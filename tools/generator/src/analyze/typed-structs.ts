@@ -1168,6 +1168,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#StatechartState',
     purpose: 'reviewed escape-free statechart state',
   },
+  {
+    declarationFingerprint: 'sha256:0a192307a03c8542e477cc8b64353c3b5de08c6cde73bec89ca39694c56943b4',
+    id: '@flighthq/types:interface#SpriteData',
+    purpose: 'reviewed escape-free sprite data',
+  },
+  {
+    declarationFingerprint: 'sha256:3c0fee3ae382d16ba3cd1c9fc452d167718acbfee3812c43c4f7942f1c656469',
+    id: '@flighthq/types:interface#Skeleton2DIkConstraint',
+    purpose: 'reviewed escape-free skeleton IK constraint',
+  },
+  {
+    declarationFingerprint: 'sha256:dcd5f590b1f242ab29d2afd97181bbc6e1cfeb173ca544ef716f2f321130ebd8',
+    id: '@flighthq/types:interface#Physics2DRayResult',
+    purpose: 'reviewed escape-free physics ray result',
+  },
+  {
+    declarationFingerprint: 'sha256:fe60b141f962890b1a4304cac98fcfa9c5c81e8831ac27ee0fa728625f276013',
+    id: '@flighthq/types:interface#PbrExtension',
+    purpose: 'reviewed escape-free PBR extension',
+  },
+  {
+    declarationFingerprint: 'sha256:a31ec0e776fefad7311e898f90401d6895f78c493ec129f623f6512f580a2a18',
+    id: '@flighthq/types:interface#NativeTextRuntime',
+    purpose: 'reviewed escape-free native text runtime',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

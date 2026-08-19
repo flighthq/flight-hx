@@ -48,7 +48,7 @@ class GlPbrExtensionRegistry {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(extensions, 'length') : Float)) : Bool)) {
-        var registration:Null<GlPbrExtensionRegistration> = ((cast registry : flighthq._internal._Map<String, GlPbrExtensionRegistration>).get((cast flighthq._internal._StaticIndex.readArray(extensions, i) : PbrExtension).kind));
+        var registration:Null<GlPbrExtensionRegistration> = ((cast registry : flighthq._internal._Map<String, GlPbrExtensionRegistration>).get((cast flighthq._internal._StaticIndex.readArray(extensions, i) : { var kind:String; }).kind));
         if ((cast _Runtime.strictEquals(registration, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
         (cast registration : GlPbrExtensionRegistration).bind(({ final __callArgument3:Dynamic = context; __callArgument3; }), flighthq._internal._StaticIndex.readArray(extensions, i));
         i++;
@@ -77,25 +77,25 @@ class GlPbrExtensionRegistry {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(extensions, 'length') : Float)) : Bool)) {
         var extension:PbrExtension = flighthq._internal._StaticIndex.readArray(extensions, i);
-        if ((cast ((cast kinds : flighthq._internal._Set<String>).has((cast extension : PbrExtension).kind)) : Bool)) {
-          _Runtime.callProperty(issues, 'push', cast ([{ code: 'duplicate-kind', kind: (cast extension : PbrExtension).kind }] : Array<Dynamic>));
+        if ((cast ((cast kinds : flighthq._internal._Set<String>).has(extension.kind)) : Bool)) {
+          _Runtime.callProperty(issues, 'push', cast ([{ code: 'duplicate-kind', kind: extension.kind }] : Array<Dynamic>));
           i++;
           continue;
         }
-        ((cast kinds : flighthq._internal._Set<String>).add((cast extension : PbrExtension).kind));
-        var registration:Null<GlPbrExtensionRegistration> = ((cast registry : flighthq._internal._Map<String, GlPbrExtensionRegistration>).get((cast extension : PbrExtension).kind));
+        ((cast kinds : flighthq._internal._Set<String>).add(extension.kind));
+        var registration:Null<GlPbrExtensionRegistration> = ((cast registry : flighthq._internal._Map<String, GlPbrExtensionRegistration>).get(extension.kind));
         if ((cast _Runtime.strictEquals(registration, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          _Runtime.callProperty(issues, 'push', cast ([{ code: 'missing-registration', kind: (cast extension : PbrExtension).kind }] : Array<Dynamic>));
+          _Runtime.callProperty(issues, 'push', cast ([{ code: 'missing-registration', kind: extension.kind }] : Array<Dynamic>));
           i++;
           continue;
         }
         if ((cast !(cast (cast registration : GlPbrExtensionRegistration).isSupported(({ final __callArgument6:Dynamic = extension; __callArgument6; })) : Bool) : Bool)) {
-          _Runtime.callProperty(issues, 'push', cast ([{ code: 'unsupported-extension', kind: (cast extension : PbrExtension).kind }] : Array<Dynamic>));
+          _Runtime.callProperty(issues, 'push', cast ([{ code: 'unsupported-extension', kind: extension.kind }] : Array<Dynamic>));
           i++;
           continue;
         }
         var contribution:GlPbrExtensionShaderContribution = (cast registration : GlPbrExtensionRegistration).createShaderContribution(({ final __callArgument7:Dynamic = shaderContext; __callArgument7; }), ({ final __callArgument8:Dynamic = extension; __callArgument8; }));
-        if ((cast _Runtime.strictEquals((cast contribution : GlPbrExtensionShaderContribution).samplesTransmissionSceneColor, true) : Bool)) { (transmissionSceneColorKind = cast ((cast extension : PbrExtension).kind : Dynamic)); }
+        if ((cast _Runtime.strictEquals((cast contribution : GlPbrExtensionShaderContribution).samplesTransmissionSceneColor, true) : Bool)) { (transmissionSceneColorKind = cast (extension.kind : Dynamic)); }
         (textureCount = cast ((textureCount + (cast contribution : GlPbrExtensionShaderContribution).textureCount) : Dynamic));
         i++;
       }
@@ -136,7 +136,7 @@ class GlPbrExtensionRegistry {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(extensions, 'length') : Float)) : Bool)) {
-        _Runtime.callProperty(contributions, 'push', cast ([(cast ((cast registry : flighthq._internal._Map<String, GlPbrExtensionRegistration>).get((cast flighthq._internal._StaticIndex.readArray(extensions, i) : PbrExtension).kind)) : GlPbrExtensionRegistration).createShaderContribution(({ final __callArgument20:Dynamic = context; __callArgument20; }), flighthq._internal._StaticIndex.readArray(extensions, i))] : Array<Dynamic>));
+        _Runtime.callProperty(contributions, 'push', cast ([(cast ((cast registry : flighthq._internal._Map<String, GlPbrExtensionRegistration>).get((cast flighthq._internal._StaticIndex.readArray(extensions, i) : { var kind:String; }).kind)) : GlPbrExtensionRegistration).createShaderContribution(({ final __callArgument20:Dynamic = context; __callArgument20; }), flighthq._internal._StaticIndex.readArray(extensions, i))] : Array<Dynamic>));
         i++;
       }
     }

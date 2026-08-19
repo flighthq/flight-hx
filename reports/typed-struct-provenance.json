@@ -38268,7 +38268,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 13,
       "fields": 2,
       "id": "@flighthq/types:interface#Physics2DRayResult",
       "name": "Physics2DRayResult",
@@ -47180,7 +47180,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 13,
       "fields": 1,
       "id": "@flighthq/types:interface#SpriteData",
       "name": "SpriteData",

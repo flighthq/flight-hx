@@ -61,7 +61,7 @@ class SceneMaterialTextureRegistry {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(extended.extensions, 'length') : Float)) : Bool)) {
           var extension:PbrExtension = flighthq._internal._StaticIndex.readArray(extended.extensions, i);
-          var lister:Null<Scene3DPbrExtensionTextureLister> = ((cast registry.extensionListers : flighthq._internal._Map<String, Scene3DPbrExtensionTextureLister>).get((cast extension : PbrExtension).kind));
+          var lister:Null<Scene3DPbrExtensionTextureLister> = ((cast registry.extensionListers : flighthq._internal._Map<String, Scene3DPbrExtensionTextureLister>).get(extension.kind));
           if ((cast !_Runtime.strictEquals(lister, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { lister(({ final __callArgument5:Dynamic = extension; __callArgument5; }), ({ final __callArgument6:Dynamic = out; __callArgument6; })); }
           i++;
         }

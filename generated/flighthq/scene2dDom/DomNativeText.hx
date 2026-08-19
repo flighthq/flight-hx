@@ -38,11 +38,11 @@ class DomNativeText {
     source = (cast (cast renderProxy : RenderProxy2D).source : NativeText);
     runtime = (cast getNativeTextRuntime(({ final __callArgument0:Dynamic = source; __callArgument0; })) : NativeTextRuntime);
     data = (cast source : NativeText).data;
-    element = (cast runtime : NativeTextRuntime).element;
+    element = runtime.element;
     if ((cast _Runtime.strictEquals(element, null) : Bool)) {
       (element = cast (flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>)) : Dynamic));
       prepareDomElement(({ final __callArgument1:Dynamic = element; __callArgument1; }));
-      ((cast runtime : NativeTextRuntime).element = element);
+      (runtime.element = cast (element : Null<flighthq._internal.dom.HTMLElement>));
     }
     DomNativeText.applyNativeTextStyle__domNativeText(({ final __callArgument2:Dynamic = element; __callArgument2; }), data.style);
     if ((cast _Runtime.strictEquals(data.autoSize, 'none') : Bool)) {
@@ -64,8 +64,8 @@ class DomNativeText {
     }
     ((cast element : flighthq._internal.dom.HTMLElement).textContent = data.text);
     rect = (cast element : flighthq._internal.dom.HTMLElement).getBoundingClientRect();
-    ((cast runtime : NativeTextRuntime).measuredWidth = (cast rect : flighthq._internal.dom.DOMRect).width);
-    ((cast runtime : NativeTextRuntime).measuredHeight = (cast rect : flighthq._internal.dom.DOMRect).height);
+    (runtime.measuredWidth = cast ((cast rect : flighthq._internal.dom.DOMRect).width : Float));
+    (runtime.measuredHeight = cast ((cast rect : flighthq._internal.dom.DOMRect).height : Float));
     applyDomStyle(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = element; __callArgument4; }), ({ final __callArgument5:Dynamic = renderProxy; __callArgument5; }));
     setDomRendererElement(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = element; __callArgument7; }));
   }

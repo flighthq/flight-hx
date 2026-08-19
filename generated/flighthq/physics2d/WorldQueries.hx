@@ -73,7 +73,7 @@ class WorldQueries {
   }
 
   public static function queryPhysics2DRayInternal__worldQueries(world:Physics2DWorld, originX:Float, originY:Float, directionX:Float, directionY:Float, out:Physics2DRayResult, maxFraction:Float, filter:Null<Physics2DQueryFilter>, closestOnly:Bool):Void {
-    ((cast out : Physics2DRayResult).hitCount = 0.0);
+    (out.hitCount = cast (0.0 : Float));
     if ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([originX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([originY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([directionX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([directionY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([maxFraction] : Array<Dynamic>)) : Bool)) : Bool) || (cast ((cast maxFraction : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
       return;
     }
@@ -125,11 +125,11 @@ class WorldQueries {
 
   public static function writeClosestRayHit__worldQueries(out:Physics2DRayResult, body:RigidBody2D, collider:Physics2DCollider, colliderIndex:Float, source:CollisionRaycastHit):Void {
     var current:Physics2DRayHit = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals((cast out : Physics2DRayResult).hitCount, 0.0) : Bool)) {
+    if ((cast _Runtime.strictEquals(out.hitCount, 0.0) : Bool)) {
       WorldQueries.writeRayHit__worldQueries(({ final __callArgument55:Dynamic = out; __callArgument55; }), ({ final __callArgument56:Dynamic = body; __callArgument56; }), ({ final __callArgument57:Dynamic = collider; __callArgument57; }), (cast colliderIndex : Float), ({ final __callArgument58:Dynamic = source; __callArgument58; }));
       return;
     }
-    current = flighthq._internal._StaticIndex.readArray((cast out : Physics2DRayResult).hits, 0.0);
+    current = flighthq._internal._StaticIndex.readArray(out.hits, 0.0);
     if ((cast ((cast ((cast source.fraction : Float) > (cast current.fraction : Float)) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(source.fraction, current.fraction), function():Dynamic return cast _Runtime.orValue(((cast (cast body : RigidBody2D).index : Float) > (cast (cast current.body : RigidBody2D).index : Float)), function():Dynamic return cast _Runtime.andValue(_Runtime.strictEquals((cast body : RigidBody2D).index, (cast current.body : RigidBody2D).index), function():Dynamic return cast ((cast colliderIndex : Float) >= (cast current.colliderIndex : Float))))) : Bool)) : Bool)) {
       return;
     }
@@ -156,9 +156,9 @@ class WorldQueries {
 
   public static function writeRayHit__worldQueries(out:Physics2DRayResult, body:RigidBody2D, collider:Physics2DCollider, colliderIndex:Float, source:CollisionRaycastHit):Void {
     var hit:Physics2DRayHit = cast _Runtime.UNDEFINED;
-    hit = flighthq._internal._StaticIndex.readArray((cast out : Physics2DRayResult).hits, (cast out : Physics2DRayResult).hitCount);
+    hit = flighthq._internal._StaticIndex.readArray(out.hits, out.hitCount);
     if ((cast _Runtime.strictEquals(hit, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callProperty((cast out : Physics2DRayResult).hits, 'push', cast ([{ body: body, collider: collider, colliderIndex: colliderIndex, fraction: source.fraction, normalX: source.normalX, normalY: source.normalY, x: source.x, y: source.y }] : Array<Dynamic>));
+      _Runtime.callProperty(out.hits, 'push', cast ([{ body: body, collider: collider, colliderIndex: colliderIndex, fraction: source.fraction, normalX: source.normalX, normalY: source.normalY, x: source.x, y: source.y }] : Array<Dynamic>));
     } else {
       (hit.body = cast (body : RigidBody2D));
       (hit.collider = cast (collider : Physics2DCollider));
@@ -169,20 +169,20 @@ class WorldQueries {
       (hit.x = cast (source.x : Float));
       (hit.y = cast (source.y : Float));
     }
-    (cast out : Physics2DRayResult).hitCount++;
+    out.hitCount++;
   }
 
   public static function sortLiveRayHits__worldQueries(out:Physics2DRayResult):Void {
     {
       var i:Float = 1.0;
-      while ((cast ((cast i : Float) < (cast (cast out : Physics2DRayResult).hitCount : Float)) : Bool)) {
-        var value:Physics2DRayHit = flighthq._internal._StaticIndex.readArray((cast out : Physics2DRayResult).hits, i);
+      while ((cast ((cast i : Float) < (cast out.hitCount : Float)) : Bool)) {
+        var value:Physics2DRayHit = flighthq._internal._StaticIndex.readArray(out.hits, i);
         var at:Float = i;
-        while ((cast ((cast ((cast at : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast (cast WorldQueries.compareRayHits__worldQueries(({ final __callArgument59:Dynamic = value; __callArgument59; }), flighthq._internal._StaticIndex.readArray((cast out : Physics2DRayResult).hits, (at - 1.0))) : Float) : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
-          flighthq._internal._StaticIndex.writeArray((cast out : Physics2DRayResult).hits, at, flighthq._internal._StaticIndex.readArray((cast out : Physics2DRayResult).hits, (at - 1.0)));
+        while ((cast ((cast ((cast at : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast (cast WorldQueries.compareRayHits__worldQueries(({ final __callArgument59:Dynamic = value; __callArgument59; }), flighthq._internal._StaticIndex.readArray(out.hits, (at - 1.0))) : Float) : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
+          flighthq._internal._StaticIndex.writeArray(out.hits, at, flighthq._internal._StaticIndex.readArray(out.hits, (at - 1.0)));
           at--;
         }
-        flighthq._internal._StaticIndex.writeArray((cast out : Physics2DRayResult).hits, at, value);
+        flighthq._internal._StaticIndex.writeArray(out.hits, at, value);
         i++;
       }
     }

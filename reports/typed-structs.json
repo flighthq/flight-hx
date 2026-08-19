@@ -198939,9 +198939,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 13,
+        "directAccesses": 13,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -199283,7 +199283,7 @@
       },
       "name": "NativeTextRuntime",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free native text runtime",
       "reasons": [],
       "source": "upstream/packages/types/src/NativeText.ts",
       "sourceProvenance": {
@@ -225852,9 +225852,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 13,
+        "directAccesses": 13,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -225882,7 +225882,7 @@
       },
       "name": "PbrExtension",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free PBR extension",
       "reasons": [],
       "source": "upstream/packages/types/src/PbrExtension.ts",
       "sourceProvenance": {
@@ -235722,9 +235722,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 13,
+        "directAccesses": 13,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -235754,7 +235754,7 @@
       },
       "name": "Physics2DRayResult",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free physics ray result",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics2D.ts",
       "sourceProvenance": {
@@ -307909,9 +307909,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 13,
+        "directAccesses": 13,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -307981,7 +307981,7 @@
       },
       "name": "Skeleton2DIkConstraint",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free skeleton IK constraint",
       "reasons": [],
       "source": "upstream/packages/types/src/Skeleton2DIkConstraint.ts",
       "sourceProvenance": {
@@ -327067,9 +327067,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 13,
+        "directAccesses": 13,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -327091,7 +327091,7 @@
       },
       "name": "SpriteData",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free sprite data",
       "reasons": [],
       "source": "upstream/packages/types/src/Sprite.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1376,
+      "newAuditOnly": 1371,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1376,
+    "auditOnlySchemas": 1371,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 23460,
-    "directSchemas": 628,
+    "directAccesses": 23525,
+    "directSchemas": 633,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 7206,
+    "pendingAccesses": 7141,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

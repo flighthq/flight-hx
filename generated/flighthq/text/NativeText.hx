@@ -37,8 +37,8 @@ class NativeText {
       return;
     }
     runtime = (cast getNativeTextRuntime(({ final __callArgument0:Dynamic = native; __callArgument0; })) : NativeTextRuntime);
-    (out.width = cast (((cast ((cast _Runtime.field(runtime, 'measuredWidth') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(runtime, 'measuredWidth') : Dynamic) : (cast data.width : Dynamic)) : Float));
-    (out.height = cast (((cast ((cast _Runtime.field(runtime, 'measuredHeight') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(runtime, 'measuredHeight') : Dynamic) : (cast data.height : Dynamic)) : Float));
+    (out.width = cast (((cast ((cast runtime.measuredWidth : Float) > (cast 0.0 : Float)) : Bool) ? (cast runtime.measuredWidth : Dynamic) : (cast data.width : Dynamic)) : Float));
+    (out.height = cast (((cast ((cast runtime.measuredHeight : Float) > (cast 0.0 : Float)) : Bool) ? (cast runtime.measuredHeight : Dynamic) : (cast data.height : Dynamic)) : Float));
   }
 
   public static function createNativeText(?obj:PartialNode<flighthq.types.NativeText>):flighthq.types.NativeText {
@@ -56,20 +56,20 @@ class NativeText {
   public static function createNativeTextRuntime():NativeTextRuntime {
     var out:NativeTextRuntime = cast _Runtime.UNDEFINED;
     out = (cast createNode2DRuntime(({ final __callArgument7:Dynamic = NativeText.defaultMethods__nativeText; __callArgument7; })) : NativeTextRuntime);
-    ((cast out : NativeTextRuntime).element = null);
-    ((cast out : NativeTextRuntime).measuredHeight = 0.0);
-    ((cast out : NativeTextRuntime).measuredWidth = 0.0);
+    (out.element = cast (null : Null<flighthq._internal.dom.HTMLElement>));
+    (out.measuredHeight = cast (0.0 : Float));
+    (out.measuredWidth = cast (0.0 : Float));
     return cast out;
     return cast null;
   }
 
   public static function getNativeTextMeasuredHeight(source:flighthq.types.NativeText):Float {
-    return cast (cast (cast getNode2DRuntime(({ final __callArgument8:Dynamic = source; __callArgument8; })) : NativeTextRuntime) : NativeTextRuntime).measuredHeight;
+    return cast (cast (cast getNode2DRuntime(({ final __callArgument8:Dynamic = source; __callArgument8; })) : NativeTextRuntime) : { var measuredHeight:Float; }).measuredHeight;
     return cast null;
   }
 
   public static function getNativeTextMeasuredWidth(source:flighthq.types.NativeText):Float {
-    return cast (cast (cast getNode2DRuntime(({ final __callArgument9:Dynamic = source; __callArgument9; })) : NativeTextRuntime) : NativeTextRuntime).measuredWidth;
+    return cast (cast (cast getNode2DRuntime(({ final __callArgument9:Dynamic = source; __callArgument9; })) : NativeTextRuntime) : { var measuredWidth:Float; }).measuredWidth;
     return cast null;
   }
 

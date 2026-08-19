@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1376 |
-| Direct schemas | 628 |
+| Audit-only schemas | 1371 |
+| Direct schemas | 633 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 7206 |
-| Directly emitted accesses | 23460 |
+| Pending accesses | 7141 |
+| Directly emitted accesses | 23525 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1376 |
+| Newly discovered, audit-only | 1371 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -1003,7 +1003,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#MovieClipSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#NativeText` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#NativeTextData` | `direct` | `new` | — | reviewed escape-free native-text data | 6 | 19 | 7 | 0 | 0 | 26 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#NativeTextRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 41 | 7 | 6 | 0 | 13 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#NativeTextRuntime` | `direct` | `new` | — | reviewed escape-free native text runtime | 41 | 7 | 6 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#NativeTextStyle` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 9 | 0 | 0 | 9 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#NetBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#NetBody` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
@@ -1122,7 +1122,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#PathOffsetOptions` | `direct` | `preserved` | `@flighthq/types:interface#PathOffsetOptions` | path-offset option record | 5 | 5 | 0 | 0 | 0 | 5 | 0 | 0 | yes | — |
 | `@flighthq/types:type#PathSegment` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#PathWinding` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#PbrExtension` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 13 | 0 | 0 | 13 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#PbrExtension` | `direct` | `new` | — | reviewed escape-free PBR extension | 1 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:type#PbrUvSet` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#PermissionBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:type#PermissionName` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1170,7 +1170,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Physics2DQueryHit` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 3 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DQueryResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 3 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DRayHit` | `direct` | `new` | — | reviewed escape-free physics ray hit | 8 | 15 | 16 | 0 | 0 | 31 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DRayResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 11 | 2 | 0 | 13 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DRayResult` | `direct` | `new` | — | reviewed escape-free physics ray result | 2 | 11 | 2 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DRevoluteJoint` | `direct` | `new` | — | reviewed escape-free physics revolute joint | 23 | 16 | 10 | 0 | 0 | 26 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DRevoluteJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DRopeJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
@@ -1510,7 +1510,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Skeleton2DDeformLengthMismatch` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Skeleton2DDrawOrderAnimationTarget` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Skeleton2DDrawOrderTimeline` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Skeleton2DIkConstraint` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 13 | 0 | 0 | 13 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Skeleton2DIkConstraint` | `direct` | `new` | — | reviewed escape-free skeleton IK constraint | 7 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Skeleton2DImport` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Skeleton2DImportAnimation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Skeleton2DPathConstraint` | `direct` | `new` | — | reviewed escape-free 2D skeleton path constraint | 12 | 16 | 0 | 0 | 0 | 16 | 0 | 0 | yes | — |
@@ -1590,7 +1590,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Spring3D` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SpringConfig` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Sprite` | `direct` | `new` | — | reviewed escape-free sprite | 19 | 14 | 2 | 0 | 0 | 16 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#SpriteData` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 11 | 2 | 0 | 13 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SpriteData` | `direct` | `new` | — | reviewed escape-free sprite data | 1 | 11 | 2 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SpriteRenderer` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SpriteRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 40 | 2 | 4 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Spritesheet` | `direct` | `preserved` | `@flighthq/types:interface#Spritesheet` | broad asset document | 3 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |

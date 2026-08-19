@@ -27,7 +27,7 @@ class GltfMaterialExtension {
     if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(_Runtime.field(existing, 'kind'), ExtendedPbrMaterialKind) : Bool)) {
       var extended:ExtendedPbrMaterial = (cast (cast existing : flighthq._internal._Any) : ExtendedPbrMaterial);
-      if ((cast _Runtime.callProperty(extended.extensions, 'some', cast ([function(entry:PbrExtension, __unused0:Float, __unused1:Array<PbrExtension>):Bool return _Runtime.strictEquals((cast entry : PbrExtension).kind, (cast extension : PbrExtension).kind)] : Array<Dynamic>)) : Bool)) { return cast false; }
+      if ((cast _Runtime.callProperty(extended.extensions, 'some', cast ([function(entry:PbrExtension, __unused0:Float, __unused1:Array<PbrExtension>):Bool return _Runtime.strictEquals(entry.kind, extension.kind)] : Array<Dynamic>)) : Bool)) { return cast false; }
       (extended.extensions = cast (_Runtime.concatArrays([_Runtime.toArray(extended.extensions), [extension]]) : Array<PbrExtension>));
       return cast true;
     }
@@ -50,7 +50,7 @@ class GltfMaterialExtension {
     material = flighthq._internal._StaticIndex.readArray(document.materials, index);
     if ((cast ((cast _Runtime.strictEquals(material, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(material, 'kind'), ExtendedPbrMaterialKind) : Bool)) : Bool)) { return cast null; }
     extended = (cast (cast material : flighthq._internal._Any) : ExtendedPbrMaterial);
-    return cast _Runtime.coalesce(_Runtime.find(extended.extensions, function(entry:PbrExtension, __unused2:Float, __unused3:Array<PbrExtension>):Bool return _Runtime.strictEquals((cast entry : PbrExtension).kind, kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(_Runtime.find(extended.extensions, function(entry:PbrExtension, __unused2:Float, __unused3:Array<PbrExtension>):Bool return _Runtime.strictEquals(entry.kind, kind)), function():Dynamic return cast null);
     return cast null;
   }
 }

@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_376,
+      newAuditOnly: 1_371,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(630);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(635);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_376);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_371);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(228);
+    expect(newDirect).toHaveLength(233);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1250,6 +1250,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'StatechartState',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free statechart state',
+        }),
+        expect.objectContaining({
+          name: 'SpriteData',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free sprite data',
+        }),
+        expect.objectContaining({
+          name: 'Skeleton2DIkConstraint',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free skeleton IK constraint',
+        }),
+        expect.objectContaining({
+          name: 'Physics2DRayResult',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free physics ray result',
+        }),
+        expect.objectContaining({
+          name: 'PbrExtension',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free PBR extension',
+        }),
+        expect.objectContaining({
+          name: 'NativeTextRuntime',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free native text runtime',
         }),
       ]),
     );
@@ -2394,6 +2419,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#StatechartState',
         purpose: 'reviewed escape-free statechart state',
       },
+      {
+        declarationFingerprint: 'sha256:0a192307a03c8542e477cc8b64353c3b5de08c6cde73bec89ca39694c56943b4',
+        id: '@flighthq/types:interface#SpriteData',
+        purpose: 'reviewed escape-free sprite data',
+      },
+      {
+        declarationFingerprint: 'sha256:3c0fee3ae382d16ba3cd1c9fc452d167718acbfee3812c43c4f7942f1c656469',
+        id: '@flighthq/types:interface#Skeleton2DIkConstraint',
+        purpose: 'reviewed escape-free skeleton IK constraint',
+      },
+      {
+        declarationFingerprint: 'sha256:dcd5f590b1f242ab29d2afd97181bbc6e1cfeb173ca544ef716f2f321130ebd8',
+        id: '@flighthq/types:interface#Physics2DRayResult',
+        purpose: 'reviewed escape-free physics ray result',
+      },
+      {
+        declarationFingerprint: 'sha256:fe60b141f962890b1a4304cac98fcfa9c5c81e8831ac27ee0fa728625f276013',
+        id: '@flighthq/types:interface#PbrExtension',
+        purpose: 'reviewed escape-free PBR extension',
+      },
+      {
+        declarationFingerprint: 'sha256:a31ec0e776fefad7311e898f90401d6895f78c493ec129f623f6512f580a2a18',
+        id: '@flighthq/types:interface#NativeTextRuntime',
+        purpose: 'reviewed escape-free native text runtime',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -3217,6 +3267,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const nineteenthHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['NativeTextRuntime', 'PbrExtension', 'Physics2DRayResult', 'Skeleton2DIkConstraint', 'SpriteData'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -3257,22 +3316,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_376,
+      auditOnlySchemas: 1_371,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 23_460,
-      directSchemas: 628,
+      directAccesses: 23_525,
+      directSchemas: 633,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 7_206,
+      pendingAccesses: 7_141,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_376,
+      newAuditOnly: 1_371,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -3349,7 +3408,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(23_460);
+    expect(report.summary.directAccesses).toBe(23_525);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -4361,6 +4420,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(eighteenthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'SpriteData',
+        13,
+        'sha256:0a192307a03c8542e477cc8b64353c3b5de08c6cde73bec89ca39694c56943b4',
+        'reviewed escape-free sprite data',
+      ],
+      [
+        'Skeleton2DIkConstraint',
+        13,
+        'sha256:3c0fee3ae382d16ba3cd1c9fc452d167718acbfee3812c43c4f7942f1c656469',
+        'reviewed escape-free skeleton IK constraint',
+      ],
+      [
+        'Physics2DRayResult',
+        13,
+        'sha256:dcd5f590b1f242ab29d2afd97181bbc6e1cfeb173ca544ef716f2f321130ebd8',
+        'reviewed escape-free physics ray result',
+      ],
+      [
+        'PbrExtension',
+        13,
+        'sha256:fe60b141f962890b1a4304cac98fcfa9c5c81e8831ac27ee0fa728625f276013',
+        'reviewed escape-free PBR extension',
+      ],
+      [
+        'NativeTextRuntime',
+        13,
+        'sha256:a31ec0e776fefad7311e898f90401d6895f78c493ec129f623f6512f580a2a18',
+        'reviewed escape-free native text runtime',
+      ],
+    ] as const) {
+      expect(nineteenthHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -6159,6 +6260,29 @@ describe('typed struct analysis', () => {
         expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
       }
     }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, nominalIdentity] of [
+      [
+        '@flighthq/types:interface#SpriteData',
+        true,
+        [],
+        { blockerReasons: ['normalization-provenance'], closed: false },
+      ],
+      ['@flighthq/types:interface#Skeleton2DIkConstraint', false, ['cross-schema-transfer'], null],
+      ['@flighthq/types:interface#Physics2DRayResult', true, [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#PbrExtension', false, ['cross-schema-transfer'], null],
+      ['@flighthq/types:interface#NativeTextRuntime', false, ['cross-schema-transfer'], null],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons: [],
+      });
+      if (nominalIdentity === null) {
+        expect(provenanceById.has(frontierId)).toBe(false);
+      } else {
+        expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+      }
+    }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
@@ -7273,6 +7397,34 @@ describe('typed struct analysis', () => {
       ['generated/flighthq/shading/GetModifierDefineKey.hx', 'modifier'],
       ['generated/flighthq/socket/Socket.hx', 'socket'],
       ['generated/flighthq/statechart/Statechart.hx', 'state'],
+    ] as const) {
+      expect(readFileSync(path, 'utf8')).not.toContain(`_Runtime.field(${receiver},`);
+    }
+    for (const path of [
+      'generated/flighthq/interaction/RegisterSpriteHitTest.hx',
+      'generated/flighthq/movieclip/SpritesheetTimelineSource.hx',
+      'generated/flighthq/physics2d/WorldQueries.hx',
+      'generated/flighthq/scene2d/Sprite.hx',
+      'generated/flighthq/scene2dCanvas/CanvasSprite.hx',
+      'generated/flighthq/scene2dDom/DomNativeText.hx',
+      'generated/flighthq/scene2dDom/DomSprite.hx',
+      'generated/flighthq/scene2dGl/GlSprite.hx',
+      'generated/flighthq/scene2dWgpu/WgpuSprite.hx',
+      'generated/flighthq/scene3dFormats/GltfMaterialExtension.hx',
+      'generated/flighthq/scene3dGl/GlPbrExtensionRegistry.hx',
+      'generated/flighthq/scene3dResources/SceneMaterialTextureRegistry.hx',
+      'generated/flighthq/skeleton2d/IkConstraint2D.hx',
+      'generated/flighthq/swf/SwfDocument.hx',
+      'generated/flighthq/text/NativeText.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:NativeTextRuntime|PbrExtension|Physics2DRayResult|Skeleton2DIkConstraint|SpriteData)\)\./u,
+      );
+    }
+    for (const [path, receiver] of [
+      ['generated/flighthq/physics2d/WorldQueries.hx', 'out'],
+      ['generated/flighthq/skeleton2d/IkConstraint2D.hx', 'ik'],
+      ['generated/flighthq/text/NativeText.hx', 'runtime'],
     ] as const) {
       expect(readFileSync(path, 'utf8')).not.toContain(`_Runtime.field(${receiver},`);
     }

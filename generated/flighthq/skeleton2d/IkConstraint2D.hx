@@ -33,11 +33,11 @@ class IkConstraint2D {
     ik = (cast constraint : Skeleton2DIkConstraint);
     bones = skeleton.bones;
     world = skeleton.worldMatrices;
-    target = _Runtime.field(ik, 'targetBoneIndex');
+    target = ik.targetBoneIndex;
     if ((cast ((cast ((cast target : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast target : Float) >= (cast _Runtime.field(bones, 'length') : Float)) : Bool)) : Bool)) { return; }
     targetX = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast ((target * IkConstraint2D.MATRIX_STRIDE__ikConstraint2D) + 4.0) : Float));
     targetY = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast ((target * IkConstraint2D.MATRIX_STRIDE__ikConstraint2D) + 5.0) : Float));
-    chain = _Runtime.field(ik, 'boneIndices');
+    chain = ik.boneIndices;
     if ((cast _Runtime.strictEquals(_Runtime.field(chain, 'length'), 1.0) : Bool)) {
       IkConstraint2D.solveSkeleton2DIkChain1__ikConstraint2D(({ final __callArgument1:Dynamic = skeleton; __callArgument1; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast chain : Array<Float>), (cast 0.0 : Float)) : Float), (cast targetX : Float), (cast targetY : Float), ({ final __callArgument2:Dynamic = ik; __callArgument2; }));
       return;
@@ -60,14 +60,14 @@ class IkConstraint2D {
     dx = ((cast local : { var x:Float; var y:Float; }).x - (cast bone : Bone2D).x);
     dy = ((cast local : { var x:Float; var y:Float; }).y - (cast bone : Bone2D).y);
     rotation = (_Runtime.multiplyNumbers(HxMath.atan2(dy, dx), RAD_TO_DEG) - (cast bone : Bone2D).shearX);
-    ((cast bone : Bone2D).rotation += _Runtime.multiplyNumbers((cast IkConstraint2D.wrapSkeleton2DAngle__ikConstraint2D((cast (rotation - (cast bone : Bone2D).rotation) : Float)) : Float), _Runtime.field(ik, 'mix')));
-    if ((cast ((cast _Runtime.field(ik, 'stretch') : Bool) || (cast _Runtime.field(ik, 'compress') : Bool)) : Bool)) {
+    ((cast bone : Bone2D).rotation += ((cast IkConstraint2D.wrapSkeleton2DAngle__ikConstraint2D((cast (rotation - (cast bone : Bone2D).rotation) : Float)) : Float) * ik.mix));
+    if ((cast ((cast ik.stretch : Bool) || (cast ik.compress : Bool)) : Bool)) {
       var reach:Float = _Runtime.hypot(dx, dy);
       var length:Float = _Runtime.multiplyNumbers((cast bone : Bone2D).length, HxMath.abs((cast bone : Bone2D).scaleX));
       if ((cast ((cast length : Float) > (cast 0.0 : Float)) : Bool)) {
         var wanted:Float = (reach / length);
-        if ((cast ((cast _Runtime.andValue(((cast wanted : Float) > (cast 1.0 : Float)), function():Dynamic return cast _Runtime.field(ik, 'stretch')) : Bool) || (cast _Runtime.andValue(((cast wanted : Float) < (cast 1.0 : Float)), function():Dynamic return cast _Runtime.field(ik, 'compress')) : Bool)) : Bool)) {
-          var scale:Float = (1.0 + _Runtime.multiplyNumbers((wanted - 1.0), _Runtime.field(ik, 'mix')));
+        if ((cast ((cast _Runtime.andValue(((cast wanted : Float) > (cast 1.0 : Float)), function():Dynamic return cast ik.stretch) : Bool) || (cast _Runtime.andValue(((cast wanted : Float) < (cast 1.0 : Float)), function():Dynamic return cast ik.compress) : Bool)) : Bool)) {
+          var scale:Float = (1.0 + ((wanted - 1.0) * ik.mix));
           ((cast bone : Bone2D).scaleX *= scale);
           ((cast bone : Bone2D).scaleY *= scale);
         }
@@ -110,8 +110,8 @@ class IkConstraint2D {
     span = (parentLength + childLength);
     if ((cast ((cast reach : Float) >= (cast span : Float)) : Bool)) {
       (bendAngle = cast (0.0 : Dynamic));
-      if ((cast _Runtime.field(ik, 'stretch') : Bool)) {
-        var scale:Float = (1.0 + _Runtime.multiplyNumbers(((reach / span) - 1.0), _Runtime.field(ik, 'mix')));
+      if ((cast ik.stretch : Bool)) {
+        var scale:Float = (1.0 + (((reach / span) - 1.0) * ik.mix));
         ((cast parent : Bone2D).scaleX *= scale);
         ((cast parent : Bone2D).scaleY *= scale);
       }
@@ -124,13 +124,13 @@ class IkConstraint2D {
     } }
     cosParent = ((((parentLength * parentLength) + (reach * reach)) - (childLength * childLength)) / ((2.0 * parentLength) * reach));
     parentOffset = ((cast ((cast reach : Float) >= (cast span : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, cosParent))) : Dynamic));
-    direction = ((cast _Runtime.field(ik, 'bendPositive') : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic));
+    direction = ((cast ik.bendPositive : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic));
     aim = HxMath.atan2(dy, dx);
     parentRotation = (((aim + (parentOffset * direction)) * RAD_TO_DEG) - (cast parent : Bone2D).shearX);
-    ((cast parent : Bone2D).rotation += _Runtime.multiplyNumbers((cast IkConstraint2D.wrapSkeleton2DAngle__ikConstraint2D((cast (parentRotation - (cast parent : Bone2D).rotation) : Float)) : Float), _Runtime.field(ik, 'mix')));
+    ((cast parent : Bone2D).rotation += ((cast IkConstraint2D.wrapSkeleton2DAngle__ikConstraint2D((cast (parentRotation - (cast parent : Bone2D).rotation) : Float)) : Float) * ik.mix));
     computeSkeleton2DBoneWorldTransform(({ final __callArgument8:Dynamic = skeleton; __callArgument8; }), (cast parentIndex : Float));
     childRotation = (((-bendAngle * direction) * RAD_TO_DEG) - (cast child : Bone2D).shearX);
-    ((cast child : Bone2D).rotation += _Runtime.multiplyNumbers((cast IkConstraint2D.wrapSkeleton2DAngle__ikConstraint2D((cast (childRotation - (cast child : Bone2D).rotation) : Float)) : Float), _Runtime.field(ik, 'mix')));
+    ((cast child : Bone2D).rotation += ((cast IkConstraint2D.wrapSkeleton2DAngle__ikConstraint2D((cast (childRotation - (cast child : Bone2D).rotation) : Float)) : Float) * ik.mix));
     computeSkeleton2DBoneWorldTransform(({ final __callArgument9:Dynamic = skeleton; __callArgument9; }), (cast childIndex : Float));
   }
 

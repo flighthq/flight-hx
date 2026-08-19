@@ -394,7 +394,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Physics2DQueryHit` | 0 | 3 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DQueryResult` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DRayHit` | 31 | 8 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#Physics2DRayResult` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics2DRayResult` | 13 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DSolverConfig` | 55 | 13 | 1 | 0 | 0 | 0 | 2 | 2 | yes | — |
 | `@flighthq/types:interface#Physics2DStepExplanation` | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DWorld` | 217 | 29 | 0 | 9 | 0 | 0 | 1 | 1 | yes | — |
@@ -536,7 +536,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Spring2D` | 0 | 2 | 0 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Spring3D` | 0 | 3 | 0 | 3 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SpringConfig` | 0 | 2 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#SpriteData` | 0 | 1 | 1 | 1 | 1 | 0 | 2 | 2 | no | `normalization-provenance` |
+| `@flighthq/types:interface#SpriteData` | 13 | 1 | 1 | 1 | 1 | 0 | 2 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#SpritesheetAnimationData` | 38 | 8 | 1 | 0 | 0 | 1 | 2 | 6 | no | `container-transfer` |
 | `@flighthq/types:interface#SpritesheetData` | 35 | 6 | 4 | 2 | 0 | 0 | 1 | 5 | yes | — |
 | `@flighthq/types:interface#SpritesheetFrame` | 12 | 6 | 1 | 0 | 1 | 0 | 2 | 2 | no | `normalization-provenance` |
