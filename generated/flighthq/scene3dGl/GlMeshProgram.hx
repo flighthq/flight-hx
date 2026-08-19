@@ -198,7 +198,7 @@ class GlMeshProgram {
   }
 
   public static function isGlMeshAlphaCoverage__glMeshProgram(material:Null<Material>):Bool {
-    return cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field((cast material : SurfaceMaterial), 'alphaMode'), 'blend') : Bool));
+    return cast ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals((cast (cast material : SurfaceMaterial) : { var alphaMode:MaterialAlphaMode; }).alphaMode, 'blend') : Bool));
     return cast null;
   }
 

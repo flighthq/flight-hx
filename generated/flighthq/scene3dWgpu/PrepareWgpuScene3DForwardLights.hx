@@ -43,12 +43,12 @@ class PrepareWgpuScene3DForwardLights {
     prepared = (cast PrepareWgpuScene3DForwardLights.ensurePrepared__prepareWgpuScene3DForwardLights(({ final __callArgument0:Dynamic = state; __callArgument0; })) : Prepared__prepareWgpuScene3DForwardLights);
     out = (cast prepared : Prepared__prepareWgpuScene3DForwardLights).list;
     ((cast prepared : Prepared__prepareWgpuScene3DForwardLights).blockCount = 0.0);
-    _Runtime.setLength((cast out : WgpuScene3DForwardLightList).meshLightBlocks, _Runtime.field(sceneRenderList, 'meshCount'));
-    ((cast out : WgpuScene3DForwardLightList).meshCount = _Runtime.field(sceneRenderList, 'meshCount'));
+    _Runtime.setLength((cast out : WgpuScene3DForwardLightList).meshLightBlocks, sceneRenderList.meshCount);
+    ((cast out : WgpuScene3DForwardLightList).meshCount = sceneRenderList.meshCount);
     {
       var meshIndex:Float = 0.0;
-      while ((cast ((cast meshIndex : Float) < (cast _Runtime.field(sceneRenderList, 'meshCount') : Float)) : Bool)) {
-        PrepareWgpuScene3DForwardLights.setMeshWorldBoundingSphere__prepareWgpuScene3DForwardLights(flighthq._internal._StaticIndex.readArray(_Runtime.field(sceneRenderList, 'visibleMeshes'), meshIndex));
+      while ((cast ((cast meshIndex : Float) < (cast sceneRenderList.meshCount : Float)) : Bool)) {
+        PrepareWgpuScene3DForwardLights.setMeshWorldBoundingSphere__prepareWgpuScene3DForwardLights(flighthq._internal._StaticIndex.readArray(sceneRenderList.visibleMeshes, meshIndex));
         selectScene3DForwardLights((cast prepared : Prepared__prepareWgpuScene3DForwardLights).selection, ({ final __callArgument1:Dynamic = lights; __callArgument1; }), ({ final __callArgument2:Dynamic = PrepareWgpuScene3DForwardLights.scratchWorldSphere__prepareWgpuScene3DForwardLights; __callArgument2; }));
         var blockIndex:Float = (cast PrepareWgpuScene3DForwardLights.findPreparedBlock__prepareWgpuScene3DForwardLights((cast prepared : Dynamic), (cast (cast prepared : Prepared__prepareWgpuScene3DForwardLights).selection : Scene3DForwardLightSelection).indices) : Float);
         if ((cast ((cast blockIndex : Float) < (cast 0.0 : Float)) : Bool)) {

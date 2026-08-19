@@ -165,7 +165,7 @@ class WgpuMeshPipeline {
   }
 
   public static function isWgpuMeshAlphaCoverage__wgpuMeshPipeline(material:Null<Material>):Bool {
-    return cast ((cast !_Runtime.looseEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field((cast material : SurfaceMaterial), 'alphaMode'), 'blend') : Bool));
+    return cast ((cast !_Runtime.looseEquals(material, null) : Bool) && (cast _Runtime.strictEquals((cast (cast material : SurfaceMaterial) : { var alphaMode:MaterialAlphaMode; }).alphaMode, 'blend') : Bool));
     return cast null;
   }
 

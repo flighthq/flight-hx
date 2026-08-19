@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1436 |
-| Direct schemas | 568 |
+| Audit-only schemas | 1431 |
+| Direct schemas | 573 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 8282 |
-| Directly emitted accesses | 22384 |
+| Pending accesses | 8168 |
+| Directly emitted accesses | 22498 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1436 |
+| Newly discovered, audit-only | 1431 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -428,7 +428,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#DeviceInfo` | `direct` | `preserved` | `@flighthq/types:interface#DeviceInfo` | broad host document | 25 | 0 | 50 | 0 | 0 | 50 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DialogBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 10 | yes | — |
 | `@flighthq/types:interface#DirectionalBlurEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#DirectionalLight` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 24 | 0 | 0 | 24 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#DirectionalLight` | `direct` | `new` | — | reviewed escape-free directional light | 8 | 24 | 0 | 0 | 0 | 24 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DirectionalLightOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DisplacementEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DisplayObject` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 0 | 12 | 0 | 12 | 0 | 0 | 0 | yes | — |
@@ -980,7 +980,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#MorphShapeColorEndpoint` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MorphShapeColorPaintBinding` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 4 | 0 | 0 | 4 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#MorphShapeData` | `direct` | `new` | — | reviewed escape-free morph-shape data | 6 | 29 | 1 | 0 | 0 | 30 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#MorphShapeGradientEndpoint` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 23 | 0 | 0 | 23 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MorphShapeGradientEndpoint` | `direct` | `new` | — | reviewed escape-free morph-shape gradient endpoint | 5 | 23 | 0 | 0 | 0 | 23 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MorphShapeGradientEndpointExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#MorphShapeGradientEndpointReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#MorphShapeGradientPaintBinding` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 13 | 0 | 0 | 13 | 0 | 0 | 5 | yes | — |
@@ -1401,7 +1401,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Scene3DMetadata` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Scene3DPbrExtensionTextureLister` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#Scene3DPickOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Scene3DRenderList` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 21 | 1 | 0 | 22 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Scene3DRenderList` | `direct` | `new` | — | reviewed escape-free Scene3D render list | 4 | 21 | 1 | 0 | 0 | 22 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DRenderProxy` | `direct` | `new` | — | reviewed escape-free Scene3D render proxy | 8 | 23 | 25 | 0 | 0 | 48 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DResourceEvent` | `direct` | `renamed` | `@flighthq/scene-resources:interface#SceneResourceEvent` | broad scene document | 2 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DResourceInFlight` | `direct` | `renamed` | `@flighthq/scene-resources:interface#SceneResourceInFlight` | broad scene document | 3 | 10 | 1 | 0 | 0 | 11 | 0 | 0 | yes | — |
@@ -1566,7 +1566,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#SpatialIndexingExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#SpatialIndexingGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#SpatialIndexingMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#SpatialIndexingNotice` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 22 | 0 | 0 | 22 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SpatialIndexingNotice` | `direct` | `new` | — | reviewed escape-free spatial-indexing notice | 6 | 22 | 0 | 0 | 0 | 22 | 0 | 0 | yes | — |
 | `@flighthq/types:type#SpatialIndexingOperation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#SpatialIndexingReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#SpatialIndexRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
@@ -1657,7 +1657,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#StrokePathTessellationExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#StrokePathTessellationReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#StrokeStyle` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 14 | 0 | 0 | 14 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#SurfaceMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 18 | 5 | 0 | 23 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SurfaceMaterial` | `direct` | `new` | — | reviewed escape-free surface material | 6 | 18 | 5 | 0 | 0 | 23 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SurfaceMaterialOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SvgDocumentImportOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SwfDocumentImport` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |

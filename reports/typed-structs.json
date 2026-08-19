@@ -66659,9 +66659,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 24,
+        "directAccesses": 24,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -66745,7 +66745,7 @@
       },
       "name": "DirectionalLight",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free directional light",
       "reasons": [],
       "source": "upstream/packages/types/src/DirectionalLight.ts",
       "sourceProvenance": {
@@ -194438,9 +194438,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 23,
+        "directAccesses": 23,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -194494,7 +194494,7 @@
       },
       "name": "MorphShapeGradientEndpoint",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free morph-shape gradient endpoint",
       "reasons": [],
       "source": "upstream/packages/types/src/MorphShape.ts",
       "sourceProvenance": {
@@ -283219,9 +283219,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 22,
+        "directAccesses": 22,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -283267,7 +283267,7 @@
       },
       "name": "Scene3DRenderList",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Scene3D render list",
       "reasons": [],
       "source": "upstream/packages/types/src/Scene3DRenderList.ts",
       "sourceProvenance": {
@@ -322399,9 +322399,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 22,
+        "directAccesses": 22,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -322463,7 +322463,7 @@
       },
       "name": "SpatialIndexingNotice",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free spatial-indexing notice",
       "reasons": [],
       "source": "upstream/packages/types/src/SpatialIndexing.ts",
       "sourceProvenance": {
@@ -340905,9 +340905,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 23,
+        "directAccesses": 23,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -340975,7 +340975,7 @@
       },
       "name": "SurfaceMaterial",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free surface material",
       "reasons": [],
       "source": "upstream/packages/types/src/SurfaceMaterial.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1436,
+      "newAuditOnly": 1431,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1436,
+    "auditOnlySchemas": 1431,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 22384,
-    "directSchemas": 568,
+    "directAccesses": 22498,
+    "directSchemas": 573,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 8282,
+    "pendingAccesses": 8168,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

@@ -11,20 +11,20 @@ class ExplainMorphShapeGradientEndpoints {
   public static function explainMorphShapeGradientEndpoints(start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint):MorphShapeGradientEndpointExplanation {
     var issue:Float = cast _Runtime.UNDEFINED;
     issue = (cast getMorphShapeGradientEndpointIssue(({ final __callArgument0:Dynamic = start; __callArgument0; }), ({ final __callArgument1:Dynamic = end; __callArgument1; })) : Float);
-    return cast { endStopCount: _Runtime.field(_Runtime.field(end, 'colors'), 'length'), reason: (cast ExplainMorphShapeGradientEndpoints.getReason__explainMorphShapeGradientEndpoints((cast issue : Float)) : MorphShapeGradientEndpointReason), startStopCount: _Runtime.field(_Runtime.field(start, 'colors'), 'length'), supported: _Runtime.strictEquals(issue, ExplainMorphShapeGradientEndpoints.GradientEndpointIssueNone__explainMorphShapeGradientEndpoints) };
+    return cast { endStopCount: _Runtime.field(end.colors, 'length'), reason: (cast ExplainMorphShapeGradientEndpoints.getReason__explainMorphShapeGradientEndpoints((cast issue : Float)) : MorphShapeGradientEndpointReason), startStopCount: _Runtime.field(start.colors, 'length'), supported: _Runtime.strictEquals(issue, ExplainMorphShapeGradientEndpoints.GradientEndpointIssueNone__explainMorphShapeGradientEndpoints) };
     return cast null;
   }
 
   public static function getMorphShapeGradientEndpointIssue(start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint):Float {
     var startCount:Float = cast _Runtime.UNDEFINED;
     var endCount:Float = cast _Runtime.UNDEFINED;
-    startCount = _Runtime.field(_Runtime.field(start, 'colors'), 'length');
-    endCount = _Runtime.field(_Runtime.field(end, 'colors'), 'length');
+    startCount = _Runtime.field(start.colors, 'length');
+    endCount = _Runtime.field(end.colors, 'length');
     if ((cast ((cast _Runtime.strictEquals(startCount, 0.0) : Bool) || (cast _Runtime.strictEquals(endCount, 0.0) : Bool)) : Bool)) { return cast ExplainMorphShapeGradientEndpoints.GradientEndpointIssueEmpty__explainMorphShapeGradientEndpoints; }
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(start, 'alphas'), 'length'), startCount) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(start, 'ratios'), 'length'), startCount) : Bool)) : Bool)) {
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(start.alphas, 'length'), startCount) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(start.ratios, 'length'), startCount) : Bool)) : Bool)) {
       return cast ExplainMorphShapeGradientEndpoints.GradientEndpointIssueStartComponents__explainMorphShapeGradientEndpoints;
     }
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(end, 'alphas'), 'length'), endCount) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(end, 'ratios'), 'length'), endCount) : Bool)) : Bool)) {
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(end.alphas, 'length'), endCount) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(end.ratios, 'length'), endCount) : Bool)) : Bool)) {
       return cast ExplainMorphShapeGradientEndpoints.GradientEndpointIssueEndComponents__explainMorphShapeGradientEndpoints;
     }
     if ((cast !_Runtime.strictEquals(startCount, endCount) : Bool)) { return cast ExplainMorphShapeGradientEndpoints.GradientEndpointIssueStopCount__explainMorphShapeGradientEndpoints; }

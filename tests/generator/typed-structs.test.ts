@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_436,
+      newAuditOnly: 1_431,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(570);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(575);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_436);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_431);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(168);
+    expect(newDirect).toHaveLength(173);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -950,6 +950,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'Scene3DDocumentNode',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free Scene3D document node',
+        }),
+        expect.objectContaining({
+          name: 'DirectionalLight',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free directional light',
+        }),
+        expect.objectContaining({
+          name: 'SurfaceMaterial',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free surface material',
+        }),
+        expect.objectContaining({
+          name: 'MorphShapeGradientEndpoint',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free morph-shape gradient endpoint',
+        }),
+        expect.objectContaining({
+          name: 'SpatialIndexingNotice',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free spatial-indexing notice',
+        }),
+        expect.objectContaining({
+          name: 'Scene3DRenderList',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Scene3D render list',
         }),
       ]),
     );
@@ -1794,6 +1819,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#Scene3DDocumentNode',
         purpose: 'reviewed escape-free Scene3D document node',
       },
+      {
+        declarationFingerprint: 'sha256:5aa15d73a4d69dda6f617f278e05d90700a178b45474ec248e36e1a1139373ae',
+        id: '@flighthq/types:interface#DirectionalLight',
+        purpose: 'reviewed escape-free directional light',
+      },
+      {
+        declarationFingerprint: 'sha256:ad4981fb8d04361edb9e7e958ecc08e26e759a9934fb583584440ff0296f4f4a',
+        id: '@flighthq/types:interface#SurfaceMaterial',
+        purpose: 'reviewed escape-free surface material',
+      },
+      {
+        declarationFingerprint: 'sha256:f5a125c830ec328239b3260b832a2d808ac31e1e0735b68100978abf63435bde',
+        id: '@flighthq/types:interface#MorphShapeGradientEndpoint',
+        purpose: 'reviewed escape-free morph-shape gradient endpoint',
+      },
+      {
+        declarationFingerprint: 'sha256:f864004b87b82bcca917b1ed1e00b1b83f330263d4f5c0fce6e3b8e5bc6dafa8',
+        id: '@flighthq/types:interface#SpatialIndexingNotice',
+        purpose: 'reviewed escape-free spatial-indexing notice',
+      },
+      {
+        declarationFingerprint: 'sha256:7e7d78288f957c8b5498a6e851712cd492da91353a70049a43a65b9d5abf86ed',
+        id: '@flighthq/types:interface#Scene3DRenderList',
+        purpose: 'reviewed escape-free Scene3D render list',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -2483,6 +2533,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const seventhHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'DirectionalLight',
+            'MorphShapeGradientEndpoint',
+            'Scene3DRenderList',
+            'SpatialIndexingNotice',
+            'SurfaceMaterial',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -2523,22 +2586,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_436,
+      auditOnlySchemas: 1_431,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 22_384,
-      directSchemas: 568,
+      directAccesses: 22_498,
+      directSchemas: 573,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 8_282,
+      pendingAccesses: 8_168,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_436,
+      newAuditOnly: 1_431,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -2605,7 +2668,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(22_384);
+    expect(report.summary.directAccesses).toBe(22_498);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -3118,6 +3181,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(sixthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'DirectionalLight',
+        24,
+        'sha256:5aa15d73a4d69dda6f617f278e05d90700a178b45474ec248e36e1a1139373ae',
+        'reviewed escape-free directional light',
+      ],
+      [
+        'SurfaceMaterial',
+        23,
+        'sha256:ad4981fb8d04361edb9e7e958ecc08e26e759a9934fb583584440ff0296f4f4a',
+        'reviewed escape-free surface material',
+      ],
+      [
+        'MorphShapeGradientEndpoint',
+        23,
+        'sha256:f5a125c830ec328239b3260b832a2d808ac31e1e0735b68100978abf63435bde',
+        'reviewed escape-free morph-shape gradient endpoint',
+      ],
+      [
+        'SpatialIndexingNotice',
+        22,
+        'sha256:f864004b87b82bcca917b1ed1e00b1b83f330263d4f5c0fce6e3b8e5bc6dafa8',
+        'reviewed escape-free spatial-indexing notice',
+      ],
+      [
+        'Scene3DRenderList',
+        22,
+        'sha256:7e7d78288f957c8b5498a6e851712cd492da91353a70049a43a65b9d5abf86ed',
+        'reviewed escape-free Scene3D render list',
+      ],
+    ] as const) {
+      expect(seventhHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -4897,6 +5002,24 @@ describe('typed struct analysis', () => {
         expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
       }
     }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#DirectionalLight', false, ['cross-schema-transfer'], [], null],
+      ['@flighthq/types:interface#SurfaceMaterial', false, ['cross-schema-transfer', 'dynamic-ingress'], [], null],
+      ['@flighthq/types:interface#MorphShapeGradientEndpoint', true, [], [], null],
+      ['@flighthq/types:interface#SpatialIndexingNotice', true, [], ['object-spread'], null],
+      ['@flighthq/types:interface#Scene3DRenderList', true, [], [], { blockerReasons: [], closed: true }],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      if (nominalIdentity === null) {
+        expect(provenanceById.has(frontierId)).toBe(false);
+      } else {
+        expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+      }
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -5511,6 +5634,38 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(/_Runtime\.field\(effect,/u);
     }
+    for (const path of [
+      'generated/flighthq/lighting/DirectionalLight.hx',
+      'generated/flighthq/materials/SurfaceMaterial.hx',
+      'generated/flighthq/render/SceneRender.hx',
+      'generated/flighthq/scene3d/SceneDocumentLights.hx',
+      'generated/flighthq/scene3dFormats/Awd2Parse.hx',
+      'generated/flighthq/scene3dGl/DrawGlScene3D.hx',
+      'generated/flighthq/scene3dGl/GlMeshProgram.hx',
+      'generated/flighthq/scene3dGl/GlParticleEmitter3D.hx',
+      'generated/flighthq/scene3dGl/GlPbrStandardBlock.hx',
+      'generated/flighthq/scene3dGl/GlShadowMap.hx',
+      'generated/flighthq/scene3dGl/PrepareGlScene3DForwardLights.hx',
+      'generated/flighthq/scene3dWgpu/DrawWgpuScene3D.hx',
+      'generated/flighthq/scene3dWgpu/PrepareWgpuScene3DForwardLights.hx',
+      'generated/flighthq/scene3dWgpu/StandardPbrWgpuMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dWgpu/WgpuMeshPipeline.hx',
+      'generated/flighthq/scene3dWgpu/WgpuParticleEmitter3D.hx',
+      'generated/flighthq/scene3dWgpu/WgpuShadowMap.hx',
+      'generated/flighthq/shape/ExplainMorphShapeGradientEndpoints.hx',
+      'generated/flighthq/shape/MorphShapePaint.hx',
+      'generated/flighthq/spatial/FormatSpatialIndexingNotice.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:DirectionalLight|MorphShapeGradientEndpoint|Scene3DRenderList|SpatialIndexingNotice|SurfaceMaterial)\)\./u,
+      );
+    }
+    expect(readFileSync('generated/flighthq/lighting/DirectionalLight.hx', 'utf8')).not.toMatch(
+      /_Runtime\.field\(light,/u,
+    );
+    expect(readFileSync('generated/flighthq/materials/SurfaceMaterial.hx', 'utf8')).not.toMatch(
+      /_Runtime\.field\(material,/u,
+    );
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
     expect(generatedCanvasRenderState).not.toMatch(
       /\(cast (?:runtime|sourceRuntime|targetRuntime) : CanvasRenderStateRuntime\)\./u,

@@ -43,12 +43,12 @@ class PrepareGlScene3DForwardLights {
     prepared = (cast PrepareGlScene3DForwardLights.ensurePreparedGlScene3DForwardLights__prepareGlScene3DForwardLights(({ final __callArgument0:Dynamic = state; __callArgument0; })) : PreparedGlScene3DForwardLights__prepareGlScene3DForwardLights);
     out = (cast prepared : PreparedGlScene3DForwardLights__prepareGlScene3DForwardLights).list;
     ((cast prepared : PreparedGlScene3DForwardLights__prepareGlScene3DForwardLights).blockCount = 0.0);
-    _Runtime.setLength((cast out : GlScene3DForwardLightList).meshLightBlocks, _Runtime.field(sceneRenderList, 'meshCount'));
-    ((cast out : GlScene3DForwardLightList).meshCount = _Runtime.field(sceneRenderList, 'meshCount'));
+    _Runtime.setLength((cast out : GlScene3DForwardLightList).meshLightBlocks, sceneRenderList.meshCount);
+    ((cast out : GlScene3DForwardLightList).meshCount = sceneRenderList.meshCount);
     {
       var meshIndex:Float = 0.0;
-      while ((cast ((cast meshIndex : Float) < (cast _Runtime.field(sceneRenderList, 'meshCount') : Float)) : Bool)) {
-        var mesh:Mesh = flighthq._internal._StaticIndex.readArray(_Runtime.field(sceneRenderList, 'visibleMeshes'), meshIndex);
+      while ((cast ((cast meshIndex : Float) < (cast sceneRenderList.meshCount : Float)) : Bool)) {
+        var mesh:Mesh = flighthq._internal._StaticIndex.readArray(sceneRenderList.visibleMeshes, meshIndex);
         PrepareGlScene3DForwardLights.setMeshWorldBoundingSphere__prepareGlScene3DForwardLights(({ final __callArgument1:Dynamic = mesh; __callArgument1; }));
         selectScene3DForwardLights((cast prepared : PreparedGlScene3DForwardLights__prepareGlScene3DForwardLights).selection, ({ final __callArgument2:Dynamic = lights; __callArgument2; }), ({ final __callArgument3:Dynamic = PrepareGlScene3DForwardLights.scratchWorldSphere__prepareGlScene3DForwardLights; __callArgument3; }));
         var blockIndex:Float = (cast PrepareGlScene3DForwardLights.findPreparedBlock__prepareGlScene3DForwardLights((cast prepared : Dynamic), (cast (cast prepared : PreparedGlScene3DForwardLights__prepareGlScene3DForwardLights).selection : Scene3DForwardLightSelection).indices) : Float);

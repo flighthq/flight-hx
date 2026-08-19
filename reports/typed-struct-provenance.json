@@ -42635,7 +42635,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 22,
       "fields": 4,
       "id": "@flighthq/types:interface#Scene3DRenderList",
       "name": "Scene3DRenderList",

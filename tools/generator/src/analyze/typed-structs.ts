@@ -868,6 +868,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#Scene3DDocumentNode',
     purpose: 'reviewed escape-free Scene3D document node',
   },
+  {
+    declarationFingerprint: 'sha256:5aa15d73a4d69dda6f617f278e05d90700a178b45474ec248e36e1a1139373ae',
+    id: '@flighthq/types:interface#DirectionalLight',
+    purpose: 'reviewed escape-free directional light',
+  },
+  {
+    declarationFingerprint: 'sha256:ad4981fb8d04361edb9e7e958ecc08e26e759a9934fb583584440ff0296f4f4a',
+    id: '@flighthq/types:interface#SurfaceMaterial',
+    purpose: 'reviewed escape-free surface material',
+  },
+  {
+    declarationFingerprint: 'sha256:f5a125c830ec328239b3260b832a2d808ac31e1e0735b68100978abf63435bde',
+    id: '@flighthq/types:interface#MorphShapeGradientEndpoint',
+    purpose: 'reviewed escape-free morph-shape gradient endpoint',
+  },
+  {
+    declarationFingerprint: 'sha256:f864004b87b82bcca917b1ed1e00b1b83f330263d4f5c0fce6e3b8e5bc6dafa8',
+    id: '@flighthq/types:interface#SpatialIndexingNotice',
+    purpose: 'reviewed escape-free spatial-indexing notice',
+  },
+  {
+    declarationFingerprint: 'sha256:7e7d78288f957c8b5498a6e851712cd492da91353a70049a43a65b9d5abf86ed',
+    id: '@flighthq/types:interface#Scene3DRenderList',
+    purpose: 'reviewed escape-free Scene3D render list',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

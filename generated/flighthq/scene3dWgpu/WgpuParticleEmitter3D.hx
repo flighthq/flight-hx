@@ -323,7 +323,7 @@ class WgpuParticleEmitter3D {
     list = (cast prepareScene3DRender(({ final __callArgument23:Dynamic = state; __callArgument23; }), ({ final __callArgument24:Dynamic = scene; __callArgument24; }), ({ final __callArgument25:Dynamic = camera; __callArgument25; }), ({ final __callArgument26:Dynamic = lights; __callArgument26; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Scene3DRenderList);
     resources = (cast WgpuParticleEmitter3D.ensureParticle3DResources__wgpuParticleEmitter3D(({ final __callArgument27:Dynamic = state; __callArgument27; })) : WgpuParticle3DResources__wgpuParticleEmitter3D);
     f = WgpuParticleEmitter3D.frameScratch__wgpuParticleEmitter3D;
-    vp = (cast (cast list : Scene3DRenderList).viewProjection : { var m:flighthq._internal._Float32Array; }).m;
+    vp = (cast list.viewProjection : { var m:flighthq._internal._Float32Array; }).m;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 16.0 : Float)) : Bool)) {

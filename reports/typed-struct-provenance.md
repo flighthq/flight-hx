@@ -475,7 +475,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Scene3DForwardLightSelectionExplanation` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#Scene3DKindUsage` | 29 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Scene3DMetadata` | 0 | 3 | 2 | 0 | 1 | 0 | 2 | 3 | no | `normalization-provenance` |
-| `@flighthq/types:interface#Scene3DRenderList` | 0 | 4 | 0 | 3 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Scene3DRenderList` | 22 | 4 | 0 | 3 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Scene3DResourceInFlight` | 11 | 3 | 1 | 1 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DResourceResolution` | 0 | 3 | 1 | 4 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#Scene3DResourceResolverRuntime` | 25 | 4 | 0 | 8 | 0 | 0 | 0 | 0 | yes | — |

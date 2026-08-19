@@ -61,7 +61,7 @@ class SceneDocumentLights {
         if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, DirectionalLightKind) : Bool)) {
           if ((cast _Runtime.strictEquals(directional, null) : Bool)) {
             (directional = cast ((cast cloneDirectionalLight((cast descriptor : DirectionalLight)) : DirectionalLight) : Dynamic));
-            rotateVector3ByQuaternion(({ final __callArgument0:Dynamic = (cast directional : DirectionalLight).direction; __callArgument0; }), ({ final __callArgument1:Dynamic = (cast directional : DirectionalLight).direction; __callArgument1; }), ({ final __callArgument2:Dynamic = (cast (cast source : Scene3DDocumentLight).transform : Transform3D).rotation; __callArgument2; }));
+            rotateVector3ByQuaternion(({ final __callArgument0:Dynamic = (cast directional : { var direction:Vector3; }).direction; __callArgument0; }), ({ final __callArgument1:Dynamic = (cast directional : { var direction:Vector3; }).direction; __callArgument1; }), ({ final __callArgument2:Dynamic = (cast (cast source : Scene3DDocumentLight).transform : Transform3D).rotation; __callArgument2; }));
           }
           i++;
           continue;

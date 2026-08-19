@@ -66,11 +66,11 @@ class DrawWgpuScene3D {
     var opaqueDrawList:Array<WgpuScene3DDrawEntry> = cast _Runtime.UNDEFINED;
     var blendedDrawList:Array<WgpuScene3DDrawEntry> = cast _Runtime.UNDEFINED;
     list = (cast prepareScene3DRender(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = scene; __callArgument1; }), ({ final __callArgument2:Dynamic = camera; __callArgument2; }), ({ final __callArgument3:Dynamic = lights; __callArgument3; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Scene3DRenderList);
-    lightBlock = (cast list : Scene3DRenderList).lights;
-    viewProjection = (cast list : Scene3DRenderList).viewProjection;
+    lightBlock = list.lights;
+    viewProjection = list.viewProjection;
     runtime = (cast getWgpuScene3DRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuScene3DRuntime);
     (cast declareWgpuRenderTargetColorSpace(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = 'linear'; __callArgument6; })) : Bool);
-    hasPreparedForwardLights = ((cast !_Runtime.strictEquals(forwardLights, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(forwardLights, 'meshCount'), (cast list : Scene3DRenderList).meshCount) : Bool));
+    hasPreparedForwardLights = ((cast !_Runtime.strictEquals(forwardLights, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(forwardLights, 'meshCount'), list.meshCount) : Bool));
     if ((cast ((cast !(cast hasPreparedForwardLights : Bool) : Bool) && (cast (cast DrawWgpuScene3D.hasExcessForwardLights__drawWgpuScene3D(({ final __callArgument7:Dynamic = lights; __callArgument7; })) : Bool) : Bool)) : Bool)) { ({ final __optionalCall8 = runtime.forwardLightSelectionGuard; if (__optionalCall8 != null) __optionalCall8(lights); }); }
     opaqueDrawList = runtime.opaqueDrawList;
     blendedDrawList = runtime.blendedDrawList;
@@ -78,8 +78,8 @@ class DrawWgpuScene3D {
     DrawWgpuScene3D.recycleDrawEntries__drawWgpuScene3D(({ final __callArgument10:Dynamic = blendedDrawList; __callArgument10; }), runtime.blendedPool);
     {
       var m:Float = 0.0;
-      while ((cast ((cast m : Float) < (cast (cast list : Scene3DRenderList).meshCount : Float)) : Bool)) {
-        var mesh:Mesh = flighthq._internal._StaticIndex.readArray((cast list : Scene3DRenderList).visibleMeshes, m);
+      while ((cast ((cast m : Float) < (cast list.meshCount : Float)) : Bool)) {
+        var mesh:Mesh = flighthq._internal._StaticIndex.readArray(list.visibleMeshes, m);
         var subsets:Array<MeshSubset> = (cast mesh.geometry : { var subsets:Array<MeshSubset>; }).subsets;
         var worldMatrix:Matrix4 = (cast getNodeWorldMatrix4((cast mesh : Dynamic)) : Matrix4);
         var wx:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast worldMatrix.m : flighthq._internal._Float32Array), (cast 12.0 : Float));
@@ -190,14 +190,14 @@ class DrawWgpuScene3D {
   }
 
   public static function isBlendedMaterial__drawWgpuScene3D(material:Material):Bool {
-    return cast _Runtime.strictEquals(_Runtime.field((cast material : SurfaceMaterial), 'alphaMode'), 'blend');
+    return cast _Runtime.strictEquals((cast (cast material : SurfaceMaterial) : { var alphaMode:MaterialAlphaMode; }).alphaMode, 'blend');
     return cast null;
   }
 
   public static function getMaterialBlendMode__drawWgpuScene3D(material:Material):BlendMode {
     var surface:SurfaceMaterial = cast _Runtime.UNDEFINED;
     surface = (cast material : SurfaceMaterial);
-    return cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(surface, 'alphaMode'), 'blend') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(surface, 'blendMode')), 'string') : Bool)) : Bool) ? (cast _Runtime.field(surface, 'blendMode') : Dynamic) : (cast (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal : Dynamic));
+    return cast ((cast ((cast _Runtime.strictEquals(surface.alphaMode, 'blend') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(surface.blendMode), 'string') : Bool)) : Bool) ? (cast surface.blendMode : Dynamic) : (cast (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal : Dynamic));
     return cast null;
   }
 

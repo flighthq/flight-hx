@@ -86,7 +86,7 @@ class WgpuShadowMap {
     var boundPipeline:Null<flighthq._internal.dom.GPURenderPipeline> = cast _Runtime.UNDEFINED;
     sceneRuntime = (cast getWgpuScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuScene3DRuntime);
     if ((cast !_Runtime.strictEquals(sceneRuntime.shadow, null) : Bool)) { ((cast sceneRuntime.shadow : WgpuScene3DShadow).enabled = false); }
-    if ((cast ((cast _Runtime.strictEquals(directionalLight, null) : Bool) || (cast !(cast _Runtime.field(directionalLight, 'castsShadow') : Bool) : Bool)) : Bool)) { return; }
+    if ((cast ((cast _Runtime.strictEquals(directionalLight, null) : Bool) || (cast !(cast (cast directionalLight : { var castsShadow:Bool; }).castsShadow : Bool) : Bool)) : Bool)) { return; }
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
     encoder = runtime.commandEncoder;
     if ((cast _Runtime.strictEquals(encoder, null) : Bool)) { return; }
@@ -99,7 +99,7 @@ class WgpuShadowMap {
       (shadow = cast ({ depthTexture: depthTexture, depthView: (cast depthTexture : flighthq._internal.dom.GPUTexture).createView(), enabled: false, mapHeight: DIRECTIONAL_SHADOW_MAP_SIZE, mapWidth: DIRECTIONAL_SHADOW_MAP_SIZE, matrix: (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4), normalBiasWorld: 0.0, pcfRadius: 0.0, shadowBias: 0.0 } : Dynamic));
       (sceneRuntime.shadow = cast (shadow : Null<WgpuScene3DShadow>));
     }
-    normalBiasWorld = _Runtime.multiplyNumbers(_Runtime.field(directionalLight, 'normalBias'), (cast getOrthographicProjectionTexelSize(shadowCamera.projection, (cast (cast shadow : WgpuScene3DShadow).mapWidth : Float), (cast (cast shadow : WgpuScene3DShadow).mapHeight : Float)) : Float));
+    normalBiasWorld = ((cast directionalLight : { var normalBias:Float; }).normalBias * (cast getOrthographicProjectionTexelSize(shadowCamera.projection, (cast (cast shadow : WgpuScene3DShadow).mapWidth : Float), (cast (cast shadow : WgpuScene3DShadow).mapHeight : Float)) : Float));
     lightMatrix = (cast shadow : WgpuScene3DShadow).matrix;
     getCamera3DViewProjectionMatrix4(({ final __callArgument3:Dynamic = lightMatrix; __callArgument3; }), ({ final __callArgument4:Dynamic = shadowCamera; __callArgument4; }), (cast 1.0 : Float));
     skinning = (cast getWgpuSkinningAdapter(({ final __callArgument5:Dynamic = state; __callArgument5; })) : Null<WgpuSkinningAdapter>);
@@ -141,8 +141,8 @@ class WgpuShadowMap {
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end();
     ((cast shadow : WgpuScene3DShadow).enabled = true);
     ((cast shadow : WgpuScene3DShadow).normalBiasWorld = normalBiasWorld);
-    ((cast shadow : WgpuScene3DShadow).pcfRadius = (cast WgpuShadowMap.normalizeDirectionalShadowPcfRadius__wgpuShadowMap((cast _Runtime.field(directionalLight, 'pcfRadius') : Float)) : Float));
-    ((cast shadow : WgpuScene3DShadow).shadowBias = _Runtime.field(directionalLight, 'shadowBias'));
+    ((cast shadow : WgpuScene3DShadow).pcfRadius = (cast WgpuShadowMap.normalizeDirectionalShadowPcfRadius__wgpuShadowMap((cast (cast directionalLight : { var pcfRadius:Float; }).pcfRadius : Float)) : Float));
+    ((cast shadow : WgpuScene3DShadow).shadowBias = (cast directionalLight : { var shadowBias:Float; }).shadowBias);
   }
 
   public static function normalizeDirectionalShadowPcfRadius__wgpuShadowMap(radius:Float):Float {

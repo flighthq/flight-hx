@@ -17,7 +17,7 @@ import flighthq.types._internal._DirectionalLightValues.DirectionalLightKind;
 
 class DirectionalLight {
   public static function cloneDirectionalLight(source:flighthq.types.DirectionalLight):flighthq.types.DirectionalLight {
-    return cast (cast createEntity((cast { castsShadow: _Runtime.field(source, 'castsShadow'), color: _Runtime.field(source, 'color'), direction: (cast cloneVector3(({ final __callArgument0:Dynamic = _Runtime.field(source, 'direction'); __callArgument0; })) : Vector3), intensity: _Runtime.field(source, 'intensity'), kind: DirectionalLightKind, normalBias: _Runtime.field(source, 'normalBias'), pcfRadius: _Runtime.field(source, 'pcfRadius'), shadowBias: _Runtime.field(source, 'shadowBias') } : Dynamic)) : { >Entity, var castsShadow:Bool; var color:Float; var direction:Vector3; var intensity:Float; var kind:String; var normalBias:Float; var pcfRadius:Float; var shadowBias:Float; });
+    return cast (cast createEntity((cast { castsShadow: source.castsShadow, color: source.color, direction: (cast cloneVector3(({ final __callArgument0:Dynamic = source.direction; __callArgument0; })) : Vector3), intensity: source.intensity, kind: DirectionalLightKind, normalBias: source.normalBias, pcfRadius: source.pcfRadius, shadowBias: source.shadowBias } : Dynamic)) : { >Entity, var castsShadow:Bool; var color:Float; var direction:Vector3; var intensity:Float; var kind:String; var normalBias:Float; var pcfRadius:Float; var shadowBias:Float; });
     return cast null;
   }
 
@@ -38,7 +38,7 @@ class DirectionalLight {
     lz = z;
     len = HxMath.sqrt((((lx * lx) + (ly * ly)) + (lz * lz)));
     if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
-      setVector3(({ final __callArgument12:Dynamic = (cast out : flighthq.types.DirectionalLight).direction; __callArgument12; }), (cast (lx / len) : Float), (cast (ly / len) : Float), (cast (lz / len) : Float));
+      setVector3(({ final __callArgument12:Dynamic = out.direction; __callArgument12; }), (cast (lx / len) : Float), (cast (ly / len) : Float), (cast (lz / len) : Float));
     }
   }
 
@@ -52,7 +52,7 @@ class DirectionalLight {
     dz = (toZ - fromZ);
     len = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
     if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
-      setVector3(({ final __callArgument13:Dynamic = (cast out : flighthq.types.DirectionalLight).direction; __callArgument13; }), (cast (dx / len) : Float), (cast (dy / len) : Float), (cast (dz / len) : Float));
+      setVector3(({ final __callArgument13:Dynamic = out.direction; __callArgument13; }), (cast (dx / len) : Float), (cast (dy / len) : Float), (cast (dz / len) : Float));
     }
   }
 }
