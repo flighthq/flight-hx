@@ -73,7 +73,7 @@ class WgpuDraw {
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : WgpuRenderStateRuntime);
     cache = ((cast premultiply : Bool) ? (cast ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast runtime.textureSourcePremultipliedSrgbTextureCache : Dynamic) : (cast runtime.textureSourcePremultipliedTextureCache : Dynamic)) : Dynamic) : (cast ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast runtime.textureSourceStraightSrgbTextureCache : Dynamic) : (cast runtime.textureSourceStraightTextureCache : Dynamic)) : Dynamic));
     cached = ((cast cache : flighthq._internal._WeakMap<TextureSource, WgpuTextureSourceTextureEntry>).get(image));
-    if ((cast ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast cached : WgpuTextureSourceTextureEntry).version, _Runtime.field(image, 'version')) : Bool)) : Bool)) { return cast cached; }
+    if ((cast ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast cached : WgpuTextureSourceTextureEntry).version, image.version) : Bool)) : Bool)) { return cast cached; }
     built = (cast upload(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = image; __callArgument12; }), (cast generateMips : Bool), (cast premultiply : Bool), ({ final __callArgument13:Dynamic = colorSpace; __callArgument13; })) : Null<WgpuTextureEntry>);
     if ((cast _Runtime.strictEquals(built, null) : Bool)) { return cast _Runtime.coalesce(cached, function():Dynamic return cast null); }
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -84,10 +84,10 @@ class WgpuDraw {
       ((cast cached : WgpuTextureSourceTextureEntry).bindGroupLinear = _Runtime.field(_Runtime, 'UNDEFINED'));
       ((cast cached : WgpuTextureSourceTextureEntry).bindGroupNearest = _Runtime.field(_Runtime, 'UNDEFINED'));
       ((cast cached : WgpuTextureSourceTextureEntry).straightAlpha = (cast built : WgpuTextureEntry).straightAlpha);
-      ((cast cached : WgpuTextureSourceTextureEntry).version = _Runtime.field(image, 'version'));
+      ((cast cached : WgpuTextureSourceTextureEntry).version = image.version);
       return cast cached;
     }
-    entry = (cast _Runtime.mergeObjects([built, { version: _Runtime.field(image, 'version') }]));
+    entry = (cast _Runtime.mergeObjects([built, { version: image.version }]));
     ((cast cache : flighthq._internal._WeakMap<TextureSource, WgpuTextureSourceTextureEntry>).set(image, (cast entry)));
     return cast entry;
     return cast null;

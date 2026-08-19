@@ -71,7 +71,7 @@ class ResolveScene3DResources {
         var ref:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>> = (cast getScene3DTextureResourceReference(({ final __callArgument6:Dynamic = scene; __callArgument6; }), ({ final __callArgument7:Dynamic = texture; __callArgument7; })) : Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>);
         if ((cast _Runtime.looseEquals(ref, null) : Bool)) { i++; continue; }
         var image:Null<TextureSource> = ((cast _Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) ? (cast (cast texture : Texture2D).source : Dynamic) : (cast null : Dynamic));
-        if ((cast _Runtime.strictEquals(({ final __structural8 = image; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { var kind:String; }).kind; }), ImageTextureSourceKind) : Bool)) {
+        if ((cast _Runtime.strictEquals(({ final __typedStruct8 = image; __typedStruct8 == null ? _Runtime.UNDEFINED : (cast __typedStruct8 : { var kind:String; }).kind; }), ImageTextureSourceKind) : Bool)) {
           ((cast (cast runtime : Scene3DResourceResolverRuntime).resolved : flighthq._internal._Map<ImageResourceReference, Image>).set(ref, (cast (cast image : Image))));
           ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = null);
           ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved);

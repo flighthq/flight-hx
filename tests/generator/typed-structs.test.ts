@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_456,
+      newAuditOnly: 1_451,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(550);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(555);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_456);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_451);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(148);
+    expect(newDirect).toHaveLength(153);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -850,6 +850,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'PathMesh',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free path mesh',
+        }),
+        expect.objectContaining({
+          name: 'StandardPbrMaterial',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free standard PBR material',
+        }),
+        expect.objectContaining({
+          name: 'TextSelectionRectangle',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free text selection rectangle',
+        }),
+        expect.objectContaining({
+          name: 'LayoutNode',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free layout node',
+        }),
+        expect.objectContaining({
+          name: 'Scene3DKindUsage',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Scene3D kind usage',
+        }),
+        expect.objectContaining({
+          name: 'TextureSource',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free texture source',
         }),
       ]),
     );
@@ -1594,6 +1619,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#PathMesh',
         purpose: 'reviewed escape-free path mesh',
       },
+      {
+        declarationFingerprint: 'sha256:75623596e21f7fa8bdb96972f77d790d3fa4eaa91a9a238efce37fd2c87cff25',
+        id: '@flighthq/types:interface#StandardPbrMaterial',
+        purpose: 'reviewed escape-free standard PBR material',
+      },
+      {
+        declarationFingerprint: 'sha256:8b127f9af8b5c5c504869aff4b368a55038b3df041dcc04c392bae8aed708e39',
+        id: '@flighthq/types:interface#TextSelectionRectangle',
+        purpose: 'reviewed escape-free text selection rectangle',
+      },
+      {
+        declarationFingerprint: 'sha256:dcb64afdbc4634db6a19bccd9b239a2d46272227ea1bcc4547bb450d8e95b91f',
+        id: '@flighthq/types:interface#LayoutNode',
+        purpose: 'reviewed escape-free layout node',
+      },
+      {
+        declarationFingerprint: 'sha256:6221bdcad721b47767821e41a9d71f9e1d6766b425ec20a430f0ee643b761ab6',
+        id: '@flighthq/types:interface#Scene3DKindUsage',
+        purpose: 'reviewed escape-free Scene3D kind usage',
+      },
+      {
+        declarationFingerprint: 'sha256:e1aa5f7158dac8804df2b8cb02d88eb0ef695dcb84db0bb0804dc6a2fd8c1b1f',
+        id: '@flighthq/types:interface#TextureSource',
+        purpose: 'reviewed escape-free texture source',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -2245,6 +2295,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const thirdHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['LayoutNode', 'Scene3DKindUsage', 'StandardPbrMaterial', 'TextSelectionRectangle', 'TextureSource'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -2285,22 +2344,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_456,
+      auditOnlySchemas: 1_451,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 21_840,
-      directSchemas: 548,
+      directAccesses: 21_987,
+      directSchemas: 553,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 8_826,
+      pendingAccesses: 8_679,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_456,
+      newAuditOnly: 1_451,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -2367,7 +2426,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(21_840);
+    expect(report.summary.directAccesses).toBe(21_987);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -2717,6 +2776,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(secondHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'StandardPbrMaterial',
+        30,
+        'sha256:75623596e21f7fa8bdb96972f77d790d3fa4eaa91a9a238efce37fd2c87cff25',
+        'reviewed escape-free standard PBR material',
+      ],
+      [
+        'TextSelectionRectangle',
+        30,
+        'sha256:8b127f9af8b5c5c504869aff4b368a55038b3df041dcc04c392bae8aed708e39',
+        'reviewed escape-free text selection rectangle',
+      ],
+      [
+        'LayoutNode',
+        29,
+        'sha256:dcb64afdbc4634db6a19bccd9b239a2d46272227ea1bcc4547bb450d8e95b91f',
+        'reviewed escape-free layout node',
+      ],
+      [
+        'Scene3DKindUsage',
+        29,
+        'sha256:6221bdcad721b47767821e41a9d71f9e1d6766b425ec20a430f0ee643b761ab6',
+        'reviewed escape-free Scene3D kind usage',
+      ],
+      [
+        'TextureSource',
+        29,
+        'sha256:e1aa5f7158dac8804df2b8cb02d88eb0ef695dcb84db0bb0804dc6a2fd8c1b1f',
+        'reviewed escape-free texture source',
+      ],
+    ] as const) {
+      expect(thirdHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -4400,6 +4501,30 @@ describe('typed struct analysis', () => {
         expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
       }
     }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
+      [
+        '@flighthq/types:interface#StandardPbrMaterial',
+        false,
+        ['cross-schema-transfer', 'dynamic-ingress'],
+        ['optional-omission'],
+        null,
+      ],
+      ['@flighthq/types:interface#TextSelectionRectangle', false, ['anonymous-structural-transfer'], [], null],
+      ['@flighthq/types:interface#LayoutNode', true, [], ['object-spread'], null],
+      ['@flighthq/types:interface#Scene3DKindUsage', true, [], [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#TextureSource', false, ['cross-schema-transfer'], [], null],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      if (nominalIdentity === null) {
+        expect(provenanceById.has(frontierId)).toBe(false);
+      } else {
+        expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+      }
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -4869,6 +4994,51 @@ describe('typed struct analysis', () => {
     }
     expect(readFileSync('generated/flighthq/clock/Clock.hx', 'utf8')).not.toMatch(/_Runtime\.field\(current,/u);
     expect(readFileSync('generated/flighthq/lighting/AreaLight.hx', 'utf8')).not.toMatch(/_Runtime\.field\(source,/u);
+    for (const path of [
+      'generated/flighthq/bitmapfontFormats/BitmapFontFnt.hx',
+      'generated/flighthq/interaction/RegisterSpriteHitTest.hx',
+      'generated/flighthq/layout/AnchorLayout.hx',
+      'generated/flighthq/layout/FlexLayout.hx',
+      'generated/flighthq/layout/GridLayout.hx',
+      'generated/flighthq/layout/ResolveLayoutTree.hx',
+      'generated/flighthq/renderGl/GlDraw.hx',
+      'generated/flighthq/renderGl/GlExternalTexture.hx',
+      'generated/flighthq/renderWgpu/WgpuDraw.hx',
+      'generated/flighthq/renderWgpu/WgpuExternalTexture.hx',
+      'generated/flighthq/scene2dCanvas/CanvasRichText.hx',
+      'generated/flighthq/scene2dCanvas/CanvasTextInput.hx',
+      'generated/flighthq/scene2dCanvas/CanvasTextureWindowSource.hx',
+      'generated/flighthq/scene2dDom/DomTextInput.hx',
+      'generated/flighthq/scene2dGl/GlTextInput.hx',
+      'generated/flighthq/scene2dWgpu/WgpuTextInput.hx',
+      'generated/flighthq/scene3d/SceneKindUsage.hx',
+      'generated/flighthq/scene3dFormats/GltfEmissiveStrength.hx',
+      'generated/flighthq/scene3dFormats/GltfMaterialExtension.hx',
+      'generated/flighthq/scene3dFormats/GltfParse.hx',
+      'generated/flighthq/scene3dFormats/GltfSpecularGlossiness.hx',
+      'generated/flighthq/scene3dFormats/GltfUnlit.hx',
+      'generated/flighthq/scene3dFormats/ObjParse.hx',
+      'generated/flighthq/scene3dGl/ExplainGlScene3DCoverage.hx',
+      'generated/flighthq/scene3dGl/GlEnvironmentCube.hx',
+      'generated/flighthq/scene3dGl/StandardPbrGlMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dResources/ExplainScene3DResourceCoverage.hx',
+      'generated/flighthq/scene3dResources/ResolveScene3DResources.hx',
+      'generated/flighthq/scene3dWgpu/ExplainWgpuScene3DCoverage.hx',
+      'generated/flighthq/scene3dWgpu/StandardPbrWgpuMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dWgpu/WgpuEnvironmentCube.hx',
+      'generated/flighthq/textinput/TextInputEditing.hx',
+      'generated/flighthq/texture/CubeTexture.hx',
+      'generated/flighthq/texture/Texture.hx',
+      'generated/flighthq/textureatlas/TextureAtlas.hx',
+    ]) {
+      const generatedThirdFrontier = readFileSync(path, 'utf8');
+      expect(generatedThirdFrontier).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:LayoutNode(?:<[^>]+>)?|Scene3DKindUsage|StandardPbrMaterial|TextSelectionRectangle|TextureSource)\)\./u,
+      );
+    }
+    expect(readFileSync('generated/flighthq/scene3d/SceneKindUsage.hx', 'utf8')).not.toMatch(
+      /_Runtime\.field\(usage,/u,
+    );
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
     expect(generatedCanvasRenderState).not.toMatch(
       /\(cast (?:runtime|sourceRuntime|targetRuntime) : CanvasRenderStateRuntime\)\./u,

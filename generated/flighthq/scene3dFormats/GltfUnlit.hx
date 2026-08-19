@@ -45,11 +45,11 @@ class GltfUnlit {
         var existing:MaterialLike = flighthq._internal._StaticIndex.readArray((cast _Runtime.field(context, 'document') : { var materials:Array<MaterialLike>; }).materials, i);
         if ((cast ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(existing, 'kind'), StandardPbrMaterialKind) : Bool)) : Bool)) { i++; continue; }
         var standard:StandardPbrMaterial = (cast (cast existing : flighthq._internal._Any) : StandardPbrMaterial);
-        var replacement:UnlitMaterial = (cast createUnlitMaterial(({ final __callArgument1:Dynamic = { baseColor: (cast standard : StandardPbrMaterial).baseColor, baseColorMap: (cast standard : StandardPbrMaterial).baseColorMap }; __callArgument1; })) : UnlitMaterial);
-        ((cast replacement : UnlitMaterial).alphaCutoff = (cast standard : StandardPbrMaterial).alphaCutoff);
-        ((cast replacement : UnlitMaterial).alphaMode = (cast standard : StandardPbrMaterial).alphaMode);
-        ((cast replacement : UnlitMaterial).doubleSided = (cast standard : StandardPbrMaterial).doubleSided);
-        ((cast replacement : UnlitMaterial).name = (cast standard : StandardPbrMaterial).name);
+        var replacement:UnlitMaterial = (cast createUnlitMaterial(({ final __callArgument1:Dynamic = { baseColor: standard.baseColor, baseColorMap: standard.baseColorMap }; __callArgument1; })) : UnlitMaterial);
+        ((cast replacement : UnlitMaterial).alphaCutoff = standard.alphaCutoff);
+        ((cast replacement : UnlitMaterial).alphaMode = standard.alphaMode);
+        ((cast replacement : UnlitMaterial).doubleSided = standard.doubleSided);
+        ((cast replacement : UnlitMaterial).name = standard.name);
         flighthq._internal._StaticIndex.writeArray((cast _Runtime.field(context, 'document') : { var materials:Array<MaterialLike>; }).materials, i, (cast (cast replacement : flighthq._internal._Any) : MaterialLike));
         i++;
       }

@@ -118,9 +118,9 @@ class GlDraw {
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }).texture);
     (runtime.currentTexture = cast ((cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }).texture : Null<flighthq._internal.dom.WebGLTexture>));
     (runtime.currentTextureStraightAlpha = cast (straightAlpha : Bool));
-    if ((cast !_Runtime.strictEquals((cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }).version, _Runtime.field(image, 'version')) : Bool)) {
+    if ((cast !_Runtime.strictEquals((cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }).version, image.version) : Bool)) {
       upload(({ final __callArgument26:Dynamic = state; __callArgument26; }), ({ final __callArgument27:Dynamic = image; __callArgument27; }), (cast premultiply : Bool), ({ final __callArgument28:Dynamic = colorSpace; __callArgument28; }));
-      ((cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }).version = _Runtime.field(image, 'version'));
+      ((cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }).version = image.version);
     }
     applyGlSamplerState(({ final __callArgument29:Dynamic = state; __callArgument29; }), ({ final __callArgument30:Dynamic = runtime; __callArgument30; }), (cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }).texture, ({ final __callArgument31:Dynamic = _Runtime.coalesce(sampler, function():Dynamic return cast null); __callArgument31; }), ({ final __callArgument32:Dynamic = _Runtime.coalesce(smoothingOverride, function():Dynamic return cast null); __callArgument32; }));
     return cast (cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }).texture;
@@ -309,7 +309,7 @@ class GlDraw {
   public static function uploadGlImageResource__glDraw(state:GlRenderState, image:TextureSource, premultiply:Bool, colorSpace:TextureColorSpace):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
-    flighthq._internal.backend.WebGl2Backend.pixelStorei(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL', flighthq._internal.backend.WebGl2Backend.UNPACK_PREMULTIPLY_ALPHA_WEBGL), ((cast premultiply : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(image, 'alphaType'), 'premultiplied') : Bool)));
+    flighthq._internal.backend.WebGl2Backend.pixelStorei(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL', flighthq._internal.backend.WebGl2Backend.UNPACK_PREMULTIPLY_ALPHA_WEBGL), ((cast premultiply : Bool) && (cast !_Runtime.strictEquals(image.alphaType, 'premultiplied') : Bool)));
     uploadGlTextureElement(({ final __callArgument73:Dynamic = gl; __callArgument73; }), (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D) : Float), (cast (cast _Runtime.field((cast image : Image), 'source') : flighthq._internal.dom.TexImageSource) : flighthq._internal._Any), (cast ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SRGB8_ALPHA8', flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic)) : Float));
   }
 

@@ -61,7 +61,7 @@ class GlExternalTexture {
   }
 
   public static function getExternalTextureSource__glExternalTexture(texture:TextureLike):Null<ExternalTexture> {
-    if ((cast ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) || (cast !_Runtime.strictEquals(({ final __structural17 = _Runtime.field(texture, 'source'); __structural17 == null ? _Runtime.UNDEFINED : (cast __structural17 : { var kind:String; }).kind; }), ExternalTextureSourceKind) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) || (cast !_Runtime.strictEquals(({ final __typedStruct17 = _Runtime.field(texture, 'source'); __typedStruct17 == null ? _Runtime.UNDEFINED : (cast __typedStruct17 : { var kind:String; }).kind; }), ExternalTextureSourceKind) : Bool)) : Bool)) { return cast null; }
     return cast (cast _Runtime.field(texture, 'source') : ExternalTexture);
     return cast null;
   }

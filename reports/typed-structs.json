@@ -165245,9 +165245,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 29,
+        "directAccesses": 29,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -165293,7 +165293,7 @@
       },
       "name": "LayoutNode",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free layout node",
       "reasons": [],
       "source": "upstream/packages/types/src/Layout.ts",
       "sourceProvenance": {
@@ -282131,9 +282131,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 29,
+        "directAccesses": 29,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -282187,7 +282187,7 @@
       },
       "name": "Scene3DKindUsage",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Scene3D kind usage",
       "reasons": [],
       "source": "upstream/packages/types/src/Scene3DKindUsage.ts",
       "sourceProvenance": {
@@ -332833,9 +332833,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 30,
+        "directAccesses": 30,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -333007,7 +333007,7 @@
       },
       "name": "StandardPbrMaterial",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free standard PBR material",
       "reasons": [],
       "source": "upstream/packages/types/src/StandardPbrMaterial.ts",
       "sourceProvenance": {
@@ -353239,9 +353239,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 30,
+        "directAccesses": 30,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -353295,7 +353295,7 @@
       },
       "name": "TextSelectionRectangle",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free text selection rectangle",
       "reasons": [],
       "source": "upstream/packages/types/src/TextSelectionRectangle.ts",
       "sourceProvenance": {
@@ -365384,9 +365384,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 29,
+        "directAccesses": 29,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -365454,7 +365454,7 @@
       },
       "name": "TextureSource",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free texture source",
       "reasons": [],
       "source": "upstream/packages/types/src/TextureSource.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1456,
+      "newAuditOnly": 1451,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1456,
+    "auditOnlySchemas": 1451,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 21840,
-    "directSchemas": 548,
+    "directAccesses": 21987,
+    "directSchemas": 553,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 8826,
+    "pendingAccesses": 8679,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

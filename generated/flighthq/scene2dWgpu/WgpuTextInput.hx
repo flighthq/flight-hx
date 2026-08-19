@@ -39,7 +39,7 @@ class WgpuTextInput {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', (cast computeRgbHexString((cast (cast input : { var selectionColor:Float; }).selectionColor : Float)) : String));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast input : { var selectionAlpha:Float; }).selectionAlpha);
       for (rect in _Runtime.iterable(WgpuTextInput.selectionRectangles__wgpuTextInput)) {
-        flighthq._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([((cast rect : TextSelectionRectangle).x - scrollXOffset), ((cast rect : TextSelectionRectangle).y - scrollYOffset), (cast rect : TextSelectionRectangle).width, (cast rect : TextSelectionRectangle).height] : Array<Dynamic>));
+        flighthq._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([(rect.x - scrollXOffset), (rect.y - scrollYOffset), rect.width, rect.height] : Array<Dynamic>));
       }
     }
     if ((cast ((cast (cast input : { var focused:Bool; }).focused : Bool) && (cast _Runtime.strictEquals((cast getTextInputSelectionBeginIndex(({ final __callArgument6:Dynamic = source; __callArgument6; })) : Float), (cast getTextInputSelectionEndIndex(({ final __callArgument7:Dynamic = source; __callArgument7; })) : Float)) : Bool)) : Bool)) {

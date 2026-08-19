@@ -73,7 +73,7 @@ class WgpuExternalTexture {
   }
 
   public static function getExternalTextureSource__wgpuExternalTexture(texture:TextureLike):Null<ExternalTexture> {
-    if ((cast ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) || (cast !_Runtime.strictEquals(({ final __structural21 = _Runtime.field(texture, 'source'); __structural21 == null ? _Runtime.UNDEFINED : (cast __structural21 : { var kind:String; }).kind; }), ExternalTextureSourceKind) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) || (cast !_Runtime.strictEquals(({ final __typedStruct21 = _Runtime.field(texture, 'source'); __typedStruct21 == null ? _Runtime.UNDEFINED : (cast __typedStruct21 : { var kind:String; }).kind; }), ExternalTextureSourceKind) : Bool)) : Bool)) { return cast null; }
     return cast (cast _Runtime.field(texture, 'source') : ExternalTexture);
     return cast null;
   }

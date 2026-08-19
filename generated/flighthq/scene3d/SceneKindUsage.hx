@@ -26,14 +26,14 @@ class SceneKindUsage {
 
   public static function getScene3DKindUsage(out:Scene3DKindUsage, scene:Scene3D):Void {
     var visit:Node3D->Void = cast _Runtime.UNDEFINED;
-    _Runtime.setLength((cast out : Scene3DKindUsage).materialKinds, 0.0);
-    _Runtime.setLength((cast out : Scene3DKindUsage).modifierKinds, 0.0);
-    _Runtime.setLength((cast out : Scene3DKindUsage).nodeKinds, 0.0);
-    _Runtime.setLength((cast out : Scene3DKindUsage).resourceMimeTypes, 0.0);
-    _Runtime.setLength((cast out : Scene3DKindUsage).textureSourceKinds, 0.0);
+    _Runtime.setLength(out.materialKinds, 0.0);
+    _Runtime.setLength(out.modifierKinds, 0.0);
+    _Runtime.setLength(out.nodeKinds, 0.0);
+    _Runtime.setLength(out.resourceMimeTypes, 0.0);
+    _Runtime.setLength(out.textureSourceKinds, 0.0);
     visit = (cast function(node:Node3D):Void {
       var materials:Array<Null<Material>> = cast _Runtime.UNDEFINED;
-      SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast out : Scene3DKindUsage).nodeKinds, (cast _Runtime.field(node, 'kind') : String));
+      SceneKindUsage.addScene3DUsedKind__sceneKindUsage(out.nodeKinds, (cast _Runtime.field(node, 'kind') : String));
       if ((cast !(cast (cast isMesh((cast node : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return; }
       materials = (cast node : { var materials:Array<Null<Material>>; }).materials;
       {
@@ -41,13 +41,13 @@ class SceneKindUsage {
         while ((cast ((cast i : Float) < (cast _Runtime.field(materials, 'length') : Float)) : Bool)) {
           var material:Null<Material> = (cast flighthq._internal._StaticIndex.readArray(materials, i) : Null<Material>);
           if ((cast _Runtime.strictEquals(material, null) : Bool)) { i++; continue; }
-          SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast out : Scene3DKindUsage).materialKinds, (cast (cast material : Material).kind : String));
+          SceneKindUsage.addScene3DUsedKind__sceneKindUsage(out.materialKinds, (cast (cast material : Material).kind : String));
           var modifiers:Null<Array<Modifier>> = _Runtime.field((cast material : flighthq._internal._Partial<{ var modifiers:Array<Modifier>; }>), 'modifiers');
           if ((cast _Runtime.strictEquals(modifiers, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
           {
             var m:Float = 0.0;
             while ((cast ((cast m : Float) < (cast _Runtime.field(modifiers, 'length') : Float)) : Bool)) {
-              SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast out : Scene3DKindUsage).modifierKinds, (cast (cast flighthq._internal._StaticIndex.readArray(modifiers, m) : Modifier).kind : String));
+              SceneKindUsage.addScene3DUsedKind__sceneKindUsage(out.modifierKinds, (cast (cast flighthq._internal._StaticIndex.readArray(modifiers, m) : Modifier).kind : String));
               m++;
             }
           }
@@ -62,16 +62,16 @@ class SceneKindUsage {
       while ((cast ((cast i : Float) < (cast _Runtime.field(scene.resources, 'length') : Float)) : Bool)) {
         var resource:ImageResourceReference = flighthq._internal._StaticIndex.readArray(scene.resources, i);
         if ((cast ((cast _Runtime.strictEquals((cast resource : { @:optional var textures:Null<Array<Texture>>; }).textures, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast resource : { @:optional var textures:Null<Array<Texture>>; }).textures, 'length'), 0.0) : Bool)) : Bool)) { i++; continue; }
-        SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast out : Scene3DKindUsage).textureSourceKinds, (cast ImageTextureSourceKind : String));
-        if ((cast !_Runtime.strictEquals((cast resource : { var mimeType:Null<String>; }).mimeType, null) : Bool)) { SceneKindUsage.addScene3DUsedKind__sceneKindUsage((cast out : Scene3DKindUsage).resourceMimeTypes, (cast (cast resource : { var mimeType:Null<String>; }).mimeType : String)); }
+        SceneKindUsage.addScene3DUsedKind__sceneKindUsage(out.textureSourceKinds, (cast ImageTextureSourceKind : String));
+        if ((cast !_Runtime.strictEquals((cast resource : { var mimeType:Null<String>; }).mimeType, null) : Bool)) { SceneKindUsage.addScene3DUsedKind__sceneKindUsage(out.resourceMimeTypes, (cast (cast resource : { var mimeType:Null<String>; }).mimeType : String)); }
         i++;
       }
     }
-    _Runtime.callProperty((cast out : Scene3DKindUsage).materialKinds, 'sort', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty((cast out : Scene3DKindUsage).modifierKinds, 'sort', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty((cast out : Scene3DKindUsage).nodeKinds, 'sort', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty((cast out : Scene3DKindUsage).resourceMimeTypes, 'sort', cast ([] : Array<Dynamic>));
-    _Runtime.callProperty((cast out : Scene3DKindUsage).textureSourceKinds, 'sort', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty(out.materialKinds, 'sort', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty(out.modifierKinds, 'sort', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty(out.nodeKinds, 'sort', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty(out.resourceMimeTypes, 'sort', cast ([] : Array<Dynamic>));
+    _Runtime.callProperty(out.textureSourceKinds, 'sort', cast ([] : Array<Dynamic>));
   }
 
   public static function addScene3DUsedKind__sceneKindUsage(kinds:Array<String>, kind:String):Void {

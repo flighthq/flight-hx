@@ -37,8 +37,8 @@ class BitmapFontFnt {
     base = metrics.ascent;
     primaryTexture = ({ final __typedStruct1 = flighthq._internal._StaticIndex.readArray(font.pages, 0.0); __typedStruct1 == null ? _Runtime.UNDEFINED : (cast __typedStruct1 : { var texture:Null<Texture2D>; }).texture; });
     primaryImage = ((cast _Runtime.strictEquals(({ final __structural2 = primaryTexture; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var dimension:String; }).dimension; }), '2d') : Bool) ? (cast (cast primaryTexture : Texture2D).source : Dynamic) : (cast null : Dynamic));
-    scaleW = ((cast !_Runtime.strictEquals(primaryImage, null) : Bool) ? (cast (cast primaryImage : TextureSource).width : Dynamic) : (cast 0.0 : Dynamic));
-    scaleH = ((cast !_Runtime.strictEquals(primaryImage, null) : Bool) ? (cast (cast primaryImage : TextureSource).height : Dynamic) : (cast 0.0 : Dynamic));
+    scaleW = ((cast !_Runtime.strictEquals(primaryImage, null) : Bool) ? (cast (cast primaryImage : { var width:Float; }).width : Dynamic) : (cast 0.0 : Dynamic));
+    scaleH = ((cast !_Runtime.strictEquals(primaryImage, null) : Bool) ? (cast (cast primaryImage : { var height:Float; }).height : Dynamic) : (cast 0.0 : Dynamic));
     pageCount = HxMath.max(_Runtime.field(font.pages, 'length'), 1.0);
     lines = (cast cast ([] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast (['info face="" size=' + Std.string(lineHeight) + ' bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=0,0 outline=0'] : Array<Dynamic>));

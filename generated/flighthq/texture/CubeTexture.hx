@@ -52,7 +52,7 @@ class CubeTexture {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast 6.0 : Float)) : Bool)) {
         var face:Null<TextureSource> = flighthq._internal._StaticIndex.readArray(sources, i);
-        if ((cast !_Runtime.strictEquals(face, null) : Bool)) { return cast (cast face : TextureSource).width; }
+        if ((cast !_Runtime.strictEquals(face, null) : Bool)) { return cast (cast face : { var width:Float; }).width; }
         i++;
       }
     }

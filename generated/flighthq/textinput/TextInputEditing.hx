@@ -134,18 +134,18 @@ class TextInputEditing {
     caretIndex = (cast getTextInputCaretIndex(({ final __callArgument23:Dynamic = source; __callArgument23; })) : Float);
     group = (cast TextInputEditing.getTextLayoutGroupAtIndex__textInputEditing(({ final __callArgument24:Dynamic = layout; __callArgument24; }), (cast caretIndex : Float)) : Null<TextLayoutGroup>);
     if ((cast _Runtime.strictEquals(group, null) : Bool)) {
-      ((cast out : TextSelectionRectangle).x = TEXT_BOUNDS_GUTTER);
-      ((cast out : TextSelectionRectangle).y = TEXT_BOUNDS_GUTTER);
-      ((cast out : TextSelectionRectangle).width = 1.0);
-      ((cast out : TextSelectionRectangle).height = (cast TextInputEditing.getFallbackLineHeight__textInputEditing(({ final __callArgument25:Dynamic = layout; __callArgument25; })) : Float));
-      ((cast out : TextSelectionRectangle).lineIndex = 0.0);
+      (out.x = cast (TEXT_BOUNDS_GUTTER : Float));
+      (out.y = cast (TEXT_BOUNDS_GUTTER : Float));
+      (out.width = cast (1.0 : Float));
+      (out.height = cast ((cast TextInputEditing.getFallbackLineHeight__textInputEditing(({ final __callArgument25:Dynamic = layout; __callArgument25; })) : Float) : Float));
+      (out.lineIndex = cast (0.0 : Float));
       return;
     }
-    ((cast out : TextSelectionRectangle).x = (cast TextInputEditing.getTextLayoutGroupCaretX__textInputEditing(({ final __callArgument26:Dynamic = group; __callArgument26; }), (cast caretIndex : Float)) : Float));
-    ((cast out : TextSelectionRectangle).y = (cast group : { var offsetY:Float; }).offsetY);
-    ((cast out : TextSelectionRectangle).width = 1.0);
-    ((cast out : TextSelectionRectangle).height = (cast group : { var height:Float; }).height);
-    ((cast out : TextSelectionRectangle).lineIndex = (cast group : { var lineIndex:Float; }).lineIndex);
+    (out.x = cast ((cast TextInputEditing.getTextLayoutGroupCaretX__textInputEditing(({ final __callArgument26:Dynamic = group; __callArgument26; }), (cast caretIndex : Float)) : Float) : Float));
+    (out.y = cast ((cast group : { var offsetY:Float; }).offsetY : Float));
+    (out.width = cast (1.0 : Float));
+    (out.height = cast ((cast group : { var height:Float; }).height : Float));
+    (out.lineIndex = cast ((cast group : { var lineIndex:Float; }).lineIndex : Float));
   }
 
   public static function getTextInputCharacterIndexAtPoint(source:RichText, layout:TextLayoutResult, x:Float, y:Float):Float {

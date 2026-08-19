@@ -34,8 +34,8 @@ class TextureAtlas {
     texture = atlas.texture;
     if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals((cast texture : Texture2D).dimension, '2d') : Bool)) : Bool) || (cast _Runtime.strictEquals((cast texture : Texture2D).source, null) : Bool)) : Bool)) { return cast 0.0; }
     image = (cast texture : Texture2D).source;
-    if ((cast _Runtime.strictEquals((cast image : TextureSource).kind, BitmapTextureSourceKind) : Bool)) { return cast _Runtime.field((cast (cast image : Bitmap) : { var data:flighthq._internal._UInt8ClampedArray; }).data, 'byteLength'); }
-    if ((cast _Runtime.strictEquals((cast image : TextureSource).kind, CompressedImageTextureSourceKind) : Bool)) {
+    if ((cast _Runtime.strictEquals(image.kind, BitmapTextureSourceKind) : Bool)) { return cast _Runtime.field((cast (cast image : Bitmap) : { var data:flighthq._internal._UInt8ClampedArray; }).data, 'byteLength'); }
+    if ((cast _Runtime.strictEquals(image.kind, CompressedImageTextureSourceKind) : Bool)) {
       return cast _Runtime.field((cast _Runtime.field((cast image : CompressedImage), 'compressed') : { var payload:flighthq._internal._UInt8Array; }).payload, 'byteLength');
     }
     return cast 0.0;

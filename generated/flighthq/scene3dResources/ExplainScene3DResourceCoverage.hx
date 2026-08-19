@@ -30,8 +30,8 @@ class ExplainScene3DResourceCoverage {
     found = false;
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'materialKinds'), 'length') : Float)) : Bool)) {
-        var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'materialKinds'), i);
+      while ((cast ((cast i : Float) < (cast _Runtime.field(usage.materialKinds, 'length') : Float)) : Bool)) {
+        var kind:String = flighthq._internal._StaticIndex.readArray(usage.materialKinds, i);
         if ((cast (cast hasScene3DMaterialTextureLister(resolver.registry, (cast kind : String)) : Bool) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.MaterialTextureLister }] : Array<Dynamic>));
           i++;

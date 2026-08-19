@@ -111,7 +111,7 @@ class CanvasRichText {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', CanvasRichText.SELECTION_COLOR__canvasRichText);
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', HxMath.min(1.0, ((cast renderProxy : RenderProxy2D).alpha * CanvasRichText.SELECTION_ALPHA__canvasRichText)));
       for (rectangle in _Runtime.iterable(CanvasRichText._richTextSelectionRectangles__canvasRichText)) {
-        flighthq._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([((cast rectangle : TextSelectionRectangle).x - scrollXOffset), ((cast rectangle : TextSelectionRectangle).y - scrollYOffset), (cast rectangle : TextSelectionRectangle).width, (cast rectangle : TextSelectionRectangle).height] : Array<Dynamic>));
+        flighthq._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([(rectangle.x - scrollXOffset), (rectangle.y - scrollYOffset), rectangle.width, rectangle.height] : Array<Dynamic>));
       }
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast renderProxy : RenderProxy2D).alpha);
     }

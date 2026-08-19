@@ -273,7 +273,7 @@ class Texture {
   }
 
   public static function getTextureHeight(texture:TextureLike):Float {
-    return cast _Runtime.coalesce(({ final __structural36 = (cast Texture.getFirstTextureSource__texture(({ final __callArgument35:Dynamic = texture; __callArgument35; })) : Null<TextureSource>); __structural36 == null ? _Runtime.UNDEFINED : (cast __structural36 : { var height:Float; }).height; }), function():Dynamic return cast -1.0);
+    return cast _Runtime.coalesce(({ final __typedStruct36 = (cast Texture.getFirstTextureSource__texture(({ final __callArgument35:Dynamic = texture; __callArgument35; })) : Null<TextureSource>); __typedStruct36 == null ? _Runtime.UNDEFINED : (cast __typedStruct36 : { var height:Float; }).height; }), function():Dynamic return cast -1.0);
     return cast null;
   }
 
@@ -293,7 +293,7 @@ class Texture {
   }
 
   public static function getTextureSourceKind(texture:TextureLike):Null<TextureSourceKind> {
-    return cast _Runtime.coalesce(({ final __structural43 = (cast Texture.getFirstTextureSource__texture(({ final __callArgument42:Dynamic = texture; __callArgument42; })) : Null<TextureSource>); __structural43 == null ? _Runtime.UNDEFINED : (cast __structural43 : { var kind:String; }).kind; }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __typedStruct43 = (cast Texture.getFirstTextureSource__texture(({ final __callArgument42:Dynamic = texture; __callArgument42; })) : Null<TextureSource>); __typedStruct43 == null ? _Runtime.UNDEFINED : (cast __typedStruct43 : { var kind:String; }).kind; }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -334,7 +334,7 @@ class Texture {
   }
 
   public static function getTextureWidth(texture:TextureLike):Float {
-    return cast _Runtime.coalesce(({ final __structural45 = (cast Texture.getFirstTextureSource__texture(({ final __callArgument44:Dynamic = texture; __callArgument44; })) : Null<TextureSource>); __structural45 == null ? _Runtime.UNDEFINED : (cast __structural45 : { var width:Float; }).width; }), function():Dynamic return cast -1.0);
+    return cast _Runtime.coalesce(({ final __typedStruct45 = (cast Texture.getFirstTextureSource__texture(({ final __callArgument44:Dynamic = texture; __callArgument44; })) : Null<TextureSource>); __typedStruct45 == null ? _Runtime.UNDEFINED : (cast __typedStruct45 : { var width:Float; }).width; }), function():Dynamic return cast -1.0);
     return cast null;
   }
 

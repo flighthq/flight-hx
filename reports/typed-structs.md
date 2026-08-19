@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1456 |
-| Direct schemas | 548 |
+| Audit-only schemas | 1451 |
+| Direct schemas | 553 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 8826 |
-| Directly emitted accesses | 21840 |
+| Pending accesses | 8679 |
+| Directly emitted accesses | 21987 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1456 |
+| Newly discovered, audit-only | 1451 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -826,7 +826,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#Kind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#KuwaharaEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LambertMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 14 | 4 | 0 | 18 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#LayoutNode` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 29 | 0 | 0 | 29 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#LayoutNode` | `direct` | `new` | — | reviewed escape-free layout node | 4 | 29 | 0 | 0 | 0 | 29 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LayoutResolutionExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#LayoutResolutionFailureKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#LayoutResolutionGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
@@ -1392,7 +1392,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Scene3DForwardLightSelectionExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Scene3DGraphSyncPolicy` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Scene3DHit` | `direct` | `new` | — | reviewed escape-free Scene3D hit | 12 | 56 | 27 | 0 | 0 | 83 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Scene3DKindUsage` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 29 | 0 | 0 | 29 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Scene3DKindUsage` | `direct` | `new` | — | reviewed escape-free Scene3D kind usage | 5 | 29 | 0 | 0 | 0 | 29 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DLightBlock` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 21 | 6 | 0 | 27 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DLights` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 35 | yes | — |
 | `@flighthq/types:type#Scene3DLightsLike` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 35 | yes | — |
@@ -1614,7 +1614,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#SsrEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#StandardMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#StandardMaterialKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#StandardPbrMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 24 | 6 | 0 | 30 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#StandardPbrMaterial` | `direct` | `new` | — | reviewed escape-free standard PBR material | 19 | 24 | 6 | 0 | 0 | 30 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#StandardPbrMaterialProperties` | `direct` | `new` | — | reviewed escape-free standard PBR material properties | 13 | 60 | 32 | 0 | 0 | 92 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#StarlingDocument` | `direct` | `relocated` | `@flighthq/spritesheet-formats:interface#StarlingDocument` | broad serialization document | 2 | 3 | 0 | 0 | 0 | 3 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#StarlingParsed` | `direct` | `relocated` | `@flighthq/spritesheet-formats:interface#StarlingParsed` | broad serialization document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -1740,7 +1740,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#TextSegmentGranularity` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#TextSegmentRange` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextSelectionRange` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TextSelectionRectangle` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 20 | 10 | 0 | 30 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TextSelectionRectangle` | `direct` | `new` | — | reviewed escape-free text selection rectangle | 5 | 20 | 10 | 0 | 0 | 30 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextShaperBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 8 | 0 | 9 | 17 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextShaperCache` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextShaperOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | yes | — |
@@ -1802,7 +1802,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#TexturePackerSize` | `direct` | `relocated` | `@flighthq/spritesheet-formats:interface#TexturePackerSize` | broad serialization document | 2 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextureResolutionExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#TextureResolutionStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#TextureSource` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 29 | 0 | 0 | 29 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TextureSource` | `direct` | `new` | — | reviewed escape-free texture source | 6 | 29 | 0 | 0 | 0 | 29 | 0 | 0 | yes | — |
 | `@flighthq/types:type#TextureSourceCubeFaces` | `audit-only` | `new` | — | checker-discovered public declaration | 30 | 0 | 0 | 0 | 0 | 0 | 0 | 16 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#TextureSourceKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#TextureUvTransform` | `direct` | `preserved` | `@flighthq/types:interface#TextureUvTransform` | broad asset document | 5 | 18 | 0 | 0 | 0 | 18 | 0 | 0 | yes | — |

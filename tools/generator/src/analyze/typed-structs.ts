@@ -768,6 +768,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#PathMesh',
     purpose: 'reviewed escape-free path mesh',
   },
+  {
+    declarationFingerprint: 'sha256:75623596e21f7fa8bdb96972f77d790d3fa4eaa91a9a238efce37fd2c87cff25',
+    id: '@flighthq/types:interface#StandardPbrMaterial',
+    purpose: 'reviewed escape-free standard PBR material',
+  },
+  {
+    declarationFingerprint: 'sha256:8b127f9af8b5c5c504869aff4b368a55038b3df041dcc04c392bae8aed708e39',
+    id: '@flighthq/types:interface#TextSelectionRectangle',
+    purpose: 'reviewed escape-free text selection rectangle',
+  },
+  {
+    declarationFingerprint: 'sha256:dcb64afdbc4634db6a19bccd9b239a2d46272227ea1bcc4547bb450d8e95b91f',
+    id: '@flighthq/types:interface#LayoutNode',
+    purpose: 'reviewed escape-free layout node',
+  },
+  {
+    declarationFingerprint: 'sha256:6221bdcad721b47767821e41a9d71f9e1d6766b425ec20a430f0ee643b761ab6',
+    id: '@flighthq/types:interface#Scene3DKindUsage',
+    purpose: 'reviewed escape-free Scene3D kind usage',
+  },
+  {
+    declarationFingerprint: 'sha256:e1aa5f7158dac8804df2b8cb02d88eb0ef695dcb84db0bb0804dc6a2fd8c1b1f',
+    id: '@flighthq/types:interface#TextureSource',
+    purpose: 'reviewed escape-free texture source',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

@@ -42501,7 +42501,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 29,
       "fields": 5,
       "id": "@flighthq/types:interface#Scene3DKindUsage",
       "name": "Scene3DKindUsage",

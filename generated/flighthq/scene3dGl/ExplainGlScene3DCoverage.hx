@@ -43,8 +43,8 @@ class ExplainGlScene3DCoverage {
     hasStandard = ((cast materials : flighthq._internal._Map<String, GlMeshMaterialRenderer>).has(StandardMaterialKindValue));
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'materialKinds'), 'length') : Float)) : Bool)) {
-        var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'materialKinds'), i);
+      while ((cast ((cast i : Float) < (cast _Runtime.field(usage.materialKinds, 'length') : Float)) : Bool)) {
+        var kind:String = flighthq._internal._StaticIndex.readArray(usage.materialKinds, i);
         if ((cast ((cast materials : flighthq._internal._Map<String, GlMeshMaterialRenderer>).has(kind)) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
           i++;
@@ -59,8 +59,8 @@ class ExplainGlScene3DCoverage {
     resolvers = (cast (cast getGlRenderStateRuntime(({ final __callArgument7:Dynamic = state; __callArgument7; })) : GlRenderStateRuntime) : { @:optional var glTextureResolverRegistry:Null<flighthq._internal._Map<String, GlTextureResolver>>; }).glTextureResolverRegistry;
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'textureSourceKinds'), 'length') : Float)) : Bool)) {
-        var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'textureSourceKinds'), i);
+      while ((cast ((cast i : Float) < (cast _Runtime.field(usage.textureSourceKinds, 'length') : Float)) : Bool)) {
+        var kind:String = flighthq._internal._StaticIndex.readArray(usage.textureSourceKinds, i);
         if ((cast _Runtime.strictEquals(({ final __collection8:Dynamic = resolvers; __collection8 == null ? _Runtime.UNDEFINED : ((cast __collection8 : flighthq._internal._Map<String, GlTextureResolver>).has(kind)); }), true) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.TextureResolver }] : Array<Dynamic>));
           i++;
@@ -75,8 +75,8 @@ class ExplainGlScene3DCoverage {
     snippets = (cast (cast getGlScene3DRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : GlScene3DRuntime) : { var modifierSnippetRegistry:Null<ModifierRegistry>; }).modifierSnippetRegistry;
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(usage, 'modifierKinds'), 'length') : Float)) : Bool)) {
-        var kind:String = flighthq._internal._StaticIndex.readArray(_Runtime.field(usage, 'modifierKinds'), i);
+      while ((cast ((cast i : Float) < (cast _Runtime.field(usage.modifierKinds, 'length') : Float)) : Bool)) {
+        var kind:String = flighthq._internal._StaticIndex.readArray(usage.modifierKinds, i);
         if ((cast ((cast !_Runtime.strictEquals(snippets, null) : Bool) && (cast !_Runtime.strictEquals((cast resolveModifier(({ final __callArgument10:Dynamic = snippets; __callArgument10; }), (cast kind : String)) : Null<ModifierDefinition>), null) : Bool)) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.ModifierSnippet }] : Array<Dynamic>));
           i++;

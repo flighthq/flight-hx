@@ -90,7 +90,7 @@ class GlEnvironmentCube {
       var face:Float = 0.0;
       while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
         var image:Null<TextureSource> = flighthq._internal._StaticIndex.readArray((cast cube : { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }).sources, face);
-        if ((cast ((cast _Runtime.strictEquals(image, null) : Bool) || (cast _Runtime.andValue(!_Runtime.strictEquals((cast image : TextureSource).kind, ImageTextureSourceKind), function():Dynamic return cast !_Runtime.strictEquals((cast image : TextureSource).kind, BitmapTextureSourceKind)) : Bool)) : Bool)) {
+        if ((cast ((cast _Runtime.strictEquals(image, null) : Bool) || (cast _Runtime.andValue(!_Runtime.strictEquals((cast image : { var kind:String; }).kind, ImageTextureSourceKind), function():Dynamic return cast !_Runtime.strictEquals((cast image : { var kind:String; }).kind, BitmapTextureSourceKind)) : Bool)) : Bool)) {
           return cast false;
         }
         face++;
@@ -102,7 +102,7 @@ class GlEnvironmentCube {
 
   public static function uploadGlEnvironmentImage__glEnvironmentCube(gl:flighthq._internal.dom.WebGL2RenderingContext, target:Float, image:TextureSource, ?internalFormat:Float):Void {
     if (internalFormat == null) internalFormat = cast (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic);
-    if ((cast _Runtime.strictEquals(_Runtime.field(image, 'kind'), BitmapTextureSourceKind) : Bool)) {
+    if ((cast _Runtime.strictEquals(image.kind, BitmapTextureSourceKind) : Bool)) {
       var bitmap:Bitmap = (cast image : Bitmap);
       uploadGlTextureData(({ final __callArgument9:Dynamic = gl; __callArgument9; }), (cast target : Float), (cast bitmap.width : Float), (cast bitmap.height : Float), bitmap.data, (cast internalFormat : Float));
     } else {
