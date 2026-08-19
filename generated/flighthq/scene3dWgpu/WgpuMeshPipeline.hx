@@ -779,11 +779,11 @@ class WgpuMeshPipeline {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast 17.0 : Float), (cast (cast WgpuMeshPipeline.scratchCameraPosition__wgpuMeshPipeline : { var x:Float; var y:Float; var z:Float; }).y : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast 18.0 : Float), (cast (cast WgpuMeshPipeline.scratchCameraPosition__wgpuMeshPipeline : { var x:Float; var y:Float; var z:Float; }).z : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast 19.0 : Float), (cast 0.0 : Float));
-    data = _Runtime.field(lights, 'data');
+    data = lights.data;
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast 20.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 0.0 : Float)) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast 21.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 1.0 : Float)) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast 22.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 2.0 : Float)) : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast 23.0 : Float), (cast _Runtime.field(lights, 'directionalCount') : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast 23.0 : Float), (cast lights.directionalCount : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast 24.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 4.0 : Float)) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast 25.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 5.0 : Float)) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast 26.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 6.0 : Float)) : Float));
@@ -791,7 +791,7 @@ class WgpuMeshPipeline {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast 28.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 8.0 : Float)) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast 29.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 9.0 : Float)) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast 30.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 10.0 : Float)) : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast 31.0 : Float), (cast _Runtime.field(lights, 'ambientCount') : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast 31.0 : Float), (cast lights.ambientCount : Float));
     view = (cast camera.view : { var m:flighthq._internal._Float32Array; }).m;
     {
       var i:Float = 0.0;
@@ -824,9 +824,9 @@ class WgpuMeshPipeline {
         i++;
       }
     }
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast WgpuMeshPipeline.FRAME_COUNTS_OFFSET__wgpuMeshPipeline : Float), (cast _Runtime.field(lights, 'pointCount') : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast (WgpuMeshPipeline.FRAME_COUNTS_OFFSET__wgpuMeshPipeline + 1.0) : Float), (cast _Runtime.field(lights, 'spotCount') : Float));
-    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast (WgpuMeshPipeline.FRAME_COUNTS_OFFSET__wgpuMeshPipeline + 2.0) : Float), (cast _Runtime.field(lights, 'hemisphereCount') : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast WgpuMeshPipeline.FRAME_COUNTS_OFFSET__wgpuMeshPipeline : Float), (cast lights.pointCount : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast (WgpuMeshPipeline.FRAME_COUNTS_OFFSET__wgpuMeshPipeline + 1.0) : Float), (cast lights.spotCount : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast (WgpuMeshPipeline.FRAME_COUNTS_OFFSET__wgpuMeshPipeline + 2.0) : Float), (cast lights.hemisphereCount : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f : flighthq._internal._Float32Array), (cast (WgpuMeshPipeline.FRAME_COUNTS_OFFSET__wgpuMeshPipeline + 3.0) : Float), (cast 0.0 : Float));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([(cast binding : WgpuScene3DFrameBinding).buffer, 0.0, _Runtime.field(f, 'buffer'), 0.0, WgpuMeshPipeline.FRAME_UNIFORM_BYTES__wgpuMeshPipeline] : Array<Dynamic>));
   }

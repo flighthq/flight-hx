@@ -25,13 +25,13 @@ class WgpuGodRaysEffect {
     var exposure:Float = cast _Runtime.UNDEFINED;
     var samples:Float = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
-    centerX = _Runtime.coalesce(_Runtime.field(effect, 'centerX'), function():Dynamic return cast 0.5);
-    centerY = _Runtime.coalesce(_Runtime.field(effect, 'centerY'), function():Dynamic return cast 0.5);
-    density = _Runtime.coalesce(_Runtime.field(effect, 'density'), function():Dynamic return cast 0.96);
-    decay = _Runtime.coalesce(_Runtime.field(effect, 'decay'), function():Dynamic return cast 0.93);
-    weight = _Runtime.coalesce(_Runtime.field(effect, 'weight'), function():Dynamic return cast 0.4);
-    exposure = _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 0.6);
-    samples = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 64.0)));
+    centerX = _Runtime.coalesce(effect.centerX, function():Dynamic return cast 0.5);
+    centerY = _Runtime.coalesce(effect.centerY, function():Dynamic return cast 0.5);
+    density = _Runtime.coalesce(effect.density, function():Dynamic return cast 0.96);
+    decay = _Runtime.coalesce(effect.decay, function():Dynamic return cast 0.93);
+    weight = _Runtime.coalesce(effect.weight, function():Dynamic return cast 0.4);
+    exposure = _Runtime.coalesce(effect.exposure, function():Dynamic return cast 0.6);
+    samples = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(effect.samples, function():Dynamic return cast 64.0)));
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'atmospheric.godRays.' + Std.string(samples) + '' : String), (cast (cast WgpuGodRaysEffect.buildGodRaysFragment__wgpuGodRaysEffect((cast samples : Float)) : String) : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast source : WgpuRenderTarget), ({ final __callArgument2:Dynamic = (cast dest : WgpuRenderTarget); __callArgument2; }), ({ final __callArgument3:Dynamic = pipeline; __callArgument3; }), ({ final __callArgument4:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast centerX : Float));

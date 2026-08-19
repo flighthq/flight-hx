@@ -53,21 +53,21 @@ class GlLitProgram {
     var shadow:Null<GlScene3DShadow> = cast _Runtime.UNDEFINED;
     var ibl:Null<GlScene3DIbl> = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
-    if ((cast ((cast !_Runtime.strictEquals(((cast GlLitProgram._uploadedLightBlock__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Scene3DLightBlock>).get(program)), lights) : Bool) || (cast !_Runtime.strictEquals(((cast GlLitProgram._uploadedLightVersion__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Float>).get(program)), _Runtime.field(lights, 'version')) : Bool)) : Bool)) {
-      var data:flighthq._internal._Float32Array = _Runtime.field(lights, 'data');
+    if ((cast ((cast !_Runtime.strictEquals(((cast GlLitProgram._uploadedLightBlock__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Scene3DLightBlock>).get(program)), lights) : Bool) || (cast !_Runtime.strictEquals(((cast GlLitProgram._uploadedLightVersion__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Float>).get(program)), lights.version) : Bool)) : Bool)) {
+      var data:flighthq._internal._Float32Array = lights.data;
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, program.locDirectional, flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 2.0 : Float)), 0.0);
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, program.locDirectionalRadiance, flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 4.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 5.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 6.0 : Float)), 0.0);
       flighthq._internal.backend.WebGl2Backend.uniform3f(gl, program.locAmbientRadiance, flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 8.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 9.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 10.0 : Float)));
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locDirectionalCount, _Runtime.field(lights, 'directionalCount'));
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locAmbientCount, _Runtime.field(lights, 'ambientCount'));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locDirectionalCount, lights.directionalCount);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locAmbientCount, lights.ambientCount);
       flighthq._internal.backend.WebGl2Backend.uniform4fv(gl, program.locPointLights, (cast data : flighthq._internal._Float32Array).subarray(Std.int(SCENE_LIGHT_POINT_OFFSET), Std.int((SCENE_LIGHT_POINT_OFFSET + (SCENE_LIGHT_POINT_STRIDE * MAX_FORWARD_LIGHTS)))));
       flighthq._internal.backend.WebGl2Backend.uniform4fv(gl, program.locSpotLights, (cast data : flighthq._internal._Float32Array).subarray(Std.int(SCENE_LIGHT_SPOT_OFFSET), Std.int((SCENE_LIGHT_SPOT_OFFSET + (SCENE_LIGHT_SPOT_STRIDE * MAX_FORWARD_LIGHTS)))));
       flighthq._internal.backend.WebGl2Backend.uniform4fv(gl, program.locHemisphereLights, (cast data : flighthq._internal._Float32Array).subarray(Std.int(SCENE_LIGHT_HEMISPHERE_OFFSET), Std.int((SCENE_LIGHT_HEMISPHERE_OFFSET + (SCENE_LIGHT_HEMISPHERE_STRIDE * MAX_FORWARD_LIGHTS)))));
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locPointCount, _Runtime.field(lights, 'pointCount'));
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locSpotCount, _Runtime.field(lights, 'spotCount'));
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locHemisphereCount, _Runtime.field(lights, 'hemisphereCount'));
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locPointCount, lights.pointCount);
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locSpotCount, lights.spotCount);
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locHemisphereCount, lights.hemisphereCount);
       ((cast GlLitProgram._uploadedLightBlock__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Scene3DLightBlock>).set(program, (cast lights)));
-      ((cast GlLitProgram._uploadedLightVersion__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Float>).set(program, (cast _Runtime.field(lights, 'version'))));
+      ((cast GlLitProgram._uploadedLightVersion__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Float>).set(program, (cast lights.version)));
     }
     runtime = (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime);
     shadow = runtime.shadow;

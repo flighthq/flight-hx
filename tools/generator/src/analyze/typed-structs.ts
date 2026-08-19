@@ -818,6 +818,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#QuadBatch',
     purpose: 'reviewed escape-free quad batch',
   },
+  {
+    declarationFingerprint: 'sha256:1b5f5456e620e7bbc76f4a5bb4aaa3a55f80a9ebc786347d9c288be4f77737da',
+    id: '@flighthq/types:interface#TextInputOptions',
+    purpose: 'reviewed escape-free text input options',
+  },
+  {
+    declarationFingerprint: 'sha256:bc1bd8fee72d0e49ff3cc90a7cac976377ee624b49519bc78226652352e72d31',
+    id: '@flighthq/types:interface#LottieDocument',
+    purpose: 'reviewed escape-free Lottie document',
+  },
+  {
+    declarationFingerprint: 'sha256:4f02cd2e116d99ce5b2af2c64e24ae32f9498383db2c912a82071baa98a33344',
+    id: '@flighthq/types:interface#Scene3DLightBlock',
+    purpose: 'reviewed escape-free Scene3D light block',
+  },
+  {
+    declarationFingerprint: 'sha256:200f20a7b556d1c3a1c4880fde41f35aba28c6d41c03cf434ac1c39eb00f2275',
+    id: '@flighthq/types:interface#GodRaysEffect',
+    purpose: 'reviewed escape-free god-rays effect',
+  },
+  {
+    declarationFingerprint: 'sha256:5e7d4b75130bdda69787b9c27ae02b9270e3c086f66849b6aecb864787210fd6',
+    id: '@flighthq/types:interface#NativeTextData',
+    purpose: 'reviewed escape-free native-text data',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

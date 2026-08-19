@@ -30539,7 +30539,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 26,
       "fields": 6,
       "id": "@flighthq/types:interface#NativeTextData",
       "name": "NativeTextData",

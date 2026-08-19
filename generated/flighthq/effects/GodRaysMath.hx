@@ -10,25 +10,25 @@ class GodRaysMath {
     var samples:Float = cast _Runtime.UNDEFINED;
     var weight:Float = cast _Runtime.UNDEFINED;
     var exposure:Float = cast _Runtime.UNDEFINED;
-    samples = HxMath.max(1.0, _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 100.0));
-    weight = HxMath.max(0.000001, _Runtime.coalesce(_Runtime.field(effect, 'weight'), function():Dynamic return cast 0.4));
-    exposure = HxMath.max(0.000001, _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 0.1));
+    samples = HxMath.max(1.0, _Runtime.coalesce(effect.samples, function():Dynamic return cast 100.0));
+    weight = HxMath.max(0.000001, _Runtime.coalesce(effect.weight, function():Dynamic return cast 0.4));
+    exposure = HxMath.max(0.000001, _Runtime.coalesce(effect.exposure, function():Dynamic return cast 0.1));
     return cast (1.0 / ((samples * weight) * exposure));
     return cast null;
   }
 
   public static function computeGodRaysLightCenter(effect:GodRaysEffect, out:Array<Float>):Void {
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'centerX'), function():Dynamic return cast 0.5))) : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'centerY'), function():Dynamic return cast 0.5))) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(effect.centerX, function():Dynamic return cast 0.5))) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(effect.centerY, function():Dynamic return cast 0.5))) : Float));
   }
 
   public static function computeGodRaysSampleWeight(effect:GodRaysEffect, sampleIndex:Float):Float {
     var decay:Float = cast _Runtime.UNDEFINED;
     var weight:Float = cast _Runtime.UNDEFINED;
     var exposure:Float = cast _Runtime.UNDEFINED;
-    decay = _Runtime.coalesce(_Runtime.field(effect, 'decay'), function():Dynamic return cast 0.96);
-    weight = _Runtime.coalesce(_Runtime.field(effect, 'weight'), function():Dynamic return cast 0.4);
-    exposure = _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 0.1);
+    decay = _Runtime.coalesce(effect.decay, function():Dynamic return cast 0.96);
+    weight = _Runtime.coalesce(effect.weight, function():Dynamic return cast 0.4);
+    exposure = _Runtime.coalesce(effect.exposure, function():Dynamic return cast 0.1);
     return cast (_Runtime.multiplyNumbers(HxMath.pow(decay, sampleIndex), weight) * exposure);
     return cast null;
   }
@@ -40,10 +40,10 @@ class GodRaysMath {
     var samples:Float = cast _Runtime.UNDEFINED;
     var dx:Float = cast _Runtime.UNDEFINED;
     var dy:Float = cast _Runtime.UNDEFINED;
-    cx = _Runtime.coalesce(_Runtime.field(effect, 'centerX'), function():Dynamic return cast 0.5);
-    cy = _Runtime.coalesce(_Runtime.field(effect, 'centerY'), function():Dynamic return cast 0.5);
-    density = _Runtime.coalesce(_Runtime.field(effect, 'density'), function():Dynamic return cast 0.96);
-    samples = HxMath.max(1.0, _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 100.0));
+    cx = _Runtime.coalesce(effect.centerX, function():Dynamic return cast 0.5);
+    cy = _Runtime.coalesce(effect.centerY, function():Dynamic return cast 0.5);
+    density = _Runtime.coalesce(effect.density, function():Dynamic return cast 0.96);
+    samples = HxMath.max(1.0, _Runtime.coalesce(effect.samples, function():Dynamic return cast 100.0));
     dx = (((cx - px) * density) / samples);
     dy = (((cy - py) * density) / samples);
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast dx : Float));

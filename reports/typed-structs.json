@@ -144788,9 +144788,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 26,
+        "directAccesses": 26,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -144868,7 +144868,7 @@
       },
       "name": "GodRaysEffect",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free god-rays effect",
       "reasons": [],
       "source": "upstream/packages/types/src/GodRaysEffect.ts",
       "sourceProvenance": {
@@ -173082,9 +173082,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 27,
+        "directAccesses": 27,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -173202,7 +173202,7 @@
       },
       "name": "LottieDocument",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Lottie document",
       "reasons": [],
       "source": "upstream/packages/types/src/LottieDocument.ts",
       "sourceProvenance": {
@@ -198853,9 +198853,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 26,
+        "directAccesses": 26,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -198917,7 +198917,7 @@
       },
       "name": "NativeTextData",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free native-text data",
       "reasons": [],
       "source": "upstream/packages/types/src/NativeText.ts",
       "sourceProvenance": {
@@ -282209,9 +282209,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 27,
+        "directAccesses": 27,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -282281,7 +282281,7 @@
       },
       "name": "Scene3DLightBlock",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Scene3D light block",
       "reasons": [],
       "source": "upstream/packages/types/src/Scene3DLightBlock.ts",
       "sourceProvenance": {
@@ -349321,9 +349321,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 28,
+        "directAccesses": 28,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -349409,7 +349409,7 @@
       },
       "name": "TextInputOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free text input options",
       "reasons": [],
       "source": "upstream/packages/types/src/TextInputState.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1446,
+      "newAuditOnly": 1441,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1446,
+    "auditOnlySchemas": 1441,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 22127,
-    "directSchemas": 558,
+    "directAccesses": 22261,
+    "directSchemas": 563,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 8539,
+    "pendingAccesses": 8405,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

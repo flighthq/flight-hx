@@ -44,15 +44,15 @@ class DomNativeText {
       prepareDomElement(({ final __callArgument1:Dynamic = element; __callArgument1; }));
       ((cast runtime : NativeTextRuntime).element = element);
     }
-    DomNativeText.applyNativeTextStyle__domNativeText(({ final __callArgument2:Dynamic = element; __callArgument2; }), (cast data : NativeTextData).style);
-    if ((cast _Runtime.strictEquals((cast data : NativeTextData).autoSize, 'none') : Bool)) {
+    DomNativeText.applyNativeTextStyle__domNativeText(({ final __callArgument2:Dynamic = element; __callArgument2; }), data.style);
+    if ((cast _Runtime.strictEquals(data.autoSize, 'none') : Bool)) {
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).whiteSpace = 'normal');
-      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '' + Std.string((cast data : NativeTextData).width) + 'px');
-      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string((cast data : NativeTextData).height) + 'px');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '' + Std.string(data.width) + 'px');
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string(data.height) + 'px');
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).overflow = 'hidden');
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).display = 'flex');
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).flexDirection = 'column');
-      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).justifyContent = (cast DomNativeText._verticalAlignToJustifyContent__domNativeText((cast data : NativeTextData).verticalAlign) : String));
+      ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).justifyContent = (cast DomNativeText._verticalAlignToJustifyContent__domNativeText(data.verticalAlign) : String));
     } else {
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).whiteSpace = 'nowrap');
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '');
@@ -62,7 +62,7 @@ class DomNativeText {
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).flexDirection = '');
       ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).justifyContent = '');
     }
-    ((cast element : flighthq._internal.dom.HTMLElement).textContent = (cast data : NativeTextData).text);
+    ((cast element : flighthq._internal.dom.HTMLElement).textContent = data.text);
     rect = (cast element : flighthq._internal.dom.HTMLElement).getBoundingClientRect();
     ((cast runtime : NativeTextRuntime).measuredWidth = (cast rect : flighthq._internal.dom.DOMRect).width);
     ((cast runtime : NativeTextRuntime).measuredHeight = (cast rect : flighthq._internal.dom.DOMRect).height);

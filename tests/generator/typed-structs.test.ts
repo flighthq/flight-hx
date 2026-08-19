@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_446,
+      newAuditOnly: 1_441,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(560);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(565);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_446);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_441);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(158);
+    expect(newDirect).toHaveLength(163);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -900,6 +900,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'QuadBatch',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free quad batch',
+        }),
+        expect.objectContaining({
+          name: 'TextInputOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free text input options',
+        }),
+        expect.objectContaining({
+          name: 'LottieDocument',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Lottie document',
+        }),
+        expect.objectContaining({
+          name: 'Scene3DLightBlock',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Scene3D light block',
+        }),
+        expect.objectContaining({
+          name: 'GodRaysEffect',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free god-rays effect',
+        }),
+        expect.objectContaining({
+          name: 'NativeTextData',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free native-text data',
         }),
       ]),
     );
@@ -1694,6 +1719,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#QuadBatch',
         purpose: 'reviewed escape-free quad batch',
       },
+      {
+        declarationFingerprint: 'sha256:1b5f5456e620e7bbc76f4a5bb4aaa3a55f80a9ebc786347d9c288be4f77737da',
+        id: '@flighthq/types:interface#TextInputOptions',
+        purpose: 'reviewed escape-free text input options',
+      },
+      {
+        declarationFingerprint: 'sha256:bc1bd8fee72d0e49ff3cc90a7cac976377ee624b49519bc78226652352e72d31',
+        id: '@flighthq/types:interface#LottieDocument',
+        purpose: 'reviewed escape-free Lottie document',
+      },
+      {
+        declarationFingerprint: 'sha256:4f02cd2e116d99ce5b2af2c64e24ae32f9498383db2c912a82071baa98a33344',
+        id: '@flighthq/types:interface#Scene3DLightBlock',
+        purpose: 'reviewed escape-free Scene3D light block',
+      },
+      {
+        declarationFingerprint: 'sha256:200f20a7b556d1c3a1c4880fde41f35aba28c6d41c03cf434ac1c39eb00f2275',
+        id: '@flighthq/types:interface#GodRaysEffect',
+        purpose: 'reviewed escape-free god-rays effect',
+      },
+      {
+        declarationFingerprint: 'sha256:5e7d4b75130bdda69787b9c27ae02b9270e3c086f66849b6aecb864787210fd6',
+        id: '@flighthq/types:interface#NativeTextData',
+        purpose: 'reviewed escape-free native-text data',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -2361,6 +2411,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const fifthHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['GodRaysEffect', 'LottieDocument', 'NativeTextData', 'Scene3DLightBlock', 'TextInputOptions'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -2401,22 +2460,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_446,
+      auditOnlySchemas: 1_441,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 22_127,
-      directSchemas: 558,
+      directAccesses: 22_261,
+      directSchemas: 563,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 8_539,
+      pendingAccesses: 8_405,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_446,
+      newAuditOnly: 1_441,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -2483,7 +2542,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(22_127);
+    expect(report.summary.directAccesses).toBe(22_261);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -2915,6 +2974,48 @@ describe('typed struct analysis', () => {
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses: 28, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'TextInputOptions',
+        28,
+        'sha256:1b5f5456e620e7bbc76f4a5bb4aaa3a55f80a9ebc786347d9c288be4f77737da',
+        'reviewed escape-free text input options',
+      ],
+      [
+        'LottieDocument',
+        27,
+        'sha256:bc1bd8fee72d0e49ff3cc90a7cac976377ee624b49519bc78226652352e72d31',
+        'reviewed escape-free Lottie document',
+      ],
+      [
+        'Scene3DLightBlock',
+        27,
+        'sha256:4f02cd2e116d99ce5b2af2c64e24ae32f9498383db2c912a82071baa98a33344',
+        'reviewed escape-free Scene3D light block',
+      ],
+      [
+        'GodRaysEffect',
+        26,
+        'sha256:200f20a7b556d1c3a1c4880fde41f35aba28c6d41c03cf434ac1c39eb00f2275',
+        'reviewed escape-free god-rays effect',
+      ],
+      [
+        'NativeTextData',
+        26,
+        'sha256:5e7d4b75130bdda69787b9c27ae02b9270e3c086f66849b6aecb864787210fd6',
+        'reviewed escape-free native-text data',
+      ],
+    ] as const) {
+      expect(fifthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
         escapes: [],
         migration: { baselineId: null, status: 'new' },
         purpose,
@@ -4637,6 +4738,30 @@ describe('typed struct analysis', () => {
         expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
       }
     }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#TextInputOptions', true, [], [], null],
+      ['@flighthq/types:interface#LottieDocument', false, ['dynamic-ingress'], ['json-serialization'], null],
+      ['@flighthq/types:interface#Scene3DLightBlock', false, ['anonymous-structural-transfer'], [], null],
+      ['@flighthq/types:interface#GodRaysEffect', false, ['cross-schema-transfer', 'object-literal-spread'], [], null],
+      [
+        '@flighthq/types:interface#NativeTextData',
+        true,
+        [],
+        [],
+        { blockerReasons: ['normalization-provenance'], closed: false },
+      ],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      if (nominalIdentity === null) {
+        expect(provenanceById.has(frontierId)).toBe(false);
+      } else {
+        expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+      }
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -5200,6 +5325,24 @@ describe('typed struct analysis', () => {
       /_Runtime\.field\(program,/u,
     );
     expect(readFileSync('generated/flighthq/quadbatch/QuadBatch.hx', 'utf8')).not.toMatch(/_Runtime\.field\(batch,/u);
+    for (const path of [
+      'generated/flighthq/effects/GodRaysMath.hx',
+      'generated/flighthq/effectsGl/GlGodRaysEffect.hx',
+      'generated/flighthq/effectsWgpu/WgpuGodRaysEffect.hx',
+      'generated/flighthq/render/SceneRender.hx',
+      'generated/flighthq/scene2dDom/DomNativeText.hx',
+      'generated/flighthq/scene2dFormats/LottieDocument.hx',
+      'generated/flighthq/scene3dGl/GlLitProgram.hx',
+      'generated/flighthq/scene3dWgpu/WgpuMeshPipeline.hx',
+      'generated/flighthq/text/NativeText.hx',
+      'generated/flighthq/textinput/TextInput.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:GodRaysEffect|LottieDocument|NativeTextData|Scene3DLightBlock|TextInputOptions)\)\./u,
+      );
+    }
+    expect(readFileSync('generated/flighthq/effects/GodRaysMath.hx', 'utf8')).not.toMatch(/_Runtime\.field\(effect,/u);
+    expect(readFileSync('generated/flighthq/textinput/TextInput.hx', 'utf8')).not.toMatch(/_Runtime\.field\(options,/u);
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
     expect(generatedCanvasRenderState).not.toMatch(
       /\(cast (?:runtime|sourceRuntime|targetRuntime) : CanvasRenderStateRuntime\)\./u,

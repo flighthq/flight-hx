@@ -137,16 +137,16 @@ class SceneRender {
         }
       }
     }
-    if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals((cast out : Scene3DLightBlock).directionalCount, directionalCount) : Bool) && (cast _Runtime.strictEquals((cast out : Scene3DLightBlock).ambientCount, ambientCount) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast out : Scene3DLightBlock).pointCount, pointCount) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast out : Scene3DLightBlock).spotCount, spotCount) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast out : Scene3DLightBlock).hemisphereCount, hemisphereCount) : Bool)) : Bool) && (cast (cast SceneRender.isFloat32ArrayEqual__sceneRender((cast out : Scene3DLightBlock).data, ({ final __callArgument7:Dynamic = SceneRender.scratchLightData__sceneRender; __callArgument7; })) : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(out.directionalCount, directionalCount) : Bool) && (cast _Runtime.strictEquals(out.ambientCount, ambientCount) : Bool)) : Bool) && (cast _Runtime.strictEquals(out.pointCount, pointCount) : Bool)) : Bool) && (cast _Runtime.strictEquals(out.spotCount, spotCount) : Bool)) : Bool) && (cast _Runtime.strictEquals(out.hemisphereCount, hemisphereCount) : Bool)) : Bool) && (cast (cast SceneRender.isFloat32ArrayEqual__sceneRender(out.data, ({ final __callArgument7:Dynamic = SceneRender.scratchLightData__sceneRender; __callArgument7; })) : Bool) : Bool)) : Bool)) {
       return;
     }
-    (cast (cast out : Scene3DLightBlock).data : flighthq._internal._Float32Array).set(SceneRender.scratchLightData__sceneRender);
-    ((cast out : Scene3DLightBlock).directionalCount = directionalCount);
-    ((cast out : Scene3DLightBlock).ambientCount = ambientCount);
-    ((cast out : Scene3DLightBlock).pointCount = pointCount);
-    ((cast out : Scene3DLightBlock).spotCount = spotCount);
-    ((cast out : Scene3DLightBlock).hemisphereCount = hemisphereCount);
-    (cast out : Scene3DLightBlock).version++;
+    (cast out.data : flighthq._internal._Float32Array).set(SceneRender.scratchLightData__sceneRender);
+    (out.directionalCount = cast (directionalCount : Float));
+    (out.ambientCount = cast (ambientCount : Float));
+    (out.pointCount = cast (pointCount : Float));
+    (out.spotCount = cast (spotCount : Float));
+    (out.hemisphereCount = cast (hemisphereCount : Float));
+    out.version++;
   }
 
   public static function prepareScene3DRender(state:RenderState, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike, ?viewportAspect:Float):Scene3DRenderList {
