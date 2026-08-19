@@ -16973,9 +16973,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 34,
+        "directAccesses": 34,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -17091,7 +17091,7 @@
       },
       "name": "AreaLight",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free area light",
       "reasons": [],
       "source": "upstream/packages/types/src/AreaLight.ts",
       "sourceProvenance": {
@@ -52250,9 +52250,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 36,
+        "directAccesses": 36,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -52322,7 +52322,7 @@
       },
       "name": "Clock",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free clock",
       "reasons": [],
       "source": "upstream/packages/types/src/Clock.ts",
       "sourceProvenance": {
@@ -174682,9 +174682,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 32,
+        "directAccesses": 32,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -174874,7 +174874,7 @@
       },
       "name": "LottieLayer",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Lottie layer",
       "reasons": [],
       "source": "upstream/packages/types/src/LottieDocument.ts",
       "sourceProvenance": {
@@ -198183,9 +198183,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 32,
+        "directAccesses": 32,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -198207,7 +198207,7 @@
       },
       "name": "MovieClipData",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free movie-clip data",
       "reasons": [],
       "source": "upstream/packages/types/src/MovieClip.ts",
       "sourceProvenance": {
@@ -222770,9 +222770,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 31,
+        "directAccesses": 31,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -222802,7 +222802,7 @@
       },
       "name": "PathMesh",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free path mesh",
       "reasons": [],
       "source": "upstream/packages/types/src/PathMesh.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1461,
+      "newAuditOnly": 1456,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1461,
+    "auditOnlySchemas": 1456,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 21675,
-    "directSchemas": 543,
+    "directAccesses": 21840,
+    "directSchemas": 548,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 8991,
+    "pendingAccesses": 8826,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

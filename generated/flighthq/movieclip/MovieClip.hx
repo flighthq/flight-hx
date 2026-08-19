@@ -38,8 +38,8 @@ import flighthq.types._internal._MovieClipValues.MovieClipKind;
 
 class MovieClip {
   public static function addMovieClipFrameScript(clip:flighthq.types.MovieClip, frame:flighthq._internal._Union2<Float, String>, script:FrameScript):Void {
-    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, null) : Bool)) { return; }
-    addTimelineFrameScript((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, ({ final __callArgument0:Dynamic = frame; __callArgument0; }), ({ final __callArgument1:Dynamic = script; __callArgument1; }));
+    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, null) : Bool)) { return; }
+    addTimelineFrameScript((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, ({ final __callArgument0:Dynamic = frame; __callArgument0; }), ({ final __callArgument1:Dynamic = script; __callArgument1; }));
   }
 
   public static function createMovieClip(?obj:PartialNode<flighthq.types.MovieClip>):flighthq.types.MovieClip {
@@ -65,7 +65,7 @@ class MovieClip {
   public static function disposeMovieClipSignals(clip:flighthq.types.MovieClip):Void {
     var runtime:MovieClipRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(clip, EntityRuntimeKey) : MovieClipRuntime);
-    if ((cast !_Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, null) : Bool)) { disposeTimelineSignals((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline); }
+    if ((cast !_Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, null) : Bool)) { disposeTimelineSignals((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline); }
     ((cast runtime : MovieClipRuntime).movieClipSignals = null);
   }
 
@@ -74,27 +74,27 @@ class MovieClip {
     var signals:TimelineSignals = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(clip, EntityRuntimeKey) : MovieClipRuntime);
     if ((cast !_Runtime.strictEquals((cast runtime : MovieClipRuntime).movieClipSignals, null) : Bool)) { return cast (cast runtime : MovieClipRuntime).movieClipSignals; }
-    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, null) : Bool)) { ((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline = (cast createTimeline(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Timeline)); }
-    signals = (cast enableTimelineSignals((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline) : TimelineSignals);
+    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, null) : Bool)) { ((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline = cast ((cast createTimeline(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Timeline) : Null<Timeline>)); }
+    signals = (cast enableTimelineSignals((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline) : TimelineSignals);
     ((cast runtime : MovieClipRuntime).movieClipSignals = signals);
     return cast signals;
     return cast null;
   }
 
   public static function getMovieClipCurrentFrame(clip:flighthq.types.MovieClip):Float {
-    return cast _Runtime.coalesce(({ final __typedStruct3 = (cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline; __typedStruct3 == null ? _Runtime.UNDEFINED : (cast __typedStruct3 : { var currentFrame:Float; }).currentFrame; }), function():Dynamic return cast 1.0);
+    return cast _Runtime.coalesce(({ final __typedStruct3 = (cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline; __typedStruct3 == null ? _Runtime.UNDEFINED : (cast __typedStruct3 : { var currentFrame:Float; }).currentFrame; }), function():Dynamic return cast 1.0);
     return cast null;
   }
 
   public static function getMovieClipCurrentLabel(clip:flighthq.types.MovieClip):Null<TimelineLabel> {
-    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, null) : Bool)) { return cast null; }
-    return cast (cast getTimelineCurrentLabel((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline) : Null<TimelineLabel>);
+    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, null) : Bool)) { return cast null; }
+    return cast (cast getTimelineCurrentLabel((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline) : Null<TimelineLabel>);
     return cast null;
   }
 
   public static function getMovieClipFrameScript(clip:flighthq.types.MovieClip, frame:flighthq._internal._Union2<Float, String>):Null<FrameScript> {
-    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, null) : Bool)) { return cast null; }
-    return cast (cast getTimelineFrameScript((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, ({ final __callArgument4:Dynamic = frame; __callArgument4; })) : Null<FrameScript>);
+    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, null) : Bool)) { return cast null; }
+    return cast (cast getTimelineFrameScript((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, ({ final __callArgument4:Dynamic = frame; __callArgument4; })) : Null<FrameScript>);
     return cast null;
   }
 
@@ -112,61 +112,61 @@ class MovieClip {
   }
 
   public static function getMovieClipTotalFrames(clip:flighthq.types.MovieClip):Float {
-    return cast _Runtime.coalesce(({ final __structural7 = ({ final __typedStruct6 = (cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline; __typedStruct6 == null ? _Runtime.UNDEFINED : (cast __typedStruct6 : { var source:Null<TimelineSource>; }).source; }); __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var totalFrames:Float; }).totalFrames; }), function():Dynamic return cast 1.0);
+    return cast _Runtime.coalesce(({ final __structural7 = ({ final __typedStruct6 = (cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline; __typedStruct6 == null ? _Runtime.UNDEFINED : (cast __typedStruct6 : { var source:Null<TimelineSource>; }).source; }); __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var totalFrames:Float; }).totalFrames; }), function():Dynamic return cast 1.0);
     return cast null;
   }
 
   public static function gotoAndPlayMovieClip(clip:flighthq.types.MovieClip, frame:flighthq._internal._Union2<Float, String>):Void {
-    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, null) : Bool)) { return; }
-    gotoAndPlayTimeline((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, ({ final __callArgument8:Dynamic = frame; __callArgument8; }));
+    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, null) : Bool)) { return; }
+    gotoAndPlayTimeline((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, ({ final __callArgument8:Dynamic = frame; __callArgument8; }));
   }
 
   public static function gotoAndStopMovieClip(clip:flighthq.types.MovieClip, frame:flighthq._internal._Union2<Float, String>):Void {
-    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, null) : Bool)) { return; }
-    gotoAndStopTimeline((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, ({ final __callArgument9:Dynamic = frame; __callArgument9; }));
+    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, null) : Bool)) { return; }
+    gotoAndStopTimeline((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, ({ final __callArgument9:Dynamic = frame; __callArgument9; }));
   }
 
   public static function isMovieClipPlaying(clip:flighthq.types.MovieClip):Bool {
-    return cast _Runtime.coalesce(({ final __typedStruct10 = (cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline; __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : { var isPlaying:Bool; }).isPlaying; }), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __typedStruct10 = (cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline; __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : { var isPlaying:Bool; }).isPlaying; }), function():Dynamic return cast false);
     return cast null;
   }
 
   public static function nextFrameMovieClip(clip:flighthq.types.MovieClip):Void {
-    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, null) : Bool)) { return; }
-    nextFrameTimeline((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline);
+    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, null) : Bool)) { return; }
+    nextFrameTimeline((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline);
   }
 
   public static function playMovieClip(clip:flighthq.types.MovieClip):Void {
-    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, null) : Bool)) { return; }
-    playTimeline((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline);
+    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, null) : Bool)) { return; }
+    playTimeline((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline);
   }
 
   public static function prevFrameMovieClip(clip:flighthq.types.MovieClip):Void {
-    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, null) : Bool)) { return; }
-    prevFrameTimeline((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline);
+    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, null) : Bool)) { return; }
+    prevFrameTimeline((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline);
   }
 
   public static function removeMovieClipFrameScript(clip:flighthq.types.MovieClip, frame:flighthq._internal._Union2<Float, String>):Void {
-    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, null) : Bool)) { return; }
-    removeTimelineFrameScript((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, ({ final __callArgument11:Dynamic = frame; __callArgument11; }));
+    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, null) : Bool)) { return; }
+    removeTimelineFrameScript((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, ({ final __callArgument11:Dynamic = frame; __callArgument11; }));
   }
 
   public static function setMovieClipSource(clip:flighthq.types.MovieClip, source:TimelineSource):Void {
     var timeline:Timeline = cast _Runtime.UNDEFINED;
-    timeline = _Runtime.coalesce((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, function():Dynamic return cast (cast createTimeline(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Timeline));
+    timeline = _Runtime.coalesce((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, function():Dynamic return cast (cast createTimeline(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Timeline));
     (timeline.source = cast (source : Null<TimelineSource>));
     (timeline.target = cast (clip : Null<Node2D>));
-    ((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline = timeline);
+    ((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline = cast (timeline : Null<Timeline>));
     gotoAndStopTimeline(({ final __callArgument12:Dynamic = timeline; __callArgument12; }), ({ final __callArgument13:Dynamic = timeline.currentFrame; __callArgument13; }));
   }
 
   public static function stopMovieClip(clip:flighthq.types.MovieClip):Void {
-    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, null) : Bool)) { return; }
-    stopTimeline((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline);
+    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, null) : Bool)) { return; }
+    stopTimeline((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline);
   }
 
   public static function updateMovieClip(clip:flighthq.types.MovieClip, deltaTime:Float):Void {
-    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, null) : Bool)) { return; }
-    (cast updateTimeline((cast (cast clip : flighthq.types.MovieClip).data : MovieClipData).timeline, (cast deltaTime : Float)) : Bool);
+    if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, null) : Bool)) { return; }
+    (cast updateTimeline((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, (cast deltaTime : Float)) : Bool);
   }
 }

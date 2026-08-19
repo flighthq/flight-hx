@@ -33,11 +33,11 @@ class TessellateStrokePath {
     var connectionCount:Float = cast _Runtime.UNDEFINED;
     sectionCount = (_Runtime.toInt32(_Runtime.field((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, 'length')) >> 1);
     if ((cast ((cast sectionCount : Float) < (cast 2.0 : Float)) : Bool)) { return; }
-    base = (_Runtime.toInt32(_Runtime.field((cast mesh : PathMesh).vertices, 'length')) >> 1);
+    base = (_Runtime.toInt32(_Runtime.field(mesh.vertices, 'length')) >> 1);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast sectionCount : Float)) : Bool)) {
-        _Runtime.pushMany((cast mesh : PathMesh).vertices, cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left : Array<Float>), (cast (i * 2.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left : Array<Float>), (cast ((i * 2.0) + 1.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right : Array<Float>), (cast (i * 2.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right : Array<Float>), (cast ((i * 2.0) + 1.0) : Float))] : Array<Dynamic>));
+        _Runtime.pushMany(mesh.vertices, cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left : Array<Float>), (cast (i * 2.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left : Array<Float>), (cast ((i * 2.0) + 1.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right : Array<Float>), (cast (i * 2.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right : Array<Float>), (cast ((i * 2.0) + 1.0) : Float))] : Array<Dynamic>));
         i++;
       }
     }
@@ -72,10 +72,10 @@ class TessellateStrokePath {
     var center:Float = cast _Runtime.UNDEFINED;
     var arcBase:Float = cast _Runtime.UNDEFINED;
     var arcCount:Float = cast _Runtime.UNDEFINED;
-    center = (_Runtime.toInt32(_Runtime.field((cast mesh : PathMesh).vertices, 'length')) >> 1);
-    _Runtime.pushMany((cast mesh : PathMesh).vertices, cast ([((flighthq._internal._StaticIndex.readFloatArrayTyped((cast start : Array<Float>), (cast 0.0 : Float)) + flighthq._internal._StaticIndex.readFloatArrayTyped((cast end : Array<Float>), (cast 0.0 : Float))) / 2.0), ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast start : Array<Float>), (cast 1.0 : Float)) + flighthq._internal._StaticIndex.readFloatArrayTyped((cast end : Array<Float>), (cast 1.0 : Float))) / 2.0)] : Array<Dynamic>));
-    arcBase = (_Runtime.toInt32(_Runtime.field((cast mesh : PathMesh).vertices, 'length')) >> 1);
-    _Runtime.callProperty((cast mesh : PathMesh).vertices, 'push', _Runtime.concatArrays([[flighthq._internal._StaticIndex.readFloatArrayTyped((cast start : Array<Float>), (cast 0.0 : Float))], [flighthq._internal._StaticIndex.readFloatArrayTyped((cast start : Array<Float>), (cast 1.0 : Float))], _Runtime.toArray(interior), [flighthq._internal._StaticIndex.readFloatArrayTyped((cast end : Array<Float>), (cast 0.0 : Float))], [flighthq._internal._StaticIndex.readFloatArrayTyped((cast end : Array<Float>), (cast 1.0 : Float))]]));
+    center = (_Runtime.toInt32(_Runtime.field(mesh.vertices, 'length')) >> 1);
+    _Runtime.pushMany(mesh.vertices, cast ([((flighthq._internal._StaticIndex.readFloatArrayTyped((cast start : Array<Float>), (cast 0.0 : Float)) + flighthq._internal._StaticIndex.readFloatArrayTyped((cast end : Array<Float>), (cast 0.0 : Float))) / 2.0), ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast start : Array<Float>), (cast 1.0 : Float)) + flighthq._internal._StaticIndex.readFloatArrayTyped((cast end : Array<Float>), (cast 1.0 : Float))) / 2.0)] : Array<Dynamic>));
+    arcBase = (_Runtime.toInt32(_Runtime.field(mesh.vertices, 'length')) >> 1);
+    _Runtime.callProperty(mesh.vertices, 'push', _Runtime.concatArrays([[flighthq._internal._StaticIndex.readFloatArrayTyped((cast start : Array<Float>), (cast 0.0 : Float))], [flighthq._internal._StaticIndex.readFloatArrayTyped((cast start : Array<Float>), (cast 1.0 : Float))], _Runtime.toArray(interior), [flighthq._internal._StaticIndex.readFloatArrayTyped((cast end : Array<Float>), (cast 0.0 : Float))], [flighthq._internal._StaticIndex.readFloatArrayTyped((cast end : Array<Float>), (cast 1.0 : Float))]]));
     arcCount = ((_Runtime.toInt32(_Runtime.field(interior, 'length')) >> 1) + 2.0);
     {
       var i:Float = 0.0;
@@ -93,14 +93,14 @@ class TessellateStrokePath {
     var by:Float = cast _Runtime.UNDEFINED;
     var cx:Float = cast _Runtime.UNDEFINED;
     var cy:Float = cast _Runtime.UNDEFINED;
-    ax = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast mesh : PathMesh).vertices : Array<Float>), (cast (a * 2.0) : Float));
-    ay = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast mesh : PathMesh).vertices : Array<Float>), (cast ((a * 2.0) + 1.0) : Float));
-    bx = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast mesh : PathMesh).vertices : Array<Float>), (cast (b * 2.0) : Float));
-    by = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast mesh : PathMesh).vertices : Array<Float>), (cast ((b * 2.0) + 1.0) : Float));
-    cx = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast mesh : PathMesh).vertices : Array<Float>), (cast (c * 2.0) : Float));
-    cy = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast mesh : PathMesh).vertices : Array<Float>), (cast ((c * 2.0) + 1.0) : Float));
+    ax = flighthq._internal._StaticIndex.readFloatArrayTyped((cast mesh.vertices : Array<Float>), (cast (a * 2.0) : Float));
+    ay = flighthq._internal._StaticIndex.readFloatArrayTyped((cast mesh.vertices : Array<Float>), (cast ((a * 2.0) + 1.0) : Float));
+    bx = flighthq._internal._StaticIndex.readFloatArrayTyped((cast mesh.vertices : Array<Float>), (cast (b * 2.0) : Float));
+    by = flighthq._internal._StaticIndex.readFloatArrayTyped((cast mesh.vertices : Array<Float>), (cast ((b * 2.0) + 1.0) : Float));
+    cx = flighthq._internal._StaticIndex.readFloatArrayTyped((cast mesh.vertices : Array<Float>), (cast (c * 2.0) : Float));
+    cy = flighthq._internal._StaticIndex.readFloatArrayTyped((cast mesh.vertices : Array<Float>), (cast ((c * 2.0) + 1.0) : Float));
     if ((cast ((cast HxMath.abs((((bx - ax) * (cy - ay)) - ((by - ay) * (cx - ax)))) : Float) <= (cast TessellateStrokePath.TRIANGLE_EPSILON__tessellateStrokePath : Float)) : Bool)) { return; }
-    _Runtime.pushMany((cast mesh : PathMesh).indices, cast ([a, b, c] : Array<Dynamic>));
+    _Runtime.pushMany(mesh.indices, cast ([a, b, c] : Array<Dynamic>));
   }
 
   public static final TRIANGLE_EPSILON__tessellateStrokePath:Float = 1e-10;

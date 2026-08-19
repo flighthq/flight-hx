@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_461,
+      newAuditOnly: 1_456,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(545);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(550);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_461);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_456);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(143);
+    expect(newDirect).toHaveLength(148);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -825,6 +825,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'PackableRectangle',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free packable rectangle',
+        }),
+        expect.objectContaining({
+          name: 'Clock',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free clock',
+        }),
+        expect.objectContaining({
+          name: 'AreaLight',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free area light',
+        }),
+        expect.objectContaining({
+          name: 'LottieLayer',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Lottie layer',
+        }),
+        expect.objectContaining({
+          name: 'MovieClipData',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free movie-clip data',
+        }),
+        expect.objectContaining({
+          name: 'PathMesh',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free path mesh',
         }),
       ]),
     );
@@ -1544,6 +1569,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#PackableRectangle',
         purpose: 'reviewed escape-free packable rectangle',
       },
+      {
+        declarationFingerprint: 'sha256:e6e95909db1bea0affe3369897e0632ad4f455db8211a678d4d881f01d456a9b',
+        id: '@flighthq/types:interface#Clock',
+        purpose: 'reviewed escape-free clock',
+      },
+      {
+        declarationFingerprint: 'sha256:9ea86c550f139c78db1e1e5f74465c7b5551ae23b4269fa6f342fabefe27471a',
+        id: '@flighthq/types:interface#AreaLight',
+        purpose: 'reviewed escape-free area light',
+      },
+      {
+        declarationFingerprint: 'sha256:ed2e39801a2b33fe8f903c119ababfaab77850d0f8749741e2e3a9a1a71ea5c2',
+        id: '@flighthq/types:interface#LottieLayer',
+        purpose: 'reviewed escape-free Lottie layer',
+      },
+      {
+        declarationFingerprint: 'sha256:5aa6485af78fca2067f0720a27927c1e85e3c6481c8299dbe80ef2b73dd1d259',
+        id: '@flighthq/types:interface#MovieClipData',
+        purpose: 'reviewed escape-free movie-clip data',
+      },
+      {
+        declarationFingerprint: 'sha256:66cba4b02f27ccf2d392f2ce60c410aaa294ac9c3344dcc6fe3c41e474430059',
+        id: '@flighthq/types:interface#PathMesh',
+        purpose: 'reviewed escape-free path mesh',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -2188,6 +2238,13 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const secondHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['AreaLight', 'Clock', 'LottieLayer', 'MovieClipData', 'PathMesh'].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -2228,22 +2285,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_461,
+      auditOnlySchemas: 1_456,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 21_675,
-      directSchemas: 543,
+      directAccesses: 21_840,
+      directSchemas: 548,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 8_991,
+      pendingAccesses: 8_826,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_461,
+      newAuditOnly: 1_456,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -2310,7 +2367,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(21_675);
+    expect(report.summary.directAccesses).toBe(21_840);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -2618,6 +2675,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(highAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'Clock',
+        36,
+        'sha256:e6e95909db1bea0affe3369897e0632ad4f455db8211a678d4d881f01d456a9b',
+        'reviewed escape-free clock',
+      ],
+      [
+        'AreaLight',
+        34,
+        'sha256:9ea86c550f139c78db1e1e5f74465c7b5551ae23b4269fa6f342fabefe27471a',
+        'reviewed escape-free area light',
+      ],
+      [
+        'LottieLayer',
+        32,
+        'sha256:ed2e39801a2b33fe8f903c119ababfaab77850d0f8749741e2e3a9a1a71ea5c2',
+        'reviewed escape-free Lottie layer',
+      ],
+      [
+        'MovieClipData',
+        32,
+        'sha256:5aa6485af78fca2067f0720a27927c1e85e3c6481c8299dbe80ef2b73dd1d259',
+        'reviewed escape-free movie-clip data',
+      ],
+      [
+        'PathMesh',
+        31,
+        'sha256:66cba4b02f27ccf2d392f2ce60c410aaa294ac9c3344dcc6fe3c41e474430059',
+        'reviewed escape-free path mesh',
+      ],
+    ] as const) {
+      expect(secondHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -4278,6 +4377,29 @@ describe('typed struct analysis', () => {
         expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
       }
     }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#AreaLight', false, ['cross-schema-transfer'], null],
+      ['@flighthq/types:interface#Clock', true, [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#LottieLayer', true, [], null],
+      [
+        '@flighthq/types:interface#MovieClipData',
+        true,
+        [],
+        { blockerReasons: ['normalization-provenance'], closed: false },
+      ],
+      ['@flighthq/types:interface#PathMesh', true, [], { blockerReasons: [], closed: true }],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons: [],
+      });
+      if (nominalIdentity === null) {
+        expect(provenanceById.has(frontierId)).toBe(false);
+      } else {
+        expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+      }
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -4727,6 +4849,26 @@ describe('typed struct analysis', () => {
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:FlyCameraController|NodeOrderList(?:<[^>]+>)?|PackableRectangle|ParticleEmitter3D|SocketRuntime)\)\./u,
       );
     }
+    for (const path of [
+      'generated/flighthq/clock/Clock.hx',
+      'generated/flighthq/clock/ClockSignals.hx',
+      'generated/flighthq/lighting/AreaLight.hx',
+      'generated/flighthq/movieclip/MovieClip.hx',
+      'generated/flighthq/path/PathMeshPool.hx',
+      'generated/flighthq/path/TessellatePathTyped.hx',
+      'generated/flighthq/path/TessellateStrokePath.hx',
+      'generated/flighthq/scene2dFormats/LottieDocument.hx',
+      'generated/flighthq/scene2dGl/GlMeshShapeRenderer.hx',
+      'generated/flighthq/scene2dWgpu/WgpuMeshShapeRenderer.hx',
+    ]) {
+      const generatedSecondFrontier = readFileSync(path, 'utf8');
+      expect(generatedSecondFrontier).not.toMatch(/_Runtime\.field\((?:clock|fresh|layer|mesh),/u);
+      expect(generatedSecondFrontier).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AreaLight|Clock|LottieLayer|MovieClipData|PathMesh)\)\./u,
+      );
+    }
+    expect(readFileSync('generated/flighthq/clock/Clock.hx', 'utf8')).not.toMatch(/_Runtime\.field\(current,/u);
+    expect(readFileSync('generated/flighthq/lighting/AreaLight.hx', 'utf8')).not.toMatch(/_Runtime\.field\(source,/u);
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
     expect(generatedCanvasRenderState).not.toMatch(
       /\(cast (?:runtime|sourceRuntime|targetRuntime) : CanvasRenderStateRuntime\)\./u,

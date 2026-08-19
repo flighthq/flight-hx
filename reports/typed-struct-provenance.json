@@ -19544,7 +19544,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 36,
       "fields": 7,
       "id": "@flighthq/types:interface#Clock",
       "name": "Clock",
@@ -30465,7 +30465,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 32,
       "fields": 1,
       "id": "@flighthq/types:interface#MovieClipData",
       "name": "MovieClipData",
@@ -37057,7 +37057,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 31,
       "fields": 2,
       "id": "@flighthq/types:interface#PathMesh",
       "name": "PathMesh",

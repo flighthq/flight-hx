@@ -14,25 +14,25 @@ class PathMeshPool {
     var mesh:PathMesh = cast _Runtime.UNDEFINED;
     var fresh:PathMesh = cast _Runtime.UNDEFINED;
     mesh = ((cast ((cast _Runtime.field(PathMeshPool.pathMeshPool__pathMeshPool, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callProperty(PathMeshPool.pathMeshPool__pathMeshPool, 'pop', cast ([] : Array<Dynamic>)) : Dynamic) : (cast { vertices: cast ([] : Array<Dynamic>), indices: cast ([] : Array<Dynamic>) } : Dynamic));
-    _Runtime.setLength((cast mesh : PathMesh).vertices, 0.0);
-    _Runtime.setLength((cast mesh : PathMesh).indices, 0.0);
+    _Runtime.setLength(mesh.vertices, 0.0);
+    _Runtime.setLength(mesh.indices, 0.0);
     fresh = (cast tessellatePath(({ final __callArgument0:Dynamic = path; __callArgument0; }), (cast tolerance : Float)) : PathMesh);
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field((cast fresh : PathMesh).vertices, 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast mesh : PathMesh).vertices : Array<Float>), (cast i : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast fresh : PathMesh).vertices : Array<Float>), (cast i : Float)) : Float));
+      while ((cast ((cast i : Float) < (cast _Runtime.field(fresh.vertices, 'length') : Float)) : Bool)) {
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast mesh.vertices : Array<Float>), (cast i : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast fresh.vertices : Array<Float>), (cast i : Float)) : Float));
         i++;
       }
     }
-    _Runtime.setLength((cast mesh : PathMesh).vertices, _Runtime.field((cast fresh : PathMesh).vertices, 'length'));
+    _Runtime.setLength(mesh.vertices, _Runtime.field(fresh.vertices, 'length'));
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field((cast fresh : PathMesh).indices, 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast mesh : PathMesh).indices : Array<Float>), (cast i : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast fresh : PathMesh).indices : Array<Float>), (cast i : Float)) : Float));
+      while ((cast ((cast i : Float) < (cast _Runtime.field(fresh.indices, 'length') : Float)) : Bool)) {
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast mesh.indices : Array<Float>), (cast i : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast fresh.indices : Array<Float>), (cast i : Float)) : Float));
         i++;
       }
     }
-    _Runtime.setLength((cast mesh : PathMesh).indices, _Runtime.field((cast fresh : PathMesh).indices, 'length'));
+    _Runtime.setLength(mesh.indices, _Runtime.field(fresh.indices, 'length'));
     return cast mesh;
     return cast null;
   }

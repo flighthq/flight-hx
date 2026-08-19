@@ -743,6 +743,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#PackableRectangle',
     purpose: 'reviewed escape-free packable rectangle',
   },
+  {
+    declarationFingerprint: 'sha256:e6e95909db1bea0affe3369897e0632ad4f455db8211a678d4d881f01d456a9b',
+    id: '@flighthq/types:interface#Clock',
+    purpose: 'reviewed escape-free clock',
+  },
+  {
+    declarationFingerprint: 'sha256:9ea86c550f139c78db1e1e5f74465c7b5551ae23b4269fa6f342fabefe27471a',
+    id: '@flighthq/types:interface#AreaLight',
+    purpose: 'reviewed escape-free area light',
+  },
+  {
+    declarationFingerprint: 'sha256:ed2e39801a2b33fe8f903c119ababfaab77850d0f8749741e2e3a9a1a71ea5c2',
+    id: '@flighthq/types:interface#LottieLayer',
+    purpose: 'reviewed escape-free Lottie layer',
+  },
+  {
+    declarationFingerprint: 'sha256:5aa6485af78fca2067f0720a27927c1e85e3c6481c8299dbe80ef2b73dd1d259',
+    id: '@flighthq/types:interface#MovieClipData',
+    purpose: 'reviewed escape-free movie-clip data',
+  },
+  {
+    declarationFingerprint: 'sha256:66cba4b02f27ccf2d392f2ce60c410aaa294ac9c3344dcc6fe3c41e474430059',
+    id: '@flighthq/types:interface#PathMesh',
+    purpose: 'reviewed escape-free path mesh',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

@@ -12,7 +12,7 @@ class TessellatePathTyped {
   public static function tessellatePathTyped(path:Path, tolerance:Float = 0.25):PathMeshTyped {
     var mesh:PathMesh = cast _Runtime.UNDEFINED;
     mesh = (cast tessellatePath(({ final __callArgument0:Dynamic = path; __callArgument0; }), (cast tolerance : Float)) : PathMesh);
-    return cast { vertices: new flighthq._internal._Float32Array((cast mesh : PathMesh).vertices), indices: new flighthq._internal._UInt32Array((cast mesh : PathMesh).indices) };
+    return cast { vertices: new flighthq._internal._Float32Array(mesh.vertices), indices: new flighthq._internal._UInt32Array(mesh.indices) };
     return cast null;
   }
 }

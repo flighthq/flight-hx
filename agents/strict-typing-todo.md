@@ -5,9 +5,9 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,536 public schemas are semantically eligible for typed structural lowering.
-- 543 schemas currently emit direct fields, covering 21,675 accesses.
-- 993 eligible schemas remain audit-only, covering 8,991 pending accesses.
-- 736 audit-only schemas have no recorded escape, covering 4,237 pending accesses.
+- 548 schemas currently emit direct fields, covering 21,840 accesses.
+- 988 eligible schemas remain audit-only, covering 8,826 pending accesses.
+- 731 audit-only schemas have no recorded escape, covering 4,072 pending accesses.
 - Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
 - Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
@@ -59,6 +59,7 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Promote `TiledTilesetTile`, `TiledTilesetRef`, `TiledProperty`, `TiledTilesetTileFrame`, and `TiledGid`: 34 accesses now emit directly across three generated Tiled-format modules. `TiledGid`, `TiledTilesetRef`, and `TiledTilesetTile` are mechanically compatible and provenance-closed but remain structural pending separate cpp review; container transfer keeps `TiledProperty` and `TiledTilesetTileFrame` structural. The tranche removes 21 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote `TransmissionVolumePbrExtension`, `ClearcoatPbrExtension`, `IridescencePbrExtension`, `WrappedDiffusePbrExtension`, and `SpecularPbrExtension`: 111 accesses now emit directly across 16 generated materials, scene-format, WebGL, and resource modules. Cross-schema transfer keeps all five PBR extension records structural. The tranche removes 104 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote the highest-access zero-escape frontier: `FlyCameraController`, `ParticleEmitter3D`, `SocketRuntime`, `NodeOrderList`, and `PackableRectangle`. Their 241 accesses now emit directly across 11 generated modules. Cross-schema transfer keeps the fly controller structural, dynamic ingress keeps the particle emitter structural, normalization provenance keeps the node order list structural, and the provenance-closed socket runtime and packable rectangle remain structural pending separate cpp review. The tranche removes 76 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
+- [x] Promote the next highest-access zero-escape frontier: `Clock`, `AreaLight`, `LottieLayer`, `MovieClipData`, and `PathMesh`. Their 165 accesses now emit directly across ten generated modules. Cross-schema transfer keeps the area light structural, normalization provenance keeps the movie-clip data structural, the Lottie layer has no production construction provenance, and the provenance-closed clock and path mesh remain structural pending separate cpp review. The tranche removes 50 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [ ] Review the next cohesive five-row zero-escape tranche from the refreshed audit, preserving exact fingerprint, provenance, Haxe, portability, and affected-parity gates.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 

@@ -158,7 +158,7 @@ class LottieDocument {
     for (layer in _Runtime.iterable(layers)) {
       var node:DisplayObject = (cast LottieDocument.createLottieLayerNode__lottieDocument(({ final __callArgument14:Dynamic = layer; __callArgument14; }), (cast context : Dynamic)) : DisplayObject);
       _Runtime.callProperty(ordered, 'push', cast ([{ layer: layer, node: node }] : Array<Dynamic>));
-      if ((cast !_Runtime.strictEquals(_Runtime.field(layer, 'ind'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast nodes : flighthq._internal._Map<Float, DisplayObject>).set(_Runtime.field(layer, 'ind'), (cast node))); }
+      if ((cast !_Runtime.strictEquals(layer.ind, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast nodes : flighthq._internal._Map<Float, DisplayObject>).set(layer.ind, (cast node))); }
     }
     {
       var index:Float = _Runtime.subtractNumbers(_Runtime.field(ordered, 'length'), 1.0);
@@ -166,7 +166,7 @@ class LottieDocument {
         var __destructure4 = flighthq._internal._StaticIndex.readArray(ordered, index);
         var layer:LottieLayer = _Runtime.field(__destructure4, 'layer');
         var node:DisplayObject = _Runtime.field(__destructure4, 'node');
-        var parent:Null<DisplayObject> = ((cast _Runtime.strictEquals(_Runtime.field(layer, 'parent'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast nodes : flighthq._internal._Map<Float, DisplayObject>).get(_Runtime.field(layer, 'parent'))) : Dynamic));
+        var parent:Null<DisplayObject> = ((cast _Runtime.strictEquals(layer.parent, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast nodes : flighthq._internal._Map<Float, DisplayObject>).get(layer.parent)) : Dynamic));
         (cast addNodeChild((cast _Runtime.coalesce(parent, function():Dynamic return cast root) : Dynamic), (cast node : Dynamic)) : NodeOf<Node2DTraits>);
         index--;
       }
@@ -175,16 +175,16 @@ class LottieDocument {
 
   public static function createLottieLayerNode__lottieDocument(layer:LottieLayer, context:LottieImportContext__lottieDocument):DisplayObject {
     var container:DisplayObject = cast _Runtime.UNDEFINED;
-    container = (cast createDisplayObject((cast { name: _Runtime.coalesce(_Runtime.field(layer, 'nm'), function():Dynamic return cast null) } : Dynamic)) : DisplayObject);
-    LottieDocument.applyLottieTransform__lottieDocument(({ final __callArgument15:Dynamic = container; __callArgument15; }), _Runtime.field(layer, 'ks'), (cast context : Dynamic));
+    container = (cast createDisplayObject((cast { name: _Runtime.coalesce(layer.nm, function():Dynamic return cast null) } : Dynamic)) : DisplayObject);
+    LottieDocument.applyLottieTransform__lottieDocument(({ final __callArgument15:Dynamic = container; __callArgument15; }), layer.ks, (cast context : Dynamic));
     LottieDocument.applyLottieLayerVisibility__lottieDocument(({ final __callArgument16:Dynamic = container; __callArgument16; }), ({ final __callArgument17:Dynamic = layer; __callArgument17; }), (cast context : Dynamic));
     LottieDocument.applyLottieBlendMode__lottieDocument(({ final __callArgument18:Dynamic = container; __callArgument18; }), ({ final __callArgument19:Dynamic = layer; __callArgument19; }), (cast context : Dynamic));
-    LottieDocument.reportLottieExpression__lottieDocument((cast _Runtime.field(layer, 'ks') : flighthq._internal._Any), (cast context : Dynamic));
-    if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'ty'), 0.0) : Bool)) { LottieDocument.appendLottiePrecomposition__lottieDocument(({ final __callArgument20:Dynamic = container; __callArgument20; }), ({ final __callArgument21:Dynamic = layer; __callArgument21; }), (cast context : Dynamic)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'ty'), 1.0) : Bool)) { LottieDocument.appendLottieSolid__lottieDocument(({ final __callArgument22:Dynamic = container; __callArgument22; }), ({ final __callArgument23:Dynamic = layer; __callArgument23; })); } else { if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'ty'), 2.0) : Bool)) { LottieDocument.appendLottieImage__lottieDocument(({ final __callArgument24:Dynamic = container; __callArgument24; }), ({ final __callArgument25:Dynamic = layer; __callArgument25; }), (cast context : Dynamic)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'ty'), 3.0) : Bool)) {
-    } else { if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'ty'), 4.0) : Bool)) { LottieDocument.appendLottieShapeItems__lottieDocument(({ final __callArgument26:Dynamic = container; __callArgument26; }), ({ final __callArgument27:Dynamic = _Runtime.coalesce(_Runtime.field(layer, 'shapes'), function():Dynamic return cast cast ([] : Array<Dynamic>)); __callArgument27; }), (cast context : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end); } else { if ((cast _Runtime.strictEquals(_Runtime.field(layer, 'ty'), 5.0) : Bool)) { LottieDocument.appendLottieText__lottieDocument(({ final __callArgument28:Dynamic = container; __callArgument28; }), ({ final __callArgument29:Dynamic = layer; __callArgument29; }), (cast context : Dynamic)); } else { if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(layer, 'ty'), 6.0) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(layer, 'ty'), 13.0) : Bool)) : Bool)) {
-      LottieDocument.reportLottieSkip__lottieDocument((cast context : Dynamic), (cast 'lottie.unsupported-layer' : String), ({ final __callArgument30:Dynamic = { layerType: _Runtime.field(layer, 'ty') }; __callArgument30; }));
+    LottieDocument.reportLottieExpression__lottieDocument((cast layer.ks : flighthq._internal._Any), (cast context : Dynamic));
+    if ((cast _Runtime.strictEquals(layer.ty, 0.0) : Bool)) { LottieDocument.appendLottiePrecomposition__lottieDocument(({ final __callArgument20:Dynamic = container; __callArgument20; }), ({ final __callArgument21:Dynamic = layer; __callArgument21; }), (cast context : Dynamic)); } else { if ((cast _Runtime.strictEquals(layer.ty, 1.0) : Bool)) { LottieDocument.appendLottieSolid__lottieDocument(({ final __callArgument22:Dynamic = container; __callArgument22; }), ({ final __callArgument23:Dynamic = layer; __callArgument23; })); } else { if ((cast _Runtime.strictEquals(layer.ty, 2.0) : Bool)) { LottieDocument.appendLottieImage__lottieDocument(({ final __callArgument24:Dynamic = container; __callArgument24; }), ({ final __callArgument25:Dynamic = layer; __callArgument25; }), (cast context : Dynamic)); } else { if ((cast _Runtime.strictEquals(layer.ty, 3.0) : Bool)) {
+    } else { if ((cast _Runtime.strictEquals(layer.ty, 4.0) : Bool)) { LottieDocument.appendLottieShapeItems__lottieDocument(({ final __callArgument26:Dynamic = container; __callArgument26; }), ({ final __callArgument27:Dynamic = _Runtime.coalesce(layer.shapes, function():Dynamic return cast cast ([] : Array<Dynamic>)); __callArgument27; }), (cast context : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end); } else { if ((cast _Runtime.strictEquals(layer.ty, 5.0) : Bool)) { LottieDocument.appendLottieText__lottieDocument(({ final __callArgument28:Dynamic = container; __callArgument28; }), ({ final __callArgument29:Dynamic = layer; __callArgument29; }), (cast context : Dynamic)); } else { if ((cast ((cast !_Runtime.strictEquals(layer.ty, 6.0) : Bool) && (cast !_Runtime.strictEquals(layer.ty, 13.0) : Bool)) : Bool)) {
+      LottieDocument.reportLottieSkip__lottieDocument((cast context : Dynamic), (cast 'lottie.unsupported-layer' : String), ({ final __callArgument30:Dynamic = { layerType: layer.ty }; __callArgument30; }));
     } } } } } } }
-    LottieDocument.applyLottieMasks__lottieDocument(({ final __callArgument31:Dynamic = container; __callArgument31; }), ({ final __callArgument32:Dynamic = _Runtime.coalesce(_Runtime.field(layer, 'masksProperties'), function():Dynamic return cast cast ([] : Array<Dynamic>)); __callArgument32; }), (cast context : Dynamic));
+    LottieDocument.applyLottieMasks__lottieDocument(({ final __callArgument31:Dynamic = container; __callArgument31; }), ({ final __callArgument32:Dynamic = _Runtime.coalesce(layer.masksProperties, function():Dynamic return cast cast ([] : Array<Dynamic>)); __callArgument32; }), (cast context : Dynamic));
     return cast container;
     return cast null;
   }
@@ -309,10 +309,10 @@ class LottieDocument {
     var color:Float = cast _Runtime.UNDEFINED;
     var path:Path = cast _Runtime.UNDEFINED;
     shape = (cast createShape(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Shape);
-    color = (cast LottieDocument.parseHexColor__lottieDocument((cast _Runtime.coalesce(_Runtime.field(layer, 'sc'), function():Dynamic return cast '#000000') : String)) : Float);
+    color = (cast LottieDocument.parseHexColor__lottieDocument((cast _Runtime.coalesce(layer.sc, function():Dynamic return cast '#000000') : String)) : Float);
     appendShapeBeginFill(({ final __callArgument79:Dynamic = shape; __callArgument79; }), (cast color : Float), (cast 1.0 : Float));
     path = (cast createPath(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Path);
-    appendPathRectangle(({ final __callArgument80:Dynamic = path; __callArgument80; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast _Runtime.coalesce(_Runtime.field(layer, 'sw'), function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(_Runtime.field(layer, 'sh'), function():Dynamic return cast 0.0) : Float));
+    appendPathRectangle(({ final __callArgument80:Dynamic = path; __callArgument80; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast _Runtime.coalesce(layer.sw, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(layer.sh, function():Dynamic return cast 0.0) : Float));
     appendShapePath(({ final __callArgument81:Dynamic = shape; __callArgument81; }), _Runtime.slice((cast path : Path).commands, 0, null), _Runtime.slice((cast path : Path).data, 0, null), (cast path : Path).winding);
     appendShapeEndFill(({ final __callArgument82:Dynamic = shape; __callArgument82; }));
     (cast addNodeChild((cast parent : Dynamic), (cast shape : Dynamic)) : NodeOf<Node2DTraits>);
@@ -321,9 +321,9 @@ class LottieDocument {
   public static function appendLottieImage__lottieDocument(parent:DisplayObject, layer:LottieLayer, context:LottieImportContext__lottieDocument):Void {
     var asset:Null<flighthq._internal._Union2<LottieImageAsset, LottiePrecompositionAsset>> = cast _Runtime.UNDEFINED;
     var image:Null<Image> = cast _Runtime.UNDEFINED;
-    asset = ((cast _Runtime.strictEquals(_Runtime.field(layer, 'refId'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast (cast context : LottieImportContext__lottieDocument).assets : flighthq._internal._Map<String, LottieAsset>).get(_Runtime.field(layer, 'refId'))) : Dynamic));
+    asset = ((cast _Runtime.strictEquals(layer.refId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast (cast context : LottieImportContext__lottieDocument).assets : flighthq._internal._Map<String, LottieAsset>).get(layer.refId)) : Dynamic));
     if ((cast ((cast _Runtime.strictEquals(asset, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast (cast LottieDocument.isImageAsset__lottieDocument(({ final __callArgument83:Dynamic = asset; __callArgument83; })) : Bool) : Bool) : Bool)) : Bool)) {
-      LottieDocument.reportLottieDrop__lottieDocument((cast context : Dynamic), (cast 'lottie.unresolved-asset' : String), ({ final __callArgument84:Dynamic = { id: _Runtime.coalesce(_Runtime.field(layer, 'refId'), function():Dynamic return cast '') }; __callArgument84; }));
+      LottieDocument.reportLottieDrop__lottieDocument((cast context : Dynamic), (cast 'lottie.unresolved-asset' : String), ({ final __callArgument84:Dynamic = { id: _Runtime.coalesce(layer.refId, function():Dynamic return cast '') }; __callArgument84; }));
       return;
     }
     image = _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural85 = (cast context : LottieImportContext__lottieDocument).options; __structural85 == null ? _Runtime.UNDEFINED : (cast __structural85 : { @:optional var resolveImageResource:Null<LottieImageAsset->Null<Image>>; }).resolveImageResource; }), cast ([asset] : Array<Dynamic>)), function():Dynamic return cast null);
@@ -338,10 +338,10 @@ class LottieDocument {
     var textData:Null<LottieTextData> = cast _Runtime.UNDEFINED;
     var first:Null<LottieTextDocument> = cast _Runtime.UNDEFINED;
     var label:TextLabel = cast _Runtime.UNDEFINED;
-    textData = _Runtime.field(layer, 't');
+    textData = layer.t;
     first = ({ final __structural91 = _Runtime.optionalIndex(({ final __structural90 = ({ final __structural89 = textData; __structural89 == null ? _Runtime.UNDEFINED : (cast __structural89 : { var d:{ var k:Array<LottieKeyframe<LottieTextDocument>>; }; }).d; }); __structural90 == null ? _Runtime.UNDEFINED : (cast __structural90 : { var k:Array<LottieKeyframe<LottieTextDocument>>; }).k; }), 0.0); __structural91 == null ? _Runtime.UNDEFINED : (cast __structural91 : { @:optional var s:Null<LottieTextDocument>; }).s; });
     if ((cast _Runtime.strictEquals(first, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      LottieDocument.reportLottieDrop__lottieDocument((cast context : Dynamic), (cast 'lottie.text-missing-document' : String), ({ final __callArgument92:Dynamic = { layer: _Runtime.coalesce(_Runtime.field(layer, 'nm'), function():Dynamic return cast '') }; __callArgument92; }));
+      LottieDocument.reportLottieDrop__lottieDocument((cast context : Dynamic), (cast 'lottie.text-missing-document' : String), ({ final __callArgument92:Dynamic = { layer: _Runtime.coalesce(layer.nm, function():Dynamic return cast '') }; __callArgument92; }));
       return;
     }
     label = (cast createTextLabel((cast { data: { autoSize: 'left', height: _Runtime.multiplyNumbers(_Runtime.coalesce((cast first : LottieTextDocument).s, function():Dynamic return cast 16.0), 1.25), text: (cast first : LottieTextDocument).t, textFormat: (cast LottieDocument.createLottieTextFormat__lottieDocument(({ final __callArgument93:Dynamic = first; __callArgument93; })) : { var align:String; var color:Float; var font:Null<String>; var leading:Null<Float>; var letterSpacing:Null<Float>; var size:Null<Float>; }), width: _Runtime.field((cast context : LottieImportContext__lottieDocument).document, 'w') } } : Dynamic)) : TextLabel);
@@ -351,7 +351,7 @@ class LottieDocument {
   public static function appendLottiePrecomposition__lottieDocument(parent:DisplayObject, layer:LottieLayer, context:LottieImportContext__lottieDocument):Void {
     var id:Null<String> = cast _Runtime.UNDEFINED;
     var asset:Null<flighthq._internal._Union2<LottieImageAsset, LottiePrecompositionAsset>> = cast _Runtime.UNDEFINED;
-    id = _Runtime.field(layer, 'refId');
+    id = layer.refId;
     asset = ((cast _Runtime.strictEquals(id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast ((cast (cast context : LottieImportContext__lottieDocument).assets : flighthq._internal._Map<String, LottieAsset>).get(id)) : Dynamic));
     if ((cast ((cast ((cast _Runtime.strictEquals(id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(asset, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast !(cast (cast LottieDocument.isPrecompositionAsset__lottieDocument(({ final __callArgument94:Dynamic = asset; __callArgument94; })) : Bool) : Bool) : Bool)) : Bool)) {
       LottieDocument.reportLottieDrop__lottieDocument((cast context : Dynamic), (cast 'lottie.unresolved-asset' : String), ({ final __callArgument95:Dynamic = { id: _Runtime.coalesce(id, function():Dynamic return cast '') }; __callArgument95; }));
@@ -362,7 +362,7 @@ class LottieDocument {
       return;
     }
     ((cast (cast context : LottieImportContext__lottieDocument).resolvingPrecompositions : flighthq._internal._Set<String>).add(id));
-    LottieDocument.appendLottieLayers__lottieDocument(({ final __callArgument97:Dynamic = parent; __callArgument97; }), (cast asset : LottiePrecompositionAsset).layers, (cast _Runtime.mergeObjects([context, { frameOffset: ((cast context : LottieImportContext__lottieDocument).frameOffset + _Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(layer, 'st'), function():Dynamic return cast 0.0), (cast context : LottieImportContext__lottieDocument).frameScale)) }, { frameScale: _Runtime.multiplyNumbers((cast context : LottieImportContext__lottieDocument).frameScale, _Runtime.coalesce(_Runtime.field(layer, 'sr'), function():Dynamic return cast 1.0)) }]) : Dynamic));
+    LottieDocument.appendLottieLayers__lottieDocument(({ final __callArgument97:Dynamic = parent; __callArgument97; }), (cast asset : LottiePrecompositionAsset).layers, (cast _Runtime.mergeObjects([context, { frameOffset: ((cast context : LottieImportContext__lottieDocument).frameOffset + _Runtime.multiplyNumbers(_Runtime.coalesce(layer.st, function():Dynamic return cast 0.0), (cast context : LottieImportContext__lottieDocument).frameScale)) }, { frameScale: _Runtime.multiplyNumbers((cast context : LottieImportContext__lottieDocument).frameScale, _Runtime.coalesce(layer.sr, function():Dynamic return cast 1.0)) }]) : Dynamic));
     ((cast (cast context : LottieImportContext__lottieDocument).resolvingPrecompositions : flighthq._internal._Set<String>).delete_(id));
   }
 
@@ -865,8 +865,8 @@ class LottieDocument {
     var duration:Float = cast _Runtime.UNDEFINED;
     var times:Array<Float> = cast _Runtime.UNDEFINED;
     var values:Array<Float> = cast _Runtime.UNDEFINED;
-    start = (cast LottieDocument.frameToSeconds__lottieDocument((cast _Runtime.coalesce(_Runtime.field(layer, 'ip'), function():Dynamic return cast _Runtime.field((cast context : LottieImportContext__lottieDocument).document, 'ip')) : Float), (cast context : Dynamic)) : Float);
-    end = (cast LottieDocument.frameToSeconds__lottieDocument((cast _Runtime.coalesce(_Runtime.field(layer, 'op'), function():Dynamic return cast _Runtime.field((cast context : LottieImportContext__lottieDocument).document, 'op')) : Float), (cast context : Dynamic)) : Float);
+    start = (cast LottieDocument.frameToSeconds__lottieDocument((cast _Runtime.coalesce(layer.ip, function():Dynamic return cast _Runtime.field((cast context : LottieImportContext__lottieDocument).document, 'ip')) : Float), (cast context : Dynamic)) : Float);
+    end = (cast LottieDocument.frameToSeconds__lottieDocument((cast _Runtime.coalesce(layer.op, function():Dynamic return cast _Runtime.field((cast context : LottieImportContext__lottieDocument).document, 'op')) : Float), (cast context : Dynamic)) : Float);
     ((cast target : { var visible:Bool; }).visible = ((cast ((cast start : Float) <= (cast 0.0 : Float)) : Bool) && (cast ((cast end : Float) > (cast 0.0 : Float)) : Bool)));
     duration = HxMath.max(0.0, _Runtime.divideNumbers(_Runtime.subtractNumbers(_Runtime.field((cast context : LottieImportContext__lottieDocument).document, 'op'), _Runtime.field((cast context : LottieImportContext__lottieDocument).document, 'ip')), _Runtime.field((cast context : LottieImportContext__lottieDocument).document, 'fr')));
     times = (cast _Runtime.filterArray((cast cast ([0.0, (cast LottieDocument.clamp__lottieDocument((cast start : Float), (cast 0.0 : Float), (cast duration : Float)) : Float), (cast LottieDocument.clamp__lottieDocument((cast end : Float), (cast 0.0 : Float), (cast duration : Float)) : Float), duration] : Array<Dynamic>) : Array<Dynamic>), function(time:Float, index:Float, all:Array<Float>):Bool return ((cast _Runtime.strictEquals(index, 0.0) : Bool) || (cast ((cast time : Float) > (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast all : Array<Float>), (cast (index - 1.0) : Float)) : Float)) : Bool)), _Runtime.UNDEFINED));
@@ -879,7 +879,7 @@ class LottieDocument {
     var mode:Float = cast _Runtime.UNDEFINED;
     var fixed:Null<String> = cast _Runtime.UNDEFINED;
     var advanced:Null<String> = cast _Runtime.UNDEFINED;
-    mode = _Runtime.coalesce(_Runtime.field(layer, 'bm'), function():Dynamic return cast 0.0);
+    mode = _Runtime.coalesce(layer.bm, function():Dynamic return cast 0.0);
     fixed = ((cast LottieDocument._lottieFixedBlendModes__lottieDocument : flighthq._internal._Map<Float, String>).get(mode));
     if ((cast !_Runtime.strictEquals(fixed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       ((cast target : { var blendMode:Null<String>; }).blendMode = fixed);

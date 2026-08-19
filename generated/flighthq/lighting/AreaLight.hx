@@ -18,7 +18,7 @@ import flighthq.types._internal._AreaLightValues.AreaLightKind;
 
 class AreaLight {
   public static function cloneAreaLight(source:flighthq.types.AreaLight):flighthq.types.AreaLight {
-    return cast (cast createEntity((cast { castsShadow: _Runtime.field(source, 'castsShadow'), color: _Runtime.field(source, 'color'), direction: (cast cloneVector3(({ final __callArgument0:Dynamic = _Runtime.field(source, 'direction'); __callArgument0; })) : Vector3), intensity: _Runtime.field(source, 'intensity'), kind: AreaLightKind, normalBias: _Runtime.field(source, 'normalBias'), pcfRadius: _Runtime.field(source, 'pcfRadius'), position: (cast cloneVector3(({ final __callArgument1:Dynamic = _Runtime.field(source, 'position'); __callArgument1; })) : Vector3), range: _Runtime.field(source, 'range'), right: (cast cloneVector3(({ final __callArgument2:Dynamic = _Runtime.field(source, 'right'); __callArgument2; })) : Vector3), shadowBias: _Runtime.field(source, 'shadowBias'), up: (cast cloneVector3(({ final __callArgument3:Dynamic = _Runtime.field(source, 'up'); __callArgument3; })) : Vector3) } : Dynamic)) : { >Entity, var castsShadow:Bool; var color:Float; var direction:Vector3; var intensity:Float; var kind:String; var normalBias:Float; var pcfRadius:Float; var position:Vector3; var range:Float; var right:Vector3; var shadowBias:Float; var up:Vector3; });
+    return cast (cast createEntity((cast { castsShadow: source.castsShadow, color: source.color, direction: (cast cloneVector3(({ final __callArgument0:Dynamic = source.direction; __callArgument0; })) : Vector3), intensity: source.intensity, kind: AreaLightKind, normalBias: source.normalBias, pcfRadius: source.pcfRadius, position: (cast cloneVector3(({ final __callArgument1:Dynamic = source.position; __callArgument1; })) : Vector3), range: source.range, right: (cast cloneVector3(({ final __callArgument2:Dynamic = source.right; __callArgument2; })) : Vector3), shadowBias: source.shadowBias, up: (cast cloneVector3(({ final __callArgument3:Dynamic = source.up; __callArgument3; })) : Vector3) } : Dynamic)) : { >Entity, var castsShadow:Bool; var color:Float; var direction:Vector3; var intensity:Float; var kind:String; var normalBias:Float; var pcfRadius:Float; var position:Vector3; var range:Float; var right:Vector3; var shadowBias:Float; var up:Vector3; });
     return cast null;
   }
 
@@ -44,21 +44,21 @@ class AreaLight {
     rightLen = HxMath.sqrt((((right.x * right.x) + (right.y * right.y)) + (right.z * right.z)));
     upLen = HxMath.sqrt((((up.x * up.x) + (up.y * up.y)) + (up.z * up.z)));
     dirLen = HxMath.sqrt((((direction.x * direction.x) + (direction.y * direction.y)) + (direction.z * direction.z)));
-    existingRightLen = HxMath.sqrt(((((cast (cast out : flighthq.types.AreaLight).right : { var x:Float; }).x * (cast (cast out : flighthq.types.AreaLight).right : { var x:Float; }).x) + ((cast (cast out : flighthq.types.AreaLight).right : { var y:Float; }).y * (cast (cast out : flighthq.types.AreaLight).right : { var y:Float; }).y)) + ((cast (cast out : flighthq.types.AreaLight).right : { var z:Float; }).z * (cast (cast out : flighthq.types.AreaLight).right : { var z:Float; }).z)));
-    existingUpLen = HxMath.sqrt(((((cast (cast out : flighthq.types.AreaLight).up : { var x:Float; }).x * (cast (cast out : flighthq.types.AreaLight).up : { var x:Float; }).x) + ((cast (cast out : flighthq.types.AreaLight).up : { var y:Float; }).y * (cast (cast out : flighthq.types.AreaLight).up : { var y:Float; }).y)) + ((cast (cast out : flighthq.types.AreaLight).up : { var z:Float; }).z * (cast (cast out : flighthq.types.AreaLight).up : { var z:Float; }).z)));
+    existingRightLen = HxMath.sqrt(((((cast out.right : { var x:Float; }).x * (cast out.right : { var x:Float; }).x) + ((cast out.right : { var y:Float; }).y * (cast out.right : { var y:Float; }).y)) + ((cast out.right : { var z:Float; }).z * (cast out.right : { var z:Float; }).z)));
+    existingUpLen = HxMath.sqrt(((((cast out.up : { var x:Float; }).x * (cast out.up : { var x:Float; }).x) + ((cast out.up : { var y:Float; }).y * (cast out.up : { var y:Float; }).y)) + ((cast out.up : { var z:Float; }).z * (cast out.up : { var z:Float; }).z)));
     if ((cast ((cast dirLen : Float) > (cast 0.0 : Float)) : Bool)) {
-      (cast normalizeVector3(({ final __callArgument31:Dynamic = (cast out : flighthq.types.AreaLight).direction; __callArgument31; }), ({ final __callArgument32:Dynamic = direction; __callArgument32; })) : Float);
+      (cast normalizeVector3(({ final __callArgument31:Dynamic = out.direction; __callArgument31; }), ({ final __callArgument32:Dynamic = direction; __callArgument32; })) : Float);
     }
     if ((cast ((cast rightLen : Float) > (cast 0.0 : Float)) : Bool)) {
-      setVector3(({ final __callArgument33:Dynamic = (cast out : flighthq.types.AreaLight).right; __callArgument33; }), (cast (right.x / rightLen) : Float), (cast (right.y / rightLen) : Float), (cast (right.z / rightLen) : Float));
+      setVector3(({ final __callArgument33:Dynamic = out.right; __callArgument33; }), (cast (right.x / rightLen) : Float), (cast (right.y / rightLen) : Float), (cast (right.z / rightLen) : Float));
       if ((cast ((cast existingRightLen : Float) > (cast 0.0 : Float)) : Bool)) {
-        setVector3(({ final __callArgument34:Dynamic = (cast out : flighthq.types.AreaLight).right; __callArgument34; }), (cast ((cast (cast out : flighthq.types.AreaLight).right : { var x:Float; }).x * existingRightLen) : Float), (cast ((cast (cast out : flighthq.types.AreaLight).right : { var y:Float; }).y * existingRightLen) : Float), (cast ((cast (cast out : flighthq.types.AreaLight).right : { var z:Float; }).z * existingRightLen) : Float));
+        setVector3(({ final __callArgument34:Dynamic = out.right; __callArgument34; }), (cast ((cast out.right : { var x:Float; }).x * existingRightLen) : Float), (cast ((cast out.right : { var y:Float; }).y * existingRightLen) : Float), (cast ((cast out.right : { var z:Float; }).z * existingRightLen) : Float));
       }
     }
     if ((cast ((cast upLen : Float) > (cast 0.0 : Float)) : Bool)) {
-      setVector3(({ final __callArgument35:Dynamic = (cast out : flighthq.types.AreaLight).up; __callArgument35; }), (cast (up.x / upLen) : Float), (cast (up.y / upLen) : Float), (cast (up.z / upLen) : Float));
+      setVector3(({ final __callArgument35:Dynamic = out.up; __callArgument35; }), (cast (up.x / upLen) : Float), (cast (up.y / upLen) : Float), (cast (up.z / upLen) : Float));
       if ((cast ((cast existingUpLen : Float) > (cast 0.0 : Float)) : Bool)) {
-        setVector3(({ final __callArgument36:Dynamic = (cast out : flighthq.types.AreaLight).up; __callArgument36; }), (cast ((cast (cast out : flighthq.types.AreaLight).up : { var x:Float; }).x * existingUpLen) : Float), (cast ((cast (cast out : flighthq.types.AreaLight).up : { var y:Float; }).y * existingUpLen) : Float), (cast ((cast (cast out : flighthq.types.AreaLight).up : { var z:Float; }).z * existingUpLen) : Float));
+        setVector3(({ final __callArgument36:Dynamic = out.up; __callArgument36; }), (cast ((cast out.up : { var x:Float; }).x * existingUpLen) : Float), (cast ((cast out.up : { var y:Float; }).y * existingUpLen) : Float), (cast ((cast out.up : { var z:Float; }).z * existingUpLen) : Float));
       }
     }
   }

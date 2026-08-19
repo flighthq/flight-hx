@@ -70,7 +70,7 @@ class WgpuMeshShapeRenderer {
             (supported = cast (false : Dynamic));
             break;
           }
-          _Runtime.callProperty(meshes, 'push', cast ([{ vertices: new flighthq._internal._Float32Array((cast mesh : PathMesh).vertices), indices: new flighthq._internal._UInt16Array((cast mesh : PathMesh).indices), color: (cast region : { var color:Float; }).color, alpha: (cast region : { var alpha:Float; }).alpha }] : Array<Dynamic>));
+          _Runtime.callProperty(meshes, 'push', cast ([{ vertices: new flighthq._internal._Float32Array((cast mesh : { var vertices:Array<Float>; }).vertices), indices: new flighthq._internal._UInt16Array((cast mesh : { var indices:Array<Float>; }).indices), color: (cast region : { var color:Float; }).color, alpha: (cast region : { var alpha:Float; }).alpha }] : Array<Dynamic>));
           i++;
         }
       }
