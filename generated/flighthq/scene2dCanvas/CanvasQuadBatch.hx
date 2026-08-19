@@ -49,7 +49,7 @@ class CanvasQuadBatch {
     var smoothing:Bool = cast _Runtime.UNDEFINED;
     var restoreMaterial:Bool = cast _Runtime.UNDEFINED;
     source = (cast (cast quadBatch : RenderProxy2D).source : QuadBatch);
-    data = (cast source : QuadBatch).data;
+    data = source.data;
     __destructure0 = data;
     atlas = __destructure0.atlas;
     instanceCount = __destructure0.instanceCount;

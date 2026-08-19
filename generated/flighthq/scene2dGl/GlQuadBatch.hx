@@ -77,7 +77,7 @@ class GlQuadBatch {
     var drawCount:Float = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime);
     source = (cast (cast quadBatch : RenderProxy2D).source : QuadBatch);
-    data = (cast source : QuadBatch).data;
+    data = source.data;
     __destructure0 = data;
     atlas = __destructure0.atlas;
     instanceCount = __destructure0.instanceCount;

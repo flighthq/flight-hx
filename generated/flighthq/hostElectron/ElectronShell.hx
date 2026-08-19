@@ -12,7 +12,7 @@ import flighthq.types.Shell.ShellShortcutLink;
 class ElectronShell {
   public static function createElectronShellBackend(electron:ElectronApi):ShellBackend {
     var shell:flighthq.types.ElectronApi.ElectronShell = cast _Runtime.UNDEFINED;
-    shell = (cast electron : ElectronApi).shell;
+    shell = electron.shell;
     return cast { openExternal: function(url:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {

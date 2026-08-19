@@ -55,17 +55,17 @@ class GlLitProgram {
     gl = (cast state : GlRenderState).gl;
     if ((cast ((cast !_Runtime.strictEquals(((cast GlLitProgram._uploadedLightBlock__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Scene3DLightBlock>).get(program)), lights) : Bool) || (cast !_Runtime.strictEquals(((cast GlLitProgram._uploadedLightVersion__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Float>).get(program)), _Runtime.field(lights, 'version')) : Bool)) : Bool)) {
       var data:flighthq._internal._Float32Array = _Runtime.field(lights, 'data');
-      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDirectional'), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 2.0 : Float)), 0.0);
-      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locDirectionalRadiance'), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 4.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 5.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 6.0 : Float)), 0.0);
-      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, _Runtime.field(program, 'locAmbientRadiance'), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 8.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 9.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 10.0 : Float)));
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locDirectionalCount'), _Runtime.field(lights, 'directionalCount'));
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locAmbientCount'), _Runtime.field(lights, 'ambientCount'));
-      flighthq._internal.backend.WebGl2Backend.uniform4fv(gl, _Runtime.field(program, 'locPointLights'), (cast data : flighthq._internal._Float32Array).subarray(Std.int(SCENE_LIGHT_POINT_OFFSET), Std.int((SCENE_LIGHT_POINT_OFFSET + (SCENE_LIGHT_POINT_STRIDE * MAX_FORWARD_LIGHTS)))));
-      flighthq._internal.backend.WebGl2Backend.uniform4fv(gl, _Runtime.field(program, 'locSpotLights'), (cast data : flighthq._internal._Float32Array).subarray(Std.int(SCENE_LIGHT_SPOT_OFFSET), Std.int((SCENE_LIGHT_SPOT_OFFSET + (SCENE_LIGHT_SPOT_STRIDE * MAX_FORWARD_LIGHTS)))));
-      flighthq._internal.backend.WebGl2Backend.uniform4fv(gl, _Runtime.field(program, 'locHemisphereLights'), (cast data : flighthq._internal._Float32Array).subarray(Std.int(SCENE_LIGHT_HEMISPHERE_OFFSET), Std.int((SCENE_LIGHT_HEMISPHERE_OFFSET + (SCENE_LIGHT_HEMISPHERE_STRIDE * MAX_FORWARD_LIGHTS)))));
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locPointCount'), _Runtime.field(lights, 'pointCount'));
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locSpotCount'), _Runtime.field(lights, 'spotCount'));
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locHemisphereCount'), _Runtime.field(lights, 'hemisphereCount'));
+      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, program.locDirectional, flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 2.0 : Float)), 0.0);
+      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, program.locDirectionalRadiance, flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 4.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 5.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 6.0 : Float)), 0.0);
+      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, program.locAmbientRadiance, flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 8.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 9.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast 10.0 : Float)));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locDirectionalCount, _Runtime.field(lights, 'directionalCount'));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locAmbientCount, _Runtime.field(lights, 'ambientCount'));
+      flighthq._internal.backend.WebGl2Backend.uniform4fv(gl, program.locPointLights, (cast data : flighthq._internal._Float32Array).subarray(Std.int(SCENE_LIGHT_POINT_OFFSET), Std.int((SCENE_LIGHT_POINT_OFFSET + (SCENE_LIGHT_POINT_STRIDE * MAX_FORWARD_LIGHTS)))));
+      flighthq._internal.backend.WebGl2Backend.uniform4fv(gl, program.locSpotLights, (cast data : flighthq._internal._Float32Array).subarray(Std.int(SCENE_LIGHT_SPOT_OFFSET), Std.int((SCENE_LIGHT_SPOT_OFFSET + (SCENE_LIGHT_SPOT_STRIDE * MAX_FORWARD_LIGHTS)))));
+      flighthq._internal.backend.WebGl2Backend.uniform4fv(gl, program.locHemisphereLights, (cast data : flighthq._internal._Float32Array).subarray(Std.int(SCENE_LIGHT_HEMISPHERE_OFFSET), Std.int((SCENE_LIGHT_HEMISPHERE_OFFSET + (SCENE_LIGHT_HEMISPHERE_STRIDE * MAX_FORWARD_LIGHTS)))));
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locPointCount, _Runtime.field(lights, 'pointCount'));
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locSpotCount, _Runtime.field(lights, 'spotCount'));
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locHemisphereCount, _Runtime.field(lights, 'hemisphereCount'));
       ((cast GlLitProgram._uploadedLightBlock__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Scene3DLightBlock>).set(program, (cast lights)));
       ((cast GlLitProgram._uploadedLightVersion__glLitProgram : flighthq._internal._WeakMap<flighthq.types.GlLitProgram, Float>).set(program, (cast _Runtime.field(lights, 'version'))));
     }
@@ -74,42 +74,42 @@ class GlLitProgram {
     if ((cast ((cast !_Runtime.strictEquals(shadow, null) : Bool) && (cast (cast shadow : GlScene3DShadow).enabled : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.SHADOW_MAP_TEXTURE_UNIT__glLitProgram));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast shadow : GlScene3DShadow).texture);
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShadowBias'), (cast shadow : GlScene3DShadow).shadowBias);
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locShadowMap'), GlLitProgram.SHADOW_MAP_TEXTURE_UNIT__glLitProgram);
-      flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, _Runtime.field(program, 'locShadowMatrix'), false, (cast (cast shadow : GlScene3DShadow).matrix : { var m:flighthq._internal._Float32Array; }).m);
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShadowNormalBiasWorld'), (cast shadow : GlScene3DShadow).normalBiasWorld);
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locShadowPcfRadius'), (cast shadow : GlScene3DShadow).pcfRadius);
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShadowEnabled'), 1.0);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locShadowBias, (cast shadow : GlScene3DShadow).shadowBias);
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locShadowMap, GlLitProgram.SHADOW_MAP_TEXTURE_UNIT__glLitProgram);
+      flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, program.locShadowMatrix, false, (cast (cast shadow : GlScene3DShadow).matrix : { var m:flighthq._internal._Float32Array; }).m);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locShadowNormalBiasWorld, (cast shadow : GlScene3DShadow).normalBiasWorld);
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locShadowPcfRadius, (cast shadow : GlScene3DShadow).pcfRadius);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locShadowEnabled, 1.0);
     } else {
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locShadowEnabled'), 0.0);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locShadowEnabled, 0.0);
     }
     ibl = runtime.ibl;
     if ((cast !_Runtime.strictEquals(ibl, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), (cast ibl : GlScene3DIbl).irradianceCube);
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblIrradiance'), GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram);
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locIblIrradiance, GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), (cast ibl : GlScene3DIbl).prefilteredCube);
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblPrefiltered'), GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram);
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locIblPrefiltered, GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast ibl : GlScene3DIbl).brdfLut);
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblBrdf'), GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram);
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblEnabled'), 1.0);
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblIntensity'), (cast ibl : GlScene3DIbl).intensity);
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblMaxMip'), ((cast ibl : GlScene3DIbl).prefilteredMipCount - 1.0));
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locIblBrdf, GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locIblEnabled, 1.0);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locIblIntensity, (cast ibl : GlScene3DIbl).intensity);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locIblMaxMip, ((cast ibl : GlScene3DIbl).prefilteredMipCount - 1.0));
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
     } else {
       var placeholders:GlIblPlaceholders__glLitProgram = (cast GlLitProgram.ensureGlIblPlaceholders__glLitProgram(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlIblPlaceholders__glLitProgram);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), (cast placeholders : GlIblPlaceholders__glLitProgram).cube);
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblIrradiance'), GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram);
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locIblIrradiance, GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), (cast placeholders : GlIblPlaceholders__glLitProgram).cube);
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblPrefiltered'), GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram);
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locIblPrefiltered, GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast placeholders : GlIblPlaceholders__glLitProgram).lut);
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.field(program, 'locIblBrdf'), GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram);
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locIblEnabled'), 0.0);
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locIblBrdf, GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locIblEnabled, 0.0);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
     }
   }

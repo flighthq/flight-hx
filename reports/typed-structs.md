@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1451 |
-| Direct schemas | 553 |
+| Audit-only schemas | 1446 |
+| Direct schemas | 558 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 8679 |
-| Directly emitted accesses | 21987 |
+| Pending accesses | 8539 |
+| Directly emitted accesses | 22127 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1451 |
+| Newly discovered, audit-only | 1446 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -453,7 +453,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#EasingSegment` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 1 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#EasingStepsGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#EffectSourceMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#ElectronApi` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 28 | 0 | 0 | 28 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ElectronApi` | `direct` | `new` | — | reviewed escape-free Electron API | 16 | 28 | 0 | 0 | 0 | 28 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronApp` | `audit-only` | `new` | — | checker-discovered public declaration | 31 | 7 | 0 | 0 | 7 | 0 | 0 | 48 | yes | — |
 | `@flighthq/types:interface#ElectronAutoUpdater` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 14 | yes | — |
 | `@flighthq/types:interface#ElectronBackendOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
@@ -593,7 +593,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#GlFramebufferStatusKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#GlFullscreenProgram` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 143 | 0 | 0 | 143 | 0 | 0 | 38 | yes | — |
 | `@flighthq/types:interface#GlitchEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#GlLitProgram` | `audit-only` | `new` | — | checker-discovered public declaration | 39 | 28 | 0 | 0 | 28 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlLitProgram` | `direct` | `new` | — | reviewed escape-free WebGL lit program | 39 | 28 | 0 | 0 | 0 | 28 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlMatcapDefineKey` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlMatcapProgram` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlMaterialRenderer` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 2 | 0 | 0 | 2 | 0 | 0 | 2 | yes | — |
@@ -831,7 +831,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#LayoutResolutionFailureKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#LayoutResolutionGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#LayoutResolver` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#LayoutState` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 14 | 13 | 1 | 28 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#LayoutState` | `direct` | `new` | — | reviewed escape-free layout state | 8 | 14 | 13 | 1 | 0 | 28 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LayoutTree` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 17 | 0 | 0 | 17 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LensDirtEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LensDistortionEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
@@ -958,7 +958,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#MeshGeometryFromAttributesOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MeshGeometryGlData` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MeshGeometryOptions` | `direct` | `relocated` | `@flighthq/mesh:interface#MeshGeometryOptions` | broad scene document | 5 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#MeshGeometryRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 14 | 14 | 0 | 28 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MeshGeometryRuntime` | `direct` | `new` | — | reviewed escape-free mesh geometry runtime | 8 | 14 | 14 | 0 | 0 | 28 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MeshGeometryWgpuData` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MeshMorph` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MeshMorphBindPose` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
@@ -1220,7 +1220,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ProtocolBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 12 | yes | — |
 | `@flighthq/types:interface#ProtocolHandler` | `direct` | `preserved` | `@flighthq/types:interface#ProtocolHandler` | broad host document | 1 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ProximityReading` | `direct` | `preserved` | `@flighthq/types:interface#ProximityReading` | broad host document | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#QuadBatch` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 28 | 0 | 0 | 28 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#QuadBatch` | `direct` | `new` | — | reviewed escape-free quad batch | 19 | 28 | 0 | 0 | 0 | 28 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#QuadBatchData` | `direct` | `new` | — | reviewed escape-free quad batch data | 6 | 121 | 9 | 0 | 0 | 130 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#QuadBatchRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 39 | 6 | 3 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#QuadBatchSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |

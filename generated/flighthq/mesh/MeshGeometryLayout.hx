@@ -75,9 +75,9 @@ class MeshGeometryLayout {
     }
     converted = (cast createMeshGeometry(({ final __callArgument4:Dynamic = { indices: _Runtime.coalesce(source.indices, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), layout: targetLayout, subsets: source.subsets, topology: source.topology, vertices: dstVertices }; __callArgument4; })) : MeshGeometry);
     sourceRuntime = (cast _Runtime.getIndex(source, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    smoothingSources = ({ final __structural5 = sourceRuntime; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; }).tangentSmoothingSources; });
+    smoothingSources = ({ final __typedStruct5 = sourceRuntime; __typedStruct5 == null ? _Runtime.UNDEFINED : (cast __typedStruct5 : { var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; }).tangentSmoothingSources; });
     if ((cast ((cast !_Runtime.strictEquals(smoothingSources, null) : Bool) && (cast !_Runtime.strictEquals(smoothingSources, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      ((cast (cast _Runtime.getIndex(converted, EntityRuntimeKey) : MeshGeometryRuntime) : MeshGeometryRuntime).tangentSmoothingSources = _Runtime.slice(smoothingSources, 0, null));
+      ((cast (cast _Runtime.getIndex(converted, EntityRuntimeKey) : MeshGeometryRuntime) : { var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; }).tangentSmoothingSources = cast (_Runtime.slice(smoothingSources, 0, null) : Null<flighthq._internal._UInt32Array>));
     }
     return cast converted;
     return cast null;

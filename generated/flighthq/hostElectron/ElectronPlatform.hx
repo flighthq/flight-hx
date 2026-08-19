@@ -19,7 +19,7 @@ class ElectronPlatform {
       (out.kind = cast ('desktop' : PlatformKind));
       (out.version = cast (_Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural1 = proc; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var getSystemVersion:Null<Void->String>; }).getSystemVersion; }), cast ([] : Array<Dynamic>)), function():Dynamic return cast '') : String));
       (out.arch = cast (_Runtime.coalesce(({ final __structural2 = proc; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var arch:Null<String>; }).arch; }), function():Dynamic return cast '') : String));
-      (out.locale = cast ((cast (cast electron : ElectronApi).app : ElectronApp).getLocale() : String));
+      (out.locale = cast ((cast electron.app : ElectronApp).getLocale() : String));
       (out.isTouch = cast (false : Bool));
       return cast out;
       return cast _Runtime.UNDEFINED;

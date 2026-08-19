@@ -172,7 +172,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#DomClipHooks` | 0 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#DomScene2DRectangle` | 0 | 4 | 1 | 0 | 1 | 0 | 2 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#DragForce` | 3 | 2 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
-| `@flighthq/types:interface#ElectronApi` | 0 | 16 | 0 | 12 | 0 | 0 | 1 | 0 | yes | — |
+| `@flighthq/types:interface#ElectronApi` | 28 | 16 | 0 | 12 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronAutoUpdater` | 0 | 5 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronBrowserWindow` | 0 | 39 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#ElectronClipboard` | 0 | 15 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |
@@ -290,7 +290,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#IpcSignals` | 3 | 2 | 0 | 2 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#IpcTarget` | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#LayoutResolutionExplanation` | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#LayoutState` | 0 | 8 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#LayoutState` | 28 | 8 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#LayoutTree` | 0 | 1 | 1 | 1 | 0 | 0 | 1 | 3 | yes | — |
 | `@flighthq/types:interface#LibgdxAtlasDocument` | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LibgdxAtlasPage` | 0 | 7 | 1 | 1 | 0 | 0 | 0 | 0 | yes | — |

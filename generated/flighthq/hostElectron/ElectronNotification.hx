@@ -32,10 +32,10 @@ class ElectronNotification {
         var id:String = cast _Runtime.UNDEFINED;
         var actions:Array<NotificationAction> = cast _Runtime.UNDEFINED;
         var n:flighthq.types.ElectronApi.ElectronNotification = cast _Runtime.UNDEFINED;
-        if ((cast !(cast (cast (cast electron : ElectronApi).Notification : ElectronNotificationConstructor).isSupported() : Bool) : Bool)) { return cast ''; }
+        if ((cast !(cast (cast electron.Notification : ElectronNotificationConstructor).isSupported() : Bool) : Bool)) { return cast ''; }
         id = _Runtime.coalesce(request.id, function():Dynamic return cast 'notification-' + Std.string(nextId++) + '');
         actions = _Runtime.coalesce(request.actions, function():Dynamic return cast cast ([] : Array<Dynamic>));
-        n = _Runtime.construct((cast electron : ElectronApi).Notification, [{ title: request.title, body: request.body, icon: request.icon, silent: request.silent, actions: (cast _Runtime.mapArray((cast actions : Array<NotificationAction>), function(a:NotificationAction, __unused0:Float, __unused1:Array<NotificationAction>):{ var type:String; var text:String; } return { type: 'button', text: a.title }, _Runtime.UNDEFINED)) }]);
+        n = _Runtime.construct(electron.Notification, [{ title: request.title, body: request.body, icon: request.icon, silent: request.silent, actions: (cast _Runtime.mapArray((cast actions : Array<NotificationAction>), function(a:NotificationAction, __unused0:Float, __unused1:Array<NotificationAction>):{ var type:String; var text:String; } return { type: 'button', text: a.title }, _Runtime.UNDEFINED)) }]);
         (cast n : flighthq.types.ElectronApi.ElectronNotification).on((cast 'show' : String), ({ final __callArgument0:Dynamic = function(__unused2:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void { _Runtime.callOptionalValue(showListener, cast ([id] : Array<Dynamic>)); }, cast ([] : Array<Dynamic>)); }; __callArgument0; }));
         (cast n : flighthq.types.ElectronApi.ElectronNotification).on((cast 'click' : String), ({ final __callArgument1:Dynamic = function(__unused3:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void { _Runtime.callOptionalValue(clickListener, cast ([id] : Array<Dynamic>)); }, cast ([] : Array<Dynamic>)); }; __callArgument1; }));
         (cast n : flighthq.types.ElectronApi.ElectronNotification).on((cast 'action' : String), ({ final __callArgument3:Dynamic = _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
@@ -54,13 +54,13 @@ class ElectronNotification {
       }));
     }, requestPermission: function():flighthq._internal._Promise<NotificationPermission> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve(((cast (cast (cast electron : ElectronApi).Notification : ElectronNotificationConstructor).isSupported() : Bool) ? (cast 'granted' : Dynamic) : (cast 'denied' : Dynamic)));
+        return flighthq._internal._Async.resolve(((cast (cast electron.Notification : ElectronNotificationConstructor).isSupported() : Bool) ? (cast 'granted' : Dynamic) : (cast 'denied' : Dynamic)));
       }));
     }, getPermission: function():NotificationPermission {
-      return cast ((cast (cast (cast electron : ElectronApi).Notification : ElectronNotificationConstructor).isSupported() : Bool) ? (cast 'granted' : Dynamic) : (cast 'denied' : Dynamic));
+      return cast ((cast (cast electron.Notification : ElectronNotificationConstructor).isSupported() : Bool) ? (cast 'granted' : Dynamic) : (cast 'denied' : Dynamic));
       return cast _Runtime.UNDEFINED;
     }, isSupported: function():Bool {
-      return cast (cast (cast electron : ElectronApi).Notification : ElectronNotificationConstructor).isSupported();
+      return cast (cast electron.Notification : ElectronNotificationConstructor).isSupported();
       return cast _Runtime.UNDEFINED;
     }, getCapabilities: function():NotificationCapabilities {
       return cast { actions: true, channels: false, coldStart: false, image: false, listActive: false, scheduling: false, textReply: false };

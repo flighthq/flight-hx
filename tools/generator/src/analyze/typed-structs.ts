@@ -793,6 +793,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#TextureSource',
     purpose: 'reviewed escape-free texture source',
   },
+  {
+    declarationFingerprint: 'sha256:f54a1342b6e20a6877114b8a64de522c5dd432abe1db067f1d64cf56da7987a5',
+    id: '@flighthq/types:interface#ElectronApi',
+    purpose: 'reviewed escape-free Electron API',
+  },
+  {
+    declarationFingerprint: 'sha256:6f76f76885ae46aa509bb7badc6b7ce66f4ef96ca95fa1871bc7f24685c71df1',
+    id: '@flighthq/types:interface#GlLitProgram',
+    purpose: 'reviewed escape-free WebGL lit program',
+  },
+  {
+    declarationFingerprint: 'sha256:7990b91753d362be27f86906395a45a7c19aae3b4001e7681dc88f6e8ca61d39',
+    id: '@flighthq/types:interface#LayoutState',
+    purpose: 'reviewed escape-free layout state',
+  },
+  {
+    declarationFingerprint: 'sha256:09771ab81a3d8b9386f482e7a9b0d8e8bb9af7a1576510bd07568070f8cde3bd',
+    id: '@flighthq/types:interface#MeshGeometryRuntime',
+    purpose: 'reviewed escape-free mesh geometry runtime',
+  },
+  {
+    declarationFingerprint: 'sha256:899537b7d2a81e3752bb2c1fc97d945d22692f778fc4c242542ee226df28fef4',
+    id: '@flighthq/types:interface#QuadBatch',
+    purpose: 'reviewed escape-free quad batch',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

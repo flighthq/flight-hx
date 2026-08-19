@@ -10,7 +10,7 @@ import flighthq.types.Ipc.IpcBackend;
 class ElectronIpc {
   public static function createElectronIpcBackend(electron:ElectronApi):IpcBackend {
     var ipcMain:ElectronIpcMain = cast _Runtime.UNDEFINED;
-    ipcMain = (cast electron : ElectronApi).ipcMain;
+    ipcMain = electron.ipcMain;
     return cast { send: function():Void {
 
     }, invoke: function():flighthq._internal._Promise<flighthq._internal._Any> {

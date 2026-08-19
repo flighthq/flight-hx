@@ -21,7 +21,7 @@ import flighthq.types.ElectronApi.ElectronSaveDialogOptions;
 class ElectronDialog {
   public static function createElectronDialogBackend(electron:ElectronApi):DialogBackend {
     var dialog:flighthq.types.ElectronApi.ElectronDialog = cast _Runtime.UNDEFINED;
-    dialog = (cast electron : ElectronApi).dialog;
+    dialog = electron.dialog;
     return cast { openFile: function(options:OpenFileDialogOptions):flighthq._internal._Promise<Array<FileDialogHandle>> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {

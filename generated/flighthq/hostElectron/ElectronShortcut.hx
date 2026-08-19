@@ -12,7 +12,7 @@ class ElectronShortcut {
   public static function createElectronShortcutBackend(electron:ElectronApi):ShortcutBackend {
     var globalShortcut:ElectronGlobalShortcut = cast _Runtime.UNDEFINED;
     var registered:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;
-    globalShortcut = (cast electron : ElectronApi).globalShortcut;
+    globalShortcut = electron.globalShortcut;
     registered = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     return cast { getRegistered: function():Array<String> {
       return cast _Runtime.concatArrays([_Runtime.toArray(registered)]);

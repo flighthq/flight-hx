@@ -20,7 +20,7 @@ class ElectronWindow {
     return cast { open: function(win:ApplicationWindow, options:WindowOptions):Bool {
       var bw:ElectronBrowserWindow = cast _Runtime.UNDEFINED;
       var onUnmaximize:Void->Void = cast _Runtime.UNDEFINED;
-      bw = _Runtime.construct((cast electron : ElectronApi).BrowserWindow, [{ title: options.title, x: options.x, y: options.y, width: options.width, height: options.height, resizable: options.resizable, alwaysOnTop: options.alwaysOnTop, fullscreen: options.fullscreen, show: options.visible, minWidth: options.minWidth, minHeight: options.minHeight, maxWidth: options.maxWidth, maxHeight: options.maxHeight, frame: options.frame, transparent: options.transparent }]);
+      bw = _Runtime.construct(electron.BrowserWindow, [{ title: options.title, x: options.x, y: options.y, width: options.width, height: options.height, resizable: options.resizable, alwaysOnTop: options.alwaysOnTop, fullscreen: options.fullscreen, show: options.visible, minWidth: options.minWidth, minHeight: options.minHeight, maxWidth: options.maxWidth, maxHeight: options.maxHeight, frame: options.frame, transparent: options.transparent }]);
       ((cast ElectronWindow._windows__electronWindow : flighthq._internal._WeakMap<ApplicationWindow, ElectronBrowserWindow>).set(win, (cast bw)));
       ((cast ElectronWindow._windowsById__electronWindow : flighthq._internal._Map<Float, ApplicationWindow>).set((cast bw : ElectronBrowserWindow).id, (cast win)));
       (cast bw : ElectronBrowserWindow).on((cast 'move' : String), ({ final __callArgument0:Dynamic = function(__unused0:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void {

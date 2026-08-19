@@ -15,13 +15,13 @@ class ElectronMenu {
     var selectListener:Null<String->Void> = cast _Runtime.UNDEFINED;
     selectListener = null;
     return cast { setApplicationMenu: function(items:Array<MenuItemTemplate>):Bool {
-      (cast (cast electron : ElectronApi).Menu : ElectronMenuConstructor).setApplicationMenu((cast (cast (cast electron : ElectronApi).Menu : ElectronMenuConstructor).buildFromTemplate((cast ElectronMenu.toElectronTemplate__electronMenu(({ final __callArgument0:Dynamic = items; __callArgument0; }), ({ final __callArgument1:Dynamic = function(id:String):Void { _Runtime.callOptionalValue(selectListener, cast ([id] : Array<Dynamic>)); }; __callArgument1; })) : Array<ElectronMenuItemOptions>)) : Dynamic));
+      (cast electron.Menu : ElectronMenuConstructor).setApplicationMenu((cast (cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast ElectronMenu.toElectronTemplate__electronMenu(({ final __callArgument0:Dynamic = items; __callArgument0; }), ({ final __callArgument1:Dynamic = function(id:String):Void { _Runtime.callOptionalValue(selectListener, cast ([id] : Array<Dynamic>)); }; __callArgument1; })) : Array<ElectronMenuItemOptions>)) : Dynamic));
       return cast true;
       return cast _Runtime.UNDEFINED;
     }, popupContextMenu: function(items:Array<MenuItemTemplate>, x:Float, y:Float):flighthq._internal._Promise<Null<String>> {
       return cast flighthq._internal._Async.create(function(resolve:flighthq._internal._Any, __unused0:flighthq._internal._Any):Void {
         var menu:flighthq.types.ElectronApi.ElectronMenu = cast _Runtime.UNDEFINED;
-        menu = (cast (cast electron : ElectronApi).Menu : ElectronMenuConstructor).buildFromTemplate((cast ElectronMenu.toElectronTemplate__electronMenu(({ final __callArgument2:Dynamic = items; __callArgument2; }), ({ final __callArgument4:Dynamic = function(id:String):Void { resolve(({ final __callArgument3:Dynamic = id; __callArgument3; })); }; __callArgument4; })) : Array<ElectronMenuItemOptions>));
+        menu = (cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast ElectronMenu.toElectronTemplate__electronMenu(({ final __callArgument2:Dynamic = items; __callArgument2; }), ({ final __callArgument4:Dynamic = function(id:String):Void { resolve(({ final __callArgument3:Dynamic = id; __callArgument3; })); }; __callArgument4; })) : Array<ElectronMenuItemOptions>));
         try {
           (cast menu : flighthq.types.ElectronApi.ElectronMenu).popup(({ final __callArgument5:Dynamic = { x: x, y: y }; __callArgument5; }));
         } catch (__error:Dynamic) {

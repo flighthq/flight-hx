@@ -208,7 +208,7 @@ class MeshGeometryCompute {
     indices = geometry.indices;
     indexCount = _Runtime.select(indices, function():Dynamic return cast (cast indices : { var length:Float; }).length, function():Dynamic return cast vertexCount);
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    recordedSmoothingSources = ({ final __structural0 = runtime; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; }).tangentSmoothingSources; });
+    recordedSmoothingSources = ({ final __typedStruct0 = runtime; __typedStruct0 == null ? _Runtime.UNDEFINED : (cast __typedStruct0 : { var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; }).tangentSmoothingSources; });
     smoothingSources = ((cast ((cast ((cast !_Runtime.strictEquals(recordedSmoothingSources, null) : Bool) && (cast !_Runtime.strictEquals(recordedSmoothingSources, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(recordedSmoothingSources, 'length'), vertexCount) : Bool)) : Bool) ? (cast recordedSmoothingSources : Dynamic) : (cast null : Dynamic));
     accum = new flighthq._internal._Float64Array((vertexCount * 3.0));
     {
@@ -617,9 +617,9 @@ class MeshGeometryCompute {
     if ((cast _Runtime.strictEquals(out, geometry) : Bool)) { return; }
     sourceRuntime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     targetRuntime = (cast _Runtime.getIndex(out, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    sources = ({ final __structural30 = sourceRuntime; __structural30 == null ? _Runtime.UNDEFINED : (cast __structural30 : { var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; }).tangentSmoothingSources; });
+    sources = ({ final __typedStruct30 = sourceRuntime; __typedStruct30 == null ? _Runtime.UNDEFINED : (cast __typedStruct30 : { var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; }).tangentSmoothingSources; });
     if ((cast !_Runtime.strictEquals(targetRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      ((cast targetRuntime : MeshGeometryRuntime).tangentSmoothingSources = ((cast ((cast ((cast !_Runtime.strictEquals(sources, null) : Bool) && (cast !_Runtime.strictEquals(sources, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(sources, 'length'), vertexCount) : Bool)) : Bool) ? (cast _Runtime.slice(sources, 0, null) : Dynamic) : (cast null : Dynamic)));
+      ((cast targetRuntime : { var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; }).tangentSmoothingSources = cast (((cast ((cast ((cast !_Runtime.strictEquals(sources, null) : Bool) && (cast !_Runtime.strictEquals(sources, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(sources, 'length'), vertexCount) : Bool)) : Bool) ? (cast _Runtime.slice(sources, 0, null) : Dynamic) : (cast null : Dynamic)) : Null<flighthq._internal._UInt32Array>));
     }
   }
 
@@ -631,7 +631,7 @@ class MeshGeometryCompute {
     sourceRuntime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     targetRuntime = (cast _Runtime.getIndex(out, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     if ((cast _Runtime.strictEquals(targetRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    previous = ({ final __structural31 = sourceRuntime; __structural31 == null ? _Runtime.UNDEFINED : (cast __structural31 : { var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; }).tangentSmoothingSources; });
+    previous = ({ final __typedStruct31 = sourceRuntime; __typedStruct31 == null ? _Runtime.UNDEFINED : (cast __typedStruct31 : { var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; }).tangentSmoothingSources; });
     sources = new flighthq._internal._UInt32Array(outputVertexCount);
     {
       var vertex:Float = 0.0;
@@ -648,10 +648,10 @@ class MeshGeometryCompute {
         cluster++;
       }
     }
-    ((cast targetRuntime : MeshGeometryRuntime).tangentSmoothingSources = sources);
-    ((cast targetRuntime : MeshGeometryRuntime).skinBindPose = null);
-    ((cast targetRuntime : MeshGeometryRuntime).morphBindPose = null);
-    ((cast targetRuntime : MeshGeometryRuntime).morphBlendedWeights = null);
+    ((cast targetRuntime : { var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; }).tangentSmoothingSources = cast (sources : Null<flighthq._internal._UInt32Array>));
+    ((cast targetRuntime : { var skinBindPose:Null<MeshSkinBindPose>; }).skinBindPose = cast (null : Null<MeshSkinBindPose>));
+    ((cast targetRuntime : { var morphBindPose:Null<MeshMorphBindPose>; }).morphBindPose = cast (null : Null<MeshMorphBindPose>));
+    ((cast targetRuntime : { var morphBlendedWeights:Null<flighthq._internal._Float32Array>; }).morphBlendedWeights = cast (null : Null<flighthq._internal._Float32Array>));
   }
 
   @:noCompletion
@@ -660,7 +660,7 @@ class MeshGeometryCompute {
     var bounds:Null<Aabb> = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     bounds = geometry.bounds;
-    if ((cast ((cast ((cast _Runtime.strictEquals(bounds, null) : Bool) || (cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast runtime : MeshGeometryRuntime).boundsVersion, geometry.version) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast _Runtime.strictEquals(bounds, null) : Bool) || (cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var boundsVersion:Float; }).boundsVersion, geometry.version) : Bool)) : Bool)) {
       refreshMeshGeometryBounds(({ final __callArgument32:Dynamic = geometry; __callArgument32; }));
       (bounds = cast (geometry.bounds : Dynamic));
     }
@@ -678,7 +678,7 @@ class MeshGeometryCompute {
     }
     computeMeshGeometryBounds(({ final __callArgument33:Dynamic = bounds; __callArgument33; }), ({ final __callArgument34:Dynamic = geometry; __callArgument34; }));
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    if ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast runtime : MeshGeometryRuntime).boundsVersion = geometry.version); }
+    if ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast runtime : { var boundsVersion:Float; }).boundsVersion = cast (geometry.version : Float)); }
   }
 
   public static final NORMAL_OFFSET__meshGeometryCompute:Float = 3.0;

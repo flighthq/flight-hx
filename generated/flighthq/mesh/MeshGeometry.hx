@@ -58,9 +58,9 @@ class MeshGeometry {
     }
     clone = (cast MeshGeometry.createMeshGeometryRuntime__meshGeometry((cast { bounds: bounds, indices: indices, layout: source.layout, subsets: subsets, topology: source.topology, version: 0.0, vertices: vertices } : flighthq._internal._Any)) : flighthq.types.MeshGeometry);
     sourceRuntime = (cast _Runtime.getIndex(source, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    smoothingSources = ({ final __structural8 = sourceRuntime; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; }).tangentSmoothingSources; });
+    smoothingSources = ({ final __typedStruct8 = sourceRuntime; __typedStruct8 == null ? _Runtime.UNDEFINED : (cast __typedStruct8 : { var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; }).tangentSmoothingSources; });
     if ((cast ((cast !_Runtime.strictEquals(smoothingSources, null) : Bool) && (cast !_Runtime.strictEquals(smoothingSources, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      ((cast (cast _Runtime.getIndex(clone, EntityRuntimeKey) : MeshGeometryRuntime) : MeshGeometryRuntime).tangentSmoothingSources = _Runtime.slice(smoothingSources, 0, null));
+      ((cast (cast _Runtime.getIndex(clone, EntityRuntimeKey) : MeshGeometryRuntime) : { var tangentSmoothingSources:Null<flighthq._internal._UInt32Array>; }).tangentSmoothingSources = cast (_Runtime.slice(smoothingSources, 0, null) : Null<flighthq._internal._UInt32Array>));
     }
     return cast clone;
     return cast null;
@@ -89,13 +89,13 @@ class MeshGeometry {
   public static function destroyMeshGeometryGlData(geometry:flighthq.types.MeshGeometry):Void {
     var runtime:Null<MeshGeometryRuntime> = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    if (_Runtime.truthy(runtime)) { ((cast runtime : MeshGeometryRuntime).webglData = null); }
+    if (_Runtime.truthy(runtime)) { ((cast runtime : { var webglData:Null<MeshGeometryGlData>; }).webglData = cast (null : Null<MeshGeometryGlData>)); }
   }
 
   public static function destroyMeshGeometryWgpuData(geometry:flighthq.types.MeshGeometry):Void {
     var runtime:Null<MeshGeometryRuntime> = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    if (_Runtime.truthy(runtime)) { ((cast runtime : MeshGeometryRuntime).webgpuData = null); }
+    if (_Runtime.truthy(runtime)) { ((cast runtime : { var webgpuData:Null<MeshGeometryWgpuData>; }).webgpuData = cast (null : Null<MeshGeometryWgpuData>)); }
   }
 
   public static function getMeshGeometryIndexCount(geometry:flighthq.types.MeshGeometry):Float {
@@ -106,14 +106,14 @@ class MeshGeometry {
   public static function getMeshGeometryMorphBindPose(geometry:flighthq.types.MeshGeometry):Null<MeshMorphBindPose> {
     var runtime:Null<MeshGeometryRuntime> = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    return cast _Runtime.select(runtime, function():Dynamic return cast (cast runtime : MeshGeometryRuntime).morphBindPose, function():Dynamic return cast null);
+    return cast _Runtime.select(runtime, function():Dynamic return cast (cast runtime : { var morphBindPose:Null<MeshMorphBindPose>; }).morphBindPose, function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getMeshGeometrySkinBindPose(geometry:flighthq.types.MeshGeometry):Null<MeshSkinBindPose> {
     var runtime:Null<MeshGeometryRuntime> = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    return cast _Runtime.select(runtime, function():Dynamic return cast (cast runtime : MeshGeometryRuntime).skinBindPose, function():Dynamic return cast null);
+    return cast _Runtime.select(runtime, function():Dynamic return cast (cast runtime : { var skinBindPose:Null<MeshSkinBindPose>; }).skinBindPose, function():Dynamic return cast null);
     return cast null;
   }
 
@@ -143,13 +143,13 @@ class MeshGeometry {
   public static function setMeshGeometryMorphBindPose(geometry:flighthq.types.MeshGeometry, bindPose:Null<MeshMorphBindPose>):Void {
     var runtime:Null<MeshGeometryRuntime> = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    if (_Runtime.truthy(runtime)) { ((cast runtime : MeshGeometryRuntime).morphBindPose = bindPose); }
+    if (_Runtime.truthy(runtime)) { ((cast runtime : { var morphBindPose:Null<MeshMorphBindPose>; }).morphBindPose = cast (bindPose : Null<MeshMorphBindPose>)); }
   }
 
   public static function setMeshGeometrySkinBindPose(geometry:flighthq.types.MeshGeometry, bindPose:Null<MeshSkinBindPose>):Void {
     var runtime:Null<MeshGeometryRuntime> = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    if (_Runtime.truthy(runtime)) { ((cast runtime : MeshGeometryRuntime).skinBindPose = bindPose); }
+    if (_Runtime.truthy(runtime)) { ((cast runtime : { var skinBindPose:Null<MeshSkinBindPose>; }).skinBindPose = cast (bindPose : Null<MeshSkinBindPose>)); }
   }
 
   public static function createMeshGeometryRuntime__meshGeometry(fields:flighthq._internal._Omit<flighthq.types.MeshGeometry, Dynamic>):flighthq.types.MeshGeometry {

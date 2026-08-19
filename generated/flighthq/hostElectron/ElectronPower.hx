@@ -17,8 +17,8 @@ class ElectronPower {
     var powerMonitor:ElectronPowerMonitor = cast _Runtime.UNDEFINED;
     var powerSaveBlocker:ElectronPowerSaveBlocker = cast _Runtime.UNDEFINED;
     var blockerId:Float = cast _Runtime.UNDEFINED;
-    powerMonitor = (cast electron : ElectronApi).powerMonitor;
-    powerSaveBlocker = (cast electron : ElectronApi).powerSaveBlocker;
+    powerMonitor = electron.powerMonitor;
+    powerSaveBlocker = electron.powerSaveBlocker;
     blockerId = -1.0;
     return cast { getStatus: function(out:PowerStatus):PowerStatus {
       var onBattery:Bool = cast _Runtime.UNDEFINED;

@@ -70881,9 +70881,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 28,
+        "directAccesses": 28,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -71025,7 +71025,7 @@
       },
       "name": "ElectronApi",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Electron API",
       "reasons": [],
       "source": "upstream/packages/types/src/ElectronApi.ts",
       "sourceProvenance": {
@@ -126363,9 +126363,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 28,
+        "directAccesses": 28,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -126691,7 +126691,7 @@
       },
       "name": "GlLitProgram",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WebGL lit program",
       "reasons": [],
       "source": "upstream/packages/types/src/GlLitProgram.ts",
       "sourceProvenance": {
@@ -166158,9 +166158,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 28,
+        "directAccesses": 28,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -166238,7 +166238,7 @@
       },
       "name": "LayoutState",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free layout state",
       "reasons": [],
       "source": "upstream/packages/types/src/Layout.ts",
       "sourceProvenance": {
@@ -190613,9 +190613,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 28,
+        "directAccesses": 28,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -190693,7 +190693,7 @@
       },
       "name": "MeshGeometryRuntime",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free mesh geometry runtime",
       "reasons": [],
       "source": "upstream/packages/types/src/MeshGeometry.ts",
       "sourceProvenance": {
@@ -250320,9 +250320,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 28,
+        "directAccesses": 28,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -250494,7 +250494,7 @@
       },
       "name": "QuadBatch",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free quad batch",
       "reasons": [],
       "source": "upstream/packages/types/src/QuadBatch.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1451,
+      "newAuditOnly": 1446,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1451,
+    "auditOnlySchemas": 1446,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 21987,
-    "directSchemas": 553,
+    "directAccesses": 22127,
+    "directSchemas": 558,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 8679,
+    "pendingAccesses": 8539,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

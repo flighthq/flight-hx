@@ -52,7 +52,7 @@ class WgpuMeshUpload {
     (upload = cast ({ indexBuffer: indexBuffer, indexCount: (cast indices : { var length:Float; }).length, indexFormat: ((cast _Runtime.strictEquals((cast indices : { var BYTES_PER_ELEMENT:Float; }).BYTES_PER_ELEMENT, 4.0) : Bool) ? (cast 'uint32' : Dynamic) : (cast 'uint16' : Dynamic)), skinBindUploaded: hasSkinBindPose, version: geometry.version, vertexBuffer: vertexBuffer } : Dynamic));
     ((cast cache : flighthq._internal._WeakMap<flighthq._internal._Object, flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload>).set(geometry, (cast upload)));
     if ((cast !_Runtime.strictEquals(meshRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      ((cast meshRuntime : MeshGeometryRuntime).webgpuData = (cast (cast upload : flighthq._internal._Any) : flighthq._internal._IndexedAccess<MeshGeometryRuntime, String>));
+      ((cast meshRuntime : { var webgpuData:Null<MeshGeometryWgpuData>; }).webgpuData = cast ((cast (cast upload : flighthq._internal._Any) : flighthq._internal._IndexedAccess<MeshGeometryRuntime, String>) : Null<MeshGeometryWgpuData>));
     }
     return cast upload;
     return cast null;

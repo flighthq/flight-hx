@@ -125,7 +125,7 @@ class WgpuSkinPalette {
     var runtime:Null<MeshGeometryRuntime> = cast _Runtime.UNDEFINED;
     var bindPose:Null<MeshSkinBindPose> = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    bindPose = ((cast _Runtime.looseEquals(({ final __structural11 = runtime; __structural11 == null ? _Runtime.UNDEFINED : (cast __structural11 : { var morphBindPose:Null<MeshMorphBindPose>; }).morphBindPose; }), null) : Bool) ? (cast ({ final __structural12 = runtime; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { var skinBindPose:Null<MeshSkinBindPose>; }).skinBindPose; }) : Dynamic) : (cast null : Dynamic));
+    bindPose = ((cast _Runtime.looseEquals(({ final __typedStruct11 = runtime; __typedStruct11 == null ? _Runtime.UNDEFINED : (cast __typedStruct11 : { var morphBindPose:Null<MeshMorphBindPose>; }).morphBindPose; }), null) : Bool) ? (cast ({ final __typedStruct12 = runtime; __typedStruct12 == null ? _Runtime.UNDEFINED : (cast __typedStruct12 : { var skinBindPose:Null<MeshSkinBindPose>; }).skinBindPose; }) : Dynamic) : (cast null : Dynamic));
     if ((cast _Runtime.looseEquals(bindPose, null) : Bool)) { return cast null; }
     return cast (cast WgpuSkinPalette.buildSkinBindVertices__wgpuSkinPalette(({ final __callArgument13:Dynamic = geometry; __callArgument13; }), ({ final __callArgument14:Dynamic = bindPose; __callArgument14; })) : flighthq._internal._Float32Array);
     return cast null;
@@ -134,7 +134,7 @@ class WgpuSkinPalette {
   public static function hasBindPose__wgpuSkinPalette(geometry:MeshGeometry):Bool {
     var runtime:Null<MeshGeometryRuntime> = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    return cast ((cast _Runtime.looseEquals(({ final __structural15 = runtime; __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { var morphBindPose:Null<MeshMorphBindPose>; }).morphBindPose; }), null) : Bool) && (cast !_Runtime.looseEquals(({ final __structural16 = runtime; __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : { var skinBindPose:Null<MeshSkinBindPose>; }).skinBindPose; }), null) : Bool));
+    return cast ((cast _Runtime.looseEquals(({ final __typedStruct15 = runtime; __typedStruct15 == null ? _Runtime.UNDEFINED : (cast __typedStruct15 : { var morphBindPose:Null<MeshMorphBindPose>; }).morphBindPose; }), null) : Bool) && (cast !_Runtime.looseEquals(({ final __typedStruct16 = runtime; __typedStruct16 == null ? _Runtime.UNDEFINED : (cast __typedStruct16 : { var skinBindPose:Null<MeshSkinBindPose>; }).skinBindPose; }), null) : Bool));
     return cast null;
   }
 

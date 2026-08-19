@@ -79,7 +79,7 @@ class WgpuQuadBatch {
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
     if ((cast _Runtime.strictEquals(runtime.renderPass, null) : Bool)) { return; }
     source = (cast (cast quadBatch : RenderProxy2D).source : QuadBatch);
-    data = (cast source : QuadBatch).data;
+    data = source.data;
     __destructure0 = data;
     atlas = __destructure0.atlas;
     instanceCount = __destructure0.instanceCount;

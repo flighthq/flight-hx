@@ -161,7 +161,7 @@ class GlVelocity {
     var spatial:Spatial2DNode<Dynamic> = cast _Runtime.UNDEFINED;
     var bounds:Rectangle = cast _Runtime.UNDEFINED;
     batch = (cast (cast node : flighthq._internal._Any) : QuadBatch);
-    data = (cast batch : QuadBatch).data;
+    data = batch.data;
     runtime = (cast _Runtime.getIndex((cast node : { @:optional var __EntityRuntimeKey:flighthq._internal._Any; }), EntityRuntimeKey) : QuadBatchRuntime);
     instanceVelocities = (cast runtime : QuadBatchRuntime).instanceVelocities;
     __destructure1 = data;

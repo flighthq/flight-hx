@@ -21,7 +21,7 @@ import flighthq.types.Menu.MenuItemTemplate;
 class ElectronApp {
   public static function createElectronAppBackend(electron:ElectronApi):AppBackend {
     var app:flighthq.types.ElectronApi.ElectronApp = cast _Runtime.UNDEFINED;
-    app = (cast electron : ElectronApi).app;
+    app = electron.app;
     return cast { addRecentDocument: function(path:String):Void {
       (cast app : flighthq.types.ElectronApi.ElectronApp).addRecentDocument((cast path : String));
     }, bounceDock: function():Float {
@@ -100,7 +100,7 @@ class ElectronApp {
       ({ final __optionalOwner8 = (cast app : flighthq.types.ElectronApi.ElectronApp).dock; if (__optionalOwner8 != null) { final __optionalCall7 = (cast __optionalOwner8 : { var setBadge:String->Void; }).setBadge; if (__optionalCall7 != null) __optionalCall7(text); } });
     }, setDockMenu: function(items:Array<MenuItemTemplate>):Void {
       if ((cast !_Runtime.truthy((cast app : flighthq.types.ElectronApi.ElectronApp).dock) : Bool)) { return; }
-      (cast (cast app : flighthq.types.ElectronApi.ElectronApp).dock : ElectronDock).setMenu((cast (cast electron : ElectronApi).Menu : ElectronMenuConstructor).buildFromTemplate((cast _Runtime.mapArray((cast items : Array<MenuItemTemplate>), ElectronApp.toMenuItemOptions__electronApp, _Runtime.UNDEFINED))));
+      (cast (cast app : flighthq.types.ElectronApi.ElectronApp).dock : ElectronDock).setMenu((cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast _Runtime.mapArray((cast items : Array<MenuItemTemplate>), ElectronApp.toMenuItemOptions__electronApp, _Runtime.UNDEFINED))));
     }, setLoginItem: function(settings:AppLoginItemLike):Bool {
       (cast app : flighthq.types.ElectronApi.ElectronApp).setLoginItemSettings(({ final __callArgument9:Dynamic = { openAtLogin: settings.openAtLogin, openAsHidden: settings.openAsHidden, path: settings.path, args: _Runtime.select(settings.args, function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(settings.args)]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }; __callArgument9; }));
       return cast true;

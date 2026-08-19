@@ -15,7 +15,7 @@ import flighthq.types.ElectronApi.ElectronNativeImageModule;
 class ElectronClipboard {
   public static function createElectronClipboardBackend(electron:ElectronApi):ClipboardBackend {
     var cb:flighthq.types.ElectronApi.ElectronClipboard = cast _Runtime.UNDEFINED;
-    cb = (cast electron : ElectronApi).clipboard;
+    cb = electron.clipboard;
     return cast { readText: function():flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
@@ -76,7 +76,7 @@ class ElectronClipboard {
     }, writeImage: function(dataUrl:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeImage((cast (cast electron : ElectronApi).nativeImage : ElectronNativeImageModule).createFromDataUrl((cast dataUrl : String)));
+          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeImage((cast electron.nativeImage : ElectronNativeImageModule).createFromDataUrl((cast dataUrl : String)));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;

@@ -11,7 +11,7 @@ class ElectronProtocol {
   public static function createElectronProtocolBackend(electron:ElectronApi):ProtocolBackend {
     var app:ElectronApp = cast _Runtime.UNDEFINED;
     var registered:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;
-    app = (cast electron : ElectronApi).app;
+    app = electron.app;
     registered = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     return cast { register: function(scheme:String):Bool {
       var ok:Bool = cast _Runtime.UNDEFINED;

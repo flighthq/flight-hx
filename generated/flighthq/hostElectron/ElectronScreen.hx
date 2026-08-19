@@ -14,7 +14,7 @@ import flighthq.types.ScreenChangeEvent.ScreenChangeKind;
 class ElectronScreen {
   public static function createElectronScreenBackend(electron:ElectronApi):ScreenBackend {
     var screen:flighthq.types.ElectronApi.ElectronScreen = cast _Runtime.UNDEFINED;
-    screen = (cast electron : ElectronApi).screen;
+    screen = electron.screen;
     return cast { getScreens: function(out:Array<ScreenInfo>):Array<ScreenInfo> {
       var displays:Array<ElectronDisplay> = cast _Runtime.UNDEFINED;
       var primaryId:Float = cast _Runtime.UNDEFINED;

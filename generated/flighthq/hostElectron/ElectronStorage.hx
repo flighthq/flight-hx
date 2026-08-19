@@ -17,7 +17,7 @@ class ElectronStorage {
     load = (cast function load():flighthq._internal._Record<String, String> {
       if ((cast !_Runtime.strictEquals(store, null) : Bool)) { return cast store; }
       try {
-        var dir:String = (cast (cast electron : ElectronApi).app : ElectronApp).getPath((cast 'userData' : String));
+        var dir:String = (cast electron.app : ElectronApp).getPath((cast 'userData' : String));
         var path:String = '' + Std.string(dir) + '/' + Std.string(fileName) + '';
         if ((cast (cast fs : ElectronFs).existsSync((cast path : String)) : Bool)) {
           var raw:String = (cast fs : ElectronFs).readFileSync((cast path : String), (cast 'utf-8' : String));
@@ -35,7 +35,7 @@ class ElectronStorage {
     });
     save = (cast function save():Bool {
       try {
-        var dir:String = (cast (cast electron : ElectronApi).app : ElectronApp).getPath((cast 'userData' : String));
+        var dir:String = (cast electron.app : ElectronApp).getPath((cast 'userData' : String));
         var path:String = '' + Std.string(dir) + '/' + Std.string(fileName) + '';
         (cast fs : ElectronFs).writeFileSync((cast path : String), (cast _Runtime.jsonStringify((cast load() : flighthq._internal._Record<String, String>)) : String));
         return cast true;
@@ -44,7 +44,7 @@ class ElectronStorage {
       }
       return cast _Runtime.UNDEFINED;
     });
-    fs = (cast electron : ElectronApi).fs;
+    fs = electron.fs;
     store = null;
     return cast { clear: function():Bool {
       (store = cast ({  } : Dynamic));

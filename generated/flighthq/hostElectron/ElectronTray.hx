@@ -43,7 +43,7 @@ class ElectronTray {
       var tray:flighthq.types.ElectronApi.ElectronTray = cast _Runtime.UNDEFINED;
       var record:TrayRecord__electronTray = cast _Runtime.UNDEFINED;
       id = nextId++;
-      tray = _Runtime.construct((cast electron : ElectronApi).Tray, [_Runtime.coalesce(options.icon, function():Dynamic return cast '')]);
+      tray = _Runtime.construct(electron.Tray, [_Runtime.coalesce(options.icon, function():Dynamic return cast '')]);
       record = (cast { tray: tray, title: '', tooltip: '', menu: null });
       if ((cast !_Runtime.strictEquals(options.tooltip, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         (cast tray : flighthq.types.ElectronApi.ElectronTray).setToolTip((cast options.tooltip : String));
@@ -101,7 +101,7 @@ class ElectronTray {
       var menu:ElectronMenu = cast _Runtime.UNDEFINED;
       record = ((cast trays : flighthq._internal._Map<Float, TrayRecord__electronTray>).get(id));
       if ((cast !_Runtime.truthy(record) : Bool)) { return; }
-      menu = (cast (cast electron : ElectronApi).Menu : ElectronMenuConstructor).buildFromTemplate((cast ElectronTray.toElectronTemplate__electronTray(({ final __callArgument19:Dynamic = items; __callArgument19; })) : Array<ElectronMenuItemOptions>));
+      menu = (cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast ElectronTray.toElectronTemplate__electronTray(({ final __callArgument19:Dynamic = items; __callArgument19; })) : Array<ElectronMenuItemOptions>));
       ((cast record : TrayRecord__electronTray).menu = menu);
       (cast (cast record : TrayRecord__electronTray).tray : flighthq.types.ElectronApi.ElectronTray).setContextMenu(({ final __callArgument20:Dynamic = menu; __callArgument20; }));
     }, setIcon: function(id:Float, icon:String):Void {

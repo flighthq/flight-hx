@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_451,
+      newAuditOnly: 1_446,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(555);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(560);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_451);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_446);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(153);
+    expect(newDirect).toHaveLength(158);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -875,6 +875,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'TextureSource',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free texture source',
+        }),
+        expect.objectContaining({
+          name: 'ElectronApi',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Electron API',
+        }),
+        expect.objectContaining({
+          name: 'GlLitProgram',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL lit program',
+        }),
+        expect.objectContaining({
+          name: 'LayoutState',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free layout state',
+        }),
+        expect.objectContaining({
+          name: 'MeshGeometryRuntime',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free mesh geometry runtime',
+        }),
+        expect.objectContaining({
+          name: 'QuadBatch',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free quad batch',
         }),
       ]),
     );
@@ -1644,6 +1669,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#TextureSource',
         purpose: 'reviewed escape-free texture source',
       },
+      {
+        declarationFingerprint: 'sha256:f54a1342b6e20a6877114b8a64de522c5dd432abe1db067f1d64cf56da7987a5',
+        id: '@flighthq/types:interface#ElectronApi',
+        purpose: 'reviewed escape-free Electron API',
+      },
+      {
+        declarationFingerprint: 'sha256:6f76f76885ae46aa509bb7badc6b7ce66f4ef96ca95fa1871bc7f24685c71df1',
+        id: '@flighthq/types:interface#GlLitProgram',
+        purpose: 'reviewed escape-free WebGL lit program',
+      },
+      {
+        declarationFingerprint: 'sha256:7990b91753d362be27f86906395a45a7c19aae3b4001e7681dc88f6e8ca61d39',
+        id: '@flighthq/types:interface#LayoutState',
+        purpose: 'reviewed escape-free layout state',
+      },
+      {
+        declarationFingerprint: 'sha256:09771ab81a3d8b9386f482e7a9b0d8e8bb9af7a1576510bd07568070f8cde3bd',
+        id: '@flighthq/types:interface#MeshGeometryRuntime',
+        purpose: 'reviewed escape-free mesh geometry runtime',
+      },
+      {
+        declarationFingerprint: 'sha256:899537b7d2a81e3752bb2c1fc97d945d22692f778fc4c242542ee226df28fef4',
+        id: '@flighthq/types:interface#QuadBatch',
+        purpose: 'reviewed escape-free quad batch',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -2304,6 +2354,13 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const fourthHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['ElectronApi', 'GlLitProgram', 'LayoutState', 'MeshGeometryRuntime', 'QuadBatch'].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -2344,22 +2401,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_451,
+      auditOnlySchemas: 1_446,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 21_987,
-      directSchemas: 553,
+      directAccesses: 22_127,
+      directSchemas: 558,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 8_679,
+      pendingAccesses: 8_539,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_451,
+      newAuditOnly: 1_446,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -2426,7 +2483,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(21_987);
+    expect(report.summary.directAccesses).toBe(22_127);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -2821,6 +2878,43 @@ describe('typed struct analysis', () => {
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, declarationFingerprint, purpose] of [
+      [
+        'ElectronApi',
+        'sha256:f54a1342b6e20a6877114b8a64de522c5dd432abe1db067f1d64cf56da7987a5',
+        'reviewed escape-free Electron API',
+      ],
+      [
+        'GlLitProgram',
+        'sha256:6f76f76885ae46aa509bb7badc6b7ce66f4ef96ca95fa1871bc7f24685c71df1',
+        'reviewed escape-free WebGL lit program',
+      ],
+      [
+        'LayoutState',
+        'sha256:7990b91753d362be27f86906395a45a7c19aae3b4001e7681dc88f6e8ca61d39',
+        'reviewed escape-free layout state',
+      ],
+      [
+        'MeshGeometryRuntime',
+        'sha256:09771ab81a3d8b9386f482e7a9b0d8e8bb9af7a1576510bd07568070f8cde3bd',
+        'reviewed escape-free mesh geometry runtime',
+      ],
+      [
+        'QuadBatch',
+        'sha256:899537b7d2a81e3752bb2c1fc97d945d22692f778fc4c242542ee226df28fef4',
+        'reviewed escape-free quad batch',
+      ],
+    ] as const) {
+      expect(fourthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses: 28, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
         escapes: [],
         migration: { baselineId: null, status: 'new' },
         purpose,
@@ -4525,6 +4619,24 @@ describe('typed struct analysis', () => {
         expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
       }
     }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#ElectronApi', true, [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#GlLitProgram', false, ['cross-schema-transfer'], null],
+      ['@flighthq/types:interface#LayoutState', true, [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#MeshGeometryRuntime', false, ['cross-schema-transfer'], null],
+      ['@flighthq/types:interface#QuadBatch', false, ['cross-schema-transfer', 'dynamic-ingress'], null],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons: [],
+      });
+      if (nominalIdentity === null) {
+        expect(provenanceById.has(frontierId)).toBe(false);
+      } else {
+        expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+      }
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -5039,6 +5151,55 @@ describe('typed struct analysis', () => {
     expect(readFileSync('generated/flighthq/scene3d/SceneKindUsage.hx', 'utf8')).not.toMatch(
       /_Runtime\.field\(usage,/u,
     );
+    for (const path of [
+      'generated/flighthq/hostElectron/ElectronApp.hx',
+      'generated/flighthq/hostElectron/ElectronClipboard.hx',
+      'generated/flighthq/hostElectron/ElectronDialog.hx',
+      'generated/flighthq/hostElectron/ElectronIpc.hx',
+      'generated/flighthq/hostElectron/ElectronMenu.hx',
+      'generated/flighthq/hostElectron/ElectronNotification.hx',
+      'generated/flighthq/hostElectron/ElectronPlatform.hx',
+      'generated/flighthq/hostElectron/ElectronPower.hx',
+      'generated/flighthq/hostElectron/ElectronProtocol.hx',
+      'generated/flighthq/hostElectron/ElectronScreen.hx',
+      'generated/flighthq/hostElectron/ElectronShell.hx',
+      'generated/flighthq/hostElectron/ElectronShortcut.hx',
+      'generated/flighthq/hostElectron/ElectronStorage.hx',
+      'generated/flighthq/hostElectron/ElectronTray.hx',
+      'generated/flighthq/hostElectron/ElectronUpdater.hx',
+      'generated/flighthq/hostElectron/ElectronWindow.hx',
+      'generated/flighthq/layout/EnableLayoutGuards.hx',
+      'generated/flighthq/layout/LayoutState.hx',
+      'generated/flighthq/layout/ResolveLayoutTree.hx',
+      'generated/flighthq/mesh/MeshGeometry.hx',
+      'generated/flighthq/mesh/MeshGeometryCompute.hx',
+      'generated/flighthq/mesh/MeshGeometryLayout.hx',
+      'generated/flighthq/mesh/UpdateMeshMorph.hx',
+      'generated/flighthq/quadbatch/QuadBatch.hx',
+      'generated/flighthq/scene2dCanvas/CanvasQuadBatch.hx',
+      'generated/flighthq/scene2dGl/GlQuadBatch.hx',
+      'generated/flighthq/scene2dGl/GlVelocity.hx',
+      'generated/flighthq/scene2dWgpu/WgpuQuadBatch.hx',
+      'generated/flighthq/scene2dWgpu/WgpuVelocity.hx',
+      'generated/flighthq/scene3dGl/GlLitProgram.hx',
+      'generated/flighthq/scene3dWgpu/WgpuMeshUpload.hx',
+      'generated/flighthq/scene3dWgpu/WgpuSkinPalette.hx',
+    ]) {
+      const generatedFourthFrontier = readFileSync(path, 'utf8');
+      expect(generatedFourthFrontier).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:ElectronApi|GlLitProgram|LayoutState|MeshGeometryRuntime|QuadBatch)\)\./u,
+      );
+    }
+    expect(readFileSync('generated/flighthq/hostElectron/ElectronApp.hx', 'utf8')).not.toMatch(
+      /_Runtime\.field\(electron,/u,
+    );
+    expect(readFileSync('generated/flighthq/layout/ResolveLayoutTree.hx', 'utf8')).not.toMatch(
+      /_Runtime\.field\(state,/u,
+    );
+    expect(readFileSync('generated/flighthq/scene3dGl/GlLitProgram.hx', 'utf8')).not.toMatch(
+      /_Runtime\.field\(program,/u,
+    );
+    expect(readFileSync('generated/flighthq/quadbatch/QuadBatch.hx', 'utf8')).not.toMatch(/_Runtime\.field\(batch,/u);
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
     expect(generatedCanvasRenderState).not.toMatch(
       /\(cast (?:runtime|sourceRuntime|targetRuntime) : CanvasRenderStateRuntime\)\./u,

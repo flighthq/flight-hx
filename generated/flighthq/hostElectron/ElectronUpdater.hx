@@ -15,7 +15,7 @@ class ElectronUpdater {
     var autoUpdater:ElectronAutoUpdater = cast _Runtime.UNDEFINED;
     var channel:String = cast _Runtime.UNDEFINED;
     var config:UpdaterConfig = cast _Runtime.UNDEFINED;
-    autoUpdater = (cast electron : ElectronApi).autoUpdater;
+    autoUpdater = electron.autoUpdater;
     channel = '';
     config = (cast { allowPrerelease: false, autoDownload: true, autoInstallOnAppQuit: true });
     return cast { setFeedUrl: function(url:String):Void {
