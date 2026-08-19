@@ -568,6 +568,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#WgpuRenderEffectPipeline',
     purpose: 'reviewed escape-free WebGPU render-effect pipeline',
   },
+  {
+    declarationFingerprint: 'sha256:6e37b62b50d5b48500aae731c8675045a8e2096273488315f353d68df10c6e8c',
+    id: '@flighthq/types:interface#VertexDisplaceModifier',
+    purpose: 'reviewed escape-free vertex-displacement modifier',
+  },
+  {
+    declarationFingerprint: 'sha256:ffe9e013055090ced18c33db3dc23624189ee7c37ad89167e5ab4878f51bab9c',
+    id: '@flighthq/types:interface#AnimatedNormalModifier',
+    purpose: 'reviewed escape-free animated-normal modifier',
+  },
+  {
+    declarationFingerprint: 'sha256:1a8dbcef5fd253b0791b984f6f9941f1d377d618e6cffc3d199824faebde91f9',
+    id: '@flighthq/types:interface#EmissiveModifier',
+    purpose: 'reviewed escape-free emissive modifier',
+  },
+  {
+    declarationFingerprint: 'sha256:0ddef0017cb9786dae56bccef54787182c9ff0a31489f925f8ac31bcf61731a4',
+    id: '@flighthq/types:interface#FogModifier',
+    purpose: 'reviewed escape-free fog modifier',
+  },
+  {
+    declarationFingerprint: 'sha256:b4447f68b4d80c5a7fc46ba4dfaedef76ea959785551545cb6cb49842f894138',
+    id: '@flighthq/types:interface#DissolveModifier',
+    purpose: 'reviewed escape-free dissolve modifier',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

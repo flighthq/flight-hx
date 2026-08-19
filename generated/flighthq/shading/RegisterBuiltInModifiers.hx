@@ -49,8 +49,8 @@ class RegisterBuiltInModifiers {
   public static final animatedNormalModifierDefinition:ModifierDefinition = (cast { kind: AnimatedNormalModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Normal, getDefineSignature: function(modifier:Modifier):String {
     var animated:AnimatedNormalModifier = cast _Runtime.UNDEFINED;
     animated = (cast modifier : AnimatedNormalModifier);
-    if ((cast _Runtime.strictEquals(_Runtime.field(animated, 'map'), null) : Bool)) { return cast '0'; }
-    return cast ((cast !_Runtime.strictEquals(_Runtime.field(animated, 'secondaryMap'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '2' : Dynamic) : (cast '1' : Dynamic));
+    if ((cast _Runtime.strictEquals(animated.map, null) : Bool)) { return cast '0'; }
+    return cast ((cast !_Runtime.strictEquals(animated.secondaryMap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '2' : Dynamic) : (cast '1' : Dynamic));
     return cast _Runtime.UNDEFINED;
   } });
 
@@ -64,8 +64,8 @@ class RegisterBuiltInModifiers {
     var signature:String = cast _Runtime.UNDEFINED;
     emissive = (cast modifier : EmissiveModifier);
     signature = '';
-    if ((cast !_Runtime.strictEquals(_Runtime.field(emissive, 'mask'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (signature = cast ((signature + 'm') : Dynamic)); }
-    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(emissive, 'facing'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(emissive, 'facing'), (cast EmissiveModifierFacingValue : { var AwayFromLight:String; var Ignore:String; var TowardLight:String; }).Ignore) : Bool)) : Bool)) { (signature = cast ((signature + 'g') : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(emissive.mask, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (signature = cast ((signature + 'm') : Dynamic)); }
+    if ((cast ((cast !_Runtime.strictEquals(emissive.facing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(emissive.facing, (cast EmissiveModifierFacingValue : { var AwayFromLight:String; var Ignore:String; var TowardLight:String; }).Ignore) : Bool)) : Bool)) { (signature = cast ((signature + 'g') : Dynamic)); }
     return cast signature;
     return cast _Runtime.UNDEFINED;
   } });
@@ -75,8 +75,8 @@ class RegisterBuiltInModifiers {
   public static final fogModifierDefinition:ModifierDefinition = (cast { kind: FogModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect, getDefineSignature: function(modifier:Modifier):String {
     var fog:FogModifier = cast _Runtime.UNDEFINED;
     fog = (cast modifier : FogModifier);
-    if ((cast _Runtime.strictEquals(_Runtime.field(fog, 'mode'), (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Exponential) : Bool)) { return cast 'e'; }
-    if ((cast _Runtime.strictEquals(_Runtime.field(fog, 'mode'), (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Exponential2) : Bool)) { return cast 'x'; }
+    if ((cast _Runtime.strictEquals(fog.mode, (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Exponential) : Bool)) { return cast 'e'; }
+    if ((cast _Runtime.strictEquals(fog.mode, (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Exponential2) : Bool)) { return cast 'x'; }
     return cast 'l';
     return cast _Runtime.UNDEFINED;
   } });
@@ -100,8 +100,8 @@ class RegisterBuiltInModifiers {
     var displace:VertexDisplaceModifier = cast _Runtime.UNDEFINED;
     var signature:String = cast _Runtime.UNDEFINED;
     displace = (cast modifier : VertexDisplaceModifier);
-    signature = ((cast _Runtime.strictEquals(_Runtime.field(displace, 'source'), (cast VertexDisplaceModifierSourceValue : { var HeightMap:String; var Sine:String; }).HeightMap) : Bool) ? (cast 'h' : Dynamic) : (cast 's' : Dynamic));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(displace, 'axis'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (signature = cast ((signature + 'a') : Dynamic)); }
+    signature = ((cast _Runtime.strictEquals(displace.source, (cast VertexDisplaceModifierSourceValue : { var HeightMap:String; var Sine:String; }).HeightMap) : Bool) ? (cast 'h' : Dynamic) : (cast 's' : Dynamic));
+    if ((cast !_Runtime.strictEquals(displace.axis, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (signature = cast ((signature + 'a') : Dynamic)); }
     return cast signature;
     return cast _Runtime.UNDEFINED;
   } });

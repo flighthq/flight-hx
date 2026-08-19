@@ -55,16 +55,16 @@ class GlShadedBuiltInModifiers {
     var suffix:String = cast _Runtime.UNDEFINED;
     var scroll:Vector2Like = cast _Runtime.UNDEFINED;
     animated = (cast modifier : AnimatedNormalModifier);
-    if ((cast _Runtime.strictEquals(_Runtime.field(animated, 'map'), null) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals(animated.map, null) : Bool)) { return; }
     gl = (cast _Runtime.field(context, 'state') : GlRenderState).gl;
     suffix = '_' + Std.string(_Runtime.field(context, 'index')) + '';
-    GlShadedBuiltInModifiers.bindGlModifierTexture__glShadedBuiltInModifiers(({ final __callArgument0:Dynamic = context; __callArgument0; }), _Runtime.field(animated, 'map'), (cast 'u_animNormalMap' + Std.string(suffix) + '' : String));
-    scroll = _Runtime.field(animated, 'scroll');
+    GlShadedBuiltInModifiers.bindGlModifierTexture__glShadedBuiltInModifiers(({ final __callArgument0:Dynamic = context; __callArgument0; }), animated.map, (cast 'u_animNormalMap' + Std.string(suffix) + '' : String));
+    scroll = animated.scroll;
     flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_animNormalScroll' + Std.string(suffix) + ''), scroll.x, scroll.y);
-    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_animNormalStrength' + Std.string(suffix) + ''), _Runtime.coalesce(_Runtime.field(animated, 'strength'), function():Dynamic return cast 1.0));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(animated, 'secondaryMap'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      GlShadedBuiltInModifiers.bindGlModifierTexture__glShadedBuiltInModifiers(({ final __callArgument1:Dynamic = context; __callArgument1; }), _Runtime.field(animated, 'secondaryMap'), (cast 'u_animNormalMap2' + Std.string(suffix) + '' : String));
-      var secondary:Vector2Like = _Runtime.coalesce(_Runtime.field(animated, 'secondaryScroll'), function():Dynamic return cast scroll);
+    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_animNormalStrength' + Std.string(suffix) + ''), _Runtime.coalesce(animated.strength, function():Dynamic return cast 1.0));
+    if ((cast !_Runtime.strictEquals(animated.secondaryMap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      GlShadedBuiltInModifiers.bindGlModifierTexture__glShadedBuiltInModifiers(({ final __callArgument1:Dynamic = context; __callArgument1; }), animated.secondaryMap, (cast 'u_animNormalMap2' + Std.string(suffix) + '' : String));
+      var secondary:Vector2Like = _Runtime.coalesce(animated.secondaryScroll, function():Dynamic return cast scroll);
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_animNormalScroll2' + Std.string(suffix) + ''), secondary.x, secondary.y);
     }
   } }, { contribution: function(modifier:Modifier, index:Float):String {
@@ -72,9 +72,9 @@ class GlShadedBuiltInModifiers {
     var suffix:String = cast _Runtime.UNDEFINED;
     var dual:String = cast _Runtime.UNDEFINED;
     animated = (cast modifier : AnimatedNormalModifier);
-    if ((cast _Runtime.strictEquals(_Runtime.field(animated, 'map'), null) : Bool)) { return cast ''; }
+    if ((cast _Runtime.strictEquals(animated.map, null) : Bool)) { return cast ''; }
     suffix = '_' + Std.string(index) + '';
-    dual = ((cast !_Runtime.strictEquals(_Runtime.field(animated, 'secondaryMap'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '  animNormal += texture(u_animNormalMap2' + Std.string(suffix) + ', v_uv0 + u_animNormalScroll2' + Std.string(suffix) + ' * u_time).xyz * 2.0 - 1.0;\n' : Dynamic) : (cast '' : Dynamic));
+    dual = ((cast !_Runtime.strictEquals(animated.secondaryMap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '  animNormal += texture(u_animNormalMap2' + Std.string(suffix) + ', v_uv0 + u_animNormalScroll2' + Std.string(suffix) + ' * u_time).xyz * 2.0 - 1.0;\n' : Dynamic) : (cast '' : Dynamic));
     return cast ((((('{\n' + '  vec3 animNormal = texture(u_animNormalMap' + Std.string(suffix) + ', v_uv0 + u_animNormalScroll' + Std.string(suffix) + ' * u_time).xyz * 2.0 - 1.0;\n') + dual) + '  animNormal.xy *= u_animNormalStrength' + Std.string(suffix) + ';\n') + '  normal = normalize(tbn * animNormal);\n') + '}');
     return cast _Runtime.UNDEFINED;
   } }, { declarations: function(modifier:Modifier, index:Float):String {
@@ -82,10 +82,10 @@ class GlShadedBuiltInModifiers {
     var suffix:String = cast _Runtime.UNDEFINED;
     var source:String = cast _Runtime.UNDEFINED;
     animated = (cast modifier : AnimatedNormalModifier);
-    if ((cast _Runtime.strictEquals(_Runtime.field(animated, 'map'), null) : Bool)) { return cast ''; }
+    if ((cast _Runtime.strictEquals(animated.map, null) : Bool)) { return cast ''; }
     suffix = '_' + Std.string(index) + '';
     source = (('uniform sampler2D u_animNormalMap' + Std.string(suffix) + ';\n' + 'uniform vec2 u_animNormalScroll' + Std.string(suffix) + ';\n') + 'uniform float u_animNormalStrength' + Std.string(suffix) + ';\n');
-    if ((cast !_Runtime.strictEquals(_Runtime.field(animated, 'secondaryMap'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+    if ((cast !_Runtime.strictEquals(animated.secondaryMap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (source = cast ((source + 'uniform sampler2D u_animNormalMap2' + Std.string(suffix) + ';\nuniform vec2 u_animNormalScroll2' + Std.string(suffix) + ';\n') : Dynamic));
     }
     return cast source;
@@ -100,14 +100,14 @@ class GlShadedBuiltInModifiers {
     emissive = (cast modifier : EmissiveModifier);
     gl = (cast _Runtime.field(context, 'state') : GlRenderState).gl;
     suffix = '_' + Std.string(_Runtime.field(context, 'index')) + '';
-    (cast unpackColorToLinear(({ final __callArgument2:Dynamic = GlShadedBuiltInModifiers.scratchRgba__glShadedBuiltInModifiers; __callArgument2; }), (cast _Runtime.field(emissive, 'color') : Float)) : LinearColor);
+    (cast unpackColorToLinear(({ final __callArgument2:Dynamic = GlShadedBuiltInModifiers.scratchRgba__glShadedBuiltInModifiers; __callArgument2; }), (cast emissive.color : Float)) : LinearColor);
     flighthq._internal.backend.WebGl2Backend.uniform3f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_emissiveColor' + Std.string(suffix) + ''), flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlShadedBuiltInModifiers.scratchRgba__glShadedBuiltInModifiers : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlShadedBuiltInModifiers.scratchRgba__glShadedBuiltInModifiers : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlShadedBuiltInModifiers.scratchRgba__glShadedBuiltInModifiers : Array<Float>), (cast 2.0 : Float)));
-    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_emissiveStrength' + Std.string(suffix) + ''), _Runtime.field(emissive, 'strength'));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(emissive, 'mask'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { GlShadedBuiltInModifiers.bindGlModifierTexture__glShadedBuiltInModifiers(({ final __callArgument3:Dynamic = context; __callArgument3; }), _Runtime.field(emissive, 'mask'), (cast 'u_emissiveMask' + Std.string(suffix) + '' : String)); }
+    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_emissiveStrength' + Std.string(suffix) + ''), emissive.strength);
+    if ((cast !_Runtime.strictEquals(emissive.mask, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { GlShadedBuiltInModifiers.bindGlModifierTexture__glShadedBuiltInModifiers(({ final __callArgument3:Dynamic = context; __callArgument3; }), emissive.mask, (cast 'u_emissiveMask' + Std.string(suffix) + '' : String)); }
     if ((cast (cast GlShadedBuiltInModifiers.isEmissiveGated__glShadedBuiltInModifiers(({ final __callArgument4:Dynamic = emissive; __callArgument4; })) : Bool) : Bool)) {
-      var sign:Float = ((cast _Runtime.strictEquals(_Runtime.field(emissive, 'facing'), (cast EmissiveModifierFacingValue : { var AwayFromLight:String; var Ignore:String; var TowardLight:String; }).AwayFromLight) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
+      var sign:Float = ((cast _Runtime.strictEquals(emissive.facing, (cast EmissiveModifierFacingValue : { var AwayFromLight:String; var Ignore:String; var TowardLight:String; }).AwayFromLight) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_emissiveFacingSign' + Std.string(suffix) + ''), sign);
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_emissiveFacingSoftness' + Std.string(suffix) + ''), _Runtime.coalesce(_Runtime.field(emissive, 'facingSoftness'), function():Dynamic return cast 0.0));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_emissiveFacingSoftness' + Std.string(suffix) + ''), _Runtime.coalesce(emissive.facingSoftness, function():Dynamic return cast 0.0));
     }
   } }, { contribution: function(modifier:Modifier, index:Float):String {
     var emissive:EmissiveModifier = cast _Runtime.UNDEFINED;
@@ -116,7 +116,7 @@ class GlShadedBuiltInModifiers {
     emissive = (cast modifier : EmissiveModifier);
     suffix = '_' + Std.string(index) + '';
     body = ('{\n' + '  vec3 emissiveTerm = u_emissiveColor' + Std.string(suffix) + ' * u_emissiveStrength' + Std.string(suffix) + ';\n');
-    if ((cast !_Runtime.strictEquals(_Runtime.field(emissive, 'mask'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (body = cast ((body + '  emissiveTerm *= texture(u_emissiveMask' + Std.string(suffix) + ', v_uv0).rgb;\n') : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(emissive.mask, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (body = cast ((body + '  emissiveTerm *= texture(u_emissiveMask' + Std.string(suffix) + ', v_uv0).rgb;\n') : Dynamic)); }
     if ((cast (cast GlShadedBuiltInModifiers.isEmissiveGated__glShadedBuiltInModifiers(({ final __callArgument5:Dynamic = emissive; __callArgument5; })) : Bool) : Bool)) {
       (body = cast ((body + ((('  vec3 emissiveLightDir = u_directionalCount > 0.5 ? normalize(-u_directional.xyz) : vec3(0.0, 0.0, 1.0);\n' + '  float emissiveFacing = dot(normal, emissiveLightDir) * u_emissiveFacingSign' + Std.string(suffix) + ';\n') + '  float emissiveSoft = max(u_emissiveFacingSoftness' + Std.string(suffix) + ', 1e-4);\n') + '  emissiveTerm *= smoothstep(-emissiveSoft, emissiveSoft, emissiveFacing);\n')) : Dynamic));
     }
@@ -130,7 +130,7 @@ class GlShadedBuiltInModifiers {
     emissive = (cast modifier : EmissiveModifier);
     suffix = '_' + Std.string(index) + '';
     source = 'uniform vec3 u_emissiveColor' + Std.string(suffix) + ';\nuniform float u_emissiveStrength' + Std.string(suffix) + ';\n';
-    if ((cast !_Runtime.strictEquals(_Runtime.field(emissive, 'mask'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (source = cast ((source + 'uniform sampler2D u_emissiveMask' + Std.string(suffix) + ';\n') : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(emissive.mask, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (source = cast ((source + 'uniform sampler2D u_emissiveMask' + Std.string(suffix) + ';\n') : Dynamic)); }
     if ((cast (cast GlShadedBuiltInModifiers.isEmissiveGated__glShadedBuiltInModifiers(({ final __callArgument6:Dynamic = emissive; __callArgument6; })) : Bool) : Bool)) {
       (source = cast ((source + 'uniform float u_emissiveFacingSign' + Std.string(suffix) + ';\nuniform float u_emissiveFacingSoftness' + Std.string(suffix) + ';\n') : Dynamic));
     }
@@ -171,18 +171,18 @@ class GlShadedBuiltInModifiers {
     dissolve = (cast modifier : DissolveModifier);
     gl = (cast _Runtime.field(context, 'state') : GlRenderState).gl;
     suffix = '_' + Std.string(_Runtime.field(context, 'index')) + '';
-    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_dissolveThreshold' + Std.string(suffix) + ''), _Runtime.field(dissolve, 'threshold'));
-    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_dissolveEdgeWidth' + Std.string(suffix) + ''), _Runtime.coalesce(_Runtime.field(dissolve, 'edgeWidth'), function():Dynamic return cast 0.05));
-    (cast unpackColorToLinear(({ final __callArgument8:Dynamic = GlShadedBuiltInModifiers.scratchRgba__glShadedBuiltInModifiers; __callArgument8; }), (cast _Runtime.field(dissolve, 'edgeColor') : Float)) : LinearColor);
+    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_dissolveThreshold' + Std.string(suffix) + ''), dissolve.threshold);
+    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_dissolveEdgeWidth' + Std.string(suffix) + ''), _Runtime.coalesce(dissolve.edgeWidth, function():Dynamic return cast 0.05));
+    (cast unpackColorToLinear(({ final __callArgument8:Dynamic = GlShadedBuiltInModifiers.scratchRgba__glShadedBuiltInModifiers; __callArgument8; }), (cast dissolve.edgeColor : Float)) : LinearColor);
     flighthq._internal.backend.WebGl2Backend.uniform3f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_dissolveEdgeColor' + Std.string(suffix) + ''), flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlShadedBuiltInModifiers.scratchRgba__glShadedBuiltInModifiers : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlShadedBuiltInModifiers.scratchRgba__glShadedBuiltInModifiers : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlShadedBuiltInModifiers.scratchRgba__glShadedBuiltInModifiers : Array<Float>), (cast 2.0 : Float)));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(dissolve, 'map'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { GlShadedBuiltInModifiers.bindGlModifierTexture__glShadedBuiltInModifiers(({ final __callArgument9:Dynamic = context; __callArgument9; }), _Runtime.field(dissolve, 'map'), (cast 'u_dissolveMap' + Std.string(suffix) + '' : String)); } else { flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_dissolveScale' + Std.string(suffix) + ''), _Runtime.coalesce(_Runtime.field(dissolve, 'scale'), function():Dynamic return cast 8.0)); }
+    if ((cast !_Runtime.strictEquals(dissolve.map, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { GlShadedBuiltInModifiers.bindGlModifierTexture__glShadedBuiltInModifiers(({ final __callArgument9:Dynamic = context; __callArgument9; }), dissolve.map, (cast 'u_dissolveMap' + Std.string(suffix) + '' : String)); } else { flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_dissolveScale' + Std.string(suffix) + ''), _Runtime.coalesce(dissolve.scale, function():Dynamic return cast 8.0)); }
   } }, { contribution: function(modifier:Modifier, index:Float):String {
     var dissolve:DissolveModifier = cast _Runtime.UNDEFINED;
     var suffix:String = cast _Runtime.UNDEFINED;
     var noise:String = cast _Runtime.UNDEFINED;
     dissolve = (cast modifier : DissolveModifier);
     suffix = '_' + Std.string(index) + '';
-    noise = ((cast !_Runtime.strictEquals(_Runtime.field(dissolve, 'map'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '  float dissolveNoise = texture(u_dissolveMap' + Std.string(suffix) + ', v_uv0).r;\n' : Dynamic) : (cast '  float dissolveNoise = shadedValueNoise(v_uv0 * u_dissolveScale' + Std.string(suffix) + ');\n' : Dynamic));
+    noise = ((cast !_Runtime.strictEquals(dissolve.map, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '  float dissolveNoise = texture(u_dissolveMap' + Std.string(suffix) + ', v_uv0).r;\n' : Dynamic) : (cast '  float dissolveNoise = shadedValueNoise(v_uv0 * u_dissolveScale' + Std.string(suffix) + ');\n' : Dynamic));
     return cast ((((('{\n' + noise) + '  if (dissolveNoise < u_dissolveThreshold' + Std.string(suffix) + ') discard;\n') + '  float dissolveEdge = 1.0 - smoothstep(u_dissolveThreshold' + Std.string(suffix) + ', u_dissolveThreshold' + Std.string(suffix) + ' + max(u_dissolveEdgeWidth' + Std.string(suffix) + ', 1e-4), dissolveNoise);\n') + '  radiance = mix(radiance, u_dissolveEdgeColor' + Std.string(suffix) + ', dissolveEdge);\n') + '}');
     return cast _Runtime.UNDEFINED;
   } }, { declarations: function(modifier:Modifier, index:Float):String {
@@ -192,7 +192,7 @@ class GlShadedBuiltInModifiers {
     dissolve = (cast modifier : DissolveModifier);
     suffix = '_' + Std.string(index) + '';
     source = (('uniform float u_dissolveThreshold' + Std.string(suffix) + ';\n' + 'uniform float u_dissolveEdgeWidth' + Std.string(suffix) + ';\n') + 'uniform vec3 u_dissolveEdgeColor' + Std.string(suffix) + ';\n');
-    (source = cast ((source + ((cast !_Runtime.strictEquals(_Runtime.field(dissolve, 'map'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 'uniform sampler2D u_dissolveMap' + Std.string(suffix) + ';\n' : Dynamic) : (cast 'uniform float u_dissolveScale' + Std.string(suffix) + ';\n' : Dynamic))) : Dynamic));
+    (source = cast ((source + ((cast !_Runtime.strictEquals(dissolve.map, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast 'uniform sampler2D u_dissolveMap' + Std.string(suffix) + ';\n' : Dynamic) : (cast 'uniform float u_dissolveScale' + Std.string(suffix) + ';\n' : Dynamic))) : Dynamic));
     return cast source;
     return cast _Runtime.UNDEFINED;
   } }]));
@@ -230,13 +230,13 @@ class GlShadedBuiltInModifiers {
     fog = (cast modifier : FogModifier);
     gl = (cast _Runtime.field(context, 'state') : GlRenderState).gl;
     suffix = '_' + Std.string(_Runtime.field(context, 'index')) + '';
-    (cast unpackColorToLinear(({ final __callArgument11:Dynamic = GlShadedBuiltInModifiers.scratchRgba__glShadedBuiltInModifiers; __callArgument11; }), (cast _Runtime.field(fog, 'color') : Float)) : LinearColor);
+    (cast unpackColorToLinear(({ final __callArgument11:Dynamic = GlShadedBuiltInModifiers.scratchRgba__glShadedBuiltInModifiers; __callArgument11; }), (cast fog.color : Float)) : LinearColor);
     flighthq._internal.backend.WebGl2Backend.uniform3f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_fogColor' + Std.string(suffix) + ''), flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlShadedBuiltInModifiers.scratchRgba__glShadedBuiltInModifiers : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlShadedBuiltInModifiers.scratchRgba__glShadedBuiltInModifiers : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlShadedBuiltInModifiers.scratchRgba__glShadedBuiltInModifiers : Array<Float>), (cast 2.0 : Float)));
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(fog, 'mode'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(fog, 'mode'), (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Linear) : Bool)) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_fogNear' + Std.string(suffix) + ''), _Runtime.coalesce(_Runtime.field(fog, 'near'), function():Dynamic return cast 0.0));
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_fogFar' + Std.string(suffix) + ''), _Runtime.coalesce(_Runtime.field(fog, 'far'), function():Dynamic return cast 1.0));
+    if ((cast ((cast _Runtime.strictEquals(fog.mode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(fog.mode, (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Linear) : Bool)) : Bool)) {
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_fogNear' + Std.string(suffix) + ''), _Runtime.coalesce(fog.near, function():Dynamic return cast 0.0));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_fogFar' + Std.string(suffix) + ''), _Runtime.coalesce(fog.far, function():Dynamic return cast 1.0));
     } else {
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_fogDensity' + Std.string(suffix) + ''), _Runtime.coalesce(_Runtime.field(fog, 'density'), function():Dynamic return cast 1.0));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_fogDensity' + Std.string(suffix) + ''), _Runtime.coalesce(fog.density, function():Dynamic return cast 1.0));
     }
   } }, { contribution: function(modifier:Modifier, index:Float):String {
     var fog:FogModifier = cast _Runtime.UNDEFINED;
@@ -244,9 +244,9 @@ class GlShadedBuiltInModifiers {
     var factor:String = cast _Runtime.UNDEFINED;
     fog = (cast modifier : FogModifier);
     suffix = '_' + Std.string(index) + '';
-    if ((cast _Runtime.strictEquals(_Runtime.field(fog, 'mode'), (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Exponential) : Bool)) {
+    if ((cast _Runtime.strictEquals(fog.mode, (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Exponential) : Bool)) {
       (factor = cast ('  float fogFactor = 1.0 - exp(-u_fogDensity' + Std.string(suffix) + ' * fogDist);\n' : Dynamic));
-    } else { if ((cast _Runtime.strictEquals(_Runtime.field(fog, 'mode'), (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Exponential2) : Bool)) {
+    } else { if ((cast _Runtime.strictEquals(fog.mode, (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Exponential2) : Bool)) {
       (factor = cast ('  float fogTerm = u_fogDensity' + Std.string(suffix) + ' * fogDist;\n  float fogFactor = 1.0 - exp(-fogTerm * fogTerm);\n' : Dynamic));
     } else {
       (factor = cast ('  float fogFactor = clamp((fogDist - u_fogNear' + Std.string(suffix) + ') / max(u_fogFar' + Std.string(suffix) + ' - u_fogNear' + Std.string(suffix) + ', 1e-4), 0.0, 1.0);\n' : Dynamic));
@@ -260,7 +260,7 @@ class GlShadedBuiltInModifiers {
     fog = (cast modifier : FogModifier);
     suffix = '_' + Std.string(index) + '';
     source = 'uniform vec3 u_fogColor' + Std.string(suffix) + ';\n';
-    (source = cast ((source + ((cast ((cast _Runtime.strictEquals(_Runtime.field(fog, 'mode'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(fog, 'mode'), (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Linear) : Bool)) : Bool) ? (cast 'uniform float u_fogNear' + Std.string(suffix) + ';\nuniform float u_fogFar' + Std.string(suffix) + ';\n' : Dynamic) : (cast 'uniform float u_fogDensity' + Std.string(suffix) + ';\n' : Dynamic))) : Dynamic));
+    (source = cast ((source + ((cast ((cast _Runtime.strictEquals(fog.mode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(fog.mode, (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Linear) : Bool)) : Bool) ? (cast 'uniform float u_fogNear' + Std.string(suffix) + ';\nuniform float u_fogFar' + Std.string(suffix) + ';\n' : Dynamic) : (cast 'uniform float u_fogDensity' + Std.string(suffix) + ';\n' : Dynamic))) : Dynamic));
     return cast source;
     return cast _Runtime.UNDEFINED;
   } }]));
@@ -295,16 +295,16 @@ class GlShadedBuiltInModifiers {
     displace = (cast modifier : VertexDisplaceModifier);
     gl = (cast _Runtime.field(context, 'state') : GlRenderState).gl;
     suffix = '_' + Std.string(_Runtime.field(context, 'index')) + '';
-    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_vDisplaceAmplitude' + Std.string(suffix) + ''), _Runtime.field(displace, 'amplitude'));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(displace, 'axis'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_vDisplaceAxis' + Std.string(suffix) + ''), (cast _Runtime.field(displace, 'axis') : { var x:Float; }).x, (cast _Runtime.field(displace, 'axis') : { var y:Float; }).y, (cast _Runtime.field(displace, 'axis') : { var z:Float; }).z);
+    flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_vDisplaceAmplitude' + Std.string(suffix) + ''), displace.amplitude);
+    if ((cast !_Runtime.strictEquals(displace.axis, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      flighthq._internal.backend.WebGl2Backend.uniform3f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_vDisplaceAxis' + Std.string(suffix) + ''), (cast displace.axis : { var x:Float; }).x, (cast displace.axis : { var y:Float; }).y, (cast displace.axis : { var z:Float; }).z);
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(displace, 'source'), (cast VertexDisplaceModifierSourceValue : { var HeightMap:String; var Sine:String; }).HeightMap) : Bool)) {
-      if ((cast !_Runtime.strictEquals(_Runtime.field(displace, 'map'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { GlShadedBuiltInModifiers.bindGlModifierTexture__glShadedBuiltInModifiers(({ final __callArgument12:Dynamic = context; __callArgument12; }), _Runtime.field(displace, 'map'), (cast 'u_vDisplaceMap' + Std.string(suffix) + '' : String)); }
+    if ((cast _Runtime.strictEquals(displace.source, (cast VertexDisplaceModifierSourceValue : { var HeightMap:String; var Sine:String; }).HeightMap) : Bool)) {
+      if ((cast !_Runtime.strictEquals(displace.map, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { GlShadedBuiltInModifiers.bindGlModifierTexture__glShadedBuiltInModifiers(({ final __callArgument12:Dynamic = context; __callArgument12; }), displace.map, (cast 'u_vDisplaceMap' + Std.string(suffix) + '' : String)); }
     } else {
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_vDisplaceFrequency' + Std.string(suffix) + ''), _Runtime.coalesce(_Runtime.field(displace, 'frequency'), function():Dynamic return cast 1.0));
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_vDisplaceSpeed' + Std.string(suffix) + ''), _Runtime.coalesce(_Runtime.field(displace, 'speed'), function():Dynamic return cast 1.0));
-      var dir:Vector3Like = _Runtime.coalesce(_Runtime.field(displace, 'direction'), function():Dynamic return cast { x: 1.0, y: 0.0, z: 0.0 });
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_vDisplaceFrequency' + Std.string(suffix) + ''), _Runtime.coalesce(displace.frequency, function():Dynamic return cast 1.0));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_vDisplaceSpeed' + Std.string(suffix) + ''), _Runtime.coalesce(displace.speed, function():Dynamic return cast 1.0));
+      var dir:Vector3Like = _Runtime.coalesce(displace.direction, function():Dynamic return cast { x: 1.0, y: 0.0, z: 0.0 });
       flighthq._internal.backend.WebGl2Backend.uniform3f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(context, 'program'), 'u_vDisplaceDir' + Std.string(suffix) + ''), dir.x, dir.y, dir.z);
     }
   } }, { contribution: function(modifier:Modifier, index:Float):String {
@@ -314,8 +314,8 @@ class GlShadedBuiltInModifiers {
     var amount:String = cast _Runtime.UNDEFINED;
     displace = (cast modifier : VertexDisplaceModifier);
     suffix = '_' + Std.string(index) + '';
-    axis = ((cast !_Runtime.strictEquals(_Runtime.field(displace, 'axis'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '  vec3 vDisplaceAxis = normalize(u_vDisplaceAxis' + Std.string(suffix) + ');\n' : Dynamic) : (cast '  vec3 vDisplaceAxis = normalize(localNormal);\n' : Dynamic));
-    amount = ((cast _Runtime.strictEquals(_Runtime.field(displace, 'source'), (cast VertexDisplaceModifierSourceValue : { var HeightMap:String; var Sine:String; }).HeightMap) : Bool) ? (cast '  float vDisplaceAmount = texture(u_vDisplaceMap' + Std.string(suffix) + ', vertexUv).r * u_vDisplaceAmplitude' + Std.string(suffix) + ';\n' : Dynamic) : (cast '  float vDisplacePhase = dot(localPosition.xyz, normalize(u_vDisplaceDir' + Std.string(suffix) + ')) * u_vDisplaceFrequency' + Std.string(suffix) + ' + u_time * u_vDisplaceSpeed' + Std.string(suffix) + ';\n  float vDisplaceAmount = sin(vDisplacePhase) * u_vDisplaceAmplitude' + Std.string(suffix) + ';\n' : Dynamic));
+    axis = ((cast !_Runtime.strictEquals(displace.axis, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '  vec3 vDisplaceAxis = normalize(u_vDisplaceAxis' + Std.string(suffix) + ');\n' : Dynamic) : (cast '  vec3 vDisplaceAxis = normalize(localNormal);\n' : Dynamic));
+    amount = ((cast _Runtime.strictEquals(displace.source, (cast VertexDisplaceModifierSourceValue : { var HeightMap:String; var Sine:String; }).HeightMap) : Bool) ? (cast '  float vDisplaceAmount = texture(u_vDisplaceMap' + Std.string(suffix) + ', vertexUv).r * u_vDisplaceAmplitude' + Std.string(suffix) + ';\n' : Dynamic) : (cast '  float vDisplacePhase = dot(localPosition.xyz, normalize(u_vDisplaceDir' + Std.string(suffix) + ')) * u_vDisplaceFrequency' + Std.string(suffix) + ' + u_time * u_vDisplaceSpeed' + Std.string(suffix) + ';\n  float vDisplaceAmount = sin(vDisplacePhase) * u_vDisplaceAmplitude' + Std.string(suffix) + ';\n' : Dynamic));
     return cast (((('{\n' + axis) + amount) + '  localPosition.xyz += vDisplaceAxis * vDisplaceAmount;\n') + '}');
     return cast _Runtime.UNDEFINED;
   } }, { declarations: function(modifier:Modifier, index:Float):String {
@@ -325,8 +325,8 @@ class GlShadedBuiltInModifiers {
     displace = (cast modifier : VertexDisplaceModifier);
     suffix = '_' + Std.string(index) + '';
     source = 'uniform float u_vDisplaceAmplitude' + Std.string(suffix) + ';\n';
-    if ((cast !_Runtime.strictEquals(_Runtime.field(displace, 'axis'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (source = cast ((source + 'uniform vec3 u_vDisplaceAxis' + Std.string(suffix) + ';\n') : Dynamic)); }
-    (source = cast ((source + ((cast _Runtime.strictEquals(_Runtime.field(displace, 'source'), (cast VertexDisplaceModifierSourceValue : { var HeightMap:String; var Sine:String; }).HeightMap) : Bool) ? (cast 'uniform sampler2D u_vDisplaceMap' + Std.string(suffix) + ';\n' : Dynamic) : (cast 'uniform float u_vDisplaceFrequency' + Std.string(suffix) + ';\nuniform float u_vDisplaceSpeed' + Std.string(suffix) + ';\nuniform vec3 u_vDisplaceDir' + Std.string(suffix) + ';\n' : Dynamic))) : Dynamic));
+    if ((cast !_Runtime.strictEquals(displace.axis, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (source = cast ((source + 'uniform vec3 u_vDisplaceAxis' + Std.string(suffix) + ';\n') : Dynamic)); }
+    (source = cast ((source + ((cast _Runtime.strictEquals(displace.source, (cast VertexDisplaceModifierSourceValue : { var HeightMap:String; var Sine:String; }).HeightMap) : Bool) ? (cast 'uniform sampler2D u_vDisplaceMap' + Std.string(suffix) + ';\n' : Dynamic) : (cast 'uniform float u_vDisplaceFrequency' + Std.string(suffix) + ';\nuniform float u_vDisplaceSpeed' + Std.string(suffix) + ';\nuniform vec3 u_vDisplaceDir' + Std.string(suffix) + ';\n' : Dynamic))) : Dynamic));
     return cast source;
     return cast _Runtime.UNDEFINED;
   } }]));
@@ -357,7 +357,7 @@ class GlShadedBuiltInModifiers {
   }
 
   public static function isEmissiveGated__glShadedBuiltInModifiers(modifier:EmissiveModifier):Bool {
-    return cast ((cast !_Runtime.strictEquals(_Runtime.field(modifier, 'facing'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(modifier, 'facing'), (cast EmissiveModifierFacingValue : { var AwayFromLight:String; var Ignore:String; var TowardLight:String; }).Ignore) : Bool));
+    return cast ((cast !_Runtime.strictEquals(modifier.facing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(modifier.facing, (cast EmissiveModifierFacingValue : { var AwayFromLight:String; var Ignore:String; var TowardLight:String; }).Ignore) : Bool));
     return cast null;
   }
 

@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_496,
+      newAuditOnly: 1_491,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(510);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(515);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_496);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_491);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(108);
+    expect(newDirect).toHaveLength(113);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -650,6 +650,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'WgpuRenderEffectPipeline',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free WebGPU render-effect pipeline',
+        }),
+        expect.objectContaining({
+          name: 'VertexDisplaceModifier',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free vertex-displacement modifier',
+        }),
+        expect.objectContaining({
+          name: 'AnimatedNormalModifier',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free animated-normal modifier',
+        }),
+        expect.objectContaining({
+          name: 'EmissiveModifier',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free emissive modifier',
+        }),
+        expect.objectContaining({
+          name: 'FogModifier',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free fog modifier',
+        }),
+        expect.objectContaining({
+          name: 'DissolveModifier',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free dissolve modifier',
         }),
       ]),
     );
@@ -1193,6 +1218,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:a7039648e61c44e19af4213680f60efe61ad6452ffc0b16c420927d0116c0349',
         id: '@flighthq/types:interface#WgpuRenderEffectPipeline',
         purpose: 'reviewed escape-free WebGPU render-effect pipeline',
+      },
+      {
+        declarationFingerprint: 'sha256:6e37b62b50d5b48500aae731c8675045a8e2096273488315f353d68df10c6e8c',
+        id: '@flighthq/types:interface#VertexDisplaceModifier',
+        purpose: 'reviewed escape-free vertex-displacement modifier',
+      },
+      {
+        declarationFingerprint: 'sha256:ffe9e013055090ced18c33db3dc23624189ee7c37ad89167e5ab4878f51bab9c',
+        id: '@flighthq/types:interface#AnimatedNormalModifier',
+        purpose: 'reviewed escape-free animated-normal modifier',
+      },
+      {
+        declarationFingerprint: 'sha256:1a8dbcef5fd253b0791b984f6f9941f1d377d618e6cffc3d199824faebde91f9',
+        id: '@flighthq/types:interface#EmissiveModifier',
+        purpose: 'reviewed escape-free emissive modifier',
+      },
+      {
+        declarationFingerprint: 'sha256:0ddef0017cb9786dae56bccef54787182c9ff0a31489f925f8ac31bcf61731a4',
+        id: '@flighthq/types:interface#FogModifier',
+        purpose: 'reviewed escape-free fog modifier',
+      },
+      {
+        declarationFingerprint: 'sha256:b4447f68b4d80c5a7fc46ba4dfaedef76ea959785551545cb6cb49842f894138',
+        id: '@flighthq/types:interface#DissolveModifier',
+        purpose: 'reviewed escape-free dissolve modifier',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -1759,6 +1809,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const shadingModifierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'AnimatedNormalModifier',
+            'DissolveModifier',
+            'EmissiveModifier',
+            'FogModifier',
+            'VertexDisplaceModifier',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -1799,22 +1862,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_496,
+      auditOnlySchemas: 1_491,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 20_834,
-      directSchemas: 508,
+      directAccesses: 20_964,
+      directSchemas: 513,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 9_832,
+      pendingAccesses: 9_702,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_496,
+      newAuditOnly: 1_491,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -1873,7 +1936,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(20_834);
+    expect(report.summary.directAccesses).toBe(20_964);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -2738,6 +2801,48 @@ describe('typed struct analysis', () => {
     }
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
+        'VertexDisplaceModifier',
+        38,
+        'sha256:6e37b62b50d5b48500aae731c8675045a8e2096273488315f353d68df10c6e8c',
+        'reviewed escape-free vertex-displacement modifier',
+      ],
+      [
+        'AnimatedNormalModifier',
+        30,
+        'sha256:ffe9e013055090ced18c33db3dc23624189ee7c37ad89167e5ab4878f51bab9c',
+        'reviewed escape-free animated-normal modifier',
+      ],
+      [
+        'EmissiveModifier',
+        26,
+        'sha256:1a8dbcef5fd253b0791b984f6f9941f1d377d618e6cffc3d199824faebde91f9',
+        'reviewed escape-free emissive modifier',
+      ],
+      [
+        'FogModifier',
+        19,
+        'sha256:0ddef0017cb9786dae56bccef54787182c9ff0a31489f925f8ac31bcf61731a4',
+        'reviewed escape-free fog modifier',
+      ],
+      [
+        'DissolveModifier',
+        17,
+        'sha256:b4447f68b4d80c5a7fc46ba4dfaedef76ea959785551545cb6cb49842f894138',
+        'reviewed escape-free dissolve modifier',
+      ],
+    ] as const) {
+      expect(shadingModifierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
         'Physics2DWorld',
         217,
         'sha256:a28a94c95326e5405d33feda957ea8ee57399e1266dae9f9d7c88218d945a9fe',
@@ -3397,6 +3502,26 @@ describe('typed struct analysis', () => {
       blockerReasons: ['container-transfer', 'normalization-provenance'],
       closed: false,
     });
+    for (const shadingModifierId of [
+      '@flighthq/types:interface#AnimatedNormalModifier',
+      '@flighthq/types:interface#DissolveModifier',
+      '@flighthq/types:interface#EmissiveModifier',
+      '@flighthq/types:interface#VertexDisplaceModifier',
+    ]) {
+      expect(classAuditById.get(shadingModifierId)?.migration).toEqual({
+        mechanicallyCompatible: false,
+        normalizationReasons: ['cross-schema-transfer'],
+        observabilityReasons: ['optional-omission'],
+      });
+      expect(provenanceById.has(shadingModifierId)).toBe(false);
+    }
+    const fogModifierId = '@flighthq/types:interface#FogModifier';
+    expect(classAuditById.get(fogModifierId)?.migration).toEqual({
+      mechanicallyCompatible: false,
+      normalizationReasons: ['cross-schema-transfer'],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.has(fogModifierId)).toBe(false);
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -3759,6 +3884,21 @@ describe('typed struct analysis', () => {
       ['generated/flighthq/scene2dWgpu/WgpuClipRectangle.hx', 'WgpuScissorRect'],
     ] as const) {
       expect(readFileSync(path, 'utf8')).not.toContain(`: ${typeName}).`);
+    }
+    for (const path of [
+      'generated/flighthq/scene3dGl/GlShadedBuiltInModifiers.hx',
+      'generated/flighthq/scene3dWgpu/WgpuShadedPrelude.hx',
+      'generated/flighthq/shading/CreateAnimatedNormalModifier.hx',
+      'generated/flighthq/shading/CreateDissolveModifier.hx',
+      'generated/flighthq/shading/CreateEmissiveModifier.hx',
+      'generated/flighthq/shading/CreateVertexDisplaceModifier.hx',
+      'generated/flighthq/shading/RegisterBuiltInModifiers.hx',
+    ]) {
+      const generatedModifier = readFileSync(path, 'utf8');
+      expect(generatedModifier).not.toMatch(/_Runtime\.field\(modifier,/u);
+      expect(generatedModifier).not.toMatch(
+        /\(cast modifier : (?:AnimatedNormalModifier|DissolveModifier|EmissiveModifier|FogModifier|VertexDisplaceModifier)\)\./u,
+      );
     }
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([

@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1496 |
-| Direct schemas | 508 |
+| Audit-only schemas | 1491 |
+| Direct schemas | 513 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 9832 |
-| Directly emitted accesses | 20834 |
+| Pending accesses | 9702 |
+| Directly emitted accesses | 20964 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1496 |
+| Newly discovered, audit-only | 1491 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -82,7 +82,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#AmbientLightOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AmbientLightReading` | `direct` | `preserved` | `@flighthq/types:interface#AmbientLightReading` | broad host document | 4 | 0 | 3 | 0 | 0 | 3 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnchorLayoutItemStyle` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#AnimatedNormalModifier` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 28 | 2 | 0 | 30 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AnimatedNormalModifier` | `direct` | `new` | — | reviewed escape-free animated-normal modifier | 7 | 28 | 2 | 0 | 0 | 30 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimatedNormalModifierOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationBlendTree` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 17 | 0 | 0 | 17 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationBlendTreeChannel` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
@@ -433,7 +433,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#DisplacementEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DisplayObject` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 0 | 12 | 0 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DisplayObjectRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 38 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#DissolveModifier` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 16 | 1 | 0 | 17 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#DissolveModifier` | `direct` | `new` | — | reviewed escape-free dissolve modifier | 7 | 16 | 1 | 0 | 0 | 17 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DissolveModifierOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DitherEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#DomBlendModeFidelity` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -493,7 +493,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#EmbeddedAudioResourceReference` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 6 | 2 | 0 | 8 | 0 | 0 | 20 | yes | — |
 | `@flighthq/types:interface#EmbeddedImageResourceReference` | `direct` | `renamed` | `@flighthq/types:interface#EmbeddedSceneResourceRef` | broad scene document | 6 | 6 | 2 | 0 | 0 | 8 | 56 | 56 | yes | — |
 | `@flighthq/types:interface#EmissiveMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 17 | 3 | 0 | 20 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#EmissiveModifier` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 25 | 1 | 0 | 26 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#EmissiveModifier` | `direct` | `new` | — | reviewed escape-free emissive modifier | 7 | 25 | 1 | 0 | 0 | 26 | 0 | 0 | yes | — |
 | `@flighthq/types:type#EmissiveModifierFacing` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#EmissiveModifierOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Entity` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14 | yes | — |
@@ -543,7 +543,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#FocusManagerOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#FocusNavigationInput` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#FocusNavigationOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#FogModifier` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 19 | 0 | 0 | 19 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#FogModifier` | `direct` | `new` | — | reviewed escape-free fog modifier | 7 | 19 | 0 | 0 | 0 | 19 | 0 | 0 | yes | — |
 | `@flighthq/types:type#FogModifierMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#FogModifierOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Font` | `direct` | `preserved` | `@flighthq/types:interface#Font` | broad asset document | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -1929,7 +1929,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#VertexAttribute` | `direct` | `preserved` | `@flighthq/types:interface#VertexAttribute` | broad scene document | 3 | 60 | 0 | 0 | 0 | 60 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#VertexAttributeLayout` | `direct` | `preserved` | `@flighthq/types:interface#VertexAttributeLayout` | broad scene document | 2 | 67 | 0 | 0 | 0 | 67 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#VertexColorMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 8 | 1 | 0 | 9 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#VertexDisplaceModifier` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 36 | 2 | 0 | 38 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#VertexDisplaceModifier` | `direct` | `new` | — | reviewed escape-free vertex-displacement modifier | 9 | 36 | 2 | 0 | 0 | 38 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#VertexDisplaceModifierOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#VertexDisplaceModifierSource` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#VertexFormat` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
