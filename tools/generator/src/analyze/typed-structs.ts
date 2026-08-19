@@ -643,6 +643,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#InteractionPointerState',
     purpose: 'reviewed escape-free interaction pointer state',
   },
+  {
+    declarationFingerprint: 'sha256:24320b83bfd5874be2f12540bc06d3b54f1f6d2611c4c7652b684095843ad56b',
+    id: '@flighthq/types:interface#TilemapData',
+    purpose: 'reviewed escape-free tilemap data',
+  },
+  {
+    declarationFingerprint: 'sha256:d8b583fd4ac5be7b2e225eb093440e762ac18bd63947531c364b379b941aa409',
+    id: '@flighthq/types:interface#TiledObject',
+    purpose: 'reviewed escape-free Tiled object',
+  },
+  {
+    declarationFingerprint: 'sha256:06addefb47009dd6ad6194898472603ce2dd11f327687e4795e7ed1fa107eb9f',
+    id: '@flighthq/types:interface#TiledMap',
+    purpose: 'reviewed escape-free Tiled map',
+  },
+  {
+    declarationFingerprint: 'sha256:baaa0bd15356d53492d909bb22e420d309e45d951731b185dddd284a4bfe42b1',
+    id: '@flighthq/types:interface#Tilemap',
+    purpose: 'reviewed escape-free tilemap',
+  },
+  {
+    declarationFingerprint: 'sha256:f7f49b1c5693d038732edcc23550418414f1b7bca0501669372a4e0d11f212eb',
+    id: '@flighthq/types:interface#TiledTileset',
+    purpose: 'reviewed escape-free Tiled tileset',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

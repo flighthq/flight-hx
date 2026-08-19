@@ -19,7 +19,7 @@ class TiledGid {
     var best:Null<TiledTilesetRef> = cast _Runtime.UNDEFINED;
     if ((cast ((cast tileId : Float) <= (cast 0.0 : Float)) : Bool)) { return cast null; }
     best = null;
-    for (ref in _Runtime.iterable(_Runtime.field(map, 'tilesets'))) {
+    for (ref in _Runtime.iterable(map.tilesets)) {
       if ((cast ((cast ((cast (cast ref : TiledTilesetRef).firstGid : Float) <= (cast tileId : Float)) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(best, null), function():Dynamic return cast ((cast (cast ref : TiledTilesetRef).firstGid : Float) > (cast (cast best : TiledTilesetRef).firstGid : Float))) : Bool)) : Bool)) { (best = cast (ref : Dynamic)); }
     }
     return cast best;

@@ -41,7 +41,7 @@ class GlTilemap {
   public static function submitGlTilemap__glTilemap(state:GlRenderState, tilemapNode:RenderProxy2D):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var source:Tilemap = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:TilemapData = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
     var columns:Float = cast _Runtime.UNDEFINED;
     var rows:Float = cast _Runtime.UNDEFINED;
@@ -76,13 +76,13 @@ class GlTilemap {
     var drawCount:Float = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime);
     source = (cast (cast tilemapNode : RenderProxy2D).source : Tilemap);
-    __destructure0 = (cast source : Tilemap).data;
-    atlas = _Runtime.field(__destructure0, 'atlas');
-    columns = _Runtime.field(__destructure0, 'columns');
-    rows = _Runtime.field(__destructure0, 'rows');
-    tileHeight = _Runtime.field(__destructure0, 'tileHeight');
-    tileWidth = _Runtime.field(__destructure0, 'tileWidth');
-    tiles = _Runtime.field(__destructure0, 'tiles');
+    __destructure0 = source.data;
+    atlas = __destructure0.atlas;
+    columns = __destructure0.columns;
+    rows = __destructure0.rows;
+    tileHeight = __destructure0.tileHeight;
+    tileWidth = __destructure0.tileWidth;
+    tiles = __destructure0.tiles;
     if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast !(cast (cast hasTextureSource(({ final __callArgument1:Dynamic = atlas.texture; __callArgument1; })) : Bool) : Bool) : Bool)) : Bool)) { return; }
     if ((cast ((cast _Runtime.strictEquals(columns, 0.0) : Bool) || (cast _Runtime.strictEquals(rows, 0.0) : Bool)) : Bool)) { return; }
     (cast ensureGlQuadBatchShader(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlQuadBatchShader);
@@ -94,7 +94,7 @@ class GlTilemap {
     if ((cast _Runtime.strictEquals(glTexture, null) : Bool)) { return; }
     straightAlpha = runtime.currentTextureStraightAlpha;
     nodeMaterialData = (cast tilemapNode : RenderProxy2D).materialData;
-    perTileColorScaleBias = (cast (cast source : Tilemap).data : TilemapData).materialData;
+    perTileColorScaleBias = (cast source.data : { var materialData:Null<Array<Null<flighthq._internal._Object>>>; }).materialData;
     nodeColorScaleBias = (cast tilemapNode : RenderProxy2D).colorScaleBias;
     nodeColorMatrix = (cast tilemapNode : RenderProxy2D).colorMatrix;
     startCount = runtime.quadBatchWriterCount;

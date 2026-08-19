@@ -26,7 +26,7 @@ class CanvasTilemap {
   @:noCompletion
   public static function drawCanvasTilemap(state:CanvasRenderState, tilemapNode:RenderProxy2D):Void {
     var source:Tilemap = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:TilemapData = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;
     var columns:Float = cast _Runtime.UNDEFINED;
     var rows:Float = cast _Runtime.UNDEFINED;
@@ -42,13 +42,13 @@ class CanvasTilemap {
     var smoothing:Bool = cast _Runtime.UNDEFINED;
     var restoreMaterial:Bool = cast _Runtime.UNDEFINED;
     source = (cast (cast tilemapNode : RenderProxy2D).source : Tilemap);
-    __destructure0 = (cast source : Tilemap).data;
-    atlas = _Runtime.field(__destructure0, 'atlas');
-    columns = _Runtime.field(__destructure0, 'columns');
-    rows = _Runtime.field(__destructure0, 'rows');
-    tileHeight = _Runtime.field(__destructure0, 'tileHeight');
-    tileWidth = _Runtime.field(__destructure0, 'tileWidth');
-    tiles = _Runtime.field(__destructure0, 'tiles');
+    __destructure0 = source.data;
+    atlas = __destructure0.atlas;
+    columns = __destructure0.columns;
+    rows = __destructure0.rows;
+    tileHeight = __destructure0.tileHeight;
+    tileWidth = __destructure0.tileWidth;
+    tiles = __destructure0.tiles;
     if ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool)) { return; }
     image = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers(({ final __callArgument0:Dynamic = state; __callArgument0; })) : CanvasTextureResolvers), ({ final __callArgument1:Dynamic = atlas.texture; __callArgument1; })) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(image, null) : Bool)) { return; }

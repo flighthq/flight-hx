@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_481,
+      newAuditOnly: 1_476,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(525);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(530);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_481);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_476);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(123);
+    expect(newDirect).toHaveLength(128);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -725,6 +725,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'InteractionPointerState',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free interaction pointer state',
+        }),
+        expect.objectContaining({
+          name: 'TilemapData',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free tilemap data',
+        }),
+        expect.objectContaining({
+          name: 'TiledObject',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Tiled object',
+        }),
+        expect.objectContaining({
+          name: 'TiledMap',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Tiled map',
+        }),
+        expect.objectContaining({
+          name: 'Tilemap',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free tilemap',
+        }),
+        expect.objectContaining({
+          name: 'TiledTileset',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Tiled tileset',
         }),
       ]),
     );
@@ -1344,6 +1369,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#InteractionPointerState',
         purpose: 'reviewed escape-free interaction pointer state',
       },
+      {
+        declarationFingerprint: 'sha256:24320b83bfd5874be2f12540bc06d3b54f1f6d2611c4c7652b684095843ad56b',
+        id: '@flighthq/types:interface#TilemapData',
+        purpose: 'reviewed escape-free tilemap data',
+      },
+      {
+        declarationFingerprint: 'sha256:d8b583fd4ac5be7b2e225eb093440e762ac18bd63947531c364b379b941aa409',
+        id: '@flighthq/types:interface#TiledObject',
+        purpose: 'reviewed escape-free Tiled object',
+      },
+      {
+        declarationFingerprint: 'sha256:06addefb47009dd6ad6194898472603ce2dd11f327687e4795e7ed1fa107eb9f',
+        id: '@flighthq/types:interface#TiledMap',
+        purpose: 'reviewed escape-free Tiled map',
+      },
+      {
+        declarationFingerprint: 'sha256:baaa0bd15356d53492d909bb22e420d309e45d951731b185dddd284a4bfe42b1',
+        id: '@flighthq/types:interface#Tilemap',
+        purpose: 'reviewed escape-free tilemap',
+      },
+      {
+        declarationFingerprint: 'sha256:f7f49b1c5693d038732edcc23550418414f1b7bca0501669372a4e0d11f212eb',
+        id: '@flighthq/types:interface#TiledTileset',
+        purpose: 'reviewed escape-free Tiled tileset',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -1948,6 +1998,13 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const tilemapTiledCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['TiledMap', 'TiledObject', 'TiledTileset', 'Tilemap', 'TilemapData'].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -1988,22 +2045,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_481,
+      auditOnlySchemas: 1_476,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 21_145,
-      directSchemas: 523,
+      directAccesses: 21_289,
+      directSchemas: 528,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 9_521,
+      pendingAccesses: 9_377,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_481,
+      newAuditOnly: 1_476,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -2070,7 +2127,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(21_145);
+    expect(report.summary.directAccesses).toBe(21_289);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -2252,6 +2309,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(interactionStateCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'TilemapData',
+        70,
+        'sha256:24320b83bfd5874be2f12540bc06d3b54f1f6d2611c4c7652b684095843ad56b',
+        'reviewed escape-free tilemap data',
+      ],
+      [
+        'TiledObject',
+        25,
+        'sha256:d8b583fd4ac5be7b2e225eb093440e762ac18bd63947531c364b379b941aa409',
+        'reviewed escape-free Tiled object',
+      ],
+      [
+        'TiledMap',
+        17,
+        'sha256:06addefb47009dd6ad6194898472603ce2dd11f327687e4795e7ed1fa107eb9f',
+        'reviewed escape-free Tiled map',
+      ],
+      [
+        'Tilemap',
+        17,
+        'sha256:baaa0bd15356d53492d909bb22e420d309e45d951731b185dddd284a4bfe42b1',
+        'reviewed escape-free tilemap',
+      ],
+      [
+        'TiledTileset',
+        15,
+        'sha256:f7f49b1c5693d038732edcc23550418414f1b7bca0501669372a4e0d11f212eb',
+        'reviewed escape-free Tiled tileset',
+      ],
+    ] as const) {
+      expect(tilemapTiledCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -3792,6 +3891,35 @@ describe('typed struct analysis', () => {
       blockerReasons: ['container-transfer'],
       closed: false,
     });
+    const tilemapDataId = '@flighthq/types:interface#TilemapData';
+    expect(classAuditById.get(tilemapDataId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.get(tilemapDataId)?.nominalIdentity).toEqual({
+      blockerReasons: ['container-transfer', 'normalization-provenance'],
+      closed: false,
+    });
+    for (const closedTiledId of [
+      '@flighthq/types:interface#TiledMap',
+      '@flighthq/types:interface#TiledObject',
+      '@flighthq/types:interface#TiledTileset',
+    ]) {
+      expect(classAuditById.get(closedTiledId)?.migration).toEqual({
+        mechanicallyCompatible: true,
+        normalizationReasons: [],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.get(closedTiledId)?.nominalIdentity).toEqual({ blockerReasons: [], closed: true });
+    }
+    const tilemapId = '@flighthq/types:interface#Tilemap';
+    expect(classAuditById.get(tilemapId)?.migration).toEqual({
+      mechanicallyCompatible: false,
+      normalizationReasons: ['cross-schema-transfer'],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.has(tilemapId)).toBe(false);
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -4171,6 +4299,24 @@ describe('typed struct analysis', () => {
       expect(generatedOptionalInteractionState).toContain('__typedStruct');
       expect(generatedOptionalInteractionState).not.toContain('__structural');
     }
+    for (const path of [
+      'generated/flighthq/scene2dCanvas/CanvasTilemap.hx',
+      'generated/flighthq/scene2dGl/GlTilemap.hx',
+      'generated/flighthq/scene2dWgpu/WgpuTilemap.hx',
+      'generated/flighthq/tilemap/Tilemap.hx',
+      'generated/flighthq/tilemapFormats/TiledGid.hx',
+      'generated/flighthq/tilemapFormats/TiledProject.hx',
+      'generated/flighthq/tilemapFormats/TiledTmxFormat.hx',
+    ]) {
+      const generatedTilemap = readFileSync(path, 'utf8');
+      expect(generatedTilemap).not.toMatch(/_Runtime\.field\((?:data|map|object|source|tilemap|tileset),/u);
+      expect(generatedTilemap).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:TiledMap|TiledObject|TiledTileset|Tilemap|TilemapData)\)\./u,
+      );
+    }
+    expect(readFileSync('generated/flighthq/tilemap/Tilemap.hx', 'utf8')).toMatch(
+      /var __destructure[0-9]+:TilemapData/u,
+    );
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
     expect(generatedCanvasRenderState).not.toMatch(
       /\(cast (?:runtime|sourceRuntime|targetRuntime) : CanvasRenderStateRuntime\)\./u,

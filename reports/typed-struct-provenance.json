@@ -51896,7 +51896,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 17,
       "fields": 13,
       "id": "@flighthq/types:interface#TiledMap",
       "name": "TiledMap",
@@ -51999,7 +51999,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 25,
       "fields": 13,
       "id": "@flighthq/types:interface#TiledObject",
       "name": "TiledObject",
@@ -52294,7 +52294,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 15,
       "fields": 12,
       "id": "@flighthq/types:interface#TiledTileset",
       "name": "TiledTileset",
@@ -52569,7 +52569,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 70,
       "fields": 7,
       "id": "@flighthq/types:interface#TilemapData",
       "name": "TilemapData",

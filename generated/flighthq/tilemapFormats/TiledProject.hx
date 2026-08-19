@@ -27,7 +27,7 @@ class TiledProject {
     var groups:Array<TilesetGroup__tiledProject> = cast _Runtime.UNDEFINED;
     var byFirstGid:flighthq._internal._Map<Float, Null<TilesetGroup__tiledProject>> = cast _Runtime.UNDEFINED;
     var anyResolved:Bool = cast _Runtime.UNDEFINED;
-    layer = flighthq._internal._StaticIndex.readArray(_Runtime.field(map, 'layers'), layerIndex);
+    layer = flighthq._internal._StaticIndex.readArray(map.layers, layerIndex);
     if ((cast ((cast _Runtime.strictEquals(layer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast layer : { var type:String; }).type, 'tilelayer') : Bool)) : Bool)) { return cast null; }
     __destructure0 = layer;
     width = _Runtime.field(__destructure0, 'width');
