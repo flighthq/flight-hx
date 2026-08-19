@@ -5,14 +5,14 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,536 public schemas are semantically eligible for typed structural lowering.
-- 578 schemas currently emit direct fields, covering 22,608 accesses.
-- 958 eligible schemas remain audit-only, covering 8,058 pending accesses.
-- 701 audit-only schemas have no recorded escape, covering 3,304 pending accesses.
+- 583 schemas currently emit direct fields, covering 22,715 accesses.
+- 953 eligible schemas remain audit-only, covering 7,951 pending accesses.
+- 696 audit-only schemas have no recorded escape, covering 3,197 pending accesses.
 - Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
 - Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
 - The cpp provenance audit has 551 closed nominal-identity candidates; only `Camera2D` and `ParticleEmitterState` are enabled.
-- Generated `Dynamic` occurrences fell from 49,168 to 46,955 across checker-derived typed-struct assignments and the reviewed escape-free tranches.
+- Generated `Dynamic` occurrences fell from 49,168 to 46,951 across checker-derived typed-struct assignments and the reviewed escape-free tranches.
 
 ## 1. Closed mapped aliases
 
@@ -66,6 +66,7 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Promote the sixth high-access zero-escape frontier: `Scene3DResourceResolverRuntime`, `GradientGlowEffect`, `BitmapTextData`, `WgpuShapeMeshBuffers`, and `Scene3DDocumentNode`. Their 123 accesses now emit directly across 19 generated modules. Cross-schema transfer plus object-literal spread keep the gradient-glow effect structural, normalization provenance keeps bitmap-text data structural, optional omission keeps the Scene3D document node structural, and the provenance-closed resource-resolver runtime and WebGPU buffers remain structural pending separate cpp review. The tranche removes 36 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote the seventh high-access zero-escape frontier: `DirectionalLight`, `SurfaceMaterial`, `MorphShapeGradientEndpoint`, `SpatialIndexingNotice`, and `Scene3DRenderList`. Their 114 accesses now emit directly across 20 generated modules. Cross-schema transfer keeps the directional light structural; cross-schema transfer plus dynamic ingress keep the surface material structural; object spread keeps the spatial-indexing notice structural; the morph-gradient endpoint has no production construction provenance; and the provenance-closed Scene3D render list remains structural pending separate cpp review. The tranche removes 90 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote the eighth high-access zero-escape frontier: `Scene2DKindUsage`, `MotionPath`, `InnerGlowEffect`, `CustomShaderMaterial`, and `CreateRenderTextureOptions`. Their 110 accesses now emit directly across 14 generated modules. Cross-schema transfer plus object-literal spread keep the inner-glow effect structural, cross-schema transfer keeps the custom-shader material and render-texture options structural, and the provenance-closed Scene2D kind usage and motion path remain structural pending separate cpp review. The tranche removes 80 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
+- [x] Promote the ninth high-access zero-escape frontier: `AbcInstruction`, `AbcMultiname`, `AnimationRootMotionExtractor`, `CanvasRenderTexturePool`, and `LogEntry`. Their 107 accesses now emit directly across six generated modules. Container transfer keeps the ABC instruction structural, normalization provenance keeps the ABC multiname structural, cross-schema transfer keeps the root-motion extractor structural, object-spread observation keeps log entries structural, and the provenance-closed Canvas pool remains structural pending separate cpp review. The tranche removes four generated `Dynamic` occurrences and 42 `_Runtime.field` calls while `Reflect` and type-erasure debt remain unchanged.
 - [ ] Review the next cohesive five-row zero-escape tranche from the refreshed audit, preserving exact fingerprint, provenance, Haxe, portability, and affected-parity gates.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 

@@ -918,6 +918,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#CreateRenderTextureOptions',
     purpose: 'reviewed escape-free render-texture options',
   },
+  {
+    declarationFingerprint: 'sha256:f9b45a313f2614d54a52c279b9226bcc9c33ba384453b6dca79b0f5c1338c57d',
+    id: '@flighthq/types:interface#AbcInstruction',
+    purpose: 'reviewed escape-free ABC instruction',
+  },
+  {
+    declarationFingerprint: 'sha256:a530f1994767f0978b42abb9d0e32a5edfe81713180e2a2a86d594892bcf840c',
+    id: '@flighthq/types:interface#AbcMultiname',
+    purpose: 'reviewed escape-free ABC multiname',
+  },
+  {
+    declarationFingerprint: 'sha256:7b66783df68ff872ad421ae76f22aa65a493abbe89363e655126bd5366f4c849',
+    id: '@flighthq/types:interface#AnimationRootMotionExtractor',
+    purpose: 'reviewed escape-free animation root-motion extractor',
+  },
+  {
+    declarationFingerprint: 'sha256:bccbdac026b10fed057b1fa96baa3cd24ad093dbb672ca4714c9f87985872894',
+    id: '@flighthq/types:interface#CanvasRenderTexturePool',
+    purpose: 'reviewed escape-free Canvas render-texture pool',
+  },
+  {
+    declarationFingerprint: 'sha256:386ab33911ac9d6cfda1c53f076da7a8c79abd8f042508f5e4210185d9eacd08',
+    id: '@flighthq/types:interface#LogEntry',
+    purpose: 'reviewed escape-free log entry',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

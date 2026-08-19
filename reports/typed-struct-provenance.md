@@ -30,10 +30,10 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#AbcClass` | 0 | 2 | 1 | 1 | 1 | 0 | 0 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#AbcException` | 0 | 5 | 1 | 0 | 1 | 0 | 0 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#AbcInstance` | 0 | 7 | 1 | 1 | 1 | 0 | 0 | 1 | no | `normalization-provenance` |
-| `@flighthq/types:interface#AbcInstruction` | 0 | 3 | 0 | 0 | 0 | 7 | 0 | 1 | no | `container-transfer` |
+| `@flighthq/types:interface#AbcInstruction` | 22 | 3 | 0 | 0 | 0 | 7 | 0 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#AbcMetadataItem` | 0 | 2 | 1 | 0 | 2 | 0 | 0 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#AbcMethodBody` | 0 | 8 | 1 | 2 | 1 | 0 | 0 | 1 | no | `normalization-provenance` |
-| `@flighthq/types:interface#AbcMultiname` | 0 | 6 | 1 | 0 | 2 | 0 | 0 | 1 | no | `normalization-provenance` |
+| `@flighthq/types:interface#AbcMultiname` | 22 | 6 | 1 | 0 | 2 | 0 | 0 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#AbcNamespace` | 0 | 2 | 1 | 0 | 2 | 0 | 0 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#AbcOptionalValue` | 0 | 2 | 1 | 0 | 2 | 0 | 0 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#AbcScript` | 0 | 2 | 1 | 1 | 1 | 0 | 0 | 1 | no | `normalization-provenance` |
@@ -95,7 +95,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#CanvasRenderEffectPipeline` | 0 | 4 | 0 | 4 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTextureEntry` | 0 | 2 | 0 | 1 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTextureExplanation` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#CanvasRenderTexturePool` | 0 | 5 | 0 | 4 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#CanvasRenderTexturePool` | 21 | 5 | 0 | 4 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CanvasShapeCommand` | 0 | 2 | 5 | 0 | 5 | 0 | 4 | 6 | no | `normalization-provenance` |
 | `@flighthq/types:interface#CanvasShapeDrawState` | 115 | 16 | 0 | 3 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorApi` | 0 | 12 | 0 | 12 | 0 | 0 | 1 | 0 | yes | — |

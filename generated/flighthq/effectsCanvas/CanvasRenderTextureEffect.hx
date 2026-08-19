@@ -40,7 +40,7 @@ class CanvasRenderTextureEffect {
         var remaining:Float = _Runtime.subtractNumbers(_Runtime.field(operations, 'length'), index);
         var output:RenderTexture = ((cast _Runtime.strictEquals(_Runtime.fmod(remaining, 2.0), 1.0) : Bool) ? (cast dest : Dynamic) : (cast scratch : Dynamic));
         writeCanvasRenderTextureTarget(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = output; __callArgument4; }), (cast function(target:CanvasRenderTarget):Void {
-          (cast operation : { var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }).runner(({ final __callArgument5:Dynamic = { state: state, source: current, dest: target, pool: (cast pool : CanvasRenderTexturePool).effectTargets }; __callArgument5; }), (cast operation : { var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }).effect);
+          (cast operation : { var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }).runner(({ final __callArgument5:Dynamic = { state: state, source: current, dest: target, pool: pool.effectTargets }; __callArgument5; }), (cast operation : { var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }).effect);
         } : Dynamic));
         (current = cast ((cast getCanvasRenderTextureTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = output; __callArgument7; })) : Null<CanvasRenderTarget>) : Dynamic));
         index++;

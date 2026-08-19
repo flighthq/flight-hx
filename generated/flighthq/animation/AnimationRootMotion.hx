@@ -37,11 +37,11 @@ class AnimationRootMotion {
     if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([startTime] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([endTime] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.rangeError('AnimationRootMotionExtractor time range must contain only finite numbers.'));
     }
-    components = (cast (cast (cast extractor : AnimationRootMotionExtractor).channel : { var track:AnimationTrack; }).track : { var components:Float; }).components;
+    components = (cast (cast extractor.channel : { var track:AnimationTrack; }).track : { var components:Float; }).components;
     if ((cast ((cast (cast out : { var length:Float; }).length : Float) < (cast components : Float)) : Bool)) { return cast false; }
-    AnimationRootMotion.writeAnimationRootMotionAt__animationRootMotion((cast extractor : AnimationRootMotionExtractor).fromMotion, ({ final __callArgument5:Dynamic = extractor; __callArgument5; }), (cast startTime : Float), (cast extractor : AnimationRootMotionExtractor).fromSample);
-    AnimationRootMotion.writeAnimationRootMotionAt__animationRootMotion((cast extractor : AnimationRootMotionExtractor).toMotion, ({ final __callArgument6:Dynamic = extractor; __callArgument6; }), (cast endTime : Float), (cast extractor : AnimationRootMotionExtractor).toSample);
-    AnimationRootMotion.writeAnimationRootMotionDelta__animationRootMotion(({ final __callArgument7:Dynamic = out; __callArgument7; }), ({ final __callArgument8:Dynamic = (cast extractor : AnimationRootMotionExtractor).fromMotion; __callArgument8; }), ({ final __callArgument9:Dynamic = (cast extractor : AnimationRootMotionExtractor).toMotion; __callArgument9; }), (cast (cast (cast (cast extractor : AnimationRootMotionExtractor).channel : { var track:AnimationTrack; }).track : { var quaternion:Bool; }).quaternion : Bool));
+    AnimationRootMotion.writeAnimationRootMotionAt__animationRootMotion(extractor.fromMotion, ({ final __callArgument5:Dynamic = extractor; __callArgument5; }), (cast startTime : Float), extractor.fromSample);
+    AnimationRootMotion.writeAnimationRootMotionAt__animationRootMotion(extractor.toMotion, ({ final __callArgument6:Dynamic = extractor; __callArgument6; }), (cast endTime : Float), extractor.toSample);
+    AnimationRootMotion.writeAnimationRootMotionDelta__animationRootMotion(({ final __callArgument7:Dynamic = out; __callArgument7; }), ({ final __callArgument8:Dynamic = extractor.fromMotion; __callArgument8; }), ({ final __callArgument9:Dynamic = extractor.toMotion; __callArgument9; }), (cast (cast (cast extractor.channel : { var track:AnimationTrack; }).track : { var quaternion:Bool; }).quaternion : Bool));
     return cast true;
     return cast null;
   }
@@ -71,8 +71,8 @@ class AnimationRootMotion {
     var track:AnimationTrack = cast _Runtime.UNDEFINED;
     var cycle:Float = cast _Runtime.UNDEFINED;
     var localTime:Float = cast _Runtime.UNDEFINED;
-    duration = (cast (cast extractor : AnimationRootMotionExtractor).clip : { var duration:Float; }).duration;
-    track = (cast (cast extractor : AnimationRootMotionExtractor).channel : { var track:AnimationTrack; }).track;
+    duration = (cast extractor.clip : { var duration:Float; }).duration;
+    track = (cast extractor.channel : { var track:AnimationTrack; }).track;
     if ((cast !(cast _Runtime.compare(duration, 0.0, '>') : Bool) : Bool)) {
       AnimationRootMotion.writeAnimationRootMotionIdentity__animationRootMotion(({ final __callArgument11:Dynamic = out; __callArgument11; }), (cast track.components : Float), (cast track.quaternion : Bool));
       return;
@@ -82,14 +82,14 @@ class AnimationRootMotion {
     sampleAnimationTrack(({ final __callArgument12:Dynamic = sample; __callArgument12; }), ({ final __callArgument13:Dynamic = track; __callArgument13; }), (cast localTime : Float));
     if ((cast track.quaternion : Bool)) {
       AnimationRootMotion.writeAnimationRootMotionQuaternionPower__animationRootMotion(({ final __callArgument14:Dynamic = out; __callArgument14; }), ({ final __callArgument15:Dynamic = extractor; __callArgument15; }), (cast cycle : Float));
-      AnimationRootMotion.writeAnimationRootMotionDelta__animationRootMotion(({ final __callArgument16:Dynamic = (cast extractor : AnimationRootMotionExtractor).powerScratch; __callArgument16; }), ({ final __callArgument17:Dynamic = (cast extractor : AnimationRootMotionExtractor).startSample; __callArgument17; }), ({ final __callArgument18:Dynamic = sample; __callArgument18; }), (cast true : Bool));
-      AnimationRootMotion.multiplyAnimationRootMotionQuaternion__animationRootMotion(({ final __callArgument19:Dynamic = out; __callArgument19; }), ({ final __callArgument20:Dynamic = out; __callArgument20; }), ({ final __callArgument21:Dynamic = (cast extractor : AnimationRootMotionExtractor).powerScratch; __callArgument21; }));
+      AnimationRootMotion.writeAnimationRootMotionDelta__animationRootMotion(({ final __callArgument16:Dynamic = extractor.powerScratch; __callArgument16; }), ({ final __callArgument17:Dynamic = extractor.startSample; __callArgument17; }), ({ final __callArgument18:Dynamic = sample; __callArgument18; }), (cast true : Bool));
+      AnimationRootMotion.multiplyAnimationRootMotionQuaternion__animationRootMotion(({ final __callArgument19:Dynamic = out; __callArgument19; }), ({ final __callArgument20:Dynamic = out; __callArgument20; }), ({ final __callArgument21:Dynamic = extractor.powerScratch; __callArgument21; }));
       return;
     }
     {
       var component:Float = 0.0;
       while ((cast ((cast component : Float) < (cast track.components : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast component : Float), (cast ((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast sample : flighthq._internal._Float32Array), (cast component : Float)) - flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast extractor : AnimationRootMotionExtractor).startSample : flighthq._internal._Float32Array), (cast component : Float))) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast extractor : AnimationRootMotionExtractor).cycleDelta : flighthq._internal._Float32Array), (cast component : Float)) * cycle)) : Float));
+        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast component : Float), (cast ((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast sample : flighthq._internal._Float32Array), (cast component : Float)) - flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast extractor.startSample : flighthq._internal._Float32Array), (cast component : Float))) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast extractor.cycleDelta : flighthq._internal._Float32Array), (cast component : Float)) * cycle)) : Float));
         component++;
       }
     }
@@ -128,14 +128,14 @@ class AnimationRootMotion {
     var remaining:Float = cast _Runtime.UNDEFINED;
     AnimationRootMotion.writeAnimationRootMotionIdentity__animationRootMotion(({ final __callArgument23:Dynamic = out; __callArgument23; }), (cast 4.0 : Float), (cast true : Bool));
     if ((cast _Runtime.strictEquals(exponent, 0.0) : Bool)) { return; }
-    base = (cast extractor : AnimationRootMotionExtractor).powerScratch;
+    base = extractor.powerScratch;
     if ((cast ((cast exponent : Float) > (cast 0.0 : Float)) : Bool)) {
-      (cast base : flighthq._internal._Float32Array).set((cast extractor : AnimationRootMotionExtractor).cycleDelta);
+      (cast base : flighthq._internal._Float32Array).set(extractor.cycleDelta);
     } else {
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast base : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast -flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast extractor : AnimationRootMotionExtractor).cycleDelta : flighthq._internal._Float32Array), (cast 0.0 : Float)) : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast base : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast -flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast extractor : AnimationRootMotionExtractor).cycleDelta : flighthq._internal._Float32Array), (cast 1.0 : Float)) : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast base : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast -flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast extractor : AnimationRootMotionExtractor).cycleDelta : flighthq._internal._Float32Array), (cast 2.0 : Float)) : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast base : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast (cast extractor : AnimationRootMotionExtractor).cycleDelta : flighthq._internal._Float32Array), (cast 3.0 : Float)) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast base : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast -flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast extractor.cycleDelta : flighthq._internal._Float32Array), (cast 0.0 : Float)) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast base : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast -flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast extractor.cycleDelta : flighthq._internal._Float32Array), (cast 1.0 : Float)) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast base : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast -flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast extractor.cycleDelta : flighthq._internal._Float32Array), (cast 2.0 : Float)) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast base : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast extractor.cycleDelta : flighthq._internal._Float32Array), (cast 3.0 : Float)) : Float));
     }
     remaining = HxMath.abs(exponent);
     while ((cast ((cast remaining : Float) > (cast 0.0 : Float)) : Bool)) {

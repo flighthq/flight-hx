@@ -13107,7 +13107,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 22,
       "fields": 3,
       "id": "@flighthq/types:interface#AbcInstruction",
       "name": "AbcInstruction",
@@ -13307,7 +13307,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 22,
       "fields": 6,
       "id": "@flighthq/types:interface#AbcMultiname",
       "name": "AbcMultiname",
@@ -17167,7 +17167,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 21,
       "fields": 5,
       "id": "@flighthq/types:interface#CanvasRenderTexturePool",
       "name": "CanvasRenderTexturePool",

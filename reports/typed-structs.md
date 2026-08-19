@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1426 |
-| Direct schemas | 578 |
+| Audit-only schemas | 1421 |
+| Direct schemas | 583 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 8058 |
-| Directly emitted accesses | 22608 |
+| Pending accesses | 7951 |
+| Directly emitted accesses | 22715 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1426 |
+| Newly discovered, audit-only | 1421 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -51,12 +51,12 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#AbcException` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 3 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AbcFile` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AbcInstance` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#AbcInstruction` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 22 | 0 | 0 | 22 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AbcInstruction` | `direct` | `new` | — | reviewed escape-free ABC instruction | 3 | 22 | 0 | 0 | 0 | 22 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AbcMetadata` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AbcMetadataItem` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AbcMethod` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AbcMethodBody` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#AbcMultiname` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 15 | 7 | 0 | 22 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AbcMultiname` | `direct` | `new` | — | reviewed escape-free ABC multiname | 6 | 15 | 7 | 0 | 0 | 22 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AbcMultinameKind` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#AbcNamespace` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AbcOpcode` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
@@ -102,7 +102,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#AnimationLayerStackChannelSource` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AnimationLoopMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#AnimationPlayer` | `direct` | `new` | — | reviewed escape-free animation player | 10 | 42 | 19 | 0 | 0 | 61 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#AnimationRootMotionExtractor` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 21 | 0 | 0 | 21 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AnimationRootMotionExtractor` | `direct` | `new` | — | reviewed escape-free animation root-motion extractor | 10 | 21 | 0 | 0 | 0 | 21 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationSampleAccumulator` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 14 | 2 | 0 | 16 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationStateMachine` | `direct` | `new` | — | reviewed escape-free animation state machine | 12 | 38 | 14 | 1 | 0 | 53 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationStateMachineChannel` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
@@ -273,7 +273,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CanvasRenderTargetPool` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTextureEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 12 | 3 | 0 | 15 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTextureExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CanvasRenderTexturePool` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 18 | 3 | 0 | 21 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CanvasRenderTexturePool` | `direct` | `new` | — | reviewed escape-free Canvas render-texture pool | 5 | 18 | 3 | 0 | 0 | 21 | 0 | 0 | yes | — |
 | `@flighthq/types:type#CanvasRenderTextureStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#CanvasShapeCommand` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 1 | 0 | 1 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasShapeDrawState` | `direct` | `new` | — | reviewed escape-free Canvas shape draw state | 16 | 50 | 60 | 5 | 0 | 115 | 0 | 0 | yes | — |
@@ -862,7 +862,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#LogContext` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#LogData` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#LogDataProvider` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#LogEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 21 | 0 | 0 | 21 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#LogEntry` | `direct` | `new` | — | reviewed escape-free log entry | 3 | 21 | 0 | 0 | 0 | 21 | 0 | 0 | yes | — |
 | `@flighthq/types:type#LogFormatter` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#LogSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#LogSink` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |

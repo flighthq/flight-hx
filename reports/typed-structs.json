@@ -555,9 +555,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 22,
+        "directAccesses": 22,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -595,7 +595,7 @@
       },
       "name": "AbcInstruction",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free ABC instruction",
       "reasons": [],
       "source": "upstream/packages/types/src/Abc.ts",
       "sourceProvenance": {
@@ -913,9 +913,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 22,
+        "directAccesses": 22,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -977,7 +977,7 @@
       },
       "name": "AbcMultiname",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free ABC multiname",
       "reasons": [],
       "source": "upstream/packages/types/src/Abc.ts",
       "sourceProvenance": {
@@ -10010,9 +10010,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 21,
+        "directAccesses": 21,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -10112,7 +10112,7 @@
       },
       "name": "AnimationRootMotionExtractor",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free animation root-motion extractor",
       "reasons": [],
       "source": "upstream/packages/types/src/AnimationRootMotionExtractor.ts",
       "sourceProvenance": {
@@ -43350,9 +43350,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 21,
+        "directAccesses": 21,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -43406,7 +43406,7 @@
       },
       "name": "CanvasRenderTexturePool",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Canvas render-texture pool",
       "reasons": [],
       "source": "upstream/packages/types/src/CanvasRenderTexture.ts",
       "sourceProvenance": {
@@ -172071,9 +172071,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 21,
+        "directAccesses": 21,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -172111,7 +172111,7 @@
       },
       "name": "LogEntry",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free log entry",
       "reasons": [],
       "source": "upstream/packages/types/src/Log.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1426,
+      "newAuditOnly": 1421,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1426,
+    "auditOnlySchemas": 1421,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 22608,
-    "directSchemas": 578,
+    "directAccesses": 22715,
+    "directSchemas": 583,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 8058,
+    "pendingAccesses": 7951,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"
