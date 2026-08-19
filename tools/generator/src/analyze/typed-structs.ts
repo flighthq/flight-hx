@@ -393,6 +393,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#StatechartTransition',
     purpose: 'reviewed escape-free statechart transition',
   },
+  {
+    declarationFingerprint: 'sha256:8ec3670c4d9138ddabd2f31f44282b7a63234e7b28abfeaaa79fb46b60386ac4',
+    id: '@flighthq/types:interface#TextureContainer',
+    purpose: 'reviewed escape-free texture container',
+  },
+  {
+    declarationFingerprint: 'sha256:22098c0143137cb3701785c749ec0e7c11469f7bd572f09d9e5d884bb1662a2a',
+    id: '@flighthq/types:interface#TextureContainerLevel',
+    purpose: 'reviewed escape-free texture container level',
+  },
+  {
+    declarationFingerprint: 'sha256:0bd021297d7eda8245da83f5d68c7bc9458594d019d2b8fe0106ff9cc338fcb0',
+    id: '@flighthq/types:interface#RenderTexture',
+    purpose: 'reviewed escape-free render texture',
+  },
+  {
+    declarationFingerprint: 'sha256:a7fa638af0c9e6325e55fe5a74a9b9a6af64eb5bcba6dd5adbd45c089c1d8836',
+    id: '@flighthq/types:interface#GlRenderTextureEntry',
+    purpose: 'reviewed escape-free WebGL render-texture entry',
+  },
+  {
+    declarationFingerprint: 'sha256:a5243909363d6d37ff704867c3df7bbceae877b0eac612d58b88af423e746572',
+    id: '@flighthq/types:interface#WgpuRenderTextureEntry',
+    purpose: 'reviewed escape-free WebGPU render-texture entry',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

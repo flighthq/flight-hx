@@ -7,7 +7,7 @@ This is a construction, structural-flow, and observability census. It does not e
 | Metric | Count |
 | --- | ---: |
 | Eligible canonical schemas | 1536 |
-| Direct field accesses | 19567 |
+| Direct field accesses | 19738 |
 | Declared optional fields | 1970 |
 | Declared required-undefined fields | 2 |
 | Production object literals | 1842 |
@@ -477,7 +477,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#GlRenderStats` | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlRenderTarget` | 303 | 18 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 130 | 15 | 8 | 0 | no | `anonymous-structural-transfer` | — |
 | `@flighthq/types:interface#GlRenderTargetPool` | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 15 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#GlRenderTextureEntry` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#GlRenderTextureEntry` | 24 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlRenderTextureExplanation` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlRenderTexturePool` | 0 | 5 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlScene3DDrawEntry` | 0 | 10 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
@@ -943,7 +943,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#RenderTargetDescriptor` | 50 | 10 | 8 | 0 | 6 | 4 | 2 | 0 | 4 | 5 | 27 | 0 | 0 | 0 | 0 | 0 | 22 | 0 | 148 | 0 | no | `anonymous-structural-transfer`, `cross-schema-transfer`, `object-literal-spread` | `optional-omission` |
 | `@flighthq/types:interface#RenderTargetDimensions` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#RenderTargetExplanation` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#RenderTexture` | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 44 | 4 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#RenderTexture` | 30 | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 44 | 4 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#RenderViewport2D` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 14 | 0 | yes | — | — |
 | `@flighthq/types:interface#ReplaceTextInputOptions` | 0 | 3 | 3 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 5 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#ResolvedRenderTargetDescriptor` | 49 | 10 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 2 | yes | — | `object-spread` |
@@ -1311,8 +1311,8 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#TextureAtlasRegion` | 288 | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 6 | 30 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#TextureAtlasRegionTextureExplanation` | 0 | 1 | 0 | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#TextureAtlasStarlingParseOptions` | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#TextureContainer` | 0 | 9 | 0 | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 5 | 13 | 10 | yes | — | `object-spread` |
-| `@flighthq/types:interface#TextureContainerLevel` | 0 | 4 | 0 | 0 | 5 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 12 | 0 | yes | — | — |
+| `@flighthq/types:interface#TextureContainer` | 62 | 9 | 0 | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 5 | 13 | 10 | yes | — | `object-spread` |
+| `@flighthq/types:interface#TextureContainerLevel` | 32 | 4 | 0 | 0 | 5 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 12 | 0 | yes | — | — |
 | `@flighthq/types:interface#TextureContainerParseExplanation` | 0 | 2 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | no | `anonymous-structural-transfer` | — |
 | `@flighthq/types:interface#TexturePackerArrayDocument` | 1 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | no | `anonymous-structural-transfer` | `json-serialization` |
 | `@flighthq/types:interface#TexturePackerArrayFrame` | 0 | 7 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
@@ -1484,7 +1484,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#WgpuRenderStateSignals` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuRenderStats` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | no | `anonymous-structural-transfer` | — |
 | `@flighthq/types:interface#WgpuRenderTarget` | 152 | 11 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 127 | 7 | 2 | 0 | no | `anonymous-structural-transfer` | — |
-| `@flighthq/types:interface#WgpuRenderTextureEntry` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#WgpuRenderTextureEntry` | 23 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuRenderTextureExplanation` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuRenderTexturePool` | 0 | 5 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuSavedPassState` | 0 | 7 | 0 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |

@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1531 |
-| Direct schemas | 473 |
+| Audit-only schemas | 1526 |
+| Direct schemas | 478 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 11099 |
-| Directly emitted accesses | 19567 |
+| Pending accesses | 10928 |
+| Directly emitted accesses | 19738 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1531 |
+| Newly discovered, audit-only | 1526 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -627,7 +627,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GlRenderStats` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderTarget` | `direct` | `new` | — | reviewed escape-free WebGL render target | 18 | 276 | 27 | 0 | 0 | 303 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderTargetPool` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#GlRenderTextureEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 19 | 5 | 0 | 24 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlRenderTextureEntry` | `direct` | `new` | — | reviewed escape-free WebGL render-texture entry | 2 | 19 | 5 | 0 | 0 | 24 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderTextureExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GlRenderTextureGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#GlRenderTexturePool` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 15 | 2 | 0 | 17 | 0 | 0 | 0 | yes | — |
@@ -1282,7 +1282,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#RenderTargetFormat` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#RenderTargetFormatPolicy` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#RenderTargetSizeOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#RenderTexture` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 22 | 8 | 0 | 30 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RenderTexture` | `direct` | `new` | — | reviewed escape-free render texture | 10 | 22 | 8 | 0 | 0 | 30 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderViewport2D` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ReplaceTextInputOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ResolvedRenderTargetDescriptor` | `direct` | `new` | — | reviewed escape-free resolved render-target descriptor | 10 | 49 | 0 | 0 | 0 | 49 | 0 | 0 | yes | — |
@@ -1778,10 +1778,10 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#TextureAtlasRegionTextureStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#TextureAtlasStarlingParseOptions` | `direct` | `relocated` | `@flighthq/textureatlas-formats:interface#TextureAtlasStarlingParseOptions` | broad serialization document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#TextureColorSpace` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#TextureContainer` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 62 | 0 | 0 | 62 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TextureContainer` | `direct` | `new` | — | reviewed escape-free texture container | 9 | 62 | 0 | 0 | 0 | 62 | 0 | 0 | yes | — |
 | `@flighthq/types:type#TextureContainerFormat` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#TextureContainerKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#TextureContainerLevel` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 32 | 0 | 0 | 32 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TextureContainerLevel` | `direct` | `new` | — | reviewed escape-free texture container level | 4 | 32 | 0 | 0 | 0 | 32 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextureContainerParseExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#TextureContainerParseFailureReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#TextureContainerSupercompression` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -2009,7 +2009,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuRenderStats` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderTarget` | `direct` | `new` | — | reviewed escape-free WebGPU render target | 11 | 136 | 16 | 0 | 0 | 152 | 0 | 0 | yes | — |
 | `@flighthq/types:type#WgpuRenderTargetPool` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuRenderTextureEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 18 | 5 | 0 | 23 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuRenderTextureEntry` | `direct` | `new` | — | reviewed escape-free WebGPU render-texture entry | 2 | 18 | 5 | 0 | 0 | 23 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderTextureExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#WgpuRenderTextureGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#WgpuRenderTexturePool` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 15 | 2 | 0 | 17 | 0 | 0 | 0 | yes | — |

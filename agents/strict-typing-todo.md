@@ -5,9 +5,9 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,536 public schemas are semantically eligible for typed structural lowering.
-- 473 schemas currently emit direct fields, covering 19,567 accesses.
-- 1,063 eligible schemas remain audit-only, covering 11,099 pending accesses.
-- 806 audit-only schemas have no recorded escape, covering 6,345 pending accesses.
+- 478 schemas currently emit direct fields, covering 19,738 accesses.
+- 1,058 eligible schemas remain audit-only, covering 10,928 pending accesses.
+- 801 audit-only schemas have no recorded escape, covering 6,174 pending accesses.
 - Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
 - Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
@@ -45,6 +45,7 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Promote `Physics2DPrismaticJoint`, `Physics2DPulleyJoint`, `Physics2DGearJoint`, `Physics2DWheelJoint`, and `Physics2DRevoluteJoint`: 155 accesses now emit directly across two generated modules. Cross-schema transfer and object-literal spread keep all five records structural and outside the cpp provenance candidate pool. The tranche removes redundant schema casts while generated `Dynamic`, `_Runtime.field`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote `Skeleton2D`, `Skeleton3D`, `MeshSkinBindPose`, `SkinAttachment2D`, and `Skeleton2DPathConstraint`: 179 accesses now emit directly across 24 generated modules. Cross-schema transfers keep both skeleton aggregates and the path constraint structural; propagated normalization provenance keeps the mechanically compatible bind-pose and skin-attachment leaves structural. The tranche removes 126 `_Runtime.field` calls and six `Dynamic` occurrences while `Reflect` and type-erasure debt remain unchanged.
 - [x] Promote `AnimationStateMachine`, `AnimationCrossfade`, `Statechart`, `StatechartInstance`, and `StatechartTransition`: 172 accesses now emit directly across seven generated modules. Cross-schema transfers keep the animation records structural, JSON serialization keeps `Statechart` structural, and the provenance-closed instance and transition remain structural pending separate cpp review. The tranche removes 100 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
+- [x] Promote `TextureContainer`, `TextureContainerLevel`, `RenderTexture`, `GlRenderTextureEntry`, and `WgpuRenderTextureEntry`: 171 accesses now emit directly across 12 generated modules. Object spread keeps the container structural, cross-schema transfer keeps the render texture structural, and propagated normalization provenance keeps the three mechanically compatible leaf records structural. The tranche removes 63 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [ ] Review the next cohesive five-row zero-escape tranche from the refreshed audit, preserving exact fingerprint, provenance, Haxe, portability, and affected-parity gates.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 

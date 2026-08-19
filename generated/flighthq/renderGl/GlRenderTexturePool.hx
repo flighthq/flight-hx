@@ -25,9 +25,9 @@ class GlRenderTexturePool {
     var renderTexture:RenderTexture = cast _Runtime.UNDEFINED;
     GlRenderTexturePool.assertUsablePool__glRenderTexturePool(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = pool; __callArgument1; }));
     renderTexture = _Runtime.coalesce(_Runtime.callProperty((cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).free, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast createRenderTexture(({ final __callArgument2:Dynamic = descriptor; __callArgument2; })) : RenderTexture));
-    GlRenderTexturePool.applyRenderTargetDescriptor__glRenderTexturePool((cast renderTexture : RenderTexture).source, ({ final __callArgument3:Dynamic = descriptor; __callArgument3; }));
+    GlRenderTexturePool.applyRenderTargetDescriptor__glRenderTexturePool(renderTexture.source, ({ final __callArgument3:Dynamic = descriptor; __callArgument3; }));
     resetTextureUvTransform(({ final __callArgument4:Dynamic = renderTexture; __callArgument4; }));
-    ((cast renderTexture : RenderTexture).colorSpace = _Runtime.coalesce(descriptor.colorSpace, function():Dynamic return cast 'srgb'));
+    (renderTexture.colorSpace = cast (_Runtime.coalesce(descriptor.colorSpace, function():Dynamic return cast 'srgb') : TextureColorSpace));
     invalidateGlRenderTexture(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = renderTexture; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     ((cast (cast pool : flighthq.types.GlRenderTexture.GlRenderTexturePool).leased : flighthq._internal._Set<RenderTexture>).add(renderTexture));
     return cast renderTexture;

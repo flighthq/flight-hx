@@ -22,7 +22,7 @@ class ImageResource {
   }
 
   public static function createCompressedImage(compressed:CompressedImageData):CompressedImage {
-    return cast (cast createEntity(({ final __callArgument0:Dynamic = { alphaType: ImageResource.DECODED_ALPHA_TYPE__imageResource, compressed: compressed, gamut: ImageResource.DECODED_GAMUT__imageResource, height: (cast compressed.container : TextureContainer).height, kind: CompressedImageTextureSourceKind, version: 0.0, width: (cast compressed.container : TextureContainer).width }; __callArgument0; })) : { >Entity, var alphaType:String; var compressed:CompressedImageData; var gamut:String; var height:Float; var kind:String; var version:Float; var width:Float; });
+    return cast (cast createEntity(({ final __callArgument0:Dynamic = { alphaType: ImageResource.DECODED_ALPHA_TYPE__imageResource, compressed: compressed, gamut: ImageResource.DECODED_GAMUT__imageResource, height: (cast compressed.container : { var height:Float; }).height, kind: CompressedImageTextureSourceKind, version: 0.0, width: (cast compressed.container : { var width:Float; }).width }; __callArgument0; })) : { >Entity, var alphaType:String; var compressed:CompressedImageData; var gamut:String; var height:Float; var kind:String; var version:Float; var width:Float; });
     return cast null;
   }
 

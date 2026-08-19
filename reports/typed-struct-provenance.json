@@ -24781,7 +24781,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 24,
       "fields": 2,
       "id": "@flighthq/types:interface#GlRenderTextureEntry",
       "name": "GlRenderTextureEntry",
@@ -51065,7 +51065,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 32,
       "fields": 4,
       "id": "@flighthq/types:interface#TextureContainerLevel",
       "name": "TextureContainerLevel",
@@ -56430,7 +56430,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 23,
       "fields": 2,
       "id": "@flighthq/types:interface#WgpuRenderTextureEntry",
       "name": "WgpuRenderTextureEntry",
