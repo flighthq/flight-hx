@@ -368,7 +368,7 @@ class Awd2Parse {
               _Runtime.callProperty(document.meshes, 'push', cast ([mesh] : Array<Dynamic>));
               var childIndex:Float = _Runtime.field(document.nodes, 'length');
               _Runtime.callProperty(document.nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
-              _Runtime.callProperty((cast group : Scene3DDocumentNode).children, 'push', cast ([childIndex] : Array<Dynamic>));
+              _Runtime.callProperty(group.children, 'push', cast ([childIndex] : Array<Dynamic>));
               i++;
             }
           }
@@ -389,7 +389,7 @@ class Awd2Parse {
       if ((cast !_Runtime.strictEquals((cast container : ParsedContainer__awd2Parse).parentId, 0.0) : Bool)) {
         var parentIndex:Null<Float> = ((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get((cast container : ParsedContainer__awd2Parse).parentId));
         if ((cast !_Runtime.strictEquals(parentIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, parentIndex) : Scene3DDocumentNode).children, 'push', cast ([((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get(blockId))] : Array<Dynamic>));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, parentIndex) : { var children:Array<Float>; }).children, 'push', cast ([((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get(blockId))] : Array<Dynamic>));
           ((cast parented : flighthq._internal._Set<Float>).add(blockId));
         }
       }
@@ -400,7 +400,7 @@ class Awd2Parse {
       if ((cast !_Runtime.strictEquals((cast meshInst : ParsedMeshInstance__awd2Parse).parentId, 0.0) : Bool)) {
         var parentIndex:Null<Float> = ((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get((cast meshInst : ParsedMeshInstance__awd2Parse).parentId));
         if ((cast !_Runtime.strictEquals(parentIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, parentIndex) : Scene3DDocumentNode).children, 'push', cast ([((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get(blockId))] : Array<Dynamic>));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, parentIndex) : { var children:Array<Float>; }).children, 'push', cast ([((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get(blockId))] : Array<Dynamic>));
           ((cast parented : flighthq._internal._Set<Float>).add(blockId));
         }
       }
@@ -777,9 +777,9 @@ class Awd2Parse {
       while ((cast ((cast j : Float) < (cast jointCount : Float)) : Bool)) {
         var parentIndex1:Float = (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(parsedSkeleton, 'joints'), j) : ParsedJoint__awd2Parse).parentIndex;
         if ((cast ((cast ((cast parentIndex1 : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast (parentIndex1 - 1.0) : Float) < (cast jointCount : Float)) : Bool)) : Bool)) {
-          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast (parentIndex1 - 1.0) : Float))) : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast (parentIndex1 - 1.0) : Float))) : { var children:Array<Float>; }).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
         } else {
-          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, skeletonRootIndex) : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, skeletonRootIndex) : { var children:Array<Float>; }).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
         }
         j++;
       }
@@ -810,7 +810,7 @@ class Awd2Parse {
         } else {
           copyMatrix4(({ final __callArgument149:Dynamic = local; __callArgument149; }), ({ final __callArgument150:Dynamic = flighthq._internal._StaticIndex.readArray(bindWorld, j); __callArgument150; }));
         }
-        decomposeMatrix4ToTransform3D(({ final __callArgument151:Dynamic = (cast flighthq._internal._StaticIndex.readArray(document.nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))) : Scene3DDocumentNode).transform; __callArgument151; }), ({ final __callArgument152:Dynamic = local; __callArgument152; }));
+        decomposeMatrix4ToTransform3D(({ final __callArgument151:Dynamic = (cast flighthq._internal._StaticIndex.readArray(document.nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))) : { var transform:Transform3D; }).transform; __callArgument151; }), ({ final __callArgument152:Dynamic = local; __callArgument152; }));
         j++;
       }
     }

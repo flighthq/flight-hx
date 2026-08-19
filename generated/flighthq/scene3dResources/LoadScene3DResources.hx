@@ -59,7 +59,7 @@ class LoadScene3DResources {
             loaded++;
             continue;
           }
-          var entry:Null<Scene3DResourceInFlight> = ((cast (cast runtime : Scene3DResourceResolverRuntime).inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).get(ref));
+          var entry:Null<Scene3DResourceInFlight> = ((cast runtime.inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).get(ref));
           if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
           _Runtime.callProperty(pending, 'push', cast ([_Runtime.callProperty((cast entry : { var promise:flighthq._internal._Promise<flighthq._internal._Nothing>; }).promise, 'then', cast ([function(__unused0:flighthq._internal._Nothing):Void {
             loaded++;
@@ -92,7 +92,7 @@ class LoadScene3DResources {
         var promises:Array<flighthq._internal._Promise<flighthq._internal._Nothing>> = cast _Runtime.UNDEFINED;
         runtime = _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey);
         promises = cast ([] : Array<Dynamic>);
-        for (entry in _Runtime.iterable(((cast (cast runtime : Scene3DResourceResolverRuntime).inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).values()))) {
+        for (entry in _Runtime.iterable(((cast runtime.inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).values()))) {
           _Runtime.callProperty(promises, 'push', cast ([entry.promise] : Array<Dynamic>));
         }
         return flighthq._internal._Async.flatMap(flighthq._internal._Async.allSettled(promises), function(__awaitValue16:Dynamic):Dynamic {

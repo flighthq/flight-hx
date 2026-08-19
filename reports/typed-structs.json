@@ -36100,9 +36100,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 25,
+        "directAccesses": 25,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -36164,7 +36164,7 @@
       },
       "name": "BitmapTextData",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free bitmap-text data",
       "reasons": [],
       "source": "upstream/packages/types/src/BitmapText.ts",
       "sourceProvenance": {
@@ -145024,9 +145024,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 25,
+        "directAccesses": 25,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -145112,7 +145112,7 @@
       },
       "name": "GradientGlowEffect",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free gradient-glow effect",
       "reasons": [],
       "source": "upstream/packages/types/src/GradientGlowEffect.ts",
       "sourceProvenance": {
@@ -280994,9 +280994,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 24,
+        "directAccesses": 24,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -281050,7 +281050,7 @@
       },
       "name": "Scene3DDocumentNode",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Scene3D document node",
       "reasons": [],
       "source": "upstream/packages/types/src/Scene3DDocument.ts",
       "sourceProvenance": {
@@ -283817,9 +283817,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 25,
+        "directAccesses": 25,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -283865,7 +283865,7 @@
       },
       "name": "Scene3DResourceResolverRuntime",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Scene3D resource-resolver runtime",
       "reasons": [],
       "source": "upstream/packages/types/src/Scene3DResources.ts",
       "sourceProvenance": {
@@ -418268,9 +418268,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 24,
+        "directAccesses": 24,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -418348,7 +418348,7 @@
       },
       "name": "WgpuShapeMeshBuffers",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WebGPU shape-mesh buffers",
       "reasons": [],
       "source": "upstream/packages/types/src/WgpuRenderState.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1441,
+      "newAuditOnly": 1436,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1441,
+    "auditOnlySchemas": 1436,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 22261,
-    "directSchemas": 563,
+    "directAccesses": 22384,
+    "directSchemas": 568,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 8405,
+    "pendingAccesses": 8282,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

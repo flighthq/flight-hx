@@ -267,7 +267,7 @@ class GltfParse {
             var m:Float = 0.0;
             while ((cast ((cast m : Float) < (cast _Runtime.field(docMeshes, 'length') : Float)) : Bool)) {
               var childIndex:Float = _Runtime.field(nodes, 'length');
-              _Runtime.callProperty((cast group : Scene3DDocumentNode).children, 'push', cast ([childIndex] : Array<Dynamic>));
+              _Runtime.callProperty(group.children, 'push', cast ([childIndex] : Array<Dynamic>));
               _Runtime.callProperty(flighthq._internal._StaticIndex.readArray(gltfNodePrimitiveNodes, i), 'push', cast ([childIndex] : Array<Dynamic>));
               _Runtime.callProperty(nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: flighthq._internal._StaticIndex.readFloatArrayTyped((cast docMeshes : Array<Float>), (cast m : Float)), transform: (cast GltfParse.createIdentityTransform__gltfParse() : Transform3D) }] : Array<Dynamic>));
               m++;
@@ -288,7 +288,7 @@ class GltfParse {
         {
           var c:Float = 0.0;
           while ((cast ((cast c : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-            _Runtime.callProperty((cast parent : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast gltfNodeToDocNode : Array<Float>), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast children : Array<Float>), (cast c : Float)) : Float))] : Array<Dynamic>));
+            _Runtime.callProperty(parent.children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast gltfNodeToDocNode : Array<Float>), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast children : Array<Float>), (cast c : Float)) : Float))] : Array<Dynamic>));
             c++;
           }
         }
@@ -626,7 +626,7 @@ class GltfParse {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(meshNodeIndices, 'length') : Float)) : Bool)) {
-        var meshIndex:Null<Float> = ({ final __structural147 = flighthq._internal._StaticIndex.readArray(nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast meshNodeIndices : Array<Float>), (cast i : Float))); __structural147 == null ? _Runtime.UNDEFINED : (cast __structural147 : Scene3DDocumentNode).mesh; });
+        var meshIndex:Null<Float> = ({ final __typedStruct147 = flighthq._internal._StaticIndex.readArray(nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast meshNodeIndices : Array<Float>), (cast i : Float))); __typedStruct147 == null ? _Runtime.UNDEFINED : (cast __typedStruct147 : { @:optional var mesh:Null<Float>; }).mesh; });
         var morph:Null<MeshMorph> = ((cast !_Runtime.strictEquals(meshIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast ({ final __structural148 = flighthq._internal._StaticIndex.readArray(meshes, meshIndex); __structural148 == null ? _Runtime.UNDEFINED : (cast __structural148 : Scene3DDocumentMesh).morph; }) : Dynamic) : (cast null : Dynamic));
         if ((cast ((cast _Runtime.looseEquals(morph, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast morph : MeshMorph).targets, 'length'), 0.0) : Bool)) : Bool)) { i++; continue; }
         if ((cast !_Runtime.strictEquals(_Runtime.field(values, 'length'), _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(perKey, _Runtime.field(times, 'length')), _Runtime.field((cast morph : MeshMorph).targets, 'length'))) : Bool)) {

@@ -16673,7 +16673,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 25,
       "fields": 6,
       "id": "@flighthq/types:interface#BitmapTextData",
       "name": "BitmapTextData",
@@ -42786,7 +42786,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 25,
       "fields": 4,
       "id": "@flighthq/types:interface#Scene3DResourceResolverRuntime",
       "name": "Scene3DResourceResolverRuntime",
@@ -56868,7 +56868,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 24,
       "fields": 8,
       "id": "@flighthq/types:interface#WgpuShapeMeshBuffers",
       "name": "WgpuShapeMeshBuffers",

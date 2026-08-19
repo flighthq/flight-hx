@@ -371,7 +371,7 @@ class ObjParse {
     _Runtime.callProperty(document.meshes, 'push', cast ([mesh] : Array<Dynamic>));
     nodeIndex = _Runtime.field(document.nodes, 'length');
     node = (cast { children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: (cast createTransform3D() : Transform3D) });
-    if ((cast !_Runtime.strictEquals(name, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast node : Scene3DDocumentNode).name = name); }
+    if ((cast !_Runtime.strictEquals(name, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (node.name = cast (name : Null<String>)); }
     _Runtime.callProperty(document.nodes, 'push', cast ([node] : Array<Dynamic>));
     _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([nodeIndex] : Array<Dynamic>));
   }
@@ -449,7 +449,7 @@ class ObjParse {
     meshIndex = _Runtime.field(document.meshes, 'length');
     _Runtime.callProperty(document.meshes, 'push', cast ([{ geometry: geometry, materials: cast ([-1.0] : Array<Dynamic>) }] : Array<Dynamic>));
     node = (cast { children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: (cast createTransform3D() : Transform3D) });
-    if ((cast !_Runtime.strictEquals(name, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast node : Scene3DDocumentNode).name = name); }
+    if ((cast !_Runtime.strictEquals(name, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (node.name = cast (name : Null<String>)); }
     _Runtime.callProperty(document.nodes, 'push', cast ([node] : Array<Dynamic>));
     _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([_Runtime.subtractNumbers(_Runtime.field(document.nodes, 'length'), 1.0)] : Array<Dynamic>));
   }

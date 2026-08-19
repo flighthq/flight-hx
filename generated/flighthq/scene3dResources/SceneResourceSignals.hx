@@ -26,15 +26,15 @@ class SceneResourceSignals {
     var runtime:Scene3DResourceResolverRuntime = cast _Runtime.UNDEFINED;
     var signals:Scene3DResourceSignals = cast _Runtime.UNDEFINED;
     runtime = _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey);
-    if ((cast !_Runtime.strictEquals((cast runtime : Scene3DResourceResolverRuntime).signals, null) : Bool)) { return cast (cast runtime : Scene3DResourceResolverRuntime).signals; }
+    if ((cast !_Runtime.strictEquals(runtime.signals, null) : Bool)) { return cast runtime.signals; }
     signals = (cast createScene3DResourceSignals() : Scene3DResourceSignals);
-    ((cast runtime : Scene3DResourceResolverRuntime).signals = signals);
+    (runtime.signals = cast (signals : Null<Scene3DResourceSignals>));
     return cast signals;
     return cast null;
   }
 
   public static function getScene3DResourceSignals(resolver:Scene3DResourceResolver):Null<Scene3DResourceSignals> {
-    return cast (cast _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey) : Scene3DResourceResolverRuntime).signals;
+    return cast (cast _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey) : { var signals:Null<Scene3DResourceSignals>; }).signals;
     return cast null;
   }
 }

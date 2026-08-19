@@ -781,7 +781,7 @@ class ThreeDsParse {
     meshIndex = _Runtime.field(document.meshes, 'length');
     _Runtime.callProperty(document.meshes, 'push', cast ([documentMesh] : Array<Dynamic>));
     node = (cast { children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: transform });
-    if ((cast ((cast _Runtime.field(mesh.name, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ((cast node : Scene3DDocumentNode).name = mesh.name); }
+    if ((cast ((cast _Runtime.field(mesh.name, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { (node.name = cast (mesh.name : Null<String>)); }
     nodeIndex = _Runtime.field(document.nodes, 'length');
     _Runtime.callProperty(document.nodes, 'push', cast ([node] : Array<Dynamic>));
     _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([nodeIndex] : Array<Dynamic>));

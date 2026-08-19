@@ -72,7 +72,7 @@ class ResolveScene3DResources {
         if ((cast _Runtime.looseEquals(ref, null) : Bool)) { i++; continue; }
         var image:Null<TextureSource> = ((cast _Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) ? (cast (cast texture : Texture2D).source : Dynamic) : (cast null : Dynamic));
         if ((cast _Runtime.strictEquals(({ final __typedStruct8 = image; __typedStruct8 == null ? _Runtime.UNDEFINED : (cast __typedStruct8 : { var kind:String; }).kind; }), ImageTextureSourceKind) : Bool)) {
-          ((cast (cast runtime : Scene3DResourceResolverRuntime).resolved : flighthq._internal._Map<ImageResourceReference, Image>).set(ref, (cast (cast image : Image))));
+          ((cast runtime.resolved : flighthq._internal._Map<ImageResourceReference, Image>).set(ref, (cast (cast image : Image))));
           ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = null);
           ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved);
         }
@@ -91,7 +91,7 @@ class ResolveScene3DResources {
     for (__iteration0 in _Runtime.iterable(working)) {
       var ref:ImageResourceReference = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
       var subscribers:Array<Texture> = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
-      var image:Null<Image> = ((cast (cast runtime : Scene3DResourceResolverRuntime).resolved : flighthq._internal._Map<ImageResourceReference, Image>).get(ref));
+      var image:Null<Image> = ((cast runtime.resolved : flighthq._internal._Map<ImageResourceReference, Image>).get(ref));
       if ((cast _Runtime.strictEquals(image, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         if ((cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved) : Bool)) { ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved); }
         _Runtime.callProperty(unresolved, 'push', cast ([{ ref: ref, textures: subscribers }] : Array<Dynamic>));
@@ -138,7 +138,7 @@ class ResolveScene3DResources {
   public static function cancelDroppedResolutions__resolveScene3DResources(resolver:Scene3DResourceResolver, working:flighthq._internal._Map<ImageResourceReference, Array<Texture>>):Void {
     var runtime:Scene3DResourceResolverRuntime = cast _Runtime.UNDEFINED;
     runtime = _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey);
-    for (__iteration1 in _Runtime.iterable((cast runtime : Scene3DResourceResolverRuntime).inFlight)) {
+    for (__iteration1 in _Runtime.iterable(runtime.inFlight)) {
       var ref:ImageResourceReference = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
       var entry:Scene3DResourceInFlight = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
       var subscribers:Null<Array<Texture>> = ((cast working : flighthq._internal._Map<ImageResourceReference, Array<Texture>>).get(ref));
@@ -154,7 +154,7 @@ class ResolveScene3DResources {
         continue;
       }
       (cast entry.controller : flighthq._internal.dom.AbortController).abort();
-      ((cast (cast runtime : Scene3DResourceResolverRuntime).inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).delete_(ref));
+      ((cast runtime.inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).delete_(ref));
       if ((cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Loading) : Bool)) {
         ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved);
       }
@@ -164,8 +164,8 @@ class ResolveScene3DResources {
   public static function finishScene3DResourceResolution__resolveScene3DResources(resolver:Scene3DResourceResolver, ref:ImageResourceReference, entry:Scene3DResourceInFlight, image:Null<Image>):Void {
     var runtime:Scene3DResourceResolverRuntime = cast _Runtime.UNDEFINED;
     runtime = _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey);
-    if ((cast !_Runtime.strictEquals(((cast (cast runtime : Scene3DResourceResolverRuntime).inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).get(ref)), entry) : Bool)) { return; }
-    ((cast (cast runtime : Scene3DResourceResolverRuntime).inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).delete_(ref));
+    if ((cast !_Runtime.strictEquals(((cast runtime.inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).get(ref)), entry) : Bool)) { return; }
+    ((cast runtime.inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).delete_(ref));
     if ((cast _Runtime.strictEquals(image, null) : Bool)) {
       ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = { kind: (cast ImageResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Unavailable, message: 'Image resource resolution returned no image', name: null });
       ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed);
@@ -174,7 +174,7 @@ class ResolveScene3DResources {
       }
       return;
     }
-    ((cast (cast runtime : Scene3DResourceResolverRuntime).resolved : flighthq._internal._Map<ImageResourceReference, Image>).set(ref, (cast image)));
+    ((cast runtime.resolved : flighthq._internal._Map<ImageResourceReference, Image>).set(ref, (cast image)));
     ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = null);
     ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved);
     for (texture in _Runtime.iterable(entry.subscribers)) {
@@ -185,8 +185,8 @@ class ResolveScene3DResources {
   public static function failScene3DResourceResolution__resolveScene3DResources(resolver:Scene3DResourceResolver, ref:ImageResourceReference, entry:Scene3DResourceInFlight, cause:flighthq._internal._Any):Void {
     var runtime:Scene3DResourceResolverRuntime = cast _Runtime.UNDEFINED;
     runtime = _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey);
-    if ((cast !_Runtime.strictEquals(((cast (cast runtime : Scene3DResourceResolverRuntime).inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).get(ref)), entry) : Bool)) { return; }
-    ((cast (cast runtime : Scene3DResourceResolverRuntime).inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).delete_(ref));
+    if ((cast !_Runtime.strictEquals(((cast runtime.inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).get(ref)), entry) : Bool)) { return; }
+    ((cast runtime.inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).delete_(ref));
     if ((cast (cast (cast entry.controller : flighthq._internal.dom.AbortController).signal : flighthq._internal.dom.AbortSignal).aborted : Bool)) { return; }
     ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = (cast createImageResourceFailure((cast cause : flighthq._internal._Any)) : ImageResourceFailure));
     ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed);
@@ -206,7 +206,7 @@ class ResolveScene3DResources {
   public static function emitScene3DResourceEvent__resolveScene3DResources(resolver:Scene3DResourceResolver, texture:Texture, ref:ImageResourceReference, resolved:Bool):Void {
     var signals:Null<Scene3DResourceSignals> = cast _Runtime.UNDEFINED;
     var event:{ var ref:ImageResourceReference; var texture:Texture; } = cast _Runtime.UNDEFINED;
-    signals = (cast _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey) : Scene3DResourceResolverRuntime).signals;
+    signals = (cast _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey) : { var signals:Null<Scene3DResourceSignals>; }).signals;
     if ((cast _Runtime.strictEquals(signals, null) : Bool)) { return; }
     event = (cast { ref: ref, texture: texture });
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[((cast resolved : Bool) ? (cast (cast signals : { var onResourceResolved:Signal<Scene3DResourceEvent->Void>; }).onResourceResolved : Dynamic) : (cast (cast signals : { var onResourceFailed:Signal<Scene3DResourceEvent->Void>; }).onResourceFailed : Dynamic))], [event]]), 1);
@@ -218,7 +218,7 @@ class ResolveScene3DResources {
     for (__iteration2 in _Runtime.iterable(working)) {
       var ref:ImageResourceReference = flighthq._internal._StaticIndex.readArray(__iteration2, 0.0);
       var subscribers:Array<Texture> = flighthq._internal._StaticIndex.readArray(__iteration2, 1.0);
-      var resolved:Null<Image> = ((cast (cast runtime : Scene3DResourceResolverRuntime).resolved : flighthq._internal._Map<ImageResourceReference, Image>).get(ref));
+      var resolved:Null<Image> = ((cast runtime.resolved : flighthq._internal._Map<ImageResourceReference, Image>).get(ref));
       if ((cast !_Runtime.strictEquals(resolved, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = null);
         ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved);
@@ -231,7 +231,7 @@ class ResolveScene3DResources {
         }
         continue;
       }
-      if ((cast ((cast (cast runtime : Scene3DResourceResolverRuntime).inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).has(ref)) : Bool)) { continue; }
+      if ((cast ((cast runtime.inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).has(ref)) : Bool)) { continue; }
       if ((cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved) : Bool)) { ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved); }
       if ((cast !_Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved) : Bool)) { continue; }
       ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = null);
@@ -248,14 +248,14 @@ class ResolveScene3DResources {
           }
         }
       }
-      var handle:ResourceLoadHandle<Null<Image>> = (cast queueResourceLoad((cast runtime : Scene3DResourceResolverRuntime).loader, (cast { load: function(loaderSignal:flighthq._internal.dom.AbortSignal, __unused3:ResourceLoadBytesReporter):flighthq._internal._Promise<Null<Image>> {
+      var handle:ResourceLoadHandle<Null<Image>> = (cast queueResourceLoad(runtime.loader, (cast { load: function(loaderSignal:flighthq._internal.dom.AbortSignal, __unused3:ResourceLoadBytesReporter):flighthq._internal._Promise<Null<Image>> {
         if ((cast (cast loaderSignal : flighthq._internal.dom.AbortSignal).aborted : Bool)) { (cast controller : flighthq._internal.dom.AbortController).abort((cast loaderSignal : flighthq._internal.dom.AbortSignal).reason); } else { (cast loaderSignal : flighthq._internal.dom.AbortSignal).addEventListener('abort', function(__unused4:flighthq._internal.dom.Event):Void { (cast controller : flighthq._internal.dom.AbortController).abort((cast loaderSignal : flighthq._internal.dom.AbortSignal).reason); }, { once: true }); }
         return cast (cast resolveOneScene3DResourceTexture(({ final __callArgument54:Dynamic = resolver; __callArgument54; }), ({ final __callArgument55:Dynamic = ref; __callArgument55; }), (cast controller : flighthq._internal.dom.AbortController).signal) : flighthq._internal._Promise<Null<Image>>);
         return cast _Runtime.UNDEFINED;
       }, priority: priority } : Dynamic)) : ResourceLoadHandle<Null<Image>>);
       var entry:Scene3DResourceInFlight = (cast { controller: controller, promise: ResolveScene3DResources._resolvedVoid__resolveScene3DResources, subscribers: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [subscribers]) });
       (entry.promise = cast (_Runtime.callProperty(handle.promise, 'then', cast ([function(image:Null<Image>):Void { ResolveScene3DResources.finishScene3DResourceResolution__resolveScene3DResources(({ final __callArgument56:Dynamic = resolver; __callArgument56; }), ({ final __callArgument57:Dynamic = ref; __callArgument57; }), ({ final __callArgument58:Dynamic = entry; __callArgument58; }), ({ final __callArgument59:Dynamic = image; __callArgument59; })); }, function(cause:flighthq._internal._Any):Void { ResolveScene3DResources.failScene3DResourceResolution__resolveScene3DResources(({ final __callArgument60:Dynamic = resolver; __callArgument60; }), ({ final __callArgument61:Dynamic = ref; __callArgument61; }), ({ final __callArgument62:Dynamic = entry; __callArgument62; }), (cast cause : flighthq._internal._Any)); }] : Array<Dynamic>)) : flighthq._internal._Promise<flighthq._internal._Nothing>));
-      ((cast (cast runtime : Scene3DResourceResolverRuntime).inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).set(ref, (cast entry)));
+      ((cast runtime.inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).set(ref, (cast entry)));
     }
   }
 

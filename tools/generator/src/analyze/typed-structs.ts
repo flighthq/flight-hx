@@ -843,6 +843,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#NativeTextData',
     purpose: 'reviewed escape-free native-text data',
   },
+  {
+    declarationFingerprint: 'sha256:1a88b32407ec4e866c81dacc567c24c15122e2fea6540aaa7a45532c65af6067',
+    id: '@flighthq/types:interface#Scene3DResourceResolverRuntime',
+    purpose: 'reviewed escape-free Scene3D resource-resolver runtime',
+  },
+  {
+    declarationFingerprint: 'sha256:095a13e1c53d9734759a7a788007e08fb2ad1347e36f353e48ba2e6b730c44ae',
+    id: '@flighthq/types:interface#GradientGlowEffect',
+    purpose: 'reviewed escape-free gradient-glow effect',
+  },
+  {
+    declarationFingerprint: 'sha256:63846610c575904018effbac806a0440c7a5eeadaee51b0834ffb45fbf7fd44b',
+    id: '@flighthq/types:interface#BitmapTextData',
+    purpose: 'reviewed escape-free bitmap-text data',
+  },
+  {
+    declarationFingerprint: 'sha256:f9514088a8f644f0471aa1aa5a043041544b3296d2aa7a9994fa8dfa8ae9e7b8',
+    id: '@flighthq/types:interface#WgpuShapeMeshBuffers',
+    purpose: 'reviewed escape-free WebGPU shape-mesh buffers',
+  },
+  {
+    declarationFingerprint: 'sha256:9ed61dc079468b2826972b414de55e5725087be3219b8eea7e4ddf7716ade10c',
+    id: '@flighthq/types:interface#Scene3DDocumentNode',
+    purpose: 'reviewed escape-free Scene3D document node',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

@@ -328,7 +328,7 @@ class Md5Parse {
         } else { if ((cast !_Runtime.strictEquals(parentIndex, -1.0) : Bool)) {
           Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument54:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument54; }), (cast 'md5mesh.joint-parent-out-of-range' : String), (cast '' : String), ({ final __callArgument55:Dynamic = { firstJoint: j, firstParent: parentIndex }; __callArgument55; }));
         } }
-        var transform:Transform3D = (cast flighthq._internal._StaticIndex.readArray(document.nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))) : Scene3DDocumentNode).transform;
+        var transform:Transform3D = (cast flighthq._internal._StaticIndex.readArray(document.nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))) : { var transform:Transform3D; }).transform;
         setVector3(({ final __callArgument56:Dynamic = (cast transform : Transform3D).position; __callArgument56; }), (cast localPx : Float), (cast localPy : Float), (cast localPz : Float));
         setQuaternion(({ final __callArgument57:Dynamic = (cast transform : Transform3D).rotation; __callArgument57; }), (cast localQx : Float), (cast localQy : Float), (cast localQz : Float), (cast localQw : Float));
         j++;
@@ -339,9 +339,9 @@ class Md5Parse {
       while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
         var parentIndex:Float = (cast flighthq._internal._StaticIndex.readArray(joints, j) : { var parentIndex:Float; }).parentIndex;
         if ((cast ((cast ((cast ((cast ((cast parentIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast parentIndex : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) : Bool) && (cast !_Runtime.strictEquals(parentIndex, j) : Bool)) : Bool) && (cast !(cast (cast Md5Parse.isMd5JointCycle__md5Parse(({ final __callArgument58:Dynamic = joints; __callArgument58; }), (cast j : Float)) : Bool) : Bool) : Bool)) : Bool)) {
-          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast parentIndex : Float))) : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast parentIndex : Float))) : { var children:Array<Float>; }).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
         } else {
-          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, skeletonRootIndex) : Scene3DDocumentNode).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, skeletonRootIndex) : { var children:Array<Float>; }).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
         }
         j++;
       }

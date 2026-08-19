@@ -52,13 +52,13 @@ class GlGradientGlowEffect {
     s2 = (cast acquireGlRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pool; __callArgument7; }), ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : GlRenderTarget);
     src = (cast source : GlRenderTarget);
     dst = (cast dest : GlRenderTarget);
-    quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'quality'), function():Dynamic return cast 1.0)));
-    strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
-    sourceMode = _Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw');
+    quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(effect.quality, function():Dynamic return cast 1.0)));
+    strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
+    sourceMode = _Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw');
     gl = (cast state : GlRenderState).gl;
     applyGlEffectTintPass(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = src; __callArgument10; }), ({ final __callArgument11:Dynamic = s0; __callArgument11; }), (cast 16777215.0 : Float), (cast 1.0 : Float), (cast HxMath.min(1.0, strength) : Float));
-    applyGlEffectBoxBlur(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = s0; __callArgument13; }), ({ final __callArgument14:Dynamic = s1; __callArgument14; }), ({ final __callArgument15:Dynamic = s2; __callArgument15; }), ({ final __callArgument16:Dynamic = { blurX: _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0), passes: quality }; __callArgument16; }));
-    ramp = (cast createGlEffectGradientRampTexture(({ final __callArgument17:Dynamic = gl; __callArgument17; }), _Runtime.field(effect, 'colors'), _Runtime.field(effect, 'alphas'), _Runtime.field(effect, 'ratios')) : flighthq._internal.dom.WebGLTexture);
+    applyGlEffectBoxBlur(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = s0; __callArgument13; }), ({ final __callArgument14:Dynamic = s1; __callArgument14; }), ({ final __callArgument15:Dynamic = s2; __callArgument15; }), ({ final __callArgument16:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0), passes: quality }; __callArgument16; }));
+    ramp = (cast createGlEffectGradientRampTexture(({ final __callArgument17:Dynamic = gl; __callArgument17; }), effect.colors, effect.alphas, effect.ratios) : flighthq._internal.dom.WebGLTexture);
     GlGradientGlowEffect.applyGradientLookupPass__glGradientGlowEffect(({ final __callArgument18:Dynamic = state; __callArgument18; }), ({ final __callArgument19:Dynamic = s1; __callArgument19; }), ({ final __callArgument20:Dynamic = ramp; __callArgument20; }), ({ final __callArgument21:Dynamic = s0; __callArgument21; }));
     flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, ramp);
     clearGlRenderTarget(({ final __callArgument22:Dynamic = state; __callArgument22; }), ({ final __callArgument23:Dynamic = dst; __callArgument23; }));

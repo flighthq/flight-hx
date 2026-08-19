@@ -49,12 +49,12 @@ class SceneResourceResolver {
   public static function disposeScene3DResourceResolver(resolver:Scene3DResourceResolver):Void {
     var runtime:Scene3DResourceResolverRuntime = cast _Runtime.UNDEFINED;
     runtime = _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey);
-    cancelResourceLoad((cast runtime : Scene3DResourceResolverRuntime).loader);
-    disposeResourceLoader((cast runtime : Scene3DResourceResolverRuntime).loader);
-    for (entry in _Runtime.iterable(((cast (cast runtime : Scene3DResourceResolverRuntime).inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).values()))) {
+    cancelResourceLoad(runtime.loader);
+    disposeResourceLoader(runtime.loader);
+    for (entry in _Runtime.iterable(((cast runtime.inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).values()))) {
       (cast entry.controller : flighthq._internal.dom.AbortController).abort();
     }
-    ((cast (cast runtime : Scene3DResourceResolverRuntime).inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).clear());
-    ((cast (cast runtime : Scene3DResourceResolverRuntime).resolved : flighthq._internal._Map<ImageResourceReference, Image>).clear());
+    ((cast runtime.inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).clear());
+    ((cast runtime.resolved : flighthq._internal._Map<ImageResourceReference, Image>).clear());
   }
 }

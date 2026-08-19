@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_441,
+      newAuditOnly: 1_436,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(565);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(570);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_441);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_436);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(163);
+    expect(newDirect).toHaveLength(168);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -925,6 +925,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'NativeTextData',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free native-text data',
+        }),
+        expect.objectContaining({
+          name: 'Scene3DResourceResolverRuntime',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Scene3D resource-resolver runtime',
+        }),
+        expect.objectContaining({
+          name: 'GradientGlowEffect',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free gradient-glow effect',
+        }),
+        expect.objectContaining({
+          name: 'BitmapTextData',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free bitmap-text data',
+        }),
+        expect.objectContaining({
+          name: 'WgpuShapeMeshBuffers',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGPU shape-mesh buffers',
+        }),
+        expect.objectContaining({
+          name: 'Scene3DDocumentNode',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Scene3D document node',
         }),
       ]),
     );
@@ -1744,6 +1769,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#NativeTextData',
         purpose: 'reviewed escape-free native-text data',
       },
+      {
+        declarationFingerprint: 'sha256:1a88b32407ec4e866c81dacc567c24c15122e2fea6540aaa7a45532c65af6067',
+        id: '@flighthq/types:interface#Scene3DResourceResolverRuntime',
+        purpose: 'reviewed escape-free Scene3D resource-resolver runtime',
+      },
+      {
+        declarationFingerprint: 'sha256:095a13e1c53d9734759a7a788007e08fb2ad1347e36f353e48ba2e6b730c44ae',
+        id: '@flighthq/types:interface#GradientGlowEffect',
+        purpose: 'reviewed escape-free gradient-glow effect',
+      },
+      {
+        declarationFingerprint: 'sha256:63846610c575904018effbac806a0440c7a5eeadaee51b0834ffb45fbf7fd44b',
+        id: '@flighthq/types:interface#BitmapTextData',
+        purpose: 'reviewed escape-free bitmap-text data',
+      },
+      {
+        declarationFingerprint: 'sha256:f9514088a8f644f0471aa1aa5a043041544b3296d2aa7a9994fa8dfa8ae9e7b8',
+        id: '@flighthq/types:interface#WgpuShapeMeshBuffers',
+        purpose: 'reviewed escape-free WebGPU shape-mesh buffers',
+      },
+      {
+        declarationFingerprint: 'sha256:9ed61dc079468b2826972b414de55e5725087be3219b8eea7e4ddf7716ade10c',
+        id: '@flighthq/types:interface#Scene3DDocumentNode',
+        purpose: 'reviewed escape-free Scene3D document node',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -2420,6 +2470,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const sixthHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'BitmapTextData',
+            'GradientGlowEffect',
+            'Scene3DDocumentNode',
+            'Scene3DResourceResolverRuntime',
+            'WgpuShapeMeshBuffers',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -2460,22 +2523,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_441,
+      auditOnlySchemas: 1_436,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 22_261,
-      directSchemas: 563,
+      directAccesses: 22_384,
+      directSchemas: 568,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 8_405,
+      pendingAccesses: 8_282,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_441,
+      newAuditOnly: 1_436,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -2542,7 +2605,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(22_261);
+    expect(report.summary.directAccesses).toBe(22_384);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -3013,6 +3076,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(fifthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'Scene3DResourceResolverRuntime',
+        25,
+        'sha256:1a88b32407ec4e866c81dacc567c24c15122e2fea6540aaa7a45532c65af6067',
+        'reviewed escape-free Scene3D resource-resolver runtime',
+      ],
+      [
+        'GradientGlowEffect',
+        25,
+        'sha256:095a13e1c53d9734759a7a788007e08fb2ad1347e36f353e48ba2e6b730c44ae',
+        'reviewed escape-free gradient-glow effect',
+      ],
+      [
+        'BitmapTextData',
+        25,
+        'sha256:63846610c575904018effbac806a0440c7a5eeadaee51b0834ffb45fbf7fd44b',
+        'reviewed escape-free bitmap-text data',
+      ],
+      [
+        'WgpuShapeMeshBuffers',
+        24,
+        'sha256:f9514088a8f644f0471aa1aa5a043041544b3296d2aa7a9994fa8dfa8ae9e7b8',
+        'reviewed escape-free WebGPU shape-mesh buffers',
+      ],
+      [
+        'Scene3DDocumentNode',
+        24,
+        'sha256:9ed61dc079468b2826972b414de55e5725087be3219b8eea7e4ddf7716ade10c',
+        'reviewed escape-free Scene3D document node',
+      ],
+    ] as const) {
+      expect(sixthHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -4762,6 +4867,36 @@ describe('typed struct analysis', () => {
         expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
       }
     }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#Scene3DResourceResolverRuntime', true, [], [], { blockerReasons: [], closed: true }],
+      [
+        '@flighthq/types:interface#GradientGlowEffect',
+        false,
+        ['cross-schema-transfer', 'object-literal-spread'],
+        [],
+        null,
+      ],
+      [
+        '@flighthq/types:interface#BitmapTextData',
+        true,
+        [],
+        [],
+        { blockerReasons: ['normalization-provenance'], closed: false },
+      ],
+      ['@flighthq/types:interface#WgpuShapeMeshBuffers', true, [], [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#Scene3DDocumentNode', true, [], ['optional-omission'], null],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      if (nominalIdentity === null) {
+        expect(provenanceById.has(frontierId)).toBe(false);
+      } else {
+        expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+      }
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -5343,6 +5478,39 @@ describe('typed struct analysis', () => {
     }
     expect(readFileSync('generated/flighthq/effects/GodRaysMath.hx', 'utf8')).not.toMatch(/_Runtime\.field\(effect,/u);
     expect(readFileSync('generated/flighthq/textinput/TextInput.hx', 'utf8')).not.toMatch(/_Runtime\.field\(options,/u);
+    for (const path of [
+      'generated/flighthq/bitmaptext/BitmapText.hx',
+      'generated/flighthq/bitmaptext/UpdateBitmapText.hx',
+      'generated/flighthq/effects/GradientGlowEffect.hx',
+      'generated/flighthq/effectsCanvas/CanvasGradientGlowEffect.hx',
+      'generated/flighthq/effectsGl/GlGradientGlowEffect.hx',
+      'generated/flighthq/effectsWgpu/WgpuGradientGlowEffect.hx',
+      'generated/flighthq/scene2dWgpu/WgpuColorAdjustmentMaterialFeature.hx',
+      'generated/flighthq/scene2dWgpu/WgpuShapeData.hx',
+      'generated/flighthq/scene2dWgpu/WgpuShapeMesh.hx',
+      'generated/flighthq/scene3d/SceneDocument.hx',
+      'generated/flighthq/scene3dFormats/Awd2Parse.hx',
+      'generated/flighthq/scene3dFormats/GltfParse.hx',
+      'generated/flighthq/scene3dFormats/Md5Parse.hx',
+      'generated/flighthq/scene3dFormats/ObjParse.hx',
+      'generated/flighthq/scene3dFormats/ThreeDsParse.hx',
+      'generated/flighthq/scene3dResources/LoadScene3DResources.hx',
+      'generated/flighthq/scene3dResources/ResolveScene3DResources.hx',
+      'generated/flighthq/scene3dResources/SceneResourceResolver.hx',
+      'generated/flighthq/scene3dResources/SceneResourceSignals.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:BitmapTextData|GradientGlowEffect|Scene3DDocumentNode|Scene3DResourceResolverRuntime|WgpuShapeMeshBuffers)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/effects/GradientGlowEffect.hx',
+      'generated/flighthq/effectsCanvas/CanvasGradientGlowEffect.hx',
+      'generated/flighthq/effectsGl/GlGradientGlowEffect.hx',
+      'generated/flighthq/effectsWgpu/WgpuGradientGlowEffect.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(/_Runtime\.field\(effect,/u);
+    }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
     expect(generatedCanvasRenderState).not.toMatch(
       /\(cast (?:runtime|sourceRuntime|targetRuntime) : CanvasRenderStateRuntime\)\./u,

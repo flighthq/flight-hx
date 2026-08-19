@@ -60,26 +60,26 @@ class WgpuShapeData {
       }
     }
     b = (cast shapeData : WgpuShapeRendererData).meshBuffers;
-    for (buffer in _Runtime.iterable((cast b : WgpuShapeMeshBuffers).vertexBuffers)) {
+    for (buffer in _Runtime.iterable(b.vertexBuffers)) {
       (cast buffer : flighthq._internal.dom.GPUBuffer).destroy();
     }
-    for (buffer in _Runtime.iterable((cast b : WgpuShapeMeshBuffers).indexBuffers)) {
+    for (buffer in _Runtime.iterable(b.indexBuffers)) {
       (cast buffer : flighthq._internal.dom.GPUBuffer).destroy();
     }
-    for (buffer in _Runtime.iterable((cast b : WgpuShapeMeshBuffers).uniformBuffers)) {
+    for (buffer in _Runtime.iterable(b.uniformBuffers)) {
       (cast buffer : flighthq._internal.dom.GPUBuffer).destroy();
     }
-    for (buffer in _Runtime.iterable((cast b : WgpuShapeMeshBuffers).colorScaleBiasUniformBuffers)) {
+    for (buffer in _Runtime.iterable(b.colorScaleBiasUniformBuffers)) {
       (cast buffer : flighthq._internal.dom.GPUBuffer).destroy();
     }
-    _Runtime.setLength((cast b : WgpuShapeMeshBuffers).vertexBuffers, 0.0);
-    _Runtime.setLength((cast b : WgpuShapeMeshBuffers).vertexCapacities, 0.0);
-    _Runtime.setLength((cast b : WgpuShapeMeshBuffers).indexBuffers, 0.0);
-    _Runtime.setLength((cast b : WgpuShapeMeshBuffers).indexCapacities, 0.0);
-    _Runtime.setLength((cast b : WgpuShapeMeshBuffers).uniformBuffers, 0.0);
-    _Runtime.setLength((cast b : WgpuShapeMeshBuffers).bindGroups, 0.0);
-    _Runtime.setLength((cast b : WgpuShapeMeshBuffers).colorScaleBiasUniformBuffers, 0.0);
-    _Runtime.setLength((cast b : WgpuShapeMeshBuffers).colorScaleBiasBindGroups, 0.0);
+    _Runtime.setLength(b.vertexBuffers, 0.0);
+    _Runtime.setLength(b.vertexCapacities, 0.0);
+    _Runtime.setLength(b.indexBuffers, 0.0);
+    _Runtime.setLength(b.indexCapacities, 0.0);
+    _Runtime.setLength(b.uniformBuffers, 0.0);
+    _Runtime.setLength(b.bindGroups, 0.0);
+    _Runtime.setLength(b.colorScaleBiasUniformBuffers, 0.0);
+    _Runtime.setLength(b.colorScaleBiasBindGroups, 0.0);
   }
 
   @:noCompletion

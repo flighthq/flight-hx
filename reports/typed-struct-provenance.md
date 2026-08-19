@@ -84,7 +84,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#BitmapMismatch` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#BitmapReadbackExplanation` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#BitmapRegion` | 674 | 5 | 1 | 1 | 0 | 0 | 2 | 1 | yes | — |
-| `@flighthq/types:interface#BitmapTextData` | 0 | 6 | 1 | 1 | 1 | 0 | 2 | 2 | no | `normalization-provenance` |
+| `@flighthq/types:interface#BitmapTextData` | 25 | 6 | 1 | 1 | 1 | 0 | 2 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#BitmapTextPage` | 39 | 4 | 1 | 1 | 1 | 0 | 0 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#BufferedLogSink` | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#ByteReader` | 56 | 2 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
@@ -478,7 +478,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Scene3DRenderList` | 0 | 4 | 0 | 3 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Scene3DResourceInFlight` | 11 | 3 | 1 | 1 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DResourceResolution` | 0 | 3 | 1 | 4 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#Scene3DResourceResolverRuntime` | 0 | 4 | 0 | 8 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Scene3DResourceResolverRuntime` | 25 | 4 | 0 | 8 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DResources` | 0 | 3 | 0 | 3 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#Scene3DResourceWorkingSet` | 0 | 2 | 1 | 3 | 0 | 1 | 0 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#SceneCoverageEntry` | 0 | 3 | 0 | 0 | 0 | 6 | 1 | 0 | no | `container-transfer` |
@@ -721,7 +721,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#WgpuScene3DLayouts` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DShadow` | 0 | 9 | 1 | 1 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuScissorRect` | 36 | 4 | 2 | 0 | 1 | 0 | 2 | 1 | no | `normalization-provenance` |
-| `@flighthq/types:interface#WgpuShapeMeshBuffers` | 0 | 8 | 1 | 0 | 0 | 0 | 2 | 1 | yes | — |
+| `@flighthq/types:interface#WgpuShapeMeshBuffers` | 24 | 8 | 1 | 0 | 0 | 0 | 2 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuShapeRasterSurface` | 0 | 3 | 1 | 1 | 0 | 0 | 1 | 2 | yes | — |
 | `@flighthq/types:interface#WgpuShapeRendererData` | 0 | 8 | 0 | 3 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuVelocityContext` | 0 | 5 | 0 | 2 | 0 | 0 | 1 | 0 | yes | — |

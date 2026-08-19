@@ -73,7 +73,7 @@ class WgpuShapeMesh {
       (cast fold : WgpuColorAdjustmentMaterialFeature).drawShapeMeshes(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = renderProxy; __callArgument18; }), ({ final __callArgument19:Dynamic = meshes; __callArgument19; }), ({ final __callArgument20:Dynamic = buffers; __callArgument20; }));
       return;
     }
-    drawWgpuShapeMeshBatch(({ final __callArgument21:Dynamic = state; __callArgument21; }), ({ final __callArgument22:Dynamic = renderProxy; __callArgument22; }), ({ final __callArgument23:Dynamic = meshes; __callArgument23; }), ({ final __callArgument24:Dynamic = buffers; __callArgument24; }), (cast WgpuShapeMesh.ensureShapeMeshPipeline__wgpuShapeMesh(({ final __callArgument25:Dynamic = state; __callArgument25; }), (cast renderProxy : RenderProxy2D).blendMode) : WgpuShapeMeshPipeline), (cast buffers : WgpuShapeMeshBuffers).uniformBuffers, (cast buffers : WgpuShapeMeshBuffers).bindGroups, ({ final __callArgument26:Dynamic = WgpuShapeMesh._shapeMeshUniformScratch__wgpuShapeMesh; __callArgument26; }));
+    drawWgpuShapeMeshBatch(({ final __callArgument21:Dynamic = state; __callArgument21; }), ({ final __callArgument22:Dynamic = renderProxy; __callArgument22; }), ({ final __callArgument23:Dynamic = meshes; __callArgument23; }), ({ final __callArgument24:Dynamic = buffers; __callArgument24; }), (cast WgpuShapeMesh.ensureShapeMeshPipeline__wgpuShapeMesh(({ final __callArgument25:Dynamic = state; __callArgument25; }), (cast renderProxy : RenderProxy2D).blendMode) : WgpuShapeMeshPipeline), buffers.uniformBuffers, buffers.bindGroups, ({ final __callArgument26:Dynamic = WgpuShapeMesh._shapeMeshUniformScratch__wgpuShapeMesh; __callArgument26; }));
   }
 
   public static final SHAPE_MESH_WGSL__wgpuShapeMesh:String = '\nstruct ShapeMeshUniforms { matrix : mat3x3f, color : vec4f }\n@group(0) @binding(0) var<uniform> u : ShapeMeshUniforms;\n@vertex fn vs_main(@location(0) position : vec2f) -> @builtin(position) vec4f {\n  let p = u.matrix * vec3f(position, 1.0);\n  return vec4f(p.x, p.y, 0.0, 1.0);\n}\n@fragment fn fs_main() -> @location(0) vec4f { return u.color; }\n';
@@ -86,15 +86,15 @@ class WgpuShapeMesh {
     var size:Float = cast _Runtime.UNDEFINED;
     var buffer:flighthq._internal.dom.GPUBuffer = cast _Runtime.UNDEFINED;
     size = HxMath.max(4.0, (_Runtime.toInt32((byteLength + 3.0)) & _Runtime.toInt32(~3)));
-    buffer = flighthq._internal._StaticIndex.readArray((cast buffers : WgpuShapeMeshBuffers).indexBuffers, meshIndex);
-    if ((cast ((cast _Runtime.strictEquals(buffer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast buffers : WgpuShapeMeshBuffers).indexCapacities : Array<Float>), (cast meshIndex : Float)), function():Dynamic return cast 0.0) : Float) < (cast size : Float)) : Bool)) : Bool)) {
+    buffer = flighthq._internal._StaticIndex.readArray(buffers.indexBuffers, meshIndex);
+    if ((cast ((cast _Runtime.strictEquals(buffer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast buffers.indexCapacities : Array<Float>), (cast meshIndex : Float)), function():Dynamic return cast 0.0) : Float) < (cast size : Float)) : Bool)) : Bool)) {
       if ((cast !_Runtime.strictEquals(buffer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         var runtime:WgpuRenderStateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument27:Dynamic = state; __callArgument27; })) : WgpuRenderStateRuntime);
         _Runtime.callProperty(_Runtime.coalesce(runtime.retiredBuffers, function():Dynamic return cast (runtime.retiredBuffers = cast (cast ([] : Array<Dynamic>) : Null<Array<flighthq._internal.dom.GPUBuffer>>))), 'push', cast ([buffer] : Array<Dynamic>));
       }
       (buffer = cast (flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBuffer', cast ([{ size: size, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'INDEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)) : Dynamic));
-      flighthq._internal._StaticIndex.writeArray((cast buffers : WgpuShapeMeshBuffers).indexBuffers, meshIndex, buffer);
-      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast buffers : WgpuShapeMeshBuffers).indexCapacities : Array<Float>), (cast meshIndex : Float), (cast size : Float));
+      flighthq._internal._StaticIndex.writeArray(buffers.indexBuffers, meshIndex, buffer);
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast buffers.indexCapacities : Array<Float>), (cast meshIndex : Float), (cast size : Float));
     }
     return cast buffer;
     return cast null;
@@ -143,15 +143,15 @@ class WgpuShapeMesh {
     var size:Float = cast _Runtime.UNDEFINED;
     var buffer:flighthq._internal.dom.GPUBuffer = cast _Runtime.UNDEFINED;
     size = HxMath.max(8.0, byteLength);
-    buffer = flighthq._internal._StaticIndex.readArray((cast buffers : WgpuShapeMeshBuffers).vertexBuffers, meshIndex);
-    if ((cast ((cast _Runtime.strictEquals(buffer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast buffers : WgpuShapeMeshBuffers).vertexCapacities : Array<Float>), (cast meshIndex : Float)), function():Dynamic return cast 0.0) : Float) < (cast size : Float)) : Bool)) : Bool)) {
+    buffer = flighthq._internal._StaticIndex.readArray(buffers.vertexBuffers, meshIndex);
+    if ((cast ((cast _Runtime.strictEquals(buffer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast buffers.vertexCapacities : Array<Float>), (cast meshIndex : Float)), function():Dynamic return cast 0.0) : Float) < (cast size : Float)) : Bool)) : Bool)) {
       if ((cast !_Runtime.strictEquals(buffer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         var runtime:WgpuRenderStateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument30:Dynamic = state; __callArgument30; })) : WgpuRenderStateRuntime);
         _Runtime.callProperty(_Runtime.coalesce(runtime.retiredBuffers, function():Dynamic return cast (runtime.retiredBuffers = cast (cast ([] : Array<Dynamic>) : Null<Array<flighthq._internal.dom.GPUBuffer>>))), 'push', cast ([buffer] : Array<Dynamic>));
       }
       (buffer = cast (flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBuffer', cast ([{ size: size, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)) : Dynamic));
-      flighthq._internal._StaticIndex.writeArray((cast buffers : WgpuShapeMeshBuffers).vertexBuffers, meshIndex, buffer);
-      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast buffers : WgpuShapeMeshBuffers).vertexCapacities : Array<Float>), (cast meshIndex : Float), (cast size : Float));
+      flighthq._internal._StaticIndex.writeArray(buffers.vertexBuffers, meshIndex, buffer);
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast buffers.vertexCapacities : Array<Float>), (cast meshIndex : Float), (cast size : Float));
     }
     return cast buffer;
     return cast null;

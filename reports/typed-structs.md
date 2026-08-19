@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1441 |
-| Direct schemas | 563 |
+| Audit-only schemas | 1436 |
+| Direct schemas | 568 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 8405 |
-| Directly emitted accesses | 22261 |
+| Pending accesses | 8282 |
+| Directly emitted accesses | 22384 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1441 |
+| Newly discovered, audit-only | 1436 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -231,7 +231,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#BitmapSharpenOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapText` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#BitmapTextAlign` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#BitmapTextData` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 13 | 12 | 0 | 25 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#BitmapTextData` | `direct` | `new` | — | reviewed escape-free bitmap-text data | 6 | 13 | 12 | 0 | 0 | 25 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapTextOptions` | `direct` | `preserved` | `@flighthq/types:interface#BitmapTextOptions` | bitmap-text option record | 5 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapTextPage` | `direct` | `new` | — | reviewed escape-free bitmap-text page | 4 | 33 | 6 | 0 | 0 | 39 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapTextRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 39 | 15 | 3 | 0 | 18 | 0 | 0 | 0 | yes | — |
@@ -724,7 +724,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GlyphSource` | `direct` | `preserved` | `@flighthq/types:interface#GlyphSource` | broad asset document | 4 | 0 | 0 | 0 | 0 | 0 | 5 | 5 | yes | — |
 | `@flighthq/types:interface#GodRaysEffect` | `direct` | `new` | — | reviewed escape-free god-rays effect | 8 | 26 | 0 | 0 | 0 | 26 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GradientBevelEffect` | `direct` | `new` | — | reviewed escape-free gradient-bevel effect | 12 | 34 | 0 | 0 | 0 | 34 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#GradientGlowEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 25 | 0 | 0 | 25 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GradientGlowEffect` | `direct` | `new` | — | reviewed escape-free gradient-glow effect | 9 | 25 | 0 | 0 | 0 | 25 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GradientSpread` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#GradientType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#GrayscaleAdjustment` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -1385,7 +1385,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Scene3DDocumentLoadOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentLoadProgress` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentMesh` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 6 | 6 | 0 | 12 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Scene3DDocumentNode` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 21 | 3 | 0 | 24 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Scene3DDocumentNode` | `direct` | `new` | — | reviewed escape-free Scene3D document node | 5 | 21 | 3 | 0 | 0 | 24 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentScene` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentSkin` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DForwardLightSelection` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
@@ -1409,7 +1409,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Scene3DResourceResolution` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DResourceResolver` | `direct` | `renamed` | `@flighthq/scene-resources:interface#SceneResourceResolver` | broad scene document | 2 | 5 | 0 | 1 | 0 | 6 | 11 | 11 | yes | — |
 | `@flighthq/types:interface#Scene3DResourceResolverOptions` | `direct` | `renamed` | `@flighthq/scene-resources:interface#SceneResourceResolverOptions` | broad scene document | 3 | 3 | 0 | 0 | 0 | 3 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Scene3DResourceResolverRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 24 | 1 | 0 | 25 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Scene3DResourceResolverRuntime` | `direct` | `new` | — | reviewed escape-free Scene3D resource-resolver runtime | 4 | 24 | 1 | 0 | 0 | 25 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Scene3DResourceResolverWithRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 11 | no | `unsupported-shape` |
 | `@flighthq/types:interface#Scene3DResourceRevealOptions` | `direct` | `renamed` | `@flighthq/scene-resources:interface#SceneResourceRevealOptions` | broad scene document | 3 | 4 | 0 | 0 | 0 | 4 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DResources` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
@@ -2025,7 +2025,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuScene3DShadow` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 14 | 5 | 0 | 19 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScissorRect` | `direct` | `new` | — | reviewed escape-free WebGPU scissor rectangle | 4 | 36 | 0 | 0 | 0 | 36 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuShapeMesh` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuShapeMeshBuffers` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 24 | 0 | 0 | 24 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuShapeMeshBuffers` | `direct` | `new` | — | reviewed escape-free WebGPU shape-mesh buffers | 8 | 24 | 0 | 0 | 0 | 24 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuShapeMeshPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuShapeRasterSurface` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuShapeRendererData` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 11 | 7 | 0 | 18 | 0 | 0 | 0 | yes | — |

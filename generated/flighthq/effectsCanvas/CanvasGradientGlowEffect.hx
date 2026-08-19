@@ -49,10 +49,10 @@ class CanvasGradientGlowEffect {
     var ramp:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     blurred = (cast acquireCanvasRenderTarget(({ final __callArgument6:Dynamic = pool; __callArgument6; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
     glow = (cast acquireCanvasRenderTarget(({ final __callArgument7:Dynamic = pool; __callArgument7; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
-    strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);
+    strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
     glowPasses = HxMath.max(1.0, HxMath.floor(strength));
-    blur = HxMath.max(0.0, (_Runtime.addNumbers(_Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0), _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0)) / 2.0));
-    ramp = (cast buildCanvasGradientRamp(_Runtime.field(effect, 'colors'), _Runtime.field(effect, 'alphas'), _Runtime.field(effect, 'ratios')) : flighthq._internal._UInt8ClampedArray);
+    blur = HxMath.max(0.0, (_Runtime.addNumbers(_Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0), _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0)) / 2.0));
+    ramp = (cast buildCanvasGradientRamp(effect.colors, effect.alphas, effect.ratios) : flighthq._internal._UInt8ClampedArray);
     drawCanvasEffectPass(({ final __callArgument8:Dynamic = blurred; __callArgument8; }), ({ final __callArgument9:Dynamic = source; __callArgument9; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     applyCanvasGradientRampLookup(({ final __callArgument10:Dynamic = glow; __callArgument10; }), ({ final __callArgument11:Dynamic = blurred; __callArgument11; }), ({ final __callArgument12:Dynamic = ramp; __callArgument12; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     clearCanvasTarget(({ final __callArgument13:Dynamic = dest; __callArgument13; }));
@@ -63,7 +63,7 @@ class CanvasGradientGlowEffect {
         i++;
       }
     }
-    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw'), 'hide') : Bool)) { compositeCanvasImage(({ final __callArgument16:Dynamic = dest; __callArgument16; }), ({ final __callArgument17:Dynamic = source; __callArgument17; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end); }
+    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw'), 'hide') : Bool)) { compositeCanvasImage(({ final __callArgument16:Dynamic = dest; __callArgument16; }), ({ final __callArgument17:Dynamic = source; __callArgument17; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end); }
     releaseCanvasRenderTarget(({ final __callArgument18:Dynamic = pool; __callArgument18; }), ({ final __callArgument19:Dynamic = glow; __callArgument19; }));
     releaseCanvasRenderTarget(({ final __callArgument20:Dynamic = pool; __callArgument20; }), ({ final __callArgument21:Dynamic = blurred; __callArgument21; }));
   }

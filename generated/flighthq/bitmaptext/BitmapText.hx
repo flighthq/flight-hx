@@ -51,7 +51,7 @@ class BitmapText {
     var runtime:BitmapTextRuntime = cast _Runtime.UNDEFINED;
     bitmapText = (cast createNode2D((cast BitmapTextKind : String), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic), (cast createBitmapTextData : Dynamic), (cast function(__unused0:Null<flighthq._internal._Any>):BitmapTextRuntime return createBitmapTextRuntime() : Dynamic)) : flighthq.types.BitmapText);
     data = (cast bitmapText : flighthq.types.BitmapText).data;
-    ((cast data : BitmapTextData).glyphSource = glyphSource);
+    (data.glyphSource = cast (glyphSource : Null<GlyphSource>));
     if ((cast !_Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { BitmapText.applyBitmapTextOptions__bitmapText(({ final __callArgument3:Dynamic = data; __callArgument3; }), ({ final __callArgument4:Dynamic = options; __callArgument4; })); }
     runtime = (cast getNode2DRuntime(({ final __callArgument5:Dynamic = bitmapText; __callArgument5; })) : BitmapTextRuntime);
     _Runtime.callProperty((cast runtime : BitmapTextRuntime).pages, 'push', cast ([(cast BitmapText.createBitmapTextPage__bitmapText() : BitmapTextPage)] : Array<Dynamic>));
@@ -98,35 +98,35 @@ class BitmapText {
   }
 
   public static function setBitmapTextAlign(target:flighthq.types.BitmapText, align:BitmapTextAlign):Void {
-    ((cast (cast target : flighthq.types.BitmapText).data : BitmapTextData).align = align);
+    ((cast (cast target : flighthq.types.BitmapText).data : { var align:BitmapTextAlign; }).align = cast (align : BitmapTextAlign));
   }
 
   public static function setBitmapTextGlyphSource(target:flighthq.types.BitmapText, glyphSource:Null<GlyphSource>):Void {
-    ((cast (cast target : flighthq.types.BitmapText).data : BitmapTextData).glyphSource = glyphSource);
+    ((cast (cast target : flighthq.types.BitmapText).data : { var glyphSource:Null<GlyphSource>; }).glyphSource = cast (glyphSource : Null<GlyphSource>));
   }
 
   public static function setBitmapTextLetterSpacing(target:flighthq.types.BitmapText, letterSpacing:Float):Void {
-    ((cast (cast target : flighthq.types.BitmapText).data : BitmapTextData).letterSpacing = letterSpacing);
+    ((cast (cast target : flighthq.types.BitmapText).data : { var letterSpacing:Float; }).letterSpacing = cast (letterSpacing : Float));
   }
 
   public static function setBitmapTextLineHeight(target:flighthq.types.BitmapText, lineHeight:Float):Void {
-    ((cast (cast target : flighthq.types.BitmapText).data : BitmapTextData).lineHeight = lineHeight);
+    ((cast (cast target : flighthq.types.BitmapText).data : { var lineHeight:Float; }).lineHeight = cast (lineHeight : Float));
   }
 
   public static function setBitmapTextText(target:flighthq.types.BitmapText, text:String):Void {
-    ((cast (cast target : flighthq.types.BitmapText).data : BitmapTextData).text = text);
+    ((cast (cast target : flighthq.types.BitmapText).data : { var text:String; }).text = cast (text : String));
   }
 
   public static function setBitmapTextWrapWidth(target:flighthq.types.BitmapText, wrapWidth:Null<Float>):Void {
-    ((cast (cast target : flighthq.types.BitmapText).data : BitmapTextData).wrapWidth = wrapWidth);
+    ((cast (cast target : flighthq.types.BitmapText).data : { var wrapWidth:Null<Float>; }).wrapWidth = cast (wrapWidth : Null<Float>));
   }
 
   public static function applyBitmapTextOptions__bitmapText(data:BitmapTextData, options:BitmapTextOptions):Void {
-    if ((cast !_Runtime.strictEquals(options.align, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast data : BitmapTextData).align = options.align); }
-    if ((cast !_Runtime.strictEquals(options.letterSpacing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast data : BitmapTextData).letterSpacing = options.letterSpacing); }
-    if ((cast !_Runtime.strictEquals(options.lineHeight, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast data : BitmapTextData).lineHeight = options.lineHeight); }
-    if ((cast !_Runtime.strictEquals(options.text, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast data : BitmapTextData).text = options.text); }
-    if ((cast !_Runtime.strictEquals(options.wrapWidth, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast data : BitmapTextData).wrapWidth = options.wrapWidth); }
+    if ((cast !_Runtime.strictEquals(options.align, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (data.align = cast (options.align : BitmapTextAlign)); }
+    if ((cast !_Runtime.strictEquals(options.letterSpacing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (data.letterSpacing = cast (options.letterSpacing : Float)); }
+    if ((cast !_Runtime.strictEquals(options.lineHeight, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (data.lineHeight = cast (options.lineHeight : Float)); }
+    if ((cast !_Runtime.strictEquals(options.text, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (data.text = cast (options.text : String)); }
+    if ((cast !_Runtime.strictEquals(options.wrapWidth, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (data.wrapWidth = cast (options.wrapWidth : Null<Float>)); }
   }
 
   public static function copyLocalBoundsRectangle__bitmapText(out:Rectangle, source:Node<Dynamic>):Void {
