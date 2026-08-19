@@ -130,17 +130,17 @@ class WorldQueries {
       return;
     }
     current = flighthq._internal._StaticIndex.readArray((cast out : Physics2DRayResult).hits, 0.0);
-    if ((cast ((cast ((cast _Runtime.field(source, 'fraction') : Float) > (cast (cast current : Physics2DRayHit).fraction : Float)) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(_Runtime.field(source, 'fraction'), (cast current : Physics2DRayHit).fraction), function():Dynamic return cast _Runtime.orValue(((cast (cast body : RigidBody2D).index : Float) > (cast (cast (cast current : Physics2DRayHit).body : RigidBody2D).index : Float)), function():Dynamic return cast _Runtime.andValue(_Runtime.strictEquals((cast body : RigidBody2D).index, (cast (cast current : Physics2DRayHit).body : RigidBody2D).index), function():Dynamic return cast ((cast colliderIndex : Float) >= (cast (cast current : Physics2DRayHit).colliderIndex : Float))))) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast source.fraction : Float) > (cast current.fraction : Float)) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(source.fraction, current.fraction), function():Dynamic return cast _Runtime.orValue(((cast (cast body : RigidBody2D).index : Float) > (cast (cast current.body : RigidBody2D).index : Float)), function():Dynamic return cast _Runtime.andValue(_Runtime.strictEquals((cast body : RigidBody2D).index, (cast current.body : RigidBody2D).index), function():Dynamic return cast ((cast colliderIndex : Float) >= (cast current.colliderIndex : Float))))) : Bool)) : Bool)) {
       return;
     }
-    ((cast current : Physics2DRayHit).body = body);
-    ((cast current : Physics2DRayHit).collider = collider);
-    ((cast current : Physics2DRayHit).colliderIndex = colliderIndex);
-    ((cast current : Physics2DRayHit).fraction = _Runtime.field(source, 'fraction'));
-    ((cast current : Physics2DRayHit).normalX = _Runtime.field(source, 'normalX'));
-    ((cast current : Physics2DRayHit).normalY = _Runtime.field(source, 'normalY'));
-    ((cast current : Physics2DRayHit).x = _Runtime.field(source, 'x'));
-    ((cast current : Physics2DRayHit).y = _Runtime.field(source, 'y'));
+    (current.body = cast (body : RigidBody2D));
+    (current.collider = cast (collider : Physics2DCollider));
+    (current.colliderIndex = cast (colliderIndex : Float));
+    (current.fraction = cast (source.fraction : Float));
+    (current.normalX = cast (source.normalX : Float));
+    (current.normalY = cast (source.normalY : Float));
+    (current.x = cast (source.x : Float));
+    (current.y = cast (source.y : Float));
   }
 
   public static function writeQueryHit__worldQueries(out:Physics2DQueryResult, body:RigidBody2D, collider:Physics2DCollider, colliderIndex:Float):Void {
@@ -158,16 +158,16 @@ class WorldQueries {
     var hit:Physics2DRayHit = cast _Runtime.UNDEFINED;
     hit = flighthq._internal._StaticIndex.readArray((cast out : Physics2DRayResult).hits, (cast out : Physics2DRayResult).hitCount);
     if ((cast _Runtime.strictEquals(hit, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.callProperty((cast out : Physics2DRayResult).hits, 'push', cast ([{ body: body, collider: collider, colliderIndex: colliderIndex, fraction: _Runtime.field(source, 'fraction'), normalX: _Runtime.field(source, 'normalX'), normalY: _Runtime.field(source, 'normalY'), x: _Runtime.field(source, 'x'), y: _Runtime.field(source, 'y') }] : Array<Dynamic>));
+      _Runtime.callProperty((cast out : Physics2DRayResult).hits, 'push', cast ([{ body: body, collider: collider, colliderIndex: colliderIndex, fraction: source.fraction, normalX: source.normalX, normalY: source.normalY, x: source.x, y: source.y }] : Array<Dynamic>));
     } else {
-      ((cast hit : Physics2DRayHit).body = body);
-      ((cast hit : Physics2DRayHit).collider = collider);
-      ((cast hit : Physics2DRayHit).colliderIndex = colliderIndex);
-      ((cast hit : Physics2DRayHit).fraction = _Runtime.field(source, 'fraction'));
-      ((cast hit : Physics2DRayHit).normalX = _Runtime.field(source, 'normalX'));
-      ((cast hit : Physics2DRayHit).normalY = _Runtime.field(source, 'normalY'));
-      ((cast hit : Physics2DRayHit).x = _Runtime.field(source, 'x'));
-      ((cast hit : Physics2DRayHit).y = _Runtime.field(source, 'y'));
+      (hit.body = cast (body : RigidBody2D));
+      (hit.collider = cast (collider : Physics2DCollider));
+      (hit.colliderIndex = cast (colliderIndex : Float));
+      (hit.fraction = cast (source.fraction : Float));
+      (hit.normalX = cast (source.normalX : Float));
+      (hit.normalY = cast (source.normalY : Float));
+      (hit.x = cast (source.x : Float));
+      (hit.y = cast (source.y : Float));
     }
     (cast out : Physics2DRayResult).hitCount++;
   }
@@ -189,9 +189,9 @@ class WorldQueries {
   }
 
   public static function compareRayHits__worldQueries(a:Physics2DRayHit, b:Physics2DRayHit):Float {
-    if ((cast !_Runtime.strictEquals(_Runtime.field(a, 'fraction'), _Runtime.field(b, 'fraction')) : Bool)) { return cast _Runtime.subtractNumbers(_Runtime.field(a, 'fraction'), _Runtime.field(b, 'fraction')); }
-    if ((cast !_Runtime.strictEquals((cast _Runtime.field(a, 'body') : RigidBody2D).index, (cast _Runtime.field(b, 'body') : RigidBody2D).index) : Bool)) { return cast ((cast _Runtime.field(a, 'body') : RigidBody2D).index - (cast _Runtime.field(b, 'body') : RigidBody2D).index); }
-    return cast _Runtime.subtractNumbers(_Runtime.field(a, 'colliderIndex'), _Runtime.field(b, 'colliderIndex'));
+    if ((cast !_Runtime.strictEquals(a.fraction, b.fraction) : Bool)) { return cast (a.fraction - b.fraction); }
+    if ((cast !_Runtime.strictEquals((cast a.body : RigidBody2D).index, (cast b.body : RigidBody2D).index) : Bool)) { return cast ((cast a.body : RigidBody2D).index - (cast b.body : RigidBody2D).index); }
+    return cast (a.colliderIndex - b.colliderIndex);
     return cast null;
   }
 

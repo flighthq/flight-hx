@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_526,
+      newAuditOnly: 1_521,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(480);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(485);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_526);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_521);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(78);
+    expect(newDirect).toHaveLength(83);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -500,6 +500,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'WgpuRenderTextureEntry',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free WebGPU render-texture entry',
+        }),
+        expect.objectContaining({
+          name: 'Scene3DHit',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Scene3D hit',
+        }),
+        expect.objectContaining({
+          name: 'CollisionRaycastHit',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free collision raycast hit',
+        }),
+        expect.objectContaining({
+          name: 'Physics2DRayHit',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free physics ray hit',
+        }),
+        expect.objectContaining({
+          name: 'CollisionContactPoint',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free collision contact point',
+        }),
+        expect.objectContaining({
+          name: 'VelocitySample',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free velocity sample',
         }),
       ]),
     );
@@ -893,6 +918,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:a5243909363d6d37ff704867c3df7bbceae877b0eac612d58b88af423e746572',
         id: '@flighthq/types:interface#WgpuRenderTextureEntry',
         purpose: 'reviewed escape-free WebGPU render-texture entry',
+      },
+      {
+        declarationFingerprint: 'sha256:1f1a4f489fe6eccd17a7e7fa5d1f588954faea0ba5f647040ad72640141a377c',
+        id: '@flighthq/types:interface#Scene3DHit',
+        purpose: 'reviewed escape-free Scene3D hit',
+      },
+      {
+        declarationFingerprint: 'sha256:0fc37ebc201db4f24d23947b080f8715be1cf57f2413f81e5ba05b274d3134d4',
+        id: '@flighthq/types:interface#CollisionRaycastHit',
+        purpose: 'reviewed escape-free collision raycast hit',
+      },
+      {
+        declarationFingerprint: 'sha256:9094ab4baa041a3973eb2471908827999044b59892109431e6ce46c93436a483',
+        id: '@flighthq/types:interface#Physics2DRayHit',
+        purpose: 'reviewed escape-free physics ray hit',
+      },
+      {
+        declarationFingerprint: 'sha256:0972cae3f54ba0ec4d0e1833767f11ab476578197e212b0dcb988637891ba0fa',
+        id: '@flighthq/types:interface#CollisionContactPoint',
+        purpose: 'reviewed escape-free collision contact point',
+      },
+      {
+        declarationFingerprint: 'sha256:735f8f6b33ae4a5c730243d8695d7b81baf6bb3777af4dd6effa7492f291b1b1',
+        id: '@flighthq/types:interface#VelocitySample',
+        purpose: 'reviewed escape-free velocity sample',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -1401,6 +1451,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const hitAndContactCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['CollisionContactPoint', 'CollisionRaycastHit', 'Physics2DRayHit', 'Scene3DHit', 'VelocitySample'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -1441,22 +1500,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_526,
+      auditOnlySchemas: 1_521,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 19_738,
-      directSchemas: 478,
+      directAccesses: 19_938,
+      directSchemas: 483,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 10_928,
+      pendingAccesses: 10_728,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_526,
+      newAuditOnly: 1_521,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -1484,7 +1543,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(19_738);
+    expect(report.summary.directAccesses).toBe(19_938);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -2097,6 +2156,48 @@ describe('typed struct analysis', () => {
     }
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
+        'Scene3DHit',
+        83,
+        'sha256:1f1a4f489fe6eccd17a7e7fa5d1f588954faea0ba5f647040ad72640141a377c',
+        'reviewed escape-free Scene3D hit',
+      ],
+      [
+        'CollisionRaycastHit',
+        32,
+        'sha256:0fc37ebc201db4f24d23947b080f8715be1cf57f2413f81e5ba05b274d3134d4',
+        'reviewed escape-free collision raycast hit',
+      ],
+      [
+        'Physics2DRayHit',
+        31,
+        'sha256:9094ab4baa041a3973eb2471908827999044b59892109431e6ce46c93436a483',
+        'reviewed escape-free physics ray hit',
+      ],
+      [
+        'VelocitySample',
+        29,
+        'sha256:735f8f6b33ae4a5c730243d8695d7b81baf6bb3777af4dd6effa7492f291b1b1',
+        'reviewed escape-free velocity sample',
+      ],
+      [
+        'CollisionContactPoint',
+        25,
+        'sha256:0972cae3f54ba0ec4d0e1833767f11ab476578197e212b0dcb988637891ba0fa',
+        'reviewed escape-free collision contact point',
+      ],
+    ] as const) {
+      expect(hitAndContactCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
         'Physics2DWorld',
         217,
         'sha256:a28a94c95326e5405d33feda957ea8ee57399e1266dae9f9d7c88218d945a9fe',
@@ -2570,6 +2671,29 @@ describe('typed struct analysis', () => {
         closed: false,
       });
     }
+    const scene3DHitId = '@flighthq/types:interface#Scene3DHit';
+    expect(classAuditById.get(scene3DHitId)?.migration).toEqual({
+      mechanicallyCompatible: false,
+      normalizationReasons: ['cross-schema-transfer'],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.has(scene3DHitId)).toBe(false);
+    for (const hitLeafId of [
+      '@flighthq/types:interface#CollisionContactPoint',
+      '@flighthq/types:interface#CollisionRaycastHit',
+      '@flighthq/types:interface#Physics2DRayHit',
+      '@flighthq/types:interface#VelocitySample',
+    ]) {
+      expect(classAuditById.get(hitLeafId)?.migration).toEqual({
+        mechanicallyCompatible: true,
+        normalizationReasons: [],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.get(hitLeafId)?.nominalIdentity).toEqual({
+        blockerReasons: [],
+        closed: true,
+      });
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -2819,6 +2943,25 @@ describe('typed struct analysis', () => {
       /\(cast (?:entry|renderTexture) : (?:WgpuRenderTextureEntry|RenderTexture)\)\./u,
     );
     expect(generatedWgpuRenderTexture).not.toMatch(/_Runtime\.field\(renderTexture,/u);
+    const generatedRaycastCollision = readFileSync('generated/flighthq/collision/RaycastCollisionShape.hx', 'utf8');
+    expect(generatedRaycastCollision).not.toMatch(
+      /\(cast (?:out|RaycastCollisionShape\.localHitScratch__raycastCollisionShape) : CollisionRaycastHit\)\./u,
+    );
+    expect(generatedRaycastCollision).not.toMatch(
+      /_Runtime\.field\((?:out|RaycastCollisionShape\.localHitScratch__raycastCollisionShape),/u,
+    );
+    const generatedShapeContact = readFileSync('generated/flighthq/collision/ShapeContact.hx', 'utf8');
+    expect(generatedShapeContact).not.toMatch(/\(cast point : CollisionContactPoint\)\./u);
+    expect(generatedShapeContact).not.toMatch(/_Runtime\.field\(point,/u);
+    const generatedWorldQueries = readFileSync('generated/flighthq/physics2d/WorldQueries.hx', 'utf8');
+    expect(generatedWorldQueries).not.toMatch(/\(cast (?:current|hit) : Physics2DRayHit\)\./u);
+    expect(generatedWorldQueries).not.toMatch(/_Runtime\.field\((?:a|b|current|hit|source),/u);
+    const generatedPickScene3D = readFileSync('generated/flighthq/picking/PickScene3D.hx', 'utf8');
+    expect(generatedPickScene3D).not.toMatch(/\(cast (?:hit|out|src|PickScene3D\._hit__pickScene3D) : Scene3DHit\)\./u);
+    expect(generatedPickScene3D).not.toMatch(/_Runtime\.field\((?:hit|out|src|PickScene3D\._hit__pickScene3D),/u);
+    const generatedVelocitySample = readFileSync('generated/flighthq/velocity/VelocitySample.hx', 'utf8');
+    expect(generatedVelocitySample).not.toMatch(/\(cast sample : flighthq\.types\.VelocitySample\)\./u);
+    expect(generatedVelocitySample).not.toMatch(/_Runtime\.field\(sample,/u);
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

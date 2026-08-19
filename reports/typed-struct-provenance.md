@@ -144,12 +144,12 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#CollisionAabb` | 0 | 4 | 2 | 0 | 0 | 0 | 6 | 6 | yes | — |
 | `@flighthq/types:interface#CollisionCircle` | 0 | 3 | 2 | 0 | 0 | 0 | 6 | 6 | yes | — |
 | `@flighthq/types:interface#CollisionContactManifold` | 44 | 6 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#CollisionContactPoint` | 0 | 4 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#CollisionContactPoint` | 25 | 4 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CollisionManifold` | 45 | 4 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CollisionObb` | 0 | 5 | 2 | 0 | 0 | 0 | 6 | 6 | yes | — |
 | `@flighthq/types:interface#CollisionPoint` | 0 | 2 | 2 | 0 | 0 | 0 | 6 | 6 | yes | — |
 | `@flighthq/types:interface#CollisionPolygon` | 0 | 1 | 2 | 0 | 0 | 0 | 6 | 6 | yes | — |
-| `@flighthq/types:interface#CollisionRaycastHit` | 0 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#CollisionRaycastHit` | 32 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CollisionSegment` | 0 | 4 | 2 | 0 | 0 | 0 | 6 | 6 | yes | — |
 | `@flighthq/types:interface#CollisionTestExplanation` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#CollisionTimeOfImpact` | 61 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
@@ -393,7 +393,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Physics2DQueryFilter` | 0 | 6 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DQueryHit` | 0 | 3 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DQueryResult` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#Physics2DRayHit` | 0 | 8 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics2DRayHit` | 31 | 8 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DRayResult` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DSolverConfig` | 55 | 13 | 1 | 0 | 0 | 0 | 2 | 2 | yes | — |
 | `@flighthq/types:interface#Physics2DStepExplanation` | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
@@ -682,7 +682,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#UpdaterSignatureConfig` | 0 | 2 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#Velocity2D` | 86 | 2 | 1 | 0 | 0 | 0 | 5 | 3 | yes | — |
 | `@flighthq/types:interface#VelocityField` | 0 | 2 | 2 | 1 | 0 | 0 | 3 | 1 | yes | — |
-| `@flighthq/types:interface#VelocitySample` | 0 | 4 | 1 | 2 | 0 | 0 | 4 | 2 | yes | — |
+| `@flighthq/types:interface#VelocitySample` | 29 | 4 | 1 | 2 | 0 | 0 | 4 | 2 | yes | — |
 | `@flighthq/types:interface#VertexAttribute` | 60 | 3 | 1 | 0 | 4 | 0 | 8 | 9 | no | `normalization-provenance` |
 | `@flighthq/types:interface#VertexAttributeLayout` | 67 | 2 | 2 | 1 | 4 | 0 | 8 | 8 | no | `normalization-provenance` |
 | `@flighthq/types:interface#VideoChannel` | 43 | 8 | 0 | 2 | 0 | 0 | 1 | 1 | yes | — |

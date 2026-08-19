@@ -235,10 +235,10 @@ class ShapeContact {
     separation = ((normalX * (x - faceX)) + (normalY * (y - faceY)));
     if ((cast ((cast separation : Float) > (cast 0.0 : Float)) : Bool)) { return; }
     point = flighthq._internal._StaticIndex.readArray(out.points, out.pointCount);
-    ((cast point : CollisionContactPoint).x = x);
-    ((cast point : CollisionContactPoint).y = y);
-    ((cast point : CollisionContactPoint).depth = -separation);
-    ((cast point : CollisionContactPoint).featureId = featureId);
+    (point.x = cast (x : Float));
+    (point.y = cast (y : Float));
+    (point.depth = cast (-separation : Float));
+    (point.featureId = cast (featureId : Float));
     out.pointCount++;
   }
 
@@ -366,10 +366,10 @@ class ShapeContact {
     (out.depth = cast (depth : Float));
     (out.overlapping = cast (true : Bool));
     point = flighthq._internal._StaticIndex.readArray(out.points, 0.0);
-    ((cast point : CollisionContactPoint).x = (cx - (normalX * radius)));
-    ((cast point : CollisionContactPoint).y = (cy - (normalY * radius)));
-    ((cast point : CollisionContactPoint).depth = depth);
-    ((cast point : CollisionContactPoint).featureId = 0.0);
+    (point.x = cast ((cx - (normalX * radius)) : Float));
+    (point.y = cast ((cy - (normalY * radius)) : Float));
+    (point.depth = cast (depth : Float));
+    (point.featureId = cast (0.0 : Float));
     (out.pointCount = cast (1.0 : Float));
     return cast true;
     return cast null;

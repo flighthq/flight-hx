@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1526 |
-| Direct schemas | 478 |
+| Audit-only schemas | 1521 |
+| Direct schemas | 483 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 10928 |
-| Directly emitted accesses | 19738 |
+| Pending accesses | 10728 |
+| Directly emitted accesses | 19938 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1526 |
+| Newly discovered, audit-only | 1521 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -361,12 +361,12 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CollisionAabb` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 84 | 0 | 0 | 84 | 0 | 0 | 49 | yes | — |
 | `@flighthq/types:interface#CollisionCircle` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 98 | 3 | 0 | 101 | 0 | 0 | 49 | yes | — |
 | `@flighthq/types:interface#CollisionContactManifold` | `direct` | `new` | — | reviewed escape-free collision contact manifold | 6 | 23 | 21 | 0 | 0 | 44 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CollisionContactPoint` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 13 | 12 | 0 | 25 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CollisionContactPoint` | `direct` | `new` | — | reviewed escape-free collision contact point | 4 | 13 | 12 | 0 | 0 | 25 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CollisionManifold` | `direct` | `new` | — | reviewed escape-free collision manifold | 4 | 7 | 38 | 0 | 0 | 45 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CollisionObb` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 97 | 10 | 0 | 107 | 0 | 0 | 49 | yes | — |
 | `@flighthq/types:interface#CollisionPoint` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 32 | 2 | 0 | 34 | 0 | 0 | 47 | yes | — |
 | `@flighthq/types:interface#CollisionPolygon` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 31 | 0 | 0 | 31 | 0 | 0 | 49 | yes | — |
-| `@flighthq/types:interface#CollisionRaycastHit` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 22 | 10 | 0 | 32 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CollisionRaycastHit` | `direct` | `new` | — | reviewed escape-free collision raycast hit | 5 | 22 | 10 | 0 | 0 | 32 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CollisionResponse` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CollisionSegment` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 84 | 4 | 0 | 88 | 0 | 0 | 49 | yes | — |
 | `@flighthq/types:type#CollisionShape` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
@@ -1169,7 +1169,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Physics2DQueryFilter` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DQueryHit` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 3 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DQueryResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 3 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DRayHit` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 15 | 16 | 0 | 31 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DRayHit` | `direct` | `new` | — | reviewed escape-free physics ray hit | 8 | 15 | 16 | 0 | 0 | 31 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DRayResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 11 | 2 | 0 | 13 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DRevoluteJoint` | `direct` | `new` | — | reviewed escape-free physics revolute joint | 23 | 16 | 10 | 0 | 0 | 26 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DRevoluteJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
@@ -1391,7 +1391,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Scene3DForwardLightSelection` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DForwardLightSelectionExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Scene3DGraphSyncPolicy` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#Scene3DHit` | `audit-only` | `new` | — | checker-discovered public declaration | 12 | 56 | 27 | 0 | 83 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Scene3DHit` | `direct` | `new` | — | reviewed escape-free Scene3D hit | 12 | 56 | 27 | 0 | 0 | 83 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DKindUsage` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 29 | 0 | 0 | 29 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DLightBlock` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 21 | 6 | 0 | 27 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DLights` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 35 | yes | — |
@@ -1925,7 +1925,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Velocity2D` | `direct` | `new` | — | reviewed escape-free 2D velocity | 2 | 50 | 36 | 0 | 0 | 86 | 0 | 0 | yes | — |
 | `@flighthq/types:type#VelocityContributor` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#VelocityField` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 10 | 1 | 0 | 11 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#VelocitySample` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 25 | 4 | 0 | 29 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#VelocitySample` | `direct` | `new` | — | reviewed escape-free velocity sample | 4 | 25 | 4 | 0 | 0 | 29 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#VertexAttribute` | `direct` | `preserved` | `@flighthq/types:interface#VertexAttribute` | broad scene document | 3 | 60 | 0 | 0 | 0 | 60 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#VertexAttributeLayout` | `direct` | `preserved` | `@flighthq/types:interface#VertexAttributeLayout` | broad scene document | 2 | 67 | 0 | 0 | 0 | 67 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#VertexColorMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 8 | 1 | 0 | 9 | 0 | 0 | 0 | yes | — |

@@ -92,8 +92,8 @@ class PickScene3D {
     found = false;
     bestT = HxMath.POSITIVE_INFINITY;
     PickScene3D.forEachScene3DRayHit__pickScene3D(({ final __callArgument19:Dynamic = scene; __callArgument19; }), ({ final __callArgument20:Dynamic = ray; __callArgument20; }), ({ final __callArgument21:Dynamic = options; __callArgument21; }), ({ final __callArgument24:Dynamic = function(hit:Scene3DHit):Void {
-      if ((cast ((cast _Runtime.field(hit, 'distance') : Float) >= (cast bestT : Float)) : Bool)) { return; }
-      (bestT = cast (_Runtime.field(hit, 'distance') : Dynamic));
+      if ((cast ((cast hit.distance : Float) >= (cast bestT : Float)) : Bool)) { return; }
+      (bestT = cast (hit.distance : Dynamic));
       (found = cast (true : Dynamic));
       PickScene3D.copyScene3DHit__pickScene3D(({ final __callArgument22:Dynamic = out; __callArgument22; }), ({ final __callArgument23:Dynamic = hit; __callArgument23; }));
     }; __callArgument24; }));
@@ -109,22 +109,22 @@ class PickScene3D {
   }
 
   public static function copyScene3DHit__pickScene3D(out:Scene3DHit, src:Scene3DHit):Void {
-    ((cast out : Scene3DHit).node = _Runtime.field(src, 'node'));
-    ((cast out : Scene3DHit).distance = _Runtime.field(src, 'distance'));
-    ((cast out : Scene3DHit).triangleIndex = _Runtime.field(src, 'triangleIndex'));
-    ((cast out : Scene3DHit).u = _Runtime.field(src, 'u'));
-    ((cast out : Scene3DHit).v = _Runtime.field(src, 'v'));
-    ((cast out : Scene3DHit).w = _Runtime.field(src, 'w'));
-    ((cast out : Scene3DHit).pointX = _Runtime.field(src, 'pointX'));
-    ((cast out : Scene3DHit).pointY = _Runtime.field(src, 'pointY'));
-    ((cast out : Scene3DHit).pointZ = _Runtime.field(src, 'pointZ'));
-    ((cast out : Scene3DHit).normalX = _Runtime.field(src, 'normalX'));
-    ((cast out : Scene3DHit).normalY = _Runtime.field(src, 'normalY'));
-    ((cast out : Scene3DHit).normalZ = _Runtime.field(src, 'normalZ'));
+    (out.node = cast (src.node : Null<Mesh>));
+    (out.distance = cast (src.distance : Float));
+    (out.triangleIndex = cast (src.triangleIndex : Float));
+    (out.u = cast (src.u : Float));
+    (out.v = cast (src.v : Float));
+    (out.w = cast (src.w : Float));
+    (out.pointX = cast (src.pointX : Float));
+    (out.pointY = cast (src.pointY : Float));
+    (out.pointZ = cast (src.pointZ : Float));
+    (out.normalX = cast (src.normalX : Float));
+    (out.normalY = cast (src.normalY : Float));
+    (out.normalZ = cast (src.normalZ : Float));
   }
 
   public static function compareScene3DHitByDistance__pickScene3D(a:Scene3DHit, b:Scene3DHit):Float {
-    return cast _Runtime.subtractNumbers(_Runtime.field(a, 'distance'), _Runtime.field(b, 'distance'));
+    return cast (a.distance - b.distance);
     return cast null;
   }
 
@@ -193,16 +193,16 @@ class PickScene3D {
           triangle++;
           continue;
         }
-        ((cast PickScene3D._hit__pickScene3D : Scene3DHit).node = mesh);
-        ((cast PickScene3D._hit__pickScene3D : Scene3DHit).distance = t);
-        ((cast PickScene3D._hit__pickScene3D : Scene3DHit).triangleIndex = triangle);
-        ((cast PickScene3D._hit__pickScene3D : Scene3DHit).normalX = PickScene3D._worldNormal__pickScene3D.x);
-        ((cast PickScene3D._hit__pickScene3D : Scene3DHit).normalY = PickScene3D._worldNormal__pickScene3D.y);
-        ((cast PickScene3D._hit__pickScene3D : Scene3DHit).normalZ = PickScene3D._worldNormal__pickScene3D.z);
+        (PickScene3D._hit__pickScene3D.node = cast (mesh : Null<Mesh>));
+        (PickScene3D._hit__pickScene3D.distance = cast (t : Float));
+        (PickScene3D._hit__pickScene3D.triangleIndex = cast (triangle : Float));
+        (PickScene3D._hit__pickScene3D.normalX = cast (PickScene3D._worldNormal__pickScene3D.x : Float));
+        (PickScene3D._hit__pickScene3D.normalY = cast (PickScene3D._worldNormal__pickScene3D.y : Float));
+        (PickScene3D._hit__pickScene3D.normalZ = cast (PickScene3D._worldNormal__pickScene3D.z : Float));
         getRay3DPointAt(({ final __callArgument71:Dynamic = PickScene3D._worldPoint__pickScene3D; __callArgument71; }), ({ final __callArgument72:Dynamic = ray; __callArgument72; }), (cast t : Float));
-        ((cast PickScene3D._hit__pickScene3D : Scene3DHit).pointX = PickScene3D._worldPoint__pickScene3D.x);
-        ((cast PickScene3D._hit__pickScene3D : Scene3DHit).pointY = PickScene3D._worldPoint__pickScene3D.y);
-        ((cast PickScene3D._hit__pickScene3D : Scene3DHit).pointZ = PickScene3D._worldPoint__pickScene3D.z);
+        (PickScene3D._hit__pickScene3D.pointX = cast (PickScene3D._worldPoint__pickScene3D.x : Float));
+        (PickScene3D._hit__pickScene3D.pointY = cast (PickScene3D._worldPoint__pickScene3D.y : Float));
+        (PickScene3D._hit__pickScene3D.pointZ = cast (PickScene3D._worldPoint__pickScene3D.z : Float));
         getRay3DPointAt(({ final __callArgument73:Dynamic = PickScene3D._localPoint__pickScene3D; __callArgument73; }), ({ final __callArgument74:Dynamic = PickScene3D._localRay__pickScene3D; __callArgument74; }), (cast t : Float));
         PickScene3D.writeBarycentric__pickScene3D(({ final __callArgument75:Dynamic = PickScene3D._hit__pickScene3D; __callArgument75; }), ({ final __callArgument76:Dynamic = PickScene3D._localPoint__pickScene3D; __callArgument76; }), ({ final __callArgument77:Dynamic = PickScene3D._a__pickScene3D; __callArgument77; }), ({ final __callArgument78:Dynamic = PickScene3D._b__pickScene3D; __callArgument78; }), ({ final __callArgument79:Dynamic = PickScene3D._c__pickScene3D; __callArgument79; }));
         onHit(({ final __callArgument80:Dynamic = PickScene3D._hit__pickScene3D; __callArgument80; }));
@@ -277,17 +277,17 @@ class PickScene3D {
     d21 = (((v2x * v1x) + (v2y * v1y)) + (v2z * v1z));
     denom = ((d00 * d11) - (d01 * d01));
     if ((cast _Runtime.strictEquals(denom, 0.0) : Bool)) {
-      ((cast out : Scene3DHit).u = 1.0);
-      ((cast out : Scene3DHit).v = 0.0);
-      ((cast out : Scene3DHit).w = 0.0);
+      (out.u = cast (1.0 : Float));
+      (out.v = cast (0.0 : Float));
+      (out.w = cast (0.0 : Float));
       return;
     }
     inv = (1.0 / denom);
     v = (((d11 * d20) - (d01 * d21)) * inv);
     w = (((d00 * d21) - (d01 * d20)) * inv);
-    ((cast out : Scene3DHit).u = ((1.0 - v) - w));
-    ((cast out : Scene3DHit).v = v);
-    ((cast out : Scene3DHit).w = w);
+    (out.u = cast (((1.0 - v) - w) : Float));
+    (out.v = cast (v : Float));
+    (out.w = cast (w : Float));
   }
 
   public static function transformPointByMatrix4__pickScene3D(out:Vector3, p:Vector3, m:flighthq._internal._Float32Array):Void {

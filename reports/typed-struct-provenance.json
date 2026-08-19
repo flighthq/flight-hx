@@ -20024,7 +20024,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 25,
       "fields": 4,
       "id": "@flighthq/types:interface#CollisionContactPoint",
       "name": "CollisionContactPoint",
@@ -20484,7 +20484,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 32,
       "fields": 5,
       "id": "@flighthq/types:interface#CollisionRaycastHit",
       "name": "CollisionRaycastHit",
@@ -38227,7 +38227,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 31,
       "fields": 8,
       "id": "@flighthq/types:interface#Physics2DRayHit",
       "name": "Physics2DRayHit",
@@ -54811,7 +54811,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 29,
       "fields": 4,
       "id": "@flighthq/types:interface#VelocitySample",
       "name": "VelocitySample",

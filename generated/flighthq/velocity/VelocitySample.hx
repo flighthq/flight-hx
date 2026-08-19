@@ -13,15 +13,15 @@ class VelocitySample {
     var cy:Float = cast _Runtime.UNDEFINED;
     var px:Float = cast _Runtime.UNDEFINED;
     var py:Float = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.field(sample, 'previousWorldTransform'), null) : Bool)) {
+    if ((cast _Runtime.strictEquals(sample.previousWorldTransform, null) : Bool)) {
       (out.x = cast (0.0 : Float));
       (out.y = cast (0.0 : Float));
       return cast out;
     }
     cx = (((currentWorldTransform.a * pointX) + (currentWorldTransform.c * pointY)) + currentWorldTransform.tx);
     cy = (((currentWorldTransform.b * pointX) + (currentWorldTransform.d * pointY)) + currentWorldTransform.ty);
-    px = ((((cast _Runtime.field(sample, 'previousWorldTransform') : { var a:Float; }).a * pointX) + ((cast _Runtime.field(sample, 'previousWorldTransform') : { var c:Float; }).c * pointY)) + (cast _Runtime.field(sample, 'previousWorldTransform') : { var tx:Float; }).tx);
-    py = ((((cast _Runtime.field(sample, 'previousWorldTransform') : { var b:Float; }).b * pointX) + ((cast _Runtime.field(sample, 'previousWorldTransform') : { var d:Float; }).d * pointY)) + (cast _Runtime.field(sample, 'previousWorldTransform') : { var ty:Float; }).ty);
+    px = ((((cast sample.previousWorldTransform : { var a:Float; }).a * pointX) + ((cast sample.previousWorldTransform : { var c:Float; }).c * pointY)) + (cast sample.previousWorldTransform : { var tx:Float; }).tx);
+    py = ((((cast sample.previousWorldTransform : { var b:Float; }).b * pointX) + ((cast sample.previousWorldTransform : { var d:Float; }).d * pointY)) + (cast sample.previousWorldTransform : { var ty:Float; }).ty);
     (out.x = cast ((cx - px) : Float));
     (out.y = cast ((cy - py) : Float));
     return cast out;

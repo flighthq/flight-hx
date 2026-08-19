@@ -172,9 +172,9 @@ class RaycastCollisionShape {
     if ((cast !(cast (cast RaycastCollisionShape.raycastBox__raycastCollisionShape((cast -(cast shape : { var halfW:Float; }).halfW : Float), (cast -(cast shape : { var halfH:Float; }).halfH : Float), (cast (cast shape : { var halfW:Float; }).halfW : Float), (cast (cast shape : { var halfH:Float; }).halfH : Float), (cast localOriginX : Float), (cast localOriginY : Float), (cast localDirectionX : Float), (cast localDirectionY : Float), (cast maxFraction : Float), ({ final __callArgument11:Dynamic = RaycastCollisionShape.localHitScratch__raycastCollisionShape; __callArgument11; })) : Bool) : Bool) : Bool)) {
       return cast false;
     }
-    normalX = (((cast RaycastCollisionShape.localHitScratch__raycastCollisionShape : CollisionRaycastHit).normalX * cos) - ((cast RaycastCollisionShape.localHitScratch__raycastCollisionShape : CollisionRaycastHit).normalY * sin));
-    normalY = (((cast RaycastCollisionShape.localHitScratch__raycastCollisionShape : CollisionRaycastHit).normalX * sin) + ((cast RaycastCollisionShape.localHitScratch__raycastCollisionShape : CollisionRaycastHit).normalY * cos));
-    RaycastCollisionShape.writeRaycastHit__raycastCollisionShape(({ final __callArgument12:Dynamic = out; __callArgument12; }), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast (cast RaycastCollisionShape.localHitScratch__raycastCollisionShape : CollisionRaycastHit).fraction : Float), (cast normalX : Float), (cast normalY : Float));
+    normalX = ((RaycastCollisionShape.localHitScratch__raycastCollisionShape.normalX * cos) - (RaycastCollisionShape.localHitScratch__raycastCollisionShape.normalY * sin));
+    normalY = ((RaycastCollisionShape.localHitScratch__raycastCollisionShape.normalX * sin) + (RaycastCollisionShape.localHitScratch__raycastCollisionShape.normalY * cos));
+    RaycastCollisionShape.writeRaycastHit__raycastCollisionShape(({ final __callArgument12:Dynamic = out; __callArgument12; }), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast RaycastCollisionShape.localHitScratch__raycastCollisionShape.fraction : Float), (cast normalX : Float), (cast normalY : Float));
     return cast true;
     return cast null;
   }
@@ -331,19 +331,19 @@ class RaycastCollisionShape {
   }
 
   public static function writeRaycastHit__raycastCollisionShape(out:CollisionRaycastHit, originX:Float, originY:Float, directionX:Float, directionY:Float, fraction:Float, normalX:Float, normalY:Float):Void {
-    ((cast out : CollisionRaycastHit).fraction = fraction);
-    ((cast out : CollisionRaycastHit).x = (originX + (directionX * fraction)));
-    ((cast out : CollisionRaycastHit).y = (originY + (directionY * fraction)));
-    ((cast out : CollisionRaycastHit).normalX = normalX);
-    ((cast out : CollisionRaycastHit).normalY = normalY);
+    (out.fraction = cast (fraction : Float));
+    (out.x = cast ((originX + (directionX * fraction)) : Float));
+    (out.y = cast ((originY + (directionY * fraction)) : Float));
+    (out.normalX = cast (normalX : Float));
+    (out.normalY = cast (normalY : Float));
   }
 
   public static function clearRaycastHit__raycastCollisionShape(out:CollisionRaycastHit):Void {
-    ((cast out : CollisionRaycastHit).fraction = 0.0);
-    ((cast out : CollisionRaycastHit).x = 0.0);
-    ((cast out : CollisionRaycastHit).y = 0.0);
-    ((cast out : CollisionRaycastHit).normalX = 0.0);
-    ((cast out : CollisionRaycastHit).normalY = 0.0);
+    (out.fraction = cast (0.0 : Float));
+    (out.x = cast (0.0 : Float));
+    (out.y = cast (0.0 : Float));
+    (out.normalX = cast (0.0 : Float));
+    (out.normalY = cast (0.0 : Float));
   }
 
   public static final localHitScratch__raycastCollisionShape:CollisionRaycastHit = (cast { fraction: 0.0, x: 0.0, y: 0.0, normalX: 0.0, normalY: 0.0 });

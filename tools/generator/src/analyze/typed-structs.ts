@@ -418,6 +418,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#WgpuRenderTextureEntry',
     purpose: 'reviewed escape-free WebGPU render-texture entry',
   },
+  {
+    declarationFingerprint: 'sha256:1f1a4f489fe6eccd17a7e7fa5d1f588954faea0ba5f647040ad72640141a377c',
+    id: '@flighthq/types:interface#Scene3DHit',
+    purpose: 'reviewed escape-free Scene3D hit',
+  },
+  {
+    declarationFingerprint: 'sha256:0fc37ebc201db4f24d23947b080f8715be1cf57f2413f81e5ba05b274d3134d4',
+    id: '@flighthq/types:interface#CollisionRaycastHit',
+    purpose: 'reviewed escape-free collision raycast hit',
+  },
+  {
+    declarationFingerprint: 'sha256:9094ab4baa041a3973eb2471908827999044b59892109431e6ce46c93436a483',
+    id: '@flighthq/types:interface#Physics2DRayHit',
+    purpose: 'reviewed escape-free physics ray hit',
+  },
+  {
+    declarationFingerprint: 'sha256:0972cae3f54ba0ec4d0e1833767f11ab476578197e212b0dcb988637891ba0fa',
+    id: '@flighthq/types:interface#CollisionContactPoint',
+    purpose: 'reviewed escape-free collision contact point',
+  },
+  {
+    declarationFingerprint: 'sha256:735f8f6b33ae4a5c730243d8695d7b81baf6bb3777af4dd6effa7492f291b1b1',
+    id: '@flighthq/types:interface#VelocitySample',
+    purpose: 'reviewed escape-free velocity sample',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

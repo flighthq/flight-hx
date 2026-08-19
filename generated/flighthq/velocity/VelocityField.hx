@@ -47,10 +47,10 @@ class VelocityField {
   public static function contributeVelocity(field:flighthq.types.Velocity.VelocityField, source:flighthq._internal._Object, x:Float, y:Float):Void {
     var sample:VelocitySample = cast _Runtime.UNDEFINED;
     sample = (cast ensureVelocitySample(({ final __callArgument0:Dynamic = field; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; })) : VelocitySample);
-    ((cast (cast sample : VelocitySample).velocity : { var x:Float; }).x = cast (x : Float));
-    ((cast (cast sample : VelocitySample).velocity : { var y:Float; }).y = cast (y : Float));
-    ((cast sample : VelocitySample).lastFrameId = (cast field : flighthq.types.Velocity.VelocityField).frameId);
-    ((cast sample : VelocitySample).explicitFrameId = (cast field : flighthq.types.Velocity.VelocityField).frameId);
+    ((cast sample.velocity : { var x:Float; }).x = cast (x : Float));
+    ((cast sample.velocity : { var y:Float; }).y = cast (y : Float));
+    (sample.lastFrameId = cast ((cast field : flighthq.types.Velocity.VelocityField).frameId : Float));
+    (sample.explicitFrameId = cast ((cast field : flighthq.types.Velocity.VelocityField).frameId : Float));
   }
 
   public static function copyVelocity(out:Velocity2D, source:Velocity2D):Velocity2D {
@@ -99,13 +99,13 @@ class VelocityField {
   public static function getVelocity(field:flighthq.types.Velocity.VelocityField, source:flighthq._internal._Object, out:Velocity2D):Velocity2D {
     var sample:Null<VelocitySample> = cast _Runtime.UNDEFINED;
     sample = ((cast (cast field : flighthq.types.Velocity.VelocityField).samples : flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>).get(source));
-    if ((cast ((cast _Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast sample : VelocitySample).lastFrameId, (cast field : flighthq.types.Velocity.VelocityField).frameId) : Bool)) : Bool)) {
+    if ((cast ((cast _Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast sample : { var lastFrameId:Float; }).lastFrameId, (cast field : flighthq.types.Velocity.VelocityField).frameId) : Bool)) : Bool)) {
       (out.x = cast (0.0 : Float));
       (out.y = cast (0.0 : Float));
       return cast out;
     }
-    (out.x = cast ((cast (cast sample : VelocitySample).velocity : { var x:Float; }).x : Float));
-    (out.y = cast ((cast (cast sample : VelocitySample).velocity : { var y:Float; }).y : Float));
+    (out.x = cast ((cast (cast sample : { var velocity:Velocity2D; }).velocity : { var x:Float; }).x : Float));
+    (out.y = cast ((cast (cast sample : { var velocity:Velocity2D; }).velocity : { var y:Float; }).y : Float));
     return cast out;
     return cast null;
   }
@@ -113,7 +113,7 @@ class VelocityField {
   public static function hasVelocity(field:flighthq.types.Velocity.VelocityField, source:flighthq._internal._Object):Bool {
     var sample:Null<VelocitySample> = cast _Runtime.UNDEFINED;
     sample = ((cast (cast field : flighthq.types.Velocity.VelocityField).samples : flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>).get(source));
-    return cast _Runtime.andValue(((cast !_Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast sample : VelocitySample).lastFrameId, (cast field : flighthq.types.Velocity.VelocityField).frameId) : Bool)), function():Dynamic return cast _Runtime.orValue(!_Runtime.strictEquals((cast (cast sample : VelocitySample).velocity : { var x:Float; }).x, 0.0), function():Dynamic return cast !_Runtime.strictEquals((cast (cast sample : VelocitySample).velocity : { var y:Float; }).y, 0.0)));
+    return cast _Runtime.andValue(((cast !_Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast sample : { var lastFrameId:Float; }).lastFrameId, (cast field : flighthq.types.Velocity.VelocityField).frameId) : Bool)), function():Dynamic return cast _Runtime.orValue(!_Runtime.strictEquals((cast (cast sample : { var velocity:Velocity2D; }).velocity : { var x:Float; }).x, 0.0), function():Dynamic return cast !_Runtime.strictEquals((cast (cast sample : { var velocity:Velocity2D; }).velocity : { var y:Float; }).y, 0.0)));
     return cast null;
   }
 
