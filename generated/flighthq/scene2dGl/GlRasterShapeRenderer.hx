@@ -49,7 +49,7 @@ class GlRasterShapeRenderer {
   public static function drawGlRasterShape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var source:Shape = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:ShapeData = cast _Runtime.UNDEFINED;
     var commands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
     var rasterizer:Null<ShapeRasterizer> = cast _Runtime.UNDEFINED;
     var material:Null<Material> = cast _Runtime.UNDEFINED;
@@ -71,8 +71,8 @@ class GlRasterShapeRenderer {
     var d:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime);
     source = (cast (cast renderProxy : RenderProxy2D).source : Shape);
-    __destructure0 = (cast source : Shape).data;
-    commands = _Runtime.field(__destructure0, 'commands');
+    __destructure0 = source.data;
+    commands = __destructure0.commands;
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals((cast renderProxy : RenderProxy2D).rendererData, null) : Bool)) : Bool)) { return; }
     rasterizer = (cast getGlShapeRasterizer(({ final __callArgument1:Dynamic = state; __callArgument1; })) : Null<ShapeRasterizer>);
     if ((cast _Runtime.strictEquals(rasterizer, null) : Bool)) {

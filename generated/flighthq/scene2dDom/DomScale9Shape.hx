@@ -62,7 +62,7 @@ class DomScale9Shape {
     data = (cast (cast renderProxy : RenderProxy2D).rendererData : Null<DomScale9ShapeData__domScale9Shape>);
     if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
     source = (cast (cast renderProxy : RenderProxy2D).source : Scale9Shape);
-    __destructure0 = (cast source : Scale9Shape).data;
+    __destructure0 = source.data;
     commands = _Runtime.field(__destructure0, 'commands');
     scale9Grid = _Runtime.field(__destructure0, 'scale9Grid');
     if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
@@ -72,7 +72,7 @@ class DomScale9Shape {
       return;
     }
     bounds = (cast getNodeLocalBoundsRectangle((cast source : Dynamic)) : Rectangle);
-    mapper = (cast buildDomScale9Mapper(({ final __callArgument5:Dynamic = bounds; __callArgument5; }), ({ final __callArgument6:Dynamic = scale9Grid; __callArgument6; }), (cast (cast source : Scale9Shape).scaleX : Float), (cast (cast source : Scale9Shape).scaleY : Float)) : Null<Scale9Mapper>);
+    mapper = (cast buildDomScale9Mapper(({ final __callArgument5:Dynamic = bounds; __callArgument5; }), ({ final __callArgument6:Dynamic = scale9Grid; __callArgument6; }), (cast source.scaleX : Float), (cast source.scaleY : Float)) : Null<Scale9Mapper>);
     if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
       drawDomShape(({ final __callArgument7:Dynamic = state; __callArgument7; }), ({ final __callArgument8:Dynamic = renderProxy; __callArgument8; }));
       return;
@@ -82,8 +82,8 @@ class DomScale9Shape {
       ((cast data : DomScale9ShapeData__domScale9Shape).context = flighthq._internal.backend.CanvasElementBackend.call((cast data : DomScale9ShapeData__domScale9Shape).canvas, 'getContext', cast (['2d'] : Array<Dynamic>)));
       prepareDomElement(({ final __callArgument9:Dynamic = (cast data : DomScale9ShapeData__domScale9Shape).canvas; __callArgument9; }));
     }
-    w = HxMath.max(1.0, HxMath.ceil((bounds.width * (cast source : Scale9Shape).scaleX)));
-    h = HxMath.max(1.0, HxMath.ceil((bounds.height * (cast source : Scale9Shape).scaleY)));
+    w = HxMath.max(1.0, HxMath.ceil((bounds.width * source.scaleX)));
+    h = HxMath.max(1.0, HxMath.ceil((bounds.height * source.scaleY)));
     pixelRatio = (cast state : DomRenderState).pixelRatio;
     flighthq._internal.backend.CanvasElementBackend.setField((cast data : DomScale9ShapeData__domScale9Shape).canvas, 'width', HxMath.ceil((w * pixelRatio)));
     flighthq._internal.backend.CanvasElementBackend.setField((cast data : DomScale9ShapeData__domScale9Shape).canvas, 'height', HxMath.ceil((h * pixelRatio)));
@@ -96,7 +96,7 @@ class DomScale9Shape {
     ((cast (cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast (cast renderProxy : RenderProxy2D).alpha : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string((cast renderProxy : RenderProxy2D).alpha) : Dynamic) : (cast '' : Dynamic)));
     ((cast (cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).imageRendering = ((cast (cast state : DomRenderState).allowSmoothing : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
     _Runtime.callOptionalValue((cast state : DomRenderState).applyBlendMode, cast ([(cast data : DomScale9ShapeData__domScale9Shape).canvas, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
-    DomScale9Shape.setStrippedDomTransform__domScale9Shape(({ final __callArgument16:Dynamic = (cast data : DomScale9ShapeData__domScale9Shape).canvas; __callArgument16; }), ({ final __callArgument17:Dynamic = (cast renderProxy : RenderProxy2D).transform2D; __callArgument17; }), (cast (cast source : Scale9Shape).scaleX : Float), (cast (cast source : Scale9Shape).scaleY : Float), (cast (cast state : DomRenderState).roundPixels : Bool));
+    DomScale9Shape.setStrippedDomTransform__domScale9Shape(({ final __callArgument16:Dynamic = (cast data : DomScale9ShapeData__domScale9Shape).canvas; __callArgument16; }), ({ final __callArgument17:Dynamic = (cast renderProxy : RenderProxy2D).transform2D; __callArgument17; }), (cast source.scaleX : Float), (cast source.scaleY : Float), (cast (cast state : DomRenderState).roundPixels : Bool));
     setDomRendererElement(({ final __callArgument18:Dynamic = state; __callArgument18; }), ({ final __callArgument19:Dynamic = (cast data : DomScale9ShapeData__domScale9Shape).canvas; __callArgument19; }));
   }
 

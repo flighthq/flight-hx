@@ -33,13 +33,13 @@ class CanvasScale9Shape {
     var commands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
     var scale9Grid:RectangleLike = cast _Runtime.UNDEFINED;
     var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
-    var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure1:Scale9Shape = cast _Runtime.UNDEFINED;
     var scaleX:Float = cast _Runtime.UNDEFINED;
     var scaleY:Float = cast _Runtime.UNDEFINED;
     var mapper:Null<Scale9Mapper> = cast _Runtime.UNDEFINED;
     drawCanvasScene2D(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = renderProxy; __callArgument1; }));
     source = (cast (cast renderProxy : RenderProxy2D).source : Scale9Shape);
-    __destructure0 = (cast source : Scale9Shape).data;
+    __destructure0 = source.data;
     commands = _Runtime.field(__destructure0, 'commands');
     scale9Grid = _Runtime.field(__destructure0, 'scale9Grid');
     if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
@@ -47,8 +47,8 @@ class CanvasScale9Shape {
     _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast renderProxy : RenderProxy2D).alpha);
     __destructure1 = source;
-    scaleX = _Runtime.field(__destructure1, 'scaleX');
-    scaleY = _Runtime.field(__destructure1, 'scaleY');
+    scaleX = __destructure1.scaleX;
+    scaleY = __destructure1.scaleY;
     mapper = (cast buildScale9Mapper(({ final __callArgument2:Dynamic = commands; __callArgument2; }), ({ final __callArgument3:Dynamic = scale9Grid; __callArgument3; }), (cast scaleX : Float), (cast scaleY : Float)) : Null<Scale9Mapper>);
     if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
       setCanvasTransform(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = context; __callArgument5; }), (cast renderProxy : RenderProxy2D).transform2D);

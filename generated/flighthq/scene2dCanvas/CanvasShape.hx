@@ -29,13 +29,13 @@ class CanvasShape {
   @:noCompletion
   public static function drawCanvasShape(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
     var source:Shape = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:ShapeData = cast _Runtime.UNDEFINED;
     var commands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
     var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     drawCanvasScene2D(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = renderProxy; __callArgument1; }));
     source = (cast (cast renderProxy : RenderProxy2D).source : Shape);
-    __destructure0 = (cast source : Shape).data;
-    commands = _Runtime.field(__destructure0, 'commands');
+    __destructure0 = source.data;
+    commands = __destructure0.commands;
     if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
     context = (cast state : CanvasRenderState).context;
     _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));

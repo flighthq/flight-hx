@@ -329,7 +329,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Modifier` | 0 | 2 | 2 | 0 | 1 | 0 | 3 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#ModifierRegistry` | 0 | 1 | 2 | 1 | 0 | 0 | 1 | 3 | yes | — |
 | `@flighthq/types:interface#MorphShapeColorPaintBinding` | 0 | 6 | 1 | 0 | 2 | 0 | 2 | 3 | no | `normalization-provenance` |
-| `@flighthq/types:interface#MorphShapeData` | 0 | 6 | 1 | 9 | 2 | 1 | 2 | 3 | no | `container-transfer`, `normalization-provenance` |
+| `@flighthq/types:interface#MorphShapeData` | 30 | 6 | 1 | 9 | 2 | 1 | 2 | 3 | no | `container-transfer`, `normalization-provenance` |
 | `@flighthq/types:interface#MorphShapeGradientPaintBinding` | 0 | 13 | 1 | 2 | 2 | 0 | 2 | 3 | no | `normalization-provenance` |
 | `@flighthq/types:interface#MorphShapeLinePaintBinding` | 0 | 8 | 1 | 0 | 2 | 0 | 2 | 3 | no | `normalization-provenance` |
 | `@flighthq/types:interface#MorphShapePathBinding` | 0 | 2 | 1 | 2 | 2 | 0 | 2 | 3 | no | `normalization-provenance` |
@@ -491,7 +491,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Sensors` | 11 | 11 | 0 | 11 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SensorsBackend` | 0 | 21 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#ShapeCommandRegistry` | 0 | 16 | 0 | 6 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ShapeData` | 0 | 1 | 1 | 2 | 1 | 0 | 2 | 2 | no | `normalization-provenance` |
+| `@flighthq/types:interface#ShapeData` | 38 | 1 | 1 | 2 | 1 | 0 | 2 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#ShapedGlyph` | 0 | 6 | 1 | 0 | 0 | 0 | 2 | 2 | yes | — |
 | `@flighthq/types:interface#ShapeFillRegion` | 0 | 3 | 0 | 1 | 0 | 6 | 0 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#ShapeStrokeRegion` | 0 | 4 | 0 | 2 | 0 | 7 | 0 | 1 | no | `container-transfer` |

@@ -29751,7 +29751,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 30,
       "fields": 6,
       "id": "@flighthq/types:interface#MorphShapeData",
       "name": "MorphShapeData",
@@ -43423,7 +43423,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 38,
       "fields": 1,
       "id": "@flighthq/types:interface#ShapeData",
       "name": "ShapeData",

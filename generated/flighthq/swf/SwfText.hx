@@ -197,7 +197,7 @@ class SwfText {
     var regions:Null<Array<ShapeFillRegion>> = cast _Runtime.UNDEFINED;
     var outline:Path = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(glyph, null) : Bool)) { return cast null; }
-    regions = (cast getShapeFillRegions((cast (cast _Runtime.field(glyph, 'data') : ShapeData).commands : Dynamic)) : Null<Array<ShapeFillRegion>>);
+    regions = (cast getShapeFillRegions((cast (cast (cast glyph : { var data:ShapeData; }).data : { var commands:Array<ShapeCommandToken>; }).commands : Dynamic)) : Null<Array<ShapeFillRegion>>);
     if ((cast _Runtime.strictEquals(regions, null) : Bool)) { return cast null; }
     outline = (cast createPath(({ final __callArgument28:Dynamic = 'nonZero'; __callArgument28; })) : Path);
     for (region in _Runtime.iterable(regions)) {

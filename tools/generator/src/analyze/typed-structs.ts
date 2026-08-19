@@ -468,6 +468,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#ShapedRun',
     purpose: 'reviewed escape-free shaped run',
   },
+  {
+    declarationFingerprint: 'sha256:2b31b5b9c65d277eeeeb327a2e2fcb4452dfbc7cb3117508c5bafbdd7d741f34',
+    id: '@flighthq/types:interface#Shape',
+    purpose: 'reviewed escape-free shape',
+  },
+  {
+    declarationFingerprint: 'sha256:c4d9690d18b21e3fb00e7e50dfe7d187fcf5b4135c164263b85824d18571e746',
+    id: '@flighthq/types:interface#Scale9Shape',
+    purpose: 'reviewed escape-free scale-9 shape',
+  },
+  {
+    declarationFingerprint: 'sha256:c3677e835bf0844d2df50b06f28145cdeebf386b4c0f584f8296158a84558aa4',
+    id: '@flighthq/types:interface#ShapeData',
+    purpose: 'reviewed escape-free shape data',
+  },
+  {
+    declarationFingerprint: 'sha256:4d520958150bb3f2e2c1beebf07d580ca947c836dca809a68b34ea205143529c',
+    id: '@flighthq/types:interface#MorphShape',
+    purpose: 'reviewed escape-free morph shape',
+  },
+  {
+    declarationFingerprint: 'sha256:3c3ad2fcb2496c19ddf40cd7c5c6c20d5ddde69456be127c40066abd544b30e8',
+    id: '@flighthq/types:interface#MorphShapeData',
+    purpose: 'reviewed escape-free morph-shape data',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

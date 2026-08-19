@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_516,
+      newAuditOnly: 1_511,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(490);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(495);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_516);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_511);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(88);
+    expect(newDirect).toHaveLength(93);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -550,6 +550,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'ShapedRun',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free shaped run',
+        }),
+        expect.objectContaining({
+          name: 'Shape',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free shape',
+        }),
+        expect.objectContaining({
+          name: 'Scale9Shape',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free scale-9 shape',
+        }),
+        expect.objectContaining({
+          name: 'ShapeData',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free shape data',
+        }),
+        expect.objectContaining({
+          name: 'MorphShape',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free morph shape',
+        }),
+        expect.objectContaining({
+          name: 'MorphShapeData',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free morph-shape data',
         }),
       ]),
     );
@@ -993,6 +1018,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:8b0fb4643dfec361ac4d51caaaef5867c9e05efc2ef364fddcf328380fc07ac5',
         id: '@flighthq/types:interface#ShapedRun',
         purpose: 'reviewed escape-free shaped run',
+      },
+      {
+        declarationFingerprint: 'sha256:2b31b5b9c65d277eeeeb327a2e2fcb4452dfbc7cb3117508c5bafbdd7d741f34',
+        id: '@flighthq/types:interface#Shape',
+        purpose: 'reviewed escape-free shape',
+      },
+      {
+        declarationFingerprint: 'sha256:c4d9690d18b21e3fb00e7e50dfe7d187fcf5b4135c164263b85824d18571e746',
+        id: '@flighthq/types:interface#Scale9Shape',
+        purpose: 'reviewed escape-free scale-9 shape',
+      },
+      {
+        declarationFingerprint: 'sha256:c3677e835bf0844d2df50b06f28145cdeebf386b4c0f584f8296158a84558aa4',
+        id: '@flighthq/types:interface#ShapeData',
+        purpose: 'reviewed escape-free shape data',
+      },
+      {
+        declarationFingerprint: 'sha256:4d520958150bb3f2e2c1beebf07d580ca947c836dca809a68b34ea205143529c',
+        id: '@flighthq/types:interface#MorphShape',
+        purpose: 'reviewed escape-free morph shape',
+      },
+      {
+        declarationFingerprint: 'sha256:3c3ad2fcb2496c19ddf40cd7c5c6c20d5ddde69456be127c40066abd544b30e8',
+        id: '@flighthq/types:interface#MorphShapeData',
+        purpose: 'reviewed escape-free morph-shape data',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -1517,6 +1567,13 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const shapeDataCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['MorphShape', 'MorphShapeData', 'Scale9Shape', 'Shape', 'ShapeData'].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -1557,22 +1614,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_516,
+      auditOnlySchemas: 1_511,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 20_142,
-      directSchemas: 488,
+      directAccesses: 20_326,
+      directSchemas: 493,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 10_524,
+      pendingAccesses: 10_340,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_516,
+      newAuditOnly: 1_511,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -1600,7 +1657,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(20_142);
+    expect(report.summary.directAccesses).toBe(20_326);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -2297,6 +2354,48 @@ describe('typed struct analysis', () => {
     }
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
+        'Shape',
+        41,
+        'sha256:2b31b5b9c65d277eeeeb327a2e2fcb4452dfbc7cb3117508c5bafbdd7d741f34',
+        'reviewed escape-free shape',
+      ],
+      [
+        'Scale9Shape',
+        39,
+        'sha256:c4d9690d18b21e3fb00e7e50dfe7d187fcf5b4135c164263b85824d18571e746',
+        'reviewed escape-free scale-9 shape',
+      ],
+      [
+        'ShapeData',
+        38,
+        'sha256:c3677e835bf0844d2df50b06f28145cdeebf386b4c0f584f8296158a84558aa4',
+        'reviewed escape-free shape data',
+      ],
+      [
+        'MorphShape',
+        36,
+        'sha256:4d520958150bb3f2e2c1beebf07d580ca947c836dca809a68b34ea205143529c',
+        'reviewed escape-free morph shape',
+      ],
+      [
+        'MorphShapeData',
+        30,
+        'sha256:3c3ad2fcb2496c19ddf40cd7c5c6c20d5ddde69456be127c40066abd544b30e8',
+        'reviewed escape-free morph-shape data',
+      ],
+    ] as const) {
+      expect(shapeDataCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
         'Physics2DWorld',
         217,
         'sha256:a28a94c95326e5405d33feda957ea8ee57399e1266dae9f9d7c88218d945a9fe',
@@ -2831,6 +2930,44 @@ describe('typed struct analysis', () => {
       blockerReasons: ['container-transfer', 'normalization-provenance'],
       closed: false,
     });
+    for (const shapeCrossSchemaId of [
+      '@flighthq/types:interface#MorphShape',
+      '@flighthq/types:interface#Scale9Shape',
+    ]) {
+      expect(classAuditById.get(shapeCrossSchemaId)?.migration).toEqual({
+        mechanicallyCompatible: false,
+        normalizationReasons: ['cross-schema-transfer'],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.has(shapeCrossSchemaId)).toBe(false);
+    }
+    const shapeId = '@flighthq/types:interface#Shape';
+    expect(classAuditById.get(shapeId)?.migration).toEqual({
+      mechanicallyCompatible: false,
+      normalizationReasons: ['cross-schema-transfer', 'dynamic-ingress'],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.has(shapeId)).toBe(false);
+    const shapeDataId = '@flighthq/types:interface#ShapeData';
+    expect(classAuditById.get(shapeDataId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.get(shapeDataId)?.nominalIdentity).toEqual({
+      blockerReasons: ['normalization-provenance'],
+      closed: false,
+    });
+    const morphShapeDataId = '@flighthq/types:interface#MorphShapeData';
+    expect(classAuditById.get(morphShapeDataId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.get(morphShapeDataId)?.nominalIdentity).toEqual({
+      blockerReasons: ['container-transfer', 'normalization-provenance'],
+      closed: false,
+    });
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -3115,6 +3252,19 @@ describe('typed struct analysis', () => {
     const generatedTextShaperRun = readFileSync('generated/flighthq/textshaper/TextShaperRun.hx', 'utf8');
     expect(generatedTextShaperRun).not.toMatch(/\(cast (?:out|result|run) : ShapedRun\)\./u);
     expect(generatedTextShaperRun).not.toMatch(/_Runtime\.field\((?:out|run),/u);
+    const generatedShape = readFileSync('generated/flighthq/shape/Shape.hx', 'utf8');
+    expect(generatedShape).not.toMatch(/\(cast (?:out|shape|source) : flighthq\.types\.Shape\)\./u);
+    expect(generatedShape).not.toMatch(/_Runtime\.field\((?:out|shape|source), '(?:data|kind)'\)/u);
+    const generatedMorphShape = readFileSync('generated/flighthq/shape/MorphShape.hx', 'utf8');
+    expect(generatedMorphShape).not.toMatch(/\(cast shape : flighthq\.types\.MorphShape\)\./u);
+    expect(generatedMorphShape).not.toMatch(/_Runtime\.field\(shape,/u);
+    const generatedMorphShapePaint = readFileSync('generated/flighthq/shape/MorphShapePaint.hx', 'utf8');
+    expect(generatedMorphShapePaint).not.toMatch(/\(cast (?:data|shape) : (?:MorphShapeData|MorphShape)\)\./u);
+    expect(generatedMorphShapePaint).not.toMatch(/_Runtime\.field\(data, 'commands'\)/u);
+    const generatedCanvasScale9 = readFileSync('generated/flighthq/scene2dCanvas/CanvasScale9Shape.hx', 'utf8');
+    expect(generatedCanvasScale9).not.toMatch(/_Runtime\.field\(__destructure1, '(?:scaleX|scaleY)'\)/u);
+    const generatedShapeJson = readFileSync('generated/flighthq/shapeFormats/ShapeJson.hx', 'utf8');
+    expect(generatedShapeJson).not.toMatch(/_Runtime\.field\(shape, 'data'\)/u);
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

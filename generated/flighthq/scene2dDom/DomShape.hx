@@ -41,7 +41,7 @@ class DomShape {
   public static function drawDomShape(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var data:Null<DomShapeData__domShape> = cast _Runtime.UNDEFINED;
     var source:Shape = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:ShapeData = cast _Runtime.UNDEFINED;
     var commands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
     var rasterizer:Null<ShapeRasterizer> = cast _Runtime.UNDEFINED;
     var bounds:Rectangle = cast _Runtime.UNDEFINED;
@@ -52,8 +52,8 @@ class DomShape {
     data = (cast (cast renderProxy : RenderProxy2D).rendererData : Null<DomShapeData__domShape>);
     if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
     source = (cast (cast renderProxy : RenderProxy2D).source : Shape);
-    __destructure0 = (cast source : Shape).data;
-    commands = _Runtime.field(__destructure0, 'commands');
+    __destructure0 = source.data;
+    commands = __destructure0.commands;
     if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
     rasterizer = (cast getDomShapeRasterizer(({ final __callArgument1:Dynamic = state; __callArgument1; })) : Null<ShapeRasterizer>);
     if ((cast _Runtime.strictEquals(rasterizer, null) : Bool)) {

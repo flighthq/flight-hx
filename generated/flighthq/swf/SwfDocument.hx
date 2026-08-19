@@ -74,6 +74,7 @@ import flighthq.types.ImageResourceReference.EmbeddedImageResourceReference;
 import flighthq.types.Matrix;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.MorphShape;
+import flighthq.types.MorphShape.MorphShapeData;
 import flighthq.types.MovieClip;
 import flighthq.types.MovieClip.MovieClipData;
 import flighthq.types.Node.NodeOf;
@@ -90,6 +91,7 @@ import flighthq.types.RichText;
 import flighthq.types.RichText.RichTextData;
 import flighthq.types.Sampler;
 import flighthq.types.Scale9Shape;
+import flighthq.types.Scale9Shape.Scale9ShapeData;
 import flighthq.types.Scene2DDocument;
 import flighthq.types.Scene2DDocument.Scene2DSlotReference;
 import flighthq.types.Scene2DResources.Scene2DDocumentImportContext;
@@ -547,7 +549,7 @@ class SwfDocument {
     combined = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix);
     multiplyMatrix(({ final __callArgument68:Dynamic = combined; __callArgument68; }), ({ final __callArgument69:Dynamic = _Runtime.field(mask, 'matrix'); __callArgument69; }), ({ final __callArgument70:Dynamic = inverse; __callArgument70; }));
     contours = (cast cast ([] : Array<Dynamic>));
-    for (region in _Runtime.iterable(_Runtime.coalesce((cast getShapeFillRegions((cast (cast (cast shape : Shape).data : ShapeData).commands : Dynamic)) : Null<Array<ShapeFillRegion>>), function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
+    for (region in _Runtime.iterable(_Runtime.coalesce((cast getShapeFillRegions((cast (cast (cast shape : { var data:ShapeData; }).data : { var commands:Array<ShapeCommandToken>; }).commands : Dynamic)) : Null<Array<ShapeFillRegion>>), function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
       for (contour in _Runtime.iterable(_Runtime.coalesce((cast (cast createClipRegionFromPath((cast region : ShapeFillRegion).path, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ClipRegion) : { var contours:Null<Array<Array<Float>>>; }).contours, function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
         var transformed:Array<Float> = _Runtime.createArray(_Runtime.field(contour, 'length'));
         {
@@ -708,13 +710,13 @@ class SwfDocument {
     shape = (cast decode() : Null<MorphShape>);
     if ((cast _Runtime.strictEquals(shape, null) : Bool)) { return cast (cast SwfDocument.createSwfDisplayObject__swfDocument((cast bounds : Dynamic)) : DisplayObject); }
     if ((cast !_Runtime.strictEquals(morphBounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var data:SwfMorphBoundsData__swfDocument = (cast (cast (cast shape : MorphShape).data : flighthq._internal._Any) : SwfMorphBoundsData__swfDocument);
+      var data:SwfMorphBoundsData__swfDocument = (cast (cast (cast shape : { var data:MorphShapeData; }).data : flighthq._internal._Any) : SwfMorphBoundsData__swfDocument);
       ((cast data : SwfMorphBoundsData__swfDocument).morphStartBounds = _Runtime.mergeObjects([(cast morphBounds : { var end:SwfRectangle__swfDocument; var start:SwfRectangle__swfDocument; }).start]));
       ((cast data : SwfMorphBoundsData__swfDocument).morphEndBounds = _Runtime.mergeObjects([(cast morphBounds : { var end:SwfRectangle__swfDocument; var start:SwfRectangle__swfDocument; }).end]));
       ((cast data : SwfMorphBoundsData__swfDocument).authoredBounds = _Runtime.mergeObjects([(cast morphBounds : { var end:SwfRectangle__swfDocument; var start:SwfRectangle__swfDocument; }).start]));
       ((cast (cast getNodeRuntime((cast shape : Dynamic)) : Node2DRuntime) : { var computeLocalBoundsRectangle:Rectangle->BoundsNodeAny->Void; }).computeLocalBoundsRectangle = (cast SwfDocument.computeSwfLocalBoundsRectangle__swfDocument));
     } else { if ((cast !_Runtime.strictEquals(bounds, null) : Bool)) {
-      ((cast (cast (cast (cast shape : MorphShape).data : flighthq._internal._Any) : SwfAuthoredBoundsData__swfDocument) : SwfAuthoredBoundsData__swfDocument).authoredBounds = _Runtime.mergeObjects([bounds]));
+      ((cast (cast (cast (cast shape : { var data:MorphShapeData; }).data : flighthq._internal._Any) : SwfAuthoredBoundsData__swfDocument) : SwfAuthoredBoundsData__swfDocument).authoredBounds = _Runtime.mergeObjects([bounds]));
       ((cast (cast getNodeRuntime((cast shape : Dynamic)) : Node2DRuntime) : { var computeLocalBoundsRectangle:Rectangle->BoundsNodeAny->Void; }).computeLocalBoundsRectangle = (cast SwfDocument.computeSwfLocalBoundsRectangle__swfDocument));
     } }
     return cast shape;
@@ -725,7 +727,7 @@ class SwfDocument {
     var data:SwfMorphBoundsData__swfDocument = cast _Runtime.UNDEFINED;
     var start:SwfRectangle__swfDocument = cast _Runtime.UNDEFINED;
     var end:SwfRectangle__swfDocument = cast _Runtime.UNDEFINED;
-    data = (cast (cast (cast shape : MorphShape).data : flighthq._internal._Any) : SwfMorphBoundsData__swfDocument);
+    data = (cast (cast shape.data : flighthq._internal._Any) : SwfMorphBoundsData__swfDocument);
     start = (cast data : SwfMorphBoundsData__swfDocument).morphStartBounds;
     end = (cast data : SwfMorphBoundsData__swfDocument).morphEndBounds;
     if ((cast ((cast _Runtime.strictEquals(start, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(end, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
@@ -763,7 +765,7 @@ class SwfDocument {
     target = (cast createScale9Shape(({ final __callArgument93:Dynamic = { height: _Runtime.field(grid, 'height'), width: _Runtime.field(grid, 'width'), x: _Runtime.field(grid, 'x'), y: _Runtime.field(grid, 'y') }; __callArgument93; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Scale9Shape);
     copyShapeCommands(({ final __callArgument94:Dynamic = target; __callArgument94; }), ({ final __callArgument95:Dynamic = shape; __callArgument95; }));
     if ((cast !_Runtime.strictEquals(bounds, null) : Bool)) {
-      ((cast (cast (cast (cast target : Scale9Shape).data : flighthq._internal._Any) : SwfShapeNodeData__swfDocument) : SwfShapeNodeData__swfDocument).authoredBounds = _Runtime.mergeObjects([bounds]));
+      ((cast (cast (cast target.data : flighthq._internal._Any) : SwfShapeNodeData__swfDocument) : SwfShapeNodeData__swfDocument).authoredBounds = _Runtime.mergeObjects([bounds]));
       ((cast (cast getNodeRuntime((cast target : Dynamic)) : Node2DRuntime) : { var computeLocalBoundsRectangle:Rectangle->BoundsNodeAny->Void; }).computeLocalBoundsRectangle = (cast SwfDocument.computeSwfLocalBoundsRectangle__swfDocument));
     }
     return cast target;
@@ -775,7 +777,7 @@ class SwfDocument {
     target = (cast createShape(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Shape);
     copyShapeCommands(({ final __callArgument96:Dynamic = target; __callArgument96; }), ({ final __callArgument97:Dynamic = template; __callArgument97; }));
     if ((cast !_Runtime.strictEquals(bounds, null) : Bool)) {
-      ((cast (cast (cast target : Shape).data : SwfShapeNodeData__swfDocument) : SwfShapeNodeData__swfDocument).authoredBounds = _Runtime.mergeObjects([bounds]));
+      ((cast (cast target.data : SwfShapeNodeData__swfDocument) : SwfShapeNodeData__swfDocument).authoredBounds = _Runtime.mergeObjects([bounds]));
       ((cast (cast getNodeRuntime((cast target : Dynamic)) : Node2DRuntime) : { var computeLocalBoundsRectangle:Rectangle->BoundsNodeAny->Void; }).computeLocalBoundsRectangle = (cast SwfDocument.computeSwfLocalBoundsRectangle__swfDocument));
     }
     return cast target;

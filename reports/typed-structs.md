@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1516 |
-| Direct schemas | 488 |
+| Audit-only schemas | 1511 |
+| Direct schemas | 493 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 10524 |
-| Directly emitted accesses | 20142 |
+| Pending accesses | 10340 |
+| Directly emitted accesses | 20326 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1516 |
+| Newly discovered, audit-only | 1511 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -975,11 +975,11 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#ModifierKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#ModifierRegistry` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ModifierSlot` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#MorphShape` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 36 | 0 | 0 | 36 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MorphShape` | `direct` | `new` | — | reviewed escape-free morph shape | 19 | 36 | 0 | 0 | 0 | 36 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MorphShapeAnimationTarget` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MorphShapeColorEndpoint` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MorphShapeColorPaintBinding` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 4 | 0 | 0 | 4 | 0 | 0 | 2 | yes | — |
-| `@flighthq/types:interface#MorphShapeData` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 29 | 1 | 0 | 30 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MorphShapeData` | `direct` | `new` | — | reviewed escape-free morph-shape data | 6 | 29 | 1 | 0 | 0 | 30 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MorphShapeGradientEndpoint` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 23 | 0 | 0 | 23 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MorphShapeGradientEndpointExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#MorphShapeGradientEndpointReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1340,7 +1340,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#SaveFileDialogOptions` | `direct` | `preserved` | `@flighthq/types:interface#SaveFileDialogOptions` | broad host document | 6 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ScalarRemap` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#Scale9Mapper` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 36 | yes | — |
-| `@flighthq/types:interface#Scale9Shape` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 39 | 0 | 0 | 39 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Scale9Shape` | `direct` | `new` | — | reviewed escape-free scale-9 shape | 19 | 39 | 0 | 0 | 0 | 39 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scale9ShapeData` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scale9ShapeRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 38 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ScanlinesEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
@@ -1439,11 +1439,11 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#SepiaAdjustment` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ShadedMaterial` | `direct` | `new` | — | reviewed escape-free shaded material | 14 | 44 | 12 | 0 | 0 | 56 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ShadedMaterialOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 12 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Shape` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 41 | 0 | 0 | 41 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Shape` | `direct` | `new` | — | reviewed escape-free shape | 19 | 41 | 0 | 0 | 0 | 41 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ShapeCommandKey` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#ShapeCommandRegistry` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ShapeCommandToken` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/types:interface#ShapeData` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 38 | 0 | 0 | 38 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ShapeData` | `direct` | `new` | — | reviewed escape-free shape data | 1 | 38 | 0 | 0 | 0 | 38 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ShapedGlyph` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ShapedRun` | `direct` | `new` | — | reviewed escape-free shaped run | 6 | 15 | 11 | 0 | 0 | 26 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ShapeFillRegion` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 4 | 0 | 0 | 4 | 0 | 0 | 8 | yes | — |

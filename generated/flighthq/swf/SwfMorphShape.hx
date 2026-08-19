@@ -88,7 +88,7 @@ class SwfMorphShape {
       appendMorphShapeLineStyle(({ final __callArgument13:Dynamic = shape; __callArgument13; }), ({ final __callArgument14:Dynamic = { alpha: _Runtime.field(line, 'startAlpha'), color: _Runtime.field(line, 'startColor'), thickness: _Runtime.divideNumbers(_Runtime.field(line, 'startWidth'), SwfMorphShape.TWIPS_PER_PIXEL__swfMorphShape) }; __callArgument14; }), ({ final __callArgument15:Dynamic = { alpha: _Runtime.field(line, 'endAlpha'), color: _Runtime.field(line, 'endColor'), thickness: _Runtime.divideNumbers(_Runtime.field(line, 'endWidth'), SwfMorphShape.TWIPS_PER_PIXEL__swfMorphShape) }; __callArgument15; }), (cast _Runtime.field(line, 'pixelHinting') : Bool), ({ final __callArgument16:Dynamic = 'normal'; __callArgument16; }), _Runtime.field(line, 'caps'), _Runtime.field(line, 'joints'), (cast _Runtime.field(line, 'miterLimit') : Float));
       (cast appendMorphShapePath(({ final __callArgument17:Dynamic = shape; __callArgument17; }), ({ final __callArgument18:Dynamic = morph; __callArgument18; })) : Path);
     }
-    return cast ((cast ((cast _Runtime.field((cast (cast shape : MorphShape).data : MorphShapeData).commands, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast shape : Dynamic) : (cast null : Dynamic));
+    return cast ((cast ((cast _Runtime.field((cast shape.data : { var commands:Array<ShapeCommandToken>; }).commands, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast shape : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 

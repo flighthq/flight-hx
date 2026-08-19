@@ -35,7 +35,7 @@ class RegisterShapeHitTest {
 
   public static function hitTestShapeFill__registerShapeHitTest(source:NodeAny, x:Float, y:Float):Float {
     var regions:Null<Array<ShapeFillRegion>> = cast _Runtime.UNDEFINED;
-    regions = (cast getShapeFillRegions((cast (cast (cast (cast source : Shape) : Shape).data : ShapeData).commands : Dynamic)) : Null<Array<ShapeFillRegion>>);
+    regions = (cast getShapeFillRegions((cast (cast (cast (cast source : Shape) : { var data:ShapeData; }).data : { var commands:Array<ShapeCommandToken>; }).commands : Dynamic)) : Null<Array<ShapeFillRegion>>);
     if ((cast _Runtime.strictEquals(regions, null) : Bool)) { return cast -1.0; }
     inverseMatrixTransformPointXY(({ final __callArgument3:Dynamic = RegisterShapeHitTest.shapeHitTestLocalPoint__registerShapeHitTest; __callArgument3; }), ({ final __callArgument4:Dynamic = (cast getNodeWorldMatrix((cast (cast source : Node2D) : Dynamic)) : Matrix); __callArgument4; }), (cast x : Float), (cast y : Float));
     for (region in _Runtime.iterable(regions)) {

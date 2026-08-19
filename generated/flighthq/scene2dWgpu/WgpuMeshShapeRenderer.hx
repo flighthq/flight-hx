@@ -40,7 +40,7 @@ class WgpuMeshShapeRenderer {
   public static function drawWgpuMeshShape(state:WgpuRenderState, renderProxy:RenderProxy2D):Bool {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var source:Shape = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:ShapeData = cast _Runtime.UNDEFINED;
     var commands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
     var strokePathTessellator:Null<Path->StrokeStyle->Null<Float>->Null<PathMesh>> = cast _Runtime.UNDEFINED;
     var regions:Null<Array<flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion>>> = cast _Runtime.UNDEFINED;
@@ -49,8 +49,8 @@ class WgpuMeshShapeRenderer {
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
     if ((cast _Runtime.strictEquals(runtime.renderPass, null) : Bool)) { return cast false; }
     source = (cast (cast renderProxy : RenderProxy2D).source : Shape);
-    __destructure0 = (cast source : Shape).data;
-    commands = _Runtime.field(__destructure0, 'commands');
+    __destructure0 = source.data;
+    commands = __destructure0.commands;
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals((cast renderProxy : RenderProxy2D).rendererData, null) : Bool)) : Bool)) { return cast false; }
     strokePathTessellator = runtime.strokeTessellator;
     regions = (cast WgpuMeshShapeRenderer.resolveWgpuShapeMeshRegions__wgpuMeshShapeRenderer(({ final __callArgument1:Dynamic = commands; __callArgument1; }), (cast !_Runtime.strictEquals(strokePathTessellator, null) : Bool)) : Null<Array<flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion>>>);

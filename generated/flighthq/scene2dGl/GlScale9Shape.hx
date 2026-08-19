@@ -92,7 +92,7 @@ class GlScale9Shape {
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime);
     flushGlQuadBatchWriter(({ final __callArgument2:Dynamic = state; __callArgument2; }));
     source = (cast (cast renderProxy : RenderProxy2D).source : Scale9Shape);
-    __destructure1 = (cast source : Scale9Shape).data;
+    __destructure1 = source.data;
     commands = _Runtime.field(__destructure1, 'commands');
     scale9Grid = _Runtime.field(__destructure1, 'scale9Grid');
     version = (cast getNodeLocalContentRevision((cast source : Dynamic)) : Float);
@@ -104,17 +104,17 @@ class GlScale9Shape {
       return;
     }
     bounds = (cast getNodeLocalBoundsRectangle((cast source : Dynamic)) : Rectangle);
-    mapper = (cast buildGlScale9Mapper(({ final __callArgument7:Dynamic = bounds; __callArgument7; }), ({ final __callArgument8:Dynamic = scale9Grid; __callArgument8; }), (cast (cast source : Scale9Shape).scaleX : Float), (cast (cast source : Scale9Shape).scaleY : Float)) : Null<Scale9Mapper>);
+    mapper = (cast buildGlScale9Mapper(({ final __callArgument7:Dynamic = bounds; __callArgument7; }), ({ final __callArgument8:Dynamic = scale9Grid; __callArgument8; }), (cast source.scaleX : Float), (cast source.scaleY : Float)) : Null<Scale9Mapper>);
     if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
       drawGlShape(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = renderProxy; __callArgument10; }));
       return;
     }
     shapeData = (cast (cast (cast renderProxy : RenderProxy2D).rendererData : flighthq._internal._Any) : GlScale9ShapeData__glScale9Shape);
     pixelRatio = (cast state : GlRenderState).pixelRatio;
-    w = HxMath.ceil((bounds.width * (cast source : Scale9Shape).scaleX));
-    h = HxMath.ceil((bounds.height * (cast source : Scale9Shape).scaleY));
+    w = HxMath.ceil((bounds.width * source.scaleX));
+    h = HxMath.ceil((bounds.height * source.scaleY));
     if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
-    if ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(version, (cast shapeData : GlScale9ShapeData__glScale9Shape).lastContentId) : Bool) || (cast !_Runtime.strictEquals(w, (cast shapeData : GlScale9ShapeData__glScale9Shape).lastW) : Bool)) : Bool) || (cast !_Runtime.strictEquals(h, (cast shapeData : GlScale9ShapeData__glScale9Shape).lastH) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast source : Scale9Shape).scaleX, (cast shapeData : GlScale9ShapeData__glScale9Shape).lastScaleX) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast source : Scale9Shape).scaleY, (cast shapeData : GlScale9ShapeData__glScale9Shape).lastScaleY) : Bool)) : Bool) || (cast !_Runtime.strictEquals(pixelRatio, (cast shapeData : GlScale9ShapeData__glScale9Shape).lastPixelRatio) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(version, (cast shapeData : GlScale9ShapeData__glScale9Shape).lastContentId) : Bool) || (cast !_Runtime.strictEquals(w, (cast shapeData : GlScale9ShapeData__glScale9Shape).lastW) : Bool)) : Bool) || (cast !_Runtime.strictEquals(h, (cast shapeData : GlScale9ShapeData__glScale9Shape).lastH) : Bool)) : Bool) || (cast !_Runtime.strictEquals(source.scaleX, (cast shapeData : GlScale9ShapeData__glScale9Shape).lastScaleX) : Bool)) : Bool) || (cast !_Runtime.strictEquals(source.scaleY, (cast shapeData : GlScale9ShapeData__glScale9Shape).lastScaleY) : Bool)) : Bool) || (cast !_Runtime.strictEquals(pixelRatio, (cast shapeData : GlScale9ShapeData__glScale9Shape).lastPixelRatio) : Bool)) : Bool)) {
       flighthq._internal.backend.CanvasElementBackend.setField((cast shapeData : GlScale9ShapeData__glScale9Shape).canvas, 'width', HxMath.ceil((w * pixelRatio)));
       flighthq._internal.backend.CanvasElementBackend.setField((cast shapeData : GlScale9ShapeData__glScale9Shape).canvas, 'height', HxMath.ceil((h * pixelRatio)));
       var ctx:flighthq._internal.dom.CanvasRenderingContext2D = (cast shapeData : GlScale9ShapeData__glScale9Shape).ctx;
@@ -125,8 +125,8 @@ class GlScale9Shape {
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
       updateGlTexture(({ final __callArgument17:Dynamic = state; __callArgument17; }), (cast shapeData : GlScale9ShapeData__glScale9Shape).texture, (cast shapeData : GlScale9ShapeData__glScale9Shape).canvas);
       ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastH = h);
-      ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastScaleX = (cast source : Scale9Shape).scaleX);
-      ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastScaleY = (cast source : Scale9Shape).scaleY);
+      ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastScaleX = source.scaleX);
+      ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastScaleY = source.scaleY);
       ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastContentId = version);
       ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastPixelRatio = pixelRatio);
       ((cast shapeData : GlScale9ShapeData__glScale9Shape).lastW = w);
@@ -142,7 +142,7 @@ class GlScale9Shape {
     matrixArray = __destructure2.matrixArray;
     setGlBaseUniforms(({ final __callArgument19:Dynamic = gl; __callArgument19; }), ({ final __callArgument20:Dynamic = shaderLoc; __callArgument20; }), ({ final __callArgument21:Dynamic = renderProxy; __callArgument21; }));
     t = (cast renderProxy : RenderProxy2D).transform2D;
-    GlScale9Shape.setStrippedGlMatrixFromValues__glScale9Shape(({ final __callArgument22:Dynamic = gl; __callArgument22; }), ({ final __callArgument23:Dynamic = shaderLoc; __callArgument23; }), ({ final __callArgument24:Dynamic = matrixArray; __callArgument24; }), ({ final __callArgument25:Dynamic = t; __callArgument25; }), (cast (cast source : Scale9Shape).scaleX : Float), (cast (cast source : Scale9Shape).scaleY : Float), ({ final __callArgument26:Dynamic = _Runtime.coalesce(runtime.renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas); __callArgument26; }));
+    GlScale9Shape.setStrippedGlMatrixFromValues__glScale9Shape(({ final __callArgument22:Dynamic = gl; __callArgument22; }), ({ final __callArgument23:Dynamic = shaderLoc; __callArgument23; }), ({ final __callArgument24:Dynamic = matrixArray; __callArgument24; }), ({ final __callArgument25:Dynamic = t; __callArgument25; }), (cast source.scaleX : Float), (cast source.scaleY : Float), ({ final __callArgument26:Dynamic = _Runtime.coalesce(runtime.renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas); __callArgument26; }));
     drawGlQuad(({ final __callArgument27:Dynamic = state; __callArgument27; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast w : Float), (cast h : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
   }
 

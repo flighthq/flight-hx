@@ -28,15 +28,15 @@ import flighthq.types._internal._MorphShapeValues.MorphShapeKind;
 
 class MorphShape {
   public static function appendMorphShapePath(shape:flighthq.types.MorphShape, ?morph:PathMorph):Path {
-    if (morph == null) morph = cast ((cast (cast shape : flighthq.types.MorphShape).data : MorphShapeData).morph : Dynamic);
+    if (morph == null) morph = cast ((cast shape.data : { var morph:PathMorph; }).morph : Dynamic);
     var binding:Null<MorphShapePathBinding> = cast _Runtime.UNDEFINED;
     var path:Path = cast _Runtime.UNDEFINED;
-    binding = _Runtime.find((cast (cast shape : flighthq.types.MorphShape).data : MorphShapeData).pathBindings, function(candidate:MorphShapePathBinding, __unused0:Float, __unused1:Array<MorphShapePathBinding>):Bool return _Runtime.strictEquals((cast candidate : MorphShapePathBinding).morph, morph));
+    binding = _Runtime.find((cast shape.data : { var pathBindings:Array<MorphShapePathBinding>; }).pathBindings, function(candidate:MorphShapePathBinding, __unused0:Float, __unused1:Array<MorphShapePathBinding>):Bool return _Runtime.strictEquals((cast candidate : MorphShapePathBinding).morph, morph));
     if ((cast _Runtime.strictEquals(binding, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var path:Path = (cast createPath(_Runtime.field(morph, 'winding')) : Path);
-      samplePathMorph(({ final __callArgument0:Dynamic = path; __callArgument0; }), ({ final __callArgument1:Dynamic = morph; __callArgument1; }), (cast (cast (cast shape : flighthq.types.MorphShape).data : MorphShapeData).progress : Float));
+      samplePathMorph(({ final __callArgument0:Dynamic = path; __callArgument0; }), ({ final __callArgument1:Dynamic = morph; __callArgument1; }), (cast (cast shape.data : { var progress:Float; }).progress : Float));
       (binding = cast ({ morph: morph, path: path } : Dynamic));
-      _Runtime.callProperty((cast (cast shape : flighthq.types.MorphShape).data : MorphShapeData).pathBindings, 'push', cast ([binding] : Array<Dynamic>));
+      _Runtime.callProperty((cast shape.data : { var pathBindings:Array<MorphShapePathBinding>; }).pathBindings, 'push', cast ([binding] : Array<Dynamic>));
     }
     path = (cast binding : MorphShapePathBinding).path;
     appendShapePath(({ final __callArgument2:Dynamic = shape; __callArgument2; }), (cast path : Path).commands, (cast path : Path).data, (cast path : Path).winding);
@@ -94,17 +94,17 @@ class MorphShape {
   }
 
   public static function setMorphShapeProgress(shape:flighthq.types.MorphShape, progress:Float):Void {
-    if ((cast _Runtime.strictEquals((cast (cast shape : flighthq.types.MorphShape).data : MorphShapeData).progress, progress) : Bool)) { return; }
-    ((cast (cast shape : flighthq.types.MorphShape).data : MorphShapeData).progress = progress);
+    if ((cast _Runtime.strictEquals((cast shape.data : { var progress:Float; }).progress, progress) : Bool)) { return; }
+    ((cast shape.data : { var progress:Float; }).progress = cast (progress : Float));
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field((cast (cast shape : flighthq.types.MorphShape).data : MorphShapeData).pathBindings, 'length') : Float)) : Bool)) {
-        var binding:MorphShapePathBinding = flighthq._internal._StaticIndex.readArray((cast (cast shape : flighthq.types.MorphShape).data : MorphShapeData).pathBindings, i);
+      while ((cast ((cast i : Float) < (cast _Runtime.field((cast shape.data : { var pathBindings:Array<MorphShapePathBinding>; }).pathBindings, 'length') : Float)) : Bool)) {
+        var binding:MorphShapePathBinding = flighthq._internal._StaticIndex.readArray((cast shape.data : { var pathBindings:Array<MorphShapePathBinding>; }).pathBindings, i);
         samplePathMorph((cast binding : MorphShapePathBinding).path, (cast binding : MorphShapePathBinding).morph, (cast progress : Float));
         i++;
       }
     }
-    sampleMorphShapePaintBindings((cast shape : flighthq.types.MorphShape).data, (cast progress : Float));
+    sampleMorphShapePaintBindings(shape.data, (cast progress : Float));
     invalidateContent((cast shape : Dynamic));
   }
 }

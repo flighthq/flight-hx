@@ -52,7 +52,7 @@ class ShapeJson {
     var entries:Array<SerializedShapeCommand__shapeJson> = cast _Runtime.UNDEFINED;
     var textureOrdinal:Float = cast _Runtime.UNDEFINED;
     var i:Float = cast _Runtime.UNDEFINED;
-    commands = (cast _Runtime.field(shape, 'data') : ShapeData).commands;
+    commands = (cast shape.data : { var commands:Array<ShapeCommandToken>; }).commands;
     entries = (cast cast ([] : Array<Dynamic>));
     textureOrdinal = 0.0;
     i = 0.0;

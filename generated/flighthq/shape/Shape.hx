@@ -194,8 +194,8 @@ class Shape {
   }
 
   public static function clearShapeCommands(shape:flighthq.types.Shape):Void {
-    _Runtime.setLength((cast (cast shape : flighthq.types.Shape).data : ShapeData).commands, 0.0);
-    if ((cast _Runtime.strictEquals((cast shape : flighthq.types.Shape).kind, MorphShapeKind) : Bool)) { _Runtime.setLength((cast (cast (cast shape : MorphShape) : MorphShape).data : MorphShapeData).paintBindings, 0.0); }
+    _Runtime.setLength((cast shape.data : { var commands:Array<ShapeCommandToken>; }).commands, 0.0);
+    if ((cast _Runtime.strictEquals(shape.kind, MorphShapeKind) : Bool)) { _Runtime.setLength((cast (cast (cast shape : MorphShape) : { var data:MorphShapeData; }).data : { var paintBindings:Array<MorphShapePaintBinding>; }).paintBindings, 0.0); }
     invalidateContent((cast shape : Dynamic));
   }
 
@@ -272,7 +272,7 @@ class Shape {
       if ((cast ((cast ((cast t2 : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast t2 : Float) < (cast 1.0 : Float)) : Bool)) : Bool)) { expand((cast (cast cubicPoint((cast t2 : Float), (cast p0 : Float), (cast p1 : Float), (cast p2 : Float), (cast p3 : Float)) : Float) : Float), (cast (cast cubicPoint((cast t2 : Float), (cast q0 : Float), (cast q1 : Float), (cast q2 : Float), (cast q3 : Float)) : Float) : Float)); }
     });
     shape = (cast (cast source : flighthq._internal._Any) : flighthq.types.Shape);
-    commands = (cast (cast shape : flighthq.types.Shape).data : ShapeData).commands;
+    commands = (cast shape.data : { var commands:Array<ShapeCommandToken>; }).commands;
     minX = HxMath.POSITIVE_INFINITY;
     minY = HxMath.POSITIVE_INFINITY;
     maxX = -HxMath.POSITIVE_INFINITY;
@@ -476,8 +476,8 @@ class Shape {
   public static function copyShapeCommands(out:flighthq.types.Shape, source:flighthq.types.Shape):Void {
     var commands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
     var sourceCommands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
-    commands = (cast (cast out : flighthq.types.Shape).data : ShapeData).commands;
-    sourceCommands = (cast _Runtime.field(source, 'data') : ShapeData).commands;
+    commands = (cast out.data : { var commands:Array<ShapeCommandToken>; }).commands;
+    sourceCommands = (cast source.data : { var commands:Array<ShapeCommandToken>; }).commands;
     if ((cast !_Runtime.strictEquals(commands, sourceCommands) : Bool)) {
       _Runtime.setLength(commands, _Runtime.field(sourceCommands, 'length'));
       {
@@ -488,7 +488,7 @@ class Shape {
         }
       }
     }
-    if ((cast _Runtime.strictEquals((cast out : flighthq.types.Shape).kind, MorphShapeKind) : Bool)) { _Runtime.setLength((cast (cast (cast out : MorphShape) : MorphShape).data : MorphShapeData).paintBindings, 0.0); }
+    if ((cast _Runtime.strictEquals(out.kind, MorphShapeKind) : Bool)) { _Runtime.setLength((cast (cast (cast out : MorphShape) : { var data:MorphShapeData; }).data : { var paintBindings:Array<MorphShapePaintBinding>; }).paintBindings, 0.0); }
     invalidateContent((cast out : Dynamic));
   }
 
@@ -547,7 +547,7 @@ class Shape {
     var commands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
     var count:Float = cast _Runtime.UNDEFINED;
     var i:Float = cast _Runtime.UNDEFINED;
-    commands = (cast _Runtime.field(source, 'data') : ShapeData).commands;
+    commands = (cast source.data : { var commands:Array<ShapeCommandToken>; }).commands;
     count = 0.0;
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
@@ -596,7 +596,7 @@ class Shape {
   }
 
   public static function isShapeEmpty(source:flighthq.types.Shape):Bool {
-    return cast _Runtime.strictEquals(_Runtime.field((cast _Runtime.field(source, 'data') : ShapeData).commands, 'length'), 0.0);
+    return cast _Runtime.strictEquals(_Runtime.field((cast source.data : { var commands:Array<ShapeCommandToken>; }).commands, 'length'), 0.0);
     return cast null;
   }
 

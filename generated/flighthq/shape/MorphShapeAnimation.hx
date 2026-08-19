@@ -23,7 +23,7 @@ class MorphShapeAnimation {
     target = (cast channel.targetRef : Null<MorphShapeAnimationTarget>);
     if ((cast ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals((cast target : MorphShapeAnimationTarget).shape, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast false; }
     shape = (cast (cast target : MorphShapeAnimationTarget).shape : Null<MorphShape>);
-    if ((cast ((cast ((cast _Runtime.strictEquals(shape, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(shape), 'object') : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast shape : MorphShape).kind, MorphShapeKind) : Bool)) : Bool)) { return cast false; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(shape, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(shape), 'object') : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast shape : { var kind:String; }).kind, MorphShapeKind) : Bool)) : Bool)) { return cast false; }
     setMorphShapeProgress(({ final __callArgument3:Dynamic = shape; __callArgument3; }), (cast _Runtime.getIndex(sampled, 0.0) : Float));
     return cast true;
     return cast null;
