@@ -7424,9 +7424,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 7,
+        "directAccesses": 7,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -7480,7 +7480,7 @@
       },
       "name": "AnimatedNormalModifierOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free animated-normal modifier options",
       "reasons": [],
       "source": "upstream/packages/types/src/AnimatedNormalModifierOptions.ts",
       "sourceProvenance": {
@@ -67563,9 +67563,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -67619,7 +67619,7 @@
       },
       "name": "DissolveModifierOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free dissolve modifier options",
       "reasons": [],
       "source": "upstream/packages/types/src/DissolveModifierOptions.ts",
       "sourceProvenance": {
@@ -78251,9 +78251,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -78307,7 +78307,7 @@
       },
       "name": "EmissiveModifierOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free emissive modifier options",
       "reasons": [],
       "source": "upstream/packages/types/src/EmissiveModifierOptions.ts",
       "sourceProvenance": {
@@ -113948,9 +113948,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 5,
+        "directAccesses": 5,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -114004,7 +114004,7 @@
       },
       "name": "FogModifierOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free fog modifier options",
       "reasons": [],
       "source": "upstream/packages/types/src/FogModifierOptions.ts",
       "sourceProvenance": {
@@ -400973,9 +400973,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -401045,7 +401045,7 @@
       },
       "name": "VertexDisplaceModifierOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free vertex-displacement modifier options",
       "reasons": [],
       "source": "upstream/packages/types/src/VertexDisplaceModifierOptions.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1491,
+      "newAuditOnly": 1486,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1491,
+    "auditOnlySchemas": 1486,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 20964,
-    "directSchemas": 513,
+    "directAccesses": 20997,
+    "directSchemas": 518,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 9702,
+    "pendingAccesses": 9669,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

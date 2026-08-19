@@ -14,7 +14,7 @@ import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
 class CreateFogModifier {
   public static function createFogModifier(options:FogModifierOptions):FogModifier {
-    return cast { kind: FogModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect, color: _Runtime.field(options, 'color'), mode: _Runtime.coalesce(_Runtime.field(options, 'mode'), function():Dynamic return cast (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Linear), near: _Runtime.coalesce(_Runtime.field(options, 'near'), function():Dynamic return cast 0.0), far: _Runtime.coalesce(_Runtime.field(options, 'far'), function():Dynamic return cast 1.0), density: _Runtime.coalesce(_Runtime.field(options, 'density'), function():Dynamic return cast 1.0) };
+    return cast { kind: FogModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect, color: options.color, mode: _Runtime.coalesce(options.mode, function():Dynamic return cast (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Linear), near: _Runtime.coalesce(options.near, function():Dynamic return cast 0.0), far: _Runtime.coalesce(options.far, function():Dynamic return cast 1.0), density: _Runtime.coalesce(options.density, function():Dynamic return cast 1.0) };
     return cast null;
   }
 }

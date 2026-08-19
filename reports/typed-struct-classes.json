@@ -1523,7 +1523,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 23
       },
-      "directAccesses": 0,
+      "directAccesses": 7,
       "fields": {
         "optional": 3,
         "requiredUndefined": 0,
@@ -16986,7 +16986,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 13
       },
-      "directAccesses": 0,
+      "directAccesses": 6,
       "fields": {
         "optional": 4,
         "requiredUndefined": 0,
@@ -19577,7 +19577,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 37
       },
-      "directAccesses": 0,
+      "directAccesses": 6,
       "fields": {
         "optional": 4,
         "requiredUndefined": 0,
@@ -22041,7 +22041,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 15
       },
-      "directAccesses": 0,
+      "directAccesses": 5,
       "fields": {
         "optional": 4,
         "requiredUndefined": 0,
@@ -86681,7 +86681,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 14
       },
-      "directAccesses": 0,
+      "directAccesses": 9,
       "fields": {
         "optional": 5,
         "requiredUndefined": 0,
@@ -94793,7 +94793,7 @@
     "bridgeInputSignatures": 8275,
     "bridgeOutputSignatures": 1670,
     "crossSchemaTransfers": 1391,
-    "directAccesses": 20964,
+    "directAccesses": 20997,
     "dynamicIngresses": 67,
     "mechanicallyCompatibleSchemas": 1143,
     "normalizationRequiredSchemas": 393,

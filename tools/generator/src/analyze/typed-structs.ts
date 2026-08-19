@@ -593,6 +593,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#DissolveModifier',
     purpose: 'reviewed escape-free dissolve modifier',
   },
+  {
+    declarationFingerprint: 'sha256:97105d620e4afa392d6e85532e6fc45385b94f13a602cd4b6770281e27eded33',
+    id: '@flighthq/types:interface#AnimatedNormalModifierOptions',
+    purpose: 'reviewed escape-free animated-normal modifier options',
+  },
+  {
+    declarationFingerprint: 'sha256:877e24a08322880ba5714aa0116f27f119d937d476e1922d21694b5d5bb03c36',
+    id: '@flighthq/types:interface#DissolveModifierOptions',
+    purpose: 'reviewed escape-free dissolve modifier options',
+  },
+  {
+    declarationFingerprint: 'sha256:3178f9ac65a057f14a0f654c4380a341fe76b57d865832040c2b7e3f3a6bf79c',
+    id: '@flighthq/types:interface#EmissiveModifierOptions',
+    purpose: 'reviewed escape-free emissive modifier options',
+  },
+  {
+    declarationFingerprint: 'sha256:a140958cfd3e17565cf886b6ec71cf5ad24d26795dee44c1741d2a55287472e4',
+    id: '@flighthq/types:interface#FogModifierOptions',
+    purpose: 'reviewed escape-free fog modifier options',
+  },
+  {
+    declarationFingerprint: 'sha256:4831daeafb37b213acd119f1b235c36ab8b0c9539d23d2958379792fa2a48f98',
+    id: '@flighthq/types:interface#VertexDisplaceModifierOptions',
+    purpose: 'reviewed escape-free vertex-displacement modifier options',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(
