@@ -43,9 +43,9 @@ class AnimationBlendTree {
     {
       var inputIndex:Float = 0.0;
       while ((cast ((cast inputIndex : Float) < (cast _Runtime.field(copiedInputs, 'length') : Float)) : Bool)) {
-        var player:AnimationPlayer = (cast flighthq._internal._StaticIndex.readArray(copiedInputs, inputIndex) : AnimationBlendTreeInput).player;
+        var player:AnimationPlayer = (cast flighthq._internal._StaticIndex.readArray(copiedInputs, inputIndex) : { var player:AnimationPlayer; }).player;
         if ((cast !(cast _Runtime.includes(players, player) : Bool) : Bool)) { _Runtime.callProperty(players, 'push', cast ([player] : Array<Dynamic>)); }
-        var inputChannels:Array<AnimationChannel> = (cast (cast (cast flighthq._internal._StaticIndex.readArray(copiedInputs, inputIndex) : AnimationBlendTreeInput).player : { var clip:AnimationClip; }).clip : { var channels:Array<AnimationChannel>; }).channels;
+        var inputChannels:Array<AnimationChannel> = (cast (cast (cast flighthq._internal._StaticIndex.readArray(copiedInputs, inputIndex) : { var player:AnimationPlayer; }).player : { var clip:AnimationClip; }).clip : { var channels:Array<AnimationChannel>; }).channels;
         AnimationBlendTree.assertUniqueAnimationBlendTreeTargets__animationBlendTree(({ final __callArgument3:Dynamic = inputChannels; __callArgument3; }), (cast inputIndex : Float));
         {
           var channelIndex:Float = 0.0;
@@ -99,23 +99,23 @@ class AnimationBlendTree {
     hasAdditive = false;
     for (source in _Runtime.iterable(_Runtime.field(entry, 'sources'))) {
       var input:AnimationBlendTreeInput = flighthq._internal._StaticIndex.readArray(tree.inputs, _Runtime.field(source, 'inputIndex'));
-      if ((cast ((cast (cast input : AnimationBlendTreeInput).additive : Bool) || (cast !(cast _Runtime.compare((cast input : AnimationBlendTreeInput).weight, 0.0, '>') : Bool) : Bool)) : Bool)) {
-        if ((cast ((cast (cast input : AnimationBlendTreeInput).additive : Bool) && (cast ((cast (cast input : AnimationBlendTreeInput).weight : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { (hasAdditive = cast (true : Dynamic)); }
+      if ((cast ((cast input.additive : Bool) || (cast !(cast _Runtime.compare(input.weight, 0.0, '>') : Bool) : Bool)) : Bool)) {
+        if ((cast ((cast input.additive : Bool) && (cast ((cast input.weight : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { (hasAdditive = cast (true : Dynamic)); }
         continue;
       }
-      var channel:AnimationChannel = flighthq._internal._StaticIndex.readArray((cast (cast (cast input : AnimationBlendTreeInput).player : { var clip:AnimationClip; }).clip : { var channels:Array<AnimationChannel>; }).channels, _Runtime.field(source, 'channelIndex'));
-      sampleAnimationTrack(({ final __callArgument13:Dynamic = tree.sampleScratch; __callArgument13; }), channel.track, (cast (cast (cast input : AnimationBlendTreeInput).player : { var time:Float; }).time : Float));
-      accumulateAnimationSample(({ final __callArgument14:Dynamic = accumulator; __callArgument14; }), ({ final __callArgument15:Dynamic = tree.sampleScratch; __callArgument15; }), (cast (cast input : AnimationBlendTreeInput).weight : Float));
+      var channel:AnimationChannel = flighthq._internal._StaticIndex.readArray((cast (cast input.player : { var clip:AnimationClip; }).clip : { var channels:Array<AnimationChannel>; }).channels, _Runtime.field(source, 'channelIndex'));
+      sampleAnimationTrack(({ final __callArgument13:Dynamic = tree.sampleScratch; __callArgument13; }), channel.track, (cast (cast input.player : { var time:Float; }).time : Float));
+      accumulateAnimationSample(({ final __callArgument14:Dynamic = accumulator; __callArgument14; }), ({ final __callArgument15:Dynamic = tree.sampleScratch; __callArgument15; }), (cast input.weight : Float));
     }
     hasOverride = (cast finishAnimationSample(({ final __callArgument16:Dynamic = out; __callArgument16; }), ({ final __callArgument17:Dynamic = accumulator; __callArgument17; })) : Bool);
     if ((cast ((cast !(cast hasOverride : Bool) : Bool) && (cast !(cast hasAdditive : Bool) : Bool)) : Bool)) { return cast false; }
     if ((cast !(cast hasOverride : Bool) : Bool)) { AnimationBlendTree.writeAnimationBlendTreeIdentity__animationBlendTree(({ final __callArgument18:Dynamic = out; __callArgument18; }), (cast (cast (cast _Runtime.field(entry, 'channel') : { var track:AnimationTrack; }).track : { var components:Float; }).components : Float), (cast (cast (cast _Runtime.field(entry, 'channel') : { var track:AnimationTrack; }).track : { var quaternion:Bool; }).quaternion : Bool)); }
     for (source in _Runtime.iterable(_Runtime.field(entry, 'sources'))) {
       var input:AnimationBlendTreeInput = flighthq._internal._StaticIndex.readArray(tree.inputs, _Runtime.field(source, 'inputIndex'));
-      if ((cast ((cast !(cast (cast input : AnimationBlendTreeInput).additive : Bool) : Bool) || (cast !(cast _Runtime.compare((cast input : AnimationBlendTreeInput).weight, 0.0, '>') : Bool) : Bool)) : Bool)) { continue; }
-      var channel:AnimationChannel = flighthq._internal._StaticIndex.readArray((cast (cast (cast input : AnimationBlendTreeInput).player : { var clip:AnimationClip; }).clip : { var channels:Array<AnimationChannel>; }).channels, _Runtime.field(source, 'channelIndex'));
-      sampleAnimationTrack(({ final __callArgument21:Dynamic = tree.sampleScratch; __callArgument21; }), channel.track, (cast (cast (cast input : AnimationBlendTreeInput).player : { var time:Float; }).time : Float));
-      addAnimationSample(({ final __callArgument22:Dynamic = out; __callArgument22; }), ({ final __callArgument23:Dynamic = out; __callArgument23; }), ({ final __callArgument24:Dynamic = tree.sampleScratch; __callArgument24; }), (cast (cast input : AnimationBlendTreeInput).weight : Float), (cast (cast channel.track : { var quaternion:Bool; }).quaternion : Bool));
+      if ((cast ((cast !(cast input.additive : Bool) : Bool) || (cast !(cast _Runtime.compare(input.weight, 0.0, '>') : Bool) : Bool)) : Bool)) { continue; }
+      var channel:AnimationChannel = flighthq._internal._StaticIndex.readArray((cast (cast input.player : { var clip:AnimationClip; }).clip : { var channels:Array<AnimationChannel>; }).channels, _Runtime.field(source, 'channelIndex'));
+      sampleAnimationTrack(({ final __callArgument21:Dynamic = tree.sampleScratch; __callArgument21; }), channel.track, (cast (cast input.player : { var time:Float; }).time : Float));
+      addAnimationSample(({ final __callArgument22:Dynamic = out; __callArgument22; }), ({ final __callArgument23:Dynamic = out; __callArgument23; }), ({ final __callArgument24:Dynamic = tree.sampleScratch; __callArgument24; }), (cast input.weight : Float), (cast (cast channel.track : { var quaternion:Bool; }).quaternion : Bool));
     }
     return cast true;
     return cast null;
@@ -125,7 +125,7 @@ class AnimationBlendTree {
     var input:AnimationBlendTreeInput = cast _Runtime.UNDEFINED;
     input = flighthq._internal._StaticIndex.readArray(tree.inputs, inputIndex);
     if ((cast _Runtime.strictEquals(input, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
-    ((cast input : AnimationBlendTreeInput).weight = weight);
+    (input.weight = cast (weight : Float));
     return cast true;
     return cast null;
   }

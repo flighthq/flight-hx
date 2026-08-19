@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1396 |
-| Direct schemas | 608 |
+| Audit-only schemas | 1391 |
+| Direct schemas | 613 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 7500 |
-| Directly emitted accesses | 23166 |
+| Pending accesses | 7423 |
+| Directly emitted accesses | 23243 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1396 |
+| Newly discovered, audit-only | 1391 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -87,7 +87,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#AnimationBlendTree` | `direct` | `new` | — | reviewed escape-free animation blend tree | 4 | 17 | 0 | 0 | 0 | 17 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationBlendTreeChannel` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationBlendTreeChannelSource` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#AnimationBlendTreeInput` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 14 | 1 | 0 | 15 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AnimationBlendTreeInput` | `direct` | `new` | — | reviewed escape-free animation blend-tree input | 3 | 14 | 1 | 0 | 0 | 15 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationChannel` | `direct` | `new` | — | reviewed escape-free animation channel | 2 | 89 | 0 | 0 | 0 | 89 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationClip` | `direct` | `preserved` | `@flighthq/types:interface#AnimationClip` | broad scene document | 3 | 25 | 0 | 0 | 0 | 25 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationClipEvent` | `direct` | `new` | — | reviewed escape-free animation clip event | 3 | 18 | 0 | 0 | 0 | 18 | 0 | 0 | yes | — |
@@ -95,7 +95,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#AnimationCrossfadeChannel` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationCrossfadeOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AnimationInterpolation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#AnimationLayer` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 15 | 1 | 0 | 16 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AnimationLayer` | `direct` | `new` | — | reviewed escape-free animation layer | 5 | 15 | 1 | 0 | 0 | 16 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationLayerOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationLayerStack` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationLayerStackChannel` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
@@ -103,7 +103,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#AnimationLoopMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#AnimationPlayer` | `direct` | `new` | — | reviewed escape-free animation player | 10 | 42 | 19 | 0 | 0 | 61 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationRootMotionExtractor` | `direct` | `new` | — | reviewed escape-free animation root-motion extractor | 10 | 21 | 0 | 0 | 0 | 21 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#AnimationSampleAccumulator` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 14 | 2 | 0 | 16 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AnimationSampleAccumulator` | `direct` | `new` | — | reviewed escape-free animation sample accumulator | 4 | 14 | 2 | 0 | 0 | 16 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationStateMachine` | `direct` | `new` | — | reviewed escape-free animation state machine | 12 | 38 | 14 | 1 | 0 | 53 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationStateMachineChannel` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationStateMachineState` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
@@ -887,7 +887,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#LottieGradient` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LottieGradientShapeItem` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 22 | 0 | 0 | 22 | 0 | 0 | 27 | yes | — |
 | `@flighthq/types:interface#LottieImageAsset` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 1 | 0 | 0 | 1 | 0 | 0 | 3 | yes | — |
-| `@flighthq/types:interface#LottieKeyframe` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 15 | 0 | 0 | 15 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#LottieKeyframe` | `direct` | `new` | — | reviewed escape-free Lottie keyframe | 8 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LottieLayer` | `direct` | `new` | — | reviewed escape-free Lottie layer | 22 | 32 | 0 | 0 | 0 | 32 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LottieMarker` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LottieMask` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
@@ -1520,7 +1520,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#Skeleton2DSlotAnimationPath` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Skeleton2DSlotAnimationTarget` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Skeleton2DSlotDeform` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 1 | 0 | 5 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Skeleton2DTransformConstraint` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 15 | 0 | 0 | 15 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Skeleton2DTransformConstraint` | `direct` | `new` | — | reviewed escape-free Skeleton2D transform constraint | 16 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Skeleton3D` | `direct` | `new` | — | reviewed escape-free 3D skeleton | 4 | 40 | 1 | 0 | 0 | 41 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Skeleton3DValidationDiagnostic` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SketchEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |

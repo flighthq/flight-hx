@@ -7694,9 +7694,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 15,
+        "directAccesses": 15,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -7740,7 +7740,7 @@
       },
       "name": "AnimationBlendTreeInput",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free animation blend-tree input",
       "reasons": [],
       "source": "upstream/packages/types/src/AnimationBlendTree.ts",
       "sourceProvenance": {
@@ -8861,9 +8861,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 16,
+        "directAccesses": 16,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -8923,7 +8923,7 @@
       },
       "name": "AnimationLayer",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free animation layer",
       "reasons": [],
       "source": "upstream/packages/types/src/AnimationLayerStack.ts",
       "sourceProvenance": {
@@ -10134,9 +10134,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 16,
+        "directAccesses": 16,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -10188,7 +10188,7 @@
       },
       "name": "AnimationSampleAccumulator",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free animation sample accumulator",
       "reasons": [],
       "source": "upstream/packages/types/src/AnimationSampleAccumulator.ts",
       "sourceProvenance": {
@@ -174580,9 +174580,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 15,
+        "directAccesses": 15,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -174660,7 +174660,7 @@
       },
       "name": "LottieKeyframe",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Lottie keyframe",
       "reasons": [],
       "source": "upstream/packages/types/src/LottieDocument.ts",
       "sourceProvenance": {
@@ -311093,9 +311093,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 15,
+        "directAccesses": 15,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -311237,7 +311237,7 @@
       },
       "name": "Skeleton2DTransformConstraint",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Skeleton2D transform constraint",
       "reasons": [],
       "source": "upstream/packages/types/src/Skeleton2DTransformConstraint.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1396,
+      "newAuditOnly": 1391,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1396,
+    "auditOnlySchemas": 1391,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 23166,
-    "directSchemas": 608,
+    "directAccesses": 23243,
+    "directSchemas": 613,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 7500,
+    "pendingAccesses": 7423,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"
