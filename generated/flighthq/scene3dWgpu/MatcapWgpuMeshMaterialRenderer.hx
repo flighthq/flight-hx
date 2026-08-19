@@ -49,8 +49,8 @@ class MatcapWgpuMeshMaterialRenderer {
     if ((cast _Runtime.strictEquals(matcap, null) : Bool)) {
       (group = cast ((cast bindWgpuMatcapSurface(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pipeline; __callArgument7; }), ({ final __callArgument8:Dynamic = MatcapWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__matcapWgpuMeshMaterialRenderer; __callArgument8; }), ({ final __callArgument9:Dynamic = MatcapWgpuMeshMaterialRenderer.WHITE__matcapWgpuMeshMaterialRenderer; __callArgument9; }), (cast 0.5 : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     } else {
-      (cast unpackColorToLinear(({ final __callArgument10:Dynamic = MatcapWgpuMeshMaterialRenderer._scratch__matcapWgpuMeshMaterialRenderer; __callArgument10; }), (cast _Runtime.field(matcap, 'tint') : Float)) : LinearColor);
-      (group = cast ((cast bindWgpuMatcapSurface(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = pipeline; __callArgument12; }), ({ final __callArgument13:Dynamic = matcap; __callArgument13; }), ({ final __callArgument14:Dynamic = MatcapWgpuMeshMaterialRenderer._scratch__matcapWgpuMeshMaterialRenderer; __callArgument14; }), (cast _Runtime.field(matcap, 'alphaCutoff') : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (cast unpackColorToLinear(({ final __callArgument10:Dynamic = MatcapWgpuMeshMaterialRenderer._scratch__matcapWgpuMeshMaterialRenderer; __callArgument10; }), (cast (cast matcap : { var tint:Float; }).tint : Float)) : LinearColor);
+      (group = cast ((cast bindWgpuMatcapSurface(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = pipeline; __callArgument12; }), ({ final __callArgument13:Dynamic = matcap; __callArgument13; }), ({ final __callArgument14:Dynamic = MatcapWgpuMeshMaterialRenderer._scratch__matcapWgpuMeshMaterialRenderer; __callArgument14; }), (cast (cast matcap : { var alphaCutoff:Float; }).alphaCutoff : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     }
     beginWgpuMeshDraw(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = pipeline; __callArgument16; }));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
@@ -65,7 +65,7 @@ class MatcapWgpuMeshMaterialRenderer {
   }
 
   public static function defineKeyForMaterial__matcapWgpuMeshMaterialRenderer(material:Null<MatcapMaterial>):WgpuMatcapDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), doubleSided: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.field(material, 'doubleSided') : Bool)), hasMatcap: false };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals((cast material : { var alphaMode:MaterialAlphaMode; }).alphaMode, 'mask') : Bool)), doubleSided: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast (cast material : { var doubleSided:Bool; }).doubleSided : Bool)), hasMatcap: false };
     return cast null;
   }
 

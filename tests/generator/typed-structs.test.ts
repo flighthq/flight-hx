@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_371,
+      newAuditOnly: 1_366,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(635);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(640);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_371);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_366);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(233);
+    expect(newDirect).toHaveLength(238);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1275,6 +1275,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'NativeTextRuntime',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free native text runtime',
+        }),
+        expect.objectContaining({
+          name: 'MatcapMaterial',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free matcap material',
+        }),
+        expect.objectContaining({
+          name: 'LottieShapePath',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Lottie shape path',
+        }),
+        expect.objectContaining({
+          name: 'GlRenderEffectApplicationExplanation',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL render-effect explanation',
+        }),
+        expect.objectContaining({
+          name: 'FlexLayoutItemStyle',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free flex item style',
+        }),
+        expect.objectContaining({
+          name: 'BitmapFingerprint',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free bitmap fingerprint',
         }),
       ]),
     );
@@ -2444,6 +2469,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#NativeTextRuntime',
         purpose: 'reviewed escape-free native text runtime',
       },
+      {
+        declarationFingerprint: 'sha256:8b4467696325ff69cdbe538077a2259a9bd9f7007df08e3a49a165bf267de4e8',
+        id: '@flighthq/types:interface#MatcapMaterial',
+        purpose: 'reviewed escape-free matcap material',
+      },
+      {
+        declarationFingerprint: 'sha256:ce922284ec58aebfe1997133806dde22e7754a0ac71bda478870249b6a938926',
+        id: '@flighthq/types:interface#LottieShapePath',
+        purpose: 'reviewed escape-free Lottie shape path',
+      },
+      {
+        declarationFingerprint: 'sha256:15e53d2503c0496748f20338561a40b594875934b0cd93d9ea5cf712d7b4bbe4',
+        id: '@flighthq/types:interface#GlRenderEffectApplicationExplanation',
+        purpose: 'reviewed escape-free WebGL render-effect explanation',
+      },
+      {
+        declarationFingerprint: 'sha256:5f78f38895f44208c6b9992633e77f10e15cd707cbd579918a67aa00701daa26',
+        id: '@flighthq/types:interface#FlexLayoutItemStyle',
+        purpose: 'reviewed escape-free flex item style',
+      },
+      {
+        declarationFingerprint: 'sha256:50b5f1e7cf212f956951395d3caf98ac9fefcaaf982b3bc77b182c1b6ae2ecde',
+        id: '@flighthq/types:interface#BitmapFingerprint',
+        purpose: 'reviewed escape-free bitmap fingerprint',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -3276,6 +3326,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const twentiethHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'BitmapFingerprint',
+            'FlexLayoutItemStyle',
+            'GlRenderEffectApplicationExplanation',
+            'LottieShapePath',
+            'MatcapMaterial',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -3316,22 +3379,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_371,
+      auditOnlySchemas: 1_366,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 23_525,
-      directSchemas: 633,
+      directAccesses: 23_590,
+      directSchemas: 638,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 7_141,
+      pendingAccesses: 7_076,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_371,
+      newAuditOnly: 1_366,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -3408,7 +3471,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(23_525);
+    expect(report.summary.directAccesses).toBe(23_590);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -4462,6 +4525,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(nineteenthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'MatcapMaterial',
+        13,
+        'sha256:8b4467696325ff69cdbe538077a2259a9bd9f7007df08e3a49a165bf267de4e8',
+        'reviewed escape-free matcap material',
+      ],
+      [
+        'LottieShapePath',
+        13,
+        'sha256:ce922284ec58aebfe1997133806dde22e7754a0ac71bda478870249b6a938926',
+        'reviewed escape-free Lottie shape path',
+      ],
+      [
+        'GlRenderEffectApplicationExplanation',
+        13,
+        'sha256:15e53d2503c0496748f20338561a40b594875934b0cd93d9ea5cf712d7b4bbe4',
+        'reviewed escape-free WebGL render-effect explanation',
+      ],
+      [
+        'FlexLayoutItemStyle',
+        13,
+        'sha256:5f78f38895f44208c6b9992633e77f10e15cd707cbd579918a67aa00701daa26',
+        'reviewed escape-free flex item style',
+      ],
+      [
+        'BitmapFingerprint',
+        13,
+        'sha256:50b5f1e7cf212f956951395d3caf98ac9fefcaaf982b3bc77b182c1b6ae2ecde',
+        'reviewed escape-free bitmap fingerprint',
+      ],
+    ] as const) {
+      expect(twentiethHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -6284,6 +6389,36 @@ describe('typed struct analysis', () => {
       }
     }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#MatcapMaterial', false, ['cross-schema-transfer'], ['optional-omission'], null],
+      ['@flighthq/types:interface#LottieShapePath', false, ['dynamic-ingress'], [], null],
+      [
+        '@flighthq/types:interface#GlRenderEffectApplicationExplanation',
+        true,
+        [],
+        [],
+        { blockerReasons: [], closed: true },
+      ],
+      [
+        '@flighthq/types:interface#FlexLayoutItemStyle',
+        false,
+        ['anonymous-structural-transfer'],
+        ['optional-omission'],
+        null,
+      ],
+      ['@flighthq/types:interface#BitmapFingerprint', true, [], [], { blockerReasons: [], closed: true }],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      if (nominalIdentity === null) {
+        expect(provenanceById.has(frontierId)).toBe(false);
+      } else {
+        expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+      }
+    }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
         true,
@@ -7428,6 +7563,33 @@ describe('typed struct analysis', () => {
     ] as const) {
       expect(readFileSync(path, 'utf8')).not.toContain(`_Runtime.field(${receiver},`);
     }
+    for (const path of [
+      'generated/flighthq/bitmap/BitmapFingerprint.hx',
+      'generated/flighthq/capture/CaptureComparison.hx',
+      'generated/flighthq/effectsGl/EnableGlRenderEffectGuards.hx',
+      'generated/flighthq/effectsGl/GlRenderTextureEffect.hx',
+      'generated/flighthq/layout/FlexLayout.hx',
+      'generated/flighthq/materials/UnlitMaterials.hx',
+      'generated/flighthq/scene2dFormats/LottieDocument.hx',
+      'generated/flighthq/scene2dFormats/RiveLayout.hx',
+      'generated/flighthq/scene3dGl/MatcapGlMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dWgpu/MatcapWgpuMeshMaterialRenderer.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:BitmapFingerprint|FlexLayoutItemStyle|GlRenderEffectApplicationExplanation|LottieShapePath|MatcapMaterial)\)\./u,
+      );
+    }
+    for (const [path, receiver] of [
+      ['generated/flighthq/bitmap/BitmapFingerprint.hx', 'a'],
+      ['generated/flighthq/effectsGl/EnableGlRenderEffectGuards.hx', 'explanation'],
+      ['generated/flighthq/layout/FlexLayout.hx', 'item'],
+      ['generated/flighthq/scene3dGl/MatcapGlMeshMaterialRenderer.hx', 'matcap'],
+    ] as const) {
+      expect(readFileSync(path, 'utf8')).not.toContain(`_Runtime.field(${receiver},`);
+    }
+    expect(readFileSync('generated/flighthq/scene2dFormats/LottieDocument.hx', 'utf8')).not.toContain(
+      "_Runtime.field(value, 'v')",
+    );
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
     expect(generatedCanvasRenderState).not.toMatch(
       /\(cast (?:runtime|sourceRuntime|targetRuntime) : CanvasRenderStateRuntime\)\./u,

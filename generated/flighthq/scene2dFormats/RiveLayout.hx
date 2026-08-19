@@ -282,11 +282,11 @@ class RiveLayout {
     crossScale = ((cast parentIsRow : Bool) ? (cast (cast sizing : RiveSizingValues__riveLayout).heightScale : Dynamic) : (cast (cast sizing : RiveSizingValues__riveLayout).widthScale : Dynamic));
     result = (cast { alignSelf: ((cast _Runtime.strictEquals(crossScale, RiveLayout.RIVE_SCALE_FILL__riveLayout) : Bool) ? (cast 'stretch' : Dynamic) : (cast 'auto' : Dynamic)), grow: ((cast _Runtime.strictEquals(mainScale, RiveLayout.RIVE_SCALE_FILL__riveLayout) : Bool) ? (cast (cast RiveLayout.finiteNonNegative__riveLayout((cast mainFraction : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic)), shrink: ((cast _Runtime.strictEquals(mainScale, RiveLayout.RIVE_SCALE_FILL__riveLayout) : Bool) ? (cast (cast RiveLayout.finiteNonNegative__riveLayout((cast mainFraction : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic)) });
     if ((cast _Runtime.strictEquals(mainScale, RiveLayout.RIVE_SCALE_FILL__riveLayout) : Bool)) {
-      if ((cast _Runtime.strictEquals(_Runtime.field(provider, 'type'), 'participant') : Bool)) { ((cast result : FlexLayoutItemStyle).basis = 0.0); } else { if ((cast _Runtime.strictEquals(_Runtime.field(provider, 'type'), 'nested') : Bool)) { ((cast result : FlexLayoutItemStyle).basis = 'auto'); } else { ((cast result : FlexLayoutItemStyle).basis = (cast RiveLayout.readRiveFlexBasis__riveLayout(({ final __callArgument58:Dynamic = style; __callArgument58; })) : flighthq._internal._Union2<Float, String>)); } }
+      if ((cast _Runtime.strictEquals(_Runtime.field(provider, 'type'), 'participant') : Bool)) { (result.basis = cast (0.0 : Null<flighthq._internal._Union2<Float, String>>)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(provider, 'type'), 'nested') : Bool)) { (result.basis = cast ('auto' : Null<flighthq._internal._Union2<Float, String>>)); } else { (result.basis = cast ((cast RiveLayout.readRiveFlexBasis__riveLayout(({ final __callArgument58:Dynamic = style; __callArgument58; })) : flighthq._internal._Union2<Float, String>) : Null<flighthq._internal._Union2<Float, String>>)); } }
     } else { if ((cast ((cast ((cast _Runtime.strictEquals(mainScale, RiveLayout.RIVE_SCALE_FIXED__riveLayout) : Bool) && (cast _Runtime.strictEquals(mainUnits, RiveLayout.RIVE_UNIT_POINT__riveLayout) : Bool)) : Bool) && (cast ((cast mainValue : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
-      ((cast result : FlexLayoutItemStyle).basis = (cast RiveLayout.finiteNonNegative__riveLayout((cast mainValue : Float)) : Float));
+      (result.basis = cast ((cast RiveLayout.finiteNonNegative__riveLayout((cast mainValue : Float)) : Float) : Null<flighthq._internal._Union2<Float, String>>));
     } else {
-      ((cast result : FlexLayoutItemStyle).basis = 'auto');
+      (result.basis = cast ('auto' : Null<flighthq._internal._Union2<Float, String>>));
     } }
     return cast result;
     return cast null;

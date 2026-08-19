@@ -86,7 +86,7 @@ class GlRenderTextureEffect {
   }
 
   public static function reportGlRenderEffectApplication__glRenderTextureEffect(state:GlRenderState, explanation:GlRenderEffectApplicationExplanation):Void {
-    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(explanation, 'status'), 'complete') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(explanation, 'status'), 'no-effects') : Bool)) : Bool)) { return; }
+    if ((cast ((cast _Runtime.strictEquals(explanation.status, 'complete') : Bool) || (cast _Runtime.strictEquals(explanation.status, 'no-effects') : Bool)) : Bool)) { return; }
     _Runtime.callOptionalValue(((cast GlRenderTextureEffect._guards__glRenderTextureEffect : flighthq._internal._WeakMap<GlRenderState, GlRenderEffectApplicationGuard>).get(state)), cast ([state, explanation] : Array<Dynamic>));
   }
 

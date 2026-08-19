@@ -16211,7 +16211,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 13,
       "fields": 2,
       "id": "@flighthq/types:interface#BitmapFingerprint",
       "name": "BitmapFingerprint",
@@ -24509,7 +24509,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 13,
       "fields": 4,
       "id": "@flighthq/types:interface#GlRenderEffectApplicationExplanation",
       "name": "GlRenderEffectApplicationExplanation",

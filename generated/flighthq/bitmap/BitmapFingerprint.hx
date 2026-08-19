@@ -11,19 +11,19 @@ class BitmapFingerprint {
 
   public static function compareBitmapFingerprints(a:flighthq.types.BitmapFingerprint, b:flighthq.types.BitmapFingerprint):Float {
     var sum:Float = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(_Runtime.field(a, 'gridSize'), _Runtime.field(b, 'gridSize')) : Bool)) {
-      _Runtime.throwValue(_Runtime.error('compareBitmapFingerprints: gridSize mismatch (' + Std.string(_Runtime.field(a, 'gridSize')) + ' vs ' + Std.string(_Runtime.field(b, 'gridSize')) + ')'));
+    if ((cast !_Runtime.strictEquals(a.gridSize, b.gridSize) : Bool)) {
+      _Runtime.throwValue(_Runtime.error('compareBitmapFingerprints: gridSize mismatch (' + Std.string(a.gridSize) + ' vs ' + Std.string(b.gridSize) + ')'));
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(a, 'cells'), 'length'), 0.0) : Bool)) { return cast 0.0; }
+    if ((cast _Runtime.strictEquals(_Runtime.field(a.cells, 'length'), 0.0) : Bool)) { return cast 0.0; }
     sum = 0.0;
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(a, 'cells'), 'length') : Float)) : Bool)) {
-        (sum = cast ((sum + HxMath.abs((flighthq._internal._StaticIndex.readUint8ArrayTyped((cast _Runtime.field(a, 'cells') : flighthq._internal._UInt8Array), (cast i : Float)) - flighthq._internal._StaticIndex.readUint8ArrayTyped((cast _Runtime.field(b, 'cells') : flighthq._internal._UInt8Array), (cast i : Float))))) : Dynamic));
+      while ((cast ((cast i : Float) < (cast _Runtime.field(a.cells, 'length') : Float)) : Bool)) {
+        (sum = cast ((sum + HxMath.abs((flighthq._internal._StaticIndex.readUint8ArrayTyped((cast a.cells : flighthq._internal._UInt8Array), (cast i : Float)) - flighthq._internal._StaticIndex.readUint8ArrayTyped((cast b.cells : flighthq._internal._UInt8Array), (cast i : Float))))) : Dynamic));
         i++;
       }
     }
-    return cast _Runtime.divideNumbers(sum, _Runtime.field(_Runtime.field(a, 'cells'), 'length'));
+    return cast _Runtime.divideNumbers(sum, _Runtime.field(a.cells, 'length'));
     return cast null;
   }
 
@@ -89,7 +89,7 @@ class BitmapFingerprint {
   public static function formatBitmapFingerprint(fingerprint:flighthq.types.BitmapFingerprint):String {
     var cells:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     var hex:String = cast _Runtime.UNDEFINED;
-    cells = _Runtime.field(fingerprint, 'cells');
+    cells = fingerprint.cells;
     hex = '';
     {
       var i:Float = 0.0;
@@ -98,7 +98,7 @@ class BitmapFingerprint {
         i++;
       }
     }
-    return cast '' + Std.string(_Runtime.field(fingerprint, 'gridSize')) + ':' + Std.string(hex) + '';
+    return cast '' + Std.string(fingerprint.gridSize) + ':' + Std.string(hex) + '';
     return cast null;
   }
 

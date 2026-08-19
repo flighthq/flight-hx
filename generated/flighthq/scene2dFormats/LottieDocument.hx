@@ -692,7 +692,7 @@ class LottieDocument {
   public static function flattenLottieShapePath__lottieDocument(path:LottieShapePath):Array<Float> {
     var out:Array<Float> = cast _Runtime.UNDEFINED;
     out = (cast cast ([] : Array<Dynamic>));
-    for (points in _Runtime.iterable(cast ([_Runtime.field(path, 'v'), _Runtime.field(path, 'i'), _Runtime.field(path, 'o')] : Array<Dynamic>))) {
+    for (points in _Runtime.iterable(cast ([path.v, path.i, path.o] : Array<Dynamic>))) {
       for (point in _Runtime.iterable(points)) {
         _Runtime.pushMany(out, cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast point : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 0.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast point : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 0.0)] : Array<Dynamic>));
       }
@@ -704,7 +704,7 @@ class LottieDocument {
   public static function unflattenLottieShapePath__lottieDocument(template:LottieShapePath, values:Array<Float>):LottieShapePath {
     var count:Float = cast _Runtime.UNDEFINED;
     var readPoints:Float->Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    count = _Runtime.field(_Runtime.field(template, 'v'), 'length');
+    count = _Runtime.field(template.v, 'length');
     readPoints = (cast function(offset:Float):Array<Array<Float>> {
       var out:Array<Array<Float>> = cast _Runtime.UNDEFINED;
       out = (cast cast ([] : Array<Dynamic>));
@@ -718,7 +718,7 @@ class LottieDocument {
       return cast out;
       return cast _Runtime.UNDEFINED;
     });
-    return cast { c: _Runtime.field(template, 'c'), i: (cast readPoints((cast (count * 2.0) : Float)) : Array<Array<Float>>), o: (cast readPoints((cast (count * 4.0) : Float)) : Array<Array<Float>>), v: (cast readPoints((cast 0.0 : Float)) : Array<Array<Float>>) };
+    return cast { c: template.c, i: (cast readPoints((cast (count * 2.0) : Float)) : Array<Array<Float>>), o: (cast readPoints((cast (count * 4.0) : Float)) : Array<Array<Float>>), v: (cast readPoints((cast 0.0 : Float)) : Array<Array<Float>>) };
     return cast null;
   }
 
@@ -764,19 +764,19 @@ class LottieDocument {
     var count:Float = cast _Runtime.UNDEFINED;
     var limit:Float = cast _Runtime.UNDEFINED;
     path = (cast createPath(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Path);
-    count = _Runtime.field(_Runtime.field(value, 'v'), 'length');
+    count = _Runtime.field(value.v, 'length');
     if ((cast _Runtime.strictEquals(count, 0.0) : Bool)) { return cast path; }
-    appendPathMoveTo(({ final __callArgument219:Dynamic = path; __callArgument219; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(value, 'v'), 0.0) : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(_Runtime.field(value, 'v'), 0.0) : Array<Float>), (cast 1.0 : Float)) : Float));
-    limit = ((cast _Runtime.field(value, 'c') : Bool) ? (cast (count + 1.0) : Dynamic) : (cast count : Dynamic));
+    appendPathMoveTo(({ final __callArgument219:Dynamic = path; __callArgument219; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(value.v, 0.0) : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast flighthq._internal._StaticIndex.readArray(value.v, 0.0) : Array<Float>), (cast 1.0 : Float)) : Float));
+    limit = ((cast value.c : Bool) ? (cast (count + 1.0) : Dynamic) : (cast count : Dynamic));
     {
       var index:Float = 1.0;
       while ((cast ((cast index : Float) < (cast limit : Float)) : Bool)) {
         var previous:Float = _Runtime.fmod((index - 1.0), count);
         var current:Float = _Runtime.fmod(index, count);
-        var start:Array<Float> = flighthq._internal._StaticIndex.readArray(_Runtime.field(value, 'v'), previous);
-        var end:Array<Float> = flighthq._internal._StaticIndex.readArray(_Runtime.field(value, 'v'), current);
-        var outgoing:Array<Float> = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(value, 'o'), previous), function():Dynamic return cast cast ([0.0, 0.0] : Array<Dynamic>));
-        var incoming:Array<Float> = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(_Runtime.field(value, 'i'), current), function():Dynamic return cast cast ([0.0, 0.0] : Array<Dynamic>));
+        var start:Array<Float> = flighthq._internal._StaticIndex.readArray(value.v, previous);
+        var end:Array<Float> = flighthq._internal._StaticIndex.readArray(value.v, current);
+        var outgoing:Array<Float> = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(value.o, previous), function():Dynamic return cast cast ([0.0, 0.0] : Array<Dynamic>));
+        var incoming:Array<Float> = _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(value.i, current), function():Dynamic return cast cast ([0.0, 0.0] : Array<Dynamic>));
         if ((cast ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast outgoing : Array<Float>), (cast 0.0 : Float)), 0.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast outgoing : Array<Float>), (cast 1.0 : Float)), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast incoming : Array<Float>), (cast 0.0 : Float)), 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast incoming : Array<Float>), (cast 1.0 : Float)), 0.0) : Bool)) : Bool)) {
           appendPathLineTo(({ final __callArgument220:Dynamic = path; __callArgument220; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast end : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast end : Array<Float>), (cast 1.0 : Float)) : Float));
         } else {

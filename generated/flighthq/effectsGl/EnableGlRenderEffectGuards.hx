@@ -29,9 +29,9 @@ class EnableGlRenderEffectGuards {
 
   public static function getGlRenderEffectApplicationMessage__enableGlRenderEffectGuards(explanation:GlRenderEffectApplicationExplanation):String {
     {
-      var __switchValue = _Runtime.field(explanation, 'status');
+      var __switchValue = explanation.status;
       if (__switchValue == 'partial-registration') {
-        return cast 'applyGlRenderEffectsToRenderTexture: ' + Std.string(_Runtime.field(_Runtime.field(explanation, 'unregisteredKinds'), 'length')) + ' of ' + Std.string(_Runtime.field(explanation, 'requestedCount')) + ' effect kinds have no registered runner and were SKIPPED — the destination was written without them; call registerGlRenderEffect(state, kind, runner) for ' + Std.string(_Runtime.join(_Runtime.field(explanation, 'unregisteredKinds'), ', ')) + '';
+        return cast 'applyGlRenderEffectsToRenderTexture: ' + Std.string(_Runtime.field(explanation.unregisteredKinds, 'length')) + ' of ' + Std.string(explanation.requestedCount) + ' effect kinds have no registered runner and were SKIPPED — the destination was written without them; call registerGlRenderEffect(state, kind, runner) for ' + Std.string(_Runtime.join(explanation.unregisteredKinds, ', ')) + '';
       }
       else if (__switchValue == 'source-unavailable') {
         return cast 'applyGlRenderEffectsToRenderTexture: the source render Texture has no realized GL target, so the call returned false and the destination was NOT written — render into the source before applying effects';
@@ -40,14 +40,14 @@ class EnableGlRenderEffectGuards {
         return cast 'applyGlRenderEffectsToRenderTexture: the call returned false before replacing the destination, so its previously published pixels are a STALE DESTINATION — handle the false return before sampling dest, and make the source and runners available before retrying';
       }
       else  {
-        return cast 'applyGlRenderEffectsToRenderTexture: no registered runner for any of ' + Std.string(_Runtime.join(_Runtime.field(explanation, 'unregisteredKinds'), ', ')) + ', so the call returned false and the destination was NEVER WRITTEN — anything sampling it reads a stale or empty texture; call registerGlRenderEffect(state, kind, runner)';
+        return cast 'applyGlRenderEffectsToRenderTexture: no registered runner for any of ' + Std.string(_Runtime.join(explanation.unregisteredKinds, ', ')) + ', so the call returned false and the destination was NEVER WRITTEN — anything sampling it reads a stale or empty texture; call registerGlRenderEffect(state, kind, runner)';
       }
     }
     return cast null;
   }
 
   public static function warnGlRenderEffectApplication__enableGlRenderEffectGuards(_state:GlRenderState, explanation:GlRenderEffectApplicationExplanation):Void {
-    (cast logOnce((cast 'effects-gl:effect-application:' + Std.string(_Runtime.field(explanation, 'status')) + ':' + Std.string(_Runtime.join(_Runtime.field(explanation, 'unregisteredKinds'), ',')) + '' : String), ({ final __callArgument2:Dynamic = LogLevel.Warn; __callArgument2; }), (cast { message: (cast EnableGlRenderEffectGuards.getGlRenderEffectApplicationMessage__enableGlRenderEffectGuards(({ final __callArgument3:Dynamic = explanation; __callArgument3; })) : String), registeredCount: _Runtime.field(explanation, 'registeredCount'), requestedCount: _Runtime.field(explanation, 'requestedCount'), status: _Runtime.field(explanation, 'status'), unregisteredKinds: _Runtime.field(explanation, 'unregisteredKinds') } : Dynamic), ({ final __callArgument4:Dynamic = 'effects-gl'; __callArgument4; })) : Bool);
+    (cast logOnce((cast 'effects-gl:effect-application:' + Std.string(explanation.status) + ':' + Std.string(_Runtime.join(explanation.unregisteredKinds, ',')) + '' : String), ({ final __callArgument2:Dynamic = LogLevel.Warn; __callArgument2; }), (cast { message: (cast EnableGlRenderEffectGuards.getGlRenderEffectApplicationMessage__enableGlRenderEffectGuards(({ final __callArgument3:Dynamic = explanation; __callArgument3; })) : String), registeredCount: explanation.registeredCount, requestedCount: explanation.requestedCount, status: explanation.status, unregisteredKinds: explanation.unregisteredKinds } : Dynamic), ({ final __callArgument4:Dynamic = 'effects-gl'; __callArgument4; })) : Bool);
   }
 
   public static final _guardedStates__enableGlRenderEffectGuards:flighthq._internal._WeakSet<GlRenderState> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);

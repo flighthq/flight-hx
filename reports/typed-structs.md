@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1371 |
-| Direct schemas | 633 |
+| Audit-only schemas | 1366 |
+| Direct schemas | 638 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 7141 |
-| Directly emitted accesses | 23525 |
+| Pending accesses | 7076 |
+| Directly emitted accesses | 23590 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1371 |
+| Newly discovered, audit-only | 1366 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -200,7 +200,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#BitmapDisplacementMapOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapDropShadowOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#BitmapEdgeMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#BitmapFingerprint` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 13 | 0 | 0 | 13 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#BitmapFingerprint` | `direct` | `new` | — | reviewed escape-free bitmap fingerprint | 2 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapFont` | `direct` | `preserved` | `@flighthq/types:interface#BitmapFont` | broad asset document | 5 | 20 | 0 | 0 | 0 | 20 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapFontCharRecord` | `direct` | `relocated` | `@flighthq/bitmapfont-formats:interface#BitmapFontCharRecord` | broad serialization document | 9 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapFontData` | `direct` | `preserved` | `@flighthq/types:interface#BitmapFontData` | broad asset document | 5 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
@@ -530,7 +530,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#FlexLayoutAlign` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#FlexLayoutContainerStyle` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 9 | 1 | 0 | 10 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:type#FlexLayoutDirection` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#FlexLayoutItemStyle` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 8 | 5 | 0 | 13 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#FlexLayoutItemStyle` | `direct` | `new` | — | reviewed escape-free flex item style | 4 | 8 | 5 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:type#FlexLayoutJustify` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#FlexLayoutWrap` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#FlowStack` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
@@ -615,7 +615,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GlPbrProgram` | `direct` | `new` | — | reviewed escape-free WebGL PBR program | 53 | 30 | 0 | 0 | 0 | 30 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlPbrTransmissionSceneColor` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlQuadBatchShader` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#GlRenderEffectApplicationExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 13 | 0 | 0 | 13 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlRenderEffectApplicationExplanation` | `direct` | `new` | — | reviewed escape-free WebGL render-effect explanation | 4 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GlRenderEffectApplicationGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#GlRenderEffectApplicationStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#GlRenderEffectContext` | `direct` | `new` | — | reviewed escape-free WebGL render-effect context | 6 | 155 | 0 | 0 | 0 | 155 | 0 | 0 | yes | — |
@@ -902,7 +902,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#LottieShapeGroup` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 2 | 0 | 0 | 2 | 0 | 0 | 27 | yes | — |
 | `@flighthq/types:type#LottieShapeItem` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#LottieShapeItemBase` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#LottieShapePath` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 13 | 0 | 0 | 13 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#LottieShapePath` | `direct` | `new` | — | reviewed escape-free Lottie shape path | 4 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LottieShapePathItem` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 4 | 0 | 0 | 4 | 0 | 0 | 27 | yes | — |
 | `@flighthq/types:interface#LottieStaticProperty` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 1 | 0 | 0 | 1 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:interface#LottieStrokeShapeItem` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 10 | 0 | 0 | 10 | 0 | 0 | 27 | yes | — |
@@ -918,7 +918,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#MarkupTagHandler` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#MarkupTagRegistry` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 4 | 3 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#MarkupTagResult` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/types:interface#MatcapMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 11 | 2 | 0 | 13 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MatcapMaterial` | `direct` | `new` | — | reviewed escape-free matcap material | 8 | 11 | 2 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Material` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 16 | 5 | 0 | 21 | 0 | 0 | 7 | yes | — |
 | `@flighthq/types:type#MaterialAlphaMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#MaterialData` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |

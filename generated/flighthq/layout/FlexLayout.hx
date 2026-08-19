@@ -118,8 +118,8 @@ class FlexLayout {
         if ((cast ((cast lineStartIndex : Float) < (cast 0.0 : Float)) : Bool)) { (lineStartIndex = cast (i : Dynamic)); }
         (lineLastIndex = cast (i : Dynamic));
         var item:Null<FlexLayoutItemStyle> = (cast (cast flighthq._internal._StaticIndex.readArray(nodes, i) : { var itemStyle:Null<flighthq._internal._Object>; }).itemStyle : Null<FlexLayoutItemStyle>);
-        var grow:Float = _Runtime.coalesce(({ final __structural12 = item; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { @:optional var grow:Null<Float>; }).grow; }), function():Dynamic return cast 0.0);
-        var shrink:Float = _Runtime.coalesce(({ final __structural13 = item; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { @:optional var shrink:Null<Float>; }).shrink; }), function():Dynamic return cast 1.0);
+        var grow:Float = _Runtime.coalesce(({ final __typedStruct12 = item; __typedStruct12 == null ? _Runtime.UNDEFINED : (cast __typedStruct12 : { @:optional var grow:Null<Float>; }).grow; }), function():Dynamic return cast 0.0);
+        var shrink:Float = _Runtime.coalesce(({ final __typedStruct13 = item; __typedStruct13 == null ? _Runtime.UNDEFINED : (cast __typedStruct13 : { @:optional var shrink:Null<Float>; }).shrink; }), function():Dynamic return cast 1.0);
         (lineBaseSum = cast ((lineBaseSum + base) : Dynamic));
         (lineGrowSum = cast ((lineGrowSum + grow) : Dynamic));
         (lineShrinkWeight = cast ((lineShrinkWeight + (shrink * base)) : Dynamic));
@@ -147,7 +147,7 @@ class FlexLayout {
         if ((cast !_Runtime.strictEquals(node.parentIndex, parentIndex) : Bool)) { i++; continue; }
         var item:Null<FlexLayoutItemStyle> = (cast node.itemStyle : Null<FlexLayoutItemStyle>);
         var base:Float = (cast FlexLayout.getFlexBase__flexLayout(({ final __callArgument17:Dynamic = node; __callArgument17; }), ({ final __callArgument18:Dynamic = intrinsicSizes; __callArgument18; }), (cast i : Float), (cast row : Bool)) : Float);
-        var itemMainSize:Float = (cast FlexLayout.getFlexItemMainSize__flexLayout((cast base : Float), (cast _Runtime.coalesce(({ final __structural19 = item; __structural19 == null ? _Runtime.UNDEFINED : (cast __structural19 : { @:optional var grow:Null<Float>; }).grow; }), function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(({ final __structural20 = item; __structural20 == null ? _Runtime.UNDEFINED : (cast __structural20 : { @:optional var shrink:Null<Float>; }).shrink; }), function():Dynamic return cast 1.0) : Float), (cast distributable : Float), (cast lineGrowSum : Float), (cast lineShrinkWeight : Float)) : Float);
+        var itemMainSize:Float = (cast FlexLayout.getFlexItemMainSize__flexLayout((cast base : Float), (cast _Runtime.coalesce(({ final __typedStruct19 = item; __typedStruct19 == null ? _Runtime.UNDEFINED : (cast __typedStruct19 : { @:optional var grow:Null<Float>; }).grow; }), function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(({ final __typedStruct20 = item; __typedStruct20 == null ? _Runtime.UNDEFINED : (cast __typedStruct20 : { @:optional var shrink:Null<Float>; }).shrink; }), function():Dynamic return cast 1.0) : Float), (cast distributable : Float), (cast lineGrowSum : Float), (cast lineShrinkWeight : Float)) : Float);
         if ((cast _Runtime.strictEquals(i, childIndex) : Bool)) { (targetMainSize = cast (itemMainSize : Dynamic)); } else { if ((cast ((cast i : Float) < (cast childIndex : Float)) : Bool)) { (beforeTarget = cast ((beforeTarget + (itemMainSize + gap)) : Dynamic)); } }
         (usedMain = cast ((usedMain + itemMainSize) : Dynamic));
         i++;
@@ -161,7 +161,7 @@ class FlexLayout {
     (beforeTarget = cast ((beforeTarget + (justifyGap * targetOrdinal)) : Dynamic));
     targetMain = ((cast reverse : Bool) ? (cast ((((mainStart + mainSize) - justifyOffset) - beforeTarget) - targetMainSize) : Dynamic) : (cast ((mainStart + justifyOffset) + beforeTarget) : Dynamic));
     item = (cast itemValue : Null<FlexLayoutItemStyle>);
-    align = ((cast ((cast _Runtime.strictEquals(({ final __structural25 = item; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { @:optional var alignSelf:Null<String>; }).alignSelf; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(item, 'alignSelf'), 'auto') : Bool)) : Bool) ? (cast _Runtime.coalesce(({ final __structural26 = container; __structural26 == null ? _Runtime.UNDEFINED : (cast __structural26 : { @:optional var align:Null<String>; }).align; }), function():Dynamic return cast 'stretch') : Dynamic) : (cast _Runtime.field(item, 'alignSelf') : Dynamic));
+    align = ((cast ((cast _Runtime.strictEquals(({ final __typedStruct25 = item; __typedStruct25 == null ? _Runtime.UNDEFINED : (cast __typedStruct25 : { @:optional var alignSelf:Null<String>; }).alignSelf; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast item : { @:optional var alignSelf:Null<String>; }).alignSelf, 'auto') : Bool)) : Bool) ? (cast _Runtime.coalesce(({ final __structural26 = container; __structural26 == null ? _Runtime.UNDEFINED : (cast __structural26 : { @:optional var align:Null<String>; }).align; }), function():Dynamic return cast 'stretch') : Dynamic) : (cast (cast item : { @:optional var alignSelf:Null<String>; }).alignSelf : Dynamic));
     targetCrossSize = (cast FlexLayout.getFlexCross__flexLayout(({ final __callArgument27:Dynamic = intrinsicSizes; __callArgument27; }), (cast childIndex : Float), (cast row : Bool)) : Float);
     if ((cast _Runtime.strictEquals(align, 'stretch') : Bool)) { (targetCrossSize = cast (lineCross : Dynamic)); }
     targetCross = ((crossStart + crossOffset) + (cast FlexLayout.getFlexAlignOffset__flexLayout(({ final __callArgument28:Dynamic = align; __callArgument28; }), (cast lineCross : Float), (cast targetCrossSize : Float)) : Float));
@@ -210,7 +210,7 @@ class FlexLayout {
     var item:Null<FlexLayoutItemStyle> = cast _Runtime.UNDEFINED;
     var basis:flighthq._internal._Union2<Float, String> = cast _Runtime.UNDEFINED;
     item = (cast node.itemStyle : Null<FlexLayoutItemStyle>);
-    basis = _Runtime.coalesce(({ final __structural32 = item; __structural32 == null ? _Runtime.UNDEFINED : (cast __structural32 : { @:optional var basis:Null<flighthq._internal._Union2<Float, String>>; }).basis; }), function():Dynamic return cast 'auto');
+    basis = _Runtime.coalesce(({ final __typedStruct32 = item; __typedStruct32 == null ? _Runtime.UNDEFINED : (cast __typedStruct32 : { @:optional var basis:Null<flighthq._internal._Union2<Float, String>>; }).basis; }), function():Dynamic return cast 'auto');
     return cast ((cast _Runtime.strictEquals(basis, 'auto') : Bool) ? (cast (cast FlexLayout.finiteSize__flexLayout((cast _Runtime.getIndex(intrinsicSizes, _Runtime.addNumbers((nodeIndex * 2.0), ((cast row : Bool) ? (cast 0.0 : Dynamic) : (cast 1.0 : Dynamic)))) : Float)) : Float) : Dynamic) : (cast basis : Dynamic));
     return cast null;
   }

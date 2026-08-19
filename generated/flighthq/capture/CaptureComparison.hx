@@ -18,7 +18,7 @@ class CaptureComparison {
     var fb:Null<BitmapFingerprint> = cast _Runtime.UNDEFINED;
     fa = (cast parseBitmapFingerprint((cast a : String)) : Null<BitmapFingerprint>);
     fb = (cast parseBitmapFingerprint((cast b : String)) : Null<BitmapFingerprint>);
-    if ((cast ((cast ((cast _Runtime.strictEquals(fa, null) : Bool) || (cast _Runtime.strictEquals(fb, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast fa : BitmapFingerprint).gridSize, (cast fb : BitmapFingerprint).gridSize) : Bool)) : Bool)) { return cast HxMath.POSITIVE_INFINITY; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(fa, null) : Bool) || (cast _Runtime.strictEquals(fb, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast fa : { var gridSize:Float; }).gridSize, (cast fb : { var gridSize:Float; }).gridSize) : Bool)) : Bool)) { return cast HxMath.POSITIVE_INFINITY; }
     return cast (cast compareBitmapFingerprints(({ final __callArgument0:Dynamic = fa; __callArgument0; }), ({ final __callArgument1:Dynamic = fb; __callArgument1; })) : Float);
     return cast null;
   }

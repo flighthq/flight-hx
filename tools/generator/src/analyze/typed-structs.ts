@@ -1193,6 +1193,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#NativeTextRuntime',
     purpose: 'reviewed escape-free native text runtime',
   },
+  {
+    declarationFingerprint: 'sha256:8b4467696325ff69cdbe538077a2259a9bd9f7007df08e3a49a165bf267de4e8',
+    id: '@flighthq/types:interface#MatcapMaterial',
+    purpose: 'reviewed escape-free matcap material',
+  },
+  {
+    declarationFingerprint: 'sha256:ce922284ec58aebfe1997133806dde22e7754a0ac71bda478870249b6a938926',
+    id: '@flighthq/types:interface#LottieShapePath',
+    purpose: 'reviewed escape-free Lottie shape path',
+  },
+  {
+    declarationFingerprint: 'sha256:15e53d2503c0496748f20338561a40b594875934b0cd93d9ea5cf712d7b4bbe4',
+    id: '@flighthq/types:interface#GlRenderEffectApplicationExplanation',
+    purpose: 'reviewed escape-free WebGL render-effect explanation',
+  },
+  {
+    declarationFingerprint: 'sha256:5f78f38895f44208c6b9992633e77f10e15cd707cbd579918a67aa00701daa26',
+    id: '@flighthq/types:interface#FlexLayoutItemStyle',
+    purpose: 'reviewed escape-free flex item style',
+  },
+  {
+    declarationFingerprint: 'sha256:50b5f1e7cf212f956951395d3caf98ac9fefcaaf982b3bc77b182c1b6ae2ecde',
+    id: '@flighthq/types:interface#BitmapFingerprint',
+    purpose: 'reviewed escape-free bitmap fingerprint',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(
