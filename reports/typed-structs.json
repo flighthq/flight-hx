@@ -369931,9 +369931,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 1,
+        "directAccesses": 1,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -369979,7 +369979,7 @@
       },
       "name": "TiledGid",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Tiled gid",
       "reasons": [],
       "source": "upstream/packages/types/src/TiledGid.ts",
       "sourceProvenance": {
@@ -371846,9 +371846,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 4,
+        "directAccesses": 4,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -371886,7 +371886,7 @@
       },
       "name": "TiledProperty",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Tiled property",
       "reasons": [],
       "source": "upstream/packages/types/src/TiledProperty.ts",
       "sourceProvenance": {
@@ -373604,9 +373604,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 13,
+        "directAccesses": 13,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -373644,7 +373644,7 @@
       },
       "name": "TiledTilesetRef",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Tiled tileset reference",
       "reasons": [],
       "source": "upstream/packages/types/src/TiledTileset.ts",
       "sourceProvenance": {
@@ -373705,9 +373705,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 14,
+        "directAccesses": 14,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -373769,7 +373769,7 @@
       },
       "name": "TiledTilesetTile",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Tiled tileset tile",
       "reasons": [],
       "source": "upstream/packages/types/src/TiledTileset.ts",
       "sourceProvenance": {
@@ -373791,9 +373791,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -373823,7 +373823,7 @@
       },
       "name": "TiledTilesetTileFrame",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Tiled tileset tile frame",
       "reasons": [],
       "source": "upstream/packages/types/src/TiledTileset.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1476,
+      "newAuditOnly": 1471,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1476,
+    "auditOnlySchemas": 1471,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 21289,
-    "directSchemas": 528,
+    "directAccesses": 21323,
+    "directSchemas": 533,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 9377,
+    "pendingAccesses": 9343,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

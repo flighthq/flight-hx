@@ -631,19 +631,19 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#ThreeDsMaterial` | 15 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ThreeDsMaterialGroup` | 0 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ThreeDsMesh` | 24 | 7 | 0 | 1 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TiledGid` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#TiledGid` | 1 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#TiledGroupLayer` | 0 | 9 | 1 | 4 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#TiledImageLayer` | 0 | 9 | 2 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#TiledLayerBase` | 0 | 7 | 0 | 1 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TiledMap` | 17 | 13 | 0 | 6 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#TiledObject` | 25 | 13 | 2 | 7 | 0 | 0 | 1 | 3 | yes | — |
 | `@flighthq/types:interface#TiledObjectGroup` | 0 | 9 | 2 | 2 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#TiledProperty` | 0 | 3 | 9 | 0 | 0 | 2 | 1 | 3 | no | `container-transfer` |
+| `@flighthq/types:interface#TiledProperty` | 4 | 3 | 9 | 0 | 0 | 2 | 1 | 3 | no | `container-transfer` |
 | `@flighthq/types:interface#TiledTileLayer` | 0 | 11 | 2 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#TiledTileset` | 15 | 12 | 1 | 2 | 0 | 0 | 1 | 3 | yes | — |
-| `@flighthq/types:interface#TiledTilesetRef` | 0 | 3 | 1 | 1 | 0 | 0 | 1 | 2 | yes | — |
-| `@flighthq/types:interface#TiledTilesetTile` | 0 | 6 | 1 | 3 | 0 | 0 | 1 | 3 | yes | — |
-| `@flighthq/types:interface#TiledTilesetTileFrame` | 0 | 2 | 1 | 0 | 0 | 2 | 1 | 3 | no | `container-transfer` |
+| `@flighthq/types:interface#TiledTilesetRef` | 13 | 3 | 1 | 1 | 0 | 0 | 1 | 2 | yes | — |
+| `@flighthq/types:interface#TiledTilesetTile` | 14 | 6 | 1 | 3 | 0 | 0 | 1 | 3 | yes | — |
+| `@flighthq/types:interface#TiledTilesetTileFrame` | 2 | 2 | 1 | 0 | 0 | 2 | 1 | 3 | no | `container-transfer` |
 | `@flighthq/types:interface#TilemapData` | 70 | 7 | 1 | 1 | 1 | 2 | 2 | 2 | no | `container-transfer`, `normalization-provenance` |
 | `@flighthq/types:interface#TilemapSignals` | 0 | 3 | 0 | 3 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#TimelineAudioCue` | 0 | 10 | 0 | 2 | 0 | 0 | 0 | 0 | yes | — |

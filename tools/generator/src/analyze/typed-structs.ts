@@ -668,6 +668,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#TiledTileset',
     purpose: 'reviewed escape-free Tiled tileset',
   },
+  {
+    declarationFingerprint: 'sha256:f20a5988a4c187a5ab14cafc6d9e22031b7dd254f8a130eb362beafdafe8fe92',
+    id: '@flighthq/types:interface#TiledTilesetTile',
+    purpose: 'reviewed escape-free Tiled tileset tile',
+  },
+  {
+    declarationFingerprint: 'sha256:240a78b98b30601002a1f3bfa62be8394bd11f25ff22d798f7c1ac216d01ba3b',
+    id: '@flighthq/types:interface#TiledTilesetRef',
+    purpose: 'reviewed escape-free Tiled tileset reference',
+  },
+  {
+    declarationFingerprint: 'sha256:e8f81c64bbdac1c2bfe70e245844a7449d62dfc1978d2a4d1340dd6f30e16109',
+    id: '@flighthq/types:interface#TiledProperty',
+    purpose: 'reviewed escape-free Tiled property',
+  },
+  {
+    declarationFingerprint: 'sha256:d03a4ec13a0db461ca7538d2c409c6030e58dc2cc2c5929fe64061d173a5d9a8',
+    id: '@flighthq/types:interface#TiledTilesetTileFrame',
+    purpose: 'reviewed escape-free Tiled tileset tile frame',
+  },
+  {
+    declarationFingerprint: 'sha256:24fed34412a32b4a4ec7eb62f8605d0827907769a2c1dc6e641efe2b97808e4e',
+    id: '@flighthq/types:interface#TiledGid',
+    purpose: 'reviewed escape-free Tiled gid',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

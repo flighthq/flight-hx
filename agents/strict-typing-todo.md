@@ -5,9 +5,9 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,536 public schemas are semantically eligible for typed structural lowering.
-- 528 schemas currently emit direct fields, covering 21,289 accesses.
-- 1,008 eligible schemas remain audit-only, covering 9,377 pending accesses.
-- 751 audit-only schemas have no recorded escape, covering 4,623 pending accesses.
+- 533 schemas currently emit direct fields, covering 21,323 accesses.
+- 1,003 eligible schemas remain audit-only, covering 9,343 pending accesses.
+- 746 audit-only schemas have no recorded escape, covering 4,589 pending accesses.
 - Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
 - Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
@@ -56,6 +56,7 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Promote `AnimatedNormalModifierOptions`, `DissolveModifierOptions`, `EmissiveModifierOptions`, `FogModifierOptions`, and `VertexDisplaceModifierOptions`: 33 accesses now emit directly across five generated factories, removing their remaining reflective option reads. All five inputs are mechanically class-compatible but have no production construction site, so they remain structural and outside the cpp provenance candidate pool. The tranche removes 33 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote `InteractionManager`, `InputState`, `PointerEventData`, `NodeInteractionState`, and `InteractionPointerState`: 148 accesses now emit directly across five generated modules. `InteractionManager` and `InputState` are provenance-closed but remain structural pending separate cpp review; cross-schema transfer keeps `PointerEventData` structural, normalization provenance keeps `NodeInteractionState` structural, and container transfer keeps `InteractionPointerState` structural. The tranche removes eight `_Runtime.field` calls and redundant schema casts; six newly visible `source-never` assignments remain explicit erasures rather than guessed types, while generated `Dynamic` and `Reflect` remain unchanged.
 - [x] Promote `TilemapData`, `TiledObject`, `TiledMap`, `Tilemap`, and `TiledTileset`: 144 accesses now emit directly across seven generated modules. `TiledObject`, `TiledMap`, and `TiledTileset` are mechanically compatible and provenance-closed but remain structural pending separate cpp review; container-transfer and normalization provenance keep `TilemapData` structural, and cross-schema transfer keeps `Tilemap` structural. The tranche removes ten generated `Dynamic` occurrences and 105 `_Runtime.field` calls while generated `Reflect` and type-erasure debt remain unchanged.
+- [x] Promote `TiledTilesetTile`, `TiledTilesetRef`, `TiledProperty`, `TiledTilesetTileFrame`, and `TiledGid`: 34 accesses now emit directly across three generated Tiled-format modules. `TiledGid`, `TiledTilesetRef`, and `TiledTilesetTile` are mechanically compatible and provenance-closed but remain structural pending separate cpp review; container transfer keeps `TiledProperty` and `TiledTilesetTileFrame` structural. The tranche removes 21 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [ ] Review the next cohesive five-row zero-escape tranche from the refreshed audit, preserving exact fingerprint, provenance, Haxe, portability, and affected-parity gates.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 

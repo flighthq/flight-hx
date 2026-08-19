@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1476 |
-| Direct schemas | 528 |
+| Audit-only schemas | 1471 |
+| Direct schemas | 533 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 9377 |
-| Directly emitted accesses | 21289 |
+| Pending accesses | 9343 |
+| Directly emitted accesses | 21323 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1476 |
+| Newly discovered, audit-only | 1471 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -1815,7 +1815,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ThreeDsMesh` | `direct` | `relocated` | `@flighthq/scene-formats:interface#ThreeDsMesh` | broad serialization document | 7 | 24 | 0 | 0 | 0 | 24 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ThresholdOperation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#TiledCompression` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#TiledGid` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TiledGid` | `direct` | `new` | — | reviewed escape-free Tiled gid | 4 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TiledGroupLayer` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 2 | 0 | 0 | 2 | 0 | 0 | 13 | yes | — |
 | `@flighthq/types:interface#TiledImageLayer` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 2 | 0 | 0 | 2 | 0 | 0 | 13 | yes | — |
 | `@flighthq/types:type#TiledInflate` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
@@ -1826,15 +1826,15 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#TiledObjectGroup` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 2 | 0 | 0 | 2 | 0 | 0 | 12 | yes | — |
 | `@flighthq/types:type#TiledOrientation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#TiledParseOptions` | `direct` | `relocated` | `@flighthq/tilemap-formats:interface#TiledParseOptions` | broad serialization document | 1 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TiledProperty` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TiledProperty` | `direct` | `new` | — | reviewed escape-free Tiled property | 3 | 4 | 0 | 0 | 0 | 4 | 0 | 0 | yes | — |
 | `@flighthq/types:type#TiledPropertyType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#TiledRenderOrder` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#TiledTileLayer` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 6 | 0 | 0 | 6 | 0 | 0 | 11 | yes | — |
 | `@flighthq/types:interface#TiledTileset` | `direct` | `new` | — | reviewed escape-free Tiled tileset | 12 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TiledTilesetRef` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 13 | 0 | 0 | 13 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TiledTilesetRef` | `direct` | `new` | — | reviewed escape-free Tiled tileset reference | 3 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:type#TiledTilesetResolver` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#TiledTilesetTile` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 14 | 0 | 0 | 14 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TiledTilesetTileFrame` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TiledTilesetTile` | `direct` | `new` | — | reviewed escape-free Tiled tileset tile | 6 | 14 | 0 | 0 | 0 | 14 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TiledTilesetTileFrame` | `direct` | `new` | — | reviewed escape-free Tiled tileset tile frame | 2 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Tilemap` | `direct` | `new` | — | reviewed escape-free tilemap | 19 | 17 | 0 | 0 | 0 | 17 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TilemapData` | `direct` | `new` | — | reviewed escape-free tilemap data | 7 | 66 | 4 | 0 | 0 | 70 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TilemapRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 38 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |

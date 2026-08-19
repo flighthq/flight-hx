@@ -40,21 +40,21 @@ class TiledProject {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast cellCount : Float)) : Bool)) {
-        var __destructure1 = (cast decodeTiledGid((cast flighthq._internal._StaticIndex.readUint32ArrayTyped((cast data : flighthq._internal._UInt32Array), (cast i : Float)) : Float)) : TiledGid);
-        var tileId:Float = _Runtime.field(__destructure1, 'tileId');
+        var __destructure1:TiledGid = (cast decodeTiledGid((cast flighthq._internal._StaticIndex.readUint32ArrayTyped((cast data : flighthq._internal._UInt32Array), (cast i : Float)) : Float)) : TiledGid);
+        var tileId:Float = __destructure1.tileId;
         if ((cast ((cast tileId : Float) <= (cast 0.0 : Float)) : Bool)) { i++; continue; }
         var ref:Null<TiledTilesetRef> = (cast getTiledTilesetRefForGid(({ final __callArgument0:Dynamic = map; __callArgument0; }), (cast tileId : Float)) : Null<TiledTilesetRef>);
         if ((cast _Runtime.strictEquals(ref, null) : Bool)) { i++; continue; }
-        var group:Null<TilesetGroup__tiledProject> = ((cast byFirstGid : flighthq._internal._Map<Float, Null<TilesetGroup__tiledProject>>).get((cast ref : TiledTilesetRef).firstGid));
+        var group:Null<TilesetGroup__tiledProject> = ((cast byFirstGid : flighthq._internal._Map<Float, Null<TilesetGroup__tiledProject>>).get((cast ref : { var firstGid:Float; }).firstGid));
         if ((cast _Runtime.strictEquals(group, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           var layout:Null<flighthq._internal._Any> = (cast resolveTileset(({ final __callArgument1:Dynamic = ref; __callArgument1; })) : Null<flighthq._internal._Any>);
           if ((cast _Runtime.strictEquals(layout, null) : Bool)) {
-            ((cast byFirstGid : flighthq._internal._Map<Float, Null<TilesetGroup__tiledProject>>).set((cast ref : TiledTilesetRef).firstGid, (cast null)));
+            ((cast byFirstGid : flighthq._internal._Map<Float, Null<TilesetGroup__tiledProject>>).set((cast ref : { var firstGid:Float; }).firstGid, (cast null)));
             (group = cast (null : Dynamic));
           } else {
             (anyResolved = cast (true : Dynamic));
-            (group = cast ({ firstGid: (cast ref : TiledTilesetRef).firstGid, layout: layout, tiles: _Runtime.fill(new flighthq._internal._Int16Array(cellCount), -1.0, 0, null, 1) } : Dynamic));
-            ((cast byFirstGid : flighthq._internal._Map<Float, Null<TilesetGroup__tiledProject>>).set((cast ref : TiledTilesetRef).firstGid, (cast group)));
+            (group = cast ({ firstGid: (cast ref : { var firstGid:Float; }).firstGid, layout: layout, tiles: _Runtime.fill(new flighthq._internal._Int16Array(cellCount), -1.0, 0, null, 1) } : Dynamic));
+            ((cast byFirstGid : flighthq._internal._Map<Float, Null<TilesetGroup__tiledProject>>).set((cast ref : { var firstGid:Float; }).firstGid, (cast group)));
             _Runtime.callProperty(groups, 'push', cast ([group] : Array<Dynamic>));
           }
         }
