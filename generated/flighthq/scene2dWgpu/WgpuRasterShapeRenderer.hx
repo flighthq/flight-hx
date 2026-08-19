@@ -92,7 +92,7 @@ class WgpuRasterShapeRenderer {
     version = (cast getNodeLocalContentRevision((cast source : Dynamic)) : Float);
     pixelRatio = (cast state : WgpuRenderState).pixelRatio;
     surface = (cast acquireWgpuShapeRasterSurface(({ final __callArgument3:Dynamic = shapeData; __callArgument3; })) : WgpuShapeRasterSurface);
-    if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(version, (cast shapeData : WgpuShapeRendererData).lastContentId) : Bool) || (cast !_Runtime.strictEquals(w, (cast shapeData : WgpuShapeRendererData).lastW) : Bool)) : Bool) || (cast !_Runtime.strictEquals(h, (cast shapeData : WgpuShapeRendererData).lastH) : Bool)) : Bool) || (cast !_Runtime.strictEquals(pixelRatio, (cast shapeData : WgpuShapeRendererData).lastPixelRatio) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(version, (cast shapeData : { var lastContentId:Float; }).lastContentId) : Bool) || (cast !_Runtime.strictEquals(w, (cast shapeData : { var lastW:Float; }).lastW) : Bool)) : Bool) || (cast !_Runtime.strictEquals(h, (cast shapeData : { var lastH:Float; }).lastH) : Bool)) : Bool) || (cast !_Runtime.strictEquals(pixelRatio, (cast shapeData : { var lastPixelRatio:Float; }).lastPixelRatio) : Bool)) : Bool)) {
       var pw:Float = HxMath.ceil((w * pixelRatio));
       var ph:Float = HxMath.ceil((h * pixelRatio));
       if ((cast !_Runtime.strictEquals(flighthq._internal.backend.CanvasElementBackend.field((cast surface : WgpuShapeRasterSurface).canvas, 'width'), pw) : Bool)) { flighthq._internal.backend.CanvasElementBackend.setField((cast surface : WgpuShapeRasterSurface).canvas, 'width', pw); }
@@ -103,10 +103,10 @@ class WgpuRasterShapeRenderer {
       rasterizer(({ final __callArgument4:Dynamic = ctx; __callArgument4; }), (cast commands : Dynamic), ({ final __callArgument5:Dynamic = state; __callArgument5; }));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
       invalidateImageResource((cast surface : WgpuShapeRasterSurface).image);
-      ((cast shapeData : WgpuShapeRendererData).lastContentId = version);
-      ((cast shapeData : WgpuShapeRendererData).lastPixelRatio = pixelRatio);
-      ((cast shapeData : WgpuShapeRendererData).lastW = w);
-      ((cast shapeData : WgpuShapeRendererData).lastH = h);
+      ((cast shapeData : { var lastContentId:Float; }).lastContentId = cast (version : Float));
+      ((cast shapeData : { var lastPixelRatio:Float; }).lastPixelRatio = cast (pixelRatio : Float));
+      ((cast shapeData : { var lastW:Float; }).lastW = cast (w : Float));
+      ((cast shapeData : { var lastH:Float; }).lastH = cast (h : Float));
     }
     (cast ensureWgpuQuadBatchResources(({ final __callArgument6:Dynamic = state; __callArgument6; })) : WgpuQuadBatchResources);
     t = (cast renderProxy : RenderProxy2D).transform2D;

@@ -23904,7 +23904,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 18,
       "fields": 5,
       "id": "@flighthq/types:interface#GlColorScaleBiasInstancedShader",
       "name": "GlColorScaleBiasInstancedShader",
@@ -56974,7 +56974,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 18,
       "fields": 8,
       "id": "@flighthq/types:interface#WgpuShapeRendererData",
       "name": "WgpuShapeRendererData",

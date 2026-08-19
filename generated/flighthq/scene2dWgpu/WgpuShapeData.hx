@@ -25,13 +25,13 @@ class WgpuShapeData {
     var existing:Null<WgpuShapeRasterSurface> = cast _Runtime.UNDEFINED;
     var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
     var surface:WgpuShapeRasterSurface = cast _Runtime.UNDEFINED;
-    existing = (cast data : WgpuShapeRendererData).surface;
+    existing = data.surface;
     if ((cast !_Runtime.strictEquals(existing, null) : Bool)) { return cast existing; }
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', 1.0);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', 1.0);
     surface = (cast { canvas: canvas, ctx: flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), image: (cast createImageResource((cast canvas : flighthq._internal._Any)) : Image) });
-    ((cast data : WgpuShapeRendererData).surface = surface);
+    (data.surface = cast (surface : Null<WgpuShapeRasterSurface>));
     return cast surface;
     return cast null;
   }
@@ -51,7 +51,7 @@ class WgpuShapeData {
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime);
     shapeData = (cast getWgpuShapeData(({ final __callArgument2:Dynamic = data; __callArgument2; })) : Null<WgpuShapeRendererData>);
     if ((cast _Runtime.strictEquals(shapeData, null) : Bool)) { return; }
-    surface = (cast shapeData : WgpuShapeRendererData).surface;
+    surface = (cast shapeData : { var surface:Null<WgpuShapeRasterSurface>; }).surface;
     if ((cast !_Runtime.strictEquals(surface, null) : Bool)) {
       var entry:Null<WgpuTextureSourceTextureEntry> = ((cast runtime.textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, WgpuTextureSourceTextureEntry>).get((cast surface : WgpuShapeRasterSurface).image));
       if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -59,7 +59,7 @@ class WgpuShapeData {
         ((cast runtime.textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, WgpuTextureSourceTextureEntry>).delete_((cast surface : WgpuShapeRasterSurface).image));
       }
     }
-    b = (cast shapeData : WgpuShapeRendererData).meshBuffers;
+    b = (cast shapeData : { var meshBuffers:WgpuShapeMeshBuffers; }).meshBuffers;
     for (buffer in _Runtime.iterable(b.vertexBuffers)) {
       (cast buffer : flighthq._internal.dom.GPUBuffer).destroy();
     }

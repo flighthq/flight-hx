@@ -30,7 +30,7 @@ class AnimationLayerStack {
     advanced = (cast stack : flighthq.types.AnimationLayerStack).advanceScratch;
     _Runtime.setLength(advanced, 0.0);
     for (tree in _Runtime.iterable((cast stack : flighthq.types.AnimationLayerStack).blendTrees)) {
-      advanceAnimationPlayers((cast (cast tree : AnimationBlendTree).players : Dynamic), (cast dt : Float), (cast advanced : Dynamic));
+      advanceAnimationPlayers((cast tree.players : Dynamic), (cast dt : Float), (cast advanced : Dynamic));
     }
     for (machine in _Runtime.iterable((cast stack : flighthq.types.AnimationLayerStack).stateMachines)) {
       advanceAnimationStateMachineWithScratch(({ final __callArgument4:Dynamic = machine; __callArgument4; }), (cast dt : Float), (cast advanced : Dynamic));
@@ -38,7 +38,7 @@ class AnimationLayerStack {
   }
 
   public static function createAnimationBlendTreeLayer(blendTree:AnimationBlendTree, ?options:AnimationLayerOptions):AnimationLayer {
-    return cast (cast AnimationLayerStack.createAnimationLayer__animationLayerStack((cast _Runtime.field((cast blendTree : AnimationBlendTree).channels, 'length') : Float), ({ final __callArgument5:Dynamic = blendTree; __callArgument5; }), ({ final __callArgument6:Dynamic = null; __callArgument6; }), ({ final __callArgument7:Dynamic = options; __callArgument7; })) : AnimationLayer);
+    return cast (cast AnimationLayerStack.createAnimationLayer__animationLayerStack((cast _Runtime.field(blendTree.channels, 'length') : Float), ({ final __callArgument5:Dynamic = blendTree; __callArgument5; }), ({ final __callArgument6:Dynamic = null; __callArgument6; }), ({ final __callArgument7:Dynamic = options; __callArgument7; })) : AnimationLayer);
     return cast null;
   }
 
@@ -181,7 +181,7 @@ class AnimationLayerStack {
   }
 
   public static function getAnimationLayerChannels__animationLayerStack(layer:AnimationLayer):Array<{ var channel:AnimationChannel; }> {
-    return cast _Runtime.coalesce(({ final __structural36 = _Runtime.field(layer, 'blendTree'); __structural36 == null ? _Runtime.UNDEFINED : (cast __structural36 : { var channels:Array<AnimationBlendTreeChannel>; }).channels; }), function():Dynamic return cast (cast _Runtime.field(layer, 'stateMachine') : { var channels:Array<AnimationStateMachineChannel>; }).channels);
+    return cast _Runtime.coalesce(({ final __typedStruct36 = _Runtime.field(layer, 'blendTree'); __typedStruct36 == null ? _Runtime.UNDEFINED : (cast __typedStruct36 : { var channels:Array<AnimationBlendTreeChannel>; }).channels; }), function():Dynamic return cast (cast _Runtime.field(layer, 'stateMachine') : { var channels:Array<AnimationStateMachineChannel>; }).channels);
     return cast null;
   }
 

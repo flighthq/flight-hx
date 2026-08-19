@@ -90,9 +90,9 @@ class GlColorAdjustmentMaterialFeature {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument15:Dynamic = state; __callArgument15; })) : GlRenderStateRuntime);
     shader = (cast GlColorAdjustmentMaterialFeature.ensureGlColorMatrixInstancedShader__glColorAdjustmentMaterialFeature(({ final __callArgument16:Dynamic = state; __callArgument16; })) : GlColorScaleBiasInstancedShader);
-    useGlQuadBatchProgram(({ final __callArgument17:Dynamic = state; __callArgument17; }), (cast shader : GlColorScaleBiasInstancedShader).program);
-    setGlQuadBatchWorldAndTexture(({ final __callArgument18:Dynamic = state; __callArgument18; }), (cast shader : GlColorScaleBiasInstancedShader).locWorldMatrix, (cast shader : GlColorScaleBiasInstancedShader).locTexture, ({ final __callArgument19:Dynamic = (cast shader : GlColorScaleBiasInstancedShader).locStraightTextureAlpha; __callArgument19; }));
-    bindGlQuadBatchBaseAttributes(({ final __callArgument20:Dynamic = state; __callArgument20; }), (cast (cast shader : GlColorScaleBiasInstancedShader).locCorner : Float));
+    useGlQuadBatchProgram(({ final __callArgument17:Dynamic = state; __callArgument17; }), shader.program);
+    setGlQuadBatchWorldAndTexture(({ final __callArgument18:Dynamic = state; __callArgument18; }), shader.locWorldMatrix, shader.locTexture, ({ final __callArgument19:Dynamic = shader.locStraightTextureAlpha; __callArgument19; }));
+    bindGlQuadBatchBaseAttributes(({ final __callArgument20:Dynamic = state; __callArgument20; }), (cast shader.locCorner : Float));
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), runtime.quadBatchWriterColorScaleBiasBuffer);
     {
@@ -113,9 +113,9 @@ class GlColorAdjustmentMaterialFeature {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument21:Dynamic = state; __callArgument21; })) : GlRenderStateRuntime);
     shader = (cast GlColorAdjustmentMaterialFeature.ensureGlColorScaleBiasInstancedShader__glColorAdjustmentMaterialFeature(({ final __callArgument22:Dynamic = state; __callArgument22; })) : GlColorScaleBiasInstancedShader);
-    useGlQuadBatchProgram(({ final __callArgument23:Dynamic = state; __callArgument23; }), (cast shader : GlColorScaleBiasInstancedShader).program);
-    setGlQuadBatchWorldAndTexture(({ final __callArgument24:Dynamic = state; __callArgument24; }), (cast shader : GlColorScaleBiasInstancedShader).locWorldMatrix, (cast shader : GlColorScaleBiasInstancedShader).locTexture, ({ final __callArgument25:Dynamic = (cast shader : GlColorScaleBiasInstancedShader).locStraightTextureAlpha; __callArgument25; }));
-    bindGlQuadBatchBaseAttributes(({ final __callArgument26:Dynamic = state; __callArgument26; }), (cast (cast shader : GlColorScaleBiasInstancedShader).locCorner : Float));
+    useGlQuadBatchProgram(({ final __callArgument23:Dynamic = state; __callArgument23; }), shader.program);
+    setGlQuadBatchWorldAndTexture(({ final __callArgument24:Dynamic = state; __callArgument24; }), shader.locWorldMatrix, shader.locTexture, ({ final __callArgument25:Dynamic = shader.locStraightTextureAlpha; __callArgument25; }));
+    bindGlQuadBatchBaseAttributes(({ final __callArgument26:Dynamic = state; __callArgument26; }), (cast shader.locCorner : Float));
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), runtime.quadBatchWriterColorScaleBiasBuffer);
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, 7.0);
@@ -132,9 +132,9 @@ class GlColorAdjustmentMaterialFeature {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument27:Dynamic = state; __callArgument27; })) : GlRenderStateRuntime);
     shader = (cast GlColorAdjustmentMaterialFeature.ensureGlColorTintInstancedShader__glColorAdjustmentMaterialFeature(({ final __callArgument28:Dynamic = state; __callArgument28; })) : GlColorScaleBiasInstancedShader);
-    useGlQuadBatchProgram(({ final __callArgument29:Dynamic = state; __callArgument29; }), (cast shader : GlColorScaleBiasInstancedShader).program);
-    setGlQuadBatchWorldAndTexture(({ final __callArgument30:Dynamic = state; __callArgument30; }), (cast shader : GlColorScaleBiasInstancedShader).locWorldMatrix, (cast shader : GlColorScaleBiasInstancedShader).locTexture, ({ final __callArgument31:Dynamic = (cast shader : GlColorScaleBiasInstancedShader).locStraightTextureAlpha; __callArgument31; }));
-    bindGlQuadBatchBaseAttributes(({ final __callArgument32:Dynamic = state; __callArgument32; }), (cast (cast shader : GlColorScaleBiasInstancedShader).locCorner : Float));
+    useGlQuadBatchProgram(({ final __callArgument29:Dynamic = state; __callArgument29; }), shader.program);
+    setGlQuadBatchWorldAndTexture(({ final __callArgument30:Dynamic = state; __callArgument30; }), shader.locWorldMatrix, shader.locTexture, ({ final __callArgument31:Dynamic = shader.locStraightTextureAlpha; __callArgument31; }));
+    bindGlQuadBatchBaseAttributes(({ final __callArgument32:Dynamic = state; __callArgument32; }), (cast shader.locCorner : Float));
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), runtime.quadBatchWriterColorScaleBiasBuffer);
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, 7.0);

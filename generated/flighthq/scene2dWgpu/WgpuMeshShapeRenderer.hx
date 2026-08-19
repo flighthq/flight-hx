@@ -58,7 +58,7 @@ class WgpuMeshShapeRenderer {
     meshData = (cast getWgpuShapeData((cast renderProxy : RenderProxy2D).rendererData) : Null<WgpuShapeRendererData>);
     if ((cast _Runtime.strictEquals(meshData, null) : Bool)) { return cast false; }
     version = (cast getNodeLocalContentRevision((cast source : Dynamic)) : Float);
-    if ((cast !_Runtime.strictEquals((cast meshData : WgpuShapeRendererData).meshVersion, version) : Bool)) {
+    if ((cast !_Runtime.strictEquals((cast meshData : { var meshVersion:Float; }).meshVersion, version) : Bool)) {
       var meshes:Array<WgpuShapeMesh> = (cast cast ([] : Array<Dynamic>));
       var supported:Bool = true;
       {
@@ -74,11 +74,11 @@ class WgpuMeshShapeRenderer {
           i++;
         }
       }
-      ((cast meshData : WgpuShapeRendererData).meshes = ((cast supported : Bool) ? (cast meshes : Dynamic) : (cast null : Dynamic)));
-      ((cast meshData : WgpuShapeRendererData).meshVersion = version);
+      ((cast meshData : { var meshes:Null<Array<WgpuShapeMesh>>; }).meshes = cast (((cast supported : Bool) ? (cast meshes : Dynamic) : (cast null : Dynamic)) : Null<Array<WgpuShapeMesh>>));
+      ((cast meshData : { var meshVersion:Float; }).meshVersion = cast (version : Float));
     }
-    if ((cast _Runtime.strictEquals((cast meshData : WgpuShapeRendererData).meshes, null) : Bool)) { return cast false; }
-    drawWgpuShapeMeshes(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = renderProxy; __callArgument4; }), (cast meshData : WgpuShapeRendererData).meshes, (cast meshData : WgpuShapeRendererData).meshBuffers);
+    if ((cast _Runtime.strictEquals((cast meshData : { var meshes:Null<Array<WgpuShapeMesh>>; }).meshes, null) : Bool)) { return cast false; }
+    drawWgpuShapeMeshes(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = renderProxy; __callArgument4; }), (cast meshData : { var meshes:Null<Array<WgpuShapeMesh>>; }).meshes, (cast meshData : { var meshBuffers:WgpuShapeMeshBuffers; }).meshBuffers);
     return cast true;
     return cast null;
   }

@@ -7502,9 +7502,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 17,
+        "directAccesses": 17,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -7556,7 +7556,7 @@
       },
       "name": "AnimationBlendTree",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free animation blend tree",
       "reasons": [],
       "source": "upstream/packages/types/src/AnimationBlendTree.ts",
       "sourceProvenance": {
@@ -123319,9 +123319,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 18,
+        "directAccesses": 18,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -123375,7 +123375,7 @@
       },
       "name": "GlColorScaleBiasInstancedShader",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WebGL color scale-bias instanced shader",
       "reasons": [],
       "source": "upstream/packages/types/src/GlRenderState.ts",
       "sourceProvenance": {
@@ -165121,9 +165121,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 18,
+        "directAccesses": 18,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -165223,7 +165223,7 @@
       },
       "name": "LambertMaterial",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Lambert material",
       "reasons": [],
       "source": "upstream/packages/types/src/LambertMaterial.ts",
       "sourceProvenance": {
@@ -212860,9 +212860,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 18,
+        "directAccesses": 18,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -212948,7 +212948,7 @@
       },
       "name": "OrbitCameraControllerOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free orbit-camera options",
       "reasons": [],
       "source": "upstream/packages/types/src/OrbitCameraController.ts",
       "sourceProvenance": {
@@ -418486,9 +418486,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 18,
+        "directAccesses": 18,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -418566,7 +418566,7 @@
       },
       "name": "WgpuShapeRendererData",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WebGPU shape-renderer data",
       "reasons": [],
       "source": "upstream/packages/types/src/WgpuShapeRendererData.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1411,
+      "newAuditOnly": 1406,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1411,
+    "auditOnlySchemas": 1406,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 22910,
-    "directSchemas": 593,
+    "directAccesses": 22999,
+    "directSchemas": 598,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 7756,
+    "pendingAccesses": 7667,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

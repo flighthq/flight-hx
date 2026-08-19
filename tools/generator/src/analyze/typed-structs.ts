@@ -993,6 +993,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#BitmapTextRuntime',
     purpose: 'reviewed escape-free bitmap-text runtime',
   },
+  {
+    declarationFingerprint: 'sha256:eb2748590ab9d2f4190685a0e0023dcfbc58ae2fcfa924a12b27f0b5867c273c',
+    id: '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
+    purpose: 'reviewed escape-free WebGL color scale-bias instanced shader',
+  },
+  {
+    declarationFingerprint: 'sha256:2d0f9e3abe6c598f4700dd1dcfca1aa30bc6c7bff1a53bd74e2cbd646349b722',
+    id: '@flighthq/types:interface#LambertMaterial',
+    purpose: 'reviewed escape-free Lambert material',
+  },
+  {
+    declarationFingerprint: 'sha256:f1dbf387c55015f5b44dbbe97535bcc3591c79fc936b1381180dc3f65b3da869',
+    id: '@flighthq/types:interface#OrbitCameraControllerOptions',
+    purpose: 'reviewed escape-free orbit-camera options',
+  },
+  {
+    declarationFingerprint: 'sha256:8bf31aa0b755de712e58851fc670470e5a3027dcca83854e402fb31490ea8a01',
+    id: '@flighthq/types:interface#WgpuShapeRendererData',
+    purpose: 'reviewed escape-free WebGPU shape-renderer data',
+  },
+  {
+    declarationFingerprint: 'sha256:054fcb71f93fcdf8767c5be098eb1a25dc1facb91452f1a2fdc42cb37556318c',
+    id: '@flighthq/types:interface#AnimationBlendTree',
+    purpose: 'reviewed escape-free animation blend tree',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

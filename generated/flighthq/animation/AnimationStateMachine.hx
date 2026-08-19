@@ -155,7 +155,7 @@ class AnimationStateMachine {
     {
       var stateIndex:Float = 0.0;
       while ((cast ((cast stateIndex : Float) < (cast _Runtime.field(states, 'length') : Float)) : Bool)) {
-        var stateChannels:Array<AnimationBlendTreeChannel> = (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(states, stateIndex), 'blendTree') : AnimationBlendTree).channels;
+        var stateChannels:Array<AnimationBlendTreeChannel> = (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(states, stateIndex), 'blendTree') : { var channels:Array<AnimationBlendTreeChannel>; }).channels;
         {
           var stateChannelIndex:Float = 0.0;
           while ((cast ((cast stateChannelIndex : Float) < (cast _Runtime.field(stateChannels, 'length') : Float)) : Bool)) {
