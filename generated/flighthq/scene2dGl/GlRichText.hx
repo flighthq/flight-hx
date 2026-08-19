@@ -69,7 +69,7 @@ class GlRichText {
   @:noCompletion
   public static function drawGlRichText(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var overlay:Null<GlRichTextOverlay> = cast _Runtime.UNDEFINED;
-    overlay = ((cast ((cast !_Runtime.strictEquals(GlRichText._webglTextInputOverlay__glRichText, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field((cast getRichTextRuntime((cast (cast renderProxy : RenderProxy2D).source : RichText)) : RichTextRuntime), 'input'), null) : Bool)) : Bool) ? (cast GlRichText._webglTextInputOverlay__glRichText : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+    overlay = ((cast ((cast !_Runtime.strictEquals(GlRichText._webglTextInputOverlay__glRichText, null) : Bool) && (cast !_Runtime.strictEquals((cast (cast getRichTextRuntime((cast (cast renderProxy : RenderProxy2D).source : RichText)) : RichTextRuntime) : { var input:Null<TextInputState>; }).input, null) : Bool)) : Bool) ? (cast GlRichText._webglTextInputOverlay__glRichText : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     drawGlRichTextWithOverlay(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = renderProxy; __callArgument1; }), ({ final __callArgument2:Dynamic = overlay; __callArgument2; }));
   }
 

@@ -142,14 +142,14 @@ class RichText {
   public static function createRichTextRuntime():RichTextRuntime {
     var out:RichTextRuntime = cast _Runtime.UNDEFINED;
     out = (cast createNode2DRuntime(({ final __callArgument30:Dynamic = RichText.defaultMethods__richText; __callArgument30; })) : RichTextRuntime);
-    ((cast out : { var buildTextLayoutParams:TextLabel->TextMeasureFunction->TextLayoutParams; }).buildTextLayoutParams = (cast buildRichTextLayoutParams));
-    ((cast out : RichTextRuntime).textLayout = null);
-    ((cast out : RichTextRuntime).textLayoutUsingContentId = -1.0);
-    ((cast out : RichTextRuntime).richTextContent = null);
-    ((cast out : RichTextRuntime).selectionBeginIndex = 0.0);
-    ((cast out : RichTextRuntime).selectionEndIndex = 0.0);
-    ((cast out : RichTextRuntime).input = null);
-    ((cast out : RichTextRuntime).textFieldSignals = null);
+    (out.buildTextLayoutParams = cast (buildRichTextLayoutParams : TextLabel->TextMeasureFunction->TextLayoutParams));
+    (out.textLayout = cast (null : Null<TextLayoutResult>));
+    (out.textLayoutUsingContentId = cast (-1.0 : Float));
+    (out.richTextContent = cast (null : Null<RichTextContent>));
+    (out.selectionBeginIndex = cast (0.0 : Float));
+    (out.selectionEndIndex = cast (0.0 : Float));
+    (out.input = cast (null : Null<TextInputState>));
+    (out.textFieldSignals = cast (null : Null<TextFieldSignals>));
     return cast out;
     return cast null;
   }
@@ -168,7 +168,7 @@ class RichText {
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return cast null; }
     url = (cast getRichTextLinkAtPoint(({ final __callArgument33:Dynamic = layout; __callArgument33; }), (cast x : Float), (cast y : Float)) : Null<String>);
     if ((cast !_Runtime.strictEquals(url, null) : Bool)) {
-      var signals:Null<TextFieldSignals> = (cast (cast getNode2DRuntime(({ final __callArgument34:Dynamic = source; __callArgument34; })) : RichTextRuntime) : RichTextRuntime).textFieldSignals;
+      var signals:Null<TextFieldSignals> = (cast (cast getNode2DRuntime(({ final __callArgument34:Dynamic = source; __callArgument34; })) : RichTextRuntime) : { var textFieldSignals:Null<TextFieldSignals>; }).textFieldSignals;
       if ((cast !_Runtime.strictEquals(signals, null) : Bool)) {
         var event:TextFieldLinkEvent = (cast { url: url, x: x, y: y });
         ((cast (cast signals : TextFieldSignals).onTextFieldLink : { var emit:TextFieldLinkEvent->Void; }).emit)(({ final __callArgument35:Dynamic = event; __callArgument35; }));
@@ -185,7 +185,7 @@ class RichText {
   public static function enableTextFieldSignals(source:flighthq.types.RichText):TextFieldSignals {
     var runtime:RichTextRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getNode2DRuntime(({ final __callArgument38:Dynamic = source; __callArgument38; })) : RichTextRuntime);
-    return cast ({ final __nullishOwner39 = runtime; final __nullishValue40:Null<TextFieldSignals> = cast (cast __nullishOwner39 : RichTextRuntime).textFieldSignals; __nullishValue40 == null ? ((cast __nullishOwner39 : RichTextRuntime).textFieldSignals = (cast (cast createTextFieldSignals() : TextFieldSignals) : Null<TextFieldSignals>)) : (cast __nullishValue40 : Null<TextFieldSignals>); });
+    return cast ({ final __nullishOwner39 = runtime; final __nullishValue40:Null<TextFieldSignals> = cast __nullishOwner39.textFieldSignals; __nullishValue40 == null ? (__nullishOwner39.textFieldSignals = (cast (cast createTextFieldSignals() : TextFieldSignals) : Null<TextFieldSignals>)) : (cast __nullishValue40 : Null<TextFieldSignals>); });
     return cast null;
   }
 
@@ -295,7 +295,7 @@ class RichText {
 
   public static function getRichTextPasswordCharacter(source:flighthq.types.RichText):Null<String> {
     var input:Null<TextInputState> = cast _Runtime.UNDEFINED;
-    input = (cast (cast getNode2DRuntime(({ final __callArgument66:Dynamic = source; __callArgument66; })) : RichTextRuntime) : RichTextRuntime).input;
+    input = (cast (cast getNode2DRuntime(({ final __callArgument66:Dynamic = source; __callArgument66; })) : RichTextRuntime) : { var input:Null<TextInputState>; }).input;
     return cast ((cast ((cast !_Runtime.strictEquals(input, null) : Bool) && (cast (cast input : { var displayAsPassword:Bool; }).displayAsPassword : Bool)) : Bool) ? (cast (cast input : { var passwordCharacter:String; }).passwordCharacter : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -330,7 +330,7 @@ class RichText {
   }
 
   public static function getTextFieldSignals(source:flighthq.types.RichText):Null<TextFieldSignals> {
-    return cast (cast (cast getNode2DRuntime(({ final __callArgument74:Dynamic = source; __callArgument74; })) : RichTextRuntime) : RichTextRuntime).textFieldSignals;
+    return cast (cast (cast getNode2DRuntime(({ final __callArgument74:Dynamic = source; __callArgument74; })) : RichTextRuntime) : { var textFieldSignals:Null<TextFieldSignals>; }).textFieldSignals;
     return cast null;
   }
 
@@ -600,7 +600,7 @@ class RichText {
   public static function emitTextFieldChange__richText(source:flighthq.types.RichText, previousText:String):Void {
     var signals:Null<TextFieldSignals> = cast _Runtime.UNDEFINED;
     var event:TextFieldChangeEvent = cast _Runtime.UNDEFINED;
-    signals = (cast (cast getNode2DRuntime(({ final __callArgument97:Dynamic = source; __callArgument97; })) : RichTextRuntime) : RichTextRuntime).textFieldSignals;
+    signals = (cast (cast getNode2DRuntime(({ final __callArgument97:Dynamic = source; __callArgument97; })) : RichTextRuntime) : { var textFieldSignals:Null<TextFieldSignals>; }).textFieldSignals;
     if ((cast _Runtime.strictEquals(signals, null) : Bool)) { return; }
     event = (cast { previousText: previousText, text: (cast source.data : { var text:String; }).text });
     ((cast (cast signals : TextFieldSignals).onTextFieldChange : { var emit:TextFieldChangeEvent->Void; }).emit)(({ final __callArgument98:Dynamic = event; __callArgument98; }));
@@ -609,7 +609,7 @@ class RichText {
   public static function emitTextFieldScroll__richText(source:flighthq.types.RichText, previousScrollH:Float, previousScrollV:Float):Void {
     var signals:Null<TextFieldSignals> = cast _Runtime.UNDEFINED;
     var event:TextFieldScrollEvent = cast _Runtime.UNDEFINED;
-    signals = (cast (cast getNode2DRuntime(({ final __callArgument99:Dynamic = source; __callArgument99; })) : RichTextRuntime) : RichTextRuntime).textFieldSignals;
+    signals = (cast (cast getNode2DRuntime(({ final __callArgument99:Dynamic = source; __callArgument99; })) : RichTextRuntime) : { var textFieldSignals:Null<TextFieldSignals>; }).textFieldSignals;
     if ((cast _Runtime.strictEquals(signals, null) : Bool)) { return; }
     event = (cast { previousScrollH: previousScrollH, previousScrollV: previousScrollV, scrollH: (cast source.data : { var scrollH:Float; }).scrollH, scrollV: (cast source.data : { var scrollV:Float; }).scrollV });
     ((cast (cast signals : TextFieldSignals).onTextFieldScroll : { var emit:TextFieldScrollEvent->Void; }).emit)(({ final __callArgument100:Dynamic = event; __callArgument100; }));

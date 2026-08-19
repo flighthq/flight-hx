@@ -12,8 +12,8 @@ class TextShaperCluster {
     var count:Float = cast _Runtime.UNDEFINED;
     var positions:Array<Float> = cast _Runtime.UNDEFINED;
     var x:Float = cast _Runtime.UNDEFINED;
-    glyphs = _Runtime.field(run, 'glyphs');
-    count = _Runtime.field(run, 'glyphCount');
+    glyphs = run.glyphs;
+    count = run.glyphCount;
     positions = _Runtime.createArray((count + 1.0));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast positions : Array<Float>), (cast 0.0 : Float), (cast 0.0 : Float));
     x = 0.0;
@@ -32,9 +32,9 @@ class TextShaperCluster {
   public static function getClusterForIndex(run:ShapedRun, stringIndex:Float):Float {
     var glyphs:Array<ShapedGlyph> = cast _Runtime.UNDEFINED;
     var best:Float = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.field(run, 'glyphCount'), 0.0) : Bool)) { return cast -1.0; }
+    if ((cast _Runtime.strictEquals(run.glyphCount, 0.0) : Bool)) { return cast -1.0; }
     if ((cast ((cast stringIndex : Float) < (cast 0.0 : Float)) : Bool)) { return cast -1.0; }
-    glyphs = _Runtime.field(run, 'glyphs');
+    glyphs = run.glyphs;
     best = -1.0;
     {
       var i:Float = 0.0;
@@ -51,8 +51,8 @@ class TextShaperCluster {
 
   public static function getIndexRangeForCluster(run:ShapedRun, cluster:Float, ?stringLength:Float):Null<Array<Float>> {
     var glyphs:Array<ShapedGlyph> = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.field(run, 'glyphCount'), 0.0) : Bool)) { return cast null; }
-    glyphs = _Runtime.field(run, 'glyphs');
+    if ((cast _Runtime.strictEquals(run.glyphCount, 0.0) : Bool)) { return cast null; }
+    glyphs = run.glyphs;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(glyphs, 'length') : Float)) : Bool)) {

@@ -34,14 +34,14 @@ import flighthq.types._internal._TextLabelValues.TextLabelKind;
 class TextLabel {
   public static function buildTextLabelLayoutParams__textLabel(source:flighthq.types.TextLabel, measure:TextMeasureFunction):TextLayoutParams {
     var data:TextLabelData = cast _Runtime.UNDEFINED;
-    data = _Runtime.field(source, 'data');
-    return cast { formatRanges: cast ([(cast createTextFormatRange((cast data : TextLabelData).textFormat, (cast 0.0 : Float), (cast _Runtime.field((cast data : TextLabelData).text, 'length') : Float)) : TextFormatRange)] : Array<Dynamic>), height: (cast data : TextLabelData).height, measure: measure, text: (cast data : TextLabelData).text, verticalAlign: ((cast _Runtime.strictEquals((cast data : TextLabelData).autoSize, 'none') : Bool) ? (cast (cast data : TextLabelData).verticalAlign : Dynamic) : (cast 'top' : Dynamic)), width: (cast data : TextLabelData).width };
+    data = source.data;
+    return cast { formatRanges: cast ([(cast createTextFormatRange(data.textFormat, (cast 0.0 : Float), (cast _Runtime.field(data.text, 'length') : Float)) : TextFormatRange)] : Array<Dynamic>), height: data.height, measure: measure, text: data.text, verticalAlign: ((cast _Runtime.strictEquals(data.autoSize, 'none') : Bool) ? (cast data.verticalAlign : Dynamic) : (cast 'top' : Dynamic)), width: data.width };
     return cast null;
   }
 
   public static function appendTextLabelString(source:flighthq.types.TextLabel, value:String):Void {
     if ((cast _Runtime.strictEquals(_Runtime.field(value, 'length'), 0.0) : Bool)) { return; }
-    ((cast (cast source : flighthq.types.TextLabel).data : TextLabelData).text += value);
+    ((cast source.data : { var text:String; }).text += value);
     TextLabel.invalidateTextLabelContent__textLabel(({ final __callArgument0:Dynamic = source; __callArgument0; }));
   }
 
@@ -50,12 +50,12 @@ class TextLabel {
     var data:TextLabelData = cast _Runtime.UNDEFINED;
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
     label = (cast source : flighthq.types.TextLabel);
-    data = (cast label : flighthq.types.TextLabel).data;
-    if ((cast _Runtime.strictEquals((cast data : TextLabelData).autoSize, 'none') : Bool)) {
+    data = label.data;
+    if ((cast _Runtime.strictEquals(data.autoSize, 'none') : Bool)) {
       (out.x = cast (0.0 : Float));
       (out.y = cast (0.0 : Float));
-      (out.width = cast ((cast data : TextLabelData).width : Float));
-      (out.height = cast ((cast data : TextLabelData).height : Float));
+      (out.width = cast (data.width : Float));
+      (out.height = cast (data.height : Float));
       return;
     }
     ensureTextLayout(({ final __callArgument1:Dynamic = label; __callArgument1; }));
@@ -63,8 +63,8 @@ class TextLabel {
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) {
       (out.x = cast (0.0 : Float));
       (out.y = cast (0.0 : Float));
-      (out.width = cast ((cast data : TextLabelData).width : Float));
-      (out.height = cast ((cast data : TextLabelData).height : Float));
+      (out.width = cast (data.width : Float));
+      (out.height = cast (data.height : Float));
       return;
     }
     computeTextBoundsRectangle(({ final __callArgument3:Dynamic = out; __callArgument3; }), ({ final __callArgument4:Dynamic = data; __callArgument4; }), ({ final __callArgument5:Dynamic = layout; __callArgument5; }));
@@ -93,7 +93,7 @@ class TextLabel {
   }
 
   public static function getTextLabelFormat(source:flighthq.types.TextLabel):TextFormat {
-    return cast (cast _Runtime.field(source, 'data') : TextLabelData).textFormat;
+    return cast (cast source.data : { var textFormat:TextFormat; }).textFormat;
     return cast null;
   }
 
@@ -104,61 +104,61 @@ class TextLabel {
   }
 
   public static function getTextLabelString(source:flighthq.types.TextLabel):String {
-    return cast (cast _Runtime.field(source, 'data') : TextLabelData).text;
+    return cast (cast source.data : { var text:String; }).text;
     return cast null;
   }
 
   public static function setTextLabelAutoSize(source:flighthq.types.TextLabel, value:TextAutoSize):Void {
     var data:TextLabelData = cast _Runtime.UNDEFINED;
-    data = (cast source : flighthq.types.TextLabel).data;
-    if ((cast _Runtime.strictEquals((cast data : TextLabelData).autoSize, value) : Bool)) { return; }
-    ((cast data : TextLabelData).autoSize = value);
+    data = source.data;
+    if ((cast _Runtime.strictEquals(data.autoSize, value) : Bool)) { return; }
+    (data.autoSize = cast (value : TextAutoSize));
     invalidateNodeLocalContent((cast source : Dynamic));
     invalidateNodeLocalBounds((cast source : Dynamic));
   }
 
   public static function setTextLabelFormat(source:flighthq.types.TextLabel, value:TextFormat):Void {
-    ((cast (cast source : flighthq.types.TextLabel).data : TextLabelData).textFormat = value);
+    ((cast source.data : { var textFormat:TextFormat; }).textFormat = cast (value : TextFormat));
     TextLabel.invalidateTextLabelContent__textLabel(({ final __callArgument14:Dynamic = source; __callArgument14; }));
   }
 
   public static function setTextLabelHeight(source:flighthq.types.TextLabel, value:Float):Void {
     var data:TextLabelData = cast _Runtime.UNDEFINED;
-    data = (cast source : flighthq.types.TextLabel).data;
-    if ((cast _Runtime.strictEquals((cast data : TextLabelData).height, value) : Bool)) { return; }
-    ((cast data : TextLabelData).height = value);
+    data = source.data;
+    if ((cast _Runtime.strictEquals(data.height, value) : Bool)) { return; }
+    (data.height = cast (value : Float));
     invalidateNodeLocalContent((cast source : Dynamic));
     invalidateNodeLocalBounds((cast source : Dynamic));
   }
 
   public static function setTextLabelString(source:flighthq.types.TextLabel, value:String):Void {
     var data:TextLabelData = cast _Runtime.UNDEFINED;
-    data = (cast source : flighthq.types.TextLabel).data;
-    if ((cast _Runtime.strictEquals((cast data : TextLabelData).text, value) : Bool)) { return; }
-    ((cast data : TextLabelData).text = value);
+    data = source.data;
+    if ((cast _Runtime.strictEquals(data.text, value) : Bool)) { return; }
+    (data.text = cast (value : String));
     TextLabel.invalidateTextLabelContent__textLabel(({ final __callArgument15:Dynamic = source; __callArgument15; }));
   }
 
   public static function setTextLabelVerticalAlign(source:flighthq.types.TextLabel, value:TextVerticalAlign):Void {
     var data:TextLabelData = cast _Runtime.UNDEFINED;
-    data = (cast source : flighthq.types.TextLabel).data;
-    if ((cast _Runtime.strictEquals((cast data : TextLabelData).verticalAlign, value) : Bool)) { return; }
-    ((cast data : TextLabelData).verticalAlign = value);
+    data = source.data;
+    if ((cast _Runtime.strictEquals(data.verticalAlign, value) : Bool)) { return; }
+    (data.verticalAlign = cast (value : TextVerticalAlign));
     invalidateNodeLocalContent((cast source : Dynamic));
   }
 
   public static function setTextLabelWidth(source:flighthq.types.TextLabel, value:Float):Void {
     var data:TextLabelData = cast _Runtime.UNDEFINED;
-    data = (cast source : flighthq.types.TextLabel).data;
-    if ((cast _Runtime.strictEquals((cast data : TextLabelData).width, value) : Bool)) { return; }
-    ((cast data : TextLabelData).width = value);
+    data = source.data;
+    if ((cast _Runtime.strictEquals(data.width, value) : Bool)) { return; }
+    (data.width = cast (value : Float));
     invalidateNodeLocalContent((cast source : Dynamic));
     invalidateNodeLocalBounds((cast source : Dynamic));
   }
 
   public static function invalidateTextLabelContent__textLabel(source:flighthq.types.TextLabel):Void {
     invalidateNodeLocalContent((cast source : Dynamic));
-    if ((cast !_Runtime.strictEquals((cast (cast source : flighthq.types.TextLabel).data : TextLabelData).autoSize, 'none') : Bool)) { invalidateNodeLocalBounds((cast source : Dynamic)); }
+    if ((cast !_Runtime.strictEquals((cast source.data : { var autoSize:TextAutoSize; }).autoSize, 'none') : Bool)) { invalidateNodeLocalBounds((cast source : Dynamic)); }
   }
 
   public static final defaultMethods__textLabel:flighthq._internal._Partial<MethodsOf<TextLabelRuntime>> = (cast { computeLocalBoundsRectangle: computeTextLabelLocalBoundsRectangle });

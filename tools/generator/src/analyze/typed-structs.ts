@@ -443,6 +443,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#VelocitySample',
     purpose: 'reviewed escape-free velocity sample',
   },
+  {
+    declarationFingerprint: 'sha256:8366b22af6581d9b3d860205d8d5245e7bb40398342313332aa3c7da2e420aa1',
+    id: '@flighthq/types:interface#RichTextRuntime',
+    purpose: 'reviewed escape-free rich-text runtime',
+  },
+  {
+    declarationFingerprint: 'sha256:d94505d93827743797a2c6724668ebc639ebab71ea755df4bdc4fee0ae7971e5',
+    id: '@flighthq/types:interface#TextLabelData',
+    purpose: 'reviewed escape-free text-label data',
+  },
+  {
+    declarationFingerprint: 'sha256:d2115dbabb239acfc6288812800f14051a58f3141d2cff821ddea724af316ba8',
+    id: '@flighthq/types:interface#BitmapTextPage',
+    purpose: 'reviewed escape-free bitmap-text page',
+  },
+  {
+    declarationFingerprint: 'sha256:f0658231700532c1d5a1d52e203c8f41115d1e60669fa2fd9a98bad1aacb4416',
+    id: '@flighthq/types:interface#TextLabel',
+    purpose: 'reviewed escape-free text label',
+  },
+  {
+    declarationFingerprint: 'sha256:8b0fb4643dfec361ac4d51caaaef5867c9e05efc2ef364fddcf328380fc07ac5',
+    id: '@flighthq/types:interface#ShapedRun',
+    purpose: 'reviewed escape-free shaped run',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

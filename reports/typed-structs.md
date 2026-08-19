@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1521 |
-| Direct schemas | 483 |
+| Audit-only schemas | 1516 |
+| Direct schemas | 488 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 10728 |
-| Directly emitted accesses | 19938 |
+| Pending accesses | 10524 |
+| Directly emitted accesses | 20142 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1521 |
+| Newly discovered, audit-only | 1516 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -233,7 +233,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#BitmapTextAlign` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#BitmapTextData` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 13 | 12 | 0 | 25 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapTextOptions` | `direct` | `preserved` | `@flighthq/types:interface#BitmapTextOptions` | bitmap-text option record | 5 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#BitmapTextPage` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 33 | 6 | 0 | 39 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#BitmapTextPage` | `direct` | `new` | — | reviewed escape-free bitmap-text page | 4 | 33 | 6 | 0 | 0 | 39 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapTextRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 39 | 15 | 3 | 0 | 18 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BlendEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#BlendMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1303,7 +1303,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#RichText` | `direct` | `new` | — | reviewed escape-free rich text | 19 | 165 | 1 | 0 | 0 | 166 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RichTextContent` | `direct` | `new` | — | reviewed escape-free rich-text content | 2 | 45 | 3 | 0 | 0 | 48 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RichTextData` | `direct` | `new` | — | reviewed escape-free rich-text data | 21 | 188 | 61 | 0 | 0 | 249 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#RichTextRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 46 | 37 | 23 | 0 | 60 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RichTextRuntime` | `direct` | `new` | — | reviewed escape-free rich-text runtime | 46 | 37 | 23 | 0 | 0 | 60 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RigidBody2D` | `audit-only` | `new` | — | checker-discovered public declaration | 26 | 590 | 133 | 0 | 723 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#RimModifier` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RimModifierOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
@@ -1445,7 +1445,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#ShapeCommandToken` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#ShapeData` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 38 | 0 | 0 | 38 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ShapedGlyph` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ShapedRun` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 15 | 11 | 0 | 26 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ShapedRun` | `direct` | `new` | — | reviewed escape-free shaped run | 6 | 15 | 11 | 0 | 0 | 26 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ShapeFillRegion` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 4 | 0 | 0 | 4 | 0 | 0 | 8 | yes | — |
 | `@flighthq/types:interface#ShapeJsonFormatOptions` | `direct` | `relocated` | `@flighthq/shape-formats:interface#ShapeJsonFormatOptions` | broad serialization document | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ShapeJsonParseOptions` | `direct` | `relocated` | `@flighthq/shape-formats:interface#ShapeJsonParseOptions` | broad serialization document | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
@@ -1725,8 +1725,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#TextInputState` | `direct` | `new` | — | reviewed escape-free text-input state | 15 | 68 | 32 | 0 | 0 | 100 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextItem` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#TextJustification` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#TextLabel` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 28 | 0 | 0 | 28 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TextLabelData` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 44 | 7 | 0 | 51 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TextLabel` | `direct` | `new` | — | reviewed escape-free text label | 19 | 28 | 0 | 0 | 0 | 28 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TextLabelData` | `direct` | `new` | — | reviewed escape-free text-label data | 6 | 44 | 7 | 0 | 0 | 51 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextLabelRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 41 | 5 | 6 | 1 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextLayoutGroup` | `direct` | `new` | — | reviewed escape-free text-layout group | 12 | 257 | 43 | 0 | 0 | 300 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextLayoutParams` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 17 | 0 | 0 | 17 | 0 | 0 | 0 | yes | — |

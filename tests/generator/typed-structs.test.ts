@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_521,
+      newAuditOnly: 1_516,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(485);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(490);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_521);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_516);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(83);
+    expect(newDirect).toHaveLength(88);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -525,6 +525,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'VelocitySample',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free velocity sample',
+        }),
+        expect.objectContaining({
+          name: 'RichTextRuntime',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free rich-text runtime',
+        }),
+        expect.objectContaining({
+          name: 'TextLabelData',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free text-label data',
+        }),
+        expect.objectContaining({
+          name: 'BitmapTextPage',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free bitmap-text page',
+        }),
+        expect.objectContaining({
+          name: 'TextLabel',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free text label',
+        }),
+        expect.objectContaining({
+          name: 'ShapedRun',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free shaped run',
         }),
       ]),
     );
@@ -943,6 +968,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:735f8f6b33ae4a5c730243d8695d7b81baf6bb3777af4dd6effa7492f291b1b1',
         id: '@flighthq/types:interface#VelocitySample',
         purpose: 'reviewed escape-free velocity sample',
+      },
+      {
+        declarationFingerprint: 'sha256:8366b22af6581d9b3d860205d8d5245e7bb40398342313332aa3c7da2e420aa1',
+        id: '@flighthq/types:interface#RichTextRuntime',
+        purpose: 'reviewed escape-free rich-text runtime',
+      },
+      {
+        declarationFingerprint: 'sha256:d94505d93827743797a2c6724668ebc639ebab71ea755df4bdc4fee0ae7971e5',
+        id: '@flighthq/types:interface#TextLabelData',
+        purpose: 'reviewed escape-free text-label data',
+      },
+      {
+        declarationFingerprint: 'sha256:d2115dbabb239acfc6288812800f14051a58f3141d2cff821ddea724af316ba8',
+        id: '@flighthq/types:interface#BitmapTextPage',
+        purpose: 'reviewed escape-free bitmap-text page',
+      },
+      {
+        declarationFingerprint: 'sha256:f0658231700532c1d5a1d52e203c8f41115d1e60669fa2fd9a98bad1aacb4416',
+        id: '@flighthq/types:interface#TextLabel',
+        purpose: 'reviewed escape-free text label',
+      },
+      {
+        declarationFingerprint: 'sha256:8b0fb4643dfec361ac4d51caaaef5867c9e05efc2ef364fddcf328380fc07ac5',
+        id: '@flighthq/types:interface#ShapedRun',
+        purpose: 'reviewed escape-free shaped run',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -1460,6 +1510,13 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const textRuntimeCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['BitmapTextPage', 'RichTextRuntime', 'ShapedRun', 'TextLabel', 'TextLabelData'].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -1500,22 +1557,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_521,
+      auditOnlySchemas: 1_516,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 19_938,
-      directSchemas: 483,
+      directAccesses: 20_142,
+      directSchemas: 488,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 10_728,
+      pendingAccesses: 10_524,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_521,
+      newAuditOnly: 1_516,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -1543,7 +1600,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(19_938);
+    expect(report.summary.directAccesses).toBe(20_142);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -2198,6 +2255,48 @@ describe('typed struct analysis', () => {
     }
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
+        'RichTextRuntime',
+        60,
+        'sha256:8366b22af6581d9b3d860205d8d5245e7bb40398342313332aa3c7da2e420aa1',
+        'reviewed escape-free rich-text runtime',
+      ],
+      [
+        'TextLabelData',
+        51,
+        'sha256:d94505d93827743797a2c6724668ebc639ebab71ea755df4bdc4fee0ae7971e5',
+        'reviewed escape-free text-label data',
+      ],
+      [
+        'BitmapTextPage',
+        39,
+        'sha256:d2115dbabb239acfc6288812800f14051a58f3141d2cff821ddea724af316ba8',
+        'reviewed escape-free bitmap-text page',
+      ],
+      [
+        'TextLabel',
+        28,
+        'sha256:f0658231700532c1d5a1d52e203c8f41115d1e60669fa2fd9a98bad1aacb4416',
+        'reviewed escape-free text label',
+      ],
+      [
+        'ShapedRun',
+        26,
+        'sha256:8b0fb4643dfec361ac4d51caaaef5867c9e05efc2ef364fddcf328380fc07ac5',
+        'reviewed escape-free shaped run',
+      ],
+    ] as const) {
+      expect(textRuntimeCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
         'Physics2DWorld',
         217,
         'sha256:a28a94c95326e5405d33feda957ea8ee57399e1266dae9f9d7c88218d945a9fe',
@@ -2694,6 +2793,44 @@ describe('typed struct analysis', () => {
         closed: true,
       });
     }
+    for (const textCrossSchemaId of [
+      '@flighthq/types:interface#RichTextRuntime',
+      '@flighthq/types:interface#TextLabel',
+    ]) {
+      expect(classAuditById.get(textCrossSchemaId)?.migration).toEqual({
+        mechanicallyCompatible: false,
+        normalizationReasons: ['cross-schema-transfer'],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.has(textCrossSchemaId)).toBe(false);
+    }
+    const shapedRunId = '@flighthq/types:interface#ShapedRun';
+    expect(classAuditById.get(shapedRunId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: ['object-spread'],
+    });
+    expect(provenanceById.has(shapedRunId)).toBe(false);
+    const bitmapTextPageId = '@flighthq/types:interface#BitmapTextPage';
+    expect(classAuditById.get(bitmapTextPageId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.get(bitmapTextPageId)?.nominalIdentity).toEqual({
+      blockerReasons: ['normalization-provenance'],
+      closed: false,
+    });
+    const textLabelDataId = '@flighthq/types:interface#TextLabelData';
+    expect(classAuditById.get(textLabelDataId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.get(textLabelDataId)?.nominalIdentity).toEqual({
+      blockerReasons: ['container-transfer', 'normalization-provenance'],
+      closed: false,
+    });
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -2962,6 +3099,22 @@ describe('typed struct analysis', () => {
     const generatedVelocitySample = readFileSync('generated/flighthq/velocity/VelocitySample.hx', 'utf8');
     expect(generatedVelocitySample).not.toMatch(/\(cast sample : flighthq\.types\.VelocitySample\)\./u);
     expect(generatedVelocitySample).not.toMatch(/_Runtime\.field\(sample,/u);
+    const generatedBitmapText = readFileSync('generated/flighthq/bitmaptext/BitmapText.hx', 'utf8');
+    expect(generatedBitmapText).not.toMatch(/\(cast page : BitmapTextPage\)\./u);
+    expect(generatedBitmapText).not.toMatch(/_Runtime\.field\(page,/u);
+    const generatedRichTextRuntime = readFileSync('generated/flighthq/text/RichText.hx', 'utf8');
+    expect(generatedRichTextRuntime).not.toMatch(/\(cast out : RichTextRuntime\)\./u);
+    expect(generatedRichTextRuntime).not.toMatch(/_Runtime\.field\(out,/u);
+    const generatedTextLabel = readFileSync('generated/flighthq/text/TextLabel.hx', 'utf8');
+    expect(generatedTextLabel).not.toMatch(
+      /\(cast (?:data|label|source) : (?:TextLabelData|flighthq\.types\.TextLabel)\)\./u,
+    );
+    expect(generatedTextLabel).not.toMatch(/_Runtime\.field\((?:data|label|source),/u);
+    const generatedCanvasTextLabel = readFileSync('generated/flighthq/scene2dCanvas/CanvasTextLabel.hx', 'utf8');
+    expect(generatedCanvasTextLabel).not.toMatch(/_Runtime\.field\(__destructure0,/u);
+    const generatedTextShaperRun = readFileSync('generated/flighthq/textshaper/TextShaperRun.hx', 'utf8');
+    expect(generatedTextShaperRun).not.toMatch(/\(cast (?:out|result|run) : ShapedRun\)\./u);
+    expect(generatedTextShaperRun).not.toMatch(/_Runtime\.field\((?:out|run),/u);
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

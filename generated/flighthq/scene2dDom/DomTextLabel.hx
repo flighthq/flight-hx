@@ -54,7 +54,7 @@ class DomTextLabel {
   public static function drawDomTextLabel(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var data:Null<DomTextData__domTextLabel> = cast _Runtime.UNDEFINED;
     var source:TextLabel = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:TextLabelData = cast _Runtime.UNDEFINED;
     var text:String = cast _Runtime.UNDEFINED;
     var textFormat:TextFormat = cast _Runtime.UNDEFINED;
     var ctx:Null<flighthq._internal.dom.CanvasRenderingContext2D> = cast _Runtime.UNDEFINED;
@@ -65,9 +65,9 @@ class DomTextLabel {
     data = (cast (cast renderProxy : RenderProxy2D).rendererData : Null<DomTextData__domTextLabel>);
     if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
     source = (cast (cast renderProxy : RenderProxy2D).source : TextLabel);
-    __destructure0 = (cast source : TextLabel).data;
-    text = _Runtime.field(__destructure0, 'text');
-    textFormat = _Runtime.field(__destructure0, 'textFormat');
+    __destructure0 = source.data;
+    text = __destructure0.text;
+    textFormat = __destructure0.textFormat;
     if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return; }
     ctx = (cast DomTextLabel.getMeasureCtx__domTextLabel() : Null<flighthq._internal.dom.CanvasRenderingContext2D>);
     if ((cast _Runtime.strictEquals(ctx, null) : Bool)) { return; }
@@ -82,7 +82,7 @@ class DomTextLabel {
       return cast _Runtime.UNDEFINED;
     });
     result = (cast getTextLayoutResult((cast getTextLabelRuntime(({ final __callArgument3:Dynamic = source; __callArgument3; })) : TextLabelRuntime)) : TextLayoutResult);
-    computeTextLayout(({ final __callArgument4:Dynamic = result; __callArgument4; }), ({ final __callArgument6:Dynamic = { text: text, formatRanges: cast ([(cast createTextFormatRange(({ final __callArgument5:Dynamic = textFormat; __callArgument5; }), (cast 0.0 : Float), (cast _Runtime.field(text, 'length') : Float)) : TextFormatRange)] : Array<Dynamic>), width: (cast (cast source : TextLabel).data : TextLabelData).width, height: (cast (cast source : TextLabel).data : TextLabelData).height, measure: measure, verticalAlign: ((cast _Runtime.strictEquals((cast (cast source : TextLabel).data : TextLabelData).autoSize, 'none') : Bool) ? (cast (cast (cast source : TextLabel).data : TextLabelData).verticalAlign : Dynamic) : (cast 'top' : Dynamic)) }; __callArgument6; }));
+    computeTextLayout(({ final __callArgument4:Dynamic = result; __callArgument4; }), ({ final __callArgument6:Dynamic = { text: text, formatRanges: cast ([(cast createTextFormatRange(({ final __callArgument5:Dynamic = textFormat; __callArgument5; }), (cast 0.0 : Float), (cast _Runtime.field(text, 'length') : Float)) : TextFormatRange)] : Array<Dynamic>), width: (cast source.data : { var width:Float; }).width, height: (cast source.data : { var height:Float; }).height, measure: measure, verticalAlign: ((cast _Runtime.strictEquals((cast source.data : { var autoSize:TextAutoSize; }).autoSize, 'none') : Bool) ? (cast (cast source.data : { var verticalAlign:TextVerticalAlign; }).verticalAlign : Dynamic) : (cast 'top' : Dynamic)) }; __callArgument6; }));
     divWidth = 0.0;
     for (group in _Runtime.iterable(result.groups)) {
       var right:Float = (group.offsetX + group.width);

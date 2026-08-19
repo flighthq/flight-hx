@@ -41,7 +41,7 @@ class CanvasTextInput {
     source = (cast (cast renderProxy : RenderProxy2D).source : RichText);
     input = (cast getTextInputState(({ final __callArgument0:Dynamic = source; __callArgument0; })) : Null<TextInputState>);
     if ((cast _Runtime.strictEquals(input, null) : Bool)) { return; }
-    layout = _Runtime.field((cast getRichTextRuntime(({ final __callArgument1:Dynamic = source; __callArgument1; })) : RichTextRuntime), 'textLayout');
+    layout = (cast (cast getRichTextRuntime(({ final __callArgument1:Dynamic = source; __callArgument1; })) : RichTextRuntime) : { var textLayout:Null<TextLayoutResult>; }).textLayout;
     if ((cast ((cast _Runtime.andValue(!(cast (cast input : { var focused:Bool; }).focused : Bool), function():Dynamic return cast !(cast (cast input : { var alwaysShowSelection:Bool; }).alwaysShowSelection : Bool)) : Bool) || (cast _Runtime.strictEquals(layout, null) : Bool)) : Bool)) { return; }
     fieldW = (cast computeTextBoundsWidth((cast source.data : Dynamic), ({ final __callArgument2:Dynamic = layout; __callArgument2; })) : Float);
     fieldH = (cast computeTextBoundsHeight((cast source.data : Dynamic), ({ final __callArgument3:Dynamic = layout; __callArgument3; })) : Float);

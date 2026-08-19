@@ -88,7 +88,7 @@ class GlTextLabel {
   public static function drawGlTextLabel(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var source:TextLabel = cast _Runtime.UNDEFINED;
-    var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure1:TextLabelData = cast _Runtime.UNDEFINED;
     var text:String = cast _Runtime.UNDEFINED;
     var textFormat:TextFormat = cast _Runtime.UNDEFINED;
     var fieldWidth:Float = cast _Runtime.UNDEFINED;
@@ -106,11 +106,11 @@ class GlTextLabel {
     var t:Matrix = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime);
     source = (cast (cast renderProxy : RenderProxy2D).source : TextLabel);
-    __destructure1 = (cast source : TextLabel).data;
-    text = _Runtime.field(__destructure1, 'text');
-    textFormat = _Runtime.field(__destructure1, 'textFormat');
-    fieldWidth = _Runtime.field(__destructure1, 'width');
-    fieldHeight = _Runtime.field(__destructure1, 'height');
+    __destructure1 = source.data;
+    text = __destructure1.text;
+    textFormat = __destructure1.textFormat;
+    fieldWidth = __destructure1.width;
+    fieldHeight = __destructure1.height;
     if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return; }
     if ((cast _Runtime.strictEquals((cast renderProxy : RenderProxy2D).rendererData, null) : Bool)) { return; }
     material = (cast renderProxy : RenderProxy2D).material;
@@ -127,7 +127,7 @@ class GlTextLabel {
         return cast _Runtime.UNDEFINED;
       });
       var result:TextLayoutResult = (cast getTextLayoutResult((cast getTextLabelRuntime(({ final __callArgument5:Dynamic = source; __callArgument5; })) : TextLabelRuntime)) : TextLayoutResult);
-      computeTextLayout(({ final __callArgument6:Dynamic = result; __callArgument6; }), ({ final __callArgument8:Dynamic = { text: text, formatRanges: cast ([(cast createTextFormatRange(({ final __callArgument7:Dynamic = textFormat; __callArgument7; }), (cast 0.0 : Float), (cast _Runtime.field(text, 'length') : Float)) : TextFormatRange)] : Array<Dynamic>), width: fieldWidth, height: fieldHeight, measure: measure, verticalAlign: ((cast _Runtime.strictEquals((cast (cast source : TextLabel).data : TextLabelData).autoSize, 'none') : Bool) ? (cast (cast (cast source : TextLabel).data : TextLabelData).verticalAlign : Dynamic) : (cast 'top' : Dynamic)) }; __callArgument8; }));
+      computeTextLayout(({ final __callArgument6:Dynamic = result; __callArgument6; }), ({ final __callArgument8:Dynamic = { text: text, formatRanges: cast ([(cast createTextFormatRange(({ final __callArgument7:Dynamic = textFormat; __callArgument7; }), (cast 0.0 : Float), (cast _Runtime.field(text, 'length') : Float)) : TextFormatRange)] : Array<Dynamic>), width: fieldWidth, height: fieldHeight, measure: measure, verticalAlign: ((cast _Runtime.strictEquals((cast source.data : { var autoSize:TextAutoSize; }).autoSize, 'none') : Bool) ? (cast (cast source.data : { var verticalAlign:TextVerticalAlign; }).verticalAlign : Dynamic) : (cast 'top' : Dynamic)) }; __callArgument8; }));
       ((cast textData : GlTextLabelData__glTextLabel).lastContentId = version);
       ((cast textData : GlTextLabelData__glTextLabel).lastPixelRatio = pixelRatio);
       ((cast textData : GlTextLabelData__glTextLabel).logW = 0.0);

@@ -83,7 +83,7 @@ class WgpuTextLabel {
   public static function drawWgpuTextLabel(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var source:TextLabel = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:TextLabelData = cast _Runtime.UNDEFINED;
     var text:String = cast _Runtime.UNDEFINED;
     var textFormat:TextFormat = cast _Runtime.UNDEFINED;
     var fieldWidth:Float = cast _Runtime.UNDEFINED;
@@ -102,11 +102,11 @@ class WgpuTextLabel {
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
     if ((cast _Runtime.strictEquals(runtime.renderPass, null) : Bool)) { return; }
     source = (cast (cast renderProxy : RenderProxy2D).source : TextLabel);
-    __destructure0 = (cast source : TextLabel).data;
-    text = _Runtime.field(__destructure0, 'text');
-    textFormat = _Runtime.field(__destructure0, 'textFormat');
-    fieldWidth = _Runtime.field(__destructure0, 'width');
-    fieldHeight = _Runtime.field(__destructure0, 'height');
+    __destructure0 = source.data;
+    text = __destructure0.text;
+    textFormat = __destructure0.textFormat;
+    fieldWidth = __destructure0.width;
+    fieldHeight = __destructure0.height;
     if ((cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) { return; }
     if ((cast _Runtime.strictEquals((cast renderProxy : RenderProxy2D).rendererData, null) : Bool)) { return; }
     material = (cast renderProxy : RenderProxy2D).material;
@@ -125,7 +125,7 @@ class WgpuTextLabel {
         return cast _Runtime.UNDEFINED;
       });
       var result:TextLayoutResult = (cast getTextLayoutResult((cast getTextLabelRuntime(({ final __callArgument6:Dynamic = source; __callArgument6; })) : TextLabelRuntime)) : TextLayoutResult);
-      computeTextLayout(({ final __callArgument7:Dynamic = result; __callArgument7; }), ({ final __callArgument9:Dynamic = { text: text, formatRanges: cast ([(cast createTextFormatRange(({ final __callArgument8:Dynamic = textFormat; __callArgument8; }), (cast 0.0 : Float), (cast _Runtime.field(text, 'length') : Float)) : TextFormatRange)] : Array<Dynamic>), width: fieldWidth, height: fieldHeight, measure: measure, verticalAlign: ((cast _Runtime.strictEquals((cast (cast source : TextLabel).data : TextLabelData).autoSize, 'none') : Bool) ? (cast (cast (cast source : TextLabel).data : TextLabelData).verticalAlign : Dynamic) : (cast 'top' : Dynamic)) }; __callArgument9; }));
+      computeTextLayout(({ final __callArgument7:Dynamic = result; __callArgument7; }), ({ final __callArgument9:Dynamic = { text: text, formatRanges: cast ([(cast createTextFormatRange(({ final __callArgument8:Dynamic = textFormat; __callArgument8; }), (cast 0.0 : Float), (cast _Runtime.field(text, 'length') : Float)) : TextFormatRange)] : Array<Dynamic>), width: fieldWidth, height: fieldHeight, measure: measure, verticalAlign: ((cast _Runtime.strictEquals((cast source.data : { var autoSize:TextAutoSize; }).autoSize, 'none') : Bool) ? (cast (cast source.data : { var verticalAlign:TextVerticalAlign; }).verticalAlign : Dynamic) : (cast 'top' : Dynamic)) }; __callArgument9; }));
       ((cast textData : WgpuTextLabelData__wgpuTextLabel).lastContentId = version);
       ((cast textData : WgpuTextLabelData__wgpuTextLabel).lastPixelRatio = pixelRatio);
       ((cast textData : WgpuTextLabelData__wgpuTextLabel).logW = 0.0);

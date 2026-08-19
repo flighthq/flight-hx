@@ -47,7 +47,7 @@ class DomTextInput {
     source = (cast (cast renderProxy : RenderProxy2D).source : RichText);
     input = (cast getTextInputState(({ final __callArgument0:Dynamic = source; __callArgument0; })) : Null<TextInputState>);
     if ((cast _Runtime.strictEquals(input, null) : Bool)) { return; }
-    layout = _Runtime.field((cast getRichTextRuntime(({ final __callArgument1:Dynamic = source; __callArgument1; })) : RichTextRuntime), 'textLayout');
+    layout = (cast (cast getRichTextRuntime(({ final __callArgument1:Dynamic = source; __callArgument1; })) : RichTextRuntime) : { var textLayout:Null<TextLayoutResult>; }).textLayout;
     data = (cast (cast renderProxy : RenderProxy2D).rendererData : Null<DomTextInputData__domTextInput>);
     if ((cast ((cast ((cast _Runtime.andValue(!(cast (cast input : { var focused:Bool; }).focused : Bool), function():Dynamic return cast !(cast (cast input : { var alwaysShowSelection:Bool; }).alwaysShowSelection : Bool)) : Bool) || (cast _Runtime.strictEquals(layout, null) : Bool)) : Bool) || (cast _Runtime.looseEquals(({ final __structural2 = data; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var div:Null<flighthq._internal.dom.HTMLDivElement>; }).div; }), null) : Bool)) : Bool)) { return; }
     firstVisibleLine = ((cast source.data : { var scrollV:Float; }).scrollV - 1.0);

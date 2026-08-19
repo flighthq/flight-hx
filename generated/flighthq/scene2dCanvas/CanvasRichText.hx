@@ -42,7 +42,7 @@ class CanvasRichText {
   @:noCompletion
   public static function drawCanvasRichText(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
     CanvasRichText.drawCanvasRichTextField__canvasRichText(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = renderProxy; __callArgument1; }));
-    if ((cast ((cast !_Runtime.strictEquals(CanvasRichText._canvasTextInputOverlay__canvasRichText, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field((cast getRichTextRuntime((cast (cast renderProxy : RenderProxy2D).source : RichText)) : RichTextRuntime), 'input'), null) : Bool)) : Bool)) {
+    if ((cast ((cast !_Runtime.strictEquals(CanvasRichText._canvasTextInputOverlay__canvasRichText, null) : Bool) && (cast !_Runtime.strictEquals((cast (cast getRichTextRuntime((cast (cast renderProxy : RenderProxy2D).source : RichText)) : RichTextRuntime) : { var input:Null<TextInputState>; }).input, null) : Bool)) : Bool)) {
       (cast CanvasRichText._canvasTextInputOverlay__canvasRichText : CanvasRenderState->RenderProxy2D->Void)(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = renderProxy; __callArgument3; }));
     }
   }
@@ -106,8 +106,8 @@ class CanvasRichText {
     flighthq._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'rect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'clip', cast ([] : Array<Dynamic>));
-    if ((cast ((cast (cast source.data : { var selectable:Bool; }).selectable : Bool) && (cast !_Runtime.strictEquals((cast richTextRuntime : RichTextRuntime).selectionBeginIndex, (cast richTextRuntime : RichTextRuntime).selectionEndIndex) : Bool)) : Bool)) {
-      getRichTextSelectionRectangles(({ final __callArgument20:Dynamic = CanvasRichText._richTextSelectionRectangles__canvasRichText; __callArgument20; }), (cast (cast richTextRuntime : RichTextRuntime).selectionBeginIndex : Float), (cast (cast richTextRuntime : RichTextRuntime).selectionEndIndex : Float), ({ final __callArgument21:Dynamic = result; __callArgument21; }));
+    if ((cast ((cast (cast source.data : { var selectable:Bool; }).selectable : Bool) && (cast !_Runtime.strictEquals(richTextRuntime.selectionBeginIndex, richTextRuntime.selectionEndIndex) : Bool)) : Bool)) {
+      getRichTextSelectionRectangles(({ final __callArgument20:Dynamic = CanvasRichText._richTextSelectionRectangles__canvasRichText; __callArgument20; }), (cast richTextRuntime.selectionBeginIndex : Float), (cast richTextRuntime.selectionEndIndex : Float), ({ final __callArgument21:Dynamic = result; __callArgument21; }));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', CanvasRichText.SELECTION_COLOR__canvasRichText);
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', HxMath.min(1.0, ((cast renderProxy : RenderProxy2D).alpha * CanvasRichText.SELECTION_ALPHA__canvasRichText)));
       for (rectangle in _Runtime.iterable(CanvasRichText._richTextSelectionRectangles__canvasRichText)) {

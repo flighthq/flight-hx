@@ -11,17 +11,17 @@ import flighthq.types.TextInputState.TextInputOptions;
 
 class TextInput {
   public static function disableTextInput(node:RichText):Void {
-    ((cast (cast getRichTextRuntime(({ final __callArgument0:Dynamic = node; __callArgument0; })) : RichTextRuntime) : RichTextRuntime).input = null);
+    ((cast (cast getRichTextRuntime(({ final __callArgument0:Dynamic = node; __callArgument0; })) : RichTextRuntime) : { var input:Null<TextInputState>; }).input = cast (null : Null<TextInputState>));
   }
 
   public static function enableTextInput(node:RichText, ?options:TextInputOptions):TextInputState {
     var runtime:RichTextRuntime = cast _Runtime.UNDEFINED;
     var state:Null<TextInputState> = cast _Runtime.UNDEFINED;
     runtime = (cast getRichTextRuntime(({ final __callArgument1:Dynamic = node; __callArgument1; })) : RichTextRuntime);
-    state = (cast runtime : RichTextRuntime).input;
+    state = runtime.input;
     if ((cast _Runtime.strictEquals(state, null) : Bool)) {
       (state = cast ((cast TextInput.createTextInputState__textInput(({ final __callArgument2:Dynamic = options; __callArgument2; })) : TextInputState) : Dynamic));
-      ((cast runtime : RichTextRuntime).input = state);
+      (runtime.input = cast (state : Null<TextInputState>));
     } else { if ((cast !_Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       TextInput.applyTextInputOptions__textInput(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = options; __callArgument4; }));
     } }
@@ -30,12 +30,12 @@ class TextInput {
   }
 
   public static function getTextInputState(node:RichText):Null<TextInputState> {
-    return cast _Runtime.field((cast getRichTextRuntime(({ final __callArgument5:Dynamic = node; __callArgument5; })) : RichTextRuntime), 'input');
+    return cast (cast (cast getRichTextRuntime(({ final __callArgument5:Dynamic = node; __callArgument5; })) : RichTextRuntime) : { var input:Null<TextInputState>; }).input;
     return cast null;
   }
 
   public static function hasTextInput(node:RichText):Bool {
-    return cast !_Runtime.strictEquals(_Runtime.field((cast getRichTextRuntime(({ final __callArgument6:Dynamic = node; __callArgument6; })) : RichTextRuntime), 'input'), null);
+    return cast !_Runtime.strictEquals((cast (cast getRichTextRuntime(({ final __callArgument6:Dynamic = node; __callArgument6; })) : RichTextRuntime) : { var input:Null<TextInputState>; }).input, null);
     return cast null;
   }
 

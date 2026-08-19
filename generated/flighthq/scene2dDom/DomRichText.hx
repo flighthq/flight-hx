@@ -65,7 +65,7 @@ class DomRichText {
   @:noCompletion
   public static function drawDomRichText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     DomRichText.drawDomRichTextField__domRichText(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = renderProxy; __callArgument2; }));
-    if ((cast ((cast !_Runtime.strictEquals(DomRichText._domTextInputOverlay__domRichText, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field((cast getRichTextRuntime((cast (cast renderProxy : RenderProxy2D).source : RichText)) : RichTextRuntime), 'input'), null) : Bool)) : Bool)) {
+    if ((cast ((cast !_Runtime.strictEquals(DomRichText._domTextInputOverlay__domRichText, null) : Bool) && (cast !_Runtime.strictEquals((cast (cast getRichTextRuntime((cast (cast renderProxy : RenderProxy2D).source : RichText)) : RichTextRuntime) : { var input:Null<TextInputState>; }).input, null) : Bool)) : Bool)) {
       (cast DomRichText._domTextInputOverlay__domRichText : DomRenderState->RenderProxy2D->Void)(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = renderProxy; __callArgument4; }));
     }
   }
@@ -150,8 +150,8 @@ class DomRichText {
     scrollYOffset = ((cast ((cast firstVisibleLine : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast getRichTextScrollYOffset(result.lineHeights, (cast firstVisibleLine : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic));
     scrollXOffset = scrollH;
     html = '';
-    if ((cast ((cast (cast source.data : { var selectable:Bool; }).selectable : Bool) && (cast !_Runtime.strictEquals((cast richTextRuntime : RichTextRuntime).selectionBeginIndex, (cast richTextRuntime : RichTextRuntime).selectionEndIndex) : Bool)) : Bool)) {
-      getRichTextSelectionRectangles((cast DomRichText._richTextSelectionRectangles__domRichText : Dynamic), (cast (cast richTextRuntime : RichTextRuntime).selectionBeginIndex : Float), (cast (cast richTextRuntime : RichTextRuntime).selectionEndIndex : Float), ({ final __callArgument22:Dynamic = result; __callArgument22; }));
+    if ((cast ((cast (cast source.data : { var selectable:Bool; }).selectable : Bool) && (cast !_Runtime.strictEquals(richTextRuntime.selectionBeginIndex, richTextRuntime.selectionEndIndex) : Bool)) : Bool)) {
+      getRichTextSelectionRectangles((cast DomRichText._richTextSelectionRectangles__domRichText : Dynamic), (cast richTextRuntime.selectionBeginIndex : Float), (cast richTextRuntime.selectionEndIndex : Float), ({ final __callArgument22:Dynamic = result; __callArgument22; }));
       for (rectangle in _Runtime.iterable(DomRichText._richTextSelectionRectangles__domRichText)) {
         (html = cast ((html + '<div style="position:absolute;left:' + Std.string(((cast rectangle : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x - scrollXOffset)) + 'px;top:' + Std.string(((cast rectangle : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).y - scrollYOffset)) + 'px;width:' + Std.string((cast rectangle : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).width) + 'px;height:' + Std.string((cast rectangle : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).height) + 'px;background:' + Std.string(DomRichText.DOM_SELECTION_COLOR__domRichText) + ';opacity:' + Std.string(DomRichText.DOM_SELECTION_ALPHA__domRichText) + ';pointer-events:none;"></div>') : Dynamic));
       }

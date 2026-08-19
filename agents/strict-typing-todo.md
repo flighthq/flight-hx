@@ -5,14 +5,14 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,536 public schemas are semantically eligible for typed structural lowering.
-- 483 schemas currently emit direct fields, covering 19,938 accesses.
-- 1,053 eligible schemas remain audit-only, covering 10,728 pending accesses.
-- 796 audit-only schemas have no recorded escape, covering 5,974 pending accesses.
+- 488 schemas currently emit direct fields, covering 20,142 accesses.
+- 1,048 eligible schemas remain audit-only, covering 10,524 pending accesses.
+- 791 audit-only schemas have no recorded escape, covering 5,770 pending accesses.
 - Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
 - Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
 - The cpp provenance audit has 551 closed nominal-identity candidates; only `Camera2D` and `ParticleEmitterState` are enabled.
-- Generated `Dynamic` occurrences fell from 49,168 to 46,982 across checker-derived typed-struct assignments and the reviewed escape-free tranches.
+- Generated `Dynamic` occurrences fell from 49,168 to 46,972 across checker-derived typed-struct assignments and the reviewed escape-free tranches.
 
 ## 1. Closed mapped aliases
 
@@ -47,6 +47,7 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Promote `AnimationStateMachine`, `AnimationCrossfade`, `Statechart`, `StatechartInstance`, and `StatechartTransition`: 172 accesses now emit directly across seven generated modules. Cross-schema transfers keep the animation records structural, JSON serialization keeps `Statechart` structural, and the provenance-closed instance and transition remain structural pending separate cpp review. The tranche removes 100 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote `TextureContainer`, `TextureContainerLevel`, `RenderTexture`, `GlRenderTextureEntry`, and `WgpuRenderTextureEntry`: 171 accesses now emit directly across 12 generated modules. Object spread keeps the container structural, cross-schema transfer keeps the render texture structural, and propagated normalization provenance keeps the three mechanically compatible leaf records structural. The tranche removes 63 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote `Scene3DHit`, `CollisionRaycastHit`, `Physics2DRayHit`, `CollisionContactPoint`, and `VelocitySample`: 200 accesses now emit directly across nine generated modules. Cross-schema entity transfer keeps `Scene3DHit` structural, while the four mechanically compatible leaf records are provenance-closed but remain structural pending separate cpp review. The tranche removes 90 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
+- [x] Promote `RichTextRuntime`, `TextLabelData`, `BitmapTextPage`, `TextLabel`, and `ShapedRun`: 204 accesses now emit directly across 23 generated modules. Cross-schema transfer keeps the runtime and label structural, object spread keeps the shaped run structural, and normalization provenance keeps the bitmap-text page and label data structural. The tranche removes four generated `Dynamic` occurrences and 32 `_Runtime.field` calls while `Reflect` and type-erasure debt remain unchanged.
 - [ ] Review the next cohesive five-row zero-escape tranche from the refreshed audit, preserving exact fingerprint, provenance, Haxe, portability, and affected-parity gates.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 

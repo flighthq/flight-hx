@@ -67,7 +67,7 @@ class TextInputManager {
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
     target = (cast TextInputManager.getTextInputFocusTarget__textInputManager(({ final __callArgument10:Dynamic = manager; __callArgument10; })) : Null<RichText>);
     if ((cast _Runtime.strictEquals(target, null) : Bool)) { return cast false; }
-    layout = _Runtime.coalesce(_Runtime.field((cast getRichTextRuntime(({ final __callArgument11:Dynamic = target; __callArgument11; })) : RichTextRuntime), 'textLayout'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
+    layout = _Runtime.coalesce((cast (cast getRichTextRuntime(({ final __callArgument11:Dynamic = target; __callArgument11; })) : RichTextRuntime) : { var textLayout:Null<TextLayoutResult>; }).textLayout, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
     return cast (cast handleTextInputKeyboard(({ final __callArgument12:Dynamic = target; __callArgument12; }), ({ final __callArgument13:Dynamic = data; __callArgument13; }), (cast { clipboardText: clipboardText, layout: layout, onCopy: onCopy } : Dynamic)) : Bool);
     return cast null;
   }
@@ -76,7 +76,7 @@ class TextInputManager {
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
     var index:Float = cast _Runtime.UNDEFINED;
     focusTextInput(({ final __callArgument14:Dynamic = manager; __callArgument14; }), ({ final __callArgument15:Dynamic = target; __callArgument15; }));
-    layout = _Runtime.field((cast getRichTextRuntime(({ final __callArgument16:Dynamic = target; __callArgument16; })) : RichTextRuntime), 'textLayout');
+    layout = (cast (cast getRichTextRuntime(({ final __callArgument16:Dynamic = target; __callArgument16; })) : RichTextRuntime) : { var textLayout:Null<TextLayoutResult>; }).textLayout;
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return; }
     index = (cast getTextInputCharacterIndexAtPoint(({ final __callArgument17:Dynamic = target; __callArgument17; }), ({ final __callArgument18:Dynamic = layout; __callArgument18; }), (cast x : Float), (cast y : Float)) : Float);
     if ((cast ((cast clickCount : Float) >= (cast 3.0 : Float)) : Bool)) {
@@ -94,7 +94,7 @@ class TextInputManager {
     var index:Float = cast _Runtime.UNDEFINED;
     target = (cast manager : flighthq.types.TextInputManager).focused;
     if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !(cast (cast target : { var enabled:Bool; }).enabled : Bool) : Bool)) : Bool)) { return; }
-    layout = _Runtime.field((cast getRichTextRuntime(({ final __callArgument22:Dynamic = target; __callArgument22; })) : RichTextRuntime), 'textLayout');
+    layout = (cast (cast getRichTextRuntime(({ final __callArgument22:Dynamic = target; __callArgument22; })) : RichTextRuntime) : { var textLayout:Null<TextLayoutResult>; }).textLayout;
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return; }
     index = (cast getTextInputCharacterIndexAtPoint(({ final __callArgument23:Dynamic = target; __callArgument23; }), ({ final __callArgument24:Dynamic = layout; __callArgument24; }), (cast x : Float), (cast y : Float)) : Float);
     moveTextInputCaret(({ final __callArgument25:Dynamic = target; __callArgument25; }), (cast index : Float), (cast true : Bool));

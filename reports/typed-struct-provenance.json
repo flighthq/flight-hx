@@ -16733,7 +16733,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 39,
       "fields": 4,
       "id": "@flighthq/types:interface#BitmapTextPage",
       "name": "BitmapTextPage",
@@ -49921,7 +49921,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 51,
       "fields": 6,
       "id": "@flighthq/types:interface#TextLabelData",
       "name": "TextLabelData",

@@ -43,18 +43,18 @@ class CanvasBitmapText {
     restoreMaterial = (cast applyCanvasMaterial(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast (cast node : RenderProxy2D).material : Dynamic)) : Bool);
     flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty] : Array<Dynamic>));
     for (page in _Runtime.iterable(pages)) {
-      var atlas:TextureAtlas = (cast page : BitmapTextPage).atlas;
+      var atlas:TextureAtlas = page.atlas;
       var texture:Null<Texture2D> = atlas.texture;
-      if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast _Runtime.strictEquals((cast page : BitmapTextPage).instanceCount, 0.0) : Bool)) : Bool)) { continue; }
+      if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast _Runtime.strictEquals(page.instanceCount, 0.0) : Bool)) : Bool)) { continue; }
       var domImage:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers(({ final __callArgument4:Dynamic = state; __callArgument4; })) : CanvasTextureResolvers), ({ final __callArgument5:Dynamic = texture; __callArgument5; })) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
       if ((cast _Runtime.strictEquals(domImage, null) : Bool)) { continue; }
       var regions:Array<TextureAtlasRegion> = atlas.regions;
       var numRegions:Float = _Runtime.field(regions, 'length');
-      var ids:flighthq._internal._UInt16Array = (cast page : BitmapTextPage).ids;
-      var transforms:flighthq._internal._Float32Array = (cast page : BitmapTextPage).transforms;
+      var ids:flighthq._internal._UInt16Array = page.ids;
+      var transforms:flighthq._internal._Float32Array = page.transforms;
       {
         var i:Float = 0.0;
-        while ((cast ((cast i : Float) < (cast (cast page : BitmapTextPage).instanceCount : Float)) : Bool)) {
+        while ((cast ((cast i : Float) < (cast page.instanceCount : Float)) : Bool)) {
           var id:Float = flighthq._internal._StaticIndex.readUint16ArrayTyped((cast ids : flighthq._internal._UInt16Array), (cast i : Float));
           if ((cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast id : Float) >= (cast numRegions : Float)) : Bool)) : Bool)) { i++; continue; }
           var region:TextureAtlasRegion = flighthq._internal._StaticIndex.readArray(regions, id);

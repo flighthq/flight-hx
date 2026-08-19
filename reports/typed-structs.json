@@ -36264,9 +36264,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 39,
+        "directAccesses": 39,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -36312,7 +36312,7 @@
       },
       "name": "BitmapTextPage",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free bitmap-text page",
       "reasons": [],
       "source": "upstream/packages/types/src/BitmapText.ts",
       "sourceProvenance": {
@@ -268946,9 +268946,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 60,
+        "directAccesses": 60,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -269330,7 +269330,7 @@
       },
       "name": "RichTextRuntime",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free rich-text runtime",
       "reasons": [],
       "source": "upstream/packages/types/src/RichText.ts",
       "sourceProvenance": {
@@ -291592,9 +291592,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 26,
+        "directAccesses": 26,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -291656,7 +291656,7 @@
       },
       "name": "ShapedRun",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free shaped run",
       "reasons": [],
       "source": "upstream/packages/types/src/ShapedRun.ts",
       "sourceProvenance": {
@@ -350392,9 +350392,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 28,
+        "directAccesses": 28,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -350566,7 +350566,7 @@
       },
       "name": "TextLabel",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free text label",
       "reasons": [],
       "source": "upstream/packages/types/src/TextLabel.ts",
       "sourceProvenance": {
@@ -350588,9 +350588,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 51,
+        "directAccesses": 51,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -350652,7 +350652,7 @@
       },
       "name": "TextLabelData",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free text-label data",
       "reasons": [],
       "source": "upstream/packages/types/src/TextLabel.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1521,
+      "newAuditOnly": 1516,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1521,
+    "auditOnlySchemas": 1516,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 19938,
-    "directSchemas": 483,
+    "directAccesses": 20142,
+    "directSchemas": 488,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 10728,
+    "pendingAccesses": 10524,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

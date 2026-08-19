@@ -13,7 +13,7 @@ import flighthq.types.TextFormatRange;
 
 class RichTextContent {
   public static function clearRichTextContent(runtime:RichTextRuntime):Void {
-    ((cast runtime : RichTextRuntime).richTextContent = null);
+    (runtime.richTextContent = cast (null : Null<flighthq.types.RichTextContent>));
   }
 
   public static function computeRichTextContent(out:flighthq.types.RichTextContent, data:RichTextData, ?passwordCharacter:Null<String>):Void {
@@ -36,10 +36,10 @@ class RichTextContent {
   }
 
   public static function getRichTextContent(runtime:RichTextRuntime):flighthq.types.RichTextContent {
-    if ((cast _Runtime.strictEquals((cast runtime : RichTextRuntime).richTextContent, null) : Bool)) {
-      ((cast runtime : RichTextRuntime).richTextContent = (cast createRichTextContent() : flighthq.types.RichTextContent));
+    if ((cast _Runtime.strictEquals(runtime.richTextContent, null) : Bool)) {
+      (runtime.richTextContent = cast ((cast createRichTextContent() : flighthq.types.RichTextContent) : Null<flighthq.types.RichTextContent>));
     }
-    return cast (cast runtime : RichTextRuntime).richTextContent;
+    return cast runtime.richTextContent;
     return cast null;
   }
 

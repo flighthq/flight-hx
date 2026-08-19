@@ -92,8 +92,8 @@ class BitmapText {
     var runtime:BitmapTextRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getNode2DRuntime(({ final __callArgument16:Dynamic = target; __callArgument16; })) : BitmapTextRuntime);
     for (page in _Runtime.iterable((cast runtime : BitmapTextRuntime).pages)) {
-      ((cast page : BitmapTextPage).ids = (cast reserveUint16Array((cast page : BitmapTextPage).ids, (cast glyphCapacity : Float)) : flighthq._internal._UInt16Array));
-      ((cast page : BitmapTextPage).transforms = (cast reserveFloat32Array((cast page : BitmapTextPage).transforms, (cast (glyphCapacity * BitmapText.BITMAP_TEXT_TRANSFORM_STRIDE__bitmapText) : Float)) : flighthq._internal._Float32Array));
+      (page.ids = cast ((cast reserveUint16Array(page.ids, (cast glyphCapacity : Float)) : flighthq._internal._UInt16Array) : flighthq._internal._UInt16Array));
+      (page.transforms = cast ((cast reserveFloat32Array(page.transforms, (cast (glyphCapacity * BitmapText.BITMAP_TEXT_TRANSFORM_STRIDE__bitmapText) : Float)) : flighthq._internal._Float32Array) : flighthq._internal._Float32Array));
     }
   }
 

@@ -16,12 +16,12 @@ import flighthq.types.TextShaper.TextShaperBackend;
 
 class TextShaperRun {
   public static function clearShapedRun(run:ShapedRun):ShapedRun {
-    ((cast run : ShapedRun).advanceWidth = 0.0);
-    ((cast run : ShapedRun).direction = 'LeftToRight');
-    ((cast run : ShapedRun).font = null);
-    ((cast run : ShapedRun).glyphCount = 0.0);
-    _Runtime.setLength((cast run : ShapedRun).glyphs, 0.0);
-    ((cast run : ShapedRun).script = '');
+    (run.advanceWidth = cast (0.0 : Float));
+    (run.direction = cast ('LeftToRight' : TextDirection));
+    (run.font = cast (null : Null<FontResource>));
+    (run.glyphCount = cast (0.0 : Float));
+    _Runtime.setLength(run.glyphs, 0.0);
+    (run.script = cast ('' : String));
     return cast run;
     return cast null;
   }
@@ -147,21 +147,21 @@ class TextShaperRun {
     backend = (cast getTextShaperBackend() : Null<TextShaperBackend>);
     if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy((cast backend : TextShaperBackend).shapeRun) : Bool)) : Bool)) { return cast false; }
     result = (cast backend : TextShaperBackend).shapeRun((cast text : String), ({ final __callArgument6:Dynamic = format; __callArgument6; }), ({ final __callArgument7:Dynamic = options; __callArgument7; }));
-    glyphs = (cast out : ShapedRun).glyphs;
-    ((cast out : ShapedRun).advanceWidth = (cast result : ShapedRun).advanceWidth);
-    ((cast out : ShapedRun).direction = (cast result : ShapedRun).direction);
-    ((cast out : ShapedRun).font = (cast result : ShapedRun).font);
-    ((cast out : ShapedRun).glyphCount = (cast result : ShapedRun).glyphCount);
-    ((cast out : ShapedRun).script = (cast result : ShapedRun).script);
+    glyphs = out.glyphs;
+    (out.advanceWidth = cast (result.advanceWidth : Float));
+    (out.direction = cast (result.direction : TextDirection));
+    (out.font = cast (result.font : Null<FontResource>));
+    (out.glyphCount = cast (result.glyphCount : Float));
+    (out.script = cast (result.script : String));
     _Runtime.setLength(glyphs, 0.0);
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field((cast result : ShapedRun).glyphs, 'length') : Float)) : Bool)) {
-        _Runtime.callProperty(glyphs, 'push', cast ([flighthq._internal._StaticIndex.readArray((cast result : ShapedRun).glyphs, i)] : Array<Dynamic>));
+      while ((cast ((cast i : Float) < (cast _Runtime.field(result.glyphs, 'length') : Float)) : Bool)) {
+        _Runtime.callProperty(glyphs, 'push', cast ([flighthq._internal._StaticIndex.readArray(result.glyphs, i)] : Array<Dynamic>));
         i++;
       }
     }
-    ((cast out : ShapedRun).glyphs = glyphs);
+    (out.glyphs = cast (glyphs : Array<ShapedGlyph>));
     return cast true;
     return cast null;
   }
