@@ -518,6 +518,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#GlPbrProgram',
     purpose: 'reviewed escape-free WebGL PBR program',
   },
+  {
+    declarationFingerprint: 'sha256:58ebca8ad2f0cc535020211940a5e2321e01db30093d6a5988a44efb977cdd04',
+    id: '@flighthq/types:interface#BevelEffect',
+    purpose: 'reviewed escape-free bevel effect',
+  },
+  {
+    declarationFingerprint: 'sha256:6848511a980718c7082335e4839bb93de5a772a3a8714f0f1a720796bc2ca393',
+    id: '@flighthq/types:interface#DropShadowEffect',
+    purpose: 'reviewed escape-free drop-shadow effect',
+  },
+  {
+    declarationFingerprint: 'sha256:76e90209baf6a5c6e39df6d8af199bc57e81f9812b2b9e6407b949000f3c38ab',
+    id: '@flighthq/types:interface#GradientBevelEffect',
+    purpose: 'reviewed escape-free gradient-bevel effect',
+  },
+  {
+    declarationFingerprint: 'sha256:7183cdb448684c12099a20b237230f777d4b82a482de25e13c022cf188053e0b',
+    id: '@flighthq/types:interface#InnerShadowEffect',
+    purpose: 'reviewed escape-free inner-shadow effect',
+  },
+  {
+    declarationFingerprint: 'sha256:ec80a0d48ff955f3df6a19bad5643e1e576384f33c4c3ba299bd5e14d2253eff',
+    id: '@flighthq/types:interface#OuterGlowEffect',
+    purpose: 'reviewed escape-free outer-glow effect',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

@@ -19,9 +19,9 @@ class GradientBevelEffect {
   public static function getGradientBevelEffectPadding(effect:flighthq.types.GradientBevelEffect):RenderEffectPadding {
     var angle:Float = cast _Runtime.UNDEFINED;
     var distance:Float = cast _Runtime.UNDEFINED;
-    angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
-    distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
-    return cast (cast getDirectionalRenderEffectPadding((cast _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0) : Float), (cast _Runtime.multiplyNumbers(HxMath.cos(angle), distance) : Float), (cast _Runtime.multiplyNumbers(HxMath.sin(angle), distance) : Float)) : RenderEffectPadding);
+    angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(effect.angle, function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
+    distance = _Runtime.coalesce(effect.distance, function():Dynamic return cast 4.0);
+    return cast (cast getDirectionalRenderEffectPadding((cast _Runtime.coalesce(effect.blurX, function():Dynamic return cast 4.0) : Float), (cast _Runtime.coalesce(effect.blurY, function():Dynamic return cast 4.0) : Float), (cast _Runtime.multiplyNumbers(HxMath.cos(angle), distance) : Float), (cast _Runtime.multiplyNumbers(HxMath.sin(angle), distance) : Float)) : RenderEffectPadding);
     return cast null;
   }
 

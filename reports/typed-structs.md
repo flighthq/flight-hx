@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1506 |
-| Direct schemas | 498 |
+| Audit-only schemas | 1501 |
+| Direct schemas | 503 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 10161 |
-| Directly emitted accesses | 20505 |
+| Pending accesses | 9994 |
+| Directly emitted accesses | 20672 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1506 |
+| Newly discovered, audit-only | 1501 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -180,7 +180,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#AudioResourceUrl` | `direct` | `preserved` | `@flighthq/types:interface#AudioResourceUrl` | broad asset document | 2 | 3 | 0 | 0 | 0 | 3 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AutoExposureEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BarrelDistortionEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#BevelEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 39 | 0 | 0 | 39 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#BevelEffect` | `direct` | `new` | — | reviewed escape-free bevel effect | 13 | 39 | 0 | 0 | 0 | 39 | 0 | 0 | yes | — |
 | `@flighthq/types:type#BidiClass` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#BidiClassBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#BidiDirection` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -448,7 +448,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#DomTextInputOverlay` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#DomTextureResolver` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#DragForce` | `direct` | `preserved` | `@flighthq/types:interface#DragForce` | broad asset document | 2 | 3 | 0 | 0 | 0 | 3 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#DropShadowEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 37 | 0 | 0 | 37 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#DropShadowEffect` | `direct` | `new` | — | reviewed escape-free drop-shadow effect | 10 | 37 | 0 | 0 | 0 | 37 | 0 | 0 | yes | — |
 | `@flighthq/types:type#EasingFunction` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#EasingSegment` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 1 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#EasingStepsGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
@@ -723,7 +723,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GlyphRasterizerBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:interface#GlyphSource` | `direct` | `preserved` | `@flighthq/types:interface#GlyphSource` | broad asset document | 4 | 0 | 0 | 0 | 0 | 0 | 5 | 5 | yes | — |
 | `@flighthq/types:interface#GodRaysEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 26 | 0 | 0 | 26 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#GradientBevelEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 12 | 34 | 0 | 0 | 34 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GradientBevelEffect` | `direct` | `new` | — | reviewed escape-free gradient-bevel effect | 12 | 34 | 0 | 0 | 0 | 34 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GradientGlowEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 25 | 0 | 0 | 25 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GradientSpread` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#GradientType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -784,7 +784,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#ImportDiagnosticSeverity` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#InnerEffectSourceMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#InnerGlowEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 22 | 0 | 0 | 22 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#InnerShadowEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 30 | 0 | 0 | 30 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#InnerShadowEffect` | `direct` | `new` | — | reviewed escape-free inner-shadow effect | 10 | 30 | 0 | 0 | 0 | 30 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputGamepadAxisData` | `direct` | `preserved` | `@flighthq/types:interface#InputGamepadAxisData` | gamepad-axis input result record | 4 | 3 | 4 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputGamepadButtonData` | `direct` | `preserved` | `@flighthq/types:interface#InputGamepadButtonData` | gamepad-button input result record | 4 | 4 | 4 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputGamepadConnectData` | `direct` | `preserved` | `@flighthq/types:interface#InputGamepadConnectData` | gamepad-connection input result record | 3 | 4 | 6 | 0 | 0 | 10 | 0 | 0 | yes | — |
@@ -1063,7 +1063,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#OrientationReading` | `direct` | `preserved` | `@flighthq/types:interface#OrientationReading` | broad host document | 8 | 19 | 30 | 0 | 0 | 49 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#OrthographicProjection` | `direct` | `relocated` | `@flighthq/types:interface#OrthographicProjection` | orthographic-camera projection aggregate | 3 | 9 | 5 | 0 | 0 | 14 | 12 | 12 | yes | — |
 | `@flighthq/types:interface#OrthographicProjectionOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#OuterGlowEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 27 | 0 | 0 | 27 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#OuterGlowEffect` | `direct` | `new` | — | reviewed escape-free outer-glow effect | 8 | 27 | 0 | 0 | 0 | 27 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#OutlineEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PackableRectangle` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 38 | 0 | 0 | 38 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PackedRectangle` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |

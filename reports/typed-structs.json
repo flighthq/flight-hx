@@ -23815,9 +23815,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 39,
+        "directAccesses": 39,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -23935,7 +23935,7 @@
       },
       "name": "BevelEffect",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free bevel effect",
       "reasons": [],
       "source": "upstream/packages/types/src/BevelEffect.ts",
       "sourceProvenance": {
@@ -69952,9 +69952,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 37,
+        "directAccesses": 37,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -70048,7 +70048,7 @@
       },
       "name": "DropShadowEffect",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free drop-shadow effect",
       "reasons": [],
       "source": "upstream/packages/types/src/DropShadowEffect.ts",
       "sourceProvenance": {
@@ -144890,9 +144890,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 34,
+        "directAccesses": 34,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -145002,7 +145002,7 @@
       },
       "name": "GradientBevelEffect",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free gradient-bevel effect",
       "reasons": [],
       "source": "upstream/packages/types/src/GradientBevelEffect.ts",
       "sourceProvenance": {
@@ -158007,9 +158007,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 30,
+        "directAccesses": 30,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -158103,7 +158103,7 @@
       },
       "name": "InnerShadowEffect",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free inner-shadow effect",
       "reasons": [],
       "source": "upstream/packages/types/src/InnerShadowEffect.ts",
       "sourceProvenance": {
@@ -213278,9 +213278,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 27,
+        "directAccesses": 27,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -213358,7 +213358,7 @@
       },
       "name": "OuterGlowEffect",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free outer-glow effect",
       "reasons": [],
       "source": "upstream/packages/types/src/OuterGlowEffect.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1506,
+      "newAuditOnly": 1501,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1506,
+    "auditOnlySchemas": 1501,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 20505,
-    "directSchemas": 498,
+    "directAccesses": 20672,
+    "directSchemas": 503,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 10161,
+    "pendingAccesses": 9994,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

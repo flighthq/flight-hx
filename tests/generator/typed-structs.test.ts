@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_506,
+      newAuditOnly: 1_501,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(500);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(505);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_506);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_501);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(98);
+    expect(newDirect).toHaveLength(103);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -600,6 +600,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'GlPbrProgram',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free WebGL PBR program',
+        }),
+        expect.objectContaining({
+          name: 'BevelEffect',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free bevel effect',
+        }),
+        expect.objectContaining({
+          name: 'DropShadowEffect',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free drop-shadow effect',
+        }),
+        expect.objectContaining({
+          name: 'GradientBevelEffect',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free gradient-bevel effect',
+        }),
+        expect.objectContaining({
+          name: 'InnerShadowEffect',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free inner-shadow effect',
+        }),
+        expect.objectContaining({
+          name: 'OuterGlowEffect',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free outer-glow effect',
         }),
       ]),
     );
@@ -1093,6 +1118,31 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:6abe913b84fc928aa0aa4bbda552125819c350c09026b795363905f3f0410759',
         id: '@flighthq/types:interface#GlPbrProgram',
         purpose: 'reviewed escape-free WebGL PBR program',
+      },
+      {
+        declarationFingerprint: 'sha256:58ebca8ad2f0cc535020211940a5e2321e01db30093d6a5988a44efb977cdd04',
+        id: '@flighthq/types:interface#BevelEffect',
+        purpose: 'reviewed escape-free bevel effect',
+      },
+      {
+        declarationFingerprint: 'sha256:6848511a980718c7082335e4839bb93de5a772a3a8714f0f1a720796bc2ca393',
+        id: '@flighthq/types:interface#DropShadowEffect',
+        purpose: 'reviewed escape-free drop-shadow effect',
+      },
+      {
+        declarationFingerprint: 'sha256:76e90209baf6a5c6e39df6d8af199bc57e81f9812b2b9e6407b949000f3c38ab',
+        id: '@flighthq/types:interface#GradientBevelEffect',
+        purpose: 'reviewed escape-free gradient-bevel effect',
+      },
+      {
+        declarationFingerprint: 'sha256:7183cdb448684c12099a20b237230f777d4b82a482de25e13c022cf188053e0b',
+        id: '@flighthq/types:interface#InnerShadowEffect',
+        purpose: 'reviewed escape-free inner-shadow effect',
+      },
+      {
+        declarationFingerprint: 'sha256:ec80a0d48ff955f3df6a19bad5643e1e576384f33c4c3ba299bd5e14d2253eff',
+        id: '@flighthq/types:interface#OuterGlowEffect',
+        purpose: 'reviewed escape-free outer-glow effect',
       },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
@@ -1633,6 +1683,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const directionalEffectCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['BevelEffect', 'DropShadowEffect', 'GradientBevelEffect', 'InnerShadowEffect', 'OuterGlowEffect'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -1673,22 +1732,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_506,
+      auditOnlySchemas: 1_501,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 20_505,
-      directSchemas: 498,
+      directAccesses: 20_672,
+      directSchemas: 503,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 10_161,
+      pendingAccesses: 9_994,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_506,
+      newAuditOnly: 1_501,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -1716,7 +1775,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(20_505);
+    expect(report.summary.directAccesses).toBe(20_672);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -2497,6 +2556,48 @@ describe('typed struct analysis', () => {
     }
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
+        'BevelEffect',
+        39,
+        'sha256:58ebca8ad2f0cc535020211940a5e2321e01db30093d6a5988a44efb977cdd04',
+        'reviewed escape-free bevel effect',
+      ],
+      [
+        'DropShadowEffect',
+        37,
+        'sha256:6848511a980718c7082335e4839bb93de5a772a3a8714f0f1a720796bc2ca393',
+        'reviewed escape-free drop-shadow effect',
+      ],
+      [
+        'GradientBevelEffect',
+        34,
+        'sha256:76e90209baf6a5c6e39df6d8af199bc57e81f9812b2b9e6407b949000f3c38ab',
+        'reviewed escape-free gradient-bevel effect',
+      ],
+      [
+        'InnerShadowEffect',
+        30,
+        'sha256:7183cdb448684c12099a20b237230f777d4b82a482de25e13c022cf188053e0b',
+        'reviewed escape-free inner-shadow effect',
+      ],
+      [
+        'OuterGlowEffect',
+        27,
+        'sha256:ec80a0d48ff955f3df6a19bad5643e1e576384f33c4c3ba299bd5e14d2253eff',
+        'reviewed escape-free outer-glow effect',
+      ],
+    ] as const) {
+      expect(directionalEffectCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
         'Physics2DWorld',
         217,
         'sha256:a28a94c95326e5405d33feda957ea8ee57399e1266dae9f9d7c88218d945a9fe',
@@ -3104,6 +3205,20 @@ describe('typed struct analysis', () => {
       blockerReasons: ['normalization-provenance'],
       closed: false,
     });
+    for (const directionalEffectId of [
+      '@flighthq/types:interface#BevelEffect',
+      '@flighthq/types:interface#DropShadowEffect',
+      '@flighthq/types:interface#GradientBevelEffect',
+      '@flighthq/types:interface#InnerShadowEffect',
+      '@flighthq/types:interface#OuterGlowEffect',
+    ]) {
+      expect(classAuditById.get(directionalEffectId)?.migration).toEqual({
+        mechanicallyCompatible: false,
+        normalizationReasons: ['cross-schema-transfer', 'object-literal-spread'],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.has(directionalEffectId)).toBe(false);
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -3418,6 +3533,35 @@ describe('typed struct analysis', () => {
       const generatedGlMaterial = readFileSync(path, 'utf8');
       expect(generatedGlMaterial).not.toMatch(/\(cast program : (?:GlClassicProgram|GlPbrProgram)\)\./u);
       expect(generatedGlMaterial).not.toMatch(/_Runtime\.field\(program,/u);
+    }
+    for (const path of [
+      'generated/flighthq/effects/BevelEffect.hx',
+      'generated/flighthq/effects/DropShadowEffect.hx',
+      'generated/flighthq/effects/GradientBevelEffect.hx',
+      'generated/flighthq/effects/InnerShadowEffect.hx',
+      'generated/flighthq/effects/OuterGlowEffect.hx',
+      'generated/flighthq/effectsCanvas/CanvasBevelEffect.hx',
+      'generated/flighthq/effectsCanvas/CanvasDropShadowEffect.hx',
+      'generated/flighthq/effectsCanvas/CanvasEffectDropShadowCss.hx',
+      'generated/flighthq/effectsCanvas/CanvasGradientBevelEffect.hx',
+      'generated/flighthq/effectsCanvas/CanvasInnerShadowEffect.hx',
+      'generated/flighthq/effectsCanvas/CanvasOuterGlowEffect.hx',
+      'generated/flighthq/effectsGl/GlBevelEffect.hx',
+      'generated/flighthq/effectsGl/GlDropShadowEffect.hx',
+      'generated/flighthq/effectsGl/GlGradientBevelEffect.hx',
+      'generated/flighthq/effectsGl/GlInnerShadowEffect.hx',
+      'generated/flighthq/effectsGl/GlOuterGlowEffect.hx',
+      'generated/flighthq/effectsWgpu/WgpuBevelEffect.hx',
+      'generated/flighthq/effectsWgpu/WgpuDropShadowEffect.hx',
+      'generated/flighthq/effectsWgpu/WgpuGradientBevelEffect.hx',
+      'generated/flighthq/effectsWgpu/WgpuInnerShadowEffect.hx',
+      'generated/flighthq/effectsWgpu/WgpuOuterGlowEffect.hx',
+    ]) {
+      const generatedEffect = readFileSync(path, 'utf8');
+      expect(generatedEffect).not.toMatch(/_Runtime\.field\(effect,/u);
+      expect(generatedEffect).not.toMatch(
+        /\(cast effect : (?:BevelEffect|DropShadowEffect|GradientBevelEffect|InnerShadowEffect|OuterGlowEffect)\)\./u,
+      );
     }
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([

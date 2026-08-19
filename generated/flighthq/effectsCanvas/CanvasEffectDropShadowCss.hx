@@ -16,16 +16,16 @@ class CanvasEffectDropShadowCss {
     var radians:Float = cast _Runtime.UNDEFINED;
     var dx:Float = cast _Runtime.UNDEFINED;
     var dy:Float = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw'), 'draw') : Bool)) { return cast null; }
-    blurX = _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0);
-    blurY = _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0);
+    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw'), 'draw') : Bool)) { return cast null; }
+    blurX = _Runtime.coalesce(effect.blurX, function():Dynamic return cast 4.0);
+    blurY = _Runtime.coalesce(effect.blurY, function():Dynamic return cast 4.0);
     if ((cast !_Runtime.strictEquals(blurX, blurY) : Bool)) { return cast null; }
-    angle = _Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 45.0);
-    distance = _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 4.0);
+    angle = _Runtime.coalesce(effect.angle, function():Dynamic return cast 45.0);
+    distance = _Runtime.coalesce(effect.distance, function():Dynamic return cast 4.0);
     radians = ((angle * HxMath.PI) / 180.0);
     dx = HxMath.round(_Runtime.multiplyNumbers(HxMath.cos(radians), distance));
     dy = HxMath.round(_Runtime.multiplyNumbers(HxMath.sin(radians), distance));
-    return cast 'drop-shadow(' + Std.string(dx) + 'px ' + Std.string(dy) + 'px ' + Std.string(blurX) + 'px ' + Std.string((cast CanvasEffectDropShadowCss.cssRgbaFromColor__canvasEffectDropShadowCss((cast _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0) : Float)) : String)) + ')';
+    return cast 'drop-shadow(' + Std.string(dx) + 'px ' + Std.string(dy) + 'px ' + Std.string(blurX) + 'px ' + Std.string((cast CanvasEffectDropShadowCss.cssRgbaFromColor__canvasEffectDropShadowCss((cast _Runtime.coalesce(effect.color, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0) : Float)) : String)) + ')';
     return cast null;
   }
 
@@ -33,11 +33,11 @@ class CanvasEffectDropShadowCss {
   public static function computeOuterGlowEffectCss(effect:OuterGlowEffect):Null<String> {
     var blurX:Float = cast _Runtime.UNDEFINED;
     var blurY:Float = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(_Runtime.field(effect, 'sourceMode'), function():Dynamic return cast 'draw'), 'draw') : Bool)) { return cast null; }
-    blurX = _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 6.0);
-    blurY = _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 6.0);
+    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw'), 'draw') : Bool)) { return cast null; }
+    blurX = _Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0);
+    blurY = _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0);
     if ((cast !_Runtime.strictEquals(blurX, blurY) : Bool)) { return cast null; }
-    return cast 'drop-shadow(0px 0px ' + Std.string(blurX) + 'px ' + Std.string((cast CanvasEffectDropShadowCss.cssRgbaFromColor__canvasEffectDropShadowCss((cast _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 16711680.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'alpha'), function():Dynamic return cast 1.0) : Float)) : String)) + ')';
+    return cast 'drop-shadow(0px 0px ' + Std.string(blurX) + 'px ' + Std.string((cast CanvasEffectDropShadowCss.cssRgbaFromColor__canvasEffectDropShadowCss((cast _Runtime.coalesce(effect.color, function():Dynamic return cast 16711680.0) : Float), (cast _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0) : Float)) : String)) + ')';
     return cast null;
   }
 
