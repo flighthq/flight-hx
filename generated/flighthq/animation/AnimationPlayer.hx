@@ -176,8 +176,8 @@ class AnimationPlayer {
     if ((cast ((cast _Runtime.looseEquals(signal, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(events, 'length'), 0.0) : Bool)) : Bool)) { return; }
     if ((cast ((cast toTime : Float) > (cast fromTime : Float)) : Bool)) {
       for (event in _Runtime.iterable(events)) {
-        if ((cast ((cast (cast event : AnimationClipEvent).time : Float) > (cast toTime : Float)) : Bool)) { break; }
-        if ((cast ((cast ((cast (cast event : AnimationClipEvent).time : Float) > (cast fromTime : Float)) : Bool) || (cast _Runtime.andValue(includeFrom, function():Dynamic return cast _Runtime.strictEquals((cast event : AnimationClipEvent).time, fromTime)) : Bool)) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signal], [event]]), 1); }
+        if ((cast ((cast event.time : Float) > (cast toTime : Float)) : Bool)) { break; }
+        if ((cast ((cast ((cast event.time : Float) > (cast fromTime : Float)) : Bool) || (cast _Runtime.andValue(includeFrom, function():Dynamic return cast _Runtime.strictEquals(event.time, fromTime)) : Bool)) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signal], [event]]), 1); }
       }
       return;
     }
@@ -186,8 +186,8 @@ class AnimationPlayer {
         var index:Float = _Runtime.subtractNumbers(_Runtime.field(events, 'length'), 1.0);
         while ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool)) {
           var event:AnimationClipEvent = flighthq._internal._StaticIndex.readArray(events, index);
-          if ((cast ((cast (cast event : AnimationClipEvent).time : Float) < (cast toTime : Float)) : Bool)) { break; }
-          if ((cast ((cast ((cast (cast event : AnimationClipEvent).time : Float) < (cast fromTime : Float)) : Bool) || (cast _Runtime.andValue(includeFrom, function():Dynamic return cast _Runtime.strictEquals((cast event : AnimationClipEvent).time, fromTime)) : Bool)) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signal], [event]]), 1); }
+          if ((cast ((cast event.time : Float) < (cast toTime : Float)) : Bool)) { break; }
+          if ((cast ((cast ((cast event.time : Float) < (cast fromTime : Float)) : Bool) || (cast _Runtime.andValue(includeFrom, function():Dynamic return cast _Runtime.strictEquals(event.time, fromTime)) : Bool)) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signal], [event]]), 1); }
           index--;
         }
       }
@@ -195,7 +195,7 @@ class AnimationPlayer {
     }
     if ((cast !(cast includeFrom : Bool) : Bool)) { return; }
     for (event in _Runtime.iterable(events)) {
-      if ((cast _Runtime.strictEquals((cast event : AnimationClipEvent).time, fromTime) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signal], [event]]), 1); } else { if ((cast ((cast (cast event : AnimationClipEvent).time : Float) > (cast fromTime : Float)) : Bool)) { break; } }
+      if ((cast _Runtime.strictEquals(event.time, fromTime) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signal], [event]]), 1); } else { if ((cast ((cast event.time : Float) > (cast fromTime : Float)) : Bool)) { break; } }
     }
   }
 

@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_416,
+      newAuditOnly: 1_411,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(590);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(595);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_416);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_411);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(188);
+    expect(newDirect).toHaveLength(193);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1050,6 +1050,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'TransformInherit2D',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free 2D transform inheritance',
+        }),
+        expect.objectContaining({
+          name: 'ExtendedPbrMaterial',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free extended PBR material',
+        }),
+        expect.objectContaining({
+          name: 'TweenPropertyDetail',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free tween property detail',
+        }),
+        expect.objectContaining({
+          name: 'WgpuScene3DShadow',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGPU Scene3D shadow',
+        }),
+        expect.objectContaining({
+          name: 'AnimationClipEvent',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free animation clip event',
+        }),
+        expect.objectContaining({
+          name: 'BitmapTextRuntime',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free bitmap-text runtime',
         }),
       ]),
     );
@@ -1994,6 +2019,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#TransformInherit2D',
         purpose: 'reviewed escape-free 2D transform inheritance',
       },
+      {
+        declarationFingerprint: 'sha256:637bd4055c49e86f20dea391c47c2538d7a327645111fedb7d9904eed914daa0',
+        id: '@flighthq/types:interface#ExtendedPbrMaterial',
+        purpose: 'reviewed escape-free extended PBR material',
+      },
+      {
+        declarationFingerprint: 'sha256:d8b13478c32c050f10440ebe6dc0b1ef9dc33cabde40a9fddb26ab0bd47a1001',
+        id: '@flighthq/types:interface#TweenPropertyDetail',
+        purpose: 'reviewed escape-free tween property detail',
+      },
+      {
+        declarationFingerprint: 'sha256:51198c8940045753f24c81e72c79afa768610dc0b4ad580609876711fd13e77f',
+        id: '@flighthq/types:interface#WgpuScene3DShadow',
+        purpose: 'reviewed escape-free WebGPU Scene3D shadow',
+      },
+      {
+        declarationFingerprint: 'sha256:8d540d5dae11b58c4b1f2a43bfcc742aca87555ad5a5c5249f1800ebbc2a9bed',
+        id: '@flighthq/types:interface#AnimationClipEvent',
+        purpose: 'reviewed escape-free animation clip event',
+      },
+      {
+        declarationFingerprint: 'sha256:d4322da6611176c711c3b0f309d5c790a93ca34a66a751617060eefc278bf549',
+        id: '@flighthq/types:interface#BitmapTextRuntime',
+        purpose: 'reviewed escape-free bitmap-text runtime',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -2731,6 +2781,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const eleventhHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'AnimationClipEvent',
+            'BitmapTextRuntime',
+            'ExtendedPbrMaterial',
+            'TweenPropertyDetail',
+            'WgpuScene3DShadow',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -2771,22 +2834,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_416,
+      auditOnlySchemas: 1_411,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 22_817,
-      directSchemas: 588,
+      directAccesses: 22_910,
+      directSchemas: 593,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 7_849,
+      pendingAccesses: 7_756,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_416,
+      newAuditOnly: 1_411,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -2799,8 +2862,12 @@ describe('typed struct analysis', () => {
       containmentEdges: 2_059,
     });
     expect(typeErasureReport.summary).toMatchObject({
-      byReason: expect.objectContaining({ 'source-never': 116, 'standard-toolkit-boundary': 17_935 }),
-      total: 24_157,
+      byReason: expect.objectContaining({
+        'source-never': 116,
+        'source-unknown': 3_833,
+        'standard-toolkit-boundary': 17_935,
+      }),
+      total: 24_158,
     });
     expect(
       typeErasureReport.modules
@@ -2837,6 +2904,12 @@ describe('typed struct analysis', () => {
       source: 'upstream/packages/interaction/src/nodeInteractionState.ts',
       total: 12,
     });
+    expect(typeErasureReport.modules.find(({ module }) => module === 'flighthq.animation.AnimationClip')).toEqual({
+      byReason: { 'source-unknown': 12, 'standard-toolkit-boundary': 10 },
+      module: 'flighthq.animation.AnimationClip',
+      source: 'upstream/packages/animation/src/animationClip.ts',
+      total: 22,
+    });
     expect(rectangle?.eligible).toBe(true);
     expect(rectangle?.reasons).not.toContain('presence-sensitive-use');
     expect(rectangle?.escapes).toEqual(
@@ -2853,7 +2926,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(22_817);
+    expect(report.summary.directAccesses).toBe(22_910);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -3529,6 +3602,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(tenthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'ExtendedPbrMaterial',
+        19,
+        'sha256:637bd4055c49e86f20dea391c47c2538d7a327645111fedb7d9904eed914daa0',
+        'reviewed escape-free extended PBR material',
+      ],
+      [
+        'TweenPropertyDetail',
+        19,
+        'sha256:d8b13478c32c050f10440ebe6dc0b1ef9dc33cabde40a9fddb26ab0bd47a1001',
+        'reviewed escape-free tween property detail',
+      ],
+      [
+        'WgpuScene3DShadow',
+        19,
+        'sha256:51198c8940045753f24c81e72c79afa768610dc0b4ad580609876711fd13e77f',
+        'reviewed escape-free WebGPU Scene3D shadow',
+      ],
+      [
+        'AnimationClipEvent',
+        18,
+        'sha256:8d540d5dae11b58c4b1f2a43bfcc742aca87555ad5a5c5249f1800ebbc2a9bed',
+        'reviewed escape-free animation clip event',
+      ],
+      [
+        'BitmapTextRuntime',
+        18,
+        'sha256:d4322da6611176c711c3b0f309d5c790a93ca34a66a751617060eefc278bf549',
+        'reviewed escape-free bitmap-text runtime',
+      ],
+    ] as const) {
+      expect(eleventhHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -5251,6 +5366,29 @@ describe('typed struct analysis', () => {
       expect(provenanceById.has(frontierId)).toBe(false);
     }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#ExtendedPbrMaterial', false, ['cross-schema-transfer', 'dynamic-ingress'], null],
+      [
+        '@flighthq/types:interface#TweenPropertyDetail',
+        true,
+        [],
+        { blockerReasons: ['container-transfer'], closed: false },
+      ],
+      ['@flighthq/types:interface#WgpuScene3DShadow', true, [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#AnimationClipEvent', false, ['cross-schema-transfer'], null],
+      ['@flighthq/types:interface#BitmapTextRuntime', false, ['cross-schema-transfer'], null],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons: [],
+      });
+      if (nominalIdentity === null) {
+        expect(provenanceById.has(frontierId)).toBe(false);
+      } else {
+        expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+      }
+    }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, nominalIdentity] of [
       ['@flighthq/types:interface#ElectronApi', true, [], { blockerReasons: [], closed: true }],
       ['@flighthq/types:interface#GlLitProgram', false, ['cross-schema-transfer'], null],
       ['@flighthq/types:interface#LayoutState', true, [], { blockerReasons: [], closed: true }],
@@ -6097,6 +6235,33 @@ describe('typed struct analysis', () => {
     }
     expect(readFileSync('generated/flighthq/effects/ConvolutionEffect.hx', 'utf8')).not.toMatch(
       /_Runtime\.field\(effect,/u,
+    );
+    for (const path of [
+      'generated/flighthq/animation/AnimationClip.hx',
+      'generated/flighthq/animation/AnimationPlayer.hx',
+      'generated/flighthq/bitmaptext/BitmapText.hx',
+      'generated/flighthq/bitmaptext/UpdateBitmapText.hx',
+      'generated/flighthq/materials/ExtendedPbrMaterial.hx',
+      'generated/flighthq/scene2dCanvas/CanvasBitmapText.hx',
+      'generated/flighthq/scene2dGl/GlBitmapText.hx',
+      'generated/flighthq/scene2dWgpu/WgpuBitmapText.hx',
+      'generated/flighthq/scene3dFormats/GltfEmissiveStrength.hx',
+      'generated/flighthq/scene3dFormats/GltfMaterialExtension.hx',
+      'generated/flighthq/scene3dGl/ExtendedPbrGlMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dResources/SceneMaterialTextureRegistry.hx',
+      'generated/flighthq/scene3dWgpu/WgpuMeshPipeline.hx',
+      'generated/flighthq/scene3dWgpu/WgpuShadowMap.hx',
+      'generated/flighthq/tween/Tween.hx',
+      'generated/flighthq/tween/TweenProgress.hx',
+      'generated/flighthq/tween/UpdateTweens.hx',
+      'generated/flighthq/tween/_internal/_Internal.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AnimationClipEvent|BitmapTextRuntime|ExtendedPbrMaterial|TweenPropertyDetail|WgpuScene3DShadow)\)\./u,
+      );
+    }
+    expect(readFileSync('generated/flighthq/animation/AnimationClip.hx', 'utf8')).not.toMatch(
+      /_Runtime\.field\(event,/u,
     );
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
     expect(generatedCanvasRenderState).not.toMatch(

@@ -53,9 +53,9 @@ class TweenProgress {
     easedT = (tween.ease)((cast effectiveT : Float));
     writes = (cast cast ([] : Array<Dynamic>));
     for (detail in _Runtime.iterable(tween.properties)) {
-      var value:Float = ((cast detail : TweenPropertyDetail).start + ((cast detail : TweenPropertyDetail).change * easedT));
+      var value:Float = (detail.start + (detail.change * easedT));
       if ((cast tween.snapping : Bool)) { (value = cast (HxMath.round(value) : Dynamic)); }
-      _Runtime.callProperty(writes, 'push', cast ([{ key: (cast detail : TweenPropertyDetail).key, value: value }] : Array<Dynamic>));
+      _Runtime.callProperty(writes, 'push', cast ([{ key: detail.key, value: value }] : Array<Dynamic>));
     }
     target = (cast tween.target : flighthq._internal._Record<String, Float>);
     for (__iteration0 in _Runtime.iterable(writes)) {

@@ -190,12 +190,12 @@
     },
     {
       "byReason": {
-        "source-unknown": 11,
+        "source-unknown": 12,
         "standard-toolkit-boundary": 10
       },
       "module": "flighthq.animation.AnimationClip",
       "source": "upstream/packages/animation/src/animationClip.ts",
-      "total": 21
+      "total": 22
     },
     {
       "byReason": {
@@ -9542,12 +9542,12 @@
       "source-never": 116,
       "source-null": 74,
       "source-undefined": 264,
-      "source-unknown": 3832,
+      "source-unknown": 3833,
       "standard-toolkit-boundary": 17935,
       "unclassified": 365
     },
     "checkerKnownUnrepresentable": 0,
     "modules": 1119,
-    "total": 24157
+    "total": 24158
   }
 }

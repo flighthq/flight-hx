@@ -14,14 +14,14 @@ class _Internal {
     target = (cast tween.target : flighthq._internal._Record<String, Float>);
     propertyMap = (cast tween.propertyMap : flighthq._internal._Record<String, Float>);
     for (detail in _Runtime.iterable(tween.properties)) {
-      var start:Float = _Runtime.coalesce(_Runtime.getIndex(target, (cast detail : TweenPropertyDetail).key), function():Dynamic return cast 0.0);
-      var end:Float = _Runtime.coalesce(_Runtime.getIndex(propertyMap, (cast detail : TweenPropertyDetail).key), function():Dynamic return cast 0.0);
-      ((cast detail : TweenPropertyDetail).start = start);
-      ((cast detail : TweenPropertyDetail).change = (end - start));
+      var start:Float = _Runtime.coalesce(_Runtime.getIndex(target, detail.key), function():Dynamic return cast 0.0);
+      var end:Float = _Runtime.coalesce(_Runtime.getIndex(propertyMap, detail.key), function():Dynamic return cast 0.0);
+      (detail.start = cast (start : Float));
+      (detail.change = cast ((end - start) : Float));
       if ((cast tween.smartRotation : Bool)) {
-        var change:Float = _Runtime.fmod((_Runtime.fmod((cast detail : TweenPropertyDetail).change, 360.0) + 360.0), 360.0);
+        var change:Float = _Runtime.fmod((_Runtime.fmod(detail.change, 360.0) + 360.0), 360.0);
         if ((cast ((cast change : Float) > (cast 180.0 : Float)) : Bool)) { (change = cast ((change - 360.0) : Dynamic)); }
-        ((cast detail : TweenPropertyDetail).change = change);
+        (detail.change = cast (change : Float));
       }
     }
     (tween.initialized = cast (true : Bool));

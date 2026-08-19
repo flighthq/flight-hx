@@ -968,6 +968,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#TransformInherit2D',
     purpose: 'reviewed escape-free 2D transform inheritance',
   },
+  {
+    declarationFingerprint: 'sha256:637bd4055c49e86f20dea391c47c2538d7a327645111fedb7d9904eed914daa0',
+    id: '@flighthq/types:interface#ExtendedPbrMaterial',
+    purpose: 'reviewed escape-free extended PBR material',
+  },
+  {
+    declarationFingerprint: 'sha256:d8b13478c32c050f10440ebe6dc0b1ef9dc33cabde40a9fddb26ab0bd47a1001',
+    id: '@flighthq/types:interface#TweenPropertyDetail',
+    purpose: 'reviewed escape-free tween property detail',
+  },
+  {
+    declarationFingerprint: 'sha256:51198c8940045753f24c81e72c79afa768610dc0b4ad580609876711fd13e77f',
+    id: '@flighthq/types:interface#WgpuScene3DShadow',
+    purpose: 'reviewed escape-free WebGPU Scene3D shadow',
+  },
+  {
+    declarationFingerprint: 'sha256:8d540d5dae11b58c4b1f2a43bfcc742aca87555ad5a5c5249f1800ebbc2a9bed',
+    id: '@flighthq/types:interface#AnimationClipEvent',
+    purpose: 'reviewed escape-free animation clip event',
+  },
+  {
+    declarationFingerprint: 'sha256:d4322da6611176c711c3b0f309d5c790a93ca34a66a751617060eefc278bf549',
+    id: '@flighthq/types:interface#BitmapTextRuntime',
+    purpose: 'reviewed escape-free bitmap-text runtime',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

@@ -62,7 +62,7 @@ class UpdateBitmapText {
     data = (cast bitmapText : BitmapText).data;
     runtime = (cast getNode2DRuntime(({ final __callArgument0:Dynamic = bitmapText; __callArgument0; })) : BitmapTextRuntime);
     bounds = (cast UpdateBitmapText.ensureBoundsRectangle__updateBitmapText(({ final __callArgument1:Dynamic = runtime; __callArgument1; })) : Rectangle);
-    for (page in _Runtime.iterable((cast runtime : BitmapTextRuntime).pages)) {
+    for (page in _Runtime.iterable(runtime.pages)) {
       (page.instanceCount = cast (0.0 : Float));
       _Runtime.setLength((cast page.atlas : { var regions:Array<TextureAtlasRegion>; }).regions, 0.0);
     }
@@ -205,10 +205,10 @@ class UpdateBitmapText {
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     image = (cast glyphSource : GlyphSource).getGlyphAtlasImage(({ final __callArgument14:Dynamic = page; __callArgument14; }));
     if ((cast _Runtime.strictEquals(image, null) : Bool)) { return cast null; }
-    while ((cast ((cast _Runtime.field((cast runtime : BitmapTextRuntime).pages, 'length') : Float) <= (cast page : Float)) : Bool)) {
-      _Runtime.callProperty((cast runtime : BitmapTextRuntime).pages, 'push', cast ([{ atlas: (cast createTextureAtlas(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : TextureAtlas), ids: new flighthq._internal._UInt16Array(), instanceCount: 0.0, transforms: new flighthq._internal._Float32Array() }] : Array<Dynamic>));
+    while ((cast ((cast _Runtime.field(runtime.pages, 'length') : Float) <= (cast page : Float)) : Bool)) {
+      _Runtime.callProperty(runtime.pages, 'push', cast ([{ atlas: (cast createTextureAtlas(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : TextureAtlas), ids: new flighthq._internal._UInt16Array(), instanceCount: 0.0, transforms: new flighthq._internal._Float32Array() }] : Array<Dynamic>));
     }
-    pageData = flighthq._internal._StaticIndex.readArray((cast runtime : BitmapTextRuntime).pages, page);
+    pageData = flighthq._internal._StaticIndex.readArray(runtime.pages, page);
     if ((cast _Runtime.strictEquals((cast pageData.atlas : { var texture:Null<Texture2D>; }).texture, null) : Bool)) {
       ((cast pageData.atlas : { var texture:Null<Texture2D>; }).texture = cast ((cast createTexture((cast { dimension: '2d', source: image } : Dynamic)) : Texture2D) : Null<Texture2D>));
     } else {
@@ -221,8 +221,8 @@ class UpdateBitmapText {
   }
 
   public static function ensureBoundsRectangle__updateBitmapText(runtime:BitmapTextRuntime):Rectangle {
-    if ((cast _Runtime.strictEquals((cast runtime : BitmapTextRuntime).localBoundsRectangle, null) : Bool)) { ((cast runtime : BitmapTextRuntime).localBoundsRectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle)); }
-    return cast (cast runtime : BitmapTextRuntime).localBoundsRectangle;
+    if ((cast _Runtime.strictEquals(runtime.localBoundsRectangle, null) : Bool)) { (runtime.localBoundsRectangle = cast ((cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle) : Null<Rectangle>)); }
+    return cast runtime.localBoundsRectangle;
     return cast null;
   }
 

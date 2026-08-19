@@ -664,7 +664,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#TurbulenceForce` | 4 | 3 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#Tween` | 91 | 19 | 1 | 6 | 0 | 2 | 2 | 2 | no | `container-transfer` |
 | `@flighthq/types:interface#TweenManager` | 16 | 3 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#TweenPropertyDetail` | 0 | 3 | 1 | 0 | 0 | 1 | 2 | 2 | no | `container-transfer` |
+| `@flighthq/types:interface#TweenPropertyDetail` | 19 | 3 | 1 | 0 | 0 | 1 | 2 | 2 | no | `container-transfer` |
 | `@flighthq/types:interface#UnityAnimationCurve` | 0 | 1 | 1 | 1 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#UnityBurst` | 0 | 4 | 1 | 0 | 0 | 1 | 1 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#UnityCurveKey` | 0 | 2 | 1 | 0 | 1 | 1 | 1 | 1 | no | `container-transfer`, `normalization-provenance` |
@@ -719,7 +719,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#WgpuScene3DFrameBinding` | 0 | 2 | 1 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DIbl` | 0 | 8 | 1 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DLayouts` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#WgpuScene3DShadow` | 0 | 9 | 1 | 1 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#WgpuScene3DShadow` | 19 | 9 | 1 | 1 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuScissorRect` | 36 | 4 | 2 | 0 | 1 | 0 | 2 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#WgpuShapeMeshBuffers` | 24 | 8 | 1 | 0 | 0 | 0 | 2 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuShapeRasterSurface` | 0 | 3 | 1 | 1 | 0 | 0 | 1 | 2 | yes | — |

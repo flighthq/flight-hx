@@ -22,9 +22,9 @@ class UpdateTweens {
     easedT = (tween.ease)((cast effectiveT : Float));
     target = (cast tween.target : flighthq._internal._Record<String, Float>);
     for (detail in _Runtime.iterable(tween.properties)) {
-      var value:Float = ((cast detail : TweenPropertyDetail).start + ((cast detail : TweenPropertyDetail).change * easedT));
+      var value:Float = (detail.start + (detail.change * easedT));
       if ((cast tween.snapping : Bool)) { (value = cast (HxMath.round(value) : Dynamic)); }
-      _Runtime.setIndex(target, (cast detail : TweenPropertyDetail).key, value);
+      _Runtime.setIndex(target, detail.key, value);
     }
     (tween.complete = cast (true : Bool));
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[tween.onComplete]]), 1);
@@ -46,9 +46,9 @@ class UpdateTweens {
     easedT = (tween.ease)((cast effectiveT : Float));
     target = (cast tween.target : flighthq._internal._Record<String, Float>);
     for (detail in _Runtime.iterable(tween.properties)) {
-      var value:Float = ((cast detail : TweenPropertyDetail).start + ((cast detail : TweenPropertyDetail).change * easedT));
+      var value:Float = (detail.start + (detail.change * easedT));
       if ((cast tween.snapping : Bool)) { (value = cast (HxMath.round(value) : Dynamic)); }
-      _Runtime.setIndex(target, (cast detail : TweenPropertyDetail).key, value);
+      _Runtime.setIndex(target, detail.key, value);
     }
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[tween.onUpdate]]), 1);
     if ((cast ((cast t : Float) >= (cast 1.0 : Float)) : Bool)) {

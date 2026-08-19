@@ -27,17 +27,17 @@ class GltfMaterialExtension {
     if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(_Runtime.field(existing, 'kind'), ExtendedPbrMaterialKind) : Bool)) {
       var extended:ExtendedPbrMaterial = (cast (cast existing : flighthq._internal._Any) : ExtendedPbrMaterial);
-      if ((cast _Runtime.callProperty((cast extended : ExtendedPbrMaterial).extensions, 'some', cast ([function(entry:PbrExtension, __unused0:Float, __unused1:Array<PbrExtension>):Bool return _Runtime.strictEquals((cast entry : PbrExtension).kind, (cast extension : PbrExtension).kind)] : Array<Dynamic>)) : Bool)) { return cast false; }
-      ((cast extended : ExtendedPbrMaterial).extensions = _Runtime.concatArrays([_Runtime.toArray((cast extended : ExtendedPbrMaterial).extensions), [extension]]));
+      if ((cast _Runtime.callProperty(extended.extensions, 'some', cast ([function(entry:PbrExtension, __unused0:Float, __unused1:Array<PbrExtension>):Bool return _Runtime.strictEquals((cast entry : PbrExtension).kind, (cast extension : PbrExtension).kind)] : Array<Dynamic>)) : Bool)) { return cast false; }
+      (extended.extensions = cast (_Runtime.concatArrays([_Runtime.toArray(extended.extensions), [extension]]) : Array<PbrExtension>));
       return cast true;
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(existing, 'kind'), StandardPbrMaterialKind) : Bool)) { return cast false; }
     standard = (cast (cast existing : flighthq._internal._Any) : StandardPbrMaterial);
     promoted = (cast createExtendedPbrMaterial(({ final __callArgument1:Dynamic = { extensions: cast ([extension] : Array<Dynamic>), standard: (cast createStandardPbrMaterialProperties(({ final __callArgument0:Dynamic = standard; __callArgument0; })) : StandardPbrMaterialProperties) }; __callArgument1; })) : ExtendedPbrMaterial);
-    ((cast promoted : ExtendedPbrMaterial).alphaCutoff = standard.alphaCutoff);
-    ((cast promoted : ExtendedPbrMaterial).alphaMode = standard.alphaMode);
-    ((cast promoted : ExtendedPbrMaterial).doubleSided = standard.doubleSided);
-    ((cast promoted : ExtendedPbrMaterial).name = standard.name);
+    (promoted.alphaCutoff = cast (standard.alphaCutoff : Float));
+    (promoted.alphaMode = cast (standard.alphaMode : MaterialAlphaMode));
+    (promoted.doubleSided = cast (standard.doubleSided : Bool));
+    (promoted.name = cast (standard.name : Null<String>));
     flighthq._internal._StaticIndex.writeArray(document.materials, index, (cast (cast promoted : flighthq._internal._Any) : MaterialLike));
     return cast true;
     return cast null;
@@ -50,7 +50,7 @@ class GltfMaterialExtension {
     material = flighthq._internal._StaticIndex.readArray(document.materials, index);
     if ((cast ((cast _Runtime.strictEquals(material, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(material, 'kind'), ExtendedPbrMaterialKind) : Bool)) : Bool)) { return cast null; }
     extended = (cast (cast material : flighthq._internal._Any) : ExtendedPbrMaterial);
-    return cast _Runtime.coalesce(_Runtime.find((cast extended : ExtendedPbrMaterial).extensions, function(entry:PbrExtension, __unused2:Float, __unused3:Array<PbrExtension>):Bool return _Runtime.strictEquals((cast entry : PbrExtension).kind, kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(_Runtime.find(extended.extensions, function(entry:PbrExtension, __unused2:Float, __unused3:Array<PbrExtension>):Bool return _Runtime.strictEquals((cast entry : PbrExtension).kind, kind)), function():Dynamic return cast null);
     return cast null;
   }
 }

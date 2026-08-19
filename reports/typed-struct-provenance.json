@@ -53801,7 +53801,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 19,
       "fields": 3,
       "id": "@flighthq/types:interface#TweenPropertyDetail",
       "name": "TweenPropertyDetail",
@@ -56752,7 +56752,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 19,
       "fields": 9,
       "id": "@flighthq/types:interface#WgpuScene3DShadow",
       "name": "WgpuScene3DShadow",

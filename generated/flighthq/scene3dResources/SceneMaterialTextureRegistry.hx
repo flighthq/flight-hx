@@ -56,11 +56,11 @@ class SceneMaterialTextureRegistry {
     registerScene3DMaterialTextures(({ final __callArgument3:Dynamic = registry; __callArgument3; }), (cast ExtendedPbrMaterialKind : String), ({ final __callArgument7:Dynamic = function(material:Material, out:Array<Texture>):Void {
       var extended:ExtendedPbrMaterial = cast _Runtime.UNDEFINED;
       extended = (cast material : ExtendedPbrMaterial);
-      SceneMaterialTextureRegistry.listStandardPbrPropertiesTextures__sceneMaterialTextureRegistry(_Runtime.field(extended, 'standard'), ({ final __callArgument4:Dynamic = out; __callArgument4; }));
+      SceneMaterialTextureRegistry.listStandardPbrPropertiesTextures__sceneMaterialTextureRegistry(extended.standard, ({ final __callArgument4:Dynamic = out; __callArgument4; }));
       {
         var i:Float = 0.0;
-        while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(extended, 'extensions'), 'length') : Float)) : Bool)) {
-          var extension:PbrExtension = flighthq._internal._StaticIndex.readArray(_Runtime.field(extended, 'extensions'), i);
+        while ((cast ((cast i : Float) < (cast _Runtime.field(extended.extensions, 'length') : Float)) : Bool)) {
+          var extension:PbrExtension = flighthq._internal._StaticIndex.readArray(extended.extensions, i);
           var lister:Null<Scene3DPbrExtensionTextureLister> = ((cast registry.extensionListers : flighthq._internal._Map<String, Scene3DPbrExtensionTextureLister>).get((cast extension : PbrExtension).kind));
           if ((cast !_Runtime.strictEquals(lister, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { lister(({ final __callArgument5:Dynamic = extension; __callArgument5; }), ({ final __callArgument6:Dynamic = out; __callArgument6; })); }
           i++;

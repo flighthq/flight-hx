@@ -352,7 +352,7 @@ class WgpuMeshPipeline {
     }
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast 0.0 : Float));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([scene.iblUniformBuffer, 0.0, _Runtime.field(u, 'buffer'), 0.0, WgpuMeshPipeline.IBL_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline] : Array<Dynamic>));
-    shadowView = ((cast !_Runtime.strictEquals(shadow, null) : Bool) ? (cast (cast shadow : WgpuScene3DShadow).depthView : Dynamic) : (cast scene.shadowDummyView : Dynamic));
+    shadowView = ((cast !_Runtime.strictEquals(shadow, null) : Bool) ? (cast (cast shadow : { var depthView:flighthq._internal.dom.GPUTextureView; }).depthView : Dynamic) : (cast scene.shadowDummyView : Dynamic));
     irradianceView = ((cast !_Runtime.strictEquals(ibl, null) : Bool) ? (cast (cast ibl : WgpuScene3DIbl).irradianceCubeView : Dynamic) : (cast scene.iblDummyCubeView : Dynamic));
     prefilteredView = ((cast !_Runtime.strictEquals(ibl, null) : Bool) ? (cast (cast ibl : WgpuScene3DIbl).prefilteredCubeView : Dynamic) : (cast scene.iblDummyCubeView : Dynamic));
     brdfView = ((cast !_Runtime.strictEquals(ibl, null) : Bool) ? (cast (cast ibl : WgpuScene3DIbl).brdfLutView : Dynamic) : (cast scene.iblDummyLutView : Dynamic));
@@ -465,7 +465,7 @@ class WgpuMeshPipeline {
       (scene.shadowDummyView = cast ((cast scene.shadowDummyTexture : flighthq._internal.dom.GPUTexture).createView() : Null<flighthq._internal.dom.GPUTextureView>));
     }
     shadow = (cast WgpuMeshPipeline.writeWgpuShadowSampleUniform__wgpuMeshPipeline(({ final __callArgument60:Dynamic = state; __callArgument60; })) : Null<WgpuScene3DShadow>);
-    view = ((cast !_Runtime.strictEquals(shadow, null) : Bool) ? (cast (cast shadow : WgpuScene3DShadow).depthView : Dynamic) : (cast scene.shadowDummyView : Dynamic));
+    view = ((cast !_Runtime.strictEquals(shadow, null) : Bool) ? (cast (cast shadow : { var depthView:flighthq._internal.dom.GPUTextureView; }).depthView : Dynamic) : (cast scene.shadowDummyView : Dynamic));
     if ((cast ((cast _Runtime.strictEquals(scene.shadowSampleBindGroup, null) : Bool) || (cast !_Runtime.strictEquals(scene.shadowSampleView, view) : Bool)) : Bool)) {
       (scene.shadowSampleBindGroup = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: (cast ensureWgpuShadowSampleLayout(({ final __callArgument61:Dynamic = state; __callArgument61; })) : flighthq._internal.dom.GPUBindGroupLayout), entries: cast ([{ binding: 0.0, resource: { buffer: scene.shadowUniformBuffer } }, { binding: 1.0, resource: view }, { binding: 2.0, resource: scene.shadowComparisonSampler }] : Array<Dynamic>) }] : Array<Dynamic>)) : Null<flighthq._internal.dom.GPUBindGroup>));
       (scene.shadowSampleView = cast (view : Null<flighthq._internal.dom.GPUTextureView>));
@@ -482,7 +482,7 @@ class WgpuMeshPipeline {
     shadow = scene.shadow;
     values = WgpuMeshPipeline._shadowSampleScratch__wgpuMeshPipeline;
     if ((cast !_Runtime.strictEquals(shadow, null) : Bool)) {
-      var matrix:flighthq._internal._Float32Array = (cast (cast shadow : WgpuScene3DShadow).matrix : { var m:flighthq._internal._Float32Array; }).m;
+      var matrix:flighthq._internal._Float32Array = (cast (cast shadow : { var matrix:Matrix4; }).matrix : { var m:flighthq._internal._Float32Array; }).m;
       {
         var index:Float = 0.0;
         while ((cast ((cast index : Float) < (cast 16.0 : Float)) : Bool)) {
@@ -490,10 +490,10 @@ class WgpuMeshPipeline {
           index++;
         }
       }
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 16.0 : Float), (cast ((cast (cast shadow : WgpuScene3DShadow).enabled : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 17.0 : Float), (cast (cast shadow : WgpuScene3DShadow).pcfRadius : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 18.0 : Float), (cast (cast shadow : WgpuScene3DShadow).shadowBias : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 19.0 : Float), (cast (cast shadow : WgpuScene3DShadow).normalBiasWorld : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 16.0 : Float), (cast ((cast (cast shadow : { var enabled:Bool; }).enabled : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 17.0 : Float), (cast (cast shadow : { var pcfRadius:Float; }).pcfRadius : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 18.0 : Float), (cast (cast shadow : { var shadowBias:Float; }).shadowBias : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast values : flighthq._internal._Float32Array), (cast 19.0 : Float), (cast (cast shadow : { var normalBiasWorld:Float; }).normalBiasWorld : Float));
     } else {
       {
         var index:Float = 0.0;

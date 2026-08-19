@@ -176,7 +176,7 @@ class Tween {
           var existingMap:flighthq._internal._Record<String, flighthq._internal._Any> = (cast existing.propertyMap : flighthq._internal._Record<String, flighthq._internal._Any>);
           var overlaps:Bool = false;
           for (detail in _Runtime.iterable(tween.properties)) {
-            if ((cast _Runtime.hasField(existingMap, (cast detail : TweenPropertyDetail).key) : Bool)) {
+            if ((cast _Runtime.hasField(existingMap, detail.key) : Bool)) {
               (overlaps = cast (true : Dynamic));
               break;
             }
@@ -245,9 +245,9 @@ class Tween {
       var easedT:Float = (tween.ease)((cast effectiveT : Float));
       var t:flighthq._internal._Record<String, Float> = (cast tween.target : flighthq._internal._Record<String, Float>);
       for (detail in _Runtime.iterable(tween.properties)) {
-        var value:Float = ((cast detail : TweenPropertyDetail).start + ((cast detail : TweenPropertyDetail).change * easedT));
+        var value:Float = (detail.start + (detail.change * easedT));
         if ((cast tween.snapping : Bool)) { (value = cast (HxMath.round(value) : Dynamic)); }
-        _Runtime.setIndex(t, (cast detail : TweenPropertyDetail).key, value);
+        _Runtime.setIndex(t, detail.key, value);
       }
       if ((cast doSendEvent : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[tween.onComplete]]), 1); }
     }

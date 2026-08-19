@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1416 |
-| Direct schemas | 588 |
+| Audit-only schemas | 1411 |
+| Direct schemas | 593 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 7849 |
-| Directly emitted accesses | 22817 |
+| Pending accesses | 7756 |
+| Directly emitted accesses | 22910 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1416 |
+| Newly discovered, audit-only | 1411 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -90,7 +90,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#AnimationBlendTreeInput` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 14 | 1 | 0 | 15 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationChannel` | `direct` | `new` | — | reviewed escape-free animation channel | 2 | 89 | 0 | 0 | 0 | 89 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationClip` | `direct` | `preserved` | `@flighthq/types:interface#AnimationClip` | broad scene document | 3 | 25 | 0 | 0 | 0 | 25 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#AnimationClipEvent` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 18 | 0 | 0 | 18 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AnimationClipEvent` | `direct` | `new` | — | reviewed escape-free animation clip event | 3 | 18 | 0 | 0 | 0 | 18 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationCrossfade` | `direct` | `new` | — | reviewed escape-free animation crossfade | 9 | 20 | 2 | 1 | 0 | 23 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationCrossfadeChannel` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationCrossfadeOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
@@ -234,7 +234,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#BitmapTextData` | `direct` | `new` | — | reviewed escape-free bitmap-text data | 6 | 13 | 12 | 0 | 0 | 25 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapTextOptions` | `direct` | `preserved` | `@flighthq/types:interface#BitmapTextOptions` | bitmap-text option record | 5 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapTextPage` | `direct` | `new` | — | reviewed escape-free bitmap-text page | 4 | 33 | 6 | 0 | 0 | 39 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#BitmapTextRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 39 | 15 | 3 | 0 | 18 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#BitmapTextRuntime` | `direct` | `new` | — | reviewed escape-free bitmap-text runtime | 39 | 15 | 3 | 0 | 0 | 18 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BlendEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#BlendMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#BlendModeNode` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
@@ -507,7 +507,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#EnvReflectModifierOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#EulerOrder` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#ExposureAdjustment` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ExtendedPbrMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 12 | 7 | 0 | 19 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ExtendedPbrMaterial` | `direct` | `new` | — | reviewed escape-free extended PBR material | 8 | 12 | 7 | 0 | 0 | 19 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ExternalAudioResourceReference` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 20 | yes | — |
 | `@flighthq/types:interface#ExternalImageResourceReference` | `direct` | `renamed` | `@flighthq/types:interface#ExternalSceneResourceRef` | broad scene document | 7 | 5 | 1 | 0 | 0 | 6 | 56 | 56 | yes | — |
 | `@flighthq/types:interface#ExternalTexture` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -1884,7 +1884,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#TweenManager` | `direct` | `preserved` | `@flighthq/types:interface#TweenManager` | broad scene document | 3 | 16 | 0 | 0 | 0 | 16 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TweenManagerOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TweenOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 9 | 0 | 0 | 9 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#TweenPropertyDetail` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 16 | 3 | 0 | 19 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TweenPropertyDetail` | `direct` | `new` | — | reviewed escape-free tween property detail | 3 | 16 | 3 | 0 | 0 | 19 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TweenStaggerOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#UnityAnimationCurve` | `direct` | `relocated` | `@flighthq/particles-formats:interface#UnityAnimationCurve` | broad serialization document | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#UnityBurst` | `direct` | `relocated` | `@flighthq/particles-formats:interface#UnityBurst` | broad serialization document | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -2022,7 +2022,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuScene3DIbl` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 15 | 0 | 0 | 15 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DLayouts` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DRuntime` | `direct` | `new` | — | reviewed escape-free WebGPU scene runtime | 61 | 174 | 100 | 2 | 0 | 276 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuScene3DShadow` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 14 | 5 | 0 | 19 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuScene3DShadow` | `direct` | `new` | — | reviewed escape-free WebGPU Scene3D shadow | 9 | 14 | 5 | 0 | 0 | 19 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScissorRect` | `direct` | `new` | — | reviewed escape-free WebGPU scissor rectangle | 4 | 36 | 0 | 0 | 0 | 36 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuShapeMesh` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuShapeMeshBuffers` | `direct` | `new` | — | reviewed escape-free WebGPU shape-mesh buffers | 8 | 24 | 0 | 0 | 0 | 24 | 0 | 0 | yes | — |

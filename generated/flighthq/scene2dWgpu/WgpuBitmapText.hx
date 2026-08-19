@@ -59,7 +59,7 @@ class WgpuBitmapText {
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
     if ((cast _Runtime.strictEquals(runtime.renderPass, null) : Bool)) { return; }
     source = (cast (cast node : RenderProxy2D).source : BitmapText);
-    pages = (cast (cast getNode2DRuntime(({ final __callArgument1:Dynamic = source; __callArgument1; })) : BitmapTextRuntime) : BitmapTextRuntime).pages;
+    pages = (cast (cast getNode2DRuntime(({ final __callArgument1:Dynamic = source; __callArgument1; })) : BitmapTextRuntime) : { var pages:Array<BitmapTextPage>; }).pages;
     material = (cast node : RenderProxy2D).material;
     materialRenderer = (cast resolveWgpuMaterialRenderer(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast material : Dynamic)) : Null<WgpuMaterialRenderer>);
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }

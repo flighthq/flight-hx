@@ -33,7 +33,7 @@ class CanvasBitmapText {
     var roundPixels:Bool = cast _Runtime.UNDEFINED;
     var restoreMaterial:Bool = cast _Runtime.UNDEFINED;
     source = (cast (cast node : RenderProxy2D).source : BitmapText);
-    pages = (cast (cast getNode2DRuntime(({ final __callArgument0:Dynamic = source; __callArgument0; })) : BitmapTextRuntime) : BitmapTextRuntime).pages;
+    pages = (cast (cast getNode2DRuntime(({ final __callArgument0:Dynamic = source; __callArgument0; })) : BitmapTextRuntime) : { var pages:Array<BitmapTextPage>; }).pages;
     context = (cast state : CanvasRenderState).context;
     transform = (cast node : RenderProxy2D).transform2D;
     roundPixels = (cast state : CanvasRenderState).roundPixels;

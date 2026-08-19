@@ -58,7 +58,7 @@ class GlBitmapText {
     var alpha:Float = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime);
     source = (cast (cast node : RenderProxy2D).source : BitmapText);
-    pages = (cast (cast getNode2DRuntime(({ final __callArgument1:Dynamic = source; __callArgument1; })) : BitmapTextRuntime) : BitmapTextRuntime).pages;
+    pages = (cast (cast getNode2DRuntime(({ final __callArgument1:Dynamic = source; __callArgument1; })) : BitmapTextRuntime) : { var pages:Array<BitmapTextPage>; }).pages;
     material = (cast node : RenderProxy2D).material;
     materialRenderer = (cast resolveGlMaterialRenderer(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast material : Dynamic)) : Null<GlMaterialRenderer>);
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
