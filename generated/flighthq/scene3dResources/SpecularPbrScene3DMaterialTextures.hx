@@ -26,8 +26,8 @@ class SpecularPbrScene3DMaterialTextures {
     registerScene3DPbrExtensionTextures(({ final __callArgument0:Dynamic = registry; __callArgument0; }), (cast SpecularPbrExtensionKind : String), ({ final __callArgument1:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
       var specular:SpecularPbrExtension = cast _Runtime.UNDEFINED;
       specular = (cast extension : SpecularPbrExtension);
-      if ((cast !_Runtime.strictEquals(_Runtime.field(specular, 'specularMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(specular, 'specularMap')] : Array<Dynamic>)); }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(specular, 'specularColorMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(specular, 'specularColorMap')] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(specular.specularMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([specular.specularMap] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(specular.specularColorMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([specular.specularColorMap] : Array<Dynamic>)); }
     }; __callArgument1; }));
   }
 }

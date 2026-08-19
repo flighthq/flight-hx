@@ -26,9 +26,9 @@ class ClearcoatPbrScene3DMaterialTextures {
     registerScene3DPbrExtensionTextures(({ final __callArgument0:Dynamic = registry; __callArgument0; }), (cast ClearcoatPbrExtensionKind : String), ({ final __callArgument1:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
       var clearcoat:ClearcoatPbrExtension = cast _Runtime.UNDEFINED;
       clearcoat = (cast extension : ClearcoatPbrExtension);
-      if ((cast !_Runtime.strictEquals(_Runtime.field(clearcoat, 'clearcoatMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(clearcoat, 'clearcoatMap')] : Array<Dynamic>)); }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(clearcoat, 'clearcoatNormalMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(clearcoat, 'clearcoatNormalMap')] : Array<Dynamic>)); }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(clearcoat, 'clearcoatRoughnessMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(clearcoat, 'clearcoatRoughnessMap')] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(clearcoat.clearcoatMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([clearcoat.clearcoatMap] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(clearcoat.clearcoatNormalMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([clearcoat.clearcoatNormalMap] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(clearcoat.clearcoatRoughnessMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([clearcoat.clearcoatRoughnessMap] : Array<Dynamic>)); }
     }; __callArgument1; }));
   }
 }

@@ -26,8 +26,8 @@ class TransmissionVolumePbrScene3DMaterialTextures {
     registerScene3DPbrExtensionTextures(({ final __callArgument0:Dynamic = registry; __callArgument0; }), (cast TransmissionVolumePbrExtensionKind : String), ({ final __callArgument1:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
       var transmission:TransmissionVolumePbrExtension = cast _Runtime.UNDEFINED;
       transmission = (cast extension : TransmissionVolumePbrExtension);
-      if ((cast !_Runtime.strictEquals(_Runtime.field(transmission, 'transmissionMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(transmission, 'transmissionMap')] : Array<Dynamic>)); }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(transmission, 'thicknessMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(transmission, 'thicknessMap')] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(transmission.transmissionMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([transmission.transmissionMap] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(transmission.thicknessMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([transmission.thicknessMap] : Array<Dynamic>)); }
     }; __callArgument1; }));
   }
 }

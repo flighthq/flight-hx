@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1471 |
-| Direct schemas | 533 |
+| Audit-only schemas | 1466 |
+| Direct schemas | 538 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 9343 |
-| Directly emitted accesses | 21323 |
+| Pending accesses | 9232 |
+| Directly emitted accesses | 21434 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1471 |
+| Newly discovered, audit-only | 1466 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -343,7 +343,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ChannelMixerAdjustment` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ChromaticAberrationEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CircleCollider` | `direct` | `preserved` | `@flighthq/types:interface#CircleCollider` | broad asset document | 7 | 17 | 0 | 0 | 0 | 17 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#ClearcoatPbrExtension` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 25 | 0 | 0 | 25 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ClearcoatPbrExtension` | `direct` | `new` | — | reviewed escape-free clearcoat PBR extension | 10 | 25 | 0 | 0 | 0 | 25 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ClipboardBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 23 | 0 | 0 | 0 | 0 | 0 | 0 | 34 | yes | — |
 | `@flighthq/types:interface#ClipboardBookmark` | `direct` | `preserved` | `@flighthq/types:interface#ClipboardBookmark` | broad host document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ClipboardWatch` | `direct` | `preserved` | `@flighthq/types:interface#ClipboardWatch` | broad host document | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
@@ -818,7 +818,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#IpcPort` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#IpcSignals` | `direct` | `preserved` | `@flighthq/types:interface#IpcSignals` | broad host document | 2 | 3 | 0 | 0 | 0 | 3 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#IpcTarget` | `direct` | `preserved` | `@flighthq/types:interface#IpcTarget` | broad host document | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#IridescencePbrExtension` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 22 | 0 | 0 | 22 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#IridescencePbrExtension` | `direct` | `new` | — | reviewed escape-free iridescence PBR extension | 9 | 22 | 0 | 0 | 0 | 22 | 0 | 0 | yes | — |
 | `@flighthq/types:type#JointStyle` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#KeyboardEventData` | `direct` | `new` | — | reviewed escape-free keyboard event data | 6 | 56 | 6 | 0 | 0 | 62 | 0 | 0 | yes | — |
 | `@flighthq/types:type#KeyCode` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
@@ -1573,7 +1573,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#SpatialObjectId` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#SpatialPair` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SpecularGlossinessPbrMaterial` | `direct` | `new` | — | reviewed escape-free specular-glossiness PBR material | 18 | 36 | 16 | 0 | 0 | 52 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#SpecularPbrExtension` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 15 | 0 | 0 | 15 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SpecularPbrExtension` | `direct` | `new` | — | reviewed escape-free specular PBR extension | 7 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SphereCollider` | `direct` | `preserved` | `@flighthq/types:interface#SphereCollider` | broad asset document | 8 | 22 | 0 | 0 | 0 | 22 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SpineAlphaKeyframe` | `direct` | `relocated` | `@flighthq/particles-formats:interface#SpineAlphaKeyframe` | broad serialization document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#SpineBlendMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1870,7 +1870,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#Transform3DLike` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 19 | yes | — |
 | `@flighthq/types:type#Transform3DNode` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 12 | no | `unsupported-shape` |
 | `@flighthq/types:interface#TransformInherit2D` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 20 | 0 | 0 | 20 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TransmissionVolumePbrExtension` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 24 | 7 | 0 | 31 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TransmissionVolumePbrExtension` | `direct` | `new` | — | reviewed escape-free transmission-volume PBR extension | 10 | 24 | 7 | 0 | 0 | 31 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TrayBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 19 | yes | — |
 | `@flighthq/types:interface#TrayBalloonOptions` | `direct` | `preserved` | `@flighthq/types:interface#TrayBalloonOptions` | tray-balloon option record | 7 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TrayCapabilities` | `direct` | `preserved` | `@flighthq/types:interface#TrayCapabilities` | broad host document | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -2048,7 +2048,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WindowBounds` | `direct` | `preserved` | `@flighthq/types:interface#WindowBounds` | broad host document | 4 | 0 | 24 | 0 | 0 | 24 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WindowOptions` | `direct` | `preserved` | `@flighthq/types:interface#WindowOptions` | broad host document | 18 | 75 | 0 | 0 | 0 | 75 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WireframeMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 6 | 2 | 0 | 8 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WrappedDiffusePbrExtension` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 18 | 0 | 0 | 18 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WrappedDiffusePbrExtension` | `direct` | `new` | — | reviewed escape-free wrapped-diffuse PBR extension | 8 | 18 | 0 | 0 | 0 | 18 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#XmlElement` | `direct` | `relocated` | `@flighthq/xml:interface#XmlElement` | broad serialization document | 5 | 74 | 0 | 0 | 0 | 74 | 0 | 0 | yes | — |
 
 ## Member-level escapes

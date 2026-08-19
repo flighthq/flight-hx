@@ -26,8 +26,8 @@ class WrappedDiffusePbrScene3DMaterialTextures {
     registerScene3DPbrExtensionTextures(({ final __callArgument0:Dynamic = registry; __callArgument0; }), (cast WrappedDiffusePbrExtensionKind : String), ({ final __callArgument1:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
       var wrappedDiffuse:WrappedDiffusePbrExtension = cast _Runtime.UNDEFINED;
       wrappedDiffuse = (cast extension : WrappedDiffusePbrExtension);
-      if ((cast !_Runtime.strictEquals(_Runtime.field(wrappedDiffuse, 'wrappedDiffuseMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(wrappedDiffuse, 'wrappedDiffuseMap')] : Array<Dynamic>)); }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(wrappedDiffuse, 'thicknessMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(wrappedDiffuse, 'thicknessMap')] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(wrappedDiffuse.wrappedDiffuseMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([wrappedDiffuse.wrappedDiffuseMap] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(wrappedDiffuse.thicknessMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([wrappedDiffuse.thicknessMap] : Array<Dynamic>)); }
     }; __callArgument1; }));
   }
 }

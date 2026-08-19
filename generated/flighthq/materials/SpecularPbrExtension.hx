@@ -27,7 +27,7 @@ class SpecularPbrExtension {
   }
 
   public static function isValidSpecularPbrExtension(value:flighthq.types.SpecularPbrExtension):Bool {
-    return cast _Runtime.andValue(((cast (cast isValidMaterialWeight((cast _Runtime.field(value, 'specular') : Float)) : Bool) : Bool) && (cast (cast isValidPbrUvSet((cast _Runtime.field(value, 'specularColorMapUvSet') : Float)) : Bool) : Bool)), function():Dynamic return cast (cast isValidPbrUvSet((cast _Runtime.field(value, 'specularMapUvSet') : Float)) : Bool));
+    return cast _Runtime.andValue(((cast (cast isValidMaterialWeight((cast value.specular : Float)) : Bool) : Bool) && (cast (cast isValidPbrUvSet((cast value.specularColorMapUvSet : Float)) : Bool) : Bool)), function():Dynamic return cast (cast isValidPbrUvSet((cast value.specularMapUvSet : Float)) : Bool));
     return cast null;
   }
 }

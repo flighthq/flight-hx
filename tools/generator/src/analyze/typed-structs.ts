@@ -693,6 +693,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#TiledGid',
     purpose: 'reviewed escape-free Tiled gid',
   },
+  {
+    declarationFingerprint: 'sha256:d2e5d9acdd16ea800ff99d016bd6da24a62a410c5efa12e734e9e2649f325602',
+    id: '@flighthq/types:interface#TransmissionVolumePbrExtension',
+    purpose: 'reviewed escape-free transmission-volume PBR extension',
+  },
+  {
+    declarationFingerprint: 'sha256:80ae6c1261768bbe66d4437552c4c7ceee1a7368799bb3190699c0895be3795f',
+    id: '@flighthq/types:interface#ClearcoatPbrExtension',
+    purpose: 'reviewed escape-free clearcoat PBR extension',
+  },
+  {
+    declarationFingerprint: 'sha256:09159cce23f7c1cbfcbebf1a7c91d65bc7d23a53e199ec7f509d05b93f7bfa9b',
+    id: '@flighthq/types:interface#IridescencePbrExtension',
+    purpose: 'reviewed escape-free iridescence PBR extension',
+  },
+  {
+    declarationFingerprint: 'sha256:58c73e60264700f5dcd433febea3ead0758d3e062b8cc68c0b35586324582a31',
+    id: '@flighthq/types:interface#WrappedDiffusePbrExtension',
+    purpose: 'reviewed escape-free wrapped-diffuse PBR extension',
+  },
+  {
+    declarationFingerprint: 'sha256:d028a204fbe4ebdd31bb85d2c26f6c239b3c7a8aff40c22b4f9548c15c012e5f',
+    id: '@flighthq/types:interface#SpecularPbrExtension',
+    purpose: 'reviewed escape-free specular PBR extension',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

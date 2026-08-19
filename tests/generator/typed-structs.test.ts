@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_471,
+      newAuditOnly: 1_466,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(535);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(540);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_471);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_466);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(133);
+    expect(newDirect).toHaveLength(138);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -775,6 +775,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'TiledGid',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free Tiled gid',
+        }),
+        expect.objectContaining({
+          name: 'TransmissionVolumePbrExtension',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free transmission-volume PBR extension',
+        }),
+        expect.objectContaining({
+          name: 'ClearcoatPbrExtension',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free clearcoat PBR extension',
+        }),
+        expect.objectContaining({
+          name: 'IridescencePbrExtension',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free iridescence PBR extension',
+        }),
+        expect.objectContaining({
+          name: 'WrappedDiffusePbrExtension',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free wrapped-diffuse PBR extension',
+        }),
+        expect.objectContaining({
+          name: 'SpecularPbrExtension',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free specular PBR extension',
         }),
       ]),
     );
@@ -1444,6 +1469,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#TiledGid',
         purpose: 'reviewed escape-free Tiled gid',
       },
+      {
+        declarationFingerprint: 'sha256:d2e5d9acdd16ea800ff99d016bd6da24a62a410c5efa12e734e9e2649f325602',
+        id: '@flighthq/types:interface#TransmissionVolumePbrExtension',
+        purpose: 'reviewed escape-free transmission-volume PBR extension',
+      },
+      {
+        declarationFingerprint: 'sha256:80ae6c1261768bbe66d4437552c4c7ceee1a7368799bb3190699c0895be3795f',
+        id: '@flighthq/types:interface#ClearcoatPbrExtension',
+        purpose: 'reviewed escape-free clearcoat PBR extension',
+      },
+      {
+        declarationFingerprint: 'sha256:09159cce23f7c1cbfcbebf1a7c91d65bc7d23a53e199ec7f509d05b93f7bfa9b',
+        id: '@flighthq/types:interface#IridescencePbrExtension',
+        purpose: 'reviewed escape-free iridescence PBR extension',
+      },
+      {
+        declarationFingerprint: 'sha256:58c73e60264700f5dcd433febea3ead0758d3e062b8cc68c0b35586324582a31',
+        id: '@flighthq/types:interface#WrappedDiffusePbrExtension',
+        purpose: 'reviewed escape-free wrapped-diffuse PBR extension',
+      },
+      {
+        declarationFingerprint: 'sha256:d028a204fbe4ebdd31bb85d2c26f6c239b3c7a8aff40c22b4f9548c15c012e5f',
+        id: '@flighthq/types:interface#SpecularPbrExtension',
+        purpose: 'reviewed escape-free specular PBR extension',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -2066,6 +2116,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const pbrExtensionCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'ClearcoatPbrExtension',
+            'IridescencePbrExtension',
+            'SpecularPbrExtension',
+            'TransmissionVolumePbrExtension',
+            'WrappedDiffusePbrExtension',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -2106,22 +2169,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_471,
+      auditOnlySchemas: 1_466,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 21_323,
-      directSchemas: 533,
+      directAccesses: 21_434,
+      directSchemas: 538,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 9_343,
+      pendingAccesses: 9_232,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_471,
+      newAuditOnly: 1_466,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -2188,7 +2251,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(21_323);
+    expect(report.summary.directAccesses).toBe(21_434);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -2412,6 +2475,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(tilemapTiledCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'TransmissionVolumePbrExtension',
+        31,
+        'sha256:d2e5d9acdd16ea800ff99d016bd6da24a62a410c5efa12e734e9e2649f325602',
+        'reviewed escape-free transmission-volume PBR extension',
+      ],
+      [
+        'ClearcoatPbrExtension',
+        25,
+        'sha256:80ae6c1261768bbe66d4437552c4c7ceee1a7368799bb3190699c0895be3795f',
+        'reviewed escape-free clearcoat PBR extension',
+      ],
+      [
+        'IridescencePbrExtension',
+        22,
+        'sha256:09159cce23f7c1cbfcbebf1a7c91d65bc7d23a53e199ec7f509d05b93f7bfa9b',
+        'reviewed escape-free iridescence PBR extension',
+      ],
+      [
+        'WrappedDiffusePbrExtension',
+        18,
+        'sha256:58c73e60264700f5dcd433febea3ead0758d3e062b8cc68c0b35586324582a31',
+        'reviewed escape-free wrapped-diffuse PBR extension',
+      ],
+      [
+        'SpecularPbrExtension',
+        15,
+        'sha256:d028a204fbe4ebdd31bb85d2c26f6c239b3c7a8aff40c22b4f9548c15c012e5f',
+        'reviewed escape-free specular PBR extension',
+      ],
+    ] as const) {
+      expect(pbrExtensionCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -4040,6 +4145,20 @@ describe('typed struct analysis', () => {
       observabilityReasons: [],
     });
     expect(provenanceById.has(tilemapId)).toBe(false);
+    for (const pbrExtensionId of [
+      '@flighthq/types:interface#ClearcoatPbrExtension',
+      '@flighthq/types:interface#IridescencePbrExtension',
+      '@flighthq/types:interface#SpecularPbrExtension',
+      '@flighthq/types:interface#TransmissionVolumePbrExtension',
+      '@flighthq/types:interface#WrappedDiffusePbrExtension',
+    ]) {
+      expect(classAuditById.get(pbrExtensionId)?.migration).toEqual({
+        mechanicallyCompatible: false,
+        normalizationReasons: ['cross-schema-transfer'],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.has(pbrExtensionId)).toBe(false);
+    }
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -4442,6 +4561,32 @@ describe('typed struct analysis', () => {
     expect(readFileSync('generated/flighthq/tilemapFormats/TiledProject.hx', 'utf8')).toMatch(
       /var __destructure[0-9]+:TiledGid/u,
     );
+    for (const path of [
+      'generated/flighthq/materials/ClearcoatPbrExtension.hx',
+      'generated/flighthq/materials/IridescencePbrExtension.hx',
+      'generated/flighthq/materials/SpecularPbrExtension.hx',
+      'generated/flighthq/materials/TransmissionVolumePbrExtension.hx',
+      'generated/flighthq/materials/WrappedDiffusePbrExtension.hx',
+      'generated/flighthq/scene3dFormats/GltfTransmissionVolume.hx',
+      'generated/flighthq/scene3dGl/ClearcoatPbrGlExtension.hx',
+      'generated/flighthq/scene3dGl/IridescencePbrGlExtension.hx',
+      'generated/flighthq/scene3dGl/SpecularPbrGlExtension.hx',
+      'generated/flighthq/scene3dGl/TransmissionVolumePbrGlExtension.hx',
+      'generated/flighthq/scene3dGl/WrappedDiffusePbrGlExtension.hx',
+      'generated/flighthq/scene3dResources/ClearcoatPbrScene3DMaterialTextures.hx',
+      'generated/flighthq/scene3dResources/IridescencePbrScene3DMaterialTextures.hx',
+      'generated/flighthq/scene3dResources/SpecularPbrScene3DMaterialTextures.hx',
+      'generated/flighthq/scene3dResources/TransmissionVolumePbrScene3DMaterialTextures.hx',
+      'generated/flighthq/scene3dResources/WrappedDiffusePbrScene3DMaterialTextures.hx',
+    ]) {
+      const generatedPbrExtension = readFileSync(path, 'utf8');
+      expect(generatedPbrExtension).not.toMatch(
+        /_Runtime\.field\((?:clearcoat|extension|iridescence|specular|target|transmission|value|wrappedDiffuse),/u,
+      );
+      expect(generatedPbrExtension).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:ClearcoatPbrExtension|IridescencePbrExtension|SpecularPbrExtension|TransmissionVolumePbrExtension|WrappedDiffusePbrExtension)\)\./u,
+      );
+    }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
     expect(generatedCanvasRenderState).not.toMatch(
       /\(cast (?:runtime|sourceRuntime|targetRuntime) : CanvasRenderStateRuntime\)\./u,

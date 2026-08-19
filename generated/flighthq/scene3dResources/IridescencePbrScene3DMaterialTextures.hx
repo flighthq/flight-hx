@@ -26,8 +26,8 @@ class IridescencePbrScene3DMaterialTextures {
     registerScene3DPbrExtensionTextures(({ final __callArgument0:Dynamic = registry; __callArgument0; }), (cast IridescencePbrExtensionKind : String), ({ final __callArgument1:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
       var iridescence:IridescencePbrExtension = cast _Runtime.UNDEFINED;
       iridescence = (cast extension : IridescencePbrExtension);
-      if ((cast !_Runtime.strictEquals(_Runtime.field(iridescence, 'iridescenceMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(iridescence, 'iridescenceMap')] : Array<Dynamic>)); }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(iridescence, 'iridescenceThicknessMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(iridescence, 'iridescenceThicknessMap')] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(iridescence.iridescenceMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([iridescence.iridescenceMap] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(iridescence.iridescenceThicknessMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([iridescence.iridescenceThicknessMap] : Array<Dynamic>)); }
     }; __callArgument1; }));
   }
 }

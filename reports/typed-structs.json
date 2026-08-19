@@ -51114,9 +51114,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 25,
+        "directAccesses": 25,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -51216,7 +51216,7 @@
       },
       "name": "ClearcoatPbrExtension",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free clearcoat PBR extension",
       "reasons": [],
       "source": "upstream/packages/types/src/ClearcoatPbrExtension.ts",
       "sourceProvenance": {
@@ -163269,9 +163269,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 22,
+        "directAccesses": 22,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -163363,7 +163363,7 @@
       },
       "name": "IridescencePbrExtension",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free iridescence PBR extension",
       "reasons": [],
       "source": "upstream/packages/types/src/IridescencePbrExtension.ts",
       "sourceProvenance": {
@@ -324250,9 +324250,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 15,
+        "directAccesses": 15,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -324328,7 +324328,7 @@
       },
       "name": "SpecularPbrExtension",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free specular PBR extension",
       "reasons": [],
       "source": "upstream/packages/types/src/SpecularPbrExtension.ts",
       "sourceProvenance": {
@@ -379872,9 +379872,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 31,
+        "directAccesses": 31,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -379974,7 +379974,7 @@
       },
       "name": "TransmissionVolumePbrExtension",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free transmission-volume PBR extension",
       "reasons": [],
       "source": "upstream/packages/types/src/TransmissionVolumePbrExtension.ts",
       "sourceProvenance": {
@@ -420830,9 +420830,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 18,
+        "directAccesses": 18,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -420916,7 +420916,7 @@
       },
       "name": "WrappedDiffusePbrExtension",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free wrapped-diffuse PBR extension",
       "reasons": [],
       "source": "upstream/packages/types/src/WrappedDiffusePbrExtension.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1471,
+      "newAuditOnly": 1466,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1471,
+    "auditOnlySchemas": 1466,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 21323,
-    "directSchemas": 533,
+    "directAccesses": 21434,
+    "directSchemas": 538,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 9343,
+    "pendingAccesses": 9232,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"
