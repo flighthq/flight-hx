@@ -543,6 +543,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#OuterGlowEffect',
     purpose: 'reviewed escape-free outer-glow effect',
   },
+  {
+    declarationFingerprint: 'sha256:c5eed51656152d130c5bd39967bda2fdec09e68c7666b1789992993ec2ac9b57',
+    id: '@flighthq/types:interface#GlScissorRect',
+    purpose: 'reviewed escape-free WebGL scissor rectangle',
+  },
+  {
+    declarationFingerprint: 'sha256:34dfe22efbf1d2f4e16ac9a93fc703b8a54032d9ea689c75c5e61549dc76a3c9',
+    id: '@flighthq/types:interface#WgpuScissorRect',
+    purpose: 'reviewed escape-free WebGPU scissor rectangle',
+  },
+  {
+    declarationFingerprint: 'sha256:be617f3f8f9f830df9da893eee28eeb9740c2f15a2e4462f451c6d3191c0ca99',
+    id: '@flighthq/types:interface#CanvasRenderStateRuntime',
+    purpose: 'reviewed escape-free Canvas render-state runtime',
+  },
+  {
+    declarationFingerprint: 'sha256:ea1b2223d50df5b640545106804895714d12cb99a7838ab014ed2e3816d701a9',
+    id: '@flighthq/types:interface#GlRenderEffectPipeline',
+    purpose: 'reviewed escape-free WebGL render-effect pipeline',
+  },
+  {
+    declarationFingerprint: 'sha256:a7039648e61c44e19af4213680f60efe61ad6452ffc0b16c420927d0116c0349',
+    id: '@flighthq/types:interface#WgpuRenderEffectPipeline',
+    purpose: 'reviewed escape-free WebGPU render-effect pipeline',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

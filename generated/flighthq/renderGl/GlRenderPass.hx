@@ -198,7 +198,7 @@ class GlRenderPass {
       return;
     }
     flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SCISSOR_TEST', flighthq._internal.backend.WebGl2Backend.SCISSOR_TEST));
-    flighthq._internal.backend.WebGl2Backend.scissor(gl, _Runtime.field(rect, 'x'), _Runtime.field(rect, 'y'), _Runtime.field(rect, 'width'), _Runtime.field(rect, 'height'));
+    flighthq._internal.backend.WebGl2Backend.scissor(gl, (cast rect : { var x:Float; }).x, (cast rect : { var y:Float; }).y, (cast rect : { var width:Float; }).width, (cast rect : { var height:Float; }).height);
   }
 
   public static function captureGlStencil__glRenderPass(gl:flighthq._internal.dom.WebGL2RenderingContext):SavedGlStencil__glRenderPass {
@@ -222,10 +222,10 @@ class GlRenderPass {
     var y:Float = cast _Runtime.UNDEFINED;
     var right:Float = cast _Runtime.UNDEFINED;
     var top:Float = cast _Runtime.UNDEFINED;
-    x = HxMath.max(_Runtime.field(a, 'x'), _Runtime.field(b, 'x'));
-    y = HxMath.max(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'));
-    right = HxMath.min(_Runtime.addNumbers(_Runtime.field(a, 'x'), _Runtime.field(a, 'width')), _Runtime.addNumbers(_Runtime.field(b, 'x'), _Runtime.field(b, 'width')));
-    top = HxMath.min(_Runtime.addNumbers(_Runtime.field(a, 'y'), _Runtime.field(a, 'height')), _Runtime.addNumbers(_Runtime.field(b, 'y'), _Runtime.field(b, 'height')));
+    x = HxMath.max(a.x, _Runtime.field(b, 'x'));
+    y = HxMath.max(a.y, _Runtime.field(b, 'y'));
+    right = HxMath.min((a.x + a.width), _Runtime.addNumbers(_Runtime.field(b, 'x'), _Runtime.field(b, 'width')));
+    top = HxMath.min((a.y + a.height), _Runtime.addNumbers(_Runtime.field(b, 'y'), _Runtime.field(b, 'height')));
     return cast { height: HxMath.max(0.0, (top - y)), width: HxMath.max(0.0, (right - x)), x: x, y: y };
     return cast null;
   }

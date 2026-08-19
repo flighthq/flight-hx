@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_501,
+      newAuditOnly: 1_496,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(505);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(510);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_501);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_496);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(103);
+    expect(newDirect).toHaveLength(108);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -625,6 +625,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'OuterGlowEffect',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free outer-glow effect',
+        }),
+        expect.objectContaining({
+          name: 'GlScissorRect',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL scissor rectangle',
+        }),
+        expect.objectContaining({
+          name: 'WgpuScissorRect',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGPU scissor rectangle',
+        }),
+        expect.objectContaining({
+          name: 'CanvasRenderStateRuntime',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Canvas render-state runtime',
+        }),
+        expect.objectContaining({
+          name: 'GlRenderEffectPipeline',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL render-effect pipeline',
+        }),
+        expect.objectContaining({
+          name: 'WgpuRenderEffectPipeline',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGPU render-effect pipeline',
         }),
       ]),
     );
@@ -1144,6 +1169,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#OuterGlowEffect',
         purpose: 'reviewed escape-free outer-glow effect',
       },
+      {
+        declarationFingerprint: 'sha256:c5eed51656152d130c5bd39967bda2fdec09e68c7666b1789992993ec2ac9b57',
+        id: '@flighthq/types:interface#GlScissorRect',
+        purpose: 'reviewed escape-free WebGL scissor rectangle',
+      },
+      {
+        declarationFingerprint: 'sha256:34dfe22efbf1d2f4e16ac9a93fc703b8a54032d9ea689c75c5e61549dc76a3c9',
+        id: '@flighthq/types:interface#WgpuScissorRect',
+        purpose: 'reviewed escape-free WebGPU scissor rectangle',
+      },
+      {
+        declarationFingerprint: 'sha256:be617f3f8f9f830df9da893eee28eeb9740c2f15a2e4462f451c6d3191c0ca99',
+        id: '@flighthq/types:interface#CanvasRenderStateRuntime',
+        purpose: 'reviewed escape-free Canvas render-state runtime',
+      },
+      {
+        declarationFingerprint: 'sha256:ea1b2223d50df5b640545106804895714d12cb99a7838ab014ed2e3816d701a9',
+        id: '@flighthq/types:interface#GlRenderEffectPipeline',
+        purpose: 'reviewed escape-free WebGL render-effect pipeline',
+      },
+      {
+        declarationFingerprint: 'sha256:a7039648e61c44e19af4213680f60efe61ad6452ffc0b16c420927d0116c0349',
+        id: '@flighthq/types:interface#WgpuRenderEffectPipeline',
+        purpose: 'reviewed escape-free WebGPU render-effect pipeline',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -1471,6 +1521,10 @@ describe('typed struct analysis', () => {
     const provenance = auditTypedStructProvenance(workspace, 'fixture', registry, classAudit, programAndChecker);
     const classAuditById = new Map(classAudit.schemas.map((schema) => [schema.id, schema]));
     const provenanceById = new Map(provenance.schemas.map((schema) => [schema.id, schema]));
+    const typeErasureReport = JSON.parse(readFileSync('reports/type-erasures.json', 'utf8')) as {
+      modules: Array<{ byReason: Record<string, number>; module: string; total: number }>;
+      summary: { byReason: Record<string, number>; total: number };
+    };
     const rectangle = report.candidates.find((candidate) => candidate.name === 'Rectangle');
     const color = report.candidates.find((candidate) => candidate.name === 'ColorScaleBias');
     const camera2D = report.candidates.find((candidate) => candidate.name === 'Camera2D');
@@ -1692,6 +1746,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const backendStatePipelineCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'CanvasRenderStateRuntime',
+            'GlRenderEffectPipeline',
+            'GlScissorRect',
+            'WgpuRenderEffectPipeline',
+            'WgpuScissorRect',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -1732,22 +1799,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_501,
+      auditOnlySchemas: 1_496,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 20_672,
-      directSchemas: 503,
+      directAccesses: 20_834,
+      directSchemas: 508,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 9_994,
+      pendingAccesses: 9_832,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_501,
+      newAuditOnly: 1_496,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -1759,6 +1826,37 @@ describe('typed struct analysis', () => {
       closedSchemas: 551,
       containmentEdges: 2_059,
     });
+    expect(typeErasureReport.summary).toMatchObject({
+      byReason: expect.objectContaining({ 'standard-toolkit-boundary': 17_935 }),
+      total: 24_151,
+    });
+    expect(
+      typeErasureReport.modules
+        .filter(({ module }) =>
+          [
+            'flighthq.scene2dCanvas.CanvasCache',
+            'flighthq.scene2dCanvas.CanvasRenderState',
+            'flighthq.scene2dCanvas.CanvasRenderTarget',
+          ].includes(module),
+        )
+        .map(({ byReason, module, total }) => ({ byReason, module, total })),
+    ).toEqual([
+      {
+        byReason: { 'standard-toolkit-boundary': 20 },
+        module: 'flighthq.scene2dCanvas.CanvasCache',
+        total: 20,
+      },
+      {
+        byReason: { 'external-toolkit-boundary': 1, 'standard-toolkit-boundary': 17 },
+        module: 'flighthq.scene2dCanvas.CanvasRenderState',
+        total: 18,
+      },
+      {
+        byReason: { 'external-toolkit-boundary': 1, 'standard-toolkit-boundary': 26 },
+        module: 'flighthq.scene2dCanvas.CanvasRenderTarget',
+        total: 27,
+      },
+    ]);
     expect(rectangle?.eligible).toBe(true);
     expect(rectangle?.reasons).not.toContain('presence-sensitive-use');
     expect(rectangle?.escapes).toEqual(
@@ -1775,7 +1873,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(20_672);
+    expect(report.summary.directAccesses).toBe(20_834);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -2598,6 +2696,48 @@ describe('typed struct analysis', () => {
     }
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
+        'GlScissorRect',
+        38,
+        'sha256:c5eed51656152d130c5bd39967bda2fdec09e68c7666b1789992993ec2ac9b57',
+        'reviewed escape-free WebGL scissor rectangle',
+      ],
+      [
+        'WgpuScissorRect',
+        36,
+        'sha256:34dfe22efbf1d2f4e16ac9a93fc703b8a54032d9ea689c75c5e61549dc76a3c9',
+        'reviewed escape-free WebGPU scissor rectangle',
+      ],
+      [
+        'CanvasRenderStateRuntime',
+        34,
+        'sha256:be617f3f8f9f830df9da893eee28eeb9740c2f15a2e4462f451c6d3191c0ca99',
+        'reviewed escape-free Canvas render-state runtime',
+      ],
+      [
+        'GlRenderEffectPipeline',
+        27,
+        'sha256:ea1b2223d50df5b640545106804895714d12cb99a7838ab014ed2e3816d701a9',
+        'reviewed escape-free WebGL render-effect pipeline',
+      ],
+      [
+        'WgpuRenderEffectPipeline',
+        27,
+        'sha256:a7039648e61c44e19af4213680f60efe61ad6452ffc0b16c420927d0116c0349',
+        'reviewed escape-free WebGPU render-effect pipeline',
+      ],
+    ] as const) {
+      expect(backendStatePipelineCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
         'Physics2DWorld',
         217,
         'sha256:a28a94c95326e5405d33feda957ea8ee57399e1266dae9f9d7c88218d945a9fe',
@@ -3219,6 +3359,44 @@ describe('typed struct analysis', () => {
       });
       expect(provenanceById.has(directionalEffectId)).toBe(false);
     }
+    const canvasRenderStateRuntimeId = '@flighthq/types:interface#CanvasRenderStateRuntime';
+    expect(classAuditById.get(canvasRenderStateRuntimeId)?.migration).toEqual({
+      mechanicallyCompatible: false,
+      normalizationReasons: ['cross-schema-transfer'],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.has(canvasRenderStateRuntimeId)).toBe(false);
+    for (const closedPipelineId of [
+      '@flighthq/types:interface#GlRenderEffectPipeline',
+      '@flighthq/types:interface#WgpuRenderEffectPipeline',
+    ]) {
+      expect(classAuditById.get(closedPipelineId)?.migration).toEqual({
+        mechanicallyCompatible: true,
+        normalizationReasons: [],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.get(closedPipelineId)?.nominalIdentity).toEqual({ blockerReasons: [], closed: true });
+    }
+    const wgpuScissorRectId = '@flighthq/types:interface#WgpuScissorRect';
+    expect(classAuditById.get(wgpuScissorRectId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.get(wgpuScissorRectId)?.nominalIdentity).toEqual({
+      blockerReasons: ['normalization-provenance'],
+      closed: false,
+    });
+    const glScissorRectId = '@flighthq/types:interface#GlScissorRect';
+    expect(classAuditById.get(glScissorRectId)?.migration).toEqual({
+      mechanicallyCompatible: true,
+      normalizationReasons: [],
+      observabilityReasons: [],
+    });
+    expect(provenanceById.get(glScissorRectId)?.nominalIdentity).toEqual({
+      blockerReasons: ['container-transfer', 'normalization-provenance'],
+      closed: false,
+    });
     const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
     const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
@@ -3562,6 +3740,25 @@ describe('typed struct analysis', () => {
       expect(generatedEffect).not.toMatch(
         /\(cast effect : (?:BevelEffect|DropShadowEffect|GradientBevelEffect|InnerShadowEffect|OuterGlowEffect)\)\./u,
       );
+    }
+    const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
+    expect(generatedCanvasRenderState).not.toMatch(
+      /\(cast (?:runtime|sourceRuntime|targetRuntime) : CanvasRenderStateRuntime\)\./u,
+    );
+    for (const [path, typeName] of [
+      ['generated/flighthq/effectsGl/GlRenderEffectPipeline.hx', 'GlRenderEffectPipeline'],
+      ['generated/flighthq/effectsWgpu/WgpuRenderEffectPipeline.hx', 'WgpuRenderEffectPipeline'],
+    ] as const) {
+      expect(readFileSync(path, 'utf8')).not.toContain(`(cast pipeline : flighthq.types.${typeName}).`);
+    }
+    for (const [path, typeName] of [
+      ['generated/flighthq/renderGl/GlRenderPass.hx', 'GlScissorRect'],
+      ['generated/flighthq/renderGl/GlRenderTarget.hx', 'GlScissorRect'],
+      ['generated/flighthq/scene2dGl/GlClipRectangle.hx', 'GlScissorRect'],
+      ['generated/flighthq/renderWgpu/WgpuScissor.hx', 'WgpuScissorRect'],
+      ['generated/flighthq/scene2dWgpu/WgpuClipRectangle.hx', 'WgpuScissorRect'],
+    ] as const) {
+      expect(readFileSync(path, 'utf8')).not.toContain(`: ${typeName}).`);
     }
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([

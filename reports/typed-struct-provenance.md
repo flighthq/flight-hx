@@ -229,7 +229,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#GlQuadBatchShader` | 0 | 11 | 1 | 0 | 1 | 0 | 1 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#GlRenderEffectApplicationExplanation` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#GlRenderEffectContext` | 155 | 6 | 0 | 4 | 0 | 0 | 1 | 0 | yes | — |
-| `@flighthq/types:interface#GlRenderEffectPipeline` | 0 | 6 | 0 | 5 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#GlRenderEffectPipeline` | 27 | 6 | 0 | 5 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#GlRenderStats` | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderTargetPool` | 0 | 1 | 3 | 1 | 0 | 0 | 4 | 3 | yes | — |
 | `@flighthq/types:interface#GlRenderTextureEntry` | 24 | 2 | 1 | 1 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
@@ -709,7 +709,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#WgpuQuadBatchResources` | 0 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuQuadBatchWriterBufferSlot` | 0 | 4 | 1 | 0 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#WgpuRenderEffectContext` | 147 | 6 | 0 | 4 | 0 | 0 | 1 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuRenderEffectPipeline` | 0 | 6 | 0 | 5 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#WgpuRenderEffectPipeline` | 27 | 6 | 0 | 5 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuRenderStateSignals` | 0 | 2 | 0 | 2 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderTextureEntry` | 23 | 2 | 1 | 1 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#WgpuRenderTextureExplanation` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
@@ -720,7 +720,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#WgpuScene3DIbl` | 0 | 8 | 1 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DLayouts` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DShadow` | 0 | 9 | 1 | 1 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#WgpuScissorRect` | 0 | 4 | 2 | 0 | 1 | 0 | 2 | 1 | no | `normalization-provenance` |
+| `@flighthq/types:interface#WgpuScissorRect` | 36 | 4 | 2 | 0 | 1 | 0 | 2 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#WgpuShapeMeshBuffers` | 0 | 8 | 1 | 0 | 0 | 0 | 2 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuShapeRasterSurface` | 0 | 3 | 1 | 1 | 0 | 0 | 1 | 2 | yes | — |
 | `@flighthq/types:interface#WgpuShapeRendererData` | 0 | 8 | 0 | 3 | 0 | 0 | 1 | 1 | yes | — |

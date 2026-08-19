@@ -29,7 +29,7 @@ class GlClipRectangle {
     if ((cast _Runtime.strictEquals(previous, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SCISSOR_TEST', flighthq._internal.backend.WebGl2Backend.SCISSOR_TEST));
     } else {
-      flighthq._internal.backend.WebGl2Backend.scissor(gl, (cast previous : GlScissorRect).x, (cast previous : GlScissorRect).y, (cast previous : GlScissorRect).width, (cast previous : GlScissorRect).height);
+      flighthq._internal.backend.WebGl2Backend.scissor(gl, (cast previous : { var x:Float; }).x, (cast previous : { var y:Float; }).y, (cast previous : { var width:Float; }).width, (cast previous : { var height:Float; }).height);
     }
   }
 
@@ -45,7 +45,7 @@ class GlClipRectangle {
     flushGlQuadBatchWriter(({ final __callArgument11:Dynamic = state; __callArgument11; }));
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SCISSOR_TEST', flighthq._internal.backend.WebGl2Backend.SCISSOR_TEST));
-    flighthq._internal.backend.WebGl2Backend.scissor(gl, (cast next : GlScissorRect).x, (cast next : GlScissorRect).y, (cast next : GlScissorRect).width, (cast next : GlScissorRect).height);
+    flighthq._internal.backend.WebGl2Backend.scissor(gl, next.x, next.y, next.width, next.height);
   }
 
   public static function computeScissorRect__glClipRectangle(state:GlRenderState, rect:RectangleLike, transform:MatrixLike):GlScissorRect {
@@ -96,11 +96,11 @@ class GlClipRectangle {
     var y:Float = cast _Runtime.UNDEFINED;
     var right:Float = cast _Runtime.UNDEFINED;
     var bottom:Float = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(a, null) : Bool)) { return cast { height: _Runtime.field(b, 'height'), width: _Runtime.field(b, 'width'), x: _Runtime.field(b, 'x'), y: _Runtime.field(b, 'y') }; }
-    x = HxMath.max(_Runtime.field(a, 'x'), _Runtime.field(b, 'x'));
-    y = HxMath.max(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'));
-    right = HxMath.min(_Runtime.addNumbers(_Runtime.field(a, 'x'), _Runtime.field(a, 'width')), _Runtime.addNumbers(_Runtime.field(b, 'x'), _Runtime.field(b, 'width')));
-    bottom = HxMath.min(_Runtime.addNumbers(_Runtime.field(a, 'y'), _Runtime.field(a, 'height')), _Runtime.addNumbers(_Runtime.field(b, 'y'), _Runtime.field(b, 'height')));
+    if ((cast _Runtime.strictEquals(a, null) : Bool)) { return cast { height: b.height, width: b.width, x: b.x, y: b.y }; }
+    x = HxMath.max((cast a : { var x:Float; }).x, b.x);
+    y = HxMath.max((cast a : { var y:Float; }).y, b.y);
+    right = HxMath.min(((cast a : { var x:Float; }).x + (cast a : { var width:Float; }).width), (b.x + b.width));
+    bottom = HxMath.min(((cast a : { var y:Float; }).y + (cast a : { var height:Float; }).height), (b.y + b.height));
     return cast { height: HxMath.max(0.0, (bottom - y)), width: HxMath.max(0.0, (right - x)), x: x, y: y };
     return cast null;
   }

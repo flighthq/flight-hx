@@ -51,17 +51,17 @@ class GlRenderEffectPipeline {
     var depth:Null<String> = cast _Runtime.UNDEFINED;
     w = flighthq._internal.backend.CanvasElementBackend.field((cast state : GlRenderState).canvas, 'width');
     h = flighthq._internal.backend.CanvasElementBackend.field((cast state : GlRenderState).canvas, 'height');
-    __destructure0 = (cast pipeline : flighthq.types.GlRenderEffectPipeline).options;
+    __destructure0 = pipeline.options;
     sampleCount = _Runtime.field(__destructure0, 'sampleCount');
     format = _Runtime.field(__destructure0, 'format');
     depth = _Runtime.field(__destructure0, 'depth');
-    if ((cast _Runtime.strictEquals((cast pipeline : flighthq.types.GlRenderEffectPipeline).sceneTarget, null) : Bool)) {
-      ((cast pipeline : flighthq.types.GlRenderEffectPipeline).sceneTarget = (cast createGlRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = { width: w, height: h, sampleCount: sampleCount, format: format, depth: depth, colorSpace: colorSpace }; __callArgument1; })) : GlRenderTarget));
+    if ((cast _Runtime.strictEquals(pipeline.sceneTarget, null) : Bool)) {
+      (pipeline.sceneTarget = cast ((cast createGlRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = { width: w, height: h, sampleCount: sampleCount, format: format, depth: depth, colorSpace: colorSpace }; __callArgument1; })) : GlRenderTarget) : Null<GlRenderTarget>));
     } else {
-      resizeGlRenderTarget(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast pipeline : flighthq.types.GlRenderEffectPipeline).sceneTarget, (cast w : Float), (cast h : Float));
+      resizeGlRenderTarget(({ final __callArgument2:Dynamic = state; __callArgument2; }), pipeline.sceneTarget, (cast w : Float), (cast h : Float));
     }
-    ((cast (cast pipeline : flighthq.types.GlRenderEffectPipeline).sceneTarget : { var colorSpace:RenderTargetColorSpace; }).colorSpace = cast (colorSpace : RenderTargetColorSpace));
-    beginGlRenderPass(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast pipeline : flighthq.types.GlRenderEffectPipeline).sceneTarget, (cast { preserveColor: true, preserveDepth: true } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    ((cast pipeline.sceneTarget : { var colorSpace:RenderTargetColorSpace; }).colorSpace = cast (colorSpace : RenderTargetColorSpace));
+    beginGlRenderPass(({ final __callArgument3:Dynamic = state; __callArgument3; }), pipeline.sceneTarget, (cast { preserveColor: true, preserveDepth: true } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static function createGlRenderEffectPipeline(_state:GlRenderState, ?options:RenderEffectPipelineOptions):flighthq.types.GlRenderEffectPipeline {
@@ -72,18 +72,18 @@ class GlRenderEffectPipeline {
 
   @:noCompletion
   public static function destroyGlRenderEffectPipeline(state:GlRenderState, pipeline:flighthq.types.GlRenderEffectPipeline):Void {
-    if (_Runtime.truthy((cast pipeline : flighthq.types.GlRenderEffectPipeline).sceneTarget)) {
-      destroyGlRenderTarget(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast pipeline : flighthq.types.GlRenderEffectPipeline).sceneTarget);
-      ((cast pipeline : flighthq.types.GlRenderEffectPipeline).sceneTarget = null);
+    if (_Runtime.truthy(pipeline.sceneTarget)) {
+      destroyGlRenderTarget(({ final __callArgument4:Dynamic = state; __callArgument4; }), pipeline.sceneTarget);
+      (pipeline.sceneTarget = cast (null : Null<GlRenderTarget>));
     }
-    destroyGlRenderTargetPool(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast pipeline : flighthq.types.GlRenderEffectPipeline).pool);
-    if ((cast !_Runtime.strictEquals((cast (cast pipeline : flighthq.types.GlRenderEffectPipeline).lutTexture : GlColorLutTextureCache).texture, null) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.deleteTexture((cast state : GlRenderState).gl, (cast (cast pipeline : flighthq.types.GlRenderEffectPipeline).lutTexture : GlColorLutTextureCache).texture);
-      ((cast (cast pipeline : flighthq.types.GlRenderEffectPipeline).lutTexture : GlColorLutTextureCache).texture = null);
+    destroyGlRenderTargetPool(({ final __callArgument5:Dynamic = state; __callArgument5; }), pipeline.pool);
+    if ((cast !_Runtime.strictEquals((cast pipeline.lutTexture : GlColorLutTextureCache).texture, null) : Bool)) {
+      flighthq._internal.backend.WebGl2Backend.deleteTexture((cast state : GlRenderState).gl, (cast pipeline.lutTexture : GlColorLutTextureCache).texture);
+      ((cast pipeline.lutTexture : GlColorLutTextureCache).texture = null);
     }
-    ((cast (cast pipeline : flighthq.types.GlRenderEffectPipeline).lutTexture : GlColorLutTextureCache).lut = null);
-    ((cast (cast pipeline : flighthq.types.GlRenderEffectPipeline).lutCache : ColorLutCache).signature = null);
-    ((cast (cast pipeline : flighthq.types.GlRenderEffectPipeline).lutCache : ColorLutCache).lut = null);
+    ((cast pipeline.lutTexture : GlColorLutTextureCache).lut = null);
+    ((cast pipeline.lutCache : ColorLutCache).signature = null);
+    ((cast pipeline.lutCache : ColorLutCache).lut = null);
   }
 
   public static function endGlRenderEffectPipeline(state:GlRenderState, pipeline:flighthq.types.GlRenderEffectPipeline, operations:Array<flighthq._internal._Union2<RenderEffect, Adjustment>>):Void {
@@ -96,18 +96,18 @@ class GlRenderEffectPipeline {
     var pending:Array<Adjustment> = cast _Runtime.UNDEFINED;
     var ensureScratch:Void->Void = cast _Runtime.UNDEFINED;
     var flushAdjustments:Void->Void = cast _Runtime.UNDEFINED;
-    scene = (cast pipeline : flighthq.types.GlRenderEffectPipeline).sceneTarget;
+    scene = pipeline.sceneTarget;
     if ((cast _Runtime.strictEquals(scene, null) : Bool)) { return; }
     endGlRenderPass(({ final __callArgument6:Dynamic = state; __callArgument6; }));
-    format = _Runtime.coalesce(_Runtime.field((cast pipeline : flighthq.types.GlRenderEffectPipeline).options, 'format'), function():Dynamic return cast 'rgba8');
+    format = _Runtime.coalesce(_Runtime.field(pipeline.options, 'format'), function():Dynamic return cast 'rgba8');
     descriptor = (cast { width: (cast scene : { var width:Float; }).width, height: (cast scene : { var height:Float; }).height, format: format, colorSpace: (cast scene : { var colorSpace:RenderTargetColorSpace; }).colorSpace });
     source = scene;
     scratchA = null;
     scratchB = null;
     pending = (cast cast ([] : Array<Dynamic>));
     ensureScratch = (cast function():Void {
-      if ((cast _Runtime.strictEquals(scratchA, null) : Bool)) { (scratchA = cast ((cast acquireGlRenderTarget(({ final __callArgument7:Dynamic = state; __callArgument7; }), (cast pipeline : flighthq.types.GlRenderEffectPipeline).pool, ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : GlRenderTarget) : Dynamic)); }
-      if ((cast _Runtime.strictEquals(scratchB, null) : Bool)) { (scratchB = cast ((cast acquireGlRenderTarget(({ final __callArgument9:Dynamic = state; __callArgument9; }), (cast pipeline : flighthq.types.GlRenderEffectPipeline).pool, ({ final __callArgument10:Dynamic = descriptor; __callArgument10; })) : GlRenderTarget) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchA, null) : Bool)) { (scratchA = cast ((cast acquireGlRenderTarget(({ final __callArgument7:Dynamic = state; __callArgument7; }), pipeline.pool, ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : GlRenderTarget) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchB, null) : Bool)) { (scratchB = cast ((cast acquireGlRenderTarget(({ final __callArgument9:Dynamic = state; __callArgument9; }), pipeline.pool, ({ final __callArgument10:Dynamic = descriptor; __callArgument10; })) : GlRenderTarget) : Dynamic)); }
     });
     flushAdjustments = (cast function():Void {
       var dest:GlRenderTarget = cast _Runtime.UNDEFINED;
@@ -116,7 +116,7 @@ class GlRenderEffectPipeline {
       dest = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
       clearGlRenderTarget(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = dest; __callArgument12; }));
       if ((cast _Runtime.callProperty(pending, 'some', cast ([isColorLutAdjustment] : Array<Dynamic>)) : Bool)) {
-        applyColorLutPassToGl(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = source; __callArgument14; }), ({ final __callArgument15:Dynamic = dest; __callArgument15; }), (cast bakeColorLutForRun((cast pipeline : flighthq.types.GlRenderEffectPipeline).lutCache, ({ final __callArgument16:Dynamic = pending; __callArgument16; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ColorLut), (cast pipeline : flighthq.types.GlRenderEffectPipeline).lutTexture);
+        applyColorLutPassToGl(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = source; __callArgument14; }), ({ final __callArgument15:Dynamic = dest; __callArgument15; }), (cast bakeColorLutForRun(pipeline.lutCache, ({ final __callArgument16:Dynamic = pending; __callArgument16; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ColorLut), pipeline.lutTexture);
       } else {
         var matrices:Array<Array<Float>> = (cast cast ([] : Array<Dynamic>));
         for (op in _Runtime.iterable(pending)) {
@@ -139,17 +139,17 @@ class GlRenderEffectPipeline {
       ensureScratch();
       var dest:GlRenderTarget = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
       clearGlRenderTarget(({ final __callArgument29:Dynamic = state; __callArgument29; }), ({ final __callArgument30:Dynamic = dest; __callArgument30; }));
-      runner(({ final __callArgument31:Dynamic = { state: state, source: source, dest: dest, pool: (cast pipeline : flighthq.types.GlRenderEffectPipeline).pool, sceneDepthTexture: (cast scene : { var depthTexture:Null<flighthq._internal.dom.WebGLTexture>; }).depthTexture, sceneVelocityTexture: (cast pipeline : flighthq.types.GlRenderEffectPipeline).velocityTexture }; __callArgument31; }), ({ final __callArgument32:Dynamic = operation; __callArgument32; }));
+      runner(({ final __callArgument31:Dynamic = { state: state, source: source, dest: dest, pool: pipeline.pool, sceneDepthTexture: (cast scene : { var depthTexture:Null<flighthq._internal.dom.WebGLTexture>; }).depthTexture, sceneVelocityTexture: pipeline.velocityTexture }; __callArgument31; }), ({ final __callArgument32:Dynamic = operation; __callArgument32; }));
       (source = cast (dest : Dynamic));
     }
     flushAdjustments();
     GlRenderEffectPipeline.presentGlRenderEffectResult__glRenderEffectPipeline(({ final __callArgument33:Dynamic = state; __callArgument33; }), ({ final __callArgument34:Dynamic = source; __callArgument34; }));
-    if ((cast !_Runtime.strictEquals(scratchA, null) : Bool)) { releaseGlRenderTarget((cast pipeline : flighthq.types.GlRenderEffectPipeline).pool, ({ final __callArgument35:Dynamic = scratchA; __callArgument35; })); }
-    if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { releaseGlRenderTarget((cast pipeline : flighthq.types.GlRenderEffectPipeline).pool, ({ final __callArgument36:Dynamic = scratchB; __callArgument36; })); }
+    if ((cast !_Runtime.strictEquals(scratchA, null) : Bool)) { releaseGlRenderTarget(pipeline.pool, ({ final __callArgument35:Dynamic = scratchA; __callArgument35; })); }
+    if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { releaseGlRenderTarget(pipeline.pool, ({ final __callArgument36:Dynamic = scratchB; __callArgument36; })); }
   }
 
   public static function setGlRenderEffectVelocityTexture(pipeline:flighthq.types.GlRenderEffectPipeline, texture:Null<flighthq._internal.dom.WebGLTexture>):Void {
-    ((cast pipeline : flighthq.types.GlRenderEffectPipeline).velocityTexture = texture);
+    (pipeline.velocityTexture = cast (texture : Null<flighthq._internal.dom.WebGLTexture>));
   }
 
   public static function presentGlRenderEffectResult__glRenderEffectPipeline(state:GlRenderState, source:GlRenderTarget):Void {

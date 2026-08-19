@@ -18,8 +18,8 @@ class CanvasMaterials {
   public static function applyCanvasBlendMode(state:CanvasRenderState, value:Null<BlendMode>):Void {
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : CanvasRenderStateRuntime);
-    if ((cast _Runtime.strictEquals(value, (cast runtime : CanvasRenderStateRuntime).currentBlendMode) : Bool)) { return; }
-    ((cast runtime : CanvasRenderStateRuntime).currentBlendMode = value);
+    if ((cast _Runtime.strictEquals(value, runtime.currentBlendMode) : Bool)) { return; }
+    (runtime.currentBlendMode = cast (value : Null<String>));
     flighthq._internal.backend.Canvas2dBackend.setField((cast state : CanvasRenderState).context, 'globalCompositeOperation', _Runtime.coalesce(((cast !_Runtime.strictEquals(value, null) : Bool) ? (cast _Runtime.getIndex(CanvasMaterials.CANVAS_BLEND_MODE__canvasMaterials, value) : Dynamic) : (cast null : Dynamic)), function():Dynamic return cast 'source-over'));
   }
 

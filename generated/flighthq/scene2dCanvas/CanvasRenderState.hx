@@ -34,9 +34,9 @@ class CanvasRenderState {
     sourceRuntime = (cast getCanvasRenderStateRuntime(({ final __callArgument1:Dynamic = source; __callArgument1; })) : CanvasRenderStateRuntime);
     ((cast target : { var applyBlendMode:Null<flighthq.types.CanvasRenderState->Null<String>->Void>; }).applyBlendMode = (cast (cast source : flighthq.types.CanvasRenderState).applyBlendMode));
     ((cast target : { var canvasCssFilterResolver:Null<flighthq.types.CanvasRenderState->RenderProxy2D->Null<String>>; }).canvasCssFilterResolver = (cast (cast source : flighthq.types.CanvasRenderState).canvasCssFilterResolver));
-    ((cast (cast targetRuntime : CanvasRenderStateRuntime).canvasTextureResolvers : CanvasTextureResolvers).registry = (cast CanvasRenderState.copyMap__canvasRenderState((cast (cast (cast sourceRuntime : CanvasRenderStateRuntime).canvasTextureResolvers : CanvasTextureResolvers).registry : Dynamic)) : Null<flighthq._internal._Map<String, CanvasTextureResolver>>));
-    ((cast targetRuntime : CanvasRenderStateRuntime).materialRendererMap = (cast CanvasRenderState.copyMap__canvasRenderState((cast (cast sourceRuntime : CanvasRenderStateRuntime).materialRendererMap : Dynamic)) : Null<flighthq._internal._Map<String, CanvasMaterialRenderer>>));
-    ((cast targetRuntime : CanvasRenderStateRuntime).canvasRenderEffectRegistry = (cast CanvasRenderState.copyMap__canvasRenderState((cast (cast sourceRuntime : CanvasRenderStateRuntime).canvasRenderEffectRegistry : Dynamic)) : Null<flighthq._internal._Map<String, CanvasRenderEffectRunner>>));
+    ((cast targetRuntime.canvasTextureResolvers : CanvasTextureResolvers).registry = (cast CanvasRenderState.copyMap__canvasRenderState((cast (cast sourceRuntime.canvasTextureResolvers : CanvasTextureResolvers).registry : Dynamic)) : Null<flighthq._internal._Map<String, CanvasTextureResolver>>));
+    (targetRuntime.materialRendererMap = cast ((cast CanvasRenderState.copyMap__canvasRenderState((cast sourceRuntime.materialRendererMap : Dynamic)) : Null<flighthq._internal._Map<String, CanvasMaterialRenderer>>) : Null<flighthq._internal._Map<String, CanvasMaterialRenderer>>));
+    (targetRuntime.canvasRenderEffectRegistry = cast ((cast CanvasRenderState.copyMap__canvasRenderState((cast sourceRuntime.canvasRenderEffectRegistry : Dynamic)) : Null<flighthq._internal._Map<String, CanvasRenderEffectRunner>>) : Null<flighthq._internal._Map<String, CanvasRenderEffectRunner>>));
     copyRenderStateRegistrations(({ final __callArgument2:Dynamic = target; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }));
   }
 
@@ -56,13 +56,13 @@ class CanvasRenderState {
     ((cast (cast state : { var contextAttributes:flighthq._internal.dom.CanvasRenderingContext2DSettings; }) : { var contextAttributes:flighthq._internal.dom.CanvasRenderingContext2DSettings; }).contextAttributes = flighthq._internal.backend.Canvas2dBackend.call(context, 'getContextAttributes', cast ([] : Array<Dynamic>)));
     runtime = (cast createCanvasRenderStateRuntime() : CanvasRenderStateRuntime);
     _Runtime.setIndex(state, EntityRuntimeKey, runtime);
-    ((cast runtime : CanvasRenderStateRuntime).canvasTextureResolvers = (cast createCanvasTextureResolvers() : CanvasTextureResolvers));
-    ((cast (cast runtime : CanvasRenderStateRuntime).canvasTextureResolvers : { @:optional var registryMiss:Null<RenderRegistry->String->Void>; }).registryMiss = (cast function(registry:RenderRegistry, kind:String):Void { _Runtime.callOptionalValue((cast runtime : CanvasRenderStateRuntime).registryMiss, cast ([registry, kind] : Array<Dynamic>)); }));
-    ((cast runtime : CanvasRenderStateRuntime).currentBlendMode = null);
-    ((cast runtime : CanvasRenderStateRuntime).imageSmoothingEnabled = _Runtime.coalesce(_Runtime.field(options, 'imageSmoothingEnabled'), function():Dynamic return cast true));
-    ((cast runtime : CanvasRenderStateRuntime).imageSmoothingQuality = _Runtime.coalesce(_Runtime.field(options, 'imageSmoothingQuality'), function():Dynamic return cast 'high'));
-    flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', (cast runtime : CanvasRenderStateRuntime).imageSmoothingEnabled);
-    flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingQuality', (cast runtime : CanvasRenderStateRuntime).imageSmoothingQuality);
+    (runtime.canvasTextureResolvers = cast ((cast createCanvasTextureResolvers() : CanvasTextureResolvers) : CanvasTextureResolvers));
+    ((cast runtime.canvasTextureResolvers : { @:optional var registryMiss:Null<RenderRegistry->String->Void>; }).registryMiss = (cast function(registry:RenderRegistry, kind:String):Void { _Runtime.callOptionalValue(runtime.registryMiss, cast ([registry, kind] : Array<Dynamic>)); }));
+    (runtime.currentBlendMode = cast (null : Null<String>));
+    (runtime.imageSmoothingEnabled = cast (_Runtime.coalesce(_Runtime.field(options, 'imageSmoothingEnabled'), function():Dynamic return cast true) : Bool));
+    (runtime.imageSmoothingQuality = cast (_Runtime.coalesce(_Runtime.field(options, 'imageSmoothingQuality'), function():Dynamic return cast 'high') : flighthq._internal._Any));
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', runtime.imageSmoothingEnabled);
+    flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingQuality', runtime.imageSmoothingQuality);
     return cast state;
     return cast null;
   }
@@ -89,7 +89,7 @@ class CanvasRenderState {
   }
 
   public static function getCanvasRenderStateTextureResolvers(state:flighthq.types.CanvasRenderState):CanvasTextureResolvers {
-    return cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument7:Dynamic = state; __callArgument7; })) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).canvasTextureResolvers;
+    return cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument7:Dynamic = state; __callArgument7; })) : CanvasRenderStateRuntime) : { var canvasTextureResolvers:CanvasTextureResolvers; }).canvasTextureResolvers;
     return cast null;
   }
 }

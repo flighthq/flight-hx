@@ -5,9 +5,9 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,536 public schemas are semantically eligible for typed structural lowering.
-- 503 schemas currently emit direct fields, covering 20,672 accesses.
-- 1,033 eligible schemas remain audit-only, covering 9,994 pending accesses.
-- 776 audit-only schemas have no recorded escape, covering 5,240 pending accesses.
+- 508 schemas currently emit direct fields, covering 20,834 accesses.
+- 1,028 eligible schemas remain audit-only, covering 9,832 pending accesses.
+- 771 audit-only schemas have no recorded escape, covering 5,078 pending accesses.
 - Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
 - Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
@@ -51,6 +51,7 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Promote `Shape`, `Scale9Shape`, `ShapeData`, `MorphShape`, and `MorphShapeData`: 184 accesses now emit directly across 20 generated modules. Cross-schema transfer keeps all three public shape identities structural, `Shape` additionally has dynamic ingress, and propagated normalization provenance keeps both data records structural. The tranche removes seven generated `Dynamic` occurrences and 14 `_Runtime.field` calls while `Reflect` and type-erasure debt remain unchanged.
 - [x] Promote `GlMeshProgram`, `GlClassicProgram`, `GlMeshUpload`, `GlParticleShader`, and `GlPbrProgram`: 179 accesses now emit directly across 15 generated modules. Object-literal spread keeps the classic and PBR program records structural; anonymous/cross-schema transfer and optional omission keep the mesh program structural; optional omission keeps the mesh upload structural; and normalization provenance keeps the particle shader structural. The tranche removes 83 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote `BevelEffect`, `DropShadowEffect`, `GradientBevelEffect`, `InnerShadowEffect`, and `OuterGlowEffect`: 167 accesses now emit directly across 21 generated modules. Cross-schema transfer and object-literal spread keep all five effect records structural. The tranche removes 167 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
+- [x] Promote `GlScissorRect`, `WgpuScissorRect`, `CanvasRenderStateRuntime`, `GlRenderEffectPipeline`, and `WgpuRenderEffectPipeline`: 162 accesses now emit directly across 16 generated modules. Cross-schema transfer keeps the Canvas runtime and WebGL scissor record structural, normalization provenance keeps the WebGPU scissor record structural, and the two provenance-closed pipelines remain structural pending separate cpp review. The tranche removes 46 `_Runtime.field` calls; five newly visible `ImageSmoothingQuality` uses remain explicit standard-toolkit-boundary erasures rather than guessed types, while generated `Dynamic` and `Reflect` remain unchanged.
 - [ ] Review the next cohesive five-row zero-escape tranche from the refreshed audit, preserving exact fingerprint, provenance, Haxe, portability, and affected-parity gates.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 

@@ -24619,7 +24619,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 27,
       "fields": 6,
       "id": "@flighthq/types:interface#GlRenderEffectPipeline",
       "name": "GlRenderEffectPipeline",
@@ -56349,7 +56349,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 27,
       "fields": 6,
       "id": "@flighthq/types:interface#WgpuRenderEffectPipeline",
       "name": "WgpuRenderEffectPipeline",
@@ -56806,7 +56806,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 36,
       "fields": 4,
       "id": "@flighthq/types:interface#WgpuScissorRect",
       "name": "WgpuScissorRect",

@@ -51,7 +51,7 @@ class CanvasCache {
     var screen:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
     var cacheState:CanvasRenderState = cast _Runtime.UNDEFINED;
     screen = (cast getCanvasRenderStateRuntime(({ final __callArgument1:Dynamic = screenState; __callArgument1; })) : CanvasRenderStateRuntime);
-    cacheState = (cast createCanvasRenderState(flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)), (cast { backgroundColor: (cast screenState : CanvasRenderState).backgroundColor, imageSmoothingEnabled: (cast screen : CanvasRenderStateRuntime).imageSmoothingEnabled, imageSmoothingQuality: (cast screen : CanvasRenderStateRuntime).imageSmoothingQuality, pixelRatio: (cast screenState : CanvasRenderState).pixelRatio, roundPixels: (cast screenState : CanvasRenderState).roundPixels, sceneGraphSyncPolicy: (cast screenState : CanvasRenderState).sceneGraphSyncPolicy } : flighthq._internal._Any)) : CanvasRenderState);
+    cacheState = (cast createCanvasRenderState(flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)), (cast { backgroundColor: (cast screenState : CanvasRenderState).backgroundColor, imageSmoothingEnabled: screen.imageSmoothingEnabled, imageSmoothingQuality: screen.imageSmoothingQuality, pixelRatio: (cast screenState : CanvasRenderState).pixelRatio, roundPixels: (cast screenState : CanvasRenderState).roundPixels, sceneGraphSyncPolicy: (cast screenState : CanvasRenderState).sceneGraphSyncPolicy } : flighthq._internal._Any)) : CanvasRenderState);
     ((cast cacheState : CanvasRenderState).allowSmoothing = (cast screenState : CanvasRenderState).allowSmoothing);
     ((cast cacheState : CanvasRenderState).renderAlpha = (cast screenState : CanvasRenderState).renderAlpha);
     ((cast cacheState : CanvasRenderState).renderBlendMode = (cast screenState : CanvasRenderState).renderBlendMode);
@@ -140,8 +140,8 @@ class CanvasCache {
     runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument28:Dynamic = cacheState; __callArgument28; })) : CanvasRenderStateRuntime);
     ((cast handles : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }).canvas = target.canvas);
     ((cast handles : { var context:flighthq._internal.dom.CanvasRenderingContext2D; }).context = target.context);
-    flighthq._internal.backend.Canvas2dBackend.setField((cast handles : { var context:flighthq._internal.dom.CanvasRenderingContext2D; }).context, 'imageSmoothingEnabled', (cast runtime : CanvasRenderStateRuntime).imageSmoothingEnabled);
-    flighthq._internal.backend.Canvas2dBackend.setField((cast handles : { var context:flighthq._internal.dom.CanvasRenderingContext2D; }).context, 'imageSmoothingQuality', (cast runtime : CanvasRenderStateRuntime).imageSmoothingQuality);
+    flighthq._internal.backend.Canvas2dBackend.setField((cast handles : { var context:flighthq._internal.dom.CanvasRenderingContext2D; }).context, 'imageSmoothingEnabled', runtime.imageSmoothingEnabled);
+    flighthq._internal.backend.Canvas2dBackend.setField((cast handles : { var context:flighthq._internal.dom.CanvasRenderingContext2D; }).context, 'imageSmoothingQuality', runtime.imageSmoothingQuality);
     setCanvasRenderTransform2D(({ final __callArgument29:Dynamic = cacheState; __callArgument29; }), ({ final __callArgument30:Dynamic = CanvasCache._renderTransform__canvasCache; __callArgument30; }));
     dirty = (cast prepareScene2DRender(({ final __callArgument31:Dynamic = cacheState; __callArgument31; }), ({ final __callArgument32:Dynamic = source; __callArgument32; })) : Bool);
     if ((cast ((cast dirty : Bool) || (cast resized : Bool)) : Bool)) {

@@ -47,7 +47,7 @@ class CanvasBlendEffect {
 
   public static function getCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:Null<String>):Null<CanvasRenderTarget> {
     if ((cast _Runtime.strictEquals(backdropKey, null) : Bool)) { return cast null; }
-    return cast _Runtime.coalesce(({ final __collection6:Dynamic = (cast (cast getCanvasRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).canvasBlendEffectBackdrops; __collection6 == null ? _Runtime.UNDEFINED : ((cast __collection6 : flighthq._internal._Map<String, CanvasRenderTarget>).get(backdropKey)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection6:Dynamic = (cast (cast getCanvasRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : CanvasRenderStateRuntime) : { @:optional var canvasBlendEffectBackdrops:Null<flighthq._internal._Map<String, CanvasRenderTarget>>; }).canvasBlendEffectBackdrops; __collection6 == null ? _Runtime.UNDEFINED : ((cast __collection6 : flighthq._internal._Map<String, CanvasRenderTarget>).get(backdropKey)); }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -63,11 +63,11 @@ class CanvasBlendEffect {
   public static function registerCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:String, target:CanvasRenderTarget):Void {
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : CanvasRenderStateRuntime);
-    ((cast ({ final __nullishOwner12 = runtime; final __nullishValue13:Null<flighthq._internal._Map<String, CanvasRenderTarget>> = cast (cast __nullishOwner12 : CanvasRenderStateRuntime).canvasBlendEffectBackdrops; __nullishValue13 == null ? ((cast __nullishOwner12 : CanvasRenderStateRuntime).canvasBlendEffectBackdrops = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, CanvasRenderTarget>>)) : (cast __nullishValue13 : Null<flighthq._internal._Map<String, CanvasRenderTarget>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(backdropKey, (cast target)));
+    ((cast ({ final __nullishOwner12 = runtime; final __nullishValue13:Null<flighthq._internal._Map<String, CanvasRenderTarget>> = cast __nullishOwner12.canvasBlendEffectBackdrops; __nullishValue13 == null ? (__nullishOwner12.canvasBlendEffectBackdrops = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, CanvasRenderTarget>>)) : (cast __nullishValue13 : Null<flighthq._internal._Map<String, CanvasRenderTarget>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(backdropKey, (cast target)));
   }
 
   public static function unregisterCanvasBlendEffectBackdrop(state:CanvasRenderState, backdropKey:String):Bool {
-    return cast _Runtime.coalesce(({ final __collection16:Dynamic = (cast (cast getCanvasRenderStateRuntime(({ final __callArgument15:Dynamic = state; __callArgument15; })) : CanvasRenderStateRuntime) : CanvasRenderStateRuntime).canvasBlendEffectBackdrops; __collection16 == null ? _Runtime.UNDEFINED : ((cast __collection16 : flighthq._internal._Map<String, CanvasRenderTarget>).delete_(backdropKey)); }), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __collection16:Dynamic = (cast (cast getCanvasRenderStateRuntime(({ final __callArgument15:Dynamic = state; __callArgument15; })) : CanvasRenderStateRuntime) : { @:optional var canvasBlendEffectBackdrops:Null<flighthq._internal._Map<String, CanvasRenderTarget>>; }).canvasBlendEffectBackdrops; __collection16 == null ? _Runtime.UNDEFINED : ((cast __collection16 : flighthq._internal._Map<String, CanvasRenderTarget>).delete_(backdropKey)); }), function():Dynamic return cast false);
     return cast null;
   }
 

@@ -192,7 +192,7 @@ class GlRenderTarget {
         flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DRAW_FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.DRAW_FRAMEBUFFER), runtime.currentFramebuffer);
         if ((cast !_Runtime.strictEquals(scissor, null) : Bool)) {
           flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SCISSOR_TEST', flighthq._internal.backend.WebGl2Backend.SCISSOR_TEST));
-          flighthq._internal.backend.WebGl2Backend.scissor(gl, (cast scissor : GlScissorRect).x, (cast scissor : GlScissorRect).y, (cast scissor : GlScissorRect).width, (cast scissor : GlScissorRect).height);
+          flighthq._internal.backend.WebGl2Backend.scissor(gl, (cast scissor : { var x:Float; }).x, (cast scissor : { var y:Float; }).y, (cast scissor : { var width:Float; }).width, (cast scissor : { var height:Float; }).height);
         }
         (runtime.currentTexture = cast (null : Null<flighthq._internal.dom.WebGLTexture>));
       }
@@ -203,7 +203,7 @@ class GlRenderTarget {
       flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DRAW_FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.DRAW_FRAMEBUFFER), runtime.currentFramebuffer);
       if ((cast !_Runtime.strictEquals(scissor, null) : Bool)) {
         flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SCISSOR_TEST', flighthq._internal.backend.WebGl2Backend.SCISSOR_TEST));
-        flighthq._internal.backend.WebGl2Backend.scissor(gl, (cast scissor : GlScissorRect).x, (cast scissor : GlScissorRect).y, (cast scissor : GlScissorRect).width, (cast scissor : GlScissorRect).height);
+        flighthq._internal.backend.WebGl2Backend.scissor(gl, (cast scissor : { var x:Float; }).x, (cast scissor : { var y:Float; }).y, (cast scissor : { var width:Float; }).width, (cast scissor : { var height:Float; }).height);
       }
       (runtime.currentTexture = cast (null : Null<flighthq._internal.dom.WebGLTexture>));
     }

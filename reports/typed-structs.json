@@ -42888,9 +42888,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 34,
+        "directAccesses": 34,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -43088,7 +43088,7 @@
       },
       "name": "CanvasRenderStateRuntime",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Canvas render-state runtime",
       "reasons": [],
       "source": "upstream/packages/types/src/CanvasRenderState.ts",
       "sourceProvenance": {
@@ -131628,9 +131628,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 27,
+        "directAccesses": 27,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -131692,7 +131692,7 @@
       },
       "name": "GlRenderEffectPipeline",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WebGL render-effect pipeline",
       "reasons": [],
       "source": "upstream/packages/types/src/GlRenderEffectPipeline.ts",
       "sourceProvenance": {
@@ -134708,9 +134708,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 38,
+        "directAccesses": 38,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -134756,7 +134756,7 @@
       },
       "name": "GlScissorRect",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WebGL scissor rectangle",
       "reasons": [],
       "source": "upstream/packages/types/src/GlRenderState.ts",
       "sourceProvenance": {
@@ -414487,9 +414487,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 27,
+        "directAccesses": 27,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -414551,7 +414551,7 @@
       },
       "name": "WgpuRenderEffectPipeline",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WebGPU render-effect pipeline",
       "reasons": [],
       "source": "upstream/packages/types/src/WgpuRenderEffectPipeline.ts",
       "sourceProvenance": {
@@ -418128,9 +418128,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 36,
+        "directAccesses": 36,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -418176,7 +418176,7 @@
       },
       "name": "WgpuScissorRect",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WebGPU scissor rectangle",
       "reasons": [],
       "source": "upstream/packages/types/src/WgpuRenderState.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1501,
+      "newAuditOnly": 1496,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1501,
+    "auditOnlySchemas": 1496,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 20672,
-    "directSchemas": 503,
+    "directAccesses": 20834,
+    "directSchemas": 508,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 9994,
+    "pendingAccesses": 9832,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

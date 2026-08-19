@@ -29,10 +29,10 @@ class WgpuClipRectangle {
     if ((cast _Runtime.strictEquals(previous, null) : Bool)) {
       var viewport:{ var width:Float; var height:Float; } = _Runtime.coalesce(runtime.renderTargetViewport, function():Dynamic return cast (cast state : WgpuRenderState).canvas);
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setScissorRect(0.0, 0.0, (cast viewport : { var width:Float; var height:Float; }).width, (cast viewport : { var width:Float; var height:Float; }).height);
-    } else { if ((cast ((cast ((cast (cast previous : WgpuScissorRect).width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast (cast previous : WgpuScissorRect).height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
+    } else { if ((cast ((cast ((cast (cast previous : { var width:Float; }).width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast (cast previous : { var height:Float; }).height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setScissorRect(0.0, 0.0, 1.0, 1.0);
     } else {
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setScissorRect((cast previous : WgpuScissorRect).x, (cast previous : WgpuScissorRect).y, (cast previous : WgpuScissorRect).width, (cast previous : WgpuScissorRect).height);
+      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setScissorRect((cast previous : { var x:Float; }).x, (cast previous : { var y:Float; }).y, (cast previous : { var width:Float; }).width, (cast previous : { var height:Float; }).height);
     } }
   }
 
@@ -48,10 +48,10 @@ class WgpuClipRectangle {
     _Runtime.callProperty(runtime.scissorStack, 'push', cast ([next] : Array<Dynamic>));
     pass = runtime.renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
-    if ((cast ((cast ((cast (cast next : WgpuScissorRect).width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast (cast next : WgpuScissorRect).height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast next.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast next.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setScissorRect(0.0, 0.0, 1.0, 1.0);
     } else {
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setScissorRect((cast next : WgpuScissorRect).x, (cast next : WgpuScissorRect).y, (cast next : WgpuScissorRect).width, (cast next : WgpuScissorRect).height);
+      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setScissorRect(next.x, next.y, next.width, next.height);
     }
   }
 
@@ -93,11 +93,11 @@ class WgpuClipRectangle {
     var y:Float = cast _Runtime.UNDEFINED;
     var right:Float = cast _Runtime.UNDEFINED;
     var bottom:Float = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(a, null) : Bool)) { return cast { height: _Runtime.field(b, 'height'), width: _Runtime.field(b, 'width'), x: _Runtime.field(b, 'x'), y: _Runtime.field(b, 'y') }; }
-    x = HxMath.max(_Runtime.field(a, 'x'), _Runtime.field(b, 'x'));
-    y = HxMath.max(_Runtime.field(a, 'y'), _Runtime.field(b, 'y'));
-    right = HxMath.min(_Runtime.addNumbers(_Runtime.field(a, 'x'), _Runtime.field(a, 'width')), _Runtime.addNumbers(_Runtime.field(b, 'x'), _Runtime.field(b, 'width')));
-    bottom = HxMath.min(_Runtime.addNumbers(_Runtime.field(a, 'y'), _Runtime.field(a, 'height')), _Runtime.addNumbers(_Runtime.field(b, 'y'), _Runtime.field(b, 'height')));
+    if ((cast _Runtime.strictEquals(a, null) : Bool)) { return cast { height: b.height, width: b.width, x: b.x, y: b.y }; }
+    x = HxMath.max((cast a : { var x:Float; }).x, b.x);
+    y = HxMath.max((cast a : { var y:Float; }).y, b.y);
+    right = HxMath.min(((cast a : { var x:Float; }).x + (cast a : { var width:Float; }).width), (b.x + b.width));
+    bottom = HxMath.min(((cast a : { var y:Float; }).y + (cast a : { var height:Float; }).height), (b.y + b.height));
     return cast { height: HxMath.max(0.0, (bottom - y)), width: HxMath.max(0.0, (right - x)), x: x, y: y };
     return cast null;
   }

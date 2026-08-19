@@ -5302,11 +5302,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 18
+        "standard-toolkit-boundary": 20
       },
       "module": "flighthq.scene2dCanvas.CanvasCache",
       "source": "upstream/packages/scene2d-canvas/src/canvasCache.ts",
-      "total": 18
+      "total": 20
     },
     {
       "byReason": {
@@ -5385,20 +5385,20 @@
     {
       "byReason": {
         "external-toolkit-boundary": 1,
-        "standard-toolkit-boundary": 15
+        "standard-toolkit-boundary": 17
       },
       "module": "flighthq.scene2dCanvas.CanvasRenderState",
       "source": "upstream/packages/scene2d-canvas/src/canvasRenderState.ts",
-      "total": 16
+      "total": 18
     },
     {
       "byReason": {
         "external-toolkit-boundary": 1,
-        "standard-toolkit-boundary": 25
+        "standard-toolkit-boundary": 26
       },
       "module": "flighthq.scene2dCanvas.CanvasRenderTarget",
       "source": "upstream/packages/scene2d-canvas/src/canvasRenderTarget.ts",
-      "total": 26
+      "total": 27
     },
     {
       "byReason": {
@@ -9543,11 +9543,11 @@
       "source-null": 74,
       "source-undefined": 264,
       "source-unknown": 3832,
-      "standard-toolkit-boundary": 17930,
+      "standard-toolkit-boundary": 17935,
       "unclassified": 365
     },
     "checkerKnownUnrepresentable": 0,
     "modules": 1119,
-    "total": 24146
+    "total": 24151
   }
 }
