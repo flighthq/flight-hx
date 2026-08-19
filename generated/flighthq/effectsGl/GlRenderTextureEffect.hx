@@ -49,7 +49,7 @@ class GlRenderTextureEffect {
           var remaining:Float = _Runtime.subtractNumbers(_Runtime.field(operations, 'length'), index);
           var output:RenderTexture = ((cast _Runtime.strictEquals(_Runtime.fmod(remaining, 2.0), 1.0) : Bool) ? (cast dest : Dynamic) : (cast scratch : Dynamic));
           writeGlRenderTextureTarget(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = output; __callArgument10; }), (cast function(target:GlRenderTarget):Void {
-            (cast operation : { var effect:RenderEffect; var runner:GlRenderEffectRunner; }).runner(({ final __callArgument11:Dynamic = { state: state, source: current, dest: target, pool: (cast pool : GlRenderTexturePool).effectTargets, sceneDepthTexture: null, sceneVelocityTexture: null }; __callArgument11; }), (cast operation : { var effect:RenderEffect; var runner:GlRenderEffectRunner; }).effect);
+            (cast operation : { var effect:RenderEffect; var runner:GlRenderEffectRunner; }).runner(({ final __callArgument11:Dynamic = { state: state, source: current, dest: target, pool: pool.effectTargets, sceneDepthTexture: null, sceneVelocityTexture: null }; __callArgument11; }), (cast operation : { var effect:RenderEffect; var runner:GlRenderEffectRunner; }).effect);
           } : Dynamic));
           (current = cast ((cast getGlRenderTextureTarget(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = output; __callArgument13; })) : Null<GlRenderTarget>) : Dynamic));
           index++;

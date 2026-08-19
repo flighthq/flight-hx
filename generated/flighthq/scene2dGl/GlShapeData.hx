@@ -20,13 +20,13 @@ class GlShapeData {
     var existing:Null<GlShapeRasterSurface> = cast _Runtime.UNDEFINED;
     var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
     var surface:GlShapeRasterSurface = cast _Runtime.UNDEFINED;
-    existing = (cast data : GlShapeRendererData).surface;
+    existing = data.surface;
     if ((cast !_Runtime.strictEquals(existing, null) : Bool)) { return cast existing; }
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', 1.0);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', 1.0);
     surface = (cast { canvas: canvas, ctx: flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), image: (cast createImageResource((cast canvas : flighthq._internal._Any)) : Image) });
-    ((cast data : GlShapeRendererData).surface = surface);
+    (data.surface = cast (surface : Null<GlShapeRasterSurface>));
     return cast surface;
     return cast null;
   }
@@ -43,7 +43,7 @@ class GlShapeData {
     var surface:Null<GlShapeRasterSurface> = cast _Runtime.UNDEFINED;
     var entry:Null<{ var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }> = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime);
-    surface = (cast (cast getGlShapeData(({ final __callArgument2:Dynamic = data; __callArgument2; })) : GlShapeRendererData) : GlShapeRendererData).surface;
+    surface = (cast (cast getGlShapeData(({ final __callArgument2:Dynamic = data; __callArgument2; })) : GlShapeRendererData) : { var surface:Null<GlShapeRasterSurface>; }).surface;
     if ((cast _Runtime.strictEquals(surface, null) : Bool)) { return; }
     entry = ((cast runtime.textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }>).get((cast surface : GlShapeRasterSurface).image));
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {

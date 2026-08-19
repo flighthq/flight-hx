@@ -53,7 +53,7 @@ class GlMeshShapeRenderer {
     if ((cast ((cast _Runtime.strictEquals(regions, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(regions, 'length'), 0.0) : Bool)) : Bool)) { return cast false; }
     version = (cast getNodeLocalContentRevision((cast source : Dynamic)) : Float);
     meshData = (cast getGlShapeData((cast renderProxy : RenderProxy2D).rendererData) : GlShapeRendererData);
-    if ((cast !_Runtime.strictEquals((cast meshData : GlShapeRendererData).meshVersion, version) : Bool)) {
+    if ((cast !_Runtime.strictEquals(meshData.meshVersion, version) : Bool)) {
       var meshes:Array<GlShapeMesh> = (cast cast ([] : Array<Dynamic>));
       var supported:Bool = true;
       {
@@ -69,11 +69,11 @@ class GlMeshShapeRenderer {
           i++;
         }
       }
-      ((cast meshData : GlShapeRendererData).meshes = ((cast supported : Bool) ? (cast meshes : Dynamic) : (cast null : Dynamic)));
-      ((cast meshData : GlShapeRendererData).meshVersion = version);
+      (meshData.meshes = cast (((cast supported : Bool) ? (cast meshes : Dynamic) : (cast null : Dynamic)) : Null<Array<GlShapeMesh>>));
+      (meshData.meshVersion = cast (version : Float));
     }
-    if ((cast _Runtime.strictEquals((cast meshData : GlShapeRendererData).meshes, null) : Bool)) { return cast false; }
-    drawGlShapeMeshes(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = renderProxy; __callArgument4; }), (cast meshData : GlShapeRendererData).meshes);
+    if ((cast _Runtime.strictEquals(meshData.meshes, null) : Bool)) { return cast false; }
+    drawGlShapeMeshes(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = renderProxy; __callArgument4; }), meshData.meshes);
     return cast true;
     return cast null;
   }

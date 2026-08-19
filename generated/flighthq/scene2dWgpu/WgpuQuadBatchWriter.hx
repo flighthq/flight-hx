@@ -105,25 +105,25 @@ class WgpuQuadBatchWriter {
     resources = (cast ensureWgpuQuadBatchResources(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuQuadBatchResources);
     slot = (cast WgpuQuadBatchWriter.acquireWgpuQuadBatchWriterBufferSlot__wgpuQuadBatchWriter(({ final __callArgument6:Dynamic = state; __callArgument6; })) : WgpuQuadBatchWriterBufferSlot);
     instanceBytes = (count * WgpuQuadBatchWriter.QUAD_BATCH_INSTANCE_STRIDE__wgpuQuadBatchWriter);
-    if ((cast ((cast _Runtime.strictEquals((cast slot : WgpuQuadBatchWriterBufferSlot).instanceBuffer, null) : Bool) || (cast ((cast (cast slot : WgpuQuadBatchWriterBufferSlot).instanceCapacity : Float) < (cast instanceBytes : Float)) : Bool)) : Bool)) {
-      var capacity:Float = HxMath.max(HxMath.max(instanceBytes, ((cast slot : WgpuQuadBatchWriterBufferSlot).instanceCapacity * 2.0)), (WgpuQuadBatchWriter.QUAD_BATCH_INSTANCE_STRIDE__wgpuQuadBatchWriter * 256.0));
-      ((cast slot : WgpuQuadBatchWriterBufferSlot).instanceBuffer = (cast WgpuQuadBatchWriter.createWgpuQuadBatchWriterBuffer__wgpuQuadBatchWriter(({ final __callArgument7:Dynamic = state; __callArgument7; }), (cast capacity : Float)) : flighthq._internal.dom.GPUBuffer));
-      ((cast slot : WgpuQuadBatchWriterBufferSlot).instanceCapacity = capacity);
+    if ((cast ((cast _Runtime.strictEquals(slot.instanceBuffer, null) : Bool) || (cast ((cast slot.instanceCapacity : Float) < (cast instanceBytes : Float)) : Bool)) : Bool)) {
+      var capacity:Float = HxMath.max(HxMath.max(instanceBytes, (slot.instanceCapacity * 2.0)), (WgpuQuadBatchWriter.QUAD_BATCH_INSTANCE_STRIDE__wgpuQuadBatchWriter * 256.0));
+      (slot.instanceBuffer = cast ((cast WgpuQuadBatchWriter.createWgpuQuadBatchWriterBuffer__wgpuQuadBatchWriter(({ final __callArgument7:Dynamic = state; __callArgument7; }), (cast capacity : Float)) : flighthq._internal.dom.GPUBuffer) : Null<flighthq._internal.dom.GPUBuffer>));
+      (slot.instanceCapacity = cast (capacity : Float));
     }
-    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([(cast slot : WgpuQuadBatchWriterBufferSlot).instanceBuffer, 0.0, _Runtime.field(runtime.quadBatchWriterInstanceData, 'buffer'), 0.0, instanceBytes] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([slot.instanceBuffer, 0.0, _Runtime.field(runtime.quadBatchWriterInstanceData, 'buffer'), 0.0, instanceBytes] : Array<Dynamic>));
     if ((cast ((cast group3Floats : Float) > (cast 0.0 : Float)) : Bool)) {
       var group3Bytes:Float = ((count * group3Floats) * 4.0);
-      if ((cast ((cast _Runtime.strictEquals((cast slot : WgpuQuadBatchWriterBufferSlot).materialBuffer, null) : Bool) || (cast ((cast (cast slot : WgpuQuadBatchWriterBufferSlot).materialCapacity : Float) < (cast group3Bytes : Float)) : Bool)) : Bool)) {
-        var capacity:Float = HxMath.max(HxMath.max(group3Bytes, ((cast slot : WgpuQuadBatchWriterBufferSlot).materialCapacity * 2.0)), ((group3Floats * 4.0) * 256.0));
-        ((cast slot : WgpuQuadBatchWriterBufferSlot).materialBuffer = (cast WgpuQuadBatchWriter.createWgpuQuadBatchWriterBuffer__wgpuQuadBatchWriter(({ final __callArgument8:Dynamic = state; __callArgument8; }), (cast capacity : Float)) : flighthq._internal.dom.GPUBuffer));
-        ((cast slot : WgpuQuadBatchWriterBufferSlot).materialCapacity = capacity);
+      if ((cast ((cast _Runtime.strictEquals(slot.materialBuffer, null) : Bool) || (cast ((cast slot.materialCapacity : Float) < (cast group3Bytes : Float)) : Bool)) : Bool)) {
+        var capacity:Float = HxMath.max(HxMath.max(group3Bytes, (slot.materialCapacity * 2.0)), ((group3Floats * 4.0) * 256.0));
+        (slot.materialBuffer = cast ((cast WgpuQuadBatchWriter.createWgpuQuadBatchWriterBuffer__wgpuQuadBatchWriter(({ final __callArgument8:Dynamic = state; __callArgument8; }), (cast capacity : Float)) : flighthq._internal.dom.GPUBuffer) : Null<flighthq._internal.dom.GPUBuffer>));
+        (slot.materialCapacity = cast (capacity : Float));
       }
-      flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([(cast slot : WgpuQuadBatchWriterBufferSlot).materialBuffer, 0.0, (cast group3Data : { var buffer:flighthq._internal._Any; }).buffer, 0.0, group3Bytes] : Array<Dynamic>));
+      flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([slot.materialBuffer, 0.0, (cast group3Data : { var buffer:flighthq._internal._Any; }).buffer, 0.0, group3Bytes] : Array<Dynamic>));
     }
     _Runtime.callOptionalValue((cast state : WgpuRenderState).applyBlendMode, cast ([state, blendMode] : Array<Dynamic>));
     textureBindGroup = ((cast !_Runtime.strictEquals(sampler, null) : Bool) ? (cast (cast WgpuQuadBatchWriter.createWgpuTextureSamplerBindGroup__wgpuQuadBatchWriter(({ final __callArgument9:Dynamic = state; __callArgument9; }), (cast texture : WgpuTextureEntry).view, ({ final __callArgument10:Dynamic = sampler; __callArgument10; })) : flighthq._internal.dom.GPUBindGroup) : Dynamic) : (cast (cast resolveWgpuSmoothingBindGroup(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = texture; __callArgument12; }), ({ final __callArgument13:Dynamic = smoothing; __callArgument13; })) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     uniformOffset = (cast WgpuQuadBatchWriter.writeWgpuQuadBatchWriterUniforms__wgpuQuadBatchWriter(({ final __callArgument14:Dynamic = state; __callArgument14; }), (cast _Runtime.strictEquals((cast texture : WgpuTextureEntry).straightAlpha, true) : Bool)) : Float);
-    instanceBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast resources : WgpuQuadBatchResources).instanceBindGroupLayout, entries: cast ([{ binding: 0.0, resource: { buffer: (cast slot : WgpuQuadBatchWriterBufferSlot).instanceBuffer } }] : Array<Dynamic>) }] : Array<Dynamic>));
+    instanceBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast resources : WgpuQuadBatchResources).instanceBindGroupLayout, entries: cast ([{ binding: 0.0, resource: { buffer: slot.instanceBuffer } }] : Array<Dynamic>) }] : Array<Dynamic>));
     module = ((cast !_Runtime.strictEquals(ctFlush, null) : Bool) ? (cast (cast ctFlush : WgpuColorAdjustmentFlush).module : Dynamic) : (cast (cast renderer : WgpuMaterialRenderer).getShaderModule(({ final __callArgument15:Dynamic = state; __callArgument15; })) : Dynamic));
     pipeline = (cast getWgpuQuadBatchPipeline(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = resources; __callArgument17; }), ({ final __callArgument18:Dynamic = module; __callArgument18; }), (cast ((cast group3Floats : Float) > (cast 0.0 : Float)) : Bool), ({ final __callArgument19:Dynamic = blendMode; __callArgument19; })) : flighthq._internal.dom.GPURenderPipeline);
     pass = runtime.renderPass;
@@ -132,7 +132,7 @@ class WgpuQuadBatchWriter {
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, textureBindGroup);
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, instanceBindGroup);
     if ((cast ((cast group3Floats : Float) > (cast 0.0 : Float)) : Bool)) {
-      var materialBindGroup:flighthq._internal.dom.GPUBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast resources : WgpuQuadBatchResources).materialBindGroupLayout, entries: cast ([{ binding: 0.0, resource: { buffer: (cast slot : WgpuQuadBatchWriterBufferSlot).materialBuffer } }] : Array<Dynamic>) }] : Array<Dynamic>));
+      var materialBindGroup:flighthq._internal.dom.GPUBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast resources : WgpuQuadBatchResources).materialBindGroupLayout, entries: cast ([{ binding: 0.0, resource: { buffer: slot.materialBuffer } }] : Array<Dynamic>) }] : Array<Dynamic>));
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(3.0, materialBindGroup);
     }
     if ((cast ((cast runtime.currentMaskDepth : Float) > (cast 0.0 : Float)) : Bool)) { (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setStencilReference(runtime.currentMaskDepth); }

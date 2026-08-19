@@ -24873,7 +24873,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 17,
       "fields": 5,
       "id": "@flighthq/types:interface#GlRenderTexturePool",
       "name": "GlRenderTexturePool",
@@ -56226,7 +56226,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 16,
       "fields": 4,
       "id": "@flighthq/types:interface#WgpuQuadBatchWriterBufferSlot",
       "name": "WgpuQuadBatchWriterBufferSlot",
@@ -56522,7 +56522,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 17,
       "fields": 5,
       "id": "@flighthq/types:interface#WgpuRenderTexturePool",
       "name": "WgpuRenderTexturePool",

@@ -90,7 +90,7 @@ class GlRasterShapeRenderer {
     if ((cast ((cast ((cast w : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast h : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     pixelRatio = (cast state : GlRenderState).pixelRatio;
     surface = (cast acquireGlShapeRasterSurface(({ final __callArgument3:Dynamic = shapeData; __callArgument3; })) : GlShapeRasterSurface);
-    if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(version, (cast shapeData : GlShapeRendererData).lastContentId) : Bool) || (cast !_Runtime.strictEquals(w, (cast shapeData : GlShapeRendererData).lastW) : Bool)) : Bool) || (cast !_Runtime.strictEquals(h, (cast shapeData : GlShapeRendererData).lastH) : Bool)) : Bool) || (cast !_Runtime.strictEquals(pixelRatio, (cast shapeData : GlShapeRendererData).lastPixelRatio) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(version, shapeData.lastContentId) : Bool) || (cast !_Runtime.strictEquals(w, shapeData.lastW) : Bool)) : Bool) || (cast !_Runtime.strictEquals(h, shapeData.lastH) : Bool)) : Bool) || (cast !_Runtime.strictEquals(pixelRatio, shapeData.lastPixelRatio) : Bool)) : Bool)) {
       var __destructure1 = surface;
       var canvas:flighthq._internal.dom.HTMLCanvasElement = _Runtime.field(__destructure1, 'canvas');
       var ctx:flighthq._internal.dom.CanvasRenderingContext2D = _Runtime.field(__destructure1, 'ctx');
@@ -101,10 +101,10 @@ class GlRasterShapeRenderer {
       rasterizer(({ final __callArgument4:Dynamic = ctx; __callArgument4; }), (cast commands : Dynamic), ({ final __callArgument5:Dynamic = state; __callArgument5; }));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
       invalidateImageResource((cast surface : GlShapeRasterSurface).image);
-      ((cast shapeData : GlShapeRendererData).lastContentId = version);
-      ((cast shapeData : GlShapeRendererData).lastPixelRatio = pixelRatio);
-      ((cast shapeData : GlShapeRendererData).lastW = w);
-      ((cast shapeData : GlShapeRendererData).lastH = h);
+      (shapeData.lastContentId = cast (version : Float));
+      (shapeData.lastPixelRatio = cast (pixelRatio : Float));
+      (shapeData.lastW = cast (w : Float));
+      (shapeData.lastH = cast (h : Float));
     }
     (cast ensureGlQuadBatchShader(({ final __callArgument6:Dynamic = state; __callArgument6; })) : GlQuadBatchShader);
     t = (cast renderProxy : RenderProxy2D).transform2D;

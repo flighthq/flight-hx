@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_406,
+      newAuditOnly: 1_401,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(600);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(605);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_406);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_401);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(198);
+    expect(newDirect).toHaveLength(203);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1100,6 +1100,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'AnimationBlendTree',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free animation blend tree',
+        }),
+        expect.objectContaining({
+          name: 'WgpuRenderTexturePool',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGPU render-texture pool',
+        }),
+        expect.objectContaining({
+          name: 'GlRenderTexturePool',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL render-texture pool',
+        }),
+        expect.objectContaining({
+          name: 'GlShadedProgram',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL shaded program',
+        }),
+        expect.objectContaining({
+          name: 'GlShapeRendererData',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL shape-renderer data',
+        }),
+        expect.objectContaining({
+          name: 'WgpuQuadBatchWriterBufferSlot',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGPU quad-batch buffer slot',
         }),
       ]),
     );
@@ -2094,6 +2119,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#AnimationBlendTree',
         purpose: 'reviewed escape-free animation blend tree',
       },
+      {
+        declarationFingerprint: 'sha256:8a2e66fa93ab54d34cd36ee7491780879d7f4f726c841200a9a168247ce7152c',
+        id: '@flighthq/types:interface#WgpuRenderTexturePool',
+        purpose: 'reviewed escape-free WebGPU render-texture pool',
+      },
+      {
+        declarationFingerprint: 'sha256:c9cc45d02ce4d7e948c85172e4a590ef8bacca7dc268920a688dea44c772f41c',
+        id: '@flighthq/types:interface#GlRenderTexturePool',
+        purpose: 'reviewed escape-free WebGL render-texture pool',
+      },
+      {
+        declarationFingerprint: 'sha256:ea78be613c04f60f3a3dfb6529793a1e50fdf4a6d96d13246cb23de6e92ccdab',
+        id: '@flighthq/types:interface#GlShadedProgram',
+        purpose: 'reviewed escape-free WebGL shaded program',
+      },
+      {
+        declarationFingerprint: 'sha256:ae1793eea0c5323a3989c3b263cf25e9d862080401783b4209e04677c86e3f65',
+        id: '@flighthq/types:interface#GlShapeRendererData',
+        purpose: 'reviewed escape-free WebGL shape-renderer data',
+      },
+      {
+        declarationFingerprint: 'sha256:0362fdf0b62095db70100964f8f2d188eae552a2513337d7a145648619fd9486',
+        id: '@flighthq/types:interface#WgpuQuadBatchWriterBufferSlot',
+        purpose: 'reviewed escape-free WebGPU quad-batch buffer slot',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -2857,6 +2907,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const thirteenthHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'GlRenderTexturePool',
+            'GlShadedProgram',
+            'GlShapeRendererData',
+            'WgpuQuadBatchWriterBufferSlot',
+            'WgpuRenderTexturePool',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -2897,22 +2960,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_406,
+      auditOnlySchemas: 1_401,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 22_999,
-      directSchemas: 598,
+      directAccesses: 23_082,
+      directSchemas: 603,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 7_667,
+      pendingAccesses: 7_584,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_406,
+      newAuditOnly: 1_401,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -2989,7 +3052,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(22_999);
+    expect(report.summary.directAccesses).toBe(23_082);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -3749,6 +3812,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(twelfthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'WgpuRenderTexturePool',
+        17,
+        'sha256:8a2e66fa93ab54d34cd36ee7491780879d7f4f726c841200a9a168247ce7152c',
+        'reviewed escape-free WebGPU render-texture pool',
+      ],
+      [
+        'GlRenderTexturePool',
+        17,
+        'sha256:c9cc45d02ce4d7e948c85172e4a590ef8bacca7dc268920a688dea44c772f41c',
+        'reviewed escape-free WebGL render-texture pool',
+      ],
+      [
+        'GlShadedProgram',
+        17,
+        'sha256:ea78be613c04f60f3a3dfb6529793a1e50fdf4a6d96d13246cb23de6e92ccdab',
+        'reviewed escape-free WebGL shaded program',
+      ],
+      [
+        'GlShapeRendererData',
+        16,
+        'sha256:ae1793eea0c5323a3989c3b263cf25e9d862080401783b4209e04677c86e3f65',
+        'reviewed escape-free WebGL shape-renderer data',
+      ],
+      [
+        'WgpuQuadBatchWriterBufferSlot',
+        16,
+        'sha256:0362fdf0b62095db70100964f8f2d188eae552a2513337d7a145648619fd9486',
+        'reviewed escape-free WebGPU quad-batch buffer slot',
+      ],
+    ] as const) {
+      expect(thirteenthHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -5432,6 +5537,29 @@ describe('typed struct analysis', () => {
         expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
       }
     }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#WgpuRenderTexturePool', true, [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#GlRenderTexturePool', true, [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#GlShadedProgram', false, ['object-literal-spread'], null],
+      ['@flighthq/types:interface#GlShapeRendererData', false, ['dynamic-ingress'], null],
+      [
+        '@flighthq/types:interface#WgpuQuadBatchWriterBufferSlot',
+        true,
+        [],
+        { blockerReasons: ['normalization-provenance'], closed: false },
+      ],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons: [],
+      });
+      if (nominalIdentity === null) {
+        expect(provenanceById.has(frontierId)).toBe(false);
+      } else {
+        expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+      }
+    }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
@@ -6409,6 +6537,22 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AnimationBlendTree|GlColorScaleBiasInstancedShader|LambertMaterial|OrbitCameraControllerOptions|WgpuShapeRendererData)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/effectsGl/GlRenderTextureEffect.hx',
+      'generated/flighthq/effectsWgpu/WgpuRenderTextureEffect.hx',
+      'generated/flighthq/renderGl/GlRenderTexturePool.hx',
+      'generated/flighthq/renderWgpu/WgpuRenderState.hx',
+      'generated/flighthq/renderWgpu/WgpuRenderTexturePool.hx',
+      'generated/flighthq/scene2dGl/GlMeshShapeRenderer.hx',
+      'generated/flighthq/scene2dGl/GlRasterShapeRenderer.hx',
+      'generated/flighthq/scene2dGl/GlShapeData.hx',
+      'generated/flighthq/scene2dWgpu/WgpuQuadBatchWriter.hx',
+      'generated/flighthq/scene3dGl/ShadedGlMeshMaterialRenderer.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:GlRenderTexturePool|GlShadedProgram|GlShapeRendererData|WgpuQuadBatchWriterBufferSlot|WgpuRenderTexturePool)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');

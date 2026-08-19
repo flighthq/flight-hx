@@ -1018,6 +1018,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#AnimationBlendTree',
     purpose: 'reviewed escape-free animation blend tree',
   },
+  {
+    declarationFingerprint: 'sha256:8a2e66fa93ab54d34cd36ee7491780879d7f4f726c841200a9a168247ce7152c',
+    id: '@flighthq/types:interface#WgpuRenderTexturePool',
+    purpose: 'reviewed escape-free WebGPU render-texture pool',
+  },
+  {
+    declarationFingerprint: 'sha256:c9cc45d02ce4d7e948c85172e4a590ef8bacca7dc268920a688dea44c772f41c',
+    id: '@flighthq/types:interface#GlRenderTexturePool',
+    purpose: 'reviewed escape-free WebGL render-texture pool',
+  },
+  {
+    declarationFingerprint: 'sha256:ea78be613c04f60f3a3dfb6529793a1e50fdf4a6d96d13246cb23de6e92ccdab',
+    id: '@flighthq/types:interface#GlShadedProgram',
+    purpose: 'reviewed escape-free WebGL shaded program',
+  },
+  {
+    declarationFingerprint: 'sha256:ae1793eea0c5323a3989c3b263cf25e9d862080401783b4209e04677c86e3f65',
+    id: '@flighthq/types:interface#GlShapeRendererData',
+    purpose: 'reviewed escape-free WebGL shape-renderer data',
+  },
+  {
+    declarationFingerprint: 'sha256:0362fdf0b62095db70100964f8f2d188eae552a2513337d7a145648619fd9486',
+    id: '@flighthq/types:interface#WgpuQuadBatchWriterBufferSlot',
+    purpose: 'reviewed escape-free WebGPU quad-batch buffer slot',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

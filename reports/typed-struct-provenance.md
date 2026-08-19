@@ -234,7 +234,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#GlRenderTargetPool` | 0 | 1 | 3 | 1 | 0 | 0 | 4 | 3 | yes | — |
 | `@flighthq/types:interface#GlRenderTextureEntry` | 24 | 2 | 1 | 1 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#GlRenderTextureExplanation` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#GlRenderTexturePool` | 0 | 5 | 0 | 3 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#GlRenderTexturePool` | 17 | 5 | 0 | 3 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#GlScene3DDrawEntry` | 0 | 10 | 4 | 1 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#GlScene3DForwardLightList` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#GlScene3DIbl` | 0 | 5 | 1 | 0 | 0 | 0 | 0 | 1 | yes | — |
@@ -707,13 +707,13 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#WgpuMeshMaterialRenderer` | 0 | 2 | 2 | 0 | 1 | 1 | 2 | 3 | no | `container-transfer`, `normalization-provenance` |
 | `@flighthq/types:interface#WgpuModifierCompileContext` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuQuadBatchResources` | 0 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#WgpuQuadBatchWriterBufferSlot` | 0 | 4 | 1 | 0 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
+| `@flighthq/types:interface#WgpuQuadBatchWriterBufferSlot` | 16 | 4 | 1 | 0 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#WgpuRenderEffectContext` | 147 | 6 | 0 | 4 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderEffectPipeline` | 27 | 6 | 0 | 5 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuRenderStateSignals` | 0 | 2 | 0 | 2 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderTextureEntry` | 23 | 2 | 1 | 1 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#WgpuRenderTextureExplanation` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#WgpuRenderTexturePool` | 0 | 5 | 0 | 3 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#WgpuRenderTexturePool` | 17 | 5 | 0 | 3 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DDrawEntry` | 0 | 10 | 4 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DForwardLightList` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DFrameBinding` | 0 | 2 | 1 | 0 | 0 | 0 | 0 | 1 | yes | — |

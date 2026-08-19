@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1406 |
-| Direct schemas | 598 |
+| Audit-only schemas | 1401 |
+| Direct schemas | 603 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 7667 |
-| Directly emitted accesses | 22999 |
+| Pending accesses | 7584 |
+| Directly emitted accesses | 23082 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1406 |
+| Newly discovered, audit-only | 1401 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -630,7 +630,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GlRenderTextureEntry` | `direct` | `new` | — | reviewed escape-free WebGL render-texture entry | 2 | 19 | 5 | 0 | 0 | 24 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderTextureExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GlRenderTextureGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#GlRenderTexturePool` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 15 | 2 | 0 | 17 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlRenderTexturePool` | `direct` | `new` | — | reviewed escape-free WebGL render-texture pool | 5 | 15 | 2 | 0 | 0 | 17 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GlRenderTextureStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#GlRichTextOverlay` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#GlScene3DDrawEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 2 | 10 | 0 | 12 | 0 | 0 | 0 | yes | — |
@@ -640,14 +640,14 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GlScene3DShadow` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 7 | 1 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlScissorRect` | `direct` | `new` | — | reviewed escape-free WebGL scissor rectangle | 4 | 38 | 0 | 0 | 0 | 38 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlShadedDefineKey` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 20 | 0 | 0 | 20 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#GlShadedProgram` | `audit-only` | `new` | — | checker-discovered public declaration | 48 | 17 | 0 | 0 | 17 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlShadedProgram` | `direct` | `new` | — | reviewed escape-free WebGL shaded program | 48 | 17 | 0 | 0 | 0 | 17 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlShader` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
 | `@flighthq/types:interface#GlShaderLocations` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlShapeMesh` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlShapeMeshBinding` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlShapeMeshColorScaleBiasShader` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlShapeRasterSurface` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#GlShapeRendererData` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 9 | 7 | 0 | 16 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlShapeRendererData` | `direct` | `new` | — | reviewed escape-free WebGL shape-renderer data | 7 | 9 | 7 | 0 | 0 | 16 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlSkinPaletteTexture` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 1 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlTextureDescriptor` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GlTextureFilterKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1998,7 +1998,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuPbrDefineKey` | `audit-only` | `new` | — | checker-discovered public declaration | 17 | 37 | 0 | 0 | 37 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuPbrPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuQuadBatchResources` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuQuadBatchWriterBufferSlot` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 12 | 4 | 0 | 16 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuQuadBatchWriterBufferSlot` | `direct` | `new` | — | reviewed escape-free WebGPU quad-batch buffer slot | 4 | 12 | 4 | 0 | 0 | 16 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderEffectContext` | `direct` | `new` | — | reviewed escape-free WebGPU render-effect context | 6 | 147 | 0 | 0 | 0 | 147 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderEffectPipeline` | `direct` | `new` | — | reviewed escape-free WebGPU render-effect pipeline | 6 | 24 | 3 | 0 | 0 | 27 | 0 | 0 | yes | — |
 | `@flighthq/types:type#WgpuRenderEffectRunner` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
@@ -2012,7 +2012,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuRenderTextureEntry` | `direct` | `new` | — | reviewed escape-free WebGPU render-texture entry | 2 | 18 | 5 | 0 | 0 | 23 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderTextureExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#WgpuRenderTextureGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#WgpuRenderTexturePool` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 15 | 2 | 0 | 17 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuRenderTexturePool` | `direct` | `new` | — | reviewed escape-free WebGPU render-texture pool | 5 | 15 | 2 | 0 | 0 | 17 | 0 | 0 | yes | — |
 | `@flighthq/types:type#WgpuRenderTextureStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#WgpuRichTextOverlay` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#WgpuSavedPassState` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |

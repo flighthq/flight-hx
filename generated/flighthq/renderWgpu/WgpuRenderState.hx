@@ -318,8 +318,8 @@ class WgpuRenderState {
     ({ final __hostTypeCall38 = runtime.particleInstanceBuffer; __hostTypeCall38 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall38 : flighthq._internal.dom.GPUBuffer).destroy(); });
     ({ final __hostTypeCall39 = runtime.depthStencilTexture; __hostTypeCall39 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall39 : flighthq._internal.dom.GPUTexture).destroy(); });
     for (slot in _Runtime.iterable(runtime.quadBatchWriterBufferPool)) {
-      ({ final __hostTypeCall42 = (cast slot : WgpuQuadBatchWriterBufferSlot).instanceBuffer; __hostTypeCall42 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall42 : flighthq._internal.dom.GPUBuffer).destroy(); });
-      ({ final __hostTypeCall43 = (cast slot : WgpuQuadBatchWriterBufferSlot).materialBuffer; __hostTypeCall43 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall43 : flighthq._internal.dom.GPUBuffer).destroy(); });
+      ({ final __hostTypeCall42 = slot.instanceBuffer; __hostTypeCall42 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall42 : flighthq._internal.dom.GPUBuffer).destroy(); });
+      ({ final __hostTypeCall43 = slot.materialBuffer; __hostTypeCall43 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall43 : flighthq._internal.dom.GPUBuffer).destroy(); });
     }
     (cast (cast WgpuRenderState.getWgpuDeviceRuntime__wgpuRenderState(({ final __callArgument44:Dynamic = runtime; __callArgument44; })) : WgpuDeviceRuntime__wgpuRenderState) : WgpuDeviceRuntime__wgpuRenderState).references--;
   }
