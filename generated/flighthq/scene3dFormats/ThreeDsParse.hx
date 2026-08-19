@@ -818,31 +818,31 @@ class ThreeDsParse {
     var range:Float = cast _Runtime.UNDEFINED;
     var intensity:Float = cast _Runtime.UNDEFINED;
     var descriptor:Light = cast _Runtime.UNDEFINED;
-    position = (cast ThreeDsParse.convertThreeDsPointZUpToYUp__threeDsParse(_Runtime.field(light, 'position')) : Vector3);
+    position = (cast ThreeDsParse.convertThreeDsPointZUpToYUp__threeDsParse(light.position) : Vector3);
     transform = (cast createTransform3D() : Transform3D);
     ((cast (cast transform : Transform3D).position : { var x:Float; }).x = cast (position.x : Float));
     ((cast (cast transform : Transform3D).position : { var y:Float; }).y = cast (position.y : Float));
     ((cast (cast transform : Transform3D).position : { var z:Float; }).z = cast (position.z : Float));
-    color = (cast ThreeDsParse.packThreeDsColor__threeDsParse(_Runtime.field(light, 'color'), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
-    range = _Runtime.coalesce(_Runtime.field(light, 'outerRange'), function():Dynamic return cast -1.0);
-    if ((cast !_Runtime.strictEquals(_Runtime.field(light, 'innerRange'), null) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument99:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument99; }), (cast '3ds.light-inner-range-dropped' : String), (cast '' : String), ({ final __callArgument100:Dynamic = { firstName: _Runtime.field(light, 'name') }; __callArgument100; }));
+    color = (cast ThreeDsParse.packThreeDsColor__threeDsParse(light.color, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
+    range = _Runtime.coalesce(light.outerRange, function():Dynamic return cast -1.0);
+    if ((cast !_Runtime.strictEquals(light.innerRange, null) : Bool)) {
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument99:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument99; }), (cast '3ds.light-inner-range-dropped' : String), (cast '' : String), ({ final __callArgument100:Dynamic = { firstName: light.name }; __callArgument100; }));
     }
-    intensity = ((cast _Runtime.field(light, 'enabled') : Bool) ? (cast _Runtime.field(light, 'multiplier') : Dynamic) : (cast 0.0 : Dynamic));
-    if ((cast !(cast _Runtime.field(light, 'enabled') : Bool) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument101:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument101; }), (cast '3ds.light-disabled' : String), (cast '' : String), ({ final __callArgument102:Dynamic = { firstName: _Runtime.field(light, 'name') }; __callArgument102; }));
+    intensity = ((cast light.enabled : Bool) ? (cast light.multiplier : Dynamic) : (cast 0.0 : Dynamic));
+    if ((cast !(cast light.enabled : Bool) : Bool)) {
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument101:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument101; }), (cast '3ds.light-disabled' : String), (cast '' : String), ({ final __callArgument102:Dynamic = { firstName: light.name }; __callArgument102; }));
     }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(light, 'target'), null) : Bool)) {
-      var aim:Vector3 = (cast ThreeDsParse.convertThreeDsPointZUpToYUp__threeDsParse(_Runtime.field(light, 'target')) : Vector3);
+    if ((cast !_Runtime.strictEquals(light.target, null) : Bool)) {
+      var aim:Vector3 = (cast ThreeDsParse.convertThreeDsPointZUpToYUp__threeDsParse(light.target) : Vector3);
       subtractVector3(({ final __callArgument103:Dynamic = aim; __callArgument103; }), ({ final __callArgument104:Dynamic = aim; __callArgument104; }), ({ final __callArgument105:Dynamic = position; __callArgument105; }));
       if ((cast ((cast (cast normalizeVector3(({ final __callArgument106:Dynamic = aim; __callArgument106; }), ({ final __callArgument107:Dynamic = aim; __callArgument107; })) : Float) : Float) > (cast 0.0 : Float)) : Bool)) {
         setQuaternionFromUnitVectors(({ final __callArgument108:Dynamic = (cast transform : Transform3D).rotation; __callArgument108; }), ({ final __callArgument109:Dynamic = ThreeDsParse.DOCUMENT_VIEW_LOCAL_AXIS__threeDsParse; __callArgument109; }), ({ final __callArgument110:Dynamic = aim; __callArgument110; }));
       }
-      (descriptor = cast ((cast createSpotLight((cast { color: color, direction: ThreeDsParse.DOCUMENT_VIEW_LOCAL_AXIS__threeDsParse, innerConeDegrees: _Runtime.divideNumbers(_Runtime.field(light, 'hotspot'), 2.0), intensity: intensity, outerConeDegrees: _Runtime.divideNumbers(_Runtime.field(light, 'falloff'), 2.0), range: range } : Dynamic)) : SpotLight) : Dynamic));
+      (descriptor = cast ((cast createSpotLight((cast { color: color, direction: ThreeDsParse.DOCUMENT_VIEW_LOCAL_AXIS__threeDsParse, innerConeDegrees: (light.hotspot / 2.0), intensity: intensity, outerConeDegrees: (light.falloff / 2.0), range: range } : Dynamic)) : SpotLight) : Dynamic));
     } else {
       (descriptor = cast ((cast createPointLight((cast { color: color, intensity: intensity, range: range } : Dynamic)) : PointLight) : Dynamic));
     }
-    _Runtime.callProperty(document.lights, 'push', cast ([_Runtime.mergeObjects([{ descriptor: descriptor }, ((cast ((cast _Runtime.field(_Runtime.field(light, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast { name: _Runtime.field(light, 'name') } : Dynamic) : (cast {  } : Dynamic)), { transform: transform }])] : Array<Dynamic>));
+    _Runtime.callProperty(document.lights, 'push', cast ([_Runtime.mergeObjects([{ descriptor: descriptor }, ((cast ((cast _Runtime.field(light.name, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast { name: light.name } : Dynamic) : (cast {  } : Dynamic)), { transform: transform }])] : Array<Dynamic>));
   }
 
   public static function collectThreeDsPivots__threeDsParse(view:Dynamic, offset:Float):flighthq._internal._Map<String, Array<Float>> {

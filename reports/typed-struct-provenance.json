@@ -13556,7 +13556,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 16,
       "fields": 11,
       "id": "@flighthq/types:interface#AbcTrait",
       "name": "AbcTrait",
@@ -17083,7 +17083,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 15,
       "fields": 2,
       "id": "@flighthq/types:interface#CanvasRenderTextureEntry",
       "name": "CanvasRenderTextureEntry",
@@ -51582,7 +51582,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 15,
       "fields": 10,
       "id": "@flighthq/types:interface#ThreeDsLight",
       "name": "ThreeDsLight",

@@ -1093,6 +1093,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#Skeleton2DTransformConstraint',
     purpose: 'reviewed escape-free Skeleton2D transform constraint',
   },
+  {
+    declarationFingerprint: 'sha256:74c21326aec08c9f2f2e16e6d64e3300ccdb3fc5423d6bf9b2c1145b6def2a8a',
+    id: '@flighthq/types:interface#AbcTrait',
+    purpose: 'reviewed escape-free ABC trait',
+  },
+  {
+    declarationFingerprint: 'sha256:347be02a5d0ddbe8c51171c42f0c6fbb5fd7c9a9ce57332156da8e12fbaf5722',
+    id: '@flighthq/types:interface#CanvasRenderTextureEntry',
+    purpose: 'reviewed escape-free Canvas render-texture entry',
+  },
+  {
+    declarationFingerprint: 'sha256:be5f077631722591406184fa65398af48876fb3c6e8c82d3a3da4cc352c434e7',
+    id: '@flighthq/types:interface#NetRequest',
+    purpose: 'reviewed escape-free net request',
+  },
+  {
+    declarationFingerprint: 'sha256:035a1014631528e9aa9210a89a65d69e398026d9db46131285a1c87aeb2fda16',
+    id: '@flighthq/types:interface#SheenPbrExtension',
+    purpose: 'reviewed escape-free sheen PBR extension',
+  },
+  {
+    declarationFingerprint: 'sha256:1e5fb34fc3ff6df55e616cadbad7a3c2ea2027a5237f3e2d660b7d33d745305e',
+    id: '@flighthq/types:interface#ThreeDsLight',
+    purpose: 'reviewed escape-free 3DS light',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

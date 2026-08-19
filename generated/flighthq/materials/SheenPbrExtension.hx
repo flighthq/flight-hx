@@ -27,7 +27,7 @@ class SheenPbrExtension {
   }
 
   public static function isValidSheenPbrExtension(value:flighthq.types.SheenPbrExtension):Bool {
-    return cast _Runtime.andValue(((cast (cast isValidMaterialWeight((cast _Runtime.field(value, 'sheenRoughness') : Float)) : Bool) : Bool) && (cast (cast isValidPbrUvSet((cast _Runtime.field(value, 'sheenColorMapUvSet') : Float)) : Bool) : Bool)), function():Dynamic return cast (cast isValidPbrUvSet((cast _Runtime.field(value, 'sheenRoughnessMapUvSet') : Float)) : Bool));
+    return cast _Runtime.andValue(((cast (cast isValidMaterialWeight((cast value.sheenRoughness : Float)) : Bool) : Bool) && (cast (cast isValidPbrUvSet((cast value.sheenColorMapUvSet : Float)) : Bool) : Bool)), function():Dynamic return cast (cast isValidPbrUvSet((cast value.sheenRoughnessMapUvSet : Float)) : Bool));
     return cast null;
   }
 }

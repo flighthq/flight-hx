@@ -37,7 +37,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#AbcNamespace` | 0 | 2 | 1 | 0 | 2 | 0 | 0 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#AbcOptionalValue` | 0 | 2 | 1 | 0 | 2 | 0 | 0 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#AbcScript` | 0 | 2 | 1 | 1 | 1 | 0 | 0 | 1 | no | `normalization-provenance` |
-| `@flighthq/types:interface#AbcTrait` | 0 | 11 | 4 | 0 | 1 | 2 | 0 | 1 | no | `container-transfer`, `normalization-provenance` |
+| `@flighthq/types:interface#AbcTrait` | 16 | 11 | 4 | 0 | 1 | 2 | 0 | 1 | no | `container-transfer`, `normalization-provenance` |
 | `@flighthq/types:interface#AcceleratorParseError` | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#AccessibilityBackend` | 0 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#AmbientLightReading` | 3 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
@@ -93,7 +93,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#CanvasMaterialRenderer` | 0 | 1 | 1 | 0 | 1 | 0 | 1 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#CanvasRenderEffectContext` | 42 | 4 | 0 | 4 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderEffectPipeline` | 0 | 4 | 0 | 4 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#CanvasRenderTextureEntry` | 0 | 2 | 0 | 1 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CanvasRenderTextureEntry` | 15 | 2 | 0 | 1 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTextureExplanation` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTexturePool` | 21 | 5 | 0 | 4 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CanvasShapeCommand` | 0 | 2 | 5 | 0 | 5 | 0 | 4 | 6 | no | `normalization-provenance` |
@@ -627,7 +627,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#TexturePackerSize` | 2 | 2 | 3 | 0 | 3 | 0 | 2 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#TextureResolutionExplanation` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#ThreeDsCamera` | 0 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ThreeDsLight` | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ThreeDsLight` | 15 | 10 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ThreeDsMaterial` | 15 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ThreeDsMaterialGroup` | 0 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ThreeDsMesh` | 24 | 7 | 0 | 1 | 0 | 0 | 0 | 0 | yes | — |

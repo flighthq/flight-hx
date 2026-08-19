@@ -423,29 +423,29 @@ class AbcFile {
     kind = (_Runtime.toInt32(packed) & 15);
     trait = (cast { attributes: (_Runtime.toInt32(packed) >> 4), classIndex: 0.0, dispatchId: 0.0, kind: kind, metadata: cast ([] : Array<Dynamic>), methodIndex: 0.0, name: name, slotId: 0.0, typeName: 0.0, valueIndex: 0.0, valueKind: 0.0 });
     if ((cast ((cast _Runtime.strictEquals(kind, (cast AbcTraitKindValue : { var Class:Float; var Const:Float; var Function:Float; var Getter:Float; var Method:Float; var Setter:Float; var Slot:Float; }).Slot) : Bool) || (cast _Runtime.strictEquals(kind, (cast AbcTraitKindValue : { var Class:Float; var Const:Float; var Function:Float; var Getter:Float; var Method:Float; var Setter:Float; var Slot:Float; }).Const) : Bool)) : Bool)) {
-      ((cast trait : AbcTrait).slotId = (cast reader : AbcReader__abcFile).readVarUint());
-      ((cast trait : AbcTrait).typeName = (cast reader : AbcReader__abcFile).readVarUint());
-      ((cast trait : AbcTrait).valueIndex = (cast reader : AbcReader__abcFile).readVarUint());
-      if ((cast !_Runtime.strictEquals((cast trait : AbcTrait).valueIndex, 0.0) : Bool)) { ((cast trait : AbcTrait).valueKind = (cast reader : AbcReader__abcFile).readUint8()); }
+      (trait.slotId = cast ((cast reader : AbcReader__abcFile).readVarUint() : Float));
+      (trait.typeName = cast ((cast reader : AbcReader__abcFile).readVarUint() : Float));
+      (trait.valueIndex = cast ((cast reader : AbcReader__abcFile).readVarUint() : Float));
+      if ((cast !_Runtime.strictEquals(trait.valueIndex, 0.0) : Bool)) { (trait.valueKind = cast ((cast reader : AbcReader__abcFile).readUint8() : Float)); }
     } else { if ((cast _Runtime.strictEquals(kind, (cast AbcTraitKindValue : { var Class:Float; var Const:Float; var Function:Float; var Getter:Float; var Method:Float; var Setter:Float; var Slot:Float; }).Class) : Bool)) {
-      ((cast trait : AbcTrait).slotId = (cast reader : AbcReader__abcFile).readVarUint());
-      ((cast trait : AbcTrait).classIndex = (cast reader : AbcReader__abcFile).readVarUint());
+      (trait.slotId = cast ((cast reader : AbcReader__abcFile).readVarUint() : Float));
+      (trait.classIndex = cast ((cast reader : AbcReader__abcFile).readVarUint() : Float));
     } else { if ((cast _Runtime.strictEquals(kind, (cast AbcTraitKindValue : { var Class:Float; var Const:Float; var Function:Float; var Getter:Float; var Method:Float; var Setter:Float; var Slot:Float; }).Function) : Bool)) {
-      ((cast trait : AbcTrait).slotId = (cast reader : AbcReader__abcFile).readVarUint());
-      ((cast trait : AbcTrait).methodIndex = (cast reader : AbcReader__abcFile).readVarUint());
+      (trait.slotId = cast ((cast reader : AbcReader__abcFile).readVarUint() : Float));
+      (trait.methodIndex = cast ((cast reader : AbcReader__abcFile).readVarUint() : Float));
     } else { if ((cast ((cast ((cast _Runtime.strictEquals(kind, (cast AbcTraitKindValue : { var Class:Float; var Const:Float; var Function:Float; var Getter:Float; var Method:Float; var Setter:Float; var Slot:Float; }).Method) : Bool) || (cast _Runtime.strictEquals(kind, (cast AbcTraitKindValue : { var Class:Float; var Const:Float; var Function:Float; var Getter:Float; var Method:Float; var Setter:Float; var Slot:Float; }).Getter) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, (cast AbcTraitKindValue : { var Class:Float; var Const:Float; var Function:Float; var Getter:Float; var Method:Float; var Setter:Float; var Slot:Float; }).Setter) : Bool)) : Bool)) {
-      ((cast trait : AbcTrait).dispatchId = (cast reader : AbcReader__abcFile).readVarUint());
-      ((cast trait : AbcTrait).methodIndex = (cast reader : AbcReader__abcFile).readVarUint());
+      (trait.dispatchId = cast ((cast reader : AbcReader__abcFile).readVarUint() : Float));
+      (trait.methodIndex = cast ((cast reader : AbcReader__abcFile).readVarUint() : Float));
     } else {
       return cast null;
     } } } }
-    if ((cast !_Runtime.strictEquals((_Runtime.toInt32((cast trait : AbcTrait).attributes) & _Runtime.toInt32(AbcFile.TRAIT_ATTRIBUTE_METADATA__abcFile)), 0.0) : Bool)) {
+    if ((cast !_Runtime.strictEquals((_Runtime.toInt32(trait.attributes) & _Runtime.toInt32(AbcFile.TRAIT_ATTRIBUTE_METADATA__abcFile)), 0.0) : Bool)) {
       var count:Float = (cast reader : AbcReader__abcFile).readVarUint();
       if ((cast ((cast !(cast (cast reader : AbcReader__abcFile).valid : Bool) : Bool) || (cast ((cast count : Float) > (cast AbcFile.MAX_ENTRIES__abcFile : Float)) : Bool)) : Bool)) { return cast null; }
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-          _Runtime.callProperty((cast trait : AbcTrait).metadata, 'push', cast ([(cast reader : AbcReader__abcFile).readVarUint()] : Array<Dynamic>));
+          _Runtime.callProperty(trait.metadata, 'push', cast ([(cast reader : AbcReader__abcFile).readVarUint()] : Array<Dynamic>));
           i++;
         }
       }

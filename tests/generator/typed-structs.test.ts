@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_391,
+      newAuditOnly: 1_386,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(615);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(620);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_391);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_386);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(213);
+    expect(newDirect).toHaveLength(218);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1175,6 +1175,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'Skeleton2DTransformConstraint',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free Skeleton2D transform constraint',
+        }),
+        expect.objectContaining({
+          name: 'AbcTrait',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free ABC trait',
+        }),
+        expect.objectContaining({
+          name: 'CanvasRenderTextureEntry',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Canvas render-texture entry',
+        }),
+        expect.objectContaining({
+          name: 'NetRequest',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free net request',
+        }),
+        expect.objectContaining({
+          name: 'SheenPbrExtension',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free sheen PBR extension',
+        }),
+        expect.objectContaining({
+          name: 'ThreeDsLight',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free 3DS light',
         }),
       ]),
     );
@@ -2244,6 +2269,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#Skeleton2DTransformConstraint',
         purpose: 'reviewed escape-free Skeleton2D transform constraint',
       },
+      {
+        declarationFingerprint: 'sha256:74c21326aec08c9f2f2e16e6d64e3300ccdb3fc5423d6bf9b2c1145b6def2a8a',
+        id: '@flighthq/types:interface#AbcTrait',
+        purpose: 'reviewed escape-free ABC trait',
+      },
+      {
+        declarationFingerprint: 'sha256:347be02a5d0ddbe8c51171c42f0c6fbb5fd7c9a9ce57332156da8e12fbaf5722',
+        id: '@flighthq/types:interface#CanvasRenderTextureEntry',
+        purpose: 'reviewed escape-free Canvas render-texture entry',
+      },
+      {
+        declarationFingerprint: 'sha256:be5f077631722591406184fa65398af48876fb3c6e8c82d3a3da4cc352c434e7',
+        id: '@flighthq/types:interface#NetRequest',
+        purpose: 'reviewed escape-free net request',
+      },
+      {
+        declarationFingerprint: 'sha256:035a1014631528e9aa9210a89a65d69e398026d9db46131285a1c87aeb2fda16',
+        id: '@flighthq/types:interface#SheenPbrExtension',
+        purpose: 'reviewed escape-free sheen PBR extension',
+      },
+      {
+        declarationFingerprint: 'sha256:1e5fb34fc3ff6df55e616cadbad7a3c2ea2027a5237f3e2d660b7d33d745305e',
+        id: '@flighthq/types:interface#ThreeDsLight',
+        purpose: 'reviewed escape-free 3DS light',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -3042,6 +3092,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const sixteenthHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['AbcTrait', 'CanvasRenderTextureEntry', 'NetRequest', 'SheenPbrExtension', 'ThreeDsLight'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -3082,22 +3141,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_391,
+      auditOnlySchemas: 1_386,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 23_243,
-      directSchemas: 613,
+      directAccesses: 23_319,
+      directSchemas: 618,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 7_423,
+      pendingAccesses: 7_347,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_391,
+      newAuditOnly: 1_386,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -3174,7 +3233,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(23_243);
+    expect(report.summary.directAccesses).toBe(23_319);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -4060,6 +4119,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(fifteenthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'AbcTrait',
+        16,
+        'sha256:74c21326aec08c9f2f2e16e6d64e3300ccdb3fc5423d6bf9b2c1145b6def2a8a',
+        'reviewed escape-free ABC trait',
+      ],
+      [
+        'CanvasRenderTextureEntry',
+        15,
+        'sha256:347be02a5d0ddbe8c51171c42f0c6fbb5fd7c9a9ce57332156da8e12fbaf5722',
+        'reviewed escape-free Canvas render-texture entry',
+      ],
+      [
+        'NetRequest',
+        15,
+        'sha256:be5f077631722591406184fa65398af48876fb3c6e8c82d3a3da4cc352c434e7',
+        'reviewed escape-free net request',
+      ],
+      [
+        'SheenPbrExtension',
+        15,
+        'sha256:035a1014631528e9aa9210a89a65d69e398026d9db46131285a1c87aeb2fda16',
+        'reviewed escape-free sheen PBR extension',
+      ],
+      [
+        'ThreeDsLight',
+        15,
+        'sha256:1e5fb34fc3ff6df55e616cadbad7a3c2ea2027a5237f3e2d660b7d33d745305e',
+        'reviewed escape-free 3DS light',
+      ],
+    ] as const) {
+      expect(sixteenthHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -5800,6 +5901,30 @@ describe('typed struct analysis', () => {
     }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
+        '@flighthq/types:interface#AbcTrait',
+        true,
+        [],
+        [],
+        { blockerReasons: ['container-transfer', 'normalization-provenance'], closed: false },
+      ],
+      ['@flighthq/types:interface#CanvasRenderTextureEntry', true, [], [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#NetRequest', true, [], ['optional-omission'], null],
+      ['@flighthq/types:interface#SheenPbrExtension', false, ['cross-schema-transfer'], [], null],
+      ['@flighthq/types:interface#ThreeDsLight', true, [], [], { blockerReasons: [], closed: true }],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      if (nominalIdentity === null) {
+        expect(provenanceById.has(frontierId)).toBe(false);
+      } else {
+        expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+      }
+    }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
+      [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
         true,
         [],
@@ -6826,6 +6951,29 @@ describe('typed struct analysis', () => {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AnimationBlendTreeInput|AnimationLayer|AnimationSampleAccumulator|LottieKeyframe|Skeleton2DTransformConstraint)\)\./u,
       );
+    }
+    for (const path of [
+      'generated/flighthq/abc/AbcFile.hx',
+      'generated/flighthq/materials/SheenPbrExtension.hx',
+      'generated/flighthq/net/Net.hx',
+      'generated/flighthq/scene2dCanvas/CanvasRenderTexture.hx',
+      'generated/flighthq/scene3dFormats/ThreeDsParse.hx',
+      'generated/flighthq/scene3dGl/SheenPbrGlExtension.hx',
+      'generated/flighthq/scene3dResources/SheenPbrScene3DMaterialTextures.hx',
+      'generated/flighthq/swf/SwfFrameAction.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AbcTrait|CanvasRenderTextureEntry|NetRequest|SheenPbrExtension|ThreeDsLight)\)\./u,
+      );
+    }
+    for (const [path, receiver] of [
+      ['generated/flighthq/abc/AbcFile.hx', 'trait'],
+      ['generated/flighthq/net/Net.hx', 'request'],
+      ['generated/flighthq/scene3dFormats/ThreeDsParse.hx', 'light'],
+      ['generated/flighthq/scene3dGl/SheenPbrGlExtension.hx', 'extension'],
+      ['generated/flighthq/scene3dResources/SheenPbrScene3DMaterialTextures.hx', 'sheen'],
+    ] as const) {
+      expect(readFileSync(path, 'utf8')).not.toContain(`_Runtime.field(${receiver},`);
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
     expect(generatedCanvasRenderState).not.toMatch(

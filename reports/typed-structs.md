@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1391 |
-| Direct schemas | 613 |
+| Audit-only schemas | 1386 |
+| Direct schemas | 618 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 7423 |
-| Directly emitted accesses | 23243 |
+| Pending accesses | 7347 |
+| Directly emitted accesses | 23319 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1391 |
+| Newly discovered, audit-only | 1386 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -62,7 +62,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#AbcOpcode` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#AbcOptionalValue` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AbcScript` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#AbcTrait` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 6 | 10 | 0 | 16 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AbcTrait` | `direct` | `new` | — | reviewed escape-free ABC trait | 11 | 6 | 10 | 0 | 0 | 16 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AbcTraitKind` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#Accelerator` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#AcceleratorParseError` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 4 | yes | — |
@@ -271,7 +271,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CanvasRenderStateRuntime` | `direct` | `new` | — | reviewed escape-free Canvas render-state runtime | 23 | 22 | 11 | 1 | 0 | 34 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTarget` | `direct` | `new` | — | reviewed escape-free Canvas render target | 4 | 147 | 6 | 0 | 0 | 153 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTargetPool` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CanvasRenderTextureEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 12 | 3 | 0 | 15 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CanvasRenderTextureEntry` | `direct` | `new` | — | reviewed escape-free Canvas render-texture entry | 2 | 12 | 3 | 0 | 0 | 15 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTextureExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTexturePool` | `direct` | `new` | — | reviewed escape-free Canvas render-texture pool | 5 | 18 | 3 | 0 | 0 | 21 | 0 | 0 | yes | — |
 | `@flighthq/types:type#CanvasRenderTextureStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1011,7 +1011,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#NetMethod` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#NetProgress` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#NetRedirect` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#NetRequest` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 15 | 0 | 0 | 15 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#NetRequest` | `direct` | `new` | — | reviewed escape-free net request | 8 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#NetRequestOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 1 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#NetResponse` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#NetResponseBody` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
@@ -1464,7 +1464,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ShareResult` | `direct` | `preserved` | `@flighthq/types:interface#ShareResult` | broad host document | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ShareSignals` | `direct` | `preserved` | `@flighthq/types:interface#ShareSignals` | broad host document | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SharpenEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#SheenPbrExtension` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 15 | 0 | 0 | 15 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SheenPbrExtension` | `direct` | `new` | — | reviewed escape-free sheen PBR extension | 7 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ShellBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | yes | — |
 | `@flighthq/types:interface#ShellOpenExternalOptions` | `direct` | `preserved` | `@flighthq/types:interface#ShellOpenExternalOptions` | broad host document | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ShellOpenPathOptions` | `direct` | `preserved` | `@flighthq/types:interface#ShellOpenPathOptions` | broad host document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -1809,7 +1809,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#TextureWrap` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#TextVerticalAlign` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#ThreeDsCamera` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ThreeDsLight` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 15 | 0 | 0 | 15 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ThreeDsLight` | `direct` | `new` | — | reviewed escape-free 3DS light | 10 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ThreeDsMaterial` | `direct` | `relocated` | `@flighthq/scene-formats:interface#ThreeDsMaterial` | broad serialization document | 9 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ThreeDsMaterialGroup` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ThreeDsMesh` | `direct` | `relocated` | `@flighthq/scene-formats:interface#ThreeDsMesh` | broad serialization document | 7 | 24 | 0 | 0 | 0 | 24 | 0 | 0 | yes | — |

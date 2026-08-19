@@ -1399,9 +1399,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 16,
+        "directAccesses": 16,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -1503,7 +1503,7 @@
       },
       "name": "AbcTrait",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free ABC trait",
       "reasons": [],
       "source": "upstream/packages/types/src/Abc.ts",
       "sourceProvenance": {
@@ -43234,9 +43234,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 15,
+        "directAccesses": 15,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -43266,7 +43266,7 @@
       },
       "name": "CanvasRenderTextureEntry",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Canvas render-texture entry",
       "reasons": [],
       "source": "upstream/packages/types/src/CanvasRenderTexture.ts",
       "sourceProvenance": {
@@ -201604,9 +201604,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 15,
+        "directAccesses": 15,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -201684,7 +201684,7 @@
       },
       "name": "NetRequest",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free net request",
       "reasons": [],
       "source": "upstream/packages/types/src/Net.ts",
       "sourceProvenance": {
@@ -294373,9 +294373,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 15,
+        "directAccesses": 15,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -294451,7 +294451,7 @@
       },
       "name": "SheenPbrExtension",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free sheen PBR extension",
       "reasons": [],
       "source": "upstream/packages/types/src/SheenPbrExtension.ts",
       "sourceProvenance": {
@@ -368197,9 +368197,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 15,
+        "directAccesses": 15,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -368293,7 +368293,7 @@
       },
       "name": "ThreeDsLight",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free 3DS light",
       "reasons": [],
       "source": "upstream/packages/types/src/ThreeDsSchema.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1391,
+      "newAuditOnly": 1386,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1391,
+    "auditOnlySchemas": 1386,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 23243,
-    "directSchemas": 613,
+    "directAccesses": 23319,
+    "directSchemas": 618,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 7423,
+    "pendingAccesses": 7347,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"
