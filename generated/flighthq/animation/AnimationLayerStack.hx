@@ -76,8 +76,8 @@ class AnimationLayerStack {
             continue;
           }
           var existing:AnimationLayerStackChannel = flighthq._internal._StaticIndex.readArray(channels, existingIndex);
-          AnimationLayerStack.assertCompatibleAnimationLayerChannels__animationLayerStack((cast existing : AnimationLayerStackChannel).channel, ({ final __callArgument11:Dynamic = channel; __callArgument11; }));
-          _Runtime.callProperty((cast (cast existing : AnimationLayerStackChannel).sources : Array<AnimationLayerStackChannelSource>), 'push', cast ([{ channelIndex: channelIndex, layerIndex: layerIndex }] : Array<Dynamic>));
+          AnimationLayerStack.assertCompatibleAnimationLayerChannels__animationLayerStack(existing.channel, ({ final __callArgument11:Dynamic = channel; __callArgument11; }));
+          _Runtime.callProperty((cast existing.sources : Array<AnimationLayerStackChannelSource>), 'push', cast ([{ channelIndex: channelIndex, layerIndex: layerIndex }] : Array<Dynamic>));
         }
         layerIndex++;
       }
@@ -95,7 +95,7 @@ class AnimationLayerStack {
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(stack.channels, 'length') : Float)) : Bool)) {
-        if ((cast (cast sampleAnimationLayerStackChannel(({ final __callArgument16:Dynamic = out; __callArgument16; }), ({ final __callArgument17:Dynamic = stack; __callArgument17; }), (cast index : Float)) : Bool) : Bool)) { visit(({ final __callArgument18:Dynamic = out; __callArgument18; }), _Runtime.field(flighthq._internal._StaticIndex.readArray(stack.channels, index), 'channel'), (cast index : Float)); }
+        if ((cast (cast sampleAnimationLayerStackChannel(({ final __callArgument16:Dynamic = out; __callArgument16; }), ({ final __callArgument17:Dynamic = stack; __callArgument17; }), (cast index : Float)) : Bool) : Bool)) { visit(({ final __callArgument18:Dynamic = out; __callArgument18; }), (cast flighthq._internal._StaticIndex.readArray(stack.channels, index) : { var channel:AnimationChannel; }).channel, (cast index : Float)); }
         index++;
       }
     }
@@ -107,19 +107,19 @@ class AnimationLayerStack {
     entry = flighthq._internal._StaticIndex.readArray(stack.channels, channelIndex);
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
     hasPose = false;
-    for (source in _Runtime.iterable(_Runtime.field(entry, 'sources'))) {
+    for (source in _Runtime.iterable(entry.sources)) {
       var layer:AnimationLayer = flighthq._internal._StaticIndex.readArray(stack.layers, _Runtime.field(source, 'layerIndex'));
       if ((cast ((cast !(cast _Runtime.compare(layer.weight, 0.0, '>') : Bool) : Bool) || (cast !(cast (cast AnimationLayerStack.sampleAnimationLayer__animationLayerStack(({ final __callArgument21:Dynamic = stack.sampleScratch; __callArgument21; }), ({ final __callArgument22:Dynamic = layer; __callArgument22; }), (cast _Runtime.field(source, 'channelIndex') : Float)) : Bool) : Bool) : Bool)) : Bool)) { continue; }
       if ((cast layer.additive : Bool)) {
         if ((cast !(cast hasPose : Bool) : Bool)) {
-          AnimationLayerStack.writeAnimationLayerIdentity__animationLayerStack(({ final __callArgument23:Dynamic = out; __callArgument23; }), (cast (cast (cast _Runtime.field(entry, 'channel') : { var track:AnimationTrack; }).track : { var components:Float; }).components : Float), (cast (cast (cast _Runtime.field(entry, 'channel') : { var track:AnimationTrack; }).track : { var quaternion:Bool; }).quaternion : Bool));
+          AnimationLayerStack.writeAnimationLayerIdentity__animationLayerStack(({ final __callArgument23:Dynamic = out; __callArgument23; }), (cast (cast (cast entry.channel : { var track:AnimationTrack; }).track : { var components:Float; }).components : Float), (cast (cast (cast entry.channel : { var track:AnimationTrack; }).track : { var quaternion:Bool; }).quaternion : Bool));
           (hasPose = cast (true : Dynamic));
         }
-        addAnimationSample(({ final __callArgument24:Dynamic = out; __callArgument24; }), ({ final __callArgument25:Dynamic = out; __callArgument25; }), ({ final __callArgument26:Dynamic = stack.sampleScratch; __callArgument26; }), (cast layer.weight : Float), (cast (cast (cast _Runtime.field(entry, 'channel') : { var track:AnimationTrack; }).track : { var quaternion:Bool; }).quaternion : Bool));
+        addAnimationSample(({ final __callArgument24:Dynamic = out; __callArgument24; }), ({ final __callArgument25:Dynamic = out; __callArgument25; }), ({ final __callArgument26:Dynamic = stack.sampleScratch; __callArgument26; }), (cast layer.weight : Float), (cast (cast (cast entry.channel : { var track:AnimationTrack; }).track : { var quaternion:Bool; }).quaternion : Bool));
       } else { if ((cast hasPose : Bool)) {
-        blendAnimationSamples(({ final __callArgument27:Dynamic = out; __callArgument27; }), ({ final __callArgument28:Dynamic = out; __callArgument28; }), ({ final __callArgument29:Dynamic = stack.sampleScratch; __callArgument29; }), (cast layer.weight : Float), (cast (cast (cast _Runtime.field(entry, 'channel') : { var track:AnimationTrack; }).track : { var quaternion:Bool; }).quaternion : Bool));
+        blendAnimationSamples(({ final __callArgument27:Dynamic = out; __callArgument27; }), ({ final __callArgument28:Dynamic = out; __callArgument28; }), ({ final __callArgument29:Dynamic = stack.sampleScratch; __callArgument29; }), (cast layer.weight : Float), (cast (cast (cast entry.channel : { var track:AnimationTrack; }).track : { var quaternion:Bool; }).quaternion : Bool));
       } else {
-        AnimationLayerStack.copyAnimationLayerSample__animationLayerStack(({ final __callArgument30:Dynamic = out; __callArgument30; }), ({ final __callArgument31:Dynamic = stack.sampleScratch; __callArgument31; }), (cast (cast (cast _Runtime.field(entry, 'channel') : { var track:AnimationTrack; }).track : { var components:Float; }).components : Float));
+        AnimationLayerStack.copyAnimationLayerSample__animationLayerStack(({ final __callArgument30:Dynamic = out; __callArgument30; }), ({ final __callArgument31:Dynamic = stack.sampleScratch; __callArgument31; }), (cast (cast (cast entry.channel : { var track:AnimationTrack; }).track : { var components:Float; }).components : Float));
         (hasPose = cast (true : Dynamic));
       } }
     }

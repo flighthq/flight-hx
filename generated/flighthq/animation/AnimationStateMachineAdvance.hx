@@ -13,10 +13,10 @@ import flighthq.types.EasingFunction;
 class AnimationStateMachineAdvance {
   public static function advanceAnimationStateMachineWithScratch(machine:AnimationStateMachine, dt:Float, advanced:Array<AnimationPlayer>):Void {
     var toIndex:Null<Float> = cast _Runtime.UNDEFINED;
-    advanceAnimationPlayers((cast (cast flighthq._internal._StaticIndex.readArray(machine.states, machine.currentStateIndex) : AnimationStateMachineState).blendTree : { var players:Array<AnimationPlayer>; }).players, (cast dt : Float), ({ final __callArgument0:Dynamic = advanced; __callArgument0; }));
+    advanceAnimationPlayers((cast (cast flighthq._internal._StaticIndex.readArray(machine.states, machine.currentStateIndex) : { var blendTree:AnimationBlendTree; }).blendTree : { var players:Array<AnimationPlayer>; }).players, (cast dt : Float), ({ final __callArgument0:Dynamic = advanced; __callArgument0; }));
     toIndex = machine.transitionToStateIndex;
     if ((cast _Runtime.strictEquals(toIndex, null) : Bool)) { return; }
-    advanceAnimationPlayers((cast (cast flighthq._internal._StaticIndex.readArray(machine.states, toIndex) : AnimationStateMachineState).blendTree : { var players:Array<AnimationPlayer>; }).players, (cast dt : Float), ({ final __callArgument1:Dynamic = advanced; __callArgument1; }));
+    advanceAnimationPlayers((cast (cast flighthq._internal._StaticIndex.readArray(machine.states, toIndex) : { var blendTree:AnimationBlendTree; }).blendTree : { var players:Array<AnimationPlayer>; }).players, (cast dt : Float), ({ final __callArgument1:Dynamic = advanced; __callArgument1; }));
     (machine.transitionElapsed += dt);
     (machine.transitionWeight = cast ((machine.transitionCurve)((cast (cast AnimationStateMachineAdvance.getLinearAnimationStateMachineTransitionWeight__animationStateMachineAdvance((cast machine.transitionElapsed : Float), (cast machine.transitionDuration : Float)) : Float) : Float)) : Float));
     if ((cast ((cast ((cast machine.transitionDuration : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast machine.transitionElapsed : Float) >= (cast machine.transitionDuration : Float)) : Bool)) : Bool)) {

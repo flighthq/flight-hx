@@ -41,12 +41,12 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#AcceleratorParseError` | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#AccessibilityBackend` | 0 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#AmbientLightReading` | 3 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#AnimationBlendTreeChannel` | 0 | 3 | 1 | 3 | 5 | 0 | 5 | 5 | no | `normalization-provenance` |
+| `@flighthq/types:interface#AnimationBlendTreeChannel` | 9 | 3 | 1 | 3 | 5 | 0 | 5 | 5 | no | `normalization-provenance` |
 | `@flighthq/types:interface#AnimationBlendTreeChannelSource` | 0 | 2 | 1 | 0 | 5 | 0 | 5 | 5 | no | `normalization-provenance` |
-| `@flighthq/types:interface#AnimationCrossfadeChannel` | 0 | 3 | 1 | 1 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
-| `@flighthq/types:interface#AnimationLayerStackChannel` | 0 | 2 | 1 | 2 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
+| `@flighthq/types:interface#AnimationCrossfadeChannel` | 8 | 3 | 1 | 1 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
+| `@flighthq/types:interface#AnimationLayerStackChannel` | 9 | 2 | 1 | 2 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#AnimationLayerStackChannelSource` | 0 | 2 | 1 | 0 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
-| `@flighthq/types:interface#AnimationStateMachineChannel` | 0 | 2 | 1 | 1 | 3 | 0 | 3 | 3 | no | `normalization-provenance` |
+| `@flighthq/types:interface#AnimationStateMachineChannel` | 9 | 2 | 1 | 1 | 3 | 0 | 3 | 3 | no | `normalization-provenance` |
 | `@flighthq/types:interface#AnimationTrackValidationDiagnostic` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#App` | 7 | 6 | 0 | 6 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#AppBackend` | 0 | 38 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |

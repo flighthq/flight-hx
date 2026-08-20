@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_306,
+      newAuditOnly: 1_301,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(700);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(705);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_306);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_301);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(298);
+    expect(newDirect).toHaveLength(303);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1600,6 +1600,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'TextInputManager',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free text-input manager',
+        }),
+        expect.objectContaining({
+          name: 'AnimationBlendTreeChannel',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free animation blend-tree channel',
+        }),
+        expect.objectContaining({
+          name: 'AnimationCrossfadeChannel',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free animation crossfade channel',
+        }),
+        expect.objectContaining({
+          name: 'AnimationLayerStackChannel',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free animation layer-stack channel',
+        }),
+        expect.objectContaining({
+          name: 'AnimationStateMachineChannel',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free animation state-machine channel',
+        }),
+        expect.objectContaining({
+          name: 'AnimationStateMachineState',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free animation state-machine state',
         }),
       ]),
     );
@@ -3094,6 +3119,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#TextInputManager',
         purpose: 'reviewed escape-free text-input manager',
       },
+      {
+        declarationFingerprint: 'sha256:d73fbec5a2c4773d9e8eb53ed511928234ed9ff9989a54401b85df4ed2c1ad56',
+        id: '@flighthq/types:interface#AnimationBlendTreeChannel',
+        purpose: 'reviewed escape-free animation blend-tree channel',
+      },
+      {
+        declarationFingerprint: 'sha256:fe06435797da8cf9bf102b8854a6814b5c53dc2c5bb25df2f0dbadd34d731f39',
+        id: '@flighthq/types:interface#AnimationCrossfadeChannel',
+        purpose: 'reviewed escape-free animation crossfade channel',
+      },
+      {
+        declarationFingerprint: 'sha256:9d46d35ab194d129b0c60a82cc260ec545d9c9be36d37d06a76b937ef307f883',
+        id: '@flighthq/types:interface#AnimationLayerStackChannel',
+        purpose: 'reviewed escape-free animation layer-stack channel',
+      },
+      {
+        declarationFingerprint: 'sha256:454c30877bccdda403fac1dd002f9773048d6cb022fd88f025b11f2a6f45b950',
+        id: '@flighthq/types:interface#AnimationStateMachineChannel',
+        purpose: 'reviewed escape-free animation state-machine channel',
+      },
+      {
+        declarationFingerprint: 'sha256:61309ced3413df8041d6b2ae9688589d56cd8c53406af08e2d975a4c7dc40cbc',
+        id: '@flighthq/types:interface#AnimationStateMachineState',
+        purpose: 'reviewed escape-free animation state-machine state',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -4073,6 +4123,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const thirtyThirdHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'AnimationBlendTreeChannel',
+            'AnimationCrossfadeChannel',
+            'AnimationLayerStackChannel',
+            'AnimationStateMachineChannel',
+            'AnimationStateMachineState',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -4113,22 +4176,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_306,
+      auditOnlySchemas: 1_301,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 24_235,
-      directSchemas: 698,
+      directAccesses: 24_278,
+      directSchemas: 703,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 6_431,
+      pendingAccesses: 6_388,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_306,
+      newAuditOnly: 1_301,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -4205,7 +4268,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(24_235);
+    expect(report.summary.directAccesses).toBe(24_278);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -5805,6 +5868,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(thirtySecondHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'AnimationBlendTreeChannel',
+        9,
+        'sha256:d73fbec5a2c4773d9e8eb53ed511928234ed9ff9989a54401b85df4ed2c1ad56',
+        'reviewed escape-free animation blend-tree channel',
+      ],
+      [
+        'AnimationCrossfadeChannel',
+        8,
+        'sha256:fe06435797da8cf9bf102b8854a6814b5c53dc2c5bb25df2f0dbadd34d731f39',
+        'reviewed escape-free animation crossfade channel',
+      ],
+      [
+        'AnimationLayerStackChannel',
+        9,
+        'sha256:9d46d35ab194d129b0c60a82cc260ec545d9c9be36d37d06a76b937ef307f883',
+        'reviewed escape-free animation layer-stack channel',
+      ],
+      [
+        'AnimationStateMachineChannel',
+        9,
+        'sha256:454c30877bccdda403fac1dd002f9773048d6cb022fd88f025b11f2a6f45b950',
+        'reviewed escape-free animation state-machine channel',
+      ],
+      [
+        'AnimationStateMachineState',
+        8,
+        'sha256:61309ced3413df8041d6b2ae9688589d56cd8c53406af08e2d975a4c7dc40cbc',
+        'reviewed escape-free animation state-machine state',
+      ],
+    ] as const) {
+      expect(thirtyThirdHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -7863,6 +7968,41 @@ describe('typed struct analysis', () => {
       if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
       else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
     }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, nominalIdentity] of [
+      [
+        '@flighthq/types:interface#AnimationBlendTreeChannel',
+        true,
+        [],
+        { blockerReasons: ['normalization-provenance'], closed: false },
+      ],
+      [
+        '@flighthq/types:interface#AnimationCrossfadeChannel',
+        true,
+        [],
+        { blockerReasons: ['normalization-provenance'], closed: false },
+      ],
+      [
+        '@flighthq/types:interface#AnimationLayerStackChannel',
+        true,
+        [],
+        { blockerReasons: ['normalization-provenance'], closed: false },
+      ],
+      [
+        '@flighthq/types:interface#AnimationStateMachineChannel',
+        true,
+        [],
+        { blockerReasons: ['normalization-provenance'], closed: false },
+      ],
+      ['@flighthq/types:interface#AnimationStateMachineState', false, ['cross-schema-transfer'], null],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons: [],
+      });
+      if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
+      else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+    }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
@@ -9232,6 +9372,17 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:FocusManager|SelectableRichTextManager|TextInputHistoryEntry|TextInputManager|TextSegment)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/animation/AnimationBlendTree.hx',
+      'generated/flighthq/animation/AnimationCrossfade.hx',
+      'generated/flighthq/animation/AnimationLayerStack.hx',
+      'generated/flighthq/animation/AnimationStateMachine.hx',
+      'generated/flighthq/animation/AnimationStateMachineAdvance.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AnimationBlendTreeChannel|AnimationCrossfadeChannel|AnimationLayerStackChannel|AnimationStateMachineChannel|AnimationStateMachineState)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');

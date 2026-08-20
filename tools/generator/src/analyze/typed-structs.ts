@@ -1518,6 +1518,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#TextInputManager',
     purpose: 'reviewed escape-free text-input manager',
   },
+  {
+    declarationFingerprint: 'sha256:d73fbec5a2c4773d9e8eb53ed511928234ed9ff9989a54401b85df4ed2c1ad56',
+    id: '@flighthq/types:interface#AnimationBlendTreeChannel',
+    purpose: 'reviewed escape-free animation blend-tree channel',
+  },
+  {
+    declarationFingerprint: 'sha256:fe06435797da8cf9bf102b8854a6814b5c53dc2c5bb25df2f0dbadd34d731f39',
+    id: '@flighthq/types:interface#AnimationCrossfadeChannel',
+    purpose: 'reviewed escape-free animation crossfade channel',
+  },
+  {
+    declarationFingerprint: 'sha256:9d46d35ab194d129b0c60a82cc260ec545d9c9be36d37d06a76b937ef307f883',
+    id: '@flighthq/types:interface#AnimationLayerStackChannel',
+    purpose: 'reviewed escape-free animation layer-stack channel',
+  },
+  {
+    declarationFingerprint: 'sha256:454c30877bccdda403fac1dd002f9773048d6cb022fd88f025b11f2a6f45b950',
+    id: '@flighthq/types:interface#AnimationStateMachineChannel',
+    purpose: 'reviewed escape-free animation state-machine channel',
+  },
+  {
+    declarationFingerprint: 'sha256:61309ced3413df8041d6b2ae9688589d56cd8c53406af08e2d975a4c7dc40cbc',
+    id: '@flighthq/types:interface#AnimationStateMachineState',
+    purpose: 'reviewed escape-free animation state-machine state',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

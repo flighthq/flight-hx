@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1306 |
-| Direct schemas | 698 |
+| Audit-only schemas | 1301 |
+| Direct schemas | 703 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 6431 |
-| Directly emitted accesses | 24235 |
+| Pending accesses | 6388 |
+| Directly emitted accesses | 24278 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1306 |
+| Newly discovered, audit-only | 1301 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -85,28 +85,28 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#AnimatedNormalModifier` | `direct` | `new` | — | reviewed escape-free animated-normal modifier | 7 | 28 | 2 | 0 | 0 | 30 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimatedNormalModifierOptions` | `direct` | `new` | — | reviewed escape-free animated-normal modifier options | 5 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationBlendTree` | `direct` | `new` | — | reviewed escape-free animation blend tree | 4 | 17 | 0 | 0 | 0 | 17 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#AnimationBlendTreeChannel` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AnimationBlendTreeChannel` | `direct` | `new` | — | reviewed escape-free animation blend-tree channel | 3 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationBlendTreeChannelSource` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationBlendTreeInput` | `direct` | `new` | — | reviewed escape-free animation blend-tree input | 3 | 14 | 1 | 0 | 0 | 15 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationChannel` | `direct` | `new` | — | reviewed escape-free animation channel | 2 | 89 | 0 | 0 | 0 | 89 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationClip` | `direct` | `preserved` | `@flighthq/types:interface#AnimationClip` | broad scene document | 3 | 25 | 0 | 0 | 0 | 25 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationClipEvent` | `direct` | `new` | — | reviewed escape-free animation clip event | 3 | 18 | 0 | 0 | 0 | 18 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationCrossfade` | `direct` | `new` | — | reviewed escape-free animation crossfade | 9 | 20 | 2 | 1 | 0 | 23 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#AnimationCrossfadeChannel` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AnimationCrossfadeChannel` | `direct` | `new` | — | reviewed escape-free animation crossfade channel | 3 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationCrossfadeOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AnimationInterpolation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#AnimationLayer` | `direct` | `new` | — | reviewed escape-free animation layer | 5 | 15 | 1 | 0 | 0 | 16 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationLayerOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationLayerStack` | `direct` | `new` | — | reviewed escape-free animation layer stack | 6 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#AnimationLayerStackChannel` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AnimationLayerStackChannel` | `direct` | `new` | — | reviewed escape-free animation layer-stack channel | 2 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationLayerStackChannelSource` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AnimationLoopMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#AnimationPlayer` | `direct` | `new` | — | reviewed escape-free animation player | 10 | 42 | 19 | 0 | 0 | 61 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationRootMotionExtractor` | `direct` | `new` | — | reviewed escape-free animation root-motion extractor | 10 | 21 | 0 | 0 | 0 | 21 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationSampleAccumulator` | `direct` | `new` | — | reviewed escape-free animation sample accumulator | 4 | 14 | 2 | 0 | 0 | 16 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationStateMachine` | `direct` | `new` | — | reviewed escape-free animation state machine | 12 | 38 | 14 | 1 | 0 | 53 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#AnimationStateMachineChannel` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#AnimationStateMachineState` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AnimationStateMachineChannel` | `direct` | `new` | — | reviewed escape-free animation state-machine channel | 2 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AnimationStateMachineState` | `direct` | `new` | — | reviewed escape-free animation state-machine state | 2 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationTrack` | `direct` | `new` | — | reviewed escape-free animation track | 7 | 99 | 0 | 0 | 0 | 99 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AnimationTrackValidationCode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#AnimationTrackValidationDiagnostic` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |

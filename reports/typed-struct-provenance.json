@@ -13818,7 +13818,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 9,
       "fields": 3,
       "id": "@flighthq/types:interface#AnimationBlendTreeChannel",
       "name": "AnimationBlendTreeChannel",
@@ -14107,7 +14107,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 8,
       "fields": 3,
       "id": "@flighthq/types:interface#AnimationCrossfadeChannel",
       "name": "AnimationCrossfadeChannel",
@@ -14174,7 +14174,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 9,
       "fields": 2,
       "id": "@flighthq/types:interface#AnimationLayerStackChannel",
       "name": "AnimationLayerStackChannel",
@@ -14327,7 +14327,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 9,
       "fields": 2,
       "id": "@flighthq/types:interface#AnimationStateMachineChannel",
       "name": "AnimationStateMachineChannel",

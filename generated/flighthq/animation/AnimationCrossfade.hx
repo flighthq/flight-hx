@@ -35,7 +35,7 @@ class AnimationCrossfade {
     channels = (cast AnimationCrossfade.createAnimationCrossfadeChannels__animationCrossfade(({ final __callArgument1:Dynamic = from; __callArgument1; }), ({ final __callArgument2:Dynamic = to; __callArgument2; })) : Array<AnimationCrossfadeChannel>);
     sampleWidth = 0.0;
     for (entry in _Runtime.iterable(channels)) {
-      (sampleWidth = cast (HxMath.max(sampleWidth, (cast (cast (cast entry : AnimationCrossfadeChannel).channel : { var track:AnimationTrack; }).track : { var components:Float; }).components) : Dynamic));
+      (sampleWidth = cast (HxMath.max(sampleWidth, (cast (cast entry.channel : { var track:AnimationTrack; }).track : { var components:Float; }).components) : Dynamic));
     }
     return cast (cast createEntity((cast { channels: channels, curve: curve, duration: resolvedDuration, elapsed: 0.0, from: from, fromSample: new flighthq._internal._Float32Array(sampleWidth), to: to, toSample: new flighthq._internal._Float32Array(sampleWidth), weight: (cast curve((cast (cast AnimationCrossfade.getLinearAnimationCrossfadeWeight__animationCrossfade((cast 0.0 : Float), (cast resolvedDuration : Float)) : Float) : Float)) : Float) } : Dynamic)) : { >Entity, var channels:Array<AnimationCrossfadeChannel>; var curve:EasingFunction; var duration:Float; var elapsed:Float; var from:AnimationPlayer; var fromSample:flighthq._internal._Float32Array; var to:AnimationPlayer; var toSample:flighthq._internal._Float32Array; var weight:Float; });
     return cast null;
@@ -55,18 +55,18 @@ class AnimationCrossfade {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(state.channels, 'length') : Float)) : Bool)) {
         var entry:AnimationCrossfadeChannel = flighthq._internal._StaticIndex.readArray(state.channels, index);
-        if ((cast _Runtime.strictEquals(_Runtime.field(entry, 'fromIndex'), null) : Bool)) {
-          sampleAnimationTrack(({ final __callArgument5:Dynamic = out; __callArgument5; }), (cast flighthq._internal._StaticIndex.readArray(toChannels, _Runtime.field(entry, 'toIndex')) : { var track:AnimationTrack; }).track, (cast (cast state.to : { var time:Float; }).time : Float));
-        } else { if ((cast _Runtime.strictEquals(_Runtime.field(entry, 'toIndex'), null) : Bool)) {
-          sampleAnimationTrack(({ final __callArgument6:Dynamic = out; __callArgument6; }), (cast flighthq._internal._StaticIndex.readArray(fromChannels, _Runtime.field(entry, 'fromIndex')) : { var track:AnimationTrack; }).track, (cast (cast state.from : { var time:Float; }).time : Float));
+        if ((cast _Runtime.strictEquals(entry.fromIndex, null) : Bool)) {
+          sampleAnimationTrack(({ final __callArgument5:Dynamic = out; __callArgument5; }), (cast flighthq._internal._StaticIndex.readArray(toChannels, entry.toIndex) : { var track:AnimationTrack; }).track, (cast (cast state.to : { var time:Float; }).time : Float));
+        } else { if ((cast _Runtime.strictEquals(entry.toIndex, null) : Bool)) {
+          sampleAnimationTrack(({ final __callArgument6:Dynamic = out; __callArgument6; }), (cast flighthq._internal._StaticIndex.readArray(fromChannels, entry.fromIndex) : { var track:AnimationTrack; }).track, (cast (cast state.from : { var time:Float; }).time : Float));
         } else {
-          var fromTrack:AnimationTrack = (cast flighthq._internal._StaticIndex.readArray(fromChannels, _Runtime.field(entry, 'fromIndex')) : { var track:AnimationTrack; }).track;
-          var toTrack:AnimationTrack = (cast flighthq._internal._StaticIndex.readArray(toChannels, _Runtime.field(entry, 'toIndex')) : { var track:AnimationTrack; }).track;
+          var fromTrack:AnimationTrack = (cast flighthq._internal._StaticIndex.readArray(fromChannels, entry.fromIndex) : { var track:AnimationTrack; }).track;
+          var toTrack:AnimationTrack = (cast flighthq._internal._StaticIndex.readArray(toChannels, entry.toIndex) : { var track:AnimationTrack; }).track;
           sampleAnimationTrack(({ final __callArgument7:Dynamic = state.fromSample; __callArgument7; }), ({ final __callArgument8:Dynamic = fromTrack; __callArgument8; }), (cast (cast state.from : { var time:Float; }).time : Float));
           sampleAnimationTrack(({ final __callArgument9:Dynamic = state.toSample; __callArgument9; }), ({ final __callArgument10:Dynamic = toTrack; __callArgument10; }), (cast (cast state.to : { var time:Float; }).time : Float));
           blendAnimationSamples(({ final __callArgument11:Dynamic = out; __callArgument11; }), ({ final __callArgument12:Dynamic = state.fromSample; __callArgument12; }), ({ final __callArgument13:Dynamic = state.toSample; __callArgument13; }), (cast state.weight : Float), (cast fromTrack.quaternion : Bool));
         } }
-        visit(({ final __callArgument14:Dynamic = out; __callArgument14; }), _Runtime.field(entry, 'channel'), (cast index : Float));
+        visit(({ final __callArgument14:Dynamic = out; __callArgument14; }), entry.channel, (cast index : Float));
         index++;
       }
     }
