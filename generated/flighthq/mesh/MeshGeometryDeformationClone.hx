@@ -35,9 +35,9 @@ class MeshGeometryDeformationClone {
   }
 
   public static function restoreMorphBindPose__meshGeometryDeformationClone(geometry:MeshGeometry, bindPose:MeshMorphBindPose):Void {
-    MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone(({ final __callArgument9:Dynamic = geometry; __callArgument9; }), (cast 'position' : String), _Runtime.field(bindPose, 'positions'));
-    if ((cast !_Runtime.strictEquals(_Runtime.field(bindPose, 'normals'), null) : Bool)) { MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone(({ final __callArgument10:Dynamic = geometry; __callArgument10; }), (cast 'normal' : String), _Runtime.field(bindPose, 'normals')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(bindPose, 'tangents'), null) : Bool)) { MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone(({ final __callArgument11:Dynamic = geometry; __callArgument11; }), (cast 'tangent' : String), _Runtime.field(bindPose, 'tangents')); }
+    MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone(({ final __callArgument9:Dynamic = geometry; __callArgument9; }), (cast 'position' : String), bindPose.positions);
+    if ((cast !_Runtime.strictEquals(bindPose.normals, null) : Bool)) { MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone(({ final __callArgument10:Dynamic = geometry; __callArgument10; }), (cast 'normal' : String), bindPose.normals); }
+    if ((cast !_Runtime.strictEquals(bindPose.tangents, null) : Bool)) { MeshGeometryDeformationClone.restoreFloat3__meshGeometryDeformationClone(({ final __callArgument11:Dynamic = geometry; __callArgument11; }), (cast 'tangent' : String), bindPose.tangents); }
   }
 
   public static function restoreSkinBindPose__meshGeometryDeformationClone(geometry:MeshGeometry, bindPose:MeshSkinBindPose):Void {

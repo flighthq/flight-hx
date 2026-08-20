@@ -29012,7 +29012,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 12,
       "fields": 2,
       "id": "@flighthq/types:interface#MeshMorph",
       "name": "MeshMorph",
@@ -29078,7 +29078,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 11,
       "fields": 6,
       "id": "@flighthq/types:interface#MeshMorphBindPose",
       "name": "MeshMorphBindPose",
@@ -42438,7 +42438,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 11,
       "fields": 3,
       "id": "@flighthq/types:interface#Scene3DForwardLightSelection",
       "name": "Scene3DForwardLightSelection",

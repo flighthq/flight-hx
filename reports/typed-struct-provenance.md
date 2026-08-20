@@ -321,8 +321,8 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#MenuBackend` | 0 | 3 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#MenuSignals` | 5 | 4 | 0 | 4 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#MeshGeometryGlData` | 0 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | no | `normalization-provenance` |
-| `@flighthq/types:interface#MeshMorph` | 0 | 2 | 2 | 1 | 2 | 0 | 5 | 4 | no | `normalization-provenance` |
-| `@flighthq/types:interface#MeshMorphBindPose` | 0 | 6 | 1 | 0 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
+| `@flighthq/types:interface#MeshMorph` | 12 | 2 | 2 | 1 | 2 | 0 | 5 | 4 | no | `normalization-provenance` |
+| `@flighthq/types:interface#MeshMorphBindPose` | 11 | 6 | 1 | 0 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#MeshSkinBindPose` | 36 | 6 | 1 | 0 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#MeshSubset` | 26 | 2 | 3 | 0 | 4 | 2 | 9 | 7 | no | `container-transfer`, `normalization-provenance` |
 | `@flighthq/types:interface#MessageDialogResult` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
@@ -471,7 +471,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Scene3DDocument` | 115 | 10 | 1 | 13 | 0 | 10 | 1 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#Scene3DDocumentAnimationChannel` | 0 | 3 | 1 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentSkin` | 0 | 2 | 1 | 3 | 0 | 1 | 1 | 1 | no | `container-transfer` |
-| `@flighthq/types:interface#Scene3DForwardLightSelection` | 0 | 3 | 0 | 2 | 0 | 0 | 1 | 0 | yes | — |
+| `@flighthq/types:interface#Scene3DForwardLightSelection` | 11 | 3 | 0 | 2 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DForwardLightSelectionExplanation` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#Scene3DKindUsage` | 29 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Scene3DMetadata` | 0 | 3 | 2 | 0 | 1 | 0 | 2 | 3 | no | `normalization-provenance` |

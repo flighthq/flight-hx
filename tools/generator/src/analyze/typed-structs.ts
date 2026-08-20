@@ -1343,6 +1343,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#StatechartInput',
     purpose: 'reviewed escape-free statechart input',
   },
+  {
+    declarationFingerprint: 'sha256:bd85b1817bcc1e551af340721e5efe989bc68b5d35234abedbb53e229cf8d9d4',
+    id: '@flighthq/types:interface#FlyCameraControllerOptions',
+    purpose: 'reviewed escape-free fly-camera controller options',
+  },
+  {
+    declarationFingerprint: 'sha256:71b4483bdbf0b4a6fc8b0b13a251315a59fc167b5ba49f7629fa1662b1cd429d',
+    id: '@flighthq/types:interface#MeshMorph',
+    purpose: 'reviewed escape-free mesh morph',
+  },
+  {
+    declarationFingerprint: 'sha256:c49c9ca13d552a40f3f674729c178d641b948943835cef7d9f5125e8bada05dd',
+    id: '@flighthq/types:interface#Scene3DDocumentMesh',
+    purpose: 'reviewed escape-free Scene3D document mesh',
+  },
+  {
+    declarationFingerprint: 'sha256:46ae94ec0d2f4ecb8234eaf136c57802dfddfe945afee70775a2cd3b7ed391ec',
+    id: '@flighthq/types:interface#MeshMorphBindPose',
+    purpose: 'reviewed escape-free mesh morph bind pose',
+  },
+  {
+    declarationFingerprint: 'sha256:8a8917d87d1e9f3bc9fe8e873e99c17984e9b9d84dc790c0049b851acb32e92c',
+    id: '@flighthq/types:interface#Scene3DForwardLightSelection',
+    purpose: 'reviewed escape-free Scene3D forward-light selection',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

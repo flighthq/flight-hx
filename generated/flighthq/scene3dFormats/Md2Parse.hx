@@ -259,7 +259,7 @@ class Md2Parse {
     geometry = (cast createMeshGeometry(({ final __callArgument48:Dynamic = { indices: indexArray, layout: CANONICAL_LAYOUT, vertices: vertices }; __callArgument48; })) : MeshGeometry);
     morph = (cast Md2Parse.buildMd2Morph__md2Parse((cast frames : Dynamic), ({ final __callArgument49:Dynamic = sourceVertexIndices; __callArgument49; })) : Null<MeshMorph>);
     documentMesh = (cast { geometry: geometry, materials: meshMaterials });
-    if ((cast !_Runtime.strictEquals(morph, null) : Bool)) { ((cast documentMesh : Scene3DDocumentMesh).morph = morph); }
+    if ((cast !_Runtime.strictEquals(morph, null) : Bool)) { (documentMesh.morph = cast (morph : Null<MeshMorph>)); }
     _Runtime.callProperty(document.meshes, 'push', cast ([documentMesh] : Array<Dynamic>));
     _Runtime.callProperty(document.nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: 0.0, transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
     _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([0.0] : Array<Dynamic>));
@@ -363,7 +363,7 @@ class Md2Parse {
     var usedNames:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;
     var runStart:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(morph, null) : Bool)) { return cast cast ([] : Array<Dynamic>); }
-    targetCount = _Runtime.field((cast morph : MeshMorph).targets, 'length');
+    targetCount = _Runtime.field((cast morph : { var targets:Array<MorphTarget>; }).targets, 'length');
     if ((cast _Runtime.strictEquals(targetCount, 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     animations = (cast cast ([] : Array<Dynamic>));
     usedNames = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);

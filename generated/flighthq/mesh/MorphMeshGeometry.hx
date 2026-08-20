@@ -13,7 +13,7 @@ import flighthq.types.MorphTarget.MeshMorph;
 
 class MorphMeshGeometry {
   public static function blendMeshGeometryMorph(geometry:MeshGeometry, morph:MeshMorph, bindPose:MeshMorphBindPose):Void {
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:MeshMorphBindPose = cast _Runtime.UNDEFINED;
     var blendedNormals:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
     var blendedPositions:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var blendedTangents:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
@@ -33,19 +33,19 @@ class MorphMeshGeometry {
     var normalOffset:Float = cast _Runtime.UNDEFINED;
     var tangentOffset:Float = cast _Runtime.UNDEFINED;
     __destructure0 = bindPose;
-    blendedNormals = _Runtime.field(__destructure0, 'blendedNormals');
-    blendedPositions = _Runtime.field(__destructure0, 'blendedPositions');
-    blendedTangents = _Runtime.field(__destructure0, 'blendedTangents');
-    normals = _Runtime.field(__destructure0, 'normals');
-    positions = _Runtime.field(__destructure0, 'positions');
-    tangents = _Runtime.field(__destructure0, 'tangents');
+    blendedNormals = __destructure0.blendedNormals;
+    blendedPositions = __destructure0.blendedPositions;
+    blendedTangents = __destructure0.blendedTangents;
+    normals = __destructure0.normals;
+    positions = __destructure0.positions;
+    tangents = __destructure0.tangents;
     vertexCount = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(positions, 'length'), 3.0)) | 0);
     floats = (vertexCount * 3.0);
     (cast blendedPositions : flighthq._internal._Float32Array).set((cast positions : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int(floats)));
     if ((cast ((cast !_Runtime.strictEquals(blendedNormals, null) : Bool) && (cast !_Runtime.strictEquals(normals, null) : Bool)) : Bool)) { (cast blendedNormals : flighthq._internal._Float32Array).set((cast normals : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int(floats))); }
     if ((cast ((cast !_Runtime.strictEquals(blendedTangents, null) : Bool) && (cast !_Runtime.strictEquals(tangents, null) : Bool)) : Bool)) { (cast blendedTangents : flighthq._internal._Float32Array).set((cast tangents : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int(floats))); }
-    targets = _Runtime.field(morph, 'targets');
-    weights = _Runtime.field(morph, 'weights');
+    targets = morph.targets;
+    weights = morph.weights;
     targetCount = HxMath.min(_Runtime.field(targets, 'length'), _Runtime.field(weights, 'length'));
     {
       var t:Float = 0.0;

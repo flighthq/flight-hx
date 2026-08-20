@@ -48,7 +48,7 @@ class Mesh {
     if ((cast (cast isNodeLocalMatrix4Detached((cast source : Dynamic)) : Bool) : Bool)) { setNodeLocalMatrix4((cast clone : Dynamic), (cast getNodeLocalMatrix4((cast source : Dynamic)) : Matrix4Like)); }
     if ((cast !_Runtime.looseEquals(source.skin, null) : Bool)) { (clone.skin = cast (source.skin : Null<Skin>)); }
     if ((cast !_Runtime.looseEquals(source.morph, null) : Bool)) {
-      (clone.morph = cast ({ targets: (cast source.morph : MeshMorph).targets, weights: new flighthq._internal._Float32Array((cast source.morph : MeshMorph).weights) } : Null<MeshMorph>));
+      (clone.morph = cast ({ targets: (cast source.morph : { var targets:Array<MorphTarget>; }).targets, weights: new flighthq._internal._Float32Array((cast source.morph : { var weights:flighthq._internal._Float32Array; }).weights) } : Null<MeshMorph>));
     }
     return cast clone;
     return cast null;

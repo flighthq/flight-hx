@@ -242,7 +242,7 @@ class Md5Parse {
             _Runtime.callProperty(document.materials, 'push', cast ([(cast (cast material : flighthq._internal._Any) : MaterialLike)] : Array<Dynamic>));
           }
           var documentMesh:Scene3DDocumentMesh = (cast { geometry: geometry, materials: meshMaterials });
-          if ((cast !_Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast documentMesh : Scene3DDocumentMesh).skin = skinIndex); }
+          if ((cast !_Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (documentMesh.skin = cast (skinIndex : Null<Float>)); }
           var meshIndex:Float = _Runtime.field(document.meshes, 'length');
           _Runtime.callProperty(document.meshes, 'push', cast ([documentMesh] : Array<Dynamic>));
           var nodeIndex:Float = _Runtime.field(document.nodes, 'length');

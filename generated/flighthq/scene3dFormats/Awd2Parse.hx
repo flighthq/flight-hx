@@ -351,7 +351,7 @@ class Awd2Parse {
         if ((cast _Runtime.strictEquals(_Runtime.field(geometries, 'length'), 1.0) : Bool)) {
           var meshIndex:Float = _Runtime.field(document.meshes, 'length');
           var mesh:Scene3DDocumentMesh = (cast { geometry: (cast flighthq._internal._StaticIndex.readArray(geometries, 0.0) : ParsedGeometry__awd2Parse).geometry, materials: (cast materialForSubset((cast meshInst : Dynamic), (cast 0.0 : Float)) : Array<Float>) });
-          if ((cast ((cast !_Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast flighthq._internal._StaticIndex.readArray(geometries, 0.0) : ParsedGeometry__awd2Parse).skinned : Bool)) : Bool)) { ((cast mesh : Scene3DDocumentMesh).skin = skinIndex); }
+          if ((cast ((cast !_Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast flighthq._internal._StaticIndex.readArray(geometries, 0.0) : ParsedGeometry__awd2Parse).skinned : Bool)) : Bool)) { (mesh.skin = cast (skinIndex : Null<Float>)); }
           _Runtime.callProperty(document.meshes, 'push', cast ([mesh] : Array<Dynamic>));
           (nodeIndex = cast (_Runtime.field(document.nodes, 'length') : Dynamic));
           _Runtime.callProperty(document.nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, name: _Runtime.orValue((cast meshInst : ParsedMeshInstance__awd2Parse).name, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), transform: transform }] : Array<Dynamic>));
@@ -364,7 +364,7 @@ class Awd2Parse {
             while ((cast ((cast i : Float) < (cast _Runtime.field(geometries, 'length') : Float)) : Bool)) {
               var meshIndex:Float = _Runtime.field(document.meshes, 'length');
               var mesh:Scene3DDocumentMesh = (cast { geometry: (cast flighthq._internal._StaticIndex.readArray(geometries, i) : ParsedGeometry__awd2Parse).geometry, materials: (cast materialForSubset((cast meshInst : Dynamic), (cast i : Float)) : Array<Float>) });
-              if ((cast ((cast !_Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast flighthq._internal._StaticIndex.readArray(geometries, i) : ParsedGeometry__awd2Parse).skinned : Bool)) : Bool)) { ((cast mesh : Scene3DDocumentMesh).skin = skinIndex); }
+              if ((cast ((cast !_Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast flighthq._internal._StaticIndex.readArray(geometries, i) : ParsedGeometry__awd2Parse).skinned : Bool)) : Bool)) { (mesh.skin = cast (skinIndex : Null<Float>)); }
               _Runtime.callProperty(document.meshes, 'push', cast ([mesh] : Array<Dynamic>));
               var childIndex:Float = _Runtime.field(document.nodes, 'length');
               _Runtime.callProperty(document.nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));

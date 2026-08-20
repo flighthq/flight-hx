@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_341,
+      newAuditOnly: 1_336,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(665);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(670);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_341);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_336);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(263);
+    expect(newDirect).toHaveLength(268);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1425,6 +1425,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'StatechartInput',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free statechart input',
+        }),
+        expect.objectContaining({
+          name: 'FlyCameraControllerOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free fly-camera controller options',
+        }),
+        expect.objectContaining({
+          name: 'MeshMorph',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free mesh morph',
+        }),
+        expect.objectContaining({
+          name: 'Scene3DDocumentMesh',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Scene3D document mesh',
+        }),
+        expect.objectContaining({
+          name: 'MeshMorphBindPose',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free mesh morph bind pose',
+        }),
+        expect.objectContaining({
+          name: 'Scene3DForwardLightSelection',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Scene3D forward-light selection',
         }),
       ]),
     );
@@ -2744,6 +2769,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#StatechartInput',
         purpose: 'reviewed escape-free statechart input',
       },
+      {
+        declarationFingerprint: 'sha256:bd85b1817bcc1e551af340721e5efe989bc68b5d35234abedbb53e229cf8d9d4',
+        id: '@flighthq/types:interface#FlyCameraControllerOptions',
+        purpose: 'reviewed escape-free fly-camera controller options',
+      },
+      {
+        declarationFingerprint: 'sha256:71b4483bdbf0b4a6fc8b0b13a251315a59fc167b5ba49f7629fa1662b1cd429d',
+        id: '@flighthq/types:interface#MeshMorph',
+        purpose: 'reviewed escape-free mesh morph',
+      },
+      {
+        declarationFingerprint: 'sha256:c49c9ca13d552a40f3f674729c178d641b948943835cef7d9f5125e8bada05dd',
+        id: '@flighthq/types:interface#Scene3DDocumentMesh',
+        purpose: 'reviewed escape-free Scene3D document mesh',
+      },
+      {
+        declarationFingerprint: 'sha256:46ae94ec0d2f4ecb8234eaf136c57802dfddfe945afee70775a2cd3b7ed391ec',
+        id: '@flighthq/types:interface#MeshMorphBindPose',
+        purpose: 'reviewed escape-free mesh morph bind pose',
+      },
+      {
+        declarationFingerprint: 'sha256:8a8917d87d1e9f3bc9fe8e873e99c17984e9b9d84dc790c0049b851acb32e92c',
+        id: '@flighthq/types:interface#Scene3DForwardLightSelection',
+        purpose: 'reviewed escape-free Scene3D forward-light selection',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -3646,6 +3696,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const twentySixthHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'FlyCameraControllerOptions',
+            'MeshMorph',
+            'MeshMorphBindPose',
+            'Scene3DDocumentMesh',
+            'Scene3DForwardLightSelection',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -3686,22 +3749,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_341,
+      auditOnlySchemas: 1_336,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 23_881,
-      directSchemas: 663,
+      directAccesses: 23_939,
+      directSchemas: 668,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 6_785,
+      pendingAccesses: 6_727,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_341,
+      newAuditOnly: 1_336,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -3778,7 +3841,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(23_881);
+    expect(report.summary.directAccesses).toBe(23_939);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -5084,6 +5147,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(twentyFifthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'FlyCameraControllerOptions',
+        12,
+        'sha256:bd85b1817bcc1e551af340721e5efe989bc68b5d35234abedbb53e229cf8d9d4',
+        'reviewed escape-free fly-camera controller options',
+      ],
+      [
+        'MeshMorph',
+        12,
+        'sha256:71b4483bdbf0b4a6fc8b0b13a251315a59fc167b5ba49f7629fa1662b1cd429d',
+        'reviewed escape-free mesh morph',
+      ],
+      [
+        'Scene3DDocumentMesh',
+        12,
+        'sha256:c49c9ca13d552a40f3f674729c178d641b948943835cef7d9f5125e8bada05dd',
+        'reviewed escape-free Scene3D document mesh',
+      ],
+      [
+        'MeshMorphBindPose',
+        11,
+        'sha256:46ae94ec0d2f4ecb8234eaf136c57802dfddfe945afee70775a2cd3b7ed391ec',
+        'reviewed escape-free mesh morph bind pose',
+      ],
+      [
+        'Scene3DForwardLightSelection',
+        11,
+        'sha256:8a8917d87d1e9f3bc9fe8e873e99c17984e9b9d84dc790c0049b851acb32e92c',
+        'reviewed escape-free Scene3D forward-light selection',
+      ],
+    ] as const) {
+      expect(twentySixthHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -7023,6 +7128,33 @@ describe('typed struct analysis', () => {
       else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
     }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#FlyCameraControllerOptions', true, [], [], null],
+      [
+        '@flighthq/types:interface#MeshMorph',
+        true,
+        [],
+        [],
+        { blockerReasons: ['normalization-provenance'], closed: false },
+      ],
+      ['@flighthq/types:interface#Scene3DDocumentMesh', true, [], ['optional-omission'], null],
+      [
+        '@flighthq/types:interface#MeshMorphBindPose',
+        true,
+        [],
+        [],
+        { blockerReasons: ['normalization-provenance'], closed: false },
+      ],
+      ['@flighthq/types:interface#Scene3DForwardLightSelection', true, [], [], { blockerReasons: [], closed: true }],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
+      else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+    }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
         true,
@@ -8286,6 +8418,26 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AnimationLayerStack|StatechartCondition|StatechartInput|StatechartRegion|StatechartTransitionExplanation)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/cameraControls/FlyCameraController.hx',
+      'generated/flighthq/lighting/SceneForwardLights.hx',
+      'generated/flighthq/mesh/MeshGeometryDeformationClone.hx',
+      'generated/flighthq/mesh/MorphMeshGeometry.hx',
+      'generated/flighthq/mesh/UpdateMeshMorph.hx',
+      'generated/flighthq/scene3d/Mesh.hx',
+      'generated/flighthq/scene3d/SceneAnimation.hx',
+      'generated/flighthq/scene3d/SceneDocument.hx',
+      'generated/flighthq/scene3dFormats/Awd2Parse.hx',
+      'generated/flighthq/scene3dFormats/GltfParse.hx',
+      'generated/flighthq/scene3dFormats/Md2Parse.hx',
+      'generated/flighthq/scene3dFormats/Md5Parse.hx',
+      'generated/flighthq/scene3dGl/PrepareGlScene3DForwardLights.hx',
+      'generated/flighthq/scene3dWgpu/PrepareWgpuScene3DForwardLights.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:FlyCameraControllerOptions|MeshMorph|MeshMorphBindPose|Scene3DDocumentMesh|Scene3DForwardLightSelection)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');

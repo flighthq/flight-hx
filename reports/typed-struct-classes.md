@@ -7,7 +7,7 @@ This is a construction, structural-flow, and observability census. It does not e
 | Metric | Count |
 | --- | ---: |
 | Eligible canonical schemas | 1536 |
-| Direct field accesses | 23881 |
+| Direct field accesses | 23939 |
 | Declared optional fields | 1970 |
 | Declared required-undefined fields | 2 |
 | Production object literals | 1842 |
@@ -413,7 +413,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#FlowStack` | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#FlowState` | 0 | 8 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 2 | 16 | 0 | yes | — | — |
 | `@flighthq/types:interface#FlyCameraController` | 64 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#FlyCameraControllerOptions` | 0 | 6 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 10 | 0 | yes | — | — |
+| `@flighthq/types:interface#FlyCameraControllerOptions` | 12 | 6 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 10 | 0 | yes | — | — |
 | `@flighthq/types:interface#FocusEventData` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#FocusManager` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#FocusManagerOptions` | 0 | 1 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 2 | 0 | yes | — | `optional-omission` |
@@ -730,8 +730,8 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#MeshGeometryOptions` | 7 | 5 | 3 | 0 | 11 | 11 | 0 | 0 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 114 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#MeshGeometryRuntime` | 28 | 8 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 22 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#MeshGeometryWgpuData` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | no | `dynamic-ingress` | — |
-| `@flighthq/types:interface#MeshMorph` | 0 | 2 | 0 | 0 | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 25 | 0 | yes | — | — |
-| `@flighthq/types:interface#MeshMorphBindPose` | 0 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 1 | 0 | yes | — | — |
+| `@flighthq/types:interface#MeshMorph` | 12 | 2 | 0 | 0 | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 25 | 0 | yes | — | — |
+| `@flighthq/types:interface#MeshMorphBindPose` | 11 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#MeshSkinBindPose` | 36 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 2 | 8 | 0 | yes | — | — |
 | `@flighthq/types:interface#MeshSubset` | 26 | 2 | 0 | 0 | 13 | 13 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 12 | 0 | yes | — | — |
 | `@flighthq/types:interface#MeshTriangleVertexIndices` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | no | `anonymous-structural-transfer` | — |
@@ -1025,11 +1025,11 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#Scene3DDocumentLight` | 0 | 4 | 2 | 0 | 6 | 5 | 1 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | 0 | no | `object-literal-spread` | `optional-omission` |
 | `@flighthq/types:interface#Scene3DDocumentLoadOptions` | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | 0 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#Scene3DDocumentLoadProgress` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — | `object-spread` |
-| `@flighthq/types:interface#Scene3DDocumentMesh` | 0 | 5 | 3 | 0 | 8 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | yes | — | `optional-omission` |
+| `@flighthq/types:interface#Scene3DDocumentMesh` | 12 | 5 | 3 | 0 | 8 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#Scene3DDocumentNode` | 24 | 5 | 2 | 0 | 18 | 18 | 0 | 0 | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#Scene3DDocumentScene` | 0 | 2 | 1 | 0 | 5 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 12 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#Scene3DDocumentSkin` | 0 | 2 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — | — |
-| `@flighthq/types:interface#Scene3DForwardLightSelection` | 0 | 3 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
+| `@flighthq/types:interface#Scene3DForwardLightSelection` | 11 | 3 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#Scene3DForwardLightSelectionExplanation` | 0 | 4 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Scene3DHit` | 83 | 12 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 10 | 5 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#Scene3DKindUsage` | 29 | 5 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 7 | 1 | 0 | 0 | yes | — | — |

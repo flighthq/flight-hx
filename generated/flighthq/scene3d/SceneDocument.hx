@@ -147,7 +147,7 @@ class SceneDocument {
       while ((cast ((cast i : Float) < (cast _Runtime.field(document.nodes, 'length') : Float)) : Bool)) {
         var meshIndex:Null<Float> = (cast flighthq._internal._StaticIndex.readArray(document.nodes, i) : { @:optional var mesh:Null<Float>; }).mesh;
         if ((cast _Runtime.strictEquals(meshIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        var skinIndex:Null<Float> = ({ final __structural16 = flighthq._internal._StaticIndex.readArray(document.meshes, meshIndex); __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : Scene3DDocumentMesh).skin; });
+        var skinIndex:Null<Float> = ({ final __typedStruct16 = flighthq._internal._StaticIndex.readArray(document.meshes, meshIndex); __typedStruct16 == null ? _Runtime.UNDEFINED : (cast __typedStruct16 : { @:optional var skin:Null<Float>; }).skin; });
         if ((cast _Runtime.strictEquals(skinIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
         var skin:Null<Skin> = flighthq._internal._StaticIndex.readArray(skins, skinIndex);
         if ((cast !_Runtime.strictEquals(skin, null) : Bool)) { ((cast (cast (cast flighthq._internal._StaticIndex.readArray(nodes, i) : flighthq._internal._Any) : Mesh) : { @:optional var skin:Null<Skin>; }).skin = cast (skin : Null<Skin>)); }
@@ -213,9 +213,9 @@ class SceneDocument {
     var mesh:Mesh = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(node.mesh, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast createNode3D((cast node.kind : String), ({ final __callArgument21:Dynamic = { name: node.name }; __callArgument21; })) : Node3D); }
     documentMesh = flighthq._internal._StaticIndex.readArray(meshes, node.mesh);
-    meshMaterials = (cast _Runtime.mapArray((cast (cast documentMesh : Scene3DDocumentMesh).materials : Array<Float>), function(index:Float, __unused6:Float, __unused7:Array<Float>):Material return _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(materials, index), function():Dynamic return cast null), _Runtime.UNDEFINED));
-    mesh = (cast createMesh((cast documentMesh : Scene3DDocumentMesh).geometry, ({ final __callArgument22:Dynamic = meshMaterials; __callArgument22; }), (cast node.kind : String), ({ final __callArgument23:Dynamic = { name: node.name }; __callArgument23; })) : Mesh);
-    if ((cast !_Runtime.looseEquals((cast documentMesh : Scene3DDocumentMesh).morph, null) : Bool)) { (mesh.morph = cast ((cast documentMesh : Scene3DDocumentMesh).morph : Null<MeshMorph>)); }
+    meshMaterials = (cast _Runtime.mapArray((cast documentMesh.materials : Array<Float>), function(index:Float, __unused6:Float, __unused7:Array<Float>):Material return _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(materials, index), function():Dynamic return cast null), _Runtime.UNDEFINED));
+    mesh = (cast createMesh(documentMesh.geometry, ({ final __callArgument22:Dynamic = meshMaterials; __callArgument22; }), (cast node.kind : String), ({ final __callArgument23:Dynamic = { name: node.name }; __callArgument23; })) : Mesh);
+    if ((cast !_Runtime.looseEquals(documentMesh.morph, null) : Bool)) { (mesh.morph = cast (documentMesh.morph : Null<MeshMorph>)); }
     return cast (cast (cast mesh : flighthq._internal._Any) : Node3D);
     return cast null;
   }

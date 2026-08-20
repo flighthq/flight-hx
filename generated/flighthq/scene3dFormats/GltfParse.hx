@@ -237,7 +237,7 @@ class GltfParse {
           if ((cast _Runtime.strictEquals(geometry, null) : Bool)) { p++; continue; }
           var morph:Null<MeshMorph> = (cast GltfParse.buildGltfMorph__gltfParse(({ final __callArgument50:Dynamic = doc; __callArgument50; }), ({ final __callArgument51:Dynamic = buffers; __callArgument51; }), ({ final __callArgument52:Dynamic = primitive; __callArgument52; }), gltfMesh.weights, (cast (cast getMeshGeometryVertexCount(({ final __callArgument53:Dynamic = geometry; __callArgument53; })) : Float) : Float), (cast gltfDrops : Dynamic)) : Null<MeshMorph>);
           var documentMesh:Scene3DDocumentMesh = (cast { geometry: geometry, materials: ((cast !_Runtime.strictEquals(primitive.material, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast cast ([primitive.material] : Array<Dynamic>) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic)) });
-          if ((cast !_Runtime.strictEquals(morph, null) : Bool)) { ((cast documentMesh : Scene3DDocumentMesh).morph = morph); }
+          if ((cast !_Runtime.strictEquals(morph, null) : Bool)) { (documentMesh.morph = cast (morph : Null<MeshMorph>)); }
           _Runtime.callProperty(docMeshIndices, 'push', cast ([_Runtime.field(meshes, 'length')] : Array<Dynamic>));
           _Runtime.callProperty(meshes, 'push', cast ([documentMesh] : Array<Dynamic>));
           p++;
@@ -305,7 +305,7 @@ class GltfParse {
         {
           var m:Float = 0.0;
           while ((cast ((cast m : Float) < (cast _Runtime.field(meshIndicesForNode, 'length') : Float)) : Bool)) {
-            ((cast flighthq._internal._StaticIndex.readArray(meshes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast meshIndicesForNode : Array<Float>), (cast m : Float))) : Scene3DDocumentMesh).skin = skinIndex);
+            ((cast flighthq._internal._StaticIndex.readArray(meshes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast meshIndicesForNode : Array<Float>), (cast m : Float))) : { @:optional var skin:Null<Float>; }).skin = cast (skinIndex : Null<Float>));
             m++;
           }
         }
@@ -627,15 +627,15 @@ class GltfParse {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(meshNodeIndices, 'length') : Float)) : Bool)) {
         var meshIndex:Null<Float> = ({ final __typedStruct147 = flighthq._internal._StaticIndex.readArray(nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast meshNodeIndices : Array<Float>), (cast i : Float))); __typedStruct147 == null ? _Runtime.UNDEFINED : (cast __typedStruct147 : { @:optional var mesh:Null<Float>; }).mesh; });
-        var morph:Null<MeshMorph> = ((cast !_Runtime.strictEquals(meshIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast ({ final __structural148 = flighthq._internal._StaticIndex.readArray(meshes, meshIndex); __structural148 == null ? _Runtime.UNDEFINED : (cast __structural148 : Scene3DDocumentMesh).morph; }) : Dynamic) : (cast null : Dynamic));
-        if ((cast ((cast _Runtime.looseEquals(morph, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast morph : MeshMorph).targets, 'length'), 0.0) : Bool)) : Bool)) { i++; continue; }
-        if ((cast !_Runtime.strictEquals(_Runtime.field(values, 'length'), _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(perKey, _Runtime.field(times, 'length')), _Runtime.field((cast morph : MeshMorph).targets, 'length'))) : Bool)) {
-          GltfParse.tallyGltfDrop__gltfParse((cast gltfDrops : Dynamic), ({ final __callArgument149:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument149; }), (cast 'gltf.weights-cardinality-mismatch' : String), (cast '' : String), ({ final __callArgument150:Dynamic = { firstExpected: _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(perKey, _Runtime.field(times, 'length')), _Runtime.field((cast morph : MeshMorph).targets, 'length')), firstActual: _Runtime.field(values, 'length') }; __callArgument150; }));
+        var morph:Null<MeshMorph> = ((cast !_Runtime.strictEquals(meshIndex, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast ({ final __typedStruct148 = flighthq._internal._StaticIndex.readArray(meshes, meshIndex); __typedStruct148 == null ? _Runtime.UNDEFINED : (cast __typedStruct148 : { @:optional var morph:Null<MeshMorph>; }).morph; }) : Dynamic) : (cast null : Dynamic));
+        if ((cast ((cast _Runtime.looseEquals(morph, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast morph : { var targets:Array<MorphTarget>; }).targets, 'length'), 0.0) : Bool)) : Bool)) { i++; continue; }
+        if ((cast !_Runtime.strictEquals(_Runtime.field(values, 'length'), _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(perKey, _Runtime.field(times, 'length')), _Runtime.field((cast morph : { var targets:Array<MorphTarget>; }).targets, 'length'))) : Bool)) {
+          GltfParse.tallyGltfDrop__gltfParse((cast gltfDrops : Dynamic), ({ final __callArgument149:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument149; }), (cast 'gltf.weights-cardinality-mismatch' : String), (cast '' : String), ({ final __callArgument150:Dynamic = { firstExpected: _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(perKey, _Runtime.field(times, 'length')), _Runtime.field((cast morph : { var targets:Array<MorphTarget>; }).targets, 'length')), firstActual: _Runtime.field(values, 'length') }; __callArgument150; }));
           (cardinalityDropped = cast (true : Dynamic));
           i++;
           continue;
         }
-        var track:AnimationTrack = (cast createAnimationTrack((cast { components: _Runtime.field((cast morph : MeshMorph).targets, 'length'), interpolation: _Runtime.getIndex(GltfParse.GLTF_SAMPLER_INTERPOLATIONS__gltfParse, _Runtime.coalesce(interpolation, function():Dynamic return cast 'LINEAR')), times: times, values: values } : Dynamic)) : AnimationTrack);
+        var track:AnimationTrack = (cast createAnimationTrack((cast { components: _Runtime.field((cast morph : { var targets:Array<MorphTarget>; }).targets, 'length'), interpolation: _Runtime.getIndex(GltfParse.GLTF_SAMPLER_INTERPOLATIONS__gltfParse, _Runtime.coalesce(interpolation, function():Dynamic return cast 'LINEAR')), times: times, values: values } : Dynamic)) : AnimationTrack);
         _Runtime.callProperty(channels, 'push', cast ([{ node: flighthq._internal._StaticIndex.readFloatArrayTyped((cast meshNodeIndices : Array<Float>), (cast i : Float)), path: Scene3DAnimationPathWeights, track: track }] : Array<Dynamic>));
         bound++;
         i++;

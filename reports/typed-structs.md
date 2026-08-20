@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1341 |
-| Direct schemas | 663 |
+| Audit-only schemas | 1336 |
+| Direct schemas | 668 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 6785 |
-| Directly emitted accesses | 23881 |
+| Pending accesses | 6727 |
+| Directly emitted accesses | 23939 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1341 |
+| Newly discovered, audit-only | 1336 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -536,7 +536,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#FlowStack` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#FlowState` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 2 | 0 | 9 | 11 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#FlyCameraController` | `direct` | `new` | — | reviewed escape-free fly camera controller | 8 | 42 | 22 | 0 | 0 | 64 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#FlyCameraControllerOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#FlyCameraControllerOptions` | `direct` | `new` | — | reviewed escape-free fly-camera controller options | 6 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:type#FocusDirection` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#FocusEventData` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 3 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#FocusManager` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 9 | 1 | 0 | 10 | 0 | 0 | 0 | yes | — |
@@ -960,8 +960,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#MeshGeometryOptions` | `direct` | `relocated` | `@flighthq/mesh:interface#MeshGeometryOptions` | broad scene document | 5 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MeshGeometryRuntime` | `direct` | `new` | — | reviewed escape-free mesh geometry runtime | 8 | 14 | 14 | 0 | 0 | 28 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MeshGeometryWgpuData` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#MeshMorph` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#MeshMorphBindPose` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MeshMorph` | `direct` | `new` | — | reviewed escape-free mesh morph | 2 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MeshMorphBindPose` | `direct` | `new` | — | reviewed escape-free mesh morph bind pose | 6 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:type#MeshRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 35 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | no | `unsupported-shape` |
 | `@flighthq/types:interface#MeshSkinBindPose` | `direct` | `new` | — | reviewed escape-free mesh skin bind pose | 6 | 36 | 0 | 0 | 0 | 36 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MeshSubset` | `direct` | `preserved` | `@flighthq/types:interface#MeshSubset` | broad scene document | 2 | 26 | 0 | 0 | 0 | 26 | 0 | 0 | yes | — |
@@ -1384,11 +1384,11 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Scene3DDocumentLight` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentLoadOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentLoadProgress` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Scene3DDocumentMesh` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 6 | 6 | 0 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Scene3DDocumentMesh` | `direct` | `new` | — | reviewed escape-free Scene3D document mesh | 5 | 6 | 6 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentNode` | `direct` | `new` | — | reviewed escape-free Scene3D document node | 5 | 21 | 3 | 0 | 0 | 24 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentScene` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentSkin` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Scene3DForwardLightSelection` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Scene3DForwardLightSelection` | `direct` | `new` | — | reviewed escape-free Scene3D forward-light selection | 3 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DForwardLightSelectionExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Scene3DGraphSyncPolicy` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Scene3DHit` | `direct` | `new` | — | reviewed escape-free Scene3D hit | 12 | 56 | 27 | 0 | 0 | 83 | 0 | 0 | yes | — |

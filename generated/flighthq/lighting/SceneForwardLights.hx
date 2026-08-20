@@ -25,9 +25,9 @@ class SceneForwardLights {
     spots = _Runtime.field(lights, 'spot');
     pointCount = (cast SceneForwardLights.selectStrongestLights__sceneForwardLights(({ final __callArgument0:Dynamic = points; __callArgument0; }), ({ final __callArgument1:Dynamic = bounds; __callArgument1; }), ({ final __callArgument2:Dynamic = SceneForwardLights.scratchSelectedPointLights__sceneForwardLights; __callArgument2; }), ({ final __callArgument3:Dynamic = SceneForwardLights.scratchSelectedPointIndices__sceneForwardLights; __callArgument3; }), ({ final __callArgument4:Dynamic = SceneForwardLights.scratchSelectedPointScores__sceneForwardLights; __callArgument4; })) : Float);
     spotCount = (cast SceneForwardLights.selectStrongestLights__sceneForwardLights(({ final __callArgument5:Dynamic = spots; __callArgument5; }), ({ final __callArgument6:Dynamic = bounds; __callArgument6; }), ({ final __callArgument7:Dynamic = SceneForwardLights.scratchSelectedSpotLights__sceneForwardLights; __callArgument7; }), ({ final __callArgument8:Dynamic = SceneForwardLights.scratchSelectedSpotIndices__sceneForwardLights; __callArgument8; }), ({ final __callArgument9:Dynamic = SceneForwardLights.scratchSelectedSpotScores__sceneForwardLights; __callArgument9; })) : Float);
-    outPoints = (cast out : Scene3DForwardLightSelection).point;
-    outSpots = (cast out : Scene3DForwardLightSelection).spot;
-    outIndices = (cast out : Scene3DForwardLightSelection).indices;
+    outPoints = out.point;
+    outSpots = out.spot;
+    outIndices = out.indices;
     _Runtime.setLength(outIndices, 0.0);
     _Runtime.setLength(outPoints, 0.0);
     _Runtime.setLength(outSpots, 0.0);

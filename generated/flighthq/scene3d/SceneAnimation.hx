@@ -33,7 +33,7 @@ class SceneAnimation {
         if ((cast _Runtime.strictEquals((cast target : { var path:Scene3DAnimationPath; }).path, 'Weights') : Bool)) {
           var morph:Null<MeshMorph> = (cast (cast (cast target : { var node:Node3D; }).node : Mesh) : { @:optional var morph:Null<MeshMorph>; }).morph;
           if ((cast _Runtime.looseEquals(morph, null) : Bool)) { i++; continue; }
-          sampleAnimationTrack(({ final __callArgument0:Dynamic = (cast morph : MeshMorph).weights; __callArgument0; }), channel.track, (cast time : Float));
+          sampleAnimationTrack(({ final __callArgument0:Dynamic = (cast morph : { var weights:flighthq._internal._Float32Array; }).weights; __callArgument0; }), channel.track, (cast time : Float));
           i++;
           continue;
         }

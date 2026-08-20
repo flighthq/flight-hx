@@ -41,7 +41,7 @@ class UpdateMeshMorph {
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     blended = ({ final __typedStruct10 = runtime; __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : { var morphBlendedWeights:Null<flighthq._internal._Float32Array>; }).morphBlendedWeights; });
     if ((cast _Runtime.looseEquals(blended, null) : Bool)) { return cast true; }
-    weights = _Runtime.field(morph, 'weights');
+    weights = morph.weights;
     if ((cast !_Runtime.strictEquals(_Runtime.field(blended, 'length'), _Runtime.field(weights, 'length')) : Bool)) { return cast true; }
     {
       var i:Float = 0.0;
@@ -60,7 +60,7 @@ class UpdateMeshMorph {
     var blended:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     if ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    weights = _Runtime.field(morph, 'weights');
+    weights = morph.weights;
     blended = (cast runtime : { var morphBlendedWeights:Null<flighthq._internal._Float32Array>; }).morphBlendedWeights;
     if ((cast ((cast _Runtime.looseEquals(blended, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(blended, 'length'), _Runtime.field(weights, 'length')) : Bool)) : Bool)) {
       (blended = cast (new flighthq._internal._Float32Array(_Runtime.field(weights, 'length')) : Dynamic));
