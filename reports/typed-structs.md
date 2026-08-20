@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1331 |
-| Direct schemas | 673 |
+| Audit-only schemas | 1326 |
+| Direct schemas | 678 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 6672 |
-| Directly emitted accesses | 23994 |
+| Pending accesses | 6622 |
+| Directly emitted accesses | 24044 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1331 |
+| Newly discovered, audit-only | 1326 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -47,9 +47,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Aabb` | `direct` | `preserved` | `@flighthq/types:interface#Aabb` | 3D axis-aligned bounds entity | 2 | 24 | 0 | 0 | 0 | 24 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AabbLike` | `direct` | `preserved` | `@flighthq/types:type#AabbLike` | structural 3D axis-aligned bounds carrier | 2 | 232 | 0 | 0 | 0 | 232 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AbcClass` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#AbcConstantPool` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AbcConstantPool` | `direct` | `new` | — | reviewed escape-free ABC constant pool | 7 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AbcException` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 3 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#AbcFile` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AbcFile` | `direct` | `new` | — | reviewed escape-free ABC file | 9 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AbcInstance` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AbcInstruction` | `direct` | `new` | — | reviewed escape-free ABC instruction | 3 | 22 | 0 | 0 | 0 | 22 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AbcMetadata` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -876,7 +876,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#LottieAnimatedProperty` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 5 | 0 | 0 | 5 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:type#LottieAsset` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#LottieBezierHandle` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#LottieDashEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#LottieDashEntry` | `direct` | `new` | — | reviewed escape-free Lottie dash entry | 3 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LottieDocument` | `direct` | `new` | — | reviewed escape-free Lottie document | 13 | 27 | 0 | 0 | 0 | 27 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LottieDocumentImportOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LottieDocumentImportResult` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
@@ -907,8 +907,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#LottieStaticProperty` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 1 | 0 | 0 | 1 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:interface#LottieStrokeShapeItem` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 10 | 0 | 0 | 10 | 0 | 0 | 27 | yes | — |
 | `@flighthq/types:interface#LottieTextData` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#LottieTextDocument` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#LottieTransform` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#LottieTextDocument` | `direct` | `new` | — | reviewed escape-free Lottie text document | 9 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#LottieTransform` | `direct` | `new` | — | reviewed escape-free Lottie transform | 8 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LottieTransformShapeItem` | `audit-only` | `new` | — | checker-discovered public declaration | 12 | 0 | 0 | 0 | 0 | 0 | 0 | 27 | yes | — |
 | `@flighthq/types:interface#LottieTrimPathShapeItem` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 9 | 0 | 0 | 9 | 0 | 0 | 28 | yes | — |
 | `@flighthq/types:interface#LottieUnknownShapeItem` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 29 | no | `index-signature` |

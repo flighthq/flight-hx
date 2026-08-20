@@ -1393,6 +1393,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#WgpuVelocityContext',
     purpose: 'reviewed escape-free WebGPU velocity context',
   },
+  {
+    declarationFingerprint: 'sha256:37795ca287195af002dc2ffce67b2c13f8bd2180ce31d09dbb3de78a3a0740ca',
+    id: '@flighthq/types:interface#AbcFile',
+    purpose: 'reviewed escape-free ABC file',
+  },
+  {
+    declarationFingerprint: 'sha256:32ae95dcc7d22d69461d4060c53eb50cdd377aa71bb215906736ec0c036da37f',
+    id: '@flighthq/types:interface#AbcConstantPool',
+    purpose: 'reviewed escape-free ABC constant pool',
+  },
+  {
+    declarationFingerprint: 'sha256:d21894626b9d2757d1bec65c881dbd34f84463a37d4eb1cebc327db28cbed122',
+    id: '@flighthq/types:interface#LottieTransform',
+    purpose: 'reviewed escape-free Lottie transform',
+  },
+  {
+    declarationFingerprint: 'sha256:60ab6bdec3878f30bcaf79ab485dad342270d5c455ff2eb29b1d706a89b0638a',
+    id: '@flighthq/types:interface#LottieDashEntry',
+    purpose: 'reviewed escape-free Lottie dash entry',
+  },
+  {
+    declarationFingerprint: 'sha256:6fdb87c8296e70368f5ddd5a6699e7b6e050cb5e2d794d4382bd58fc5e83d4e2',
+    id: '@flighthq/types:interface#LottieTextDocument',
+    purpose: 'reviewed escape-free Lottie text document',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

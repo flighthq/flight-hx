@@ -179,9 +179,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -251,7 +251,7 @@
       },
       "name": "AbcConstantPool",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free ABC constant pool",
       "reasons": [],
       "source": "upstream/packages/types/src/Abc.ts",
       "sourceProvenance": {
@@ -351,9 +351,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 11,
+        "directAccesses": 11,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -439,7 +439,7 @@
       },
       "name": "AbcFile",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free ABC file",
       "reasons": [],
       "source": "upstream/packages/types/src/Abc.ts",
       "sourceProvenance": {
@@ -173020,9 +173020,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 10,
+        "directAccesses": 10,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -173060,7 +173060,7 @@
       },
       "name": "LottieDashEntry",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Lottie dash entry",
       "reasons": [],
       "source": "upstream/packages/types/src/LottieDocument.ts",
       "sourceProvenance": {
@@ -177984,9 +177984,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -178072,7 +178072,7 @@
       },
       "name": "LottieTextDocument",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Lottie text document",
       "reasons": [],
       "source": "upstream/packages/types/src/LottieDocument.ts",
       "sourceProvenance": {
@@ -178094,9 +178094,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 11,
+        "directAccesses": 11,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -178174,7 +178174,7 @@
       },
       "name": "LottieTransform",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Lottie transform",
       "reasons": [],
       "source": "upstream/packages/types/src/LottieDocument.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1331,
+      "newAuditOnly": 1326,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1331,
+    "auditOnlySchemas": 1326,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 23994,
-    "directSchemas": 673,
+    "directAccesses": 24044,
+    "directSchemas": 678,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 6672,
+    "pendingAccesses": 6622,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

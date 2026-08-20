@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_331,
+      newAuditOnly: 1_326,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(675);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(680);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_331);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_326);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(273);
+    expect(newDirect).toHaveLength(278);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1475,6 +1475,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'WgpuVelocityContext',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free WebGPU velocity context',
+        }),
+        expect.objectContaining({
+          name: 'AbcFile',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free ABC file',
+        }),
+        expect.objectContaining({
+          name: 'AbcConstantPool',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free ABC constant pool',
+        }),
+        expect.objectContaining({
+          name: 'LottieTransform',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Lottie transform',
+        }),
+        expect.objectContaining({
+          name: 'LottieDashEntry',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Lottie dash entry',
+        }),
+        expect.objectContaining({
+          name: 'LottieTextDocument',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Lottie text document',
         }),
       ]),
     );
@@ -2844,6 +2869,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#WgpuVelocityContext',
         purpose: 'reviewed escape-free WebGPU velocity context',
       },
+      {
+        declarationFingerprint: 'sha256:37795ca287195af002dc2ffce67b2c13f8bd2180ce31d09dbb3de78a3a0740ca',
+        id: '@flighthq/types:interface#AbcFile',
+        purpose: 'reviewed escape-free ABC file',
+      },
+      {
+        declarationFingerprint: 'sha256:32ae95dcc7d22d69461d4060c53eb50cdd377aa71bb215906736ec0c036da37f',
+        id: '@flighthq/types:interface#AbcConstantPool',
+        purpose: 'reviewed escape-free ABC constant pool',
+      },
+      {
+        declarationFingerprint: 'sha256:d21894626b9d2757d1bec65c881dbd34f84463a37d4eb1cebc327db28cbed122',
+        id: '@flighthq/types:interface#LottieTransform',
+        purpose: 'reviewed escape-free Lottie transform',
+      },
+      {
+        declarationFingerprint: 'sha256:60ab6bdec3878f30bcaf79ab485dad342270d5c455ff2eb29b1d706a89b0638a',
+        id: '@flighthq/types:interface#LottieDashEntry',
+        purpose: 'reviewed escape-free Lottie dash entry',
+      },
+      {
+        declarationFingerprint: 'sha256:6fdb87c8296e70368f5ddd5a6699e7b6e050cb5e2d794d4382bd58fc5e83d4e2',
+        id: '@flighthq/types:interface#LottieTextDocument',
+        purpose: 'reviewed escape-free Lottie text document',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -3772,6 +3822,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const twentyEighthHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['AbcConstantPool', 'AbcFile', 'LottieDashEntry', 'LottieTextDocument', 'LottieTransform'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -3812,22 +3871,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_331,
+      auditOnlySchemas: 1_326,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 23_994,
-      directSchemas: 673,
+      directAccesses: 24_044,
+      directSchemas: 678,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 6_672,
+      pendingAccesses: 6_622,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_331,
+      newAuditOnly: 1_326,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -3904,7 +3963,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(23_994);
+    expect(report.summary.directAccesses).toBe(24_044);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -5294,6 +5353,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(twentySeventhHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'AbcFile',
+        11,
+        'sha256:37795ca287195af002dc2ffce67b2c13f8bd2180ce31d09dbb3de78a3a0740ca',
+        'reviewed escape-free ABC file',
+      ],
+      [
+        'AbcConstantPool',
+        9,
+        'sha256:32ae95dcc7d22d69461d4060c53eb50cdd377aa71bb215906736ec0c036da37f',
+        'reviewed escape-free ABC constant pool',
+      ],
+      [
+        'LottieTransform',
+        11,
+        'sha256:d21894626b9d2757d1bec65c881dbd34f84463a37d4eb1cebc327db28cbed122',
+        'reviewed escape-free Lottie transform',
+      ],
+      [
+        'LottieDashEntry',
+        10,
+        'sha256:60ab6bdec3878f30bcaf79ab485dad342270d5c455ff2eb29b1d706a89b0638a',
+        'reviewed escape-free Lottie dash entry',
+      ],
+      [
+        'LottieTextDocument',
+        9,
+        'sha256:6fdb87c8296e70368f5ddd5a6699e7b6e050cb5e2d794d4382bd58fc5e83d4e2',
+        'reviewed escape-free Lottie text document',
+      ],
+    ] as const) {
+      expect(twentyEighthHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -7274,6 +7375,20 @@ describe('typed struct analysis', () => {
       if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
       else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
     }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons] of [
+      ['@flighthq/types:interface#AbcFile', false, ['anonymous-structural-transfer'], []],
+      ['@flighthq/types:interface#AbcConstantPool', false, ['anonymous-structural-transfer'], []],
+      ['@flighthq/types:interface#LottieTransform', false, ['cross-schema-transfer'], []],
+      ['@flighthq/types:interface#LottieDashEntry', true, [], []],
+      ['@flighthq/types:interface#LottieTextDocument', true, [], []],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      expect(provenanceById.has(frontierId)).toBe(false);
+    }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
@@ -8573,6 +8688,14 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:CanvasRenderTargetPool|ColorLutCache|GlShapeMeshBinding|GlVelocityContext|WgpuVelocityContext)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/scene2dFormats/LottieDocument.hx',
+      'generated/flighthq/swf/SwfFrameAction.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AbcConstantPool|AbcFile|LottieDashEntry|LottieTextDocument|LottieTransform)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
