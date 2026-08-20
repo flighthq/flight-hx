@@ -626,7 +626,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#TexturePackerRect` | 0 | 4 | 4 | 0 | 3 | 0 | 2 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#TexturePackerSize` | 2 | 2 | 3 | 0 | 3 | 0 | 2 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#TextureResolutionExplanation` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#ThreeDsCamera` | 0 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ThreeDsCamera` | 10 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ThreeDsLight` | 15 | 10 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ThreeDsMaterial` | 15 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ThreeDsMaterialGroup` | 0 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | yes | — |

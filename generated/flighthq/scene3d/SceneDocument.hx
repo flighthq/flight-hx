@@ -53,7 +53,7 @@ class SceneDocument {
     nodes = (cast SceneDocument.buildDocumentNodes__sceneDocument(({ final __callArgument0:Dynamic = document; __callArgument0; })) : Array<Node3D>);
     SceneDocument.applyDocumentSkins__sceneDocument(({ final __callArgument1:Dynamic = document; __callArgument1; }), ({ final __callArgument2:Dynamic = nodes; __callArgument2; }));
     scene = (cast createScene3D(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Scene3D);
-    roots = _Runtime.coalesce(({ final __structural3 = flighthq._internal._StaticIndex.readArray(document.scenes, sceneIndex); __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : Scene3DDocumentScene).rootNodes; }), function():Dynamic return cast cast ([] : Array<Dynamic>));
+    roots = _Runtime.coalesce(({ final __typedStruct3 = flighthq._internal._StaticIndex.readArray(document.scenes, sceneIndex); __typedStruct3 == null ? _Runtime.UNDEFINED : (cast __typedStruct3 : { var rootNodes:Array<Float>; }).rootNodes; }), function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
       var r:Float = 0.0;
       while ((cast ((cast r : Float) < (cast _Runtime.field(roots, 'length') : Float)) : Bool)) {
@@ -79,7 +79,7 @@ class SceneDocument {
       var s:Float = 0.0;
       while ((cast ((cast s : Float) < (cast _Runtime.field(document.scenes, 'length') : Float)) : Bool)) {
         var scene:Scene3D = (cast createScene3D(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Scene3D);
-        var roots:Array<Float> = (cast flighthq._internal._StaticIndex.readArray(document.scenes, s) : Scene3DDocumentScene).rootNodes;
+        var roots:Array<Float> = (cast flighthq._internal._StaticIndex.readArray(document.scenes, s) : { var rootNodes:Array<Float>; }).rootNodes;
         {
           var r:Float = 0.0;
           while ((cast ((cast r : Float) < (cast _Runtime.field(roots, 'length') : Float)) : Bool)) {

@@ -51561,7 +51561,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 10,
       "fields": 7,
       "id": "@flighthq/types:interface#ThreeDsCamera",
       "name": "ThreeDsCamera",

@@ -373,7 +373,7 @@ class ObjParse {
     node = (cast { children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: (cast createTransform3D() : Transform3D) });
     if ((cast !_Runtime.strictEquals(name, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (node.name = cast (name : Null<String>)); }
     _Runtime.callProperty(document.nodes, 'push', cast ([node] : Array<Dynamic>));
-    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([nodeIndex] : Array<Dynamic>));
+    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : { var rootNodes:Array<Float>; }).rootNodes, 'push', cast ([nodeIndex] : Array<Dynamic>));
   }
 
   public static function resolveObjElementIndices__objParse(args:String, positionCount:Float, objDrops:Null<flighthq._internal._Map<String, ObjDropTally__objParse>>, lineIndex:Float):Array<Float> {
@@ -451,7 +451,7 @@ class ObjParse {
     node = (cast { children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: (cast createTransform3D() : Transform3D) });
     if ((cast !_Runtime.strictEquals(name, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (node.name = cast (name : Null<String>)); }
     _Runtime.callProperty(document.nodes, 'push', cast ([node] : Array<Dynamic>));
-    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([_Runtime.subtractNumbers(_Runtime.field(document.nodes, 'length'), 1.0)] : Array<Dynamic>));
+    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : { var rootNodes:Array<Float>; }).rootNodes, 'push', cast ([_Runtime.subtractNumbers(_Runtime.field(document.nodes, 'length'), 1.0)] : Array<Dynamic>));
   }
 
   public static function objMaterialToBlinnPhong__objParse(material:ObjMaterial, document:Scene3DDocument, diagnostics:Null<Array<ImportDiagnostic>>):BlinnPhongMaterial {

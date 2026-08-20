@@ -320,7 +320,7 @@ class Awd2Parse {
       (skeletonJointNodeIndices = cast ((cast built : { var jointNodeIndices:Array<Float>; var skeletonRootIndex:Float; var skin:Scene3DDocumentSkin; }).jointNodeIndices : Dynamic));
       (skinIndex = cast (_Runtime.field(document.skins, 'length') : Dynamic));
       _Runtime.callProperty(document.skins, 'push', cast ([(cast built : { var jointNodeIndices:Array<Float>; var skeletonRootIndex:Float; var skin:Scene3DDocumentSkin; }).skin] : Array<Dynamic>));
-      _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([(cast built : { var jointNodeIndices:Array<Float>; var skeletonRootIndex:Float; var skin:Scene3DDocumentSkin; }).skeletonRootIndex] : Array<Dynamic>));
+      _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : { var rootNodes:Array<Float>; }).rootNodes, 'push', cast ([(cast built : { var jointNodeIndices:Array<Float>; var skeletonRootIndex:Float; var skin:Scene3DDocumentSkin; }).skeletonRootIndex] : Array<Dynamic>));
       if ((cast ((cast (cast skeletonBlocks : flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse>).size : Float) > (cast 1.0 : Float)) : Bool)) {
         reportImportDiagnostic(({ final __callArgument38:Dynamic = diagnostics; __callArgument38; }), ({ final __callArgument39:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument39; }), (cast 'awd2.multiple-skeletons' : String), (cast 'parseAwd2' : String), ({ final __callArgument40:Dynamic = { skeletons: (cast skeletonBlocks : flighthq._internal._Map<Float, ParsedSkeleton__awd2Parse>).size }; __callArgument40; }));
       }
@@ -406,7 +406,7 @@ class Awd2Parse {
       }
     }
     for (blockId in _Runtime.iterable(((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).keys()))) {
-      if ((cast !(cast ((cast parented : flighthq._internal._Set<Float>).has(blockId)) : Bool) : Bool)) { _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get(blockId))] : Array<Dynamic>)); }
+      if ((cast !(cast ((cast parented : flighthq._internal._Set<Float>).has(blockId)) : Bool) : Bool)) { _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : { var rootNodes:Array<Float>; }).rootNodes, 'push', cast ([((cast nodeIndexForBlock : flighthq._internal._Map<Float, Float>).get(blockId))] : Array<Dynamic>)); }
     }
     lightDrops = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (light in _Runtime.iterable(((cast lightBlocks : flighthq._internal._Map<Float, ParsedLight__awd2Parse>).values()))) {

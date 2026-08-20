@@ -170,7 +170,7 @@ class DrawGlScene3D {
         (DrawGlScene3D.proxy__drawGlScene3D.alpha = cast ((cast entry : DrawEntry__drawGlScene3D).alpha : Null<Float>));
         (DrawGlScene3D.proxy__drawGlScene3D.colorScaleBias = cast (((cast colorAdjusted : Bool) ? (cast (cast entry : DrawEntry__drawGlScene3D).colorScaleBias : Dynamic) : (cast null : Dynamic)) : Null<ColorScaleBias>));
         (DrawGlScene3D.proxy__drawGlScene3D.colorMatrix = cast (((cast colorAdjusted : Bool) ? (cast (cast entry : DrawEntry__drawGlScene3D).colorMatrix : Dynamic) : (cast null : Dynamic)) : Null<Array<Float>>));
-        (DrawGlScene3D.proxy__drawGlScene3D.jointMatrices = cast (((cast skinned : Bool) ? (cast (cast (cast (cast (cast entry : DrawEntry__drawGlScene3D).mesh : { @:optional var skin:Null<Skin>; }).skin : Skin).skeleton : { var jointMatrices:flighthq._internal._Float32Array; }).jointMatrices : Dynamic) : (cast null : Dynamic)) : Null<flighthq._internal._Float32Array>));
+        (DrawGlScene3D.proxy__drawGlScene3D.jointMatrices = cast (((cast skinned : Bool) ? (cast (cast (cast (cast (cast entry : DrawEntry__drawGlScene3D).mesh : { @:optional var skin:Null<Skin>; }).skin : { var skeleton:Skeleton3D; }).skeleton : { var jointMatrices:flighthq._internal._Float32Array; }).jointMatrices : Dynamic) : (cast null : Dynamic)) : Null<flighthq._internal._Float32Array>));
         (DrawGlScene3D.proxy__drawGlScene3D.material = cast ((cast entry : DrawEntry__drawGlScene3D).material : Material));
         (DrawGlScene3D.proxy__drawGlScene3D.normalMatrix = cast (DrawGlScene3D.scratchNormalMatrix__drawGlScene3D : Matrix3));
         (DrawGlScene3D.proxy__drawGlScene3D.subset = cast ((cast entry : DrawEntry__drawGlScene3D).subset : MeshSubset));
@@ -214,7 +214,7 @@ class DrawGlScene3D {
           (DrawGlScene3D.proxy__drawGlScene3D.alpha = cast ((cast entry : DrawEntry__drawGlScene3D).alpha : Null<Float>));
           (DrawGlScene3D.proxy__drawGlScene3D.colorScaleBias = cast (((cast colorAdjusted : Bool) ? (cast (cast entry : DrawEntry__drawGlScene3D).colorScaleBias : Dynamic) : (cast null : Dynamic)) : Null<ColorScaleBias>));
           (DrawGlScene3D.proxy__drawGlScene3D.colorMatrix = cast (((cast colorAdjusted : Bool) ? (cast (cast entry : DrawEntry__drawGlScene3D).colorMatrix : Dynamic) : (cast null : Dynamic)) : Null<Array<Float>>));
-          (DrawGlScene3D.proxy__drawGlScene3D.jointMatrices = cast (((cast skinned : Bool) ? (cast (cast (cast (cast (cast entry : DrawEntry__drawGlScene3D).mesh : { @:optional var skin:Null<Skin>; }).skin : Skin).skeleton : { var jointMatrices:flighthq._internal._Float32Array; }).jointMatrices : Dynamic) : (cast null : Dynamic)) : Null<flighthq._internal._Float32Array>));
+          (DrawGlScene3D.proxy__drawGlScene3D.jointMatrices = cast (((cast skinned : Bool) ? (cast (cast (cast (cast (cast entry : DrawEntry__drawGlScene3D).mesh : { @:optional var skin:Null<Skin>; }).skin : { var skeleton:Skeleton3D; }).skeleton : { var jointMatrices:flighthq._internal._Float32Array; }).jointMatrices : Dynamic) : (cast null : Dynamic)) : Null<flighthq._internal._Float32Array>));
           (DrawGlScene3D.proxy__drawGlScene3D.material = cast ((cast entry : DrawEntry__drawGlScene3D).material : Material));
           (DrawGlScene3D.proxy__drawGlScene3D.normalMatrix = cast (DrawGlScene3D.scratchNormalMatrix__drawGlScene3D : Matrix3));
           (DrawGlScene3D.proxy__drawGlScene3D.subset = cast ((cast entry : DrawEntry__drawGlScene3D).subset : MeshSubset));

@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_316,
+      newAuditOnly: 1_311,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(690);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(695);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_316);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_311);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(288);
+    expect(newDirect).toHaveLength(293);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1550,6 +1550,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'WgpuSavedPassState',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free WebGPU saved pass state',
+        }),
+        expect.objectContaining({
+          name: 'GltfPunctualLight',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free glTF punctual light',
+        }),
+        expect.objectContaining({
+          name: 'GltfCamera',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free glTF camera',
+        }),
+        expect.objectContaining({
+          name: 'ThreeDsCamera',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free 3DS camera',
+        }),
+        expect.objectContaining({
+          name: 'Scene3DDocumentScene',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Scene3D document scene',
+        }),
+        expect.objectContaining({
+          name: 'Skin',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free skin',
         }),
       ]),
     );
@@ -2994,6 +3019,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#WgpuSavedPassState',
         purpose: 'reviewed escape-free WebGPU saved pass state',
       },
+      {
+        declarationFingerprint: 'sha256:9a4b9d5d9174473533ebcc2cf171e61b59acfc5603eaae96e16d5c9e284a6034',
+        id: '@flighthq/types:interface#GltfPunctualLight',
+        purpose: 'reviewed escape-free glTF punctual light',
+      },
+      {
+        declarationFingerprint: 'sha256:6bade5e485caee34db3848337c19201905ce4f65982b14d78750efbf48afa1ef',
+        id: '@flighthq/types:interface#GltfCamera',
+        purpose: 'reviewed escape-free glTF camera',
+      },
+      {
+        declarationFingerprint: 'sha256:09f6242a4cf2fa26b7599d4f94ce760d6bf91fe693341ad46b9691cd24728253',
+        id: '@flighthq/types:interface#ThreeDsCamera',
+        purpose: 'reviewed escape-free 3DS camera',
+      },
+      {
+        declarationFingerprint: 'sha256:6ce66003f1c3681606bdd962b865f63465e80ac078292ae9dba05deeb7ce1be5',
+        id: '@flighthq/types:interface#Scene3DDocumentScene',
+        purpose: 'reviewed escape-free Scene3D document scene',
+      },
+      {
+        declarationFingerprint: 'sha256:b7e8ad399e4c8c4380cafd3c1a2f3e74211782882d88f21901a89e54cd5628e8',
+        id: '@flighthq/types:interface#Skin',
+        purpose: 'reviewed escape-free skin',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -3953,6 +4003,13 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const thirtyFirstHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['GltfCamera', 'GltfPunctualLight', 'Scene3DDocumentScene', 'Skin', 'ThreeDsCamera'].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -3993,22 +4050,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_316,
+      auditOnlySchemas: 1_311,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 24_137,
-      directSchemas: 688,
+      directAccesses: 24_186,
+      directSchemas: 693,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 6_529,
+      pendingAccesses: 6_480,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_316,
+      newAuditOnly: 1_311,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -4085,7 +4142,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(24_137);
+    expect(report.summary.directAccesses).toBe(24_186);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -5601,6 +5658,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(thirtiethHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'GltfPunctualLight',
+        10,
+        'sha256:9a4b9d5d9174473533ebcc2cf171e61b59acfc5603eaae96e16d5c9e284a6034',
+        'reviewed escape-free glTF punctual light',
+      ],
+      [
+        'GltfCamera',
+        9,
+        'sha256:6bade5e485caee34db3848337c19201905ce4f65982b14d78750efbf48afa1ef',
+        'reviewed escape-free glTF camera',
+      ],
+      [
+        'ThreeDsCamera',
+        10,
+        'sha256:09f6242a4cf2fa26b7599d4f94ce760d6bf91fe693341ad46b9691cd24728253',
+        'reviewed escape-free 3DS camera',
+      ],
+      [
+        'Scene3DDocumentScene',
+        10,
+        'sha256:6ce66003f1c3681606bdd962b865f63465e80ac078292ae9dba05deeb7ce1be5',
+        'reviewed escape-free Scene3D document scene',
+      ],
+      [
+        'Skin',
+        10,
+        'sha256:b7e8ad399e4c8c4380cafd3c1a2f3e74211782882d88f21901a89e54cd5628e8',
+        'reviewed escape-free skin',
+      ],
+    ] as const) {
+      expect(thirtyFirstHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -7624,6 +7723,21 @@ describe('typed struct analysis', () => {
       expect(provenanceById.has(frontierId)).toBe(false);
     }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#GltfPunctualLight', true, [], [], null],
+      ['@flighthq/types:interface#GltfCamera', true, [], [], null],
+      ['@flighthq/types:interface#ThreeDsCamera', true, [], [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#Scene3DDocumentScene', true, [], ['optional-omission'], null],
+      ['@flighthq/types:interface#Skin', true, [], [], null],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
+      else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+    }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
         true,
@@ -8959,6 +9073,27 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:WgpuEffectPipeline|WgpuMeshPipeline|WgpuRenderOptions|WgpuSavedPassState|WgpuTextureSourceTextureEntry)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/scene3d/SceneDocument.hx',
+      'generated/flighthq/scene3dFormats/Awd2Parse.hx',
+      'generated/flighthq/scene3dFormats/GltfParse.hx',
+      'generated/flighthq/scene3dFormats/GltfPunctualLights.hx',
+      'generated/flighthq/scene3dFormats/Md2Parse.hx',
+      'generated/flighthq/scene3dFormats/Md5Parse.hx',
+      'generated/flighthq/scene3dFormats/ObjParse.hx',
+      'generated/flighthq/scene3dFormats/SceneSkeleton.hx',
+      'generated/flighthq/scene3dFormats/ThreeDsParse.hx',
+      'generated/flighthq/scene3dGl/DrawGlScene3D.hx',
+      'generated/flighthq/scene3dGl/GlShadowMap.hx',
+      'generated/flighthq/scene3dWgpu/DrawWgpuScene3D.hx',
+      'generated/flighthq/scene3dWgpu/WgpuShadowMap.hx',
+      'generated/flighthq/skeleton3d/PrepareScene3DSkinning.hx',
+      'generated/flighthq/skeleton3d/UpdateMeshSkin.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:GltfCamera|GltfPunctualLight|Scene3DDocumentScene|Skin|ThreeDsCamera)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');

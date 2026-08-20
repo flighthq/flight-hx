@@ -23,7 +23,7 @@ class UpdateMeshSkin {
     var bindPose:Null<MeshSkinBindPose> = cast _Runtime.UNDEFINED;
     skin = mesh.skin;
     if ((cast _Runtime.looseEquals(skin, null) : Bool)) { return; }
-    computeSkeleton3DJointMatrices((cast skin : Skin).skeleton);
+    computeSkeleton3DJointMatrices((cast skin : { var skeleton:Skeleton3D; }).skeleton);
     geometry = mesh.geometry;
     bindPose = (cast getMeshGeometrySkinBindPose(({ final __callArgument0:Dynamic = geometry; __callArgument0; })) : Null<MeshSkinBindPose>);
     if ((cast _Runtime.strictEquals(bindPose, null) : Bool)) {
@@ -32,6 +32,6 @@ class UpdateMeshSkin {
     } else { if ((cast !_Runtime.looseEquals(mesh.morph, null) : Bool)) {
       updateMeshSkinBindPoseDeformInput(({ final __callArgument3:Dynamic = bindPose; __callArgument3; }), ({ final __callArgument4:Dynamic = geometry; __callArgument4; }));
     } }
-    skinMeshGeometry(({ final __callArgument5:Dynamic = geometry; __callArgument5; }), (cast skin : Skin).skeleton, ({ final __callArgument6:Dynamic = bindPose; __callArgument6; }));
+    skinMeshGeometry(({ final __callArgument5:Dynamic = geometry; __callArgument5; }), (cast skin : { var skeleton:Skeleton3D; }).skeleton, ({ final __callArgument6:Dynamic = bindPose; __callArgument6; }));
   }
 }

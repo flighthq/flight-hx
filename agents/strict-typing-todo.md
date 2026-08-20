@@ -5,9 +5,9 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,536 public schemas are semantically eligible for typed structural lowering.
-- 688 schemas currently emit direct fields, covering 24,137 accesses.
-- 848 eligible schemas remain audit-only, covering 6,529 pending accesses.
-- 591 audit-only schemas have no recorded escape, covering 1,775 pending accesses.
+- 693 schemas currently emit direct fields, covering 24,186 accesses.
+- 843 eligible schemas remain audit-only, covering 6,480 pending accesses.
+- 586 audit-only schemas have no recorded escape, covering 1,726 pending accesses.
 - Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
 - Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
@@ -88,6 +88,7 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Promote the twenty-eighth high-access zero-escape frontier: `AbcFile`, `AbcConstantPool`, `LottieTransform`, `LottieDashEntry`, and `LottieTextDocument`. Their 50 accesses now emit directly across two generated modules. Anonymous structural transfer keeps the two ABC records structural, cross-schema transfer keeps the Lottie transform structural, and the dash entry and text document have no closed construction provenance. The tranche removes 27 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote the twenty-ninth high-access zero-escape frontier: `AreaLightOptions`, `SpotLightOptions`, `PointLightOptions`, `DirectionalLightOptions`, and `Light`. Their 45 accesses now emit directly across six generated modules. Optional omission keeps three option records structural, the area-light options have no closed construction provenance, and cross-schema transfer keeps `Light` structural. The tranche removes three `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote the thirtieth high-access zero-escape frontier: `WgpuTextureSourceTextureEntry`, `WgpuEffectPipeline`, `WgpuMeshPipeline`, `WgpuRenderOptions`, and `WgpuSavedPassState`. Their 48 accesses now emit directly across 11 generated modules. Object-literal spread keeps the texture-source entry structural, optional omission keeps the effect pipeline and render options structural, cross-schema transfer keeps the mesh pipeline structural, and the saved pass state has no closed construction provenance. The tranche removes 12 `_Runtime.field` calls and one generated `Dynamic`; generated `Reflect` and type-erasure debt remain unchanged.
+- [x] Promote the thirty-first high-access zero-escape frontier: `GltfPunctualLight`, `GltfCamera`, `ThreeDsCamera`, `Scene3DDocumentScene`, and `Skin`. Their 49 accesses now emit directly across 15 generated modules. Optional omission keeps the document scene structural; four schemas have no closed construction provenance; and the provenance-closed 3DS camera remains structural pending separate cpp review. The tranche removes 19 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [ ] Review the next cohesive five-row zero-escape tranche from the refreshed audit, preserving exact fingerprint, provenance, Haxe, portability, and affected-parity gates.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 

@@ -1468,6 +1468,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#WgpuSavedPassState',
     purpose: 'reviewed escape-free WebGPU saved pass state',
   },
+  {
+    declarationFingerprint: 'sha256:9a4b9d5d9174473533ebcc2cf171e61b59acfc5603eaae96e16d5c9e284a6034',
+    id: '@flighthq/types:interface#GltfPunctualLight',
+    purpose: 'reviewed escape-free glTF punctual light',
+  },
+  {
+    declarationFingerprint: 'sha256:6bade5e485caee34db3848337c19201905ce4f65982b14d78750efbf48afa1ef',
+    id: '@flighthq/types:interface#GltfCamera',
+    purpose: 'reviewed escape-free glTF camera',
+  },
+  {
+    declarationFingerprint: 'sha256:09f6242a4cf2fa26b7599d4f94ce760d6bf91fe693341ad46b9691cd24728253',
+    id: '@flighthq/types:interface#ThreeDsCamera',
+    purpose: 'reviewed escape-free 3DS camera',
+  },
+  {
+    declarationFingerprint: 'sha256:6ce66003f1c3681606bdd962b865f63465e80ac078292ae9dba05deeb7ce1be5',
+    id: '@flighthq/types:interface#Scene3DDocumentScene',
+    purpose: 'reviewed escape-free Scene3D document scene',
+  },
+  {
+    declarationFingerprint: 'sha256:b7e8ad399e4c8c4380cafd3c1a2f3e74211782882d88f21901a89e54cd5628e8',
+    id: '@flighthq/types:interface#Skin',
+    purpose: 'reviewed escape-free skin',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

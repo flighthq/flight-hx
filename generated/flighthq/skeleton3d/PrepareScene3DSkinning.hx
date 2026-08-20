@@ -31,7 +31,7 @@ class PrepareScene3DSkinning {
     var bounds:Null<Aabb> = cast _Runtime.UNDEFINED;
     skin = mesh.skin;
     if ((cast _Runtime.looseEquals(skin, null) : Bool)) { return; }
-    computeSkeleton3DJointMatrices((cast skin : Skin).skeleton);
+    computeSkeleton3DJointMatrices((cast skin : { var skeleton:Skeleton3D; }).skeleton);
     geometry = mesh.geometry;
     bindPose = (cast getMeshGeometrySkinBindPose(({ final __callArgument0:Dynamic = geometry; __callArgument0; })) : Null<MeshSkinBindPose>);
     if ((cast _Runtime.strictEquals(bindPose, null) : Bool)) {
@@ -44,7 +44,7 @@ class PrepareScene3DSkinning {
       (bounds = cast ((cast createAabb(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Aabb) : Dynamic));
       ((cast runtime : { @:optional var deformedLocalBounds:Null<Aabb>; }).deformedLocalBounds = bounds);
     }
-    getMeshSkinConservativeBounds(({ final __callArgument3:Dynamic = bounds; __callArgument3; }), ({ final __callArgument4:Dynamic = bindPose; __callArgument4; }), (cast skin : Skin).skeleton);
+    getMeshSkinConservativeBounds(({ final __callArgument3:Dynamic = bounds; __callArgument3; }), ({ final __callArgument4:Dynamic = bindPose; __callArgument4; }), (cast skin : { var skeleton:Skeleton3D; }).skeleton);
   }
 
   public static function prepareScene3DSkinning(scene:NodeAny):Void {

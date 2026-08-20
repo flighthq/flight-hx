@@ -247,7 +247,7 @@ class Md5Parse {
           _Runtime.callProperty(document.meshes, 'push', cast ([documentMesh] : Array<Dynamic>));
           var nodeIndex:Float = _Runtime.field(document.nodes, 'length');
           _Runtime.callProperty(document.nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
-          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([nodeIndex] : Array<Dynamic>));
+          _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : { var rootNodes:Array<Float>; }).rootNodes, 'push', cast ([nodeIndex] : Array<Dynamic>));
         } else {
           Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument32:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument32; }), (cast 'md5mesh.mesh-empty' : String), (cast '' : String), ({ final __callArgument33:Dynamic = {  }; __callArgument33; }));
         }
@@ -278,7 +278,7 @@ class Md5Parse {
     var bindWorld:Matrix4 = cast _Runtime.UNDEFINED;
     skeletonRootIndex = _Runtime.field(document.nodes, 'length');
     _Runtime.callProperty(document.nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: Node3DKind, name: 'skeleton', transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
-    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([skeletonRootIndex] : Array<Dynamic>));
+    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : { var rootNodes:Array<Float>; }).rootNodes, 'push', cast ([skeletonRootIndex] : Array<Dynamic>));
     jointPositions = (cast cast ([] : Array<Dynamic>));
     jointOrientations = (cast cast ([] : Array<Dynamic>));
     for (joint in _Runtime.iterable(joints)) {

@@ -784,7 +784,7 @@ class ThreeDsParse {
     if ((cast ((cast _Runtime.field(mesh.name, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { (node.name = cast (mesh.name : Null<String>)); }
     nodeIndex = _Runtime.field(document.nodes, 'length');
     _Runtime.callProperty(document.nodes, 'push', cast ([node] : Array<Dynamic>));
-    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([nodeIndex] : Array<Dynamic>));
+    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : { var rootNodes:Array<Float>; }).rootNodes, 'push', cast ([nodeIndex] : Array<Dynamic>));
   }
 
   public static function appendThreeDsCameraDocument__threeDsParse(camera:ThreeDsCamera, document:Scene3DDocument):Void {
@@ -792,23 +792,23 @@ class ThreeDsParse {
     var transform:Transform3D = cast _Runtime.UNDEFINED;
     var aim:Vector3 = cast _Runtime.UNDEFINED;
     var focalLength:Float = cast _Runtime.UNDEFINED;
-    position = (cast ThreeDsParse.convertThreeDsPointZUpToYUp__threeDsParse(_Runtime.field(camera, 'position')) : Vector3);
+    position = (cast ThreeDsParse.convertThreeDsPointZUpToYUp__threeDsParse(camera.position) : Vector3);
     transform = (cast createTransform3D() : Transform3D);
     ((cast (cast transform : Transform3D).position : { var x:Float; }).x = cast (position.x : Float));
     ((cast (cast transform : Transform3D).position : { var y:Float; }).y = cast (position.y : Float));
     ((cast (cast transform : Transform3D).position : { var z:Float; }).z = cast (position.z : Float));
-    aim = (cast ThreeDsParse.convertThreeDsPointZUpToYUp__threeDsParse(_Runtime.field(camera, 'target')) : Vector3);
+    aim = (cast ThreeDsParse.convertThreeDsPointZUpToYUp__threeDsParse(camera.target) : Vector3);
     subtractVector3(({ final __callArgument86:Dynamic = aim; __callArgument86; }), ({ final __callArgument87:Dynamic = aim; __callArgument87; }), ({ final __callArgument88:Dynamic = position; __callArgument88; }));
     if ((cast ((cast (cast normalizeVector3(({ final __callArgument89:Dynamic = aim; __callArgument89; }), ({ final __callArgument90:Dynamic = aim; __callArgument90; })) : Float) : Float) > (cast 0.0 : Float)) : Bool)) {
       setQuaternionFromUnitVectors(({ final __callArgument91:Dynamic = (cast transform : Transform3D).rotation; __callArgument91; }), ({ final __callArgument92:Dynamic = ThreeDsParse.DOCUMENT_VIEW_LOCAL_AXIS__threeDsParse; __callArgument92; }), ({ final __callArgument93:Dynamic = aim; __callArgument93; }));
-      if ((cast !_Runtime.strictEquals(_Runtime.field(camera, 'roll'), 0.0) : Bool)) {
+      if ((cast !_Runtime.strictEquals(camera.roll, 0.0) : Bool)) {
         var roll:Quaternion = (cast createQuaternion(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Quaternion);
-        setQuaternionFromAxisAngle(({ final __callArgument94:Dynamic = roll; __callArgument94; }), ({ final __callArgument95:Dynamic = aim; __callArgument95; }), (cast _Runtime.multiplyNumbers(_Runtime.field(camera, 'roll'), DEG_TO_RAD) : Float));
+        setQuaternionFromAxisAngle(({ final __callArgument94:Dynamic = roll; __callArgument94; }), ({ final __callArgument95:Dynamic = aim; __callArgument95; }), (cast (camera.roll * DEG_TO_RAD) : Float));
         multiplyQuaternion(({ final __callArgument96:Dynamic = (cast transform : Transform3D).rotation; __callArgument96; }), ({ final __callArgument97:Dynamic = roll; __callArgument97; }), ({ final __callArgument98:Dynamic = (cast transform : Transform3D).rotation; __callArgument98; }));
       }
     }
-    focalLength = ((cast ((cast _Runtime.field(camera, 'focalLength') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(camera, 'focalLength') : Dynamic) : (cast ThreeDsParse.THREE_DS_DEFAULT_FOCAL_LENGTH_MM__threeDsParse : Dynamic));
-    _Runtime.callProperty(document.cameras, 'push', cast ([_Runtime.mergeObjects([{ far: _Runtime.coalesce(_Runtime.field(camera, 'far'), function():Dynamic return cast ThreeDsParse.THREE_DS_DEFAULT_FAR__threeDsParse) }, ((cast ((cast _Runtime.field(_Runtime.field(camera, 'name'), 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast { name: _Runtime.field(camera, 'name') } : Dynamic) : (cast {  } : Dynamic)), { near: _Runtime.coalesce(_Runtime.field(camera, 'near'), function():Dynamic return cast ThreeDsParse.THREE_DS_DEFAULT_NEAR__threeDsParse) }, { projection: { aspect: 1.0, fovY: _Runtime.multiplyNumbers(2.0, HxMath.atan((THREE_DS_CAMERA_APERTURE_MM / (2.0 * focalLength)))), kind: 'perspective' } }, { transform: transform }])] : Array<Dynamic>));
+    focalLength = ((cast ((cast camera.focalLength : Float) > (cast 0.0 : Float)) : Bool) ? (cast camera.focalLength : Dynamic) : (cast ThreeDsParse.THREE_DS_DEFAULT_FOCAL_LENGTH_MM__threeDsParse : Dynamic));
+    _Runtime.callProperty(document.cameras, 'push', cast ([_Runtime.mergeObjects([{ far: _Runtime.coalesce(camera.far, function():Dynamic return cast ThreeDsParse.THREE_DS_DEFAULT_FAR__threeDsParse) }, ((cast ((cast _Runtime.field(camera.name, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast { name: camera.name } : Dynamic) : (cast {  } : Dynamic)), { near: _Runtime.coalesce(camera.near, function():Dynamic return cast ThreeDsParse.THREE_DS_DEFAULT_NEAR__threeDsParse) }, { projection: { aspect: 1.0, fovY: _Runtime.multiplyNumbers(2.0, HxMath.atan((THREE_DS_CAMERA_APERTURE_MM / (2.0 * focalLength)))), kind: 'perspective' } }, { transform: transform }])] : Array<Dynamic>));
   }
 
   public static function appendThreeDsLightDocument__threeDsParse(light:ThreeDsLight, document:Scene3DDocument, threeDsDrops:Null<flighthq._internal._Map<String, ThreeDsDropTally__threeDsParse>>):Void {

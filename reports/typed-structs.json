@@ -138611,9 +138611,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -138659,7 +138659,7 @@
       },
       "name": "GltfCamera",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free glTF camera",
       "reasons": [],
       "source": "upstream/packages/types/src/GltfSchema.ts",
       "sourceProvenance": {
@@ -140904,9 +140904,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 10,
+        "directAccesses": 10,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -140968,7 +140968,7 @@
       },
       "name": "GltfPunctualLight",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free glTF punctual light",
       "reasons": [],
       "source": "upstream/packages/types/src/GltfSchema.ts",
       "sourceProvenance": {
@@ -281072,9 +281072,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 10,
+        "directAccesses": 10,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -281104,7 +281104,7 @@
       },
       "name": "Scene3DDocumentScene",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Scene3D document scene",
       "reasons": [],
       "source": "upstream/packages/types/src/Scene3DDocument.ts",
       "sourceProvenance": {
@@ -311459,9 +311459,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 10,
+        "directAccesses": 10,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -311491,7 +311491,7 @@
       },
       "name": "Skin",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free skin",
       "reasons": [],
       "source": "upstream/packages/types/src/Skin.ts",
       "sourceProvenance": {
@@ -368103,9 +368103,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 10,
+        "directAccesses": 10,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -368175,7 +368175,7 @@
       },
       "name": "ThreeDsCamera",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free 3DS camera",
       "reasons": [],
       "source": "upstream/packages/types/src/ThreeDsSchema.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1316,
+      "newAuditOnly": 1311,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1316,
+    "auditOnlySchemas": 1311,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 24137,
-    "directSchemas": 688,
+    "directAccesses": 24186,
+    "directSchemas": 693,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 6529,
+    "pendingAccesses": 6480,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

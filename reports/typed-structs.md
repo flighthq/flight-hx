@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1316 |
-| Direct schemas | 688 |
+| Audit-only schemas | 1311 |
+| Direct schemas | 693 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 6529 |
-| Directly emitted accesses | 24137 |
+| Pending accesses | 6480 |
+| Directly emitted accesses | 24186 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1316 |
+| Newly discovered, audit-only | 1311 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -661,7 +661,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GltfAnimationSampler` | `direct` | `relocated` | `@flighthq/scene-formats:interface#GltfAnimationSampler` | broad serialization document | 3 | 5 | 0 | 0 | 0 | 5 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GltfBuffer` | `direct` | `relocated` | `@flighthq/scene-formats:interface#GltfBuffer` | broad serialization document | 2 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GltfBufferView` | `direct` | `relocated` | `@flighthq/scene-formats:interface#GltfBufferView` | broad serialization document | 4 | 19 | 0 | 0 | 0 | 19 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#GltfCamera` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GltfCamera` | `direct` | `new` | — | reviewed escape-free glTF camera | 4 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GltfComponentType` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#GltfDocument` | `direct` | `relocated` | `@flighthq/scene-formats:interface#GltfDocument` | broad serialization document | 18 | 36 | 0 | 0 | 0 | 36 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GltfDocumentExtensions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | no | `index-signature` |
@@ -690,7 +690,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GltfOcclusionTextureInfo` | `direct` | `relocated` | `@flighthq/scene-formats:interface#GltfOcclusionTextureInfo` | broad serialization document | 4 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GltfPbrMetallicRoughness` | `direct` | `relocated` | `@flighthq/scene-formats:interface#GltfPbrMetallicRoughness` | broad serialization document | 5 | 5 | 0 | 0 | 0 | 5 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GltfPrimitive` | `direct` | `relocated` | `@flighthq/scene-formats:interface#GltfPrimitive` | broad serialization document | 6 | 14 | 0 | 0 | 0 | 14 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#GltfPunctualLight` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GltfPunctualLight` | `direct` | `new` | — | reviewed escape-free glTF punctual light | 6 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GltfSampler` | `direct` | `relocated` | `@flighthq/scene-formats:interface#GltfSampler` | broad serialization document | 4 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GltfScene3D` | `direct` | `renamed` | `@flighthq/scene-formats:interface#GltfScene` | broad serialization document | 2 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GltfSkin` | `direct` | `relocated` | `@flighthq/scene-formats:interface#GltfSkin` | broad serialization document | 4 | 3 | 0 | 0 | 0 | 3 | 0 | 0 | yes | — |
@@ -1386,7 +1386,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Scene3DDocumentLoadProgress` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentMesh` | `direct` | `new` | — | reviewed escape-free Scene3D document mesh | 5 | 6 | 6 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentNode` | `direct` | `new` | — | reviewed escape-free Scene3D document node | 5 | 21 | 3 | 0 | 0 | 24 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Scene3DDocumentScene` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Scene3DDocumentScene` | `direct` | `new` | — | reviewed escape-free Scene3D document scene | 2 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DDocumentSkin` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DForwardLightSelection` | `direct` | `new` | — | reviewed escape-free Scene3D forward-light selection | 3 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Scene3DForwardLightSelectionExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -1524,7 +1524,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Skeleton3D` | `direct` | `new` | — | reviewed escape-free 3D skeleton | 4 | 40 | 1 | 0 | 0 | 41 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Skeleton3DValidationDiagnostic` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SketchEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Skin` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Skin` | `direct` | `new` | — | reviewed escape-free skin | 2 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Skin2D` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SkinAttachment2D` | `direct` | `new` | — | reviewed escape-free 2D skin attachment | 3 | 20 | 0 | 0 | 0 | 20 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SkinInfluence` | `direct` | `relocated` | `@flighthq/scene-formats:interface#SkinInfluence` | broad serialization document | 2 | 5 | 0 | 0 | 0 | 5 | 0 | 0 | yes | — |
@@ -1808,7 +1808,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#TextureUvTransform` | `direct` | `preserved` | `@flighthq/types:interface#TextureUvTransform` | broad asset document | 5 | 18 | 0 | 0 | 0 | 18 | 0 | 0 | yes | — |
 | `@flighthq/types:type#TextureWrap` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#TextVerticalAlign` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#ThreeDsCamera` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ThreeDsCamera` | `direct` | `new` | — | reviewed escape-free 3DS camera | 7 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ThreeDsLight` | `direct` | `new` | — | reviewed escape-free 3DS light | 10 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ThreeDsMaterial` | `direct` | `relocated` | `@flighthq/scene-formats:interface#ThreeDsMaterial` | broad serialization document | 9 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ThreeDsMaterialGroup` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |

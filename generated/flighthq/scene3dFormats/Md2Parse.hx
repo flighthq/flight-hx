@@ -262,7 +262,7 @@ class Md2Parse {
     if ((cast !_Runtime.strictEquals(morph, null) : Bool)) { (documentMesh.morph = cast (morph : Null<MeshMorph>)); }
     _Runtime.callProperty(document.meshes, 'push', cast ([documentMesh] : Array<Dynamic>));
     _Runtime.callProperty(document.nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: 0.0, transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
-    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : Scene3DDocumentScene).rootNodes, 'push', cast ([0.0] : Array<Dynamic>));
+    _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : { var rootNodes:Array<Float>; }).rootNodes, 'push', cast ([0.0] : Array<Dynamic>));
     _Runtime.callProperty(document.animations, 'push', _Runtime.concatArrays([_Runtime.toArray((cast Md2Parse.buildMd2MorphAnimations__md2Parse((cast frames : Dynamic), ({ final __callArgument50:Dynamic = morph; __callArgument50; })) : Array<Scene3DDocumentAnimation>))]));
     return cast document;
     return cast null;
