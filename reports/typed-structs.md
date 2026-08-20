@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1346 |
-| Direct schemas | 658 |
+| Audit-only schemas | 1341 |
+| Direct schemas | 663 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 6840 |
-| Directly emitted accesses | 23826 |
+| Pending accesses | 6785 |
+| Directly emitted accesses | 23881 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1346 |
+| Newly discovered, audit-only | 1341 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -97,7 +97,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#AnimationInterpolation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#AnimationLayer` | `direct` | `new` | — | reviewed escape-free animation layer | 5 | 15 | 1 | 0 | 0 | 16 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationLayerOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#AnimationLayerStack` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AnimationLayerStack` | `direct` | `new` | — | reviewed escape-free animation layer stack | 6 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationLayerStackChannel` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnimationLayerStackChannelSource` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AnimationLoopMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1628,16 +1628,16 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#StarlingSubTexture` | `direct` | `relocated` | `@flighthq/spritesheet-formats:interface#StarlingSubTexture` | broad serialization document | 12 | 18 | 14 | 0 | 0 | 32 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Statechart` | `direct` | `new` | — | reviewed escape-free statechart | 3 | 21 | 0 | 0 | 0 | 21 | 0 | 0 | yes | — |
 | `@flighthq/types:type#StatechartComparison` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#StatechartCondition` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#StatechartCondition` | `direct` | `new` | — | reviewed escape-free statechart condition | 3 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:type#StatechartDurationGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#StatechartInput` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#StatechartInput` | `direct` | `new` | — | reviewed escape-free statechart input | 3 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:type#StatechartInputKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#StatechartInstance` | `direct` | `new` | — | reviewed escape-free statechart instance | 9 | 48 | 3 | 1 | 0 | 52 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#StatechartRegion` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#StatechartRegion` | `direct` | `new` | — | reviewed escape-free statechart region | 3 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#StatechartSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#StatechartState` | `direct` | `new` | — | reviewed escape-free statechart state | 3 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#StatechartTransition` | `direct` | `new` | — | reviewed escape-free statechart transition | 4 | 23 | 0 | 0 | 0 | 23 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#StatechartTransitionExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#StatechartTransitionExplanation` | `direct` | `new` | — | reviewed escape-free statechart transition explanation | 7 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:type#StatechartTransitionStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#StatusBar` | `direct` | `preserved` | `@flighthq/types:interface#StatusBar` | broad host document | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
 | `@flighthq/types:type#StatusBarAnimation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |

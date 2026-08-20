@@ -67,7 +67,7 @@ class Statechart {
     var blend:Float = cast _Runtime.UNDEFINED;
     region = flighthq._internal._StaticIndex.readArray((cast instance.chart : { var regions:Array<StatechartRegion>; }).regions, regionIndex);
     sourceStateIndex = flighthq._internal._StaticIndex.readInt32ArrayTyped((cast instance.regionStates : flighthq._internal._Int32Array), (cast regionIndex : Float));
-    sourceState = flighthq._internal._StaticIndex.readArray(_Runtime.field(region, 'states'), sourceStateIndex);
+    sourceState = flighthq._internal._StaticIndex.readArray(region.states, sourceStateIndex);
     if ((cast _Runtime.strictEquals(sourceState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('Statechart region ' + Std.string(regionIndex) + ' has an invalid active state')); }
     ({ var __indexedObject2:flighthq._internal._Float64Array = instance.regionElapsed; var __indexedKey3:Float = regionIndex; flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast __indexedObject2 : flighthq._internal._Float64Array), (cast __indexedKey3 : Float), (cast (flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast __indexedObject2 : flighthq._internal._Float64Array), (cast __indexedKey3 : Float)) + deltaTimeMs) : Float)); });
     transitionIndex = flighthq._internal._StaticIndex.readInt32ArrayTyped((cast instance.regionTransitions : flighthq._internal._Int32Array), (cast regionIndex : Float));
@@ -105,8 +105,8 @@ class Statechart {
     var input:StatechartInput = cast _Runtime.UNDEFINED;
     input = flighthq._internal._StaticIndex.readArray((cast instance.chart : { var inputs:Array<StatechartInput>; }).inputs, inputIndex);
     if ((cast _Runtime.strictEquals(input, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('Statechart input index ' + Std.string(inputIndex) + ' is out of range')); }
-    if ((cast !_Runtime.strictEquals(_Runtime.field(input, 'kind'), expectedKind) : Bool)) {
-      _Runtime.throwValue(_Runtime.typeError('Statechart input ' + Std.string(inputIndex) + ' is ' + Std.string(_Runtime.field(input, 'kind')) + ', not ' + Std.string(expectedKind) + ''));
+    if ((cast !_Runtime.strictEquals(input.kind, expectedKind) : Bool)) {
+      _Runtime.throwValue(_Runtime.typeError('Statechart input ' + Std.string(inputIndex) + ' is ' + Std.string(input.kind) + ', not ' + Std.string(expectedKind) + ''));
     }
   }
 
@@ -114,7 +114,7 @@ class Statechart {
     {
       var inputIndex:Float = 0.0;
       while ((cast ((cast inputIndex : Float) < (cast _Runtime.field((cast instance.chart : { var inputs:Array<StatechartInput>; }).inputs, 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray((cast instance.chart : { var inputs:Array<StatechartInput>; }).inputs, inputIndex), 'kind'), (cast StatechartInputKindValue : { var Boolean:String; var Number:String; var Trigger:String; }).Trigger) : Bool)) { flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast instance.inputValues : flighthq._internal._Float64Array), (cast inputIndex : Float), (cast 0.0 : Float)); }
+        if ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray((cast instance.chart : { var inputs:Array<StatechartInput>; }).inputs, inputIndex) : { var kind:StatechartInputKind; }).kind, (cast StatechartInputKindValue : { var Boolean:String; var Number:String; var Trigger:String; }).Trigger) : Bool)) { flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast instance.inputValues : flighthq._internal._Float64Array), (cast inputIndex : Float), (cast 0.0 : Float)); }
         inputIndex++;
       }
     }
@@ -122,24 +122,24 @@ class Statechart {
 
   public static function compareStatechartCondition__statechart(value:Float, condition:StatechartCondition):Bool {
     {
-      var __switchValue = _Runtime.field(condition, 'comparison');
+      var __switchValue = condition.comparison;
       if (__switchValue == (cast StatechartComparisonValue : { var Equal:String; var GreaterThan:String; var GreaterThanOrEqual:String; var LessThan:String; var LessThanOrEqual:String; var NotEqual:String; }).Equal) {
-        return cast _Runtime.strictEquals(value, _Runtime.field(condition, 'value'));
+        return cast _Runtime.strictEquals(value, condition.value);
       }
       else if (__switchValue == (cast StatechartComparisonValue : { var Equal:String; var GreaterThan:String; var GreaterThanOrEqual:String; var LessThan:String; var LessThanOrEqual:String; var NotEqual:String; }).GreaterThan) {
-        return cast ((cast value : Float) > (cast _Runtime.field(condition, 'value') : Float));
+        return cast ((cast value : Float) > (cast condition.value : Float));
       }
       else if (__switchValue == (cast StatechartComparisonValue : { var Equal:String; var GreaterThan:String; var GreaterThanOrEqual:String; var LessThan:String; var LessThanOrEqual:String; var NotEqual:String; }).GreaterThanOrEqual) {
-        return cast ((cast value : Float) >= (cast _Runtime.field(condition, 'value') : Float));
+        return cast ((cast value : Float) >= (cast condition.value : Float));
       }
       else if (__switchValue == (cast StatechartComparisonValue : { var Equal:String; var GreaterThan:String; var GreaterThanOrEqual:String; var LessThan:String; var LessThanOrEqual:String; var NotEqual:String; }).LessThan) {
-        return cast ((cast value : Float) < (cast _Runtime.field(condition, 'value') : Float));
+        return cast ((cast value : Float) < (cast condition.value : Float));
       }
       else if (__switchValue == (cast StatechartComparisonValue : { var Equal:String; var GreaterThan:String; var GreaterThanOrEqual:String; var LessThan:String; var LessThanOrEqual:String; var NotEqual:String; }).LessThanOrEqual) {
-        return cast ((cast value : Float) <= (cast _Runtime.field(condition, 'value') : Float));
+        return cast ((cast value : Float) <= (cast condition.value : Float));
       }
       else if (__switchValue == (cast StatechartComparisonValue : { var Equal:String; var GreaterThan:String; var GreaterThanOrEqual:String; var LessThan:String; var LessThanOrEqual:String; var NotEqual:String; }).NotEqual) {
-        return cast !_Runtime.strictEquals(value, _Runtime.field(condition, 'value'));
+        return cast !_Runtime.strictEquals(value, condition.value);
       }
     }
     return cast null;
@@ -159,7 +159,7 @@ class Statechart {
       var inputIndex:Float = 0.0;
       while ((cast ((cast inputIndex : Float) < (cast _Runtime.field(chart.inputs, 'length') : Float)) : Bool)) {
         var input:StatechartInput = flighthq._internal._StaticIndex.readArray(chart.inputs, inputIndex);
-        flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast inputValues : flighthq._internal._Float64Array), (cast inputIndex : Float), (cast ((cast _Runtime.strictEquals(_Runtime.field(input, 'kind'), (cast StatechartInputKindValue : { var Boolean:String; var Number:String; var Trigger:String; }).Boolean) : Bool) ? (cast ((cast _Runtime.strictEquals(_Runtime.field(input, 'initialValue'), 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic) : (cast _Runtime.field(input, 'initialValue') : Dynamic)) : Float));
+        flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast inputValues : flighthq._internal._Float64Array), (cast inputIndex : Float), (cast ((cast _Runtime.strictEquals(input.kind, (cast StatechartInputKindValue : { var Boolean:String; var Number:String; var Trigger:String; }).Boolean) : Bool) ? (cast ((cast _Runtime.strictEquals(input.initialValue, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic) : (cast input.initialValue : Dynamic)) : Float));
         inputIndex++;
       }
     }
@@ -173,7 +173,7 @@ class Statechart {
     {
       var regionIndex:Float = 0.0;
       while ((cast ((cast regionIndex : Float) < (cast regionCount : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeInt32ArrayTyped((cast regionStates : flighthq._internal._Int32Array), (cast regionIndex : Float), (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(chart.regions, regionIndex), 'initialStateIndex') : Float));
+        flighthq._internal._StaticIndex.writeInt32ArrayTyped((cast regionStates : flighthq._internal._Int32Array), (cast regionIndex : Float), (cast (cast flighthq._internal._StaticIndex.readArray(chart.regions, regionIndex) : { var initialStateIndex:Float; }).initialStateIndex : Float));
         regionIndex++;
       }
     }
@@ -203,7 +203,7 @@ class Statechart {
     region = flighthq._internal._StaticIndex.readArray((cast instance.chart : { var regions:Array<StatechartRegion>; }).regions, regionIndex);
     if ((cast _Runtime.strictEquals(region, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast Statechart.invalidRegionExplanation__statechart((cast regionIndex : Float)) : StatechartTransitionExplanation); }
     sourceStateIndex = flighthq._internal._StaticIndex.readInt32ArrayTyped((cast instance.regionStates : flighthq._internal._Int32Array), (cast regionIndex : Float));
-    state = flighthq._internal._StaticIndex.readArray(_Runtime.field(region, 'states'), sourceStateIndex);
+    state = flighthq._internal._StaticIndex.readArray(region.states, sourceStateIndex);
     if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast Statechart.invalidRegionExplanation__statechart((cast regionIndex : Float)) : StatechartTransitionExplanation); }
     activeTransitionIndex = flighthq._internal._StaticIndex.readInt32ArrayTyped((cast instance.regionTransitions : flighthq._internal._Int32Array), (cast regionIndex : Float));
     if ((cast ((cast activeTransitionIndex : Float) >= (cast 0.0 : Float)) : Bool)) {
@@ -252,10 +252,10 @@ class Statechart {
       var conditionIndex:Float = 0.0;
       while ((cast ((cast conditionIndex : Float) < (cast _Runtime.field(transition.conditions, 'length') : Float)) : Bool)) {
         var condition:StatechartCondition = flighthq._internal._StaticIndex.readArray(transition.conditions, conditionIndex);
-        var input:StatechartInput = flighthq._internal._StaticIndex.readArray((cast instance.chart : { var inputs:Array<StatechartInput>; }).inputs, _Runtime.field(condition, 'inputIndex'));
+        var input:StatechartInput = flighthq._internal._StaticIndex.readArray((cast instance.chart : { var inputs:Array<StatechartInput>; }).inputs, condition.inputIndex);
         if ((cast _Runtime.strictEquals(input, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast conditionIndex; }
-        var inputValue:Float = flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast instance.inputValues : flighthq._internal._Float64Array), (cast _Runtime.field(condition, 'inputIndex') : Float));
-        var met:Bool = ((cast _Runtime.strictEquals(_Runtime.field(input, 'kind'), (cast StatechartInputKindValue : { var Boolean:String; var Number:String; var Trigger:String; }).Trigger) : Bool) ? (cast !_Runtime.strictEquals(inputValue, 0.0) : Dynamic) : (cast (cast Statechart.compareStatechartCondition__statechart((cast inputValue : Float), ({ final __callArgument11:Dynamic = condition; __callArgument11; })) : Bool) : Dynamic));
+        var inputValue:Float = flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast instance.inputValues : flighthq._internal._Float64Array), (cast condition.inputIndex : Float));
+        var met:Bool = ((cast _Runtime.strictEquals(input.kind, (cast StatechartInputKindValue : { var Boolean:String; var Number:String; var Trigger:String; }).Trigger) : Bool) ? (cast !_Runtime.strictEquals(inputValue, 0.0) : Dynamic) : (cast (cast Statechart.compareStatechartCondition__statechart((cast inputValue : Float), ({ final __callArgument11:Dynamic = condition; __callArgument11; })) : Bool) : Dynamic));
         if ((cast !(cast met : Bool) : Bool)) { return cast conditionIndex; }
         conditionIndex++;
       }
@@ -268,7 +268,7 @@ class Statechart {
     var region:StatechartRegion = cast _Runtime.UNDEFINED;
     var state:StatechartState = cast _Runtime.UNDEFINED;
     region = flighthq._internal._StaticIndex.readArray((cast instance.chart : { var regions:Array<StatechartRegion>; }).regions, regionIndex);
-    state = flighthq._internal._StaticIndex.readArray(_Runtime.field(region, 'states'), flighthq._internal._StaticIndex.readInt32ArrayTyped((cast instance.regionStates : flighthq._internal._Int32Array), (cast regionIndex : Float)));
+    state = flighthq._internal._StaticIndex.readArray(region.states, flighthq._internal._StaticIndex.readInt32ArrayTyped((cast instance.regionStates : flighthq._internal._Int32Array), (cast regionIndex : Float)));
     {
       var transitionIndex:Float = 0.0;
       while ((cast ((cast transitionIndex : Float) < (cast _Runtime.field(state.transitions, 'length') : Float)) : Bool)) {
@@ -300,7 +300,7 @@ class Statechart {
     {
       var inputIndex:Float = 0.0;
       while ((cast ((cast inputIndex : Float) < (cast _Runtime.field(chart.inputs, 'length') : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals(_Runtime.field(flighthq._internal._StaticIndex.readArray(chart.inputs, inputIndex), 'name'), name) : Bool)) { return cast inputIndex; }
+        if ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(chart.inputs, inputIndex) : { @:optional var name:Null<String>; }).name, name) : Bool)) { return cast inputIndex; }
         inputIndex++;
       }
     }
@@ -352,7 +352,7 @@ class Statechart {
     {
       var inputIndex:Float = 0.0;
       while ((cast ((cast inputIndex : Float) < (cast _Runtime.field(chart.inputs, 'length') : Float)) : Bool)) {
-        var kind:StatechartInputKind = _Runtime.field(flighthq._internal._StaticIndex.readArray(chart.inputs, inputIndex), 'kind');
+        var kind:StatechartInputKind = (cast flighthq._internal._StaticIndex.readArray(chart.inputs, inputIndex) : { var kind:StatechartInputKind; }).kind;
         if ((cast ((cast ((cast !_Runtime.strictEquals(kind, (cast StatechartInputKindValue : { var Boolean:String; var Number:String; var Trigger:String; }).Boolean) : Bool) && (cast !_Runtime.strictEquals(kind, (cast StatechartInputKindValue : { var Boolean:String; var Number:String; var Trigger:String; }).Number) : Bool)) : Bool) && (cast !_Runtime.strictEquals(kind, (cast StatechartInputKindValue : { var Boolean:String; var Number:String; var Trigger:String; }).Trigger) : Bool)) : Bool)) {
           _Runtime.throwValue(_Runtime.typeError('Statechart input ' + Std.string(inputIndex) + ' has unknown kind ' + Std.string(Std.string(kind)) + ''));
         }
@@ -363,13 +363,13 @@ class Statechart {
       var regionIndex:Float = 0.0;
       while ((cast ((cast regionIndex : Float) < (cast _Runtime.field(chart.regions, 'length') : Float)) : Bool)) {
         var region:StatechartRegion = flighthq._internal._StaticIndex.readArray(chart.regions, regionIndex);
-        if ((cast ((cast ((cast _Runtime.field(region, 'initialStateIndex') : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(region, 'initialStateIndex') : Float) >= (cast _Runtime.field(_Runtime.field(region, 'states'), 'length') : Float)) : Bool)) : Bool)) {
+        if ((cast ((cast ((cast region.initialStateIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast region.initialStateIndex : Float) >= (cast _Runtime.field(region.states, 'length') : Float)) : Bool)) : Bool)) {
           _Runtime.throwValue(_Runtime.rangeError('Statechart region ' + Std.string(regionIndex) + ' has an invalid initialStateIndex'));
         }
         {
           var stateIndex:Float = 0.0;
-          while ((cast ((cast stateIndex : Float) < (cast _Runtime.field(_Runtime.field(region, 'states'), 'length') : Float)) : Bool)) {
-            var state:StatechartState = flighthq._internal._StaticIndex.readArray(_Runtime.field(region, 'states'), stateIndex);
+          while ((cast ((cast stateIndex : Float) < (cast _Runtime.field(region.states, 'length') : Float)) : Bool)) {
+            var state:StatechartState = flighthq._internal._StaticIndex.readArray(region.states, stateIndex);
             if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(state.kind), 'string') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(state.kind, 'length'), 0.0) : Bool)) : Bool)) {
               _Runtime.throwValue(_Runtime.typeError('Statechart region ' + Std.string(regionIndex) + ' state ' + Std.string(stateIndex) + ' has an invalid kind'));
             }
@@ -383,18 +383,18 @@ class Statechart {
                 if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([transition.exitTimeRatio] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast transition.exitTimeRatio : Float) < (cast -1.0 : Float)) : Bool)) : Bool)) {
                   _Runtime.throwValue(_Runtime.rangeError('Statechart region ' + Std.string(regionIndex) + ' state ' + Std.string(stateIndex) + ' transition ' + Std.string(transitionIndex) + ' has an invalid exit time'));
                 }
-                if ((cast ((cast ((cast transition.targetStateIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast transition.targetStateIndex : Float) >= (cast _Runtime.field(_Runtime.field(region, 'states'), 'length') : Float)) : Bool)) : Bool)) {
+                if ((cast ((cast ((cast transition.targetStateIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast transition.targetStateIndex : Float) >= (cast _Runtime.field(region.states, 'length') : Float)) : Bool)) : Bool)) {
                   _Runtime.throwValue(_Runtime.rangeError('Statechart region ' + Std.string(regionIndex) + ' state ' + Std.string(stateIndex) + ' transition ' + Std.string(transitionIndex) + ' has an invalid target'));
                 }
                 {
                   var conditionIndex:Float = 0.0;
                   while ((cast ((cast conditionIndex : Float) < (cast _Runtime.field(transition.conditions, 'length') : Float)) : Bool)) {
                     var condition:StatechartCondition = flighthq._internal._StaticIndex.readArray(transition.conditions, conditionIndex);
-                    var inputIndex:Float = _Runtime.field(condition, 'inputIndex');
+                    var inputIndex:Float = condition.inputIndex;
                     if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([inputIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast inputIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast inputIndex : Float) >= (cast _Runtime.field(chart.inputs, 'length') : Float)) : Bool)) : Bool)) {
                       _Runtime.throwValue(_Runtime.rangeError('Statechart region ' + Std.string(regionIndex) + ' state ' + Std.string(stateIndex) + ' transition ' + Std.string(transitionIndex) + ' has an invalid input'));
                     }
-                    if ((cast !(cast _Runtime.includes(flighthq._internal.DynamicObject.values(StatechartComparisonValue), _Runtime.field(condition, 'comparison')) : Bool) : Bool)) {
+                    if ((cast !(cast _Runtime.includes(flighthq._internal.DynamicObject.values(StatechartComparisonValue), condition.comparison) : Bool) : Bool)) {
                       _Runtime.throwValue(_Runtime.typeError('Statechart region ' + Std.string(regionIndex) + ' state ' + Std.string(stateIndex) + ' transition ' + Std.string(transitionIndex) + ' has an invalid comparison'));
                     }
                     conditionIndex++;

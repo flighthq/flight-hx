@@ -1318,6 +1318,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#SoftKeyboard',
     purpose: 'reviewed escape-free soft keyboard',
   },
+  {
+    declarationFingerprint: 'sha256:8dcda29032e3645a19eb6084d397110b860b0be81538c518508e62fe6102e21c',
+    id: '@flighthq/types:interface#AnimationLayerStack',
+    purpose: 'reviewed escape-free animation layer stack',
+  },
+  {
+    declarationFingerprint: 'sha256:f7c1c8098f7f7c82fe01a7ddf2d805715c481cb04fccaf02da88b46b1d167363',
+    id: '@flighthq/types:interface#StatechartTransitionExplanation',
+    purpose: 'reviewed escape-free statechart transition explanation',
+  },
+  {
+    declarationFingerprint: 'sha256:3215c135be242191155c72f14deb9e2ac8380b6ca45320c66f824972a1d9f629',
+    id: '@flighthq/types:interface#StatechartCondition',
+    purpose: 'reviewed escape-free statechart condition',
+  },
+  {
+    declarationFingerprint: 'sha256:882e0d77b136ee617b5ba9c0a7d578d413d16fd2a91d872175aa5135d01bfe4f',
+    id: '@flighthq/types:interface#StatechartRegion',
+    purpose: 'reviewed escape-free statechart region',
+  },
+  {
+    declarationFingerprint: 'sha256:33eaa2d8e27482f0dd168784805292b3f4ea43bb6b6dc4828ec20cf05dc6ec46',
+    id: '@flighthq/types:interface#StatechartInput',
+    purpose: 'reviewed escape-free statechart input',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

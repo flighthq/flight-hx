@@ -549,11 +549,11 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#StarlingPexColor` | 32 | 4 | 4 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#StarlingPexDocument` | 82 | 38 | 2 | 4 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#StarlingPexParseResult` | 2 | 3 | 0 | 3 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#StatechartCondition` | 0 | 3 | 1 | 0 | 0 | 0 | 2 | 1 | yes | — |
+| `@flighthq/types:interface#StatechartCondition` | 11 | 3 | 1 | 0 | 0 | 0 | 2 | 1 | yes | — |
 | `@flighthq/types:interface#StatechartInstance` | 52 | 9 | 0 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#StatechartSignals` | 0 | 1 | 1 | 1 | 0 | 0 | 1 | 2 | yes | — |
 | `@flighthq/types:interface#StatechartTransition` | 23 | 4 | 1 | 1 | 0 | 0 | 2 | 1 | yes | — |
-| `@flighthq/types:interface#StatechartTransitionExplanation` | 0 | 7 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#StatechartTransitionExplanation` | 12 | 7 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#StatusBar` | 1 | 1 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#StatusBarBackend` | 0 | 6 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#StorageMigration` | 4 | 2 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |

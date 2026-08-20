@@ -47970,7 +47970,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 11,
       "fields": 3,
       "id": "@flighthq/types:interface#StatechartCondition",
       "name": "StatechartCondition",
@@ -48163,7 +48163,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 12,
       "fields": 7,
       "id": "@flighthq/types:interface#StatechartTransitionExplanation",
       "name": "StatechartTransitionExplanation",
