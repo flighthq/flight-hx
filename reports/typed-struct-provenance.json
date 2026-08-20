@@ -17056,7 +17056,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 12,
       "fields": 4,
       "id": "@flighthq/types:interface#CanvasRenderEffectPipeline",
       "name": "CanvasRenderEffectPipeline",
@@ -24929,7 +24929,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 12,
       "fields": 10,
       "id": "@flighthq/types:interface#GlScene3DDrawEntry",
       "name": "GlScene3DDrawEntry",
@@ -39105,7 +39105,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 12,
       "fields": 4,
       "id": "@flighthq/types:interface#RenderEffectPadding",
       "name": "RenderEffectPadding",

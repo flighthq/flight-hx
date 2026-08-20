@@ -48,12 +48,12 @@ class CanvasRenderEffectPipeline {
     var h:Float = cast _Runtime.UNDEFINED;
     w = flighthq._internal.backend.CanvasElementBackend.field((cast state : CanvasRenderState).canvas, 'width');
     h = flighthq._internal.backend.CanvasElementBackend.field((cast state : CanvasRenderState).canvas, 'height');
-    if ((cast _Runtime.strictEquals((cast pipeline : flighthq.types.CanvasRenderEffectPipeline).sceneTarget, null) : Bool)) {
-      ((cast pipeline : flighthq.types.CanvasRenderEffectPipeline).sceneTarget = (cast createCanvasRenderTarget((cast w : Float), (cast h : Float)) : CanvasRenderTarget));
+    if ((cast _Runtime.strictEquals(pipeline.sceneTarget, null) : Bool)) {
+      (pipeline.sceneTarget = cast ((cast createCanvasRenderTarget((cast w : Float), (cast h : Float)) : CanvasRenderTarget) : Null<CanvasRenderTarget>));
     } else {
-      resizeCanvasRenderTarget((cast pipeline : flighthq.types.CanvasRenderEffectPipeline).sceneTarget, (cast w : Float), (cast h : Float));
+      resizeCanvasRenderTarget(pipeline.sceneTarget, (cast w : Float), (cast h : Float));
     }
-    beginCanvasRenderPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast pipeline : flighthq.types.CanvasRenderEffectPipeline).sceneTarget, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    beginCanvasRenderPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), pipeline.sceneTarget, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static function createCanvasRenderEffectPipeline(_state:CanvasRenderState, ?options:RenderEffectPipelineOptions):flighthq.types.CanvasRenderEffectPipeline {
@@ -70,11 +70,11 @@ class CanvasRenderEffectPipeline {
 
   @:noCompletion
   public static function destroyCanvasRenderEffectPipeline(_state:CanvasRenderState, pipeline:flighthq.types.CanvasRenderEffectPipeline):Void {
-    ((cast pipeline : flighthq.types.CanvasRenderEffectPipeline).sceneTarget = null);
-    _Runtime.setLength((cast (cast pipeline : flighthq.types.CanvasRenderEffectPipeline).pool : CanvasRenderTargetPool).free, 0.0);
-    _Runtime.setLength((cast (cast pipeline : flighthq.types.CanvasRenderEffectPipeline).pool : CanvasRenderTargetPool).inUse, 0.0);
-    ((cast (cast pipeline : flighthq.types.CanvasRenderEffectPipeline).lutCache : ColorLutCache).signature = null);
-    ((cast (cast pipeline : flighthq.types.CanvasRenderEffectPipeline).lutCache : ColorLutCache).lut = null);
+    (pipeline.sceneTarget = cast (null : Null<CanvasRenderTarget>));
+    _Runtime.setLength((cast pipeline.pool : CanvasRenderTargetPool).free, 0.0);
+    _Runtime.setLength((cast pipeline.pool : CanvasRenderTargetPool).inUse, 0.0);
+    ((cast pipeline.lutCache : ColorLutCache).signature = null);
+    ((cast pipeline.lutCache : ColorLutCache).lut = null);
   }
 
   public static function endCanvasRenderEffectPipeline(state:CanvasRenderState, pipeline:flighthq.types.CanvasRenderEffectPipeline, operations:Array<flighthq._internal._Union2<RenderEffect, Adjustment>>):Void {
@@ -86,10 +86,10 @@ class CanvasRenderEffectPipeline {
     var pending:Array<Adjustment> = cast _Runtime.UNDEFINED;
     var ensureScratch:Void->Void = cast _Runtime.UNDEFINED;
     var flushAdjustments:Void->Void = cast _Runtime.UNDEFINED;
-    scene = (cast pipeline : flighthq.types.CanvasRenderEffectPipeline).sceneTarget;
+    scene = pipeline.sceneTarget;
     if ((cast _Runtime.strictEquals(scene, null) : Bool)) { return; }
     endCanvasRenderPass(({ final __callArgument2:Dynamic = state; __callArgument2; }));
-    pool = (cast pipeline : flighthq.types.CanvasRenderEffectPipeline).pool;
+    pool = pipeline.pool;
     source = scene;
     scratchA = null;
     scratchB = null;
@@ -104,7 +104,7 @@ class CanvasRenderEffectPipeline {
       ensureScratch();
       dest = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
       if ((cast _Runtime.callProperty(pending, 'some', cast ([isColorLutAdjustment] : Array<Dynamic>)) : Bool)) {
-        applyColorLutPassToCanvas(({ final __callArgument5:Dynamic = source; __callArgument5; }), ({ final __callArgument6:Dynamic = dest; __callArgument6; }), (cast bakeColorLutForRun((cast pipeline : flighthq.types.CanvasRenderEffectPipeline).lutCache, ({ final __callArgument7:Dynamic = pending; __callArgument7; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ColorLut));
+        applyColorLutPassToCanvas(({ final __callArgument5:Dynamic = source; __callArgument5; }), ({ final __callArgument6:Dynamic = dest; __callArgument6; }), (cast bakeColorLutForRun(pipeline.lutCache, ({ final __callArgument7:Dynamic = pending; __callArgument7; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ColorLut));
       } else {
         var matrices:Array<Array<Float>> = (cast cast ([] : Array<Dynamic>));
         for (op in _Runtime.iterable(pending)) {

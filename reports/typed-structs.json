@@ -41707,9 +41707,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 12,
+        "directAccesses": 12,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -41755,7 +41755,7 @@
       },
       "name": "CanvasRenderEffectPipeline",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Canvas render-effect pipeline",
       "reasons": [],
       "source": "upstream/packages/types/src/CanvasRenderEffectPipeline.ts",
       "sourceProvenance": {
@@ -57043,9 +57043,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 12,
+        "directAccesses": 12,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -57091,7 +57091,7 @@
       },
       "name": "ColorAdjustmentRuntime",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free color-adjustment runtime",
       "reasons": [],
       "source": "upstream/packages/types/src/ColorAdjustmentRuntime.ts",
       "sourceProvenance": {
@@ -134110,9 +134110,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 12,
+        "directAccesses": 12,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -134206,7 +134206,7 @@
       },
       "name": "GlScene3DDrawEntry",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WebGL Scene3D draw entry",
       "reasons": [],
       "source": "upstream/packages/types/src/GlScene3DRuntime.ts",
       "sourceProvenance": {
@@ -259252,9 +259252,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 12,
+        "directAccesses": 12,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -259300,7 +259300,7 @@
       },
       "name": "RenderEffectPadding",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free render-effect padding",
       "reasons": [],
       "source": "upstream/packages/types/src/RenderEffectPadding.ts",
       "sourceProvenance": {
@@ -290246,9 +290246,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 12,
+        "directAccesses": 12,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -290358,7 +290358,7 @@
       },
       "name": "ShadedMaterialOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free shaded-material options",
       "reasons": [],
       "source": "upstream/packages/types/src/ShadedMaterialOptions.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1361,
+      "newAuditOnly": 1356,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1361,
+    "auditOnlySchemas": 1356,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 23651,
-    "directSchemas": 643,
+    "directAccesses": 23711,
+    "directSchemas": 648,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 7015,
+    "pendingAccesses": 6955,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

@@ -50,23 +50,23 @@ class NodeColorAdjustment {
     var adjustments:Null<Array<Adjustment>> = cast _Runtime.UNDEFINED;
     var out:ColorScaleBias = cast _Runtime.UNDEFINED;
     var status:Float = cast _Runtime.UNDEFINED;
-    adjustments = (cast runtime : ColorAdjustmentRuntime).colorAdjustments;
+    adjustments = runtime.colorAdjustments;
     if ((cast ((cast _Runtime.strictEquals(adjustments, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(adjustments, 'length'), 0.0) : Bool)) : Bool)) {
-      ((cast runtime : ColorAdjustmentRuntime).resolvedColorScaleBias = null);
-      ((cast runtime : ColorAdjustmentRuntime).resolvedColorMatrix = null);
-      ((cast runtime : ColorAdjustmentRuntime).colorAdjustmentsUnsupported = false);
+      (runtime.resolvedColorScaleBias = cast (null : Null<ColorScaleBias>));
+      (runtime.resolvedColorMatrix = cast (null : Null<Array<Float>>));
+      (runtime.colorAdjustmentsUnsupported = cast (false : Bool));
       return;
     }
-    out = _Runtime.coalesce((cast runtime : ColorAdjustmentRuntime).resolvedColorScaleBias, function():Dynamic return cast (cast createColorScaleBias(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ColorScaleBias));
+    out = _Runtime.coalesce(runtime.resolvedColorScaleBias, function():Dynamic return cast (cast createColorScaleBias(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ColorScaleBias));
     status = (cast resolveColorAdjustmentsColorScaleBias(({ final __callArgument3:Dynamic = adjustments; __callArgument3; }), ({ final __callArgument4:Dynamic = out; __callArgument4; })) : Float);
     if ((cast _Runtime.strictEquals(status, COLOR_ADJUSTMENT_NONE) : Bool)) {
-      ((cast runtime : ColorAdjustmentRuntime).resolvedColorScaleBias = null);
-      ((cast runtime : ColorAdjustmentRuntime).resolvedColorMatrix = null);
-      ((cast runtime : ColorAdjustmentRuntime).colorAdjustmentsUnsupported = false);
+      (runtime.resolvedColorScaleBias = cast (null : Null<ColorScaleBias>));
+      (runtime.resolvedColorMatrix = cast (null : Null<Array<Float>>));
+      (runtime.colorAdjustmentsUnsupported = cast (false : Bool));
       return;
     }
-    ((cast runtime : ColorAdjustmentRuntime).resolvedColorScaleBias = out);
-    ((cast runtime : ColorAdjustmentRuntime).resolvedColorMatrix = ((cast _Runtime.strictEquals(status, COLOR_ADJUSTMENT_CHANNEL_MIXING) : Bool) ? (cast (cast resolveColorAdjustmentsColorMatrix(({ final __callArgument5:Dynamic = adjustments; __callArgument5; })) : Null<Array<Float>>) : Dynamic) : (cast null : Dynamic)));
-    ((cast runtime : ColorAdjustmentRuntime).colorAdjustmentsUnsupported = ((cast _Runtime.strictEquals(status, COLOR_ADJUSTMENT_CHANNEL_MIXING) : Bool) && (cast _Runtime.strictEquals((cast runtime : ColorAdjustmentRuntime).resolvedColorMatrix, null) : Bool)));
+    (runtime.resolvedColorScaleBias = cast (out : Null<ColorScaleBias>));
+    (runtime.resolvedColorMatrix = cast (((cast _Runtime.strictEquals(status, COLOR_ADJUSTMENT_CHANNEL_MIXING) : Bool) ? (cast (cast resolveColorAdjustmentsColorMatrix(({ final __callArgument5:Dynamic = adjustments; __callArgument5; })) : Null<Array<Float>>) : Dynamic) : (cast null : Dynamic)) : Null<Array<Float>>));
+    (runtime.colorAdjustmentsUnsupported = cast (((cast _Runtime.strictEquals(status, COLOR_ADJUSTMENT_CHANNEL_MIXING) : Bool) && (cast _Runtime.strictEquals(runtime.resolvedColorMatrix, null) : Bool)) : Bool));
   }
 }

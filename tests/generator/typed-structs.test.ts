@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_361,
+      newAuditOnly: 1_356,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(645);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(650);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_361);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_356);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(243);
+    expect(newDirect).toHaveLength(248);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1325,6 +1325,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'VignetteEffect',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free vignette effect',
+        }),
+        expect.objectContaining({
+          name: 'CanvasRenderEffectPipeline',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Canvas render-effect pipeline',
+        }),
+        expect.objectContaining({
+          name: 'ColorAdjustmentRuntime',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free color-adjustment runtime',
+        }),
+        expect.objectContaining({
+          name: 'GlScene3DDrawEntry',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL Scene3D draw entry',
+        }),
+        expect.objectContaining({
+          name: 'ShadedMaterialOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free shaded-material options',
+        }),
+        expect.objectContaining({
+          name: 'RenderEffectPadding',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free render-effect padding',
         }),
       ]),
     );
@@ -2544,6 +2569,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#VignetteEffect',
         purpose: 'reviewed escape-free vignette effect',
       },
+      {
+        declarationFingerprint: 'sha256:f0f92129b058ee5f05cd9b1720f2d60db4a348e6e4db086f74a9ceb8718520af',
+        id: '@flighthq/types:interface#CanvasRenderEffectPipeline',
+        purpose: 'reviewed escape-free Canvas render-effect pipeline',
+      },
+      {
+        declarationFingerprint: 'sha256:6af421b0c66043312dce3e7248225fbb43b0df05efaec7f3186f4f863b33dd93',
+        id: '@flighthq/types:interface#ColorAdjustmentRuntime',
+        purpose: 'reviewed escape-free color-adjustment runtime',
+      },
+      {
+        declarationFingerprint: 'sha256:4e3a499b44071f2a83f997c36a83d95dd82c343b59af35480c3a88fa1d605add',
+        id: '@flighthq/types:interface#GlScene3DDrawEntry',
+        purpose: 'reviewed escape-free WebGL Scene3D draw entry',
+      },
+      {
+        declarationFingerprint: 'sha256:3f073246cc4c3bc480231452c128a1e7887dfcbe84ace00b3cabb63a2b5a4f9b',
+        id: '@flighthq/types:interface#ShadedMaterialOptions',
+        purpose: 'reviewed escape-free shaded-material options',
+      },
+      {
+        declarationFingerprint: 'sha256:b38af857c9f1ced8a0efa777f84273e301f75abdceb65a7180dd2eef56c4802d',
+        id: '@flighthq/types:interface#RenderEffectPadding',
+        purpose: 'reviewed escape-free render-effect padding',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -3402,6 +3452,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const twentySecondHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'CanvasRenderEffectPipeline',
+            'ColorAdjustmentRuntime',
+            'GlScene3DDrawEntry',
+            'RenderEffectPadding',
+            'ShadedMaterialOptions',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -3442,22 +3505,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_361,
+      auditOnlySchemas: 1_356,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 23_651,
-      directSchemas: 643,
+      directAccesses: 23_711,
+      directSchemas: 648,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 7_015,
+      pendingAccesses: 6_955,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_361,
+      newAuditOnly: 1_356,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -3534,7 +3597,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(23_651);
+    expect(report.summary.directAccesses).toBe(23_711);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -4672,6 +4735,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(twentyFirstHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'CanvasRenderEffectPipeline',
+        12,
+        'sha256:f0f92129b058ee5f05cd9b1720f2d60db4a348e6e4db086f74a9ceb8718520af',
+        'reviewed escape-free Canvas render-effect pipeline',
+      ],
+      [
+        'ColorAdjustmentRuntime',
+        12,
+        'sha256:6af421b0c66043312dce3e7248225fbb43b0df05efaec7f3186f4f863b33dd93',
+        'reviewed escape-free color-adjustment runtime',
+      ],
+      [
+        'GlScene3DDrawEntry',
+        12,
+        'sha256:4e3a499b44071f2a83f997c36a83d95dd82c343b59af35480c3a88fa1d605add',
+        'reviewed escape-free WebGL Scene3D draw entry',
+      ],
+      [
+        'ShadedMaterialOptions',
+        12,
+        'sha256:3f073246cc4c3bc480231452c128a1e7887dfcbe84ace00b3cabb63a2b5a4f9b',
+        'reviewed escape-free shaded-material options',
+      ],
+      [
+        'RenderEffectPadding',
+        12,
+        'sha256:b38af857c9f1ced8a0efa777f84273e301f75abdceb65a7180dd2eef56c4802d',
+        'reviewed escape-free render-effect padding',
+      ],
+    ] as const) {
+      expect(twentySecondHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -6542,6 +6647,24 @@ describe('typed struct analysis', () => {
       }
     }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#CanvasRenderEffectPipeline', true, [], [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#ColorAdjustmentRuntime', false, ['cross-schema-transfer'], [], null],
+      ['@flighthq/types:interface#GlScene3DDrawEntry', true, [], [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#ShadedMaterialOptions', true, [], ['optional-omission'], null],
+      ['@flighthq/types:interface#RenderEffectPadding', true, [], [], { blockerReasons: [], closed: true }],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      if (nominalIdentity === null) {
+        expect(provenanceById.has(frontierId)).toBe(false);
+      } else {
+        expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+      }
+    }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
         true,
@@ -7736,6 +7859,25 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toContain('_Runtime.field(effect,');
     }
+    for (const path of [
+      'generated/flighthq/effects/RenderEffectPadding.hx',
+      'generated/flighthq/effectsCanvas/CanvasRenderEffectPipeline.hx',
+      'generated/flighthq/node/NodeColorAdjustment.hx',
+      'generated/flighthq/render/RenderTarget.hx',
+      'generated/flighthq/scene3dGl/DrawGlScene3D.hx',
+      'generated/flighthq/shading/CreateShadedMaterial.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:CanvasRenderEffectPipeline|ColorAdjustmentRuntime|GlScene3DDrawEntry|RenderEffectPadding|ShadedMaterialOptions)\)\./u,
+      );
+    }
+    expect(readFileSync('generated/flighthq/effects/RenderEffectPadding.hx', 'utf8')).not.toContain(
+      '_Runtime.field(padding,',
+    );
+    expect(readFileSync('generated/flighthq/render/RenderTarget.hx', 'utf8')).not.toContain('_Runtime.field(padding,');
+    expect(readFileSync('generated/flighthq/shading/CreateShadedMaterial.hx', 'utf8')).not.toContain(
+      'final __structural',
+    );
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
     expect(generatedCanvasRenderState).not.toMatch(
       /\(cast (?:runtime|sourceRuntime|targetRuntime) : CanvasRenderStateRuntime\)\./u,

@@ -92,7 +92,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Camera3DOptions` | 0 | 3 | 0 | 2 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasMaterialRenderer` | 0 | 1 | 1 | 0 | 1 | 0 | 1 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#CanvasRenderEffectContext` | 42 | 4 | 0 | 4 | 0 | 0 | 1 | 0 | yes | — |
-| `@flighthq/types:interface#CanvasRenderEffectPipeline` | 0 | 4 | 0 | 4 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#CanvasRenderEffectPipeline` | 12 | 4 | 0 | 4 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTextureEntry` | 15 | 2 | 0 | 1 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTextureExplanation` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTexturePool` | 21 | 5 | 0 | 4 | 0 | 0 | 1 | 1 | yes | — |
@@ -235,7 +235,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#GlRenderTextureEntry` | 24 | 2 | 1 | 1 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#GlRenderTextureExplanation` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#GlRenderTexturePool` | 17 | 5 | 0 | 3 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#GlScene3DDrawEntry` | 0 | 10 | 4 | 1 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#GlScene3DDrawEntry` | 12 | 10 | 4 | 1 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#GlScene3DForwardLightList` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#GlScene3DIbl` | 0 | 5 | 1 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#GlScene3DShadow` | 0 | 6 | 1 | 1 | 0 | 0 | 0 | 1 | yes | — |
@@ -414,7 +414,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#RenderBatchKey` | 0 | 5 | 1 | 1 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderBlendStateEntry` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderDrawContext` | 0 | 4 | 0 | 1 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#RenderEffectPadding` | 0 | 4 | 1 | 0 | 0 | 0 | 1 | 2 | yes | — |
+| `@flighthq/types:interface#RenderEffectPadding` | 12 | 4 | 1 | 0 | 0 | 0 | 1 | 2 | yes | — |
 | `@flighthq/types:interface#RenderEffectPaddingExplanation` | 0 | 3 | 0 | 1 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#RenderQueue` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#RenderRegistryMiss` | 0 | 2 | 1 | 0 | 0 | 1 | 0 | 1 | no | `container-transfer` |

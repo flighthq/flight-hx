@@ -1243,6 +1243,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#VignetteEffect',
     purpose: 'reviewed escape-free vignette effect',
   },
+  {
+    declarationFingerprint: 'sha256:f0f92129b058ee5f05cd9b1720f2d60db4a348e6e4db086f74a9ceb8718520af',
+    id: '@flighthq/types:interface#CanvasRenderEffectPipeline',
+    purpose: 'reviewed escape-free Canvas render-effect pipeline',
+  },
+  {
+    declarationFingerprint: 'sha256:6af421b0c66043312dce3e7248225fbb43b0df05efaec7f3186f4f863b33dd93',
+    id: '@flighthq/types:interface#ColorAdjustmentRuntime',
+    purpose: 'reviewed escape-free color-adjustment runtime',
+  },
+  {
+    declarationFingerprint: 'sha256:4e3a499b44071f2a83f997c36a83d95dd82c343b59af35480c3a88fa1d605add',
+    id: '@flighthq/types:interface#GlScene3DDrawEntry',
+    purpose: 'reviewed escape-free WebGL Scene3D draw entry',
+  },
+  {
+    declarationFingerprint: 'sha256:3f073246cc4c3bc480231452c128a1e7887dfcbe84ace00b3cabb63a2b5a4f9b',
+    id: '@flighthq/types:interface#ShadedMaterialOptions',
+    purpose: 'reviewed escape-free shaded-material options',
+  },
+  {
+    declarationFingerprint: 'sha256:b38af857c9f1ced8a0efa777f84273e301f75abdceb65a7180dd2eef56c4802d',
+    id: '@flighthq/types:interface#RenderEffectPadding',
+    purpose: 'reviewed escape-free render-effect padding',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

@@ -33,8 +33,8 @@ class RenderTarget {
   public static function computeRenderTargetSize(bounds:RectangleLike, padding:flighthq._internal._Union2<Float, RenderEffectPadding> = 0.0, minWidth:Float = 1.0, minHeight:Float = 1.0):{ var width:Float; var height:Float; } {
     var horizontal:Float = cast _Runtime.UNDEFINED;
     var vertical:Float = cast _Runtime.UNDEFINED;
-    horizontal = ((cast _Runtime.strictEquals(_Runtime.typeofValue(padding), 'number') : Bool) ? (cast _Runtime.multiplyNumbers(padding, 2.0) : Dynamic) : (cast _Runtime.addNumbers(_Runtime.field(padding, 'left'), _Runtime.field(padding, 'right')) : Dynamic));
-    vertical = ((cast _Runtime.strictEquals(_Runtime.typeofValue(padding), 'number') : Bool) ? (cast _Runtime.multiplyNumbers(padding, 2.0) : Dynamic) : (cast _Runtime.addNumbers(_Runtime.field(padding, 'top'), _Runtime.field(padding, 'bottom')) : Dynamic));
+    horizontal = ((cast _Runtime.strictEquals(_Runtime.typeofValue(padding), 'number') : Bool) ? (cast _Runtime.multiplyNumbers(padding, 2.0) : Dynamic) : (cast ((cast padding : { var left:Float; }).left + (cast padding : { var right:Float; }).right) : Dynamic));
+    vertical = ((cast _Runtime.strictEquals(_Runtime.typeofValue(padding), 'number') : Bool) ? (cast _Runtime.multiplyNumbers(padding, 2.0) : Dynamic) : (cast ((cast padding : { var top:Float; }).top + (cast padding : { var bottom:Float; }).bottom) : Dynamic));
     return cast { width: HxMath.max(minWidth, _Runtime.addNumbers(HxMath.ceil(bounds.width), horizontal)), height: HxMath.max(minHeight, _Runtime.addNumbers(HxMath.ceil(bounds.height), vertical)) };
     return cast null;
   }

@@ -49,10 +49,10 @@ class RenderEffectPadding {
         continue;
       }
       var padding:flighthq.types.RenderEffectPadding = (cast resolver(({ final __callArgument10:Dynamic = effect; __callArgument10; })) : flighthq.types.RenderEffectPadding);
-      (bottom = cast ((bottom + (cast RenderEffectPadding.sanitizePadding__renderEffectPadding((cast _Runtime.field(padding, 'bottom') : Float)) : Float)) : Dynamic));
-      (left = cast ((left + (cast RenderEffectPadding.sanitizePadding__renderEffectPadding((cast _Runtime.field(padding, 'left') : Float)) : Float)) : Dynamic));
-      (right = cast ((right + (cast RenderEffectPadding.sanitizePadding__renderEffectPadding((cast _Runtime.field(padding, 'right') : Float)) : Float)) : Dynamic));
-      (top = cast ((top + (cast RenderEffectPadding.sanitizePadding__renderEffectPadding((cast _Runtime.field(padding, 'top') : Float)) : Float)) : Dynamic));
+      (bottom = cast ((bottom + (cast RenderEffectPadding.sanitizePadding__renderEffectPadding((cast padding.bottom : Float)) : Float)) : Dynamic));
+      (left = cast ((left + (cast RenderEffectPadding.sanitizePadding__renderEffectPadding((cast padding.left : Float)) : Float)) : Dynamic));
+      (right = cast ((right + (cast RenderEffectPadding.sanitizePadding__renderEffectPadding((cast padding.right : Float)) : Float)) : Dynamic));
+      (top = cast ((top + (cast RenderEffectPadding.sanitizePadding__renderEffectPadding((cast padding.top : Float)) : Float)) : Dynamic));
     }
     return cast { missingKinds: missingKinds, padding: { bottom: bottom, left: left, right: right, top: top }, status: ((cast _Runtime.strictEquals(_Runtime.field(missingKinds, 'length'), 0.0) : Bool) ? (cast 'complete' : Dynamic) : (cast 'missing-resolver' : Dynamic)) };
     return cast null;
@@ -65,7 +65,7 @@ class RenderEffectPadding {
     gaussian = (cast getGaussianRenderEffectPadding((cast blurX : Float), (cast blurY : Float)) : flighthq.types.RenderEffectPadding);
     dx = ((cast ((cast HxMath.abs(offsetX) : Float) < (cast 1e-10 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast offsetX : Dynamic));
     dy = ((cast ((cast HxMath.abs(offsetY) : Float) < (cast 1e-10 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast offsetY : Dynamic));
-    return cast { bottom: HxMath.ceil(_Runtime.addNumbers((cast gaussian : flighthq.types.RenderEffectPadding).bottom, HxMath.max(0.0, dy))), left: HxMath.ceil(_Runtime.addNumbers((cast gaussian : flighthq.types.RenderEffectPadding).left, HxMath.max(0.0, -dx))), right: HxMath.ceil(_Runtime.addNumbers((cast gaussian : flighthq.types.RenderEffectPadding).right, HxMath.max(0.0, dx))), top: HxMath.ceil(_Runtime.addNumbers((cast gaussian : flighthq.types.RenderEffectPadding).top, HxMath.max(0.0, -dy))) };
+    return cast { bottom: HxMath.ceil(_Runtime.addNumbers(gaussian.bottom, HxMath.max(0.0, dy))), left: HxMath.ceil(_Runtime.addNumbers(gaussian.left, HxMath.max(0.0, -dx))), right: HxMath.ceil(_Runtime.addNumbers(gaussian.right, HxMath.max(0.0, dx))), top: HxMath.ceil(_Runtime.addNumbers(gaussian.top, HxMath.max(0.0, -dy))) };
     return cast null;
   }
 

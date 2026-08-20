@@ -118,16 +118,16 @@ class DrawGlScene3D {
             var resolvedMaterial:Material = _Runtime.coalesce(material, function():Dynamic return cast DrawGlScene3D.DEFAULT_MATERIAL__drawGlScene3D);
             var isBlended:Bool = ((cast (cast DrawGlScene3D.isBlendedMaterial__drawGlScene3D(({ final __callArgument20:Dynamic = resolvedMaterial; __callArgument20; })) : Bool) : Bool) || (cast ((cast objectAlpha : Float) < (cast 1.0 : Float)) : Bool));
             var entry:GlScene3DDrawEntry = (cast DrawGlScene3D.acquireDrawEntry__drawGlScene3D(((cast isBlended : Bool) ? (cast runtime.blendedPool : Dynamic) : (cast runtime.opaquePool : Dynamic))) : GlScene3DDrawEntry);
-            ((cast entry : GlScene3DDrawEntry).alpha = objectAlpha);
-            ((cast entry : GlScene3DDrawEntry).clipW = clipW);
-            ((cast entry : GlScene3DDrawEntry).colorMatrix = colorMatrix);
-            ((cast entry : GlScene3DDrawEntry).colorScaleBias = colorScaleBias);
-            ((cast entry : GlScene3DDrawEntry).lightBlock = ((cast hasPreparedForwardLights : Bool) ? (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(forwardLights, 'meshLightBlocks'), m) : Dynamic) : (cast lightBlock : Dynamic)));
-            ((cast entry : GlScene3DDrawEntry).mesh = mesh);
-            ((cast entry : GlScene3DDrawEntry).material = resolvedMaterial);
-            ((cast entry : GlScene3DDrawEntry).renderer = renderer);
-            ((cast entry : GlScene3DDrawEntry).subset = flighthq._internal._StaticIndex.readArray(subsets, s));
-            ((cast entry : GlScene3DDrawEntry).worldMatrix = worldMatrix);
+            (entry.alpha = cast (objectAlpha : Float));
+            (entry.clipW = cast (clipW : Float));
+            (entry.colorMatrix = cast (colorMatrix : Null<flighthq._internal._Object>));
+            (entry.colorScaleBias = cast (colorScaleBias : Null<flighthq._internal._Object>));
+            (entry.lightBlock = cast (((cast hasPreparedForwardLights : Bool) ? (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(forwardLights, 'meshLightBlocks'), m) : Dynamic) : (cast lightBlock : Dynamic)) : Scene3DLightBlock));
+            (entry.mesh = cast (mesh : flighthq._internal._Object));
+            (entry.material = cast (resolvedMaterial : flighthq._internal._Object));
+            (entry.renderer = cast (renderer : flighthq._internal._Object));
+            (entry.subset = cast (flighthq._internal._StaticIndex.readArray(subsets, s) : flighthq._internal._Object));
+            (entry.worldMatrix = cast (worldMatrix : flighthq._internal._Object));
             if ((cast isBlended : Bool)) {
               _Runtime.callProperty(blendedDrawList, 'push', cast ([entry] : Array<Dynamic>));
             } else {
@@ -256,7 +256,7 @@ class DrawGlScene3D {
   }
 
   public static function compareBlendedEntriesDescending__drawGlScene3D(a:GlScene3DDrawEntry, b:GlScene3DDrawEntry):Float {
-    return cast ((cast b : GlScene3DDrawEntry).clipW - (cast a : GlScene3DDrawEntry).clipW);
+    return cast (b.clipW - a.clipW);
     return cast null;
   }
 
