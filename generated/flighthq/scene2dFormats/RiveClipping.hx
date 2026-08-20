@@ -58,7 +58,7 @@ class RiveClipping {
     for (__iteration0 in _Runtime.iterable(clips)) {
       var target:DisplayObject = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
       var path:Path = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
-      ((cast target : DisplayObject).clip = (cast createClipRegionFromPath(({ final __callArgument11:Dynamic = path; __callArgument11; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ClipRegion));
+      (target.clip = cast ((cast createClipRegionFromPath(({ final __callArgument11:Dynamic = path; __callArgument11; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ClipRegion) : Null<ClipRegion>));
     }
   }
 

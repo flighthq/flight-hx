@@ -94,8 +94,8 @@ class RiveScene2D {
     name = (cast RiveScene2D.readRiveText__riveScene2D(({ final __callArgument9:Dynamic = source; __callArgument9; }), (cast RiveScene2D.RIVE_NAME__riveScene2D : Float), (cast '' : String)) : String);
     root = (cast createDisplayObject((cast { name: name } : Dynamic)) : DisplayObject);
     RiveScene2D.applyRiveTransform__riveScene2D(({ final __callArgument10:Dynamic = root; __callArgument10; }), ({ final __callArgument11:Dynamic = source; __callArgument11; }));
-    ((cast root : DisplayObject).pivotX = ((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument12:Dynamic = source; __callArgument12; }), (cast RiveScene2D.RIVE_ORIGIN_X__riveScene2D : Float), (cast 0.0 : Float)) : Float) * width));
-    ((cast root : DisplayObject).pivotY = ((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument13:Dynamic = source; __callArgument13; }), (cast RiveScene2D.RIVE_ORIGIN_Y__riveScene2D : Float), (cast 0.0 : Float)) : Float) * height));
+    (root.pivotX = cast (((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument12:Dynamic = source; __callArgument12; }), (cast RiveScene2D.RIVE_ORIGIN_X__riveScene2D : Float), (cast 0.0 : Float)) : Float) * width) : Float));
+    (root.pivotY = cast (((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument13:Dynamic = source; __callArgument13; }), (cast RiveScene2D.RIVE_ORIGIN_Y__riveScene2D : Float), (cast 0.0 : Float)) : Float) * height) : Float));
     advancedBlends = (cast cast ([] : Array<Dynamic>));
     nodes = (cast cast ([root] : Array<Dynamic>));
     shapePaths = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
@@ -255,12 +255,12 @@ class RiveScene2D {
   }
 
   public static function applyRiveTransform__riveScene2D(target:DisplayObject, source:RiveCoreObject):Void {
-    ((cast target : DisplayObject).x = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument85:Dynamic = source; __callArgument85; }), (cast RiveScene2D.RIVE_X__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument86:Dynamic = source; __callArgument86; }), (cast RiveScene2D.RIVE_X_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Float));
-    ((cast target : DisplayObject).y = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument87:Dynamic = source; __callArgument87; }), (cast RiveScene2D.RIVE_Y__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument88:Dynamic = source; __callArgument88; }), (cast RiveScene2D.RIVE_Y_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Float));
-    ((cast target : DisplayObject).rotation = ((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument89:Dynamic = source; __callArgument89; }), (cast RiveScene2D.RIVE_ROTATION__riveScene2D : Float), (cast 0.0 : Float)) : Float) * RAD_TO_DEG));
-    ((cast target : DisplayObject).scaleX = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument90:Dynamic = source; __callArgument90; }), (cast RiveScene2D.RIVE_SCALE_X__riveScene2D : Float), (cast 1.0 : Float)) : Float));
-    ((cast target : DisplayObject).scaleY = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument91:Dynamic = source; __callArgument91; }), (cast RiveScene2D.RIVE_SCALE_Y__riveScene2D : Float), (cast 1.0 : Float)) : Float));
-    ((cast target : DisplayObject).alpha = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument92:Dynamic = source; __callArgument92; }), (cast RiveScene2D.RIVE_OPACITY__riveScene2D : Float), (cast 1.0 : Float)) : Float));
+    (target.x = cast ((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument85:Dynamic = source; __callArgument85; }), (cast RiveScene2D.RIVE_X__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument86:Dynamic = source; __callArgument86; }), (cast RiveScene2D.RIVE_X_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Float) : Float));
+    (target.y = cast ((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument87:Dynamic = source; __callArgument87; }), (cast RiveScene2D.RIVE_Y__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument88:Dynamic = source; __callArgument88; }), (cast RiveScene2D.RIVE_Y_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Float) : Float));
+    (target.rotation = cast (((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument89:Dynamic = source; __callArgument89; }), (cast RiveScene2D.RIVE_ROTATION__riveScene2D : Float), (cast 0.0 : Float)) : Float) * RAD_TO_DEG) : Float));
+    (target.scaleX = cast ((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument90:Dynamic = source; __callArgument90; }), (cast RiveScene2D.RIVE_SCALE_X__riveScene2D : Float), (cast 1.0 : Float)) : Float) : Float));
+    (target.scaleY = cast ((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument91:Dynamic = source; __callArgument91; }), (cast RiveScene2D.RIVE_SCALE_Y__riveScene2D : Float), (cast 1.0 : Float)) : Float) : Float));
+    (target.alpha = cast ((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument92:Dynamic = source; __callArgument92; }), (cast RiveScene2D.RIVE_OPACITY__riveScene2D : Float), (cast 1.0 : Float)) : Float) : Float));
   }
 
   public static function applyRiveBlendMode__riveScene2D(target:DisplayObject, source:RiveCoreObject, advanced:Array<RiveAdvancedBlend>):Void {
@@ -271,10 +271,10 @@ class RiveScene2D {
     value = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument93:Dynamic = source; __callArgument93; }), (cast RiveScene2D.RIVE_BLEND_MODE__riveScene2D : Float), (cast RiveScene2D.RIVE_BLEND_SRC_OVER__riveScene2D : Float)) : Float);
     fixed = ((cast RiveScene2D.RIVE_FIXED_BLEND_MODES__riveScene2D : flighthq._internal._Map<Float, String>).get(value));
     if ((cast !_Runtime.strictEquals(fixed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      ((cast target : DisplayObject).blendMode = fixed);
+      (target.blendMode = cast (fixed : Null<String>));
       return;
     }
-    ((cast target : DisplayObject).blendMode = (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal);
+    (target.blendMode = cast ((cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal : Null<String>));
     mode = ((cast RiveScene2D.RIVE_ADVANCED_BLEND_MODES__riveScene2D : flighthq._internal._Map<Float, String>).get(value));
     if ((cast !_Runtime.strictEquals(mode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(advanced, 'push', cast ([{ mode: mode, node: target }] : Array<Dynamic>)); }
   }

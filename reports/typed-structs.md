@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1356 |
-| Direct schemas | 648 |
+| Audit-only schemas | 1351 |
+| Direct schemas | 653 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 6955 |
-| Directly emitted accesses | 23711 |
+| Pending accesses | 6896 |
+| Directly emitted accesses | 23770 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1356 |
+| Newly discovered, audit-only | 1351 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -70,7 +70,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#AccessibilityBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
 | `@flighthq/types:interface#AccessibilityDescriptor` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AccessibilityLiveness` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#AccessibilityNode` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AccessibilityNode` | `direct` | `new` | — | reviewed escape-free accessibility node | 8 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AccessibilityRole` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#AccessibilityState` | `direct` | `new` | — | reviewed escape-free accessibility state | 13 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Adjustment` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
@@ -431,7 +431,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#DirectionalLight` | `direct` | `new` | — | reviewed escape-free directional light | 8 | 24 | 0 | 0 | 0 | 24 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DirectionalLightOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DisplacementEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#DisplayObject` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 0 | 12 | 0 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#DisplayObject` | `direct` | `new` | — | reviewed escape-free display object | 19 | 0 | 12 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DisplayObjectRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 38 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DissolveModifier` | `direct` | `new` | — | reviewed escape-free dissolve modifier | 7 | 16 | 1 | 0 | 0 | 17 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DissolveModifierOptions` | `direct` | `new` | — | reviewed escape-free dissolve modifier options | 5 | 6 | 0 | 0 | 0 | 6 | 0 | 0 | yes | — |
@@ -729,7 +729,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#GradientType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#GrayscaleAdjustment` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GridLayoutContainerStyle` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 18 | 2 | 0 | 20 | 0 | 0 | 4 | yes | — |
-| `@flighthq/types:interface#GridLayoutItemStyle` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 8 | 4 | 0 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GridLayoutItemStyle` | `direct` | `new` | — | reviewed escape-free grid item style | 4 | 8 | 4 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GridLayoutTrack` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#GridSliceOptions` | `direct` | `preserved` | `@flighthq/types:interface#GridSliceOptions` | broad asset document | 12 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Group` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -1001,7 +1001,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#MovieClipData` | `direct` | `new` | — | reviewed escape-free movie-clip data | 1 | 30 | 2 | 0 | 0 | 32 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MovieClipRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 39 | 3 | 3 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#MovieClipSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#NativeText` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#NativeText` | `direct` | `new` | — | reviewed escape-free native text | 19 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#NativeTextData` | `direct` | `new` | — | reviewed escape-free native-text data | 6 | 19 | 7 | 0 | 0 | 26 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#NativeTextRuntime` | `direct` | `new` | — | reviewed escape-free native text runtime | 41 | 7 | 6 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#NativeTextStyle` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 9 | 0 | 0 | 9 | 0 | 0 | 1 | yes | — |
@@ -1727,7 +1727,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#TextJustification` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#TextLabel` | `direct` | `new` | — | reviewed escape-free text label | 19 | 28 | 0 | 0 | 0 | 28 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextLabelData` | `direct` | `new` | — | reviewed escape-free text-label data | 6 | 44 | 7 | 0 | 0 | 51 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TextLabelRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 41 | 5 | 6 | 1 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TextLabelRuntime` | `direct` | `new` | — | reviewed escape-free text-label runtime | 41 | 5 | 6 | 1 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextLayoutGroup` | `direct` | `new` | — | reviewed escape-free text-layout group | 12 | 257 | 43 | 0 | 0 | 300 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextLayoutParams` | `direct` | `new` | — | reviewed escape-free text-layout parameters | 14 | 17 | 0 | 0 | 0 | 17 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextLayoutResult` | `direct` | `new` | — | reviewed escape-free text-layout result | 9 | 118 | 10 | 0 | 0 | 128 | 0 | 0 | yes | — |

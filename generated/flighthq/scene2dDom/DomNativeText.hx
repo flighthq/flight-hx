@@ -37,7 +37,7 @@ class DomNativeText {
     var rect:flighthq._internal.dom.DOMRect = cast _Runtime.UNDEFINED;
     source = (cast (cast renderProxy : RenderProxy2D).source : NativeText);
     runtime = (cast getNativeTextRuntime(({ final __callArgument0:Dynamic = source; __callArgument0; })) : NativeTextRuntime);
-    data = (cast source : NativeText).data;
+    data = source.data;
     element = runtime.element;
     if ((cast _Runtime.strictEquals(element, null) : Bool)) {
       (element = cast (flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>)) : Dynamic));

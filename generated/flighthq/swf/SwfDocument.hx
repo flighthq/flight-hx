@@ -670,7 +670,7 @@ class SwfDocument {
     var target:DisplayObject = cast _Runtime.UNDEFINED;
     target = (cast createDisplayObject(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : DisplayObject);
     if ((cast !_Runtime.strictEquals(bounds, null) : Bool)) {
-      ((cast target : DisplayObject).data = (cast { authoredBounds: _Runtime.mergeObjects([bounds]) } : SwfDisplayObjectData__swfDocument));
+      (target.data = cast ((cast { authoredBounds: _Runtime.mergeObjects([bounds]) } : SwfDisplayObjectData__swfDocument) : Null<Node2DData>));
       ((cast (cast getNodeRuntime((cast target : Dynamic)) : Node2DRuntime) : { var computeLocalBoundsRectangle:Rectangle->BoundsNodeAny->Void; }).computeLocalBoundsRectangle = (cast SwfDocument.computeSwfLocalBoundsRectangle__swfDocument));
     }
     return cast target;

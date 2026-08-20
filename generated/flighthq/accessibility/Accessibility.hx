@@ -11,14 +11,14 @@ import flighthq.types.Accessibility.AccessibilityState;
 
 class Accessibility {
   public static function _applyAccessibilityElementAttributes__accessibility(element:flighthq._internal.dom.HTMLElement, node:AccessibilityNode):Void {
-    element.setAttribute('role', _Runtime.field(node, 'role'));
-    Accessibility._reflectAccessibilityAttribute__accessibility(({ final __callArgument0:Dynamic = element; __callArgument0; }), (cast 'aria-label' : String), _Runtime.field(node, 'label'));
-    Accessibility._reflectAccessibilityAttribute__accessibility(({ final __callArgument1:Dynamic = element; __callArgument1; }), (cast 'aria-description' : String), _Runtime.field(node, 'description'));
-    Accessibility._reflectAccessibilityAttribute__accessibility(({ final __callArgument2:Dynamic = element; __callArgument2; }), (cast 'title' : String), _Runtime.field(node, 'description'));
-    Accessibility._reflectAccessibilityAttribute__accessibility(({ final __callArgument3:Dynamic = element; __callArgument3; }), (cast 'aria-valuetext' : String), _Runtime.field(node, 'value'));
-    Accessibility._setAccessibilityElementValueText__accessibility(({ final __callArgument4:Dynamic = element; __callArgument4; }), _Runtime.field(node, 'value'));
+    element.setAttribute('role', node.role);
+    Accessibility._reflectAccessibilityAttribute__accessibility(({ final __callArgument0:Dynamic = element; __callArgument0; }), (cast 'aria-label' : String), node.label);
+    Accessibility._reflectAccessibilityAttribute__accessibility(({ final __callArgument1:Dynamic = element; __callArgument1; }), (cast 'aria-description' : String), node.description);
+    Accessibility._reflectAccessibilityAttribute__accessibility(({ final __callArgument2:Dynamic = element; __callArgument2; }), (cast 'title' : String), node.description);
+    Accessibility._reflectAccessibilityAttribute__accessibility(({ final __callArgument3:Dynamic = element; __callArgument3; }), (cast 'aria-valuetext' : String), node.value);
+    Accessibility._setAccessibilityElementValueText__accessibility(({ final __callArgument4:Dynamic = element; __callArgument4; }), node.value);
     element.setAttribute('tabindex', '-1');
-    Accessibility._applyAccessibilityStateAttributes__accessibility(({ final __callArgument5:Dynamic = element; __callArgument5; }), ({ final __callArgument6:Dynamic = _Runtime.coalesce(_Runtime.field(node, 'states'), function():Dynamic return cast Accessibility._EMPTY_STATE__accessibility); __callArgument6; }));
+    Accessibility._applyAccessibilityStateAttributes__accessibility(({ final __callArgument5:Dynamic = element; __callArgument5; }), ({ final __callArgument6:Dynamic = _Runtime.coalesce(node.states, function():Dynamic return cast Accessibility._EMPTY_STATE__accessibility); __callArgument6; }));
   }
 
   public static function _applyAccessibilityStateAttributes__accessibility(element:flighthq._internal.dom.HTMLElement, state:AccessibilityState):Void {
@@ -162,14 +162,14 @@ class Accessibility {
       var element:Null<flighthq._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
       overlayRoot = (cast getRoot() : Null<flighthq._internal.dom.HTMLElement>);
       if ((cast _Runtime.strictEquals(overlayRoot, null) : Bool)) { return; }
-      element = ((cast elements : flighthq._internal._Map<String, flighthq._internal.dom.HTMLElement>).get(_Runtime.field(node, 'id')));
+      element = ((cast elements : flighthq._internal._Map<String, flighthq._internal.dom.HTMLElement>).get(node.id));
       if ((cast _Runtime.strictEquals(element, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         (element = cast (flighthq._internal.backend.DomDocumentBackend.call((cast overlayRoot : flighthq._internal.dom.HTMLElement).ownerDocument, 'createElement', cast (['div'] : Array<Dynamic>)) : Dynamic));
-        (cast element : flighthq._internal.dom.HTMLElement).setAttribute('data-flight-accessibility-id', _Runtime.field(node, 'id'));
-        ((cast elements : flighthq._internal._Map<String, flighthq._internal.dom.HTMLElement>).set(_Runtime.field(node, 'id'), (cast element)));
+        (cast element : flighthq._internal.dom.HTMLElement).setAttribute('data-flight-accessibility-id', node.id);
+        ((cast elements : flighthq._internal._Map<String, flighthq._internal.dom.HTMLElement>).set(node.id, (cast element)));
       }
       Accessibility._applyAccessibilityElementAttributes__accessibility(({ final __callArgument22:Dynamic = element; __callArgument22; }), ({ final __callArgument23:Dynamic = node; __callArgument23; }));
-      Accessibility._reparentAccessibilityElement__accessibility(({ final __callArgument24:Dynamic = element; __callArgument24; }), _Runtime.field(node, 'parentId'), ({ final __callArgument25:Dynamic = elements; __callArgument25; }), ({ final __callArgument26:Dynamic = overlayRoot; __callArgument26; }));
+      Accessibility._reparentAccessibilityElement__accessibility(({ final __callArgument24:Dynamic = element; __callArgument24; }), node.parentId, ({ final __callArgument25:Dynamic = elements; __callArgument25; }), ({ final __callArgument26:Dynamic = overlayRoot; __callArgument26; }));
     }, removeNode: function(id:String):Void {
       var element:Null<flighthq._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
       element = ((cast elements : flighthq._internal._Map<String, flighthq._internal.dom.HTMLElement>).get(id));

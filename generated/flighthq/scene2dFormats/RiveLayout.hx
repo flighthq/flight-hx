@@ -324,10 +324,10 @@ class RiveLayout {
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(column, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(row, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast ((cast (column + columnSpan) : Float) > (cast columnCount : Float)) : Bool)) : Bool) || (cast ((cast (row + rowSpan) : Float) > (cast rowCount : Float)) : Bool)) : Bool)) {
       return cast result;
     }
-    ((cast result : GridLayoutItemStyle).column = column);
-    ((cast result : GridLayoutItemStyle).row = row);
-    if ((cast ((cast columnSpan : Float) > (cast 1.0 : Float)) : Bool)) { ((cast result : GridLayoutItemStyle).columnSpan = columnSpan); }
-    if ((cast ((cast rowSpan : Float) > (cast 1.0 : Float)) : Bool)) { ((cast result : GridLayoutItemStyle).rowSpan = rowSpan); }
+    (result.column = cast (column : Null<Float>));
+    (result.row = cast (row : Null<Float>));
+    if ((cast ((cast columnSpan : Float) > (cast 1.0 : Float)) : Bool)) { (result.columnSpan = cast (columnSpan : Null<Float>)); }
+    if ((cast ((cast rowSpan : Float) > (cast 1.0 : Float)) : Bool)) { (result.rowSpan = cast (rowSpan : Null<Float>)); }
     return cast result;
     return cast null;
   }

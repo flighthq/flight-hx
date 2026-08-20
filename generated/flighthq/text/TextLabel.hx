@@ -85,9 +85,9 @@ class TextLabel {
   public static function createTextLabelRuntime():TextLabelRuntime {
     var out:TextLabelRuntime = cast _Runtime.UNDEFINED;
     out = (cast createNode2DRuntime(({ final __callArgument12:Dynamic = TextLabel.defaultMethods__textLabel; __callArgument12; })) : TextLabelRuntime);
-    ((cast out : { var buildTextLayoutParams:flighthq.types.TextLabel->TextMeasureFunction->TextLayoutParams; }).buildTextLayoutParams = (cast TextLabel.buildTextLabelLayoutParams__textLabel));
-    ((cast out : TextLabelRuntime).textLayout = null);
-    ((cast out : TextLabelRuntime).textLayoutUsingContentId = -1.0);
+    (out.buildTextLayoutParams = cast (TextLabel.buildTextLabelLayoutParams__textLabel : flighthq.types.TextLabel->TextMeasureFunction->TextLayoutParams));
+    (out.textLayout = cast (null : Null<TextLayoutResult>));
+    (out.textLayoutUsingContentId = cast (-1.0 : Float));
     return cast out;
     return cast null;
   }

@@ -1268,6 +1268,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#RenderEffectPadding',
     purpose: 'reviewed escape-free render-effect padding',
   },
+  {
+    declarationFingerprint: 'sha256:d4aa2c07ba8d4abaf82786b5682b8b5a49af14d917e142ef18f4618dcdcd6769',
+    id: '@flighthq/types:interface#DisplayObject',
+    purpose: 'reviewed escape-free display object',
+  },
+  {
+    declarationFingerprint: 'sha256:2a53a77d506c3e24d49ddec40f9177f91887dcb95e9ec7f71474223753bca498',
+    id: '@flighthq/types:interface#GridLayoutItemStyle',
+    purpose: 'reviewed escape-free grid item style',
+  },
+  {
+    declarationFingerprint: 'sha256:88013e44c2b9873292c3001ef0df176f90cb4974f368d0820db78530ca328431',
+    id: '@flighthq/types:interface#NativeText',
+    purpose: 'reviewed escape-free native text',
+  },
+  {
+    declarationFingerprint: 'sha256:db7e05906a3f2b5f6884a839980220d5bdfa14ef1bb5a1d9e1899983f004d07f',
+    id: '@flighthq/types:interface#TextLabelRuntime',
+    purpose: 'reviewed escape-free text-label runtime',
+  },
+  {
+    declarationFingerprint: 'sha256:0d54531616bd2ab0cae1a50a1978b2e6307e45e6937724a91c4f5dee64f19703',
+    id: '@flighthq/types:interface#AccessibilityNode',
+    purpose: 'reviewed escape-free accessibility node',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

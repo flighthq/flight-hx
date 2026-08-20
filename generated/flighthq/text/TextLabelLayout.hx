@@ -27,18 +27,18 @@ class TextLabelLayout {
     var result:TextLayoutResult = cast _Runtime.UNDEFINED;
     runtime = (cast getNode2DRuntime(({ final __callArgument0:Dynamic = source; __callArgument0; })) : TextLabelRuntime);
     contentId = (cast getNodeLocalContentRevision((cast source : Dynamic)) : Float);
-    if ((cast ((cast !_Runtime.strictEquals((cast runtime : TextLabelRuntime).textLayout, null) : Bool) && (cast _Runtime.strictEquals((cast runtime : TextLabelRuntime).textLayoutUsingContentId, contentId) : Bool)) : Bool)) { return; }
+    if ((cast ((cast !_Runtime.strictEquals(runtime.textLayout, null) : Bool) && (cast _Runtime.strictEquals(runtime.textLayoutUsingContentId, contentId) : Bool)) : Bool)) { return; }
     measure = (cast getTextLayoutMeasureProvider() : Null<TextMeasureFunction>);
     if ((cast _Runtime.strictEquals(measure, null) : Bool)) { return; }
-    params = (cast runtime : TextLabelRuntime).buildTextLayoutParams(({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument2:Dynamic = measure; __callArgument2; }));
+    params = (runtime.buildTextLayoutParams)(({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument2:Dynamic = measure; __callArgument2; }));
     result = (cast getTextLayoutResult(({ final __callArgument3:Dynamic = runtime; __callArgument3; })) : TextLayoutResult);
     computeTextLayout(({ final __callArgument4:Dynamic = result; __callArgument4; }), ({ final __callArgument5:Dynamic = params; __callArgument5; }));
-    ((cast runtime : TextLabelRuntime).textLayoutUsingContentId = contentId);
+    (runtime.textLayoutUsingContentId = cast (contentId : Float));
   }
 
   public static function getTextLayout(source:TextLabel):Null<TextLayoutResult> {
     ensureTextLayout(({ final __callArgument6:Dynamic = source; __callArgument6; }));
-    return cast (cast (cast getNode2DRuntime(({ final __callArgument7:Dynamic = source; __callArgument7; })) : TextLabelRuntime) : TextLabelRuntime).textLayout;
+    return cast (cast (cast getNode2DRuntime(({ final __callArgument7:Dynamic = source; __callArgument7; })) : TextLabelRuntime) : { var textLayout:Null<TextLayoutResult>; }).textLayout;
     return cast null;
   }
 
