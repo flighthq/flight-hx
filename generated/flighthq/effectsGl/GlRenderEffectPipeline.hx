@@ -82,8 +82,8 @@ class GlRenderEffectPipeline {
       ((cast pipeline.lutTexture : GlColorLutTextureCache).texture = null);
     }
     ((cast pipeline.lutTexture : GlColorLutTextureCache).lut = null);
-    ((cast pipeline.lutCache : ColorLutCache).signature = null);
-    ((cast pipeline.lutCache : ColorLutCache).lut = null);
+    ((cast pipeline.lutCache : { var signature:Null<String>; }).signature = cast (null : Null<String>));
+    ((cast pipeline.lutCache : { var lut:Null<ColorLut>; }).lut = cast (null : Null<ColorLut>));
   }
 
   public static function endGlRenderEffectPipeline(state:GlRenderState, pipeline:flighthq.types.GlRenderEffectPipeline, operations:Array<flighthq._internal._Union2<RenderEffect, Adjustment>>):Void {

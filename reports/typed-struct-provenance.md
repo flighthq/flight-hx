@@ -156,7 +156,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#ColorKeyframe` | 22 | 4 | 0 | 0 | 0 | 1 | 1 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#ColorLut` | 0 | 2 | 4 | 0 | 1 | 0 | 8 | 6 | no | `normalization-provenance` |
 | `@flighthq/types:interface#ColorLutAdjustment` | 0 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | no | `container-transfer` |
-| `@flighthq/types:interface#ColorLutCache` | 0 | 2 | 3 | 1 | 0 | 0 | 4 | 4 | yes | — |
+| `@flighthq/types:interface#ColorLutCache` | 11 | 2 | 3 | 1 | 0 | 0 | 4 | 4 | yes | — |
 | `@flighthq/types:interface#ColorMatrixAdjustment` | 0 | 2 | 0 | 0 | 0 | 1 | 0 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#ColorScaleBiasAdjustment` | 0 | 3 | 0 | 3 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#CompressedImageData` | 7 | 2 | 1 | 1 | 1 | 0 | 2 | 1 | no | `normalization-provenance` |
@@ -241,7 +241,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#GlScene3DShadow` | 0 | 6 | 1 | 1 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#GlShader` | 0 | 2 | 2 | 0 | 1 | 0 | 2 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#GlShapeMesh` | 0 | 4 | 1 | 0 | 1 | 1 | 2 | 1 | no | `container-transfer`, `normalization-provenance` |
-| `@flighthq/types:interface#GlShapeMeshBinding` | 0 | 6 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#GlShapeMeshBinding` | 11 | 6 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#GlShapeRasterSurface` | 0 | 3 | 1 | 1 | 1 | 0 | 1 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#GlSkinPaletteTexture` | 0 | 2 | 1 | 0 | 0 | 0 | 1 | 2 | yes | — |
 | `@flighthq/types:interface#GltfAccessorSparse` | 12 | 3 | 1 | 0 | 1 | 0 | 1 | 0 | no | `normalization-provenance` |
@@ -250,7 +250,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#GltfDracoMeshCompression` | 0 | 2 | 1 | 0 | 1 | 0 | 1 | 0 | no | `normalization-provenance` |
 | `@flighthq/types:interface#GltfExtensionHandler` | 0 | 2 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#GlUniformColorScaleBiasShader` | 0 | 7 | 1 | 0 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
-| `@flighthq/types:interface#GlVelocityContext` | 0 | 5 | 0 | 2 | 0 | 0 | 1 | 0 | yes | — |
+| `@flighthq/types:interface#GlVelocityContext` | 11 | 5 | 0 | 2 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#GlWireframeUpload` | 0 | 4 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#GlyphAtlas` | 8 | 1 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#GlyphAtlasEntryExplanation` | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
@@ -724,7 +724,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#WgpuShapeMeshBuffers` | 24 | 8 | 1 | 0 | 0 | 0 | 2 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuShapeRasterSurface` | 0 | 3 | 1 | 1 | 0 | 0 | 1 | 2 | yes | — |
 | `@flighthq/types:interface#WgpuShapeRendererData` | 18 | 8 | 0 | 3 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#WgpuVelocityContext` | 0 | 5 | 0 | 2 | 0 | 0 | 1 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuVelocityContext` | 11 | 5 | 0 | 2 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuWireframeUpload` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#WindowBackend` | 0 | 28 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#WindowBounds` | 24 | 4 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |

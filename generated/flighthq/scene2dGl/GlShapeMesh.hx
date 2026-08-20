@@ -26,15 +26,15 @@ class GlShapeMesh {
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime);
     flushGlQuadBatchWriter(({ final __callArgument1:Dynamic = state; __callArgument1; }));
     gl = (cast state : GlRenderState).gl;
-    flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(binding, 'program'));
-    (runtime.currentProgram = cast (_Runtime.field(binding, 'program') : Null<flighthq._internal.dom.WebGLProgram>));
+    flighthq._internal.backend.WebGl2Backend.useProgram(gl, binding.program);
+    (runtime.currentProgram = cast (binding.program : Null<flighthq._internal.dom.WebGLProgram>));
     _Runtime.callOptionalValue((cast state : GlRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, _Runtime.field(binding, 'matrixLocation'), false, (cast GlShapeMesh.shapeMeshMatrix__glShapeMesh(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = renderProxy; __callArgument3; })) : flighthq._internal._Float32Array));
+    flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, binding.matrixLocation, false, (cast GlShapeMesh.shapeMeshMatrix__glShapeMesh(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = renderProxy; __callArgument3; })) : flighthq._internal._Float32Array));
     _Runtime.callOptionalValue(onProgramBound, cast ([state] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), _Runtime.field(binding, 'vertexBuffer'));
-    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, _Runtime.field(binding, 'positionLocation'));
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, _Runtime.field(binding, 'positionLocation'), 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 0.0, 0.0);
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), _Runtime.field(binding, 'indexBuffer'));
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), binding.vertexBuffer);
+    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, binding.positionLocation);
+    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, binding.positionLocation, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 0.0, 0.0);
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), binding.indexBuffer);
     nodeAlpha = (cast renderProxy : RenderProxy2D).alpha;
     {
       var i:Float = 0.0;
@@ -46,14 +46,14 @@ class GlShapeMesh {
         var r:Float = ((_Runtime.toInt32((_Runtime.toInt32((cast mesh : flighthq.types.GlShapeMesh).color) >> 16)) & 255) / 255.0);
         var g:Float = ((_Runtime.toInt32((_Runtime.toInt32((cast mesh : flighthq.types.GlShapeMesh).color) >> 8)) & 255) / 255.0);
         var b:Float = ((_Runtime.toInt32((cast mesh : flighthq.types.GlShapeMesh).color) & 255) / 255.0);
-        flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(binding, 'colorLocation'), (r * a), (g * a), (b * a), a);
+        flighthq._internal.backend.WebGl2Backend.uniform4f(gl, binding.colorLocation, (r * a), (g * a), (b * a), a);
         flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast mesh : flighthq.types.GlShapeMesh).vertices, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STREAM_DRAW', flighthq._internal.backend.WebGl2Backend.STREAM_DRAW));
         flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), (cast mesh : flighthq.types.GlShapeMesh).indices, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STREAM_DRAW', flighthq._internal.backend.WebGl2Backend.STREAM_DRAW));
         flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLES', flighthq._internal.backend.WebGl2Backend.TRIANGLES), _Runtime.field((cast mesh : flighthq.types.GlShapeMesh).indices, 'length'), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT), 0.0);
         i++;
       }
     }
-    flighthq._internal.backend.WebGl2Backend.disableVertexAttribArray(gl, _Runtime.field(binding, 'positionLocation'));
+    flighthq._internal.backend.WebGl2Backend.disableVertexAttribArray(gl, binding.positionLocation);
   }
 
   @:noCompletion

@@ -16,15 +16,15 @@ class ColorLutCache {
     var transforms:Array<ColorTransformFunction> = cast _Runtime.UNDEFINED;
     var lut:ColorLut = cast _Runtime.UNDEFINED;
     signature = (cast ColorLutCache.colorLutRunSignature__colorLutCache(({ final __callArgument0:Dynamic = run; __callArgument0; }), (cast size : Float)) : String);
-    if ((cast ((cast _Runtime.strictEquals((cast cache : flighthq.types.ColorLutCache).signature, signature) : Bool) && (cast !_Runtime.strictEquals((cast cache : flighthq.types.ColorLutCache).lut, null) : Bool)) : Bool)) { return cast (cast cache : flighthq.types.ColorLutCache).lut; }
+    if ((cast ((cast _Runtime.strictEquals(cache.signature, signature) : Bool) && (cast !_Runtime.strictEquals(cache.lut, null) : Bool)) : Bool)) { return cast cache.lut; }
     transforms = (cast cast ([] : Array<Dynamic>));
     for (operation in _Runtime.iterable(run)) {
       var transform:Null<ColorTransformFunction> = (cast getAdjustmentColorTransform(({ final __callArgument3:Dynamic = operation; __callArgument3; })) : Null<ColorTransformFunction>);
       if ((cast !_Runtime.strictEquals(transform, null) : Bool)) { _Runtime.callProperty(transforms, 'push', cast ([transform] : Array<Dynamic>)); }
     }
     lut = (cast bakeColorLut(({ final __callArgument4:Dynamic = transforms; __callArgument4; }), (cast size : Float)) : ColorLut);
-    ((cast cache : flighthq.types.ColorLutCache).signature = signature);
-    ((cast cache : flighthq.types.ColorLutCache).lut = lut);
+    (cache.signature = cast (signature : Null<String>));
+    (cache.lut = cast (lut : Null<ColorLut>));
     return cast lut;
     return cast null;
   }

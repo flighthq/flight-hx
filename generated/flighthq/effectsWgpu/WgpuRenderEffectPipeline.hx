@@ -76,8 +76,8 @@ class WgpuRenderEffectPipeline {
     ((cast pipeline.lutTexture : { var texture:Null<flighthq._internal.dom.GPUTexture>; }).texture = cast (null : Null<flighthq._internal.dom.GPUTexture>));
     ((cast pipeline.lutTexture : { var size:Float; }).size = cast (0.0 : Float));
     ((cast pipeline.lutTexture : { var lut:Null<ColorLut>; }).lut = cast (null : Null<ColorLut>));
-    ((cast pipeline.lutCache : ColorLutCache).signature = null);
-    ((cast pipeline.lutCache : ColorLutCache).lut = null);
+    ((cast pipeline.lutCache : { var signature:Null<String>; }).signature = cast (null : Null<String>));
+    ((cast pipeline.lutCache : { var lut:Null<ColorLut>; }).lut = cast (null : Null<ColorLut>));
   }
 
   public static function endWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:flighthq.types.WgpuRenderEffectPipeline, operations:Array<flighthq._internal._Union2<RenderEffect, Adjustment>>):Void {

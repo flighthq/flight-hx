@@ -5,9 +5,9 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,536 public schemas are semantically eligible for typed structural lowering.
-- 668 schemas currently emit direct fields, covering 23,939 accesses.
-- 868 eligible schemas remain audit-only, covering 6,727 pending accesses.
-- 611 audit-only schemas have no recorded escape, covering 1,973 pending accesses.
+- 673 schemas currently emit direct fields, covering 23,994 accesses.
+- 863 eligible schemas remain audit-only, covering 6,672 pending accesses.
+- 606 audit-only schemas have no recorded escape, covering 1,918 pending accesses.
 - Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
 - Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
@@ -84,6 +84,7 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Promote the twenty-fourth high-access zero-escape frontier: `CapacitorApi`, `CapacitorDeviceInfo`, `ElectronDisplay`, `ElectronRectangle`, and `SoftKeyboard`. Their 56 accesses now emit directly across 16 generated modules. Dynamic ingress keeps the Electron display structural; Capacitor device info has no closed construction provenance; and the provenance-closed Capacitor API, Electron rectangle, and soft keyboard remain structural pending separate cpp review. The tranche removes ten `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote the twenty-fifth high-access zero-escape frontier: `AnimationLayerStack`, `StatechartTransitionExplanation`, `StatechartCondition`, `StatechartRegion`, and `StatechartInput`. Their 55 accesses now emit directly across three generated modules. Cross-schema transfer keeps the animation layer stack structural; the statechart region and input have no closed construction provenance; and the provenance-closed transition explanation and condition remain structural pending separate cpp review. The tranche removes 50 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote the twenty-sixth high-access zero-escape frontier: `FlyCameraControllerOptions`, `MeshMorph`, `Scene3DDocumentMesh`, `MeshMorphBindPose`, and `Scene3DForwardLightSelection`. Their 58 accesses now emit directly across 14 generated modules. Normalization provenance keeps the two morph records structural; optional omission keeps the document mesh structural; fly-camera options have no closed construction provenance; and the provenance-closed forward-light selection remains structural pending separate cpp review. The tranche removes 15 `_Runtime.field` calls and one generated `Dynamic`; generated `Reflect` and type-erasure debt remain unchanged.
+- [x] Promote the twenty-seventh high-access zero-escape frontier: `CanvasRenderTargetPool`, `ColorLutCache`, `GlShapeMeshBinding`, `GlVelocityContext`, and `WgpuVelocityContext`. Their 55 accesses now emit directly across nine generated modules. Cross-schema transfer keeps the Canvas render-target pool structural; the provenance-closed color LUT cache, WebGL shape-mesh binding, and WebGL/WebGPU velocity contexts remain structural pending separate cpp review. The tranche removes 31 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [ ] Review the next cohesive five-row zero-escape tranche from the refreshed audit, preserving exact fingerprint, provenance, Haxe, portability, and affected-parity gates.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 

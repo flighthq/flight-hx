@@ -49,7 +49,7 @@ class GlVelocity {
   public static final defaultGlNode2DVelocityWriter:GlVelocityWriter = (cast function(ctx:GlVelocityContext, node:flighthq._internal._Object):Void {
     var spatial:Spatial2DNode<Dynamic> = cast _Runtime.UNDEFINED;
     var bounds:Rectangle = cast _Runtime.UNDEFINED;
-    (cast getVelocity(_Runtime.field(ctx, 'field'), ({ final __callArgument2:Dynamic = node; __callArgument2; }), ({ final __callArgument3:Dynamic = GlVelocity._scratchVelocity__glVelocity; __callArgument3; })) : Velocity2D);
+    (cast getVelocity(ctx.field, ({ final __callArgument2:Dynamic = node; __callArgument2; }), ({ final __callArgument3:Dynamic = GlVelocity._scratchVelocity__glVelocity; __callArgument3; })) : Velocity2D);
     if ((cast ((cast _Runtime.strictEquals(GlVelocity._scratchVelocity__glVelocity.x, 0.0) : Bool) && (cast _Runtime.strictEquals(GlVelocity._scratchVelocity__glVelocity.y, 0.0) : Bool)) : Bool)) { return; }
     spatial = (cast (cast node : flighthq._internal._Any) : Spatial2DNode<Dynamic>);
     ensureNodeWorldBoundsRectangle((cast spatial : Dynamic));
@@ -242,7 +242,7 @@ class GlVelocity {
       }
       return;
     }
-    (cast getVelocity(_Runtime.field(ctx, 'field'), ({ final __callArgument7:Dynamic = node; __callArgument7; }), ({ final __callArgument8:Dynamic = GlVelocity._scratchVelocity__glVelocity; __callArgument8; })) : Velocity2D);
+    (cast getVelocity(ctx.field, ({ final __callArgument7:Dynamic = node; __callArgument7; }), ({ final __callArgument8:Dynamic = GlVelocity._scratchVelocity__glVelocity; __callArgument8; })) : Velocity2D);
     if ((cast ((cast _Runtime.strictEquals(GlVelocity._scratchVelocity__glVelocity.x, 0.0) : Bool) && (cast _Runtime.strictEquals(GlVelocity._scratchVelocity__glVelocity.y, 0.0) : Bool)) : Bool)) { return; }
     spatial = (cast (cast node : flighthq._internal._Any) : Spatial2DNode<Dynamic>);
     ensureNodeWorldBoundsRectangle((cast spatial : Dynamic));
@@ -258,14 +258,14 @@ class GlVelocity {
     var clipY0:Float = cast _Runtime.UNDEFINED;
     var clipWidth:Float = cast _Runtime.UNDEFINED;
     var clipHeight:Float = cast _Runtime.UNDEFINED;
-    program = (cast GlVelocity.ensureGlVelocityProgram__glVelocity(_Runtime.field(ctx, 'state')) : GlVelocityProgram__glVelocity);
-    gl = (cast _Runtime.field(ctx, 'state') : GlRenderState).gl;
-    clipX0 = ((_Runtime.divideNumbers(x, _Runtime.field(ctx, 'width')) * 2.0) - 1.0);
-    clipY0 = (1.0 - (_Runtime.divideNumbers(y, _Runtime.field(ctx, 'height')) * 2.0));
-    clipWidth = (_Runtime.divideNumbers(width, _Runtime.field(ctx, 'width')) * 2.0);
-    clipHeight = -(_Runtime.divideNumbers(height, _Runtime.field(ctx, 'height')) * 2.0);
+    program = (cast GlVelocity.ensureGlVelocityProgram__glVelocity(ctx.state) : GlVelocityProgram__glVelocity);
+    gl = (cast ctx.state : GlRenderState).gl;
+    clipX0 = (((x / ctx.width) * 2.0) - 1.0);
+    clipY0 = (1.0 - ((y / ctx.height) * 2.0));
+    clipWidth = ((width / ctx.width) * 2.0);
+    clipHeight = -((height / ctx.height) * 2.0);
     flighthq._internal.backend.WebGl2Backend.uniform4f(gl, (cast program : GlVelocityProgram__glVelocity).locClipRect, clipX0, clipY0, clipWidth, clipHeight);
-    flighthq._internal.backend.WebGl2Backend.uniform2f(gl, (cast program : GlVelocityProgram__glVelocity).locVelocity, _Runtime.multiplyNumbers(velocityX, _Runtime.field(ctx, 'pixelRatio')), _Runtime.multiplyNumbers(velocityY, _Runtime.field(ctx, 'pixelRatio')));
+    flighthq._internal.backend.WebGl2Backend.uniform2f(gl, (cast program : GlVelocityProgram__glVelocity).locVelocity, (velocityX * ctx.pixelRatio), (velocityY * ctx.pixelRatio));
     flighthq._internal.backend.WebGl2Backend.drawArrays(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLES', flighthq._internal.backend.WebGl2Backend.TRIANGLES), 0.0, 6.0);
   }
 
@@ -329,7 +329,7 @@ class GlVelocity {
   public static function visitGlVelocity__glVelocity<Traits:flighthq._internal._Object>(ctx:GlVelocityContext, node:Transform2DNode<Traits>):Void {
     var writer:Null<GlVelocityWriter> = cast _Runtime.UNDEFINED;
     var count:Float = cast _Runtime.UNDEFINED;
-    writer = (cast getGlVelocityWriter(_Runtime.field(ctx, 'state'), (cast _Runtime.field(node, 'kind') : String)) : Null<GlVelocityWriter>);
+    writer = (cast getGlVelocityWriter(ctx.state, (cast _Runtime.field(node, 'kind') : String)) : Null<GlVelocityWriter>);
     if ((cast !_Runtime.strictEquals(writer, null) : Bool)) { writer(({ final __callArgument15:Dynamic = ctx; __callArgument15; }), ({ final __callArgument16:Dynamic = node; __callArgument16; })); }
     count = (cast getNodeChildCount((cast node : Dynamic)) : Float);
     {

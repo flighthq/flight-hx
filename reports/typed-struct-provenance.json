@@ -21015,7 +21015,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 11,
       "fields": 2,
       "id": "@flighthq/types:interface#ColorLutCache",
       "name": "ColorLutCache",
@@ -25224,7 +25224,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 11,
       "fields": 6,
       "id": "@flighthq/types:interface#GlShapeMeshBinding",
       "name": "GlShapeMeshBinding",
@@ -25653,7 +25653,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 11,
       "fields": 5,
       "id": "@flighthq/types:interface#GlVelocityContext",
       "name": "GlVelocityContext",
@@ -57013,7 +57013,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 11,
       "fields": 5,
       "id": "@flighthq/types:interface#WgpuVelocityContext",
       "name": "WgpuVelocityContext",

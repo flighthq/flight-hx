@@ -50,11 +50,11 @@ class CanvasRenderTexturePool {
     }
     _Runtime.setLength(pool.free, 0.0);
     ((cast pool.leased : flighthq._internal._Set<RenderTexture>).clear());
-    for (target in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray((cast pool.effectTargets : CanvasRenderTargetPool).free), _Runtime.toArray((cast pool.effectTargets : CanvasRenderTargetPool).inUse)]))) {
+    for (target in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray((cast pool.effectTargets : { var free:Array<CanvasRenderTarget>; }).free), _Runtime.toArray((cast pool.effectTargets : { var inUse:Array<CanvasRenderTarget>; }).inUse)]))) {
       destroyCanvasRenderTarget(({ final __callArgument15:Dynamic = target; __callArgument15; }));
     }
-    _Runtime.setLength((cast pool.effectTargets : CanvasRenderTargetPool).free, 0.0);
-    _Runtime.setLength((cast pool.effectTargets : CanvasRenderTargetPool).inUse, 0.0);
+    _Runtime.setLength((cast pool.effectTargets : { var free:Array<CanvasRenderTarget>; }).free, 0.0);
+    _Runtime.setLength((cast pool.effectTargets : { var inUse:Array<CanvasRenderTarget>; }).inUse, 0.0);
     (pool.owner = cast (null : Null<CanvasRenderState>));
     (pool.destroyed = cast (true : Bool));
   }

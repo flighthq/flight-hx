@@ -36,9 +36,9 @@ class CanvasRenderEffectPipeline {
     var target:CanvasRenderTarget = cast _Runtime.UNDEFINED;
     w = HxMath.max(1.0, HxMath.ceil(width));
     h = HxMath.max(1.0, HxMath.ceil(height));
-    target = _Runtime.coalesce(_Runtime.callProperty((cast pool : CanvasRenderTargetPool).free, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast createCanvasRenderTarget((cast w : Float), (cast h : Float)) : CanvasRenderTarget));
+    target = _Runtime.coalesce(_Runtime.callProperty(pool.free, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast createCanvasRenderTarget((cast w : Float), (cast h : Float)) : CanvasRenderTarget));
     if ((cast ((cast !_Runtime.strictEquals(target.width, w) : Bool) || (cast !_Runtime.strictEquals(target.height, h) : Bool)) : Bool)) { resizeCanvasRenderTarget(({ final __callArgument0:Dynamic = target; __callArgument0; }), (cast w : Float), (cast h : Float)); }
-    _Runtime.callProperty((cast pool : CanvasRenderTargetPool).inUse, 'push', cast ([target] : Array<Dynamic>));
+    _Runtime.callProperty(pool.inUse, 'push', cast ([target] : Array<Dynamic>));
     return cast target;
     return cast null;
   }
@@ -71,10 +71,10 @@ class CanvasRenderEffectPipeline {
   @:noCompletion
   public static function destroyCanvasRenderEffectPipeline(_state:CanvasRenderState, pipeline:flighthq.types.CanvasRenderEffectPipeline):Void {
     (pipeline.sceneTarget = cast (null : Null<CanvasRenderTarget>));
-    _Runtime.setLength((cast pipeline.pool : CanvasRenderTargetPool).free, 0.0);
-    _Runtime.setLength((cast pipeline.pool : CanvasRenderTargetPool).inUse, 0.0);
-    ((cast pipeline.lutCache : ColorLutCache).signature = null);
-    ((cast pipeline.lutCache : ColorLutCache).lut = null);
+    _Runtime.setLength((cast pipeline.pool : { var free:Array<CanvasRenderTarget>; }).free, 0.0);
+    _Runtime.setLength((cast pipeline.pool : { var inUse:Array<CanvasRenderTarget>; }).inUse, 0.0);
+    ((cast pipeline.lutCache : { var signature:Null<String>; }).signature = cast (null : Null<String>));
+    ((cast pipeline.lutCache : { var lut:Null<ColorLut>; }).lut = cast (null : Null<ColorLut>));
   }
 
   public static function endCanvasRenderEffectPipeline(state:CanvasRenderState, pipeline:flighthq.types.CanvasRenderEffectPipeline, operations:Array<flighthq._internal._Union2<RenderEffect, Adjustment>>):Void {
@@ -137,9 +137,9 @@ class CanvasRenderEffectPipeline {
   @:noCompletion
   public static function releaseCanvasRenderTarget(pool:CanvasRenderTargetPool, target:CanvasRenderTarget):Void {
     var index:Float = cast _Runtime.UNDEFINED;
-    index = _Runtime.callProperty((cast pool : CanvasRenderTargetPool).inUse, 'indexOf', cast ([target] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(index, -1.0) : Bool)) { _Runtime.splice((cast pool : CanvasRenderTargetPool).inUse, Std.int(index), Std.int(1.0), []); }
-    _Runtime.callProperty((cast pool : CanvasRenderTargetPool).free, 'push', cast ([target] : Array<Dynamic>));
+    index = _Runtime.callProperty(pool.inUse, 'indexOf', cast ([target] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals(index, -1.0) : Bool)) { _Runtime.splice(pool.inUse, Std.int(index), Std.int(1.0), []); }
+    _Runtime.callProperty(pool.free, 'push', cast ([target] : Array<Dynamic>));
   }
 
   public static function presentCanvasRenderEffectResult__canvasRenderEffectPipeline(state:CanvasRenderState, source:CanvasRenderTarget):Void {
