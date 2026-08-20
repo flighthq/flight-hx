@@ -7,7 +7,7 @@ This is a construction, structural-flow, and observability census. It does not e
 | Metric | Count |
 | --- | ---: |
 | Eligible canonical schemas | 1536 |
-| Direct field accesses | 24044 |
+| Direct field accesses | 24089 |
 | Declared optional fields | 1970 |
 | Declared required-undefined fields | 2 |
 | Production object literals | 1842 |
@@ -97,7 +97,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#AppLoginItemLike` | 5 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 3 | 1 | yes | — | `object-spread` |
 | `@flighthq/types:interface#AppUpdater` | 10 | 10 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#AreaLight` | 34 | 12 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#AreaLightOptions` | 0 | 11 | 11 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 6 | 0 | yes | — | — |
+| `@flighthq/types:interface#AreaLightOptions` | 11 | 11 | 11 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 6 | 0 | yes | — | — |
 | `@flighthq/types:interface#AsepriteArrayDocument` | 1 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | no | `anonymous-structural-transfer` | `json-serialization` |
 | `@flighthq/types:interface#AsepriteArrayFrame` | 2 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#AsepriteBaseFrame` | 1 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | yes | — | `object-spread` |
@@ -330,7 +330,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#DialogBackend` | 0 | 6 | 0 | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 5 | 6 | 5 | yes | — | `object-spread` |
 | `@flighthq/types:interface#DirectionalBlurEffect` | 0 | 4 | 3 | 0 | 1 | 0 | 1 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
 | `@flighthq/types:interface#DirectionalLight` | 24 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#DirectionalLightOptions` | 0 | 7 | 7 | 0 | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 28 | 0 | yes | — | `optional-omission` |
+| `@flighthq/types:interface#DirectionalLightOptions` | 7 | 7 | 7 | 0 | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 28 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#DisplacementEffect` | 0 | 4 | 3 | 0 | 1 | 0 | 1 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
 | `@flighthq/types:interface#DisplayObject` | 12 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 3 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#DisplayObjectRuntime` | 0 | 38 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
@@ -649,7 +649,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#LibgdxSerializeOptions` | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#LifecycleBackend` | 0 | 4 | 2 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 2 | 0 | yes | — | — |
 | `@flighthq/types:interface#LiftGammaGainAdjustment` | 0 | 5 | 3 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | no | `object-literal-spread` | — |
-| `@flighthq/types:interface#Light` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#Light` | 8 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#LoadScene2DAudioResourcesOptions` | 0 | 5 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 6 | 0 | yes | — | — |
 | `@flighthq/types:interface#LoadScene2DImageResourcesOptions` | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 5 | 0 | yes | — | — |
 | `@flighthq/types:interface#LoadScene3DResourcesOptions` | 1 | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 3 | 0 | yes | — | — |
@@ -893,7 +893,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#PointerEventData` | 28 | 18 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#PointGravityWellForce` | 0 | 8 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#PointLight` | 0 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#PointLightOptions` | 0 | 8 | 8 | 0 | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 37 | 0 | yes | — | `optional-omission` |
+| `@flighthq/types:interface#PointLightOptions` | 8 | 8 | 8 | 0 | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 37 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#PosterizeEffect` | 0 | 2 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 1 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
 | `@flighthq/types:interface#Power` | 37 | 10 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#PowerBackend` | 0 | 13 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 3 | 2 | 1 | yes | — | `object-spread` |
@@ -1158,7 +1158,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#SpineTintKeyframe` | 0 | 2 | 0 | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `anonymous-structural-transfer` | — |
 | `@flighthq/types:interface#SpotLight` | 0 | 12 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#SpotLightConeAngles` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#SpotLightOptions` | 0 | 11 | 11 | 0 | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 16 | 0 | yes | — | `optional-omission` |
+| `@flighthq/types:interface#SpotLightOptions` | 11 | 11 | 11 | 0 | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 16 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#Spring` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Spring2D` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Spring3D` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | yes | — | — |

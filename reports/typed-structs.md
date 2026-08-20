@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1326 |
-| Direct schemas | 678 |
+| Audit-only schemas | 1321 |
+| Direct schemas | 683 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 6622 |
-| Directly emitted accesses | 24044 |
+| Pending accesses | 6577 |
+| Directly emitted accesses | 24089 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1326 |
+| Newly discovered, audit-only | 1321 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -131,7 +131,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#AppPathKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#AppUpdater` | `direct` | `preserved` | `@flighthq/types:interface#AppUpdater` | broad host document | 10 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AreaLight` | `direct` | `new` | — | reviewed escape-free area light | 12 | 34 | 0 | 0 | 0 | 34 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#AreaLightOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AreaLightOptions` | `direct` | `new` | — | reviewed escape-free area-light options | 11 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AsepriteArrayDocument` | `direct` | `relocated` | `@flighthq/spritesheet-formats:interface#AsepriteArrayDocument` | broad serialization document | 2 | 1 | 0 | 0 | 0 | 1 | 3 | 3 | yes | — |
 | `@flighthq/types:interface#AsepriteArrayFrame` | `direct` | `relocated` | `@flighthq/spritesheet-formats:interface#AsepriteArrayFrame` | broad serialization document | 7 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AsepriteBaseFrame` | `direct` | `relocated` | `@flighthq/spritesheet-formats:interface#AsepriteBaseFrame` | broad serialization document | 6 | 1 | 0 | 0 | 0 | 1 | 1 | 1 | yes | — |
@@ -429,7 +429,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#DialogBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 10 | yes | — |
 | `@flighthq/types:interface#DirectionalBlurEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DirectionalLight` | `direct` | `new` | — | reviewed escape-free directional light | 8 | 24 | 0 | 0 | 0 | 24 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#DirectionalLightOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#DirectionalLightOptions` | `direct` | `new` | — | reviewed escape-free directional-light options | 7 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DisplacementEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DisplayObject` | `direct` | `new` | — | reviewed escape-free display object | 19 | 0 | 12 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DisplayObjectRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 38 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -848,7 +848,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#LibgdxSerializeOptions` | `direct` | `relocated` | `@flighthq/particles-formats:interface#LibgdxSerializeOptions` | broad serialization document | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LifecycleBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 2 | 0 | 0 | 2 | 0 | 0 | 8 | yes | — |
 | `@flighthq/types:interface#LiftGammaGainAdjustment` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Light` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Light` | `direct` | `new` | — | reviewed escape-free light | 1 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:type#LightUnit` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#LinearColor` | `audit-only` | `new` | — | checker-discovered public declaration | 37 | 0 | 0 | 0 | 0 | 0 | 0 | 123 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#LineScaleMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1203,7 +1203,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#PointerType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#PointGravityWellForce` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PointLight` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 24 | 0 | 0 | 24 | 0 | 0 | 7 | yes | — |
-| `@flighthq/types:interface#PointLightOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#PointLightOptions` | `direct` | `new` | — | reviewed escape-free point-light options | 8 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PosterizeEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Power` | `direct` | `preserved` | `@flighthq/types:interface#Power` | broad host document | 10 | 27 | 10 | 0 | 0 | 37 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PowerBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 0 | 0 | 0 | 0 | 0 | 0 | 18 | yes | — |
@@ -1583,7 +1583,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#SpineTintKeyframe` | `direct` | `relocated` | `@flighthq/particles-formats:interface#SpineTintKeyframe` | broad serialization document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SpotLight` | `audit-only` | `new` | — | checker-discovered public declaration | 12 | 40 | 2 | 0 | 42 | 0 | 0 | 7 | yes | — |
 | `@flighthq/types:interface#SpotLightConeAngles` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 2 | 0 | 2 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#SpotLightOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SpotLightOptions` | `direct` | `new` | — | reviewed escape-free spot-light options | 11 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:type#SpreadMethod` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Spring` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 4 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Spring2D` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |

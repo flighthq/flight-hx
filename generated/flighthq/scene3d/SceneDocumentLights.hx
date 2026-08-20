@@ -53,12 +53,12 @@ class SceneDocumentLights {
       while ((cast ((cast i : Float) < (cast _Runtime.field(document.lights, 'length') : Float)) : Bool)) {
         var source:Scene3DDocumentLight = flighthq._internal._StaticIndex.readArray(document.lights, i);
         var descriptor:Light = (cast source : Scene3DDocumentLight).descriptor;
-        if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, AmbientLightKind) : Bool)) {
+        if ((cast _Runtime.strictEquals(descriptor.kind, AmbientLightKind) : Bool)) {
           if ((cast _Runtime.strictEquals(ambient, null) : Bool)) { (ambient = cast ((cast cloneAmbientLight((cast descriptor : AmbientLight)) : AmbientLight) : Dynamic)); }
           i++;
           continue;
         }
-        if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, DirectionalLightKind) : Bool)) {
+        if ((cast _Runtime.strictEquals(descriptor.kind, DirectionalLightKind) : Bool)) {
           if ((cast _Runtime.strictEquals(directional, null) : Bool)) {
             (directional = cast ((cast cloneDirectionalLight((cast descriptor : DirectionalLight)) : DirectionalLight) : Dynamic));
             rotateVector3ByQuaternion(({ final __callArgument0:Dynamic = (cast directional : { var direction:Vector3; }).direction; __callArgument0; }), ({ final __callArgument1:Dynamic = (cast directional : { var direction:Vector3; }).direction; __callArgument1; }), ({ final __callArgument2:Dynamic = (cast (cast source : Scene3DDocumentLight).transform : Transform3D).rotation; __callArgument2; }));
@@ -66,19 +66,19 @@ class SceneDocumentLights {
           i++;
           continue;
         }
-        if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, HemisphereLightKind) : Bool)) {
+        if ((cast _Runtime.strictEquals(descriptor.kind, HemisphereLightKind) : Bool)) {
           _Runtime.callProperty(hemisphere, 'push', cast ([(cast cloneHemisphereLight((cast descriptor : HemisphereLight)) : HemisphereLight)] : Array<Dynamic>));
           i++;
           continue;
         }
-        if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, PointLightKind) : Bool)) {
+        if ((cast _Runtime.strictEquals(descriptor.kind, PointLightKind) : Bool)) {
           var resolved:PointLight = (cast clonePointLight((cast descriptor : PointLight)) : PointLight);
           SceneDocumentLights.transformDocumentLightPosition__sceneDocumentLights(({ final __callArgument3:Dynamic = (cast resolved : PointLight).position; __callArgument3; }), ({ final __callArgument4:Dynamic = (cast source : Scene3DDocumentLight).transform; __callArgument4; }));
           _Runtime.callProperty(point, 'push', cast ([resolved] : Array<Dynamic>));
           i++;
           continue;
         }
-        if ((cast _Runtime.strictEquals((cast descriptor : Light).kind, SpotLightKind) : Bool)) {
+        if ((cast _Runtime.strictEquals(descriptor.kind, SpotLightKind) : Bool)) {
           var resolved:SpotLight = (cast cloneSpotLight((cast descriptor : SpotLight)) : SpotLight);
           SceneDocumentLights.transformDocumentLightPosition__sceneDocumentLights(({ final __callArgument5:Dynamic = (cast resolved : SpotLight).position; __callArgument5; }), ({ final __callArgument6:Dynamic = (cast source : Scene3DDocumentLight).transform; __callArgument6; }));
           rotateVector3ByQuaternion(({ final __callArgument7:Dynamic = (cast resolved : SpotLight).direction; __callArgument7; }), ({ final __callArgument8:Dynamic = (cast resolved : SpotLight).direction; __callArgument8; }), ({ final __callArgument9:Dynamic = (cast (cast source : Scene3DDocumentLight).transform : Transform3D).rotation; __callArgument9; }));

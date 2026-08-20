@@ -17113,9 +17113,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 11,
+        "directAccesses": 11,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -17217,7 +17217,7 @@
       },
       "name": "AreaLightOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free area-light options",
       "reasons": [],
       "source": "upstream/packages/types/src/AreaLightOptions.ts",
       "sourceProvenance": {
@@ -66767,9 +66767,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 7,
+        "directAccesses": 7,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -66839,7 +66839,7 @@
       },
       "name": "DirectionalLightOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free directional-light options",
       "reasons": [],
       "source": "upstream/packages/types/src/DirectionalLightOptions.ts",
       "sourceProvenance": {
@@ -167768,9 +167768,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 8,
+        "directAccesses": 8,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -167798,7 +167798,7 @@
       },
       "name": "Light",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free light",
       "reasons": [],
       "source": "upstream/packages/types/src/Light.ts",
       "sourceProvenance": {
@@ -245546,9 +245546,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 8,
+        "directAccesses": 8,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -245626,7 +245626,7 @@
       },
       "name": "PointLightOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free point-light options",
       "reasons": [],
       "source": "upstream/packages/types/src/PointLightOptions.ts",
       "sourceProvenance": {
@@ -325842,9 +325842,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 11,
+        "directAccesses": 11,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -325946,7 +325946,7 @@
       },
       "name": "SpotLightOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free spot-light options",
       "reasons": [],
       "source": "upstream/packages/types/src/SpotLightOptions.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1326,
+      "newAuditOnly": 1321,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1326,
+    "auditOnlySchemas": 1321,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 24044,
-    "directSchemas": 678,
+    "directAccesses": 24089,
+    "directSchemas": 683,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 6622,
+    "pendingAccesses": 6577,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

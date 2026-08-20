@@ -1418,6 +1418,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#LottieTextDocument',
     purpose: 'reviewed escape-free Lottie text document',
   },
+  {
+    declarationFingerprint: 'sha256:2692ed3168285d890bf7abb2054c889a2ddeeaf73b7ed333349c732c3705c662',
+    id: '@flighthq/types:interface#AreaLightOptions',
+    purpose: 'reviewed escape-free area-light options',
+  },
+  {
+    declarationFingerprint: 'sha256:d0bf1578d5df68cbb0e862e25e3ac2b9d7a0141cb8461c4a9226d61baecee179',
+    id: '@flighthq/types:interface#SpotLightOptions',
+    purpose: 'reviewed escape-free spot-light options',
+  },
+  {
+    declarationFingerprint: 'sha256:35ec8d4b09d8b5e4ec4a3bb1b4cc4df6cae2b1df2ee5ff01c43296dc64029d2c',
+    id: '@flighthq/types:interface#PointLightOptions',
+    purpose: 'reviewed escape-free point-light options',
+  },
+  {
+    declarationFingerprint: 'sha256:ae22f5138e53cd2df7b843f130bdd9febf39d2cad6f130edf563bb11fc9f4431',
+    id: '@flighthq/types:interface#DirectionalLightOptions',
+    purpose: 'reviewed escape-free directional-light options',
+  },
+  {
+    declarationFingerprint: 'sha256:11378cc025586905b984f2649a5cbdfc57d770ba6450991d9acb4714ea46dae7',
+    id: '@flighthq/types:interface#Light',
+    purpose: 'reviewed escape-free light',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

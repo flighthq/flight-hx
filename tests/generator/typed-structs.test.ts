@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_326,
+      newAuditOnly: 1_321,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(680);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(685);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_326);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_321);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(278);
+    expect(newDirect).toHaveLength(283);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1500,6 +1500,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'LottieTextDocument',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free Lottie text document',
+        }),
+        expect.objectContaining({
+          name: 'AreaLightOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free area-light options',
+        }),
+        expect.objectContaining({
+          name: 'SpotLightOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free spot-light options',
+        }),
+        expect.objectContaining({
+          name: 'PointLightOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free point-light options',
+        }),
+        expect.objectContaining({
+          name: 'DirectionalLightOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free directional-light options',
+        }),
+        expect.objectContaining({
+          name: 'Light',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free light',
         }),
       ]),
     );
@@ -2894,6 +2919,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#LottieTextDocument',
         purpose: 'reviewed escape-free Lottie text document',
       },
+      {
+        declarationFingerprint: 'sha256:2692ed3168285d890bf7abb2054c889a2ddeeaf73b7ed333349c732c3705c662',
+        id: '@flighthq/types:interface#AreaLightOptions',
+        purpose: 'reviewed escape-free area-light options',
+      },
+      {
+        declarationFingerprint: 'sha256:d0bf1578d5df68cbb0e862e25e3ac2b9d7a0141cb8461c4a9226d61baecee179',
+        id: '@flighthq/types:interface#SpotLightOptions',
+        purpose: 'reviewed escape-free spot-light options',
+      },
+      {
+        declarationFingerprint: 'sha256:35ec8d4b09d8b5e4ec4a3bb1b4cc4df6cae2b1df2ee5ff01c43296dc64029d2c',
+        id: '@flighthq/types:interface#PointLightOptions',
+        purpose: 'reviewed escape-free point-light options',
+      },
+      {
+        declarationFingerprint: 'sha256:ae22f5138e53cd2df7b843f130bdd9febf39d2cad6f130edf563bb11fc9f4431',
+        id: '@flighthq/types:interface#DirectionalLightOptions',
+        purpose: 'reviewed escape-free directional-light options',
+      },
+      {
+        declarationFingerprint: 'sha256:11378cc025586905b984f2649a5cbdfc57d770ba6450991d9acb4714ea46dae7',
+        id: '@flighthq/types:interface#Light',
+        purpose: 'reviewed escape-free light',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -3831,6 +3881,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const twentyNinthHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['AreaLightOptions', 'DirectionalLightOptions', 'Light', 'PointLightOptions', 'SpotLightOptions'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -3871,22 +3930,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_326,
+      auditOnlySchemas: 1_321,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 24_044,
-      directSchemas: 678,
+      directAccesses: 24_089,
+      directSchemas: 683,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 6_622,
+      pendingAccesses: 6_577,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_326,
+      newAuditOnly: 1_321,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -3963,7 +4022,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(24_044);
+    expect(report.summary.directAccesses).toBe(24_089);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -5395,6 +5454,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(twentyEighthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'AreaLightOptions',
+        11,
+        'sha256:2692ed3168285d890bf7abb2054c889a2ddeeaf73b7ed333349c732c3705c662',
+        'reviewed escape-free area-light options',
+      ],
+      [
+        'SpotLightOptions',
+        11,
+        'sha256:d0bf1578d5df68cbb0e862e25e3ac2b9d7a0141cb8461c4a9226d61baecee179',
+        'reviewed escape-free spot-light options',
+      ],
+      [
+        'PointLightOptions',
+        8,
+        'sha256:35ec8d4b09d8b5e4ec4a3bb1b4cc4df6cae2b1df2ee5ff01c43296dc64029d2c',
+        'reviewed escape-free point-light options',
+      ],
+      [
+        'DirectionalLightOptions',
+        7,
+        'sha256:ae22f5138e53cd2df7b843f130bdd9febf39d2cad6f130edf563bb11fc9f4431',
+        'reviewed escape-free directional-light options',
+      ],
+      [
+        'Light',
+        8,
+        'sha256:11378cc025586905b984f2649a5cbdfc57d770ba6450991d9acb4714ea46dae7',
+        'reviewed escape-free light',
+      ],
+    ] as const) {
+      expect(twentyNinthHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -7389,6 +7490,20 @@ describe('typed struct analysis', () => {
       });
       expect(provenanceById.has(frontierId)).toBe(false);
     }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons] of [
+      ['@flighthq/types:interface#AreaLightOptions', true, [], []],
+      ['@flighthq/types:interface#SpotLightOptions', true, [], ['optional-omission']],
+      ['@flighthq/types:interface#PointLightOptions', true, [], ['optional-omission']],
+      ['@flighthq/types:interface#DirectionalLightOptions', true, [], ['optional-omission']],
+      ['@flighthq/types:interface#Light', false, ['cross-schema-transfer'], []],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      expect(provenanceById.has(frontierId)).toBe(false);
+    }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
@@ -8696,6 +8811,18 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AbcConstantPool|AbcFile|LottieDashEntry|LottieTextDocument|LottieTransform)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/lighting/AreaLight.hx',
+      'generated/flighthq/lighting/DirectionalLight.hx',
+      'generated/flighthq/lighting/LightAnalysis.hx',
+      'generated/flighthq/lighting/PointLight.hx',
+      'generated/flighthq/lighting/SpotLight.hx',
+      'generated/flighthq/scene3d/SceneDocumentLights.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AreaLightOptions|DirectionalLightOptions|Light|PointLightOptions|SpotLightOptions)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
