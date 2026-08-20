@@ -498,11 +498,12 @@ export function stableJson(value: unknown): string {
 
 export function writeOrCheck(file: string, content: string, check: boolean): void {
   const normalized = content.replace(/\r\n/gu, '\n');
+  const current = existsSync(file) ? readFileSync(file, 'utf8').replace(/\r\n/gu, '\n') : undefined;
   if (check) {
-    if (!existsSync(file)) throw new Error(`Generated report is missing: ${path.relative(process.cwd(), file)}`);
-    const current = readFileSync(file, 'utf8').replace(/\r\n/gu, '\n');
+    if (current === undefined) throw new Error(`Generated report is missing: ${path.relative(process.cwd(), file)}`);
     if (current !== normalized) throw new Error(`Generated report is stale: ${path.relative(process.cwd(), file)}`);
     return;
   }
+  if (current === normalized) return;
   writeFileSync(file, normalized);
 }
