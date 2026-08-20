@@ -101,16 +101,16 @@ class DrawWgpuScene3D {
             var resolvedMaterial:Material = _Runtime.coalesce(material, function():Dynamic return cast DrawWgpuScene3D.DEFAULT_MATERIAL__drawWgpuScene3D);
             var blended:Bool = ((cast (cast DrawWgpuScene3D.isBlendedMaterial__drawWgpuScene3D(({ final __callArgument16:Dynamic = resolvedMaterial; __callArgument16; })) : Bool) : Bool) || (cast ((cast objectAlpha : Float) < (cast 1.0 : Float)) : Bool));
             var entry:WgpuScene3DDrawEntry = (cast DrawWgpuScene3D.acquireDrawEntry__drawWgpuScene3D(((cast blended : Bool) ? (cast runtime.blendedPool : Dynamic) : (cast runtime.opaquePool : Dynamic))) : WgpuScene3DDrawEntry);
-            ((cast entry : WgpuScene3DDrawEntry).alpha = objectAlpha);
-            ((cast entry : WgpuScene3DDrawEntry).depth = (clipZ / clipW));
-            ((cast entry : WgpuScene3DDrawEntry).colorMatrix = colorMatrix);
-            ((cast entry : WgpuScene3DDrawEntry).colorScaleBias = colorScaleBias);
-            ((cast entry : WgpuScene3DDrawEntry).lightBlock = ((cast hasPreparedForwardLights : Bool) ? (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(forwardLights, 'meshLightBlocks'), m) : Dynamic) : (cast lightBlock : Dynamic)));
-            ((cast entry : WgpuScene3DDrawEntry).material = resolvedMaterial);
-            ((cast entry : WgpuScene3DDrawEntry).mesh = mesh);
-            ((cast entry : WgpuScene3DDrawEntry).renderer = renderer);
-            ((cast entry : WgpuScene3DDrawEntry).subset = flighthq._internal._StaticIndex.readArray(subsets, s));
-            ((cast entry : WgpuScene3DDrawEntry).worldMatrix = worldMatrix);
+            (entry.alpha = cast (objectAlpha : Float));
+            (entry.depth = cast ((clipZ / clipW) : Float));
+            (entry.colorMatrix = cast (colorMatrix : Null<flighthq._internal._Object>));
+            (entry.colorScaleBias = cast (colorScaleBias : Null<flighthq._internal._Object>));
+            (entry.lightBlock = cast (((cast hasPreparedForwardLights : Bool) ? (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(forwardLights, 'meshLightBlocks'), m) : Dynamic) : (cast lightBlock : Dynamic)) : flighthq._internal._Object));
+            (entry.material = cast (resolvedMaterial : flighthq._internal._Object));
+            (entry.mesh = cast (mesh : flighthq._internal._Object));
+            (entry.renderer = cast (renderer : flighthq._internal._Object));
+            (entry.subset = cast (flighthq._internal._StaticIndex.readArray(subsets, s) : flighthq._internal._Object));
+            (entry.worldMatrix = cast (worldMatrix : flighthq._internal._Object));
             _Runtime.callProperty(((cast blended : Bool) ? (cast blendedDrawList : Dynamic) : (cast opaqueDrawList : Dynamic)), 'push', cast ([entry] : Array<Dynamic>));
             s++;
           }
@@ -214,7 +214,7 @@ class DrawWgpuScene3D {
   }
 
   public static function compareBlendedEntriesDescending__drawWgpuScene3D(a:WgpuScene3DDrawEntry, b:WgpuScene3DDrawEntry):Float {
-    return cast ((cast b : WgpuScene3DDrawEntry).depth - (cast a : WgpuScene3DDrawEntry).depth);
+    return cast (b.depth - a.depth);
     return cast null;
   }
 

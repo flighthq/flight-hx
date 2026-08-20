@@ -7,7 +7,7 @@ This is a construction, structural-flow, and observability census. It does not e
 | Metric | Count |
 | --- | ---: |
 | Eligible canonical schemas | 1536 |
-| Direct field accesses | 23590 |
+| Direct field accesses | 23651 |
 | Declared optional fields | 1970 |
 | Declared required-undefined fields | 2 |
 | Production object literals | 1842 |
@@ -53,7 +53,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#AccessibilityBackend` | 0 | 5 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#AccessibilityDescriptor` | 0 | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#AccessibilityNode` | 0 | 8 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
-| `@flighthq/types:interface#AccessibilityState` | 0 | 13 | 13 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | yes | — | `optional-omission` |
+| `@flighthq/types:interface#AccessibilityState` | 13 | 13 | 13 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#Adjustment` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 1 | 6 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#AgxToneMapOptions` | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 2 | 0 | yes | — | — |
 | `@flighthq/types:interface#AmbientLight` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
@@ -1432,7 +1432,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#VideoResourceLoadOptions` | 8 | 5 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 4 | 0 | yes | — | — |
 | `@flighthq/types:interface#VideoResourceUrl` | 3 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 6 | 0 | yes | — | — |
 | `@flighthq/types:interface#Viewport` | 14 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 2 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#VignetteEffect` | 0 | 5 | 4 | 0 | 1 | 0 | 1 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 1 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
+| `@flighthq/types:interface#VignetteEffect` | 12 | 5 | 4 | 0 | 1 | 0 | 1 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 1 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
 | `@flighthq/types:interface#VolumetricLightEffect` | 0 | 7 | 6 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | no | `object-literal-spread` | — |
 | `@flighthq/types:interface#VortexForce` | 9 | 10 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 2 | 0 | yes | — | — |
 | `@flighthq/types:interface#VoxelGrid` | 0 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — | — |
@@ -1488,7 +1488,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#WgpuRenderTextureExplanation` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuRenderTexturePool` | 17 | 5 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuSavedPassState` | 0 | 7 | 0 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#WgpuScene3DDrawEntry` | 0 | 10 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#WgpuScene3DDrawEntry` | 12 | 10 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuScene3DForwardLightList` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuScene3DFrameBinding` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuScene3DIbl` | 15 | 8 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — | — |
@@ -1496,7 +1496,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#WgpuScene3DRuntime` | 276 | 61 | 2 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuScene3DShadow` | 19 | 9 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuScissorRect` | 36 | 4 | 0 | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 2 | 0 | yes | — | — |
-| `@flighthq/types:interface#WgpuShapeMesh` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 7 | 6 | yes | — | `object-spread` |
+| `@flighthq/types:interface#WgpuShapeMesh` | 12 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 7 | 6 | yes | — | `object-spread` |
 | `@flighthq/types:interface#WgpuShapeMeshBuffers` | 24 | 8 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 2 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuShapeMeshPipeline` | 0 | 2 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | no | `dynamic-ingress` | — |
 | `@flighthq/types:interface#WgpuShapeRasterSurface` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
@@ -1509,7 +1509,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#WgpuUnlitDefineKey` | 0 | 3 | 0 | 0 | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 4 | 2 | yes | — | `object-spread` |
 | `@flighthq/types:interface#WgpuUnlitPipeline` | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#WgpuVelocityContext` | 0 | 5 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#WgpuVideoTextureEntry` | 0 | 10 | 3 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | `optional-omission` |
+| `@flighthq/types:interface#WgpuVideoTextureEntry` | 12 | 10 | 3 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#WgpuWireframePipeline` | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#WgpuWireframeUpload` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#WhiteBalanceEffect` | 0 | 3 | 2 | 0 | 1 | 0 | 1 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 1 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |

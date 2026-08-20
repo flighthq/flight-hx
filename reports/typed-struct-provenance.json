@@ -56572,7 +56572,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 12,
       "fields": 10,
       "id": "@flighthq/types:interface#WgpuScene3DDrawEntry",
       "name": "WgpuScene3DDrawEntry",

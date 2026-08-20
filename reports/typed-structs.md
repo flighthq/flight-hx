@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1366 |
-| Direct schemas | 638 |
+| Audit-only schemas | 1361 |
+| Direct schemas | 643 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 7076 |
-| Directly emitted accesses | 23590 |
+| Pending accesses | 7015 |
+| Directly emitted accesses | 23651 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1366 |
+| Newly discovered, audit-only | 1361 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -72,7 +72,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#AccessibilityLiveness` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#AccessibilityNode` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AccessibilityRole` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#AccessibilityState` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 13 | 0 | 0 | 13 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AccessibilityState` | `direct` | `new` | — | reviewed escape-free accessibility state | 13 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Adjustment` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:type#AdjustmentKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#AdvancedBlendMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1944,7 +1944,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#ViewportAlign` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#ViewportLike` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ViewportScaleMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#VignetteEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#VignetteEffect` | `direct` | `new` | — | reviewed escape-free vignette effect | 5 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#VolumetricLightEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#VortexForce` | `direct` | `preserved` | `@flighthq/types:interface#VortexForce` | broad asset document | 10 | 9 | 0 | 0 | 0 | 9 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#VoxelGrid` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 1 | 1 | 0 | 2 | 0 | 0 | 0 | yes | — |
@@ -2016,7 +2016,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#WgpuRenderTextureStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#WgpuRichTextOverlay` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#WgpuSavedPassState` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuScene3DDrawEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 2 | 10 | 0 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuScene3DDrawEntry` | `direct` | `new` | — | reviewed escape-free WebGPU Scene3D draw entry | 10 | 2 | 10 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DForwardLightList` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 1 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DFrameBinding` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DIbl` | `direct` | `new` | — | reviewed escape-free WebGPU Scene3D IBL | 8 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
@@ -2024,7 +2024,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuScene3DRuntime` | `direct` | `new` | — | reviewed escape-free WebGPU scene runtime | 61 | 174 | 100 | 2 | 0 | 276 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DShadow` | `direct` | `new` | — | reviewed escape-free WebGPU Scene3D shadow | 9 | 14 | 5 | 0 | 0 | 19 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScissorRect` | `direct` | `new` | — | reviewed escape-free WebGPU scissor rectangle | 4 | 36 | 0 | 0 | 0 | 36 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuShapeMesh` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuShapeMesh` | `direct` | `new` | — | reviewed escape-free WebGPU shape mesh | 4 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuShapeMeshBuffers` | `direct` | `new` | — | reviewed escape-free WebGPU shape-mesh buffers | 8 | 24 | 0 | 0 | 0 | 24 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuShapeMeshPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuShapeRasterSurface` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
@@ -2039,7 +2039,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuUnlitPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuVelocityContext` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#WgpuVelocityWriter` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#WgpuVideoTextureEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 9 | 3 | 0 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuVideoTextureEntry` | `direct` | `new` | — | reviewed escape-free WebGPU video texture entry | 10 | 9 | 3 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuWireframePipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuWireframeUpload` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WhiteBalanceEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |

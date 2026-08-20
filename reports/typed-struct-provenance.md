@@ -714,7 +714,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#WgpuRenderTextureEntry` | 23 | 2 | 1 | 1 | 1 | 0 | 1 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#WgpuRenderTextureExplanation` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuRenderTexturePool` | 17 | 5 | 0 | 3 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#WgpuScene3DDrawEntry` | 0 | 10 | 4 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#WgpuScene3DDrawEntry` | 12 | 10 | 4 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DForwardLightList` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DFrameBinding` | 0 | 2 | 1 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DIbl` | 15 | 8 | 1 | 0 | 0 | 0 | 0 | 1 | yes | — |

@@ -26,10 +26,10 @@ class GlVignetteEffect {
     var b:Float = cast _Runtime.UNDEFINED;
     var a:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
-    intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
-    radius = _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 0.75);
-    softness = _Runtime.coalesce(_Runtime.field(effect, 'softness'), function():Dynamic return cast 0.45);
-    color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 255.0);
+    intensity = _Runtime.coalesce(effect.intensity, function():Dynamic return cast 1.0);
+    radius = _Runtime.coalesce(effect.radius, function():Dynamic return cast 0.75);
+    softness = _Runtime.coalesce(effect.softness, function():Dynamic return cast 0.45);
+    color = _Runtime.coalesce(effect.color, function():Dynamic return cast 255.0);
     r = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) / 255.0);
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0);
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0);

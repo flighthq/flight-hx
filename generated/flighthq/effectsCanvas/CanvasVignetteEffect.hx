@@ -33,10 +33,10 @@ class CanvasVignetteEffect {
     var r:Float = cast _Runtime.UNDEFINED;
     var g:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
-    intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
-    radius = _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 0.75);
-    softness = _Runtime.coalesce(_Runtime.field(effect, 'softness'), function():Dynamic return cast 0.45);
-    color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 255.0);
+    intensity = _Runtime.coalesce(effect.intensity, function():Dynamic return cast 1.0);
+    radius = _Runtime.coalesce(effect.radius, function():Dynamic return cast 0.75);
+    softness = _Runtime.coalesce(effect.softness, function():Dynamic return cast 0.45);
+    color = _Runtime.coalesce(effect.color, function():Dynamic return cast 255.0);
     colorAlpha = ((_Runtime.toInt32(color) & 255) / 255.0);
     darken = HxMath.max(0.0, HxMath.min(1.0, (intensity * colorAlpha)));
     drawCanvasEffectPass(({ final __callArgument0:Dynamic = dest; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);

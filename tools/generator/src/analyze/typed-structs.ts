@@ -1218,6 +1218,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#BitmapFingerprint',
     purpose: 'reviewed escape-free bitmap fingerprint',
   },
+  {
+    declarationFingerprint: 'sha256:1f209c4f7d90191f56d8beee8987f5e88fd79dde04fdb55d2259a7ed5061c8e7',
+    id: '@flighthq/types:interface#AccessibilityState',
+    purpose: 'reviewed escape-free accessibility state',
+  },
+  {
+    declarationFingerprint: 'sha256:da0f630196cf440da445e080b9729ba42c3fb30d7645cfdfac1fd789e78c86cd',
+    id: '@flighthq/types:interface#WgpuVideoTextureEntry',
+    purpose: 'reviewed escape-free WebGPU video texture entry',
+  },
+  {
+    declarationFingerprint: 'sha256:a7bf1ac799a7a857268d1b05541826b1ec19e7b1e3f640d485b2a77dfdf793aa',
+    id: '@flighthq/types:interface#WgpuShapeMesh',
+    purpose: 'reviewed escape-free WebGPU shape mesh',
+  },
+  {
+    declarationFingerprint: 'sha256:b4d8b046bbaf156d910380ce47f8e5eb9bdcdfac78735a793394fc189153168d',
+    id: '@flighthq/types:interface#WgpuScene3DDrawEntry',
+    purpose: 'reviewed escape-free WebGPU Scene3D draw entry',
+  },
+  {
+    declarationFingerprint: 'sha256:f41110d11eecb97849c3d3c836b7c17e79b58e5fa50dc2486f4e58366b4f3fbe',
+    id: '@flighthq/types:interface#VignetteEffect',
+    purpose: 'reviewed escape-free vignette effect',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

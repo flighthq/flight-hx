@@ -177,20 +177,20 @@ class WgpuDraw {
     height = (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight;
     sampler = (cast WgpuDraw.getWgpuVideoSampler__wgpuDraw(({ final __callArgument27:Dynamic = state; __callArgument27; }), ({ final __callArgument28:Dynamic = videoTexture; __callArgument28; })) : flighthq._internal.dom.GPUSampler);
     entry = ((cast cache : flighthq._internal._WeakMap<Image, WgpuVideoTextureEntry>).get(image));
-    if ((cast ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast entry : WgpuVideoTextureEntry).width, width) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast entry : WgpuVideoTextureEntry).height, height) : Bool)) : Bool)) {
-      ({ final __hostTypeCall32 = ({ final __structural31 = entry; __structural31 == null ? _Runtime.UNDEFINED : (cast __structural31 : { var texture:flighthq._internal.dom.GPUTexture; }).texture; }); __hostTypeCall32 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall32 : flighthq._internal.dom.GPUTexture).destroy(); });
+    if ((cast ((cast ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast entry : { var width:Float; }).width, width) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast entry : { var height:Float; }).height, height) : Bool)) : Bool)) {
+      ({ final __hostTypeCall32 = ({ final __typedStruct31 = entry; __typedStruct31 == null ? _Runtime.UNDEFINED : (cast __typedStruct31 : { var texture:flighthq._internal.dom.GPUTexture; }).texture; }); __hostTypeCall32 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall32 : flighthq._internal.dom.GPUTexture).destroy(); });
       var texture:flighthq._internal.dom.GPUTexture = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: ((cast _Runtime.strictEquals((cast videoTexture : { var colorSpace:TextureColorSpace; }).colorSpace, 'srgb') : Bool) ? (cast 'rgba8unorm-srgb' : Dynamic) : (cast 'rgba8unorm' : Dynamic)), usage: (_Runtime.toInt32((_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')))) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT'))) }] : Array<Dynamic>));
       var view:flighthq._internal.dom.GPUTextureView = (cast texture : flighthq._internal.dom.GPUTexture).createView();
       (entry = cast ({ bindGroup: (cast WgpuDraw.buildWgpuTextureBindGroup__wgpuDraw(({ final __callArgument33:Dynamic = state; __callArgument33; }), ({ final __callArgument34:Dynamic = view; __callArgument34; }), ({ final __callArgument35:Dynamic = sampler; __callArgument35; })) : flighthq._internal.dom.GPUBindGroup), height: height, sampler: sampler, texture: texture, uploadedVersion: -1.0, view: view, width: width } : Dynamic));
       ((cast cache : flighthq._internal._WeakMap<Image, WgpuVideoTextureEntry>).set(image, (cast entry)));
-    } else { if ((cast !_Runtime.strictEquals((cast entry : WgpuVideoTextureEntry).sampler, sampler) : Bool)) {
-      ((cast entry : WgpuVideoTextureEntry).sampler = sampler);
-      ((cast entry : WgpuVideoTextureEntry).bindGroup = (cast WgpuDraw.buildWgpuTextureBindGroup__wgpuDraw(({ final __callArgument36:Dynamic = state; __callArgument36; }), (cast entry : WgpuVideoTextureEntry).view, ({ final __callArgument37:Dynamic = sampler; __callArgument37; })) : flighthq._internal.dom.GPUBindGroup));
+    } else { if ((cast !_Runtime.strictEquals((cast entry : { var sampler:flighthq._internal.dom.GPUSampler; }).sampler, sampler) : Bool)) {
+      ((cast entry : { var sampler:flighthq._internal.dom.GPUSampler; }).sampler = cast (sampler : flighthq._internal.dom.GPUSampler));
+      ((cast entry : { var bindGroup:flighthq._internal.dom.GPUBindGroup; }).bindGroup = cast ((cast WgpuDraw.buildWgpuTextureBindGroup__wgpuDraw(({ final __callArgument36:Dynamic = state; __callArgument36; }), (cast entry : { var view:flighthq._internal.dom.GPUTextureView; }).view, ({ final __callArgument37:Dynamic = sampler; __callArgument37; })) : flighthq._internal.dom.GPUBindGroup) : flighthq._internal.dom.GPUBindGroup));
     } }
-    if ((cast !_Runtime.strictEquals((cast entry : WgpuVideoTextureEntry).uploadedVersion, (cast image : Image).version) : Bool)) {
-      var copied:Bool = (cast tryCopyWgpuExternalImageToTexture(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), ({ final __callArgument38:Dynamic = { source: element, flipY: false }; __callArgument38; }), ({ final __callArgument39:Dynamic = { texture: (cast entry : WgpuVideoTextureEntry).texture, premultipliedAlpha: true }; __callArgument39; }), (cast width : Float), (cast height : Float)) : Bool);
-      if ((cast !(cast copied : Bool) : Bool)) { return cast ((cast ((cast (cast entry : WgpuVideoTextureEntry).uploadedVersion : Float) < (cast 0.0 : Float)) : Bool) ? (cast null : Dynamic) : (cast entry : Dynamic)); }
-      ((cast entry : WgpuVideoTextureEntry).uploadedVersion = (cast image : Image).version);
+    if ((cast !_Runtime.strictEquals((cast entry : { var uploadedVersion:Float; }).uploadedVersion, (cast image : Image).version) : Bool)) {
+      var copied:Bool = (cast tryCopyWgpuExternalImageToTexture(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), ({ final __callArgument38:Dynamic = { source: element, flipY: false }; __callArgument38; }), ({ final __callArgument39:Dynamic = { texture: (cast entry : { var texture:flighthq._internal.dom.GPUTexture; }).texture, premultipliedAlpha: true }; __callArgument39; }), (cast width : Float), (cast height : Float)) : Bool);
+      if ((cast !(cast copied : Bool) : Bool)) { return cast ((cast ((cast (cast entry : { var uploadedVersion:Float; }).uploadedVersion : Float) < (cast 0.0 : Float)) : Bool) ? (cast null : Dynamic) : (cast entry : Dynamic)); }
+      ((cast entry : { var uploadedVersion:Float; }).uploadedVersion = cast ((cast image : Image).version : Float));
     }
     return cast entry;
     return cast null;
@@ -253,7 +253,7 @@ class WgpuDraw {
     for (cache in _Runtime.iterable(cast ([runtime.videoTextureCache, runtime.videoSrgbTextureCache] : Array<Dynamic>))) {
       var entry:Null<WgpuVideoTextureEntry> = ({ final __collection49:Dynamic = cache; __collection49 == null ? _Runtime.UNDEFINED : ((cast __collection49 : flighthq._internal._WeakMap<Image, WgpuVideoTextureEntry>).get(image)); });
       if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-      (cast (cast entry : WgpuVideoTextureEntry).texture : flighthq._internal.dom.GPUTexture).destroy();
+      (cast (cast entry : { var texture:flighthq._internal.dom.GPUTexture; }).texture : flighthq._internal.dom.GPUTexture).destroy();
       ((cast cache : flighthq._internal._WeakMap<Dynamic, Dynamic>).delete_(image));
       (destroyed = cast (true : Dynamic));
     }

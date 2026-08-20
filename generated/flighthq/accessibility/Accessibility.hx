@@ -22,19 +22,19 @@ class Accessibility {
   }
 
   public static function _applyAccessibilityStateAttributes__accessibility(element:flighthq._internal.dom.HTMLElement, state:AccessibilityState):Void {
-    Accessibility._reflectAccessibilityBoolean__accessibility(({ final __callArgument7:Dynamic = element; __callArgument7; }), (cast 'aria-disabled' : String), _Runtime.field(state, 'disabled'));
-    Accessibility._reflectAccessibilityBoolean__accessibility(({ final __callArgument8:Dynamic = element; __callArgument8; }), (cast 'aria-checked' : String), _Runtime.field(state, 'checked'));
-    Accessibility._reflectAccessibilityBoolean__accessibility(({ final __callArgument9:Dynamic = element; __callArgument9; }), (cast 'aria-expanded' : String), _Runtime.field(state, 'expanded'));
-    Accessibility._reflectAccessibilityBoolean__accessibility(({ final __callArgument10:Dynamic = element; __callArgument10; }), (cast 'aria-selected' : String), _Runtime.field(state, 'selected'));
-    Accessibility._reflectAccessibilityBoolean__accessibility(({ final __callArgument11:Dynamic = element; __callArgument11; }), (cast 'aria-pressed' : String), _Runtime.field(state, 'pressed'));
-    Accessibility._reflectAccessibilityBoolean__accessibility(({ final __callArgument12:Dynamic = element; __callArgument12; }), (cast 'aria-busy' : String), _Runtime.field(state, 'busy'));
-    Accessibility._reflectAccessibilityBoolean__accessibility(({ final __callArgument13:Dynamic = element; __callArgument13; }), (cast 'aria-hidden' : String), _Runtime.field(state, 'hidden'));
-    Accessibility._reflectAccessibilityBoolean__accessibility(({ final __callArgument14:Dynamic = element; __callArgument14; }), (cast 'aria-readonly' : String), _Runtime.field(state, 'readonly'));
-    Accessibility._reflectAccessibilityBoolean__accessibility(({ final __callArgument15:Dynamic = element; __callArgument15; }), (cast 'aria-required' : String), _Runtime.field(state, 'required'));
-    Accessibility._reflectAccessibilityNumber__accessibility(({ final __callArgument16:Dynamic = element; __callArgument16; }), (cast 'aria-level' : String), _Runtime.field(state, 'level'));
-    Accessibility._reflectAccessibilityNumber__accessibility(({ final __callArgument17:Dynamic = element; __callArgument17; }), (cast 'aria-valuemin' : String), _Runtime.field(state, 'valueMin'));
-    Accessibility._reflectAccessibilityNumber__accessibility(({ final __callArgument18:Dynamic = element; __callArgument18; }), (cast 'aria-valuemax' : String), _Runtime.field(state, 'valueMax'));
-    Accessibility._reflectAccessibilityNumber__accessibility(({ final __callArgument19:Dynamic = element; __callArgument19; }), (cast 'aria-valuenow' : String), _Runtime.field(state, 'valueNow'));
+    Accessibility._reflectAccessibilityBoolean__accessibility(({ final __callArgument7:Dynamic = element; __callArgument7; }), (cast 'aria-disabled' : String), state.disabled);
+    Accessibility._reflectAccessibilityBoolean__accessibility(({ final __callArgument8:Dynamic = element; __callArgument8; }), (cast 'aria-checked' : String), state.checked);
+    Accessibility._reflectAccessibilityBoolean__accessibility(({ final __callArgument9:Dynamic = element; __callArgument9; }), (cast 'aria-expanded' : String), state.expanded);
+    Accessibility._reflectAccessibilityBoolean__accessibility(({ final __callArgument10:Dynamic = element; __callArgument10; }), (cast 'aria-selected' : String), state.selected);
+    Accessibility._reflectAccessibilityBoolean__accessibility(({ final __callArgument11:Dynamic = element; __callArgument11; }), (cast 'aria-pressed' : String), state.pressed);
+    Accessibility._reflectAccessibilityBoolean__accessibility(({ final __callArgument12:Dynamic = element; __callArgument12; }), (cast 'aria-busy' : String), state.busy);
+    Accessibility._reflectAccessibilityBoolean__accessibility(({ final __callArgument13:Dynamic = element; __callArgument13; }), (cast 'aria-hidden' : String), state.hidden);
+    Accessibility._reflectAccessibilityBoolean__accessibility(({ final __callArgument14:Dynamic = element; __callArgument14; }), (cast 'aria-readonly' : String), state.readonly);
+    Accessibility._reflectAccessibilityBoolean__accessibility(({ final __callArgument15:Dynamic = element; __callArgument15; }), (cast 'aria-required' : String), state.required);
+    Accessibility._reflectAccessibilityNumber__accessibility(({ final __callArgument16:Dynamic = element; __callArgument16; }), (cast 'aria-level' : String), state.level);
+    Accessibility._reflectAccessibilityNumber__accessibility(({ final __callArgument17:Dynamic = element; __callArgument17; }), (cast 'aria-valuemin' : String), state.valueMin);
+    Accessibility._reflectAccessibilityNumber__accessibility(({ final __callArgument18:Dynamic = element; __callArgument18; }), (cast 'aria-valuemax' : String), state.valueMax);
+    Accessibility._reflectAccessibilityNumber__accessibility(({ final __callArgument19:Dynamic = element; __callArgument19; }), (cast 'aria-valuenow' : String), state.valueNow);
   }
 
   public static var _backend__accessibility:Null<AccessibilityBackend> = _Runtime.explicitNull();
