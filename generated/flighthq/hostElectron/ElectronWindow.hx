@@ -26,15 +26,15 @@ class ElectronWindow {
       (cast bw : ElectronBrowserWindow).on((cast 'move' : String), ({ final __callArgument0:Dynamic = function(__unused0:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void {
         var bounds:ElectronRectangle = cast _Runtime.UNDEFINED;
         bounds = (cast bw : ElectronBrowserWindow).getBounds();
-        (win.x = cast ((cast bounds : ElectronRectangle).x : Float));
-        (win.y = cast ((cast bounds : ElectronRectangle).y : Float));
+        (win.x = cast (bounds.x : Float));
+        (win.y = cast (bounds.y : Float));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMove]]), 1);
       }, cast ([] : Array<Dynamic>)); }; __callArgument0; }));
       (cast bw : ElectronBrowserWindow).on((cast 'resize' : String), ({ final __callArgument1:Dynamic = function(__unused1:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void {
         var bounds:ElectronRectangle = cast _Runtime.UNDEFINED;
         bounds = (cast bw : ElectronBrowserWindow).getBounds();
-        (win.width = cast ((cast bounds : ElectronRectangle).width : Float));
-        (win.height = cast ((cast bounds : ElectronRectangle).height : Float));
+        (win.width = cast (bounds.width : Float));
+        (win.height = cast (bounds.height : Float));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onResize]]), 1);
       }, cast ([] : Array<Dynamic>)); }; __callArgument1; }));
       (cast bw : ElectronBrowserWindow).on((cast 'minimize' : String), ({ final __callArgument2:Dynamic = function(__unused2:Array<flighthq._internal._Any>):Void { _Runtime.callValue(function():Void {
@@ -117,10 +117,10 @@ class ElectronWindow {
       }
       try {
         var bounds:ElectronRectangle = (cast bw : ElectronBrowserWindow).getBounds();
-        (out.x = cast ((cast bounds : ElectronRectangle).x : Float));
-        (out.y = cast ((cast bounds : ElectronRectangle).y : Float));
-        (out.width = cast ((cast bounds : ElectronRectangle).width : Float));
-        (out.height = cast ((cast bounds : ElectronRectangle).height : Float));
+        (out.x = cast (bounds.x : Float));
+        (out.y = cast (bounds.y : Float));
+        (out.width = cast (bounds.width : Float));
+        (out.height = cast (bounds.height : Float));
       } catch (__error:Dynamic) {
         (out.x = cast (win.x : Float));
         (out.y = cast (win.y : Float));

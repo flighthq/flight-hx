@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1351 |
-| Direct schemas | 653 |
+| Audit-only schemas | 1346 |
+| Direct schemas | 658 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 6896 |
-| Directly emitted accesses | 23770 |
+| Pending accesses | 6840 |
+| Directly emitted accesses | 23826 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1351 |
+| Newly discovered, audit-only | 1346 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -282,7 +282,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CanvasTextShaperBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#CanvasTextureResolver` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#CanvasTextureResolvers` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 3 | 6 | 1 | 10 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CapacitorApi` | `audit-only` | `new` | — | checker-discovered public declaration | 12 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CapacitorApi` | `direct` | `new` | — | reviewed escape-free Capacitor API | 12 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorAppInfo` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorAppPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
 | `@flighthq/types:interface#CapacitorClipboardPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 7 | yes | — |
@@ -290,7 +290,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CapacitorClipboardWriteOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorConnectionStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorDeviceId` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CapacitorDeviceInfo` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CapacitorDeviceInfo` | `direct` | `new` | — | reviewed escape-free Capacitor device info | 8 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorDevicePlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#CapacitorDialogAlertOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorDialogConfirmOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -463,7 +463,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ElectronClipboard` | `audit-only` | `new` | — | checker-discovered public declaration | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 20 | yes | — |
 | `@flighthq/types:interface#ElectronClipboardData` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#ElectronDialog` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
-| `@flighthq/types:interface#ElectronDisplay` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ElectronDisplay` | `direct` | `new` | — | reviewed escape-free Electron display | 4 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronDock` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | yes | — |
 | `@flighthq/types:interface#ElectronFs` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:interface#ElectronGlobalShortcut` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
@@ -482,7 +482,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ElectronOpenDialogOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronPowerMonitor` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 1 | 0 | 0 | 1 | 0 | 0 | 16 | yes | — |
 | `@flighthq/types:interface#ElectronPowerSaveBlocker` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
-| `@flighthq/types:interface#ElectronRectangle` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ElectronRectangle` | `direct` | `new` | — | reviewed escape-free Electron rectangle | 4 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronSaveDialogOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronScreen` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 11 | yes | — |
 | `@flighthq/types:interface#ElectronShell` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | yes | — |
@@ -1545,7 +1545,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#SocketRuntime` | `direct` | `new` | — | reviewed escape-free socket runtime | 5 | 32 | 11 | 0 | 0 | 43 | 0 | 0 | yes | — |
 | `@flighthq/types:type#SocketSendFailureExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#SocketSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#SoftKeyboard` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SoftKeyboard` | `direct` | `new` | — | reviewed escape-free soft keyboard | 9 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SoftKeyboardBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 0 | 0 | 0 | 0 | 0 | 0 | 14 | yes | — |
 | `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |

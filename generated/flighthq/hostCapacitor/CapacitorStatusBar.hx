@@ -14,7 +14,7 @@ class CapacitorStatusBar {
   public static function createCapacitorStatusBarBackend(capacitor:CapacitorApi):StatusBarBackend {
     var statusBar:CapacitorStatusBarPlugin = cast _Runtime.UNDEFINED;
     var cachedInfo:Null<CapacitorStatusBarInfoResult> = cast _Runtime.UNDEFINED;
-    statusBar = (cast capacitor : CapacitorApi).statusBar;
+    statusBar = capacitor.statusBar;
     cachedInfo = null;
     flighthq._internal._Async.recover(_Runtime.callProperty((cast statusBar : CapacitorStatusBarPlugin).getInfo(), 'then', cast ([function(info:CapacitorStatusBarInfoResult):Void {
       (cachedInfo = cast (info : Dynamic));

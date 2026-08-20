@@ -17463,7 +17463,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 12,
       "fields": 12,
       "id": "@flighthq/types:interface#CapacitorApi",
       "name": "CapacitorApi",
@@ -22262,7 +22262,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 12,
       "fields": 4,
       "id": "@flighthq/types:interface#ElectronRectangle",
       "name": "ElectronRectangle",
@@ -46589,7 +46589,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 9,
       "fields": 9,
       "id": "@flighthq/types:interface#SoftKeyboard",
       "name": "SoftKeyboard",

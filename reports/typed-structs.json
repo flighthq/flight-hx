@@ -44630,9 +44630,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 12,
+        "directAccesses": 12,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -44742,7 +44742,7 @@
       },
       "name": "CapacitorApi",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Capacitor API",
       "reasons": [],
       "source": "upstream/packages/types/src/CapacitorApi.ts",
       "sourceProvenance": {
@@ -45300,9 +45300,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 11,
+        "directAccesses": 11,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -45380,7 +45380,7 @@
       },
       "name": "CapacitorDeviceInfo",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Capacitor device info",
       "reasons": [],
       "source": "upstream/packages/types/src/CapacitorApi.ts",
       "sourceProvenance": {
@@ -73711,9 +73711,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 12,
+        "directAccesses": 12,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -73759,7 +73759,7 @@
       },
       "name": "ElectronDisplay",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Electron display",
       "reasons": [],
       "source": "upstream/packages/types/src/ElectronApi.ts",
       "sourceProvenance": {
@@ -75580,9 +75580,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 12,
+        "directAccesses": 12,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -75628,7 +75628,7 @@
       },
       "name": "ElectronRectangle",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Electron rectangle",
       "reasons": [],
       "source": "upstream/packages/types/src/ElectronApi.ts",
       "sourceProvenance": {
@@ -313706,9 +313706,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -313794,7 +313794,7 @@
       },
       "name": "SoftKeyboard",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free soft keyboard",
       "reasons": [],
       "source": "upstream/packages/types/src/Keyboard.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1351,
+      "newAuditOnly": 1346,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1351,
+    "auditOnlySchemas": 1346,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 23770,
-    "directSchemas": 653,
+    "directAccesses": 23826,
+    "directSchemas": 658,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 6896,
+    "pendingAccesses": 6840,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

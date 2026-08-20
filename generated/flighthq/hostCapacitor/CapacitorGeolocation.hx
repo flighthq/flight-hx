@@ -22,7 +22,7 @@ class CapacitorGeolocation {
     var geolocation:CapacitorGeolocationPlugin = cast _Runtime.UNDEFINED;
     var nextWatchId:Float = cast _Runtime.UNDEFINED;
     var watchIds:flighthq._internal._Map<Float, Null<String>> = cast _Runtime.UNDEFINED;
-    geolocation = (cast capacitor : CapacitorApi).geolocation;
+    geolocation = capacitor.geolocation;
     nextWatchId = 1.0;
     watchIds = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     return cast { getCurrentPosition: function(options:GeolocationRequestOptions):flighthq._internal._Promise<Null<GeoPosition>> {

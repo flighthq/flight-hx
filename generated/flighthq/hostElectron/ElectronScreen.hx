@@ -19,13 +19,13 @@ class ElectronScreen {
       var displays:Array<ElectronDisplay> = cast _Runtime.UNDEFINED;
       var primaryId:Float = cast _Runtime.UNDEFINED;
       displays = (cast screen : flighthq.types.ElectronApi.ElectronScreen).getAllDisplays();
-      primaryId = (cast (cast screen : flighthq.types.ElectronApi.ElectronScreen).getPrimaryDisplay() : ElectronDisplay).id;
+      primaryId = (cast (cast screen : flighthq.types.ElectronApi.ElectronScreen).getPrimaryDisplay() : { var id:Float; }).id;
       _Runtime.setLength(out, _Runtime.field(displays, 'length'));
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(displays, 'length') : Float)) : Bool)) {
           var display:ElectronDisplay = flighthq._internal._StaticIndex.readArray(displays, i);
-          flighthq._internal._StaticIndex.writeArray(out, i, (cast ElectronScreen.fillScreenInfo__electronScreen((cast {  } : ScreenInfo), ({ final __callArgument0:Dynamic = display; __callArgument0; }), (cast _Runtime.strictEquals((cast display : ElectronDisplay).id, primaryId) : Bool)) : ScreenInfo));
+          flighthq._internal._StaticIndex.writeArray(out, i, (cast ElectronScreen.fillScreenInfo__electronScreen((cast {  } : ScreenInfo), ({ final __callArgument0:Dynamic = display; __callArgument0; }), (cast _Runtime.strictEquals(display.id, primaryId) : Bool)) : ScreenInfo));
           i++;
         }
       }
@@ -47,12 +47,12 @@ class ElectronScreen {
       var onAdded:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
       var onRemoved:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
       var onMetrics:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
-      primaryId = (cast function():Float return (cast (cast screen : flighthq.types.ElectronApi.ElectronScreen).getPrimaryDisplay() : ElectronDisplay).id);
+      primaryId = (cast function():Float return (cast (cast screen : flighthq.types.ElectronApi.ElectronScreen).getPrimaryDisplay() : { var id:Float; }).id);
       makeHandler = (cast function(kind:ScreenChangeKind):Array<flighthq._internal._Any>->Void return _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
         var display:Null<ElectronDisplay> = cast _Runtime.UNDEFINED;
         var event:ScreenChangeEvent = cast _Runtime.UNDEFINED;
         display = (cast flighthq._internal._StaticIndex.readArray(args, 1.0) : Null<ElectronDisplay>);
-        event = (cast { kind: kind, screen: _Runtime.select(display, function():Dynamic return cast (cast ElectronScreen.fillScreenInfo__electronScreen((cast {  } : ScreenInfo), ({ final __callArgument2:Dynamic = display; __callArgument2; }), (cast _Runtime.strictEquals((cast display : ElectronDisplay).id, (cast primaryId() : Float)) : Bool)) : ScreenInfo), function():Dynamic return cast (cast {  } : ScreenInfo)), changedMetrics: ((cast _Runtime.strictEquals(kind, 'ScreenMetricsChanged') : Bool) ? (cast { bounds: true, workArea: true, scaleFactor: true, orientation: true } : Dynamic) : (cast null : Dynamic)) });
+        event = (cast { kind: kind, screen: _Runtime.select(display, function():Dynamic return cast (cast ElectronScreen.fillScreenInfo__electronScreen((cast {  } : ScreenInfo), ({ final __callArgument2:Dynamic = display; __callArgument2; }), (cast _Runtime.strictEquals((cast display : { var id:Float; }).id, (cast primaryId() : Float)) : Bool)) : ScreenInfo), function():Dynamic return cast (cast {  } : ScreenInfo)), changedMetrics: ((cast _Runtime.strictEquals(kind, 'ScreenMetricsChanged') : Bool) ? (cast { bounds: true, workArea: true, scaleFactor: true, orientation: true } : Dynamic) : (cast null : Dynamic)) });
         listener(({ final __callArgument3:Dynamic = event; __callArgument3; }));
       }, 0));
       onAdded = (cast makeHandler(({ final __callArgument4:Dynamic = 'ScreenAdded'; __callArgument4; })) : Array<flighthq._internal._Any>->Void);
@@ -72,14 +72,14 @@ class ElectronScreen {
   }
 
   public static function fillScreenInfo__electronScreen(out:ScreenInfo, display:ElectronDisplay, isPrimary:Bool):ScreenInfo {
-    (out.id = cast (_Runtime.field(display, 'id') : Float));
-    (out.x = cast ((cast _Runtime.field(display, 'bounds') : { var x:Float; var y:Float; var width:Float; var height:Float; }).x : Float));
-    (out.y = cast ((cast _Runtime.field(display, 'bounds') : { var x:Float; var y:Float; var width:Float; var height:Float; }).y : Float));
-    (out.width = cast ((cast _Runtime.field(display, 'bounds') : { var x:Float; var y:Float; var width:Float; var height:Float; }).width : Float));
-    (out.height = cast ((cast _Runtime.field(display, 'bounds') : { var x:Float; var y:Float; var width:Float; var height:Float; }).height : Float));
-    (out.workWidth = cast ((cast _Runtime.field(display, 'workArea') : { var x:Float; var y:Float; var width:Float; var height:Float; }).width : Float));
-    (out.workHeight = cast ((cast _Runtime.field(display, 'workArea') : { var x:Float; var y:Float; var width:Float; var height:Float; }).height : Float));
-    (out.scaleFactor = cast (_Runtime.field(display, 'scaleFactor') : Float));
+    (out.id = cast (display.id : Float));
+    (out.x = cast ((cast display.bounds : { var x:Float; var y:Float; var width:Float; var height:Float; }).x : Float));
+    (out.y = cast ((cast display.bounds : { var x:Float; var y:Float; var width:Float; var height:Float; }).y : Float));
+    (out.width = cast ((cast display.bounds : { var x:Float; var y:Float; var width:Float; var height:Float; }).width : Float));
+    (out.height = cast ((cast display.bounds : { var x:Float; var y:Float; var width:Float; var height:Float; }).height : Float));
+    (out.workWidth = cast ((cast display.workArea : { var x:Float; var y:Float; var width:Float; var height:Float; }).width : Float));
+    (out.workHeight = cast ((cast display.workArea : { var x:Float; var y:Float; var width:Float; var height:Float; }).height : Float));
+    (out.scaleFactor = cast (display.scaleFactor : Float));
     (out.isPrimary = cast (isPrimary : Bool));
     return cast out;
     return cast null;

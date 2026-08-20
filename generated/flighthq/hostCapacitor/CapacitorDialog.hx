@@ -19,7 +19,7 @@ import flighthq.types.Dialog.PromptDialogOptions;
 class CapacitorDialog {
   public static function createCapacitorDialogBackend(capacitor:CapacitorApi):DialogBackend {
     var dialog:CapacitorDialogPlugin = cast _Runtime.UNDEFINED;
-    dialog = (cast capacitor : CapacitorApi).dialog;
+    dialog = capacitor.dialog;
     return cast { openFile: function():flighthq._internal._Promise<Array<FileDialogHandle>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));

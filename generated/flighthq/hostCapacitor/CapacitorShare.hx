@@ -17,7 +17,7 @@ class CapacitorShare {
   public static function createCapacitorShareBackend(capacitor:CapacitorApi):ShareBackend {
     var share:CapacitorSharePlugin = cast _Runtime.UNDEFINED;
     var cachedAvailable:Bool = cast _Runtime.UNDEFINED;
-    share = (cast capacitor : CapacitorApi).share;
+    share = capacitor.share;
     cachedAvailable = false;
     flighthq._internal._Async.recover(_Runtime.callProperty((cast share : CapacitorSharePlugin).canShare(), 'then', cast ([function(result:CapacitorShareCanResult):Void {
       (cachedAvailable = cast ((cast result : CapacitorShareCanResult).value : Dynamic));

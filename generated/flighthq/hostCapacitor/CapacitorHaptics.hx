@@ -13,7 +13,7 @@ import flighthq.types.Haptics.HapticsCapabilities;
 class CapacitorHaptics {
   public static function createCapacitorHapticsBackend(capacitor:CapacitorApi):HapticsBackend {
     var haptics:CapacitorHapticsPlugin = cast _Runtime.UNDEFINED;
-    haptics = (cast capacitor : CapacitorApi).haptics;
+    haptics = capacitor.haptics;
     return cast { cancel: function():Bool {
       return cast false;
       return cast _Runtime.UNDEFINED;

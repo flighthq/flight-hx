@@ -24,7 +24,7 @@ class CapacitorNotification {
     var nextNumericId:Float = cast _Runtime.UNDEFINED;
     var idByNumber:flighthq._internal._Map<Float, String> = cast _Runtime.UNDEFINED;
     var cachedPermission:NotificationPermission = cast _Runtime.UNDEFINED;
-    notifications = (cast capacitor : CapacitorApi).localNotifications;
+    notifications = capacitor.localNotifications;
     nextNumericId = 1.0;
     idByNumber = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     cachedPermission = 'default';

@@ -25,7 +25,7 @@ import flighthq.types.FileSystem.FileSystemUsage;
 class CapacitorFileSystem {
   public static function createCapacitorFileSystemBackend(capacitor:CapacitorApi):FileSystemBackend {
     var filesystem:CapacitorFilesystemPlugin = cast _Runtime.UNDEFINED;
-    filesystem = (cast capacitor : CapacitorApi).filesystem;
+    filesystem = capacitor.filesystem;
     return cast { readTextFile: function(path:String):flighthq._internal._Promise<Null<String>> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {

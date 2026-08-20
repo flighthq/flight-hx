@@ -43,23 +43,23 @@ class Keyboard {
       nowVisible = info.visible;
       if ((cast _Runtime.strictEquals(phase, 'will') : Bool)) {
         if ((cast ((cast nowVisible : Bool) && (cast !(cast prevVisible : Bool) : Bool)) : Bool)) {
-          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onWillShow], [transition]]), 1);
+          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onWillShow], [transition]]), 1);
         } else { if ((cast ((cast !(cast nowVisible : Bool) : Bool) && (cast prevVisible : Bool)) : Bool)) {
-          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onWillHide], [transition]]), 1);
+          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onWillHide], [transition]]), 1);
         } else {
-          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onWillResize], [transition]]), 1);
+          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onWillResize], [transition]]), 1);
         } }
       } else {
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onDidResize], [info.height]]), 1);
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onResize], [info.height]]), 1);
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onDidResize], [info.height]]), 1);
+        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onResize], [info.height]]), 1);
         if ((cast !_Runtime.strictEquals(nowVisible, prevVisible) : Bool)) {
           (wasVisible = cast (nowVisible : Dynamic));
           if ((cast nowVisible : Bool)) {
-            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onDidShow], [info.height]]), 1);
-            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onShow], [info.height]]), 1);
+            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onDidShow], [info.height]]), 1);
+            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onShow], [info.height]]), 1);
           } else {
-            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onDidHide]]), 1);
-            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast keyboard : SoftKeyboard).onHide]]), 1);
+            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onDidHide]]), 1);
+            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onHide]]), 1);
           }
         }
       }

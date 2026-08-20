@@ -98,7 +98,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#CanvasRenderTexturePool` | 21 | 5 | 0 | 4 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CanvasShapeCommand` | 0 | 2 | 5 | 0 | 5 | 0 | 4 | 6 | no | `normalization-provenance` |
 | `@flighthq/types:interface#CanvasShapeDrawState` | 115 | 16 | 0 | 3 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CapacitorApi` | 0 | 12 | 0 | 12 | 0 | 0 | 1 | 0 | yes | — |
+| `@flighthq/types:interface#CapacitorApi` | 12 | 12 | 0 | 12 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorAppInfo` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorAppPlugin` | 0 | 4 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorClipboardPlugin` | 0 | 2 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |
@@ -186,7 +186,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#ElectronNativeImageModule` | 0 | 2 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronNotification` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronPowerSaveBlocker` | 0 | 3 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |
-| `@flighthq/types:interface#ElectronRectangle` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ElectronRectangle` | 12 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronScreen` | 0 | 5 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronShell` | 0 | 7 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronTray` | 0 | 13 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -524,7 +524,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#SocketMessage` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SocketRuntime` | 43 | 5 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SocketSignals` | 0 | 4 | 1 | 4 | 0 | 0 | 1 | 2 | yes | — |
-| `@flighthq/types:interface#SoftKeyboard` | 0 | 9 | 0 | 9 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#SoftKeyboard` | 9 | 9 | 0 | 9 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SoftKeyboardInfo` | 17 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SoftKeyboardTransition` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#SpatialIndex` | 0 | 1 | 2 | 1 | 0 | 0 | 3 | 2 | yes | — |

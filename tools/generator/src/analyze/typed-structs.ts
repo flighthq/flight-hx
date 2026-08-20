@@ -1293,6 +1293,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#AccessibilityNode',
     purpose: 'reviewed escape-free accessibility node',
   },
+  {
+    declarationFingerprint: 'sha256:b0dc0c96ded1a17737bca7c5890baa1686ceb20716717440a7c6d69ac0b5e6fc',
+    id: '@flighthq/types:interface#CapacitorApi',
+    purpose: 'reviewed escape-free Capacitor API',
+  },
+  {
+    declarationFingerprint: 'sha256:0d43596323d2b6bae32b2a18e48f1b8b9d4e1b111f4befd669e75060b5a088be',
+    id: '@flighthq/types:interface#CapacitorDeviceInfo',
+    purpose: 'reviewed escape-free Capacitor device info',
+  },
+  {
+    declarationFingerprint: 'sha256:f0ff8180f6aea9d35478fc8c9e6286d524e4ce32fed7623b2b2e5fe4a65cf11e',
+    id: '@flighthq/types:interface#ElectronDisplay',
+    purpose: 'reviewed escape-free Electron display',
+  },
+  {
+    declarationFingerprint: 'sha256:b6d1c737450f66fa221301095025d2d5cc6e89f73afe45f736ec72dc3c1b39eb',
+    id: '@flighthq/types:interface#ElectronRectangle',
+    purpose: 'reviewed escape-free Electron rectangle',
+  },
+  {
+    declarationFingerprint: 'sha256:b30795d80dbe254f4e9c948d7cb48d343af06663ca1574e18a0ba9a23e6d8a3e',
+    id: '@flighthq/types:interface#SoftKeyboard',
+    purpose: 'reviewed escape-free soft keyboard',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

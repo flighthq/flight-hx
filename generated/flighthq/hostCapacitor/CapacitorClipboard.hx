@@ -13,7 +13,7 @@ import flighthq.types.Clipboard.ClipboardBookmark;
 class CapacitorClipboard {
   public static function createCapacitorClipboardBackend(capacitor:CapacitorApi):ClipboardBackend {
     var clipboard:CapacitorClipboardPlugin = cast _Runtime.UNDEFINED;
-    clipboard = (cast capacitor : CapacitorApi).clipboard;
+    clipboard = capacitor.clipboard;
     return cast { readText: function():flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {

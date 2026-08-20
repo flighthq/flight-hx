@@ -137,7 +137,7 @@ class ElectronTray {
   public static function toBounds__electronTray(tray:flighthq.types.ElectronApi.ElectronTray):Null<{ var x:Float; var y:Float; var width:Float; var height:Float; }> {
     try {
       var bounds:ElectronRectangle = _Runtime.callProperty(tray, 'getBounds', cast ([] : Array<Dynamic>));
-      return cast { x: (cast bounds : ElectronRectangle).x, y: (cast bounds : ElectronRectangle).y, width: (cast bounds : ElectronRectangle).width, height: (cast bounds : ElectronRectangle).height };
+      return cast { x: bounds.x, y: bounds.y, width: bounds.width, height: bounds.height };
     } catch (__error:Dynamic) {
       return cast null;
     }

@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_351,
+      newAuditOnly: 1_346,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(655);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(660);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_351);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_346);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(253);
+    expect(newDirect).toHaveLength(258);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1375,6 +1375,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'AccessibilityNode',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free accessibility node',
+        }),
+        expect.objectContaining({
+          name: 'CapacitorApi',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Capacitor API',
+        }),
+        expect.objectContaining({
+          name: 'CapacitorDeviceInfo',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Capacitor device info',
+        }),
+        expect.objectContaining({
+          name: 'ElectronDisplay',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Electron display',
+        }),
+        expect.objectContaining({
+          name: 'ElectronRectangle',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Electron rectangle',
+        }),
+        expect.objectContaining({
+          name: 'SoftKeyboard',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free soft keyboard',
         }),
       ]),
     );
@@ -2644,6 +2669,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#AccessibilityNode',
         purpose: 'reviewed escape-free accessibility node',
       },
+      {
+        declarationFingerprint: 'sha256:b0dc0c96ded1a17737bca7c5890baa1686ceb20716717440a7c6d69ac0b5e6fc',
+        id: '@flighthq/types:interface#CapacitorApi',
+        purpose: 'reviewed escape-free Capacitor API',
+      },
+      {
+        declarationFingerprint: 'sha256:0d43596323d2b6bae32b2a18e48f1b8b9d4e1b111f4befd669e75060b5a088be',
+        id: '@flighthq/types:interface#CapacitorDeviceInfo',
+        purpose: 'reviewed escape-free Capacitor device info',
+      },
+      {
+        declarationFingerprint: 'sha256:f0ff8180f6aea9d35478fc8c9e6286d524e4ce32fed7623b2b2e5fe4a65cf11e',
+        id: '@flighthq/types:interface#ElectronDisplay',
+        purpose: 'reviewed escape-free Electron display',
+      },
+      {
+        declarationFingerprint: 'sha256:b6d1c737450f66fa221301095025d2d5cc6e89f73afe45f736ec72dc3c1b39eb',
+        id: '@flighthq/types:interface#ElectronRectangle',
+        purpose: 'reviewed escape-free Electron rectangle',
+      },
+      {
+        declarationFingerprint: 'sha256:b30795d80dbe254f4e9c948d7cb48d343af06663ca1574e18a0ba9a23e6d8a3e',
+        id: '@flighthq/types:interface#SoftKeyboard',
+        purpose: 'reviewed escape-free soft keyboard',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -3524,6 +3574,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const twentyFourthHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['CapacitorApi', 'CapacitorDeviceInfo', 'ElectronDisplay', 'ElectronRectangle', 'SoftKeyboard'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -3564,22 +3623,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_351,
+      auditOnlySchemas: 1_346,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 23_770,
-      directSchemas: 653,
+      directAccesses: 23_826,
+      directSchemas: 658,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 6_896,
+      pendingAccesses: 6_840,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_351,
+      newAuditOnly: 1_346,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -3656,7 +3715,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(23_770);
+    expect(report.summary.directAccesses).toBe(23_826);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -4878,6 +4937,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(twentyThirdHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'CapacitorApi',
+        12,
+        'sha256:b0dc0c96ded1a17737bca7c5890baa1686ceb20716717440a7c6d69ac0b5e6fc',
+        'reviewed escape-free Capacitor API',
+      ],
+      [
+        'CapacitorDeviceInfo',
+        11,
+        'sha256:0d43596323d2b6bae32b2a18e48f1b8b9d4e1b111f4befd669e75060b5a088be',
+        'reviewed escape-free Capacitor device info',
+      ],
+      [
+        'ElectronDisplay',
+        12,
+        'sha256:f0ff8180f6aea9d35478fc8c9e6286d524e4ce32fed7623b2b2e5fe4a65cf11e',
+        'reviewed escape-free Electron display',
+      ],
+      [
+        'ElectronRectangle',
+        12,
+        'sha256:b6d1c737450f66fa221301095025d2d5cc6e89f73afe45f736ec72dc3c1b39eb',
+        'reviewed escape-free Electron rectangle',
+      ],
+      [
+        'SoftKeyboard',
+        9,
+        'sha256:b30795d80dbe254f4e9c948d7cb48d343af06663ca1574e18a0ba9a23e6d8a3e',
+        'reviewed escape-free soft keyboard',
+      ],
+    ] as const) {
+      expect(twentyFourthHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -6787,6 +6888,21 @@ describe('typed struct analysis', () => {
       expect(nominalIdentity).toBe(null);
     }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#CapacitorApi', true, [], [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#CapacitorDeviceInfo', true, [], [], null],
+      ['@flighthq/types:interface#ElectronDisplay', false, ['dynamic-ingress'], [], null],
+      ['@flighthq/types:interface#ElectronRectangle', true, [], [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#SoftKeyboard', true, [], [], { blockerReasons: [], closed: true }],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
+      else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+    }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
         true,
@@ -8021,6 +8137,28 @@ describe('typed struct analysis', () => {
       '_Runtime.field(node,',
     );
     expect(readFileSync('generated/flighthq/layout/GridLayout.hx', 'utf8')).not.toContain('final __structural');
+    for (const path of [
+      'generated/flighthq/hostCapacitor/CapacitorApp.hx',
+      'generated/flighthq/hostCapacitor/CapacitorClipboard.hx',
+      'generated/flighthq/hostCapacitor/CapacitorConnectivity.hx',
+      'generated/flighthq/hostCapacitor/CapacitorDevice.hx',
+      'generated/flighthq/hostCapacitor/CapacitorDialog.hx',
+      'generated/flighthq/hostCapacitor/CapacitorFileSystem.hx',
+      'generated/flighthq/hostCapacitor/CapacitorGeolocation.hx',
+      'generated/flighthq/hostCapacitor/CapacitorHaptics.hx',
+      'generated/flighthq/hostCapacitor/CapacitorKeyboard.hx',
+      'generated/flighthq/hostCapacitor/CapacitorNotification.hx',
+      'generated/flighthq/hostCapacitor/CapacitorShare.hx',
+      'generated/flighthq/hostCapacitor/CapacitorStatusBar.hx',
+      'generated/flighthq/hostElectron/ElectronScreen.hx',
+      'generated/flighthq/hostElectron/ElectronTray.hx',
+      'generated/flighthq/hostElectron/ElectronWindow.hx',
+      'generated/flighthq/keyboard/Keyboard.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:CapacitorApi|CapacitorDeviceInfo|ElectronDisplay|ElectronRectangle|SoftKeyboard)\)\./u,
+      );
+    }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
     expect(generatedCanvasRenderState).not.toMatch(
       /\(cast (?:runtime|sourceRuntime|targetRuntime) : CanvasRenderStateRuntime\)\./u,

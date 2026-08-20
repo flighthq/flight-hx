@@ -24,7 +24,7 @@ class CapacitorKeyboard {
     var keyboard:CapacitorKeyboardPlugin = cast _Runtime.UNDEFINED;
     var mirrorVisible:Bool = cast _Runtime.UNDEFINED;
     var mirrorHeight:Float = cast _Runtime.UNDEFINED;
-    keyboard = (cast capacitor : CapacitorApi).keyboard;
+    keyboard = capacitor.keyboard;
     mirrorVisible = false;
     mirrorHeight = 0.0;
     flighthq._internal._Async.recover((cast keyboard : CapacitorKeyboardPlugin).addListener((cast 'keyboardWillShow' : String), ({ final __callArgument1:Dynamic = function(info:{ var keyboardHeight:Float; }):Void {

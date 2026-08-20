@@ -15,7 +15,7 @@ class CapacitorConnectivity {
   public static function createCapacitorConnectivityBackend(capacitor:CapacitorApi):ConnectivityBackend {
     var network:CapacitorNetworkPlugin = cast _Runtime.UNDEFINED;
     var mirror:CapacitorConnectionStatus = cast _Runtime.UNDEFINED;
-    network = (cast capacitor : CapacitorApi).network;
+    network = capacitor.network;
     mirror = (cast { connected: false, connectionType: 'unknown' });
     flighthq._internal._Async.recover(_Runtime.callProperty((cast network : CapacitorNetworkPlugin).getStatus(), 'then', cast ([function(status:CapacitorConnectionStatus):Void {
       (mirror = cast (status : Dynamic));

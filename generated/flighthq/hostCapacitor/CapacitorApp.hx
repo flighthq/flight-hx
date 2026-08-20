@@ -15,7 +15,7 @@ class CapacitorApp {
     var app:CapacitorAppPlugin = cast _Runtime.UNDEFINED;
     var cachedName:String = cast _Runtime.UNDEFINED;
     var cachedVersion:String = cast _Runtime.UNDEFINED;
-    app = (cast capacitor : CapacitorApi).app;
+    app = capacitor.app;
     cachedName = '';
     cachedVersion = '';
     flighthq._internal._Async.recover(_Runtime.callProperty((cast app : CapacitorAppPlugin).getInfo(), 'then', cast ([function(info:CapacitorAppInfo):Void {
