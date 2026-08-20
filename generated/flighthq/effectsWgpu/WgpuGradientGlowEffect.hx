@@ -68,7 +68,7 @@ class WgpuGradientGlowEffect {
 
     }, cast ([] : Array<Dynamic>)); }; __callArgument20; }));
     pass = (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).beginPass(({ final __callArgument21:Dynamic = s0; __callArgument21; }), (cast 'load' : String));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline((cast pipeline : WgpuEffectPipeline).pipeline);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(pipeline.pipeline);
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).uniformBG, cast ([slotOffset] : Array<Dynamic>));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, blurredBG);
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, rampBG);

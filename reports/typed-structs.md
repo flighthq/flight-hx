@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1321 |
-| Direct schemas | 683 |
+| Audit-only schemas | 1316 |
+| Direct schemas | 688 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 6577 |
-| Directly emitted accesses | 24089 |
+| Pending accesses | 6529 |
+| Directly emitted accesses | 24137 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1321 |
+| Newly discovered, audit-only | 1316 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -1983,14 +1983,14 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuDebugPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#WgpuDualSourceEffectPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#WgpuEffectBlendMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:type#WgpuEffectPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 9 | 0 | 1 | 10 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#WgpuEffectPipeline` | `direct` | `new` | — | reviewed escape-free WebGPU effect pipeline | 4 | 9 | 0 | 1 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuFullscreenPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuMatcapDefineKey` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuMatcapPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuMaterialBinding` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 28 | 7 | 0 | 35 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#WgpuMaterialRenderer` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 2 | 0 | 0 | 2 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#WgpuMeshMaterialRenderer` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
-| `@flighthq/types:interface#WgpuMeshPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuMeshPipeline` | `direct` | `new` | — | reviewed escape-free WebGPU mesh pipeline | 6 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuMeshUpload` | `direct` | `new` | — | reviewed escape-free WebGPU mesh upload | 6 | 14 | 0 | 0 | 0 | 14 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuModifierCompileContext` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 8 | 0 | 0 | 8 | 0 | 0 | 5 | yes | — |
 | `@flighthq/types:interface#WgpuModifierContribution` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
@@ -2002,7 +2002,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuRenderEffectContext` | `direct` | `new` | — | reviewed escape-free WebGPU render-effect context | 6 | 147 | 0 | 0 | 0 | 147 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderEffectPipeline` | `direct` | `new` | — | reviewed escape-free WebGPU render-effect pipeline | 6 | 24 | 3 | 0 | 0 | 27 | 0 | 0 | yes | — |
 | `@flighthq/types:type#WgpuRenderEffectRunner` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#WgpuRenderOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuRenderOptions` | `direct` | `new` | — | reviewed escape-free WebGPU render options | 8 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 17 | 277 | 8 | 4 | 289 | 0 | 0 | 6 | yes | — |
 | `@flighthq/types:interface#WgpuRenderStateRuntime` | `direct` | `new` | — | reviewed escape-free WebGPU render-state runtime | 100 | 404 | 318 | 8 | 0 | 730 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderStateSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -2015,7 +2015,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuRenderTexturePool` | `direct` | `new` | — | reviewed escape-free WebGPU render-texture pool | 5 | 15 | 2 | 0 | 0 | 17 | 0 | 0 | yes | — |
 | `@flighthq/types:type#WgpuRenderTextureStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#WgpuRichTextOverlay` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#WgpuSavedPassState` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuSavedPassState` | `direct` | `new` | — | reviewed escape-free WebGPU saved pass state | 7 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DDrawEntry` | `direct` | `new` | — | reviewed escape-free WebGPU Scene3D draw entry | 10 | 2 | 10 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DForwardLightList` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 1 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DFrameBinding` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
@@ -2032,7 +2032,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuSkinningAdapter` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 2 | 0 | 0 | 2 | 0 | 0 | 11 | yes | — |
 | `@flighthq/types:interface#WgpuTextureEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 22 | 2 | 0 | 24 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#WgpuTextureResolver` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#WgpuTextureSourceTextureEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 4 | 7 | 0 | 11 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuTextureSourceTextureEntry` | `direct` | `new` | — | reviewed escape-free WebGPU texture-source entry | 7 | 4 | 7 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuToonDefineKey` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuToonPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuUnlitDefineKey` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |

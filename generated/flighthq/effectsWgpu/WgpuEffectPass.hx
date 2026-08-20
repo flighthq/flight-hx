@@ -118,13 +118,13 @@ class WgpuEffectPass {
     var variant:Null<flighthq._internal.dom.GPURenderPipeline> = cast _Runtime.UNDEFINED;
     canvasFormat = (cast (cast WgpuEffectPass.getOrCreateEffectPassState__wgpuEffectPass(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuEffectPassState__wgpuEffectPass) : WgpuEffectPassState__wgpuEffectPass).format;
     targetFormat = ((cast !_Runtime.strictEquals(dest, null) : Bool) ? (cast (cast dest : { var format:String; }).format : Dynamic) : (cast canvasFormat : Dynamic));
-    if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(pipeline, 'compileForFormat'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(pipeline, 'variants'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast _Runtime.strictEquals(targetFormat, canvasFormat) : Bool)) : Bool)) {
-      return cast _Runtime.field(pipeline, 'pipeline');
+    if ((cast ((cast ((cast _Runtime.strictEquals(pipeline.compileForFormat, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(pipeline.variants, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast _Runtime.strictEquals(targetFormat, canvasFormat) : Bool)) : Bool)) {
+      return cast pipeline.pipeline;
     }
-    variant = ((cast _Runtime.field(pipeline, 'variants') : flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>).get(targetFormat));
+    variant = ((cast pipeline.variants : flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>).get(targetFormat));
     if ((cast _Runtime.strictEquals(variant, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (variant = cast (_Runtime.callProperty(pipeline, 'compileForFormat', cast ([targetFormat] : Array<Dynamic>)) : Dynamic));
-      ((cast _Runtime.field(pipeline, 'variants') : flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>).set(targetFormat, (cast variant)));
+      (variant = cast ((pipeline.compileForFormat)((cast targetFormat : String)) : Dynamic));
+      ((cast pipeline.variants : flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>).set(targetFormat, (cast variant)));
     }
     return cast variant;
     return cast null;

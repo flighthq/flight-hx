@@ -74,7 +74,7 @@ class WgpuTextLabel {
     if ((cast _Runtime.strictEquals(textLabelData, null) : Bool)) { return; }
     entry = ((cast runtime.textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, WgpuTextureSourceTextureEntry>).get((cast textLabelData : WgpuTextLabelData__wgpuTextLabel).image));
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (cast (cast entry : WgpuTextureSourceTextureEntry).texture : flighthq._internal.dom.GPUTexture).destroy();
+      (cast (cast entry : { var texture:flighthq._internal.dom.GPUTexture; }).texture : flighthq._internal.dom.GPUTexture).destroy();
       ((cast runtime.textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, WgpuTextureSourceTextureEntry>).delete_((cast textLabelData : WgpuTextLabelData__wgpuTextLabel).image));
     }
   }

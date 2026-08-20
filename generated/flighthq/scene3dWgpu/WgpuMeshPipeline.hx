@@ -82,14 +82,14 @@ class WgpuMeshPipeline {
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuScene3DRuntime);
     (scene.activeMeshPipeline = cast (pipeline : Null<flighthq.types.WgpuMeshPipeline>));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(pipeline, 'pipeline'));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(pipeline.pipeline);
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, scene.frameBindGroup);
-    if ((cast _Runtime.field(pipeline, 'hasPbrSampleGroup') : Bool)) {
+    if ((cast pipeline.hasPbrSampleGroup : Bool)) {
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(3.0, (cast ensureWgpuPbrSampleBindGroup(({ final __callArgument2:Dynamic = state; __callArgument2; })) : flighthq._internal.dom.GPUBindGroup));
-    } else { if ((cast _Runtime.field(pipeline, 'hasShadowGroup') : Bool)) {
+    } else { if ((cast pipeline.hasShadowGroup : Bool)) {
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(3.0, (cast ensureWgpuShadowSampleBindGroup(({ final __callArgument3:Dynamic = state; __callArgument3; })) : flighthq._internal.dom.GPUBindGroup));
     } }
-    if ((cast _Runtime.field(pipeline, 'hasIblGroup') : Bool)) {
+    if ((cast pipeline.hasIblGroup : Bool)) {
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(4.0, (cast ensureWgpuIblSampleBindGroup(({ final __callArgument4:Dynamic = state; __callArgument4; })) : flighthq._internal.dom.GPUBindGroup));
     }
   }
@@ -187,13 +187,13 @@ class WgpuMeshPipeline {
     if ((cast ((cast _Runtime.strictEquals(pass, null) : Bool) || (cast _Runtime.strictEquals(scene.activeMeshPipeline, null) : Bool)) : Bool)) { return; }
     subset = proxy.subset;
     if ((cast _Runtime.strictEquals(subset.indexCount, 0.0) : Bool)) { return; }
-    upload = (cast ensureWgpuMeshUpload(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = geometry; __callArgument12; }), (cast (cast scene.activeMeshPipeline : flighthq.types.WgpuMeshPipeline).skinned : Bool)) : Null<WgpuMeshUpload>);
+    upload = (cast ensureWgpuMeshUpload(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = geometry; __callArgument12; }), (cast (cast scene.activeMeshPipeline : { var skinned:Bool; }).skinned : Bool)) : Null<WgpuMeshUpload>);
     if ((cast ((cast _Runtime.strictEquals(upload, null) : Bool) || (cast _Runtime.strictEquals((cast upload : { var indexBuffer:Null<flighthq._internal.dom.GPUBuffer>; }).indexBuffer, null) : Bool)) : Bool)) { return; }
     drawBindGroup = (cast writeWgpuDrawUniform(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = proxy; __callArgument14; })) : flighthq._internal.dom.GPUBindGroup);
     activePipeline = scene.activeMeshPipeline;
     jointMatrices = _Runtime.coalesce(proxy.jointMatrices, function():Dynamic return cast null);
     skinning = (cast scene.skinningAdapter : Null<WgpuSkinningAdapter>);
-    boundDrawGroup = ((cast ((cast ((cast (cast activePipeline : flighthq.types.WgpuMeshPipeline).skinned : Bool) && (cast !_Runtime.strictEquals(jointMatrices, null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(skinning, null) : Bool)) : Bool) ? (cast (cast skinning : WgpuSkinningAdapter).getDrawBindGroup(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = jointMatrices; __callArgument16; })) : Dynamic) : (cast drawBindGroup : Dynamic));
+    boundDrawGroup = ((cast ((cast ((cast activePipeline.skinned : Bool) && (cast !_Runtime.strictEquals(jointMatrices, null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(skinning, null) : Bool)) : Bool) ? (cast (cast skinning : WgpuSkinningAdapter).getDrawBindGroup(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = jointMatrices; __callArgument16; })) : Dynamic) : (cast drawBindGroup : Dynamic));
     flighthq._internal._StaticIndex.writeUint32ArrayTyped((cast WgpuMeshPipeline._dynamicOffsets__wgpuMeshPipeline : flighthq._internal._UInt32Array), (cast 0.0 : Float), (cast scene.pendingDrawOffset : Float));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, boundDrawGroup, WgpuMeshPipeline._dynamicOffsets__wgpuMeshPipeline);
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, (cast upload : { var vertexBuffer:flighthq._internal.dom.GPUBuffer; }).vertexBuffer);

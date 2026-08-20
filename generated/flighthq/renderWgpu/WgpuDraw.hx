@@ -73,18 +73,18 @@ class WgpuDraw {
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : WgpuRenderStateRuntime);
     cache = ((cast premultiply : Bool) ? (cast ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast runtime.textureSourcePremultipliedSrgbTextureCache : Dynamic) : (cast runtime.textureSourcePremultipliedTextureCache : Dynamic)) : Dynamic) : (cast ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast runtime.textureSourceStraightSrgbTextureCache : Dynamic) : (cast runtime.textureSourceStraightTextureCache : Dynamic)) : Dynamic));
     cached = ((cast cache : flighthq._internal._WeakMap<TextureSource, WgpuTextureSourceTextureEntry>).get(image));
-    if ((cast ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast cached : WgpuTextureSourceTextureEntry).version, image.version) : Bool)) : Bool)) { return cast cached; }
+    if ((cast ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast cached : { var version:Float; }).version, image.version) : Bool)) : Bool)) { return cast cached; }
     built = (cast upload(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = image; __callArgument12; }), (cast generateMips : Bool), (cast premultiply : Bool), ({ final __callArgument13:Dynamic = colorSpace; __callArgument13; })) : Null<WgpuTextureEntry>);
     if ((cast _Runtime.strictEquals(built, null) : Bool)) { return cast _Runtime.coalesce(cached, function():Dynamic return cast null); }
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (cast (cast cached : WgpuTextureSourceTextureEntry).texture : flighthq._internal.dom.GPUTexture).destroy();
-      ((cast cached : WgpuTextureSourceTextureEntry).texture = (cast built : WgpuTextureEntry).texture);
-      ((cast cached : WgpuTextureSourceTextureEntry).view = (cast built : WgpuTextureEntry).view);
-      ((cast cached : WgpuTextureSourceTextureEntry).bindGroup = (cast built : WgpuTextureEntry).bindGroup);
-      ((cast cached : WgpuTextureSourceTextureEntry).bindGroupLinear = _Runtime.field(_Runtime, 'UNDEFINED'));
-      ((cast cached : WgpuTextureSourceTextureEntry).bindGroupNearest = _Runtime.field(_Runtime, 'UNDEFINED'));
-      ((cast cached : WgpuTextureSourceTextureEntry).straightAlpha = (cast built : WgpuTextureEntry).straightAlpha);
-      ((cast cached : WgpuTextureSourceTextureEntry).version = image.version);
+      (cast (cast cached : { var texture:flighthq._internal.dom.GPUTexture; }).texture : flighthq._internal.dom.GPUTexture).destroy();
+      ((cast cached : { var texture:flighthq._internal.dom.GPUTexture; }).texture = cast ((cast built : WgpuTextureEntry).texture : flighthq._internal.dom.GPUTexture));
+      ((cast cached : { var view:flighthq._internal.dom.GPUTextureView; }).view = cast ((cast built : WgpuTextureEntry).view : flighthq._internal.dom.GPUTextureView));
+      ((cast cached : { var bindGroup:flighthq._internal.dom.GPUBindGroup; }).bindGroup = cast ((cast built : WgpuTextureEntry).bindGroup : flighthq._internal.dom.GPUBindGroup));
+      ((cast cached : { @:optional var bindGroupLinear:Null<flighthq._internal.dom.GPUBindGroup>; }).bindGroupLinear = cast (_Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal.dom.GPUBindGroup>));
+      ((cast cached : { @:optional var bindGroupNearest:Null<flighthq._internal.dom.GPUBindGroup>; }).bindGroupNearest = cast (_Runtime.field(_Runtime, 'UNDEFINED') : Null<flighthq._internal.dom.GPUBindGroup>));
+      ((cast cached : { @:optional var straightAlpha:Null<Bool>; }).straightAlpha = cast ((cast built : WgpuTextureEntry).straightAlpha : Null<Bool>));
+      ((cast cached : { var version:Float; }).version = cast (image.version : Float));
       return cast cached;
     }
     entry = (cast _Runtime.mergeObjects([built, { version: image.version }]));

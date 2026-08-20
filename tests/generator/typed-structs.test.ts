@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_321,
+      newAuditOnly: 1_316,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(685);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(690);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_321);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_316);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(283);
+    expect(newDirect).toHaveLength(288);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1525,6 +1525,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'Light',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free light',
+        }),
+        expect.objectContaining({
+          name: 'WgpuTextureSourceTextureEntry',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGPU texture-source entry',
+        }),
+        expect.objectContaining({
+          name: 'WgpuEffectPipeline',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGPU effect pipeline',
+        }),
+        expect.objectContaining({
+          name: 'WgpuMeshPipeline',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGPU mesh pipeline',
+        }),
+        expect.objectContaining({
+          name: 'WgpuRenderOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGPU render options',
+        }),
+        expect.objectContaining({
+          name: 'WgpuSavedPassState',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGPU saved pass state',
         }),
       ]),
     );
@@ -2944,6 +2969,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#Light',
         purpose: 'reviewed escape-free light',
       },
+      {
+        declarationFingerprint: 'sha256:89b8cf222fe23605091e257b356350a8d4bf1de8cd89062a08a65cc99128f75a',
+        id: '@flighthq/types:interface#WgpuTextureSourceTextureEntry',
+        purpose: 'reviewed escape-free WebGPU texture-source entry',
+      },
+      {
+        declarationFingerprint: 'sha256:0def27f503d792f5c38b473b5e9fbcfc235b9945fc28b8b0a2b972ab472f6d4c',
+        id: '@flighthq/types:type#WgpuEffectPipeline',
+        purpose: 'reviewed escape-free WebGPU effect pipeline',
+      },
+      {
+        declarationFingerprint: 'sha256:5457497ed09b0fa23e64aa05dce5b60933f498139db0fc6470ba4f0e29804d8d',
+        id: '@flighthq/types:interface#WgpuMeshPipeline',
+        purpose: 'reviewed escape-free WebGPU mesh pipeline',
+      },
+      {
+        declarationFingerprint: 'sha256:cfc1746d136ddf34026e1c7e71cf59ee94dfc90edf8e66824bacfcdd8682dac6',
+        id: '@flighthq/types:interface#WgpuRenderOptions',
+        purpose: 'reviewed escape-free WebGPU render options',
+      },
+      {
+        declarationFingerprint: 'sha256:22df7e6d3385e1e076ae9715044784097c49ec0109050e4f7f8424f0fb7c93a1',
+        id: '@flighthq/types:interface#WgpuSavedPassState',
+        purpose: 'reviewed escape-free WebGPU saved pass state',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -3890,6 +3940,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const thirtiethHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'WgpuEffectPipeline',
+            'WgpuMeshPipeline',
+            'WgpuRenderOptions',
+            'WgpuSavedPassState',
+            'WgpuTextureSourceTextureEntry',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -3930,22 +3993,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_321,
+      auditOnlySchemas: 1_316,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 24_089,
-      directSchemas: 683,
+      directAccesses: 24_137,
+      directSchemas: 688,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 6_577,
+      pendingAccesses: 6_529,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_321,
+      newAuditOnly: 1_316,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -4022,7 +4085,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(24_089);
+    expect(report.summary.directAccesses).toBe(24_137);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -5496,6 +5559,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(twentyNinthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'WgpuTextureSourceTextureEntry',
+        11,
+        'sha256:89b8cf222fe23605091e257b356350a8d4bf1de8cd89062a08a65cc99128f75a',
+        'reviewed escape-free WebGPU texture-source entry',
+      ],
+      [
+        'WgpuEffectPipeline',
+        10,
+        'sha256:0def27f503d792f5c38b473b5e9fbcfc235b9945fc28b8b0a2b972ab472f6d4c',
+        'reviewed escape-free WebGPU effect pipeline',
+      ],
+      [
+        'WgpuMeshPipeline',
+        9,
+        'sha256:5457497ed09b0fa23e64aa05dce5b60933f498139db0fc6470ba4f0e29804d8d',
+        'reviewed escape-free WebGPU mesh pipeline',
+      ],
+      [
+        'WgpuRenderOptions',
+        9,
+        'sha256:cfc1746d136ddf34026e1c7e71cf59ee94dfc90edf8e66824bacfcdd8682dac6',
+        'reviewed escape-free WebGPU render options',
+      ],
+      [
+        'WgpuSavedPassState',
+        9,
+        'sha256:22df7e6d3385e1e076ae9715044784097c49ec0109050e4f7f8424f0fb7c93a1',
+        'reviewed escape-free WebGPU saved pass state',
+      ],
+    ] as const) {
+      expect(thirtiethHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -7504,6 +7609,20 @@ describe('typed struct analysis', () => {
       });
       expect(provenanceById.has(frontierId)).toBe(false);
     }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons] of [
+      ['@flighthq/types:interface#WgpuTextureSourceTextureEntry', false, ['object-literal-spread'], []],
+      ['@flighthq/types:type#WgpuEffectPipeline', true, [], ['optional-omission']],
+      ['@flighthq/types:interface#WgpuMeshPipeline', false, ['cross-schema-transfer'], []],
+      ['@flighthq/types:interface#WgpuRenderOptions', true, [], ['optional-omission']],
+      ['@flighthq/types:interface#WgpuSavedPassState', true, [], []],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      expect(provenanceById.has(frontierId)).toBe(false);
+    }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
@@ -8823,6 +8942,23 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AreaLightOptions|DirectionalLightOptions|Light|PointLightOptions|SpotLightOptions)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/effectsWgpu/WgpuColorLutPass.hx',
+      'generated/flighthq/effectsWgpu/WgpuEffectPass.hx',
+      'generated/flighthq/effectsWgpu/WgpuGradientBevelEffect.hx',
+      'generated/flighthq/effectsWgpu/WgpuGradientGlowEffect.hx',
+      'generated/flighthq/renderWgpu/WgpuDraw.hx',
+      'generated/flighthq/renderWgpu/WgpuRenderState.hx',
+      'generated/flighthq/renderWgpu/WgpuRenderTarget.hx',
+      'generated/flighthq/scene2dWgpu/WgpuShapeData.hx',
+      'generated/flighthq/scene2dWgpu/WgpuTextLabel.hx',
+      'generated/flighthq/scene3dWgpu/WgpuMeshPipeline.hx',
+      'generated/flighthq/scene3dWgpu/WgpuShadedPrelude.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:WgpuEffectPipeline|WgpuMeshPipeline|WgpuRenderOptions|WgpuSavedPassState|WgpuTextureSourceTextureEntry)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');

@@ -1443,6 +1443,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#Light',
     purpose: 'reviewed escape-free light',
   },
+  {
+    declarationFingerprint: 'sha256:89b8cf222fe23605091e257b356350a8d4bf1de8cd89062a08a65cc99128f75a',
+    id: '@flighthq/types:interface#WgpuTextureSourceTextureEntry',
+    purpose: 'reviewed escape-free WebGPU texture-source entry',
+  },
+  {
+    declarationFingerprint: 'sha256:0def27f503d792f5c38b473b5e9fbcfc235b9945fc28b8b0a2b972ab472f6d4c',
+    id: '@flighthq/types:type#WgpuEffectPipeline',
+    purpose: 'reviewed escape-free WebGPU effect pipeline',
+  },
+  {
+    declarationFingerprint: 'sha256:5457497ed09b0fa23e64aa05dce5b60933f498139db0fc6470ba4f0e29804d8d',
+    id: '@flighthq/types:interface#WgpuMeshPipeline',
+    purpose: 'reviewed escape-free WebGPU mesh pipeline',
+  },
+  {
+    declarationFingerprint: 'sha256:cfc1746d136ddf34026e1c7e71cf59ee94dfc90edf8e66824bacfcdd8682dac6',
+    id: '@flighthq/types:interface#WgpuRenderOptions',
+    purpose: 'reviewed escape-free WebGPU render options',
+  },
+  {
+    declarationFingerprint: 'sha256:22df7e6d3385e1e076ae9715044784097c49ec0109050e4f7f8424f0fb7c93a1',
+    id: '@flighthq/types:interface#WgpuSavedPassState',
+    purpose: 'reviewed escape-free WebGPU saved pass state',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

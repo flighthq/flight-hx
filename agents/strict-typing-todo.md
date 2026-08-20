@@ -5,14 +5,14 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,536 public schemas are semantically eligible for typed structural lowering.
-- 683 schemas currently emit direct fields, covering 24,089 accesses.
-- 853 eligible schemas remain audit-only, covering 6,577 pending accesses.
-- 596 audit-only schemas have no recorded escape, covering 1,823 pending accesses.
+- 688 schemas currently emit direct fields, covering 24,137 accesses.
+- 848 eligible schemas remain audit-only, covering 6,529 pending accesses.
+- 591 audit-only schemas have no recorded escape, covering 1,775 pending accesses.
 - Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
 - Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
 - The cpp provenance audit has 551 closed nominal-identity candidates; only `Camera2D` and `ParticleEmitterState` are enabled.
-- Generated `Dynamic` occurrences fell from 49,168 to 46,949 across checker-derived typed-struct assignments and the reviewed escape-free tranches.
+- Generated `Dynamic` occurrences fell from 49,168 to 46,946 across checker-derived typed-struct assignments and the reviewed escape-free tranches.
 
 ## 1. Closed mapped aliases
 
@@ -87,6 +87,7 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Promote the twenty-seventh high-access zero-escape frontier: `CanvasRenderTargetPool`, `ColorLutCache`, `GlShapeMeshBinding`, `GlVelocityContext`, and `WgpuVelocityContext`. Their 55 accesses now emit directly across nine generated modules. Cross-schema transfer keeps the Canvas render-target pool structural; the provenance-closed color LUT cache, WebGL shape-mesh binding, and WebGL/WebGPU velocity contexts remain structural pending separate cpp review. The tranche removes 31 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote the twenty-eighth high-access zero-escape frontier: `AbcFile`, `AbcConstantPool`, `LottieTransform`, `LottieDashEntry`, and `LottieTextDocument`. Their 50 accesses now emit directly across two generated modules. Anonymous structural transfer keeps the two ABC records structural, cross-schema transfer keeps the Lottie transform structural, and the dash entry and text document have no closed construction provenance. The tranche removes 27 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote the twenty-ninth high-access zero-escape frontier: `AreaLightOptions`, `SpotLightOptions`, `PointLightOptions`, `DirectionalLightOptions`, and `Light`. Their 45 accesses now emit directly across six generated modules. Optional omission keeps three option records structural, the area-light options have no closed construction provenance, and cross-schema transfer keeps `Light` structural. The tranche removes three `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
+- [x] Promote the thirtieth high-access zero-escape frontier: `WgpuTextureSourceTextureEntry`, `WgpuEffectPipeline`, `WgpuMeshPipeline`, `WgpuRenderOptions`, and `WgpuSavedPassState`. Their 48 accesses now emit directly across 11 generated modules. Object-literal spread keeps the texture-source entry structural, optional omission keeps the effect pipeline and render options structural, cross-schema transfer keeps the mesh pipeline structural, and the saved pass state has no closed construction provenance. The tranche removes 12 `_Runtime.field` calls and one generated `Dynamic`; generated `Reflect` and type-erasure debt remain unchanged.
 - [ ] Review the next cohesive five-row zero-escape tranche from the refreshed audit, preserving exact fingerprint, provenance, Haxe, portability, and affected-parity gates.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 
