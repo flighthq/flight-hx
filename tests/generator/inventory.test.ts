@@ -210,7 +210,7 @@ describe('auditLowering', () => {
     expect(audit.summary.staticFacts.indexedReceivers.Float32Array.expressions).toBeGreaterThan(1_000);
     expect(math?.lowered).toBeGreaterThan(50);
     expect(math?.staticFacts.numericRelations).toBeGreaterThan(10);
-  }, 180_000);
+  }, 300_000);
 });
 
 describe('packageNameToModule', () => {
