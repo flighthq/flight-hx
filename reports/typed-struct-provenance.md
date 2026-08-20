@@ -202,7 +202,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#FileWatchEvent` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#FlowStack` | 0 | 1 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#FocusEventData` | 0 | 3 | 0 | 6 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#FocusManager` | 0 | 3 | 0 | 4 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#FocusManager` | 10 | 3 | 0 | 4 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#FontResource` | 9 | 2 | 1 | 0 | 0 | 0 | 3 | 3 | yes | — |
 | `@flighthq/types:interface#FontVariation` | 0 | 2 | 2 | 0 | 6 | 0 | 15 | 14 | no | `normalization-provenance` |
 | `@flighthq/types:interface#FontVariationAxis` | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -486,7 +486,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#ScreenChangeEvent` | 4 | 3 | 0 | 2 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ScreenMode` | 10 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#ScreenSignals` | 3 | 3 | 0 | 3 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#SelectableRichTextManager` | 0 | 1 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#SelectableRichTextManager` | 9 | 1 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SensorReading` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Sensors` | 11 | 11 | 0 | 11 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SensorsBackend` | 0 | 21 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
@@ -596,8 +596,8 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#TextFieldScrollEvent` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextFieldSignals` | 0 | 3 | 1 | 3 | 1 | 0 | 1 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#TextInputEditRecord` | 0 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TextInputHistoryEntry` | 0 | 7 | 1 | 0 | 1 | 0 | 1 | 2 | no | `normalization-provenance` |
-| `@flighthq/types:interface#TextInputManager` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#TextInputHistoryEntry` | 10 | 7 | 1 | 0 | 1 | 0 | 1 | 2 | no | `normalization-provenance` |
+| `@flighthq/types:interface#TextInputManager` | 9 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#TextInputSource` | 0 | 2 | 0 | 2 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#TextInputState` | 100 | 15 | 1 | 1 | 1 | 0 | 1 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#TextItem` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |

@@ -38,8 +38,8 @@ class TextSegmentBoundary {
     lookup = ((cast _Runtime.strictEquals(clamped, _Runtime.field(text, 'length')) : Bool) ? (cast _Runtime.subtractNumbers(_Runtime.field(text, 'length'), 1.0) : Dynamic) : (cast clamped : Dynamic));
     segments = (cast segmentWords((cast text : String), ({ final __callArgument4:Dynamic = locale; __callArgument4; })) : Array<TextSegment>);
     for (segment in _Runtime.iterable(segments)) {
-      if ((cast ((cast ((cast lookup : Float) >= (cast (cast segment : TextSegment).start : Float)) : Bool) && (cast ((cast lookup : Float) < (cast (cast segment : TextSegment).end : Float)) : Bool)) : Bool)) {
-        return cast ((cast _Runtime.strictEquals((cast segment : TextSegment).isWordLike, true) : Bool) ? (cast { start: (cast segment : TextSegment).start, end: (cast segment : TextSegment).end } : Dynamic) : (cast null : Dynamic));
+      if ((cast ((cast ((cast lookup : Float) >= (cast segment.start : Float)) : Bool) && (cast ((cast lookup : Float) < (cast segment.end : Float)) : Bool)) : Bool)) {
+        return cast ((cast _Runtime.strictEquals(segment.isWordLike, true) : Bool) ? (cast { start: segment.start, end: segment.end } : Dynamic) : (cast null : Dynamic));
       }
     }
     return cast null;
@@ -58,7 +58,7 @@ class TextSegmentBoundary {
     from = (cast TextSegmentBoundary.clampIndex__textSegmentBoundary((cast index : Float), (cast length : Float)) : Float);
     if ((cast ((cast from : Float) >= (cast length : Float)) : Bool)) { return cast length; }
     for (segment in _Runtime.iterable(segments)) {
-      if ((cast ((cast (cast segment : TextSegment).start : Float) > (cast from : Float)) : Bool)) { return cast (cast segment : TextSegment).start; }
+      if ((cast ((cast segment.start : Float) > (cast from : Float)) : Bool)) { return cast segment.start; }
     }
     return cast length;
     return cast null;
@@ -68,13 +68,13 @@ class TextSegmentBoundary {
     var length:Float = cast _Runtime.UNDEFINED;
     var from:Float = cast _Runtime.UNDEFINED;
     var previous:Float = cast _Runtime.UNDEFINED;
-    length = ((cast _Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast (cast flighthq._internal._StaticIndex.readArray(segments, _Runtime.subtractNumbers(_Runtime.field(segments, 'length'), 1.0)) : TextSegment).end : Dynamic));
+    length = ((cast _Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast (cast flighthq._internal._StaticIndex.readArray(segments, _Runtime.subtractNumbers(_Runtime.field(segments, 'length'), 1.0)) : { var end:Float; }).end : Dynamic));
     from = (cast TextSegmentBoundary.clampIndex__textSegmentBoundary((cast index : Float), (cast length : Float)) : Float);
     if ((cast ((cast from : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
     previous = 0.0;
     for (segment in _Runtime.iterable(segments)) {
-      if ((cast ((cast (cast segment : TextSegment).start : Float) >= (cast from : Float)) : Bool)) { break; }
-      (previous = cast ((cast segment : TextSegment).start : Dynamic));
+      if ((cast ((cast segment.start : Float) >= (cast from : Float)) : Bool)) { break; }
+      (previous = cast (segment.start : Dynamic));
     }
     return cast previous;
     return cast null;

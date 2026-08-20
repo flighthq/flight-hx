@@ -427,7 +427,7 @@ class TextInputEditing {
     if ((cast !(cast (cast canRedoTextInput(({ final __callArgument106:Dynamic = source; __callArgument106; })) : Bool) : Bool) : Bool)) { return; }
     state.historyIndex++;
     record = flighthq._internal._StaticIndex.readArray(state.history, state.historyIndex);
-    TextInputEditing.applyHistoryRecord__textInputEditing(({ final __callArgument107:Dynamic = source; __callArgument107; }), ({ final __callArgument108:Dynamic = state; __callArgument108; }), (cast (cast record : TextInputHistoryEntry).textAfter : String), (cast (cast record : TextInputHistoryEntry).caretIndexAfter : Float), (cast (cast record : TextInputHistoryEntry).selectionIndexAfter : Float));
+    TextInputEditing.applyHistoryRecord__textInputEditing(({ final __callArgument107:Dynamic = source; __callArgument107; }), ({ final __callArgument108:Dynamic = state; __callArgument108; }), (cast record.textAfter : String), (cast record.caretIndexAfter : Float), (cast record.selectionIndexAfter : Float));
   }
 
   public static function replaceSelectedTextInput(source:RichText, text:String, ?options:ReplaceTextInputOptions):Void {
@@ -572,7 +572,7 @@ class TextInputEditing {
     if ((cast !(cast (cast canUndoTextInput(({ final __callArgument137:Dynamic = source; __callArgument137; })) : Bool) : Bool) : Bool)) { return; }
     record = flighthq._internal._StaticIndex.readArray(state.history, state.historyIndex);
     state.historyIndex--;
-    TextInputEditing.applyHistoryRecord__textInputEditing(({ final __callArgument138:Dynamic = source; __callArgument138; }), ({ final __callArgument139:Dynamic = state; __callArgument139; }), (cast (cast record : TextInputHistoryEntry).textBefore : String), (cast (cast record : TextInputHistoryEntry).caretIndexBefore : Float), (cast (cast record : TextInputHistoryEntry).selectionIndexBefore : Float));
+    TextInputEditing.applyHistoryRecord__textInputEditing(({ final __callArgument138:Dynamic = source; __callArgument138; }), ({ final __callArgument139:Dynamic = state; __callArgument139; }), (cast record.textBefore : String), (cast record.caretIndexBefore : Float), (cast record.selectionIndexBefore : Float));
   }
 
   public static function adjustTextFormatRanges__textInputEditing(ranges:Array<TextFormatRange>, defaultFormat:flighthq._internal._IndexedAccess<RichTextData, String>, beginIndex:Float, endIndex:Float, insertLength:Float):Void {
@@ -777,10 +777,10 @@ class TextInputEditing {
       _Runtime.setLength(state.history, (state.historyIndex + 1.0));
     }
     previous = ((cast ((cast state.historyIndex : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(state.history, state.historyIndex) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
-    if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(mergeKind, null) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast previous : TextInputHistoryEntry).mergeKind, mergeKind) : Bool)) : Bool)) {
-      ((cast previous : TextInputHistoryEntry).textAfter = textAfter);
-      ((cast previous : TextInputHistoryEntry).caretIndexAfter = state.caretIndex);
-      ((cast previous : TextInputHistoryEntry).selectionIndexAfter = state.selectionIndex);
+    if ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(mergeKind, null) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast previous : { var mergeKind:Null<String>; }).mergeKind, mergeKind) : Bool)) : Bool)) {
+      ((cast previous : { var textAfter:String; }).textAfter = cast (textAfter : String));
+      ((cast previous : { var caretIndexAfter:Float; }).caretIndexAfter = cast (state.caretIndex : Float));
+      ((cast previous : { var selectionIndexAfter:Float; }).selectionIndexAfter = cast (state.selectionIndex : Float));
       return;
     }
     _Runtime.callProperty(state.history, 'push', cast ([{ caretIndexAfter: state.caretIndex, caretIndexBefore: caretIndexBefore, mergeKind: mergeKind, selectionIndexAfter: state.selectionIndex, selectionIndexBefore: selectionIndexBefore, textAfter: textAfter, textBefore: textBefore }] : Array<Dynamic>));

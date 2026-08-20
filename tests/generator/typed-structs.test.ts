@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_311,
+      newAuditOnly: 1_306,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(695);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(700);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_311);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_306);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(293);
+    expect(newDirect).toHaveLength(298);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1575,6 +1575,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'Skin',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free skin',
+        }),
+        expect.objectContaining({
+          name: 'TextSegment',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free text segment',
+        }),
+        expect.objectContaining({
+          name: 'TextInputHistoryEntry',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free text-input history entry',
+        }),
+        expect.objectContaining({
+          name: 'FocusManager',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free focus manager',
+        }),
+        expect.objectContaining({
+          name: 'SelectableRichTextManager',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free selectable rich-text manager',
+        }),
+        expect.objectContaining({
+          name: 'TextInputManager',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free text-input manager',
         }),
       ]),
     );
@@ -3044,6 +3069,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#Skin',
         purpose: 'reviewed escape-free skin',
       },
+      {
+        declarationFingerprint: 'sha256:9b243f874c904eab543ac8b4bf5d2d573d276fd43d61844e87ac58bb55bfba3c',
+        id: '@flighthq/types:interface#TextSegment',
+        purpose: 'reviewed escape-free text segment',
+      },
+      {
+        declarationFingerprint: 'sha256:a9ce5aa975796bb35e867912a36b63da2afa409d140e37ef526468868d688827',
+        id: '@flighthq/types:interface#TextInputHistoryEntry',
+        purpose: 'reviewed escape-free text-input history entry',
+      },
+      {
+        declarationFingerprint: 'sha256:9243635aa70272176f5cfbfa387824f2d148defb705b2d56775c35a40101d7bd',
+        id: '@flighthq/types:interface#FocusManager',
+        purpose: 'reviewed escape-free focus manager',
+      },
+      {
+        declarationFingerprint: 'sha256:6d058addff5ee1865dc3b94841d6a732b6c5a31f6b9474f0cb5900253ceebf44',
+        id: '@flighthq/types:interface#SelectableRichTextManager',
+        purpose: 'reviewed escape-free selectable rich-text manager',
+      },
+      {
+        declarationFingerprint: 'sha256:8cc504b6ffd314ebe6b2ee4b1fbaffd18de06d27d0633a503699869b5d8a3656',
+        id: '@flighthq/types:interface#TextInputManager',
+        purpose: 'reviewed escape-free text-input manager',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -4010,6 +4060,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const thirtySecondHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'FocusManager',
+            'SelectableRichTextManager',
+            'TextInputHistoryEntry',
+            'TextInputManager',
+            'TextSegment',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -4050,22 +4113,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_311,
+      auditOnlySchemas: 1_306,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 24_186,
-      directSchemas: 693,
+      directAccesses: 24_235,
+      directSchemas: 698,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 6_480,
+      pendingAccesses: 6_431,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_311,
+      newAuditOnly: 1_306,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -4142,7 +4205,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(24_186);
+    expect(report.summary.directAccesses).toBe(24_235);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -5700,6 +5763,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(thirtyFirstHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'TextSegment',
+        11,
+        'sha256:9b243f874c904eab543ac8b4bf5d2d573d276fd43d61844e87ac58bb55bfba3c',
+        'reviewed escape-free text segment',
+      ],
+      [
+        'TextInputHistoryEntry',
+        10,
+        'sha256:a9ce5aa975796bb35e867912a36b63da2afa409d140e37ef526468868d688827',
+        'reviewed escape-free text-input history entry',
+      ],
+      [
+        'FocusManager',
+        10,
+        'sha256:9243635aa70272176f5cfbfa387824f2d148defb705b2d56775c35a40101d7bd',
+        'reviewed escape-free focus manager',
+      ],
+      [
+        'SelectableRichTextManager',
+        9,
+        'sha256:6d058addff5ee1865dc3b94841d6a732b6c5a31f6b9474f0cb5900253ceebf44',
+        'reviewed escape-free selectable rich-text manager',
+      ],
+      [
+        'TextInputManager',
+        9,
+        'sha256:8cc504b6ffd314ebe6b2ee4b1fbaffd18de06d27d0633a503699869b5d8a3656',
+        'reviewed escape-free text-input manager',
+      ],
+    ] as const) {
+      expect(thirtySecondHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -7738,6 +7843,27 @@ describe('typed struct analysis', () => {
       else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
     }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#TextSegment', true, [], ['optional-omission'], null],
+      [
+        '@flighthq/types:interface#TextInputHistoryEntry',
+        true,
+        [],
+        [],
+        { blockerReasons: ['normalization-provenance'], closed: false },
+      ],
+      ['@flighthq/types:interface#FocusManager', true, [], [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#SelectableRichTextManager', true, [], [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#TextInputManager', true, [], [], { blockerReasons: [], closed: true }],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
+      else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+    }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
         true,
@@ -9094,6 +9220,18 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:GltfCamera|GltfPunctualLight|Scene3DDocumentScene|Skin|ThreeDsCamera)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/interaction/FocusManager.hx',
+      'generated/flighthq/textinput/SelectableRichTextManager.hx',
+      'generated/flighthq/textinput/TextInputEditing.hx',
+      'generated/flighthq/textinput/TextInputManager.hx',
+      'generated/flighthq/textsegment/TextSegmentBoundary.hx',
+      'generated/flighthq/textsegment/TextSegmenterBackend.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:FocusManager|SelectableRichTextManager|TextInputHistoryEntry|TextInputManager|TextSegment)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');

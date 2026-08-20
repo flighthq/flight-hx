@@ -23118,7 +23118,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 10,
       "fields": 3,
       "id": "@flighthq/types:interface#FocusManager",
       "name": "FocusManager",
@@ -43158,7 +43158,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 9,
       "fields": 1,
       "id": "@flighthq/types:interface#SelectableRichTextManager",
       "name": "SelectableRichTextManager",
@@ -49670,7 +49670,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 10,
       "fields": 7,
       "id": "@flighthq/types:interface#TextInputHistoryEntry",
       "name": "TextInputHistoryEntry",
@@ -49725,7 +49725,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 9,
       "fields": 2,
       "id": "@flighthq/types:interface#TextInputManager",
       "name": "TextInputManager",

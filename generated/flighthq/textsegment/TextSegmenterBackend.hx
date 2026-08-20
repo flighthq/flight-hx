@@ -61,7 +61,7 @@ class TextSegmenterBackend {
     for (data in _Runtime.iterable(_Runtime.callProperty(segmenter, 'segment', cast ([text] : Array<Dynamic>)))) {
       var start:Float = _Runtime.field(data, 'index');
       var record:TextSegment = (cast { start: start, end: _Runtime.addNumbers(start, _Runtime.field(_Runtime.field(data, 'segment'), 'length')), text: _Runtime.field(data, 'segment') });
-      if ((cast isWordGranularity : Bool)) { ((cast record : TextSegment).isWordLike = _Runtime.coalesce(_Runtime.field(data, 'isWordLike'), function():Dynamic return cast false)); }
+      if ((cast isWordGranularity : Bool)) { (record.isWordLike = cast (_Runtime.coalesce(_Runtime.field(data, 'isWordLike'), function():Dynamic return cast false) : Null<Bool>)); }
       _Runtime.callProperty(out, 'push', cast ([record] : Array<Dynamic>));
     }
     return cast out;

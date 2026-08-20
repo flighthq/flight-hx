@@ -29,9 +29,9 @@ import flighthq.types.TextLayout.TextLayoutResult;
 class TextInputManager {
   public static function blurTextInput(manager:flighthq.types.TextInputManager):Void {
     var target:Null<RichText> = cast _Runtime.UNDEFINED;
-    target = (cast manager : flighthq.types.TextInputManager).focused;
+    target = manager.focused;
     if ((cast !_Runtime.strictEquals(target, null) : Bool)) { TextInputManager.setTextInputFocused__textInputManager(({ final __callArgument0:Dynamic = target; __callArgument0; }), (cast false : Bool)); }
-    ((cast manager : flighthq.types.TextInputManager).focused = null);
+    (manager.focused = cast (null : Null<RichText>));
   }
 
   public static function connectInputToTextInput(input:TextInputSource, manager:flighthq.types.TextInputManager):Void->Void {
@@ -92,7 +92,7 @@ class TextInputManager {
     var target:Null<RichText> = cast _Runtime.UNDEFINED;
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
     var index:Float = cast _Runtime.UNDEFINED;
-    target = (cast manager : flighthq.types.TextInputManager).focused;
+    target = manager.focused;
     if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !(cast (cast target : { var enabled:Bool; }).enabled : Bool) : Bool)) : Bool)) { return; }
     layout = (cast (cast getRichTextRuntime(({ final __callArgument22:Dynamic = target; __callArgument22; })) : RichTextRuntime) : { var textLayout:Null<TextLayoutResult>; }).textLayout;
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return; }
@@ -102,24 +102,24 @@ class TextInputManager {
 
   public static function dispatchTextInputWheel(manager:flighthq.types.TextInputManager, deltaLines:Float):Void {
     var target:Null<RichText> = cast _Runtime.UNDEFINED;
-    target = (cast manager : flighthq.types.TextInputManager).focused;
+    target = manager.focused;
     if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !(cast (cast target : { var enabled:Bool; }).enabled : Bool) : Bool)) : Bool)) { return; }
     setRichTextScrollV(({ final __callArgument26:Dynamic = target; __callArgument26; }), (cast _Runtime.addNumbers((cast (cast target : { var data:RichTextData; }).data : { var scrollV:Float; }).scrollV, HxMath.round(deltaLines)) : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static function focusTextInput(manager:flighthq.types.TextInputManager, target:RichText):Void {
-    if ((cast !_Runtime.strictEquals((cast manager : flighthq.types.TextInputManager).focused, target) : Bool)) {
-      var previous:Null<RichText> = (cast manager : flighthq.types.TextInputManager).focused;
+    if ((cast !_Runtime.strictEquals(manager.focused, target) : Bool)) {
+      var previous:Null<RichText> = manager.focused;
       if ((cast !_Runtime.strictEquals(previous, null) : Bool)) { TextInputManager.setTextInputFocused__textInputManager(({ final __callArgument27:Dynamic = previous; __callArgument27; }), (cast false : Bool)); }
     }
-    ((cast manager : flighthq.types.TextInputManager).focused = target);
+    (manager.focused = cast (target : Null<RichText>));
     TextInputManager.setTextInputFocused__textInputManager(({ final __callArgument28:Dynamic = target; __callArgument28; }), (cast true : Bool));
   }
 
   public static function getTextInputFocusTarget__textInputManager(manager:flighthq.types.TextInputManager):Null<RichText> {
     var target:Null<RichText> = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast manager : flighthq.types.TextInputManager).enabled : Bool) : Bool)) { return cast null; }
-    target = (cast manager : flighthq.types.TextInputManager).focused;
+    if ((cast !(cast manager.enabled : Bool) : Bool)) { return cast null; }
+    target = manager.focused;
     if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !(cast (cast target : { var enabled:Bool; }).enabled : Bool) : Bool)) : Bool)) { return cast null; }
     return cast target;
     return cast null;

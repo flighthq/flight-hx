@@ -1493,6 +1493,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#Skin',
     purpose: 'reviewed escape-free skin',
   },
+  {
+    declarationFingerprint: 'sha256:9b243f874c904eab543ac8b4bf5d2d573d276fd43d61844e87ac58bb55bfba3c',
+    id: '@flighthq/types:interface#TextSegment',
+    purpose: 'reviewed escape-free text segment',
+  },
+  {
+    declarationFingerprint: 'sha256:a9ce5aa975796bb35e867912a36b63da2afa409d140e37ef526468868d688827',
+    id: '@flighthq/types:interface#TextInputHistoryEntry',
+    purpose: 'reviewed escape-free text-input history entry',
+  },
+  {
+    declarationFingerprint: 'sha256:9243635aa70272176f5cfbfa387824f2d148defb705b2d56775c35a40101d7bd',
+    id: '@flighthq/types:interface#FocusManager',
+    purpose: 'reviewed escape-free focus manager',
+  },
+  {
+    declarationFingerprint: 'sha256:6d058addff5ee1865dc3b94841d6a732b6c5a31f6b9474f0cb5900253ceebf44',
+    id: '@flighthq/types:interface#SelectableRichTextManager',
+    purpose: 'reviewed escape-free selectable rich-text manager',
+  },
+  {
+    declarationFingerprint: 'sha256:8cc504b6ffd314ebe6b2ee4b1fbaffd18de06d27d0633a503699869b5d8a3656',
+    id: '@flighthq/types:interface#TextInputManager',
+    purpose: 'reviewed escape-free text-input manager',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

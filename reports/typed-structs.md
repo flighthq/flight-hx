@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1311 |
-| Direct schemas | 693 |
+| Audit-only schemas | 1306 |
+| Direct schemas | 698 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 6480 |
-| Directly emitted accesses | 24186 |
+| Pending accesses | 6431 |
+| Directly emitted accesses | 24235 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1311 |
+| Newly discovered, audit-only | 1306 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -539,7 +539,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#FlyCameraControllerOptions` | `direct` | `new` | — | reviewed escape-free fly-camera controller options | 6 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:type#FocusDirection` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#FocusEventData` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 3 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#FocusManager` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 9 | 1 | 0 | 10 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#FocusManager` | `direct` | `new` | — | reviewed escape-free focus manager | 3 | 9 | 1 | 0 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#FocusManagerOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#FocusNavigationInput` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#FocusNavigationOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
@@ -1429,7 +1429,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#ScreenOrientation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#ScreenSignals` | `direct` | `preserved` | `@flighthq/types:interface#ScreenSignals` | broad host document | 3 | 3 | 0 | 0 | 0 | 3 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ScreenSpaceFogEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#SelectableRichTextManager` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 6 | 3 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SelectableRichTextManager` | `direct` | `new` | — | reviewed escape-free selectable rich-text manager | 1 | 6 | 3 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:type#SensorAccuracy` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#SensorReading` | `direct` | `preserved` | `@flighthq/types:interface#SensorReading` | broad host document | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Sensors` | `direct` | `preserved` | `@flighthq/types:interface#Sensors` | broad host document | 11 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
@@ -1718,8 +1718,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#TextFormatListMarker` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#TextFormatRange` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 73 | 24 | 0 | 97 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#TextInputEditRecord` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TextInputHistoryEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 7 | 3 | 0 | 10 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TextInputManager` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 7 | 2 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TextInputHistoryEntry` | `direct` | `new` | — | reviewed escape-free text-input history entry | 7 | 7 | 3 | 0 | 0 | 10 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TextInputManager` | `direct` | `new` | — | reviewed escape-free text-input manager | 2 | 7 | 2 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextInputOptions` | `direct` | `new` | — | reviewed escape-free text input options | 9 | 28 | 0 | 0 | 0 | 28 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextInputSource` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextInputState` | `direct` | `new` | — | reviewed escape-free text-input state | 15 | 68 | 32 | 0 | 0 | 100 | 0 | 0 | yes | — |
@@ -1735,7 +1735,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#TextListMarker` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#TextMeasureFunction` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#TextMetrics` | `direct` | `preserved` | `@flighthq/types:interface#TextMetrics` | text-metrics result record | 3 | 0 | 6 | 0 | 0 | 6 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TextSegment` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 10 | 1 | 0 | 11 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TextSegment` | `direct` | `new` | — | reviewed escape-free text segment | 4 | 10 | 1 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TextSegmenterBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:type#TextSegmentGranularity` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#TextSegmentRange` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
