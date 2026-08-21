@@ -1868,6 +1868,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#WgpuRenderRegistries',
     purpose: 'reviewed escape-free WebGPU render registries',
   },
+  {
+    declarationFingerprint: 'sha256:5ce6595f77e48ec51736d037cd6c477e81146a82bc72dfb055963b7abde227bd',
+    id: '@flighthq/types:interface#CffIndex',
+    purpose: 'reviewed escape-free CFF index',
+  },
+  {
+    declarationFingerprint: 'sha256:9c0a9c97e23fa85d9ef93e4bb92eafc52268728257918105ad7b2bef22c8528c',
+    id: '@flighthq/types:interface#SfntTableDirectory',
+    purpose: 'reviewed escape-free SFNT table directory',
+  },
+  {
+    declarationFingerprint: 'sha256:1bdecf5ebe419641dbe4f01ba3a31d542cbefad13bccc3e91e726fc63246e2af',
+    id: '@flighthq/types:interface#SfntTableRange',
+    purpose: 'reviewed escape-free SFNT table range',
+  },
+  {
+    declarationFingerprint: 'sha256:a464d3b4df6257129e226fa1fadfafb5d4a0c32b02aac84a101f84c5fc5ab615',
+    id: '@flighthq/types:interface#Woff2GlyfStreams',
+    purpose: 'reviewed escape-free WOFF2 glyf streams',
+  },
+  {
+    declarationFingerprint: 'sha256:24ae797b8608d8871a3ebd378c3101ddb9f4b4bc1859b2b282e50ae9f4b8c1f8',
+    id: '@flighthq/types:interface#Woff2TableEntry',
+    purpose: 'reviewed escape-free WOFF2 table entry',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

@@ -5,14 +5,14 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,611 public schemas are semantically eligible for typed structural lowering.
-- 768 schemas currently emit direct fields, covering 25,930 accesses.
-- 843 eligible schemas remain audit-only, covering 7,376 pending accesses.
-- 568 audit-only schemas have no recorded escape, covering 1,562 pending accesses.
+- 773 schemas currently emit direct fields, covering 26,030 accesses.
+- 838 eligible schemas remain audit-only, covering 7,276 pending accesses.
+- 563 audit-only schemas have no recorded escape, covering 1,462 pending accesses.
 - Direct schemas retain 451 operation-local reflective survivors: 197 incompatible-union, 87 unknown-member, 70 width-sensitive, 42 dynamic-enumeration, 38 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
 - Generated Haxe contains 49 `_Partial`, zero `_Pick`, three `_Omit`, 200 `_IndexedAccess`, nine `_Conditional`, and 654 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 11,278 generated type uses.
 - The cpp provenance audit has 582 closed nominal-identity candidates; only `Camera2D` and `ParticleEmitterState` are enabled.
-- Generated Haxe on the `598ef6f6` upstream pin contains 50,694 `Dynamic` occurrences and zero `Reflect`; pass 46 leaves `Dynamic` unchanged while moving 237 additional accesses to direct typed fields.
+- Generated Haxe on the `598ef6f6` upstream pin contains 50,694 `Dynamic` occurrences and zero `Reflect`; pass 47 leaves `Dynamic` unchanged while moving 100 additional accesses to direct typed fields.
 
 ## 1. Closed mapped aliases
 
@@ -104,6 +104,7 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Promote the forty-fourth high-access zero-escape frontier: `Physics3DWorld`, `Physics3DContact`, `Physics3DMassData`, `Physics3DHingeJoint`, and `Physics3DSliderJoint`. Their 404 accesses now emit directly across 11 generated Physics3D modules. Test enumeration keeps the world structural; cross-schema transfer plus object-literal spread keep both joint records structural; and the provenance-closed contact and mass data remain structural pending separate cpp review. The tranche removes 63 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote the forty-fifth high-access zero-escape frontier: `Physics3DContactConstraint`, `Physics3DContactConstraintPoint`, `Physics3DConeTwistJoint`, `Physics3DGeneric6DofJoint`, and `Physics3DSolverConfig`. Their 175 accesses now emit directly across five generated Physics3D modules. Container transfer keeps the contact constraint structural; cross-schema transfer plus object-literal spread keep both joint records structural; and the provenance-closed constraint point and solver config remain structural pending separate cpp review. The tranche removes 38 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote the forty-sixth high-access zero-escape frontier: `CanvasRenderRegistries`, `DomRenderRegistries`, `GlRenderRegistries`, `RenderRegistries`, and `WgpuRenderRegistries`. Their 237 accesses now emit through checker-derived field types across 59 generated renderer modules. Optional omission keeps all five records structural, and strict-equality observation additionally applies to the portable registry. The tranche removes redundant schema-wide casts while generated `Dynamic`, `_Runtime.field`, `Reflect`, and type-erasure debt remain unchanged.
+- [x] Promote the forty-seventh high-access zero-escape frontier: `CffIndex`, `SfntTableDirectory`, `SfntTableRange`, `Woff2GlyfStreams`, and `Woff2TableEntry`. Their 100 accesses now emit directly across seven generated font-format modules. Object-spread observation keeps the SFNT directory structural; the other four records are provenance-closed but remain structural pending separate cpp review. The tranche removes 68 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [ ] Review the next cohesive five-row zero-escape tranche from the refreshed audit, preserving exact fingerprint, provenance, Haxe, portability, and affected-parity gates.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 

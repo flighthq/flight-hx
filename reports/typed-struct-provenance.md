@@ -135,7 +135,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#CatalogEntry` | 0 | 3 | 0 | 1 | 0 | 6 | 1 | 0 | no | `container-transfer` |
 | `@flighthq/types:interface#CatalogRegistration` | 0 | 2 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#CdlValues` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CffIndex` | 0 | 2 | 0 | 1 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#CffIndex` | 14 | 2 | 0 | 1 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#CffIndexEntry` | 0 | 2 | 5 | 0 | 0 | 6 | 0 | 2 | no | `container-transfer` |
 | `@flighthq/types:interface#CffTable` | 0 | 4 | 0 | 4 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#ClipboardBackend` | 0 | 23 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
@@ -512,7 +512,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#SensorReading` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Sensors` | 11 | 11 | 0 | 11 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SensorsBackend` | 0 | 21 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#SfntTableRange` | 0 | 2 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#SfntTableRange` | 31 | 2 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#ShapeBoundsContext` | 0 | 11 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#ShapeBoundsExplanation` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#ShapeCommandRegistry` | 0 | 16 | 0 | 6 | 0 | 0 | 0 | 0 | yes | — |
@@ -756,9 +756,9 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#WgpuWireframeUpload` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#WindowBackend` | 0 | 28 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#WindowBounds` | 24 | 4 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#Woff2GlyfStreams` | 0 | 9 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Woff2GlyfStreams` | 27 | 9 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Woff2TableDirectory` | 0 | 3 | 0 | 1 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#Woff2TableEntry` | 0 | 5 | 1 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#Woff2TableEntry` | 9 | 5 | 1 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#WoffChecksumMismatch` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#XmlElement` | 74 | 5 | 0 | 0 | 0 | 3 | 1 | 1 | no | `container-transfer` |
 | `@flighthq/types:type#AsepriteHashFrame` | 0 | 6 | 0 | 3 | 0 | 0 | 0 | 0 | yes | — |

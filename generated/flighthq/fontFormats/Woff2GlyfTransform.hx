@@ -270,23 +270,23 @@ class Woff2GlyfTransform {
     var total:Float = cast _Runtime.UNDEFINED;
     var glyf:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     var at:Float = cast _Runtime.UNDEFINED;
-    if ((cast ((cast _Runtime.field(_Runtime.field(streams, 'nContourStream'), 'byteLength') : Float) < (cast _Runtime.multiplyNumbers(_Runtime.field(streams, 'glyphCount'), 2.0) : Float)) : Bool)) { return cast null; }
-    contourView = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(_Runtime.field(streams, 'nContourStream'), 'buffer'), _Runtime.field(_Runtime.field(streams, 'nContourStream'), 'byteOffset'), _Runtime.field(_Runtime.field(streams, 'nContourStream'), 'byteLength')]);
+    if ((cast ((cast _Runtime.field(streams.nContourStream, 'byteLength') : Float) < (cast (streams.glyphCount * 2.0) : Float)) : Bool)) { return cast null; }
+    contourView = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(streams.nContourStream, 'buffer'), _Runtime.field(streams.nContourStream, 'byteOffset'), _Runtime.field(streams.nContourStream, 'byteLength')]);
     points = (cast { at: 0.0 });
     glyph = (cast { at: 0.0 });
     compositeAt = 0.0;
     flagAt = 0.0;
     instructionAt = 0.0;
-    bboxAt = (cast getWoff2BboxBitmapByteLength((cast _Runtime.field(streams, 'glyphCount') : Float)) : Float);
+    bboxAt = (cast getWoff2BboxBitmapByteLength((cast streams.glyphCount : Float)) : Float);
     records = (cast cast ([] : Array<Dynamic>));
     {
       var index:Float = 0.0;
-      while ((cast ((cast index : Float) < (cast _Runtime.field(streams, 'glyphCount') : Float)) : Bool)) {
+      while ((cast ((cast index : Float) < (cast streams.glyphCount : Float)) : Bool)) {
         var contours:Float = _Runtime.callProperty(contourView, 'getInt16', cast ([(index * 2.0)] : Array<Dynamic>));
         var stored:Null<{ var xMax:Float; var xMin:Float; var yMax:Float; var yMin:Float; }> = null;
-        if ((cast (cast hasWoff2GlyphBbox(_Runtime.field(streams, 'bboxStream'), (cast index : Float)) : Bool) : Bool)) {
-          if ((cast ((cast (bboxAt + 8.0) : Float) > (cast _Runtime.field(_Runtime.field(streams, 'bboxStream'), 'byteLength') : Float)) : Bool)) { return cast null; }
-          var box:flighthq._internal._Any = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(_Runtime.field(streams, 'bboxStream'), 'buffer'), _Runtime.addNumbers(_Runtime.field(_Runtime.field(streams, 'bboxStream'), 'byteOffset'), bboxAt), 8.0]);
+        if ((cast (cast hasWoff2GlyphBbox(streams.bboxStream, (cast index : Float)) : Bool) : Bool)) {
+          if ((cast ((cast (bboxAt + 8.0) : Float) > (cast _Runtime.field(streams.bboxStream, 'byteLength') : Float)) : Bool)) { return cast null; }
+          var box:flighthq._internal._Any = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(streams.bboxStream, 'buffer'), _Runtime.addNumbers(_Runtime.field(streams.bboxStream, 'byteOffset'), bboxAt), 8.0]);
           (stored = cast ({ xMax: _Runtime.callProperty(box, 'getInt16', cast ([4.0] : Array<Dynamic>)), xMin: _Runtime.callProperty(box, 'getInt16', cast ([0.0] : Array<Dynamic>)), yMax: _Runtime.callProperty(box, 'getInt16', cast ([6.0] : Array<Dynamic>)), yMin: _Runtime.callProperty(box, 'getInt16', cast ([2.0] : Array<Dynamic>)) } : Dynamic));
           (bboxAt = cast ((bboxAt + 8.0) : Dynamic));
         }
@@ -296,15 +296,15 @@ class Woff2GlyfTransform {
           continue;
         }
         if ((cast ((cast contours : Float) < (cast 0.0 : Float)) : Bool)) {
-          var measured:Null<{ var byteLength:Float; var hasInstructions:Bool; }> = (cast measureWoff2CompositeGlyph(_Runtime.field(streams, 'compositeStream'), (cast compositeAt : Float)) : Null<{ var byteLength:Float; var hasInstructions:Bool; }>);
+          var measured:Null<{ var byteLength:Float; var hasInstructions:Bool; }> = (cast measureWoff2CompositeGlyph(streams.compositeStream, (cast compositeAt : Float)) : Null<{ var byteLength:Float; var hasInstructions:Bool; }>);
           if ((cast ((cast _Runtime.strictEquals(measured, null) : Bool) || (cast _Runtime.strictEquals(stored, null) : Bool)) : Bool)) { return cast null; }
-          var components:flighthq._internal._UInt8Array = (cast _Runtime.field(streams, 'compositeStream') : flighthq._internal._UInt8Array).subarray(Std.int(compositeAt), Std.int((compositeAt + (cast measured : { var byteLength:Float; var hasInstructions:Bool; }).byteLength)));
+          var components:flighthq._internal._UInt8Array = (cast streams.compositeStream : flighthq._internal._UInt8Array).subarray(Std.int(compositeAt), Std.int((compositeAt + (cast measured : { var byteLength:Float; var hasInstructions:Bool; }).byteLength)));
           (compositeAt = cast ((compositeAt + (cast measured : { var byteLength:Float; var hasInstructions:Bool; }).byteLength) : Dynamic));
           var instructions:flighthq._internal._UInt8Array = Woff2GlyfTransform.EMPTY_BYTES__woff2GlyfTransform;
           if ((cast (cast measured : { var byteLength:Float; var hasInstructions:Bool; }).hasInstructions : Bool)) {
-            var length:Float = (cast readWoff2Short(_Runtime.field(streams, 'glyphStream'), ({ final __callArgument5:Dynamic = glyph; __callArgument5; }), (cast _Runtime.field(_Runtime.field(streams, 'glyphStream'), 'byteLength') : Float)) : Float);
-            if ((cast ((cast ((cast length : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast (instructionAt + length) : Float) > (cast _Runtime.field(_Runtime.field(streams, 'instructionStream'), 'byteLength') : Float)) : Bool)) : Bool)) { return cast null; }
-            (instructions = cast ((cast _Runtime.field(streams, 'instructionStream') : flighthq._internal._UInt8Array).subarray(Std.int(instructionAt), Std.int((instructionAt + length))) : Dynamic));
+            var length:Float = (cast readWoff2Short(streams.glyphStream, ({ final __callArgument5:Dynamic = glyph; __callArgument5; }), (cast _Runtime.field(streams.glyphStream, 'byteLength') : Float)) : Float);
+            if ((cast ((cast ((cast length : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast (instructionAt + length) : Float) > (cast _Runtime.field(streams.instructionStream, 'byteLength') : Float)) : Bool)) : Bool)) { return cast null; }
+            (instructions = cast ((cast streams.instructionStream : flighthq._internal._UInt8Array).subarray(Std.int(instructionAt), Std.int((instructionAt + length))) : Dynamic));
             (instructionAt = cast ((instructionAt + length) : Dynamic));
           }
           _Runtime.callProperty(records, 'push', cast ([(cast Woff2GlyfTransform.padToEven__woff2GlyfTransform((cast encodeSfntCompositeGlyph(({ final __callArgument6:Dynamic = components; __callArgument6; }), ({ final __callArgument7:Dynamic = instructions; __callArgument7; }), ({ final __callArgument8:Dynamic = stored; __callArgument8; }), (cast (cast measured : { var byteLength:Float; var hasInstructions:Bool; }).hasInstructions : Bool)) : flighthq._internal._UInt8Array)) : flighthq._internal._UInt8Array)] : Array<Dynamic>));
@@ -316,14 +316,14 @@ class Woff2GlyfTransform {
         {
           var contour:Float = 0.0;
           while ((cast ((cast contour : Float) < (cast contours : Float)) : Bool)) {
-            var count:Float = (cast readWoff2Short(_Runtime.field(streams, 'nPointsStream'), ({ final __callArgument9:Dynamic = points; __callArgument9; }), (cast _Runtime.field(_Runtime.field(streams, 'nPointsStream'), 'byteLength') : Float)) : Float);
+            var count:Float = (cast readWoff2Short(streams.nPointsStream, ({ final __callArgument9:Dynamic = points; __callArgument9; }), (cast _Runtime.field(streams.nPointsStream, 'byteLength') : Float)) : Float);
             if ((cast ((cast count : Float) < (cast 0.0 : Float)) : Bool)) { return cast null; }
             (pointCount = cast ((pointCount + count) : Dynamic));
             _Runtime.callProperty(endPtsOfContours, 'push', cast ([(pointCount - 1.0)] : Array<Dynamic>));
             (contour = cast ((contour + 1.0) : Dynamic));
           }
         }
-        if ((cast ((cast (flagAt + pointCount) : Float) > (cast _Runtime.field(_Runtime.field(streams, 'flagStream'), 'byteLength') : Float)) : Bool)) { return cast null; }
+        if ((cast ((cast (flagAt + pointCount) : Float) > (cast _Runtime.field(streams.flagStream, 'byteLength') : Float)) : Bool)) { return cast null; }
         var xs:Array<Float> = (cast cast ([] : Array<Dynamic>));
         var ys:Array<Float> = (cast cast ([] : Array<Dynamic>));
         var onCurve:Array<Bool> = (cast cast ([] : Array<Dynamic>));
@@ -332,8 +332,8 @@ class Woff2GlyfTransform {
         {
           var point:Float = 0.0;
           while ((cast ((cast point : Float) < (cast pointCount : Float)) : Bool)) {
-            var flag:Float = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast _Runtime.field(streams, 'flagStream') : flighthq._internal._UInt8Array), (cast (flagAt + point) : Float));
-            var delta:Null<{ var dx:Float; var dy:Float; var used:Float; }> = (cast decodeWoff2Triplet((cast (_Runtime.toInt32(flag) & 127) : Float), _Runtime.field(streams, 'glyphStream'), (cast (cast glyph : { var at:Float; }).at : Float)) : Null<{ var dx:Float; var dy:Float; var used:Float; }>);
+            var flag:Float = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast streams.flagStream : flighthq._internal._UInt8Array), (cast (flagAt + point) : Float));
+            var delta:Null<{ var dx:Float; var dy:Float; var used:Float; }> = (cast decodeWoff2Triplet((cast (_Runtime.toInt32(flag) & 127) : Float), streams.glyphStream, (cast (cast glyph : { var at:Float; }).at : Float)) : Null<{ var dx:Float; var dy:Float; var used:Float; }>);
             if ((cast _Runtime.strictEquals(delta, null) : Bool)) { return cast null; }
             ((cast glyph : { var at:Float; }).at += (cast delta : { var dx:Float; var dy:Float; var used:Float; }).used);
             (x = cast ((x + (cast delta : { var dx:Float; var dy:Float; var used:Float; }).dx) : Dynamic));
@@ -345,16 +345,16 @@ class Woff2GlyfTransform {
           }
         }
         (flagAt = cast ((flagAt + pointCount) : Dynamic));
-        var instructionLength:Float = (cast readWoff2Short(_Runtime.field(streams, 'glyphStream'), ({ final __callArgument10:Dynamic = glyph; __callArgument10; }), (cast _Runtime.field(_Runtime.field(streams, 'glyphStream'), 'byteLength') : Float)) : Float);
-        if ((cast ((cast ((cast instructionLength : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast (instructionAt + instructionLength) : Float) > (cast _Runtime.field(_Runtime.field(streams, 'instructionStream'), 'byteLength') : Float)) : Bool)) : Bool)) { return cast null; }
-        var instructions:flighthq._internal._UInt8Array = (cast _Runtime.field(streams, 'instructionStream') : flighthq._internal._UInt8Array).subarray(Std.int(instructionAt), Std.int((instructionAt + instructionLength)));
+        var instructionLength:Float = (cast readWoff2Short(streams.glyphStream, ({ final __callArgument10:Dynamic = glyph; __callArgument10; }), (cast _Runtime.field(streams.glyphStream, 'byteLength') : Float)) : Float);
+        if ((cast ((cast ((cast instructionLength : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast (instructionAt + instructionLength) : Float) > (cast _Runtime.field(streams.instructionStream, 'byteLength') : Float)) : Bool)) : Bool)) { return cast null; }
+        var instructions:flighthq._internal._UInt8Array = (cast streams.instructionStream : flighthq._internal._UInt8Array).subarray(Std.int(instructionAt), Std.int((instructionAt + instructionLength)));
         (instructionAt = cast ((instructionAt + instructionLength) : Dynamic));
         var bounds:{ var xMax:Float; var xMin:Float; var yMax:Float; var yMin:Float; } = _Runtime.coalesce(stored, function():Dynamic return cast (cast Woff2GlyfTransform.measurePointBounds__woff2GlyfTransform(({ final __callArgument11:Dynamic = xs; __callArgument11; }), ({ final __callArgument12:Dynamic = ys; __callArgument12; })) : { var xMax:Float; var xMin:Float; var yMax:Float; var yMin:Float; }));
         _Runtime.callProperty(records, 'push', cast ([(cast Woff2GlyfTransform.padToEven__woff2GlyfTransform((cast encodeSfntSimpleGlyph(({ final __callArgument13:Dynamic = endPtsOfContours; __callArgument13; }), ({ final __callArgument14:Dynamic = xs; __callArgument14; }), ({ final __callArgument15:Dynamic = ys; __callArgument15; }), ({ final __callArgument16:Dynamic = onCurve; __callArgument16; }), ({ final __callArgument17:Dynamic = instructions; __callArgument17; }), ({ final __callArgument18:Dynamic = bounds; __callArgument18; })) : flighthq._internal._UInt8Array)) : flighthq._internal._UInt8Array)] : Array<Dynamic>));
         (index = cast ((index + 1.0) : Dynamic));
       }
     }
-    loca = (cast encodeSfntLoca((cast _Runtime.mapArray((cast records : Array<flighthq._internal._UInt8Array>), function(record:flighthq._internal._UInt8Array, __unused0:Float, __unused1:Array<flighthq._internal._UInt8Array>):Float return _Runtime.field(record, 'byteLength'), _Runtime.UNDEFINED)), (cast _Runtime.field(streams, 'indexFormat') : Float)) : Null<flighthq._internal._UInt8Array>);
+    loca = (cast encodeSfntLoca((cast _Runtime.mapArray((cast records : Array<flighthq._internal._UInt8Array>), function(record:flighthq._internal._UInt8Array, __unused0:Float, __unused1:Array<flighthq._internal._UInt8Array>):Float return _Runtime.field(record, 'byteLength'), _Runtime.UNDEFINED)), (cast streams.indexFormat : Float)) : Null<flighthq._internal._UInt8Array>);
     if ((cast _Runtime.strictEquals(loca, null) : Bool)) { return cast null; }
     total = 0.0;
     for (record in _Runtime.iterable(records)) {

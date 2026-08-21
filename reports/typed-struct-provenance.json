@@ -18941,7 +18941,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 14,
       "fields": 2,
       "id": "@flighthq/types:interface#CffIndex",
       "name": "CffIndex",
@@ -44541,7 +44541,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 31,
       "fields": 2,
       "id": "@flighthq/types:interface#SfntTableRange",
       "name": "SfntTableRange",
@@ -58558,7 +58558,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 27,
       "fields": 9,
       "id": "@flighthq/types:interface#Woff2GlyfStreams",
       "name": "Woff2GlyfStreams",
@@ -58627,7 +58627,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 9,
       "fields": 5,
       "id": "@flighthq/types:interface#Woff2TableEntry",
       "name": "Woff2TableEntry",

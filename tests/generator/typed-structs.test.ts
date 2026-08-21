@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_348,
+      newAuditOnly: 1_343,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_118);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(770);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(775);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_716);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_348);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_343);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(368);
+    expect(newDirect).toHaveLength(373);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1950,6 +1950,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'WgpuRenderRegistries',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free WebGPU render registries',
+        }),
+        expect.objectContaining({
+          name: 'CffIndex',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free CFF index',
+        }),
+        expect.objectContaining({
+          name: 'SfntTableDirectory',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free SFNT table directory',
+        }),
+        expect.objectContaining({
+          name: 'SfntTableRange',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free SFNT table range',
+        }),
+        expect.objectContaining({
+          name: 'Woff2GlyfStreams',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WOFF2 glyf streams',
+        }),
+        expect.objectContaining({
+          name: 'Woff2TableEntry',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WOFF2 table entry',
         }),
       ]),
     );
@@ -3794,6 +3819,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#WgpuRenderRegistries',
         purpose: 'reviewed escape-free WebGPU render registries',
       },
+      {
+        declarationFingerprint: 'sha256:5ce6595f77e48ec51736d037cd6c477e81146a82bc72dfb055963b7abde227bd',
+        id: '@flighthq/types:interface#CffIndex',
+        purpose: 'reviewed escape-free CFF index',
+      },
+      {
+        declarationFingerprint: 'sha256:9c0a9c97e23fa85d9ef93e4bb92eafc52268728257918105ad7b2bef22c8528c',
+        id: '@flighthq/types:interface#SfntTableDirectory',
+        purpose: 'reviewed escape-free SFNT table directory',
+      },
+      {
+        declarationFingerprint: 'sha256:1bdecf5ebe419641dbe4f01ba3a31d542cbefad13bccc3e91e726fc63246e2af',
+        id: '@flighthq/types:interface#SfntTableRange',
+        purpose: 'reviewed escape-free SFNT table range',
+      },
+      {
+        declarationFingerprint: 'sha256:a464d3b4df6257129e226fa1fadfafb5d4a0c32b02aac84a101f84c5fc5ab615',
+        id: '@flighthq/types:interface#Woff2GlyfStreams',
+        purpose: 'reviewed escape-free WOFF2 glyf streams',
+      },
+      {
+        declarationFingerprint: 'sha256:24ae797b8608d8871a3ebd378c3101ddb9f4b4bc1859b2b282e50ae9f4b8c1f8',
+        id: '@flighthq/types:interface#Woff2TableEntry',
+        purpose: 'reviewed escape-free WOFF2 table entry',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -4943,6 +4993,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const fortySeventhHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['CffIndex', 'SfntTableDirectory', 'SfntTableRange', 'Woff2GlyfStreams', 'Woff2TableEntry'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -4983,22 +5042,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_348,
+      auditOnlySchemas: 1_343,
       bindableAccesses: 33_306,
       candidates: 2_118,
-      directAccesses: 25_930,
-      directSchemas: 768,
+      directAccesses: 26_030,
+      directSchemas: 773,
       eligible: 1_611,
       escapes: 11_129,
       fields: 25_393,
       ineligible: 507,
-      pendingAccesses: 7_376,
+      pendingAccesses: 7_276,
       reflectiveSurvivors: 451,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_348,
+      newAuditOnly: 1_343,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -5075,7 +5134,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(25_930);
+    expect(report.summary.directAccesses).toBe(26_030);
     expect(rectangle?.emission).toEqual({
       directAccesses: 707,
       mode: 'direct',
@@ -7282,6 +7341,48 @@ describe('typed struct analysis', () => {
     }
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
+        'CffIndex',
+        14,
+        'sha256:5ce6595f77e48ec51736d037cd6c477e81146a82bc72dfb055963b7abde227bd',
+        'reviewed escape-free CFF index',
+      ],
+      [
+        'SfntTableDirectory',
+        19,
+        'sha256:9c0a9c97e23fa85d9ef93e4bb92eafc52268728257918105ad7b2bef22c8528c',
+        'reviewed escape-free SFNT table directory',
+      ],
+      [
+        'SfntTableRange',
+        31,
+        'sha256:1bdecf5ebe419641dbe4f01ba3a31d542cbefad13bccc3e91e726fc63246e2af',
+        'reviewed escape-free SFNT table range',
+      ],
+      [
+        'Woff2GlyfStreams',
+        27,
+        'sha256:a464d3b4df6257129e226fa1fadfafb5d4a0c32b02aac84a101f84c5fc5ab615',
+        'reviewed escape-free WOFF2 glyf streams',
+      ],
+      [
+        'Woff2TableEntry',
+        9,
+        'sha256:24ae797b8608d8871a3ebd378c3101ddb9f4b4bc1859b2b282e50ae9f4b8c1f8',
+        'reviewed escape-free WOFF2 table entry',
+      ],
+    ] as const) {
+      expect(fortySeventhHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
         'TiledTilesetTile',
         14,
         'sha256:f20a5988a4c187a5ab14cafc6d9e22031b7dd254f8a130eb362beafdafe8fe92',
@@ -9207,6 +9308,21 @@ describe('typed struct analysis', () => {
         observabilityReasons,
       });
       expect(provenanceById.has(frontierId)).toBe(false);
+    }
+    for (const [frontierId, observabilityReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#CffIndex', [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#SfntTableDirectory', ['object-spread'], null],
+      ['@flighthq/types:interface#SfntTableRange', [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#Woff2GlyfStreams', [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#Woff2TableEntry', [], { blockerReasons: [], closed: true }],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible: true,
+        normalizationReasons: [],
+        observabilityReasons,
+      });
+      if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
+      else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
     }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       ['@flighthq/types:interface#AnimationLayerStack', false, ['cross-schema-transfer'], [], null],
@@ -11152,6 +11268,19 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:CanvasRenderRegistries|DomRenderRegistries|GlRenderRegistries|RenderRegistries|WgpuRenderRegistries)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/fontFormats/CffTable.hx',
+      'generated/flighthq/fontFormats/OpenTypeCmap.hx',
+      'generated/flighthq/fontFormats/OpenTypeGlyf.hx',
+      'generated/flighthq/fontFormats/OpenTypeGlyphOutlineSource.hx',
+      'generated/flighthq/fontFormats/OpenTypeMetrics.hx',
+      'generated/flighthq/fontFormats/Woff2Font.hx',
+      'generated/flighthq/fontFormats/Woff2GlyfTransform.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:CffIndex|SfntTableDirectory|SfntTableRange|Woff2GlyfStreams|Woff2TableEntry)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');

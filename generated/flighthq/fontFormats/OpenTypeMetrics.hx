@@ -16,18 +16,18 @@ class OpenTypeMetrics {
     var longMetricCount:Float = cast _Runtime.UNDEFINED;
     var advances:flighthq._internal._Int32Array = cast _Runtime.UNDEFINED;
     var lastAdvance:Float = cast _Runtime.UNDEFINED;
-    hhea = ((cast _Runtime.field(directory, 'tables') : flighthq._internal._Map<String, SfntTableRange>).get('hhea'));
-    hmtx = ((cast _Runtime.field(directory, 'tables') : flighthq._internal._Map<String, SfntTableRange>).get('hmtx'));
-    if ((cast ((cast ((cast _Runtime.strictEquals(hhea, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(hmtx, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast ((cast _Runtime.field(hhea, 'length') : Float) < (cast 36.0 : Float)) : Bool)) : Bool)) { return cast null; }
+    hhea = ((cast directory.tables : flighthq._internal._Map<String, SfntTableRange>).get('hhea'));
+    hmtx = ((cast directory.tables : flighthq._internal._Map<String, SfntTableRange>).get('hmtx'));
+    if ((cast ((cast ((cast _Runtime.strictEquals(hhea, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(hmtx, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast ((cast (cast hhea : { var length:Float; }).length : Float) < (cast 36.0 : Float)) : Bool)) : Bool)) { return cast null; }
     view = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]);
-    longMetricCount = _Runtime.callProperty(view, 'getUint16', cast ([_Runtime.addNumbers(_Runtime.field(hhea, 'offset'), 34.0)] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.strictEquals(longMetricCount, 0.0) : Bool) || (cast ((cast (longMetricCount * 4.0) : Float) > (cast _Runtime.field(hmtx, 'length') : Float)) : Bool)) : Bool)) { return cast null; }
+    longMetricCount = _Runtime.callProperty(view, 'getUint16', cast ([((cast hhea : { var offset:Float; }).offset + 34.0)] : Array<Dynamic>));
+    if ((cast ((cast _Runtime.strictEquals(longMetricCount, 0.0) : Bool) || (cast ((cast (longMetricCount * 4.0) : Float) > (cast (cast hmtx : { var length:Float; }).length : Float)) : Bool)) : Bool)) { return cast null; }
     advances = new flighthq._internal._Int32Array(glyphCount);
     lastAdvance = 0.0;
     {
       var glyph:Float = 0.0;
       while ((cast ((cast glyph : Float) < (cast glyphCount : Float)) : Bool)) {
-        if ((cast ((cast glyph : Float) < (cast longMetricCount : Float)) : Bool)) { (lastAdvance = cast (_Runtime.callProperty(view, 'getUint16', cast ([_Runtime.addNumbers(_Runtime.field(hmtx, 'offset'), (glyph * 4.0))] : Array<Dynamic>)) : Dynamic)); }
+        if ((cast ((cast glyph : Float) < (cast longMetricCount : Float)) : Bool)) { (lastAdvance = cast (_Runtime.callProperty(view, 'getUint16', cast ([((cast hmtx : { var offset:Float; }).offset + (glyph * 4.0))] : Array<Dynamic>)) : Dynamic)); }
         flighthq._internal._StaticIndex.writeInt32ArrayTyped((cast advances : flighthq._internal._Int32Array), (cast glyph : Float), (cast lastAdvance : Float));
         (glyph = cast ((glyph + 1.0) : Dynamic));
       }
@@ -39,9 +39,9 @@ class OpenTypeMetrics {
   @:noCompletion
   public static function readOpenTypeGlyphCount(bytes:flighthq._internal._UInt8Array, directory:SfntTableDirectory):Float {
     var maxp:Null<SfntTableRange> = cast _Runtime.UNDEFINED;
-    maxp = ((cast _Runtime.field(directory, 'tables') : flighthq._internal._Map<String, SfntTableRange>).get('maxp'));
-    if ((cast ((cast _Runtime.strictEquals(maxp, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast _Runtime.field(maxp, 'length') : Float) < (cast 6.0 : Float)) : Bool)) : Bool)) { return cast -1.0; }
-    return cast _Runtime.callProperty(_Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]), 'getUint16', cast ([_Runtime.addNumbers(_Runtime.field(maxp, 'offset'), 4.0)] : Array<Dynamic>));
+    maxp = ((cast directory.tables : flighthq._internal._Map<String, SfntTableRange>).get('maxp'));
+    if ((cast ((cast _Runtime.strictEquals(maxp, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast (cast maxp : { var length:Float; }).length : Float) < (cast 6.0 : Float)) : Bool)) : Bool)) { return cast -1.0; }
+    return cast _Runtime.callProperty(_Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]), 'getUint16', cast ([((cast maxp : { var offset:Float; }).offset + 4.0)] : Array<Dynamic>));
     return cast null;
   }
 
@@ -49,9 +49,9 @@ class OpenTypeMetrics {
   public static function readOpenTypeLocaFormat(bytes:flighthq._internal._UInt8Array, directory:SfntTableDirectory):Float {
     var head:Null<SfntTableRange> = cast _Runtime.UNDEFINED;
     var format:Float = cast _Runtime.UNDEFINED;
-    head = ((cast _Runtime.field(directory, 'tables') : flighthq._internal._Map<String, SfntTableRange>).get('head'));
-    if ((cast ((cast _Runtime.strictEquals(head, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast _Runtime.field(head, 'length') : Float) < (cast 54.0 : Float)) : Bool)) : Bool)) { return cast -1.0; }
-    format = _Runtime.callProperty(_Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]), 'getInt16', cast ([_Runtime.addNumbers(_Runtime.field(head, 'offset'), 50.0)] : Array<Dynamic>));
+    head = ((cast directory.tables : flighthq._internal._Map<String, SfntTableRange>).get('head'));
+    if ((cast ((cast _Runtime.strictEquals(head, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast (cast head : { var length:Float; }).length : Float) < (cast 54.0 : Float)) : Bool)) : Bool)) { return cast -1.0; }
+    format = _Runtime.callProperty(_Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]), 'getInt16', cast ([((cast head : { var offset:Float; }).offset + 50.0)] : Array<Dynamic>));
     return cast ((cast ((cast _Runtime.strictEquals(format, 0.0) : Bool) || (cast _Runtime.strictEquals(format, 1.0) : Bool)) : Bool) ? (cast format : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
@@ -62,13 +62,13 @@ class OpenTypeMetrics {
     var hhea:Null<SfntTableRange> = cast _Runtime.UNDEFINED;
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var unitsPerEm:Float = cast _Runtime.UNDEFINED;
-    head = ((cast _Runtime.field(directory, 'tables') : flighthq._internal._Map<String, SfntTableRange>).get('head'));
-    hhea = ((cast _Runtime.field(directory, 'tables') : flighthq._internal._Map<String, SfntTableRange>).get('hhea'));
-    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(head, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(hhea, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast ((cast _Runtime.field(head, 'length') : Float) < (cast 54.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(hhea, 'length') : Float) < (cast 36.0 : Float)) : Bool)) : Bool)) { return cast null; }
+    head = ((cast directory.tables : flighthq._internal._Map<String, SfntTableRange>).get('head'));
+    hhea = ((cast directory.tables : flighthq._internal._Map<String, SfntTableRange>).get('hhea'));
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(head, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(hhea, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast ((cast (cast head : { var length:Float; }).length : Float) < (cast 54.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast hhea : { var length:Float; }).length : Float) < (cast 36.0 : Float)) : Bool)) : Bool)) { return cast null; }
     view = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]);
-    unitsPerEm = _Runtime.callProperty(view, 'getUint16', cast ([_Runtime.addNumbers(_Runtime.field(head, 'offset'), 18.0)] : Array<Dynamic>));
+    unitsPerEm = _Runtime.callProperty(view, 'getUint16', cast ([((cast head : { var offset:Float; }).offset + 18.0)] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(unitsPerEm, 0.0) : Bool)) { return cast null; }
-    return cast { ascent: _Runtime.callProperty(view, 'getInt16', cast ([_Runtime.addNumbers(_Runtime.field(hhea, 'offset'), 4.0)] : Array<Dynamic>)), descent: -_Runtime.callProperty(view, 'getInt16', cast ([_Runtime.addNumbers(_Runtime.field(hhea, 'offset'), 6.0)] : Array<Dynamic>)), lineGap: _Runtime.callProperty(view, 'getInt16', cast ([_Runtime.addNumbers(_Runtime.field(hhea, 'offset'), 8.0)] : Array<Dynamic>)), unitsPerEm: unitsPerEm };
+    return cast { ascent: _Runtime.callProperty(view, 'getInt16', cast ([((cast hhea : { var offset:Float; }).offset + 4.0)] : Array<Dynamic>)), descent: -_Runtime.callProperty(view, 'getInt16', cast ([((cast hhea : { var offset:Float; }).offset + 6.0)] : Array<Dynamic>)), lineGap: _Runtime.callProperty(view, 'getInt16', cast ([((cast hhea : { var offset:Float; }).offset + 8.0)] : Array<Dynamic>)), unitsPerEm: unitsPerEm };
     return cast null;
   }
 }

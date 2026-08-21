@@ -37,13 +37,13 @@ class OpenTypeGlyf {
     var xs:Null<{ var cursor:Float; var values:flighthq._internal._Int32Array; }> = cast _Runtime.UNDEFINED;
     var ys:Null<{ var cursor:Float; var values:flighthq._internal._Int32Array; }> = cast _Runtime.UNDEFINED;
     var first:Float = cast _Runtime.UNDEFINED;
-    glyf = ((cast _Runtime.field(directory, 'tables') : flighthq._internal._Map<String, SfntTableRange>).get('glyf'));
+    glyf = ((cast directory.tables : flighthq._internal._Map<String, SfntTableRange>).get('glyf'));
     if ((cast ((cast ((cast _Runtime.strictEquals(glyf, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast glyphIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast (glyphIndex + 1.0) : Float) >= (cast _Runtime.field(ranges, 'length') : Float)) : Bool)) : Bool)) { return cast false; }
     _Runtime.setLength((cast out : Path).commands, 0.0);
     _Runtime.setLength((cast out : Path).data, 0.0);
     ((cast out : Path).winding = 'nonZero');
-    start = _Runtime.addNumbers(_Runtime.field(glyf, 'offset'), flighthq._internal._StaticIndex.readUint32ArrayTyped((cast ranges : flighthq._internal._UInt32Array), (cast glyphIndex : Float)));
-    end = _Runtime.addNumbers(_Runtime.field(glyf, 'offset'), flighthq._internal._StaticIndex.readUint32ArrayTyped((cast ranges : flighthq._internal._UInt32Array), (cast (glyphIndex + 1.0) : Float)));
+    start = ((cast glyf : { var offset:Float; }).offset + flighthq._internal._StaticIndex.readUint32ArrayTyped((cast ranges : flighthq._internal._UInt32Array), (cast glyphIndex : Float)));
+    end = ((cast glyf : { var offset:Float; }).offset + flighthq._internal._StaticIndex.readUint32ArrayTyped((cast ranges : flighthq._internal._UInt32Array), (cast (glyphIndex + 1.0) : Float)));
     if ((cast ((cast end : Float) <= (cast start : Float)) : Bool)) { return cast true; }
     if ((cast ((cast ((cast end : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool) || (cast ((cast (start + 10.0) : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) : Bool)) { return cast false; }
     view = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]);
@@ -91,17 +91,17 @@ class OpenTypeGlyf {
     var entryBytes:Float = cast _Runtime.UNDEFINED;
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var offsets:flighthq._internal._UInt32Array = cast _Runtime.UNDEFINED;
-    loca = ((cast _Runtime.field(directory, 'tables') : flighthq._internal._Map<String, SfntTableRange>).get('loca'));
+    loca = ((cast directory.tables : flighthq._internal._Map<String, SfntTableRange>).get('loca'));
     if ((cast _Runtime.strictEquals(loca, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     entryCount = (glyphCount + 1.0);
     entryBytes = ((cast _Runtime.strictEquals(locaFormat, 0.0) : Bool) ? (cast 2.0 : Dynamic) : (cast 4.0 : Dynamic));
-    if ((cast ((cast (entryCount * entryBytes) : Float) > (cast _Runtime.field(loca, 'length') : Float)) : Bool)) { return cast null; }
+    if ((cast ((cast (entryCount * entryBytes) : Float) > (cast (cast loca : { var length:Float; }).length : Float)) : Bool)) { return cast null; }
     view = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]);
     offsets = new flighthq._internal._UInt32Array(entryCount);
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast entryCount : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeUint32ArrayTyped((cast offsets : flighthq._internal._UInt32Array), (cast index : Float), (cast ((cast _Runtime.strictEquals(locaFormat, 0.0) : Bool) ? (cast _Runtime.multiplyNumbers(_Runtime.callProperty(view, 'getUint16', cast ([_Runtime.addNumbers(_Runtime.field(loca, 'offset'), (index * 2.0))] : Array<Dynamic>)), 2.0) : Dynamic) : (cast _Runtime.callProperty(view, 'getUint32', cast ([_Runtime.addNumbers(_Runtime.field(loca, 'offset'), (index * 4.0))] : Array<Dynamic>)) : Dynamic)) : Float));
+        flighthq._internal._StaticIndex.writeUint32ArrayTyped((cast offsets : flighthq._internal._UInt32Array), (cast index : Float), (cast ((cast _Runtime.strictEquals(locaFormat, 0.0) : Bool) ? (cast _Runtime.multiplyNumbers(_Runtime.callProperty(view, 'getUint16', cast ([((cast loca : { var offset:Float; }).offset + (index * 2.0))] : Array<Dynamic>)), 2.0) : Dynamic) : (cast _Runtime.callProperty(view, 'getUint32', cast ([((cast loca : { var offset:Float; }).offset + (index * 4.0))] : Array<Dynamic>)) : Dynamic)) : Float));
         (index = cast ((index + 1.0) : Dynamic));
       }
     }

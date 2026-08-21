@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2118 |
 | Eligible | 1611 |
 | Ineligible | 507 |
-| Audit-only schemas | 1348 |
-| Direct schemas | 768 |
+| Audit-only schemas | 1343 |
+| Direct schemas | 773 |
 | Declared fields | 25393 |
 | Bindable accesses | 33306 |
-| Pending accesses | 7376 |
-| Directly emitted accesses | 25930 |
+| Pending accesses | 7276 |
+| Directly emitted accesses | 26030 |
 | Reflective survivors | 451 |
 | Dynamic escapes | 11129 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1348 |
+| Newly discovered, audit-only | 1343 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -348,7 +348,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CatalogEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 18 | 0 | 0 | 18 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CatalogRegistration` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CdlValues` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CffIndex` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 14 | 0 | 0 | 14 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CffIndex` | `direct` | `new` | — | reviewed escape-free CFF index | 2 | 14 | 0 | 0 | 0 | 14 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CffIndexEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CffTable` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ChannelMixerAdjustment` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -1525,8 +1525,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#SensorsPermissionState` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#SensorSubscribeOptions` | `direct` | `preserved` | `@flighthq/types:interface#SensorSubscribeOptions` | broad host document | 1 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SepiaAdjustment` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#SfntTableDirectory` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 19 | 0 | 0 | 19 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#SfntTableRange` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 31 | 0 | 0 | 31 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SfntTableDirectory` | `direct` | `new` | — | reviewed escape-free SFNT table directory | 3 | 19 | 0 | 0 | 0 | 19 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SfntTableRange` | `direct` | `new` | — | reviewed escape-free SFNT table range | 2 | 31 | 0 | 0 | 0 | 31 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ShadedMaterial` | `direct` | `new` | — | reviewed escape-free shaded material | 14 | 44 | 12 | 0 | 0 | 56 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ShadedMaterialOptions` | `direct` | `new` | — | reviewed escape-free shaded-material options | 12 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Shape` | `direct` | `new` | — | reviewed escape-free shape | 19 | 47 | 0 | 0 | 0 | 47 | 0 | 0 | yes | — |
@@ -2156,9 +2156,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WindowBounds` | `direct` | `preserved` | `@flighthq/types:interface#WindowBounds` | broad host document | 4 | 0 | 24 | 0 | 0 | 24 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WindowOptions` | `direct` | `preserved` | `@flighthq/types:interface#WindowOptions` | broad host document | 18 | 75 | 0 | 0 | 0 | 75 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WireframeMaterial` | `direct` | `new` | — | reviewed escape-free wireframe material | 8 | 6 | 2 | 0 | 0 | 8 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Woff2GlyfStreams` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 27 | 0 | 0 | 27 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Woff2GlyfStreams` | `direct` | `new` | — | reviewed escape-free WOFF2 glyf streams | 9 | 27 | 0 | 0 | 0 | 27 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Woff2TableDirectory` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Woff2TableEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Woff2TableEntry` | `direct` | `new` | — | reviewed escape-free WOFF2 table entry | 5 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WoffChecksumMismatch` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WrappedDiffusePbrExtension` | `direct` | `new` | — | reviewed escape-free wrapped-diffuse PBR extension | 8 | 18 | 0 | 0 | 0 | 18 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#XmlElement` | `direct` | `relocated` | `@flighthq/xml:interface#XmlElement` | broad serialization document | 5 | 74 | 0 | 0 | 0 | 74 | 0 | 0 | yes | — |

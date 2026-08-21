@@ -57,10 +57,10 @@ class OpenTypeCmap {
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var subtableOffset:Float = cast _Runtime.UNDEFINED;
     var format:Float = cast _Runtime.UNDEFINED;
-    cmap = ((cast _Runtime.field(directory, 'tables') : flighthq._internal._Map<String, SfntTableRange>).get('cmap'));
-    if ((cast ((cast _Runtime.strictEquals(cmap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast _Runtime.field(cmap, 'length') : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) { return cast null; }
+    cmap = ((cast directory.tables : flighthq._internal._Map<String, SfntTableRange>).get('cmap'));
+    if ((cast ((cast _Runtime.strictEquals(cmap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast (cast cmap : { var length:Float; }).length : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) { return cast null; }
     view = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]);
-    subtableOffset = (cast findOpenTypeUnicodeSubtable((cast view : flighthq._internal._Any), (cast _Runtime.field(cmap, 'offset') : Float), (cast _Runtime.field(cmap, 'length') : Float), (cast _Runtime.field(bytes, 'byteLength') : Float)) : Float);
+    subtableOffset = (cast findOpenTypeUnicodeSubtable((cast view : flighthq._internal._Any), (cast (cast cmap : { var offset:Float; }).offset : Float), (cast (cast cmap : { var length:Float; }).length : Float), (cast _Runtime.field(bytes, 'byteLength') : Float)) : Float);
     if ((cast _Runtime.strictEquals(subtableOffset, -1.0) : Bool)) { return cast null; }
     format = _Runtime.callProperty(view, 'getUint16', cast ([subtableOffset] : Array<Dynamic>));
     if ((cast _Runtime.strictEquals(format, 4.0) : Bool)) { return cast (cast OpenTypeCmap.readOpenTypeCmapFormat4__openTypeCmap((cast view : flighthq._internal._Any), (cast subtableOffset : Float), (cast _Runtime.field(bytes, 'byteLength') : Float)) : flighthq._internal._Map<Float, Float>); }

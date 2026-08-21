@@ -107,19 +107,19 @@ class OpenTypeGlyphOutlineSource {
     if ((cast _Runtime.strictEquals(unwrapped, null) : Bool)) { return cast _Runtime.mergeObjects([empty, { accepted: false }, { reason: 'malformed-table' }, { table: '' }]); }
     directory = (cast readSfntTableDirectory(({ final __callArgument19:Dynamic = unwrapped; __callArgument19; })) : Null<SfntTableDirectory>);
     if ((cast _Runtime.strictEquals(directory, null) : Bool)) { return cast _Runtime.mergeObjects([empty, { accepted: false }, { reason: 'too-short' }]); }
-    counted = (cast { format: format, readableTableCount: (cast (cast directory : SfntTableDirectory).tables : flighthq._internal._Map<String, SfntTableRange>).size, tableCount: (cast directory : SfntTableDirectory).declaredTableCount });
+    counted = (cast { format: format, readableTableCount: (cast (cast directory : { var tables:flighthq._internal._Map<String, SfntTableRange>; }).tables : flighthq._internal._Map<String, SfntTableRange>).size, tableCount: (cast directory : { var declaredTableCount:Float; }).declaredTableCount });
     _Runtime.voidValue(unwrapped);
     for (tag in _Runtime.iterable(cast (['cmap', 'head', 'hhea', 'hmtx', 'maxp'] : Array<Dynamic>))) {
-      if ((cast !(cast ((cast (cast directory : SfntTableDirectory).tables : flighthq._internal._Map<String, SfntTableRange>).has(tag)) : Bool) : Bool)) { return cast _Runtime.mergeObjects([counted, { accepted: false }, { reason: 'missing-required-table' }, { table: tag }]); }
+      if ((cast !(cast ((cast (cast directory : { var tables:flighthq._internal._Map<String, SfntTableRange>; }).tables : flighthq._internal._Map<String, SfntTableRange>).has(tag)) : Bool) : Bool)) { return cast _Runtime.mergeObjects([counted, { accepted: false }, { reason: 'missing-required-table' }, { table: tag }]); }
     }
-    if ((cast !(cast ((cast (cast directory : SfntTableDirectory).tables : flighthq._internal._Map<String, SfntTableRange>).has('glyf')) : Bool) : Bool)) {
-      if ((cast ((cast ((cast (cast directory : SfntTableDirectory).tables : flighthq._internal._Map<String, SfntTableRange>).has('CFF2')) : Bool) && (cast !(cast ((cast (cast directory : SfntTableDirectory).tables : flighthq._internal._Map<String, SfntTableRange>).has('CFF ')) : Bool) : Bool)) : Bool)) {
+    if ((cast !(cast ((cast (cast directory : { var tables:flighthq._internal._Map<String, SfntTableRange>; }).tables : flighthq._internal._Map<String, SfntTableRange>).has('glyf')) : Bool) : Bool)) {
+      if ((cast ((cast ((cast (cast directory : { var tables:flighthq._internal._Map<String, SfntTableRange>; }).tables : flighthq._internal._Map<String, SfntTableRange>).has('CFF2')) : Bool) && (cast !(cast ((cast (cast directory : { var tables:flighthq._internal._Map<String, SfntTableRange>; }).tables : flighthq._internal._Map<String, SfntTableRange>).has('CFF ')) : Bool) : Bool)) : Bool)) {
         return cast _Runtime.mergeObjects([counted, { accepted: false }, { reason: 'unsupported-outlines' }, { table: 'CFF2' }]);
       }
-      if ((cast !(cast ((cast (cast directory : SfntTableDirectory).tables : flighthq._internal._Map<String, SfntTableRange>).has('CFF ')) : Bool) : Bool)) {
+      if ((cast !(cast ((cast (cast directory : { var tables:flighthq._internal._Map<String, SfntTableRange>; }).tables : flighthq._internal._Map<String, SfntTableRange>).has('CFF ')) : Bool) : Bool)) {
         return cast _Runtime.mergeObjects([counted, { accepted: false }, { reason: 'missing-required-table' }, { table: 'glyf' }]);
       }
-    } else { if ((cast !(cast ((cast (cast directory : SfntTableDirectory).tables : flighthq._internal._Map<String, SfntTableRange>).has('loca')) : Bool) : Bool)) {
+    } else { if ((cast !(cast ((cast (cast directory : { var tables:flighthq._internal._Map<String, SfntTableRange>; }).tables : flighthq._internal._Map<String, SfntTableRange>).has('loca')) : Bool) : Bool)) {
       return cast _Runtime.mergeObjects([counted, { accepted: false }, { reason: 'missing-required-table' }, { table: 'loca' }]);
     } }
     parsed = (cast OpenTypeGlyphOutlineSource.readOpenTypeFontTables__openTypeGlyphOutlineSource(({ final __callArgument22:Dynamic = bytes; __callArgument22; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<OpenTypeFontTables__openTypeGlyphOutlineSource>);
@@ -148,7 +148,7 @@ class OpenTypeGlyphOutlineSource {
     codepoints = (cast readOpenTypeCodepointMap(({ final __callArgument32:Dynamic = bytes; __callArgument32; }), ({ final __callArgument33:Dynamic = directory; __callArgument33; })) : Null<flighthq._internal._Map<Float, Float>>);
     if ((cast ((cast ((cast _Runtime.strictEquals(metrics, null) : Bool) || (cast _Runtime.strictEquals(advances, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(codepoints, null) : Bool)) : Bool)) { return cast null; }
     shared = (cast { advances: advances, bytes: bytes, codepoints: codepoints, directory: directory, glyphCount: glyphCount, metrics: metrics });
-    if ((cast ((cast (cast directory : SfntTableDirectory).tables : flighthq._internal._Map<String, SfntTableRange>).has('glyf')) : Bool)) {
+    if ((cast ((cast (cast directory : { var tables:flighthq._internal._Map<String, SfntTableRange>; }).tables : flighthq._internal._Map<String, SfntTableRange>).has('glyf')) : Bool)) {
       var locaFormat:Float = (cast readOpenTypeLocaFormat(({ final __callArgument34:Dynamic = bytes; __callArgument34; }), ({ final __callArgument35:Dynamic = directory; __callArgument35; })) : Float);
       if ((cast _Runtime.strictEquals(locaFormat, -1.0) : Bool)) { return cast null; }
       var ranges:Null<flighthq._internal._UInt32Array> = (cast readOpenTypeGlyphRanges(({ final __callArgument36:Dynamic = bytes; __callArgument36; }), ({ final __callArgument37:Dynamic = directory; __callArgument37; }), (cast glyphCount : Float), (cast locaFormat : Float)) : Null<flighthq._internal._UInt32Array>);

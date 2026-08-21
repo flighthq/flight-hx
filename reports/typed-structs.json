@@ -52728,9 +52728,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 14,
+        "directAccesses": 14,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -52760,7 +52760,7 @@
       },
       "name": "CffIndex",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free CFF index",
       "reasons": [],
       "source": "upstream/packages/types/src/CffTable.ts",
       "sourceProvenance": {
@@ -307396,9 +307396,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 19,
+        "directAccesses": 19,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -307436,7 +307436,7 @@
       },
       "name": "SfntTableDirectory",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free SFNT table directory",
       "reasons": [],
       "source": "upstream/packages/types/src/SfntTableDirectory.ts",
       "sourceProvenance": {
@@ -307458,9 +307458,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 31,
+        "directAccesses": 31,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -307490,7 +307490,7 @@
       },
       "name": "SfntTableRange",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free SFNT table range",
       "reasons": [],
       "source": "upstream/packages/types/src/SfntTableDirectory.ts",
       "sourceProvenance": {
@@ -441243,9 +441243,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 27,
+        "directAccesses": 27,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -441331,7 +441331,7 @@
       },
       "name": "Woff2GlyfStreams",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WOFF2 glyf streams",
       "reasons": [],
       "source": "upstream/packages/types/src/Woff2GlyfStreams.ts",
       "sourceProvenance": {
@@ -441415,9 +441415,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -441471,7 +441471,7 @@
       },
       "name": "Woff2TableEntry",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WOFF2 table entry",
       "reasons": [],
       "source": "upstream/packages/types/src/Woff2TableDirectory.ts",
       "sourceProvenance": {
@@ -441762,7 +441762,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1348,
+      "newAuditOnly": 1343,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -441771,16 +441771,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1348,
+    "auditOnlySchemas": 1343,
     "bindableAccesses": 33306,
     "candidates": 2118,
-    "directAccesses": 25930,
-    "directSchemas": 768,
+    "directAccesses": 26030,
+    "directSchemas": 773,
     "eligible": 1611,
     "escapes": 11129,
     "fields": 25393,
     "ineligible": 507,
-    "pendingAccesses": 7376,
+    "pendingAccesses": 7276,
     "reflectiveSurvivors": 451
   },
   "upstreamCommit": "598ef6f62b6f1ae2873956501069ed824699021a"

@@ -45,22 +45,22 @@ class Woff2Font {
     raw = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     at = 0.0;
     for (entry in _Runtime.iterable((cast directory : Woff2TableDirectory).entries)) {
-      var length:Float = ((cast (cast entry : Woff2TableEntry).transformed : Bool) ? (cast (cast entry : Woff2TableEntry).transformLength : Dynamic) : (cast (cast entry : Woff2TableEntry).originalLength : Dynamic));
+      var length:Float = ((cast entry.transformed : Bool) ? (cast entry.transformLength : Dynamic) : (cast entry.originalLength : Dynamic));
       if ((cast ((cast (at + length) : Float) > (cast _Runtime.field(stream, 'byteLength') : Float)) : Bool)) { return cast null; }
-      ((cast raw : flighthq._internal._Map<String, flighthq._internal._UInt8Array>).set((cast entry : Woff2TableEntry).tag, (cast (cast stream : flighthq._internal._UInt8Array).subarray(Std.int(at), Std.int((at + length))))));
+      ((cast raw : flighthq._internal._Map<String, flighthq._internal._UInt8Array>).set(entry.tag, (cast (cast stream : flighthq._internal._UInt8Array).subarray(Std.int(at), Std.int((at + length))))));
       (at = cast ((at + length) : Dynamic));
     }
     tables = (cast cast ([] : Array<Dynamic>));
     for (entry in _Runtime.iterable((cast directory : Woff2TableDirectory).entries)) {
-      var stored:flighthq._internal._UInt8Array = ((cast raw : flighthq._internal._Map<String, flighthq._internal._UInt8Array>).get((cast entry : Woff2TableEntry).tag));
-      if ((cast !(cast (cast entry : Woff2TableEntry).transformed : Bool) : Bool)) {
-        _Runtime.callProperty(tables, 'push', cast ([{ data: stored, tag: (cast packSfntTag((cast (cast entry : Woff2TableEntry).tag : String)) : Float) }] : Array<Dynamic>));
+      var stored:flighthq._internal._UInt8Array = ((cast raw : flighthq._internal._Map<String, flighthq._internal._UInt8Array>).get(entry.tag));
+      if ((cast !(cast entry.transformed : Bool) : Bool)) {
+        _Runtime.callProperty(tables, 'push', cast ([{ data: stored, tag: (cast packSfntTag((cast entry.tag : String)) : Float) }] : Array<Dynamic>));
         continue;
       }
       if ((cast _Runtime.strictEquals(reverseTransform, null) : Bool)) { return cast null; }
-      var restored:Null<flighthq._internal._UInt8Array> = (cast (cast reverseTransform : String->flighthq._internal._UInt8Array->flighthq._internal._Map<String, flighthq._internal._UInt8Array>->Null<flighthq._internal._UInt8Array>)((cast (cast entry : Woff2TableEntry).tag : String), ({ final __callArgument6:Dynamic = stored; __callArgument6; }), ({ final __callArgument7:Dynamic = raw; __callArgument7; })) : Null<flighthq._internal._UInt8Array>);
+      var restored:Null<flighthq._internal._UInt8Array> = (cast (cast reverseTransform : String->flighthq._internal._UInt8Array->flighthq._internal._Map<String, flighthq._internal._UInt8Array>->Null<flighthq._internal._UInt8Array>)((cast entry.tag : String), ({ final __callArgument6:Dynamic = stored; __callArgument6; }), ({ final __callArgument7:Dynamic = raw; __callArgument7; })) : Null<flighthq._internal._UInt8Array>);
       if ((cast _Runtime.strictEquals(restored, null) : Bool)) { return cast null; }
-      _Runtime.callProperty(tables, 'push', cast ([{ data: restored, tag: (cast packSfntTag((cast (cast entry : Woff2TableEntry).tag : String)) : Float) }] : Array<Dynamic>));
+      _Runtime.callProperty(tables, 'push', cast ([{ data: restored, tag: (cast packSfntTag((cast entry.tag : String)) : Float) }] : Array<Dynamic>));
     }
     return cast (cast assembleSfntFont((cast flavor : Float), ({ final __callArgument8:Dynamic = tables; __callArgument8; })) : flighthq._internal._UInt8Array);
     return cast null;

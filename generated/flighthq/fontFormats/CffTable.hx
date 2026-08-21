@@ -38,7 +38,7 @@ class CffTable {
     subrsOffset = _Runtime.optionalIndex(({ final __collection2:Dynamic = privateDict; __collection2 == null ? _Runtime.UNDEFINED : ((cast __collection2 : flighthq._internal._Map<Float, Array<Float>>).get(CFF_OPERATOR_SUBRS)); }), 0.0);
     if ((cast _Runtime.strictEquals(subrsOffset, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     subrs = (cast readCffIndex(({ final __callArgument3:Dynamic = bytes; __callArgument3; }), (cast (privateAt + subrsOffset) : Float)) : Null<CffIndex>);
-    return cast ((cast _Runtime.strictEquals(subrs, null) : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast (cast subrs : CffIndex).entries : Dynamic));
+    return cast ((cast _Runtime.strictEquals(subrs, null) : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast (cast subrs : { var entries:Array<CffIndexEntry>; }).entries : Dynamic));
     return cast null;
   }
 
@@ -53,9 +53,9 @@ class CffTable {
     fdSelectOffset = _Runtime.optionalIndex(((cast top : flighthq._internal._Map<Float, Array<Float>>).get(CFF_OPERATOR_FD_SELECT)), 0.0);
     if ((cast ((cast _Runtime.strictEquals(fdArrayOffset, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(fdSelectOffset, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast null; }
     fdArray = (cast readCffIndex(({ final __callArgument4:Dynamic = bytes; __callArgument4; }), (cast (tableOffset + fdArrayOffset) : Float)) : Null<CffIndex>);
-    if ((cast ((cast _Runtime.strictEquals(fdArray, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast fdArray : CffIndex).entries, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast _Runtime.strictEquals(fdArray, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast fdArray : { var entries:Array<CffIndexEntry>; }).entries, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
     pools = (cast cast ([] : Array<Dynamic>));
-    for (entry in _Runtime.iterable((cast fdArray : CffIndex).entries)) {
+    for (entry in _Runtime.iterable((cast fdArray : { var entries:Array<CffIndexEntry>; }).entries)) {
       var fontDict:Null<flighthq._internal._Map<Float, Array<Float>>> = (cast readCffDict(({ final __callArgument7:Dynamic = bytes; __callArgument7; }), (cast (cast entry : CffIndexEntry).start : Float), (cast (cast entry : CffIndexEntry).end : Float)) : Null<flighthq._internal._Map<Float, Array<Float>>>);
       if ((cast _Runtime.strictEquals(fontDict, null) : Bool)) { return cast null; }
       _Runtime.callProperty(pools, 'push', cast ([(cast CffTable.readCffLocalSubrs__cffTable(({ final __callArgument8:Dynamic = bytes; __callArgument8; }), ({ final __callArgument9:Dynamic = fontDict; __callArgument9; }), (cast tableOffset : Float), (cast tableEnd : Float)) : Array<CffIndexEntry>)] : Array<Dynamic>));
@@ -91,34 +91,34 @@ class CffTable {
     var charstringsAt:Float = cast _Runtime.UNDEFINED;
     var charstrings:Null<CffIndex> = cast _Runtime.UNDEFINED;
     var isCid:Bool = cast _Runtime.UNDEFINED;
-    table = ((cast _Runtime.field(directory, 'tables') : flighthq._internal._Map<String, SfntTableRange>).get('CFF '));
-    if ((cast ((cast _Runtime.strictEquals(table, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast _Runtime.field(table, 'length') : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) { return cast null; }
+    table = ((cast directory.tables : flighthq._internal._Map<String, SfntTableRange>).get('CFF '));
+    if ((cast ((cast _Runtime.strictEquals(table, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast (cast table : { var length:Float; }).length : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) { return cast null; }
     view = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]);
-    headerSize = _Runtime.callProperty(view, 'getUint8', cast ([_Runtime.addNumbers(_Runtime.field(table, 'offset'), 2.0)] : Array<Dynamic>));
-    tableEnd = _Runtime.addNumbers(_Runtime.field(table, 'offset'), _Runtime.field(table, 'length'));
-    names = (cast readCffIndex(({ final __callArgument11:Dynamic = bytes; __callArgument11; }), (cast _Runtime.addNumbers(_Runtime.field(table, 'offset'), headerSize) : Float)) : Null<CffIndex>);
+    headerSize = _Runtime.callProperty(view, 'getUint8', cast ([((cast table : { var offset:Float; }).offset + 2.0)] : Array<Dynamic>));
+    tableEnd = ((cast table : { var offset:Float; }).offset + (cast table : { var length:Float; }).length);
+    names = (cast readCffIndex(({ final __callArgument11:Dynamic = bytes; __callArgument11; }), (cast ((cast table : { var offset:Float; }).offset + headerSize) : Float)) : Null<CffIndex>);
     if ((cast _Runtime.strictEquals(names, null) : Bool)) { return cast null; }
-    topDicts = (cast readCffIndex(({ final __callArgument12:Dynamic = bytes; __callArgument12; }), (cast (cast names : CffIndex).endOffset : Float)) : Null<CffIndex>);
-    if ((cast ((cast _Runtime.strictEquals(topDicts, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast topDicts : CffIndex).entries, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
-    strings = (cast readCffIndex(({ final __callArgument13:Dynamic = bytes; __callArgument13; }), (cast (cast topDicts : CffIndex).endOffset : Float)) : Null<CffIndex>);
+    topDicts = (cast readCffIndex(({ final __callArgument12:Dynamic = bytes; __callArgument12; }), (cast (cast names : { var endOffset:Float; }).endOffset : Float)) : Null<CffIndex>);
+    if ((cast ((cast _Runtime.strictEquals(topDicts, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast topDicts : { var entries:Array<CffIndexEntry>; }).entries, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
+    strings = (cast readCffIndex(({ final __callArgument13:Dynamic = bytes; __callArgument13; }), (cast (cast topDicts : { var endOffset:Float; }).endOffset : Float)) : Null<CffIndex>);
     if ((cast _Runtime.strictEquals(strings, null) : Bool)) { return cast null; }
-    globals = (cast readCffIndex(({ final __callArgument14:Dynamic = bytes; __callArgument14; }), (cast (cast strings : CffIndex).endOffset : Float)) : Null<CffIndex>);
+    globals = (cast readCffIndex(({ final __callArgument14:Dynamic = bytes; __callArgument14; }), (cast (cast strings : { var endOffset:Float; }).endOffset : Float)) : Null<CffIndex>);
     if ((cast _Runtime.strictEquals(globals, null) : Bool)) { return cast null; }
-    top = (cast readCffDict(({ final __callArgument15:Dynamic = bytes; __callArgument15; }), (cast (cast flighthq._internal._StaticIndex.readArray((cast topDicts : CffIndex).entries, 0.0) : CffIndexEntry).start : Float), (cast (cast flighthq._internal._StaticIndex.readArray((cast topDicts : CffIndex).entries, 0.0) : CffIndexEntry).end : Float)) : Null<flighthq._internal._Map<Float, Array<Float>>>);
+    top = (cast readCffDict(({ final __callArgument15:Dynamic = bytes; __callArgument15; }), (cast (cast flighthq._internal._StaticIndex.readArray((cast topDicts : { var entries:Array<CffIndexEntry>; }).entries, 0.0) : CffIndexEntry).start : Float), (cast (cast flighthq._internal._StaticIndex.readArray((cast topDicts : { var entries:Array<CffIndexEntry>; }).entries, 0.0) : CffIndexEntry).end : Float)) : Null<flighthq._internal._Map<Float, Array<Float>>>);
     if ((cast _Runtime.strictEquals(top, null) : Bool)) { return cast null; }
     charstringsOffset = _Runtime.optionalIndex(((cast top : flighthq._internal._Map<Float, Array<Float>>).get(CFF_OPERATOR_CHARSTRINGS)), 0.0);
     if ((cast _Runtime.strictEquals(charstringsOffset, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
-    charstringsAt = _Runtime.addNumbers(_Runtime.field(table, 'offset'), charstringsOffset);
-    if ((cast ((cast ((cast charstringsAt : Float) < (cast _Runtime.field(table, 'offset') : Float)) : Bool) || (cast ((cast charstringsAt : Float) >= (cast tableEnd : Float)) : Bool)) : Bool)) { return cast null; }
+    charstringsAt = ((cast table : { var offset:Float; }).offset + charstringsOffset);
+    if ((cast ((cast ((cast charstringsAt : Float) < (cast (cast table : { var offset:Float; }).offset : Float)) : Bool) || (cast ((cast charstringsAt : Float) >= (cast tableEnd : Float)) : Bool)) : Bool)) { return cast null; }
     charstrings = (cast readCffIndex(({ final __callArgument16:Dynamic = bytes; __callArgument16; }), (cast charstringsAt : Float)) : Null<CffIndex>);
     if ((cast _Runtime.strictEquals(charstrings, null) : Bool)) { return cast null; }
     isCid = ((cast ((cast top : flighthq._internal._Map<Float, Array<Float>>).has(CFF_OPERATOR_FD_ARRAY)) : Bool) && (cast ((cast top : flighthq._internal._Map<Float, Array<Float>>).has(CFF_OPERATOR_FD_SELECT)) : Bool));
     if ((cast isCid : Bool)) {
-      var perGlyph:Null<Array<Array<CffIndexEntry>>> = (cast CffTable.readCffCidSubrs__cffTable(({ final __callArgument17:Dynamic = bytes; __callArgument17; }), ({ final __callArgument18:Dynamic = top; __callArgument18; }), (cast _Runtime.field(table, 'offset') : Float), (cast tableEnd : Float), (cast _Runtime.field((cast charstrings : CffIndex).entries, 'length') : Float)) : Null<Array<Array<CffIndexEntry>>>);
+      var perGlyph:Null<Array<Array<CffIndexEntry>>> = (cast CffTable.readCffCidSubrs__cffTable(({ final __callArgument17:Dynamic = bytes; __callArgument17; }), ({ final __callArgument18:Dynamic = top; __callArgument18; }), (cast (cast table : { var offset:Float; }).offset : Float), (cast tableEnd : Float), (cast _Runtime.field((cast charstrings : { var entries:Array<CffIndexEntry>; }).entries, 'length') : Float)) : Null<Array<Array<CffIndexEntry>>>);
       if ((cast _Runtime.strictEquals(perGlyph, null) : Bool)) { return cast null; }
-      return cast { charstrings: (cast charstrings : CffIndex).entries, globalSubrs: (cast globals : CffIndex).entries, localSubrs: cast ([] : Array<Dynamic>), localSubrsByGlyph: perGlyph };
+      return cast { charstrings: (cast charstrings : { var entries:Array<CffIndexEntry>; }).entries, globalSubrs: (cast globals : { var entries:Array<CffIndexEntry>; }).entries, localSubrs: cast ([] : Array<Dynamic>), localSubrsByGlyph: perGlyph };
     }
-    return cast { charstrings: (cast charstrings : CffIndex).entries, globalSubrs: (cast globals : CffIndex).entries, localSubrs: (cast CffTable.readCffLocalSubrs__cffTable(({ final __callArgument19:Dynamic = bytes; __callArgument19; }), ({ final __callArgument20:Dynamic = top; __callArgument20; }), (cast _Runtime.field(table, 'offset') : Float), (cast tableEnd : Float)) : Array<CffIndexEntry>), localSubrsByGlyph: null };
+    return cast { charstrings: (cast charstrings : { var entries:Array<CffIndexEntry>; }).entries, globalSubrs: (cast globals : { var entries:Array<CffIndexEntry>; }).entries, localSubrs: (cast CffTable.readCffLocalSubrs__cffTable(({ final __callArgument19:Dynamic = bytes; __callArgument19; }), ({ final __callArgument20:Dynamic = top; __callArgument20; }), (cast (cast table : { var offset:Float; }).offset : Float), (cast tableEnd : Float)) : Array<CffIndexEntry>), localSubrsByGlyph: null };
     return cast null;
   }
 }
