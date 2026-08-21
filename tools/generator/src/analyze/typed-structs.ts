@@ -1643,6 +1643,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#TiltShiftEffect',
     purpose: 'reviewed escape-free tilt-shift effect',
   },
+  {
+    declarationFingerprint: 'sha256:37096ced174312eb2922c58215277db0bb82a6aaef5a6151e566048a172e830e',
+    id: '@flighthq/types:interface#AnisotropyPbrExtension',
+    purpose: 'reviewed escape-free anisotropy PBR extension',
+  },
+  {
+    declarationFingerprint: 'sha256:2b6e077b6b1679a2d911c05c53b37f74ef4d6522381ff80e683b663407c47559',
+    id: '@flighthq/types:interface#DepthMaterial',
+    purpose: 'reviewed escape-free depth material',
+  },
+  {
+    declarationFingerprint: 'sha256:c70d8469431bf75424c4a4a457ce0d99ad98a217f88c1bfe6c687de4407e4031',
+    id: '@flighthq/types:interface#NormalMaterial',
+    purpose: 'reviewed escape-free normal material',
+  },
+  {
+    declarationFingerprint: 'sha256:9d8cc36eaecca7c66c0ce29413c59ec9780d206a161003fb62f06b580efd7d2b',
+    id: '@flighthq/types:interface#VertexColorMaterial',
+    purpose: 'reviewed escape-free vertex-color material',
+  },
+  {
+    declarationFingerprint: 'sha256:99fe447361adb31ff8434deb7f21c124b509a725ca83f0248cfb14280692d699',
+    id: '@flighthq/types:interface#WireframeMaterial',
+    purpose: 'reviewed escape-free wireframe material',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

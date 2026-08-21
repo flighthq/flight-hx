@@ -32,13 +32,13 @@ class DepthGlMeshMaterialRenderer {
     var program:GlDebugProgram = cast _Runtime.UNDEFINED;
     depth = (cast material : Null<DepthMaterial>);
     program = (cast ensureGlDebugProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = { hasNormalMap: false, mode: 'depth' }; __callArgument1; })) : GlDebugProgram);
-    beginGlMeshDraw(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = program; __callArgument3; }), (cast ((cast !_Runtime.strictEquals(depth, null) : Bool) && (cast _Runtime.field(depth, 'doubleSided') : Bool)) : Bool));
+    beginGlMeshDraw(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = program; __callArgument3; }), (cast ((cast !_Runtime.strictEquals(depth, null) : Bool) && (cast (cast depth : { var doubleSided:Bool; }).doubleSided : Bool)) : Bool));
     setGlMeshViewProjection(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast program : GlDebugProgram).locViewProjection, ({ final __callArgument5:Dynamic = camera; __callArgument5; }));
     if ((cast _Runtime.strictEquals(depth, null) : Bool)) {
       bindGlDebugRange(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = program; __callArgument7; }), (cast 0.0 : Float), (cast 1.0 : Float));
       return;
     }
-    bindGlDebugRange(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = program; __callArgument9; }), (cast _Runtime.field(depth, 'near') : Float), (cast _Runtime.field(depth, 'far') : Float));
+    bindGlDebugRange(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = program; __callArgument9; }), (cast (cast depth : { var near:Float; }).near : Float), (cast (cast depth : { var far:Float; }).far : Float));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
     program = (cast (cast getGlScene3DRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;

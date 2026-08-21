@@ -37,15 +37,15 @@ class VertexColorGlMeshMaterialRenderer {
     gl = (cast state : GlRenderState).gl;
     vertexColor = (cast material : Null<VertexColorMaterial>);
     program = (cast ensureGlUnlitProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast VertexColorGlMeshMaterialRenderer.defineKeyForMaterial__vertexColorGlMeshMaterialRenderer(({ final __callArgument1:Dynamic = vertexColor; __callArgument1; })) : GlUnlitDefineKey)) : GlUnlitProgram);
-    beginGlMeshDraw(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = program; __callArgument3; }), (cast ((cast !_Runtime.strictEquals(vertexColor, null) : Bool) && (cast _Runtime.field(vertexColor, 'doubleSided') : Bool)) : Bool));
+    beginGlMeshDraw(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = program; __callArgument3; }), (cast ((cast !_Runtime.strictEquals(vertexColor, null) : Bool) && (cast (cast vertexColor : { var doubleSided:Bool; }).doubleSided : Bool)) : Bool));
     setGlMeshViewProjection(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast program : GlUnlitProgram).locViewProjection, ({ final __callArgument5:Dynamic = camera; __callArgument5; }));
     flighthq._internal.backend.WebGl2Backend.vertexAttrib4f(gl, 4.0, 1.0, 1.0, 1.0, 1.0);
     if ((cast _Runtime.strictEquals(vertexColor, null) : Bool)) {
       bindGlUnlitSurface(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = program; __callArgument7; }), ({ final __callArgument8:Dynamic = VertexColorGlMeshMaterialRenderer.WHITE__vertexColorGlMeshMaterialRenderer; __callArgument8; }), (cast 1.0 : Float), (cast null : Dynamic), (cast 0.5 : Float));
       return;
     }
-    (cast unpackColorToLinear(({ final __callArgument9:Dynamic = VertexColorGlMeshMaterialRenderer.scratchRgba__vertexColorGlMeshMaterialRenderer; __callArgument9; }), (cast _Runtime.field(vertexColor, 'tint') : Float)) : LinearColor);
-    bindGlUnlitSurface(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = program; __callArgument11; }), ({ final __callArgument12:Dynamic = VertexColorGlMeshMaterialRenderer.scratchRgba__vertexColorGlMeshMaterialRenderer; __callArgument12; }), (cast 1.0 : Float), (cast null : Dynamic), (cast _Runtime.field(vertexColor, 'alphaCutoff') : Float));
+    (cast unpackColorToLinear(({ final __callArgument9:Dynamic = VertexColorGlMeshMaterialRenderer.scratchRgba__vertexColorGlMeshMaterialRenderer; __callArgument9; }), (cast (cast vertexColor : { var tint:Float; }).tint : Float)) : LinearColor);
+    bindGlUnlitSurface(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = program; __callArgument11; }), ({ final __callArgument12:Dynamic = VertexColorGlMeshMaterialRenderer.scratchRgba__vertexColorGlMeshMaterialRenderer; __callArgument12; }), (cast 1.0 : Float), (cast null : Dynamic), (cast (cast vertexColor : { var alphaCutoff:Float; }).alphaCutoff : Float));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
     program = (cast (cast getGlScene3DRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;
@@ -58,7 +58,7 @@ class VertexColorGlMeshMaterialRenderer {
   }
 
   public static function defineKeyForMaterial__vertexColorGlMeshMaterialRenderer(material:Null<VertexColorMaterial>):GlUnlitDefineKey {
-    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(material, 'alphaMode'), 'mask') : Bool)), hasColorMap: false, hasUvTransform: false, vertexColor: true };
+    return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(material, null) : Bool) && (cast _Runtime.strictEquals((cast material : { var alphaMode:MaterialAlphaMode; }).alphaMode, 'mask') : Bool)), hasColorMap: false, hasUvTransform: false, vertexColor: true };
     return cast null;
   }
 

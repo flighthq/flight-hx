@@ -26,7 +26,7 @@ class AnisotropyPbrScene3DMaterialTextures {
     registerScene3DPbrExtensionTextures(({ final __callArgument0:Dynamic = registry; __callArgument0; }), (cast AnisotropyPbrExtensionKind : String), ({ final __callArgument1:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
       var anisotropy:AnisotropyPbrExtension = cast _Runtime.UNDEFINED;
       anisotropy = (cast extension : AnisotropyPbrExtension);
-      if ((cast !_Runtime.strictEquals(_Runtime.field(anisotropy, 'anisotropyMap'), null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([_Runtime.field(anisotropy, 'anisotropyMap')] : Array<Dynamic>)); }
+      if ((cast !_Runtime.strictEquals(anisotropy.anisotropyMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([anisotropy.anisotropyMap] : Array<Dynamic>)); }
     }; __callArgument1; }));
   }
 }

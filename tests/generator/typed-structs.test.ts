@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_281,
+      newAuditOnly: 1_276,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(725);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(730);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_281);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_276);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(323);
+    expect(newDirect).toHaveLength(328);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1725,6 +1725,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'TiltShiftEffect',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free tilt-shift effect',
+        }),
+        expect.objectContaining({
+          name: 'AnisotropyPbrExtension',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free anisotropy PBR extension',
+        }),
+        expect.objectContaining({
+          name: 'DepthMaterial',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free depth material',
+        }),
+        expect.objectContaining({
+          name: 'NormalMaterial',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free normal material',
+        }),
+        expect.objectContaining({
+          name: 'VertexColorMaterial',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free vertex-color material',
+        }),
+        expect.objectContaining({
+          name: 'WireframeMaterial',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free wireframe material',
         }),
       ]),
     );
@@ -3344,6 +3369,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#TiltShiftEffect',
         purpose: 'reviewed escape-free tilt-shift effect',
       },
+      {
+        declarationFingerprint: 'sha256:37096ced174312eb2922c58215277db0bb82a6aaef5a6151e566048a172e830e',
+        id: '@flighthq/types:interface#AnisotropyPbrExtension',
+        purpose: 'reviewed escape-free anisotropy PBR extension',
+      },
+      {
+        declarationFingerprint: 'sha256:2b6e077b6b1679a2d911c05c53b37f74ef4d6522381ff80e683b663407c47559',
+        id: '@flighthq/types:interface#DepthMaterial',
+        purpose: 'reviewed escape-free depth material',
+      },
+      {
+        declarationFingerprint: 'sha256:c70d8469431bf75424c4a4a457ce0d99ad98a217f88c1bfe6c687de4407e4031',
+        id: '@flighthq/types:interface#NormalMaterial',
+        purpose: 'reviewed escape-free normal material',
+      },
+      {
+        declarationFingerprint: 'sha256:9d8cc36eaecca7c66c0ce29413c59ec9780d206a161003fb62f06b580efd7d2b',
+        id: '@flighthq/types:interface#VertexColorMaterial',
+        purpose: 'reviewed escape-free vertex-color material',
+      },
+      {
+        declarationFingerprint: 'sha256:99fe447361adb31ff8434deb7f21c124b509a725ca83f0248cfb14280692d699',
+        id: '@flighthq/types:interface#WireframeMaterial',
+        purpose: 'reviewed escape-free wireframe material',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -4378,6 +4428,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const thirtyEighthHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'AnisotropyPbrExtension',
+            'DepthMaterial',
+            'NormalMaterial',
+            'VertexColorMaterial',
+            'WireframeMaterial',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -4418,22 +4481,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_281,
+      auditOnlySchemas: 1_276,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 24_452,
-      directSchemas: 723,
+      directAccesses: 24_496,
+      directSchemas: 728,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 6_214,
+      pendingAccesses: 6_170,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_281,
+      newAuditOnly: 1_276,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -4510,7 +4573,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(24_452);
+    expect(report.summary.directAccesses).toBe(24_496);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -6320,6 +6383,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(thirtySeventhHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'AnisotropyPbrExtension',
+        10,
+        'sha256:37096ced174312eb2922c58215277db0bb82a6aaef5a6151e566048a172e830e',
+        'reviewed escape-free anisotropy PBR extension',
+      ],
+      [
+        'DepthMaterial',
+        8,
+        'sha256:2b6e077b6b1679a2d911c05c53b37f74ef4d6522381ff80e683b663407c47559',
+        'reviewed escape-free depth material',
+      ],
+      [
+        'NormalMaterial',
+        9,
+        'sha256:c70d8469431bf75424c4a4a457ce0d99ad98a217f88c1bfe6c687de4407e4031',
+        'reviewed escape-free normal material',
+      ],
+      [
+        'VertexColorMaterial',
+        9,
+        'sha256:9d8cc36eaecca7c66c0ce29413c59ec9780d206a161003fb62f06b580efd7d2b',
+        'reviewed escape-free vertex-color material',
+      ],
+      [
+        'WireframeMaterial',
+        8,
+        'sha256:99fe447361adb31ff8434deb7f21c124b509a725ca83f0248cfb14280692d699',
+        'reviewed escape-free wireframe material',
+      ],
+    ] as const) {
+      expect(thirtyEighthHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -8471,6 +8576,20 @@ describe('typed struct analysis', () => {
       });
       expect(provenanceById.has(effectId)).toBe(false);
     }
+    for (const [frontierId, observabilityReasons] of [
+      ['@flighthq/types:interface#AnisotropyPbrExtension', []],
+      ['@flighthq/types:interface#DepthMaterial', ['optional-omission']],
+      ['@flighthq/types:interface#NormalMaterial', ['optional-omission']],
+      ['@flighthq/types:interface#VertexColorMaterial', ['optional-omission']],
+      ['@flighthq/types:interface#WireframeMaterial', ['optional-omission']],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible: false,
+        normalizationReasons: ['cross-schema-transfer'],
+        observabilityReasons,
+      });
+      expect(provenanceById.has(frontierId)).toBe(false);
+    }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
@@ -9916,6 +10035,24 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:CrtEffect|DirectionalBlurEffect|LensFlareEffect|RadialBlurEffect|TiltShiftEffect)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/materials/AnisotropyPbrExtension.hx',
+      'generated/flighthq/materials/UnlitMaterials.hx',
+      'generated/flighthq/scene3dGl/AnisotropyPbrGlExtension.hx',
+      'generated/flighthq/scene3dGl/DepthGlMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dGl/NormalGlMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dGl/VertexColorGlMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dGl/WireframeGlMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dResources/AnisotropyPbrScene3DMaterialTextures.hx',
+      'generated/flighthq/scene3dWgpu/DepthWgpuMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dWgpu/NormalWgpuMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dWgpu/VertexColorWgpuMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dWgpu/WireframeWgpuMeshMaterialRenderer.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AnisotropyPbrExtension|DepthMaterial|NormalMaterial|VertexColorMaterial|WireframeMaterial)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
