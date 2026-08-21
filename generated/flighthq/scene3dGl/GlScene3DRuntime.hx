@@ -36,9 +36,9 @@ class GlScene3DRuntime {
     ((cast (cast scene : { var programCache:flighthq._internal._Map<String, GlMeshProgram>; }).programCache : flighthq._internal._Map<String, GlMeshProgram>).clear());
     ((cast scene : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram = cast (null : Null<GlMeshProgram>));
     if ((cast !_Runtime.strictEquals((cast scene : { var ibl:Null<GlScene3DIbl>; }).ibl, null) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, (cast (cast scene : { var ibl:Null<GlScene3DIbl>; }).ibl : GlScene3DIbl).brdfLut);
-      flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, (cast (cast scene : { var ibl:Null<GlScene3DIbl>; }).ibl : GlScene3DIbl).irradianceCube);
-      flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, (cast (cast scene : { var ibl:Null<GlScene3DIbl>; }).ibl : GlScene3DIbl).prefilteredCube);
+      flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, (cast (cast scene : { var ibl:Null<GlScene3DIbl>; }).ibl : { var brdfLut:flighthq._internal.dom.WebGLTexture; }).brdfLut);
+      flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, (cast (cast scene : { var ibl:Null<GlScene3DIbl>; }).ibl : { var irradianceCube:flighthq._internal.dom.WebGLTexture; }).irradianceCube);
+      flighthq._internal.backend.WebGl2Backend.deleteTexture(gl, (cast (cast scene : { var ibl:Null<GlScene3DIbl>; }).ibl : { var prefilteredCube:flighthq._internal.dom.WebGLTexture; }).prefilteredCube);
       ((cast scene : { var ibl:Null<GlScene3DIbl>; }).ibl = cast (null : Null<GlScene3DIbl>));
     }
     if ((cast !_Runtime.strictEquals((cast scene : { var iblBakeFramebuffer:Null<flighthq._internal.dom.WebGLFramebuffer>; }).iblBakeFramebuffer, null) : Bool)) {

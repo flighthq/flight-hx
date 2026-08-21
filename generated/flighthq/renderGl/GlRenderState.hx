@@ -209,8 +209,8 @@ class GlRenderState {
     if (_Runtime.truthy(runtime.colorMatrixInstancedShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.colorMatrixInstancedShader : { var program:flighthq._internal.dom.WebGLProgram; }).program)); }
     if (_Runtime.truthy(runtime.colorTintInstancedShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.colorTintInstancedShader : { var program:flighthq._internal.dom.WebGLProgram; }).program)); }
     if (_Runtime.truthy(runtime.uniformColorScaleBiasShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.uniformColorScaleBiasShader : GlUniformColorScaleBiasShader).program)); }
-    if (_Runtime.truthy(runtime.shapeMeshColorScaleBiasShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.shapeMeshColorScaleBiasShader : GlShapeMeshColorScaleBiasShader).program)); }
-    if (_Runtime.truthy(runtime.shapeMeshColorMatrixShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.shapeMeshColorMatrixShader : GlShapeMeshColorScaleBiasShader).program)); }
+    if (_Runtime.truthy(runtime.shapeMeshColorScaleBiasShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.shapeMeshColorScaleBiasShader : { var program:flighthq._internal.dom.WebGLProgram; }).program)); }
+    if (_Runtime.truthy(runtime.shapeMeshColorMatrixShader)) { ((cast programs : flighthq._internal._Set<flighthq._internal.dom.WebGLProgram>).add((cast runtime.shapeMeshColorMatrixShader : { var program:flighthq._internal.dom.WebGLProgram; }).program)); }
     for (program in _Runtime.iterable(programs)) {
       flighthq._internal.backend.WebGl2Backend.deleteProgram(gl, program);
     }

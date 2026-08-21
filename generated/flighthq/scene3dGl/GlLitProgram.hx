@@ -86,17 +86,17 @@ class GlLitProgram {
     ibl = runtime.ibl;
     if ((cast !_Runtime.strictEquals(ibl, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram));
-      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), (cast ibl : GlScene3DIbl).irradianceCube);
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), (cast ibl : { var irradianceCube:flighthq._internal.dom.WebGLTexture; }).irradianceCube);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locIblIrradiance, GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram));
-      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), (cast ibl : GlScene3DIbl).prefilteredCube);
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), (cast ibl : { var prefilteredCube:flighthq._internal.dom.WebGLTexture; }).prefilteredCube);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locIblPrefiltered, GlLitProgram.IBL_PREFILTERED_TEXTURE_UNIT__glLitProgram);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram));
-      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast ibl : GlScene3DIbl).brdfLut);
+      flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast ibl : { var brdfLut:flighthq._internal.dom.WebGLTexture; }).brdfLut);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locIblBrdf, GlLitProgram.IBL_BRDF_TEXTURE_UNIT__glLitProgram);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locIblEnabled, 1.0);
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locIblIntensity, (cast ibl : GlScene3DIbl).intensity);
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locIblMaxMip, ((cast ibl : GlScene3DIbl).prefilteredMipCount - 1.0));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locIblIntensity, (cast ibl : { var intensity:Float; }).intensity);
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locIblMaxMip, ((cast ibl : { var prefilteredMipCount:Float; }).prefilteredMipCount - 1.0));
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
     } else {
       var placeholders:GlIblPlaceholders__glLitProgram = (cast GlLitProgram.ensureGlIblPlaceholders__glLitProgram(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlIblPlaceholders__glLitProgram);

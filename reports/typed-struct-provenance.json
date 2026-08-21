@@ -23851,7 +23851,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 10,
       "fields": 2,
       "id": "@flighthq/types:interface#GlColorLutTextureCache",
       "name": "GlColorLutTextureCache",
@@ -25005,7 +25005,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 9,
       "fields": 5,
       "id": "@flighthq/types:interface#GlScene3DIbl",
       "name": "GlScene3DIbl",
@@ -25688,7 +25688,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 10,
       "fields": 4,
       "id": "@flighthq/types:interface#GlWireframeUpload",
       "name": "GlWireframeUpload",

@@ -615,12 +615,12 @@ class GlColorAdjustmentMaterialFeature {
       return;
     }
     shader = ((cast _Runtime.looseEquals(colorMatrix, null) : Bool) ? (cast (cast GlColorAdjustmentMaterialFeature.ensureGlShapeMeshColorScaleBiasShader__glColorAdjustmentMaterialFeature(({ final __callArgument138:Dynamic = state; __callArgument138; })) : GlShapeMeshColorScaleBiasShader) : Dynamic) : (cast (cast GlColorAdjustmentMaterialFeature.ensureGlShapeMeshColorMatrixShader__glColorAdjustmentMaterialFeature(({ final __callArgument139:Dynamic = state; __callArgument139; })) : GlShapeMeshColorScaleBiasShader) : Dynamic));
-    binding = (cast { program: (cast shader : GlShapeMeshColorScaleBiasShader).program, vertexBuffer: base.vertexBuffer, indexBuffer: base.indexBuffer, positionLocation: (cast shader : GlShapeMeshColorScaleBiasShader).positionLocation, matrixLocation: (cast shader : GlShapeMeshColorScaleBiasShader).matrixLocation, colorLocation: (cast shader : GlShapeMeshColorScaleBiasShader).colorLocation });
+    binding = (cast { program: shader.program, vertexBuffer: base.vertexBuffer, indexBuffer: base.indexBuffer, positionLocation: shader.positionLocation, matrixLocation: shader.matrixLocation, colorLocation: shader.colorLocation });
     drawGlShapeMeshBatch(({ final __callArgument140:Dynamic = state; __callArgument140; }), ({ final __callArgument141:Dynamic = renderProxy; __callArgument141; }), ({ final __callArgument142:Dynamic = meshes; __callArgument142; }), ({ final __callArgument143:Dynamic = binding; __callArgument143; }), ({ final __callArgument144:Dynamic = function(bound:GlRenderState):Void {
       var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
       gl = (cast bound : GlRenderState).gl;
       if ((cast !_Runtime.looseEquals(colorMatrix, null) : Bool)) {
-        var locations:Array<Null<flighthq._internal.dom.WebGLUniformLocation>> = (cast shader : GlShapeMeshColorScaleBiasShader).colorMatrixLocations;
+        var locations:Array<Null<flighthq._internal.dom.WebGLUniformLocation>> = shader.colorMatrixLocations;
         {
           var row:Float = 0.0;
           while ((cast ((cast row : Float) < (cast 4.0 : Float)) : Bool)) {
@@ -632,8 +632,8 @@ class GlColorAdjustmentMaterialFeature {
         flighthq._internal.backend.WebGl2Backend.uniform4f(gl, flighthq._internal._StaticIndex.readArray(locations, 4.0), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 4.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 9.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 14.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 19.0 : Float)));
         return;
       }
-      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, (cast shader : GlShapeMeshColorScaleBiasShader).colorScaleLocation, (cast colorScaleBias : { var redScale:Float; }).redScale, (cast colorScaleBias : { var greenScale:Float; }).greenScale, (cast colorScaleBias : { var blueScale:Float; }).blueScale, (cast colorScaleBias : { var alphaScale:Float; }).alphaScale);
-      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, (cast shader : GlShapeMeshColorScaleBiasShader).colorBiasLocation, (cast colorScaleBias : { var redBias:Float; }).redBias, (cast colorScaleBias : { var greenBias:Float; }).greenBias, (cast colorScaleBias : { var blueBias:Float; }).blueBias, (cast colorScaleBias : { var alphaBias:Float; }).alphaBias);
+      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, shader.colorScaleLocation, (cast colorScaleBias : { var redScale:Float; }).redScale, (cast colorScaleBias : { var greenScale:Float; }).greenScale, (cast colorScaleBias : { var blueScale:Float; }).blueScale, (cast colorScaleBias : { var alphaScale:Float; }).alphaScale);
+      flighthq._internal.backend.WebGl2Backend.uniform4f(gl, shader.colorBiasLocation, (cast colorScaleBias : { var redBias:Float; }).redBias, (cast colorScaleBias : { var greenBias:Float; }).greenBias, (cast colorScaleBias : { var blueBias:Float; }).blueBias, (cast colorScaleBias : { var alphaBias:Float; }).alphaBias);
     }; __callArgument144; }));
   }
 

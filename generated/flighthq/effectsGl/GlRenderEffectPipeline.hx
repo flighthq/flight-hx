@@ -77,11 +77,11 @@ class GlRenderEffectPipeline {
       (pipeline.sceneTarget = cast (null : Null<GlRenderTarget>));
     }
     destroyGlRenderTargetPool(({ final __callArgument5:Dynamic = state; __callArgument5; }), pipeline.pool);
-    if ((cast !_Runtime.strictEquals((cast pipeline.lutTexture : GlColorLutTextureCache).texture, null) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.deleteTexture((cast state : GlRenderState).gl, (cast pipeline.lutTexture : GlColorLutTextureCache).texture);
-      ((cast pipeline.lutTexture : GlColorLutTextureCache).texture = null);
+    if ((cast !_Runtime.strictEquals((cast pipeline.lutTexture : { var texture:Null<flighthq._internal.dom.WebGLTexture>; }).texture, null) : Bool)) {
+      flighthq._internal.backend.WebGl2Backend.deleteTexture((cast state : GlRenderState).gl, (cast pipeline.lutTexture : { var texture:Null<flighthq._internal.dom.WebGLTexture>; }).texture);
+      ((cast pipeline.lutTexture : { var texture:Null<flighthq._internal.dom.WebGLTexture>; }).texture = cast (null : Null<flighthq._internal.dom.WebGLTexture>));
     }
-    ((cast pipeline.lutTexture : GlColorLutTextureCache).lut = null);
+    ((cast pipeline.lutTexture : { var lut:Null<ColorLut>; }).lut = cast (null : Null<ColorLut>));
     ((cast pipeline.lutCache : { var signature:Null<String>; }).signature = cast (null : Null<String>));
     ((cast pipeline.lutCache : { var lut:Null<ColorLut>; }).lut = cast (null : Null<ColorLut>));
   }

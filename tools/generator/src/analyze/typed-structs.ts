@@ -1593,6 +1593,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#Physics2DWheelJointOptions',
     purpose: 'reviewed escape-free physics wheel-joint options',
   },
+  {
+    declarationFingerprint: 'sha256:28022486054f5704cc934e961f951937b26459388fd4d73a20763de668fb2500',
+    id: '@flighthq/types:interface#GlColorLutTextureCache',
+    purpose: 'reviewed escape-free WebGL color-LUT texture cache',
+  },
+  {
+    declarationFingerprint: 'sha256:60a7d244805c8bf2b3b72e2fcf4777fe83b902d5676a58e0975baa9b8cf7d52c',
+    id: '@flighthq/types:interface#GlScene3DIbl',
+    purpose: 'reviewed escape-free WebGL Scene3D IBL',
+  },
+  {
+    declarationFingerprint: 'sha256:df1e98bd12a8d711c970bbc0453b9fbccdcb484b40c72fbb3f426e18442333ed',
+    id: '@flighthq/types:interface#GlShapeMeshColorScaleBiasShader',
+    purpose: 'reviewed escape-free WebGL shape-mesh color-scale-bias shader',
+  },
+  {
+    declarationFingerprint: 'sha256:246dc6c529144431c519bf28ad1b7b38a1b7d40a7d85e35ea777ffeaebb1748c',
+    id: '@flighthq/types:interface#GlToonProgram',
+    purpose: 'reviewed escape-free WebGL toon program',
+  },
+  {
+    declarationFingerprint: 'sha256:6aaa4136bcd431697355c53644dbe3b6636296775ee6f35ff740addf61f844ce',
+    id: '@flighthq/types:interface#GlWireframeUpload',
+    purpose: 'reviewed escape-free WebGL wireframe upload',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

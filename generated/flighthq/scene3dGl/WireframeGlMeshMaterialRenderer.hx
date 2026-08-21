@@ -63,8 +63,8 @@ class WireframeGlMeshMaterialRenderer {
     uploadGlMeshDrawAlpha(({ final __callArgument8:Dynamic = gl; __callArgument8; }), ({ final __callArgument9:Dynamic = program; __callArgument9; }), (cast _Runtime.coalesce(proxy.alpha, function():Dynamic return cast 1.0) : Float), ({ final __callArgument10:Dynamic = proxy.material; __callArgument10; }));
     upload = (cast ensureGlWireframeUpload(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = geometry; __callArgument12; })) : GlWireframeUpload);
     subset = proxy.subset;
-    elementSize = ((cast _Runtime.strictEquals((cast upload : GlWireframeUpload).indexType, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT)) : Bool) ? (cast 4.0 : Dynamic) : (cast 2.0 : Dynamic));
-    flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINES', flighthq._internal.backend.WebGl2Backend.LINES), (subset.indexCount * 2.0), (cast upload : GlWireframeUpload).indexType, ((subset.indexOffset * 2.0) * elementSize));
+    elementSize = ((cast _Runtime.strictEquals(upload.indexType, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT)) : Bool) ? (cast 4.0 : Dynamic) : (cast 2.0 : Dynamic));
+    flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINES', flighthq._internal.backend.WebGl2Backend.LINES), (subset.indexCount * 2.0), upload.indexType, ((subset.indexOffset * 2.0) * elementSize));
   } });
 
   public static function registerGlWireframeMaterial(state:GlRenderState):Void {

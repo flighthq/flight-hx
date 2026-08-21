@@ -36,7 +36,7 @@ class GlColorLutPass {
     var samples:Array<Float> = cast _Runtime.UNDEFINED;
     var data:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     var texture:Null<flighthq._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !_Runtime.strictEquals((cast cache : GlColorLutTextureCache).texture, null) : Bool) && (cast _Runtime.strictEquals((cast cache : GlColorLutTextureCache).lut, lut) : Bool)) : Bool)) { return cast (cast cache : GlColorLutTextureCache).texture; }
+    if ((cast ((cast !_Runtime.strictEquals(cache.texture, null) : Bool) && (cast _Runtime.strictEquals(cache.lut, lut) : Bool)) : Bool)) { return cast cache.texture; }
     n = _Runtime.field(lut, 'size');
     samples = _Runtime.field(lut, 'samples');
     data = new flighthq._internal._UInt8Array((((n * n) * n) * 4.0));
@@ -52,10 +52,10 @@ class GlColorLutPass {
         i++;
       }
     }
-    texture = (cast cache : GlColorLutTextureCache).texture;
+    texture = cache.texture;
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) {
       (texture = cast (flighthq._internal.backend.WebGl2Backend.createTexture(gl) : Dynamic));
-      ((cast cache : GlColorLutTextureCache).texture = texture);
+      (cache.texture = cast (texture : Null<flighthq._internal.dom.WebGLTexture>));
     }
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_3D', flighthq._internal.backend.WebGl2Backend.TEXTURE_3D), texture);
     flighthq._internal.backend.WebGl2Backend.texImage3D(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_3D', flighthq._internal.backend.WebGl2Backend.TEXTURE_3D), 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA8', flighthq._internal.backend.WebGl2Backend.RGBA8), n, n, n, 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_BYTE', flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE), data);
@@ -65,7 +65,7 @@ class GlColorLutPass {
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_3D', flighthq._internal.backend.WebGl2Backend.TEXTURE_3D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_WRAP_T', flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_T), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CLAMP_TO_EDGE', flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE));
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_3D', flighthq._internal.backend.WebGl2Backend.TEXTURE_3D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_WRAP_R', flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_R), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CLAMP_TO_EDGE', flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE));
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_3D', flighthq._internal.backend.WebGl2Backend.TEXTURE_3D), null);
-    ((cast cache : GlColorLutTextureCache).lut = lut);
+    (cache.lut = cast (lut : Null<ColorLut>));
     return cast texture;
     return cast null;
   }

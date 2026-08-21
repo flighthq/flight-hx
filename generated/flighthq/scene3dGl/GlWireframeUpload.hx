@@ -17,8 +17,8 @@ class GlWireframeUpload {
   public static function destroyGlWireframeUpload(state:GlRenderState, upload:flighthq.types.GlWireframeProgram.GlWireframeUpload):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
-    flighthq._internal.backend.WebGl2Backend.deleteVertexArray(gl, _Runtime.field(upload, 'vao'));
-    flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, _Runtime.field(upload, 'lineIndexBuffer'));
+    flighthq._internal.backend.WebGl2Backend.deleteVertexArray(gl, upload.vao);
+    flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, upload.lineIndexBuffer);
   }
 
   @:noCompletion
@@ -40,8 +40,8 @@ class GlWireframeUpload {
       ((cast GlWireframeUpload.wireframeUploads__glWireframeUpload : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeProgram.GlWireframeUpload>>).set(state, (cast perState)));
     }
     upload = ((cast perState : flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeProgram.GlWireframeUpload>).get((cast geometry : MeshGeometry)));
-    if ((cast ((cast !_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast upload : flighthq.types.GlWireframeProgram.GlWireframeUpload).version, geometry.version) : Bool)) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : flighthq.types.GlWireframeProgram.GlWireframeUpload).vao);
+    if ((cast ((cast !_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast upload : { var version:Float; }).version, geometry.version) : Bool)) : Bool)) {
+      flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : { var vao:flighthq._internal.dom.WebGLVertexArrayObject; }).vao);
       return cast upload;
     }
     lineIndices = (cast GlWireframeUpload.buildLineIndices__glWireframeUpload(({ final __callArgument2:Dynamic = geometry; __callArgument2; })) : flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>);
@@ -50,17 +50,17 @@ class GlWireframeUpload {
       (upload = cast ({ indexType: indexType, lineIndexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), vao: flighthq._internal.backend.WebGl2Backend.createVertexArray(gl), version: -1.0 } : Dynamic));
       ((cast perState : flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeProgram.GlWireframeUpload>).set((cast geometry : MeshGeometry), (cast upload)));
     }
-    ((cast upload : flighthq.types.GlWireframeProgram.GlWireframeUpload).indexType = indexType);
-    flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : flighthq.types.GlWireframeProgram.GlWireframeUpload).vao);
+    ((cast upload : { var indexType:Float; }).indexType = cast (indexType : Float));
+    flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : { var vao:flighthq._internal.dom.WebGLVertexArrayObject; }).vao);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), meshUpload.vertexBuffer);
     stride = (cast geometry.layout : { var stride:Float; }).stride;
     position = _Runtime.find((cast geometry.layout : { var attributes:Array<VertexAttribute>; }).attributes, function(a:VertexAttribute, __unused0:Float, __unused1:Array<VertexAttribute>):Bool return _Runtime.strictEquals(a.semantic, 'position'));
     byteOffset = ((cast !_Runtime.strictEquals(position, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast position : { var byteOffset:Float; }).byteOffset : Dynamic) : (cast 0.0 : Dynamic));
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, 0.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 0.0, 3.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, stride, byteOffset);
-    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), (cast upload : flighthq.types.GlWireframeProgram.GlWireframeUpload).lineIndexBuffer);
+    flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), (cast upload : { var lineIndexBuffer:flighthq._internal.dom.WebGLBuffer; }).lineIndexBuffer);
     flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), lineIndices, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STATIC_DRAW', flighthq._internal.backend.WebGl2Backend.STATIC_DRAW));
-    ((cast upload : flighthq.types.GlWireframeProgram.GlWireframeUpload).version = geometry.version);
+    ((cast upload : { var version:Float; }).version = cast (geometry.version : Float));
     return cast upload;
     return cast null;
   }

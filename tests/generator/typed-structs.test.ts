@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_291,
+      newAuditOnly: 1_286,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(715);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(720);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_291);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_286);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(313);
+    expect(newDirect).toHaveLength(318);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1675,6 +1675,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'Physics2DWheelJointOptions',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free physics wheel-joint options',
+        }),
+        expect.objectContaining({
+          name: 'GlColorLutTextureCache',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL color-LUT texture cache',
+        }),
+        expect.objectContaining({
+          name: 'GlScene3DIbl',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL Scene3D IBL',
+        }),
+        expect.objectContaining({
+          name: 'GlShapeMeshColorScaleBiasShader',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL shape-mesh color-scale-bias shader',
+        }),
+        expect.objectContaining({
+          name: 'GlToonProgram',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL toon program',
+        }),
+        expect.objectContaining({
+          name: 'GlWireframeUpload',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGL wireframe upload',
         }),
       ]),
     );
@@ -3244,6 +3269,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#Physics2DWheelJointOptions',
         purpose: 'reviewed escape-free physics wheel-joint options',
       },
+      {
+        declarationFingerprint: 'sha256:28022486054f5704cc934e961f951937b26459388fd4d73a20763de668fb2500',
+        id: '@flighthq/types:interface#GlColorLutTextureCache',
+        purpose: 'reviewed escape-free WebGL color-LUT texture cache',
+      },
+      {
+        declarationFingerprint: 'sha256:60a7d244805c8bf2b3b72e2fcf4777fe83b902d5676a58e0975baa9b8cf7d52c',
+        id: '@flighthq/types:interface#GlScene3DIbl',
+        purpose: 'reviewed escape-free WebGL Scene3D IBL',
+      },
+      {
+        declarationFingerprint: 'sha256:df1e98bd12a8d711c970bbc0453b9fbccdcb484b40c72fbb3f426e18442333ed',
+        id: '@flighthq/types:interface#GlShapeMeshColorScaleBiasShader',
+        purpose: 'reviewed escape-free WebGL shape-mesh color-scale-bias shader',
+      },
+      {
+        declarationFingerprint: 'sha256:246dc6c529144431c519bf28ad1b7b38a1b7d40a7d85e35ea777ffeaebb1748c',
+        id: '@flighthq/types:interface#GlToonProgram',
+        purpose: 'reviewed escape-free WebGL toon program',
+      },
+      {
+        declarationFingerprint: 'sha256:6aaa4136bcd431697355c53644dbe3b6636296775ee6f35ff740addf61f844ce',
+        id: '@flighthq/types:interface#GlWireframeUpload',
+        purpose: 'reviewed escape-free WebGL wireframe upload',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -4256,6 +4306,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const thirtySixthHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'GlColorLutTextureCache',
+            'GlScene3DIbl',
+            'GlShapeMeshColorScaleBiasShader',
+            'GlToonProgram',
+            'GlWireframeUpload',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -4296,22 +4359,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_291,
+      auditOnlySchemas: 1_286,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 24_365,
-      directSchemas: 713,
+      directAccesses: 24_413,
+      directSchemas: 718,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 6_301,
+      pendingAccesses: 6_253,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_291,
+      newAuditOnly: 1_286,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -4388,7 +4451,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(24_365);
+    expect(report.summary.directAccesses).toBe(24_413);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -6114,6 +6177,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(thirtyFifthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'GlColorLutTextureCache',
+        10,
+        'sha256:28022486054f5704cc934e961f951937b26459388fd4d73a20763de668fb2500',
+        'reviewed escape-free WebGL color-LUT texture cache',
+      ],
+      [
+        'GlScene3DIbl',
+        9,
+        'sha256:60a7d244805c8bf2b3b72e2fcf4777fe83b902d5676a58e0975baa9b8cf7d52c',
+        'reviewed escape-free WebGL Scene3D IBL',
+      ],
+      [
+        'GlShapeMeshColorScaleBiasShader',
+        9,
+        'sha256:df1e98bd12a8d711c970bbc0453b9fbccdcb484b40c72fbb3f426e18442333ed',
+        'reviewed escape-free WebGL shape-mesh color-scale-bias shader',
+      ],
+      [
+        'GlToonProgram',
+        10,
+        'sha256:246dc6c529144431c519bf28ad1b7b38a1b7d40a7d85e35ea777ffeaebb1748c',
+        'reviewed escape-free WebGL toon program',
+      ],
+      [
+        'GlWireframeUpload',
+        10,
+        'sha256:6aaa4136bcd431697355c53644dbe3b6636296775ee6f35ff740addf61f844ce',
+        'reviewed escape-free WebGL wireframe upload',
+      ],
+    ] as const) {
+      expect(thirtySixthHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -8237,6 +8342,21 @@ describe('typed struct analysis', () => {
       else expect(provenanceById.get(optionsId)?.nominalIdentity).toEqual(nominalIdentity);
     }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#GlColorLutTextureCache', true, [], [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#GlScene3DIbl', true, [], [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#GlShapeMeshColorScaleBiasShader', true, [], ['optional-omission'], null],
+      ['@flighthq/types:interface#GlToonProgram', false, ['object-literal-spread'], [], null],
+      ['@flighthq/types:interface#GlWireframeUpload', true, [], [], { blockerReasons: [], closed: true }],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
+      else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+    }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
         true,
@@ -9647,6 +9767,22 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?Physics2D(?:DebugGeometry|GearJoint|MouseJoint|PrismaticJoint|WheelJoint)Options\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/effectsGl/GlColorLutPass.hx',
+      'generated/flighthq/effectsGl/GlRenderEffectPipeline.hx',
+      'generated/flighthq/renderGl/GlRenderState.hx',
+      'generated/flighthq/scene2dGl/GlColorAdjustmentMaterialFeature.hx',
+      'generated/flighthq/scene3dGl/GlEnvironmentIblBake.hx',
+      'generated/flighthq/scene3dGl/GlLitProgram.hx',
+      'generated/flighthq/scene3dGl/GlScene3DRuntime.hx',
+      'generated/flighthq/scene3dGl/GlWireframeUpload.hx',
+      'generated/flighthq/scene3dGl/ToonGlMeshMaterialRenderer.hx',
+      'generated/flighthq/scene3dGl/WireframeGlMeshMaterialRenderer.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:GlColorLutTextureCache|GlScene3DIbl|GlShapeMeshColorScaleBiasShader|GlToonProgram|GlWireframeUpload)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
