@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_256,
+      newAuditOnly: 1_251,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(750);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(755);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_256);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_251);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(348);
+    expect(newDirect).toHaveLength(353);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1850,6 +1850,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'ClippingAttachment2D',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free clipping attachment',
+        }),
+        expect.objectContaining({
+          name: 'MorphShapeLineEndpoint',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free morph-shape line endpoint',
+        }),
+        expect.objectContaining({
+          name: 'MorphShapeColorEndpoint',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free morph-shape color endpoint',
+        }),
+        expect.objectContaining({
+          name: 'MorphShapePathBinding',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free morph-shape path binding',
+        }),
+        expect.objectContaining({
+          name: 'MorphShapeAnimationTarget',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free morph-shape animation target',
+        }),
+        expect.objectContaining({
+          name: 'SwfMorphShapePaths',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free SWF morph-shape paths',
         }),
       ]),
     );
@@ -3594,6 +3619,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#ClippingAttachment2D',
         purpose: 'reviewed escape-free clipping attachment',
       },
+      {
+        declarationFingerprint: 'sha256:9f08ed93b7149ba994f4cc6c6ddd65acb4d6899ce85afdd0cc31c16d82ebd125',
+        id: '@flighthq/types:interface#MorphShapeLineEndpoint',
+        purpose: 'reviewed escape-free morph-shape line endpoint',
+      },
+      {
+        declarationFingerprint: 'sha256:7b64793cbbbbba919e192888fc21a8521ab2e265520986d959157929a2d9b0a3',
+        id: '@flighthq/types:interface#MorphShapeColorEndpoint',
+        purpose: 'reviewed escape-free morph-shape color endpoint',
+      },
+      {
+        declarationFingerprint: 'sha256:0f9f71ff1557793611652434f7be0c4c1277647dc9314a7ebeb461cb0b163816',
+        id: '@flighthq/types:interface#MorphShapePathBinding',
+        purpose: 'reviewed escape-free morph-shape path binding',
+      },
+      {
+        declarationFingerprint: 'sha256:fe1394427e35042ec6cc108bd2924960765e205372f08ad78f79be2edf26d287',
+        id: '@flighthq/types:interface#MorphShapeAnimationTarget',
+        purpose: 'reviewed escape-free morph-shape animation target',
+      },
+      {
+        declarationFingerprint: 'sha256:7eb385b918d55147dd586f7df3f0131e718f5dbed8ec4151fa4d72c8d6270c70',
+        id: '@flighthq/types:interface#SwfMorphShapePaths',
+        purpose: 'reviewed escape-free SWF morph-shape paths',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -4687,6 +4737,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const fortyThirdHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'MorphShapeLineEndpoint',
+            'MorphShapeColorEndpoint',
+            'MorphShapePathBinding',
+            'MorphShapeAnimationTarget',
+            'SwfMorphShapePaths',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -4727,22 +4790,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_256,
+      auditOnlySchemas: 1_251,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 24_651,
-      directSchemas: 748,
+      directAccesses: 24_676,
+      directSchemas: 753,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 6_015,
+      pendingAccesses: 5_990,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_256,
+      newAuditOnly: 1_251,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -4819,7 +4882,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(24_651);
+    expect(report.summary.directAccesses).toBe(24_676);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -6839,6 +6902,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(fortySecondHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'MorphShapeLineEndpoint',
+        9,
+        'sha256:9f08ed93b7149ba994f4cc6c6ddd65acb4d6899ce85afdd0cc31c16d82ebd125',
+        'reviewed escape-free morph-shape line endpoint',
+      ],
+      [
+        'MorphShapeColorEndpoint',
+        6,
+        'sha256:7b64793cbbbbba919e192888fc21a8521ab2e265520986d959157929a2d9b0a3',
+        'reviewed escape-free morph-shape color endpoint',
+      ],
+      [
+        'MorphShapePathBinding',
+        6,
+        'sha256:0f9f71ff1557793611652434f7be0c4c1277647dc9314a7ebeb461cb0b163816',
+        'reviewed escape-free morph-shape path binding',
+      ],
+      [
+        'MorphShapeAnimationTarget',
+        2,
+        'sha256:fe1394427e35042ec6cc108bd2924960765e205372f08ad78f79be2edf26d287',
+        'reviewed escape-free morph-shape animation target',
+      ],
+      [
+        'SwfMorphShapePaths',
+        2,
+        'sha256:7eb385b918d55147dd586f7df3f0131e718f5dbed8ec4151fa4d72c8d6270c70',
+        'reviewed escape-free SWF morph-shape paths',
+      ],
+    ] as const) {
+      expect(fortyThirdHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -9069,6 +9174,27 @@ describe('typed struct analysis', () => {
       else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
     }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#MorphShapeLineEndpoint', true, [], [], null],
+      ['@flighthq/types:interface#MorphShapeColorEndpoint', true, [], [], null],
+      [
+        '@flighthq/types:interface#MorphShapePathBinding',
+        true,
+        [],
+        [],
+        { blockerReasons: ['normalization-provenance'], closed: false },
+      ],
+      ['@flighthq/types:interface#MorphShapeAnimationTarget', false, ['dynamic-ingress'], ['strict-equality'], null],
+      ['@flighthq/types:interface#SwfMorphShapePaths', true, [], [], { blockerReasons: [], closed: true }],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
+      else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+    }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
         true,
@@ -10579,6 +10705,16 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AttachmentSkin2D|RegionAttachment2D|PathAttachment2D|PointAttachment2D|ClippingAttachment2D)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/shape/MorphShape.hx',
+      'generated/flighthq/shape/MorphShapeAnimation.hx',
+      'generated/flighthq/shape/MorphShapePaint.hx',
+      'generated/flighthq/swf/SwfMorphShape.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:MorphShapeLineEndpoint|MorphShapeColorEndpoint|MorphShapePathBinding|MorphShapeAnimationTarget|SwfMorphShapePaths)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');

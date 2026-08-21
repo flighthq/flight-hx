@@ -60,7 +60,7 @@ class SwfMorphShape {
     if ((cast _Runtime.strictEquals(lines, null) : Bool)) { return cast null; }
     paths = (cast readSwfMorphShapePaths(new SwfReader((cast reader : SwfReader).source, (cast reader : SwfReader).pos, endEdgesStart), new SwfReader((cast reader : SwfReader).source, endEdgesStart, (cast reader : SwfReader).end)) : Null<SwfMorphShapePaths>);
     if ((cast _Runtime.strictEquals(paths, null) : Bool)) { return cast null; }
-    return cast (cast SwfMorphShape.createSwfMorphShapeNode__swfMorphShape((cast fills : Dynamic), (cast lines : Dynamic), (cast paths : SwfMorphShapePaths).fills, (cast paths : SwfMorphShapePaths).lines) : Null<MorphShape>);
+    return cast (cast SwfMorphShape.createSwfMorphShapeNode__swfMorphShape((cast fills : Dynamic), (cast lines : Dynamic), (cast paths : { var fills:flighthq._internal._Map<Float, { var end:Path; var start:Path; }>; }).fills, (cast paths : { var lines:flighthq._internal._Map<Float, { var end:Path; var start:Path; }>; }).lines) : Null<MorphShape>);
     return cast null;
   }
 

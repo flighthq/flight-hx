@@ -332,7 +332,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#MorphShapeData` | 30 | 6 | 1 | 9 | 2 | 1 | 2 | 3 | no | `container-transfer`, `normalization-provenance` |
 | `@flighthq/types:interface#MorphShapeGradientPaintBinding` | 0 | 13 | 1 | 2 | 2 | 0 | 2 | 3 | no | `normalization-provenance` |
 | `@flighthq/types:interface#MorphShapeLinePaintBinding` | 0 | 8 | 1 | 0 | 2 | 0 | 2 | 3 | no | `normalization-provenance` |
-| `@flighthq/types:interface#MorphShapePathBinding` | 0 | 2 | 1 | 2 | 2 | 0 | 2 | 3 | no | `normalization-provenance` |
+| `@flighthq/types:interface#MorphShapePathBinding` | 6 | 2 | 1 | 2 | 2 | 0 | 2 | 3 | no | `normalization-provenance` |
 | `@flighthq/types:interface#MorphShapeTexturePaintBinding` | 0 | 5 | 1 | 2 | 2 | 0 | 2 | 3 | no | `normalization-provenance` |
 | `@flighthq/types:interface#MorphTarget` | 0 | 3 | 1 | 0 | 2 | 0 | 5 | 4 | no | `normalization-provenance` |
 | `@flighthq/types:interface#MotionPath` | 22 | 6 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
@@ -562,7 +562,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#StorageSignals` | 2 | 1 | 0 | 1 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#StrokePathTessellationExplanation` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#SwfDocumentImport` | 0 | 2 | 0 | 2 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#SwfMorphShapePaths` | 0 | 2 | 0 | 2 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#SwfMorphShapePaths` | 2 | 2 | 0 | 2 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#SwfNodeAppearance` | 0 | 4 | 1 | 3 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#TauriApi` | 14 | 11 | 0 | 11 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#TauriAppModule` | 0 | 4 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |

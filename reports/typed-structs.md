@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1256 |
-| Direct schemas | 748 |
+| Audit-only schemas | 1251 |
+| Direct schemas | 753 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 6015 |
-| Directly emitted accesses | 24651 |
+| Pending accesses | 5990 |
+| Directly emitted accesses | 24676 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1256 |
+| Newly discovered, audit-only | 1251 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -976,18 +976,18 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ModifierRegistry` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ModifierSlot` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#MorphShape` | `direct` | `new` | — | reviewed escape-free morph shape | 19 | 36 | 0 | 0 | 0 | 36 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#MorphShapeAnimationTarget` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#MorphShapeColorEndpoint` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MorphShapeAnimationTarget` | `direct` | `new` | — | reviewed escape-free morph-shape animation target | 1 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MorphShapeColorEndpoint` | `direct` | `new` | — | reviewed escape-free morph-shape color endpoint | 2 | 6 | 0 | 0 | 0 | 6 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MorphShapeColorPaintBinding` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 4 | 0 | 0 | 4 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#MorphShapeData` | `direct` | `new` | — | reviewed escape-free morph-shape data | 6 | 29 | 1 | 0 | 0 | 30 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MorphShapeGradientEndpoint` | `direct` | `new` | — | reviewed escape-free morph-shape gradient endpoint | 5 | 23 | 0 | 0 | 0 | 23 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MorphShapeGradientEndpointExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#MorphShapeGradientEndpointReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#MorphShapeGradientPaintBinding` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 13 | 0 | 0 | 13 | 0 | 0 | 5 | yes | — |
-| `@flighthq/types:interface#MorphShapeLineEndpoint` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MorphShapeLineEndpoint` | `direct` | `new` | — | reviewed escape-free morph-shape line endpoint | 3 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MorphShapeLinePaintBinding` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 6 | 0 | 0 | 6 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:type#MorphShapePaintBinding` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/types:interface#MorphShapePathBinding` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MorphShapePathBinding` | `direct` | `new` | — | reviewed escape-free morph-shape path binding | 2 | 6 | 0 | 0 | 0 | 6 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MorphShapeRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 38 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MorphShapeTexturePaintBinding` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 2 | 0 | 0 | 2 | 0 | 0 | 5 | yes | — |
 | `@flighthq/types:interface#MorphTarget` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
@@ -1662,7 +1662,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#SvgDocumentImportOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SwfDocumentImport` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#SwfFilterListGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#SwfMorphShapePaths` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SwfMorphShapePaths` | `direct` | `new` | — | reviewed escape-free SWF morph-shape paths | 2 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SwfNodeAppearance` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TaaEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TauriApi` | `direct` | `new` | — | reviewed escape-free Tauri API | 11 | 14 | 0 | 0 | 0 | 14 | 0 | 0 | yes | — |

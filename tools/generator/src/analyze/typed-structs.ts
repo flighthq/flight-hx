@@ -1768,6 +1768,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#ClippingAttachment2D',
     purpose: 'reviewed escape-free clipping attachment',
   },
+  {
+    declarationFingerprint: 'sha256:9f08ed93b7149ba994f4cc6c6ddd65acb4d6899ce85afdd0cc31c16d82ebd125',
+    id: '@flighthq/types:interface#MorphShapeLineEndpoint',
+    purpose: 'reviewed escape-free morph-shape line endpoint',
+  },
+  {
+    declarationFingerprint: 'sha256:7b64793cbbbbba919e192888fc21a8521ab2e265520986d959157929a2d9b0a3',
+    id: '@flighthq/types:interface#MorphShapeColorEndpoint',
+    purpose: 'reviewed escape-free morph-shape color endpoint',
+  },
+  {
+    declarationFingerprint: 'sha256:0f9f71ff1557793611652434f7be0c4c1277647dc9314a7ebeb461cb0b163816',
+    id: '@flighthq/types:interface#MorphShapePathBinding',
+    purpose: 'reviewed escape-free morph-shape path binding',
+  },
+  {
+    declarationFingerprint: 'sha256:fe1394427e35042ec6cc108bd2924960765e205372f08ad78f79be2edf26d287',
+    id: '@flighthq/types:interface#MorphShapeAnimationTarget',
+    purpose: 'reviewed escape-free morph-shape animation target',
+  },
+  {
+    declarationFingerprint: 'sha256:7eb385b918d55147dd586f7df3f0131e718f5dbed8ec4151fa4d72c8d6270c70',
+    id: '@flighthq/types:interface#SwfMorphShapePaths',
+    purpose: 'reviewed escape-free SWF morph-shape paths',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

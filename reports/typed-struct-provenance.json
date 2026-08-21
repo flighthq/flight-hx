@@ -30064,7 +30064,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 6,
       "fields": 2,
       "id": "@flighthq/types:interface#MorphShapePathBinding",
       "name": "MorphShapePathBinding",
@@ -48491,7 +48491,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 2,
       "fields": 2,
       "id": "@flighthq/types:interface#SwfMorphShapePaths",
       "name": "SwfMorphShapePaths",

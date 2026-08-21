@@ -194151,9 +194151,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -194175,7 +194175,7 @@
       },
       "name": "MorphShapeAnimationTarget",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free morph-shape animation target",
       "reasons": [],
       "source": "upstream/packages/types/src/MorphShapeAnimationTarget.ts",
       "sourceProvenance": {
@@ -194197,9 +194197,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -194229,7 +194229,7 @@
       },
       "name": "MorphShapeColorEndpoint",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free morph-shape color endpoint",
       "reasons": [],
       "source": "upstream/packages/types/src/MorphShape.ts",
       "sourceProvenance": {
@@ -195443,9 +195443,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -195483,7 +195483,7 @@
       },
       "name": "MorphShapeLineEndpoint",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free morph-shape line endpoint",
       "reasons": [],
       "source": "upstream/packages/types/src/MorphShape.ts",
       "sourceProvenance": {
@@ -195685,9 +195685,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 6,
+        "directAccesses": 6,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -195717,7 +195717,7 @@
       },
       "name": "MorphShapePathBinding",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free morph-shape path binding",
       "reasons": [],
       "source": "upstream/packages/types/src/MorphShape.ts",
       "sourceProvenance": {
@@ -341206,9 +341206,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 2,
+        "directAccesses": 2,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -341238,7 +341238,7 @@
       },
       "name": "SwfMorphShapePaths",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free SWF morph-shape paths",
       "reasons": [],
       "source": "upstream/packages/types/src/SwfMorphShapePaths.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1256,
+      "newAuditOnly": 1251,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1256,
+    "auditOnlySchemas": 1251,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 24651,
-    "directSchemas": 748,
+    "directAccesses": 24676,
+    "directSchemas": 753,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 6015,
+    "pendingAccesses": 5990,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"
