@@ -22,10 +22,10 @@ class WgpuCrtEffect {
     var vignette:Float = cast _Runtime.UNDEFINED;
     var aberration:Float = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
-    curvature = _Runtime.coalesce(_Runtime.field(effect, 'curvature'), function():Dynamic return cast 0.1);
-    scanlineIntensity = _Runtime.coalesce(_Runtime.field(effect, 'scanlineIntensity'), function():Dynamic return cast 0.3);
-    vignette = _Runtime.coalesce(_Runtime.field(effect, 'vignette'), function():Dynamic return cast 0.3);
-    aberration = _Runtime.coalesce(_Runtime.field(effect, 'aberration'), function():Dynamic return cast 0.005);
+    curvature = _Runtime.coalesce(effect.curvature, function():Dynamic return cast 0.1);
+    scanlineIntensity = _Runtime.coalesce(effect.scanlineIntensity, function():Dynamic return cast 0.3);
+    vignette = _Runtime.coalesce(effect.vignette, function():Dynamic return cast 0.3);
+    aberration = _Runtime.coalesce(effect.aberration, function():Dynamic return cast 0.005);
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'stylization.crt' : String), (cast WgpuCrtEffect.CRT_FRAGMENT_WGSL__wgpuCrtEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast source : WgpuRenderTarget), ({ final __callArgument2:Dynamic = (cast dest : WgpuRenderTarget); __callArgument2; }), ({ final __callArgument3:Dynamic = pipeline; __callArgument3; }), ({ final __callArgument4:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast curvature : Float));

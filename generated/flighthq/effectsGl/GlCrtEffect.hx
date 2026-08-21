@@ -22,10 +22,10 @@ class GlCrtEffect {
     var vignette:Float = cast _Runtime.UNDEFINED;
     var aberration:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
-    curvature = _Runtime.coalesce(_Runtime.field(effect, 'curvature'), function():Dynamic return cast 0.1);
-    scanlineIntensity = _Runtime.coalesce(_Runtime.field(effect, 'scanlineIntensity'), function():Dynamic return cast 0.3);
-    vignette = _Runtime.coalesce(_Runtime.field(effect, 'vignette'), function():Dynamic return cast 0.3);
-    aberration = _Runtime.coalesce(_Runtime.field(effect, 'aberration'), function():Dynamic return cast 0.005);
+    curvature = _Runtime.coalesce(effect.curvature, function():Dynamic return cast 0.1);
+    scanlineIntensity = _Runtime.coalesce(effect.scanlineIntensity, function():Dynamic return cast 0.3);
+    vignette = _Runtime.coalesce(effect.vignette, function():Dynamic return cast 0.3);
+    aberration = _Runtime.coalesce(effect.aberration, function():Dynamic return cast 0.005);
     program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'stylization.crt' : String), (cast GlCrtEffect.CRT_FRAGMENT_SRC__glCrtEffect : String)) : GlFullscreenProgram);
     drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; }), ({ final __callArgument3:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_curvature'), curvature);

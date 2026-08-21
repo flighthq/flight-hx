@@ -22,10 +22,10 @@ class GlRadialBlurEffect {
     var strength:Float = cast _Runtime.UNDEFINED;
     var samples:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
-    centerX = _Runtime.coalesce(_Runtime.field(effect, 'centerX'), function():Dynamic return cast 0.5);
-    centerY = _Runtime.coalesce(_Runtime.field(effect, 'centerY'), function():Dynamic return cast 0.5);
-    strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 0.2);
-    samples = _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0);
+    centerX = _Runtime.coalesce(effect.centerX, function():Dynamic return cast 0.5);
+    centerY = _Runtime.coalesce(effect.centerY, function():Dynamic return cast 0.5);
+    strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 0.2);
+    samples = _Runtime.coalesce(effect.samples, function():Dynamic return cast 16.0);
     program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'radialBlur' : String), (cast GlRadialBlurEffect.RADIAL_BLUR_FRAGMENT_SRC__glRadialBlurEffect : String)) : GlFullscreenProgram);
     drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; }), ({ final __callArgument3:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_center'), centerX, centerY);

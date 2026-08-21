@@ -21,9 +21,9 @@ class GlDirectionalBlurEffect {
     var length:Float = cast _Runtime.UNDEFINED;
     var samples:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
-    angle = _Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 0.0);
-    length = _Runtime.coalesce(_Runtime.field(effect, 'length'), function():Dynamic return cast 8.0);
-    samples = _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0);
+    angle = _Runtime.coalesce(effect.angle, function():Dynamic return cast 0.0);
+    length = _Runtime.coalesce(effect.length, function():Dynamic return cast 8.0);
+    samples = _Runtime.coalesce(effect.samples, function():Dynamic return cast 16.0);
     program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'directionalBlur' : String), (cast GlDirectionalBlurEffect.DIRECTIONAL_BLUR_FRAGMENT_SRC__glDirectionalBlurEffect : String)) : GlFullscreenProgram);
     drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; }), ({ final __callArgument3:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_angle'), angle);

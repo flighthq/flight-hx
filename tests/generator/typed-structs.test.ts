@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_286,
+      newAuditOnly: 1_281,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(720);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(725);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_286);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_281);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(318);
+    expect(newDirect).toHaveLength(323);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1700,6 +1700,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'GlWireframeUpload',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free WebGL wireframe upload',
+        }),
+        expect.objectContaining({
+          name: 'CrtEffect',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free CRT effect',
+        }),
+        expect.objectContaining({
+          name: 'DirectionalBlurEffect',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free directional-blur effect',
+        }),
+        expect.objectContaining({
+          name: 'LensFlareEffect',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free lens-flare effect',
+        }),
+        expect.objectContaining({
+          name: 'RadialBlurEffect',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free radial-blur effect',
+        }),
+        expect.objectContaining({
+          name: 'TiltShiftEffect',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free tilt-shift effect',
         }),
       ]),
     );
@@ -3294,6 +3319,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#GlWireframeUpload',
         purpose: 'reviewed escape-free WebGL wireframe upload',
       },
+      {
+        declarationFingerprint: 'sha256:5e68df6723770b9c423c2bfb2e8b4b0535c8c16e64ebadb99798468ce7acadff',
+        id: '@flighthq/types:interface#CrtEffect',
+        purpose: 'reviewed escape-free CRT effect',
+      },
+      {
+        declarationFingerprint: 'sha256:3826059319d02a6dce524539dfa04c76d510f7c5a7cdd738f758f7d5caac4b4d',
+        id: '@flighthq/types:interface#DirectionalBlurEffect',
+        purpose: 'reviewed escape-free directional-blur effect',
+      },
+      {
+        declarationFingerprint: 'sha256:fd7a053e9ad1fb2da43a056833df82c8be9d0574e7f6abf1be97c220b5f28e87',
+        id: '@flighthq/types:interface#LensFlareEffect',
+        purpose: 'reviewed escape-free lens-flare effect',
+      },
+      {
+        declarationFingerprint: 'sha256:22f272013c3655070dc964707dbebbc4b5eb6699cfe0e632dba09392544d5981',
+        id: '@flighthq/types:interface#RadialBlurEffect',
+        purpose: 'reviewed escape-free radial-blur effect',
+      },
+      {
+        declarationFingerprint: 'sha256:fbcbf389afcd6233e11df0aa41d734c8fa5b4c26a8c9ed22d9e3e46a707e24a6',
+        id: '@flighthq/types:interface#TiltShiftEffect',
+        purpose: 'reviewed escape-free tilt-shift effect',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -4319,6 +4369,15 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const thirtySeventhHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['CrtEffect', 'DirectionalBlurEffect', 'LensFlareEffect', 'RadialBlurEffect', 'TiltShiftEffect'].includes(
+            candidate.name,
+          ),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -4359,22 +4418,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_286,
+      auditOnlySchemas: 1_281,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 24_413,
-      directSchemas: 718,
+      directAccesses: 24_452,
+      directSchemas: 723,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 6_253,
+      pendingAccesses: 6_214,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_286,
+      newAuditOnly: 1_281,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -4451,7 +4510,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(24_413);
+    expect(report.summary.directAccesses).toBe(24_452);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -6219,6 +6278,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(thirtySixthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'CrtEffect',
+        8,
+        'sha256:5e68df6723770b9c423c2bfb2e8b4b0535c8c16e64ebadb99798468ce7acadff',
+        'reviewed escape-free CRT effect',
+      ],
+      [
+        'DirectionalBlurEffect',
+        8,
+        'sha256:3826059319d02a6dce524539dfa04c76d510f7c5a7cdd738f758f7d5caac4b4d',
+        'reviewed escape-free directional-blur effect',
+      ],
+      [
+        'LensFlareEffect',
+        8,
+        'sha256:fd7a053e9ad1fb2da43a056833df82c8be9d0574e7f6abf1be97c220b5f28e87',
+        'reviewed escape-free lens-flare effect',
+      ],
+      [
+        'RadialBlurEffect',
+        8,
+        'sha256:22f272013c3655070dc964707dbebbc4b5eb6699cfe0e632dba09392544d5981',
+        'reviewed escape-free radial-blur effect',
+      ],
+      [
+        'TiltShiftEffect',
+        7,
+        'sha256:fbcbf389afcd6233e11df0aa41d734c8fa5b4c26a8c9ed22d9e3e46a707e24a6',
+        'reviewed escape-free tilt-shift effect',
+      ],
+    ] as const) {
+      expect(thirtySeventhHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -8356,6 +8457,20 @@ describe('typed struct analysis', () => {
       if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
       else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
     }
+    for (const effectId of [
+      '@flighthq/types:interface#CrtEffect',
+      '@flighthq/types:interface#DirectionalBlurEffect',
+      '@flighthq/types:interface#LensFlareEffect',
+      '@flighthq/types:interface#RadialBlurEffect',
+      '@flighthq/types:interface#TiltShiftEffect',
+    ]) {
+      expect(classAuditById.get(effectId)?.migration).toEqual({
+        mechanicallyCompatible: false,
+        normalizationReasons: ['cross-schema-transfer', 'object-literal-spread'],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.has(effectId)).toBe(false);
+    }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
@@ -9783,6 +9898,24 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:GlColorLutTextureCache|GlScene3DIbl|GlShapeMeshColorScaleBiasShader|GlToonProgram|GlWireframeUpload)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/effects/DirectionalBlurEffect.hx',
+      'generated/flighthq/effects/TiltShiftEffect.hx',
+      'generated/flighthq/effectsGl/GlCrtEffect.hx',
+      'generated/flighthq/effectsGl/GlDirectionalBlurEffect.hx',
+      'generated/flighthq/effectsGl/GlLensFlareEffect.hx',
+      'generated/flighthq/effectsGl/GlRadialBlurEffect.hx',
+      'generated/flighthq/effectsGl/GlTiltShiftEffect.hx',
+      'generated/flighthq/effectsWgpu/WgpuCrtEffect.hx',
+      'generated/flighthq/effectsWgpu/WgpuDirectionalBlurEffect.hx',
+      'generated/flighthq/effectsWgpu/WgpuLensFlareEffect.hx',
+      'generated/flighthq/effectsWgpu/WgpuRadialBlurEffect.hx',
+      'generated/flighthq/effectsWgpu/WgpuTiltShiftEffect.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:CrtEffect|DirectionalBlurEffect|LensFlareEffect|RadialBlurEffect|TiltShiftEffect)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');

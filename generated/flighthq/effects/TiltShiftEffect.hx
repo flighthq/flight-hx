@@ -18,7 +18,7 @@ class TiltShiftEffect {
 
   public static function getTiltShiftEffectPadding(effect:flighthq.types.TiltShiftEffect):RenderEffectPadding {
     var vertical:Float = cast _Runtime.UNDEFINED;
-    vertical = HxMath.ceil(_Runtime.multiplyNumbers(HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(effect, 'blur'), function():Dynamic return cast 4.0)), 3.0));
+    vertical = HxMath.ceil(_Runtime.multiplyNumbers(HxMath.max(0.0, _Runtime.coalesce(effect.blur, function():Dynamic return cast 4.0)), 3.0));
     return cast { bottom: vertical, left: 0.0, right: 0.0, top: vertical };
     return cast null;
   }

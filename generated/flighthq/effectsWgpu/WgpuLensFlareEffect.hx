@@ -22,10 +22,10 @@ class WgpuLensFlareEffect {
     var ghosts:Float = cast _Runtime.UNDEFINED;
     var halo:Float = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
-    threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.8);
-    intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
-    ghosts = _Runtime.coalesce(_Runtime.field(effect, 'ghosts'), function():Dynamic return cast 4.0);
-    halo = _Runtime.coalesce(_Runtime.field(effect, 'halo'), function():Dynamic return cast 0.5);
+    threshold = _Runtime.coalesce(effect.threshold, function():Dynamic return cast 0.8);
+    intensity = _Runtime.coalesce(effect.intensity, function():Dynamic return cast 1.0);
+    ghosts = _Runtime.coalesce(effect.ghosts, function():Dynamic return cast 4.0);
+    halo = _Runtime.coalesce(effect.halo, function():Dynamic return cast 0.5);
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'lens.lensFlare' : String), (cast WgpuLensFlareEffect.LENS_FLARE_FRAGMENT_WGSL__wgpuLensFlareEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast source : WgpuRenderTarget), ({ final __callArgument2:Dynamic = (cast dest : WgpuRenderTarget); __callArgument2; }), ({ final __callArgument3:Dynamic = pipeline; __callArgument3; }), ({ final __callArgument4:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast threshold : Float));

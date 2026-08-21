@@ -1618,6 +1618,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#GlWireframeUpload',
     purpose: 'reviewed escape-free WebGL wireframe upload',
   },
+  {
+    declarationFingerprint: 'sha256:5e68df6723770b9c423c2bfb2e8b4b0535c8c16e64ebadb99798468ce7acadff',
+    id: '@flighthq/types:interface#CrtEffect',
+    purpose: 'reviewed escape-free CRT effect',
+  },
+  {
+    declarationFingerprint: 'sha256:3826059319d02a6dce524539dfa04c76d510f7c5a7cdd738f758f7d5caac4b4d',
+    id: '@flighthq/types:interface#DirectionalBlurEffect',
+    purpose: 'reviewed escape-free directional-blur effect',
+  },
+  {
+    declarationFingerprint: 'sha256:fd7a053e9ad1fb2da43a056833df82c8be9d0574e7f6abf1be97c220b5f28e87',
+    id: '@flighthq/types:interface#LensFlareEffect',
+    purpose: 'reviewed escape-free lens-flare effect',
+  },
+  {
+    declarationFingerprint: 'sha256:22f272013c3655070dc964707dbebbc4b5eb6699cfe0e632dba09392544d5981',
+    id: '@flighthq/types:interface#RadialBlurEffect',
+    purpose: 'reviewed escape-free radial-blur effect',
+  },
+  {
+    declarationFingerprint: 'sha256:fbcbf389afcd6233e11df0aa41d734c8fa5b4c26a8c9ed22d9e3e46a707e24a6',
+    id: '@flighthq/types:interface#TiltShiftEffect',
+    purpose: 'reviewed escape-free tilt-shift effect',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

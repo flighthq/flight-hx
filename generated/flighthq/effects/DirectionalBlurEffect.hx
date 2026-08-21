@@ -23,8 +23,8 @@ class DirectionalBlurEffect {
     var projectedY:Float = cast _Runtime.UNDEFINED;
     var horizontal:Float = cast _Runtime.UNDEFINED;
     var vertical:Float = cast _Runtime.UNDEFINED;
-    angle = _Runtime.coalesce(_Runtime.field(effect, 'angle'), function():Dynamic return cast 0.0);
-    halfLength = _Runtime.multiplyNumbers(HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(effect, 'length'), function():Dynamic return cast 8.0)), 0.5);
+    angle = _Runtime.coalesce(effect.angle, function():Dynamic return cast 0.0);
+    halfLength = _Runtime.multiplyNumbers(HxMath.max(0.0, _Runtime.coalesce(effect.length, function():Dynamic return cast 8.0)), 0.5);
     projectedX = HxMath.abs(_Runtime.multiplyNumbers(HxMath.cos(angle), halfLength));
     projectedY = HxMath.abs(_Runtime.multiplyNumbers(HxMath.sin(angle), halfLength));
     horizontal = ((cast ((cast projectedX : Float) < (cast 1e-10 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.ceil(projectedX) : Dynamic));

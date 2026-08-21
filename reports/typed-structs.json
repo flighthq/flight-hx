@@ -62884,9 +62884,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 8,
+        "directAccesses": 8,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -62940,7 +62940,7 @@
       },
       "name": "CrtEffect",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free CRT effect",
       "reasons": [],
       "source": "upstream/packages/types/src/CrtEffect.ts",
       "sourceProvenance": {
@@ -66589,9 +66589,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 8,
+        "directAccesses": 8,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -66637,7 +66637,7 @@
       },
       "name": "DirectionalBlurEffect",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free directional-blur effect",
       "reasons": [],
       "source": "upstream/packages/types/src/DirectionalBlurEffect.ts",
       "sourceProvenance": {
@@ -166438,9 +166438,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 8,
+        "directAccesses": 8,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -166494,7 +166494,7 @@
       },
       "name": "LensFlareEffect",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free lens-flare effect",
       "reasons": [],
       "source": "upstream/packages/types/src/LensFlareEffect.ts",
       "sourceProvenance": {
@@ -253362,9 +253362,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 8,
+        "directAccesses": 8,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -253418,7 +253418,7 @@
       },
       "name": "RadialBlurEffect",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free radial-blur effect",
       "reasons": [],
       "source": "upstream/packages/types/src/RadialBlurEffect.ts",
       "sourceProvenance": {
@@ -374539,9 +374539,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 7,
+        "directAccesses": 7,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -374587,7 +374587,7 @@
       },
       "name": "TiltShiftEffect",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free tilt-shift effect",
       "reasons": [],
       "source": "upstream/packages/types/src/TiltShiftEffect.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1286,
+      "newAuditOnly": 1281,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1286,
+    "auditOnlySchemas": 1281,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 24413,
-    "directSchemas": 718,
+    "directAccesses": 24452,
+    "directSchemas": 723,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 6253,
+    "pendingAccesses": 6214,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

@@ -22,10 +22,10 @@ class GlLensFlareEffect {
     var ghosts:Float = cast _Runtime.UNDEFINED;
     var halo:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
-    threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.8);
-    intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
-    ghosts = _Runtime.coalesce(_Runtime.field(effect, 'ghosts'), function():Dynamic return cast 4.0);
-    halo = _Runtime.coalesce(_Runtime.field(effect, 'halo'), function():Dynamic return cast 0.5);
+    threshold = _Runtime.coalesce(effect.threshold, function():Dynamic return cast 0.8);
+    intensity = _Runtime.coalesce(effect.intensity, function():Dynamic return cast 1.0);
+    ghosts = _Runtime.coalesce(effect.ghosts, function():Dynamic return cast 4.0);
+    halo = _Runtime.coalesce(effect.halo, function():Dynamic return cast 0.5);
     program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'lens.lensFlare' : String), (cast GlLensFlareEffect.LENS_FLARE_FRAGMENT_SRC__glLensFlareEffect : String)) : GlFullscreenProgram);
     drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; }), ({ final __callArgument3:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_threshold'), threshold);
