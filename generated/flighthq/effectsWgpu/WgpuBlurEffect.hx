@@ -20,7 +20,7 @@ import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 class WgpuBlurEffect {
   @:noCompletion
   public static function applyBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, effect:BlurEffect):Void {
-    applyGaussianBlurToWgpu(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument2:Dynamic = dest; __callArgument2; }), ({ final __callArgument3:Dynamic = temp; __callArgument3; }), ({ final __callArgument4:Dynamic = { blurX: _Runtime.field(effect, 'blurX'), blurY: _Runtime.field(effect, 'blurY') }; __callArgument4; }));
+    applyGaussianBlurToWgpu(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument2:Dynamic = dest; __callArgument2; }), ({ final __callArgument3:Dynamic = temp; __callArgument3; }), ({ final __callArgument4:Dynamic = { blurX: effect.blurX, blurY: effect.blurY }; __callArgument4; }));
   }
 
   @:noCompletion

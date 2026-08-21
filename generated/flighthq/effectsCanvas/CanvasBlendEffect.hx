@@ -21,12 +21,12 @@ class CanvasBlendEffect {
     var backdrop:Null<CanvasRenderTarget> = cast _Runtime.UNDEFINED;
     var operation:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
-    backdrop = (cast getCanvasBlendEffectBackdrop(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = _Runtime.coalesce(_Runtime.field(effect, 'backdropKey'), function():Dynamic return cast null); __callArgument1; })) : Null<CanvasRenderTarget>);
+    backdrop = (cast getCanvasBlendEffectBackdrop(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = _Runtime.coalesce(effect.backdropKey, function():Dynamic return cast null); __callArgument1; })) : Null<CanvasRenderTarget>);
     if ((cast _Runtime.strictEquals(backdrop, null) : Bool)) {
       drawCanvasEffectPass(({ final __callArgument2:Dynamic = dest; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
       return;
     }
-    operation = getCanvasBlendEffectCompositeOperation((cast _Runtime.field(effect, 'mode') : String));
+    operation = getCanvasBlendEffectCompositeOperation((cast effect.mode : String));
     ctx = dest.context;
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
@@ -35,7 +35,7 @@ class CanvasBlendEffect {
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'filter', 'none');
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([0.0, 0.0, dest.width, dest.height] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([(cast backdrop : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }).canvas, 0.0, 0.0] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalAlpha', _Runtime.coalesce(_Runtime.field(effect, 'opacity'), function():Dynamic return cast 1.0));
+    flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalAlpha', _Runtime.coalesce(effect.opacity, function():Dynamic return cast 1.0));
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', operation);
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([source.canvas, 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));

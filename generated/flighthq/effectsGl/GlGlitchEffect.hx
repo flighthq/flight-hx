@@ -22,10 +22,10 @@ class GlGlitchEffect {
     var colorShift:Float = cast _Runtime.UNDEFINED;
     var seed:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
-    intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.5);
-    blockSize = _Runtime.coalesce(_Runtime.field(effect, 'blockSize'), function():Dynamic return cast 24.0);
-    colorShift = _Runtime.coalesce(_Runtime.field(effect, 'colorShift'), function():Dynamic return cast 8.0);
-    seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
+    intensity = _Runtime.coalesce(effect.intensity, function():Dynamic return cast 0.5);
+    blockSize = _Runtime.coalesce(effect.blockSize, function():Dynamic return cast 24.0);
+    colorShift = _Runtime.coalesce(effect.colorShift, function():Dynamic return cast 8.0);
+    seed = _Runtime.coalesce(effect.seed, function():Dynamic return cast 0.0);
     program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'stylization.glitch' : String), (cast GlGlitchEffect.GLITCH_FRAGMENT_SRC__glGlitchEffect : String)) : GlFullscreenProgram);
     drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; }), ({ final __callArgument3:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);

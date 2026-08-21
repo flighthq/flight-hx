@@ -21,9 +21,9 @@ class GlOutlineEffect {
     var thickness:Float = cast _Runtime.UNDEFINED;
     var color:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
-    threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.2);
-    thickness = _Runtime.coalesce(_Runtime.field(effect, 'thickness'), function():Dynamic return cast 1.0);
-    color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 255.0);
+    threshold = _Runtime.coalesce(effect.threshold, function():Dynamic return cast 0.2);
+    thickness = _Runtime.coalesce(effect.thickness, function():Dynamic return cast 1.0);
+    color = _Runtime.coalesce(effect.color, function():Dynamic return cast 255.0);
     program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'stylization.outline' : String), (cast GlOutlineEffect.OUTLINE_FRAGMENT_SRC__glOutlineEffect : String)) : GlFullscreenProgram);
     drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; }), ({ final __callArgument3:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_threshold'), threshold);

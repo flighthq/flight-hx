@@ -1543,6 +1543,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#AnimationStateMachineState',
     purpose: 'reviewed escape-free animation state-machine state',
   },
+  {
+    declarationFingerprint: 'sha256:d63118c410116509a903cf1414b9561e31bee6107c718e648d79b5c96fb3fd3b',
+    id: '@flighthq/types:interface#BlendEffect',
+    purpose: 'reviewed escape-free blend effect',
+  },
+  {
+    declarationFingerprint: 'sha256:057f7b6cb433bf1bd71e9973328f74a479ab0395a4b8cf9166fc61fc32917bdf',
+    id: '@flighthq/types:interface#BlurEffect',
+    purpose: 'reviewed escape-free blur effect',
+  },
+  {
+    declarationFingerprint: 'sha256:9a00b56b3964f4300679fc03b08efc716144f91285ef67e7f80fc772a723c568',
+    id: '@flighthq/types:interface#FilmGrainEffect',
+    purpose: 'reviewed escape-free film-grain effect',
+  },
+  {
+    declarationFingerprint: 'sha256:2ca3b14ea2ba238108237a31c7a3a2764abd2981b1ab0e441f8977b7fc5e5df2',
+    id: '@flighthq/types:interface#GlitchEffect',
+    purpose: 'reviewed escape-free glitch effect',
+  },
+  {
+    declarationFingerprint: 'sha256:e972992e03ced9fb69d2b4ba2fce5bf11410e5c020156d747ef06554c1c3cb36',
+    id: '@flighthq/types:interface#OutlineEffect',
+    purpose: 'reviewed escape-free outline effect',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

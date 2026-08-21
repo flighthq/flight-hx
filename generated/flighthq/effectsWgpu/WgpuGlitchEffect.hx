@@ -22,10 +22,10 @@ class WgpuGlitchEffect {
     var colorShift:Float = cast _Runtime.UNDEFINED;
     var seed:Float = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
-    intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.5);
-    blockSize = _Runtime.coalesce(_Runtime.field(effect, 'blockSize'), function():Dynamic return cast 24.0);
-    colorShift = _Runtime.coalesce(_Runtime.field(effect, 'colorShift'), function():Dynamic return cast 8.0);
-    seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
+    intensity = _Runtime.coalesce(effect.intensity, function():Dynamic return cast 0.5);
+    blockSize = _Runtime.coalesce(effect.blockSize, function():Dynamic return cast 24.0);
+    colorShift = _Runtime.coalesce(effect.colorShift, function():Dynamic return cast 8.0);
+    seed = _Runtime.coalesce(effect.seed, function():Dynamic return cast 0.0);
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'stylization.glitch' : String), (cast WgpuGlitchEffect.GLITCH_FRAGMENT_WGSL__wgpuGlitchEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast source : WgpuRenderTarget), ({ final __callArgument2:Dynamic = (cast dest : WgpuRenderTarget); __callArgument2; }), ({ final __callArgument3:Dynamic = pipeline; __callArgument3; }), ({ final __callArgument4:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast intensity : Float));

@@ -15,9 +15,9 @@ class EdgeDetectMath {
     var g:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
     var a:Float = cast _Runtime.UNDEFINED;
-    threshold = HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.1));
+    threshold = HxMath.max(0.0, _Runtime.coalesce(effect.threshold, function():Dynamic return cast 0.1));
     feather = (threshold * 0.5);
-    color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 255.0);
+    color = _Runtime.coalesce(effect.color, function():Dynamic return cast 255.0);
     r = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) / 255.0);
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0);
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0);
@@ -31,7 +31,7 @@ class EdgeDetectMath {
   }
 
   public static function computeOutlineThicknessPx(effect:OutlineEffect):Float {
-    return cast HxMath.max(0.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'thickness'), function():Dynamic return cast 1.0)));
+    return cast HxMath.max(0.0, HxMath.round(_Runtime.coalesce(effect.thickness, function():Dynamic return cast 1.0)));
     return cast null;
   }
 

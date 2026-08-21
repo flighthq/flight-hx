@@ -26,10 +26,10 @@ class GlBlendEffect {
     var opacity:Float = cast _Runtime.UNDEFINED;
     var hasBackdrop:Bool = cast _Runtime.UNDEFINED;
     var inputs:Array<flighthq._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;
-    backdrop = (cast getGlBlendEffectBackdrop(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = _Runtime.coalesce(_Runtime.field(effect, 'backdropKey'), function():Dynamic return cast null); __callArgument1; })) : Null<flighthq._internal.dom.WebGLTexture>);
+    backdrop = (cast getGlBlendEffectBackdrop(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = _Runtime.coalesce(effect.backdropKey, function():Dynamic return cast null); __callArgument1; })) : Null<flighthq._internal.dom.WebGLTexture>);
     program = (cast getGlEffectProgram(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast 'blend.advanced' : String), (cast BLEND_FRAGMENT_SRC : String)) : GlFullscreenProgram);
-    modeIndex = (cast getBlendEffectModeIndex((cast _Runtime.field(effect, 'mode') : String)) : Float);
-    opacity = _Runtime.coalesce(_Runtime.field(effect, 'opacity'), function():Dynamic return cast 1.0);
+    modeIndex = (cast getBlendEffectModeIndex((cast effect.mode : String)) : Float);
+    opacity = _Runtime.coalesce(effect.opacity, function():Dynamic return cast 1.0);
     hasBackdrop = !_Runtime.strictEquals(backdrop, null);
     inputs = (cast cast ([source.texture, ((cast hasBackdrop : Bool) ? (cast (cast backdrop : flighthq._internal.dom.WebGLTexture) : Dynamic) : (cast source.texture : Dynamic))] : Array<Dynamic>));
     drawGlFullscreenPass(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = program; __callArgument4; }), ({ final __callArgument5:Dynamic = inputs; __callArgument5; }), ({ final __callArgument6:Dynamic = dest; __callArgument6; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {

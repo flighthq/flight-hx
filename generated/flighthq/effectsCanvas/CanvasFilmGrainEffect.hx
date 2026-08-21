@@ -28,9 +28,9 @@ class CanvasFilmGrainEffect {
     var s:Float = cast _Runtime.UNDEFINED;
     var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     var pattern:Null<flighthq._internal.dom.CanvasPattern> = cast _Runtime.UNDEFINED;
-    intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.1);
-    size = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'size'), function():Dynamic return cast 1.0)));
-    seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
+    intensity = _Runtime.coalesce(effect.intensity, function():Dynamic return cast 0.1);
+    size = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(effect.size, function():Dynamic return cast 1.0)));
+    seed = _Runtime.coalesce(effect.seed, function():Dynamic return cast 0.0);
     drawCanvasEffectPass(({ final __callArgument0:Dynamic = dest; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     cells = 64.0;
     patchSize = (cells * size);

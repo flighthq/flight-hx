@@ -25,13 +25,13 @@ class WgpuBlendEffect {
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     var modeIndex:Float = cast _Runtime.UNDEFINED;
     var hasBackdrop:Bool = cast _Runtime.UNDEFINED;
-    backdrop = (cast getWgpuBlendEffectBackdrop(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = _Runtime.coalesce(_Runtime.field(effect, 'backdropKey'), function():Dynamic return cast null); __callArgument1; })) : Null<WgpuRenderTarget>);
+    backdrop = (cast getWgpuBlendEffectBackdrop(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = _Runtime.coalesce(effect.backdropKey, function():Dynamic return cast null); __callArgument1; })) : Null<WgpuRenderTarget>);
     pipeline = (cast WgpuBlendEffect.getWgpuBlendEffectPipeline__wgpuBlendEffect(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuEffectPipeline);
-    modeIndex = (cast getWgpuBlendEffectModeIndex((cast _Runtime.field(effect, 'mode') : String)) : Float);
+    modeIndex = (cast getWgpuBlendEffectModeIndex((cast effect.mode : String)) : Float);
     hasBackdrop = !_Runtime.strictEquals(backdrop, null);
     drawWgpuDualSourceEffectPass(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast source : WgpuRenderTarget), (cast _Runtime.coalesce(backdrop, function():Dynamic return cast source) : WgpuRenderTarget), ({ final __callArgument4:Dynamic = (cast dest : WgpuRenderTarget); __callArgument4; }), ({ final __callArgument5:Dynamic = pipeline; __callArgument5; }), ({ final __callArgument6:Dynamic = function(f32:flighthq._internal._Float32Array, i32:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeInt32ArrayTyped((cast i32 : flighthq._internal._Int32Array), (cast 0.0 : Float), (cast modeIndex : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'opacity'), function():Dynamic return cast 1.0) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast _Runtime.coalesce(effect.opacity, function():Dynamic return cast 1.0) : Float));
       flighthq._internal._StaticIndex.writeInt32ArrayTyped((cast i32 : flighthq._internal._Int32Array), (cast 2.0 : Float), (cast ((cast hasBackdrop : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Float));
     }; __callArgument6; }));
   }

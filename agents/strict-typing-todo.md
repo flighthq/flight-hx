@@ -5,9 +5,9 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 ## Baseline
 
 - 1,536 public schemas are semantically eligible for typed structural lowering.
-- 703 schemas currently emit direct fields, covering 24,278 accesses.
-- 833 eligible schemas remain audit-only, covering 6,388 pending accesses.
-- 576 audit-only schemas have no recorded escape, covering 1,634 pending accesses.
+- 708 schemas currently emit direct fields, covering 24,324 accesses.
+- 828 eligible schemas remain audit-only, covering 6,342 pending accesses.
+- 571 audit-only schemas have no recorded escape, covering 1,588 pending accesses.
 - Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
 - Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
 - The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
@@ -91,6 +91,7 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Promote the thirty-first high-access zero-escape frontier: `GltfPunctualLight`, `GltfCamera`, `ThreeDsCamera`, `Scene3DDocumentScene`, and `Skin`. Their 49 accesses now emit directly across 15 generated modules. Optional omission keeps the document scene structural; four schemas have no closed construction provenance; and the provenance-closed 3DS camera remains structural pending separate cpp review. The tranche removes 19 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote the thirty-second high-access zero-escape frontier: `TextSegment`, `TextInputHistoryEntry`, `FocusManager`, `SelectableRichTextManager`, and `TextInputManager`. Their 49 accesses now emit directly across six generated modules. Optional omission keeps the text segment structural, normalization provenance keeps the history entry structural, and the three provenance-closed manager records remain structural pending separate cpp review. The tranche removes redundant schema casts while generated `Dynamic`, `_Runtime.field`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote the thirty-third high-access zero-escape frontier: `AnimationBlendTreeChannel`, `AnimationCrossfadeChannel`, `AnimationLayerStackChannel`, `AnimationStateMachineChannel`, and `AnimationStateMachineState`. Their 43 accesses now emit directly across five generated animation modules. Normalization provenance keeps the four mechanically compatible channel records structural, and cross-schema transfer keeps the state record structural. The tranche removes 29 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
+- [x] Promote the thirty-fourth high-access zero-escape frontier: `BlendEffect`, `BlurEffect`, `FilmGrainEffect`, `GlitchEffect`, and `OutlineEffect`. Their 46 accesses now emit directly across 17 generated effects, Canvas, WebGL, and WebGPU modules. Cross-schema transfer plus object-literal spread keeps all five effect records structural. The tranche removes 46 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [ ] Review the next cohesive five-row zero-escape tranche from the refreshed audit, preserving exact fingerprint, provenance, Haxe, portability, and affected-parity gates.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 

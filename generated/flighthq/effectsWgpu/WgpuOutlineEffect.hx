@@ -25,9 +25,9 @@ class WgpuOutlineEffect {
     var b:Float = cast _Runtime.UNDEFINED;
     var a:Float = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
-    threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.2);
-    thickness = _Runtime.coalesce(_Runtime.field(effect, 'thickness'), function():Dynamic return cast 1.0);
-    color = _Runtime.coalesce(_Runtime.field(effect, 'color'), function():Dynamic return cast 255.0);
+    threshold = _Runtime.coalesce(effect.threshold, function():Dynamic return cast 0.2);
+    thickness = _Runtime.coalesce(effect.thickness, function():Dynamic return cast 1.0);
+    color = _Runtime.coalesce(effect.color, function():Dynamic return cast 255.0);
     r = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) / 255.0);
     g = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255) / 255.0);
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0);

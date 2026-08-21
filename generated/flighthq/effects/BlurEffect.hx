@@ -18,7 +18,7 @@ class BlurEffect {
   }
 
   public static function getBlurEffectPadding(effect:flighthq.types.BlurEffect):RenderEffectPadding {
-    return cast (cast getGaussianRenderEffectPadding((cast _Runtime.coalesce(_Runtime.field(effect, 'blurX'), function():Dynamic return cast 4.0) : Float), (cast _Runtime.coalesce(_Runtime.field(effect, 'blurY'), function():Dynamic return cast 4.0) : Float)) : RenderEffectPadding);
+    return cast (cast getGaussianRenderEffectPadding((cast _Runtime.coalesce(effect.blurX, function():Dynamic return cast 4.0) : Float), (cast _Runtime.coalesce(effect.blurY, function():Dynamic return cast 4.0) : Float)) : RenderEffectPadding);
     return cast null;
   }
 

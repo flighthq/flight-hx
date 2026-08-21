@@ -18,7 +18,7 @@ class OutlineEffect {
 
   public static function getOutlineEffectPadding(effect:flighthq.types.OutlineEffect):RenderEffectPadding {
     var thickness:Float = cast _Runtime.UNDEFINED;
-    thickness = HxMath.ceil(HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(effect, 'thickness'), function():Dynamic return cast 1.0)));
+    thickness = HxMath.ceil(HxMath.max(0.0, _Runtime.coalesce(effect.thickness, function():Dynamic return cast 1.0)));
     return cast { bottom: thickness, left: thickness, right: thickness, top: thickness };
     return cast null;
   }

@@ -27,7 +27,7 @@ import flighthq.types.RenderTexture;
 class GlBlurEffect {
   @:noCompletion
   public static function applyBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, effect:BlurEffect):Void {
-    applyGaussianBlurToGl(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument2:Dynamic = dest; __callArgument2; }), ({ final __callArgument3:Dynamic = temp; __callArgument3; }), ({ final __callArgument4:Dynamic = { blurX: _Runtime.field(effect, 'blurX'), blurY: _Runtime.field(effect, 'blurY') }; __callArgument4; }));
+    applyGaussianBlurToGl(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument2:Dynamic = dest; __callArgument2; }), ({ final __callArgument3:Dynamic = temp; __callArgument3; }), ({ final __callArgument4:Dynamic = { blurX: effect.blurX, blurY: effect.blurY }; __callArgument4; }));
   }
 
   public static function applyBlurEffectToGlRenderTextures(state:GlRenderState, source:RenderTexture, dest:RenderTexture, temp:RenderTexture, effect:BlurEffect):Bool {
