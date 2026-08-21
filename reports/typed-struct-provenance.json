@@ -37903,7 +37903,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 7,
       "fields": 7,
       "id": "@flighthq/types:interface#Physics2DDebugGeometryOptions",
       "name": "Physics2DDebugGeometryOptions",

@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1296 |
-| Direct schemas | 708 |
+| Audit-only schemas | 1291 |
+| Direct schemas | 713 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 6342 |
-| Directly emitted accesses | 24324 |
+| Pending accesses | 6301 |
+| Directly emitted accesses | 24365 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1296 |
+| Newly discovered, audit-only | 1291 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -1144,13 +1144,13 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Physics2DDebugCircle` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 6 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics2DDebugFeature` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Physics2DDebugGeometry` | `direct` | `new` | — | reviewed escape-free physics debug geometry | 4 | 10 | 4 | 0 | 0 | 14 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DDebugGeometryOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DDebugGeometryOptions` | `direct` | `new` | — | reviewed escape-free physics debug-geometry options | 7 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DDebugLine` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 7 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DDistanceJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 18 | 4 | 1 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DDistanceJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics2DGearCoordinateKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Physics2DGearJoint` | `direct` | `new` | — | reviewed escape-free physics gear joint | 23 | 21 | 8 | 0 | 0 | 29 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DGearJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 15 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DGearJointOptions` | `direct` | `new` | — | reviewed escape-free physics gear-joint options | 15 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 15 | 298 | 68 | 0 | 366 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#Physics2DJointKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Physics2DJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
@@ -1161,9 +1161,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Physics2DMassData` | `direct` | `new` | — | reviewed escape-free physics mass data | 4 | 17 | 28 | 0 | 0 | 45 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 15 | 0 | 0 | 15 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DMouseJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 20 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DMouseJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DMouseJointOptions` | `direct` | `new` | — | reviewed escape-free physics mouse-joint options | 8 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DPrismaticJoint` | `direct` | `new` | — | reviewed escape-free physics prismatic joint | 25 | 34 | 10 | 0 | 0 | 44 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DPrismaticJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DPrismaticJointOptions` | `direct` | `new` | — | reviewed escape-free physics prismatic-joint options | 16 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DPulleyJoint` | `direct` | `new` | — | reviewed escape-free physics pulley joint | 21 | 23 | 6 | 0 | 0 | 29 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DPulleyJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DQueryFilter` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
@@ -1180,7 +1180,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Physics2DWeldJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 2 | 1 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DWeldJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DWheelJoint` | `direct` | `new` | — | reviewed escape-free physics wheel joint | 24 | 21 | 6 | 0 | 0 | 27 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DWheelJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 15 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DWheelJointOptions` | `direct` | `new` | — | reviewed escape-free physics wheel-joint options | 15 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DWorld` | `direct` | `new` | — | reviewed escape-free physics world | 29 | 214 | 3 | 0 | 0 | 217 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PixelateEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#PixelFormat` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |

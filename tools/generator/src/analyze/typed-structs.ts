@@ -1568,6 +1568,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#OutlineEffect',
     purpose: 'reviewed escape-free outline effect',
   },
+  {
+    declarationFingerprint: 'sha256:47def074a0904f9f25514d36c9de48c415a0d0363de3612860855ad5f0f9f073',
+    id: '@flighthq/types:interface#Physics2DDebugGeometryOptions',
+    purpose: 'reviewed escape-free physics debug-geometry options',
+  },
+  {
+    declarationFingerprint: 'sha256:78dcb4caa67b151f54c1f2a426c1264d79135c2d29ddbf220e1f930bbd6fdda1',
+    id: '@flighthq/types:interface#Physics2DGearJointOptions',
+    purpose: 'reviewed escape-free physics gear-joint options',
+  },
+  {
+    declarationFingerprint: 'sha256:e35c04cec06deb040e790ba9683b30466109fee8b73fe27022136defde1c7501',
+    id: '@flighthq/types:interface#Physics2DMouseJointOptions',
+    purpose: 'reviewed escape-free physics mouse-joint options',
+  },
+  {
+    declarationFingerprint: 'sha256:c96ac7eb691c145a2c2a1c971160cca42ae2382b4cace6917437f2fbe6d98fae',
+    id: '@flighthq/types:interface#Physics2DPrismaticJointOptions',
+    purpose: 'reviewed escape-free physics prismatic-joint options',
+  },
+  {
+    declarationFingerprint: 'sha256:9775462cd5ce4402fcc41ff2f91c58cc0fefc7a6b29602a4f44f568e829a5334',
+    id: '@flighthq/types:interface#Physics2DWheelJointOptions',
+    purpose: 'reviewed escape-free physics wheel-joint options',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

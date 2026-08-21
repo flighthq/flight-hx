@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_296,
+      newAuditOnly: 1_291,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(710);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(715);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_296);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_291);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(308);
+    expect(newDirect).toHaveLength(313);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1650,6 +1650,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'OutlineEffect',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free outline effect',
+        }),
+        expect.objectContaining({
+          name: 'Physics2DDebugGeometryOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free physics debug-geometry options',
+        }),
+        expect.objectContaining({
+          name: 'Physics2DGearJointOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free physics gear-joint options',
+        }),
+        expect.objectContaining({
+          name: 'Physics2DMouseJointOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free physics mouse-joint options',
+        }),
+        expect.objectContaining({
+          name: 'Physics2DPrismaticJointOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free physics prismatic-joint options',
+        }),
+        expect.objectContaining({
+          name: 'Physics2DWheelJointOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free physics wheel-joint options',
         }),
       ]),
     );
@@ -3194,6 +3219,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#OutlineEffect',
         purpose: 'reviewed escape-free outline effect',
       },
+      {
+        declarationFingerprint: 'sha256:47def074a0904f9f25514d36c9de48c415a0d0363de3612860855ad5f0f9f073',
+        id: '@flighthq/types:interface#Physics2DDebugGeometryOptions',
+        purpose: 'reviewed escape-free physics debug-geometry options',
+      },
+      {
+        declarationFingerprint: 'sha256:78dcb4caa67b151f54c1f2a426c1264d79135c2d29ddbf220e1f930bbd6fdda1',
+        id: '@flighthq/types:interface#Physics2DGearJointOptions',
+        purpose: 'reviewed escape-free physics gear-joint options',
+      },
+      {
+        declarationFingerprint: 'sha256:e35c04cec06deb040e790ba9683b30466109fee8b73fe27022136defde1c7501',
+        id: '@flighthq/types:interface#Physics2DMouseJointOptions',
+        purpose: 'reviewed escape-free physics mouse-joint options',
+      },
+      {
+        declarationFingerprint: 'sha256:c96ac7eb691c145a2c2a1c971160cca42ae2382b4cace6917437f2fbe6d98fae',
+        id: '@flighthq/types:interface#Physics2DPrismaticJointOptions',
+        purpose: 'reviewed escape-free physics prismatic-joint options',
+      },
+      {
+        declarationFingerprint: 'sha256:9775462cd5ce4402fcc41ff2f91c58cc0fefc7a6b29602a4f44f568e829a5334',
+        id: '@flighthq/types:interface#Physics2DWheelJointOptions',
+        purpose: 'reviewed escape-free physics wheel-joint options',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -4193,6 +4243,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const thirtyFifthHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'Physics2DDebugGeometryOptions',
+            'Physics2DGearJointOptions',
+            'Physics2DMouseJointOptions',
+            'Physics2DPrismaticJointOptions',
+            'Physics2DWheelJointOptions',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -4233,22 +4296,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_296,
+      auditOnlySchemas: 1_291,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 24_324,
-      directSchemas: 708,
+      directAccesses: 24_365,
+      directSchemas: 713,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 6_342,
+      pendingAccesses: 6_301,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_296,
+      newAuditOnly: 1_291,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -4325,7 +4388,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(24_324);
+    expect(report.summary.directAccesses).toBe(24_365);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -6009,6 +6072,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(thirtyFourthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'Physics2DDebugGeometryOptions',
+        7,
+        'sha256:47def074a0904f9f25514d36c9de48c415a0d0363de3612860855ad5f0f9f073',
+        'reviewed escape-free physics debug-geometry options',
+      ],
+      [
+        'Physics2DGearJointOptions',
+        8,
+        'sha256:78dcb4caa67b151f54c1f2a426c1264d79135c2d29ddbf220e1f930bbd6fdda1',
+        'reviewed escape-free physics gear-joint options',
+      ],
+      [
+        'Physics2DMouseJointOptions',
+        9,
+        'sha256:e35c04cec06deb040e790ba9683b30466109fee8b73fe27022136defde1c7501',
+        'reviewed escape-free physics mouse-joint options',
+      ],
+      [
+        'Physics2DPrismaticJointOptions',
+        9,
+        'sha256:c96ac7eb691c145a2c2a1c971160cca42ae2382b4cace6917437f2fbe6d98fae',
+        'reviewed escape-free physics prismatic-joint options',
+      ],
+      [
+        'Physics2DWheelJointOptions',
+        8,
+        'sha256:9775462cd5ce4402fcc41ff2f91c58cc0fefc7a6b29602a4f44f568e829a5334',
+        'reviewed escape-free physics wheel-joint options',
+      ],
+    ] as const) {
+      expect(thirtyFifthHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -8116,6 +8221,21 @@ describe('typed struct analysis', () => {
       });
       expect(provenanceById.has(effectId)).toBe(false);
     }
+    for (const [optionsId, nominalIdentity] of [
+      ['@flighthq/types:interface#Physics2DDebugGeometryOptions', { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#Physics2DGearJointOptions', null],
+      ['@flighthq/types:interface#Physics2DMouseJointOptions', null],
+      ['@flighthq/types:interface#Physics2DPrismaticJointOptions', null],
+      ['@flighthq/types:interface#Physics2DWheelJointOptions', null],
+    ] as const) {
+      expect(classAuditById.get(optionsId)?.migration).toEqual({
+        mechanicallyCompatible: true,
+        normalizationReasons: [],
+        observabilityReasons: [],
+      });
+      if (nominalIdentity === null) expect(provenanceById.has(optionsId)).toBe(false);
+      else expect(provenanceById.get(optionsId)?.nominalIdentity).toEqual(nominalIdentity);
+    }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
@@ -9521,6 +9641,14 @@ describe('typed struct analysis', () => {
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:BlendEffect|BlurEffect|FilmGrainEffect|GlitchEffect|OutlineEffect)\)\./u,
       );
     }
+    for (const path of [
+      'generated/flighthq/physics2d/DebugGeometry.hx',
+      'generated/flighthq/physics2d/JointFactories.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?Physics2D(?:DebugGeometry|GearJoint|MouseJoint|PrismaticJoint|WheelJoint)Options\)\./u,
+      );
+    }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
     expect(generatedCanvasRenderState).not.toMatch(
       /\(cast (?:runtime|sourceRuntime|targetRuntime) : CanvasRenderStateRuntime\)\./u,
@@ -9567,7 +9695,7 @@ describe('typed struct analysis', () => {
     expect(typedStructSummary(report)).toContain(
       '| `@flighthq/types:interface#ParticleFormatCodec` | `parseToDocument` | `receiver-sensitive-method` | `upstream/packages/types/src/ParticleFormatCodec.ts:12` |',
     );
-  }, 180_000);
+  }, 300_000);
 
   it('preserves source typing for audit-only schemas without enabling registry bindings', () => {
     const result = lowerFixture(
