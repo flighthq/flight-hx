@@ -17,6 +17,9 @@ class ColliderTransform {
       else if (__switchValue == 'aabb' || __switchValue == 'obb') {
         return cast { kind: 'obb', x: 0.0, y: 0.0, halfW: 0.0, halfH: 0.0, rotation: 0.0 };
       }
+      else if (__switchValue == 'capsule') {
+        return cast { kind: 'capsule', x0: 0.0, y0: 0.0, x1: 0.0, y1: 0.0, radius: (cast local : { var radius:Float; }).radius };
+      }
       else if (__switchValue == 'polygon') {
         return cast { kind: 'polygon', points: _Runtime.slice((cast local : { var points:Array<Float>; }).points, 0, null) };
       }
@@ -79,6 +82,14 @@ class ColliderTransform {
           (i = cast ((i + 2.0) : Dynamic));
         }
       }
+      return;
+    }
+    if ((cast ((cast _Runtime.strictEquals((cast local : { var kind:String; }).kind, 'capsule') : Bool) && (cast _Runtime.strictEquals((cast world : { var kind:String; }).kind, 'capsule') : Bool)) : Bool)) {
+      ((cast world : { var x0:Float; }).x0 = (_Runtime.addNumbers(_Runtime.field(body, 'x'), ((cast local : { var x0:Float; }).x0 * cos)) - ((cast local : { var y0:Float; }).y0 * sin)));
+      ((cast world : { var y0:Float; }).y0 = (_Runtime.addNumbers(_Runtime.field(body, 'y'), ((cast local : { var x0:Float; }).x0 * sin)) + ((cast local : { var y0:Float; }).y0 * cos)));
+      ((cast world : { var x1:Float; }).x1 = (_Runtime.addNumbers(_Runtime.field(body, 'x'), ((cast local : { var x1:Float; }).x1 * cos)) - ((cast local : { var y1:Float; }).y1 * sin)));
+      ((cast world : { var y1:Float; }).y1 = (_Runtime.addNumbers(_Runtime.field(body, 'y'), ((cast local : { var x1:Float; }).x1 * sin)) + ((cast local : { var y1:Float; }).y1 * cos)));
+      ((cast world : { var radius:Float; }).radius = (cast local : { var radius:Float; }).radius);
       return;
     }
     if ((cast ((cast _Runtime.strictEquals((cast local : { var kind:String; }).kind, 'segment') : Bool) && (cast _Runtime.strictEquals((cast world : { var kind:String; }).kind, 'segment') : Bool)) : Bool)) {
@@ -156,6 +167,13 @@ class ColliderTransform {
           ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxY = maxY);
           return;
         }
+      }
+      else if (__switchValue == 'capsule') {
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minX = _Runtime.subtractNumbers(HxMath.min((cast shape : { var x0:Float; }).x0, (cast shape : { var x1:Float; }).x1), (cast shape : { var radius:Float; }).radius));
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minY = _Runtime.subtractNumbers(HxMath.min((cast shape : { var y0:Float; }).y0, (cast shape : { var y1:Float; }).y1), (cast shape : { var radius:Float; }).radius));
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxX = _Runtime.addNumbers(HxMath.max((cast shape : { var x0:Float; }).x0, (cast shape : { var x1:Float; }).x1), (cast shape : { var radius:Float; }).radius));
+        ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).maxY = _Runtime.addNumbers(HxMath.max((cast shape : { var y0:Float; }).y0, (cast shape : { var y1:Float; }).y1), (cast shape : { var radius:Float; }).radius));
+        return;
       }
       else if (__switchValue == 'segment') {
         ((cast out : { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }).minX = HxMath.min((cast shape : { var x0:Float; }).x0, (cast shape : { var x1:Float; }).x1));

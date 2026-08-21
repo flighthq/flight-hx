@@ -3,11 +3,15 @@ package flighthq.collision;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.collision.CollisionShapeValidation.getCollisionShapeValidationStatus2D;
+import flighthq.collision.CollisionShapeValidation2D.getCollisionShapeValidationStatus2D;
+import flighthq.collision.CollisionShapeValidation3D.getCollisionShapeValidationStatus3D;
 import flighthq.collision.TestCollision2D.setCollisionTestGuard2D;
+import flighthq.collision.TestCollision3D.setCollisionTestGuard3D;
 import flighthq.log.Log.logOnce;
 import flighthq.types.Collision.CollisionShape2D;
+import flighthq.types.Collision.CollisionShape3D;
 import flighthq.types.Collision.CollisionTestExplanation2D;
+import flighthq.types.Collision.CollisionTestExplanation3D;
 import flighthq.types.Collision.CollisionTestStatus;
 import flighthq.types.Log.LogLevel;
 
@@ -19,11 +23,13 @@ class EnableCollisionGuards {
 
   public static function disableCollisionGuards():Void {
     setCollisionTestGuard2D((cast null : Dynamic));
+    setCollisionTestGuard3D((cast null : Dynamic));
     (EnableCollisionGuards.collisionGuardsEnabled__enableCollisionGuards = cast (false : Dynamic));
   }
 
   public static function enableCollisionGuards():Void {
     setCollisionTestGuard2D((cast EnableCollisionGuards.warnOnInvalidCollisionShapes__enableCollisionGuards : Dynamic));
+    setCollisionTestGuard3D((cast EnableCollisionGuards.warnOnInvalidCollisionShapes3D__enableCollisionGuards : Dynamic));
     (EnableCollisionGuards.collisionGuardsEnabled__enableCollisionGuards = cast (true : Dynamic));
   }
 
@@ -32,12 +38,26 @@ class EnableCollisionGuards {
     var statusB:Null<String> = cast _Runtime.UNDEFINED;
     statusA = (cast getCollisionShapeValidationStatus2D(({ final __callArgument0:Dynamic = a; __callArgument0; })) : Null<String>);
     if ((cast (cast EnableCollisionGuards.isWarnableCollisionStatus__enableCollisionGuards(({ final __callArgument1:Dynamic = statusA; __callArgument1; })) : Bool) : Bool)) {
-      EnableCollisionGuards.warnOnInvalidCollisionShape__enableCollisionGuards(({ final __callArgument2:Dynamic = { kind: (cast a : { var kind:String; }).kind, overlapping: false, shapeIndex: 0.0, status: statusA }; __callArgument2; }));
+      EnableCollisionGuards.warnOnInvalidCollisionShape__enableCollisionGuards(({ final __callArgument2:Dynamic = { kind: (cast a : { var kind:String; }).kind, overlapping: false, shapeIndex: 0.0, status: statusA }; __callArgument2; }), (cast '2D' : String));
       return;
     }
     statusB = (cast getCollisionShapeValidationStatus2D(({ final __callArgument3:Dynamic = b; __callArgument3; })) : Null<String>);
     if ((cast (cast EnableCollisionGuards.isWarnableCollisionStatus__enableCollisionGuards(({ final __callArgument4:Dynamic = statusB; __callArgument4; })) : Bool) : Bool)) {
-      EnableCollisionGuards.warnOnInvalidCollisionShape__enableCollisionGuards(({ final __callArgument5:Dynamic = { kind: (cast b : { var kind:String; }).kind, overlapping: false, shapeIndex: 1.0, status: statusB }; __callArgument5; }));
+      EnableCollisionGuards.warnOnInvalidCollisionShape__enableCollisionGuards(({ final __callArgument5:Dynamic = { kind: (cast b : { var kind:String; }).kind, overlapping: false, shapeIndex: 1.0, status: statusB }; __callArgument5; }), (cast '2D' : String));
+    }
+  }
+
+  public static function warnOnInvalidCollisionShapes3D__enableCollisionGuards(a:CollisionShape3D, b:CollisionShape3D):Void {
+    var statusA:Null<String> = cast _Runtime.UNDEFINED;
+    var statusB:Null<String> = cast _Runtime.UNDEFINED;
+    statusA = (cast getCollisionShapeValidationStatus3D(({ final __callArgument6:Dynamic = a; __callArgument6; })) : Null<String>);
+    if ((cast (cast EnableCollisionGuards.isWarnableCollisionStatus__enableCollisionGuards(({ final __callArgument7:Dynamic = statusA; __callArgument7; })) : Bool) : Bool)) {
+      EnableCollisionGuards.warnOnInvalidCollisionShape__enableCollisionGuards(({ final __callArgument8:Dynamic = { kind: (cast a : { var kind:String; }).kind, overlapping: false, shapeIndex: 0.0, status: statusA }; __callArgument8; }), (cast '3D' : String));
+      return;
+    }
+    statusB = (cast getCollisionShapeValidationStatus3D(({ final __callArgument9:Dynamic = b; __callArgument9; })) : Null<String>);
+    if ((cast (cast EnableCollisionGuards.isWarnableCollisionStatus__enableCollisionGuards(({ final __callArgument10:Dynamic = statusB; __callArgument10; })) : Bool) : Bool)) {
+      EnableCollisionGuards.warnOnInvalidCollisionShape__enableCollisionGuards(({ final __callArgument11:Dynamic = { kind: (cast b : { var kind:String; }).kind, overlapping: false, shapeIndex: 1.0, status: statusB }; __callArgument11; }), (cast '3D' : String));
     }
   }
 
@@ -46,13 +66,17 @@ class EnableCollisionGuards {
     return cast null;
   }
 
-  public static function warnOnInvalidCollisionShape__enableCollisionGuards(explanation:CollisionTestExplanation2D):Void {
+  public static function warnOnInvalidCollisionShape__enableCollisionGuards(explanation:flighthq._internal._Union2<CollisionTestExplanation2D, CollisionTestExplanation3D>, dimension:String):Void {
+    var messages:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var message:Null<String> = cast _Runtime.UNDEFINED;
-    message = _Runtime.coalesce(_Runtime.getIndex(EnableCollisionGuards.collisionGuardMessages__enableCollisionGuards, _Runtime.field(explanation, 'status')), function():Dynamic return cast _Runtime.getIndex(EnableCollisionGuards.collisionGuardMessages__enableCollisionGuards, 'degenerate-shape'));
-    (cast logOnce((cast 'collision:' + Std.string(_Runtime.field(explanation, 'status')) + ':' + Std.string(_Runtime.field(explanation, 'shapeIndex')) + ':' + Std.string(_Runtime.field(explanation, 'kind')) + '' : String), ({ final __callArgument6:Dynamic = LogLevel.Warn; __callArgument6; }), (cast { kind: _Runtime.field(explanation, 'kind'), message: message, shapeIndex: _Runtime.field(explanation, 'shapeIndex'), status: _Runtime.field(explanation, 'status') } : Dynamic), ({ final __callArgument7:Dynamic = 'collision'; __callArgument7; })) : Bool);
+    messages = ((cast _Runtime.strictEquals(dimension, '2D') : Bool) ? (cast EnableCollisionGuards.collisionGuardMessages__enableCollisionGuards : Dynamic) : (cast EnableCollisionGuards.collisionGuardMessages3D__enableCollisionGuards : Dynamic));
+    message = _Runtime.coalesce(_Runtime.getIndex(messages, (cast explanation : { var status:CollisionTestStatus; }).status), function():Dynamic return cast _Runtime.getIndex(messages, 'degenerate-shape'));
+    (cast logOnce((cast 'collision:' + Std.string(dimension) + ':' + Std.string((cast explanation : { var status:CollisionTestStatus; }).status) + ':' + Std.string((cast explanation : { var shapeIndex:Null<Float>; }).shapeIndex) + ':' + Std.string((cast explanation : { var kind:Null<flighthq._internal._Union2<String, flighthq._internal._Intersection2<String, {  }>>>; }).kind) + '' : String), ({ final __callArgument12:Dynamic = LogLevel.Warn; __callArgument12; }), (cast { kind: (cast explanation : { var kind:Null<flighthq._internal._Union2<String, flighthq._internal._Intersection2<String, {  }>>>; }).kind, message: message, shapeIndex: (cast explanation : { var shapeIndex:Null<Float>; }).shapeIndex, status: (cast explanation : { var status:CollisionTestStatus; }).status } : Dynamic), ({ final __callArgument13:Dynamic = 'collision'; __callArgument13; })) : Bool);
   }
 
   public static final collisionGuardMessages__enableCollisionGuards:flighthq._internal._Partial<flighthq._internal._Record<CollisionTestStatus, String>> = (cast _Runtime.objectFromPairs([{ key: 'degenerate-shape', value: 'testCollision2D: a shape is degenerate and cannot produce a manifold — call explainCollisionTest2D(a, b) and replace the reported shape with a finite positive-area collider.' }, { key: 'non-convex-polygon', value: 'testCollision2D: a polygon is non-convex and cannot produce a supported manifold — call explainCollisionTest2D(a, b) and replace the reported shape with a convex polygon.' }, { key: 'unsupported-shape-kind', value: 'testCollision2D: a shape kind has no manifold path and was reported as not overlapping — call explainCollisionTest2D(a, b) for the kind. Segments and points are area-less by design and answer the boolean testSegment*Collision and getCollisionShapeContainsPoint2D lanes instead.' }]));
+
+  public static final collisionGuardMessages3D__enableCollisionGuards:flighthq._internal._Partial<flighthq._internal._Record<CollisionTestStatus, String>> = (cast _Runtime.objectFromPairs([{ key: 'degenerate-shape', value: 'testCollision3D: a shape is degenerate and cannot produce a manifold — call explainCollisionTest3D(a, b) and replace the reported shape with a finite collider of positive extent.' }, { key: 'unsupported-shape-kind', value: 'testCollision3D: a shape kind has no registered support function and was reported as not overlapping — call registerBuiltInCollisionSupports3D() once at startup, or registerCollisionSupport3D(kind, support) for a vendor kind. Call explainCollisionTest3D(a, b) for which shape it was.' }]));
 
   public static var collisionGuardsEnabled__enableCollisionGuards:Bool = false;
 }

@@ -4,7 +4,7 @@ package flighthq.collision;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.collision.CollisionSupport2D.getCollisionSupport2D;
-import flighthq.collision.Manifold.clearCollisionManifold2D;
+import flighthq.collision.Manifold2D.clearCollisionManifold2D;
 import flighthq.types.Collision.CollisionManifold2D;
 import flighthq.types.Collision.CollisionShape2D;
 import flighthq.types.Collision.CollisionShapeKind2D;

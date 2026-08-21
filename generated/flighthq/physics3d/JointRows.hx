@@ -159,13 +159,13 @@ class JointRows {
     applyRow(({ final __callArgument61:Dynamic = bodyA; __callArgument61; }), ({ final __callArgument62:Dynamic = bodyB; __callArgument62; }), ({ final __callArgument63:Dynamic = state; __callArgument63; }), (cast offset : Float), (cast impulse : Float));
   }
 
-  public static function solveLowerLimitRow(bodyA:RigidBody3D, bodyB:RigidBody3D, state:Array<Float>, offset:Float, mass:Float, error:Float, biasFactor:Float, accumulatorSlot:Float):Void {
+  public static function solveLowerLimitRow(bodyA:RigidBody3D, bodyB:RigidBody3D, state:Array<Float>, offset:Float, mass:Float, error:Float, biasFactor:Float, accumulatorSlot:Float, gamma:Float = 0.0):Void {
     var velocity:Float = cast _Runtime.UNDEFINED;
     var previous:Float = cast _Runtime.UNDEFINED;
     var total:Float = cast _Runtime.UNDEFINED;
     velocity = (cast getRowVelocity(({ final __callArgument64:Dynamic = bodyA; __callArgument64; }), ({ final __callArgument65:Dynamic = bodyB; __callArgument65; }), ({ final __callArgument66:Dynamic = state; __callArgument66; }), (cast offset : Float)) : Float);
     previous = flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast accumulatorSlot : Float));
-    total = HxMath.max((previous - (mass * (velocity + (error * biasFactor)))), 0.0);
+    total = HxMath.max((previous - (mass * ((velocity + (error * biasFactor)) + (gamma * previous)))), 0.0);
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast accumulatorSlot : Float), (cast total : Float));
     applyRow(({ final __callArgument67:Dynamic = bodyA; __callArgument67; }), ({ final __callArgument68:Dynamic = bodyB; __callArgument68; }), ({ final __callArgument69:Dynamic = state; __callArgument69; }), (cast offset : Float), (cast (total - previous) : Float));
   }
@@ -196,13 +196,13 @@ class JointRows {
     applyPhysics3DJointImpulse(({ final __callArgument84:Dynamic = bodyA; __callArgument84; }), ({ final __callArgument85:Dynamic = bodyB; __callArgument85; }), (cast (cast joint : Physics3DJoint).rAX : Float), (cast (cast joint : Physics3DJoint).rAY : Float), (cast (cast joint : Physics3DJoint).rAZ : Float), (cast (cast joint : Physics3DJoint).rBX : Float), (cast (cast joint : Physics3DJoint).rBY : Float), (cast (cast joint : Physics3DJoint).rBZ : Float), (cast impulseX : Float), (cast impulseY : Float), (cast impulseZ : Float));
   }
 
-  public static function solveUpperLimitRow(bodyA:RigidBody3D, bodyB:RigidBody3D, state:Array<Float>, offset:Float, mass:Float, error:Float, biasFactor:Float, accumulatorSlot:Float):Void {
+  public static function solveUpperLimitRow(bodyA:RigidBody3D, bodyB:RigidBody3D, state:Array<Float>, offset:Float, mass:Float, error:Float, biasFactor:Float, accumulatorSlot:Float, gamma:Float = 0.0):Void {
     var velocity:Float = cast _Runtime.UNDEFINED;
     var previous:Float = cast _Runtime.UNDEFINED;
     var total:Float = cast _Runtime.UNDEFINED;
     velocity = -(cast getRowVelocity(({ final __callArgument86:Dynamic = bodyA; __callArgument86; }), ({ final __callArgument87:Dynamic = bodyB; __callArgument87; }), ({ final __callArgument88:Dynamic = state; __callArgument88; }), (cast offset : Float)) : Float);
     previous = flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast accumulatorSlot : Float));
-    total = HxMath.max((previous - (mass * (velocity + (error * biasFactor)))), 0.0);
+    total = HxMath.max((previous - (mass * ((velocity + (error * biasFactor)) + (gamma * previous)))), 0.0);
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast accumulatorSlot : Float), (cast total : Float));
     applyRow(({ final __callArgument89:Dynamic = bodyA; __callArgument89; }), ({ final __callArgument90:Dynamic = bodyB; __callArgument90; }), ({ final __callArgument91:Dynamic = state; __callArgument91; }), (cast offset : Float), (cast -(total - previous) : Float));
   }
@@ -241,6 +241,32 @@ class JointRows {
         ((cast joint : Physics3DJoint).impulse5 = value);
       }
     }
+  }
+
+  public static function writePhysics3DSoftRowParameters(mass:Float, frequencyHz:Float, dampingRatio:Float, dt:Float, hardBiasFactor:Float, out:Array<Float>):Void {
+    var angular:Float = cast _Runtime.UNDEFINED;
+    var damping:Float = cast _Runtime.UNDEFINED;
+    var stiffness:Float = cast _Runtime.UNDEFINED;
+    var gammaDenominator:Float = cast _Runtime.UNDEFINED;
+    var gamma:Float = cast _Runtime.UNDEFINED;
+    var inverseMass:Float = cast _Runtime.UNDEFINED;
+    var softened:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast !(cast _Runtime.compare(frequencyHz, 0.0, '>') : Bool) : Bool) || (cast !(cast _Runtime.compare(dt, 0.0, '>') : Bool) : Bool)) : Bool)) {
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast mass : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast hardBiasFactor : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast 0.0 : Float));
+      return;
+    }
+    angular = (JointRows.TAU__jointRows * frequencyHz);
+    damping = (((2.0 * mass) * dampingRatio) * angular);
+    stiffness = ((mass * angular) * angular);
+    gammaDenominator = (dt * (damping + (dt * stiffness)));
+    gamma = ((cast ((cast gammaDenominator : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / gammaDenominator) : Dynamic) : (cast 0.0 : Dynamic));
+    inverseMass = ((cast ((cast mass : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / mass) : Dynamic) : (cast 0.0 : Dynamic));
+    softened = (inverseMass + gamma);
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast ((cast ((cast softened : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / softened) : Dynamic) : (cast 0.0 : Dynamic)) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast ((dt * stiffness) * gamma) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast gamma : Float));
   }
 
   public static function writeRow(state:Array<Float>, offset:Float, directionX:Float, directionY:Float, directionZ:Float, armAX:Float, armAY:Float, armAZ:Float, armBX:Float, armBY:Float, armBZ:Float):Void {
@@ -285,6 +311,8 @@ class JointRows {
   }
 
   public static final BAUMGARTE__jointRows:Float = 0.2;
+
+  public static final TAU__jointRows:Float = (2.0 * HxMath.PI);
 
   public static final frameABasis:Array<Float> = _Runtime.fill(_Runtime.createArray(9.0), 0.0, 0, null, 1);
 

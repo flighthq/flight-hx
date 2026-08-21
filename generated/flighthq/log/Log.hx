@@ -200,6 +200,10 @@ class Log {
     Log._emitToSinks__log(({ final __callArgument16:Dynamic = { level: LogLevel.Debug, channel: channel, data: { msg: label, group: 'begin', depth: Log._groupDepth__log } }; __callArgument16; }));
   }
 
+  public static function clearLogChannelLevel(channel:String):Void {
+    ((cast Log._channelLevels__log : flighthq._internal._Map<String, LogLevel>).delete_(channel));
+  }
+
   public static function clearLogChannelLevels():Void {
     ((cast Log._channelLevels__log : flighthq._internal._Map<String, LogLevel>).clear());
   }

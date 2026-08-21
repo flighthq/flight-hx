@@ -4,6 +4,7 @@ package flighthq.physics3d;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.physics3d.StepValidation.isPhysics3DBodyStateValid;
+import flighthq.physics3d.StepValidation.isPhysics3DColliderStateValid;
 import flighthq.physics3d.StepValidation.isPhysics3DContactStateValid;
 import flighthq.physics3d.StepValidation.isPhysics3DGravityValid;
 import flighthq.physics3d.StepValidation.isPhysics3DJointStateValid;
@@ -20,6 +21,7 @@ class ExplainPhysics3DStep {
   public static function explainPhysics3DStep(world:Physics3DWorld, dt:Float):Physics3DStepExplanation {
     var config:Physics3DSolverConfig = cast _Runtime.UNDEFINED;
     var bodyStateValid:Bool = cast _Runtime.UNDEFINED;
+    var colliderStateValid:Bool = cast _Runtime.UNDEFINED;
     var contactStateValid:Bool = cast _Runtime.UNDEFINED;
     var gravityValid:Bool = cast _Runtime.UNDEFINED;
     var jointStateValid:Bool = cast _Runtime.UNDEFINED;
@@ -31,16 +33,17 @@ class ExplainPhysics3DStep {
     var ready:Bool = cast _Runtime.UNDEFINED;
     config = world.config;
     bodyStateValid = (cast isPhysics3DBodyStateValid(({ final __callArgument0:Dynamic = world; __callArgument0; })) : Bool);
-    contactStateValid = (cast isPhysics3DContactStateValid(({ final __callArgument1:Dynamic = world; __callArgument1; })) : Bool);
-    gravityValid = (cast isPhysics3DGravityValid(({ final __callArgument2:Dynamic = world; __callArgument2; })) : Bool);
-    jointStateValid = (cast isPhysics3DJointStateValid(({ final __callArgument3:Dynamic = world; __callArgument3; })) : Bool);
-    solverConfigValid = (cast isPhysics3DSolverConfigValid(({ final __callArgument4:Dynamic = config; __callArgument4; })) : Bool);
-    substepsValid = (cast isPhysics3DSubstepsValid(({ final __callArgument5:Dynamic = config; __callArgument5; })) : Bool);
+    colliderStateValid = (cast isPhysics3DColliderStateValid(({ final __callArgument1:Dynamic = world; __callArgument1; })) : Bool);
+    contactStateValid = (cast isPhysics3DContactStateValid(({ final __callArgument2:Dynamic = world; __callArgument2; })) : Bool);
+    gravityValid = (cast isPhysics3DGravityValid(({ final __callArgument3:Dynamic = world; __callArgument3; })) : Bool);
+    jointStateValid = (cast isPhysics3DJointStateValid(({ final __callArgument4:Dynamic = world; __callArgument4; })) : Bool);
+    solverConfigValid = (cast isPhysics3DSolverConfigValid(({ final __callArgument5:Dynamic = config; __callArgument5; })) : Bool);
+    substepsValid = (cast isPhysics3DSubstepsValid(({ final __callArgument6:Dynamic = config; __callArgument6; })) : Bool);
     timestepValid = (cast isPhysics3DTimestepValid((cast dt : Float)) : Bool);
-    velocityIterationsValid = (cast isPhysics3DVelocityIterationsValid(({ final __callArgument6:Dynamic = config; __callArgument6; })) : Bool);
-    positionIterationsValid = (cast isPhysics3DPositionIterationsValid(({ final __callArgument7:Dynamic = config; __callArgument7; })) : Bool);
-    ready = ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast bodyStateValid : Bool) && (cast contactStateValid : Bool)) : Bool) && (cast gravityValid : Bool)) : Bool) && (cast jointStateValid : Bool)) : Bool) && (cast solverConfigValid : Bool)) : Bool) && (cast substepsValid : Bool)) : Bool) && (cast timestepValid : Bool)) : Bool) && (cast velocityIterationsValid : Bool)) : Bool) && (cast positionIterationsValid : Bool));
-    return cast { bodyStateValid: bodyStateValid, contactStateValid: contactStateValid, gravityValid: gravityValid, jointStateValid: jointStateValid, solverConfigValid: solverConfigValid, substepsValid: substepsValid, timestepValid: timestepValid, velocityIterationsValid: velocityIterationsValid, positionIterationsValid: positionIterationsValid, status: ((cast ready : Bool) ? (cast 'ready' : Dynamic) : (cast 'invalid-step' : Dynamic)) };
+    velocityIterationsValid = (cast isPhysics3DVelocityIterationsValid(({ final __callArgument7:Dynamic = config; __callArgument7; })) : Bool);
+    positionIterationsValid = (cast isPhysics3DPositionIterationsValid(({ final __callArgument8:Dynamic = config; __callArgument8; })) : Bool);
+    ready = ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast bodyStateValid : Bool) && (cast colliderStateValid : Bool)) : Bool) && (cast contactStateValid : Bool)) : Bool) && (cast gravityValid : Bool)) : Bool) && (cast jointStateValid : Bool)) : Bool) && (cast solverConfigValid : Bool)) : Bool) && (cast substepsValid : Bool)) : Bool) && (cast timestepValid : Bool)) : Bool) && (cast velocityIterationsValid : Bool)) : Bool) && (cast positionIterationsValid : Bool));
+    return cast { bodyStateValid: bodyStateValid, colliderStateValid: colliderStateValid, contactStateValid: contactStateValid, gravityValid: gravityValid, jointStateValid: jointStateValid, solverConfigValid: solverConfigValid, substepsValid: substepsValid, timestepValid: timestepValid, velocityIterationsValid: velocityIterationsValid, positionIterationsValid: positionIterationsValid, status: ((cast ready : Bool) ? (cast 'ready' : Dynamic) : (cast 'invalid-step' : Dynamic)) };
     return cast null;
   }
 }

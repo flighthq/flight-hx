@@ -13922,7 +13922,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 33,
+        "inputSignatures": 34,
         "outputSignatures": 1
       },
       "construction": {
@@ -13971,6 +13971,7 @@
           "kind": "cross-schema-transfer",
           "line": 77,
           "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionCircle2D",
             "@flighthq/types:interface#CollisionObb2D",
             "@flighthq/types:interface#CollisionPoint2D",
@@ -13982,10 +13983,11 @@
           "source": "upstream/packages/collision/src/collisionSupport2D.ts"
         },
         {
-          "column": 27,
+          "column": 29,
           "kind": "cross-schema-transfer",
           "line": 36,
           "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionCircle2D",
             "@flighthq/types:interface#CollisionObb2D",
             "@flighthq/types:interface#CollisionPoint2D",
@@ -13997,10 +13999,11 @@
           "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
         },
         {
-          "column": 49,
+          "column": 51,
           "kind": "cross-schema-transfer",
           "line": 36,
           "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionCircle2D",
             "@flighthq/types:interface#CollisionObb2D",
             "@flighthq/types:interface#CollisionPoint2D",
@@ -14012,10 +14015,11 @@
           "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
         },
         {
-          "column": 26,
+          "column": 28,
           "kind": "cross-schema-transfer",
           "line": 39,
           "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionCircle2D",
             "@flighthq/types:interface#CollisionObb2D",
             "@flighthq/types:interface#CollisionPoint2D",
@@ -14027,10 +14031,11 @@
           "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
         },
         {
-          "column": 30,
+          "column": 32,
           "kind": "cross-schema-transfer",
           "line": 42,
           "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionCircle2D",
             "@flighthq/types:interface#CollisionObb2D",
             "@flighthq/types:interface#CollisionPoint2D",
@@ -14042,10 +14047,11 @@
           "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
         },
         {
-          "column": 53,
+          "column": 55,
           "kind": "cross-schema-transfer",
           "line": 45,
           "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionCircle2D",
             "@flighthq/types:interface#CollisionObb2D",
             "@flighthq/types:interface#CollisionPoint2D",
@@ -14061,7 +14067,469 @@
     },
     {
       "bridge": {
-        "inputSignatures": 32,
+        "inputSignatures": 45,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 12
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 6
+      },
+      "id": "@flighthq/types:interface#CollisionAabb3D",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "cross-schema-transfer"
+        ],
+        "observabilityReasons": []
+      },
+      "name": "CollisionAabb3D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 7,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 15,
+          "kind": "cross-schema-transfer",
+          "line": 35,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionSphere3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/collisionFace3D.ts"
+        },
+        {
+          "column": 16,
+          "kind": "cross-schema-transfer",
+          "line": 75,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionSphere3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/collisionSupport3D.ts"
+        },
+        {
+          "column": 29,
+          "kind": "cross-schema-transfer",
+          "line": 31,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionSphere3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests3D.ts"
+        },
+        {
+          "column": 51,
+          "kind": "cross-schema-transfer",
+          "line": 31,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionSphere3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests3D.ts"
+        },
+        {
+          "column": 55,
+          "kind": "cross-schema-transfer",
+          "line": 40,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionSphere3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests3D.ts"
+        },
+        {
+          "column": 49,
+          "kind": "cross-schema-transfer",
+          "line": 359,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#SpatialAabb3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics3d/src/colliderTransform.ts"
+        },
+        {
+          "column": 48,
+          "kind": "cross-schema-transfer",
+          "line": 362,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#SpatialAabb3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics3d/src/colliderTransform.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Collision.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 43,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 3
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 10
+      },
+      "id": "@flighthq/types:interface#CollisionBox3D",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "cross-schema-transfer"
+        ],
+        "observabilityReasons": [
+          "object-spread"
+        ]
+      },
+      "name": "CollisionBox3D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 1,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 5,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 15,
+          "kind": "cross-schema-transfer",
+          "line": 63,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionSphere3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/collisionFace3D.ts"
+        },
+        {
+          "column": 15,
+          "kind": "cross-schema-transfer",
+          "line": 96,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionSphere3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/collisionSupport3D.ts"
+        },
+        {
+          "column": 38,
+          "kind": "object-spread",
+          "line": 72,
+          "scope": "test",
+          "source": "upstream/packages/collision/src/gjk3D.test.ts"
+        },
+        {
+          "column": 27,
+          "kind": "cross-schema-transfer",
+          "line": 34,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionSphere3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests3D.ts"
+        },
+        {
+          "column": 48,
+          "kind": "cross-schema-transfer",
+          "line": 34,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionSphere3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests3D.ts"
+        },
+        {
+          "column": 54,
+          "kind": "cross-schema-transfer",
+          "line": 43,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionSphere3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests3D.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Collision.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 23,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 5
+      },
+      "id": "@flighthq/types:interface#CollisionCapsule2D",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "CollisionCapsule2D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Collision.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 43,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 10
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 7
+      },
+      "id": "@flighthq/types:interface#CollisionCapsule3D",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "cross-schema-transfer"
+        ],
+        "observabilityReasons": []
+      },
+      "name": "CollisionCapsule3D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 5,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 19,
+          "kind": "cross-schema-transfer",
+          "line": 86,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionSphere3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/collisionFace3D.ts"
+        },
+        {
+          "column": 19,
+          "kind": "cross-schema-transfer",
+          "line": 140,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionSphere3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/collisionSupport3D.ts"
+        },
+        {
+          "column": 35,
+          "kind": "cross-schema-transfer",
+          "line": 37,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionSphere3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests3D.ts"
+        },
+        {
+          "column": 60,
+          "kind": "cross-schema-transfer",
+          "line": 37,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionSphere3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests3D.ts"
+        },
+        {
+          "column": 58,
+          "kind": "cross-schema-transfer",
+          "line": 46,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionSphere3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests3D.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Collision.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 33,
         "outputSignatures": 1
       },
       "construction": {
@@ -14111,6 +14579,7 @@
           "line": 93,
           "relatedSchemaIds": [
             "@flighthq/types:interface#CollisionAabb2D",
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionObb2D",
             "@flighthq/types:interface#CollisionPoint2D",
             "@flighthq/types:interface#CollisionPolygon2D",
@@ -14121,11 +14590,12 @@
           "source": "upstream/packages/collision/src/collisionSupport2D.ts"
         },
         {
-          "column": 29,
+          "column": 31,
           "kind": "cross-schema-transfer",
           "line": 45,
           "relatedSchemaIds": [
             "@flighthq/types:interface#CollisionAabb2D",
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionObb2D",
             "@flighthq/types:interface#CollisionPoint2D",
             "@flighthq/types:interface#CollisionPolygon2D",
@@ -14136,11 +14606,12 @@
           "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
         },
         {
-          "column": 31,
+          "column": 33,
           "kind": "cross-schema-transfer",
           "line": 48,
           "relatedSchemaIds": [
             "@flighthq/types:interface#CollisionAabb2D",
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionObb2D",
             "@flighthq/types:interface#CollisionPoint2D",
             "@flighthq/types:interface#CollisionPolygon2D",
@@ -14151,11 +14622,12 @@
           "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
         },
         {
-          "column": 55,
+          "column": 57,
           "kind": "cross-schema-transfer",
           "line": 48,
           "relatedSchemaIds": [
             "@flighthq/types:interface#CollisionAabb2D",
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionObb2D",
             "@flighthq/types:interface#CollisionPoint2D",
             "@flighthq/types:interface#CollisionPolygon2D",
@@ -14166,11 +14638,12 @@
           "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
         },
         {
-          "column": 28,
+          "column": 30,
           "kind": "cross-schema-transfer",
           "line": 51,
           "relatedSchemaIds": [
             "@flighthq/types:interface#CollisionAabb2D",
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionObb2D",
             "@flighthq/types:interface#CollisionPoint2D",
             "@flighthq/types:interface#CollisionPolygon2D",
@@ -14181,11 +14654,12 @@
           "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
         },
         {
-          "column": 32,
+          "column": 34,
           "kind": "cross-schema-transfer",
           "line": 54,
           "relatedSchemaIds": [
             "@flighthq/types:interface#CollisionAabb2D",
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionObb2D",
             "@flighthq/types:interface#CollisionPoint2D",
             "@flighthq/types:interface#CollisionPolygon2D",
@@ -14194,6 +14668,80 @@
           ],
           "scope": "production",
           "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Collision.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 40,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 7
+      },
+      "id": "@flighthq/types:interface#CollisionCone3D",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "cross-schema-transfer"
+        ],
+        "observabilityReasons": [
+          "object-spread"
+        ]
+      },
+      "name": "CollisionCone3D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 1,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 1,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 16,
+          "kind": "cross-schema-transfer",
+          "line": 173,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionSphere3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/collisionSupport3D.ts"
+        },
+        {
+          "column": 50,
+          "kind": "object-spread",
+          "line": 122,
+          "scope": "test",
+          "source": "upstream/packages/collision/src/cylinderCone3D.test.ts"
         }
       ],
       "source": "upstream/packages/types/src/Collision.ts"
@@ -14224,6 +14772,52 @@
         "observabilityReasons": []
       },
       "name": "CollisionContactManifold2D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Collision.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 5,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 6
+      },
+      "id": "@flighthq/types:interface#CollisionContactManifold3D",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "CollisionContactManifold3D",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -14292,6 +14886,316 @@
     },
     {
       "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 5
+      },
+      "id": "@flighthq/types:interface#CollisionContactPoint3D",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "CollisionContactPoint3D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Collision.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 40,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 2,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 1
+      },
+      "id": "@flighthq/types:interface#CollisionConvex3D",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "cross-schema-transfer"
+        ],
+        "observabilityReasons": []
+      },
+      "name": "CollisionConvex3D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 2,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 19,
+          "kind": "cross-schema-transfer",
+          "line": 123,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionSphere3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/collisionFace3D.ts"
+        },
+        {
+          "column": 19,
+          "kind": "cross-schema-transfer",
+          "line": 210,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionSphere3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/collisionSupport3D.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Collision.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 40,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 7
+      },
+      "id": "@flighthq/types:interface#CollisionCylinder3D",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "cross-schema-transfer"
+        ],
+        "observabilityReasons": [
+          "object-spread"
+        ]
+      },
+      "name": "CollisionCylinder3D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 2,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 1,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 20,
+          "kind": "cross-schema-transfer",
+          "line": 227,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionSphere3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/collisionSupport3D.ts"
+        },
+        {
+          "column": 47,
+          "kind": "object-spread",
+          "line": 71,
+          "scope": "test",
+          "source": "upstream/packages/collision/src/cylinderCone3D.test.ts"
+        },
+        {
+          "column": 50,
+          "kind": "object-spread",
+          "line": 121,
+          "scope": "test",
+          "source": "upstream/packages/collision/src/cylinderCone3D.test.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Collision.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 11
+      },
+      "id": "@flighthq/types:interface#CollisionDistance3D",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "CollisionDistance3D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Collision.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 13,
+        "outputSignatures": 2
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 14
+      },
+      "id": "@flighthq/types:interface#CollisionHeightfield3D",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": [
+          "object-spread"
+        ]
+      },
+      "name": "CollisionHeightfield3D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 1
+      },
+      "sites": [
+        {
+          "column": 46,
+          "kind": "object-spread",
+          "line": 740,
+          "scope": "production",
+          "source": "upstream/packages/physics3d/src/world.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Collision.ts"
+    },
+    {
+      "bridge": {
         "inputSignatures": 13,
         "outputSignatures": 1
       },
@@ -14338,15 +15242,61 @@
     },
     {
       "bridge": {
-        "inputSignatures": 33,
+        "inputSignatures": 10,
         "outputSignatures": 1
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 5
+      },
+      "id": "@flighthq/types:interface#CollisionManifold3D",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "CollisionManifold3D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Collision.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 34,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 30
       },
       "directAccesses": 0,
@@ -14388,6 +15338,7 @@
           "line": 114,
           "relatedSchemaIds": [
             "@flighthq/types:interface#CollisionAabb2D",
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionCircle2D",
             "@flighthq/types:interface#CollisionPoint2D",
             "@flighthq/types:interface#CollisionPolygon2D",
@@ -14398,11 +15349,12 @@
           "source": "upstream/packages/collision/src/collisionSupport2D.ts"
         },
         {
-          "column": 48,
+          "column": 50,
           "kind": "cross-schema-transfer",
           "line": 39,
           "relatedSchemaIds": [
             "@flighthq/types:interface#CollisionAabb2D",
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionCircle2D",
             "@flighthq/types:interface#CollisionPoint2D",
             "@flighthq/types:interface#CollisionPolygon2D",
@@ -14413,11 +15365,12 @@
           "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
         },
         {
-          "column": 52,
+          "column": 54,
           "kind": "cross-schema-transfer",
           "line": 51,
           "relatedSchemaIds": [
             "@flighthq/types:interface#CollisionAabb2D",
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionCircle2D",
             "@flighthq/types:interface#CollisionPoint2D",
             "@flighthq/types:interface#CollisionPolygon2D",
@@ -14428,11 +15381,12 @@
           "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
         },
         {
-          "column": 25,
+          "column": 27,
           "kind": "cross-schema-transfer",
           "line": 57,
           "relatedSchemaIds": [
             "@flighthq/types:interface#CollisionAabb2D",
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionCircle2D",
             "@flighthq/types:interface#CollisionPoint2D",
             "@flighthq/types:interface#CollisionPolygon2D",
@@ -14443,11 +15397,12 @@
           "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
         },
         {
-          "column": 46,
+          "column": 48,
           "kind": "cross-schema-transfer",
           "line": 57,
           "relatedSchemaIds": [
             "@flighthq/types:interface#CollisionAabb2D",
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionCircle2D",
             "@flighthq/types:interface#CollisionPoint2D",
             "@flighthq/types:interface#CollisionPolygon2D",
@@ -14458,11 +15413,12 @@
           "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
         },
         {
-          "column": 29,
+          "column": 31,
           "kind": "cross-schema-transfer",
           "line": 60,
           "relatedSchemaIds": [
             "@flighthq/types:interface#CollisionAabb2D",
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionCircle2D",
             "@flighthq/types:interface#CollisionPoint2D",
             "@flighthq/types:interface#CollisionPolygon2D",
@@ -14477,7 +15433,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 21,
+        "inputSignatures": 22,
         "outputSignatures": 1
       },
       "construction": {
@@ -14523,7 +15479,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 32,
+        "inputSignatures": 33,
         "outputSignatures": 1
       },
       "construction": {
@@ -14573,6 +15529,7 @@
           "line": 127,
           "relatedSchemaIds": [
             "@flighthq/types:interface#CollisionAabb2D",
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionCircle2D",
             "@flighthq/types:interface#CollisionObb2D",
             "@flighthq/types:interface#CollisionPoint2D",
@@ -14583,56 +15540,12 @@
           "source": "upstream/packages/collision/src/collisionSupport2D.ts"
         },
         {
-          "column": 52,
+          "column": 54,
           "kind": "cross-schema-transfer",
           "line": 42,
           "relatedSchemaIds": [
             "@flighthq/types:interface#CollisionAabb2D",
-            "@flighthq/types:interface#CollisionCircle2D",
-            "@flighthq/types:interface#CollisionObb2D",
-            "@flighthq/types:interface#CollisionPoint2D",
-            "@flighthq/types:interface#CollisionSegment2D",
-            "@flighthq/types:interface#CollisionVendorShape2D"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
-        },
-        {
-          "column": 56,
-          "kind": "cross-schema-transfer",
-          "line": 54,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#CollisionAabb2D",
-            "@flighthq/types:interface#CollisionCircle2D",
-            "@flighthq/types:interface#CollisionObb2D",
-            "@flighthq/types:interface#CollisionPoint2D",
-            "@flighthq/types:interface#CollisionSegment2D",
-            "@flighthq/types:interface#CollisionVendorShape2D"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
-        },
-        {
-          "column": 50,
-          "kind": "cross-schema-transfer",
-          "line": 60,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#CollisionAabb2D",
-            "@flighthq/types:interface#CollisionCircle2D",
-            "@flighthq/types:interface#CollisionObb2D",
-            "@flighthq/types:interface#CollisionPoint2D",
-            "@flighthq/types:interface#CollisionSegment2D",
-            "@flighthq/types:interface#CollisionVendorShape2D"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
-        },
-        {
-          "column": 33,
-          "kind": "cross-schema-transfer",
-          "line": 63,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#CollisionAabb2D",
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionCircle2D",
             "@flighthq/types:interface#CollisionObb2D",
             "@flighthq/types:interface#CollisionPoint2D",
@@ -14645,9 +15558,58 @@
         {
           "column": 58,
           "kind": "cross-schema-transfer",
+          "line": 54,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb2D",
+            "@flighthq/types:interface#CollisionCapsule2D",
+            "@flighthq/types:interface#CollisionCircle2D",
+            "@flighthq/types:interface#CollisionObb2D",
+            "@flighthq/types:interface#CollisionPoint2D",
+            "@flighthq/types:interface#CollisionSegment2D",
+            "@flighthq/types:interface#CollisionVendorShape2D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
+        },
+        {
+          "column": 52,
+          "kind": "cross-schema-transfer",
+          "line": 60,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb2D",
+            "@flighthq/types:interface#CollisionCapsule2D",
+            "@flighthq/types:interface#CollisionCircle2D",
+            "@flighthq/types:interface#CollisionObb2D",
+            "@flighthq/types:interface#CollisionPoint2D",
+            "@flighthq/types:interface#CollisionSegment2D",
+            "@flighthq/types:interface#CollisionVendorShape2D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
+        },
+        {
+          "column": 35,
+          "kind": "cross-schema-transfer",
           "line": 63,
           "relatedSchemaIds": [
             "@flighthq/types:interface#CollisionAabb2D",
+            "@flighthq/types:interface#CollisionCapsule2D",
+            "@flighthq/types:interface#CollisionCircle2D",
+            "@flighthq/types:interface#CollisionObb2D",
+            "@flighthq/types:interface#CollisionPoint2D",
+            "@flighthq/types:interface#CollisionSegment2D",
+            "@flighthq/types:interface#CollisionVendorShape2D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
+        },
+        {
+          "column": 60,
+          "kind": "cross-schema-transfer",
+          "line": 63,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb2D",
+            "@flighthq/types:interface#CollisionCapsule2D",
             "@flighthq/types:interface#CollisionCircle2D",
             "@flighthq/types:interface#CollisionObb2D",
             "@flighthq/types:interface#CollisionPoint2D",
@@ -14667,13 +15629,13 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
+        "objectLiterals": 3,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 2,
+        "plainObjectLiterals": 3,
         "testObjectLiterals": 0
       },
-      "directAccesses": 32,
+      "directAccesses": 46,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -14686,6 +15648,52 @@
         "observabilityReasons": []
       },
       "name": "CollisionRaycastHit2D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Collision.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 4,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 7
+      },
+      "id": "@flighthq/types:interface#CollisionRaycastHit3D",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "CollisionRaycastHit3D",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -14754,16 +15762,16 @@
     },
     {
       "bridge": {
-        "inputSignatures": 27,
+        "inputSignatures": 29,
         "outputSignatures": 1
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 2,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
-        "testObjectLiterals": 1
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 8
       },
       "directAccesses": 0,
       "fields": {
@@ -14800,15 +15808,160 @@
     },
     {
       "bridge": {
+        "inputSignatures": 45,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#CollisionSphere3D",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "cross-schema-transfer"
+        ],
+        "observabilityReasons": []
+      },
+      "name": "CollisionSphere3D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 6,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 18,
+          "kind": "cross-schema-transfer",
+          "line": 257,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/collisionSupport3D.ts"
+        },
+        {
+          "column": 31,
+          "kind": "cross-schema-transfer",
+          "line": 40,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests3D.ts"
+        },
+        {
+          "column": 30,
+          "kind": "cross-schema-transfer",
+          "line": 43,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests3D.ts"
+        },
+        {
+          "column": 34,
+          "kind": "cross-schema-transfer",
+          "line": 46,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests3D.ts"
+        },
+        {
+          "column": 33,
+          "kind": "cross-schema-transfer",
+          "line": 49,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests3D.ts"
+        },
+        {
+          "column": 57,
+          "kind": "cross-schema-transfer",
+          "line": 49,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#CollisionAabb3D",
+            "@flighthq/types:interface#CollisionBox3D",
+            "@flighthq/types:interface#CollisionCapsule3D",
+            "@flighthq/types:interface#CollisionCone3D",
+            "@flighthq/types:interface#CollisionConvex3D",
+            "@flighthq/types:interface#CollisionCylinder3D",
+            "@flighthq/types:interface#CollisionVendorShape3D"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests3D.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Collision.ts"
+    },
+    {
+      "bridge": {
         "inputSignatures": 0,
         "outputSignatures": 1
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 7,
+        "objectLiterals": 5,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 7,
+        "plainObjectLiterals": 5,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -14846,6 +15999,52 @@
     },
     {
       "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 5,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 5,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#CollisionTestExplanation3D",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "CollisionTestExplanation3D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Collision.ts"
+    },
+    {
+      "bridge": {
         "inputSignatures": 1,
         "outputSignatures": 1
       },
@@ -14857,7 +16056,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 61,
+      "directAccesses": 68,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -14892,6 +16091,108 @@
     },
     {
       "bridge": {
+        "inputSignatures": 4,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 7
+      },
+      "id": "@flighthq/types:interface#CollisionTimeOfImpact3D",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "CollisionTimeOfImpact3D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Collision.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 13,
+        "outputSignatures": 2
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 11
+      },
+      "id": "@flighthq/types:interface#CollisionTriangleMesh3D",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": [
+          "object-spread"
+        ]
+      },
+      "name": "CollisionTriangleMesh3D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 1
+      },
+      "sites": [
+        {
+          "column": 14,
+          "kind": "object-spread",
+          "line": 738,
+          "scope": "production",
+          "source": "upstream/packages/physics3d/src/world.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Collision.ts"
+    },
+    {
+      "bridge": {
         "inputSignatures": 13,
         "outputSignatures": 0
       },
@@ -14916,6 +16217,52 @@
         "observabilityReasons": []
       },
       "name": "CollisionVendorShape2D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Collision.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 30,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 1
+      },
+      "id": "@flighthq/types:interface#CollisionVendorShape3D",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "CollisionVendorShape3D",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -16707,7 +18054,7 @@
         "objectLiteralsOmittingOptionalFields": 1,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 1,
-        "testObjectLiterals": 20
+        "testObjectLiterals": 21
       },
       "directAccesses": 0,
       "fields": {
@@ -16745,7 +18092,7 @@
         {
           "column": 63,
           "kind": "optional-omission",
-          "line": 40,
+          "line": 42,
           "scope": "production",
           "source": "upstream/packages/debug/src/debug.ts"
         }
@@ -37942,175 +39289,175 @@
         {
           "column": 20,
           "kind": "object-spread",
-          "line": 74,
+          "line": 75,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 38,
           "kind": "object-spread",
-          "line": 100,
+          "line": 101,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 22,
           "kind": "object-spread",
-          "line": 108,
+          "line": 109,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 38,
           "kind": "object-spread",
-          "line": 207,
+          "line": 220,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 72,
           "kind": "object-spread",
-          "line": 235,
+          "line": 248,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 70,
           "kind": "object-spread",
-          "line": 266,
+          "line": 279,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 66,
           "kind": "object-spread",
-          "line": 275,
+          "line": 288,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 66,
           "kind": "object-spread",
-          "line": 285,
+          "line": 298,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 66,
           "kind": "object-spread",
-          "line": 294,
+          "line": 307,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 23,
           "kind": "object-spread",
-          "line": 418,
+          "line": 431,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 23,
           "kind": "object-spread",
-          "line": 419,
+          "line": 432,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 29,
           "kind": "object-spread",
-          "line": 461,
+          "line": 474,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 69,
           "kind": "object-spread",
-          "line": 569,
+          "line": 582,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 69,
           "kind": "object-spread",
-          "line": 579,
+          "line": 592,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 75,
           "kind": "object-spread",
-          "line": 597,
+          "line": 610,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 66,
           "kind": "object-spread",
-          "line": 618,
+          "line": 631,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 66,
           "kind": "object-spread",
-          "line": 626,
+          "line": 639,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 62,
           "kind": "object-spread",
-          "line": 742,
+          "line": 755,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 60,
           "kind": "object-spread",
-          "line": 752,
+          "line": 765,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 38,
           "kind": "object-spread",
-          "line": 791,
+          "line": 804,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 32,
           "kind": "object-spread",
-          "line": 998,
+          "line": 1011,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 32,
           "kind": "object-spread",
-          "line": 999,
+          "line": 1012,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 22,
           "kind": "object-spread",
-          "line": 1212,
+          "line": 1225,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 32,
           "kind": "object-spread",
-          "line": 1354,
+          "line": 1367,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 32,
           "kind": "object-spread",
-          "line": 1355,
+          "line": 1368,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         }
@@ -38304,7 +39651,7 @@
         {
           "column": 10,
           "kind": "optional-omission",
-          "line": 294,
+          "line": 299,
           "scope": "production",
           "source": "upstream/packages/log/src/log.ts"
         }
@@ -52215,8 +53562,8 @@
     },
     {
       "bridge": {
-        "inputSignatures": 6,
-        "outputSignatures": 3
+        "inputSignatures": 0,
+        "outputSignatures": 0
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -52226,7 +53573,53 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 47,
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#Physics2DBrokenJoint",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics2DBrokenJoint",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics2D.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 6,
+        "outputSignatures": 3
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 2,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 51,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -52261,15 +53654,61 @@
     },
     {
       "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#Physics2DCollisionExplanation",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics2DCollisionExplanation",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics2D.ts"
+    },
+    {
+      "bridge": {
         "inputSignatures": 1,
         "outputSignatures": 0
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
+        "objectLiterals": 3,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 1,
-        "plainObjectLiterals": 1,
+        "plainObjectLiterals": 2,
         "testObjectLiterals": 3
       },
       "directAccesses": 0,
@@ -52711,13 +54150,13 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 1,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 8
+        "testObjectLiterals": 10
       },
       "directAccesses": 0,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 18
+        "total": 20
       },
       "id": "@flighthq/types:interface#Physics2DDistanceJoint",
       "migration": {
@@ -52794,14 +54233,14 @@
         {
           "column": 10,
           "kind": "object-literal-spread",
-          "line": 62,
+          "line": 66,
           "scope": "production",
           "source": "upstream/packages/physics2d/src/jointFactories.ts"
         },
         {
           "column": 22,
           "kind": "cross-schema-transfer",
-          "line": 60,
+          "line": 62,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -52826,9 +54265,9 @@
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 7,
+        "optional": 9,
         "requiredUndefined": 0,
-        "total": 10
+        "total": 12
       },
       "id": "@flighthq/types:interface#Physics2DDistanceJointOptions",
       "migration": {
@@ -52874,7 +54313,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 23
+        "total": 25
       },
       "id": "@flighthq/types:interface#Physics2DGearJoint",
       "migration": {
@@ -52907,14 +54346,14 @@
         {
           "column": 10,
           "kind": "object-literal-spread",
-          "line": 72,
+          "line": 76,
           "scope": "production",
           "source": "upstream/packages/physics2d/src/jointFactories.ts"
         },
         {
           "column": 18,
           "kind": "cross-schema-transfer",
-          "line": 144,
+          "line": 156,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -52924,7 +54363,7 @@
         {
           "column": 18,
           "kind": "cross-schema-transfer",
-          "line": 163,
+          "line": 175,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -52949,9 +54388,9 @@
       },
       "directAccesses": 8,
       "fields": {
-        "optional": 10,
+        "optional": 12,
         "requiredUndefined": 0,
-        "total": 15
+        "total": 17
       },
       "id": "@flighthq/types:interface#Physics2DGearJointOptions",
       "migration": {
@@ -52982,7 +54421,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 3,
+        "inputSignatures": 4,
         "outputSignatures": 2
       },
       "construction": {
@@ -52991,13 +54430,13 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 15
+        "testObjectLiterals": 22
       },
       "directAccesses": 0,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 15
+        "total": 17
       },
       "id": "@flighthq/types:interface#Physics2DJoint",
       "migration": {
@@ -53014,7 +54453,7 @@
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
-        "objectSpreads": 4,
+        "objectSpreads": 5,
         "prototypeObservations": 0,
         "strictEqualityAssertions": 0
       },
@@ -53031,35 +54470,42 @@
         {
           "column": 32,
           "kind": "object-spread",
-          "line": 143,
+          "line": 180,
           "scope": "test",
           "source": "upstream/packages/physics2d/src/debugGeometry.test.ts"
         },
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 145,
+          "line": 182,
           "scope": "test",
           "source": "upstream/packages/physics2d/src/debugGeometry.test.ts"
         },
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 150,
+          "line": 187,
           "scope": "test",
           "source": "upstream/packages/physics2d/src/debugGeometry.test.ts"
         },
         {
+          "column": 34,
+          "kind": "object-spread",
+          "line": 230,
+          "scope": "test",
+          "source": "upstream/packages/physics2d/src/enablePhysics2DGuards.test.ts"
+        },
+        {
           "column": 7,
           "kind": "object-spread",
-          "line": 142,
+          "line": 144,
           "scope": "test",
           "source": "upstream/packages/physics2d/src/jointRegistry.test.ts"
         },
         {
           "column": 43,
           "kind": "cross-schema-transfer",
-          "line": 101,
+          "line": 94,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DDistanceJoint"
           ],
@@ -53069,7 +54515,7 @@
         {
           "column": 35,
           "kind": "cross-schema-transfer",
-          "line": 169,
+          "line": 181,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DGearJoint"
           ],
@@ -53079,7 +54525,7 @@
         {
           "column": 40,
           "kind": "cross-schema-transfer",
-          "line": 251,
+          "line": 294,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DMouseJoint"
           ],
@@ -53089,7 +54535,7 @@
         {
           "column": 35,
           "kind": "cross-schema-transfer",
-          "line": 387,
+          "line": 444,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DPrismaticJoint"
           ],
@@ -53099,7 +54545,7 @@
         {
           "column": 35,
           "kind": "cross-schema-transfer",
-          "line": 605,
+          "line": 706,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DPulleyJoint"
           ],
@@ -53109,7 +54555,7 @@
         {
           "column": 39,
           "kind": "cross-schema-transfer",
-          "line": 841,
+          "line": 1000,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DRopeJoint"
           ],
@@ -53119,7 +54565,7 @@
         {
           "column": 35,
           "kind": "cross-schema-transfer",
-          "line": 963,
+          "line": 1146,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DWheelJoint"
           ],
@@ -53129,7 +54575,7 @@
         {
           "column": 39,
           "kind": "cross-schema-transfer",
-          "line": 1091,
+          "line": 1295,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DWeldJoint"
           ],
@@ -53137,6 +54583,52 @@
           "source": "upstream/packages/physics2d/src/joints.ts"
         }
       ],
+      "source": "upstream/packages/types/src/Physics2D.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 1
+      },
+      "id": "@flighthq/types:interface#Physics2DJointEvents",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics2DJointEvents",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
       "source": "upstream/packages/types/src/Physics2D.ts"
     },
     {
@@ -53154,9 +54646,9 @@
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 5,
+        "optional": 7,
         "requiredUndefined": 0,
-        "total": 7
+        "total": 9
       },
       "id": "@flighthq/types:interface#Physics2DJointOptions",
       "migration": {
@@ -53188,7 +54680,7 @@
         {
           "column": 24,
           "kind": "cross-schema-transfer",
-          "line": 64,
+          "line": 68,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DDistanceJointOptions"
           ],
@@ -53198,7 +54690,7 @@
         {
           "column": 24,
           "kind": "cross-schema-transfer",
-          "line": 74,
+          "line": 78,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DGearJointOptions"
           ],
@@ -53208,7 +54700,7 @@
         {
           "column": 24,
           "kind": "cross-schema-transfer",
-          "line": 116,
+          "line": 122,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DPrismaticJointOptions"
           ],
@@ -53218,7 +54710,7 @@
         {
           "column": 24,
           "kind": "cross-schema-transfer",
-          "line": 133,
+          "line": 142,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DPulleyJointOptions"
           ],
@@ -53228,7 +54720,7 @@
         {
           "column": 24,
           "kind": "cross-schema-transfer",
-          "line": 146,
+          "line": 155,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DRevoluteJointOptions"
           ],
@@ -53238,7 +54730,7 @@
         {
           "column": 24,
           "kind": "cross-schema-transfer",
-          "line": 161,
+          "line": 173,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DRopeJointOptions"
           ],
@@ -53248,7 +54740,7 @@
         {
           "column": 24,
           "kind": "cross-schema-transfer",
-          "line": 169,
+          "line": 181,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DWeldJointOptions"
           ],
@@ -53258,7 +54750,7 @@
         {
           "column": 24,
           "kind": "cross-schema-transfer",
-          "line": 177,
+          "line": 189,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DWheelJointOptions"
           ],
@@ -53266,6 +54758,52 @@
           "source": "upstream/packages/physics2d/src/jointFactories.ts"
         }
       ],
+      "source": "upstream/packages/types/src/Physics2D.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#Physics2DJointReaction",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics2DJointReaction",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
       "source": "upstream/packages/types/src/Physics2D.ts"
     },
     {
@@ -53375,9 +54913,9 @@
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 6,
+        "optional": 7,
         "requiredUndefined": 0,
-        "total": 8
+        "total": 9
       },
       "id": "@flighthq/types:interface#Physics2DJointSolver",
       "migration": {
@@ -53485,7 +55023,7 @@
         "plainObjectLiterals": 2,
         "testObjectLiterals": 1
       },
-      "directAccesses": 45,
+      "directAccesses": 49,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -53525,10 +55063,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 1,
+        "objectLiterals": 2,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 1,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 11
       },
       "directAccesses": 0,
@@ -53607,7 +55145,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 20
+        "total": 22
       },
       "id": "@flighthq/types:interface#Physics2DMouseJoint",
       "migration": {
@@ -53639,7 +55177,7 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 204,
+          "line": 227,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -53649,7 +55187,7 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 224,
+          "line": 258,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -53659,7 +55197,7 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 261,
+          "line": 304,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -53682,11 +55220,11 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 1
       },
-      "directAccesses": 9,
+      "directAccesses": 11,
       "fields": {
-        "optional": 4,
+        "optional": 6,
         "requiredUndefined": 0,
-        "total": 8
+        "total": 10
       },
       "id": "@flighthq/types:interface#Physics2DMouseJointOptions",
       "migration": {
@@ -53726,13 +55264,13 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 1,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 1
+        "testObjectLiterals": 3
       },
-      "directAccesses": 44,
+      "directAccesses": 50,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 25
+        "total": 30
       },
       "id": "@flighthq/types:interface#Physics2DPrismaticJoint",
       "migration": {
@@ -53754,7 +55292,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 6,
+        "crossSchemaTransfers": 7,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -53765,14 +55303,14 @@
         {
           "column": 10,
           "kind": "object-literal-spread",
-          "line": 114,
+          "line": 120,
           "scope": "production",
           "source": "upstream/packages/physics2d/src/jointFactories.ts"
         },
         {
           "column": 23,
           "kind": "cross-schema-transfer",
-          "line": 305,
+          "line": 362,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -53782,7 +55320,7 @@
         {
           "column": 23,
           "kind": "cross-schema-transfer",
-          "line": 310,
+          "line": 367,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -53792,7 +55330,7 @@
         {
           "column": 6,
           "kind": "cross-schema-transfer",
-          "line": 337,
+          "line": 394,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -53802,7 +55340,7 @@
         {
           "column": 23,
           "kind": "cross-schema-transfer",
-          "line": 344,
+          "line": 401,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -53812,7 +55350,7 @@
         {
           "column": 23,
           "kind": "cross-schema-transfer",
-          "line": 358,
+          "line": 415,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -53822,7 +55360,17 @@
         {
           "column": 23,
           "kind": "cross-schema-transfer",
-          "line": 425,
+          "line": 497,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d/src/joints.ts"
+        },
+        {
+          "column": 44,
+          "kind": "cross-schema-transfer",
+          "line": 633,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -53845,11 +55393,11 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 1
       },
-      "directAccesses": 9,
+      "directAccesses": 12,
       "fields": {
-        "optional": 14,
+        "optional": 19,
         "requiredUndefined": 0,
-        "total": 16
+        "total": 21
       },
       "id": "@flighthq/types:interface#Physics2DPrismaticJointOptions",
       "migration": {
@@ -53895,7 +55443,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 21
+        "total": 23
       },
       "id": "@flighthq/types:interface#Physics2DPulleyJoint",
       "migration": {
@@ -53928,7 +55476,7 @@
         {
           "column": 20,
           "kind": "cross-schema-transfer",
-          "line": 214,
+          "line": 237,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -53938,14 +55486,14 @@
         {
           "column": 10,
           "kind": "object-literal-spread",
-          "line": 131,
+          "line": 140,
           "scope": "production",
           "source": "upstream/packages/physics2d/src/jointFactories.ts"
         },
         {
           "column": 20,
           "kind": "cross-schema-transfer",
-          "line": 562,
+          "line": 663,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -53955,7 +55503,7 @@
         {
           "column": 20,
           "kind": "cross-schema-transfer",
-          "line": 578,
+          "line": 679,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -53980,9 +55528,9 @@
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 6,
+        "optional": 8,
         "requiredUndefined": 0,
-        "total": 13
+        "total": 15
       },
       "id": "@flighthq/types:interface#Physics2DPulleyJointOptions",
       "migration": {
@@ -54013,7 +55561,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 4,
+        "inputSignatures": 5,
         "outputSignatures": 1
       },
       "construction": {
@@ -54252,13 +55800,13 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 1,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 1
+        "testObjectLiterals": 2
       },
-      "directAccesses": 26,
+      "directAccesses": 32,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 23
+        "total": 28
       },
       "id": "@flighthq/types:interface#Physics2DRevoluteJoint",
       "migration": {
@@ -54280,7 +55828,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 6,
+        "crossSchemaTransfers": 7,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -54291,14 +55839,14 @@
         {
           "column": 10,
           "kind": "object-literal-spread",
-          "line": 144,
+          "line": 153,
           "scope": "production",
           "source": "upstream/packages/physics2d/src/jointFactories.ts"
         },
         {
           "column": 22,
           "kind": "cross-schema-transfer",
-          "line": 636,
+          "line": 752,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -54308,7 +55856,7 @@
         {
           "column": 22,
           "kind": "cross-schema-transfer",
-          "line": 663,
+          "line": 779,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -54318,7 +55866,7 @@
         {
           "column": 6,
           "kind": "cross-schema-transfer",
-          "line": 676,
+          "line": 792,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -54328,7 +55876,7 @@
         {
           "column": 22,
           "kind": "cross-schema-transfer",
-          "line": 687,
+          "line": 803,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -54338,7 +55886,7 @@
         {
           "column": 22,
           "kind": "cross-schema-transfer",
-          "line": 702,
+          "line": 818,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -54348,7 +55896,17 @@
         {
           "column": 22,
           "kind": "cross-schema-transfer",
-          "line": 727,
+          "line": 857,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d/src/joints.ts"
+        },
+        {
+          "column": 9,
+          "kind": "cross-schema-transfer",
+          "line": 949,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -54373,9 +55931,9 @@
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 12,
+        "optional": 17,
         "requiredUndefined": 0,
-        "total": 14
+        "total": 19
       },
       "id": "@flighthq/types:interface#Physics2DRevoluteJointOptions",
       "migration": {
@@ -54421,7 +55979,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 16
+        "total": 18
       },
       "id": "@flighthq/types:interface#Physics2DRopeJoint",
       "migration": {
@@ -54454,14 +56012,14 @@
         {
           "column": 10,
           "kind": "object-literal-spread",
-          "line": 159,
+          "line": 171,
           "scope": "production",
           "source": "upstream/packages/physics2d/src/jointFactories.ts"
         },
         {
           "column": 18,
           "kind": "cross-schema-transfer",
-          "line": 825,
+          "line": 984,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -54486,9 +56044,9 @@
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 5,
+        "optional": 7,
         "requiredUndefined": 0,
-        "total": 8
+        "total": 10
       },
       "id": "@flighthq/types:interface#Physics2DRopeJointOptions",
       "migration": {
@@ -54497,6 +56055,52 @@
         "observabilityReasons": []
       },
       "name": "Physics2DRopeJointOptions",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics2D.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 9
+      },
+      "id": "@flighthq/types:interface#Physics2DShapeCastResult",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics2DShapeCastResult",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -54626,7 +56230,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 16
+        "total": 18
       },
       "id": "@flighthq/types:interface#Physics2DWeldJoint",
       "migration": {
@@ -54659,14 +56263,14 @@
         {
           "column": 10,
           "kind": "object-literal-spread",
-          "line": 167,
+          "line": 179,
           "scope": "production",
           "source": "upstream/packages/physics2d/src/jointFactories.ts"
         },
         {
           "column": 18,
           "kind": "cross-schema-transfer",
-          "line": 1076,
+          "line": 1280,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -54676,7 +56280,7 @@
         {
           "column": 18,
           "kind": "cross-schema-transfer",
-          "line": 1082,
+          "line": 1286,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -54701,9 +56305,9 @@
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 6,
+        "optional": 8,
         "requiredUndefined": 0,
-        "total": 8
+        "total": 10
       },
       "id": "@flighthq/types:interface#Physics2DWeldJointOptions",
       "migration": {
@@ -54745,11 +56349,11 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 1
       },
-      "directAccesses": 27,
+      "directAccesses": 28,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 24
+        "total": 26
       },
       "id": "@flighthq/types:interface#Physics2DWheelJoint",
       "migration": {
@@ -54771,7 +56375,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 5,
+        "crossSchemaTransfers": 6,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -54782,14 +56386,14 @@
         {
           "column": 10,
           "kind": "object-literal-spread",
-          "line": 175,
+          "line": 187,
           "scope": "production",
           "source": "upstream/packages/physics2d/src/jointFactories.ts"
         },
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 871,
+          "line": 1049,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -54799,7 +56403,7 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 876,
+          "line": 1054,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -54809,7 +56413,7 @@
         {
           "column": 6,
           "kind": "cross-schema-transfer",
-          "line": 907,
+          "line": 1085,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -54819,7 +56423,7 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 919,
+          "line": 1097,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -54829,7 +56433,17 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 988,
+          "line": 1171,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d/src/joints.ts"
+        },
+        {
+          "column": 8,
+          "kind": "cross-schema-transfer",
+          "line": 1247,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics2DJoint"
           ],
@@ -54854,9 +56468,9 @@
       },
       "directAccesses": 8,
       "fields": {
-        "optional": 13,
+        "optional": 15,
         "requiredUndefined": 0,
-        "total": 15
+        "total": 17
       },
       "id": "@flighthq/types:interface#Physics2DWheelJointOptions",
       "migration": {
@@ -54887,7 +56501,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 43,
+        "inputSignatures": 46,
         "outputSignatures": 4
       },
       "construction": {
@@ -54898,11 +56512,11 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 217,
+      "directAccesses": 225,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 29
+        "total": 30
       },
       "id": "@flighthq/types:interface#Physics2DWorld",
       "migration": {
@@ -54933,8 +56547,54 @@
     },
     {
       "bridge": {
+        "inputSignatures": 6,
+        "outputSignatures": 3
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 2,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 5
+      },
+      "id": "@flighthq/types:interface#Physics3DCollider",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics3DCollider",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics3D.ts"
+    },
+    {
+      "bridge": {
         "inputSignatures": 0,
-        "outputSignatures": 0
+        "outputSignatures": 1
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -54942,7 +56602,53 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 1,
-        "testObjectLiterals": 1
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#Physics3DCollisionExplanation",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics3DCollisionExplanation",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics3D.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 2,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 6
       },
       "directAccesses": 0,
       "fields": {
@@ -54990,11 +56696,11 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 40,
+      "directAccesses": 51,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 39
+        "total": 45
       },
       "id": "@flighthq/types:interface#Physics3DConeTwistJoint",
       "migration": {
@@ -55016,7 +56722,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 5,
+        "crossSchemaTransfers": 6,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -55027,14 +56733,14 @@
         {
           "column": 10,
           "kind": "object-literal-spread",
-          "line": 47,
+          "line": 50,
           "scope": "production",
           "source": "upstream/packages/physics3d/src/jointFactories.ts"
         },
         {
           "column": 18,
           "kind": "cross-schema-transfer",
-          "line": 370,
+          "line": 601,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -55044,7 +56750,7 @@
         {
           "column": 18,
           "kind": "cross-schema-transfer",
-          "line": 377,
+          "line": 608,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -55054,7 +56760,7 @@
         {
           "column": 18,
           "kind": "cross-schema-transfer",
-          "line": 393,
+          "line": 624,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -55064,7 +56770,7 @@
         {
           "column": 18,
           "kind": "cross-schema-transfer",
-          "line": 458,
+          "line": 713,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -55074,7 +56780,17 @@
         {
           "column": 18,
           "kind": "cross-schema-transfer",
-          "line": 509,
+          "line": 770,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics3DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics3d/src/joints.ts"
+        },
+        {
+          "column": 18,
+          "kind": "cross-schema-transfer",
+          "line": 792,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -55095,13 +56811,13 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 8
+        "testObjectLiterals": 9
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 21,
+        "optional": 26,
         "requiredUndefined": 0,
-        "total": 23
+        "total": 28
       },
       "id": "@flighthq/types:interface#Physics3DConeTwistJointOptions",
       "migration": {
@@ -55137,17 +56853,17 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 1,
+        "objectLiterals": 2,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 1,
+        "plainObjectLiterals": 2,
         "testObjectLiterals": 3
       },
-      "directAccesses": 83,
+      "directAccesses": 0,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 12
+        "total": 14
       },
       "id": "@flighthq/types:interface#Physics3DContact",
       "migration": {
@@ -55235,7 +56951,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 39,
+      "directAccesses": 41,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -55418,6 +57134,190 @@
     },
     {
       "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#Physics3DDebugGeometry",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics3DDebugGeometry",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics3D.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 6
+      },
+      "id": "@flighthq/types:interface#Physics3DDebugGeometryOptions",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics3DDebugGeometryOptions",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics3D.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 9
+      },
+      "id": "@flighthq/types:interface#Physics3DDebugLine",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics3DDebugLine",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics3D.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 7
+      },
+      "id": "@flighthq/types:interface#Physics3DDebugSphere",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics3DDebugSphere",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics3D.ts"
+    },
+    {
+      "bridge": {
         "inputSignatures": 0,
         "outputSignatures": 1
       },
@@ -55429,13 +57329,13 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 24,
+      "directAccesses": 0,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 44
+        "total": 34
       },
-      "id": "@flighthq/types:interface#Physics3DGeneric6DofJoint",
+      "id": "@flighthq/types:interface#Physics3DDistanceJoint",
       "migration": {
         "mechanicallyCompatible": false,
         "normalizationReasons": [
@@ -55444,7 +57344,7 @@
         ],
         "observabilityReasons": []
       },
-      "name": "Physics3DGeneric6DofJoint",
+      "name": "Physics3DDistanceJoint",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -55471,9 +57371,9 @@
           "source": "upstream/packages/physics3d/src/jointFactories.ts"
         },
         {
-          "column": 17,
+          "column": 22,
           "kind": "cross-schema-transfer",
-          "line": 536,
+          "line": 121,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -55481,9 +57381,9 @@
           "source": "upstream/packages/physics3d/src/joints.ts"
         },
         {
-          "column": 17,
+          "column": 22,
           "kind": "cross-schema-transfer",
-          "line": 550,
+          "line": 127,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -55491,9 +57391,9 @@
           "source": "upstream/packages/physics3d/src/joints.ts"
         },
         {
-          "column": 17,
+          "column": 22,
           "kind": "cross-schema-transfer",
-          "line": 567,
+          "line": 208,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -55501,9 +57401,9 @@
           "source": "upstream/packages/physics3d/src/joints.ts"
         },
         {
-          "column": 17,
+          "column": 22,
           "kind": "cross-schema-transfer",
-          "line": 631,
+          "line": 256,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -55511,9 +57411,9 @@
           "source": "upstream/packages/physics3d/src/joints.ts"
         },
         {
-          "column": 17,
+          "column": 22,
           "kind": "cross-schema-transfer",
-          "line": 689,
+          "line": 275,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -55534,13 +57434,176 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 9
+        "testObjectLiterals": 25
       },
-      "directAccesses": 12,
+      "directAccesses": 0,
       "fields": {
-        "optional": 27,
+        "optional": 16,
         "requiredUndefined": 0,
-        "total": 29
+        "total": 18
+      },
+      "id": "@flighthq/types:interface#Physics3DDistanceJointOptions",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics3DDistanceJointOptions",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics3D.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 1,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 29,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 50
+      },
+      "id": "@flighthq/types:interface#Physics3DGeneric6DofJoint",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "cross-schema-transfer",
+          "object-literal-spread"
+        ],
+        "observabilityReasons": []
+      },
+      "name": "Physics3DGeneric6DofJoint",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 6,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 10,
+          "kind": "object-literal-spread",
+          "line": 98,
+          "scope": "production",
+          "source": "upstream/packages/physics3d/src/jointFactories.ts"
+        },
+        {
+          "column": 17,
+          "kind": "cross-schema-transfer",
+          "line": 819,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics3DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics3d/src/joints.ts"
+        },
+        {
+          "column": 17,
+          "kind": "cross-schema-transfer",
+          "line": 833,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics3DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics3d/src/joints.ts"
+        },
+        {
+          "column": 17,
+          "kind": "cross-schema-transfer",
+          "line": 850,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics3DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics3d/src/joints.ts"
+        },
+        {
+          "column": 17,
+          "kind": "cross-schema-transfer",
+          "line": 936,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics3DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics3d/src/joints.ts"
+        },
+        {
+          "column": 17,
+          "kind": "cross-schema-transfer",
+          "line": 999,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics3DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics3d/src/joints.ts"
+        },
+        {
+          "column": 17,
+          "kind": "cross-schema-transfer",
+          "line": 1017,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics3DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics3d/src/joints.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Physics3D.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 10
+      },
+      "directAccesses": 15,
+      "fields": {
+        "optional": 32,
+        "requiredUndefined": 0,
+        "total": 34
       },
       "id": "@flighthq/types:interface#Physics3DGeneric6DofJointOptions",
       "migration": {
@@ -55582,11 +57645,11 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 48,
+      "directAccesses": 56,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 39
+        "total": 45
       },
       "id": "@flighthq/types:interface#Physics3DHingeJoint",
       "migration": {
@@ -55608,7 +57671,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 6,
+        "crossSchemaTransfers": 7,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -55619,14 +57682,14 @@
         {
           "column": 10,
           "kind": "object-literal-spread",
-          "line": 95,
+          "line": 123,
           "scope": "production",
           "source": "upstream/packages/physics3d/src/jointFactories.ts"
         },
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 158,
+          "line": 361,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -55636,7 +57699,7 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 165,
+          "line": 368,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -55646,7 +57709,7 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 178,
+          "line": 381,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -55656,7 +57719,7 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 197,
+          "line": 400,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -55666,7 +57729,7 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 259,
+          "line": 472,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -55676,7 +57739,17 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 336,
+          "line": 553,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics3DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics3d/src/joints.ts"
+        },
+        {
+          "column": 19,
+          "kind": "cross-schema-transfer",
+          "line": 567,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -55697,13 +57770,13 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 27
+        "testObjectLiterals": 30
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 21,
+        "optional": 26,
         "requiredUndefined": 0,
-        "total": 23
+        "total": 28
       },
       "id": "@flighthq/types:interface#Physics3DHingeJointOptions",
       "migration": {
@@ -55734,7 +57807,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 17,
+        "inputSignatures": 21,
         "outputSignatures": 4
       },
       "construction": {
@@ -55749,7 +57822,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 22
+        "total": 25
       },
       "id": "@flighthq/types:interface#Physics3DJoint",
       "migration": {
@@ -55781,11 +57854,57 @@
         {
           "column": 10,
           "kind": "object-literal-spread",
-          "line": 38,
+          "line": 41,
           "scope": "production",
           "source": "upstream/packages/physics3d/src/jointFactories.ts"
         }
       ],
+      "source": "upstream/packages/types/src/Physics3D.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 2,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 1
+      },
+      "id": "@flighthq/types:interface#Physics3DJointEvents",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics3DJointEvents",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
       "source": "upstream/packages/types/src/Physics3D.ts"
     },
     {
@@ -55849,9 +57968,9 @@
       },
       "directAccesses": 8,
       "fields": {
-        "optional": 15,
+        "optional": 17,
         "requiredUndefined": 0,
-        "total": 17
+        "total": 19
       },
       "id": "@flighthq/types:interface#Physics3DJointFrameOptions",
       "migration": {
@@ -55883,7 +58002,7 @@
         {
           "column": 26,
           "kind": "cross-schema-transfer",
-          "line": 50,
+          "line": 53,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DConeTwistJointOptions"
           ],
@@ -55893,7 +58012,7 @@
         {
           "column": 26,
           "kind": "cross-schema-transfer",
-          "line": 76,
+          "line": 101,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DGeneric6DofJointOptions"
           ],
@@ -55903,7 +58022,7 @@
         {
           "column": 26,
           "kind": "cross-schema-transfer",
-          "line": 98,
+          "line": 126,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DHingeJointOptions"
           ],
@@ -55913,7 +58032,7 @@
         {
           "column": 26,
           "kind": "cross-schema-transfer",
-          "line": 115,
+          "line": 146,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DSliderJointOptions"
           ],
@@ -55974,42 +58093,42 @@
         {
           "column": 5,
           "kind": "object-spread",
-          "line": 50,
+          "line": 53,
           "scope": "production",
           "source": "upstream/packages/physics3d/src/jointFactories.ts"
         },
         {
           "column": 72,
           "kind": "object-spread",
-          "line": 64,
+          "line": 89,
           "scope": "production",
           "source": "upstream/packages/physics3d/src/jointFactories.ts"
         },
         {
           "column": 5,
           "kind": "object-spread",
-          "line": 76,
+          "line": 101,
           "scope": "production",
           "source": "upstream/packages/physics3d/src/jointFactories.ts"
         },
         {
           "column": 5,
           "kind": "object-spread",
-          "line": 98,
+          "line": 126,
           "scope": "production",
           "source": "upstream/packages/physics3d/src/jointFactories.ts"
         },
         {
           "column": 5,
           "kind": "object-spread",
-          "line": 115,
+          "line": 146,
           "scope": "production",
           "source": "upstream/packages/physics3d/src/jointFactories.ts"
         },
         {
           "column": 30,
           "kind": "cross-schema-transfer",
-          "line": 109,
+          "line": 304,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -56019,7 +58138,7 @@
         {
           "column": 38,
           "kind": "cross-schema-transfer",
-          "line": 122,
+          "line": 317,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -56029,7 +58148,7 @@
         {
           "column": 30,
           "kind": "cross-schema-transfer",
-          "line": 179,
+          "line": 382,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DHingeJoint"
           ],
@@ -56039,7 +58158,7 @@
         {
           "column": 38,
           "kind": "cross-schema-transfer",
-          "line": 207,
+          "line": 410,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DHingeJoint"
           ],
@@ -56049,7 +58168,7 @@
         {
           "column": 34,
           "kind": "cross-schema-transfer",
-          "line": 208,
+          "line": 411,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DHingeJoint"
           ],
@@ -56059,7 +58178,7 @@
         {
           "column": 38,
           "kind": "cross-schema-transfer",
-          "line": 403,
+          "line": 634,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DConeTwistJoint"
           ],
@@ -56069,7 +58188,7 @@
         {
           "column": 34,
           "kind": "cross-schema-transfer",
-          "line": 404,
+          "line": 635,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DConeTwistJoint"
           ],
@@ -56079,7 +58198,7 @@
         {
           "column": 38,
           "kind": "cross-schema-transfer",
-          "line": 578,
+          "line": 861,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DGeneric6DofJoint"
           ],
@@ -56089,7 +58208,7 @@
         {
           "column": 34,
           "kind": "cross-schema-transfer",
-          "line": 579,
+          "line": 862,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DGeneric6DofJoint"
           ],
@@ -56099,7 +58218,7 @@
         {
           "column": 30,
           "kind": "cross-schema-transfer",
-          "line": 740,
+          "line": 1068,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DSliderJoint"
           ],
@@ -56109,7 +58228,7 @@
         {
           "column": 38,
           "kind": "cross-schema-transfer",
-          "line": 766,
+          "line": 1094,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DSliderJoint"
           ],
@@ -56119,7 +58238,7 @@
         {
           "column": 34,
           "kind": "cross-schema-transfer",
-          "line": 767,
+          "line": 1095,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DSliderJoint"
           ],
@@ -56140,13 +58259,13 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 28
+        "testObjectLiterals": 42
       },
-      "directAccesses": 9,
+      "directAccesses": 11,
       "fields": {
-        "optional": 7,
+        "optional": 9,
         "requiredUndefined": 0,
-        "total": 9
+        "total": 11
       },
       "id": "@flighthq/types:interface#Physics3DJointOptions",
       "migration": {
@@ -56167,7 +58286,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 5,
+        "crossSchemaTransfers": 6,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -56178,19 +58297,9 @@
         {
           "column": 24,
           "kind": "cross-schema-transfer",
-          "line": 49,
+          "line": 52,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DConeTwistJointOptions"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/physics3d/src/jointFactories.ts"
-        },
-        {
-          "column": 62,
-          "kind": "cross-schema-transfer",
-          "line": 64,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Physics3DJointFrameOptions"
           ],
           "scope": "production",
           "source": "upstream/packages/physics3d/src/jointFactories.ts"
@@ -56200,6 +58309,26 @@
           "kind": "cross-schema-transfer",
           "line": 75,
           "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics3DDistanceJointOptions"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics3d/src/jointFactories.ts"
+        },
+        {
+          "column": 62,
+          "kind": "cross-schema-transfer",
+          "line": 89,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics3DJointFrameOptions"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics3d/src/jointFactories.ts"
+        },
+        {
+          "column": 24,
+          "kind": "cross-schema-transfer",
+          "line": 100,
+          "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DGeneric6DofJointOptions"
           ],
           "scope": "production",
@@ -56208,7 +58337,7 @@
         {
           "column": 24,
           "kind": "cross-schema-transfer",
-          "line": 97,
+          "line": 125,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DHingeJointOptions"
           ],
@@ -56218,7 +58347,7 @@
         {
           "column": 24,
           "kind": "cross-schema-transfer",
-          "line": 114,
+          "line": 145,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DSliderJointOptions"
           ],
@@ -56230,22 +58359,68 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
-        "outputSignatures": 7
+        "inputSignatures": 5,
+        "outputSignatures": 1
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 6,
-        "objectLiteralsOmittingOptionalFields": 6,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 6,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 6
+      },
+      "id": "@flighthq/types:interface#Physics3DJointReaction",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics3DJointReaction",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics3D.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 8
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 7,
+        "objectLiteralsOmittingOptionalFields": 7,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 7,
         "testObjectLiterals": 3
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 6,
+        "optional": 7,
         "requiredUndefined": 0,
-        "total": 8
+        "total": 9
       },
       "id": "@flighthq/types:interface#Physics3DJointSolver",
       "migration": {
@@ -56277,42 +58452,49 @@
         {
           "column": 72,
           "kind": "optional-omission",
-          "line": 60,
+          "line": 66,
+          "scope": "production",
+          "source": "upstream/packages/physics3d/src/joints.ts"
+        },
+        {
+          "column": 67,
+          "kind": "optional-omission",
+          "line": 118,
           "scope": "production",
           "source": "upstream/packages/physics3d/src/joints.ts"
         },
         {
           "column": 64,
           "kind": "optional-omission",
-          "line": 96,
+          "line": 291,
           "scope": "production",
           "source": "upstream/packages/physics3d/src/joints.ts"
         },
         {
           "column": 64,
           "kind": "optional-omission",
-          "line": 151,
+          "line": 354,
           "scope": "production",
           "source": "upstream/packages/physics3d/src/joints.ts"
         },
         {
           "column": 68,
           "kind": "optional-omission",
-          "line": 365,
+          "line": 596,
           "scope": "production",
           "source": "upstream/packages/physics3d/src/joints.ts"
         },
         {
           "column": 70,
           "kind": "optional-omission",
-          "line": 534,
+          "line": 817,
           "scope": "production",
           "source": "upstream/packages/physics3d/src/joints.ts"
         },
         {
           "column": 65,
           "kind": "optional-omission",
-          "line": 714,
+          "line": 1042,
           "scope": "production",
           "source": "upstream/packages/physics3d/src/joints.ts"
         }
@@ -56321,7 +58503,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 6,
+        "inputSignatures": 10,
         "outputSignatures": 1
       },
       "construction": {
@@ -56332,7 +58514,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 77,
+      "directAccesses": 132,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -56367,16 +58549,16 @@
     },
     {
       "bridge": {
-        "inputSignatures": 0,
+        "inputSignatures": 1,
         "outputSignatures": 0
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 1,
+        "objectLiterals": 2,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 1,
-        "testObjectLiterals": 1
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 8
       },
       "directAccesses": 0,
       "fields": {
@@ -56413,6 +58595,236 @@
     },
     {
       "bridge": {
+        "inputSignatures": 5,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 6
+      },
+      "id": "@flighthq/types:interface#Physics3DQueryFilter",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics3DQueryFilter",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics3D.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#Physics3DQueryHit",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics3DQueryHit",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics3D.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 2,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#Physics3DQueryResult",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics3DQueryResult",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics3D.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 10
+      },
+      "id": "@flighthq/types:interface#Physics3DRayHit",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics3DRayHit",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics3D.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 2,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#Physics3DRayResult",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics3DRayResult",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics3D.ts"
+    },
+    {
+      "bridge": {
         "inputSignatures": 0,
         "outputSignatures": 1
       },
@@ -56424,7 +58836,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 18,
+      "directAccesses": 20,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -56470,7 +58882,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 8,
+      "directAccesses": 0,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -56505,6 +58917,52 @@
     },
     {
       "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 11
+      },
+      "id": "@flighthq/types:interface#Physics3DShapeCastResult",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics3DShapeCastResult",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics3D.ts"
+    },
+    {
+      "bridge": {
         "inputSignatures": 0,
         "outputSignatures": 1
       },
@@ -56516,11 +58974,11 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 48,
+      "directAccesses": 56,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 39
+        "total": 45
       },
       "id": "@flighthq/types:interface#Physics3DSliderJoint",
       "migration": {
@@ -56542,7 +59000,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 6,
+        "crossSchemaTransfers": 7,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -56553,14 +59011,14 @@
         {
           "column": 10,
           "kind": "object-literal-spread",
-          "line": 112,
+          "line": 143,
           "scope": "production",
           "source": "upstream/packages/physics3d/src/jointFactories.ts"
         },
         {
           "column": 20,
           "kind": "cross-schema-transfer",
-          "line": 721,
+          "line": 1049,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -56570,7 +59028,7 @@
         {
           "column": 20,
           "kind": "cross-schema-transfer",
-          "line": 728,
+          "line": 1056,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -56580,7 +59038,7 @@
         {
           "column": 20,
           "kind": "cross-schema-transfer",
-          "line": 739,
+          "line": 1067,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -56590,7 +59048,7 @@
         {
           "column": 20,
           "kind": "cross-schema-transfer",
-          "line": 755,
+          "line": 1083,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -56600,7 +59058,7 @@
         {
           "column": 20,
           "kind": "cross-schema-transfer",
-          "line": 802,
+          "line": 1140,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -56610,7 +59068,17 @@
         {
           "column": 20,
           "kind": "cross-schema-transfer",
-          "line": 874,
+          "line": 1216,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics3DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics3d/src/joints.ts"
+        },
+        {
+          "column": 20,
+          "kind": "cross-schema-transfer",
+          "line": 1230,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJoint"
           ],
@@ -56631,13 +59099,13 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 8
+        "testObjectLiterals": 9
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 21,
+        "optional": 26,
         "requiredUndefined": 0,
-        "total": 23
+        "total": 28
       },
       "id": "@flighthq/types:interface#Physics3DSliderJointOptions",
       "migration": {
@@ -56679,11 +59147,11 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 25,
+      "directAccesses": 0,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 8
+        "total": 9
       },
       "id": "@flighthq/types:interface#Physics3DSolverConfig",
       "migration": {
@@ -56729,7 +59197,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 10
+        "total": 11
       },
       "id": "@flighthq/types:interface#Physics3DStepExplanation",
       "migration": {
@@ -56760,8 +59228,8 @@
     },
     {
       "bridge": {
-        "inputSignatures": 26,
-        "outputSignatures": 3
+        "inputSignatures": 47,
+        "outputSignatures": 4
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -56771,11 +59239,11 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 148,
+      "directAccesses": 244,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 30
+        "total": 32
       },
       "id": "@flighthq/types:interface#Physics3DWorld",
       "migration": {
@@ -56787,7 +59255,7 @@
       },
       "name": "Physics3DWorld",
       "oracle": {
-        "enumerations": 1,
+        "enumerations": 2,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0,
@@ -56807,7 +59275,14 @@
         {
           "column": 12,
           "kind": "enumeration",
-          "line": 34,
+          "line": 54,
+          "scope": "test",
+          "source": "upstream/packages/physics3d/src/ownership.test.ts"
+        },
+        {
+          "column": 12,
+          "kind": "enumeration",
+          "line": 59,
           "scope": "test",
           "source": "upstream/packages/physics3d/src/ownership.test.ts"
         }
@@ -63459,8 +65934,8 @@
     },
     {
       "bridge": {
-        "inputSignatures": 70,
-        "outputSignatures": 2
+        "inputSignatures": 79,
+        "outputSignatures": 4
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -63474,7 +65949,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 54
+        "total": 53
       },
       "id": "@flighthq/types:interface#RigidBody3D",
       "migration": {
@@ -74460,9 +76935,9 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 4,
-        "testObjectLiterals": 131
+        "testObjectLiterals": 133
       },
-      "directAccesses": 108,
+      "directAccesses": 114,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -74498,32 +76973,155 @@
         {
           "column": 25,
           "kind": "anonymous-structural-transfer",
-          "line": 199,
+          "line": 193,
           "scope": "production",
           "source": "upstream/packages/spatial/src/uniformGrid.ts"
         },
         {
           "column": 41,
           "kind": "anonymous-structural-transfer",
-          "line": 204,
+          "line": 198,
           "scope": "production",
           "source": "upstream/packages/spatial/src/uniformGrid.ts"
         },
         {
           "column": 25,
           "kind": "anonymous-structural-transfer",
-          "line": 208,
+          "line": 202,
           "scope": "production",
           "source": "upstream/packages/spatial/src/uniformGrid.ts"
         },
         {
           "column": 23,
           "kind": "anonymous-structural-transfer",
-          "line": 221,
+          "line": 215,
           "scope": "production",
           "source": "upstream/packages/spatial/src/uniformGrid.ts"
         }
       ],
+      "source": "upstream/packages/types/src/Spatial.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 5,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 6,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 6,
+        "testObjectLiterals": 30
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 6
+      },
+      "id": "@flighthq/types:interface#SpatialAabb3D",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "anonymous-structural-transfer"
+        ],
+        "observabilityReasons": []
+      },
+      "name": "SpatialAabb3D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 4,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 25,
+          "kind": "anonymous-structural-transfer",
+          "line": 181,
+          "scope": "production",
+          "source": "upstream/packages/spatial/src/uniformGrid3D.ts"
+        },
+        {
+          "column": 43,
+          "kind": "anonymous-structural-transfer",
+          "line": 186,
+          "scope": "production",
+          "source": "upstream/packages/spatial/src/uniformGrid3D.ts"
+        },
+        {
+          "column": 25,
+          "kind": "anonymous-structural-transfer",
+          "line": 190,
+          "scope": "production",
+          "source": "upstream/packages/spatial/src/uniformGrid3D.ts"
+        },
+        {
+          "column": 23,
+          "kind": "anonymous-structural-transfer",
+          "line": 205,
+          "scope": "production",
+          "source": "upstream/packages/spatial/src/uniformGrid3D.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Spatial.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 2
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 1
+      },
+      "id": "@flighthq/types:interface#SpatialFrustum3D",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "SpatialFrustum3D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
       "source": "upstream/packages/types/src/Spatial.ts"
     },
     {
@@ -74552,6 +77150,52 @@
         "observabilityReasons": []
       },
       "name": "SpatialIndex2D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Spatial.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 11,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 1
+      },
+      "id": "@flighthq/types:interface#SpatialIndex3D",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "SpatialIndex3D",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -74621,14 +77265,14 @@
         {
           "column": 5,
           "kind": "object-spread",
-          "line": 54,
+          "line": 59,
           "scope": "test",
           "source": "upstream/packages/physics2d/src/step.test.ts"
         },
         {
           "column": 5,
           "kind": "object-spread",
-          "line": 65,
+          "line": 70,
           "scope": "test",
           "source": "upstream/packages/physics2d/src/step.test.ts"
         }
@@ -74637,15 +77281,61 @@
     },
     {
       "bridge": {
-        "inputSignatures": 0,
-        "outputSignatures": 1
+        "inputSignatures": 2,
+        "outputSignatures": 2
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 4,
+        "objectLiterals": 2,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 4,
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 9
+      },
+      "id": "@flighthq/types:interface#SpatialIndexBackend3D",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "SpatialIndexBackend3D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Spatial.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 2
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 11,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 11,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -74683,16 +77373,16 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 0
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 1,
+        "objectLiterals": 3,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 1,
-        "testObjectLiterals": 16
+        "plainObjectLiterals": 3,
+        "testObjectLiterals": 22
       },
       "directAccesses": 22,
       "fields": {
@@ -74713,7 +77403,7 @@
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
-        "objectSpreads": 8,
+        "objectSpreads": 12,
         "prototypeObservations": 0,
         "strictEqualityAssertions": 0
       },
@@ -74730,58 +77420,86 @@
         {
           "column": 56,
           "kind": "object-spread",
-          "line": 96,
+          "line": 93,
           "scope": "test",
           "source": "upstream/packages/spatial/src/formatSpatialIndexingNotice.test.ts"
         },
         {
           "column": 56,
           "kind": "object-spread",
-          "line": 693,
+          "line": 15,
           "scope": "test",
-          "source": "upstream/packages/spatial/src/uniformGrid.test.ts"
+          "source": "upstream/packages/spatial/src/spatialIndexingGuard.test.ts"
         },
         {
           "column": 56,
           "kind": "object-spread",
-          "line": 710,
+          "line": 43,
           "scope": "test",
-          "source": "upstream/packages/spatial/src/uniformGrid.test.ts"
+          "source": "upstream/packages/spatial/src/spatialIndexingGuard.test.ts"
         },
         {
           "column": 56,
           "kind": "object-spread",
-          "line": 727,
+          "line": 61,
           "scope": "test",
-          "source": "upstream/packages/spatial/src/uniformGrid.test.ts"
+          "source": "upstream/packages/spatial/src/spatialIndexingGuard.test.ts"
         },
         {
           "column": 56,
           "kind": "object-spread",
-          "line": 749,
+          "line": 78,
           "scope": "test",
-          "source": "upstream/packages/spatial/src/uniformGrid.test.ts"
+          "source": "upstream/packages/spatial/src/spatialIndexingGuard.test.ts"
         },
         {
           "column": 56,
           "kind": "object-spread",
-          "line": 772,
+          "line": 95,
           "scope": "test",
-          "source": "upstream/packages/spatial/src/uniformGrid.test.ts"
+          "source": "upstream/packages/spatial/src/spatialIndexingGuard.test.ts"
         },
         {
           "column": 56,
           "kind": "object-spread",
-          "line": 798,
+          "line": 117,
           "scope": "test",
-          "source": "upstream/packages/spatial/src/uniformGrid.test.ts"
+          "source": "upstream/packages/spatial/src/spatialIndexingGuard.test.ts"
         },
         {
           "column": 56,
           "kind": "object-spread",
-          "line": 807,
+          "line": 140,
           "scope": "test",
-          "source": "upstream/packages/spatial/src/uniformGrid.test.ts"
+          "source": "upstream/packages/spatial/src/spatialIndexingGuard.test.ts"
+        },
+        {
+          "column": 56,
+          "kind": "object-spread",
+          "line": 166,
+          "scope": "test",
+          "source": "upstream/packages/spatial/src/spatialIndexingGuard.test.ts"
+        },
+        {
+          "column": 56,
+          "kind": "object-spread",
+          "line": 175,
+          "scope": "test",
+          "source": "upstream/packages/spatial/src/spatialIndexingGuard.test.ts"
+        },
+        {
+          "column": 56,
+          "kind": "object-spread",
+          "line": 87,
+          "scope": "test",
+          "source": "upstream/packages/spatial/src/uniformGrid3D.test.ts"
+        },
+        {
+          "column": 56,
+          "kind": "object-spread",
+          "line": 104,
+          "scope": "test",
+          "source": "upstream/packages/spatial/src/uniformGrid3D.test.ts"
         }
       ],
       "source": "upstream/packages/types/src/SpatialIndexing.ts"
@@ -74834,15 +77552,61 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 0,
         "outputSignatures": 0
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 3,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 3,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 1
+      },
+      "id": "@flighthq/types:interface#SpatialIndexRuntime3D",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "SpatialIndexRuntime3D",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Spatial.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 2,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 5,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 5,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -74881,7 +77645,7 @@
         {
           "column": 16,
           "kind": "anonymous-structural-transfer",
-          "line": 404,
+          "line": 398,
           "scope": "production",
           "source": "upstream/packages/spatial/src/uniformGrid.ts"
         }
@@ -98877,7 +101641,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 22
+        "total": 25
       },
       "id": "@flighthq/types:type#Physics3DBallAndSocketJoint",
       "migration": {
@@ -98921,9 +101685,9 @@
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 7,
+        "optional": 9,
         "requiredUndefined": 0,
-        "total": 9
+        "total": 11
       },
       "id": "@flighthq/types:type#Physics3DBallAndSocketJointOptions",
       "migration": {
@@ -98967,9 +101731,9 @@
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 15,
+        "optional": 17,
         "requiredUndefined": 0,
-        "total": 17
+        "total": 19
       },
       "id": "@flighthq/types:type#Physics3DFixedJointOptions",
       "migration": {
@@ -100227,28 +102991,28 @@
     }
   ],
   "summary": {
-    "anonymousStructuralTransfers": 154,
-    "bridgeInputSignatures": 8667,
-    "bridgeOutputSignatures": 1739,
-    "crossSchemaTransfers": 1460,
-    "directAccesses": 26156,
+    "anonymousStructuralTransfers": 158,
+    "bridgeInputSignatures": 9165,
+    "bridgeOutputSignatures": 1779,
+    "crossSchemaTransfers": 1500,
+    "directAccesses": 26293,
     "dynamicIngresses": 68,
-    "mechanicallyCompatibleSchemas": 1197,
-    "normalizationRequiredSchemas": 414,
-    "objectLiterals": 1950,
-    "objectLiteralsOmittingOptionalFields": 413,
+    "mechanicallyCompatibleSchemas": 1232,
+    "normalizationRequiredSchemas": 423,
+    "objectLiterals": 2017,
+    "objectLiteralsOmittingOptionalFields": 414,
     "objectLiteralsWithComputedKeys": 2,
-    "objectLiteralsWithSpread": 214,
-    "observabilityReviewSchemas": 260,
-    "optionalFields": 2141,
-    "oracleObservations": 296,
+    "objectLiteralsWithSpread": 215,
+    "observabilityReviewSchemas": 265,
+    "optionalFields": 2213,
+    "oracleObservations": 306,
     "productionEnumerations": 8,
     "productionJsonSerializations": 6,
     "productionObjectRests": 0,
-    "productionObjectSpreads": 128,
+    "productionObjectSpreads": 130,
     "requiredUndefinedFields": 2,
-    "schemas": 1611,
-    "testObjectLiterals": 5915
+    "schemas": 1655,
+    "testObjectLiterals": 6057
   },
-  "upstreamCommit": "598ef6f62b6f1ae2873956501069ed824699021a"
+  "upstreamCommit": "9b3b71b019ff48ea6329c16020f37fb72c3123d1"
 }

@@ -5,4 +5,7 @@ const api = compiled.flighthq.physics2d.Step;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const setPhysics2DContactIntakeGuard = api.setPhysics2DContactIntakeGuard;
+export const setPhysics2DJointResolutionGuard = api.setPhysics2DJointResolutionGuard;
+export const setPhysics2DStepGuard = api.setPhysics2DStepGuard;
 export const stepPhysics2D = api.stepPhysics2D;

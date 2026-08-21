@@ -9394,7 +9394,7 @@
           "locations": [
             {
               "column": 3,
-              "line": 780,
+              "line": 785,
               "operation": "call",
               "source": "upstream/packages/log/src/log.ts"
             }
@@ -9414,7 +9414,7 @@
           {
             "arity": 0,
             "column": 3,
-            "line": 780,
+            "line": 785,
             "source": "upstream/packages/log/src/log.ts"
           }
         ]
@@ -47360,7 +47360,7 @@
             },
             {
               "column": 47,
-              "line": 761,
+              "line": 766,
               "operation": "call",
               "source": "upstream/packages/log/src/log.ts"
             },
@@ -47416,7 +47416,7 @@
           {
             "arity": 0,
             "column": 47,
-            "line": 761,
+            "line": 766,
             "source": "upstream/packages/log/src/log.ts"
           },
           {
@@ -50805,25 +50805,25 @@
           {
             "arity": 0,
             "column": 13,
-            "line": 115,
+            "line": 120,
             "source": "upstream/packages/log/src/log.ts"
           },
           {
             "arity": 0,
             "column": 5,
-            "line": 115,
+            "line": 120,
             "source": "upstream/packages/log/src/log.ts"
           },
           {
             "arity": 0,
             "column": 35,
-            "line": 117,
+            "line": 122,
             "source": "upstream/packages/log/src/log.ts"
           },
           {
             "arity": 0,
             "column": 29,
-            "line": 317,
+            "line": 322,
             "source": "upstream/packages/log/src/log.ts"
           },
           {
@@ -78843,5 +78843,5 @@
       }
     }
   ],
-  "upstreamCommit": "598ef6f62b6f1ae2873956501069ed824699021a"
+  "upstreamCommit": "9b3b71b019ff48ea6329c16020f37fb72c3123d1"
 }

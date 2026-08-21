@@ -3,13 +3,25 @@ package flighthq.physics3d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Physics3D.Physics3DCollider;
 import flighthq.types.Physics3D.Physics3DJoint;
 import flighthq.types.Physics3D.Physics3DWorld;
+import flighthq.types.Physics3D.RigidBody3D;
 
 class Ownership {
+  public static final physics3DBodyOwners:flighthq._internal._WeakMap<RigidBody3D, Physics3DWorld> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+
   public static final physics3DJointOwners:flighthq._internal._WeakMap<Physics3DJoint, Physics3DWorld> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
+  public static final physics3DColliderOwners:flighthq._internal._WeakMap<Physics3DCollider, RigidBody3D> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+
   public static final steppingPhysics3DWorlds:flighthq._internal._WeakSet<Physics3DWorld> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);
+
+  public static function assertPhysics3DBodyNotStepping(body:RigidBody3D):Void {
+    var world:Null<Physics3DWorld> = cast _Runtime.UNDEFINED;
+    world = ((cast physics3DBodyOwners : flighthq._internal._WeakMap<RigidBody3D, Physics3DWorld>).get((cast body : RigidBody3D)));
+    if ((cast !_Runtime.strictEquals(world, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { assertPhysics3DWorldNotStepping(({ final __callArgument0:Dynamic = world; __callArgument0; })); }
+  }
 
   public static function assertPhysics3DWorldNotStepping(world:Physics3DWorld):Void {
     if ((cast ((cast steppingPhysics3DWorlds : flighthq._internal._WeakSet<Physics3DWorld>).has((cast world : Physics3DWorld))) : Bool)) {

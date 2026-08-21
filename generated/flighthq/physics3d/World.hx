@@ -3,74 +3,207 @@ package flighthq.physics3d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.physics3d.Broadphase.synchronizePhysics3DBroadphase;
+import flighthq.physics3d.ColliderTransform.createPhysics3DColliderWorldShape;
 import flighthq.physics3d.Integrate.refreshRigidBody3DWorldInertia;
 import flighthq.physics3d.JointCollisionSuppression.rebuildPhysics3DJointCollisionSuppressions;
 import flighthq.physics3d.MassProperties.createPhysics3DMassData;
 import flighthq.physics3d.MassProperties.setRigidBody3DMassData;
+import flighthq.physics3d.MassProperties.updateRigidBody3DMassData;
+import flighthq.physics3d.Ownership.assertPhysics3DBodyNotStepping;
+import flighthq.physics3d.Ownership.assertPhysics3DWorldNotStepping;
+import flighthq.physics3d.Ownership.physics3DBodyOwners;
+import flighthq.physics3d.Ownership.physics3DColliderOwners;
 import flighthq.physics3d.Ownership.physics3DJointOwners;
+import flighthq.physics3d.SymmetricTensor.TENSOR_XX;
+import flighthq.physics3d.SymmetricTensor.TENSOR_XY;
+import flighthq.physics3d.SymmetricTensor.TENSOR_XZ;
+import flighthq.physics3d.SymmetricTensor.TENSOR_YY;
+import flighthq.physics3d.SymmetricTensor.TENSOR_YZ;
+import flighthq.physics3d.SymmetricTensor.TENSOR_ZZ;
+import flighthq.physics3d.SymmetricTensor.applySymmetricTensor;
+import flighthq.spatial.UniformGrid3D.createUniformGridSpatialBackend3D;
+import flighthq.types.Collision.CollisionAabb3D;
+import flighthq.types.Collision.CollisionBox3D;
+import flighthq.types.Collision.CollisionCapsule3D;
+import flighthq.types.Collision.CollisionColliderShape3D;
+import flighthq.types.Collision.CollisionCone3D;
+import flighthq.types.Collision.CollisionConvex3D;
+import flighthq.types.Collision.CollisionCylinder3D;
+import flighthq.types.Collision.CollisionHeightfield3D;
+import flighthq.types.Collision.CollisionSphere3D;
+import flighthq.types.Collision.CollisionTriangleMesh3D;
 import flighthq.types.Physics3D.Physics3DBodyType;
+import flighthq.types.Physics3D.Physics3DCollider;
+import flighthq.types.Physics3D.Physics3DCollisionFilter;
 import flighthq.types.Physics3D.Physics3DContact;
 import flighthq.types.Physics3D.Physics3DContactConstraint;
+import flighthq.types.Physics3D.Physics3DContactEvents;
 import flighthq.types.Physics3D.Physics3DJoint;
+import flighthq.types.Physics3D.Physics3DJointEvents;
+import flighthq.types.Physics3D.Physics3DJointSolver;
 import flighthq.types.Physics3D.Physics3DMassData;
+import flighthq.types.Physics3D.Physics3DMaterial;
 import flighthq.types.Physics3D.Physics3DSequentialImpulseConfig;
 import flighthq.types.Physics3D.Physics3DSequentialImpulseState;
 import flighthq.types.Physics3D.Physics3DSolverConfig;
 import flighthq.types.Physics3D.Physics3DWorld;
 import flighthq.types.Physics3D.RigidBody3D;
+import flighthq.types.Spatial.SpatialIndexBackend3D;
 
 class World {
   public static function addPhysics3DBody(world:Physics3DWorld, body:RigidBody3D):Float {
-    if ((cast ((cast ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).has((cast body : RigidBody3D).index)) : Bool) && (cast _Runtime.strictEquals(((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get((cast body : RigidBody3D).index)), body) : Bool)) : Bool)) { return cast (cast body : RigidBody3D).index; }
+    var colliders:flighthq._internal._Set<Physics3DCollider> = cast _Runtime.UNDEFINED;
+    assertPhysics3DWorldNotStepping(({ final __callArgument0:Dynamic = world; __callArgument0; }));
+    if ((cast ((cast ((cast ((cast physics3DBodyOwners : flighthq._internal._WeakMap<RigidBody3D, Physics3DWorld>).has(body)) : Bool) || (cast !_Runtime.strictEquals((cast body : RigidBody3D).index, -1.0) : Bool)) : Bool) || (cast _Runtime.includes(world.bodies, body) : Bool)) : Bool)) {
+      _Runtime.throwValue(_Runtime.error('Cannot add a rigid body that already belongs to a physics world'));
+    }
+    colliders = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
+    for (collider in _Runtime.iterable((cast body : RigidBody3D).colliders)) {
+      if ((cast ((cast colliders : flighthq._internal._Set<Physics3DCollider>).has(collider)) : Bool)) { _Runtime.throwValue(_Runtime.error('Cannot add a rigid body containing the same collider twice')); }
+      ((cast colliders : flighthq._internal._Set<Physics3DCollider>).add(collider));
+      var owner:Null<RigidBody3D> = ((cast physics3DColliderOwners : flighthq._internal._WeakMap<Physics3DCollider, RigidBody3D>).get(collider));
+      if ((cast ((cast !_Runtime.strictEquals(owner, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(owner, body) : Bool)) : Bool)) {
+        _Runtime.throwValue(_Runtime.error('Cannot share a physics collider between rigid bodies'));
+      }
+      if ((cast ((cast !_Runtime.strictEquals((cast body : RigidBody3D).type, 'static') : Bool) && (cast (cast World.isPhysics3DStaticSurfaceCollider__world(({ final __callArgument3:Dynamic = collider; __callArgument3; })) : Bool) : Bool)) : Bool)) {
+        _Runtime.throwValue(_Runtime.error('Triangle-mesh and heightfield colliders require a static rigid body'));
+      }
+    }
     ((cast body : RigidBody3D).index = world.nextBodyIndex);
     (world.nextBodyIndex += 1.0);
     _Runtime.callProperty(world.bodies, 'push', cast ([body] : Array<Dynamic>));
     ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).set((cast body : RigidBody3D).index, (cast body)));
-    refreshRigidBody3DWorldInertia(({ final __callArgument0:Dynamic = body; __callArgument0; }));
+    ((cast physics3DBodyOwners : flighthq._internal._WeakMap<RigidBody3D, Physics3DWorld>).set(body, (cast world)));
+    for (collider in _Runtime.iterable(colliders)) {
+      ((cast physics3DColliderOwners : flighthq._internal._WeakMap<Physics3DCollider, RigidBody3D>).set(collider, (cast body)));
+    }
+    if ((cast ((cast (cast colliders : flighthq._internal._Set<Physics3DCollider>).size : Float) > (cast 0.0 : Float)) : Bool)) { updateRigidBody3DMassData(({ final __callArgument6:Dynamic = body; __callArgument6; })); }
+    refreshRigidBody3DWorldInertia(({ final __callArgument7:Dynamic = body; __callArgument7; }));
+    synchronizePhysics3DBroadphase(({ final __callArgument8:Dynamic = world; __callArgument8; }));
     return cast (cast body : RigidBody3D).index;
     return cast null;
   }
 
-  public static function applyPhysics3DForce(body:RigidBody3D, x:Float, y:Float, z:Float):Void {
-    if ((cast !_Runtime.strictEquals((cast body : RigidBody3D).type, 'dynamic') : Bool)) { return; }
-    wakePhysics3DBody(({ final __callArgument1:Dynamic = body; __callArgument1; }));
+  public static function addPhysics3DCollider(world:Physics3DWorld, body:RigidBody3D, collider:Physics3DCollider):Physics3DCollider {
+    var bodyOwner:Null<Physics3DWorld> = cast _Runtime.UNDEFINED;
+    var owner:Null<RigidBody3D> = cast _Runtime.UNDEFINED;
+    assertPhysics3DWorldNotStepping(({ final __callArgument9:Dynamic = world; __callArgument9; }));
+    bodyOwner = ((cast physics3DBodyOwners : flighthq._internal._WeakMap<RigidBody3D, Physics3DWorld>).get(body));
+    if ((cast ((cast !_Runtime.strictEquals(bodyOwner, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(bodyOwner, world) : Bool)) : Bool)) {
+      _Runtime.throwValue(_Runtime.error('Cannot mutate a rigid body through a physics world that does not own it'));
+    }
+    if ((cast _Runtime.includes((cast body : RigidBody3D).colliders, collider) : Bool)) {
+      _Runtime.throwValue(_Runtime.error('Cannot add the same physics collider to a rigid body twice'));
+    }
+    owner = ((cast physics3DColliderOwners : flighthq._internal._WeakMap<Physics3DCollider, RigidBody3D>).get(collider));
+    if ((cast ((cast !_Runtime.strictEquals(owner, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(owner, body) : Bool)) : Bool)) {
+      _Runtime.throwValue(_Runtime.error('Cannot share a physics collider between rigid bodies'));
+    }
+    if ((cast ((cast !_Runtime.strictEquals((cast body : RigidBody3D).type, 'static') : Bool) && (cast (cast World.isPhysics3DStaticSurfaceCollider__world(({ final __callArgument10:Dynamic = collider; __callArgument10; })) : Bool) : Bool)) : Bool)) {
+      _Runtime.throwValue(_Runtime.error('Triangle-mesh and heightfield colliders require a static rigid body'));
+    }
+    _Runtime.callProperty((cast body : RigidBody3D).colliders, 'push', cast ([collider] : Array<Dynamic>));
+    ((cast physics3DColliderOwners : flighthq._internal._WeakMap<Physics3DCollider, RigidBody3D>).set(collider, (cast body)));
+    updateRigidBody3DMassData(({ final __callArgument11:Dynamic = body; __callArgument11; }));
+    refreshRigidBody3DWorldInertia(({ final __callArgument12:Dynamic = body; __callArgument12; }));
+    if ((cast _Runtime.strictEquals(((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get((cast body : RigidBody3D).index)), body) : Bool)) {
+      World.invalidatePhysics3DBodyConstraints__world(({ final __callArgument13:Dynamic = world; __callArgument13; }), (cast (cast body : RigidBody3D).index : Float));
+      wakePhysics3DBody(({ final __callArgument14:Dynamic = body; __callArgument14; }));
+      synchronizePhysics3DBroadphase(({ final __callArgument15:Dynamic = world; __callArgument15; }));
+    }
+    return cast collider;
+    return cast null;
+  }
+
+  public static function applyPhysics3DForce(body:RigidBody3D, x:Float, y:Float, z:Float):Bool {
+    assertPhysics3DBodyNotStepping(({ final __callArgument16:Dynamic = body; __callArgument16; }));
+    if ((cast ((cast !_Runtime.strictEquals((cast body : RigidBody3D).type, 'dynamic') : Bool) || (cast !(cast (cast World.isFinitePhysics3DVector__world((cast x : Float), (cast y : Float), (cast z : Float)) : Bool) : Bool) : Bool)) : Bool)) { return cast false; }
     ((cast body : RigidBody3D).forceX += x);
     ((cast body : RigidBody3D).forceY += y);
     ((cast body : RigidBody3D).forceZ += z);
+    if ((cast ((cast ((cast !_Runtime.strictEquals(x, 0.0) : Bool) || (cast !_Runtime.strictEquals(y, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(z, 0.0) : Bool)) : Bool)) { wakePhysics3DBody(({ final __callArgument17:Dynamic = body; __callArgument17; })); }
+    return cast true;
+    return cast null;
   }
 
-  public static function applyPhysics3DForceAtPoint(body:RigidBody3D, x:Float, y:Float, z:Float, pointX:Float, pointY:Float, pointZ:Float):Void {
-    var rX:Float = cast _Runtime.UNDEFINED;
-    var rY:Float = cast _Runtime.UNDEFINED;
-    var rZ:Float = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals((cast body : RigidBody3D).type, 'dynamic') : Bool)) { return; }
-    wakePhysics3DBody(({ final __callArgument2:Dynamic = body; __callArgument2; }));
+  public static function applyPhysics3DForceAtPoint(body:RigidBody3D, x:Float, y:Float, z:Float, pointX:Float, pointY:Float, pointZ:Float):Bool {
+    assertPhysics3DBodyNotStepping(({ final __callArgument18:Dynamic = body; __callArgument18; }));
+    if ((cast ((cast ((cast !_Runtime.strictEquals((cast body : RigidBody3D).type, 'dynamic') : Bool) || (cast !(cast (cast World.isFinitePhysics3DVector__world((cast x : Float), (cast y : Float), (cast z : Float)) : Bool) : Bool) : Bool)) : Bool) || (cast !(cast (cast World.isFinitePhysics3DVector__world((cast pointX : Float), (cast pointY : Float), (cast pointZ : Float)) : Bool) : Bool) : Bool)) : Bool)) {
+      return cast false;
+    }
     ((cast body : RigidBody3D).forceX += x);
     ((cast body : RigidBody3D).forceY += y);
     ((cast body : RigidBody3D).forceZ += z);
-    writeRigidBody3DWorldCenter(({ final __callArgument3:Dynamic = body; __callArgument3; }), ({ final __callArgument4:Dynamic = World.scratchCenter__world; __callArgument4; }));
-    rX = (pointX - flighthq._internal._StaticIndex.readFloatArrayTyped((cast World.scratchCenter__world : Array<Float>), (cast 0.0 : Float)));
-    rY = (pointY - flighthq._internal._StaticIndex.readFloatArrayTyped((cast World.scratchCenter__world : Array<Float>), (cast 1.0 : Float)));
-    rZ = (pointZ - flighthq._internal._StaticIndex.readFloatArrayTyped((cast World.scratchCenter__world : Array<Float>), (cast 2.0 : Float)));
-    ((cast body : RigidBody3D).torqueX += ((rY * z) - (rZ * y)));
-    ((cast body : RigidBody3D).torqueY += ((rZ * x) - (rX * z)));
-    ((cast body : RigidBody3D).torqueZ += ((rX * y) - (rY * x)));
+    if ((cast !(cast (cast body : RigidBody3D).fixedRotation : Bool) : Bool)) {
+      writeRigidBody3DWorldCenter(({ final __callArgument19:Dynamic = body; __callArgument19; }), ({ final __callArgument20:Dynamic = World.scratchCenter__world; __callArgument20; }));
+      var rX:Float = (pointX - flighthq._internal._StaticIndex.readFloatArrayTyped((cast World.scratchCenter__world : Array<Float>), (cast 0.0 : Float)));
+      var rY:Float = (pointY - flighthq._internal._StaticIndex.readFloatArrayTyped((cast World.scratchCenter__world : Array<Float>), (cast 1.0 : Float)));
+      var rZ:Float = (pointZ - flighthq._internal._StaticIndex.readFloatArrayTyped((cast World.scratchCenter__world : Array<Float>), (cast 2.0 : Float)));
+      ((cast body : RigidBody3D).torqueX += ((rY * z) - (rZ * y)));
+      ((cast body : RigidBody3D).torqueY += ((rZ * x) - (rX * z)));
+      ((cast body : RigidBody3D).torqueZ += ((rX * y) - (rY * x)));
+    }
+    if ((cast ((cast ((cast !_Runtime.strictEquals(x, 0.0) : Bool) || (cast !_Runtime.strictEquals(y, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(z, 0.0) : Bool)) : Bool)) { wakePhysics3DBody(({ final __callArgument21:Dynamic = body; __callArgument21; })); }
+    return cast true;
+    return cast null;
   }
 
-  public static function applyPhysics3DLinearImpulse(body:RigidBody3D, x:Float, y:Float, z:Float):Void {
-    if ((cast ((cast !_Runtime.strictEquals((cast body : RigidBody3D).type, 'dynamic') : Bool) || (cast _Runtime.strictEquals((cast body : RigidBody3D).inverseMass, 0.0) : Bool)) : Bool)) { return; }
-    wakePhysics3DBody(({ final __callArgument5:Dynamic = body; __callArgument5; }));
+  public static function applyPhysics3DLinearImpulse(body:RigidBody3D, x:Float, y:Float, z:Float):Bool {
+    assertPhysics3DBodyNotStepping(({ final __callArgument22:Dynamic = body; __callArgument22; }));
+    if ((cast ((cast !_Runtime.strictEquals((cast body : RigidBody3D).type, 'dynamic') : Bool) || (cast !(cast (cast World.isFinitePhysics3DVector__world((cast x : Float), (cast y : Float), (cast z : Float)) : Bool) : Bool) : Bool)) : Bool)) { return cast false; }
     ((cast body : RigidBody3D).velocityX += (x * (cast body : RigidBody3D).inverseMass));
     ((cast body : RigidBody3D).velocityY += (y * (cast body : RigidBody3D).inverseMass));
     ((cast body : RigidBody3D).velocityZ += (z * (cast body : RigidBody3D).inverseMass));
+    if ((cast ((cast ((cast !_Runtime.strictEquals(x, 0.0) : Bool) || (cast !_Runtime.strictEquals(y, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(z, 0.0) : Bool)) : Bool)) { wakePhysics3DBody(({ final __callArgument23:Dynamic = body; __callArgument23; })); }
+    return cast true;
+    return cast null;
   }
 
-  public static function applyPhysics3DTorque(body:RigidBody3D, x:Float, y:Float, z:Float):Void {
-    if ((cast !_Runtime.strictEquals((cast body : RigidBody3D).type, 'dynamic') : Bool)) { return; }
-    wakePhysics3DBody(({ final __callArgument6:Dynamic = body; __callArgument6; }));
+  public static function applyPhysics3DLinearImpulseAtPoint(body:RigidBody3D, x:Float, y:Float, z:Float, pointX:Float, pointY:Float, pointZ:Float):Bool {
+    assertPhysics3DBodyNotStepping(({ final __callArgument24:Dynamic = body; __callArgument24; }));
+    if ((cast ((cast ((cast !_Runtime.strictEquals((cast body : RigidBody3D).type, 'dynamic') : Bool) || (cast !(cast (cast World.isFinitePhysics3DVector__world((cast x : Float), (cast y : Float), (cast z : Float)) : Bool) : Bool) : Bool)) : Bool) || (cast !(cast (cast World.isFinitePhysics3DVector__world((cast pointX : Float), (cast pointY : Float), (cast pointZ : Float)) : Bool) : Bool) : Bool)) : Bool)) {
+      return cast false;
+    }
+    ((cast body : RigidBody3D).velocityX += (x * (cast body : RigidBody3D).inverseMass));
+    ((cast body : RigidBody3D).velocityY += (y * (cast body : RigidBody3D).inverseMass));
+    ((cast body : RigidBody3D).velocityZ += (z * (cast body : RigidBody3D).inverseMass));
+    if ((cast !(cast (cast body : RigidBody3D).fixedRotation : Bool) : Bool)) {
+      writeRigidBody3DWorldCenter(({ final __callArgument25:Dynamic = body; __callArgument25; }), ({ final __callArgument26:Dynamic = World.scratchCenter__world; __callArgument26; }));
+      var rX:Float = (pointX - flighthq._internal._StaticIndex.readFloatArrayTyped((cast World.scratchCenter__world : Array<Float>), (cast 0.0 : Float)));
+      var rY:Float = (pointY - flighthq._internal._StaticIndex.readFloatArrayTyped((cast World.scratchCenter__world : Array<Float>), (cast 1.0 : Float)));
+      var rZ:Float = (pointZ - flighthq._internal._StaticIndex.readFloatArrayTyped((cast World.scratchCenter__world : Array<Float>), (cast 2.0 : Float)));
+      var angularImpulseX:Float = ((rY * z) - (rZ * y));
+      var angularImpulseY:Float = ((rZ * x) - (rX * z));
+      var angularImpulseZ:Float = ((rX * y) - (rY * x));
+      refreshRigidBody3DWorldInertia(({ final __callArgument27:Dynamic = body; __callArgument27; }));
+      World.readRigidBody3DWorldInverseInertia__world(({ final __callArgument28:Dynamic = body; __callArgument28; }), ({ final __callArgument29:Dynamic = World.scratchInverseInertia__world; __callArgument29; }));
+      applySymmetricTensor(({ final __callArgument30:Dynamic = World.scratchInverseInertia__world; __callArgument30; }), (cast angularImpulseX : Float), (cast angularImpulseY : Float), (cast angularImpulseZ : Float), ({ final __callArgument31:Dynamic = World.scratchVector__world; __callArgument31; }));
+      ((cast body : RigidBody3D).angularVelocityX += flighthq._internal._StaticIndex.readFloatArrayTyped((cast World.scratchVector__world : Array<Float>), (cast 0.0 : Float)));
+      ((cast body : RigidBody3D).angularVelocityY += flighthq._internal._StaticIndex.readFloatArrayTyped((cast World.scratchVector__world : Array<Float>), (cast 1.0 : Float)));
+      ((cast body : RigidBody3D).angularVelocityZ += flighthq._internal._StaticIndex.readFloatArrayTyped((cast World.scratchVector__world : Array<Float>), (cast 2.0 : Float)));
+    }
+    if ((cast ((cast ((cast !_Runtime.strictEquals(x, 0.0) : Bool) || (cast !_Runtime.strictEquals(y, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(z, 0.0) : Bool)) : Bool)) { wakePhysics3DBody(({ final __callArgument32:Dynamic = body; __callArgument32; })); }
+    return cast true;
+    return cast null;
+  }
+
+  public static function applyPhysics3DTorque(body:RigidBody3D, x:Float, y:Float, z:Float):Bool {
+    assertPhysics3DBodyNotStepping(({ final __callArgument33:Dynamic = body; __callArgument33; }));
+    if ((cast ((cast ((cast !_Runtime.strictEquals((cast body : RigidBody3D).type, 'dynamic') : Bool) || (cast (cast body : RigidBody3D).fixedRotation : Bool)) : Bool) || (cast !(cast (cast World.isFinitePhysics3DVector__world((cast x : Float), (cast y : Float), (cast z : Float)) : Bool) : Bool) : Bool)) : Bool)) { return cast false; }
     ((cast body : RigidBody3D).torqueX += x);
     ((cast body : RigidBody3D).torqueY += y);
     ((cast body : RigidBody3D).torqueZ += z);
+    if ((cast ((cast ((cast !_Runtime.strictEquals(x, 0.0) : Bool) || (cast !_Runtime.strictEquals(y, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(z, 0.0) : Bool)) : Bool)) { wakePhysics3DBody(({ final __callArgument34:Dynamic = body; __callArgument34; })); }
+    return cast true;
+    return cast null;
+  }
+
+  public static function createPhysics3DCollider(local:CollisionColliderShape3D, ?material:Physics3DMaterial, ?filter:Physics3DCollisionFilter, sensor:Bool = false):Physics3DCollider {
+    var ownedLocal:CollisionColliderShape3D = cast _Runtime.UNDEFINED;
+    ownedLocal = (cast World.cloneCollisionColliderShape3D__world(({ final __callArgument35:Dynamic = local; __callArgument35; })) : CollisionColliderShape3D);
+    return cast { local: ownedLocal, world: (cast createPhysics3DColliderWorldShape(({ final __callArgument36:Dynamic = ownedLocal; __callArgument36; })) : CollisionColliderShape3D), material: { density: _Runtime.coalesce(({ final __structural37 = material; __structural37 == null ? _Runtime.UNDEFINED : (cast __structural37 : { var density:Float; }).density; }), function():Dynamic return cast 1.0), friction: _Runtime.coalesce(({ final __structural38 = material; __structural38 == null ? _Runtime.UNDEFINED : (cast __structural38 : { var friction:Float; }).friction; }), function():Dynamic return cast 0.2), restitution: _Runtime.coalesce(({ final __structural39 = material; __structural39 == null ? _Runtime.UNDEFINED : (cast __structural39 : { var restitution:Float; }).restitution; }), function():Dynamic return cast 0.0) }, filter: { categoryBits: _Runtime.coalesce(({ final __structural40 = filter; __structural40 == null ? _Runtime.UNDEFINED : (cast __structural40 : { var categoryBits:Float; }).categoryBits; }), function():Dynamic return cast 1.0), maskBits: _Runtime.coalesce(({ final __structural41 = filter; __structural41 == null ? _Runtime.UNDEFINED : (cast __structural41 : { var maskBits:Float; }).maskBits; }), function():Dynamic return cast 65535.0), groupIndex: _Runtime.coalesce(({ final __structural42 = filter; __structural42 == null ? _Runtime.UNDEFINED : (cast __structural42 : { var groupIndex:Float; }).groupIndex; }), function():Dynamic return cast 0.0) }, sensor: sensor };
+    return cast null;
   }
 
   public static function createPhysics3DSequentialImpulseConfig():Physics3DSequentialImpulseConfig {
@@ -79,17 +212,17 @@ class World {
   }
 
   public static function createPhysics3DSolverConfig():Physics3DSolverConfig {
-    return cast { allowSleeping: true, sleepLinearThreshold: 0.01, sleepAngularThreshold: 0.02, timeToSleep: 0.5, substeps: 1.0, continuousCollision: false, maxCcdSubsteps: 4.0, sequentialImpulse: (cast createPhysics3DSequentialImpulseConfig() : Physics3DSequentialImpulseConfig) };
+    return cast { allowSleeping: true, sleepLinearThreshold: 0.01, sleepAngularThreshold: 0.02, timeToSleep: 0.5, substeps: 1.0, continuousCollision: false, maxCcdSubsteps: 4.0, maxCcdRotationSubsteps: 64.0, sequentialImpulse: (cast createPhysics3DSequentialImpulseConfig() : Physics3DSequentialImpulseConfig) };
     return cast null;
   }
 
-  public static function createPhysics3DWorld():Physics3DWorld {
-    return cast { version: Physics3DWorldVersion, bodies: cast ([] : Array<Dynamic>), bodyByIndex: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), contacts: cast ([] : Array<Dynamic>), joints: cast ([] : Array<Dynamic>), jointSolvers: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), jointCollisionSuppressions: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), events: { began: cast ([] : Array<Dynamic>), ended: cast ([] : Array<Dynamic>) }, contactHooks: { preSolve: null, postSolve: null }, solver: { constraints: cast ([] : Array<Dynamic>), constraintByPair: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) }, config: (cast createPhysics3DSolverConfig() : Physics3DSolverConfig), islandParents: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), islandSleepTimers: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), solveIslandByRoot: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), solveIslandRoots: cast ([] : Array<Dynamic>), solveIslandBodyStarts: cast ([] : Array<Dynamic>), solveIslandBodyCounts: cast ([] : Array<Dynamic>), solveIslandContactStarts: cast ([] : Array<Dynamic>), solveIslandContactCounts: cast ([] : Array<Dynamic>), solveIslandJointStarts: cast ([] : Array<Dynamic>), solveIslandJointCounts: cast ([] : Array<Dynamic>), solveIslandBodyIndices: cast ([] : Array<Dynamic>), solveIslandContactIndices: cast ([] : Array<Dynamic>), solveIslandJointIndices: cast ([] : Array<Dynamic>), solveIslandCursors: cast ([] : Array<Dynamic>), gravityX: 0.0, gravityY: -9.80665, gravityZ: 0.0, previousTimestep: 0.0, nextBodyIndex: 0.0 };
+  public static function createPhysics3DWorld(?index:SpatialIndexBackend3D):Physics3DWorld {
+    return cast { version: Physics3DWorldVersion, bodies: cast ([] : Array<Dynamic>), bodyByIndex: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), index: _Runtime.coalesce(index, function():Dynamic return cast (cast createUniformGridSpatialBackend3D((cast 1.0 : Float)) : SpatialIndexBackend3D)), contacts: cast ([] : Array<Dynamic>), joints: cast ([] : Array<Dynamic>), jointSolvers: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), jointCollisionSuppressions: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), events: { began: cast ([] : Array<Dynamic>), ended: cast ([] : Array<Dynamic>) }, jointEvents: { broke: cast ([] : Array<Dynamic>) }, contactHooks: { preSolve: null, postSolve: null }, solver: { constraints: cast ([] : Array<Dynamic>), constraintByContact: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) }, config: (cast createPhysics3DSolverConfig() : Physics3DSolverConfig), islandParents: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), islandSleepTimers: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), solveIslandByRoot: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), solveIslandRoots: cast ([] : Array<Dynamic>), solveIslandBodyStarts: cast ([] : Array<Dynamic>), solveIslandBodyCounts: cast ([] : Array<Dynamic>), solveIslandContactStarts: cast ([] : Array<Dynamic>), solveIslandContactCounts: cast ([] : Array<Dynamic>), solveIslandJointStarts: cast ([] : Array<Dynamic>), solveIslandJointCounts: cast ([] : Array<Dynamic>), solveIslandBodyIndices: cast ([] : Array<Dynamic>), solveIslandContactIndices: cast ([] : Array<Dynamic>), solveIslandJointIndices: cast ([] : Array<Dynamic>), solveIslandCursors: cast ([] : Array<Dynamic>), gravityX: 0.0, gravityY: -9.80665, gravityZ: 0.0, previousTimestep: 0.0, nextBodyIndex: 0.0 };
     return cast null;
   }
 
   public static function createRigidBody3D(type:Physics3DBodyType = 'dynamic'):RigidBody3D {
-    return cast { index: -1.0, type: type, x: 0.0, y: 0.0, z: 0.0, orientationX: 0.0, orientationY: 0.0, orientationZ: 0.0, orientationW: 1.0, velocityX: 0.0, velocityY: 0.0, velocityZ: 0.0, angularVelocityX: 0.0, angularVelocityY: 0.0, angularVelocityZ: 0.0, forceX: 0.0, forceY: 0.0, forceZ: 0.0, torqueX: 0.0, torqueY: 0.0, torqueZ: 0.0, mass: 0.0, inverseMass: 0.0, inertiaXX: 0.0, inertiaYY: 0.0, inertiaZZ: 0.0, inertiaXY: 0.0, inertiaXZ: 0.0, inertiaYZ: 0.0, inverseInertiaXX: 0.0, inverseInertiaYY: 0.0, inverseInertiaZZ: 0.0, inverseInertiaXY: 0.0, inverseInertiaXZ: 0.0, inverseInertiaYZ: 0.0, inverseInertiaWorldXX: 0.0, inverseInertiaWorldYY: 0.0, inverseInertiaWorldZZ: 0.0, inverseInertiaWorldXY: 0.0, inverseInertiaWorldXZ: 0.0, inverseInertiaWorldYZ: 0.0, centerX: 0.0, centerY: 0.0, centerZ: 0.0, linearDamping: 0.0, angularDamping: 0.0, gravityScale: 1.0, fixedRotation: false, bullet: false, sleeping: false, sleepEnabled: true, sleepTimer: 0.0, material: { density: 1.0, friction: 0.2, restitution: 0.0 }, filter: { categoryBits: 1.0, maskBits: 65535.0, groupIndex: 0.0 } };
+    return cast { index: -1.0, type: type, x: 0.0, y: 0.0, z: 0.0, orientationX: 0.0, orientationY: 0.0, orientationZ: 0.0, orientationW: 1.0, velocityX: 0.0, velocityY: 0.0, velocityZ: 0.0, angularVelocityX: 0.0, angularVelocityY: 0.0, angularVelocityZ: 0.0, forceX: 0.0, forceY: 0.0, forceZ: 0.0, torqueX: 0.0, torqueY: 0.0, torqueZ: 0.0, mass: 0.0, inverseMass: 0.0, inertiaXX: 0.0, inertiaYY: 0.0, inertiaZZ: 0.0, inertiaXY: 0.0, inertiaXZ: 0.0, inertiaYZ: 0.0, inverseInertiaXX: 0.0, inverseInertiaYY: 0.0, inverseInertiaZZ: 0.0, inverseInertiaXY: 0.0, inverseInertiaXZ: 0.0, inverseInertiaYZ: 0.0, inverseInertiaWorldXX: 0.0, inverseInertiaWorldYY: 0.0, inverseInertiaWorldZZ: 0.0, inverseInertiaWorldXY: 0.0, inverseInertiaWorldXZ: 0.0, inverseInertiaWorldYZ: 0.0, centerX: 0.0, centerY: 0.0, centerZ: 0.0, linearDamping: 0.0, angularDamping: 0.0, gravityScale: 1.0, fixedRotation: false, bullet: false, sleeping: false, sleepEnabled: true, sleepTimer: 0.0, colliders: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
@@ -98,54 +231,170 @@ class World {
     return cast null;
   }
 
+  public static function hydratePhysics3DWorld(world:Physics3DWorld):Bool {
+    var serializedVersion:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var version:Float = cast _Runtime.UNDEFINED;
+    var legacyWorld:{ @:optional var index:Null<SpatialIndexBackend3D>; @:optional var jointEvents:Null<Physics3DJointEvents>; var solver:{ >Physics3DSequentialImpulseState, @:optional var constraintByPair:Null<flighthq._internal._Map<Float, Physics3DContactConstraint>>; }; } = cast _Runtime.UNDEFINED;
+    var legacyConfig:{ >Physics3DSolverConfig, @:optional var maxCcdRotationSubsteps:Null<Float>; } = cast _Runtime.UNDEFINED;
+    assertPhysics3DWorldNotStepping(({ final __callArgument43:Dynamic = world; __callArgument43; }));
+    serializedVersion = (cast (cast (cast world : flighthq._internal._Any) : { @:optional var version:flighthq._internal._Any; }) : { @:optional var version:flighthq._internal._Any; }).version;
+    if ((cast ((cast !_Runtime.strictEquals(serializedVersion, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Runtime.typeofValue(serializedVersion), 'number') : Bool)) : Bool)) { return cast false; }
+    version = _Runtime.coalesce(serializedVersion, function():Dynamic return cast 0.0);
+    if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([version] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast version : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast version : Float) > (cast Physics3DWorldVersion : Float)) : Bool)) : Bool)) {
+      return cast false;
+    }
+    if ((cast _Runtime.strictEquals(version, Physics3DWorldVersion) : Bool)) { return cast true; }
+    legacyWorld = (cast (cast world : flighthq._internal._Any) : { @:optional var index:SpatialIndexBackend3D; @:optional var jointEvents:flighthq._internal._IndexedAccess<Physics3DWorld, String>; var solver:flighthq._internal._Intersection2<flighthq._internal._IndexedAccess<Physics3DWorld, String>, { @:optional var constraintByPair:flighthq._internal._Map<Float, Physics3DContactConstraint>; }>; });
+    legacyConfig = (cast world.config : flighthq._internal._Intersection2<Physics3DSolverConfig, { @:optional var maxCcdRotationSubsteps:Float; }>);
+    if ((cast ((cast version : Float) < (cast 2.0 : Float)) : Bool)) {
+      ({ final __nullishOwner44 = legacyWorld; final __nullishValue45:Null<SpatialIndexBackend3D> = cast (cast __nullishOwner44 : { @:optional var index:Null<SpatialIndexBackend3D>; @:optional var jointEvents:Null<Physics3DJointEvents>; var solver:{ >Physics3DSequentialImpulseState, @:optional var constraintByPair:Null<flighthq._internal._Map<Float, Physics3DContactConstraint>>; }; }).index; __nullishValue45 == null ? ((cast __nullishOwner44 : { @:optional var index:Null<SpatialIndexBackend3D>; @:optional var jointEvents:Null<Physics3DJointEvents>; var solver:{ >Physics3DSequentialImpulseState, @:optional var constraintByPair:Null<flighthq._internal._Map<Float, Physics3DContactConstraint>>; }; }).index = (cast (cast createUniformGridSpatialBackend3D((cast 1.0 : Float)) : SpatialIndexBackend3D) : Null<SpatialIndexBackend3D>)) : (cast __nullishValue45 : Null<SpatialIndexBackend3D>); });
+      for (body in _Runtime.iterable(world.bodies)) {
+        var legacyBody:{ >RigidBody3D, @:optional var colliders:Null<Array<Physics3DCollider>>; } = (cast body : flighthq._internal._Intersection2<RigidBody3D, { @:optional var colliders:Array<Physics3DCollider>; }>);
+        ({ final __nullishOwner48 = legacyBody; final __nullishValue49:Null<Array<Physics3DCollider>> = cast (cast __nullishOwner48 : { var colliders:Array<Physics3DCollider>; }).colliders; __nullishValue49 == null ? ((cast __nullishOwner48 : { var colliders:Array<Physics3DCollider>; }).colliders = (cast cast ([] : Array<Dynamic>) : Array<Physics3DCollider>)) : (cast __nullishValue49 : Array<Physics3DCollider>); });
+      }
+      for (contact in _Runtime.iterable(world.contacts)) {
+        var legacyContact:{ >Physics3DContact, @:optional var colliderA:Null<Float>; @:optional var colliderB:Null<Float>; } = (cast contact : flighthq._internal._Intersection2<Physics3DContact, { @:optional var colliderA:Float; @:optional var colliderB:Float; }>);
+        ({ final __nullishOwner52 = legacyContact; final __nullishValue53:Null<Float> = cast (cast __nullishOwner52 : { var colliderA:Float; }).colliderA; __nullishValue53 == null ? ((cast __nullishOwner52 : { var colliderA:Float; }).colliderA = (cast 0.0 : Float)) : (cast __nullishValue53 : Float); });
+        ({ final __nullishOwner54 = legacyContact; final __nullishValue55:Null<Float> = cast (cast __nullishOwner54 : { var colliderB:Float; }).colliderB; __nullishValue55 == null ? ((cast __nullishOwner54 : { var colliderB:Float; }).colliderB = (cast 0.0 : Float)) : (cast __nullishValue55 : Float); });
+      }
+    }
+    ({ final __nullishOwner56 = legacyWorld; final __nullishValue57:Null<Physics3DJointEvents> = cast (cast __nullishOwner56 : { @:optional var index:Null<SpatialIndexBackend3D>; @:optional var jointEvents:Null<Physics3DJointEvents>; var solver:{ >Physics3DSequentialImpulseState, @:optional var constraintByPair:Null<flighthq._internal._Map<Float, Physics3DContactConstraint>>; }; }).jointEvents; __nullishValue57 == null ? ((cast __nullishOwner56 : { @:optional var index:Null<SpatialIndexBackend3D>; @:optional var jointEvents:Null<Physics3DJointEvents>; var solver:{ >Physics3DSequentialImpulseState, @:optional var constraintByPair:Null<flighthq._internal._Map<Float, Physics3DContactConstraint>>; }; }).jointEvents = (cast { broke: cast ([] : Array<Dynamic>) } : Null<Physics3DJointEvents>)) : (cast __nullishValue57 : Null<Physics3DJointEvents>); });
+    ({ final __nullishOwner58 = legacyConfig; final __nullishValue59:Null<Float> = cast (cast __nullishOwner58 : { var maxCcdRotationSubsteps:Float; }).maxCcdRotationSubsteps; __nullishValue59 == null ? ((cast __nullishOwner58 : { var maxCcdRotationSubsteps:Float; }).maxCcdRotationSubsteps = (cast (cast (cast createPhysics3DSolverConfig() : Physics3DSolverConfig) : Physics3DSolverConfig).maxCcdRotationSubsteps : Float)) : (cast __nullishValue59 : Float); });
+    ((cast world.solver : Physics3DSequentialImpulseState).constraints = cast ([] : Array<Dynamic>));
+    ((cast world.solver : Physics3DSequentialImpulseState).constraintByContact = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []));
+    _Runtime.deleteField((cast legacyWorld : { @:optional var index:Null<SpatialIndexBackend3D>; @:optional var jointEvents:Null<Physics3DJointEvents>; var solver:{ >Physics3DSequentialImpulseState, @:optional var constraintByPair:Null<flighthq._internal._Map<Float, Physics3DContactConstraint>>; }; }).solver, 'constraintByPair');
+    (world.version = cast (Physics3DWorldVersion : Float));
+    return cast true;
+    return cast null;
+  }
+
+  public static function invalidatePhysics3DCollider(world:Physics3DWorld, body:RigidBody3D, collider:Physics3DCollider):Bool {
+    var bodyOwner:Null<Physics3DWorld> = cast _Runtime.UNDEFINED;
+    assertPhysics3DWorldNotStepping(({ final __callArgument60:Dynamic = world; __callArgument60; }));
+    bodyOwner = ((cast physics3DBodyOwners : flighthq._internal._WeakMap<RigidBody3D, Physics3DWorld>).get(body));
+    if ((cast ((cast !_Runtime.strictEquals(bodyOwner, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(bodyOwner, world) : Bool)) : Bool)) { return cast false; }
+    if ((cast !(cast _Runtime.includes((cast body : RigidBody3D).colliders, collider) : Bool) : Bool)) { return cast false; }
+    ((cast collider : Physics3DCollider).world = (cast createPhysics3DColliderWorldShape((cast collider : Physics3DCollider).local) : CollisionColliderShape3D));
+    updateRigidBody3DMassData(({ final __callArgument61:Dynamic = body; __callArgument61; }));
+    refreshRigidBody3DWorldInertia(({ final __callArgument62:Dynamic = body; __callArgument62; }));
+    if ((cast _Runtime.strictEquals(((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get((cast body : RigidBody3D).index)), body) : Bool)) {
+      World.invalidatePhysics3DBodyConstraints__world(({ final __callArgument63:Dynamic = world; __callArgument63; }), (cast (cast body : RigidBody3D).index : Float));
+      wakePhysics3DBody(({ final __callArgument64:Dynamic = body; __callArgument64; }));
+      synchronizePhysics3DBroadphase(({ final __callArgument65:Dynamic = world; __callArgument65; }));
+    }
+    return cast true;
+    return cast null;
+  }
+
   public static function removePhysics3DBody(world:Physics3DWorld, body:RigidBody3D):Bool {
     var at:Float = cast _Runtime.UNDEFINED;
     var index:Float = cast _Runtime.UNDEFINED;
-    var removedJoint:Bool = cast _Runtime.UNDEFINED;
+    assertPhysics3DWorldNotStepping(({ final __callArgument66:Dynamic = world; __callArgument66; }));
     at = _Runtime.callProperty(world.bodies, 'indexOf', cast ([body] : Array<Dynamic>));
     if ((cast ((cast at : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
     _Runtime.splice(world.bodies, Std.int(at), Std.int(1.0), []);
     ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).delete_((cast body : RigidBody3D).index));
     index = (cast body : RigidBody3D).index;
-    {
-      var i:Float = _Runtime.subtractNumbers(_Runtime.field(world.contacts, 'length'), 1.0);
-      while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        var contact:Physics3DContact = flighthq._internal._StaticIndex.readArray(world.contacts, i);
-        if ((cast ((cast _Runtime.strictEquals(contact.bodyA, index) : Bool) || (cast _Runtime.strictEquals(contact.bodyB, index) : Bool)) : Bool)) { _Runtime.splice(world.contacts, Std.int(i), Std.int(1.0), []); }
-        i--;
-      }
-    }
-    removedJoint = false;
+    World.invalidatePhysics3DBodyContacts__world(({ final __callArgument67:Dynamic = world; __callArgument67; }), (cast index : Float));
     {
       var i:Float = _Runtime.subtractNumbers(_Runtime.field(world.joints, 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
         var joint:Physics3DJoint = flighthq._internal._StaticIndex.readArray(world.joints, i);
-        if ((cast ((cast !_Runtime.strictEquals((cast joint : Physics3DJoint).bodyA, index) : Bool) && (cast !_Runtime.strictEquals((cast joint : Physics3DJoint).bodyB, index) : Bool)) : Bool)) { i--; continue; }
+        var solver:Null<Physics3DJointSolver> = ((cast world.jointSolvers : flighthq._internal._Map<String, Physics3DJointSolver>).get((cast joint : Physics3DJoint).kind));
+        var usesBodyA:Bool = !_Runtime.strictEquals(({ final __structural68 = solver; __structural68 == null ? _Runtime.UNDEFINED : (cast __structural68 : { @:optional var usesBodyA:Null<Bool>; }).usesBodyA; }), false);
+        var removesBodyA:Bool = ((cast usesBodyA : Bool) && (cast _Runtime.strictEquals((cast joint : Physics3DJoint).bodyA, index) : Bool));
+        var removesBodyB:Bool = _Runtime.strictEquals((cast joint : Physics3DJoint).bodyB, index);
+        if ((cast ((cast !(cast removesBodyA : Bool) : Bool) && (cast !(cast removesBodyB : Bool) : Bool)) : Bool)) { i--; continue; }
+        if ((cast ((cast !_Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast usesBodyA : Bool)) : Bool)) {
+          var otherIndex:Float = ((cast removesBodyA : Bool) ? (cast (cast joint : Physics3DJoint).bodyB : Dynamic) : (cast (cast joint : Physics3DJoint).bodyA : Dynamic));
+          var other:Null<RigidBody3D> = (cast findPhysics3DBody(({ final __callArgument69:Dynamic = world; __callArgument69; }), (cast otherIndex : Float)) : Null<RigidBody3D>);
+          if ((cast !_Runtime.strictEquals(other, null) : Bool)) { wakePhysics3DBody(({ final __callArgument70:Dynamic = other; __callArgument70; })); }
+        }
         _Runtime.splice(world.joints, Std.int(i), Std.int(1.0), []);
         ((cast physics3DJointOwners : flighthq._internal._WeakMap<Physics3DJoint, Physics3DWorld>).delete_(joint));
-        (removedJoint = cast (true : Dynamic));
         i--;
       }
     }
-    if ((cast removedJoint : Bool)) { rebuildPhysics3DJointCollisionSuppressions(({ final __callArgument7:Dynamic = world; __callArgument7; })); }
-    ((cast (cast world.solver : { var constraintByPair:flighthq._internal._Map<Float, Physics3DContactConstraint>; }).constraintByPair : flighthq._internal._Map<Float, Physics3DContactConstraint>).clear());
+    rebuildPhysics3DJointCollisionSuppressions(({ final __callArgument71:Dynamic = world; __callArgument71; }));
+    (cast world.index : SpatialIndexBackend3D).removeSpatialObject((cast index : Float));
+    ((cast body : RigidBody3D).index = -1.0);
+    ((cast physics3DBodyOwners : flighthq._internal._WeakMap<RigidBody3D, Physics3DWorld>).delete_(body));
     return cast true;
     return cast null;
   }
 
-  public static function setPhysics3DBodyFixedRotation(body:RigidBody3D, fixedRotation:Bool):Void {
-    if ((cast _Runtime.strictEquals((cast body : RigidBody3D).fixedRotation, fixedRotation) : Bool)) { return; }
+  public static function removePhysics3DCollider(world:Physics3DWorld, body:RigidBody3D, collider:Physics3DCollider):Bool {
+    var bodyOwner:Null<Physics3DWorld> = cast _Runtime.UNDEFINED;
+    var at:Float = cast _Runtime.UNDEFINED;
+    assertPhysics3DWorldNotStepping(({ final __callArgument72:Dynamic = world; __callArgument72; }));
+    bodyOwner = ((cast physics3DBodyOwners : flighthq._internal._WeakMap<RigidBody3D, Physics3DWorld>).get(body));
+    if ((cast ((cast !_Runtime.strictEquals(bodyOwner, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(bodyOwner, world) : Bool)) : Bool)) { return cast false; }
+    at = _Runtime.callProperty((cast body : RigidBody3D).colliders, 'indexOf', cast ([collider] : Array<Dynamic>));
+    if ((cast ((cast at : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
+    _Runtime.splice((cast body : RigidBody3D).colliders, Std.int(at), Std.int(1.0), []);
+    ((cast physics3DColliderOwners : flighthq._internal._WeakMap<Physics3DCollider, RigidBody3D>).delete_(collider));
+    updateRigidBody3DMassData(({ final __callArgument73:Dynamic = body; __callArgument73; }));
+    refreshRigidBody3DWorldInertia(({ final __callArgument74:Dynamic = body; __callArgument74; }));
+    if ((cast _Runtime.strictEquals(((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get((cast body : RigidBody3D).index)), body) : Bool)) {
+      World.invalidatePhysics3DBodyConstraints__world(({ final __callArgument75:Dynamic = world; __callArgument75; }), (cast (cast body : RigidBody3D).index : Float));
+      wakePhysics3DBody(({ final __callArgument76:Dynamic = body; __callArgument76; }));
+      synchronizePhysics3DBroadphase(({ final __callArgument77:Dynamic = world; __callArgument77; }));
+    }
+    return cast true;
+    return cast null;
+  }
+
+  public static function setPhysics3DBodyBullet(body:RigidBody3D, bullet:Bool):Bool {
+    assertPhysics3DBodyNotStepping(({ final __callArgument78:Dynamic = body; __callArgument78; }));
+    if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(bullet), 'boolean') : Bool)) { return cast false; }
+    if ((cast _Runtime.strictEquals((cast body : RigidBody3D).bullet, bullet) : Bool)) { return cast true; }
+    ((cast body : RigidBody3D).bullet = bullet);
+    wakePhysics3DBody(({ final __callArgument79:Dynamic = body; __callArgument79; }));
+    return cast true;
+    return cast null;
+  }
+
+  public static function setPhysics3DBodyFixedRotation(body:RigidBody3D, fixedRotation:Bool):Bool {
+    var world:Null<Physics3DWorld> = cast _Runtime.UNDEFINED;
+    assertPhysics3DBodyNotStepping(({ final __callArgument80:Dynamic = body; __callArgument80; }));
+    if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(fixedRotation), 'boolean') : Bool)) { return cast false; }
+    if ((cast _Runtime.strictEquals((cast body : RigidBody3D).fixedRotation, fixedRotation) : Bool)) { return cast true; }
+    world = ((cast physics3DBodyOwners : flighthq._internal._WeakMap<RigidBody3D, Physics3DWorld>).get(body));
+    if ((cast !_Runtime.strictEquals(world, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { World.invalidatePhysics3DBodyConstraints__world(({ final __callArgument81:Dynamic = world; __callArgument81; }), (cast (cast body : RigidBody3D).index : Float)); }
     ((cast body : RigidBody3D).fixedRotation = fixedRotation);
     if ((cast fixedRotation : Bool)) {
       ((cast body : RigidBody3D).angularVelocityX = 0.0);
       ((cast body : RigidBody3D).angularVelocityY = 0.0);
       ((cast body : RigidBody3D).angularVelocityZ = 0.0);
+      ((cast body : RigidBody3D).torqueX = 0.0);
+      ((cast body : RigidBody3D).torqueY = 0.0);
+      ((cast body : RigidBody3D).torqueZ = 0.0);
     }
-    World.refreshRigidBody3DMass__world(({ final __callArgument8:Dynamic = body; __callArgument8; }));
+    World.refreshRigidBody3DMass__world(({ final __callArgument82:Dynamic = body; __callArgument82; }));
+    wakePhysics3DBody(({ final __callArgument83:Dynamic = body; __callArgument83; }));
+    return cast true;
+    return cast null;
   }
 
-  public static function setPhysics3DBodyTransform(body:RigidBody3D, x:Float, y:Float, z:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Void {
+  public static function setPhysics3DBodySleepEnabled(body:RigidBody3D, sleepEnabled:Bool):Bool {
+    assertPhysics3DBodyNotStepping(({ final __callArgument84:Dynamic = body; __callArgument84; }));
+    if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(sleepEnabled), 'boolean') : Bool)) { return cast false; }
+    if ((cast _Runtime.strictEquals((cast body : RigidBody3D).sleepEnabled, sleepEnabled) : Bool)) { return cast true; }
+    ((cast body : RigidBody3D).sleepEnabled = sleepEnabled);
+    wakePhysics3DBody(({ final __callArgument85:Dynamic = body; __callArgument85; }));
+    return cast true;
+    return cast null;
+  }
+
+  public static function setPhysics3DBodyTransform(body:RigidBody3D, x:Float, y:Float, z:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Bool {
+    var world:Null<Physics3DWorld> = cast _Runtime.UNDEFINED;
     var lengthSquared:Float = cast _Runtime.UNDEFINED;
+    assertPhysics3DBodyNotStepping(({ final __callArgument86:Dynamic = body; __callArgument86; }));
+    if ((cast ((cast ((cast !(cast (cast World.isFinitePhysics3DVector__world((cast x : Float), (cast y : Float), (cast z : Float)) : Bool) : Bool) : Bool) || (cast !(cast (cast World.isFinitePhysics3DVector__world((cast orientationX : Float), (cast orientationY : Float), (cast orientationZ : Float)) : Bool) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([orientationW] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
+      return cast false;
+    }
+    world = ((cast physics3DBodyOwners : flighthq._internal._WeakMap<RigidBody3D, Physics3DWorld>).get(body));
+    if ((cast !_Runtime.strictEquals(world, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { World.invalidatePhysics3DBodyConstraints__world(({ final __callArgument87:Dynamic = world; __callArgument87; }), (cast (cast body : RigidBody3D).index : Float)); }
     ((cast body : RigidBody3D).x = x);
     ((cast body : RigidBody3D).y = y);
     ((cast body : RigidBody3D).z = z);
@@ -162,12 +411,21 @@ class World {
       ((cast body : RigidBody3D).orientationZ = 0.0);
       ((cast body : RigidBody3D).orientationW = 1.0);
     }
-    wakePhysics3DBody(({ final __callArgument9:Dynamic = body; __callArgument9; }));
-    refreshRigidBody3DWorldInertia(({ final __callArgument10:Dynamic = body; __callArgument10; }));
+    wakePhysics3DBody(({ final __callArgument88:Dynamic = body; __callArgument88; }));
+    refreshRigidBody3DWorldInertia(({ final __callArgument89:Dynamic = body; __callArgument89; }));
+    if ((cast !_Runtime.strictEquals(world, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { synchronizePhysics3DBroadphase(({ final __callArgument90:Dynamic = world; __callArgument90; })); }
+    return cast true;
+    return cast null;
   }
 
-  public static function setPhysics3DBodyType(body:RigidBody3D, type:Physics3DBodyType):Void {
-    if ((cast _Runtime.strictEquals((cast body : RigidBody3D).type, type) : Bool)) { return; }
+  public static function setPhysics3DBodyType(body:RigidBody3D, type:Physics3DBodyType):Bool {
+    var world:Null<Physics3DWorld> = cast _Runtime.UNDEFINED;
+    assertPhysics3DBodyNotStepping(({ final __callArgument91:Dynamic = body; __callArgument91; }));
+    if ((cast ((cast ((cast !_Runtime.strictEquals(type, 'dynamic') : Bool) && (cast !_Runtime.strictEquals(type, 'kinematic') : Bool)) : Bool) && (cast !_Runtime.strictEquals(type, 'static') : Bool)) : Bool)) { return cast false; }
+    if ((cast ((cast !_Runtime.strictEquals(type, 'static') : Bool) && (cast _Runtime.callProperty((cast body : RigidBody3D).colliders, 'some', cast ([World.isPhysics3DStaticSurfaceCollider__world] : Array<Dynamic>)) : Bool)) : Bool)) { return cast false; }
+    if ((cast _Runtime.strictEquals((cast body : RigidBody3D).type, type) : Bool)) { return cast true; }
+    world = ((cast physics3DBodyOwners : flighthq._internal._WeakMap<RigidBody3D, Physics3DWorld>).get(body));
+    if ((cast !_Runtime.strictEquals(world, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { World.invalidatePhysics3DBodyConstraints__world(({ final __callArgument92:Dynamic = world; __callArgument92; }), (cast (cast body : RigidBody3D).index : Float)); }
     ((cast body : RigidBody3D).type = type);
     if ((cast _Runtime.strictEquals(type, 'static') : Bool)) {
       ((cast body : RigidBody3D).velocityX = 0.0);
@@ -184,11 +442,15 @@ class World {
     ((cast body : RigidBody3D).torqueX = 0.0);
     ((cast body : RigidBody3D).torqueY = 0.0);
     ((cast body : RigidBody3D).torqueZ = 0.0);
-    World.refreshRigidBody3DMass__world(({ final __callArgument11:Dynamic = body; __callArgument11; }));
-    refreshRigidBody3DWorldInertia(({ final __callArgument12:Dynamic = body; __callArgument12; }));
+    World.refreshRigidBody3DMass__world(({ final __callArgument93:Dynamic = body; __callArgument93; }));
+    refreshRigidBody3DWorldInertia(({ final __callArgument94:Dynamic = body; __callArgument94; }));
+    wakePhysics3DBody(({ final __callArgument95:Dynamic = body; __callArgument95; }));
+    return cast true;
+    return cast null;
   }
 
   public static function wakePhysics3DBody(body:RigidBody3D):Void {
+    assertPhysics3DBodyNotStepping(({ final __callArgument96:Dynamic = body; __callArgument96; }));
     if ((cast _Runtime.strictEquals((cast body : RigidBody3D).type, 'static') : Bool)) { return; }
     ((cast body : RigidBody3D).sleeping = false);
     ((cast body : RigidBody3D).sleepTimer = 0.0);
@@ -226,7 +488,92 @@ class World {
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast (_Runtime.addNumbers(_Runtime.field(body, 'z'), cZ) + (2.0 * ((qX * tY) - (qY * tX)))) : Float));
   }
 
-  public static final Physics3DWorldVersion:Float = 1.0;
+  public static final Physics3DWorldVersion:Float = 4.0;
+
+  public static function cloneCollisionColliderShape3D__world(shape:CollisionColliderShape3D):CollisionColliderShape3D {
+    if ((cast _Runtime.strictEquals((cast shape : { var kind:String; }).kind, 'convex') : Bool)) { return cast { kind: 'convex', points: _Runtime.slice((cast shape : { var points:Array<Float>; }).points, 0, null) }; }
+    if ((cast _Runtime.strictEquals((cast shape : { var kind:String; }).kind, 'triangle-mesh') : Bool)) {
+      return cast _Runtime.mergeObjects([shape, { points: _Runtime.slice(_Runtime.field(shape, 'points'), 0, null) }, { indices: _Runtime.slice(_Runtime.field(shape, 'indices'), 0, null) }]);
+    }
+    if ((cast _Runtime.strictEquals((cast shape : { var kind:String; }).kind, 'heightfield') : Bool)) { return cast _Runtime.mergeObjects([shape, { heights: _Runtime.slice(_Runtime.field(shape, 'heights'), 0, null) }]); }
+    return cast _Runtime.mergeObjects([shape]);
+    return cast null;
+  }
+
+  public static function isPhysics3DStaticSurfaceCollider__world(collider:Physics3DCollider):Bool {
+    return cast ((cast _Runtime.strictEquals((cast _Runtime.field(collider, 'local') : { var kind:String; }).kind, 'triangle-mesh') : Bool) || (cast _Runtime.strictEquals((cast _Runtime.field(collider, 'local') : { var kind:String; }).kind, 'heightfield') : Bool));
+    return cast null;
+  }
+
+  public static function invalidatePhysics3DBodyConstraints__world(world:Physics3DWorld, bodyIndex:Float):Void {
+    World.invalidatePhysics3DBodyContacts__world(({ final __callArgument97:Dynamic = world; __callArgument97; }), (cast bodyIndex : Float));
+    for (joint in _Runtime.iterable(world.joints)) {
+      var solver:Null<Physics3DJointSolver> = ((cast world.jointSolvers : flighthq._internal._Map<String, Physics3DJointSolver>).get((cast joint : Physics3DJoint).kind));
+      var usesBodyA:Bool = !_Runtime.strictEquals(({ final __structural100 = solver; __structural100 == null ? _Runtime.UNDEFINED : (cast __structural100 : { @:optional var usesBodyA:Null<Bool>; }).usesBodyA; }), false);
+      var connectedA:Bool = ((cast usesBodyA : Bool) && (cast _Runtime.strictEquals((cast joint : Physics3DJoint).bodyA, bodyIndex) : Bool));
+      var connectedB:Bool = _Runtime.strictEquals((cast joint : Physics3DJoint).bodyB, bodyIndex);
+      if ((cast ((cast !(cast connectedA : Bool) : Bool) && (cast !(cast connectedB : Bool) : Bool)) : Bool)) { continue; }
+      ({ final __optionalOwner102 = solver; if (__optionalOwner102 != null) { final __optionalCall101 = (cast __optionalOwner102 : { @:optional var clearAccumulatedImpulses:Null<Physics3DJoint->Void>; }).clearAccumulatedImpulses; if (__optionalCall101 != null) __optionalCall101(joint); } });
+      ((cast joint : Physics3DJoint).impulse0 = 0.0);
+      ((cast joint : Physics3DJoint).impulse1 = 0.0);
+      ((cast joint : Physics3DJoint).impulse2 = 0.0);
+      ((cast joint : Physics3DJoint).impulse3 = 0.0);
+      ((cast joint : Physics3DJoint).impulse4 = 0.0);
+      ((cast joint : Physics3DJoint).impulse5 = 0.0);
+      if ((cast ((cast _Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast usesBodyA : Bool) : Bool)) : Bool)) { continue; }
+      var otherIndex:Float = ((cast connectedA : Bool) ? (cast (cast joint : Physics3DJoint).bodyB : Dynamic) : (cast (cast joint : Physics3DJoint).bodyA : Dynamic));
+      if ((cast _Runtime.strictEquals(otherIndex, bodyIndex) : Bool)) { continue; }
+      var other:Null<RigidBody3D> = (cast findPhysics3DBody(({ final __callArgument103:Dynamic = world; __callArgument103; }), (cast otherIndex : Float)) : Null<RigidBody3D>);
+      if ((cast !_Runtime.strictEquals(other, null) : Bool)) { wakePhysics3DBody(({ final __callArgument104:Dynamic = other; __callArgument104; })); }
+    }
+  }
+
+  public static function invalidatePhysics3DBodyContacts__world(world:Physics3DWorld, index:Float):Void {
+    {
+      var i:Float = _Runtime.subtractNumbers(_Runtime.field(world.contacts, 'length'), 1.0);
+      while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
+        var contact:Physics3DContact = flighthq._internal._StaticIndex.readArray(world.contacts, i);
+        if ((cast ((cast !_Runtime.strictEquals((cast contact : Physics3DContact).bodyA, index) : Bool) && (cast !_Runtime.strictEquals((cast contact : Physics3DContact).bodyB, index) : Bool)) : Bool)) { i--; continue; }
+        if ((cast ((cast (cast contact : Physics3DContact).enabled : Bool) && (cast !(cast (cast contact : Physics3DContact).sensor : Bool) : Bool)) : Bool)) {
+          var otherIndex:Float = ((cast _Runtime.strictEquals((cast contact : Physics3DContact).bodyA, index) : Bool) ? (cast (cast contact : Physics3DContact).bodyB : Dynamic) : (cast (cast contact : Physics3DContact).bodyA : Dynamic));
+          var other:Null<RigidBody3D> = (cast findPhysics3DBody(({ final __callArgument105:Dynamic = world; __callArgument105; }), (cast otherIndex : Float)) : Null<RigidBody3D>);
+          if ((cast !_Runtime.strictEquals(other, null) : Bool)) { wakePhysics3DBody(({ final __callArgument106:Dynamic = other; __callArgument106; })); }
+        }
+        _Runtime.splice(world.contacts, Std.int(i), Std.int(1.0), []);
+        i--;
+      }
+    }
+    World.removePhysics3DContactEventsForBody__world((cast world.events : Physics3DContactEvents).began, (cast index : Float));
+    World.removePhysics3DContactEventsForBody__world((cast world.events : Physics3DContactEvents).ended, (cast index : Float));
+    _Runtime.setLength((cast world.solver : Physics3DSequentialImpulseState).constraints, 0.0);
+    ((cast (cast world.solver : Physics3DSequentialImpulseState).constraintByContact : flighthq._internal._Map<Physics3DContact, Physics3DContactConstraint>).clear());
+    World.clearPhysics3DSolveWorkspace__world(({ final __callArgument107:Dynamic = world; __callArgument107; }));
+  }
+
+  public static function removePhysics3DContactEventsForBody__world(events:flighthq._internal._IndexedAccess<flighthq._internal._IndexedAccess<Physics3DWorld, String>, String>, bodyIndex:Float):Void {
+    {
+      var i:Float = ((cast events : { var length:Float; }).length - 1.0);
+      while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
+        if ((cast ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(events, i) : Physics3DContact).bodyA, bodyIndex) : Bool) || (cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(events, i) : Physics3DContact).bodyB, bodyIndex) : Bool)) : Bool)) { (cast events : { var splice:flighthq._internal._Any; }).splice((cast i : Float), ({ final __callArgument108:Dynamic = 1.0; __callArgument108; })); }
+        i--;
+      }
+    }
+  }
+
+  public static function clearPhysics3DSolveWorkspace__world(world:Physics3DWorld):Void {
+    ((cast world.solveIslandByRoot : flighthq._internal._Map<Float, Float>).clear());
+    _Runtime.setLength(world.solveIslandRoots, 0.0);
+    _Runtime.setLength(world.solveIslandBodyStarts, 0.0);
+    _Runtime.setLength(world.solveIslandBodyCounts, 0.0);
+    _Runtime.setLength(world.solveIslandContactStarts, 0.0);
+    _Runtime.setLength(world.solveIslandContactCounts, 0.0);
+    _Runtime.setLength(world.solveIslandJointStarts, 0.0);
+    _Runtime.setLength(world.solveIslandJointCounts, 0.0);
+    _Runtime.setLength(world.solveIslandBodyIndices, 0.0);
+    _Runtime.setLength(world.solveIslandContactIndices, 0.0);
+    _Runtime.setLength(world.solveIslandJointIndices, 0.0);
+    _Runtime.setLength(world.solveIslandCursors, 0.0);
+  }
 
   public static function refreshRigidBody3DMass__world(body:RigidBody3D):Void {
     (World.scratchMassData__world.mass = cast ((cast body : RigidBody3D).mass : Float));
@@ -239,10 +586,28 @@ class World {
     (World.scratchMassData__world.inertiaXY = cast ((cast body : RigidBody3D).inertiaXY : Float));
     (World.scratchMassData__world.inertiaXZ = cast ((cast body : RigidBody3D).inertiaXZ : Float));
     (World.scratchMassData__world.inertiaYZ = cast ((cast body : RigidBody3D).inertiaYZ : Float));
-    setRigidBody3DMassData(({ final __callArgument13:Dynamic = body; __callArgument13; }), ({ final __callArgument14:Dynamic = World.scratchMassData__world; __callArgument14; }));
+    setRigidBody3DMassData(({ final __callArgument109:Dynamic = body; __callArgument109; }), ({ final __callArgument110:Dynamic = World.scratchMassData__world; __callArgument110; }));
+  }
+
+  public static function isFinitePhysics3DVector__world(x:Float, y:Float, z:Float):Bool {
+    return cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([x] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([y] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([z] : Array<Dynamic>)) : Bool));
+    return cast null;
+  }
+
+  public static function readRigidBody3DWorldInverseInertia__world(body:RigidBody3D, out:Array<Float>):Void {
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_XX : Float), (cast _Runtime.field(body, 'inverseInertiaWorldXX') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_YY : Float), (cast _Runtime.field(body, 'inverseInertiaWorldYY') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_ZZ : Float), (cast _Runtime.field(body, 'inverseInertiaWorldZZ') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_XY : Float), (cast _Runtime.field(body, 'inverseInertiaWorldXY') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_XZ : Float), (cast _Runtime.field(body, 'inverseInertiaWorldXZ') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_YZ : Float), (cast _Runtime.field(body, 'inverseInertiaWorldYZ') : Float));
   }
 
   public static final scratchCenter__world:Array<Float> = (cast cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
 
+  public static final scratchInverseInertia__world:Array<Float> = (cast cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
+
   public static final scratchMassData__world:Physics3DMassData = (cast createPhysics3DMassData() : Physics3DMassData);
+
+  public static final scratchVector__world:Array<Float> = (cast cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
 }

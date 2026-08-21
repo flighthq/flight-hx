@@ -1,27 +1,27 @@
 # Typed Struct Provenance Audit
 
-Upstream commit: `598ef6f62b6f1ae2873956501069ed824699021a`
+Upstream commit: `9b3b71b019ff48ea6329c16020f37fb72c3123d1`
 
 This reporting-only audit tests nominal-identity closure for the clean required-field set. It does not enable class emission. Bridge exposure is reported separately and is not itself a closure blocker.
 
 | Metric | Count |
 | --- | ---: |
-| Clean required-field candidates | 773 |
-| Nominally closed candidates | 582 |
-| Blocked candidates | 191 |
+| Clean required-field candidates | 805 |
+| Nominally closed candidates | 613 |
+| Blocked candidates | 192 |
 | Normalization-provenance blockers only | 119 |
-| Container-transfer blockers only | 57 |
+| Container-transfer blockers only | 58 |
 | Both blocker classes | 15 |
-| Normalization roots (all eligible schemas) | 420 |
+| Normalization roots (all eligible schemas) | 429 |
 | JSON.parse roots | 10 |
-| Containment edges (all eligible schemas) | 2148 |
+| Containment edges (all eligible schemas) | 2191 |
 | Candidates blocked by normalization provenance | 134 |
-| Candidates blocked by container transfers | 72 |
+| Candidates blocked by container transfers | 73 |
 | Candidates with anonymous container transfers | 52 |
 | Candidates with cross-schema container transfers | 11 |
-| Candidates with dynamic container transfers | 18 |
-| Candidates exposed through bridge inputs | 484 |
-| Candidates exposed through bridge outputs | 526 |
+| Candidates with dynamic container transfers | 19 |
+| Candidates exposed through bridge inputs | 513 |
+| Candidates exposed through bridge outputs | 555 |
 
 Exact containment paths, roots, transfer locations, and bridge paths are in `typed-struct-provenance.json`.
 
@@ -147,15 +147,24 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#CocosPlistDocument` | 7 | 2 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CocosPlistMetadata` | 7 | 3 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CocosPlistParsed` | 0 | 2 | 0 | 2 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#CollisionCapsule2D` | 0 | 5 | 2 | 0 | 0 | 0 | 7 | 7 | yes | — |
 | `@flighthq/types:interface#CollisionContactManifold2D` | 44 | 6 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#CollisionContactManifold3D` | 0 | 6 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CollisionContactPoint2D` | 25 | 4 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#CollisionContactPoint3D` | 0 | 5 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#CollisionDistance3D` | 0 | 11 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CollisionManifold2D` | 49 | 4 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#CollisionPoint2D` | 0 | 2 | 2 | 0 | 0 | 0 | 6 | 6 | yes | — |
-| `@flighthq/types:interface#CollisionRaycastHit2D` | 32 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#CollisionSegment2D` | 0 | 4 | 2 | 0 | 0 | 0 | 6 | 6 | yes | — |
+| `@flighthq/types:interface#CollisionManifold3D` | 0 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#CollisionPoint2D` | 0 | 2 | 2 | 0 | 0 | 0 | 7 | 7 | yes | — |
+| `@flighthq/types:interface#CollisionRaycastHit2D` | 46 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#CollisionRaycastHit3D` | 0 | 7 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#CollisionSegment2D` | 0 | 4 | 2 | 0 | 0 | 0 | 7 | 7 | yes | — |
 | `@flighthq/types:interface#CollisionTestExplanation2D` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#CollisionTimeOfImpact2D` | 61 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#CollisionTestExplanation3D` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#CollisionTimeOfImpact2D` | 68 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#CollisionTimeOfImpact3D` | 0 | 7 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CollisionVendorShape2D` | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
+| `@flighthq/types:interface#CollisionVendorShape3D` | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#ColorKeyframe` | 22 | 4 | 0 | 0 | 0 | 1 | 1 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#ColorLut` | 0 | 2 | 4 | 0 | 1 | 0 | 8 | 6 | no | `normalization-provenance` |
 | `@flighthq/types:interface#ColorLutAdjustment` | 0 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | no | `container-transfer` |
@@ -381,7 +390,9 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#PermissionBackend` | 0 | 2 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#PermissionStateExplanation` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#PerspectiveProjection` | 9 | 3 | 4 | 0 | 2 | 0 | 4 | 3 | no | `normalization-provenance` |
-| `@flighthq/types:interface#Physics2DCollider` | 47 | 5 | 3 | 14 | 0 | 0 | 5 | 5 | yes | — |
+| `@flighthq/types:interface#Physics2DBrokenJoint` | 0 | 4 | 1 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics2DCollider` | 51 | 5 | 4 | 16 | 0 | 0 | 6 | 6 | yes | — |
+| `@flighthq/types:interface#Physics2DCollisionExplanation` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DContact` | 157 | 13 | 3 | 1 | 0 | 0 | 2 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DContactEvents` | 0 | 2 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DContactHooks` | 0 | 2 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
@@ -390,30 +401,47 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Physics2DDebugGeometry` | 14 | 4 | 0 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DDebugGeometryOptions` | 7 | 7 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DDebugLine` | 0 | 7 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics2DJointEvents` | 0 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics2DJointReaction` | 0 | 3 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DJointResolution` | 0 | 9 | 1 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DJointResolutionExplanation` | 0 | 3 | 0 | 1 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#Physics2DMassData` | 45 | 4 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DMassData` | 49 | 4 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DQueryFilter` | 0 | 6 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DQueryHit` | 0 | 3 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DQueryResult` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DRayHit` | 31 | 8 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DRayResult` | 13 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics2DShapeCastResult` | 0 | 9 | 0 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DSolverConfig` | 55 | 13 | 1 | 0 | 0 | 0 | 2 | 2 | yes | — |
 | `@flighthq/types:interface#Physics2DStepExplanation` | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#Physics2DWorld` | 217 | 29 | 0 | 9 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#Physics3DCollisionFilter` | 0 | 3 | 1 | 0 | 0 | 0 | 2 | 2 | yes | — |
-| `@flighthq/types:interface#Physics3DContact` | 83 | 12 | 3 | 1 | 0 | 0 | 2 | 2 | yes | — |
-| `@flighthq/types:interface#Physics3DContactConstraint` | 47 | 9 | 2 | 1 | 0 | 1 | 1 | 2 | no | `container-transfer` |
-| `@flighthq/types:interface#Physics3DContactConstraintPoint` | 39 | 8 | 1 | 0 | 0 | 0 | 1 | 3 | yes | — |
+| `@flighthq/types:interface#Physics2DWorld` | 225 | 30 | 0 | 10 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DCollider` | 0 | 5 | 4 | 20 | 0 | 0 | 6 | 6 | yes | — |
+| `@flighthq/types:interface#Physics3DCollisionExplanation` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DCollisionFilter` | 0 | 3 | 1 | 0 | 0 | 0 | 7 | 6 | yes | — |
+| `@flighthq/types:interface#Physics3DContact` | 0 | 14 | 4 | 1 | 0 | 2 | 2 | 2 | no | `container-transfer` |
+| `@flighthq/types:interface#Physics3DContactConstraint` | 47 | 9 | 2 | 1 | 0 | 2 | 1 | 2 | no | `container-transfer` |
+| `@flighthq/types:interface#Physics3DContactConstraintPoint` | 41 | 8 | 1 | 0 | 0 | 0 | 1 | 3 | yes | — |
 | `@flighthq/types:interface#Physics3DContactEvents` | 0 | 2 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics3DContactHooks` | 0 | 2 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DDebugGeometry` | 0 | 4 | 0 | 2 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DDebugGeometryOptions` | 0 | 6 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DDebugLine` | 0 | 9 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DDebugSphere` | 0 | 7 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DJointEvents` | 0 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics3DJointExplanation` | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#Physics3DMassData` | 77 | 10 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#Physics3DMaterial` | 0 | 3 | 1 | 0 | 0 | 0 | 2 | 2 | yes | — |
-| `@flighthq/types:interface#Physics3DSequentialImpulseConfig` | 18 | 6 | 1 | 0 | 0 | 0 | 2 | 3 | yes | — |
-| `@flighthq/types:interface#Physics3DSequentialImpulseState` | 8 | 2 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#Physics3DSolverConfig` | 25 | 8 | 1 | 1 | 0 | 0 | 2 | 2 | yes | — |
-| `@flighthq/types:interface#Physics3DStepExplanation` | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DJointReaction` | 0 | 6 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DMassData` | 132 | 10 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DMaterial` | 0 | 3 | 1 | 0 | 0 | 0 | 7 | 6 | yes | — |
+| `@flighthq/types:interface#Physics3DQueryFilter` | 0 | 6 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DQueryHit` | 0 | 3 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DQueryResult` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DRayHit` | 0 | 10 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DRayResult` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DSequentialImpulseConfig` | 20 | 6 | 1 | 0 | 0 | 0 | 2 | 3 | yes | — |
+| `@flighthq/types:interface#Physics3DSequentialImpulseState` | 0 | 2 | 1 | 3 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DShapeCastResult` | 0 | 11 | 0 | 2 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DSolverConfig` | 0 | 9 | 1 | 1 | 0 | 0 | 2 | 2 | yes | — |
+| `@flighthq/types:interface#Physics3DStepExplanation` | 0 | 11 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#PixiParseResult` | 2 | 2 | 0 | 2 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#PlatformBackend` | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Power` | 37 | 10 | 0 | 10 | 0 | 0 | 1 | 1 | yes | — |
@@ -451,8 +479,8 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#ResourceLoaderItemSignals` | 8 | 4 | 0 | 4 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#ResourceLoadHandle` | 2 | 2 | 0 | 0 | 0 | 1 | 0 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#RichTextContent` | 48 | 2 | 1 | 1 | 1 | 0 | 2 | 2 | no | `normalization-provenance` |
-| `@flighthq/types:interface#RigidBody2D` | 0 | 26 | 4 | 1 | 0 | 1 | 4 | 4 | no | `container-transfer` |
-| `@flighthq/types:interface#RigidBody3D` | 0 | 54 | 2 | 2 | 0 | 1 | 2 | 2 | no | `container-transfer` |
+| `@flighthq/types:interface#RigidBody2D` | 0 | 26 | 5 | 1 | 0 | 1 | 5 | 5 | no | `container-transfer` |
+| `@flighthq/types:interface#RigidBody3D` | 0 | 53 | 5 | 1 | 0 | 1 | 5 | 5 | no | `container-transfer` |
 | `@flighthq/types:interface#RiveAdvancedBlend` | 0 | 2 | 1 | 1 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#RiveAnimationClip` | 0 | 6 | 1 | 1 | 0 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:interface#RiveArtboardGraph` | 101 | 4 | 1 | 1 | 0 | 0 | 1 | 1 | yes | — |
@@ -552,9 +580,13 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#SoftKeyboard` | 9 | 9 | 0 | 9 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SoftKeyboardInfo` | 17 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SoftKeyboardTransition` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#SpatialFrustum3D` | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#SpatialIndex2D` | 0 | 1 | 2 | 1 | 0 | 0 | 3 | 2 | yes | — |
+| `@flighthq/types:interface#SpatialIndex3D` | 0 | 1 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#SpatialIndexBackend3D` | 0 | 9 | 2 | 0 | 0 | 0 | 3 | 3 | yes | — |
 | `@flighthq/types:interface#SpatialIndexingExplanation` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#SpatialIndexRuntime2D` | 0 | 1 | 1 | 1 | 0 | 0 | 3 | 2 | yes | — |
+| `@flighthq/types:interface#SpatialIndexRuntime3D` | 0 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SpineParsed` | 2 | 3 | 0 | 3 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#SpotLightConeAngles` | 0 | 2 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#Spring` | 0 | 2 | 5 | 0 | 0 | 0 | 3 | 3 | yes | — |
@@ -780,7 +812,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:type#Node2DInteractionSignals` | 0 | 17 | 0 | 17 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#NodeAny` | 0 | 4 | 39 | 0 | 24 | 9 | 14 | 27 | no | `container-transfer`, `normalization-provenance` |
 | `@flighthq/types:type#ObbLike` | 0 | 10 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
-| `@flighthq/types:type#Physics3DBallAndSocketJoint` | 0 | 22 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#Physics3DBallAndSocketJoint` | 0 | 25 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#PixiParsed` | 0 | 2 | 0 | 2 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#PlaneLike` | 0 | 4 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:type#QuaternionLike` | 0 | 4 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |

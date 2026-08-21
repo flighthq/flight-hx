@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const buildPhysics3DSolveIslands = api.buildPhysics3DSolveIslands;
 export const isRigidBody3DPairAwake = api.isRigidBody3DPairAwake;
+export const setPhysics3DJointResolutionGuard = api.setPhysics3DJointResolutionGuard;
 export const updatePhysics3DSleep = api.updatePhysics3DSleep;

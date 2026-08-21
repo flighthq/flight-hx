@@ -3,7 +3,7 @@ package flighthq.collision;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.collision.CollisionShapeValidation.getCollisionShapeValidationStatus2D;
+import flighthq.collision.CollisionShapeValidation2D.getCollisionShapeValidationStatus2D;
 import flighthq.collision.CollisionSupport2D.getCollisionPairTest2D;
 import flighthq.collision.CollisionSupport2D.getCollisionSupport2D;
 import flighthq.collision.TestCollision2D.testCollision2D;

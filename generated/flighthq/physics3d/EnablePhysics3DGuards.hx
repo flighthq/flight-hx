@@ -4,9 +4,16 @@ package flighthq.physics3d;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
+import flighthq.physics3d.ContactIntake.setPhysics3DContactIntakeGuard;
+import flighthq.physics3d.ExplainPhysics3DCollision.explainPhysics3DCollision;
+import flighthq.physics3d.ExplainPhysics3DJoints.explainPhysics3DJoints;
 import flighthq.physics3d.ExplainPhysics3DStep.explainPhysics3DStep;
+import flighthq.physics3d.Islands.setPhysics3DJointResolutionGuard;
 import flighthq.physics3d.Step.setPhysics3DStepGuard;
 import flighthq.types.Log.LogLevel;
+import flighthq.types.Physics3D.Physics3DCollisionExplanation;
+import flighthq.types.Physics3D.Physics3DJointExplanation;
+import flighthq.types.Physics3D.Physics3DJointKind;
 import flighthq.types.Physics3D.Physics3DStepExplanation;
 import flighthq.types.Physics3D.Physics3DWorld;
 
@@ -18,21 +25,49 @@ class EnablePhysics3DGuards {
 
   public static function disablePhysics3DGuards():Void {
     setPhysics3DStepGuard((cast null : Dynamic));
+    setPhysics3DContactIntakeGuard((cast null : Dynamic));
+    setPhysics3DJointResolutionGuard((cast null : Dynamic));
     (EnablePhysics3DGuards.physics3DGuardsEnabled__enablePhysics3DGuards = cast (false : Dynamic));
   }
 
   public static function enablePhysics3DGuards():Void {
     setPhysics3DStepGuard((cast EnablePhysics3DGuards.warnOnUnsteppablePhysics3DWorld__enablePhysics3DGuards : Dynamic));
+    setPhysics3DContactIntakeGuard((cast EnablePhysics3DGuards.warnOnUndetectablePhysics3DColliders__enablePhysics3DGuards : Dynamic));
+    setPhysics3DJointResolutionGuard((cast EnablePhysics3DGuards.warnOnUnresolvedPhysics3DJoints__enablePhysics3DGuards : Dynamic));
     (EnablePhysics3DGuards.physics3DGuardsEnabled__enablePhysics3DGuards = cast (true : Dynamic));
+  }
+
+  public static function warnOnUndetectablePhysics3DColliders__enablePhysics3DGuards(world:Physics3DWorld):Void {
+    var explanation:Physics3DCollisionExplanation = cast _Runtime.UNDEFINED;
+    var kinds:Array<String> = cast _Runtime.UNDEFINED;
+    explanation = (cast explainPhysics3DCollision(({ final __callArgument0:Dynamic = world; __callArgument0; })) : Physics3DCollisionExplanation);
+    if ((cast _Runtime.strictEquals((cast explanation : Physics3DCollisionExplanation).status, 'ready') : Bool)) { return; }
+    kinds = (cast explanation : Physics3DCollisionExplanation).unsupportedKinds;
+    (cast logOnce((cast 'physics3d:missing-support:' + Std.string(_Runtime.join(kinds, ',')) + '' : String), ({ final __callArgument1:Dynamic = LogLevel.Warn; __callArgument1; }), (cast { kinds: kinds, message: 'buildPhysics3DContacts: no support function is registered for collider ' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(kinds, 'length'), 1.0) : Bool) ? (cast 'kind' : Dynamic) : (cast 'kinds' : Dynamic))) + ' ' + Std.string(_Runtime.join(kinds, ', ')) + ', so these generate no contacts and the bodies carrying them pass through everything — call registerBuiltInCollisionSupports3D() and registerBuiltInCollisionFaceQueries3D() from @flighthq/collision, or register your own support for a vendor kind.', status: (cast explanation : Physics3DCollisionExplanation).status } : Dynamic), ({ final __callArgument2:Dynamic = 'physics3d'; __callArgument2; })) : Bool);
+  }
+
+  public static function warnOnUnresolvedPhysics3DJoints__enablePhysics3DGuards(world:Physics3DWorld):Void {
+    var explanations:Array<Physics3DJointExplanation> = cast _Runtime.UNDEFINED;
+    var joints:Array<{ var kind:Physics3DJointKind; var index:Float; var status:String; }> = cast _Runtime.UNDEFINED;
+    var key:String = cast _Runtime.UNDEFINED;
+    explanations = (cast explainPhysics3DJoints(({ final __callArgument3:Dynamic = world; __callArgument3; })) : Array<Physics3DJointExplanation>);
+    joints = (cast cast ([] : Array<Dynamic>));
+    for (explanation in _Runtime.iterable(explanations)) {
+      if ((cast _Runtime.strictEquals((cast explanation : Physics3DJointExplanation).status, 'solvable') : Bool)) { continue; }
+      _Runtime.callProperty(joints, 'push', cast ([{ index: (cast explanation : Physics3DJointExplanation).index, kind: (cast explanation : Physics3DJointExplanation).kind, status: (cast explanation : Physics3DJointExplanation).status }] : Array<Dynamic>));
+    }
+    if ((cast _Runtime.strictEquals(_Runtime.field(joints, 'length'), 0.0) : Bool)) { return; }
+    key = _Runtime.join((cast _Runtime.mapArray((cast joints : Array<{ var kind:String; var index:Float; var status:String; }>), function(joint:{ var kind:String; var index:Float; var status:String; }, __unused0:Float, __unused1:Array<{ var kind:String; var index:Float; var status:String; }>):String return '' + Std.string((cast joint : { var kind:String; var index:Float; var status:String; }).index) + ':' + Std.string((cast joint : { var kind:String; var index:Float; var status:String; }).kind) + ':' + Std.string((cast joint : { var kind:String; var index:Float; var status:String; }).status) + '', _Runtime.UNDEFINED)), ',');
+    (cast logOnce((cast 'physics3d:unresolved-joints:' + Std.string(key) + '' : String), ({ final __callArgument6:Dynamic = LogLevel.Warn; __callArgument6; }), (cast { joints: joints, message: 'buildPhysics3DSolveIslands: ' + Std.string(_Runtime.field(joints, 'length')) + ' ' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(joints, 'length'), 1.0) : Bool) ? (cast 'joint was' : Dynamic) : (cast 'joints were' : Dynamic))) + ' omitted from the solve because its kind is unregistered or a body endpoint is missing — call explainPhysics3DJoints(world), then registerBuiltInPhysics3DJointSolvers(world) or registerPhysics3DJointSolver(world, kind, solver) for an unregistered kind, and removePhysics3DJoint(world, joint) or repair an invalid endpoint.', status: 'unresolved-joints' } : Dynamic), ({ final __callArgument7:Dynamic = 'physics3d'; __callArgument7; })) : Bool);
   }
 
   public static function warnOnUnsteppablePhysics3DWorld__enablePhysics3DGuards(world:Physics3DWorld, dt:Float):Void {
     var explanation:Physics3DStepExplanation = cast _Runtime.UNDEFINED;
     var failing:Array<String> = cast _Runtime.UNDEFINED;
-    explanation = (cast explainPhysics3DStep(({ final __callArgument0:Dynamic = world; __callArgument0; }), (cast dt : Float)) : Physics3DStepExplanation);
-    failing = (cast EnablePhysics3DGuards.getFailingPhysics3DPreconditions__enablePhysics3DGuards(({ final __callArgument1:Dynamic = explanation; __callArgument1; })) : Array<String>);
+    explanation = (cast explainPhysics3DStep(({ final __callArgument8:Dynamic = world; __callArgument8; }), (cast dt : Float)) : Physics3DStepExplanation);
+    failing = (cast EnablePhysics3DGuards.getFailingPhysics3DPreconditions__enablePhysics3DGuards(({ final __callArgument9:Dynamic = explanation; __callArgument9; })) : Array<String>);
     if ((cast _Runtime.strictEquals(_Runtime.field(failing, 'length'), 0.0) : Bool)) { return; }
-    (cast logOnce((cast 'physics3d:' + Std.string((cast explanation : Physics3DStepExplanation).status) + ':' + Std.string(_Runtime.join(failing, ',')) + '' : String), ({ final __callArgument2:Dynamic = LogLevel.Warn; __callArgument2; }), (cast { failing: failing, message: 'stepPhysics3D: the world advanced nothing because ' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(failing, 'length'), 1.0) : Bool) ? (cast 'a precondition' : Dynamic) : (cast 'several preconditions' : Dynamic))) + ' failed (' + Std.string(_Runtime.join(failing, ', ')) + ') — call explainPhysics3DStep(world, dt) for the same flags as data, and repair the reported fields.', status: (cast explanation : Physics3DStepExplanation).status } : Dynamic), ({ final __callArgument3:Dynamic = 'physics3d'; __callArgument3; })) : Bool);
+    (cast logOnce((cast 'physics3d:' + Std.string((cast explanation : Physics3DStepExplanation).status) + ':' + Std.string(_Runtime.join(failing, ',')) + '' : String), ({ final __callArgument10:Dynamic = LogLevel.Warn; __callArgument10; }), (cast { failing: failing, message: 'stepPhysics3D: the world advanced nothing because ' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(failing, 'length'), 1.0) : Bool) ? (cast 'a precondition' : Dynamic) : (cast 'several preconditions' : Dynamic))) + ' failed (' + Std.string(_Runtime.join(failing, ', ')) + ') — call explainPhysics3DStep(world, dt) for the same flags as data, and repair the reported fields.', status: (cast explanation : Physics3DStepExplanation).status } : Dynamic), ({ final __callArgument11:Dynamic = 'physics3d'; __callArgument11; })) : Bool);
   }
 
   public static function getFailingPhysics3DPreconditions__enablePhysics3DGuards(explanation:Physics3DStepExplanation):Array<String> {
@@ -45,7 +80,7 @@ class EnablePhysics3DGuards {
     return cast null;
   }
 
-  public static final physics3DPreconditionFlags__enablePhysics3DGuards:Array<String> = (cast cast (['bodyStateValid', 'contactStateValid', 'gravityValid', 'jointStateValid', 'solverConfigValid', 'substepsValid', 'timestepValid', 'velocityIterationsValid', 'positionIterationsValid'] : Array<Dynamic>));
+  public static final physics3DPreconditionFlags__enablePhysics3DGuards:Array<String> = (cast cast (['bodyStateValid', 'colliderStateValid', 'contactStateValid', 'gravityValid', 'jointStateValid', 'solverConfigValid', 'substepsValid', 'timestepValid', 'velocityIterationsValid', 'positionIterationsValid'] : Array<Dynamic>));
 
   public static var physics3DGuardsEnabled__enablePhysics3DGuards:Bool = false;
 }

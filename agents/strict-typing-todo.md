@@ -120,6 +120,7 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 
 ## 4. Remaining structural escapes
 
+- [ ] Teach the escape analyzer to distinguish legacy hydration intersection members, then reconsider direct emission for `Physics3DContact`, `Physics3DSolverConfig`, and `Physics3DSequentialImpulseState`; do not reapprove them while their `unknown-member` escapes remain.
 - [ ] Resolve unknown-member ownership where the checker proves an inherited/intersection member without weakening width safety.
 - [ ] Design structural capability projections for `HasBoundsRectangleRuntime`, `HasTransform2DRuntime`, and `HasTransform3DRuntime` rather than copying wider values.
 - [ ] Keep dynamic enumeration, computed keys, receiver-sensitive methods, and presence checks operation-local unless a typed collection or capability API preserves their semantics.

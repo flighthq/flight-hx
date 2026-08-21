@@ -3,6 +3,9 @@ package flighthq.physics3d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.collision.ContactManifold3D.createCollisionContactManifold3D;
+import flighthq.physics3d.ColliderCollision.collidePhysics3DColliderShapes;
+import flighthq.physics3d.ColliderTransform.updatePhysics3DColliderWorldShape;
 import flighthq.physics3d.SymmetricTensor.TENSOR_XX;
 import flighthq.physics3d.SymmetricTensor.TENSOR_XY;
 import flighthq.physics3d.SymmetricTensor.TENSOR_XZ;
@@ -10,6 +13,11 @@ import flighthq.physics3d.SymmetricTensor.TENSOR_YY;
 import flighthq.physics3d.SymmetricTensor.TENSOR_YZ;
 import flighthq.physics3d.SymmetricTensor.TENSOR_ZZ;
 import flighthq.physics3d.SymmetricTensor.applySymmetricTensor;
+import flighthq.physics3d.World.writeRigidBody3DWorldCenter;
+import flighthq.types.Collision.CollisionColliderShape3D;
+import flighthq.types.Collision.CollisionContactManifold3D;
+import flighthq.types.Collision.CollisionContactPoint3D;
+import flighthq.types.Physics3D.Physics3DCollider;
 import flighthq.types.Physics3D.Physics3DContact;
 import flighthq.types.Physics3D.Physics3DContactConstraint;
 import flighthq.types.Physics3D.Physics3DContactConstraintPoint;
@@ -19,6 +27,8 @@ import flighthq.types.Physics3D.Physics3DSequentialImpulseState;
 import flighthq.types.Physics3D.Physics3DSolverConfig;
 import flighthq.types.Physics3D.Physics3DWorld;
 import flighthq.types.Physics3D.RigidBody3D;
+
+typedef Physics3DPositionScratch__solver = { var manifold:CollisionContactManifold3D; var centerA:Array<Float>; var centerB:Array<Float>; };
 
 class Solver {
   @:noCompletion
@@ -36,15 +46,21 @@ class Solver {
   @:noCompletion
   public static function preparePhysics3DContactConstraints(world:Physics3DWorld):Void {
     var state:Physics3DSequentialImpulseState = cast _Runtime.UNDEFINED;
-    var previousByPair:flighthq._internal._Map<Float, Physics3DContactConstraint> = cast _Runtime.UNDEFINED;
+    var previousByContact:flighthq._internal._Map<Physics3DContact, Physics3DContactConstraint> = cast _Runtime.UNDEFINED;
     var constraints:Array<Physics3DContactConstraint> = cast _Runtime.UNDEFINED;
-    var nextByPair:flighthq._internal._Map<Float, Physics3DContactConstraint> = cast _Runtime.UNDEFINED;
     var config:Physics3DSequentialImpulseConfig = cast _Runtime.UNDEFINED;
     state = world.solver;
-    previousByPair = state.constraintByPair;
-    constraints = (cast cast ([] : Array<Dynamic>));
-    nextByPair = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
-    config = (cast world.config : { var sequentialImpulse:Physics3DSequentialImpulseConfig; }).sequentialImpulse;
+    previousByContact = (cast state : Physics3DSequentialImpulseState).constraintByContact;
+    constraints = (cast state : Physics3DSequentialImpulseState).constraints;
+    {
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(constraints, 'length') : Float)) : Bool)) {
+        ((cast flighthq._internal._StaticIndex.readArray(constraints, i) : { var contact:Float; }).contact = cast (-1.0 : Float));
+        (i = cast ((i + 1.0) : Dynamic));
+      }
+    }
+    _Runtime.setLength(constraints, 0.0);
+    config = (cast world.config : Physics3DSolverConfig).sequentialImpulse;
     {
       var island:Float = 0.0;
       while ((cast ((cast island : Float) < (cast _Runtime.field(world.solveIslandRoots, 'length') : Float)) : Bool)) {
@@ -55,77 +71,143 @@ class Solver {
           while ((cast ((cast at : Float) < (cast islandEnd : Float)) : Bool)) {
             var contactIndex:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast world.solveIslandContactIndices : Array<Float>), (cast at : Float));
             var contact:Physics3DContact = flighthq._internal._StaticIndex.readArray(world.contacts, contactIndex);
-            if ((cast ((cast !(cast contact.touching : Bool) : Bool) || (cast _Runtime.strictEquals(contact.pointCount, 0.0) : Bool)) : Bool)) { (at = cast ((at + 1.0) : Dynamic)); continue; }
-            var bodyA:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get(contact.bodyA));
-            var bodyB:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get(contact.bodyB));
+            if ((cast ((cast !(cast (cast contact : Physics3DContact).touching : Bool) : Bool) || (cast _Runtime.strictEquals((cast contact : Physics3DContact).pointCount, 0.0) : Bool)) : Bool)) { (at = cast ((at + 1.0) : Dynamic)); continue; }
+            var bodyA:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get((cast contact : Physics3DContact).bodyA));
+            var bodyB:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get((cast contact : Physics3DContact).bodyB));
             if ((cast ((cast _Runtime.strictEquals(bodyA, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(bodyB, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (at = cast ((at + 1.0) : Dynamic)); continue; }
             if ((cast ((cast ((cast ((cast _Runtime.strictEquals((cast bodyA : RigidBody3D).inverseMass, 0.0) : Bool) && (cast _Runtime.strictEquals((cast bodyB : RigidBody3D).inverseMass, 0.0) : Bool)) : Bool) && (cast !(cast (cast Solver.hasRotationalFreedom__solver(({ final __callArgument0:Dynamic = bodyA; __callArgument0; })) : Bool) : Bool) : Bool)) : Bool) && (cast !(cast (cast Solver.hasRotationalFreedom__solver(({ final __callArgument1:Dynamic = bodyB; __callArgument1; })) : Bool) : Bool) : Bool)) : Bool)) {
               (at = cast ((at + 1.0) : Dynamic));
               continue;
             }
-            var constraint:Physics3DContactConstraint = (cast createPhysics3DContactConstraint() : Physics3DContactConstraint);
-            (constraint.contact = cast (contactIndex : Float));
-            Solver.writeFrictionBasis__solver((cast contact.normalX : Float), (cast contact.normalY : Float), (cast contact.normalZ : Float), ({ final __callArgument2:Dynamic = constraint; __callArgument2; }));
-            var previous:Null<Physics3DContactConstraint> = ((cast previousByPair : flighthq._internal._Map<Float, Physics3DContactConstraint>).get((cast Solver.getContactPairKey__solver((cast contact.bodyA : Float), (cast contact.bodyB : Float)) : Float)));
+            var constraint:Null<Physics3DContactConstraint> = ((cast previousByContact : flighthq._internal._Map<Physics3DContact, Physics3DContactConstraint>).get(contact));
+            if ((cast _Runtime.strictEquals(constraint, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+              (constraint = cast ((cast createPhysics3DContactConstraint() : Physics3DContactConstraint) : Dynamic));
+              ((cast previousByContact : flighthq._internal._Map<Physics3DContact, Physics3DContactConstraint>).set(contact, (cast constraint)));
+            }
+            var previousPointCount:Float = (cast constraint : { var pointCount:Float; }).pointCount;
             {
               var i:Float = 0.0;
-              while ((cast ((cast i : Float) < (cast contact.pointCount : Float)) : Bool)) {
-                var source:Physics3DContactPoint = flighthq._internal._StaticIndex.readArray(contact.points, i);
-                var point:Physics3DContactConstraintPoint = (cast createPhysics3DContactConstraintPoint() : Physics3DContactConstraintPoint);
+              while ((cast ((cast i : Float) < (cast previousPointCount : Float)) : Bool)) {
+                var point:Physics3DContactConstraintPoint = flighthq._internal._StaticIndex.readArray((cast constraint : { var points:Array<Physics3DContactConstraintPoint>; }).points, i);
+                flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Solver.previousFeatures__solver : Array<Float>), (cast i : Float), (cast point.featureId : Float));
+                flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Solver.previousNormalImpulses__solver : Array<Float>), (cast i : Float), (cast point.normalImpulse : Float));
+                flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Solver.previousTangentImpulses0__solver : Array<Float>), (cast i : Float), (cast point.tangentImpulse0 : Float));
+                flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Solver.previousTangentImpulses1__solver : Array<Float>), (cast i : Float), (cast point.tangentImpulse1 : Float));
+                (i = cast ((i + 1.0) : Dynamic));
+              }
+            }
+            ((cast constraint : { var contact:Float; }).contact = cast (contactIndex : Float));
+            ((cast constraint : { var pointCount:Float; }).pointCount = cast ((cast contact : Physics3DContact).pointCount : Float));
+            Solver.writeFrictionBasis__solver((cast (cast contact : Physics3DContact).normalX : Float), (cast (cast contact : Physics3DContact).normalY : Float), (cast (cast contact : Physics3DContact).normalZ : Float), ({ final __callArgument2:Dynamic = constraint; __callArgument2; }));
+            {
+              var i:Float = 0.0;
+              while ((cast ((cast i : Float) < (cast (cast contact : Physics3DContact).pointCount : Float)) : Bool)) {
+                var source:Physics3DContactPoint = flighthq._internal._StaticIndex.readArray((cast contact : Physics3DContact).points, i);
+                var point:Physics3DContactConstraintPoint = flighthq._internal._StaticIndex.readArray((cast constraint : { var points:Array<Physics3DContactConstraintPoint>; }).points, i);
+                if ((cast _Runtime.strictEquals(point, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+                  (point = cast ((cast createPhysics3DContactConstraintPoint() : Physics3DContactConstraintPoint) : Dynamic));
+                  _Runtime.callProperty((cast constraint : { var points:Array<Physics3DContactConstraintPoint>; }).points, 'push', cast ([point] : Array<Dynamic>));
+                }
                 (point.featureId = cast ((cast source : Physics3DContactPoint).featureId : Float));
-                if ((cast ((cast config.warmStarting : Bool) && (cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-                  var carried:Null<Physics3DContactConstraintPoint> = (cast Solver.findPointByFeatureId__solver(({ final __callArgument3:Dynamic = previous; __callArgument3; }), (cast (cast source : Physics3DContactPoint).featureId : Float)) : Null<Physics3DContactConstraintPoint>);
-                  if ((cast !_Runtime.strictEquals(carried, null) : Bool)) {
-                    (point.normalImpulse = cast ((cast carried : { var normalImpulse:Float; }).normalImpulse : Float));
-                    (point.tangentImpulse0 = cast ((cast carried : { var tangentImpulse0:Float; }).tangentImpulse0 : Float));
-                    (point.tangentImpulse1 = cast ((cast carried : { var tangentImpulse1:Float; }).tangentImpulse1 : Float));
+                (point.normalImpulse = cast (0.0 : Float));
+                (point.tangentImpulse0 = cast (0.0 : Float));
+                (point.tangentImpulse1 = cast (0.0 : Float));
+                if ((cast config.warmStarting : Bool)) {
+                  var carried:Float = (cast Solver.findPreviousPointByFeatureId__solver((cast (cast source : Physics3DContactPoint).featureId : Float), (cast previousPointCount : Float)) : Float);
+                  if ((cast ((cast carried : Float) >= (cast 0.0 : Float)) : Bool)) {
+                    (point.normalImpulse = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast Solver.previousNormalImpulses__solver : Array<Float>), (cast carried : Float)) : Float));
+                    (point.tangentImpulse0 = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast Solver.previousTangentImpulses0__solver : Array<Float>), (cast carried : Float)) : Float));
+                    (point.tangentImpulse1 = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast Solver.previousTangentImpulses1__solver : Array<Float>), (cast carried : Float)) : Float));
                   }
                 }
-                (point.normalMass = cast ((cast Solver.getEffectiveMass__solver(({ final __callArgument4:Dynamic = bodyA; __callArgument4; }), ({ final __callArgument5:Dynamic = bodyB; __callArgument5; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast contact.normalX : Float), (cast contact.normalY : Float), (cast contact.normalZ : Float)) : Float) : Float));
-                (point.tangentMass0 = cast ((cast Solver.getEffectiveMass__solver(({ final __callArgument6:Dynamic = bodyA; __callArgument6; }), ({ final __callArgument7:Dynamic = bodyB; __callArgument7; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast constraint.tangent0X : Float), (cast constraint.tangent0Y : Float), (cast constraint.tangent0Z : Float)) : Float) : Float));
-                (point.tangentMass1 = cast ((cast Solver.getEffectiveMass__solver(({ final __callArgument8:Dynamic = bodyA; __callArgument8; }), ({ final __callArgument9:Dynamic = bodyB; __callArgument9; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast constraint.tangent1X : Float), (cast constraint.tangent1Y : Float), (cast constraint.tangent1Z : Float)) : Float) : Float));
-                var approach:Float = (cast Solver.getRelativeNormalVelocity__solver(({ final __callArgument10:Dynamic = bodyA; __callArgument10; }), ({ final __callArgument11:Dynamic = bodyB; __callArgument11; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast contact.normalX : Float), (cast contact.normalY : Float), (cast contact.normalZ : Float)) : Float);
-                (point.bias = cast (((cast ((cast approach : Float) < (cast -config.restitutionThreshold : Float)) : Bool) ? (cast (-contact.restitution * approach) : Dynamic) : (cast 0.0 : Dynamic)) : Float));
-                _Runtime.callProperty(constraint.points, 'push', cast ([point] : Array<Dynamic>));
-                (constraint.pointCount += 1.0);
+                (point.normalMass = cast ((cast Solver.getEffectiveMass__solver(({ final __callArgument3:Dynamic = bodyA; __callArgument3; }), ({ final __callArgument4:Dynamic = bodyB; __callArgument4; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast (cast contact : Physics3DContact).normalX : Float), (cast (cast contact : Physics3DContact).normalY : Float), (cast (cast contact : Physics3DContact).normalZ : Float)) : Float) : Float));
+                (point.tangentMass0 = cast ((cast Solver.getEffectiveMass__solver(({ final __callArgument5:Dynamic = bodyA; __callArgument5; }), ({ final __callArgument6:Dynamic = bodyB; __callArgument6; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast (cast constraint : { var tangent0X:Float; }).tangent0X : Float), (cast (cast constraint : { var tangent0Y:Float; }).tangent0Y : Float), (cast (cast constraint : { var tangent0Z:Float; }).tangent0Z : Float)) : Float) : Float));
+                (point.tangentMass1 = cast ((cast Solver.getEffectiveMass__solver(({ final __callArgument7:Dynamic = bodyA; __callArgument7; }), ({ final __callArgument8:Dynamic = bodyB; __callArgument8; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast (cast constraint : { var tangent1X:Float; }).tangent1X : Float), (cast (cast constraint : { var tangent1Y:Float; }).tangent1Y : Float), (cast (cast constraint : { var tangent1Z:Float; }).tangent1Z : Float)) : Float) : Float));
+                var approach:Float = (cast Solver.getRelativeNormalVelocity__solver(({ final __callArgument9:Dynamic = bodyA; __callArgument9; }), ({ final __callArgument10:Dynamic = bodyB; __callArgument10; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast (cast contact : Physics3DContact).normalX : Float), (cast (cast contact : Physics3DContact).normalY : Float), (cast (cast contact : Physics3DContact).normalZ : Float)) : Float);
+                (point.bias = cast (((cast ((cast approach : Float) < (cast -config.restitutionThreshold : Float)) : Bool) ? (cast (-(cast contact : Physics3DContact).restitution * approach) : Dynamic) : (cast 0.0 : Dynamic)) : Float));
                 (i = cast ((i + 1.0) : Dynamic));
               }
             }
             _Runtime.callProperty(constraints, 'push', cast ([constraint] : Array<Dynamic>));
-            ((cast nextByPair : flighthq._internal._Map<Float, Physics3DContactConstraint>).set((cast Solver.getContactPairKey__solver((cast contact.bodyA : Float), (cast contact.bodyB : Float)) : Float), (cast constraint)));
             (at = cast ((at + 1.0) : Dynamic));
           }
         }
         (island = cast ((island + 1.0) : Dynamic));
       }
     }
-    (state.constraints = cast (constraints : Array<Physics3DContactConstraint>));
-    (state.constraintByPair = cast (nextByPair : flighthq._internal._Map<Float, Physics3DContactConstraint>));
+    ((cast previousByContact : flighthq._internal._Map<Physics3DContact, Physics3DContactConstraint>).forEach(function(constraint:Physics3DContactConstraint, contact:Physics3DContact, __unused0:flighthq._internal._Map<Physics3DContact, Physics3DContactConstraint>):Void {
+      if ((cast ((cast constraint.contact : Float) < (cast 0.0 : Float)) : Bool)) { ((cast previousByContact : flighthq._internal._Map<Physics3DContact, Physics3DContactConstraint>).delete_(contact)); }
+    }));
   }
 
   @:noCompletion
   public static function solvePhysics3DContactPositions(world:Physics3DWorld):Float {
+    var scratch:Physics3DPositionScratch__solver = cast _Runtime.UNDEFINED;
+    scratch = (cast Solver.acquirePhysics3DPositionScratch__solver() : Physics3DPositionScratch__solver);
+    try {
+      try {
+        var __returnValue11:Dynamic = (cast Solver.solvePhysics3DContactPositionsWithScratch__solver(({ final __callArgument12:Dynamic = world; __callArgument12; }), (cast scratch : Dynamic)) : Float);
+        {
+          Solver.releasePhysics3DPositionScratch__solver((cast scratch : Dynamic));
+        }
+        return cast __returnValue11;
+      } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
+    } catch (__finallyError13:Dynamic) {
+      {
+        Solver.releasePhysics3DPositionScratch__solver((cast scratch : Dynamic));
+      }
+      _Runtime.throwValue(__finallyError13);
+    }
+    {
+      Solver.releasePhysics3DPositionScratch__solver((cast scratch : Dynamic));
+    }
+    return cast null;
+  }
+
+  public static function solvePhysics3DContactPositionsWithScratch__solver(world:Physics3DWorld, scratch:Physics3DPositionScratch__solver):Float {
     var config:Physics3DSequentialImpulseConfig = cast _Runtime.UNDEFINED;
     var deepest:Float = cast _Runtime.UNDEFINED;
-    config = (cast world.config : { var sequentialImpulse:Physics3DSequentialImpulseConfig; }).sequentialImpulse;
+    var constraints:Array<Physics3DContactConstraint> = cast _Runtime.UNDEFINED;
+    config = (cast world.config : Physics3DSolverConfig).sequentialImpulse;
     deepest = 0.0;
-    for (constraint in _Runtime.iterable((cast world.solver : { var constraints:Array<Physics3DContactConstraint>; }).constraints)) {
-      var contact:Physics3DContact = flighthq._internal._StaticIndex.readArray(world.contacts, constraint.contact);
-      var bodyA:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get(contact.bodyA));
-      var bodyB:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get(contact.bodyB));
-      if ((cast ((cast _Runtime.strictEquals(bodyA, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(bodyB, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { continue; }
-      {
-        var i:Float = 0.0;
-        while ((cast ((cast i : Float) < (cast constraint.pointCount : Float)) : Bool)) {
-          var source:Physics3DContactPoint = flighthq._internal._StaticIndex.readArray(contact.points, i);
-          var point:Physics3DContactConstraintPoint = flighthq._internal._StaticIndex.readArray(constraint.points, i);
-          var excess:Float = ((cast source : Physics3DContactPoint).depth - config.penetrationSlop);
-          if ((cast ((cast excess : Float) > (cast deepest : Float)) : Bool)) { (deepest = cast (excess : Dynamic)); }
-          if ((cast ((cast excess : Float) <= (cast 0.0 : Float)) : Bool)) { (i = cast ((i + 1.0) : Dynamic)); continue; }
-          var correction:Float = ((config.positionCorrection * excess) * point.normalMass);
-          Solver.applyPositionCorrection__solver(({ final __callArgument14:Dynamic = bodyA; __callArgument14; }), ({ final __callArgument15:Dynamic = bodyB; __callArgument15; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast (contact.normalX * correction) : Float), (cast (contact.normalY * correction) : Float), (cast (contact.normalZ * correction) : Float));
-          (i = cast ((i + 1.0) : Dynamic));
+    constraints = (cast world.solver : Physics3DSequentialImpulseState).constraints;
+    {
+      var constraintIndex:Float = 0.0;
+      while ((cast ((cast constraintIndex : Float) < (cast _Runtime.field(constraints, 'length') : Float)) : Bool)) {
+        var constraint:Physics3DContactConstraint = flighthq._internal._StaticIndex.readArray(constraints, constraintIndex);
+        var contact:Physics3DContact = flighthq._internal._StaticIndex.readArray(world.contacts, constraint.contact);
+        var bodyA:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get((cast contact : Physics3DContact).bodyA));
+        var bodyB:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get((cast contact : Physics3DContact).bodyB));
+        if ((cast ((cast _Runtime.strictEquals(bodyA, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(bodyB, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (constraintIndex = cast ((constraintIndex + 1.0) : Dynamic)); continue; }
+        var colliderA:Physics3DCollider = flighthq._internal._StaticIndex.readArray((cast bodyA : RigidBody3D).colliders, (cast contact : Physics3DContact).colliderA);
+        var colliderB:Physics3DCollider = flighthq._internal._StaticIndex.readArray((cast bodyB : RigidBody3D).colliders, (cast contact : Physics3DContact).colliderB);
+        if ((cast ((cast _Runtime.strictEquals(colliderA, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(colliderB, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (constraintIndex = cast ((constraintIndex + 1.0) : Dynamic)); continue; }
+        updatePhysics3DColliderWorldShape(({ final __callArgument14:Dynamic = colliderA; __callArgument14; }), ({ final __callArgument15:Dynamic = bodyA; __callArgument15; }));
+        updatePhysics3DColliderWorldShape(({ final __callArgument16:Dynamic = colliderB; __callArgument16; }), ({ final __callArgument17:Dynamic = bodyB; __callArgument17; }));
+        if ((cast !(cast (cast collidePhysics3DColliderShapes((cast colliderA : Physics3DCollider).world, (cast colliderB : Physics3DCollider).world, (cast scratch : Physics3DPositionScratch__solver).manifold) : Bool) : Bool) : Bool)) { (constraintIndex = cast ((constraintIndex + 1.0) : Dynamic)); continue; }
+        var manifold:CollisionContactManifold3D = (cast scratch : Physics3DPositionScratch__solver).manifold;
+        writeRigidBody3DWorldCenter(({ final __callArgument18:Dynamic = bodyA; __callArgument18; }), (cast scratch : Physics3DPositionScratch__solver).centerA);
+        writeRigidBody3DWorldCenter(({ final __callArgument19:Dynamic = bodyB; __callArgument19; }), (cast scratch : Physics3DPositionScratch__solver).centerB);
+        {
+          var i:Float = 0.0;
+          while ((cast ((cast i : Float) < (cast (cast manifold : CollisionContactManifold3D).pointCount : Float)) : Bool)) {
+            var source:CollisionContactPoint3D = flighthq._internal._StaticIndex.readArray((cast manifold : CollisionContactManifold3D).points, i);
+            var excess:Float = ((cast source : CollisionContactPoint3D).depth - config.penetrationSlop);
+            if ((cast ((cast excess : Float) > (cast deepest : Float)) : Bool)) { (deepest = cast (excess : Dynamic)); }
+            if ((cast ((cast excess : Float) <= (cast 0.0 : Float)) : Bool)) { (i = cast ((i + 1.0) : Dynamic)); continue; }
+            var rAX:Float = ((cast source : CollisionContactPoint3D).x - flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast scratch : Physics3DPositionScratch__solver).centerA : Array<Float>), (cast 0.0 : Float)));
+            var rAY:Float = ((cast source : CollisionContactPoint3D).y - flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast scratch : Physics3DPositionScratch__solver).centerA : Array<Float>), (cast 1.0 : Float)));
+            var rAZ:Float = ((cast source : CollisionContactPoint3D).z - flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast scratch : Physics3DPositionScratch__solver).centerA : Array<Float>), (cast 2.0 : Float)));
+            var rBX:Float = ((cast source : CollisionContactPoint3D).x - flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast scratch : Physics3DPositionScratch__solver).centerB : Array<Float>), (cast 0.0 : Float)));
+            var rBY:Float = ((cast source : CollisionContactPoint3D).y - flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast scratch : Physics3DPositionScratch__solver).centerB : Array<Float>), (cast 1.0 : Float)));
+            var rBZ:Float = ((cast source : CollisionContactPoint3D).z - flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast scratch : Physics3DPositionScratch__solver).centerB : Array<Float>), (cast 2.0 : Float)));
+            var mass:Float = (cast Solver.getEffectiveMass__solver(({ final __callArgument20:Dynamic = bodyA; __callArgument20; }), ({ final __callArgument21:Dynamic = bodyB; __callArgument21; }), (cast rAX : Float), (cast rAY : Float), (cast rAZ : Float), (cast rBX : Float), (cast rBY : Float), (cast rBZ : Float), (cast (cast manifold : CollisionContactManifold3D).normalX : Float), (cast (cast manifold : CollisionContactManifold3D).normalY : Float), (cast (cast manifold : CollisionContactManifold3D).normalZ : Float)) : Float);
+            var correction:Float = ((config.positionCorrection * excess) * mass);
+            Solver.applyPositionCorrection__solver(({ final __callArgument22:Dynamic = bodyA; __callArgument22; }), ({ final __callArgument23:Dynamic = bodyB; __callArgument23; }), (cast rAX : Float), (cast rAY : Float), (cast rAZ : Float), (cast rBX : Float), (cast rBY : Float), (cast rBZ : Float), (cast ((cast manifold : CollisionContactManifold3D).normalX * correction) : Float), (cast ((cast manifold : CollisionContactManifold3D).normalY * correction) : Float), (cast ((cast manifold : CollisionContactManifold3D).normalZ * correction) : Float));
+            (i = cast ((i + 1.0) : Dynamic));
+          }
         }
+        (constraintIndex = cast ((constraintIndex + 1.0) : Dynamic));
       }
     }
     return cast deepest;
@@ -134,66 +216,80 @@ class Solver {
 
   @:noCompletion
   public static function solvePhysics3DContactVelocities(world:Physics3DWorld):Void {
-    for (constraint in _Runtime.iterable((cast world.solver : { var constraints:Array<Physics3DContactConstraint>; }).constraints)) {
-      var contact:Physics3DContact = flighthq._internal._StaticIndex.readArray(world.contacts, constraint.contact);
-      var bodyA:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get(contact.bodyA));
-      var bodyB:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get(contact.bodyB));
-      if ((cast ((cast _Runtime.strictEquals(bodyA, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(bodyB, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { continue; }
-      {
-        var i:Float = 0.0;
-        while ((cast ((cast i : Float) < (cast constraint.pointCount : Float)) : Bool)) {
-          var source:Physics3DContactPoint = flighthq._internal._StaticIndex.readArray(contact.points, i);
-          var point:Physics3DContactConstraintPoint = flighthq._internal._StaticIndex.readArray(constraint.points, i);
-          var maxFriction:Float = (contact.friction * point.normalImpulse);
-          var tangentVelocity0:Float = (cast Solver.getRelativeNormalVelocity__solver(({ final __callArgument18:Dynamic = bodyA; __callArgument18; }), ({ final __callArgument19:Dynamic = bodyB; __callArgument19; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast constraint.tangent0X : Float), (cast constraint.tangent0Y : Float), (cast constraint.tangent0Z : Float)) : Float);
-          var impulse0:Float = (point.tangentImpulse0 - (tangentVelocity0 * point.tangentMass0));
-          var tangentVelocity1:Float = (cast Solver.getRelativeNormalVelocity__solver(({ final __callArgument20:Dynamic = bodyA; __callArgument20; }), ({ final __callArgument21:Dynamic = bodyB; __callArgument21; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast constraint.tangent1X : Float), (cast constraint.tangent1Y : Float), (cast constraint.tangent1Z : Float)) : Float);
-          var impulse1:Float = (point.tangentImpulse1 - (tangentVelocity1 * point.tangentMass1));
-          var magnitude:Float = HxMath.sqrt(((impulse0 * impulse0) + (impulse1 * impulse1)));
-          if ((cast ((cast magnitude : Float) > (cast maxFriction : Float)) : Bool)) {
-            var scale:Float = (maxFriction / magnitude);
-            (impulse0 = cast ((impulse0 * scale) : Dynamic));
-            (impulse1 = cast ((impulse1 * scale) : Dynamic));
+    var constraints:Array<Physics3DContactConstraint> = cast _Runtime.UNDEFINED;
+    constraints = (cast world.solver : Physics3DSequentialImpulseState).constraints;
+    {
+      var constraintIndex:Float = 0.0;
+      while ((cast ((cast constraintIndex : Float) < (cast _Runtime.field(constraints, 'length') : Float)) : Bool)) {
+        var constraint:Physics3DContactConstraint = flighthq._internal._StaticIndex.readArray(constraints, constraintIndex);
+        var contact:Physics3DContact = flighthq._internal._StaticIndex.readArray(world.contacts, constraint.contact);
+        var bodyA:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get((cast contact : Physics3DContact).bodyA));
+        var bodyB:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get((cast contact : Physics3DContact).bodyB));
+        if ((cast ((cast _Runtime.strictEquals(bodyA, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(bodyB, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (constraintIndex = cast ((constraintIndex + 1.0) : Dynamic)); continue; }
+        {
+          var i:Float = 0.0;
+          while ((cast ((cast i : Float) < (cast constraint.pointCount : Float)) : Bool)) {
+            var source:Physics3DContactPoint = flighthq._internal._StaticIndex.readArray((cast contact : Physics3DContact).points, i);
+            var point:Physics3DContactConstraintPoint = flighthq._internal._StaticIndex.readArray(constraint.points, i);
+            var normalVelocity:Float = (cast Solver.getRelativeNormalVelocity__solver(({ final __callArgument24:Dynamic = bodyA; __callArgument24; }), ({ final __callArgument25:Dynamic = bodyB; __callArgument25; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast (cast contact : Physics3DContact).normalX : Float), (cast (cast contact : Physics3DContact).normalY : Float), (cast (cast contact : Physics3DContact).normalZ : Float)) : Float);
+            var normalImpulse:Float = HxMath.max((point.normalImpulse + ((point.bias - normalVelocity) * point.normalMass)), 0.0);
+            var deltaNormal:Float = (normalImpulse - point.normalImpulse);
+            (point.normalImpulse = cast (normalImpulse : Float));
+            Solver.applyContactImpulse__solver(({ final __callArgument26:Dynamic = bodyA; __callArgument26; }), ({ final __callArgument27:Dynamic = bodyB; __callArgument27; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast ((cast contact : Physics3DContact).normalX * deltaNormal) : Float), (cast ((cast contact : Physics3DContact).normalY * deltaNormal) : Float), (cast ((cast contact : Physics3DContact).normalZ * deltaNormal) : Float));
+            var maxFriction:Float = ((cast contact : Physics3DContact).friction * point.normalImpulse);
+            var tangentVelocity0:Float = (cast Solver.getRelativeNormalVelocity__solver(({ final __callArgument28:Dynamic = bodyA; __callArgument28; }), ({ final __callArgument29:Dynamic = bodyB; __callArgument29; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast constraint.tangent0X : Float), (cast constraint.tangent0Y : Float), (cast constraint.tangent0Z : Float)) : Float);
+            var impulse0:Float = (point.tangentImpulse0 - (tangentVelocity0 * point.tangentMass0));
+            var tangentVelocity1:Float = (cast Solver.getRelativeNormalVelocity__solver(({ final __callArgument30:Dynamic = bodyA; __callArgument30; }), ({ final __callArgument31:Dynamic = bodyB; __callArgument31; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast constraint.tangent1X : Float), (cast constraint.tangent1Y : Float), (cast constraint.tangent1Z : Float)) : Float);
+            var impulse1:Float = (point.tangentImpulse1 - (tangentVelocity1 * point.tangentMass1));
+            var magnitude:Float = HxMath.sqrt(((impulse0 * impulse0) + (impulse1 * impulse1)));
+            if ((cast ((cast magnitude : Float) > (cast maxFriction : Float)) : Bool)) {
+              var scale:Float = (maxFriction / magnitude);
+              (impulse0 = cast ((impulse0 * scale) : Dynamic));
+              (impulse1 = cast ((impulse1 * scale) : Dynamic));
+            }
+            var deltaTangent0:Float = (impulse0 - point.tangentImpulse0);
+            var deltaTangent1:Float = (impulse1 - point.tangentImpulse1);
+            (point.tangentImpulse0 = cast (impulse0 : Float));
+            (point.tangentImpulse1 = cast (impulse1 : Float));
+            Solver.applyContactImpulse__solver(({ final __callArgument32:Dynamic = bodyA; __callArgument32; }), ({ final __callArgument33:Dynamic = bodyB; __callArgument33; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast ((constraint.tangent0X * deltaTangent0) + (constraint.tangent1X * deltaTangent1)) : Float), (cast ((constraint.tangent0Y * deltaTangent0) + (constraint.tangent1Y * deltaTangent1)) : Float), (cast ((constraint.tangent0Z * deltaTangent0) + (constraint.tangent1Z * deltaTangent1)) : Float));
+            (i = cast ((i + 1.0) : Dynamic));
           }
-          var deltaTangent0:Float = (impulse0 - point.tangentImpulse0);
-          var deltaTangent1:Float = (impulse1 - point.tangentImpulse1);
-          (point.tangentImpulse0 = cast (impulse0 : Float));
-          (point.tangentImpulse1 = cast (impulse1 : Float));
-          Solver.applyContactImpulse__solver(({ final __callArgument22:Dynamic = bodyA; __callArgument22; }), ({ final __callArgument23:Dynamic = bodyB; __callArgument23; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast ((constraint.tangent0X * deltaTangent0) + (constraint.tangent1X * deltaTangent1)) : Float), (cast ((constraint.tangent0Y * deltaTangent0) + (constraint.tangent1Y * deltaTangent1)) : Float), (cast ((constraint.tangent0Z * deltaTangent0) + (constraint.tangent1Z * deltaTangent1)) : Float));
-          var normalVelocity:Float = (cast Solver.getRelativeNormalVelocity__solver(({ final __callArgument24:Dynamic = bodyA; __callArgument24; }), ({ final __callArgument25:Dynamic = bodyB; __callArgument25; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast contact.normalX : Float), (cast contact.normalY : Float), (cast contact.normalZ : Float)) : Float);
-          var normalImpulse:Float = HxMath.max((point.normalImpulse + ((point.bias - normalVelocity) * point.normalMass)), 0.0);
-          var deltaNormal:Float = (normalImpulse - point.normalImpulse);
-          (point.normalImpulse = cast (normalImpulse : Float));
-          Solver.applyContactImpulse__solver(({ final __callArgument26:Dynamic = bodyA; __callArgument26; }), ({ final __callArgument27:Dynamic = bodyB; __callArgument27; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast (contact.normalX * deltaNormal) : Float), (cast (contact.normalY * deltaNormal) : Float), (cast (contact.normalZ * deltaNormal) : Float));
-          (i = cast ((i + 1.0) : Dynamic));
         }
+        (constraintIndex = cast ((constraintIndex + 1.0) : Dynamic));
       }
     }
   }
 
   @:noCompletion
   public static function warmStartPhysics3DContacts(world:Physics3DWorld):Void {
-    if ((cast !(cast (cast (cast world.config : { var sequentialImpulse:Physics3DSequentialImpulseConfig; }).sequentialImpulse : { var warmStarting:Bool; }).warmStarting : Bool) : Bool)) { return; }
-    for (constraint in _Runtime.iterable((cast world.solver : { var constraints:Array<Physics3DContactConstraint>; }).constraints)) {
-      var contact:Physics3DContact = flighthq._internal._StaticIndex.readArray(world.contacts, constraint.contact);
-      var bodyA:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get(contact.bodyA));
-      var bodyB:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get(contact.bodyB));
-      if ((cast ((cast _Runtime.strictEquals(bodyA, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(bodyB, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { continue; }
-      {
-        var i:Float = 0.0;
-        while ((cast ((cast i : Float) < (cast constraint.pointCount : Float)) : Bool)) {
-          var source:Physics3DContactPoint = flighthq._internal._StaticIndex.readArray(contact.points, i);
-          var point:Physics3DContactConstraintPoint = flighthq._internal._StaticIndex.readArray(constraint.points, i);
-          Solver.applyContactImpulse__solver(({ final __callArgument30:Dynamic = bodyA; __callArgument30; }), ({ final __callArgument31:Dynamic = bodyB; __callArgument31; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast (((contact.normalX * point.normalImpulse) + (constraint.tangent0X * point.tangentImpulse0)) + (constraint.tangent1X * point.tangentImpulse1)) : Float), (cast (((contact.normalY * point.normalImpulse) + (constraint.tangent0Y * point.tangentImpulse0)) + (constraint.tangent1Y * point.tangentImpulse1)) : Float), (cast (((contact.normalZ * point.normalImpulse) + (constraint.tangent0Z * point.tangentImpulse0)) + (constraint.tangent1Z * point.tangentImpulse1)) : Float));
-          (i = cast ((i + 1.0) : Dynamic));
+    var constraints:Array<Physics3DContactConstraint> = cast _Runtime.UNDEFINED;
+    if ((cast !(cast (cast (cast world.config : Physics3DSolverConfig).sequentialImpulse : { var warmStarting:Bool; }).warmStarting : Bool) : Bool)) { return; }
+    constraints = (cast world.solver : Physics3DSequentialImpulseState).constraints;
+    {
+      var constraintIndex:Float = 0.0;
+      while ((cast ((cast constraintIndex : Float) < (cast _Runtime.field(constraints, 'length') : Float)) : Bool)) {
+        var constraint:Physics3DContactConstraint = flighthq._internal._StaticIndex.readArray(constraints, constraintIndex);
+        var contact:Physics3DContact = flighthq._internal._StaticIndex.readArray(world.contacts, constraint.contact);
+        var bodyA:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get((cast contact : Physics3DContact).bodyA));
+        var bodyB:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get((cast contact : Physics3DContact).bodyB));
+        if ((cast ((cast _Runtime.strictEquals(bodyA, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(bodyB, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (constraintIndex = cast ((constraintIndex + 1.0) : Dynamic)); continue; }
+        {
+          var i:Float = 0.0;
+          while ((cast ((cast i : Float) < (cast constraint.pointCount : Float)) : Bool)) {
+            var source:Physics3DContactPoint = flighthq._internal._StaticIndex.readArray((cast contact : Physics3DContact).points, i);
+            var point:Physics3DContactConstraintPoint = flighthq._internal._StaticIndex.readArray(constraint.points, i);
+            Solver.applyContactImpulse__solver(({ final __callArgument34:Dynamic = bodyA; __callArgument34; }), ({ final __callArgument35:Dynamic = bodyB; __callArgument35; }), (cast (cast source : Physics3DContactPoint).rAX : Float), (cast (cast source : Physics3DContactPoint).rAY : Float), (cast (cast source : Physics3DContactPoint).rAZ : Float), (cast (cast source : Physics3DContactPoint).rBX : Float), (cast (cast source : Physics3DContactPoint).rBY : Float), (cast (cast source : Physics3DContactPoint).rBZ : Float), (cast ((((cast contact : Physics3DContact).normalX * point.normalImpulse) + (constraint.tangent0X * point.tangentImpulse0)) + (constraint.tangent1X * point.tangentImpulse1)) : Float), (cast ((((cast contact : Physics3DContact).normalY * point.normalImpulse) + (constraint.tangent0Y * point.tangentImpulse0)) + (constraint.tangent1Y * point.tangentImpulse1)) : Float), (cast ((((cast contact : Physics3DContact).normalZ * point.normalImpulse) + (constraint.tangent0Z * point.tangentImpulse0)) + (constraint.tangent1Z * point.tangentImpulse1)) : Float));
+            (i = cast ((i + 1.0) : Dynamic));
+          }
         }
+        (constraintIndex = cast ((constraintIndex + 1.0) : Dynamic));
       }
     }
   }
 
   public static function applyContactImpulse__solver(bodyA:RigidBody3D, bodyB:RigidBody3D, rAX:Float, rAY:Float, rAZ:Float, rBX:Float, rBY:Float, rBZ:Float, impulseX:Float, impulseY:Float, impulseZ:Float):Void {
-    Solver.applyBodyImpulse__solver(({ final __callArgument32:Dynamic = bodyA; __callArgument32; }), (cast rAX : Float), (cast rAY : Float), (cast rAZ : Float), (cast impulseX : Float), (cast impulseY : Float), (cast impulseZ : Float));
-    Solver.applyBodyImpulse__solver(({ final __callArgument33:Dynamic = bodyB; __callArgument33; }), (cast rBX : Float), (cast rBY : Float), (cast rBZ : Float), (cast -impulseX : Float), (cast -impulseY : Float), (cast -impulseZ : Float));
+    Solver.applyBodyImpulse__solver(({ final __callArgument36:Dynamic = bodyA; __callArgument36; }), (cast rAX : Float), (cast rAY : Float), (cast rAZ : Float), (cast impulseX : Float), (cast impulseY : Float), (cast impulseZ : Float));
+    Solver.applyBodyImpulse__solver(({ final __callArgument37:Dynamic = bodyB; __callArgument37; }), (cast rBX : Float), (cast rBY : Float), (cast rBZ : Float), (cast -impulseX : Float), (cast -impulseY : Float), (cast -impulseZ : Float));
   }
 
   public static function applyBodyImpulse__solver(body:RigidBody3D, rX:Float, rY:Float, rZ:Float, impulseX:Float, impulseY:Float, impulseZ:Float):Void {
@@ -206,16 +302,16 @@ class Solver {
     torqueX = ((rY * impulseZ) - (rZ * impulseY));
     torqueY = ((rZ * impulseX) - (rX * impulseZ));
     torqueZ = ((rX * impulseY) - (rY * impulseX));
-    Solver.readWorldInverseInertia__solver(({ final __callArgument34:Dynamic = body; __callArgument34; }), ({ final __callArgument35:Dynamic = Solver.scratchTensor__solver; __callArgument35; }));
-    applySymmetricTensor(({ final __callArgument36:Dynamic = Solver.scratchTensor__solver; __callArgument36; }), (cast torqueX : Float), (cast torqueY : Float), (cast torqueZ : Float), ({ final __callArgument37:Dynamic = Solver.scratchVector__solver; __callArgument37; }));
+    Solver.readWorldInverseInertia__solver(({ final __callArgument38:Dynamic = body; __callArgument38; }), ({ final __callArgument39:Dynamic = Solver.scratchTensor__solver; __callArgument39; }));
+    applySymmetricTensor(({ final __callArgument40:Dynamic = Solver.scratchTensor__solver; __callArgument40; }), (cast torqueX : Float), (cast torqueY : Float), (cast torqueZ : Float), ({ final __callArgument41:Dynamic = Solver.scratchVector__solver; __callArgument41; }));
     ((cast body : RigidBody3D).angularVelocityX += flighthq._internal._StaticIndex.readFloatArrayTyped((cast Solver.scratchVector__solver : Array<Float>), (cast 0.0 : Float)));
     ((cast body : RigidBody3D).angularVelocityY += flighthq._internal._StaticIndex.readFloatArrayTyped((cast Solver.scratchVector__solver : Array<Float>), (cast 1.0 : Float)));
     ((cast body : RigidBody3D).angularVelocityZ += flighthq._internal._StaticIndex.readFloatArrayTyped((cast Solver.scratchVector__solver : Array<Float>), (cast 2.0 : Float)));
   }
 
   public static function applyPositionCorrection__solver(bodyA:RigidBody3D, bodyB:RigidBody3D, rAX:Float, rAY:Float, rAZ:Float, rBX:Float, rBY:Float, rBZ:Float, correctionX:Float, correctionY:Float, correctionZ:Float):Void {
-    Solver.applyBodyPositionCorrection__solver(({ final __callArgument38:Dynamic = bodyA; __callArgument38; }), (cast rAX : Float), (cast rAY : Float), (cast rAZ : Float), (cast correctionX : Float), (cast correctionY : Float), (cast correctionZ : Float));
-    Solver.applyBodyPositionCorrection__solver(({ final __callArgument39:Dynamic = bodyB; __callArgument39; }), (cast rBX : Float), (cast rBY : Float), (cast rBZ : Float), (cast -correctionX : Float), (cast -correctionY : Float), (cast -correctionZ : Float));
+    Solver.applyBodyPositionCorrection__solver(({ final __callArgument42:Dynamic = bodyA; __callArgument42; }), (cast rAX : Float), (cast rAY : Float), (cast rAZ : Float), (cast correctionX : Float), (cast correctionY : Float), (cast correctionZ : Float));
+    Solver.applyBodyPositionCorrection__solver(({ final __callArgument43:Dynamic = bodyB; __callArgument43; }), (cast rBX : Float), (cast rBY : Float), (cast rBZ : Float), (cast -correctionX : Float), (cast -correctionY : Float), (cast -correctionZ : Float));
   }
 
   public static function applyBodyPositionCorrection__solver(body:RigidBody3D, rX:Float, rY:Float, rZ:Float, correctionX:Float, correctionY:Float, correctionZ:Float):Void {
@@ -241,8 +337,8 @@ class Solver {
     turnX = ((rY * correctionZ) - (rZ * correctionY));
     turnY = ((rZ * correctionX) - (rX * correctionZ));
     turnZ = ((rX * correctionY) - (rY * correctionX));
-    Solver.readWorldInverseInertia__solver(({ final __callArgument40:Dynamic = body; __callArgument40; }), ({ final __callArgument41:Dynamic = Solver.scratchTensor__solver; __callArgument41; }));
-    applySymmetricTensor(({ final __callArgument42:Dynamic = Solver.scratchTensor__solver; __callArgument42; }), (cast turnX : Float), (cast turnY : Float), (cast turnZ : Float), ({ final __callArgument43:Dynamic = Solver.scratchVector__solver; __callArgument43; }));
+    Solver.readWorldInverseInertia__solver(({ final __callArgument44:Dynamic = body; __callArgument44; }), ({ final __callArgument45:Dynamic = Solver.scratchTensor__solver; __callArgument45; }));
+    applySymmetricTensor(({ final __callArgument46:Dynamic = Solver.scratchTensor__solver; __callArgument46; }), (cast turnX : Float), (cast turnY : Float), (cast turnZ : Float), ({ final __callArgument47:Dynamic = Solver.scratchVector__solver; __callArgument47; }));
     angleX = flighthq._internal._StaticIndex.readFloatArrayTyped((cast Solver.scratchVector__solver : Array<Float>), (cast 0.0 : Float));
     angleY = flighthq._internal._StaticIndex.readFloatArrayTyped((cast Solver.scratchVector__solver : Array<Float>), (cast 1.0 : Float));
     angleZ = flighthq._internal._StaticIndex.readFloatArrayTyped((cast Solver.scratchVector__solver : Array<Float>), (cast 2.0 : Float));
@@ -268,20 +364,15 @@ class Solver {
     ((cast body : RigidBody3D).orientationW = nextW);
   }
 
-  public static function findPointByFeatureId__solver(constraint:Physics3DContactConstraint, featureId:Float):Null<Physics3DContactConstraintPoint> {
+  public static function findPreviousPointByFeatureId__solver(featureId:Float, pointCount:Float):Float {
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast constraint.pointCount : Float)) : Bool)) {
-        if ((cast _Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(constraint.points, i) : { var featureId:Float; }).featureId, featureId) : Bool)) { return cast flighthq._internal._StaticIndex.readArray(constraint.points, i); }
+      while ((cast ((cast i : Float) < (cast pointCount : Float)) : Bool)) {
+        if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast Solver.previousFeatures__solver : Array<Float>), (cast i : Float)), featureId) : Bool)) { return cast i; }
         (i = cast ((i + 1.0) : Dynamic));
       }
     }
-    return cast null;
-    return cast null;
-  }
-
-  public static function getContactPairKey__solver(bodyA:Float, bodyB:Float):Float {
-    return cast ((bodyA * Solver.PAIR_KEY_SCALE__solver) + bodyB);
+    return cast -1.0;
     return cast null;
   }
 
@@ -297,14 +388,14 @@ class Solver {
     crossAX = ((rAY * directionZ) - (rAZ * directionY));
     crossAY = ((rAZ * directionX) - (rAX * directionZ));
     crossAZ = ((rAX * directionY) - (rAY * directionX));
-    Solver.readWorldInverseInertia__solver(({ final __callArgument44:Dynamic = bodyA; __callArgument44; }), ({ final __callArgument45:Dynamic = Solver.scratchTensor__solver; __callArgument45; }));
-    applySymmetricTensor(({ final __callArgument46:Dynamic = Solver.scratchTensor__solver; __callArgument46; }), (cast crossAX : Float), (cast crossAY : Float), (cast crossAZ : Float), ({ final __callArgument47:Dynamic = Solver.scratchVector__solver; __callArgument47; }));
+    Solver.readWorldInverseInertia__solver(({ final __callArgument48:Dynamic = bodyA; __callArgument48; }), ({ final __callArgument49:Dynamic = Solver.scratchTensor__solver; __callArgument49; }));
+    applySymmetricTensor(({ final __callArgument50:Dynamic = Solver.scratchTensor__solver; __callArgument50; }), (cast crossAX : Float), (cast crossAY : Float), (cast crossAZ : Float), ({ final __callArgument51:Dynamic = Solver.scratchVector__solver; __callArgument51; }));
     (denominator = cast ((denominator + (((crossAX * flighthq._internal._StaticIndex.readFloatArrayTyped((cast Solver.scratchVector__solver : Array<Float>), (cast 0.0 : Float))) + (crossAY * flighthq._internal._StaticIndex.readFloatArrayTyped((cast Solver.scratchVector__solver : Array<Float>), (cast 1.0 : Float)))) + (crossAZ * flighthq._internal._StaticIndex.readFloatArrayTyped((cast Solver.scratchVector__solver : Array<Float>), (cast 2.0 : Float))))) : Dynamic));
     crossBX = ((rBY * directionZ) - (rBZ * directionY));
     crossBY = ((rBZ * directionX) - (rBX * directionZ));
     crossBZ = ((rBX * directionY) - (rBY * directionX));
-    Solver.readWorldInverseInertia__solver(({ final __callArgument48:Dynamic = bodyB; __callArgument48; }), ({ final __callArgument49:Dynamic = Solver.scratchTensor__solver; __callArgument49; }));
-    applySymmetricTensor(({ final __callArgument50:Dynamic = Solver.scratchTensor__solver; __callArgument50; }), (cast crossBX : Float), (cast crossBY : Float), (cast crossBZ : Float), ({ final __callArgument51:Dynamic = Solver.scratchVector__solver; __callArgument51; }));
+    Solver.readWorldInverseInertia__solver(({ final __callArgument52:Dynamic = bodyB; __callArgument52; }), ({ final __callArgument53:Dynamic = Solver.scratchTensor__solver; __callArgument53; }));
+    applySymmetricTensor(({ final __callArgument54:Dynamic = Solver.scratchTensor__solver; __callArgument54; }), (cast crossBX : Float), (cast crossBY : Float), (cast crossBZ : Float), ({ final __callArgument55:Dynamic = Solver.scratchVector__solver; __callArgument55; }));
     (denominator = cast ((denominator + (((crossBX * flighthq._internal._StaticIndex.readFloatArrayTyped((cast Solver.scratchVector__solver : Array<Float>), (cast 0.0 : Float))) + (crossBY * flighthq._internal._StaticIndex.readFloatArrayTyped((cast Solver.scratchVector__solver : Array<Float>), (cast 1.0 : Float)))) + (crossBZ * flighthq._internal._StaticIndex.readFloatArrayTyped((cast Solver.scratchVector__solver : Array<Float>), (cast 2.0 : Float))))) : Dynamic));
     return cast ((cast ((cast denominator : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / denominator) : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
@@ -373,9 +464,31 @@ class Solver {
 
   public static final AXIS_SELECTION_THRESHOLD__solver:Float = 0.5773502691896258;
 
-  public static final PAIR_KEY_SCALE__solver:Float = 67108864.0;
-
   public static final scratchTensor__solver:Array<Float> = (cast cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
 
   public static final scratchVector__solver:Array<Float> = (cast cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
+
+  public static final previousFeatures__solver:Array<Float> = (cast cast ([] : Array<Dynamic>));
+
+  public static final previousNormalImpulses__solver:Array<Float> = (cast cast ([] : Array<Dynamic>));
+
+  public static final previousTangentImpulses0__solver:Array<Float> = (cast cast ([] : Array<Dynamic>));
+
+  public static final previousTangentImpulses1__solver:Array<Float> = (cast cast ([] : Array<Dynamic>));
+
+  public static function acquirePhysics3DPositionScratch__solver():Physics3DPositionScratch__solver {
+    return cast _Runtime.coalesce(_Runtime.callProperty(Solver.physics3DPositionScratchPool__solver, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast Solver.createPhysics3DPositionScratch__solver() : Physics3DPositionScratch__solver));
+    return cast null;
+  }
+
+  public static function createPhysics3DPositionScratch__solver():Physics3DPositionScratch__solver {
+    return cast { manifold: (cast createCollisionContactManifold3D() : CollisionContactManifold3D), centerA: cast ([0.0, 0.0, 0.0] : Array<Dynamic>), centerB: cast ([0.0, 0.0, 0.0] : Array<Dynamic>) };
+    return cast null;
+  }
+
+  public static function releasePhysics3DPositionScratch__solver(scratch:Physics3DPositionScratch__solver):Void {
+    _Runtime.callProperty(Solver.physics3DPositionScratchPool__solver, 'push', cast ([scratch] : Array<Dynamic>));
+  }
+
+  public static final physics3DPositionScratchPool__solver:Array<Physics3DPositionScratch__solver> = (cast cast ([(cast Solver.createPhysics3DPositionScratch__solver() : Physics3DPositionScratch__solver)] : Array<Dynamic>));
 }

@@ -7,8 +7,10 @@ import flighthq.types.Physics3D.Physics3DContact;
 import flighthq.types.Physics3D.Physics3DContactPoint;
 
 class Contacts {
-  public static function createPhysics3DContact(bodyA:Float, bodyB:Float):Physics3DContact {
-    return cast { bodyA: HxMath.min(bodyA, bodyB), bodyB: HxMath.max(bodyA, bodyB), normalX: 0.0, normalY: 0.0, normalZ: 0.0, pointCount: 0.0, points: cast ([] : Array<Dynamic>), friction: 0.0, restitution: 0.0, enabled: true, sensor: false, touching: false };
+  public static function createPhysics3DContact(bodyA:Float, bodyB:Float, colliderA:Float = 0.0, colliderB:Float = 0.0):Physics3DContact {
+    var ordered:Bool = cast _Runtime.UNDEFINED;
+    ordered = ((cast bodyA : Float) <= (cast bodyB : Float));
+    return cast { bodyA: ((cast ordered : Bool) ? (cast bodyA : Dynamic) : (cast bodyB : Dynamic)), bodyB: ((cast ordered : Bool) ? (cast bodyB : Dynamic) : (cast bodyA : Dynamic)), colliderA: ((cast ordered : Bool) ? (cast colliderA : Dynamic) : (cast colliderB : Dynamic)), colliderB: ((cast ordered : Bool) ? (cast colliderB : Dynamic) : (cast colliderA : Dynamic)), normalX: 0.0, normalY: 0.0, normalZ: 0.0, pointCount: 0.0, points: cast ([] : Array<Dynamic>), friction: 0.0, restitution: 0.0, enabled: true, sensor: false, touching: false };
     return cast null;
   }
 

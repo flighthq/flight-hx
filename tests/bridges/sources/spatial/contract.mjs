@@ -3,7 +3,12 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './bvh3D.mjs';
 export * from './explainSpatialIndexing2D.mjs';
+export * from './explainSpatialIndexing3D.mjs';
 export * from './formatSpatialIndexingNotice.mjs';
 export * from './spatialIndex.mjs';
+export * from './spatialIndex3D.mjs';
+export * from './spatialIndexingGuard.mjs';
 export * from './uniformGrid.mjs';
+export * from './uniformGrid3D.mjs';

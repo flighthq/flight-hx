@@ -4,9 +4,12 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './colliderTransform.mjs';
+export * from './enablePhysics2DGuards.mjs';
+export * from './explainPhysics2DCollision.mjs';
 export * from './explainPhysics2DJoints.mjs';
 export * from './explainPhysics2DStep.mjs';
 export * from './jointFactories.mjs';
+export * from './jointReactions.mjs';
 export * from './jointRegistry.mjs';
 export * from './joints.mjs';
 export * from './massProperties.mjs';

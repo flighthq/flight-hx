@@ -94,7 +94,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free rich-text content',
   },
   {
-    declarationFingerprint: 'sha256:7eb39c9d903a978655a76f87f5e3f0e69900aba451ca34e36b8f51f5a68cf712',
+    declarationFingerprint: 'sha256:55ee81118f0e45a43a3c48b30232417b99732ab1105927547fb55f44cdfe6c00',
     id: '@flighthq/types:interface#Physics2DWorld',
     purpose: 'reviewed escape-free physics world',
   },
@@ -319,7 +319,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free 2D collision contact manifold after dimension-explicit upstream rename',
   },
   {
-    declarationFingerprint: 'sha256:7047314bcb16b3ebe3626298c25398572a66360e5e872133b33a21415c4e2e88',
+    declarationFingerprint: 'sha256:2bb0058f4ee30df35910f715952ba564655e18a8f91d5e981212a644478e74e5',
     id: '@flighthq/types:interface#Physics2DPrismaticJoint',
     purpose: 'reviewed escape-free physics prismatic joint',
   },
@@ -339,7 +339,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free physics wheel joint',
   },
   {
-    declarationFingerprint: 'sha256:f45bdd8ec8f78d20609e6978dab03cf413f0cd31305168d66313d7eb273099a1',
+    declarationFingerprint: 'sha256:2e891860961c40694e0204cbd987d650d4f8762a6d3d6ef3bd340e98b44c1af2',
     id: '@flighthq/types:interface#Physics2DRevoluteJoint',
     purpose: 'reviewed escape-free physics revolute joint',
   },
@@ -1579,12 +1579,12 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free physics gear-joint options',
   },
   {
-    declarationFingerprint: 'sha256:e35c04cec06deb040e790ba9683b30466109fee8b73fe27022136defde1c7501',
+    declarationFingerprint: 'sha256:97b067d24a365ba0250d47d2c37194f205a4c5afd97cf32682b63175e05064b7',
     id: '@flighthq/types:interface#Physics2DMouseJointOptions',
     purpose: 'reviewed escape-free physics mouse-joint options',
   },
   {
-    declarationFingerprint: 'sha256:c96ac7eb691c145a2c2a1c971160cca42ae2382b4cace6917437f2fbe6d98fae',
+    declarationFingerprint: 'sha256:ccf2479b5ae0df31a4a6efc5d386748dc1293079d540a6fc6914cbe8ee777b27',
     id: '@flighthq/types:interface#Physics2DPrismaticJointOptions',
     purpose: 'reviewed escape-free physics prismatic-joint options',
   },
@@ -1794,14 +1794,9 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free SWF morph-shape paths',
   },
   {
-    declarationFingerprint: 'sha256:478fc67f4c76a013a87b78935ea0183d26e38fcb81c608e340f38357ab1bde6a',
+    declarationFingerprint: 'sha256:e5725966d9ef05f5946cb352fed09496a74c30c0931384dfe860330c0b994b4f',
     id: '@flighthq/types:interface#Physics3DWorld',
     purpose: 'reviewed escape-free Physics3D world',
-  },
-  {
-    declarationFingerprint: 'sha256:80fa54977329f20751f7c2bd023c5b0b1b6ece290cfa9bcd5edaf93f43aa9ec5',
-    id: '@flighthq/types:interface#Physics3DContact',
-    purpose: 'reviewed escape-free Physics3D contact',
   },
   {
     declarationFingerprint: 'sha256:280e588114daf5dcd9e2597b4995772ffbf8cb4fecc34588b8f09d93669e2ca3',
@@ -1809,12 +1804,12 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free Physics3D mass data',
   },
   {
-    declarationFingerprint: 'sha256:3617e061adc1153c05c953faf6638b850bdd8a7cf5dc7ea4924c776b3ae87730',
+    declarationFingerprint: 'sha256:7cdcbd182487a3c0fea4385828ea058a2622c2848a1e377996500b7d691bb753',
     id: '@flighthq/types:interface#Physics3DHingeJoint',
     purpose: 'reviewed escape-free Physics3D hinge joint',
   },
   {
-    declarationFingerprint: 'sha256:2e63948889100e2121b93104f31cca5a88c20e619e5fe18c77d2df4c201b07fd',
+    declarationFingerprint: 'sha256:050a531fd480fabcd1aea7602a27f733b1e2c3ef774e92d8c8679c5810e9c6c9',
     id: '@flighthq/types:interface#Physics3DSliderJoint',
     purpose: 'reviewed escape-free Physics3D slider joint',
   },
@@ -1829,19 +1824,14 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free Physics3D contact-constraint point',
   },
   {
-    declarationFingerprint: 'sha256:d9850010c5e1c18420f0c418abd2e3c55fff9bd10e447971605d96046db624a5',
+    declarationFingerprint: 'sha256:799f1e572fee32caea94d4bd140ed192e65896eee0d7ea6eaa43a7cc93803755',
     id: '@flighthq/types:interface#Physics3DConeTwistJoint',
     purpose: 'reviewed escape-free Physics3D cone-twist joint',
   },
   {
-    declarationFingerprint: 'sha256:4ccbdf1e8aedb77ad285e1cbb2fac79c0038c24d9301c0dd3e56c0a9c0e8dd85',
+    declarationFingerprint: 'sha256:5e4c27794d880512671571711e950187f564950a5e70b027e9a1917bc8c16f99',
     id: '@flighthq/types:interface#Physics3DGeneric6DofJoint',
     purpose: 'reviewed escape-free Physics3D generic six-DOF joint',
-  },
-  {
-    declarationFingerprint: 'sha256:505d2ba56fc2f74759b113fadc396ec3e642b407eb3177163ae8edfcaae6972c',
-    id: '@flighthq/types:interface#Physics3DSolverConfig',
-    purpose: 'reviewed escape-free Physics3D solver config',
   },
   {
     declarationFingerprint: 'sha256:bf54026159b9f0b3aa3951ced7856cb58c83480a7bfffbc5dd32f36ea5a03b02',
@@ -1919,7 +1909,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free registry requirement',
   },
   {
-    declarationFingerprint: 'sha256:40930c997e8c14a8706c563ebe7385d8392f11fcbb0e0ed4ebc0d9f3d1d7c083',
+    declarationFingerprint: 'sha256:1a3a86ea0b1f69e258717f4914660a834f0c7be7d67f4f95d5258fb93a7f3344',
     id: '@flighthq/types:interface#Physics3DGeneric6DofJointOptions',
     purpose: 'reviewed escape-free Physics3D generic six-DOF joint options',
   },
@@ -1929,7 +1919,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free Physics3D joint-frame options',
   },
   {
-    declarationFingerprint: 'sha256:3b0da11468a92a3dd675ec3d6cf7205335cf475811446c07dc627a00a60534f2',
+    declarationFingerprint: 'sha256:46ad4888a7ca52b21b8591d90409b267d6433313e236c5bf988ae892dd07b4ff',
     id: '@flighthq/types:interface#Physics3DJointOptions',
     purpose: 'reviewed escape-free Physics3D joint options',
   },
@@ -1937,11 +1927,6 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     declarationFingerprint: 'sha256:0de6797dfe9c8f540e889ae0af3a97e5cd7aff54d43a7d4cc885954bac19f8df',
     id: '@flighthq/types:interface#Physics3DSequentialImpulseConfig',
     purpose: 'reviewed escape-free Physics3D sequential-impulse config',
-  },
-  {
-    declarationFingerprint: 'sha256:30d66ea2af3409e1b0c2bd65a21eb638acbedf4459c976c4975d470e1a986b3e',
-    id: '@flighthq/types:interface#Physics3DSequentialImpulseState',
-    purpose: 'reviewed escape-free Physics3D sequential-impulse state',
   },
 ];
 

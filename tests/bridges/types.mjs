@@ -103,6 +103,7 @@ export const LogLevel = compiled.flighthq.types.Types.__enum_LogLevel;
 export const LumenLightUnit = compiled.flighthq.types.Types.LumenLightUnit;
 export const LuxLightUnit = compiled.flighthq.types.Types.LuxLightUnit;
 export const MatcapMaterialKind = compiled.flighthq.types.Types.MatcapMaterialKind;
+export const MAX_COLLISION_CONTACT_POINTS_3D = compiled.flighthq.types.Types.MAX_COLLISION_CONTACT_POINTS_3D;
 export const MAX_DIRECTIONAL_SHADOW_PCF_RADIUS = compiled.flighthq.types.Types.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;
 export const MAX_FORWARD_LIGHTS = compiled.flighthq.types.Types.MAX_FORWARD_LIGHTS;
 export const MeshAttachment2DKind = compiled.flighthq.types.Types.MeshAttachment2DKind;

@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const addLogSink = api.addLogSink;
 export const beginLogGroup = api.beginLogGroup;
+export const clearLogChannelLevel = api.clearLogChannelLevel;
 export const clearLogChannelLevels = api.clearLogChannelLevels;
 export const clearLogGroups = api.clearLogGroups;
 export const clearLogOnceKeys = api.clearLogOnceKeys;

@@ -4,35 +4,67 @@ package flighthq.collision;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.collision.CollideContactManifold2D as Facade_Collision_flighthq_collision_CollideContactManifold2D;
+import flighthq.collision.CollideContactManifold3D as Facade_Collision_flighthq_collision_CollideContactManifold3D;
+import flighthq.collision.CollisionFace3D as Facade_Collision_flighthq_collision_CollisionFace3D;
 import flighthq.collision.CollisionSupport2D as Facade_Collision_flighthq_collision_CollisionSupport2D;
-import flighthq.collision.ContactManifold as Facade_Collision_flighthq_collision_ContactManifold;
+import flighthq.collision.CollisionSupport3D as Facade_Collision_flighthq_collision_CollisionSupport3D;
+import flighthq.collision.ContactManifold2D as Facade_Collision_flighthq_collision_ContactManifold2D;
+import flighthq.collision.ContactManifold3D as Facade_Collision_flighthq_collision_ContactManifold3D;
+import flighthq.collision.ConvexHull3D as Facade_Collision_flighthq_collision_ConvexHull3D;
 import flighthq.collision.EnableCollisionGuards as Facade_Collision_flighthq_collision_EnableCollisionGuards;
 import flighthq.collision.ExplainCollisionTest2D as Facade_Collision_flighthq_collision_ExplainCollisionTest2D;
+import flighthq.collision.ExplainCollisionTest3D as Facade_Collision_flighthq_collision_ExplainCollisionTest3D;
 import flighthq.collision.Gjk2D as Facade_Collision_flighthq_collision_Gjk2D;
-import flighthq.collision.Manifold as Facade_Collision_flighthq_collision_Manifold;
-import flighthq.collision.PointContainment as Facade_Collision_flighthq_collision_PointContainment;
+import flighthq.collision.Gjk3D as Facade_Collision_flighthq_collision_Gjk3D;
+import flighthq.collision.Manifold2D as Facade_Collision_flighthq_collision_Manifold2D;
+import flighthq.collision.Manifold3D as Facade_Collision_flighthq_collision_Manifold3D;
+import flighthq.collision.PointContainment2D as Facade_Collision_flighthq_collision_PointContainment2D;
+import flighthq.collision.PointContainment3D as Facade_Collision_flighthq_collision_PointContainment3D;
 import flighthq.collision.RaycastCollisionShape2D as Facade_Collision_flighthq_collision_RaycastCollisionShape2D;
+import flighthq.collision.RaycastCollisionShape3D as Facade_Collision_flighthq_collision_RaycastCollisionShape3D;
 import flighthq.collision.RegisterBuiltInCollisionPairTests2D as Facade_Collision_flighthq_collision_RegisterBuiltInCollisionPairTests2D;
-import flighthq.collision.SegmentCollision as Facade_Collision_flighthq_collision_SegmentCollision;
-import flighthq.collision.ShapeCollision as Facade_Collision_flighthq_collision_ShapeCollision;
-import flighthq.collision.ShapeContact as Facade_Collision_flighthq_collision_ShapeContact;
+import flighthq.collision.RegisterBuiltInCollisionPairTests3D as Facade_Collision_flighthq_collision_RegisterBuiltInCollisionPairTests3D;
+import flighthq.collision.SegmentCollision2D as Facade_Collision_flighthq_collision_SegmentCollision2D;
+import flighthq.collision.ShapeCollision2D as Facade_Collision_flighthq_collision_ShapeCollision2D;
+import flighthq.collision.ShapeCollision3D as Facade_Collision_flighthq_collision_ShapeCollision3D;
+import flighthq.collision.ShapeContact2D as Facade_Collision_flighthq_collision_ShapeContact2D;
 import flighthq.collision.SweepCollisionShape2D as Facade_Collision_flighthq_collision_SweepCollisionShape2D;
 import flighthq.collision.TestCollision2D as Facade_Collision_flighthq_collision_TestCollision2D;
+import flighthq.collision.TestCollision3D as Facade_Collision_flighthq_collision_TestCollision3D;
+import flighthq.collision.TriangleMesh3D as Facade_Collision_flighthq_collision_TriangleMesh3D;
 import flighthq.types.Collision.CollisionAabb2D;
+import flighthq.types.Collision.CollisionAabb3D;
+import flighthq.types.Collision.CollisionBox3D;
 import flighthq.types.Collision.CollisionBuiltInShape2D;
+import flighthq.types.Collision.CollisionBuiltInShape3D;
+import flighthq.types.Collision.CollisionCapsule3D;
 import flighthq.types.Collision.CollisionCircle2D;
 import flighthq.types.Collision.CollisionContactManifold2D;
+import flighthq.types.Collision.CollisionContactManifold3D;
+import flighthq.types.Collision.CollisionFaceQuery3D;
+import flighthq.types.Collision.CollisionHeightfield3D;
 import flighthq.types.Collision.CollisionManifold2D;
+import flighthq.types.Collision.CollisionManifold3D;
 import flighthq.types.Collision.CollisionObb2D;
 import flighthq.types.Collision.CollisionPairTest2D;
+import flighthq.types.Collision.CollisionPairTest3D;
 import flighthq.types.Collision.CollisionPolygon2D;
 import flighthq.types.Collision.CollisionRaycastHit2D;
+import flighthq.types.Collision.CollisionRaycastHit3D;
 import flighthq.types.Collision.CollisionSegment2D;
 import flighthq.types.Collision.CollisionShape2D;
+import flighthq.types.Collision.CollisionShape3D;
 import flighthq.types.Collision.CollisionShapeKind2D;
+import flighthq.types.Collision.CollisionShapeKind3D;
+import flighthq.types.Collision.CollisionSphere3D;
 import flighthq.types.Collision.CollisionSupport2D;
+import flighthq.types.Collision.CollisionSupport3D;
 import flighthq.types.Collision.CollisionTestExplanation2D;
+import flighthq.types.Collision.CollisionTestExplanation3D;
+import flighthq.types.Collision.CollisionTestStatus;
 import flighthq.types.Collision.CollisionTimeOfImpact2D;
+import flighthq.types.Collision.CollisionTimeOfImpact3D;
+import flighthq.types.Collision.CollisionTriangleMesh3D;
 
 class Collision {
   public static function areCollisionGuardsEnabled():Bool {
@@ -41,45 +73,63 @@ class Collision {
   }
 
   public static function clearCollisionContactManifold2D(out:CollisionContactManifold2D):Void {
-    Facade_Collision_flighthq_collision_ContactManifold.clearCollisionContactManifold2D(out);
+    Facade_Collision_flighthq_collision_ContactManifold2D.clearCollisionContactManifold2D(out);
+  }
+
+  public static function clearCollisionContactManifold3D(out:CollisionContactManifold3D):Void {
+    Facade_Collision_flighthq_collision_ContactManifold3D.clearCollisionContactManifold3D(out);
   }
 
   public static function clearCollisionManifold2D(out:CollisionManifold2D):Void {
-    Facade_Collision_flighthq_collision_Manifold.clearCollisionManifold2D(out);
+    Facade_Collision_flighthq_collision_Manifold2D.clearCollisionManifold2D(out);
   }
 
-  public static function collideAabbAabbContactManifold(a:CollisionAabb2D, b:CollisionAabb2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeContact.collideAabbAabbContactManifold(a, b, out);
+  public static function clearCollisionManifold3D(out:CollisionManifold3D):Void {
+    Facade_Collision_flighthq_collision_Manifold3D.clearCollisionManifold3D(out);
+  }
+
+  public static function collideAabbAabbContactManifold2D(a:CollisionAabb2D, b:CollisionAabb2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact2D.collideAabbAabbContactManifold2D(a, b, out);
     return cast null;
   }
 
-  public static function collideAabbObbContactManifold(a:CollisionAabb2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeContact.collideAabbObbContactManifold(a, b, out);
+  public static function collideAabbObbContactManifold2D(a:CollisionAabb2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact2D.collideAabbObbContactManifold2D(a, b, out);
     return cast null;
   }
 
-  public static function collideAabbPolygonContactManifold(a:CollisionAabb2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeContact.collideAabbPolygonContactManifold(a, b, out);
+  public static function collideAabbPolygonContactManifold2D(a:CollisionAabb2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact2D.collideAabbPolygonContactManifold2D(a, b, out);
     return cast null;
   }
 
-  public static function collideCircleAabbContactManifold(a:CollisionCircle2D, b:CollisionAabb2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeContact.collideCircleAabbContactManifold(a, b, out);
+  public static function collideCircleAabbContactManifold2D(a:CollisionCircle2D, b:CollisionAabb2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact2D.collideCircleAabbContactManifold2D(a, b, out);
     return cast null;
   }
 
-  public static function collideCircleCircleContactManifold(a:CollisionCircle2D, b:CollisionCircle2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeContact.collideCircleCircleContactManifold(a, b, out);
+  public static function collideCircleCircleContactManifold2D(a:CollisionCircle2D, b:CollisionCircle2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact2D.collideCircleCircleContactManifold2D(a, b, out);
     return cast null;
   }
 
-  public static function collideCircleObbContactManifold(a:CollisionCircle2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeContact.collideCircleObbContactManifold(a, b, out);
+  public static function collideCircleObbContactManifold2D(a:CollisionCircle2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact2D.collideCircleObbContactManifold2D(a, b, out);
     return cast null;
   }
 
-  public static function collideCirclePolygonContactManifold(a:CollisionCircle2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeContact.collideCirclePolygonContactManifold(a, b, out);
+  public static function collideCirclePolygonContactManifold2D(a:CollisionCircle2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact2D.collideCirclePolygonContactManifold2D(a, b, out);
+    return cast null;
+  }
+
+  public static function collideCollisionHeightfield3D(convex:CollisionShape3D, heightfield:CollisionHeightfield3D, out:CollisionContactManifold3D):Bool {
+    return cast Facade_Collision_flighthq_collision_TriangleMesh3D.collideCollisionHeightfield3D(convex, heightfield, out);
+    return cast null;
+  }
+
+  public static function collideCollisionTriangleMesh3D(convex:CollisionShape3D, mesh:CollisionTriangleMesh3D, out:CollisionContactManifold3D):Bool {
+    return cast Facade_Collision_flighthq_collision_TriangleMesh3D.collideCollisionTriangleMesh3D(convex, mesh, out);
     return cast null;
   }
 
@@ -88,28 +138,48 @@ class Collision {
     return cast null;
   }
 
-  public static function collideObbObbContactManifold(a:CollisionObb2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeContact.collideObbObbContactManifold(a, b, out);
+  public static function collideContactManifold3D(a:CollisionShape3D, b:CollisionShape3D, out:CollisionContactManifold3D):Bool {
+    return cast Facade_Collision_flighthq_collision_CollideContactManifold3D.collideContactManifold3D(a, b, out);
     return cast null;
   }
 
-  public static function collideObbPolygonContactManifold(a:CollisionObb2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeContact.collideObbPolygonContactManifold(a, b, out);
+  public static function collideObbObbContactManifold2D(a:CollisionObb2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact2D.collideObbObbContactManifold2D(a, b, out);
     return cast null;
   }
 
-  public static function collidePolygonPolygonContactManifold(a:CollisionPolygon2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeContact.collidePolygonPolygonContactManifold(a, b, out);
+  public static function collideObbPolygonContactManifold2D(a:CollisionObb2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact2D.collideObbPolygonContactManifold2D(a, b, out);
+    return cast null;
+  }
+
+  public static function collidePolygonPolygonContactManifold2D(a:CollisionPolygon2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeContact2D.collidePolygonPolygonContactManifold2D(a, b, out);
     return cast null;
   }
 
   public static function createCollisionContactManifold2D():CollisionContactManifold2D {
-    return cast Facade_Collision_flighthq_collision_ContactManifold.createCollisionContactManifold2D();
+    return cast Facade_Collision_flighthq_collision_ContactManifold2D.createCollisionContactManifold2D();
+    return cast null;
+  }
+
+  public static function createCollisionContactManifold3D():CollisionContactManifold3D {
+    return cast Facade_Collision_flighthq_collision_ContactManifold3D.createCollisionContactManifold3D();
+    return cast null;
+  }
+
+  public static function createCollisionHeightfield3D(columns:Float, rows:Float, heights:Array<Float>, ?cellSizeX:Float, ?cellSizeZ:Float):CollisionHeightfield3D {
+    return cast Facade_Collision_flighthq_collision_TriangleMesh3D.createCollisionHeightfield3D(columns, rows, heights, cellSizeX, cellSizeZ);
     return cast null;
   }
 
   public static function createCollisionManifold2D():CollisionManifold2D {
-    return cast Facade_Collision_flighthq_collision_Manifold.createCollisionManifold2D();
+    return cast Facade_Collision_flighthq_collision_Manifold2D.createCollisionManifold2D();
+    return cast null;
+  }
+
+  public static function createCollisionManifold3D():CollisionManifold3D {
+    return cast Facade_Collision_flighthq_collision_Manifold3D.createCollisionManifold3D();
     return cast null;
   }
 
@@ -118,8 +188,18 @@ class Collision {
     return cast null;
   }
 
+  public static function createCollisionRaycastHit3D():CollisionRaycastHit3D {
+    return cast Facade_Collision_flighthq_collision_RaycastCollisionShape3D.createCollisionRaycastHit3D();
+    return cast null;
+  }
+
   public static function createCollisionTimeOfImpact2D():CollisionTimeOfImpact2D {
     return cast Facade_Collision_flighthq_collision_SweepCollisionShape2D.createCollisionTimeOfImpact2D();
+    return cast null;
+  }
+
+  public static function createCollisionTriangleMesh3D(points:Array<Float>, indices:Array<Float>):CollisionTriangleMesh3D {
+    return cast Facade_Collision_flighthq_collision_TriangleMesh3D.createCollisionTriangleMesh3D(points, indices);
     return cast null;
   }
 
@@ -136,13 +216,38 @@ class Collision {
     return cast null;
   }
 
+  public static function explainCollisionTest3D(a:CollisionShape3D, b:CollisionShape3D):CollisionTestExplanation3D {
+    return cast Facade_Collision_flighthq_collision_ExplainCollisionTest3D.explainCollisionTest3D(a, b);
+    return cast null;
+  }
+
+  public static function getCollisionFaceQuery3D(kind:CollisionShapeKind3D):Null<CollisionFaceQuery3D> {
+    return cast Facade_Collision_flighthq_collision_CollisionFace3D.getCollisionFaceQuery3D(kind);
+    return cast null;
+  }
+
+  public static function getCollisionHeightfieldValidationStatus3D(heightfield:CollisionHeightfield3D):Null<CollisionTestStatus> {
+    return cast Facade_Collision_flighthq_collision_TriangleMesh3D.getCollisionHeightfieldValidationStatus3D(heightfield);
+    return cast null;
+  }
+
   public static function getCollisionPairTest2D(kindA:CollisionShapeKind2D, kindB:CollisionShapeKind2D):Null<CollisionPairTest2D> {
     return cast Facade_Collision_flighthq_collision_CollisionSupport2D.getCollisionPairTest2D(kindA, kindB);
     return cast null;
   }
 
+  public static function getCollisionPairTest3D(kindA:CollisionShapeKind3D, kindB:CollisionShapeKind3D):Null<CollisionPairTest3D> {
+    return cast Facade_Collision_flighthq_collision_CollisionSupport3D.getCollisionPairTest3D(kindA, kindB);
+    return cast null;
+  }
+
   public static function getCollisionShapeContainsPoint2D(shape:CollisionBuiltInShape2D, x:Float, y:Float):Bool {
-    return cast Facade_Collision_flighthq_collision_PointContainment.getCollisionShapeContainsPoint2D(shape, x, y);
+    return cast Facade_Collision_flighthq_collision_PointContainment2D.getCollisionShapeContainsPoint2D(shape, x, y);
+    return cast null;
+  }
+
+  public static function getCollisionShapeContainsPoint3D(shape:CollisionBuiltInShape3D, x:Float, y:Float, z:Float):Bool {
+    return cast Facade_Collision_flighthq_collision_PointContainment3D.getCollisionShapeContainsPoint3D(shape, x, y, z);
     return cast null;
   }
 
@@ -151,33 +256,134 @@ class Collision {
     return cast null;
   }
 
+  public static function getCollisionSupport3D(kind:CollisionShapeKind3D):Null<CollisionSupport3D> {
+    return cast Facade_Collision_flighthq_collision_CollisionSupport3D.getCollisionSupport3D(kind);
+    return cast null;
+  }
+
+  public static function getCollisionTriangleMeshValidationStatus3D(mesh:CollisionTriangleMesh3D):Null<CollisionTestStatus> {
+    return cast Facade_Collision_flighthq_collision_TriangleMesh3D.getCollisionTriangleMeshValidationStatus3D(mesh);
+    return cast null;
+  }
+
+  public static function invalidateCollisionHeightfield3D(heightfield:CollisionHeightfield3D):Void {
+    Facade_Collision_flighthq_collision_TriangleMesh3D.invalidateCollisionHeightfield3D(heightfield);
+  }
+
+  public static function invalidateCollisionTriangleMesh3D(mesh:CollisionTriangleMesh3D):Void {
+    Facade_Collision_flighthq_collision_TriangleMesh3D.invalidateCollisionTriangleMesh3D(mesh);
+  }
+
+  public static function queryCollisionAabbFace3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Float {
+    return cast Facade_Collision_flighthq_collision_CollisionFace3D.queryCollisionAabbFace3D(shape, dirX, dirY, dirZ, out);
+    return cast null;
+  }
+
+  public static function queryCollisionBoxFace3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Float {
+    return cast Facade_Collision_flighthq_collision_CollisionFace3D.queryCollisionBoxFace3D(shape, dirX, dirY, dirZ, out);
+    return cast null;
+  }
+
+  public static function queryCollisionCapsuleFace3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Float {
+    return cast Facade_Collision_flighthq_collision_CollisionFace3D.queryCollisionCapsuleFace3D(shape, dirX, dirY, dirZ, out);
+    return cast null;
+  }
+
+  public static function queryCollisionConvexFace3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Float {
+    return cast Facade_Collision_flighthq_collision_CollisionFace3D.queryCollisionConvexFace3D(shape, dirX, dirY, dirZ, out);
+    return cast null;
+  }
+
+  public static function raycastCollisionHeightfield3D(heightfield:CollisionHeightfield3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:CollisionRaycastHit3D, ?maxFraction:Float):Bool {
+    return cast Facade_Collision_flighthq_collision_TriangleMesh3D.raycastCollisionHeightfield3D(heightfield, originX, originY, originZ, directionX, directionY, directionZ, out, maxFraction);
+    return cast null;
+  }
+
   public static function raycastCollisionShape2D(shape:CollisionBuiltInShape2D, originX:Float, originY:Float, directionX:Float, directionY:Float, out:CollisionRaycastHit2D, ?maxFraction:Float):Bool {
     return cast Facade_Collision_flighthq_collision_RaycastCollisionShape2D.raycastCollisionShape2D(shape, originX, originY, directionX, directionY, out, maxFraction);
     return cast null;
+  }
+
+  public static function raycastCollisionShape3D(shape:CollisionBuiltInShape3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:CollisionRaycastHit3D, ?maxFraction:Float):Bool {
+    return cast Facade_Collision_flighthq_collision_RaycastCollisionShape3D.raycastCollisionShape3D(shape, originX, originY, originZ, directionX, directionY, directionZ, out, maxFraction);
+    return cast null;
+  }
+
+  public static function raycastCollisionTriangleMesh3D(mesh:CollisionTriangleMesh3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:CollisionRaycastHit3D, ?maxFraction:Float):Bool {
+    return cast Facade_Collision_flighthq_collision_TriangleMesh3D.raycastCollisionTriangleMesh3D(mesh, originX, originY, originZ, directionX, directionY, directionZ, out, maxFraction);
+    return cast null;
+  }
+
+  public static function registerBuiltInCollisionFaceQueries3D():Void {
+    Facade_Collision_flighthq_collision_CollisionFace3D.registerBuiltInCollisionFaceQueries3D();
   }
 
   public static function registerBuiltInCollisionPairTests2D():Void {
     Facade_Collision_flighthq_collision_RegisterBuiltInCollisionPairTests2D.registerBuiltInCollisionPairTests2D();
   }
 
+  public static function registerBuiltInCollisionPairTests3D():Void {
+    Facade_Collision_flighthq_collision_RegisterBuiltInCollisionPairTests3D.registerBuiltInCollisionPairTests3D();
+  }
+
   public static function registerBuiltInCollisionSupports2D():Void {
     Facade_Collision_flighthq_collision_CollisionSupport2D.registerBuiltInCollisionSupports2D();
+  }
+
+  public static function registerBuiltInCollisionSupports3D():Void {
+    Facade_Collision_flighthq_collision_CollisionSupport3D.registerBuiltInCollisionSupports3D();
+  }
+
+  public static function registerCollisionFaceQuery3D(kind:CollisionShapeKind3D, query:CollisionFaceQuery3D):Void {
+    Facade_Collision_flighthq_collision_CollisionFace3D.registerCollisionFaceQuery3D(kind, query);
   }
 
   public static function registerCollisionPairTest2D(kindA:CollisionShapeKind2D, kindB:CollisionShapeKind2D, test:CollisionPairTest2D):Void {
     Facade_Collision_flighthq_collision_CollisionSupport2D.registerCollisionPairTest2D(kindA, kindB, test);
   }
 
+  public static function registerCollisionPairTest3D(kindA:CollisionShapeKind3D, kindB:CollisionShapeKind3D, test:CollisionPairTest3D):Void {
+    Facade_Collision_flighthq_collision_CollisionSupport3D.registerCollisionPairTest3D(kindA, kindB, test);
+  }
+
   public static function registerCollisionSupport2D(kind:CollisionShapeKind2D, support:CollisionSupport2D):Void {
     Facade_Collision_flighthq_collision_CollisionSupport2D.registerCollisionSupport2D(kind, support);
+  }
+
+  public static function registerCollisionSupport3D(kind:CollisionShapeKind3D, support:CollisionSupport3D):Void {
+    Facade_Collision_flighthq_collision_CollisionSupport3D.registerCollisionSupport3D(kind, support);
   }
 
   public static function supportCollisionAabb2D(shape:CollisionShape2D, dirX:Float, dirY:Float, out:Array<Float>):Void {
     Facade_Collision_flighthq_collision_CollisionSupport2D.supportCollisionAabb2D(shape, dirX, dirY, out);
   }
 
+  public static function supportCollisionAabb3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
+    Facade_Collision_flighthq_collision_CollisionSupport3D.supportCollisionAabb3D(shape, dirX, dirY, dirZ, out);
+  }
+
+  public static function supportCollisionBox3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
+    Facade_Collision_flighthq_collision_CollisionSupport3D.supportCollisionBox3D(shape, dirX, dirY, dirZ, out);
+  }
+
+  public static function supportCollisionCapsule3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
+    Facade_Collision_flighthq_collision_CollisionSupport3D.supportCollisionCapsule3D(shape, dirX, dirY, dirZ, out);
+  }
+
   public static function supportCollisionCircle2D(shape:CollisionShape2D, dirX:Float, dirY:Float, out:Array<Float>):Void {
     Facade_Collision_flighthq_collision_CollisionSupport2D.supportCollisionCircle2D(shape, dirX, dirY, out);
+  }
+
+  public static function supportCollisionCone3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
+    Facade_Collision_flighthq_collision_CollisionSupport3D.supportCollisionCone3D(shape, dirX, dirY, dirZ, out);
+  }
+
+  public static function supportCollisionConvex3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
+    Facade_Collision_flighthq_collision_CollisionSupport3D.supportCollisionConvex3D(shape, dirX, dirY, dirZ, out);
+  }
+
+  public static function supportCollisionCylinder3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
+    Facade_Collision_flighthq_collision_CollisionSupport3D.supportCollisionCylinder3D(shape, dirX, dirY, dirZ, out);
   }
 
   public static function supportCollisionObb2D(shape:CollisionShape2D, dirX:Float, dirY:Float, out:Array<Float>):Void {
@@ -188,43 +394,72 @@ class Collision {
     Facade_Collision_flighthq_collision_CollisionSupport2D.supportCollisionPolygon2D(shape, dirX, dirY, out);
   }
 
+  public static function supportCollisionSphere3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
+    Facade_Collision_flighthq_collision_CollisionSupport3D.supportCollisionSphere3D(shape, dirX, dirY, dirZ, out);
+  }
+
+  public static function sweepCollisionHeightfield3D(convex:CollisionShape3D, deltaX:Float, deltaY:Float, deltaZ:Float, heightfield:CollisionHeightfield3D, out:CollisionTimeOfImpact3D, ?maxFraction:Float):Bool {
+    return cast Facade_Collision_flighthq_collision_TriangleMesh3D.sweepCollisionHeightfield3D(convex, deltaX, deltaY, deltaZ, heightfield, out, maxFraction);
+    return cast null;
+  }
+
   public static function sweepCollisionShape2D(shapeA:CollisionBuiltInShape2D, translationAX:Float, translationAY:Float, shapeB:CollisionBuiltInShape2D, translationBX:Float, translationBY:Float, out:CollisionTimeOfImpact2D, ?maxFraction:Float):Bool {
     return cast Facade_Collision_flighthq_collision_SweepCollisionShape2D.sweepCollisionShape2D(shapeA, translationAX, translationAY, shapeB, translationBX, translationBY, out, maxFraction);
     return cast null;
   }
 
-  public static function testAabbAabbCollision(a:CollisionAabb2D, b:CollisionAabb2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeCollision.testAabbAabbCollision(a, b, out);
+  public static function sweepCollisionTriangleMesh3D(convex:CollisionShape3D, deltaX:Float, deltaY:Float, deltaZ:Float, mesh:CollisionTriangleMesh3D, out:CollisionTimeOfImpact3D, ?maxFraction:Float):Bool {
+    return cast Facade_Collision_flighthq_collision_TriangleMesh3D.sweepCollisionTriangleMesh3D(convex, deltaX, deltaY, deltaZ, mesh, out, maxFraction);
     return cast null;
   }
 
-  public static function testAabbObbCollision(a:CollisionAabb2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeCollision.testAabbObbCollision(a, b, out);
+  public static function testAabbAabbCollision2D(a:CollisionAabb2D, b:CollisionAabb2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeCollision2D.testAabbAabbCollision2D(a, b, out);
     return cast null;
   }
 
-  public static function testAabbPolygonCollision(a:CollisionAabb2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeCollision.testAabbPolygonCollision(a, b, out);
+  public static function testAabbAabbCollision3D(a:CollisionAabb3D, b:CollisionAabb3D, out:CollisionManifold3D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeCollision3D.testAabbAabbCollision3D(a, b, out);
     return cast null;
   }
 
-  public static function testCircleAabbCollision(a:CollisionCircle2D, b:CollisionAabb2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeCollision.testCircleAabbCollision(a, b, out);
+  public static function testAabbObbCollision2D(a:CollisionAabb2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeCollision2D.testAabbObbCollision2D(a, b, out);
     return cast null;
   }
 
-  public static function testCircleCircleCollision(a:CollisionCircle2D, b:CollisionCircle2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeCollision.testCircleCircleCollision(a, b, out);
+  public static function testAabbPolygonCollision2D(a:CollisionAabb2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeCollision2D.testAabbPolygonCollision2D(a, b, out);
     return cast null;
   }
 
-  public static function testCircleObbCollision(a:CollisionCircle2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeCollision.testCircleObbCollision(a, b, out);
+  public static function testBoxBoxCollision3D(a:CollisionBox3D, b:CollisionBox3D, out:CollisionManifold3D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeCollision3D.testBoxBoxCollision3D(a, b, out);
     return cast null;
   }
 
-  public static function testCirclePolygonCollision(a:CollisionCircle2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeCollision.testCirclePolygonCollision(a, b, out);
+  public static function testCapsuleCapsuleCollision3D(a:CollisionCapsule3D, b:CollisionCapsule3D, out:CollisionManifold3D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeCollision3D.testCapsuleCapsuleCollision3D(a, b, out);
+    return cast null;
+  }
+
+  public static function testCircleAabbCollision2D(a:CollisionCircle2D, b:CollisionAabb2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeCollision2D.testCircleAabbCollision2D(a, b, out);
+    return cast null;
+  }
+
+  public static function testCircleCircleCollision2D(a:CollisionCircle2D, b:CollisionCircle2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeCollision2D.testCircleCircleCollision2D(a, b, out);
+    return cast null;
+  }
+
+  public static function testCircleObbCollision2D(a:CollisionCircle2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeCollision2D.testCircleObbCollision2D(a, b, out);
+    return cast null;
+  }
+
+  public static function testCirclePolygonCollision2D(a:CollisionCircle2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeCollision2D.testCirclePolygonCollision2D(a, b, out);
     return cast null;
   }
 
@@ -233,8 +468,18 @@ class Collision {
     return cast null;
   }
 
+  public static function testCollision3D(a:CollisionShape3D, b:CollisionShape3D, out:CollisionManifold3D):Bool {
+    return cast Facade_Collision_flighthq_collision_TestCollision3D.testCollision3D(a, b, out);
+    return cast null;
+  }
+
   public static function testCollisionSupport2D(a:CollisionShape2D, b:CollisionShape2D, out:CollisionManifold2D):Bool {
     return cast Facade_Collision_flighthq_collision_Gjk2D.testCollisionSupport2D(a, b, out);
+    return cast null;
+  }
+
+  public static function testCollisionSupport3D(a:CollisionShape3D, b:CollisionShape3D, out:CollisionManifold3D):Bool {
+    return cast Facade_Collision_flighthq_collision_Gjk3D.testCollisionSupport3D(a, b, out);
     return cast null;
   }
 
@@ -243,43 +488,81 @@ class Collision {
     return cast null;
   }
 
-  public static function testObbObbCollision(a:CollisionObb2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeCollision.testObbObbCollision(a, b, out);
+  public static function testCollisionSupportOverlap3D(a:CollisionShape3D, b:CollisionShape3D):Bool {
+    return cast Facade_Collision_flighthq_collision_Gjk3D.testCollisionSupportOverlap3D(a, b);
     return cast null;
   }
 
-  public static function testObbPolygonCollision(a:CollisionObb2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeCollision.testObbPolygonCollision(a, b, out);
+  public static function testObbObbCollision2D(a:CollisionObb2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeCollision2D.testObbObbCollision2D(a, b, out);
     return cast null;
   }
 
-  public static function testPolygonPolygonCollision(a:CollisionPolygon2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Collision_flighthq_collision_ShapeCollision.testPolygonPolygonCollision(a, b, out);
+  public static function testObbPolygonCollision2D(a:CollisionObb2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeCollision2D.testObbPolygonCollision2D(a, b, out);
     return cast null;
   }
 
-  public static function testSegmentAabbCollision(a:CollisionSegment2D, b:CollisionAabb2D):Bool {
-    return cast Facade_Collision_flighthq_collision_SegmentCollision.testSegmentAabbCollision(a, b);
+  public static function testPolygonPolygonCollision2D(a:CollisionPolygon2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeCollision2D.testPolygonPolygonCollision2D(a, b, out);
     return cast null;
   }
 
-  public static function testSegmentCircleCollision(a:CollisionSegment2D, b:CollisionCircle2D):Bool {
-    return cast Facade_Collision_flighthq_collision_SegmentCollision.testSegmentCircleCollision(a, b);
+  public static function testSegmentAabbCollision2D(a:CollisionSegment2D, b:CollisionAabb2D):Bool {
+    return cast Facade_Collision_flighthq_collision_SegmentCollision2D.testSegmentAabbCollision2D(a, b);
     return cast null;
   }
 
-  public static function testSegmentObbCollision(a:CollisionSegment2D, b:CollisionObb2D):Bool {
-    return cast Facade_Collision_flighthq_collision_SegmentCollision.testSegmentObbCollision(a, b);
+  public static function testSegmentCircleCollision2D(a:CollisionSegment2D, b:CollisionCircle2D):Bool {
+    return cast Facade_Collision_flighthq_collision_SegmentCollision2D.testSegmentCircleCollision2D(a, b);
     return cast null;
   }
 
-  public static function testSegmentPolygonCollision(a:CollisionSegment2D, b:CollisionPolygon2D):Bool {
-    return cast Facade_Collision_flighthq_collision_SegmentCollision.testSegmentPolygonCollision(a, b);
+  public static function testSegmentObbCollision2D(a:CollisionSegment2D, b:CollisionObb2D):Bool {
+    return cast Facade_Collision_flighthq_collision_SegmentCollision2D.testSegmentObbCollision2D(a, b);
     return cast null;
   }
 
-  public static function testSegmentSegmentCollision(a:CollisionSegment2D, b:CollisionSegment2D):Bool {
-    return cast Facade_Collision_flighthq_collision_SegmentCollision.testSegmentSegmentCollision(a, b);
+  public static function testSegmentPolygonCollision2D(a:CollisionSegment2D, b:CollisionPolygon2D):Bool {
+    return cast Facade_Collision_flighthq_collision_SegmentCollision2D.testSegmentPolygonCollision2D(a, b);
     return cast null;
+  }
+
+  public static function testSegmentSegmentCollision2D(a:CollisionSegment2D, b:CollisionSegment2D):Bool {
+    return cast Facade_Collision_flighthq_collision_SegmentCollision2D.testSegmentSegmentCollision2D(a, b);
+    return cast null;
+  }
+
+  public static function testSphereAabbCollision3D(a:CollisionSphere3D, b:CollisionAabb3D, out:CollisionManifold3D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeCollision3D.testSphereAabbCollision3D(a, b, out);
+    return cast null;
+  }
+
+  public static function testSphereBoxCollision3D(a:CollisionSphere3D, b:CollisionBox3D, out:CollisionManifold3D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeCollision3D.testSphereBoxCollision3D(a, b, out);
+    return cast null;
+  }
+
+  public static function testSphereCapsuleCollision3D(a:CollisionSphere3D, b:CollisionCapsule3D, out:CollisionManifold3D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeCollision3D.testSphereCapsuleCollision3D(a, b, out);
+    return cast null;
+  }
+
+  public static function testSphereSphereCollision3D(a:CollisionSphere3D, b:CollisionSphere3D, out:CollisionManifold3D):Bool {
+    return cast Facade_Collision_flighthq_collision_ShapeCollision3D.testSphereSphereCollision3D(a, b, out);
+    return cast null;
+  }
+
+  public static function writeCollisionConvexHullFaces3D(points:Array<Float>, out:Array<Float>):Float {
+    return cast Facade_Collision_flighthq_collision_ConvexHull3D.writeCollisionConvexHullFaces3D(points, out);
+    return cast null;
+  }
+
+  public static function writeCollisionHeightfieldBounds3D(heightfield:CollisionHeightfield3D, out:CollisionAabb3D):Void {
+    Facade_Collision_flighthq_collision_TriangleMesh3D.writeCollisionHeightfieldBounds3D(heightfield, out);
+  }
+
+  public static function writeCollisionTriangleMeshBounds3D(mesh:CollisionTriangleMesh3D, out:CollisionAabb3D):Void {
+    Facade_Collision_flighthq_collision_TriangleMesh3D.writeCollisionTriangleMeshBounds3D(mesh, out);
   }
 }

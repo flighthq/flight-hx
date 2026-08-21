@@ -3,19 +3,29 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './broadphase.mjs';
+export * from './colliderTransform.mjs';
+export * from './contactIntake.mjs';
 export * from './contacts.mjs';
+export * from './continuous.mjs';
+export * from './debugGeometry.mjs';
 export * from './enablePhysics3DGuards.mjs';
+export * from './explainPhysics3DCollision.mjs';
 export * from './explainPhysics3DJoints.mjs';
 export * from './explainPhysics3DStep.mjs';
 export * from './integrate.mjs';
 export * from './islands.mjs';
+export * from './jointBreakage.mjs';
 export * from './jointCollisionSuppression.mjs';
 export * from './jointFactories.mjs';
+export * from './jointReaction.mjs';
 export * from './jointRegistry.mjs';
 export * from './joints.mjs';
 export * from './massProperties.mjs';
+export * from './material.mjs';
 export * from './registerBuiltInPhysics3DJointSolvers.mjs';
 export * from './solver.mjs';
 export * from './step.mjs';
 export * from './stepValidation.mjs';
 export * from './world.mjs';
+export * from './worldQueries.mjs';

@@ -34,4 +34,5 @@ export const warmStartAngularBlock = api.warmStartAngularBlock;
 export const warmStartPointBlock = api.warmStartPointBlock;
 export const writeAngularRow = api.writeAngularRow;
 export const writeJointImpulse = api.writeJointImpulse;
+export const writePhysics3DSoftRowParameters = api.writePhysics3DSoftRowParameters;
 export const writeRow = api.writeRow;

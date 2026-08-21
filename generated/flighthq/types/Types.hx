@@ -8,6 +8,7 @@ import flighthq.types.AppearanceFlags as Facade_Types_flighthq_types_AppearanceF
 import flighthq.types.BatchBarrier as Facade_Types_flighthq_types_BatchBarrier_BatchBarrier;
 import flighthq.types.BatchFormat as Facade_Types_flighthq_types_BatchFormat_BatchFormat;
 import flighthq.types.ClipboardFormat as Facade_Types_flighthq_types_ClipboardFormat;
+import flighthq.types.Collision as Facade_Types_flighthq_types_Collision;
 import flighthq.types.Keyboard as Facade_Types_flighthq_types_Keyboard;
 import flighthq.types.Layout as Facade_Types_flighthq_types_Layout;
 import flighthq.types.Log.LogLevel as Facade_Types_flighthq_types_Log_LogLevel;
@@ -347,6 +348,8 @@ class Types {
   public static final LuxLightUnit:String = Facade_Types_flighthq_types__internal__LightUnitValues.LuxLightUnit;
 
   public static final MatcapMaterialKind:String = Facade_Types_flighthq_types__internal__MatcapMaterialValues.MatcapMaterialKind;
+
+  public static final MAX_COLLISION_CONTACT_POINTS_3D:Float = Facade_Types_flighthq_types_Collision.MAX_COLLISION_CONTACT_POINTS_3D;
 
   public static final MAX_DIRECTIONAL_SHADOW_PCF_RADIUS:Float = Facade_Types_flighthq_types__internal__DirectionalLightValues.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;
 

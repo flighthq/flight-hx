@@ -1,33 +1,33 @@
 # Typed Struct Class Feasibility Audit
 
-Upstream commit: `598ef6f62b6f1ae2873956501069ed824699021a`
+Upstream commit: `9b3b71b019ff48ea6329c16020f37fb72c3123d1`
 
 This is a construction, structural-flow, and observability census. It does not enable class emission.
 
 | Metric | Count |
 | --- | ---: |
-| Eligible canonical schemas | 1611 |
-| Direct field accesses | 26156 |
-| Declared optional fields | 2141 |
+| Eligible canonical schemas | 1655 |
+| Direct field accesses | 26293 |
+| Declared optional fields | 2213 |
 | Declared required-undefined fields | 2 |
-| Production object literals | 1950 |
-| Production object literals omitting optional fields | 413 |
-| Production object literals with spread | 214 |
+| Production object literals | 2017 |
+| Production object literals omitting optional fields | 414 |
+| Production object literals with spread | 215 |
 | Production object literals with computed keys | 2 |
-| Test object literals | 5915 |
-| Cross-schema transfers | 1460 |
-| Anonymous structural transfers | 154 |
+| Test object literals | 6057 |
+| Cross-schema transfers | 1500 |
+| Anonymous structural transfers | 158 |
 | Dynamic ingresses | 68 |
 | Production enumerations | 8 |
 | Production JSON serializations | 6 |
 | Production object rests | 0 |
-| Production object spreads | 128 |
-| Exported input signature references | 8667 |
-| Exported output signature references | 1739 |
-| Vitest oracle observations | 296 |
-| Mechanically compatible schemas | 1197 |
-| Schemas requiring normalization | 414 |
-| Schemas requiring observability review | 260 |
+| Production object spreads | 130 |
+| Exported input signature references | 9165 |
+| Exported output signature references | 1779 |
+| Vitest oracle observations | 306 |
+| Mechanically compatible schemas | 1232 |
+| Schemas requiring normalization | 423 |
+| Schemas requiring observability review | 265 |
 
 Counts below are per canonical schema. Exact source locations and related schema identities are in `typed-struct-classes.json`.
 
@@ -285,20 +285,38 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#CocosPlistFrame` | 12 | 7 | 1 | 0 | 2 | 2 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#CocosPlistMetadata` | 7 | 3 | 0 | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#CocosPlistParsed` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#CollisionAabb2D` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 33 | 1 | 45 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#CollisionCircle2D` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 32 | 1 | 47 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#CollisionAabb2D` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 34 | 1 | 45 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#CollisionAabb3D` | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 45 | 1 | 12 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#CollisionBox3D` | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 43 | 1 | 3 | 1 | no | `cross-schema-transfer` | `object-spread` |
+| `@flighthq/types:interface#CollisionCapsule2D` | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 23 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#CollisionCapsule3D` | 0 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 43 | 1 | 10 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#CollisionCircle2D` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 33 | 1 | 47 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#CollisionCone3D` | 0 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 40 | 1 | 0 | 1 | no | `cross-schema-transfer` | `object-spread` |
 | `@flighthq/types:interface#CollisionContactManifold2D` | 44 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 12 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#CollisionContactManifold3D` | 0 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#CollisionContactPoint2D` | 25 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#CollisionContactPoint3D` | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#CollisionConvex3D` | 0 | 1 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 40 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#CollisionCylinder3D` | 0 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 40 | 1 | 0 | 2 | no | `cross-schema-transfer` | `object-spread` |
+| `@flighthq/types:interface#CollisionDistance3D` | 0 | 11 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#CollisionHeightfield3D` | 0 | 14 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 13 | 2 | 0 | 0 | yes | — | `object-spread` |
 | `@flighthq/types:interface#CollisionManifold2D` | 49 | 4 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#CollisionObb2D` | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 33 | 1 | 30 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#CollisionPoint2D` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 21 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#CollisionPolygon2D` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 32 | 1 | 17 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#CollisionRaycastHit2D` | 32 | 5 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#CollisionManifold3D` | 0 | 5 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#CollisionObb2D` | 0 | 5 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 34 | 1 | 30 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#CollisionPoint2D` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 22 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#CollisionPolygon2D` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 33 | 1 | 17 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#CollisionRaycastHit2D` | 46 | 5 | 0 | 0 | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#CollisionRaycastHit3D` | 0 | 7 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#CollisionResponse` | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#CollisionSegment2D` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 27 | 1 | 1 | 0 | yes | — | — |
-| `@flighthq/types:interface#CollisionTestExplanation2D` | 0 | 4 | 0 | 0 | 7 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#CollisionTimeOfImpact2D` | 61 | 5 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#CollisionSegment2D` | 0 | 4 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 29 | 1 | 8 | 0 | yes | — | — |
+| `@flighthq/types:interface#CollisionSphere3D` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 45 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#CollisionTestExplanation2D` | 0 | 4 | 0 | 0 | 5 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#CollisionTestExplanation3D` | 0 | 4 | 0 | 0 | 5 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#CollisionTimeOfImpact2D` | 68 | 5 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#CollisionTimeOfImpact3D` | 0 | 7 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#CollisionTriangleMesh3D` | 0 | 11 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 13 | 2 | 0 | 0 | yes | — | `object-spread` |
 | `@flighthq/types:interface#CollisionVendorShape2D` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#CollisionVendorShape3D` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 30 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#ColorAdjustmentRuntime` | 9 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#ColorBlindSimulationAdjustment` | 0 | 3 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | no | `object-literal-spread` | — |
 | `@flighthq/types:interface#ColorGradeAdjustment` | 0 | 11 | 9 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | no | `object-literal-spread` | — |
@@ -328,7 +346,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#CurveKeyframe` | 11 | 2 | 0 | 0 | 5 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 19 | 0 | yes | — | — |
 | `@flighthq/types:interface#CustomShaderEffect` | 0 | 3 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
 | `@flighthq/types:interface#CustomShaderMaterial` | 22 | 9 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#DebugOptions` | 0 | 4 | 4 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 20 | 0 | yes | — | `optional-omission` |
+| `@flighthq/types:interface#DebugOptions` | 0 | 4 | 4 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 21 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#DebugSubsystemHooks` | 0 | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 13 | 0 | yes | — | — |
 | `@flighthq/types:interface#DecodedImage` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 6 | 0 | yes | — | — |
 | `@flighthq/types:interface#DepthMaterial` | 8 | 8 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | no | `cross-schema-transfer` | `optional-omission` |
@@ -859,8 +877,10 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#PerspectiveProjection` | 9 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#PerspectiveProjectionOptions` | 0 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 50 | 0 | yes | — | — |
 | `@flighthq/types:interface#PhongMaterial` | 43 | 13 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | no | `cross-schema-transfer` | `optional-omission` |
-| `@flighthq/types:interface#Physics2DCollider` | 47 | 5 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 3 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics2DCollisionFilter` | 0 | 3 | 0 | 0 | 2 | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 3 | 0 | no | `anonymous-structural-transfer`, `object-literal-spread` | `object-spread` |
+| `@flighthq/types:interface#Physics2DBrokenJoint` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics2DCollider` | 51 | 5 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 3 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics2DCollisionExplanation` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics2DCollisionFilter` | 0 | 3 | 0 | 0 | 3 | 2 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 3 | 0 | no | `anonymous-structural-transfer`, `object-literal-spread` | `object-spread` |
 | `@flighthq/types:interface#Physics2DContact` | 157 | 13 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 3 | 0 | yes | — | — |
 | `@flighthq/types:interface#Physics2DContactEvents` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Physics2DContactHooks` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
@@ -869,67 +889,86 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#Physics2DDebugGeometry` | 14 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Physics2DDebugGeometryOptions` | 7 | 7 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Physics2DDebugLine` | 0 | 7 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics2DDistanceJoint` | 0 | 18 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 8 | 6 | no | `cross-schema-transfer`, `object-literal-spread` | `object-spread` |
-| `@flighthq/types:interface#Physics2DDistanceJointOptions` | 0 | 10 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 11 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics2DGearJoint` | 29 | 23 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
-| `@flighthq/types:interface#Physics2DGearJointOptions` | 8 | 15 | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics2DJoint` | 0 | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 2 | 15 | 4 | no | `cross-schema-transfer` | `object-spread` |
-| `@flighthq/types:interface#Physics2DJointOptions` | 0 | 7 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#Physics2DDistanceJoint` | 0 | 20 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 10 | 6 | no | `cross-schema-transfer`, `object-literal-spread` | `object-spread` |
+| `@flighthq/types:interface#Physics2DDistanceJointOptions` | 0 | 12 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 11 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics2DGearJoint` | 29 | 25 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
+| `@flighthq/types:interface#Physics2DGearJointOptions` | 8 | 17 | 12 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics2DJoint` | 0 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 2 | 22 | 5 | no | `cross-schema-transfer` | `object-spread` |
+| `@flighthq/types:interface#Physics2DJointEvents` | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics2DJointOptions` | 0 | 9 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#Physics2DJointReaction` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Physics2DJointResolution` | 0 | 9 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Physics2DJointResolutionExplanation` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics2DJointSolver` | 0 | 8 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 26 | 0 | no | `anonymous-structural-transfer` | — |
-| `@flighthq/types:interface#Physics2DMassData` | 45 | 4 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics2DMaterial` | 0 | 3 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 11 | 1 | no | `object-literal-spread` | `object-spread` |
-| `@flighthq/types:interface#Physics2DMouseJoint` | 0 | 20 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 11 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#Physics2DMouseJointOptions` | 9 | 8 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics2DPrismaticJoint` | 44 | 25 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
-| `@flighthq/types:interface#Physics2DPrismaticJointOptions` | 9 | 16 | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics2DPulleyJoint` | 29 | 21 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
-| `@flighthq/types:interface#Physics2DPulleyJointOptions` | 0 | 13 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics2DQueryFilter` | 0 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics2DJointSolver` | 0 | 9 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 26 | 0 | no | `anonymous-structural-transfer` | — |
+| `@flighthq/types:interface#Physics2DMassData` | 49 | 4 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics2DMaterial` | 0 | 3 | 0 | 0 | 2 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 11 | 1 | no | `object-literal-spread` | `object-spread` |
+| `@flighthq/types:interface#Physics2DMouseJoint` | 0 | 22 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 11 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#Physics2DMouseJointOptions` | 11 | 10 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics2DPrismaticJoint` | 50 | 30 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 3 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
+| `@flighthq/types:interface#Physics2DPrismaticJointOptions` | 12 | 21 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics2DPulleyJoint` | 29 | 23 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
+| `@flighthq/types:interface#Physics2DPulleyJointOptions` | 0 | 15 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics2DQueryFilter` | 0 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Physics2DQueryHit` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Physics2DQueryResult` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Physics2DRayHit` | 31 | 8 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Physics2DRayResult` | 13 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics2DRevoluteJoint` | 26 | 23 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
-| `@flighthq/types:interface#Physics2DRevoluteJointOptions` | 0 | 14 | 12 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics2DRopeJoint` | 0 | 16 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
-| `@flighthq/types:interface#Physics2DRopeJointOptions` | 0 | 8 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics2DRevoluteJoint` | 32 | 28 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
+| `@flighthq/types:interface#Physics2DRevoluteJointOptions` | 0 | 19 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics2DRopeJoint` | 0 | 18 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
+| `@flighthq/types:interface#Physics2DRopeJointOptions` | 0 | 10 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics2DShapeCastResult` | 0 | 9 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Physics2DSolverConfig` | 55 | 13 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Physics2DStepExplanation` | 0 | 10 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics2DWeldJoint` | 0 | 16 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 5 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
-| `@flighthq/types:interface#Physics2DWeldJointOptions` | 0 | 8 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics2DWheelJoint` | 27 | 24 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
-| `@flighthq/types:interface#Physics2DWheelJointOptions` | 8 | 15 | 13 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics2DWorld` | 217 | 29 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 43 | 4 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics3DCollisionFilter` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics3DConeTwistJoint` | 40 | 39 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
-| `@flighthq/types:interface#Physics3DConeTwistJointOptions` | 0 | 23 | 21 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 8 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics3DContact` | 83 | 12 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 3 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics2DWeldJoint` | 0 | 18 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 5 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
+| `@flighthq/types:interface#Physics2DWeldJointOptions` | 0 | 10 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics2DWheelJoint` | 28 | 26 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
+| `@flighthq/types:interface#Physics2DWheelJointOptions` | 8 | 17 | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics2DWorld` | 225 | 30 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 46 | 4 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DCollider` | 0 | 5 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 3 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DCollisionExplanation` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DCollisionFilter` | 0 | 3 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 6 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DConeTwistJoint` | 51 | 45 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
+| `@flighthq/types:interface#Physics3DConeTwistJointOptions` | 0 | 28 | 26 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 9 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DContact` | 0 | 14 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 3 | 0 | yes | — | — |
 | `@flighthq/types:interface#Physics3DContactConstraint` | 47 | 9 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics3DContactConstraintPoint` | 39 | 8 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DContactConstraintPoint` | 41 | 8 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Physics3DContactEvents` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Physics3DContactHooks` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Physics3DContactPoint` | 0 | 11 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 1 | yes | — | `enumeration` |
-| `@flighthq/types:interface#Physics3DGeneric6DofJoint` | 24 | 44 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
-| `@flighthq/types:interface#Physics3DGeneric6DofJointOptions` | 12 | 29 | 27 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 9 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics3DHingeJoint` | 48 | 39 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
-| `@flighthq/types:interface#Physics3DHingeJointOptions` | 0 | 23 | 21 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 27 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics3DJoint` | 0 | 22 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17 | 4 | 2 | 0 | no | `object-literal-spread` | — |
+| `@flighthq/types:interface#Physics3DDebugGeometry` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DDebugGeometryOptions` | 0 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DDebugLine` | 0 | 9 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DDebugSphere` | 0 | 7 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DDistanceJoint` | 0 | 34 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
+| `@flighthq/types:interface#Physics3DDistanceJointOptions` | 0 | 18 | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 25 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DGeneric6DofJoint` | 29 | 50 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
+| `@flighthq/types:interface#Physics3DGeneric6DofJointOptions` | 15 | 34 | 32 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 10 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DHingeJoint` | 56 | 45 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
+| `@flighthq/types:interface#Physics3DHingeJointOptions` | 0 | 28 | 26 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 30 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DJoint` | 0 | 25 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 21 | 4 | 2 | 0 | no | `object-literal-spread` | — |
+| `@flighthq/types:interface#Physics3DJointEvents` | 0 | 1 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Physics3DJointExplanation` | 0 | 5 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics3DJointFrameOptions` | 8 | 17 | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 16 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#Physics3DJointFrameOptions` | 8 | 19 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 16 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#Physics3DJointFrames` | 0 | 8 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 12 | 0 | 0 | 0 | 0 | 0 | 5 | 3 | 1 | 1 | 0 | no | `cross-schema-transfer` | `object-spread` |
-| `@flighthq/types:interface#Physics3DJointOptions` | 9 | 9 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 28 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#Physics3DJointSolver` | 0 | 8 | 6 | 0 | 6 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 7 | 3 | 0 | yes | — | `optional-omission` |
-| `@flighthq/types:interface#Physics3DMassData` | 77 | 10 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics3DMaterial` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics3DSequentialImpulseConfig` | 18 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics3DSequentialImpulseState` | 8 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics3DSliderJoint` | 48 | 39 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
-| `@flighthq/types:interface#Physics3DSliderJointOptions` | 0 | 23 | 21 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 8 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics3DSolverConfig` | 25 | 8 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics3DStepExplanation` | 0 | 10 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#Physics3DWorld` | 148 | 30 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 26 | 3 | 0 | 1 | yes | — | `enumeration` |
+| `@flighthq/types:interface#Physics3DJointOptions` | 11 | 11 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 42 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#Physics3DJointReaction` | 0 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DJointSolver` | 0 | 9 | 7 | 0 | 7 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 8 | 3 | 0 | yes | — | `optional-omission` |
+| `@flighthq/types:interface#Physics3DMassData` | 132 | 10 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DMaterial` | 0 | 3 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 8 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DQueryFilter` | 0 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DQueryHit` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DQueryResult` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DRayHit` | 0 | 10 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DRayResult` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DSequentialImpulseConfig` | 20 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DSequentialImpulseState` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DShapeCastResult` | 0 | 11 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DSliderJoint` | 56 | 45 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
+| `@flighthq/types:interface#Physics3DSliderJointOptions` | 0 | 28 | 26 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 9 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DSolverConfig` | 0 | 9 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DStepExplanation` | 0 | 11 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Physics3DWorld` | 244 | 32 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 47 | 4 | 0 | 2 | yes | — | `enumeration` |
 | `@flighthq/types:interface#PixelateEffect` | 0 | 2 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
 | `@flighthq/types:interface#PixiParseResult` | 2 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Plane` | 103 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 14 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
@@ -1016,7 +1055,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#RichTextData` | 249 | 21 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 2 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#RichTextRuntime` | 60 | 46 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 1 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#RigidBody2D` | 0 | 26 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 27 | 5 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#RigidBody3D` | 0 | 54 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 70 | 2 | 1 | 0 | yes | — | — |
+| `@flighthq/types:interface#RigidBody3D` | 0 | 53 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 79 | 4 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#RimModifier` | 0 | 6 | 3 | 0 | 1 | 1 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 3 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#RimModifierOptions` | 0 | 4 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 21 | 0 | yes | — | — |
 | `@flighthq/types:interface#RiveAdvancedBlend` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
@@ -1203,13 +1242,18 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#SoftKeyboardBackend` | 0 | 11 | 7 | 0 | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 3 | 8 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#SoftKeyboardInfo` | 17 | 5 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#SoftKeyboardTransition` | 0 | 2 | 0 | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#SpatialAabb2D` | 108 | 4 | 0 | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 131 | 0 | no | `anonymous-structural-transfer` | — |
+| `@flighthq/types:interface#SpatialAabb2D` | 114 | 4 | 0 | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 133 | 0 | no | `anonymous-structural-transfer` | — |
+| `@flighthq/types:interface#SpatialAabb3D` | 0 | 6 | 0 | 0 | 6 | 6 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 30 | 0 | no | `anonymous-structural-transfer` | — |
+| `@flighthq/types:interface#SpatialFrustum3D` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 2 | 0 | yes | — | — |
 | `@flighthq/types:interface#SpatialIndex2D` | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#SpatialIndex3D` | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 11 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#SpatialIndexBackend2D` | 0 | 9 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 2 | 2 | yes | — | `object-spread` |
-| `@flighthq/types:interface#SpatialIndexingExplanation` | 0 | 4 | 0 | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#SpatialIndexingNotice` | 22 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 16 | 8 | yes | — | `object-spread` |
+| `@flighthq/types:interface#SpatialIndexBackend3D` | 0 | 9 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#SpatialIndexingExplanation` | 0 | 4 | 0 | 0 | 11 | 11 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#SpatialIndexingNotice` | 22 | 6 | 0 | 0 | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 22 | 12 | yes | — | `object-spread` |
 | `@flighthq/types:interface#SpatialIndexRuntime2D` | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#SpatialPair` | 0 | 2 | 0 | 0 | 3 | 3 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | no | `anonymous-structural-transfer` | — |
+| `@flighthq/types:interface#SpatialIndexRuntime3D` | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#SpatialPair` | 0 | 2 | 0 | 0 | 5 | 5 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 1 | 0 | no | `anonymous-structural-transfer` | — |
 | `@flighthq/types:interface#SpecularGlossinessPbrMaterial` | 52 | 18 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | no | `cross-schema-transfer` | `optional-omission` |
 | `@flighthq/types:interface#SpecularPbrExtension` | 15 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#SphereCollider` | 22 | 8 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — | — |
@@ -1615,9 +1659,9 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:type#NodeAny` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 93 | 9 | 0 | 0 | yes | — | — |
 | `@flighthq/types:type#NumericProps` | 0 | 0 | 0 | 0 | 3 | 3 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 7 | 0 | 114 | 0 | no | `cross-schema-transfer` | `enumeration` |
 | `@flighthq/types:type#ObbLike` | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — | — |
-| `@flighthq/types:type#Physics3DBallAndSocketJoint` | 0 | 22 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
-| `@flighthq/types:type#Physics3DBallAndSocketJointOptions` | 0 | 9 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
-| `@flighthq/types:type#Physics3DFixedJointOptions` | 0 | 17 | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:type#Physics3DBallAndSocketJoint` | 0 | 25 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:type#Physics3DBallAndSocketJointOptions` | 0 | 11 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:type#Physics3DFixedJointOptions` | 0 | 19 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:type#PixiParsed` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:type#PlaneLike` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:type#QuaternionLike` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 33 | 0 | 0 | 0 | yes | — | — |

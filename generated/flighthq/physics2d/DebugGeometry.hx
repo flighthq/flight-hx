@@ -121,13 +121,33 @@ class DebugGeometry {
           return;
         }
       }
+      else if (__switchValue == 'capsule') {
+        {
+          var x0:Float = (_Runtime.addNumbers(_Runtime.field(body, 'x'), ((cast shape : { var x0:Float; }).x0 * cos)) - ((cast shape : { var y0:Float; }).y0 * sin));
+          var y0:Float = (_Runtime.addNumbers(_Runtime.field(body, 'y'), ((cast shape : { var x0:Float; }).x0 * sin)) + ((cast shape : { var y0:Float; }).y0 * cos));
+          var x1:Float = (_Runtime.addNumbers(_Runtime.field(body, 'x'), ((cast shape : { var x1:Float; }).x1 * cos)) - ((cast shape : { var y1:Float; }).y1 * sin));
+          var y1:Float = (_Runtime.addNumbers(_Runtime.field(body, 'y'), ((cast shape : { var x1:Float; }).x1 * sin)) + ((cast shape : { var y1:Float; }).y1 * cos));
+          DebugGeometry.writeCircle__debugGeometry(({ final __callArgument26:Dynamic = out; __callArgument26; }), ({ final __callArgument27:Dynamic = 'collider'; __callArgument27; }), (cast _Runtime.field(body, 'index') : Float), (cast -1.0 : Float), (cast x0 : Float), (cast y0 : Float), (cast (cast shape : { var radius:Float; }).radius : Float));
+          DebugGeometry.writeCircle__debugGeometry(({ final __callArgument28:Dynamic = out; __callArgument28; }), ({ final __callArgument29:Dynamic = 'collider'; __callArgument29; }), (cast _Runtime.field(body, 'index') : Float), (cast -1.0 : Float), (cast x1 : Float), (cast y1 : Float), (cast (cast shape : { var radius:Float; }).radius : Float));
+          var axisX:Float = (x1 - x0);
+          var axisY:Float = (y1 - y0);
+          var length:Float = HxMath.sqrt(((axisX * axisX) + (axisY * axisY)));
+          if ((cast ((cast length : Float) > (cast 0.0 : Float)) : Bool)) {
+            var offsetX:Float = ((-axisY / length) * (cast shape : { var radius:Float; }).radius);
+            var offsetY:Float = ((axisX / length) * (cast shape : { var radius:Float; }).radius);
+            DebugGeometry.writeLine__debugGeometry(({ final __callArgument30:Dynamic = out; __callArgument30; }), ({ final __callArgument31:Dynamic = 'collider'; __callArgument31; }), (cast _Runtime.field(body, 'index') : Float), (cast -1.0 : Float), (cast (x0 + offsetX) : Float), (cast (y0 + offsetY) : Float), (cast (x1 + offsetX) : Float), (cast (y1 + offsetY) : Float));
+            DebugGeometry.writeLine__debugGeometry(({ final __callArgument32:Dynamic = out; __callArgument32; }), ({ final __callArgument33:Dynamic = 'collider'; __callArgument33; }), (cast _Runtime.field(body, 'index') : Float), (cast -1.0 : Float), (cast (x0 - offsetX) : Float), (cast (y0 - offsetY) : Float), (cast (x1 - offsetX) : Float), (cast (y1 - offsetY) : Float));
+          }
+          return;
+        }
+      }
       else if (__switchValue == 'segment') {
         {
           var x0:Float = (_Runtime.addNumbers(_Runtime.field(body, 'x'), ((cast shape : { var x0:Float; }).x0 * cos)) - ((cast shape : { var y0:Float; }).y0 * sin));
           var y0:Float = (_Runtime.addNumbers(_Runtime.field(body, 'y'), ((cast shape : { var x0:Float; }).x0 * sin)) + ((cast shape : { var y0:Float; }).y0 * cos));
           var x1:Float = (_Runtime.addNumbers(_Runtime.field(body, 'x'), ((cast shape : { var x1:Float; }).x1 * cos)) - ((cast shape : { var y1:Float; }).y1 * sin));
           var y1:Float = (_Runtime.addNumbers(_Runtime.field(body, 'y'), ((cast shape : { var x1:Float; }).x1 * sin)) + ((cast shape : { var y1:Float; }).y1 * cos));
-          DebugGeometry.writeLine__debugGeometry(({ final __callArgument26:Dynamic = out; __callArgument26; }), ({ final __callArgument27:Dynamic = 'collider'; __callArgument27; }), (cast _Runtime.field(body, 'index') : Float), (cast -1.0 : Float), (cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float));
+          DebugGeometry.writeLine__debugGeometry(({ final __callArgument34:Dynamic = out; __callArgument34; }), ({ final __callArgument35:Dynamic = 'collider'; __callArgument35; }), (cast _Runtime.field(body, 'index') : Float), (cast -1.0 : Float), (cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float));
           return;
         }
       }
@@ -135,7 +155,7 @@ class DebugGeometry {
         {
           var x:Float = (_Runtime.addNumbers(_Runtime.field(body, 'x'), ((cast shape : { var x:Float; }).x * cos)) - ((cast shape : { var y:Float; }).y * sin));
           var y:Float = (_Runtime.addNumbers(_Runtime.field(body, 'y'), ((cast shape : { var x:Float; }).x * sin)) + ((cast shape : { var y:Float; }).y * cos));
-          DebugGeometry.writeCircle__debugGeometry(({ final __callArgument28:Dynamic = out; __callArgument28; }), ({ final __callArgument29:Dynamic = 'collider'; __callArgument29; }), (cast _Runtime.field(body, 'index') : Float), (cast -1.0 : Float), (cast x : Float), (cast y : Float), (cast _Runtime.coalesce((cast options : { @:optional var drawCentersOfMass:Null<Bool>; @:optional var drawColliders:Null<Bool>; @:optional var drawContacts:Null<Bool>; @:optional var drawJoints:Null<Bool>; @:optional var centerOfMassRadius:Null<Float>; @:optional var contactNormalLength:Null<Float>; @:optional var pointRadius:Null<Float>; }).pointRadius, function():Dynamic return cast DebugGeometry.DEFAULT_OPTIONS__debugGeometry.pointRadius) : Float));
+          DebugGeometry.writeCircle__debugGeometry(({ final __callArgument36:Dynamic = out; __callArgument36; }), ({ final __callArgument37:Dynamic = 'collider'; __callArgument37; }), (cast _Runtime.field(body, 'index') : Float), (cast -1.0 : Float), (cast x : Float), (cast y : Float), (cast _Runtime.coalesce((cast options : { @:optional var drawCentersOfMass:Null<Bool>; @:optional var drawColliders:Null<Bool>; @:optional var drawContacts:Null<Bool>; @:optional var drawJoints:Null<Bool>; @:optional var centerOfMassRadius:Null<Float>; @:optional var contactNormalLength:Null<Float>; @:optional var pointRadius:Null<Float>; }).pointRadius, function():Dynamic return cast DebugGeometry.DEFAULT_OPTIONS__debugGeometry.pointRadius) : Float));
         }
       }
     }
@@ -162,10 +182,10 @@ class DebugGeometry {
     y2 = ((centerY + (halfW * sin)) + (halfH * cos));
     x3 = ((centerX - (halfW * cos)) - (halfH * sin));
     y3 = ((centerY - (halfW * sin)) + (halfH * cos));
-    DebugGeometry.writeLine__debugGeometry(({ final __callArgument30:Dynamic = out; __callArgument30; }), ({ final __callArgument31:Dynamic = 'collider'; __callArgument31; }), (cast bodyIndex : Float), (cast -1.0 : Float), (cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float));
-    DebugGeometry.writeLine__debugGeometry(({ final __callArgument32:Dynamic = out; __callArgument32; }), ({ final __callArgument33:Dynamic = 'collider'; __callArgument33; }), (cast bodyIndex : Float), (cast -1.0 : Float), (cast x1 : Float), (cast y1 : Float), (cast x2 : Float), (cast y2 : Float));
-    DebugGeometry.writeLine__debugGeometry(({ final __callArgument34:Dynamic = out; __callArgument34; }), ({ final __callArgument35:Dynamic = 'collider'; __callArgument35; }), (cast bodyIndex : Float), (cast -1.0 : Float), (cast x2 : Float), (cast y2 : Float), (cast x3 : Float), (cast y3 : Float));
-    DebugGeometry.writeLine__debugGeometry(({ final __callArgument36:Dynamic = out; __callArgument36; }), ({ final __callArgument37:Dynamic = 'collider'; __callArgument37; }), (cast bodyIndex : Float), (cast -1.0 : Float), (cast x3 : Float), (cast y3 : Float), (cast x0 : Float), (cast y0 : Float));
+    DebugGeometry.writeLine__debugGeometry(({ final __callArgument38:Dynamic = out; __callArgument38; }), ({ final __callArgument39:Dynamic = 'collider'; __callArgument39; }), (cast bodyIndex : Float), (cast -1.0 : Float), (cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float));
+    DebugGeometry.writeLine__debugGeometry(({ final __callArgument40:Dynamic = out; __callArgument40; }), ({ final __callArgument41:Dynamic = 'collider'; __callArgument41; }), (cast bodyIndex : Float), (cast -1.0 : Float), (cast x1 : Float), (cast y1 : Float), (cast x2 : Float), (cast y2 : Float));
+    DebugGeometry.writeLine__debugGeometry(({ final __callArgument42:Dynamic = out; __callArgument42; }), ({ final __callArgument43:Dynamic = 'collider'; __callArgument43; }), (cast bodyIndex : Float), (cast -1.0 : Float), (cast x2 : Float), (cast y2 : Float), (cast x3 : Float), (cast y3 : Float));
+    DebugGeometry.writeLine__debugGeometry(({ final __callArgument44:Dynamic = out; __callArgument44; }), ({ final __callArgument45:Dynamic = 'collider'; __callArgument45; }), (cast bodyIndex : Float), (cast -1.0 : Float), (cast x3 : Float), (cast y3 : Float), (cast x0 : Float), (cast y0 : Float));
   }
 
   public static function writeJoint__debugGeometry(out:Physics2DDebugGeometry, world:Physics2DWorld, joint:Physics2DJoint):Void {
@@ -175,28 +195,28 @@ class DebugGeometry {
     var bodyA:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
     var anchorAX:Float = cast _Runtime.UNDEFINED;
     var anchorAY:Float = cast _Runtime.UNDEFINED;
-    bodyB = (cast findPhysics2DBody(({ final __callArgument38:Dynamic = world; __callArgument38; }), (cast _Runtime.field(joint, 'bodyB') : Float)) : Null<RigidBody2D>);
+    bodyB = (cast findPhysics2DBody(({ final __callArgument46:Dynamic = world; __callArgument46; }), (cast _Runtime.field(joint, 'bodyB') : Float)) : Null<RigidBody2D>);
     if ((cast _Runtime.strictEquals(bodyB, null) : Bool)) { return; }
-    anchorBX = (cast DebugGeometry.jointAnchorX__debugGeometry(({ final __callArgument39:Dynamic = bodyB; __callArgument39; }), (cast _Runtime.field(joint, 'localAnchorBX') : Float), (cast _Runtime.field(joint, 'localAnchorBY') : Float)) : Float);
-    anchorBY = (cast DebugGeometry.jointAnchorY__debugGeometry(({ final __callArgument40:Dynamic = bodyB; __callArgument40; }), (cast _Runtime.field(joint, 'localAnchorBX') : Float), (cast _Runtime.field(joint, 'localAnchorBY') : Float)) : Float);
+    anchorBX = (cast DebugGeometry.jointAnchorX__debugGeometry(({ final __callArgument47:Dynamic = bodyB; __callArgument47; }), (cast _Runtime.field(joint, 'localAnchorBX') : Float), (cast _Runtime.field(joint, 'localAnchorBY') : Float)) : Float);
+    anchorBY = (cast DebugGeometry.jointAnchorY__debugGeometry(({ final __callArgument48:Dynamic = bodyB; __callArgument48; }), (cast _Runtime.field(joint, 'localAnchorBX') : Float), (cast _Runtime.field(joint, 'localAnchorBY') : Float)) : Float);
     if ((cast _Runtime.strictEquals(_Runtime.field(joint, 'kind'), 'Mouse') : Bool)) {
       var mouse:Physics2DMouseJoint = (cast joint : Physics2DMouseJoint);
-      DebugGeometry.writeLine__debugGeometry(({ final __callArgument41:Dynamic = out; __callArgument41; }), ({ final __callArgument42:Dynamic = 'joint'; __callArgument42; }), (cast _Runtime.field(joint, 'bodyA') : Float), (cast _Runtime.field(joint, 'bodyB') : Float), (cast (cast mouse : Physics2DMouseJoint).targetX : Float), (cast (cast mouse : Physics2DMouseJoint).targetY : Float), (cast anchorBX : Float), (cast anchorBY : Float));
+      DebugGeometry.writeLine__debugGeometry(({ final __callArgument49:Dynamic = out; __callArgument49; }), ({ final __callArgument50:Dynamic = 'joint'; __callArgument50; }), (cast _Runtime.field(joint, 'bodyA') : Float), (cast _Runtime.field(joint, 'bodyB') : Float), (cast (cast mouse : Physics2DMouseJoint).targetX : Float), (cast (cast mouse : Physics2DMouseJoint).targetY : Float), (cast anchorBX : Float), (cast anchorBY : Float));
       return;
     }
-    if ((cast _Runtime.strictEquals(({ final __structural43 = ((cast world.jointSolvers : flighthq._internal._Map<String, Physics2DJointSolver>).get(_Runtime.field(joint, 'kind'))); __structural43 == null ? _Runtime.UNDEFINED : (cast __structural43 : { @:optional var usesBodyA:Null<Bool>; }).usesBodyA; }), false) : Bool)) { return; }
-    bodyA = (cast findPhysics2DBody(({ final __callArgument44:Dynamic = world; __callArgument44; }), (cast _Runtime.field(joint, 'bodyA') : Float)) : Null<RigidBody2D>);
+    if ((cast _Runtime.strictEquals(({ final __structural51 = ((cast world.jointSolvers : flighthq._internal._Map<String, Physics2DJointSolver>).get(_Runtime.field(joint, 'kind'))); __structural51 == null ? _Runtime.UNDEFINED : (cast __structural51 : { @:optional var usesBodyA:Null<Bool>; }).usesBodyA; }), false) : Bool)) { return; }
+    bodyA = (cast findPhysics2DBody(({ final __callArgument52:Dynamic = world; __callArgument52; }), (cast _Runtime.field(joint, 'bodyA') : Float)) : Null<RigidBody2D>);
     if ((cast _Runtime.strictEquals(bodyA, null) : Bool)) { return; }
-    anchorAX = (cast DebugGeometry.jointAnchorX__debugGeometry(({ final __callArgument45:Dynamic = bodyA; __callArgument45; }), (cast _Runtime.field(joint, 'localAnchorAX') : Float), (cast _Runtime.field(joint, 'localAnchorAY') : Float)) : Float);
-    anchorAY = (cast DebugGeometry.jointAnchorY__debugGeometry(({ final __callArgument46:Dynamic = bodyA; __callArgument46; }), (cast _Runtime.field(joint, 'localAnchorAX') : Float), (cast _Runtime.field(joint, 'localAnchorAY') : Float)) : Float);
+    anchorAX = (cast DebugGeometry.jointAnchorX__debugGeometry(({ final __callArgument53:Dynamic = bodyA; __callArgument53; }), (cast _Runtime.field(joint, 'localAnchorAX') : Float), (cast _Runtime.field(joint, 'localAnchorAY') : Float)) : Float);
+    anchorAY = (cast DebugGeometry.jointAnchorY__debugGeometry(({ final __callArgument54:Dynamic = bodyA; __callArgument54; }), (cast _Runtime.field(joint, 'localAnchorAX') : Float), (cast _Runtime.field(joint, 'localAnchorAY') : Float)) : Float);
     if ((cast _Runtime.strictEquals(_Runtime.field(joint, 'kind'), 'Pulley') : Bool)) {
       var pulley:Physics2DPulleyJoint = (cast joint : Physics2DPulleyJoint);
-      DebugGeometry.writeLine__debugGeometry(({ final __callArgument47:Dynamic = out; __callArgument47; }), ({ final __callArgument48:Dynamic = 'joint'; __callArgument48; }), (cast _Runtime.field(joint, 'bodyA') : Float), (cast _Runtime.field(joint, 'bodyB') : Float), (cast pulley.groundAnchorAX : Float), (cast pulley.groundAnchorAY : Float), (cast anchorAX : Float), (cast anchorAY : Float));
-      DebugGeometry.writeLine__debugGeometry(({ final __callArgument49:Dynamic = out; __callArgument49; }), ({ final __callArgument50:Dynamic = 'joint'; __callArgument50; }), (cast _Runtime.field(joint, 'bodyA') : Float), (cast _Runtime.field(joint, 'bodyB') : Float), (cast pulley.groundAnchorBX : Float), (cast pulley.groundAnchorBY : Float), (cast anchorBX : Float), (cast anchorBY : Float));
-      DebugGeometry.writeLine__debugGeometry(({ final __callArgument51:Dynamic = out; __callArgument51; }), ({ final __callArgument52:Dynamic = 'joint'; __callArgument52; }), (cast _Runtime.field(joint, 'bodyA') : Float), (cast _Runtime.field(joint, 'bodyB') : Float), (cast pulley.groundAnchorAX : Float), (cast pulley.groundAnchorAY : Float), (cast pulley.groundAnchorBX : Float), (cast pulley.groundAnchorBY : Float));
+      DebugGeometry.writeLine__debugGeometry(({ final __callArgument55:Dynamic = out; __callArgument55; }), ({ final __callArgument56:Dynamic = 'joint'; __callArgument56; }), (cast _Runtime.field(joint, 'bodyA') : Float), (cast _Runtime.field(joint, 'bodyB') : Float), (cast pulley.groundAnchorAX : Float), (cast pulley.groundAnchorAY : Float), (cast anchorAX : Float), (cast anchorAY : Float));
+      DebugGeometry.writeLine__debugGeometry(({ final __callArgument57:Dynamic = out; __callArgument57; }), ({ final __callArgument58:Dynamic = 'joint'; __callArgument58; }), (cast _Runtime.field(joint, 'bodyA') : Float), (cast _Runtime.field(joint, 'bodyB') : Float), (cast pulley.groundAnchorBX : Float), (cast pulley.groundAnchorBY : Float), (cast anchorBX : Float), (cast anchorBY : Float));
+      DebugGeometry.writeLine__debugGeometry(({ final __callArgument59:Dynamic = out; __callArgument59; }), ({ final __callArgument60:Dynamic = 'joint'; __callArgument60; }), (cast _Runtime.field(joint, 'bodyA') : Float), (cast _Runtime.field(joint, 'bodyB') : Float), (cast pulley.groundAnchorAX : Float), (cast pulley.groundAnchorAY : Float), (cast pulley.groundAnchorBX : Float), (cast pulley.groundAnchorBY : Float));
       return;
     }
-    DebugGeometry.writeLine__debugGeometry(({ final __callArgument53:Dynamic = out; __callArgument53; }), ({ final __callArgument54:Dynamic = 'joint'; __callArgument54; }), (cast _Runtime.field(joint, 'bodyA') : Float), (cast _Runtime.field(joint, 'bodyB') : Float), (cast anchorAX : Float), (cast anchorAY : Float), (cast anchorBX : Float), (cast anchorBY : Float));
+    DebugGeometry.writeLine__debugGeometry(({ final __callArgument61:Dynamic = out; __callArgument61; }), ({ final __callArgument62:Dynamic = 'joint'; __callArgument62; }), (cast _Runtime.field(joint, 'bodyA') : Float), (cast _Runtime.field(joint, 'bodyB') : Float), (cast anchorAX : Float), (cast anchorAY : Float), (cast anchorBX : Float), (cast anchorBY : Float));
   }
 
   public static function jointAnchorX__debugGeometry(body:RigidBody2D, localX:Float, localY:Float):Float {

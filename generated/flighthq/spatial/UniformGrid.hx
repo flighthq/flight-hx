@@ -3,13 +3,13 @@ package flighthq.spatial;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.spatial.SpatialIndexingGuard.reportSpatialIndexing;
 import flighthq.types.Spatial.SpatialAabb2D;
 import flighthq.types.Spatial.SpatialIndexBackend2D;
 import flighthq.types.Spatial.SpatialObjectId;
 import flighthq.types.Spatial.SpatialPair;
 import flighthq.types.SpatialIndexing.SpatialDeclineReason;
 import flighthq.types.SpatialIndexing.SpatialIndexingExplanation;
-import flighthq.types.SpatialIndexing.SpatialIndexingGuard;
 import flighthq.types.SpatialIndexing.SpatialIndexingMode;
 import flighthq.types.SpatialIndexing.SpatialIndexingNotice;
 import flighthq.types.SpatialIndexing.SpatialIndexingOperation;
@@ -56,10 +56,6 @@ class UniformGrid {
       UniformGrid._queryGridRay__uniformGrid((cast grid : Dynamic), (cast x : Float), (cast y : Float), (cast dx : Float), (cast dy : Float), ({ final __callArgument10:Dynamic = out; __callArgument10; }));
     } };
     return cast null;
-  }
-
-  public static function setSpatialIndexingGuard(guard:Null<SpatialIndexingGuard>):Void {
-    (UniformGrid._indexingGuard__uniformGrid = cast (guard : Dynamic));
   }
 
   public static function _cellIndex__uniformGrid(coord:Float, cellSize:Float):Float {
@@ -354,8 +350,7 @@ class UniformGrid {
   }
 
   public static function _reportGridIndexing__uniformGrid(grid:UniformGrid__uniformGrid, id:SpatialObjectId, mode:SpatialIndexingMode, operation:SpatialIndexingOperation, reason:Null<SpatialIndexingReason>, wouldOccupyBucketCount:Float):Void {
-    if ((cast _Runtime.strictEquals(UniformGrid._indexingGuard__uniformGrid, null) : Bool)) { return; }
-    UniformGrid._indexingGuard__uniformGrid(({ final __callArgument41:Dynamic = { cellSize: _Runtime.field(grid, 'cellSize'), id: id, mode: mode, operation: operation, reason: reason, wouldOccupyBucketCount: wouldOccupyBucketCount }; __callArgument41; }));
+    reportSpatialIndexing(({ final __callArgument41:Dynamic = { cellSize: _Runtime.field(grid, 'cellSize'), id: id, mode: mode, operation: operation, reason: reason, wouldOccupyBucketCount: wouldOccupyBucketCount }; __callArgument41; }));
   }
 
   public static function _queryGridPoint__uniformGrid(grid:UniformGrid__uniformGrid, x:Float, y:Float, out:Array<SpatialObjectId>):Void {
@@ -528,6 +523,4 @@ class UniformGrid {
     return cast (((cx1 - cx0) + 1.0) * ((cy1 - cy0) + 1.0));
     return cast null;
   }
-
-  public static var _indexingGuard__uniformGrid:Null<SpatialIndexingGuard> = _Runtime.explicitNull();
 }

@@ -3,8 +3,8 @@ package flighthq.collision;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.collision.CollisionShapeValidation.getCollisionPolygonValidationStatus2D;
-import flighthq.collision.PointContainment.getCollisionShapeContainsPoint2D;
+import flighthq.collision.CollisionShapeValidation2D.getCollisionPolygonValidationStatus2D;
+import flighthq.collision.PointContainment2D.getCollisionShapeContainsPoint2D;
 import flighthq.types.Collision.CollisionBuiltInShape2D;
 import flighthq.types.Collision.CollisionRaycastHit2D;
 
@@ -51,48 +51,55 @@ class RaycastCollisionShape2D {
             }
             return cast __returnValue5;
           }
-          else if (__switchValue == 'obb') {
-            var __returnValue7:Dynamic = (cast RaycastCollisionShape2D.raycastObb__raycastCollisionShape2D((cast shape : Dynamic), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast maxFraction : Float), ({ final __callArgument8:Dynamic = out; __callArgument8; }), (cast scratch : Dynamic)) : Bool);
+          else if (__switchValue == 'capsule') {
+            var __returnValue7:Dynamic = (cast RaycastCollisionShape2D.raycastCapsule__raycastCollisionShape2D((cast shape : Dynamic), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast directionLengthSquared : Float), (cast maxFraction : Float), ({ final __callArgument8:Dynamic = out; __callArgument8; }), (cast scratch : Dynamic)) : Bool);
             {
               RaycastCollisionShape2D.releaseRaycastScratch__raycastCollisionShape2D((cast scratch : Dynamic));
             }
             return cast __returnValue7;
           }
-          else if (__switchValue == 'polygon') {
-            var __returnValue9:Dynamic = (cast RaycastCollisionShape2D.raycastPolygon__raycastCollisionShape2D((cast shape : { var points:Array<Float>; }).points, (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast maxFraction : Float), ({ final __callArgument10:Dynamic = out; __callArgument10; }), (cast scratch : Dynamic)) : Bool);
+          else if (__switchValue == 'obb') {
+            var __returnValue9:Dynamic = (cast RaycastCollisionShape2D.raycastObb__raycastCollisionShape2D((cast shape : Dynamic), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast maxFraction : Float), ({ final __callArgument10:Dynamic = out; __callArgument10; }), (cast scratch : Dynamic)) : Bool);
             {
               RaycastCollisionShape2D.releaseRaycastScratch__raycastCollisionShape2D((cast scratch : Dynamic));
             }
             return cast __returnValue9;
           }
-          else if (__switchValue == 'segment') {
-            var __returnValue11:Dynamic = (cast RaycastCollisionShape2D.raycastSegment__raycastCollisionShape2D((cast (cast shape : { var x0:Float; }).x0 : Float), (cast (cast shape : { var y0:Float; }).y0 : Float), (cast (cast shape : { var x1:Float; }).x1 : Float), (cast (cast shape : { var y1:Float; }).y1 : Float), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast directionLengthSquared : Float), (cast maxFraction : Float), ({ final __callArgument12:Dynamic = out; __callArgument12; }), (cast scratch : Dynamic)) : Bool);
+          else if (__switchValue == 'polygon') {
+            var __returnValue11:Dynamic = (cast RaycastCollisionShape2D.raycastPolygon__raycastCollisionShape2D((cast shape : { var points:Array<Float>; }).points, (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast maxFraction : Float), ({ final __callArgument12:Dynamic = out; __callArgument12; }), (cast scratch : Dynamic)) : Bool);
             {
               RaycastCollisionShape2D.releaseRaycastScratch__raycastCollisionShape2D((cast scratch : Dynamic));
             }
             return cast __returnValue11;
           }
-          else if (__switchValue == 'point') {
-            var __returnValue13:Dynamic = (cast RaycastCollisionShape2D.raycastPoint__raycastCollisionShape2D((cast (cast shape : { var x:Float; }).x : Float), (cast (cast shape : { var y:Float; }).y : Float), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast directionLengthSquared : Float), (cast maxFraction : Float), ({ final __callArgument14:Dynamic = out; __callArgument14; })) : Bool);
+          else if (__switchValue == 'segment') {
+            var __returnValue13:Dynamic = (cast RaycastCollisionShape2D.raycastSegment__raycastCollisionShape2D((cast (cast shape : { var x0:Float; }).x0 : Float), (cast (cast shape : { var y0:Float; }).y0 : Float), (cast (cast shape : { var x1:Float; }).x1 : Float), (cast (cast shape : { var y1:Float; }).y1 : Float), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast directionLengthSquared : Float), (cast maxFraction : Float), ({ final __callArgument14:Dynamic = out; __callArgument14; }), (cast scratch : Dynamic)) : Bool);
             {
               RaycastCollisionShape2D.releaseRaycastScratch__raycastCollisionShape2D((cast scratch : Dynamic));
             }
             return cast __returnValue13;
           }
-          else  {
-            var __returnValue15:Dynamic = false;
+          else if (__switchValue == 'point') {
+            var __returnValue15:Dynamic = (cast RaycastCollisionShape2D.raycastPoint__raycastCollisionShape2D((cast (cast shape : { var x:Float; }).x : Float), (cast (cast shape : { var y:Float; }).y : Float), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast directionLengthSquared : Float), (cast maxFraction : Float), ({ final __callArgument16:Dynamic = out; __callArgument16; })) : Bool);
             {
               RaycastCollisionShape2D.releaseRaycastScratch__raycastCollisionShape2D((cast scratch : Dynamic));
             }
             return cast __returnValue15;
           }
+          else  {
+            var __returnValue17:Dynamic = false;
+            {
+              RaycastCollisionShape2D.releaseRaycastScratch__raycastCollisionShape2D((cast scratch : Dynamic));
+            }
+            return cast __returnValue17;
+          }
         }
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError16:Dynamic) {
+    } catch (__finallyError18:Dynamic) {
       {
         RaycastCollisionShape2D.releaseRaycastScratch__raycastCollisionShape2D((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError16);
+      _Runtime.throwValue(__finallyError18);
     }
     {
       RaycastCollisionShape2D.releaseRaycastScratch__raycastCollisionShape2D((cast scratch : Dynamic));
@@ -126,7 +133,7 @@ class RaycastCollisionShape2D {
     normalLength = _Runtime.hypot((x - centerX), (y - centerY));
     normalX = ((cast ((cast normalLength : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((x - centerX) / normalLength) : Dynamic) : (cast 0.0 : Dynamic));
     normalY = ((cast ((cast normalLength : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((y - centerY) / normalLength) : Dynamic) : (cast 0.0 : Dynamic));
-    RaycastCollisionShape2D.writeRaycastHit__raycastCollisionShape2D(({ final __callArgument17:Dynamic = out; __callArgument17; }), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast fraction : Float), (cast normalX : Float), (cast normalY : Float));
+    RaycastCollisionShape2D.writeRaycastHit__raycastCollisionShape2D(({ final __callArgument19:Dynamic = out; __callArgument19; }), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast fraction : Float), (cast normalX : Float), (cast normalY : Float));
     return cast true;
     return cast null;
   }
@@ -186,9 +193,56 @@ class RaycastCollisionShape2D {
       if ((cast ((cast lower : Float) > (cast upper : Float)) : Bool)) { return cast false; }
     }
     if ((cast ((cast ((cast lower : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast lower : Float) > (cast maxFraction : Float)) : Bool)) : Bool)) { return cast false; }
-    RaycastCollisionShape2D.writeRaycastHit__raycastCollisionShape2D(({ final __callArgument18:Dynamic = out; __callArgument18; }), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast lower : Float), (cast normalX : Float), (cast normalY : Float));
+    RaycastCollisionShape2D.writeRaycastHit__raycastCollisionShape2D(({ final __callArgument20:Dynamic = out; __callArgument20; }), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast lower : Float), (cast normalX : Float), (cast normalY : Float));
     return cast true;
     return cast null;
+  }
+
+  public static function raycastCapsule__raycastCollisionShape2D(shape:flighthq._internal._Extract<CollisionBuiltInShape2D, { var kind:String; }>, originX:Float, originY:Float, directionX:Float, directionY:Float, directionLengthSquared:Float, maxFraction:Float, out:CollisionRaycastHit2D, scratch:RaycastScratch__raycastCollisionShape2D):Bool {
+    var best:Float = cast _Runtime.UNDEFINED;
+    var hit:Bool = cast _Runtime.UNDEFINED;
+    var axisX:Float = cast _Runtime.UNDEFINED;
+    var axisY:Float = cast _Runtime.UNDEFINED;
+    var length:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var x0:Float; }).x0] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var y0:Float; }).y0] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var x1:Float; }).x1] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var y1:Float; }).y1] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast shape : { var radius:Float; }).radius] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare((cast shape : { var radius:Float; }).radius, 0.0, '>') : Bool) : Bool)) : Bool)) {
+      return cast false;
+    }
+    best = HxMath.POSITIVE_INFINITY;
+    hit = false;
+    axisX = ((cast shape : { var x1:Float; }).x1 - (cast shape : { var x0:Float; }).x0);
+    axisY = ((cast shape : { var y1:Float; }).y1 - (cast shape : { var y0:Float; }).y0);
+    length = HxMath.sqrt(((axisX * axisX) + (axisY * axisY)));
+    if ((cast ((cast length : Float) > (cast 0.0 : Float)) : Bool)) {
+      ((cast RaycastCollisionShape2D.capsuleRectangleProbe__raycastCollisionShape2D : { var x:Float; }).x = (((cast shape : { var x0:Float; }).x0 + (cast shape : { var x1:Float; }).x1) / 2.0));
+      ((cast RaycastCollisionShape2D.capsuleRectangleProbe__raycastCollisionShape2D : { var y:Float; }).y = (((cast shape : { var y0:Float; }).y0 + (cast shape : { var y1:Float; }).y1) / 2.0));
+      ((cast RaycastCollisionShape2D.capsuleRectangleProbe__raycastCollisionShape2D : { var halfW:Float; }).halfW = (length / 2.0));
+      ((cast RaycastCollisionShape2D.capsuleRectangleProbe__raycastCollisionShape2D : { var halfH:Float; }).halfH = (cast shape : { var radius:Float; }).radius);
+      ((cast RaycastCollisionShape2D.capsuleRectangleProbe__raycastCollisionShape2D : { var rotation:Float; }).rotation = HxMath.atan2(axisY, axisX));
+      if ((cast ((cast (cast RaycastCollisionShape2D.raycastObb__raycastCollisionShape2D((cast RaycastCollisionShape2D.capsuleRectangleProbe__raycastCollisionShape2D : Dynamic), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast maxFraction : Float), ({ final __callArgument21:Dynamic = RaycastCollisionShape2D.capsuleHit__raycastCollisionShape2D; __callArgument21; }), (cast scratch : Dynamic)) : Bool) : Bool) && (cast ((cast RaycastCollisionShape2D.capsuleHit__raycastCollisionShape2D.fraction : Float) < (cast best : Float)) : Bool)) : Bool)) {
+        (best = cast (RaycastCollisionShape2D.capsuleHit__raycastCollisionShape2D.fraction : Dynamic));
+        (hit = cast (true : Dynamic));
+        RaycastCollisionShape2D.copyRaycastHit__raycastCollisionShape2D(({ final __callArgument22:Dynamic = RaycastCollisionShape2D.capsuleHit__raycastCollisionShape2D; __callArgument22; }), ({ final __callArgument23:Dynamic = out; __callArgument23; }));
+      }
+    }
+    for (__iteration0 in _Runtime.iterable(cast ([cast ([(cast shape : { var x0:Float; }).x0, (cast shape : { var y0:Float; }).y0] : Array<Dynamic>), cast ([(cast shape : { var x1:Float; }).x1, (cast shape : { var y1:Float; }).y1] : Array<Dynamic>)] : Array<Dynamic>))) {
+      var centerX:Float = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var centerY:Float = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
+      if ((cast ((cast (cast RaycastCollisionShape2D.raycastCircle__raycastCollisionShape2D((cast centerX : Float), (cast centerY : Float), (cast (cast shape : { var radius:Float; }).radius : Float), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast directionLengthSquared : Float), (cast maxFraction : Float), ({ final __callArgument26:Dynamic = RaycastCollisionShape2D.capsuleHit__raycastCollisionShape2D; __callArgument26; })) : Bool) : Bool) && (cast ((cast RaycastCollisionShape2D.capsuleHit__raycastCollisionShape2D.fraction : Float) < (cast best : Float)) : Bool)) : Bool)) {
+        (best = cast (RaycastCollisionShape2D.capsuleHit__raycastCollisionShape2D.fraction : Dynamic));
+        (hit = cast (true : Dynamic));
+        RaycastCollisionShape2D.copyRaycastHit__raycastCollisionShape2D(({ final __callArgument27:Dynamic = RaycastCollisionShape2D.capsuleHit__raycastCollisionShape2D; __callArgument27; }), ({ final __callArgument28:Dynamic = out; __callArgument28; }));
+      }
+    }
+    return cast hit;
+    return cast null;
+  }
+
+  public static function copyRaycastHit__raycastCollisionShape2D(source:CollisionRaycastHit2D, out:CollisionRaycastHit2D):Void {
+    (out.fraction = cast (source.fraction : Float));
+    (out.x = cast (source.x : Float));
+    (out.y = cast (source.y : Float));
+    (out.normalX = cast (source.normalX : Float));
+    (out.normalY = cast (source.normalY : Float));
   }
 
   public static function raycastObb__raycastCollisionShape2D(shape:flighthq._internal._Extract<CollisionBuiltInShape2D, { var kind:String; }>, originX:Float, originY:Float, directionX:Float, directionY:Float, maxFraction:Float, out:CollisionRaycastHit2D, scratch:RaycastScratch__raycastCollisionShape2D):Bool {
@@ -218,7 +272,7 @@ class RaycastCollisionShape2D {
     }
     normalX = (((cast (cast scratch : RaycastScratch__raycastCollisionShape2D).localHit : { var normalX:Float; }).normalX * cos) - ((cast (cast scratch : RaycastScratch__raycastCollisionShape2D).localHit : { var normalY:Float; }).normalY * sin));
     normalY = (((cast (cast scratch : RaycastScratch__raycastCollisionShape2D).localHit : { var normalX:Float; }).normalX * sin) + ((cast (cast scratch : RaycastScratch__raycastCollisionShape2D).localHit : { var normalY:Float; }).normalY * cos));
-    RaycastCollisionShape2D.writeRaycastHit__raycastCollisionShape2D(({ final __callArgument19:Dynamic = out; __callArgument19; }), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast (cast (cast scratch : RaycastScratch__raycastCollisionShape2D).localHit : { var fraction:Float; }).fraction : Float), (cast normalX : Float), (cast normalY : Float));
+    RaycastCollisionShape2D.writeRaycastHit__raycastCollisionShape2D(({ final __callArgument29:Dynamic = out; __callArgument29; }), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast (cast (cast scratch : RaycastScratch__raycastCollisionShape2D).localHit : { var fraction:Float; }).fraction : Float), (cast normalX : Float), (cast normalY : Float));
     return cast true;
     return cast null;
   }
@@ -229,13 +283,13 @@ class RaycastCollisionShape2D {
     var bestNormalY:Float = cast _Runtime.UNDEFINED;
     var found:Bool = cast _Runtime.UNDEFINED;
     var count:Float = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus2D(({ final __callArgument20:Dynamic = points; __callArgument20; })) : Null<String>), null) : Bool)) { return cast false; }
+    if ((cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus2D(({ final __callArgument30:Dynamic = points; __callArgument30; })) : Null<String>), null) : Bool)) { return cast false; }
     bestFraction = maxFraction;
     bestNormalX = 0.0;
     bestNormalY = 0.0;
     found = false;
     count = (_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1);
-    RaycastCollisionShape2D.polygonCenter__raycastCollisionShape2D(({ final __callArgument21:Dynamic = points; __callArgument21; }), (cast count : Float), ({ final __callArgument22:Dynamic = (cast scratch : RaycastScratch__raycastCollisionShape2D).polygonCenter; __callArgument22; }));
+    RaycastCollisionShape2D.polygonCenter__raycastCollisionShape2D(({ final __callArgument31:Dynamic = points; __callArgument31; }), (cast count : Float), ({ final __callArgument32:Dynamic = (cast scratch : RaycastScratch__raycastCollisionShape2D).polygonCenter; __callArgument32; }));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
@@ -244,7 +298,7 @@ class RaycastCollisionShape2D {
         var y0:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((_Runtime.toInt32(i) << 1) + 1.0) : Float));
         var x1:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (_Runtime.toInt32(j) << 1) : Float));
         var y1:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast ((_Runtime.toInt32(j) << 1) + 1.0) : Float));
-        if ((cast !(cast (cast RaycastCollisionShape2D.writeRaySegmentFraction__raycastCollisionShape2D((cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast ((directionX * directionX) + (directionY * directionY)) : Float), (cast bestFraction : Float), ({ final __callArgument23:Dynamic = (cast scratch : RaycastScratch__raycastCollisionShape2D).fraction; __callArgument23; })) : Bool) : Bool) : Bool)) {
+        if ((cast !(cast (cast RaycastCollisionShape2D.writeRaySegmentFraction__raycastCollisionShape2D((cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast ((directionX * directionX) + (directionY * directionY)) : Float), (cast bestFraction : Float), ({ final __callArgument33:Dynamic = (cast scratch : RaycastScratch__raycastCollisionShape2D).fraction; __callArgument33; })) : Bool) : Bool) : Bool)) {
           i++;
           continue;
         }
@@ -268,7 +322,7 @@ class RaycastCollisionShape2D {
       }
     }
     if ((cast !(cast found : Bool) : Bool)) { return cast false; }
-    RaycastCollisionShape2D.writeRaycastHit__raycastCollisionShape2D(({ final __callArgument24:Dynamic = out; __callArgument24; }), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast bestFraction : Float), (cast bestNormalX : Float), (cast bestNormalY : Float));
+    RaycastCollisionShape2D.writeRaycastHit__raycastCollisionShape2D(({ final __callArgument34:Dynamic = out; __callArgument34; }), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast bestFraction : Float), (cast bestNormalX : Float), (cast bestNormalY : Float));
     return cast true;
     return cast null;
   }
@@ -297,7 +351,7 @@ class RaycastCollisionShape2D {
     var normalX:Float = cast _Runtime.UNDEFINED;
     var normalY:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([x0] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([y0] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([x1] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([y1] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast false; }
-    if ((cast !(cast (cast RaycastCollisionShape2D.writeRaySegmentFraction__raycastCollisionShape2D((cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast directionLengthSquared : Float), (cast maxFraction : Float), ({ final __callArgument25:Dynamic = (cast scratch : RaycastScratch__raycastCollisionShape2D).fraction; __callArgument25; })) : Bool) : Bool) : Bool)) {
+    if ((cast !(cast (cast RaycastCollisionShape2D.writeRaySegmentFraction__raycastCollisionShape2D((cast x0 : Float), (cast y0 : Float), (cast x1 : Float), (cast y1 : Float), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast directionLengthSquared : Float), (cast maxFraction : Float), ({ final __callArgument35:Dynamic = (cast scratch : RaycastScratch__raycastCollisionShape2D).fraction; __callArgument35; })) : Bool) : Bool) : Bool)) {
       return cast false;
     }
     edgeX = (x1 - x0);
@@ -309,7 +363,7 @@ class RaycastCollisionShape2D {
       (normalX = cast (-normalX : Dynamic));
       (normalY = cast (-normalY : Dynamic));
     }
-    RaycastCollisionShape2D.writeRaycastHit__raycastCollisionShape2D(({ final __callArgument26:Dynamic = out; __callArgument26; }), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast (cast (cast scratch : RaycastScratch__raycastCollisionShape2D).fraction : { var value:Float; }).value : Float), (cast normalX : Float), (cast normalY : Float));
+    RaycastCollisionShape2D.writeRaycastHit__raycastCollisionShape2D(({ final __callArgument36:Dynamic = out; __callArgument36; }), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast (cast (cast scratch : RaycastScratch__raycastCollisionShape2D).fraction : { var value:Float; }).value : Float), (cast normalX : Float), (cast normalY : Float));
     return cast true;
     return cast null;
   }
@@ -366,7 +420,7 @@ class RaycastCollisionShape2D {
     hitY = (originY + (directionY * fraction));
     epsilon = _Runtime.multiplyNumbers(HxMath.max(1.0, _Runtime.hypot(offsetX, offsetY)), RaycastCollisionShape2D.RELATIVE_EPSILON__raycastCollisionShape2D);
     if ((cast ((cast _Runtime.hypot((hitX - pointX), (hitY - pointY)) : Float) > (cast epsilon : Float)) : Bool)) { return cast false; }
-    RaycastCollisionShape2D.writeRaycastHit__raycastCollisionShape2D(({ final __callArgument27:Dynamic = out; __callArgument27; }), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast fraction : Float), (cast 0.0 : Float), (cast 0.0 : Float));
+    RaycastCollisionShape2D.writeRaycastHit__raycastCollisionShape2D(({ final __callArgument37:Dynamic = out; __callArgument37; }), (cast originX : Float), (cast originY : Float), (cast directionX : Float), (cast directionY : Float), (cast fraction : Float), (cast 0.0 : Float), (cast 0.0 : Float));
     return cast true;
     return cast null;
   }
@@ -402,4 +456,8 @@ class RaycastCollisionShape2D {
   }
 
   public static final raycastScratchPool__raycastCollisionShape2D:Array<RaycastScratch__raycastCollisionShape2D> = (cast cast ([(cast RaycastCollisionShape2D.createRaycastScratch__raycastCollisionShape2D() : RaycastScratch__raycastCollisionShape2D)] : Array<Dynamic>));
+
+  public static final capsuleHit__raycastCollisionShape2D:CollisionRaycastHit2D = (cast { fraction: 0.0, x: 0.0, y: 0.0, normalX: 0.0, normalY: 0.0 });
+
+  public static final capsuleRectangleProbe__raycastCollisionShape2D:flighthq._internal._Extract<CollisionBuiltInShape2D, { var kind:String; }> = (cast { kind: 'obb', x: 0.0, y: 0.0, halfW: 0.0, halfH: 0.0, rotation: 0.0 });
 }

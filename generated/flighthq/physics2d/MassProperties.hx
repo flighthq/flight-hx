@@ -28,6 +28,21 @@ class MassProperties {
           return;
         }
       }
+      else if (__switchValue == 'capsule') {
+        {
+          var axisX:Float = ((cast shape : { var x1:Float; }).x1 - (cast shape : { var x0:Float; }).x0);
+          var axisY:Float = ((cast shape : { var y1:Float; }).y1 - (cast shape : { var y0:Float; }).y0);
+          var length:Float = HxMath.sqrt(((axisX * axisX) + (axisY * axisY)));
+          var radius:Float = (cast shape : { var radius:Float; }).radius;
+          var rectangleMass:Float = (((2.0 * radius) * length) * density);
+          var discMass:Float = (((HxMath.PI * radius) * radius) * density);
+          (out.mass = cast ((rectangleMass + discMass) : Float));
+          (out.inertia = cast ((((rectangleMass * ((length * length) + ((4.0 * radius) * radius))) / 12.0) + (discMass * ((((radius * radius) / 2.0) + ((length * length) / 4.0)) + (((4.0 * radius) * length) / (3.0 * HxMath.PI))))) : Float));
+          (out.centerX = cast ((((cast shape : { var x0:Float; }).x0 + (cast shape : { var x1:Float; }).x1) / 2.0) : Float));
+          (out.centerY = cast ((((cast shape : { var y0:Float; }).y0 + (cast shape : { var y1:Float; }).y1) / 2.0) : Float));
+          return;
+        }
+      }
       else if (__switchValue == 'aabb') {
         {
           var width:Float = ((cast shape : { var maxX:Float; }).maxX - (cast shape : { var minX:Float; }).minX);

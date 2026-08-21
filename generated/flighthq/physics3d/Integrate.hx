@@ -32,6 +32,13 @@ class Integrate {
     var qY:Float = cast _Runtime.UNDEFINED;
     var qZ:Float = cast _Runtime.UNDEFINED;
     var qW:Float = cast _Runtime.UNDEFINED;
+    var centerX:Float = cast _Runtime.UNDEFINED;
+    var centerY:Float = cast _Runtime.UNDEFINED;
+    var centerZ:Float = cast _Runtime.UNDEFINED;
+    var offset:Bool = cast _Runtime.UNDEFINED;
+    var oldCenterX:Float = cast _Runtime.UNDEFINED;
+    var oldCenterY:Float = cast _Runtime.UNDEFINED;
+    var oldCenterZ:Float = cast _Runtime.UNDEFINED;
     var half:Float = cast _Runtime.UNDEFINED;
     var nX:Float = cast _Runtime.UNDEFINED;
     var nY:Float = cast _Runtime.UNDEFINED;
@@ -39,6 +46,10 @@ class Integrate {
     var nW:Float = cast _Runtime.UNDEFINED;
     var lengthSquared:Float = cast _Runtime.UNDEFINED;
     var scale:Float = cast _Runtime.UNDEFINED;
+    var nextX:Float = cast _Runtime.UNDEFINED;
+    var nextY:Float = cast _Runtime.UNDEFINED;
+    var nextZ:Float = cast _Runtime.UNDEFINED;
+    var nextW:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals((cast body : RigidBody3D).type, 'static') : Bool) || (cast (cast body : RigidBody3D).sleeping : Bool)) : Bool)) { return; }
     ((cast body : RigidBody3D).x += ((cast body : RigidBody3D).velocityX * dt));
     ((cast body : RigidBody3D).y += ((cast body : RigidBody3D).velocityY * dt));
@@ -51,6 +62,21 @@ class Integrate {
     qY = (cast body : RigidBody3D).orientationY;
     qZ = (cast body : RigidBody3D).orientationZ;
     qW = (cast body : RigidBody3D).orientationW;
+    centerX = (cast body : RigidBody3D).centerX;
+    centerY = (cast body : RigidBody3D).centerY;
+    centerZ = (cast body : RigidBody3D).centerZ;
+    offset = ((cast ((cast !_Runtime.strictEquals(centerX, 0.0) : Bool) || (cast !_Runtime.strictEquals(centerY, 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(centerZ, 0.0) : Bool));
+    oldCenterX = 0.0;
+    oldCenterY = 0.0;
+    oldCenterZ = 0.0;
+    if ((cast offset : Bool)) {
+      var tX:Float = (2.0 * ((qY * centerZ) - (qZ * centerY)));
+      var tY:Float = (2.0 * ((qZ * centerX) - (qX * centerZ)));
+      var tZ:Float = (2.0 * ((qX * centerY) - (qY * centerX)));
+      (oldCenterX = cast ((((centerX + (qW * tX)) + (qY * tZ)) - (qZ * tY)) : Dynamic));
+      (oldCenterY = cast ((((centerY + (qW * tY)) + (qZ * tX)) - (qX * tZ)) : Dynamic));
+      (oldCenterZ = cast ((((centerZ + (qW * tZ)) + (qX * tY)) - (qY * tX)) : Dynamic));
+    }
     half = (dt * 0.5);
     nX = (qX + (half * (((wX * qW) + (wY * qZ)) - (wZ * qY))));
     nY = (qY + (half * (((wY * qW) + (wZ * qX)) - (wX * qZ))));
@@ -61,10 +87,22 @@ class Integrate {
       return;
     }
     scale = _Runtime.divideNumbers(1.0, HxMath.sqrt(lengthSquared));
-    ((cast body : RigidBody3D).orientationX = (nX * scale));
-    ((cast body : RigidBody3D).orientationY = (nY * scale));
-    ((cast body : RigidBody3D).orientationZ = (nZ * scale));
-    ((cast body : RigidBody3D).orientationW = (nW * scale));
+    nextX = (nX * scale);
+    nextY = (nY * scale);
+    nextZ = (nZ * scale);
+    nextW = (nW * scale);
+    if ((cast offset : Bool)) {
+      var tX:Float = (2.0 * ((nextY * centerZ) - (nextZ * centerY)));
+      var tY:Float = (2.0 * ((nextZ * centerX) - (nextX * centerZ)));
+      var tZ:Float = (2.0 * ((nextX * centerY) - (nextY * centerX)));
+      ((cast body : RigidBody3D).x += (oldCenterX - (((centerX + (nextW * tX)) + (nextY * tZ)) - (nextZ * tY))));
+      ((cast body : RigidBody3D).y += (oldCenterY - (((centerY + (nextW * tY)) + (nextZ * tX)) - (nextX * tZ))));
+      ((cast body : RigidBody3D).z += (oldCenterZ - (((centerZ + (nextW * tZ)) + (nextX * tY)) - (nextY * tX))));
+    }
+    ((cast body : RigidBody3D).orientationX = nextX);
+    ((cast body : RigidBody3D).orientationY = nextY);
+    ((cast body : RigidBody3D).orientationZ = nextZ);
+    ((cast body : RigidBody3D).orientationW = nextW);
   }
 
   public static function integrateRigidBody3DVelocity(body:RigidBody3D, gravityX:Float, gravityY:Float, gravityZ:Float, dt:Float):Void {

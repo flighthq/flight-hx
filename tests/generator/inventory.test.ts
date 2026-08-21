@@ -43,11 +43,11 @@ describe('analyzeUpstream', () => {
       excludedPackages: 2,
       exportConflicts: 0,
       exportLanes: 313,
-      exports: 34_370,
+      exports: 35_241,
       packages: 150,
-      rootExports: 13_301,
-      sourceFiles: 2_654,
-      testFiles: 1_505,
+      rootExports: 13_659,
+      sourceFiles: 2_691,
+      testFiles: 1_544,
     });
     expect(inventory.packages.every((item) => item.exportLanes.some((lane) => lane.entry === '.'))).toBe(true);
     expect(inventory.packages.every((item) => item.exportLanes.some((lane) => lane.entry === './contract'))).toBe(true);

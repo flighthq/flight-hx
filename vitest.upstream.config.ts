@@ -7,6 +7,7 @@ const packagesDirectory = path.join(repositoryRoot, 'upstream/packages');
 const bridgesDirectory = path.join(repositoryRoot, 'tests/bridges');
 const selectedPackage = process.env.FLIGHT_UPSTREAM_PACKAGE;
 export const bridgeHookTimeoutMs = 30_000;
+export const bridgeTestTimeoutMs = 30_000;
 
 export function packageBridge(specifier: string): string | undefined {
   const match = /^@flighthq\/([^/]+)(?:\/(.+))?$/u.exec(specifier);
@@ -76,8 +77,9 @@ export default defineConfig({
     globals: true,
     // A resetModules() partial-mock hook can require Vite to transform and
     // evaluate the 13 MB compiled Haxe bundle again. Keep the ordinary test
-    // timeout strict, but give those bridge-backed setup hooks enough time.
+    // timeout bounded, but give bridge-backed setup and stress tests enough time.
     hookTimeout: bridgeHookTimeoutMs,
+    testTimeout: bridgeTestTimeoutMs,
     isolate: false,
     setupFiles: [
       path.join(repositoryRoot, 'upstream/vitest.setup.ts'),

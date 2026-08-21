@@ -6,6 +6,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const isPhysics3DBodyStateValid = api.isPhysics3DBodyStateValid;
+export const isPhysics3DColliderStateValid = api.isPhysics3DColliderStateValid;
 export const isPhysics3DContactStateValid = api.isPhysics3DContactStateValid;
 export const isPhysics3DContactValid = api.isPhysics3DContactValid;
 export const isPhysics3DGravityValid = api.isPhysics3DGravityValid;

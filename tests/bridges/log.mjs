@@ -3,6 +3,7 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const addLogSink = compiled.flighthq.log.Log.addLogSink;
 export const beginLogGroup = compiled.flighthq.log.Log.beginLogGroup;
+export const clearLogChannelLevel = compiled.flighthq.log.Log.clearLogChannelLevel;
 export const clearLogChannelLevels = compiled.flighthq.log.Log.clearLogChannelLevels;
 export const clearLogGroups = compiled.flighthq.log.Log.clearLogGroups;
 export const clearLogOnceKeys = compiled.flighthq.log.Log.clearLogOnceKeys;

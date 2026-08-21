@@ -4,25 +4,40 @@ package flighthq.physics3d;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.physics3d.Contacts as Facade_Physics3d_flighthq_physics3d_Contacts;
+import flighthq.physics3d.Continuous as Facade_Physics3d_flighthq_physics3d_Continuous;
+import flighthq.physics3d.DebugGeometry as Facade_Physics3d_flighthq_physics3d_DebugGeometry;
 import flighthq.physics3d.EnablePhysics3DGuards as Facade_Physics3d_flighthq_physics3d_EnablePhysics3DGuards;
+import flighthq.physics3d.ExplainPhysics3DCollision as Facade_Physics3d_flighthq_physics3d_ExplainPhysics3DCollision;
 import flighthq.physics3d.ExplainPhysics3DJoints as Facade_Physics3d_flighthq_physics3d_ExplainPhysics3DJoints;
 import flighthq.physics3d.ExplainPhysics3DStep as Facade_Physics3d_flighthq_physics3d_ExplainPhysics3DStep;
 import flighthq.physics3d.Integrate as Facade_Physics3d_flighthq_physics3d_Integrate;
+import flighthq.physics3d.JointBreakage as Facade_Physics3d_flighthq_physics3d_JointBreakage;
 import flighthq.physics3d.JointCollisionSuppression as Facade_Physics3d_flighthq_physics3d_JointCollisionSuppression;
 import flighthq.physics3d.JointFactories as Facade_Physics3d_flighthq_physics3d_JointFactories;
+import flighthq.physics3d.JointReaction as Facade_Physics3d_flighthq_physics3d_JointReaction;
 import flighthq.physics3d.JointRegistry as Facade_Physics3d_flighthq_physics3d_JointRegistry;
 import flighthq.physics3d.Joints as Facade_Physics3d_flighthq_physics3d_Joints;
 import flighthq.physics3d.MassProperties as Facade_Physics3d_flighthq_physics3d_MassProperties;
+import flighthq.physics3d.Material as Facade_Physics3d_flighthq_physics3d_Material;
 import flighthq.physics3d.RegisterBuiltInPhysics3DJointSolvers as Facade_Physics3d_flighthq_physics3d_RegisterBuiltInPhysics3DJointSolvers;
 import flighthq.physics3d.Step as Facade_Physics3d_flighthq_physics3d_Step;
 import flighthq.physics3d.World as Facade_Physics3d_flighthq_physics3d_World;
+import flighthq.physics3d.WorldQueries as Facade_Physics3d_flighthq_physics3d_WorldQueries;
+import flighthq.types.Collision.CollisionBuiltInShape3D;
+import flighthq.types.Collision.CollisionColliderShape3D;
 import flighthq.types.Physics3D.Physics3DBallAndSocketJoint;
 import flighthq.types.Physics3D.Physics3DBallAndSocketJointOptions;
 import flighthq.types.Physics3D.Physics3DBodyType;
+import flighthq.types.Physics3D.Physics3DCollider;
+import flighthq.types.Physics3D.Physics3DCollisionExplanation;
+import flighthq.types.Physics3D.Physics3DCollisionFilter;
 import flighthq.types.Physics3D.Physics3DConeTwistJoint;
 import flighthq.types.Physics3D.Physics3DConeTwistJointOptions;
 import flighthq.types.Physics3D.Physics3DContact;
 import flighthq.types.Physics3D.Physics3DContactPoint;
+import flighthq.types.Physics3D.Physics3DDebugGeometry;
+import flighthq.types.Physics3D.Physics3DDistanceJoint;
+import flighthq.types.Physics3D.Physics3DDistanceJointOptions;
 import flighthq.types.Physics3D.Physics3DFixedJoint;
 import flighthq.types.Physics3D.Physics3DFixedJointOptions;
 import flighthq.types.Physics3D.Physics3DGeneric6DofJoint;
@@ -32,19 +47,36 @@ import flighthq.types.Physics3D.Physics3DHingeJointOptions;
 import flighthq.types.Physics3D.Physics3DJoint;
 import flighthq.types.Physics3D.Physics3DJointExplanation;
 import flighthq.types.Physics3D.Physics3DJointKind;
+import flighthq.types.Physics3D.Physics3DJointReaction;
 import flighthq.types.Physics3D.Physics3DJointSolver;
 import flighthq.types.Physics3D.Physics3DMassData;
+import flighthq.types.Physics3D.Physics3DMaterial;
+import flighthq.types.Physics3D.Physics3DQueryFilter;
+import flighthq.types.Physics3D.Physics3DQueryResult;
+import flighthq.types.Physics3D.Physics3DRayResult;
 import flighthq.types.Physics3D.Physics3DSequentialImpulseConfig;
+import flighthq.types.Physics3D.Physics3DShapeCastResult;
 import flighthq.types.Physics3D.Physics3DSliderJoint;
 import flighthq.types.Physics3D.Physics3DSliderJointOptions;
 import flighthq.types.Physics3D.Physics3DSolverConfig;
 import flighthq.types.Physics3D.Physics3DStepExplanation;
 import flighthq.types.Physics3D.Physics3DWorld;
 import flighthq.types.Physics3D.RigidBody3D;
+import flighthq.types.Spatial.SpatialAabb3D;
+import flighthq.types.Spatial.SpatialIndexBackend3D;
 
 class Physics3d {
+  public static function accumulatePhysics3DJointRowReaction(joint:Physics3DJoint, state:Array<Float>, offset:Float, impulse:Float, out:Physics3DJointReaction):Void {
+    Facade_Physics3d_flighthq_physics3d_JointReaction.accumulatePhysics3DJointRowReaction(joint, state, offset, impulse, out);
+  }
+
   public static function addPhysics3DBody(world:Physics3DWorld, body:RigidBody3D):Float {
     return cast Facade_Physics3d_flighthq_physics3d_World.addPhysics3DBody(world, body);
+    return cast null;
+  }
+
+  public static function addPhysics3DCollider(world:Physics3DWorld, body:RigidBody3D, collider:Physics3DCollider):Physics3DCollider {
+    return cast Facade_Physics3d_flighthq_physics3d_World.addPhysics3DCollider(world, body, collider);
     return cast null;
   }
 
@@ -53,25 +85,42 @@ class Physics3d {
     return cast null;
   }
 
-  public static function applyPhysics3DForce(body:RigidBody3D, x:Float, y:Float, z:Float):Void {
-    Facade_Physics3d_flighthq_physics3d_World.applyPhysics3DForce(body, x, y, z);
+  public static function applyPhysics3DForce(body:RigidBody3D, x:Float, y:Float, z:Float):Bool {
+    return cast Facade_Physics3d_flighthq_physics3d_World.applyPhysics3DForce(body, x, y, z);
+    return cast null;
   }
 
-  public static function applyPhysics3DForceAtPoint(body:RigidBody3D, x:Float, y:Float, z:Float, pointX:Float, pointY:Float, pointZ:Float):Void {
-    Facade_Physics3d_flighthq_physics3d_World.applyPhysics3DForceAtPoint(body, x, y, z, pointX, pointY, pointZ);
+  public static function applyPhysics3DForceAtPoint(body:RigidBody3D, x:Float, y:Float, z:Float, pointX:Float, pointY:Float, pointZ:Float):Bool {
+    return cast Facade_Physics3d_flighthq_physics3d_World.applyPhysics3DForceAtPoint(body, x, y, z, pointX, pointY, pointZ);
+    return cast null;
   }
 
-  public static function applyPhysics3DLinearImpulse(body:RigidBody3D, x:Float, y:Float, z:Float):Void {
-    Facade_Physics3d_flighthq_physics3d_World.applyPhysics3DLinearImpulse(body, x, y, z);
+  public static function applyPhysics3DLinearImpulse(body:RigidBody3D, x:Float, y:Float, z:Float):Bool {
+    return cast Facade_Physics3d_flighthq_physics3d_World.applyPhysics3DLinearImpulse(body, x, y, z);
+    return cast null;
   }
 
-  public static function applyPhysics3DTorque(body:RigidBody3D, x:Float, y:Float, z:Float):Void {
-    Facade_Physics3d_flighthq_physics3d_World.applyPhysics3DTorque(body, x, y, z);
+  public static function applyPhysics3DLinearImpulseAtPoint(body:RigidBody3D, x:Float, y:Float, z:Float, pointX:Float, pointY:Float, pointZ:Float):Bool {
+    return cast Facade_Physics3d_flighthq_physics3d_World.applyPhysics3DLinearImpulseAtPoint(body, x, y, z, pointX, pointY, pointZ);
+    return cast null;
+  }
+
+  public static function applyPhysics3DTorque(body:RigidBody3D, x:Float, y:Float, z:Float):Bool {
+    return cast Facade_Physics3d_flighthq_physics3d_World.applyPhysics3DTorque(body, x, y, z);
+    return cast null;
   }
 
   public static function arePhysics3DGuardsEnabled():Bool {
     return cast Facade_Physics3d_flighthq_physics3d_EnablePhysics3DGuards.arePhysics3DGuardsEnabled();
     return cast null;
+  }
+
+  public static function breakPhysics3DJoint(world:Physics3DWorld, joint:Physics3DJoint):Void {
+    Facade_Physics3d_flighthq_physics3d_JointBreakage.breakPhysics3DJoint(world, joint);
+  }
+
+  public static function clearPhysics3DJointReaction(out:Physics3DJointReaction):Void {
+    Facade_Physics3d_flighthq_physics3d_JointReaction.clearPhysics3DJointReaction(out);
   }
 
   public static function clearRigidBody3DForces(body:RigidBody3D):Void {
@@ -90,6 +139,22 @@ class Physics3d {
     Facade_Physics3d_flighthq_physics3d_MassProperties.computePhysics3DCapsuleMassData(radius, halfHeight, density, out);
   }
 
+  public static function computePhysics3DColliderMassData(collider:Physics3DCollider, out:Physics3DMassData):Void {
+    Facade_Physics3d_flighthq_physics3d_MassProperties.computePhysics3DColliderMassData(collider, out);
+  }
+
+  public static function computePhysics3DConeMassData(radius:Float, height:Float, density:Float, out:Physics3DMassData):Void {
+    Facade_Physics3d_flighthq_physics3d_MassProperties.computePhysics3DConeMassData(radius, height, density, out);
+  }
+
+  public static function computePhysics3DConvexHullMassData(points:Array<Float>, density:Float, out:Physics3DMassData):Void {
+    Facade_Physics3d_flighthq_physics3d_MassProperties.computePhysics3DConvexHullMassData(points, density, out);
+  }
+
+  public static function computePhysics3DCylinderMassData(radius:Float, halfHeight:Float, density:Float, out:Physics3DMassData):Void {
+    Facade_Physics3d_flighthq_physics3d_MassProperties.computePhysics3DCylinderMassData(radius, halfHeight, density, out);
+  }
+
   public static function computePhysics3DSphereMassData(radius:Float, density:Float, out:Physics3DMassData):Void {
     Facade_Physics3d_flighthq_physics3d_MassProperties.computePhysics3DSphereMassData(radius, density, out);
   }
@@ -99,18 +164,33 @@ class Physics3d {
     return cast null;
   }
 
+  public static function createPhysics3DCollider(local:CollisionColliderShape3D, ?material:Physics3DMaterial, ?filter:Physics3DCollisionFilter, ?sensor:Bool):Physics3DCollider {
+    return cast Facade_Physics3d_flighthq_physics3d_World.createPhysics3DCollider(local, material, filter, sensor);
+    return cast null;
+  }
+
   public static function createPhysics3DConeTwistJoint(options:Physics3DConeTwistJointOptions):Physics3DConeTwistJoint {
     return cast Facade_Physics3d_flighthq_physics3d_JointFactories.createPhysics3DConeTwistJoint(options);
     return cast null;
   }
 
-  public static function createPhysics3DContact(bodyA:Float, bodyB:Float):Physics3DContact {
-    return cast Facade_Physics3d_flighthq_physics3d_Contacts.createPhysics3DContact(bodyA, bodyB);
+  public static function createPhysics3DContact(bodyA:Float, bodyB:Float, ?colliderA:Float, ?colliderB:Float):Physics3DContact {
+    return cast Facade_Physics3d_flighthq_physics3d_Contacts.createPhysics3DContact(bodyA, bodyB, colliderA, colliderB);
     return cast null;
   }
 
   public static function createPhysics3DContactPoint():Physics3DContactPoint {
     return cast Facade_Physics3d_flighthq_physics3d_Contacts.createPhysics3DContactPoint();
+    return cast null;
+  }
+
+  public static function createPhysics3DDebugGeometry():Physics3DDebugGeometry {
+    return cast Facade_Physics3d_flighthq_physics3d_DebugGeometry.createPhysics3DDebugGeometry();
+    return cast null;
+  }
+
+  public static function createPhysics3DDistanceJoint(options:Physics3DDistanceJointOptions):Physics3DDistanceJoint {
+    return cast Facade_Physics3d_flighthq_physics3d_JointFactories.createPhysics3DDistanceJoint(options);
     return cast null;
   }
 
@@ -129,13 +209,38 @@ class Physics3d {
     return cast null;
   }
 
+  public static function createPhysics3DJointReaction():Physics3DJointReaction {
+    return cast Facade_Physics3d_flighthq_physics3d_JointReaction.createPhysics3DJointReaction();
+    return cast null;
+  }
+
   public static function createPhysics3DMassData():Physics3DMassData {
     return cast Facade_Physics3d_flighthq_physics3d_MassProperties.createPhysics3DMassData();
     return cast null;
   }
 
+  public static function createPhysics3DQueryFilter():Physics3DQueryFilter {
+    return cast Facade_Physics3d_flighthq_physics3d_WorldQueries.createPhysics3DQueryFilter();
+    return cast null;
+  }
+
+  public static function createPhysics3DQueryResult():Physics3DQueryResult {
+    return cast Facade_Physics3d_flighthq_physics3d_WorldQueries.createPhysics3DQueryResult();
+    return cast null;
+  }
+
+  public static function createPhysics3DRayResult():Physics3DRayResult {
+    return cast Facade_Physics3d_flighthq_physics3d_WorldQueries.createPhysics3DRayResult();
+    return cast null;
+  }
+
   public static function createPhysics3DSequentialImpulseConfig():Physics3DSequentialImpulseConfig {
     return cast Facade_Physics3d_flighthq_physics3d_World.createPhysics3DSequentialImpulseConfig();
+    return cast null;
+  }
+
+  public static function createPhysics3DShapeCastResult():Physics3DShapeCastResult {
+    return cast Facade_Physics3d_flighthq_physics3d_WorldQueries.createPhysics3DShapeCastResult();
     return cast null;
   }
 
@@ -149,8 +254,8 @@ class Physics3d {
     return cast null;
   }
 
-  public static function createPhysics3DWorld():Physics3DWorld {
-    return cast Facade_Physics3d_flighthq_physics3d_World.createPhysics3DWorld();
+  public static function createPhysics3DWorld(?index:SpatialIndexBackend3D):Physics3DWorld {
+    return cast Facade_Physics3d_flighthq_physics3d_World.createPhysics3DWorld(index);
     return cast null;
   }
 
@@ -165,6 +270,15 @@ class Physics3d {
 
   public static function enablePhysics3DGuards():Void {
     Facade_Physics3d_flighthq_physics3d_EnablePhysics3DGuards.enablePhysics3DGuards();
+  }
+
+  public static function evaluatePhysics3DJointBreakage(world:Physics3DWorld, dt:Float):Void {
+    Facade_Physics3d_flighthq_physics3d_JointBreakage.evaluatePhysics3DJointBreakage(world, dt);
+  }
+
+  public static function explainPhysics3DCollision(world:Physics3DWorld):Physics3DCollisionExplanation {
+    return cast Facade_Physics3d_flighthq_physics3d_ExplainPhysics3DCollision.explainPhysics3DCollision(world);
+    return cast null;
   }
 
   public static function explainPhysics3DJoints(world:Physics3DWorld):Array<Physics3DJointExplanation> {
@@ -182,9 +296,33 @@ class Physics3d {
     return cast null;
   }
 
+  public static function getPhysics3DJointReactionForce(reaction:Physics3DJointReaction):Float {
+    return cast Facade_Physics3d_flighthq_physics3d_JointReaction.getPhysics3DJointReactionForce(reaction);
+    return cast null;
+  }
+
+  public static function getPhysics3DJointReactionTorque(reaction:Physics3DJointReaction):Float {
+    return cast Facade_Physics3d_flighthq_physics3d_JointReaction.getPhysics3DJointReactionTorque(reaction);
+    return cast null;
+  }
+
   public static function getPhysics3DJointSolver(world:Physics3DWorld, kind:Physics3DJointKind):Null<Physics3DJointSolver> {
     return cast Facade_Physics3d_flighthq_physics3d_JointRegistry.getPhysics3DJointSolver(world, kind);
     return cast null;
+  }
+
+  public static function hasActivePhysics3DBullet(world:Physics3DWorld):Bool {
+    return cast Facade_Physics3d_flighthq_physics3d_Continuous.hasActivePhysics3DBullet(world);
+    return cast null;
+  }
+
+  public static function hydratePhysics3DWorld(world:Physics3DWorld):Bool {
+    return cast Facade_Physics3d_flighthq_physics3d_World.hydratePhysics3DWorld(world);
+    return cast null;
+  }
+
+  public static function integratePhysics3DContinuous(world:Physics3DWorld, dt:Float):Void {
+    Facade_Physics3d_flighthq_physics3d_Continuous.integratePhysics3DContinuous(world, dt);
   }
 
   public static function integrateRigidBody3DPose(body:RigidBody3D, dt:Float):Void {
@@ -195,13 +333,33 @@ class Physics3d {
     Facade_Physics3d_flighthq_physics3d_Integrate.integrateRigidBody3DVelocity(body, gravityX, gravityY, gravityZ, dt);
   }
 
+  public static function invalidatePhysics3DCollider(world:Physics3DWorld, body:RigidBody3D, collider:Physics3DCollider):Bool {
+    return cast Facade_Physics3d_flighthq_physics3d_World.invalidatePhysics3DCollider(world, body, collider);
+    return cast null;
+  }
+
   public static function invalidatePhysics3DJoint(world:Physics3DWorld, joint:Physics3DJoint):Bool {
     return cast Facade_Physics3d_flighthq_physics3d_JointRegistry.invalidatePhysics3DJoint(world, joint);
     return cast null;
   }
 
+  public static function isPhysics3DJointBreakable(joint:Physics3DJoint):Bool {
+    return cast Facade_Physics3d_flighthq_physics3d_JointBreakage.isPhysics3DJointBreakable(joint);
+    return cast null;
+  }
+
   public static function isPhysics3DPairJointSuppressed(world:Physics3DWorld, bodyA:Float, bodyB:Float):Bool {
     return cast Facade_Physics3d_flighthq_physics3d_JointCollisionSuppression.isPhysics3DPairJointSuppressed(world, bodyA, bodyB);
+    return cast null;
+  }
+
+  public static function mixPhysics3DFriction(first:Float, second:Float):Float {
+    return cast Facade_Physics3d_flighthq_physics3d_Material.mixPhysics3DFriction(first, second);
+    return cast null;
+  }
+
+  public static function mixPhysics3DRestitution(first:Float, second:Float):Float {
+    return cast Facade_Physics3d_flighthq_physics3d_Material.mixPhysics3DRestitution(first, second);
     return cast null;
   }
 
@@ -212,6 +370,10 @@ class Physics3d {
   public static final Physics3DConeTwistJointKind:String = Facade_Physics3d_flighthq_physics3d_Joints.Physics3DConeTwistJointKind;
 
   public static final physics3DConeTwistJointSolver:Physics3DJointSolver = Facade_Physics3d_flighthq_physics3d_Joints.physics3DConeTwistJointSolver;
+
+  public static final Physics3DDistanceJointKind:String = Facade_Physics3d_flighthq_physics3d_Joints.Physics3DDistanceJointKind;
+
+  public static final physics3DDistanceJointSolver:Physics3DJointSolver = Facade_Physics3d_flighthq_physics3d_Joints.physics3DDistanceJointSolver;
 
   public static final Physics3DFixedJointKind:String = Facade_Physics3d_flighthq_physics3d_Joints.Physics3DFixedJointKind;
 
@@ -231,6 +393,26 @@ class Physics3d {
 
   public static final Physics3DWorldVersion:Float = Facade_Physics3d_flighthq_physics3d_World.Physics3DWorldVersion;
 
+  public static function queryPhysics3DPoint(world:Physics3DWorld, x:Float, y:Float, z:Float, out:Physics3DQueryResult, ?filter:Physics3DQueryFilter):Void {
+    Facade_Physics3d_flighthq_physics3d_WorldQueries.queryPhysics3DPoint(world, x, y, z, out, filter);
+  }
+
+  public static function queryPhysics3DRay(world:Physics3DWorld, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:Physics3DRayResult, ?maxFraction:Float, ?filter:Physics3DQueryFilter):Void {
+    Facade_Physics3d_flighthq_physics3d_WorldQueries.queryPhysics3DRay(world, originX, originY, originZ, directionX, directionY, directionZ, out, maxFraction, filter);
+  }
+
+  public static function queryPhysics3DRayClosest(world:Physics3DWorld, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:Physics3DRayResult, ?maxFraction:Float, ?filter:Physics3DQueryFilter):Void {
+    Facade_Physics3d_flighthq_physics3d_WorldQueries.queryPhysics3DRayClosest(world, originX, originY, originZ, directionX, directionY, directionZ, out, maxFraction, filter);
+  }
+
+  public static function queryPhysics3DRegion(world:Physics3DWorld, region:SpatialAabb3D, out:Physics3DQueryResult, ?filter:Physics3DQueryFilter):Void {
+    Facade_Physics3d_flighthq_physics3d_WorldQueries.queryPhysics3DRegion(world, region, out, filter);
+  }
+
+  public static function queryPhysics3DShapeCast(world:Physics3DWorld, shape:CollisionBuiltInShape3D, dx:Float, dy:Float, dz:Float, out:Physics3DShapeCastResult, ?maxFraction:Float, ?filter:Physics3DQueryFilter):Void {
+    Facade_Physics3d_flighthq_physics3d_WorldQueries.queryPhysics3DShapeCast(world, shape, dx, dy, dz, out, maxFraction, filter);
+  }
+
   public static function refreshRigidBody3DWorldInertia(body:RigidBody3D):Void {
     Facade_Physics3d_flighthq_physics3d_Integrate.refreshRigidBody3DWorldInertia(body);
   }
@@ -248,21 +430,39 @@ class Physics3d {
     return cast null;
   }
 
+  public static function removePhysics3DCollider(world:Physics3DWorld, body:RigidBody3D, collider:Physics3DCollider):Bool {
+    return cast Facade_Physics3d_flighthq_physics3d_World.removePhysics3DCollider(world, body, collider);
+    return cast null;
+  }
+
   public static function removePhysics3DJoint(world:Physics3DWorld, joint:Physics3DJoint):Bool {
     return cast Facade_Physics3d_flighthq_physics3d_JointRegistry.removePhysics3DJoint(world, joint);
     return cast null;
   }
 
-  public static function setPhysics3DBodyFixedRotation(body:RigidBody3D, fixedRotation:Bool):Void {
-    Facade_Physics3d_flighthq_physics3d_World.setPhysics3DBodyFixedRotation(body, fixedRotation);
+  public static function setPhysics3DBodyBullet(body:RigidBody3D, bullet:Bool):Bool {
+    return cast Facade_Physics3d_flighthq_physics3d_World.setPhysics3DBodyBullet(body, bullet);
+    return cast null;
   }
 
-  public static function setPhysics3DBodyTransform(body:RigidBody3D, x:Float, y:Float, z:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Void {
-    Facade_Physics3d_flighthq_physics3d_World.setPhysics3DBodyTransform(body, x, y, z, orientationX, orientationY, orientationZ, orientationW);
+  public static function setPhysics3DBodyFixedRotation(body:RigidBody3D, fixedRotation:Bool):Bool {
+    return cast Facade_Physics3d_flighthq_physics3d_World.setPhysics3DBodyFixedRotation(body, fixedRotation);
+    return cast null;
   }
 
-  public static function setPhysics3DBodyType(body:RigidBody3D, type:Physics3DBodyType):Void {
-    Facade_Physics3d_flighthq_physics3d_World.setPhysics3DBodyType(body, type);
+  public static function setPhysics3DBodySleepEnabled(body:RigidBody3D, sleepEnabled:Bool):Bool {
+    return cast Facade_Physics3d_flighthq_physics3d_World.setPhysics3DBodySleepEnabled(body, sleepEnabled);
+    return cast null;
+  }
+
+  public static function setPhysics3DBodyTransform(body:RigidBody3D, x:Float, y:Float, z:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Bool {
+    return cast Facade_Physics3d_flighthq_physics3d_World.setPhysics3DBodyTransform(body, x, y, z, orientationX, orientationY, orientationZ, orientationW);
+    return cast null;
+  }
+
+  public static function setPhysics3DBodyType(body:RigidBody3D, type:Physics3DBodyType):Bool {
+    return cast Facade_Physics3d_flighthq_physics3d_World.setPhysics3DBodyType(body, type);
+    return cast null;
   }
 
   public static function setRigidBody3DMassData(body:RigidBody3D, data:Physics3DMassData):Void {
@@ -277,8 +477,21 @@ class Physics3d {
     Facade_Physics3d_flighthq_physics3d_Step.stepPhysics3DInterval(world, dt);
   }
 
+  public static function updateRigidBody3DMassData(body:RigidBody3D):Void {
+    Facade_Physics3d_flighthq_physics3d_MassProperties.updateRigidBody3DMassData(body);
+  }
+
   public static function wakePhysics3DBody(body:RigidBody3D):Void {
     Facade_Physics3d_flighthq_physics3d_World.wakePhysics3DBody(body);
+  }
+
+  public static function writePhysics3DDebugGeometry(world:Physics3DWorld, out:Physics3DDebugGeometry, ?options:{ @:optional var drawCentersOfMass:Null<Bool>; @:optional var drawColliders:Null<Bool>; @:optional var drawContacts:Null<Bool>; @:optional var drawJoints:Null<Bool>; @:optional var centerOfMassRadius:Null<Float>; @:optional var contactNormalLength:Null<Float>; }):Void {
+    Facade_Physics3d_flighthq_physics3d_DebugGeometry.writePhysics3DDebugGeometry(world, out, options);
+  }
+
+  public static function writePhysics3DJointReaction(world:Physics3DWorld, joint:Physics3DJoint, dt:Float, out:Physics3DJointReaction):Bool {
+    return cast Facade_Physics3d_flighthq_physics3d_JointReaction.writePhysics3DJointReaction(world, joint, dt, out);
+    return cast null;
   }
 
   public static function writeRigidBody3DWorldCenter(body:RigidBody3D, out:Array<Float>):Void {

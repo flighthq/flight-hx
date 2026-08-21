@@ -3,7 +3,7 @@ import path from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
-import { bridgeHookTimeoutMs, packageBridge } from '../../vitest.upstream.config.ts';
+import { bridgeHookTimeoutMs, bridgeTestTimeoutMs, packageBridge } from '../../vitest.upstream.config.ts';
 import { contractOnlyDeclarationIdentities } from '../../tools/generator/src/emit/core.ts';
 import type { PackageInventory } from '../../tools/generator/src/model/inventory.ts';
 
@@ -32,10 +32,10 @@ describe('public Haxe facades', () => {
       source.slice(0, source.indexOf(declaration)).trimEnd().split('\n').at(-1)?.trim();
 
     expect(firstIdentities).toEqual(secondIdentities);
-    expect(firstIdentities).toHaveLength(1_356);
+    expect(firstIdentities).toHaveLength(1_381);
     expect(core.contractSurface).toMatchObject({
-      noCompletionDeclarations: 1_356,
-      protectedDeclarationIdentities: 1_356,
+      noCompletionDeclarations: 1_381,
+      protectedDeclarationIdentities: 1_381,
     });
     expect(core.contractSurface.omittedModules).toHaveLength(148);
     expect(
@@ -94,6 +94,7 @@ describe('public Haxe facades', () => {
     const workspace = process.cwd();
 
     expect(bridgeHookTimeoutMs).toBe(30_000);
+    expect(bridgeTestTimeoutMs).toBe(30_000);
     expect(packageBridge('@flighthq/types/contract')).toBe(
       path.join(workspace, 'tests', 'bridges', 'sources', 'types', 'contract.mjs'),
     );

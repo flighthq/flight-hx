@@ -3,6 +3,7 @@ package flighthq.physics3d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.collision.ConvexHull3D.writeCollisionConvexHullFaces3D;
 import flighthq.physics3d.SymmetricTensor.TENSOR_XX;
 import flighthq.physics3d.SymmetricTensor.TENSOR_XY;
 import flighthq.physics3d.SymmetricTensor.TENSOR_XZ;
@@ -11,8 +12,11 @@ import flighthq.physics3d.SymmetricTensor.TENSOR_YZ;
 import flighthq.physics3d.SymmetricTensor.TENSOR_ZZ;
 import flighthq.physics3d.SymmetricTensor.inverseSymmetricTensor;
 import flighthq.physics3d.SymmetricTensor.translateSymmetricTensor;
+import flighthq.types.Collision.CollisionColliderShape3D;
 import flighthq.types.Physics3D.Physics3DBodyType;
+import flighthq.types.Physics3D.Physics3DCollider;
 import flighthq.types.Physics3D.Physics3DMassData;
+import flighthq.types.Physics3D.Physics3DMaterial;
 import flighthq.types.Physics3D.RigidBody3D;
 
 class MassProperties {
@@ -87,12 +91,207 @@ class MassProperties {
     MassProperties.writeDiagonal__massProperties(({ final __callArgument9:Dynamic = out; __callArgument9; }), (cast mass : Float), (cast transverse : Float), (cast axial : Float), (cast transverse : Float));
   }
 
+  public static function computePhysics3DColliderMassData(collider:Physics3DCollider, out:Physics3DMassData):Void {
+    var shape:CollisionColliderShape3D = cast _Runtime.UNDEFINED;
+    var density:Float = cast _Runtime.UNDEFINED;
+    shape = _Runtime.field(collider, 'local');
+    density = (cast _Runtime.field(collider, 'material') : Physics3DMaterial).density;
+    {
+      var __switchValue = (cast shape : { var kind:String; }).kind;
+      if (__switchValue == 'sphere') {
+        computePhysics3DSphereMassData((cast (cast shape : { var radius:Float; }).radius : Float), (cast density : Float), ({ final __callArgument10:Dynamic = out; __callArgument10; }));
+        (out.centerX = cast ((cast shape : { var x:Float; }).x : Float));
+        (out.centerY = cast ((cast shape : { var y:Float; }).y : Float));
+        (out.centerZ = cast ((cast shape : { var z:Float; }).z : Float));
+        return;
+      }
+      else if (__switchValue == 'aabb') {
+        computePhysics3DBoxMassData((cast (((cast shape : { var maxX:Float; }).maxX - (cast shape : { var minX:Float; }).minX) / 2.0) : Float), (cast (((cast shape : { var maxY:Float; }).maxY - (cast shape : { var minY:Float; }).minY) / 2.0) : Float), (cast (((cast shape : { var maxZ:Float; }).maxZ - (cast shape : { var minZ:Float; }).minZ) / 2.0) : Float), (cast density : Float), ({ final __callArgument11:Dynamic = out; __callArgument11; }));
+        (out.centerX = cast ((((cast shape : { var minX:Float; }).minX + (cast shape : { var maxX:Float; }).maxX) / 2.0) : Float));
+        (out.centerY = cast ((((cast shape : { var minY:Float; }).minY + (cast shape : { var maxY:Float; }).maxY) / 2.0) : Float));
+        (out.centerZ = cast ((((cast shape : { var minZ:Float; }).minZ + (cast shape : { var maxZ:Float; }).maxZ) / 2.0) : Float));
+        return;
+      }
+      else if (__switchValue == 'box') {
+        computePhysics3DBoxMassData((cast (cast shape : { var halfX:Float; }).halfX : Float), (cast (cast shape : { var halfY:Float; }).halfY : Float), (cast (cast shape : { var halfZ:Float; }).halfZ : Float), (cast density : Float), ({ final __callArgument12:Dynamic = out; __callArgument12; }));
+        MassProperties.rotateDiagonalTensor__massProperties(({ final __callArgument13:Dynamic = out; __callArgument13; }), (cast (cast shape : { var rotationX:Float; }).rotationX : Float), (cast (cast shape : { var rotationY:Float; }).rotationY : Float), (cast (cast shape : { var rotationZ:Float; }).rotationZ : Float), (cast (cast shape : { var rotationW:Float; }).rotationW : Float));
+        (out.centerX = cast ((cast shape : { var x:Float; }).x : Float));
+        (out.centerY = cast ((cast shape : { var y:Float; }).y : Float));
+        (out.centerZ = cast ((cast shape : { var z:Float; }).z : Float));
+        return;
+      }
+      else if (__switchValue == 'capsule') {
+        {
+          var axisX:Float = ((cast shape : { var x1:Float; }).x1 - (cast shape : { var x0:Float; }).x0);
+          var axisY:Float = ((cast shape : { var y1:Float; }).y1 - (cast shape : { var y0:Float; }).y0);
+          var axisZ:Float = ((cast shape : { var z1:Float; }).z1 - (cast shape : { var z0:Float; }).z0);
+          var length:Float = HxMath.sqrt((((axisX * axisX) + (axisY * axisY)) + (axisZ * axisZ)));
+          computePhysics3DCapsuleMassData((cast (cast shape : { var radius:Float; }).radius : Float), (cast (length / 2.0) : Float), (cast density : Float), ({ final __callArgument14:Dynamic = out; __callArgument14; }));
+          if ((cast ((cast length : Float) > (cast 0.0 : Float)) : Bool)) { MassProperties.alignTensorAxisToY__massProperties(({ final __callArgument15:Dynamic = out; __callArgument15; }), (cast (axisX / length) : Float), (cast (axisY / length) : Float), (cast (axisZ / length) : Float)); }
+          (out.centerX = cast ((((cast shape : { var x0:Float; }).x0 + (cast shape : { var x1:Float; }).x1) / 2.0) : Float));
+          (out.centerY = cast ((((cast shape : { var y0:Float; }).y0 + (cast shape : { var y1:Float; }).y1) / 2.0) : Float));
+          (out.centerZ = cast ((((cast shape : { var z0:Float; }).z0 + (cast shape : { var z1:Float; }).z1) / 2.0) : Float));
+          return;
+        }
+      }
+      else if (__switchValue == 'cylinder') {
+        {
+          var axisX:Float = ((cast shape : { var x1:Float; }).x1 - (cast shape : { var x0:Float; }).x0);
+          var axisY:Float = ((cast shape : { var y1:Float; }).y1 - (cast shape : { var y0:Float; }).y0);
+          var axisZ:Float = ((cast shape : { var z1:Float; }).z1 - (cast shape : { var z0:Float; }).z0);
+          var length:Float = HxMath.sqrt((((axisX * axisX) + (axisY * axisY)) + (axisZ * axisZ)));
+          computePhysics3DCylinderMassData((cast (cast shape : { var radius:Float; }).radius : Float), (cast (length / 2.0) : Float), (cast density : Float), ({ final __callArgument16:Dynamic = out; __callArgument16; }));
+          if ((cast ((cast length : Float) > (cast 0.0 : Float)) : Bool)) { MassProperties.alignTensorAxisToY__massProperties(({ final __callArgument17:Dynamic = out; __callArgument17; }), (cast (axisX / length) : Float), (cast (axisY / length) : Float), (cast (axisZ / length) : Float)); }
+          (out.centerX = cast ((((cast shape : { var x0:Float; }).x0 + (cast shape : { var x1:Float; }).x1) / 2.0) : Float));
+          (out.centerY = cast ((((cast shape : { var y0:Float; }).y0 + (cast shape : { var y1:Float; }).y1) / 2.0) : Float));
+          (out.centerZ = cast ((((cast shape : { var z0:Float; }).z0 + (cast shape : { var z1:Float; }).z1) / 2.0) : Float));
+          return;
+        }
+      }
+      else if (__switchValue == 'cone') {
+        {
+          var axisX:Float = ((cast shape : { var baseX:Float; }).baseX - (cast shape : { var apexX:Float; }).apexX);
+          var axisY:Float = ((cast shape : { var baseY:Float; }).baseY - (cast shape : { var apexY:Float; }).apexY);
+          var axisZ:Float = ((cast shape : { var baseZ:Float; }).baseZ - (cast shape : { var apexZ:Float; }).apexZ);
+          var length:Float = HxMath.sqrt((((axisX * axisX) + (axisY * axisY)) + (axisZ * axisZ)));
+          computePhysics3DConeMassData((cast (cast shape : { var radius:Float; }).radius : Float), (cast length : Float), (cast density : Float), ({ final __callArgument18:Dynamic = out; __callArgument18; }));
+          if ((cast ((cast length : Float) > (cast 0.0 : Float)) : Bool)) { MassProperties.alignTensorAxisToY__massProperties(({ final __callArgument19:Dynamic = out; __callArgument19; }), (cast (axisX / length) : Float), (cast (axisY / length) : Float), (cast (axisZ / length) : Float)); }
+          (out.centerX = cast (((cast shape : { var apexX:Float; }).apexX + (axisX * 0.75)) : Float));
+          (out.centerY = cast (((cast shape : { var apexY:Float; }).apexY + (axisY * 0.75)) : Float));
+          (out.centerZ = cast (((cast shape : { var apexZ:Float; }).apexZ + (axisZ * 0.75)) : Float));
+          return;
+        }
+      }
+      else if (__switchValue == 'convex') {
+        computePhysics3DConvexHullMassData((cast shape : { var points:Array<Float>; }).points, (cast density : Float), ({ final __callArgument20:Dynamic = out; __callArgument20; }));
+        return;
+      }
+      else  {
+        MassProperties.zeroPhysics3DMassData__massProperties(({ final __callArgument21:Dynamic = out; __callArgument21; }));
+      }
+    }
+  }
+
+  public static function computePhysics3DConeMassData(radius:Float, height:Float, density:Float, out:Physics3DMassData):Void {
+    var radius2:Float = cast _Runtime.UNDEFINED;
+    var mass:Float = cast _Runtime.UNDEFINED;
+    var axial:Float = cast _Runtime.UNDEFINED;
+    var transverse:Float = cast _Runtime.UNDEFINED;
+    radius2 = (radius * radius);
+    mass = ((((HxMath.PI / 3.0) * radius2) * height) * density);
+    axial = ((0.3 * mass) * radius2);
+    transverse = (mass * (((3.0 / 20.0) * radius2) + (((3.0 / 80.0) * height) * height)));
+    MassProperties.writeDiagonal__massProperties(({ final __callArgument22:Dynamic = out; __callArgument22; }), (cast mass : Float), (cast transverse : Float), (cast axial : Float), (cast transverse : Float));
+  }
+
+  public static function computePhysics3DConvexHullMassData(points:Array<Float>, density:Float, out:Physics3DMassData):Void {
+    var triangleCount:Float = cast _Runtime.UNDEFINED;
+    var volume:Float = cast _Runtime.UNDEFINED;
+    var momentX:Float = cast _Runtime.UNDEFINED;
+    var momentY:Float = cast _Runtime.UNDEFINED;
+    var momentZ:Float = cast _Runtime.UNDEFINED;
+    var mass:Float = cast _Runtime.UNDEFINED;
+    var centerX:Float = cast _Runtime.UNDEFINED;
+    var centerY:Float = cast _Runtime.UNDEFINED;
+    var centerZ:Float = cast _Runtime.UNDEFINED;
+    var xx:Float = cast _Runtime.UNDEFINED;
+    var yy:Float = cast _Runtime.UNDEFINED;
+    var zz:Float = cast _Runtime.UNDEFINED;
+    MassProperties.zeroPhysics3DMassData__massProperties(({ final __callArgument23:Dynamic = out; __callArgument23; }));
+    triangleCount = (cast writeCollisionConvexHullFaces3D(({ final __callArgument24:Dynamic = points; __callArgument24; }), ({ final __callArgument25:Dynamic = MassProperties.scratchHullFaces__massProperties; __callArgument25; })) : Float);
+    if ((cast _Runtime.strictEquals(triangleCount, 0.0) : Bool)) { return; }
+    volume = 0.0;
+    momentX = 0.0;
+    momentY = 0.0;
+    momentZ = 0.0;
+    {
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast 6.0 : Float)) : Bool)) {
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast MassProperties.scratchTensorA__massProperties : Array<Float>), (cast i : Float), (cast 0.0 : Float));
+        (i = cast ((i + 1.0) : Dynamic));
+      }
+    }
+    {
+      var f:Float = 0.0;
+      while ((cast ((cast f : Float) < (cast triangleCount : Float)) : Bool)) {
+        var a:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchHullFaces__massProperties : Array<Float>), (cast (f * 3.0) : Float)) * 3.0);
+        var b:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchHullFaces__massProperties : Array<Float>), (cast ((f * 3.0) + 1.0) : Float)) * 3.0);
+        var c:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchHullFaces__massProperties : Array<Float>), (cast ((f * 3.0) + 2.0) : Float)) * 3.0);
+        var aX:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast a : Float));
+        var aY:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (a + 1.0) : Float));
+        var aZ:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (a + 2.0) : Float));
+        var bX:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast b : Float));
+        var bY:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (b + 1.0) : Float));
+        var bZ:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (b + 2.0) : Float));
+        var cX:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast c : Float));
+        var cY:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (c + 1.0) : Float));
+        var cZ:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (c + 2.0) : Float));
+        var determinant:Float = (((aX * ((bY * cZ) - (bZ * cY))) + (aY * ((bZ * cX) - (bX * cZ)))) + (aZ * ((bX * cY) - (bY * cX))));
+        var tetrahedronVolume:Float = (determinant / 6.0);
+        (volume = cast ((volume + tetrahedronVolume) : Dynamic));
+        (momentX = cast ((momentX + (tetrahedronVolume * (((aX + bX) + cX) / 4.0))) : Dynamic));
+        (momentY = cast ((momentY + (tetrahedronVolume * (((aY + bY) + cY) / 4.0))) : Dynamic));
+        (momentZ = cast ((momentZ + (tetrahedronVolume * (((aZ + bZ) + cZ) / 4.0))) : Dynamic));
+        var scale:Float = (determinant / 120.0);
+        var sumX:Float = ((aX + bX) + cX);
+        var sumY:Float = ((aY + bY) + cY);
+        var sumZ:Float = ((aZ + bZ) + cZ);
+        ({ var __indexedObject26:Array<Float> = MassProperties.scratchTensorA__massProperties; var __indexedKey27:Float = TENSOR_XX; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject26 : Array<Float>), (cast __indexedKey27 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject26 : Array<Float>), (cast __indexedKey27 : Float)) + (scale * ((((aX * aX) + (bX * bX)) + (cX * cX)) + (sumX * sumX)))) : Float)); });
+        ({ var __indexedObject28:Array<Float> = MassProperties.scratchTensorA__massProperties; var __indexedKey29:Float = TENSOR_YY; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject28 : Array<Float>), (cast __indexedKey29 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject28 : Array<Float>), (cast __indexedKey29 : Float)) + (scale * ((((aY * aY) + (bY * bY)) + (cY * cY)) + (sumY * sumY)))) : Float)); });
+        ({ var __indexedObject30:Array<Float> = MassProperties.scratchTensorA__massProperties; var __indexedKey31:Float = TENSOR_ZZ; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject30 : Array<Float>), (cast __indexedKey31 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject30 : Array<Float>), (cast __indexedKey31 : Float)) + (scale * ((((aZ * aZ) + (bZ * bZ)) + (cZ * cZ)) + (sumZ * sumZ)))) : Float)); });
+        ({ var __indexedObject32:Array<Float> = MassProperties.scratchTensorA__massProperties; var __indexedKey33:Float = TENSOR_XY; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject32 : Array<Float>), (cast __indexedKey33 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject32 : Array<Float>), (cast __indexedKey33 : Float)) + (scale * ((((aX * aY) + (bX * bY)) + (cX * cY)) + (sumX * sumY)))) : Float)); });
+        ({ var __indexedObject34:Array<Float> = MassProperties.scratchTensorA__massProperties; var __indexedKey35:Float = TENSOR_XZ; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject34 : Array<Float>), (cast __indexedKey35 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject34 : Array<Float>), (cast __indexedKey35 : Float)) + (scale * ((((aX * aZ) + (bX * bZ)) + (cX * cZ)) + (sumX * sumZ)))) : Float)); });
+        ({ var __indexedObject36:Array<Float> = MassProperties.scratchTensorA__massProperties; var __indexedKey37:Float = TENSOR_YZ; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject36 : Array<Float>), (cast __indexedKey37 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject36 : Array<Float>), (cast __indexedKey37 : Float)) + (scale * ((((aY * aZ) + (bY * bZ)) + (cY * cZ)) + (sumY * sumZ)))) : Float)); });
+        (f = cast ((f + 1.0) : Dynamic));
+      }
+    }
+    if ((cast !(cast _Runtime.compare(volume, 0.0, '>') : Bool) : Bool)) { return; }
+    mass = (volume * density);
+    centerX = (momentX / volume);
+    centerY = (momentY / volume);
+    centerZ = (momentZ / volume);
+    xx = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorA__massProperties : Array<Float>), (cast TENSOR_XX : Float)) * density);
+    yy = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorA__massProperties : Array<Float>), (cast TENSOR_YY : Float)) * density);
+    zz = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorA__massProperties : Array<Float>), (cast TENSOR_ZZ : Float)) * density);
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_XX : Float), (cast (yy + zz) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_YY : Float), (cast (xx + zz) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_ZZ : Float), (cast (xx + yy) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_XY : Float), (cast (-flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorA__massProperties : Array<Float>), (cast TENSOR_XY : Float)) * density) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_XZ : Float), (cast (-flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorA__massProperties : Array<Float>), (cast TENSOR_XZ : Float)) * density) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_YZ : Float), (cast (-flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorA__massProperties : Array<Float>), (cast TENSOR_YZ : Float)) * density) : Float));
+    translateSymmetricTensor(({ final __callArgument38:Dynamic = MassProperties.scratchTensorB__massProperties; __callArgument38; }), (cast -mass : Float), (cast centerX : Float), (cast centerY : Float), (cast centerZ : Float), ({ final __callArgument39:Dynamic = MassProperties.scratchTensorB__massProperties; __callArgument39; }));
+    (out.mass = cast (mass : Float));
+    (out.centerX = cast (centerX : Float));
+    (out.centerY = cast (centerY : Float));
+    (out.centerZ = cast (centerZ : Float));
+    (out.inertiaXX = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_XX : Float)) : Float));
+    (out.inertiaYY = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_YY : Float)) : Float));
+    (out.inertiaZZ = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_ZZ : Float)) : Float));
+    (out.inertiaXY = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_XY : Float)) : Float));
+    (out.inertiaXZ = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_XZ : Float)) : Float));
+    (out.inertiaYZ = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_YZ : Float)) : Float));
+  }
+
+  public static function computePhysics3DCylinderMassData(radius:Float, halfHeight:Float, density:Float, out:Physics3DMassData):Void {
+    var height:Float = cast _Runtime.UNDEFINED;
+    var radius2:Float = cast _Runtime.UNDEFINED;
+    var mass:Float = cast _Runtime.UNDEFINED;
+    var axial:Float = cast _Runtime.UNDEFINED;
+    var transverse:Float = cast _Runtime.UNDEFINED;
+    height = (halfHeight + halfHeight);
+    radius2 = (radius * radius);
+    mass = (((HxMath.PI * radius2) * height) * density);
+    axial = ((0.5 * mass) * radius2);
+    transverse = (mass * (((height * height) / 12.0) + (radius2 / 4.0)));
+    MassProperties.writeDiagonal__massProperties(({ final __callArgument40:Dynamic = out; __callArgument40; }), (cast mass : Float), (cast transverse : Float), (cast axial : Float), (cast transverse : Float));
+  }
+
   public static function computePhysics3DSphereMassData(radius:Float, density:Float, out:Physics3DMassData):Void {
     var mass:Float = cast _Runtime.UNDEFINED;
     var moment:Float = cast _Runtime.UNDEFINED;
     mass = ((((((4.0 / 3.0) * HxMath.PI) * radius) * radius) * radius) * density);
     moment = (((0.4 * mass) * radius) * radius);
-    MassProperties.writeDiagonal__massProperties(({ final __callArgument10:Dynamic = out; __callArgument10; }), (cast mass : Float), (cast moment : Float), (cast moment : Float), (cast moment : Float));
+    MassProperties.writeDiagonal__massProperties(({ final __callArgument41:Dynamic = out; __callArgument41; }), (cast mass : Float), (cast moment : Float), (cast moment : Float), (cast moment : Float));
   }
 
   public static function createPhysics3DMassData():Physics3DMassData {
@@ -123,14 +322,56 @@ class MassProperties {
       ((cast body : RigidBody3D).inverseInertiaYZ = 0.0);
       return;
     }
-    MassProperties.readTensor__massProperties(({ final __callArgument11:Dynamic = data; __callArgument11; }), ({ final __callArgument12:Dynamic = MassProperties.scratchTensorA__massProperties; __callArgument12; }));
-    (cast inverseSymmetricTensor(({ final __callArgument13:Dynamic = MassProperties.scratchTensorA__massProperties; __callArgument13; }), ({ final __callArgument14:Dynamic = MassProperties.scratchTensorB__massProperties; __callArgument14; })) : Bool);
+    MassProperties.readTensor__massProperties(({ final __callArgument42:Dynamic = data; __callArgument42; }), ({ final __callArgument43:Dynamic = MassProperties.scratchTensorA__massProperties; __callArgument43; }));
+    (cast inverseSymmetricTensor(({ final __callArgument44:Dynamic = MassProperties.scratchTensorA__massProperties; __callArgument44; }), ({ final __callArgument45:Dynamic = MassProperties.scratchTensorB__massProperties; __callArgument45; })) : Bool);
     ((cast body : RigidBody3D).inverseInertiaXX = flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_XX : Float)));
     ((cast body : RigidBody3D).inverseInertiaYY = flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_YY : Float)));
     ((cast body : RigidBody3D).inverseInertiaZZ = flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_ZZ : Float)));
     ((cast body : RigidBody3D).inverseInertiaXY = flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_XY : Float)));
     ((cast body : RigidBody3D).inverseInertiaXZ = flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_XZ : Float)));
     ((cast body : RigidBody3D).inverseInertiaYZ = flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_YZ : Float)));
+  }
+
+  public static function updateRigidBody3DMassData(body:RigidBody3D):Void {
+    var total:Physics3DMassData = cast _Runtime.UNDEFINED;
+    var one:Physics3DMassData = cast _Runtime.UNDEFINED;
+    total = (cast MassProperties.acquirePhysics3DMassData__massProperties() : Physics3DMassData);
+    one = (cast MassProperties.acquirePhysics3DMassData__massProperties() : Physics3DMassData);
+    try {
+      try {
+        MassProperties.zeroPhysics3DMassData__massProperties(({ final __callArgument46:Dynamic = total; __callArgument46; }));
+        for (collider in _Runtime.iterable((cast body : RigidBody3D).colliders)) {
+          computePhysics3DColliderMassData(({ final __callArgument49:Dynamic = collider; __callArgument49; }), ({ final __callArgument50:Dynamic = one; __callArgument50; }));
+          combinePhysics3DMassData(({ final __callArgument51:Dynamic = total; __callArgument51; }), ({ final __callArgument52:Dynamic = one; __callArgument52; }));
+        }
+        setRigidBody3DMassData(({ final __callArgument53:Dynamic = body; __callArgument53; }), ({ final __callArgument54:Dynamic = total; __callArgument54; }));
+      } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
+    } catch (__finallyError55:Dynamic) {
+      {
+        MassProperties.releasePhysics3DMassData__massProperties(({ final __callArgument56:Dynamic = one; __callArgument56; }));
+        MassProperties.releasePhysics3DMassData__massProperties(({ final __callArgument57:Dynamic = total; __callArgument57; }));
+      }
+      _Runtime.throwValue(__finallyError55);
+    }
+    {
+      MassProperties.releasePhysics3DMassData__massProperties(({ final __callArgument58:Dynamic = one; __callArgument58; }));
+      MassProperties.releasePhysics3DMassData__massProperties(({ final __callArgument59:Dynamic = total; __callArgument59; }));
+    }
+  }
+
+  public static function alignTensorAxisToY__massProperties(out:Physics3DMassData, axisX:Float, axisY:Float, axisZ:Float):Void {
+    var axial:Float = cast _Runtime.UNDEFINED;
+    var transverse:Float = cast _Runtime.UNDEFINED;
+    var difference:Float = cast _Runtime.UNDEFINED;
+    axial = out.inertiaYY;
+    transverse = out.inertiaXX;
+    difference = (axial - transverse);
+    (out.inertiaXX = cast ((transverse + ((difference * axisX) * axisX)) : Float));
+    (out.inertiaYY = cast ((transverse + ((difference * axisY) * axisY)) : Float));
+    (out.inertiaZZ = cast ((transverse + ((difference * axisZ) * axisZ)) : Float));
+    (out.inertiaXY = cast (((difference * axisX) * axisY) : Float));
+    (out.inertiaXZ = cast (((difference * axisX) * axisZ) : Float));
+    (out.inertiaYZ = cast (((difference * axisY) * axisZ) : Float));
   }
 
   public static function readTensor__massProperties(data:Physics3DMassData, out:Array<Float>):Void {
@@ -140,6 +381,39 @@ class MassProperties {
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_XY : Float), (cast data.inertiaXY : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_XZ : Float), (cast data.inertiaXZ : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_YZ : Float), (cast data.inertiaYZ : Float));
+  }
+
+  public static function rotateDiagonalTensor__massProperties(out:Physics3DMassData, x:Float, y:Float, z:Float, w:Float):Void {
+    var a:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var c0X:Float = cast _Runtime.UNDEFINED;
+    var c0Y:Float = cast _Runtime.UNDEFINED;
+    var c0Z:Float = cast _Runtime.UNDEFINED;
+    var c1X:Float = cast _Runtime.UNDEFINED;
+    var c1Y:Float = cast _Runtime.UNDEFINED;
+    var c1Z:Float = cast _Runtime.UNDEFINED;
+    var c2X:Float = cast _Runtime.UNDEFINED;
+    var c2Y:Float = cast _Runtime.UNDEFINED;
+    var c2Z:Float = cast _Runtime.UNDEFINED;
+    a = out.inertiaXX;
+    b = out.inertiaYY;
+    c = out.inertiaZZ;
+    c0X = (1.0 - (2.0 * ((y * y) + (z * z))));
+    c0Y = (2.0 * ((x * y) + (w * z)));
+    c0Z = (2.0 * ((x * z) - (w * y)));
+    c1X = (2.0 * ((x * y) - (w * z)));
+    c1Y = (1.0 - (2.0 * ((x * x) + (z * z))));
+    c1Z = (2.0 * ((y * z) + (w * x)));
+    c2X = (2.0 * ((x * z) + (w * y)));
+    c2Y = (2.0 * ((y * z) - (w * x)));
+    c2Z = (1.0 - (2.0 * ((x * x) + (y * y))));
+    (out.inertiaXX = cast (((((a * c0X) * c0X) + ((b * c1X) * c1X)) + ((c * c2X) * c2X)) : Float));
+    (out.inertiaYY = cast (((((a * c0Y) * c0Y) + ((b * c1Y) * c1Y)) + ((c * c2Y) * c2Y)) : Float));
+    (out.inertiaZZ = cast (((((a * c0Z) * c0Z) + ((b * c1Z) * c1Z)) + ((c * c2Z) * c2Z)) : Float));
+    (out.inertiaXY = cast (((((a * c0X) * c0Y) + ((b * c1X) * c1Y)) + ((c * c2X) * c2Y)) : Float));
+    (out.inertiaXZ = cast (((((a * c0X) * c0Z) + ((b * c1X) * c1Z)) + ((c * c2X) * c2Z)) : Float));
+    (out.inertiaYZ = cast (((((a * c0Y) * c0Z) + ((b * c1Y) * c1Z)) + ((c * c2Y) * c2Z)) : Float));
   }
 
   public static function writeDiagonal__massProperties(out:Physics3DMassData, mass:Float, inertiaXX:Float, inertiaYY:Float, inertiaZZ:Float):Void {
@@ -154,6 +428,32 @@ class MassProperties {
     (out.centerY = cast (0.0 : Float));
     (out.centerZ = cast (0.0 : Float));
   }
+
+  public static function zeroPhysics3DMassData__massProperties(out:Physics3DMassData):Void {
+    (out.mass = cast (0.0 : Float));
+    (out.inertiaXX = cast (0.0 : Float));
+    (out.inertiaYY = cast (0.0 : Float));
+    (out.inertiaZZ = cast (0.0 : Float));
+    (out.inertiaXY = cast (0.0 : Float));
+    (out.inertiaXZ = cast (0.0 : Float));
+    (out.inertiaYZ = cast (0.0 : Float));
+    (out.centerX = cast (0.0 : Float));
+    (out.centerY = cast (0.0 : Float));
+    (out.centerZ = cast (0.0 : Float));
+  }
+
+  public static function acquirePhysics3DMassData__massProperties():Physics3DMassData {
+    return cast _Runtime.coalesce(_Runtime.callProperty(MassProperties.physics3DMassDataPool__massProperties, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast createPhysics3DMassData() : Physics3DMassData));
+    return cast null;
+  }
+
+  public static function releasePhysics3DMassData__massProperties(data:Physics3DMassData):Void {
+    _Runtime.callProperty(MassProperties.physics3DMassDataPool__massProperties, 'push', cast ([data] : Array<Dynamic>));
+  }
+
+  public static final physics3DMassDataPool__massProperties:Array<Physics3DMassData> = (cast cast ([] : Array<Dynamic>));
+
+  public static final scratchHullFaces__massProperties:Array<Float> = (cast cast ([] : Array<Dynamic>));
 
   public static final scratchTensorA__massProperties:Array<Float> = (cast cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
 

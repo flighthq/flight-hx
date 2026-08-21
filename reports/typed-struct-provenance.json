@@ -967,7 +967,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14006",
+      "fieldPath": "traits.__@NodeTraitsKey@14261",
       "parentSchemaId": "@flighthq/types:interface#BitmapTextRuntime"
     },
     {
@@ -1506,6 +1506,11 @@
       "parentSchemaId": "@flighthq/types:interface#CollisionContactManifold2D"
     },
     {
+      "childSchemaId": "@flighthq/types:interface#CollisionContactPoint3D",
+      "fieldPath": "points[]",
+      "parentSchemaId": "@flighthq/types:interface#CollisionContactManifold3D"
+    },
+    {
       "childSchemaId": "@flighthq/types:interface#Adjustment",
       "fieldPath": "colorAdjustments[]",
       "parentSchemaId": "@flighthq/types:interface#ColorAdjustmentRuntime"
@@ -1727,7 +1732,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14006",
+      "fieldPath": "traits.__@NodeTraitsKey@14261",
       "parentSchemaId": "@flighthq/types:interface#DisplayObjectRuntime"
     },
     {
@@ -3257,7 +3262,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14006",
+      "fieldPath": "traits.__@NodeTraitsKey@14261",
       "parentSchemaId": "@flighthq/types:interface#HtmlViewRuntime"
     },
     {
@@ -4977,7 +4982,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14006",
+      "fieldPath": "traits.__@NodeTraitsKey@14261",
       "parentSchemaId": "@flighthq/types:interface#MorphShapeRuntime"
     },
     {
@@ -5087,7 +5092,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14006",
+      "fieldPath": "traits.__@NodeTraitsKey@14261",
       "parentSchemaId": "@flighthq/types:interface#MovieClipRuntime"
     },
     {
@@ -5187,7 +5192,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14006",
+      "fieldPath": "traits.__@NodeTraitsKey@14261",
       "parentSchemaId": "@flighthq/types:interface#NativeTextRuntime"
     },
     {
@@ -5487,7 +5492,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14006",
+      "fieldPath": "traits.__@NodeTraitsKey@14261",
       "parentSchemaId": "@flighthq/types:interface#ParticleEmitter2DRuntime"
     },
     {
@@ -5586,12 +5591,27 @@
       "parentSchemaId": "@flighthq/types:interface#PhongMaterial"
     },
     {
+      "childSchemaId": "@flighthq/types:interface#Physics2DJoint",
+      "fieldPath": "joint",
+      "parentSchemaId": "@flighthq/types:interface#Physics2DBrokenJoint"
+    },
+    {
       "childSchemaId": "@flighthq/types:interface#CollisionAabb2D",
       "fieldPath": "local",
       "parentSchemaId": "@flighthq/types:interface#Physics2DCollider"
     },
     {
       "childSchemaId": "@flighthq/types:interface#CollisionAabb2D",
+      "fieldPath": "world",
+      "parentSchemaId": "@flighthq/types:interface#Physics2DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CollisionCapsule2D",
+      "fieldPath": "local",
+      "parentSchemaId": "@flighthq/types:interface#Physics2DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CollisionCapsule2D",
       "fieldPath": "world",
       "parentSchemaId": "@flighthq/types:interface#Physics2DCollider"
     },
@@ -5681,6 +5701,11 @@
       "parentSchemaId": "@flighthq/types:interface#Physics2DDebugGeometry"
     },
     {
+      "childSchemaId": "@flighthq/types:interface#Physics2DBrokenJoint",
+      "fieldPath": "broke[]",
+      "parentSchemaId": "@flighthq/types:interface#Physics2DJointEvents"
+    },
+    {
       "childSchemaId": "@flighthq/types:interface#Physics2DJointResolution",
       "fieldPath": "joints[]",
       "parentSchemaId": "@flighthq/types:interface#Physics2DJointResolutionExplanation"
@@ -5716,6 +5741,16 @@
       "parentSchemaId": "@flighthq/types:interface#Physics2DRayResult"
     },
     {
+      "childSchemaId": "@flighthq/types:interface#Physics2DCollider",
+      "fieldPath": "collider",
+      "parentSchemaId": "@flighthq/types:interface#Physics2DShapeCastResult"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#RigidBody2D",
+      "fieldPath": "body",
+      "parentSchemaId": "@flighthq/types:interface#Physics2DShapeCastResult"
+    },
+    {
       "childSchemaId": "@flighthq/types:interface#Physics2DContact",
       "fieldPath": "contacts[]",
       "parentSchemaId": "@flighthq/types:interface#Physics2DWorld"
@@ -5733,6 +5768,11 @@
     {
       "childSchemaId": "@flighthq/types:interface#Physics2DJoint",
       "fieldPath": "joints[]",
+      "parentSchemaId": "@flighthq/types:interface#Physics2DWorld"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Physics2DJointEvents",
+      "fieldPath": "jointEvents",
       "parentSchemaId": "@flighthq/types:interface#Physics2DWorld"
     },
     {
@@ -5761,6 +5801,106 @@
       "parentSchemaId": "@flighthq/types:interface#Physics2DWorld"
     },
     {
+      "childSchemaId": "@flighthq/types:interface#CollisionAabb3D",
+      "fieldPath": "local",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CollisionAabb3D",
+      "fieldPath": "world",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CollisionBox3D",
+      "fieldPath": "local",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CollisionBox3D",
+      "fieldPath": "world",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CollisionCapsule3D",
+      "fieldPath": "local",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CollisionCapsule3D",
+      "fieldPath": "world",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CollisionCone3D",
+      "fieldPath": "local",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CollisionCone3D",
+      "fieldPath": "world",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CollisionConvex3D",
+      "fieldPath": "local",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CollisionConvex3D",
+      "fieldPath": "world",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CollisionCylinder3D",
+      "fieldPath": "local",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CollisionCylinder3D",
+      "fieldPath": "world",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CollisionHeightfield3D",
+      "fieldPath": "local",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CollisionHeightfield3D",
+      "fieldPath": "world",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CollisionSphere3D",
+      "fieldPath": "local",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CollisionSphere3D",
+      "fieldPath": "world",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CollisionTriangleMesh3D",
+      "fieldPath": "local",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#CollisionTriangleMesh3D",
+      "fieldPath": "world",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Physics3DCollisionFilter",
+      "fieldPath": "filter",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Physics3DMaterial",
+      "fieldPath": "material",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+    },
+    {
       "childSchemaId": "@flighthq/types:interface#Physics3DContactPoint",
       "fieldPath": "points[]",
       "parentSchemaId": "@flighthq/types:interface#Physics3DContact"
@@ -5781,14 +5921,74 @@
       "parentSchemaId": "@flighthq/types:interface#Physics3DContactEvents"
     },
     {
+      "childSchemaId": "@flighthq/types:interface#Physics3DDebugLine",
+      "fieldPath": "lines[]",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DDebugGeometry"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Physics3DDebugSphere",
+      "fieldPath": "spheres[]",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DDebugGeometry"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Physics3DJoint",
+      "fieldPath": "broke[]",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DJointEvents"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Physics3DCollider",
+      "fieldPath": "collider",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DQueryHit"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#RigidBody3D",
+      "fieldPath": "body",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DQueryHit"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Physics3DQueryHit",
+      "fieldPath": "hits[]",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DQueryResult"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Physics3DCollider",
+      "fieldPath": "collider",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DRayHit"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#RigidBody3D",
+      "fieldPath": "body",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DRayHit"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Physics3DRayHit",
+      "fieldPath": "hits[]",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DRayResult"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Physics3DContact",
+      "fieldPath": "constraintByContact<Map:0>",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DSequentialImpulseState"
+    },
+    {
       "childSchemaId": "@flighthq/types:interface#Physics3DContactConstraint",
-      "fieldPath": "constraintByPair<Map:1>",
+      "fieldPath": "constraintByContact<Map:1>",
       "parentSchemaId": "@flighthq/types:interface#Physics3DSequentialImpulseState"
     },
     {
       "childSchemaId": "@flighthq/types:interface#Physics3DContactConstraint",
       "fieldPath": "constraints[]",
       "parentSchemaId": "@flighthq/types:interface#Physics3DSequentialImpulseState"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#Physics3DCollider",
+      "fieldPath": "collider",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DShapeCastResult"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#RigidBody3D",
+      "fieldPath": "body",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DShapeCastResult"
     },
     {
       "childSchemaId": "@flighthq/types:interface#Physics3DSequentialImpulseConfig",
@@ -5816,6 +6016,11 @@
       "parentSchemaId": "@flighthq/types:interface#Physics3DWorld"
     },
     {
+      "childSchemaId": "@flighthq/types:interface#Physics3DJointEvents",
+      "fieldPath": "jointEvents",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DWorld"
+    },
+    {
       "childSchemaId": "@flighthq/types:interface#Physics3DJointSolver",
       "fieldPath": "jointSolvers<Map:1>",
       "parentSchemaId": "@flighthq/types:interface#Physics3DWorld"
@@ -5838,6 +6043,11 @@
     {
       "childSchemaId": "@flighthq/types:interface#RigidBody3D",
       "fieldPath": "bodyByIndex<Map:1>",
+      "parentSchemaId": "@flighthq/types:interface#Physics3DWorld"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#SpatialIndexBackend3D",
+      "fieldPath": "index",
       "parentSchemaId": "@flighthq/types:interface#Physics3DWorld"
     },
     {
@@ -6007,7 +6217,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14006",
+      "fieldPath": "traits.__@NodeTraitsKey@14261",
       "parentSchemaId": "@flighthq/types:interface#QuadBatchRuntime"
     },
     {
@@ -6522,7 +6732,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14006",
+      "fieldPath": "traits.__@NodeTraitsKey@14261",
       "parentSchemaId": "@flighthq/types:interface#RichTextRuntime"
     },
     {
@@ -6586,13 +6796,8 @@
       "parentSchemaId": "@flighthq/types:interface#RigidBody2D"
     },
     {
-      "childSchemaId": "@flighthq/types:interface#Physics3DCollisionFilter",
-      "fieldPath": "filter",
-      "parentSchemaId": "@flighthq/types:interface#RigidBody3D"
-    },
-    {
-      "childSchemaId": "@flighthq/types:interface#Physics3DMaterial",
-      "fieldPath": "material",
+      "childSchemaId": "@flighthq/types:interface#Physics3DCollider",
+      "fieldPath": "colliders[]",
       "parentSchemaId": "@flighthq/types:interface#RigidBody3D"
     },
     {
@@ -6822,7 +7027,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14006",
+      "fieldPath": "traits.__@NodeTraitsKey@14261",
       "parentSchemaId": "@flighthq/types:interface#Scale9ShapeRuntime"
     },
     {
@@ -7702,7 +7907,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14006",
+      "fieldPath": "traits.__@NodeTraitsKey@14261",
       "parentSchemaId": "@flighthq/types:interface#ShapeRuntime"
     },
     {
@@ -7981,9 +8186,19 @@
       "parentSchemaId": "@flighthq/types:interface#SpatialIndex2D"
     },
     {
+      "childSchemaId": "@flighthq/types:interface#SpatialIndexRuntime3D",
+      "fieldPath": "runtime",
+      "parentSchemaId": "@flighthq/types:interface#SpatialIndex3D"
+    },
+    {
       "childSchemaId": "@flighthq/types:interface#SpatialIndexBackend2D",
       "fieldPath": "backend",
       "parentSchemaId": "@flighthq/types:interface#SpatialIndexRuntime2D"
+    },
+    {
+      "childSchemaId": "@flighthq/types:interface#SpatialIndexBackend3D",
+      "fieldPath": "backend",
+      "parentSchemaId": "@flighthq/types:interface#SpatialIndexRuntime3D"
     },
     {
       "childSchemaId": "@flighthq/types:interface#Texture2D",
@@ -8237,7 +8452,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14006",
+      "fieldPath": "traits.__@NodeTraitsKey@14261",
       "parentSchemaId": "@flighthq/types:interface#SpriteRuntime"
     },
     {
@@ -8737,7 +8952,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14006",
+      "fieldPath": "traits.__@NodeTraitsKey@14261",
       "parentSchemaId": "@flighthq/types:interface#TextLabelRuntime"
     },
     {
@@ -9277,7 +9492,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14006",
+      "fieldPath": "traits.__@NodeTraitsKey@14261",
       "parentSchemaId": "@flighthq/types:interface#TilemapRuntime"
     },
     {
@@ -11269,7 +11484,43 @@
       "reasons": [
         "cross-schema-transfer"
       ],
+      "schemaId": "@flighthq/types:interface#CollisionAabb3D"
+    },
+    {
+      "reasons": [
+        "cross-schema-transfer"
+      ],
+      "schemaId": "@flighthq/types:interface#CollisionBox3D"
+    },
+    {
+      "reasons": [
+        "cross-schema-transfer"
+      ],
+      "schemaId": "@flighthq/types:interface#CollisionCapsule3D"
+    },
+    {
+      "reasons": [
+        "cross-schema-transfer"
+      ],
       "schemaId": "@flighthq/types:interface#CollisionCircle2D"
+    },
+    {
+      "reasons": [
+        "cross-schema-transfer"
+      ],
+      "schemaId": "@flighthq/types:interface#CollisionCone3D"
+    },
+    {
+      "reasons": [
+        "cross-schema-transfer"
+      ],
+      "schemaId": "@flighthq/types:interface#CollisionConvex3D"
+    },
+    {
+      "reasons": [
+        "cross-schema-transfer"
+      ],
+      "schemaId": "@flighthq/types:interface#CollisionCylinder3D"
     },
     {
       "reasons": [
@@ -11282,6 +11533,12 @@
         "cross-schema-transfer"
       ],
       "schemaId": "@flighthq/types:interface#CollisionPolygon2D"
+    },
+    {
+      "reasons": [
+        "cross-schema-transfer"
+      ],
+      "schemaId": "@flighthq/types:interface#CollisionSphere3D"
     },
     {
       "reasons": [
@@ -12386,6 +12643,13 @@
         "cross-schema-transfer",
         "object-literal-spread"
       ],
+      "schemaId": "@flighthq/types:interface#Physics3DDistanceJoint"
+    },
+    {
+      "reasons": [
+        "cross-schema-transfer",
+        "object-literal-spread"
+      ],
       "schemaId": "@flighthq/types:interface#Physics3DGeneric6DofJoint"
     },
     {
@@ -12906,6 +13170,12 @@
         "anonymous-structural-transfer"
       ],
       "schemaId": "@flighthq/types:interface#SpatialAabb2D"
+    },
+    {
+      "reasons": [
+        "anonymous-structural-transfer"
+      ],
+      "schemaId": "@flighthq/types:interface#SpatialAabb3D"
     },
     {
       "reasons": [
@@ -19348,7 +19618,7 @@
           {
             "path": [
               "@flighthq/types:interface#RichTextRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#RichTextRuntime"
@@ -19424,7 +19694,7 @@
           {
             "path": [
               "@flighthq/types:interface#TextLabelRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#TextLabelRuntime"
@@ -19456,7 +19726,7 @@
           {
             "path": [
               "@flighthq/types:interface#BitmapTextRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#BitmapTextRuntime"
@@ -19477,7 +19747,7 @@
           {
             "path": [
               "@flighthq/types:interface#DisplayObjectRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#DisplayObjectRuntime"
@@ -19492,7 +19762,7 @@
           {
             "path": [
               "@flighthq/types:interface#HtmlViewRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#HtmlViewRuntime"
@@ -19523,7 +19793,7 @@
           {
             "path": [
               "@flighthq/types:interface#MorphShapeRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#MorphShapeRuntime"
@@ -19547,7 +19817,7 @@
           {
             "path": [
               "@flighthq/types:interface#MovieClipRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#MovieClipRuntime"
@@ -19562,7 +19832,7 @@
           {
             "path": [
               "@flighthq/types:interface#NativeTextRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#NativeTextRuntime"
@@ -19584,7 +19854,7 @@
           {
             "path": [
               "@flighthq/types:interface#ParticleEmitter2DRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#ParticleEmitter2DRuntime"
@@ -19599,7 +19869,7 @@
           {
             "path": [
               "@flighthq/types:interface#QuadBatchRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#QuadBatchRuntime"
@@ -19614,7 +19884,7 @@
           {
             "path": [
               "@flighthq/types:interface#RichTextRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#RichTextRuntime"
@@ -19654,7 +19924,7 @@
           {
             "path": [
               "@flighthq/types:interface#Scale9ShapeRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#Scale9ShapeRuntime"
@@ -19727,7 +19997,7 @@
           {
             "path": [
               "@flighthq/types:interface#ShapeRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#ShapeRuntime"
@@ -19742,7 +20012,7 @@
           {
             "path": [
               "@flighthq/types:interface#SpriteRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#SpriteRuntime"
@@ -19774,7 +20044,7 @@
           {
             "path": [
               "@flighthq/types:interface#TextLabelRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#TextLabelRuntime"
@@ -19789,7 +20059,7 @@
           {
             "path": [
               "@flighthq/types:interface#TilemapRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#TilemapRuntime"
@@ -19919,7 +20189,7 @@
         {
           "path": [
             "@flighthq/types:interface#BitmapTextRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -19940,7 +20210,7 @@
         {
           "path": [
             "@flighthq/types:interface#DisplayObjectRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -19971,7 +20241,7 @@
         {
           "path": [
             "@flighthq/types:interface#HtmlViewRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20003,7 +20273,7 @@
         {
           "path": [
             "@flighthq/types:interface#MorphShapeRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20024,7 +20294,7 @@
         {
           "path": [
             "@flighthq/types:interface#MovieClipRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20045,7 +20315,7 @@
         {
           "path": [
             "@flighthq/types:interface#NativeTextRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20078,7 +20348,7 @@
         {
           "path": [
             "@flighthq/types:interface#ParticleEmitter2DRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20100,7 +20370,7 @@
         {
           "path": [
             "@flighthq/types:interface#QuadBatchRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20122,7 +20392,7 @@
         {
           "path": [
             "@flighthq/types:interface#RichTextRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20143,7 +20413,7 @@
         {
           "path": [
             "@flighthq/types:interface#Scale9ShapeRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20176,7 +20446,7 @@
         {
           "path": [
             "@flighthq/types:interface#ShapeRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20197,7 +20467,7 @@
         {
           "path": [
             "@flighthq/types:interface#SpriteRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20218,7 +20488,7 @@
         {
           "path": [
             "@flighthq/types:interface#TextLabelRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20239,7 +20509,7 @@
         {
           "path": [
             "@flighthq/types:interface#TilemapRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20433,6 +20703,152 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#CollisionCapsule2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#CollisionCapsule2D"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DCollider",
+              "local:@flighthq/types:interface#CollisionCapsule2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DCollider"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DQueryResult",
+              "hits[]:@flighthq/types:interface#Physics2DQueryHit",
+              "collider:@flighthq/types:interface#Physics2DCollider",
+              "local:@flighthq/types:interface#CollisionCapsule2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DQueryResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DRayResult",
+              "hits[]:@flighthq/types:interface#Physics2DRayHit",
+              "collider:@flighthq/types:interface#Physics2DCollider",
+              "local:@flighthq/types:interface#CollisionCapsule2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DRayResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DShapeCastResult",
+              "collider:@flighthq/types:interface#Physics2DCollider",
+              "local:@flighthq/types:interface#CollisionCapsule2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DShapeCastResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DWorld",
+              "bodies[]:@flighthq/types:interface#RigidBody2D",
+              "colliders[]:@flighthq/types:interface#Physics2DCollider",
+              "local:@flighthq/types:interface#CollisionCapsule2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DWorld"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#RigidBody2D",
+              "colliders[]:@flighthq/types:interface#Physics2DCollider",
+              "local:@flighthq/types:interface#CollisionCapsule2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#RigidBody2D"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#CollisionCapsule2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#CollisionCapsule2D"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DCollider",
+              "local:@flighthq/types:interface#CollisionCapsule2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DCollider"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DQueryResult",
+              "hits[]:@flighthq/types:interface#Physics2DQueryHit",
+              "collider:@flighthq/types:interface#Physics2DCollider",
+              "local:@flighthq/types:interface#CollisionCapsule2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DQueryResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DRayResult",
+              "hits[]:@flighthq/types:interface#Physics2DRayHit",
+              "collider:@flighthq/types:interface#Physics2DCollider",
+              "local:@flighthq/types:interface#CollisionCapsule2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DRayResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DShapeCastResult",
+              "collider:@flighthq/types:interface#Physics2DCollider",
+              "local:@flighthq/types:interface#CollisionCapsule2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DShapeCastResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DWorld",
+              "bodies[]:@flighthq/types:interface#RigidBody2D",
+              "colliders[]:@flighthq/types:interface#Physics2DCollider",
+              "local:@flighthq/types:interface#CollisionCapsule2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DWorld"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#RigidBody2D",
+              "colliders[]:@flighthq/types:interface#Physics2DCollider",
+              "local:@flighthq/types:interface#CollisionCapsule2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#RigidBody2D"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionCapsule2D",
+            "fieldPath": "local",
+            "parentSchemaId": "@flighthq/types:interface#Physics2DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionCapsule2D",
+            "fieldPath": "world",
+            "parentSchemaId": "@flighthq/types:interface#Physics2DCollider"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 5,
+      "id": "@flighthq/types:interface#CollisionCapsule2D",
+      "name": "CollisionCapsule2D",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Collision.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
               "@flighthq/types:interface#CollisionContactManifold2D"
             ],
             "rootSchemaId": "@flighthq/types:interface#CollisionContactManifold2D"
@@ -20461,6 +20877,47 @@
       "fields": 6,
       "id": "@flighthq/types:interface#CollisionContactManifold2D",
       "name": "CollisionContactManifold2D",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Collision.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#CollisionContactManifold3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#CollisionContactManifold3D"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#CollisionContactManifold3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#CollisionContactManifold3D"
+          }
+        ]
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionContactPoint3D",
+            "fieldPath": "points[]",
+            "parentSchemaId": "@flighthq/types:interface#CollisionContactManifold3D"
+          }
+        ],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 6,
+      "id": "@flighthq/types:interface#CollisionContactManifold3D",
+      "name": "CollisionContactManifold3D",
       "nominalIdentity": {
         "blockerReasons": [],
         "closed": true
@@ -20517,6 +20974,84 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#CollisionContactManifold3D",
+              "points[]:@flighthq/types:interface#CollisionContactPoint3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#CollisionContactManifold3D"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#CollisionContactManifold3D",
+              "points[]:@flighthq/types:interface#CollisionContactPoint3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#CollisionContactManifold3D"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionContactPoint3D",
+            "fieldPath": "points[]",
+            "parentSchemaId": "@flighthq/types:interface#CollisionContactManifold3D"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 5,
+      "id": "@flighthq/types:interface#CollisionContactPoint3D",
+      "name": "CollisionContactPoint3D",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Collision.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#CollisionDistance3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#CollisionDistance3D"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#CollisionDistance3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#CollisionDistance3D"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 11,
+      "id": "@flighthq/types:interface#CollisionDistance3D",
+      "name": "CollisionDistance3D",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Collision.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
               "@flighthq/types:interface#CollisionManifold2D"
             ],
             "rootSchemaId": "@flighthq/types:interface#CollisionManifold2D"
@@ -20539,6 +21074,41 @@
       "fields": 4,
       "id": "@flighthq/types:interface#CollisionManifold2D",
       "name": "CollisionManifold2D",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Collision.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#CollisionManifold3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#CollisionManifold3D"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#CollisionManifold3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#CollisionManifold3D"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 5,
+      "id": "@flighthq/types:interface#CollisionManifold3D",
+      "name": "CollisionManifold3D",
       "nominalIdentity": {
         "blockerReasons": [],
         "closed": true
@@ -20580,6 +21150,14 @@
               "local:@flighthq/types:interface#CollisionPoint2D"
             ],
             "rootSchemaId": "@flighthq/types:interface#Physics2DRayResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DShapeCastResult",
+              "collider:@flighthq/types:interface#Physics2DCollider",
+              "local:@flighthq/types:interface#CollisionPoint2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DShapeCastResult"
           },
           {
             "path": [
@@ -20630,6 +21208,14 @@
               "local:@flighthq/types:interface#CollisionPoint2D"
             ],
             "rootSchemaId": "@flighthq/types:interface#Physics2DRayResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DShapeCastResult",
+              "collider:@flighthq/types:interface#Physics2DCollider",
+              "local:@flighthq/types:interface#CollisionPoint2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DShapeCastResult"
           },
           {
             "path": [
@@ -20700,10 +21286,45 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 32,
+      "directAccesses": 46,
       "fields": 5,
       "id": "@flighthq/types:interface#CollisionRaycastHit2D",
       "name": "CollisionRaycastHit2D",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Collision.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#CollisionRaycastHit3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#CollisionRaycastHit3D"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#CollisionRaycastHit3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#CollisionRaycastHit3D"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 7,
+      "id": "@flighthq/types:interface#CollisionRaycastHit3D",
+      "name": "CollisionRaycastHit3D",
       "nominalIdentity": {
         "blockerReasons": [],
         "closed": true
@@ -20745,6 +21366,14 @@
               "local:@flighthq/types:interface#CollisionSegment2D"
             ],
             "rootSchemaId": "@flighthq/types:interface#Physics2DRayResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DShapeCastResult",
+              "collider:@flighthq/types:interface#Physics2DCollider",
+              "local:@flighthq/types:interface#CollisionSegment2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DShapeCastResult"
           },
           {
             "path": [
@@ -20795,6 +21424,14 @@
               "local:@flighthq/types:interface#CollisionSegment2D"
             ],
             "rootSchemaId": "@flighthq/types:interface#Physics2DRayResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DShapeCastResult",
+              "collider:@flighthq/types:interface#Physics2DCollider",
+              "local:@flighthq/types:interface#CollisionSegment2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DShapeCastResult"
           },
           {
             "path": [
@@ -20872,6 +21509,34 @@
     },
     {
       "bridgeExposure": {
+        "inputPaths": [],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#CollisionTestExplanation3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#CollisionTestExplanation3D"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 4,
+      "id": "@flighthq/types:interface#CollisionTestExplanation3D",
+      "name": "CollisionTestExplanation3D",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Collision.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
         "inputPaths": [
           {
             "path": [
@@ -20893,10 +21558,45 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 61,
+      "directAccesses": 68,
       "fields": 5,
       "id": "@flighthq/types:interface#CollisionTimeOfImpact2D",
       "name": "CollisionTimeOfImpact2D",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Collision.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#CollisionTimeOfImpact3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#CollisionTimeOfImpact3D"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#CollisionTimeOfImpact3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#CollisionTimeOfImpact3D"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 7,
+      "id": "@flighthq/types:interface#CollisionTimeOfImpact3D",
+      "name": "CollisionTimeOfImpact3D",
       "nominalIdentity": {
         "blockerReasons": [],
         "closed": true
@@ -20925,6 +21625,34 @@
       "fields": 1,
       "id": "@flighthq/types:interface#CollisionVendorShape2D",
       "name": "CollisionVendorShape2D",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Collision.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#CollisionVendorShape3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#CollisionVendorShape3D"
+          }
+        ],
+        "outputPaths": []
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#CollisionVendorShape3D",
+      "name": "CollisionVendorShape3D",
       "nominalIdentity": {
         "blockerReasons": [],
         "closed": true
@@ -30821,7 +31549,7 @@
           {
             "path": [
               "@flighthq/types:interface#RichTextRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#RichTextRuntime"
           },
@@ -30849,7 +31577,7 @@
           {
             "path": [
               "@flighthq/types:interface#TextLabelRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#TextLabelRuntime"
           },
@@ -30865,28 +31593,28 @@
           {
             "path": [
               "@flighthq/types:interface#BitmapTextRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#BitmapTextRuntime"
           },
           {
             "path": [
               "@flighthq/types:interface#DisplayObjectRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#DisplayObjectRuntime"
           },
           {
             "path": [
               "@flighthq/types:interface#HtmlViewRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#HtmlViewRuntime"
           },
           {
             "path": [
               "@flighthq/types:interface#MorphShapeRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#MorphShapeRuntime"
           },
@@ -30910,14 +31638,14 @@
           {
             "path": [
               "@flighthq/types:interface#MovieClipRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#MovieClipRuntime"
           },
           {
             "path": [
               "@flighthq/types:interface#NativeTextRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#NativeTextRuntime"
           },
@@ -30930,21 +31658,21 @@
           {
             "path": [
               "@flighthq/types:interface#ParticleEmitter2DRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#ParticleEmitter2DRuntime"
           },
           {
             "path": [
               "@flighthq/types:interface#QuadBatchRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#QuadBatchRuntime"
           },
           {
             "path": [
               "@flighthq/types:interface#RichTextRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#RichTextRuntime"
           },
@@ -30959,7 +31687,7 @@
           {
             "path": [
               "@flighthq/types:interface#Scale9ShapeRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#Scale9ShapeRuntime"
           },
@@ -31010,14 +31738,14 @@
           {
             "path": [
               "@flighthq/types:interface#ShapeRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#ShapeRuntime"
           },
           {
             "path": [
               "@flighthq/types:interface#SpriteRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#SpriteRuntime"
           },
@@ -31032,14 +31760,14 @@
           {
             "path": [
               "@flighthq/types:interface#TextLabelRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#TextLabelRuntime"
           },
           {
             "path": [
               "@flighthq/types:interface#TilemapRuntime",
-              "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#TilemapRuntime"
           },
@@ -31073,7 +31801,7 @@
         "parents": [
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14006",
+            "fieldPath": "traits.__@NodeTraitsKey@14261",
             "parentSchemaId": "@flighthq/types:interface#BitmapTextRuntime"
           },
           {
@@ -31083,7 +31811,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14006",
+            "fieldPath": "traits.__@NodeTraitsKey@14261",
             "parentSchemaId": "@flighthq/types:interface#DisplayObjectRuntime"
           },
           {
@@ -31093,7 +31821,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14006",
+            "fieldPath": "traits.__@NodeTraitsKey@14261",
             "parentSchemaId": "@flighthq/types:interface#HtmlViewRuntime"
           },
           {
@@ -31103,7 +31831,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14006",
+            "fieldPath": "traits.__@NodeTraitsKey@14261",
             "parentSchemaId": "@flighthq/types:interface#MorphShapeRuntime"
           },
           {
@@ -31113,7 +31841,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14006",
+            "fieldPath": "traits.__@NodeTraitsKey@14261",
             "parentSchemaId": "@flighthq/types:interface#MovieClipRuntime"
           },
           {
@@ -31123,7 +31851,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14006",
+            "fieldPath": "traits.__@NodeTraitsKey@14261",
             "parentSchemaId": "@flighthq/types:interface#NativeTextRuntime"
           },
           {
@@ -31138,7 +31866,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14006",
+            "fieldPath": "traits.__@NodeTraitsKey@14261",
             "parentSchemaId": "@flighthq/types:interface#ParticleEmitter2DRuntime"
           },
           {
@@ -31148,7 +31876,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14006",
+            "fieldPath": "traits.__@NodeTraitsKey@14261",
             "parentSchemaId": "@flighthq/types:interface#QuadBatchRuntime"
           },
           {
@@ -31158,7 +31886,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14006",
+            "fieldPath": "traits.__@NodeTraitsKey@14261",
             "parentSchemaId": "@flighthq/types:interface#RichTextRuntime"
           },
           {
@@ -31168,7 +31896,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14006",
+            "fieldPath": "traits.__@NodeTraitsKey@14261",
             "parentSchemaId": "@flighthq/types:interface#Scale9ShapeRuntime"
           },
           {
@@ -31208,7 +31936,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14006",
+            "fieldPath": "traits.__@NodeTraitsKey@14261",
             "parentSchemaId": "@flighthq/types:interface#ShapeRuntime"
           },
           {
@@ -31218,7 +31946,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14006",
+            "fieldPath": "traits.__@NodeTraitsKey@14261",
             "parentSchemaId": "@flighthq/types:interface#SpriteRuntime"
           },
           {
@@ -31233,7 +31961,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14006",
+            "fieldPath": "traits.__@NodeTraitsKey@14261",
             "parentSchemaId": "@flighthq/types:interface#TextLabelRuntime"
           },
           {
@@ -31243,7 +31971,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14006",
+            "fieldPath": "traits.__@NodeTraitsKey@14261",
             "parentSchemaId": "@flighthq/types:interface#TilemapRuntime"
           },
           {
@@ -31273,7 +32001,7 @@
         {
           "path": [
             "@flighthq/types:interface#BitmapTextRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -31283,7 +32011,7 @@
         {
           "path": [
             "@flighthq/types:interface#DisplayObjectRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -31293,7 +32021,7 @@
         {
           "path": [
             "@flighthq/types:interface#HtmlViewRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -31303,7 +32031,7 @@
         {
           "path": [
             "@flighthq/types:interface#MorphShapeRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -31325,7 +32053,7 @@
         {
           "path": [
             "@flighthq/types:interface#MovieClipRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -31335,7 +32063,7 @@
         {
           "path": [
             "@flighthq/types:interface#NativeTextRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -31355,7 +32083,7 @@
         {
           "path": [
             "@flighthq/types:interface#ParticleEmitter2DRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -31365,7 +32093,7 @@
         {
           "path": [
             "@flighthq/types:interface#QuadBatchRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer",
@@ -31376,7 +32104,7 @@
         {
           "path": [
             "@flighthq/types:interface#RichTextRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -31386,7 +32114,7 @@
         {
           "path": [
             "@flighthq/types:interface#Scale9ShapeRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -31406,7 +32134,7 @@
         {
           "path": [
             "@flighthq/types:interface#ShapeRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -31416,7 +32144,7 @@
         {
           "path": [
             "@flighthq/types:interface#SpriteRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -31426,7 +32154,7 @@
         {
           "path": [
             "@flighthq/types:interface#TextLabelRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -31436,7 +32164,7 @@
         {
           "path": [
             "@flighthq/types:interface#TilemapRuntime",
-            "traits.__@NodeTraitsKey@14006:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14261:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -37621,6 +38349,57 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#Physics2DWorld",
+              "jointEvents:@flighthq/types:interface#Physics2DJointEvents",
+              "broke[]:@flighthq/types:interface#Physics2DBrokenJoint"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DWorld"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DWorld",
+              "jointEvents:@flighthq/types:interface#Physics2DJointEvents",
+              "broke[]:@flighthq/types:interface#Physics2DBrokenJoint"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DWorld"
+          }
+        ]
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics2DJoint",
+            "fieldPath": "joint",
+            "parentSchemaId": "@flighthq/types:interface#Physics2DBrokenJoint"
+          }
+        ],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics2DBrokenJoint",
+            "fieldPath": "broke[]",
+            "parentSchemaId": "@flighthq/types:interface#Physics2DJointEvents"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 4,
+      "id": "@flighthq/types:interface#Physics2DBrokenJoint",
+      "name": "Physics2DBrokenJoint",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Physics2D.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
               "@flighthq/types:interface#Physics2DCollider"
             ],
             "rootSchemaId": "@flighthq/types:interface#Physics2DCollider"
@@ -37640,6 +38419,13 @@
               "collider:@flighthq/types:interface#Physics2DCollider"
             ],
             "rootSchemaId": "@flighthq/types:interface#Physics2DRayResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DShapeCastResult",
+              "collider:@flighthq/types:interface#Physics2DCollider"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DShapeCastResult"
           },
           {
             "path": [
@@ -37682,6 +38468,13 @@
           },
           {
             "path": [
+              "@flighthq/types:interface#Physics2DShapeCastResult",
+              "collider:@flighthq/types:interface#Physics2DCollider"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DShapeCastResult"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#Physics2DWorld",
               "bodies[]:@flighthq/types:interface#RigidBody2D",
               "colliders[]:@flighthq/types:interface#Physics2DCollider"
@@ -37706,6 +38499,16 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#CollisionAabb2D",
+            "fieldPath": "world",
+            "parentSchemaId": "@flighthq/types:interface#Physics2DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionCapsule2D",
+            "fieldPath": "local",
+            "parentSchemaId": "@flighthq/types:interface#Physics2DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionCapsule2D",
             "fieldPath": "world",
             "parentSchemaId": "@flighthq/types:interface#Physics2DCollider"
           },
@@ -37783,15 +38586,48 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Physics2DCollider",
+            "fieldPath": "collider",
+            "parentSchemaId": "@flighthq/types:interface#Physics2DShapeCastResult"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics2DCollider",
             "fieldPath": "colliders[]",
             "parentSchemaId": "@flighthq/types:interface#RigidBody2D"
           }
         ]
       },
-      "directAccesses": 47,
+      "directAccesses": 51,
       "fields": 5,
       "id": "@flighthq/types:interface#Physics2DCollider",
       "name": "Physics2DCollider",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Physics2D.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DCollisionExplanation"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DCollisionExplanation"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 2,
+      "id": "@flighthq/types:interface#Physics2DCollisionExplanation",
+      "name": "Physics2DCollisionExplanation",
       "nominalIdentity": {
         "blockerReasons": [],
         "closed": true
@@ -38182,6 +39018,90 @@
     },
     {
       "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DWorld",
+              "jointEvents:@flighthq/types:interface#Physics2DJointEvents"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DWorld"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DWorld",
+              "jointEvents:@flighthq/types:interface#Physics2DJointEvents"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DWorld"
+          }
+        ]
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics2DBrokenJoint",
+            "fieldPath": "broke[]",
+            "parentSchemaId": "@flighthq/types:interface#Physics2DJointEvents"
+          }
+        ],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics2DJointEvents",
+            "fieldPath": "jointEvents",
+            "parentSchemaId": "@flighthq/types:interface#Physics2DWorld"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#Physics2DJointEvents",
+      "name": "Physics2DJointEvents",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Physics2D.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DJointReaction"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DJointReaction"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DJointReaction"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DJointReaction"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 3,
+      "id": "@flighthq/types:interface#Physics2DJointReaction",
+      "name": "Physics2DJointReaction",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Physics2D.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
         "inputPaths": [],
         "outputPaths": [
           {
@@ -38265,7 +39185,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 45,
+      "directAccesses": 49,
       "fields": 4,
       "id": "@flighthq/types:interface#Physics2DMassData",
       "name": "Physics2DMassData",
@@ -38507,6 +39427,52 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#Physics2DShapeCastResult"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DShapeCastResult"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DShapeCastResult"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DShapeCastResult"
+          }
+        ]
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics2DCollider",
+            "fieldPath": "collider",
+            "parentSchemaId": "@flighthq/types:interface#Physics2DShapeCastResult"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#RigidBody2D",
+            "fieldPath": "body",
+            "parentSchemaId": "@flighthq/types:interface#Physics2DShapeCastResult"
+          }
+        ],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 9,
+      "id": "@flighthq/types:interface#Physics2DShapeCastResult",
+      "name": "Physics2DShapeCastResult",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Physics2D.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
               "@flighthq/types:interface#Physics2DSolverConfig"
             ],
             "rootSchemaId": "@flighthq/types:interface#Physics2DSolverConfig"
@@ -38627,6 +39593,11 @@
             "parentSchemaId": "@flighthq/types:interface#Physics2DWorld"
           },
           {
+            "childSchemaId": "@flighthq/types:interface#Physics2DJointEvents",
+            "fieldPath": "jointEvents",
+            "parentSchemaId": "@flighthq/types:interface#Physics2DWorld"
+          },
+          {
             "childSchemaId": "@flighthq/types:interface#Physics2DJointSolver",
             "fieldPath": "jointSolvers<Map:1>",
             "parentSchemaId": "@flighthq/types:interface#Physics2DWorld"
@@ -38654,8 +39625,8 @@
         ],
         "parents": []
       },
-      "directAccesses": 217,
-      "fields": 29,
+      "directAccesses": 225,
+      "fields": 30,
       "id": "@flighthq/types:interface#Physics2DWorld",
       "name": "Physics2DWorld",
       "nominalIdentity": {
@@ -38671,8 +39642,309 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#Physics3DCollider"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DQueryResult",
+              "hits[]:@flighthq/types:interface#Physics3DQueryHit",
+              "collider:@flighthq/types:interface#Physics3DCollider"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DQueryResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DRayResult",
+              "hits[]:@flighthq/types:interface#Physics3DRayHit",
+              "collider:@flighthq/types:interface#Physics3DCollider"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DRayResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DShapeCastResult",
+              "collider:@flighthq/types:interface#Physics3DCollider"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DShapeCastResult"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#Physics3DWorld",
               "bodies[]:@flighthq/types:interface#RigidBody3D",
+              "colliders[]:@flighthq/types:interface#Physics3DCollider"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DWorld"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#RigidBody3D",
+              "colliders[]:@flighthq/types:interface#Physics3DCollider"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#RigidBody3D"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DCollider"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DQueryResult",
+              "hits[]:@flighthq/types:interface#Physics3DQueryHit",
+              "collider:@flighthq/types:interface#Physics3DCollider"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DQueryResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DRayResult",
+              "hits[]:@flighthq/types:interface#Physics3DRayHit",
+              "collider:@flighthq/types:interface#Physics3DCollider"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DRayResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DShapeCastResult",
+              "collider:@flighthq/types:interface#Physics3DCollider"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DShapeCastResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DWorld",
+              "bodies[]:@flighthq/types:interface#RigidBody3D",
+              "colliders[]:@flighthq/types:interface#Physics3DCollider"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DWorld"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#RigidBody3D",
+              "colliders[]:@flighthq/types:interface#Physics3DCollider"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#RigidBody3D"
+          }
+        ]
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionAabb3D",
+            "fieldPath": "local",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionAabb3D",
+            "fieldPath": "world",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionBox3D",
+            "fieldPath": "local",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionBox3D",
+            "fieldPath": "world",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionCapsule3D",
+            "fieldPath": "local",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionCapsule3D",
+            "fieldPath": "world",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionCone3D",
+            "fieldPath": "local",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionCone3D",
+            "fieldPath": "world",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionConvex3D",
+            "fieldPath": "local",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionConvex3D",
+            "fieldPath": "world",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionCylinder3D",
+            "fieldPath": "local",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionCylinder3D",
+            "fieldPath": "world",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionHeightfield3D",
+            "fieldPath": "local",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionHeightfield3D",
+            "fieldPath": "world",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionSphere3D",
+            "fieldPath": "local",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionSphere3D",
+            "fieldPath": "world",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionTriangleMesh3D",
+            "fieldPath": "local",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#CollisionTriangleMesh3D",
+            "fieldPath": "world",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DCollisionFilter",
+            "fieldPath": "filter",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DMaterial",
+            "fieldPath": "material",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          }
+        ],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DCollider",
+            "fieldPath": "collider",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DQueryHit"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DCollider",
+            "fieldPath": "collider",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DRayHit"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DCollider",
+            "fieldPath": "collider",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DShapeCastResult"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DCollider",
+            "fieldPath": "colliders[]",
+            "parentSchemaId": "@flighthq/types:interface#RigidBody3D"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 5,
+      "id": "@flighthq/types:interface#Physics3DCollider",
+      "name": "Physics3DCollider",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Physics3D.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DCollisionExplanation"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DCollisionExplanation"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 2,
+      "id": "@flighthq/types:interface#Physics3DCollisionExplanation",
+      "name": "Physics3DCollisionExplanation",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Physics3D.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DCollider",
+              "filter:@flighthq/types:interface#Physics3DCollisionFilter"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DCollisionFilter"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DCollisionFilter"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DQueryResult",
+              "hits[]:@flighthq/types:interface#Physics3DQueryHit",
+              "collider:@flighthq/types:interface#Physics3DCollider",
+              "filter:@flighthq/types:interface#Physics3DCollisionFilter"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DQueryResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DRayResult",
+              "hits[]:@flighthq/types:interface#Physics3DRayHit",
+              "collider:@flighthq/types:interface#Physics3DCollider",
+              "filter:@flighthq/types:interface#Physics3DCollisionFilter"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DRayResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DShapeCastResult",
+              "collider:@flighthq/types:interface#Physics3DCollider",
+              "filter:@flighthq/types:interface#Physics3DCollisionFilter"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DShapeCastResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DWorld",
+              "bodies[]:@flighthq/types:interface#RigidBody3D",
+              "colliders[]:@flighthq/types:interface#Physics3DCollider",
               "filter:@flighthq/types:interface#Physics3DCollisionFilter"
             ],
             "rootSchemaId": "@flighthq/types:interface#Physics3DWorld"
@@ -38680,6 +39952,7 @@
           {
             "path": [
               "@flighthq/types:interface#RigidBody3D",
+              "colliders[]:@flighthq/types:interface#Physics3DCollider",
               "filter:@flighthq/types:interface#Physics3DCollisionFilter"
             ],
             "rootSchemaId": "@flighthq/types:interface#RigidBody3D"
@@ -38688,8 +39961,42 @@
         "outputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#Physics3DCollider",
+              "filter:@flighthq/types:interface#Physics3DCollisionFilter"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DQueryResult",
+              "hits[]:@flighthq/types:interface#Physics3DQueryHit",
+              "collider:@flighthq/types:interface#Physics3DCollider",
+              "filter:@flighthq/types:interface#Physics3DCollisionFilter"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DQueryResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DRayResult",
+              "hits[]:@flighthq/types:interface#Physics3DRayHit",
+              "collider:@flighthq/types:interface#Physics3DCollider",
+              "filter:@flighthq/types:interface#Physics3DCollisionFilter"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DRayResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DShapeCastResult",
+              "collider:@flighthq/types:interface#Physics3DCollider",
+              "filter:@flighthq/types:interface#Physics3DCollisionFilter"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DShapeCastResult"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#Physics3DWorld",
               "bodies[]:@flighthq/types:interface#RigidBody3D",
+              "colliders[]:@flighthq/types:interface#Physics3DCollider",
               "filter:@flighthq/types:interface#Physics3DCollisionFilter"
             ],
             "rootSchemaId": "@flighthq/types:interface#Physics3DWorld"
@@ -38697,6 +40004,7 @@
           {
             "path": [
               "@flighthq/types:interface#RigidBody3D",
+              "colliders[]:@flighthq/types:interface#Physics3DCollider",
               "filter:@flighthq/types:interface#Physics3DCollisionFilter"
             ],
             "rootSchemaId": "@flighthq/types:interface#RigidBody3D"
@@ -38709,7 +40017,7 @@
           {
             "childSchemaId": "@flighthq/types:interface#Physics3DCollisionFilter",
             "fieldPath": "filter",
-            "parentSchemaId": "@flighthq/types:interface#RigidBody3D"
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
           }
         ]
       },
@@ -38779,22 +40087,42 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Physics3DContact",
+            "fieldPath": "constraintByContact<Map:0>",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DSequentialImpulseState"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DContact",
             "fieldPath": "contacts[]",
             "parentSchemaId": "@flighthq/types:interface#Physics3DWorld"
           }
         ]
       },
-      "directAccesses": 83,
-      "fields": 12,
+      "directAccesses": 0,
+      "fields": 14,
       "id": "@flighthq/types:interface#Physics3DContact",
       "name": "Physics3DContact",
       "nominalIdentity": {
-        "blockerReasons": [],
-        "closed": true
+        "blockerReasons": [
+          "container-transfer"
+        ],
+        "closed": false
       },
       "normalizationProvenance": [],
       "source": "upstream/packages/types/src/Physics3D.ts",
-      "transfers": []
+      "transfers": [
+        {
+          "column": 53,
+          "kind": "dynamic-container-transfer",
+          "line": 324,
+          "source": "upstream/packages/physics3d/src/world.ts"
+        },
+        {
+          "column": 38,
+          "kind": "dynamic-container-transfer",
+          "line": 450,
+          "source": "upstream/packages/physics3d/src/world.ts"
+        }
+      ]
     },
     {
       "bridgeExposure": {
@@ -38803,7 +40131,7 @@
             "path": [
               "@flighthq/types:interface#Physics3DWorld",
               "solver:@flighthq/types:interface#Physics3DSequentialImpulseState",
-              "constraintByPair<Map:1>:@flighthq/types:interface#Physics3DContactConstraint"
+              "constraintByContact<Map:1>:@flighthq/types:interface#Physics3DContactConstraint"
             ],
             "rootSchemaId": "@flighthq/types:interface#Physics3DWorld"
           }
@@ -38819,7 +40147,7 @@
             "path": [
               "@flighthq/types:interface#Physics3DWorld",
               "solver:@flighthq/types:interface#Physics3DSequentialImpulseState",
-              "constraintByPair<Map:1>:@flighthq/types:interface#Physics3DContactConstraint"
+              "constraintByContact<Map:1>:@flighthq/types:interface#Physics3DContactConstraint"
             ],
             "rootSchemaId": "@flighthq/types:interface#Physics3DWorld"
           }
@@ -38836,7 +40164,7 @@
         "parents": [
           {
             "childSchemaId": "@flighthq/types:interface#Physics3DContactConstraint",
-            "fieldPath": "constraintByPair<Map:1>",
+            "fieldPath": "constraintByContact<Map:1>",
             "parentSchemaId": "@flighthq/types:interface#Physics3DSequentialImpulseState"
           },
           {
@@ -38860,9 +40188,15 @@
       "source": "upstream/packages/types/src/Physics3D.ts",
       "transfers": [
         {
-          "column": 50,
+          "column": 53,
           "kind": "dynamic-container-transfer",
-          "line": 137,
+          "line": 324,
+          "source": "upstream/packages/physics3d/src/world.ts"
+        },
+        {
+          "column": 38,
+          "kind": "dynamic-container-transfer",
+          "line": 450,
           "source": "upstream/packages/physics3d/src/world.ts"
         }
       ]
@@ -38874,7 +40208,7 @@
             "path": [
               "@flighthq/types:interface#Physics3DWorld",
               "solver:@flighthq/types:interface#Physics3DSequentialImpulseState",
-              "constraintByPair<Map:1>:@flighthq/types:interface#Physics3DContactConstraint",
+              "constraintByContact<Map:1>:@flighthq/types:interface#Physics3DContactConstraint",
               "points[]:@flighthq/types:interface#Physics3DContactConstraintPoint"
             ],
             "rootSchemaId": "@flighthq/types:interface#Physics3DWorld"
@@ -38898,7 +40232,7 @@
             "path": [
               "@flighthq/types:interface#Physics3DWorld",
               "solver:@flighthq/types:interface#Physics3DSequentialImpulseState",
-              "constraintByPair<Map:1>:@flighthq/types:interface#Physics3DContactConstraint",
+              "constraintByContact<Map:1>:@flighthq/types:interface#Physics3DContactConstraint",
               "points[]:@flighthq/types:interface#Physics3DContactConstraintPoint"
             ],
             "rootSchemaId": "@flighthq/types:interface#Physics3DWorld"
@@ -38915,7 +40249,7 @@
           }
         ]
       },
-      "directAccesses": 39,
+      "directAccesses": 41,
       "fields": 8,
       "id": "@flighthq/types:interface#Physics3DContactConstraintPoint",
       "name": "Physics3DContactConstraintPoint",
@@ -39026,6 +40360,215 @@
     },
     {
       "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DDebugGeometry"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DDebugGeometry"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DDebugGeometry"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DDebugGeometry"
+          }
+        ]
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DDebugLine",
+            "fieldPath": "lines[]",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DDebugGeometry"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DDebugSphere",
+            "fieldPath": "spheres[]",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DDebugGeometry"
+          }
+        ],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 4,
+      "id": "@flighthq/types:interface#Physics3DDebugGeometry",
+      "name": "Physics3DDebugGeometry",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Physics3D.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DDebugGeometryOptions"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DDebugGeometryOptions"
+          }
+        ],
+        "outputPaths": []
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 6,
+      "id": "@flighthq/types:interface#Physics3DDebugGeometryOptions",
+      "name": "Physics3DDebugGeometryOptions",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Physics3D.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DDebugGeometry",
+              "lines[]:@flighthq/types:interface#Physics3DDebugLine"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DDebugGeometry"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DDebugGeometry",
+              "lines[]:@flighthq/types:interface#Physics3DDebugLine"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DDebugGeometry"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DDebugLine",
+            "fieldPath": "lines[]",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DDebugGeometry"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 9,
+      "id": "@flighthq/types:interface#Physics3DDebugLine",
+      "name": "Physics3DDebugLine",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Physics3D.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DDebugGeometry",
+              "spheres[]:@flighthq/types:interface#Physics3DDebugSphere"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DDebugGeometry"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DDebugGeometry",
+              "spheres[]:@flighthq/types:interface#Physics3DDebugSphere"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DDebugGeometry"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DDebugSphere",
+            "fieldPath": "spheres[]",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DDebugGeometry"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 7,
+      "id": "@flighthq/types:interface#Physics3DDebugSphere",
+      "name": "Physics3DDebugSphere",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Physics3D.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DWorld",
+              "jointEvents:@flighthq/types:interface#Physics3DJointEvents"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DWorld"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DWorld",
+              "jointEvents:@flighthq/types:interface#Physics3DJointEvents"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DWorld"
+          }
+        ]
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DJoint",
+            "fieldPath": "broke[]",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DJointEvents"
+          }
+        ],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DJointEvents",
+            "fieldPath": "jointEvents",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DWorld"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#Physics3DJointEvents",
+      "name": "Physics3DJointEvents",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Physics3D.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
         "inputPaths": [],
         "outputPaths": [
           {
@@ -39057,6 +40600,41 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#Physics3DJointReaction"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DJointReaction"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DJointReaction"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DJointReaction"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 6,
+      "id": "@flighthq/types:interface#Physics3DJointReaction",
+      "name": "Physics3DJointReaction",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Physics3D.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
               "@flighthq/types:interface#Physics3DMassData"
             ],
             "rootSchemaId": "@flighthq/types:interface#Physics3DMassData"
@@ -39075,7 +40653,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 77,
+      "directAccesses": 132,
       "fields": 10,
       "id": "@flighthq/types:interface#Physics3DMassData",
       "name": "Physics3DMassData",
@@ -39092,8 +40670,48 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#Physics3DCollider",
+              "material:@flighthq/types:interface#Physics3DMaterial"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DMaterial"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DMaterial"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DQueryResult",
+              "hits[]:@flighthq/types:interface#Physics3DQueryHit",
+              "collider:@flighthq/types:interface#Physics3DCollider",
+              "material:@flighthq/types:interface#Physics3DMaterial"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DQueryResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DRayResult",
+              "hits[]:@flighthq/types:interface#Physics3DRayHit",
+              "collider:@flighthq/types:interface#Physics3DCollider",
+              "material:@flighthq/types:interface#Physics3DMaterial"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DRayResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DShapeCastResult",
+              "collider:@flighthq/types:interface#Physics3DCollider",
+              "material:@flighthq/types:interface#Physics3DMaterial"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DShapeCastResult"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#Physics3DWorld",
               "bodies[]:@flighthq/types:interface#RigidBody3D",
+              "colliders[]:@flighthq/types:interface#Physics3DCollider",
               "material:@flighthq/types:interface#Physics3DMaterial"
             ],
             "rootSchemaId": "@flighthq/types:interface#Physics3DWorld"
@@ -39101,6 +40719,7 @@
           {
             "path": [
               "@flighthq/types:interface#RigidBody3D",
+              "colliders[]:@flighthq/types:interface#Physics3DCollider",
               "material:@flighthq/types:interface#Physics3DMaterial"
             ],
             "rootSchemaId": "@flighthq/types:interface#RigidBody3D"
@@ -39109,8 +40728,42 @@
         "outputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#Physics3DCollider",
+              "material:@flighthq/types:interface#Physics3DMaterial"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DCollider"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DQueryResult",
+              "hits[]:@flighthq/types:interface#Physics3DQueryHit",
+              "collider:@flighthq/types:interface#Physics3DCollider",
+              "material:@flighthq/types:interface#Physics3DMaterial"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DQueryResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DRayResult",
+              "hits[]:@flighthq/types:interface#Physics3DRayHit",
+              "collider:@flighthq/types:interface#Physics3DCollider",
+              "material:@flighthq/types:interface#Physics3DMaterial"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DRayResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DShapeCastResult",
+              "collider:@flighthq/types:interface#Physics3DCollider",
+              "material:@flighthq/types:interface#Physics3DMaterial"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DShapeCastResult"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#Physics3DWorld",
               "bodies[]:@flighthq/types:interface#RigidBody3D",
+              "colliders[]:@flighthq/types:interface#Physics3DCollider",
               "material:@flighthq/types:interface#Physics3DMaterial"
             ],
             "rootSchemaId": "@flighthq/types:interface#Physics3DWorld"
@@ -39118,6 +40771,7 @@
           {
             "path": [
               "@flighthq/types:interface#RigidBody3D",
+              "colliders[]:@flighthq/types:interface#Physics3DCollider",
               "material:@flighthq/types:interface#Physics3DMaterial"
             ],
             "rootSchemaId": "@flighthq/types:interface#RigidBody3D"
@@ -39130,7 +40784,7 @@
           {
             "childSchemaId": "@flighthq/types:interface#Physics3DMaterial",
             "fieldPath": "material",
-            "parentSchemaId": "@flighthq/types:interface#RigidBody3D"
+            "parentSchemaId": "@flighthq/types:interface#Physics3DCollider"
           }
         ]
       },
@@ -39138,6 +40792,231 @@
       "fields": 3,
       "id": "@flighthq/types:interface#Physics3DMaterial",
       "name": "Physics3DMaterial",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Physics3D.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DQueryFilter"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DQueryFilter"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DQueryFilter"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DQueryFilter"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 6,
+      "id": "@flighthq/types:interface#Physics3DQueryFilter",
+      "name": "Physics3DQueryFilter",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Physics3D.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DQueryResult",
+              "hits[]:@flighthq/types:interface#Physics3DQueryHit"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DQueryResult"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DQueryResult",
+              "hits[]:@flighthq/types:interface#Physics3DQueryHit"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DQueryResult"
+          }
+        ]
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DCollider",
+            "fieldPath": "collider",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DQueryHit"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#RigidBody3D",
+            "fieldPath": "body",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DQueryHit"
+          }
+        ],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DQueryHit",
+            "fieldPath": "hits[]",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DQueryResult"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 3,
+      "id": "@flighthq/types:interface#Physics3DQueryHit",
+      "name": "Physics3DQueryHit",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Physics3D.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DQueryResult"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DQueryResult"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DQueryResult"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DQueryResult"
+          }
+        ]
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DQueryHit",
+            "fieldPath": "hits[]",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DQueryResult"
+          }
+        ],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 2,
+      "id": "@flighthq/types:interface#Physics3DQueryResult",
+      "name": "Physics3DQueryResult",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Physics3D.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DRayResult",
+              "hits[]:@flighthq/types:interface#Physics3DRayHit"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DRayResult"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DRayResult",
+              "hits[]:@flighthq/types:interface#Physics3DRayHit"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DRayResult"
+          }
+        ]
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DCollider",
+            "fieldPath": "collider",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DRayHit"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#RigidBody3D",
+            "fieldPath": "body",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DRayHit"
+          }
+        ],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DRayHit",
+            "fieldPath": "hits[]",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DRayResult"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 10,
+      "id": "@flighthq/types:interface#Physics3DRayHit",
+      "name": "Physics3DRayHit",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Physics3D.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DRayResult"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DRayResult"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DRayResult"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DRayResult"
+          }
+        ]
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DRayHit",
+            "fieldPath": "hits[]",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DRayResult"
+          }
+        ],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 2,
+      "id": "@flighthq/types:interface#Physics3DRayResult",
+      "name": "Physics3DRayResult",
       "nominalIdentity": {
         "blockerReasons": [],
         "closed": true
@@ -39199,7 +41078,7 @@
           }
         ]
       },
-      "directAccesses": 18,
+      "directAccesses": 20,
       "fields": 6,
       "id": "@flighthq/types:interface#Physics3DSequentialImpulseConfig",
       "name": "Physics3DSequentialImpulseConfig",
@@ -39235,8 +41114,13 @@
       "containment": {
         "children": [
           {
+            "childSchemaId": "@flighthq/types:interface#Physics3DContact",
+            "fieldPath": "constraintByContact<Map:0>",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DSequentialImpulseState"
+          },
+          {
             "childSchemaId": "@flighthq/types:interface#Physics3DContactConstraint",
-            "fieldPath": "constraintByPair<Map:1>",
+            "fieldPath": "constraintByContact<Map:1>",
             "parentSchemaId": "@flighthq/types:interface#Physics3DSequentialImpulseState"
           },
           {
@@ -39253,10 +41137,56 @@
           }
         ]
       },
-      "directAccesses": 8,
+      "directAccesses": 0,
       "fields": 2,
       "id": "@flighthq/types:interface#Physics3DSequentialImpulseState",
       "name": "Physics3DSequentialImpulseState",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Physics3D.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DShapeCastResult"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DShapeCastResult"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DShapeCastResult"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DShapeCastResult"
+          }
+        ]
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#Physics3DCollider",
+            "fieldPath": "collider",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DShapeCastResult"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#RigidBody3D",
+            "fieldPath": "body",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DShapeCastResult"
+          }
+        ],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 11,
+      "id": "@flighthq/types:interface#Physics3DShapeCastResult",
+      "name": "Physics3DShapeCastResult",
       "nominalIdentity": {
         "blockerReasons": [],
         "closed": true
@@ -39314,8 +41244,8 @@
           }
         ]
       },
-      "directAccesses": 25,
-      "fields": 8,
+      "directAccesses": 0,
+      "fields": 9,
       "id": "@flighthq/types:interface#Physics3DSolverConfig",
       "name": "Physics3DSolverConfig",
       "nominalIdentity": {
@@ -39343,7 +41273,7 @@
         "parents": []
       },
       "directAccesses": 0,
-      "fields": 10,
+      "fields": 11,
       "id": "@flighthq/types:interface#Physics3DStepExplanation",
       "name": "Physics3DStepExplanation",
       "nominalIdentity": {
@@ -41040,6 +42970,13 @@
           },
           {
             "path": [
+              "@flighthq/types:interface#Physics2DShapeCastResult",
+              "body:@flighthq/types:interface#RigidBody2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DShapeCastResult"
+          },
+          {
+            "path": [
               "@flighthq/types:interface#Physics2DWorld",
               "bodies[]:@flighthq/types:interface#RigidBody2D"
             ],
@@ -41068,6 +43005,13 @@
               "body:@flighthq/types:interface#RigidBody2D"
             ],
             "rootSchemaId": "@flighthq/types:interface#Physics2DRayResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics2DShapeCastResult",
+              "body:@flighthq/types:interface#RigidBody2D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics2DShapeCastResult"
           },
           {
             "path": [
@@ -41105,6 +43049,11 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#RigidBody2D",
+            "fieldPath": "body",
+            "parentSchemaId": "@flighthq/types:interface#Physics2DShapeCastResult"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#RigidBody2D",
             "fieldPath": "bodies[]",
             "parentSchemaId": "@flighthq/types:interface#Physics2DWorld"
           },
@@ -41131,7 +43080,7 @@
         {
           "column": 18,
           "kind": "dynamic-container-transfer",
-          "line": 244,
+          "line": 246,
           "source": "upstream/packages/physics2d/src/world.ts"
         }
       ]
@@ -41139,6 +43088,29 @@
     {
       "bridgeExposure": {
         "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DQueryResult",
+              "hits[]:@flighthq/types:interface#Physics3DQueryHit",
+              "body:@flighthq/types:interface#RigidBody3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DQueryResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DRayResult",
+              "hits[]:@flighthq/types:interface#Physics3DRayHit",
+              "body:@flighthq/types:interface#RigidBody3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DRayResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DShapeCastResult",
+              "body:@flighthq/types:interface#RigidBody3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DShapeCastResult"
+          },
           {
             "path": [
               "@flighthq/types:interface#Physics3DWorld",
@@ -41154,6 +43126,29 @@
           }
         ],
         "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DQueryResult",
+              "hits[]:@flighthq/types:interface#Physics3DQueryHit",
+              "body:@flighthq/types:interface#RigidBody3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DQueryResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DRayResult",
+              "hits[]:@flighthq/types:interface#Physics3DRayHit",
+              "body:@flighthq/types:interface#RigidBody3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DRayResult"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DShapeCastResult",
+              "body:@flighthq/types:interface#RigidBody3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DShapeCastResult"
+          },
           {
             "path": [
               "@flighthq/types:interface#Physics3DWorld",
@@ -41172,17 +43167,27 @@
       "containment": {
         "children": [
           {
-            "childSchemaId": "@flighthq/types:interface#Physics3DCollisionFilter",
-            "fieldPath": "filter",
-            "parentSchemaId": "@flighthq/types:interface#RigidBody3D"
-          },
-          {
-            "childSchemaId": "@flighthq/types:interface#Physics3DMaterial",
-            "fieldPath": "material",
+            "childSchemaId": "@flighthq/types:interface#Physics3DCollider",
+            "fieldPath": "colliders[]",
             "parentSchemaId": "@flighthq/types:interface#RigidBody3D"
           }
         ],
         "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#RigidBody3D",
+            "fieldPath": "body",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DQueryHit"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#RigidBody3D",
+            "fieldPath": "body",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DRayHit"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#RigidBody3D",
+            "fieldPath": "body",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DShapeCastResult"
+          },
           {
             "childSchemaId": "@flighthq/types:interface#RigidBody3D",
             "fieldPath": "bodies[]",
@@ -41196,7 +43201,7 @@
         ]
       },
       "directAccesses": 0,
-      "fields": 54,
+      "fields": 53,
       "id": "@flighthq/types:interface#RigidBody3D",
       "name": "RigidBody3D",
       "nominalIdentity": {
@@ -41211,7 +43216,7 @@
         {
           "column": 18,
           "kind": "dynamic-container-transfer",
-          "line": 130,
+          "line": 311,
           "source": "upstream/packages/physics3d/src/world.ts"
         }
       ]
@@ -47961,6 +49966,34 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#SpatialFrustum3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#SpatialFrustum3D"
+          }
+        ],
+        "outputPaths": []
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#SpatialFrustum3D",
+      "name": "SpatialFrustum3D",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Spatial.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
               "@flighthq/types:interface#InteractionManager",
               "spatialIndex:@flighthq/types:interface#SpatialIndex2D"
             ],
@@ -48021,6 +50054,123 @@
       "fields": 1,
       "id": "@flighthq/types:interface#SpatialIndex2D",
       "name": "SpatialIndex2D",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Spatial.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#SpatialIndex3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#SpatialIndex3D"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#SpatialIndex3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#SpatialIndex3D"
+          }
+        ]
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#SpatialIndexRuntime3D",
+            "fieldPath": "runtime",
+            "parentSchemaId": "@flighthq/types:interface#SpatialIndex3D"
+          }
+        ],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#SpatialIndex3D",
+      "name": "SpatialIndex3D",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Spatial.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DWorld",
+              "index:@flighthq/types:interface#SpatialIndexBackend3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DWorld"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#SpatialIndex3D",
+              "runtime:@flighthq/types:interface#SpatialIndexRuntime3D",
+              "backend:@flighthq/types:interface#SpatialIndexBackend3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#SpatialIndex3D"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#SpatialIndexBackend3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#SpatialIndexBackend3D"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Physics3DWorld",
+              "index:@flighthq/types:interface#SpatialIndexBackend3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Physics3DWorld"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#SpatialIndex3D",
+              "runtime:@flighthq/types:interface#SpatialIndexRuntime3D",
+              "backend:@flighthq/types:interface#SpatialIndexBackend3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#SpatialIndex3D"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#SpatialIndexBackend3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#SpatialIndexBackend3D"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#SpatialIndexBackend3D",
+            "fieldPath": "index",
+            "parentSchemaId": "@flighthq/types:interface#Physics3DWorld"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#SpatialIndexBackend3D",
+            "fieldPath": "backend",
+            "parentSchemaId": "@flighthq/types:interface#SpatialIndexRuntime3D"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 9,
+      "id": "@flighthq/types:interface#SpatialIndexBackend3D",
+      "name": "SpatialIndexBackend3D",
       "nominalIdentity": {
         "blockerReasons": [],
         "closed": true
@@ -48122,6 +50272,55 @@
       "fields": 1,
       "id": "@flighthq/types:interface#SpatialIndexRuntime2D",
       "name": "SpatialIndexRuntime2D",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Spatial.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#SpatialIndex3D",
+              "runtime:@flighthq/types:interface#SpatialIndexRuntime3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#SpatialIndex3D"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#SpatialIndex3D",
+              "runtime:@flighthq/types:interface#SpatialIndexRuntime3D"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#SpatialIndex3D"
+          }
+        ]
+      },
+      "containment": {
+        "children": [
+          {
+            "childSchemaId": "@flighthq/types:interface#SpatialIndexBackend3D",
+            "fieldPath": "backend",
+            "parentSchemaId": "@flighthq/types:interface#SpatialIndexRuntime3D"
+          }
+        ],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#SpatialIndexRuntime3D",
+            "fieldPath": "runtime",
+            "parentSchemaId": "@flighthq/types:interface#SpatialIndex3D"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#SpatialIndexRuntime3D",
+      "name": "SpatialIndexRuntime3D",
       "nominalIdentity": {
         "blockerReasons": [],
         "closed": true
@@ -60875,7 +63074,7 @@
         "parents": []
       },
       "directAccesses": 0,
-      "fields": 22,
+      "fields": 25,
       "id": "@flighthq/types:type#Physics3DBallAndSocketJoint",
       "name": "Physics3DBallAndSocketJoint",
       "nominalIdentity": {
@@ -62148,21 +64347,21 @@
   ],
   "summary": {
     "anonymousContainerTransferSchemas": 52,
-    "bridgeInputExposedSchemas": 484,
-    "bridgeOutputExposedSchemas": 526,
-    "blockedSchemas": 191,
-    "candidateSchemas": 773,
-    "closedSchemas": 582,
+    "bridgeInputExposedSchemas": 513,
+    "bridgeOutputExposedSchemas": 555,
+    "blockedSchemas": 192,
+    "candidateSchemas": 805,
+    "closedSchemas": 613,
     "combinedBlockedSchemas": 15,
-    "containmentEdges": 2148,
-    "containerOnlyBlockedSchemas": 57,
-    "containerTransferBlockedSchemas": 72,
+    "containmentEdges": 2191,
+    "containerOnlyBlockedSchemas": 58,
+    "containerTransferBlockedSchemas": 73,
     "crossSchemaContainerTransferSchemas": 11,
-    "dynamicContainerTransferSchemas": 18,
+    "dynamicContainerTransferSchemas": 19,
     "jsonParseRoots": 10,
     "normalizationOnlyBlockedSchemas": 119,
     "normalizationProvenanceBlockedSchemas": 134,
-    "normalizationRoots": 420
+    "normalizationRoots": 429
   },
-  "upstreamCommit": "598ef6f62b6f1ae2873956501069ed824699021a"
+  "upstreamCommit": "9b3b71b019ff48ea6329c16020f37fb72c3123d1"
 }

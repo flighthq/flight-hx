@@ -1,6 +1,6 @@
 # Host Toolkit Dependency Audit
 
-Upstream commit: `598ef6f62b6f1ae2873956501069ed824699021a`
+Upstream commit: `9b3b71b019ff48ea6329c16020f37fb72c3123d1`
 
 Generated code owns checker-known source types and stable lookup keys. Maintained source owns the declarations, target values, and adapters behind those keys. Generation fails when a referenced key has no declared toolkit provider; Dynamic compatibility declarations remain visible as toolkit debt rather than changing the generated type or member expression.
 
@@ -14,7 +14,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | JavaScript-only global value keys | 36 |
 | Module value keys | 0 |
 | Type uses | 11278 |
-| Value uses | 1681 |
+| Value uses | 1921 |
 | Missing toolkit entries | 0 |
 
 ## Types
@@ -301,11 +301,11 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `global:KeyboardEvent` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 5 |
 | `global:localStorage` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 4 |
 | `global:location` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 8 |
-| `global:Map` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 309 |
+| `global:Map` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 319 |
 | `global:MediaMetadata` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 2 |
 | `global:navigator` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 42 |
 | `global:Notification` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 19 |
-| `global:Number` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 489 |
+| `global:Number` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 704 |
 | `global:OffscreenCanvas` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 10 |
 | `global:parseFloat` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 84 |
 | `global:parseInt` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 40 |
@@ -316,7 +316,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `global:requestAnimationFrame` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 3 |
 | `global:ResizeObserver` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 3 |
 | `global:screen` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 8 |
-| `global:Set` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 113 |
+| `global:Set` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 122 |
 | `global:setInterval` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 1 |
 | `global:SharedArrayBuffer` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 4 |
 | `global:structuredClone` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 3 |
@@ -327,7 +327,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `global:URL` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 7 |
 | `global:URLSearchParams` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 1 |
 | `global:VideoFrame` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 2 |
-| `global:WeakMap` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 193 |
+| `global:WeakMap` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 199 |
 | `global:WeakSet` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 12 |
 | `global:WebSocket` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 4 |
 | `global:WheelEvent` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 3 |

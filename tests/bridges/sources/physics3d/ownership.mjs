@@ -5,6 +5,9 @@ const api = compiled.flighthq.physics3d.Ownership;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const assertPhysics3DBodyNotStepping = api.assertPhysics3DBodyNotStepping;
 export const assertPhysics3DWorldNotStepping = api.assertPhysics3DWorldNotStepping;
+export const physics3DBodyOwners = api.physics3DBodyOwners;
+export const physics3DColliderOwners = api.physics3DColliderOwners;
 export const physics3DJointOwners = api.physics3DJointOwners;
 export const steppingPhysics3DWorlds = api.steppingPhysics3DWorlds;

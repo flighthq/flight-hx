@@ -129,20 +129,34 @@ import flighthq.clipboard.Clipboard as Facade_Sdk_flighthq_clipboard_Clipboard;
 import flighthq.clock.Clock as Facade_Sdk_flighthq_clock_Clock;
 import flighthq.clock.ClockSignals as Facade_Sdk_flighthq_clock_ClockSignals;
 import flighthq.collision.CollideContactManifold2D as Facade_Sdk_flighthq_collision_CollideContactManifold2D;
+import flighthq.collision.CollideContactManifold3D as Facade_Sdk_flighthq_collision_CollideContactManifold3D;
+import flighthq.collision.CollisionFace3D as Facade_Sdk_flighthq_collision_CollisionFace3D;
 import flighthq.collision.CollisionSupport2D as Facade_Sdk_flighthq_collision_CollisionSupport2D;
-import flighthq.collision.ContactManifold as Facade_Sdk_flighthq_collision_ContactManifold;
+import flighthq.collision.CollisionSupport3D as Facade_Sdk_flighthq_collision_CollisionSupport3D;
+import flighthq.collision.ContactManifold2D as Facade_Sdk_flighthq_collision_ContactManifold2D;
+import flighthq.collision.ContactManifold3D as Facade_Sdk_flighthq_collision_ContactManifold3D;
+import flighthq.collision.ConvexHull3D as Facade_Sdk_flighthq_collision_ConvexHull3D;
 import flighthq.collision.EnableCollisionGuards as Facade_Sdk_flighthq_collision_EnableCollisionGuards;
 import flighthq.collision.ExplainCollisionTest2D as Facade_Sdk_flighthq_collision_ExplainCollisionTest2D;
+import flighthq.collision.ExplainCollisionTest3D as Facade_Sdk_flighthq_collision_ExplainCollisionTest3D;
 import flighthq.collision.Gjk2D as Facade_Sdk_flighthq_collision_Gjk2D;
-import flighthq.collision.Manifold as Facade_Sdk_flighthq_collision_Manifold;
-import flighthq.collision.PointContainment as Facade_Sdk_flighthq_collision_PointContainment;
+import flighthq.collision.Gjk3D as Facade_Sdk_flighthq_collision_Gjk3D;
+import flighthq.collision.Manifold2D as Facade_Sdk_flighthq_collision_Manifold2D;
+import flighthq.collision.Manifold3D as Facade_Sdk_flighthq_collision_Manifold3D;
+import flighthq.collision.PointContainment2D as Facade_Sdk_flighthq_collision_PointContainment2D;
+import flighthq.collision.PointContainment3D as Facade_Sdk_flighthq_collision_PointContainment3D;
 import flighthq.collision.RaycastCollisionShape2D as Facade_Sdk_flighthq_collision_RaycastCollisionShape2D;
+import flighthq.collision.RaycastCollisionShape3D as Facade_Sdk_flighthq_collision_RaycastCollisionShape3D;
 import flighthq.collision.RegisterBuiltInCollisionPairTests2D as Facade_Sdk_flighthq_collision_RegisterBuiltInCollisionPairTests2D;
-import flighthq.collision.SegmentCollision as Facade_Sdk_flighthq_collision_SegmentCollision;
-import flighthq.collision.ShapeCollision as Facade_Sdk_flighthq_collision_ShapeCollision;
-import flighthq.collision.ShapeContact as Facade_Sdk_flighthq_collision_ShapeContact;
+import flighthq.collision.RegisterBuiltInCollisionPairTests3D as Facade_Sdk_flighthq_collision_RegisterBuiltInCollisionPairTests3D;
+import flighthq.collision.SegmentCollision2D as Facade_Sdk_flighthq_collision_SegmentCollision2D;
+import flighthq.collision.ShapeCollision2D as Facade_Sdk_flighthq_collision_ShapeCollision2D;
+import flighthq.collision.ShapeCollision3D as Facade_Sdk_flighthq_collision_ShapeCollision3D;
+import flighthq.collision.ShapeContact2D as Facade_Sdk_flighthq_collision_ShapeContact2D;
 import flighthq.collision.SweepCollisionShape2D as Facade_Sdk_flighthq_collision_SweepCollisionShape2D;
 import flighthq.collision.TestCollision2D as Facade_Sdk_flighthq_collision_TestCollision2D;
+import flighthq.collision.TestCollision3D as Facade_Sdk_flighthq_collision_TestCollision3D;
+import flighthq.collision.TriangleMesh3D as Facade_Sdk_flighthq_collision_TriangleMesh3D;
 import flighthq.color.ColorFromKelvin as Facade_Sdk_flighthq_color_ColorFromKelvin;
 import flighthq.color.HslColor as Facade_Sdk_flighthq_color_HslColor;
 import flighthq.color.HsvColor as Facade_Sdk_flighthq_color_HsvColor;
@@ -619,10 +633,13 @@ import flighthq.permissions.EnablePermissionGuards as Facade_Sdk_flighthq_permis
 import flighthq.permissions.Permission as Facade_Sdk_flighthq_permissions_Permission;
 import flighthq.physics2d.ColliderTransform as Facade_Sdk_flighthq_physics2d_ColliderTransform;
 import flighthq.physics2d.DebugGeometry as Facade_Sdk_flighthq_physics2d_DebugGeometry;
+import flighthq.physics2d.EnablePhysics2DGuards as Facade_Sdk_flighthq_physics2d_EnablePhysics2DGuards;
+import flighthq.physics2d.ExplainPhysics2DCollision as Facade_Sdk_flighthq_physics2d_ExplainPhysics2DCollision;
 import flighthq.physics2d.ExplainPhysics2DJoints as Facade_Sdk_flighthq_physics2d_ExplainPhysics2DJoints;
 import flighthq.physics2d.ExplainPhysics2DStep as Facade_Sdk_flighthq_physics2d_ExplainPhysics2DStep;
 import flighthq.physics2d.Islands as Facade_Sdk_flighthq_physics2d_Islands;
 import flighthq.physics2d.JointFactories as Facade_Sdk_flighthq_physics2d_JointFactories;
+import flighthq.physics2d.JointReactions as Facade_Sdk_flighthq_physics2d_JointReactions;
 import flighthq.physics2d.JointRegistry as Facade_Sdk_flighthq_physics2d_JointRegistry;
 import flighthq.physics2d.Joints as Facade_Sdk_flighthq_physics2d_Joints;
 import flighthq.physics2d.MassProperties as Facade_Sdk_flighthq_physics2d_MassProperties;
@@ -633,18 +650,25 @@ import flighthq.physics2d.Step as Facade_Sdk_flighthq_physics2d_Step;
 import flighthq.physics2d.World as Facade_Sdk_flighthq_physics2d_World;
 import flighthq.physics2d.WorldQueries as Facade_Sdk_flighthq_physics2d_WorldQueries;
 import flighthq.physics3d.Contacts as Facade_Sdk_flighthq_physics3d_Contacts;
+import flighthq.physics3d.Continuous as Facade_Sdk_flighthq_physics3d_Continuous;
+import flighthq.physics3d.DebugGeometry as Facade_Sdk_flighthq_physics3d_DebugGeometry;
 import flighthq.physics3d.EnablePhysics3DGuards as Facade_Sdk_flighthq_physics3d_EnablePhysics3DGuards;
+import flighthq.physics3d.ExplainPhysics3DCollision as Facade_Sdk_flighthq_physics3d_ExplainPhysics3DCollision;
 import flighthq.physics3d.ExplainPhysics3DJoints as Facade_Sdk_flighthq_physics3d_ExplainPhysics3DJoints;
 import flighthq.physics3d.ExplainPhysics3DStep as Facade_Sdk_flighthq_physics3d_ExplainPhysics3DStep;
 import flighthq.physics3d.Integrate as Facade_Sdk_flighthq_physics3d_Integrate;
+import flighthq.physics3d.JointBreakage as Facade_Sdk_flighthq_physics3d_JointBreakage;
 import flighthq.physics3d.JointCollisionSuppression as Facade_Sdk_flighthq_physics3d_JointCollisionSuppression;
 import flighthq.physics3d.JointFactories as Facade_Sdk_flighthq_physics3d_JointFactories;
+import flighthq.physics3d.JointReaction as Facade_Sdk_flighthq_physics3d_JointReaction;
 import flighthq.physics3d.JointRegistry as Facade_Sdk_flighthq_physics3d_JointRegistry;
 import flighthq.physics3d.Joints as Facade_Sdk_flighthq_physics3d_Joints;
 import flighthq.physics3d.MassProperties as Facade_Sdk_flighthq_physics3d_MassProperties;
+import flighthq.physics3d.Material as Facade_Sdk_flighthq_physics3d_Material;
 import flighthq.physics3d.RegisterBuiltInPhysics3DJointSolvers as Facade_Sdk_flighthq_physics3d_RegisterBuiltInPhysics3DJointSolvers;
 import flighthq.physics3d.Step as Facade_Sdk_flighthq_physics3d_Step;
 import flighthq.physics3d.World as Facade_Sdk_flighthq_physics3d_World;
+import flighthq.physics3d.WorldQueries as Facade_Sdk_flighthq_physics3d_WorldQueries;
 import flighthq.picking.PickScene3D as Facade_Sdk_flighthq_picking_PickScene3D;
 import flighthq.picking.SceneHitAttributes as Facade_Sdk_flighthq_picking_SceneHitAttributes;
 import flighthq.platform.Platform as Facade_Sdk_flighthq_platform_Platform;
@@ -996,10 +1020,15 @@ import flighthq.snapshot.RestoreSnapshot as Facade_Sdk_flighthq_snapshot_Restore
 import flighthq.socket.EnableSocketGuards as Facade_Sdk_flighthq_socket_EnableSocketGuards;
 import flighthq.socket.ExplainSocketSendFailure as Facade_Sdk_flighthq_socket_ExplainSocketSendFailure;
 import flighthq.socket.Socket as Facade_Sdk_flighthq_socket_Socket;
+import flighthq.spatial.Bvh3D as Facade_Sdk_flighthq_spatial_Bvh3D;
 import flighthq.spatial.ExplainSpatialIndexing2D as Facade_Sdk_flighthq_spatial_ExplainSpatialIndexing2D;
+import flighthq.spatial.ExplainSpatialIndexing3D as Facade_Sdk_flighthq_spatial_ExplainSpatialIndexing3D;
 import flighthq.spatial.FormatSpatialIndexingNotice as Facade_Sdk_flighthq_spatial_FormatSpatialIndexingNotice;
 import flighthq.spatial.SpatialIndex as Facade_Sdk_flighthq_spatial_SpatialIndex;
+import flighthq.spatial.SpatialIndex3D as Facade_Sdk_flighthq_spatial_SpatialIndex3D;
+import flighthq.spatial.SpatialIndexingGuard as Facade_Sdk_flighthq_spatial_SpatialIndexingGuard;
 import flighthq.spatial.UniformGrid as Facade_Sdk_flighthq_spatial_UniformGrid;
+import flighthq.spatial.UniformGrid3D as Facade_Sdk_flighthq_spatial_UniformGrid3D;
 import flighthq.spring.Spring as Facade_Sdk_flighthq_spring_Spring;
 import flighthq.spring.Spring2D as Facade_Sdk_flighthq_spring_Spring2D;
 import flighthq.spring.Spring3D as Facade_Sdk_flighthq_spring_Spring3D;
@@ -1284,21 +1313,41 @@ import flighthq.types.ClockOptions;
 import flighthq.types.CocosPlistSchema.CocosPlistFrame;
 import flighthq.types.CocosPlistSchema.CocosPlistMetadata;
 import flighthq.types.CocosPlistSchema.CocosPlistParsed;
+import flighthq.types.Collision as Facade_Sdk_flighthq_types_Collision;
 import flighthq.types.Collision.CollisionAabb2D;
+import flighthq.types.Collision.CollisionAabb3D;
+import flighthq.types.Collision.CollisionBox3D;
 import flighthq.types.Collision.CollisionBuiltInShape2D;
+import flighthq.types.Collision.CollisionBuiltInShape3D;
+import flighthq.types.Collision.CollisionCapsule3D;
 import flighthq.types.Collision.CollisionCircle2D;
+import flighthq.types.Collision.CollisionColliderShape3D;
 import flighthq.types.Collision.CollisionContactManifold2D;
+import flighthq.types.Collision.CollisionContactManifold3D;
+import flighthq.types.Collision.CollisionFaceQuery3D;
+import flighthq.types.Collision.CollisionHeightfield3D;
 import flighthq.types.Collision.CollisionManifold2D;
+import flighthq.types.Collision.CollisionManifold3D;
 import flighthq.types.Collision.CollisionObb2D;
 import flighthq.types.Collision.CollisionPairTest2D;
+import flighthq.types.Collision.CollisionPairTest3D;
 import flighthq.types.Collision.CollisionPolygon2D;
 import flighthq.types.Collision.CollisionRaycastHit2D;
+import flighthq.types.Collision.CollisionRaycastHit3D;
 import flighthq.types.Collision.CollisionSegment2D;
 import flighthq.types.Collision.CollisionShape2D;
+import flighthq.types.Collision.CollisionShape3D;
 import flighthq.types.Collision.CollisionShapeKind2D;
+import flighthq.types.Collision.CollisionShapeKind3D;
+import flighthq.types.Collision.CollisionSphere3D;
 import flighthq.types.Collision.CollisionSupport2D;
+import flighthq.types.Collision.CollisionSupport3D;
 import flighthq.types.Collision.CollisionTestExplanation2D;
+import flighthq.types.Collision.CollisionTestExplanation3D;
+import flighthq.types.Collision.CollisionTestStatus;
 import flighthq.types.Collision.CollisionTimeOfImpact2D;
+import flighthq.types.Collision.CollisionTimeOfImpact3D;
+import flighthq.types.Collision.CollisionTriangleMesh3D;
 import flighthq.types.ColorBlindSimulationAdjustment;
 import flighthq.types.ColorBlindSimulationAdjustment.ColorBlindType;
 import flighthq.types.ColorGradeAdjustment;
@@ -1698,6 +1747,7 @@ import flighthq.types.Permission.PermissionStateExplanation;
 import flighthq.types.PerspectiveProjectionOptions;
 import flighthq.types.PhongMaterial;
 import flighthq.types.Physics2D.Physics2DCollider;
+import flighthq.types.Physics2D.Physics2DCollisionExplanation;
 import flighthq.types.Physics2D.Physics2DCollisionFilter;
 import flighthq.types.Physics2D.Physics2DContactPoint;
 import flighthq.types.Physics2D.Physics2DDebugGeometry;
@@ -1707,6 +1757,7 @@ import flighthq.types.Physics2D.Physics2DGearJoint;
 import flighthq.types.Physics2D.Physics2DGearJointOptions;
 import flighthq.types.Physics2D.Physics2DJoint;
 import flighthq.types.Physics2D.Physics2DJointKind;
+import flighthq.types.Physics2D.Physics2DJointReaction;
 import flighthq.types.Physics2D.Physics2DJointResolutionExplanation;
 import flighthq.types.Physics2D.Physics2DJointSolver;
 import flighthq.types.Physics2D.Physics2DMassData;
@@ -1724,6 +1775,7 @@ import flighthq.types.Physics2D.Physics2DRevoluteJoint;
 import flighthq.types.Physics2D.Physics2DRevoluteJointOptions;
 import flighthq.types.Physics2D.Physics2DRopeJoint;
 import flighthq.types.Physics2D.Physics2DRopeJointOptions;
+import flighthq.types.Physics2D.Physics2DShapeCastResult;
 import flighthq.types.Physics2D.Physics2DSolverConfig;
 import flighthq.types.Physics2D.Physics2DStepExplanation;
 import flighthq.types.Physics2D.Physics2DWeldJoint;
@@ -1735,10 +1787,16 @@ import flighthq.types.Physics2D.RigidBody2D;
 import flighthq.types.Physics3D.Physics3DBallAndSocketJoint;
 import flighthq.types.Physics3D.Physics3DBallAndSocketJointOptions;
 import flighthq.types.Physics3D.Physics3DBodyType;
+import flighthq.types.Physics3D.Physics3DCollider;
+import flighthq.types.Physics3D.Physics3DCollisionExplanation;
+import flighthq.types.Physics3D.Physics3DCollisionFilter;
 import flighthq.types.Physics3D.Physics3DConeTwistJoint;
 import flighthq.types.Physics3D.Physics3DConeTwistJointOptions;
 import flighthq.types.Physics3D.Physics3DContact;
 import flighthq.types.Physics3D.Physics3DContactPoint;
+import flighthq.types.Physics3D.Physics3DDebugGeometry;
+import flighthq.types.Physics3D.Physics3DDistanceJoint;
+import flighthq.types.Physics3D.Physics3DDistanceJointOptions;
 import flighthq.types.Physics3D.Physics3DFixedJoint;
 import flighthq.types.Physics3D.Physics3DFixedJointOptions;
 import flighthq.types.Physics3D.Physics3DGeneric6DofJoint;
@@ -1748,9 +1806,15 @@ import flighthq.types.Physics3D.Physics3DHingeJointOptions;
 import flighthq.types.Physics3D.Physics3DJoint;
 import flighthq.types.Physics3D.Physics3DJointExplanation;
 import flighthq.types.Physics3D.Physics3DJointKind;
+import flighthq.types.Physics3D.Physics3DJointReaction;
 import flighthq.types.Physics3D.Physics3DJointSolver;
 import flighthq.types.Physics3D.Physics3DMassData;
+import flighthq.types.Physics3D.Physics3DMaterial;
+import flighthq.types.Physics3D.Physics3DQueryFilter;
+import flighthq.types.Physics3D.Physics3DQueryResult;
+import flighthq.types.Physics3D.Physics3DRayResult;
 import flighthq.types.Physics3D.Physics3DSequentialImpulseConfig;
+import flighthq.types.Physics3D.Physics3DShapeCastResult;
 import flighthq.types.Physics3D.Physics3DSliderJoint;
 import flighthq.types.Physics3D.Physics3DSliderJointOptions;
 import flighthq.types.Physics3D.Physics3DSolverConfig;
@@ -1971,8 +2035,12 @@ import flighthq.types.Socket.SocketReadyState;
 import flighthq.types.Socket.SocketSendFailureExplanation;
 import flighthq.types.Socket.SocketSignals;
 import flighthq.types.Spatial.SpatialAabb2D;
+import flighthq.types.Spatial.SpatialAabb3D;
+import flighthq.types.Spatial.SpatialFrustum3D;
 import flighthq.types.Spatial.SpatialIndex2D;
+import flighthq.types.Spatial.SpatialIndex3D;
 import flighthq.types.Spatial.SpatialIndexBackend2D;
+import flighthq.types.Spatial.SpatialIndexBackend3D;
 import flighthq.types.Spatial.SpatialObjectId;
 import flighthq.types.Spatial.SpatialPair;
 import flighthq.types.SpatialIndexing.SpatialIndexingExplanation;
@@ -2370,6 +2438,10 @@ class Sdk {
     Facade_Sdk_flighthq_animation_AnimationBlend.accumulateAnimationSample(accumulator, sample, weight);
   }
 
+  public static function accumulatePhysics3DJointRowReaction(joint:Physics3DJoint, state:Array<Float>, offset:Float, impulse:Float, out:Physics3DJointReaction):Void {
+    Facade_Sdk_flighthq_physics3d_JointReaction.accumulatePhysics3DJointRowReaction(joint, state, offset, impulse, out);
+  }
+
   public static function acquireAsset<T>(library:AssetLibrary, id:String):flighthq._internal._Promise<T> {
     return cast Facade_Sdk_flighthq_assets_AssetLibrary.acquireAsset(library, id);
     return cast null;
@@ -2562,6 +2634,11 @@ class Sdk {
 
   public static function addPhysics3DBody(world:Physics3DWorld, body:RigidBody3D):Float {
     return cast Facade_Sdk_flighthq_physics3d_World.addPhysics3DBody(world, body);
+    return cast null;
+  }
+
+  public static function addPhysics3DCollider(world:Physics3DWorld, body:RigidBody3D, collider:Physics3DCollider):Physics3DCollider {
+    return cast Facade_Sdk_flighthq_physics3d_World.addPhysics3DCollider(world, body, collider);
     return cast null;
   }
 
@@ -3050,20 +3127,29 @@ class Sdk {
     return cast null;
   }
 
-  public static function applyPhysics3DForce(body:RigidBody3D, x:Float, y:Float, z:Float):Void {
-    Facade_Sdk_flighthq_physics3d_World.applyPhysics3DForce(body, x, y, z);
+  public static function applyPhysics3DForce(body:RigidBody3D, x:Float, y:Float, z:Float):Bool {
+    return cast Facade_Sdk_flighthq_physics3d_World.applyPhysics3DForce(body, x, y, z);
+    return cast null;
   }
 
-  public static function applyPhysics3DForceAtPoint(body:RigidBody3D, x:Float, y:Float, z:Float, pointX:Float, pointY:Float, pointZ:Float):Void {
-    Facade_Sdk_flighthq_physics3d_World.applyPhysics3DForceAtPoint(body, x, y, z, pointX, pointY, pointZ);
+  public static function applyPhysics3DForceAtPoint(body:RigidBody3D, x:Float, y:Float, z:Float, pointX:Float, pointY:Float, pointZ:Float):Bool {
+    return cast Facade_Sdk_flighthq_physics3d_World.applyPhysics3DForceAtPoint(body, x, y, z, pointX, pointY, pointZ);
+    return cast null;
   }
 
-  public static function applyPhysics3DLinearImpulse(body:RigidBody3D, x:Float, y:Float, z:Float):Void {
-    Facade_Sdk_flighthq_physics3d_World.applyPhysics3DLinearImpulse(body, x, y, z);
+  public static function applyPhysics3DLinearImpulse(body:RigidBody3D, x:Float, y:Float, z:Float):Bool {
+    return cast Facade_Sdk_flighthq_physics3d_World.applyPhysics3DLinearImpulse(body, x, y, z);
+    return cast null;
   }
 
-  public static function applyPhysics3DTorque(body:RigidBody3D, x:Float, y:Float, z:Float):Void {
-    Facade_Sdk_flighthq_physics3d_World.applyPhysics3DTorque(body, x, y, z);
+  public static function applyPhysics3DLinearImpulseAtPoint(body:RigidBody3D, x:Float, y:Float, z:Float, pointX:Float, pointY:Float, pointZ:Float):Bool {
+    return cast Facade_Sdk_flighthq_physics3d_World.applyPhysics3DLinearImpulseAtPoint(body, x, y, z, pointX, pointY, pointZ);
+    return cast null;
+  }
+
+  public static function applyPhysics3DTorque(body:RigidBody3D, x:Float, y:Float, z:Float):Bool {
+    return cast Facade_Sdk_flighthq_physics3d_World.applyPhysics3DTorque(body, x, y, z);
+    return cast null;
   }
 
   public static function applyTextInputRestriction(source:RichText, text:String, ?replaceLength:Float):String {
@@ -3134,6 +3220,11 @@ class Sdk {
 
   public static function areNodeGuardsEnabled():Bool {
     return cast Facade_Sdk_flighthq_node_EnableNodeGuards.areNodeGuardsEnabled();
+    return cast null;
+  }
+
+  public static function arePhysics2DGuardsEnabled():Bool {
+    return cast Facade_Sdk_flighthq_physics2d_EnablePhysics2DGuards.arePhysics2DGuardsEnabled();
     return cast null;
   }
 
@@ -3470,6 +3561,10 @@ class Sdk {
     Facade_Sdk_flighthq_bitmap_BitmapBlur.boxBlurBitmap(out, scratch, source, options);
   }
 
+  public static function breakPhysics3DJoint(world:Physics3DWorld, joint:Physics3DJoint):Void {
+    Facade_Sdk_flighthq_physics3d_JointBreakage.breakPhysics3DJoint(world, joint);
+  }
+
   public static function buildBitmapBrightnessColorMatrix(out:Array<Float>, amount:Float):Void {
     Facade_Sdk_flighthq_bitmap_BitmapColorMatrix.buildBitmapBrightnessColorMatrix(out, amount);
   }
@@ -3719,11 +3814,19 @@ class Sdk {
   public static final clearcoatPbrGlExtension:GlPbrExtensionRegistration = Facade_Sdk_flighthq_scene3dGl_ClearcoatPbrGlExtension.clearcoatPbrGlExtension;
 
   public static function clearCollisionContactManifold2D(out:CollisionContactManifold2D):Void {
-    Facade_Sdk_flighthq_collision_ContactManifold.clearCollisionContactManifold2D(out);
+    Facade_Sdk_flighthq_collision_ContactManifold2D.clearCollisionContactManifold2D(out);
+  }
+
+  public static function clearCollisionContactManifold3D(out:CollisionContactManifold3D):Void {
+    Facade_Sdk_flighthq_collision_ContactManifold3D.clearCollisionContactManifold3D(out);
   }
 
   public static function clearCollisionManifold2D(out:CollisionManifold2D):Void {
-    Facade_Sdk_flighthq_collision_Manifold.clearCollisionManifold2D(out);
+    Facade_Sdk_flighthq_collision_Manifold2D.clearCollisionManifold2D(out);
+  }
+
+  public static function clearCollisionManifold3D(out:CollisionManifold3D):Void {
+    Facade_Sdk_flighthq_collision_Manifold3D.clearCollisionManifold3D(out);
   }
 
   public static function clearFlowStack(stack:FlowStack):Void {
@@ -3752,6 +3855,10 @@ class Sdk {
 
   public static function clearImageEncoders():Void {
     Facade_Sdk_flighthq_imageCodec_ImageEncoderRegistry.clearImageEncoders();
+  }
+
+  public static function clearLogChannelLevel(channel:String):Void {
+    Facade_Sdk_flighthq_log_Log.clearLogChannelLevel(channel);
   }
 
   public static function clearLogChannelLevels():Void {
@@ -3818,6 +3925,10 @@ class Sdk {
     Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.clearParticleEmitter3D(target);
   }
 
+  public static function clearPhysics3DJointReaction(out:Physics3DJointReaction):Void {
+    Facade_Sdk_flighthq_physics3d_JointReaction.clearPhysics3DJointReaction(out);
+  }
+
   public static function clearQuadBatch(target:QuadBatch):Void {
     Facade_Sdk_flighthq_quadbatch_QuadBatch.clearQuadBatch(target);
   }
@@ -3857,6 +3968,10 @@ class Sdk {
 
   public static function clearSpatialIndex2D(index:SpatialIndex2D):Void {
     Facade_Sdk_flighthq_spatial_SpatialIndex.clearSpatialIndex2D(index);
+  }
+
+  public static function clearSpatialIndex3D(index:SpatialIndex3D):Void {
+    Facade_Sdk_flighthq_spatial_SpatialIndex3D.clearSpatialIndex3D(index);
   }
 
   public static function clearStatusBarStyleStack():Void {
@@ -4214,38 +4329,48 @@ class Sdk {
     return cast null;
   }
 
-  public static function collideAabbAabbContactManifold(a:CollisionAabb2D, b:CollisionAabb2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeContact.collideAabbAabbContactManifold(a, b, out);
+  public static function collideAabbAabbContactManifold2D(a:CollisionAabb2D, b:CollisionAabb2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeContact2D.collideAabbAabbContactManifold2D(a, b, out);
     return cast null;
   }
 
-  public static function collideAabbObbContactManifold(a:CollisionAabb2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeContact.collideAabbObbContactManifold(a, b, out);
+  public static function collideAabbObbContactManifold2D(a:CollisionAabb2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeContact2D.collideAabbObbContactManifold2D(a, b, out);
     return cast null;
   }
 
-  public static function collideAabbPolygonContactManifold(a:CollisionAabb2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeContact.collideAabbPolygonContactManifold(a, b, out);
+  public static function collideAabbPolygonContactManifold2D(a:CollisionAabb2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeContact2D.collideAabbPolygonContactManifold2D(a, b, out);
     return cast null;
   }
 
-  public static function collideCircleAabbContactManifold(a:CollisionCircle2D, b:CollisionAabb2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeContact.collideCircleAabbContactManifold(a, b, out);
+  public static function collideCircleAabbContactManifold2D(a:CollisionCircle2D, b:CollisionAabb2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeContact2D.collideCircleAabbContactManifold2D(a, b, out);
     return cast null;
   }
 
-  public static function collideCircleCircleContactManifold(a:CollisionCircle2D, b:CollisionCircle2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeContact.collideCircleCircleContactManifold(a, b, out);
+  public static function collideCircleCircleContactManifold2D(a:CollisionCircle2D, b:CollisionCircle2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeContact2D.collideCircleCircleContactManifold2D(a, b, out);
     return cast null;
   }
 
-  public static function collideCircleObbContactManifold(a:CollisionCircle2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeContact.collideCircleObbContactManifold(a, b, out);
+  public static function collideCircleObbContactManifold2D(a:CollisionCircle2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeContact2D.collideCircleObbContactManifold2D(a, b, out);
     return cast null;
   }
 
-  public static function collideCirclePolygonContactManifold(a:CollisionCircle2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeContact.collideCirclePolygonContactManifold(a, b, out);
+  public static function collideCirclePolygonContactManifold2D(a:CollisionCircle2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeContact2D.collideCirclePolygonContactManifold2D(a, b, out);
+    return cast null;
+  }
+
+  public static function collideCollisionHeightfield3D(convex:CollisionShape3D, heightfield:CollisionHeightfield3D, out:CollisionContactManifold3D):Bool {
+    return cast Facade_Sdk_flighthq_collision_TriangleMesh3D.collideCollisionHeightfield3D(convex, heightfield, out);
+    return cast null;
+  }
+
+  public static function collideCollisionTriangleMesh3D(convex:CollisionShape3D, mesh:CollisionTriangleMesh3D, out:CollisionContactManifold3D):Bool {
+    return cast Facade_Sdk_flighthq_collision_TriangleMesh3D.collideCollisionTriangleMesh3D(convex, mesh, out);
     return cast null;
   }
 
@@ -4254,18 +4379,23 @@ class Sdk {
     return cast null;
   }
 
-  public static function collideObbObbContactManifold(a:CollisionObb2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeContact.collideObbObbContactManifold(a, b, out);
+  public static function collideContactManifold3D(a:CollisionShape3D, b:CollisionShape3D, out:CollisionContactManifold3D):Bool {
+    return cast Facade_Sdk_flighthq_collision_CollideContactManifold3D.collideContactManifold3D(a, b, out);
     return cast null;
   }
 
-  public static function collideObbPolygonContactManifold(a:CollisionObb2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeContact.collideObbPolygonContactManifold(a, b, out);
+  public static function collideObbObbContactManifold2D(a:CollisionObb2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeContact2D.collideObbObbContactManifold2D(a, b, out);
     return cast null;
   }
 
-  public static function collidePolygonPolygonContactManifold(a:CollisionPolygon2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeContact.collidePolygonPolygonContactManifold(a, b, out);
+  public static function collideObbPolygonContactManifold2D(a:CollisionObb2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeContact2D.collideObbPolygonContactManifold2D(a, b, out);
+    return cast null;
+  }
+
+  public static function collidePolygonPolygonContactManifold2D(a:CollisionPolygon2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeContact2D.collidePolygonPolygonContactManifold2D(a, b, out);
     return cast null;
   }
 
@@ -4576,6 +4706,22 @@ class Sdk {
 
   public static function computePhysics3DCapsuleMassData(radius:Float, halfHeight:Float, density:Float, out:Physics3DMassData):Void {
     Facade_Sdk_flighthq_physics3d_MassProperties.computePhysics3DCapsuleMassData(radius, halfHeight, density, out);
+  }
+
+  public static function computePhysics3DColliderMassData(collider:Physics3DCollider, out:Physics3DMassData):Void {
+    Facade_Sdk_flighthq_physics3d_MassProperties.computePhysics3DColliderMassData(collider, out);
+  }
+
+  public static function computePhysics3DConeMassData(radius:Float, height:Float, density:Float, out:Physics3DMassData):Void {
+    Facade_Sdk_flighthq_physics3d_MassProperties.computePhysics3DConeMassData(radius, height, density, out);
+  }
+
+  public static function computePhysics3DConvexHullMassData(points:Array<Float>, density:Float, out:Physics3DMassData):Void {
+    Facade_Sdk_flighthq_physics3d_MassProperties.computePhysics3DConvexHullMassData(points, density, out);
+  }
+
+  public static function computePhysics3DCylinderMassData(radius:Float, halfHeight:Float, density:Float, out:Physics3DMassData):Void {
+    Facade_Sdk_flighthq_physics3d_MassProperties.computePhysics3DCylinderMassData(radius, halfHeight, density, out);
   }
 
   public static function computePhysics3DSphereMassData(radius:Float, density:Float, out:Physics3DMassData):Void {
@@ -5466,6 +5612,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function createBvhSpatialBackend3D(?margin:Float):SpatialIndexBackend3D {
+    return cast Facade_Sdk_flighthq_spatial_Bvh3D.createBvhSpatialBackend3D(margin);
+    return cast null;
+  }
+
   #if lime
   public static function createCairoSurface(window:lime.ui.Window):flighthq._internal.dom.HTMLCanvasElement {
     return flighthq.scene2dCairo.CairoSurface.createCairoSurface(window);
@@ -5624,12 +5775,27 @@ class Sdk {
   }
 
   public static function createCollisionContactManifold2D():CollisionContactManifold2D {
-    return cast Facade_Sdk_flighthq_collision_ContactManifold.createCollisionContactManifold2D();
+    return cast Facade_Sdk_flighthq_collision_ContactManifold2D.createCollisionContactManifold2D();
+    return cast null;
+  }
+
+  public static function createCollisionContactManifold3D():CollisionContactManifold3D {
+    return cast Facade_Sdk_flighthq_collision_ContactManifold3D.createCollisionContactManifold3D();
+    return cast null;
+  }
+
+  public static function createCollisionHeightfield3D(columns:Float, rows:Float, heights:Array<Float>, ?cellSizeX:Float, ?cellSizeZ:Float):CollisionHeightfield3D {
+    return cast Facade_Sdk_flighthq_collision_TriangleMesh3D.createCollisionHeightfield3D(columns, rows, heights, cellSizeX, cellSizeZ);
     return cast null;
   }
 
   public static function createCollisionManifold2D():CollisionManifold2D {
-    return cast Facade_Sdk_flighthq_collision_Manifold.createCollisionManifold2D();
+    return cast Facade_Sdk_flighthq_collision_Manifold2D.createCollisionManifold2D();
+    return cast null;
+  }
+
+  public static function createCollisionManifold3D():CollisionManifold3D {
+    return cast Facade_Sdk_flighthq_collision_Manifold3D.createCollisionManifold3D();
     return cast null;
   }
 
@@ -5638,8 +5804,18 @@ class Sdk {
     return cast null;
   }
 
+  public static function createCollisionRaycastHit3D():CollisionRaycastHit3D {
+    return cast Facade_Sdk_flighthq_collision_RaycastCollisionShape3D.createCollisionRaycastHit3D();
+    return cast null;
+  }
+
   public static function createCollisionTimeOfImpact2D():CollisionTimeOfImpact2D {
     return cast Facade_Sdk_flighthq_collision_SweepCollisionShape2D.createCollisionTimeOfImpact2D();
+    return cast null;
+  }
+
+  public static function createCollisionTriangleMesh3D(points:Array<Float>, indices:Array<Float>):CollisionTriangleMesh3D {
+    return cast Facade_Sdk_flighthq_collision_TriangleMesh3D.createCollisionTriangleMesh3D(points, indices);
     return cast null;
   }
 
@@ -6548,6 +6724,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function createPhysics2DJointReaction():Physics2DJointReaction {
+    return cast Facade_Sdk_flighthq_physics2d_JointReactions.createPhysics2DJointReaction();
+    return cast null;
+  }
+
   public static function createPhysics2DMouseJoint(options:Physics2DMouseJointOptions):Physics2DMouseJoint {
     return cast Facade_Sdk_flighthq_physics2d_JointFactories.createPhysics2DMouseJoint(options);
     return cast null;
@@ -6588,6 +6769,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function createPhysics2DShapeCastResult():Physics2DShapeCastResult {
+    return cast Facade_Sdk_flighthq_physics2d_WorldQueries.createPhysics2DShapeCastResult();
+    return cast null;
+  }
+
   public static function createPhysics2DSolverConfig():Physics2DSolverConfig {
     return cast Facade_Sdk_flighthq_physics2d_World.createPhysics2DSolverConfig();
     return cast null;
@@ -6613,18 +6799,33 @@ class Sdk {
     return cast null;
   }
 
+  public static function createPhysics3DCollider(local:CollisionColliderShape3D, ?material:Physics3DMaterial, ?filter:Physics3DCollisionFilter, ?sensor:Bool):Physics3DCollider {
+    return cast Facade_Sdk_flighthq_physics3d_World.createPhysics3DCollider(local, material, filter, sensor);
+    return cast null;
+  }
+
   public static function createPhysics3DConeTwistJoint(options:Physics3DConeTwistJointOptions):Physics3DConeTwistJoint {
     return cast Facade_Sdk_flighthq_physics3d_JointFactories.createPhysics3DConeTwistJoint(options);
     return cast null;
   }
 
-  public static function createPhysics3DContact(bodyA:Float, bodyB:Float):Physics3DContact {
-    return cast Facade_Sdk_flighthq_physics3d_Contacts.createPhysics3DContact(bodyA, bodyB);
+  public static function createPhysics3DContact(bodyA:Float, bodyB:Float, ?colliderA:Float, ?colliderB:Float):Physics3DContact {
+    return cast Facade_Sdk_flighthq_physics3d_Contacts.createPhysics3DContact(bodyA, bodyB, colliderA, colliderB);
     return cast null;
   }
 
   public static function createPhysics3DContactPoint():Physics3DContactPoint {
     return cast Facade_Sdk_flighthq_physics3d_Contacts.createPhysics3DContactPoint();
+    return cast null;
+  }
+
+  public static function createPhysics3DDebugGeometry():Physics3DDebugGeometry {
+    return cast Facade_Sdk_flighthq_physics3d_DebugGeometry.createPhysics3DDebugGeometry();
+    return cast null;
+  }
+
+  public static function createPhysics3DDistanceJoint(options:Physics3DDistanceJointOptions):Physics3DDistanceJoint {
+    return cast Facade_Sdk_flighthq_physics3d_JointFactories.createPhysics3DDistanceJoint(options);
     return cast null;
   }
 
@@ -6643,13 +6844,38 @@ class Sdk {
     return cast null;
   }
 
+  public static function createPhysics3DJointReaction():Physics3DJointReaction {
+    return cast Facade_Sdk_flighthq_physics3d_JointReaction.createPhysics3DJointReaction();
+    return cast null;
+  }
+
   public static function createPhysics3DMassData():Physics3DMassData {
     return cast Facade_Sdk_flighthq_physics3d_MassProperties.createPhysics3DMassData();
     return cast null;
   }
 
+  public static function createPhysics3DQueryFilter():Physics3DQueryFilter {
+    return cast Facade_Sdk_flighthq_physics3d_WorldQueries.createPhysics3DQueryFilter();
+    return cast null;
+  }
+
+  public static function createPhysics3DQueryResult():Physics3DQueryResult {
+    return cast Facade_Sdk_flighthq_physics3d_WorldQueries.createPhysics3DQueryResult();
+    return cast null;
+  }
+
+  public static function createPhysics3DRayResult():Physics3DRayResult {
+    return cast Facade_Sdk_flighthq_physics3d_WorldQueries.createPhysics3DRayResult();
+    return cast null;
+  }
+
   public static function createPhysics3DSequentialImpulseConfig():Physics3DSequentialImpulseConfig {
     return cast Facade_Sdk_flighthq_physics3d_World.createPhysics3DSequentialImpulseConfig();
+    return cast null;
+  }
+
+  public static function createPhysics3DShapeCastResult():Physics3DShapeCastResult {
+    return cast Facade_Sdk_flighthq_physics3d_WorldQueries.createPhysics3DShapeCastResult();
     return cast null;
   }
 
@@ -6663,8 +6889,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function createPhysics3DWorld():Physics3DWorld {
-    return cast Facade_Sdk_flighthq_physics3d_World.createPhysics3DWorld();
+  public static function createPhysics3DWorld(?index:SpatialIndexBackend3D):Physics3DWorld {
+    return cast Facade_Sdk_flighthq_physics3d_World.createPhysics3DWorld(index);
     return cast null;
   }
 
@@ -7123,6 +7349,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function createSpatialIndex3D(?backend:SpatialIndexBackend3D):SpatialIndex3D {
+    return cast Facade_Sdk_flighthq_spatial_SpatialIndex3D.createSpatialIndex3D(backend);
+    return cast null;
+  }
+
   public static function createSpecularGlossinessPbrMaterial(?opts:{ @:optional var diffuse:Null<Float>; @:optional var diffuseMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var glossiness:Null<Float>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var specular:Null<Float>; @:optional var specularGlossinessMap:Null<Texture>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var kind:Null<Kind>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):SpecularGlossinessPbrMaterial {
     return cast Facade_Sdk_flighthq_materials_PbrMaterials.createSpecularGlossinessPbrMaterial(opts);
     return cast null;
@@ -7476,6 +7707,11 @@ class Sdk {
 
   public static function createUniformGridSpatialBackend2D(cellSize:Float):SpatialIndexBackend2D {
     return cast Facade_Sdk_flighthq_spatial_UniformGrid.createUniformGridSpatialBackend2D(cellSize);
+    return cast null;
+  }
+
+  public static function createUniformGridSpatialBackend3D(cellSize:Float):SpatialIndexBackend3D {
+    return cast Facade_Sdk_flighthq_spatial_UniformGrid3D.createUniformGridSpatialBackend3D(cellSize);
     return cast null;
   }
 
@@ -8468,6 +8704,10 @@ class Sdk {
     Facade_Sdk_flighthq_permissions_EnablePermissionGuards.disablePermissionGuards();
   }
 
+  public static function disablePhysics2DGuards():Void {
+    Facade_Sdk_flighthq_physics2d_EnablePhysics2DGuards.disablePhysics2DGuards();
+  }
+
   public static function disablePhysics3DGuards():Void {
     Facade_Sdk_flighthq_physics3d_EnablePhysics3DGuards.disablePhysics3DGuards();
   }
@@ -9245,6 +9485,10 @@ class Sdk {
     Facade_Sdk_flighthq_permissions_EnablePermissionGuards.enablePermissionGuards();
   }
 
+  public static function enablePhysics2DGuards():Void {
+    Facade_Sdk_flighthq_physics2d_EnablePhysics2DGuards.enablePhysics2DGuards();
+  }
+
   public static function enablePhysics3DGuards():Void {
     Facade_Sdk_flighthq_physics3d_EnablePhysics3DGuards.enablePhysics3DGuards();
   }
@@ -9614,6 +9858,10 @@ class Sdk {
     return cast null;
   }
 
+  public static function evaluatePhysics3DJointBreakage(world:Physics3DWorld, dt:Float):Void {
+    Facade_Sdk_flighthq_physics3d_JointBreakage.evaluatePhysics3DJointBreakage(world, dt);
+  }
+
   public static function exitApplicationFullscreen():flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast Facade_Sdk_flighthq_application_Window.exitApplicationFullscreen();
     return cast null;
@@ -9681,6 +9929,11 @@ class Sdk {
 
   public static function explainCollisionTest2D(a:CollisionShape2D, b:CollisionShape2D):CollisionTestExplanation2D {
     return cast Facade_Sdk_flighthq_collision_ExplainCollisionTest2D.explainCollisionTest2D(a, b);
+    return cast null;
+  }
+
+  public static function explainCollisionTest3D(a:CollisionShape3D, b:CollisionShape3D):CollisionTestExplanation3D {
+    return cast Facade_Sdk_flighthq_collision_ExplainCollisionTest3D.explainCollisionTest3D(a, b);
     return cast null;
   }
 
@@ -9773,6 +10026,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function explainPhysics2DCollision(world:Physics2DWorld):Physics2DCollisionExplanation {
+    return cast Facade_Sdk_flighthq_physics2d_ExplainPhysics2DCollision.explainPhysics2DCollision(world);
+    return cast null;
+  }
+
   public static function explainPhysics2DJoints(world:Physics2DWorld):Physics2DJointResolutionExplanation {
     return cast Facade_Sdk_flighthq_physics2d_ExplainPhysics2DJoints.explainPhysics2DJoints(world);
     return cast null;
@@ -9780,6 +10038,11 @@ class Sdk {
 
   public static function explainPhysics2DStep(world:Physics2DWorld, dt:Float):Physics2DStepExplanation {
     return cast Facade_Sdk_flighthq_physics2d_ExplainPhysics2DStep.explainPhysics2DStep(world, dt);
+    return cast null;
+  }
+
+  public static function explainPhysics3DCollision(world:Physics3DWorld):Physics3DCollisionExplanation {
+    return cast Facade_Sdk_flighthq_physics3d_ExplainPhysics3DCollision.explainPhysics3DCollision(world);
     return cast null;
   }
 
@@ -9829,6 +10092,11 @@ class Sdk {
 
   public static function explainSpatialIndexing2D(index:SpatialIndex2D, id:SpatialObjectId):SpatialIndexingExplanation {
     return cast Facade_Sdk_flighthq_spatial_ExplainSpatialIndexing2D.explainSpatialIndexing2D(index, id);
+    return cast null;
+  }
+
+  public static function explainSpatialIndexing3D(index:SpatialIndex3D, id:SpatialObjectId):SpatialIndexingExplanation {
+    return cast Facade_Sdk_flighthq_spatial_ExplainSpatialIndexing3D.explainSpatialIndexing3D(index, id);
     return cast null;
   }
 
@@ -10824,18 +11092,48 @@ class Sdk {
     return cast null;
   }
 
+  public static function getCollisionFaceQuery3D(kind:CollisionShapeKind3D):Null<CollisionFaceQuery3D> {
+    return cast Facade_Sdk_flighthq_collision_CollisionFace3D.getCollisionFaceQuery3D(kind);
+    return cast null;
+  }
+
+  public static function getCollisionHeightfieldValidationStatus3D(heightfield:CollisionHeightfield3D):Null<CollisionTestStatus> {
+    return cast Facade_Sdk_flighthq_collision_TriangleMesh3D.getCollisionHeightfieldValidationStatus3D(heightfield);
+    return cast null;
+  }
+
   public static function getCollisionPairTest2D(kindA:CollisionShapeKind2D, kindB:CollisionShapeKind2D):Null<CollisionPairTest2D> {
     return cast Facade_Sdk_flighthq_collision_CollisionSupport2D.getCollisionPairTest2D(kindA, kindB);
     return cast null;
   }
 
+  public static function getCollisionPairTest3D(kindA:CollisionShapeKind3D, kindB:CollisionShapeKind3D):Null<CollisionPairTest3D> {
+    return cast Facade_Sdk_flighthq_collision_CollisionSupport3D.getCollisionPairTest3D(kindA, kindB);
+    return cast null;
+  }
+
   public static function getCollisionShapeContainsPoint2D(shape:CollisionBuiltInShape2D, x:Float, y:Float):Bool {
-    return cast Facade_Sdk_flighthq_collision_PointContainment.getCollisionShapeContainsPoint2D(shape, x, y);
+    return cast Facade_Sdk_flighthq_collision_PointContainment2D.getCollisionShapeContainsPoint2D(shape, x, y);
+    return cast null;
+  }
+
+  public static function getCollisionShapeContainsPoint3D(shape:CollisionBuiltInShape3D, x:Float, y:Float, z:Float):Bool {
+    return cast Facade_Sdk_flighthq_collision_PointContainment3D.getCollisionShapeContainsPoint3D(shape, x, y, z);
     return cast null;
   }
 
   public static function getCollisionSupport2D(kind:CollisionShapeKind2D):Null<CollisionSupport2D> {
     return cast Facade_Sdk_flighthq_collision_CollisionSupport2D.getCollisionSupport2D(kind);
+    return cast null;
+  }
+
+  public static function getCollisionSupport3D(kind:CollisionShapeKind3D):Null<CollisionSupport3D> {
+    return cast Facade_Sdk_flighthq_collision_CollisionSupport3D.getCollisionSupport3D(kind);
+    return cast null;
+  }
+
+  public static function getCollisionTriangleMeshValidationStatus3D(mesh:CollisionTriangleMesh3D):Null<CollisionTestStatus> {
+    return cast Facade_Sdk_flighthq_collision_TriangleMesh3D.getCollisionTriangleMeshValidationStatus3D(mesh);
     return cast null;
   }
 
@@ -11901,6 +12199,16 @@ class Sdk {
 
   public static function getPhysics2DJointSolver(world:Physics2DWorld, kind:Physics2DJointKind):Null<Physics2DJointSolver> {
     return cast Facade_Sdk_flighthq_physics2d_JointRegistry.getPhysics2DJointSolver(world, kind);
+    return cast null;
+  }
+
+  public static function getPhysics3DJointReactionForce(reaction:Physics3DJointReaction):Float {
+    return cast Facade_Sdk_flighthq_physics3d_JointReaction.getPhysics3DJointReactionForce(reaction);
+    return cast null;
+  }
+
+  public static function getPhysics3DJointReactionTorque(reaction:Physics3DJointReaction):Float {
+    return cast Facade_Sdk_flighthq_physics3d_JointReaction.getPhysics3DJointReactionTorque(reaction);
     return cast null;
   }
 
@@ -13313,6 +13621,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function hasActivePhysics3DBullet(world:Physics3DWorld):Bool {
+    return cast Facade_Sdk_flighthq_physics3d_Continuous.hasActivePhysics3DBullet(world);
+    return cast null;
+  }
+
   public static function hasAmbientLightSensor():Bool {
     return cast Facade_Sdk_flighthq_sensors_Sensors.hasAmbientLightSensor();
     return cast null;
@@ -13663,6 +13976,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function hydratePhysics3DWorld(world:Physics3DWorld):Bool {
+    return cast Facade_Sdk_flighthq_physics3d_World.hydratePhysics3DWorld(world);
+    return cast null;
+  }
+
   public static function hypot2(x:Float, y:Float):Float {
     return cast Facade_Sdk_flighthq_math_NumberTheory.hypot2(x, y);
     return cast null;
@@ -13731,11 +14049,20 @@ class Sdk {
     return cast null;
   }
 
+  public static function insertSpatialObject3D(index:SpatialIndex3D, id:SpatialObjectId, bounds:SpatialAabb3D):Bool {
+    return cast Facade_Sdk_flighthq_spatial_SpatialIndex3D.insertSpatialObject3D(index, id, bounds);
+    return cast null;
+  }
+
   public static function insertTextInput(source:RichText, text:String):Void {
     Facade_Sdk_flighthq_textinput_TextInputEditing.insertTextInput(source, text);
   }
 
   public static final InstancedMeshKind:String = Facade_Sdk_flighthq_types__internal__InstancedMeshValues.InstancedMeshKind;
+
+  public static function integratePhysics3DContinuous(world:Physics3DWorld, dt:Float):Void {
+    Facade_Sdk_flighthq_physics3d_Continuous.integratePhysics3DContinuous(world, dt);
+  }
 
   public static function integrateRigidBody3DPose(body:RigidBody3D, dt:Float):Void {
     Facade_Sdk_flighthq_physics3d_Integrate.integrateRigidBody3DPose(body, dt);
@@ -13822,6 +14149,14 @@ class Sdk {
     Facade_Sdk_flighthq_bitmap_Bitmap.invalidateBitmap(bitmap);
   }
 
+  public static function invalidateCollisionHeightfield3D(heightfield:CollisionHeightfield3D):Void {
+    Facade_Sdk_flighthq_collision_TriangleMesh3D.invalidateCollisionHeightfield3D(heightfield);
+  }
+
+  public static function invalidateCollisionTriangleMesh3D(mesh:CollisionTriangleMesh3D):Void {
+    Facade_Sdk_flighthq_collision_TriangleMesh3D.invalidateCollisionTriangleMesh3D(mesh);
+  }
+
   public static function invalidateMeshGeometry(geometry:MeshGeometry):Void {
     Facade_Sdk_flighthq_mesh_MeshGeometry.invalidateMeshGeometry(geometry);
   }
@@ -13845,6 +14180,11 @@ class Sdk {
 
   public static function invalidatePhysics2DJoint(world:Physics2DWorld, joint:Physics2DJoint):Bool {
     return cast Facade_Sdk_flighthq_physics2d_JointRegistry.invalidatePhysics2DJoint(world, joint);
+    return cast null;
+  }
+
+  public static function invalidatePhysics3DCollider(world:Physics3DWorld, body:RigidBody3D, collider:Physics3DCollider):Bool {
+    return cast Facade_Sdk_flighthq_physics3d_World.invalidatePhysics3DCollider(world, body, collider);
     return cast null;
   }
 
@@ -14272,6 +14612,11 @@ class Sdk {
 
   public static function isPhysics2DPairOrdered(a:RigidBody2D, b:RigidBody2D):Bool {
     return cast Facade_Sdk_flighthq_physics2d_World.isPhysics2DPairOrdered(a, b);
+    return cast null;
+  }
+
+  public static function isPhysics3DJointBreakable(joint:Physics3DJoint):Bool {
+    return cast Facade_Sdk_flighthq_physics3d_JointBreakage.isPhysics3DJointBreakable(joint);
     return cast null;
   }
 
@@ -14927,6 +15272,8 @@ class Sdk {
     Facade_Sdk_flighthq_geometry_Matrix.matrixTransformVectorXY(out, source, x, y);
   }
 
+  public static final MAX_COLLISION_CONTACT_POINTS_3D:Float = Facade_Sdk_flighthq_types_Collision.MAX_COLLISION_CONTACT_POINTS_3D;
+
   public static final MAX_DIRECTIONAL_SHADOW_PCF_RADIUS:Float = Facade_Sdk_flighthq_types__internal__DirectionalLightValues.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;
 
   public static final MAX_FORWARD_LIGHTS:Float = Facade_Sdk_flighthq_types__internal__Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
@@ -15042,6 +15389,16 @@ class Sdk {
 
   public static function mixPhysics2DRestitution(first:Float, second:Float):Float {
     return cast Facade_Sdk_flighthq_physics2d_Material.mixPhysics2DRestitution(first, second);
+    return cast null;
+  }
+
+  public static function mixPhysics3DFriction(first:Float, second:Float):Float {
+    return cast Facade_Sdk_flighthq_physics3d_Material.mixPhysics3DFriction(first, second);
+    return cast null;
+  }
+
+  public static function mixPhysics3DRestitution(first:Float, second:Float):Float {
+    return cast Facade_Sdk_flighthq_physics3d_Material.mixPhysics3DRestitution(first, second);
     return cast null;
   }
 
@@ -15944,39 +16301,39 @@ class Sdk {
 
   public static final Physics2DDistanceJointKind:String = Facade_Sdk_flighthq_physics2d_Joints.Physics2DDistanceJointKind;
 
-  public static final physics2DDistanceJointSolver:{ var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = Facade_Sdk_flighthq_physics2d_Joints.physics2DDistanceJointSolver;
+  public static final physics2DDistanceJointSolver:{ var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; var writeReaction:Physics2DWorld->Physics2DJoint->Float->Physics2DJointReaction->Bool; } = Facade_Sdk_flighthq_physics2d_Joints.physics2DDistanceJointSolver;
 
   public static final Physics2DGearJointKind:String = Facade_Sdk_flighthq_physics2d_Joints.Physics2DGearJointKind;
 
-  public static final physics2DGearJointSolver:{ var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Physics2DJoint->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = Facade_Sdk_flighthq_physics2d_Joints.physics2DGearJointSolver;
+  public static final physics2DGearJointSolver:{ var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Physics2DJoint->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; var writeReaction:Physics2DWorld->Physics2DJoint->Float->Physics2DJointReaction->Bool; } = Facade_Sdk_flighthq_physics2d_Joints.physics2DGearJointSolver;
 
   public static final Physics2DMouseJointKind:String = Facade_Sdk_flighthq_physics2d_Joints.Physics2DMouseJointKind;
 
-  public static final physics2DMouseJointSolver:{ var usesBodyA:Bool; var keepsBodiesAwake:Bool; var swapEnds:Physics2DJoint->Bool; var clearAccumulatedImpulses:Physics2DJoint->Void; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; @:optional var warmStart:Null<Physics2DWorld->Physics2DJoint->Void>; @:optional var scaleAccumulatedImpulses:Null<Physics2DJoint->Float->Void>; } = Facade_Sdk_flighthq_physics2d_Joints.physics2DMouseJointSolver;
+  public static final physics2DMouseJointSolver:{ var usesBodyA:Bool; var keepsBodiesAwake:Bool; var swapEnds:Physics2DJoint->Bool; var clearAccumulatedImpulses:Physics2DJoint->Void; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; var writeReaction:Physics2DWorld->Physics2DJoint->Float->Physics2DJointReaction->Bool; @:optional var warmStart:Null<Physics2DWorld->Physics2DJoint->Void>; @:optional var scaleAccumulatedImpulses:Null<Physics2DJoint->Float->Void>; } = Facade_Sdk_flighthq_physics2d_Joints.physics2DMouseJointSolver;
 
   public static final Physics2DPrismaticJointKind:String = Facade_Sdk_flighthq_physics2d_Joints.Physics2DPrismaticJointKind;
 
-  public static final physics2DPrismaticJointSolver:{ var scaleAccumulatedImpulses:Physics2DJoint->Float->Void; var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Physics2DJoint->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = Facade_Sdk_flighthq_physics2d_Joints.physics2DPrismaticJointSolver;
+  public static final physics2DPrismaticJointSolver:{ var scaleAccumulatedImpulses:Physics2DJoint->Float->Void; var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Physics2DJoint->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; var writeReaction:Physics2DWorld->Physics2DJoint->Float->Physics2DJointReaction->Bool; } = Facade_Sdk_flighthq_physics2d_Joints.physics2DPrismaticJointSolver;
 
   public static final Physics2DPulleyJointKind:String = Facade_Sdk_flighthq_physics2d_Joints.Physics2DPulleyJointKind;
 
-  public static final physics2DPulleyJointSolver:{ var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Physics2DJoint->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = Facade_Sdk_flighthq_physics2d_Joints.physics2DPulleyJointSolver;
+  public static final physics2DPulleyJointSolver:{ var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Physics2DJoint->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; var writeReaction:Physics2DWorld->Physics2DJoint->Float->Physics2DJointReaction->Bool; } = Facade_Sdk_flighthq_physics2d_Joints.physics2DPulleyJointSolver;
 
   public static final Physics2DRevoluteJointKind:String = Facade_Sdk_flighthq_physics2d_Joints.Physics2DRevoluteJointKind;
 
-  public static final physics2DRevoluteJointSolver:{ var scaleAccumulatedImpulses:Physics2DJoint->Float->Void; var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Physics2DJoint->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = Facade_Sdk_flighthq_physics2d_Joints.physics2DRevoluteJointSolver;
+  public static final physics2DRevoluteJointSolver:{ var scaleAccumulatedImpulses:Physics2DJoint->Float->Void; var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Physics2DJoint->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; var writeReaction:Physics2DWorld->Physics2DJoint->Float->Physics2DJointReaction->Bool; } = Facade_Sdk_flighthq_physics2d_Joints.physics2DRevoluteJointSolver;
 
   public static final Physics2DRopeJointKind:String = Facade_Sdk_flighthq_physics2d_Joints.Physics2DRopeJointKind;
 
-  public static final physics2DRopeJointSolver:{ var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = Facade_Sdk_flighthq_physics2d_Joints.physics2DRopeJointSolver;
+  public static final physics2DRopeJointSolver:{ var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; var writeReaction:Physics2DWorld->Physics2DJoint->Float->Physics2DJointReaction->Bool; } = Facade_Sdk_flighthq_physics2d_Joints.physics2DRopeJointSolver;
 
   public static final Physics2DWeldJointKind:String = Facade_Sdk_flighthq_physics2d_Joints.Physics2DWeldJointKind;
 
-  public static final physics2DWeldJointSolver:{ var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Physics2DJoint->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; } = Facade_Sdk_flighthq_physics2d_Joints.physics2DWeldJointSolver;
+  public static final physics2DWeldJointSolver:{ var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Physics2DJoint->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; var writeReaction:Physics2DWorld->Physics2DJoint->Float->Physics2DJointReaction->Bool; } = Facade_Sdk_flighthq_physics2d_Joints.physics2DWeldJointSolver;
 
   public static final Physics2DWheelJointKind:String = Facade_Sdk_flighthq_physics2d_Joints.Physics2DWheelJointKind;
 
-  public static final physics2DWheelJointSolver:{ var scaleAccumulatedImpulses:Physics2DJoint->Float->Void; var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Physics2DJoint->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; @:optional var usesBodyA:Null<Bool>; @:optional var keepsBodiesAwake:Null<Bool>; } = Facade_Sdk_flighthq_physics2d_Joints.physics2DWheelJointSolver;
+  public static final physics2DWheelJointSolver:{ var scaleAccumulatedImpulses:Physics2DJoint->Float->Void; var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var swapEnds:Physics2DJoint->Bool; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; var writeReaction:Physics2DWorld->Physics2DJoint->Float->Physics2DJointReaction->Bool; @:optional var usesBodyA:Null<Bool>; @:optional var keepsBodiesAwake:Null<Bool>; } = Facade_Sdk_flighthq_physics2d_Joints.physics2DWheelJointSolver;
 
   public static final Physics2DWorldVersion:Float = Facade_Sdk_flighthq_physics2d_World.Physics2DWorldVersion;
 
@@ -15987,6 +16344,10 @@ class Sdk {
   public static final Physics3DConeTwistJointKind:String = Facade_Sdk_flighthq_physics3d_Joints.Physics3DConeTwistJointKind;
 
   public static final physics3DConeTwistJointSolver:Physics3DJointSolver = Facade_Sdk_flighthq_physics3d_Joints.physics3DConeTwistJointSolver;
+
+  public static final Physics3DDistanceJointKind:String = Facade_Sdk_flighthq_physics3d_Joints.Physics3DDistanceJointKind;
+
+  public static final physics3DDistanceJointSolver:Physics3DJointSolver = Facade_Sdk_flighthq_physics3d_Joints.physics3DDistanceJointSolver;
 
   public static final Physics3DFixedJointKind:String = Facade_Sdk_flighthq_physics3d_Joints.Physics3DFixedJointKind;
 
@@ -16211,6 +16572,26 @@ class Sdk {
     return cast null;
   }
 
+  public static function queryCollisionAabbFace3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Float {
+    return cast Facade_Sdk_flighthq_collision_CollisionFace3D.queryCollisionAabbFace3D(shape, dirX, dirY, dirZ, out);
+    return cast null;
+  }
+
+  public static function queryCollisionBoxFace3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Float {
+    return cast Facade_Sdk_flighthq_collision_CollisionFace3D.queryCollisionBoxFace3D(shape, dirX, dirY, dirZ, out);
+    return cast null;
+  }
+
+  public static function queryCollisionCapsuleFace3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Float {
+    return cast Facade_Sdk_flighthq_collision_CollisionFace3D.queryCollisionCapsuleFace3D(shape, dirX, dirY, dirZ, out);
+    return cast null;
+  }
+
+  public static function queryCollisionConvexFace3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Float {
+    return cast Facade_Sdk_flighthq_collision_CollisionFace3D.queryCollisionConvexFace3D(shape, dirX, dirY, dirZ, out);
+    return cast null;
+  }
+
   public static function queryPhysics2DPoint(world:Physics2DWorld, x:Float, y:Float, out:Physics2DQueryResult, ?filter:Physics2DQueryFilter):Void {
     Facade_Sdk_flighthq_physics2d_WorldQueries.queryPhysics2DPoint(world, x, y, out, filter);
   }
@@ -16227,20 +16608,68 @@ class Sdk {
     Facade_Sdk_flighthq_physics2d_WorldQueries.queryPhysics2DRegion(world, region, out, filter);
   }
 
+  public static function queryPhysics2DShapeCast(world:Physics2DWorld, shape:CollisionBuiltInShape2D, dx:Float, dy:Float, out:Physics2DShapeCastResult, ?maxFraction:Float, ?filter:Physics2DQueryFilter):Void {
+    Facade_Sdk_flighthq_physics2d_WorldQueries.queryPhysics2DShapeCast(world, shape, dx, dy, out, maxFraction, filter);
+  }
+
+  public static function queryPhysics3DPoint(world:Physics3DWorld, x:Float, y:Float, z:Float, out:Physics3DQueryResult, ?filter:Physics3DQueryFilter):Void {
+    Facade_Sdk_flighthq_physics3d_WorldQueries.queryPhysics3DPoint(world, x, y, z, out, filter);
+  }
+
+  public static function queryPhysics3DRay(world:Physics3DWorld, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:Physics3DRayResult, ?maxFraction:Float, ?filter:Physics3DQueryFilter):Void {
+    Facade_Sdk_flighthq_physics3d_WorldQueries.queryPhysics3DRay(world, originX, originY, originZ, directionX, directionY, directionZ, out, maxFraction, filter);
+  }
+
+  public static function queryPhysics3DRayClosest(world:Physics3DWorld, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:Physics3DRayResult, ?maxFraction:Float, ?filter:Physics3DQueryFilter):Void {
+    Facade_Sdk_flighthq_physics3d_WorldQueries.queryPhysics3DRayClosest(world, originX, originY, originZ, directionX, directionY, directionZ, out, maxFraction, filter);
+  }
+
+  public static function queryPhysics3DRegion(world:Physics3DWorld, region:SpatialAabb3D, out:Physics3DQueryResult, ?filter:Physics3DQueryFilter):Void {
+    Facade_Sdk_flighthq_physics3d_WorldQueries.queryPhysics3DRegion(world, region, out, filter);
+  }
+
+  public static function queryPhysics3DShapeCast(world:Physics3DWorld, shape:CollisionBuiltInShape3D, dx:Float, dy:Float, dz:Float, out:Physics3DShapeCastResult, ?maxFraction:Float, ?filter:Physics3DQueryFilter):Void {
+    Facade_Sdk_flighthq_physics3d_WorldQueries.queryPhysics3DShapeCast(world, shape, dx, dy, dz, out, maxFraction, filter);
+  }
+
+  public static function querySpatialFrustum3D(index:SpatialIndex3D, frustum:SpatialFrustum3D, out:Array<SpatialObjectId>, ?slices:Float):Void {
+    Facade_Sdk_flighthq_spatial_SpatialIndex3D.querySpatialFrustum3D(index, frustum, out, slices);
+  }
+
   public static function querySpatialPairs2D(index:SpatialIndex2D, out:Array<SpatialPair>):Void {
     Facade_Sdk_flighthq_spatial_SpatialIndex.querySpatialPairs2D(index, out);
+  }
+
+  public static function querySpatialPairs3D(index:SpatialIndex3D, out:Array<SpatialPair>):Void {
+    Facade_Sdk_flighthq_spatial_SpatialIndex3D.querySpatialPairs3D(index, out);
   }
 
   public static function querySpatialPoint2D(index:SpatialIndex2D, x:Float, y:Float, out:Array<SpatialObjectId>):Void {
     Facade_Sdk_flighthq_spatial_SpatialIndex.querySpatialPoint2D(index, x, y, out);
   }
 
+  public static function querySpatialPoint3D(index:SpatialIndex3D, x:Float, y:Float, z:Float, out:Array<SpatialObjectId>):Void {
+    Facade_Sdk_flighthq_spatial_SpatialIndex3D.querySpatialPoint3D(index, x, y, z, out);
+  }
+
   public static function querySpatialRay2D(index:SpatialIndex2D, x:Float, y:Float, dx:Float, dy:Float, out:Array<SpatialObjectId>):Void {
     Facade_Sdk_flighthq_spatial_SpatialIndex.querySpatialRay2D(index, x, y, dx, dy, out);
   }
 
+  public static function querySpatialRay3D(index:SpatialIndex3D, x:Float, y:Float, z:Float, dx:Float, dy:Float, dz:Float, out:Array<SpatialObjectId>):Void {
+    Facade_Sdk_flighthq_spatial_SpatialIndex3D.querySpatialRay3D(index, x, y, z, dx, dy, dz, out);
+  }
+
   public static function querySpatialRegion2D(index:SpatialIndex2D, region:SpatialAabb2D, out:Array<SpatialObjectId>):Void {
     Facade_Sdk_flighthq_spatial_SpatialIndex.querySpatialRegion2D(index, region, out);
+  }
+
+  public static function querySpatialRegion3D(index:SpatialIndex3D, region:SpatialAabb3D, out:Array<SpatialObjectId>):Void {
+    Facade_Sdk_flighthq_spatial_SpatialIndex3D.querySpatialRegion3D(index, region, out);
+  }
+
+  public static function querySpatialSphere3D(index:SpatialIndex3D, x:Float, y:Float, z:Float, radius:Float, out:Array<SpatialObjectId>):Void {
+    Facade_Sdk_flighthq_spatial_SpatialIndex3D.querySpatialSphere3D(index, x, y, z, radius, out);
   }
 
   public static function queueResourceLoad<T>(loader:ResourceLoader, item:flighthq._internal._Union2<ResourceLoadItem<T>, Void->flighthq._internal._Promise<T>>):ResourceLoadHandle<T> {
@@ -16328,8 +16757,23 @@ class Sdk {
     return cast null;
   }
 
+  public static function raycastCollisionHeightfield3D(heightfield:CollisionHeightfield3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:CollisionRaycastHit3D, ?maxFraction:Float):Bool {
+    return cast Facade_Sdk_flighthq_collision_TriangleMesh3D.raycastCollisionHeightfield3D(heightfield, originX, originY, originZ, directionX, directionY, directionZ, out, maxFraction);
+    return cast null;
+  }
+
   public static function raycastCollisionShape2D(shape:CollisionBuiltInShape2D, originX:Float, originY:Float, directionX:Float, directionY:Float, out:CollisionRaycastHit2D, ?maxFraction:Float):Bool {
     return cast Facade_Sdk_flighthq_collision_RaycastCollisionShape2D.raycastCollisionShape2D(shape, originX, originY, directionX, directionY, out, maxFraction);
+    return cast null;
+  }
+
+  public static function raycastCollisionShape3D(shape:CollisionBuiltInShape3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:CollisionRaycastHit3D, ?maxFraction:Float):Bool {
+    return cast Facade_Sdk_flighthq_collision_RaycastCollisionShape3D.raycastCollisionShape3D(shape, originX, originY, originZ, directionX, directionY, directionZ, out, maxFraction);
+    return cast null;
+  }
+
+  public static function raycastCollisionTriangleMesh3D(mesh:CollisionTriangleMesh3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:CollisionRaycastHit3D, ?maxFraction:Float):Bool {
+    return cast Facade_Sdk_flighthq_collision_TriangleMesh3D.raycastCollisionTriangleMesh3D(mesh, originX, originY, originZ, directionX, directionY, directionZ, out, maxFraction);
     return cast null;
   }
 
@@ -16533,12 +16977,24 @@ class Sdk {
     Facade_Sdk_flighthq_effects_BokehDepthOfFieldEffect.registerBokehDepthOfFieldEffectPaddingResolver(state);
   }
 
+  public static function registerBuiltInCollisionFaceQueries3D():Void {
+    Facade_Sdk_flighthq_collision_CollisionFace3D.registerBuiltInCollisionFaceQueries3D();
+  }
+
   public static function registerBuiltInCollisionPairTests2D():Void {
     Facade_Sdk_flighthq_collision_RegisterBuiltInCollisionPairTests2D.registerBuiltInCollisionPairTests2D();
   }
 
+  public static function registerBuiltInCollisionPairTests3D():Void {
+    Facade_Sdk_flighthq_collision_RegisterBuiltInCollisionPairTests3D.registerBuiltInCollisionPairTests3D();
+  }
+
   public static function registerBuiltInCollisionSupports2D():Void {
     Facade_Sdk_flighthq_collision_CollisionSupport2D.registerBuiltInCollisionSupports2D();
+  }
+
+  public static function registerBuiltInCollisionSupports3D():Void {
+    Facade_Sdk_flighthq_collision_CollisionSupport3D.registerBuiltInCollisionSupports3D();
   }
 
   public static function registerBuiltInGlModifierSnippets(state:GlRenderState):Void {
@@ -16661,12 +17117,24 @@ class Sdk {
     Facade_Sdk_flighthq_effectsCanvas_CanvasVignetteEffect.registerCanvasVignetteEffect(state);
   }
 
+  public static function registerCollisionFaceQuery3D(kind:CollisionShapeKind3D, query:CollisionFaceQuery3D):Void {
+    Facade_Sdk_flighthq_collision_CollisionFace3D.registerCollisionFaceQuery3D(kind, query);
+  }
+
   public static function registerCollisionPairTest2D(kindA:CollisionShapeKind2D, kindB:CollisionShapeKind2D, test:CollisionPairTest2D):Void {
     Facade_Sdk_flighthq_collision_CollisionSupport2D.registerCollisionPairTest2D(kindA, kindB, test);
   }
 
+  public static function registerCollisionPairTest3D(kindA:CollisionShapeKind3D, kindB:CollisionShapeKind3D, test:CollisionPairTest3D):Void {
+    Facade_Sdk_flighthq_collision_CollisionSupport3D.registerCollisionPairTest3D(kindA, kindB, test);
+  }
+
   public static function registerCollisionSupport2D(kind:CollisionShapeKind2D, support:CollisionSupport2D):Void {
     Facade_Sdk_flighthq_collision_CollisionSupport2D.registerCollisionSupport2D(kind, support);
+  }
+
+  public static function registerCollisionSupport3D(kind:CollisionShapeKind3D, support:CollisionSupport3D):Void {
+    Facade_Sdk_flighthq_collision_CollisionSupport3D.registerCollisionSupport3D(kind, support);
   }
 
   public static function registerContactShadowsEffectPaddingResolver(state:RenderState):Void {
@@ -17775,6 +18243,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function removePhysics3DCollider(world:Physics3DWorld, body:RigidBody3D, collider:Physics3DCollider):Bool {
+    return cast Facade_Sdk_flighthq_physics3d_World.removePhysics3DCollider(world, body, collider);
+    return cast null;
+  }
+
   public static function removePhysics3DJoint(world:Physics3DWorld, joint:Physics3DJoint):Bool {
     return cast Facade_Sdk_flighthq_physics3d_JointRegistry.removePhysics3DJoint(world, joint);
     return cast null;
@@ -17795,6 +18268,10 @@ class Sdk {
 
   public static function removeSpatialObject2D(index:SpatialIndex2D, id:SpatialObjectId):Void {
     Facade_Sdk_flighthq_spatial_SpatialIndex.removeSpatialObject2D(index, id);
+  }
+
+  public static function removeSpatialObject3D(index:SpatialIndex3D, id:SpatialObjectId):Void {
+    Facade_Sdk_flighthq_spatial_SpatialIndex3D.removeSpatialObject3D(index, id);
   }
 
   public static function removeStorageItem(key:String):Bool {
@@ -19328,16 +19805,29 @@ class Sdk {
     return cast null;
   }
 
-  public static function setPhysics3DBodyFixedRotation(body:RigidBody3D, fixedRotation:Bool):Void {
-    Facade_Sdk_flighthq_physics3d_World.setPhysics3DBodyFixedRotation(body, fixedRotation);
+  public static function setPhysics3DBodyBullet(body:RigidBody3D, bullet:Bool):Bool {
+    return cast Facade_Sdk_flighthq_physics3d_World.setPhysics3DBodyBullet(body, bullet);
+    return cast null;
   }
 
-  public static function setPhysics3DBodyTransform(body:RigidBody3D, x:Float, y:Float, z:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Void {
-    Facade_Sdk_flighthq_physics3d_World.setPhysics3DBodyTransform(body, x, y, z, orientationX, orientationY, orientationZ, orientationW);
+  public static function setPhysics3DBodyFixedRotation(body:RigidBody3D, fixedRotation:Bool):Bool {
+    return cast Facade_Sdk_flighthq_physics3d_World.setPhysics3DBodyFixedRotation(body, fixedRotation);
+    return cast null;
   }
 
-  public static function setPhysics3DBodyType(body:RigidBody3D, type:Physics3DBodyType):Void {
-    Facade_Sdk_flighthq_physics3d_World.setPhysics3DBodyType(body, type);
+  public static function setPhysics3DBodySleepEnabled(body:RigidBody3D, sleepEnabled:Bool):Bool {
+    return cast Facade_Sdk_flighthq_physics3d_World.setPhysics3DBodySleepEnabled(body, sleepEnabled);
+    return cast null;
+  }
+
+  public static function setPhysics3DBodyTransform(body:RigidBody3D, x:Float, y:Float, z:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Bool {
+    return cast Facade_Sdk_flighthq_physics3d_World.setPhysics3DBodyTransform(body, x, y, z, orientationX, orientationY, orientationZ, orientationW);
+    return cast null;
+  }
+
+  public static function setPhysics3DBodyType(body:RigidBody3D, type:Physics3DBodyType):Bool {
+    return cast Facade_Sdk_flighthq_physics3d_World.setPhysics3DBodyType(body, type);
+    return cast null;
   }
 
   public static function setPlane(out:PlaneLike, a:Float, b:Float, c:Float, d:Float):Void {
@@ -19596,7 +20086,7 @@ class Sdk {
   }
 
   public static function setSpatialIndexingGuard(guard:Null<SpatialIndexingGuard>):Void {
-    Facade_Sdk_flighthq_spatial_UniformGrid.setSpatialIndexingGuard(guard);
+    Facade_Sdk_flighthq_spatial_SpatialIndexingGuard.setSpatialIndexingGuard(guard);
   }
 
   public static function setSpotLightCone(out:SpotLight, innerDegrees:Float, outerDegrees:Float):Void {
@@ -20379,8 +20869,32 @@ class Sdk {
     Facade_Sdk_flighthq_collision_CollisionSupport2D.supportCollisionAabb2D(shape, dirX, dirY, out);
   }
 
+  public static function supportCollisionAabb3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
+    Facade_Sdk_flighthq_collision_CollisionSupport3D.supportCollisionAabb3D(shape, dirX, dirY, dirZ, out);
+  }
+
+  public static function supportCollisionBox3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
+    Facade_Sdk_flighthq_collision_CollisionSupport3D.supportCollisionBox3D(shape, dirX, dirY, dirZ, out);
+  }
+
+  public static function supportCollisionCapsule3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
+    Facade_Sdk_flighthq_collision_CollisionSupport3D.supportCollisionCapsule3D(shape, dirX, dirY, dirZ, out);
+  }
+
   public static function supportCollisionCircle2D(shape:CollisionShape2D, dirX:Float, dirY:Float, out:Array<Float>):Void {
     Facade_Sdk_flighthq_collision_CollisionSupport2D.supportCollisionCircle2D(shape, dirX, dirY, out);
+  }
+
+  public static function supportCollisionCone3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
+    Facade_Sdk_flighthq_collision_CollisionSupport3D.supportCollisionCone3D(shape, dirX, dirY, dirZ, out);
+  }
+
+  public static function supportCollisionConvex3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
+    Facade_Sdk_flighthq_collision_CollisionSupport3D.supportCollisionConvex3D(shape, dirX, dirY, dirZ, out);
+  }
+
+  public static function supportCollisionCylinder3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
+    Facade_Sdk_flighthq_collision_CollisionSupport3D.supportCollisionCylinder3D(shape, dirX, dirY, dirZ, out);
   }
 
   public static function supportCollisionObb2D(shape:CollisionShape2D, dirX:Float, dirY:Float, out:Array<Float>):Void {
@@ -20389,6 +20903,10 @@ class Sdk {
 
   public static function supportCollisionPolygon2D(shape:CollisionShape2D, dirX:Float, dirY:Float, out:Array<Float>):Void {
     Facade_Sdk_flighthq_collision_CollisionSupport2D.supportCollisionPolygon2D(shape, dirX, dirY, out);
+  }
+
+  public static function supportCollisionSphere3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
+    Facade_Sdk_flighthq_collision_CollisionSupport3D.supportCollisionSphere3D(shape, dirX, dirY, dirZ, out);
   }
 
   public static function suppressVelocity(field:VelocityField, source:flighthq._internal._Object):Void {
@@ -20411,8 +20929,18 @@ class Sdk {
     Facade_Sdk_flighthq_node_NodeOrderList.swapNodeOrderListEntries(list, nodeA, nodeB);
   }
 
+  public static function sweepCollisionHeightfield3D(convex:CollisionShape3D, deltaX:Float, deltaY:Float, deltaZ:Float, heightfield:CollisionHeightfield3D, out:CollisionTimeOfImpact3D, ?maxFraction:Float):Bool {
+    return cast Facade_Sdk_flighthq_collision_TriangleMesh3D.sweepCollisionHeightfield3D(convex, deltaX, deltaY, deltaZ, heightfield, out, maxFraction);
+    return cast null;
+  }
+
   public static function sweepCollisionShape2D(shapeA:CollisionBuiltInShape2D, translationAX:Float, translationAY:Float, shapeB:CollisionBuiltInShape2D, translationBX:Float, translationBY:Float, out:CollisionTimeOfImpact2D, ?maxFraction:Float):Bool {
     return cast Facade_Sdk_flighthq_collision_SweepCollisionShape2D.sweepCollisionShape2D(shapeA, translationAX, translationAY, shapeB, translationBX, translationBY, out, maxFraction);
+    return cast null;
+  }
+
+  public static function sweepCollisionTriangleMesh3D(convex:CollisionShape3D, deltaX:Float, deltaY:Float, deltaZ:Float, mesh:CollisionTriangleMesh3D, out:CollisionTimeOfImpact3D, ?maxFraction:Float):Bool {
+    return cast Facade_Sdk_flighthq_collision_TriangleMesh3D.sweepCollisionTriangleMesh3D(convex, deltaX, deltaY, deltaZ, mesh, out, maxFraction);
     return cast null;
   }
 
@@ -20442,38 +20970,53 @@ class Sdk {
     return cast null;
   }
 
-  public static function testAabbAabbCollision(a:CollisionAabb2D, b:CollisionAabb2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeCollision.testAabbAabbCollision(a, b, out);
+  public static function testAabbAabbCollision2D(a:CollisionAabb2D, b:CollisionAabb2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeCollision2D.testAabbAabbCollision2D(a, b, out);
     return cast null;
   }
 
-  public static function testAabbObbCollision(a:CollisionAabb2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeCollision.testAabbObbCollision(a, b, out);
+  public static function testAabbAabbCollision3D(a:CollisionAabb3D, b:CollisionAabb3D, out:CollisionManifold3D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeCollision3D.testAabbAabbCollision3D(a, b, out);
     return cast null;
   }
 
-  public static function testAabbPolygonCollision(a:CollisionAabb2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeCollision.testAabbPolygonCollision(a, b, out);
+  public static function testAabbObbCollision2D(a:CollisionAabb2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeCollision2D.testAabbObbCollision2D(a, b, out);
     return cast null;
   }
 
-  public static function testCircleAabbCollision(a:CollisionCircle2D, b:CollisionAabb2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeCollision.testCircleAabbCollision(a, b, out);
+  public static function testAabbPolygonCollision2D(a:CollisionAabb2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeCollision2D.testAabbPolygonCollision2D(a, b, out);
     return cast null;
   }
 
-  public static function testCircleCircleCollision(a:CollisionCircle2D, b:CollisionCircle2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeCollision.testCircleCircleCollision(a, b, out);
+  public static function testBoxBoxCollision3D(a:CollisionBox3D, b:CollisionBox3D, out:CollisionManifold3D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeCollision3D.testBoxBoxCollision3D(a, b, out);
     return cast null;
   }
 
-  public static function testCircleObbCollision(a:CollisionCircle2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeCollision.testCircleObbCollision(a, b, out);
+  public static function testCapsuleCapsuleCollision3D(a:CollisionCapsule3D, b:CollisionCapsule3D, out:CollisionManifold3D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeCollision3D.testCapsuleCapsuleCollision3D(a, b, out);
     return cast null;
   }
 
-  public static function testCirclePolygonCollision(a:CollisionCircle2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeCollision.testCirclePolygonCollision(a, b, out);
+  public static function testCircleAabbCollision2D(a:CollisionCircle2D, b:CollisionAabb2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeCollision2D.testCircleAabbCollision2D(a, b, out);
+    return cast null;
+  }
+
+  public static function testCircleCircleCollision2D(a:CollisionCircle2D, b:CollisionCircle2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeCollision2D.testCircleCircleCollision2D(a, b, out);
+    return cast null;
+  }
+
+  public static function testCircleObbCollision2D(a:CollisionCircle2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeCollision2D.testCircleObbCollision2D(a, b, out);
+    return cast null;
+  }
+
+  public static function testCirclePolygonCollision2D(a:CollisionCircle2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeCollision2D.testCirclePolygonCollision2D(a, b, out);
     return cast null;
   }
 
@@ -20482,8 +21025,18 @@ class Sdk {
     return cast null;
   }
 
+  public static function testCollision3D(a:CollisionShape3D, b:CollisionShape3D, out:CollisionManifold3D):Bool {
+    return cast Facade_Sdk_flighthq_collision_TestCollision3D.testCollision3D(a, b, out);
+    return cast null;
+  }
+
   public static function testCollisionSupport2D(a:CollisionShape2D, b:CollisionShape2D, out:CollisionManifold2D):Bool {
     return cast Facade_Sdk_flighthq_collision_Gjk2D.testCollisionSupport2D(a, b, out);
+    return cast null;
+  }
+
+  public static function testCollisionSupport3D(a:CollisionShape3D, b:CollisionShape3D, out:CollisionManifold3D):Bool {
+    return cast Facade_Sdk_flighthq_collision_Gjk3D.testCollisionSupport3D(a, b, out);
     return cast null;
   }
 
@@ -20492,43 +21045,68 @@ class Sdk {
     return cast null;
   }
 
-  public static function testObbObbCollision(a:CollisionObb2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeCollision.testObbObbCollision(a, b, out);
+  public static function testCollisionSupportOverlap3D(a:CollisionShape3D, b:CollisionShape3D):Bool {
+    return cast Facade_Sdk_flighthq_collision_Gjk3D.testCollisionSupportOverlap3D(a, b);
     return cast null;
   }
 
-  public static function testObbPolygonCollision(a:CollisionObb2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeCollision.testObbPolygonCollision(a, b, out);
+  public static function testObbObbCollision2D(a:CollisionObb2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeCollision2D.testObbObbCollision2D(a, b, out);
     return cast null;
   }
 
-  public static function testPolygonPolygonCollision(a:CollisionPolygon2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_ShapeCollision.testPolygonPolygonCollision(a, b, out);
+  public static function testObbPolygonCollision2D(a:CollisionObb2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeCollision2D.testObbPolygonCollision2D(a, b, out);
     return cast null;
   }
 
-  public static function testSegmentAabbCollision(a:CollisionSegment2D, b:CollisionAabb2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_SegmentCollision.testSegmentAabbCollision(a, b);
+  public static function testPolygonPolygonCollision2D(a:CollisionPolygon2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeCollision2D.testPolygonPolygonCollision2D(a, b, out);
     return cast null;
   }
 
-  public static function testSegmentCircleCollision(a:CollisionSegment2D, b:CollisionCircle2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_SegmentCollision.testSegmentCircleCollision(a, b);
+  public static function testSegmentAabbCollision2D(a:CollisionSegment2D, b:CollisionAabb2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_SegmentCollision2D.testSegmentAabbCollision2D(a, b);
     return cast null;
   }
 
-  public static function testSegmentObbCollision(a:CollisionSegment2D, b:CollisionObb2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_SegmentCollision.testSegmentObbCollision(a, b);
+  public static function testSegmentCircleCollision2D(a:CollisionSegment2D, b:CollisionCircle2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_SegmentCollision2D.testSegmentCircleCollision2D(a, b);
     return cast null;
   }
 
-  public static function testSegmentPolygonCollision(a:CollisionSegment2D, b:CollisionPolygon2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_SegmentCollision.testSegmentPolygonCollision(a, b);
+  public static function testSegmentObbCollision2D(a:CollisionSegment2D, b:CollisionObb2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_SegmentCollision2D.testSegmentObbCollision2D(a, b);
     return cast null;
   }
 
-  public static function testSegmentSegmentCollision(a:CollisionSegment2D, b:CollisionSegment2D):Bool {
-    return cast Facade_Sdk_flighthq_collision_SegmentCollision.testSegmentSegmentCollision(a, b);
+  public static function testSegmentPolygonCollision2D(a:CollisionSegment2D, b:CollisionPolygon2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_SegmentCollision2D.testSegmentPolygonCollision2D(a, b);
+    return cast null;
+  }
+
+  public static function testSegmentSegmentCollision2D(a:CollisionSegment2D, b:CollisionSegment2D):Bool {
+    return cast Facade_Sdk_flighthq_collision_SegmentCollision2D.testSegmentSegmentCollision2D(a, b);
+    return cast null;
+  }
+
+  public static function testSphereAabbCollision3D(a:CollisionSphere3D, b:CollisionAabb3D, out:CollisionManifold3D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeCollision3D.testSphereAabbCollision3D(a, b, out);
+    return cast null;
+  }
+
+  public static function testSphereBoxCollision3D(a:CollisionSphere3D, b:CollisionBox3D, out:CollisionManifold3D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeCollision3D.testSphereBoxCollision3D(a, b, out);
+    return cast null;
+  }
+
+  public static function testSphereCapsuleCollision3D(a:CollisionSphere3D, b:CollisionCapsule3D, out:CollisionManifold3D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeCollision3D.testSphereCapsuleCollision3D(a, b, out);
+    return cast null;
+  }
+
+  public static function testSphereSphereCollision3D(a:CollisionSphere3D, b:CollisionSphere3D, out:CollisionManifold3D):Bool {
+    return cast Facade_Sdk_flighthq_collision_ShapeCollision3D.testSphereSphereCollision3D(a, b, out);
     return cast null;
   }
 
@@ -21014,6 +21592,10 @@ class Sdk {
     Facade_Sdk_flighthq_physics2d_MassProperties.updateRigidBody2DMassData(body);
   }
 
+  public static function updateRigidBody3DMassData(body:RigidBody3D):Void {
+    Facade_Sdk_flighthq_physics3d_MassProperties.updateRigidBody3DMassData(body);
+  }
+
   public static function updateScene3DResourceStreaming(scene:Scene3D, resolver:Scene3DResourceResolver, ?options:UpdateScene3DResourceStreamingOptions):Scene3DResources {
     return cast Facade_Sdk_flighthq_scene3dResources_ResolveScene3DResources.updateScene3DResourceStreaming(scene, resolver, options);
     return cast null;
@@ -21021,6 +21603,11 @@ class Sdk {
 
   public static function updateSpatialObject2D(index:SpatialIndex2D, id:SpatialObjectId, bounds:SpatialAabb2D):Bool {
     return cast Facade_Sdk_flighthq_spatial_SpatialIndex.updateSpatialObject2D(index, id, bounds);
+    return cast null;
+  }
+
+  public static function updateSpatialObject3D(index:SpatialIndex3D, id:SpatialObjectId, bounds:SpatialAabb3D):Bool {
+    return cast Facade_Sdk_flighthq_spatial_SpatialIndex3D.updateSpatialObject3D(index, id, bounds);
     return cast null;
   }
 
@@ -21328,6 +21915,19 @@ class Sdk {
     return cast null;
   }
 
+  public static function writeCollisionConvexHullFaces3D(points:Array<Float>, out:Array<Float>):Float {
+    return cast Facade_Sdk_flighthq_collision_ConvexHull3D.writeCollisionConvexHullFaces3D(points, out);
+    return cast null;
+  }
+
+  public static function writeCollisionHeightfieldBounds3D(heightfield:CollisionHeightfield3D, out:CollisionAabb3D):Void {
+    Facade_Sdk_flighthq_collision_TriangleMesh3D.writeCollisionHeightfieldBounds3D(heightfield, out);
+  }
+
+  public static function writeCollisionTriangleMeshBounds3D(mesh:CollisionTriangleMesh3D, out:CollisionAabb3D):Void {
+    Facade_Sdk_flighthq_collision_TriangleMesh3D.writeCollisionTriangleMeshBounds3D(mesh, out);
+  }
+
   public static function writeDialogHandleBinaryFile(handle:FileDialogHandle, data:flighthq._internal._UInt8Array):flighthq._internal._Promise<Bool> {
     return cast Facade_Sdk_flighthq_filesystem_Filesystem.writeDialogHandleBinaryFile(handle, data);
     return cast null;
@@ -21361,6 +21961,20 @@ class Sdk {
 
   public static function writePhysics2DDebugGeometry(world:Physics2DWorld, out:Physics2DDebugGeometry, ?options:{ @:optional var drawCentersOfMass:Null<Bool>; @:optional var drawColliders:Null<Bool>; @:optional var drawContacts:Null<Bool>; @:optional var drawJoints:Null<Bool>; @:optional var centerOfMassRadius:Null<Float>; @:optional var contactNormalLength:Null<Float>; @:optional var pointRadius:Null<Float>; }):Void {
     Facade_Sdk_flighthq_physics2d_DebugGeometry.writePhysics2DDebugGeometry(world, out, options);
+  }
+
+  public static function writePhysics2DJointReaction(world:Physics2DWorld, joint:Physics2DJoint, dt:Float, out:Physics2DJointReaction):Bool {
+    return cast Facade_Sdk_flighthq_physics2d_JointReactions.writePhysics2DJointReaction(world, joint, dt, out);
+    return cast null;
+  }
+
+  public static function writePhysics3DDebugGeometry(world:Physics3DWorld, out:Physics3DDebugGeometry, ?options:{ @:optional var drawCentersOfMass:Null<Bool>; @:optional var drawColliders:Null<Bool>; @:optional var drawContacts:Null<Bool>; @:optional var drawJoints:Null<Bool>; @:optional var centerOfMassRadius:Null<Float>; @:optional var contactNormalLength:Null<Float>; }):Void {
+    Facade_Sdk_flighthq_physics3d_DebugGeometry.writePhysics3DDebugGeometry(world, out, options);
+  }
+
+  public static function writePhysics3DJointReaction(world:Physics3DWorld, joint:Physics3DJoint, dt:Float, out:Physics3DJointReaction):Bool {
+    return cast Facade_Sdk_flighthq_physics3d_JointReaction.writePhysics3DJointReaction(world, joint, dt, out);
+    return cast null;
   }
 
   public static function writeRigidBody3DWorldCenter(body:RigidBody3D, out:Array<Float>):Void {

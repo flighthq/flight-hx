@@ -18,6 +18,11 @@ class _Console {
 
   static function print(values:Array<Dynamic>):Void {
     while (values.length > 0 && values[values.length - 1] == null) values.pop();
-    Sys.println(values.map(Std.string).join(' '));
+    final line = values.map(Std.string).join(' ');
+    #if js
+    js.Syntax.code("console.log({0})", line);
+    #else
+    Sys.println(line);
+    #end
   }
 }

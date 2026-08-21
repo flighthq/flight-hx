@@ -5,8 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.debug.DebugTiming as Facade_Debug_flighthq_debug_DebugTiming;
 import flighthq.log.Log.addLogSink;
+import flighthq.log.Log.clearLogChannelLevel;
 import flighthq.log.Log.clearLogChannelLevels;
 import flighthq.log.Log.createConsoleLogSink;
+import flighthq.log.Log.getLogChannelLevel;
 import flighthq.log.Log.getLogLevel;
 import flighthq.log.Log.removeLogSink;
 import flighthq.log.Log.setLogChannelLevel;
@@ -99,24 +101,57 @@ class Debug {
     var level:LogLevel = cast _Runtime.UNDEFINED;
     var subsystems:Array<DebugSubsystemHooks> = cast _Runtime.UNDEFINED;
     var channels:Array<String> = cast _Runtime.UNDEFINED;
+    var savedChannelLevels:flighthq._internal._Map<String, Null<Float>> = cast _Runtime.UNDEFINED;
     if ((cast Debug._enabled__debug : Bool)) { return; }
     level = _Runtime.coalesce(_Runtime.field(options, 'level'), function():Dynamic return cast LogLevel.Debug);
     subsystems = (cast Debug._resolveDebugSubsystems__debug(_Runtime.field(options, 'subsystems')) : Array<DebugSubsystemHooks>);
     channels = (cast Debug._collectDebugChannels__debug(({ final __callArgument13:Dynamic = subsystems; __callArgument13; }), _Runtime.field(options, 'channels')) : Array<String>);
     (Debug._savedGlobalLevel__debug = cast ((cast getLogLevel() : LogLevel) : Dynamic));
-    Debug._applyDebugLevels__debug(({ final __callArgument14:Dynamic = level; __callArgument14; }), ({ final __callArgument15:Dynamic = channels; __callArgument15; }));
-    Debug._installDebugSink__debug(({ final __callArgument16:Dynamic = _Runtime.coalesce(_Runtime.field(options, 'sink'), function():Dynamic return cast (cast createConsoleLogSink(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : LogSink)); __callArgument16; }));
-    for (hooks in _Runtime.iterable(subsystems)) {
-      _Runtime.callOptionalProperty(hooks, 'enableGuards', cast ([] : Array<Dynamic>));
-      _Runtime.callProperty(Debug._enabledSubsystems__debug, 'push', cast ([hooks] : Array<Dynamic>));
+    savedChannelLevels = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [(cast _Runtime.mapArray((cast channels : Array<String>), function(channel:String, __unused0:Float, __unused1:Array<String>):Array<flighthq._internal._Union2<String, Null<Float>>> return cast ([channel, (cast getLogChannelLevel((cast channel : String)) : Null<Float>)] : Array<Dynamic>), _Runtime.UNDEFINED))]);
+    try {
+      Debug._applyDebugLevels__debug(({ final __callArgument14:Dynamic = level; __callArgument14; }), ({ final __callArgument15:Dynamic = channels; __callArgument15; }));
+      Debug._installDebugSink__debug(({ final __callArgument16:Dynamic = _Runtime.coalesce(_Runtime.field(options, 'sink'), function():Dynamic return cast (cast createConsoleLogSink(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : LogSink)); __callArgument16; }));
+      for (hooks in _Runtime.iterable(subsystems)) {
+        _Runtime.callProperty(Debug._enabledSubsystems__debug, 'push', cast ([hooks] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(hooks, 'enableGuards', cast ([] : Array<Dynamic>));
+      }
+    } catch (error:Dynamic) {
+      {
+        var index:Float = _Runtime.subtractNumbers(_Runtime.field(Debug._enabledSubsystems__debug, 'length'), 1.0);
+        while ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool)) {
+          try {
+            _Runtime.callOptionalProperty(flighthq._internal._StaticIndex.readArray(Debug._enabledSubsystems__debug, index), 'disableGuards', cast ([] : Array<Dynamic>));
+          } catch (__error:Dynamic) {
+          }
+          index--;
+        }
+      }
+      _Runtime.setLength(Debug._enabledSubsystems__debug, 0.0);
+      try {
+        Debug._removeDebugSink__debug();
+      } catch (__error:Dynamic) {
+      }
+      for (__iteration2 in _Runtime.iterable(savedChannelLevels)) {
+        var channel:String = flighthq._internal._StaticIndex.readArray(__iteration2, 0.0);
+        var savedLevel:Null<Float> = flighthq._internal._StaticIndex.readArray(__iteration2, 1.0);
+        try {
+          if ((cast _Runtime.strictEquals(savedLevel, null) : Bool)) { clearLogChannelLevel((cast channel : String)); } else { setLogChannelLevel((cast channel : String), ({ final __callArgument21:Dynamic = savedLevel; __callArgument21; })); }
+        } catch (__error:Dynamic) {
+        }
+      }
+      try {
+        setLogLevel(({ final __callArgument22:Dynamic = Debug._savedGlobalLevel__debug; __callArgument22; }));
+      } catch (__error:Dynamic) {
+      }
+      _Runtime.throwValue(error);
     }
     (Debug._enabled__debug = cast (true : Dynamic));
   }
 
   public static function enableFlightDiagnostics(state:RenderState):Void {
     enableDebug(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    enableColorAdjustmentGuards(({ final __callArgument19:Dynamic = state; __callArgument19; }));
-    enableRenderRegistryGuards(({ final __callArgument20:Dynamic = state; __callArgument20; }));
+    enableColorAdjustmentGuards(({ final __callArgument23:Dynamic = state; __callArgument23; }));
+    enableRenderRegistryGuards(({ final __callArgument24:Dynamic = state; __callArgument24; }));
   }
 
   public static function endDebugSpan(timer:Null<LogTimer>):Float {

@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const createPhysics3DBallAndSocketJoint = api.createPhysics3DBallAndSocketJoint;
 export const createPhysics3DConeTwistJoint = api.createPhysics3DConeTwistJoint;
+export const createPhysics3DDistanceJoint = api.createPhysics3DDistanceJoint;
 export const createPhysics3DFixedJoint = api.createPhysics3DFixedJoint;
 export const createPhysics3DGeneric6DofJoint = api.createPhysics3DGeneric6DofJoint;
 export const createPhysics3DHingeJoint = api.createPhysics3DHingeJoint;
