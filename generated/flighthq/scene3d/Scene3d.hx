@@ -59,22 +59,22 @@ class Scene3d {
     return cast null;
   }
 
-  public static function createBillboard(geometry:MeshGeometry, materials:Array<Null<Material>>, ?mode:BillboardMode, ?kind:Kind, ?obj:flighthq._internal._Partial<flighthq._internal._Pick<Billboard, String>>):Billboard {
+  public static function createBillboard(geometry:MeshGeometry, materials:Array<Null<Material>>, ?mode:BillboardMode, ?kind:Kind, ?obj:flighthq._internal._Partial<{ var enabled:Bool; var name:Null<String>; }>):Billboard {
     return cast Facade_Scene3d_flighthq_scene3d_Billboard.createBillboard(geometry, materials, mode, kind, obj);
     return cast null;
   }
 
-  public static function createMesh(geometry:MeshGeometry, materials:Array<Null<Material>>, ?kind:Kind, ?obj:flighthq._internal._Partial<flighthq._internal._Pick<Mesh, String>>):Mesh {
+  public static function createMesh(geometry:MeshGeometry, materials:Array<Null<Material>>, ?kind:Kind, ?obj:flighthq._internal._Partial<{ var enabled:Bool; var name:Null<String>; }>):Mesh {
     return cast Facade_Scene3d_flighthq_scene3d_Mesh.createMesh(geometry, materials, kind, obj);
     return cast null;
   }
 
-  public static function createNode3D(?kind:Kind, ?obj:flighthq._internal._Partial<flighthq._internal._Pick<Node3D, String>>):Node3D {
+  public static function createNode3D(?kind:Kind, ?obj:flighthq._internal._Partial<{ var enabled:Bool; var name:Null<String>; var alpha:Float; var visible:Bool; }>):Node3D {
     return cast Facade_Scene3d_flighthq_scene3d_SceneNode.createNode3D(kind, obj);
     return cast null;
   }
 
-  public static function createScene3D(?obj:flighthq._internal._Partial<flighthq._internal._Pick<Node3D, String>>):Scene3D {
+  public static function createScene3D(?obj:flighthq._internal._Partial<{ var enabled:Bool; var name:Null<String>; }>):Scene3D {
     return cast Facade_Scene3d_flighthq_scene3d_Scene.createScene3D(obj);
     return cast null;
   }
@@ -179,12 +179,14 @@ class Scene3d {
 
   public static final Node3DKind:String = Facade_Scene3d_flighthq_types__internal__Node3DValues.Node3DKind;
 
-  public static function orientBillboardToCamera(billboard:Billboard, camera:Camera3D):Void {
-    Facade_Scene3d_flighthq_scene3d_BillboardCamera.orientBillboardToCamera(billboard, camera);
+  public static function orientBillboardToCamera(billboard:Billboard, camera:Camera3D):Bool {
+    return cast Facade_Scene3d_flighthq_scene3d_BillboardCamera.orientBillboardToCamera(billboard, camera);
+    return cast null;
   }
 
-  public static function orientScene3DBillboardsToCamera(scene:Node3D, camera:Camera3D):Void {
-    Facade_Scene3d_flighthq_scene3d_BillboardCamera.orientScene3DBillboardsToCamera(scene, camera);
+  public static function orientScene3DBillboardsToCamera(scene:Node3D, camera:Camera3D):Bool {
+    return cast Facade_Scene3d_flighthq_scene3d_BillboardCamera.orientScene3DBillboardsToCamera(scene, camera);
+    return cast null;
   }
 
   public static function prepareScene3DMorph(scene:NodeAny):Void {

@@ -5,4 +5,5 @@ const api = compiled.flighthq.node.HasAppearance;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const initAppearanceRuntimeTrait = api.initAppearanceRuntimeTrait;
 export const initAppearanceTrait = api.initAppearanceTrait;

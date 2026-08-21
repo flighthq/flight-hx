@@ -19,12 +19,16 @@ class GlEnvironmentSkybox {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var sky:GlSkybox__glEnvironmentSkybox = cast _Runtime.UNDEFINED;
     var prevDepthTest:Bool = cast _Runtime.UNDEFINED;
+    var prevDepthMask:Bool = cast _Runtime.UNDEFINED;
+    var prevBlend:Bool = cast _Runtime.UNDEFINED;
     cube = (cast ensureGlEnvironmentSourceCube(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = environment; __callArgument1; })) : Null<flighthq._internal.dom.WebGLTexture>);
     if ((cast _Runtime.strictEquals(cube, null) : Bool)) { return; }
     gl = (cast state : GlRenderState).gl;
     sky = (cast GlEnvironmentSkybox.ensureGlSkybox__glEnvironmentSkybox(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlSkybox__glEnvironmentSkybox);
     if ((cast !(cast (cast updateCamera3DInverseViewProjection(({ final __callArgument3:Dynamic = camera; __callArgument3; }), (cast aspect : Float)) : Bool) : Bool) : Bool)) { return; }
-    prevDepthTest = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST)) : Bool);
+    prevDepthTest = flighthq._internal.backend.WebGl2Backend.isEnabled(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST));
+    prevDepthMask = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_WRITEMASK', flighthq._internal.backend.WebGl2Backend.DEPTH_WRITEMASK)) : Bool);
+    prevBlend = flighthq._internal.backend.WebGl2Backend.isEnabled(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND));
     flighthq._internal.backend.WebGl2Backend.depthMask(gl, false);
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST));
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND));
@@ -37,8 +41,9 @@ class GlEnvironmentSkybox {
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast sky : GlSkybox__glEnvironmentSkybox).vao);
     flighthq._internal.backend.WebGl2Backend.drawArrays(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLE_STRIP', flighthq._internal.backend.WebGl2Backend.TRIANGLE_STRIP), 0.0, 4.0);
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, null);
-    flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
+    flighthq._internal.backend.WebGl2Backend.depthMask(gl, prevDepthMask);
     if ((cast prevDepthTest : Bool)) { flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST)); }
+    if ((cast prevBlend : Bool)) { flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND)); }
   }
 
   public static function ensureGlSkybox__glEnvironmentSkybox(state:GlRenderState):GlSkybox__glEnvironmentSkybox {

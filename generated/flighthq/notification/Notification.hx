@@ -301,7 +301,7 @@ class Notification {
         ((cast _showListeners : flighthq._internal._Set<String->Void>).delete_(listener));
       };
       return cast _Runtime.UNDEFINED;
-    }, updateNotification: function(id:String, partial:flighthq._internal._Any):flighthq._internal._Promise<Bool> {
+    }, updateNotification: function(id:String, partial:{ @:optional var title:Null<String>; @:optional var id:Null<String>; @:optional var body:Null<String>; @:optional var icon:Null<String>; @:optional var badge:Null<String>; @:optional var tag:Null<String>; @:optional var silent:Null<Bool>; @:optional var actions:Null<Array<NotificationAction>>; @:optional var dir:Null<String>; @:optional var image:Null<String>; @:optional var lang:Null<String>; @:optional var renotify:Null<Bool>; @:optional var requireInteraction:Null<Bool>; @:optional var timestamp:Null<Float>; @:optional var vibrate:Null<Array<Float>>; @:optional var data:flighthq._internal._Any; }):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var merged:NotificationRequest = cast _Runtime.UNDEFINED;
@@ -326,9 +326,7 @@ class Notification {
         })
       );
     } });
-    {
-    }
-    internal = (cast backend : Dynamic);
+    internal = (cast backend : { >NotificationBackend, var _dispatchAction:String->String->Void; var _dispatchClick:String->Void; var _dispatchDismiss:String->Void; var _dispatchReply:String->String->String->Void; });
     ((cast internal : { var _dispatchAction:String->String->Void; })._dispatchAction = (cast function(notificationId:String, actionId:String):Void {
       for (fn in _Runtime.iterable(_actionListeners)) {
         fn((cast notificationId : String), (cast actionId : String));
@@ -549,7 +547,7 @@ class Notification {
         ((cast _showListeners : flighthq._internal._Set<String->Void>).delete_(listener));
       };
       return cast _Runtime.UNDEFINED;
-    }, updateNotification: function(id:String, partial:flighthq._internal._Any):flighthq._internal._Promise<Bool> {
+    }, updateNotification: function(id:String, partial:{ @:optional var title:Null<String>; @:optional var id:Null<String>; @:optional var body:Null<String>; @:optional var icon:Null<String>; @:optional var badge:Null<String>; @:optional var tag:Null<String>; @:optional var silent:Null<Bool>; @:optional var actions:Null<Array<NotificationAction>>; @:optional var dir:Null<String>; @:optional var image:Null<String>; @:optional var lang:Null<String>; @:optional var renotify:Null<Bool>; @:optional var requireInteraction:Null<Bool>; @:optional var timestamp:Null<Float>; @:optional var vibrate:Null<Array<Float>>; @:optional var data:flighthq._internal._Any; }):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var existing:Null<flighthq._internal.dom.Notification> = cast _Runtime.UNDEFINED;
@@ -699,8 +697,8 @@ class Notification {
     return cast null;
   }
 
-  public static function updateNotification(id:String, partial:flighthq._internal._Partial<NotificationRequest>):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getNotificationBackend() : NotificationBackend) : NotificationBackend).updateNotification((cast id : String), (cast partial : flighthq._internal._Any));
+  public static function updateNotification(id:String, partial:{ @:optional var title:Null<String>; @:optional var id:Null<String>; @:optional var body:Null<String>; @:optional var icon:Null<String>; @:optional var badge:Null<String>; @:optional var tag:Null<String>; @:optional var silent:Null<Bool>; @:optional var actions:Null<Array<NotificationAction>>; @:optional var dir:Null<String>; @:optional var image:Null<String>; @:optional var lang:Null<String>; @:optional var renotify:Null<Bool>; @:optional var requireInteraction:Null<Bool>; @:optional var timestamp:Null<Float>; @:optional var vibrate:Null<Array<Float>>; @:optional var data:flighthq._internal._Any; }):flighthq._internal._Promise<Bool> {
+    return cast (cast (cast getNotificationBackend() : NotificationBackend) : NotificationBackend).updateNotification((cast id : String), (cast partial : Dynamic));
     return cast null;
   }
 }

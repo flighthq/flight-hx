@@ -3,12 +3,16 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './enableShapeBoundsGuards.mjs';
 export * from './explainShapeTessellation.mjs';
 export * from './morphShape.mjs';
 export * from './morphShapeAnimation.mjs';
+export * from './registerDefaultShapeBoundsCommands.mjs';
 export * from './scale9Shape.mjs';
 export * from './scale9ShapeCommands.mjs';
 export * from './shape.mjs';
+export * from './shapeBounds.mjs';
+export * from './shapeBoundsRegistry.mjs';
 export * from './shapeCommands.mjs';
 export * from './shapeFill.mjs';
 export * from './shapeStroke.mjs';

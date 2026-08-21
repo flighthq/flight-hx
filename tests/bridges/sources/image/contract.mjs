@@ -3,6 +3,7 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './imageBackend.mjs';
 export * from './imageResource.mjs';
 export * from './imageResourceFrom.mjs';
 export * from './imageResourceReference.mjs';

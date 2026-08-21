@@ -3,13 +3,13 @@ package flighthq.collision;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.collision.CollisionShapeValidation.getCollisionPolygonValidationStatus;
-import flighthq.types.Collision.CollisionShape;
+import flighthq.collision.CollisionShapeValidation.getCollisionPolygonValidationStatus2D;
+import flighthq.types.Collision.CollisionBuiltInShape2D;
 
 class PointContainment {
   public static final RELATIVE_EPSILON__pointContainment:Float = 1e-9;
 
-  public static function getCollisionShapeContainsPoint(shape:CollisionShape, x:Float, y:Float):Bool {
+  public static function getCollisionShapeContainsPoint2D(shape:CollisionBuiltInShape2D, x:Float, y:Float):Bool {
     {
       var __switchValue = (cast shape : { var kind:String; }).kind;
       if (__switchValue == 'circle') {
@@ -34,7 +34,7 @@ class PointContainment {
         }
       }
       else if (__switchValue == 'polygon') {
-        if ((cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus((cast shape : { var points:Array<Float>; }).points) : Null<String>), null) : Bool)) { return cast false; }
+        if ((cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus2D((cast shape : { var points:Array<Float>; }).points) : Null<String>), null) : Bool)) { return cast false; }
         return cast (cast PointContainment.isPointInConvexPolygon__pointContainment((cast x : Float), (cast y : Float), (cast shape : { var points:Array<Float>; }).points, (cast (_Runtime.toInt32(_Runtime.field((cast shape : { var points:Array<Float>; }).points, 'length')) >> 1) : Float)) : Bool);
       }
       else if (__switchValue == 'segment') {

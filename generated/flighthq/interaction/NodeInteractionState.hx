@@ -31,7 +31,7 @@ class NodeInteractionState {
   }
 
   public static function getNodeHitArea(source:NodeAny):Null<HitArea> {
-    return cast _Runtime.coalesce(({ final __typedStruct5 = (cast getNodeInteractionState(({ final __callArgument4:Dynamic = source; __callArgument4; })) : Null<flighthq.types.NodeInteractionState>); __typedStruct5 == null ? _Runtime.UNDEFINED : (cast __typedStruct5 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Rectangle, String>, NodeAny>, Path>>; }).hitArea; }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __typedStruct5 = (cast getNodeInteractionState(({ final __callArgument4:Dynamic = source; __callArgument4; })) : Null<flighthq.types.NodeInteractionState>); __typedStruct5 == null ? _Runtime.UNDEFINED : (cast __typedStruct5 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Path, Rectangle>, String>, NodeAny>>; }).hitArea; }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -64,7 +64,7 @@ class NodeInteractionState {
   }
 
   public static function setNodeHitArea(source:NodeAny, hitArea:Null<HitArea>):Void {
-    ((cast (cast enableNodeInteractionState(({ final __callArgument14:Dynamic = source; __callArgument14; })) : flighthq.types.NodeInteractionState) : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Rectangle, String>, NodeAny>, Path>>; }).hitArea = cast (hitArea : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Rectangle, String>, NodeAny>, Path>>));
+    ((cast (cast enableNodeInteractionState(({ final __callArgument14:Dynamic = source; __callArgument14; })) : flighthq.types.NodeInteractionState) : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Path, Rectangle>, String>, NodeAny>>; }).hitArea = cast (hitArea : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Path, Rectangle>, String>, NodeAny>>));
   }
 
   public static function setNodeHitTestEnabled(source:NodeAny, enabled:Bool):Void {

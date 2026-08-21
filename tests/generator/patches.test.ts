@@ -2,7 +2,7 @@ import ts from 'typescript';
 
 import { lowerTypeScriptSource } from '../../tools/generator/src/lower/typescript.ts';
 import type { SemanticPatch } from '../../tools/generator/src/model/patch.ts';
-import { applySemanticPatches } from '../../tools/generator/src/patch/apply.ts';
+import { applySemanticPatches, semanticBodyPatchFunctionNames } from '../../tools/generator/src/patch/apply.ts';
 
 function fixture() {
   const source = ts.createSourceFile(
@@ -28,6 +28,43 @@ function fixture() {
 }
 
 describe('semantic patches', () => {
+  it('lets a body patch own syntax that the general lowerer cannot represent', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/math/src/accessor.ts',
+      'function createCursor(): { readonly length: number } { return { get length() { return 1; } }; }',
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const patch = {
+      expect: { astHash: 'sha256:fixture', kind: 'function' as const },
+      fragment: 'fixture.hx',
+      id: 'math.cursor',
+      operation: 'replaceBody' as const,
+      reason: 'Exercise body ownership before semantic patch application.',
+      target: {
+        export: 'createCursor__accessor',
+        package: '@flighthq/math',
+        source: 'upstream/packages/math/src/accessor.ts',
+      },
+    };
+
+    const unowned = lowerTypeScriptSource(source, '@flighthq/math', '/workspace');
+    expect(unowned.declarations).toHaveLength(0);
+    expect(unowned.diagnostics).toHaveLength(1);
+
+    const owned = lowerTypeScriptSource(source, '@flighthq/math', '/workspace', undefined, undefined, {
+      ownedFunctionBodies: semanticBodyPatchFunctionNames(
+        [patch],
+        '@flighthq/math',
+        'upstream/packages/math/src/accessor.ts',
+      ),
+    });
+    expect(owned.declarations).toHaveLength(1);
+    expect(owned.declarations[0]).toMatchObject({ body: [], kind: 'function', name: 'createCursor' });
+    expect(owned.diagnostics).toHaveLength(0);
+  });
+
   it('applies an exact fingerprinted operation and audits it', () => {
     const { base, declaration, declarations } = fixture();
     const patch = { ...base, name: 'clampValue', operation: 'rename' as const };

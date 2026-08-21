@@ -3,13 +3,13 @@ package flighthq.spatial;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.spatial.ExplainSpatialIndexing as Facade_Spatial_flighthq_spatial_ExplainSpatialIndexing;
+import flighthq.spatial.ExplainSpatialIndexing2D as Facade_Spatial_flighthq_spatial_ExplainSpatialIndexing2D;
 import flighthq.spatial.FormatSpatialIndexingNotice as Facade_Spatial_flighthq_spatial_FormatSpatialIndexingNotice;
 import flighthq.spatial.SpatialIndex as Facade_Spatial_flighthq_spatial_SpatialIndex;
 import flighthq.spatial.UniformGrid as Facade_Spatial_flighthq_spatial_UniformGrid;
-import flighthq.types.Spatial.SpatialAabb;
-import flighthq.types.Spatial.SpatialIndex;
-import flighthq.types.Spatial.SpatialIndexBackend;
+import flighthq.types.Spatial.SpatialAabb2D;
+import flighthq.types.Spatial.SpatialIndex2D;
+import flighthq.types.Spatial.SpatialIndexBackend2D;
 import flighthq.types.Spatial.SpatialObjectId;
 import flighthq.types.Spatial.SpatialPair;
 import flighthq.types.SpatialIndexing.SpatialIndexingExplanation;
@@ -17,22 +17,22 @@ import flighthq.types.SpatialIndexing.SpatialIndexingGuard;
 import flighthq.types.SpatialIndexing.SpatialIndexingNotice;
 
 class Spatial {
-  public static function clearSpatialIndex(index:SpatialIndex):Void {
-    Facade_Spatial_flighthq_spatial_SpatialIndex.clearSpatialIndex(index);
+  public static function clearSpatialIndex2D(index:SpatialIndex2D):Void {
+    Facade_Spatial_flighthq_spatial_SpatialIndex.clearSpatialIndex2D(index);
   }
 
-  public static function createSpatialIndex(?backend:SpatialIndexBackend):SpatialIndex {
-    return cast Facade_Spatial_flighthq_spatial_SpatialIndex.createSpatialIndex(backend);
+  public static function createSpatialIndex2D(?backend:SpatialIndexBackend2D):SpatialIndex2D {
+    return cast Facade_Spatial_flighthq_spatial_SpatialIndex.createSpatialIndex2D(backend);
     return cast null;
   }
 
-  public static function createUniformGridSpatialBackend(cellSize:Float):SpatialIndexBackend {
-    return cast Facade_Spatial_flighthq_spatial_UniformGrid.createUniformGridSpatialBackend(cellSize);
+  public static function createUniformGridSpatialBackend2D(cellSize:Float):SpatialIndexBackend2D {
+    return cast Facade_Spatial_flighthq_spatial_UniformGrid.createUniformGridSpatialBackend2D(cellSize);
     return cast null;
   }
 
-  public static function explainSpatialIndexing(index:SpatialIndex, id:SpatialObjectId):SpatialIndexingExplanation {
-    return cast Facade_Spatial_flighthq_spatial_ExplainSpatialIndexing.explainSpatialIndexing(index, id);
+  public static function explainSpatialIndexing2D(index:SpatialIndex2D, id:SpatialObjectId):SpatialIndexingExplanation {
+    return cast Facade_Spatial_flighthq_spatial_ExplainSpatialIndexing2D.explainSpatialIndexing2D(index, id);
     return cast null;
   }
 
@@ -41,39 +41,39 @@ class Spatial {
     return cast null;
   }
 
-  public static function insertSpatialObject(index:SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Bool {
-    return cast Facade_Spatial_flighthq_spatial_SpatialIndex.insertSpatialObject(index, id, bounds);
+  public static function insertSpatialObject2D(index:SpatialIndex2D, id:SpatialObjectId, bounds:SpatialAabb2D):Bool {
+    return cast Facade_Spatial_flighthq_spatial_SpatialIndex.insertSpatialObject2D(index, id, bounds);
     return cast null;
   }
 
   public static final MAX_INDEXED_CELLS_PER_OBJECT:Float = Facade_Spatial_flighthq_spatial_UniformGrid.MAX_INDEXED_CELLS_PER_OBJECT;
 
-  public static function querySpatialPairs(index:SpatialIndex, out:Array<SpatialPair>):Void {
-    Facade_Spatial_flighthq_spatial_SpatialIndex.querySpatialPairs(index, out);
+  public static function querySpatialPairs2D(index:SpatialIndex2D, out:Array<SpatialPair>):Void {
+    Facade_Spatial_flighthq_spatial_SpatialIndex.querySpatialPairs2D(index, out);
   }
 
-  public static function querySpatialPoint(index:SpatialIndex, x:Float, y:Float, out:Array<SpatialObjectId>):Void {
-    Facade_Spatial_flighthq_spatial_SpatialIndex.querySpatialPoint(index, x, y, out);
+  public static function querySpatialPoint2D(index:SpatialIndex2D, x:Float, y:Float, out:Array<SpatialObjectId>):Void {
+    Facade_Spatial_flighthq_spatial_SpatialIndex.querySpatialPoint2D(index, x, y, out);
   }
 
-  public static function querySpatialRay(index:SpatialIndex, x:Float, y:Float, dx:Float, dy:Float, out:Array<SpatialObjectId>):Void {
-    Facade_Spatial_flighthq_spatial_SpatialIndex.querySpatialRay(index, x, y, dx, dy, out);
+  public static function querySpatialRay2D(index:SpatialIndex2D, x:Float, y:Float, dx:Float, dy:Float, out:Array<SpatialObjectId>):Void {
+    Facade_Spatial_flighthq_spatial_SpatialIndex.querySpatialRay2D(index, x, y, dx, dy, out);
   }
 
-  public static function querySpatialRegion(index:SpatialIndex, region:SpatialAabb, out:Array<SpatialObjectId>):Void {
-    Facade_Spatial_flighthq_spatial_SpatialIndex.querySpatialRegion(index, region, out);
+  public static function querySpatialRegion2D(index:SpatialIndex2D, region:SpatialAabb2D, out:Array<SpatialObjectId>):Void {
+    Facade_Spatial_flighthq_spatial_SpatialIndex.querySpatialRegion2D(index, region, out);
   }
 
-  public static function removeSpatialObject(index:SpatialIndex, id:SpatialObjectId):Void {
-    Facade_Spatial_flighthq_spatial_SpatialIndex.removeSpatialObject(index, id);
+  public static function removeSpatialObject2D(index:SpatialIndex2D, id:SpatialObjectId):Void {
+    Facade_Spatial_flighthq_spatial_SpatialIndex.removeSpatialObject2D(index, id);
   }
 
   public static function setSpatialIndexingGuard(guard:Null<SpatialIndexingGuard>):Void {
     Facade_Spatial_flighthq_spatial_UniformGrid.setSpatialIndexingGuard(guard);
   }
 
-  public static function updateSpatialObject(index:SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Bool {
-    return cast Facade_Spatial_flighthq_spatial_SpatialIndex.updateSpatialObject(index, id, bounds);
+  public static function updateSpatialObject2D(index:SpatialIndex2D, id:SpatialObjectId, bounds:SpatialAabb2D):Bool {
+    return cast Facade_Spatial_flighthq_spatial_SpatialIndex.updateSpatialObject2D(index, id, bounds);
     return cast null;
   }
 }

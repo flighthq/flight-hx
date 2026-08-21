@@ -12,10 +12,13 @@ import flighthq.spritesheet.SpritesheetFrom as Facade_Spritesheet_flighthq_sprit
 import flighthq.spritesheet.SpritesheetPlayer as Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer;
 import flighthq.spritesheet.SpritesheetValidation as Facade_Spritesheet_flighthq_spritesheet_SpritesheetValidation;
 import flighthq.types.Entity;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.GridSliceOptions;
+import flighthq.types.Signal;
 import flighthq.types.Spritesheet;
 import flighthq.types.SpritesheetAnimation;
 import flighthq.types.SpritesheetAnimationData;
+import flighthq.types.SpritesheetAnimationDirection;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrame;
 import flighthq.types.SpritesheetFrameData;
@@ -41,37 +44,37 @@ class Spritesheet {
     return cast null;
   }
 
-  public static function createSpritesheet(?obj:flighthq._internal._Partial<flighthq.types.Spritesheet>):flighthq.types.Spritesheet {
+  public static function createSpritesheet(?obj:{ @:optional var atlas:Null<TextureAtlas>; @:optional var animations:Null<flighthq._internal._Record<String, SpritesheetAnimation>>; @:optional var frames:Null<Array<SpritesheetFrame>>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):flighthq.types.Spritesheet {
     return cast (cast createEntity((cast { atlas: _Runtime.coalesce(({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var atlas:Null<TextureAtlas>; }).atlas; }), function():Dynamic return cast null), animations: _Runtime.coalesce(({ final __structural2 = obj; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var animations:Null<flighthq._internal._Record<String, SpritesheetAnimation>>; }).animations; }), function():Dynamic return cast {  }), frames: _Runtime.coalesce(({ final __structural3 = obj; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var frames:Null<Array<SpritesheetFrame>>; }).frames; }), function():Dynamic return cast cast ([] : Array<Dynamic>)) } : Dynamic)) : { >Entity, var atlas:Null<TextureAtlas>; var animations:flighthq._internal._Record<String, SpritesheetAnimation>; var frames:Array<SpritesheetFrame>; });
     return cast null;
   }
 
-  public static function createSpritesheetAnimation(?obj:flighthq._internal._Partial<SpritesheetAnimation>):SpritesheetAnimation {
+  public static function createSpritesheetAnimation(?obj:{ @:optional var frames:Null<Array<Float>>; @:optional var frameDuration:Null<Float>; @:optional var frameDurations:Null<Array<Float>>; @:optional var direction:Null<SpritesheetAnimationDirection>; @:optional var repeatCount:Null<Float>; @:optional var originX:Null<Float>; @:optional var originY:Null<Float>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):SpritesheetAnimation {
     return cast Facade_Spritesheet_flighthq_spritesheet_SpritesheetAnimation.createSpritesheetAnimation(obj);
     return cast null;
   }
 
-  public static function createSpritesheetAnimationData(?obj:flighthq._internal._Partial<SpritesheetAnimationData>):SpritesheetAnimationData {
+  public static function createSpritesheetAnimationData(?obj:{ @:optional var direction:Null<SpritesheetAnimationDirection>; @:optional var frameDuration:Null<Float>; @:optional var frameDurations:Null<Array<Float>>; @:optional var frameNames:Null<Array<String>>; @:optional var repeatCount:Null<Float>; @:optional var name:Null<String>; @:optional var originX:Null<Float>; @:optional var originY:Null<Float>; }):SpritesheetAnimationData {
     return cast Facade_Spritesheet_flighthq_spritesheet_SpritesheetData.createSpritesheetAnimationData(obj);
     return cast null;
   }
 
-  public static function createSpritesheetAnimationFromFrameNames(spritesheet:flighthq.types.Spritesheet, pattern:Dynamic, ?options:flighthq._internal._Partial<flighthq._internal._Pick<SpritesheetAnimation, String>>):Null<SpritesheetAnimation> {
+  public static function createSpritesheetAnimationFromFrameNames(spritesheet:flighthq.types.Spritesheet, pattern:Dynamic, ?options:flighthq._internal._Partial<{ var frameDuration:Float; var frameDurations:Null<Array<Float>>; var direction:SpritesheetAnimationDirection; var repeatCount:Float; var originX:Float; var originY:Float; }>):Null<SpritesheetAnimation> {
     return cast Facade_Spritesheet_flighthq_spritesheet_SpritesheetAnimation.createSpritesheetAnimationFromFrameNames(spritesheet, pattern, options);
     return cast null;
   }
 
-  public static function createSpritesheetData(?obj:flighthq._internal._Partial<SpritesheetData>):SpritesheetData {
+  public static function createSpritesheetData(?obj:{ @:optional var animations:Null<Array<SpritesheetAnimationData>>; @:optional var frames:Null<Array<SpritesheetFrameData>>; @:optional var imageFile:Null<String>; @:optional var imageHeight:Null<Float>; @:optional var imageWidth:Null<Float>; @:optional var scale:Null<Float>; }):SpritesheetData {
     return cast Facade_Spritesheet_flighthq_spritesheet_SpritesheetData.createSpritesheetData(obj);
     return cast null;
   }
 
-  public static function createSpritesheetFrame(?obj:flighthq._internal._Partial<SpritesheetFrame>):SpritesheetFrame {
+  public static function createSpritesheetFrame(?obj:{ @:optional var id:Null<Float>; @:optional var offsetX:Null<Float>; @:optional var offsetY:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var rotated:Null<Bool>; }):SpritesheetFrame {
     return cast Facade_Spritesheet_flighthq_spritesheet_SpritesheetFrame.createSpritesheetFrame(obj);
     return cast null;
   }
 
-  public static function createSpritesheetFrameData(?obj:flighthq._internal._Partial<SpritesheetFrameData>):SpritesheetFrameData {
+  public static function createSpritesheetFrameData(?obj:{ @:optional var height:Null<Float>; @:optional var name:Null<String>; @:optional var offsetX:Null<Float>; @:optional var offsetY:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var rotated:Null<Bool>; @:optional var sourceHeight:Null<Float>; @:optional var sourceWidth:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; }):SpritesheetFrameData {
     return cast Facade_Spritesheet_flighthq_spritesheet_SpritesheetData.createSpritesheetFrameData(obj);
     return cast null;
   }
@@ -86,7 +89,7 @@ class Spritesheet {
     return cast null;
   }
 
-  public static function createSpritesheetPlayer(?obj:flighthq._internal._Partial<SpritesheetPlayer>):SpritesheetPlayer {
+  public static function createSpritesheetPlayer(?obj:{ @:optional var animation:Null<SpritesheetAnimation>; @:optional var complete:Null<Bool>; @:optional var elapsed:Null<Float>; @:optional var paused:Null<Bool>; @:optional var speed:Null<Float>; @:optional var frameIndex:Null<Float>; @:optional var onComplete:Null<Signal<Void->Void>>; @:optional var onLoop:Null<Signal<Void->Void>>; @:optional var queue:Null<Array<SpritesheetAnimation>>; }):SpritesheetPlayer {
     return cast Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer.createSpritesheetPlayer(obj);
     return cast null;
   }

@@ -96,6 +96,8 @@ import flighthq.types.DirectionalBlurEffect;
 import flighthq.types.DisplacementEffect;
 import flighthq.types.DitherEffect;
 import flighthq.types.DropShadowEffect;
+import flighthq.types.EffectSourceMode;
+import flighthq.types.EffectSourceMode.InnerEffectSourceMode;
 import flighthq.types.Entity.Kind;
 import flighthq.types.FilmEmulationEffect;
 import flighthq.types.FilmGrainEffect;
@@ -136,6 +138,7 @@ import flighthq.types.SsrEffect;
 import flighthq.types.TaaEffect;
 import flighthq.types.TiltShiftEffect;
 import flighthq.types.ToneMapEffect;
+import flighthq.types.ToneMapEffect.ToneMapOperator;
 import flighthq.types.VignetteEffect;
 import flighthq.types.VolumetricLightEffect;
 import flighthq.types.WhiteBalanceEffect;
@@ -330,12 +333,12 @@ class Effects {
     Facade_Effects_flighthq_effects_ColorTemperatureMath.computeWhiteBalanceMultipliers(temperature, tint, out);
   }
 
-  public static function createAutoExposureEffect(?options:flighthq._internal._Omit<AutoExposureEffect, String>):AutoExposureEffect {
+  public static function createAutoExposureEffect(?options:{ @:optional var adaptationSpeed:Null<Float>; @:optional var exposureCompensation:Null<Float>; @:optional var maxExposure:Null<Float>; @:optional var minExposure:Null<Float>; }):AutoExposureEffect {
     return cast Facade_Effects_flighthq_effects_AutoExposureEffect.createAutoExposureEffect(options);
     return cast null;
   }
 
-  public static function createBarrelDistortionEffect(?options:flighthq._internal._Omit<BarrelDistortionEffect, String>):BarrelDistortionEffect {
+  public static function createBarrelDistortionEffect(?options:{ @:optional var amount:Null<Float>; @:optional var scale:Null<Float>; }):BarrelDistortionEffect {
     return cast Facade_Effects_flighthq_effects_BarrelDistortionEffect.createBarrelDistortionEffect(options);
     return cast null;
   }
@@ -345,97 +348,97 @@ class Effects {
     return cast null;
   }
 
-  public static function createBevelEffect(?options:flighthq._internal._Omit<BevelEffect, String>):BevelEffect {
+  public static function createBevelEffect(?options:{ @:optional var angle:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):BevelEffect {
     return cast Facade_Effects_flighthq_effects_BevelEffect.createBevelEffect(options);
     return cast null;
   }
 
-  public static function createBlendEffect(mode:AdvancedBlendMode, ?options:flighthq._internal._Omit<BlendEffect, String>):BlendEffect {
+  public static function createBlendEffect(mode:AdvancedBlendMode, ?options:{ @:optional var backdropKey:Null<String>; @:optional var opacity:Null<Float>; }):BlendEffect {
     return cast Facade_Effects_flighthq_effects_BlendEffect.createBlendEffect(mode, options);
     return cast null;
   }
 
-  public static function createBloomEffect(?options:flighthq._internal._Omit<BloomEffect, String>):BloomEffect {
+  public static function createBloomEffect(?options:{ @:optional var threshold:Null<Float>; @:optional var intensity:Null<Float>; @:optional var radius:Null<Float>; @:optional var passes:Null<Float>; }):BloomEffect {
     return cast Facade_Effects_flighthq_effects_BloomEffect.createBloomEffect(options);
     return cast null;
   }
 
-  public static function createBlurEffect(?options:flighthq._internal._Omit<BlurEffect, String>):BlurEffect {
+  public static function createBlurEffect(?options:{ @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }):BlurEffect {
     return cast Facade_Effects_flighthq_effects_BlurEffect.createBlurEffect(options);
     return cast null;
   }
 
-  public static function createBokehDepthOfFieldEffect(?options:flighthq._internal._Omit<BokehDepthOfFieldEffect, String>):BokehDepthOfFieldEffect {
+  public static function createBokehDepthOfFieldEffect(?options:{ @:optional var focusDistance:Null<Float>; @:optional var focusRange:Null<Float>; @:optional var maxBlur:Null<Float>; }):BokehDepthOfFieldEffect {
     return cast Facade_Effects_flighthq_effects_BokehDepthOfFieldEffect.createBokehDepthOfFieldEffect(options);
     return cast null;
   }
 
-  public static function createCameraMotionBlurEffect(?options:flighthq._internal._Omit<CameraMotionBlurEffect, String>):CameraMotionBlurEffect {
+  public static function createCameraMotionBlurEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var samples:Null<Float>; }):CameraMotionBlurEffect {
     return cast Facade_Effects_flighthq_effects_CameraMotionBlurEffect.createCameraMotionBlurEffect(options);
     return cast null;
   }
 
-  public static function createChromaticAberrationEffect(?options:flighthq._internal._Omit<ChromaticAberrationEffect, String>):ChromaticAberrationEffect {
+  public static function createChromaticAberrationEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var radial:Null<Bool>; }):ChromaticAberrationEffect {
     return cast Facade_Effects_flighthq_effects_ChromaticAberrationEffect.createChromaticAberrationEffect(options);
     return cast null;
   }
 
-  public static function createCompositeEffect(operator_:CompositeOperator, ?options:flighthq._internal._Omit<CompositeEffect, String>):CompositeEffect {
+  public static function createCompositeEffect(operator_:CompositeOperator, ?options:{ @:optional var backdropKey:Null<String>; }):CompositeEffect {
     return cast Facade_Effects_flighthq_effects_CompositeEffect.createCompositeEffect(operator_, options);
     return cast null;
   }
 
-  public static function createContactShadowsEffect(?options:flighthq._internal._Omit<ContactShadowsEffect, String>):ContactShadowsEffect {
+  public static function createContactShadowsEffect(?options:{ @:optional var distance:Null<Float>; @:optional var opacity:Null<Float>; @:optional var samples:Null<Float>; @:optional var smoothness:Null<Float>; }):ContactShadowsEffect {
     return cast Facade_Effects_flighthq_effects_ContactShadowsEffect.createContactShadowsEffect(options);
     return cast null;
   }
 
-  public static function createConvolutionEffect(options:flighthq._internal._Omit<ConvolutionEffect, String>):ConvolutionEffect {
+  public static function createConvolutionEffect(options:{ var matrix:Array<Float>; var matrixX:Float; var matrixY:Float; @:optional var bias:Null<Float>; @:optional var clamp:Null<Bool>; @:optional var color:Null<Float>; @:optional var divisor:Null<Float>; @:optional var preserveAlpha:Null<Bool>; }):ConvolutionEffect {
     return cast Facade_Effects_flighthq_effects_ConvolutionEffect.createConvolutionEffect(options);
     return cast null;
   }
 
-  public static function createCrtEffect(?options:flighthq._internal._Omit<CrtEffect, String>):CrtEffect {
+  public static function createCrtEffect(?options:{ @:optional var curvature:Null<Float>; @:optional var scanlineIntensity:Null<Float>; @:optional var vignette:Null<Float>; @:optional var aberration:Null<Float>; }):CrtEffect {
     return cast Facade_Effects_flighthq_effects_CrtEffect.createCrtEffect(options);
     return cast null;
   }
 
-  public static function createCustomShaderEffect(options:flighthq._internal._Omit<CustomShaderEffect, String>):CustomShaderEffect {
+  public static function createCustomShaderEffect(options:{ var shaderKey:String; @:optional var uniforms:Null<flighthq._internal._Record<String, flighthq._internal._Union2<Float, Array<Float>>>>; }):CustomShaderEffect {
     return cast Facade_Effects_flighthq_effects_CustomShaderEffect.createCustomShaderEffect(options);
     return cast null;
   }
 
-  public static function createDirectionalBlurEffect(?options:flighthq._internal._Omit<DirectionalBlurEffect, String>):DirectionalBlurEffect {
+  public static function createDirectionalBlurEffect(?options:{ @:optional var angle:Null<Float>; @:optional var length:Null<Float>; @:optional var samples:Null<Float>; }):DirectionalBlurEffect {
     return cast Facade_Effects_flighthq_effects_DirectionalBlurEffect.createDirectionalBlurEffect(options);
     return cast null;
   }
 
-  public static function createDisplacementEffect(?options:flighthq._internal._Omit<DisplacementEffect, String>):DisplacementEffect {
+  public static function createDisplacementEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var frequency:Null<Float>; @:optional var seed:Null<Float>; }):DisplacementEffect {
     return cast Facade_Effects_flighthq_effects_DisplacementEffect.createDisplacementEffect(options);
     return cast null;
   }
 
-  public static function createDitherEffect(?options:flighthq._internal._Omit<DitherEffect, String>):DitherEffect {
+  public static function createDitherEffect(?options:{ @:optional var levels:Null<Float>; }):DitherEffect {
     return cast Facade_Effects_flighthq_effects_DitherEffect.createDitherEffect(options);
     return cast null;
   }
 
-  public static function createDropShadowEffect(?options:flighthq._internal._Omit<DropShadowEffect, String>):DropShadowEffect {
+  public static function createDropShadowEffect(?options:{ @:optional var alpha:Null<Float>; @:optional var angle:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):DropShadowEffect {
     return cast Facade_Effects_flighthq_effects_DropShadowEffect.createDropShadowEffect(options);
     return cast null;
   }
 
-  public static function createFilmEmulationEffect(?options:flighthq._internal._Omit<FilmEmulationEffect, String>):FilmEmulationEffect {
+  public static function createFilmEmulationEffect(?options:{ @:optional var gateWeave:Null<Float>; @:optional var grainIntensity:Null<Float>; @:optional var halationRadius:Null<Float>; @:optional var halationStrength:Null<Float>; }):FilmEmulationEffect {
     return cast Facade_Effects_flighthq_effects_FilmEmulationEffect.createFilmEmulationEffect(options);
     return cast null;
   }
 
-  public static function createFilmGrainEffect(?options:flighthq._internal._Omit<FilmGrainEffect, String>):FilmGrainEffect {
+  public static function createFilmGrainEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var size:Null<Float>; @:optional var seed:Null<Float>; }):FilmGrainEffect {
     return cast Facade_Effects_flighthq_effects_FilmGrainEffect.createFilmGrainEffect(options);
     return cast null;
   }
 
-  public static function createFxaaEffect(?options:flighthq._internal._Omit<FxaaEffect, String>):FxaaEffect {
+  public static function createFxaaEffect(?options:{ @:optional var edgeThreshold:Null<Float>; @:optional var subpixel:Null<Float>; }):FxaaEffect {
     return cast Facade_Effects_flighthq_effects_FxaaEffect.createFxaaEffect(options);
     return cast null;
   }
@@ -445,162 +448,162 @@ class Effects {
     return cast null;
   }
 
-  public static function createGlitchEffect(?options:flighthq._internal._Omit<GlitchEffect, String>):GlitchEffect {
+  public static function createGlitchEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var blockSize:Null<Float>; @:optional var colorShift:Null<Float>; @:optional var seed:Null<Float>; }):GlitchEffect {
     return cast Facade_Effects_flighthq_effects_GlitchEffect.createGlitchEffect(options);
     return cast null;
   }
 
-  public static function createGodRaysEffect(?options:flighthq._internal._Omit<GodRaysEffect, String>):GodRaysEffect {
+  public static function createGodRaysEffect(?options:{ @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var density:Null<Float>; @:optional var decay:Null<Float>; @:optional var weight:Null<Float>; @:optional var exposure:Null<Float>; @:optional var samples:Null<Float>; }):GodRaysEffect {
     return cast Facade_Effects_flighthq_effects_GodRaysEffect.createGodRaysEffect(options);
     return cast null;
   }
 
-  public static function createGradientBevelEffect(options:flighthq._internal._Omit<GradientBevelEffect, String>):GradientBevelEffect {
+  public static function createGradientBevelEffect(options:{ var alphas:Array<Float>; @:optional var angle:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; var colors:Array<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; var ratios:Array<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):GradientBevelEffect {
     return cast Facade_Effects_flighthq_effects_GradientBevelEffect.createGradientBevelEffect(options);
     return cast null;
   }
 
-  public static function createGradientGlowEffect(options:flighthq._internal._Omit<GradientGlowEffect, String>):GradientGlowEffect {
+  public static function createGradientGlowEffect(options:{ var alphas:Array<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; var colors:Array<Float>; @:optional var quality:Null<Float>; var ratios:Array<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):GradientGlowEffect {
     return cast Facade_Effects_flighthq_effects_GradientGlowEffect.createGradientGlowEffect(options);
     return cast null;
   }
 
-  public static function createHalftoneEffect(?options:flighthq._internal._Omit<HalftoneEffect, String>):HalftoneEffect {
+  public static function createHalftoneEffect(?options:{ @:optional var scale:Null<Float>; @:optional var angle:Null<Float>; }):HalftoneEffect {
     return cast Facade_Effects_flighthq_effects_HalftoneEffect.createHalftoneEffect(options);
     return cast null;
   }
 
-  public static function createInnerGlowEffect(?options:flighthq._internal._Omit<InnerGlowEffect, String>):InnerGlowEffect {
+  public static function createInnerGlowEffect(?options:{ @:optional var alpha:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<InnerEffectSourceMode>; @:optional var strength:Null<Float>; }):InnerGlowEffect {
     return cast Facade_Effects_flighthq_effects_InnerGlowEffect.createInnerGlowEffect(options);
     return cast null;
   }
 
-  public static function createInnerShadowEffect(?options:flighthq._internal._Omit<InnerShadowEffect, String>):InnerShadowEffect {
+  public static function createInnerShadowEffect(?options:{ @:optional var alpha:Null<Float>; @:optional var angle:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<InnerEffectSourceMode>; @:optional var strength:Null<Float>; }):InnerShadowEffect {
     return cast Facade_Effects_flighthq_effects_InnerShadowEffect.createInnerShadowEffect(options);
     return cast null;
   }
 
-  public static function createKuwaharaEffect(?options:flighthq._internal._Omit<KuwaharaEffect, String>):KuwaharaEffect {
+  public static function createKuwaharaEffect(?options:{ @:optional var radius:Null<Float>; }):KuwaharaEffect {
     return cast Facade_Effects_flighthq_effects_KuwaharaEffect.createKuwaharaEffect(options);
     return cast null;
   }
 
-  public static function createLensDirtEffect(?options:flighthq._internal._Omit<LensDirtEffect, String>):LensDirtEffect {
+  public static function createLensDirtEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var threshold:Null<Float>; @:optional var seed:Null<Float>; }):LensDirtEffect {
     return cast Facade_Effects_flighthq_effects_LensDirtEffect.createLensDirtEffect(options);
     return cast null;
   }
 
-  public static function createLensDistortionEffect(?options:flighthq._internal._Omit<LensDistortionEffect, String>):LensDistortionEffect {
+  public static function createLensDistortionEffect(?options:{ @:optional var amount:Null<Float>; @:optional var scale:Null<Float>; }):LensDistortionEffect {
     return cast Facade_Effects_flighthq_effects_LensDistortionEffect.createLensDistortionEffect(options);
     return cast null;
   }
 
-  public static function createLensFlareEffect(?options:flighthq._internal._Omit<LensFlareEffect, String>):LensFlareEffect {
+  public static function createLensFlareEffect(?options:{ @:optional var threshold:Null<Float>; @:optional var intensity:Null<Float>; @:optional var ghosts:Null<Float>; @:optional var halo:Null<Float>; }):LensFlareEffect {
     return cast Facade_Effects_flighthq_effects_LensFlareEffect.createLensFlareEffect(options);
     return cast null;
   }
 
-  public static function createMedianEffect(?options:flighthq._internal._Omit<MedianEffect, String>):MedianEffect {
+  public static function createMedianEffect(?options:{ @:optional var radius:Null<Float>; }):MedianEffect {
     return cast Facade_Effects_flighthq_effects_MedianEffect.createMedianEffect(options);
     return cast null;
   }
 
-  public static function createMotionBlurEffect(?options:flighthq._internal._Omit<MotionBlurEffect, String>):MotionBlurEffect {
+  public static function createMotionBlurEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var samples:Null<Float>; }):MotionBlurEffect {
     return cast Facade_Effects_flighthq_effects_MotionBlurEffect.createMotionBlurEffect(options);
     return cast null;
   }
 
-  public static function createOuterGlowEffect(?options:flighthq._internal._Omit<OuterGlowEffect, String>):OuterGlowEffect {
+  public static function createOuterGlowEffect(?options:{ @:optional var alpha:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):OuterGlowEffect {
     return cast Facade_Effects_flighthq_effects_OuterGlowEffect.createOuterGlowEffect(options);
     return cast null;
   }
 
-  public static function createOutlineEffect(?options:flighthq._internal._Omit<OutlineEffect, String>):OutlineEffect {
+  public static function createOutlineEffect(?options:{ @:optional var threshold:Null<Float>; @:optional var thickness:Null<Float>; @:optional var color:Null<Float>; }):OutlineEffect {
     return cast Facade_Effects_flighthq_effects_OutlineEffect.createOutlineEffect(options);
     return cast null;
   }
 
-  public static function createPanniniProjectionEffect(?options:flighthq._internal._Omit<PanniniProjectionEffect, String>):PanniniProjectionEffect {
+  public static function createPanniniProjectionEffect(?options:{ @:optional var compression:Null<Float>; @:optional var crop:Null<Float>; }):PanniniProjectionEffect {
     return cast Facade_Effects_flighthq_effects_PanniniProjectionEffect.createPanniniProjectionEffect(options);
     return cast null;
   }
 
-  public static function createPixelateEffect(?options:flighthq._internal._Omit<PixelateEffect, String>):PixelateEffect {
+  public static function createPixelateEffect(?options:{ @:optional var size:Null<Float>; }):PixelateEffect {
     return cast Facade_Effects_flighthq_effects_PixelateEffect.createPixelateEffect(options);
     return cast null;
   }
 
-  public static function createPosterizeEffect(?options:flighthq._internal._Omit<PosterizeEffect, String>):PosterizeEffect {
+  public static function createPosterizeEffect(?options:{ @:optional var levels:Null<Float>; }):PosterizeEffect {
     return cast Facade_Effects_flighthq_effects_PosterizeEffect.createPosterizeEffect(options);
     return cast null;
   }
 
-  public static function createRadialBlurEffect(?options:flighthq._internal._Omit<RadialBlurEffect, String>):RadialBlurEffect {
+  public static function createRadialBlurEffect(?options:{ @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var strength:Null<Float>; @:optional var samples:Null<Float>; }):RadialBlurEffect {
     return cast Facade_Effects_flighthq_effects_RadialBlurEffect.createRadialBlurEffect(options);
     return cast null;
   }
 
-  public static function createScanlinesEffect(?options:flighthq._internal._Omit<ScanlinesEffect, String>):ScanlinesEffect {
+  public static function createScanlinesEffect(?options:{ @:optional var count:Null<Float>; @:optional var intensity:Null<Float>; }):ScanlinesEffect {
     return cast Facade_Effects_flighthq_effects_ScanlinesEffect.createScanlinesEffect(options);
     return cast null;
   }
 
-  public static function createScreenSpaceFogEffect(?options:flighthq._internal._Omit<ScreenSpaceFogEffect, String>):ScreenSpaceFogEffect {
+  public static function createScreenSpaceFogEffect(?options:{ @:optional var color:Null<Float>; @:optional var near:Null<Float>; @:optional var far:Null<Float>; @:optional var density:Null<Float>; }):ScreenSpaceFogEffect {
     return cast Facade_Effects_flighthq_effects_ScreenSpaceFogEffect.createScreenSpaceFogEffect(options);
     return cast null;
   }
 
-  public static function createSharpenEffect(?options:flighthq._internal._Omit<SharpenEffect, String>):SharpenEffect {
+  public static function createSharpenEffect(?options:{ @:optional var amount:Null<Float>; }):SharpenEffect {
     return cast Facade_Effects_flighthq_effects_SharpenEffect.createSharpenEffect(options);
     return cast null;
   }
 
-  public static function createSketchEffect(?options:flighthq._internal._Omit<SketchEffect, String>):SketchEffect {
+  public static function createSketchEffect(?options:{ @:optional var strength:Null<Float>; }):SketchEffect {
     return cast Facade_Effects_flighthq_effects_SketchEffect.createSketchEffect(options);
     return cast null;
   }
 
-  public static function createSmaaEffect(?options:flighthq._internal._Omit<SmaaEffect, String>):SmaaEffect {
+  public static function createSmaaEffect(?options:{ @:optional var threshold:Null<Float>; }):SmaaEffect {
     return cast Facade_Effects_flighthq_effects_SmaaEffect.createSmaaEffect(options);
     return cast null;
   }
 
-  public static function createSsaoEffect(?options:flighthq._internal._Omit<SsaoEffect, String>):SsaoEffect {
+  public static function createSsaoEffect(?options:{ @:optional var radius:Null<Float>; @:optional var intensity:Null<Float>; @:optional var bias:Null<Float>; @:optional var samples:Null<Float>; }):SsaoEffect {
     return cast Facade_Effects_flighthq_effects_SsaoEffect.createSsaoEffect(options);
     return cast null;
   }
 
-  public static function createSsrEffect(?options:flighthq._internal._Omit<SsrEffect, String>):SsrEffect {
+  public static function createSsrEffect(?options:{ @:optional var maxDistance:Null<Float>; @:optional var resolution:Null<Float>; @:optional var steps:Null<Float>; }):SsrEffect {
     return cast Facade_Effects_flighthq_effects_SsrEffect.createSsrEffect(options);
     return cast null;
   }
 
-  public static function createTaaEffect(?options:flighthq._internal._Omit<TaaEffect, String>):TaaEffect {
+  public static function createTaaEffect(?options:{ @:optional var feedback:Null<Float>; }):TaaEffect {
     return cast Facade_Effects_flighthq_effects_TaaEffect.createTaaEffect(options);
     return cast null;
   }
 
-  public static function createTiltShiftEffect(?options:flighthq._internal._Omit<TiltShiftEffect, String>):TiltShiftEffect {
+  public static function createTiltShiftEffect(?options:{ @:optional var center:Null<Float>; @:optional var width:Null<Float>; @:optional var blur:Null<Float>; }):TiltShiftEffect {
     return cast Facade_Effects_flighthq_effects_TiltShiftEffect.createTiltShiftEffect(options);
     return cast null;
   }
 
-  public static function createToneMapEffect(?options:flighthq._internal._Omit<ToneMapEffect, String>):ToneMapEffect {
+  public static function createToneMapEffect(?options:{ @:optional var operator_:Null<ToneMapOperator>; @:optional var exposure:Null<Float>; @:optional var white:Null<Float>; }):ToneMapEffect {
     return cast Facade_Effects_flighthq_effects_ToneMapEffect.createToneMapEffect(options);
     return cast null;
   }
 
-  public static function createVignetteEffect(?options:flighthq._internal._Omit<VignetteEffect, String>):VignetteEffect {
+  public static function createVignetteEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var radius:Null<Float>; @:optional var softness:Null<Float>; @:optional var color:Null<Float>; }):VignetteEffect {
     return cast Facade_Effects_flighthq_effects_VignetteEffect.createVignetteEffect(options);
     return cast null;
   }
 
-  public static function createVolumetricLightEffect(?options:flighthq._internal._Omit<VolumetricLightEffect, String>):VolumetricLightEffect {
+  public static function createVolumetricLightEffect(?options:{ @:optional var density:Null<Float>; @:optional var lightColor:Null<Float>; @:optional var lightX:Null<Float>; @:optional var lightY:Null<Float>; @:optional var samples:Null<Float>; @:optional var scattering:Null<Float>; }):VolumetricLightEffect {
     return cast Facade_Effects_flighthq_effects_VolumetricLightEffect.createVolumetricLightEffect(options);
     return cast null;
   }
 
-  public static function createWhiteBalanceEffect(?options:flighthq._internal._Omit<WhiteBalanceEffect, String>):WhiteBalanceEffect {
+  public static function createWhiteBalanceEffect(?options:{ @:optional var temperature:Null<Float>; @:optional var tint:Null<Float>; }):WhiteBalanceEffect {
     return cast Facade_Effects_flighthq_effects_WhiteBalanceEffect.createWhiteBalanceEffect(options);
     return cast null;
   }

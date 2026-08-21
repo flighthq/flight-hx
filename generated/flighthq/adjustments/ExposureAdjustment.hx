@@ -6,11 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.types.ExposureAdjustment;
 
 class ExposureAdjustment {
-  public static function createExposureAdjustment(?options:flighthq._internal._Omit<flighthq.types.ExposureAdjustment, String>):flighthq.types.ExposureAdjustment {
+  public static function createExposureAdjustment(?options:{ @:optional var exposure:Null<Float>; }):flighthq.types.ExposureAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var m:Float = cast _Runtime.UNDEFINED;
     var colorMatrix:Array<Float> = cast _Runtime.UNDEFINED;
-    m = HxMath.pow(2.0, _Runtime.coalesce(_Runtime.field(options, 'exposure'), function():Dynamic return cast 0.0));
+    m = HxMath.pow(2.0, _Runtime.coalesce((cast options : { @:optional var exposure:Null<Float>; }).exposure, function():Dynamic return cast 0.0));
     colorMatrix = (cast cast ([m, 0.0, 0.0, 0.0, 0.0, 0.0, m, 0.0, 0.0, 0.0, 0.0, 0.0, m, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
     return cast _Runtime.mergeObjects([{ kind: 'ExposureAdjustment' }, options, { colorMatrix: colorMatrix }]);
     return cast null;

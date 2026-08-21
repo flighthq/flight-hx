@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const orientBillboardToCamera = api.orientBillboardToCamera;
 export const orientScene3DBillboardsToCamera = api.orientScene3DBillboardsToCamera;
+export const setBillboardCameraBasisGuard = api.setBillboardCameraBasisGuard;

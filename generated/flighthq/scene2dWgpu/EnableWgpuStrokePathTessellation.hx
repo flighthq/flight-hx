@@ -7,12 +7,20 @@ import flighthq.path.TessellateStrokePath.tessellateStrokePath;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.Path;
 import flighthq.types.PathMesh;
+import flighthq.types.RegistryTable.RegistryEntryState;
+import flighthq.types.RegistryTable.SlotTable;
 import flighthq.types.StrokeStyle;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 class EnableWgpuStrokePathTessellation {
   public static function enableWgpuStrokePathTessellation(state:WgpuRenderState):Void {
-    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : { var strokeTessellator:Null<Path->StrokeStyle->Null<Float>->Null<PathMesh>>; }).strokeTessellator = cast (tessellateStrokePath : Null<Path->StrokeStyle->Null<Float>->Null<PathMesh>>));
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var table:SlotTable<Path->StrokeStyle->Null<Float>->Null<PathMesh>> = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
+    table = (cast runtime.registries : WgpuRenderRegistries).strokeTessellator;
+    ((cast runtime.registries : WgpuRenderRegistries).strokeTessellator = _Runtime.mergeObjects([table, { entry: { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: tessellateStrokePath } }]));
   }
 }

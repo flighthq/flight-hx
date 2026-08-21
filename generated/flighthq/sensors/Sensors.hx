@@ -3,6 +3,8 @@ package flighthq.sensors;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.math.Constants.DEG_TO_RAD;
+import flighthq.math.Constants.RAD_TO_DEG;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.Sensors;
@@ -126,7 +128,6 @@ class Sensors {
     var beta:Float = cast _Runtime.UNDEFINED;
     var alpha:Float = cast _Runtime.UNDEFINED;
     var gamma:Float = cast _Runtime.UNDEFINED;
-    var toDeg:Float = cast _Runtime.UNDEFINED;
     x = quaternion.x;
     y = quaternion.y;
     z = quaternion.z;
@@ -135,17 +136,15 @@ class Sensors {
     beta = ((cast ((cast HxMath.abs(sinBeta) : Float) >= (cast 1.0 : Float)) : Bool) ? (cast (_Runtime.multiplyNumbers(_Runtime.sign(sinBeta), HxMath.PI) / 2.0) : Dynamic) : (cast HxMath.asin(sinBeta) : Dynamic));
     alpha = HxMath.atan2((2.0 * ((w * z) + (x * y))), (1.0 - (2.0 * ((x * x) + (z * z)))));
     gamma = HxMath.atan2((2.0 * ((w * y) + (x * z))), (1.0 - (2.0 * ((x * x) + (y * y)))));
-    toDeg = (180.0 / HxMath.PI);
-    (out.alpha = cast (_Runtime.fmod((_Runtime.fmod((alpha * toDeg), 360.0) + 360.0), 360.0) : Float));
-    (out.beta = cast ((beta * toDeg) : Float));
-    (out.gamma = cast ((gamma * toDeg) : Float));
+    (out.alpha = cast (_Runtime.fmod((_Runtime.fmod((alpha * RAD_TO_DEG), 360.0) + 360.0), 360.0) : Float));
+    (out.beta = cast ((beta * RAD_TO_DEG) : Float));
+    (out.gamma = cast ((gamma * RAD_TO_DEG) : Float));
     (out.interval = cast (quaternion.interval : Float));
     (out.timestamp = cast (quaternion.timestamp : Float));
     (out.accuracy = cast (quaternion.accuracy : SensorAccuracy));
   }
 
   public static function computeGravityFromOrientation(out:MotionReading, orientation:OrientationReading):Void {
-    var toRad:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
     var g:Float = cast _Runtime.UNDEFINED;
     var G:Float = cast _Runtime.UNDEFINED;
@@ -153,9 +152,8 @@ class Sensors {
     var cosG:Float = cast _Runtime.UNDEFINED;
     var sinB:Float = cast _Runtime.UNDEFINED;
     var cosB:Float = cast _Runtime.UNDEFINED;
-    toRad = (HxMath.PI / 180.0);
-    b = (orientation.beta * toRad);
-    g = (orientation.gamma * toRad);
+    b = (orientation.beta * DEG_TO_RAD);
+    g = (orientation.gamma * DEG_TO_RAD);
     G = 9.80665;
     sinG = HxMath.sin(g);
     cosG = HxMath.cos(g);
@@ -170,7 +168,6 @@ class Sensors {
   }
 
   public static function computeQuaternionFromOrientationReading(out:QuaternionReading, orientation:OrientationReading):Void {
-    var toRad:Float = cast _Runtime.UNDEFINED;
     var a:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
     var g:Float = cast _Runtime.UNDEFINED;
@@ -180,10 +177,9 @@ class Sensors {
     var sb:Float = cast _Runtime.UNDEFINED;
     var cg:Float = cast _Runtime.UNDEFINED;
     var sg:Float = cast _Runtime.UNDEFINED;
-    toRad = (HxMath.PI / 180.0);
-    a = ((orientation.alpha * toRad) * 0.5);
-    b = ((orientation.beta * toRad) * 0.5);
-    g = ((orientation.gamma * toRad) * 0.5);
+    a = ((orientation.alpha * DEG_TO_RAD) * 0.5);
+    b = ((orientation.beta * DEG_TO_RAD) * 0.5);
+    g = ((orientation.gamma * DEG_TO_RAD) * 0.5);
     ca = HxMath.cos(a);
     sa = HxMath.sin(a);
     cb = HxMath.cos(b);
@@ -247,15 +243,13 @@ class Sensors {
     var alpha:Float = cast _Runtime.UNDEFINED;
     var beta:Float = cast _Runtime.UNDEFINED;
     var gamma:Float = cast _Runtime.UNDEFINED;
-    var toRad:Float = cast _Runtime.UNDEFINED;
     var angle:Float = cast _Runtime.UNDEFINED;
     var sinA:Float = cast _Runtime.UNDEFINED;
     var cosA:Float = cast _Runtime.UNDEFINED;
     alpha = orientation.alpha;
     beta = orientation.beta;
     gamma = orientation.gamma;
-    toRad = (HxMath.PI / 180.0);
-    angle = (screenAngle * toRad);
+    angle = (screenAngle * DEG_TO_RAD);
     sinA = HxMath.sin(angle);
     cosA = HxMath.cos(angle);
     (out.alpha = cast (alpha : Float));

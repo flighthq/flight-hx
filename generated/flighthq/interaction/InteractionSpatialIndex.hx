@@ -7,9 +7,9 @@ import flighthq.interaction.HitTests.hitTestNodeRegion;
 import flighthq.interaction.NodeInteractionState.getNodeInteractionState;
 import flighthq.node.BoundsRectangle.getNodeWorldBoundsRectangle;
 import flighthq.node.Node.getNodeRuntime;
-import flighthq.spatial.SpatialIndex.clearSpatialIndex;
-import flighthq.spatial.SpatialIndex.insertSpatialObject;
-import flighthq.spatial.SpatialIndex.querySpatialPoint;
+import flighthq.spatial.SpatialIndex.clearSpatialIndex2D;
+import flighthq.spatial.SpatialIndex.insertSpatialObject2D;
+import flighthq.spatial.SpatialIndex.querySpatialPoint2D;
 import flighthq.types.InteractionManager;
 import flighthq.types.Node;
 import flighthq.types.Node.NodeAny;
@@ -18,13 +18,13 @@ import flighthq.types.Node2D;
 import flighthq.types.NodeInteractionState;
 import flighthq.types.Path;
 import flighthq.types.Rectangle;
-import flighthq.types.Spatial.SpatialAabb;
-import flighthq.types.Spatial.SpatialIndex;
+import flighthq.types.Spatial.SpatialAabb2D;
+import flighthq.types.Spatial.SpatialIndex2D;
 import flighthq.types.Spatial.SpatialObjectId;
 
 class InteractionSpatialIndex {
   public static function findSpatialInteractionTarget<N:NodeAny>(manager:InteractionManager<N>, x:Float, y:Float, precise:Bool = false):Null<N> {
-    var index:Null<SpatialIndex> = cast _Runtime.UNDEFINED;
+    var index:Null<SpatialIndex2D> = cast _Runtime.UNDEFINED;
     var nodes:Null<Array<NodeAny>> = cast _Runtime.UNDEFINED;
     var best:Null<N> = cast _Runtime.UNDEFINED;
     var bestRank:Float = cast _Runtime.UNDEFINED;
@@ -32,7 +32,7 @@ class InteractionSpatialIndex {
     if ((cast _Runtime.strictEquals(index, null) : Bool)) { return cast null; }
     nodes = ((cast InteractionSpatialIndex.managerCandidates__interactionSpatialIndex : flighthq._internal._WeakMap<flighthq._internal._Object, Array<NodeAny>>).get(manager));
     if ((cast ((cast _Runtime.strictEquals(nodes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(nodes, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
-    querySpatialPoint(({ final __callArgument0:Dynamic = index; __callArgument0; }), (cast x : Float), (cast y : Float), ({ final __callArgument1:Dynamic = InteractionSpatialIndex.spatialQueryOut__interactionSpatialIndex; __callArgument1; }));
+    querySpatialPoint2D(({ final __callArgument0:Dynamic = index; __callArgument0; }), (cast x : Float), (cast y : Float), ({ final __callArgument1:Dynamic = InteractionSpatialIndex.spatialQueryOut__interactionSpatialIndex; __callArgument1; }));
     best = null;
     bestRank = HxMath.POSITIVE_INFINITY;
     {
@@ -53,14 +53,14 @@ class InteractionSpatialIndex {
   }
 
   public static function refreshInteractionSpatialIndex<N:NodeAny>(manager:InteractionManager<N>):Void {
-    var index:Null<SpatialIndex> = cast _Runtime.UNDEFINED;
+    var index:Null<SpatialIndex2D> = cast _Runtime.UNDEFINED;
     var nodes:Array<NodeAny> = cast _Runtime.UNDEFINED;
     index = manager.spatialIndex;
     if ((cast _Runtime.strictEquals(index, null) : Bool)) { return; }
     nodes = (cast cast ([] : Array<Dynamic>));
     InteractionSpatialIndex.collectSpatialCandidates__interactionSpatialIndex(({ final __callArgument3:Dynamic = manager.root; __callArgument3; }), ({ final __callArgument4:Dynamic = nodes; __callArgument4; }));
     ((cast InteractionSpatialIndex.managerCandidates__interactionSpatialIndex : flighthq._internal._WeakMap<flighthq._internal._Object, Array<NodeAny>>).set(manager, (cast nodes)));
-    clearSpatialIndex(({ final __callArgument5:Dynamic = index; __callArgument5; }));
+    clearSpatialIndex2D(({ final __callArgument5:Dynamic = index; __callArgument5; }));
     {
       var rank:Float = 0.0;
       while ((cast ((cast rank : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
@@ -69,7 +69,7 @@ class InteractionSpatialIndex {
         (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.minY = cast (bounds.y : Float));
         (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.maxX = cast ((bounds.x + bounds.width) : Float));
         (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.maxY = cast ((bounds.y + bounds.height) : Float));
-        (cast insertSpatialObject(({ final __callArgument6:Dynamic = index; __callArgument6; }), (cast (cast rank : SpatialObjectId) : Float), ({ final __callArgument7:Dynamic = InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex; __callArgument7; })) : Bool);
+        (cast insertSpatialObject2D(({ final __callArgument6:Dynamic = index; __callArgument6; }), (cast (cast rank : SpatialObjectId) : Float), ({ final __callArgument7:Dynamic = InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex; __callArgument7; })) : Bool);
         rank++;
       }
     }
@@ -82,7 +82,7 @@ class InteractionSpatialIndex {
     if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return; }
     state = (cast getNodeInteractionState(({ final __callArgument8:Dynamic = node; __callArgument8; })) : Null<NodeInteractionState>);
     enabled = _Runtime.strictEquals(({ final __typedStruct9 = state; __typedStruct9 == null ? _Runtime.UNDEFINED : (cast __typedStruct9 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
-    if ((cast ((cast enabled : Bool) && (cast !_Runtime.looseEquals(({ final __typedStruct10 = state; __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Rectangle, String>, NodeAny>, Path>>; }).hitArea; }), null) : Bool)) : Bool)) {
+    if ((cast ((cast enabled : Bool) && (cast !_Runtime.looseEquals(({ final __typedStruct10 = state; __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Path, Rectangle>, String>, NodeAny>>; }).hitArea; }), null) : Bool)) : Bool)) {
       _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>));
       return;
     }
@@ -101,7 +101,7 @@ class InteractionSpatialIndex {
 
   public static final managerCandidates__interactionSpatialIndex:flighthq._internal._WeakMap<flighthq._internal._Object, Array<NodeAny>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final spatialInsertAabb__interactionSpatialIndex:SpatialAabb = (cast { maxX: 0.0, maxY: 0.0, minX: 0.0, minY: 0.0 });
+  public static final spatialInsertAabb__interactionSpatialIndex:SpatialAabb2D = (cast { maxX: 0.0, maxY: 0.0, minX: 0.0, minY: 0.0 });
 
   public static final spatialQueryOut__interactionSpatialIndex:Array<SpatialObjectId> = (cast cast ([] : Array<Dynamic>));
 }

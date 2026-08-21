@@ -49,4 +49,35 @@ export default definePatches([
       source: 'upstream/packages/entity/src/entity.ts',
     },
   },
+  {
+    expect: {
+      astHash: 'sha256:c9f7e40c68e9aa3e64b72655fb256482b9e2272f4fe1c03e91b3a09fa5f92be8',
+      kind: 'function',
+    },
+    fragment: 'tools/generator/patches/bodies/shape/createShapeCommandArgumentCursor.hx',
+    id: 'shape.create-command-argument-cursor.portable-length',
+    operation: 'replaceBody',
+    reason:
+      'Portable Haxe anonymous structures cannot preserve a TypeScript object-literal getter, so a typed runtime class materializes its length field.',
+    target: {
+      export: 'createShapeCommandArgumentCursor__shapeBounds',
+      package: '@flighthq/shape',
+      source: 'upstream/packages/shape/src/shapeBounds.ts',
+    },
+  },
+  {
+    expect: {
+      astHash: 'sha256:73591ed5d5c6b7033f7738aa4af078735da6fc138353164610269cd995ca7186',
+      kind: 'function',
+    },
+    fragment: 'tools/generator/patches/bodies/shape/setShapeCommandArgumentCursor.hx',
+    id: 'shape.set-command-argument-cursor.portable-length',
+    operation: 'replaceBody',
+    reason: 'Keep the typed runtime cursor length synchronized with its internal argument-count mutation.',
+    target: {
+      export: 'setShapeCommandArgumentCursor__shapeBounds',
+      package: '@flighthq/shape',
+      source: 'upstream/packages/shape/src/shapeBounds.ts',
+    },
+  },
 ]);

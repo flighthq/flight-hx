@@ -63,7 +63,7 @@ class GlBlendEffect {
   }
 
   public static function registerGlBlendEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument14:Dynamic = state; __callArgument14; }), (cast 'BlendEffect' : String), ({ final __callArgument15:Dynamic = defaultGlBlendEffectRunner; __callArgument15; }));
+    registerGlRenderEffect(({ final __callArgument14:Dynamic = state; __callArgument14; }), (cast 'BlendEffect' : String), ({ final __callArgument15:Dynamic = defaultGlBlendEffectRunner; __callArgument15; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static function registerGlBlendEffectBackdrop(state:GlRenderState, backdropKey:String, texture:flighthq._internal.dom.WebGLTexture):Void {

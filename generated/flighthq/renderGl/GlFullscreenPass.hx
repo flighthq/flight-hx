@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
+import flighthq.renderGl.GlShader.ensureDefaultGlBitmapShader;
 import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
@@ -146,7 +147,7 @@ class GlFullscreenPass {
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, _Runtime.field(program, 'locTexCoord'), 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 16.0, 8.0);
     flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLES', flighthq._internal.backend.WebGl2Backend.TRIANGLES), 6.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT), 0.0);
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, null);
-    (runtime.shaderLoc = cast ((cast runtime.defaultBitmapShader : { var locations:GlShaderLocations; }).locations : GlShaderLocations));
+    (runtime.shaderLoc = cast ((cast (cast ensureDefaultGlBitmapShader(({ final __callArgument11:Dynamic = state; __callArgument11; })) : GlBitmapShader) : { var locations:GlShaderLocations; }).locations : Null<GlShaderLocations>));
   }
 
   public static final _quadVaos__glFullscreenPass:flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, flighthq._internal.dom.WebGLVertexArrayObject> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);

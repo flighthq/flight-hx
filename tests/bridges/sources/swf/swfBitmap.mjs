@@ -5,4 +5,5 @@ const api = compiled.flighthq.swf.SwfBitmap;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const createSwfJpegAlphaBitmap = api.createSwfJpegAlphaBitmap;
 export const createSwfLosslessBitmap = api.createSwfLosslessBitmap;

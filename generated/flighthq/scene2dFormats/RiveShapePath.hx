@@ -3,6 +3,8 @@ package flighthq.scene2dFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
+import flighthq.math.Constants.CIRCLE_KAPPA;
 import flighthq.path.Path.appendPathClose;
 import flighthq.path.Path.appendPathCubicCurveTo;
 import flighthq.path.Path.appendPathEllipse;
@@ -13,21 +15,25 @@ import flighthq.path.Path.appendPathRectangle;
 import flighthq.path.Path.appendPathRoundRectangle;
 import flighthq.path.Path.createPath;
 import flighthq.scene2dFormats.RiveCoreTypes.isRiveCoreTypeDerivedFrom;
+import flighthq.types.ImportDiagnostic;
+import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.Path;
 import flighthq.types.RiveDocument.RiveArtboardGraph;
 import flighthq.types.RiveDocument.RiveCoreObject;
 import flighthq.types.RiveDocument.RiveProperty;
 import flighthq.types.RiveDocument.RiveValue;
 import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 typedef RiveVertexPoint__riveShapePath = { var corner:Null<Array<Float>>; var entryX:Float; var entryY:Float; var exitX:Float; var exitY:Float; var inX:Float; var inY:Float; var outX:Float; var outY:Float; var radius:Float; var x:Float; var y:Float; };
 
 class RiveShapePath {
-  public static function createRivePath(path:RiveCoreObject, artboard:RiveArtboardGraph, index:Float):Null<Path> {
+  public static function createRivePath(path:RiveCoreObject, artboard:RiveArtboardGraph, index:Float, ?diagnostics:Array<ImportDiagnostic>):Null<Path> {
     if ((cast (cast isRiveCoreTypeDerivedFrom((cast path.typeKey : Float), (cast RiveShapePath.RIVE_POINTS_COMMON_PATH__riveShapePath : Float)) : Bool) : Bool)) {
       return cast (cast RiveShapePath.createRivePointsPath__riveShapePath(({ final __callArgument0:Dynamic = path; __callArgument0; }), ({ final __callArgument1:Dynamic = artboard; __callArgument1; }), (cast index : Float)) : Path);
     }
-    if ((cast (cast isRiveCoreTypeDerivedFrom((cast path.typeKey : Float), (cast RiveShapePath.RIVE_PARAMETRIC_PATH__riveShapePath : Float)) : Bool) : Bool)) { return cast (cast RiveShapePath.createRiveParametricPath__riveShapePath(({ final __callArgument2:Dynamic = path; __callArgument2; })) : Path); }
+    if ((cast (cast isRiveCoreTypeDerivedFrom((cast path.typeKey : Float), (cast RiveShapePath.RIVE_PARAMETRIC_PATH__riveShapePath : Float)) : Bool) : Bool)) { return cast (cast RiveShapePath.createRiveParametricPath__riveShapePath(({ final __callArgument2:Dynamic = path; __callArgument2; }), ({ final __callArgument3:Dynamic = diagnostics; __callArgument3; })) : Path); }
+    reportImportDiagnostic(({ final __callArgument4:Dynamic = diagnostics; __callArgument4; }), ({ final __callArgument5:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument5; }), (cast 'rive.path-kind-unsupported' : String), (cast 'createRivePath' : String), ({ final __callArgument6:Dynamic = { typeKey: path.typeKey }; __callArgument6; }));
     return cast null;
     return cast null;
   }
@@ -38,14 +44,14 @@ class RiveShapePath {
     var closed:Bool = cast _Runtime.UNDEFINED;
     var first:RiveVertexPoint__riveShapePath = cast _Runtime.UNDEFINED;
     var limit:Float = cast _Runtime.UNDEFINED;
-    vertices = (cast RiveShapePath.collectRiveVertices__riveShapePath(({ final __callArgument3:Dynamic = artboard; __callArgument3; }), (cast index : Float)) : Array<RiveVertexPoint__riveShapePath>);
+    vertices = (cast RiveShapePath.collectRiveVertices__riveShapePath(({ final __callArgument7:Dynamic = artboard; __callArgument7; }), (cast index : Float)) : Array<RiveVertexPoint__riveShapePath>);
     path = (cast createPath(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Path);
     if ((cast _Runtime.strictEquals(_Runtime.field(vertices, 'length'), 0.0) : Bool)) { return cast path; }
-    closed = (cast RiveShapePath.readRiveFlag__riveShapePath(({ final __callArgument4:Dynamic = source; __callArgument4; }), (cast RiveShapePath.RIVE_IS_CLOSED__riveShapePath : Float), (cast false : Bool)) : Bool);
+    closed = (cast RiveShapePath.readRiveFlag__riveShapePath(({ final __callArgument8:Dynamic = source; __callArgument8; }), (cast RiveShapePath.RIVE_IS_CLOSED__riveShapePath : Float), (cast false : Bool)) : Bool);
     RiveShapePath.applyRiveCornerRounding__riveShapePath((cast vertices : Dynamic), (cast closed : Bool));
     first = flighthq._internal._StaticIndex.readArray(vertices, 0.0);
-    appendPathMoveTo(({ final __callArgument5:Dynamic = path; __callArgument5; }), (cast (cast first : RiveVertexPoint__riveShapePath).entryX : Float), (cast (cast first : RiveVertexPoint__riveShapePath).entryY : Float));
-    RiveShapePath.appendRiveCorner__riveShapePath(({ final __callArgument6:Dynamic = path; __callArgument6; }), (cast first : Dynamic));
+    appendPathMoveTo(({ final __callArgument9:Dynamic = path; __callArgument9; }), (cast (cast first : RiveVertexPoint__riveShapePath).entryX : Float), (cast (cast first : RiveVertexPoint__riveShapePath).entryY : Float));
+    RiveShapePath.appendRiveCorner__riveShapePath(({ final __callArgument10:Dynamic = path; __callArgument10; }), (cast first : Dynamic));
     limit = ((cast closed : Bool) ? (cast _Runtime.field(vertices, 'length') : Dynamic) : (cast _Runtime.subtractNumbers(_Runtime.field(vertices, 'length'), 1.0) : Dynamic));
     {
       var step:Float = 0.0;
@@ -53,22 +59,22 @@ class RiveShapePath {
         var from:RiveVertexPoint__riveShapePath = flighthq._internal._StaticIndex.readArray(vertices, step);
         var to:RiveVertexPoint__riveShapePath = flighthq._internal._StaticIndex.readArray(vertices, _Runtime.fmod((step + 1.0), _Runtime.field(vertices, 'length')));
         if ((cast ((cast ((cast ((cast _Runtime.strictEquals((cast from : RiveVertexPoint__riveShapePath).outX, (cast from : RiveVertexPoint__riveShapePath).exitX) : Bool) && (cast _Runtime.strictEquals((cast from : RiveVertexPoint__riveShapePath).outY, (cast from : RiveVertexPoint__riveShapePath).exitY) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast to : RiveVertexPoint__riveShapePath).inX, (cast to : RiveVertexPoint__riveShapePath).entryX) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast to : RiveVertexPoint__riveShapePath).inY, (cast to : RiveVertexPoint__riveShapePath).entryY) : Bool)) : Bool)) {
-          appendPathLineTo(({ final __callArgument7:Dynamic = path; __callArgument7; }), (cast (cast to : RiveVertexPoint__riveShapePath).entryX : Float), (cast (cast to : RiveVertexPoint__riveShapePath).entryY : Float));
+          appendPathLineTo(({ final __callArgument11:Dynamic = path; __callArgument11; }), (cast (cast to : RiveVertexPoint__riveShapePath).entryX : Float), (cast (cast to : RiveVertexPoint__riveShapePath).entryY : Float));
         } else {
-          appendPathCubicCurveTo(({ final __callArgument8:Dynamic = path; __callArgument8; }), (cast (cast from : RiveVertexPoint__riveShapePath).outX : Float), (cast (cast from : RiveVertexPoint__riveShapePath).outY : Float), (cast (cast to : RiveVertexPoint__riveShapePath).inX : Float), (cast (cast to : RiveVertexPoint__riveShapePath).inY : Float), (cast (cast to : RiveVertexPoint__riveShapePath).entryX : Float), (cast (cast to : RiveVertexPoint__riveShapePath).entryY : Float));
+          appendPathCubicCurveTo(({ final __callArgument12:Dynamic = path; __callArgument12; }), (cast (cast from : RiveVertexPoint__riveShapePath).outX : Float), (cast (cast from : RiveVertexPoint__riveShapePath).outY : Float), (cast (cast to : RiveVertexPoint__riveShapePath).inX : Float), (cast (cast to : RiveVertexPoint__riveShapePath).inY : Float), (cast (cast to : RiveVertexPoint__riveShapePath).entryX : Float), (cast (cast to : RiveVertexPoint__riveShapePath).entryY : Float));
         }
-        RiveShapePath.appendRiveCorner__riveShapePath(({ final __callArgument9:Dynamic = path; __callArgument9; }), (cast to : Dynamic));
+        RiveShapePath.appendRiveCorner__riveShapePath(({ final __callArgument13:Dynamic = path; __callArgument13; }), (cast to : Dynamic));
         step++;
       }
     }
-    if ((cast closed : Bool)) { appendPathClose(({ final __callArgument10:Dynamic = path; __callArgument10; })); }
+    if ((cast closed : Bool)) { appendPathClose(({ final __callArgument14:Dynamic = path; __callArgument14; })); }
     return cast path;
     return cast null;
   }
 
   public static function appendRiveCorner__riveShapePath(path:Path, vertex:RiveVertexPoint__riveShapePath):Void {
     if ((cast _Runtime.strictEquals(_Runtime.field(vertex, 'corner'), null) : Bool)) { return; }
-    appendPathCubicCurveTo(({ final __callArgument11:Dynamic = path; __callArgument11; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(vertex, 'corner') : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(vertex, 'corner') : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(vertex, 'corner') : Array<Float>), (cast 2.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(vertex, 'corner') : Array<Float>), (cast 3.0 : Float)) : Float), (cast _Runtime.field(vertex, 'exitX') : Float), (cast _Runtime.field(vertex, 'exitY') : Float));
+    appendPathCubicCurveTo(({ final __callArgument15:Dynamic = path; __callArgument15; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(vertex, 'corner') : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(vertex, 'corner') : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(vertex, 'corner') : Array<Float>), (cast 2.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(vertex, 'corner') : Array<Float>), (cast 3.0 : Float)) : Float), (cast _Runtime.field(vertex, 'exitX') : Float), (cast _Runtime.field(vertex, 'exitY') : Float));
   }
 
   public static function applyRiveCornerRounding__riveShapePath(vertices:Array<RiveVertexPoint__riveShapePath>, closed:Bool):Void {
@@ -111,34 +117,35 @@ class RiveShapePath {
     }
   }
 
-  public static function createRiveParametricPath__riveShapePath(source:RiveCoreObject):Path {
+  public static function createRiveParametricPath__riveShapePath(source:RiveCoreObject, ?diagnostics:Array<ImportDiagnostic>):Path {
     var path:Path = cast _Runtime.UNDEFINED;
     var width:Float = cast _Runtime.UNDEFINED;
     var height:Float = cast _Runtime.UNDEFINED;
     var left:Float = cast _Runtime.UNDEFINED;
     var top:Float = cast _Runtime.UNDEFINED;
     path = (cast createPath(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Path);
-    width = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument12:Dynamic = source; __callArgument12; }), (cast RiveShapePath.RIVE_PARAMETRIC_WIDTH__riveShapePath : Float), (cast 0.0 : Float)) : Float);
-    height = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument13:Dynamic = source; __callArgument13; }), (cast RiveShapePath.RIVE_PARAMETRIC_HEIGHT__riveShapePath : Float), (cast 0.0 : Float)) : Float);
-    left = (-(cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument14:Dynamic = source; __callArgument14; }), (cast RiveShapePath.RIVE_PARAMETRIC_ORIGIN_X__riveShapePath : Float), (cast 0.5 : Float)) : Float) * width);
-    top = (-(cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument15:Dynamic = source; __callArgument15; }), (cast RiveShapePath.RIVE_PARAMETRIC_ORIGIN_Y__riveShapePath : Float), (cast 0.5 : Float)) : Float) * height);
+    width = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument16:Dynamic = source; __callArgument16; }), (cast RiveShapePath.RIVE_PARAMETRIC_WIDTH__riveShapePath : Float), (cast 0.0 : Float)) : Float);
+    height = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument17:Dynamic = source; __callArgument17; }), (cast RiveShapePath.RIVE_PARAMETRIC_HEIGHT__riveShapePath : Float), (cast 0.0 : Float)) : Float);
+    left = (-(cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument18:Dynamic = source; __callArgument18; }), (cast RiveShapePath.RIVE_PARAMETRIC_ORIGIN_X__riveShapePath : Float), (cast 0.5 : Float)) : Float) * width);
+    top = (-(cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument19:Dynamic = source; __callArgument19; }), (cast RiveShapePath.RIVE_PARAMETRIC_ORIGIN_Y__riveShapePath : Float), (cast 0.5 : Float)) : Float) * height);
     if ((cast (cast isRiveCoreTypeDerivedFrom((cast source.typeKey : Float), (cast RiveShapePath.RIVE_ELLIPSE__riveShapePath : Float)) : Bool) : Bool)) {
-      appendPathEllipse(({ final __callArgument16:Dynamic = path; __callArgument16; }), (cast (left + (width / 2.0)) : Float), (cast (top + (height / 2.0)) : Float), (cast (width / 2.0) : Float), (cast (height / 2.0) : Float));
+      appendPathEllipse(({ final __callArgument20:Dynamic = path; __callArgument20; }), (cast (left + (width / 2.0)) : Float), (cast (top + (height / 2.0)) : Float), (cast (width / 2.0) : Float), (cast (height / 2.0) : Float));
       return cast path;
     }
     if ((cast (cast isRiveCoreTypeDerivedFrom((cast source.typeKey : Float), (cast RiveShapePath.RIVE_POLYGON__riveShapePath : Float)) : Bool) : Bool)) {
-      RiveShapePath.appendRivePolygonPath__riveShapePath(({ final __callArgument17:Dynamic = path; __callArgument17; }), ({ final __callArgument18:Dynamic = source; __callArgument18; }), (cast left : Float), (cast top : Float), (cast width : Float), (cast height : Float));
+      RiveShapePath.appendRivePolygonPath__riveShapePath(({ final __callArgument21:Dynamic = path; __callArgument21; }), ({ final __callArgument22:Dynamic = source; __callArgument22; }), (cast left : Float), (cast top : Float), (cast width : Float), (cast height : Float));
       return cast path;
     }
     if ((cast (cast isRiveCoreTypeDerivedFrom((cast source.typeKey : Float), (cast RiveShapePath.RIVE_TRIANGLE__riveShapePath : Float)) : Bool) : Bool)) {
-      appendPathPolygon(({ final __callArgument19:Dynamic = path; __callArgument19; }), ({ final __callArgument20:Dynamic = cast ([(left + (width / 2.0)), top, (left + width), (top + height), left, (top + height)] : Array<Dynamic>); __callArgument20; }));
+      appendPathPolygon(({ final __callArgument23:Dynamic = path; __callArgument23; }), ({ final __callArgument24:Dynamic = cast ([(left + (width / 2.0)), top, (left + width), (top + height), left, (top + height)] : Array<Dynamic>); __callArgument24; }));
       return cast path;
     }
     if ((cast (cast isRiveCoreTypeDerivedFrom((cast source.typeKey : Float), (cast RiveShapePath.RIVE_RECTANGLE__riveShapePath : Float)) : Bool) : Bool)) {
-      RiveShapePath.appendRiveRectanglePath__riveShapePath(({ final __callArgument21:Dynamic = path; __callArgument21; }), ({ final __callArgument22:Dynamic = source; __callArgument22; }), (cast left : Float), (cast top : Float), (cast width : Float), (cast height : Float));
+      RiveShapePath.appendRiveRectanglePath__riveShapePath(({ final __callArgument25:Dynamic = path; __callArgument25; }), ({ final __callArgument26:Dynamic = source; __callArgument26; }), (cast left : Float), (cast top : Float), (cast width : Float), (cast height : Float));
       return cast path;
     }
-    appendPathRectangle(({ final __callArgument23:Dynamic = path; __callArgument23; }), (cast left : Float), (cast top : Float), (cast width : Float), (cast height : Float));
+    reportImportDiagnostic(({ final __callArgument27:Dynamic = diagnostics; __callArgument27; }), ({ final __callArgument28:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument28; }), (cast 'rive.parametric-path-substituted' : String), (cast 'createRiveParametricPath' : String), ({ final __callArgument29:Dynamic = { substitutedAs: 'rectangle', typeKey: source.typeKey }; __callArgument29; }));
+    appendPathRectangle(({ final __callArgument30:Dynamic = path; __callArgument30; }), (cast left : Float), (cast top : Float), (cast width : Float), (cast height : Float));
     return cast path;
     return cast null;
   }
@@ -148,19 +155,19 @@ class RiveShapePath {
     var topLeft:Float = cast _Runtime.UNDEFINED;
     var radii:Array<Float> = cast _Runtime.UNDEFINED;
     var uniform:Bool = cast _Runtime.UNDEFINED;
-    linked = (cast RiveShapePath.readRiveFlag__riveShapePath(({ final __callArgument24:Dynamic = source; __callArgument24; }), (cast RiveShapePath.RIVE_LINK_CORNER_RADIUS__riveShapePath : Float), (cast true : Bool)) : Bool);
-    topLeft = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument25:Dynamic = source; __callArgument25; }), (cast RiveShapePath.RIVE_CORNER_RADIUS_TL__riveShapePath : Float), (cast 0.0 : Float)) : Float);
-    radii = ((cast linked : Bool) ? (cast cast ([topLeft, topLeft, topLeft, topLeft] : Array<Dynamic>) : Dynamic) : (cast cast ([topLeft, (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument26:Dynamic = source; __callArgument26; }), (cast RiveShapePath.RIVE_CORNER_RADIUS_TR__riveShapePath : Float), (cast 0.0 : Float)) : Float), (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument27:Dynamic = source; __callArgument27; }), (cast RiveShapePath.RIVE_CORNER_RADIUS_BL__riveShapePath : Float), (cast 0.0 : Float)) : Float), (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument28:Dynamic = source; __callArgument28; }), (cast RiveShapePath.RIVE_CORNER_RADIUS_BR__riveShapePath : Float), (cast 0.0 : Float)) : Float)] : Array<Dynamic>) : Dynamic));
+    linked = (cast RiveShapePath.readRiveFlag__riveShapePath(({ final __callArgument31:Dynamic = source; __callArgument31; }), (cast RiveShapePath.RIVE_LINK_CORNER_RADIUS__riveShapePath : Float), (cast true : Bool)) : Bool);
+    topLeft = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument32:Dynamic = source; __callArgument32; }), (cast RiveShapePath.RIVE_CORNER_RADIUS_TL__riveShapePath : Float), (cast 0.0 : Float)) : Float);
+    radii = ((cast linked : Bool) ? (cast cast ([topLeft, topLeft, topLeft, topLeft] : Array<Dynamic>) : Dynamic) : (cast cast ([topLeft, (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument33:Dynamic = source; __callArgument33; }), (cast RiveShapePath.RIVE_CORNER_RADIUS_TR__riveShapePath : Float), (cast 0.0 : Float)) : Float), (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument34:Dynamic = source; __callArgument34; }), (cast RiveShapePath.RIVE_CORNER_RADIUS_BL__riveShapePath : Float), (cast 0.0 : Float)) : Float), (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument35:Dynamic = source; __callArgument35; }), (cast RiveShapePath.RIVE_CORNER_RADIUS_BR__riveShapePath : Float), (cast 0.0 : Float)) : Float)] : Array<Dynamic>) : Dynamic));
     uniform = _Runtime.callProperty(radii, 'every', cast ([function(radius:Float, __unused0:Float, __unused1:Array<Float>):Bool return _Runtime.strictEquals(radius, flighthq._internal._StaticIndex.readFloatArrayTyped((cast radii : Array<Float>), (cast 0.0 : Float)))] : Array<Dynamic>));
     if ((cast ((cast uniform : Bool) && (cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast radii : Array<Float>), (cast 0.0 : Float)) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      appendPathRoundRectangle(({ final __callArgument29:Dynamic = path; __callArgument29; }), (cast left : Float), (cast top : Float), (cast width : Float), (cast height : Float), ({ final __callArgument30:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast radii : Array<Float>), (cast 0.0 : Float)); __callArgument30; }));
+      appendPathRoundRectangle(({ final __callArgument36:Dynamic = path; __callArgument36; }), (cast left : Float), (cast top : Float), (cast width : Float), (cast height : Float), ({ final __callArgument37:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast radii : Array<Float>), (cast 0.0 : Float)); __callArgument37; }));
       return;
     }
     if ((cast uniform : Bool)) {
-      appendPathRectangle(({ final __callArgument31:Dynamic = path; __callArgument31; }), (cast left : Float), (cast top : Float), (cast width : Float), (cast height : Float));
+      appendPathRectangle(({ final __callArgument38:Dynamic = path; __callArgument38; }), (cast left : Float), (cast top : Float), (cast width : Float), (cast height : Float));
       return;
     }
-    RiveShapePath.appendRivePerCornerRectangle__riveShapePath(({ final __callArgument32:Dynamic = path; __callArgument32; }), (cast left : Float), (cast top : Float), (cast width : Float), (cast height : Float), ({ final __callArgument33:Dynamic = radii; __callArgument33; }));
+    RiveShapePath.appendRivePerCornerRectangle__riveShapePath(({ final __callArgument39:Dynamic = path; __callArgument39; }), (cast left : Float), (cast top : Float), (cast width : Float), (cast height : Float), ({ final __callArgument40:Dynamic = radii; __callArgument40; }));
   }
 
   public static function appendRivePerCornerRectangle__riveShapePath(path:Path, left:Float, top:Float, width:Float, height:Float, radii:Array<Float>):Void {
@@ -181,19 +188,19 @@ class RiveShapePath {
     br = flighthq._internal._StaticIndex.readArray(__destructure2, 3.0);
     right = (left + width);
     bottom = (top + height);
-    k = RiveShapePath.CIRCLE_CUBIC_RATIO__riveShapePath;
-    appendPathMoveTo(({ final __callArgument34:Dynamic = path; __callArgument34; }), (cast (left + tl) : Float), (cast top : Float));
-    appendPathLineTo(({ final __callArgument35:Dynamic = path; __callArgument35; }), (cast (right - tr) : Float), (cast top : Float));
-    if ((cast ((cast tr : Float) > (cast 0.0 : Float)) : Bool)) { appendPathCubicCurveTo(({ final __callArgument36:Dynamic = path; __callArgument36; }), (cast ((right - tr) + (tr * k)) : Float), (cast top : Float), (cast right : Float), (cast ((top + tr) - (tr * k)) : Float), (cast right : Float), (cast (top + tr) : Float)); }
-    appendPathLineTo(({ final __callArgument37:Dynamic = path; __callArgument37; }), (cast right : Float), (cast (bottom - br) : Float));
+    k = CIRCLE_KAPPA;
+    appendPathMoveTo(({ final __callArgument41:Dynamic = path; __callArgument41; }), (cast (left + tl) : Float), (cast top : Float));
+    appendPathLineTo(({ final __callArgument42:Dynamic = path; __callArgument42; }), (cast (right - tr) : Float), (cast top : Float));
+    if ((cast ((cast tr : Float) > (cast 0.0 : Float)) : Bool)) { appendPathCubicCurveTo(({ final __callArgument43:Dynamic = path; __callArgument43; }), (cast ((right - tr) + (tr * k)) : Float), (cast top : Float), (cast right : Float), (cast ((top + tr) - (tr * k)) : Float), (cast right : Float), (cast (top + tr) : Float)); }
+    appendPathLineTo(({ final __callArgument44:Dynamic = path; __callArgument44; }), (cast right : Float), (cast (bottom - br) : Float));
     if ((cast ((cast br : Float) > (cast 0.0 : Float)) : Bool)) {
-      appendPathCubicCurveTo(({ final __callArgument38:Dynamic = path; __callArgument38; }), (cast right : Float), (cast ((bottom - br) + (br * k)) : Float), (cast ((right - br) + (br * k)) : Float), (cast bottom : Float), (cast (right - br) : Float), (cast bottom : Float));
+      appendPathCubicCurveTo(({ final __callArgument45:Dynamic = path; __callArgument45; }), (cast right : Float), (cast ((bottom - br) + (br * k)) : Float), (cast ((right - br) + (br * k)) : Float), (cast bottom : Float), (cast (right - br) : Float), (cast bottom : Float));
     }
-    appendPathLineTo(({ final __callArgument39:Dynamic = path; __callArgument39; }), (cast (left + bl) : Float), (cast bottom : Float));
-    if ((cast ((cast bl : Float) > (cast 0.0 : Float)) : Bool)) { appendPathCubicCurveTo(({ final __callArgument40:Dynamic = path; __callArgument40; }), (cast ((left + bl) - (bl * k)) : Float), (cast bottom : Float), (cast left : Float), (cast ((bottom - bl) + (bl * k)) : Float), (cast left : Float), (cast (bottom - bl) : Float)); }
-    appendPathLineTo(({ final __callArgument41:Dynamic = path; __callArgument41; }), (cast left : Float), (cast (top + tl) : Float));
-    if ((cast ((cast tl : Float) > (cast 0.0 : Float)) : Bool)) { appendPathCubicCurveTo(({ final __callArgument42:Dynamic = path; __callArgument42; }), (cast left : Float), (cast ((top + tl) - (tl * k)) : Float), (cast ((left + tl) - (tl * k)) : Float), (cast top : Float), (cast (left + tl) : Float), (cast top : Float)); }
-    appendPathClose(({ final __callArgument43:Dynamic = path; __callArgument43; }));
+    appendPathLineTo(({ final __callArgument46:Dynamic = path; __callArgument46; }), (cast (left + bl) : Float), (cast bottom : Float));
+    if ((cast ((cast bl : Float) > (cast 0.0 : Float)) : Bool)) { appendPathCubicCurveTo(({ final __callArgument47:Dynamic = path; __callArgument47; }), (cast ((left + bl) - (bl * k)) : Float), (cast bottom : Float), (cast left : Float), (cast ((bottom - bl) + (bl * k)) : Float), (cast left : Float), (cast (bottom - bl) : Float)); }
+    appendPathLineTo(({ final __callArgument48:Dynamic = path; __callArgument48; }), (cast left : Float), (cast (top + tl) : Float));
+    if ((cast ((cast tl : Float) > (cast 0.0 : Float)) : Bool)) { appendPathCubicCurveTo(({ final __callArgument49:Dynamic = path; __callArgument49; }), (cast left : Float), (cast ((top + tl) - (tl * k)) : Float), (cast ((left + tl) - (tl * k)) : Float), (cast top : Float), (cast (left + tl) : Float), (cast top : Float)); }
+    appendPathClose(({ final __callArgument50:Dynamic = path; __callArgument50; }));
   }
 
   public static function appendRivePolygonPath__riveShapePath(path:Path, source:RiveCoreObject, left:Float, top:Float, width:Float, height:Float):Void {
@@ -204,9 +211,9 @@ class RiveShapePath {
     var centerY:Float = cast _Runtime.UNDEFINED;
     var count:Float = cast _Runtime.UNDEFINED;
     var vertices:Array<Float> = cast _Runtime.UNDEFINED;
-    points = HxMath.max(3.0, HxMath.round((cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument44:Dynamic = source; __callArgument44; }), (cast RiveShapePath.RIVE_POLYGON_POINTS__riveShapePath : Float), (cast 5.0 : Float)) : Float)));
+    points = HxMath.max(3.0, HxMath.round((cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument51:Dynamic = source; __callArgument51; }), (cast RiveShapePath.RIVE_POLYGON_POINTS__riveShapePath : Float), (cast 5.0 : Float)) : Float)));
     star = (cast isRiveCoreTypeDerivedFrom((cast source.typeKey : Float), (cast RiveShapePath.RIVE_STAR__riveShapePath : Float)) : Bool);
-    innerRatio = ((cast star : Bool) ? (cast (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument45:Dynamic = source; __callArgument45; }), (cast RiveShapePath.RIVE_STAR_INNER_RADIUS__riveShapePath : Float), (cast 0.5 : Float)) : Float) : Dynamic) : (cast 1.0 : Dynamic));
+    innerRatio = ((cast star : Bool) ? (cast (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument52:Dynamic = source; __callArgument52; }), (cast RiveShapePath.RIVE_STAR_INNER_RADIUS__riveShapePath : Float), (cast 0.5 : Float)) : Float) : Dynamic) : (cast 1.0 : Dynamic));
     centerX = (left + (width / 2.0));
     centerY = (top + (height / 2.0));
     count = ((cast star : Bool) ? (cast (points * 2.0) : Dynamic) : (cast points : Dynamic));
@@ -220,7 +227,7 @@ class RiveShapePath {
         index++;
       }
     }
-    appendPathPolygon(({ final __callArgument46:Dynamic = path; __callArgument46; }), ({ final __callArgument47:Dynamic = vertices; __callArgument47; }));
+    appendPathPolygon(({ final __callArgument53:Dynamic = path; __callArgument53; }), ({ final __callArgument54:Dynamic = vertices; __callArgument54; }));
   }
 
   public static function collectRiveVertices__riveShapePath(artboard:RiveArtboardGraph, pathIndex:Float):Array<RiveVertexPoint__riveShapePath> {
@@ -232,7 +239,7 @@ class RiveShapePath {
         if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast index : Float)), pathIndex) : Bool)) { index++; continue; }
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(artboard.objects, index);
         if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveShapePath.RIVE_PATH_VERTEX__riveShapePath : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
-        _Runtime.callProperty(points, 'push', cast ([(cast RiveShapePath.createRiveVertexPoint__riveShapePath(({ final __callArgument48:Dynamic = object; __callArgument48; })) : RiveVertexPoint__riveShapePath)] : Array<Dynamic>));
+        _Runtime.callProperty(points, 'push', cast ([(cast RiveShapePath.createRiveVertexPoint__riveShapePath(({ final __callArgument55:Dynamic = object; __callArgument55; })) : RiveVertexPoint__riveShapePath)] : Array<Dynamic>));
         index++;
       }
     }
@@ -244,14 +251,14 @@ class RiveShapePath {
     var x:Float = cast _Runtime.UNDEFINED;
     var y:Float = cast _Runtime.UNDEFINED;
     var point:RiveVertexPoint__riveShapePath = cast _Runtime.UNDEFINED;
-    x = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument49:Dynamic = source; __callArgument49; }), (cast RiveShapePath.RIVE_VERTEX_X__riveShapePath : Float), (cast 0.0 : Float)) : Float);
-    y = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument50:Dynamic = source; __callArgument50; }), (cast RiveShapePath.RIVE_VERTEX_Y__riveShapePath : Float), (cast 0.0 : Float)) : Float);
-    point = (cast { corner: null, entryX: x, entryY: y, exitX: x, exitY: y, inX: x, inY: y, outX: x, outY: y, radius: ((cast (cast isRiveCoreTypeDerivedFrom((cast source.typeKey : Float), (cast RiveShapePath.RIVE_STRAIGHT_VERTEX__riveShapePath : Float)) : Bool) : Bool) ? (cast (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument51:Dynamic = source; __callArgument51; }), (cast RiveShapePath.RIVE_VERTEX_RADIUS__riveShapePath : Float), (cast 0.0 : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic)), x: x, y: y });
+    x = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument56:Dynamic = source; __callArgument56; }), (cast RiveShapePath.RIVE_VERTEX_X__riveShapePath : Float), (cast 0.0 : Float)) : Float);
+    y = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument57:Dynamic = source; __callArgument57; }), (cast RiveShapePath.RIVE_VERTEX_Y__riveShapePath : Float), (cast 0.0 : Float)) : Float);
+    point = (cast { corner: null, entryX: x, entryY: y, exitX: x, exitY: y, inX: x, inY: y, outX: x, outY: y, radius: ((cast (cast isRiveCoreTypeDerivedFrom((cast source.typeKey : Float), (cast RiveShapePath.RIVE_STRAIGHT_VERTEX__riveShapePath : Float)) : Bool) : Bool) ? (cast (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument58:Dynamic = source; __callArgument58; }), (cast RiveShapePath.RIVE_VERTEX_RADIUS__riveShapePath : Float), (cast 0.0 : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic)), x: x, y: y });
     if ((cast (cast isRiveCoreTypeDerivedFrom((cast source.typeKey : Float), (cast RiveShapePath.RIVE_CUBIC_DETACHED_VERTEX__riveShapePath : Float)) : Bool) : Bool)) {
-      var inRotation:Float = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument52:Dynamic = source; __callArgument52; }), (cast RiveShapePath.RIVE_IN_ROTATION__riveShapePath : Float), (cast 0.0 : Float)) : Float);
-      var inDistance:Float = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument53:Dynamic = source; __callArgument53; }), (cast RiveShapePath.RIVE_IN_DISTANCE__riveShapePath : Float), (cast 0.0 : Float)) : Float);
-      var outRotation:Float = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument54:Dynamic = source; __callArgument54; }), (cast RiveShapePath.RIVE_OUT_ROTATION__riveShapePath : Float), (cast 0.0 : Float)) : Float);
-      var outDistance:Float = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument55:Dynamic = source; __callArgument55; }), (cast RiveShapePath.RIVE_OUT_DISTANCE__riveShapePath : Float), (cast 0.0 : Float)) : Float);
+      var inRotation:Float = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument59:Dynamic = source; __callArgument59; }), (cast RiveShapePath.RIVE_IN_ROTATION__riveShapePath : Float), (cast 0.0 : Float)) : Float);
+      var inDistance:Float = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument60:Dynamic = source; __callArgument60; }), (cast RiveShapePath.RIVE_IN_DISTANCE__riveShapePath : Float), (cast 0.0 : Float)) : Float);
+      var outRotation:Float = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument61:Dynamic = source; __callArgument61; }), (cast RiveShapePath.RIVE_OUT_ROTATION__riveShapePath : Float), (cast 0.0 : Float)) : Float);
+      var outDistance:Float = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument62:Dynamic = source; __callArgument62; }), (cast RiveShapePath.RIVE_OUT_DISTANCE__riveShapePath : Float), (cast 0.0 : Float)) : Float);
       ((cast point : RiveVertexPoint__riveShapePath).inX = (x + _Runtime.multiplyNumbers(HxMath.cos(inRotation), inDistance)));
       ((cast point : RiveVertexPoint__riveShapePath).inY = (y + _Runtime.multiplyNumbers(HxMath.sin(inRotation), inDistance)));
       ((cast point : RiveVertexPoint__riveShapePath).outX = (x + _Runtime.multiplyNumbers(HxMath.cos(outRotation), outDistance)));
@@ -259,13 +266,13 @@ class RiveShapePath {
       return cast point;
     }
     if ((cast (cast isRiveCoreTypeDerivedFrom((cast source.typeKey : Float), (cast RiveShapePath.RIVE_CUBIC_MIRRORED_VERTEX__riveShapePath : Float)) : Bool) : Bool)) {
-      var rotation:Float = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument56:Dynamic = source; __callArgument56; }), (cast RiveShapePath.RIVE_MIRRORED_ROTATION__riveShapePath : Float), (cast 0.0 : Float)) : Float);
-      var distance:Float = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument57:Dynamic = source; __callArgument57; }), (cast RiveShapePath.RIVE_MIRRORED_DISTANCE__riveShapePath : Float), (cast 0.0 : Float)) : Float);
+      var rotation:Float = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument63:Dynamic = source; __callArgument63; }), (cast RiveShapePath.RIVE_MIRRORED_ROTATION__riveShapePath : Float), (cast 0.0 : Float)) : Float);
+      var distance:Float = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument64:Dynamic = source; __callArgument64; }), (cast RiveShapePath.RIVE_MIRRORED_DISTANCE__riveShapePath : Float), (cast 0.0 : Float)) : Float);
       return cast (cast RiveShapePath.applyRiveCollinearHandles__riveShapePath((cast point : Dynamic), (cast rotation : Float), (cast distance : Float), (cast distance : Float)) : RiveVertexPoint__riveShapePath);
     }
     if ((cast (cast isRiveCoreTypeDerivedFrom((cast source.typeKey : Float), (cast RiveShapePath.RIVE_CUBIC_ASYMMETRIC_VERTEX__riveShapePath : Float)) : Bool) : Bool)) {
-      var rotation:Float = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument58:Dynamic = source; __callArgument58; }), (cast RiveShapePath.RIVE_ASYMMETRIC_ROTATION__riveShapePath : Float), (cast 0.0 : Float)) : Float);
-      return cast (cast RiveShapePath.applyRiveCollinearHandles__riveShapePath((cast point : Dynamic), (cast rotation : Float), (cast (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument59:Dynamic = source; __callArgument59; }), (cast RiveShapePath.RIVE_ASYMMETRIC_IN_DISTANCE__riveShapePath : Float), (cast 0.0 : Float)) : Float) : Float), (cast (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument60:Dynamic = source; __callArgument60; }), (cast RiveShapePath.RIVE_ASYMMETRIC_OUT_DISTANCE__riveShapePath : Float), (cast 0.0 : Float)) : Float) : Float)) : RiveVertexPoint__riveShapePath);
+      var rotation:Float = (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument65:Dynamic = source; __callArgument65; }), (cast RiveShapePath.RIVE_ASYMMETRIC_ROTATION__riveShapePath : Float), (cast 0.0 : Float)) : Float);
+      return cast (cast RiveShapePath.applyRiveCollinearHandles__riveShapePath((cast point : Dynamic), (cast rotation : Float), (cast (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument66:Dynamic = source; __callArgument66; }), (cast RiveShapePath.RIVE_ASYMMETRIC_IN_DISTANCE__riveShapePath : Float), (cast 0.0 : Float)) : Float) : Float), (cast (cast RiveShapePath.readRiveDouble__riveShapePath(({ final __callArgument67:Dynamic = source; __callArgument67; }), (cast RiveShapePath.RIVE_ASYMMETRIC_OUT_DISTANCE__riveShapePath : Float), (cast 0.0 : Float)) : Float) : Float)) : RiveVertexPoint__riveShapePath);
     }
     return cast point;
     return cast null;
@@ -297,8 +304,6 @@ class RiveShapePath {
     return cast ((cast ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast property : { var value:RiveValue; }).value), 'number') : Bool)) : Bool) ? (cast fallback : Dynamic) : (cast !_Runtime.strictEquals((cast property : { var value:RiveValue; }).value, 0.0) : Dynamic));
     return cast null;
   }
-
-  public static final CIRCLE_CUBIC_RATIO__riveShapePath:Float = 0.5522847498307936;
 
   public static final RIVE_PATH_VERTEX__riveShapePath:Float = 14.0;
 

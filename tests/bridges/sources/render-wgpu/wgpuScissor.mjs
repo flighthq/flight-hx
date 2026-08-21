@@ -8,3 +8,4 @@ __syncDependencies();
 export const applyWgpuScissorRect = api.applyWgpuScissorRect;
 export const popWgpuScissorRect = api.popWgpuScissorRect;
 export const pushWgpuScissorRect = api.pushWgpuScissorRect;
+export const setWgpuRenderPassScissorRect = api.setWgpuRenderPassScissorRect;

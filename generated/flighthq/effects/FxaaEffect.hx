@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.FxaaEffect;
 
 class FxaaEffect {
-  public static function createFxaaEffect(?options:flighthq._internal._Omit<flighthq.types.FxaaEffect, String>):flighthq.types.FxaaEffect {
+  public static function createFxaaEffect(?options:{ @:optional var edgeThreshold:Null<Float>; @:optional var subpixel:Null<Float>; }):flighthq.types.FxaaEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'FxaaEffect' }, options]);
     return cast null;

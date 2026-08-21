@@ -73,10 +73,10 @@ class CanvasSourceModeCompositing {
     var g:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
     var a:Float = cast _Runtime.UNDEFINED;
-    r = (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255);
-    g = (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255);
-    b = (_Runtime.toInt32(color) & 255);
-    a = HxMath.max(0.0, HxMath.min(1.0, alpha));
+    r = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
+    g = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255);
+    b = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255);
+    a = HxMath.max(0.0, HxMath.min(1.0, (alpha * ((_Runtime.toInt32(color) & 255) / 255.0))));
     return cast 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',' + Std.string(_Runtime.toFixed(a, 3.0)) + ')';
     return cast null;
   }

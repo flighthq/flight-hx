@@ -10,7 +10,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class DisplacementEffect {
-  public static function createDisplacementEffect(?options:flighthq._internal._Omit<flighthq.types.DisplacementEffect, String>):flighthq.types.DisplacementEffect {
+  public static function createDisplacementEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var frequency:Null<Float>; @:optional var seed:Null<Float>; }):flighthq.types.DisplacementEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'DisplacementEffect' }, options]);
     return cast null;

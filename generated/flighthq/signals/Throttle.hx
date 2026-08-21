@@ -77,6 +77,7 @@ class Throttle {
     var trailingTimer:Null<Dynamic> = cast _Runtime.UNDEFINED;
     var lastArgs:Null<Array<flighthq._internal._Any>> = cast _Runtime.UNDEFINED;
     var clearTrailing:Void->Void = cast _Runtime.UNDEFINED;
+    var scheduleTrailing:Float->Void = cast _Runtime.UNDEFINED;
     var handler:T = cast _Runtime.UNDEFINED;
     leading = _Runtime.coalesce(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.leading; }), function():Dynamic return cast true);
     trailing = _Runtime.coalesce(({ final __typedStruct7 = options; __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.trailing; }), function():Dynamic return cast true);
@@ -89,6 +90,14 @@ class Throttle {
         (trailingTimer = cast (null : Dynamic));
       }
     });
+    scheduleTrailing = (cast function(delay:Float):Void {
+      (trailingTimer = cast (_Runtime.setTimeout(function():Void {
+        (lastFiredAt = cast (_Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)) : Dynamic));
+        (trailingTimer = cast (null : Dynamic));
+        _Runtime.apply(slot, _Runtime.concatArrays([_Runtime.toArray(lastArgs)]));
+        (lastArgs = cast (null : Dynamic));
+      }, delay) : Dynamic));
+    });
     handler = (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
       var now:Float = cast _Runtime.UNDEFINED;
       var remaining:Float = cast _Runtime.UNDEFINED;
@@ -99,20 +108,14 @@ class Throttle {
         (lastFiredAt = cast (now : Dynamic));
         if ((cast leading : Bool)) {
           _Runtime.apply(slot, _Runtime.concatArrays([_Runtime.toArray(args)]));
-        } else {
+        } else { if ((cast trailing : Bool)) {
           (lastArgs = cast (args : Dynamic));
-        }
+          scheduleTrailing((cast intervalMs : Float));
+        } }
       } else { if ((cast trailing : Bool)) {
         clearTrailing();
         (lastArgs = cast (args : Dynamic));
-        (trailingTimer = cast (_Runtime.setTimeout(function():Void {
-          (lastFiredAt = cast (_Runtime.callProperty(flighthq._internal._HostValueLut.get('Date'), 'now', cast ([] : Array<Dynamic>)) : Dynamic));
-          (trailingTimer = cast (null : Dynamic));
-          if ((cast !_Runtime.strictEquals(lastArgs, null) : Bool)) {
-            _Runtime.apply(slot, _Runtime.concatArrays([_Runtime.toArray(lastArgs)]));
-            (lastArgs = cast (null : Dynamic));
-          }
-        }, remaining) : Dynamic));
+        scheduleTrailing((cast remaining : Float));
       } }
     }, 0) : T);
     connectSignal((cast source : Dynamic), (cast handler : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);

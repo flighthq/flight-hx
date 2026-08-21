@@ -6,13 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.types.InvertAdjustment;
 
 class InvertAdjustment {
-  public static function createInvertAdjustment(?options:flighthq._internal._Omit<flighthq.types.InvertAdjustment, String>):flighthq.types.InvertAdjustment {
+  public static function createInvertAdjustment(?options:{ @:optional var intensity:Null<Float>; }):flighthq.types.InvertAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var intensity:Float = cast _Runtime.UNDEFINED;
     var s:Float = cast _Runtime.UNDEFINED;
     var o:Float = cast _Runtime.UNDEFINED;
     var colorMatrix:Array<Float> = cast _Runtime.UNDEFINED;
-    intensity = _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0);
+    intensity = _Runtime.coalesce((cast options : { @:optional var intensity:Null<Float>; }).intensity, function():Dynamic return cast 1.0);
     s = (1.0 - (2.0 * intensity));
     o = intensity;
     colorMatrix = (cast cast ([s, 0.0, 0.0, 0.0, o, 0.0, s, 0.0, 0.0, o, 0.0, 0.0, s, 0.0, o, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));

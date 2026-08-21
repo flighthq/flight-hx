@@ -23,6 +23,7 @@ import flighthq.scene3dFormats.Md2Schema.MD2_VERSION;
 import flighthq.scene3dFormats.Shared.CANONICAL_FLOATS_PER_VERTEX;
 import flighthq.scene3dFormats.Shared.CANONICAL_LAYOUT;
 import flighthq.scene3dFormats.Shared.createExternalTextureRef;
+import flighthq.scene3dFormats.Shared.reverseTriangleWinding;
 import flighthq.types.AnimationTrack;
 import flighthq.types.ImageResourceReference;
 import flighthq.types.ImportDiagnostic;
@@ -243,7 +244,7 @@ class Md2Parse {
           s++;
           continue;
         }
-        var material:Material = (cast (cast createBlinnPhongMaterial(({ final __callArgument44:Dynamic = { diffuseMap: (cast createExternalTextureRef((cast skinName : String), ({ final __callArgument43:Dynamic = null; __callArgument43; }), (cast document.resources : Dynamic)) : Texture) }; __callArgument44; })) : flighthq._internal._Any) : Material);
+        var material:Material = (cast (cast createBlinnPhongMaterial((cast { diffuseMap: (cast createExternalTextureRef((cast skinName : String), ({ final __callArgument43:Dynamic = null; __callArgument43; }), (cast document.resources : Dynamic)) : Texture) } : Dynamic)) : flighthq._internal._Any) : Material);
         ((cast material : Material).name = skinName);
         var index:Float = _Runtime.field(document.materials, 'length');
         _Runtime.callProperty(document.materials, 'push', cast ([(cast (cast material : flighthq._internal._Any) : MaterialLike)] : Array<Dynamic>));
@@ -252,8 +253,9 @@ class Md2Parse {
       }
     }
     if ((cast ((cast emptySkinCount : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument45:Dynamic = diagnostics; __callArgument45; }), ({ final __callArgument46:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument46; }), (cast 'md2.skin-empty-path' : String), (cast 'parseMd2' : String), ({ final __callArgument47:Dynamic = { count: emptySkinCount, firstSkin: firstEmptySkin }; __callArgument47; }));
+      reportImportDiagnostic(({ final __callArgument44:Dynamic = diagnostics; __callArgument44; }), ({ final __callArgument45:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument45; }), (cast 'md2.skin-empty-path' : String), (cast 'parseMd2' : String), ({ final __callArgument46:Dynamic = { count: emptySkinCount, firstSkin: firstEmptySkin }; __callArgument46; }));
     }
+    reverseTriangleWinding(({ final __callArgument47:Dynamic = indices; __callArgument47; }));
     vertices = new flighthq._internal._Float32Array(interleavedVertices);
     indexArray = new flighthq._internal._UInt32Array(indices);
     geometry = (cast createMeshGeometry(({ final __callArgument48:Dynamic = { indices: indexArray, layout: CANONICAL_LAYOUT, vertices: vertices }; __callArgument48; })) : MeshGeometry);

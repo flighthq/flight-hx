@@ -6,6 +6,7 @@ __syncDependencies();
 export * from './aabb.mjs';
 export * from './boundingSphere.mjs';
 export * from './capsule.mjs';
+export * from './enableGeometryPoolGuards.mjs';
 export * from './frustum.mjs';
 export * from './matrix.mjs';
 export * from './matrix3.mjs';

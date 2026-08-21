@@ -27,7 +27,8 @@ describe('analyzeUpstream', () => {
     const sdk = inventory.packages.find((item) => item.name === '@flighthq/sdk');
     const hostElectron = inventory.packages.find((item) => item.name === '@flighthq/host-electron');
     const toolCapture = inventory.packages.find((item) => item.name === '@flighthq/tool-capture');
-    if (!abc || !compression || !geometry || !sdk || !hostElectron || !toolCapture) {
+    const toolRegistry = inventory.packages.find((item) => item.name === '@flighthq/tool-registry');
+    if (!abc || !compression || !geometry || !sdk || !hostElectron || !toolCapture || !toolRegistry) {
       throw new Error('Expected representative packages');
     }
     const abcRoot = resolvePackageExportLane(inventoryByName, '@flighthq/abc');
@@ -39,14 +40,14 @@ describe('analyzeUpstream', () => {
 
     expect(inventory.schemaVersion).toBe(4);
     expect(inventory.summary).toMatchObject({
-      excludedPackages: 1,
+      excludedPackages: 2,
       exportConflicts: 0,
-      exportLanes: 299,
-      exports: 32_998,
-      packages: 143,
-      rootExports: 12_782,
-      sourceFiles: 2_544,
-      testFiles: 1_419,
+      exportLanes: 313,
+      exports: 34_370,
+      packages: 150,
+      rootExports: 13_301,
+      sourceFiles: 2_654,
+      testFiles: 1_505,
     });
     expect(inventory.packages.every((item) => item.exportLanes.some((lane) => lane.entry === '.'))).toBe(true);
     expect(inventory.packages.every((item) => item.exportLanes.some((lane) => lane.entry === './contract'))).toBe(true);
@@ -83,6 +84,7 @@ describe('analyzeUpstream', () => {
     expect(hostElectron.exclusion).toBeNull();
     expect(toolCapture.exclusion).toMatchObject({
       evidence: {
+        nodeEntrypoints: [expect.stringContaining('/tool-capture/src/bin.ts')],
         nodeImports: expect.arrayContaining(['node:fs']),
         playwrightDependencies: ['@playwright/test'],
         playwrightImports: ['@playwright/test'],
@@ -91,6 +93,18 @@ describe('analyzeUpstream', () => {
       },
       reason: expect.stringContaining('absent from SDK barrels'),
       rule: 'node-playwright-tooling',
+    });
+    expect(toolRegistry.exclusion).toMatchObject({
+      evidence: {
+        nodeEntrypoints: [expect.stringContaining('/tool-registry/src/bin.ts')],
+        nodeImports: [],
+        playwrightDependencies: [],
+        playwrightImports: [],
+        sdkExposures: [],
+        toolingBins: ['tool-registry -> dist/bin.js'],
+      },
+      reason: expect.stringContaining('production Node entrypoint'),
+      rule: 'node-cli-tooling',
     });
     expect(toolCapture.exportLanes.find((lane) => lane.entry === '.')?.conditions).toContainEqual({
       condition: 'browser',
@@ -147,7 +161,7 @@ describe('analyzeUpstream', () => {
     expect(config).not.toContain('excludedPackages');
   });
 
-  it('fails closed for partial or additional tooling exclusion claims', () => {
+  it('fails closed for partial tooling claims and derives each complete host rationale', () => {
     const directory = mkdtempSync(path.join(os.tmpdir(), 'flight-exclusions-'));
     try {
       const complete = exclusionFixture(directory, 'complete', {
@@ -160,12 +174,21 @@ describe('analyzeUpstream', () => {
       });
 
       const partial = exclusionFixture(directory, 'partial', {
-        dependencies: {},
+        dependencies: { '@playwright/test': '^1.0.0' },
         imports: ["import 'node:path';"],
         toolingBin: true,
       });
       expect(() => derivePackageExclusions(directory, [complete, partial])).toThrow(
-        /Partial package exclusion matches:[\s\S]*missing Playwright production dependency/u,
+        /Partial package exclusion matches:[\s\S]*missing production Playwright import/u,
+      );
+
+      const hostless = exclusionFixture(directory, 'hostless', {
+        dependencies: {},
+        imports: [],
+        toolingBin: true,
+      });
+      expect(() => derivePackageExclusions(directory, [complete, hostless])).toThrow(
+        /Partial package exclusion matches:[\s\S]*missing production Node import or entrypoint/u,
       );
 
       const newHostReason = exclusionFixture(directory, 'new-host-reason', {
@@ -181,14 +204,14 @@ describe('analyzeUpstream', () => {
         /Partial package exclusion matches:[\s\S]*unsupported host dependencies \(electron\)[\s\S]*unsupported host imports \(electron\)/u,
       );
 
-      const additional = exclusionFixture(directory, 'additional', {
-        dependencies: { '@playwright/test': '^1.0.0' },
-        imports: ["import 'node:crypto';", "import type { Browser } from '@playwright/test';"],
+      const nodeCli = exclusionFixture(directory, 'node-cli', {
+        dependencies: {},
+        imports: ['#!/usr/bin/env node'],
         toolingBin: true,
       });
-      expect(() => derivePackageExclusions(directory, [complete, additional])).toThrow(
-        'Package exclusion derivation changed: expected exactly one node-playwright-tooling exclusion, found 2',
-      );
+      const exclusions = derivePackageExclusions(directory, [complete, nodeCli]);
+      expect(exclusions.get(complete.name)?.rule).toBe('node-playwright-tooling');
+      expect(exclusions.get(nodeCli.name)?.rule).toBe('node-cli-tooling');
     } finally {
       rmSync(directory, { force: true, recursive: true });
     }
@@ -200,7 +223,7 @@ describe('auditLowering', () => {
     const audit = auditLowering(path.resolve('.'));
     const math = audit.packages.find((item) => item.packageName === '@flighthq/math');
 
-    expect(audit.summary.packages).toBe(142);
+    expect(audit.summary.packages).toBe(148);
     expect(audit.summary.declarations).toBeGreaterThan(5_000);
     expect(audit.summary.lowered).toBe(audit.summary.declarations);
     expect(audit.summary.diagnostics).toBe(0);

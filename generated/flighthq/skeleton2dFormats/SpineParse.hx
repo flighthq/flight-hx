@@ -62,7 +62,7 @@ class SpineParse {
       var entry:{ @:optional var offsets:flighthq._internal._Any; @:optional var time:flighthq._internal._Any; } = (cast frame : { @:optional var offsets:flighthq._internal._Any; @:optional var time:flighthq._internal._Any; });
       var ordering:Null<Array<Float>> = (cast SpineParse.resolveSpineDrawOrder__spineParse((cast (cast entry : { @:optional var offsets:flighthq._internal._Any; @:optional var time:flighthq._internal._Any; }).offsets : flighthq._internal._Any), ({ final __callArgument2:Dynamic = slots; __callArgument2; })) : Null<Array<Float>>);
       if ((cast _Runtime.strictEquals(ordering, null) : Bool)) {
-        reportImportDiagnostic(({ final __callArgument3:Dynamic = diagnostics; __callArgument3; }), ({ final __callArgument4:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument4; }), (cast 'spine.draworder-keyframe-unresolved' : String), (cast 'parseSpineSkeleton' : String), ({ final __callArgument5:Dynamic = { time: (cast SpineParse.numberOr__spineParse((cast (cast entry : { @:optional var offsets:flighthq._internal._Any; @:optional var time:flighthq._internal._Any; }).time : flighthq._internal._Any), (cast 0.0 : Float)) : Float) }; __callArgument5; }));
+        reportImportDiagnostic(({ final __callArgument3:Dynamic = diagnostics; __callArgument3; }), ({ final __callArgument4:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument4; }), (cast 'spine.draworder-keyframe-unresolved' : String), (cast 'parseSpineDrawOrderTimeline' : String), ({ final __callArgument5:Dynamic = { time: (cast SpineParse.numberOr__spineParse((cast (cast entry : { @:optional var offsets:flighthq._internal._Any; @:optional var time:flighthq._internal._Any; }).time : flighthq._internal._Any), (cast 0.0 : Float)) : Float) }; __callArgument5; }));
         continue;
       }
       _Runtime.callProperty(times, 'push', cast ([(cast SpineParse.numberOr__spineParse((cast (cast entry : { @:optional var offsets:flighthq._internal._Any; @:optional var time:flighthq._internal._Any; }).time : flighthq._internal._Any), (cast 0.0 : Float)) : Float)] : Array<Dynamic>));
@@ -118,7 +118,7 @@ class SpineParse {
     type = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast raw : { var type:flighthq._internal._Any; }).type), 'string') : Bool) ? (cast (cast raw : { var type:flighthq._internal._Any; }).type : Dynamic) : (cast 'region' : Dynamic));
     if ((cast _Runtime.strictEquals(type, 'region') : Bool)) { return cast (cast SpineParse.parseSpineRegionAttachment__spineParse((cast name : String), ({ final __callArgument11:Dynamic = raw; __callArgument11; })) : RegionAttachment2D); }
     if ((cast _Runtime.strictEquals(type, 'mesh') : Bool)) { return cast (cast SpineParse.parseSpineMeshAttachment__spineParse((cast name : String), ({ final __callArgument12:Dynamic = raw; __callArgument12; }), ({ final __callArgument13:Dynamic = diagnostics; __callArgument13; })) : MeshAttachment2D); }
-    reportImportDiagnostic(({ final __callArgument14:Dynamic = diagnostics; __callArgument14; }), ({ final __callArgument15:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument15; }), (cast 'spine.' + Std.string(type) + '-attachment-unsupported' : String), (cast 'parseSpineSkeleton' : String), ({ final __callArgument16:Dynamic = { name: 1.0 }; __callArgument16; }));
+    reportImportDiagnostic(({ final __callArgument14:Dynamic = diagnostics; __callArgument14; }), ({ final __callArgument15:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument15; }), (cast 'spine.' + Std.string(type) + '-attachment-unsupported' : String), (cast 'parseSpineAttachment' : String), ({ final __callArgument16:Dynamic = { name: 1.0 }; __callArgument16; }));
     return cast null;
     return cast null;
   }
@@ -280,7 +280,7 @@ class SpineParse {
       }
     }
     if ((cast truncated : Bool)) {
-      reportImportDiagnostic(({ final __callArgument35:Dynamic = diagnostics; __callArgument35; }), ({ final __callArgument36:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument36; }), (cast 'spine.weighted-vertices-truncated' : String), (cast 'parseSpineSkeleton' : String), ({ final __callArgument37:Dynamic = { vertices: 1.0 }; __callArgument37; }));
+      reportImportDiagnostic(({ final __callArgument35:Dynamic = diagnostics; __callArgument35; }), ({ final __callArgument36:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument36; }), (cast 'spine.weighted-vertices-truncated' : String), (cast 'parseSpineWeightedVertices' : String), ({ final __callArgument37:Dynamic = { vertices: 1.0 }; __callArgument37; }));
     }
     return cast { influenceCounts: influenceCounts, influences: new flighthq._internal._Float32Array(influences) };
     return cast null;
@@ -411,10 +411,10 @@ class SpineParse {
       }
     }
     if ((cast ((cast clampedSegments : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument50:Dynamic = diagnostics; __callArgument50; }), ({ final __callArgument51:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument51; }), (cast 'spine.curve-time-overshoot-clamped' : String), (cast 'parseSpineSkeleton' : String), ({ final __callArgument52:Dynamic = { segments: clampedSegments }; __callArgument52; }));
+      reportImportDiagnostic(({ final __callArgument50:Dynamic = diagnostics; __callArgument50; }), ({ final __callArgument51:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument51; }), (cast 'spine.curve-time-overshoot-clamped' : String), (cast 'buildSpineSegmentEasings' : String), ({ final __callArgument52:Dynamic = { segments: clampedSegments }; __callArgument52; }));
     }
     if ((cast ((cast divergentSegments : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument53:Dynamic = diagnostics; __callArgument53; }), ({ final __callArgument54:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument54; }), (cast 'spine.per-component-curve-easing-unsupported' : String), (cast 'parseSpineSkeleton' : String), ({ final __callArgument55:Dynamic = { segments: divergentSegments }; __callArgument55; }));
+      reportImportDiagnostic(({ final __callArgument53:Dynamic = diagnostics; __callArgument53; }), ({ final __callArgument54:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument54; }), (cast 'spine.per-component-curve-easing-unsupported' : String), (cast 'buildSpineSegmentEasings' : String), ({ final __callArgument55:Dynamic = { segments: divergentSegments }; __callArgument55; }));
     }
     return cast ((cast curved : Bool) ? (cast easings : Dynamic) : (cast null : Dynamic));
     return cast null;
@@ -494,7 +494,7 @@ class SpineParse {
     for (__iteration10 in _Runtime.iterable(unmodeled)) {
       var kind:String = flighthq._internal._StaticIndex.readArray(__iteration10, 0.0);
       var count:Float = flighthq._internal._StaticIndex.readArray(__iteration10, 1.0);
-      reportImportDiagnostic(({ final __callArgument94:Dynamic = diagnostics; __callArgument94; }), ({ final __callArgument95:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument95; }), (cast 'spine.slot-' + Std.string(kind) + '-timeline-unsupported' : String), (cast 'parseSpineSkeleton' : String), ({ final __callArgument96:Dynamic = { timelines: count }; __callArgument96; }));
+      reportImportDiagnostic(({ final __callArgument94:Dynamic = diagnostics; __callArgument94; }), ({ final __callArgument95:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument95; }), (cast 'spine.slot-' + Std.string(kind) + '-timeline-unsupported' : String), (cast 'parseSpineSlotTimelines' : String), ({ final __callArgument96:Dynamic = { timelines: count }; __callArgument96; }));
     }
   }
 
@@ -564,7 +564,7 @@ class SpineParse {
     var count:Float = cast _Runtime.UNDEFINED;
     count = 0.0;
     if ((cast _Runtime.isArray(raw) : Bool)) { (count = cast (_Runtime.field(raw, 'length') : Dynamic)); } else { if ((cast ((cast !_Runtime.strictEquals(raw, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(raw), 'object') : Bool)) : Bool)) { (count = cast (_Runtime.field(flighthq._internal.DynamicObject.keys((cast raw : flighthq._internal._Record<String, flighthq._internal._Any>)), 'length') : Dynamic)); } }
-    if ((cast ((cast count : Float) > (cast 0.0 : Float)) : Bool)) { reportImportDiagnostic(({ final __callArgument114:Dynamic = diagnostics; __callArgument114; }), ({ final __callArgument115:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument115; }), (cast kind : String), (cast 'parseSpineSkeleton' : String), ({ final __callArgument116:Dynamic = { count: count }; __callArgument116; })); }
+    if ((cast ((cast count : Float) > (cast 0.0 : Float)) : Bool)) { reportImportDiagnostic(({ final __callArgument114:Dynamic = diagnostics; __callArgument114; }), ({ final __callArgument115:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument115; }), (cast kind : String), (cast 'parseSpineAnimations' : String), ({ final __callArgument116:Dynamic = { count: count }; __callArgument116; })); }
   }
 
   public static function clampUnit__spineParse(value:Float):Float {

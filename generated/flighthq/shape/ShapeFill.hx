@@ -3,6 +3,7 @@ package flighthq.shape;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.math.Constants.CIRCLE_KAPPA;
 import flighthq.types.Path;
 import flighthq.types.Path.PathCommand;
 import flighthq.types.ShapeCommand.PathWinding;
@@ -145,13 +146,11 @@ class ShapeFill {
     return cast null;
   }
 
-  public static final KAPPA__shapeFill:Float = 0.5522847498307936;
-
   public static function appendEllipseToPath__shapeFill(path:Path, cx:Float, cy:Float, rx:Float, ry:Float):Void {
     var kx:Float = cast _Runtime.UNDEFINED;
     var ky:Float = cast _Runtime.UNDEFINED;
-    kx = (rx * ShapeFill.KAPPA__shapeFill);
-    ky = (ry * ShapeFill.KAPPA__shapeFill);
+    kx = (rx * CIRCLE_KAPPA);
+    ky = (ry * CIRCLE_KAPPA);
     ShapeFill.pushVerb__shapeFill(({ final __callArgument12:Dynamic = path; __callArgument12; }), (cast (cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO : Float), (cast (cx + rx) : Float), (cast cy : Float));
     ShapeFill.pushCubic__shapeFill(({ final __callArgument13:Dynamic = path; __callArgument13; }), (cast (cx + rx) : Float), (cast (cy + ky) : Float), (cast (cx + kx) : Float), (cast (cy + ry) : Float), (cast cx : Float), (cast (cy + ry) : Float));
     ShapeFill.pushCubic__shapeFill(({ final __callArgument14:Dynamic = path; __callArgument14; }), (cast (cx - kx) : Float), (cast (cy + ry) : Float), (cast (cx - rx) : Float), (cast (cy + ky) : Float), (cast (cx - rx) : Float), (cast cy : Float));

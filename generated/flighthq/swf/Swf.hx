@@ -5,7 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.swf.EnableSwfGuards as Facade_Swf_flighthq_swf_EnableSwfGuards;
 import flighthq.swf.SwfDocument as Facade_Swf_flighthq_swf_SwfDocument;
+import flighthq.swf.SwfImageDecoder as Facade_Swf_flighthq_swf_SwfImageDecoder;
 import flighthq.types.GlyphOutlineSource;
+import flighthq.types.ImportDiagnostic;
 import flighthq.types.Scene2DDocument;
 import flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry;
 import flighthq.types.SwfDocumentImport;
@@ -16,23 +18,23 @@ class Swf {
     return cast null;
   }
 
-  public static function createGlyphOutlineSourcesFromSwf(source:flighthq._internal._UInt8Array):Null<flighthq._internal._Map<Float, GlyphOutlineSource>> {
-    return cast Facade_Swf_flighthq_swf_SwfDocument.createGlyphOutlineSourcesFromSwf(source);
+  public static function createGlyphOutlineSourcesFromSwf(source:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<flighthq._internal._Map<Float, GlyphOutlineSource>> {
+    return cast Facade_Swf_flighthq_swf_SwfDocument.createGlyphOutlineSourcesFromSwf(source, diagnostics);
     return cast null;
   }
 
-  public static function createScene2DFromSwf(source:flighthq._internal._UInt8Array):Null<Scene2DDocument> {
-    return cast Facade_Swf_flighthq_swf_SwfDocument.createScene2DFromSwf(source);
+  public static function createScene2DFromSwf(source:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<Scene2DDocument> {
+    return cast Facade_Swf_flighthq_swf_SwfDocument.createScene2DFromSwf(source, diagnostics);
     return cast null;
   }
 
-  public static function createScene2DImportFromSwf(source:flighthq._internal._UInt8Array):Null<SwfDocumentImport> {
-    return cast Facade_Swf_flighthq_swf_SwfDocument.createScene2DImportFromSwf(source);
+  public static function createScene2DImportFromSwf(source:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<SwfDocumentImport> {
+    return cast Facade_Swf_flighthq_swf_SwfDocument.createScene2DImportFromSwf(source, diagnostics);
     return cast null;
   }
 
-  public static function createScene2DSymbolFromSwf(source:flighthq._internal._UInt8Array, linkageName:String):Null<Scene2DDocument> {
-    return cast Facade_Swf_flighthq_swf_SwfDocument.createScene2DSymbolFromSwf(source, linkageName);
+  public static function createScene2DSymbolFromSwf(source:flighthq._internal._UInt8Array, linkageName:String, ?diagnostics:Array<ImportDiagnostic>):Null<Scene2DDocument> {
+    return cast Facade_Swf_flighthq_swf_SwfDocument.createScene2DSymbolFromSwf(source, linkageName, diagnostics);
     return cast null;
   }
 
@@ -47,6 +49,10 @@ class Swf {
   public static function readSwfExportedSymbolNames(source:flighthq._internal._UInt8Array):Array<String> {
     return cast Facade_Swf_flighthq_swf_SwfDocument.readSwfExportedSymbolNames(source);
     return cast null;
+  }
+
+  public static function registerSwfImageDecoders():Void {
+    Facade_Swf_flighthq_swf_SwfImageDecoder.registerSwfImageDecoders();
   }
 
   public static function registerSwfScene2DDocumentImporter(registry:Scene2DDocumentImporterRegistry):Void {

@@ -16,13 +16,14 @@ class RegionAttachment2D {
   public static final MATRIX_STRIDE__regionAttachment2D:Float = 6.0;
 
   public static function computeSkeleton2DRegionAttachmentVertices(out:flighthq._internal._Float32Array, attachment:flighthq.types.RegionAttachment2D, skeleton:Skeleton2D, boneIndex:Float):Void {
-    var b:Float = cast _Runtime.UNDEFINED;
     var world:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
     var hw:Float = cast _Runtime.UNDEFINED;
     var hh:Float = cast _Runtime.UNDEFINED;
+    world = skeleton.worldMatrices;
+    if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast (boneIndex * RegionAttachment2D.MATRIX_STRIDE__regionAttachment2D) : Float) >= (cast _Runtime.field(world, 'length') : Float)) : Bool)) : Bool)) { return; }
     setTransformMatrix(({ final __callArgument0:Dynamic = RegionAttachment2D._local__regionAttachment2D; __callArgument0; }), (cast attachment.scaleX : Float), (cast attachment.scaleY : Float), (cast (attachment.rotation * DEG_TO_RAD) : Float), (cast attachment.x : Float), (cast attachment.y : Float));
     b = (boneIndex * RegionAttachment2D.MATRIX_STRIDE__regionAttachment2D);
-    world = skeleton.worldMatrices;
     (RegionAttachment2D._bone__regionAttachment2D.a = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast b : Float)) : Float));
     (RegionAttachment2D._bone__regionAttachment2D.b = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 1.0) : Float)) : Float));
     (RegionAttachment2D._bone__regionAttachment2D.c = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 2.0) : Float)) : Float));

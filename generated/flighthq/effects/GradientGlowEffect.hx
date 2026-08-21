@@ -5,13 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effects.RenderEffectPadding.getGaussianRenderEffectPadding;
 import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
+import flighthq.types.EffectSourceMode;
 import flighthq.types.GradientGlowEffect;
 import flighthq.types.RenderEffect;
 import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class GradientGlowEffect {
-  public static function createGradientGlowEffect(options:flighthq._internal._Omit<flighthq.types.GradientGlowEffect, String>):flighthq.types.GradientGlowEffect {
+  public static function createGradientGlowEffect(options:{ var alphas:Array<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; var colors:Array<Float>; @:optional var quality:Null<Float>; var ratios:Array<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):flighthq.types.GradientGlowEffect {
     return cast _Runtime.mergeObjects([{ kind: 'GradientGlowEffect' }, options]);
     return cast null;
   }

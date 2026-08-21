@@ -21,9 +21,9 @@ class CanvasFillPattern {
 
   @:noCompletion
   public static function createBitmapPattern(context:flighthq._internal.dom.CanvasRenderingContext2D, texture:Texture, resolvers:CanvasTextureResolvers, allowSmoothing:Bool = true):Null<flighthq._internal.dom.CanvasPattern> {
-    var source:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
+    var source:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLVideoElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.HTMLCanvasElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
     var smooth:Bool = cast _Runtime.UNDEFINED;
-    source = (cast resolveCanvasTextureWindowSource(({ final __callArgument0:Dynamic = resolvers; __callArgument0; }), ({ final __callArgument1:Dynamic = texture; __callArgument1; })) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
+    source = (cast resolveCanvasTextureWindowSource(({ final __callArgument0:Dynamic = resolvers; __callArgument0; }), ({ final __callArgument1:Dynamic = texture; __callArgument1; })) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLVideoElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.HTMLCanvasElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(source, null) : Bool)) { return cast null; }
     smooth = ((cast allowSmoothing : Bool) && (cast !(cast StringTools.startsWith((cast (cast texture : { var sampler:Sampler; }).sampler : { var magFilter:TextureFilter; }).magFilter, 'nearest') : Bool) : Bool));
     CanvasFillPattern.setSmoothing__canvasFillPattern(({ final __callArgument2:Dynamic = context; __callArgument2; }), (cast smooth : Bool));
@@ -202,10 +202,12 @@ class CanvasFillPattern {
     var r:Float = cast _Runtime.UNDEFINED;
     var g:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
-    r = (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255);
-    g = (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255);
-    b = (_Runtime.toInt32(color) & 255);
-    return cast 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',' + Std.string(alpha) + ')';
+    var a:Float = cast _Runtime.UNDEFINED;
+    r = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
+    g = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255);
+    b = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255);
+    a = (((_Runtime.toInt32(color) & 255) / 255.0) * alpha);
+    return cast 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',' + Std.string(a) + ')';
     return cast null;
   }
 }

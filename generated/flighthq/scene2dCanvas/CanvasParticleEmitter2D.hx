@@ -30,7 +30,7 @@ class CanvasParticleEmitter2D {
     var ids:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
     var particleCount:Float = cast _Runtime.UNDEFINED;
     var transforms:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    var imageSource:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
+    var imageSource:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLVideoElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.HTMLCanvasElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
     var regions:Array<TextureAtlasRegion> = cast _Runtime.UNDEFINED;
     var numRegions:Float = cast _Runtime.UNDEFINED;
     var nodeAlpha:Float = cast _Runtime.UNDEFINED;
@@ -45,7 +45,7 @@ class CanvasParticleEmitter2D {
     particleCount = __destructure0.particleCount;
     transforms = __destructure0.transforms;
     if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool)) { return; }
-    imageSource = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers(({ final __callArgument0:Dynamic = state; __callArgument0; })) : CanvasTextureResolvers), ({ final __callArgument1:Dynamic = atlas.texture; __callArgument1; })) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
+    imageSource = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers(({ final __callArgument0:Dynamic = state; __callArgument0; })) : CanvasTextureResolvers), ({ final __callArgument1:Dynamic = atlas.texture; __callArgument1; })) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLVideoElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.HTMLCanvasElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(imageSource, null) : Bool)) { return; }
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');

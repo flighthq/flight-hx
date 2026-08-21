@@ -3,8 +3,12 @@ package flighthq.geometry;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.geometry.GeometryPoolGuards.geometryPoolReleaseGuard;
 import flighthq.geometry.Vector3.createVector3;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types.Vector3;
+import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class Vector3Pool {
   public static function acquireEmptyVector3():Vector3 {
@@ -34,6 +38,8 @@ class Vector3Pool {
 
   public static function releaseVector3(v:Vector3):Void {
     if ((cast !_Runtime.truthy(v) : Bool)) { return; }
+    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(Vector3Pool.pool__vector3Pool, v) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseVector3' : String)); }
+    _Runtime.setIndex(v, EntityRuntimeKey, _Runtime.field(_Runtime, 'UNDEFINED'));
     _Runtime.callProperty(Vector3Pool.pool__vector3Pool, 'push', cast ([v] : Array<Dynamic>));
   }
 

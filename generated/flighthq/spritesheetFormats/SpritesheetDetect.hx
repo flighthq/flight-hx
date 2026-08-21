@@ -3,11 +3,17 @@ package flighthq.spritesheetFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.registry.RegistryTable.createKeyedTable;
+import flighthq.registry.RegistryTable.getRegistryTableEntry;
+import flighthq.registry.RegistryTable.getRegistryTableKeys;
+import flighthq.registry.RegistryTable.withRegistryTableEntry;
+import flighthq.registry.RegistryTable.withoutRegistryTableEntry;
 import flighthq.spritesheetFormats.AsepriteParse.parseAsepriteSpritesheet;
 import flighthq.spritesheetFormats.CocosPlistParse.parseCocosPlistSpritesheet;
 import flighthq.spritesheetFormats.LibgdxAtlasParse.parseLibgdxAtlasSpritesheet;
 import flighthq.spritesheetFormats.StarlingParse.parseStarlingSpritesheet;
 import flighthq.spritesheetFormats.TexturePackerParse.parseTexturePackerSpritesheet;
+import flighthq.types.RegistryTable.KeyedTable;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFormat.SpritesheetFormatKind;
 import flighthq.types.SpritesheetFormat.SpritesheetFormatKindAseprite as ASEPRITE;
@@ -19,11 +25,9 @@ import flighthq.types.SpritesheetParseOptions;
 
 typedef FormatEntry__spritesheetDetect = { var detect:String->Bool; var parse:String->SpritesheetParseOptions->SpritesheetData; };
 
-typedef FormatRegistry__spritesheetDetect = flighthq._internal._Map<SpritesheetFormatKind, FormatEntry__spritesheetDetect>;
+typedef RegisteredFormatEntry__spritesheetDetect = { var entry:FormatEntry__spritesheetDetect; var order:Float; };
 
 class SpritesheetDetect {
-  public static var _registry__spritesheetDetect:Null<FormatRegistry__spritesheetDetect> = _Runtime.explicitNull();
-
   public static function detectTexturePacker__spritesheetDetect(text:String):Bool {
     if ((cast !_Runtime.strictEquals(_Runtime.getIndex(_Runtime.callProperty(text, 'trimStart', cast ([] : Array<Dynamic>)), 0.0), '{') : Bool)) { return cast false; }
     return cast ((cast _Runtime.callProperty(_Runtime.regexp('"meta"\\s*:', ''), 'test', cast ([text] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(_Runtime.regexp('"app"\\s*:', ''), 'test', cast ([text] : Array<Dynamic>)) : Bool));
@@ -56,47 +60,83 @@ class SpritesheetDetect {
     return cast null;
   }
 
-  public static function getRegistry__spritesheetDetect():FormatRegistry__spritesheetDetect {
+  public static function getRegistry__spritesheetDetect():KeyedTable<RegisteredFormatEntry__spritesheetDetect> {
     if ((cast !_Runtime.strictEquals(SpritesheetDetect._registry__spritesheetDetect, null) : Bool)) { return cast SpritesheetDetect._registry__spritesheetDetect; }
-    (SpritesheetDetect._registry__spritesheetDetect = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-    ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(ASEPRITE, (cast { detect: SpritesheetDetect.detectAseprite__spritesheetDetect, parse: function(text:String, __unused0:SpritesheetParseOptions):SpritesheetData return (cast parseAsepriteSpritesheet((cast text : String)) : SpritesheetData) })));
-    ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(COCOS_PLIST, (cast { detect: SpritesheetDetect.detectCocosPlist__spritesheetDetect, parse: function(text:String, __unused1:SpritesheetParseOptions):SpritesheetData return (cast parseCocosPlistSpritesheet((cast text : String)) : SpritesheetData) })));
-    ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(TEXTURE_PACKER, (cast { detect: SpritesheetDetect.detectTexturePacker__spritesheetDetect, parse: function(text:String, __unused2:SpritesheetParseOptions):SpritesheetData return (cast parseTexturePackerSpritesheet((cast text : String)) : SpritesheetData) })));
-    ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(STARLING, (cast { detect: SpritesheetDetect.detectStarling__spritesheetDetect, parse: function(text:String, opts:SpritesheetParseOptions):SpritesheetData return (cast parseStarlingSpritesheet((cast text : String), (cast { frameDuration: opts.frameDuration } : Dynamic)) : SpritesheetData) })));
-    ((cast SpritesheetDetect._registry__spritesheetDetect : FormatRegistry__spritesheetDetect).set(LIBGDX_ATLAS, (cast { detect: SpritesheetDetect.detectLibgdxAtlas__spritesheetDetect, parse: function(text:String, opts:SpritesheetParseOptions):SpritesheetData return (cast parseLibgdxAtlasSpritesheet((cast text : String), (cast { frameDuration: opts.frameDuration } : Dynamic)) : SpritesheetData) })));
+    (SpritesheetDetect._registry__spritesheetDetect = cast ((cast createKeyedTable((cast 'SpritesheetFormat' : String), (cast 'Unclaimed' : String)) : KeyedTable<RegisteredFormatEntry__spritesheetDetect>) : Dynamic));
+    SpritesheetDetect.bindSpritesheetFormat__spritesheetDetect((cast ASEPRITE : String), (cast { detect: SpritesheetDetect.detectAseprite__spritesheetDetect, parse: function(text:String, __unused0:SpritesheetParseOptions):SpritesheetData return (cast parseAsepriteSpritesheet((cast text : String)) : SpritesheetData) } : Dynamic));
+    SpritesheetDetect.bindSpritesheetFormat__spritesheetDetect((cast COCOS_PLIST : String), (cast { detect: SpritesheetDetect.detectCocosPlist__spritesheetDetect, parse: function(text:String, __unused1:SpritesheetParseOptions):SpritesheetData return (cast parseCocosPlistSpritesheet((cast text : String)) : SpritesheetData) } : Dynamic));
+    SpritesheetDetect.bindSpritesheetFormat__spritesheetDetect((cast TEXTURE_PACKER : String), (cast { detect: SpritesheetDetect.detectTexturePacker__spritesheetDetect, parse: function(text:String, __unused2:SpritesheetParseOptions):SpritesheetData return (cast parseTexturePackerSpritesheet((cast text : String)) : SpritesheetData) } : Dynamic));
+    SpritesheetDetect.bindSpritesheetFormat__spritesheetDetect((cast STARLING : String), (cast { detect: SpritesheetDetect.detectStarling__spritesheetDetect, parse: function(text:String, opts:SpritesheetParseOptions):SpritesheetData return (cast parseStarlingSpritesheet((cast text : String), (cast { frameDuration: opts.frameDuration } : Dynamic)) : SpritesheetData) } : Dynamic));
+    SpritesheetDetect.bindSpritesheetFormat__spritesheetDetect((cast LIBGDX_ATLAS : String), (cast { detect: SpritesheetDetect.detectLibgdxAtlas__spritesheetDetect, parse: function(text:String, opts:SpritesheetParseOptions):SpritesheetData return (cast parseLibgdxAtlasSpritesheet((cast text : String), (cast { frameDuration: opts.frameDuration } : Dynamic)) : SpritesheetData) } : Dynamic));
     return cast SpritesheetDetect._registry__spritesheetDetect;
     return cast null;
   }
 
   public static function detectSpritesheetFormat(text:String):Null<SpritesheetFormatKind> {
-    for (__iteration3 in _Runtime.iterable((cast SpritesheetDetect.getRegistry__spritesheetDetect() : FormatRegistry__spritesheetDetect))) {
+    for (__iteration3 in _Runtime.iterable((cast SpritesheetDetect.getSpritesheetFormatsInDetectionOrder__spritesheetDetect() : Array<Array<flighthq._internal._Union2<String, RegisteredFormatEntry__spritesheetDetect>>>))) {
       var kind:String = flighthq._internal._StaticIndex.readArray(__iteration3, 0.0);
-      var entry:FormatEntry__spritesheetDetect = flighthq._internal._StaticIndex.readArray(__iteration3, 1.0);
-      if ((cast (cast entry : FormatEntry__spritesheetDetect).detect((cast text : String)) : Bool)) { return cast kind; }
+      var registered:RegisteredFormatEntry__spritesheetDetect = flighthq._internal._StaticIndex.readArray(__iteration3, 1.0);
+      if ((cast (cast (cast registered : RegisteredFormatEntry__spritesheetDetect).entry : FormatEntry__spritesheetDetect).detect((cast text : String)) : Bool)) { return cast kind; }
     }
     return cast null;
     return cast null;
   }
 
   public static function getSpritesheetFormat(kind:SpritesheetFormatKind):Null<{ var detect:String->Bool; var parse:String->SpritesheetParseOptions->SpritesheetData; }> {
-    return cast _Runtime.coalesce(((cast (cast SpritesheetDetect.getRegistry__spritesheetDetect() : FormatRegistry__spritesheetDetect) : FormatRegistry__spritesheetDetect).get(kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __structural2 = (cast getRegistryTableEntry((cast (cast SpritesheetDetect.getRegistry__spritesheetDetect() : KeyedTable<RegisteredFormatEntry__spritesheetDetect>) : Dynamic), (cast kind : String)) : Null<RegisteredFormatEntry__spritesheetDetect>); __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var entry:FormatEntry__spritesheetDetect; }).entry; }), function():Dynamic return cast null);
+    return cast null;
+  }
+
+  public static function getSpritesheetFormatKinds():Array<SpritesheetFormatKind> {
+    var kinds:Array<SpritesheetFormatKind> = cast _Runtime.UNDEFINED;
+    kinds = (cast cast ([] : Array<Dynamic>));
+    getRegistryTableKeys(({ final __callArgument3:Dynamic = kinds; __callArgument3; }), (cast (cast SpritesheetDetect.getRegistry__spritesheetDetect() : KeyedTable<RegisteredFormatEntry__spritesheetDetect>) : Dynamic));
+    return cast kinds;
     return cast null;
   }
 
   public static function parseSpritesheet(text:String, ?formatKind:SpritesheetFormatKind, ?options:SpritesheetParseOptions):Null<SpritesheetData> {
     var opts:SpritesheetParseOptions = cast _Runtime.UNDEFINED;
     var kind:Null<String> = cast _Runtime.UNDEFINED;
-    var entry:Null<FormatEntry__spritesheetDetect> = cast _Runtime.UNDEFINED;
+    var registered:Null<RegisteredFormatEntry__spritesheetDetect> = cast _Runtime.UNDEFINED;
     opts = _Runtime.coalesce(options, function():Dynamic return cast {  });
     kind = _Runtime.coalesce(formatKind, function():Dynamic return cast (cast detectSpritesheetFormat((cast text : String)) : Null<String>));
     if ((cast !_Runtime.truthy(kind) : Bool)) { return cast null; }
-    entry = ((cast (cast SpritesheetDetect.getRegistry__spritesheetDetect() : FormatRegistry__spritesheetDetect) : FormatRegistry__spritesheetDetect).get(kind));
-    if ((cast !_Runtime.truthy(entry) : Bool)) { return cast null; }
-    return cast (cast entry : FormatEntry__spritesheetDetect).parse((cast text : String), ({ final __callArgument2:Dynamic = opts; __callArgument2; }));
+    registered = (cast getRegistryTableEntry((cast (cast SpritesheetDetect.getRegistry__spritesheetDetect() : KeyedTable<RegisteredFormatEntry__spritesheetDetect>) : Dynamic), (cast kind : String)) : Null<RegisteredFormatEntry__spritesheetDetect>);
+    if ((cast _Runtime.strictEquals(registered, null) : Bool)) { return cast null; }
+    return cast (cast (cast registered : RegisteredFormatEntry__spritesheetDetect).entry : FormatEntry__spritesheetDetect).parse((cast text : String), ({ final __callArgument4:Dynamic = opts; __callArgument4; }));
     return cast null;
   }
 
   public static function registerSpritesheetFormat(kind:SpritesheetFormatKind, entry:{ var detect:String->Bool; var parse:String->SpritesheetParseOptions->SpritesheetData; }):Void {
-    ((cast (cast SpritesheetDetect.getRegistry__spritesheetDetect() : FormatRegistry__spritesheetDetect) : FormatRegistry__spritesheetDetect).set(kind, (cast entry)));
+    SpritesheetDetect.bindSpritesheetFormat__spritesheetDetect((cast kind : String), (cast entry : Dynamic));
   }
+
+  public static function unregisterSpritesheetFormat(kind:SpritesheetFormatKind):Void {
+    (SpritesheetDetect._registry__spritesheetDetect = cast ((cast withoutRegistryTableEntry((cast (cast SpritesheetDetect.getRegistry__spritesheetDetect() : KeyedTable<RegisteredFormatEntry__spritesheetDetect>) : Dynamic), (cast kind : String)) : KeyedTable<RegisteredFormatEntry__spritesheetDetect>) : Dynamic));
+  }
+
+  public static function bindSpritesheetFormat__spritesheetDetect(kind:SpritesheetFormatKind, entry:FormatEntry__spritesheetDetect):Void {
+    var registry:KeyedTable<RegisteredFormatEntry__spritesheetDetect> = cast _Runtime.UNDEFINED;
+    var current:Null<RegisteredFormatEntry__spritesheetDetect> = cast _Runtime.UNDEFINED;
+    registry = (cast SpritesheetDetect.getRegistry__spritesheetDetect() : KeyedTable<RegisteredFormatEntry__spritesheetDetect>);
+    current = (cast getRegistryTableEntry((cast registry : Dynamic), (cast kind : String)) : Null<RegisteredFormatEntry__spritesheetDetect>);
+    (SpritesheetDetect._registry__spritesheetDetect = cast ((cast withRegistryTableEntry((cast registry : Dynamic), (cast kind : String), (cast { entry: entry, order: _Runtime.coalesce(({ final __structural5 = current; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { var order:Float; }).order; }), function():Dynamic return cast SpritesheetDetect._nextFormatOrder__spritesheetDetect++) } : Dynamic)) : KeyedTable<{ var entry:FormatEntry__spritesheetDetect; var order:Float; }>) : Dynamic));
+  }
+
+  public static function getSpritesheetFormatsInDetectionOrder__spritesheetDetect():Array<Array<flighthq._internal._Union2<SpritesheetFormatKind, RegisteredFormatEntry__spritesheetDetect>>> {
+    var formats:Array<Array<flighthq._internal._Union2<SpritesheetFormatKind, RegisteredFormatEntry__spritesheetDetect>>> = cast _Runtime.UNDEFINED;
+    formats = (cast cast ([] : Array<Dynamic>));
+    for (kind in _Runtime.iterable((cast getSpritesheetFormatKinds() : Array<String>))) {
+      var registered:Null<RegisteredFormatEntry__spritesheetDetect> = (cast getRegistryTableEntry((cast (cast SpritesheetDetect.getRegistry__spritesheetDetect() : KeyedTable<RegisteredFormatEntry__spritesheetDetect>) : Dynamic), (cast kind : String)) : Null<RegisteredFormatEntry__spritesheetDetect>);
+      if ((cast !_Runtime.strictEquals(registered, null) : Bool)) { _Runtime.callProperty(formats, 'push', cast ([cast ([kind, registered] : Array<Dynamic>)] : Array<Dynamic>)); }
+    }
+    _Runtime.sortAndReturn(formats, function(a:Array<flighthq._internal._Union2<String, RegisteredFormatEntry__spritesheetDetect>>, b:Array<flighthq._internal._Union2<String, RegisteredFormatEntry__spritesheetDetect>>) return ((cast flighthq._internal._StaticIndex.readArray(a, 1.0) : RegisteredFormatEntry__spritesheetDetect).order - (cast flighthq._internal._StaticIndex.readArray(b, 1.0) : RegisteredFormatEntry__spritesheetDetect).order));
+    return cast formats;
+    return cast null;
+  }
+
+  public static var _registry__spritesheetDetect:Null<KeyedTable<RegisteredFormatEntry__spritesheetDetect>> = _Runtime.explicitNull();
+
+  public static var _nextFormatOrder__spritesheetDetect:Float = 0.0;
 }

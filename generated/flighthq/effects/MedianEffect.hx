@@ -10,7 +10,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class MedianEffect {
-  public static function createMedianEffect(?options:flighthq._internal._Omit<flighthq.types.MedianEffect, String>):flighthq.types.MedianEffect {
+  public static function createMedianEffect(?options:{ @:optional var radius:Null<Float>; }):flighthq.types.MedianEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'MedianEffect' }, options]);
     return cast null;

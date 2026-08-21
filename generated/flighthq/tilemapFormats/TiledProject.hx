@@ -3,9 +3,12 @@ package flighthq.tilemapFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.tilemap.Tilemap.createTilemapData;
 import flighthq.tilemapFormats.TiledGid.decodeTiledGid;
 import flighthq.tilemapFormats.TiledGid.getTiledTilesetRefForGid;
+import flighthq.types.ImportDiagnostic;
+import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TiledGid;
 import flighthq.types.TiledLayer;
@@ -13,11 +16,12 @@ import flighthq.types.TiledMap;
 import flighthq.types.TiledParseOptions.TiledTilesetResolver;
 import flighthq.types.TiledTileset.TiledTilesetRef;
 import flighthq.types.Tilemap.TilemapData;
+import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 typedef TilesetGroup__tiledProject = { var firstGid:Float; var layout:Dynamic; var tiles:flighthq._internal._Int16Array; };
 
 class TiledProject {
-  public static function buildTilemapLayersFromTiled(map:TiledMap, layerIndex:Float, resolveTileset:TiledTilesetResolver):Null<Array<TilemapData>> {
+  public static function buildTilemapLayersFromTiled(map:TiledMap, layerIndex:Float, resolveTileset:TiledTilesetResolver, ?diagnostics:Array<ImportDiagnostic>):Null<Array<TilemapData>> {
     var layer:TiledLayer = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var width:Float = cast _Runtime.UNDEFINED;
@@ -27,6 +31,9 @@ class TiledProject {
     var groups:Array<TilesetGroup__tiledProject> = cast _Runtime.UNDEFINED;
     var byFirstGid:flighthq._internal._Map<Float, Null<TilesetGroup__tiledProject>> = cast _Runtime.UNDEFINED;
     var anyResolved:Bool = cast _Runtime.UNDEFINED;
+    var cellsWithoutTileset:Float = cast _Runtime.UNDEFINED;
+    var cellsLeftEmpty:Float = cast _Runtime.UNDEFINED;
+    var unresolvedTilesets:flighthq._internal._Set<Float> = cast _Runtime.UNDEFINED;
     layer = flighthq._internal._StaticIndex.readArray(map.layers, layerIndex);
     if ((cast ((cast _Runtime.strictEquals(layer, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast layer : { var type:String; }).type, 'tilelayer') : Bool)) : Bool)) { return cast null; }
     __destructure0 = layer;
@@ -37,6 +44,9 @@ class TiledProject {
     groups = (cast cast ([] : Array<Dynamic>));
     byFirstGid = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     anyResolved = false;
+    cellsWithoutTileset = 0.0;
+    cellsLeftEmpty = 0.0;
+    unresolvedTilesets = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast cellCount : Float)) : Bool)) {
@@ -44,10 +54,14 @@ class TiledProject {
         var tileId:Float = __destructure1.tileId;
         if ((cast ((cast tileId : Float) <= (cast 0.0 : Float)) : Bool)) { i++; continue; }
         var ref:Null<TiledTilesetRef> = (cast getTiledTilesetRefForGid(({ final __callArgument0:Dynamic = map; __callArgument0; }), (cast tileId : Float)) : Null<TiledTilesetRef>);
-        if ((cast _Runtime.strictEquals(ref, null) : Bool)) { i++; continue; }
+        if ((cast _Runtime.strictEquals(ref, null) : Bool)) {
+          cellsWithoutTileset++;
+          i++;
+          continue;
+        }
         var group:Null<TilesetGroup__tiledProject> = ((cast byFirstGid : flighthq._internal._Map<Float, Null<TilesetGroup__tiledProject>>).get((cast ref : { var firstGid:Float; }).firstGid));
         if ((cast _Runtime.strictEquals(group, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          var layout:Null<flighthq._internal._Any> = (cast resolveTileset(({ final __callArgument1:Dynamic = ref; __callArgument1; })) : Null<flighthq._internal._Any>);
+          var layout:Null<{ var atlas:Null<TextureAtlas>; var tileHeight:Float; var tileWidth:Float; }> = (cast resolveTileset(({ final __callArgument1:Dynamic = ref; __callArgument1; })) : Null<{ var atlas:Null<TextureAtlas>; var tileHeight:Float; var tileWidth:Float; }>);
           if ((cast _Runtime.strictEquals(layout, null) : Bool)) {
             ((cast byFirstGid : flighthq._internal._Map<Float, Null<TilesetGroup__tiledProject>>).set((cast ref : { var firstGid:Float; }).firstGid, (cast null)));
             (group = cast (null : Dynamic));
@@ -58,13 +72,24 @@ class TiledProject {
             _Runtime.callProperty(groups, 'push', cast ([group] : Array<Dynamic>));
           }
         }
-        if ((cast _Runtime.strictEquals(group, null) : Bool)) { i++; continue; }
+        if ((cast _Runtime.strictEquals(group, null) : Bool)) {
+          cellsLeftEmpty++;
+          ((cast unresolvedTilesets : flighthq._internal._Set<Float>).add((cast ref : { var firstGid:Float; }).firstGid));
+          i++;
+          continue;
+        }
         flighthq._internal._StaticIndex.writeInt16ArrayTyped((cast (cast group : TilesetGroup__tiledProject).tiles : flighthq._internal._Int16Array), (cast i : Float), (cast (tileId - (cast group : TilesetGroup__tiledProject).firstGid) : Float));
         i++;
       }
     }
+    if ((cast ((cast cellsWithoutTileset : Float) > (cast 0.0 : Float)) : Bool)) {
+      reportImportDiagnostic(({ final __callArgument2:Dynamic = diagnostics; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument3; }), (cast 'tiled.tile-outside-every-tileset' : String), (cast 'buildTilemapLayersFromTiled' : String), ({ final __callArgument4:Dynamic = { cells: cellsWithoutTileset, layerIndex: layerIndex }; __callArgument4; }));
+    }
+    if ((cast ((cast cellsLeftEmpty : Float) > (cast 0.0 : Float)) : Bool)) {
+      reportImportDiagnostic(({ final __callArgument5:Dynamic = diagnostics; __callArgument5; }), ({ final __callArgument6:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument6; }), (cast 'tiled.tileset-unresolved' : String), (cast 'buildTilemapLayersFromTiled' : String), ({ final __callArgument7:Dynamic = { cells: cellsLeftEmpty, layerIndex: layerIndex, tilesets: (cast unresolvedTilesets : flighthq._internal._Set<Float>).size }; __callArgument7; }));
+    }
     if ((cast !(cast anyResolved : Bool) : Bool)) { return cast null; }
-    return cast (cast _Runtime.mapArray((cast groups : Array<TilesetGroup__tiledProject>), function(group:TilesetGroup__tiledProject, __unused2:Float, __unused3:Array<TilesetGroup__tiledProject>):TilemapData return (cast createTilemapData(({ final __callArgument2:Dynamic = { atlas: _Runtime.field((cast group : TilesetGroup__tiledProject).layout, 'atlas'), columns: width, rows: height, tileHeight: _Runtime.field((cast group : TilesetGroup__tiledProject).layout, 'tileHeight'), tileWidth: _Runtime.field((cast group : TilesetGroup__tiledProject).layout, 'tileWidth'), tiles: (cast group : TilesetGroup__tiledProject).tiles }; __callArgument2; })) : TilemapData), _Runtime.UNDEFINED));
+    return cast (cast _Runtime.mapArray((cast groups : Array<TilesetGroup__tiledProject>), function(group:TilesetGroup__tiledProject, __unused2:Float, __unused3:Array<TilesetGroup__tiledProject>):TilemapData return (cast createTilemapData((cast { atlas: (cast (cast group : TilesetGroup__tiledProject).layout : { var atlas:Null<TextureAtlas>; var tileHeight:Float; var tileWidth:Float; }).atlas, columns: width, rows: height, tileHeight: (cast (cast group : TilesetGroup__tiledProject).layout : { var atlas:Null<TextureAtlas>; var tileHeight:Float; var tileWidth:Float; }).tileHeight, tileWidth: (cast (cast group : TilesetGroup__tiledProject).layout : { var atlas:Null<TextureAtlas>; var tileHeight:Float; var tileWidth:Float; }).tileWidth, tiles: (cast group : TilesetGroup__tiledProject).tiles } : Dynamic)) : TilemapData), _Runtime.UNDEFINED));
     return cast null;
   }
 }

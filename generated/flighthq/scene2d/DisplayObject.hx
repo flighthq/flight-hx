@@ -20,12 +20,14 @@ import flighthq.types.Entity.Kind;
 import flighthq.types.HasAppearance;
 import flighthq.types.HasBlendMode;
 import flighthq.types.HasBoundsRectangle;
+import flighthq.types.HasBoundsRectangle.BoundsNodeAny;
 import flighthq.types.HasBoundsRectangle.HasBoundsRectangleRuntime;
 import flighthq.types.HasClip;
 import flighthq.types.HasMaterial;
 import flighthq.types.HasTransform2D;
 import flighthq.types.HasTransform2D.HasTransform2DRuntime;
 import flighthq.types.MethodsOf;
+import flighthq.types.Node;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node.NodeRuntimeFactory;
@@ -36,6 +38,7 @@ import flighthq.types.Node2D.Node2DRuntime;
 import flighthq.types.Node2D.Node2DRuntimeFactory;
 import flighthq.types.Node2D.Node2DTraits;
 import flighthq.types.PartialNode;
+import flighthq.types.Rectangle;
 import flighthq.types.Scene2D;
 import flighthq.types.Types.Node2DTraitsKey;
 import flighthq.types._internal._Node2DValues.Node2DTraitsKey;
@@ -44,24 +47,24 @@ class DisplayObject {
   public static function createNode2D<R:Node2DRuntime>(kind:Kind, ?obj:PartialNode<Node2D>, ?createData:Node2DDataFactory, ?createNode2DRuntimeFactory:Node2DRuntimeFactory<R>):Node2D {
     var out:Node2D = cast _Runtime.UNDEFINED;
     out = (cast createNode((cast kind : String), (cast obj : Dynamic), (cast createData : Dynamic), (cast _Runtime.coalesce(createNode2DRuntimeFactory, function():Dynamic return cast (cast (cast createNode2DRuntime : flighthq._internal._Any) : NodeRuntimeFactory<R>)) : Dynamic)) : Node2D);
-    initTransform2DTrait(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = obj; __callArgument1; }));
-    initBoundsRectangleTrait(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = obj; __callArgument3; }));
-    initAppearanceTrait(({ final __callArgument4:Dynamic = out; __callArgument4; }), ({ final __callArgument5:Dynamic = obj; __callArgument5; }));
-    initBlendModeTrait(({ final __callArgument6:Dynamic = out; __callArgument6; }), ({ final __callArgument7:Dynamic = obj; __callArgument7; }));
-    initMaterialTrait(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = obj; __callArgument9; }));
-    initClipTrait(({ final __callArgument10:Dynamic = out; __callArgument10; }), ({ final __callArgument11:Dynamic = obj; __callArgument11; }));
+    initTransform2DTrait(({ final __callArgument0:Dynamic = out; __callArgument0; }), (cast obj : Dynamic));
+    initBoundsRectangleTrait(({ final __callArgument1:Dynamic = out; __callArgument1; }), (cast obj : Dynamic));
+    initAppearanceTrait(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = obj; __callArgument3; }));
+    initBlendModeTrait(({ final __callArgument4:Dynamic = out; __callArgument4; }), ({ final __callArgument5:Dynamic = obj; __callArgument5; }));
+    initMaterialTrait(({ final __callArgument6:Dynamic = out; __callArgument6; }), (cast obj : Dynamic));
+    initClipTrait(({ final __callArgument7:Dynamic = out; __callArgument7; }), (cast obj : Dynamic));
     return cast out;
     return cast null;
   }
 
   @:noCompletion
-  public static function createNode2DRuntime(?methods:flighthq._internal._Partial<flighthq._internal._Intersection2<MethodsOf<Node2DRuntime>, flighthq._internal._Pick<Node2DRuntime, String>>>):Node2DRuntime {
+  public static function createNode2DRuntime(?methods:{ @:optional var canAddChild:Null<Node<Node2DTraits>->Node<Node2DTraits>->Bool>; @:optional var computeLocalBoundsRectangle:Null<Rectangle->BoundsNodeAny->Void>; @:optional var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; }):Node2DRuntime {
     var out:Node2DRuntime = cast _Runtime.UNDEFINED;
-    out = (cast createNodeRuntime(({ final __callArgument12:Dynamic = methods; __callArgument12; })) : Node2DRuntime);
+    out = (cast createNodeRuntime((cast methods : Dynamic)) : Node2DRuntime);
     ((cast out : { @:optional var traits:Null<NodeTraitsKey<Node2DTraits>>; }).traits = Node2DTraitsKey);
     ((cast out : { var scene2d:Null<Scene2D>; }).scene2d = null);
-    initTransform2DRuntimeTrait(({ final __callArgument13:Dynamic = out; __callArgument13; }), ({ final __callArgument14:Dynamic = methods; __callArgument14; }));
-    initBoundsRectangleRuntimeTrait(({ final __callArgument15:Dynamic = out; __callArgument15; }), ({ final __callArgument16:Dynamic = methods; __callArgument16; }));
+    initTransform2DRuntimeTrait(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = methods; __callArgument9; }));
+    initBoundsRectangleRuntimeTrait(({ final __callArgument10:Dynamic = out; __callArgument10; }), (cast methods : Dynamic));
     return cast out;
     return cast null;
   }

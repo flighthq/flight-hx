@@ -3,6 +3,7 @@ package flighthq.scene3dGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.scene3dGl.GlMeshUpload.bindGlVertexAttribute;
 import flighthq.scene3dGl.GlMeshUpload.ensureGlMeshUpload;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlScene3DRuntime.GlMeshUpload;
@@ -22,18 +23,17 @@ class GlWireframeUpload {
   }
 
   @:noCompletion
-  public static function ensureGlWireframeUpload(state:GlRenderState, geometry:MeshGeometry):flighthq.types.GlWireframeProgram.GlWireframeUpload {
+  public static function ensureGlWireframeUpload(state:GlRenderState, geometry:MeshGeometry, gpuSkinned:Bool = false):flighthq.types.GlWireframeProgram.GlWireframeUpload {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var meshUpload:GlMeshUpload = cast _Runtime.UNDEFINED;
     var perState:Null<flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeProgram.GlWireframeUpload>> = cast _Runtime.UNDEFINED;
     var upload:Null<flighthq.types.GlWireframeProgram.GlWireframeUpload> = cast _Runtime.UNDEFINED;
-    var lineIndices:flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array> = cast _Runtime.UNDEFINED;
+    var lineIndices:flighthq._internal._Union2<flighthq._internal._UInt32Array, flighthq._internal._UInt16Array> = cast _Runtime.UNDEFINED;
     var indexType:Float = cast _Runtime.UNDEFINED;
     var stride:Float = cast _Runtime.UNDEFINED;
-    var position:Null<VertexAttribute> = cast _Runtime.UNDEFINED;
-    var byteOffset:Float = cast _Runtime.UNDEFINED;
+    var attributes:Array<VertexAttribute> = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
-    meshUpload = (cast ensureGlMeshUpload(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = geometry; __callArgument1; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : GlMeshUpload);
+    meshUpload = (cast ensureGlMeshUpload(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = geometry; __callArgument1; }), (cast gpuSkinned : Bool)) : GlMeshUpload);
     perState = ((cast GlWireframeUpload.wireframeUploads__glWireframeUpload : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeProgram.GlWireframeUpload>>).get(state));
     if ((cast _Runtime.strictEquals(perState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (perState = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Dynamic));
@@ -44,7 +44,7 @@ class GlWireframeUpload {
       flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : { var vao:flighthq._internal.dom.WebGLVertexArrayObject; }).vao);
       return cast upload;
     }
-    lineIndices = (cast GlWireframeUpload.buildLineIndices__glWireframeUpload(({ final __callArgument2:Dynamic = geometry; __callArgument2; })) : flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>);
+    lineIndices = (cast GlWireframeUpload.buildLineIndices__glWireframeUpload(({ final __callArgument2:Dynamic = geometry; __callArgument2; })) : flighthq._internal._Union2<flighthq._internal._UInt32Array, flighthq._internal._UInt16Array>);
     indexType = ((cast _Runtime.isInstanceOfName(lineIndices, 'Uint32Array') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT) : Dynamic));
     if ((cast _Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (upload = cast ({ indexType: indexType, lineIndexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), vao: flighthq._internal.backend.WebGl2Backend.createVertexArray(gl), version: -1.0 } : Dynamic));
@@ -54,10 +54,17 @@ class GlWireframeUpload {
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : { var vao:flighthq._internal.dom.WebGLVertexArrayObject; }).vao);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), meshUpload.vertexBuffer);
     stride = (cast geometry.layout : { var stride:Float; }).stride;
-    position = _Runtime.find((cast geometry.layout : { var attributes:Array<VertexAttribute>; }).attributes, function(a:VertexAttribute, __unused0:Float, __unused1:Array<VertexAttribute>):Bool return _Runtime.strictEquals(a.semantic, 'position'));
-    byteOffset = ((cast !_Runtime.strictEquals(position, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast position : { var byteOffset:Float; }).byteOffset : Dynamic) : (cast 0.0 : Dynamic));
-    flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, 0.0);
-    flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, 0.0, 3.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, stride, byteOffset);
+    attributes = (cast geometry.layout : { var attributes:Array<VertexAttribute>; }).attributes;
+    {
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(attributes, 'length') : Float)) : Bool)) {
+        var attribute:VertexAttribute = flighthq._internal._StaticIndex.readArray(attributes, i);
+        if ((cast ((cast ((cast _Runtime.strictEquals(attribute.semantic, 'position') : Bool) || (cast _Runtime.strictEquals(attribute.semantic, 'joints0') : Bool)) : Bool) || (cast _Runtime.strictEquals(attribute.semantic, 'weights0') : Bool)) : Bool)) {
+          bindGlVertexAttribute(({ final __callArgument3:Dynamic = gl; __callArgument3; }), ({ final __callArgument4:Dynamic = attribute; __callArgument4; }), (cast stride : Float));
+        }
+        i++;
+      }
+    }
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), (cast upload : { var lineIndexBuffer:flighthq._internal.dom.WebGLBuffer; }).lineIndexBuffer);
     flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), lineIndices, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STATIC_DRAW', flighthq._internal.backend.WebGl2Backend.STATIC_DRAW));
     ((cast upload : { var version:Float; }).version = cast (geometry.version : Float));
@@ -66,11 +73,11 @@ class GlWireframeUpload {
   }
 
   public static function buildLineIndices__glWireframeUpload(geometry:MeshGeometry):flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array> {
-    var triangleIndices:Null<flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>> = cast _Runtime.UNDEFINED;
+    var triangleIndices:Null<flighthq._internal._Union2<flighthq._internal._UInt32Array, flighthq._internal._UInt16Array>> = cast _Runtime.UNDEFINED;
     var triangleCount:Float = cast _Runtime.UNDEFINED;
     var lineCount:Float = cast _Runtime.UNDEFINED;
     var useUint32:Bool = cast _Runtime.UNDEFINED;
-    var lines:flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array> = cast _Runtime.UNDEFINED;
+    var lines:flighthq._internal._Union2<flighthq._internal._UInt32Array, flighthq._internal._UInt16Array> = cast _Runtime.UNDEFINED;
     triangleIndices = geometry.indices;
     triangleCount = ((cast !_Runtime.strictEquals(triangleIndices, null) : Bool) ? (cast HxMath.floor(((cast triangleIndices : { var length:Float; }).length / 3.0)) : Dynamic) : (cast HxMath.floor(((_Runtime.multiplyNumbers(_Runtime.field(geometry.vertices, 'length'), 4.0) / (cast geometry.layout : { var stride:Float; }).stride) / 3.0)) : Dynamic));
     lineCount = (triangleCount * 6.0);

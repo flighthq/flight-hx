@@ -3,6 +3,7 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './enableWgpuRenderEffectGuards.mjs';
 export * from './wgpuBevelEffect.mjs';
 export * from './wgpuBlendEffect.mjs';
 export * from './wgpuBloomEffect.mjs';

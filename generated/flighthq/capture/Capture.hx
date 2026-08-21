@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.capture.CaptureBaseline as Facade_Capture_flighthq_capture_CaptureBaseline;
 import flighthq.capture.CaptureComparison as Facade_Capture_flighthq_capture_CaptureComparison;
 import flighthq.types.CaptureBaseline;
+import flighthq.types.CaptureBaselineField;
 import flighthq.types.CaptureCheckResult;
 
 class Capture {
@@ -38,7 +39,7 @@ class Capture {
     return cast null;
   }
 
-  public static function getCaptureBaselineField(baseline:CaptureBaseline, column:String, field:String):Null<String> {
+  public static function getCaptureBaselineField(baseline:CaptureBaseline, column:String, field:CaptureBaselineField):Null<String> {
     return cast Facade_Capture_flighthq_capture_CaptureBaseline.getCaptureBaselineField(baseline, column, field);
     return cast null;
   }
@@ -48,7 +49,7 @@ class Capture {
     return cast null;
   }
 
-  public static function setCaptureBaselineField(baseline:CaptureBaseline, column:String, field:String, value:String):Void {
+  public static function setCaptureBaselineField(baseline:CaptureBaseline, column:String, field:CaptureBaselineField, value:String):Void {
     Facade_Capture_flighthq_capture_CaptureBaseline.setCaptureBaselineField(baseline, column, field, value);
   }
 }

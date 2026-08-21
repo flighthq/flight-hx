@@ -5,4 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.EntityRuntime;
 
-typedef Skeleton3D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var joints:Array<Node3D>; @:optional var names:Null<Array<String>>; };
+typedef Skeleton3D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var normalMatrices:flighthq._internal._Float32Array; var joints:Array<Node3D>; @:optional var names:Null<Array<String>>; };

@@ -3,6 +3,7 @@ package flighthq.node;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.HasTransform2D;
 import flighthq.types.HasTransform2D.HasTransform2DRuntime;
 import flighthq.types.Matrix;
@@ -19,7 +20,7 @@ class HasTransform2d {
   }
 
   @:noCompletion
-  public static function initTransform2DTrait(target:HasTransform2D, ?obj:flighthq._internal._Partial<HasTransform2D>):Void {
+  public static function initTransform2DTrait(target:HasTransform2D, ?obj:{ @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var rotation:Null<Float>; @:optional var scaleX:Null<Float>; @:optional var scaleY:Null<Float>; @:optional var skewX:Null<Float>; @:optional var skewY:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):Void {
     (target.pivotX = cast (_Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var pivotX:Null<Float>; }).pivotX; }), function():Dynamic return cast 0.0) : Float));
     (target.pivotY = cast (_Runtime.coalesce(({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var pivotY:Null<Float>; }).pivotY; }), function():Dynamic return cast 0.0) : Float));
     (target.rotation = cast (_Runtime.coalesce(({ final __structural2 = obj; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var rotation:Null<Float>; }).rotation; }), function():Dynamic return cast 0.0) : Float));

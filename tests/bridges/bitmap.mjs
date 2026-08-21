@@ -7,6 +7,7 @@ export const applyBitmapLevels = compiled.flighthq.bitmap.Bitmap.applyBitmapLeve
 export const applyBitmapPaletteMap = compiled.flighthq.bitmap.Bitmap.applyBitmapPaletteMap;
 export const applyBitmapThreshold = compiled.flighthq.bitmap.Bitmap.applyBitmapThreshold;
 export const bevelBitmap = compiled.flighthq.bitmap.Bitmap.bevelBitmap;
+export const BITMAP_FINGERPRINT_COMPUTATION_ID = compiled.flighthq.bitmap.Bitmap.BITMAP_FINGERPRINT_COMPUTATION_ID;
 export const BITMAP_NOISE_CHANNEL_A = compiled.flighthq.bitmap.Bitmap.BITMAP_NOISE_CHANNEL_A;
 export const BITMAP_NOISE_CHANNEL_B = compiled.flighthq.bitmap.Bitmap.BITMAP_NOISE_CHANNEL_B;
 export const BITMAP_NOISE_CHANNEL_G = compiled.flighthq.bitmap.Bitmap.BITMAP_NOISE_CHANNEL_G;

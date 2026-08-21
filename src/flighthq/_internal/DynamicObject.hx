@@ -65,6 +65,26 @@ class DynamicObject {
     #end
   }
 
+  public static function is(left:Float, right:Float):Bool {
+    #if js
+    return js.Syntax.code('Object.is({0}, {1})', left, right);
+    #else
+    if (Math.isNaN(left)) return Math.isNaN(right);
+    if (left == 0 && right == 0) {
+      #if cpp
+      final leftBits = haxe.io.FPHelper.doubleToI64(left);
+      final leftHigh = leftBits.high;
+      final leftLow = leftBits.low;
+      final rightBits = haxe.io.FPHelper.doubleToI64(right);
+      return leftHigh == rightBits.high && leftLow == rightBits.low;
+      #else
+      return Math.atan2(left, -1.0) == Math.atan2(right, -1.0);
+      #end
+    }
+    return left == right;
+    #end
+  }
+
   public static inline function field(name:String):Dynamic {
     #if js
     return js.Syntax.code('Object[{0}]', name);

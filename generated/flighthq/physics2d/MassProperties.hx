@@ -3,7 +3,7 @@ package flighthq.physics2d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionShape;
+import flighthq.types.Collision.CollisionBuiltInShape2D;
 import flighthq.types.Physics2D.Physics2DBodyType;
 import flighthq.types.Physics2D.Physics2DCollider;
 import flighthq.types.Physics2D.Physics2DMassData;
@@ -12,7 +12,7 @@ import flighthq.types.Physics2D.RigidBody2D;
 
 class MassProperties {
   public static function computePhysics2DColliderMassData(collider:Physics2DCollider, out:Physics2DMassData):Void {
-    var shape:CollisionShape = cast _Runtime.UNDEFINED;
+    var shape:CollisionBuiltInShape2D = cast _Runtime.UNDEFINED;
     var density:Float = cast _Runtime.UNDEFINED;
     shape = collider.local;
     density = (cast collider.material : Physics2DMaterial).density;
@@ -64,6 +64,24 @@ class MassProperties {
   }
 
   public static function updateRigidBody2DMassData(body:RigidBody2D):Void {
+    var scratch:Physics2DMassData = cast _Runtime.UNDEFINED;
+    scratch = (cast MassProperties.acquirePhysics2DMassScratch__massProperties() : Physics2DMassData);
+    try {
+      try {
+        MassProperties.updateRigidBody2DMassDataWithScratch__massProperties(({ final __callArgument1:Dynamic = body; __callArgument1; }), ({ final __callArgument2:Dynamic = scratch; __callArgument2; }));
+      } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
+    } catch (__finallyError3:Dynamic) {
+      {
+        MassProperties.releasePhysics2DMassScratch__massProperties(({ final __callArgument4:Dynamic = scratch; __callArgument4; }));
+      }
+      _Runtime.throwValue(__finallyError3);
+    }
+    {
+      MassProperties.releasePhysics2DMassScratch__massProperties(({ final __callArgument5:Dynamic = scratch; __callArgument5; }));
+    }
+  }
+
+  public static function updateRigidBody2DMassDataWithScratch__massProperties(body:RigidBody2D, scratch:Physics2DMassData):Void {
     var mass:Float = cast _Runtime.UNDEFINED;
     var weightedX:Float = cast _Runtime.UNDEFINED;
     var weightedY:Float = cast _Runtime.UNDEFINED;
@@ -73,10 +91,10 @@ class MassProperties {
     weightedX = 0.0;
     weightedY = 0.0;
     for (collider in _Runtime.iterable((cast body : RigidBody2D).colliders)) {
-      computePhysics2DColliderMassData(({ final __callArgument3:Dynamic = collider; __callArgument3; }), ({ final __callArgument4:Dynamic = MassProperties.scratch__massProperties; __callArgument4; }));
-      (mass = cast ((mass + MassProperties.scratch__massProperties.mass) : Dynamic));
-      (weightedX = cast ((weightedX + (MassProperties.scratch__massProperties.centerX * MassProperties.scratch__massProperties.mass)) : Dynamic));
-      (weightedY = cast ((weightedY + (MassProperties.scratch__massProperties.centerY * MassProperties.scratch__massProperties.mass)) : Dynamic));
+      computePhysics2DColliderMassData(({ final __callArgument8:Dynamic = collider; __callArgument8; }), ({ final __callArgument9:Dynamic = scratch; __callArgument9; }));
+      (mass = cast ((mass + scratch.mass) : Dynamic));
+      (weightedX = cast ((weightedX + (scratch.centerX * scratch.mass)) : Dynamic));
+      (weightedY = cast ((weightedY + (scratch.centerY * scratch.mass)) : Dynamic));
     }
     if ((cast ((cast mass : Float) > (cast 0.0 : Float)) : Bool)) {
       ((cast body : RigidBody2D).centerX = (weightedX / mass));
@@ -87,10 +105,10 @@ class MassProperties {
     }
     inertia = 0.0;
     for (collider in _Runtime.iterable((cast body : RigidBody2D).colliders)) {
-      computePhysics2DColliderMassData(({ final __callArgument7:Dynamic = collider; __callArgument7; }), ({ final __callArgument8:Dynamic = MassProperties.scratch__massProperties; __callArgument8; }));
-      var offsetX:Float = (MassProperties.scratch__massProperties.centerX - (cast body : RigidBody2D).centerX);
-      var offsetY:Float = (MassProperties.scratch__massProperties.centerY - (cast body : RigidBody2D).centerY);
-      (inertia = cast ((inertia + (MassProperties.scratch__massProperties.inertia + (MassProperties.scratch__massProperties.mass * ((offsetX * offsetX) + (offsetY * offsetY))))) : Dynamic));
+      computePhysics2DColliderMassData(({ final __callArgument12:Dynamic = collider; __callArgument12; }), ({ final __callArgument13:Dynamic = scratch; __callArgument13; }));
+      var offsetX:Float = (scratch.centerX - (cast body : RigidBody2D).centerX);
+      var offsetY:Float = (scratch.centerY - (cast body : RigidBody2D).centerY);
+      (inertia = cast ((inertia + (scratch.inertia + (scratch.mass * ((offsetX * offsetX) + (offsetY * offsetY))))) : Dynamic));
     }
     simulated = _Runtime.strictEquals((cast body : RigidBody2D).type, 'dynamic');
     ((cast body : RigidBody2D).mass = ((cast simulated : Bool) ? (cast mass : Dynamic) : (cast 0.0 : Dynamic)));
@@ -153,5 +171,14 @@ class MassProperties {
     (out.inertia = cast ((originMoment - (out.mass * offsetSquared)) : Float));
   }
 
-  public static final scratch__massProperties:Physics2DMassData = (cast { mass: 0.0, inertia: 0.0, centerX: 0.0, centerY: 0.0 });
+  public static function acquirePhysics2DMassScratch__massProperties():Physics2DMassData {
+    return cast _Runtime.coalesce(_Runtime.callProperty(MassProperties.physics2DMassScratchPool__massProperties, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast { mass: 0.0, inertia: 0.0, centerX: 0.0, centerY: 0.0 });
+    return cast null;
+  }
+
+  public static function releasePhysics2DMassScratch__massProperties(scratch:Physics2DMassData):Void {
+    _Runtime.callProperty(MassProperties.physics2DMassScratchPool__massProperties, 'push', cast ([scratch] : Array<Dynamic>));
+  }
+
+  public static final physics2DMassScratchPool__massProperties:Array<Physics2DMassData> = (cast cast ([{ mass: 0.0, inertia: 0.0, centerX: 0.0, centerY: 0.0 }] : Array<Dynamic>));
 }

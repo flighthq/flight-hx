@@ -3,6 +3,8 @@ package flighthq.effectsCanvas;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.color.PackColor.getColorAlpha;
+import flighthq.color.PackColor.getColorRgb;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasEffectPass;
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline.acquireCanvasRenderTarget;
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline.createCanvasRenderTargetPool;
@@ -60,6 +62,8 @@ class CanvasBevelEffect {
     var distance:Float = cast _Runtime.UNDEFINED;
     var offsetX:Float = cast _Runtime.UNDEFINED;
     var offsetY:Float = cast _Runtime.UNDEFINED;
+    var highlightPacked:Float = cast _Runtime.UNDEFINED;
+    var shadowPacked:Float = cast _Runtime.UNDEFINED;
     blurred = (cast acquireCanvasRenderTarget(({ final __callArgument10:Dynamic = pool; __callArgument10; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
     lit = (cast acquireCanvasRenderTarget(({ final __callArgument11:Dynamic = pool; __callArgument11; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
     shade = (cast acquireCanvasRenderTarget(({ final __callArgument12:Dynamic = pool; __callArgument12; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
@@ -81,12 +85,14 @@ class CanvasBevelEffect {
     clearCanvasTarget(({ final __callArgument25:Dynamic = side; __callArgument25; }));
     compositeCanvasImage(({ final __callArgument26:Dynamic = side; __callArgument26; }), ({ final __callArgument27:Dynamic = lit; __callArgument27; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     compositeCanvasImage(({ final __callArgument28:Dynamic = side; __callArgument28; }), ({ final __callArgument29:Dynamic = shade; __callArgument29; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 'destination-out' : flighthq._internal._Any));
-    drawCanvasTintedAlphaMask(({ final __callArgument30:Dynamic = tinted; __callArgument30; }), ({ final __callArgument31:Dynamic = side; __callArgument31; }), (cast _Runtime.coalesce(effect.highlightColor, function():Dynamic return cast 16777215.0) : Float), (cast _Runtime.coalesce(effect.highlightAlpha, function():Dynamic return cast 1.0) : Float), (cast strength : Float));
+    highlightPacked = _Runtime.coalesce(effect.highlightColor, function():Dynamic return cast 4294967295.0);
+    drawCanvasTintedAlphaMask(({ final __callArgument30:Dynamic = tinted; __callArgument30; }), ({ final __callArgument31:Dynamic = side; __callArgument31; }), (cast (cast getColorRgb((cast highlightPacked : Float)) : Float) : Float), (cast _Runtime.multiplyNumbers(_Runtime.coalesce(effect.highlightAlpha, function():Dynamic return cast 1.0), (cast getColorAlpha((cast highlightPacked : Float)) : Float)) : Float), (cast strength : Float));
     compositeCanvasImage(({ final __callArgument32:Dynamic = band; __callArgument32; }), ({ final __callArgument33:Dynamic = tinted; __callArgument33; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     clearCanvasTarget(({ final __callArgument34:Dynamic = side; __callArgument34; }));
     compositeCanvasImage(({ final __callArgument35:Dynamic = side; __callArgument35; }), ({ final __callArgument36:Dynamic = shade; __callArgument36; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     compositeCanvasImage(({ final __callArgument37:Dynamic = side; __callArgument37; }), ({ final __callArgument38:Dynamic = lit; __callArgument38; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 'destination-out' : flighthq._internal._Any));
-    drawCanvasTintedAlphaMask(({ final __callArgument39:Dynamic = tinted; __callArgument39; }), ({ final __callArgument40:Dynamic = side; __callArgument40; }), (cast _Runtime.coalesce(effect.shadowColor, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(effect.shadowAlpha, function():Dynamic return cast 1.0) : Float), (cast strength : Float));
+    shadowPacked = _Runtime.coalesce(effect.shadowColor, function():Dynamic return cast 255.0);
+    drawCanvasTintedAlphaMask(({ final __callArgument39:Dynamic = tinted; __callArgument39; }), ({ final __callArgument40:Dynamic = side; __callArgument40; }), (cast (cast getColorRgb((cast shadowPacked : Float)) : Float) : Float), (cast _Runtime.multiplyNumbers(_Runtime.coalesce(effect.shadowAlpha, function():Dynamic return cast 1.0), (cast getColorAlpha((cast shadowPacked : Float)) : Float)) : Float), (cast strength : Float));
     compositeCanvasImage(({ final __callArgument41:Dynamic = band; __callArgument41; }), ({ final __callArgument42:Dynamic = tinted; __callArgument42; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     clipCanvasBevelBand(({ final __callArgument43:Dynamic = band; __callArgument43; }), ({ final __callArgument44:Dynamic = source; __callArgument44; }), effect.bevelType);
     clearCanvasTarget(({ final __callArgument45:Dynamic = dest; __callArgument45; }));

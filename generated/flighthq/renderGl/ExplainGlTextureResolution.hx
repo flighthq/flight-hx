@@ -6,17 +6,22 @@ import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.texture.Texture.getTextureSourceKind;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderRegistries;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.GlTextureResolver;
+import flighthq.types.RegistryTable.KeyedTable;
+import flighthq.types.RegistryTable.RegistryEntryState;
+import flighthq.types.RegistryTable.RegistryTableEntry;
 import flighthq.types.Texture.TextureLike;
 import flighthq.types.TextureResolutionExplanation;
+import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 class ExplainGlTextureResolution {
   public static function explainGlTextureResolution(state:GlRenderState, texture:TextureLike):TextureResolutionExplanation {
     var kind:Null<String> = cast _Runtime.UNDEFINED;
     kind = (cast getTextureSourceKind(({ final __callArgument0:Dynamic = texture; __callArgument0; })) : Null<String>);
     if ((cast _Runtime.strictEquals(kind, null) : Bool)) { return cast { kind: kind, status: 'missing-kind' }; }
-    return cast { kind: kind, status: ((cast _Runtime.strictEquals(({ final __collection3:Dynamic = (cast (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime) : { @:optional var glTextureResolverRegistry:Null<flighthq._internal._Map<String, GlTextureResolver>>; }).glTextureResolverRegistry; __collection3 == null ? _Runtime.UNDEFINED : ((cast __collection3 : flighthq._internal._Map<String, GlTextureResolver>).has(kind)); }), true) : Bool) ? (cast 'registered' : Dynamic) : (cast 'missing-resolver' : Dynamic)) };
+    return cast { kind: kind, status: ((cast _Runtime.strictEquals(({ final __structural3 = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).textureResolvers : KeyedTable<GlTextureResolver>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlTextureResolver>>).get(kind)); __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast 'registered' : Dynamic) : (cast 'missing-resolver' : Dynamic)) };
     return cast null;
   }
 }

@@ -4,7 +4,7 @@ package flighthq.scene2dWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq._internal.WebExterns.WgpuTextLabelData;
-import flighthq.color.PackColor.computeRgbHexString;
+import flighthq.color.PackColor.computeRgbaCssString;
 import flighthq.image.ImageResource.createImageResource;
 import flighthq.image.ImageResource.invalidateImageResource;
 import flighthq.node.Revision.getNodeLocalContentRevision;
@@ -154,7 +154,7 @@ class WgpuTextLabel {
       flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'textAlign', 'start');
       for (group in _Runtime.iterable(result.groups)) {
         flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'font', (cast computeTextFormatFontString(group.format) : String));
-        flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle', (cast computeRgbHexString((cast _Runtime.coalesce((cast group.format : TextFormat).color, function():Dynamic return cast 0.0) : Float)) : String));
+        flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle', (cast computeRgbaCssString((cast _Runtime.coalesce((cast group.format : TextFormat).color, function():Dynamic return cast 255.0) : Float)) : String));
         var slice:String = _Runtime.substring(text, group.startIndex, group.endIndex);
         flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillText', cast ([slice, group.offsetX, (group.offsetY + (group.ascent * 0.815))] : Array<Dynamic>));
       }

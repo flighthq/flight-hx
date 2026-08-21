@@ -3,15 +3,18 @@
 function __syncDependencies() {}
 __syncDependencies();
 
-export * from './collideContactManifold.mjs';
+export * from './collideContactManifold2D.mjs';
+export * from './collisionSupport2D.mjs';
 export * from './contactManifold.mjs';
 export * from './enableCollisionGuards.mjs';
-export * from './explainCollisionTest.mjs';
+export * from './explainCollisionTest2D.mjs';
+export * from './gjk2D.mjs';
 export * from './manifold.mjs';
 export * from './pointContainment.mjs';
-export * from './raycastCollisionShape.mjs';
+export * from './raycastCollisionShape2D.mjs';
+export * from './registerBuiltInCollisionPairTests2D.mjs';
 export * from './segmentCollision.mjs';
 export * from './shapeCollision.mjs';
 export * from './shapeContact.mjs';
-export * from './sweepCollisionShape.mjs';
-export * from './testCollision.mjs';
+export * from './sweepCollisionShape2D.mjs';
+export * from './testCollision2D.mjs';

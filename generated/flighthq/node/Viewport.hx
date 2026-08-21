@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Viewport;
 import flighthq.types.Viewport.ViewportLike;
 

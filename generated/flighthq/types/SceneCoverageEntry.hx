@@ -9,4 +9,18 @@ import flighthq.types._internal._SceneCoverageEntryValues.SceneCoverageValue;
 
 typedef SceneCoverage = flighthq._internal._IndexedAccess<Dynamic, String>;
 
-typedef SceneCoverageEntry = { var coverage:SceneCoverage; var kind:Kind; var registry:RenderRegistry; };
+typedef SceneCoverageEntryBase__SceneCoverageEntry = { var facet:RequirementFacet; var kind:Kind; var registry:RenderRegistry; };
+
+typedef SceneCoverageRemedy__SceneCoverageEntry = { var module:String; var registrar:String; };
+
+typedef SatisfiedSceneCoverageEntry = { var facet:RequirementFacet; var kind:Kind; var registry:RenderRegistry; var coverage:Dynamic; };
+
+typedef UnregisteredSceneCoverageEntry = { var facet:RequirementFacet; var kind:Kind; var registry:RenderRegistry; var module:String; var registrar:String; var coverage:Dynamic; };
+
+typedef UnavailableSceneCoverageEntry = { var facet:RequirementFacet; var kind:Kind; var registry:RenderRegistry; var coverage:Dynamic; };
+
+typedef FallbackRemediableSceneCoverageEntry = { var facet:RequirementFacet; var kind:Kind; var registry:RenderRegistry; var module:String; var registrar:String; var coverage:Dynamic; };
+
+typedef FallbackUnavailableSceneCoverageEntry = { var facet:RequirementFacet; var kind:Kind; var registry:RenderRegistry; var coverage:Dynamic; };
+
+typedef SceneCoverageEntry = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<FallbackRemediableSceneCoverageEntry, FallbackUnavailableSceneCoverageEntry>, SatisfiedSceneCoverageEntry>, UnavailableSceneCoverageEntry>, UnregisteredSceneCoverageEntry>;

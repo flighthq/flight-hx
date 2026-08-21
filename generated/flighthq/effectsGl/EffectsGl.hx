@@ -57,6 +57,7 @@ import flighthq.types.Adjustment;
 import flighthq.types.BlurEffect;
 import flighthq.types.GlRenderEffectPipeline;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectApplicationExplanation;
+import flighthq.types.GlRenderEffectPipeline.GlRenderEffectResolver;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
 import flighthq.types.GlRenderState;
@@ -199,6 +200,11 @@ class EffectsGl {
     return cast null;
   }
 
+  public static function getGlCustomShaderSource(state:GlRenderState, shaderKey:String):Null<String> {
+    return cast Facade_EffectsGl_flighthq_effectsGl_GlCustomShaderEffect.getGlCustomShaderSource(state, shaderKey);
+    return cast null;
+  }
+
   public static function registerGlBevelEffect(state:GlRenderState):Void {
     Facade_EffectsGl_flighthq_effectsGl_GlBevelEffect.registerGlBevelEffect(state);
   }
@@ -249,6 +255,10 @@ class EffectsGl {
 
   public static function registerGlCustomShaderEffect(state:GlRenderState):Void {
     Facade_EffectsGl_flighthq_effectsGl_GlCustomShaderEffect.registerGlCustomShaderEffect(state);
+  }
+
+  public static function registerGlCustomShaderSource(state:GlRenderState, shaderKey:String, fragmentSource:String):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlCustomShaderEffect.registerGlCustomShaderSource(state, shaderKey, fragmentSource);
   }
 
   public static function registerGlDirectionalBlurEffect(state:GlRenderState):Void {
@@ -347,8 +357,8 @@ class EffectsGl {
     Facade_EffectsGl_flighthq_effectsGl_GlRadialBlurEffect.registerGlRadialBlurEffect(state);
   }
 
-  public static function registerGlRenderEffect(state:GlRenderState, kind:String, runner:GlRenderEffectRunner):Void {
-    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistry.registerGlRenderEffect(state, kind, runner);
+  public static function registerGlRenderEffect(state:GlRenderState, kind:String, runner:GlRenderEffectRunner, ?isResolvable:GlRenderEffectResolver):Void {
+    Facade_EffectsGl_flighthq_effectsGl_GlRenderEffectRegistry.registerGlRenderEffect(state, kind, runner, isResolvable);
   }
 
   public static function registerGlScanlinesEffect(state:GlRenderState):Void {

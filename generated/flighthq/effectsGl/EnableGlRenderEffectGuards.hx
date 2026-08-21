@@ -3,6 +3,8 @@ package flighthq.effectsGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effectsGl.GlCustomShaderEffect.setGlCustomShaderSourceGuard;
+import flighthq.effectsGl.GlRenderEffectPipeline.setGlRenderEffectPipelineSkipGuard;
 import flighthq.effectsGl.GlRenderTextureEffect.setGlRenderEffectApplicationGuard;
 import flighthq.log.Log.logOnce;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectApplicationExplanation;
@@ -19,12 +21,20 @@ class EnableGlRenderEffectGuards {
 
   public static function disableGlRenderEffectGuards(state:GlRenderState):Void {
     setGlRenderEffectApplicationGuard(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast null : Dynamic));
+    setGlCustomShaderSourceGuard(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast null : Dynamic));
+    setGlRenderEffectPipelineSkipGuard(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast null : Dynamic));
     ((cast EnableGlRenderEffectGuards._guardedStates__enableGlRenderEffectGuards : flighthq._internal._WeakSet<GlRenderState>).delete_(state));
   }
 
   public static function enableGlRenderEffectGuards(state:GlRenderState):Void {
-    setGlRenderEffectApplicationGuard(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast EnableGlRenderEffectGuards.warnGlRenderEffectApplication__enableGlRenderEffectGuards : Dynamic));
+    setGlRenderEffectApplicationGuard(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast EnableGlRenderEffectGuards.warnGlRenderEffectApplication__enableGlRenderEffectGuards : Dynamic));
+    setGlCustomShaderSourceGuard(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast EnableGlRenderEffectGuards.warnGlCustomShaderSourceReregistered__enableGlRenderEffectGuards : Dynamic));
+    setGlRenderEffectPipelineSkipGuard(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast EnableGlRenderEffectGuards.warnGlRenderEffectPipelineSkip__enableGlRenderEffectGuards : Dynamic));
     ((cast EnableGlRenderEffectGuards._guardedStates__enableGlRenderEffectGuards : flighthq._internal._WeakSet<GlRenderState>).add(state));
+  }
+
+  public static function warnGlCustomShaderSourceReregistered__enableGlRenderEffectGuards(_state:GlRenderState, shaderKey:String, _previousSource:String, _nextSource:String):Void {
+    (cast logOnce((cast 'effects-gl:custom-shader-source-reregistered:' + Std.string(shaderKey) + '' : String), ({ final __callArgument6:Dynamic = LogLevel.Warn; __callArgument6; }), (cast { message: 'registerGlCustomShaderSource: shaderKey "' + Std.string(shaderKey) + '" already held DIFFERENT source, and the compiled program is cached by key — the new source will NOT run and the effect keeps drawing with the old one; register edited source under a new key and point the effect at it', shaderKey: shaderKey } : Dynamic), ({ final __callArgument7:Dynamic = 'effects-gl'; __callArgument7; })) : Bool);
   }
 
   public static function getGlRenderEffectApplicationMessage__enableGlRenderEffectGuards(explanation:GlRenderEffectApplicationExplanation):String {
@@ -36,8 +46,14 @@ class EnableGlRenderEffectGuards {
       else if (__switchValue == 'source-unavailable') {
         return cast 'applyGlRenderEffectsToRenderTexture: the source render Texture has no realized GL target, so the call returned false and the destination was NOT written — render into the source before applying effects';
       }
+      else if (__switchValue == 'partial-resolution') {
+        return cast 'applyGlRenderEffectsToRenderTexture: ' + Std.string(_Runtime.field(explanation.unresolvedIndexes, 'length')) + ' of ' + Std.string(explanation.requestedCount) + ' effects have a runner but nothing to run with, so those stages COPIED THE INPUT THROUGH UNCHANGED — they were not dropped and the destination WAS written; chain position(s) ' + Std.string(_Runtime.join(explanation.unresolvedIndexes, ', ')) + ' name something unregistered, such as a shaderKey with no registerGlCustomShaderSource call';
+      }
       else if (__switchValue == 'stale-destination') {
         return cast 'applyGlRenderEffectsToRenderTexture: the call returned false before replacing the destination, so its previously published pixels are a STALE DESTINATION — handle the false return before sampling dest, and make the source and runners available before retrying';
+      }
+      else if (__switchValue == 'unresolved-effects') {
+        return cast 'applyGlRenderEffectsToRenderTexture: every effect has a runner but NONE can resolve what it names, so the whole chain COPIED THE INPUT THROUGH UNCHANGED — the call returned true and the destination WAS written, which looks like effects that did nothing rather than effects that failed; chain position(s) ' + Std.string(_Runtime.join(explanation.unresolvedIndexes, ', ')) + ' name something unregistered, such as a shaderKey with no registerGlCustomShaderSource call';
       }
       else  {
         return cast 'applyGlRenderEffectsToRenderTexture: no registered runner for any of ' + Std.string(_Runtime.join(explanation.unregisteredKinds, ', ')) + ', so the call returned false and the destination was NEVER WRITTEN — anything sampling it reads a stale or empty texture; call registerGlRenderEffect(state, kind, runner)';
@@ -47,7 +63,11 @@ class EnableGlRenderEffectGuards {
   }
 
   public static function warnGlRenderEffectApplication__enableGlRenderEffectGuards(_state:GlRenderState, explanation:GlRenderEffectApplicationExplanation):Void {
-    (cast logOnce((cast 'effects-gl:effect-application:' + Std.string(explanation.status) + ':' + Std.string(_Runtime.join(explanation.unregisteredKinds, ',')) + '' : String), ({ final __callArgument2:Dynamic = LogLevel.Warn; __callArgument2; }), (cast { message: (cast EnableGlRenderEffectGuards.getGlRenderEffectApplicationMessage__enableGlRenderEffectGuards(({ final __callArgument3:Dynamic = explanation; __callArgument3; })) : String), registeredCount: explanation.registeredCount, requestedCount: explanation.requestedCount, status: explanation.status, unregisteredKinds: explanation.unregisteredKinds } : Dynamic), ({ final __callArgument4:Dynamic = 'effects-gl'; __callArgument4; })) : Bool);
+    (cast logOnce((cast 'effects-gl:effect-application:' + Std.string(explanation.status) + ':' + Std.string(_Runtime.join(explanation.unregisteredKinds, ',')) + ':' + Std.string(_Runtime.join(explanation.unresolvedIndexes, ',')) + '' : String), ({ final __callArgument8:Dynamic = LogLevel.Warn; __callArgument8; }), (cast { message: (cast EnableGlRenderEffectGuards.getGlRenderEffectApplicationMessage__enableGlRenderEffectGuards(({ final __callArgument9:Dynamic = explanation; __callArgument9; })) : String), registeredCount: explanation.registeredCount, requestedCount: explanation.requestedCount, status: explanation.status, unregisteredKinds: explanation.unregisteredKinds } : Dynamic), ({ final __callArgument10:Dynamic = 'effects-gl'; __callArgument10; })) : Bool);
+  }
+
+  public static function warnGlRenderEffectPipelineSkip__enableGlRenderEffectGuards(_state:GlRenderState, kind:String):Void {
+    (cast logOnce((cast 'effects-gl:pipeline-effect-skipped:' + Std.string(kind) + '' : String), ({ final __callArgument11:Dynamic = LogLevel.Warn; __callArgument11; }), (cast { kind: kind, message: 'endGlRenderEffectPipeline: effect kind "' + Std.string(kind) + '" has no registered runner, so the pass was SKIPPED — the frame was written without it and nothing else reports this; call registerGlRenderEffect(state, "' + Std.string(kind) + '", runner), or check whether this kind has a runner on this backend at all' } : Dynamic), ({ final __callArgument12:Dynamic = 'effects-gl'; __callArgument12; })) : Bool);
   }
 
   public static final _guardedStates__enableGlRenderEffectGuards:flighthq._internal._WeakSet<GlRenderState> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);

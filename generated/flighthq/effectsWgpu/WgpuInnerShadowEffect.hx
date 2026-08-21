@@ -3,6 +3,7 @@ package flighthq.effectsWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.color.PackColor.unpackColorRgba;
 import flighthq.effectsWgpu.WgpuEffectBlitShader.applyWgpuEffectBlitOffsetPass;
 import flighthq.effectsWgpu.WgpuEffectBlitShader.applyWgpuEffectBlitPass;
 import flighthq.effectsWgpu.WgpuEffectBoxBlur.applyWgpuEffectBoxBlur;
@@ -49,7 +50,7 @@ class WgpuInnerShadowEffect {
     distance = _Runtime.coalesce(effect.distance, function():Dynamic return cast 4.0);
     dx = _Runtime.multiplyNumbers(HxMath.cos(angle), distance);
     dy = _Runtime.multiplyNumbers(HxMath.sin(angle), distance);
-    color = _Runtime.coalesce(effect.color, function():Dynamic return cast 0.0);
+    color = _Runtime.coalesce(effect.color, function():Dynamic return cast 255.0);
     alpha = _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0);
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(effect.quality, function():Dynamic return cast 1.0)));
@@ -78,8 +79,11 @@ class WgpuInnerShadowEffect {
 
   public static function getInvertTintEdgeColor__wgpuInnerShadowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
     var edgeAlpha:Float = cast _Runtime.UNDEFINED;
-    edgeAlpha = HxMath.min(1.0, (alpha * strength));
-    return cast cast ([(((_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) / 255.0) * edgeAlpha), (((_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255) / 255.0) * edgeAlpha), (((_Runtime.toInt32(color) & 255) / 255.0) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
+    unpackColorRgba(({ final __callArgument40:Dynamic = WgpuInnerShadowEffect.scratchEdge__wgpuInnerShadowEffect; __callArgument40; }), (cast color : Float));
+    edgeAlpha = HxMath.min(1.0, ((alpha * flighthq._internal._StaticIndex.readFloatArrayTyped((cast WgpuInnerShadowEffect.scratchEdge__wgpuInnerShadowEffect : Array<Float>), (cast 3.0 : Float))) * strength));
+    return cast cast ([(flighthq._internal._StaticIndex.readFloatArrayTyped((cast WgpuInnerShadowEffect.scratchEdge__wgpuInnerShadowEffect : Array<Float>), (cast 0.0 : Float)) * edgeAlpha), (flighthq._internal._StaticIndex.readFloatArrayTyped((cast WgpuInnerShadowEffect.scratchEdge__wgpuInnerShadowEffect : Array<Float>), (cast 1.0 : Float)) * edgeAlpha), (flighthq._internal._StaticIndex.readFloatArrayTyped((cast WgpuInnerShadowEffect.scratchEdge__wgpuInnerShadowEffect : Array<Float>), (cast 2.0 : Float)) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
     return cast null;
   }
+
+  public static final scratchEdge__wgpuInnerShadowEffect:Array<Float> = (cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
 }

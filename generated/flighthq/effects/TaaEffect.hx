@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.TaaEffect;
 
 class TaaEffect {
-  public static function createTaaEffect(?options:flighthq._internal._Omit<flighthq.types.TaaEffect, String>):flighthq.types.TaaEffect {
+  public static function createTaaEffect(?options:{ @:optional var feedback:Null<Float>; }):flighthq.types.TaaEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'TaaEffect' }, options]);
     return cast null;

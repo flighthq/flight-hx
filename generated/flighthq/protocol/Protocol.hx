@@ -47,7 +47,7 @@ class Protocol {
     return cast null;
   }
 
-  public static function createProtocolUrl(parts:flighthq._internal._Partial<ParsedProtocolUrl>):String {
+  public static function createProtocolUrl(parts:{ @:optional var scheme:Null<String>; @:optional var host:Null<String>; @:optional var path:Null<String>; @:optional var query:Null<flighthq._internal._Record<String, String>>; }):String {
     var scheme:String = cast _Runtime.UNDEFINED;
     var host:String = cast _Runtime.UNDEFINED;
     var path:String = cast _Runtime.UNDEFINED;
@@ -55,10 +55,10 @@ class Protocol {
     var authority:String = cast _Runtime.UNDEFINED;
     var normalizedPath:String = cast _Runtime.UNDEFINED;
     var url:String = cast _Runtime.UNDEFINED;
-    scheme = _Runtime.coalesce(_Runtime.field(parts, 'scheme'), function():Dynamic return cast 'unknown');
-    host = _Runtime.coalesce(_Runtime.field(parts, 'host'), function():Dynamic return cast '');
-    path = _Runtime.coalesce(_Runtime.field(parts, 'path'), function():Dynamic return cast '');
-    query = _Runtime.field(parts, 'query');
+    scheme = _Runtime.coalesce((cast parts : { @:optional var scheme:Null<String>; @:optional var host:Null<String>; @:optional var path:Null<String>; @:optional var query:Null<flighthq._internal._Record<String, String>>; }).scheme, function():Dynamic return cast 'unknown');
+    host = _Runtime.coalesce((cast parts : { @:optional var scheme:Null<String>; @:optional var host:Null<String>; @:optional var path:Null<String>; @:optional var query:Null<flighthq._internal._Record<String, String>>; }).host, function():Dynamic return cast '');
+    path = _Runtime.coalesce((cast parts : { @:optional var scheme:Null<String>; @:optional var host:Null<String>; @:optional var path:Null<String>; @:optional var query:Null<flighthq._internal._Record<String, String>>; }).path, function():Dynamic return cast '');
+    query = (cast parts : { @:optional var scheme:Null<String>; @:optional var host:Null<String>; @:optional var path:Null<String>; @:optional var query:Null<flighthq._internal._Record<String, String>>; }).query;
     authority = _Runtime.select(host, function():Dynamic return cast '//' + Std.string(host) + '', function():Dynamic return cast '');
     normalizedPath = _Runtime.select(_Runtime.andValue(path, function():Dynamic return cast !(cast StringTools.startsWith(path, '/') : Bool)), function():Dynamic return cast '/' + Std.string(path) + '', function():Dynamic return cast path);
     url = '' + Std.string(scheme) + ':' + Std.string(authority) + '' + Std.string(normalizedPath) + '';

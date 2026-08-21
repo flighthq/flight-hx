@@ -4,6 +4,7 @@ package flighthq.adjustments;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.adjustments.ColorMatrixMath.COLOR_MATRIX_LENGTH;
+import flighthq.types.AdjustmentKind;
 import flighthq.types.ColorMatrixAdjustment;
 
 class ColorMatrixAdjustment {
@@ -17,7 +18,7 @@ class ColorMatrixAdjustment {
 
   public static function getAdjustmentColorMatrix(operation:{ var kind:String; }):Null<Array<Float>> {
     var matrix:Null<Array<Float>> = cast _Runtime.UNDEFINED;
-    matrix = _Runtime.field((cast operation : flighthq._internal._Partial<flighthq.types.ColorMatrixAdjustment>), 'colorMatrix');
+    matrix = (cast (cast operation : { @:optional var colorMatrix:Null<Array<Float>>; @:optional var kind:Null<AdjustmentKind>; }) : { @:optional var colorMatrix:Null<Array<Float>>; @:optional var kind:Null<String>; }).colorMatrix;
     return cast ((cast ((cast _Runtime.isArray(matrix) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(matrix, 'length'), COLOR_MATRIX_LENGTH) : Bool)) : Bool) ? (cast matrix : Dynamic) : (cast null : Dynamic));
     return cast null;
   }

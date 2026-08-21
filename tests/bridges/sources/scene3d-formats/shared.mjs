@@ -16,4 +16,5 @@ export const MAX_SKIN_INFLUENCES = api.MAX_SKIN_INFLUENCES;
 export const negateVec3Z = api.negateVec3Z;
 export const packSkinInfluences = api.packSkinInfluences;
 export const reverseTriangleWinding = api.reverseTriangleWinding;
+export const reverseVertexTriangleWinding = api.reverseVertexTriangleWinding;
 export const SKINNED_FLOATS_PER_VERTEX = api.SKINNED_FLOATS_PER_VERTEX;

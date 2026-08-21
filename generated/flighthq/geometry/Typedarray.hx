@@ -9,7 +9,7 @@ class Typedarray {
     var out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.field(array, 'length') : Float) >= (cast capacity : Float)) : Bool)) { return cast array; }
     out = new flighthq._internal._Float32Array(capacity);
-    if (_Runtime.truthy(array)) { (cast out : flighthq._internal._Float32Array).set(array); }
+    (cast out : flighthq._internal._Float32Array).set(array);
     return cast out;
     return cast null;
   }
@@ -18,7 +18,7 @@ class Typedarray {
     var out:flighthq._internal._Int16Array = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.field(array, 'length') : Float) >= (cast capacity : Float)) : Bool)) { return cast array; }
     out = new flighthq._internal._Int16Array(capacity);
-    if (_Runtime.truthy(array)) { (cast out : flighthq._internal._Int16Array).set(array); }
+    (cast out : flighthq._internal._Int16Array).set(array);
     return cast out;
     return cast null;
   }
@@ -27,7 +27,7 @@ class Typedarray {
     var out:flighthq._internal._UInt16Array = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.field(array, 'length') : Float) >= (cast capacity : Float)) : Bool)) { return cast array; }
     out = new flighthq._internal._UInt16Array(capacity);
-    if (_Runtime.truthy(array)) { (cast out : flighthq._internal._UInt16Array).set(array); }
+    (cast out : flighthq._internal._UInt16Array).set(array);
     return cast out;
     return cast null;
   }

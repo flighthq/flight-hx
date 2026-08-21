@@ -34,8 +34,8 @@ class GlScanlinesEffect {
   });
 
   public static function registerGlScanlinesEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'ScanlinesEffect' : String), ({ final __callArgument6:Dynamic = defaultGlScanlinesEffectRunner; __callArgument6; }));
+    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'ScanlinesEffect' : String), ({ final __callArgument6:Dynamic = defaultGlScanlinesEffectRunner; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
-  public static final SCANLINES_FRAGMENT_SRC__glScanlinesEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_count;\nuniform float u_intensity;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float line = sin(v_texCoord.y * u_count * 3.14159265) * 0.5 + 0.5;\n  o_color = vec4(c.rgb * (1.0 - u_intensity * (1.0 - line)), c.a);\n}';
+  public static final SCANLINES_FRAGMENT_SRC__glScanlinesEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_count;\nuniform float u_intensity;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  // Counted down the image so a given line index falls on the same row whichever origin the target\n  // uses; a render target is bottom-left, so the row has to be measured from the far edge first.\n  float line = sin((1.0 - v_texCoord.y) * u_count * 3.14159265) * 0.5 + 0.5;\n  o_color = vec4(c.rgb * (1.0 - u_intensity * (1.0 - line)), c.a);\n}';
 }

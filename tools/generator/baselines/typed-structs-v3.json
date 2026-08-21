@@ -2788,9 +2788,9 @@
     {
       "declarationKind": "interface",
       "emission": "direct",
-      "name": "SpatialAabb",
+      "name": "SpatialAabb2D",
       "packageName": "@flighthq/types",
-      "purpose": "2D spatial-index bounds aggregate",
+      "purpose": "2D spatial-index bounds aggregate after dimension-explicit upstream rename",
       "source": "upstream/packages/types/src/Spatial.ts"
     },
     {

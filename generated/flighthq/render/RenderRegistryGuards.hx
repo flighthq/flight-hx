@@ -50,7 +50,7 @@ class RenderRegistryGuards {
         return cast 'computeRenderEffectPadding: effect kind has no registered padding resolver — call registerRenderEffectPaddingResolver(state, kind, resolver)';
       }
       else if (__switchValue == RenderRegistry.MaterialTextureLister) {
-        return cast 'a material kind in this scene has no registered texture lister, so a mesh waiting on its maps never reveals — call registerScene3DMaterialTextures(registry, kind, lister), or the named door for that family';
+        return cast 'a material kind in this scene has no registered texture lister, so an all-unlisted mesh gets no fade, while a mixed mesh can reveal before that material\'s textures settle and show a later texture pop-in — call registerScene3DMaterialTextures(registry, kind, lister), or the named door for that family';
       }
       else if (__switchValue == RenderRegistry.MaterialRenderer) {
         if ((cast _Runtime.hasField(state, 'device') : Bool)) { return cast 'resolveWgpuMaterialRenderer: material kind has no registered renderer, so nodes using it do not draw — call registerWgpuMaterialRenderer(state, kind, renderer)'; }

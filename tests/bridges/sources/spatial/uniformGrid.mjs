@@ -5,6 +5,6 @@ const api = compiled.flighthq.spatial.UniformGrid;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const createUniformGridSpatialBackend = api.createUniformGridSpatialBackend;
+export const createUniformGridSpatialBackend2D = api.createUniformGridSpatialBackend2D;
 export const MAX_INDEXED_CELLS_PER_OBJECT = api.MAX_INDEXED_CELLS_PER_OBJECT;
 export const setSpatialIndexingGuard = api.setSpatialIndexingGuard;

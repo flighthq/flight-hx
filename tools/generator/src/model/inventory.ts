@@ -51,6 +51,7 @@ export interface PackageExclusion {
   evidence: {
     hostDependencies: string[];
     hostImports: string[];
+    nodeEntrypoints: string[];
     nodeImports: string[];
     playwrightDependencies: string[];
     playwrightImports: string[];
@@ -58,7 +59,7 @@ export interface PackageExclusion {
     toolingBins: string[];
   };
   reason: string;
-  rule: 'node-playwright-tooling';
+  rule: 'node-cli-tooling' | 'node-playwright-tooling';
 }
 
 export interface PackageInventory {

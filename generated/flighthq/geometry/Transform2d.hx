@@ -4,6 +4,7 @@ package flighthq.geometry;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.math.Constants.RAD_TO_DEG;
 import flighthq.types.Entity;
 import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Transform2D;
@@ -21,6 +22,7 @@ class Transform2d {
     var c:Float = cast _Runtime.UNDEFINED;
     var d:Float = cast _Runtime.UNDEFINED;
     var scaleX:Float = cast _Runtime.UNDEFINED;
+    var reflected:Bool = cast _Runtime.UNDEFINED;
     var scaleY:Float = cast _Runtime.UNDEFINED;
     var skewXDegrees:Float = cast _Runtime.UNDEFINED;
     var skewYDegrees:Float = cast _Runtime.UNDEFINED;
@@ -29,9 +31,10 @@ class Transform2d {
     c = source.c;
     d = source.d;
     scaleX = HxMath.sqrt(((a * a) + (b * b)));
-    scaleY = ((cast ((cast ((a * d) - (b * c)) : Float) < (cast 0.0 : Float)) : Bool) ? (cast -HxMath.sqrt(((c * c) + (d * d))) : Dynamic) : (cast HxMath.sqrt(((c * c) + (d * d))) : Dynamic));
-    skewXDegrees = _Runtime.multiplyNumbers(HxMath.atan2(-c, d), Transform2d.RAD_TO_DEG__transform2d);
-    skewYDegrees = _Runtime.multiplyNumbers(HxMath.atan2(b, a), Transform2d.RAD_TO_DEG__transform2d);
+    reflected = ((cast ((a * d) - (b * c)) : Float) < (cast 0.0 : Float));
+    scaleY = ((cast reflected : Bool) ? (cast -HxMath.sqrt(((c * c) + (d * d))) : Dynamic) : (cast HxMath.sqrt(((c * c) + (d * d))) : Dynamic));
+    skewXDegrees = _Runtime.multiplyNumbers(((cast reflected : Bool) ? (cast HxMath.atan2(c, -d) : Dynamic) : (cast HxMath.atan2(-c, d) : Dynamic)), RAD_TO_DEG);
+    skewYDegrees = _Runtime.multiplyNumbers(HxMath.atan2(b, a), RAD_TO_DEG);
     if ((cast _Runtime.strictEquals(skewXDegrees, skewYDegrees) : Bool)) {
       _Runtime.setField(out, 'rotation', skewYDegrees);
       _Runtime.setField(out, 'skewX', 0.0);
@@ -48,6 +51,4 @@ class Transform2d {
     _Runtime.setField(out, 'x', source.tx);
     _Runtime.setField(out, 'y', source.ty);
   }
-
-  public static final RAD_TO_DEG__transform2d:Float = (180.0 / HxMath.PI);
 }

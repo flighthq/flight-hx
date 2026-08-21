@@ -23,72 +23,161 @@ class Matrix {
   }
 
   public static function copyMatrix(out:MatrixLike, source:MatrixLike):Void {
-    setMatrix(({ final __callArgument2:Dynamic = out; __callArgument2; }), (cast source.a : Float), (cast source.b : Float), (cast source.c : Float), (cast source.d : Float), (cast source.tx : Float), (cast source.ty : Float));
+    var __destructure0:MatrixLike = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
+    var tx:Float = cast _Runtime.UNDEFINED;
+    var ty:Float = cast _Runtime.UNDEFINED;
+    __destructure0 = source;
+    a = __destructure0.a;
+    b = __destructure0.b;
+    c = __destructure0.c;
+    d = __destructure0.d;
+    tx = __destructure0.tx;
+    ty = __destructure0.ty;
+    setMatrix(({ final __callArgument2:Dynamic = out; __callArgument2; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast tx : Float), (cast ty : Float));
   }
 
   public static function copyMatrixColumnFromVector3(out:MatrixLike, column:Float, source:Vector3Like):Void {
-    if ((cast ((cast column : Float) > (cast 2.0 : Float)) : Bool)) {
-      _Runtime.throwValue(_Runtime.rangeError((('Column ' + column) + ' out of bounds (2)')));
-    } else { if ((cast _Runtime.strictEquals(column, 0.0) : Bool)) {
-      (out.a = cast (source.x : Float));
-      (out.b = cast (source.y : Float));
-    } else { if ((cast _Runtime.strictEquals(column, 1.0) : Bool)) {
-      (out.c = cast (source.x : Float));
-      (out.d = cast (source.y : Float));
-    } else {
-      (out.tx = cast (source.x : Float));
-      (out.ty = cast (source.y : Float));
-    } } }
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    x = source.x;
+    y = source.y;
+    {
+      var __switchValue = column;
+      if (__switchValue == 0.0) {
+        (out.a = cast (x : Float));
+        (out.b = cast (y : Float));
+        return;
+      }
+      else if (__switchValue == 1.0) {
+        (out.c = cast (x : Float));
+        (out.d = cast (y : Float));
+        return;
+      }
+      else if (__switchValue == 2.0) {
+        (out.tx = cast (x : Float));
+        (out.ty = cast (y : Float));
+        return;
+      }
+      else  {
+        _Runtime.throwValue(_Runtime.rangeError((('Column ' + column) + ' out of bounds (2)')));
+      }
+    }
   }
 
   public static function copyMatrixColumnToVector3(out:Vector3Like, column:Float, source:MatrixLike):Void {
-    if ((cast ((cast column : Float) > (cast 2.0 : Float)) : Bool)) {
-      _Runtime.throwValue(_Runtime.rangeError((('Column ' + column) + ' out of bounds (2)')));
-    } else { if ((cast _Runtime.strictEquals(column, 0.0) : Bool)) {
-      (out.x = cast (source.a : Float));
-      (out.y = cast (source.b : Float));
-      (out.z = cast (0.0 : Float));
-    } else { if ((cast _Runtime.strictEquals(column, 1.0) : Bool)) {
-      (out.x = cast (source.c : Float));
-      (out.y = cast (source.d : Float));
-      (out.z = cast (0.0 : Float));
-    } else {
-      (out.x = cast (source.tx : Float));
-      (out.y = cast (source.ty : Float));
-      (out.z = cast (1.0 : Float));
-    } } }
+    var __destructure1:MatrixLike = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
+    var tx:Float = cast _Runtime.UNDEFINED;
+    var ty:Float = cast _Runtime.UNDEFINED;
+    __destructure1 = source;
+    a = __destructure1.a;
+    b = __destructure1.b;
+    c = __destructure1.c;
+    d = __destructure1.d;
+    tx = __destructure1.tx;
+    ty = __destructure1.ty;
+    {
+      var __switchValue = column;
+      if (__switchValue == 0.0) {
+        (out.x = cast (a : Float));
+        (out.y = cast (b : Float));
+        (out.z = cast (0.0 : Float));
+        return;
+      }
+      else if (__switchValue == 1.0) {
+        (out.x = cast (c : Float));
+        (out.y = cast (d : Float));
+        (out.z = cast (0.0 : Float));
+        return;
+      }
+      else if (__switchValue == 2.0) {
+        (out.x = cast (tx : Float));
+        (out.y = cast (ty : Float));
+        (out.z = cast (1.0 : Float));
+        return;
+      }
+      else  {
+        _Runtime.throwValue(_Runtime.rangeError((('Column ' + column) + ' out of bounds (2)')));
+      }
+    }
   }
 
   public static function copyMatrixRowFromVector3(out:MatrixLike, row:Float, source:Vector3Like):Void {
-    if ((cast ((cast row : Float) > (cast 2.0 : Float)) : Bool)) {
-      _Runtime.throwValue(_Runtime.rangeError((('Row ' + row) + ' out of bounds (2)')));
-    } else { if ((cast _Runtime.strictEquals(row, 0.0) : Bool)) {
-      (out.a = cast (source.x : Float));
-      (out.c = cast (source.y : Float));
-      (out.tx = cast (source.z : Float));
-    } else { if ((cast _Runtime.strictEquals(row, 1.0) : Bool)) {
-      (out.b = cast (source.x : Float));
-      (out.d = cast (source.y : Float));
-      (out.ty = cast (source.z : Float));
-    } } }
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var z:Float = cast _Runtime.UNDEFINED;
+    x = source.x;
+    y = source.y;
+    z = source.z;
+    {
+      var __switchValue = row;
+      if (__switchValue == 0.0) {
+        (out.a = cast (x : Float));
+        (out.c = cast (y : Float));
+        (out.tx = cast (z : Float));
+        return;
+      }
+      else if (__switchValue == 1.0) {
+        (out.b = cast (x : Float));
+        (out.d = cast (y : Float));
+        (out.ty = cast (z : Float));
+        return;
+      }
+      else if (__switchValue == 2.0) {
+        return;
+      }
+      else  {
+        _Runtime.throwValue(_Runtime.rangeError((('Row ' + row) + ' out of bounds (2)')));
+      }
+    }
   }
 
   public static function copyMatrixRowToVector3(out:Vector3Like, row:Float, source:MatrixLike):Void {
-    if ((cast ((cast row : Float) > (cast 2.0 : Float)) : Bool)) {
-      _Runtime.throwValue(_Runtime.rangeError((('Row ' + row) + ' out of bounds (2)')));
-    } else { if ((cast _Runtime.strictEquals(row, 0.0) : Bool)) {
-      (out.x = cast (source.a : Float));
-      (out.y = cast (source.c : Float));
-      (out.z = cast (source.tx : Float));
-    } else { if ((cast _Runtime.strictEquals(row, 1.0) : Bool)) {
-      (out.x = cast (source.b : Float));
-      (out.y = cast (source.d : Float));
-      (out.z = cast (source.ty : Float));
-    } else {
-      (out.x = cast (0.0 : Float));
-      (out.y = cast (0.0 : Float));
-      (out.z = cast (1.0 : Float));
-    } } }
+    var __destructure2:MatrixLike = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
+    var tx:Float = cast _Runtime.UNDEFINED;
+    var ty:Float = cast _Runtime.UNDEFINED;
+    __destructure2 = source;
+    a = __destructure2.a;
+    b = __destructure2.b;
+    c = __destructure2.c;
+    d = __destructure2.d;
+    tx = __destructure2.tx;
+    ty = __destructure2.ty;
+    {
+      var __switchValue = row;
+      if (__switchValue == 0.0) {
+        (out.x = cast (a : Float));
+        (out.y = cast (c : Float));
+        (out.z = cast (tx : Float));
+        return;
+      }
+      else if (__switchValue == 1.0) {
+        (out.x = cast (b : Float));
+        (out.y = cast (d : Float));
+        (out.z = cast (ty : Float));
+        return;
+      }
+      else if (__switchValue == 2.0) {
+        (out.x = cast (0.0 : Float));
+        (out.y = cast (0.0 : Float));
+        (out.z = cast (1.0 : Float));
+        return;
+      }
+      else  {
+        _Runtime.throwValue(_Runtime.rangeError((('Row ' + row) + ' out of bounds (2)')));
+      }
+    }
   }
 
   public static function createGradientTransformMatrix(width:Float, height:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):flighthq.types.Matrix {
@@ -195,25 +284,29 @@ class Matrix {
   }
 
   public static function matrixTransformBounds(out:RectangleLike, source:MatrixLike, ax:Float, ay:Float, bx:Float, by:Float):Void {
-    var __destructure0:MatrixLike = cast _Runtime.UNDEFINED;
+    var __destructure3:MatrixLike = cast _Runtime.UNDEFINED;
     var a:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
     var c:Float = cast _Runtime.UNDEFINED;
     var d:Float = cast _Runtime.UNDEFINED;
+    var sourceTx:Float = cast _Runtime.UNDEFINED;
+    var sourceTy:Float = cast _Runtime.UNDEFINED;
     var tx0:Float = cast _Runtime.UNDEFINED;
     var tx1:Float = cast _Runtime.UNDEFINED;
     var ty0:Float = cast _Runtime.UNDEFINED;
     var ty1:Float = cast _Runtime.UNDEFINED;
     var tx:Float = cast _Runtime.UNDEFINED;
     var ty:Float = cast _Runtime.UNDEFINED;
-    __destructure0 = source;
-    a = __destructure0.a;
-    b = __destructure0.b;
-    c = __destructure0.c;
-    d = __destructure0.d;
+    __destructure3 = source;
+    a = __destructure3.a;
+    b = __destructure3.b;
+    c = __destructure3.c;
+    d = __destructure3.d;
+    sourceTx = __destructure3.tx;
+    sourceTy = __destructure3.ty;
     if ((cast ((cast _Runtime.strictEquals(ax, bx) : Bool) && (cast _Runtime.strictEquals(ay, by) : Bool)) : Bool)) {
-      (out.x = cast (source.tx : Float));
-      (out.y = cast (source.ty : Float));
+      (out.x = cast (sourceTx : Float));
+      (out.y = cast (sourceTy : Float));
       (out.width = cast (0.0 : Float));
       (out.height = cast (0.0 : Float));
       return;
@@ -240,8 +333,8 @@ class Matrix {
     if ((cast ((cast ty : Float) < (cast ty0 : Float)) : Bool)) { (ty0 = cast (ty : Dynamic)); }
     if ((cast ((cast tx : Float) > (cast tx1 : Float)) : Bool)) { (tx1 = cast (tx : Dynamic)); }
     if ((cast ((cast ty : Float) > (cast ty1 : Float)) : Bool)) { (ty1 = cast (ty : Dynamic)); }
-    (out.x = cast ((tx0 + source.tx) : Float));
-    (out.y = cast ((ty0 + source.ty) : Float));
+    (out.x = cast ((tx0 + sourceTx) : Float));
+    (out.y = cast ((ty0 + sourceTy) : Float));
     (out.width = cast ((tx1 - tx0) : Float));
     (out.height = cast ((ty1 - ty0) : Float));
   }
@@ -308,29 +401,57 @@ class Matrix {
   public static function rotateMatrix(out:MatrixLike, source:MatrixLike, theta:Float):Void {
     var cos:Float = cast _Runtime.UNDEFINED;
     var sin:Float = cast _Runtime.UNDEFINED;
+    var __destructure4:MatrixLike = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
+    var tx:Float = cast _Runtime.UNDEFINED;
+    var ty:Float = cast _Runtime.UNDEFINED;
     var a1:Float = cast _Runtime.UNDEFINED;
     var c1:Float = cast _Runtime.UNDEFINED;
     var tx1:Float = cast _Runtime.UNDEFINED;
     cos = HxMath.cos(theta);
     sin = HxMath.sin(theta);
-    a1 = ((source.a * cos) - (source.b * sin));
-    (out.b = cast (((source.a * sin) + (source.b * cos)) : Float));
+    __destructure4 = source;
+    a = __destructure4.a;
+    b = __destructure4.b;
+    c = __destructure4.c;
+    d = __destructure4.d;
+    tx = __destructure4.tx;
+    ty = __destructure4.ty;
+    a1 = ((a * cos) - (b * sin));
+    (out.b = cast (((a * sin) + (b * cos)) : Float));
     (out.a = cast (a1 : Float));
-    c1 = ((source.c * cos) - (source.d * sin));
-    (out.d = cast (((source.c * sin) + (source.d * cos)) : Float));
+    c1 = ((c * cos) - (d * sin));
+    (out.d = cast (((c * sin) + (d * cos)) : Float));
     (out.c = cast (c1 : Float));
-    tx1 = ((source.tx * cos) - (source.ty * sin));
-    (out.ty = cast (((source.tx * sin) + (source.ty * cos)) : Float));
+    tx1 = ((tx * cos) - (ty * sin));
+    (out.ty = cast (((tx * sin) + (ty * cos)) : Float));
     (out.tx = cast (tx1 : Float));
   }
 
   public static function scaleMatrix(out:MatrixLike, source:MatrixLike, sx:Float, sy:Float):Void {
-    (out.a = cast ((source.a * sx) : Float));
-    (out.b = cast ((source.b * sy) : Float));
-    (out.c = cast ((source.c * sx) : Float));
-    (out.d = cast ((source.d * sy) : Float));
-    (out.tx = cast ((source.tx * sx) : Float));
-    (out.ty = cast ((source.ty * sy) : Float));
+    var __destructure5:MatrixLike = cast _Runtime.UNDEFINED;
+    var a:Float = cast _Runtime.UNDEFINED;
+    var b:Float = cast _Runtime.UNDEFINED;
+    var c:Float = cast _Runtime.UNDEFINED;
+    var d:Float = cast _Runtime.UNDEFINED;
+    var tx:Float = cast _Runtime.UNDEFINED;
+    var ty:Float = cast _Runtime.UNDEFINED;
+    __destructure5 = source;
+    a = __destructure5.a;
+    b = __destructure5.b;
+    c = __destructure5.c;
+    d = __destructure5.d;
+    tx = __destructure5.tx;
+    ty = __destructure5.ty;
+    (out.a = cast ((a * sx) : Float));
+    (out.b = cast ((b * sy) : Float));
+    (out.c = cast ((c * sx) : Float));
+    (out.d = cast ((d * sy) : Float));
+    (out.tx = cast ((tx * sx) : Float));
+    (out.ty = cast ((ty * sy) : Float));
   }
 
   public static function setGradientTransformMatrix(out:MatrixLike, width:Float, height:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Void {
@@ -409,20 +530,20 @@ class Matrix {
   }
 
   public static function translateMatrix(out:MatrixLike, source:MatrixLike, dx:Float, dy:Float):Void {
-    var __destructure1:MatrixLike = cast _Runtime.UNDEFINED;
+    var __destructure6:MatrixLike = cast _Runtime.UNDEFINED;
     var a:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
     var c:Float = cast _Runtime.UNDEFINED;
     var d:Float = cast _Runtime.UNDEFINED;
     var tx:Float = cast _Runtime.UNDEFINED;
     var ty:Float = cast _Runtime.UNDEFINED;
-    __destructure1 = source;
-    a = __destructure1.a;
-    b = __destructure1.b;
-    c = __destructure1.c;
-    d = __destructure1.d;
-    tx = __destructure1.tx;
-    ty = __destructure1.ty;
+    __destructure6 = source;
+    a = __destructure6.a;
+    b = __destructure6.b;
+    c = __destructure6.c;
+    d = __destructure6.d;
+    tx = __destructure6.tx;
+    ty = __destructure6.ty;
     setMatrix(({ final __callArgument20:Dynamic = out; __callArgument20; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast (tx + dx) : Float), (cast (ty + dy) : Float));
   }
 
@@ -431,20 +552,20 @@ class Matrix {
   }
 
   public static function translateMatrixByVectorXY(out:MatrixLike, source:MatrixLike, x:Float, y:Float):Void {
-    var __destructure2:MatrixLike = cast _Runtime.UNDEFINED;
+    var __destructure7:MatrixLike = cast _Runtime.UNDEFINED;
     var a:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
     var c:Float = cast _Runtime.UNDEFINED;
     var d:Float = cast _Runtime.UNDEFINED;
     var tx:Float = cast _Runtime.UNDEFINED;
     var ty:Float = cast _Runtime.UNDEFINED;
-    __destructure2 = source;
-    a = __destructure2.a;
-    b = __destructure2.b;
-    c = __destructure2.c;
-    d = __destructure2.d;
-    tx = __destructure2.tx;
-    ty = __destructure2.ty;
+    __destructure7 = source;
+    a = __destructure7.a;
+    b = __destructure7.b;
+    c = __destructure7.c;
+    d = __destructure7.d;
+    tx = __destructure7.tx;
+    ty = __destructure7.ty;
     setMatrix(({ final __callArgument23:Dynamic = out; __callArgument23; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast ((tx + (a * x)) + (c * y)) : Float), (cast ((ty + (b * x)) + (d * y)) : Float));
   }
 

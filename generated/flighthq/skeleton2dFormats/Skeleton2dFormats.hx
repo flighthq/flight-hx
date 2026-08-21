@@ -11,6 +11,11 @@ import flighthq.types.ImportDiagnostic;
 import flighthq.types.Skeleton2DImport;
 
 class Skeleton2dFormats {
+  public static function getSkeleton2DFormatKinds():Array<String> {
+    return cast Facade_Skeleton2dFormats_flighthq_skeleton2dFormats_SkeletonDetect.getSkeleton2DFormatKinds();
+    return cast null;
+  }
+
   public static function parseDragonBonesSkeleton(json:String, ?diagnostics:Array<ImportDiagnostic>):Null<Skeleton2DImport> {
     return cast Facade_Skeleton2dFormats_flighthq_skeleton2dFormats_DragonBonesParse.parseDragonBonesSkeleton(json, diagnostics);
     return cast null;

@@ -6,6 +6,7 @@ export const allocateHsvColor = compiled.flighthq.color.Color.allocateHsvColor;
 export const allocateLinearColor = compiled.flighthq.color.Color.allocateLinearColor;
 export const clampLinearRgb = compiled.flighthq.color.Color.clampLinearRgb;
 export const colorFromKelvin = compiled.flighthq.color.Color.colorFromKelvin;
+export const computeRgbaCssString = compiled.flighthq.color.Color.computeRgbaCssString;
 export const computeRgbHexString = compiled.flighthq.color.Color.computeRgbHexString;
 export const getColorAlpha = compiled.flighthq.color.Color.getColorAlpha;
 export const getColorContrastRatio = compiled.flighthq.color.Color.getColorContrastRatio;

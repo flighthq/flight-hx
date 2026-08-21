@@ -2,11 +2,11 @@
   "modules": [
     {
       "byReason": {
-        "standard-toolkit-boundary": 23
+        "standard-toolkit-boundary": 22
       },
       "module": "flighthq.abc.AbcFile",
       "source": "upstream/packages/abc/src/abcFile.ts",
-      "total": 23
+      "total": 22
     },
     {
       "byReason": {
@@ -29,41 +29,17 @@
       "byReason": {
         "standard-toolkit-boundary": 2
       },
-      "module": "flighthq.adjustments.BrightnessContrastAdjustment",
-      "source": "upstream/packages/adjustments/src/brightnessContrastAdjustment.ts",
-      "total": 2
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 1
-      },
-      "module": "flighthq.adjustments.ChannelMixerAdjustment",
-      "source": "upstream/packages/adjustments/src/channelMixerAdjustment.ts",
-      "total": 1
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 2
-      },
       "module": "flighthq.adjustments.ColorAdjustmentResolution",
       "source": "upstream/packages/adjustments/src/colorAdjustmentResolution.ts",
       "total": 2
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 1
-      },
-      "module": "flighthq.adjustments.ColorBlindSimulationAdjustment",
-      "source": "upstream/packages/adjustments/src/colorBlindSimulationAdjustment.ts",
-      "total": 1
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 29
+        "standard-toolkit-boundary": 20
       },
       "module": "flighthq.adjustments.ColorGradeAdjustment",
       "source": "upstream/packages/adjustments/src/colorGradeAdjustment.ts",
-      "total": 29
+      "total": 20
     },
     {
       "byReason": {
@@ -101,59 +77,27 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 3
+        "standard-toolkit-boundary": 2
       },
       "module": "flighthq.adjustments.ExposureAdjustment",
       "source": "upstream/packages/adjustments/src/exposureAdjustment.ts",
-      "total": 3
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 1
-      },
-      "module": "flighthq.adjustments.GrayscaleAdjustment",
-      "source": "upstream/packages/adjustments/src/grayscaleAdjustment.ts",
-      "total": 1
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 9
-      },
-      "module": "flighthq.adjustments.HueSaturationAdjustment",
-      "source": "upstream/packages/adjustments/src/hueSaturationAdjustment.ts",
-      "total": 9
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 1
-      },
-      "module": "flighthq.adjustments.InvertAdjustment",
-      "source": "upstream/packages/adjustments/src/invertAdjustment.ts",
-      "total": 1
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 21
-      },
-      "module": "flighthq.adjustments.LiftGammaGainAdjustment",
-      "source": "upstream/packages/adjustments/src/liftGammaGainAdjustment.ts",
-      "total": 21
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 2
-      },
-      "module": "flighthq.adjustments.LookupTableGradeAdjustment",
-      "source": "upstream/packages/adjustments/src/lookupTableGradeAdjustment.ts",
       "total": 2
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 1
+        "standard-toolkit-boundary": 6
       },
-      "module": "flighthq.adjustments.SepiaAdjustment",
-      "source": "upstream/packages/adjustments/src/sepiaAdjustment.ts",
-      "total": 1
+      "module": "flighthq.adjustments.HueSaturationAdjustment",
+      "source": "upstream/packages/adjustments/src/hueSaturationAdjustment.ts",
+      "total": 6
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 18
+      },
+      "module": "flighthq.adjustments.LiftGammaGainAdjustment",
+      "source": "upstream/packages/adjustments/src/liftGammaGainAdjustment.ts",
+      "total": 18
     },
     {
       "byReason": {
@@ -266,13 +210,13 @@
     {
       "byReason": {
         "source-any": 2,
-        "source-unknown": 49,
+        "source-unknown": 36,
         "standard-toolkit-boundary": 48,
         "unclassified": 6
       },
       "module": "flighthq.application.Application",
       "source": "upstream/packages/application/src/application.ts",
-      "total": 105
+      "total": 92
     },
     {
       "byReason": {
@@ -294,11 +238,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 17
+        "standard-toolkit-boundary": 16
       },
       "module": "flighthq.applicationGl.GlApplicationRenderView",
       "source": "upstream/packages/application-gl/src/glApplicationRenderView.ts",
-      "total": 17
+      "total": 16
     },
     {
       "byReason": {
@@ -372,11 +316,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 2
+        "standard-toolkit-boundary": 5
       },
       "module": "flighthq.binpack.ExplainUnpackedRectangles",
       "source": "upstream/packages/binpack/src/explainUnpackedRectangles.ts",
-      "total": 2
+      "total": 5
     },
     {
       "byReason": {
@@ -559,12 +503,12 @@
     },
     {
       "byReason": {
-        "external-toolkit-boundary": 3,
-        "standard-toolkit-boundary": 17
+        "external-toolkit-boundary": 2,
+        "standard-toolkit-boundary": 11
       },
       "module": "flighthq.bitmap.BitmapFrom",
       "source": "upstream/packages/bitmap/src/bitmapFrom.ts",
-      "total": 20
+      "total": 13
     },
     {
       "byReason": {
@@ -688,12 +632,11 @@
     },
     {
       "byReason": {
-        "external-toolkit-boundary": 1,
-        "standard-toolkit-boundary": 4
+        "standard-toolkit-boundary": 1
       },
       "module": "flighthq.bitmap.ExplainBitmapReadback",
       "source": "upstream/packages/bitmap/src/explainBitmapReadback.ts",
-      "total": 5
+      "total": 1
     },
     {
       "byReason": {
@@ -705,11 +648,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 2
+        "standard-toolkit-boundary": 1
       },
       "module": "flighthq.bitmapfont.BitmapFontFromGlyphAtlas",
       "source": "upstream/packages/bitmapfont/src/bitmapFontFromGlyphAtlas.ts",
-      "total": 2
+      "total": 1
     },
     {
       "byReason": {
@@ -772,21 +715,21 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 10,
-        "unclassified": 1
+        "standard-toolkit-boundary": 1,
+        "unclassified": 2
       },
       "module": "flighthq.bitmaptext.BitmapText",
       "source": "upstream/packages/bitmaptext/src/bitmapText.ts",
-      "total": 11
+      "total": 3
     },
     {
       "byReason": {
         "source-any": 2,
-        "standard-toolkit-boundary": 18
+        "standard-toolkit-boundary": 17
       },
       "module": "flighthq.bitmaptext.UpdateBitmapText",
       "source": "upstream/packages/bitmaptext/src/updateBitmapText.ts",
-      "total": 20
+      "total": 19
     },
     {
       "byReason": {
@@ -795,6 +738,14 @@
       "module": "flighthq.camera.Camera",
       "source": "upstream/packages/camera/src/camera.ts",
       "total": 2
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 22
+      },
+      "module": "flighthq.camera.ExplainCamera3DView",
+      "source": "upstream/packages/camera/src/explainCamera3DView.ts",
+      "total": 22
     },
     {
       "byReason": {
@@ -890,11 +841,35 @@
     },
     {
       "byReason": {
+        "standard-toolkit-boundary": 6
+      },
+      "module": "flighthq.collision.CollisionSupport2D",
+      "source": "upstream/packages/collision/src/collisionSupport2D.ts",
+      "total": 6
+    },
+    {
+      "byReason": {
         "standard-toolkit-boundary": 4
       },
       "module": "flighthq.collision.ConvexVertices",
       "source": "upstream/packages/collision/src/convexVertices.ts",
       "total": 4
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 2
+      },
+      "module": "flighthq.collision.EnableCollisionGuards",
+      "source": "upstream/packages/collision/src/enableCollisionGuards.ts",
+      "total": 2
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 10
+      },
+      "module": "flighthq.collision.Gjk2D",
+      "source": "upstream/packages/collision/src/gjk2D.ts",
+      "total": 10
     },
     {
       "byReason": {
@@ -906,11 +881,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 78
+        "standard-toolkit-boundary": 80
       },
-      "module": "flighthq.collision.RaycastCollisionShape",
-      "source": "upstream/packages/collision/src/raycastCollisionShape.ts",
-      "total": 78
+      "module": "flighthq.collision.RaycastCollisionShape2D",
+      "source": "upstream/packages/collision/src/raycastCollisionShape2D.ts",
+      "total": 80
     },
     {
       "byReason": {
@@ -922,27 +897,29 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 46
+        "standard-toolkit-boundary": 48,
+        "unclassified": 1
       },
       "module": "flighthq.collision.ShapeCollision",
       "source": "upstream/packages/collision/src/shapeCollision.ts",
-      "total": 46
+      "total": 49
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 16
+        "standard-toolkit-boundary": 18
       },
       "module": "flighthq.collision.ShapeContact",
       "source": "upstream/packages/collision/src/shapeContact.ts",
-      "total": 16
+      "total": 18
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 30
+        "standard-toolkit-boundary": 32,
+        "unclassified": 1
       },
-      "module": "flighthq.collision.SweepCollisionShape",
-      "source": "upstream/packages/collision/src/sweepCollisionShape.ts",
-      "total": 30
+      "module": "flighthq.collision.SweepCollisionShape2D",
+      "source": "upstream/packages/collision/src/sweepCollisionShape2D.ts",
+      "total": 33
     },
     {
       "byReason": {
@@ -1020,11 +997,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 22
+        "standard-toolkit-boundary": 32
       },
       "module": "flighthq.compression.Deflate",
       "source": "upstream/packages/compression/src/deflate.ts",
-      "total": 22
+      "total": 32
     },
     {
       "byReason": {
@@ -1257,11 +1234,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 14
+        "standard-toolkit-boundary": 15
       },
       "module": "flighthq.effects.DirectionalBlurEffect",
       "source": "upstream/packages/effects/src/directionalBlurEffect.ts",
-      "total": 14
+      "total": 15
     },
     {
       "byReason": {
@@ -1395,12 +1372,12 @@
     },
     {
       "byReason": {
-        "source-any": 14,
-        "standard-toolkit-boundary": 41
+        "source-any": 10,
+        "standard-toolkit-boundary": 39
       },
       "module": "flighthq.effects.RenderEffectPadding",
       "source": "upstream/packages/effects/src/renderEffectPadding.ts",
-      "total": 55
+      "total": 49
     },
     {
       "byReason": {
@@ -1453,11 +1430,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 13
+        "standard-toolkit-boundary": 9
       },
       "module": "flighthq.effectsCanvas.CanvasBloomEffect",
       "source": "upstream/packages/effects-canvas/src/canvasBloomEffect.ts",
-      "total": 13
+      "total": 9
     },
     {
       "byReason": {
@@ -1549,6 +1526,14 @@
     },
     {
       "byReason": {
+        "standard-toolkit-boundary": 28
+      },
+      "module": "flighthq.effectsCanvas.CanvasLensDistortionEffect",
+      "source": "upstream/packages/effects-canvas/src/canvasLensDistortionEffect.ts",
+      "total": 28
+    },
+    {
+      "byReason": {
         "standard-toolkit-boundary": 11
       },
       "module": "flighthq.effectsCanvas.CanvasOuterGlowEffect",
@@ -1565,6 +1550,14 @@
     },
     {
       "byReason": {
+        "standard-toolkit-boundary": 10
+      },
+      "module": "flighthq.effectsCanvas.CanvasPosterizeEffect",
+      "source": "upstream/packages/effects-canvas/src/canvasPosterizeEffect.ts",
+      "total": 10
+    },
+    {
+      "byReason": {
         "standard-toolkit-boundary": 23
       },
       "module": "flighthq.effectsCanvas.CanvasRenderEffectPipeline",
@@ -1573,12 +1566,11 @@
     },
     {
       "byReason": {
-        "source-any": 4,
-        "standard-toolkit-boundary": 3
+        "standard-toolkit-boundary": 2
       },
       "module": "flighthq.effectsCanvas.CanvasRenderEffectRegistry",
       "source": "upstream/packages/effects-canvas/src/canvasRenderEffectRegistry.ts",
-      "total": 7
+      "total": 2
     },
     {
       "byReason": {
@@ -1606,19 +1598,27 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 22
+        "standard-toolkit-boundary": 38
       },
-      "module": "flighthq.effectsCanvas.CanvasVignetteEffect",
-      "source": "upstream/packages/effects-canvas/src/canvasVignetteEffect.ts",
-      "total": 22
+      "module": "flighthq.effectsCanvas.CanvasTiltShiftEffect",
+      "source": "upstream/packages/effects-canvas/src/canvasTiltShiftEffect.ts",
+      "total": 38
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 6
+        "standard-toolkit-boundary": 21
+      },
+      "module": "flighthq.effectsCanvas.CanvasVignetteEffect",
+      "source": "upstream/packages/effects-canvas/src/canvasVignetteEffect.ts",
+      "total": 21
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 9
       },
       "module": "flighthq.effectsGl.EnableGlRenderEffectGuards",
       "source": "upstream/packages/effects-gl/src/enableGlRenderEffectGuards.ts",
-      "total": 6
+      "total": 9
     },
     {
       "byReason": {
@@ -1719,20 +1719,19 @@
     },
     {
       "byReason": {
-        "source-any": 2,
-        "standard-toolkit-boundary": 13
+        "standard-toolkit-boundary": 12
       },
       "module": "flighthq.effectsGl.GlCustomShaderEffect",
       "source": "upstream/packages/effects-gl/src/glCustomShaderEffect.ts",
-      "total": 15
+      "total": 12
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 8
+        "standard-toolkit-boundary": 9
       },
       "module": "flighthq.effectsGl.GlDirectionalBlurEffect",
       "source": "upstream/packages/effects-gl/src/glDirectionalBlurEffect.ts",
-      "total": 8
+      "total": 9
     },
     {
       "byReason": {
@@ -1825,11 +1824,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 17
+        "standard-toolkit-boundary": 15
       },
       "module": "flighthq.effectsGl.GlGodRaysEffect",
       "source": "upstream/packages/effects-gl/src/glGodRaysEffect.ts",
-      "total": 17
+      "total": 15
     },
     {
       "byReason": {
@@ -1849,11 +1848,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 8
+        "standard-toolkit-boundary": 9
       },
       "module": "flighthq.effectsGl.GlHalftoneEffect",
       "source": "upstream/packages/effects-gl/src/glHalftoneEffect.ts",
-      "total": 8
+      "total": 9
     },
     {
       "byReason": {
@@ -1961,20 +1960,19 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 4
+        "standard-toolkit-boundary": 7
       },
       "module": "flighthq.effectsGl.GlRenderEffectPipeline",
       "source": "upstream/packages/effects-gl/src/glRenderEffectPipeline.ts",
-      "total": 4
+      "total": 7
     },
     {
       "byReason": {
-        "source-any": 4,
         "standard-toolkit-boundary": 3
       },
       "module": "flighthq.effectsGl.GlRenderEffectRegistry",
       "source": "upstream/packages/effects-gl/src/glRenderEffectRegistry.ts",
-      "total": 7
+      "total": 3
     },
     {
       "byReason": {
@@ -2066,6 +2064,14 @@
     },
     {
       "byReason": {
+        "standard-toolkit-boundary": 6
+      },
+      "module": "flighthq.effectsWgpu.EnableWgpuRenderEffectGuards",
+      "source": "upstream/packages/effects-wgpu/src/enableWgpuRenderEffectGuards.ts",
+      "total": 6
+    },
+    {
+      "byReason": {
         "standard-toolkit-boundary": 15
       },
       "module": "flighthq.effectsWgpu.WgpuBevelEffect",
@@ -2091,11 +2097,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 4
+        "standard-toolkit-boundary": 12
       },
       "module": "flighthq.effectsWgpu.WgpuBlurEffect",
       "source": "upstream/packages/effects-wgpu/src/wgpuBlurEffect.ts",
-      "total": 4
+      "total": 12
     },
     {
       "byReason": {
@@ -2123,6 +2129,14 @@
       "module": "flighthq.effectsWgpu.WgpuConvolutionEffect",
       "source": "upstream/packages/effects-wgpu/src/wgpuConvolutionEffect.ts",
       "total": 3
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 1
+      },
+      "module": "flighthq.effectsWgpu.WgpuDirectionalBlurEffect",
+      "source": "upstream/packages/effects-wgpu/src/wgpuDirectionalBlurEffect.ts",
+      "total": 1
     },
     {
       "byReason": {
@@ -2233,11 +2247,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 2
+        "standard-toolkit-boundary": 3
       },
       "module": "flighthq.effectsWgpu.WgpuHalftoneEffect",
       "source": "upstream/packages/effects-wgpu/src/wgpuHalftoneEffect.ts",
-      "total": 2
+      "total": 3
     },
     {
       "byReason": {
@@ -2261,6 +2275,14 @@
       },
       "module": "flighthq.effectsWgpu.WgpuKuwaharaEffect",
       "source": "upstream/packages/effects-wgpu/src/wgpuKuwaharaEffect.ts",
+      "total": 2
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 2
+      },
+      "module": "flighthq.effectsWgpu.WgpuLensDirtEffect",
+      "source": "upstream/packages/effects-wgpu/src/wgpuLensDirtEffect.ts",
       "total": 2
     },
     {
@@ -2308,28 +2330,27 @@
       "byReason": {
         "external-toolkit-boundary": 1,
         "source-undefined": 1,
-        "standard-toolkit-boundary": 11
+        "standard-toolkit-boundary": 17
       },
       "module": "flighthq.effectsWgpu.WgpuRenderEffectPipeline",
       "source": "upstream/packages/effects-wgpu/src/wgpuRenderEffectPipeline.ts",
-      "total": 13
-    },
-    {
-      "byReason": {
-        "source-any": 4,
-        "standard-toolkit-boundary": 3
-      },
-      "module": "flighthq.effectsWgpu.WgpuRenderEffectRegistry",
-      "source": "upstream/packages/effects-wgpu/src/wgpuRenderEffectRegistry.ts",
-      "total": 7
+      "total": 19
     },
     {
       "byReason": {
         "standard-toolkit-boundary": 2
       },
+      "module": "flighthq.effectsWgpu.WgpuRenderEffectRegistry",
+      "source": "upstream/packages/effects-wgpu/src/wgpuRenderEffectRegistry.ts",
+      "total": 2
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 8
+      },
       "module": "flighthq.effectsWgpu.WgpuRenderTextureEffect",
       "source": "upstream/packages/effects-wgpu/src/wgpuRenderTextureEffect.ts",
-      "total": 2
+      "total": 8
     },
     {
       "byReason": {
@@ -2411,6 +2432,126 @@
     },
     {
       "byReason": {
+        "standard-toolkit-boundary": 27,
+        "unclassified": 1
+      },
+      "module": "flighthq.fontFormats.CffCharstring",
+      "source": "upstream/packages/font-formats/src/cffCharstring.ts",
+      "total": 28
+    },
+    {
+      "byReason": {
+        "source-any": 1,
+        "standard-toolkit-boundary": 28,
+        "unclassified": 1
+      },
+      "module": "flighthq.fontFormats.CffDict",
+      "source": "upstream/packages/font-formats/src/cffDict.ts",
+      "total": 30
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 19
+      },
+      "module": "flighthq.fontFormats.CffFdSelect",
+      "source": "upstream/packages/font-formats/src/cffFdSelect.ts",
+      "total": 19
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 10
+      },
+      "module": "flighthq.fontFormats.CffIndex",
+      "source": "upstream/packages/font-formats/src/cffIndex.ts",
+      "total": 10
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 15
+      },
+      "module": "flighthq.fontFormats.CffTable",
+      "source": "upstream/packages/font-formats/src/cffTable.ts",
+      "total": 15
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 41,
+        "unclassified": 3
+      },
+      "module": "flighthq.fontFormats.OpenTypeCmap",
+      "source": "upstream/packages/font-formats/src/openTypeCmap.ts",
+      "total": 44
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 40,
+        "unclassified": 2
+      },
+      "module": "flighthq.fontFormats.OpenTypeGlyf",
+      "source": "upstream/packages/font-formats/src/openTypeGlyf.ts",
+      "total": 42
+    },
+    {
+      "byReason": {
+        "source-null": 2,
+        "standard-toolkit-boundary": 8
+      },
+      "module": "flighthq.fontFormats.OpenTypeGlyphOutlineSource",
+      "source": "upstream/packages/font-formats/src/openTypeGlyphOutlineSource.ts",
+      "total": 10
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 30
+      },
+      "module": "flighthq.fontFormats.OpenTypeMetrics",
+      "source": "upstream/packages/font-formats/src/openTypeMetrics.ts",
+      "total": 30
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 75
+      },
+      "module": "flighthq.fontFormats.SfntAssembly",
+      "source": "upstream/packages/font-formats/src/sfntAssembly.ts",
+      "total": 75
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 14
+      },
+      "module": "flighthq.fontFormats.SfntTableDirectory",
+      "source": "upstream/packages/font-formats/src/sfntTableDirectory.ts",
+      "total": 14
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 35,
+        "unclassified": 1
+      },
+      "module": "flighthq.fontFormats.Woff2Font",
+      "source": "upstream/packages/font-formats/src/woff2Font.ts",
+      "total": 36
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 47
+      },
+      "module": "flighthq.fontFormats.Woff2GlyfTransform",
+      "source": "upstream/packages/font-formats/src/woff2GlyfTransform.ts",
+      "total": 47
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 48,
+        "unclassified": 1
+      },
+      "module": "flighthq.fontFormats.WoffFont",
+      "source": "upstream/packages/font-formats/src/woffFont.ts",
+      "total": 49
+    },
+    {
+      "byReason": {
         "source-any": 1,
         "standard-toolkit-boundary": 33
       },
@@ -2436,11 +2577,19 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 34
+        "standard-toolkit-boundary": 46
       },
       "module": "flighthq.geometry.Capsule",
       "source": "upstream/packages/geometry/src/capsule.ts",
-      "total": 34
+      "total": 46
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.geometry.EnableGeometryPoolGuards",
+      "source": "upstream/packages/geometry/src/enableGeometryPoolGuards.ts",
+      "total": 1
     },
     {
       "byReason": {
@@ -2468,43 +2617,43 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 2
+        "standard-toolkit-boundary": 3
       },
       "module": "flighthq.geometry.Matrix3Pool",
       "source": "upstream/packages/geometry/src/matrix3Pool.ts",
-      "total": 2
+      "total": 3
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 38
+        "standard-toolkit-boundary": 41
       },
       "module": "flighthq.geometry.Matrix4",
       "source": "upstream/packages/geometry/src/matrix4.ts",
-      "total": 38
+      "total": 41
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 2
+        "standard-toolkit-boundary": 3
       },
       "module": "flighthq.geometry.Matrix4Pool",
       "source": "upstream/packages/geometry/src/matrix4Pool.ts",
-      "total": 2
+      "total": 3
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 2
+        "standard-toolkit-boundary": 3
       },
       "module": "flighthq.geometry.MatrixPool",
       "source": "upstream/packages/geometry/src/matrixPool.ts",
-      "total": 2
+      "total": 3
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 46
+        "standard-toolkit-boundary": 52
       },
       "module": "flighthq.geometry.Obb",
       "source": "upstream/packages/geometry/src/obb.ts",
-      "total": 46
+      "total": 52
     },
     {
       "byReason": {
@@ -2516,51 +2665,51 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 140
+        "standard-toolkit-boundary": 144
       },
       "module": "flighthq.geometry.Quaternion",
       "source": "upstream/packages/geometry/src/quaternion.ts",
-      "total": 140
+      "total": 144
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 2
+        "standard-toolkit-boundary": 3
       },
       "module": "flighthq.geometry.QuaternionPool",
       "source": "upstream/packages/geometry/src/quaternionPool.ts",
-      "total": 2
+      "total": 3
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 18
+        "standard-toolkit-boundary": 26
       },
       "module": "flighthq.geometry.Ray3d",
       "source": "upstream/packages/geometry/src/ray3d.ts",
-      "total": 18
+      "total": 26
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 64
+        "standard-toolkit-boundary": 72
       },
       "module": "flighthq.geometry.Rectangle",
       "source": "upstream/packages/geometry/src/rectangle.ts",
-      "total": 64
+      "total": 72
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 2
+        "standard-toolkit-boundary": 3
       },
       "module": "flighthq.geometry.RectanglePool",
       "source": "upstream/packages/geometry/src/rectanglePool.ts",
-      "total": 2
+      "total": 3
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 11
+        "standard-toolkit-boundary": 12
       },
       "module": "flighthq.geometry.Transform2d",
       "source": "upstream/packages/geometry/src/transform2d.ts",
-      "total": 11
+      "total": 12
     },
     {
       "byReason": {
@@ -2572,51 +2721,51 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 18
+        "standard-toolkit-boundary": 22
       },
       "module": "flighthq.geometry.Vector2",
       "source": "upstream/packages/geometry/src/vector2.ts",
-      "total": 18
+      "total": 22
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 2
+        "standard-toolkit-boundary": 3
       },
       "module": "flighthq.geometry.Vector2Pool",
       "source": "upstream/packages/geometry/src/vector2Pool.ts",
-      "total": 2
+      "total": 3
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 34
+        "standard-toolkit-boundary": 36
       },
       "module": "flighthq.geometry.Vector3",
       "source": "upstream/packages/geometry/src/vector3.ts",
-      "total": 34
+      "total": 36
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 2
+        "standard-toolkit-boundary": 3
       },
       "module": "flighthq.geometry.Vector3Pool",
       "source": "upstream/packages/geometry/src/vector3Pool.ts",
-      "total": 2
+      "total": 3
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 18
+        "standard-toolkit-boundary": 20
       },
       "module": "flighthq.geometry.Vector4",
       "source": "upstream/packages/geometry/src/vector4.ts",
-      "total": 18
+      "total": 20
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 2
+        "standard-toolkit-boundary": 3
       },
       "module": "flighthq.geometry.Vector4Pool",
       "source": "upstream/packages/geometry/src/vector4Pool.ts",
-      "total": 2
+      "total": 3
     },
     {
       "byReason": {
@@ -2966,6 +3115,17 @@
     },
     {
       "byReason": {
+        "source-any": 1,
+        "source-never": 2,
+        "source-unknown": 3,
+        "standard-toolkit-boundary": 11
+      },
+      "module": "flighthq.image.ImageBackend",
+      "source": "upstream/packages/image/src/imageBackend.ts",
+      "total": 17
+    },
+    {
+      "byReason": {
         "standard-toolkit-boundary": 6
       },
       "module": "flighthq.image.ImageResource",
@@ -2975,24 +3135,31 @@
     {
       "byReason": {
         "external-toolkit-boundary": 2,
-        "source-any": 1,
-        "source-never": 2,
-        "source-unknown": 3,
-        "standard-toolkit-boundary": 24
+        "standard-toolkit-boundary": 25
       },
       "module": "flighthq.image.ImageResourceFrom",
       "source": "upstream/packages/image/src/imageResourceFrom.ts",
-      "total": 32
+      "total": 27
     },
     {
       "byReason": {
         "source-any": 1,
+        "source-null": 4,
         "source-unknown": 2,
-        "standard-toolkit-boundary": 2
+        "standard-toolkit-boundary": 6,
+        "unclassified": 1
       },
       "module": "flighthq.image.ImageResourceReference",
       "source": "upstream/packages/image/src/imageResourceReference.ts",
-      "total": 5
+      "total": 14
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 9
+      },
+      "module": "flighthq.imageCodec.ImageBitmapComposerRegistry",
+      "source": "upstream/packages/image-codec/src/imageBitmapComposerRegistry.ts",
+      "total": 9
     },
     {
       "byReason": {
@@ -3087,12 +3254,12 @@
         "source-any": 27,
         "source-never": 10,
         "source-unknown": 2,
-        "standard-toolkit-boundary": 42,
+        "standard-toolkit-boundary": 33,
         "unclassified": 1
       },
       "module": "flighthq.interaction.InteractionManager",
       "source": "upstream/packages/interaction/src/interactionManager.ts",
-      "total": 82
+      "total": 73
     },
     {
       "byReason": {
@@ -3220,31 +3387,31 @@
     {
       "byReason": {
         "source-unknown": 9,
-        "standard-toolkit-boundary": 16
+        "standard-toolkit-boundary": 8
       },
       "module": "flighthq.layout.AnchorLayout",
       "source": "upstream/packages/layout/src/anchorLayout.ts",
-      "total": 25
+      "total": 17
     },
     {
       "byReason": {
         "source-unknown": 20,
-        "standard-toolkit-boundary": 39,
+        "standard-toolkit-boundary": 22,
         "unclassified": 2
       },
       "module": "flighthq.layout.FlexLayout",
       "source": "upstream/packages/layout/src/flexLayout.ts",
-      "total": 61
+      "total": 44
     },
     {
       "byReason": {
         "source-any": 1,
         "source-unknown": 21,
-        "standard-toolkit-boundary": 50
+        "standard-toolkit-boundary": 36
       },
       "module": "flighthq.layout.GridLayout",
       "source": "upstream/packages/layout/src/gridLayout.ts",
-      "total": 72
+      "total": 58
     },
     {
       "byReason": {
@@ -3316,14 +3483,6 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 5
-      },
-      "module": "flighthq.lighting.SceneLights",
-      "source": "upstream/packages/lighting/src/sceneLights.ts",
-      "total": 5
-    },
-    {
-      "byReason": {
         "standard-toolkit-boundary": 16
       },
       "module": "flighthq.lighting.SpotLight",
@@ -3348,68 +3507,36 @@
         "external-toolkit-boundary": 4,
         "source-any": 1,
         "source-unknown": 87,
-        "standard-toolkit-boundary": 74,
+        "standard-toolkit-boundary": 75,
         "unclassified": 2
       },
       "module": "flighthq.log.Log",
       "source": "upstream/packages/log/src/log.ts",
-      "total": 168
+      "total": 169
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 6
+        "standard-toolkit-boundary": 2
       },
       "module": "flighthq.materials.AnisotropyPbrExtension",
       "source": "upstream/packages/materials/src/anisotropyPbrExtension.ts",
-      "total": 6
+      "total": 2
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 19
-      },
-      "module": "flighthq.materials.ClassicMaterials",
-      "source": "upstream/packages/materials/src/classicMaterials.ts",
-      "total": 19
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 11
+        "standard-toolkit-boundary": 2
       },
       "module": "flighthq.materials.ClearcoatPbrExtension",
       "source": "upstream/packages/materials/src/clearcoatPbrExtension.ts",
-      "total": 11
+      "total": 2
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 24
+        "standard-toolkit-boundary": 14
       },
       "module": "flighthq.materials.ColorScaleBias",
       "source": "upstream/packages/materials/src/colorScaleBias.ts",
-      "total": 24
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 3
-      },
-      "module": "flighthq.materials.CustomShaderMaterial",
-      "source": "upstream/packages/materials/src/customShaderMaterial.ts",
-      "total": 3
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 3
-      },
-      "module": "flighthq.materials.ExtendedPbrMaterial",
-      "source": "upstream/packages/materials/src/extendedPbrMaterial.ts",
-      "total": 3
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 8
-      },
-      "module": "flighthq.materials.IridescencePbrExtension",
-      "source": "upstream/packages/materials/src/iridescencePbrExtension.ts",
-      "total": 8
+      "total": 14
     },
     {
       "byReason": {
@@ -3422,14 +3549,6 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 17
-      },
-      "module": "flighthq.materials.MaterialPresets",
-      "source": "upstream/packages/materials/src/materialPresets.ts",
-      "total": 17
-    },
-    {
-      "byReason": {
         "standard-toolkit-boundary": 24
       },
       "module": "flighthq.materials.MaterialValidation",
@@ -3438,67 +3557,35 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 39
+        "standard-toolkit-boundary": 12
       },
       "module": "flighthq.materials.PbrMaterials",
       "source": "upstream/packages/materials/src/pbrMaterials.ts",
-      "total": 39
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 12
-      },
-      "module": "flighthq.materials.PhongToPbr",
-      "source": "upstream/packages/materials/src/phongToPbr.ts",
       "total": 12
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 6
+        "standard-toolkit-boundary": 11
       },
-      "module": "flighthq.materials.SheenPbrExtension",
-      "source": "upstream/packages/materials/src/sheenPbrExtension.ts",
-      "total": 6
+      "module": "flighthq.materials.PhongToPbr",
+      "source": "upstream/packages/materials/src/phongToPbr.ts",
+      "total": 11
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 6
-      },
-      "module": "flighthq.materials.SpecularPbrExtension",
-      "source": "upstream/packages/materials/src/specularPbrExtension.ts",
-      "total": 6
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 1
-      },
-      "module": "flighthq.materials.StandardMaterial",
-      "source": "upstream/packages/materials/src/standardMaterial.ts",
-      "total": 1
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 13
+        "standard-toolkit-boundary": 4
       },
       "module": "flighthq.materials.TransmissionVolumePbrExtension",
       "source": "upstream/packages/materials/src/transmissionVolumePbrExtension.ts",
-      "total": 13
+      "total": 4
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 18
-      },
-      "module": "flighthq.materials.UnlitMaterials",
-      "source": "upstream/packages/materials/src/unlitMaterials.ts",
-      "total": 18
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 9
+        "standard-toolkit-boundary": 2
       },
       "module": "flighthq.materials.WrappedDiffusePbrExtension",
       "source": "upstream/packages/materials/src/wrappedDiffusePbrExtension.ts",
-      "total": 9
+      "total": 2
     },
     {
       "byReason": {
@@ -3542,11 +3629,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 20
+        "standard-toolkit-boundary": 25
       },
       "module": "flighthq.math.NumberTheory",
       "source": "upstream/packages/math/src/numberTheory.ts",
-      "total": 20
+      "total": 25
     },
     {
       "byReason": {
@@ -3558,11 +3645,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 34
+        "standard-toolkit-boundary": 38
       },
       "module": "flighthq.math.RandomDistributions",
       "source": "upstream/packages/math/src/randomDistributions.ts",
-      "total": 34
+      "total": 38
     },
     {
       "byReason": {
@@ -3590,11 +3677,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 7
+        "standard-toolkit-boundary": 31
       },
       "module": "flighthq.math.Statistics",
       "source": "upstream/packages/math/src/statistics.ts",
-      "total": 7
+      "total": 31
     },
     {
       "byReason": {
@@ -3633,46 +3720,45 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 64
+        "standard-toolkit-boundary": 63
       },
       "module": "flighthq.menu.Menu",
       "source": "upstream/packages/menu/src/menu.ts",
-      "total": 64
+      "total": 63
     },
     {
       "byReason": {
         "source-any": 1,
-        "standard-toolkit-boundary": 20,
-        "unclassified": 1
+        "standard-toolkit-boundary": 9
       },
       "module": "flighthq.mesh.MeshGeometry",
       "source": "upstream/packages/mesh/src/meshGeometry.ts",
-      "total": 22
+      "total": 10
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 69,
-        "unclassified": 3
+        "standard-toolkit-boundary": 58,
+        "unclassified": 1
       },
       "module": "flighthq.mesh.MeshGeometryAttributes",
       "source": "upstream/packages/mesh/src/meshGeometryAttributes.ts",
-      "total": 72
+      "total": 59
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 213
+        "standard-toolkit-boundary": 183
       },
       "module": "flighthq.mesh.MeshGeometryBuilders",
       "source": "upstream/packages/mesh/src/meshGeometryBuilders.ts",
-      "total": 213
+      "total": 183
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 52
+        "standard-toolkit-boundary": 54
       },
       "module": "flighthq.mesh.MeshGeometryCompute",
       "source": "upstream/packages/mesh/src/meshGeometryCompute.ts",
-      "total": 52
+      "total": 54
     },
     {
       "byReason": {
@@ -3692,20 +3778,19 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 49,
-        "unclassified": 2
+        "standard-toolkit-boundary": 14
       },
       "module": "flighthq.mesh.MeshGeometryLayout",
       "source": "upstream/packages/mesh/src/meshGeometryLayout.ts",
-      "total": 51
+      "total": 14
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 14
+        "standard-toolkit-boundary": 20
       },
       "module": "flighthq.mesh.MeshGeometryOperations",
       "source": "upstream/packages/mesh/src/meshGeometryOperations.ts",
-      "total": 14
+      "total": 20
     },
     {
       "byReason": {
@@ -3717,19 +3802,19 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 18
+        "standard-toolkit-boundary": 26
       },
       "module": "flighthq.mesh.MeshGeometryTransforms",
       "source": "upstream/packages/mesh/src/meshGeometryTransforms.ts",
-      "total": 18
+      "total": 26
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 10
+        "standard-toolkit-boundary": 4
       },
       "module": "flighthq.mesh.MeshGeometryUvs",
       "source": "upstream/packages/mesh/src/meshGeometryUvs.ts",
-      "total": 10
+      "total": 4
     },
     {
       "byReason": {
@@ -3749,6 +3834,15 @@
     },
     {
       "byReason": {
+        "standard-toolkit-boundary": 34,
+        "unclassified": 2
+      },
+      "module": "flighthq.mesh.VertexFormat",
+      "source": "upstream/packages/mesh/src/vertexFormat.ts",
+      "total": 36
+    },
+    {
+      "byReason": {
         "standard-toolkit-boundary": 2
       },
       "module": "flighthq.motionpath.MotionPath",
@@ -3765,11 +3859,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 5
+        "unclassified": 1
       },
       "module": "flighthq.movieclip.MovieClip",
       "source": "upstream/packages/movieclip/src/movieClip.ts",
-      "total": 5
+      "total": 1
     },
     {
       "byReason": {
@@ -3793,76 +3887,29 @@
     {
       "byReason": {
         "source-any": 1,
-        "source-unknown": 2
+        "source-unknown": 2,
+        "standard-toolkit-boundary": 20
       },
       "module": "flighthq.node.BoundsRectangle",
       "source": "upstream/packages/node/src/boundsRectangle.ts",
-      "total": 3
+      "total": 23
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 2
+        "unclassified": 2
       },
-      "module": "flighthq.node.HasAppearance",
-      "source": "upstream/packages/node/src/hasAppearance.ts",
+      "module": "flighthq.node.EnableNodeGuards",
+      "source": "upstream/packages/node/src/enableNodeGuards.ts",
       "total": 2
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 1
-      },
-      "module": "flighthq.node.HasBlendMode",
-      "source": "upstream/packages/node/src/hasBlendMode.ts",
-      "total": 1
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 2
-      },
-      "module": "flighthq.node.HasBoundsRectangle",
-      "source": "upstream/packages/node/src/hasBoundsRectangle.ts",
-      "total": 2
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 1
-      },
-      "module": "flighthq.node.HasClip",
-      "source": "upstream/packages/node/src/hasClip.ts",
-      "total": 1
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 2
-      },
-      "module": "flighthq.node.HasMaterial",
-      "source": "upstream/packages/node/src/hasMaterial.ts",
-      "total": 2
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 9
-      },
-      "module": "flighthq.node.HasTransform2d",
-      "source": "upstream/packages/node/src/hasTransform2d.ts",
-      "total": 9
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 3
-      },
-      "module": "flighthq.node.HasTransform3d",
-      "source": "upstream/packages/node/src/hasTransform3d.ts",
-      "total": 3
-    },
-    {
-      "byReason": {
-        "source-unknown": 1,
-        "standard-toolkit-boundary": 30
+        "standard-toolkit-boundary": 23,
+        "unclassified": 6
       },
       "module": "flighthq.node.Hierarchy",
       "source": "upstream/packages/node/src/hierarchy.ts",
-      "total": 31
+      "total": 29
     },
     {
       "byReason": {
@@ -3875,14 +3922,6 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 1
-      },
-      "module": "flighthq.node.NodeColorAdjustment",
-      "source": "upstream/packages/node/src/nodeColorAdjustment.ts",
-      "total": 1
-    },
-    {
-      "byReason": {
         "standard-toolkit-boundary": 12
       },
       "module": "flighthq.node.NodeOrderList",
@@ -3891,19 +3930,19 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 13
+        "standard-toolkit-boundary": 12
       },
       "module": "flighthq.node.NodeTransform2d",
       "source": "upstream/packages/node/src/nodeTransform2d.ts",
-      "total": 13
+      "total": 12
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 15
+        "standard-toolkit-boundary": 12
       },
       "module": "flighthq.node.StageFit",
       "source": "upstream/packages/node/src/stageFit.ts",
-      "total": 15
+      "total": 12
     },
     {
       "byReason": {
@@ -3916,21 +3955,12 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 5
-      },
-      "module": "flighthq.node.Viewport",
-      "source": "upstream/packages/node/src/viewport.ts",
-      "total": 5
-    },
-    {
-      "byReason": {
-        "source-unknown": 11,
-        "standard-toolkit-boundary": 94,
-        "unclassified": 1
+        "source-unknown": 15,
+        "standard-toolkit-boundary": 90
       },
       "module": "flighthq.notification.Notification",
       "source": "upstream/packages/notification/src/notification.ts",
-      "total": 106
+      "total": 105
     },
     {
       "byReason": {
@@ -3950,21 +3980,21 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 33,
-        "unclassified": 1
+        "standard-toolkit-boundary": 22,
+        "unclassified": 2
       },
       "module": "flighthq.particleemitter.ParticleEmitter",
       "source": "upstream/packages/particleemitter/src/particleEmitter.ts",
-      "total": 34
+      "total": 24
     },
     {
       "byReason": {
         "source-unknown": 2,
-        "standard-toolkit-boundary": 16
+        "standard-toolkit-boundary": 12
       },
       "module": "flighthq.particleemitter.ParticleEmitter3D",
       "source": "upstream/packages/particleemitter/src/particleEmitter3D.ts",
-      "total": 18
+      "total": 14
     },
     {
       "byReason": {
@@ -4035,11 +4065,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 53
+        "standard-toolkit-boundary": 1
       },
       "module": "flighthq.particles.ParticleEmitterConfig",
       "source": "upstream/packages/particles/src/particleEmitterConfig.ts",
-      "total": 53
+      "total": 1
     },
     {
       "byReason": {
@@ -4069,11 +4099,11 @@
       "byReason": {
         "source-any": 1,
         "source-unknown": 2,
-        "standard-toolkit-boundary": 88
+        "standard-toolkit-boundary": 86
       },
       "module": "flighthq.particles.ValidateParticleEmitterConfig",
       "source": "upstream/packages/particles/src/validateParticleEmitterConfig.ts",
-      "total": 91
+      "total": 89
     },
     {
       "byReason": {
@@ -4086,116 +4116,115 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 8
+        "standard-toolkit-boundary": 6
       },
       "module": "flighthq.particlesFormats.FormatRegistry",
       "source": "upstream/packages/particles-formats/src/formatRegistry.ts",
-      "total": 8
+      "total": 6
     },
     {
       "byReason": {
         "source-any": 4,
-        "standard-toolkit-boundary": 76
+        "standard-toolkit-boundary": 54
       },
       "module": "flighthq.particlesFormats.LibgdxParse",
       "source": "upstream/packages/particles-formats/src/libgdxParse.ts",
-      "total": 80
+      "total": 58
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 94
+        "standard-toolkit-boundary": 82
       },
       "module": "flighthq.particlesFormats.LibgdxSerialize",
       "source": "upstream/packages/particles-formats/src/libgdxSerialize.ts",
-      "total": 94
+      "total": 82
     },
     {
       "byReason": {
-        "source-never": 8,
-        "standard-toolkit-boundary": 6
+        "source-never": 8
       },
       "module": "flighthq.particlesFormats.ParseParticleConfig",
       "source": "upstream/packages/particles-formats/src/parseParticleConfig.ts",
-      "total": 14
+      "total": 8
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 33,
+        "standard-toolkit-boundary": 31,
         "unclassified": 1
       },
       "module": "flighthq.particlesFormats.ParticleDesignerParse",
       "source": "upstream/packages/particles-formats/src/particleDesignerParse.ts",
-      "total": 34
+      "total": 32
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 44
+        "standard-toolkit-boundary": 21
       },
       "module": "flighthq.particlesFormats.ParticleDesignerSerialize",
       "source": "upstream/packages/particles-formats/src/particleDesignerSerialize.ts",
-      "total": 44
+      "total": 21
     },
     {
       "byReason": {
         "source-unknown": 149,
-        "standard-toolkit-boundary": 32
+        "standard-toolkit-boundary": 30
       },
       "module": "flighthq.particlesFormats.PixiParse",
       "source": "upstream/packages/particles-formats/src/pixiParse.ts",
-      "total": 181
+      "total": 179
     },
     {
       "byReason": {
         "source-any": 26,
         "source-unknown": 333,
-        "standard-toolkit-boundary": 41
+        "standard-toolkit-boundary": 39
       },
       "module": "flighthq.particlesFormats.SpineParse",
       "source": "upstream/packages/particles-formats/src/spineParse.ts",
-      "total": 400
+      "total": 398
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 28
+        "standard-toolkit-boundary": 17
       },
       "module": "flighthq.particlesFormats.SpineSerialize",
       "source": "upstream/packages/particles-formats/src/spineSerialize.ts",
-      "total": 28
+      "total": 17
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 50,
+        "standard-toolkit-boundary": 48,
         "unclassified": 1
       },
       "module": "flighthq.particlesFormats.StarlingPexParse",
       "source": "upstream/packages/particles-formats/src/starlingPexParse.ts",
-      "total": 51
+      "total": 49
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 41
+        "standard-toolkit-boundary": 14
       },
       "module": "flighthq.particlesFormats.StarlingPexSerialize",
       "source": "upstream/packages/particles-formats/src/starlingPexSerialize.ts",
-      "total": 41
+      "total": 14
     },
     {
       "byReason": {
         "source-any": 17,
         "source-unknown": 524,
-        "standard-toolkit-boundary": 36
+        "standard-toolkit-boundary": 34
       },
       "module": "flighthq.particlesFormats.UnityParse",
       "source": "upstream/packages/particles-formats/src/unityParse.ts",
-      "total": 577
+      "total": 575
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 16
+        "standard-toolkit-boundary": 9
       },
       "module": "flighthq.particlesFormats.UnitySerialize",
       "source": "upstream/packages/particles-formats/src/unitySerialize.ts",
-      "total": 16
+      "total": 9
     },
     {
       "byReason": {
@@ -4377,11 +4406,11 @@
     {
       "byReason": {
         "source-any": 2,
-        "standard-toolkit-boundary": 15
+        "standard-toolkit-boundary": 17
       },
       "module": "flighthq.pathFormats.SvgPathData",
       "source": "upstream/packages/path-formats/src/svgPathData.ts",
-      "total": 17
+      "total": 19
     },
     {
       "byReason": {
@@ -4395,11 +4424,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 36
+        "standard-toolkit-boundary": 38
       },
       "module": "flighthq.physics2d.Broadphase",
       "source": "upstream/packages/physics2d/src/broadphase.ts",
-      "total": 36
+      "total": 38
     },
     {
       "byReason": {
@@ -4411,11 +4440,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 31
+        "standard-toolkit-boundary": 23
       },
       "module": "flighthq.physics2d.DebugGeometry",
       "source": "upstream/packages/physics2d/src/debugGeometry.ts",
-      "total": 31
+      "total": 23
     },
     {
       "byReason": {
@@ -4468,11 +4497,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 5
+        "standard-toolkit-boundary": 7
       },
       "module": "flighthq.physics2d.MassProperties",
       "source": "upstream/packages/physics2d/src/massProperties.ts",
-      "total": 5
+      "total": 7
     },
     {
       "byReason": {
@@ -4500,11 +4529,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 75
+        "standard-toolkit-boundary": 77
       },
       "module": "flighthq.physics2d.Step",
       "source": "upstream/packages/physics2d/src/step.ts",
-      "total": 75
+      "total": 77
     },
     {
       "byReason": {
@@ -4526,11 +4555,157 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 27
+        "standard-toolkit-boundary": 29
       },
       "module": "flighthq.physics2d.WorldQueries",
       "source": "upstream/packages/physics2d/src/worldQueries.ts",
-      "total": 27
+      "total": 29
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 4
+      },
+      "module": "flighthq.physics3d.Contacts",
+      "source": "upstream/packages/physics3d/src/contacts.ts",
+      "total": 4
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 3
+      },
+      "module": "flighthq.physics3d.EnablePhysics3DGuards",
+      "source": "upstream/packages/physics3d/src/enablePhysics3DGuards.ts",
+      "total": 3
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 2
+      },
+      "module": "flighthq.physics3d.ExplainPhysics3DJoints",
+      "source": "upstream/packages/physics3d/src/explainPhysics3DJoints.ts",
+      "total": 2
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 4
+      },
+      "module": "flighthq.physics3d.Integrate",
+      "source": "upstream/packages/physics3d/src/integrate.ts",
+      "total": 4
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 24
+      },
+      "module": "flighthq.physics3d.Islands",
+      "source": "upstream/packages/physics3d/src/islands.ts",
+      "total": 24
+    },
+    {
+      "byReason": {
+        "source-any": 2,
+        "standard-toolkit-boundary": 16
+      },
+      "module": "flighthq.physics3d.JointCollisionSuppression",
+      "source": "upstream/packages/physics3d/src/jointCollisionSuppression.ts",
+      "total": 18
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 2
+      },
+      "module": "flighthq.physics3d.JointFactories",
+      "source": "upstream/packages/physics3d/src/jointFactories.ts",
+      "total": 2
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 4
+      },
+      "module": "flighthq.physics3d.JointMath",
+      "source": "upstream/packages/physics3d/src/jointMath.ts",
+      "total": 4
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 12
+      },
+      "module": "flighthq.physics3d.JointRegistry",
+      "source": "upstream/packages/physics3d/src/jointRegistry.ts",
+      "total": 12
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 14
+      },
+      "module": "flighthq.physics3d.JointRows",
+      "source": "upstream/packages/physics3d/src/jointRows.ts",
+      "total": 14
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 24
+      },
+      "module": "flighthq.physics3d.Joints",
+      "source": "upstream/packages/physics3d/src/joints.ts",
+      "total": 24
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 3
+      },
+      "module": "flighthq.physics3d.MassProperties",
+      "source": "upstream/packages/physics3d/src/massProperties.ts",
+      "total": 3
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 2
+      },
+      "module": "flighthq.physics3d.Ownership",
+      "source": "upstream/packages/physics3d/src/ownership.ts",
+      "total": 2
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 24
+      },
+      "module": "flighthq.physics3d.Solver",
+      "source": "upstream/packages/physics3d/src/solver.ts",
+      "total": 24
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 9
+      },
+      "module": "flighthq.physics3d.Step",
+      "source": "upstream/packages/physics3d/src/step.ts",
+      "total": 9
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 71
+      },
+      "module": "flighthq.physics3d.StepValidation",
+      "source": "upstream/packages/physics3d/src/stepValidation.ts",
+      "total": 71
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 10
+      },
+      "module": "flighthq.physics3d.SymmetricTensor",
+      "source": "upstream/packages/physics3d/src/symmetricTensor.ts",
+      "total": 10
+    },
+    {
+      "byReason": {
+        "source-any": 14,
+        "standard-toolkit-boundary": 14
+      },
+      "module": "flighthq.physics3d.World",
+      "source": "upstream/packages/physics3d/src/world.ts",
+      "total": 28
     },
     {
       "byReason": {
@@ -4571,30 +4746,66 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 44
+        "standard-toolkit-boundary": 40
       },
       "module": "flighthq.protocol.Protocol",
       "source": "upstream/packages/protocol/src/protocol.ts",
-      "total": 44
+      "total": 40
     },
     {
       "byReason": {
         "source-any": 2,
-        "standard-toolkit-boundary": 35,
-        "unclassified": 1
+        "standard-toolkit-boundary": 27,
+        "unclassified": 2
       },
       "module": "flighthq.quadbatch.QuadBatch",
       "source": "upstream/packages/quadbatch/src/quadBatch.ts",
-      "total": 38
+      "total": 31
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 9,
+        "source-unknown": 2
+      },
+      "module": "flighthq.registry.Registry",
+      "source": null,
+      "total": 2
+    },
+    {
+      "byReason": {
+        "source-any": 2,
+        "source-never": 1,
+        "source-null": 3,
+        "source-unknown": 26,
+        "standard-toolkit-boundary": 17
+      },
+      "module": "flighthq.registry.RegistryTable",
+      "source": "upstream/packages/registry/src/registryTable.ts",
+      "total": 49
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 9
+      },
+      "module": "flighthq.registryCatalog.RegistryCatalog",
+      "source": "upstream/packages/registry-catalog/src/registryCatalog.ts",
+      "total": 9
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 4
+      },
+      "module": "flighthq.registryCodegen.RegistryCodegen",
+      "source": "upstream/packages/registry-codegen/src/registryCodegen.ts",
+      "total": 4
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 4,
         "unclassified": 1
       },
       "module": "flighthq.render.EnableColorAdjustments",
       "source": "upstream/packages/render/src/enableColorAdjustments.ts",
-      "total": 10
+      "total": 5
     },
     {
       "byReason": {
@@ -4640,19 +4851,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 3
+        "standard-toolkit-boundary": 2
       },
       "module": "flighthq.render.Renderer",
       "source": "upstream/packages/render/src/renderer.ts",
-      "total": 3
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 3
-      },
-      "module": "flighthq.render.RenderMaterial",
-      "source": "upstream/packages/render/src/renderMaterial.ts",
-      "total": 3
+      "total": 2
     },
     {
       "byReason": {
@@ -4701,12 +4904,11 @@
     },
     {
       "byReason": {
-        "source-any": 2,
-        "standard-toolkit-boundary": 15
+        "standard-toolkit-boundary": 3
       },
       "module": "flighthq.render.RenderState",
       "source": "upstream/packages/render/src/renderState.ts",
-      "total": 17
+      "total": 3
     },
     {
       "byReason": {
@@ -4728,12 +4930,11 @@
     },
     {
       "byReason": {
-        "source-unknown": 6,
-        "standard-toolkit-boundary": 5
+        "source-unknown": 6
       },
       "module": "flighthq.render.RenderViewport",
       "source": "upstream/packages/render/src/renderViewport.ts",
-      "total": 11
+      "total": 6
     },
     {
       "byReason": {
@@ -4789,12 +4990,11 @@
     },
     {
       "byReason": {
-        "source-any": 4,
-        "standard-toolkit-boundary": 67
+        "standard-toolkit-boundary": 66
       },
       "module": "flighthq.renderGl.GlDraw",
       "source": "upstream/packages/render-gl/src/glDraw.ts",
-      "total": 71
+      "total": 66
     },
     {
       "byReason": {
@@ -4830,12 +5030,11 @@
     },
     {
       "byReason": {
-        "source-any": 4,
-        "standard-toolkit-boundary": 4
+        "standard-toolkit-boundary": 3
       },
       "module": "flighthq.renderGl.GlMaterialRegistry",
       "source": "upstream/packages/render-gl/src/glMaterialRegistry.ts",
-      "total": 8
+      "total": 3
     },
     {
       "byReason": {
@@ -4876,20 +5075,20 @@
       "byReason": {
         "external-toolkit-boundary": 1,
         "source-unknown": 4,
-        "standard-toolkit-boundary": 47,
-        "unclassified": 2
+        "standard-toolkit-boundary": 42,
+        "unclassified": 1
       },
       "module": "flighthq.renderGl.GlRenderState",
       "source": "upstream/packages/render-gl/src/glRenderState.ts",
-      "total": 54
+      "total": 48
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 42
+        "standard-toolkit-boundary": 70
       },
       "module": "flighthq.renderGl.GlRenderStateBracket",
       "source": "upstream/packages/render-gl/src/glRenderStateBracket.ts",
-      "total": 42
+      "total": 70
     },
     {
       "byReason": {
@@ -4953,12 +5152,11 @@
     },
     {
       "byReason": {
-        "source-any": 10,
-        "standard-toolkit-boundary": 3
+        "standard-toolkit-boundary": 1
       },
       "module": "flighthq.renderGl.GlTextureResolver",
       "source": "upstream/packages/render-gl/src/glTextureResolver.ts",
-      "total": 13
+      "total": 1
     },
     {
       "byReason": {
@@ -4989,12 +5187,13 @@
       "byReason": {
         "external-toolkit-boundary": 5,
         "source-any": 5,
-        "source-unknown": 38,
-        "standard-toolkit-boundary": 14
+        "source-unknown": 43,
+        "standard-toolkit-boundary": 46,
+        "unclassified": 1
       },
       "module": "flighthq.renderWgpu._internal._WgpuTestHelper",
       "source": "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
-      "total": 62
+      "total": 100
     },
     {
       "byReason": {
@@ -5022,13 +5221,23 @@
     },
     {
       "byReason": {
-        "external-toolkit-boundary": 14,
-        "source-undefined": 7,
+        "external-toolkit-boundary": 13,
+        "source-undefined": 5,
         "standard-toolkit-boundary": 5
+      },
+      "module": "flighthq.renderWgpu.WgpuAntialias",
+      "source": "upstream/packages/render-wgpu/src/wgpuAntialias.ts",
+      "total": 23
+    },
+    {
+      "byReason": {
+        "external-toolkit-boundary": 15,
+        "source-undefined": 8,
+        "standard-toolkit-boundary": 7
       },
       "module": "flighthq.renderWgpu.WgpuBackground",
       "source": "upstream/packages/render-wgpu/src/wgpuBackground.ts",
-      "total": 26
+      "total": 30
     },
     {
       "byReason": {
@@ -5043,13 +5252,13 @@
     },
     {
       "byReason": {
-        "external-toolkit-boundary": 29,
-        "source-undefined": 12,
-        "standard-toolkit-boundary": 26
+        "external-toolkit-boundary": 28,
+        "source-undefined": 11,
+        "standard-toolkit-boundary": 32
       },
       "module": "flighthq.renderWgpu.WgpuDraw",
       "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts",
-      "total": 67
+      "total": 71
     },
     {
       "byReason": {
@@ -5091,12 +5300,11 @@
     },
     {
       "byReason": {
-        "source-any": 4,
-        "standard-toolkit-boundary": 4
+        "standard-toolkit-boundary": 3
       },
       "module": "flighthq.renderWgpu.WgpuMaterialRegistry",
       "source": "upstream/packages/render-wgpu/src/wgpuMaterialRegistry.ts",
-      "total": 8
+      "total": 3
     },
     {
       "byReason": {
@@ -5110,27 +5318,27 @@
     },
     {
       "byReason": {
-        "external-toolkit-boundary": 17,
+        "external-toolkit-boundary": 18,
         "source-any": 6,
-        "source-undefined": 6,
+        "source-undefined": 7,
         "source-unknown": 4,
-        "standard-toolkit-boundary": 34,
-        "unclassified": 2
+        "standard-toolkit-boundary": 29,
+        "unclassified": 1
       },
       "module": "flighthq.renderWgpu.WgpuRenderState",
       "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-      "total": 69
+      "total": 65
     },
     {
       "byReason": {
         "external-toolkit-boundary": 16,
         "source-never": 1,
         "source-undefined": 7,
-        "standard-toolkit-boundary": 21
+        "standard-toolkit-boundary": 15
       },
       "module": "flighthq.renderWgpu.WgpuRenderTarget",
       "source": "upstream/packages/render-wgpu/src/wgpuRenderTarget.ts",
-      "total": 45
+      "total": 39
     },
     {
       "byReason": {
@@ -5198,12 +5406,11 @@
     },
     {
       "byReason": {
-        "source-any": 10,
-        "standard-toolkit-boundary": 3
+        "standard-toolkit-boundary": 1
       },
       "module": "flighthq.renderWgpu.WgpuTextureResolver",
       "source": "upstream/packages/render-wgpu/src/wgpuTextureResolver.ts",
-      "total": 13
+      "total": 1
     },
     {
       "byReason": {
@@ -5217,21 +5424,36 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 2
+        "standard-toolkit-boundary": 1
+      },
+      "module": "flighthq.requirements.RequirementCollector",
+      "source": "upstream/packages/requirements/src/requirementCollector.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 17
+      },
+      "module": "flighthq.requirements.RequirementSet",
+      "source": "upstream/packages/requirements/src/requirementSet.ts",
+      "total": 17
+    },
+    {
+      "byReason": {
+        "unclassified": 1
       },
       "module": "flighthq.scene2d.DisplayContainer",
       "source": "upstream/packages/scene2d/src/displayContainer.ts",
-      "total": 2
+      "total": 1
     },
     {
       "byReason": {
         "source-any": 2,
-        "source-unknown": 1,
-        "standard-toolkit-boundary": 9
+        "source-unknown": 1
       },
       "module": "flighthq.scene2d.DisplayObject",
       "source": "upstream/packages/scene2d/src/displayObject.ts",
-      "total": 12
+      "total": 3
     },
     {
       "byReason": {
@@ -5243,21 +5465,19 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 5,
-        "unclassified": 1
+        "unclassified": 2
       },
       "module": "flighthq.scene2d.HtmlView",
       "source": "upstream/packages/scene2d/src/htmlView.ts",
-      "total": 6
+      "total": 2
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 5,
         "unclassified": 2
       },
       "module": "flighthq.scene2d.Scene2d",
       "source": "upstream/packages/scene2d/src/scene2d.ts",
-      "total": 7
+      "total": 2
     },
     {
       "byReason": {
@@ -5269,12 +5489,12 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 11,
-        "unclassified": 2
+        "standard-toolkit-boundary": 8,
+        "unclassified": 3
       },
       "module": "flighthq.scene2d.Sprite",
       "source": "upstream/packages/scene2d/src/sprite.ts",
-      "total": 13
+      "total": 11
     },
     {
       "byReason": {
@@ -5302,11 +5522,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 20
+        "standard-toolkit-boundary": 19
       },
       "module": "flighthq.scene2dCanvas.CanvasCache",
       "source": "upstream/packages/scene2d-canvas/src/canvasCache.ts",
-      "total": 20
+      "total": 19
     },
     {
       "byReason": {
@@ -5351,12 +5571,11 @@
     },
     {
       "byReason": {
-        "source-any": 4,
-        "standard-toolkit-boundary": 7
+        "standard-toolkit-boundary": 6
       },
       "module": "flighthq.scene2dCanvas.CanvasMaterialRegistry",
       "source": "upstream/packages/scene2d-canvas/src/canvasMaterialRegistry.ts",
-      "total": 11
+      "total": 6
     },
     {
       "byReason": {
@@ -5385,11 +5604,11 @@
     {
       "byReason": {
         "external-toolkit-boundary": 1,
-        "standard-toolkit-boundary": 17
+        "standard-toolkit-boundary": 7
       },
       "module": "flighthq.scene2dCanvas.CanvasRenderState",
       "source": "upstream/packages/scene2d-canvas/src/canvasRenderState.ts",
-      "total": 18
+      "total": 8
     },
     {
       "byReason": {
@@ -5454,11 +5673,11 @@
       "byReason": {
         "source-never": 12,
         "source-unknown": 77,
-        "standard-toolkit-boundary": 44
+        "standard-toolkit-boundary": 47
       },
       "module": "flighthq.scene2dCanvas.CanvasShapeCommands",
       "source": "upstream/packages/scene2d-canvas/src/canvasShapeCommands.ts",
-      "total": 133
+      "total": 136
     },
     {
       "byReason": {
@@ -5470,11 +5689,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 2
+        "standard-toolkit-boundary": 1
       },
       "module": "flighthq.scene2dCanvas.CanvasShapeRegistry",
       "source": "upstream/packages/scene2d-canvas/src/canvasShapeRegistry.ts",
-      "total": 2
+      "total": 1
     },
     {
       "byReason": {
@@ -5643,11 +5862,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 7
+        "source-any": 2
       },
       "module": "flighthq.scene2dDom.DomRenderState",
       "source": "upstream/packages/scene2d-dom/src/domRenderState.ts",
-      "total": 7
+      "total": 2
     },
     {
       "byReason": {
@@ -5685,11 +5904,11 @@
     {
       "byReason": {
         "external-toolkit-boundary": 1,
-        "standard-toolkit-boundary": 11
+        "standard-toolkit-boundary": 13
       },
       "module": "flighthq.scene2dDom.DomSprite",
       "source": "upstream/packages/scene2d-dom/src/domSprite.ts",
-      "total": 12
+      "total": 14
     },
     {
       "byReason": {
@@ -5727,12 +5946,11 @@
     },
     {
       "byReason": {
-        "source-any": 10,
         "standard-toolkit-boundary": 3
       },
       "module": "flighthq.scene2dDom.DomTextureResolver",
       "source": "upstream/packages/scene2d-dom/src/domTextureResolver.ts",
-      "total": 13
+      "total": 3
     },
     {
       "byReason": {
@@ -5753,13 +5971,13 @@
     {
       "byReason": {
         "source-any": 11,
-        "source-unknown": 75,
-        "standard-toolkit-boundary": 153,
+        "source-unknown": 85,
+        "standard-toolkit-boundary": 183,
         "unclassified": 2
       },
       "module": "flighthq.scene2dFormats.LottieDocument",
       "source": "upstream/packages/scene2d-formats/src/lottieDocument.ts",
-      "total": 241
+      "total": 281
     },
     {
       "byReason": {
@@ -5901,21 +6119,21 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 7
+        "standard-toolkit-boundary": 9
       },
       "module": "flighthq.scene2dFormats.RiveText",
       "source": "upstream/packages/scene2d-formats/src/riveText.ts",
-      "total": 7
+      "total": 9
     },
     {
       "byReason": {
-        "source-any": 8,
-        "standard-toolkit-boundary": 309,
+        "source-any": 10,
+        "standard-toolkit-boundary": 308,
         "unclassified": 2
       },
       "module": "flighthq.scene2dFormats.SvgDocument",
       "source": "upstream/packages/scene2d-formats/src/svgDocument.ts",
-      "total": 319
+      "total": 320
     },
     {
       "byReason": {
@@ -5980,6 +6198,14 @@
       "module": "flighthq.scene2dGl.GlMeshShapeRenderer",
       "source": "upstream/packages/scene2d-gl/src/glMeshShapeRenderer.ts",
       "total": 1
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 3
+      },
+      "module": "flighthq.scene2dGl.GlNode2D",
+      "source": "upstream/packages/scene2d-gl/src/glNode2D.ts",
+      "total": 3
     },
     {
       "byReason": {
@@ -6089,14 +6315,13 @@
     },
     {
       "byReason": {
-        "source-any": 2,
         "source-unknown": 10,
-        "standard-toolkit-boundary": 39,
+        "standard-toolkit-boundary": 42,
         "unclassified": 8
       },
       "module": "flighthq.scene2dGl.GlVelocity",
       "source": "upstream/packages/scene2d-gl/src/glVelocity.ts",
-      "total": 59
+      "total": 60
     },
     {
       "byReason": {
@@ -6151,11 +6376,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 15
+        "standard-toolkit-boundary": 14
       },
       "module": "flighthq.scene2dWgpu.WgpuCache",
       "source": "upstream/packages/scene2d-wgpu/src/wgpuCache.ts",
-      "total": 15
+      "total": 14
     },
     {
       "byReason": {
@@ -6170,21 +6395,19 @@
         "external-toolkit-boundary": 19,
         "source-any": 12,
         "source-undefined": 12,
-        "standard-toolkit-boundary": 10
+        "standard-toolkit-boundary": 9
       },
       "module": "flighthq.scene2dWgpu.WgpuClipContours",
       "source": "upstream/packages/scene2d-wgpu/src/wgpuClipContours.ts",
-      "total": 53
+      "total": 52
     },
     {
       "byReason": {
-        "external-toolkit-boundary": 5,
-        "source-undefined": 5,
         "standard-toolkit-boundary": 42
       },
       "module": "flighthq.scene2dWgpu.WgpuClipRectangle",
       "source": "upstream/packages/scene2d-wgpu/src/wgpuClipRectangle.ts",
-      "total": 52
+      "total": 42
     },
     {
       "byReason": {
@@ -6209,11 +6432,11 @@
         "external-toolkit-boundary": 13,
         "source-any": 2,
         "source-undefined": 6,
-        "standard-toolkit-boundary": 26
+        "standard-toolkit-boundary": 25
       },
       "module": "flighthq.scene2dWgpu.WgpuParticleEmitter2D",
       "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts",
-      "total": 47
+      "total": 46
     },
     {
       "byReason": {
@@ -6260,24 +6483,24 @@
     },
     {
       "byReason": {
-        "external-toolkit-boundary": 3,
-        "source-undefined": 2,
+        "external-toolkit-boundary": 2,
+        "source-undefined": 1,
         "standard-toolkit-boundary": 45,
         "unclassified": 3
       },
       "module": "flighthq.scene2dWgpu.WgpuRichText",
       "source": "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts",
-      "total": 53
+      "total": 51
     },
     {
       "byReason": {
-        "external-toolkit-boundary": 3,
-        "source-undefined": 2,
+        "external-toolkit-boundary": 2,
+        "source-undefined": 1,
         "standard-toolkit-boundary": 12
       },
       "module": "flighthq.scene2dWgpu.WgpuScale9Shape",
       "source": "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts",
-      "total": 17
+      "total": 15
     },
     {
       "byReason": {
@@ -6294,11 +6517,11 @@
         "external-toolkit-boundary": 18,
         "source-any": 12,
         "source-undefined": 10,
-        "standard-toolkit-boundary": 12
+        "standard-toolkit-boundary": 10
       },
       "module": "flighthq.scene2dWgpu.WgpuShapeMesh",
       "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts",
-      "total": 52
+      "total": 50
     },
     {
       "byReason": {
@@ -6346,23 +6569,14 @@
     {
       "byReason": {
         "external-toolkit-boundary": 14,
-        "source-any": 2,
         "source-undefined": 7,
         "source-unknown": 10,
-        "standard-toolkit-boundary": 24,
+        "standard-toolkit-boundary": 21,
         "unclassified": 8
       },
       "module": "flighthq.scene2dWgpu.WgpuVelocity",
       "source": "upstream/packages/scene2d-wgpu/src/wgpuVelocity.ts",
-      "total": 65
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 4
-      },
-      "module": "flighthq.scene3d.Billboard",
-      "source": "upstream/packages/scene3d/src/billboard.ts",
-      "total": 4
+      "total": 60
     },
     {
       "byReason": {
@@ -6374,12 +6588,20 @@
     },
     {
       "byReason": {
+        "standard-toolkit-boundary": 2
+      },
+      "module": "flighthq.scene3d.EnableScene3DGuards",
+      "source": "upstream/packages/scene3d/src/enableScene3DGuards.ts",
+      "total": 2
+    },
+    {
+      "byReason": {
         "source-any": 1,
-        "standard-toolkit-boundary": 3
+        "standard-toolkit-boundary": 1
       },
       "module": "flighthq.scene3d.Mesh",
       "source": "upstream/packages/scene3d/src/mesh.ts",
-      "total": 4
+      "total": 2
     },
     {
       "byReason": {
@@ -6393,12 +6615,11 @@
     {
       "byReason": {
         "source-never": 1,
-        "source-null": 1,
-        "standard-toolkit-boundary": 1
+        "source-null": 1
       },
       "module": "flighthq.scene3d.Scene",
       "source": "upstream/packages/scene3d/src/scene.ts",
-      "total": 3
+      "total": 2
     },
     {
       "byReason": {
@@ -6420,19 +6641,19 @@
       "byReason": {
         "source-null": 3,
         "source-unknown": 4,
-        "standard-toolkit-boundary": 15
+        "standard-toolkit-boundary": 11
       },
       "module": "flighthq.scene3d.SceneDocument",
       "source": "upstream/packages/scene3d/src/sceneDocument.ts",
-      "total": 22
+      "total": 18
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 4
+        "standard-toolkit-boundary": 3
       },
       "module": "flighthq.scene3d.SceneDocumentLights",
       "source": "upstream/packages/scene3d/src/sceneDocumentLights.ts",
-      "total": 4
+      "total": 3
     },
     {
       "byReason": {
@@ -6453,11 +6674,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 4
+        "unclassified": 1
       },
       "module": "flighthq.scene3d.SceneNode",
       "source": "upstream/packages/scene3d/src/sceneNode.ts",
-      "total": 4
+      "total": 1
     },
     {
       "byReason": {
@@ -6486,32 +6707,30 @@
     },
     {
       "byReason": {
-        "source-any": 4,
+        "source-any": 5,
         "source-unknown": 6,
         "standard-toolkit-boundary": 418,
         "unclassified": 41
       },
       "module": "flighthq.scene3dFormats.Awd2Parse",
       "source": "upstream/packages/scene3d-formats/src/awd2Parse.ts",
-      "total": 469
+      "total": 470
     },
     {
       "byReason": {
-        "source-never": 3,
-        "standard-toolkit-boundary": 1
+        "source-never": 3
       },
       "module": "flighthq.scene3dFormats.GltfAnisotropy",
       "source": "upstream/packages/scene3d-formats/src/gltfAnisotropy.ts",
-      "total": 4
+      "total": 3
     },
     {
       "byReason": {
-        "source-never": 3,
-        "standard-toolkit-boundary": 1
+        "source-never": 3
       },
       "module": "flighthq.scene3dFormats.GltfClearcoat",
       "source": "upstream/packages/scene3d-formats/src/gltfClearcoat.ts",
-      "total": 4
+      "total": 3
     },
     {
       "byReason": {
@@ -6524,33 +6743,32 @@
     },
     {
       "byReason": {
-        "source-never": 3,
-        "standard-toolkit-boundary": 1
+        "source-never": 3
       },
       "module": "flighthq.scene3dFormats.GltfIridescence",
       "source": "upstream/packages/scene3d-formats/src/gltfIridescence.ts",
-      "total": 4
+      "total": 3
     },
     {
       "byReason": {
         "source-unknown": 4,
-        "standard-toolkit-boundary": 4
+        "standard-toolkit-boundary": 2
       },
       "module": "flighthq.scene3dFormats.GltfMaterialExtension",
       "source": "upstream/packages/scene3d-formats/src/gltfMaterialExtension.ts",
-      "total": 8
+      "total": 6
     },
     {
       "byReason": {
         "source-any": 1,
-        "source-never": 3,
+        "source-never": 7,
         "source-unknown": 3,
-        "standard-toolkit-boundary": 141,
+        "standard-toolkit-boundary": 142,
         "unclassified": 2
       },
       "module": "flighthq.scene3dFormats.GltfParse",
       "source": "upstream/packages/scene3d-formats/src/gltfParse.ts",
-      "total": 150
+      "total": 155
     },
     {
       "byReason": {
@@ -6563,60 +6781,55 @@
     },
     {
       "byReason": {
-        "source-never": 3,
-        "standard-toolkit-boundary": 1
+        "source-never": 3
       },
       "module": "flighthq.scene3dFormats.GltfSheen",
       "source": "upstream/packages/scene3d-formats/src/gltfSheen.ts",
-      "total": 4
+      "total": 3
     },
     {
       "byReason": {
-        "source-never": 3,
-        "standard-toolkit-boundary": 1
+        "source-never": 3
       },
       "module": "flighthq.scene3dFormats.GltfSpecular",
       "source": "upstream/packages/scene3d-formats/src/gltfSpecular.ts",
-      "total": 4
+      "total": 3
     },
     {
       "byReason": {
         "source-never": 3,
-        "source-unknown": 2,
-        "standard-toolkit-boundary": 1
+        "source-unknown": 2
       },
       "module": "flighthq.scene3dFormats.GltfSpecularGlossiness",
       "source": "upstream/packages/scene3d-formats/src/gltfSpecularGlossiness.ts",
-      "total": 6
+      "total": 5
     },
     {
       "byReason": {
-        "source-never": 9,
-        "standard-toolkit-boundary": 1
+        "source-never": 9
       },
       "module": "flighthq.scene3dFormats.GltfTransmissionVolume",
       "source": "upstream/packages/scene3d-formats/src/gltfTransmissionVolume.ts",
-      "total": 10
+      "total": 9
     },
     {
       "byReason": {
         "source-never": 5,
-        "source-unknown": 2,
-        "standard-toolkit-boundary": 1
+        "source-unknown": 2
       },
       "module": "flighthq.scene3dFormats.GltfUnlit",
       "source": "upstream/packages/scene3d-formats/src/gltfUnlit.ts",
-      "total": 8
+      "total": 7
     },
     {
       "byReason": {
         "source-unknown": 2,
-        "standard-toolkit-boundary": 85,
+        "standard-toolkit-boundary": 84,
         "unclassified": 1
       },
       "module": "flighthq.scene3dFormats.Md2Parse",
       "source": "upstream/packages/scene3d-formats/src/md2Parse.ts",
-      "total": 88
+      "total": 87
     },
     {
       "byReason": {
@@ -6631,11 +6844,11 @@
       "byReason": {
         "source-any": 1,
         "source-unknown": 2,
-        "standard-toolkit-boundary": 127
+        "standard-toolkit-boundary": 128
       },
       "module": "flighthq.scene3dFormats.Md5Parse",
       "source": "upstream/packages/scene3d-formats/src/md5Parse.ts",
-      "total": 130
+      "total": 131
     },
     {
       "byReason": {
@@ -6649,11 +6862,11 @@
       "byReason": {
         "source-any": 2,
         "source-unknown": 2,
-        "standard-toolkit-boundary": 92
+        "standard-toolkit-boundary": 90
       },
       "module": "flighthq.scene3dFormats.ObjParse",
       "source": "upstream/packages/scene3d-formats/src/objParse.ts",
-      "total": 96
+      "total": 94
     },
     {
       "byReason": {
@@ -6667,11 +6880,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 7
+        "standard-toolkit-boundary": 13
       },
       "module": "flighthq.scene3dFormats.Shared",
       "source": "upstream/packages/scene3d-formats/src/shared.ts",
-      "total": 7
+      "total": 13
     },
     {
       "byReason": {
@@ -6694,20 +6907,27 @@
     },
     {
       "byReason": {
-        "source-any": 2,
-        "standard-toolkit-boundary": 23
+        "standard-toolkit-boundary": 19
       },
       "module": "flighthq.scene3dGl.CustomShaderGlMeshMaterialRenderer",
       "source": "upstream/packages/scene3d-gl/src/customShaderGlMeshMaterialRenderer.ts",
-      "total": 25
+      "total": 19
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 8
+        "standard-toolkit-boundary": 1
+      },
+      "module": "flighthq.scene3dGl.DepthGlMeshMaterialRenderer",
+      "source": "upstream/packages/scene3d-gl/src/depthGlMeshMaterialRenderer.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 9
       },
       "module": "flighthq.scene3dGl.DrawGlScene3D",
       "source": "upstream/packages/scene3d-gl/src/drawGlScene3D.ts",
-      "total": 8
+      "total": 9
     },
     {
       "byReason": {
@@ -6719,11 +6939,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 9
+        "standard-toolkit-boundary": 10
       },
       "module": "flighthq.scene3dGl.ExplainGlScene3DCoverage",
       "source": "upstream/packages/scene3d-gl/src/explainGlScene3DCoverage.ts",
-      "total": 9
+      "total": 10
     },
     {
       "byReason": {
@@ -6735,19 +6955,19 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 14
+        "standard-toolkit-boundary": 15
       },
       "module": "flighthq.scene3dGl.GlClassicPrelude",
       "source": "upstream/packages/scene3d-gl/src/glClassicPrelude.ts",
-      "total": 14
+      "total": 15
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 12
+        "standard-toolkit-boundary": 15
       },
       "module": "flighthq.scene3dGl.GlDebugPrelude",
       "source": "upstream/packages/scene3d-gl/src/glDebugPrelude.ts",
-      "total": 12
+      "total": 15
     },
     {
       "byReason": {
@@ -6760,19 +6980,19 @@
     {
       "byReason": {
         "source-any": 2,
-        "standard-toolkit-boundary": 74
+        "standard-toolkit-boundary": 80
       },
       "module": "flighthq.scene3dGl.GlEnvironmentIblBake",
       "source": "upstream/packages/scene3d-gl/src/glEnvironmentIblBake.ts",
-      "total": 76
+      "total": 82
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 28
+        "standard-toolkit-boundary": 31
       },
       "module": "flighthq.scene3dGl.GlEnvironmentSkybox",
       "source": "upstream/packages/scene3d-gl/src/glEnvironmentSkybox.ts",
-      "total": 28
+      "total": 31
     },
     {
       "byReason": {
@@ -6784,27 +7004,27 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 11
+        "standard-toolkit-boundary": 13
       },
       "module": "flighthq.scene3dGl.GlMatcapPrelude",
       "source": "upstream/packages/scene3d-gl/src/glMatcapPrelude.ts",
-      "total": 11
+      "total": 13
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 4
+        "standard-toolkit-boundary": 3
       },
       "module": "flighthq.scene3dGl.GlMeshMaterialRegistry",
       "source": "upstream/packages/scene3d-gl/src/glMeshMaterialRegistry.ts",
-      "total": 4
+      "total": 3
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 38
+        "standard-toolkit-boundary": 43
       },
       "module": "flighthq.scene3dGl.GlMeshProgram",
       "source": "upstream/packages/scene3d-gl/src/glMeshProgram.ts",
-      "total": 38
+      "total": 43
     },
     {
       "byReason": {
@@ -6826,11 +7046,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 35
+        "standard-toolkit-boundary": 34
       },
       "module": "flighthq.scene3dGl.GlPbrExtensionRegistry",
       "source": "upstream/packages/scene3d-gl/src/glPbrExtensionRegistry.ts",
-      "total": 35
+      "total": 34
     },
     {
       "byReason": {
@@ -6842,11 +7062,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 20
+        "standard-toolkit-boundary": 21
       },
       "module": "flighthq.scene3dGl.GlPbrProgramCache",
       "source": "upstream/packages/scene3d-gl/src/glPbrProgramCache.ts",
-      "total": 20
+      "total": 21
     },
     {
       "byReason": {
@@ -6858,13 +7078,13 @@
     },
     {
       "byReason": {
-        "source-any": 6,
+        "source-any": 2,
         "source-unknown": 1,
         "standard-toolkit-boundary": 12
       },
       "module": "flighthq.scene3dGl.GlScene3DRuntime",
       "source": "upstream/packages/scene3d-gl/src/glScene3DRuntime.ts",
-      "total": 19
+      "total": 15
     },
     {
       "byReason": {
@@ -6876,52 +7096,60 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 28
+        "standard-toolkit-boundary": 1
+      },
+      "module": "flighthq.scene3dGl.GlShadedModifierSnippet",
+      "source": "upstream/packages/scene3d-gl/src/glShadedModifierSnippet.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 30
       },
       "module": "flighthq.scene3dGl.GlShadedPrelude",
       "source": "upstream/packages/scene3d-gl/src/glShadedPrelude.ts",
-      "total": 28
+      "total": 30
     },
     {
       "byReason": {
         "source-unknown": 1,
-        "standard-toolkit-boundary": 37
+        "standard-toolkit-boundary": 38
       },
       "module": "flighthq.scene3dGl.GlShadowMap",
       "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts",
-      "total": 38
+      "total": 39
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 9
+        "standard-toolkit-boundary": 10
       },
       "module": "flighthq.scene3dGl.GlToonPrelude",
       "source": "upstream/packages/scene3d-gl/src/glToonPrelude.ts",
-      "total": 9
+      "total": 10
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 12
+        "standard-toolkit-boundary": 13
       },
       "module": "flighthq.scene3dGl.GlUnlitPrelude",
       "source": "upstream/packages/scene3d-gl/src/glUnlitPrelude.ts",
-      "total": 12
+      "total": 13
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 4
+        "standard-toolkit-boundary": 6
       },
       "module": "flighthq.scene3dGl.GlWireframePrelude",
       "source": "upstream/packages/scene3d-gl/src/glWireframePrelude.ts",
-      "total": 4
+      "total": 6
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 20
+        "standard-toolkit-boundary": 17
       },
       "module": "flighthq.scene3dGl.GlWireframeUpload",
       "source": "upstream/packages/scene3d-gl/src/glWireframeUpload.ts",
-      "total": 20
+      "total": 17
     },
     {
       "byReason": {
@@ -6957,11 +7185,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 17
+        "standard-toolkit-boundary": 18
       },
       "module": "flighthq.scene3dGl.ShadedGlMeshMaterialRenderer",
       "source": "upstream/packages/scene3d-gl/src/shadedGlMeshMaterialRenderer.ts",
-      "total": 17
+      "total": 18
     },
     {
       "byReason": {
@@ -7182,13 +7410,13 @@
     {
       "byReason": {
         "external-toolkit-boundary": 9,
-        "source-any": 4,
+        "source-any": 2,
         "source-undefined": 3,
-        "standard-toolkit-boundary": 30
+        "standard-toolkit-boundary": 26
       },
       "module": "flighthq.scene3dWgpu.CustomShaderWgpuMeshMaterialRenderer",
       "source": "upstream/packages/scene3d-wgpu/src/customShaderWgpuMeshMaterialRenderer.ts",
-      "total": 46
+      "total": 40
     },
     {
       "byReason": {
@@ -7227,11 +7455,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 9
+        "standard-toolkit-boundary": 10
       },
       "module": "flighthq.scene3dWgpu.ExplainWgpuScene3DCoverage",
       "source": "upstream/packages/scene3d-wgpu/src/explainWgpuScene3DCoverage.ts",
-      "total": 9
+      "total": 10
     },
     {
       "byReason": {
@@ -7395,33 +7623,33 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 4
+        "standard-toolkit-boundary": 3
       },
       "module": "flighthq.scene3dWgpu.WgpuMeshMaterialRegistry",
       "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshMaterialRegistry.ts",
-      "total": 4
+      "total": 3
     },
     {
       "byReason": {
-        "external-toolkit-boundary": 55,
-        "source-undefined": 14,
+        "external-toolkit-boundary": 56,
+        "source-undefined": 15,
         "source-unknown": 7,
         "standard-toolkit-boundary": 29
       },
       "module": "flighthq.scene3dWgpu.WgpuMeshPipeline",
       "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
-      "total": 105
+      "total": 107
     },
     {
       "byReason": {
-        "external-toolkit-boundary": 6,
-        "source-undefined": 4,
+        "external-toolkit-boundary": 7,
+        "source-undefined": 5,
         "source-unknown": 2,
-        "standard-toolkit-boundary": 7
+        "standard-toolkit-boundary": 10
       },
       "module": "flighthq.scene3dWgpu.WgpuMeshUpload",
       "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshUpload.ts",
-      "total": 19
+      "total": 24
     },
     {
       "byReason": {
@@ -7453,13 +7681,13 @@
     },
     {
       "byReason": {
-        "source-any": 4,
+        "source-any": 2,
         "source-unknown": 4,
         "standard-toolkit-boundary": 2
       },
       "module": "flighthq.scene3dWgpu.WgpuScene3DRuntime",
       "source": "upstream/packages/scene3d-wgpu/src/wgpuScene3DRuntime.ts",
-      "total": 10
+      "total": 8
     },
     {
       "byReason": {
@@ -7471,37 +7699,46 @@
     },
     {
       "byReason": {
+        "standard-toolkit-boundary": 1
+      },
+      "module": "flighthq.scene3dWgpu.WgpuShadedModifierSnippet",
+      "source": "upstream/packages/scene3d-wgpu/src/wgpuShadedModifierSnippet.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
         "external-toolkit-boundary": 7,
         "source-any": 7,
         "source-undefined": 2,
         "source-unknown": 4,
-        "standard-toolkit-boundary": 35
+        "standard-toolkit-boundary": 36
       },
       "module": "flighthq.scene3dWgpu.WgpuShadedPrelude",
       "source": "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts",
-      "total": 55
+      "total": 56
     },
     {
       "byReason": {
-        "external-toolkit-boundary": 16,
-        "source-undefined": 10,
+        "external-toolkit-boundary": 17,
+        "source-undefined": 11,
         "source-unknown": 1,
         "standard-toolkit-boundary": 9
       },
       "module": "flighthq.scene3dWgpu.WgpuShadowMap",
       "source": "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts",
-      "total": 36
+      "total": 38
     },
     {
       "byReason": {
-        "external-toolkit-boundary": 7,
-        "source-undefined": 3,
+        "external-toolkit-boundary": 11,
+        "source-any": 4,
+        "source-undefined": 4,
         "source-unknown": 3,
-        "standard-toolkit-boundary": 7
+        "standard-toolkit-boundary": 15
       },
       "module": "flighthq.scene3dWgpu.WgpuSkinPalette",
       "source": "upstream/packages/scene3d-wgpu/src/wgpuSkinPalette.ts",
-      "total": 20
+      "total": 37
     },
     {
       "byReason": {
@@ -7537,11 +7774,11 @@
       "byReason": {
         "external-toolkit-boundary": 3,
         "source-undefined": 2,
-        "standard-toolkit-boundary": 8
+        "standard-toolkit-boundary": 10
       },
       "module": "flighthq.scene3dWgpu.WgpuWireframeUpload",
       "source": "upstream/packages/scene3d-wgpu/src/wgpuWireframeUpload.ts",
-      "total": 13
+      "total": 15
     },
     {
       "byReason": {
@@ -7565,22 +7802,22 @@
     {
       "byReason": {
         "source-any": 20,
-        "source-unknown": 22,
+        "source-unknown": 25,
         "unclassified": 39
       },
       "module": "flighthq.sdk.Sdk",
       "source": null,
-      "total": 81
+      "total": 84
     },
     {
       "byReason": {
         "source-unknown": 7,
-        "standard-toolkit-boundary": 54,
+        "standard-toolkit-boundary": 50,
         "unclassified": 4
       },
       "module": "flighthq.sensors.Sensors",
       "source": "upstream/packages/sensors/src/sensors.ts",
-      "total": 65
+      "total": 61
     },
     {
       "byReason": {
@@ -7634,11 +7871,12 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 12
+        "standard-toolkit-boundary": 3,
+        "unclassified": 1
       },
       "module": "flighthq.shape.MorphShape",
       "source": "upstream/packages/shape/src/morphShape.ts",
-      "total": 12
+      "total": 4
     },
     {
       "byReason": {
@@ -7658,11 +7896,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 5
+        "unclassified": 1
       },
       "module": "flighthq.shape.Scale9Shape",
       "source": "upstream/packages/shape/src/scale9Shape.ts",
-      "total": 5
+      "total": 1
     },
     {
       "byReason": {
@@ -7674,12 +7912,28 @@
     },
     {
       "byReason": {
-        "source-unknown": 1,
-        "standard-toolkit-boundary": 9
+        "source-unknown": 2,
+        "unclassified": 1
       },
       "module": "flighthq.shape.Shape",
       "source": "upstream/packages/shape/src/shape.ts",
-      "total": 10
+      "total": 3
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 45
+      },
+      "module": "flighthq.shape.ShapeBounds",
+      "source": "upstream/packages/shape/src/shapeBounds.ts",
+      "total": 45
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 4
+      },
+      "module": "flighthq.shape.ShapeBoundsRegistry",
+      "source": "upstream/packages/shape/src/shapeBoundsRegistry.ts",
+      "total": 4
     },
     {
       "byReason": {
@@ -7716,12 +7970,12 @@
     {
       "byReason": {
         "source-never": 2,
-        "source-unknown": 113,
-        "standard-toolkit-boundary": 26
+        "source-unknown": 87,
+        "standard-toolkit-boundary": 40
       },
       "module": "flighthq.shapeFormats.ShapeJson",
       "source": "upstream/packages/shape-formats/src/shapeJson.ts",
-      "total": 141
+      "total": 129
     },
     {
       "byReason": {
@@ -7830,11 +8084,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 34
+        "standard-toolkit-boundary": 29
       },
       "module": "flighthq.skeleton2d.IkConstraint2D",
       "source": "upstream/packages/skeleton2d/src/ikConstraint2D.ts",
-      "total": 34
+      "total": 29
     },
     {
       "byReason": {
@@ -7863,12 +8117,12 @@
     },
     {
       "byReason": {
-        "source-unknown": 2,
-        "standard-toolkit-boundary": 7
+        "source-unknown": 14,
+        "standard-toolkit-boundary": 4
       },
       "module": "flighthq.skeleton2d.Skeleton2dAnimationTarget",
       "source": "upstream/packages/skeleton2d/src/skeleton2dAnimationTarget.ts",
-      "total": 9
+      "total": 18
     },
     {
       "byReason": {
@@ -7916,22 +8170,21 @@
     },
     {
       "byReason": {
-        "source-any": 2,
-        "standard-toolkit-boundary": 12
+        "standard-toolkit-boundary": 8
       },
       "module": "flighthq.skeleton2dFormats.SkeletonDetect",
       "source": "upstream/packages/skeleton2d-formats/src/skeletonDetect.ts",
-      "total": 14
+      "total": 8
     },
     {
       "byReason": {
         "source-unknown": 3,
-        "standard-toolkit-boundary": 57,
+        "standard-toolkit-boundary": 64,
         "unclassified": 2
       },
       "module": "flighthq.skeleton2dFormats.SpineBinaryParse",
       "source": "upstream/packages/skeleton2d-formats/src/spineBinaryParse.ts",
-      "total": 62
+      "total": 69
     },
     {
       "byReason": {
@@ -7980,11 +8233,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 8
+        "standard-toolkit-boundary": 9
       },
       "module": "flighthq.skeleton3d.Skeleton3d",
       "source": "upstream/packages/skeleton3d/src/skeleton3d.ts",
-      "total": 8
+      "total": 9
     },
     {
       "byReason": {
@@ -8078,54 +8331,38 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 5,
+        "standard-toolkit-boundary": 1,
         "unclassified": 1
       },
       "module": "flighthq.spritesheet.Spritesheet",
       "source": "upstream/packages/spritesheet/src/spritesheet.ts",
-      "total": 6
+      "total": 2
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 18,
+        "standard-toolkit-boundary": 4,
         "unclassified": 1
       },
       "module": "flighthq.spritesheet.SpritesheetAnimation",
       "source": "upstream/packages/spritesheet/src/spritesheetAnimation.ts",
-      "total": 19
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 26
-      },
-      "module": "flighthq.spritesheet.SpritesheetData",
-      "source": "upstream/packages/spritesheet/src/spritesheetData.ts",
-      "total": 26
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 6
-      },
-      "module": "flighthq.spritesheet.SpritesheetFrame",
-      "source": "upstream/packages/spritesheet/src/spritesheetFrame.ts",
-      "total": 6
+      "total": 5
     },
     {
       "byReason": {
         "source-unknown": 2,
-        "standard-toolkit-boundary": 15
+        "standard-toolkit-boundary": 10
       },
       "module": "flighthq.spritesheet.SpritesheetFrom",
       "source": "upstream/packages/spritesheet/src/spritesheetFrom.ts",
-      "total": 17
+      "total": 12
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 32
+        "standard-toolkit-boundary": 22
       },
       "module": "flighthq.spritesheet.SpritesheetPlayer",
       "source": "upstream/packages/spritesheet/src/spritesheetPlayer.ts",
-      "total": 32
+      "total": 22
     },
     {
       "byReason": {
@@ -8137,87 +8374,87 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 23
+        "standard-toolkit-boundary": 17
       },
       "module": "flighthq.spritesheetFormats.AsepriteParse",
       "source": "upstream/packages/spritesheet-formats/src/asepriteParse.ts",
-      "total": 23
+      "total": 17
     },
     {
       "byReason": {
         "source-any": 1,
-        "standard-toolkit-boundary": 26
+        "source-unknown": 10,
+        "standard-toolkit-boundary": 11
       },
       "module": "flighthq.spritesheetFormats.AsepriteSerialize",
       "source": "upstream/packages/spritesheet-formats/src/asepriteSerialize.ts",
-      "total": 27
+      "total": 22
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 42
+        "standard-toolkit-boundary": 40
       },
       "module": "flighthq.spritesheetFormats.CocosPlistParse",
       "source": "upstream/packages/spritesheet-formats/src/cocosPlistParse.ts",
-      "total": 42
+      "total": 40
     },
     {
       "byReason": {
         "source-any": 1,
-        "standard-toolkit-boundary": 36
+        "standard-toolkit-boundary": 34
       },
       "module": "flighthq.spritesheetFormats.CocosPlistSerialize",
       "source": "upstream/packages/spritesheet-formats/src/cocosPlistSerialize.ts",
-      "total": 37
+      "total": 35
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 32
+        "standard-toolkit-boundary": 28
       },
       "module": "flighthq.spritesheetFormats.LibgdxAtlasParse",
       "source": "upstream/packages/spritesheet-formats/src/libgdxAtlasParse.ts",
-      "total": 32
+      "total": 28
     },
     {
       "byReason": {
-        "source-any": 2,
-        "standard-toolkit-boundary": 21
+        "standard-toolkit-boundary": 15
       },
       "module": "flighthq.spritesheetFormats.SpritesheetDetect",
       "source": "upstream/packages/spritesheet-formats/src/spritesheetDetect.ts",
-      "total": 23
+      "total": 15
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 34,
+        "standard-toolkit-boundary": 30,
         "unclassified": 2
       },
       "module": "flighthq.spritesheetFormats.StarlingParse",
       "source": "upstream/packages/spritesheet-formats/src/starlingParse.ts",
-      "total": 36
+      "total": 32
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 14
+        "standard-toolkit-boundary": 13
       },
       "module": "flighthq.spritesheetFormats.StarlingSerialize",
       "source": "upstream/packages/spritesheet-formats/src/starlingSerialize.ts",
-      "total": 14
+      "total": 13
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 14
+        "standard-toolkit-boundary": 8
       },
       "module": "flighthq.spritesheetFormats.TexturePackerParse",
       "source": "upstream/packages/spritesheet-formats/src/texturePackerParse.ts",
-      "total": 14
+      "total": 8
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 21
+        "standard-toolkit-boundary": 10
       },
       "module": "flighthq.spritesheetFormats.TexturePackerSerialize",
       "source": "upstream/packages/spritesheet-formats/src/texturePackerSerialize.ts",
-      "total": 21
+      "total": 10
     },
     {
       "byReason": {
@@ -8256,29 +8493,29 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 7
+        "standard-toolkit-boundary": 8
       },
       "module": "flighthq.swf.SwfBitmap",
       "source": "upstream/packages/swf/src/swfBitmap.ts",
-      "total": 7
+      "total": 8
     },
     {
       "byReason": {
         "source-unknown": 6,
-        "standard-toolkit-boundary": 228,
+        "standard-toolkit-boundary": 236,
         "unclassified": 1
       },
       "module": "flighthq.swf.SwfDocument",
       "source": "upstream/packages/swf/src/swfDocument.ts",
-      "total": 235
+      "total": 243
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 21
+        "standard-toolkit-boundary": 12
       },
       "module": "flighthq.swf.SwfFilter",
       "source": "upstream/packages/swf/src/swfFilter.ts",
-      "total": 21
+      "total": 12
     },
     {
       "byReason": {
@@ -8291,11 +8528,19 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 16
+        "standard-toolkit-boundary": 1
+      },
+      "module": "flighthq.swf.SwfImageDecoder",
+      "source": "upstream/packages/swf/src/swfImageDecoder.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 13
       },
       "module": "flighthq.swf.SwfMorphShape",
       "source": "upstream/packages/swf/src/swfMorphShape.ts",
-      "total": 16
+      "total": 13
     },
     {
       "byReason": {
@@ -8317,30 +8562,29 @@
       "byReason": {
         "source-never": 1,
         "source-null": 14,
-        "standard-toolkit-boundary": 26
+        "standard-toolkit-boundary": 27
       },
       "module": "flighthq.swf.SwfText",
       "source": "upstream/packages/swf/src/swfText.ts",
-      "total": 41
+      "total": 42
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 8,
-        "unclassified": 1
+        "unclassified": 2
       },
       "module": "flighthq.text.NativeText",
       "source": "upstream/packages/text/src/nativeText.ts",
-      "total": 9
+      "total": 2
     },
     {
       "byReason": {
         "source-unknown": 2,
-        "standard-toolkit-boundary": 71,
-        "unclassified": 1
+        "standard-toolkit-boundary": 50,
+        "unclassified": 2
       },
       "module": "flighthq.text.RichText",
       "source": "upstream/packages/text/src/richText.ts",
-      "total": 74
+      "total": 54
     },
     {
       "byReason": {
@@ -8352,12 +8596,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 8,
-        "unclassified": 1
+        "unclassified": 2
       },
       "module": "flighthq.text.TextLabel",
       "source": "upstream/packages/text/src/textLabel.ts",
-      "total": 9
+      "total": 2
     },
     {
       "byReason": {
@@ -8475,14 +8718,6 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 4
-      },
-      "module": "flighthq.textMarkup.MarkupClassStyles",
-      "source": "upstream/packages/text-markup/src/markupClassStyles.ts",
-      "total": 4
-    },
-    {
-      "byReason": {
         "standard-toolkit-boundary": 2
       },
       "module": "flighthq.textMarkup.MarkupNamedColors",
@@ -8492,21 +8727,21 @@
     {
       "byReason": {
         "source-any": 2,
-        "standard-toolkit-boundary": 46
+        "standard-toolkit-boundary": 34
       },
       "module": "flighthq.textMarkup.MarkupTagRegistry",
       "source": "upstream/packages/text-markup/src/markupTagRegistry.ts",
-      "total": 48
+      "total": 36
     },
     {
       "byReason": {
         "source-any": 1,
-        "standard-toolkit-boundary": 98,
+        "standard-toolkit-boundary": 96,
         "unclassified": 2
       },
       "module": "flighthq.textMarkup.TextMarkup",
       "source": "upstream/packages/text-markup/src/textMarkup.ts",
-      "total": 101
+      "total": 99
     },
     {
       "byReason": {
@@ -8571,21 +8806,13 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 10
-      },
-      "module": "flighthq.texture.Sampler",
-      "source": "upstream/packages/texture/src/sampler.ts",
-      "total": 10
-    },
-    {
-      "byReason": {
         "source-any": 2,
         "source-unknown": 3,
-        "standard-toolkit-boundary": 28
+        "standard-toolkit-boundary": 27
       },
       "module": "flighthq.texture.Texture",
       "source": "upstream/packages/texture/src/texture.ts",
-      "total": 33
+      "total": 32
     },
     {
       "byReason": {
@@ -8597,77 +8824,61 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 2
+        "standard-toolkit-boundary": 5
       },
-      "module": "flighthq.textureatlas.TextureAtlas",
-      "source": "upstream/packages/textureatlas/src/textureAtlas.ts",
-      "total": 2
+      "module": "flighthq.textureatlas.TextureAtlasGrid",
+      "source": "upstream/packages/textureatlas/src/textureAtlasGrid.ts",
+      "total": 5
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 4
+        "standard-toolkit-boundary": 17
       },
-      "module": "flighthq.textureatlas.TextureAtlasFrom",
-      "source": "upstream/packages/textureatlas/src/textureAtlasFrom.ts",
-      "total": 4
+      "module": "flighthq.textureatlas.TextureAtlasRegion",
+      "source": "upstream/packages/textureatlas/src/textureAtlasRegion.ts",
+      "total": 17
     },
     {
       "byReason": {
         "standard-toolkit-boundary": 7
       },
-      "module": "flighthq.textureatlas.TextureAtlasGrid",
-      "source": "upstream/packages/textureatlas/src/textureAtlasGrid.ts",
+      "module": "flighthq.textureatlasFormats.TextureAtlasAsepriteParse",
+      "source": "upstream/packages/textureatlas-formats/src/textureAtlasAsepriteParse.ts",
       "total": 7
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 46
-      },
-      "module": "flighthq.textureatlas.TextureAtlasRegion",
-      "source": "upstream/packages/textureatlas/src/textureAtlasRegion.ts",
-      "total": 46
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 8
-      },
-      "module": "flighthq.textureatlasFormats.TextureAtlasAsepriteParse",
-      "source": "upstream/packages/textureatlas-formats/src/textureAtlasAsepriteParse.ts",
-      "total": 8
-    },
-    {
-      "byReason": {
-        "source-any": 4,
+        "source-any": 2,
         "source-unknown": 32,
-        "standard-toolkit-boundary": 30
+        "standard-toolkit-boundary": 25
       },
       "module": "flighthq.textureatlasFormats.TextureAtlasDetect",
       "source": "upstream/packages/textureatlas-formats/src/textureAtlasDetect.ts",
-      "total": 66
+      "total": 59
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 31
+        "standard-toolkit-boundary": 30
       },
       "module": "flighthq.textureatlasFormats.TextureAtlasLibgdxParse",
       "source": "upstream/packages/textureatlas-formats/src/textureAtlasLibgdxParse.ts",
-      "total": 31
+      "total": 30
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 13
+        "standard-toolkit-boundary": 12
       },
       "module": "flighthq.textureatlasFormats.TextureAtlasPackerParse",
       "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerParse.ts",
-      "total": 13
+      "total": 12
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 3
+        "standard-toolkit-boundary": 2
       },
       "module": "flighthq.textureatlasFormats.TextureAtlasStarlingParse",
       "source": "upstream/packages/textureatlas-formats/src/textureAtlasStarlingParse.ts",
-      "total": 3
+      "total": 2
     },
     {
       "byReason": {
@@ -8740,12 +8951,12 @@
     {
       "byReason": {
         "source-any": 2,
-        "standard-toolkit-boundary": 24,
-        "unclassified": 1
+        "standard-toolkit-boundary": 15,
+        "unclassified": 2
       },
       "module": "flighthq.tilemap.Tilemap",
       "source": "upstream/packages/tilemap/src/tilemap.ts",
-      "total": 27
+      "total": 19
     },
     {
       "byReason": {
@@ -8775,12 +8986,12 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 12,
+        "standard-toolkit-boundary": 7,
         "unclassified": 1
       },
       "module": "flighthq.tilemapFormats.TiledProject",
       "source": "upstream/packages/tilemap-formats/src/tiledProject.ts",
-      "total": 13
+      "total": 8
     },
     {
       "byReason": {
@@ -8802,11 +9013,11 @@
     {
       "byReason": {
         "source-any": 4,
-        "standard-toolkit-boundary": 22
+        "standard-toolkit-boundary": 14
       },
       "module": "flighthq.timeline.Timeline",
       "source": "upstream/packages/timeline/src/timeline.ts",
-      "total": 26
+      "total": 18
     },
     {
       "byReason": {
@@ -8975,11 +9186,11 @@
     },
     {
       "byReason": {
-        "unclassified": 1
+        "unclassified": 2
       },
       "module": "flighthq.types.Compression",
       "source": "upstream/packages/types/src/Compression.ts",
-      "total": 1
+      "total": 2
     },
     {
       "byReason": {
@@ -9145,6 +9356,14 @@
     },
     {
       "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.MeshGeometry",
+      "source": "upstream/packages/types/src/MeshGeometry.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
         "standard-toolkit-boundary": 1
       },
       "module": "flighthq.types.MethodsOf",
@@ -9177,19 +9396,11 @@
     },
     {
       "byReason": {
-        "source-unknown": 1
+        "source-unknown": 3
       },
       "module": "flighthq.types.Notification",
       "source": "upstream/packages/types/src/Notification.ts",
-      "total": 1
-    },
-    {
-      "byReason": {
-        "source-never": 1
-      },
-      "module": "flighthq.types.PartialNode",
-      "source": "upstream/packages/types/src/PartialNode.ts",
-      "total": 1
+      "total": 3
     },
     {
       "byReason": {
@@ -9209,6 +9420,14 @@
     },
     {
       "byReason": {
+        "unclassified": 3
+      },
+      "module": "flighthq.types.RegistryTable",
+      "source": "upstream/packages/types/src/RegistryTable.ts",
+      "total": 3
+    },
+    {
+      "byReason": {
         "unclassified": 1
       },
       "module": "flighthq.types.RenderCache",
@@ -9221,6 +9440,14 @@
       },
       "module": "flighthq.types.RenderTarget",
       "source": "upstream/packages/types/src/RenderTarget.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.RequirementFacet",
+      "source": "upstream/packages/types/src/RequirementFacet.ts",
       "total": 1
     },
     {
@@ -9257,11 +9484,11 @@
     },
     {
       "byReason": {
-        "unclassified": 1
+        "unclassified": 6
       },
       "module": "flighthq.types.SceneCoverageEntry",
       "source": "upstream/packages/types/src/SceneCoverageEntry.ts",
-      "total": 1
+      "total": 6
     },
     {
       "byReason": {
@@ -9537,17 +9764,17 @@
   "schemaVersion": 1,
   "summary": {
     "byReason": {
-      "external-toolkit-boundary": 606,
-      "source-any": 965,
-      "source-never": 116,
-      "source-null": 74,
-      "source-undefined": 264,
-      "source-unknown": 3833,
-      "standard-toolkit-boundary": 17935,
-      "unclassified": 365
+      "external-toolkit-boundary": 618,
+      "source-any": 907,
+      "source-never": 120,
+      "source-null": 83,
+      "source-undefined": 267,
+      "source-unknown": 3868,
+      "standard-toolkit-boundary": 18231,
+      "unclassified": 407
     },
     "checkerKnownUnrepresentable": 0,
-    "modules": 1119,
-    "total": 24158
+    "modules": 1149,
+    "total": 24501
   }
 }

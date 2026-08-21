@@ -19,6 +19,7 @@ import flighthq.types.GlMeshProgram;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlScene3DRuntime;
 import flighthq.types.Material;
+import flighthq.types.Matrix4;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
@@ -34,6 +35,7 @@ class DepthGlMeshMaterialRenderer {
     program = (cast ensureGlDebugProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = { hasNormalMap: false, mode: 'depth' }; __callArgument1; })) : GlDebugProgram);
     beginGlMeshDraw(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = program; __callArgument3; }), (cast ((cast !_Runtime.strictEquals(depth, null) : Bool) && (cast (cast depth : { var doubleSided:Bool; }).doubleSided : Bool)) : Bool));
     setGlMeshViewProjection(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast program : GlDebugProgram).locViewProjection, ({ final __callArgument5:Dynamic = camera; __callArgument5; }));
+    flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv((cast state : GlRenderState).gl, (cast program : GlDebugProgram).locView, false, (cast camera.view : { var m:flighthq._internal._Float32Array; }).m);
     if ((cast _Runtime.strictEquals(depth, null) : Bool)) {
       bindGlDebugRange(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = program; __callArgument7; }), (cast 0.0 : Float), (cast 1.0 : Float));
       return;

@@ -4,7 +4,6 @@ package flighthq.node;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.adjustments.ColorAdjustmentResolution.COLOR_ADJUSTMENT_CHANNEL_MIXING;
-import flighthq.adjustments.ColorAdjustmentResolution.COLOR_ADJUSTMENT_NONE;
 import flighthq.adjustments.ColorAdjustmentResolution.resolveColorAdjustmentsColorMatrix;
 import flighthq.adjustments.ColorAdjustmentResolution.resolveColorAdjustmentsColorScaleBias;
 import flighthq.adjustments.TintAdjustment.createTintAdjustment;
@@ -59,12 +58,6 @@ class NodeColorAdjustment {
     }
     out = _Runtime.coalesce(runtime.resolvedColorScaleBias, function():Dynamic return cast (cast createColorScaleBias(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ColorScaleBias));
     status = (cast resolveColorAdjustmentsColorScaleBias(({ final __callArgument3:Dynamic = adjustments; __callArgument3; }), ({ final __callArgument4:Dynamic = out; __callArgument4; })) : Float);
-    if ((cast _Runtime.strictEquals(status, COLOR_ADJUSTMENT_NONE) : Bool)) {
-      (runtime.resolvedColorScaleBias = cast (null : Null<ColorScaleBias>));
-      (runtime.resolvedColorMatrix = cast (null : Null<Array<Float>>));
-      (runtime.colorAdjustmentsUnsupported = cast (false : Bool));
-      return;
-    }
     (runtime.resolvedColorScaleBias = cast (out : Null<ColorScaleBias>));
     (runtime.resolvedColorMatrix = cast (((cast _Runtime.strictEquals(status, COLOR_ADJUSTMENT_CHANNEL_MIXING) : Bool) ? (cast (cast resolveColorAdjustmentsColorMatrix(({ final __callArgument5:Dynamic = adjustments; __callArgument5; })) : Null<Array<Float>>) : Dynamic) : (cast null : Dynamic)) : Null<Array<Float>>));
     (runtime.colorAdjustmentsUnsupported = cast (((cast _Runtime.strictEquals(status, COLOR_ADJUSTMENT_CHANNEL_MIXING) : Bool) && (cast _Runtime.strictEquals(runtime.resolvedColorMatrix, null) : Bool)) : Bool));

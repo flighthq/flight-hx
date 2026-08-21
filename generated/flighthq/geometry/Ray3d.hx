@@ -141,12 +141,14 @@ class Ray3d {
     var dz:Float = cast _Runtime.UNDEFINED;
     var tMin:Float = cast _Runtime.UNDEFINED;
     var tMax:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast ((cast ((cast (cast aabb.min : { var x:Float; }).x : Float) > (cast (cast aabb.max : { var x:Float; }).x : Float)) : Bool) || (cast ((cast (cast aabb.min : { var y:Float; }).y : Float) > (cast (cast aabb.max : { var y:Float; }).y : Float)) : Bool)) : Bool) || (cast ((cast (cast aabb.min : { var z:Float; }).z : Float) > (cast (cast aabb.max : { var z:Float; }).z : Float)) : Bool)) : Bool)) { return cast -1.0; }
     ox = (cast ray.origin : { var x:Float; }).x;
     oy = (cast ray.origin : { var y:Float; }).y;
     oz = (cast ray.origin : { var z:Float; }).z;
     dx = (cast ray.direction : { var x:Float; }).x;
     dy = (cast ray.direction : { var y:Float; }).y;
     dz = (cast ray.direction : { var z:Float; }).z;
+    if ((cast _Runtime.strictEquals((((dx * dx) + (dy * dy)) + (dz * dz)), 0.0) : Bool)) { return cast -1.0; }
     tMin = 0.0;
     tMax = HxMath.POSITIVE_INFINITY;
     if ((cast !_Runtime.strictEquals(dx, 0.0) : Bool)) {
@@ -199,10 +201,21 @@ class Ray3d {
   }
 
   public static function intersectRay3DPlane(ray:Ray3DLike, plane:PlaneLike):Float {
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
+    var normalLengthSq:Float = cast _Runtime.UNDEFINED;
+    var directionLengthSq:Float = cast _Runtime.UNDEFINED;
     var denom:Float = cast _Runtime.UNDEFINED;
     var t:Float = cast _Runtime.UNDEFINED;
-    denom = (((plane.a * (cast ray.direction : { var x:Float; }).x) + (plane.b * (cast ray.direction : { var y:Float; }).y)) + (plane.c * (cast ray.direction : { var z:Float; }).z));
-    if ((cast ((cast HxMath.abs(denom) : Float) < (cast 1e-10 : Float)) : Bool)) { return cast -1.0; }
+    dx = (cast ray.direction : { var x:Float; }).x;
+    dy = (cast ray.direction : { var y:Float; }).y;
+    dz = (cast ray.direction : { var z:Float; }).z;
+    normalLengthSq = (((plane.a * plane.a) + (plane.b * plane.b)) + (plane.c * plane.c));
+    directionLengthSq = (((dx * dx) + (dy * dy)) + (dz * dz));
+    if ((cast ((cast _Runtime.strictEquals(normalLengthSq, 0.0) : Bool) || (cast _Runtime.strictEquals(directionLengthSq, 0.0) : Bool)) : Bool)) { return cast -1.0; }
+    denom = (((plane.a * dx) + (plane.b * dy)) + (plane.c * dz));
+    if ((cast ((cast HxMath.abs(denom) : Float) <= (cast _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(1e-10, HxMath.sqrt(normalLengthSq)), HxMath.sqrt(directionLengthSq)) : Float)) : Bool)) { return cast -1.0; }
     t = (-((((plane.a * (cast ray.origin : { var x:Float; }).x) + (plane.b * (cast ray.origin : { var y:Float; }).y)) + (plane.c * (cast ray.origin : { var z:Float; }).z)) + plane.d) / denom);
     return cast ((cast ((cast t : Float) >= (cast 0.0 : Float)) : Bool) ? (cast t : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
@@ -253,6 +266,11 @@ class Ray3d {
     var dx:Float = cast _Runtime.UNDEFINED;
     var dy:Float = cast _Runtime.UNDEFINED;
     var dz:Float = cast _Runtime.UNDEFINED;
+    var nx:Float = cast _Runtime.UNDEFINED;
+    var ny:Float = cast _Runtime.UNDEFINED;
+    var nz:Float = cast _Runtime.UNDEFINED;
+    var normalLengthSq:Float = cast _Runtime.UNDEFINED;
+    var directionLengthSq:Float = cast _Runtime.UNDEFINED;
     var hx:Float = cast _Runtime.UNDEFINED;
     var hy:Float = cast _Runtime.UNDEFINED;
     var hz:Float = cast _Runtime.UNDEFINED;
@@ -276,11 +294,17 @@ class Ray3d {
     dx = (cast ray.direction : { var x:Float; }).x;
     dy = (cast ray.direction : { var y:Float; }).y;
     dz = (cast ray.direction : { var z:Float; }).z;
+    nx = ((e1y * e2z) - (e1z * e2y));
+    ny = ((e1z * e2x) - (e1x * e2z));
+    nz = ((e1x * e2y) - (e1y * e2x));
+    normalLengthSq = (((nx * nx) + (ny * ny)) + (nz * nz));
+    directionLengthSq = (((dx * dx) + (dy * dy)) + (dz * dz));
+    if ((cast ((cast _Runtime.strictEquals(normalLengthSq, 0.0) : Bool) || (cast _Runtime.strictEquals(directionLengthSq, 0.0) : Bool)) : Bool)) { return cast -1.0; }
     hx = ((dy * e2z) - (dz * e2y));
     hy = ((dz * e2x) - (dx * e2z));
     hz = ((dx * e2y) - (dy * e2x));
     det = (((e1x * hx) + (e1y * hy)) + (e1z * hz));
-    if ((cast ((cast HxMath.abs(det) : Float) < (cast 1e-10 : Float)) : Bool)) { return cast -1.0; }
+    if ((cast ((cast HxMath.abs(det) : Float) <= (cast _Runtime.multiplyNumbers(_Runtime.multiplyNumbers(1e-10, HxMath.sqrt(normalLengthSq)), HxMath.sqrt(directionLengthSq)) : Float)) : Bool)) { return cast -1.0; }
     invDet = (1.0 / det);
     sx = ((cast ray.origin : { var x:Float; }).x - a.x);
     sy = ((cast ray.origin : { var y:Float; }).y - a.y);

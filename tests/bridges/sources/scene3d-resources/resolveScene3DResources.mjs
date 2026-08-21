@@ -5,7 +5,7 @@ import * as __dependency0 from '@flighthq/image/contract';
 const api = compiled.flighthq.scene3dResources.ResolveScene3DResources;
 function __syncDependencies() {
   compiled.flighthq.image.ImageResourceReference.createImageResourceFailure = __dependency0.createImageResourceFailure;
-  compiled.flighthq.image.ImageResourceFrom.loadImageResourceFromBytes = __dependency0.loadImageResourceFromBytes;
+  compiled.flighthq.image.ImageResourceReference.resolveImageResourceReference = __dependency0.resolveImageResourceReference;
 }
 __syncDependencies();
 

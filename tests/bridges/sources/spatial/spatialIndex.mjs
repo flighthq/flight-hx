@@ -5,12 +5,12 @@ const api = compiled.flighthq.spatial.SpatialIndex;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const clearSpatialIndex = api.clearSpatialIndex;
-export const createSpatialIndex = api.createSpatialIndex;
-export const insertSpatialObject = api.insertSpatialObject;
-export const querySpatialPairs = api.querySpatialPairs;
-export const querySpatialPoint = api.querySpatialPoint;
-export const querySpatialRay = api.querySpatialRay;
-export const querySpatialRegion = api.querySpatialRegion;
-export const removeSpatialObject = api.removeSpatialObject;
-export const updateSpatialObject = api.updateSpatialObject;
+export const clearSpatialIndex2D = api.clearSpatialIndex2D;
+export const createSpatialIndex2D = api.createSpatialIndex2D;
+export const insertSpatialObject2D = api.insertSpatialObject2D;
+export const querySpatialPairs2D = api.querySpatialPairs2D;
+export const querySpatialPoint2D = api.querySpatialPoint2D;
+export const querySpatialRay2D = api.querySpatialRay2D;
+export const querySpatialRegion2D = api.querySpatialRegion2D;
+export const removeSpatialObject2D = api.removeSpatialObject2D;
+export const updateSpatialObject2D = api.updateSpatialObject2D;

@@ -6,6 +6,7 @@ export const approxEqualRelative = compiled.flighthq.math.Math.approxEqualRelati
 export const approxZero = compiled.flighthq.math.Math.approxZero;
 export const ceilPowerOfTwo = compiled.flighthq.math.Math.ceilPowerOfTwo;
 export const ceilTo = compiled.flighthq.math.Math.ceilTo;
+export const CIRCLE_KAPPA = compiled.flighthq.math.Math.CIRCLE_KAPPA;
 export const clamp = compiled.flighthq.math.Math.clamp;
 export const createRandomSource = compiled.flighthq.math.Math.createRandomSource;
 export const createRandomSourceFromHash = compiled.flighthq.math.Math.createRandomSourceFromHash;

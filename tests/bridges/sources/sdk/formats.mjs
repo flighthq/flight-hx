@@ -4,6 +4,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from '@flighthq/bitmapfont-formats';
+export * from '@flighthq/font-formats';
 export * from '@flighthq/importdiagnostics';
 export * from '@flighthq/particles-formats';
 export * from '@flighthq/path-formats';

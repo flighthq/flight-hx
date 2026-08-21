@@ -3,22 +3,22 @@ package flighthq.collision;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.collision.CollisionShapeValidation.getCollisionPolygonValidationStatus;
-import flighthq.types.Collision.CollisionAabb;
-import flighthq.types.Collision.CollisionCircle;
-import flighthq.types.Collision.CollisionObb;
-import flighthq.types.Collision.CollisionPolygon;
-import flighthq.types.Collision.CollisionSegment;
+import flighthq.collision.CollisionShapeValidation.getCollisionPolygonValidationStatus2D;
+import flighthq.types.Collision.CollisionAabb2D;
+import flighthq.types.Collision.CollisionCircle2D;
+import flighthq.types.Collision.CollisionObb2D;
+import flighthq.types.Collision.CollisionPolygon2D;
+import flighthq.types.Collision.CollisionSegment2D;
 
 class SegmentCollision {
   public static final RELATIVE_EPSILON__segmentCollision:Float = 1e-9;
 
-  public static function testSegmentAabbCollision(a:CollisionSegment, b:CollisionAabb):Bool {
+  public static function testSegmentAabbCollision(a:CollisionSegment2D, b:CollisionAabb2D):Bool {
     return cast (cast SegmentCollision.isSegmentOverlappingBox__segmentCollision((cast _Runtime.field(a, 'x0') : Float), (cast _Runtime.field(a, 'y0') : Float), (cast _Runtime.field(a, 'x1') : Float), (cast _Runtime.field(a, 'y1') : Float), (cast _Runtime.field(b, 'minX') : Float), (cast _Runtime.field(b, 'minY') : Float), (cast _Runtime.field(b, 'maxX') : Float), (cast _Runtime.field(b, 'maxY') : Float)) : Bool);
     return cast null;
   }
 
-  public static function testSegmentCircleCollision(a:CollisionSegment, b:CollisionCircle):Bool {
+  public static function testSegmentCircleCollision(a:CollisionSegment2D, b:CollisionCircle2D):Bool {
     var x0:Float = cast _Runtime.UNDEFINED;
     var y0:Float = cast _Runtime.UNDEFINED;
     var dx:Float = cast _Runtime.UNDEFINED;
@@ -47,7 +47,7 @@ class SegmentCollision {
     return cast null;
   }
 
-  public static function testSegmentObbCollision(a:CollisionSegment, b:CollisionObb):Bool {
+  public static function testSegmentObbCollision(a:CollisionSegment2D, b:CollisionObb2D):Bool {
     var cos:Float = cast _Runtime.UNDEFINED;
     var sin:Float = cast _Runtime.UNDEFINED;
     var d0x:Float = cast _Runtime.UNDEFINED;
@@ -72,11 +72,11 @@ class SegmentCollision {
     return cast null;
   }
 
-  public static function testSegmentPolygonCollision(a:CollisionSegment, b:CollisionPolygon):Bool {
+  public static function testSegmentPolygonCollision(a:CollisionSegment2D, b:CollisionPolygon2D):Bool {
     var points:Array<Float> = cast _Runtime.UNDEFINED;
     var pn:Float = cast _Runtime.UNDEFINED;
     points = _Runtime.field(b, 'points');
-    if ((cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus(({ final __callArgument0:Dynamic = points; __callArgument0; })) : Null<String>), null) : Bool)) { return cast false; }
+    if ((cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus2D(({ final __callArgument0:Dynamic = points; __callArgument0; })) : Null<String>), null) : Bool)) { return cast false; }
     pn = (_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1);
     if ((cast (cast SegmentCollision.isPointInConvexPolygon__segmentCollision((cast _Runtime.field(a, 'x0') : Float), (cast _Runtime.field(a, 'y0') : Float), ({ final __callArgument1:Dynamic = points; __callArgument1; }), (cast pn : Float)) : Bool) : Bool)) { return cast true; }
     if ((cast (cast SegmentCollision.isPointInConvexPolygon__segmentCollision((cast _Runtime.field(a, 'x1') : Float), (cast _Runtime.field(a, 'y1') : Float), ({ final __callArgument2:Dynamic = points; __callArgument2; }), (cast pn : Float)) : Bool) : Bool)) { return cast true; }
@@ -94,7 +94,7 @@ class SegmentCollision {
     return cast null;
   }
 
-  public static function testSegmentSegmentCollision(a:CollisionSegment, b:CollisionSegment):Bool {
+  public static function testSegmentSegmentCollision(a:CollisionSegment2D, b:CollisionSegment2D):Bool {
     return cast (cast SegmentCollision.isSegmentsIntersecting__segmentCollision((cast _Runtime.field(a, 'x0') : Float), (cast _Runtime.field(a, 'y0') : Float), (cast _Runtime.field(a, 'x1') : Float), (cast _Runtime.field(a, 'y1') : Float), (cast _Runtime.field(b, 'x0') : Float), (cast _Runtime.field(b, 'y0') : Float), (cast _Runtime.field(b, 'x1') : Float), (cast _Runtime.field(b, 'y1') : Float)) : Bool);
     return cast null;
   }

@@ -13,7 +13,15 @@ typedef GlRenderEffectRunner = GlRenderEffectContext->RenderEffect->Void;
 
 typedef GlRenderEffectApplicationStatus = String;
 
-typedef GlRenderEffectApplicationExplanation = { var registeredCount:Float; var requestedCount:Float; var status:GlRenderEffectApplicationStatus; var unregisteredKinds:Array<String>; };
+typedef GlRenderEffectApplicationExplanation = { var registeredCount:Float; var requestedCount:Float; var status:GlRenderEffectApplicationStatus; var unregisteredKinds:Array<String>; var unresolvedIndexes:Array<Float>; };
+
+typedef GlRenderEffectResolver = GlRenderState->RenderEffect->Bool;
+
+typedef GlRenderEffectRegistration = { @:optional var isResolvable:GlRenderEffectResolver; var runner:GlRenderEffectRunner; };
+
+typedef GlCustomShaderSourceGuard = GlRenderState->String->String->String->Void;
+
+typedef GlRenderEffectPipelineSkipGuard = GlRenderState->String->Void;
 
 typedef GlRenderEffectApplicationGuard = GlRenderState->GlRenderEffectApplicationExplanation->Void;
 

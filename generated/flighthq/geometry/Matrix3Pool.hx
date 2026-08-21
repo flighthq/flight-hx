@@ -3,10 +3,14 @@ package flighthq.geometry;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.geometry.GeometryPoolGuards.geometryPoolReleaseGuard;
 import flighthq.geometry.Matrix3.createMatrix3;
 import flighthq.geometry.Matrix3.setMatrix3Identity;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Matrix3;
 import flighthq.types.Matrix3.Matrix3Like;
+import flighthq.types.Types.EntityRuntimeKey;
+import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class Matrix3Pool {
   public static function acquireIdentityMatrix3():Matrix3 {
@@ -34,6 +38,8 @@ class Matrix3Pool {
 
   public static function releaseMatrix3(m:Matrix3):Void {
     if ((cast !_Runtime.truthy(m) : Bool)) { return; }
+    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(Matrix3Pool.pool__matrix3Pool, m) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseMatrix3' : String)); }
+    _Runtime.setIndex(m, EntityRuntimeKey, _Runtime.field(_Runtime, 'UNDEFINED'));
     _Runtime.callProperty(Matrix3Pool.pool__matrix3Pool, 'push', cast ([m] : Array<Dynamic>));
   }
 

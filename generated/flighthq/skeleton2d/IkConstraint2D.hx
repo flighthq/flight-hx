@@ -115,13 +115,10 @@ class IkConstraint2D {
         ((cast parent : Bone2D).scaleX *= scale);
         ((cast parent : Bone2D).scaleY *= scale);
       }
-    } else { if ((cast ((cast reach : Float) <= (cast HxMath.abs((parentLength - childLength)) : Float)) : Bool)) {
-      (bendAngle = cast (HxMath.PI : Dynamic));
-      (reach = cast (HxMath.abs((parentLength - childLength)) : Dynamic));
     } else {
       var cosJoint:Float = ((((parentLength * parentLength) + (childLength * childLength)) - (reach * reach)) / ((2.0 * parentLength) * childLength));
       (bendAngle = cast (_Runtime.subtractNumbers(HxMath.PI, HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, cosJoint)))) : Dynamic));
-    } }
+    }
     cosParent = ((((parentLength * parentLength) + (reach * reach)) - (childLength * childLength)) / ((2.0 * parentLength) * reach));
     parentOffset = ((cast ((cast reach : Float) >= (cast span : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, cosParent))) : Dynamic));
     direction = ((cast ik.bendPositive : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic));

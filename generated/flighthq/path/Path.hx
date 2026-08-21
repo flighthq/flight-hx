@@ -3,6 +3,7 @@ package flighthq.path;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.math.Constants.CIRCLE_KAPPA;
 import flighthq.path.CleanPath as Facade_Path_flighthq_path_CleanPath;
 import flighthq.path.ContainsPathPoint as Facade_Path_flighthq_path_ContainsPathPoint;
 import flighthq.path.CopyPath as Facade_Path_flighthq_path_CopyPath;
@@ -99,7 +100,7 @@ class Path {
     var cosEnd:Float = cast _Runtime.UNDEFINED;
     var sinEnd:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast radius : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
-    k = (radius * Path.KAPPA__path);
+    k = (radius * CIRCLE_KAPPA);
     cosStart = HxMath.cos(startAngle);
     sinStart = HxMath.sin(startAngle);
     cosEnd = HxMath.cos(endAngle);
@@ -238,8 +239,8 @@ class Path {
   public static function appendPathEllipse(path:flighthq.types.Path, cx:Float, cy:Float, radiusX:Float, radiusY:Float):Void {
     var kx:Float = cast _Runtime.UNDEFINED;
     var ky:Float = cast _Runtime.UNDEFINED;
-    kx = (radiusX * Path.KAPPA__path);
-    ky = (radiusY * Path.KAPPA__path);
+    kx = (radiusX * CIRCLE_KAPPA);
+    ky = (radiusY * CIRCLE_KAPPA);
     appendPathMoveTo(({ final __callArgument9:Dynamic = path; __callArgument9; }), (cast (cx + radiusX) : Float), (cast cy : Float));
     appendPathCubicCurveTo(({ final __callArgument10:Dynamic = path; __callArgument10; }), (cast (cx + radiusX) : Float), (cast (cy - ky) : Float), (cast (cx + kx) : Float), (cast (cy - radiusY) : Float), (cast cx : Float), (cast (cy - radiusY) : Float));
     appendPathCubicCurveTo(({ final __callArgument11:Dynamic = path; __callArgument11; }), (cast (cx - kx) : Float), (cast (cy - radiusY) : Float), (cast (cx - radiusX) : Float), (cast (cy - ky) : Float), (cast (cx - radiusX) : Float), (cast cy : Float));
@@ -456,8 +457,6 @@ class Path {
     return cast Facade_Path_flighthq_path_GetPathSegmentAtParameter.getQuadraticBezierTangent(x0, y0, cx, cy, x1, y1, t, out);
     return cast null;
   }
-
-  public static final KAPPA__path:Float = 0.5522847498308936;
 
   public static function normalizeCornerRadii__path(radius:flighthq._internal._Union2<Float, Array<Float>>, width:Float, height:Float):Array<Float> {
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;

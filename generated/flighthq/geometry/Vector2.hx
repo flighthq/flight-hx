@@ -11,8 +11,16 @@ import flighthq.types.Vector3.Vector3Like;
 
 class Vector2 {
   public static function addVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
-    (out.x = cast ((a.x + b.x) : Float));
-    (out.y = cast ((a.y + b.y) : Float));
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    ax = a.x;
+    ay = a.y;
+    bx = b.x;
+    by = b.y;
+    (out.x = cast ((ax + bx) : Float));
+    (out.y = cast ((ay + by) : Float));
   }
 
   public static function clampVector2(out:Vector2Like, value:Vector2Like, min:Vector2Like, max:Vector2Like):Void {
@@ -38,8 +46,12 @@ class Vector2 {
   }
 
   public static function copyVector2(out:Vector2Like, source:Vector2Like):Void {
-    (out.x = cast (source.x : Float));
-    (out.y = cast (source.y : Float));
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    x = source.x;
+    y = source.y;
+    (out.x = cast (x : Float));
+    (out.y = cast (y : Float));
   }
 
   public static function createVector2(?x:Float, ?y:Float):flighthq.types.Vector2 {
@@ -120,23 +132,55 @@ class Vector2 {
   }
 
   public static function interpolateVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like, t:Float):Void {
-    (out.x = cast ((a.x + (t * (b.x - a.x))) : Float));
-    (out.y = cast ((a.y + (t * (b.y - a.y))) : Float));
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    ax = a.x;
+    ay = a.y;
+    bx = b.x;
+    by = b.y;
+    (out.x = cast ((ax + (t * (bx - ax))) : Float));
+    (out.y = cast ((ay + (t * (by - ay))) : Float));
   }
 
   public static function maxVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
-    (out.x = cast (((cast ((cast a.x : Float) > (cast b.x : Float)) : Bool) ? (cast a.x : Dynamic) : (cast b.x : Dynamic)) : Float));
-    (out.y = cast (((cast ((cast a.y : Float) > (cast b.y : Float)) : Bool) ? (cast a.y : Dynamic) : (cast b.y : Dynamic)) : Float));
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    ax = a.x;
+    ay = a.y;
+    bx = b.x;
+    by = b.y;
+    (out.x = cast (((cast ((cast ax : Float) > (cast bx : Float)) : Bool) ? (cast ax : Dynamic) : (cast bx : Dynamic)) : Float));
+    (out.y = cast (((cast ((cast ay : Float) > (cast by : Float)) : Bool) ? (cast ay : Dynamic) : (cast by : Dynamic)) : Float));
   }
 
   public static function minVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
-    (out.x = cast (((cast ((cast a.x : Float) < (cast b.x : Float)) : Bool) ? (cast a.x : Dynamic) : (cast b.x : Dynamic)) : Float));
-    (out.y = cast (((cast ((cast a.y : Float) < (cast b.y : Float)) : Bool) ? (cast a.y : Dynamic) : (cast b.y : Dynamic)) : Float));
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    ax = a.x;
+    ay = a.y;
+    bx = b.x;
+    by = b.y;
+    (out.x = cast (((cast ((cast ax : Float) < (cast bx : Float)) : Bool) ? (cast ax : Dynamic) : (cast bx : Dynamic)) : Float));
+    (out.y = cast (((cast ((cast ay : Float) < (cast by : Float)) : Bool) ? (cast ay : Dynamic) : (cast by : Dynamic)) : Float));
   }
 
   public static function multiplyVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
-    (out.x = cast ((a.x * b.x) : Float));
-    (out.y = cast ((a.y * b.y) : Float));
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    ax = a.x;
+    ay = a.y;
+    bx = b.x;
+    by = b.y;
+    (out.x = cast ((ax * bx) : Float));
+    (out.y = cast ((ay * by) : Float));
   }
 
   public static function nearEqualsVector2(a:Vector2Like, b:Vector2Like, tolerance:Float = 0.000001):Bool {
@@ -145,16 +189,24 @@ class Vector2 {
   }
 
   public static function negateVector2(out:Vector2Like, source:Vector2Like):Void {
-    (out.x = cast ((source.x * -1.0) : Float));
-    (out.y = cast ((source.y * -1.0) : Float));
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    x = source.x;
+    y = source.y;
+    (out.x = cast ((x * -1.0) : Float));
+    (out.y = cast ((y * -1.0) : Float));
   }
 
   public static function normalizeVector2(out:Vector2Like, source:Vector2Like):Float {
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
     var l:Float = cast _Runtime.UNDEFINED;
-    l = (cast getVector2Length(({ final __callArgument8:Dynamic = source; __callArgument8; })) : Float);
+    x = source.x;
+    y = source.y;
+    l = HxMath.sqrt((HxMath.pow(x, 2.0) + HxMath.pow(y, 2.0)));
     if ((cast !_Runtime.strictEquals(l, 0.0) : Bool)) {
-      (out.x = cast ((source.x / l) : Float));
-      (out.y = cast ((source.y / l) : Float));
+      (out.x = cast ((x / l) : Float));
+      (out.y = cast ((y / l) : Float));
     } else {
       (out.x = cast (0.0 : Float));
       (out.y = cast (0.0 : Float));
@@ -164,8 +216,12 @@ class Vector2 {
   }
 
   public static function offsetVector2(out:Vector2Like, source:Vector2Like, dx:Float, dy:Float):Void {
-    (out.x = cast ((source.x + dx) : Float));
-    (out.y = cast ((source.y + dy) : Float));
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    x = source.x;
+    y = source.y;
+    (out.x = cast ((x + dx) : Float));
+    (out.y = cast ((y + dy) : Float));
   }
 
   public static function reflectVector2(out:Vector2Like, incident:Vector2Like, normal:Vector2Like):Void {
@@ -184,20 +240,28 @@ class Vector2 {
   }
 
   public static function scaleVector2(out:Vector2Like, source:Vector2Like, scalar:Float):Void {
-    (out.x = cast ((source.x * scalar) : Float));
-    (out.y = cast ((source.y * scalar) : Float));
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    x = source.x;
+    y = source.y;
+    (out.x = cast ((x * scalar) : Float));
+    (out.y = cast ((y * scalar) : Float));
   }
 
   public static function scaleVector2ToLength(out:Vector2Like, source:Vector2Like, length:Float):Void {
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
     var currentLength:Float = cast _Runtime.UNDEFINED;
-    currentLength = (cast getVector2Length(({ final __callArgument9:Dynamic = source; __callArgument9; })) : Float);
+    x = source.x;
+    y = source.y;
+    currentLength = HxMath.sqrt((HxMath.pow(x, 2.0) + HxMath.pow(y, 2.0)));
     if ((cast _Runtime.strictEquals(currentLength, 0.0) : Bool)) {
       (out.x = cast (0.0 : Float));
       (out.y = cast (0.0 : Float));
     } else {
       var scale:Float = (length / currentLength);
-      (out.x = cast ((source.x * scale) : Float));
-      (out.y = cast ((source.y * scale) : Float));
+      (out.x = cast ((x * scale) : Float));
+      (out.y = cast ((y * scale) : Float));
     }
   }
 
@@ -222,8 +286,16 @@ class Vector2 {
   }
 
   public static function subtractVector2(out:Vector2Like, source:Vector2Like, other:Vector2Like):Void {
-    (out.x = cast ((source.x - other.x) : Float));
-    (out.y = cast ((source.y - other.y) : Float));
+    var sx:Float = cast _Runtime.UNDEFINED;
+    var sy:Float = cast _Runtime.UNDEFINED;
+    var ox:Float = cast _Runtime.UNDEFINED;
+    var oy:Float = cast _Runtime.UNDEFINED;
+    sx = source.x;
+    sy = source.y;
+    ox = other.x;
+    oy = other.y;
+    (out.x = cast ((sx - ox) : Float));
+    (out.y = cast ((sy - oy) : Float));
   }
 
   public static function writeVector2ToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:Vector2Like):Void {
@@ -231,7 +303,7 @@ class Vector2 {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float), (cast source.y : Float));
   }
 
-  public static final VECTOR2_X_AXIS:flighthq.types.Vector2 = (cast createVector2(({ final __callArgument10:Dynamic = 1.0; __callArgument10; }), ({ final __callArgument11:Dynamic = 0.0; __callArgument11; })) : flighthq.types.Vector2);
+  public static final VECTOR2_X_AXIS:flighthq.types.Vector2 = (cast createVector2(({ final __callArgument8:Dynamic = 1.0; __callArgument8; }), ({ final __callArgument9:Dynamic = 0.0; __callArgument9; })) : flighthq.types.Vector2);
 
-  public static final VECTOR2_Y_AXIS:flighthq.types.Vector2 = (cast createVector2(({ final __callArgument12:Dynamic = 0.0; __callArgument12; }), ({ final __callArgument13:Dynamic = 1.0; __callArgument13; })) : flighthq.types.Vector2);
+  public static final VECTOR2_Y_AXIS:flighthq.types.Vector2 = (cast createVector2(({ final __callArgument10:Dynamic = 0.0; __callArgument10; }), ({ final __callArgument11:Dynamic = 1.0; __callArgument11; })) : flighthq.types.Vector2);
 }

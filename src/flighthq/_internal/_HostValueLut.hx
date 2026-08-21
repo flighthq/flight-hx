@@ -49,6 +49,7 @@ class _HostValueLut {
     'RegExp',
     'ResizeObserver',
     'Set',
+    'SharedArrayBuffer',
     'TextDecoder',
     'TextEncoder',
     'URL',

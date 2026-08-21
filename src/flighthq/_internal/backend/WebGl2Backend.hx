@@ -93,14 +93,18 @@ class WebGl2Backend {
   public static inline final BLEND_EQUATION_RGB:Int = 32777;
   public static inline final BLEND_SRC_ALPHA:Int = 32971;
   public static inline final BLEND_SRC_RGB:Int = 32969;
+  public static inline final CCW:Int = 2305;
   public static inline final CLAMP_TO_EDGE:Int = 33071;
   public static inline final COLOR:Int = 6144;
   public static inline final COLOR_ATTACHMENT0:Int = 36064;
   public static inline final COLOR_BUFFER_BIT:Int = 16384;
+  public static inline final COLOR_CLEAR_VALUE:Int = 3106;
+  public static inline final COLOR_WRITEMASK:Int = 3107;
   public static inline final COMPILE_STATUS:Int = 35713;
   public static inline final CULL_FACE:Int = 2884;
   public static inline final CULL_FACE_MODE:Int = 2885;
   public static inline final CURRENT_PROGRAM:Int = 35725;
+  public static inline final CW:Int = 2304;
   public static inline final DECR_WRAP:Int = 34056;
   public static inline final DEPTH24_STENCIL8:Int = 35056;
   public static inline final DEPTH_BUFFER_BIT:Int = 256;
@@ -126,6 +130,7 @@ class WebGl2Backend {
   public static inline final FRAMEBUFFER_BINDING:Int = 36006;
   public static inline final FRAMEBUFFER_COMPLETE:Int = 36053;
   public static inline final FRONT:Int = 1028;
+  public static inline final FRONT_FACE:Int = 2886;
   public static inline final FUNC_ADD:Int = 32774;
   public static inline final FUNC_REVERSE_SUBTRACT:Int = 32779;
   public static inline final HALF_FLOAT:Int = 5131;
@@ -167,6 +172,13 @@ class WebGl2Backend {
   public static inline final SRC_ALPHA:Int = 770;
   public static inline final STATIC_DRAW:Int = 35044;
   public static inline final STENCIL_BUFFER_BIT:Int = 1024;
+  public static inline final STENCIL_BACK_FAIL:Int = 34817;
+  public static inline final STENCIL_BACK_FUNC:Int = 34816;
+  public static inline final STENCIL_BACK_PASS_DEPTH_FAIL:Int = 34818;
+  public static inline final STENCIL_BACK_PASS_DEPTH_PASS:Int = 34819;
+  public static inline final STENCIL_BACK_REF:Int = 36003;
+  public static inline final STENCIL_BACK_VALUE_MASK:Int = 36004;
+  public static inline final STENCIL_BACK_WRITEMASK:Int = 36005;
   public static inline final STENCIL_FAIL:Int = 2964;
   public static inline final STENCIL_FUNC:Int = 2962;
   public static inline final STENCIL_PASS_DEPTH_FAIL:Int = 2965;
@@ -549,6 +561,10 @@ class WebGl2Backend {
     gl.framebufferTexture2D(Std.int(target), Std.int(attachment), Std.int(textarget), texture, Std.int(level));
   }
 
+  public static inline function frontFace(gl:GlContext, mode:Float):Void {
+    gl.frontFace(Std.int(mode));
+  }
+
   public static inline function generateMipmap(gl:GlContext, target:Float):Void {
     gl.generateMipmap(Std.int(target));
   }
@@ -694,8 +710,16 @@ class WebGl2Backend {
     gl.stencilFunc(Std.int(func), Std.int(ref), Std.int(mask));
   }
 
+  public static inline function stencilFuncSeparate(gl:GlContext, face:Float, func:Float, ref:Float, mask:Float):Void {
+    gl.stencilFuncSeparate(Std.int(face), Std.int(func), Std.int(ref), Std.int(mask));
+  }
+
   public static inline function stencilMask(gl:GlContext, mask:Float):Void {
     gl.stencilMask(Std.int(mask));
+  }
+
+  public static inline function stencilMaskSeparate(gl:GlContext, face:Float, mask:Float):Void {
+    gl.stencilMaskSeparate(Std.int(face), Std.int(mask));
   }
 
   public static inline function stencilOp(gl:GlContext, fail:Float, zfail:Float, zpass:Float):Void {

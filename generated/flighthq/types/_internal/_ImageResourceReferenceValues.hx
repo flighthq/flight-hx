@@ -3,7 +3,9 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.AlphaType;
 import flighthq.types.Image;
+import flighthq.types.ImageBitmapComposition;
 import flighthq.types.ResourceResolutionState;
 import flighthq.types.Texture;
 

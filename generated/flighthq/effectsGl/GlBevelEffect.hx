@@ -3,6 +3,8 @@ package flighthq.effectsGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.color.PackColor.getColorAlpha;
+import flighthq.color.PackColor.getColorRgb;
 import flighthq.effectsGl.GlEffectBlitShader.applyGlEffectBlitPass;
 import flighthq.effectsGl.GlEffectBlitShader.applyGlEffectErasePass;
 import flighthq.effectsGl.GlEffectBoxBlur.applyGlEffectBoxBlur;
@@ -42,8 +44,10 @@ class GlBevelEffect {
     var distance:Float = cast _Runtime.UNDEFINED;
     var offsetX:Float = cast _Runtime.UNDEFINED;
     var offsetY:Float = cast _Runtime.UNDEFINED;
+    var shadowPacked:Float = cast _Runtime.UNDEFINED;
     var shadowColor:Float = cast _Runtime.UNDEFINED;
     var shadowAlpha:Float = cast _Runtime.UNDEFINED;
+    var highlightPacked:Float = cast _Runtime.UNDEFINED;
     var highlightColor:Float = cast _Runtime.UNDEFINED;
     var highlightAlpha:Float = cast _Runtime.UNDEFINED;
     var strength:Float = cast _Runtime.UNDEFINED;
@@ -64,10 +68,12 @@ class GlBevelEffect {
     distance = _Runtime.coalesce(effect.distance, function():Dynamic return cast 4.0);
     offsetX = HxMath.round(_Runtime.multiplyNumbers(HxMath.cos(angle), distance));
     offsetY = HxMath.round(_Runtime.multiplyNumbers(HxMath.sin(angle), distance));
-    shadowColor = _Runtime.coalesce(effect.shadowColor, function():Dynamic return cast 0.0);
-    shadowAlpha = _Runtime.coalesce(effect.shadowAlpha, function():Dynamic return cast 1.0);
-    highlightColor = _Runtime.coalesce(effect.highlightColor, function():Dynamic return cast 16777215.0);
-    highlightAlpha = _Runtime.coalesce(effect.highlightAlpha, function():Dynamic return cast 1.0);
+    shadowPacked = _Runtime.coalesce(effect.shadowColor, function():Dynamic return cast 255.0);
+    shadowColor = (cast getColorRgb((cast shadowPacked : Float)) : Float);
+    shadowAlpha = _Runtime.multiplyNumbers(_Runtime.coalesce(effect.shadowAlpha, function():Dynamic return cast 1.0), (cast getColorAlpha((cast shadowPacked : Float)) : Float));
+    highlightPacked = _Runtime.coalesce(effect.highlightColor, function():Dynamic return cast 4294967295.0);
+    highlightColor = (cast getColorRgb((cast highlightPacked : Float)) : Float);
+    highlightAlpha = _Runtime.multiplyNumbers(_Runtime.coalesce(effect.highlightAlpha, function():Dynamic return cast 1.0), (cast getColorAlpha((cast highlightPacked : Float)) : Float));
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(effect.quality, function():Dynamic return cast 1.0)));
     sourceMode = _Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw');
@@ -76,7 +82,7 @@ class GlBevelEffect {
     tinted = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
     blurred = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
     blurTemp = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
-    applyGlEffectTintPass(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = src; __callArgument10; }), ({ final __callArgument11:Dynamic = tinted; __callArgument11; }), (cast 16777215.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
+    applyGlEffectTintPass(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = src; __callArgument10; }), ({ final __callArgument11:Dynamic = tinted; __callArgument11; }), (cast 4294967295.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
     applyGlEffectBoxBlur(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = tinted; __callArgument13; }), ({ final __callArgument14:Dynamic = blurred; __callArgument14; }), ({ final __callArgument15:Dynamic = blurTemp; __callArgument15; }), ({ final __callArgument16:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 4.0), passes: quality }; __callArgument16; }));
     clearGlRenderTarget(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = dst; __callArgument18; }));
     if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) { applyGlEffectBlitPass(({ final __callArgument19:Dynamic = state; __callArgument19; }), ({ final __callArgument20:Dynamic = src; __callArgument20; }), ({ final __callArgument21:Dynamic = dst; __callArgument21; })); }
@@ -92,7 +98,7 @@ class GlBevelEffect {
   });
 
   public static function registerGlBevelEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument36:Dynamic = state; __callArgument36; }), (cast 'BevelEffect' : String), ({ final __callArgument37:Dynamic = defaultGlBevelEffectRunner; __callArgument37; }));
+    registerGlRenderEffect(({ final __callArgument36:Dynamic = state; __callArgument36; }), (cast 'BevelEffect' : String), ({ final __callArgument37:Dynamic = defaultGlBevelEffectRunner; __callArgument37; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static final BEVEL_COMPOSITE_FRAGMENT_SRC__glBevelEffect:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nuniform vec4 u_highlight;\nuniform vec4 u_shadow;\nuniform vec2 u_offset;\nuniform float u_intensity;\nuniform float u_clipMode;\nout vec4 fragColor;\n\nfloat sampleField(vec2 uv) {\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) return 0.0;\n  return texture(u_texture0, uv).a;\n}\n\nvoid main() {\n  float lit = sampleField(v_texCoord - u_offset);\n  float shade = sampleField(v_texCoord + u_offset);\n  float gradient = lit - shade;\n  float srcA = texture(u_texture1, v_texCoord).a;\n  bool isHighlight = gradient >= 0.0;\n  vec3 color = isHighlight ? u_highlight.rgb : u_shadow.rgb;\n  float colorAlpha = isHighlight ? u_highlight.a : u_shadow.a;\n  float clip = 1.0;\n  if (u_clipMode == 1.0) { clip = srcA; }\n  else if (u_clipMode == 2.0) { clip = 1.0 - srcA; }\n  float edge = min(1.0, abs(gradient) * u_intensity);\n  float a = edge * colorAlpha * clip;\n  fragColor = vec4(color * a, a);\n}';

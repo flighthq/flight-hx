@@ -40,6 +40,7 @@ class SvgPathData {
     readNumber = (cast function readNumber():Null<Float> {
       var start:Float = cast _Runtime.UNDEFINED;
       var sawDigit:Bool = cast _Runtime.UNDEFINED;
+      var value:Float = cast _Runtime.UNDEFINED;
       skipSeparators();
       start = pos;
       if ((cast ((cast ((cast pos : Float) < (cast length : Float)) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(_Runtime.getIndex(d, pos), '+'), function():Dynamic return cast _Runtime.strictEquals(_Runtime.getIndex(d, pos), '-')) : Bool)) : Bool)) { pos++; }
@@ -70,7 +71,8 @@ class SvgPathData {
         }
         if ((cast !(cast expDigit : Bool) : Bool)) { (pos = cast (expStart : Dynamic)); }
       }
-      return cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([_Runtime.slice(d, start, pos)] : Array<Dynamic>));
+      value = _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'parseFloat', cast ([_Runtime.slice(d, start, pos)] : Array<Dynamic>));
+      return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) ? (cast value : Dynamic) : (cast null : Dynamic));
       return cast _Runtime.UNDEFINED;
     });
     readFlag = (cast function readFlag():Null<Float> {

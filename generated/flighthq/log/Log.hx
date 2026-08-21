@@ -29,7 +29,6 @@ typedef MemoryLogSinkState__log = { var buf:Array<LogEntry>; var head:Float; };
 class Log {
   public static function _applyRedaction__log(data:flighthq._internal._Record<String, flighthq._internal._Any>):flighthq._internal._Record<String, flighthq._internal._Any> {
     var result:{  } = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.field(Log._redactionPaths__log, 'length'), 0.0) : Bool)) { return cast data; }
     result = (cast _Runtime.mergeObjects([data]));
     for (path in _Runtime.iterable(Log._redactionPaths__log)) {
       var parts:Array<String> = _Runtime.callProperty(path, 'split', cast (['.'] : Array<Dynamic>));
@@ -140,7 +139,6 @@ class Log {
   public static function _redactPath__log(obj:flighthq._internal._Record<String, flighthq._internal._Any>, parts:Array<String>, idx:Float):Void {
     var key:String = cast _Runtime.UNDEFINED;
     var next:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    if ((cast ((cast idx : Float) >= (cast _Runtime.field(parts, 'length') : Float)) : Bool)) { return; }
     key = flighthq._internal._StaticIndex.readArray(parts, idx);
     if ((cast !(cast _Runtime.hasField(obj, key) : Bool) : Bool)) { return; }
     if ((cast _Runtime.strictEquals(idx, _Runtime.subtractNumbers(_Runtime.field(parts, 'length'), 1.0)) : Bool)) {
@@ -210,6 +208,10 @@ class Log {
     (Log._groupDepth__log = cast (0.0 : Dynamic));
   }
 
+  public static function clearLogOnceKeys():Void {
+    ((cast Log._onceKeys__log : flighthq._internal._Set<String>).clear());
+  }
+
   public static function clearLogRedactionPaths():Void {
     _Runtime.setLength(Log._redactionPaths__log, 0.0);
   }
@@ -241,19 +243,18 @@ class Log {
     size = _Runtime.coalesce((cast options : { @:optional var size:Null<Float>; @:optional var intervalMs:Null<Float>; }).size, function():Dynamic return cast 100.0);
     intervalMs = _Runtime.coalesce((cast options : { @:optional var size:Null<Float>; @:optional var intervalMs:Null<Float>; }).intervalMs, function():Dynamic return cast 1000.0);
     flush = (cast function():Void {
-      var state:Null<BufferedLogSinkState__log> = cast _Runtime.UNDEFINED;
+      var state:BufferedLogSinkState__log = cast _Runtime.UNDEFINED;
       var batch:Array<LogEntry> = cast _Runtime.UNDEFINED;
       state = ((cast Log._bufferedSinkStates__log : flighthq._internal._WeakMap<BufferedLogSink, BufferedLogSinkState__log>).get(handle));
-      if ((cast ((cast !_Runtime.truthy(state) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast state : BufferedLogSinkState__log).buf, 'length'), 0.0) : Bool)) : Bool)) { return; }
+      if ((cast _Runtime.strictEquals(_Runtime.field((cast state : BufferedLogSinkState__log).buf, 'length'), 0.0) : Bool)) { return; }
       batch = _Runtime.splice((cast state : BufferedLogSinkState__log).buf, Std.int(0.0), Std.int((cast state : BufferedLogSinkState__log).buf.length - Std.int(0.0)), []);
       for (entry in _Runtime.iterable(batch)) {
         target(({ final __callArgument19:Dynamic = entry; __callArgument19; }));
       }
     });
     sink = function(entry:LogEntry):Void {
-      var state:Null<BufferedLogSinkState__log> = cast _Runtime.UNDEFINED;
+      var state:BufferedLogSinkState__log = cast _Runtime.UNDEFINED;
       state = ((cast Log._bufferedSinkStates__log : flighthq._internal._WeakMap<BufferedLogSink, BufferedLogSinkState__log>).get(handle));
-      if ((cast !_Runtime.truthy(state) : Bool)) { return; }
       _Runtime.callProperty((cast state : BufferedLogSinkState__log).buf, 'push', cast ([{ level: entry.level, channel: entry.channel, data: entry.data }] : Array<Dynamic>));
       if ((cast ((cast _Runtime.field((cast state : BufferedLogSinkState__log).buf, 'length') : Float) >= (cast size : Float)) : Bool)) { flush(); }
     };

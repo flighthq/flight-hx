@@ -35,7 +35,7 @@ class GlSsaoEffect {
   });
 
   public static function registerGlSsaoEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'SsaoEffect' : String), ({ final __callArgument6:Dynamic = defaultGlSsaoEffectRunner; __callArgument6; }));
+    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'SsaoEffect' : String), ({ final __callArgument6:Dynamic = defaultGlSsaoEffectRunner; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static final SSAO_FRAGMENT_SRC__glSsaoEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_resolution;\nuniform float u_radius;\nuniform float u_intensity;\nout vec4 o_color;\nfloat luma(vec3 c) {\n  return dot(c, vec3(0.299, 0.587, 0.114));\n}\nvoid main() {\n  vec2 texel = (1.0 / u_resolution) * max(u_radius, 1.0);\n  vec4 center = texture(u_texture0, v_texCoord);\n  float lc = luma(center.rgb);\n  float variation = 0.0;\n  variation += abs(lc - luma(texture(u_texture0, v_texCoord + vec2(-1.0, 0.0) * texel).rgb));\n  variation += abs(lc - luma(texture(u_texture0, v_texCoord + vec2(1.0, 0.0) * texel).rgb));\n  variation += abs(lc - luma(texture(u_texture0, v_texCoord + vec2(0.0, -1.0) * texel).rgb));\n  variation += abs(lc - luma(texture(u_texture0, v_texCoord + vec2(0.0, 1.0) * texel).rgb));\n  variation *= 0.25;\n  float occlusion = clamp(variation * u_intensity, 0.0, 1.0);\n  o_color = vec4(center.rgb * (1.0 - occlusion), center.a);\n}';

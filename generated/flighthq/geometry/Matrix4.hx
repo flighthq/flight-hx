@@ -18,7 +18,7 @@ import flighthq.types.Vector4.Vector4Like;
 
 class Matrix4 {
   public static function appendMatrix4(out:Matrix4Like, source:Matrix4Like, other:Matrix4Like):Void {
-    multiplyMatrix4(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument2:Dynamic = other; __callArgument2; }));
+    multiplyMatrix4(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = other; __callArgument1; }), ({ final __callArgument2:Dynamic = source; __callArgument2; }));
   }
 
   public static function appendRotationMatrix4(out:Matrix4Like, source:Matrix4Like, radians:Float, axis:Vector4Like, ?pivotPoint:Vector4Like):Void {
@@ -31,8 +31,8 @@ class Matrix4 {
       var t2:flighthq.types.Matrix4 = (cast acquireIdentityMatrix4() : flighthq.types.Matrix4);
       appendTranslationMatrix4(({ final __callArgument4:Dynamic = t1; __callArgument4; }), ({ final __callArgument5:Dynamic = t1; __callArgument5; }), (cast -_Runtime.field(p, 'x') : Float), (cast -_Runtime.field(p, 'y') : Float), (cast -_Runtime.field(p, 'z') : Float));
       appendTranslationMatrix4(({ final __callArgument6:Dynamic = t2; __callArgument6; }), ({ final __callArgument7:Dynamic = t2; __callArgument7; }), (cast _Runtime.field(p, 'x') : Float), (cast _Runtime.field(p, 'y') : Float), (cast _Runtime.field(p, 'z') : Float));
-      multiplyMatrix4(({ final __callArgument8:Dynamic = m; __callArgument8; }), ({ final __callArgument9:Dynamic = t1; __callArgument9; }), ({ final __callArgument10:Dynamic = m; __callArgument10; }));
-      multiplyMatrix4(({ final __callArgument11:Dynamic = m; __callArgument11; }), ({ final __callArgument12:Dynamic = m; __callArgument12; }), ({ final __callArgument13:Dynamic = t2; __callArgument13; }));
+      multiplyMatrix4(({ final __callArgument8:Dynamic = m; __callArgument8; }), ({ final __callArgument9:Dynamic = m; __callArgument9; }), ({ final __callArgument10:Dynamic = t1; __callArgument10; }));
+      multiplyMatrix4(({ final __callArgument11:Dynamic = m; __callArgument11; }), ({ final __callArgument12:Dynamic = t2; __callArgument12; }), ({ final __callArgument13:Dynamic = m; __callArgument13; }));
       releaseMatrix4(({ final __callArgument14:Dynamic = t1; __callArgument14; }));
       releaseMatrix4(({ final __callArgument15:Dynamic = t2; __callArgument15; }));
     }
@@ -679,7 +679,7 @@ class Matrix4 {
   }
 
   public static function prependMatrix4(out:Matrix4Like, source:Matrix4Like, other:Matrix4Like):Void {
-    multiplyMatrix4(({ final __callArgument34:Dynamic = out; __callArgument34; }), ({ final __callArgument35:Dynamic = other; __callArgument35; }), ({ final __callArgument36:Dynamic = source; __callArgument36; }));
+    multiplyMatrix4(({ final __callArgument34:Dynamic = out; __callArgument34; }), ({ final __callArgument35:Dynamic = source; __callArgument35; }), ({ final __callArgument36:Dynamic = other; __callArgument36; }));
   }
 
   public static function prependRotationMatrix4(out:Matrix4Like, source:Matrix4Like, radians:Float, axis:Vector4Like, ?pivotPoint:Vector4Like):Void {
@@ -713,7 +713,7 @@ class Matrix4 {
     var m:flighthq.types.Matrix4 = cast _Runtime.UNDEFINED;
     m = (cast acquireIdentityMatrix4() : flighthq.types.Matrix4);
     translateMatrix4(({ final __callArgument59:Dynamic = m; __callArgument59; }), ({ final __callArgument60:Dynamic = m; __callArgument60; }), (cast x : Float), (cast y : Float), (cast z : Float));
-    multiplyMatrix4(({ final __callArgument61:Dynamic = out; __callArgument61; }), ({ final __callArgument62:Dynamic = m; __callArgument62; }), ({ final __callArgument63:Dynamic = source; __callArgument63; }));
+    prependMatrix4(({ final __callArgument61:Dynamic = out; __callArgument61; }), ({ final __callArgument62:Dynamic = source; __callArgument62; }), ({ final __callArgument63:Dynamic = m; __callArgument63; }));
     releaseMatrix4(({ final __callArgument64:Dynamic = m; __callArgument64; }));
   }
 
@@ -730,22 +730,22 @@ class Matrix4 {
     var o:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     a = source.m;
     o = out.m;
-    if ((cast !_Runtime.strictEquals(out, source) : Bool)) { (cast out.m : flighthq._internal._Float32Array).set(source.m); }
-    if ((cast !_Runtime.strictEquals(sx, 1.0) : Bool)) {
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 0.0 : Float)) * sx) : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 4.0 : Float)) * sx) : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 8.0 : Float)) * sx) : Float));
-    }
-    if ((cast !_Runtime.strictEquals(sy, 1.0) : Bool)) {
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 1.0 : Float)) * sy) : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 5.0 : Float)) * sy) : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 9.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 9.0 : Float)) * sy) : Float));
-    }
-    if ((cast !_Runtime.strictEquals(sz, 1.0) : Bool)) {
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 2.0 : Float)) * sz) : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 6.0 : Float)) * sz) : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 10.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 10.0 : Float)) * sz) : Float));
-    }
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 0.0 : Float)) * sx) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 1.0 : Float)) * sx) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 2.0 : Float)) * sx) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 3.0 : Float)) * sx) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 4.0 : Float)) * sy) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 5.0 : Float)) * sy) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 6.0 : Float)) * sy) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 7.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 7.0 : Float)) * sy) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 8.0 : Float)) * sz) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 9.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 9.0 : Float)) * sz) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 10.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 10.0 : Float)) * sz) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 11.0 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 11.0 : Float)) * sz) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 12.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 12.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 13.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 13.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 14.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 14.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast o : flighthq._internal._Float32Array), (cast 15.0 : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast a : flighthq._internal._Float32Array), (cast 15.0 : Float)) : Float));
   }
 
   public static function setMatrix4(out:Matrix4Like, m00:Float, m01:Float, m02:Float, m03:Float, m10:Float, m11:Float, m12:Float, m13:Float, m20:Float, m21:Float, m22:Float, m23:Float, m30:Float, m31:Float, m32:Float, m33:Float):Void {
@@ -907,14 +907,20 @@ class Matrix4 {
     xz = ((up.x * zy) - (up.y * zx));
     xl = HxMath.sqrt((((xx * xx) + (xy * xy)) + (xz * xz)));
     if ((cast _Runtime.strictEquals(xl, 0.0) : Bool)) {
-      (xx = cast (0.0 : Dynamic));
-      (xy = cast (0.0 : Dynamic));
-      (xz = cast (0.0 : Dynamic));
-    } else {
-      (xx = cast ((xx / xl) : Dynamic));
-      (xy = cast ((xy / xl) : Dynamic));
-      (xz = cast ((xz / xl) : Dynamic));
+      if ((cast ((cast HxMath.abs(zz) : Float) < (cast 0.9 : Float)) : Bool)) {
+        (xx = cast (-zy : Dynamic));
+        (xy = cast (zx : Dynamic));
+        (xz = cast (0.0 : Dynamic));
+      } else {
+        (xx = cast (0.0 : Dynamic));
+        (xy = cast (-zz : Dynamic));
+        (xz = cast (zy : Dynamic));
+      }
+      (xl = cast (HxMath.sqrt((((xx * xx) + (xy * xy)) + (xz * xz))) : Dynamic));
     }
+    (xx = cast ((xx / xl) : Dynamic));
+    (xy = cast ((xy / xl) : Dynamic));
+    (xz = cast ((xz / xl) : Dynamic));
     yx = ((zy * xz) - (zz * xy));
     yy = ((zz * xx) - (zx * xz));
     yz = ((zx * xy) - (zy * xx));

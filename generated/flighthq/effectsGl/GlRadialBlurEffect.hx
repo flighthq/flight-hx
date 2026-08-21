@@ -23,7 +23,7 @@ class GlRadialBlurEffect {
     var samples:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     centerX = _Runtime.coalesce(effect.centerX, function():Dynamic return cast 0.5);
-    centerY = _Runtime.coalesce(effect.centerY, function():Dynamic return cast 0.5);
+    centerY = _Runtime.subtractNumbers(1.0, _Runtime.coalesce(effect.centerY, function():Dynamic return cast 0.5));
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 0.2);
     samples = _Runtime.coalesce(effect.samples, function():Dynamic return cast 16.0);
     program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'radialBlur' : String), (cast GlRadialBlurEffect.RADIAL_BLUR_FRAGMENT_SRC__glRadialBlurEffect : String)) : GlFullscreenProgram);
@@ -39,7 +39,7 @@ class GlRadialBlurEffect {
   });
 
   public static function registerGlRadialBlurEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'RadialBlurEffect' : String), ({ final __callArgument6:Dynamic = defaultGlRadialBlurEffectRunner; __callArgument6; }));
+    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'RadialBlurEffect' : String), ({ final __callArgument6:Dynamic = defaultGlRadialBlurEffectRunner; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static final RADIAL_BLUR_FRAGMENT_SRC__glRadialBlurEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform vec2 u_center;\nuniform float u_strength;\nuniform float u_samples;\nout vec4 o_color;\nconst int SAMPLES = 16;\nvoid main() {\n  vec2 toCenter = u_center - v_texCoord;\n  float count = min(u_samples, 16.0);\n  vec4 sum = vec4(0.0);\n  float taken = 0.0;\n  for (int i = 0; i < SAMPLES; i++) {\n    if (float(i) >= count) break;\n    float t = count > 1.0 ? float(i) / (count - 1.0) : 0.0;\n    vec2 uv = v_texCoord + toCenter * (t * u_strength);\n    sum += texture(u_texture0, uv);\n    taken += 1.0;\n  }\n  o_color = sum / max(taken, 1.0);\n}';

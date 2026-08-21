@@ -11,24 +11,24 @@ import flighthq.types.SpatialIndexing.SpatialIndexingOperation;
 class FormatSpatialIndexingNotice {
   public static function formatSpatialIndexingNotice(notice:SpatialIndexingNotice):String {
     if ((cast _Runtime.strictEquals(notice.reason, 'invalid-cell-size') : Bool)) {
-      return cast 'createUniformGridSpatialBackend(' + Std.string(notice.cellSize) + '): cellSize must be a positive finite number. ' + Std.string(notice.operation) + 'SpatialObject(' + Std.string(notice.id) + ') used the bounded overflow path instead, so results remain correct but queries scan this object.';
+      return cast 'createUniformGridSpatialBackend2D(' + Std.string(notice.cellSize) + '): cellSize must be a positive finite number. ' + Std.string(notice.operation) + 'SpatialObject2D(' + Std.string(notice.id) + ') used the bounded overflow path instead, so results remain correct but queries scan this object.';
     }
     if ((cast _Runtime.strictEquals(notice.reason, 'inverted-bounds') : Bool)) {
-      return cast '' + Std.string(notice.operation) + 'SpatialObject(' + Std.string(notice.id) + '): minX/minY must not exceed maxX/maxY, so the object was not indexed and no query will return it. The operation returns false for this — normalize or correct the bounds upstream.';
+      return cast '' + Std.string(notice.operation) + 'SpatialObject2D(' + Std.string(notice.id) + '): minX/minY must not exceed maxX/maxY, so the object was not indexed and no query will return it. The operation returns false for this — normalize or correct the bounds upstream.';
     }
     if ((cast _Runtime.strictEquals(notice.reason, 'missing-id') : Bool)) {
       if ((cast _Runtime.strictEquals(notice.operation, 'remove') : Bool)) {
-        return cast 'removeSpatialObject(' + Std.string(notice.id) + '): the id was not indexed, so removal was a no-op. Check the object\'s indexing lifecycle if this was unexpected.';
+        return cast 'removeSpatialObject2D(' + Std.string(notice.id) + '): the id was not indexed, so removal was a no-op. Check the object\'s indexing lifecycle if this was unexpected.';
       }
-      return cast 'updateSpatialObject(' + Std.string(notice.id) + '): the id was not indexed, so update used its documented insert behavior and left the object in \'' + Std.string(notice.mode) + '\' mode. Use insertSpatialObject for a new id, or check the object\'s indexing lifecycle.';
+      return cast 'updateSpatialObject2D(' + Std.string(notice.id) + '): the id was not indexed, so update used its documented insert behavior and left the object in \'' + Std.string(notice.mode) + '\' mode. Use insertSpatialObject2D for a new id, or check the object\'s indexing lifecycle.';
     }
     if ((cast _Runtime.strictEquals(notice.mode, 'declined') : Bool)) {
-      return cast '' + Std.string(notice.operation) + 'SpatialObject(' + Std.string(notice.id) + '): the bounds are not finite, so the object was not indexed and no query will return it. The operation returns false for this — check the sentinel, and check what produced NaN/Infinity bounds upstream.';
+      return cast '' + Std.string(notice.operation) + 'SpatialObject2D(' + Std.string(notice.id) + '): the bounds are not finite, so the object was not indexed and no query will return it. The operation returns false for this — check the sentinel, and check what produced NaN/Infinity bounds upstream.';
     }
     if ((cast _Runtime.strictEquals(notice.mode, 'overflow') : Bool)) {
-      return cast '' + Std.string(notice.operation) + 'SpatialObject(' + Std.string(notice.id) + '): the bounds span ' + Std.string(notice.wouldOccupyBucketCount) + ' cells, over the ' + Std.string(MAX_INDEXED_CELLS_PER_OBJECT) + ' per-object budget, so the object is held in the flat overflow list instead of the grid. Results are unaffected. If this is not a one-off outlier, the grid\'s cellSize is too small for the objects being indexed — size it to a typical object.';
+      return cast '' + Std.string(notice.operation) + 'SpatialObject2D(' + Std.string(notice.id) + '): the bounds span ' + Std.string(notice.wouldOccupyBucketCount) + ' cells, over the ' + Std.string(MAX_INDEXED_CELLS_PER_OBJECT) + ' per-object budget, so the object is held in the flat overflow list instead of the grid. Results are unaffected. If this is not a one-off outlier, the grid\'s cellSize is too small for the objects being indexed — size it to a typical object.';
     }
-    return cast '' + Std.string(notice.operation) + 'SpatialObject(' + Std.string(notice.id) + '): indexed as \'' + Std.string(notice.mode) + '\', which carries no caller-facing advice.';
+    return cast '' + Std.string(notice.operation) + 'SpatialObject2D(' + Std.string(notice.id) + '): indexed as \'' + Std.string(notice.mode) + '\', which carries no caller-facing advice.';
     return cast null;
   }
 }

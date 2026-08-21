@@ -3,6 +3,7 @@ package flighthq.effectsGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.color.PackColor.unpackColorRgba;
 import flighthq.effectsGl.GlEffectBlitShader.applyGlEffectBlitOffsetPass;
 import flighthq.effectsGl.GlEffectBlitShader.applyGlEffectBlitPass;
 import flighthq.effectsGl.GlEffectBoxBlur.applyGlEffectBoxBlur;
@@ -59,7 +60,7 @@ class GlInnerShadowEffect {
     distance = _Runtime.coalesce(effect.distance, function():Dynamic return cast 4.0);
     dx = _Runtime.multiplyNumbers(HxMath.cos(angle), distance);
     dy = _Runtime.multiplyNumbers(HxMath.sin(angle), distance);
-    color = _Runtime.coalesce(effect.color, function():Dynamic return cast 0.0);
+    color = _Runtime.coalesce(effect.color, function():Dynamic return cast 255.0);
     alpha = _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0);
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(effect.quality, function():Dynamic return cast 1.0)));
@@ -85,7 +86,7 @@ class GlInnerShadowEffect {
   });
 
   public static function registerGlInnerShadowEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument42:Dynamic = state; __callArgument42; }), (cast 'InnerShadowEffect' : String), ({ final __callArgument43:Dynamic = defaultGlInnerShadowEffectRunner; __callArgument43; }));
+    registerGlRenderEffect(({ final __callArgument42:Dynamic = state; __callArgument42; }), (cast 'InnerShadowEffect' : String), ({ final __callArgument43:Dynamic = defaultGlInnerShadowEffectRunner; __callArgument43; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static function applyGlInnerClipPass__glInnerShadowEffect(state:GlRenderState, shadow:GlRenderTarget, source:GlRenderTarget, dest:GlRenderTarget):Void {
@@ -111,8 +112,11 @@ class GlInnerShadowEffect {
 
   public static function getInvertTintEdgeColor__glInnerShadowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
     var edgeAlpha:Float = cast _Runtime.UNDEFINED;
-    edgeAlpha = HxMath.min(1.0, (alpha * strength));
-    return cast cast ([(((_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) / 255.0) * edgeAlpha), (((_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255) / 255.0) * edgeAlpha), (((_Runtime.toInt32(color) & 255) / 255.0) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
+    unpackColorRgba(({ final __callArgument51:Dynamic = GlInnerShadowEffect.scratchEdge__glInnerShadowEffect; __callArgument51; }), (cast color : Float));
+    edgeAlpha = HxMath.min(1.0, ((alpha * flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlInnerShadowEffect.scratchEdge__glInnerShadowEffect : Array<Float>), (cast 3.0 : Float))) * strength));
+    return cast cast ([(flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlInnerShadowEffect.scratchEdge__glInnerShadowEffect : Array<Float>), (cast 0.0 : Float)) * edgeAlpha), (flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlInnerShadowEffect.scratchEdge__glInnerShadowEffect : Array<Float>), (cast 1.0 : Float)) * edgeAlpha), (flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlInnerShadowEffect.scratchEdge__glInnerShadowEffect : Array<Float>), (cast 2.0 : Float)) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
     return cast null;
   }
+
+  public static final scratchEdge__glInnerShadowEffect:Array<Float> = (cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
 }

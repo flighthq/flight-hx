@@ -6,13 +6,18 @@ import flighthq._internal._Runtime;
 import flighthq.render.RenderProxy.getRenderProxy2D;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.types.HasAppearance;
+import flighthq.types.RegistryTable.KeyedTable;
+import flighthq.types.RegistryTable.RegistryEntryState;
+import flighthq.types.RegistryTable.RegistryTableEntry;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
+import flighthq.types.RenderState.RenderRegistries;
 import flighthq.types.RenderState.RenderStateRuntime;
 import flighthq.types.Renderable;
 import flighthq.types.Renderer;
 import flighthq.types.Scene2DRenderBlankReason;
 import flighthq.types.Scene2DRenderExplanation;
+import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 class ExplainScene2DRender {
   @:noCompletion
@@ -26,8 +31,8 @@ class ExplainScene2DRender {
     var effectiveAlpha:Float = cast _Runtime.UNDEFINED;
     var reason:Scene2DRenderBlankReason = cast _Runtime.UNDEFINED;
     kind = (cast source : { var kind:String; }).kind;
-    hasRenderer = !_Runtime.strictEquals(((cast (cast (cast getRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : RenderStateRuntime) : { var rendererMap:flighthq._internal._Map<String, Renderer>; }).rendererMap : flighthq._internal._Map<String, Renderer>).get(kind)), _Runtime.field(_Runtime, 'UNDEFINED'));
-    proxy = (cast getRenderProxy2D(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; })) : Null<RenderProxy2D>);
+    hasRenderer = _Runtime.strictEquals(({ final __structural2 = ((cast (cast (cast (cast (cast getRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : RenderRegistries).renderers : KeyedTable<Renderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<Renderer>>).get(kind)); __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
+    proxy = (cast getRenderProxy2D(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = source; __callArgument4; })) : Null<RenderProxy2D>);
     prepared = !_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED'));
     appearance = (cast (cast source : flighthq._internal._Any) : HasAppearance);
     visible = ((cast !_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast proxy : RenderProxy2D).visible : Dynamic) : (cast (cast appearance : HasAppearance).visible : Dynamic));

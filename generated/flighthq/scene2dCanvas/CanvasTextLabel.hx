@@ -3,7 +3,7 @@ package flighthq.scene2dCanvas;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.color.PackColor.computeRgbHexString;
+import flighthq.color.PackColor.computeRgbaCssString;
 import flighthq.render.Renderer.noopRendererData;
 import flighthq.scene2dCanvas.CanvasNode2D.drawCanvasScene2D;
 import flighthq.scene2dCanvas.CanvasTransform.setCanvasTransform;
@@ -58,14 +58,14 @@ class CanvasTextLabel {
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textAlign', 'start');
     for (group in _Runtime.iterable(result.groups)) {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', (cast computeTextFormatFontString(group.format) : String));
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', (cast computeRgbHexString((cast _Runtime.coalesce((cast group.format : TextFormat).color, function():Dynamic return cast 0.0) : Float)) : String));
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', (cast computeRgbaCssString((cast _Runtime.coalesce((cast group.format : TextFormat).color, function():Dynamic return cast 255.0) : Float)) : String));
       var slice:String = _Runtime.substring(text, group.startIndex, group.endIndex);
       var x:Float = group.offsetX;
       var y:Float = (group.offsetY + (group.ascent * 0.815));
       flighthq._internal.backend.Canvas2dBackend.call(context, 'fillText', cast ([slice, x, y] : Array<Dynamic>));
       if (_Runtime.truthy((cast group.format : TextFormat).underline)) {
         var lineY:Float = (y + group.descent);
-        flighthq._internal.backend.Canvas2dBackend.setField(context, 'strokeStyle', (cast computeRgbHexString((cast _Runtime.coalesce((cast group.format : TextFormat).color, function():Dynamic return cast 0.0) : Float)) : String));
+        flighthq._internal.backend.Canvas2dBackend.setField(context, 'strokeStyle', (cast computeRgbaCssString((cast _Runtime.coalesce((cast group.format : TextFormat).color, function():Dynamic return cast 255.0) : Float)) : String));
         flighthq._internal.backend.Canvas2dBackend.setField(context, 'lineWidth', HxMath.max(1.0, _Runtime.divideNumbers(_Runtime.coalesce((cast group.format : TextFormat).size, function():Dynamic return cast 12.0), 16.0)));
         flighthq._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
         flighthq._internal.backend.Canvas2dBackend.call(context, 'moveTo', cast ([x, lineY] : Array<Dynamic>));

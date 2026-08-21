@@ -6,6 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.RenderTarget.RenderTargetDimensions;
 
-typedef WgpuRenderTarget = { var height:Float; var width:Float; var bindGroup:flighthq._internal.dom.GPUBindGroup; var colorSpace:RenderTargetColorSpace; var depthStencilTexture:flighthq._internal.dom.GPUTexture; var depthStencilView:flighthq._internal.dom.GPUTextureView; var format:flighthq._internal.dom.GPUTextureFormat; var clearColors:Array<Float>; var clearDepth:Float; var texture:flighthq._internal.dom.GPUTexture; var view:flighthq._internal.dom.GPUTextureView; };
+typedef WgpuRenderTarget = { var height:Float; var width:Float; var bindGroup:flighthq._internal.dom.GPUBindGroup; var colorSpace:RenderTargetColorSpace; var depthStencilTexture:flighthq._internal.dom.GPUTexture; var depthStencilView:flighthq._internal.dom.GPUTextureView; var format:flighthq._internal.dom.GPUTextureFormat; var sampleCount:Float; var clearColors:Array<Float>; var clearDepth:Float; var texture:flighthq._internal.dom.GPUTexture; var view:flighthq._internal.dom.GPUTextureView; };
 
 typedef WgpuRenderTargetPool = { var free:Array<flighthq.types.WgpuRenderTarget>; };

@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const getCamera2DVisibleBounds = api.getCamera2DVisibleBounds;
+export const setCamera2DVisibleBoundsGuard = api.setCamera2DVisibleBoundsGuard;

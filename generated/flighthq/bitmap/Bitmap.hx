@@ -10,6 +10,7 @@ import flighthq.bitmap.BitmapBlur as Facade_Bitmap_flighthq_bitmap_BitmapBlur;
 import flighthq.bitmap.BitmapChannel as Facade_Bitmap_flighthq_bitmap_BitmapChannel;
 import flighthq.bitmap.BitmapColorMatrix as Facade_Bitmap_flighthq_bitmap_BitmapColorMatrix;
 import flighthq.bitmap.BitmapCompare as Facade_Bitmap_flighthq_bitmap_BitmapCompare;
+import flighthq.bitmap.BitmapCompare.BitmapComparisonSource__bitmapCompare;
 import flighthq.bitmap.BitmapComposite as Facade_Bitmap_flighthq_bitmap_BitmapComposite;
 import flighthq.bitmap.BitmapConvolution as Facade_Bitmap_flighthq_bitmap_BitmapConvolution;
 import flighthq.bitmap.BitmapCopy as Facade_Bitmap_flighthq_bitmap_BitmapCopy;
@@ -105,6 +106,8 @@ class Bitmap {
   public static function bevelBitmap(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapBevelOptions):Void {
     Facade_Bitmap_flighthq_bitmap_BitmapBevel.bevelBitmap(out, scratch, source, options);
   }
+
+  public static final BITMAP_FINGERPRINT_COMPUTATION_ID:String = Facade_Bitmap_flighthq_bitmap_BitmapFingerprint.BITMAP_FINGERPRINT_COMPUTATION_ID;
 
   public static final BITMAP_NOISE_CHANNEL_A:Float = Facade_Bitmap_flighthq_bitmap_BitmapNoise.BITMAP_NOISE_CHANNEL_A;
 
@@ -426,7 +429,7 @@ class Bitmap {
     return cast null;
   }
 
-  public static function getBitmapMismatch(source:flighthq.types.Bitmap, other:flighthq.types.Bitmap, ?channelTolerance:Float):BitmapMismatch {
+  public static function getBitmapMismatch(source:BitmapComparisonSource__bitmapCompare, other:BitmapComparisonSource__bitmapCompare, ?channelTolerance:Float):BitmapMismatch {
     return cast Facade_Bitmap_flighthq_bitmap_BitmapCompare.getBitmapMismatch(source, other, channelTolerance);
     return cast null;
   }

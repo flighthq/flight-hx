@@ -5,5 +5,5 @@ const api = compiled.flighthq.collision.ContactManifold;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const clearCollisionContactManifold = api.clearCollisionContactManifold;
-export const createCollisionContactManifold = api.createCollisionContactManifold;
+export const clearCollisionContactManifold2D = api.clearCollisionContactManifold2D;
+export const createCollisionContactManifold2D = api.createCollisionContactManifold2D;

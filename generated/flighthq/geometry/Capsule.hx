@@ -69,9 +69,13 @@ class Capsule {
     dz = (pz - closestZ);
     dist = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
     if ((cast ((cast dist : Float) < (cast 1e-10 : Float)) : Bool)) {
-      (out.x = cast ((closestX + r) : Float));
-      (out.y = cast (closestY : Float));
-      (out.z = cast (closestZ : Float));
+      var __destructure0 = (cast Capsule.axisPerpendicular__capsule((cast abx : Float), (cast aby : Float), (cast abz : Float), (cast abLen2 : Float)) : Array<Float>);
+      var perpX:Float = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
+      var perpY:Float = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
+      var perpZ:Float = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
+      (out.x = cast ((closestX + (r * perpX)) : Float));
+      (out.y = cast ((closestY + (r * perpY)) : Float));
+      (out.z = cast ((closestZ + (r * perpZ)) : Float));
     } else {
       var inv:Float = (r / dist);
       (out.x = cast ((closestX + (dx * inv)) : Float));
@@ -94,6 +98,7 @@ class Capsule {
     var by:Float = cast _Runtime.UNDEFINED;
     var bz:Float = cast _Runtime.UNDEFINED;
     var r:Float = cast _Runtime.UNDEFINED;
+    var directionLengthSq:Float = cast _Runtime.UNDEFINED;
     var abx:Float = cast _Runtime.UNDEFINED;
     var aby:Float = cast _Runtime.UNDEFINED;
     var abz:Float = cast _Runtime.UNDEFINED;
@@ -130,6 +135,9 @@ class Capsule {
     by = capsule.endY;
     bz = capsule.endZ;
     r = capsule.radius;
+    if ((cast ((cast r : Float) < (cast 0.0 : Float)) : Bool)) { return cast -1.0; }
+    directionLengthSq = (((dx * dx) + (dy * dy)) + (dz * dz));
+    if ((cast _Runtime.strictEquals(directionLengthSq, 0.0) : Bool)) { return cast -1.0; }
     abx = (bx - ax);
     aby = (by - ay);
     abz = (bz - az);
@@ -138,7 +146,6 @@ class Capsule {
       var mx:Float = cast _Runtime.UNDEFINED;
       var my:Float = cast _Runtime.UNDEFINED;
       var mz:Float = cast _Runtime.UNDEFINED;
-      var lenD2:Float = cast _Runtime.UNDEFINED;
       var b:Float = cast _Runtime.UNDEFINED;
       var c:Float = cast _Runtime.UNDEFINED;
       var disc:Float = cast _Runtime.UNDEFINED;
@@ -148,16 +155,14 @@ class Capsule {
       mx = (ox - cx);
       my = (oy - cy);
       mz = (oz - cz);
-      lenD2 = (((dx * dx) + (dy * dy)) + (dz * dz));
-      if ((cast _Runtime.strictEquals(lenD2, 0.0) : Bool)) { return cast -1.0; }
       b = (((mx * dx) + (my * dy)) + (mz * dz));
       c = ((((mx * mx) + (my * my)) + (mz * mz)) - (r * r));
-      disc = ((b * b) - (lenD2 * c));
+      disc = ((b * b) - (directionLengthSq * c));
       if ((cast ((cast disc : Float) < (cast 0.0 : Float)) : Bool)) { return cast -1.0; }
       sqrtD = HxMath.sqrt(disc);
-      t1 = ((-b - sqrtD) / lenD2);
+      t1 = ((-b - sqrtD) / directionLengthSq);
       if ((cast ((cast t1 : Float) >= (cast 0.0 : Float)) : Bool)) { return cast t1; }
-      t2 = ((-b + sqrtD) / lenD2);
+      t2 = ((-b + sqrtD) / directionLengthSq);
       return cast ((cast ((cast t2 : Float) >= (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast -1.0 : Dynamic));
       return cast _Runtime.UNDEFINED;
     });
@@ -178,7 +183,7 @@ class Capsule {
     qa = (((dpx * dpx) + (dpy * dpy)) + (dpz * dpz));
     qb = (((apx * dpx) + (apy * dpy)) + (apz * dpz));
     qc = ((((apx * apx) + (apy * apy)) + (apz * apz)) - (r * r));
-    if ((cast ((cast qa : Float) > (cast 1e-20 : Float)) : Bool)) {
+    if ((cast ((cast HxMath.sqrt(qa) : Float) > (cast _Runtime.multiplyNumbers(1e-10, HxMath.sqrt(directionLengthSq)) : Float)) : Bool)) {
       var disc:Float = ((qb * qb) - (qa * qc));
       if ((cast ((cast disc : Float) >= (cast 0.0 : Float)) : Bool)) {
         var sqrtD:Float = HxMath.sqrt(disc);
@@ -231,6 +236,32 @@ class Capsule {
     (out.endY = cast (endY : Float));
     (out.endZ = cast (endZ : Float));
     (out.radius = cast (radius : Float));
+  }
+
+  public static function axisPerpendicular__capsule(abx:Float, aby:Float, abz:Float, abLen2:Float):Array<Float> {
+    var absX:Float = cast _Runtime.UNDEFINED;
+    var absY:Float = cast _Runtime.UNDEFINED;
+    var absZ:Float = cast _Runtime.UNDEFINED;
+    var leastAlignedX:Float = cast _Runtime.UNDEFINED;
+    var leastAlignedY:Float = cast _Runtime.UNDEFINED;
+    var leastAlignedZ:Float = cast _Runtime.UNDEFINED;
+    var px:Float = cast _Runtime.UNDEFINED;
+    var py:Float = cast _Runtime.UNDEFINED;
+    var pz:Float = cast _Runtime.UNDEFINED;
+    var length:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast abLen2 : Float) < (cast 1e-20 : Float)) : Bool)) { return cast cast ([1.0, 0.0, 0.0] : Array<Dynamic>); }
+    absX = HxMath.abs(abx);
+    absY = HxMath.abs(aby);
+    absZ = HxMath.abs(abz);
+    leastAlignedX = ((cast ((cast ((cast absX : Float) <= (cast absY : Float)) : Bool) && (cast ((cast absX : Float) <= (cast absZ : Float)) : Bool)) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic));
+    leastAlignedY = ((cast ((cast _Runtime.strictEquals(leastAlignedX, 0.0) : Bool) && (cast ((cast absY : Float) <= (cast absZ : Float)) : Bool)) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic));
+    leastAlignedZ = ((cast ((cast _Runtime.strictEquals(leastAlignedX, 0.0) : Bool) && (cast _Runtime.strictEquals(leastAlignedY, 0.0) : Bool)) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic));
+    px = ((aby * leastAlignedZ) - (abz * leastAlignedY));
+    py = ((abz * leastAlignedX) - (abx * leastAlignedZ));
+    pz = ((abx * leastAlignedY) - (aby * leastAlignedX));
+    length = HxMath.sqrt((((px * px) + (py * py)) + (pz * pz)));
+    return cast cast ([(px / length), (py / length), (pz / length)] : Array<Dynamic>);
+    return cast null;
   }
 
   public static function pointToSegmentDistanceSq__capsule(px:Float, py:Float, pz:Float, ax:Float, ay:Float, az:Float, bx:Float, by:Float, bz:Float):Float {

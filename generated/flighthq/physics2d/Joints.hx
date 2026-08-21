@@ -42,7 +42,7 @@ class Joints {
     var state:Null<Array<Float>> = cast _Runtime.UNDEFINED;
     var bodyA:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
     var bodyB:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
-    state = ((cast Joints.jointStateScratch__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
+    state = ((cast Joints.jointSolveStates__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
     if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     bodyA = (cast findPhysics2DBody(({ final __callArgument0:Dynamic = world; __callArgument0; }), (cast (cast joint : Physics2DJoint).bodyA : Float)) : Null<RigidBody2D>);
     bodyB = (cast findPhysics2DBody(({ final __callArgument1:Dynamic = world; __callArgument1; }), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Null<RigidBody2D>);
@@ -57,8 +57,13 @@ class Joints {
     var axisX:Float = cast _Runtime.UNDEFINED;
     var axisY:Float = cast _Runtime.UNDEFINED;
     var length:Float = cast _Runtime.UNDEFINED;
+    var normalizedAxisX:Float = cast _Runtime.UNDEFINED;
+    var normalizedAxisY:Float = cast _Runtime.UNDEFINED;
     var mass:Float = cast _Runtime.UNDEFINED;
     var separation:Float = cast _Runtime.UNDEFINED;
+    var effectiveMass:Float = cast _Runtime.UNDEFINED;
+    var bias:Float = cast _Runtime.UNDEFINED;
+    var gamma:Float = cast _Runtime.UNDEFINED;
     var distanceState:Array<Float> = cast _Runtime.UNDEFINED;
     distance = (cast joint : Physics2DDistanceJoint);
     bodyA = (cast findPhysics2DBody(({ final __callArgument4:Dynamic = world; __callArgument4; }), (cast (cast joint : Physics2DJoint).bodyA : Float)) : Null<RigidBody2D>);
@@ -69,35 +74,35 @@ class Joints {
     axisY = (((cast bodyB : RigidBody2D).y + (cast joint : Physics2DJoint).rBY) - ((cast bodyA : RigidBody2D).y + (cast joint : Physics2DJoint).rAY));
     length = HxMath.sqrt(((axisX * axisX) + (axisY * axisY)));
     if ((cast ((cast length : Float) > (cast Joints.EPSILON__joints : Float)) : Bool)) {
-      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.axisScratch__joints : Array<Float>), (cast 0.0 : Float), (cast (axisX / length) : Float));
-      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.axisScratch__joints : Array<Float>), (cast 1.0 : Float), (cast (axisY / length) : Float));
+      (normalizedAxisX = cast ((axisX / length) : Dynamic));
+      (normalizedAxisY = cast ((axisY / length) : Dynamic));
     } else {
-      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.axisScratch__joints : Array<Float>), (cast 0.0 : Float), (cast 1.0 : Float));
-      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.axisScratch__joints : Array<Float>), (cast 1.0 : Float), (cast 0.0 : Float));
+      (normalizedAxisX = cast (1.0 : Dynamic));
+      (normalizedAxisY = cast (0.0 : Dynamic));
     }
-    mass = (cast Joints.axisEffectiveMass__joints(({ final __callArgument9:Dynamic = bodyA; __callArgument9; }), ({ final __callArgument10:Dynamic = bodyB; __callArgument10; }), ({ final __callArgument11:Dynamic = joint; __callArgument11; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast Joints.axisScratch__joints : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast Joints.axisScratch__joints : Array<Float>), (cast 1.0 : Float)) : Float)) : Float);
+    mass = (cast Joints.axisEffectiveMass__joints(({ final __callArgument9:Dynamic = bodyA; __callArgument9; }), ({ final __callArgument10:Dynamic = bodyB; __callArgument10; }), ({ final __callArgument11:Dynamic = joint; __callArgument11; }), (cast normalizedAxisX : Float), (cast normalizedAxisY : Float)) : Float);
     separation = (length - (cast distance : Physics2DDistanceJoint).length);
     if ((cast ((cast (cast distance : Physics2DDistanceJoint).frequencyHz : Float) > (cast 0.0 : Float)) : Bool)) {
       var angular:Float = ((2.0 * HxMath.PI) * (cast distance : Physics2DDistanceJoint).frequencyHz);
       var damp:Float = (((2.0 * mass) * (cast distance : Physics2DDistanceJoint).dampingRatio) * angular);
       var spring:Float = ((mass * angular) * angular);
-      var gamma:Float = (dt * (damp + (dt * spring)));
-      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.jointScratch__joints : Array<Float>), (cast 2.0 : Float), (cast ((cast ((cast gamma : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / gamma) : Dynamic) : (cast 0.0 : Dynamic)) : Float));
-      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.jointScratch__joints : Array<Float>), (cast 1.0 : Float), (cast (((separation * dt) * spring) * flighthq._internal._StaticIndex.readFloatArrayTyped((cast Joints.jointScratch__joints : Array<Float>), (cast 2.0 : Float))) : Float));
-      var softMass:Float = (mass + flighthq._internal._StaticIndex.readFloatArrayTyped((cast Joints.jointScratch__joints : Array<Float>), (cast 2.0 : Float)));
-      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.jointScratch__joints : Array<Float>), (cast 0.0 : Float), (cast ((cast ((cast softMass : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / softMass) : Dynamic) : (cast 0.0 : Dynamic)) : Float));
+      var gammaDenominator:Float = (dt * (damp + (dt * spring)));
+      (gamma = cast (((cast ((cast gammaDenominator : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / gammaDenominator) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+      (bias = cast ((((separation * dt) * spring) * gamma) : Dynamic));
+      var softMass:Float = (mass + gamma);
+      (effectiveMass = cast (((cast ((cast softMass : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / softMass) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
     } else {
-      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.jointScratch__joints : Array<Float>), (cast 0.0 : Float), (cast ((cast ((cast mass : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / mass) : Dynamic) : (cast 0.0 : Dynamic)) : Float));
-      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.jointScratch__joints : Array<Float>), (cast 1.0 : Float), (cast (separation * (Joints.BAUMGARTE__joints / dt)) : Float));
-      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.jointScratch__joints : Array<Float>), (cast 2.0 : Float), (cast 0.0 : Float));
+      (effectiveMass = cast (((cast ((cast mass : Float) > (cast 0.0 : Float)) : Bool) ? (cast (1.0 / mass) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+      (bias = cast ((separation * (Joints.BAUMGARTE__joints / dt)) : Dynamic));
+      (gamma = cast (0.0 : Dynamic));
     }
     ((cast distance : Physics2DDistanceJoint).rAX = (cast joint : Physics2DJoint).rAX);
     distanceState = (cast Joints.beginJointSolve__joints(({ final __callArgument12:Dynamic = distance; __callArgument12; }), (cast 5.0 : Float)) : Array<Float>);
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast distanceState : Array<Float>), (cast 0.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast Joints.jointScratch__joints : Array<Float>), (cast 0.0 : Float)) : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast distanceState : Array<Float>), (cast 1.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast Joints.jointScratch__joints : Array<Float>), (cast 1.0 : Float)) : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast distanceState : Array<Float>), (cast 2.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast Joints.jointScratch__joints : Array<Float>), (cast 2.0 : Float)) : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast distanceState : Array<Float>), (cast 3.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast Joints.axisScratch__joints : Array<Float>), (cast 0.0 : Float)) : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast distanceState : Array<Float>), (cast 4.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast Joints.axisScratch__joints : Array<Float>), (cast 1.0 : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast distanceState : Array<Float>), (cast 0.0 : Float), (cast effectiveMass : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast distanceState : Array<Float>), (cast 1.0 : Float), (cast bias : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast distanceState : Array<Float>), (cast 2.0 : Float), (cast gamma : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast distanceState : Array<Float>), (cast 3.0 : Float), (cast normalizedAxisX : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast distanceState : Array<Float>), (cast 4.0 : Float), (cast normalizedAxisY : Float));
   }, solve: function(world:Physics2DWorld, joint:Physics2DJoint):Void {
     var state:Null<Array<Float>> = cast _Runtime.UNDEFINED;
     var bodyA:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
@@ -110,7 +115,7 @@ class Joints {
     var axisY:Float = cast _Runtime.UNDEFINED;
     var velocity:Float = cast _Runtime.UNDEFINED;
     var lambda:Float = cast _Runtime.UNDEFINED;
-    state = ((cast Joints.jointStateScratch__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
+    state = ((cast Joints.jointSolveStates__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
     if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     bodyA = (cast findPhysics2DBody(({ final __callArgument13:Dynamic = world; __callArgument13; }), (cast (cast joint : Physics2DJoint).bodyA : Float)) : Null<RigidBody2D>);
     bodyB = (cast findPhysics2DBody(({ final __callArgument14:Dynamic = world; __callArgument14; }), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Null<RigidBody2D>);
@@ -131,7 +136,7 @@ class Joints {
     var state:Null<Array<Float>> = cast _Runtime.UNDEFINED;
     var bodyA:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
     var bodyB:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
-    state = ((cast Joints.jointStateScratch__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
+    state = ((cast Joints.jointSolveStates__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
     if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     bodyA = (cast findPhysics2DBody(({ final __callArgument20:Dynamic = world; __callArgument20; }), (cast (cast joint : Physics2DJoint).bodyA : Float)) : Null<RigidBody2D>);
     bodyB = (cast findPhysics2DBody(({ final __callArgument21:Dynamic = world; __callArgument21; }), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Null<RigidBody2D>);
@@ -195,7 +200,7 @@ class Joints {
     var velocityA:Float = cast _Runtime.UNDEFINED;
     var velocityB:Float = cast _Runtime.UNDEFINED;
     var lambda:Float = cast _Runtime.UNDEFINED;
-    state = ((cast Joints.jointStateScratch__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
+    state = ((cast Joints.jointSolveStates__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
     if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     bodyA = (cast findPhysics2DBody(({ final __callArgument35:Dynamic = world; __callArgument35; }), (cast (cast joint : Physics2DJoint).bodyA : Float)) : Null<RigidBody2D>);
     bodyB = (cast findPhysics2DBody(({ final __callArgument36:Dynamic = world; __callArgument36; }), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Null<RigidBody2D>);
@@ -288,7 +293,7 @@ class Joints {
     var previousY:Float = cast _Runtime.UNDEFINED;
     var magnitude:Float = cast _Runtime.UNDEFINED;
     mouse = (cast joint : Physics2DMouseJoint);
-    state = ((cast Joints.jointStateScratch__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
+    state = ((cast Joints.jointSolveStates__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
     if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     bodyB = (cast findPhysics2DBody(({ final __callArgument42:Dynamic = world; __callArgument42; }), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Null<RigidBody2D>);
     if ((cast _Runtime.strictEquals(bodyB, null) : Bool)) { return; }
@@ -336,7 +341,7 @@ class Joints {
     var bodyA:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
     var bodyB:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
     prismatic = (cast joint : Physics2DPrismaticJoint);
-    state = ((cast Joints.jointStateScratch__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
+    state = ((cast Joints.jointSolveStates__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
     if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     bodyA = (cast findPhysics2DBody(({ final __callArgument43:Dynamic = world; __callArgument43; }), (cast (cast joint : Physics2DJoint).bodyA : Float)) : Null<RigidBody2D>);
     bodyB = (cast findPhysics2DBody(({ final __callArgument44:Dynamic = world; __callArgument44; }), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Null<RigidBody2D>);
@@ -470,7 +475,7 @@ class Joints {
     var perpendicularImpulse:Float = cast _Runtime.UNDEFINED;
     var angularImpulse:Float = cast _Runtime.UNDEFINED;
     prismatic = (cast joint : Physics2DPrismaticJoint);
-    state = ((cast Joints.jointStateScratch__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
+    state = ((cast Joints.jointSolveStates__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
     if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     bodyA = (cast findPhysics2DBody(({ final __callArgument57:Dynamic = world; __callArgument57; }), (cast (cast joint : Physics2DJoint).bodyA : Float)) : Null<RigidBody2D>);
     bodyB = (cast findPhysics2DBody(({ final __callArgument58:Dynamic = world; __callArgument58; }), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Null<RigidBody2D>);
@@ -537,7 +542,7 @@ class Joints {
     var state:Null<Array<Float>> = cast _Runtime.UNDEFINED;
     var bodyA:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
     var bodyB:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
-    state = ((cast Joints.jointStateScratch__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
+    state = ((cast Joints.jointSolveStates__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
     if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     bodyA = (cast findPhysics2DBody(({ final __callArgument69:Dynamic = world; __callArgument69; }), (cast (cast joint : Physics2DJoint).bodyA : Float)) : Null<RigidBody2D>);
     bodyB = (cast findPhysics2DBody(({ final __callArgument70:Dynamic = world; __callArgument70; }), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Null<RigidBody2D>);
@@ -625,7 +630,7 @@ class Joints {
     var velocityA:Float = cast _Runtime.UNDEFINED;
     var velocityB:Float = cast _Runtime.UNDEFINED;
     var lambda:Float = cast _Runtime.UNDEFINED;
-    state = ((cast Joints.jointStateScratch__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
+    state = ((cast Joints.jointSolveStates__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
     if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     bodyA = (cast findPhysics2DBody(({ final __callArgument80:Dynamic = world; __callArgument80; }), (cast (cast joint : Physics2DJoint).bodyA : Float)) : Null<RigidBody2D>);
     bodyB = (cast findPhysics2DBody(({ final __callArgument81:Dynamic = world; __callArgument81; }), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Null<RigidBody2D>);
@@ -708,7 +713,7 @@ class Joints {
     var bodyB:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
     var angularMass:Float = cast _Runtime.UNDEFINED;
     revolute = (cast joint : Physics2DRevoluteJoint);
-    state = ((cast Joints.jointStateScratch__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
+    state = ((cast Joints.jointSolveStates__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
     if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     bodyA = (cast findPhysics2DBody(({ final __callArgument99:Dynamic = world; __callArgument99; }), (cast (cast joint : Physics2DJoint).bodyA : Float)) : Null<RigidBody2D>);
     bodyB = (cast findPhysics2DBody(({ final __callArgument100:Dynamic = world; __callArgument100; }), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Null<RigidBody2D>);
@@ -754,7 +759,7 @@ class Joints {
     var state:Null<Array<Float>> = cast _Runtime.UNDEFINED;
     var bodyA:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
     var bodyB:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
-    state = ((cast Joints.jointStateScratch__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
+    state = ((cast Joints.jointSolveStates__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
     if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     bodyA = (cast findPhysics2DBody(({ final __callArgument104:Dynamic = world; __callArgument104; }), (cast (cast joint : Physics2DJoint).bodyA : Float)) : Null<RigidBody2D>);
     bodyB = (cast findPhysics2DBody(({ final __callArgument105:Dynamic = world; __callArgument105; }), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Null<RigidBody2D>);
@@ -807,7 +812,7 @@ class Joints {
     var velocity:Float = cast _Runtime.UNDEFINED;
     var lambda:Float = cast _Runtime.UNDEFINED;
     var previous:Float = cast _Runtime.UNDEFINED;
-    state = ((cast Joints.jointStateScratch__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
+    state = ((cast Joints.jointSolveStates__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
     if ((cast ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast 0.0 : Float)), 0.0) : Bool)) : Bool)) { return; }
     bodyA = (cast findPhysics2DBody(({ final __callArgument117:Dynamic = world; __callArgument117; }), (cast (cast joint : Physics2DJoint).bodyA : Float)) : Null<RigidBody2D>);
     bodyB = (cast findPhysics2DBody(({ final __callArgument118:Dynamic = world; __callArgument118; }), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Null<RigidBody2D>);
@@ -835,7 +840,7 @@ class Joints {
     var bodyA:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
     var bodyB:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
     wheel = (cast joint : Physics2DWheelJoint);
-    state = ((cast Joints.jointStateScratch__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
+    state = ((cast Joints.jointSolveStates__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
     if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     bodyA = (cast findPhysics2DBody(({ final __callArgument124:Dynamic = world; __callArgument124; }), (cast (cast joint : Physics2DJoint).bodyA : Float)) : Null<RigidBody2D>);
     bodyB = (cast findPhysics2DBody(({ final __callArgument125:Dynamic = world; __callArgument125; }), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Null<RigidBody2D>);
@@ -949,7 +954,7 @@ class Joints {
     var lateralVelocity:Float = cast _Runtime.UNDEFINED;
     var lateralImpulse:Float = cast _Runtime.UNDEFINED;
     wheel = (cast joint : Physics2DWheelJoint);
-    state = ((cast Joints.jointStateScratch__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
+    state = ((cast Joints.jointSolveStates__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
     if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     bodyA = (cast findPhysics2DBody(({ final __callArgument136:Dynamic = world; __callArgument136; }), (cast (cast joint : Physics2DJoint).bodyA : Float)) : Null<RigidBody2D>);
     bodyB = (cast findPhysics2DBody(({ final __callArgument137:Dynamic = world; __callArgument137; }), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Null<RigidBody2D>);
@@ -1023,7 +1028,7 @@ class Joints {
     var bodyB:Null<RigidBody2D> = cast _Runtime.UNDEFINED;
     var angularVelocity:Float = cast _Runtime.UNDEFINED;
     var angularLambda:Float = cast _Runtime.UNDEFINED;
-    state = ((cast Joints.jointStateScratch__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
+    state = ((cast Joints.jointSolveStates__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
     if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     bodyA = (cast findPhysics2DBody(({ final __callArgument154:Dynamic = world; __callArgument154; }), (cast (cast joint : Physics2DJoint).bodyA : Float)) : Null<RigidBody2D>);
     bodyB = (cast findPhysics2DBody(({ final __callArgument155:Dynamic = world; __callArgument155; }), (cast (cast joint : Physics2DJoint).bodyB : Float)) : Null<RigidBody2D>);
@@ -1178,21 +1183,17 @@ class Joints {
     ({ final __nullishOwner175 = joint; final __nullishValue176:Null<Float> = cast (cast __nullishOwner175 : Physics2DJoint).impulse0; __nullishValue176 == null ? ((cast __nullishOwner175 : Physics2DJoint).impulse0 = (cast 0.0 : Float)) : (cast __nullishValue176 : Float); });
     ({ final __nullishOwner177 = joint; final __nullishValue178:Null<Float> = cast (cast __nullishOwner177 : Physics2DJoint).impulse1; __nullishValue178 == null ? ((cast __nullishOwner177 : Physics2DJoint).impulse1 = (cast 0.0 : Float)) : (cast __nullishValue178 : Float); });
     ({ final __nullishOwner179 = joint; final __nullishValue180:Null<Float> = cast (cast __nullishOwner179 : Physics2DJoint).impulse2; __nullishValue180 == null ? ((cast __nullishOwner179 : Physics2DJoint).impulse2 = (cast 0.0 : Float)) : (cast __nullishValue180 : Float); });
-    state = ((cast Joints.jointStateScratch__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
+    state = ((cast Joints.jointSolveStates__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).get(joint));
     if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (state = cast (cast ([] : Array<Dynamic>) : Dynamic));
-      ((cast Joints.jointStateScratch__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).set(joint, (cast state)));
+      ((cast Joints.jointSolveStates__joints : flighthq._internal._WeakMap<Physics2DJoint, Array<Float>>).set(joint, (cast state)));
     }
     _Runtime.setLength(state, length);
     return cast state;
     return cast null;
   }
 
-  public static final jointStateScratch__joints:flighthq._internal._WeakMap<Physics2DJoint, Array<Float>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
-
-  public static final axisScratch__joints:Array<Float> = (cast cast ([0.0, 0.0] : Array<Dynamic>));
-
-  public static final jointScratch__joints:Array<Float> = (cast cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
+  public static final jointSolveStates__joints:flighthq._internal._WeakMap<Physics2DJoint, Array<Float>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static final EPSILON__joints:Float = 1e-9;
 

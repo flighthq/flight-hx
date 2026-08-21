@@ -8,13 +8,13 @@ import flighthq.textureatlas.TextureAtlas as Facade_Textureatlas_flighthq_textur
 import flighthq.textureatlas.TextureAtlasFrom as Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom;
 import flighthq.textureatlas.TextureAtlasGrid as Facade_Textureatlas_flighthq_textureatlas_TextureAtlasGrid;
 import flighthq.textureatlas.TextureAtlasRegion as Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.GridSliceOptions;
 import flighthq.types.Image;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Texture.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
-import flighthq.types.TextureAtlasRegion.TextureAtlasRegionLike;
 import flighthq.types.TextureAtlasRegionTextureExplanation;
 import flighthq.types.Vector2.Vector2Like;
 
@@ -49,7 +49,7 @@ class Textureatlas {
     Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.clearTextureAtlasRegions(target);
   }
 
-  public static function createTextureAtlas(?obj:flighthq._internal._Partial<TextureAtlas>):TextureAtlas {
+  public static function createTextureAtlas(?obj:{ @:optional var texture:Null<Texture2D>; @:optional var regions:Null<Array<TextureAtlasRegion>>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):TextureAtlas {
     return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlas.createTextureAtlas(obj);
     return cast null;
   }
@@ -79,7 +79,7 @@ class Textureatlas {
     return cast null;
   }
 
-  public static function createTextureAtlasRegion(?obj:flighthq._internal._Partial<TextureAtlasRegionLike>):TextureAtlasRegion {
+  public static function createTextureAtlasRegion(?obj:{ @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var name:Null<String>; @:optional var id:Null<Float>; @:optional var originalHeight:Null<Float>; @:optional var originalWidth:Null<Float>; @:optional var rotated:Null<Bool>; @:optional var sourceX:Null<Float>; @:optional var sourceY:Null<Float>; @:optional var trimmed:Null<Bool>; }):TextureAtlasRegion {
     return cast Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.createTextureAtlasRegion(obj);
     return cast null;
   }
@@ -186,7 +186,7 @@ class Textureatlas {
     return cast null;
   }
 
-  public static function setTextureAtlasRegion(out:TextureAtlasRegion, source:flighthq._internal._Partial<TextureAtlasRegionLike>):Void {
+  public static function setTextureAtlasRegion(out:TextureAtlasRegion, source:{ @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var name:Null<String>; @:optional var id:Null<Float>; @:optional var originalHeight:Null<Float>; @:optional var originalWidth:Null<Float>; @:optional var rotated:Null<Bool>; @:optional var sourceX:Null<Float>; @:optional var sourceY:Null<Float>; @:optional var trimmed:Null<Bool>; }):Void {
     Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion.setTextureAtlasRegion(out, source);
   }
 }

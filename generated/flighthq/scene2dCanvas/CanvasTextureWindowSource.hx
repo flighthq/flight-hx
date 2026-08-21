@@ -19,7 +19,7 @@ class CanvasTextureWindowSource {
   @:noCompletion
   public static function resolveCanvasTextureWindowSource(resolvers:CanvasTextureResolvers, texture:Texture):Null<flighthq._internal.dom.CanvasImageSource> {
     var image:Null<TextureSource> = cast _Runtime.UNDEFINED;
-    var source:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
+    var source:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLVideoElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.HTMLCanvasElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
     var uvOffsetX:Float = cast _Runtime.UNDEFINED;
     var uvOffsetY:Float = cast _Runtime.UNDEFINED;
     var uvRotation:Float = cast _Runtime.UNDEFINED;
@@ -40,7 +40,7 @@ class CanvasTextureWindowSource {
     var flipY:Bool = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) { return cast null; }
     image = _Runtime.field(texture, 'source');
-    source = (cast resolveCanvasTexture(({ final __callArgument0:Dynamic = resolvers; __callArgument0; }), ({ final __callArgument1:Dynamic = texture; __callArgument1; })) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
+    source = (cast resolveCanvasTexture(({ final __callArgument0:Dynamic = resolvers; __callArgument0; }), ({ final __callArgument1:Dynamic = texture; __callArgument1; })) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLVideoElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.HTMLCanvasElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(source, null) : Bool)) { return cast null; }
     uvOffsetX = (cast _Runtime.field(texture, 'uvOffset') : { var x:Float; }).x;
     uvOffsetY = (cast _Runtime.field(texture, 'uvOffset') : { var y:Float; }).y;

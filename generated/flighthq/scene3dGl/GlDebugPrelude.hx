@@ -6,11 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.renderGl.GlTextureResolver.resolveGlTexture;
 import flighthq.scene3dGl.GlMeshFragmentTail.GL_MESH_FRAGMENT_TAIL;
 import flighthq.scene3dGl.GlMeshFragmentTail.GL_MESH_FRAGMENT_TAIL_UNIFORMS;
+import flighthq.scene3dGl.GlMeshProgram.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
 import flighthq.scene3dGl.GlMeshProgram.compileGlProgram;
 import flighthq.scene3dGl.GlMeshProgram.ensureGlScene3DProgram;
+import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.GlDebugProgram;
 import flighthq.types.GlDebugProgram.GlDebugDefineKey;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlScene3DRuntime;
 import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.Texture;
 import flighthq.types.Texture.TextureLike;
@@ -37,7 +40,7 @@ class GlDebugPrelude {
 
   @:noCompletion
   public static function buildGlDebugDefineKey(key:GlDebugDefineKey):String {
-    return cast '' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(key, 'mode'), 'depth') : Bool) ? (cast 'd' : Dynamic) : (cast 'n' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasNormalMap') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '';
+    return cast '' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(key, 'mode'), 'depth') : Bool) ? (cast 'd' : Dynamic) : (cast 'n' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasNormalMap') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
     return cast null;
   }
 
@@ -45,25 +48,27 @@ class GlDebugPrelude {
   public static function compileGlDebugProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlDebugDefineKey):GlDebugProgram {
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
     program = (cast compileGlProgram(({ final __callArgument2:Dynamic = gl; __callArgument2; }), (cast (cast getGlDebugVertexSourceForKey(({ final __callArgument3:Dynamic = key; __callArgument3; })) : String) : String), (cast (cast getGlDebugFragmentSourceForKey(({ final __callArgument4:Dynamic = key; __callArgument4; })) : String) : String)) : flighthq._internal.dom.WebGLProgram);
-    return cast { locFar: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_far'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNear: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_near'), locNormalMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMap'), locNormalMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMatrix'), locNormalScale: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalScale'), locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };
+    return cast { locFar: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_far'), locJointNormalTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointNormalTexture'), locJointTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointTexture'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNear: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_near'), locNormalMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMap'), locNormalMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMatrix'), locNormalScale: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalScale'), locView: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_view'), locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };
     return cast null;
   }
 
   @:noCompletion
   public static function ensureGlDebugProgram(state:GlRenderState, key:GlDebugDefineKey):GlDebugProgram {
-    return cast (cast (cast ensureGlScene3DProgram : GlRenderState->String->(flighthq._internal.dom.WebGL2RenderingContext->GlDebugProgram)->GlDebugProgram)(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'debug:' + Std.string((cast buildGlDebugDefineKey(({ final __callArgument6:Dynamic = key; __callArgument6; })) : String)) + '' : String), ({ final __callArgument9:Dynamic = function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlDebugProgram return (cast compileGlDebugProgram(({ final __callArgument7:Dynamic = gl; __callArgument7; }), ({ final __callArgument8:Dynamic = key; __callArgument8; })) : GlDebugProgram); __callArgument9; })) : GlDebugProgram);
+    var fullKey:GlDebugDefineKey = cast _Runtime.UNDEFINED;
+    fullKey = (cast _Runtime.mergeObjects([key, { hasSkin: (cast (cast getGlScene3DRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlScene3DRuntime) : { var activeSkinnedRun:Bool; }).activeSkinnedRun }]));
+    return cast (cast (cast ensureGlScene3DProgram : GlRenderState->String->(flighthq._internal.dom.WebGL2RenderingContext->GlDebugProgram)->GlDebugProgram)(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast 'debug:' + Std.string((cast buildGlDebugDefineKey(({ final __callArgument7:Dynamic = fullKey; __callArgument7; })) : String)) + '' : String), ({ final __callArgument10:Dynamic = function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlDebugProgram return (cast compileGlDebugProgram(({ final __callArgument8:Dynamic = gl; __callArgument8; }), ({ final __callArgument9:Dynamic = fullKey; __callArgument9; })) : GlDebugProgram); __callArgument10; })) : GlDebugProgram);
     return cast null;
   }
 
   @:noCompletion
   public static function getGlDebugFragmentSourceForKey(key:GlDebugDefineKey):String {
-    return cast ((cast GlDebugPrelude.buildDefineSource__glDebugPrelude(({ final __callArgument10:Dynamic = key; __callArgument10; })) : String) + GlDebugPrelude.DEBUG_FRAGMENT_BODY__glDebugPrelude);
+    return cast ((cast GlDebugPrelude.buildDefineSource__glDebugPrelude(({ final __callArgument11:Dynamic = key; __callArgument11; })) : String) + GlDebugPrelude.DEBUG_FRAGMENT_BODY__glDebugPrelude);
     return cast null;
   }
 
   @:noCompletion
   public static function getGlDebugVertexSourceForKey(key:GlDebugDefineKey):String {
-    return cast ((cast GlDebugPrelude.buildDefineSource__glDebugPrelude(({ final __callArgument11:Dynamic = key; __callArgument11; })) : String) + GlDebugPrelude.DEBUG_VERTEX_BODY__glDebugPrelude);
+    return cast (((cast GlDebugPrelude.buildDefineSource__glDebugPrelude(({ final __callArgument12:Dynamic = key; __callArgument12; })) : String) + _Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '')) + GlDebugPrelude.DEBUG_VERTEX_BODY__glDebugPrelude);
     return cast null;
   }
 
@@ -72,11 +77,12 @@ class GlDebugPrelude {
     defines = '#version 300 es\n';
     if ((cast _Runtime.strictEquals(_Runtime.field(key, 'mode'), 'depth') : Bool)) { (defines = cast ((defines + '#define DEPTH_MODE\n') : Dynamic)); } else { (defines = cast ((defines + '#define NORMAL_MODE\n') : Dynamic)); }
     if ((cast _Runtime.field(key, 'hasNormalMap') : Bool)) { (defines = cast ((defines + '#define HAS_NORMAL_MAP\n') : Dynamic)); }
+    if (_Runtime.truthy(_Runtime.field(key, 'hasSkin'))) { (defines = cast ((defines + '#define HAS_SKIN\n') : Dynamic)); }
     return cast defines;
     return cast null;
   }
 
-  public static final DEBUG_VERTEX_BODY__glDebugPrelude:String = '\nlayout(location = 0) in vec3 a_position;\nlayout(location = 1) in vec3 a_normal;\nlayout(location = 2) in vec4 a_tangent;\nlayout(location = 3) in vec2 a_uv0;\n\nuniform mat4 u_viewProjection;\nuniform mat4 u_model;\nuniform mat3 u_normalMatrix;\n\nout vec3 v_worldPosition;\nout vec3 v_normal;\nout vec4 v_tangent;\nout vec2 v_uv0;\n\nvoid main() {\n  vec4 worldPosition = u_model * vec4(a_position, 1.0);\n  v_worldPosition = worldPosition.xyz;\n  v_normal = u_normalMatrix * a_normal;\n  v_tangent = vec4(u_normalMatrix * a_tangent.xyz, a_tangent.w);\n  v_uv0 = a_uv0;\n  gl_Position = u_viewProjection * worldPosition;\n}\n';
+  public static final DEBUG_VERTEX_BODY__glDebugPrelude:String = '\nlayout(location = 0) in vec3 a_position;\nlayout(location = 1) in vec3 a_normal;\nlayout(location = 2) in vec4 a_tangent;\nlayout(location = 3) in vec2 a_uv0;\n\nuniform mat4 u_viewProjection;\nuniform mat4 u_model;\nuniform mat3 u_normalMatrix;\n#ifdef DEPTH_MODE\nuniform mat4 u_view;\n#endif\n\nout vec3 v_worldPosition;\nout vec3 v_normal;\nout vec4 v_tangent;\nout vec2 v_uv0;\n#ifdef DEPTH_MODE\nout float v_viewDepth;\n#endif\n\nvoid main() {\n#ifdef HAS_SKIN\n  mat4 skin = skinMatrix();\n  vec4 localPosition = skin * vec4(a_position, 1.0);\n  vec3 localNormal = skinNormalMatrix() * a_normal;\n  vec3 localTangent = mat3(skin) * a_tangent.xyz;\n#else\n  vec4 localPosition = vec4(a_position, 1.0);\n  vec3 localNormal = a_normal;\n  vec3 localTangent = a_tangent.xyz;\n#endif\n  vec4 worldPosition = u_model * localPosition;\n  v_worldPosition = worldPosition.xyz;\n  v_normal = u_normalMatrix * localNormal;\n  // A tangent is a TRUE SURFACE VECTOR and follows the model matrix, the same one a position\n  // follows. Only the normal is a covector needing the inverse-transpose. The two agree under\n  // rotation and uniform scale, which is why sharing u_normalMatrix looked correct, and diverge\n  // under non-uniform scale, tilting the tangent off the surface it is supposed to lie in.\n  // tangent.w is HANDEDNESS, and a model transform that mirrors (negative determinant) reverses it:\n  // the bitangent is rebuilt as w * cross(N, T), so without this the whole frame is flipped on every\n  // mirrored instance. Guarded rather than sign(), because sign() returns 0 for a singular matrix\n  // and a zero w collapses the bitangent entirely — a worse failure than keeping the original hand.\n  mat3 modelRotation = mat3(u_model);\n  float tangentHandedness = a_tangent.w * (determinant(modelRotation) < 0.0 ? -1.0 : 1.0);\n  v_tangent = vec4(modelRotation * localTangent, tangentHandedness);\n  v_uv0 = a_uv0;\n#ifdef DEPTH_MODE\n  v_viewDepth = -(u_view * worldPosition).z;\n#endif\n  gl_Position = u_viewProjection * worldPosition;\n}\n';
 
-  public static final DEBUG_FRAGMENT_BODY__glDebugPrelude:String = '\nprecision highp float;\n\nin vec3 v_worldPosition;\nin vec3 v_normal;\nin vec4 v_tangent;\nin vec2 v_uv0;\n\n#ifdef DEPTH_MODE\nuniform float u_near;\nuniform float u_far;\n#endif\n#ifdef NORMAL_MODE\nuniform float u_normalScale;\n#ifdef HAS_NORMAL_MAP\nuniform sampler2D u_normalMap;\n#endif\n#endif\n\n' + Std.string(GL_MESH_FRAGMENT_TAIL_UNIFORMS) + '\n\nout vec4 fragColor;\n\nvoid main() {\n#ifdef DEPTH_MODE\n  // Linear view-space distance is the perspective w: 1.0 / gl_FragCoord.w == w_clip == eye distance.\n  // This is camera-agnostic (no camera near/far needed); map it across the material\'s [u_near, u_far]\n  // visualization window to grayscale [0, 1].\n  float eyeDepth = 1.0 / gl_FragCoord.w;\n  float d = clamp((eyeDepth - u_near) / max(u_far - u_near, 1e-6), 0.0, 1.0);\n  fragColor = vec4(vec3(d), 1.0);\n#endif\n#ifdef NORMAL_MODE\n  // Visualize the WORLD-space surface normal (the geometric normal carried through u_normalMatrix).\n  vec3 geometricNormal = normalize(v_normal);\n  if (!gl_FrontFacing) geometricNormal = -geometricNormal;\n\n  vec3 normal = geometricNormal;\n#ifdef HAS_NORMAL_MAP\n  vec3 tangent = normalize(v_tangent.xyz);\n  vec3 bitangent = cross(geometricNormal, tangent) * v_tangent.w;\n  vec3 tangentNormal = texture(u_normalMap, v_uv0).xyz * 2.0 - 1.0;\n  tangentNormal.xy *= u_normalScale;\n  mat3 tbn = mat3(tangent, bitangent, geometricNormal);\n  normal = normalize(tbn * tangentNormal);\n#endif\n\n  fragColor = vec4(normal * 0.5 + 0.5, 1.0);\n#endif\n' + Std.string(GL_MESH_FRAGMENT_TAIL) + '\n}\n';
+  public static final DEBUG_FRAGMENT_BODY__glDebugPrelude:String = '\nprecision highp float;\n\nin vec3 v_worldPosition;\nin vec3 v_normal;\nin vec4 v_tangent;\nin vec2 v_uv0;\n\n#ifdef DEPTH_MODE\nin float v_viewDepth;\nuniform float u_near;\nuniform float u_far;\n#endif\n#ifdef NORMAL_MODE\nuniform float u_normalScale;\n#ifdef HAS_NORMAL_MAP\nuniform sampler2D u_normalMap;\n#endif\n#endif\n\n' + Std.string(GL_MESH_FRAGMENT_TAIL_UNIFORMS) + '\n\nout vec4 fragColor;\n\nvoid main() {\n#ifdef DEPTH_MODE\n  // Positive distance along the camera\'s view axis, computed before projection so perspective and\n  // orthographic cameras agree. Map it across the material\'s visualization window to grayscale.\n  float d = clamp((v_viewDepth - u_near) / max(u_far - u_near, 1e-6), 0.0, 1.0);\n  fragColor = vec4(vec3(d), 1.0);\n#endif\n#ifdef NORMAL_MODE\n  // Visualize the WORLD-space surface normal (the geometric normal carried through u_normalMatrix).\n  vec3 geometricNormal = normalize(v_normal);\n  if (!gl_FrontFacing) geometricNormal = -geometricNormal;\n\n  vec3 normal = geometricNormal;\n#ifdef HAS_NORMAL_MAP\n  vec3 tangent = normalize(v_tangent.xyz);\n  vec3 bitangent = cross(geometricNormal, tangent) * v_tangent.w;\n  vec3 tangentNormal = texture(u_normalMap, v_uv0).xyz * 2.0 - 1.0;\n  tangentNormal.xy *= u_normalScale;\n  mat3 tbn = mat3(tangent, bitangent, geometricNormal);\n  normal = normalize(tbn * tangentNormal);\n#endif\n\n  fragColor = vec4(normal * 0.5 + 0.5, 1.0);\n#endif\n' + Std.string(GL_MESH_FRAGMENT_TAIL) + '\n}\n';
 }

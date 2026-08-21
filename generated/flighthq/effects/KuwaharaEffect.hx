@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.KuwaharaEffect;
 
 class KuwaharaEffect {
-  public static function createKuwaharaEffect(?options:flighthq._internal._Omit<flighthq.types.KuwaharaEffect, String>):flighthq.types.KuwaharaEffect {
+  public static function createKuwaharaEffect(?options:{ @:optional var radius:Null<Float>; }):flighthq.types.KuwaharaEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'KuwaharaEffect' }, options]);
     return cast null;

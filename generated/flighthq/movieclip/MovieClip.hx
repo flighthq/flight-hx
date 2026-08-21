@@ -43,12 +43,12 @@ class MovieClip {
   }
 
   public static function createMovieClip(?obj:PartialNode<flighthq.types.MovieClip>):flighthq.types.MovieClip {
-    return cast (cast createNode2D((cast MovieClipKind : String), (cast obj : Dynamic), (cast createMovieClipData : Dynamic), (cast function(__unused0:Null<flighthq._internal._Any>):MovieClipRuntime return createMovieClipRuntime() : Dynamic)) : flighthq.types.MovieClip);
+    return cast (cast createNode2D((cast MovieClipKind : String), (cast obj : Dynamic), (cast createMovieClipData : Dynamic), (cast function(__unused0:Dynamic):MovieClipRuntime return createMovieClipRuntime() : Dynamic)) : flighthq.types.MovieClip);
     return cast null;
   }
 
   @:noCompletion
-  public static function createMovieClipData(?data:flighthq._internal._Partial<MovieClipData>):MovieClipData {
+  public static function createMovieClipData(?data:{ @:optional var timeline:Null<Timeline>; }):MovieClipData {
     return cast { timeline: _Runtime.coalesce(({ final __structural2 = data; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var timeline:Null<Timeline>; }).timeline; }), function():Dynamic return cast null) };
     return cast null;
   }

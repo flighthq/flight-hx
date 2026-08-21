@@ -6,6 +6,8 @@ import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.CompressedImage;
 import flighthq.types.CompressedImageData;
+import flighthq.types.RegistryTable.RegistryEntryState;
+import flighthq.types.RegistryTable.SlotTable;
 import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
@@ -15,8 +17,10 @@ import flighthq.types.WgpuCompressedTextureDecoder;
 import flighthq.types.WgpuCompressedTextureSupport;
 import flighthq.types.WgpuCompressedTextureUploader;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderState.WgpuTextureEntry;
+import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 typedef WgpuCompressedFormatInfo__wgpuCompressedTexture = { var blockHeight:Float; var blockWidth:Float; var bytesPerBlock:Float; var format:flighthq._internal.dom.GPUTextureFormat; };
 
@@ -50,11 +54,19 @@ class WgpuCompressedTexture {
   }
 
   public static function registerWgpuCompressedTextureDecoder(state:WgpuRenderState, decode:Null<WgpuCompressedTextureDecoder>):Void {
-    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuRenderStateRuntime) : { @:optional var compressedTextureDecoder:Null<WgpuCompressedTextureDecoder>; }).compressedTextureDecoder = cast (decode : Null<WgpuCompressedTextureDecoder>));
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var table:SlotTable<WgpuCompressedTextureDecoder> = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuRenderStateRuntime);
+    table = (cast runtime.registries : WgpuRenderRegistries).compressedTextureDecoder;
+    ((cast runtime.registries : WgpuRenderRegistries).compressedTextureDecoder = _Runtime.mergeObjects([table, { entry: ((cast _Runtime.strictEquals(decode, null) : Bool) ? (cast null : Dynamic) : (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: decode } : Dynamic)) }]));
   }
 
   public static function registerWgpuCompressedTextureUpload(state:WgpuRenderState, ?uploader:Dynamic):Void {
-    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuRenderStateRuntime) : { @:optional var compressedTextureUpload:Null<WgpuCompressedTextureUploader>; }).compressedTextureUpload = cast (((cast _Runtime.strictEquals(uploader, null) : Bool) ? (cast null : Dynamic) : (cast WgpuCompressedTexture.uploadWgpuCompressedImage__wgpuCompressedTexture : Dynamic)) : Null<WgpuCompressedTextureUploader>));
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var table:SlotTable<WgpuCompressedTextureUploader> = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuRenderStateRuntime);
+    table = (cast runtime.registries : WgpuRenderRegistries).compressedTextureUpload;
+    ((cast runtime.registries : WgpuRenderRegistries).compressedTextureUpload = _Runtime.mergeObjects([table, { entry: ((cast _Runtime.strictEquals(uploader, null) : Bool) ? (cast null : Dynamic) : (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: WgpuCompressedTexture.uploadWgpuCompressedImage__wgpuCompressedTexture } : Dynamic)) }]));
   }
 
   @:noCompletion

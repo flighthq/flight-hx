@@ -111,10 +111,14 @@ class Revision {
 
   @:noCompletion
   public static function invalidateNodeWorldBounds<Traits:flighthq._internal._Object>(target:Node<Traits>):Void {
-    var runtime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
-    runtime = (cast getNodeRuntime((cast target : Dynamic)) : NodeRuntime<Traits>);
-    ((cast runtime : NodeRuntime<Traits>).worldBoundsUsingWorldTransformId = -1.0);
-    ((cast runtime : NodeRuntime<Traits>).worldBoundsUsingLocalBoundsId = -1.0);
+    var current:Null<Node<Traits>> = cast _Runtime.UNDEFINED;
+    current = target;
+    while ((cast !_Runtime.strictEquals(current, null) : Bool)) {
+      var runtime:NodeRuntime<Traits> = (cast getNodeRuntime((cast current : Dynamic)) : NodeRuntime<Traits>);
+      ((cast runtime : NodeRuntime<Traits>).worldBoundsUsingWorldTransformId = -1.0);
+      ((cast runtime : NodeRuntime<Traits>).worldBoundsUsingLocalBoundsId = -1.0);
+      (current = cast ((cast runtime : NodeRuntime<Traits>).parent : Dynamic));
+    }
   }
 
   public static var _worldTransformRevisionCounter__revision:Float = 0.0;

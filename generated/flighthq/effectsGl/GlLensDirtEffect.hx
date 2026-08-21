@@ -3,42 +3,68 @@ package flighthq.effectsGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effectsGl.GlBlurEffect.applyGaussianBlurToGl;
 import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
+import flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget;
+import flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget;
 import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
+import flighthq.types.GlRenderTarget.GlRenderTargetPool;
 import flighthq.types.LensDirtEffect;
 import flighthq.types.RenderEffect;
+import flighthq.types.RenderTarget.RenderTargetDescriptor;
+import flighthq.types.RenderTarget.RenderTargetFormat;
 
 class GlLensDirtEffect {
   @:noCompletion
-  public static function applyLensDirtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensDirtEffect):Void {
+  public static function applyLensDirtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:LensDirtEffect):Void {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var threshold:Float = cast _Runtime.UNDEFINED;
     var seed:Float = cast _Runtime.UNDEFINED;
-    var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
+    var descriptor:{ var width:Float; var height:Float; var format:RenderTargetFormat; } = cast _Runtime.UNDEFINED;
+    var bright:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var blurred:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var temp:GlRenderTarget = cast _Runtime.UNDEFINED;
+    var brightProgram:GlFullscreenProgram = cast _Runtime.UNDEFINED;
+    var compositeProgram:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.55);
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
-    program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'lens.lensDirt' : String), (cast GlLensDirtEffect.LENS_DIRT_FRAGMENT_SRC__glLensDirtEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; }), ({ final __callArgument3:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
+    descriptor = (cast { width: source.width, height: source.height, format: source.format });
+    bright = (cast acquireGlRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = pool; __callArgument1; }), ({ final __callArgument2:Dynamic = descriptor; __callArgument2; })) : GlRenderTarget);
+    blurred = (cast acquireGlRenderTarget(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = pool; __callArgument4; }), ({ final __callArgument5:Dynamic = descriptor; __callArgument5; })) : GlRenderTarget);
+    temp = (cast acquireGlRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pool; __callArgument7; }), ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : GlRenderTarget);
+    brightProgram = (cast getGlEffectProgram(({ final __callArgument9:Dynamic = state; __callArgument9; }), (cast 'lens.lensDirt.bright' : String), (cast GlLensDirtEffect.LENS_DIRT_BRIGHT_FRAGMENT_SRC__glLensDirtEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = brightProgram; __callArgument11; }), ({ final __callArgument12:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument12; }), ({ final __callArgument13:Dynamic = bright; __callArgument13; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_threshold'), threshold);
+    } : Dynamic));
+    applyGaussianBlurToGl(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = bright; __callArgument15; }), ({ final __callArgument16:Dynamic = blurred; __callArgument16; }), ({ final __callArgument17:Dynamic = temp; __callArgument17; }), ({ final __callArgument18:Dynamic = { blurX: GlLensDirtEffect.LENS_DIRT_BLUR_SIGMA__glLensDirtEffect, blurY: GlLensDirtEffect.LENS_DIRT_BLUR_SIGMA__glLensDirtEffect }; __callArgument18; }));
+    compositeProgram = (cast getGlEffectProgram(({ final __callArgument19:Dynamic = state; __callArgument19; }), (cast 'lens.lensDirt.composite' : String), (cast GlLensDirtEffect.LENS_DIRT_COMPOSITE_FRAGMENT_SRC__glLensDirtEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument20:Dynamic = state; __callArgument20; }), ({ final __callArgument21:Dynamic = compositeProgram; __callArgument21; }), ({ final __callArgument22:Dynamic = cast ([source.texture, blurred.texture] : Array<Dynamic>); __callArgument22; }), ({ final __callArgument23:Dynamic = dest; __callArgument23; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_seed'), seed);
     } : Dynamic));
+    releaseGlRenderTarget(({ final __callArgument24:Dynamic = pool; __callArgument24; }), ({ final __callArgument25:Dynamic = bright; __callArgument25; }));
+    releaseGlRenderTarget(({ final __callArgument26:Dynamic = pool; __callArgument26; }), ({ final __callArgument27:Dynamic = blurred; __callArgument27; }));
+    releaseGlRenderTarget(({ final __callArgument28:Dynamic = pool; __callArgument28; }), ({ final __callArgument29:Dynamic = temp; __callArgument29; }));
   }
 
   public static final defaultGlLensDirtEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
-    applyLensDirtEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : LensDirtEffect));
+    applyLensDirtEffectToGl(ctx.state, ctx.source, ctx.dest, ctx.pool, (cast effect : LensDirtEffect));
   });
 
   public static function registerGlLensDirtEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'LensDirtEffect' : String), ({ final __callArgument6:Dynamic = defaultGlLensDirtEffectRunner; __callArgument6; }));
+    registerGlRenderEffect(({ final __callArgument30:Dynamic = state; __callArgument30; }), (cast 'LensDirtEffect' : String), ({ final __callArgument31:Dynamic = defaultGlLensDirtEffectRunner; __callArgument31; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
-  public static final LENS_DIRT_FRAGMENT_SRC__glLensDirtEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_threshold;\nuniform float u_seed;\nout vec4 o_color;\nfloat dirtHash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }\nfloat dirtAmount(vec2 uv, float seed) {\n  float acc = 0.0;\n  for (int i = 0; i < 8; i++) {\n    float fi = float(i);\n    vec2 c = vec2(dirtHash(vec2(fi, seed)), dirtHash(vec2(fi + 9.0, seed)));\n    float r = 0.06 + 0.16 * dirtHash(vec2(fi + 3.0, seed));\n    float d = distance(uv, c) / r;\n    acc += smoothstep(1.0, 0.0, d) * (0.3 + 0.7 * dirtHash(vec2(fi + 5.0, seed)));\n  }\n  return clamp(acc, 0.0, 1.0);\n}\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float lum = dot(c.rgb, vec3(0.299, 0.587, 0.114));\n  float bright = max(0.0, lum - u_threshold);\n  float dirt = dirtAmount(v_texCoord, u_seed + 1.0);\n  o_color = vec4(c.rgb + bright * dirt * u_intensity * 2.0, c.a);\n}';
+  public static final LENS_DIRT_BRIGHT_FRAGMENT_SRC__glLensDirtEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_threshold;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float lum = dot(c.rgb, vec3(0.299, 0.587, 0.114));\n  float bright = max(0.0, lum - u_threshold);\n  o_color = vec4(c.rgb * (bright / max(lum, 0.00001)), c.a);\n}';
+
+  public static final LENS_DIRT_COMPOSITE_FRAGMENT_SRC__glLensDirtEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nuniform float u_intensity;\nuniform float u_seed;\nout vec4 o_color;\nfloat dirtHash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }\nfloat dirtAmount(vec2 uv, float seed) {\n  float acc = 0.0;\n  for (int i = 0; i < 8; i++) {\n    float fi = float(i);\n    vec2 c = vec2(dirtHash(vec2(fi, seed)), dirtHash(vec2(fi + 9.0, seed)));\n    float r = 0.06 + 0.16 * dirtHash(vec2(fi + 3.0, seed));\n    float d = distance(uv, c) / r;\n    acc += smoothstep(1.0, 0.0, d) * (0.3 + 0.7 * dirtHash(vec2(fi + 5.0, seed)));\n  }\n  return clamp(acc, 0.0, 1.0);\n}\nvoid main() {\n  vec4 scene = texture(u_texture0, v_texCoord);\n  vec3 bright = texture(u_texture1, v_texCoord).rgb;\n  float dirt = dirtAmount(v_texCoord, u_seed + 1.0);\n  o_color = vec4(scene.rgb + bright * dirt * u_intensity * 2.0, scene.a);\n}';
+
+  public static final LENS_DIRT_BLUR_SIGMA__glLensDirtEffect:Float = 8.0;
 }

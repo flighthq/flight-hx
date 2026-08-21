@@ -13,14 +13,19 @@ import flighthq.types.Billboard.BillboardRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
+import flighthq.types.Node.NodeData;
+import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node3D;
 import flighthq.types.Node3D.Node3DRuntime;
+import flighthq.types.Node3D.Node3DTraits;
 import flighthq.types.NodeSignals;
+import flighthq.types.Quaternion;
 import flighthq.types.Types.BillboardKind;
+import flighthq.types.Vector3;
 import flighthq.types._internal._BillboardValues.BillboardKind;
 
 class Billboard {
-  public static function createBillboard(geometry:MeshGeometry, materials:Array<Null<Material>>, mode:BillboardMode = 'full', ?kind:Kind, ?obj:flighthq._internal._Partial<flighthq._internal._Pick<flighthq.types.Billboard, String>>):flighthq.types.Billboard {
+  public static function createBillboard(geometry:MeshGeometry, materials:Array<Null<Material>>, mode:BillboardMode = 'full', ?kind:Kind, ?obj:flighthq._internal._Partial<{ var enabled:Bool; var name:Null<String>; }>):flighthq.types.Billboard {
     if (kind == null) kind = cast (BillboardKind : Dynamic);
     var billboard:flighthq.types.Billboard = cast _Runtime.UNDEFINED;
     billboard = (cast createNode3D((cast kind : String), ({ final __callArgument0:Dynamic = obj; __callArgument0; })) : flighthq.types.Billboard);
@@ -48,9 +53,9 @@ class Billboard {
   }
 
   public static function isBillboard(source:Node3D):Bool {
-    var candidate:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    candidate = (cast source : flighthq._internal._Partial<flighthq.types.Billboard>);
-    return cast ((cast !_Runtime.looseEquals(_Runtime.field(candidate, 'geometry'), null) : Bool) && (cast !_Runtime.looseEquals(_Runtime.field(candidate, 'mode'), null) : Bool));
+    var candidate:{ @:optional var geometry:Null<MeshGeometry>; @:optional var materials:Null<Array<Null<Material>>>; @:optional var mode:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node3DTraits>>; @:optional var data:Null<flighthq._internal._Object>; @:optional var enabled:Null<Bool>; @:optional var kind:Null<String>; @:optional var name:Null<String>; @:optional var alpha:Null<Float>; @:optional var visible:Null<Bool>; @:optional var position:Null<Vector3>; @:optional var rotation:Null<Quaternion>; @:optional var scale:Null<Vector3>; } = cast _Runtime.UNDEFINED;
+    candidate = (cast source : { @:optional var geometry:Null<MeshGeometry>; @:optional var materials:Null<Array<Null<Material>>>; @:optional var mode:Null<BillboardMode>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node3DTraits>>; @:optional var data:Null<NodeData>; @:optional var enabled:Null<Bool>; @:optional var kind:Null<Kind>; @:optional var name:Null<String>; @:optional var alpha:Null<Float>; @:optional var visible:Null<Bool>; @:optional var position:Null<Vector3>; @:optional var rotation:Null<Quaternion>; @:optional var scale:Null<Vector3>; });
+    return cast ((cast !_Runtime.looseEquals((cast candidate : { @:optional var geometry:Null<MeshGeometry>; @:optional var materials:Null<Array<Null<Material>>>; @:optional var mode:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node3DTraits>>; @:optional var data:Null<flighthq._internal._Object>; @:optional var enabled:Null<Bool>; @:optional var kind:Null<String>; @:optional var name:Null<String>; @:optional var alpha:Null<Float>; @:optional var visible:Null<Bool>; @:optional var position:Null<Vector3>; @:optional var rotation:Null<Quaternion>; @:optional var scale:Null<Vector3>; }).geometry, null) : Bool) && (cast !_Runtime.looseEquals((cast candidate : { @:optional var geometry:Null<MeshGeometry>; @:optional var materials:Null<Array<Null<Material>>>; @:optional var mode:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node3DTraits>>; @:optional var data:Null<flighthq._internal._Object>; @:optional var enabled:Null<Bool>; @:optional var kind:Null<String>; @:optional var name:Null<String>; @:optional var alpha:Null<Float>; @:optional var visible:Null<Bool>; @:optional var position:Null<Vector3>; @:optional var rotation:Null<Quaternion>; @:optional var scale:Null<Vector3>; }).mode, null) : Bool));
     return cast null;
   }
 }

@@ -13,6 +13,21 @@ class PackColor {
     return cast null;
   }
 
+  public static function computeRgbaCssString(color:Float):String {
+    var packed:Float = cast _Runtime.UNDEFINED;
+    var red:Float = cast _Runtime.UNDEFINED;
+    var green:Float = cast _Runtime.UNDEFINED;
+    var blue:Float = cast _Runtime.UNDEFINED;
+    var alpha:Float = cast _Runtime.UNDEFINED;
+    packed = _Runtime.unsignedShiftRight(_Runtime.toInt32(color), 0);
+    red = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 24)) & 255);
+    green = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 16)) & 255);
+    blue = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 8)) & 255);
+    alpha = ((_Runtime.toInt32(packed) & 255) / 255.0);
+    return cast 'rgba(' + Std.string(red) + ',' + Std.string(green) + ',' + Std.string(blue) + ',' + Std.string(alpha) + ')';
+    return cast null;
+  }
+
   public static function computeRgbHexString(color:Float):String {
     return cast '#' + Std.string(_Runtime.padStart(_Runtime.numberToString((_Runtime.toInt32(color) & 16777215), 16.0), 6.0, '0')) + '';
     return cast null;

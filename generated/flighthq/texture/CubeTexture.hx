@@ -21,7 +21,7 @@ import flighthq.types.Vector2;
 
 class CubeTexture {
   public static function getCubeSources__cubeTexture(texture:flighthq.types.CubeTexture):TextureSourceCubeFaces {
-    return cast (cast texture : { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }).sources;
+    return cast (cast texture : { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9457:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }).sources;
     return cast null;
   }
 

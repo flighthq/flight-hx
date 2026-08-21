@@ -204,10 +204,10 @@ class NodeOrderList {
     var sortKey:Float = cast _Runtime.UNDEFINED;
     var at:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(node, target) : Bool)) { return; }
+    if ((cast _Runtime.strictEquals((cast NodeOrderList.findNodeOrderListEntryIndex__nodeOrderList((cast list : Dynamic), (cast target : Dynamic)) : Float), -1.0) : Bool)) { return; }
     existing = (cast NodeOrderList.findNodeOrderListEntryIndex__nodeOrderList((cast list : Dynamic), (cast node : Dynamic)) : Float);
     if ((cast !_Runtime.strictEquals(existing, -1.0) : Bool)) { NodeOrderList.removeNodeOrderListEntryAtIndex__nodeOrderList((cast list : Dynamic), (cast existing : Float)); }
     targetIndex = (cast NodeOrderList.findNodeOrderListEntryIndex__nodeOrderList((cast list : Dynamic), (cast target : Dynamic)) : Float);
-    if ((cast _Runtime.strictEquals(targetIndex, -1.0) : Bool)) { return; }
     sortKey = flighthq._internal._StaticIndex.readFloatArrayTyped((cast list.sortKeys : Array<Float>), (cast targetIndex : Float));
     at = (targetIndex + offset);
     addNodeOrderListEntry((cast list : Dynamic), (cast node : Dynamic), (cast sortKey : Float));

@@ -7,6 +7,8 @@ import flighthq.types.Bitmap;
 import flighthq.types.BitmapFingerprint;
 
 class BitmapFingerprint {
+  public static final BITMAP_FINGERPRINT_COMPUTATION_ID:String = 'grid-average-rgb-v1';
+
   public static final HEX__bitmapFingerprint:String = '0123456789abcdef';
 
   public static function compareBitmapFingerprints(a:flighthq.types.BitmapFingerprint, b:flighthq.types.BitmapFingerprint):Float {

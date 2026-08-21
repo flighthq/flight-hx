@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef CaptureColumnBaseline = { @:optional var fingerprint:String; @:optional var sourceHash:String; @:optional var sha256:String; };
+typedef CaptureColumnBaseline = { @:optional var fingerprint:String; @:optional var sourceHash:String; @:optional var sha256:String; @:optional var fingerprintProvenance:CaptureBaselineProvenance; @:optional var sha256Provenance:CaptureBaselineProvenance; };

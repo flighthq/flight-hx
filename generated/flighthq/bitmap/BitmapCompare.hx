@@ -7,6 +7,8 @@ import flighthq.bitmap.Bitmap.createBitmap;
 import flighthq.types.Bitmap;
 import flighthq.types.BitmapMismatch;
 
+typedef BitmapComparisonSource__bitmapCompare = { var width:Float; var height:Float; var data:flighthq._internal._ArrayLike<Float>; };
+
 class BitmapCompare {
   public static function compareBitmap(source:Bitmap, other:Bitmap):Null<Bitmap> {
     var result:Bitmap = cast _Runtime.UNDEFINED;
@@ -37,27 +39,27 @@ class BitmapCompare {
     return cast null;
   }
 
-  public static function getBitmapMismatch(source:Bitmap, other:Bitmap, channelTolerance:Float = 0.0):BitmapMismatch {
-    var a:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
-    var b:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+  public static function getBitmapMismatch(source:BitmapComparisonSource__bitmapCompare, other:BitmapComparisonSource__bitmapCompare, channelTolerance:Float = 0.0):BitmapMismatch {
+    var a:flighthq._internal._ArrayLike<Float> = cast _Runtime.UNDEFINED;
+    var b:flighthq._internal._ArrayLike<Float> = cast _Runtime.UNDEFINED;
     var totalPixels:Float = cast _Runtime.UNDEFINED;
     var mismatchedPixels:Float = cast _Runtime.UNDEFINED;
     var maxChannelDelta:Float = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !_Runtime.strictEquals(source.width, other.width) : Bool) || (cast !_Runtime.strictEquals(source.height, other.height) : Bool)) : Bool)) {
-      _Runtime.throwValue(_Runtime.error('getBitmapMismatch: bitmap dimensions do not match (' + Std.string(source.width) + '×' + Std.string(source.height) + ' vs ' + Std.string(other.width) + '×' + Std.string(other.height) + ')'));
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(source, 'width'), _Runtime.field(other, 'width')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(source, 'height'), _Runtime.field(other, 'height')) : Bool)) : Bool)) {
+      _Runtime.throwValue(_Runtime.error('getBitmapMismatch: bitmap dimensions do not match (' + Std.string(_Runtime.field(source, 'width')) + '×' + Std.string(_Runtime.field(source, 'height')) + ' vs ' + Std.string(_Runtime.field(other, 'width')) + '×' + Std.string(_Runtime.field(other, 'height')) + ')'));
     }
-    a = source.data;
-    b = other.data;
-    totalPixels = (source.width * source.height);
+    a = _Runtime.field(source, 'data');
+    b = _Runtime.field(other, 'data');
+    totalPixels = _Runtime.multiplyNumbers(_Runtime.field(source, 'width'), _Runtime.field(source, 'height'));
     mismatchedPixels = 0.0;
     maxChannelDelta = 0.0;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(a, 'length') : Float)) : Bool)) {
-        var dr:Float = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast a : flighthq._internal._UInt8ClampedArray), (cast i : Float)) - flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast b : flighthq._internal._UInt8ClampedArray), (cast i : Float))));
-        var dg:Float = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast a : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float)) - flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast b : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float))));
-        var db:Float = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast a : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float)) - flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast b : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float))));
-        var da:Float = HxMath.abs((flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast a : flighthq._internal._UInt8ClampedArray), (cast (i + 3.0) : Float)) - flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast b : flighthq._internal._UInt8ClampedArray), (cast (i + 3.0) : Float))));
+        var dr:Float = HxMath.abs(_Runtime.subtractNumbers(_Runtime.getIndex(a, i), _Runtime.getIndex(b, i)));
+        var dg:Float = HxMath.abs(_Runtime.subtractNumbers(_Runtime.getIndex(a, (i + 1.0)), _Runtime.getIndex(b, (i + 1.0))));
+        var db:Float = HxMath.abs(_Runtime.subtractNumbers(_Runtime.getIndex(a, (i + 2.0)), _Runtime.getIndex(b, (i + 2.0))));
+        var da:Float = HxMath.abs(_Runtime.subtractNumbers(_Runtime.getIndex(a, (i + 3.0)), _Runtime.getIndex(b, (i + 3.0))));
         var pixelDelta:Float = HxMath.max(HxMath.max(HxMath.max(dr, dg), db), da);
         if ((cast ((cast pixelDelta : Float) > (cast maxChannelDelta : Float)) : Bool)) { (maxChannelDelta = cast (pixelDelta : Dynamic)); }
         if ((cast ((cast pixelDelta : Float) > (cast channelTolerance : Float)) : Bool)) { mismatchedPixels++; }

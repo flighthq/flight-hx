@@ -14,7 +14,6 @@ import flighthq.scene3dResources.SceneMaterialTextureRegistry.registerExtendedPb
 import flighthq.scene3dResources.SceneMaterialTextureRegistry.registerStandardPbrScene3DMaterialTextures;
 import flighthq.scene3dResources.SceneMaterialTextureRegistry.registerUnlitScene3DMaterialTextures;
 import flighthq.types.Entity;
-import flighthq.types.Image;
 import flighthq.types.ImageResourceReference;
 import flighthq.types.ImageResourceReference.ImageResourceFetch;
 import flighthq.types.ResourceLoader;
@@ -24,6 +23,7 @@ import flighthq.types.Scene3DResources.Scene3DResourceResolver;
 import flighthq.types.Scene3DResources.Scene3DResourceResolverOptions;
 import flighthq.types.Scene3DResources.Scene3DResourceResolverRuntime;
 import flighthq.types.Scene3DResources.Scene3DResourceResolverWithRuntime;
+import flighthq.types.TextureSource;
 import flighthq.types.Types.Scene3DResourceResolverRuntimeKey;
 import flighthq.types._internal._Scene3DResourcesValues.Scene3DResourceResolverRuntimeKey;
 
@@ -42,7 +42,7 @@ class SceneResourceResolver {
     var loader:ResourceLoader = cast _Runtime.UNDEFINED;
     loader = (cast createResourceLoader((cast { dedupe: false, maxConcurrent: ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.maxConcurrent; }), streaming: true } : Dynamic)) : ResourceLoader);
     startResourceLoad(({ final __callArgument2:Dynamic = loader; __callArgument2; }));
-    return cast (cast createEntity((cast _Runtime.objectFromPairs([{ key: 'fetch', value: _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.fetch; }), function():Dynamic return cast fetchWebImageResource) }, { key: 'registry', value: _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.registry; }), function():Dynamic return cast (cast createScene3DMaterialTextureRegistry() : Scene3DMaterialTextureRegistry)) }, { key: Scene3DResourceResolverRuntimeKey, value: { inFlight: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), loader: loader, resolved: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), signals: null } }]) : Dynamic)) : { >Entity, var fetch:ImageResourceFetch; var registry:Scene3DMaterialTextureRegistry; var ___u40_Scene3DResourceResolverRuntimeKey_u40_45915:{ var inFlight:flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>; var loader:ResourceLoader; var resolved:flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>; var signals:flighthq._internal._Any; }; });
+    return cast (cast createEntity((cast _Runtime.objectFromPairs([{ key: 'fetch', value: _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.fetch; }), function():Dynamic return cast fetchWebImageResource) }, { key: 'registry', value: _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.registry; }), function():Dynamic return cast (cast createScene3DMaterialTextureRegistry() : Scene3DMaterialTextureRegistry)) }, { key: Scene3DResourceResolverRuntimeKey, value: { inFlight: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), loader: loader, resolved: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), signals: null } }]) : Dynamic)) : { >Entity, var fetch:ImageResourceFetch; var registry:Scene3DMaterialTextureRegistry; var ___u40_Scene3DResourceResolverRuntimeKey_u40_51057:{ var inFlight:flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>; var loader:ResourceLoader; var resolved:flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>; var signals:flighthq._internal._Any; }; });
     return cast null;
   }
 
@@ -55,6 +55,6 @@ class SceneResourceResolver {
       (cast entry.controller : flighthq._internal.dom.AbortController).abort();
     }
     ((cast runtime.inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).clear());
-    ((cast runtime.resolved : flighthq._internal._Map<ImageResourceReference, Image>).clear());
+    ((cast runtime.resolved : flighthq._internal._Map<ImageResourceReference, TextureSource>).clear());
   }
 }

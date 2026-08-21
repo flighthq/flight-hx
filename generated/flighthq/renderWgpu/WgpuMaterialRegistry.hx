@@ -3,46 +3,55 @@ package flighthq.renderWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.registry.RegistryTable.withRegistryTableEntry;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.Material;
+import flighthq.types.RegistryTable.KeyedTable;
+import flighthq.types.RegistryTable.RegistryEntryState;
+import flighthq.types.RegistryTable.RegistryTableEntry;
 import flighthq.types.RenderRegistrySignals;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.StandardMaterial.StandardMaterialKind;
 import flighthq.types.WgpuMaterialRenderer;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
 class WgpuMaterialRegistry {
   @:noCompletion
   public static function getWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMaterialRenderer> {
-    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
-    return cast _Runtime.coalesce(({ final __collection1:Dynamic = runtime.materialRendererMap; __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map<String, WgpuMaterialRenderer>).get(kind)); }), function():Dynamic return cast null);
+    var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:WgpuMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
+    entry = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : WgpuRenderRegistries).materialRenderers : KeyedTable<WgpuMaterialRenderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuMaterialRenderer>>).get(kind));
+    return cast ((cast _Runtime.strictEquals(({ final __structural2 = entry; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:WgpuMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   @:noCompletion
   public static function registerWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind, renderer:WgpuMaterialRenderer):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
-    ((cast ({ final __nullishOwner5 = runtime; final __nullishValue6:Null<flighthq._internal._Map<String, WgpuMaterialRenderer>> = cast __nullishOwner5.materialRendererMap; __nullishValue6 == null ? (__nullishOwner5.materialRendererMap = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, WgpuMaterialRenderer>>)) : (cast __nullishValue6 : Null<flighthq._internal._Map<String, WgpuMaterialRenderer>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast renderer)));
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuRenderStateRuntime);
+    ((cast runtime.registries : WgpuRenderRegistries).materialRenderers = (cast withRegistryTableEntry((cast (cast runtime.registries : WgpuRenderRegistries).materialRenderers : Dynamic), (cast kind : String), ({ final __callArgument4:Dynamic = renderer; __callArgument4; })) : KeyedTable<WgpuMaterialRenderer>));
   }
 
   @:noCompletion
   public static function resolveWgpuMaterialRenderer(state:WgpuRenderState, material:Null<Material>):Null<WgpuMaterialRenderer> {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    var map:Null<flighthq._internal._Map<String, WgpuMaterialRenderer>> = cast _Runtime.UNDEFINED;
+    var entries:flighthq._internal._Map<String, RegistryTableEntry<WgpuMaterialRenderer>> = cast _Runtime.UNDEFINED;
     var kind:String = cast _Runtime.UNDEFINED;
-    var renderer:Null<WgpuMaterialRenderer> = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument7:Dynamic = state; __callArgument7; })) : WgpuRenderStateRuntime);
-    map = runtime.materialRendererMap;
-    kind = _Runtime.coalesce(({ final __structural8 = material; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { var kind:String; }).kind; }), function():Dynamic return cast StandardMaterialKindValue);
-    renderer = _Runtime.coalesce(({ final __collection9:Dynamic = map; __collection9 == null ? _Runtime.UNDEFINED : ((cast __collection9 : flighthq._internal._Map<String, WgpuMaterialRenderer>).get(kind)); }), function():Dynamic return cast null);
-    if ((cast !_Runtime.strictEquals(renderer, null) : Bool)) { return cast renderer; }
+    var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:WgpuMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
+    var fallback:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:WgpuMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuRenderStateRuntime);
+    entries = (cast (cast runtime.registries : WgpuRenderRegistries).materialRenderers : KeyedTable<WgpuMaterialRenderer>).entries;
+    kind = _Runtime.coalesce(({ final __structural6 = material; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var kind:String; }).kind; }), function():Dynamic return cast StandardMaterialKindValue);
+    entry = ((cast entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuMaterialRenderer>>).get(kind));
+    if ((cast _Runtime.strictEquals(({ final __structural7 = entry; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { return cast (cast entry : { var state:String; var value:WgpuMaterialRenderer; }).value; }
     _Runtime.callOptionalValue(runtime.registryMiss, cast ([RenderRegistry.MaterialRenderer, kind] : Array<Dynamic>));
-    return cast ((cast _Runtime.strictEquals(kind, StandardMaterialKindValue) : Bool) ? (cast null : Dynamic) : (cast _Runtime.coalesce(({ final __collection10:Dynamic = map; __collection10 == null ? _Runtime.UNDEFINED : ((cast __collection10 : flighthq._internal._Map<String, WgpuMaterialRenderer>).get(StandardMaterialKindValue)); }), function():Dynamic return cast null) : Dynamic));
+    if ((cast _Runtime.strictEquals(kind, StandardMaterialKindValue) : Bool)) { return cast null; }
+    fallback = ((cast entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuMaterialRenderer>>).get(StandardMaterialKindValue));
+    return cast ((cast _Runtime.strictEquals(({ final __structural8 = fallback; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast fallback : { var state:String; var value:WgpuMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 }

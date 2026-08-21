@@ -11,3 +11,13 @@ typedef WgpuRenderEffectContext = { var state:WgpuRenderState; var source:WgpuRe
 typedef WgpuRenderEffectRunner = WgpuRenderEffectContext->RenderEffect->Void;
 
 typedef WgpuRenderEffectPipeline = { var options:RenderEffectPipelineOptions; var sceneTarget:Null<WgpuRenderTarget>; var pool:WgpuRenderTargetPool; var lutCache:ColorLutCache; var lutTexture:WgpuColorLutTextureCache; var velocityTexture:Null<flighthq._internal.dom.GPUTexture>; };
+
+typedef WgpuRenderEffectApplicationStatus = String;
+
+typedef WgpuRenderEffectApplicationExplanation = { var registeredCount:Float; var requestedCount:Float; var status:WgpuRenderEffectApplicationStatus; var unregisteredKinds:Array<String>; };
+
+typedef WgpuRenderEffectPipelineSkipGuard = WgpuRenderState->String->Void;
+
+typedef WgpuRenderEffectPipelineSampleCountGuard = WgpuRenderState->Float->Float->Void;
+
+typedef WgpuRenderEffectApplicationGuard = WgpuRenderState->WgpuRenderEffectApplicationExplanation->Void;

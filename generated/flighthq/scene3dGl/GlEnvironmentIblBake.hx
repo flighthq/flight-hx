@@ -22,6 +22,9 @@ class GlEnvironmentIblBake {
     var fbo:flighthq._internal.dom.WebGLFramebuffer = cast _Runtime.UNDEFINED;
     var prevFramebuffer:Null<flighthq._internal.dom.WebGLFramebuffer> = cast _Runtime.UNDEFINED;
     var prevViewport:flighthq._internal._Int32Array = cast _Runtime.UNDEFINED;
+    var prevDepthTest:Bool = cast _Runtime.UNDEFINED;
+    var prevCullFace:Bool = cast _Runtime.UNDEFINED;
+    var prevBlend:Bool = cast _Runtime.UNDEFINED;
     var irradianceCube:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var prefilteredCube:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
@@ -37,6 +40,9 @@ class GlEnvironmentIblBake {
     fbo = runtime.iblBakeFramebuffer;
     prevFramebuffer = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER_BINDING', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_BINDING)) : Null<flighthq._internal.dom.WebGLFramebuffer>);
     prevViewport = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'VIEWPORT', flighthq._internal.backend.WebGl2Backend.VIEWPORT)) : flighthq._internal._Int32Array);
+    prevDepthTest = flighthq._internal.backend.WebGl2Backend.isEnabled(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST));
+    prevCullFace = flighthq._internal.backend.WebGl2Backend.isEnabled(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flighthq._internal.backend.WebGl2Backend.CULL_FACE));
+    prevBlend = flighthq._internal.backend.WebGl2Backend.isEnabled(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND));
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST));
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flighthq._internal.backend.WebGl2Backend.CULL_FACE));
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND));
@@ -48,6 +54,9 @@ class GlEnvironmentIblBake {
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), prevFramebuffer);
     flighthq._internal.backend.WebGl2Backend.viewport(gl, flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 2.0 : Float)), flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 3.0 : Float)));
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, null);
+    if ((cast prevDepthTest : Bool)) { flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST)); }
+    if ((cast prevCullFace : Bool)) { flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flighthq._internal.backend.WebGl2Backend.CULL_FACE)); }
+    if ((cast prevBlend : Bool)) { flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND)); }
     (runtime.ibl = cast ({ brdfLut: brdfLut, intensity: _Runtime.field(environment, 'intensity'), irradianceCube: irradianceCube, prefilteredCube: prefilteredCube, prefilteredMipCount: prefilteredMipCount } : Null<GlScene3DIbl>));
   }
 

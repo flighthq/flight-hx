@@ -208,7 +208,7 @@ class AbcFile {
     if ((cast !(cast (cast AbcFile.readAbcPool__abcFile((cast reader : Dynamic), ({ final __callArgument0:Dynamic = integers; __callArgument0; }), ({ final __callArgument1:Dynamic = function():Null<Float> return (cast reader : AbcReader__abcFile).readVarInt(); __callArgument1; })) : Bool) : Bool) : Bool)) { return cast null; }
     unsignedIntegers = (cast cast ([0.0] : Array<Dynamic>));
     if ((cast !(cast (cast AbcFile.readAbcPool__abcFile((cast reader : Dynamic), ({ final __callArgument2:Dynamic = unsignedIntegers; __callArgument2; }), ({ final __callArgument3:Dynamic = function():Null<Float> return (cast reader : AbcReader__abcFile).readVarUint(); __callArgument3; })) : Bool) : Bool) : Bool)) { return cast null; }
-    doubles = (cast cast ([_Runtime.field(flighthq._internal._HostValueLut.get('Number'), 'NaN')] : Array<Dynamic>));
+    doubles = (cast cast ([HxMath.NaN] : Array<Dynamic>));
     if ((cast !(cast (cast AbcFile.readAbcPool__abcFile((cast reader : Dynamic), ({ final __callArgument4:Dynamic = doubles; __callArgument4; }), ({ final __callArgument5:Dynamic = function():Null<Float> return (cast reader : AbcReader__abcFile).readDouble(); __callArgument5; })) : Bool) : Bool) : Bool)) { return cast null; }
     strings = (cast cast ([''] : Array<Dynamic>));
     if ((cast !(cast (cast AbcFile.readAbcPool__abcFile((cast reader : Dynamic), ({ final __callArgument6:Dynamic = strings; __callArgument6; }), ({ final __callArgument7:Dynamic = function():Null<String> return (cast reader : AbcReader__abcFile).readString(); __callArgument7; })) : Bool) : Bool) : Bool)) { return cast null; }

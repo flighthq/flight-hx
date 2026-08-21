@@ -3,12 +3,12 @@ package flighthq.physics2d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionShape;
+import flighthq.types.Collision.CollisionBuiltInShape2D;
 import flighthq.types.Physics2D.Physics2DCollider;
 import flighthq.types.Physics2D.RigidBody2D;
 
 class ColliderTransform {
-  public static function createPhysics2DColliderWorldShape(local:CollisionShape):CollisionShape {
+  public static function createPhysics2DColliderWorldShape(local:CollisionBuiltInShape2D):CollisionBuiltInShape2D {
     {
       var __switchValue = (cast local : { var kind:String; }).kind;
       if (__switchValue == 'circle') {
@@ -34,8 +34,8 @@ class ColliderTransform {
   }
 
   public static function updatePhysics2DColliderWorldShape(collider:Physics2DCollider, body:RigidBody2D):Void {
-    var local:CollisionShape = cast _Runtime.UNDEFINED;
-    var world:CollisionShape = cast _Runtime.UNDEFINED;
+    var local:CollisionBuiltInShape2D = cast _Runtime.UNDEFINED;
+    var world:CollisionBuiltInShape2D = cast _Runtime.UNDEFINED;
     var cos:Float = cast _Runtime.UNDEFINED;
     var sin:Float = cast _Runtime.UNDEFINED;
     local = collider.local;
@@ -95,7 +95,7 @@ class ColliderTransform {
   }
 
   public static function writePhysics2DColliderBounds(collider:Physics2DCollider, out:{ var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }):Void {
-    var shape:CollisionShape = cast _Runtime.UNDEFINED;
+    var shape:CollisionBuiltInShape2D = cast _Runtime.UNDEFINED;
     shape = collider.world;
     {
       var __switchValue = (cast shape : { var kind:String; }).kind;

@@ -19,7 +19,7 @@ class ExplainUnpackedRectangles {
     var usableWidth:Float = cast _Runtime.UNDEFINED;
     var usableHeight:Float = cast _Runtime.UNDEFINED;
     var result:PackResult = cast _Runtime.UNDEFINED;
-    var unpacked:flighthq._internal._Set<RectangleId> = cast _Runtime.UNDEFINED;
+    var outstanding:flighthq._internal._Map<RectangleId, Float> = cast _Runtime.UNDEFINED;
     var explanations:Array<UnpackedRectangleExplanation> = cast _Runtime.UNDEFINED;
     border = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.border; }), function():Dynamic return cast 0.0);
     allowRotation = _Runtime.coalesce(({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.allowRotation; }), function():Dynamic return cast false);
@@ -27,11 +27,16 @@ class ExplainUnpackedRectangles {
     usableHeight = _Runtime.subtractNumbers(_Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.maxHeight; }), function():Dynamic return cast BIN_PACK_DEFAULT_MAX_EXTENT), (2.0 * border));
     result = (cast packRectangles(({ final __callArgument4:Dynamic = rectangles; __callArgument4; }), ({ final __callArgument5:Dynamic = options; __callArgument5; })) : PackResult);
     if ((cast _Runtime.strictEquals(_Runtime.field((cast result : PackResult).unpacked, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
-    unpacked = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [(cast result : PackResult).unpacked]);
+    outstanding = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
+    for (id in _Runtime.iterable((cast result : PackResult).unpacked)) {
+      ((cast outstanding : flighthq._internal._Map<RectangleId, Float>).set(id, (cast _Runtime.addNumbers(_Runtime.coalesce(((cast outstanding : flighthq._internal._Map<RectangleId, Float>).get(id)), function():Dynamic return cast 0.0), 1.0))));
+    }
     explanations = (cast cast ([] : Array<Dynamic>));
     for (rectangle in _Runtime.iterable(rectangles)) {
-      if ((cast !(cast ((cast unpacked : flighthq._internal._Set<RectangleId>).has(rectangle.id)) : Bool) : Bool)) { continue; }
-      _Runtime.callProperty(explanations, 'push', cast ([{ id: rectangle.id, reason: (cast ExplainUnpackedRectangles.getUnpackedReason__explainUnpackedRectangles(({ final __callArgument8:Dynamic = rectangle; __callArgument8; }), (cast usableWidth : Float), (cast usableHeight : Float), (cast allowRotation : Bool)) : UnpackedRectangleReason), usableWidth: usableWidth, usableHeight: usableHeight }] : Array<Dynamic>));
+      var remaining:Float = _Runtime.coalesce(((cast outstanding : flighthq._internal._Map<RectangleId, Float>).get(rectangle.id)), function():Dynamic return cast 0.0);
+      if ((cast _Runtime.strictEquals(remaining, 0.0) : Bool)) { continue; }
+      ((cast outstanding : flighthq._internal._Map<RectangleId, Float>).set(rectangle.id, (cast (remaining - 1.0))));
+      _Runtime.callProperty(explanations, 'push', cast ([{ id: rectangle.id, reason: (cast ExplainUnpackedRectangles.getUnpackedReason__explainUnpackedRectangles(({ final __callArgument10:Dynamic = rectangle; __callArgument10; }), (cast usableWidth : Float), (cast usableHeight : Float), (cast allowRotation : Bool)) : UnpackedRectangleReason), usableWidth: usableWidth, usableHeight: usableHeight }] : Array<Dynamic>));
     }
     return cast explanations;
     return cast null;

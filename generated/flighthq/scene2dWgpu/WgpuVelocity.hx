@@ -23,6 +23,9 @@ import flighthq.types.QuadBatch.QuadBatchData;
 import flighthq.types.QuadBatch.QuadBatchRuntime;
 import flighthq.types.QuadTransformType;
 import flighthq.types.Rectangle;
+import flighthq.types.RegistryTable.KeyedTable;
+import flighthq.types.RegistryTable.RegistryEntryState;
+import flighthq.types.RegistryTable.RegistryTableEntry;
 import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
@@ -30,18 +33,20 @@ import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types.Velocity.Velocity2D;
 import flighthq.types.Velocity.VelocityField;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderTarget;
 import flighthq.types.WgpuVelocityWriter;
 import flighthq.types.WgpuVelocityWriter.WgpuVelocityContext;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
+import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 import flighthq.velocity.VelocityField.getVelocity;
 
 typedef WgpuVelocityPipeline__wgpuVelocity = { var pipeline:flighthq._internal.dom.GPURenderPipeline; var uniformBuffer:flighthq._internal.dom.GPUBuffer; var bindGroup:flighthq._internal.dom.GPUBindGroup; var cursor:Float; var scratch:flighthq._internal._Float32Array; };
 
 class WgpuVelocity {
   public static function createWgpuVelocityTarget(state:WgpuRenderState, width:Float, height:Float):WgpuRenderTarget {
-    return cast (cast createWgpuRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast width : Float), (cast height : Float), (cast 'rgba16float' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : WgpuRenderTarget);
+    return cast (cast createWgpuRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast width : Float), (cast height : Float), (cast 'rgba16float' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : WgpuRenderTarget);
     return cast null;
   }
 
@@ -282,18 +287,21 @@ class WgpuVelocity {
 
   @:noCompletion
   public static function getWgpuVelocityWriter(state:WgpuRenderState, kind:Kind):Null<WgpuVelocityWriter> {
-    return cast _Runtime.coalesce(({ final __collection9:Dynamic = ((cast WgpuVelocity._velocityWriters__wgpuVelocity : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuVelocityWriter>>).get(state)); __collection9 == null ? _Runtime.UNDEFINED : ((cast __collection9 : flighthq._internal._Map<String, WgpuVelocityWriter>).get(kind)); }), function():Dynamic return cast null);
+    var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:WgpuVelocityWriter; }>> = cast _Runtime.UNDEFINED;
+    entry = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : WgpuRenderRegistries).velocityWriters : KeyedTable<WgpuVelocityWriter>).entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuVelocityWriter>>).get(kind));
+    return cast ((cast _Runtime.strictEquals(({ final __structural11 = entry; __structural11 == null ? _Runtime.UNDEFINED : (cast __structural11 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:WgpuVelocityWriter; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function registerWgpuVelocityWriter(state:WgpuRenderState, kind:Kind, writer:WgpuVelocityWriter):Void {
-    var writers:Null<flighthq._internal._Map<String, WgpuVelocityWriter>> = cast _Runtime.UNDEFINED;
-    writers = ((cast WgpuVelocity._velocityWriters__wgpuVelocity : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuVelocityWriter>>).get(state));
-    if ((cast _Runtime.strictEquals(writers, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (writers = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-      ((cast WgpuVelocity._velocityWriters__wgpuVelocity : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuVelocityWriter>>).set(state, (cast writers)));
-    }
-    ((cast writers : flighthq._internal._Map<String, WgpuVelocityWriter>).set(kind, (cast writer)));
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var table:KeyedTable<WgpuVelocityWriter> = cast _Runtime.UNDEFINED;
+    var entries:flighthq._internal._Map<String, RegistryTableEntry<WgpuVelocityWriter>> = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument12:Dynamic = state; __callArgument12; })) : WgpuRenderStateRuntime);
+    table = (cast runtime.registries : WgpuRenderRegistries).velocityWriters;
+    entries = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [(cast table : KeyedTable<WgpuVelocityWriter>).entries]);
+    ((cast entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuVelocityWriter>>).set(kind, (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: writer })));
+    ((cast runtime.registries : WgpuRenderRegistries).velocityWriters = _Runtime.mergeObjects([table, { entries: entries }]));
   }
 
   public static function renderWgpuVelocity<Traits:flighthq._internal._Object>(state:WgpuRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:WgpuRenderTarget):Void {
@@ -301,7 +309,7 @@ class WgpuVelocity {
     var pipeline:WgpuVelocityPipeline__wgpuVelocity = cast _Runtime.UNDEFINED;
     var pass:flighthq._internal.dom.GPURenderPassEncoder = cast _Runtime.UNDEFINED;
     var ctx:WgpuVelocityContext = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : WgpuRenderStateRuntime);
     if ((cast _Runtime.strictEquals(runtime.commandEncoder, null) : Bool)) {
       _Runtime.throwValue(_Runtime.error('No active command encoder — call renderWgpuBackground before renderWgpuVelocity.'));
     }
@@ -309,14 +317,14 @@ class WgpuVelocity {
       (cast runtime.renderPass : flighthq._internal.dom.GPURenderPassEncoder).end();
       (runtime.renderPass = cast (null : Null<flighthq._internal.dom.GPURenderPassEncoder>));
     }
-    pipeline = (cast WgpuVelocity.ensureWgpuVelocityPipeline__wgpuVelocity(({ final __callArgument11:Dynamic = state; __callArgument11; })) : WgpuVelocityPipeline__wgpuVelocity);
+    pipeline = (cast WgpuVelocity.ensureWgpuVelocityPipeline__wgpuVelocity(({ final __callArgument14:Dynamic = state; __callArgument14; })) : WgpuVelocityPipeline__wgpuVelocity);
     ((cast pipeline : WgpuVelocityPipeline__wgpuVelocity).cursor = 0.0);
     pass = (cast runtime.commandEncoder : flighthq._internal.dom.GPUCommandEncoder).beginRenderPass({ colorAttachments: cast ([{ view: target.view, loadOp: 'clear', storeOp: 'store', clearValue: { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } }] : Array<Dynamic>) });
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setViewport(0.0, 0.0, target.width, target.height, 0.0, 1.0);
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline((cast pipeline : WgpuVelocityPipeline__wgpuVelocity).pipeline);
     ((cast WgpuVelocity._activeVelocityPasses__wgpuVelocity : flighthq._internal._WeakMap<WgpuRenderState, { var pass:flighthq._internal.dom.GPURenderPassEncoder; var pipeline:WgpuVelocityPipeline__wgpuVelocity; }>).set(state, (cast { pass: pass, pipeline: pipeline })));
     ctx = (cast { state: state, field: field, width: target.width, height: target.height, pixelRatio: (cast state : WgpuRenderState).pixelRatio });
-    WgpuVelocity.visitWgpuVelocity__wgpuVelocity(({ final __callArgument12:Dynamic = ctx; __callArgument12; }), (cast root : Dynamic));
+    WgpuVelocity.visitWgpuVelocity__wgpuVelocity(({ final __callArgument15:Dynamic = ctx; __callArgument15; }), (cast root : Dynamic));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end();
     ((cast WgpuVelocity._activeVelocityPasses__wgpuVelocity : flighthq._internal._WeakMap<WgpuRenderState, { var pass:flighthq._internal.dom.GPURenderPassEncoder; var pipeline:WgpuVelocityPipeline__wgpuVelocity; }>).delete_(state));
   }
@@ -350,13 +358,13 @@ class WgpuVelocity {
     var writer:Null<WgpuVelocityWriter> = cast _Runtime.UNDEFINED;
     var count:Float = cast _Runtime.UNDEFINED;
     writer = (cast getWgpuVelocityWriter(ctx.state, (cast _Runtime.field(node, 'kind') : String)) : Null<WgpuVelocityWriter>);
-    if ((cast !_Runtime.strictEquals(writer, null) : Bool)) { writer(({ final __callArgument13:Dynamic = ctx; __callArgument13; }), ({ final __callArgument14:Dynamic = node; __callArgument14; })); }
+    if ((cast !_Runtime.strictEquals(writer, null) : Bool)) { writer(({ final __callArgument16:Dynamic = ctx; __callArgument16; }), ({ final __callArgument17:Dynamic = node; __callArgument17; })); }
     count = (cast getNodeChildCount((cast node : Dynamic)) : Float);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var child:Null<NodeOf<Traits>> = (cast getNodeChildAt((cast node : Dynamic), (cast i : Float)) : Null<NodeOf<Traits>>);
-        if ((cast !_Runtime.strictEquals(child, null) : Bool)) { WgpuVelocity.visitWgpuVelocity__wgpuVelocity(({ final __callArgument15:Dynamic = ctx; __callArgument15; }), (cast (cast (cast child : flighthq._internal._Any) : Transform2DNode<Traits>) : Dynamic)); }
+        if ((cast !_Runtime.strictEquals(child, null) : Bool)) { WgpuVelocity.visitWgpuVelocity__wgpuVelocity(({ final __callArgument18:Dynamic = ctx; __callArgument18; }), (cast (cast (cast child : flighthq._internal._Any) : Transform2DNode<Traits>) : Dynamic)); }
         i++;
       }
     }
@@ -373,8 +381,6 @@ class WgpuVelocity {
   public static final _scratchVelocity__wgpuVelocity:Velocity2D = (cast { x: 0.0, y: 0.0 });
 
   public static final _velocityPipelines__wgpuVelocity:flighthq._internal._WeakMap<WgpuRenderState, WgpuVelocityPipeline__wgpuVelocity> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
-
-  public static final _velocityWriters__wgpuVelocity:flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuVelocityWriter>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static final _activeVelocityPasses__wgpuVelocity:flighthq._internal._WeakMap<WgpuRenderState, { var pass:flighthq._internal.dom.GPURenderPassEncoder; var pipeline:WgpuVelocityPipeline__wgpuVelocity; }> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

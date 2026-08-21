@@ -56,7 +56,7 @@ class GlGradientGlowEffect {
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
     sourceMode = _Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw');
     gl = (cast state : GlRenderState).gl;
-    applyGlEffectTintPass(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = src; __callArgument10; }), ({ final __callArgument11:Dynamic = s0; __callArgument11; }), (cast 16777215.0 : Float), (cast 1.0 : Float), (cast HxMath.min(1.0, strength) : Float));
+    applyGlEffectTintPass(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = src; __callArgument10; }), ({ final __callArgument11:Dynamic = s0; __callArgument11; }), (cast 4294967295.0 : Float), (cast 1.0 : Float), (cast HxMath.min(1.0, strength) : Float));
     applyGlEffectBoxBlur(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = s0; __callArgument13; }), ({ final __callArgument14:Dynamic = s1; __callArgument14; }), ({ final __callArgument15:Dynamic = s2; __callArgument15; }), ({ final __callArgument16:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0), passes: quality }; __callArgument16; }));
     ramp = (cast createGlEffectGradientRampTexture(({ final __callArgument17:Dynamic = gl; __callArgument17; }), effect.colors, effect.alphas, effect.ratios) : flighthq._internal.dom.WebGLTexture);
     GlGradientGlowEffect.applyGradientLookupPass__glGradientGlowEffect(({ final __callArgument18:Dynamic = state; __callArgument18; }), ({ final __callArgument19:Dynamic = s1; __callArgument19; }), ({ final __callArgument20:Dynamic = ramp; __callArgument20; }), ({ final __callArgument21:Dynamic = s0; __callArgument21; }));
@@ -78,7 +78,7 @@ class GlGradientGlowEffect {
   });
 
   public static function registerGlGradientGlowEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument39:Dynamic = state; __callArgument39; }), (cast 'GradientGlowEffect' : String), ({ final __callArgument40:Dynamic = defaultGlGradientGlowEffectRunner; __callArgument40; }));
+    registerGlRenderEffect(({ final __callArgument39:Dynamic = state; __callArgument39; }), (cast 'GradientGlowEffect' : String), ({ final __callArgument40:Dynamic = defaultGlGradientGlowEffectRunner; __callArgument40; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static function applyGradientLookupPass__glGradientGlowEffect(state:GlRenderState, blurred:GlRenderTarget, ramp:flighthq._internal.dom.WebGLTexture, dest:GlRenderTarget):Void {

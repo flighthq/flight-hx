@@ -3,42 +3,81 @@ package flighthq.effectsWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effectsWgpu.WgpuBlurEffect.applyGaussianBlurToWgpu;
+import flighthq.effectsWgpu.WgpuEffectPass.createWgpuDualSourceEffectPipeline;
+import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuDualSourceEffectPass;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
+import flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget;
+import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
 import flighthq.types.LensDirtEffect;
 import flighthq.types.RenderEffect;
+import flighthq.types.WgpuDualSourceEffectPipeline;
+import flighthq.types.WgpuEffectBlendMode;
 import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
+import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
 class WgpuLensDirtEffect {
   @:noCompletion
-  public static function applyLensDirtEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:LensDirtEffect):Void {
+  public static function applyLensDirtEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:LensDirtEffect):Void {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var threshold:Float = cast _Runtime.UNDEFINED;
     var seed:Float = cast _Runtime.UNDEFINED;
-    var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
+    var descriptor:{ var width:Float; var height:Float; var format:String; } = cast _Runtime.UNDEFINED;
+    var bright:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var blurred:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var temp:WgpuRenderTarget = cast _Runtime.UNDEFINED;
+    var brightPipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.55);
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
-    pipeline = (cast getWgpuEffectPipeline(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'lens.lensDirt' : String), (cast WgpuLensDirtEffect.LENS_DIRT_FRAGMENT_WGSL__wgpuLensDirtEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast source : WgpuRenderTarget), ({ final __callArgument2:Dynamic = (cast dest : WgpuRenderTarget); __callArgument2; }), ({ final __callArgument3:Dynamic = pipeline; __callArgument3; }), ({ final __callArgument4:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    descriptor = (cast { width: source.width, height: source.height, format: source.format });
+    bright = (cast acquireWgpuRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = pool; __callArgument1; }), ({ final __callArgument2:Dynamic = descriptor; __callArgument2; })) : WgpuRenderTarget);
+    blurred = (cast acquireWgpuRenderTarget(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = pool; __callArgument4; }), ({ final __callArgument5:Dynamic = descriptor; __callArgument5; })) : WgpuRenderTarget);
+    temp = (cast acquireWgpuRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pool; __callArgument7; }), ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : WgpuRenderTarget);
+    brightPipeline = (cast getWgpuEffectPipeline(({ final __callArgument9:Dynamic = state; __callArgument9; }), (cast 'lens.lensDirt.bright' : String), (cast WgpuLensDirtEffect.LENS_DIRT_BRIGHT_FRAGMENT_WGSL__wgpuLensDirtEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass(({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast source : WgpuRenderTarget), ({ final __callArgument11:Dynamic = bright; __callArgument11; }), ({ final __callArgument12:Dynamic = brightPipeline; __callArgument12; }), ({ final __callArgument13:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast threshold : Float));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument13; }));
+    applyGaussianBlurToWgpu(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = bright; __callArgument15; }), ({ final __callArgument16:Dynamic = blurred; __callArgument16; }), ({ final __callArgument17:Dynamic = temp; __callArgument17; }), ({ final __callArgument18:Dynamic = { blurX: WgpuLensDirtEffect.LENS_DIRT_BLUR_SIGMA__wgpuLensDirtEffect, blurY: WgpuLensDirtEffect.LENS_DIRT_BLUR_SIGMA__wgpuLensDirtEffect }; __callArgument18; }));
+    drawWgpuDualSourceEffectPass(({ final __callArgument19:Dynamic = state; __callArgument19; }), (cast source : WgpuRenderTarget), ({ final __callArgument20:Dynamic = blurred; __callArgument20; }), ({ final __callArgument21:Dynamic = (cast dest : WgpuRenderTarget); __callArgument21; }), (cast WgpuLensDirtEffect.getLensDirtCompositePipeline__wgpuLensDirtEffect(({ final __callArgument22:Dynamic = state; __callArgument22; })) : WgpuEffectPipeline), ({ final __callArgument23:Dynamic = function(__unused4:flighthq._internal._Float32Array, __unused5:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast intensity : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast threshold : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast seed : Float));
-    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument4; }));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast seed : Float));
+    }, cast ([__unused4] : Array<Dynamic>)); }; __callArgument23; }));
+    releaseWgpuRenderTarget(({ final __callArgument24:Dynamic = pool; __callArgument24; }), ({ final __callArgument25:Dynamic = bright; __callArgument25; }));
+    releaseWgpuRenderTarget(({ final __callArgument26:Dynamic = pool; __callArgument26; }), ({ final __callArgument27:Dynamic = blurred; __callArgument27; }));
+    releaseWgpuRenderTarget(({ final __callArgument28:Dynamic = pool; __callArgument28; }), ({ final __callArgument29:Dynamic = temp; __callArgument29; }));
   }
 
   public static final defaultWgpuLensDirtEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyLensDirtEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast effect : LensDirtEffect));
+    applyLensDirtEffectToWgpu(ctx.state, ctx.source, ctx.dest, ctx.pool, (cast effect : LensDirtEffect));
   });
 
   public static function registerWgpuLensDirtEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'LensDirtEffect' : String), ({ final __callArgument6:Dynamic = defaultWgpuLensDirtEffectRunner; __callArgument6; }));
+    registerWgpuRenderEffect(({ final __callArgument30:Dynamic = state; __callArgument30; }), (cast 'LensDirtEffect' : String), ({ final __callArgument31:Dynamic = defaultWgpuLensDirtEffectRunner; __callArgument31; }));
   }
 
-  public static final LENS_DIRT_FRAGMENT_WGSL__wgpuLensDirtEffect:String = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_threshold : f32,\n  u_seed : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn dirtHash(p : vec2f) -> f32 { return fract(sin(dot(p, vec2f(127.1, 311.7))) * 43758.5453123); }\n\nfn dirtAmount(uv : vec2f, seed : f32) -> f32 {\n  var acc = 0.0;\n  for (var i = 0; i < 8; i = i + 1) {\n    let fi = f32(i);\n    let c = vec2f(dirtHash(vec2f(fi, seed)), dirtHash(vec2f(fi + 9.0, seed)));\n    let r = 0.06 + 0.16 * dirtHash(vec2f(fi + 3.0, seed));\n    let d = distance(uv, c) / r;\n    acc = acc + smoothstep(1.0, 0.0, d) * (0.3 + 0.7 * dirtHash(vec2f(fi + 5.0, seed)));\n  }\n  return clamp(acc, 0.0, 1.0);\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let lum = dot(c.rgb, vec3f(0.299, 0.587, 0.114));\n  let bright = max(0.0, lum - uni.u_threshold);\n  let dirt = dirtAmount(uv, uni.u_seed + 1.0);\n  return vec4f(c.rgb + bright * dirt * uni.u_intensity * 2.0, c.a);\n}';
+  public static function getLensDirtCompositePipeline__wgpuLensDirtEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
+    var pipeline:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
+    pipeline = ((cast WgpuLensDirtEffect._compositePipelines__wgpuLensDirtEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
+    if ((cast _Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      (pipeline = cast ((cast createWgpuDualSourceEffectPipeline(({ final __callArgument32:Dynamic = state; __callArgument32; }), (cast WgpuLensDirtEffect.LENS_DIRT_COMPOSITE_FRAGMENT_WGSL__wgpuLensDirtEffect : String), ({ final __callArgument33:Dynamic = 'replace'; __callArgument33; })) : WgpuEffectPipeline) : Dynamic));
+      ((cast WgpuLensDirtEffect._compositePipelines__wgpuLensDirtEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, (cast pipeline)));
+    }
+    return cast pipeline;
+    return cast null;
+  }
+
+  public static final LENS_DIRT_BRIGHT_FRAGMENT_WGSL__wgpuLensDirtEffect:String = '\nstruct Uniforms {\n  u_threshold : f32,\n  _pad0 : f32,\n  _pad1 : f32,\n  _pad2 : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let lum = dot(c.rgb, vec3f(0.299, 0.587, 0.114));\n  let bright = max(0.0, lum - uni.u_threshold);\n  return vec4f(c.rgb * (bright / max(lum, 0.00001)), c.a);\n}';
+
+  public static final LENS_DIRT_COMPOSITE_FRAGMENT_WGSL__wgpuLensDirtEffect:String = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_seed : f32,\n  _pad0 : f32,\n  _pad1 : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var sceneTex : texture_2d<f32>;\n@group(1) @binding(1) var sceneSmp : sampler;\n@group(2) @binding(0) var brightTex : texture_2d<f32>;\n@group(2) @binding(1) var brightSmp : sampler;\n\nfn dirtHash(p : vec2f) -> f32 { return fract(sin(dot(p, vec2f(127.1, 311.7))) * 43758.5453123); }\n\nfn dirtAmount(uv : vec2f, seed : f32) -> f32 {\n  var acc = 0.0;\n  for (var i = 0; i < 8; i = i + 1) {\n    let fi = f32(i);\n    let c = vec2f(dirtHash(vec2f(fi, seed)), dirtHash(vec2f(fi + 9.0, seed)));\n    let r = 0.06 + 0.16 * dirtHash(vec2f(fi + 3.0, seed));\n    let d = distance(uv, c) / r;\n    acc = acc + smoothstep(1.0, 0.0, d) * (0.3 + 0.7 * dirtHash(vec2f(fi + 5.0, seed)));\n  }\n  return clamp(acc, 0.0, 1.0);\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let scene = textureSampleLevel(sceneTex, sceneSmp, uv, 0.0);\n  let bright = textureSampleLevel(brightTex, brightSmp, uv, 0.0).rgb;\n  let dirt = dirtAmount(uv, uni.u_seed + 1.0);\n  return vec4f(scene.rgb + bright * dirt * uni.u_intensity * 2.0, scene.a);\n}';
+
+  public static final LENS_DIRT_BLUR_SIGMA__wgpuLensDirtEffect:Float = 8.0;
+
+  public static final _compositePipelines__wgpuLensDirtEffect:flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

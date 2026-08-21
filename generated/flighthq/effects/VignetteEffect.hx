@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.VignetteEffect;
 
 class VignetteEffect {
-  public static function createVignetteEffect(?options:flighthq._internal._Omit<flighthq.types.VignetteEffect, String>):flighthq.types.VignetteEffect {
+  public static function createVignetteEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var radius:Null<Float>; @:optional var softness:Null<Float>; @:optional var color:Null<Float>; }):flighthq.types.VignetteEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'VignetteEffect' }, options]);
     return cast null;

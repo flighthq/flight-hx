@@ -6,6 +6,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const cloneMeshGeometry = api.cloneMeshGeometry;
+export const cloneMeshGeometryMetadata = api.cloneMeshGeometryMetadata;
 export const createMeshGeometry = api.createMeshGeometry;
 export const destroyMeshGeometryGlData = api.destroyMeshGeometryGlData;
 export const destroyMeshGeometryWgpuData = api.destroyMeshGeometryWgpuData;

@@ -5,6 +5,8 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 class Constants {
+  public static final CIRCLE_KAPPA:Float = 0.5522847498307936;
+
   public static final EPSILON:Float = 0.000001;
 
   public static final TAU:Float = (HxMath.PI * 2.0);

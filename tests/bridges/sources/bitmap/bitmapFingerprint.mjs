@@ -5,6 +5,7 @@ const api = compiled.flighthq.bitmap.BitmapFingerprint;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const BITMAP_FINGERPRINT_COMPUTATION_ID = api.BITMAP_FINGERPRINT_COMPUTATION_ID;
 export const compareBitmapFingerprints = api.compareBitmapFingerprints;
 export const createBitmapFingerprint = api.createBitmapFingerprint;
 export const formatBitmapFingerprint = api.formatBitmapFingerprint;

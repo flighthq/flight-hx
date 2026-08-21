@@ -5,6 +5,7 @@ const api = compiled.flighthq.scene3dFormats.Md5Parse;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const canonicalizeMd5TangentHandedness = api.canonicalizeMd5TangentHandedness;
 export const createScene3DFromMd5Mesh = api.createScene3DFromMd5Mesh;
 export const importMd5Mesh = api.importMd5Mesh;
 export const parseMd5Mesh = api.parseMd5Mesh;

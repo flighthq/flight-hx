@@ -43,7 +43,7 @@ import flighthq.types.PointerEventData.PointerType;
 import flighthq.types.Signal;
 import flighthq.types.Signal.SignalData;
 import flighthq.types.SignalConnectOptions;
-import flighthq.types.Spatial.SpatialIndex;
+import flighthq.types.Spatial.SpatialIndex2D;
 import flighthq.types.Vector2.Vector2Like;
 
 typedef KeyboardSignalName__interactionManager = String;
@@ -150,11 +150,11 @@ class InteractionManager {
     InteractionManager.dispatchPointerSignalAt__interactionManager((cast manager : Dynamic), (cast 'onContextMenu' : Dynamic), (cast x : Float), (cast y : Float), (cast button : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument24:Dynamic = options; __callArgument24; }));
   }
 
-  public static function dispatchInteractionKeyDown<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, key:String, keyCode:Float = 0.0, ?modifiers:flighthq._internal._Partial<KeyboardEventData>):Void {
+  public static function dispatchInteractionKeyDown<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, key:String, keyCode:Float = 0.0, ?modifiers:{ @:optional var altKey:Null<Bool>; @:optional var ctrlKey:Null<Bool>; @:optional var key:Null<String>; @:optional var keyCode:Null<Float>; @:optional var metaKey:Null<Bool>; @:optional var shiftKey:Null<Bool>; }):Void {
     InteractionManager.dispatchKeyboardSignal__interactionManager((cast manager : Dynamic), (cast 'onKeyDown' : Dynamic), (cast key : String), (cast keyCode : Float), ({ final __callArgument25:Dynamic = modifiers; __callArgument25; }));
   }
 
-  public static function dispatchInteractionKeyUp<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, key:String, keyCode:Float = 0.0, ?modifiers:flighthq._internal._Partial<KeyboardEventData>):Void {
+  public static function dispatchInteractionKeyUp<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, key:String, keyCode:Float = 0.0, ?modifiers:{ @:optional var altKey:Null<Bool>; @:optional var ctrlKey:Null<Bool>; @:optional var key:Null<String>; @:optional var keyCode:Null<Float>; @:optional var metaKey:Null<Bool>; @:optional var shiftKey:Null<Bool>; }):Void {
     InteractionManager.dispatchKeyboardSignal__interactionManager((cast manager : Dynamic), (cast 'onKeyUp' : Dynamic), (cast key : String), (cast keyCode : Float), ({ final __callArgument26:Dynamic = modifiers; __callArgument26; }));
   }
 
@@ -275,7 +275,7 @@ class InteractionManager {
     (InteractionManager.interactionConnectGuard__interactionManager = cast (guard : Dynamic));
   }
 
-  public static function dispatchKeyboardSignal__interactionManager<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, name:KeyboardSignalName__interactionManager, key:String, keyCode:Float, ?modifiers:flighthq._internal._Partial<KeyboardEventData>):Void {
+  public static function dispatchKeyboardSignal__interactionManager<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, name:KeyboardSignalName__interactionManager, key:String, keyCode:Float, ?modifiers:{ @:optional var altKey:Null<Bool>; @:optional var ctrlKey:Null<Bool>; @:optional var key:Null<String>; @:optional var keyCode:Null<Float>; @:optional var metaKey:Null<Bool>; @:optional var shiftKey:Null<Bool>; }):Void {
     if ((cast ((cast !(cast manager.enabled : Bool) : Bool) || (cast !(cast (cast InteractionManager.hasInteractionSignalSubscriber__interactionManager((cast manager : Dynamic), (cast name : String)) : Bool) : Bool) : Bool)) : Bool)) { return; }
     InteractionManager.setKeyboardData__interactionManager((cast key : String), (cast keyCode : Float), ({ final __callArgument57:Dynamic = modifiers; __callArgument57; }));
     InteractionManager.emitInteractionSignal__interactionManager((cast manager.root : Dynamic), (cast manager.root : Dynamic), (cast name : Dynamic), ({ final __callArgument58:Dynamic = InteractionManager._keyboardData__interactionManager; __callArgument58; }));
@@ -347,7 +347,7 @@ class InteractionManager {
     while ((cast !_Runtime.strictEquals(current, null) : Bool)) {
       InteractionManager.setInteractionSignalCurrentTarget__interactionManager((cast data : Dynamic), ({ final __callArgument78:Dynamic = target; __callArgument78; }), ({ final __callArgument79:Dynamic = current; __callArgument79; }));
       InteractionManager.emitInteractionSignalDirect__interactionManager((cast current : Dynamic), (cast name : Dynamic), (cast data : Dynamic));
-      if ((cast (cast (cast InteractionManager.isInteractionSignalCancelled__interactionManager : { var ___u40_EntityRuntimeKey_u40_12063:Null<NodeRuntime<flighthq._internal._Any>>; var data:Null<flighthq._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument80:Dynamic = current; __callArgument80; }), (cast name : String)) : Bool) : Bool)) { break; }
+      if ((cast (cast (cast InteractionManager.isInteractionSignalCancelled__interactionManager : { var ___u40_EntityRuntimeKey_u40_9457:Null<NodeRuntime<flighthq._internal._Any>>; var data:Null<flighthq._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument80:Dynamic = current; __callArgument80; }), (cast name : String)) : Bool) : Bool)) { break; }
       if ((cast _Runtime.strictEquals(current, root) : Bool)) { break; }
       (current = cast ((cast getNodeParent((cast current : Dynamic)) : Null<N>) : Dynamic));
     }
@@ -421,7 +421,7 @@ class InteractionManager {
   public static function hasInteractionSignalSubscriber__interactionManager<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, name:InteractionSignalName):Bool {
     if ((cast ((cast _Runtime.coalesce(((cast manager.signalSubscriberCounts : flighthq._internal._Map<String, Float>).get(name)), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float)) : Bool)) { return cast true; }
     if ((cast manager.trackedSubscribersOnly : Bool)) { return cast false; }
-    return cast (cast (cast InteractionManager.hasInteractionSignalSubscriberInGraph__interactionManager : { var ___u40_EntityRuntimeKey_u40_12063:Null<NodeRuntime<flighthq._internal._Any>>; var data:Null<flighthq._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument85:Dynamic = manager.root; __callArgument85; }), (cast name : String)) : Bool);
+    return cast (cast (cast InteractionManager.hasInteractionSignalSubscriberInGraph__interactionManager : { var ___u40_EntityRuntimeKey_u40_9457:Null<NodeRuntime<flighthq._internal._Any>>; var data:Null<flighthq._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument85:Dynamic = manager.root; __callArgument85; }), (cast name : String)) : Bool);
     return cast null;
   }
 
@@ -433,7 +433,7 @@ class InteractionManager {
     children = _Runtime.field((cast getNodeRuntime((cast source : Dynamic)) : NodeRuntime<flighthq._internal._Any>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        if ((cast (cast (cast InteractionManager.hasInteractionSignalSubscriberInGraph__interactionManager : { var ___u40_EntityRuntimeKey_u40_12063:Null<NodeRuntime<flighthq._internal._Any>>; var data:Null<flighthq._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument89:Dynamic = (cast child : N); __callArgument89; }), (cast name : String)) : Bool) : Bool)) { return cast true; }
+        if ((cast (cast (cast InteractionManager.hasInteractionSignalSubscriberInGraph__interactionManager : { var ___u40_EntityRuntimeKey_u40_9457:Null<NodeRuntime<flighthq._internal._Any>>; var data:Null<flighthq._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument89:Dynamic = (cast child : N); __callArgument89; }), (cast name : String)) : Bool) : Bool)) { return cast true; }
       }
     }
     return cast false;
@@ -469,7 +469,7 @@ class InteractionManager {
     if ((cast _Runtime.strictEquals((cast targetSlots : flighthq._internal._Map<Dynamic, Dynamic>).size, 0.0) : Bool)) { ((cast manager.trackedSignalSlots : flighthq._internal._Map<N, flighthq._internal._Map<String, flighthq._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>>).delete_(target)); }
   }
 
-  public static function setKeyboardData__interactionManager(key:String, keyCode:Float, modifiers:Null<flighthq._internal._Partial<KeyboardEventData>>):Void {
+  public static function setKeyboardData__interactionManager(key:String, keyCode:Float, modifiers:Null<{ @:optional var altKey:Null<Bool>; @:optional var ctrlKey:Null<Bool>; @:optional var key:Null<String>; @:optional var keyCode:Null<Float>; @:optional var metaKey:Null<Bool>; @:optional var shiftKey:Null<Bool>; }>):Void {
     (InteractionManager._keyboardData__interactionManager.altKey = cast (_Runtime.coalesce(({ final __structural95 = modifiers; __structural95 == null ? _Runtime.UNDEFINED : (cast __structural95 : { @:optional var altKey:Null<Bool>; }).altKey; }), function():Dynamic return cast false) : Bool));
     (InteractionManager._keyboardData__interactionManager.ctrlKey = cast (_Runtime.coalesce(({ final __structural96 = modifiers; __structural96 == null ? _Runtime.UNDEFINED : (cast __structural96 : { @:optional var ctrlKey:Null<Bool>; }).ctrlKey; }), function():Dynamic return cast false) : Bool));
     (InteractionManager._keyboardData__interactionManager.key = cast (key : String));

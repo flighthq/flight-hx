@@ -29,9 +29,14 @@ class GlNode2D {
   }
 
   public static function renderGlScene2D(state:GlRenderState, source:Node2D):Void {
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var tempStack:Array<Renderable> = cast _Runtime.UNDEFINED;
     var clipHooks:Null<Scene2DClipHooks> = cast _Runtime.UNDEFINED;
     var stackLength:Float = cast _Runtime.UNDEFINED;
+    gl = (cast state : GlRenderState).gl;
+    flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flighthq._internal.backend.WebGl2Backend.CULL_FACE));
+    flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST));
+    flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND));
     tempStack = (cast (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime) : { var tempStack:Array<Renderable>; }).tempStack;
     clipHooks = (cast state : GlRenderState).displayObjectClipHooks;
     stackLength = 1.0;

@@ -32,7 +32,6 @@ import flighthq.scene2dCanvas.CanvasTextureResolver as Facade_Scene2dCanvas_flig
 import flighthq.scene2dCanvas.CanvasTilemap as Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasTilemap;
 import flighthq.scene2dCanvas.EnableCanvasTextureResolverGuards as Facade_Scene2dCanvas_flighthq_scene2dCanvas_EnableCanvasTextureResolverGuards;
 import flighthq.scene2dCanvas.ExplainCanvasTextureResolution as Facade_Scene2dCanvas_flighthq_scene2dCanvas_ExplainCanvasTextureResolution;
-import flighthq.types.CanvasRenderOptions;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTexture.CanvasRenderTextureExplanation;
 import flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool;
@@ -44,6 +43,7 @@ import flighthq.types.Node2D;
 import flighthq.types.RenderCache;
 import flighthq.types.RenderCacheRefreshOptions;
 import flighthq.types.RenderState;
+import flighthq.types.RenderState.Scene3DGraphSyncPolicy;
 import flighthq.types.RenderTarget.RenderTargetDescriptor;
 import flighthq.types.RenderTexture;
 import flighthq.types.Scene2DRenderer;
@@ -87,7 +87,7 @@ class Scene2dCanvas {
     return cast null;
   }
 
-  public static function createCanvasRenderState(canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:flighthq._internal._Partial<CanvasRenderOptions>):CanvasRenderState {
+  public static function createCanvasRenderState(canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:{ @:optional var backgroundColor:Null<Float>; @:optional var contextAttributes:Null<flighthq._internal.dom.CanvasRenderingContext2DSettings>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<flighthq._internal.dom.ImageSmoothingQuality>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; }):CanvasRenderState {
     return cast Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasRenderState.createCanvasRenderState(canvas, options);
     return cast null;
   }

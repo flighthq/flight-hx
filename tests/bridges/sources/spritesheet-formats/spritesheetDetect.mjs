@@ -7,5 +7,7 @@ __syncDependencies();
 
 export const detectSpritesheetFormat = api.detectSpritesheetFormat;
 export const getSpritesheetFormat = api.getSpritesheetFormat;
+export const getSpritesheetFormatKinds = api.getSpritesheetFormatKinds;
 export const parseSpritesheet = api.parseSpritesheet;
 export const registerSpritesheetFormat = api.registerSpritesheetFormat;
+export const unregisterSpritesheetFormat = api.unregisterSpritesheetFormat;

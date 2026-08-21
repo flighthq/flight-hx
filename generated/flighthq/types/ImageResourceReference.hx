@@ -14,7 +14,7 @@ typedef ImageResourceFailure = { var kind:ImageResourceFailureKind; var message:
 
 typedef ImageResourceReferenceBase__ImageResourceReference = { var failure:Null<ImageResourceFailure>; var mimeType:Null<String>; var state:ResourceResolutionState; @:optional var textures:Array<Texture>; };
 
-typedef EmbeddedImageResourceReference = { var failure:Null<ImageResourceFailure>; var mimeType:Null<String>; var state:ResourceResolutionState; @:optional var textures:Array<Texture>; var kind:String; var bytes:flighthq._internal._UInt8Array; };
+typedef EmbeddedImageResourceReference = { var failure:Null<ImageResourceFailure>; var mimeType:Null<String>; var state:ResourceResolutionState; @:optional var textures:Array<Texture>; var kind:String; var alphaType:AlphaType; @:optional var bitmapComposition:ImageBitmapComposition; var bytes:flighthq._internal._UInt8Array; };
 
 typedef ExternalImageResourceReference = { var failure:Null<ImageResourceFailure>; var mimeType:Null<String>; var state:ResourceResolutionState; @:optional var textures:Array<Texture>; var kind:String; var uri:String; var basePath:Null<String>; };
 

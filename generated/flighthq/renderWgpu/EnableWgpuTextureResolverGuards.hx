@@ -3,10 +3,14 @@ package flighthq.renderWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.log.Log.logOnce;
 import flighthq.render.RenderRegistryGuards.areRenderRegistryGuardsEnabled;
 import flighthq.render.RenderRegistryGuards.enableRenderRegistryGuards;
+import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
+import flighthq.types.Log.LogLevel;
 import flighthq.types.RenderState;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 
 class EnableWgpuTextureResolverGuards {
   @:noCompletion
@@ -16,6 +20,13 @@ class EnableWgpuTextureResolverGuards {
   }
 
   public static function enableWgpuTextureResolverGuards(state:WgpuRenderState):Void {
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     enableRenderRegistryGuards(({ final __callArgument1:Dynamic = state; __callArgument1; }));
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
+    (runtime.mipmapDegradedGuard = cast (EnableWgpuTextureResolverGuards.warnOnMipmapDegradation__enableWgpuTextureResolverGuards : Null<WgpuRenderState->Void>));
+  }
+
+  public static function warnOnMipmapDegradation__enableWgpuTextureResolverGuards(state:WgpuRenderState):Void {
+    (cast logOnce((cast 'render-wgpu:mipmap-degraded' : String), ({ final __callArgument3:Dynamic = LogLevel.Warn; __callArgument3; }), (cast { message: 'bindWgpuBitmapTexture: mipmaps requested but no WGPU mipmap generator registered — texture allocated with a single mip level (bilinear fallback). Call registerWgpuMipmapGeneration(state) to enable trilinear/anisotropic sampling.', state: state } : Dynamic), ({ final __callArgument4:Dynamic = 'render-wgpu'; __callArgument4; })) : Bool);
   }
 }

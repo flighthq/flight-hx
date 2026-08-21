@@ -5,6 +5,7 @@ export const addLogSink = compiled.flighthq.log.Log.addLogSink;
 export const beginLogGroup = compiled.flighthq.log.Log.beginLogGroup;
 export const clearLogChannelLevels = compiled.flighthq.log.Log.clearLogChannelLevels;
 export const clearLogGroups = compiled.flighthq.log.Log.clearLogGroups;
+export const clearLogOnceKeys = compiled.flighthq.log.Log.clearLogOnceKeys;
 export const clearLogRedactionPaths = compiled.flighthq.log.Log.clearLogRedactionPaths;
 export const clearLogSerializers = compiled.flighthq.log.Log.clearLogSerializers;
 export const clearLogSinks = compiled.flighthq.log.Log.clearLogSinks;

@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.geometry.Aabb as Facade_Geometry_flighthq_geometry_Aabb;
 import flighthq.geometry.BoundingSphere as Facade_Geometry_flighthq_geometry_BoundingSphere;
 import flighthq.geometry.Capsule as Facade_Geometry_flighthq_geometry_Capsule;
+import flighthq.geometry.EnableGeometryPoolGuards as Facade_Geometry_flighthq_geometry_EnableGeometryPoolGuards;
 import flighthq.geometry.Frustum as Facade_Geometry_flighthq_geometry_Frustum;
 import flighthq.geometry.Matrix as Facade_Geometry_flighthq_geometry_Matrix;
 import flighthq.geometry.Matrix3 as Facade_Geometry_flighthq_geometry_Matrix3;
@@ -172,6 +173,11 @@ class Geometry {
 
   public static function appendTranslationMatrix4(out:Matrix4Like, source:Matrix4Like, x:Float, y:Float, z:Float):Void {
     Facade_Geometry_flighthq_geometry_Matrix4.appendTranslationMatrix4(out, source, x, y, z);
+  }
+
+  public static function areGeometryPoolGuardsEnabled():Bool {
+    return cast Facade_Geometry_flighthq_geometry_EnableGeometryPoolGuards.areGeometryPoolGuardsEnabled();
+    return cast null;
   }
 
   public static function clampVector2(out:Vector2Like, value:Vector2Like, min:Vector2Like, max:Vector2Like):Void {
@@ -537,6 +543,10 @@ class Geometry {
     Facade_Geometry_flighthq_geometry_Transform2d.decomposeMatrixToTransform2D(out, source);
   }
 
+  public static function disableGeometryPoolGuards():Void {
+    Facade_Geometry_flighthq_geometry_EnableGeometryPoolGuards.disableGeometryPoolGuards();
+  }
+
   public static function divideVector2(out:Vector2Like, source:Vector2Like, divisor:Vector2Like):Void {
     Facade_Geometry_flighthq_geometry_Vector2.divideVector2(out, source, divisor);
   }
@@ -547,6 +557,10 @@ class Geometry {
 
   public static function divideVector4(out:Vector4Like, source:Vector4Like, divisor:Vector4Like):Void {
     Facade_Geometry_flighthq_geometry_Vector4.divideVector4(out, source, divisor);
+  }
+
+  public static function enableGeometryPoolGuards():Void {
+    Facade_Geometry_flighthq_geometry_EnableGeometryPoolGuards.enableGeometryPoolGuards();
   }
 
   public static function enclosesRectangle(source:RectangleLike, other:RectangleLike):Bool {

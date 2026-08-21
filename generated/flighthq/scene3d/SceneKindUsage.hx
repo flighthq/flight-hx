@@ -42,7 +42,7 @@ class SceneKindUsage {
           var material:Null<Material> = (cast flighthq._internal._StaticIndex.readArray(materials, i) : Null<Material>);
           if ((cast _Runtime.strictEquals(material, null) : Bool)) { i++; continue; }
           SceneKindUsage.addScene3DUsedKind__sceneKindUsage(out.materialKinds, (cast (cast material : Material).kind : String));
-          var modifiers:Null<Array<Modifier>> = _Runtime.field((cast material : flighthq._internal._Partial<{ var modifiers:Array<Modifier>; }>), 'modifiers');
+          var modifiers:Null<Array<Modifier>> = (cast (cast material : { @:optional var modifiers:Null<Array<Modifier>>; }) : { @:optional var modifiers:Null<Array<Modifier>>; }).modifiers;
           if ((cast _Runtime.strictEquals(modifiers, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
           {
             var m:Float = 0.0;

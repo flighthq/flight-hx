@@ -32,7 +32,7 @@ class GlSketchEffect {
   });
 
   public static function registerGlSketchEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'SketchEffect' : String), ({ final __callArgument6:Dynamic = defaultGlSketchEffectRunner; __callArgument6; }));
+    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'SketchEffect' : String), ({ final __callArgument6:Dynamic = defaultGlSketchEffectRunner; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static final SKETCH_FRAGMENT_SRC__glSketchEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_strength;\nuniform vec2 u_resolution;\nout vec4 o_color;\nfloat lum(vec2 uv) {\n  return dot(texture(u_texture0, uv).rgb, vec3(0.2126, 0.7152, 0.0722));\n}\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  float tl = lum(v_texCoord + texel * vec2(-1.0, -1.0));\n  float t = lum(v_texCoord + texel * vec2(0.0, -1.0));\n  float tr = lum(v_texCoord + texel * vec2(1.0, -1.0));\n  float l = lum(v_texCoord + texel * vec2(-1.0, 0.0));\n  float rr = lum(v_texCoord + texel * vec2(1.0, 0.0));\n  float bl = lum(v_texCoord + texel * vec2(-1.0, 1.0));\n  float b = lum(v_texCoord + texel * vec2(0.0, 1.0));\n  float br = lum(v_texCoord + texel * vec2(1.0, 1.0));\n  float gx = -tl - 2.0 * l - bl + tr + 2.0 * rr + br;\n  float gy = -tl - 2.0 * t - tr + bl + 2.0 * b + br;\n  float edge = sqrt(gx * gx + gy * gy);\n  float pencil = clamp(1.0 - edge * u_strength, 0.0, 1.0);\n  float a = texture(u_texture0, v_texCoord).a;\n  o_color = vec4(vec3(pencil), a);\n}';

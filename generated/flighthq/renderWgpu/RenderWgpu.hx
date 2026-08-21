@@ -10,6 +10,7 @@ import flighthq.renderWgpu.WgpuCompressedTexture as Facade_RenderWgpu_flighthq_r
 import flighthq.renderWgpu.WgpuDraw as Facade_RenderWgpu_flighthq_renderWgpu_WgpuDraw;
 import flighthq.renderWgpu.WgpuElement as Facade_RenderWgpu_flighthq_renderWgpu_WgpuElement;
 import flighthq.renderWgpu.WgpuExternalTexture as Facade_RenderWgpu_flighthq_renderWgpu_WgpuExternalTexture;
+import flighthq.renderWgpu.WgpuMipmap as Facade_RenderWgpu_flighthq_renderWgpu_WgpuMipmap;
 import flighthq.renderWgpu.WgpuRenderState as Facade_RenderWgpu_flighthq_renderWgpu_WgpuRenderState;
 import flighthq.renderWgpu.WgpuRenderTarget as Facade_RenderWgpu_flighthq_renderWgpu_WgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTexture as Facade_RenderWgpu_flighthq_renderWgpu_WgpuRenderTexture;
@@ -84,8 +85,8 @@ class RenderWgpu {
     return cast null;
   }
 
-  public static function createWgpuRenderTarget(state:WgpuRenderState, width:Float, height:Float, ?format:flighthq._internal.dom.GPUTextureFormat, ?colorSpace:RenderTargetColorSpace):WgpuRenderTarget {
-    return cast Facade_RenderWgpu_flighthq_renderWgpu_WgpuRenderTarget.createWgpuRenderTarget(state, width, height, format, colorSpace);
+  public static function createWgpuRenderTarget(state:WgpuRenderState, width:Float, height:Float, ?format:flighthq._internal.dom.GPUTextureFormat, ?colorSpace:RenderTargetColorSpace, ?sampleCount:Float):WgpuRenderTarget {
+    return cast Facade_RenderWgpu_flighthq_renderWgpu_WgpuRenderTarget.createWgpuRenderTarget(state, width, height, format, colorSpace, sampleCount);
     return cast null;
   }
 
@@ -166,6 +167,10 @@ class RenderWgpu {
     Facade_RenderWgpu_flighthq_renderWgpu_WgpuTextureResolver.registerWgpuImageTextureResolver(state);
   }
 
+  public static function registerWgpuMipmapGeneration(state:WgpuRenderState):Void {
+    Facade_RenderWgpu_flighthq_renderWgpu_WgpuMipmap.registerWgpuMipmapGeneration(state);
+  }
+
   public static function registerWgpuRenderTextureResolver(state:WgpuRenderState):Void {
     Facade_RenderWgpu_flighthq_renderWgpu_WgpuTextureResolver.registerWgpuRenderTextureResolver(state);
   }
@@ -184,6 +189,11 @@ class RenderWgpu {
 
   public static function renderWgpuBackground(state:WgpuRenderState):Void {
     Facade_RenderWgpu_flighthq_renderWgpu_WgpuBackground.renderWgpuBackground(state);
+  }
+
+  public static function resolveWgpuApplyBlendMode(state:WgpuRenderState):flighthq._internal._IndexedAccess<WgpuRenderState, String> {
+    return cast Facade_RenderWgpu_flighthq_renderWgpu_WgpuRenderState.resolveWgpuApplyBlendMode(state);
+    return cast null;
   }
 
   public static function resolveWgpuSmoothingBindGroup(state:WgpuRenderState, entry:WgpuTextureEntry, smoothing:Null<Bool>):flighthq._internal.dom.GPUBindGroup {

@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_251,
+      newAuditOnly: 1_363,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -53,7 +53,7 @@ describe('typed struct stable declaration identity', () => {
       baselineUpstreamCommit: '5d24729f7360475e28a105ae0caeeaa2e1328260',
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
-    expect(discovery.candidates).toHaveLength(2_006);
+    expect(discovery.candidates).toHaveLength(2_118);
     expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(755);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
@@ -105,8 +105,8 @@ describe('typed struct stable declaration identity', () => {
     );
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
-    expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_251);
+    expect(newlyDiscovered).toHaveLength(1_716);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_363);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
     expect(newDirect).toHaveLength(353);
     expect(newDirect).toEqual(
@@ -382,9 +382,9 @@ describe('typed struct stable declaration identity', () => {
           purpose: 'reviewed escape-free 2D velocity',
         }),
         expect.objectContaining({
-          name: 'CollisionTimeOfImpact',
+          name: 'CollisionTimeOfImpact2D',
           packageName: '@flighthq/types',
-          purpose: 'reviewed escape-free collision time of impact',
+          purpose: 'reviewed escape-free 2D collision time of impact after dimension-explicit upstream rename',
         }),
         expect.objectContaining({
           name: 'Physics2DMassData',
@@ -392,14 +392,14 @@ describe('typed struct stable declaration identity', () => {
           purpose: 'reviewed escape-free physics mass data',
         }),
         expect.objectContaining({
-          name: 'CollisionManifold',
+          name: 'CollisionManifold2D',
           packageName: '@flighthq/types',
-          purpose: 'reviewed escape-free collision manifold',
+          purpose: 'reviewed escape-free 2D collision manifold after dimension-explicit upstream rename',
         }),
         expect.objectContaining({
-          name: 'CollisionContactManifold',
+          name: 'CollisionContactManifold2D',
           packageName: '@flighthq/types',
-          purpose: 'reviewed escape-free collision contact manifold',
+          purpose: 'reviewed escape-free 2D collision contact manifold after dimension-explicit upstream rename',
         }),
         expect.objectContaining({
           name: 'Physics2DPrismaticJoint',
@@ -507,9 +507,9 @@ describe('typed struct stable declaration identity', () => {
           purpose: 'reviewed escape-free Scene3D hit',
         }),
         expect.objectContaining({
-          name: 'CollisionRaycastHit',
+          name: 'CollisionRaycastHit2D',
           packageName: '@flighthq/types',
-          purpose: 'reviewed escape-free collision raycast hit',
+          purpose: 'reviewed escape-free 2D collision raycast hit after dimension-explicit upstream rename',
         }),
         expect.objectContaining({
           name: 'Physics2DRayHit',
@@ -517,9 +517,9 @@ describe('typed struct stable declaration identity', () => {
           purpose: 'reviewed escape-free physics ray hit',
         }),
         expect.objectContaining({
-          name: 'CollisionContactPoint',
+          name: 'CollisionContactPoint2D',
           packageName: '@flighthq/types',
-          purpose: 'reviewed escape-free collision contact point',
+          purpose: 'reviewed escape-free 2D collision contact point after dimension-explicit upstream rename',
         }),
         expect.objectContaining({
           name: 'VelocitySample',
@@ -1885,12 +1885,12 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free bitmap region',
       },
       {
-        declarationFingerprint: 'sha256:a8e896f65206af608a3efc10cf9109d10714c30269d79b02c5077a81879c8d3b',
+        declarationFingerprint: 'sha256:42e9530ec685e1f00cc45e3695ffe475266047164f10002bcb41a8ad935d17e6',
         id: '@flighthq/types:interface#GlRenderStateRuntime',
         purpose: 'reviewed escape-free WebGL render-state runtime',
       },
       {
-        declarationFingerprint: 'sha256:a2bc23bace382a83f246f14c86f03121db15a25a1f479edc706a6b00dfe0475d',
+        declarationFingerprint: 'sha256:9cc616216457e3fabf5cc18316b36ac4a679a51a51daa3184ff23ab653ca7b92',
         id: '@flighthq/types:interface#WgpuRenderStateRuntime',
         purpose: 'reviewed escape-free WebGPU render-state runtime',
       },
@@ -1915,7 +1915,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free render-target descriptor',
       },
       {
-        declarationFingerprint: 'sha256:d5e40ef824804481c0135b2b35a6745fc6d84140f5c43fb4644b3a8af5a12b45',
+        declarationFingerprint: 'sha256:de5e0a1a5472a9b3ac12290774a86664d21b2546fec67a47cedd3b96b20ef04f',
         id: '@flighthq/types:interface#WgpuRenderTarget',
         purpose: 'reviewed escape-free WebGPU render target',
       },
@@ -1945,7 +1945,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free rich-text content',
       },
       {
-        declarationFingerprint: 'sha256:a28a94c95326e5405d33feda957ea8ee57399e1266dae9f9d7c88218d945a9fe',
+        declarationFingerprint: 'sha256:7eb39c9d903a978655a76f87f5e3f0e69900aba451ca34e36b8f51f5a68cf712',
         id: '@flighthq/types:interface#Physics2DWorld',
         purpose: 'reviewed escape-free physics world',
       },
@@ -1960,7 +1960,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free physics solver config',
       },
       {
-        declarationFingerprint: 'sha256:61a33980287691a1d2e1de55628a62dc799ca4529f6c87a035683162ee3e72ce',
+        declarationFingerprint: 'sha256:c4157b990247a1cf3e358e8ddae5bef9ee4b2d0acebc1f3630e6e3594369951c',
         id: '@flighthq/types:interface#Physics2DCollider',
         purpose: 'reviewed escape-free physics collider',
       },
@@ -1985,12 +1985,12 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free WebGPU render-effect context',
       },
       {
-        declarationFingerprint: 'sha256:4699244536c3feef6f3f739f35112b90e8382c1ec3ae5327e196af03c3d85b16',
+        declarationFingerprint: 'sha256:22fd14cbeff906498e6edbd2d1b4bacab27556b1e3e49e1216933d2785fec45d',
         id: '@flighthq/types:interface#GlScene3DRuntime',
         purpose: 'reviewed escape-free WebGL scene runtime',
       },
       {
-        declarationFingerprint: 'sha256:4dab30bcdbb8075f68a1edc7500087cb2a72c3202eb16b2ffb6f143591215923',
+        declarationFingerprint: 'sha256:d73b5ce1b57506125a02a6af3df57a93e786f126e2f9cc4a43a4ca12cc6647fe',
         id: '@flighthq/types:interface#WgpuScene3DRuntime',
         purpose: 'reviewed escape-free WebGPU scene runtime',
       },
@@ -2120,7 +2120,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free Blinn-Phong material',
       },
       {
-        declarationFingerprint: 'sha256:b27249a8cd675e578a7deb9802c0ebbf90928b97b9000fc7b47a1165ad38f419',
+        declarationFingerprint: 'sha256:1c285541caead8d5b1b57d898fffaf5eb240a01f1ca74a91bb910133f58947eb',
         id: '@flighthq/types:interface#RenderStateRuntime',
         purpose: 'reviewed escape-free render-state runtime',
       },
@@ -2130,7 +2130,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free render proxy',
       },
       {
-        declarationFingerprint: 'sha256:2fc485e81e3cee06d54afe96b9e729f984503a325de3c0fa9fb2eb466f01ed3b',
+        declarationFingerprint: 'sha256:0a8d83da2d0248649e6b7200c1cef7462b9438b5ae01577f4efa27d8fb957109',
         id: '@flighthq/types:interface#DomRenderStateRuntime',
         purpose: 'reviewed escape-free DOM render-state runtime',
       },
@@ -2140,7 +2140,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free resolved render-target descriptor',
       },
       {
-        declarationFingerprint: 'sha256:79df9e528430e381be2d9b7b98b30e5784f18d6f57932943ae5ef00f34daaed5',
+        declarationFingerprint: 'sha256:23b508e780cb7961f22f26d996610340b3542df2d5804c493ad65292e48a3e68',
         id: '@flighthq/types:interface#Scene3DRenderProxy',
         purpose: 'reviewed escape-free Scene3D render proxy',
       },
@@ -2150,9 +2150,9 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free 2D velocity',
       },
       {
-        declarationFingerprint: 'sha256:daa52fb2451e8e19fe83cb7d0c336ee6443aa4ce7bed4067a08e12c74835c407',
-        id: '@flighthq/types:interface#CollisionTimeOfImpact',
-        purpose: 'reviewed escape-free collision time of impact',
+        declarationFingerprint: 'sha256:c0ed0a556d84d92379c5ceea6f10db4b92255b6633ea4e34a9d102483f40da61',
+        id: '@flighthq/types:interface#CollisionTimeOfImpact2D',
+        purpose: 'reviewed escape-free 2D collision time of impact after dimension-explicit upstream rename',
       },
       {
         declarationFingerprint: 'sha256:4db498c8ac68087d55e1489e845ae6c93c321ef8e63c84e2848d03acd2aca853',
@@ -2160,14 +2160,14 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free physics mass data',
       },
       {
-        declarationFingerprint: 'sha256:3faf5007f7f5fcf04ee37c934cfbdb99659201a81ab1a767ebe1727536076405',
-        id: '@flighthq/types:interface#CollisionManifold',
-        purpose: 'reviewed escape-free collision manifold',
+        declarationFingerprint: 'sha256:d6aeed28d689880b86690274be5bf1bbae4e6925518f467b381c0a3fb848ba57',
+        id: '@flighthq/types:interface#CollisionManifold2D',
+        purpose: 'reviewed escape-free 2D collision manifold after dimension-explicit upstream rename',
       },
       {
-        declarationFingerprint: 'sha256:6dfc439ab4ce910b63d1d1a0ad76eaa0bb434fe5a5a17db5b8af67a6ca5332ef',
-        id: '@flighthq/types:interface#CollisionContactManifold',
-        purpose: 'reviewed escape-free collision contact manifold',
+        declarationFingerprint: 'sha256:70433e9e6573de517e1e3ff1ea8550a8fbcd0d69578f822f81a548ac128a2cc3',
+        id: '@flighthq/types:interface#CollisionContactManifold2D',
+        purpose: 'reviewed escape-free 2D collision contact manifold after dimension-explicit upstream rename',
       },
       {
         declarationFingerprint: 'sha256:7047314bcb16b3ebe3626298c25398572a66360e5e872133b33a21415c4e2e88',
@@ -2200,12 +2200,12 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free 2D skeleton',
       },
       {
-        declarationFingerprint: 'sha256:31eb650a945dc248ce93c5e25b2cd1fdf0f3ad4576ca1b19dc10acd77f99e5e7',
+        declarationFingerprint: 'sha256:f3df109087ade0de26157b3ee09b2f37ab1e92d4685ace63c1b088c3809b829c',
         id: '@flighthq/types:interface#Skeleton3D',
         purpose: 'reviewed escape-free 3D skeleton',
       },
       {
-        declarationFingerprint: 'sha256:736e4bf4ec95bf4937e25e58fcd614373bff9626fbfd4431685b2b025bd9f67c',
+        declarationFingerprint: 'sha256:77bf0f172a896ccce04fb27b31e7fdedec6d24293ad0864f737721597d4d0aa7',
         id: '@flighthq/types:interface#MeshSkinBindPose',
         purpose: 'reviewed escape-free mesh skin bind pose',
       },
@@ -2275,9 +2275,9 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free Scene3D hit',
       },
       {
-        declarationFingerprint: 'sha256:0fc37ebc201db4f24d23947b080f8715be1cf57f2413f81e5ba05b274d3134d4',
-        id: '@flighthq/types:interface#CollisionRaycastHit',
-        purpose: 'reviewed escape-free collision raycast hit',
+        declarationFingerprint: 'sha256:7e697ecfffc8e5104e3e0bc9d2257c08f1f4b162258e53df6c4201f24ee96223',
+        id: '@flighthq/types:interface#CollisionRaycastHit2D',
+        purpose: 'reviewed escape-free 2D collision raycast hit after dimension-explicit upstream rename',
       },
       {
         declarationFingerprint: 'sha256:9094ab4baa041a3973eb2471908827999044b59892109431e6ce46c93436a483',
@@ -2285,9 +2285,9 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free physics ray hit',
       },
       {
-        declarationFingerprint: 'sha256:0972cae3f54ba0ec4d0e1833767f11ab476578197e212b0dcb988637891ba0fa',
-        id: '@flighthq/types:interface#CollisionContactPoint',
-        purpose: 'reviewed escape-free collision contact point',
+        declarationFingerprint: 'sha256:49d86e4cbb8bd06a2c29ad03a6c6f45088a9596d1f200bb9bb55f07c6842ee10',
+        id: '@flighthq/types:interface#CollisionContactPoint2D',
+        purpose: 'reviewed escape-free 2D collision contact point after dimension-explicit upstream rename',
       },
       {
         declarationFingerprint: 'sha256:735f8f6b33ae4a5c730243d8695d7b81baf6bb3777af4dd6effa7492f291b1b1',
@@ -2345,7 +2345,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free morph-shape data',
       },
       {
-        declarationFingerprint: 'sha256:25ac84d4effc1f1758fbadbe9e06fde068ef3b4b8fc74721bf1940acb3180003',
+        declarationFingerprint: 'sha256:a10acf0108d1714db25e5cd6fb3fd0b81964716afd987ef044dd1fcd2333e459',
         id: '@flighthq/types:interface#GlMeshProgram',
         purpose: 'reviewed escape-free WebGL mesh program',
       },
@@ -2405,7 +2405,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free WebGPU scissor rectangle',
       },
       {
-        declarationFingerprint: 'sha256:be617f3f8f9f830df9da893eee28eeb9740c2f15a2e4462f451c6d3191c0ca99',
+        declarationFingerprint: 'sha256:5af720d86a9638ad751e184c1a7db541300dcdce38e6e5e5168e2c0fe5b00421',
         id: '@flighthq/types:interface#CanvasRenderStateRuntime',
         purpose: 'reviewed escape-free Canvas render-state runtime',
       },
@@ -2470,7 +2470,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free vertex-displacement modifier options',
       },
       {
-        declarationFingerprint: 'sha256:862e11110d27a2fae69cc108968d79f6b75dfb8719760df193c2f036752e10e6',
+        declarationFingerprint: 'sha256:2ad7549c058e1efa23cb19f7996356cd3cc5f03d86fc0819502c27ee9e1ef575',
         id: '@flighthq/types:interface#InteractionManager',
         purpose: 'reviewed escape-free interaction manager',
       },
@@ -2605,7 +2605,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free area light',
       },
       {
-        declarationFingerprint: 'sha256:ed2e39801a2b33fe8f903c119ababfaab77850d0f8749741e2e3a9a1a71ea5c2',
+        declarationFingerprint: 'sha256:536acfeb8adf5990afe92ebb61f68034b3e9b20bf0c9ea500f398f8d74b0f718',
         id: '@flighthq/types:interface#LottieLayer',
         purpose: 'reviewed escape-free Lottie layer',
       },
@@ -2660,7 +2660,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free layout state',
       },
       {
-        declarationFingerprint: 'sha256:09771ab81a3d8b9386f482e7a9b0d8e8bb9af7a1576510bd07568070f8cde3bd',
+        declarationFingerprint: 'sha256:2bdbe3ada235694e4763bdd4790a27ed58622ac27fe80ef8d7378eebd44f0e9f',
         id: '@flighthq/types:interface#MeshGeometryRuntime',
         purpose: 'reviewed escape-free mesh geometry runtime',
       },
@@ -2695,7 +2695,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free native-text data',
       },
       {
-        declarationFingerprint: 'sha256:1a88b32407ec4e866c81dacc567c24c15122e2fea6540aaa7a45532c65af6067',
+        declarationFingerprint: 'sha256:cca48392cc0563408359655051fa56fa10bc7f87bc7ff62ad06dc65a87430355',
         id: '@flighthq/types:interface#Scene3DResourceResolverRuntime',
         purpose: 'reviewed escape-free Scene3D resource-resolver runtime',
       },
@@ -2980,7 +2980,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free WebGPU color-LUT texture cache',
       },
       {
-        declarationFingerprint: 'sha256:5ded44df647ee2b8cd70a1c2fac7b6afdecf21d4ad1b059efa421212360c4c4d',
+        declarationFingerprint: 'sha256:31d73dbaa19b2ef6cf67f3fadd4a1b5319ee6881fb53b0fa1213c11a3b34115d',
         id: '@flighthq/types:interface#WgpuMeshUpload',
         purpose: 'reviewed escape-free WebGPU mesh upload',
       },
@@ -3055,7 +3055,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free Lottie shape path',
       },
       {
-        declarationFingerprint: 'sha256:15e53d2503c0496748f20338561a40b594875934b0cd93d9ea5cf712d7b4bbe4',
+        declarationFingerprint: 'sha256:9b76f1af7c0c56fb8e63f46501e7fbd383c1ca70e99a8c2150f52e1ecd678a6d',
         id: '@flighthq/types:interface#GlRenderEffectApplicationExplanation',
         purpose: 'reviewed escape-free WebGL render-effect explanation',
       },
@@ -3105,7 +3105,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free color-adjustment runtime',
       },
       {
-        declarationFingerprint: 'sha256:4e3a499b44071f2a83f997c36a83d95dd82c343b59af35480c3a88fa1d605add',
+        declarationFingerprint: 'sha256:19afb18fb092b624bbd1cde411781b148a4786e8dc14bc25d8305755907b3f0c',
         id: '@flighthq/types:interface#GlScene3DDrawEntry',
         purpose: 'reviewed escape-free WebGL Scene3D draw entry',
       },
@@ -4098,9 +4098,9 @@ describe('typed struct analysis', () => {
       report.candidates
         .filter((candidate) =>
           [
-            'CollisionContactManifold',
-            'CollisionManifold',
-            'CollisionTimeOfImpact',
+            'CollisionContactManifold2D',
+            'CollisionManifold2D',
+            'CollisionTimeOfImpact2D',
             'Physics2DMassData',
             'Velocity2D',
           ].includes(candidate.name),
@@ -4158,9 +4158,13 @@ describe('typed struct analysis', () => {
     const hitAndContactCandidates = new Map(
       report.candidates
         .filter((candidate) =>
-          ['CollisionContactPoint', 'CollisionRaycastHit', 'Physics2DRayHit', 'Scene3DHit', 'VelocitySample'].includes(
-            candidate.name,
-          ),
+          [
+            'CollisionContactPoint2D',
+            'CollisionRaycastHit2D',
+            'Physics2DRayHit',
+            'Scene3DHit',
+            'VelocitySample',
+          ].includes(candidate.name),
         )
         .map((candidate) => [candidate.name, candidate]),
     );
@@ -4790,40 +4794,40 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_251,
-      bindableAccesses: 30_666,
-      candidates: 2_006,
-      directAccesses: 24_676,
+      auditOnlySchemas: 1_363,
+      bindableAccesses: 33_306,
+      candidates: 2_118,
+      directAccesses: 25_114,
       directSchemas: 753,
-      eligible: 1_536,
-      escapes: 10_973,
-      fields: 23_912,
-      ineligible: 470,
-      pendingAccesses: 5_990,
-      reflectiveSurvivors: 455,
+      eligible: 1_611,
+      escapes: 11_129,
+      fields: 25_393,
+      ineligible: 507,
+      pendingAccesses: 8_192,
+      reflectiveSurvivors: 451,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_251,
+      newAuditOnly: 1_363,
       preserved: 231,
       relocated: 146,
       removed: 3,
       renamed: 23,
     });
-    expect(classAudit.summary.schemas).toBe(1_536);
+    expect(classAudit.summary.schemas).toBe(1_611);
     expect(provenance.summary).toMatchObject({
-      candidateSchemas: 741,
-      closedSchemas: 551,
-      containmentEdges: 2_059,
+      candidateSchemas: 774,
+      closedSchemas: 582,
+      containmentEdges: 2_148,
     });
     expect(typeErasureReport.summary).toMatchObject({
       byReason: expect.objectContaining({
-        'source-never': 116,
-        'source-unknown': 3_833,
-        'standard-toolkit-boundary': 17_935,
+        'source-never': 120,
+        'source-unknown': 3_868,
+        'standard-toolkit-boundary': 18_231,
       }),
-      total: 24_158,
+      total: 24_501,
     });
     expect(
       typeErasureReport.modules
@@ -4837,14 +4841,14 @@ describe('typed struct analysis', () => {
         .map(({ byReason, module, total }) => ({ byReason, module, total })),
     ).toEqual([
       {
-        byReason: { 'standard-toolkit-boundary': 20 },
+        byReason: { 'standard-toolkit-boundary': 19 },
         module: 'flighthq.scene2dCanvas.CanvasCache',
-        total: 20,
+        total: 19,
       },
       {
-        byReason: { 'external-toolkit-boundary': 1, 'standard-toolkit-boundary': 17 },
+        byReason: { 'external-toolkit-boundary': 1, 'standard-toolkit-boundary': 7 },
         module: 'flighthq.scene2dCanvas.CanvasRenderState',
-        total: 18,
+        total: 8,
       },
       {
         byReason: { 'external-toolkit-boundary': 1, 'standard-toolkit-boundary': 26 },
@@ -4882,15 +4886,18 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(24_676);
+    expect(report.summary.directAccesses).toBe(25_114);
     expect(rectangle?.emission).toEqual({
-      directAccesses: 667,
+      directAccesses: 707,
       mode: 'direct',
       pendingAccesses: 0,
-      reflectiveSurvivors: [{ accesses: 2, reason: 'presence-sensitive' }],
+      reflectiveSurvivors: [
+        { accesses: 1, reason: 'computed-key' },
+        { accesses: 2, reason: 'presence-sensitive' },
+      ],
     });
     expect(camera2D?.emission).toEqual({
-      directAccesses: 17,
+      directAccesses: 19,
       mode: 'direct',
       pendingAccesses: 0,
       reflectiveSurvivors: [],
@@ -4930,18 +4937,18 @@ describe('typed struct analysis', () => {
       reasons: [],
     });
     expect(glRenderStateRuntime).toMatchObject({
-      declarationFingerprint: 'sha256:a8e896f65206af608a3efc10cf9109d10714c30269d79b02c5077a81879c8d3b',
+      declarationFingerprint: 'sha256:42e9530ec685e1f00cc45e3695ffe475266047164f10002bcb41a8ad935d17e6',
       eligible: true,
-      emission: { directAccesses: 544, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+      emission: { directAccesses: 578, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
       escapes: [],
       migration: { baselineId: null, status: 'new' },
       purpose: 'reviewed escape-free WebGL render-state runtime',
       reasons: [],
     });
     expect(wgpuRenderStateRuntime).toMatchObject({
-      declarationFingerprint: 'sha256:a2bc23bace382a83f246f14c86f03121db15a25a1f479edc706a6b00dfe0475d',
+      declarationFingerprint: 'sha256:9cc616216457e3fabf5cc18316b36ac4a679a51a51daa3184ff23ab653ca7b92',
       eligible: true,
-      emission: { directAccesses: 730, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+      emission: { directAccesses: 822, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
       escapes: [],
       migration: { baselineId: null, status: 'new' },
       purpose: 'reviewed escape-free WebGPU render-state runtime',
@@ -4950,13 +4957,13 @@ describe('typed struct analysis', () => {
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
         'CanvasRenderTarget',
-        153,
+        156,
         'sha256:77ecafe9197f64a9e574cc139335cb7aff72a45c8b5efecc742d943d53a49e3a',
         'reviewed escape-free Canvas render target',
       ],
       [
         'GlRenderTarget',
-        303,
+        306,
         'sha256:a70ee9ffbaf0c1d0fd73965076d56028db2ce78f1dda4c9006e35974be0fe408',
         'reviewed escape-free WebGL render target',
       ],
@@ -4974,8 +4981,8 @@ describe('typed struct analysis', () => {
       ],
       [
         'WgpuRenderTarget',
-        152,
-        'sha256:d5e40ef824804481c0135b2b35a6745fc6d84140f5c43fb4644b3a8af5a12b45',
+        161,
+        'sha256:de5e0a1a5472a9b3ac12290774a86664d21b2546fec67a47cedd3b96b20ef04f',
         'reviewed escape-free WebGPU render target',
       ],
     ] as const) {
@@ -5035,7 +5042,7 @@ describe('typed struct analysis', () => {
       [
         'InteractionManager',
         49,
-        'sha256:862e11110d27a2fae69cc108968d79f6b75dfb8719760df193c2f036752e10e6',
+        'sha256:2ad7549c058e1efa23cb19f7996356cd3cc5f03d86fc0819502c27ee9e1ef575',
         'reviewed escape-free interaction manager',
       ],
       [
@@ -5184,7 +5191,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'PackableRectangle',
-        38,
+        39,
         'sha256:0d4dd4a03fe6768f388ff1d15945725582f976354ad7cc1f2df54aa966166763',
         'reviewed escape-free packable rectangle',
       ],
@@ -5214,8 +5221,8 @@ describe('typed struct analysis', () => {
       ],
       [
         'LottieLayer',
-        32,
-        'sha256:ed2e39801a2b33fe8f903c119ababfaab77850d0f8749741e2e3a9a1a71ea5c2',
+        34,
+        'sha256:536acfeb8adf5990afe92ebb61f68034b3e9b20bf0c9ea500f398f8d74b0f718',
         'reviewed escape-free Lottie layer',
       ],
       [
@@ -5256,7 +5263,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'LayoutNode',
-        29,
+        30,
         'sha256:dcb64afdbc4634db6a19bccd9b239a2d46272227ea1bcc4547bb450d8e95b91f',
         'reviewed escape-free layout node',
       ],
@@ -5268,7 +5275,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'TextureSource',
-        29,
+        28,
         'sha256:e1aa5f7158dac8804df2b8cb02d88eb0ef695dcb84db0bb0804dc6a2fd8c1b1f',
         'reviewed escape-free texture source',
       ],
@@ -5283,29 +5290,34 @@ describe('typed struct analysis', () => {
         reasons: [],
       });
     }
-    for (const [name, declarationFingerprint, purpose] of [
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
         'ElectronApi',
+        28,
         'sha256:f54a1342b6e20a6877114b8a64de522c5dd432abe1db067f1d64cf56da7987a5',
         'reviewed escape-free Electron API',
       ],
       [
         'GlLitProgram',
+        28,
         'sha256:6f76f76885ae46aa509bb7badc6b7ce66f4ef96ca95fa1871bc7f24685c71df1',
         'reviewed escape-free WebGL lit program',
       ],
       [
         'LayoutState',
+        28,
         'sha256:7990b91753d362be27f86906395a45a7c19aae3b4001e7681dc88f6e8ca61d39',
         'reviewed escape-free layout state',
       ],
       [
         'MeshGeometryRuntime',
-        'sha256:09771ab81a3d8b9386f482e7a9b0d8e8bb9af7a1576510bd07568070f8cde3bd',
+        18,
+        'sha256:2bdbe3ada235694e4763bdd4790a27ed58622ac27fe80ef8d7378eebd44f0e9f',
         'reviewed escape-free mesh geometry runtime',
       ],
       [
         'QuadBatch',
+        28,
         'sha256:899537b7d2a81e3752bb2c1fc97d945d22692f778fc4c242542ee226df28fef4',
         'reviewed escape-free quad batch',
       ],
@@ -5313,7 +5325,7 @@ describe('typed struct analysis', () => {
       expect(fourthHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
-        emission: { directAccesses: 28, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
         escapes: [],
         migration: { baselineId: null, status: 'new' },
         purpose,
@@ -5329,7 +5341,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'LottieDocument',
-        27,
+        28,
         'sha256:bc1bd8fee72d0e49ff3cc90a7cac976377ee624b49519bc78226652352e72d31',
         'reviewed escape-free Lottie document',
       ],
@@ -5366,7 +5378,7 @@ describe('typed struct analysis', () => {
       [
         'Scene3DResourceResolverRuntime',
         25,
-        'sha256:1a88b32407ec4e866c81dacc567c24c15122e2fea6540aaa7a45532c65af6067',
+        'sha256:cca48392cc0563408359655051fa56fa10bc7f87bc7ff62ad06dc65a87430355',
         'reviewed escape-free Scene3D resource-resolver runtime',
       ],
       [
@@ -5714,13 +5726,13 @@ describe('typed struct analysis', () => {
       ],
       [
         'LayoutTree',
-        17,
+        16,
         'sha256:490d3123a670ddb1d15cd2cfd73da271b75c8e85cc7f1fe029718b2079329e7a',
         'reviewed escape-free layout tree',
       ],
       [
         'Sprite',
-        16,
+        17,
         'sha256:d7459435d0471453f1a562948d6fa63807ac8d1381c6ea5874b6f8299eb1b9c2',
         'reviewed escape-free sprite',
       ],
@@ -5756,7 +5768,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'LottieKeyframe',
-        15,
+        21,
         'sha256:62295208edb23fbfba568845028bd4aed2cdbe7599cc9c81a4c03ce484fccc8d',
         'reviewed escape-free Lottie keyframe',
       ],
@@ -5834,8 +5846,8 @@ describe('typed struct analysis', () => {
       ],
       [
         'WgpuMeshUpload',
-        14,
-        'sha256:5ded44df647ee2b8cd70a1c2fac7b6afdecf21d4ad1b059efa421212360c4c4d',
+        15,
+        'sha256:31d73dbaa19b2ef6cf67f3fadd4a1b5319ee6881fb53b0fa1213c11a3b34115d',
         'reviewed escape-free WebGPU mesh upload',
       ],
       [
@@ -5882,7 +5894,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'Modifier',
-        14,
+        20,
         'sha256:796da4037514e9798f33666107ab84b3e7a4d1656e87ad4354d2508e6a10dd38',
         'reviewed escape-free modifier',
       ],
@@ -5906,7 +5918,7 @@ describe('typed struct analysis', () => {
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
         'SpriteData',
-        13,
+        14,
         'sha256:0a192307a03c8542e477cc8b64353c3b5de08c6cde73bec89ca39694c56943b4',
         'reviewed escape-free sprite data',
       ],
@@ -5960,13 +5972,13 @@ describe('typed struct analysis', () => {
       ],
       [
         'GlRenderEffectApplicationExplanation',
-        13,
-        'sha256:15e53d2503c0496748f20338561a40b594875934b0cd93d9ea5cf712d7b4bbe4',
+        18,
+        'sha256:9b76f1af7c0c56fb8e63f46501e7fbd383c1ca70e99a8c2150f52e1ecd678a6d',
         'reviewed escape-free WebGL render-effect explanation',
       ],
       [
         'FlexLayoutItemStyle',
-        13,
+        14,
         'sha256:5f78f38895f44208c6b9992633e77f10e15cd707cbd579918a67aa00701daa26',
         'reviewed escape-free flex item style',
       ],
@@ -6002,7 +6014,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'WgpuShapeMesh',
-        12,
+        13,
         'sha256:a7bf1ac799a7a857268d1b05541826b1ec19e7b1e3f640d485b2a77dfdf793aa',
         'reviewed escape-free WebGPU shape mesh',
       ],
@@ -6038,14 +6050,14 @@ describe('typed struct analysis', () => {
       ],
       [
         'ColorAdjustmentRuntime',
-        12,
+        9,
         'sha256:6af421b0c66043312dce3e7248225fbb43b0df05efaec7f3186f4f863b33dd93',
         'reviewed escape-free color-adjustment runtime',
       ],
       [
         'GlScene3DDrawEntry',
         12,
-        'sha256:4e3a499b44071f2a83f997c36a83d95dd82c343b59af35480c3a88fa1d605add',
+        'sha256:19afb18fb092b624bbd1cde411781b148a4786e8dc14bc25d8305755907b3f0c',
         'reviewed escape-free WebGL Scene3D draw entry',
       ],
       [
@@ -6296,7 +6308,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'LottieTransform',
-        11,
+        14,
         'sha256:d21894626b9d2757d1bec65c881dbd34f84463a37d4eb1cebc327db28cbed122',
         'reviewed escape-free Lottie transform',
       ],
@@ -6386,7 +6398,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'WgpuRenderOptions',
-        9,
+        10,
         'sha256:cfc1746d136ddf34026e1c7e71cf59ee94dfc90edf8e66824bacfcdd8682dac6',
         'reviewed escape-free WebGPU render options',
       ],
@@ -6434,7 +6446,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'Skin',
-        10,
+        13,
         'sha256:b7e8ad399e4c8c4380cafd3c1a2f3e74211782882d88f21901a89e54cd5628e8',
         'reviewed escape-free skin',
       ],
@@ -6686,7 +6698,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'TiltShiftEffect',
-        7,
+        10,
         'sha256:fbcbf389afcd6233e11df0aa41d734c8fa5b4c26a8c9ed22d9e3e46a707e24a6',
         'reviewed escape-free tilt-shift effect',
       ],
@@ -6962,7 +6974,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'TiledTilesetRef',
-        13,
+        14,
         'sha256:240a78b98b30601002a1f3bfa62be8394bd11f25ff22d798f7c1ac216d01ba3b',
         'reviewed escape-free Tiled tileset reference',
       ],
@@ -6998,32 +7010,32 @@ describe('typed struct analysis', () => {
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
         'CanvasRenderEffectContext',
-        42,
+        48,
         'sha256:56f73a3c7c106c2cfc9affd8f47d517ff6685a4a5bad8083b9d9fe76d3fcf217',
         'reviewed escape-free Canvas render-effect context',
       ],
       [
         'GlRenderEffectContext',
-        155,
+        156,
         'sha256:fdc15a042a1a80053691e6e5e9fdcec40ccc068adde5e22e51ae98764f1520a6',
         'reviewed escape-free WebGL render-effect context',
       ],
       [
         'WgpuRenderEffectContext',
-        147,
+        148,
         'sha256:fd9b6f3f63bcd3f4391e10fb091fcb7444196085bcefc1d301287787dfe3a3e2',
         'reviewed escape-free WebGPU render-effect context',
       ],
       [
         'GlScene3DRuntime',
-        132,
-        'sha256:4699244536c3feef6f3f739f35112b90e8382c1ec3ae5327e196af03c3d85b16',
+        125,
+        'sha256:22fd14cbeff906498e6edbd2d1b4bacab27556b1e3e49e1216933d2785fec45d',
         'reviewed escape-free WebGL scene runtime',
       ],
       [
         'WgpuScene3DRuntime',
-        276,
-        'sha256:4dab30bcdbb8075f68a1edc7500087cb2a72c3202eb16b2ffb6f143591215923',
+        312,
+        'sha256:d73b5ce1b57506125a02a6af3df57a93e786f126e2f9cc4a43a4ca12cc6647fe',
         'reviewed escape-free WebGPU scene runtime',
       ],
     ] as const) {
@@ -7046,7 +7058,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'CanvasShapeDrawState',
-        115,
+        119,
         'sha256:02c299290855d11a256afa1f89ac05ea04f2bd5c9cfbd95f9b8f313c8291d5dc',
         'reviewed escape-free Canvas shape draw state',
       ],
@@ -7064,7 +7076,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'RiveCoreObject',
-        104,
+        115,
         'sha256:9252f9146b93933f51443521632f05794eed7f39a6e8059a7ae12d86167e16ac',
         'reviewed escape-free Rive core object',
       ],
@@ -7082,7 +7094,7 @@ describe('typed struct analysis', () => {
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
         'AnimationTrack',
-        99,
+        107,
         'sha256:a3e8b0a6c23713f4d8e46cae1937cd775b8337ee098c6b36ecb5a906b35a8a44',
         'reviewed escape-free animation track',
       ],
@@ -7250,8 +7262,8 @@ describe('typed struct analysis', () => {
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
         'RenderStateRuntime',
-        82,
-        'sha256:b27249a8cd675e578a7deb9802c0ebbf90928b97b9000fc7b47a1165ad38f419',
+        91,
+        'sha256:1c285541caead8d5b1b57d898fffaf5eb240a01f1ca74a91bb910133f58947eb',
         'reviewed escape-free render-state runtime',
       ],
       [
@@ -7262,20 +7274,20 @@ describe('typed struct analysis', () => {
       ],
       [
         'DomRenderStateRuntime',
-        52,
-        'sha256:2fc485e81e3cee06d54afe96b9e729f984503a325de3c0fa9fb2eb466f01ed3b',
+        57,
+        'sha256:0a8d83da2d0248649e6b7200c1cef7462b9438b5ae01577f4efa27d8fb957109',
         'reviewed escape-free DOM render-state runtime',
       ],
       [
         'ResolvedRenderTargetDescriptor',
-        49,
+        52,
         'sha256:f1ab7ec236b568f33e9b66eec91b29426d97375591f5060c6a649f9439d5d083',
         'reviewed escape-free resolved render-target descriptor',
       ],
       [
         'Scene3DRenderProxy',
-        48,
-        'sha256:79df9e528430e381be2d9b7b98b30e5784f18d6f57932943ae5ef00f34daaed5',
+        54,
+        'sha256:23b508e780cb7961f22f26d996610340b3542df2d5804c493ad65292e48a3e68',
         'reviewed escape-free Scene3D render proxy',
       ],
     ] as const) {
@@ -7297,10 +7309,10 @@ describe('typed struct analysis', () => {
         'reviewed escape-free 2D velocity',
       ],
       [
-        'CollisionTimeOfImpact',
+        'CollisionTimeOfImpact2D',
         61,
-        'sha256:daa52fb2451e8e19fe83cb7d0c336ee6443aa4ce7bed4067a08e12c74835c407',
-        'reviewed escape-free collision time of impact',
+        'sha256:c0ed0a556d84d92379c5ceea6f10db4b92255b6633ea4e34a9d102483f40da61',
+        'reviewed escape-free 2D collision time of impact after dimension-explicit upstream rename',
       ],
       [
         'Physics2DMassData',
@@ -7309,16 +7321,16 @@ describe('typed struct analysis', () => {
         'reviewed escape-free physics mass data',
       ],
       [
-        'CollisionManifold',
-        45,
-        'sha256:3faf5007f7f5fcf04ee37c934cfbdb99659201a81ab1a767ebe1727536076405',
-        'reviewed escape-free collision manifold',
+        'CollisionManifold2D',
+        49,
+        'sha256:d6aeed28d689880b86690274be5bf1bbae4e6925518f467b381c0a3fb848ba57',
+        'reviewed escape-free 2D collision manifold after dimension-explicit upstream rename',
       ],
       [
-        'CollisionContactManifold',
+        'CollisionContactManifold2D',
         44,
-        'sha256:6dfc439ab4ce910b63d1d1a0ad76eaa0bb434fe5a5a17db5b8af67a6ca5332ef',
-        'reviewed escape-free collision contact manifold',
+        'sha256:70433e9e6573de517e1e3ff1ea8550a8fbcd0d69578f822f81a548ac128a2cc3',
+        'reviewed escape-free 2D collision contact manifold after dimension-explicit upstream rename',
       ],
     ] as const) {
       expect(collisionPhysicsCandidates.get(name)).toMatchObject({
@@ -7382,14 +7394,14 @@ describe('typed struct analysis', () => {
       ],
       [
         'Skeleton3D',
-        41,
-        'sha256:31eb650a945dc248ce93c5e25b2cd1fdf0f3ad4576ca1b19dc10acd77f99e5e7',
+        51,
+        'sha256:f3df109087ade0de26157b3ee09b2f37ab1e92d4685ace63c1b088c3809b829c',
         'reviewed escape-free 3D skeleton',
       ],
       [
         'MeshSkinBindPose',
-        36,
-        'sha256:736e4bf4ec95bf4937e25e58fcd614373bff9626fbfd4431685b2b025bd9f67c',
+        42,
+        'sha256:77bf0f172a896ccce04fb27b31e7fdedec6d24293ad0864f737721597d4d0aa7',
         'reviewed escape-free mesh skin bind pose',
       ],
       [
@@ -7507,10 +7519,10 @@ describe('typed struct analysis', () => {
         'reviewed escape-free Scene3D hit',
       ],
       [
-        'CollisionRaycastHit',
+        'CollisionRaycastHit2D',
         32,
-        'sha256:0fc37ebc201db4f24d23947b080f8715be1cf57f2413f81e5ba05b274d3134d4',
-        'reviewed escape-free collision raycast hit',
+        'sha256:7e697ecfffc8e5104e3e0bc9d2257c08f1f4b162258e53df6c4201f24ee96223',
+        'reviewed escape-free 2D collision raycast hit after dimension-explicit upstream rename',
       ],
       [
         'Physics2DRayHit',
@@ -7525,10 +7537,10 @@ describe('typed struct analysis', () => {
         'reviewed escape-free velocity sample',
       ],
       [
-        'CollisionContactPoint',
+        'CollisionContactPoint2D',
         25,
-        'sha256:0972cae3f54ba0ec4d0e1833767f11ab476578197e212b0dcb988637891ba0fa',
-        'reviewed escape-free collision contact point',
+        'sha256:49d86e4cbb8bd06a2c29ad03a6c6f45088a9596d1f200bb9bb55f07c6842ee10',
+        'reviewed escape-free 2D collision contact point after dimension-explicit upstream rename',
       ],
     ] as const) {
       expect(hitAndContactCandidates.get(name)).toMatchObject({
@@ -7586,7 +7598,7 @@ describe('typed struct analysis', () => {
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
         'Shape',
-        41,
+        47,
         'sha256:2b31b5b9c65d277eeeeb327a2e2fcb4452dfbc7cb3117508c5bafbdd7d741f34',
         'reviewed escape-free shape',
       ],
@@ -7598,7 +7610,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'ShapeData',
-        38,
+        44,
         'sha256:c3677e835bf0844d2df50b06f28145cdeebf386b4c0f584f8296158a84558aa4',
         'reviewed escape-free shape data',
       ],
@@ -7628,8 +7640,8 @@ describe('typed struct analysis', () => {
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
         'GlMeshProgram',
-        43,
-        'sha256:25ac84d4effc1f1758fbadbe9e06fde068ef3b4b8fc74721bf1940acb3180003',
+        45,
+        'sha256:a10acf0108d1714db25e5cd6fb3fd0b81964716afd987ef044dd1fcd2333e459',
         'reviewed escape-free WebGL mesh program',
       ],
       [
@@ -7724,8 +7736,8 @@ describe('typed struct analysis', () => {
       ],
       [
         'CanvasRenderStateRuntime',
-        34,
-        'sha256:be617f3f8f9f830df9da893eee28eeb9740c2f15a2e4462f451c6d3191c0ca99',
+        40,
+        'sha256:5af720d86a9638ad751e184c1a7db541300dcdce38e6e5e5168e2c0fe5b00421',
         'reviewed escape-free Canvas render-state runtime',
       ],
       [
@@ -7736,7 +7748,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'WgpuRenderEffectPipeline',
-        27,
+        29,
         'sha256:a7039648e61c44e19af4213680f60efe61ad6452ffc0b16c420927d0116c0349',
         'reviewed escape-free WebGPU render-effect pipeline',
       ],
@@ -7797,7 +7809,7 @@ describe('typed struct analysis', () => {
       [
         'Physics2DWorld',
         217,
-        'sha256:a28a94c95326e5405d33feda957ea8ee57399e1266dae9f9d7c88218d945a9fe',
+        'sha256:7eb39c9d903a978655a76f87f5e3f0e69900aba451ca34e36b8f51f5a68cf712',
         'reviewed escape-free physics world',
       ],
       [
@@ -7815,7 +7827,7 @@ describe('typed struct analysis', () => {
       [
         'Physics2DCollider',
         47,
-        'sha256:61a33980287691a1d2e1de55628a62dc799ca4529f6c87a035683162ee3e72ce',
+        'sha256:c4157b990247a1cf3e358e8ddae5bef9ee4b2d0acebc1f3630e6e3594369951c',
         'reviewed escape-free physics collider',
       ],
       [
@@ -8151,9 +8163,9 @@ describe('typed struct analysis', () => {
       expect(provenanceById.has(renderRuntimeId)).toBe(false);
     }
     for (const collisionPhysicsId of [
-      '@flighthq/types:interface#CollisionContactManifold',
-      '@flighthq/types:interface#CollisionManifold',
-      '@flighthq/types:interface#CollisionTimeOfImpact',
+      '@flighthq/types:interface#CollisionContactManifold2D',
+      '@flighthq/types:interface#CollisionManifold2D',
+      '@flighthq/types:interface#CollisionTimeOfImpact2D',
       '@flighthq/types:interface#Physics2DMassData',
       '@flighthq/types:interface#Velocity2D',
     ]) {
@@ -8276,8 +8288,8 @@ describe('typed struct analysis', () => {
     });
     expect(provenanceById.has(scene3DHitId)).toBe(false);
     for (const hitLeafId of [
-      '@flighthq/types:interface#CollisionContactPoint',
-      '@flighthq/types:interface#CollisionRaycastHit',
+      '@flighthq/types:interface#CollisionContactPoint2D',
+      '@flighthq/types:interface#CollisionRaycastHit2D',
       '@flighthq/types:interface#Physics2DRayHit',
       '@flighthq/types:interface#VelocitySample',
     ]) {
@@ -9229,7 +9241,7 @@ describe('typed struct analysis', () => {
       ['@flighthq/types:interface#TextSelectionRectangle', false, ['anonymous-structural-transfer'], [], null],
       ['@flighthq/types:interface#LayoutNode', true, [], ['object-spread'], null],
       ['@flighthq/types:interface#Scene3DKindUsage', true, [], [], { blockerReasons: [], closed: true }],
-      ['@flighthq/types:interface#TextureSource', false, ['cross-schema-transfer'], [], null],
+      ['@flighthq/types:interface#TextureSource', false, ['cross-schema-transfer'], ['strict-equality'], null],
     ] as const) {
       expect(classAuditById.get(frontierId)?.migration).toEqual({
         mechanicallyCompatible,
@@ -9601,14 +9613,14 @@ describe('typed struct analysis', () => {
     const generatedMassProperties = readFileSync('generated/flighthq/physics2d/MassProperties.hx', 'utf8');
     expect(generatedMassProperties).not.toMatch(/\(cast out : Physics2DMassData\)\./u);
     expect(generatedMassProperties).not.toMatch(/_Runtime\.field\(out,/u);
-    const generatedCollisionManifold = readFileSync('generated/flighthq/collision/Manifold.hx', 'utf8');
-    expect(generatedCollisionManifold).not.toMatch(/\(cast out : CollisionManifold\)\./u);
-    expect(generatedCollisionManifold).not.toMatch(/_Runtime\.field\(out,/u);
+    const generatedCollisionManifold2D = readFileSync('generated/flighthq/collision/Manifold.hx', 'utf8');
+    expect(generatedCollisionManifold2D).not.toMatch(/\(cast out : CollisionManifold2D\)\./u);
+    expect(generatedCollisionManifold2D).not.toMatch(/_Runtime\.field\(out,/u);
     const generatedContactManifold = readFileSync('generated/flighthq/collision/ContactManifold.hx', 'utf8');
-    expect(generatedContactManifold).not.toMatch(/\(cast out : CollisionContactManifold\)\./u);
+    expect(generatedContactManifold).not.toMatch(/\(cast out : CollisionContactManifold2D\)\./u);
     expect(generatedContactManifold).not.toMatch(/_Runtime\.field\(out,/u);
-    const generatedSweepCollision = readFileSync('generated/flighthq/collision/SweepCollisionShape.hx', 'utf8');
-    expect(generatedSweepCollision).not.toMatch(/\(cast out : CollisionTimeOfImpact\)\./u);
+    const generatedSweepCollision = readFileSync('generated/flighthq/collision/SweepCollisionShape2D.hx', 'utf8');
+    expect(generatedSweepCollision).not.toMatch(/\(cast out : CollisionTimeOfImpact2D\)\./u);
     expect(generatedSweepCollision).not.toMatch(/_Runtime\.field\(out,/u);
     const generatedPhysicsJoints = readFileSync('generated/flighthq/physics2d/Joints.hx', 'utf8');
     expect(generatedPhysicsJoints).not.toMatch(
@@ -9666,15 +9678,15 @@ describe('typed struct analysis', () => {
       /\(cast (?:entry|renderTexture) : (?:WgpuRenderTextureEntry|RenderTexture)\)\./u,
     );
     expect(generatedWgpuRenderTexture).not.toMatch(/_Runtime\.field\(renderTexture,/u);
-    const generatedRaycastCollision = readFileSync('generated/flighthq/collision/RaycastCollisionShape.hx', 'utf8');
+    const generatedRaycastCollision = readFileSync('generated/flighthq/collision/RaycastCollisionShape2D.hx', 'utf8');
     expect(generatedRaycastCollision).not.toMatch(
-      /\(cast (?:out|RaycastCollisionShape\.localHitScratch__raycastCollisionShape) : CollisionRaycastHit\)\./u,
+      /\(cast (?:out|RaycastCollisionShape\.localHitScratch__raycastCollisionShape2D) : CollisionRaycastHit2D\)\./u,
     );
     expect(generatedRaycastCollision).not.toMatch(
-      /_Runtime\.field\((?:out|RaycastCollisionShape\.localHitScratch__raycastCollisionShape),/u,
+      /_Runtime\.field\((?:out|RaycastCollisionShape\.localHitScratch__raycastCollisionShape2D),/u,
     );
     const generatedShapeContact = readFileSync('generated/flighthq/collision/ShapeContact.hx', 'utf8');
-    expect(generatedShapeContact).not.toMatch(/\(cast point : CollisionContactPoint\)\./u);
+    expect(generatedShapeContact).not.toMatch(/\(cast point : CollisionContactPoint2D\)\./u);
     expect(generatedShapeContact).not.toMatch(/_Runtime\.field\(point,/u);
     const generatedWorldQueries = readFileSync('generated/flighthq/physics2d/WorldQueries.hx', 'utf8');
     expect(generatedWorldQueries).not.toMatch(/\(cast (?:current|hit) : Physics2DRayHit\)\./u);

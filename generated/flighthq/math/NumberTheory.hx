@@ -22,6 +22,9 @@ class NumberTheory {
   }
 
   public static function gcd(a:Float, b:Float):Float {
+    if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([a] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([b] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
+      _Runtime.throwValue(_Runtime.rangeError('gcd: arguments must be finite'));
+    }
     (a = cast (HxMath.abs(_Runtime.trunc(a)) : Dynamic));
     (b = cast (HxMath.abs(_Runtime.trunc(b)) : Dynamic));
     if ((cast ((cast _Runtime.strictEquals(a, 0.0) : Bool) && (cast _Runtime.strictEquals(b, 0.0) : Bool)) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('gcd: both arguments must not be 0')); }

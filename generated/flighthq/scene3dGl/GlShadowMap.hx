@@ -103,7 +103,7 @@ class GlShadowMap {
       if ((cast skinned : Bool)) {
         var jointMatrices:flighthq._internal._Float32Array = (cast (cast mesh.skin : { var skeleton:Skeleton3D; }).skeleton : { var jointMatrices:flighthq._internal._Float32Array; }).jointMatrices;
         flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + SKIN_PALETTE_TEXTURE_UNIT));
-        uploadGlSkinPaletteTexture(({ final __callArgument10:Dynamic = gl; __callArgument10; }), (cast ensureGlSkinPalette(({ final __callArgument11:Dynamic = state; __callArgument11; })) : GlSkinPaletteTexture), ({ final __callArgument12:Dynamic = jointMatrices; __callArgument12; }), (cast (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(jointMatrices, 'length'), 16.0)) | 0) : Float));
+        uploadGlSkinPaletteTexture(({ final __callArgument10:Dynamic = gl; __callArgument10; }), (cast ensureGlSkinPalette(({ final __callArgument11:Dynamic = state; __callArgument11; })) : GlSkinPaletteTexture), ({ final __callArgument12:Dynamic = jointMatrices; __callArgument12; }), (cast (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(jointMatrices, 'length'), 16.0)) | 0) : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
         flighthq._internal.backend.WebGl2Backend.uniform1i(gl, _Runtime.coalesce(program.locJointTexture, function():Dynamic return cast null), SKIN_PALETTE_TEXTURE_UNIT);
       }
       upload = (cast ensureGlMeshUpload(({ final __callArgument13:Dynamic = state; __callArgument13; }), mesh.geometry, (cast skinned : Bool)) : GlMeshUpload);
@@ -138,7 +138,7 @@ class GlShadowMap {
   public static function compileShadowDepthSkinnedProgram__glShadowMap(gl:flighthq._internal.dom.WebGL2RenderingContext):GlMeshProgram {
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
     program = (cast compileGlProgram(({ final __callArgument15:Dynamic = gl; __callArgument15; }), (cast GlShadowMap.SHADOW_DEPTH_SKINNED_VERTEX__glShadowMap : String), (cast GlShadowMap.SHADOW_DEPTH_FRAGMENT__glShadowMap : String)) : flighthq._internal.dom.WebGLProgram);
-    return cast { locJointTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointTexture'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNormalMatrix: null, locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };
+    return cast { locJointNormalTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointNormalTexture'), locJointTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointTexture'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNormalMatrix: null, locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };
     return cast null;
   }
 

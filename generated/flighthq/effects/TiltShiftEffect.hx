@@ -10,7 +10,7 @@ import flighthq.types.RenderState;
 import flighthq.types.TiltShiftEffect;
 
 class TiltShiftEffect {
-  public static function createTiltShiftEffect(?options:flighthq._internal._Omit<flighthq.types.TiltShiftEffect, String>):flighthq.types.TiltShiftEffect {
+  public static function createTiltShiftEffect(?options:{ @:optional var center:Null<Float>; @:optional var width:Null<Float>; @:optional var blur:Null<Float>; }):flighthq.types.TiltShiftEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'TiltShiftEffect' }, options]);
     return cast null;

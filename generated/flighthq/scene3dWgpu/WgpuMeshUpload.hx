@@ -7,6 +7,7 @@ import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometry.MeshGeometryRuntime;
 import flighthq.types.MeshGeometry.MeshGeometryWgpuData;
+import flighthq.types.MeshGeometry.VertexAttributeLayout;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuScene3DRuntime;
@@ -16,8 +17,8 @@ import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class WgpuMeshUpload {
   @:noCompletion
-  public static function ensureWgpuMeshUpload(state:WgpuRenderState, geometry:MeshGeometry, gpuSkinned:Bool = false):Null<flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload> {
-    var indices:Null<flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>> = cast _Runtime.UNDEFINED;
+  public static function ensureWgpuMeshUpload(state:WgpuRenderState, geometry:MeshGeometry, gpuSkinned:Bool = false):flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload {
+    var indices:Null<flighthq._internal._Union2<flighthq._internal._UInt32Array, flighthq._internal._UInt16Array>> = cast _Runtime.UNDEFINED;
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var cache:flighthq._internal._WeakMap<flighthq._internal._Object, flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload> = cast _Runtime.UNDEFINED;
     var upload:Null<flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload> = cast _Runtime.UNDEFINED;
@@ -27,9 +28,9 @@ class WgpuMeshUpload {
     var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
     var vertices:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var vertexBuffer:flighthq._internal.dom.GPUBuffer = cast _Runtime.UNDEFINED;
-    var indexBuffer:flighthq._internal.dom.GPUBuffer = cast _Runtime.UNDEFINED;
+    var indexBuffer:Null<flighthq._internal.dom.GPUBuffer> = cast _Runtime.UNDEFINED;
+    var stride:Float = cast _Runtime.UNDEFINED;
     indices = geometry.indices;
-    if ((cast _Runtime.strictEquals(indices, null) : Bool)) { return cast null; }
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuScene3DRuntime);
     cache = scene.uploadCache;
     upload = ((cast cache : flighthq._internal._WeakMap<flighthq._internal._Object, flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload>).get(geometry));
@@ -47,9 +48,13 @@ class WgpuMeshUpload {
     vertices = ((cast hasSkinBindPose : Bool) ? (cast (cast skinning : WgpuSkinningAdapter).getUploadVertices(({ final __callArgument3:Dynamic = geometry; __callArgument3; })) : Dynamic) : (cast geometry.vertices : Dynamic));
     vertexBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: HxMath.max(4.0, (cast WgpuMeshUpload.alignTo4__wgpuMeshUpload((cast _Runtime.field(vertices, 'byteLength') : Float)) : Float)), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([vertexBuffer, 0.0, _Runtime.field(vertices, 'buffer'), _Runtime.field(vertices, 'byteOffset'), _Runtime.field(vertices, 'byteLength')] : Array<Dynamic>));
-    indexBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: HxMath.max(4.0, (cast WgpuMeshUpload.alignTo4__wgpuMeshUpload((cast (cast indices : { var byteLength:Float; }).byteLength : Float)) : Float)), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'INDEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
-    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeBuffer', cast ([indexBuffer, 0.0, (cast indices : { var buffer:haxe.io.Bytes; }).buffer, (cast indices : { var byteOffset:Float; }).byteOffset, (cast indices : { var byteLength:Float; }).byteLength] : Array<Dynamic>));
-    (upload = cast ({ indexBuffer: indexBuffer, indexCount: (cast indices : { var length:Float; }).length, indexFormat: ((cast _Runtime.strictEquals((cast indices : { var BYTES_PER_ELEMENT:Float; }).BYTES_PER_ELEMENT, 4.0) : Bool) ? (cast 'uint32' : Dynamic) : (cast 'uint16' : Dynamic)), skinBindUploaded: hasSkinBindPose, version: geometry.version, vertexBuffer: vertexBuffer } : Dynamic));
+    indexBuffer = null;
+    if ((cast !_Runtime.strictEquals(indices, null) : Bool)) {
+      (indexBuffer = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: HxMath.max(4.0, (cast WgpuMeshUpload.alignTo4__wgpuMeshUpload((cast (cast indices : { var byteLength:Float; }).byteLength : Float)) : Float)), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'INDEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)) : Dynamic));
+      WgpuMeshUpload.writeMeshIndices__wgpuMeshUpload(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), ({ final __callArgument4:Dynamic = indexBuffer; __callArgument4; }), ({ final __callArgument5:Dynamic = indices; __callArgument5; }));
+    }
+    stride = (cast geometry.layout : { var stride:Float; }).stride;
+    (upload = cast ({ indexBuffer: indexBuffer, indexCount: ((cast !_Runtime.strictEquals(indices, null) : Bool) ? (cast (cast indices : { var length:Float; }).length : Dynamic) : (cast ((cast ((cast stride : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(vertices, 'byteLength'), stride)) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic)), indexFormat: ((cast _Runtime.strictEquals(indices, null) : Bool) ? (cast null : Dynamic) : (cast ((cast _Runtime.strictEquals((cast indices : { var BYTES_PER_ELEMENT:Float; }).BYTES_PER_ELEMENT, 4.0) : Bool) ? (cast 'uint32' : Dynamic) : (cast 'uint16' : Dynamic)) : Dynamic)), skinBindUploaded: hasSkinBindPose, version: geometry.version, vertexBuffer: vertexBuffer } : Dynamic));
     ((cast cache : flighthq._internal._WeakMap<flighthq._internal._Object, flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload>).set(geometry, (cast upload)));
     if ((cast !_Runtime.strictEquals(meshRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       ((cast meshRuntime : { var webgpuData:Null<MeshGeometryWgpuData>; }).webgpuData = cast ((cast (cast upload : flighthq._internal._Any) : flighthq._internal._IndexedAccess<MeshGeometryRuntime, String>) : Null<MeshGeometryWgpuData>));
@@ -62,4 +67,22 @@ class WgpuMeshUpload {
     return cast (_Runtime.toInt32((byteLength + 3.0)) & _Runtime.toInt32(~3));
     return cast null;
   }
+
+  public static function writeMeshIndices__wgpuMeshUpload(queue:flighthq._internal.dom.GPUQueue, indexBuffer:flighthq._internal.dom.GPUBuffer, indices:flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>):Void {
+    var byteLength:Float = cast _Runtime.UNDEFINED;
+    var paddedByteLength:Float = cast _Runtime.UNDEFINED;
+    var wordCount:Float = cast _Runtime.UNDEFINED;
+    byteLength = (cast indices : { var byteLength:Float; }).byteLength;
+    if ((cast _Runtime.strictEquals((_Runtime.toInt32(byteLength) & 3), 0.0) : Bool)) {
+      flighthq._internal.backend.WebGpuQueueBackend.call(queue, 'writeBuffer', cast ([indexBuffer, 0.0, (cast indices : { var buffer:haxe.io.Bytes; }).buffer, (cast indices : { var byteOffset:Float; }).byteOffset, byteLength] : Array<Dynamic>));
+      return;
+    }
+    paddedByteLength = (cast WgpuMeshUpload.alignTo4__wgpuMeshUpload((cast byteLength : Float)) : Float);
+    wordCount = (paddedByteLength / 2.0);
+    if ((cast ((cast _Runtime.field(WgpuMeshUpload._meshIndexScratch__wgpuMeshUpload, 'length') : Float) < (cast wordCount : Float)) : Bool)) { (WgpuMeshUpload._meshIndexScratch__wgpuMeshUpload = cast (new flighthq._internal._UInt16Array(wordCount) : Dynamic)); }
+    (cast WgpuMeshUpload._meshIndexScratch__wgpuMeshUpload : flighthq._internal._UInt16Array).set((cast indices : flighthq._internal._UInt16Array));
+    flighthq._internal.backend.WebGpuQueueBackend.call(queue, 'writeBuffer', cast ([indexBuffer, 0.0, _Runtime.field(WgpuMeshUpload._meshIndexScratch__wgpuMeshUpload, 'buffer'), 0.0, paddedByteLength] : Array<Dynamic>));
+  }
+
+  public static var _meshIndexScratch__wgpuMeshUpload:flighthq._internal._UInt16Array = new flighthq._internal._UInt16Array(0.0);
 }

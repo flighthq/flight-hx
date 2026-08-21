@@ -6,15 +6,15 @@ import flighthq._internal._Runtime;
 import flighthq.types.BrightnessContrastAdjustment;
 
 class BrightnessContrastAdjustment {
-  public static function createBrightnessContrastAdjustment(?options:flighthq._internal._Omit<flighthq.types.BrightnessContrastAdjustment, String>):flighthq.types.BrightnessContrastAdjustment {
+  public static function createBrightnessContrastAdjustment(?options:{ @:optional var brightness:Null<Float>; @:optional var contrast:Null<Float>; }):flighthq.types.BrightnessContrastAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var brightness:Float = cast _Runtime.UNDEFINED;
     var contrast:Float = cast _Runtime.UNDEFINED;
     var s:Float = cast _Runtime.UNDEFINED;
     var o:Float = cast _Runtime.UNDEFINED;
     var colorMatrix:Array<Float> = cast _Runtime.UNDEFINED;
-    brightness = _Runtime.coalesce(_Runtime.field(options, 'brightness'), function():Dynamic return cast 0.0);
-    contrast = _Runtime.coalesce(_Runtime.field(options, 'contrast'), function():Dynamic return cast 1.0);
+    brightness = _Runtime.coalesce((cast options : { @:optional var brightness:Null<Float>; @:optional var contrast:Null<Float>; }).brightness, function():Dynamic return cast 0.0);
+    contrast = _Runtime.coalesce((cast options : { @:optional var brightness:Null<Float>; @:optional var contrast:Null<Float>; }).contrast, function():Dynamic return cast 1.0);
     s = contrast;
     o = ((brightness * contrast) + (0.5 * (1.0 - contrast)));
     colorMatrix = (cast cast ([s, 0.0, 0.0, 0.0, o, 0.0, s, 0.0, 0.0, o, 0.0, 0.0, s, 0.0, o, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));

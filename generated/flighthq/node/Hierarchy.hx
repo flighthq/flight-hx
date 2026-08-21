@@ -8,11 +8,13 @@ import flighthq.geometry.Matrix.inverseMatrix;
 import flighthq.geometry.Matrix.multiplyMatrix;
 import flighthq.geometry.MatrixPool.acquireMatrix;
 import flighthq.geometry.MatrixPool.releaseMatrix;
+import flighthq.geometry.Transform2d.decomposeMatrixToTransform2D;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.node.NodeTransform2d.ensureNodeWorldMatrix;
 import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.node.Revision.invalidateNodeLocalTransform;
 import flighthq.node.Revision.invalidateNodeParentReference;
+import flighthq.node.Revision.invalidateNodeWorldBounds;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.types.HasTransform2D.Transform2DNode;
 import flighthq.types.Matrix;
@@ -23,6 +25,7 @@ import flighthq.types.Node.NodeOf;
 import flighthq.types.Node.NodeRuntime;
 import flighthq.types.NodeSignals;
 import flighthq.types.Signal;
+import flighthq.types.Transform2D.Transform2DLike;
 
 class Hierarchy {
   public static function addNodeChild<Traits:flighthq._internal._Object>(target:Node<Traits>, child:Node<Traits>):NodeOf<Traits> {
@@ -35,6 +38,7 @@ class Hierarchy {
     var children:Null<Array<Node<Traits>>> = cast _Runtime.UNDEFINED;
     var childRuntime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
     var parent:Node<Traits> = cast _Runtime.UNDEFINED;
+    var wasChild:Bool = cast _Runtime.UNDEFINED;
     var targetSignals:Null<NodeSignals> = cast _Runtime.UNDEFINED;
     targetRuntime = (cast getNodeRuntime((cast target : Dynamic)) : NodeRuntime<Traits>);
     children = (cast targetRuntime : NodeRuntime<Traits>).children;
@@ -42,9 +46,11 @@ class Hierarchy {
       _Runtime.throwValue(_Runtime.typeError('Parameter child must be non-null'));
     } else { if ((cast _Runtime.strictEquals(child, target) : Bool)) {
       _Runtime.throwValue(_Runtime.typeError('An object cannot be added as a child of itself'));
+    } else { if ((cast (cast isNodeAncestorOf((cast child : Dynamic), (cast target : Dynamic)) : Bool) : Bool)) {
+      _Runtime.throwValue(_Runtime.typeError('An ancestor cannot be added as a child of its descendant'));
     } else { if ((cast ((cast ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool) || (cast _Runtime.andValue(!_Runtime.strictEquals(children, null), function():Dynamic return cast ((cast index : Float) > (cast _Runtime.field(children, 'length') : Float))) : Bool)) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(children, null), function():Dynamic return cast ((cast index : Float) > (cast 0.0 : Float))) : Bool)) : Bool)) {
       Hierarchy.throwOutOfBoundsError__hierarchy();
-    } } }
+    } } } }
     if ((cast !(cast (cast targetRuntime : NodeRuntime<Traits>).canAddChild((cast target : Dynamic), (cast child : Dynamic)) : Bool) : Bool)) {
       _Runtime.throwValue(_Runtime.typeError('The specified parent object cannot add this child'));
     }
@@ -53,9 +59,11 @@ class Hierarchy {
     }
     childRuntime = (cast getNodeRuntime((cast child : Dynamic)) : NodeRuntime<Traits>);
     parent = (cast (cast childRuntime : NodeRuntime<Traits>).parent : Node<Traits>);
+    wasChild = false;
     if ((cast _Runtime.strictEquals(parent, target) : Bool)) {
       var i:Float = _Runtime.callProperty(children, 'indexOf', cast ([child] : Array<Dynamic>));
       if ((cast !_Runtime.strictEquals(i, -1.0) : Bool)) {
+        (wasChild = cast (true : Dynamic));
         if ((cast _Runtime.strictEquals(i, HxMath.min(index, _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0))) : Bool)) { return cast (cast child : NodeOf<Traits>); }
         _Runtime.splice(children, Std.int(i), Std.int(1.0), []);
       }
@@ -66,6 +74,7 @@ class Hierarchy {
     }
     _Runtime.splice(children, Std.int(index), Std.int(0.0), [child]);
     Hierarchy.invalidateNodeChildren__hierarchy((cast targetRuntime : Dynamic));
+    if ((cast !(cast wasChild : Bool) : Bool)) { invalidateNodeWorldBounds((cast target : Dynamic)); }
     targetSignals = (cast targetRuntime : NodeRuntime<Traits>).nodeSignals;
     if ((cast !_Runtime.strictEquals(targetSignals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast targetSignals : { var onChildrenChanged:Signal<Void->Void>; }).onChildrenChanged]]), 1); }
     if ((cast !_Runtime.strictEquals(parent, target) : Bool)) {
@@ -240,6 +249,7 @@ class Hierarchy {
       if ((cast !_Runtime.strictEquals(i, -1.0) : Bool)) {
         _Runtime.splice(children, Std.int(i), Std.int(1.0), []);
         Hierarchy.invalidateNodeChildren__hierarchy((cast (cast targetRuntime : NodeRuntime<Traits>) : Dynamic));
+        invalidateNodeWorldBounds((cast target : Dynamic));
       }
       var targetSignals:Null<NodeSignals> = _Runtime.field(targetRuntime, 'nodeSignals');
       if ((cast !_Runtime.strictEquals(targetSignals, null) : Bool)) {
@@ -280,45 +290,48 @@ class Hierarchy {
     }
   }
 
-  public static function reparentNode<Traits:flighthq._internal._Object>(child:Transform2DNode<Traits>, newParent:Transform2DNode<Traits>):NodeOf<Traits> {
+  public static function reparentNode<Traits:flighthq._internal._Object>(child:Transform2DNode<Traits>, newParent:Transform2DNode<Traits>):Bool {
     var oldWorld:Matrix = cast _Runtime.UNDEFINED;
     var localM:Matrix = cast _Runtime.UNDEFINED;
     ensureNodeWorldMatrix((cast child : Dynamic));
+    ensureNodeWorldMatrix((cast newParent : Dynamic));
     oldWorld = (cast acquireMatrix() : Matrix);
     localM = (cast acquireMatrix() : Matrix);
     try {
       try {
         copyMatrix(({ final __callArgument0:Dynamic = oldWorld; __callArgument0; }), ({ final __callArgument1:Dynamic = (cast getNodeWorldMatrix((cast child : Dynamic)) : Matrix); __callArgument1; }));
-        (cast addNodeChild((cast newParent : Dynamic), (cast child : Dynamic)) : NodeOf<Traits>);
-        (cast inverseMatrix(({ final __callArgument2:Dynamic = localM; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast getNodeWorldMatrix((cast newParent : Dynamic)) : Matrix); __callArgument3; })) : Bool);
-        multiplyMatrix(({ final __callArgument4:Dynamic = localM; __callArgument4; }), ({ final __callArgument5:Dynamic = localM; __callArgument5; }), ({ final __callArgument6:Dynamic = oldWorld; __callArgument6; }));
-        var a:Float = localM.a;
-        var b:Float = localM.b;
-        var c:Float = localM.c;
-        var d:Float = localM.d;
-        (child.scaleX = cast (HxMath.sqrt(((a * a) + (b * b))) : Float));
-        (child.scaleY = cast (HxMath.sqrt(((c * c) + (d * d))) : Float));
-        if ((cast ((cast ((a * d) - (b * c)) : Float) < (cast 0.0 : Float)) : Bool)) {
-          (child.scaleY = cast (-child.scaleY : Float));
+        if ((cast !(cast (cast inverseMatrix(({ final __callArgument2:Dynamic = localM; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast getNodeWorldMatrix((cast newParent : Dynamic)) : Matrix); __callArgument3; })) : Bool) : Bool) : Bool)) {
+          _Runtime.callOptionalValue(Hierarchy.reparentNodeGuard__hierarchy, cast ([(cast child : Node<Dynamic>), (cast newParent : Node<Dynamic>)] : Array<Dynamic>));
+          var __returnValue4:Dynamic = false;
+          {
+            releaseMatrix(({ final __callArgument5:Dynamic = oldWorld; __callArgument5; }));
+            releaseMatrix(({ final __callArgument6:Dynamic = localM; __callArgument6; }));
+          }
+          return cast __returnValue4;
         }
-        var skewYRad:Float = (child.skewY * Hierarchy.DEG_TO_RAD__hierarchy);
-        (child.rotation = cast ((_Runtime.subtractNumbers(HxMath.atan2(b, a), skewYRad) * Hierarchy.RAD_TO_DEG__hierarchy) : Float));
-        (child.x = cast ((localM.tx + ((a * child.pivotX) + (c * child.pivotY))) : Float));
-        (child.y = cast ((localM.ty + ((b * child.pivotX) + (d * child.pivotY))) : Float));
+        (cast addNodeChild((cast newParent : Dynamic), (cast child : Dynamic)) : NodeOf<Traits>);
+        multiplyMatrix(({ final __callArgument7:Dynamic = localM; __callArgument7; }), ({ final __callArgument8:Dynamic = localM; __callArgument8; }), ({ final __callArgument9:Dynamic = oldWorld; __callArgument9; }));
+        var pivotX:Float = child.pivotX;
+        var pivotY:Float = child.pivotY;
+        decomposeMatrixToTransform2D(({ final __callArgument10:Dynamic = child; __callArgument10; }), ({ final __callArgument11:Dynamic = localM; __callArgument11; }));
+        (child.pivotX = cast (pivotX : Float));
+        (child.pivotY = cast (pivotY : Float));
+        (child.x = cast ((localM.tx + ((localM.a * pivotX) + (localM.c * pivotY))) : Float));
+        (child.y = cast ((localM.ty + ((localM.b * pivotX) + (localM.d * pivotY))) : Float));
         invalidateNodeLocalTransform((cast child : Dynamic));
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError7:Dynamic) {
+    } catch (__finallyError12:Dynamic) {
       {
-        releaseMatrix(({ final __callArgument8:Dynamic = oldWorld; __callArgument8; }));
-        releaseMatrix(({ final __callArgument9:Dynamic = localM; __callArgument9; }));
+        releaseMatrix(({ final __callArgument13:Dynamic = oldWorld; __callArgument13; }));
+        releaseMatrix(({ final __callArgument14:Dynamic = localM; __callArgument14; }));
       }
-      _Runtime.throwValue(__finallyError7);
+      _Runtime.throwValue(__finallyError12);
     }
     {
-      releaseMatrix(({ final __callArgument10:Dynamic = oldWorld; __callArgument10; }));
-      releaseMatrix(({ final __callArgument11:Dynamic = localM; __callArgument11; }));
+      releaseMatrix(({ final __callArgument15:Dynamic = oldWorld; __callArgument15; }));
+      releaseMatrix(({ final __callArgument16:Dynamic = localM; __callArgument16; }));
     }
-    return cast (cast (cast child : flighthq._internal._Any) : NodeOf<Traits>);
+    return cast true;
     return cast null;
   }
 
@@ -347,6 +360,11 @@ class Hierarchy {
         if ((cast !_Runtime.strictEquals(targetSignals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast targetSignals : { var onChildrenOrderChanged:Signal<Void->Void>; }).onChildrenOrderChanged]]), 1); }
       }
     }
+  }
+
+  @:noCompletion
+  public static function setReparentNodeGuard(guard:Null<Node<Dynamic>->Node<Dynamic>->Void>):Void {
+    (Hierarchy.reparentNodeGuard__hierarchy = cast (guard : Dynamic));
   }
 
   public static function swapNodeChildren<Traits:flighthq._internal._Object>(target:Node<Traits>, child1:Node<Traits>, child2:Node<Traits>):Void {
@@ -395,7 +413,5 @@ class Hierarchy {
     _Runtime.throwValue(_Runtime.rangeError('The supplied index is out of bounds.'));
   }
 
-  public static final DEG_TO_RAD__hierarchy:Float = (HxMath.PI / 180.0);
-
-  public static final RAD_TO_DEG__hierarchy:Float = (180.0 / HxMath.PI);
+  public static var reparentNodeGuard__hierarchy:Null<Node<Dynamic>->Node<Dynamic>->Void> = _Runtime.explicitNull();
 }

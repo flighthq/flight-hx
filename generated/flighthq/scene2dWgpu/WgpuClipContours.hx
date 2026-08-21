@@ -3,6 +3,7 @@ package flighthq.scene2dWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.renderWgpu.WgpuBackground.retireWgpuBuffer;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.scene2dWgpu.WgpuQuadBatchWriter.flushWgpuQuadBatchWriter;
 import flighthq.types.Matrix;
@@ -36,7 +37,8 @@ class WgpuClipContours {
       if ((cast ((cast (cast entry : WgpuClipContourEntry).vertexCount : Float) > (cast 0.0 : Float)) : Bool)) { (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw((cast entry : WgpuClipContourEntry).vertexCount); }
     }
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      _Runtime.pushMany(_Runtime.coalesce(runtime.retiredBuffers, function():Dynamic return cast (runtime.retiredBuffers = cast (cast ([] : Array<Dynamic>) : Null<Array<flighthq._internal.dom.GPUBuffer>>))), cast ([(cast entry : WgpuClipContourEntry).vertexBuffer, (cast entry : WgpuClipContourEntry).uniformBuffer] : Array<Dynamic>));
+      retireWgpuBuffer(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast entry : WgpuClipContourEntry).vertexBuffer);
+      retireWgpuBuffer(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast entry : WgpuClipContourEntry).uniformBuffer);
     }
   }
 
@@ -52,16 +54,16 @@ class WgpuClipContours {
     var uniformBuffer:flighthq._internal.dom.GPUBuffer = cast _Runtime.UNDEFINED;
     var bindGroup:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuRenderStateRuntime);
-    flushWgpuQuadBatchWriter(({ final __callArgument4:Dynamic = state; __callArgument4; }));
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuRenderStateRuntime);
+    flushWgpuQuadBatchWriter(({ final __callArgument6:Dynamic = state; __callArgument6; }));
     _Runtime.voidValue(winding);
     device = (cast state : WgpuRenderState).device;
     depth = runtime.currentMaskDepth;
-    pipelines = (cast WgpuClipContours.ensureClipContourPipelines__wgpuClipContours(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuClipContourPipelines);
-    __destructure0 = (cast WgpuClipContours.createClipContourVertexBuffer__wgpuClipContours(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = contours; __callArgument7; })) : { var vertexBuffer:flighthq._internal.dom.GPUBuffer; var vertexCount:Float; });
+    pipelines = (cast WgpuClipContours.ensureClipContourPipelines__wgpuClipContours(({ final __callArgument7:Dynamic = state; __callArgument7; })) : WgpuClipContourPipelines);
+    __destructure0 = (cast WgpuClipContours.createClipContourVertexBuffer__wgpuClipContours(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = contours; __callArgument9; })) : { var vertexBuffer:flighthq._internal.dom.GPUBuffer; var vertexCount:Float; });
     vertexBuffer = _Runtime.field(__destructure0, 'vertexBuffer');
     vertexCount = _Runtime.field(__destructure0, 'vertexCount');
-    uniformBuffer = (cast WgpuClipContours.createClipContourUniformBuffer__wgpuClipContours(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = worldTransform; __callArgument9; })) : flighthq._internal.dom.GPUBuffer);
+    uniformBuffer = (cast WgpuClipContours.createClipContourUniformBuffer__wgpuClipContours(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = worldTransform; __callArgument11; })) : flighthq._internal.dom.GPUBuffer);
     bindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: (cast pipelines : WgpuClipContourPipelines).bindGroupLayout, entries: cast ([{ binding: 0.0, resource: { buffer: uniformBuffer } }] : Array<Dynamic>) }] : Array<Dynamic>));
     pass = runtime.renderPass;
     if ((cast !_Runtime.strictEquals(pass, null) : Bool)) {
@@ -82,7 +84,7 @@ class WgpuClipContours {
     var ih:Float = cast _Runtime.UNDEFINED;
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var buffer:flighthq._internal.dom.GPUBuffer = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument12:Dynamic = state; __callArgument12; })) : WgpuRenderStateRuntime);
     viewport = _Runtime.coalesce(runtime.renderTargetViewport, function():Dynamic return cast (cast state : WgpuRenderState).canvas);
     iw = (2.0 / (cast viewport : { var width:Float; var height:Float; }).width);
     ih = (2.0 / (cast viewport : { var width:Float; var height:Float; }).height);
@@ -144,7 +146,7 @@ class WgpuClipContours {
     var vertexBuffers:Array<flighthq._internal.dom.GPUVertexBufferLayout> = cast _Runtime.UNDEFINED;
     var make:String->flighthq._internal.dom.GPURenderPipeline = cast _Runtime.UNDEFINED;
     var pipelines:WgpuClipContourPipelines = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument11:Dynamic = state; __callArgument11; })) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : WgpuRenderStateRuntime);
     format = _Runtime.coalesce(runtime.currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
     cache = _Runtime.coalesce(runtime.clipContourPipelines, function():Dynamic return cast (runtime.clipContourPipelines = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, WgpuClipContourPipelines>>)));
     existing = ((cast cache : flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>).get(format));

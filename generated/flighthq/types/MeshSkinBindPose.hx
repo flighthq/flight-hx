@@ -4,4 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef MeshSkinBindPose = { var joints:flighthq._internal._Float32Array; var normals:flighthq._internal._Float32Array; var positions:flighthq._internal._Float32Array; var skinnedNormals:flighthq._internal._Float32Array; var skinnedPositions:flighthq._internal._Float32Array; var weights:flighthq._internal._Float32Array; };
+typedef MeshSkinBindPose = { var joints:flighthq._internal._Float32Array; var normals:flighthq._internal._Float32Array; var positions:flighthq._internal._Float32Array; var skinnedNormals:flighthq._internal._Float32Array; var skinnedPositions:flighthq._internal._Float32Array; var skinnedTangents:flighthq._internal._Float32Array; var tangents:flighthq._internal._Float32Array; var weights:flighthq._internal._Float32Array; };

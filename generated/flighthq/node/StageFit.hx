@@ -41,18 +41,26 @@ class StageFit {
   }
 
   public static function computeScene2DFitTransform<Traits:flighthq._internal._Object>(out:MatrixLike, scene2d:Scene2DFitContext<Traits>, viewWidth:Float, viewHeight:Float):Void {
+    var contentX:Float = cast _Runtime.UNDEFINED;
+    var contentY:Float = cast _Runtime.UNDEFINED;
     var contentWidth:Float = cast _Runtime.UNDEFINED;
     var contentHeight:Float = cast _Runtime.UNDEFINED;
     var sx:Float = cast _Runtime.UNDEFINED;
     var sy:Float = cast _Runtime.UNDEFINED;
+    contentX = 0.0;
+    contentY = 0.0;
     contentWidth = 0.0;
     contentHeight = 0.0;
     if ((cast !_Runtime.strictEquals(_Runtime.field(scene2d, 'root'), null) : Bool)) {
-      var runtime:flighthq._internal._Any = (cast getNodeRuntime((cast _Runtime.field(scene2d, 'root') : Dynamic)) : flighthq._internal._Partial<HasBoundsRectangleRuntime>);
-      if ((cast !_Runtime.strictEquals(_Runtime.optionalField(runtime, 'computeLocalBoundsRectangle'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      var runtime:{ @:optional var boundsRectangle:Null<Rectangle>; @:optional var computeLocalBoundsRectangle:Null<Rectangle->BoundsNodeAny->Void>; @:optional var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; @:optional var localBoundsRectangle:Null<Rectangle>; @:optional var worldBoundsRectangle:Null<Rectangle>; @:optional var binding:Null<flighthq._internal._Object>; } = (cast getNodeRuntime((cast _Runtime.field(scene2d, 'root') : Dynamic)) : { @:optional var boundsRectangle:Null<Rectangle>; @:optional var computeLocalBoundsRectangle:Null<Rectangle->BoundsNodeAny->Void>; @:optional var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; @:optional var localBoundsRectangle:Null<Rectangle>; @:optional var worldBoundsRectangle:Null<Rectangle>; @:optional var binding:Null<flighthq._internal._Object>; });
+      if ((cast !_Runtime.strictEquals(({ final __structural0 = runtime; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var boundsRectangle:Null<Rectangle>; @:optional var computeLocalBoundsRectangle:Null<Rectangle->BoundsNodeAny->Void>; @:optional var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; @:optional var localBoundsRectangle:Null<Rectangle>; @:optional var worldBoundsRectangle:Null<Rectangle>; @:optional var binding:Null<flighthq._internal._Object>; }).computeLocalBoundsRectangle; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+        (StageFit._tempRectangle__stageFit.x = cast (0.0 : Float));
+        (StageFit._tempRectangle__stageFit.y = cast (0.0 : Float));
         (StageFit._tempRectangle__stageFit.width = cast (0.0 : Float));
         (StageFit._tempRectangle__stageFit.height = cast (0.0 : Float));
-        _Runtime.callProperty(runtime, 'computeLocalBoundsRectangle', cast ([StageFit._tempRectangle__stageFit, (cast _Runtime.field(scene2d, 'root') : BoundsNodeAny)] : Array<Dynamic>));
+        (cast runtime : { @:optional var boundsRectangle:Null<Rectangle>; @:optional var computeLocalBoundsRectangle:Null<Rectangle->BoundsNodeAny->Void>; @:optional var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; @:optional var localBoundsRectangle:Null<Rectangle>; @:optional var worldBoundsRectangle:Null<Rectangle>; @:optional var binding:Null<flighthq._internal._Object>; }).computeLocalBoundsRectangle(({ final __callArgument1:Dynamic = StageFit._tempRectangle__stageFit; __callArgument1; }), (cast _Runtime.field(scene2d, 'root') : BoundsNodeAny));
+        (contentX = cast (StageFit._tempRectangle__stageFit.x : Dynamic));
+        (contentY = cast (StageFit._tempRectangle__stageFit.y : Dynamic));
         (contentWidth = cast (StageFit._tempRectangle__stageFit.width : Dynamic));
         (contentHeight = cast (StageFit._tempRectangle__stageFit.height : Dynamic));
       }
@@ -81,8 +89,8 @@ class StageFit {
     (out.b = cast (0.0 : Float));
     (out.c = cast (0.0 : Float));
     (out.d = cast (sy : Float));
-    (out.tx = cast ((cast computeScene2DFitAlignX((cast (contentWidth * sx) : Float), (cast viewWidth : Float), _Runtime.field(scene2d, 'align')) : Float) : Float));
-    (out.ty = cast ((cast computeScene2DFitAlignY((cast (contentHeight * sy) : Float), (cast viewHeight : Float), _Runtime.field(scene2d, 'align')) : Float) : Float));
+    (out.tx = cast (((cast computeScene2DFitAlignX((cast (contentWidth * sx) : Float), (cast viewWidth : Float), _Runtime.field(scene2d, 'align')) : Float) - (contentX * sx)) : Float));
+    (out.ty = cast (((cast computeScene2DFitAlignY((cast (contentHeight * sy) : Float), (cast viewHeight : Float), _Runtime.field(scene2d, 'align')) : Float) - (contentY * sy)) : Float));
   }
 
   public static final _tempRectangle__stageFit:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle);

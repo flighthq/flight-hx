@@ -36,7 +36,6 @@ import flighthq.types.InteractionManager.InteractionManagerOptions;
 import flighthq.types.InteractionManager.InteractionPointerOptions;
 import flighthq.types.InteractionManager.InteractionSignalName;
 import flighthq.types.InteractionSignals;
-import flighthq.types.KeyboardEventData;
 import flighthq.types.Node;
 import flighthq.types.Node.NodeAny;
 import flighthq.types.Node2D;
@@ -109,11 +108,11 @@ class Interaction {
     Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionContextMenu(manager, x, y, button, options);
   }
 
-  public static function dispatchInteractionKeyDown<N:NodeAny>(manager:InteractionManager<N>, key:String, ?keyCode:Float, ?modifiers:flighthq._internal._Partial<KeyboardEventData>):Void {
+  public static function dispatchInteractionKeyDown<N:NodeAny>(manager:InteractionManager<N>, key:String, ?keyCode:Float, ?modifiers:{ @:optional var altKey:Null<Bool>; @:optional var ctrlKey:Null<Bool>; @:optional var key:Null<String>; @:optional var keyCode:Null<Float>; @:optional var metaKey:Null<Bool>; @:optional var shiftKey:Null<Bool>; }):Void {
     Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionKeyDown(manager, key, keyCode, modifiers);
   }
 
-  public static function dispatchInteractionKeyUp<N:NodeAny>(manager:InteractionManager<N>, key:String, ?keyCode:Float, ?modifiers:flighthq._internal._Partial<KeyboardEventData>):Void {
+  public static function dispatchInteractionKeyUp<N:NodeAny>(manager:InteractionManager<N>, key:String, ?keyCode:Float, ?modifiers:{ @:optional var altKey:Null<Bool>; @:optional var ctrlKey:Null<Bool>; @:optional var key:Null<String>; @:optional var keyCode:Null<Float>; @:optional var metaKey:Null<Bool>; @:optional var shiftKey:Null<Bool>; }):Void {
     Facade_Interaction_flighthq_interaction_InteractionManager.dispatchInteractionKeyUp(manager, key, keyCode, modifiers);
   }
 

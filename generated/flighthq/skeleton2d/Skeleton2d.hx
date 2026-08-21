@@ -256,6 +256,16 @@ class Skeleton2d {
     return cast null;
   }
 
+  public static function getSkeleton2DAnimationTargetBinder(kind:Skeleton2DAnimationTargetKind):Null<Skeleton2DAnimationTargetBinder> {
+    return cast Facade_Skeleton2d_flighthq_skeleton2d_Skeleton2dAnimationTarget.getSkeleton2DAnimationTargetBinder(kind);
+    return cast null;
+  }
+
+  public static function getSkeleton2DAnimationTargetBinderKinds():Array<Skeleton2DAnimationTargetKind> {
+    return cast Facade_Skeleton2d_flighthq_skeleton2d_Skeleton2dAnimationTarget.getSkeleton2DAnimationTargetBinderKinds();
+    return cast null;
+  }
+
   public static function getSkeleton2DBoneIndexByName(skeleton:Skeleton2D, name:String):Float {
     var bones:Array<Bone2D> = cast _Runtime.UNDEFINED;
     bones = skeleton.bones;
@@ -379,6 +389,10 @@ class Skeleton2d {
 
   public static function solveSkeleton2DConstraints(skeleton:Skeleton2D, constraints:Array<Skeleton2DConstraint>):Void {
     Facade_Skeleton2d_flighthq_skeleton2d_Skeleton2dConstraint.solveSkeleton2DConstraints(skeleton, constraints);
+  }
+
+  public static function unregisterSkeleton2DAnimationTargetBinder(kind:Skeleton2DAnimationTargetKind):Void {
+    Facade_Skeleton2d_flighthq_skeleton2d_Skeleton2dAnimationTarget.unregisterSkeleton2DAnimationTargetBinder(kind);
   }
 
   public static function validateSkeleton2D(skeleton:Skeleton2D):Null<String> {

@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.SsaoEffect;
 
 class SsaoEffect {
-  public static function createSsaoEffect(?options:flighthq._internal._Omit<flighthq.types.SsaoEffect, String>):flighthq.types.SsaoEffect {
+  public static function createSsaoEffect(?options:{ @:optional var radius:Null<Float>; @:optional var intensity:Null<Float>; @:optional var bias:Null<Float>; @:optional var samples:Null<Float>; }):flighthq.types.SsaoEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'SsaoEffect' }, options]);
     return cast null;

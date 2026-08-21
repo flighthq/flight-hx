@@ -33,7 +33,7 @@ class GltfMaterialExtension {
     }
     if ((cast !_Runtime.strictEquals(_Runtime.field(existing, 'kind'), StandardPbrMaterialKind) : Bool)) { return cast false; }
     standard = (cast (cast existing : flighthq._internal._Any) : StandardPbrMaterial);
-    promoted = (cast createExtendedPbrMaterial(({ final __callArgument1:Dynamic = { extensions: cast ([extension] : Array<Dynamic>), standard: (cast createStandardPbrMaterialProperties(({ final __callArgument0:Dynamic = standard; __callArgument0; })) : StandardPbrMaterialProperties) }; __callArgument1; })) : ExtendedPbrMaterial);
+    promoted = (cast createExtendedPbrMaterial((cast { extensions: cast ([extension] : Array<Dynamic>), standard: (cast createStandardPbrMaterialProperties((cast standard : Dynamic)) : StandardPbrMaterialProperties) } : Dynamic)) : ExtendedPbrMaterial);
     (promoted.alphaCutoff = cast (standard.alphaCutoff : Float));
     (promoted.alphaMode = cast (standard.alphaMode : MaterialAlphaMode));
     (promoted.doubleSided = cast (standard.doubleSided : Bool));

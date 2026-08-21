@@ -1,20 +1,20 @@
 # Host Toolkit Dependency Audit
 
-Upstream commit: `cad72aa3ea4e6e76a050918a403dcb10efdfcb0d`
+Upstream commit: `598ef6f62b6f1ae2873956501069ed824699021a`
 
 Generated code owns checker-known source types and stable lookup keys. Maintained source owns the declarations, target values, and adapters behind those keys. Generation fails when a referenced key has no declared toolkit provider; Dynamic compatibility declarations remain visible as toolkit debt rather than changing the generated type or member expression.
 
 | Metric | Count |
 | --- | ---: |
-| Host type keys | 225 |
+| Host type keys | 233 |
 | External type keys | 4 |
 | Dynamic compatibility type entries | 218 |
-| Global value keys | 68 |
+| Global value keys | 69 |
 | Portable global value keys | 15 |
-| JavaScript-only global value keys | 53 |
+| JavaScript-only global value keys | 54 |
 | Module value keys | 0 |
-| Type uses | 10963 |
-| Value uses | 1560 |
+| Type uses | 11278 |
+| Value uses | 1681 |
 | Missing toolkit entries | 0 |
 
 ## Types
@@ -26,7 +26,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `external:WgpuScale9ShapeData` | `external` | `flighthq._internal.WebExterns.WgpuScale9ShapeData` | `src/flighthq/_internal/WebExterns.hx` | `dynamic-stub` | 1 |
 | `external:WgpuTextLabelData` | `external` | `flighthq._internal.WebExterns.WgpuTextLabelData` | `src/flighthq/_internal/WebExterns.hx` | `dynamic-stub` | 1 |
 | `host:AbortController` | `host` | `flighthq._internal.dom.AbortController` | `src/flighthq/_internal/dom/AbortController.hx` | `dynamic-stub` | 40 |
-| `host:AbortSignal` | `host` | `flighthq._internal.dom.AbortSignal` | `src/flighthq/_internal/dom/AbortSignal.hx` | `dynamic-stub` | 138 |
+| `host:AbortSignal` | `host` | `flighthq._internal.dom.AbortSignal` | `src/flighthq/_internal/dom/AbortSignal.hx` | `dynamic-stub` | 150 |
 | `host:AddEventListenerOptions` | `host` | `flighthq._internal.dom.AddEventListenerOptions` | `src/flighthq/_internal/dom/AddEventListenerOptions.hx` | `typed` | 1 |
 | `host:AudioBuffer` | `host` | `flighthq._internal.dom.AudioBuffer` | `src/flighthq/_internal/dom/AudioBuffer.hx` | `typed` | 26 |
 | `host:AudioBufferSourceNode` | `host` | `flighthq._internal.dom.AudioBufferSourceNode` | `src/flighthq/_internal/dom/AudioBufferSourceNode.hx` | `dynamic-stub` | 12 |
@@ -39,13 +39,13 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:BodyInit` | `host` | `flighthq._internal.dom.BodyInit` | `src/flighthq/_internal/dom/BodyInit.hx` | `dynamic-stub` | 1 |
 | `host:BufferSource` | `host` | `flighthq._internal.dom.BufferSource` | `src/flighthq/_internal/dom/BufferSource.hx` | `dynamic-stub` | 1 |
 | `host:CanvasFillRule` | `host` | `flighthq._internal.dom.CanvasFillRule` | `src/flighthq/_internal/dom/CanvasFillRule.hx` | `dynamic-stub` | 1 |
-| `host:CanvasGradient` | `host` | `flighthq._internal.dom.CanvasGradient` | `src/flighthq/_internal/dom/CanvasGradient.hx` | `typed` | 39 |
+| `host:CanvasGradient` | `host` | `flighthq._internal.dom.CanvasGradient` | `src/flighthq/_internal/dom/CanvasGradient.hx` | `typed` | 38 |
 | `host:CanvasImageSource` | `host` | `flighthq._internal.dom.CanvasImageSource` | `src/flighthq/_internal/dom/CanvasImageSource.hx` | `dynamic-stub` | 23 |
 | `host:CanvasLineCap` | `host` | `flighthq._internal.dom.CanvasLineCap` | `src/flighthq/_internal/dom/CanvasLineCap.hx` | `dynamic-stub` | 1 |
 | `host:CanvasLineJoin` | `host` | `flighthq._internal.dom.CanvasLineJoin` | `src/flighthq/_internal/dom/CanvasLineJoin.hx` | `dynamic-stub` | 1 |
 | `host:CanvasPattern` | `host` | `flighthq._internal.dom.CanvasPattern` | `src/flighthq/_internal/dom/CanvasPattern.hx` | `dynamic-stub` | 34 |
-| `host:CanvasRenderingContext2D` | `host` | `flighthq._internal.dom.CanvasRenderingContext2D` | `src/flighthq/_internal/dom/CanvasRenderingContext2D.hx` | `dynamic-stub` | 650 |
-| `host:CanvasRenderingContext2DSettings` | `host` | `flighthq._internal.dom.CanvasRenderingContext2DSettings` | `src/flighthq/_internal/dom/CanvasRenderingContext2DSettings.hx` | `dynamic-stub` | 5 |
+| `host:CanvasRenderingContext2D` | `host` | `flighthq._internal.dom.CanvasRenderingContext2D` | `src/flighthq/_internal/dom/CanvasRenderingContext2D.hx` | `dynamic-stub` | 639 |
+| `host:CanvasRenderingContext2DSettings` | `host` | `flighthq._internal.dom.CanvasRenderingContext2DSettings` | `src/flighthq/_internal/dom/CanvasRenderingContext2DSettings.hx` | `dynamic-stub` | 6 |
 | `host:ChildNode` | `host` | `flighthq._internal.dom.ChildNode` | `src/flighthq/_internal/dom/ChildNode.hx` | `dynamic-stub` | 8 |
 | `host:Clipboard` | `host` | `flighthq._internal.dom.Clipboard` | `src/flighthq/_internal/dom/Clipboard.hx` | `dynamic-stub` | 21 |
 | `host:ClipboardItem` | `host` | `flighthq._internal.dom.ClipboardItem` | `src/flighthq/_internal/dom/ClipboardItem.hx` | `dynamic-stub` | 9 |
@@ -53,11 +53,11 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:CompositionEvent` | `host` | `flighthq._internal.dom.CompositionEvent` | `src/flighthq/_internal/dom/CompositionEvent.hx` | `dynamic-stub` | 3 |
 | `host:Console` | `host` | `flighthq._internal.dom.Console` | `src/flighthq/_internal/dom/Console.hx` | `dynamic-stub` | 2 |
 | `host:Crypto` | `host` | `flighthq._internal.dom.Crypto` | `src/flighthq/_internal/dom/Crypto.hx` | `dynamic-stub` | 3 |
-| `host:CSSStyleDeclaration` | `host` | `flighthq._internal.dom.CSSStyleDeclaration` | `src/flighthq/_internal/dom/CSSStyleDeclaration.hx` | `dynamic-stub` | 157 |
+| `host:CSSStyleDeclaration` | `host` | `flighthq._internal.dom.CSSStyleDeclaration` | `src/flighthq/_internal/dom/CSSStyleDeclaration.hx` | `dynamic-stub` | 158 |
 | `host:CustomEvent` | `host` | `flighthq._internal.dom.CustomEvent` | `src/flighthq/_internal/dom/CustomEvent.hx` | `dynamic-stub` | 3 |
 | `host:DataTransfer` | `host` | `flighthq._internal.dom.DataTransfer` | `src/flighthq/_internal/dom/DataTransfer.hx` | `dynamic-stub` | 2 |
-| `host:Document` | `host` | `flighthq._internal.dom.Document` | `src/flighthq/_internal/dom/Document.hx` | `dynamic-stub` | 163 |
-| `host:DOMException` | `host` | `flighthq._internal.dom.DOMException` | `src/flighthq/_internal/dom/DOMException.hx` | `dynamic-stub` | 6 |
+| `host:Document` | `host` | `flighthq._internal.dom.Document` | `src/flighthq/_internal/dom/Document.hx` | `dynamic-stub` | 160 |
+| `host:DOMException` | `host` | `flighthq._internal.dom.DOMException` | `src/flighthq/_internal/dom/DOMException.hx` | `dynamic-stub` | 7 |
 | `host:DOMRect` | `host` | `flighthq._internal.dom.DOMRect` | `src/flighthq/_internal/dom/DOMRect.hx` | `dynamic-stub` | 17 |
 | `host:DOMRectReadOnly` | `host` | `flighthq._internal.dom.DOMRectReadOnly` | `src/flighthq/_internal/dom/DOMRectReadOnly.hx` | `dynamic-stub` | 3 |
 | `host:DOMStringMap` | `host` | `flighthq._internal.dom.DOMStringMap` | `src/flighthq/_internal/dom/DOMStringMap.hx` | `dynamic-stub` | 1 |
@@ -93,29 +93,34 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:GlobalCompositeOperation` | `host` | `flighthq._internal.dom.GlobalCompositeOperation` | `src/flighthq/_internal/dom/GlobalCompositeOperation.hx` | `dynamic-stub` | 8 |
 | `host:GPU` | `host` | `flighthq._internal.dom.GPU` | `src/flighthq/_internal/dom/GPU.hx` | `dynamic-stub` | 7 |
 | `host:GPUAdapter` | `host` | `flighthq._internal.dom.GPUAdapter` | `src/flighthq/_internal/dom/GPUAdapter.hx` | `dynamic-stub` | 17 |
-| `host:GPUBindGroup` | `host` | `flighthq._internal.dom.GPUBindGroup` | `src/flighthq/_internal/dom/GPUBindGroup.hx` | `dynamic-stub` | 212 |
+| `host:GPUAllowSharedBufferSource` | `host` | `flighthq._internal.dom.GPUAllowSharedBufferSource` | `src/flighthq/_internal/dom/GPUAllowSharedBufferSource.hx` | `typed` | 4 |
+| `host:GPUBindGroup` | `host` | `flighthq._internal.dom.GPUBindGroup` | `src/flighthq/_internal/dom/GPUBindGroup.hx` | `dynamic-stub` | 220 |
 | `host:GPUBindGroupEntry` | `host` | `flighthq._internal.dom.GPUBindGroupEntry` | `src/flighthq/_internal/dom/GPUBindGroupEntry.hx` | `dynamic-stub` | 15 |
-| `host:GPUBindGroupLayout` | `host` | `flighthq._internal.dom.GPUBindGroupLayout` | `src/flighthq/_internal/dom/GPUBindGroupLayout.hx` | `dynamic-stub` | 274 |
+| `host:GPUBindGroupLayout` | `host` | `flighthq._internal.dom.GPUBindGroupLayout` | `src/flighthq/_internal/dom/GPUBindGroupLayout.hx` | `dynamic-stub` | 285 |
 | `host:GPUBindGroupLayoutEntry` | `host` | `flighthq._internal.dom.GPUBindGroupLayoutEntry` | `src/flighthq/_internal/dom/GPUBindGroupLayoutEntry.hx` | `dynamic-stub` | 10 |
 | `host:GPUBlendComponent` | `host` | `flighthq._internal.dom.GPUBlendComponent` | `src/flighthq/_internal/dom/GPUBlendComponent.hx` | `dynamic-stub` | 3 |
 | `host:GPUBlendFactor` | `host` | `flighthq._internal.dom.GPUBlendFactor` | `src/flighthq/_internal/dom/GPUBlendFactor.hx` | `dynamic-stub` | 2 |
 | `host:GPUBlendOperation` | `host` | `flighthq._internal.dom.GPUBlendOperation` | `src/flighthq/_internal/dom/GPUBlendOperation.hx` | `dynamic-stub` | 1 |
 | `host:GPUBlendState` | `host` | `flighthq._internal.dom.GPUBlendState` | `src/flighthq/_internal/dom/GPUBlendState.hx` | `dynamic-stub` | 61 |
-| `host:GPUBuffer` | `host` | `flighthq._internal.dom.GPUBuffer` | `src/flighthq/_internal/dom/GPUBuffer.hx` | `dynamic-stub` | 293 |
+| `host:GPUBuffer` | `host` | `flighthq._internal.dom.GPUBuffer` | `src/flighthq/_internal/dom/GPUBuffer.hx` | `dynamic-stub` | 306 |
 | `host:GPUBufferBinding` | `host` | `flighthq._internal.dom.GPUBufferBinding` | `src/flighthq/_internal/dom/GPUBufferBinding.hx` | `dynamic-stub` | 10 |
-| `host:GPUBufferUsage` | `host` | `flighthq._internal.dom.GPUBufferUsage` | `src/flighthq/_internal/dom/GPUBufferUsage.hx` | `dynamic-stub` | 72 |
+| `host:GPUBufferDescriptor` | `host` | `flighthq._internal.dom.GPUBufferDescriptor` | `src/flighthq/_internal/dom/GPUBufferDescriptor.hx` | `typed` | 8 |
+| `host:GPUBufferUsage` | `host` | `flighthq._internal.dom.GPUBufferUsage` | `src/flighthq/_internal/dom/GPUBufferUsage.hx` | `dynamic-stub` | 73 |
 | `host:GPUCanvasContext` | `host` | `flighthq._internal.dom.GPUCanvasContext` | `src/flighthq/_internal/dom/GPUCanvasContext.hx` | `dynamic-stub` | 14 |
 | `host:GPUColor` | `host` | `flighthq._internal.dom.GPUColor` | `src/flighthq/_internal/dom/GPUColor.hx` | `dynamic-stub` | 4 |
 | `host:GPUColorDict` | `host` | `flighthq._internal.dom.GPUColorDict` | `src/flighthq/_internal/dom/GPUColorDict.hx` | `dynamic-stub` | 16 |
 | `host:GPUColorWrite` | `host` | `flighthq._internal.dom.GPUColorWrite` | `src/flighthq/_internal/dom/GPUColorWrite.hx` | `dynamic-stub` | 2 |
 | `host:GPUCommandBuffer` | `host` | `flighthq._internal.dom.GPUCommandBuffer` | `src/flighthq/_internal/dom/GPUCommandBuffer.hx` | `dynamic-stub` | 10 |
-| `host:GPUCommandEncoder` | `host` | `flighthq._internal.dom.GPUCommandEncoder` | `src/flighthq/_internal/dom/GPUCommandEncoder.hx` | `dynamic-stub` | 37 |
+| `host:GPUCommandEncoder` | `host` | `flighthq._internal.dom.GPUCommandEncoder` | `src/flighthq/_internal/dom/GPUCommandEncoder.hx` | `dynamic-stub` | 43 |
 | `host:GPUCopyExternalImageDestInfo` | `host` | `flighthq._internal.dom.GPUCopyExternalImageDestInfo` | `src/flighthq/_internal/dom/GPUCopyExternalImageDestInfo.hx` | `dynamic-stub` | 4 |
 | `host:GPUCopyExternalImageSource` | `host` | `flighthq._internal.dom.GPUCopyExternalImageSource` | `src/flighthq/_internal/dom/GPUCopyExternalImageSource.hx` | `dynamic-stub` | 8 |
 | `host:GPUCopyExternalImageSourceInfo` | `host` | `flighthq._internal.dom.GPUCopyExternalImageSourceInfo` | `src/flighthq/_internal/dom/GPUCopyExternalImageSourceInfo.hx` | `dynamic-stub` | 4 |
-| `host:GPUDevice` | `host` | `flighthq._internal.dom.GPUDevice` | `src/flighthq/_internal/dom/GPUDevice.hx` | `dynamic-stub` | 392 |
+| `host:GPUDevice` | `host` | `flighthq._internal.dom.GPUDevice` | `src/flighthq/_internal/dom/GPUDevice.hx` | `dynamic-stub` | 404 |
 | `host:GPUDeviceDescriptor` | `host` | `flighthq._internal.dom.GPUDeviceDescriptor` | `src/flighthq/_internal/dom/GPUDeviceDescriptor.hx` | `dynamic-stub` | 4 |
 | `host:GPUDeviceLostInfo` | `host` | `flighthq._internal.dom.GPUDeviceLostInfo` | `src/flighthq/_internal/dom/GPUDeviceLostInfo.hx` | `dynamic-stub` | 1 |
+| `host:GPUExtent3D` | `host` | `flighthq._internal.dom.GPUExtent3D` | `src/flighthq/_internal/dom/GPUExtent3D.hx` | `typed` | 3 |
+| `host:GPUExtent3DDict` | `host` | `flighthq._internal.dom.GPUExtent3DDict` | `src/flighthq/_internal/dom/GPUExtent3DDict.hx` | `typed` | 10 |
+| `host:GPUExtent3DDictStrict` | `host` | `flighthq._internal.dom.GPUExtent3DDictStrict` | `src/flighthq/_internal/dom/GPUExtent3DDictStrict.hx` | `typed` | 1 |
 | `host:GPUExternalTexture` | `host` | `flighthq._internal.dom.GPUExternalTexture` | `src/flighthq/_internal/dom/GPUExternalTexture.hx` | `dynamic-stub` | 10 |
 | `host:GPUFeatureName` | `host` | `flighthq._internal.dom.GPUFeatureName` | `src/flighthq/_internal/dom/GPUFeatureName.hx` | `dynamic-stub` | 1 |
 | `host:GPUFilterMode` | `host` | `flighthq._internal.dom.GPUFilterMode` | `src/flighthq/_internal/dom/GPUFilterMode.hx` | `dynamic-stub` | 14 |
@@ -125,33 +130,36 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:GPUMipmapFilterMode` | `host` | `flighthq._internal.dom.GPUMipmapFilterMode` | `src/flighthq/_internal/dom/GPUMipmapFilterMode.hx` | `dynamic-stub` | 4 |
 | `host:GPUOrigin3D` | `host` | `flighthq._internal.dom.GPUOrigin3D` | `src/flighthq/_internal/dom/GPUOrigin3D.hx` | `dynamic-stub` | 3 |
 | `host:GPUOrigin3DDict` | `host` | `flighthq._internal.dom.GPUOrigin3DDict` | `src/flighthq/_internal/dom/GPUOrigin3DDict.hx` | `typed` | 6 |
-| `host:GPUPipelineLayout` | `host` | `flighthq._internal.dom.GPUPipelineLayout` | `src/flighthq/_internal/dom/GPUPipelineLayout.hx` | `dynamic-stub` | 58 |
+| `host:GPUPipelineLayout` | `host` | `flighthq._internal.dom.GPUPipelineLayout` | `src/flighthq/_internal/dom/GPUPipelineLayout.hx` | `dynamic-stub` | 60 |
 | `host:GPUPowerPreference` | `host` | `flighthq._internal.dom.GPUPowerPreference` | `src/flighthq/_internal/dom/GPUPowerPreference.hx` | `dynamic-stub` | 1 |
 | `host:GPUPrimitiveTopology` | `host` | `flighthq._internal.dom.GPUPrimitiveTopology` | `src/flighthq/_internal/dom/GPUPrimitiveTopology.hx` | `dynamic-stub` | 1 |
-| `host:GPUQueue` | `host` | `flighthq._internal.dom.GPUQueue` | `src/flighthq/_internal/dom/GPUQueue.hx` | `dynamic-stub` | 83 |
-| `host:GPURenderPassEncoder` | `host` | `flighthq._internal.dom.GPURenderPassEncoder` | `src/flighthq/_internal/dom/GPURenderPassEncoder.hx` | `dynamic-stub` | 253 |
-| `host:GPURenderPipeline` | `host` | `flighthq._internal.dom.GPURenderPipeline` | `src/flighthq/_internal/dom/GPURenderPipeline.hx` | `dynamic-stub` | 111 |
+| `host:GPUQueue` | `host` | `flighthq._internal.dom.GPUQueue` | `src/flighthq/_internal/dom/GPUQueue.hx` | `dynamic-stub` | 87 |
+| `host:GPURenderPassEncoder` | `host` | `flighthq._internal.dom.GPURenderPassEncoder` | `src/flighthq/_internal/dom/GPURenderPassEncoder.hx` | `dynamic-stub` | 258 |
+| `host:GPURenderPipeline` | `host` | `flighthq._internal.dom.GPURenderPipeline` | `src/flighthq/_internal/dom/GPURenderPipeline.hx` | `dynamic-stub` | 115 |
 | `host:GPURenderPipelineDescriptor` | `host` | `flighthq._internal.dom.GPURenderPipelineDescriptor` | `src/flighthq/_internal/dom/GPURenderPipelineDescriptor.hx` | `dynamic-stub` | 8 |
-| `host:GPUSampler` | `host` | `flighthq._internal.dom.GPUSampler` | `src/flighthq/_internal/dom/GPUSampler.hx` | `dynamic-stub` | 225 |
+| `host:GPUSampler` | `host` | `flighthq._internal.dom.GPUSampler` | `src/flighthq/_internal/dom/GPUSampler.hx` | `dynamic-stub` | 229 |
 | `host:GPUSamplerDescriptor` | `host` | `flighthq._internal.dom.GPUSamplerDescriptor` | `src/flighthq/_internal/dom/GPUSamplerDescriptor.hx` | `dynamic-stub` | 4 |
-| `host:GPUShaderModule` | `host` | `flighthq._internal.dom.GPUShaderModule` | `src/flighthq/_internal/dom/GPUShaderModule.hx` | `dynamic-stub` | 143 |
-| `host:GPUShaderStage` | `host` | `flighthq._internal.dom.GPUShaderStage` | `src/flighthq/_internal/dom/GPUShaderStage.hx` | `dynamic-stub` | 103 |
+| `host:GPUShaderModule` | `host` | `flighthq._internal.dom.GPUShaderModule` | `src/flighthq/_internal/dom/GPUShaderModule.hx` | `dynamic-stub` | 147 |
+| `host:GPUShaderStage` | `host` | `flighthq._internal.dom.GPUShaderStage` | `src/flighthq/_internal/dom/GPUShaderStage.hx` | `dynamic-stub` | 109 |
 | `host:GPUStencilFaceState` | `host` | `flighthq._internal.dom.GPUStencilFaceState` | `src/flighthq/_internal/dom/GPUStencilFaceState.hx` | `dynamic-stub` | 8 |
 | `host:GPUStencilOperation` | `host` | `flighthq._internal.dom.GPUStencilOperation` | `src/flighthq/_internal/dom/GPUStencilOperation.hx` | `dynamic-stub` | 1 |
 | `host:GPUSupportedFeatures` | `host` | `flighthq._internal.dom.GPUSupportedFeatures` | `src/flighthq/_internal/dom/GPUSupportedFeatures.hx` | `dynamic-stub` | 9 |
-| `host:GPUSupportedLimits` | `host` | `flighthq._internal.dom.GPUSupportedLimits` | `src/flighthq/_internal/dom/GPUSupportedLimits.hx` | `dynamic-stub` | 10 |
-| `host:GPUTexture` | `host` | `flighthq._internal.dom.GPUTexture` | `src/flighthq/_internal/dom/GPUTexture.hx` | `dynamic-stub` | 207 |
-| `host:GPUTextureFormat` | `host` | `flighthq._internal.dom.GPUTextureFormat` | `src/flighthq/_internal/dom/GPUTextureFormat.hx` | `dynamic-stub` | 57 |
-| `host:GPUTextureUsage` | `host` | `flighthq._internal.dom.GPUTextureUsage` | `src/flighthq/_internal/dom/GPUTextureUsage.hx` | `dynamic-stub` | 64 |
-| `host:GPUTextureView` | `host` | `flighthq._internal.dom.GPUTextureView` | `src/flighthq/_internal/dom/GPUTextureView.hx` | `dynamic-stub` | 301 |
+| `host:GPUSupportedLimits` | `host` | `flighthq._internal.dom.GPUSupportedLimits` | `src/flighthq/_internal/dom/GPUSupportedLimits.hx` | `dynamic-stub` | 15 |
+| `host:GPUTexelCopyBufferLayout` | `host` | `flighthq._internal.dom.GPUTexelCopyBufferLayout` | `src/flighthq/_internal/dom/GPUTexelCopyBufferLayout.hx` | `typed` | 10 |
+| `host:GPUTexelCopyTextureInfo` | `host` | `flighthq._internal.dom.GPUTexelCopyTextureInfo` | `src/flighthq/_internal/dom/GPUTexelCopyTextureInfo.hx` | `typed` | 8 |
+| `host:GPUTexture` | `host` | `flighthq._internal.dom.GPUTexture` | `src/flighthq/_internal/dom/GPUTexture.hx` | `dynamic-stub` | 231 |
+| `host:GPUTextureDescriptor` | `host` | `flighthq._internal.dom.GPUTextureDescriptor` | `src/flighthq/_internal/dom/GPUTextureDescriptor.hx` | `typed` | 13 |
+| `host:GPUTextureFormat` | `host` | `flighthq._internal.dom.GPUTextureFormat` | `src/flighthq/_internal/dom/GPUTextureFormat.hx` | `dynamic-stub` | 59 |
+| `host:GPUTextureUsage` | `host` | `flighthq._internal.dom.GPUTextureUsage` | `src/flighthq/_internal/dom/GPUTextureUsage.hx` | `dynamic-stub` | 67 |
+| `host:GPUTextureView` | `host` | `flighthq._internal.dom.GPUTextureView` | `src/flighthq/_internal/dom/GPUTextureView.hx` | `dynamic-stub` | 318 |
 | `host:GPUVertexBufferLayout` | `host` | `flighthq._internal.dom.GPUVertexBufferLayout` | `src/flighthq/_internal/dom/GPUVertexBufferLayout.hx` | `dynamic-stub` | 23 |
 | `host:Headers` | `host` | `flighthq._internal.dom.Headers` | `src/flighthq/_internal/dom/Headers.hx` | `dynamic-stub` | 10 |
 | `host:HTMLAudioElement` | `host` | `flighthq._internal.dom.HTMLAudioElement` | `src/flighthq/_internal/dom/HTMLAudioElement.hx` | `dynamic-stub` | 2 |
-| `host:HTMLCanvasElement` | `host` | `flighthq._internal.dom.HTMLCanvasElement` | `src/flighthq/_internal/dom/HTMLCanvasElement.hx` | `dynamic-stub` | 407 |
+| `host:HTMLCanvasElement` | `host` | `flighthq._internal.dom.HTMLCanvasElement` | `src/flighthq/_internal/dom/HTMLCanvasElement.hx` | `dynamic-stub` | 403 |
 | `host:HTMLDivElement` | `host` | `flighthq._internal.dom.HTMLDivElement` | `src/flighthq/_internal/dom/HTMLDivElement.hx` | `dynamic-stub` | 38 |
-| `host:HTMLElement` | `host` | `flighthq._internal.dom.HTMLElement` | `src/flighthq/_internal/dom/HTMLElement.hx` | `dynamic-stub` | 293 |
+| `host:HTMLElement` | `host` | `flighthq._internal.dom.HTMLElement` | `src/flighthq/_internal/dom/HTMLElement.hx` | `dynamic-stub` | 298 |
 | `host:HTMLHeadElement` | `host` | `flighthq._internal.dom.HTMLHeadElement` | `src/flighthq/_internal/dom/HTMLHeadElement.hx` | `dynamic-stub` | 8 |
-| `host:HTMLImageElement` | `host` | `flighthq._internal.dom.HTMLImageElement` | `src/flighthq/_internal/dom/HTMLImageElement.hx` | `dynamic-stub` | 74 |
+| `host:HTMLImageElement` | `host` | `flighthq._internal.dom.HTMLImageElement` | `src/flighthq/_internal/dom/HTMLImageElement.hx` | `dynamic-stub` | 75 |
 | `host:HTMLInputElement` | `host` | `flighthq._internal.dom.HTMLInputElement` | `src/flighthq/_internal/dom/HTMLInputElement.hx` | `dynamic-stub` | 31 |
 | `host:HTMLLIElement` | `host` | `flighthq._internal.dom.HTMLLIElement` | `src/flighthq/_internal/dom/HTMLLIElement.hx` | `dynamic-stub` | 22 |
 | `host:HTMLLinkElement` | `host` | `flighthq._internal.dom.HTMLLinkElement` | `src/flighthq/_internal/dom/HTMLLinkElement.hx` | `dynamic-stub` | 5 |
@@ -163,7 +171,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:HTMLVideoElement` | `host` | `flighthq._internal.dom.HTMLVideoElement` | `src/flighthq/_internal/dom/HTMLVideoElement.hx` | `dynamic-stub` | 138 |
 | `host:ImageBitmap` | `host` | `flighthq._internal.dom.ImageBitmap` | `src/flighthq/_internal/dom/ImageBitmap.hx` | `dynamic-stub` | 60 |
 | `host:ImageBitmapRenderingContext` | `host` | `flighthq._internal.dom.ImageBitmapRenderingContext` | `src/flighthq/_internal/dom/ImageBitmapRenderingContext.hx` | `dynamic-stub` | 1 |
-| `host:ImageData` | `host` | `flighthq._internal.dom.ImageData` | `src/flighthq/_internal/dom/ImageData.hx` | `dynamic-stub` | 34 |
+| `host:ImageData` | `host` | `flighthq._internal.dom.ImageData` | `src/flighthq/_internal/dom/ImageData.hx` | `dynamic-stub` | 32 |
 | `host:ImageDataArray` | `host` | `flighthq._internal.dom.ImageDataArray` | `src/flighthq/_internal/dom/ImageDataArray.hx` | `dynamic-stub` | 2 |
 | `host:ImageDataSettings` | `host` | `flighthq._internal.dom.ImageDataSettings` | `src/flighthq/_internal/dom/ImageDataSettings.hx` | `typed` | 1 |
 | `host:ImageSmoothingQuality` | `host` | `flighthq._internal.dom.ImageSmoothingQuality` | `src/flighthq/_internal/dom/ImageSmoothingQuality.hx` | `dynamic-stub` | 2 |
@@ -232,7 +240,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:WEBGL_compressed_texture_s3tc` | `host` | `flighthq._internal.dom.WEBGL_compressed_texture_s3tc` | `src/flighthq/_internal/dom/WEBGL_compressed_texture_s3tc.hx` | `dynamic-stub` | 1 |
 | `host:WEBGL_compressed_texture_s3tc_srgb` | `host` | `flighthq._internal.dom.WEBGL_compressed_texture_s3tc_srgb` | `src/flighthq/_internal/dom/WEBGL_compressed_texture_s3tc_srgb.hx` | `dynamic-stub` | 1 |
 | `host:WEBGL_debug_renderer_info` | `host` | `flighthq._internal.dom.WEBGL_debug_renderer_info` | `src/flighthq/_internal/dom/WEBGL_debug_renderer_info.hx` | `dynamic-stub` | 4 |
-| `host:WebGL2RenderingContext` | `host` | `flighthq._internal.dom.WebGL2RenderingContext` | `src/flighthq/_internal/dom/WebGL2RenderingContext.hx` | `dynamic-stub` | 2693 |
+| `host:WebGL2RenderingContext` | `host` | `flighthq._internal.dom.WebGL2RenderingContext` | `src/flighthq/_internal/dom/WebGL2RenderingContext.hx` | `dynamic-stub` | 2811 |
 | `host:WebGLActiveInfo` | `host` | `flighthq._internal.dom.WebGLActiveInfo` | `src/flighthq/_internal/dom/WebGLActiveInfo.hx` | `dynamic-stub` | 8 |
 | `host:WebGLBuffer` | `host` | `flighthq._internal.dom.WebGLBuffer` | `src/flighthq/_internal/dom/WebGLBuffer.hx` | `dynamic-stub` | 55 |
 | `host:WebGLContextAttributes` | `host` | `flighthq._internal.dom.WebGLContextAttributes` | `src/flighthq/_internal/dom/WebGLContextAttributes.hx` | `dynamic-stub` | 5 |
@@ -243,7 +251,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:WebGLRenderingContext` | `host` | `flighthq._internal.dom.WebGLRenderingContext` | `src/flighthq/_internal/dom/WebGLRenderingContext.hx` | `dynamic-stub` | 10 |
 | `host:WebGLShader` | `host` | `flighthq._internal.dom.WebGLShader` | `src/flighthq/_internal/dom/WebGLShader.hx` | `dynamic-stub` | 3 |
 | `host:WebGLTexture` | `host` | `flighthq._internal.dom.WebGLTexture` | `src/flighthq/_internal/dom/WebGLTexture.hx` | `dynamic-stub` | 385 |
-| `host:WebGLUniformLocation` | `host` | `flighthq._internal.dom.WebGLUniformLocation` | `src/flighthq/_internal/dom/WebGLUniformLocation.hx` | `dynamic-stub` | 366 |
+| `host:WebGLUniformLocation` | `host` | `flighthq._internal.dom.WebGLUniformLocation` | `src/flighthq/_internal/dom/WebGLUniformLocation.hx` | `dynamic-stub` | 375 |
 | `host:WebGLVertexArrayObject` | `host` | `flighthq._internal.dom.WebGLVertexArrayObject` | `src/flighthq/_internal/dom/WebGLVertexArrayObject.hx` | `dynamic-stub` | 26 |
 | `host:WebSocket` | `host` | `flighthq._internal.dom.WebSocket` | `src/flighthq/_internal/dom/WebSocket.hx` | `dynamic-stub` | 9 |
 | `host:WheelEvent` | `host` | `flighthq._internal.dom.WheelEvent` | `src/flighthq/_internal/dom/WheelEvent.hx` | `dynamic-stub` | 9 |
@@ -257,7 +265,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | --- | --- | --- | ---: |
 | `global:AbortController` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 9 |
 | `global:AbortSignal` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 3 |
-| `global:ArrayBuffer` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 9 |
+| `global:ArrayBuffer` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 13 |
 | `global:atob` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 4 |
 | `global:Audio` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 1 |
 | `global:AudioBuffer` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 1 |
@@ -268,12 +276,12 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `global:console` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 6 |
 | `global:createImageBitmap` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 1 |
 | `global:crypto` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 3 |
-| `global:DataView` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 16 |
+| `global:DataView` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 41 |
 | `global:Date` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 20 |
 | `global:decodeURIComponent` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 2 |
 | `global:DeviceMotionEvent` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 7 |
 | `global:document` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 25 |
-| `global:DOMException` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 8 |
+| `global:DOMException` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 13 |
 | `global:encodeURIComponent` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 2 |
 | `global:fetch` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 6 |
 | `global:File` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 1 |
@@ -293,11 +301,11 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `global:KeyboardEvent` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 5 |
 | `global:localStorage` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 4 |
 | `global:location` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 8 |
-| `global:Map` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 303 |
+| `global:Map` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 309 |
 | `global:MediaMetadata` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 2 |
 | `global:navigator` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 42 |
 | `global:Notification` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 19 |
-| `global:Number` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 424 |
+| `global:Number` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 489 |
 | `global:OffscreenCanvas` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 10 |
 | `global:parseFloat` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 84 |
 | `global:parseInt` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 40 |
@@ -308,8 +316,9 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `global:requestAnimationFrame` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 3 |
 | `global:ResizeObserver` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 3 |
 | `global:screen` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 8 |
-| `global:Set` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 106 |
+| `global:Set` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 113 |
 | `global:setInterval` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 1 |
+| `global:SharedArrayBuffer` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 4 |
 | `global:structuredClone` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 3 |
 | `global:TextDecoder` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 8 |
 | `global:TextEncoder` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 1 |
@@ -318,8 +327,8 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `global:URL` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 7 |
 | `global:URLSearchParams` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 1 |
 | `global:VideoFrame` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 2 |
-| `global:WeakMap` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 190 |
-| `global:WeakSet` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 10 |
+| `global:WeakMap` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 193 |
+| `global:WeakSet` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 12 |
 | `global:WebSocket` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 4 |
 | `global:WheelEvent` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 3 |
 | `global:window` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 50 |

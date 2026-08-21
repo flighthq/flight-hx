@@ -9,4 +9,6 @@ export const beginWgpuRenderEffectPipeline = api.beginWgpuRenderEffectPipeline;
 export const createWgpuRenderEffectPipeline = api.createWgpuRenderEffectPipeline;
 export const destroyWgpuRenderEffectPipeline = api.destroyWgpuRenderEffectPipeline;
 export const endWgpuRenderEffectPipeline = api.endWgpuRenderEffectPipeline;
+export const setWgpuRenderEffectPipelineSampleCountGuard = api.setWgpuRenderEffectPipelineSampleCountGuard;
+export const setWgpuRenderEffectPipelineSkipGuard = api.setWgpuRenderEffectPipelineSkipGuard;
 export const setWgpuRenderEffectVelocityTexture = api.setWgpuRenderEffectVelocityTexture;

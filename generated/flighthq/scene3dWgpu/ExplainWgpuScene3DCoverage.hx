@@ -4,93 +4,121 @@ package flighthq.scene3dWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
-import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
-import flighthq.shading.ModifierRegistry.resolveModifier;
-import flighthq.types.ModifierDefinition;
-import flighthq.types.ModifierRegistry;
+import flighthq.types.Entity.Kind;
+import flighthq.types.RegistryTable.KeyedTable;
+import flighthq.types.RegistryTable.RegistryEntryState;
+import flighthq.types.RegistryTable.RegistryTableEntry;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
+import flighthq.types.RequirementFacet;
 import flighthq.types.Scene3DKindUsage;
+import flighthq.types.SceneCoverageCatalog;
+import flighthq.types.SceneCoverageCatalog.CatalogEntry;
+import flighthq.types.SceneCoverageCatalog.CatalogRegistration;
 import flighthq.types.SceneCoverageEntry;
 import flighthq.types.SceneCoverageEntry.SceneCoverage;
 import flighthq.types.StandardMaterial.StandardMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
+import flighthq.types.WgpuModifierSnippet;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuScene3DRuntime;
 import flighthq.types.WgpuTextureResolver;
+import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
+import flighthq.types._internal._RequirementFacetValues.RequirementFacetValue;
 import flighthq.types._internal._SceneCoverageEntryValues.SceneCoverageValue;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
 class ExplainWgpuScene3DCoverage {
   @:noCompletion
-  public static function explainWgpuScene3DCoverage(out:Array<SceneCoverageEntry>, state:WgpuRenderState, usage:Scene3DKindUsage):Void {
+  public static function explainWgpuScene3DCoverage(out:Array<SceneCoverageEntry>, state:WgpuRenderState, usage:Scene3DKindUsage, catalog:SceneCoverageCatalog):Void {
     _Runtime.setLength(out, 0.0);
-    (cast ExplainWgpuScene3DCoverage.collectWgpuScene3DCoverageGaps__explainWgpuScene3DCoverage(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = usage; __callArgument2; }), (cast false : Bool)) : Bool);
+    (cast ExplainWgpuScene3DCoverage.collectWgpuScene3DCoverageGaps__explainWgpuScene3DCoverage(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = usage; __callArgument2; }), (cast false : Bool), ({ final __callArgument3:Dynamic = catalog; __callArgument3; })) : Bool);
   }
 
   @:noCompletion
   public static function hasWgpuScene3DCoverage(state:WgpuRenderState, usage:Scene3DKindUsage):Bool {
-    return cast !(cast (cast ExplainWgpuScene3DCoverage.collectWgpuScene3DCoverageGaps__explainWgpuScene3DCoverage(({ final __callArgument3:Dynamic = null; __callArgument3; }), ({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = usage; __callArgument5; }), (cast true : Bool)) : Bool) : Bool);
+    return cast !(cast (cast ExplainWgpuScene3DCoverage.collectWgpuScene3DCoverageGaps__explainWgpuScene3DCoverage(({ final __callArgument4:Dynamic = null; __callArgument4; }), ({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = usage; __callArgument6; }), (cast true : Bool), ({ final __callArgument7:Dynamic = null; __callArgument7; })) : Bool) : Bool);
     return cast null;
   }
 
-  public static function collectWgpuScene3DCoverageGaps__explainWgpuScene3DCoverage(out:Null<Array<SceneCoverageEntry>>, state:WgpuRenderState, usage:Scene3DKindUsage, stopAtFirst:Bool):Bool {
+  public static function collectWgpuScene3DCoverageGaps__explainWgpuScene3DCoverage(out:Null<Array<SceneCoverageEntry>>, state:WgpuRenderState, usage:Scene3DKindUsage, stopAtFirst:Bool, catalog:Null<SceneCoverageCatalog>):Bool {
     var found:Bool = cast _Runtime.UNDEFINED;
-    var materials:flighthq._internal._Map<String, WgpuMeshMaterialRenderer> = cast _Runtime.UNDEFINED;
+    var materials:flighthq._internal._Map<String, RegistryTableEntry<WgpuMeshMaterialRenderer>> = cast _Runtime.UNDEFINED;
     var hasStandard:Bool = cast _Runtime.UNDEFINED;
-    var resolvers:Null<flighthq._internal._Map<String, WgpuTextureResolver>> = cast _Runtime.UNDEFINED;
-    var snippets:Null<ModifierRegistry> = cast _Runtime.UNDEFINED;
+    var resolvers:KeyedTable<WgpuTextureResolver> = cast _Runtime.UNDEFINED;
+    var snippets:flighthq._internal._Map<String, RegistryTableEntry<WgpuModifierSnippet>> = cast _Runtime.UNDEFINED;
     found = false;
-    materials = (cast (cast getWgpuScene3DRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : WgpuScene3DRuntime) : { var materialRegistry:flighthq._internal._Map<String, WgpuMeshMaterialRenderer>; }).materialRegistry;
-    hasStandard = ((cast materials : flighthq._internal._Map<String, WgpuMeshMaterialRenderer>).has(StandardMaterialKindValue));
+    materials = (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : WgpuRenderRegistries).meshMaterialRenderers : KeyedTable<WgpuMeshMaterialRenderer>).entries;
+    hasStandard = _Runtime.strictEquals(({ final __structural9 = ((cast materials : flighthq._internal._Map<String, RegistryTableEntry<WgpuMeshMaterialRenderer>>).get(StandardMaterialKindValue)); __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(usage.materialKinds, 'length') : Float)) : Bool)) {
         var kind:String = flighthq._internal._StaticIndex.readArray(usage.materialKinds, i);
-        if ((cast ((cast materials : flighthq._internal._Map<String, WgpuMeshMaterialRenderer>).has(kind)) : Bool)) {
-          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
+        if ((cast _Runtime.strictEquals(({ final __structural10 = ((cast materials : flighthq._internal._Map<String, RegistryTableEntry<WgpuMeshMaterialRenderer>>).get(kind)); __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
+          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Satisfied, facet: (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneMaterialKind, kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
           i++;
           continue;
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: ((cast hasStandard : Bool) ? (cast (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Fallback : Dynamic) : (cast (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Missing : Dynamic)), kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([(cast ExplainWgpuScene3DCoverage.createShortfallEntry__explainWgpuScene3DCoverage(({ final __callArgument11:Dynamic = catalog; __callArgument11; }), (cast hasStandard : Bool), ({ final __callArgument12:Dynamic = (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneMaterialKind; __callArgument12; }), (cast kind : String), ({ final __callArgument13:Dynamic = RenderRegistry.MaterialRenderer; __callArgument13; })) : SceneCoverageEntry)] : Array<Dynamic>));
         i++;
       }
     }
-    resolvers = (cast (cast getWgpuRenderStateRuntime(({ final __callArgument7:Dynamic = state; __callArgument7; })) : WgpuRenderStateRuntime) : { @:optional var wgpuTextureResolverRegistry:Null<flighthq._internal._Map<String, WgpuTextureResolver>>; }).wgpuTextureResolverRegistry;
+    resolvers = (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : WgpuRenderRegistries).textureResolvers;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(usage.textureSourceKinds, 'length') : Float)) : Bool)) {
         var kind:String = flighthq._internal._StaticIndex.readArray(usage.textureSourceKinds, i);
-        if ((cast _Runtime.strictEquals(({ final __collection8:Dynamic = resolvers; __collection8 == null ? _Runtime.UNDEFINED : ((cast __collection8 : flighthq._internal._Map<String, WgpuTextureResolver>).has(kind)); }), true) : Bool)) {
-          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.TextureResolver }] : Array<Dynamic>));
+        if ((cast _Runtime.strictEquals(({ final __structural15 = ((cast (cast resolvers : KeyedTable<WgpuTextureResolver>).entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuTextureResolver>>).get(kind)); __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
+          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Satisfied, facet: (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneTextureSourceKind, kind: kind, registry: RenderRegistry.TextureResolver }] : Array<Dynamic>));
           i++;
           continue;
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Missing, kind: kind, registry: RenderRegistry.TextureResolver }] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([(cast ExplainWgpuScene3DCoverage.createShortfallEntry__explainWgpuScene3DCoverage(({ final __callArgument16:Dynamic = catalog; __callArgument16; }), (cast false : Bool), ({ final __callArgument17:Dynamic = (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneTextureSourceKind; __callArgument17; }), (cast kind : String), ({ final __callArgument18:Dynamic = RenderRegistry.TextureResolver; __callArgument18; })) : SceneCoverageEntry)] : Array<Dynamic>));
         i++;
       }
     }
-    snippets = (cast (cast getWgpuScene3DRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : WgpuScene3DRuntime) : { var modifierSnippetRegistry:Null<ModifierRegistry>; }).modifierSnippetRegistry;
+    snippets = (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument19:Dynamic = state; __callArgument19; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : WgpuRenderRegistries).modifierSnippets : KeyedTable<WgpuModifierSnippet>).entries;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(usage.modifierKinds, 'length') : Float)) : Bool)) {
         var kind:String = flighthq._internal._StaticIndex.readArray(usage.modifierKinds, i);
-        if ((cast ((cast !_Runtime.strictEquals(snippets, null) : Bool) && (cast !_Runtime.strictEquals((cast resolveModifier(({ final __callArgument10:Dynamic = snippets; __callArgument10; }), (cast kind : String)) : Null<ModifierDefinition>), null) : Bool)) : Bool)) {
-          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Satisfied, kind: kind, registry: RenderRegistry.ModifierSnippet }] : Array<Dynamic>));
+        if ((cast _Runtime.strictEquals(({ final __structural20 = ((cast snippets : flighthq._internal._Map<String, RegistryTableEntry<WgpuModifierSnippet>>).get(kind)); __structural20 == null ? _Runtime.UNDEFINED : (cast __structural20 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
+          _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Satisfied, facet: (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneModifierKind, kind: kind, registry: RenderRegistry.ModifierSnippet }] : Array<Dynamic>));
           i++;
           continue;
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var Fallback:String; var Missing:String; var Satisfied:String; }).Missing, kind: kind, registry: RenderRegistry.ModifierSnippet }] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([(cast ExplainWgpuScene3DCoverage.createShortfallEntry__explainWgpuScene3DCoverage(({ final __callArgument21:Dynamic = catalog; __callArgument21; }), (cast false : Bool), ({ final __callArgument22:Dynamic = (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneModifierKind; __callArgument22; }), (cast kind : String), ({ final __callArgument23:Dynamic = RenderRegistry.ModifierSnippet; __callArgument23; })) : SceneCoverageEntry)] : Array<Dynamic>));
         i++;
       }
     }
     return cast found;
+    return cast null;
+  }
+
+  public static function createShortfallEntry__explainWgpuScene3DCoverage(catalog:Null<SceneCoverageCatalog>, fallback:Bool, facet:flighthq._internal._IndexedAccess<SceneCoverageEntry, String>, kind:Kind, registry:flighthq._internal._IndexedAccess<SceneCoverageEntry, String>):SceneCoverageEntry {
+    var registration:Null<CatalogRegistration> = cast _Runtime.UNDEFINED;
+    var base:{ var facet:RequirementFacet; var kind:String; var registry:RenderRegistry; } = cast _Runtime.UNDEFINED;
+    registration = (cast ExplainWgpuScene3DCoverage.findCatalogRegistration__explainWgpuScene3DCoverage(({ final __callArgument24:Dynamic = catalog; __callArgument24; }), (cast kind : String), ({ final __callArgument25:Dynamic = registry; __callArgument25; })) : Null<CatalogRegistration>);
+    base = (cast { facet: facet, kind: kind, registry: registry });
+    if ((cast _Runtime.strictEquals(registration, null) : Bool)) {
+      return cast _Runtime.mergeObjects([base, { coverage: ((cast fallback : Bool) ? (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).FallbackUnavailable : Dynamic) : (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Unavailable : Dynamic)) }]);
+    }
+    return cast _Runtime.mergeObjects([base, { coverage: ((cast fallback : Bool) ? (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).FallbackRemediable : Dynamic) : (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Unregistered : Dynamic)) }, { module: (cast registration : CatalogRegistration).module }, { registrar: (cast registration : CatalogRegistration).registrar }]);
+    return cast null;
+  }
+
+  public static function findCatalogRegistration__explainWgpuScene3DCoverage(catalog:Null<SceneCoverageCatalog>, kind:Kind, registry:flighthq._internal._IndexedAccess<SceneCoverageEntry, String>):Null<CatalogRegistration> {
+    if ((cast _Runtime.strictEquals(catalog, null) : Bool)) { return cast null; }
+    for (entry in _Runtime.iterable(catalog)) {
+      if ((cast ((cast _Runtime.strictEquals((cast entry : CatalogEntry).kind, kind) : Bool) && (cast _Runtime.strictEquals((cast entry : CatalogEntry).registry, registry) : Bool)) : Bool)) { return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray((cast entry : CatalogEntry).registrations, 0.0), function():Dynamic return cast null); }
+    }
+    return cast null;
     return cast null;
   }
 }

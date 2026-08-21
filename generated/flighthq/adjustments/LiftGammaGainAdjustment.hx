@@ -7,16 +7,16 @@ import flighthq.types.ColorTransformFunction;
 import flighthq.types.LiftGammaGainAdjustment;
 
 class LiftGammaGainAdjustment {
-  public static function createLiftGammaGainAdjustment(?options:flighthq._internal._Omit<flighthq.types.LiftGammaGainAdjustment, String>):flighthq.types.LiftGammaGainAdjustment {
+  public static function createLiftGammaGainAdjustment(?options:{ @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }):flighthq.types.LiftGammaGainAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var lift:Array<Float> = cast _Runtime.UNDEFINED;
     var gammaRaw:Array<Float> = cast _Runtime.UNDEFINED;
     var gain:Array<Float> = cast _Runtime.UNDEFINED;
     var gammaExp:Array<Float> = cast _Runtime.UNDEFINED;
     var transform:ColorTransformFunction = cast _Runtime.UNDEFINED;
-    lift = (cast LiftGammaGainAdjustment.unpackRgb__liftGammaGainAdjustment((cast _Runtime.coalesce(_Runtime.field(options, 'lift'), function():Dynamic return cast 255.0) : Float)) : Array<Float>);
-    gammaRaw = (cast LiftGammaGainAdjustment.unpackRgb__liftGammaGainAdjustment((cast _Runtime.coalesce(_Runtime.field(options, 'gamma'), function():Dynamic return cast 2155905279.0) : Float)) : Array<Float>);
-    gain = (cast LiftGammaGainAdjustment.unpackRgb__liftGammaGainAdjustment((cast _Runtime.coalesce(_Runtime.field(options, 'gain'), function():Dynamic return cast 4294967295.0) : Float)) : Array<Float>);
+    lift = (cast LiftGammaGainAdjustment.unpackRgb__liftGammaGainAdjustment((cast _Runtime.coalesce((cast options : { @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }).lift, function():Dynamic return cast 255.0) : Float)) : Array<Float>);
+    gammaRaw = (cast LiftGammaGainAdjustment.unpackRgb__liftGammaGainAdjustment((cast _Runtime.coalesce((cast options : { @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }).gamma, function():Dynamic return cast 2155905279.0) : Float)) : Array<Float>);
+    gain = (cast LiftGammaGainAdjustment.unpackRgb__liftGammaGainAdjustment((cast _Runtime.coalesce((cast options : { @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }).gain, function():Dynamic return cast 4294967295.0) : Float)) : Array<Float>);
     gammaExp = (cast cast ([_Runtime.divideNumbers(1.0, HxMath.max((flighthq._internal._StaticIndex.readFloatArrayTyped((cast gammaRaw : Array<Float>), (cast 0.0 : Float)) * 2.0), 0.001)), _Runtime.divideNumbers(1.0, HxMath.max((flighthq._internal._StaticIndex.readFloatArrayTyped((cast gammaRaw : Array<Float>), (cast 1.0 : Float)) * 2.0), 0.001)), _Runtime.divideNumbers(1.0, HxMath.max((flighthq._internal._StaticIndex.readFloatArrayTyped((cast gammaRaw : Array<Float>), (cast 2.0 : Float)) * 2.0), 0.001))] : Array<Dynamic>));
     transform = function(out:Array<Float>, r:Float, g:Float, b:Float):Void {
       flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast (cast LiftGammaGainAdjustment.clamp01__liftGammaGainAdjustment((cast HxMath.pow(HxMath.max(((r * flighthq._internal._StaticIndex.readFloatArrayTyped((cast gain : Array<Float>), (cast 0.0 : Float))) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast lift : Array<Float>), (cast 0.0 : Float)) * (1.0 - r))), 0.0), flighthq._internal._StaticIndex.readFloatArrayTyped((cast gammaExp : Array<Float>), (cast 0.0 : Float))) : Float)) : Float) : Float));

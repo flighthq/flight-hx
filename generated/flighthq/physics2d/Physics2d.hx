@@ -18,12 +18,11 @@ import flighthq.physics2d.Solver as Facade_Physics2d_flighthq_physics2d_Solver;
 import flighthq.physics2d.Step as Facade_Physics2d_flighthq_physics2d_Step;
 import flighthq.physics2d.World as Facade_Physics2d_flighthq_physics2d_World;
 import flighthq.physics2d.WorldQueries as Facade_Physics2d_flighthq_physics2d_WorldQueries;
-import flighthq.types.Collision.CollisionShape;
+import flighthq.types.Collision.CollisionBuiltInShape2D;
 import flighthq.types.Physics2D.Physics2DCollider;
 import flighthq.types.Physics2D.Physics2DCollisionFilter;
 import flighthq.types.Physics2D.Physics2DContactPoint;
 import flighthq.types.Physics2D.Physics2DDebugGeometry;
-import flighthq.types.Physics2D.Physics2DDebugGeometryOptions;
 import flighthq.types.Physics2D.Physics2DDistanceJoint;
 import flighthq.types.Physics2D.Physics2DDistanceJointOptions;
 import flighthq.types.Physics2D.Physics2DGearJoint;
@@ -55,8 +54,8 @@ import flighthq.types.Physics2D.Physics2DWheelJoint;
 import flighthq.types.Physics2D.Physics2DWheelJointOptions;
 import flighthq.types.Physics2D.Physics2DWorld;
 import flighthq.types.Physics2D.RigidBody2D;
-import flighthq.types.Spatial.SpatialAabb;
-import flighthq.types.Spatial.SpatialIndexBackend;
+import flighthq.types.Spatial.SpatialAabb2D;
+import flighthq.types.Spatial.SpatialIndexBackend2D;
 
 class Physics2d {
   public static function addPhysics2DBody(world:Physics2DWorld, body:RigidBody2D):RigidBody2D {
@@ -107,12 +106,12 @@ class Physics2d {
     Facade_Physics2d_flighthq_physics2d_MassProperties.computePhysics2DColliderMassData(collider, out);
   }
 
-  public static function createPhysics2DCollider(local:CollisionShape, material:Physics2DMaterial, ?sensor:Bool, ?filter:Physics2DCollisionFilter):Physics2DCollider {
+  public static function createPhysics2DCollider(local:CollisionBuiltInShape2D, material:Physics2DMaterial, ?sensor:Bool, ?filter:Physics2DCollisionFilter):Physics2DCollider {
     return cast Facade_Physics2d_flighthq_physics2d_World.createPhysics2DCollider(local, material, sensor, filter);
     return cast null;
   }
 
-  public static function createPhysics2DColliderWorldShape(local:CollisionShape):CollisionShape {
+  public static function createPhysics2DColliderWorldShape(local:CollisionBuiltInShape2D):CollisionBuiltInShape2D {
     return cast Facade_Physics2d_flighthq_physics2d_ColliderTransform.createPhysics2DColliderWorldShape(local);
     return cast null;
   }
@@ -187,7 +186,7 @@ class Physics2d {
     return cast null;
   }
 
-  public static function createPhysics2DWorld(?gravityX:Float, ?gravityY:Float, ?index:SpatialIndexBackend):Physics2DWorld {
+  public static function createPhysics2DWorld(?gravityX:Float, ?gravityY:Float, ?index:SpatialIndexBackend2D):Physics2DWorld {
     return cast Facade_Physics2d_flighthq_physics2d_World.createPhysics2DWorld(gravityX, gravityY, index);
     return cast null;
   }
@@ -302,7 +301,7 @@ class Physics2d {
     Facade_Physics2d_flighthq_physics2d_WorldQueries.queryPhysics2DRayClosest(world, originX, originY, directionX, directionY, out, maxFraction, filter);
   }
 
-  public static function queryPhysics2DRegion(world:Physics2DWorld, region:SpatialAabb, out:Physics2DQueryResult, ?filter:Physics2DQueryFilter):Void {
+  public static function queryPhysics2DRegion(world:Physics2DWorld, region:SpatialAabb2D, out:Physics2DQueryResult, ?filter:Physics2DQueryFilter):Void {
     Facade_Physics2d_flighthq_physics2d_WorldQueries.queryPhysics2DRegion(world, region, out, filter);
   }
 
@@ -395,7 +394,7 @@ class Physics2d {
     Facade_Physics2d_flighthq_physics2d_ColliderTransform.writePhysics2DColliderBounds(collider, out);
   }
 
-  public static function writePhysics2DDebugGeometry(world:Physics2DWorld, out:Physics2DDebugGeometry, ?options:flighthq._internal._Partial<Physics2DDebugGeometryOptions>):Void {
+  public static function writePhysics2DDebugGeometry(world:Physics2DWorld, out:Physics2DDebugGeometry, ?options:{ @:optional var drawCentersOfMass:Null<Bool>; @:optional var drawColliders:Null<Bool>; @:optional var drawContacts:Null<Bool>; @:optional var drawJoints:Null<Bool>; @:optional var centerOfMassRadius:Null<Float>; @:optional var contactNormalLength:Null<Float>; @:optional var pointRadius:Null<Float>; }):Void {
     Facade_Physics2d_flighthq_physics2d_DebugGeometry.writePhysics2DDebugGeometry(world, out, options);
   }
 }

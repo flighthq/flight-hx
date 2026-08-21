@@ -25,12 +25,14 @@ class WgpuBlurEffect {
 
   @:noCompletion
   public static function applyGaussianBlurToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, temp:WgpuRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
+    var scale:Float = cast _Runtime.UNDEFINED;
     var sigmaX:Float = cast _Runtime.UNDEFINED;
     var sigmaY:Float = cast _Runtime.UNDEFINED;
     var radiusX:Float = cast _Runtime.UNDEFINED;
     var radiusY:Float = cast _Runtime.UNDEFINED;
-    sigmaX = _Runtime.coalesce((cast options : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }).blurX, function():Dynamic return cast 4.0);
-    sigmaY = _Runtime.coalesce((cast options : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }).blurY, function():Dynamic return cast 4.0);
+    scale = (cast getWgpuRenderTargetTexelScale((cast source.width : Float), (cast flighthq._internal.backend.CanvasElementBackend.field((cast state : WgpuRenderState).canvas, 'width') : Float)) : Float);
+    sigmaX = _Runtime.multiplyNumbers(_Runtime.coalesce((cast options : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }).blurX, function():Dynamic return cast 4.0), scale);
+    sigmaY = _Runtime.multiplyNumbers(_Runtime.coalesce((cast options : { @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }).blurY, function():Dynamic return cast 4.0), scale);
     radiusX = ((cast ((cast sigmaX : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.ceil((sigmaX * 3.0)) : Dynamic) : (cast 0.0 : Dynamic));
     radiusY = ((cast ((cast sigmaY : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.ceil((sigmaY * 3.0)) : Dynamic) : (cast 0.0 : Dynamic));
     WgpuBlurEffect.applyWgpuGaussianBlurPass__wgpuBlurEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = source; __callArgument6; }), ({ final __callArgument7:Dynamic = temp; __callArgument7; }), (cast sigmaX : Float), (cast radiusX : Float), (cast 1.0 : Float), (cast 0.0 : Float));
@@ -45,6 +47,13 @@ class WgpuBlurEffect {
     applyBlurEffectToWgpu(ctx.state, ctx.source, ctx.dest, ({ final __callArgument12:Dynamic = temp; __callArgument12; }), (cast effect : BlurEffect));
     releaseWgpuRenderTarget(ctx.pool, ({ final __callArgument13:Dynamic = temp; __callArgument13; }));
   });
+
+  @:noCompletion
+  public static function getWgpuRenderTargetTexelScale(targetWidth:Float, canvasWidth:Float):Float {
+    if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([targetWidth] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([canvasWidth] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast canvasWidth : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast 1.0; }
+    return cast HxMath.max(1.0, HxMath.round((targetWidth / canvasWidth)));
+    return cast null;
+  }
 
   public static function registerWgpuBlurEffect(state:WgpuRenderState):Void {
     registerWgpuRenderEffect(({ final __callArgument14:Dynamic = state; __callArgument14; }), (cast 'BlurEffect' : String), ({ final __callArgument15:Dynamic = defaultWgpuBlurEffectRunner; __callArgument15; }));

@@ -14,6 +14,7 @@ import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.renderGl.GlRenderTarget.createGlRenderTarget;
 import flighthq.types.Entity.Kind;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderRegistries;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GlVelocityWriter;
@@ -29,6 +30,9 @@ import flighthq.types.QuadBatch.QuadBatchData;
 import flighthq.types.QuadBatch.QuadBatchRuntime;
 import flighthq.types.QuadTransformType;
 import flighthq.types.Rectangle;
+import flighthq.types.RegistryTable.KeyedTable;
+import flighthq.types.RegistryTable.RegistryEntryState;
+import flighthq.types.RegistryTable.RegistryTableEntry;
 import flighthq.types.RenderTarget.RenderTargetDescriptor;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
@@ -36,6 +40,7 @@ import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types.Velocity.Velocity2D;
 import flighthq.types.Velocity.VelocityField;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
+import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 import flighthq.velocity.VelocityField.getVelocity;
 
 typedef GlVelocityProgram__glVelocity = { var program:flighthq._internal.dom.WebGLProgram; var quadBuffer:flighthq._internal.dom.WebGLBuffer; var locCorner:Float; var locClipRect:flighthq._internal.dom.WebGLUniformLocation; var locVelocity:flighthq._internal.dom.WebGLUniformLocation; };
@@ -271,28 +276,37 @@ class GlVelocity {
 
   @:noCompletion
   public static function getGlVelocityWriter(state:GlRenderState, kind:Kind):Null<GlVelocityWriter> {
-    return cast _Runtime.coalesce(({ final __collection10:Dynamic = ((cast GlVelocity._velocityWriters__glVelocity : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, GlVelocityWriter>>).get(state)); __collection10 == null ? _Runtime.UNDEFINED : ((cast __collection10 : flighthq._internal._Map<String, GlVelocityWriter>).get(kind)); }), function():Dynamic return cast null);
+    var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlVelocityWriter; }>> = cast _Runtime.UNDEFINED;
+    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument11:Dynamic = state; __callArgument11; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).velocityWriters : KeyedTable<GlVelocityWriter>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlVelocityWriter>>).get(kind));
+    return cast ((cast _Runtime.strictEquals(({ final __structural12 = entry; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:GlVelocityWriter; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function registerGlVelocityWriter(state:GlRenderState, kind:Kind, writer:GlVelocityWriter):Void {
-    var writers:Null<flighthq._internal._Map<String, GlVelocityWriter>> = cast _Runtime.UNDEFINED;
-    writers = ((cast GlVelocity._velocityWriters__glVelocity : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, GlVelocityWriter>>).get(state));
-    if ((cast _Runtime.strictEquals(writers, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (writers = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-      ((cast GlVelocity._velocityWriters__glVelocity : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, GlVelocityWriter>>).set(state, (cast writers)));
-    }
-    ((cast writers : flighthq._internal._Map<String, GlVelocityWriter>).set(kind, (cast writer)));
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var table:KeyedTable<GlVelocityWriter> = cast _Runtime.UNDEFINED;
+    var entries:flighthq._internal._Map<String, RegistryTableEntry<GlVelocityWriter>> = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : GlRenderStateRuntime);
+    table = (cast runtime.registries : GlRenderRegistries).velocityWriters;
+    entries = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [(cast table : KeyedTable<GlVelocityWriter>).entries]);
+    ((cast entries : flighthq._internal._Map<String, RegistryTableEntry<GlVelocityWriter>>).set(kind, (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: writer })));
+    ((cast runtime.registries : GlRenderRegistries).velocityWriters = _Runtime.mergeObjects([table, { entries: entries }]));
   }
 
   public static function renderGlVelocity<Traits:flighthq._internal._Object>(state:GlRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:GlRenderTarget):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var program:GlVelocityProgram__glVelocity = cast _Runtime.UNDEFINED;
+    var prevBlend:Bool = cast _Runtime.UNDEFINED;
+    var prevViewport:flighthq._internal._Int32Array = cast _Runtime.UNDEFINED;
+    var prevClearColor:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var ctx:GlVelocityContext = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument11:Dynamic = state; __callArgument11; })) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
-    program = (cast GlVelocity.ensureGlVelocityProgram__glVelocity(({ final __callArgument12:Dynamic = state; __callArgument12; })) : GlVelocityProgram__glVelocity);
+    program = (cast GlVelocity.ensureGlVelocityProgram__glVelocity(({ final __callArgument15:Dynamic = state; __callArgument15; })) : GlVelocityProgram__glVelocity);
+    prevBlend = flighthq._internal.backend.WebGl2Backend.isEnabled(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND));
+    prevViewport = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'VIEWPORT', flighthq._internal.backend.WebGl2Backend.VIEWPORT)) : flighthq._internal._Int32Array);
+    prevClearColor = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR_CLEAR_VALUE', flighthq._internal.backend.WebGl2Backend.COLOR_CLEAR_VALUE)) : flighthq._internal._Float32Array);
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), target.framebuffer);
     flighthq._internal.backend.WebGl2Backend.viewport(gl, 0.0, 0.0, target.width, target.height);
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND));
@@ -303,9 +317,12 @@ class GlVelocity {
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, (cast program : GlVelocityProgram__glVelocity).locCorner);
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, (cast program : GlVelocityProgram__glVelocity).locCorner, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 0.0, 0.0);
     ctx = (cast { state: state, field: field, width: target.width, height: target.height, pixelRatio: (cast state : GlRenderState).pixelRatio });
-    GlVelocity.visitGlVelocity__glVelocity(({ final __callArgument13:Dynamic = ctx; __callArgument13; }), (cast root : Dynamic));
+    GlVelocity.visitGlVelocity__glVelocity(({ final __callArgument16:Dynamic = ctx; __callArgument16; }), (cast root : Dynamic));
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), runtime.currentFramebuffer);
     flighthq._internal.backend.WebGl2Backend.disableVertexAttribArray(gl, (cast program : GlVelocityProgram__glVelocity).locCorner);
+    if ((cast prevBlend : Bool)) { flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND)); }
+    flighthq._internal.backend.WebGl2Backend.viewport(gl, flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 2.0 : Float)), flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 3.0 : Float)));
+    flighthq._internal.backend.WebGl2Backend.clearColor(gl, flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast prevClearColor : flighthq._internal._Float32Array), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast prevClearColor : flighthq._internal._Float32Array), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast prevClearColor : flighthq._internal._Float32Array), (cast 2.0 : Float)), flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast prevClearColor : flighthq._internal._Float32Array), (cast 3.0 : Float)));
   }
 
   public static function ensureGlVelocityProgram__glVelocity(state:GlRenderState):GlVelocityProgram__glVelocity {
@@ -316,7 +333,7 @@ class GlVelocity {
     program = ((cast GlVelocity._velocityPrograms__glVelocity : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlVelocityProgram__glVelocity>).get((cast state : GlRenderState).gl));
     if ((cast !_Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast program; }
     gl = (cast state : GlRenderState).gl;
-    glProgram = (cast createGlProgram(({ final __callArgument14:Dynamic = gl; __callArgument14; }), (cast GlVelocity.VELOCITY_VERTEX_SRC__glVelocity : String), (cast GlVelocity.VELOCITY_FRAGMENT_SRC__glVelocity : String), (cast 'Velocity' : String)) : flighthq._internal.dom.WebGLProgram);
+    glProgram = (cast createGlProgram(({ final __callArgument17:Dynamic = gl; __callArgument17; }), (cast GlVelocity.VELOCITY_VERTEX_SRC__glVelocity : String), (cast GlVelocity.VELOCITY_FRAGMENT_SRC__glVelocity : String), (cast 'Velocity' : String)) : flighthq._internal.dom.WebGLProgram);
     quadBuffer = flighthq._internal.backend.WebGl2Backend.createBuffer(gl);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), quadBuffer);
     flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), new flighthq._internal._Float32Array(cast ([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0] : Array<Dynamic>)), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STATIC_DRAW', flighthq._internal.backend.WebGl2Backend.STATIC_DRAW));
@@ -330,13 +347,13 @@ class GlVelocity {
     var writer:Null<GlVelocityWriter> = cast _Runtime.UNDEFINED;
     var count:Float = cast _Runtime.UNDEFINED;
     writer = (cast getGlVelocityWriter(ctx.state, (cast _Runtime.field(node, 'kind') : String)) : Null<GlVelocityWriter>);
-    if ((cast !_Runtime.strictEquals(writer, null) : Bool)) { writer(({ final __callArgument15:Dynamic = ctx; __callArgument15; }), ({ final __callArgument16:Dynamic = node; __callArgument16; })); }
+    if ((cast !_Runtime.strictEquals(writer, null) : Bool)) { writer(({ final __callArgument18:Dynamic = ctx; __callArgument18; }), ({ final __callArgument19:Dynamic = node; __callArgument19; })); }
     count = (cast getNodeChildCount((cast node : Dynamic)) : Float);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var child:Null<NodeOf<Traits>> = (cast getNodeChildAt((cast node : Dynamic), (cast i : Float)) : Null<NodeOf<Traits>>);
-        if ((cast !_Runtime.strictEquals(child, null) : Bool)) { GlVelocity.visitGlVelocity__glVelocity(({ final __callArgument17:Dynamic = ctx; __callArgument17; }), (cast (cast (cast child : flighthq._internal._Any) : Transform2DNode<Traits>) : Dynamic)); }
+        if ((cast !_Runtime.strictEquals(child, null) : Bool)) { GlVelocity.visitGlVelocity__glVelocity(({ final __callArgument20:Dynamic = ctx; __callArgument20; }), (cast (cast (cast child : flighthq._internal._Any) : Transform2DNode<Traits>) : Dynamic)); }
         i++;
       }
     }
@@ -349,6 +366,4 @@ class GlVelocity {
   public static final _scratchVelocity__glVelocity:Velocity2D = (cast { x: 0.0, y: 0.0 });
 
   public static final _velocityPrograms__glVelocity:flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlVelocityProgram__glVelocity> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
-
-  public static final _velocityWriters__glVelocity:flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, GlVelocityWriter>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

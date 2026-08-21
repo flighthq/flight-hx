@@ -5,14 +5,17 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.materials.PbrMaterials.createStandardPbrMaterialProperties;
 import flighthq.materials.SurfaceMaterial.createSurfaceMaterial;
+import flighthq.types.BlendMode;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.ExtendedPbrMaterial;
 import flighthq.types.PbrExtension;
 import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
+import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Types.ExtendedPbrMaterialKind;
 import flighthq.types._internal._ExtendedPbrMaterialValues.ExtendedPbrMaterialKind;
 
 class ExtendedPbrMaterial {
-  public static function createExtendedPbrMaterial(?opts:flighthq._internal._Partial<flighthq.types.ExtendedPbrMaterial>):flighthq.types.ExtendedPbrMaterial {
+  public static function createExtendedPbrMaterial(?opts:{ @:optional var extensions:Null<Array<PbrExtension>>; @:optional var kind:Null<String>; @:optional var standard:Null<StandardPbrMaterialProperties>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):flighthq.types.ExtendedPbrMaterial {
     var material:flighthq.types.ExtendedPbrMaterial = cast _Runtime.UNDEFINED;
     material = (cast createSurfaceMaterial((cast ExtendedPbrMaterialKind : String), (cast opts : Dynamic)) : flighthq.types.ExtendedPbrMaterial);
     (material.extensions = cast (_Runtime.coalesce(({ final __structural0 = opts; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var extensions:Null<Array<PbrExtension>>; }).extensions; }), function():Dynamic return cast cast ([] : Array<Dynamic>)) : Array<PbrExtension>));

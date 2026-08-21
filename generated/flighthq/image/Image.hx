@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.image.ImageResource as Facade_Image_flighthq_image_ImageResource;
 import flighthq.image.ImageResourceFrom as Facade_Image_flighthq_image_ImageResourceFrom;
 import flighthq.image.ImageResourceReference as Facade_Image_flighthq_image_ImageResourceReference;
+import flighthq.types.AlphaType;
 import flighthq.types.Bitmap;
 import flighthq.types.CompressedImage;
 import flighthq.types.CompressedImageData;
@@ -16,6 +17,7 @@ import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
 import flighthq.types.ImageResourceReference.ImageResourceFailure;
 import flighthq.types.ImageResourceReference.ImageResourceFetch;
 import flighthq.types.ImageResourceReference.ImageResourceReferenceResolutionExplanation;
+import flighthq.types.TextureSource;
 
 class Image {
   public static function cloneImageResource(resource:flighthq.types.Image):flighthq.types.Image {
@@ -28,8 +30,8 @@ class Image {
     return cast null;
   }
 
-  public static function createEmbeddedImageResourceReference(bytes:flighthq._internal._UInt8Array, ?mimeType:Null<String>):EmbeddedImageResourceReference {
-    return cast Facade_Image_flighthq_image_ImageResourceReference.createEmbeddedImageResourceReference(bytes, mimeType);
+  public static function createEmbeddedImageResourceReference(bytes:flighthq._internal._UInt8Array, ?mimeType:Null<String>, ?alphaType:AlphaType):EmbeddedImageResourceReference {
+    return cast Facade_Image_flighthq_image_ImageResourceReference.createEmbeddedImageResourceReference(bytes, mimeType, alphaType);
     return cast null;
   }
 
@@ -66,6 +68,14 @@ class Image {
   public static function createImageResourceFromImageElement(img:flighthq._internal.dom.HTMLImageElement):flighthq.types.Image {
     return cast Facade_Image_flighthq_image_ImageResourceFrom.createImageResourceFromImageElement(img);
     return cast null;
+  }
+
+  public static function disableImageBitmapComposition():Void {
+    Facade_Image_flighthq_image_ImageResourceReference.disableImageBitmapComposition();
+  }
+
+  public static function enableImageBitmapComposition():Void {
+    Facade_Image_flighthq_image_ImageResourceReference.enableImageBitmapComposition();
   }
 
   public static function explainImageResourceReferenceResolution(ref:ImageResourceReference):ImageResourceReferenceResolutionExplanation {
@@ -108,7 +118,7 @@ class Image {
     return cast null;
   }
 
-  public static function resolveImageResourceReference(ref:ImageResourceReference, fetch:ImageResourceFetch, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<flighthq.types.Image>> {
+  public static function resolveImageResourceReference(ref:ImageResourceReference, fetch:ImageResourceFetch, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<TextureSource>> {
     return cast Facade_Image_flighthq_image_ImageResourceReference.resolveImageResourceReference(ref, fetch, signal);
     return cast null;
   }

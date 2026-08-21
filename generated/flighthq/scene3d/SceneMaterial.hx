@@ -5,12 +5,20 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.node.Traversal.findNode;
 import flighthq.node.Traversal.forEachNodeDescendant;
+import flighthq.types.Entity.Kind;
 import flighthq.types.Material;
 import flighthq.types.Mesh;
+import flighthq.types.MeshGeometry;
+import flighthq.types.MorphTarget.MeshMorph;
 import flighthq.types.Node;
+import flighthq.types.Node.NodeData;
 import flighthq.types.Node.NodeOf;
+import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node3D;
 import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types.Quaternion;
+import flighthq.types.Skin;
+import flighthq.types.Vector3;
 
 class SceneMaterial {
   public static function findScene3DMaterialByName(root:Node3D, name:String):Null<Material> {
@@ -38,7 +46,7 @@ class SceneMaterial {
 
   public static function collectNodeMaterials__sceneMaterial(node:Node3D, out:Array<Material>):Void {
     var materials:Null<Array<Null<Material>>> = cast _Runtime.UNDEFINED;
-    materials = _Runtime.field((cast node : flighthq._internal._Partial<Mesh>), 'materials');
+    materials = (cast (cast node : { @:optional var geometry:Null<MeshGeometry>; @:optional var materials:Null<Array<Null<Material>>>; @:optional var morph:Null<MeshMorph>; @:optional var skin:Null<Skin>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node3DTraits>>; @:optional var data:Null<NodeData>; @:optional var enabled:Null<Bool>; @:optional var kind:Null<Kind>; @:optional var name:Null<String>; @:optional var alpha:Null<Float>; @:optional var visible:Null<Bool>; @:optional var position:Null<Vector3>; @:optional var rotation:Null<Quaternion>; @:optional var scale:Null<Vector3>; }) : { @:optional var geometry:Null<MeshGeometry>; @:optional var materials:Null<Array<Null<Material>>>; @:optional var morph:Null<MeshMorph>; @:optional var skin:Null<Skin>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node3DTraits>>; @:optional var data:Null<flighthq._internal._Object>; @:optional var enabled:Null<Bool>; @:optional var kind:Null<String>; @:optional var name:Null<String>; @:optional var alpha:Null<Float>; @:optional var visible:Null<Bool>; @:optional var position:Null<Vector3>; @:optional var rotation:Null<Quaternion>; @:optional var scale:Null<Vector3>; }).materials;
     if ((cast _Runtime.looseEquals(materials, null) : Bool)) { return; }
     {
       var i:Float = 0.0;
@@ -52,7 +60,7 @@ class SceneMaterial {
 
   public static function getNamedNodeMaterial__sceneMaterial(node:Node3D, name:String):Null<Material> {
     var materials:Null<Array<Null<Material>>> = cast _Runtime.UNDEFINED;
-    materials = _Runtime.field((cast node : flighthq._internal._Partial<Mesh>), 'materials');
+    materials = (cast (cast node : { @:optional var geometry:Null<MeshGeometry>; @:optional var materials:Null<Array<Null<Material>>>; @:optional var morph:Null<MeshMorph>; @:optional var skin:Null<Skin>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node3DTraits>>; @:optional var data:Null<NodeData>; @:optional var enabled:Null<Bool>; @:optional var kind:Null<Kind>; @:optional var name:Null<String>; @:optional var alpha:Null<Float>; @:optional var visible:Null<Bool>; @:optional var position:Null<Vector3>; @:optional var rotation:Null<Quaternion>; @:optional var scale:Null<Vector3>; }) : { @:optional var geometry:Null<MeshGeometry>; @:optional var materials:Null<Array<Null<Material>>>; @:optional var morph:Null<MeshMorph>; @:optional var skin:Null<Skin>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node3DTraits>>; @:optional var data:Null<flighthq._internal._Object>; @:optional var enabled:Null<Bool>; @:optional var kind:Null<String>; @:optional var name:Null<String>; @:optional var alpha:Null<Float>; @:optional var visible:Null<Bool>; @:optional var position:Null<Vector3>; @:optional var rotation:Null<Quaternion>; @:optional var scale:Null<Vector3>; }).materials;
     if ((cast _Runtime.looseEquals(materials, null) : Bool)) { return cast null; }
     {
       var i:Float = 0.0;

@@ -6,12 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.effects.RenderEffectPadding.getDirectionalRenderEffectPadding;
 import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
 import flighthq.types.BevelEffect;
+import flighthq.types.EffectSourceMode;
 import flighthq.types.RenderEffect;
 import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class BevelEffect {
-  public static function createBevelEffect(?options:flighthq._internal._Omit<flighthq.types.BevelEffect, String>):flighthq.types.BevelEffect {
+  public static function createBevelEffect(?options:{ @:optional var angle:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):flighthq.types.BevelEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'BevelEffect' }, options]);
     return cast null;

@@ -6,6 +6,8 @@ import Math as HxMath;
 class _Runtime {
   public static inline final MAX_SAFE_INTEGER:Float = 9007199254740991.0;
   public static inline final NUMBER_EPSILON:Float = 2.220446049250313e-16;
+  public static inline final NUMBER_MAX_VALUE:Float = 1.7976931348623157e308;
+  public static inline final NUMBER_MIN_VALUE:Float = 5e-324;
 
   #if !js
   static final haxeArityCallables:Array<Dynamic> = [];
@@ -1183,6 +1185,23 @@ class _Runtime {
     return js.Syntax.code('{0} in {1}', key, source);
     #else
     return source != null && Reflect.hasField(source, Std.string(key));
+    #end
+  }
+
+  public static function isIterable(value:Dynamic):Bool {
+    #if js
+    return value != null && js.Syntax.code('Symbol.iterator in Object({0})', value);
+    #else
+    if (value == null) return false;
+    if (Std.isOfType(value, Array) || Std.isOfType(value, haxe.io.Bytes) || Std.isOfType(value, String)) return true;
+    #if python
+    if (Std.isOfType(value, python.Tuple)) return true;
+    #end
+    #if (lime && !js)
+    if (Std.isOfType(value, _LimeTypedArray) || Std.isOfType(value, lime.utils.ArrayBufferView)) return true;
+    #end
+    if (Std.isOfType(value, _Set) || Std.isOfType(value, _Map)) return true;
+    return Reflect.field(value, 'iterator') != null || Reflect.field(value, 'toArray') != null;
     #end
   }
 

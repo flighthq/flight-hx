@@ -5,16 +5,26 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderRegistries;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.RegistryTable.RegistryEntryState;
+import flighthq.types.RegistryTable.SlotTable;
 import flighthq.types.ShapeRasterizer;
+import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 class GlShapeRasterizer {
   public static function getGlShapeRasterizer(state:GlRenderState):Null<ShapeRasterizer> {
-    return cast _Runtime.coalesce((cast (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime) : { @:optional var shapeRasterizer:Null<ShapeRasterizer>; }).shapeRasterizer, function():Dynamic return cast null);
+    var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:ShapeRasterizer; }>> = cast _Runtime.UNDEFINED;
+    entry = (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).shapeRasterizer : SlotTable<ShapeRasterizer>).entry;
+    return cast ((cast _Runtime.strictEquals(({ final __structural1 = entry; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:ShapeRasterizer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function registerGlShapeRasterizer(state:GlRenderState, rasterizer:Null<ShapeRasterizer>):Void {
-    ((cast (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime) : { @:optional var shapeRasterizer:Null<ShapeRasterizer>; }).shapeRasterizer = cast (rasterizer : Null<ShapeRasterizer>));
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var table:SlotTable<ShapeRasterizer> = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime);
+    table = (cast runtime.registries : GlRenderRegistries).shapeRasterizer;
+    ((cast runtime.registries : GlRenderRegistries).shapeRasterizer = _Runtime.mergeObjects([table, { entry: ((cast _Runtime.strictEquals(rasterizer, null) : Bool) ? (cast null : Dynamic) : (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: rasterizer } : Dynamic)) }]));
   }
 }

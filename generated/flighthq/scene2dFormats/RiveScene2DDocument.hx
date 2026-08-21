@@ -4,6 +4,7 @@ package flighthq.scene2dFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResourceReference.createEmbeddedImageResourceReference;
+import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.node.Hierarchy.addNodeChild;
 import flighthq.node.Hierarchy.getNodeChildAt;
 import flighthq.node.Hierarchy.getNodeChildCount;
@@ -11,11 +12,13 @@ import flighthq.scene2d.DisplayContainer.createDisplayObject;
 import flighthq.scene2d.Sprite.createSprite;
 import flighthq.scene2dFormats.RiveScene2D.createScene2DFromRiveDocument;
 import flighthq.texture.Texture.createTexture;
+import flighthq.types.AlphaType;
 import flighthq.types.DisplayObject;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.ImageResourceReference;
 import flighthq.types.ImageResourceReference.EmbeddedImageResourceReference;
 import flighthq.types.ImportDiagnostic;
+import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.Node.NodeOf;
 import flighthq.types.Node2D;
 import flighthq.types.Node2D.Node2DTraits;
@@ -33,6 +36,7 @@ import flighthq.types.Texture.TextureSourceCubeFaces;
 import flighthq.types.TextureSource;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
+import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 class RiveScene2DDocument {
   @:noCompletion
@@ -73,7 +77,7 @@ class RiveScene2DDocument {
     }
   }
 
-  public static function createRiveImageResources__riveScene2DDocument(imported:RiveDocumentImportResult):Array<ImageResourceReference> {
+  public static function createRiveImageResources__riveScene2DDocument(imported:RiveDocumentImportResult, diagnostics:Null<Array<ImportDiagnostic>>):Array<ImageResourceReference> {
     var references:Array<ImageResourceReference> = cast _Runtime.UNDEFINED;
     references = (cast cast ([] : Array<Dynamic>));
     {
@@ -81,8 +85,8 @@ class RiveScene2DDocument {
       while ((cast ((cast index : Float) < (cast _Runtime.field(imported.assets, 'length') : Float)) : Bool)) {
         var asset:RiveFileAsset = flighthq._internal._StaticIndex.readArray(imported.assets, index);
         if ((cast ((cast !_Runtime.strictEquals(asset.kind, RiveScene2DDocument.RIVE_IMAGE_ASSET_KIND__riveScene2DDocument) : Bool) || (cast _Runtime.strictEquals(asset.bytes, null) : Bool)) : Bool)) { index++; continue; }
-        var reference:EmbeddedImageResourceReference = (cast createEmbeddedImageResourceReference(asset.bytes, (cast RiveScene2DDocument.toRiveMimeType__riveScene2DDocument(asset.bytes) : Null<String>)) : EmbeddedImageResourceReference);
-        (reference.textures = cast ((cast RiveScene2DDocument.collectRiveTexturesForAsset__riveScene2DDocument(({ final __callArgument7:Dynamic = imported; __callArgument7; }), (cast index : Float)) : Array<Texture>) : Null<Array<Texture>>));
+        var reference:EmbeddedImageResourceReference = (cast createEmbeddedImageResourceReference(asset.bytes, (cast RiveScene2DDocument.toRiveMimeType__riveScene2DDocument(asset.bytes, (cast index : Float), ({ final __callArgument7:Dynamic = diagnostics; __callArgument7; })) : Null<String>), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : EmbeddedImageResourceReference);
+        (reference.textures = cast ((cast RiveScene2DDocument.collectRiveTexturesForAsset__riveScene2DDocument(({ final __callArgument8:Dynamic = imported; __callArgument8; }), (cast index : Float)) : Array<Texture>) : Null<Array<Texture>>));
         _Runtime.callProperty(references, 'push', cast ([reference] : Array<Dynamic>));
         index++;
       }
@@ -97,7 +101,7 @@ class RiveScene2DDocument {
     for (artboard in _Runtime.iterable(imported.artboards)) {
       var walk:Node2D->Void = cast _Runtime.UNDEFINED;
       walk = (cast function(node:Node2D):Void {
-        var texture:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+        var texture:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9457:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9457:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9457:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
         texture = ((cast RiveScene2DDocument._imageTextures__riveScene2DDocument : flighthq._internal._WeakMap<Node2D, Texture>).get(node));
         if ((cast ((cast !_Runtime.strictEquals(texture, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(((cast RiveScene2DDocument._imageAssetIndices__riveScene2DDocument : flighthq._internal._WeakMap<Node2D, Float>).get(node)), assetIndex) : Bool)) : Bool)) { _Runtime.callProperty(textures, 'push', cast ([texture] : Array<Dynamic>)); }
         {
@@ -108,7 +112,7 @@ class RiveScene2DDocument {
           }
         }
       });
-      walk(({ final __callArgument10:Dynamic = (cast artboard : RiveArtboardImport).root; __callArgument10; }));
+      walk(({ final __callArgument11:Dynamic = (cast artboard : RiveArtboardImport).root; __callArgument11; }));
     }
     return cast textures;
     return cast null;
@@ -118,13 +122,13 @@ class RiveScene2DDocument {
   public static function createScene2DDocumentFromRiveDocument(source:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<RiveScene2DDocumentResult> {
     var imported:RiveDocumentImportResult = cast _Runtime.UNDEFINED;
     var root:DisplayObject = cast _Runtime.UNDEFINED;
-    imported = (cast createScene2DFromRiveDocument(({ final __callArgument11:Dynamic = source; __callArgument11; }), ({ final __callArgument12:Dynamic = diagnostics; __callArgument12; })) : RiveDocumentImportResult);
+    imported = (cast createScene2DFromRiveDocument(({ final __callArgument12:Dynamic = source; __callArgument12; }), ({ final __callArgument13:Dynamic = diagnostics; __callArgument13; })) : RiveDocumentImportResult);
     if ((cast _Runtime.strictEquals(_Runtime.field(imported.artboards, 'length'), 0.0) : Bool)) { return cast null; }
     root = (cast createDisplayObject((cast { name: 'Rive' } : Dynamic)) : DisplayObject);
     for (artboard in _Runtime.iterable(imported.artboards)) {
       (cast addNodeChild((cast root : Dynamic), (cast (cast artboard : RiveArtboardImport).root : Dynamic)) : NodeOf<Node2DTraits>);
     }
-    return cast { imageResources: (cast RiveScene2DDocument.createRiveImageResources__riveScene2DDocument(({ final __callArgument15:Dynamic = imported; __callArgument15; })) : Array<ImageResourceReference>), imported: imported, root: root, slots: (cast RiveScene2DDocument.createRiveSlots__riveScene2DDocument(imported.artboards) : Array<Scene2DSlotReference>) };
+    return cast { imageResources: (cast RiveScene2DDocument.createRiveImageResources__riveScene2DDocument(({ final __callArgument16:Dynamic = imported; __callArgument16; }), ({ final __callArgument17:Dynamic = diagnostics; __callArgument17; })) : Array<ImageResourceReference>), imported: imported, root: root, slots: (cast RiveScene2DDocument.createRiveSlots__riveScene2DDocument(imported.artboards) : Array<Scene2DSlotReference>) };
     return cast null;
   }
 
@@ -133,10 +137,11 @@ class RiveScene2DDocument {
     ((cast RiveScene2DDocument._nestedArtboards__riveScene2DDocument : flighthq._internal._WeakMap<Node2D, Float>).set(node, (cast artboardIndex)));
   }
 
-  public static function toRiveMimeType__riveScene2DDocument(bytes:flighthq._internal._UInt8Array):Null<String> {
+  public static function toRiveMimeType__riveScene2DDocument(bytes:flighthq._internal._UInt8Array, assetIndex:Float, diagnostics:Null<Array<ImportDiagnostic>>):Null<String> {
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 0.0 : Float)), 137.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 1.0 : Float)), 80.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 2.0 : Float)), 78.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 3.0 : Float)), 71.0) : Bool)) : Bool)) { return cast 'image/png'; }
     if ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 0.0 : Float)), 255.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 1.0 : Float)), 216.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 2.0 : Float)), 255.0) : Bool)) : Bool)) { return cast 'image/jpeg'; }
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 0.0 : Float)), 82.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 1.0 : Float)), 73.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 2.0 : Float)), 70.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 3.0 : Float)), 70.0) : Bool)) : Bool)) { return cast 'image/webp'; }
+    reportImportDiagnostic(({ final __callArgument18:Dynamic = diagnostics; __callArgument18; }), ({ final __callArgument19:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument19; }), (cast 'rive.image-mime-type-undetected' : String), (cast 'toRiveMimeType' : String), ({ final __callArgument20:Dynamic = { assetIndex: assetIndex }; __callArgument20; }));
     return cast null;
     return cast null;
   }

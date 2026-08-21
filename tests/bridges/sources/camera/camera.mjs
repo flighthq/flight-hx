@@ -10,6 +10,7 @@ export const getCamera3DInverseViewProjectionMatrix4 = api.getCamera3DInverseVie
 export const getCamera3DViewProjectionMatrix4 = api.getCamera3DViewProjectionMatrix4;
 export const setCamera3DAspect = api.setCamera3DAspect;
 export const setCamera3DJitter = api.setCamera3DJitter;
+export const setCamera3DViewGuard = api.setCamera3DViewGuard;
 export const setCamera3DViewMatrix4FromLookAt = api.setCamera3DViewMatrix4FromLookAt;
 export const setCamera3DViewMatrix4FromMatrix4 = api.setCamera3DViewMatrix4FromMatrix4;
 export const updateCamera3DInverseViewProjection = api.updateCamera3DInverseViewProjection;

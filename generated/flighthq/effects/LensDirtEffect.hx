@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.LensDirtEffect;
 
 class LensDirtEffect {
-  public static function createLensDirtEffect(?options:flighthq._internal._Omit<flighthq.types.LensDirtEffect, String>):flighthq.types.LensDirtEffect {
+  public static function createLensDirtEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var threshold:Null<Float>; @:optional var seed:Null<Float>; }):flighthq.types.LensDirtEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'LensDirtEffect' }, options]);
     return cast null;

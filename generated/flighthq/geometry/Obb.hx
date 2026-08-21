@@ -29,7 +29,19 @@ class Obb {
     var px:Float = cast _Runtime.UNDEFINED;
     var py:Float = cast _Runtime.UNDEFINED;
     var pz:Float = cast _Runtime.UNDEFINED;
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var qx:Float = cast _Runtime.UNDEFINED;
+    var qy:Float = cast _Runtime.UNDEFINED;
+    var qz:Float = cast _Runtime.UNDEFINED;
+    var qw:Float = cast _Runtime.UNDEFINED;
+    var xx:Float = cast _Runtime.UNDEFINED;
+    var yy:Float = cast _Runtime.UNDEFINED;
+    var zz:Float = cast _Runtime.UNDEFINED;
+    var xy:Float = cast _Runtime.UNDEFINED;
+    var xz:Float = cast _Runtime.UNDEFINED;
+    var yz:Float = cast _Runtime.UNDEFINED;
+    var wx:Float = cast _Runtime.UNDEFINED;
+    var wy:Float = cast _Runtime.UNDEFINED;
+    var wz:Float = cast _Runtime.UNDEFINED;
     var ax0:Float = cast _Runtime.UNDEFINED;
     var ay0:Float = cast _Runtime.UNDEFINED;
     var az0:Float = cast _Runtime.UNDEFINED;
@@ -54,16 +66,28 @@ class Obb {
     px = point.x;
     py = point.y;
     pz = point.z;
-    __destructure0 = (cast Obb.obbLocalAxes__obb(({ final __callArgument1:Dynamic = obb; __callArgument1; })) : Array<Float>);
-    ax0 = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
-    ay0 = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
-    az0 = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
-    ax1 = flighthq._internal._StaticIndex.readArray(__destructure0, 3.0);
-    ay1 = flighthq._internal._StaticIndex.readArray(__destructure0, 4.0);
-    az1 = flighthq._internal._StaticIndex.readArray(__destructure0, 5.0);
-    ax2 = flighthq._internal._StaticIndex.readArray(__destructure0, 6.0);
-    ay2 = flighthq._internal._StaticIndex.readArray(__destructure0, 7.0);
-    az2 = flighthq._internal._StaticIndex.readArray(__destructure0, 8.0);
+    qx = obb.orientationX;
+    qy = obb.orientationY;
+    qz = obb.orientationZ;
+    qw = obb.orientationW;
+    xx = (qx * qx);
+    yy = (qy * qy);
+    zz = (qz * qz);
+    xy = (qx * qy);
+    xz = (qx * qz);
+    yz = (qy * qz);
+    wx = (qw * qx);
+    wy = (qw * qy);
+    wz = (qw * qz);
+    ax0 = (1.0 - (2.0 * (yy + zz)));
+    ay0 = (2.0 * (xy + wz));
+    az0 = (2.0 * (xz - wy));
+    ax1 = (2.0 * (xy - wz));
+    ay1 = (1.0 - (2.0 * (xx + zz)));
+    az1 = (2.0 * (yz + wx));
+    ax2 = (2.0 * (xz + wy));
+    ay2 = (2.0 * (yz - wx));
+    az2 = (1.0 - (2.0 * (xx + yy)));
     dx = (px - cx);
     dy = (py - cy);
     dz = (pz - cz);
@@ -85,7 +109,19 @@ class Obb {
     var hx:Float = cast _Runtime.UNDEFINED;
     var hy:Float = cast _Runtime.UNDEFINED;
     var hz:Float = cast _Runtime.UNDEFINED;
-    var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
+    var qx:Float = cast _Runtime.UNDEFINED;
+    var qy:Float = cast _Runtime.UNDEFINED;
+    var qz:Float = cast _Runtime.UNDEFINED;
+    var qw:Float = cast _Runtime.UNDEFINED;
+    var xx:Float = cast _Runtime.UNDEFINED;
+    var yy:Float = cast _Runtime.UNDEFINED;
+    var zz:Float = cast _Runtime.UNDEFINED;
+    var xy:Float = cast _Runtime.UNDEFINED;
+    var xz:Float = cast _Runtime.UNDEFINED;
+    var yz:Float = cast _Runtime.UNDEFINED;
+    var wx:Float = cast _Runtime.UNDEFINED;
+    var wy:Float = cast _Runtime.UNDEFINED;
+    var wz:Float = cast _Runtime.UNDEFINED;
     var ax0:Float = cast _Runtime.UNDEFINED;
     var ay0:Float = cast _Runtime.UNDEFINED;
     var az0:Float = cast _Runtime.UNDEFINED;
@@ -95,9 +131,12 @@ class Obb {
     var ax2:Float = cast _Runtime.UNDEFINED;
     var ay2:Float = cast _Runtime.UNDEFINED;
     var az2:Float = cast _Runtime.UNDEFINED;
-    var origins:Array<Float> = cast _Runtime.UNDEFINED;
-    var dirs:Array<Float> = cast _Runtime.UNDEFINED;
-    var halfExts:Array<Float> = cast _Runtime.UNDEFINED;
+    var origin0:Float = cast _Runtime.UNDEFINED;
+    var origin1:Float = cast _Runtime.UNDEFINED;
+    var origin2:Float = cast _Runtime.UNDEFINED;
+    var direction0:Float = cast _Runtime.UNDEFINED;
+    var direction1:Float = cast _Runtime.UNDEFINED;
+    var direction2:Float = cast _Runtime.UNDEFINED;
     var tMin:Float = cast _Runtime.UNDEFINED;
     var tMax:Float = cast _Runtime.UNDEFINED;
     ox = ((cast ray.origin : { var x:Float; }).x - obb.centerX);
@@ -106,48 +145,85 @@ class Obb {
     dx = (cast ray.direction : { var x:Float; }).x;
     dy = (cast ray.direction : { var y:Float; }).y;
     dz = (cast ray.direction : { var z:Float; }).z;
+    if ((cast _Runtime.strictEquals((((dx * dx) + (dy * dy)) + (dz * dz)), 0.0) : Bool)) { return cast -1.0; }
     hx = obb.halfExtentX;
     hy = obb.halfExtentY;
     hz = obb.halfExtentZ;
-    __destructure1 = (cast Obb.obbLocalAxes__obb(({ final __callArgument2:Dynamic = obb; __callArgument2; })) : Array<Float>);
-    ax0 = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
-    ay0 = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
-    az0 = flighthq._internal._StaticIndex.readArray(__destructure1, 2.0);
-    ax1 = flighthq._internal._StaticIndex.readArray(__destructure1, 3.0);
-    ay1 = flighthq._internal._StaticIndex.readArray(__destructure1, 4.0);
-    az1 = flighthq._internal._StaticIndex.readArray(__destructure1, 5.0);
-    ax2 = flighthq._internal._StaticIndex.readArray(__destructure1, 6.0);
-    ay2 = flighthq._internal._StaticIndex.readArray(__destructure1, 7.0);
-    az2 = flighthq._internal._StaticIndex.readArray(__destructure1, 8.0);
-    origins = (cast cast ([(((ox * ax0) + (oy * ay0)) + (oz * az0)), (((ox * ax1) + (oy * ay1)) + (oz * az1)), (((ox * ax2) + (oy * ay2)) + (oz * az2))] : Array<Dynamic>));
-    dirs = (cast cast ([(((dx * ax0) + (dy * ay0)) + (dz * az0)), (((dx * ax1) + (dy * ay1)) + (dz * az1)), (((dx * ax2) + (dy * ay2)) + (dz * az2))] : Array<Dynamic>));
-    halfExts = (cast cast ([hx, hy, hz] : Array<Dynamic>));
+    qx = obb.orientationX;
+    qy = obb.orientationY;
+    qz = obb.orientationZ;
+    qw = obb.orientationW;
+    xx = (qx * qx);
+    yy = (qy * qy);
+    zz = (qz * qz);
+    xy = (qx * qy);
+    xz = (qx * qz);
+    yz = (qy * qz);
+    wx = (qw * qx);
+    wy = (qw * qy);
+    wz = (qw * qz);
+    ax0 = (1.0 - (2.0 * (yy + zz)));
+    ay0 = (2.0 * (xy + wz));
+    az0 = (2.0 * (xz - wy));
+    ax1 = (2.0 * (xy - wz));
+    ay1 = (1.0 - (2.0 * (xx + zz)));
+    az1 = (2.0 * (yz + wx));
+    ax2 = (2.0 * (xz + wy));
+    ay2 = (2.0 * (yz - wx));
+    az2 = (1.0 - (2.0 * (xx + yy)));
+    origin0 = (((ox * ax0) + (oy * ay0)) + (oz * az0));
+    origin1 = (((ox * ax1) + (oy * ay1)) + (oz * az1));
+    origin2 = (((ox * ax2) + (oy * ay2)) + (oz * az2));
+    direction0 = (((dx * ax0) + (dy * ay0)) + (dz * az0));
+    direction1 = (((dx * ax1) + (dy * ay1)) + (dz * az1));
+    direction2 = (((dx * ax2) + (dy * ay2)) + (dz * az2));
     tMin = 0.0;
     tMax = HxMath.POSITIVE_INFINITY;
-    {
-      var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast 3.0 : Float)) : Bool)) {
-        var o:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast origins : Array<Float>), (cast i : Float));
-        var d:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirs : Array<Float>), (cast i : Float));
-        var h:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast halfExts : Array<Float>), (cast i : Float));
-        if ((cast ((cast HxMath.abs(d) : Float) > (cast 1e-10 : Float)) : Bool)) {
-          var invD:Float = (1.0 / d);
-          var t1:Float = ((-h - o) * invD);
-          var t2:Float = ((h - o) * invD);
-          if ((cast ((cast t1 : Float) > (cast t2 : Float)) : Bool)) {
-            var tmp:Float = t1;
-            (t1 = cast (t2 : Dynamic));
-            (t2 = cast (tmp : Dynamic));
-          }
-          (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
-          (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
-          if ((cast ((cast tMin : Float) > (cast tMax : Float)) : Bool)) { return cast -1.0; }
-        } else { if ((cast ((cast ((cast o : Float) < (cast -h : Float)) : Bool) || (cast ((cast o : Float) > (cast h : Float)) : Bool)) : Bool)) {
-          return cast -1.0;
-        } }
-        i++;
+    if ((cast !_Runtime.strictEquals(direction0, 0.0) : Bool)) {
+      var invD:Float = (1.0 / direction0);
+      var t1:Float = ((-hx - origin0) * invD);
+      var t2:Float = ((hx - origin0) * invD);
+      if ((cast ((cast t1 : Float) > (cast t2 : Float)) : Bool)) {
+        var swap:Float = t1;
+        (t1 = cast (t2 : Dynamic));
+        (t2 = cast (swap : Dynamic));
       }
-    }
+      (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
+      (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
+      if ((cast ((cast tMin : Float) > (cast tMax : Float)) : Bool)) { return cast -1.0; }
+    } else { if ((cast ((cast ((cast origin0 : Float) < (cast -hx : Float)) : Bool) || (cast ((cast origin0 : Float) > (cast hx : Float)) : Bool)) : Bool)) {
+      return cast -1.0;
+    } }
+    if ((cast !_Runtime.strictEquals(direction1, 0.0) : Bool)) {
+      var invD:Float = (1.0 / direction1);
+      var t1:Float = ((-hy - origin1) * invD);
+      var t2:Float = ((hy - origin1) * invD);
+      if ((cast ((cast t1 : Float) > (cast t2 : Float)) : Bool)) {
+        var swap:Float = t1;
+        (t1 = cast (t2 : Dynamic));
+        (t2 = cast (swap : Dynamic));
+      }
+      (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
+      (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
+      if ((cast ((cast tMin : Float) > (cast tMax : Float)) : Bool)) { return cast -1.0; }
+    } else { if ((cast ((cast ((cast origin1 : Float) < (cast -hy : Float)) : Bool) || (cast ((cast origin1 : Float) > (cast hy : Float)) : Bool)) : Bool)) {
+      return cast -1.0;
+    } }
+    if ((cast !_Runtime.strictEquals(direction2, 0.0) : Bool)) {
+      var invD:Float = (1.0 / direction2);
+      var t1:Float = ((-hz - origin2) * invD);
+      var t2:Float = ((hz - origin2) * invD);
+      if ((cast ((cast t1 : Float) > (cast t2 : Float)) : Bool)) {
+        var swap:Float = t1;
+        (t1 = cast (t2 : Dynamic));
+        (t2 = cast (swap : Dynamic));
+      }
+      (tMin = cast (HxMath.max(tMin, t1) : Dynamic));
+      (tMax = cast (HxMath.min(tMax, t2) : Dynamic));
+      if ((cast ((cast tMin : Float) > (cast tMax : Float)) : Bool)) { return cast -1.0; }
+    } else { if ((cast ((cast ((cast origin2 : Float) < (cast -hz : Float)) : Bool) || (cast ((cast origin2 : Float) > (cast hz : Float)) : Bool)) : Bool)) {
+      return cast -1.0;
+    } }
     return cast tMin;
     return cast null;
   }
@@ -159,7 +235,19 @@ class Obb {
     var ahx:Float = cast _Runtime.UNDEFINED;
     var ahy:Float = cast _Runtime.UNDEFINED;
     var ahz:Float = cast _Runtime.UNDEFINED;
-    var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
+    var qx:Float = cast _Runtime.UNDEFINED;
+    var qy:Float = cast _Runtime.UNDEFINED;
+    var qz:Float = cast _Runtime.UNDEFINED;
+    var qw:Float = cast _Runtime.UNDEFINED;
+    var xx:Float = cast _Runtime.UNDEFINED;
+    var yy:Float = cast _Runtime.UNDEFINED;
+    var zz:Float = cast _Runtime.UNDEFINED;
+    var xy:Float = cast _Runtime.UNDEFINED;
+    var xz:Float = cast _Runtime.UNDEFINED;
+    var yz:Float = cast _Runtime.UNDEFINED;
+    var wx:Float = cast _Runtime.UNDEFINED;
+    var wy:Float = cast _Runtime.UNDEFINED;
+    var wz:Float = cast _Runtime.UNDEFINED;
     var ax0:Float = cast _Runtime.UNDEFINED;
     var ay0:Float = cast _Runtime.UNDEFINED;
     var az0:Float = cast _Runtime.UNDEFINED;
@@ -172,22 +260,35 @@ class Obb {
     var tx:Float = cast _Runtime.UNDEFINED;
     var ty:Float = cast _Runtime.UNDEFINED;
     var tz:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast ((cast ((cast (cast aabb.min : { var x:Float; }).x : Float) > (cast (cast aabb.max : { var x:Float; }).x : Float)) : Bool) || (cast ((cast (cast aabb.min : { var y:Float; }).y : Float) > (cast (cast aabb.max : { var y:Float; }).y : Float)) : Bool)) : Bool) || (cast ((cast (cast aabb.min : { var z:Float; }).z : Float) > (cast (cast aabb.max : { var z:Float; }).z : Float)) : Bool)) : Bool)) { return cast false; }
     acx = (((cast aabb.min : { var x:Float; }).x + (cast aabb.max : { var x:Float; }).x) * 0.5);
     acy = (((cast aabb.min : { var y:Float; }).y + (cast aabb.max : { var y:Float; }).y) * 0.5);
     acz = (((cast aabb.min : { var z:Float; }).z + (cast aabb.max : { var z:Float; }).z) * 0.5);
     ahx = (((cast aabb.max : { var x:Float; }).x - (cast aabb.min : { var x:Float; }).x) * 0.5);
     ahy = (((cast aabb.max : { var y:Float; }).y - (cast aabb.min : { var y:Float; }).y) * 0.5);
     ahz = (((cast aabb.max : { var z:Float; }).z - (cast aabb.min : { var z:Float; }).z) * 0.5);
-    __destructure2 = (cast Obb.obbLocalAxes__obb(({ final __callArgument3:Dynamic = obb; __callArgument3; })) : Array<Float>);
-    ax0 = flighthq._internal._StaticIndex.readArray(__destructure2, 0.0);
-    ay0 = flighthq._internal._StaticIndex.readArray(__destructure2, 1.0);
-    az0 = flighthq._internal._StaticIndex.readArray(__destructure2, 2.0);
-    ax1 = flighthq._internal._StaticIndex.readArray(__destructure2, 3.0);
-    ay1 = flighthq._internal._StaticIndex.readArray(__destructure2, 4.0);
-    az1 = flighthq._internal._StaticIndex.readArray(__destructure2, 5.0);
-    ax2 = flighthq._internal._StaticIndex.readArray(__destructure2, 6.0);
-    ay2 = flighthq._internal._StaticIndex.readArray(__destructure2, 7.0);
-    az2 = flighthq._internal._StaticIndex.readArray(__destructure2, 8.0);
+    qx = obb.orientationX;
+    qy = obb.orientationY;
+    qz = obb.orientationZ;
+    qw = obb.orientationW;
+    xx = (qx * qx);
+    yy = (qy * qy);
+    zz = (qz * qz);
+    xy = (qx * qy);
+    xz = (qx * qz);
+    yz = (qy * qz);
+    wx = (qw * qx);
+    wy = (qw * qy);
+    wz = (qw * qz);
+    ax0 = (1.0 - (2.0 * (yy + zz)));
+    ay0 = (2.0 * (xy + wz));
+    az0 = (2.0 * (xz - wy));
+    ax1 = (2.0 * (xy - wz));
+    ay1 = (1.0 - (2.0 * (xx + zz)));
+    az1 = (2.0 * (yz + wx));
+    ax2 = (2.0 * (xz + wy));
+    ay2 = (2.0 * (yz - wx));
+    az2 = (1.0 - (2.0 * (xx + yy)));
     tx = (acx - obb.centerX);
     ty = (acy - obb.centerY);
     tz = (acz - obb.centerZ);
@@ -196,7 +297,19 @@ class Obb {
   }
 
   public static function isObbIntersectingObb(a:ObbLike, b:ObbLike):Bool {
-    var __destructure3:Dynamic = cast _Runtime.UNDEFINED;
+    var aqx:Float = cast _Runtime.UNDEFINED;
+    var aqy:Float = cast _Runtime.UNDEFINED;
+    var aqz:Float = cast _Runtime.UNDEFINED;
+    var aqw:Float = cast _Runtime.UNDEFINED;
+    var axx:Float = cast _Runtime.UNDEFINED;
+    var ayy:Float = cast _Runtime.UNDEFINED;
+    var azz:Float = cast _Runtime.UNDEFINED;
+    var axy:Float = cast _Runtime.UNDEFINED;
+    var axz:Float = cast _Runtime.UNDEFINED;
+    var ayz:Float = cast _Runtime.UNDEFINED;
+    var awx:Float = cast _Runtime.UNDEFINED;
+    var awy:Float = cast _Runtime.UNDEFINED;
+    var awz:Float = cast _Runtime.UNDEFINED;
     var ax0:Float = cast _Runtime.UNDEFINED;
     var ay0:Float = cast _Runtime.UNDEFINED;
     var az0:Float = cast _Runtime.UNDEFINED;
@@ -206,7 +319,19 @@ class Obb {
     var ax2:Float = cast _Runtime.UNDEFINED;
     var ay2:Float = cast _Runtime.UNDEFINED;
     var az2:Float = cast _Runtime.UNDEFINED;
-    var __destructure4:Dynamic = cast _Runtime.UNDEFINED;
+    var bqx:Float = cast _Runtime.UNDEFINED;
+    var bqy:Float = cast _Runtime.UNDEFINED;
+    var bqz:Float = cast _Runtime.UNDEFINED;
+    var bqw:Float = cast _Runtime.UNDEFINED;
+    var bxx:Float = cast _Runtime.UNDEFINED;
+    var byy:Float = cast _Runtime.UNDEFINED;
+    var bzz:Float = cast _Runtime.UNDEFINED;
+    var bxy:Float = cast _Runtime.UNDEFINED;
+    var bxz:Float = cast _Runtime.UNDEFINED;
+    var byz:Float = cast _Runtime.UNDEFINED;
+    var bwx:Float = cast _Runtime.UNDEFINED;
+    var bwy:Float = cast _Runtime.UNDEFINED;
+    var bwz:Float = cast _Runtime.UNDEFINED;
     var bx0:Float = cast _Runtime.UNDEFINED;
     var by0:Float = cast _Runtime.UNDEFINED;
     var bz0:Float = cast _Runtime.UNDEFINED;
@@ -219,26 +344,50 @@ class Obb {
     var tx:Float = cast _Runtime.UNDEFINED;
     var ty:Float = cast _Runtime.UNDEFINED;
     var tz:Float = cast _Runtime.UNDEFINED;
-    __destructure3 = (cast Obb.obbLocalAxes__obb(({ final __callArgument4:Dynamic = a; __callArgument4; })) : Array<Float>);
-    ax0 = flighthq._internal._StaticIndex.readArray(__destructure3, 0.0);
-    ay0 = flighthq._internal._StaticIndex.readArray(__destructure3, 1.0);
-    az0 = flighthq._internal._StaticIndex.readArray(__destructure3, 2.0);
-    ax1 = flighthq._internal._StaticIndex.readArray(__destructure3, 3.0);
-    ay1 = flighthq._internal._StaticIndex.readArray(__destructure3, 4.0);
-    az1 = flighthq._internal._StaticIndex.readArray(__destructure3, 5.0);
-    ax2 = flighthq._internal._StaticIndex.readArray(__destructure3, 6.0);
-    ay2 = flighthq._internal._StaticIndex.readArray(__destructure3, 7.0);
-    az2 = flighthq._internal._StaticIndex.readArray(__destructure3, 8.0);
-    __destructure4 = (cast Obb.obbLocalAxes__obb(({ final __callArgument5:Dynamic = b; __callArgument5; })) : Array<Float>);
-    bx0 = flighthq._internal._StaticIndex.readArray(__destructure4, 0.0);
-    by0 = flighthq._internal._StaticIndex.readArray(__destructure4, 1.0);
-    bz0 = flighthq._internal._StaticIndex.readArray(__destructure4, 2.0);
-    bx1 = flighthq._internal._StaticIndex.readArray(__destructure4, 3.0);
-    by1 = flighthq._internal._StaticIndex.readArray(__destructure4, 4.0);
-    bz1 = flighthq._internal._StaticIndex.readArray(__destructure4, 5.0);
-    bx2 = flighthq._internal._StaticIndex.readArray(__destructure4, 6.0);
-    by2 = flighthq._internal._StaticIndex.readArray(__destructure4, 7.0);
-    bz2 = flighthq._internal._StaticIndex.readArray(__destructure4, 8.0);
+    aqx = a.orientationX;
+    aqy = a.orientationY;
+    aqz = a.orientationZ;
+    aqw = a.orientationW;
+    axx = (aqx * aqx);
+    ayy = (aqy * aqy);
+    azz = (aqz * aqz);
+    axy = (aqx * aqy);
+    axz = (aqx * aqz);
+    ayz = (aqy * aqz);
+    awx = (aqw * aqx);
+    awy = (aqw * aqy);
+    awz = (aqw * aqz);
+    ax0 = (1.0 - (2.0 * (ayy + azz)));
+    ay0 = (2.0 * (axy + awz));
+    az0 = (2.0 * (axz - awy));
+    ax1 = (2.0 * (axy - awz));
+    ay1 = (1.0 - (2.0 * (axx + azz)));
+    az1 = (2.0 * (ayz + awx));
+    ax2 = (2.0 * (axz + awy));
+    ay2 = (2.0 * (ayz - awx));
+    az2 = (1.0 - (2.0 * (axx + ayy)));
+    bqx = b.orientationX;
+    bqy = b.orientationY;
+    bqz = b.orientationZ;
+    bqw = b.orientationW;
+    bxx = (bqx * bqx);
+    byy = (bqy * bqy);
+    bzz = (bqz * bqz);
+    bxy = (bqx * bqy);
+    bxz = (bqx * bqz);
+    byz = (bqy * bqz);
+    bwx = (bqw * bqx);
+    bwy = (bqw * bqy);
+    bwz = (bqw * bqz);
+    bx0 = (1.0 - (2.0 * (byy + bzz)));
+    by0 = (2.0 * (bxy + bwz));
+    bz0 = (2.0 * (bxz - bwy));
+    bx1 = (2.0 * (bxy - bwz));
+    by1 = (1.0 - (2.0 * (bxx + bzz)));
+    bz1 = (2.0 * (byz + bwx));
+    bx2 = (2.0 * (bxz + bwy));
+    by2 = (2.0 * (byz - bwx));
+    bz2 = (1.0 - (2.0 * (bxx + byy)));
     tx = (b.centerX - a.centerX);
     ty = (b.centerY - a.centerY);
     tz = (b.centerZ - a.centerZ);
@@ -321,24 +470,24 @@ class Obb {
     if ((cast ((cast trace : Float) > (cast 0.0 : Float)) : Bool)) {
       var s:Float = _Runtime.divideNumbers(0.5, HxMath.sqrt((trace + 1.0)));
       (mqw = cast ((0.25 / s) : Dynamic));
-      (mqx = cast (((r12 - r21) * s) : Dynamic));
-      (mqy = cast (((r20 - r02) * s) : Dynamic));
-      (mqz = cast (((r01 - r10) * s) : Dynamic));
+      (mqx = cast (((r21 - r12) * s) : Dynamic));
+      (mqy = cast (((r02 - r20) * s) : Dynamic));
+      (mqz = cast (((r10 - r01) * s) : Dynamic));
     } else { if ((cast ((cast ((cast r00 : Float) > (cast r11 : Float)) : Bool) && (cast ((cast r00 : Float) > (cast r22 : Float)) : Bool)) : Bool)) {
       var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + r00) - r11) - r22)));
-      (mqw = cast (((r12 - r21) / s) : Dynamic));
+      (mqw = cast (((r21 - r12) / s) : Dynamic));
       (mqx = cast ((0.25 * s) : Dynamic));
       (mqy = cast (((r10 + r01) / s) : Dynamic));
       (mqz = cast (((r20 + r02) / s) : Dynamic));
     } else { if ((cast ((cast r11 : Float) > (cast r22 : Float)) : Bool)) {
       var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + r11) - r00) - r22)));
-      (mqw = cast (((r20 - r02) / s) : Dynamic));
+      (mqw = cast (((r02 - r20) / s) : Dynamic));
       (mqx = cast (((r10 + r01) / s) : Dynamic));
       (mqy = cast ((0.25 * s) : Dynamic));
       (mqz = cast (((r21 + r12) / s) : Dynamic));
     } else {
       var s:Float = _Runtime.multiplyNumbers(2.0, HxMath.sqrt((((1.0 + r22) - r00) - r11)));
-      (mqw = cast (((r01 - r10) / s) : Dynamic));
+      (mqw = cast (((r10 - r01) / s) : Dynamic));
       (mqx = cast (((r20 + r02) / s) : Dynamic));
       (mqy = cast (((r21 + r12) / s) : Dynamic));
       (mqz = cast ((0.25 * s) : Dynamic));
@@ -353,37 +502,6 @@ class Obb {
     (out.orientationY = cast (((((mqw * oqy) - (mqx * oqz)) + (mqy * oqw)) + (mqz * oqx)) : Float));
     (out.orientationZ = cast (((((mqw * oqz) + (mqx * oqy)) - (mqy * oqx)) + (mqz * oqw)) : Float));
     (out.orientationW = cast (((((mqw * oqw) - (mqx * oqx)) - (mqy * oqy)) - (mqz * oqz)) : Float));
-  }
-
-  public static function obbLocalAxes__obb(obb:ObbLike):Array<Float> {
-    var qx:Float = cast _Runtime.UNDEFINED;
-    var qy:Float = cast _Runtime.UNDEFINED;
-    var qz:Float = cast _Runtime.UNDEFINED;
-    var qw:Float = cast _Runtime.UNDEFINED;
-    var xx:Float = cast _Runtime.UNDEFINED;
-    var yy:Float = cast _Runtime.UNDEFINED;
-    var zz:Float = cast _Runtime.UNDEFINED;
-    var xy:Float = cast _Runtime.UNDEFINED;
-    var xz:Float = cast _Runtime.UNDEFINED;
-    var yz:Float = cast _Runtime.UNDEFINED;
-    var wx:Float = cast _Runtime.UNDEFINED;
-    var wy:Float = cast _Runtime.UNDEFINED;
-    var wz:Float = cast _Runtime.UNDEFINED;
-    qx = obb.orientationX;
-    qy = obb.orientationY;
-    qz = obb.orientationZ;
-    qw = obb.orientationW;
-    xx = (qx * qx);
-    yy = (qy * qy);
-    zz = (qz * qz);
-    xy = (qx * qy);
-    xz = (qx * qz);
-    yz = (qy * qz);
-    wx = (qw * qx);
-    wy = (qw * qy);
-    wz = (qw * qz);
-    return cast cast ([(1.0 - (2.0 * (yy + zz))), (2.0 * (xy + wz)), (2.0 * (xz - wy)), (2.0 * (xy - wz)), (1.0 - (2.0 * (xx + zz))), (2.0 * (yz + wx)), (2.0 * (xz + wy)), (2.0 * (yz - wx)), (1.0 - (2.0 * (xx + yy)))] : Array<Dynamic>);
-    return cast null;
   }
 
   private static function obbSatSeparated__obb(__flightArguments:Array<Dynamic>):Bool {
@@ -414,35 +532,99 @@ class Obb {
     var hbx:Float = cast flighthq._internal._StaticIndex.readArray(__flightArguments, 24);
     var hby:Float = cast flighthq._internal._StaticIndex.readArray(__flightArguments, 25);
     var hbz:Float = cast flighthq._internal._StaticIndex.readArray(__flightArguments, 26);
-    var onAxis:Float->Float->Float->Bool = cast _Runtime.UNDEFINED;
-    onAxis = (cast function(lx:Float, ly:Float, lz:Float):Bool {
-      var lenSq:Float = cast _Runtime.UNDEFINED;
-      var d:Float = cast _Runtime.UNDEFINED;
-      var pA:Float = cast _Runtime.UNDEFINED;
-      var pB:Float = cast _Runtime.UNDEFINED;
-      lenSq = (((lx * lx) + (ly * ly)) + (lz * lz));
-      if ((cast ((cast lenSq : Float) < (cast 1e-10 : Float)) : Bool)) { return cast false; }
-      d = HxMath.abs((((tx * lx) + (ty * ly)) + (tz * lz)));
-      pA = ((_Runtime.multiplyNumbers(HxMath.abs((((ax0 * lx) + (ay0 * ly)) + (az0 * lz))), hax) + _Runtime.multiplyNumbers(HxMath.abs((((ax1 * lx) + (ay1 * ly)) + (az1 * lz))), hay)) + _Runtime.multiplyNumbers(HxMath.abs((((ax2 * lx) + (ay2 * ly)) + (az2 * lz))), haz));
-      pB = ((_Runtime.multiplyNumbers(HxMath.abs((((bx0 * lx) + (by0 * ly)) + (bz0 * lz))), hbx) + _Runtime.multiplyNumbers(HxMath.abs((((bx1 * lx) + (by1 * ly)) + (bz1 * lz))), hby)) + _Runtime.multiplyNumbers(HxMath.abs((((bx2 * lx) + (by2 * ly)) + (bz2 * lz))), hbz));
-      return cast ((cast d : Float) > (cast (pA + pB) : Float));
-      return cast _Runtime.UNDEFINED;
-    });
-    if ((cast (cast onAxis((cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float)) : Bool) : Bool)) { return cast true; }
-    if ((cast (cast onAxis((cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float)) : Bool) : Bool)) { return cast true; }
-    if ((cast (cast onAxis((cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool) : Bool)) { return cast true; }
-    if ((cast (cast onAxis((cast bx0 : Float), (cast by0 : Float), (cast bz0 : Float)) : Bool) : Bool)) { return cast true; }
-    if ((cast (cast onAxis((cast bx1 : Float), (cast by1 : Float), (cast bz1 : Float)) : Bool) : Bool)) { return cast true; }
-    if ((cast (cast onAxis((cast bx2 : Float), (cast by2 : Float), (cast bz2 : Float)) : Bool) : Bool)) { return cast true; }
-    if ((cast (cast onAxis((cast ((ay0 * bz0) - (az0 * by0)) : Float), (cast ((az0 * bx0) - (ax0 * bz0)) : Float), (cast ((ax0 * by0) - (ay0 * bx0)) : Float)) : Bool) : Bool)) { return cast true; }
-    if ((cast (cast onAxis((cast ((ay0 * bz1) - (az0 * by1)) : Float), (cast ((az0 * bx1) - (ax0 * bz1)) : Float), (cast ((ax0 * by1) - (ay0 * bx1)) : Float)) : Bool) : Bool)) { return cast true; }
-    if ((cast (cast onAxis((cast ((ay0 * bz2) - (az0 * by2)) : Float), (cast ((az0 * bx2) - (ax0 * bz2)) : Float), (cast ((ax0 * by2) - (ay0 * bx2)) : Float)) : Bool) : Bool)) { return cast true; }
-    if ((cast (cast onAxis((cast ((ay1 * bz0) - (az1 * by0)) : Float), (cast ((az1 * bx0) - (ax1 * bz0)) : Float), (cast ((ax1 * by0) - (ay1 * bx0)) : Float)) : Bool) : Bool)) { return cast true; }
-    if ((cast (cast onAxis((cast ((ay1 * bz1) - (az1 * by1)) : Float), (cast ((az1 * bx1) - (ax1 * bz1)) : Float), (cast ((ax1 * by1) - (ay1 * bx1)) : Float)) : Bool) : Bool)) { return cast true; }
-    if ((cast (cast onAxis((cast ((ay1 * bz2) - (az1 * by2)) : Float), (cast ((az1 * bx2) - (ax1 * bz2)) : Float), (cast ((ax1 * by2) - (ay1 * bx2)) : Float)) : Bool) : Bool)) { return cast true; }
-    if ((cast (cast onAxis((cast ((ay2 * bz0) - (az2 * by0)) : Float), (cast ((az2 * bx0) - (ax2 * bz0)) : Float), (cast ((ax2 * by0) - (ay2 * bx0)) : Float)) : Bool) : Bool)) { return cast true; }
-    if ((cast (cast onAxis((cast ((ay2 * bz1) - (az2 * by1)) : Float), (cast ((az2 * bx1) - (ax2 * bz1)) : Float), (cast ((ax2 * by1) - (ay2 * bx1)) : Float)) : Bool) : Bool)) { return cast true; }
-    if ((cast (cast onAxis((cast ((ay2 * bz2) - (az2 * by2)) : Float), (cast ((az2 * bx2) - (ax2 * bz2)) : Float), (cast ((ax2 * by2) - (ay2 * bx2)) : Float)) : Bool) : Bool)) { return cast true; }
+    {
+      var axis:Float = 0.0;
+      while ((cast ((cast axis : Float) < (cast 15.0 : Float)) : Bool)) {
+        var lx:Float = cast _Runtime.UNDEFINED;
+        var ly:Float = cast _Runtime.UNDEFINED;
+        var lz:Float = cast _Runtime.UNDEFINED;
+        {
+          var __switchValue = axis;
+          if (__switchValue == 0.0) {
+            (lx = cast (ax0 : Dynamic));
+            (ly = cast (ay0 : Dynamic));
+            (lz = cast (az0 : Dynamic));
+          }
+          else if (__switchValue == 1.0) {
+            (lx = cast (ax1 : Dynamic));
+            (ly = cast (ay1 : Dynamic));
+            (lz = cast (az1 : Dynamic));
+          }
+          else if (__switchValue == 2.0) {
+            (lx = cast (ax2 : Dynamic));
+            (ly = cast (ay2 : Dynamic));
+            (lz = cast (az2 : Dynamic));
+          }
+          else if (__switchValue == 3.0) {
+            (lx = cast (bx0 : Dynamic));
+            (ly = cast (by0 : Dynamic));
+            (lz = cast (bz0 : Dynamic));
+          }
+          else if (__switchValue == 4.0) {
+            (lx = cast (bx1 : Dynamic));
+            (ly = cast (by1 : Dynamic));
+            (lz = cast (bz1 : Dynamic));
+          }
+          else if (__switchValue == 5.0) {
+            (lx = cast (bx2 : Dynamic));
+            (ly = cast (by2 : Dynamic));
+            (lz = cast (bz2 : Dynamic));
+          }
+          else if (__switchValue == 6.0) {
+            (lx = cast (((ay0 * bz0) - (az0 * by0)) : Dynamic));
+            (ly = cast (((az0 * bx0) - (ax0 * bz0)) : Dynamic));
+            (lz = cast (((ax0 * by0) - (ay0 * bx0)) : Dynamic));
+          }
+          else if (__switchValue == 7.0) {
+            (lx = cast (((ay0 * bz1) - (az0 * by1)) : Dynamic));
+            (ly = cast (((az0 * bx1) - (ax0 * bz1)) : Dynamic));
+            (lz = cast (((ax0 * by1) - (ay0 * bx1)) : Dynamic));
+          }
+          else if (__switchValue == 8.0) {
+            (lx = cast (((ay0 * bz2) - (az0 * by2)) : Dynamic));
+            (ly = cast (((az0 * bx2) - (ax0 * bz2)) : Dynamic));
+            (lz = cast (((ax0 * by2) - (ay0 * bx2)) : Dynamic));
+          }
+          else if (__switchValue == 9.0) {
+            (lx = cast (((ay1 * bz0) - (az1 * by0)) : Dynamic));
+            (ly = cast (((az1 * bx0) - (ax1 * bz0)) : Dynamic));
+            (lz = cast (((ax1 * by0) - (ay1 * bx0)) : Dynamic));
+          }
+          else if (__switchValue == 10.0) {
+            (lx = cast (((ay1 * bz1) - (az1 * by1)) : Dynamic));
+            (ly = cast (((az1 * bx1) - (ax1 * bz1)) : Dynamic));
+            (lz = cast (((ax1 * by1) - (ay1 * bx1)) : Dynamic));
+          }
+          else if (__switchValue == 11.0) {
+            (lx = cast (((ay1 * bz2) - (az1 * by2)) : Dynamic));
+            (ly = cast (((az1 * bx2) - (ax1 * bz2)) : Dynamic));
+            (lz = cast (((ax1 * by2) - (ay1 * bx2)) : Dynamic));
+          }
+          else if (__switchValue == 12.0) {
+            (lx = cast (((ay2 * bz0) - (az2 * by0)) : Dynamic));
+            (ly = cast (((az2 * bx0) - (ax2 * bz0)) : Dynamic));
+            (lz = cast (((ax2 * by0) - (ay2 * bx0)) : Dynamic));
+          }
+          else if (__switchValue == 13.0) {
+            (lx = cast (((ay2 * bz1) - (az2 * by1)) : Dynamic));
+            (ly = cast (((az2 * bx1) - (ax2 * bz1)) : Dynamic));
+            (lz = cast (((ax2 * by1) - (ay2 * bx1)) : Dynamic));
+          }
+          else  {
+            (lx = cast (((ay2 * bz2) - (az2 * by2)) : Dynamic));
+            (ly = cast (((az2 * bx2) - (ax2 * bz2)) : Dynamic));
+            (lz = cast (((ax2 * by2) - (ay2 * bx2)) : Dynamic));
+          }
+        }
+        var lenSq:Float = (((lx * lx) + (ly * ly)) + (lz * lz));
+        if ((cast ((cast lenSq : Float) < (cast 1e-10 : Float)) : Bool)) { axis++; continue; }
+        var d:Float = HxMath.abs((((tx * lx) + (ty * ly)) + (tz * lz)));
+        var pA:Float = ((_Runtime.multiplyNumbers(HxMath.abs((((ax0 * lx) + (ay0 * ly)) + (az0 * lz))), hax) + _Runtime.multiplyNumbers(HxMath.abs((((ax1 * lx) + (ay1 * ly)) + (az1 * lz))), hay)) + _Runtime.multiplyNumbers(HxMath.abs((((ax2 * lx) + (ay2 * ly)) + (az2 * lz))), haz));
+        var pB:Float = ((_Runtime.multiplyNumbers(HxMath.abs((((bx0 * lx) + (by0 * ly)) + (bz0 * lz))), hbx) + _Runtime.multiplyNumbers(HxMath.abs((((bx1 * lx) + (by1 * ly)) + (bz1 * lz))), hby)) + _Runtime.multiplyNumbers(HxMath.abs((((bx2 * lx) + (by2 * ly)) + (bz2 * lz))), hbz));
+        if ((cast ((cast d : Float) > (cast (pA + pB) : Float)) : Bool)) { return cast true; }
+        axis++;
+      }
+    }
     return cast false;
     return cast null;
   }

@@ -5,5 +5,6 @@ const api = compiled.flighthq.scene3dGl.GlMeshUpload;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const bindGlVertexAttribute = api.bindGlVertexAttribute;
 export const destroyGlMeshUpload = api.destroyGlMeshUpload;
 export const ensureGlMeshUpload = api.ensureGlMeshUpload;

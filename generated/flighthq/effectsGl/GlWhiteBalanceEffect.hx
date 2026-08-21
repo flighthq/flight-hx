@@ -34,7 +34,7 @@ class GlWhiteBalanceEffect {
   });
 
   public static function registerGlWhiteBalanceEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'WhiteBalanceEffect' : String), ({ final __callArgument6:Dynamic = defaultGlWhiteBalanceEffectRunner; __callArgument6; }));
+    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'WhiteBalanceEffect' : String), ({ final __callArgument6:Dynamic = defaultGlWhiteBalanceEffectRunner; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static final WHITE_BALANCE_FRAGMENT_SRC__glWhiteBalanceEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_temperature;\nuniform float u_tint;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  vec3 rgb = c.rgb;\n  rgb.r += u_temperature * 0.5;\n  rgb.b -= u_temperature * 0.5;\n  rgb.g += u_tint * 0.5;\n  o_color = vec4(clamp(rgb, 0.0, 1.0), c.a);\n}';

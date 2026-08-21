@@ -10,12 +10,16 @@ import flighthq.types.GlCompressedTextureDecoder;
 import flighthq.types.GlCompressedTextureSupport;
 import flighthq.types.GlCompressedTextureUploader;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderRegistries;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.RegistryTable.RegistryEntryState;
+import flighthq.types.RegistryTable.SlotTable;
 import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 import flighthq.types.TextureContainerLevel;
 import flighthq.types.TextureContainerSupercompression;
+import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 class GlCompressedTexture {
   @:noCompletion
@@ -204,11 +208,19 @@ class GlCompressedTexture {
   }
 
   public static function registerGlCompressedTextureDecoder(state:GlRenderState, decode:Null<GlCompressedTextureDecoder>):Void {
-    ((cast (cast getGlRenderStateRuntime(({ final __callArgument43:Dynamic = state; __callArgument43; })) : GlRenderStateRuntime) : { @:optional var compressedTextureDecoder:Null<GlCompressedTextureDecoder>; }).compressedTextureDecoder = cast (decode : Null<GlCompressedTextureDecoder>));
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var table:SlotTable<GlCompressedTextureDecoder> = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument43:Dynamic = state; __callArgument43; })) : GlRenderStateRuntime);
+    table = (cast runtime.registries : GlRenderRegistries).compressedTextureDecoder;
+    ((cast runtime.registries : GlRenderRegistries).compressedTextureDecoder = _Runtime.mergeObjects([table, { entry: ((cast _Runtime.strictEquals(decode, null) : Bool) ? (cast null : Dynamic) : (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: decode } : Dynamic)) }]));
   }
 
   public static function registerGlCompressedTextureUpload(state:GlRenderState, ?uploader:Dynamic):Void {
-    ((cast (cast getGlRenderStateRuntime(({ final __callArgument44:Dynamic = state; __callArgument44; })) : GlRenderStateRuntime) : { @:optional var compressedTextureUpload:Null<GlCompressedTextureUploader>; }).compressedTextureUpload = cast (((cast _Runtime.strictEquals(uploader, null) : Bool) ? (cast null : Dynamic) : (cast GlCompressedTexture.uploadGlCompressedImage__glCompressedTexture : Dynamic)) : Null<GlCompressedTextureUploader>));
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var table:SlotTable<GlCompressedTextureUploader> = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument44:Dynamic = state; __callArgument44; })) : GlRenderStateRuntime);
+    table = (cast runtime.registries : GlRenderRegistries).compressedTextureUpload;
+    ((cast runtime.registries : GlRenderRegistries).compressedTextureUpload = _Runtime.mergeObjects([table, { entry: ((cast _Runtime.strictEquals(uploader, null) : Bool) ? (cast null : Dynamic) : (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: GlCompressedTexture.uploadGlCompressedImage__glCompressedTexture } : Dynamic)) }]));
   }
 
   public static function uploadGlCompressedTextureContainer(gl:flighthq._internal.dom.WebGL2RenderingContext, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:GlCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Bool {

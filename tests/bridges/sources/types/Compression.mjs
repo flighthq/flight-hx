@@ -5,4 +5,5 @@ const api = compiled.flighthq.types._internal._CompressionValues;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const CompressionFraming = api.CompressionFramingValue;
 export const Compression = api.CompressionValue;

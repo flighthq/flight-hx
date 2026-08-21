@@ -33,7 +33,7 @@ class CanvasTilemap {
     var tileHeight:Float = cast _Runtime.UNDEFINED;
     var tileWidth:Float = cast _Runtime.UNDEFINED;
     var tiles:flighthq._internal._Int16Array = cast _Runtime.UNDEFINED;
-    var image:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
+    var image:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLVideoElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.HTMLCanvasElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
     var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     var regions:Array<TextureAtlasRegion> = cast _Runtime.UNDEFINED;
     var numRegions:Float = cast _Runtime.UNDEFINED;
@@ -50,7 +50,7 @@ class CanvasTilemap {
     tileWidth = __destructure0.tileWidth;
     tiles = __destructure0.tiles;
     if ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool)) { return; }
-    image = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers(({ final __callArgument0:Dynamic = state; __callArgument0; })) : CanvasTextureResolvers), ({ final __callArgument1:Dynamic = atlas.texture; __callArgument1; })) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.HTMLVideoElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
+    image = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers(({ final __callArgument0:Dynamic = state; __callArgument0; })) : CanvasTextureResolvers), ({ final __callArgument1:Dynamic = atlas.texture; __callArgument1; })) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLVideoElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.HTMLCanvasElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(image, null) : Bool)) { return; }
     if ((cast ((cast _Runtime.strictEquals(columns, 0.0) : Bool) || (cast _Runtime.strictEquals(rows, 0.0) : Bool)) : Bool)) { return; }
     _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast tilemapNode : RenderProxy2D).blendMode] : Array<Dynamic>));

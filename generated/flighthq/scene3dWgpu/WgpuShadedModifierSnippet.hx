@@ -3,33 +3,32 @@ package flighthq.scene3dWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
-import flighthq.shading.ModifierRegistry.createModifierRegistry;
-import flighthq.shading.ModifierRegistry.registerModifier;
-import flighthq.shading.ModifierRegistry.resolveModifier;
-import flighthq.types.ModifierDefinition;
+import flighthq.registry.RegistryTable.withRegistryTableEntry;
+import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.ModifierKind;
-import flighthq.types.ModifierRegistry;
+import flighthq.types.RegistryTable.KeyedTable;
+import flighthq.types.RegistryTable.RegistryEntryState;
+import flighthq.types.RegistryTable.RegistryTableEntry;
 import flighthq.types.WgpuModifierSnippet;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuScene3DRuntime;
+import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
+import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 class WgpuShadedModifierSnippet {
   @:noCompletion
   public static function registerWgpuModifierSnippet(state:WgpuRenderState, snippet:WgpuModifierSnippet):Void {
-    var runtime:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuScene3DRuntime);
-    if ((cast _Runtime.strictEquals(runtime.modifierSnippetRegistry, null) : Bool)) { (runtime.modifierSnippetRegistry = cast ((cast createModifierRegistry() : ModifierRegistry) : Null<ModifierRegistry>)); }
-    registerModifier(runtime.modifierSnippetRegistry, ({ final __callArgument1:Dynamic = snippet; __callArgument1; }));
-    runtime.modifierSnippetRevision++;
+    var registries:WgpuRenderRegistries = cast _Runtime.UNDEFINED;
+    registries = (cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries;
+    ((cast registries : WgpuRenderRegistries).modifierSnippets = (cast withRegistryTableEntry((cast (cast registries : WgpuRenderRegistries).modifierSnippets : Dynamic), (cast _Runtime.field(snippet, 'kind') : String), ({ final __callArgument1:Dynamic = snippet; __callArgument1; })) : KeyedTable<WgpuModifierSnippet>));
+    (cast registries : WgpuRenderRegistries).modifierSnippetRevision++;
   }
 
   @:noCompletion
   public static function resolveWgpuModifierSnippet(state:WgpuRenderState, kind:ModifierKind):Null<WgpuModifierSnippet> {
-    var registry:Null<ModifierRegistry> = cast _Runtime.UNDEFINED;
-    registry = (cast (cast getWgpuScene3DRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuScene3DRuntime) : { var modifierSnippetRegistry:Null<ModifierRegistry>; }).modifierSnippetRegistry;
-    if ((cast _Runtime.strictEquals(registry, null) : Bool)) { return cast null; }
-    return cast (cast resolveModifier(({ final __callArgument3:Dynamic = registry; __callArgument3; }), (cast kind : String)) : Null<WgpuModifierSnippet>);
+    var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:WgpuModifierSnippet; }>> = cast _Runtime.UNDEFINED;
+    entry = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : WgpuRenderRegistries).modifierSnippets : KeyedTable<WgpuModifierSnippet>).entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuModifierSnippet>>).get(kind));
+    return cast ((cast _Runtime.strictEquals(({ final __structural4 = entry; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:WgpuModifierSnippet; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 }

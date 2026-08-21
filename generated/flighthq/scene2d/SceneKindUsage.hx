@@ -36,7 +36,7 @@ class SceneKindUsage {
         SceneKindUsage.addScene2DUsedKind__sceneKindUsage(out.blendModes, (cast _Runtime.field(node, 'blendMode') : String));
       }
       if ((cast !_Runtime.strictEquals(_Runtime.field(node, 'material'), null) : Bool)) { SceneKindUsage.addScene2DUsedKind__sceneKindUsage(out.materialKinds, (cast (cast _Runtime.field(node, 'material') : Material).kind : String)); }
-      commands = ({ final __structural0 = (cast _Runtime.field(node, 'data') : Null<flighthq._internal._Partial<{ var commands:Array<ShapeCommandToken>; }>>); __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; });
+      commands = ({ final __structural0 = (cast _Runtime.field(node, 'data') : Null<{ @:optional var commands:Null<Array<ShapeCommandToken>>; }>); __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; });
       if ((cast _Runtime.strictEquals(commands, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       i = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {

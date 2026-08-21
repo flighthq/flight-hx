@@ -3,6 +3,7 @@ package flighthq.textMarkup;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.color.PackColor.getColorRgb;
 import flighthq.textMarkup.MarkupClassStyles as Facade_TextMarkup_flighthq_textMarkup_MarkupClassStyles;
 import flighthq.textMarkup.MarkupNamedColors as Facade_TextMarkup_flighthq_textMarkup_MarkupNamedColors;
 import flighthq.textMarkup.MarkupTagRegistry as Facade_TextMarkup_flighthq_textMarkup_MarkupTagRegistry;
@@ -115,7 +116,7 @@ class TextMarkup {
   }
 
   public static function formatMarkupColor__textMarkup(color:Float):String {
-    return cast '#' + Std.string(_Runtime.padStart(_Runtime.numberToString((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 0)) & 16777215), 16.0), 6.0, '0')) + '';
+    return cast '#' + Std.string(_Runtime.padStart(_Runtime.numberToString((cast getColorRgb((cast color : Float)) : Float), 16.0), 6.0, '0')) + '';
     return cast null;
   }
 
@@ -306,7 +307,7 @@ class TextMarkup {
 
   public static function normalizeMarkupTagResult__textMarkup(result:MarkupTagResult):MarkupTagEffect {
     if ((cast ((cast ((cast _Runtime.hasField(result, 'format') : Bool) || (cast _Runtime.hasField(result, 'breakBefore') : Bool)) : Bool) || (cast _Runtime.hasField(result, 'text') : Bool)) : Bool)) { return cast (cast result : MarkupTagEffect); }
-    return cast { format: (cast result : flighthq._internal._Partial<TextFormat>) };
+    return cast { format: (cast result : { @:optional var align:Null<TextFormatAlign>; @:optional var blockIndent:Null<Float>; @:optional var bold:Null<Bool>; @:optional var bullet:Null<Bool>; @:optional var color:Null<Float>; @:optional var font:Null<String>; @:optional var indent:Null<Float>; @:optional var italic:Null<Bool>; @:optional var kerning:Null<Bool>; @:optional var leading:Null<Float>; @:optional var leftMargin:Null<Float>; @:optional var letterSpacing:Null<Float>; @:optional var listMarker:Null<TextFormatListMarker>; @:optional var rightMargin:Null<Float>; @:optional var size:Null<Float>; @:optional var strikethrough:Null<Bool>; @:optional var tabStops:Null<Array<Float>>; @:optional var target:Null<String>; @:optional var underline:Null<Bool>; @:optional var url:Null<String>; @:optional var variations:Null<Array<FontVariation>>; }) };
     return cast null;
   }
 
@@ -358,7 +359,7 @@ class TextMarkup {
     _Runtime.callProperty(ranges, 'push', cast ([(cast createTextFormatRange(({ final __callArgument27:Dynamic = _Runtime.mergeObjects([format]); __callArgument27; }), (cast start : Float), (cast end : Float)) : TextFormatRange)] : Array<Dynamic>));
   }
 
-  public static function registerMarkupClassStyles(registry:MarkupTagRegistry, styles:flighthq._internal._Record<String, flighthq._internal._Partial<TextFormat>>):Void {
+  public static function registerMarkupClassStyles(registry:MarkupTagRegistry, styles:flighthq._internal._Record<String, { @:optional var align:Null<TextFormatAlign>; @:optional var blockIndent:Null<Float>; @:optional var bold:Null<Bool>; @:optional var bullet:Null<Bool>; @:optional var color:Null<Float>; @:optional var font:Null<String>; @:optional var indent:Null<Float>; @:optional var italic:Null<Bool>; @:optional var kerning:Null<Bool>; @:optional var leading:Null<Float>; @:optional var leftMargin:Null<Float>; @:optional var letterSpacing:Null<Float>; @:optional var listMarker:Null<TextFormatListMarker>; @:optional var rightMargin:Null<Float>; @:optional var size:Null<Float>; @:optional var strikethrough:Null<Bool>; @:optional var tabStops:Null<Array<Float>>; @:optional var target:Null<String>; @:optional var underline:Null<Bool>; @:optional var url:Null<String>; @:optional var variations:Null<Array<FontVariation>>; }>):Void {
     Facade_TextMarkup_flighthq_textMarkup_MarkupClassStyles.registerMarkupClassStyles(registry, styles);
   }
 

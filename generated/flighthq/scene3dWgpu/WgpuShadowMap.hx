@@ -111,17 +111,17 @@ class WgpuShadowMap {
       var mesh:Mesh = cast _Runtime.UNDEFINED;
       var skinned:Bool = cast _Runtime.UNDEFINED;
       var pipeline:flighthq._internal.dom.GPURenderPipeline = cast _Runtime.UNDEFINED;
-      var upload:Null<WgpuMeshUpload> = cast _Runtime.UNDEFINED;
+      var upload:WgpuMeshUpload = cast _Runtime.UNDEFINED;
       var world:Matrix4 = cast _Runtime.UNDEFINED;
       var jointMatrices:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
+      var skinDrawBindGroup:Null<flighthq._internal.dom.GPUBindGroup> = cast _Runtime.UNDEFINED;
       var rigidDrawBindGroup:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
       var drawBindGroup:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
       mesh = (cast (cast node : flighthq._internal._Any) : Mesh);
       if ((cast _Runtime.looseEquals(mesh.geometry, null) : Bool)) { return; }
       skinned = _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural7 = skinning; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var isGpuSkinned:Mesh->Bool; }).isGpuSkinned; }), cast ([mesh] : Array<Dynamic>)), function():Dynamic return cast false);
       pipeline = ((cast skinned : Bool) ? (cast (cast WgpuShadowMap.ensureWgpuShadowDepthPipeline__wgpuShadowMap(({ final __callArgument8:Dynamic = state; __callArgument8; }), (cast true : Bool)) : flighthq._internal.dom.GPURenderPipeline) : Dynamic) : (cast rigidPipeline : Dynamic));
-      upload = (cast ensureWgpuMeshUpload(({ final __callArgument9:Dynamic = state; __callArgument9; }), mesh.geometry, (cast skinned : Bool)) : Null<WgpuMeshUpload>);
-      if ((cast ((cast _Runtime.strictEquals(upload, null) : Bool) || (cast _Runtime.strictEquals((cast upload : { var indexBuffer:Null<flighthq._internal.dom.GPUBuffer>; }).indexBuffer, null) : Bool)) : Bool)) { return; }
+      upload = (cast ensureWgpuMeshUpload(({ final __callArgument9:Dynamic = state; __callArgument9; }), mesh.geometry, (cast skinned : Bool)) : WgpuMeshUpload);
       if ((cast !_Runtime.strictEquals(pipeline, boundPipeline) : Bool)) {
         (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(pipeline);
         (boundPipeline = cast (pipeline : Dynamic));
@@ -130,13 +130,18 @@ class WgpuShadowMap {
       multiplyMatrix4(({ final __callArgument10:Dynamic = WgpuShadowMap._shadowProxy__wgpuShadowMap.worldMatrix; __callArgument10; }), ({ final __callArgument11:Dynamic = lightMatrix; __callArgument11; }), ({ final __callArgument12:Dynamic = world; __callArgument12; }));
       jointMatrices = ((cast skinned : Bool) ? (cast (cast (cast mesh.skin : { var skeleton:Skeleton3D; }).skeleton : { var jointMatrices:flighthq._internal._Float32Array; }).jointMatrices : Dynamic) : (cast null : Dynamic));
       (WgpuShadowMap._shadowProxy__wgpuShadowMap.jointMatrices = cast (jointMatrices : Null<flighthq._internal._Float32Array>));
-      rigidDrawBindGroup = (cast writeWgpuDrawUniform(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = WgpuShadowMap._shadowProxy__wgpuShadowMap; __callArgument14; })) : flighthq._internal.dom.GPUBindGroup);
-      drawBindGroup = ((cast _Runtime.strictEquals(jointMatrices, null) : Bool) ? (cast rigidDrawBindGroup : Dynamic) : (cast (cast skinning : WgpuSkinningAdapter).getDrawBindGroup(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = jointMatrices; __callArgument16; })) : Dynamic));
+      skinDrawBindGroup = ((cast _Runtime.strictEquals(jointMatrices, null) : Bool) ? (cast null : Dynamic) : (cast (cast skinning : WgpuSkinningAdapter).getDrawBindGroup(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = jointMatrices; __callArgument14; })) : Dynamic));
+      rigidDrawBindGroup = (cast writeWgpuDrawUniform(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = WgpuShadowMap._shadowProxy__wgpuShadowMap; __callArgument16; })) : flighthq._internal.dom.GPUBindGroup);
+      drawBindGroup = _Runtime.coalesce(skinDrawBindGroup, function():Dynamic return cast rigidDrawBindGroup);
       flighthq._internal._StaticIndex.writeUint32ArrayTyped((cast WgpuShadowMap._dynamicOffsets__wgpuShadowMap : flighthq._internal._UInt32Array), (cast 0.0 : Float), (cast sceneRuntime.pendingDrawOffset : Float));
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, drawBindGroup, WgpuShadowMap._dynamicOffsets__wgpuShadowMap);
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, (cast upload : { var vertexBuffer:flighthq._internal.dom.GPUBuffer; }).vertexBuffer);
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer((cast upload : { var indexBuffer:Null<flighthq._internal.dom.GPUBuffer>; }).indexBuffer, (cast upload : { var indexFormat:String; }).indexFormat);
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).drawIndexed((cast upload : { var indexCount:Float; }).indexCount, 1.0, 0.0, 0.0, 0.0);
+      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, upload.vertexBuffer);
+      if ((cast _Runtime.strictEquals(upload.indexBuffer, null) : Bool)) {
+        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(upload.indexCount, 1.0, 0.0, 0.0);
+      } else {
+        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer(upload.indexBuffer, upload.indexFormat);
+        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).drawIndexed(upload.indexCount, 1.0, 0.0, 0.0, 0.0);
+      }
     } : Dynamic));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end();
     ((cast shadow : { var enabled:Bool; }).enabled = cast (true : Bool));
@@ -172,7 +177,7 @@ class WgpuShadowMap {
     return cast null;
   }
 
-  public static final SHADOW_DEPTH_WGSL__wgpuShadowMap:String = '\nstruct Draw { world : mat4x4f };\n@group(0) @binding(0) var<uniform> draw : Draw;\n\n@vertex fn vs_main(@location(0) position : vec3f) -> @builtin(position) vec4f {\n  var clip = draw.world * vec4f(position, 1.0);\n  clip.z = (clip.z + clip.w) * 0.5;\n  return clip;\n}\n';
+  public static final SHADOW_DEPTH_WGSL__wgpuShadowMap:String = '\n// The Draw record is the SAME 256-byte slot the mesh path writes, so the depth shader must declare the\n// fields ahead of the one it wants or params would land at the wrong offset. It reads only params.z, the\n// skin arena base — writeWgpuDrawUniform already writes every field below.\nstruct Draw {\n  world : mat4x4f,\n  normalMatrix : mat3x3f,\n  uvTransform : mat3x3f,\n  params : vec4f,\n};\n@group(0) @binding(0) var<uniform> draw : Draw;\n\n@vertex fn vs_main(@location(0) position : vec3f) -> @builtin(position) vec4f {\n  var clip = draw.world * vec4f(position, 1.0);\n  clip.z = (clip.z + clip.w) * 0.5;\n  return clip;\n}\n';
 
   public static final SHADOW_VERTEX_BUFFER_LAYOUTS__wgpuShadowMap:Array<flighthq._internal.dom.GPUVertexBufferLayout> = (cast cast ([{ arrayStride: 48.0, attributes: cast ([{ shaderLocation: 0.0, offset: 0.0, format: 'float32x3' }] : Array<Dynamic>) }] : Array<Dynamic>));
 

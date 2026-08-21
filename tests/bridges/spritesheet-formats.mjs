@@ -3,6 +3,7 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const detectSpritesheetFormat = compiled.flighthq.spritesheetFormats.SpritesheetFormats.detectSpritesheetFormat;
 export const getSpritesheetFormat = compiled.flighthq.spritesheetFormats.SpritesheetFormats.getSpritesheetFormat;
+export const getSpritesheetFormatKinds = compiled.flighthq.spritesheetFormats.SpritesheetFormats.getSpritesheetFormatKinds;
 export const parseAsepriteSpritesheet = compiled.flighthq.spritesheetFormats.SpritesheetFormats.parseAsepriteSpritesheet;
 export const parseAsepriteSpritesheetDocument = compiled.flighthq.spritesheetFormats.SpritesheetFormats.parseAsepriteSpritesheetDocument;
 export const parseCocosPlistSpritesheet = compiled.flighthq.spritesheetFormats.SpritesheetFormats.parseCocosPlistSpritesheet;
@@ -18,3 +19,4 @@ export const serializeAsepriteSpritesheet = compiled.flighthq.spritesheetFormats
 export const serializeCocosPlistSpritesheet = compiled.flighthq.spritesheetFormats.SpritesheetFormats.serializeCocosPlistSpritesheet;
 export const serializeStarlingSpritesheet = compiled.flighthq.spritesheetFormats.SpritesheetFormats.serializeStarlingSpritesheet;
 export const serializeTexturePackerSpritesheet = compiled.flighthq.spritesheetFormats.SpritesheetFormats.serializeTexturePackerSpritesheet;
+export const unregisterSpritesheetFormat = compiled.flighthq.spritesheetFormats.SpritesheetFormats.unregisterSpritesheetFormat;

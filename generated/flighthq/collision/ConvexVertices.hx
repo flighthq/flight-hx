@@ -3,11 +3,11 @@ package flighthq.collision;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionAabb;
-import flighthq.types.Collision.CollisionObb;
+import flighthq.types.Collision.CollisionAabb2D;
+import flighthq.types.Collision.CollisionObb2D;
 
 class ConvexVertices {
-  public static function writeAabbVertices(aabb:CollisionAabb, out:flighthq._internal._Float64Array):Void {
+  public static function writeAabbVertices(aabb:CollisionAabb2D, out:flighthq._internal._Float64Array):Void {
     var minX:Float = cast _Runtime.UNDEFINED;
     var minY:Float = cast _Runtime.UNDEFINED;
     var maxX:Float = cast _Runtime.UNDEFINED;
@@ -26,7 +26,7 @@ class ConvexVertices {
     flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast out : flighthq._internal._Float64Array), (cast 7.0 : Float), (cast maxY : Float));
   }
 
-  public static function writeObbVertices(obb:CollisionObb, out:flighthq._internal._Float64Array):Void {
+  public static function writeObbVertices(obb:CollisionObb2D, out:flighthq._internal._Float64Array):Void {
     var cx:Float = cast _Runtime.UNDEFINED;
     var cy:Float = cast _Runtime.UNDEFINED;
     var halfW:Float = cast _Runtime.UNDEFINED;

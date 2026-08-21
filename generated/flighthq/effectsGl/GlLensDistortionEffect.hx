@@ -34,7 +34,7 @@ class GlLensDistortionEffect {
   });
 
   public static function registerGlLensDistortionEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'LensDistortionEffect' : String), ({ final __callArgument6:Dynamic = defaultGlLensDistortionEffectRunner; __callArgument6; }));
+    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'LensDistortionEffect' : String), ({ final __callArgument6:Dynamic = defaultGlLensDistortionEffectRunner; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static final LENS_DISTORTION_FRAGMENT_SRC__glLensDistortionEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_amount;\nuniform float u_scale;\nout vec4 o_color;\nvoid main() {\n  vec2 centered = (v_texCoord - 0.5) / u_scale;\n  float r2 = dot(centered, centered);\n  vec2 distorted = centered * (1.0 + u_amount * r2) + 0.5;\n  if (distorted.x < 0.0 || distorted.x > 1.0 || distorted.y < 0.0 || distorted.y > 1.0) {\n    o_color = vec4(0.0, 0.0, 0.0, 1.0);\n  } else {\n    o_color = texture(u_texture0, distorted);\n  }\n}';

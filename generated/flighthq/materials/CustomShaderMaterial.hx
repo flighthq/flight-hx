@@ -4,13 +4,16 @@ package flighthq.materials;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.materials.SurfaceMaterial.createSurfaceMaterial;
+import flighthq.types.BlendMode;
 import flighthq.types.CustomShaderMaterial;
+import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Texture;
 import flighthq.types.Types.CustomShaderMaterialKind;
 import flighthq.types._internal._CustomShaderMaterialValues.CustomShaderMaterialKind;
 
 class CustomShaderMaterial {
-  public static function createCustomShaderMaterial(?opts:flighthq._internal._Partial<flighthq.types.CustomShaderMaterial>):flighthq.types.CustomShaderMaterial {
+  public static function createCustomShaderMaterial(?opts:{ @:optional var kind:Null<String>; @:optional var shaderKey:Null<String>; @:optional var textures:Null<flighthq._internal._Record<String, Texture>>; @:optional var uniforms:Null<flighthq._internal._Record<String, flighthq._internal._Union2<Float, Array<Float>>>>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):flighthq.types.CustomShaderMaterial {
     var material:flighthq.types.CustomShaderMaterial = cast _Runtime.UNDEFINED;
     material = (cast createSurfaceMaterial((cast CustomShaderMaterialKind : String), (cast opts : Dynamic)) : flighthq.types.CustomShaderMaterial);
     (material.shaderKey = cast (_Runtime.coalesce(({ final __structural0 = opts; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var shaderKey:Null<String>; }).shaderKey; }), function():Dynamic return cast '') : String));

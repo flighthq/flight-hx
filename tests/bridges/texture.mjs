@@ -17,6 +17,7 @@ export const createPixelArtSampler = compiled.flighthq.texture.Texture.createPix
 export const createRenderTexture = compiled.flighthq.texture.Texture.createRenderTexture;
 export const createSampler = compiled.flighthq.texture.Texture.createSampler;
 export const createTexture = compiled.flighthq.texture.Texture.createTexture;
+export const createTexture2D = compiled.flighthq.texture.Texture.createTexture2D;
 export const createTilingSampler = compiled.flighthq.texture.Texture.createTilingSampler;
 export const createVideoTexture = compiled.flighthq.texture.Texture.createVideoTexture;
 export const equalsCubeTexture = compiled.flighthq.texture.Texture.equalsCubeTexture;

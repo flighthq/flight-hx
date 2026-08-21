@@ -10,7 +10,6 @@ import flighthq.renderGl.GlTextureResolver.registerGlTextureResolver;
 import flighthq.texture.Sampler.cloneSampler;
 import flighthq.texture.Texture.createTexture;
 import flighthq.types.CreateExternalTextureOptions;
-import flighthq.types.Entity.EntityWithoutRuntime;
 import flighthq.types.ExternalTexture;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
@@ -22,6 +21,7 @@ import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.Texture.TextureLike;
 import flighthq.types.TextureSource;
 import flighthq.types.Types.ExternalTextureSourceKind;
+import flighthq.types.Vector2;
 import flighthq.types._internal._TextureSourceKindValues.ExternalTextureSourceKind;
 
 class GlExternalTexture {
@@ -61,8 +61,8 @@ class GlExternalTexture {
   }
 
   public static function getExternalTextureSource__glExternalTexture(texture:TextureLike):Null<ExternalTexture> {
-    if ((cast ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) || (cast !_Runtime.strictEquals(({ final __typedStruct17 = _Runtime.field(texture, 'source'); __typedStruct17 == null ? _Runtime.UNDEFINED : (cast __typedStruct17 : { var kind:String; }).kind; }), ExternalTextureSourceKind) : Bool)) : Bool)) { return cast null; }
-    return cast (cast _Runtime.field(texture, 'source') : ExternalTexture);
+    if ((cast ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) || (cast !_Runtime.strictEquals(({ final __typedStruct17 = (cast texture : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source; __typedStruct17 == null ? _Runtime.UNDEFINED : (cast __typedStruct17 : { var kind:String; }).kind; }), ExternalTextureSourceKind) : Bool)) : Bool)) { return cast null; }
+    return cast (cast (cast texture : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source : ExternalTexture);
     return cast null;
   }
 }

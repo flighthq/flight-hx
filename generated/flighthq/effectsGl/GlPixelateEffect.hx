@@ -32,7 +32,7 @@ class GlPixelateEffect {
   });
 
   public static function registerGlPixelateEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'PixelateEffect' : String), ({ final __callArgument6:Dynamic = defaultGlPixelateEffectRunner; __callArgument6; }));
+    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'PixelateEffect' : String), ({ final __callArgument6:Dynamic = defaultGlPixelateEffectRunner; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static final PIXELATE_FRAGMENT_SRC__glPixelateEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_size;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvoid main() {\n  vec2 blocks = u_resolution / u_size;\n  vec2 uv = (floor(v_texCoord * blocks) + 0.5) / blocks;\n  o_color = texture(u_texture0, uv);\n}';

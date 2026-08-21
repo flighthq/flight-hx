@@ -51,7 +51,7 @@ class WgpuDropShadowEffect {
     distance = _Runtime.coalesce(effect.distance, function():Dynamic return cast 4.0);
     dx = _Runtime.multiplyNumbers(HxMath.cos(angle), distance);
     dy = _Runtime.multiplyNumbers(HxMath.sin(angle), distance);
-    color = _Runtime.coalesce(effect.color, function():Dynamic return cast 0.0);
+    color = _Runtime.coalesce(effect.color, function():Dynamic return cast 255.0);
     alpha = _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0);
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(effect.quality, function():Dynamic return cast 1.0)));

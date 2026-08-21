@@ -50,18 +50,18 @@ class SpritesheetFrom {
     animations = (cast {  });
     for (ad in _Runtime.iterable(data.animations)) {
       var resolvedFrames:Array<Float> = ((cast ((cast _Runtime.field(ad.frameNames, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast _Runtime.filterArray((cast (cast _Runtime.mapArray((cast ad.frameNames : Array<String>), function(n:String, __unused1:Float, __unused2:Array<String>):Null<Float> return ((cast frameNameToIndex : flighthq._internal._Map<String, Float>).get(n)), _Runtime.UNDEFINED)) : Array<Null<Float>>), function(i:Null<Float>, __unused3:Float, __unused4:Array<Null<Float>>):Bool return !_Runtime.strictEquals(i, _Runtime.field(_Runtime, 'UNDEFINED')), _Runtime.UNDEFINED)) : Dynamic) : (cast (cast _Runtime.toArray({ length: _Runtime.field(data.frames, 'length') }, function(_:flighthq._internal._Any, i:Float):Float return i) : Array<Float>) : Dynamic));
-      _Runtime.setIndex(animations, ad.name, (cast createSpritesheetAnimation(({ final __callArgument5:Dynamic = { direction: ad.direction, frameDuration: ad.frameDuration, frameDurations: ad.frameDurations, frames: resolvedFrames, originX: ad.originX, originY: ad.originY, repeatCount: ad.repeatCount }; __callArgument5; })) : SpritesheetAnimation));
+      _Runtime.setIndex(animations, ad.name, (cast createSpritesheetAnimation((cast { direction: ad.direction, frameDuration: ad.frameDuration, frameDurations: ad.frameDurations, frames: resolvedFrames, originX: ad.originX, originY: ad.originY, repeatCount: ad.repeatCount } : Dynamic)) : SpritesheetAnimation));
     }
-    return cast (cast createSpritesheet(({ final __callArgument6:Dynamic = { animations: animations, atlas: atlas, frames: frames }; __callArgument6; })) : Spritesheet);
+    return cast (cast createSpritesheet((cast { animations: animations, atlas: atlas, frames: frames } : Dynamic)) : Spritesheet);
     return cast null;
   }
 
   public static function createSpritesheetFromGrid(options:GridSliceOptions):Spritesheet {
     var atlas:TextureAtlas = cast _Runtime.UNDEFINED;
     var frames:Array<SpritesheetFrame> = cast _Runtime.UNDEFINED;
-    atlas = (cast createTextureAtlasFromGrid(({ final __callArgument7:Dynamic = options; __callArgument7; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : TextureAtlas);
-    frames = (cast _Runtime.mapArray((cast atlas.regions : Array<TextureAtlasRegion>), function(region:TextureAtlasRegion, __unused5:Float, __unused6:Array<TextureAtlasRegion>):SpritesheetFrame return (cast createSpritesheetFrame(({ final __callArgument8:Dynamic = { id: region.id }; __callArgument8; })) : SpritesheetFrame), _Runtime.UNDEFINED));
-    return cast (cast createSpritesheet(({ final __callArgument9:Dynamic = { atlas: atlas, frames: frames }; __callArgument9; })) : Spritesheet);
+    atlas = (cast createTextureAtlasFromGrid(({ final __callArgument5:Dynamic = options; __callArgument5; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : TextureAtlas);
+    frames = (cast _Runtime.mapArray((cast atlas.regions : Array<TextureAtlasRegion>), function(region:TextureAtlasRegion, __unused5:Float, __unused6:Array<TextureAtlasRegion>):SpritesheetFrame return (cast createSpritesheetFrame(({ final __callArgument6:Dynamic = { id: region.id }; __callArgument6; })) : SpritesheetFrame), _Runtime.UNDEFINED));
+    return cast (cast createSpritesheet((cast { atlas: atlas, frames: frames } : Dynamic)) : Spritesheet);
     return cast null;
   }
 }

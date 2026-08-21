@@ -8,5 +8,7 @@ __syncDependencies();
 export const createCaptureBaseline = api.createCaptureBaseline;
 export const formatCaptureBaseline = api.formatCaptureBaseline;
 export const getCaptureBaselineField = api.getCaptureBaselineField;
+export const getCaptureBaselineProvenance = api.getCaptureBaselineProvenance;
 export const parseCaptureBaseline = api.parseCaptureBaseline;
 export const setCaptureBaselineField = api.setCaptureBaselineField;
+export const setCaptureBaselineProvenance = api.setCaptureBaselineProvenance;

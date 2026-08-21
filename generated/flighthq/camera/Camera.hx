@@ -7,6 +7,7 @@ import flighthq.camera.Basis as Facade_Camera_flighthq_camera_Basis;
 import flighthq.camera.Camera2d as Facade_Camera_flighthq_camera_Camera2d;
 import flighthq.camera.Culling as Facade_Camera_flighthq_camera_Culling;
 import flighthq.camera.Depth as Facade_Camera_flighthq_camera_Depth;
+import flighthq.camera.EnableCameraGuards as Facade_Camera_flighthq_camera_EnableCameraGuards;
 import flighthq.camera.FrustumCorners as Facade_Camera_flighthq_camera_FrustumCorners;
 import flighthq.camera.Intersection as Facade_Camera_flighthq_camera_Intersection;
 import flighthq.camera.Parallax as Facade_Camera_flighthq_camera_Parallax;
@@ -67,6 +68,13 @@ class Camera {
     ({ var __indexedObject14:flighthq._internal._Float32Array = m; var __indexedKey15:Float = 13.0; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject14 : flighthq._internal._Float32Array), (cast __indexedKey15 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject14 : flighthq._internal._Float32Array), (cast __indexedKey15 : Float)) + (y * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 15.0 : Float)))) : Float)); });
   }
 
+  public static function areCameraGuardsEnabled():Bool {
+    return cast Facade_Camera_flighthq_camera_EnableCameraGuards.areCameraGuardsEnabled();
+    return cast null;
+  }
+
+  public static var camera3DViewGuard__camera:Null<Camera3D->Void> = _Runtime.explicitNull();
+
   public static function configureDirectionalShadowCamera3D(camera:Camera3D, lightDirection:Vector3Like, sceneBounds:AabbLike):Void {
     Facade_Camera_flighthq_camera_ShadowCamera.configureDirectionalShadowCamera3D(camera, lightDirection, sceneBounds);
   }
@@ -93,6 +101,14 @@ class Camera {
   public static function createPerspectiveProjection(opts:PerspectiveProjectionOptions):PerspectiveProjection {
     return cast Facade_Camera_flighthq_camera_Projection.createPerspectiveProjection(opts);
     return cast null;
+  }
+
+  public static function disableCameraGuards():Void {
+    Facade_Camera_flighthq_camera_EnableCameraGuards.disableCameraGuards();
+  }
+
+  public static function enableCameraGuards():Void {
+    Facade_Camera_flighthq_camera_EnableCameraGuards.enableCameraGuards();
   }
 
   public static function getCamera2DParallaxPoint(camera:Camera2D, factor:Float, out:Vector2Like):Void {
@@ -223,12 +239,18 @@ class Camera {
     ((cast camera.jitter : { var y:Float; }).y = cast (y : Float));
   }
 
+  @:noCompletion
+  public static function setCamera3DViewGuard(guard:Null<Camera3D->Void>):Void {
+    (Camera.camera3DViewGuard__camera = cast (guard : Dynamic));
+  }
+
   public static function setCamera3DViewMatrix4FromLookAt(camera:Camera3D, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
     setMatrix4LookAt(({ final __callArgument27:Dynamic = camera.view; __callArgument27; }), ({ final __callArgument28:Dynamic = eye; __callArgument28; }), ({ final __callArgument29:Dynamic = target; __callArgument29; }), ({ final __callArgument30:Dynamic = up; __callArgument30; }));
   }
 
   public static function setCamera3DViewMatrix4FromMatrix4(camera:Camera3D, view:Matrix4Like):Void {
     (cast (cast camera.view : { var m:flighthq._internal._Float32Array; }).m : flighthq._internal._Float32Array).set(view.m);
+    _Runtime.callOptionalValue(Camera.camera3DViewGuard__camera, cast ([camera] : Array<Dynamic>));
   }
 
   public static function setProjectionMatrix4(out:Matrix4Like, projection:Projection, aspect:Float, near:Float, far:Float):Void {

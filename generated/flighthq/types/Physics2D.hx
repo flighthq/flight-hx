@@ -3,8 +3,8 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionShape;
-import flighthq.types.Spatial.SpatialIndexBackend;
+import flighthq.types.Collision.CollisionBuiltInShape2D;
+import flighthq.types.Spatial.SpatialIndexBackend2D;
 
 typedef Physics2DBodyType = String;
 
@@ -12,7 +12,7 @@ typedef Physics2DMaterial = { var density:Float; var friction:Float; var restitu
 
 typedef Physics2DCollisionFilter = { var categoryBits:Float; var maskBits:Float; var groupIndex:Float; };
 
-typedef Physics2DCollider = { var local:CollisionShape; var world:CollisionShape; var material:Physics2DMaterial; var filter:Physics2DCollisionFilter; var sensor:Bool; };
+typedef Physics2DCollider = { var local:CollisionBuiltInShape2D; var world:CollisionBuiltInShape2D; var material:Physics2DMaterial; var filter:Physics2DCollisionFilter; var sensor:Bool; };
 
 typedef Physics2DMassData = { var mass:Float; var inertia:Float; var centerX:Float; var centerY:Float; };
 
@@ -30,7 +30,7 @@ typedef Physics2DSolverConfig = { var allowSleeping:Bool; var sleepLinearThresho
 
 typedef Physics2DStepExplanation = { var bodyStateValid:Bool; var contactStateValid:Bool; var gravityValid:Bool; var jointStateValid:Bool; var previousTimestepValid:Bool; var solverConfigValid:Bool; var timestepValid:Bool; var velocityIterationsValid:Bool; var positionIterationsValid:Bool; var status:String; };
 
-typedef Physics2DWorld = { var version:Float; var bodies:Array<RigidBody2D>; var bodyByIndex:flighthq._internal._Map<Float, RigidBody2D>; var contacts:Array<Physics2DContact>; var joints:Array<Physics2DJoint>; var jointSolvers:flighthq._internal._Map<Physics2DJointKind, Physics2DJointSolver>; var jointCollisionSuppressions:flighthq._internal._Map<Float, flighthq._internal._Map<Float, Float>>; var events:Physics2DContactEvents; var contactHooks:Physics2DContactHooks; var index:SpatialIndexBackend; var config:Physics2DSolverConfig; var islandParents:flighthq._internal._Map<Float, Float>; var islandSleepTimers:flighthq._internal._Map<Float, Float>; var solveIslandByRoot:flighthq._internal._Map<Float, Float>; var solveIslandRoots:Array<Float>; var solveIslandBodyStarts:Array<Float>; var solveIslandBodyCounts:Array<Float>; var solveIslandContactStarts:Array<Float>; var solveIslandContactCounts:Array<Float>; var solveIslandJointStarts:Array<Float>; var solveIslandJointCounts:Array<Float>; var solveIslandBodyIndices:Array<Float>; var solveIslandContactIndices:Array<Float>; var solveIslandJointIndices:Array<Float>; var solveIslandCursors:Array<Float>; var gravityX:Float; var gravityY:Float; var previousTimestep:Float; var nextBodyIndex:Float; };
+typedef Physics2DWorld = { var version:Float; var bodies:Array<RigidBody2D>; var bodyByIndex:flighthq._internal._Map<Float, RigidBody2D>; var contacts:Array<Physics2DContact>; var joints:Array<Physics2DJoint>; var jointSolvers:flighthq._internal._Map<Physics2DJointKind, Physics2DJointSolver>; var jointCollisionSuppressions:flighthq._internal._Map<Float, flighthq._internal._Map<Float, Float>>; var events:Physics2DContactEvents; var contactHooks:Physics2DContactHooks; var index:SpatialIndexBackend2D; var config:Physics2DSolverConfig; var islandParents:flighthq._internal._Map<Float, Float>; var islandSleepTimers:flighthq._internal._Map<Float, Float>; var solveIslandByRoot:flighthq._internal._Map<Float, Float>; var solveIslandRoots:Array<Float>; var solveIslandBodyStarts:Array<Float>; var solveIslandBodyCounts:Array<Float>; var solveIslandContactStarts:Array<Float>; var solveIslandContactCounts:Array<Float>; var solveIslandJointStarts:Array<Float>; var solveIslandJointCounts:Array<Float>; var solveIslandBodyIndices:Array<Float>; var solveIslandContactIndices:Array<Float>; var solveIslandJointIndices:Array<Float>; var solveIslandCursors:Array<Float>; var gravityX:Float; var gravityY:Float; var previousTimestep:Float; var nextBodyIndex:Float; };
 
 typedef Physics2DJointKind = String;
 

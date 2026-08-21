@@ -4,6 +4,8 @@ package flighthq.swf;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix.createMatrix;
+import flighthq.geometry.Matrix.inverseMatrix;
+import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.path.Path.appendPathCurveTo;
 import flighthq.path.Path.appendPathLineTo;
 import flighthq.path.Path.appendPathMoveTo;
@@ -17,7 +19,10 @@ import flighthq.shape.ShapeCommands.appendShapeEndFill;
 import flighthq.shape.ShapeCommands.appendShapeLineStyle;
 import flighthq.shape.ShapeCommands.appendShapeLineTo;
 import flighthq.shape.ShapeCommands.appendShapeMoveTo;
+import flighthq.types.ImportDiagnostic;
+import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.Matrix;
+import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Path;
 import flighthq.types.Shape;
 import flighthq.types.ShapeCommand.CapsStyle;
@@ -30,6 +35,7 @@ import flighthq.types.ShapeCommand.SpreadMethod;
 import flighthq.types.SwfMorphShapePaths;
 import flighthq.types.Texture;
 import flighthq.types.Texture.Texture2D;
+import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 typedef SwfShapeEdgeRecord__swfShape = { var controlX:Float; var controlY:Float; var curved:Bool; var kind:String; var toX:Float; var toY:Float; };
 
@@ -53,15 +59,15 @@ typedef SwfBitmapFillResolver__swfShape = Float->Bool->Bool->Null<Texture2D>;
 
 class SwfShape {
   public static function createSwfGlyphShape(reader:SwfReader):Null<Shape> {
-    return cast (cast SwfShape.decodeSwfShapeBody__swfShape(({ final __callArgument0:Dynamic = reader; __callArgument0; }), (cast 1.0 : Float), (cast { fills: cast ([(cast SwfShape.createSwfShapeFill__swfShape((cast 0.0 : Float), (cast 1.0 : Float)) : SwfShapeFill__swfShape)] : Array<Dynamic>), lines: cast ([] : Array<Dynamic>) } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<Shape>);
+    return cast (cast SwfShape.decodeSwfShapeBody__swfShape(({ final __callArgument0:Dynamic = reader; __callArgument0; }), (cast 1.0 : Float), (cast { fills: cast ([(cast SwfShape.createSwfShapeFill__swfShape((cast 255.0 : Float), (cast 1.0 : Float)) : SwfShapeFill__swfShape)] : Array<Dynamic>), lines: cast ([] : Array<Dynamic>) } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<Shape>);
     return cast null;
   }
 
-  public static function createSwfShape(reader:SwfReader, version:Float, ?resolveBitmapFill:Null<SwfBitmapFillResolver__swfShape>):Null<Shape> {
+  public static function createSwfShape(reader:SwfReader, version:Float, ?resolveBitmapFill:Null<SwfBitmapFillResolver__swfShape>, ?diagnostics:Array<ImportDiagnostic>):Null<Shape> {
     if (resolveBitmapFill == null) resolveBitmapFill = cast (null : Dynamic);
     var styles:Null<SwfShapeStyles__swfShape> = cast _Runtime.UNDEFINED;
-    styles = (cast SwfShape.readSwfShapeStyles__swfShape(({ final __callArgument1:Dynamic = reader; __callArgument1; }), (cast version : Float), (cast ((cast version : Float) >= (cast 3.0 : Float)) : Bool), (cast resolveBitmapFill : Dynamic)) : Null<SwfShapeStyles__swfShape>);
-    return cast ((cast _Runtime.strictEquals(styles, null) : Bool) ? (cast null : Dynamic) : (cast (cast SwfShape.decodeSwfShapeBody__swfShape(({ final __callArgument2:Dynamic = reader; __callArgument2; }), (cast version : Float), (cast styles : Dynamic), (cast resolveBitmapFill : Dynamic)) : Null<Shape>) : Dynamic));
+    styles = (cast SwfShape.readSwfShapeStyles__swfShape(({ final __callArgument1:Dynamic = reader; __callArgument1; }), (cast version : Float), (cast ((cast version : Float) >= (cast 3.0 : Float)) : Bool), (cast resolveBitmapFill : Dynamic), ({ final __callArgument2:Dynamic = diagnostics; __callArgument2; })) : Null<SwfShapeStyles__swfShape>);
+    return cast ((cast _Runtime.strictEquals(styles, null) : Bool) ? (cast null : Dynamic) : (cast (cast SwfShape.decodeSwfShapeBody__swfShape(({ final __callArgument3:Dynamic = reader; __callArgument3; }), (cast version : Float), (cast styles : Dynamic), (cast resolveBitmapFill : Dynamic)) : Null<Shape>) : Dynamic));
     return cast null;
   }
 
@@ -84,7 +90,7 @@ class SwfShape {
       while (true) {
         if ((cast ((cast ++records : Float) > (cast SwfShape.MAX_SHAPE_RECORDS__swfShape : Float)) : Bool)) { return cast null; }
         if ((cast !_Runtime.strictEquals((cast reader : SwfReader).readUnsignedBits(1.0), 0.0) : Bool)) {
-          if ((cast !(cast (cast SwfShape.readSwfShapeEdge__swfShape(({ final __callArgument3:Dynamic = reader; __callArgument3; }), (cast state : Dynamic)) : Bool) : Bool) : Bool)) { return cast null; }
+          if ((cast !(cast (cast SwfShape.readSwfShapeEdge__swfShape(({ final __callArgument4:Dynamic = reader; __callArgument4; }), (cast state : Dynamic)) : Bool) : Bool) : Bool)) { return cast null; }
           continue;
         }
         var flags:Float = (cast reader : SwfReader).readUnsignedBits(5.0);
@@ -101,8 +107,8 @@ class SwfShape {
         if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_LINE_STYLE__swfShape)), 0.0) : Bool)) { ((cast state : SwfShapeState__swfShape).line = (cast reader : SwfReader).readUnsignedBits(lineBits)); }
         if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
         if ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfShape.STATE_NEW_STYLES__swfShape)), 0.0) : Bool)) {
-          SwfShape.appendSwfShapeStyleLayer__swfShape(({ final __callArgument4:Dynamic = shape; __callArgument4; }), (cast state : Dynamic));
-          var replacement:Null<SwfShapeStyles__swfShape> = (cast SwfShape.readSwfShapeStyles__swfShape(({ final __callArgument5:Dynamic = reader; __callArgument5; }), (cast version : Float), (cast hasAlpha : Bool), (cast resolveBitmapFill : Dynamic)) : Null<SwfShapeStyles__swfShape>);
+          SwfShape.appendSwfShapeStyleLayer__swfShape(({ final __callArgument5:Dynamic = shape; __callArgument5; }), (cast state : Dynamic));
+          var replacement:Null<SwfShapeStyles__swfShape> = (cast SwfShape.readSwfShapeStyles__swfShape(({ final __callArgument6:Dynamic = reader; __callArgument6; }), (cast version : Float), (cast hasAlpha : Bool), (cast resolveBitmapFill : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<SwfShapeStyles__swfShape>);
           if ((cast _Runtime.strictEquals(replacement, null) : Bool)) { return cast null; }
           ((cast state : SwfShapeState__swfShape).styles = replacement);
           ((cast state : SwfShapeState__swfShape).fill0 = 0.0);
@@ -115,7 +121,7 @@ class SwfShape {
       }
     }
     SwfShape.flushSwfShapeSegments__swfShape((cast state : Dynamic));
-    SwfShape.appendSwfShapeStyleLayer__swfShape(({ final __callArgument6:Dynamic = shape; __callArgument6; }), (cast state : Dynamic));
+    SwfShape.appendSwfShapeStyleLayer__swfShape(({ final __callArgument7:Dynamic = shape; __callArgument7; }), (cast state : Dynamic));
     return cast ((cast (cast reader : SwfReader).valid : Bool) ? (cast shape : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -128,8 +134,8 @@ class SwfShape {
     var endY:Float = cast _Runtime.UNDEFINED;
     var startIndex:Float = cast _Runtime.UNDEFINED;
     var endIndex:Float = cast _Runtime.UNDEFINED;
-    startRecords = (cast SwfShape.readSwfShapeRecordList__swfShape(({ final __callArgument7:Dynamic = startReader; __callArgument7; })) : Null<Array<SwfShapeRecord__swfShape>>);
-    endRecords = (cast SwfShape.readSwfShapeRecordList__swfShape(({ final __callArgument8:Dynamic = endReader; __callArgument8; })) : Null<Array<SwfShapeRecord__swfShape>>);
+    startRecords = (cast SwfShape.readSwfShapeRecordList__swfShape(({ final __callArgument8:Dynamic = startReader; __callArgument8; })) : Null<Array<SwfShapeRecord__swfShape>>);
+    endRecords = (cast SwfShape.readSwfShapeRecordList__swfShape(({ final __callArgument9:Dynamic = endReader; __callArgument9; })) : Null<Array<SwfShapeRecord__swfShape>>);
     if ((cast ((cast _Runtime.strictEquals(startRecords, null) : Bool) || (cast _Runtime.strictEquals(endRecords, null) : Bool)) : Bool)) { return cast null; }
     state = (cast { fill0: 0.0, fill0Segment: null, fill1: 0.0, fill1Segment: null, fillSegments: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), line: 0.0, lineSegment: null, lineSegments: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), styles: { fills: cast ([] : Array<Dynamic>), lines: cast ([] : Array<Dynamic>) }, x: 0.0, y: 0.0 });
     endX = 0.0;
@@ -193,15 +199,15 @@ class SwfShape {
       ((cast edge : SwfShapeEdge__swfShape).controlY = (_Runtime.addNumbers(fromY, _Runtime.field(startEdge, 'toY')) / 2.0));
     }
     if ((cast !_Runtime.strictEquals((cast state : SwfShapeState__swfShape).fill0, 0.0) : Bool)) {
-      ({ final __nullishOwner9 = state; final __nullishValue10:Null<SwfShapeSegment__swfShape> = cast (cast __nullishOwner9 : SwfShapeState__swfShape).fill0Segment; __nullishValue10 == null ? ((cast __nullishOwner9 : SwfShapeState__swfShape).fill0Segment = (cast (cast SwfShape.createSwfMorphSegment__swfShape((cast fromX : Float), (cast fromY : Float), (cast endFromX : Float), (cast endFromY : Float)) : SwfShapeSegment__swfShape) : Null<SwfShapeSegment__swfShape>)) : (cast __nullishValue10 : Null<SwfShapeSegment__swfShape>); });
+      ({ final __nullishOwner10 = state; final __nullishValue11:Null<SwfShapeSegment__swfShape> = cast (cast __nullishOwner10 : SwfShapeState__swfShape).fill0Segment; __nullishValue11 == null ? ((cast __nullishOwner10 : SwfShapeState__swfShape).fill0Segment = (cast (cast SwfShape.createSwfMorphSegment__swfShape((cast fromX : Float), (cast fromY : Float), (cast endFromX : Float), (cast endFromY : Float)) : SwfShapeSegment__swfShape) : Null<SwfShapeSegment__swfShape>)) : (cast __nullishValue11 : Null<SwfShapeSegment__swfShape>); });
       _Runtime.callProperty((cast (cast state : SwfShapeState__swfShape).fill0Segment : SwfShapeSegment__swfShape).edges, 'push', cast ([edge] : Array<Dynamic>));
     }
     if ((cast !_Runtime.strictEquals((cast state : SwfShapeState__swfShape).fill1, 0.0) : Bool)) {
-      ({ final __nullishOwner11 = state; final __nullishValue12:Null<SwfShapeSegment__swfShape> = cast (cast __nullishOwner11 : SwfShapeState__swfShape).fill1Segment; __nullishValue12 == null ? ((cast __nullishOwner11 : SwfShapeState__swfShape).fill1Segment = (cast (cast SwfShape.createSwfMorphSegment__swfShape((cast fromX : Float), (cast fromY : Float), (cast endFromX : Float), (cast endFromY : Float)) : SwfShapeSegment__swfShape) : Null<SwfShapeSegment__swfShape>)) : (cast __nullishValue12 : Null<SwfShapeSegment__swfShape>); });
+      ({ final __nullishOwner12 = state; final __nullishValue13:Null<SwfShapeSegment__swfShape> = cast (cast __nullishOwner12 : SwfShapeState__swfShape).fill1Segment; __nullishValue13 == null ? ((cast __nullishOwner12 : SwfShapeState__swfShape).fill1Segment = (cast (cast SwfShape.createSwfMorphSegment__swfShape((cast fromX : Float), (cast fromY : Float), (cast endFromX : Float), (cast endFromY : Float)) : SwfShapeSegment__swfShape) : Null<SwfShapeSegment__swfShape>)) : (cast __nullishValue13 : Null<SwfShapeSegment__swfShape>); });
       _Runtime.callProperty((cast (cast state : SwfShapeState__swfShape).fill1Segment : SwfShapeSegment__swfShape).edges, 'push', cast ([edge] : Array<Dynamic>));
     }
     if ((cast !_Runtime.strictEquals((cast state : SwfShapeState__swfShape).line, 0.0) : Bool)) {
-      ({ final __nullishOwner13 = state; final __nullishValue14:Null<SwfShapeSegment__swfShape> = cast (cast __nullishOwner13 : SwfShapeState__swfShape).lineSegment; __nullishValue14 == null ? ((cast __nullishOwner13 : SwfShapeState__swfShape).lineSegment = (cast (cast SwfShape.createSwfMorphSegment__swfShape((cast fromX : Float), (cast fromY : Float), (cast endFromX : Float), (cast endFromY : Float)) : SwfShapeSegment__swfShape) : Null<SwfShapeSegment__swfShape>)) : (cast __nullishValue14 : Null<SwfShapeSegment__swfShape>); });
+      ({ final __nullishOwner14 = state; final __nullishValue15:Null<SwfShapeSegment__swfShape> = cast (cast __nullishOwner14 : SwfShapeState__swfShape).lineSegment; __nullishValue15 == null ? ((cast __nullishOwner14 : SwfShapeState__swfShape).lineSegment = (cast (cast SwfShape.createSwfMorphSegment__swfShape((cast fromX : Float), (cast fromY : Float), (cast endFromX : Float), (cast endFromY : Float)) : SwfShapeSegment__swfShape) : Null<SwfShapeSegment__swfShape>)) : (cast __nullishValue15 : Null<SwfShapeSegment__swfShape>); });
       _Runtime.callProperty((cast (cast state : SwfShapeState__swfShape).lineSegment : SwfShapeSegment__swfShape).edges, 'push', cast ([edge] : Array<Dynamic>));
     }
     ((cast state : SwfShapeState__swfShape).x = _Runtime.field(startEdge, 'toX'));
@@ -219,18 +225,18 @@ class SwfShape {
     for (__iteration0 in _Runtime.iterable(segments)) {
       var index:Float = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
       var collected:Array<SwfShapeSegment__swfShape> = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
-      var startPath:Path = (cast createPath(({ final __callArgument17:Dynamic = 'nonZero'; __callArgument17; })) : Path);
-      var endPath:Path = (cast createPath(({ final __callArgument18:Dynamic = 'nonZero'; __callArgument18; })) : Path);
+      var startPath:Path = (cast createPath(({ final __callArgument18:Dynamic = 'nonZero'; __callArgument18; })) : Path);
+      var endPath:Path = (cast createPath(({ final __callArgument19:Dynamic = 'nonZero'; __callArgument19; })) : Path);
       for (contour in _Runtime.iterable((cast SwfShape.stitchSwfShapeSegments__swfShape((cast collected : Dynamic)) : Array<SwfShapeSegment__swfShape>))) {
-        appendPathMoveTo(({ final __callArgument21:Dynamic = startPath; __callArgument21; }), (cast ((cast contour : SwfShapeSegment__swfShape).startX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast contour : SwfShapeSegment__swfShape).startY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
-        appendPathMoveTo(({ final __callArgument22:Dynamic = endPath; __callArgument22; }), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast contour : SwfShapeSegment__swfShape).endStartX, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast contour : SwfShapeSegment__swfShape).endStartY, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
+        appendPathMoveTo(({ final __callArgument22:Dynamic = startPath; __callArgument22; }), (cast ((cast contour : SwfShapeSegment__swfShape).startX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast contour : SwfShapeSegment__swfShape).startY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
+        appendPathMoveTo(({ final __callArgument23:Dynamic = endPath; __callArgument23; }), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast contour : SwfShapeSegment__swfShape).endStartX, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast contour : SwfShapeSegment__swfShape).endStartY, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
         for (edge in _Runtime.iterable((cast contour : SwfShapeSegment__swfShape).edges)) {
           if ((cast (cast edge : SwfShapeEdge__swfShape).curved : Bool)) {
-            appendPathCurveTo(({ final __callArgument25:Dynamic = startPath; __callArgument25; }), (cast ((cast edge : SwfShapeEdge__swfShape).controlX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).controlY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
-            appendPathCurveTo(({ final __callArgument26:Dynamic = endPath; __callArgument26; }), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endControlX, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endControlY, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endToX, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endToY, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
+            appendPathCurveTo(({ final __callArgument26:Dynamic = startPath; __callArgument26; }), (cast ((cast edge : SwfShapeEdge__swfShape).controlX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).controlY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
+            appendPathCurveTo(({ final __callArgument27:Dynamic = endPath; __callArgument27; }), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endControlX, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endControlY, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endToX, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endToY, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
           } else {
-            appendPathLineTo(({ final __callArgument27:Dynamic = startPath; __callArgument27; }), (cast ((cast edge : SwfShapeEdge__swfShape).toX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
-            appendPathLineTo(({ final __callArgument28:Dynamic = endPath; __callArgument28; }), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endToX, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endToY, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
+            appendPathLineTo(({ final __callArgument28:Dynamic = startPath; __callArgument28; }), (cast ((cast edge : SwfShapeEdge__swfShape).toX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
+            appendPathLineTo(({ final __callArgument29:Dynamic = endPath; __callArgument29; }), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endToX, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast _Runtime.divideNumbers(_Runtime.coalesce((cast edge : SwfShapeEdge__swfShape).endToY, function():Dynamic return cast 0.0), SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
           }
         }
       }
@@ -255,7 +261,7 @@ class SwfShape {
       while ((cast ((cast count : Float) <= (cast SwfShape.MAX_SHAPE_RECORDS__swfShape : Float)) : Bool)) {
         if ((cast _Runtime.strictEquals(count, SwfShape.MAX_SHAPE_RECORDS__swfShape) : Bool)) { return cast null; }
         if ((cast !_Runtime.strictEquals((cast reader : SwfReader).readUnsignedBits(1.0), 0.0) : Bool)) {
-          var record:Null<SwfShapeEdgeRecord__swfShape> = (cast SwfShape.readSwfShapeEdgeRecord__swfShape(({ final __callArgument29:Dynamic = reader; __callArgument29; }), ({ final __callArgument30:Dynamic = pen; __callArgument30; })) : Null<SwfShapeEdgeRecord__swfShape>);
+          var record:Null<SwfShapeEdgeRecord__swfShape> = (cast SwfShape.readSwfShapeEdgeRecord__swfShape(({ final __callArgument30:Dynamic = reader; __callArgument30; }), ({ final __callArgument31:Dynamic = pen; __callArgument31; })) : Null<SwfShapeEdgeRecord__swfShape>);
           if ((cast _Runtime.strictEquals(record, null) : Bool)) { return cast null; }
           _Runtime.callProperty(records, 'push', cast ([record] : Array<Dynamic>));
           count++;
@@ -286,12 +292,12 @@ class SwfShape {
 
   public static function appendSwfShapeContours__swfShape(shape:Shape, segments:Array<SwfShapeSegment__swfShape>):Void {
     for (contour in _Runtime.iterable((cast SwfShape.stitchSwfShapeSegments__swfShape((cast segments : Dynamic)) : Array<SwfShapeSegment__swfShape>))) {
-      appendShapeMoveTo(({ final __callArgument33:Dynamic = shape; __callArgument33; }), (cast ((cast contour : SwfShapeSegment__swfShape).startX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast contour : SwfShapeSegment__swfShape).startY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
+      appendShapeMoveTo(({ final __callArgument34:Dynamic = shape; __callArgument34; }), (cast ((cast contour : SwfShapeSegment__swfShape).startX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast contour : SwfShapeSegment__swfShape).startY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
       for (edge in _Runtime.iterable((cast contour : SwfShapeSegment__swfShape).edges)) {
         if ((cast (cast edge : SwfShapeEdge__swfShape).curved : Bool)) {
-          appendShapeCurveTo(({ final __callArgument36:Dynamic = shape; __callArgument36; }), (cast ((cast edge : SwfShapeEdge__swfShape).controlX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).controlY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
+          appendShapeCurveTo(({ final __callArgument37:Dynamic = shape; __callArgument37; }), (cast ((cast edge : SwfShapeEdge__swfShape).controlX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).controlY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
         } else {
-          appendShapeLineTo(({ final __callArgument37:Dynamic = shape; __callArgument37; }), (cast ((cast edge : SwfShapeEdge__swfShape).toX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
+          appendShapeLineTo(({ final __callArgument38:Dynamic = shape; __callArgument38; }), (cast ((cast edge : SwfShapeEdge__swfShape).toX / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast ((cast edge : SwfShapeEdge__swfShape).toY / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float));
         }
       }
     }
@@ -303,21 +309,21 @@ class SwfShape {
       var segments:Null<Array<SwfShapeSegment__swfShape>> = ((cast (cast state : SwfShapeState__swfShape).fillSegments : flighthq._internal._Map<Float, Array<SwfShapeSegment__swfShape>>).get(index));
       if ((cast ((cast _Runtime.strictEquals(fill, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(segments, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { continue; }
       if ((cast !_Runtime.strictEquals((cast fill : SwfShapeFill__swfShape).texture, null) : Bool)) {
-        appendShapeBeginTextureFill(({ final __callArgument40:Dynamic = shape; __callArgument40; }), ({ final __callArgument41:Dynamic = (cast fill : SwfShapeFill__swfShape).texture; __callArgument41; }), (cast fill : SwfShapeFill__swfShape).textureMatrix);
+        appendShapeBeginTextureFill(({ final __callArgument41:Dynamic = shape; __callArgument41; }), ({ final __callArgument42:Dynamic = (cast fill : SwfShapeFill__swfShape).texture; __callArgument42; }), (cast fill : SwfShapeFill__swfShape).textureMatrix);
       } else { if ((cast _Runtime.strictEquals((cast fill : SwfShapeFill__swfShape).gradientType, null) : Bool)) {
-        appendShapeBeginFill(({ final __callArgument42:Dynamic = shape; __callArgument42; }), (cast (cast fill : SwfShapeFill__swfShape).color : Float), (cast (cast fill : SwfShapeFill__swfShape).opacity : Float));
+        appendShapeBeginFill(({ final __callArgument43:Dynamic = shape; __callArgument43; }), (cast (cast fill : SwfShapeFill__swfShape).color : Float), (cast (cast fill : SwfShapeFill__swfShape).opacity : Float));
       } else {
-        appendShapeBeginGradientFill(({ final __callArgument43:Dynamic = shape; __callArgument43; }), (cast fill : SwfShapeFill__swfShape).gradientType, (cast fill : SwfShapeFill__swfShape).colors, (cast fill : SwfShapeFill__swfShape).alphas, (cast fill : SwfShapeFill__swfShape).ratios, (cast fill : SwfShapeFill__swfShape).matrix, (cast fill : SwfShapeFill__swfShape).spreadMethod, ({ final __callArgument44:Dynamic = 'rgb'; __callArgument44; }), (cast (cast fill : SwfShapeFill__swfShape).focalPoint : Float));
+        appendShapeBeginGradientFill(({ final __callArgument44:Dynamic = shape; __callArgument44; }), (cast fill : SwfShapeFill__swfShape).gradientType, (cast fill : SwfShapeFill__swfShape).colors, (cast fill : SwfShapeFill__swfShape).alphas, (cast fill : SwfShapeFill__swfShape).ratios, (cast fill : SwfShapeFill__swfShape).matrix, (cast fill : SwfShapeFill__swfShape).spreadMethod, ({ final __callArgument45:Dynamic = 'rgb'; __callArgument45; }), (cast (cast fill : SwfShapeFill__swfShape).focalPoint : Float));
       } }
-      SwfShape.appendSwfShapeContours__swfShape(({ final __callArgument45:Dynamic = shape; __callArgument45; }), (cast segments : Dynamic));
-      appendShapeEndFill(({ final __callArgument46:Dynamic = shape; __callArgument46; }));
+      SwfShape.appendSwfShapeContours__swfShape(({ final __callArgument46:Dynamic = shape; __callArgument46; }), (cast segments : Dynamic));
+      appendShapeEndFill(({ final __callArgument47:Dynamic = shape; __callArgument47; }));
     }
     for (index in _Runtime.iterable(_Runtime.callProperty(_Runtime.concatArrays([_Runtime.toArray(((cast (cast state : SwfShapeState__swfShape).lineSegments : flighthq._internal._Map<Float, Array<SwfShapeSegment__swfShape>>).keys()))]), 'sort', cast ([SwfShape.compareSwfShapeStyleIndex__swfShape] : Array<Dynamic>)))) {
       var line:SwfShapeLine__swfShape = flighthq._internal._StaticIndex.readArray((cast (cast state : SwfShapeState__swfShape).styles : SwfShapeStyles__swfShape).lines, (index - 1.0));
       var segments:Null<Array<SwfShapeSegment__swfShape>> = ((cast (cast state : SwfShapeState__swfShape).lineSegments : flighthq._internal._Map<Float, Array<SwfShapeSegment__swfShape>>).get(index));
       if ((cast ((cast _Runtime.strictEquals(line, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(segments, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { continue; }
-      appendShapeLineStyle(({ final __callArgument49:Dynamic = shape; __callArgument49; }), (cast ((cast line : SwfShapeLine__swfShape).width / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast (cast line : SwfShapeLine__swfShape).color : Float), (cast (cast line : SwfShapeLine__swfShape).alpha : Float), (cast (cast line : SwfShapeLine__swfShape).pixelHinting : Bool), ({ final __callArgument50:Dynamic = 'normal'; __callArgument50; }), (cast line : SwfShapeLine__swfShape).caps, (cast line : SwfShapeLine__swfShape).joints, (cast (cast line : SwfShapeLine__swfShape).miterLimit : Float));
-      SwfShape.appendSwfShapeContours__swfShape(({ final __callArgument51:Dynamic = shape; __callArgument51; }), (cast segments : Dynamic));
+      appendShapeLineStyle(({ final __callArgument50:Dynamic = shape; __callArgument50; }), (cast ((cast line : SwfShapeLine__swfShape).width / SwfShape.TWIPS_PER_PIXEL__swfShape) : Float), (cast (cast line : SwfShapeLine__swfShape).color : Float), (cast (cast line : SwfShapeLine__swfShape).alpha : Float), (cast (cast line : SwfShapeLine__swfShape).pixelHinting : Bool), ({ final __callArgument51:Dynamic = 'normal'; __callArgument51; }), (cast line : SwfShapeLine__swfShape).caps, (cast line : SwfShapeLine__swfShape).joints, (cast (cast line : SwfShapeLine__swfShape).miterLimit : Float));
+      SwfShape.appendSwfShapeContours__swfShape(({ final __callArgument52:Dynamic = shape; __callArgument52; }), (cast segments : Dynamic));
     }
     ((cast (cast state : SwfShapeState__swfShape).fillSegments : flighthq._internal._Map<Float, Array<SwfShapeSegment__swfShape>>).clear());
     ((cast (cast state : SwfShapeState__swfShape).lineSegments : flighthq._internal._Map<Float, Array<SwfShapeSegment__swfShape>>).clear());
@@ -358,7 +364,7 @@ class SwfShape {
     green = (cast reader : SwfReader).readUint8();
     blue = (cast reader : SwfReader).readUint8();
     alpha = ((cast hasAlpha : Bool) ? (cast (cast reader : SwfReader).readUint8() : Dynamic) : (cast 255.0 : Dynamic));
-    return cast { color: (((red * 65536.0) + (green * 256.0)) + blue), opacity: (alpha / 255.0) };
+    return cast { color: _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(red) << 24)) | _Runtime.toInt32((_Runtime.toInt32(green) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(blue) << 8)))) | 255)), 0), opacity: (alpha / 255.0) };
     return cast null;
   }
 
@@ -405,35 +411,35 @@ class SwfShape {
     var edge:SwfShapeEdge__swfShape = cast _Runtime.UNDEFINED;
     fromX = (cast state : SwfShapeState__swfShape).x;
     fromY = (cast state : SwfShapeState__swfShape).y;
-    record = (cast SwfShape.readSwfShapeEdgeRecord__swfShape(({ final __callArgument52:Dynamic = reader; __callArgument52; }), ({ final __callArgument53:Dynamic = state; __callArgument53; })) : Null<SwfShapeEdgeRecord__swfShape>);
+    record = (cast SwfShape.readSwfShapeEdgeRecord__swfShape(({ final __callArgument53:Dynamic = reader; __callArgument53; }), ({ final __callArgument54:Dynamic = state; __callArgument54; })) : Null<SwfShapeEdgeRecord__swfShape>);
     if ((cast _Runtime.strictEquals(record, null) : Bool)) { return cast false; }
     edge = (cast { controlX: (cast record : SwfShapeEdgeRecord__swfShape).controlX, controlY: (cast record : SwfShapeEdgeRecord__swfShape).controlY, curved: (cast record : SwfShapeEdgeRecord__swfShape).curved, toX: (cast record : SwfShapeEdgeRecord__swfShape).toX, toY: (cast record : SwfShapeEdgeRecord__swfShape).toY });
     if ((cast !_Runtime.strictEquals((cast state : SwfShapeState__swfShape).fill1, 0.0) : Bool)) {
-      ({ final __nullishOwner54 = state; final __nullishValue55:Null<SwfShapeSegment__swfShape> = cast (cast __nullishOwner54 : SwfShapeState__swfShape).fill1Segment; __nullishValue55 == null ? ((cast __nullishOwner54 : SwfShapeState__swfShape).fill1Segment = (cast (cast SwfShape.createSwfShapeSegment__swfShape((cast fromX : Float), (cast fromY : Float)) : SwfShapeSegment__swfShape) : Null<SwfShapeSegment__swfShape>)) : (cast __nullishValue55 : Null<SwfShapeSegment__swfShape>); });
+      ({ final __nullishOwner55 = state; final __nullishValue56:Null<SwfShapeSegment__swfShape> = cast (cast __nullishOwner55 : SwfShapeState__swfShape).fill1Segment; __nullishValue56 == null ? ((cast __nullishOwner55 : SwfShapeState__swfShape).fill1Segment = (cast (cast SwfShape.createSwfShapeSegment__swfShape((cast fromX : Float), (cast fromY : Float)) : SwfShapeSegment__swfShape) : Null<SwfShapeSegment__swfShape>)) : (cast __nullishValue56 : Null<SwfShapeSegment__swfShape>); });
       _Runtime.callProperty((cast (cast state : SwfShapeState__swfShape).fill1Segment : SwfShapeSegment__swfShape).edges, 'push', cast ([edge] : Array<Dynamic>));
     }
     if ((cast !_Runtime.strictEquals((cast state : SwfShapeState__swfShape).fill0, 0.0) : Bool)) {
-      ({ final __nullishOwner56 = state; final __nullishValue57:Null<SwfShapeSegment__swfShape> = cast (cast __nullishOwner56 : SwfShapeState__swfShape).fill0Segment; __nullishValue57 == null ? ((cast __nullishOwner56 : SwfShapeState__swfShape).fill0Segment = (cast (cast SwfShape.createSwfShapeSegment__swfShape((cast fromX : Float), (cast fromY : Float)) : SwfShapeSegment__swfShape) : Null<SwfShapeSegment__swfShape>)) : (cast __nullishValue57 : Null<SwfShapeSegment__swfShape>); });
+      ({ final __nullishOwner57 = state; final __nullishValue58:Null<SwfShapeSegment__swfShape> = cast (cast __nullishOwner57 : SwfShapeState__swfShape).fill0Segment; __nullishValue58 == null ? ((cast __nullishOwner57 : SwfShapeState__swfShape).fill0Segment = (cast (cast SwfShape.createSwfShapeSegment__swfShape((cast fromX : Float), (cast fromY : Float)) : SwfShapeSegment__swfShape) : Null<SwfShapeSegment__swfShape>)) : (cast __nullishValue58 : Null<SwfShapeSegment__swfShape>); });
       _Runtime.callProperty((cast (cast state : SwfShapeState__swfShape).fill0Segment : SwfShapeSegment__swfShape).edges, 'push', cast ([edge] : Array<Dynamic>));
     }
     if ((cast !_Runtime.strictEquals((cast state : SwfShapeState__swfShape).line, 0.0) : Bool)) {
-      ({ final __nullishOwner58 = state; final __nullishValue59:Null<SwfShapeSegment__swfShape> = cast (cast __nullishOwner58 : SwfShapeState__swfShape).lineSegment; __nullishValue59 == null ? ((cast __nullishOwner58 : SwfShapeState__swfShape).lineSegment = (cast (cast SwfShape.createSwfShapeSegment__swfShape((cast fromX : Float), (cast fromY : Float)) : SwfShapeSegment__swfShape) : Null<SwfShapeSegment__swfShape>)) : (cast __nullishValue59 : Null<SwfShapeSegment__swfShape>); });
+      ({ final __nullishOwner59 = state; final __nullishValue60:Null<SwfShapeSegment__swfShape> = cast (cast __nullishOwner59 : SwfShapeState__swfShape).lineSegment; __nullishValue60 == null ? ((cast __nullishOwner59 : SwfShapeState__swfShape).lineSegment = (cast (cast SwfShape.createSwfShapeSegment__swfShape((cast fromX : Float), (cast fromY : Float)) : SwfShapeSegment__swfShape) : Null<SwfShapeSegment__swfShape>)) : (cast __nullishValue60 : Null<SwfShapeSegment__swfShape>); });
       _Runtime.callProperty((cast (cast state : SwfShapeState__swfShape).lineSegment : SwfShapeSegment__swfShape).edges, 'push', cast ([edge] : Array<Dynamic>));
     }
     return cast true;
     return cast null;
   }
 
-  public static function readSwfShapeFillStyle__swfShape(reader:SwfReader, version:Float, hasAlpha:Bool, resolveBitmapFill:Null<SwfBitmapFillResolver__swfShape>):Null<SwfShapeFill__swfShape> {
+  public static function readSwfShapeFillStyle__swfShape(reader:SwfReader, version:Float, hasAlpha:Bool, resolveBitmapFill:Null<SwfBitmapFillResolver__swfShape>, ?diagnostics:Array<ImportDiagnostic>):Null<SwfShapeFill__swfShape> {
     var type:Float = cast _Runtime.UNDEFINED;
     type = (cast reader : SwfReader).readUint8();
     if ((cast _Runtime.strictEquals(type, SwfShape.FILL_SOLID__swfShape) : Bool)) {
-      var solid:{ var color:Float; var opacity:Float; } = (cast SwfShape.readSwfShapeColor__swfShape(({ final __callArgument60:Dynamic = reader; __callArgument60; }), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
+      var solid:{ var color:Float; var opacity:Float; } = (cast SwfShape.readSwfShapeColor__swfShape(({ final __callArgument61:Dynamic = reader; __callArgument61; }), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
       return cast (cast SwfShape.createSwfShapeFill__swfShape((cast (cast solid : { var color:Float; var opacity:Float; }).color : Float), (cast (cast solid : { var color:Float; var opacity:Float; }).opacity : Float)) : SwfShapeFill__swfShape);
     }
     if ((cast ((cast ((cast _Runtime.strictEquals(type, SwfShape.FILL_LINEAR_GRADIENT__swfShape) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_RADIAL_GRADIENT__swfShape) : Bool)) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_FOCAL_GRADIENT__swfShape) : Bool)) : Bool)) {
       if ((cast ((cast _Runtime.strictEquals(type, SwfShape.FILL_FOCAL_GRADIENT__swfShape) : Bool) && (cast ((cast version : Float) < (cast 4.0 : Float)) : Bool)) : Bool)) { return cast null; }
-      var matrix:Matrix = (cast SwfShape.readSwfShapeMatrix__swfShape(({ final __callArgument61:Dynamic = reader; __callArgument61; })) : Matrix);
+      var matrix:Matrix = (cast SwfShape.readSwfShapeMatrix__swfShape(({ final __callArgument62:Dynamic = reader; __callArgument62; })) : Matrix);
       var spread:Float = (cast reader : SwfReader).readUnsignedBits(2.0);
       (cast reader : SwfReader).readUnsignedBits(2.0);
       var count:Float = (cast reader : SwfReader).readUnsignedBits(4.0);
@@ -446,7 +452,7 @@ class SwfShape {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
           var ratio:Float = (cast reader : SwfReader).readUint8();
-          var record:{ var color:Float; var opacity:Float; } = (cast SwfShape.readSwfShapeColor__swfShape(({ final __callArgument62:Dynamic = reader; __callArgument62; }), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
+          var record:{ var color:Float; var opacity:Float; } = (cast SwfShape.readSwfShapeColor__swfShape(({ final __callArgument63:Dynamic = reader; __callArgument63; }), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
           _Runtime.callProperty(ratios, 'push', cast ([ratio] : Array<Dynamic>));
           _Runtime.callProperty(colors, 'push', cast ([(cast record : { var color:Float; var opacity:Float; }).color] : Array<Dynamic>));
           _Runtime.callProperty(alphas, 'push', cast ([(cast record : { var color:Float; var opacity:Float; }).opacity] : Array<Dynamic>));
@@ -455,17 +461,22 @@ class SwfShape {
       }
       var focalPoint:Float = ((cast _Runtime.strictEquals(type, SwfShape.FILL_FOCAL_GRADIENT__swfShape) : Bool) ? (cast (cast reader : SwfReader).readFixed8() : Dynamic) : (cast 0.0 : Dynamic));
       if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
-      return cast { alphas: alphas, color: 0.0, colors: colors, focalPoint: focalPoint, gradientType: ((cast _Runtime.strictEquals(type, SwfShape.FILL_LINEAR_GRADIENT__swfShape) : Bool) ? (cast 'linear' : Dynamic) : (cast 'radial' : Dynamic)), matrix: matrix, opacity: 1.0, ratios: ratios, spreadMethod: (cast SwfShape.resolveSwfShapeSpreadMethod__swfShape((cast spread : Float)) : SpreadMethod), texture: null, textureMatrix: null };
+      return cast { alphas: alphas, color: 255.0, colors: colors, focalPoint: focalPoint, gradientType: ((cast _Runtime.strictEquals(type, SwfShape.FILL_LINEAR_GRADIENT__swfShape) : Bool) ? (cast 'linear' : Dynamic) : (cast 'radial' : Dynamic)), matrix: matrix, opacity: 1.0, ratios: ratios, spreadMethod: (cast SwfShape.resolveSwfShapeSpreadMethod__swfShape((cast spread : Float)) : SpreadMethod), texture: null, textureMatrix: null };
     }
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(type, SwfShape.FILL_REPEATING_BITMAP__swfShape) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_CLIPPED_BITMAP__swfShape) : Bool)) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_NON_SMOOTHED_REPEATING_BITMAP__swfShape) : Bool)) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_NON_SMOOTHED_CLIPPED_BITMAP__swfShape) : Bool)) : Bool)) {
       var characterId:Float = (cast reader : SwfReader).readUint16();
-      var matrix:Matrix = (cast SwfShape.readSwfShapeMatrix__swfShape(({ final __callArgument63:Dynamic = reader; __callArgument63; })) : Matrix);
+      var matrix:Matrix = (cast SwfShape.readSwfShapeMatrix__swfShape(({ final __callArgument64:Dynamic = reader; __callArgument64; })) : Matrix);
       if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
       var repeat:Bool = ((cast _Runtime.strictEquals(type, SwfShape.FILL_REPEATING_BITMAP__swfShape) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_NON_SMOOTHED_REPEATING_BITMAP__swfShape) : Bool));
       var smoothed:Bool = ((cast _Runtime.strictEquals(type, SwfShape.FILL_REPEATING_BITMAP__swfShape) : Bool) || (cast _Runtime.strictEquals(type, SwfShape.FILL_CLIPPED_BITMAP__swfShape) : Bool));
-      var fill:SwfShapeFill__swfShape = (cast SwfShape.createSwfShapeFill__swfShape((cast 0.0 : Float), (cast 1.0 : Float)) : SwfShapeFill__swfShape);
+      var fill:SwfShapeFill__swfShape = (cast SwfShape.createSwfShapeFill__swfShape((cast 255.0 : Float), (cast 1.0 : Float)) : SwfShapeFill__swfShape);
       ((cast fill : SwfShapeFill__swfShape).texture = _Runtime.coalesce(_Runtime.callOptionalValue(resolveBitmapFill, cast ([characterId, repeat, smoothed] : Array<Dynamic>)), function():Dynamic return cast null));
-      ((cast fill : SwfShapeFill__swfShape).textureMatrix = (cast createMatrix(({ final __callArgument64:Dynamic = (matrix.a / SwfShape.TWIPS_PER_PIXEL__swfShape); __callArgument64; }), ({ final __callArgument65:Dynamic = (matrix.b / SwfShape.TWIPS_PER_PIXEL__swfShape); __callArgument65; }), ({ final __callArgument66:Dynamic = (matrix.c / SwfShape.TWIPS_PER_PIXEL__swfShape); __callArgument66; }), ({ final __callArgument67:Dynamic = (matrix.d / SwfShape.TWIPS_PER_PIXEL__swfShape); __callArgument67; }), ({ final __callArgument68:Dynamic = matrix.tx; __callArgument68; }), ({ final __callArgument69:Dynamic = matrix.ty; __callArgument69; })) : Matrix));
+      var textureMatrix:Matrix = (cast createMatrix(({ final __callArgument65:Dynamic = (matrix.a / SwfShape.TWIPS_PER_PIXEL__swfShape); __callArgument65; }), ({ final __callArgument66:Dynamic = (matrix.b / SwfShape.TWIPS_PER_PIXEL__swfShape); __callArgument66; }), ({ final __callArgument67:Dynamic = (matrix.c / SwfShape.TWIPS_PER_PIXEL__swfShape); __callArgument67; }), ({ final __callArgument68:Dynamic = (matrix.d / SwfShape.TWIPS_PER_PIXEL__swfShape); __callArgument68; }), ({ final __callArgument69:Dynamic = matrix.tx; __callArgument69; }), ({ final __callArgument70:Dynamic = matrix.ty; __callArgument70; })) : Matrix);
+      if ((cast (cast inverseMatrix(({ final __callArgument71:Dynamic = SwfShape._textureMatrixScratch__swfShape; __callArgument71; }), ({ final __callArgument72:Dynamic = textureMatrix; __callArgument72; })) : Bool) : Bool)) {
+        ((cast fill : SwfShapeFill__swfShape).textureMatrix = textureMatrix);
+      } else {
+        reportImportDiagnostic(({ final __callArgument73:Dynamic = diagnostics; __callArgument73; }), ({ final __callArgument74:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument74; }), (cast 'swf.fill-matrix-singular' : String), (cast 'readSwfShapeFillStyle' : String), ({ final __callArgument75:Dynamic = { character: characterId }; __callArgument75; }));
+      }
       return cast fill;
     }
     return cast null;
@@ -487,7 +498,7 @@ class SwfShape {
     var color:{ var color:Float; var opacity:Float; } = cast _Runtime.UNDEFINED;
     width = (cast reader : SwfReader).readUint16();
     if ((cast ((cast version : Float) < (cast 4.0 : Float)) : Bool)) {
-      var color:{ var color:Float; var opacity:Float; } = (cast SwfShape.readSwfShapeColor__swfShape(({ final __callArgument70:Dynamic = reader; __callArgument70; }), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
+      var color:{ var color:Float; var opacity:Float; } = (cast SwfShape.readSwfShapeColor__swfShape(({ final __callArgument76:Dynamic = reader; __callArgument76; }), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
       if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
       return cast { alpha: (cast color : { var color:Float; var opacity:Float; }).opacity, caps: 'round', color: (cast color : { var color:Float; var opacity:Float; }).color, joints: 'round', miterLimit: 3.0, pixelHinting: false, width: width };
     }
@@ -503,11 +514,11 @@ class SwfShape {
     miterLimit = ((cast _Runtime.strictEquals(join, SwfShape.JOIN_MITER__swfShape) : Bool) ? (cast (cast reader : SwfReader).readFixed8() : Dynamic) : (cast 3.0 : Dynamic));
     if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
     if ((cast hasFill : Bool)) {
-      var fill:Null<SwfShapeFill__swfShape> = (cast SwfShape.readSwfShapeFillStyle__swfShape(({ final __callArgument71:Dynamic = reader; __callArgument71; }), (cast version : Float), (cast hasAlpha : Bool), (cast resolveBitmapFill : Dynamic)) : Null<SwfShapeFill__swfShape>);
+      var fill:Null<SwfShapeFill__swfShape> = (cast SwfShape.readSwfShapeFillStyle__swfShape(({ final __callArgument77:Dynamic = reader; __callArgument77; }), (cast version : Float), (cast hasAlpha : Bool), (cast resolveBitmapFill : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<SwfShapeFill__swfShape>);
       if ((cast _Runtime.strictEquals(fill, null) : Bool)) { return cast null; }
       return cast { alpha: (cast fill : SwfShapeFill__swfShape).opacity, caps: (cast SwfShape.resolveSwfShapeCapsStyle__swfShape((cast startCap : Float)) : CapsStyle), color: (cast fill : SwfShapeFill__swfShape).color, joints: (cast SwfShape.resolveSwfShapeJointStyle__swfShape((cast join : Float)) : JointStyle), miterLimit: miterLimit, pixelHinting: pixelHinting, width: width };
     }
-    color = (cast SwfShape.readSwfShapeColor__swfShape(({ final __callArgument72:Dynamic = reader; __callArgument72; }), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
+    color = (cast SwfShape.readSwfShapeColor__swfShape(({ final __callArgument78:Dynamic = reader; __callArgument78; }), (cast hasAlpha : Bool)) : { var color:Float; var opacity:Float; });
     if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
     return cast { alpha: (cast color : { var color:Float; var opacity:Float; }).opacity, caps: (cast SwfShape.resolveSwfShapeCapsStyle__swfShape((cast startCap : Float)) : CapsStyle), color: (cast color : { var color:Float; var opacity:Float; }).color, joints: (cast SwfShape.resolveSwfShapeJointStyle__swfShape((cast join : Float)) : JointStyle), miterLimit: miterLimit, pixelHinting: pixelHinting, width: width };
     return cast null;
@@ -539,7 +550,7 @@ class SwfShape {
     tx = _Runtime.divideNumbers((cast reader : SwfReader).readSignedBits(translateBits), SwfShape.TWIPS_PER_PIXEL__swfShape);
     ty = _Runtime.divideNumbers((cast reader : SwfReader).readSignedBits(translateBits), SwfShape.TWIPS_PER_PIXEL__swfShape);
     (cast reader : SwfReader).alignToByte();
-    return cast (cast createMatrix(({ final __callArgument73:Dynamic = a; __callArgument73; }), ({ final __callArgument74:Dynamic = b; __callArgument74; }), ({ final __callArgument75:Dynamic = c; __callArgument75; }), ({ final __callArgument76:Dynamic = d; __callArgument76; }), ({ final __callArgument77:Dynamic = tx; __callArgument77; }), ({ final __callArgument78:Dynamic = ty; __callArgument78; })) : Matrix);
+    return cast (cast createMatrix(({ final __callArgument79:Dynamic = a; __callArgument79; }), ({ final __callArgument80:Dynamic = b; __callArgument80; }), ({ final __callArgument81:Dynamic = c; __callArgument81; }), ({ final __callArgument82:Dynamic = d; __callArgument82; }), ({ final __callArgument83:Dynamic = tx; __callArgument83; }), ({ final __callArgument84:Dynamic = ty; __callArgument84; })) : Matrix);
     return cast null;
   }
 
@@ -550,30 +561,30 @@ class SwfShape {
     return cast null;
   }
 
-  public static function readSwfShapeStyles__swfShape(reader:SwfReader, version:Float, hasAlpha:Bool, resolveBitmapFill:Null<SwfBitmapFillResolver__swfShape>):Null<SwfShapeStyles__swfShape> {
+  public static function readSwfShapeStyles__swfShape(reader:SwfReader, version:Float, hasAlpha:Bool, resolveBitmapFill:Null<SwfBitmapFillResolver__swfShape>, ?diagnostics:Array<ImportDiagnostic>):Null<SwfShapeStyles__swfShape> {
     var fillCount:Float = cast _Runtime.UNDEFINED;
     var fills:Array<SwfShapeFill__swfShape> = cast _Runtime.UNDEFINED;
     var lineCount:Float = cast _Runtime.UNDEFINED;
     var lines:Array<SwfShapeLine__swfShape> = cast _Runtime.UNDEFINED;
-    fillCount = (cast SwfShape.readSwfShapeStyleCount__swfShape(({ final __callArgument79:Dynamic = reader; __callArgument79; }), (cast version : Float)) : Float);
+    fillCount = (cast SwfShape.readSwfShapeStyleCount__swfShape(({ final __callArgument85:Dynamic = reader; __callArgument85; }), (cast version : Float)) : Float);
     if ((cast ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool) || (cast ((cast fillCount : Float) > (cast SwfShape.MAX_SHAPE_STYLES__swfShape : Float)) : Bool)) : Bool)) { return cast null; }
     fills = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast fillCount : Float)) : Bool)) {
-        var fill:Null<SwfShapeFill__swfShape> = (cast SwfShape.readSwfShapeFillStyle__swfShape(({ final __callArgument80:Dynamic = reader; __callArgument80; }), (cast version : Float), (cast hasAlpha : Bool), (cast resolveBitmapFill : Dynamic)) : Null<SwfShapeFill__swfShape>);
+        var fill:Null<SwfShapeFill__swfShape> = (cast SwfShape.readSwfShapeFillStyle__swfShape(({ final __callArgument86:Dynamic = reader; __callArgument86; }), (cast version : Float), (cast hasAlpha : Bool), (cast resolveBitmapFill : Dynamic), ({ final __callArgument87:Dynamic = diagnostics; __callArgument87; })) : Null<SwfShapeFill__swfShape>);
         if ((cast _Runtime.strictEquals(fill, null) : Bool)) { return cast null; }
         _Runtime.callProperty(fills, 'push', cast ([fill] : Array<Dynamic>));
         i++;
       }
     }
-    lineCount = (cast SwfShape.readSwfShapeStyleCount__swfShape(({ final __callArgument81:Dynamic = reader; __callArgument81; }), (cast version : Float)) : Float);
+    lineCount = (cast SwfShape.readSwfShapeStyleCount__swfShape(({ final __callArgument88:Dynamic = reader; __callArgument88; }), (cast version : Float)) : Float);
     if ((cast ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool) || (cast ((cast lineCount : Float) > (cast SwfShape.MAX_SHAPE_STYLES__swfShape : Float)) : Bool)) : Bool)) { return cast null; }
     lines = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast lineCount : Float)) : Bool)) {
-        var line:Null<SwfShapeLine__swfShape> = (cast SwfShape.readSwfShapeLineStyle__swfShape(({ final __callArgument82:Dynamic = reader; __callArgument82; }), (cast version : Float), (cast hasAlpha : Bool), (cast resolveBitmapFill : Dynamic)) : Null<SwfShapeLine__swfShape>);
+        var line:Null<SwfShapeLine__swfShape> = (cast SwfShape.readSwfShapeLineStyle__swfShape(({ final __callArgument89:Dynamic = reader; __callArgument89; }), (cast version : Float), (cast hasAlpha : Bool), (cast resolveBitmapFill : Dynamic)) : Null<SwfShapeLine__swfShape>);
         if ((cast _Runtime.strictEquals(line, null) : Bool)) { return cast null; }
         _Runtime.callProperty(lines, 'push', cast ([line] : Array<Dynamic>));
         i++;
@@ -729,4 +740,6 @@ class SwfShape {
   public static final STATE_NEW_STYLES__swfShape:Float = 16.0;
 
   public static final TWIPS_PER_PIXEL__swfShape:Float = 20.0;
+
+  public static final _textureMatrixScratch__swfShape:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix);
 }

@@ -153,7 +153,7 @@ class BoundingSphere {
       return;
     }
     newRadius = (((dist + ar) + br) * 0.5);
-    t = ((cast !_Runtime.strictEquals(dist, 0.0) : Bool) ? (cast ((newRadius - ar) / dist) : Dynamic) : (cast 0.0 : Dynamic));
+    t = ((newRadius - ar) / dist);
     ((cast out.center : { var x:Float; }).x = cast ((acx + (dx * t)) : Float));
     ((cast out.center : { var y:Float; }).y = cast ((acy + (dy * t)) : Float));
     ((cast out.center : { var z:Float; }).z = cast ((acz + (dz * t)) : Float));

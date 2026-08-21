@@ -4,6 +4,7 @@ package flighthq.scene2dCanvas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.PackColor.computeRgbHexString;
+import flighthq.color.PackColor.computeRgbaCssString;
 import flighthq.render.Renderer.noopRendererData;
 import flighthq.scene2dCanvas.CanvasNode2D.drawCanvasScene2D;
 import flighthq.scene2dCanvas.CanvasTransform.setCanvasTransform;
@@ -121,7 +122,7 @@ class CanvasRichText {
     for (group in _Runtime.iterable(result.groups)) {
       if ((cast ((cast group.lineIndex : Float) < (cast firstVisibleLine : Float)) : Bool)) { continue; }
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', (cast computeTextFormatFontString(group.format) : String));
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', (cast computeRgbHexString((cast _Runtime.coalesce((cast group.format : TextFormat).color, function():Dynamic return cast data.textColor) : Float)) : String));
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', (cast computeRgbaCssString((cast _Runtime.coalesce((cast group.format : TextFormat).color, function():Dynamic return cast data.textColor) : Float)) : String));
       var slice:String = _Runtime.substring(text, group.startIndex, group.endIndex);
       var x:Float = (group.offsetX - scrollXOffset);
       var y:Float = ((group.offsetY + group.ascent) - scrollYOffset);
@@ -131,7 +132,7 @@ class CanvasRichText {
         flighthq._internal.backend.Canvas2dBackend.call(context, 'fillText', cast ([CanvasRichText.BULLET_CHAR__canvasRichText, ((x - bulletW) - CanvasRichText.BULLET_GAP__canvasRichText), y] : Array<Dynamic>));
       }
       flighthq._internal.backend.Canvas2dBackend.call(context, 'fillText', cast ([slice, x, y] : Array<Dynamic>));
-      var lineColor:String = (cast computeRgbHexString((cast _Runtime.coalesce((cast group.format : TextFormat).color, function():Dynamic return cast data.textColor) : Float)) : String);
+      var lineColor:String = (cast computeRgbaCssString((cast _Runtime.coalesce((cast group.format : TextFormat).color, function():Dynamic return cast data.textColor) : Float)) : String);
       var lineWidth:Float = HxMath.max(1.0, _Runtime.divideNumbers(_Runtime.coalesce((cast group.format : TextFormat).size, function():Dynamic return cast 12.0), 16.0));
       if (_Runtime.truthy(_Runtime.orValue((cast group.format : TextFormat).underline, function():Dynamic return cast (cast group.format : TextFormat).strikethrough))) {
         flighthq._internal.backend.Canvas2dBackend.setField(context, 'strokeStyle', lineColor);

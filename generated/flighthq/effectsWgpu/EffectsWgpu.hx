@@ -3,6 +3,7 @@ package flighthq.effectsWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.effectsWgpu.EnableWgpuRenderEffectGuards as Facade_EffectsWgpu_flighthq_effectsWgpu_EnableWgpuRenderEffectGuards;
 import flighthq.effectsWgpu.WgpuBevelEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBevelEffect;
 import flighthq.effectsWgpu.WgpuBlendEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBlendEffect;
 import flighthq.effectsWgpu.WgpuBloomEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBloomEffect;
@@ -71,8 +72,8 @@ class EffectsWgpu {
     Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectPipeline.beginWgpuRenderEffectPipeline(state, pipeline, colorSpace);
   }
 
-  public static function createWgpuRenderEffectPipeline(_state:WgpuRenderState, ?options:RenderEffectPipelineOptions):WgpuRenderEffectPipeline {
-    return cast Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectPipeline.createWgpuRenderEffectPipeline(_state, options);
+  public static function createWgpuRenderEffectPipeline(state:WgpuRenderState, ?options:RenderEffectPipelineOptions):WgpuRenderEffectPipeline {
+    return cast Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectPipeline.createWgpuRenderEffectPipeline(state, options);
     return cast null;
   }
 
@@ -163,6 +164,14 @@ class EffectsWgpu {
   public static final defaultWgpuVignetteEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuVignetteEffect.defaultWgpuVignetteEffectRunner;
 
   public static final defaultWgpuWhiteBalanceEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuWhiteBalanceEffect.defaultWgpuWhiteBalanceEffectRunner;
+
+  public static function disableWgpuRenderEffectGuards(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_EnableWgpuRenderEffectGuards.disableWgpuRenderEffectGuards(state);
+  }
+
+  public static function enableWgpuRenderEffectGuards(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flighthq_effectsWgpu_EnableWgpuRenderEffectGuards.enableWgpuRenderEffectGuards(state);
+  }
 
   public static function endWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:WgpuRenderEffectPipeline, operations:Array<flighthq._internal._Union2<RenderEffect, Adjustment>>):Void {
     Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectPipeline.endWgpuRenderEffectPipeline(state, pipeline, operations);

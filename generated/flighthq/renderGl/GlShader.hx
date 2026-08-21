@@ -61,6 +61,21 @@ class GlShader {
   }
 
   @:noCompletion
+  public static function ensureDefaultGlBitmapShader(state:GlRenderState):GlBitmapShader {
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var shaderLoc:GlShaderLocations = cast _Runtime.UNDEFINED;
+    var shader:GlBitmapShader = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument24:Dynamic = state; __callArgument24; })) : GlRenderStateRuntime);
+    if ((cast !_Runtime.strictEquals(runtime.defaultBitmapShader, null) : Bool)) { return cast runtime.defaultBitmapShader; }
+    shaderLoc = (cast compileDefaultGlProgram((cast state : GlRenderState).gl) : GlShaderLocations);
+    shader = (cast createDefaultGlBitmapShader(({ final __callArgument25:Dynamic = shaderLoc; __callArgument25; }), runtime.matrixArray) : GlBitmapShader);
+    (runtime.defaultBitmapShader = cast (shader : Null<GlBitmapShader>));
+    (runtime.shaderLoc = cast (shaderLoc : Null<GlShaderLocations>));
+    return cast shader;
+    return cast null;
+  }
+
+  @:noCompletion
   public static function setGlAttributes(gl:flighthq._internal.dom.WebGL2RenderingContext, loc:GlShaderLocations):Void {
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, (cast loc : GlShaderLocations).locPosition);
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, (cast loc : GlShaderLocations).locTexCoord);

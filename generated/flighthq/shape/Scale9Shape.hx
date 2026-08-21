@@ -18,13 +18,13 @@ import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 
 class Scale9Shape {
   public static function createScale9Shape(scale9Grid:RectangleLike, ?obj:PartialNode<flighthq.types.Scale9Shape>):flighthq.types.Scale9Shape {
-    return cast (cast createNode2D((cast Scale9ShapeKind : String), (cast (cast obj : PartialNode<flighthq.types.Scale9Shape>) : Dynamic), (cast function(data:Null<flighthq._internal._Any>):Scale9ShapeData return (cast createScale9ShapeData(({ final __callArgument0:Dynamic = scale9Grid; __callArgument0; }), ({ final __callArgument1:Dynamic = data; __callArgument1; })) : Scale9ShapeData) : Dynamic), (cast function(__unused0:Null<flighthq._internal._Any>):Scale9ShapeRuntime return createScale9ShapeRuntime() : Dynamic)) : flighthq.types.Scale9Shape);
+    return cast (cast createNode2D((cast Scale9ShapeKind : String), (cast (cast obj : PartialNode<flighthq.types.Scale9Shape>) : Dynamic), (cast function(data:Null<{  }>):Scale9ShapeData return (cast createScale9ShapeData(({ final __callArgument0:Dynamic = scale9Grid; __callArgument0; }), (cast data : Dynamic)) : Scale9ShapeData) : Dynamic), (cast function(__unused0:Dynamic):Scale9ShapeRuntime return createScale9ShapeRuntime() : Dynamic)) : flighthq.types.Scale9Shape);
     return cast null;
   }
 
   @:noCompletion
-  public static function createScale9ShapeData(scale9Grid:RectangleLike, ?data:flighthq._internal._Partial<Scale9ShapeData>):Scale9ShapeData {
-    return cast { commands: _Runtime.coalesce(({ final __structural2 = data; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), scale9Grid: scale9Grid };
+  public static function createScale9ShapeData(scale9Grid:RectangleLike, ?data:{ @:optional var scale9Grid:Null<RectangleLike>; @:optional var commands:Null<Array<ShapeCommandToken>>; }):Scale9ShapeData {
+    return cast { commands: _Runtime.coalesce(({ final __structural1 = data; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), scale9Grid: scale9Grid };
     return cast null;
   }
 
@@ -36,7 +36,7 @@ class Scale9Shape {
 
   @:noCompletion
   public static function getScale9ShapeRuntime(source:flighthq.types.Scale9Shape):Scale9ShapeRuntime {
-    return cast (cast getNode2DRuntime(({ final __callArgument3:Dynamic = source; __callArgument3; })) : Scale9ShapeRuntime);
+    return cast (cast getNode2DRuntime(({ final __callArgument2:Dynamic = source; __callArgument2; })) : Scale9ShapeRuntime);
     return cast null;
   }
 }

@@ -5,4 +5,4 @@ const api = compiled.flighthq.collision.PointContainment;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const getCollisionShapeContainsPoint = api.getCollisionShapeContainsPoint;
+export const getCollisionShapeContainsPoint2D = api.getCollisionShapeContainsPoint2D;

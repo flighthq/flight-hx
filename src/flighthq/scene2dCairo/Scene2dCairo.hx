@@ -32,7 +32,6 @@ import flighthq.scene2dCanvas.CanvasTextureResolver as Facade_Scene2dCanvas_flig
 import flighthq.scene2dCanvas.CanvasTilemap as Facade_Scene2dCanvas_flighthq_scene2dCanvas_CanvasTilemap;
 import flighthq.scene2dCanvas.EnableCanvasTextureResolverGuards as Facade_Scene2dCanvas_flighthq_scene2dCanvas_EnableCanvasTextureResolverGuards;
 import flighthq.scene2dCanvas.ExplainCanvasTextureResolution as Facade_Scene2dCanvas_flighthq_scene2dCanvas_ExplainCanvasTextureResolution;
-import flighthq.types.CanvasRenderOptions;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTexture.CanvasRenderTextureExplanation;
 import flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool;
@@ -44,6 +43,7 @@ import flighthq.types.Node2D;
 import flighthq.types.RenderCache;
 import flighthq.types.RenderCacheRefreshOptions;
 import flighthq.types.RenderState;
+import flighthq.types.RenderState.Scene3DGraphSyncPolicy;
 import flighthq.types.RenderTarget.RenderTargetDescriptor;
 import flighthq.types.RenderTexture;
 import flighthq.types.Scene2DRenderer;
@@ -61,7 +61,7 @@ class Scene2dCairo {
   public static inline function createCairoCacheState(screenState:CanvasRenderState):CanvasRenderState { return flighthq.scene2dCanvas.Scene2dCanvas.createCanvasCacheState(screenState); }
   public static inline function createCairoElement(width:Float, height:Float, ?pixelRatio:Float):flighthq._internal.dom.HTMLCanvasElement { return flighthq.scene2dCanvas.Scene2dCanvas.createCanvasElement(width, height, pixelRatio); }
   public static inline function createCairoOffscreenRenderState(screenState:CanvasRenderState):CanvasRenderState { return flighthq.scene2dCanvas.Scene2dCanvas.createCanvasOffscreenRenderState(screenState); }
-  public static inline function createCairoRenderState(canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:flighthq._internal._Partial<CanvasRenderOptions>):CanvasRenderState { return flighthq.scene2dCanvas.Scene2dCanvas.createCanvasRenderState(canvas, options); }
+  public static inline function createCairoRenderState(canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:{ @:optional var backgroundColor:Null<Float>; @:optional var contextAttributes:Null<flighthq._internal.dom.CanvasRenderingContext2DSettings>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<flighthq._internal.dom.ImageSmoothingQuality>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; }):CanvasRenderState { return flighthq.scene2dCanvas.Scene2dCanvas.createCanvasRenderState(canvas, options); }
   public static inline function createCairoRenderTexturePool():CanvasRenderTexturePool { return flighthq.scene2dCanvas.Scene2dCanvas.createCanvasRenderTexturePool(); }
   public static inline function createCairoShapeRasterizer(resolvers:CanvasTextureResolvers):ShapeRasterizer { return flighthq.scene2dCanvas.Scene2dCanvas.createCanvasShapeRasterizer(resolvers); }
   public static inline function createCairoTextureResolvers():CanvasTextureResolvers { return flighthq.scene2dCanvas.Scene2dCanvas.createCanvasTextureResolvers(); }

@@ -27,25 +27,25 @@ class HtmlView {
   }
 
   public static function createHtmlView(?obj:PartialNode<flighthq.types.HtmlView>):flighthq.types.HtmlView {
-    return cast (cast createNode2D((cast HtmlViewKind : String), (cast obj : Dynamic), (cast createHtmlViewData : Dynamic), (cast function(__unused0:Null<flighthq._internal._Any>):HtmlViewRuntime return createHtmlViewRuntime() : Dynamic)) : flighthq.types.HtmlView);
+    return cast (cast createNode2D((cast HtmlViewKind : String), (cast obj : Dynamic), (cast createHtmlViewData : Dynamic), (cast function(__unused0:Dynamic):HtmlViewRuntime return createHtmlViewRuntime() : Dynamic)) : flighthq.types.HtmlView);
     return cast null;
   }
 
   @:noCompletion
-  public static function createHtmlViewData(?data:flighthq._internal._Partial<HtmlViewData>):HtmlViewData {
+  public static function createHtmlViewData(?data:{ @:optional var element:Null<flighthq._internal.dom.HTMLElement>; @:optional var height:Null<Float>; @:optional var width:Null<Float>; }):HtmlViewData {
     return cast { element: _Runtime.coalesce(({ final __structural0 = data; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var element:Null<flighthq._internal.dom.HTMLElement>; }).element; }), function():Dynamic return cast null), height: _Runtime.coalesce(({ final __structural1 = data; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast 100.0), width: _Runtime.coalesce(({ final __structural2 = data; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast 100.0) };
     return cast null;
   }
 
   @:noCompletion
   public static function createHtmlViewRuntime():HtmlViewRuntime {
-    return cast (cast createNode2DRuntime(({ final __callArgument3:Dynamic = HtmlView.defaultMethods__htmlView; __callArgument3; })) : HtmlViewRuntime);
+    return cast (cast createNode2DRuntime((cast HtmlView.defaultMethods__htmlView : Dynamic)) : HtmlViewRuntime);
     return cast null;
   }
 
   @:noCompletion
   public static function getHtmlViewRuntime(source:flighthq.types.HtmlView):HtmlViewRuntime {
-    return cast (cast getNode2DRuntime(({ final __callArgument4:Dynamic = source; __callArgument4; })) : HtmlViewRuntime);
+    return cast (cast getNode2DRuntime(({ final __callArgument3:Dynamic = source; __callArgument3; })) : HtmlViewRuntime);
     return cast null;
   }
 

@@ -158,7 +158,7 @@ class CocosPlistParse {
     __destructure8 = (cast CocosPlistParse.parsePlistPair__cocosPlistParse((cast (cast doc.metadata : { var size:String; }).size : String)) : Array<Float>);
     imageWidth = flighthq._internal._StaticIndex.readArray(__destructure8, 0.0);
     imageHeight = flighthq._internal._StaticIndex.readArray(__destructure8, 1.0);
-    return cast (cast createSpritesheetData(({ final __callArgument25:Dynamic = { animations: cast ([] : Array<Dynamic>), frames: frames, imageFile: (cast doc.metadata : { var textureFileName:String; }).textureFileName, imageHeight: imageHeight, imageWidth: imageWidth, scale: 1.0 }; __callArgument25; })) : SpritesheetData);
+    return cast (cast createSpritesheetData((cast { animations: cast ([] : Array<Dynamic>), frames: frames, imageFile: (cast doc.metadata : { var textureFileName:String; }).textureFileName, imageHeight: imageHeight, imageWidth: imageWidth, scale: 1.0 } : Dynamic)) : SpritesheetData);
     return cast null;
   }
 
@@ -170,7 +170,7 @@ class CocosPlistParse {
   public static function parseCocosPlistSpritesheetDocument(xml:String):CocosPlistParsed {
     var document:CocosPlistDocument = cast _Runtime.UNDEFINED;
     document = (cast CocosPlistParse.parseCocosPlistXml__cocosPlistParse((cast xml : String)) : CocosPlistDocument);
-    return cast { data: (cast CocosPlistParse.documentToData__cocosPlistParse(({ final __callArgument26:Dynamic = document; __callArgument26; })) : SpritesheetData), document: document };
+    return cast { data: (cast CocosPlistParse.documentToData__cocosPlistParse(({ final __callArgument25:Dynamic = document; __callArgument25; })) : SpritesheetData), document: document };
     return cast null;
   }
 }

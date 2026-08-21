@@ -10,7 +10,7 @@ import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
 
 class CocosPlistSerialize {
-  public static function serializeCocosPlistSpritesheet(data:SpritesheetData, ?existing:flighthq._internal._Partial<CocosPlistDocument>):String {
+  public static function serializeCocosPlistSpritesheet(data:SpritesheetData, ?existing:{ @:optional var frames:Null<flighthq._internal._Record<String, CocosPlistFrame>>; @:optional var metadata:Null<CocosPlistMetadata>; }):String {
     var frames:flighthq._internal._Record<String, CocosPlistFrame> = cast _Runtime.UNDEFINED;
     var doc:CocosPlistDocument = cast _Runtime.UNDEFINED;
     frames = (cast {  });

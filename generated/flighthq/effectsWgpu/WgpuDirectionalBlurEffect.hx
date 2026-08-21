@@ -21,7 +21,7 @@ class WgpuDirectionalBlurEffect {
     var length:Float = cast _Runtime.UNDEFINED;
     var samples:Float = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
-    angle = _Runtime.coalesce(effect.angle, function():Dynamic return cast 0.0);
+    angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(effect.angle, function():Dynamic return cast 0.0), HxMath.PI) / 180.0);
     length = _Runtime.coalesce(effect.length, function():Dynamic return cast 8.0);
     samples = _Runtime.coalesce(effect.samples, function():Dynamic return cast 16.0);
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'motion.directionalBlur' : String), (cast WgpuDirectionalBlurEffect.DIRECTIONAL_BLUR_FRAGMENT_WGSL__wgpuDirectionalBlurEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);

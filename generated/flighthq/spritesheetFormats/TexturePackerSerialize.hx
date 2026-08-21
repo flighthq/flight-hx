@@ -10,6 +10,7 @@ import flighthq.types.SpritesheetFrameData;
 import flighthq.types.TexturePackerSchema.TexturePackerArrayDocument;
 import flighthq.types.TexturePackerSchema.TexturePackerArrayFrame;
 import flighthq.types.TexturePackerSchema.TexturePackerDocument;
+import flighthq.types.TexturePackerSchema.TexturePackerFrameTag;
 import flighthq.types.TexturePackerSchema.TexturePackerHashDocument;
 import flighthq.types.TexturePackerSchema.TexturePackerHashFrame;
 import flighthq.types.TexturePackerSchema.TexturePackerMeta;
@@ -19,15 +20,15 @@ import flighthq.types.TexturePackerSchema.TexturePackerSerializeOptions;
 import flighthq.types.TexturePackerSchema.TexturePackerSize;
 
 class TexturePackerSerialize {
-  public static function dataToMeta__texturePackerSerialize(data:SpritesheetData, existing:flighthq._internal._Partial<TexturePackerMeta>):TexturePackerMeta {
-    return cast { app: _Runtime.coalesce(_Runtime.field(existing, 'app'), function():Dynamic return cast 'https://www.codeandweb.com/texturepacker'), format: _Runtime.coalesce(_Runtime.field(existing, 'format'), function():Dynamic return cast 'RGBA8888'), frameTags: _Runtime.select(_Runtime.field(data.animations, 'length'), function():Dynamic return cast (cast _Runtime.mapArray((cast data.animations : Array<SpritesheetAnimationData>), function(anim:SpritesheetAnimationData, __unused0:Float, __unused1:Array<SpritesheetAnimationData>):{ var direction:SpritesheetAnimationDirection; var from:Float; var name:String; var to:Float; } {
+  public static function dataToMeta__texturePackerSerialize(data:SpritesheetData, existing:{ @:optional var app:Null<String>; @:optional var format:Null<String>; @:optional var frameTags:Null<Array<TexturePackerFrameTag>>; @:optional var image:Null<String>; @:optional var scale:Null<flighthq._internal._Union2<Float, String>>; @:optional var size:Null<TexturePackerSize>; @:optional var version:Null<String>; }):TexturePackerMeta {
+    return cast { app: _Runtime.coalesce((cast existing : { @:optional var app:Null<String>; @:optional var format:Null<String>; @:optional var frameTags:Null<Array<TexturePackerFrameTag>>; @:optional var image:Null<String>; @:optional var scale:Null<flighthq._internal._Union2<String, Float>>; @:optional var size:Null<TexturePackerSize>; @:optional var version:Null<String>; }).app, function():Dynamic return cast 'https://www.codeandweb.com/texturepacker'), format: _Runtime.coalesce((cast existing : { @:optional var app:Null<String>; @:optional var format:Null<String>; @:optional var frameTags:Null<Array<TexturePackerFrameTag>>; @:optional var image:Null<String>; @:optional var scale:Null<flighthq._internal._Union2<String, Float>>; @:optional var size:Null<TexturePackerSize>; @:optional var version:Null<String>; }).format, function():Dynamic return cast 'RGBA8888'), frameTags: _Runtime.select(_Runtime.field(data.animations, 'length'), function():Dynamic return cast (cast _Runtime.mapArray((cast data.animations : Array<SpritesheetAnimationData>), function(anim:SpritesheetAnimationData, __unused0:Float, __unused1:Array<SpritesheetAnimationData>):{ var direction:SpritesheetAnimationDirection; var from:Float; var name:String; var to:Float; } {
       var firstIdx:Float = cast _Runtime.UNDEFINED;
       var lastIdx:Float = cast _Runtime.UNDEFINED;
       firstIdx = _Runtime.findIndex(data.frames, function(f:SpritesheetFrameData, __unused2:Float, __unused3:Array<SpritesheetFrameData>):Bool return _Runtime.strictEquals(f.name, flighthq._internal._StaticIndex.readArray(anim.frameNames, 0.0)));
       lastIdx = _Runtime.findIndex(data.frames, function(f:SpritesheetFrameData, __unused4:Float, __unused5:Array<SpritesheetFrameData>):Bool return _Runtime.strictEquals(f.name, flighthq._internal._StaticIndex.readArray(anim.frameNames, _Runtime.subtractNumbers(_Runtime.field(anim.frameNames, 'length'), 1.0))));
       return cast { direction: anim.direction, from: ((cast ((cast firstIdx : Float) >= (cast 0.0 : Float)) : Bool) ? (cast firstIdx : Dynamic) : (cast 0.0 : Dynamic)), name: anim.name, to: ((cast ((cast lastIdx : Float) >= (cast 0.0 : Float)) : Bool) ? (cast lastIdx : Dynamic) : (cast 0.0 : Dynamic)) };
       return cast _Runtime.UNDEFINED;
-    }, _Runtime.UNDEFINED)), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), image: _Runtime.orValue(_Runtime.orValue(data.imageFile, function():Dynamic return cast _Runtime.field(existing, 'image')), function():Dynamic return cast ''), scale: ((cast !_Runtime.strictEquals(data.scale, 1.0) : Bool) ? (cast data.scale : Dynamic) : (cast _Runtime.coalesce(_Runtime.field(existing, 'scale'), function():Dynamic return cast 1.0) : Dynamic)), size: { h: data.imageHeight, w: data.imageWidth }, version: _Runtime.coalesce(_Runtime.field(existing, 'version'), function():Dynamic return cast '1.0') };
+    }, _Runtime.UNDEFINED)), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), image: _Runtime.orValue(_Runtime.orValue(data.imageFile, function():Dynamic return cast (cast existing : { @:optional var app:Null<String>; @:optional var format:Null<String>; @:optional var frameTags:Null<Array<TexturePackerFrameTag>>; @:optional var image:Null<String>; @:optional var scale:Null<flighthq._internal._Union2<String, Float>>; @:optional var size:Null<TexturePackerSize>; @:optional var version:Null<String>; }).image), function():Dynamic return cast ''), scale: ((cast !_Runtime.strictEquals(data.scale, 1.0) : Bool) ? (cast data.scale : Dynamic) : (cast _Runtime.coalesce((cast existing : { @:optional var app:Null<String>; @:optional var format:Null<String>; @:optional var frameTags:Null<Array<TexturePackerFrameTag>>; @:optional var image:Null<String>; @:optional var scale:Null<flighthq._internal._Union2<String, Float>>; @:optional var size:Null<TexturePackerSize>; @:optional var version:Null<String>; }).scale, function():Dynamic return cast 1.0) : Dynamic)), size: { h: data.imageHeight, w: data.imageWidth }, version: _Runtime.coalesce((cast existing : { @:optional var app:Null<String>; @:optional var format:Null<String>; @:optional var frameTags:Null<Array<TexturePackerFrameTag>>; @:optional var image:Null<String>; @:optional var scale:Null<flighthq._internal._Union2<String, Float>>; @:optional var size:Null<TexturePackerSize>; @:optional var version:Null<String>; }).version, function():Dynamic return cast '1.0') };
     return cast null;
   }
 
@@ -38,20 +39,20 @@ class TexturePackerSerialize {
     return cast null;
   }
 
-  public static function dataToHashDocument__texturePackerSerialize(data:SpritesheetData, existing:flighthq._internal._Partial<TexturePackerHashDocument>):TexturePackerHashDocument {
+  public static function dataToHashDocument__texturePackerSerialize(data:SpritesheetData, existing:{ @:optional var frames:Null<flighthq._internal._Record<String, TexturePackerHashFrame>>; @:optional var meta:Null<TexturePackerMeta>; }):TexturePackerHashDocument {
     var frames:flighthq._internal._Record<String, TexturePackerHashFrame> = cast _Runtime.UNDEFINED;
     frames = (cast {  });
     for (frame in _Runtime.iterable(data.frames)) {
       _Runtime.setIndex(frames, frame.name, (cast TexturePackerSerialize.frameToEntry__texturePackerSerialize(({ final __callArgument2:Dynamic = frame; __callArgument2; })) : TexturePackerHashFrame));
     }
-    return cast { frames: frames, meta: (cast TexturePackerSerialize.dataToMeta__texturePackerSerialize(({ final __callArgument3:Dynamic = data; __callArgument3; }), (cast _Runtime.coalesce(_Runtime.field(existing, 'meta'), function():Dynamic return cast {  }) : flighthq._internal._Any)) : TexturePackerMeta) };
+    return cast { frames: frames, meta: (cast TexturePackerSerialize.dataToMeta__texturePackerSerialize(({ final __callArgument3:Dynamic = data; __callArgument3; }), (cast _Runtime.coalesce((cast existing : { @:optional var frames:Null<flighthq._internal._Record<String, TexturePackerHashFrame>>; @:optional var meta:Null<TexturePackerMeta>; }).meta, function():Dynamic return cast {  }) : Dynamic)) : TexturePackerMeta) };
     return cast null;
   }
 
-  public static function dataToArrayDocument__texturePackerSerialize(data:SpritesheetData, existing:flighthq._internal._Partial<TexturePackerArrayDocument>):TexturePackerArrayDocument {
+  public static function dataToArrayDocument__texturePackerSerialize(data:SpritesheetData, existing:{ @:optional var frames:Null<Array<TexturePackerArrayFrame>>; @:optional var meta:Null<TexturePackerMeta>; }):TexturePackerArrayDocument {
     var frames:Array<TexturePackerArrayFrame> = cast _Runtime.UNDEFINED;
     frames = (cast _Runtime.mapArray((cast data.frames : Array<SpritesheetFrameData>), function(frame:SpritesheetFrameData, __unused6:Float, __unused7:Array<SpritesheetFrameData>):{ var frame:TexturePackerRect; @:optional var pivot:Null<TexturePackerPivot>; var rotated:Bool; var sourceSize:TexturePackerSize; var spriteSourceSize:TexturePackerRect; var trimmed:Bool; var filename:String; } return _Runtime.mergeObjects([{ filename: frame.name }, (cast TexturePackerSerialize.frameToEntry__texturePackerSerialize(({ final __callArgument4:Dynamic = frame; __callArgument4; })) : TexturePackerHashFrame)]), _Runtime.UNDEFINED));
-    return cast { frames: frames, meta: (cast TexturePackerSerialize.dataToMeta__texturePackerSerialize(({ final __callArgument5:Dynamic = data; __callArgument5; }), (cast _Runtime.coalesce(_Runtime.field(existing, 'meta'), function():Dynamic return cast {  }) : flighthq._internal._Any)) : TexturePackerMeta) };
+    return cast { frames: frames, meta: (cast TexturePackerSerialize.dataToMeta__texturePackerSerialize(({ final __callArgument5:Dynamic = data; __callArgument5; }), (cast _Runtime.coalesce((cast existing : { @:optional var frames:Null<Array<TexturePackerArrayFrame>>; @:optional var meta:Null<TexturePackerMeta>; }).meta, function():Dynamic return cast {  }) : Dynamic)) : TexturePackerMeta) };
     return cast null;
   }
 
@@ -62,10 +63,10 @@ class TexturePackerSerialize {
     existingIsArray = ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.isArray((cast (cast existing : TexturePackerArrayDocument) : { var frames:Array<TexturePackerArrayFrame>; }).frames) : Bool));
     variant = _Runtime.coalesce(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.variant; }), function():Dynamic return cast ((cast existingIsArray : Bool) ? (cast 'array' : Dynamic) : (cast 'hash' : Dynamic)));
     if ((cast _Runtime.strictEquals(variant, 'array') : Bool)) {
-      var doc:TexturePackerArrayDocument = (cast TexturePackerSerialize.dataToArrayDocument__texturePackerSerialize(({ final __callArgument7:Dynamic = data; __callArgument7; }), (cast _Runtime.coalesce((cast existing : flighthq._internal._Partial<TexturePackerArrayDocument>), function():Dynamic return cast {  }) : flighthq._internal._Any)) : TexturePackerArrayDocument);
+      var doc:TexturePackerArrayDocument = (cast TexturePackerSerialize.dataToArrayDocument__texturePackerSerialize(({ final __callArgument7:Dynamic = data; __callArgument7; }), ({ final __callArgument8:Dynamic = _Runtime.coalesce((cast existing : { @:optional var frames:Null<Array<TexturePackerArrayFrame>>; @:optional var meta:Null<TexturePackerMeta>; }), function():Dynamic return cast {  }); __callArgument8; })) : TexturePackerArrayDocument);
       return cast _Runtime.jsonStringify(doc, null, 2.0);
     }
-    doc = (cast TexturePackerSerialize.dataToHashDocument__texturePackerSerialize(({ final __callArgument8:Dynamic = data; __callArgument8; }), (cast _Runtime.coalesce((cast existing : flighthq._internal._Partial<TexturePackerHashDocument>), function():Dynamic return cast {  }) : flighthq._internal._Any)) : TexturePackerHashDocument);
+    doc = (cast TexturePackerSerialize.dataToHashDocument__texturePackerSerialize(({ final __callArgument9:Dynamic = data; __callArgument9; }), ({ final __callArgument10:Dynamic = _Runtime.coalesce((cast existing : { @:optional var frames:Null<flighthq._internal._Record<String, TexturePackerHashFrame>>; @:optional var meta:Null<TexturePackerMeta>; }), function():Dynamic return cast {  }); __callArgument10; })) : TexturePackerHashDocument);
     return cast _Runtime.jsonStringify(doc, null, 2.0);
     return cast null;
   }

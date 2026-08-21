@@ -15,12 +15,15 @@ import flighthq.effectsCanvas.CanvasGradientGlowEffect as Facade_EffectsCanvas_f
 import flighthq.effectsCanvas.CanvasGradientRamp as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasGradientRamp;
 import flighthq.effectsCanvas.CanvasInnerGlowEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasInnerGlowEffect;
 import flighthq.effectsCanvas.CanvasInnerShadowEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasInnerShadowEffect;
+import flighthq.effectsCanvas.CanvasLensDistortionEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasLensDistortionEffect;
 import flighthq.effectsCanvas.CanvasOuterGlowEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasOuterGlowEffect;
 import flighthq.effectsCanvas.CanvasPixelateEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasPixelateEffect;
+import flighthq.effectsCanvas.CanvasPosterizeEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasPosterizeEffect;
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasRenderEffectPipeline;
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasRenderEffectRegistry;
 import flighthq.effectsCanvas.CanvasRenderTextureEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasRenderTextureEffect;
 import flighthq.effectsCanvas.CanvasScanlinesEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasScanlinesEffect;
+import flighthq.effectsCanvas.CanvasTiltShiftEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasTiltShiftEffect;
 import flighthq.effectsCanvas.CanvasVignetteEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasVignetteEffect;
 import flighthq.types.Adjustment;
 import flighthq.types.AdvancedBlendMode;
@@ -58,10 +61,13 @@ class EffectsCairo {
   public static inline function registerCairoGradientGlowEffect(state:CanvasRenderState):Void { flighthq.effectsCanvas.EffectsCanvas.registerCanvasGradientGlowEffect(state); }
   public static inline function registerCairoInnerGlowEffect(state:CanvasRenderState):Void { flighthq.effectsCanvas.EffectsCanvas.registerCanvasInnerGlowEffect(state); }
   public static inline function registerCairoInnerShadowEffect(state:CanvasRenderState):Void { flighthq.effectsCanvas.EffectsCanvas.registerCanvasInnerShadowEffect(state); }
+  public static inline function registerCairoLensDistortionEffect(state:CanvasRenderState):Void { flighthq.effectsCanvas.EffectsCanvas.registerCanvasLensDistortionEffect(state); }
   public static inline function registerCairoOuterGlowEffect(state:CanvasRenderState):Void { flighthq.effectsCanvas.EffectsCanvas.registerCanvasOuterGlowEffect(state); }
   public static inline function registerCairoPixelateEffect(state:CanvasRenderState):Void { flighthq.effectsCanvas.EffectsCanvas.registerCanvasPixelateEffect(state); }
+  public static inline function registerCairoPosterizeEffect(state:CanvasRenderState):Void { flighthq.effectsCanvas.EffectsCanvas.registerCanvasPosterizeEffect(state); }
   public static inline function registerCairoRenderEffect(state:CanvasRenderState, kind:String, runner:CanvasRenderEffectRunner):Void { flighthq.effectsCanvas.EffectsCanvas.registerCanvasRenderEffect(state, kind, runner); }
   public static inline function registerCairoScanlinesEffect(state:CanvasRenderState):Void { flighthq.effectsCanvas.EffectsCanvas.registerCanvasScanlinesEffect(state); }
+  public static inline function registerCairoTiltShiftEffect(state:CanvasRenderState):Void { flighthq.effectsCanvas.EffectsCanvas.registerCanvasTiltShiftEffect(state); }
   public static inline function registerCairoVignetteEffect(state:CanvasRenderState):Void { flighthq.effectsCanvas.EffectsCanvas.registerCanvasVignetteEffect(state); }
   public static inline function unregisterCairoBlendEffectBackdrop(state:CanvasRenderState, backdropKey:String):Bool { return flighthq.effectsCanvas.EffectsCanvas.unregisterCanvasBlendEffectBackdrop(state, backdropKey); }
   public static var defaultCairoBevelEffectRunner(get, never):CanvasRenderEffectRunner;
@@ -86,12 +92,18 @@ class EffectsCairo {
   static inline function get_defaultCairoInnerGlowEffectRunner():CanvasRenderEffectRunner return flighthq.effectsCanvas.EffectsCanvas.defaultCanvasInnerGlowEffectRunner;
   public static var defaultCairoInnerShadowEffectRunner(get, never):CanvasRenderEffectRunner;
   static inline function get_defaultCairoInnerShadowEffectRunner():CanvasRenderEffectRunner return flighthq.effectsCanvas.EffectsCanvas.defaultCanvasInnerShadowEffectRunner;
+  public static var defaultCairoLensDistortionEffectRunner(get, never):CanvasRenderEffectRunner;
+  static inline function get_defaultCairoLensDistortionEffectRunner():CanvasRenderEffectRunner return flighthq.effectsCanvas.EffectsCanvas.defaultCanvasLensDistortionEffectRunner;
   public static var defaultCairoOuterGlowEffectRunner(get, never):CanvasRenderEffectRunner;
   static inline function get_defaultCairoOuterGlowEffectRunner():CanvasRenderEffectRunner return flighthq.effectsCanvas.EffectsCanvas.defaultCanvasOuterGlowEffectRunner;
   public static var defaultCairoPixelateEffectRunner(get, never):CanvasRenderEffectRunner;
   static inline function get_defaultCairoPixelateEffectRunner():CanvasRenderEffectRunner return flighthq.effectsCanvas.EffectsCanvas.defaultCanvasPixelateEffectRunner;
+  public static var defaultCairoPosterizeEffectRunner(get, never):CanvasRenderEffectRunner;
+  static inline function get_defaultCairoPosterizeEffectRunner():CanvasRenderEffectRunner return flighthq.effectsCanvas.EffectsCanvas.defaultCanvasPosterizeEffectRunner;
   public static var defaultCairoScanlinesEffectRunner(get, never):CanvasRenderEffectRunner;
   static inline function get_defaultCairoScanlinesEffectRunner():CanvasRenderEffectRunner return flighthq.effectsCanvas.EffectsCanvas.defaultCanvasScanlinesEffectRunner;
+  public static var defaultCairoTiltShiftEffectRunner(get, never):CanvasRenderEffectRunner;
+  static inline function get_defaultCairoTiltShiftEffectRunner():CanvasRenderEffectRunner return flighthq.effectsCanvas.EffectsCanvas.defaultCanvasTiltShiftEffectRunner;
   public static var defaultCairoVignetteEffectRunner(get, never):CanvasRenderEffectRunner;
   static inline function get_defaultCairoVignetteEffectRunner():CanvasRenderEffectRunner return flighthq.effectsCanvas.EffectsCanvas.defaultCanvasVignetteEffectRunner;
 }

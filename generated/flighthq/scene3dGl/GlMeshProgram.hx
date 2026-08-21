@@ -3,14 +3,14 @@ package flighthq.scene3dGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.camera.Basis.getCamera3DPosition;
 import flighthq.camera.Camera.getCamera3DViewProjectionMatrix4;
 import flighthq.geometry.Matrix3.createMatrix3;
 import flighthq.geometry.Matrix4.createMatrix4;
-import flighthq.geometry.Matrix4.getMatrix4Position;
-import flighthq.geometry.Matrix4.inverseMatrix4;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlSkinPaletteTexture.uploadGlSkinPaletteTexture;
 import flighthq.scene3dGl.GlMeshUpload.ensureGlMeshUpload;
+import flighthq.scene3dGl.GlScene3DRuntime.ensureGlSkinNormalPalette;
 import flighthq.scene3dGl.GlScene3DRuntime.ensureGlSkinPalette;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.scene3dGl.GlViewportAspect.getGlScene3DViewportAspect;
@@ -42,18 +42,48 @@ class GlMeshProgram {
   @:noCompletion
   public static function beginGlMeshDraw(state:GlRenderState, program:flighthq.types.GlMeshProgram, doubleSided:Bool):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var runtime:GlScene3DRuntime = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
-    ((cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<flighthq.types.GlMeshProgram>; }).activeMeshProgram = cast (program : Null<flighthq.types.GlMeshProgram>));
+    runtime = (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime);
+    (runtime.activeMeshProgram = cast (program : Null<flighthq.types.GlMeshProgram>));
     flighthq._internal.backend.WebGl2Backend.useProgram(gl, program.program);
     flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST));
     flighthq._internal.backend.WebGl2Backend.depthFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LESS', flighthq._internal.backend.WebGl2Backend.LESS));
-    flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
+    flighthq._internal.backend.WebGl2Backend.depthMask(gl, !(cast runtime.activeBlendedRun : Bool));
     if ((cast doubleSided : Bool)) {
       flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flighthq._internal.backend.WebGl2Backend.CULL_FACE));
     } else {
       flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flighthq._internal.backend.WebGl2Backend.CULL_FACE));
       flighthq._internal.backend.WebGl2Backend.cullFace(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BACK', flighthq._internal.backend.WebGl2Backend.BACK));
     }
+  }
+
+  @:noCompletion
+  public static function bindGlMeshSkinPalette(state:GlRenderState, program:flighthq.types.GlMeshProgram, proxy:Scene3DRenderProxy):Bool {
+    var jointMatrices:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
+    var gpuSkinned:Bool = cast _Runtime.UNDEFINED;
+    var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
+    var jointCount:Float = cast _Runtime.UNDEFINED;
+    var palette:GlSkinPaletteTexture = cast _Runtime.UNDEFINED;
+    var normalMatrices:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
+    jointMatrices = proxy.jointMatrices;
+    gpuSkinned = ((cast !_Runtime.looseEquals(program.locJointTexture, null) : Bool) && (cast !_Runtime.looseEquals(jointMatrices, null) : Bool));
+    if ((cast !(cast gpuSkinned : Bool) : Bool)) { return cast false; }
+    gl = (cast state : GlRenderState).gl;
+    jointCount = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(jointMatrices, 'length'), 16.0)) | 0);
+    palette = (cast ensureGlSkinPalette(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlSkinPaletteTexture);
+    flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + SKIN_PALETTE_TEXTURE_UNIT));
+    uploadGlSkinPaletteTexture(({ final __callArgument2:Dynamic = gl; __callArgument2; }), ({ final __callArgument3:Dynamic = palette; __callArgument3; }), ({ final __callArgument4:Dynamic = jointMatrices; __callArgument4; }), (cast jointCount : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locJointTexture, SKIN_PALETTE_TEXTURE_UNIT);
+    normalMatrices = proxy.normalMatrices;
+    if ((cast ((cast !_Runtime.looseEquals(program.locJointNormalTexture, null) : Bool) && (cast !_Runtime.looseEquals(normalMatrices, null) : Bool)) : Bool)) {
+      var normalPalette:GlSkinPaletteTexture = (cast ensureGlSkinNormalPalette(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlSkinPaletteTexture);
+      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + SKIN_NORMAL_PALETTE_TEXTURE_UNIT));
+      uploadGlSkinPaletteTexture(({ final __callArgument6:Dynamic = gl; __callArgument6; }), ({ final __callArgument7:Dynamic = normalPalette; __callArgument7; }), ({ final __callArgument8:Dynamic = normalMatrices; __callArgument8; }), (cast jointCount : Float), (cast 3.0 : Float));
+      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locJointNormalTexture, SKIN_NORMAL_PALETTE_TEXTURE_UNIT);
+    }
+    return cast true;
+    return cast null;
   }
 
   @:noCompletion
@@ -65,13 +95,13 @@ class GlMeshProgram {
       ((cast (cast program : flighthq.types.GlMeshProgram) : { @:optional var locUvTransform:Null<flighthq._internal.dom.WebGLUniformLocation>; }).locUvTransform = cast (loc : Null<flighthq._internal.dom.WebGLUniformLocation>));
     }
     if ((cast ((cast _Runtime.strictEquals(loc, null) : Bool) || (cast _Runtime.strictEquals(texture, null) : Bool)) : Bool)) { return; }
-    getTextureUvMatrix(({ final __callArgument1:Dynamic = GlMeshProgram.scratchUvMatrix__glMeshProgram; __callArgument1; }), ({ final __callArgument2:Dynamic = texture; __callArgument2; }));
+    getTextureUvMatrix(({ final __callArgument9:Dynamic = GlMeshProgram.scratchUvMatrix__glMeshProgram; __callArgument9; }), ({ final __callArgument10:Dynamic = texture; __callArgument10; }));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, loc, false, GlMeshProgram.scratchUvMatrix__glMeshProgram.m);
   }
 
   @:noCompletion
   public static function compileGlProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, vertexSource:String, fragmentSource:String):flighthq._internal.dom.WebGLProgram {
-    return cast (cast createGlProgram(({ final __callArgument3:Dynamic = gl; __callArgument3; }), (cast vertexSource : String), (cast fragmentSource : String), (cast 'Mesh' : String)) : flighthq._internal.dom.WebGLProgram);
+    return cast (cast createGlProgram(({ final __callArgument11:Dynamic = gl; __callArgument11; }), (cast vertexSource : String), (cast fragmentSource : String), (cast 'Mesh' : String)) : flighthq._internal.dom.WebGLProgram);
     return cast null;
   }
 
@@ -85,14 +115,14 @@ class GlMeshProgram {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var colorMatrix:Null<Array<Float>> = cast _Runtime.UNDEFINED;
     var colorScaleBias:Null<ColorScaleBias> = cast _Runtime.UNDEFINED;
-    var jointMatrices:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
     var gpuSkinned:Bool = cast _Runtime.UNDEFINED;
     var upload:GlMeshUpload = cast _Runtime.UNDEFINED;
     var subset:MeshSubset = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, program.locModel, false, (cast proxy.worldMatrix : { var m:flighthq._internal._Float32Array; }).m);
     if ((cast !_Runtime.strictEquals(program.locNormalMatrix, null) : Bool)) { flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, program.locNormalMatrix, false, (cast proxy.normalMatrix : { var m:flighthq._internal._Float32Array; }).m); }
-    uploadGlMeshDrawAlpha(({ final __callArgument4:Dynamic = gl; __callArgument4; }), ({ final __callArgument5:Dynamic = program; __callArgument5; }), (cast _Runtime.coalesce(proxy.alpha, function():Dynamic return cast 1.0) : Float), ({ final __callArgument6:Dynamic = proxy.material; __callArgument6; }));
+    flighthq._internal.backend.WebGl2Backend.frontFace(gl, ((cast (cast GlMeshProgram.isMirroringWorldMatrix__glMeshProgram((cast proxy.worldMatrix : { var m:flighthq._internal._Float32Array; }).m) : Bool) : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CW', flighthq._internal.backend.WebGl2Backend.CW) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CCW', flighthq._internal.backend.WebGl2Backend.CCW) : Dynamic)));
+    uploadGlMeshDrawAlpha(({ final __callArgument12:Dynamic = gl; __callArgument12; }), ({ final __callArgument13:Dynamic = program; __callArgument13; }), (cast _Runtime.coalesce(proxy.alpha, function():Dynamic return cast 1.0) : Float), ({ final __callArgument14:Dynamic = proxy.material; __callArgument14; }));
     colorMatrix = proxy.colorMatrix;
     colorScaleBias = proxy.colorScaleBias;
     if ((cast !_Runtime.looseEquals(colorMatrix, null) : Bool)) {
@@ -126,21 +156,16 @@ class GlMeshProgram {
         flighthq._internal.backend.WebGl2Backend.uniform4f(gl, locColorBias, (cast colorScaleBias : { var redBias:Float; }).redBias, (cast colorScaleBias : { var greenBias:Float; }).greenBias, (cast colorScaleBias : { var blueBias:Float; }).blueBias, (cast colorScaleBias : { var alphaBias:Float; }).alphaBias);
       }
     } }
-    jointMatrices = proxy.jointMatrices;
-    gpuSkinned = ((cast !_Runtime.looseEquals(program.locJointTexture, null) : Bool) && (cast !_Runtime.looseEquals(jointMatrices, null) : Bool));
-    if ((cast gpuSkinned : Bool)) {
-      var palette:GlSkinPaletteTexture = (cast ensureGlSkinPalette(({ final __callArgument7:Dynamic = state; __callArgument7; })) : GlSkinPaletteTexture);
-      flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + SKIN_PALETTE_TEXTURE_UNIT));
-      uploadGlSkinPaletteTexture(({ final __callArgument8:Dynamic = gl; __callArgument8; }), ({ final __callArgument9:Dynamic = palette; __callArgument9; }), ({ final __callArgument10:Dynamic = jointMatrices; __callArgument10; }), (cast (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(jointMatrices, 'length'), 16.0)) | 0) : Float));
-      flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locJointTexture, SKIN_PALETTE_TEXTURE_UNIT);
-    }
-    upload = (cast ensureGlMeshUpload(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = geometry; __callArgument12; }), (cast gpuSkinned : Bool)) : GlMeshUpload);
+    gpuSkinned = (cast bindGlMeshSkinPalette(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = program; __callArgument16; }), ({ final __callArgument17:Dynamic = proxy; __callArgument17; })) : Bool);
+    upload = (cast ensureGlMeshUpload(({ final __callArgument18:Dynamic = state; __callArgument18; }), ({ final __callArgument19:Dynamic = geometry; __callArgument19; }), (cast gpuSkinned : Bool)) : GlMeshUpload);
     subset = proxy.subset;
     if ((cast !_Runtime.strictEquals(upload.indexBuffer, null) : Bool)) {
       var elementSize:Float = ((cast _Runtime.strictEquals(upload.indexType, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT)) : Bool) ? (cast 4.0 : Dynamic) : (cast 2.0 : Dynamic));
       flighthq._internal.backend.WebGl2Backend.drawElements(gl, upload.primitiveMode, subset.indexCount, upload.indexType, (subset.indexOffset * elementSize));
+      flighthq._internal.backend.WebGl2Backend.frontFace(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CCW', flighthq._internal.backend.WebGl2Backend.CCW));
     } else {
       flighthq._internal.backend.WebGl2Backend.drawArrays(gl, upload.primitiveMode, subset.indexOffset, subset.indexCount);
+      flighthq._internal.backend.WebGl2Backend.frontFace(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CCW', flighthq._internal.backend.WebGl2Backend.CCW));
     }
   }
 
@@ -148,7 +173,7 @@ class GlMeshProgram {
   public static function ensureGlScene3DProgram<T:flighthq.types.GlMeshProgram>(state:GlRenderState, key:String, compile:flighthq._internal.dom.WebGL2RenderingContext->T):T {
     var runtime:GlScene3DRuntime = cast _Runtime.UNDEFINED;
     var program:Null<flighthq.types.GlMeshProgram> = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlScene3DRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : GlScene3DRuntime);
+    runtime = (cast getGlScene3DRuntime(({ final __callArgument20:Dynamic = state; __callArgument20; })) : GlScene3DRuntime);
     program = ((cast runtime.programCache : flighthq._internal._Map<String, flighthq.types.GlMeshProgram>).get(key));
     if ((cast _Runtime.strictEquals(program, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (program = cast ((cast compile((cast state : GlRenderState).gl) : T) : Dynamic));
@@ -160,20 +185,19 @@ class GlMeshProgram {
 
   @:noCompletion
   public static function hasGlUvTransform(texture:Null<TextureLike>):Bool {
-    return cast ((cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast (cast hasTextureSource(({ final __callArgument14:Dynamic = texture; __callArgument14; })) : Bool) : Bool)) : Bool) && (cast (cast hasTextureUvTransform(({ final __callArgument15:Dynamic = texture; __callArgument15; })) : Bool) : Bool));
+    return cast ((cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast (cast hasTextureSource(({ final __callArgument21:Dynamic = texture; __callArgument21; })) : Bool) : Bool)) : Bool) && (cast (cast hasTextureUvTransform(({ final __callArgument22:Dynamic = texture; __callArgument22; })) : Bool) : Bool));
     return cast null;
   }
 
   @:noCompletion
   public static function setGlMeshCameraPosition(gl:flighthq._internal.dom.WebGL2RenderingContext, locCameraPosition:Null<flighthq._internal.dom.WebGLUniformLocation>, camera:Camera3D):Void {
-    (cast inverseMatrix4(({ final __callArgument16:Dynamic = GlMeshProgram.scratchInverseView__glMeshProgram; __callArgument16; }), ({ final __callArgument17:Dynamic = camera.view; __callArgument17; })) : Bool);
-    getMatrix4Position(({ final __callArgument18:Dynamic = GlMeshProgram.scratchCameraPosition__glMeshProgram; __callArgument18; }), ({ final __callArgument19:Dynamic = GlMeshProgram.scratchInverseView__glMeshProgram; __callArgument19; }));
+    getCamera3DPosition(({ final __callArgument23:Dynamic = GlMeshProgram.scratchCameraPosition__glMeshProgram; __callArgument23; }), ({ final __callArgument24:Dynamic = camera; __callArgument24; }));
     flighthq._internal.backend.WebGl2Backend.uniform3f(gl, locCameraPosition, (cast GlMeshProgram.scratchCameraPosition__glMeshProgram : { var x:Float; var y:Float; var z:Float; }).x, (cast GlMeshProgram.scratchCameraPosition__glMeshProgram : { var x:Float; var y:Float; var z:Float; }).y, (cast GlMeshProgram.scratchCameraPosition__glMeshProgram : { var x:Float; var y:Float; var z:Float; }).z);
   }
 
   @:noCompletion
   public static function setGlMeshViewProjection(state:GlRenderState, locViewProjection:Null<flighthq._internal.dom.WebGLUniformLocation>, camera:Camera3D):Void {
-    getCamera3DViewProjectionMatrix4(({ final __callArgument20:Dynamic = GlMeshProgram.scratchViewProjection__glMeshProgram; __callArgument20; }), ({ final __callArgument21:Dynamic = camera; __callArgument21; }), (cast (cast getGlScene3DViewportAspect(({ final __callArgument22:Dynamic = state; __callArgument22; })) : Float) : Float));
+    getCamera3DViewProjectionMatrix4(({ final __callArgument25:Dynamic = GlMeshProgram.scratchViewProjection__glMeshProgram; __callArgument25; }), ({ final __callArgument26:Dynamic = camera; __callArgument26; }), (cast (cast getGlScene3DViewportAspect(({ final __callArgument27:Dynamic = state; __callArgument27; })) : Float) : Float));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv((cast state : GlRenderState).gl, locViewProjection, false, GlMeshProgram.scratchViewProjection__glMeshProgram.m);
   }
 
@@ -193,7 +217,7 @@ class GlMeshProgram {
       ((cast (cast program : flighthq.types.GlMeshProgram) : { @:optional var locAlphaIsCoverage:Null<flighthq._internal.dom.WebGLUniformLocation>; }).locAlphaIsCoverage = cast (coverageLocation : Null<flighthq._internal.dom.WebGLUniformLocation>));
     }
     if ((cast !_Runtime.strictEquals(coverageLocation, null) : Bool)) {
-      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, coverageLocation, ((cast (cast GlMeshProgram.isGlMeshAlphaCoverage__glMeshProgram(({ final __callArgument23:Dynamic = material; __callArgument23; })) : Bool) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
+      flighthq._internal.backend.WebGl2Backend.uniform1f(gl, coverageLocation, ((cast (cast GlMeshProgram.isGlMeshAlphaCoverage__glMeshProgram(({ final __callArgument28:Dynamic = material; __callArgument28; })) : Bool) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     }
   }
 
@@ -209,13 +233,19 @@ class GlMeshProgram {
   public static final SKIN_PALETTE_TEXTURE_UNIT:Float = 12.0;
 
   @:noCompletion
-  public static final GL_SKIN_VERTEX_DECLARATIONS_GLSL:String = '\nlayout(location = 6) in vec4 a_joints0;\nlayout(location = 7) in vec4 a_weights0;\nuniform highp sampler2D u_jointTexture;\n\nmat4 fetchJointMatrix(int joint) {\n  int x = joint * 4;\n  return mat4(\n    texelFetch(u_jointTexture, ivec2(x, 0), 0),\n    texelFetch(u_jointTexture, ivec2(x + 1, 0), 0),\n    texelFetch(u_jointTexture, ivec2(x + 2, 0), 0),\n    texelFetch(u_jointTexture, ivec2(x + 3, 0), 0)\n  );\n}\n\nmat4 skinMatrix() {\n  return a_weights0.x * fetchJointMatrix(int(a_joints0.x))\n       + a_weights0.y * fetchJointMatrix(int(a_joints0.y))\n       + a_weights0.z * fetchJointMatrix(int(a_joints0.z))\n       + a_weights0.w * fetchJointMatrix(int(a_joints0.w));\n}\n';
+  public static final SKIN_NORMAL_PALETTE_TEXTURE_UNIT:Float = 13.0;
+
+  @:noCompletion
+  public static final GL_SKIN_VERTEX_DECLARATIONS_GLSL:String = '\nlayout(location = 6) in vec4 a_joints0;\nlayout(location = 7) in vec4 a_weights0;\nuniform highp sampler2D u_jointTexture;\nuniform highp sampler2D u_jointNormalTexture;\n\nmat4 fetchJointMatrix(int joint) {\n  int x = joint * 4;\n  return mat4(\n    texelFetch(u_jointTexture, ivec2(x, 0), 0),\n    texelFetch(u_jointTexture, ivec2(x + 1, 0), 0),\n    texelFetch(u_jointTexture, ivec2(x + 2, 0), 0),\n    texelFetch(u_jointTexture, ivec2(x + 3, 0), 0)\n  );\n}\n\n// A vertex with NO influence stays at its bind pose, which the weighted sum cannot express: with every\n// weight zero the sum is the ZERO matrix, so the vertex would land on the origin with w = 0. Identity is\n// the bind pose. packSkinInfluences documents this case as legal — it zero-fills unused slots and says\n// such a vertex "stays at its bind position" — and the CPU skinVertices path falls back the same way.\nmat4 skinMatrix() {\n  float totalWeight = a_weights0.x + a_weights0.y + a_weights0.z + a_weights0.w;\n  if (totalWeight == 0.0) return mat4(1.0);\n  return a_weights0.x * fetchJointMatrix(int(a_joints0.x))\n       + a_weights0.y * fetchJointMatrix(int(a_joints0.y))\n       + a_weights0.z * fetchJointMatrix(int(a_joints0.z))\n       + a_weights0.w * fetchJointMatrix(int(a_joints0.w));\n}\n\n// Three texels per joint, one per padded vec4 column; the fourth component of each is unused.\nmat3 fetchJointNormalMatrix(int joint) {\n  int x = joint * 3;\n  return mat3(\n    texelFetch(u_jointNormalTexture, ivec2(x, 0), 0).xyz,\n    texelFetch(u_jointNormalTexture, ivec2(x + 1, 0), 0).xyz,\n    texelFetch(u_jointNormalTexture, ivec2(x + 2, 0), 0).xyz\n  );\n}\n\n// A normal is a covector: under non-uniform joint scale it follows the inverse-transpose, not the pose\n// matrix a position and a tangent follow. Blending the per-joint inverse-transposes is an APPROXIMATION\n// — the inverse-transpose of the blend is a different matrix — and it is the affordable one, since the\n// exact answer needs a 3x3 inverse per vertex. The CPU path blends the same way, so the two agree.\nmat3 skinNormalMatrix() {\n  // Same no-influence fallback as skinMatrix: a zero blend would hand the shader a zero normal, which\n  // every lighting term then normalizes into an undefined direction.\n  float totalWeight = a_weights0.x + a_weights0.y + a_weights0.z + a_weights0.w;\n  if (totalWeight == 0.0) return mat3(1.0);\n  return a_weights0.x * fetchJointNormalMatrix(int(a_joints0.x))\n       + a_weights0.y * fetchJointNormalMatrix(int(a_joints0.y))\n       + a_weights0.z * fetchJointNormalMatrix(int(a_joints0.z))\n       + a_weights0.w * fetchJointNormalMatrix(int(a_joints0.w));\n}\n';
 
   public static final scratchViewProjection__glMeshProgram:Matrix4 = (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4);
-
-  public static final scratchInverseView__glMeshProgram:Matrix4 = (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4);
 
   public static final scratchCameraPosition__glMeshProgram:{ var x:Float; var y:Float; var z:Float; } = (cast { x: 0.0, y: 0.0, z: 0.0 });
 
   public static final scratchUvMatrix__glMeshProgram:Matrix3 = (cast createMatrix3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix3);
+
+  public static function isMirroringWorldMatrix__glMeshProgram(m:flighthq._internal._Float32Array):Bool {
+    return cast _Runtime.compare((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float)) * ((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 5.0 : Float)) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 10.0 : Float))) - (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float)) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 9.0 : Float))))) - (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 4.0 : Float)) * ((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float)) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 10.0 : Float))) - (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 2.0 : Float)) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 9.0 : Float)))))) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 8.0 : Float)) * ((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float)) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float))) - (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 2.0 : Float)) * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 5.0 : Float)))))), 0.0, '<');
+    return cast null;
+  }
 }

@@ -3,51 +3,51 @@ package flighthq.spatial;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.spatial.UniformGrid.createUniformGridSpatialBackend;
-import flighthq.types.Spatial.SpatialAabb;
-import flighthq.types.Spatial.SpatialIndex;
-import flighthq.types.Spatial.SpatialIndexBackend;
-import flighthq.types.Spatial.SpatialIndexRuntime;
+import flighthq.spatial.UniformGrid.createUniformGridSpatialBackend2D;
+import flighthq.types.Spatial.SpatialAabb2D;
+import flighthq.types.Spatial.SpatialIndex2D;
+import flighthq.types.Spatial.SpatialIndexBackend2D;
+import flighthq.types.Spatial.SpatialIndexRuntime2D;
 import flighthq.types.Spatial.SpatialObjectId;
 import flighthq.types.Spatial.SpatialPair;
 
 class SpatialIndex {
-  public static function clearSpatialIndex(index:flighthq.types.Spatial.SpatialIndex):Void {
-    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).clearSpatialIndex();
+  public static function clearSpatialIndex2D(index:SpatialIndex2D):Void {
+    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime2D).backend : SpatialIndexBackend2D).clearSpatialIndex();
   }
 
-  public static function createSpatialIndex(?backend:SpatialIndexBackend):flighthq.types.Spatial.SpatialIndex {
-    return cast { runtime: { backend: _Runtime.coalesce(backend, function():Dynamic return cast (cast createUniformGridSpatialBackend((cast SpatialIndex.DEFAULT_SPATIAL_CELL_SIZE__spatialIndex : Float)) : SpatialIndexBackend)) } };
+  public static function createSpatialIndex2D(?backend:SpatialIndexBackend2D):SpatialIndex2D {
+    return cast { runtime: { backend: _Runtime.coalesce(backend, function():Dynamic return cast (cast createUniformGridSpatialBackend2D((cast SpatialIndex.DEFAULT_SPATIAL_CELL_SIZE__spatialIndex : Float)) : SpatialIndexBackend2D)) } };
     return cast null;
   }
 
-  public static function insertSpatialObject(index:flighthq.types.Spatial.SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Bool {
-    return cast (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).insertSpatialObject((cast id : Float), ({ final __callArgument0:Dynamic = bounds; __callArgument0; }));
+  public static function insertSpatialObject2D(index:SpatialIndex2D, id:SpatialObjectId, bounds:SpatialAabb2D):Bool {
+    return cast (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime2D).backend : SpatialIndexBackend2D).insertSpatialObject((cast id : Float), ({ final __callArgument0:Dynamic = bounds; __callArgument0; }));
     return cast null;
   }
 
-  public static function querySpatialPairs(index:flighthq.types.Spatial.SpatialIndex, out:Array<SpatialPair>):Void {
-    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).querySpatialPairs(({ final __callArgument1:Dynamic = out; __callArgument1; }));
+  public static function querySpatialPairs2D(index:SpatialIndex2D, out:Array<SpatialPair>):Void {
+    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime2D).backend : SpatialIndexBackend2D).querySpatialPairs(({ final __callArgument1:Dynamic = out; __callArgument1; }));
   }
 
-  public static function querySpatialPoint(index:flighthq.types.Spatial.SpatialIndex, x:Float, y:Float, out:Array<SpatialObjectId>):Void {
-    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).querySpatialPoint((cast x : Float), (cast y : Float), ({ final __callArgument2:Dynamic = out; __callArgument2; }));
+  public static function querySpatialPoint2D(index:SpatialIndex2D, x:Float, y:Float, out:Array<SpatialObjectId>):Void {
+    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime2D).backend : SpatialIndexBackend2D).querySpatialPoint((cast x : Float), (cast y : Float), ({ final __callArgument2:Dynamic = out; __callArgument2; }));
   }
 
-  public static function querySpatialRay(index:flighthq.types.Spatial.SpatialIndex, x:Float, y:Float, dx:Float, dy:Float, out:Array<SpatialObjectId>):Void {
-    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).querySpatialRay((cast x : Float), (cast y : Float), (cast dx : Float), (cast dy : Float), ({ final __callArgument3:Dynamic = out; __callArgument3; }));
+  public static function querySpatialRay2D(index:SpatialIndex2D, x:Float, y:Float, dx:Float, dy:Float, out:Array<SpatialObjectId>):Void {
+    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime2D).backend : SpatialIndexBackend2D).querySpatialRay((cast x : Float), (cast y : Float), (cast dx : Float), (cast dy : Float), ({ final __callArgument3:Dynamic = out; __callArgument3; }));
   }
 
-  public static function querySpatialRegion(index:flighthq.types.Spatial.SpatialIndex, region:SpatialAabb, out:Array<SpatialObjectId>):Void {
-    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).querySpatialRegion(({ final __callArgument4:Dynamic = region; __callArgument4; }), ({ final __callArgument5:Dynamic = out; __callArgument5; }));
+  public static function querySpatialRegion2D(index:SpatialIndex2D, region:SpatialAabb2D, out:Array<SpatialObjectId>):Void {
+    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime2D).backend : SpatialIndexBackend2D).querySpatialRegion(({ final __callArgument4:Dynamic = region; __callArgument4; }), ({ final __callArgument5:Dynamic = out; __callArgument5; }));
   }
 
-  public static function removeSpatialObject(index:flighthq.types.Spatial.SpatialIndex, id:SpatialObjectId):Void {
-    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).removeSpatialObject((cast id : Float));
+  public static function removeSpatialObject2D(index:SpatialIndex2D, id:SpatialObjectId):Void {
+    (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime2D).backend : SpatialIndexBackend2D).removeSpatialObject((cast id : Float));
   }
 
-  public static function updateSpatialObject(index:flighthq.types.Spatial.SpatialIndex, id:SpatialObjectId, bounds:SpatialAabb):Bool {
-    return cast (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime).backend : SpatialIndexBackend).updateSpatialObject((cast id : Float), ({ final __callArgument6:Dynamic = bounds; __callArgument6; }));
+  public static function updateSpatialObject2D(index:SpatialIndex2D, id:SpatialObjectId, bounds:SpatialAabb2D):Bool {
+    return cast (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime2D).backend : SpatialIndexBackend2D).updateSpatialObject((cast id : Float), ({ final __callArgument6:Dynamic = bounds; __callArgument6; }));
     return cast null;
   }
 

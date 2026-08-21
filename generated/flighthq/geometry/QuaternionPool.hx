@@ -3,8 +3,12 @@ package flighthq.geometry;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.geometry.GeometryPoolGuards.geometryPoolReleaseGuard;
 import flighthq.geometry.Quaternion.createQuaternion;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Quaternion;
+import flighthq.types.Types.EntityRuntimeKey;
+import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class QuaternionPool {
   public static function acquireIdentityQuaternion():Quaternion {
@@ -35,6 +39,8 @@ class QuaternionPool {
 
   public static function releaseQuaternion(q:Quaternion):Void {
     if ((cast !_Runtime.truthy(q) : Bool)) { return; }
+    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(QuaternionPool.pool__quaternionPool, q) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseQuaternion' : String)); }
+    _Runtime.setIndex(q, EntityRuntimeKey, _Runtime.field(_Runtime, 'UNDEFINED'));
     _Runtime.callProperty(QuaternionPool.pool__quaternionPool, 'push', cast ([q] : Array<Dynamic>));
   }
 

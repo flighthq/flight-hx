@@ -53,7 +53,7 @@ class ImageResource {
       ((cast resource : Image).width = (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth);
       ((cast resource : Image).height = (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight);
     } else {
-      var sized:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.ImageBitmap> = (cast element : flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLImageElement, flighthq._internal.dom.HTMLCanvasElement>, flighthq._internal.dom.ImageBitmap>);
+      var sized:flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLImageElement, flighthq._internal.dom.HTMLCanvasElement>, flighthq._internal.dom.ImageBitmap> = (cast element : flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLImageElement, flighthq._internal.dom.HTMLCanvasElement>, flighthq._internal.dom.ImageBitmap>);
       ((cast resource : Image).width = flighthq._internal.backend.CanvasElementBackend.field(sized, 'width'));
       ((cast resource : Image).height = flighthq._internal.backend.CanvasElementBackend.field(sized, 'height'));
     }

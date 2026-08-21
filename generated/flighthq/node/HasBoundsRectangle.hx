@@ -3,6 +3,7 @@ package flighthq.node;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.HasBoundsRectangle;
 import flighthq.types.HasBoundsRectangle.BoundsNodeAny;
 import flighthq.types.HasBoundsRectangle.HasBoundsRectangleRuntime;
@@ -15,7 +16,7 @@ class HasBoundsRectangle {
   }
 
   @:noCompletion
-  public static function initBoundsRectangleRuntimeTrait(target:HasBoundsRectangleRuntime, ?methods:flighthq._internal._Partial<flighthq._internal._Intersection2<MethodsOf<HasBoundsRectangleRuntime>, flighthq._internal._Pick<HasBoundsRectangleRuntime, String>>>):Void {
+  public static function initBoundsRectangleRuntimeTrait(target:HasBoundsRectangleRuntime, ?methods:{ @:optional var computeLocalBoundsRectangle:Null<Rectangle->BoundsNodeAny->Void>; @:optional var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; }):Void {
     (target.boundsRectangle = cast (null : Null<Rectangle>));
     (target.localBoundsRectangle = cast (null : Null<Rectangle>));
     (target.worldBoundsRectangle = cast (null : Null<Rectangle>));
@@ -24,6 +25,6 @@ class HasBoundsRectangle {
   }
 
   @:noCompletion
-  public static function initBoundsRectangleTrait(_target:flighthq.types.HasBoundsRectangle, ?_obj:flighthq._internal._Partial<flighthq.types.HasBoundsRectangle>):Void {
+  public static function initBoundsRectangleTrait(_target:flighthq.types.HasBoundsRectangle, ?_obj:{ @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):Void {
   }
 }

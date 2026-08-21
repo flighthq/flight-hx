@@ -31,7 +31,7 @@ class GlPosterizeEffect {
   });
 
   public static function registerGlPosterizeEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'PosterizeEffect' : String), ({ final __callArgument6:Dynamic = defaultGlPosterizeEffectRunner; __callArgument6; }));
+    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'PosterizeEffect' : String), ({ final __callArgument6:Dynamic = defaultGlPosterizeEffectRunner; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static final POSTERIZE_FRAGMENT_SRC__glPosterizeEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_levels;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  vec3 rgb = floor(c.rgb * u_levels) / (u_levels - 1.0);\n  o_color = vec4(clamp(rgb, 0.0, 1.0), c.a);\n}';

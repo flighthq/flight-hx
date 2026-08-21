@@ -8,6 +8,8 @@ export * from './camera.mjs';
 export * from './camera2d.mjs';
 export * from './culling.mjs';
 export * from './depth.mjs';
+export * from './enableCameraGuards.mjs';
+export * from './explainCamera3DView.mjs';
 export * from './frustumCorners.mjs';
 export * from './intersection.mjs';
 export * from './parallax.mjs';

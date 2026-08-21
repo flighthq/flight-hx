@@ -5,4 +5,5 @@ const api = compiled.flighthq.skeleton3d.SkinVertices;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const skinTangents = api.skinTangents;
 export const skinVertices = api.skinVertices;

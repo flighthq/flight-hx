@@ -18,9 +18,9 @@ class GlSkinPaletteTexture {
   }
 
   @:noCompletion
-  public static function uploadGlSkinPaletteTexture(gl:flighthq._internal.dom.WebGL2RenderingContext, palette:flighthq.types.GlSkinPaletteTexture, jointMatrices:flighthq._internal._Float32Array, jointCount:Float):Void {
+  public static function uploadGlSkinPaletteTexture(gl:flighthq._internal.dom.WebGL2RenderingContext, palette:flighthq.types.GlSkinPaletteTexture, jointMatrices:flighthq._internal._Float32Array, jointCount:Float, texelsPerJoint:Float = 4.0):Void {
     var width:Float = cast _Runtime.UNDEFINED;
-    width = (jointCount * 4.0);
+    width = (jointCount * texelsPerJoint);
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast palette : flighthq.types.GlSkinPaletteTexture).texture);
     if ((cast ((cast jointCount : Float) > (cast (cast palette : flighthq.types.GlSkinPaletteTexture).jointCapacity : Float)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.texImage2D(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA32F', flighthq._internal.backend.WebGl2Backend.RGBA32F), width, 1.0, 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), (cast jointMatrices : flighthq._internal._Float32Array));

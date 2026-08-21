@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene3dResources.Awd2Load as Facade_Scene3dResources_flighthq_scene3dResources_Awd2Load;
 import flighthq.scene3dResources.EnableScene3DResourceFailureGuards as Facade_Scene3dResources_flighthq_scene3dResources_EnableScene3DResourceFailureGuards;
+import flighthq.scene3dResources.ExplainScene3DResourceCoverage as Facade_Scene3dResources_flighthq_scene3dResources_ExplainScene3DResourceCoverage;
 import flighthq.scene3dResources.GetScene3DResourceTextures as Facade_Scene3dResources_flighthq_scene3dResources_GetScene3DResourceTextures;
 import flighthq.scene3dResources.GltfLoad as Facade_Scene3dResources_flighthq_scene3dResources_GltfLoad;
 import flighthq.scene3dResources.ImageResourceFetch as Facade_Scene3dResources_flighthq_scene3dResources_ImageResourceFetch;
@@ -25,6 +26,7 @@ import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
 import flighthq.types.ObjSchema.ObjMaterialLibrary;
 import flighthq.types.Scene3D;
 import flighthq.types.Scene3DDocument;
+import flighthq.types.Scene3DKindUsage;
 import flighthq.types.Scene3DResources;
 import flighthq.types.Scene3DResources.LoadScene3DResourcesOptions;
 import flighthq.types.Scene3DResources.ResolveScene3DResourcesOptions;
@@ -34,7 +36,10 @@ import flighthq.types.Scene3DResources.Scene3DResourceResolverOptions;
 import flighthq.types.Scene3DResources.Scene3DResourceRevealOptions;
 import flighthq.types.Scene3DResources.Scene3DResourceSignals;
 import flighthq.types.Scene3DResources.UpdateScene3DResourceStreamingOptions;
+import flighthq.types.SceneCoverageCatalog;
+import flighthq.types.SceneCoverageEntry;
 import flighthq.types.Texture;
+import flighthq.types.TextureSource;
 import flighthq.types.TweenManager;
 
 class Scene3dResources {
@@ -69,6 +74,10 @@ class Scene3dResources {
   public static function enableScene3DResourceSignals(resolver:Scene3DResourceResolver):Scene3DResourceSignals {
     return cast Facade_Scene3dResources_flighthq_scene3dResources_SceneResourceSignals.enableScene3DResourceSignals(resolver);
     return cast null;
+  }
+
+  public static function explainScene3DResourceCoverage(out:Array<SceneCoverageEntry>, resolver:Scene3DResourceResolver, usage:Scene3DKindUsage, catalog:SceneCoverageCatalog):Void {
+    Facade_Scene3dResources_flighthq_scene3dResources_ExplainScene3DResourceCoverage.explainScene3DResourceCoverage(out, resolver, usage, catalog);
   }
 
   public static function fetchWebImageResource(ref:ExternalImageResourceReference, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<Image>> {
@@ -145,7 +154,7 @@ class Scene3dResources {
     return cast null;
   }
 
-  public static function resolveOneScene3DResourceTexture(resolver:Scene3DResourceResolver, ref:ImageResourceReference, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<Image>> {
+  public static function resolveOneScene3DResourceTexture(resolver:Scene3DResourceResolver, ref:ImageResourceReference, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<TextureSource>> {
     return cast Facade_Scene3dResources_flighthq_scene3dResources_ResolveScene3DResources.resolveOneScene3DResourceTexture(resolver, ref, signal);
     return cast null;
   }

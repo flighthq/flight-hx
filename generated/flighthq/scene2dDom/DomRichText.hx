@@ -4,6 +4,7 @@ package flighthq.scene2dDom;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.PackColor.computeRgbHexString;
+import flighthq.color.PackColor.computeRgbaCssString;
 import flighthq.entity.Entity.createEntity;
 import flighthq.scene2dDom.DomFontSource.getDomFontAscentCached;
 import flighthq.scene2dDom.DomFontSource.setDomFontAscentCached;
@@ -169,16 +170,17 @@ class DomRichText {
         ((cast bulletLines : flighthq._internal._Set<Float>).add(group.lineIndex));
         var bulletSize:Float = _Runtime.coalesce((cast fmt : TextFormat).size, function():Dynamic return cast 12.0);
         var bulletX:Float = ((x - (bulletSize * 0.7)) - DomRichText.DOM_BULLET_GAP__domRichText);
-        var bulletStyle:String = 'position:absolute;left:' + Std.string(bulletX) + 'px;top:' + Std.string(y) + 'px;font:' + Std.string(fontStr) + ';line-height:1;color:' + Std.string((cast computeRgbHexString((cast _Runtime.coalesce((cast fmt : TextFormat).color, function():Dynamic return cast (cast source.data : { var textColor:Float; }).textColor) : Float)) : String)) + ';white-space:nowrap;';
+        var bulletStyle:String = 'position:absolute;left:' + Std.string(bulletX) + 'px;top:' + Std.string(y) + 'px;font:' + Std.string(fontStr) + ';line-height:1;color:' + Std.string((cast computeRgbaCssString((cast _Runtime.coalesce((cast fmt : TextFormat).color, function():Dynamic return cast (cast source.data : { var textColor:Float; }).textColor) : Float)) : String)) + ';white-space:nowrap;';
         (html = cast ((html + '<div style="' + Std.string(bulletStyle) + '">Ã¢â‚¬Â¢</div>') : Dynamic));
       }
       var style:String = 'position:absolute;left:' + Std.string(x) + 'px;top:' + Std.string(y) + 'px;font:' + Std.string(fontStr) + ';line-height:1;';
-      (style = cast ((style + 'color:' + Std.string((cast computeRgbHexString((cast _Runtime.coalesce((cast fmt : TextFormat).color, function():Dynamic return cast (cast source.data : { var textColor:Float; }).textColor) : Float)) : String)) + ';white-space:nowrap;') : Dynamic));
+      (style = cast ((style + 'color:' + Std.string((cast computeRgbaCssString((cast _Runtime.coalesce((cast fmt : TextFormat).color, function():Dynamic return cast (cast source.data : { var textColor:Float; }).textColor) : Float)) : String)) + ';white-space:nowrap;') : Dynamic));
       if (_Runtime.truthy(_Runtime.orValue((cast fmt : TextFormat).underline, function():Dynamic return cast (cast fmt : TextFormat).strikethrough))) {
         var decorations:Array<flighthq._internal._Any> = (cast cast ([] : Array<Dynamic>));
         if (_Runtime.truthy((cast fmt : TextFormat).underline)) { _Runtime.callProperty(decorations, 'push', cast (['underline'] : Array<Dynamic>)); }
         if (_Runtime.truthy((cast fmt : TextFormat).strikethrough)) { _Runtime.callProperty(decorations, 'push', cast (['line-through'] : Array<Dynamic>)); }
         (style = cast ((style + 'text-decoration:' + Std.string(_Runtime.join(decorations, ' ')) + ';') : Dynamic));
+        if (_Runtime.truthy((cast fmt : TextFormat).underline)) { (style = cast ((style + 'text-decoration-skip-ink:none;') : Dynamic)); }
       }
       {
         var __switchValue = (cast fmt : TextFormat).align;

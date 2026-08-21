@@ -17,6 +17,7 @@ export const prepareMeshSkinning = compiled.flighthq.skeleton3d.Skeleton3d.prepa
 export const prepareScene3DSkinning = compiled.flighthq.skeleton3d.Skeleton3d.prepareScene3DSkinning;
 export const setSkeleton3DBindPose = compiled.flighthq.skeleton3d.Skeleton3d.setSkeleton3DBindPose;
 export const skinMeshGeometry = compiled.flighthq.skeleton3d.Skeleton3d.skinMeshGeometry;
+export const skinTangents = compiled.flighthq.skeleton3d.Skeleton3d.skinTangents;
 export const skinVertices = compiled.flighthq.skeleton3d.Skeleton3d.skinVertices;
 export const updateMeshDeformation = compiled.flighthq.skeleton3d.Skeleton3d.updateMeshDeformation;
 export const updateMeshSkin = compiled.flighthq.skeleton3d.Skeleton3d.updateMeshSkin;

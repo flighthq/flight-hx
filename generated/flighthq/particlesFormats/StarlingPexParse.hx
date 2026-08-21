@@ -4,6 +4,7 @@ package flighthq.particlesFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
+import flighthq.math.Constants.DEG_TO_RAD;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
@@ -41,8 +42,6 @@ class StarlingPexParse {
     return cast { config: (cast StarlingPexParse.documentToConfig__starlingPexParse(({ final __callArgument2:Dynamic = doc; __callArgument2; }), (cast _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.textureSize; }), function():Dynamic return cast 1.0) : Float)) : ParticleEmitterConfig), diagnostics: (cast StarlingPexParse.collectStarlingPexDiagnostics__starlingPexParse(({ final __callArgument4:Dynamic = doc; __callArgument4; })) : Array<ImportDiagnostic>), document: doc };
     return cast null;
   }
-
-  public static final DEG2RAD__starlingPexParse:Float = (HxMath.PI / 180.0);
 
   public static function collectStarlingPexDiagnostics__starlingPexParse(doc:StarlingPexDocument):Array<ImportDiagnostic> {
     var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;
@@ -97,7 +96,7 @@ class StarlingPexParse {
     var rotSpeedMid:Float = cast _Runtime.UNDEFINED;
     var rotSpeedVar:Float = cast _Runtime.UNDEFINED;
     var pdDuration:Float = cast _Runtime.UNDEFINED;
-    angleRad = (doc.angle * StarlingPexParse.DEG2RAD__starlingPexParse);
+    angleRad = (doc.angle * DEG_TO_RAD);
     lifespan = doc.particleLifespan;
     lifespanVar = doc.particleLifespanVariance;
     speed = doc.speed;
@@ -113,10 +112,10 @@ class StarlingPexParse {
     rotStartVar = doc.rotationStartVariance;
     rotEndVar = doc.rotationEndVariance;
     lifetimeMid = _Runtime.orValue((lifespan + (lifespanVar * 0.5)), function():Dynamic return cast 1.0);
-    rotSpeedMid = ((((rotStart + rotEnd) * 0.5) * StarlingPexParse.DEG2RAD__starlingPexParse) / lifetimeMid);
-    rotSpeedVar = (_Runtime.multiplyNumbers(HxMath.max(rotStartVar, rotEndVar), StarlingPexParse.DEG2RAD__starlingPexParse) / lifetimeMid);
+    rotSpeedMid = ((((rotStart + rotEnd) * 0.5) * DEG_TO_RAD) / lifetimeMid);
+    rotSpeedVar = (_Runtime.multiplyNumbers(HxMath.max(rotStartVar, rotEndVar), DEG_TO_RAD) / lifetimeMid);
     pdDuration = doc.duration;
-    return cast (cast createParticleEmitterConfig(({ final __callArgument19:Dynamic = { maxParticles: doc.maxParticles, loop: ((cast pdDuration : Float) <= (cast 0.0 : Float)), duration: ((cast ((cast pdDuration : Float) > (cast 0.0 : Float)) : Bool) ? (cast pdDuration : Dynamic) : (cast 0.0 : Dynamic)), lifetimeMin: HxMath.max(0.0, (lifespan - lifespanVar)), lifetimeMax: (lifespan + lifespanVar), speedMin: HxMath.max(0.0, (speed - speedVar)), speedMax: (speed + speedVar), directionX: HxMath.cos(angleRad), directionY: -HxMath.sin(angleRad), spread: (doc.angleVariance * StarlingPexParse.DEG2RAD__starlingPexParse), gravityX: doc.gravityx, gravityY: doc.gravityy, emitterShape: emitterShape, emitterRadius: ((cast _Runtime.strictEquals(emitterShape, 'circle') : Bool) ? (cast vx : Dynamic) : (cast 0.0 : Dynamic)), emitterWidth: ((cast _Runtime.strictEquals(emitterShape, 'rect') : Bool) ? (cast (vx * 2.0) : Dynamic) : (cast 0.0 : Dynamic)), emitterHeight: ((cast _Runtime.strictEquals(emitterShape, 'rect') : Bool) ? (cast (vy * 2.0) : Dynamic) : (cast 0.0 : Dynamic)), scaleMin: HxMath.max(0.0, (startSize - startVar)), scaleMax: (startSize + startVar), scaleEnd: ((cast ((cast startSize : Float) > (cast 0.0 : Float)) : Bool) ? (cast (finishSize / startSize) : Dynamic) : (cast 1.0 : Dynamic)), colorStartR: (cast doc.startColor : { var red:Float; }).red, colorStartG: (cast doc.startColor : { var green:Float; }).green, colorStartB: (cast doc.startColor : { var blue:Float; }).blue, colorStartVarianceR: (cast doc.startColorVariance : { var red:Float; }).red, colorStartVarianceG: (cast doc.startColorVariance : { var green:Float; }).green, colorStartVarianceB: (cast doc.startColorVariance : { var blue:Float; }).blue, colorEndR: (cast doc.finishColor : { var red:Float; }).red, colorEndG: (cast doc.finishColor : { var green:Float; }).green, colorEndB: (cast doc.finishColor : { var blue:Float; }).blue, colorEndVarianceR: (cast doc.finishColorVariance : { var red:Float; }).red, colorEndVarianceG: (cast doc.finishColorVariance : { var green:Float; }).green, colorEndVarianceB: (cast doc.finishColorVariance : { var blue:Float; }).blue, alphaStart: (cast doc.startColor : { var alpha:Float; }).alpha, alphaEnd: (cast doc.finishColor : { var alpha:Float; }).alpha, rotationSpeedMin: (rotSpeedMid - rotSpeedVar), rotationSpeedMax: (rotSpeedMid + rotSpeedVar), blendMode: (cast StarlingPexParse.pexBlendMode__starlingPexParse((cast doc.blendFuncSource : Float), (cast doc.blendFuncDestination : Float)) : Null<String>) }; __callArgument19; })) : ParticleEmitterConfig);
+    return cast (cast createParticleEmitterConfig((cast { maxParticles: doc.maxParticles, loop: ((cast pdDuration : Float) <= (cast 0.0 : Float)), duration: ((cast ((cast pdDuration : Float) > (cast 0.0 : Float)) : Bool) ? (cast pdDuration : Dynamic) : (cast 0.0 : Dynamic)), lifetimeMin: HxMath.max(0.0, (lifespan - lifespanVar)), lifetimeMax: (lifespan + lifespanVar), speedMin: HxMath.max(0.0, (speed - speedVar)), speedMax: (speed + speedVar), directionX: HxMath.cos(angleRad), directionY: -HxMath.sin(angleRad), spread: (doc.angleVariance * DEG_TO_RAD), gravityX: doc.gravityx, gravityY: doc.gravityy, emitterShape: emitterShape, emitterRadius: ((cast _Runtime.strictEquals(emitterShape, 'circle') : Bool) ? (cast vx : Dynamic) : (cast 0.0 : Dynamic)), emitterWidth: ((cast _Runtime.strictEquals(emitterShape, 'rect') : Bool) ? (cast (vx * 2.0) : Dynamic) : (cast 0.0 : Dynamic)), emitterHeight: ((cast _Runtime.strictEquals(emitterShape, 'rect') : Bool) ? (cast (vy * 2.0) : Dynamic) : (cast 0.0 : Dynamic)), scaleMin: HxMath.max(0.0, (startSize - startVar)), scaleMax: (startSize + startVar), scaleEnd: ((cast ((cast startSize : Float) > (cast 0.0 : Float)) : Bool) ? (cast (finishSize / startSize) : Dynamic) : (cast 1.0 : Dynamic)), colorStartR: (cast doc.startColor : { var red:Float; }).red, colorStartG: (cast doc.startColor : { var green:Float; }).green, colorStartB: (cast doc.startColor : { var blue:Float; }).blue, colorStartVarianceR: (cast doc.startColorVariance : { var red:Float; }).red, colorStartVarianceG: (cast doc.startColorVariance : { var green:Float; }).green, colorStartVarianceB: (cast doc.startColorVariance : { var blue:Float; }).blue, colorEndR: (cast doc.finishColor : { var red:Float; }).red, colorEndG: (cast doc.finishColor : { var green:Float; }).green, colorEndB: (cast doc.finishColor : { var blue:Float; }).blue, colorEndVarianceR: (cast doc.finishColorVariance : { var red:Float; }).red, colorEndVarianceG: (cast doc.finishColorVariance : { var green:Float; }).green, colorEndVarianceB: (cast doc.finishColorVariance : { var blue:Float; }).blue, alphaStart: (cast doc.startColor : { var alpha:Float; }).alpha, alphaEnd: (cast doc.finishColor : { var alpha:Float; }).alpha, rotationSpeedMin: (rotSpeedMid - rotSpeedVar), rotationSpeedMax: (rotSpeedMid + rotSpeedVar), blendMode: (cast StarlingPexParse.pexBlendMode__starlingPexParse((cast doc.blendFuncSource : Float), (cast doc.blendFuncDestination : Float)) : Null<String>) } : Dynamic)) : ParticleEmitterConfig);
     return cast null;
   }
 

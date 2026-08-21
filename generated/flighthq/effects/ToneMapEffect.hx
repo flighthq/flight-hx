@@ -4,9 +4,10 @@ package flighthq.effects;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ToneMapEffect;
+import flighthq.types.ToneMapEffect.ToneMapOperator;
 
 class ToneMapEffect {
-  public static function createToneMapEffect(?options:flighthq._internal._Omit<flighthq.types.ToneMapEffect, String>):flighthq.types.ToneMapEffect {
+  public static function createToneMapEffect(?options:{ @:optional var operator_:Null<ToneMapOperator>; @:optional var exposure:Null<Float>; @:optional var white:Null<Float>; }):flighthq.types.ToneMapEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'ToneMapEffect' }, options]);
     return cast null;

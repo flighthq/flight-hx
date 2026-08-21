@@ -7,5 +7,7 @@ __syncDependencies();
 
 export const detectTextureAtlasFormat = api.detectTextureAtlasFormat;
 export const getTextureAtlasFormat = api.getTextureAtlasFormat;
+export const getTextureAtlasFormatKinds = api.getTextureAtlasFormatKinds;
 export const parseTextureAtlas = api.parseTextureAtlas;
 export const registerTextureAtlasFormat = api.registerTextureAtlasFormat;
+export const unregisterTextureAtlasFormat = api.unregisterTextureAtlasFormat;

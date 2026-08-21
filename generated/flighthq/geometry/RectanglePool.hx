@@ -3,8 +3,12 @@ package flighthq.geometry;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.geometry.GeometryPoolGuards.geometryPoolReleaseGuard;
 import flighthq.geometry.Rectangle.createRectangle;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Rectangle;
+import flighthq.types.Types.EntityRuntimeKey;
+import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class RectanglePool {
   public static function acquireEmptyRectangle():Rectangle {
@@ -35,6 +39,8 @@ class RectanglePool {
 
   public static function releaseRectangle(r:Rectangle):Void {
     if ((cast !_Runtime.truthy(r) : Bool)) { return; }
+    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(RectanglePool.pool__rectanglePool, r) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseRectangle' : String)); }
+    _Runtime.setIndex(r, EntityRuntimeKey, _Runtime.field(_Runtime, 'UNDEFINED'));
     _Runtime.callProperty(RectanglePool.pool__rectanglePool, 'push', cast ([r] : Array<Dynamic>));
   }
 

@@ -53,7 +53,9 @@ class FlexLayout {
     var crossOffset:Float = cast _Runtime.UNDEFINED;
     var containsTarget:Bool = cast _Runtime.UNDEFINED;
     var nodes:Array<LayoutNode<flighthq._internal._Object, flighthq._internal._Object>> = cast _Runtime.UNDEFINED;
+    var crossReverse:Bool = cast _Runtime.UNDEFINED;
     var distributable:Float = cast _Runtime.UNDEFINED;
+    var shrinkScale:Float = cast _Runtime.UNDEFINED;
     var usedMain:Float = cast _Runtime.UNDEFINED;
     var targetMainSize:Float = cast _Runtime.UNDEFINED;
     var beforeTarget:Float = cast _Runtime.UNDEFINED;
@@ -132,11 +134,10 @@ class FlexLayout {
     }
     if ((cast !(cast containsTarget : Bool) : Bool)) { return cast (cast LayoutResolutionFailureKindValue : { var IntrinsicSizesTooSmall:String; var InvalidContainerStyle:String; var InvalidHierarchy:String; var InvalidItemStyle:String; var OutputTooSmall:String; var UnregisteredKind:String; }).InvalidItemStyle; }
     if ((cast _Runtime.strictEquals(wrap, 'nowrap') : Bool)) { (lineCross = cast (crossSize : Dynamic)); }
-    if ((cast _Runtime.strictEquals(wrap, 'wrap-reverse') : Bool)) {
-      var totalCross:Float = (cast FlexLayout.getFlexLinesCrossSize__flexLayout(({ final __callArgument15:Dynamic = tree; __callArgument15; }), ({ final __callArgument16:Dynamic = intrinsicSizes; __callArgument16; }), (cast parentIndex : Float), (cast row : Bool), (cast mainSize : Float), (cast gap : Float)) : Float);
-      (crossOffset = cast (((crossSize - totalCross) + crossOffset) : Dynamic));
-    }
+    crossReverse = _Runtime.strictEquals(wrap, 'wrap-reverse');
+    if ((cast crossReverse : Bool)) { (crossOffset = cast (((crossSize - crossOffset) - lineCross) : Dynamic)); }
     distributable = ((mainSize - lineBaseSum) - _Runtime.multiplyNumbers(gap, HxMath.max(0.0, (lineCount - 1.0))));
+    shrinkScale = (cast FlexLayout.getFlexShrinkScale__flexLayout(({ final __callArgument15:Dynamic = tree; __callArgument15; }), ({ final __callArgument16:Dynamic = intrinsicSizes; __callArgument16; }), (cast parentIndex : Float), (cast row : Bool), (cast lineStartIndex : Float), (cast lineLastIndex : Float), (cast HxMath.max(0.0, -distributable) : Float), (cast lineShrinkWeight : Float)) : Float);
     usedMain = _Runtime.multiplyNumbers(gap, HxMath.max(0.0, (lineCount - 1.0)));
     targetMainSize = 0.0;
     beforeTarget = 0.0;
@@ -147,7 +148,7 @@ class FlexLayout {
         if ((cast !_Runtime.strictEquals(node.parentIndex, parentIndex) : Bool)) { i++; continue; }
         var item:Null<FlexLayoutItemStyle> = (cast node.itemStyle : Null<FlexLayoutItemStyle>);
         var base:Float = (cast FlexLayout.getFlexBase__flexLayout(({ final __callArgument17:Dynamic = node; __callArgument17; }), ({ final __callArgument18:Dynamic = intrinsicSizes; __callArgument18; }), (cast i : Float), (cast row : Bool)) : Float);
-        var itemMainSize:Float = (cast FlexLayout.getFlexItemMainSize__flexLayout((cast base : Float), (cast _Runtime.coalesce(({ final __typedStruct19 = item; __typedStruct19 == null ? _Runtime.UNDEFINED : (cast __typedStruct19 : { @:optional var grow:Null<Float>; }).grow; }), function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(({ final __typedStruct20 = item; __typedStruct20 == null ? _Runtime.UNDEFINED : (cast __typedStruct20 : { @:optional var shrink:Null<Float>; }).shrink; }), function():Dynamic return cast 1.0) : Float), (cast distributable : Float), (cast lineGrowSum : Float), (cast lineShrinkWeight : Float)) : Float);
+        var itemMainSize:Float = (cast FlexLayout.getFlexItemMainSize__flexLayout((cast base : Float), (cast _Runtime.coalesce(({ final __typedStruct19 = item; __typedStruct19 == null ? _Runtime.UNDEFINED : (cast __typedStruct19 : { @:optional var grow:Null<Float>; }).grow; }), function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(({ final __typedStruct20 = item; __typedStruct20 == null ? _Runtime.UNDEFINED : (cast __typedStruct20 : { @:optional var shrink:Null<Float>; }).shrink; }), function():Dynamic return cast 1.0) : Float), (cast distributable : Float), (cast lineGrowSum : Float), (cast shrinkScale : Float)) : Float);
         if ((cast _Runtime.strictEquals(i, childIndex) : Bool)) { (targetMainSize = cast (itemMainSize : Dynamic)); } else { if ((cast ((cast i : Float) < (cast childIndex : Float)) : Bool)) { (beforeTarget = cast ((beforeTarget + (itemMainSize + gap)) : Dynamic)); } }
         (usedMain = cast ((usedMain + itemMainSize) : Dynamic));
         i++;
@@ -164,7 +165,7 @@ class FlexLayout {
     align = ((cast ((cast _Runtime.strictEquals(({ final __typedStruct25 = item; __typedStruct25 == null ? _Runtime.UNDEFINED : (cast __typedStruct25 : { @:optional var alignSelf:Null<String>; }).alignSelf; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast item : { @:optional var alignSelf:Null<String>; }).alignSelf, 'auto') : Bool)) : Bool) ? (cast _Runtime.coalesce(({ final __structural26 = container; __structural26 == null ? _Runtime.UNDEFINED : (cast __structural26 : { @:optional var align:Null<String>; }).align; }), function():Dynamic return cast 'stretch') : Dynamic) : (cast (cast item : { @:optional var alignSelf:Null<String>; }).alignSelf : Dynamic));
     targetCrossSize = (cast FlexLayout.getFlexCross__flexLayout(({ final __callArgument27:Dynamic = intrinsicSizes; __callArgument27; }), (cast childIndex : Float), (cast row : Bool)) : Float);
     if ((cast _Runtime.strictEquals(align, 'stretch') : Bool)) { (targetCrossSize = cast (lineCross : Dynamic)); }
-    targetCross = ((crossStart + crossOffset) + (cast FlexLayout.getFlexAlignOffset__flexLayout(({ final __callArgument28:Dynamic = align; __callArgument28; }), (cast lineCross : Float), (cast targetCrossSize : Float)) : Float));
+    targetCross = ((crossStart + crossOffset) + (cast FlexLayout.getFlexAlignOffset__flexLayout(({ final __callArgument28:Dynamic = align; __callArgument28; }), (cast lineCross : Float), (cast targetCrossSize : Float), (cast crossReverse : Bool)) : Float));
     childOffset = (childIndex * 4.0);
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast childOffset : Float), (cast ((cast row : Bool) ? (cast targetMain : Dynamic) : (cast targetCross : Dynamic)) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (childOffset + 1.0) : Float), (cast ((cast row : Bool) ? (cast targetCross : Dynamic) : (cast targetMain : Dynamic)) : Float));
@@ -174,35 +175,40 @@ class FlexLayout {
     return cast _Runtime.UNDEFINED;
   });
 
-  public static function getFlexLinesCrossSize__flexLayout(tree:LayoutTree, intrinsicSizes:flighthq._internal._ArrayLike<Float>, parentIndex:Float, row:Bool, mainSize:Float, gap:Float):Float {
-    var lineCount:Float = cast _Runtime.UNDEFINED;
-    var lineUsed:Float = cast _Runtime.UNDEFINED;
-    var lineCross:Float = cast _Runtime.UNDEFINED;
-    var total:Float = cast _Runtime.UNDEFINED;
-    lineCount = 0.0;
-    lineUsed = 0.0;
-    lineCross = 0.0;
-    total = 0.0;
+  public static function getFlexShrinkScale__flexLayout(tree:LayoutTree, intrinsicSizes:flighthq._internal._ArrayLike<Float>, parentIndex:Float, row:Bool, lineStartIndex:Float, lineLastIndex:Float, deficit:Float, initialWeight:Float):Float {
+    var scale:Float = cast _Runtime.UNDEFINED;
+    var frozenCount:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast _Runtime.strictEquals(deficit, 0.0) : Bool) || (cast _Runtime.strictEquals(initialWeight, 0.0) : Bool)) : Bool)) { return cast 0.0; }
+    scale = (deficit / initialWeight);
+    frozenCount = -1.0;
     {
-      var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(tree.nodes, 'length') : Float)) : Bool)) {
-        var node:LayoutNode<flighthq._internal._Object, flighthq._internal._Object> = flighthq._internal._StaticIndex.readArray(tree.nodes, i);
-        if ((cast !_Runtime.strictEquals(node.parentIndex, parentIndex) : Bool)) { i++; continue; }
-        var base:Float = (cast FlexLayout.getFlexBase__flexLayout(({ final __callArgument29:Dynamic = node; __callArgument29; }), ({ final __callArgument30:Dynamic = intrinsicSizes; __callArgument30; }), (cast i : Float), (cast row : Bool)) : Float);
-        if ((cast ((cast ((cast lineCount : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast ((lineUsed + gap) + base) : Float) > (cast mainSize : Float)) : Bool)) : Bool)) {
-          (total = cast ((total + _Runtime.addNumbers(lineCross, ((cast _Runtime.strictEquals(total, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast gap : Dynamic)))) : Dynamic));
-          (lineCount = cast (0.0 : Dynamic));
-          (lineUsed = cast (0.0 : Dynamic));
-          (lineCross = cast (0.0 : Dynamic));
+      while (true) {
+        var nextFrozenCount:Float = 0.0;
+        var frozenBase:Float = 0.0;
+        var activeWeight:Float = 0.0;
+        {
+          var i:Float = lineStartIndex;
+          while ((cast ((cast i : Float) <= (cast lineLastIndex : Float)) : Bool)) {
+            var node:LayoutNode<flighthq._internal._Object, flighthq._internal._Object> = flighthq._internal._StaticIndex.readArray(tree.nodes, i);
+            if ((cast !_Runtime.strictEquals(node.parentIndex, parentIndex) : Bool)) { i++; continue; }
+            var item:Null<FlexLayoutItemStyle> = (cast node.itemStyle : Null<FlexLayoutItemStyle>);
+            var base:Float = (cast FlexLayout.getFlexBase__flexLayout(({ final __callArgument29:Dynamic = node; __callArgument29; }), ({ final __callArgument30:Dynamic = intrinsicSizes; __callArgument30; }), (cast i : Float), (cast row : Bool)) : Float);
+            var weight:Float = _Runtime.multiplyNumbers(_Runtime.coalesce(({ final __typedStruct31 = item; __typedStruct31 == null ? _Runtime.UNDEFINED : (cast __typedStruct31 : { @:optional var shrink:Null<Float>; }).shrink; }), function():Dynamic return cast 1.0), base);
+            if ((cast _Runtime.strictEquals(weight, 0.0) : Bool)) { i++; continue; }
+            if ((cast ((cast (scale * weight) : Float) >= (cast base : Float)) : Bool)) {
+              (frozenBase = cast ((frozenBase + base) : Dynamic));
+              nextFrozenCount++;
+            } else {
+              (activeWeight = cast ((activeWeight + weight) : Dynamic));
+            }
+            i++;
+          }
         }
-        (lineUsed = cast ((lineUsed + _Runtime.addNumbers(((cast _Runtime.strictEquals(lineCount, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast gap : Dynamic)), base)) : Dynamic));
-        (lineCross = cast (HxMath.max(lineCross, (cast FlexLayout.getFlexCross__flexLayout(({ final __callArgument31:Dynamic = intrinsicSizes; __callArgument31; }), (cast i : Float), (cast row : Bool)) : Float)) : Dynamic));
-        lineCount++;
-        i++;
+        if ((cast ((cast _Runtime.strictEquals(nextFrozenCount, frozenCount) : Bool) || (cast _Runtime.strictEquals(activeWeight, 0.0) : Bool)) : Bool)) { return cast scale; }
+        (frozenCount = cast (nextFrozenCount : Dynamic));
+        (scale = cast (_Runtime.divideNumbers(HxMath.max(0.0, (deficit - frozenBase)), activeWeight) : Dynamic));
       }
     }
-    if ((cast ((cast lineCount : Float) > (cast 0.0 : Float)) : Bool)) { (total = cast ((total + _Runtime.addNumbers(lineCross, ((cast _Runtime.strictEquals(total, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast gap : Dynamic)))) : Dynamic)); }
-    return cast total;
     return cast null;
   }
 
@@ -220,11 +226,9 @@ class FlexLayout {
     return cast null;
   }
 
-  public static function getFlexItemMainSize__flexLayout(base:Float, grow:Float, shrink:Float, distributable:Float, growSum:Float, shrinkWeight:Float):Float {
+  public static function getFlexItemMainSize__flexLayout(base:Float, grow:Float, shrink:Float, distributable:Float, growSum:Float, shrinkScale:Float):Float {
     if ((cast ((cast ((cast distributable : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast growSum : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { return cast (base + ((distributable * grow) / growSum)); }
-    if ((cast ((cast ((cast distributable : Float) < (cast 0.0 : Float)) : Bool) && (cast ((cast shrinkWeight : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      return cast HxMath.max(0.0, (base + (((distributable * shrink) * base) / shrinkWeight)));
-    }
+    if ((cast ((cast distributable : Float) < (cast 0.0 : Float)) : Bool)) { return cast HxMath.max(0.0, (base - ((shrinkScale * shrink) * base))); }
     return cast base;
     return cast null;
   }
@@ -260,26 +264,26 @@ class FlexLayout {
     return cast null;
   }
 
-  public static function getFlexAlignOffset__flexLayout(align:FlexLayoutAlign, available:Float, size:Float):Float {
-    if ((cast _Runtime.strictEquals(align, 'end') : Bool)) { return cast (available - size); }
+  public static function getFlexAlignOffset__flexLayout(align:FlexLayoutAlign, available:Float, size:Float, reverse:Bool):Float {
     if ((cast _Runtime.strictEquals(align, 'center') : Bool)) { return cast ((available - size) / 2.0); }
+    if ((cast _Runtime.strictEquals(align, ((cast reverse : Bool) ? (cast 'start' : Dynamic) : (cast 'end' : Dynamic))) : Bool)) { return cast (available - size); }
     return cast 0.0;
     return cast null;
   }
 
   public static function isFlexLayoutContainerStyle__flexLayout(value:Null<flighthq._internal._Object>):Bool {
-    var style:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var style:{ @:optional var align:Null<String>; @:optional var direction:Null<String>; @:optional var gap:Null<Float>; @:optional var justify:Null<String>; @:optional var paddingBottom:Null<Float>; @:optional var paddingLeft:Null<Float>; @:optional var paddingRight:Null<Float>; @:optional var paddingTop:Null<Float>; @:optional var wrap:Null<String>; } = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast true; }
-    style = (cast value : flighthq._internal._Partial<FlexLayoutContainerStyle>);
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast (cast FlexLayout.isFlexAlign__flexLayout((cast _Runtime.field(style, 'align') : flighthq._internal._Any)) : Bool) : Bool) && (cast (cast FlexLayout.isFlexDirection__flexLayout((cast _Runtime.field(style, 'direction') : flighthq._internal._Any)) : Bool) : Bool)) : Bool) && (cast (cast FlexLayout.isNonNegativeOptionalNumber__flexLayout((cast _Runtime.field(style, 'gap') : flighthq._internal._Any)) : Bool) : Bool)) : Bool) && (cast (cast FlexLayout.isFlexJustify__flexLayout((cast _Runtime.field(style, 'justify') : flighthq._internal._Any)) : Bool) : Bool)) : Bool) && (cast (cast FlexLayout.isNonNegativeOptionalNumber__flexLayout((cast _Runtime.field(style, 'paddingBottom') : flighthq._internal._Any)) : Bool) : Bool)) : Bool) && (cast (cast FlexLayout.isNonNegativeOptionalNumber__flexLayout((cast _Runtime.field(style, 'paddingLeft') : flighthq._internal._Any)) : Bool) : Bool)) : Bool) && (cast (cast FlexLayout.isNonNegativeOptionalNumber__flexLayout((cast _Runtime.field(style, 'paddingRight') : flighthq._internal._Any)) : Bool) : Bool)) : Bool) && (cast (cast FlexLayout.isNonNegativeOptionalNumber__flexLayout((cast _Runtime.field(style, 'paddingTop') : flighthq._internal._Any)) : Bool) : Bool)), function():Dynamic return cast (cast FlexLayout.isFlexWrap__flexLayout((cast _Runtime.field(style, 'wrap') : flighthq._internal._Any)) : Bool));
+    style = (cast value : { @:optional var align:Null<FlexLayoutAlign>; @:optional var direction:Null<FlexLayoutDirection>; @:optional var gap:Null<Float>; @:optional var justify:Null<FlexLayoutJustify>; @:optional var paddingBottom:Null<Float>; @:optional var paddingLeft:Null<Float>; @:optional var paddingRight:Null<Float>; @:optional var paddingTop:Null<Float>; @:optional var wrap:Null<FlexLayoutWrap>; });
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast (cast FlexLayout.isFlexAlign__flexLayout((cast (cast style : { @:optional var align:Null<String>; @:optional var direction:Null<String>; @:optional var gap:Null<Float>; @:optional var justify:Null<String>; @:optional var paddingBottom:Null<Float>; @:optional var paddingLeft:Null<Float>; @:optional var paddingRight:Null<Float>; @:optional var paddingTop:Null<Float>; @:optional var wrap:Null<String>; }).align : flighthq._internal._Any)) : Bool) : Bool) && (cast (cast FlexLayout.isFlexDirection__flexLayout((cast (cast style : { @:optional var align:Null<String>; @:optional var direction:Null<String>; @:optional var gap:Null<Float>; @:optional var justify:Null<String>; @:optional var paddingBottom:Null<Float>; @:optional var paddingLeft:Null<Float>; @:optional var paddingRight:Null<Float>; @:optional var paddingTop:Null<Float>; @:optional var wrap:Null<String>; }).direction : flighthq._internal._Any)) : Bool) : Bool)) : Bool) && (cast (cast FlexLayout.isNonNegativeOptionalNumber__flexLayout((cast (cast style : { @:optional var align:Null<String>; @:optional var direction:Null<String>; @:optional var gap:Null<Float>; @:optional var justify:Null<String>; @:optional var paddingBottom:Null<Float>; @:optional var paddingLeft:Null<Float>; @:optional var paddingRight:Null<Float>; @:optional var paddingTop:Null<Float>; @:optional var wrap:Null<String>; }).gap : flighthq._internal._Any)) : Bool) : Bool)) : Bool) && (cast (cast FlexLayout.isFlexJustify__flexLayout((cast (cast style : { @:optional var align:Null<String>; @:optional var direction:Null<String>; @:optional var gap:Null<Float>; @:optional var justify:Null<String>; @:optional var paddingBottom:Null<Float>; @:optional var paddingLeft:Null<Float>; @:optional var paddingRight:Null<Float>; @:optional var paddingTop:Null<Float>; @:optional var wrap:Null<String>; }).justify : flighthq._internal._Any)) : Bool) : Bool)) : Bool) && (cast (cast FlexLayout.isNonNegativeOptionalNumber__flexLayout((cast (cast style : { @:optional var align:Null<String>; @:optional var direction:Null<String>; @:optional var gap:Null<Float>; @:optional var justify:Null<String>; @:optional var paddingBottom:Null<Float>; @:optional var paddingLeft:Null<Float>; @:optional var paddingRight:Null<Float>; @:optional var paddingTop:Null<Float>; @:optional var wrap:Null<String>; }).paddingBottom : flighthq._internal._Any)) : Bool) : Bool)) : Bool) && (cast (cast FlexLayout.isNonNegativeOptionalNumber__flexLayout((cast (cast style : { @:optional var align:Null<String>; @:optional var direction:Null<String>; @:optional var gap:Null<Float>; @:optional var justify:Null<String>; @:optional var paddingBottom:Null<Float>; @:optional var paddingLeft:Null<Float>; @:optional var paddingRight:Null<Float>; @:optional var paddingTop:Null<Float>; @:optional var wrap:Null<String>; }).paddingLeft : flighthq._internal._Any)) : Bool) : Bool)) : Bool) && (cast (cast FlexLayout.isNonNegativeOptionalNumber__flexLayout((cast (cast style : { @:optional var align:Null<String>; @:optional var direction:Null<String>; @:optional var gap:Null<Float>; @:optional var justify:Null<String>; @:optional var paddingBottom:Null<Float>; @:optional var paddingLeft:Null<Float>; @:optional var paddingRight:Null<Float>; @:optional var paddingTop:Null<Float>; @:optional var wrap:Null<String>; }).paddingRight : flighthq._internal._Any)) : Bool) : Bool)) : Bool) && (cast (cast FlexLayout.isNonNegativeOptionalNumber__flexLayout((cast (cast style : { @:optional var align:Null<String>; @:optional var direction:Null<String>; @:optional var gap:Null<Float>; @:optional var justify:Null<String>; @:optional var paddingBottom:Null<Float>; @:optional var paddingLeft:Null<Float>; @:optional var paddingRight:Null<Float>; @:optional var paddingTop:Null<Float>; @:optional var wrap:Null<String>; }).paddingTop : flighthq._internal._Any)) : Bool) : Bool)), function():Dynamic return cast (cast FlexLayout.isFlexWrap__flexLayout((cast (cast style : { @:optional var align:Null<String>; @:optional var direction:Null<String>; @:optional var gap:Null<Float>; @:optional var justify:Null<String>; @:optional var paddingBottom:Null<Float>; @:optional var paddingLeft:Null<Float>; @:optional var paddingRight:Null<Float>; @:optional var paddingTop:Null<Float>; @:optional var wrap:Null<String>; }).wrap : flighthq._internal._Any)) : Bool));
     return cast null;
   }
 
   public static function isFlexLayoutItemStyle__flexLayout(value:Null<flighthq._internal._Object>):Bool {
-    var style:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var style:{ @:optional var alignSelf:Null<String>; @:optional var basis:Null<flighthq._internal._Union2<Float, String>>; @:optional var grow:Null<Float>; @:optional var shrink:Null<Float>; } = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast true; }
-    style = (cast value : flighthq._internal._Partial<FlexLayoutItemStyle>);
-    return cast _Runtime.andValue(((cast ((cast _Runtime.orValue(((cast _Runtime.strictEquals(_Runtime.field(style, 'alignSelf'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(style, 'alignSelf'), 'auto') : Bool)), function():Dynamic return cast (cast FlexLayout.isFlexAlign__flexLayout((cast _Runtime.field(style, 'alignSelf') : flighthq._internal._Any)) : Bool)) : Bool) && (cast _Runtime.orValue(((cast _Runtime.strictEquals(_Runtime.field(style, 'basis'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(style, 'basis'), 'auto') : Bool)), function():Dynamic return cast (cast FlexLayout.isNonNegativeNumber__flexLayout((cast _Runtime.field(style, 'basis') : flighthq._internal._Any)) : Bool)) : Bool)) : Bool) && (cast (cast FlexLayout.isNonNegativeOptionalNumber__flexLayout((cast _Runtime.field(style, 'grow') : flighthq._internal._Any)) : Bool) : Bool)), function():Dynamic return cast (cast FlexLayout.isNonNegativeOptionalNumber__flexLayout((cast _Runtime.field(style, 'shrink') : flighthq._internal._Any)) : Bool));
+    style = (cast value : { @:optional var alignSelf:Null<flighthq._internal._Union2<FlexLayoutAlign, String>>; @:optional var basis:Null<flighthq._internal._Union2<Float, String>>; @:optional var grow:Null<Float>; @:optional var shrink:Null<Float>; });
+    return cast _Runtime.andValue(((cast ((cast _Runtime.orValue(((cast _Runtime.strictEquals((cast style : { @:optional var alignSelf:Null<String>; @:optional var basis:Null<flighthq._internal._Union2<Float, String>>; @:optional var grow:Null<Float>; @:optional var shrink:Null<Float>; }).alignSelf, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast style : { @:optional var alignSelf:Null<String>; @:optional var basis:Null<flighthq._internal._Union2<Float, String>>; @:optional var grow:Null<Float>; @:optional var shrink:Null<Float>; }).alignSelf, 'auto') : Bool)), function():Dynamic return cast (cast FlexLayout.isFlexAlign__flexLayout((cast (cast style : { @:optional var alignSelf:Null<String>; @:optional var basis:Null<flighthq._internal._Union2<Float, String>>; @:optional var grow:Null<Float>; @:optional var shrink:Null<Float>; }).alignSelf : flighthq._internal._Any)) : Bool)) : Bool) && (cast _Runtime.orValue(((cast _Runtime.strictEquals((cast style : { @:optional var alignSelf:Null<String>; @:optional var basis:Null<flighthq._internal._Union2<Float, String>>; @:optional var grow:Null<Float>; @:optional var shrink:Null<Float>; }).basis, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast style : { @:optional var alignSelf:Null<String>; @:optional var basis:Null<flighthq._internal._Union2<Float, String>>; @:optional var grow:Null<Float>; @:optional var shrink:Null<Float>; }).basis, 'auto') : Bool)), function():Dynamic return cast (cast FlexLayout.isNonNegativeNumber__flexLayout((cast (cast style : { @:optional var alignSelf:Null<String>; @:optional var basis:Null<flighthq._internal._Union2<Float, String>>; @:optional var grow:Null<Float>; @:optional var shrink:Null<Float>; }).basis : flighthq._internal._Any)) : Bool)) : Bool)) : Bool) && (cast (cast FlexLayout.isNonNegativeOptionalNumber__flexLayout((cast (cast style : { @:optional var alignSelf:Null<String>; @:optional var basis:Null<flighthq._internal._Union2<Float, String>>; @:optional var grow:Null<Float>; @:optional var shrink:Null<Float>; }).grow : flighthq._internal._Any)) : Bool) : Bool)), function():Dynamic return cast (cast FlexLayout.isNonNegativeOptionalNumber__flexLayout((cast (cast style : { @:optional var alignSelf:Null<String>; @:optional var basis:Null<flighthq._internal._Union2<Float, String>>; @:optional var grow:Null<Float>; @:optional var shrink:Null<Float>; }).shrink : flighthq._internal._Any)) : Bool));
     return cast null;
   }
 

@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.FilmGrainEffect;
 
 class FilmGrainEffect {
-  public static function createFilmGrainEffect(?options:flighthq._internal._Omit<flighthq.types.FilmGrainEffect, String>):flighthq.types.FilmGrainEffect {
+  public static function createFilmGrainEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var size:Null<Float>; @:optional var seed:Null<Float>; }):flighthq.types.FilmGrainEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'FilmGrainEffect' }, options]);
     return cast null;

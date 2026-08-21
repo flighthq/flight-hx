@@ -333,7 +333,7 @@ class DragonBonesParse {
       }
     }
     if ((cast ((cast recovered : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument113:Dynamic = diagnostics; __callArgument113; }), ({ final __callArgument114:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument114; }), (cast 'dragonbones.malformed-frame-recovered' : String), (cast 'parseDragonBonesSkeleton' : String), ({ final __callArgument115:Dynamic = { frames: recovered }; __callArgument115; }));
+      reportImportDiagnostic(({ final __callArgument113:Dynamic = diagnostics; __callArgument113; }), ({ final __callArgument114:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument114; }), (cast 'dragonbones.malformed-frame-recovered' : String), (cast 'dragonBonesFrames' : String), ({ final __callArgument115:Dynamic = { frames: recovered }; __callArgument115; }));
     }
     return cast frames;
     return cast null;
@@ -357,7 +357,7 @@ class DragonBonesParse {
       }
     }
     if ((cast ((cast approximated : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument117:Dynamic = diagnostics; __callArgument117; }), ({ final __callArgument118:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument118; }), (cast 'dragonbones.tween-easing-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), ({ final __callArgument119:Dynamic = { frames: approximated }; __callArgument119; }));
+      reportImportDiagnostic(({ final __callArgument117:Dynamic = diagnostics; __callArgument117; }), ({ final __callArgument118:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument118; }), (cast 'dragonbones.tween-easing-approximated' : String), (cast 'dragonBonesInterpolation' : String), ({ final __callArgument119:Dynamic = { frames: approximated }; __callArgument119; }));
     }
     return cast ((cast stepped : Bool) ? (cast AnimationInterpolationStep : Dynamic) : (cast AnimationInterpolationLinear : Dynamic));
     return cast null;
@@ -434,7 +434,7 @@ class DragonBonesParse {
     b = (cast DragonBonesParse.colorChannel__dragonBonesParse((cast (cast color : { var bM:flighthq._internal._Any; }).bM : flighthq._internal._Any)) : Float);
     a = (cast DragonBonesParse.colorChannel__dragonBonesParse((cast (cast color : { var aM:flighthq._internal._Any; }).aM : flighthq._internal._Any)) : Float);
     if ((cast ((cast ((cast ((cast !_Runtime.strictEquals((cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast color : { var rO:flighthq._internal._Any; }).rO : flighthq._internal._Any), (cast 0.0 : Float)) : Float), 0.0) : Bool) || (cast !_Runtime.strictEquals((cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast color : { var gO:flighthq._internal._Any; }).gO : flighthq._internal._Any), (cast 0.0 : Float)) : Float), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast color : { var bO:flighthq._internal._Any; }).bO : flighthq._internal._Any), (cast 0.0 : Float)) : Float), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast DragonBonesParse.numberOr__dragonBonesParse((cast (cast color : { var aO:flighthq._internal._Any; }).aO : flighthq._internal._Any), (cast 0.0 : Float)) : Float), 0.0) : Bool)) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument120:Dynamic = diagnostics; __callArgument120; }), ({ final __callArgument121:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument121; }), (cast 'dragonbones.color-offset-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), ({ final __callArgument122:Dynamic = { slots: 1.0 }; __callArgument122; }));
+      reportImportDiagnostic(({ final __callArgument120:Dynamic = diagnostics; __callArgument120; }), ({ final __callArgument121:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument121; }), (cast 'dragonbones.color-offset-unsupported' : String), (cast 'parseDragonBonesColor' : String), ({ final __callArgument122:Dynamic = { slots: 1.0 }; __callArgument122; }));
     }
     return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << 24)) | _Runtime.toInt32((_Runtime.toInt32(g) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(b) << 8)))) | _Runtime.toInt32(a))), 0);
     return cast null;
@@ -481,7 +481,7 @@ class DragonBonesParse {
     type = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast display : { var type:flighthq._internal._Any; }).type), 'string') : Bool) ? (cast (cast display : { var type:flighthq._internal._Any; }).type : Dynamic) : (cast 'image' : Dynamic));
     if ((cast _Runtime.strictEquals(type, 'image') : Bool)) { return cast (cast DragonBonesParse.parseDragonBonesRegionDisplay__dragonBonesParse(({ final __callArgument131:Dynamic = display; __callArgument131; })) : RegionAttachment2D); }
     if ((cast _Runtime.strictEquals(type, 'mesh') : Bool)) { return cast (cast DragonBonesParse.parseDragonBonesMeshDisplay__dragonBonesParse(({ final __callArgument132:Dynamic = display; __callArgument132; }), (cast remapBoneIndex : Dynamic), ({ final __callArgument133:Dynamic = diagnostics; __callArgument133; })) : Null<MeshAttachment2D>); }
-    reportImportDiagnostic(({ final __callArgument134:Dynamic = diagnostics; __callArgument134; }), ({ final __callArgument135:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument135; }), (cast 'dragonbones.' + Std.string(type) + '-display-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), ({ final __callArgument136:Dynamic = { displays: 1.0 }; __callArgument136; }));
+    reportImportDiagnostic(({ final __callArgument134:Dynamic = diagnostics; __callArgument134; }), ({ final __callArgument135:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument135; }), (cast 'dragonbones.' + Std.string(type) + '-display-unsupported' : String), (cast 'parseDragonBonesDisplay' : String), ({ final __callArgument136:Dynamic = { displays: 1.0 }; __callArgument136; }));
     return cast null;
     return cast null;
   }
@@ -489,12 +489,12 @@ class DragonBonesParse {
   public static function parseDragonBonesMeshDisplay__dragonBonesParse(display:flighthq._internal._Record<String, flighthq._internal._Any>, remapBoneIndex:DragonBonesBoneRemap__dragonBonesParse, ?diagnostics:Array<ImportDiagnostic>):Null<MeshAttachment2D> {
     var uvs:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.hasField(display, 'share') : Bool)) {
-      reportImportDiagnostic(({ final __callArgument137:Dynamic = diagnostics; __callArgument137; }), ({ final __callArgument138:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument138; }), (cast 'dragonbones.shared-mesh-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), ({ final __callArgument139:Dynamic = { displays: 1.0 }; __callArgument139; }));
+      reportImportDiagnostic(({ final __callArgument137:Dynamic = diagnostics; __callArgument137; }), ({ final __callArgument138:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument138; }), (cast 'dragonbones.shared-mesh-unsupported' : String), (cast 'parseDragonBonesMeshDisplay' : String), ({ final __callArgument139:Dynamic = { displays: 1.0 }; __callArgument139; }));
       return cast null;
     }
     if ((cast _Runtime.hasField(display, 'weights') : Bool)) {
       if ((cast _Runtime.hasField(display, 'bonePose') : Bool)) { return cast (cast DragonBonesParse.parseDragonBonesWeightedMesh__dragonBonesParse(({ final __callArgument140:Dynamic = display; __callArgument140; }), (cast remapBoneIndex : Dynamic), ({ final __callArgument141:Dynamic = diagnostics; __callArgument141; })) : MeshAttachment2D); }
-      reportImportDiagnostic(({ final __callArgument142:Dynamic = diagnostics; __callArgument142; }), ({ final __callArgument143:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument143; }), (cast 'dragonbones.legacy-weighted-mesh-unsupported' : String), (cast 'parseDragonBonesSkeleton' : String), ({ final __callArgument144:Dynamic = { displays: 1.0 }; __callArgument144; }));
+      reportImportDiagnostic(({ final __callArgument142:Dynamic = diagnostics; __callArgument142; }), ({ final __callArgument143:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument143; }), (cast 'dragonbones.legacy-weighted-mesh-unsupported' : String), (cast 'parseDragonBonesMeshDisplay' : String), ({ final __callArgument144:Dynamic = { displays: 1.0 }; __callArgument144; }));
       return cast null;
     }
     uvs = (cast DragonBonesParse.toFloat32Array__dragonBonesParse((cast (cast display : { var uvs:flighthq._internal._Any; }).uvs : flighthq._internal._Any)) : flighthq._internal._Float32Array);
@@ -596,7 +596,7 @@ class DragonBonesParse {
       }
     }
     if ((cast recovered : Bool)) {
-      reportImportDiagnostic(({ final __callArgument154:Dynamic = diagnostics; __callArgument154; }), ({ final __callArgument155:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument155; }), (cast 'dragonbones.weighted-mesh-recovered' : String), (cast 'parseDragonBonesSkeleton' : String), ({ final __callArgument156:Dynamic = { meshes: 1.0 }; __callArgument156; }));
+      reportImportDiagnostic(({ final __callArgument154:Dynamic = diagnostics; __callArgument154; }), ({ final __callArgument155:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument155; }), (cast 'dragonbones.weighted-mesh-recovered' : String), (cast 'parseDragonBonesWeightedMesh' : String), ({ final __callArgument156:Dynamic = { meshes: 1.0 }; __callArgument156; }));
     }
     return cast { kind: MeshAttachment2DKind, name: ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast display : { var name:flighthq._internal._Any; }).name), 'string') : Bool) ? (cast (cast display : { var name:flighthq._internal._Any; }).name : Dynamic) : (cast null : Dynamic)), skin: { influenceCounts: influenceCounts, influences: new flighthq._internal._Float32Array(influences) }, triangles: (cast DragonBonesParse.toUint16Array__dragonBonesParse((cast (cast display : { var triangles:flighthq._internal._Any; }).triangles : flighthq._internal._Any)) : flighthq._internal._UInt16Array), uvs: uvs, vertexCount: vertexCount, vertices: null };
     return cast null;
@@ -759,7 +759,7 @@ class DragonBonesParse {
       }
     }
     if ((cast ((cast _Runtime.field(pending, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument166:Dynamic = diagnostics; __callArgument166; }), ({ final __callArgument167:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument167; }), (cast 'dragonbones.unresolved-bone-parent' : String), (cast 'parseDragonBonesSkeleton' : String), ({ final __callArgument168:Dynamic = { count: _Runtime.field(pending, 'length') }; __callArgument168; }));
+      reportImportDiagnostic(({ final __callArgument166:Dynamic = diagnostics; __callArgument166; }), ({ final __callArgument167:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument167; }), (cast 'dragonbones.unresolved-bone-parent' : String), (cast 'parseDragonBonesSkeleton' : String), ({ final __callArgument168:Dynamic = { count: _Runtime.field(pending, 'length') }; __callArgument168; }));
       for (entry in _Runtime.iterable(pending)) {
         ((cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone : Bone2D).parentIndex = -1.0);
         if ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone : Bone2D).name), 'string') : Bool)) { ((cast indexByName : flighthq._internal._Map<String, Float>).set((cast (cast entry : { var bone:Bone2D; var parentName:Null<String>; var rawIndex:Float; }).bone : Bone2D).name, (cast _Runtime.field(bones, 'length')))); }

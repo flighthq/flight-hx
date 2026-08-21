@@ -91,7 +91,7 @@ class GlRenderTarget {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var __destructure0:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-    var shaderLoc:GlShaderLocations = cast _Runtime.UNDEFINED;
+    var shaderLoc:Null<GlShaderLocations> = cast _Runtime.UNDEFINED;
     var matrixArray:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var quadTransform:Matrix = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast target.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast target.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }

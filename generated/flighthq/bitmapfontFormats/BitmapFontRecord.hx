@@ -4,6 +4,7 @@ package flighthq.bitmapfontFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmapfont.BitmapFont.createBitmapFont;
+import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontData;
 import flighthq.types.BitmapFont.BitmapFontEncoding;
@@ -14,7 +15,10 @@ import flighthq.types.BitmapFontRecord;
 import flighthq.types.BitmapFontRecord.BitmapFontCharRecord;
 import flighthq.types.BitmapFontRecord.BitmapFontKerningRecord;
 import flighthq.types.BitmapFontRecord.BitmapFontPageRecord;
+import flighthq.types.ImportDiagnostic;
+import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.TextureAtlas;
+import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 class BitmapFontRecord {
   public static function buildBitmapFontFromRecord(record:flighthq.types.BitmapFontRecord, ?options:BitmapFontParseOptions):Null<BitmapFont> {
@@ -55,5 +59,17 @@ class BitmapFontRecord {
     data = (cast { encoding: record.encoding, glyphs: glyphs, kerning: kerning, metrics: { ascent: record.base, descent: (record.lineHeight - record.base), lineGap: 0.0 }, pages: pages });
     return cast (cast createBitmapFont(({ final __callArgument5:Dynamic = data; __callArgument5; })) : BitmapFont);
     return cast null;
+  }
+
+  public static function reportDroppedBitmapFontRecords(diagnostics:Null<Array<ImportDiagnostic>>, origin:String, pages:Float, chars:Float, kernings:Float):Void {
+    if ((cast ((cast pages : Float) > (cast 0.0 : Float)) : Bool)) {
+      reportImportDiagnostic(({ final __callArgument6:Dynamic = diagnostics; __callArgument6; }), ({ final __callArgument7:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument7; }), (cast 'bmfont.page-unreadable' : String), (cast origin : String), ({ final __callArgument8:Dynamic = { records: pages }; __callArgument8; }));
+    }
+    if ((cast ((cast chars : Float) > (cast 0.0 : Float)) : Bool)) {
+      reportImportDiagnostic(({ final __callArgument9:Dynamic = diagnostics; __callArgument9; }), ({ final __callArgument10:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument10; }), (cast 'bmfont.char-unreadable' : String), (cast origin : String), ({ final __callArgument11:Dynamic = { records: chars }; __callArgument11; }));
+    }
+    if ((cast ((cast kernings : Float) > (cast 0.0 : Float)) : Bool)) {
+      reportImportDiagnostic(({ final __callArgument12:Dynamic = diagnostics; __callArgument12; }), ({ final __callArgument13:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument13; }), (cast 'bmfont.kerning-unreadable' : String), (cast origin : String), ({ final __callArgument14:Dynamic = { records: kernings }; __callArgument14; }));
+    }
   }
 }

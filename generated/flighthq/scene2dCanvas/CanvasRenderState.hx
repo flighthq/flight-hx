@@ -4,6 +4,7 @@ package flighthq.scene2dCanvas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix.createMatrix;
+import flighthq.registry.RegistryTable.createKeyedTable;
 import flighthq.render.RenderColor.setRenderStateBackgroundColor;
 import flighthq.render.RenderState.createRenderState as _createRenderState;
 import flighthq.render.RenderState.createRenderStateRuntime;
@@ -14,15 +15,23 @@ import flighthq.types.CanvasMaterialRenderer;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderOptions;
 import flighthq.types.CanvasRenderState;
+import flighthq.types.CanvasRenderState.CanvasRenderRegistries;
 import flighthq.types.CanvasRenderState.CanvasRenderStateRuntime;
 import flighthq.types.CanvasTextureResolver;
 import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
 import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Matrix;
+import flighthq.types.Path;
+import flighthq.types.PathMesh;
+import flighthq.types.RegistryTable.KeyedTable;
+import flighthq.types.RegistryTable.SlotTable;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderRegistrySignals;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
+import flighthq.types.RenderState.Scene3DGraphSyncPolicy;
+import flighthq.types.Renderer;
+import flighthq.types.StrokeStyle;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
@@ -35,20 +44,19 @@ class CanvasRenderState {
     ((cast target : { var applyBlendMode:Null<flighthq.types.CanvasRenderState->Null<String>->Void>; }).applyBlendMode = (cast (cast source : flighthq.types.CanvasRenderState).applyBlendMode));
     ((cast target : { var canvasCssFilterResolver:Null<flighthq.types.CanvasRenderState->RenderProxy2D->Null<String>>; }).canvasCssFilterResolver = (cast (cast source : flighthq.types.CanvasRenderState).canvasCssFilterResolver));
     ((cast targetRuntime.canvasTextureResolvers : CanvasTextureResolvers).registry = (cast CanvasRenderState.copyMap__canvasRenderState((cast (cast sourceRuntime.canvasTextureResolvers : CanvasTextureResolvers).registry : Dynamic)) : Null<flighthq._internal._Map<String, CanvasTextureResolver>>));
-    (targetRuntime.materialRendererMap = cast ((cast CanvasRenderState.copyMap__canvasRenderState((cast sourceRuntime.materialRendererMap : Dynamic)) : Null<flighthq._internal._Map<String, CanvasMaterialRenderer>>) : Null<flighthq._internal._Map<String, CanvasMaterialRenderer>>));
-    (targetRuntime.canvasRenderEffectRegistry = cast ((cast CanvasRenderState.copyMap__canvasRenderState((cast sourceRuntime.canvasRenderEffectRegistry : Dynamic)) : Null<flighthq._internal._Map<String, CanvasRenderEffectRunner>>) : Null<flighthq._internal._Map<String, CanvasRenderEffectRunner>>));
+    (targetRuntime.registries = cast ({ materialRenderers: (cast sourceRuntime.registries : CanvasRenderRegistries).materialRenderers, renderEffects: (cast sourceRuntime.registries : CanvasRenderRegistries).renderEffects, renderers: (cast targetRuntime.registries : CanvasRenderRegistries).renderers, strokeTessellator: (cast targetRuntime.registries : CanvasRenderRegistries).strokeTessellator } : CanvasRenderRegistries));
     copyRenderStateRegistrations(({ final __callArgument2:Dynamic = target; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }));
   }
 
-  public static function createCanvasRenderState(canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:flighthq._internal._Partial<CanvasRenderOptions>):flighthq.types.CanvasRenderState {
+  public static function createCanvasRenderState(canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:{ @:optional var backgroundColor:Null<Float>; @:optional var contextAttributes:Null<flighthq._internal.dom.CanvasRenderingContext2DSettings>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<flighthq._internal.dom.ImageSmoothingQuality>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; }):flighthq.types.CanvasRenderState {
     if (options == null) options = cast ({  } : Dynamic);
     var context:Null<flighthq._internal.dom.CanvasRenderingContext2D> = cast _Runtime.UNDEFINED;
     var state:flighthq.types.CanvasRenderState = cast _Runtime.UNDEFINED;
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
-    context = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d', _Runtime.orValue(_Runtime.field(options, 'contextAttributes'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>));
+    context = flighthq._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d', _Runtime.orValue((cast options : { @:optional var backgroundColor:Null<Float>; @:optional var contextAttributes:Null<flighthq._internal.dom.CanvasRenderingContext2DSettings>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).contextAttributes, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'))] : Array<Dynamic>));
     if ((cast !_Runtime.truthy(context) : Bool)) { _Runtime.throwValue(_Runtime.error('Failed to get context for canvas.')); }
-    state = (cast _createRenderState(({ final __callArgument4:Dynamic = { pixelRatio: _Runtime.coalesce(_Runtime.field(options, 'pixelRatio'), function():Dynamic return cast 1.0), renderTransform2D: _Runtime.coalesce(_Runtime.field(options, 'renderTransform'), function():Dynamic return cast (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix)), roundPixels: _Runtime.coalesce(_Runtime.field(options, 'roundPixels'), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.field(options, 'sceneGraphSyncPolicy') }; __callArgument4; })) : flighthq.types.CanvasRenderState);
-    if ((cast !_Runtime.looseEquals(_Runtime.field(options, 'backgroundColor'), null) : Bool)) { setRenderStateBackgroundColor(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast _Runtime.field(options, 'backgroundColor') : Float)); }
+    state = (cast _createRenderState((cast { pixelRatio: _Runtime.coalesce((cast options : { @:optional var backgroundColor:Null<Float>; @:optional var contextAttributes:Null<flighthq._internal.dom.CanvasRenderingContext2DSettings>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).pixelRatio, function():Dynamic return cast 1.0), renderTransform2D: _Runtime.coalesce((cast options : { @:optional var backgroundColor:Null<Float>; @:optional var contextAttributes:Null<flighthq._internal.dom.CanvasRenderingContext2DSettings>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).renderTransform, function():Dynamic return cast (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix)), roundPixels: _Runtime.coalesce((cast options : { @:optional var backgroundColor:Null<Float>; @:optional var contextAttributes:Null<flighthq._internal.dom.CanvasRenderingContext2DSettings>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).roundPixels, function():Dynamic return cast false), sceneGraphSyncPolicy: (cast options : { @:optional var backgroundColor:Null<Float>; @:optional var contextAttributes:Null<flighthq._internal.dom.CanvasRenderingContext2DSettings>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).sceneGraphSyncPolicy } : Dynamic)) : flighthq.types.CanvasRenderState);
+    if ((cast !_Runtime.looseEquals((cast options : { @:optional var backgroundColor:Null<Float>; @:optional var contextAttributes:Null<flighthq._internal.dom.CanvasRenderingContext2DSettings>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).backgroundColor, null) : Bool)) { setRenderStateBackgroundColor(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast (cast options : { @:optional var backgroundColor:Null<Float>; @:optional var contextAttributes:Null<flighthq._internal.dom.CanvasRenderingContext2DSettings>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).backgroundColor : Float)); }
     ((cast state : { var applyBlendMode:Null<flighthq.types.CanvasRenderState->Null<String>->Void>; }).applyBlendMode = (cast null));
     ((cast state : { var canvasCssFilterResolver:Null<flighthq.types.CanvasRenderState->RenderProxy2D->Null<String>>; }).canvasCssFilterResolver = (cast null));
     ((cast (cast state : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }) : { var canvas:flighthq._internal.dom.HTMLCanvasElement; }).canvas = canvas);
@@ -59,8 +67,8 @@ class CanvasRenderState {
     (runtime.canvasTextureResolvers = cast ((cast createCanvasTextureResolvers() : CanvasTextureResolvers) : CanvasTextureResolvers));
     ((cast runtime.canvasTextureResolvers : { @:optional var registryMiss:Null<RenderRegistry->String->Void>; }).registryMiss = (cast function(registry:RenderRegistry, kind:String):Void { _Runtime.callOptionalValue(runtime.registryMiss, cast ([registry, kind] : Array<Dynamic>)); }));
     (runtime.currentBlendMode = cast (null : Null<String>));
-    (runtime.imageSmoothingEnabled = cast (_Runtime.coalesce(_Runtime.field(options, 'imageSmoothingEnabled'), function():Dynamic return cast true) : Bool));
-    (runtime.imageSmoothingQuality = cast (_Runtime.coalesce(_Runtime.field(options, 'imageSmoothingQuality'), function():Dynamic return cast 'high') : flighthq._internal._Any));
+    (runtime.imageSmoothingEnabled = cast (_Runtime.coalesce((cast options : { @:optional var backgroundColor:Null<Float>; @:optional var contextAttributes:Null<flighthq._internal.dom.CanvasRenderingContext2DSettings>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).imageSmoothingEnabled, function():Dynamic return cast true) : Bool));
+    (runtime.imageSmoothingQuality = cast (_Runtime.coalesce((cast options : { @:optional var backgroundColor:Null<Float>; @:optional var contextAttributes:Null<flighthq._internal.dom.CanvasRenderingContext2DSettings>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<String>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<String>; }).imageSmoothingQuality, function():Dynamic return cast 'high') : flighthq._internal._Any));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', runtime.imageSmoothingEnabled);
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingQuality', runtime.imageSmoothingQuality);
     return cast state;
@@ -69,12 +77,15 @@ class CanvasRenderState {
 
   @:noCompletion
   public static function createCanvasRenderStateRuntime():CanvasRenderStateRuntime {
-    return cast (cast createRenderStateRuntime() : CanvasRenderStateRuntime);
+    var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast createRenderStateRuntime() : CanvasRenderStateRuntime);
+    (runtime.registries = cast ({ renderEffects: (cast createKeyedTable((cast 'CanvasRenderEffect' : String), (cast 'Unregistered' : String)) : KeyedTable<CanvasRenderEffectRunner>), renderers: (cast runtime.registries : CanvasRenderRegistries).renderers, strokeTessellator: (cast runtime.registries : CanvasRenderRegistries).strokeTessellator } : CanvasRenderRegistries));
+    return cast runtime;
     return cast null;
   }
 
   public static function destroyCanvasRenderState(state:flighthq.types.CanvasRenderState):Void {
-    destroyRenderState(({ final __callArgument6:Dynamic = state; __callArgument6; }));
+    destroyRenderState(({ final __callArgument5:Dynamic = state; __callArgument5; }));
   }
 
   @:noCompletion
@@ -89,7 +100,7 @@ class CanvasRenderState {
   }
 
   public static function getCanvasRenderStateTextureResolvers(state:flighthq.types.CanvasRenderState):CanvasTextureResolvers {
-    return cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument7:Dynamic = state; __callArgument7; })) : CanvasRenderStateRuntime) : { var canvasTextureResolvers:CanvasTextureResolvers; }).canvasTextureResolvers;
+    return cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : CanvasRenderStateRuntime) : { var canvasTextureResolvers:CanvasTextureResolvers; }).canvasTextureResolvers;
     return cast null;
   }
 }

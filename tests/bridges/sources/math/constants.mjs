@@ -5,6 +5,7 @@ const api = compiled.flighthq.math.Constants;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const CIRCLE_KAPPA = api.CIRCLE_KAPPA;
 export const DEG_TO_RAD = api.DEG_TO_RAD;
 export const EPSILON = api.EPSILON;
 export const HALF_PI = api.HALF_PI;

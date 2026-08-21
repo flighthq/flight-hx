@@ -3,7 +3,7 @@ package flighthq.scene2dDom;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.color.PackColor.computeRgbHexString;
+import flighthq.color.PackColor.computeRgbaCssString;
 import flighthq.entity.Entity.createEntity;
 import flighthq.scene2dDom.DomStyle.applyDomStyle;
 import flighthq.scene2dDom.DomStyle.prepareDomElement;
@@ -97,7 +97,7 @@ class DomTextLabel {
       var x:Float = group.offsetX;
       var y:Float = group.offsetY;
       var style:String = 'position:absolute;left:' + Std.string(x) + 'px;top:' + Std.string(y) + 'px;font:' + Std.string((cast computeTextFormatFontString(({ final __callArgument11:Dynamic = fmt; __callArgument11; })) : String)) + ';';
-      (style = cast ((style + 'color:' + Std.string((cast computeRgbHexString((cast _Runtime.coalesce((cast fmt : TextFormat).color, function():Dynamic return cast 0.0) : Float)) : String)) + ';white-space:nowrap;') : Dynamic));
+      (style = cast ((style + 'color:' + Std.string((cast computeRgbaCssString((cast _Runtime.coalesce((cast fmt : TextFormat).color, function():Dynamic return cast 255.0) : Float)) : String)) + ';white-space:nowrap;') : Dynamic));
       if (_Runtime.truthy((cast fmt : TextFormat).underline)) { (style = cast ((style + 'text-decoration:underline;') : Dynamic)); }
       (html = cast ((html + '<div style="' + Std.string(style) + '">' + Std.string(slice) + '</div>') : Dynamic));
     }

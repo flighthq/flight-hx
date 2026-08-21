@@ -7,12 +7,12 @@ import flighthq.types.SpatialIndexing.SpatialIndexingExplanation;
 
 typedef SpatialObjectId = Float;
 
-typedef SpatialAabb = { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; };
+typedef SpatialAabb2D = { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; };
 
 typedef SpatialPair = { var a:SpatialObjectId; var b:SpatialObjectId; };
 
-typedef SpatialIndexBackend = { var insertSpatialObject:SpatialObjectId->SpatialAabb->Bool; var updateSpatialObject:SpatialObjectId->SpatialAabb->Bool; var removeSpatialObject:SpatialObjectId->Void; var clearSpatialIndex:Void->Void; var explainSpatialIndexing:SpatialObjectId->SpatialIndexingExplanation; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialRegion:SpatialAabb->Array<SpatialObjectId>->Void; var querySpatialPoint:Float->Float->Array<SpatialObjectId>->Void; var querySpatialRay:Float->Float->Float->Float->Array<SpatialObjectId>->Void; };
+typedef SpatialIndexBackend2D = { var insertSpatialObject:SpatialObjectId->SpatialAabb2D->Bool; var updateSpatialObject:SpatialObjectId->SpatialAabb2D->Bool; var removeSpatialObject:SpatialObjectId->Void; var clearSpatialIndex:Void->Void; var explainSpatialIndexing:SpatialObjectId->SpatialIndexingExplanation; var querySpatialPairs:Array<SpatialPair>->Void; var querySpatialRegion:SpatialAabb2D->Array<SpatialObjectId>->Void; var querySpatialPoint:Float->Float->Array<SpatialObjectId>->Void; var querySpatialRay:Float->Float->Float->Float->Array<SpatialObjectId>->Void; };
 
-typedef SpatialIndexRuntime = { var backend:SpatialIndexBackend; };
+typedef SpatialIndexRuntime2D = { var backend:SpatialIndexBackend2D; };
 
-typedef SpatialIndex = { var runtime:SpatialIndexRuntime; };
+typedef SpatialIndex2D = { var runtime:SpatialIndexRuntime2D; };

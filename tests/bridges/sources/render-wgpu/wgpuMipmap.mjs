@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const generateWgpuMipmaps = api.generateWgpuMipmaps;
 export const getWgpuMipLevelCount = api.getWgpuMipLevelCount;
+export const registerWgpuMipmapGeneration = api.registerWgpuMipmapGeneration;

@@ -1,0 +1,8 @@
+package flighthq._internal.dom;
+
+/** Typed dictionary form of a WebGPU texture extent. */
+typedef GPUExtent3DDict = {
+  var width:Float;
+  @:optional var height:Float;
+  @:optional var depthOrArrayLayers:Float;
+}

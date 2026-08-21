@@ -12,8 +12,8 @@ import flighthq.physics2d.Ownership.assertPhysics2DWorldNotStepping;
 import flighthq.physics2d.Ownership.physics2DBodyOwners;
 import flighthq.physics2d.Ownership.physics2DColliderOwners;
 import flighthq.physics2d.Ownership.physics2DJointOwners;
-import flighthq.spatial.UniformGrid.createUniformGridSpatialBackend;
-import flighthq.types.Collision.CollisionShape;
+import flighthq.spatial.UniformGrid.createUniformGridSpatialBackend2D;
+import flighthq.types.Collision.CollisionBuiltInShape2D;
 import flighthq.types.Physics2D.Physics2DBodyType;
 import flighthq.types.Physics2D.Physics2DCollider;
 import flighthq.types.Physics2D.Physics2DCollisionFilter;
@@ -25,7 +25,7 @@ import flighthq.types.Physics2D.Physics2DMaterial;
 import flighthq.types.Physics2D.Physics2DSolverConfig;
 import flighthq.types.Physics2D.Physics2DWorld;
 import flighthq.types.Physics2D.RigidBody2D;
-import flighthq.types.Spatial.SpatialIndexBackend;
+import flighthq.types.Spatial.SpatialIndexBackend2D;
 
 class World {
   public static function addPhysics2DBody(world:Physics2DWorld, body:RigidBody2D):RigidBody2D {
@@ -139,14 +139,14 @@ class World {
     return cast null;
   }
 
-  public static function createPhysics2DCollider(local:CollisionShape, material:Physics2DMaterial, sensor:Bool = false, ?filter:Physics2DCollisionFilter):Physics2DCollider {
-    var ownedLocal:CollisionShape = cast _Runtime.UNDEFINED;
-    ownedLocal = (cast World.clonePhysics2DLocalShape__world(({ final __callArgument23:Dynamic = local; __callArgument23; })) : CollisionShape);
-    return cast { local: ownedLocal, world: (cast createPhysics2DColliderWorldShape(({ final __callArgument24:Dynamic = ownedLocal; __callArgument24; })) : CollisionShape), material: _Runtime.mergeObjects([material]), filter: ((cast _Runtime.strictEquals(filter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { categoryBits: 1.0, maskBits: 4294967295.0, groupIndex: 0.0 } : Dynamic) : (cast _Runtime.mergeObjects([filter]) : Dynamic)), sensor: sensor };
+  public static function createPhysics2DCollider(local:CollisionBuiltInShape2D, material:Physics2DMaterial, sensor:Bool = false, ?filter:Physics2DCollisionFilter):Physics2DCollider {
+    var ownedLocal:CollisionBuiltInShape2D = cast _Runtime.UNDEFINED;
+    ownedLocal = (cast World.clonePhysics2DLocalShape__world(({ final __callArgument23:Dynamic = local; __callArgument23; })) : CollisionBuiltInShape2D);
+    return cast { local: ownedLocal, world: (cast createPhysics2DColliderWorldShape(({ final __callArgument24:Dynamic = ownedLocal; __callArgument24; })) : CollisionBuiltInShape2D), material: _Runtime.mergeObjects([material]), filter: ((cast _Runtime.strictEquals(filter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { categoryBits: 1.0, maskBits: 4294967295.0, groupIndex: 0.0 } : Dynamic) : (cast _Runtime.mergeObjects([filter]) : Dynamic)), sensor: sensor };
     return cast null;
   }
 
-  public static function clonePhysics2DLocalShape__world(local:CollisionShape):CollisionShape {
+  public static function clonePhysics2DLocalShape__world(local:CollisionBuiltInShape2D):CollisionBuiltInShape2D {
     {
       var __switchValue = (cast local : { var kind:String; }).kind;
       if (__switchValue == 'circle') {
@@ -176,9 +176,9 @@ class World {
     return cast null;
   }
 
-  public static function createPhysics2DWorld(gravityX:Float = 0.0, ?gravityY:Float, ?index:SpatialIndexBackend):Physics2DWorld {
+  public static function createPhysics2DWorld(gravityX:Float = 0.0, ?gravityY:Float, ?index:SpatialIndexBackend2D):Physics2DWorld {
     if (gravityY == null) gravityY = cast (-9.81 : Dynamic);
-    return cast { version: Physics2DWorldVersion, bodies: cast ([] : Array<Dynamic>), bodyByIndex: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), contacts: cast ([] : Array<Dynamic>), joints: cast ([] : Array<Dynamic>), jointSolvers: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), jointCollisionSuppressions: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), events: { began: cast ([] : Array<Dynamic>), ended: cast ([] : Array<Dynamic>) }, contactHooks: { preSolve: null, postSolve: null }, index: _Runtime.coalesce(index, function():Dynamic return cast (cast createUniformGridSpatialBackend((cast 1.0 : Float)) : SpatialIndexBackend)), config: (cast createPhysics2DSolverConfig() : Physics2DSolverConfig), islandParents: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), islandSleepTimers: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), solveIslandByRoot: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), solveIslandRoots: cast ([] : Array<Dynamic>), solveIslandBodyStarts: cast ([] : Array<Dynamic>), solveIslandBodyCounts: cast ([] : Array<Dynamic>), solveIslandContactStarts: cast ([] : Array<Dynamic>), solveIslandContactCounts: cast ([] : Array<Dynamic>), solveIslandJointStarts: cast ([] : Array<Dynamic>), solveIslandJointCounts: cast ([] : Array<Dynamic>), solveIslandBodyIndices: cast ([] : Array<Dynamic>), solveIslandContactIndices: cast ([] : Array<Dynamic>), solveIslandJointIndices: cast ([] : Array<Dynamic>), solveIslandCursors: cast ([] : Array<Dynamic>), gravityX: gravityX, gravityY: gravityY, previousTimestep: 0.0, nextBodyIndex: 0.0 };
+    return cast { version: Physics2DWorldVersion, bodies: cast ([] : Array<Dynamic>), bodyByIndex: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), contacts: cast ([] : Array<Dynamic>), joints: cast ([] : Array<Dynamic>), jointSolvers: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), jointCollisionSuppressions: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), events: { began: cast ([] : Array<Dynamic>), ended: cast ([] : Array<Dynamic>) }, contactHooks: { preSolve: null, postSolve: null }, index: _Runtime.coalesce(index, function():Dynamic return cast (cast createUniformGridSpatialBackend2D((cast 1.0 : Float)) : SpatialIndexBackend2D)), config: (cast createPhysics2DSolverConfig() : Physics2DSolverConfig), islandParents: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), islandSleepTimers: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), solveIslandByRoot: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), solveIslandRoots: cast ([] : Array<Dynamic>), solveIslandBodyStarts: cast ([] : Array<Dynamic>), solveIslandBodyCounts: cast ([] : Array<Dynamic>), solveIslandContactStarts: cast ([] : Array<Dynamic>), solveIslandContactCounts: cast ([] : Array<Dynamic>), solveIslandJointStarts: cast ([] : Array<Dynamic>), solveIslandJointCounts: cast ([] : Array<Dynamic>), solveIslandBodyIndices: cast ([] : Array<Dynamic>), solveIslandContactIndices: cast ([] : Array<Dynamic>), solveIslandJointIndices: cast ([] : Array<Dynamic>), solveIslandCursors: cast ([] : Array<Dynamic>), gravityX: gravityX, gravityY: gravityY, previousTimestep: 0.0, nextBodyIndex: 0.0 };
     return cast null;
   }
 
@@ -230,7 +230,7 @@ class World {
     if ((cast ((cast _Runtime.callProperty((cast body : RigidBody2D).colliders, 'indexOf', cast ([collider] : Array<Dynamic>)) : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
     inWorld = _Runtime.strictEquals(((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody2D>).get((cast body : RigidBody2D).index)), body);
     if ((cast inWorld : Bool)) { World._invalidatePhysics2DBodyConstraints__world(({ final __callArgument29:Dynamic = world; __callArgument29; }), (cast (cast body : RigidBody2D).index : Float)); }
-    (collider.world = cast ((cast createPhysics2DColliderWorldShape(collider.local) : CollisionShape) : CollisionShape));
+    (collider.world = cast ((cast createPhysics2DColliderWorldShape(collider.local) : CollisionBuiltInShape2D) : CollisionBuiltInShape2D));
     updateRigidBody2DMassData(({ final __callArgument30:Dynamic = body; __callArgument30; }));
     if ((cast inWorld : Bool)) {
       World._wakePhysics2DBodyFromTopology__world(({ final __callArgument31:Dynamic = body; __callArgument31; }));
@@ -274,7 +274,7 @@ class World {
     rebuildPhysics2DJointCollisionSuppressions(({ final __callArgument38:Dynamic = world; __callArgument38; }));
     ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody2D>).delete_(_Runtime.field(body, 'index')));
     _Runtime.splice(world.bodies, Std.int(at), Std.int(1.0), []);
-    (cast world.index : SpatialIndexBackend).removeSpatialObject((cast _Runtime.field(body, 'index') : Float));
+    (cast world.index : SpatialIndexBackend2D).removeSpatialObject((cast _Runtime.field(body, 'index') : Float));
     mutableBody = (cast body : RigidBody2D);
     ((cast mutableBody : RigidBody2D).index = -1.0);
     ((cast physics2DBodyOwners : flighthq._internal._WeakMap<RigidBody2D, Physics2DWorld>).delete_(mutableBody));

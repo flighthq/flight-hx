@@ -30,14 +30,23 @@ import flighthq.types.Vector3;
 import flighthq.types.Vector3.Vector3Like;
 
 class BillboardCamera {
-  public static function orientBillboardToCamera(billboard:Billboard, camera:Camera3D):Void {
-    BillboardCamera.setBillboardCameraBasis__billboardCamera(({ final __callArgument0:Dynamic = camera; __callArgument0; }));
+  public static function orientBillboardToCamera(billboard:Billboard, camera:Camera3D):Bool {
+    if ((cast !(cast (cast BillboardCamera.setBillboardCameraBasis__billboardCamera(({ final __callArgument0:Dynamic = camera; __callArgument0; })) : Bool) : Bool) : Bool)) { return cast false; }
     BillboardCamera.applyBillboardFacing__billboardCamera(({ final __callArgument1:Dynamic = billboard; __callArgument1; }));
+    return cast true;
+    return cast null;
   }
 
-  public static function orientScene3DBillboardsToCamera(scene:Node3D, camera:Camera3D):Void {
-    BillboardCamera.setBillboardCameraBasis__billboardCamera(({ final __callArgument2:Dynamic = camera; __callArgument2; }));
+  public static function orientScene3DBillboardsToCamera(scene:Node3D, camera:Camera3D):Bool {
+    if ((cast !(cast (cast BillboardCamera.setBillboardCameraBasis__billboardCamera(({ final __callArgument2:Dynamic = camera; __callArgument2; })) : Bool) : Bool) : Bool)) { return cast false; }
     BillboardCamera.orientBillboardSubtree__billboardCamera(({ final __callArgument3:Dynamic = scene; __callArgument3; }));
+    return cast true;
+    return cast null;
+  }
+
+  @:noCompletion
+  public static function setBillboardCameraBasisGuard(guard:Null<Camera3D->Void>):Void {
+    (BillboardCamera.billboardCameraBasisGuard__billboardCamera = cast (guard : Dynamic));
   }
 
   public static function applyBillboardFacing__billboardCamera(billboard:Billboard):Void {
@@ -77,12 +86,15 @@ class BillboardCamera {
     }
   }
 
-  public static function setBillboardCameraBasis__billboardCamera(camera:Camera3D):Void {
+  public static function setBillboardCameraBasis__billboardCamera(camera:Camera3D):Bool {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var rl:Float = cast _Runtime.UNDEFINED;
     var ul:Float = cast _Runtime.UNDEFINED;
     var bl:Float = cast _Runtime.UNDEFINED;
-    (cast inverseMatrix4(({ final __callArgument22:Dynamic = BillboardCamera._cameraWorld__billboardCamera; __callArgument22; }), ({ final __callArgument23:Dynamic = camera.view; __callArgument23; })) : Bool);
+    if ((cast !(cast (cast inverseMatrix4(({ final __callArgument22:Dynamic = BillboardCamera._cameraWorld__billboardCamera; __callArgument22; }), ({ final __callArgument23:Dynamic = camera.view; __callArgument23; })) : Bool) : Bool) : Bool)) {
+      _Runtime.callOptionalValue(BillboardCamera.billboardCameraBasisGuard__billboardCamera, cast ([camera] : Array<Dynamic>));
+      return cast false;
+    }
     m = BillboardCamera._cameraWorld__billboardCamera.m;
     (BillboardCamera._cameraEyeX__billboardCamera = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 12.0 : Float)) : Dynamic));
     (BillboardCamera._cameraEyeY__billboardCamera = cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 13.0 : Float)) : Dynamic));
@@ -108,6 +120,8 @@ class BillboardCamera {
     (BillboardCamera._cameraBackX__billboardCamera = cast ((BillboardCamera._cameraBackX__billboardCamera / bl) : Dynamic));
     (BillboardCamera._cameraBackY__billboardCamera = cast ((BillboardCamera._cameraBackY__billboardCamera / bl) : Dynamic));
     (BillboardCamera._cameraBackZ__billboardCamera = cast ((BillboardCamera._cameraBackZ__billboardCamera / bl) : Dynamic));
+    return cast true;
+    return cast null;
   }
 
   public static function writeBillboardFacingMatrix__billboardCamera(out:Matrix4, mode:BillboardMode):Void {
@@ -262,4 +276,6 @@ class BillboardCamera {
   public static var _cameraBackY__billboardCamera:Float = 0.0;
 
   public static var _cameraBackZ__billboardCamera:Float = 1.0;
+
+  public static var billboardCameraBasisGuard__billboardCamera:Null<Camera3D->Void> = _Runtime.explicitNull();
 }

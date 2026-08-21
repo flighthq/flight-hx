@@ -25,5 +25,6 @@ export const removeNodeChildren = api.removeNodeChildren;
 export const reparentNode = api.reparentNode;
 export const replaceNodeChild = api.replaceNodeChild;
 export const setNodeChildIndex = api.setNodeChildIndex;
+export const setReparentNodeGuard = api.setReparentNodeGuard;
 export const swapNodeChildren = api.swapNodeChildren;
 export const swapNodeChildrenAt = api.swapNodeChildrenAt;

@@ -5,3 +5,5 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef ApplicationLoopOptions = { @:optional var maxDeltaTime:Float; @:optional var targetFrameRate:Float; @:optional var backgroundFrameRate:Float; @:optional var fixedTimeStep:Float; @:optional var maxUpdatesPerFrame:Float; };
+
+typedef ApplicationStepOptions = { @:optional var maxDeltaTime:Null<Float>; @:optional var fixedTimeStep:Null<Float>; @:optional var maxUpdatesPerFrame:Null<Float>; };

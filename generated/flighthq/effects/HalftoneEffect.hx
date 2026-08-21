@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.HalftoneEffect;
 
 class HalftoneEffect {
-  public static function createHalftoneEffect(?options:flighthq._internal._Omit<flighthq.types.HalftoneEffect, String>):flighthq.types.HalftoneEffect {
+  public static function createHalftoneEffect(?options:{ @:optional var scale:Null<Float>; @:optional var angle:Null<Float>; }):flighthq.types.HalftoneEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'HalftoneEffect' }, options]);
     return cast null;

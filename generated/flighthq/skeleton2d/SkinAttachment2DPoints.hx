@@ -61,6 +61,7 @@ class SkinAttachment2DPoints {
       return;
     }
     if ((cast ((cast _Runtime.strictEquals(vertices, null) : Bool) || (cast _Runtime.strictEquals(vertices, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast (boneIndex * SkinAttachment2DPoints.MATRIX_STRIDE__skinAttachment2DPoints) : Float) >= (cast _Runtime.field(world, 'length') : Float)) : Bool)) : Bool)) { return; }
     offsets = ((cast ((cast !_Runtime.strictEquals(deform, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(deform, 'length'), _Runtime.field(vertices, 'length')) : Bool)) : Bool) ? (cast deform : Dynamic) : (cast null : Dynamic));
     if ((cast ((cast !_Runtime.strictEquals(deform, null) : Bool) && (cast _Runtime.strictEquals(offsets, null) : Bool)) : Bool)) {
       reportSkeleton2DDeformLengthMismatch((cast subject : String), (cast _Runtime.field(deform, 'length') : Float), (cast _Runtime.field(vertices, 'length') : Float));

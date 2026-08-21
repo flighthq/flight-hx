@@ -60,11 +60,15 @@ class ShapeJson {
       var key:String = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
       var argCount:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
       var base:Float = (i + 2.0);
+      var commandArgs:Array<ShapeCommandToken> = _Runtime.slice(commands, base, (base + argCount));
+      if ((cast !(cast (cast ShapeJson.isValidShapeCommandArgs__shapeJson((cast key : String), ({ final __callArgument0:Dynamic = commandArgs; __callArgument0; })) : Bool) : Bool) : Bool)) {
+        _Runtime.throwValue(_Runtime.typeError('Shape command "' + Std.string(key) + '" cannot be represented as shape JSON'));
+      }
       var args:Array<flighthq._internal._Any> = (cast cast ([] : Array<Dynamic>));
       {
         var a:Float = 0.0;
         while ((cast ((cast a : Float) < (cast argCount : Float)) : Bool)) {
-          var value:ShapeCommandToken = flighthq._internal._StaticIndex.readArray(commands, (base + a));
+          var value:ShapeCommandToken = flighthq._internal._StaticIndex.readArray(commandArgs, a);
           if ((cast _Runtime.strictEquals(value, null) : Bool)) {
             _Runtime.callProperty(args, 'push', cast ([null] : Array<Dynamic>));
           } else { if ((cast (cast ShapeJson.isMatrixValue__shapeJson((cast value : flighthq._internal._Any)) : Bool) : Bool)) {
@@ -80,14 +84,14 @@ class ShapeJson {
       _Runtime.callProperty(entries, 'push', cast ([{ key: key, args: args }] : Array<Dynamic>));
       (i = cast ((i + (argCount + 2.0)) : Dynamic));
     }
-    return cast _Runtime.jsonStringify({ shapeFormat: ShapeJson.SHAPE_JSON_FORMAT__shapeJson, commands: entries }, null, ({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.space; }));
+    return cast _Runtime.jsonStringify({ shapeFormat: ShapeJson.SHAPE_JSON_FORMAT__shapeJson, commands: entries }, null, ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.space; }));
     return cast null;
   }
 
   public static function parseShapeJson(text:String, ?options:ShapeJsonParseOptions):Null<Shape> {
     var root:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var rawCommands:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    var resolveTexture:Null<ShapeTextureReference->Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>> = cast _Runtime.UNDEFINED;
+    var resolveTexture:Null<ShapeTextureReference->Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9457:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9457:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9457:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>> = cast _Runtime.UNDEFINED;
     var shape:Shape = cast _Runtime.UNDEFINED;
     try {
       (root = cast (_Runtime.jsonParse(text) : Dynamic));
@@ -98,7 +102,7 @@ class ShapeJson {
     if ((cast !_Runtime.strictEquals((cast root : { var shapeFormat:flighthq._internal._Any; }).shapeFormat, ShapeJson.SHAPE_JSON_FORMAT__shapeJson) : Bool)) { return cast null; }
     rawCommands = (cast root : { var commands:flighthq._internal._Any; }).commands;
     if ((cast !(cast _Runtime.isArray(rawCommands) : Bool) : Bool)) { return cast null; }
-    resolveTexture = ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.resolveTexture; });
+    resolveTexture = ({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.resolveTexture; });
     shape = (cast createShape(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Shape);
     for (entry in _Runtime.iterable(rawCommands)) {
       if ((cast !(cast (cast ShapeJson.isPlainObject__shapeJson((cast entry : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast null; }
@@ -119,7 +123,7 @@ class ShapeJson {
         _Runtime.callProperty(args, 'push', cast ([reconstructed] : Array<Dynamic>));
       }
       if ((cast drop : Bool)) { continue; }
-      if ((cast !(cast (cast ShapeJson.isValidShapeCommandArgs__shapeJson((cast key : String), ({ final __callArgument6:Dynamic = args; __callArgument6; })) : Bool) : Bool) : Bool)) { return cast null; }
+      if ((cast !(cast (cast ShapeJson.isValidShapeCommandArgs__shapeJson((cast key : String), ({ final __callArgument7:Dynamic = args; __callArgument7; })) : Bool) : Bool) : Bool)) { return cast null; }
       _Runtime.callHaxeRestValue(appender, _Runtime.concatArrays([[shape], _Runtime.toArray((cast args : Array<flighthq._internal._Any>))]), 1);
     }
     return cast shape;
@@ -134,11 +138,11 @@ class ShapeJson {
     if ((cast _Runtime.isArray(value) : Bool)) { return cast value; }
     if ((cast !(cast (cast ShapeJson.isPlainObject__shapeJson((cast value : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast ShapeJson.MALFORMED_ARG__shapeJson; }
     if ((cast ((cast (cast ShapeJson.isPlainObject__shapeJson((cast (cast value : { var texture:flighthq._internal._Any; }).texture : flighthq._internal._Any)) : Bool) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast (cast value : { var texture:flighthq._internal._Any; }).texture : { var index:flighthq._internal._Any; }).index), 'number') : Bool)) : Bool)) {
-      var resolved:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_12063:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = _Runtime.coalesce(_Runtime.callOptionalValue(resolveTexture, cast ([{ index: (cast (cast value : { var texture:flighthq._internal._Any; }).texture : { var index:flighthq._internal._Any; }).index }] : Array<Dynamic>)), function():Dynamic return cast null);
+      var resolved:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9457:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9457:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9457:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = _Runtime.coalesce(_Runtime.callOptionalValue(resolveTexture, cast ([{ index: (cast (cast value : { var texture:flighthq._internal._Any; }).texture : { var index:flighthq._internal._Any; }).index }] : Array<Dynamic>)), function():Dynamic return cast null);
       return cast ((cast _Runtime.strictEquals(resolved, null) : Bool) ? (cast ShapeJson.DROP_COMMAND__shapeJson : Dynamic) : (cast resolved : Dynamic));
     }
-    if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast value : { var a:flighthq._internal._Any; }).a), 'number') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast value : { var b:flighthq._internal._Any; }).b), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast value : { var c:flighthq._internal._Any; }).c), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast value : { var d:flighthq._internal._Any; }).d), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast value : { var tx:flighthq._internal._Any; }).tx), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast value : { var ty:flighthq._internal._Any; }).ty), 'number') : Bool)) : Bool)) {
-      return cast (cast createMatrix(({ final __callArgument7:Dynamic = (cast value : { var a:flighthq._internal._Any; }).a; __callArgument7; }), ({ final __callArgument8:Dynamic = (cast value : { var b:flighthq._internal._Any; }).b; __callArgument8; }), ({ final __callArgument9:Dynamic = (cast value : { var c:flighthq._internal._Any; }).c; __callArgument9; }), ({ final __callArgument10:Dynamic = (cast value : { var d:flighthq._internal._Any; }).d; __callArgument10; }), ({ final __callArgument11:Dynamic = (cast value : { var tx:flighthq._internal._Any; }).tx; __callArgument11; }), ({ final __callArgument12:Dynamic = (cast value : { var ty:flighthq._internal._Any; }).ty; __callArgument12; })) : Matrix);
+    if ((cast (cast ShapeJson.isMatrixValue__shapeJson((cast value : flighthq._internal._Any)) : Bool) : Bool)) {
+      return cast (cast createMatrix(({ final __callArgument8:Dynamic = (cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).a; __callArgument8; }), ({ final __callArgument9:Dynamic = (cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).b; __callArgument9; }), ({ final __callArgument10:Dynamic = (cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).c; __callArgument10; }), ({ final __callArgument11:Dynamic = (cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).d; __callArgument11; }), ({ final __callArgument12:Dynamic = (cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).tx; __callArgument12; }), ({ final __callArgument13:Dynamic = (cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).ty; __callArgument13; })) : Matrix);
     }
     return cast ShapeJson.MALFORMED_ARG__shapeJson;
     return cast null;
@@ -198,6 +202,11 @@ class ShapeJson {
   }
 
   public static function isMatrixValue__shapeJson(value:flighthq._internal._Any):Bool {
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast (cast ShapeJson.isMatrixLike__shapeJson((cast value : flighthq._internal._Any)) : Bool) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).a] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).b] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).c] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).d] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).tx] : Array<Dynamic>)) : Bool)), function():Dynamic return cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).ty] : Array<Dynamic>)));
+    return cast null;
+  }
+
+  public static function isMatrixLike__shapeJson(value:flighthq._internal._Any):Bool {
     return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast (cast ShapeJson.isPlainObject__shapeJson((cast value : flighthq._internal._Any)) : Bool) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast value : { var a:flighthq._internal._Any; }).a), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast value : { var b:flighthq._internal._Any; }).b), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast value : { var c:flighthq._internal._Any; }).c), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast value : { var d:flighthq._internal._Any; }).d), 'number') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast value : { var tx:flighthq._internal._Any; }).tx), 'number') : Bool)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue((cast value : { var ty:flighthq._internal._Any; }).ty), 'number'));
     return cast null;
   }
@@ -218,7 +227,7 @@ class ShapeJson {
 
   public static final DROP_COMMAND__shapeJson:flighthq._internal._Symbol = _Runtime.symbol('shapeFormats.dropCommand');
 
-  public static final SHAPE_JSON_FORMAT__shapeJson:Float = 2.0;
+  public static final SHAPE_JSON_FORMAT__shapeJson:Float = 3.0;
 
   public static final GRADIENT_ARG_SPEC__shapeJson:ShapeCommandArgSpec__shapeJson = (cast { required: 4.0, types: cast (['string', 'numbers', 'numbers', 'numbers', 'matrixOrNull', 'string', 'string', 'number'] : Array<Dynamic>) });
 

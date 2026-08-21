@@ -5,7 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.XmlElement;
 
-typedef ParseState__xmlParse = { var pos:Float; };
+typedef ParseState__xmlParse = { var depth:Float; var depthExceeded:Bool; var pos:Float; };
 
 class XmlParse {
   public static function parseXmlAttributes(attrs:String):flighthq._internal._Record<String, String> {
@@ -29,7 +29,7 @@ class XmlParse {
     src = _Runtime.replace((cast XmlParse.stripXmlComments__xmlParse((cast xml : String)) : String), _Runtime.regexp('\\r\\n?', 'g'), '\n', false);
     entities = (cast {  });
     (src = cast (StringTools.trim(Std.string((cast XmlParse.stripXmlDoctypes__xmlParse((cast _Runtime.replace(src, _Runtime.regexp('<\\?[\\s\\S]*?\\?>', 'g'), '', false) : String), ({ final __callArgument1:Dynamic = entities; __callArgument1; })) : String))) : Dynamic));
-    return cast (cast XmlParse.parseElement__xmlParse((cast (cast XmlParse.expandXmlEntities__xmlParse((cast src : String), ({ final __callArgument2:Dynamic = entities; __callArgument2; })) : String) : String), (cast { pos: 0.0 } : Dynamic)) : Null<XmlElement>);
+    return cast (cast XmlParse.parseElement__xmlParse((cast (cast XmlParse.expandXmlEntities__xmlParse((cast src : String), ({ final __callArgument2:Dynamic = entities; __callArgument2; })) : String) : String), (cast { depth: 0.0, depthExceeded: false, pos: 0.0 } : Dynamic)) : Null<XmlElement>);
     return cast null;
   }
 
@@ -38,6 +38,8 @@ class XmlParse {
   public static final MAX_XML_ENTITY_GROWTH__xmlParse:Float = 16.0;
 
   public static final MAX_XML_ENTITY_BUDGET__xmlParse:Float = 65536.0;
+
+  public static final MAX_XML_ELEMENT_DEPTH__xmlParse:Float = 256.0;
 
   public static final XML_ENTITIES__xmlParse:flighthq._internal._Record<String, String> = (cast { amp: '&', apos: '\'', gt: '>', lt: '<', quot: '"' });
 
@@ -92,6 +94,10 @@ class XmlParse {
     var children:Array<XmlElement> = cast _Runtime.UNDEFINED;
     var content:Array<flighthq._internal._Union2<String, XmlElement>> = cast _Runtime.UNDEFINED;
     var text:String = cast _Runtime.UNDEFINED;
+    if ((cast ((cast (cast state : ParseState__xmlParse).depth : Float) >= (cast XmlParse.MAX_XML_ELEMENT_DEPTH__xmlParse : Float)) : Bool)) {
+      ((cast state : ParseState__xmlParse).depthExceeded = true);
+      return cast null;
+    }
     XmlParse.skipWhitespace__xmlParse((cast src : String), (cast state : Dynamic));
     if ((cast ((cast ((cast (cast state : ParseState__xmlParse).pos : Float) >= (cast _Runtime.field(src, 'length') : Float)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.getIndex(src, (cast state : ParseState__xmlParse).pos), '<') : Bool)) : Bool)) { return cast null; }
     (cast state : ParseState__xmlParse).pos++;
@@ -151,7 +157,10 @@ class XmlParse {
           (cast state : ParseState__xmlParse).pos++;
           break;
         }
+        (cast state : ParseState__xmlParse).depth++;
         var child:Null<XmlElement> = (cast XmlParse.parseElement__xmlParse((cast src : String), (cast state : Dynamic)) : Null<XmlElement>);
+        (cast state : ParseState__xmlParse).depth--;
+        if ((cast (cast state : ParseState__xmlParse).depthExceeded : Bool)) { return cast null; }
         if (_Runtime.truthy(child)) {
           _Runtime.callProperty(children, 'push', cast ([child] : Array<Dynamic>));
           _Runtime.callProperty(content, 'push', cast ([child] : Array<Dynamic>));

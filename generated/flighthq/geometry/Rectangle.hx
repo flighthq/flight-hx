@@ -53,12 +53,18 @@ class Rectangle {
   }
 
   public static function copyRectangle(out:RectangleLike, source:RectangleLike):Void {
-    if ((cast !_Runtime.strictEquals(out, source) : Bool)) {
-      (out.x = cast (source.x : Float));
-      (out.y = cast (source.y : Float));
-      (out.width = cast (source.width : Float));
-      (out.height = cast (source.height : Float));
-    }
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    x = source.x;
+    y = source.y;
+    width = source.width;
+    height = source.height;
+    (out.x = cast (x : Float));
+    (out.y = cast (y : Float));
+    (out.width = cast (width : Float));
+    (out.height = cast (height : Float));
   }
 
   public static function createRectangle(?x:Float, ?y:Float, ?width:Float, ?height:Float):flighthq.types.Rectangle {
@@ -88,14 +94,24 @@ class Rectangle {
   }
 
   public static function equalsRectangle(a:Null<RectangleLike>, b:Null<RectangleLike>):Bool {
-    if ((cast _Runtime.strictEquals(a, b) : Bool)) { return cast true; }
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
-    return cast ((cast ((cast ((cast _Runtime.strictEquals((cast a : { var x:Float; }).x, (cast b : { var x:Float; }).x) : Bool) && (cast _Runtime.strictEquals((cast a : { var y:Float; }).y, (cast b : { var y:Float; }).y) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var width:Float; }).width, (cast b : { var width:Float; }).width) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var height:Float; }).height, (cast b : { var height:Float; }).height) : Bool));
+    return cast ((cast _Runtime.strictEquals(a, b) : Bool) || (cast _Runtime.andValue(((cast ((cast _Runtime.strictEquals((cast a : { var x:Float; }).x, (cast b : { var x:Float; }).x) : Bool) && (cast _Runtime.strictEquals((cast a : { var y:Float; }).y, (cast b : { var y:Float; }).y) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var width:Float; }).width, (cast b : { var width:Float; }).width) : Bool)), function():Dynamic return cast _Runtime.strictEquals((cast a : { var height:Float; }).height, (cast b : { var height:Float; }).height)) : Bool));
     return cast null;
   }
 
   public static function expandRectangleToPoint(out:RectangleLike, sourceRect:RectangleLike, sourceVec2:Vector2Like):Void {
-    inflateRectangle(({ final __callArgument15:Dynamic = out; __callArgument15; }), ({ final __callArgument16:Dynamic = sourceRect; __callArgument16; }), (cast sourceVec2.x : Float), (cast sourceVec2.y : Float));
+    var minX:Float = cast _Runtime.UNDEFINED;
+    var maxX:Float = cast _Runtime.UNDEFINED;
+    var minY:Float = cast _Runtime.UNDEFINED;
+    var maxY:Float = cast _Runtime.UNDEFINED;
+    minX = HxMath.min(HxMath.min(sourceRect.x, (sourceRect.x + sourceRect.width)), sourceVec2.x);
+    maxX = HxMath.max(HxMath.max(sourceRect.x, (sourceRect.x + sourceRect.width)), sourceVec2.x);
+    minY = HxMath.min(HxMath.min(sourceRect.y, (sourceRect.y + sourceRect.height)), sourceVec2.y);
+    maxY = HxMath.max(HxMath.max(sourceRect.y, (sourceRect.y + sourceRect.height)), sourceVec2.y);
+    (out.x = cast (minX : Float));
+    (out.y = cast (minY : Float));
+    (out.width = cast ((maxX - minX) : Float));
+    (out.height = cast ((maxY - minY) : Float));
   }
 
   public static function getRectangleBottom(source:RectangleLike):Float {
@@ -104,8 +120,12 @@ class Rectangle {
   }
 
   public static function getRectangleBottomRight(out:Vector2Like, source:RectangleLike):Void {
-    (out.x = cast ((source.x + source.width) : Float));
-    (out.y = cast ((source.y + source.height) : Float));
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    x = (source.x + source.width);
+    y = (source.y + source.height);
+    (out.x = cast (x : Float));
+    (out.y = cast (y : Float));
   }
 
   public static function getRectangleLeft(source:RectangleLike):Float {
@@ -134,13 +154,21 @@ class Rectangle {
   }
 
   public static function getRectangleNormalizedBottomRight(out:Vector2Like, source:RectangleLike):Void {
-    (out.x = cast ((cast getRectangleMaxX(({ final __callArgument17:Dynamic = source; __callArgument17; })) : Float) : Float));
-    (out.y = cast ((cast getRectangleMaxY(({ final __callArgument18:Dynamic = source; __callArgument18; })) : Float) : Float));
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    x = (cast getRectangleMaxX(({ final __callArgument15:Dynamic = source; __callArgument15; })) : Float);
+    y = (cast getRectangleMaxY(({ final __callArgument16:Dynamic = source; __callArgument16; })) : Float);
+    (out.x = cast (x : Float));
+    (out.y = cast (y : Float));
   }
 
   public static function getRectangleNormalizedTopLeft(out:Vector2Like, source:RectangleLike):Void {
-    (out.x = cast ((cast getRectangleMinX(({ final __callArgument19:Dynamic = source; __callArgument19; })) : Float) : Float));
-    (out.y = cast ((cast getRectangleMinY(({ final __callArgument20:Dynamic = source; __callArgument20; })) : Float) : Float));
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    x = (cast getRectangleMinX(({ final __callArgument17:Dynamic = source; __callArgument17; })) : Float);
+    y = (cast getRectangleMinY(({ final __callArgument18:Dynamic = source; __callArgument18; })) : Float);
+    (out.x = cast (x : Float));
+    (out.y = cast (y : Float));
   }
 
   public static function getRectangleRight(source:RectangleLike):Float {
@@ -149,8 +177,12 @@ class Rectangle {
   }
 
   public static function getRectangleSize(out:Vector2Like, source:RectangleLike):Void {
-    (out.x = cast (source.width : Float));
-    (out.y = cast (source.height : Float));
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    width = source.width;
+    height = source.height;
+    (out.x = cast (width : Float));
+    (out.y = cast (height : Float));
   }
 
   public static function getRectangleTop(source:RectangleLike):Float {
@@ -159,19 +191,31 @@ class Rectangle {
   }
 
   public static function getRectangleTopLeft(out:Vector2Like, source:RectangleLike):Void {
-    (out.x = cast (source.x : Float));
-    (out.y = cast (source.y : Float));
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    x = source.x;
+    y = source.y;
+    (out.x = cast (x : Float));
+    (out.y = cast (y : Float));
   }
 
   public static function inflateRectangle(out:RectangleLike, source:RectangleLike, dx:Float, dy:Float):Void {
-    (out.x = cast ((source.x - dx) : Float));
-    (out.width = cast ((source.width + (dx * 2.0)) : Float));
-    (out.y = cast ((source.y - dy) : Float));
-    (out.height = cast ((source.height + (dy * 2.0)) : Float));
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    x = source.x;
+    y = source.y;
+    width = source.width;
+    height = source.height;
+    (out.x = cast ((x - dx) : Float));
+    (out.width = cast ((width + (dx * 2.0)) : Float));
+    (out.y = cast ((y - dy) : Float));
+    (out.height = cast ((height + (dy * 2.0)) : Float));
   }
 
   public static function intersectsRectangle(a:RectangleLike, b:RectangleLike):Bool {
-    return cast !(cast _Runtime.orValue(((cast ((cast ((cast (cast getRectangleMaxX(({ final __callArgument21:Dynamic = a; __callArgument21; })) : Float) : Float) <= (cast (cast getRectangleMinX(({ final __callArgument22:Dynamic = b; __callArgument22; })) : Float) : Float)) : Bool) || (cast ((cast (cast getRectangleMinX(({ final __callArgument23:Dynamic = a; __callArgument23; })) : Float) : Float) >= (cast (cast getRectangleMaxX(({ final __callArgument24:Dynamic = b; __callArgument24; })) : Float) : Float)) : Bool)) : Bool) || (cast ((cast (cast getRectangleMaxY(({ final __callArgument25:Dynamic = a; __callArgument25; })) : Float) : Float) <= (cast (cast getRectangleMinY(({ final __callArgument26:Dynamic = b; __callArgument26; })) : Float) : Float)) : Bool)), function():Dynamic return cast ((cast (cast getRectangleMinY(({ final __callArgument27:Dynamic = a; __callArgument27; })) : Float) : Float) >= (cast (cast getRectangleMaxY(({ final __callArgument28:Dynamic = b; __callArgument28; })) : Float) : Float))) : Bool);
+    return cast !(cast _Runtime.orValue(((cast ((cast ((cast (cast getRectangleMaxX(({ final __callArgument19:Dynamic = a; __callArgument19; })) : Float) : Float) <= (cast (cast getRectangleMinX(({ final __callArgument20:Dynamic = b; __callArgument20; })) : Float) : Float)) : Bool) || (cast ((cast (cast getRectangleMinX(({ final __callArgument21:Dynamic = a; __callArgument21; })) : Float) : Float) >= (cast (cast getRectangleMaxX(({ final __callArgument22:Dynamic = b; __callArgument22; })) : Float) : Float)) : Bool)) : Bool) || (cast ((cast (cast getRectangleMaxY(({ final __callArgument23:Dynamic = a; __callArgument23; })) : Float) : Float) <= (cast (cast getRectangleMinY(({ final __callArgument24:Dynamic = b; __callArgument24; })) : Float) : Float)) : Bool)), function():Dynamic return cast ((cast (cast getRectangleMinY(({ final __callArgument25:Dynamic = a; __callArgument25; })) : Float) : Float) >= (cast (cast getRectangleMaxY(({ final __callArgument26:Dynamic = b; __callArgument26; })) : Float) : Float))) : Bool);
     return cast null;
   }
 
@@ -246,10 +290,10 @@ class Rectangle {
     var maxY:Float = cast _Runtime.UNDEFINED;
     var minX:Float = cast _Runtime.UNDEFINED;
     var minY:Float = cast _Runtime.UNDEFINED;
-    maxX = (cast getRectangleMaxX(({ final __callArgument29:Dynamic = source; __callArgument29; })) : Float);
-    maxY = (cast getRectangleMaxY(({ final __callArgument30:Dynamic = source; __callArgument30; })) : Float);
-    minX = (cast getRectangleMinX(({ final __callArgument31:Dynamic = source; __callArgument31; })) : Float);
-    minY = (cast getRectangleMinY(({ final __callArgument32:Dynamic = source; __callArgument32; })) : Float);
+    maxX = (cast getRectangleMaxX(({ final __callArgument27:Dynamic = source; __callArgument27; })) : Float);
+    maxY = (cast getRectangleMaxY(({ final __callArgument28:Dynamic = source; __callArgument28; })) : Float);
+    minX = (cast getRectangleMinX(({ final __callArgument29:Dynamic = source; __callArgument29; })) : Float);
+    minY = (cast getRectangleMinY(({ final __callArgument30:Dynamic = source; __callArgument30; })) : Float);
     (out.x = cast (minX : Float));
     (out.y = cast (minY : Float));
     (out.width = cast ((maxX - minX) : Float));
@@ -257,17 +301,37 @@ class Rectangle {
   }
 
   public static function offsetRectangle(out:RectangleLike, source:RectangleLike, dx:Float, dy:Float):Void {
-    (out.x = cast ((source.x + dx) : Float));
-    (out.y = cast ((source.y + dy) : Float));
-    (out.width = cast (source.width : Float));
-    (out.height = cast (source.height : Float));
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    x = source.x;
+    y = source.y;
+    width = source.width;
+    height = source.height;
+    (out.x = cast ((x + dx) : Float));
+    (out.y = cast ((y + dy) : Float));
+    (out.width = cast (width : Float));
+    (out.height = cast (height : Float));
   }
 
   public static function offsetRectangleByPoint(out:RectangleLike, source:RectangleLike, point:Vector2Like):Void {
-    (out.x = cast ((source.x + point.x) : Float));
-    (out.y = cast ((source.y + point.y) : Float));
-    (out.width = cast (source.width : Float));
-    (out.height = cast (source.height : Float));
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    var pointX:Float = cast _Runtime.UNDEFINED;
+    var pointY:Float = cast _Runtime.UNDEFINED;
+    x = source.x;
+    y = source.y;
+    width = source.width;
+    height = source.height;
+    pointX = point.x;
+    pointY = point.y;
+    (out.x = cast ((x + pointX) : Float));
+    (out.y = cast ((y + pointY) : Float));
+    (out.width = cast (width : Float));
+    (out.height = cast (height : Float));
   }
 
   public static function setEmptyRectangle(out:RectangleLike):Void {
@@ -282,35 +346,63 @@ class Rectangle {
   }
 
   public static function setRectangleBottom(target:RectangleLike, value:Float):Void {
-    (target.height = cast ((value - target.y) : Float));
+    var y:Float = cast _Runtime.UNDEFINED;
+    y = target.y;
+    (target.height = cast ((value - y) : Float));
   }
 
   public static function setRectangleBottomRight(target:RectangleLike, point:Vector2Like):Void {
-    (target.width = cast ((point.x - target.x) : Float));
-    (target.height = cast ((point.y - target.y) : Float));
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var pointX:Float = cast _Runtime.UNDEFINED;
+    var pointY:Float = cast _Runtime.UNDEFINED;
+    x = target.x;
+    y = target.y;
+    pointX = point.x;
+    pointY = point.y;
+    (target.width = cast ((pointX - x) : Float));
+    (target.height = cast ((pointY - y) : Float));
   }
 
   public static function setRectangleLeft(target:RectangleLike, value:Float):Void {
-    (target.width -= (value - target.x));
+    var x:Float = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    x = target.x;
+    width = target.width;
+    (target.width = cast ((width - (value - x)) : Float));
     (target.x = cast (value : Float));
   }
 
   public static function setRectangleRight(target:RectangleLike, value:Float):Void {
-    (target.width = cast ((value - target.x) : Float));
+    var x:Float = cast _Runtime.UNDEFINED;
+    x = target.x;
+    (target.width = cast ((value - x) : Float));
   }
 
   public static function setRectangleSize(out:RectangleLike, size:Vector2Like):Void {
-    (out.width = cast (size.x : Float));
-    (out.height = cast (size.y : Float));
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    width = size.x;
+    height = size.y;
+    (out.width = cast (width : Float));
+    (out.height = cast (height : Float));
   }
 
   public static function setRectangleTop(target:RectangleLike, value:Float):Void {
-    (target.height -= (value - target.y));
+    var y:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    y = target.y;
+    height = target.height;
+    (target.height = cast ((height - (value - y)) : Float));
     (target.y = cast (value : Float));
   }
 
   public static function setRectangleTopLeft(out:RectangleLike, point:Vector2Like):Void {
-    (out.x = cast (point.x : Float));
-    (out.y = cast (point.y : Float));
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    x = point.x;
+    y = point.y;
+    (out.x = cast (x : Float));
+    (out.y = cast (y : Float));
   }
 }

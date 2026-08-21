@@ -3,6 +3,7 @@ package flighthq.swf;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.color.PackColor.packColor;
 import flighthq.text.RichText.createRichText;
 import flighthq.textMarkup.TextMarkup.parseTextMarkup;
 import flighthq.types.RichText;
@@ -42,11 +43,11 @@ class SwfEditText {
       var red:Float = (cast reader : SwfReader).readUint8();
       var green:Float = (cast reader : SwfReader).readUint8();
       var blue:Float = (cast reader : SwfReader).readUint8();
-      (cast reader : SwfReader).readUint8();
-      (color = cast ((((red * 65536.0) + (green * 256.0)) + blue) : Dynamic));
+      var alpha:Float = (cast reader : SwfReader).readUint8();
+      (color = cast ((cast packColor((cast (red / 255.0) : Float), (cast (green / 255.0) : Float), (cast (blue / 255.0) : Float), (cast (alpha / 255.0) : Float)) : Float) : Dynamic));
       (hasColor = cast (true : Dynamic));
     }
-    maxChars = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HAS_MAX_LENGTH__swfEditText)), 0.0) : Bool) ? (cast (cast reader : SwfReader).readUint16() : Dynamic) : (cast 0.0 : Dynamic));
+    maxChars = ((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(SwfEditText.EDIT_TEXT_HAS_MAX_LENGTH__swfEditText)), 0.0) : Bool) ? (cast (cast reader : SwfReader).readUint16() : Dynamic) : (cast -1.0 : Dynamic));
     align = 'left';
     leftMargin = 0.0;
     rightMargin = 0.0;
@@ -84,7 +85,7 @@ class SwfEditText {
     ((cast node.data : { var selectable:Bool; }).selectable = cast (((cast _Runtime.field(field, 'selectable') : Bool) && (cast !(cast _Runtime.field(field, 'readOnly') : Bool) : Bool)) : Bool));
     ((cast node.data : { var text:String; }).text = cast (((cast _Runtime.strictEquals(content, null) : Bool) ? (cast _Runtime.field(field, 'text') : Dynamic) : (cast (cast content : { var text:String; }).text : Dynamic)) : String));
     if ((cast !_Runtime.strictEquals(content, null) : Bool)) { ((cast node.data : { var textFormatRanges:Array<TextFormatRange>; }).textFormatRanges = cast ((cast content : { var formatRanges:Array<TextFormatRange>; }).formatRanges : Array<TextFormatRange>)); }
-    ((cast node.data : { var textColor:Float; }).textColor = cast (_Runtime.field(field, 'color') : Float));
+    if ((cast _Runtime.field(field, 'hasColor') : Bool)) { ((cast node.data : { var textColor:Float; }).textColor = cast (_Runtime.field(field, 'color') : Float)); }
     ((cast node.data : { var textFormat:TextFormat; }).textFormat = cast (format : TextFormat));
     ((cast node.data : { var width:Float; }).width = cast (_Runtime.field(field, 'width') : Float));
     ((cast node.data : { var wordWrap:Bool; }).wordWrap = cast (_Runtime.field(field, 'wordWrap') : Bool));

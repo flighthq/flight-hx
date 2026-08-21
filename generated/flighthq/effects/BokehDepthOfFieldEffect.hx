@@ -10,7 +10,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class BokehDepthOfFieldEffect {
-  public static function createBokehDepthOfFieldEffect(?options:flighthq._internal._Omit<flighthq.types.BokehDepthOfFieldEffect, String>):flighthq.types.BokehDepthOfFieldEffect {
+  public static function createBokehDepthOfFieldEffect(?options:{ @:optional var focusDistance:Null<Float>; @:optional var focusRange:Null<Float>; @:optional var maxBlur:Null<Float>; }):flighthq.types.BokehDepthOfFieldEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'BokehDepthOfFieldEffect' }, options]);
     return cast null;

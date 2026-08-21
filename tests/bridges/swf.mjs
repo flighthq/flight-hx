@@ -9,4 +9,5 @@ export const createScene2DSymbolFromSwf = compiled.flighthq.swf.Swf.createScene2
 export const disableSwfGuards = compiled.flighthq.swf.Swf.disableSwfGuards;
 export const enableSwfGuards = compiled.flighthq.swf.Swf.enableSwfGuards;
 export const readSwfExportedSymbolNames = compiled.flighthq.swf.Swf.readSwfExportedSymbolNames;
+export const registerSwfImageDecoders = compiled.flighthq.swf.Swf.registerSwfImageDecoders;
 export const registerSwfScene2DDocumentImporter = compiled.flighthq.swf.Swf.registerSwfScene2DDocumentImporter;

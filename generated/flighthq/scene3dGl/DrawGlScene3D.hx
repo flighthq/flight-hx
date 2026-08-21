@@ -10,7 +10,7 @@ import flighthq.mesh.MeshGeometry.hasMeshGeometrySkin;
 import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.render.SceneRender.prepareScene3DRender;
 import flighthq.renderGl.GlDraw.enableGlBlendModeSupport;
-import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
+import flighthq.renderGl.GlRenderState.getGlColorAdjustmentMaterialFeature;
 import flighthq.renderGl.GlRenderState.invalidateGlRenderStateCache;
 import flighthq.renderGl.GlRenderTarget.declareGlRenderTargetColorSpace;
 import flighthq.scene3d.SceneNode.getNode3DRuntime;
@@ -25,7 +25,6 @@ import flighthq.types.ColorScaleBias;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.GlScene3DForwardLightList;
 import flighthq.types.GlScene3DRuntime;
 import flighthq.types.GlScene3DRuntime.GlScene3DDrawEntry;
@@ -57,7 +56,7 @@ import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
-typedef DrawEntry__drawGlScene3D = { var alpha:Float; var clipW:Float; var colorMatrix:Null<Array<Float>>; var colorScaleBias:Null<ColorScaleBias>; var lightBlock:Scene3DLightBlock; var material:Material; var mesh:Mesh; var renderer:GlMeshMaterialRenderer; var subset:MeshSubset; var worldMatrix:Matrix4; };
+typedef DrawEntry__drawGlScene3D = { var alpha:Float; var colorMatrix:Null<Array<Float>>; var colorScaleBias:Null<ColorScaleBias>; var depth:Float; var lightBlock:Scene3DLightBlock; var material:Material; var mesh:Mesh; var renderer:GlMeshMaterialRenderer; var subset:MeshSubset; var worldMatrix:Matrix4; };
 
 class DrawGlScene3D {
   public static function isGpuSkinnedDraw__drawGlScene3D(mesh:Mesh):Bool {
@@ -85,6 +84,7 @@ class DrawGlScene3D {
     lightBlock = list.lights;
     viewProjection = list.viewProjection;
     runtime = (cast getGlScene3DRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : GlScene3DRuntime);
+    (runtime.activeBlendedRun = cast (false : Bool));
     hasPreparedForwardLights = ((cast !_Runtime.strictEquals(forwardLights, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(forwardLights, 'meshCount'), list.meshCount) : Bool));
     if ((cast ((cast !(cast hasPreparedForwardLights : Bool) : Bool) && (cast (cast DrawGlScene3D.hasExcessForwardLights__drawGlScene3D(({ final __callArgument7:Dynamic = lights; __callArgument7; })) : Bool) : Bool)) : Bool)) { ({ final __optionalCall8 = runtime.forwardLightSelectionGuard; if (__optionalCall8 != null) __optionalCall8(lights); }); }
     if ((cast !(cast (cast declareGlRenderTargetColorSpace(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = 'linear'; __callArgument10; })) : Bool) : Bool) : Bool)) { ({ final __optionalCall11 = runtime.colorSpaceGuard; if (__optionalCall11 != null) __optionalCall11(); }); }
@@ -105,6 +105,7 @@ class DrawGlScene3D {
         var wz:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast worldMatrix.m : flighthq._internal._Float32Array), (cast 14.0 : Float));
         var vp:flighthq._internal._Float32Array = viewProjection.m;
         var clipW:Float = ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vp : flighthq._internal._Float32Array), (cast 3.0 : Float)) * wx) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vp : flighthq._internal._Float32Array), (cast 7.0 : Float)) * wy)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vp : flighthq._internal._Float32Array), (cast 11.0 : Float)) * wz)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vp : flighthq._internal._Float32Array), (cast 15.0 : Float)));
+        var clipZ:Float = ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vp : flighthq._internal._Float32Array), (cast 2.0 : Float)) * wx) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vp : flighthq._internal._Float32Array), (cast 6.0 : Float)) * wy)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vp : flighthq._internal._Float32Array), (cast 10.0 : Float)) * wz)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vp : flighthq._internal._Float32Array), (cast 14.0 : Float)));
         var objectAlpha:Float = (cast getNode3DWorldAlpha(({ final __callArgument15:Dynamic = mesh; __callArgument15; })) : Float);
         var nodeRuntime:Node3DRuntime = (cast getNode3DRuntime(({ final __callArgument16:Dynamic = mesh; __callArgument16; })) : Node3DRuntime);
         var colorScaleBias:Null<ColorScaleBias> = (cast nodeRuntime : { var resolvedColorScaleBias:Null<ColorScaleBias>; }).resolvedColorScaleBias;
@@ -119,9 +120,9 @@ class DrawGlScene3D {
             var isBlended:Bool = ((cast (cast DrawGlScene3D.isBlendedMaterial__drawGlScene3D(({ final __callArgument20:Dynamic = resolvedMaterial; __callArgument20; })) : Bool) : Bool) || (cast ((cast objectAlpha : Float) < (cast 1.0 : Float)) : Bool));
             var entry:GlScene3DDrawEntry = (cast DrawGlScene3D.acquireDrawEntry__drawGlScene3D(((cast isBlended : Bool) ? (cast runtime.blendedPool : Dynamic) : (cast runtime.opaquePool : Dynamic))) : GlScene3DDrawEntry);
             (entry.alpha = cast (objectAlpha : Float));
-            (entry.clipW = cast (clipW : Float));
             (entry.colorMatrix = cast (colorMatrix : Null<flighthq._internal._Object>));
             (entry.colorScaleBias = cast (colorScaleBias : Null<flighthq._internal._Object>));
+            (entry.depth = cast ((clipZ / clipW) : Float));
             (entry.lightBlock = cast (((cast hasPreparedForwardLights : Bool) ? (cast flighthq._internal._StaticIndex.readArray(_Runtime.field(forwardLights, 'meshLightBlocks'), m) : Dynamic) : (cast lightBlock : Dynamic)) : Scene3DLightBlock));
             (entry.mesh = cast (mesh : flighthq._internal._Object));
             (entry.material = cast (resolvedMaterial : flighthq._internal._Object));
@@ -145,7 +146,7 @@ class DrawGlScene3D {
     boundSkinned = _Runtime.field(_Runtime, 'UNDEFINED');
     boundColorAdjustment = _Runtime.field(_Runtime, 'UNDEFINED');
     boundColorMatrix = _Runtime.field(_Runtime, 'UNDEFINED');
-    colorAdjustmentFeatureEnabled = !_Runtime.looseEquals((cast (cast getGlRenderStateRuntime(({ final __callArgument21:Dynamic = state; __callArgument21; })) : GlRenderStateRuntime) : { @:optional var glColorAdjustmentMaterialFeature:Null<GlColorAdjustmentMaterialFeature>; }).glColorAdjustmentMaterialFeature, null);
+    colorAdjustmentFeatureEnabled = !_Runtime.strictEquals((cast getGlColorAdjustmentMaterialFeature(({ final __callArgument21:Dynamic = state; __callArgument21; })) : Null<GlColorAdjustmentMaterialFeature>), null);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(opaqueDrawList, 'length') : Float)) : Bool)) {
@@ -171,6 +172,7 @@ class DrawGlScene3D {
         (DrawGlScene3D.proxy__drawGlScene3D.colorScaleBias = cast (((cast colorAdjusted : Bool) ? (cast (cast entry : DrawEntry__drawGlScene3D).colorScaleBias : Dynamic) : (cast null : Dynamic)) : Null<ColorScaleBias>));
         (DrawGlScene3D.proxy__drawGlScene3D.colorMatrix = cast (((cast colorAdjusted : Bool) ? (cast (cast entry : DrawEntry__drawGlScene3D).colorMatrix : Dynamic) : (cast null : Dynamic)) : Null<Array<Float>>));
         (DrawGlScene3D.proxy__drawGlScene3D.jointMatrices = cast (((cast skinned : Bool) ? (cast (cast (cast (cast (cast entry : DrawEntry__drawGlScene3D).mesh : { @:optional var skin:Null<Skin>; }).skin : { var skeleton:Skeleton3D; }).skeleton : { var jointMatrices:flighthq._internal._Float32Array; }).jointMatrices : Dynamic) : (cast null : Dynamic)) : Null<flighthq._internal._Float32Array>));
+        (DrawGlScene3D.proxy__drawGlScene3D.normalMatrices = cast (((cast skinned : Bool) ? (cast (cast (cast (cast (cast entry : DrawEntry__drawGlScene3D).mesh : { @:optional var skin:Null<Skin>; }).skin : { var skeleton:Skeleton3D; }).skeleton : { var normalMatrices:flighthq._internal._Float32Array; }).normalMatrices : Dynamic) : (cast null : Dynamic)) : Null<flighthq._internal._Float32Array>));
         (DrawGlScene3D.proxy__drawGlScene3D.material = cast ((cast entry : DrawEntry__drawGlScene3D).material : Material));
         (DrawGlScene3D.proxy__drawGlScene3D.normalMatrix = cast (DrawGlScene3D.scratchNormalMatrix__drawGlScene3D : Matrix3));
         (DrawGlScene3D.proxy__drawGlScene3D.subset = cast ((cast entry : DrawEntry__drawGlScene3D).subset : MeshSubset));
@@ -182,6 +184,7 @@ class DrawGlScene3D {
     if ((cast ((cast _Runtime.field(blendedDrawList, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callProperty(blendedDrawList, 'sort', cast ([DrawGlScene3D.compareBlendedEntriesDescending__drawGlScene3D] : Array<Dynamic>));
       var gl:flighthq._internal.dom.WebGL2RenderingContext = (cast state : GlRenderState).gl;
+      (runtime.activeBlendedRun = cast (true : Bool));
       flighthq._internal.backend.WebGl2Backend.enable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND));
       (boundMaterial = cast (_Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
       (boundLightBlock = cast (null : Dynamic));
@@ -215,6 +218,7 @@ class DrawGlScene3D {
           (DrawGlScene3D.proxy__drawGlScene3D.colorScaleBias = cast (((cast colorAdjusted : Bool) ? (cast (cast entry : DrawEntry__drawGlScene3D).colorScaleBias : Dynamic) : (cast null : Dynamic)) : Null<ColorScaleBias>));
           (DrawGlScene3D.proxy__drawGlScene3D.colorMatrix = cast (((cast colorAdjusted : Bool) ? (cast (cast entry : DrawEntry__drawGlScene3D).colorMatrix : Dynamic) : (cast null : Dynamic)) : Null<Array<Float>>));
           (DrawGlScene3D.proxy__drawGlScene3D.jointMatrices = cast (((cast skinned : Bool) ? (cast (cast (cast (cast (cast entry : DrawEntry__drawGlScene3D).mesh : { @:optional var skin:Null<Skin>; }).skin : { var skeleton:Skeleton3D; }).skeleton : { var jointMatrices:flighthq._internal._Float32Array; }).jointMatrices : Dynamic) : (cast null : Dynamic)) : Null<flighthq._internal._Float32Array>));
+          (DrawGlScene3D.proxy__drawGlScene3D.normalMatrices = cast (((cast skinned : Bool) ? (cast (cast (cast (cast (cast entry : DrawEntry__drawGlScene3D).mesh : { @:optional var skin:Null<Skin>; }).skin : { var skeleton:Skeleton3D; }).skeleton : { var normalMatrices:flighthq._internal._Float32Array; }).normalMatrices : Dynamic) : (cast null : Dynamic)) : Null<flighthq._internal._Float32Array>));
           (DrawGlScene3D.proxy__drawGlScene3D.material = cast ((cast entry : DrawEntry__drawGlScene3D).material : Material));
           (DrawGlScene3D.proxy__drawGlScene3D.normalMatrix = cast (DrawGlScene3D.scratchNormalMatrix__drawGlScene3D : Matrix3));
           (DrawGlScene3D.proxy__drawGlScene3D.subset = cast ((cast entry : DrawEntry__drawGlScene3D).subset : MeshSubset));
@@ -225,6 +229,8 @@ class DrawGlScene3D {
       }
       flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND));
     }
+    (runtime.activeBlendedRun = cast (false : Bool));
+    flighthq._internal.backend.WebGl2Backend.depthMask((cast state : GlRenderState).gl, true);
     drawGlScene3DParticleEmitter3Ds(({ final __callArgument37:Dynamic = state; __callArgument37; }), ({ final __callArgument38:Dynamic = scene; __callArgument38; }), ({ final __callArgument39:Dynamic = camera; __callArgument39; }), ({ final __callArgument40:Dynamic = lights; __callArgument40; }));
     invalidateGlRenderStateCache(({ final __callArgument41:Dynamic = state; __callArgument41; }));
   }
@@ -256,7 +262,7 @@ class DrawGlScene3D {
   }
 
   public static function compareBlendedEntriesDescending__drawGlScene3D(a:GlScene3DDrawEntry, b:GlScene3DDrawEntry):Float {
-    return cast (b.clipW - a.clipW);
+    return cast (b.depth - a.depth);
     return cast null;
   }
 
@@ -271,11 +277,11 @@ class DrawGlScene3D {
   }
 
   public static function createDrawEntry__drawGlScene3D():GlScene3DDrawEntry {
-    return cast { alpha: 1.0, clipW: 0.0, colorMatrix: null, colorScaleBias: null, lightBlock: null, material: DrawGlScene3D.DEFAULT_MATERIAL__drawGlScene3D, mesh: null, renderer: null, subset: { indexCount: 0.0, indexOffset: 0.0 }, worldMatrix: (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4) };
+    return cast { alpha: 1.0, colorMatrix: null, colorScaleBias: null, depth: 0.0, lightBlock: null, material: DrawGlScene3D.DEFAULT_MATERIAL__drawGlScene3D, mesh: null, renderer: null, subset: { indexCount: 0.0, indexOffset: 0.0 }, worldMatrix: (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4) };
     return cast null;
   }
 
-  public static final proxy__drawGlScene3D:Scene3DRenderProxy = (cast { colorMatrix: null, colorScaleBias: null, jointMatrices: null, material: (cast { kind: StandardMaterialKindValue } : Material), normalMatrix: (cast createMatrix3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix3), subset: { indexCount: 0.0, indexOffset: 0.0 }, worldMatrix: (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4) });
+  public static final proxy__drawGlScene3D:Scene3DRenderProxy = (cast { colorMatrix: null, colorScaleBias: null, jointMatrices: null, normalMatrices: null, material: (cast { kind: StandardMaterialKindValue } : Material), normalMatrix: (cast createMatrix3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix3), subset: { indexCount: 0.0, indexOffset: 0.0 }, worldMatrix: (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4) });
 
   public static final DEFAULT_MATERIAL__drawGlScene3D:Material = (cast { kind: StandardMaterialKindValue } : Material);
 

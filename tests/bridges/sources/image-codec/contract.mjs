@@ -8,6 +8,7 @@ export * from './detectImageMimeType.mjs';
 export * from './encodeImage.mjs';
 export * from './explainImageDecodeFailure.mjs';
 export * from './explainImageEncodeFailure.mjs';
+export * from './imageBitmapComposerRegistry.mjs';
 export * from './imageDecoderRegistry.mjs';
 export * from './imageEncoderRegistry.mjs';
 export * from './registerWebImageDecoders.mjs';

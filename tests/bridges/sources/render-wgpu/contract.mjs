@@ -6,6 +6,7 @@ __syncDependencies();
 export * from './enableWgpuTextureResolverGuards.mjs';
 export * from './explainWgpuTextureResolution.mjs';
 export * from './wgpuAdapterCapabilities.mjs';
+export * from './wgpuAntialias.mjs';
 export * from './wgpuBackground.mjs';
 export * from './wgpuCompressedTexture.mjs';
 export * from './wgpuDraw.mjs';

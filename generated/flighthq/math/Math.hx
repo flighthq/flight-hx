@@ -48,6 +48,8 @@ class Math {
     return cast null;
   }
 
+  public static final CIRCLE_KAPPA:Float = Facade_Math_flighthq_math_Constants.CIRCLE_KAPPA;
+
   public static function clamp(value:Float, min:Float, max:Float):Float {
     return cast Facade_Math_flighthq_math_Clamp.clamp(value, min, max);
     return cast null;

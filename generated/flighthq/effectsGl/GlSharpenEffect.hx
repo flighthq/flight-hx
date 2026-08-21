@@ -32,7 +32,7 @@ class GlSharpenEffect {
   });
 
   public static function registerGlSharpenEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'SharpenEffect' : String), ({ final __callArgument6:Dynamic = defaultGlSharpenEffectRunner; __callArgument6; }));
+    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'SharpenEffect' : String), ({ final __callArgument6:Dynamic = defaultGlSharpenEffectRunner; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static final SHARPEN_FRAGMENT_SRC__glSharpenEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_amount;\nuniform vec2 u_resolution;\nout vec4 o_color;\nvoid main() {\n  vec2 texel = 1.0 / u_resolution;\n  vec3 c = texture(u_texture0, v_texCoord).rgb;\n  vec3 n = texture(u_texture0, v_texCoord + vec2(0.0, -texel.y)).rgb;\n  vec3 s = texture(u_texture0, v_texCoord + vec2(0.0, texel.y)).rgb;\n  vec3 e = texture(u_texture0, v_texCoord + vec2(texel.x, 0.0)).rgb;\n  vec3 w = texture(u_texture0, v_texCoord + vec2(-texel.x, 0.0)).rgb;\n  vec3 high = c * 4.0 - n - s - e - w;\n  float a = texture(u_texture0, v_texCoord).a;\n  o_color = vec4(clamp(c + high * u_amount, 0.0, 1.0), a);\n}';

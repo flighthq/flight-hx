@@ -77,7 +77,7 @@ class GlBlurEffect {
   });
 
   public static function registerGlBlurEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument34:Dynamic = state; __callArgument34; }), (cast 'BlurEffect' : String), ({ final __callArgument35:Dynamic = defaultGlBlurEffectRunner; __callArgument35; }));
+    registerGlRenderEffect(({ final __callArgument34:Dynamic = state; __callArgument34; }), (cast 'BlurEffect' : String), ({ final __callArgument35:Dynamic = defaultGlBlurEffectRunner; __callArgument35; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static function applyGlGaussianBlurPass__glBlurEffect(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, sigma:Float, radius:Float, dirX:Float, dirY:Float):Void {

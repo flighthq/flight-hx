@@ -8,6 +8,7 @@ export const disableScene3DResourceFailureGuards = compiled.flighthq.scene3dReso
 export const disposeScene3DResourceResolver = compiled.flighthq.scene3dResources.Scene3dResources.disposeScene3DResourceResolver;
 export const enableScene3DResourceFailureGuards = compiled.flighthq.scene3dResources.Scene3dResources.enableScene3DResourceFailureGuards;
 export const enableScene3DResourceSignals = compiled.flighthq.scene3dResources.Scene3dResources.enableScene3DResourceSignals;
+export const explainScene3DResourceCoverage = compiled.flighthq.scene3dResources.Scene3dResources.explainScene3DResourceCoverage;
 export const fetchWebImageResource = compiled.flighthq.scene3dResources.Scene3dResources.fetchWebImageResource;
 export const getScene3DDocumentBasePathFromUrl = compiled.flighthq.scene3dResources.Scene3dResources.getScene3DDocumentBasePathFromUrl;
 export const getScene3DResourceSignals = compiled.flighthq.scene3dResources.Scene3dResources.getScene3DResourceSignals;

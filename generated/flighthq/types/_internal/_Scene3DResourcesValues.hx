@@ -6,7 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 import flighthq.types.Entity;
 import flighthq.types.Entity.Kind;
-import flighthq.types.Image;
 import flighthq.types.ImageResourceReference;
 import flighthq.types.ImageResourceReference.ImageResourceFetch;
 import flighthq.types.Material;
@@ -15,6 +14,7 @@ import flighthq.types.ResourceLoader;
 import flighthq.types.Scene3D;
 import flighthq.types.Signal;
 import flighthq.types.Texture;
+import flighthq.types.TextureSource;
 
 class _Scene3DResourcesValues {
   public static final Scene3DResourceResolverRuntimeKey:flighthq._internal._Symbol = _Runtime.symbol('Scene3DResourceResolverRuntime');

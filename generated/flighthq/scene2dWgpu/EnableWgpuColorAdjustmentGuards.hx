@@ -4,26 +4,37 @@ package flighthq.scene2dWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
+import flighthq.registry.RegistryTable.createSlotTable;
+import flighthq.renderWgpu.WgpuRenderState.getWgpuColorAdjustmentMaterialFeatureGuard;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
-import flighthq.types.ColorScaleBias;
 import flighthq.types.Log.LogLevel;
-import flighthq.types.TintMaterialData;
+import flighthq.types.RegistryTable.RegistryEntryState;
+import flighthq.types.RegistryTable.SlotTable;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeatureGuard;
+import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 class EnableWgpuColorAdjustmentGuards {
   @:noCompletion
   public static function areWgpuColorAdjustmentGuardsEnabled(state:WgpuRenderState):Bool {
-    return cast !_Runtime.looseEquals((cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : { @:optional var wgpuColorAdjustmentMaterialFeatureGuard:Null<WgpuRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>; }).wgpuColorAdjustmentMaterialFeatureGuard, null);
+    return cast !_Runtime.looseEquals((cast getWgpuColorAdjustmentMaterialFeatureGuard(({ final __callArgument0:Dynamic = state; __callArgument0; })) : Null<WgpuColorAdjustmentMaterialFeatureGuard>), null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableWgpuColorAdjustmentGuards(state:WgpuRenderState):Void {
-    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime) : { @:optional var wgpuColorAdjustmentMaterialFeatureGuard:Null<WgpuRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>; }).wgpuColorAdjustmentMaterialFeatureGuard = cast (function(__unused0:WgpuRenderState, __unused1:flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>):Void { EnableWgpuColorAdjustmentGuards.warnWgpuColorAdjustmentNotEnabled__enableWgpuColorAdjustmentGuards(); } : Null<WgpuRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>));
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var table:SlotTable<WgpuColorAdjustmentMaterialFeatureGuard> = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime);
+    table = _Runtime.coalesce((cast runtime.registries : WgpuRenderRegistries).colorAdjustmentFeatureGuard, function():Dynamic return cast (cast createSlotTable((cast 'WgpuColorAdjustmentFeatureGuard' : String), (cast 'Disabled' : String)) : SlotTable<WgpuColorAdjustmentMaterialFeatureGuard>));
+    if ((cast ((cast !_Runtime.strictEquals(({ final __structural2 = (cast table : SlotTable<WgpuColorAdjustmentMaterialFeatureGuard>).entry; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) || (cast !_Runtime.strictEquals((cast (cast table : SlotTable<WgpuColorAdjustmentMaterialFeatureGuard>).entry : { var state:String; var value:WgpuColorAdjustmentMaterialFeatureGuard; }).value, EnableWgpuColorAdjustmentGuards.warnWgpuColorAdjustmentNotEnabled__enableWgpuColorAdjustmentGuards) : Bool)) : Bool)) {
+      ((cast runtime.registries : WgpuRenderRegistries).colorAdjustmentFeatureGuard = _Runtime.mergeObjects([table, { entry: { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: EnableWgpuColorAdjustmentGuards.warnWgpuColorAdjustmentNotEnabled__enableWgpuColorAdjustmentGuards } }]));
+    }
   }
 
   public static function warnWgpuColorAdjustmentNotEnabled__enableWgpuColorAdjustmentGuards():Void {
-    (cast logOnce((cast 'scene2d-wgpu:color-adjustment-not-enabled' : String), ({ final __callArgument2:Dynamic = LogLevel.Warn; __callArgument2; }), (cast { message: 'recordWgpuQuadBatchColorScaleBias: color adjustment present but WGPU color adjustment not enabled — call registerWgpuColorAdjustmentMaterialFeature(state)' } : Dynamic), ({ final __callArgument3:Dynamic = 'scene2d-wgpu'; __callArgument3; })) : Bool);
+    (cast logOnce((cast 'scene2d-wgpu:color-adjustment-not-enabled' : String), ({ final __callArgument3:Dynamic = LogLevel.Warn; __callArgument3; }), (cast { message: 'recordWgpuQuadBatchColorScaleBias: color adjustment present but WGPU color adjustment not enabled — call registerWgpuColorAdjustmentMaterialFeature(state)' } : Dynamic), ({ final __callArgument4:Dynamic = 'scene2d-wgpu'; __callArgument4; })) : Bool);
   }
 }

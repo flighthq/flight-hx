@@ -2818,6 +2818,10 @@ function emitExpression(expression: IrExpression): string {
       if (expression.object.kind === 'identifier' && expression.object.name === 'Number') {
         if (expression.name === 'EPSILON') return '_Runtime.NUMBER_EPSILON';
         if (expression.name === 'MAX_SAFE_INTEGER') return '_Runtime.MAX_SAFE_INTEGER';
+        if (expression.name === 'MAX_VALUE') return '_Runtime.NUMBER_MAX_VALUE';
+        if (expression.name === 'MIN_SAFE_INTEGER') return '-_Runtime.MAX_SAFE_INTEGER';
+        if (expression.name === 'MIN_VALUE') return '_Runtime.NUMBER_MIN_VALUE';
+        if (expression.name === 'NaN') return 'HxMath.NaN';
         if (expression.name === 'NEGATIVE_INFINITY') return 'HxMath.NEGATIVE_INFINITY';
         if (expression.name === 'POSITIVE_INFINITY') return 'HxMath.POSITIVE_INFINITY';
       }

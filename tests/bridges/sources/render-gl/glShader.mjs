@@ -9,6 +9,7 @@ export const compileDefaultGlProgram = api.compileDefaultGlProgram;
 export const compileGlBitmapProgram = api.compileGlBitmapProgram;
 export const createDefaultGlBitmapShader = api.createDefaultGlBitmapShader;
 export const createGlBitmapShader = api.createGlBitmapShader;
+export const ensureDefaultGlBitmapShader = api.ensureDefaultGlBitmapShader;
 export const setGlAttributes = api.setGlAttributes;
 export const setGlBaseUniforms = api.setGlBaseUniforms;
 export const setGlMatrixFromTransform = api.setGlMatrixFromTransform;

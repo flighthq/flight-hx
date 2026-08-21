@@ -25,7 +25,7 @@ class CanvasEffectDropShadowCss {
     radians = ((angle * HxMath.PI) / 180.0);
     dx = HxMath.round(_Runtime.multiplyNumbers(HxMath.cos(radians), distance));
     dy = HxMath.round(_Runtime.multiplyNumbers(HxMath.sin(radians), distance));
-    return cast 'drop-shadow(' + Std.string(dx) + 'px ' + Std.string(dy) + 'px ' + Std.string(blurX) + 'px ' + Std.string((cast CanvasEffectDropShadowCss.cssRgbaFromColor__canvasEffectDropShadowCss((cast _Runtime.coalesce(effect.color, function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0) : Float)) : String)) + ')';
+    return cast 'drop-shadow(' + Std.string(dx) + 'px ' + Std.string(dy) + 'px ' + Std.string(blurX) + 'px ' + Std.string((cast CanvasEffectDropShadowCss.cssRgbaFromColor__canvasEffectDropShadowCss((cast _Runtime.coalesce(effect.color, function():Dynamic return cast 255.0) : Float), (cast _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0) : Float)) : String)) + ')';
     return cast null;
   }
 
@@ -37,7 +37,7 @@ class CanvasEffectDropShadowCss {
     blurX = _Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0);
     blurY = _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0);
     if ((cast !_Runtime.strictEquals(blurX, blurY) : Bool)) { return cast null; }
-    return cast 'drop-shadow(0px 0px ' + Std.string(blurX) + 'px ' + Std.string((cast CanvasEffectDropShadowCss.cssRgbaFromColor__canvasEffectDropShadowCss((cast _Runtime.coalesce(effect.color, function():Dynamic return cast 16711680.0) : Float), (cast _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0) : Float)) : String)) + ')';
+    return cast 'drop-shadow(0px 0px ' + Std.string(blurX) + 'px ' + Std.string((cast CanvasEffectDropShadowCss.cssRgbaFromColor__canvasEffectDropShadowCss((cast _Runtime.coalesce(effect.color, function():Dynamic return cast 4278190335.0) : Float), (cast _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0) : Float)) : String)) + ')';
     return cast null;
   }
 
@@ -45,10 +45,10 @@ class CanvasEffectDropShadowCss {
     var r:Float = cast _Runtime.UNDEFINED;
     var g:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
-    r = (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255);
-    g = (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255);
-    b = (_Runtime.toInt32(color) & 255);
-    return cast 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',' + Std.string(_Runtime.toFixed(alpha, 3.0)) + ')';
+    r = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
+    g = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255);
+    b = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255);
+    return cast 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',' + Std.string(_Runtime.toFixed((alpha * ((_Runtime.toInt32(color) & 255) / 255.0)), 3.0)) + ')';
     return cast null;
   }
 }

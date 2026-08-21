@@ -5,18 +5,23 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.texture.Texture.getTextureSourceKind;
+import flighthq.types.RegistryTable.KeyedTable;
+import flighthq.types.RegistryTable.RegistryEntryState;
+import flighthq.types.RegistryTable.RegistryTableEntry;
 import flighthq.types.Texture.TextureLike;
 import flighthq.types.TextureResolutionExplanation;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types.WgpuTextureResolver;
+import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 class ExplainWgpuTextureResolution {
   public static function explainWgpuTextureResolution(state:WgpuRenderState, texture:TextureLike):TextureResolutionExplanation {
     var kind:Null<String> = cast _Runtime.UNDEFINED;
     kind = (cast getTextureSourceKind(({ final __callArgument0:Dynamic = texture; __callArgument0; })) : Null<String>);
     if ((cast _Runtime.strictEquals(kind, null) : Bool)) { return cast { kind: kind, status: 'missing-kind' }; }
-    return cast { kind: kind, status: ((cast _Runtime.strictEquals(({ final __collection3:Dynamic = (cast (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime) : { @:optional var wgpuTextureResolverRegistry:Null<flighthq._internal._Map<String, WgpuTextureResolver>>; }).wgpuTextureResolverRegistry; __collection3 == null ? _Runtime.UNDEFINED : ((cast __collection3 : flighthq._internal._Map<String, WgpuTextureResolver>).has(kind)); }), true) : Bool) ? (cast 'registered' : Dynamic) : (cast 'missing-resolver' : Dynamic)) };
+    return cast { kind: kind, status: ((cast _Runtime.strictEquals(({ final __structural3 = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : WgpuRenderRegistries).textureResolvers : KeyedTable<WgpuTextureResolver>).entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuTextureResolver>>).get(kind)); __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast 'registered' : Dynamic) : (cast 'missing-resolver' : Dynamic)) };
     return cast null;
   }
 }

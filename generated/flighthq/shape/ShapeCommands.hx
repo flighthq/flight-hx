@@ -144,7 +144,7 @@ class ShapeCommands {
     invalidateContent((cast shape : Dynamic));
   }
 
-  public static function appendShapeBeginFill(shape:Shape, color:Float = 0.0, alpha:Float = 1.0):Void {
+  public static function appendShapeBeginFill(shape:Shape, color:Float, alpha:Float = 1.0):Void {
     _Runtime.pushMany((cast shape.data : { var commands:Array<ShapeCommandToken>; }).commands, cast (['beginFill', 2.0, color, alpha] : Array<Dynamic>));
     invalidateContent((cast shape : Dynamic));
   }
@@ -199,7 +199,7 @@ class ShapeCommands {
     invalidateContent((cast shape : Dynamic));
   }
 
-  public static function appendShapeLineStyle(shape:Shape, thickness:Float = 1.0, color:Float = 0.0, alpha:Float = 1.0, pixelHinting:Bool = false, scaleMode:LineScaleMode = 'normal', caps:CapsStyle = 'none', joints:JointStyle = 'round', miterLimit:Float = 3.0):Void {
+  public static function appendShapeLineStyle(shape:Shape, thickness:Float = 1.0, color:Float, alpha:Float = 1.0, pixelHinting:Bool = false, scaleMode:LineScaleMode = 'normal', caps:CapsStyle = 'none', joints:JointStyle = 'round', miterLimit:Float = 3.0):Void {
     _Runtime.pushMany((cast shape.data : { var commands:Array<ShapeCommandToken>; }).commands, cast (['lineStyle', 8.0, thickness, color, alpha, pixelHinting, scaleMode, caps, joints, miterLimit] : Array<Dynamic>));
     invalidateContent((cast shape : Dynamic));
   }

@@ -7,4 +7,5 @@ __syncDependencies();
 
 export const getGlRenderEffectRunner = api.getGlRenderEffectRunner;
 export const hasGlRenderEffectRunner = api.hasGlRenderEffectRunner;
+export const isGlRenderEffectResolvable = api.isGlRenderEffectResolvable;
 export const registerGlRenderEffect = api.registerGlRenderEffect;

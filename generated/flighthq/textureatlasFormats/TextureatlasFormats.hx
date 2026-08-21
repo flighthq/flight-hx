@@ -27,6 +27,11 @@ class TextureatlasFormats {
     return cast null;
   }
 
+  public static function getTextureAtlasFormatKinds():Array<TextureAtlasFormatKind> {
+    return cast Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasDetect.getTextureAtlasFormatKinds();
+    return cast null;
+  }
+
   public static function parseTextureAtlas(content:String, atlas:TextureAtlas, ?formatKind:TextureAtlasFormatKind, ?options:TextureAtlasParseOptions):Null<TextureAtlas> {
     return cast Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasDetect.parseTextureAtlas(content, atlas, formatKind, options);
     return cast null;
@@ -64,5 +69,9 @@ class TextureatlasFormats {
 
   public static function registerTextureAtlasFormat(kind:TextureAtlasFormatKind, entry:{ var detect:String->Bool; var parse:String->TextureAtlas->TextureAtlasParseOptions->TextureAtlas; }):Void {
     Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasDetect.registerTextureAtlasFormat(kind, entry);
+  }
+
+  public static function unregisterTextureAtlasFormat(kind:TextureAtlasFormatKind):Void {
+    Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasDetect.unregisterTextureAtlasFormat(kind);
   }
 }

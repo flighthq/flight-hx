@@ -5,6 +5,7 @@ const api = compiled.flighthq.skeleton2dFormats.SkeletonDetect;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const getSkeleton2DFormatKinds = api.getSkeleton2DFormatKinds;
 export const parseSkeleton2D = api.parseSkeleton2D;
 export const registerSkeleton2DFormat = api.registerSkeleton2DFormat;
 export const unregisterSkeleton2DFormat = api.unregisterSkeleton2DFormat;

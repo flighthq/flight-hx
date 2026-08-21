@@ -9,6 +9,7 @@ export const addLogSink = api.addLogSink;
 export const beginLogGroup = api.beginLogGroup;
 export const clearLogChannelLevels = api.clearLogChannelLevels;
 export const clearLogGroups = api.clearLogGroups;
+export const clearLogOnceKeys = api.clearLogOnceKeys;
 export const clearLogRedactionPaths = api.clearLogRedactionPaths;
 export const clearLogSerializers = api.clearLogSerializers;
 export const clearLogSinks = api.clearLogSinks;

@@ -7,12 +7,12 @@ import flighthq.adjustments.ColorMatrixMath.createChannelMixerColorMatrix;
 import flighthq.types.ChannelMixerAdjustment;
 
 class ChannelMixerAdjustment {
-  public static function createChannelMixerAdjustment(?options:flighthq._internal._Omit<flighthq.types.ChannelMixerAdjustment, String>):flighthq.types.ChannelMixerAdjustment {
+  public static function createChannelMixerAdjustment(?options:{ var matrix:Array<Float>; }):flighthq.types.ChannelMixerAdjustment {
     if (options == null) options = cast ({ matrix: ChannelMixerAdjustment.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment } : Dynamic);
     var matrix:Array<Float> = cast _Runtime.UNDEFINED;
     var m:Float->Float = cast _Runtime.UNDEFINED;
     var colorMatrix:Array<Float> = cast _Runtime.UNDEFINED;
-    matrix = _Runtime.coalesce(_Runtime.field(options, 'matrix'), function():Dynamic return cast ChannelMixerAdjustment.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment);
+    matrix = _Runtime.coalesce((cast options : { var matrix:Array<Float>; }).matrix, function():Dynamic return cast ChannelMixerAdjustment.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment);
     m = (cast function(i:Float):Float return _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast matrix : Array<Float>), (cast i : Float)), function():Dynamic return cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ChannelMixerAdjustment.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment : Array<Float>), (cast i : Float))));
     colorMatrix = (cast createChannelMixerColorMatrix(({ final __callArgument0:Dynamic = cast ([(cast m((cast 0.0 : Float)) : Float), (cast m((cast 1.0 : Float)) : Float), (cast m((cast 2.0 : Float)) : Float)] : Array<Dynamic>); __callArgument0; }), ({ final __callArgument1:Dynamic = cast ([(cast m((cast 4.0 : Float)) : Float), (cast m((cast 5.0 : Float)) : Float), (cast m((cast 6.0 : Float)) : Float)] : Array<Dynamic>); __callArgument1; }), ({ final __callArgument2:Dynamic = cast ([(cast m((cast 8.0 : Float)) : Float), (cast m((cast 9.0 : Float)) : Float), (cast m((cast 10.0 : Float)) : Float)] : Array<Dynamic>); __callArgument2; })) : Array<Float>);
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast colorMatrix : Array<Float>), (cast 4.0 : Float), (cast (cast m((cast 3.0 : Float)) : Float) : Float));

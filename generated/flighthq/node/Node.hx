@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Runtime.createEntityRuntime;
 import flighthq.entity.Runtime.getEntityRuntime;
 import flighthq.node.BoundsRectangle as Facade_Node_flighthq_node_BoundsRectangle;
+import flighthq.node.EnableNodeGuards as Facade_Node_flighthq_node_EnableNodeGuards;
 import flighthq.node.Hierarchy as Facade_Node_flighthq_node_Hierarchy;
 import flighthq.node.Hierarchy.removeNodeChild;
 import flighthq.node.NodeColorAdjustment as Facade_Node_flighthq_node_NodeColorAdjustment;
@@ -85,6 +86,11 @@ class Node {
 
   public static function applyNodeOrderList<Traits:flighthq._internal._Object>(target:flighthq.types.Node<Traits>, list:NodeOrderList<Traits>):Void {
     Facade_Node_flighthq_node_NodeOrderList.applyNodeOrderList(target, list);
+  }
+
+  public static function areNodeGuardsEnabled():Bool {
+    return cast Facade_Node_flighthq_node_EnableNodeGuards.areNodeGuardsEnabled();
+    return cast null;
   }
 
   public static function clearNodeOrderList<Traits:flighthq._internal._Object>(list:NodeOrderList<Traits>):Void {
@@ -209,6 +215,10 @@ class Node {
     return cast null;
   }
 
+  public static function disableNodeGuards():Void {
+    Facade_Node_flighthq_node_EnableNodeGuards.disableNodeGuards();
+  }
+
   public static function disposeNode<Traits:flighthq._internal._Object>(target:flighthq.types.Node<Traits>):Void {
     var runtime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
     var parent:Null<flighthq.types.Node<Traits>> = cast _Runtime.UNDEFINED;
@@ -250,6 +260,10 @@ class Node {
 
   public static function disposeNodeOrderList<Traits:flighthq._internal._Object>(list:NodeOrderList<Traits>):Void {
     Facade_Node_flighthq_node_NodeOrderList.disposeNodeOrderList(list);
+  }
+
+  public static function enableNodeGuards():Void {
+    Facade_Node_flighthq_node_EnableNodeGuards.enableNodeGuards();
   }
 
   public static function enableNodeSignals<Traits:flighthq._internal._Object>(source:flighthq.types.Node<Traits>):NodeSignals {
@@ -497,7 +511,7 @@ class Node {
     return cast null;
   }
 
-  public static function reparentNode<Traits:flighthq._internal._Object>(child:Transform2DNode<Traits>, newParent:Transform2DNode<Traits>):NodeOf<Traits> {
+  public static function reparentNode<Traits:flighthq._internal._Object>(child:Transform2DNode<Traits>, newParent:Transform2DNode<Traits>):Bool {
     return cast Facade_Node_flighthq_node_Hierarchy.reparentNode(child, newParent);
     return cast null;
   }

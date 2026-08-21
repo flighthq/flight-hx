@@ -3,21 +3,29 @@ package flighthq.renderGl;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.registry.RegistryTable.withRegistryTableEntry;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.GlMaterialRenderer;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderRegistries;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.Material;
+import flighthq.types.RegistryTable.KeyedTable;
+import flighthq.types.RegistryTable.RegistryEntryState;
+import flighthq.types.RegistryTable.RegistryTableEntry;
 import flighthq.types.RenderRegistrySignals;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.StandardMaterial.StandardMaterialKind;
+import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
 class GlMaterialRegistry {
   @:noCompletion
   public static function getGlMaterialRenderer(state:GlRenderState, kind:Kind):Null<GlMaterialRenderer> {
-    return cast _Runtime.coalesce(({ final __collection2:Dynamic = (cast (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime) : { @:optional var materialRendererMap:Null<flighthq._internal._Map<String, GlMaterialRenderer>>; }).materialRendererMap; __collection2 == null ? _Runtime.UNDEFINED : ((cast __collection2 : flighthq._internal._Map<String, GlMaterialRenderer>).get(kind)); }), function():Dynamic return cast null);
+    var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
+    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).materialRenderers : KeyedTable<GlMaterialRenderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlMaterialRenderer>>).get(kind));
+    return cast ((cast _Runtime.strictEquals(({ final __structural2 = entry; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:GlMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
@@ -25,22 +33,25 @@ class GlMaterialRegistry {
   public static function registerGlMaterialRenderer(state:GlRenderState, kind:Kind, renderer:GlMaterialRenderer):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : GlRenderStateRuntime);
-    ((cast ({ final __nullishOwner6 = runtime; final __nullishValue7:Null<flighthq._internal._Map<String, GlMaterialRenderer>> = cast __nullishOwner6.materialRendererMap; __nullishValue7 == null ? (__nullishOwner6.materialRendererMap = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, GlMaterialRenderer>>)) : (cast __nullishValue7 : Null<flighthq._internal._Map<String, GlMaterialRenderer>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast renderer)));
+    ((cast runtime.registries : GlRenderRegistries).materialRenderers = (cast withRegistryTableEntry((cast (cast runtime.registries : GlRenderRegistries).materialRenderers : Dynamic), (cast kind : String), ({ final __callArgument4:Dynamic = renderer; __callArgument4; })) : KeyedTable<GlMaterialRenderer>));
   }
 
   @:noCompletion
   public static function resolveGlMaterialRenderer(state:GlRenderState, material:Null<Material>):Null<GlMaterialRenderer> {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-    var map:Null<flighthq._internal._Map<String, GlMaterialRenderer>> = cast _Runtime.UNDEFINED;
+    var entries:flighthq._internal._Map<String, RegistryTableEntry<GlMaterialRenderer>> = cast _Runtime.UNDEFINED;
     var kind:String = cast _Runtime.UNDEFINED;
-    var renderer:Null<GlMaterialRenderer> = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : GlRenderStateRuntime);
-    map = runtime.materialRendererMap;
-    kind = _Runtime.coalesce(({ final __structural9 = material; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { var kind:String; }).kind; }), function():Dynamic return cast StandardMaterialKindValue);
-    renderer = _Runtime.coalesce(({ final __collection10:Dynamic = map; __collection10 == null ? _Runtime.UNDEFINED : ((cast __collection10 : flighthq._internal._Map<String, GlMaterialRenderer>).get(kind)); }), function():Dynamic return cast null);
-    if ((cast !_Runtime.strictEquals(renderer, null) : Bool)) { return cast renderer; }
+    var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
+    var fallback:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlRenderStateRuntime);
+    entries = (cast (cast runtime.registries : GlRenderRegistries).materialRenderers : KeyedTable<GlMaterialRenderer>).entries;
+    kind = _Runtime.coalesce(({ final __structural6 = material; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var kind:String; }).kind; }), function():Dynamic return cast StandardMaterialKindValue);
+    entry = ((cast entries : flighthq._internal._Map<String, RegistryTableEntry<GlMaterialRenderer>>).get(kind));
+    if ((cast _Runtime.strictEquals(({ final __structural7 = entry; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { return cast (cast entry : { var state:String; var value:GlMaterialRenderer; }).value; }
     _Runtime.callOptionalValue(runtime.registryMiss, cast ([RenderRegistry.MaterialRenderer, kind] : Array<Dynamic>));
-    return cast ((cast _Runtime.strictEquals(kind, StandardMaterialKindValue) : Bool) ? (cast null : Dynamic) : (cast _Runtime.coalesce(({ final __collection11:Dynamic = map; __collection11 == null ? _Runtime.UNDEFINED : ((cast __collection11 : flighthq._internal._Map<String, GlMaterialRenderer>).get(StandardMaterialKindValue)); }), function():Dynamic return cast null) : Dynamic));
+    if ((cast _Runtime.strictEquals(kind, StandardMaterialKindValue) : Bool)) { return cast null; }
+    fallback = ((cast entries : flighthq._internal._Map<String, RegistryTableEntry<GlMaterialRenderer>>).get(StandardMaterialKindValue));
+    return cast ((cast _Runtime.strictEquals(({ final __structural8 = fallback; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast fallback : { var state:String; var value:GlMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 }

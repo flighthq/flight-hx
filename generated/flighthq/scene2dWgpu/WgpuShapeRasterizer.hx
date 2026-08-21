@@ -4,17 +4,27 @@ package flighthq.scene2dWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
+import flighthq.types.RegistryTable.RegistryEntryState;
+import flighthq.types.RegistryTable.SlotTable;
 import flighthq.types.ShapeRasterizer;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 class WgpuShapeRasterizer {
   public static function getWgpuShapeRasterizer(state:WgpuRenderState):Null<ShapeRasterizer> {
-    return cast _Runtime.coalesce((cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : { @:optional var shapeRasterizer:Null<ShapeRasterizer>; }).shapeRasterizer, function():Dynamic return cast null);
+    var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:ShapeRasterizer; }>> = cast _Runtime.UNDEFINED;
+    entry = (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : WgpuRenderRegistries).shapeRasterizer : SlotTable<ShapeRasterizer>).entry;
+    return cast ((cast _Runtime.strictEquals(({ final __structural1 = entry; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:ShapeRasterizer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   public static function registerWgpuShapeRasterizer(state:WgpuRenderState, rasterizer:Null<ShapeRasterizer>):Void {
-    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime) : { @:optional var shapeRasterizer:Null<ShapeRasterizer>; }).shapeRasterizer = cast (rasterizer : Null<ShapeRasterizer>));
+    var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var table:SlotTable<ShapeRasterizer> = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
+    table = (cast runtime.registries : WgpuRenderRegistries).shapeRasterizer;
+    ((cast runtime.registries : WgpuRenderRegistries).shapeRasterizer = _Runtime.mergeObjects([table, { entry: ((cast _Runtime.strictEquals(rasterizer, null) : Bool) ? (cast null : Dynamic) : (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: rasterizer } : Dynamic)) }]));
   }
 }

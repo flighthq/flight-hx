@@ -86,7 +86,7 @@ class GlScale9Shape {
     var h:Float = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var __destructure2:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-    var shaderLoc:GlShaderLocations = cast _Runtime.UNDEFINED;
+    var shaderLoc:Null<GlShaderLocations> = cast _Runtime.UNDEFINED;
     var matrixArray:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var t:Matrix = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime);

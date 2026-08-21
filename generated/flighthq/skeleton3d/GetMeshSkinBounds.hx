@@ -119,7 +119,7 @@ class GetMeshSkinBounds {
     var maxX:Float = cast _Runtime.UNDEFINED;
     var maxY:Float = cast _Runtime.UNDEFINED;
     var maxZ:Float = cast _Runtime.UNDEFINED;
-    skinVertices(bindPose.skinnedPositions, bindPose.skinnedNormals, bindPose.positions, bindPose.normals, ({ final __callArgument0:Dynamic = bindPose.joints; __callArgument0; }), bindPose.weights, skeleton.jointMatrices);
+    skinVertices(bindPose.skinnedPositions, bindPose.skinnedNormals, bindPose.positions, bindPose.normals, ({ final __callArgument0:Dynamic = bindPose.joints; __callArgument0; }), bindPose.weights, skeleton.jointMatrices, skeleton.normalMatrices);
     skinned = bindPose.skinnedPositions;
     vertexCount = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(skinned, 'length'), 3.0)) | 0);
     minX = HxMath.POSITIVE_INFINITY;

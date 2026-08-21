@@ -10,6 +10,7 @@ import flighthq.geometry.Matrix.inverseMatrixTransformPointXY;
 import flighthq.geometry.Matrix.matrixTransformPointXY;
 import flighthq.geometry.Matrix.multiplyMatrix;
 import flighthq.geometry.Transform2d.decomposeMatrixToTransform2D;
+import flighthq.math.Constants.DEG_TO_RAD;
 import flighthq.node.Revision.computeNodeWorldTransformRevision;
 import flighthq.node.Revision.invalidateNodeLocalTransform;
 import flighthq.types.Entity;
@@ -110,7 +111,7 @@ class NodeTransform2d {
       } else { if ((cast ((cast angle : Float) < (cast -180.0 : Float)) : Bool)) {
         (angle = cast ((angle + 360.0) : Dynamic));
       } }
-      var rad:Float = (angle * NodeTransform2d.DEG_TO_RAD__nodeTransform2d);
+      var rad:Float = (angle * DEG_TO_RAD);
       var sin:Float = HxMath.sin(rad);
       var cos:Float = HxMath.cos(rad);
       (runtime.rotationAngle = cast (angle : Float));
@@ -125,8 +126,8 @@ class NodeTransform2d {
       (matrix.c = cast ((-runtime.rotationSine * target.scaleY) : Float));
       (matrix.d = cast ((runtime.rotationCosine * target.scaleY) : Float));
     } else {
-      var radY:Float = ((runtime.rotationAngle + target.skewY) * NodeTransform2d.DEG_TO_RAD__nodeTransform2d);
-      var radX:Float = ((runtime.rotationAngle + target.skewX) * NodeTransform2d.DEG_TO_RAD__nodeTransform2d);
+      var radY:Float = ((runtime.rotationAngle + target.skewY) * DEG_TO_RAD);
+      var radX:Float = ((runtime.rotationAngle + target.skewX) * DEG_TO_RAD);
       (matrix.a = cast (_Runtime.multiplyNumbers(HxMath.cos(radY), target.scaleX) : Float));
       (matrix.b = cast (_Runtime.multiplyNumbers(HxMath.sin(radY), target.scaleX) : Float));
       (matrix.c = cast (_Runtime.multiplyNumbers(-HxMath.sin(radX), target.scaleY) : Float));
@@ -147,6 +148,4 @@ class NodeTransform2d {
     }
     computeNodeWorldTransformRevision((cast runtime : Dynamic), (cast parentRuntime : Dynamic));
   }
-
-  public static final DEG_TO_RAD__nodeTransform2d:Float = (HxMath.PI / 180.0);
 }

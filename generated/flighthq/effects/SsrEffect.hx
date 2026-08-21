@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.SsrEffect;
 
 class SsrEffect {
-  public static function createSsrEffect(?options:flighthq._internal._Omit<flighthq.types.SsrEffect, String>):flighthq.types.SsrEffect {
+  public static function createSsrEffect(?options:{ @:optional var maxDistance:Null<Float>; @:optional var resolution:Null<Float>; @:optional var steps:Null<Float>; }):flighthq.types.SsrEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'SsrEffect' }, options]);
     return cast null;

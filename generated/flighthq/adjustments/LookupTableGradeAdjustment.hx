@@ -9,13 +9,13 @@ import flighthq.types.ColorTransformFunction;
 import flighthq.types.LookupTableGradeAdjustment;
 
 class LookupTableGradeAdjustment {
-  public static function createLookupTableGradeAdjustment(?options:flighthq._internal._Omit<flighthq.types.LookupTableGradeAdjustment, String>):flighthq.types.LookupTableGradeAdjustment {
+  public static function createLookupTableGradeAdjustment(?options:{ @:optional var lut:Null<ColorLut>; @:optional var strength:Null<Float>; }):flighthq.types.LookupTableGradeAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var lut:Null<ColorLut> = cast _Runtime.UNDEFINED;
     var strength:Float = cast _Runtime.UNDEFINED;
     var transform:ColorTransformFunction = cast _Runtime.UNDEFINED;
-    lut = _Runtime.field(options, 'lut');
-    strength = _Runtime.coalesce(_Runtime.field(options, 'strength'), function():Dynamic return cast 1.0);
+    lut = (cast options : { @:optional var lut:Null<ColorLut>; @:optional var strength:Null<Float>; }).lut;
+    strength = _Runtime.coalesce((cast options : { @:optional var lut:Null<ColorLut>; @:optional var strength:Null<Float>; }).strength, function():Dynamic return cast 1.0);
     transform = function(out:Array<Float>, r:Float, g:Float, b:Float):Void {
       if ((cast ((cast _Runtime.strictEquals(lut, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast strength : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
         flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast r : Float));

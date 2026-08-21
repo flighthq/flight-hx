@@ -112,11 +112,11 @@ class SceneDocument {
 
   public static function applyDocumentSkins__sceneDocument(document:Scene3DDocument, nodes:Array<Node3D>):Void {
     var skins:Array<Null<Skin>> = cast _Runtime.UNDEFINED;
-    skins = (cast _Runtime.mapArray((cast document.skins : Array<Scene3DDocumentSkin>), function(skin:Scene3DDocumentSkin, __unused0:Float, __unused1:Array<Scene3DDocumentSkin>):{ var skeleton:{ >Entity, var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; }; var skeletonRoot:flighthq._internal._Any; } {
+    skins = (cast _Runtime.mapArray((cast document.skins : Array<Scene3DDocumentSkin>), function(skin:Scene3DDocumentSkin, __unused0:Float, __unused1:Array<Scene3DDocumentSkin>):{ var skeleton:{ >Entity, var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; var normalMatrices:flighthq._internal._Float32Array; }; var skeletonRoot:flighthq._internal._Any; } {
       var joints:Array<Node3D> = cast _Runtime.UNDEFINED;
       var names:Array<String> = cast _Runtime.UNDEFINED;
       var inverseBindMatrices:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-      var skeleton:{ >Entity, var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; } = cast _Runtime.UNDEFINED;
+      var skeleton:{ >Entity, var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; var normalMatrices:flighthq._internal._Float32Array; } = cast _Runtime.UNDEFINED;
       joints = (cast cast ([] : Array<Dynamic>));
       names = (cast cast ([] : Array<Dynamic>));
       {
@@ -138,7 +138,7 @@ class SceneDocument {
           j++;
         }
       }
-      skeleton = (cast createEntity(({ final __callArgument15:Dynamic = { inverseBindMatrices: inverseBindMatrices, jointMatrices: new flighthq._internal._Float32Array(_Runtime.multiplyNumbers(_Runtime.field(joints, 'length'), 16.0)), joints: joints, names: ((cast _Runtime.callProperty(names, 'some', cast ([function(name:String, __unused2:Float, __unused3:Array<String>):Bool return ((cast _Runtime.field(name, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>)) : Bool) ? (cast names : Dynamic) : (cast null : Dynamic)) }; __callArgument15; })) : { >Entity, var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; });
+      skeleton = (cast createEntity(({ final __callArgument15:Dynamic = { inverseBindMatrices: inverseBindMatrices, jointMatrices: new flighthq._internal._Float32Array(_Runtime.multiplyNumbers(_Runtime.field(joints, 'length'), 16.0)), joints: joints, names: ((cast _Runtime.callProperty(names, 'some', cast ([function(name:String, __unused2:Float, __unused3:Array<String>):Bool return ((cast _Runtime.field(name, 'length') : Float) > (cast 0.0 : Float))] : Array<Dynamic>)) : Bool) ? (cast names : Dynamic) : (cast null : Dynamic)), normalMatrices: new flighthq._internal._Float32Array(_Runtime.multiplyNumbers(_Runtime.field(joints, 'length'), 12.0)) }; __callArgument15; })) : { >Entity, var inverseBindMatrices:flighthq._internal._Float32Array; var jointMatrices:flighthq._internal._Float32Array; var joints:Array<Node3D>; var names:Null<Array<String>>; var normalMatrices:flighthq._internal._Float32Array; });
       return cast { skeleton: skeleton, skeletonRoot: null };
       return cast _Runtime.UNDEFINED;
     }, _Runtime.UNDEFINED));

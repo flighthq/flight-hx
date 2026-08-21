@@ -32,7 +32,6 @@ class InterpolationAdvanced {
   public static function pingPong(t:Float, length:Float):Float {
     var cycle:Float = cast _Runtime.UNDEFINED;
     var mod:Float = cast _Runtime.UNDEFINED;
-    if ((cast ((cast length : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
     cycle = (2.0 * length);
     mod = _Runtime.fmod((_Runtime.fmod(t, cycle) + cycle), cycle);
     return cast ((cast ((cast mod : Float) <= (cast length : Float)) : Bool) ? (cast mod : Dynamic) : (cast (cycle - mod) : Dynamic));
@@ -40,7 +39,6 @@ class InterpolationAdvanced {
   }
 
   public static function repeat(t:Float, length:Float):Float {
-    if ((cast ((cast length : Float) <= (cast 0.0 : Float)) : Bool)) { return cast 0.0; }
     return cast _Runtime.fmod((_Runtime.fmod(t, length) + length), length);
     return cast null;
   }

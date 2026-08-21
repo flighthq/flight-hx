@@ -8,10 +8,40 @@ import flighthq.compression.Decompressor.getDecompressor;
 import flighthq.types.AlphaType;
 import flighthq.types.Bitmap;
 import flighthq.types.Compression;
+import flighthq.types.Compression.CompressionFraming;
 import flighthq.types.Compression.Decompressor;
+import flighthq.types.DecodedImage;
+import flighthq.types.SwfDocumentImport.SwfJpegAlphaPayload;
+import flighthq.types._internal._CompressionValues.CompressionFramingValue;
 import flighthq.types._internal._CompressionValues.CompressionValue;
 
 class SwfBitmap {
+  @:noCompletion
+  public static function createSwfJpegAlphaBitmap(decoded:DecodedImage, payload:SwfJpegAlphaPayload):Null<Bitmap> {
+    var pixelCount:Float = cast _Runtime.UNDEFINED;
+    var decompress:Null<Decompressor> = cast _Runtime.UNDEFINED;
+    var alpha:Null<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
+    var bitmap:Bitmap = cast _Runtime.UNDEFINED;
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.field(decoded, 'width'), _Runtime.field(payload, 'width')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(decoded, 'height'), _Runtime.field(payload, 'height')) : Bool)) : Bool)) { return cast null; }
+    pixelCount = _Runtime.multiplyNumbers(_Runtime.field(payload, 'width'), _Runtime.field(payload, 'height'));
+    if ((cast ((cast ((cast ((cast pixelCount : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast pixelCount : Float) > (cast SwfBitmap.MAX_PIXELS__swfBitmap : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(decoded, 'data'), 'length'), (pixelCount * 4.0)) : Bool)) : Bool)) { return cast null; }
+    decompress = (cast getDecompressor(({ final __callArgument0:Dynamic = (cast CompressionValue : { var Brotli:String; var Deflate:String; var Lzma:String; }).Deflate; __callArgument0; })) : Null<Decompressor>);
+    if ((cast _Runtime.strictEquals(decompress, null) : Bool)) { return cast null; }
+    alpha = (cast decompress(_Runtime.field(payload, 'compressedAlphaBytes'), (cast pixelCount : Float), ({ final __callArgument1:Dynamic = (cast CompressionFramingValue : { var Raw:String; var Rfc1950:String; }).Rfc1950; __callArgument1; })) : Null<flighthq._internal._UInt8Array>);
+    if ((cast ((cast _Runtime.strictEquals(alpha, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(alpha, 'length'), pixelCount) : Bool)) : Bool)) { return cast null; }
+    bitmap = (cast createBitmap((cast _Runtime.field(payload, 'width') : Float), (cast _Runtime.field(payload, 'height') : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Bitmap);
+    (cast bitmap.data : flighthq._internal._UInt8ClampedArray).set(_Runtime.field(decoded, 'data'));
+    {
+      var pixel:Float = 0.0;
+      while ((cast ((cast pixel : Float) < (cast pixelCount : Float)) : Bool)) {
+        flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast bitmap.data : flighthq._internal._UInt8ClampedArray), (cast ((pixel * 4.0) + 3.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast alpha : flighthq._internal._UInt8Array), (cast pixel : Float)) : Float));
+        pixel++;
+      }
+    }
+    return cast bitmap;
+    return cast null;
+  }
+
   public static function createSwfLosslessBitmap(payload:flighthq._internal._UInt8Array, hasAlpha:Bool):Null<Bitmap> {
     var source:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     var format:Float = cast _Runtime.UNDEFINED;
@@ -20,6 +50,7 @@ class SwfBitmap {
     var hasColorTable:Bool = cast _Runtime.UNDEFINED;
     var colorCount:Float = cast _Runtime.UNDEFINED;
     var compressed:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var uncompressedLength:Float = cast _Runtime.UNDEFINED;
     var decompress:Null<Decompressor> = cast _Runtime.UNDEFINED;
     var pixels:Null<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
     var bitmap:Bitmap = cast _Runtime.UNDEFINED;
@@ -33,12 +64,13 @@ class SwfBitmap {
     hasColorTable = _Runtime.strictEquals(format, SwfBitmap.FORMAT_COLOR_MAPPED__swfBitmap);
     colorCount = ((cast hasColorTable : Bool) ? (cast (flighthq._internal._StaticIndex.readUint8ArrayTyped((cast source : flighthq._internal._UInt8Array), (cast 5.0 : Float)) + 1.0) : Dynamic) : (cast 0.0 : Dynamic));
     compressed = (cast source : flighthq._internal._UInt8Array).subarray(Std.int(_Runtime.addNumbers(SwfBitmap.LOSSLESS_HEADER_BYTES__swfBitmap, ((cast hasColorTable : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)))));
-    decompress = (cast getDecompressor(({ final __callArgument0:Dynamic = (cast CompressionValue : { var Deflate:String; var Lzma:String; }).Deflate; __callArgument0; })) : Null<Decompressor>);
+    uncompressedLength = ((cast hasColorTable : Bool) ? (cast (_Runtime.multiplyNumbers(colorCount, ((cast hasAlpha : Bool) ? (cast 4.0 : Dynamic) : (cast 3.0 : Dynamic))) + ((cast SwfBitmap.alignSwfRow__swfBitmap((cast width : Float)) : Float) * height)) : Dynamic) : (cast ((cast _Runtime.strictEquals(format, SwfBitmap.FORMAT_15_BIT__swfBitmap) : Bool) ? (cast ((cast SwfBitmap.alignSwfRow__swfBitmap((cast (width * 2.0) : Float)) : Float) * height) : Dynamic) : (cast ((width * 4.0) * height) : Dynamic)) : Dynamic));
+    decompress = (cast getDecompressor(({ final __callArgument2:Dynamic = (cast CompressionValue : { var Brotli:String; var Deflate:String; var Lzma:String; }).Deflate; __callArgument2; })) : Null<Decompressor>);
     if ((cast _Runtime.strictEquals(decompress, null) : Bool)) { return cast null; }
-    pixels = (cast decompress(({ final __callArgument1:Dynamic = compressed; __callArgument1; }), (cast 0.0 : Float)) : Null<flighthq._internal._UInt8Array>);
-    if ((cast _Runtime.strictEquals(pixels, null) : Bool)) { return cast null; }
+    pixels = (cast decompress(({ final __callArgument3:Dynamic = compressed; __callArgument3; }), (cast uncompressedLength : Float), ({ final __callArgument4:Dynamic = (cast CompressionFramingValue : { var Raw:String; var Rfc1950:String; }).Rfc1950; __callArgument4; })) : Null<flighthq._internal._UInt8Array>);
+    if ((cast ((cast _Runtime.strictEquals(pixels, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(pixels, 'length'), uncompressedLength) : Bool)) : Bool)) { return cast null; }
     bitmap = (cast createBitmap((cast width : Float), (cast height : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Bitmap);
-    unpacked = ((cast hasColorTable : Bool) ? (cast (cast SwfBitmap.unpackSwfColorMapped__swfBitmap(({ final __callArgument2:Dynamic = bitmap; __callArgument2; }), ({ final __callArgument3:Dynamic = pixels; __callArgument3; }), (cast width : Float), (cast height : Float), (cast colorCount : Float), (cast hasAlpha : Bool)) : Bool) : Dynamic) : (cast ((cast _Runtime.strictEquals(format, SwfBitmap.FORMAT_15_BIT__swfBitmap) : Bool) ? (cast (cast SwfBitmap.unpackSwf15Bit__swfBitmap(({ final __callArgument4:Dynamic = bitmap; __callArgument4; }), ({ final __callArgument5:Dynamic = pixels; __callArgument5; }), (cast width : Float), (cast height : Float)) : Bool) : Dynamic) : (cast (cast SwfBitmap.unpackSwf24Bit__swfBitmap(({ final __callArgument6:Dynamic = bitmap; __callArgument6; }), ({ final __callArgument7:Dynamic = pixels; __callArgument7; }), (cast width : Float), (cast height : Float), (cast hasAlpha : Bool)) : Bool) : Dynamic)) : Dynamic));
+    unpacked = ((cast hasColorTable : Bool) ? (cast (cast SwfBitmap.unpackSwfColorMapped__swfBitmap(({ final __callArgument5:Dynamic = bitmap; __callArgument5; }), ({ final __callArgument6:Dynamic = pixels; __callArgument6; }), (cast width : Float), (cast height : Float), (cast colorCount : Float), (cast hasAlpha : Bool)) : Bool) : Dynamic) : (cast ((cast _Runtime.strictEquals(format, SwfBitmap.FORMAT_15_BIT__swfBitmap) : Bool) ? (cast (cast SwfBitmap.unpackSwf15Bit__swfBitmap(({ final __callArgument7:Dynamic = bitmap; __callArgument7; }), ({ final __callArgument8:Dynamic = pixels; __callArgument8; }), (cast width : Float), (cast height : Float)) : Bool) : Dynamic) : (cast (cast SwfBitmap.unpackSwf24Bit__swfBitmap(({ final __callArgument9:Dynamic = bitmap; __callArgument9; }), ({ final __callArgument10:Dynamic = pixels; __callArgument10; }), (cast width : Float), (cast height : Float), (cast hasAlpha : Bool)) : Bool) : Dynamic)) : Dynamic));
     if ((cast !(cast unpacked : Bool) : Bool)) { return cast null; }
     (bitmap.alphaType = cast (((cast hasAlpha : Bool) ? (cast 'premultiplied' : Dynamic) : (cast 'opaque' : Dynamic)) : AlphaType));
     return cast bitmap;

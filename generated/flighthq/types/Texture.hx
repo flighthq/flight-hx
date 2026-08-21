@@ -16,6 +16,6 @@ typedef Texture2D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var
 
 typedef Texture = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { >TextureCommon__Texture, var dimension:String; var sources:Array<Null<TextureSource>>; }>, { >TextureCommon__Texture, var dimension:String; var source:Null<VoxelGrid>; }>, { >TextureCommon__Texture, var dimension:String; var sources:TextureSourceCubeFaces; }>;
 
-typedef TextureLikeFrom__Texture<Type> = flighthq._internal._Conditional<Type, flighthq.types.Texture, EntityWithoutRuntime<Type>, flighthq._internal._Any>;
+typedef TextureLikeFrom__Texture<Type> = flighthq._internal._Conditional<Type, flighthq.types.Texture, { var dimension:String; var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }, flighthq._internal._Any>;
 
 typedef TextureLike = TextureLikeFrom__Texture<flighthq.types.Texture>;

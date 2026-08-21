@@ -11,7 +11,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class BlurEffect {
-  public static function createBlurEffect(?options:flighthq._internal._Omit<flighthq.types.BlurEffect, String>):flighthq.types.BlurEffect {
+  public static function createBlurEffect(?options:{ @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }):flighthq.types.BlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'BlurEffect' }, options]);
     return cast null;

@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.StandardMaterial;
 import flighthq.types.StandardMaterial.StandardMaterialKind;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
 class StandardMaterial {
-  public static function createStandardMaterial(?options:flighthq._internal._Partial<flighthq.types.StandardMaterial>):flighthq.types.StandardMaterial {
+  public static function createStandardMaterial(?options:{ @:optional var kind:Null<StandardMaterialKind>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):flighthq.types.StandardMaterial {
     return cast (cast createEntity(({ final __callArgument1:Dynamic = { kind: StandardMaterialKindValue, name: _Runtime.coalesce(({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var name:Null<String>; }).name; }), function():Dynamic return cast null) }; __callArgument1; })) : { >Entity, var kind:String; var name:Null<String>; });
     return cast null;
   }

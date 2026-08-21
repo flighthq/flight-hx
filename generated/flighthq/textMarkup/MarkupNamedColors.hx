@@ -3,6 +3,7 @@ package flighthq.textMarkup;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.color.PackColor.packOpaqueColor;
 import flighthq.textMarkup.MarkupTagRegistry.resolveMarkupHexColor;
 import flighthq.types.MarkupColorResolver;
 import flighthq.types.MarkupTagRegistry;
@@ -18,7 +19,7 @@ class MarkupNamedColors {
     hex = (cast resolveMarkupHexColor((cast value : String)) : Null<Float>);
     if ((cast !_Runtime.strictEquals(hex, null) : Bool)) { return cast hex; }
     named = _Runtime.getIndex(MarkupNamedColors.markupNamedColors__markupNamedColors, _Runtime.callProperty(StringTools.trim(Std.string(value)), 'toLowerCase', cast ([] : Array<Dynamic>)));
-    return cast ((cast _Runtime.strictEquals(named, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast null : Dynamic) : (cast named : Dynamic));
+    return cast ((cast _Runtime.strictEquals(named, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast null : Dynamic) : (cast (cast packOpaqueColor((cast named : Float)) : Float) : Dynamic));
     return cast null;
   }
 

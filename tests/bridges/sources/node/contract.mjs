@@ -4,6 +4,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './boundsRectangle.mjs';
+export * from './enableNodeGuards.mjs';
 export * from './hasAppearance.mjs';
 export * from './hasBlendMode.mjs';
 export * from './hasBoundsRectangle.mjs';

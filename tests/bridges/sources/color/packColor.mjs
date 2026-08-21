@@ -6,6 +6,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const allocateLinearColor = api.allocateLinearColor;
+export const computeRgbaCssString = api.computeRgbaCssString;
 export const computeRgbHexString = api.computeRgbHexString;
 export const getColorAlpha = api.getColorAlpha;
 export const getColorRgb = api.getColorRgb;

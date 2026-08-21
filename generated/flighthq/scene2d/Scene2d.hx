@@ -36,6 +36,8 @@ import flighthq.types.Scene2DSignals;
 import flighthq.types.Signal;
 import flighthq.types.Sprite;
 import flighthq.types.Types.EntityRuntimeKey;
+import flighthq.types.ViewportAlign;
+import flighthq.types.ViewportScaleMode;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class Scene2d {
@@ -71,7 +73,7 @@ class Scene2d {
     return cast null;
   }
 
-  public static function createScene2D(?obj:flighthq._internal._Partial<flighthq._internal._Pick<Scene2D, String>>):Scene2D {
+  public static function createScene2D(?obj:flighthq._internal._Partial<{ var align:ViewportAlign; var color:Null<Float>; var scaleMode:ViewportScaleMode; var scene2dHeight:Float; var scene2dWidth:Float; }>):Scene2D {
     var root:DisplayObject = cast _Runtime.UNDEFINED;
     var scene2d:Scene2D = cast _Runtime.UNDEFINED;
     root = (cast createDisplayObject(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : DisplayObject);

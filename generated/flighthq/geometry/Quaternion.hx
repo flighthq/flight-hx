@@ -412,7 +412,7 @@ class Quaternion {
     var cx:Float = cast _Runtime.UNDEFINED;
     var cy:Float = cast _Runtime.UNDEFINED;
     var cz:Float = cast _Runtime.UNDEFINED;
-    var len:Float = cast _Runtime.UNDEFINED;
+    var inv:Float = cast _Runtime.UNDEFINED;
     fx = from.x;
     fy = from.y;
     fz = from.z;
@@ -453,14 +453,11 @@ class Quaternion {
     (out.y = cast (cy : Float));
     (out.z = cast (cz : Float));
     (out.w = cast ((1.0 + dot) : Float));
-    len = HxMath.sqrt(((((out.x * out.x) + (out.y * out.y)) + (out.z * out.z)) + (out.w * out.w)));
-    if ((cast !_Runtime.strictEquals(len, 0.0) : Bool)) {
-      var inv:Float = (1.0 / len);
-      (out.x *= inv);
-      (out.y *= inv);
-      (out.z *= inv);
-      (out.w *= inv);
-    }
+    inv = _Runtime.divideNumbers(1.0, HxMath.sqrt(((((out.x * out.x) + (out.y * out.y)) + (out.z * out.z)) + (out.w * out.w))));
+    (out.x *= inv);
+    (out.y *= inv);
+    (out.z *= inv);
+    (out.w *= inv);
   }
 
   public static function setQuaternionIdentity(out:QuaternionLike):Void {
@@ -486,13 +483,13 @@ class Quaternion {
     var cuy:Float = cast _Runtime.UNDEFINED;
     var cuz:Float = cast _Runtime.UNDEFINED;
     var m00:Float = cast _Runtime.UNDEFINED;
-    var m01:Float = cast _Runtime.UNDEFINED;
-    var m02:Float = cast _Runtime.UNDEFINED;
     var m10:Float = cast _Runtime.UNDEFINED;
-    var m11:Float = cast _Runtime.UNDEFINED;
-    var m12:Float = cast _Runtime.UNDEFINED;
     var m20:Float = cast _Runtime.UNDEFINED;
+    var m01:Float = cast _Runtime.UNDEFINED;
+    var m11:Float = cast _Runtime.UNDEFINED;
     var m21:Float = cast _Runtime.UNDEFINED;
+    var m02:Float = cast _Runtime.UNDEFINED;
+    var m12:Float = cast _Runtime.UNDEFINED;
     var m22:Float = cast _Runtime.UNDEFINED;
     var trace:Float = cast _Runtime.UNDEFINED;
     fx = forward.x;
@@ -501,13 +498,25 @@ class Quaternion {
     ux = up.x;
     uy = up.y;
     uz = up.z;
+    if ((cast ((cast ((cast _Runtime.strictEquals(fx, 0.0) : Bool) && (cast _Runtime.strictEquals(fy, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(fz, 0.0) : Bool)) : Bool)) {
+      setQuaternionIdentity(({ final __callArgument8:Dynamic = out; __callArgument8; }));
+      return;
+    }
     rx = ((uy * fz) - (uz * fy));
     ry = ((uz * fx) - (ux * fz));
     rz = ((ux * fy) - (uy * fx));
     rLen = HxMath.sqrt((((rx * rx) + (ry * ry)) + (rz * rz)));
     if ((cast _Runtime.strictEquals(rLen, 0.0) : Bool)) {
-      setQuaternionIdentity(({ final __callArgument8:Dynamic = out; __callArgument8; }));
-      return;
+      if ((cast ((cast HxMath.abs(fz) : Float) < (cast 0.9 : Float)) : Bool)) {
+        (rx = cast (-fy : Dynamic));
+        (ry = cast (fx : Dynamic));
+        (rz = cast (0.0 : Dynamic));
+      } else {
+        (rx = cast (0.0 : Dynamic));
+        (ry = cast (-fz : Dynamic));
+        (rz = cast (fy : Dynamic));
+      }
+      (rLen = cast (HxMath.sqrt((((rx * rx) + (ry * ry)) + (rz * rz))) : Dynamic));
     }
     rInv = (1.0 / rLen);
     (rx = cast ((rx * rInv) : Dynamic));
@@ -517,13 +526,13 @@ class Quaternion {
     cuy = ((fz * rx) - (fx * rz));
     cuz = ((fx * ry) - (fy * rx));
     m00 = rx;
-    m01 = cux;
-    m02 = fx;
-    m10 = ry;
+    m10 = cux;
+    m20 = fx;
+    m01 = ry;
     m11 = cuy;
-    m12 = fy;
-    m20 = rz;
-    m21 = cuz;
+    m21 = fy;
+    m02 = rz;
+    m12 = cuz;
     m22 = fz;
     trace = ((m00 + m11) + m22);
     if ((cast ((cast trace : Float) > (cast 0.0 : Float)) : Bool)) {

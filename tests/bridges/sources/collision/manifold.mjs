@@ -5,5 +5,5 @@ const api = compiled.flighthq.collision.Manifold;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const clearCollisionManifold = api.clearCollisionManifold;
-export const createCollisionManifold = api.createCollisionManifold;
+export const clearCollisionManifold2D = api.clearCollisionManifold2D;
+export const createCollisionManifold2D = api.createCollisionManifold2D;

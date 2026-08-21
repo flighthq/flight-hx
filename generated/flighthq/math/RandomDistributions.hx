@@ -16,7 +16,9 @@ class RandomDistributions {
 
   public static function randomExponential(random:RandomSource, rate:Float = 1.0):Float {
     var u:Float = cast _Runtime.UNDEFINED;
-    if ((cast ((cast rate : Float) <= (cast 0.0 : Float)) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('randomExponential: rate must be > 0')); }
+    if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([rate] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast rate : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
+      _Runtime.throwValue(_Runtime.rangeError('randomExponential: rate must be finite and > 0'));
+    }
     u = (cast random() : Float);
     return cast _Runtime.divideNumbers(-HxMath.log(((cast _Runtime.strictEquals(u, 0.0) : Bool) ? (cast _Runtime.NUMBER_EPSILON : Dynamic) : (cast u : Dynamic))), rate);
     return cast null;
@@ -112,7 +114,9 @@ class RandomDistributions {
     var limit:Float = cast _Runtime.UNDEFINED;
     var k:Float = cast _Runtime.UNDEFINED;
     var product:Float = cast _Runtime.UNDEFINED;
-    if ((cast ((cast lambda : Float) <= (cast 0.0 : Float)) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('randomPoisson: lambda must be > 0')); }
+    if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([lambda] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast lambda : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
+      _Runtime.throwValue(_Runtime.rangeError('randomPoisson: lambda must be finite and > 0'));
+    }
     limit = HxMath.exp(-lambda);
     k = 0.0;
     product = (cast random() : Float);

@@ -3,21 +3,27 @@ package flighthq.skeleton2dFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.registry.RegistryTable.createKeyedTable;
+import flighthq.registry.RegistryTable.getRegistryTableEntry;
+import flighthq.registry.RegistryTable.getRegistryTableKeys;
+import flighthq.registry.RegistryTable.withRegistryTableEntry;
+import flighthq.registry.RegistryTable.withoutRegistryTableEntry;
 import flighthq.skeleton2dFormats.DragonBonesParse.parseDragonBonesSkeleton;
 import flighthq.skeleton2dFormats.SpineParse.parseSpineSkeleton;
 import flighthq.types.ImportDiagnostic;
+import flighthq.types.RegistryTable.KeyedTable;
 import flighthq.types.Skeleton2DImport;
 
 typedef SkeletonFormatEntry__skeletonDetect = { var detect:String->Bool; var parse:String->Array<ImportDiagnostic>->Null<Skeleton2DImport>; };
 
-class SkeletonDetect {
-  public static var _registry__skeletonDetect:Null<flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect>> = _Runtime.explicitNull();
+typedef RegisteredSkeletonFormat__skeletonDetect = { var entry:SkeletonFormatEntry__skeletonDetect; var order:Float; };
 
-  public static function getRegistry__skeletonDetect():flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect> {
+class SkeletonDetect {
+  public static function getRegistry__skeletonDetect():KeyedTable<RegisteredSkeletonFormat__skeletonDetect> {
     if ((cast !_Runtime.strictEquals(SkeletonDetect._registry__skeletonDetect, null) : Bool)) { return cast SkeletonDetect._registry__skeletonDetect; }
-    (SkeletonDetect._registry__skeletonDetect = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-    ((cast SkeletonDetect._registry__skeletonDetect : flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect>).set('Spine', (cast { detect: SkeletonDetect.detectSpine__skeletonDetect, parse: function(text:String, diagnostics:Null<Array<ImportDiagnostic>>):Null<Skeleton2DImport> return (cast parseSpineSkeleton((cast text : String), ({ final __callArgument0:Dynamic = diagnostics; __callArgument0; })) : Null<Skeleton2DImport>) })));
-    ((cast SkeletonDetect._registry__skeletonDetect : flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect>).set('DragonBones', (cast { detect: SkeletonDetect.detectDragonBones__skeletonDetect, parse: function(text:String, diagnostics:Null<Array<ImportDiagnostic>>):Null<Skeleton2DImport> return (cast parseDragonBonesSkeleton((cast text : String), ({ final __callArgument1:Dynamic = diagnostics; __callArgument1; })) : Null<Skeleton2DImport>) })));
+    (SkeletonDetect._registry__skeletonDetect = cast ((cast createKeyedTable((cast 'Skeleton2DFormat' : String), (cast 'Unclaimed' : String)) : KeyedTable<RegisteredSkeletonFormat__skeletonDetect>) : Dynamic));
+    SkeletonDetect.bindSkeleton2DFormat__skeletonDetect((cast 'Spine' : String), ({ final __callArgument0:Dynamic = SkeletonDetect.detectSpine__skeletonDetect; __callArgument0; }), ({ final __callArgument2:Dynamic = function(text:String, diagnostics:Null<Array<ImportDiagnostic>>):Null<Skeleton2DImport> return (cast parseSpineSkeleton((cast text : String), ({ final __callArgument1:Dynamic = diagnostics; __callArgument1; })) : Null<Skeleton2DImport>); __callArgument2; }));
+    SkeletonDetect.bindSkeleton2DFormat__skeletonDetect((cast 'DragonBones' : String), ({ final __callArgument3:Dynamic = SkeletonDetect.detectDragonBones__skeletonDetect; __callArgument3; }), ({ final __callArgument5:Dynamic = function(text:String, diagnostics:Null<Array<ImportDiagnostic>>):Null<Skeleton2DImport> return (cast parseDragonBonesSkeleton((cast text : String), ({ final __callArgument4:Dynamic = diagnostics; __callArgument4; })) : Null<Skeleton2DImport>); __callArgument5; }));
     return cast SkeletonDetect._registry__skeletonDetect;
     return cast null;
   }
@@ -34,19 +40,51 @@ class SkeletonDetect {
     return cast null;
   }
 
+  public static function getSkeleton2DFormatKinds():Array<String> {
+    var kinds:Array<String> = cast _Runtime.UNDEFINED;
+    kinds = (cast cast ([] : Array<Dynamic>));
+    getRegistryTableKeys(({ final __callArgument6:Dynamic = kinds; __callArgument6; }), (cast (cast SkeletonDetect.getRegistry__skeletonDetect() : KeyedTable<RegisteredSkeletonFormat__skeletonDetect>) : Dynamic));
+    return cast kinds;
+    return cast null;
+  }
+
   public static function parseSkeleton2D(text:String, ?diagnostics:Array<ImportDiagnostic>):Null<Skeleton2DImport> {
-    for (entry in _Runtime.iterable(((cast (cast SkeletonDetect.getRegistry__skeletonDetect() : flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect>) : flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect>).values()))) {
-      if ((cast (cast entry : SkeletonFormatEntry__skeletonDetect).detect((cast text : String)) : Bool)) { return cast (cast entry : SkeletonFormatEntry__skeletonDetect).parse((cast text : String), ({ final __callArgument4:Dynamic = diagnostics; __callArgument4; })); }
+    for (registered in _Runtime.iterable((cast SkeletonDetect.getSkeleton2DFormatsInDetectionOrder__skeletonDetect() : Array<RegisteredSkeletonFormat__skeletonDetect>))) {
+      if ((cast (cast (cast registered : RegisteredSkeletonFormat__skeletonDetect).entry : SkeletonFormatEntry__skeletonDetect).detect((cast text : String)) : Bool)) { return cast (cast (cast registered : RegisteredSkeletonFormat__skeletonDetect).entry : SkeletonFormatEntry__skeletonDetect).parse((cast text : String), ({ final __callArgument9:Dynamic = diagnostics; __callArgument9; })); }
     }
     return cast null;
     return cast null;
   }
 
   public static function registerSkeleton2DFormat(kind:String, detect:String->Bool, parse:String->Array<ImportDiagnostic>->Null<Skeleton2DImport>):Void {
-    ((cast (cast SkeletonDetect.getRegistry__skeletonDetect() : flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect>) : flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect>).set(kind, (cast { detect: detect, parse: parse })));
+    SkeletonDetect.bindSkeleton2DFormat__skeletonDetect((cast kind : String), ({ final __callArgument10:Dynamic = detect; __callArgument10; }), ({ final __callArgument11:Dynamic = parse; __callArgument11; }));
   }
 
   public static function unregisterSkeleton2DFormat(kind:String):Void {
-    ((cast (cast SkeletonDetect.getRegistry__skeletonDetect() : flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect>) : flighthq._internal._Map<String, SkeletonFormatEntry__skeletonDetect>).delete_(kind));
+    (SkeletonDetect._registry__skeletonDetect = cast ((cast withoutRegistryTableEntry((cast (cast SkeletonDetect.getRegistry__skeletonDetect() : KeyedTable<RegisteredSkeletonFormat__skeletonDetect>) : Dynamic), (cast kind : String)) : KeyedTable<RegisteredSkeletonFormat__skeletonDetect>) : Dynamic));
   }
+
+  public static function bindSkeleton2DFormat__skeletonDetect(kind:String, detect:String->Bool, parse:String->Array<ImportDiagnostic>->Null<Skeleton2DImport>):Void {
+    var registry:KeyedTable<RegisteredSkeletonFormat__skeletonDetect> = cast _Runtime.UNDEFINED;
+    var current:Null<RegisteredSkeletonFormat__skeletonDetect> = cast _Runtime.UNDEFINED;
+    registry = (cast SkeletonDetect.getRegistry__skeletonDetect() : KeyedTable<RegisteredSkeletonFormat__skeletonDetect>);
+    current = (cast getRegistryTableEntry((cast registry : Dynamic), (cast kind : String)) : Null<RegisteredSkeletonFormat__skeletonDetect>);
+    (SkeletonDetect._registry__skeletonDetect = cast ((cast (cast withRegistryTableEntry : KeyedTable<{ var entry:{ var detect:String->Bool; var parse:String->Null<Array<ImportDiagnostic>>->Null<Skeleton2DImport>; }; var order:Float; }>->String->{ var entry:{ var detect:String->Bool; var parse:String->Null<Array<ImportDiagnostic>>->Null<Skeleton2DImport>; }; var order:Float; }->KeyedTable<{ var entry:{ var detect:String->Bool; var parse:String->Null<Array<ImportDiagnostic>>->Null<Skeleton2DImport>; }; var order:Float; }>)(({ final __callArgument12:Dynamic = registry; __callArgument12; }), (cast kind : String), ({ final __callArgument14:Dynamic = { entry: { detect: detect, parse: parse }, order: _Runtime.coalesce(({ final __structural13 = current; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { var order:Float; }).order; }), function():Dynamic return cast SkeletonDetect._nextFormatOrder__skeletonDetect++) }; __callArgument14; })) : KeyedTable<{ var entry:{ var detect:String->Bool; var parse:String->Null<Array<ImportDiagnostic>>->Null<Skeleton2DImport>; }; var order:Float; }>) : Dynamic));
+  }
+
+  public static function getSkeleton2DFormatsInDetectionOrder__skeletonDetect():Array<RegisteredSkeletonFormat__skeletonDetect> {
+    var formats:Array<RegisteredSkeletonFormat__skeletonDetect> = cast _Runtime.UNDEFINED;
+    formats = (cast cast ([] : Array<Dynamic>));
+    for (kind in _Runtime.iterable((cast getSkeleton2DFormatKinds() : Array<String>))) {
+      var registered:Null<RegisteredSkeletonFormat__skeletonDetect> = (cast getRegistryTableEntry((cast (cast SkeletonDetect.getRegistry__skeletonDetect() : KeyedTable<RegisteredSkeletonFormat__skeletonDetect>) : Dynamic), (cast kind : String)) : Null<RegisteredSkeletonFormat__skeletonDetect>);
+      if ((cast !_Runtime.strictEquals(registered, null) : Bool)) { _Runtime.callProperty(formats, 'push', cast ([registered] : Array<Dynamic>)); }
+    }
+    _Runtime.sortAndReturn(formats, function(a:RegisteredSkeletonFormat__skeletonDetect, b:RegisteredSkeletonFormat__skeletonDetect) return ((cast a : RegisteredSkeletonFormat__skeletonDetect).order - (cast b : RegisteredSkeletonFormat__skeletonDetect).order));
+    return cast formats;
+    return cast null;
+  }
+
+  public static var _registry__skeletonDetect:Null<KeyedTable<RegisteredSkeletonFormat__skeletonDetect>> = _Runtime.explicitNull();
+
+  public static var _nextFormatOrder__skeletonDetect:Float = 0.0;
 }

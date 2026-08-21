@@ -38,17 +38,25 @@ class _WgpuTestHelper {
     return cast null;
   }
 
-  public static function makeBuffer__wgpuTestHelper():flighthq._internal.dom.GPUBuffer {
+  public static function makeBuffer__wgpuTestHelper(descriptor:flighthq._internal.dom.GPUBufferDescriptor):flighthq._internal.dom.GPUBuffer {
     return cast (cast (cast { destroy: function():Void {
 
-    } } : flighthq._internal._Any) : flighthq._internal.dom.GPUBuffer);
+    }, size: descriptor.size, usage: descriptor.usage } : flighthq._internal._Any) : flighthq._internal.dom.GPUBuffer);
     return cast null;
   }
 
-  public static function makeTexture__wgpuTestHelper():flighthq._internal.dom.GPUTexture {
-    return cast (cast (cast { createView: function():flighthq._internal.dom.GPUTextureView return (cast {  } : flighthq._internal.dom.GPUTextureView), destroy: function():Void {
+  public static function makeTexture__wgpuTestHelper(?descriptor:flighthq._internal.dom.GPUTextureDescriptor):flighthq._internal.dom.GPUTexture {
+    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    var depthOrArrayLayers:Float = cast _Runtime.UNDEFINED;
+    __destructure0 = (cast _WgpuTestHelper.normalizeGpuExtent3D__wgpuTestHelper((cast _Runtime.coalesce(({ final __hostType0 = descriptor; __hostType0 == null ? _Runtime.UNDEFINED : __hostType0.size; }), function():Dynamic return cast cast ([1.0, 1.0, 1.0] : Array<Dynamic>)) : flighthq._internal._Any)) : Array<Float>);
+    width = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
+    height = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
+    depthOrArrayLayers = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
+    return cast (cast (cast { createView: function():flighthq._internal.dom.GPUTextureView return (cast {  } : flighthq._internal.dom.GPUTextureView), depthOrArrayLayers: depthOrArrayLayers, dimension: _Runtime.coalesce(({ final __hostType1 = descriptor; __hostType1 == null ? _Runtime.UNDEFINED : __hostType1.dimension; }), function():Dynamic return cast '2d'), destroy: function():Void {
 
-    } } : flighthq._internal._Any) : flighthq._internal.dom.GPUTexture);
+    }, format: _Runtime.coalesce(({ final __hostType2 = descriptor; __hostType2 == null ? _Runtime.UNDEFINED : __hostType2.format; }), function():Dynamic return cast 'bgra8unorm'), height: height, mipLevelCount: _Runtime.coalesce(({ final __hostType3 = descriptor; __hostType3 == null ? _Runtime.UNDEFINED : __hostType3.mipLevelCount; }), function():Dynamic return cast 1.0), sampleCount: _Runtime.coalesce(({ final __hostType4 = descriptor; __hostType4 == null ? _Runtime.UNDEFINED : __hostType4.sampleCount; }), function():Dynamic return cast 1.0), usage: _Runtime.coalesce(({ final __hostType5 = descriptor; __hostType5 == null ? _Runtime.UNDEFINED : __hostType5.usage; }), function():Dynamic return cast flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')), width: width } : flighthq._internal._Any) : flighthq._internal.dom.GPUTexture);
     return cast null;
   }
 
@@ -97,16 +105,118 @@ class _WgpuTestHelper {
   }
 
   public static function makeDevice__wgpuTestHelper():flighthq._internal.dom.GPUDevice {
-    return cast (cast (cast { features: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), limits: { maxTextureDimension2D: 8192.0, minUniformBufferOffsetAlignment: 256.0 }, createBindGroup: function():flighthq._internal.dom.GPUBindGroup return (cast _WgpuTestHelper.makeBindGroup__wgpuTestHelper() : flighthq._internal.dom.GPUBindGroup), createBindGroupLayout: function():flighthq._internal.dom.GPUBindGroupLayout return (cast _WgpuTestHelper.makeBindGroupLayout__wgpuTestHelper() : flighthq._internal.dom.GPUBindGroupLayout), createBuffer: function():flighthq._internal.dom.GPUBuffer return (cast _WgpuTestHelper.makeBuffer__wgpuTestHelper() : flighthq._internal.dom.GPUBuffer), createCommandEncoder: function():flighthq._internal.dom.GPUCommandEncoder return (cast _WgpuTestHelper.makeCommandEncoder__wgpuTestHelper() : flighthq._internal.dom.GPUCommandEncoder), createPipelineLayout: function():flighthq._internal.dom.GPUPipelineLayout return (cast _WgpuTestHelper.makePipelineLayout__wgpuTestHelper() : flighthq._internal.dom.GPUPipelineLayout), createRenderPipeline: function(descriptor:flighthq._internal.dom.GPURenderPipelineDescriptor):flighthq._internal.dom.GPURenderPipeline return (cast _WgpuTestHelper.makePipeline__wgpuTestHelper(({ final __callArgument0:Dynamic = descriptor; __callArgument0; })) : flighthq._internal.dom.GPURenderPipeline), createSampler: function():flighthq._internal.dom.GPUSampler return (cast _WgpuTestHelper.makeSampler__wgpuTestHelper() : flighthq._internal.dom.GPUSampler), createShaderModule: function():flighthq._internal.dom.GPUShaderModule return (cast _WgpuTestHelper.makeShaderModule__wgpuTestHelper() : flighthq._internal.dom.GPUShaderModule), createTexture: function():flighthq._internal.dom.GPUTexture return (cast _WgpuTestHelper.makeTexture__wgpuTestHelper() : flighthq._internal.dom.GPUTexture), queue: { copyExternalImageToTexture: function():Void {
+    var writeBuffer:flighthq._internal.dom.GPUBuffer->Float->flighthq._internal._Any->Null<Float>->Null<Float>->Void = cast _Runtime.UNDEFINED;
+    var writeTexture:flighthq._internal.dom.GPUTexelCopyTextureInfo->flighthq._internal._Any->flighthq._internal.dom.GPUTexelCopyBufferLayout->flighthq._internal._Any->Void = cast _Runtime.UNDEFINED;
+    writeBuffer = (cast function(buffer:flighthq._internal.dom.GPUBuffer, bufferOffset:Float, data:flighthq._internal._Any, ?dataOffset:Float, ?size:Float):Void {
+      _WgpuTestHelper.validateWriteBufferDestination__wgpuTestHelper(({ final __callArgument6:Dynamic = buffer; __callArgument6; }), (cast bufferOffset : Float), (cast data : flighthq._internal._Any), #if js (cast dataOffset : Float) #else (cast dataOffset : Null<Float>) #end, ({ final __callArgument7:Dynamic = size; __callArgument7; }));
+    });
+    writeTexture = (cast function(destination:flighthq._internal.dom.GPUTexelCopyTextureInfo, data:flighthq._internal.dom.GPUAllowSharedBufferSource, dataLayout:flighthq._internal.dom.GPUTexelCopyBufferLayout, size:flighthq._internal.dom.GPUExtent3D):Void {
+      _WgpuTestHelper.validateWriteTextureSourceAllocation__wgpuTestHelper(({ final __callArgument8:Dynamic = destination; __callArgument8; }), (cast data : flighthq._internal._Any), ({ final __callArgument9:Dynamic = dataLayout; __callArgument9; }), (cast size : flighthq._internal._Any));
+    });
+    return cast (cast (cast { features: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), limits: { maxTextureDimension2D: 8192.0, minUniformBufferOffsetAlignment: 256.0 }, createBindGroup: function():flighthq._internal.dom.GPUBindGroup return (cast _WgpuTestHelper.makeBindGroup__wgpuTestHelper() : flighthq._internal.dom.GPUBindGroup), createBindGroupLayout: function():flighthq._internal.dom.GPUBindGroupLayout return (cast _WgpuTestHelper.makeBindGroupLayout__wgpuTestHelper() : flighthq._internal.dom.GPUBindGroupLayout), createBuffer: function(descriptor:flighthq._internal.dom.GPUBufferDescriptor):flighthq._internal.dom.GPUBuffer return (cast _WgpuTestHelper.makeBuffer__wgpuTestHelper(({ final __callArgument10:Dynamic = descriptor; __callArgument10; })) : flighthq._internal.dom.GPUBuffer), createCommandEncoder: function():flighthq._internal.dom.GPUCommandEncoder return (cast _WgpuTestHelper.makeCommandEncoder__wgpuTestHelper() : flighthq._internal.dom.GPUCommandEncoder), createPipelineLayout: function():flighthq._internal.dom.GPUPipelineLayout return (cast _WgpuTestHelper.makePipelineLayout__wgpuTestHelper() : flighthq._internal.dom.GPUPipelineLayout), createRenderPipeline: function(descriptor:flighthq._internal.dom.GPURenderPipelineDescriptor):flighthq._internal.dom.GPURenderPipeline return (cast _WgpuTestHelper.makePipeline__wgpuTestHelper(({ final __callArgument11:Dynamic = descriptor; __callArgument11; })) : flighthq._internal.dom.GPURenderPipeline), createSampler: function():flighthq._internal.dom.GPUSampler return (cast _WgpuTestHelper.makeSampler__wgpuTestHelper() : flighthq._internal.dom.GPUSampler), createShaderModule: function():flighthq._internal.dom.GPUShaderModule return (cast _WgpuTestHelper.makeShaderModule__wgpuTestHelper() : flighthq._internal.dom.GPUShaderModule), createTexture: function(descriptor:flighthq._internal.dom.GPUTextureDescriptor):flighthq._internal.dom.GPUTexture return (cast _WgpuTestHelper.makeTexture__wgpuTestHelper(({ final __callArgument12:Dynamic = descriptor; __callArgument12; })) : flighthq._internal.dom.GPUTexture), queue: { copyExternalImageToTexture: function():Void {
 
     }, submit: function():Void {
 
-    }, writeBuffer: function():Void {
-
-    }, writeTexture: function():Void {
-
-    } } } : flighthq._internal._Any) : flighthq._internal.dom.GPUDevice);
+    }, writeBuffer: writeBuffer, writeTexture: writeTexture } } : flighthq._internal._Any) : flighthq._internal.dom.GPUDevice);
     return cast null;
+  }
+
+  public static function validateWriteBufferDestination__wgpuTestHelper(buffer:flighthq._internal.dom.GPUBuffer, bufferOffset:Float, data:flighthq._internal._Any, dataOffset:Float = 0.0, ?size:Float):Void {
+    var isArrayBuffer:Bool = cast _Runtime.UNDEFINED;
+    var isSharedArrayBuffer:Bool = cast _Runtime.UNDEFINED;
+    var isView:Bool = cast _Runtime.UNDEFINED;
+    var elementByteLength:Float = cast _Runtime.UNDEFINED;
+    var dataElementLength:Float = cast _Runtime.UNDEFINED;
+    var contentElementLength:Float = cast _Runtime.UNDEFINED;
+    var contentByteLength:Float = cast _Runtime.UNDEFINED;
+    isArrayBuffer = _Runtime.isInstanceOf(data, flighthq._internal._HostValueLut.get('ArrayBuffer'));
+    isSharedArrayBuffer = ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('SharedArrayBuffer'), 'undefined') : Bool) && (cast _Runtime.isInstanceOf(data, flighthq._internal._HostValueLut.get('SharedArrayBuffer')) : Bool));
+    isView = _Runtime.callProperty(flighthq._internal._HostValueLut.get('ArrayBuffer'), 'isView', cast ([data] : Array<Dynamic>));
+    if ((cast ((cast ((cast !(cast isArrayBuffer : Bool) : Bool) && (cast !(cast isSharedArrayBuffer : Bool) : Bool)) : Bool) && (cast !(cast isView : Bool) : Bool)) : Bool)) {
+      _Runtime.throwValue(_Runtime.typeError('GPUQueue.writeBuffer: data must be a BufferSource'));
+    }
+    if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([bufferOffset] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast bufferOffset : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.fmod(bufferOffset, 4.0), 0.0) : Bool)) : Bool)) {
+      _Runtime.throwValue(_Runtime.construct(flighthq._internal._HostValueLut.get('DOMException'), ['GPUQueue.writeBuffer: bufferOffset must be a non-negative multiple of 4', 'OperationError']));
+    }
+    if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([dataOffset] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast dataOffset : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast _Runtime.andValue(!_Runtime.strictEquals(size, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.orValue(!(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([size] : Array<Dynamic>)) : Bool), function():Dynamic return cast ((cast size : Float) < (cast 0.0 : Float)))) : Bool)) : Bool)) {
+      _Runtime.throwValue(_Runtime.construct(flighthq._internal._HostValueLut.get('DOMException'), ['GPUQueue.writeBuffer: data range is invalid', 'OperationError']));
+    }
+    elementByteLength = ((cast ((cast isView : Bool) && (cast !(cast _Runtime.isInstanceOf(data, flighthq._internal._HostValueLut.get('DataView')) : Bool) : Bool)) : Bool) ? (cast (cast _WgpuTestHelper.getTypedArrayElementByteLength__wgpuTestHelper(({ final __callArgument13:Dynamic = data; __callArgument13; })) : Float) : Dynamic) : (cast 1.0 : Dynamic));
+    dataElementLength = ((cast data : { var byteLength:Float; }).byteLength / elementByteLength);
+    contentElementLength = _Runtime.coalesce(size, function():Dynamic return cast (dataElementLength - dataOffset));
+    if ((cast ((cast ((cast contentElementLength : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast (dataOffset + contentElementLength) : Float) > (cast dataElementLength : Float)) : Bool)) : Bool)) {
+      _Runtime.throwValue(_Runtime.construct(flighthq._internal._HostValueLut.get('DOMException'), ['GPUQueue.writeBuffer: data range is out of bounds', 'OperationError']));
+    }
+    contentByteLength = (contentElementLength * elementByteLength);
+    if ((cast !_Runtime.strictEquals(_Runtime.fmod(contentByteLength, 4.0), 0.0) : Bool)) {
+      _Runtime.throwValue(_Runtime.construct(flighthq._internal._HostValueLut.get('DOMException'), ['GPUQueue.writeBuffer: content byte length must be a multiple of 4', 'OperationError']));
+    }
+    if ((cast _Runtime.strictEquals((_Runtime.toInt32(buffer.usage) & _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))), 0.0) : Bool)) {
+      _Runtime.throwValue(_Runtime.error('Fake GPU validation: GPUQueue.writeBuffer destination buffer must have COPY_DST usage'));
+    }
+    if ((cast ((cast (bufferOffset + contentByteLength) : Float) > (cast buffer.size : Float)) : Bool)) {
+      _Runtime.throwValue(_Runtime.error('Fake GPU validation: GPUQueue.writeBuffer destination range exceeds the buffer size'));
+    }
+  }
+
+  public static function getTypedArrayElementByteLength__wgpuTestHelper(data:haxe.io.ArrayBufferView):Float {
+    return cast (cast (cast data : flighthq._internal._Intersection2<haxe.io.ArrayBufferView, { var BYTES_PER_ELEMENT:Float; }>) : { var BYTES_PER_ELEMENT:Float; }).BYTES_PER_ELEMENT;
+    return cast null;
+  }
+
+  public static function getWriteTextureBytesPerTexel__wgpuTestHelper(format:flighthq._internal.dom.GPUTextureFormat):Null<Float> {
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(format, 'rgba8unorm') : Bool) || (cast _Runtime.strictEquals(format, 'rgba8unorm-srgb') : Bool)) : Bool) || (cast _Runtime.strictEquals(format, 'bgra8unorm') : Bool)) : Bool) || (cast _Runtime.strictEquals(format, 'bgra8unorm-srgb') : Bool)) : Bool)) {
+      return cast 4.0;
+    }
+    if ((cast _Runtime.strictEquals(format, 'rgba32float') : Bool)) { return cast 16.0; }
+    return cast null;
+    return cast null;
+  }
+
+  public static function normalizeGpuExtent3D__wgpuTestHelper(size:flighthq._internal.dom.GPUExtent3D):Array<Float> {
+    var dictionary:flighthq._internal.dom.GPUExtent3DDict = cast _Runtime.UNDEFINED;
+    if ((cast (cast _Runtime.isIterable(size) : Bool) : Bool)) {
+      var values:Array<Float> = (cast (cast _Runtime.toArray((cast size : Dynamic)) : Array<Float>) : Array<Float>);
+      return cast cast ([_Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 1.0 : Float)), function():Dynamic return cast 1.0), _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 2.0 : Float)), function():Dynamic return cast 1.0)] : Array<Dynamic>);
+    }
+    dictionary = (cast size : flighthq._internal.dom.GPUExtent3DDict);
+    return cast cast ([(cast dictionary : flighthq._internal.dom.GPUExtent3DDict).width, _Runtime.coalesce((cast dictionary : flighthq._internal.dom.GPUExtent3DDict).height, function():Dynamic return cast 1.0), _Runtime.coalesce((cast dictionary : flighthq._internal.dom.GPUExtent3DDict).depthOrArrayLayers, function():Dynamic return cast 1.0)] : Array<Dynamic>);
+    return cast null;
+  }
+
+  public static function validateWriteTextureSourceAllocation__wgpuTestHelper(destination:flighthq._internal.dom.GPUTexelCopyTextureInfo, data:flighthq._internal.dom.GPUAllowSharedBufferSource, dataLayout:flighthq._internal.dom.GPUTexelCopyBufferLayout, size:flighthq._internal.dom.GPUExtent3D):Void {
+    var isArrayBuffer:Bool = cast _Runtime.UNDEFINED;
+    var isSharedArrayBuffer:Bool = cast _Runtime.UNDEFINED;
+    var isView:Bool = cast _Runtime.UNDEFINED;
+    var bytesPerTexel:Null<Float> = cast _Runtime.UNDEFINED;
+    var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
+    var width:Float = cast _Runtime.UNDEFINED;
+    var height:Float = cast _Runtime.UNDEFINED;
+    var depthOrArrayLayers:Float = cast _Runtime.UNDEFINED;
+    var bytesInLastRow:Float = cast _Runtime.UNDEFINED;
+    var bytesPerRow:Float = cast _Runtime.UNDEFINED;
+    var rowsPerImage:Float = cast _Runtime.UNDEFINED;
+    var requiredByteLength:Float = cast _Runtime.UNDEFINED;
+    isArrayBuffer = _Runtime.isInstanceOf(data, flighthq._internal._HostValueLut.get('ArrayBuffer'));
+    isSharedArrayBuffer = ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('SharedArrayBuffer'), 'undefined') : Bool) && (cast _Runtime.isInstanceOf(data, flighthq._internal._HostValueLut.get('SharedArrayBuffer')) : Bool));
+    isView = _Runtime.callProperty(flighthq._internal._HostValueLut.get('ArrayBuffer'), 'isView', cast ([data] : Array<Dynamic>));
+    if ((cast ((cast ((cast !(cast isArrayBuffer : Bool) : Bool) && (cast !(cast isSharedArrayBuffer : Bool) : Bool)) : Bool) && (cast !(cast isView : Bool) : Bool)) : Bool)) {
+      _Runtime.throwValue(_Runtime.typeError('GPUQueue.writeTexture: data must be a BufferSource'));
+    }
+    bytesPerTexel = (cast _WgpuTestHelper.getWriteTextureBytesPerTexel__wgpuTestHelper((cast (cast destination.texture : flighthq._internal.dom.GPUTexture).format : String)) : Null<Float>);
+    if ((cast _Runtime.strictEquals(bytesPerTexel, null) : Bool)) { return; }
+    __destructure1 = (cast _WgpuTestHelper.normalizeGpuExtent3D__wgpuTestHelper((cast size : flighthq._internal._Any)) : Array<Float>);
+    width = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
+    height = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
+    depthOrArrayLayers = flighthq._internal._StaticIndex.readArray(__destructure1, 2.0);
+    if ((cast ((cast ((cast _Runtime.strictEquals(width, 0.0) : Bool) || (cast _Runtime.strictEquals(height, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(depthOrArrayLayers, 0.0) : Bool)) : Bool)) { return; }
+    bytesInLastRow = (width * bytesPerTexel);
+    bytesPerRow = HxMath.max(bytesInLastRow, _Runtime.coalesce(dataLayout.bytesPerRow, function():Dynamic return cast bytesInLastRow));
+    rowsPerImage = HxMath.max(height, _Runtime.coalesce(dataLayout.rowsPerImage, function():Dynamic return cast height));
+    requiredByteLength = ((_Runtime.addNumbers(_Runtime.coalesce(dataLayout.offset, function():Dynamic return cast 0.0), ((bytesPerRow * rowsPerImage) * (depthOrArrayLayers - 1.0))) + (bytesPerRow * (height - 1.0))) + bytesInLastRow);
+    if ((cast ((cast requiredByteLength : Float) > (cast data.byteLength : Float)) : Bool)) {
+      _Runtime.throwValue(_Runtime.construct(flighthq._internal._HostValueLut.get('DOMException'), ['GPUQueue.writeTexture: data byte length ' + Std.string(data.byteLength) + ' is smaller than the ' + Std.string(requiredByteLength) + ' bytes required by the copy', 'OperationError']));
+    }
   }
 
   public static function makeAdapter__wgpuTestHelper():flighthq._internal.dom.GPUAdapter {
@@ -126,13 +236,14 @@ class _WgpuTestHelper {
   }
 
   @:noCompletion
-  public static function createWgpuRenderStateForTest():flighthq._internal._Promise<WgpuRenderState> {
+  public static function createWgpuRenderStateForTest(?options:WgpuRenderOptions):flighthq._internal._Promise<WgpuRenderState> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      if (options == null) options = cast ({  } : Dynamic);
       var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
       canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
       flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', 800.0);
       flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', 600.0);
-      return flighthq._internal._Async.resolve((cast createWgpuRenderState(({ final __callArgument2:Dynamic = canvas; __callArgument2; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : flighthq._internal._Promise<WgpuRenderState>));
+      return flighthq._internal._Async.resolve((cast createWgpuRenderState(({ final __callArgument16:Dynamic = canvas; __callArgument16; }), ({ final __callArgument17:Dynamic = options; __callArgument17; })) : flighthq._internal._Promise<WgpuRenderState>));
     }));
   }
 
@@ -148,13 +259,13 @@ class _WgpuTestHelper {
     flighthq._internal.DynamicObject.defineProperty(_Runtime.field(flighthq._internal._HostValueLut.get('globalThis'), 'navigator'), 'gpu', { value: gpu, configurable: true, writable: true });
     origGetContext = (cast _Runtime.field(flighthq._internal._HostValueLut.get('HTMLCanvasElement'), 'prototype') : flighthq._internal.dom.HTMLCanvasElement).getContext;
     ((cast (cast _Runtime.field(flighthq._internal._HostValueLut.get('HTMLCanvasElement'), 'prototype') : { var getContext:flighthq._internal._Any; }) : { var getContext:flighthq._internal._Any; }).getContext = function(contextId:String, ?options:flighthq._internal._Any):flighthq._internal._Any {
-      var __thisValue0:Dynamic = _Runtime.thisValue();
+      var __thisValue2:Dynamic = _Runtime.thisValue();
       if ((cast _Runtime.strictEquals(contextId, 'webgpu') : Bool)) {
         return cast (cast (cast { configure: function():Void {
 
-        }, getCurrentTexture: function():flighthq._internal.dom.GPUTexture return (cast _WgpuTestHelper.makeTexture__wgpuTestHelper() : flighthq._internal.dom.GPUTexture) } : flighthq._internal._Any) : flighthq._internal.dom.GPUCanvasContext);
+        }, getCurrentTexture: function():flighthq._internal.dom.GPUTexture return (cast _WgpuTestHelper.makeTexture__wgpuTestHelper(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : flighthq._internal.dom.GPUTexture) } : flighthq._internal._Any) : flighthq._internal.dom.GPUCanvasContext);
       }
-      return cast _Runtime.callProperty((cast origGetContext : flighthq._internal._Any), 'call', cast ([__thisValue0, contextId, options] : Array<Dynamic>));
+      return cast _Runtime.callProperty((cast origGetContext : flighthq._internal._Any), 'call', cast ([__thisValue2, contextId, options] : Array<Dynamic>));
       return cast _Runtime.UNDEFINED;
     });
   }

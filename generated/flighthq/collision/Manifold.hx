@@ -3,17 +3,17 @@ package flighthq.collision;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionManifold;
+import flighthq.types.Collision.CollisionManifold2D;
 
 class Manifold {
-  public static function clearCollisionManifold(out:CollisionManifold):Void {
+  public static function clearCollisionManifold2D(out:CollisionManifold2D):Void {
     (out.overlapping = cast (false : Bool));
     (out.normalX = cast (0.0 : Float));
     (out.normalY = cast (0.0 : Float));
     (out.depth = cast (0.0 : Float));
   }
 
-  public static function createCollisionManifold():CollisionManifold {
+  public static function createCollisionManifold2D():CollisionManifold2D {
     return cast { overlapping: false, normalX: 0.0, normalY: 0.0, depth: 0.0 };
     return cast null;
   }

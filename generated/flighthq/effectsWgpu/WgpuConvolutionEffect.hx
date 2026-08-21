@@ -3,6 +3,7 @@ package flighthq.effectsWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.color.PackColor.unpackColorRgba;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
@@ -43,7 +44,7 @@ class WgpuConvolutionEffect {
     edgeColor = _Runtime.coalesce(effect.color, function():Dynamic return cast 0.0);
     divisor = _Runtime.coalesce(effect.divisor, function():Dynamic return cast (cast WgpuConvolutionEffect.getAutoDivisor__wgpuConvolutionEffect(({ final __callArgument0:Dynamic = matrix; __callArgument0; }), (cast (matrixX * matrixY) : Float)) : Float));
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast 'stylization.convolution' : String), (cast WgpuConvolutionEffect.CONVOLUTION_WGSL__wgpuConvolutionEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast source : WgpuRenderTarget), ({ final __callArgument3:Dynamic = (cast dest : WgpuRenderTarget); __callArgument3; }), ({ final __callArgument4:Dynamic = pipeline; __callArgument4; }), ({ final __callArgument5:Dynamic = function(f32:flighthq._internal._Float32Array, i32:flighthq._internal._Int32Array):Void {
+    drawWgpuEffectPass(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast source : WgpuRenderTarget), ({ final __callArgument3:Dynamic = (cast dest : WgpuRenderTarget); __callArgument3; }), ({ final __callArgument4:Dynamic = pipeline; __callArgument4; }), ({ final __callArgument6:Dynamic = function(f32:flighthq._internal._Float32Array, i32:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast (1.0 / source.width) : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast (1.0 / source.height) : Float));
       flighthq._internal._StaticIndex.writeInt32ArrayTyped((cast i32 : flighthq._internal._Int32Array), (cast 2.0 : Float), (cast matrixX : Float));
@@ -52,10 +53,11 @@ class WgpuConvolutionEffect {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast bias : Float));
       flighthq._internal._StaticIndex.writeInt32ArrayTyped((cast i32 : flighthq._internal._Int32Array), (cast 6.0 : Float), (cast ((cast clampEdge : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Float));
       flighthq._internal._StaticIndex.writeInt32ArrayTyped((cast i32 : flighthq._internal._Int32Array), (cast 7.0 : Float), (cast ((cast preserveAlpha : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast ((_Runtime.toInt32((_Runtime.toInt32(edgeColor) >> 16)) & 255) / 255.0) : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 9.0 : Float), (cast ((_Runtime.toInt32((_Runtime.toInt32(edgeColor) >> 8)) & 255) / 255.0) : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 10.0 : Float), (cast ((_Runtime.toInt32(edgeColor) & 255) / 255.0) : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 11.0 : Float), (cast ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(edgeColor), 24)) & 255) / 255.0) : Float));
+      unpackColorRgba(({ final __callArgument5:Dynamic = WgpuConvolutionEffect.scratchEdgeColor__wgpuConvolutionEffect; __callArgument5; }), (cast edgeColor : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 8.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast WgpuConvolutionEffect.scratchEdgeColor__wgpuConvolutionEffect : Array<Float>), (cast 0.0 : Float)) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 9.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast WgpuConvolutionEffect.scratchEdgeColor__wgpuConvolutionEffect : Array<Float>), (cast 1.0 : Float)) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 10.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast WgpuConvolutionEffect.scratchEdgeColor__wgpuConvolutionEffect : Array<Float>), (cast 2.0 : Float)) : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 11.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast WgpuConvolutionEffect.scratchEdgeColor__wgpuConvolutionEffect : Array<Float>), (cast 3.0 : Float)) : Float));
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast (matrixX * matrixY) : Float)) : Bool)) {
@@ -63,7 +65,7 @@ class WgpuConvolutionEffect {
           i++;
         }
       }
-    }; __callArgument5; }));
+    }; __callArgument6; }));
   }
 
   public static final defaultWgpuConvolutionEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
@@ -71,7 +73,7 @@ class WgpuConvolutionEffect {
   });
 
   public static function registerWgpuConvolutionEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast 'ConvolutionEffect' : String), ({ final __callArgument7:Dynamic = defaultWgpuConvolutionEffectRunner; __callArgument7; }));
+    registerWgpuRenderEffect(({ final __callArgument7:Dynamic = state; __callArgument7; }), (cast 'ConvolutionEffect' : String), ({ final __callArgument8:Dynamic = defaultWgpuConvolutionEffectRunner; __callArgument8; }));
   }
 
   public static function getAutoDivisor__wgpuConvolutionEffect(matrix:Array<Float>, length:Float):Float {
@@ -89,4 +91,6 @@ class WgpuConvolutionEffect {
   }
 
   public static final CONVOLUTION_WGSL__wgpuConvolutionEffect:String = '\nstruct Uniforms {\n  texelSize : vec2f,\n  matrixX : i32,\n  matrixY : i32,\n  divisor : f32,\n  bias : f32,\n  clampEdge : i32,\n  preserveAlpha : i32,\n  edgeColor : vec4f,\n  matrix : array<f32, ' + Std.string(MAX_CONVOLUTION_EFFECT_WGPU_KERNEL_SIZE) + '>,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn sampleAt(uv : vec2f) -> vec4f {\n  if (uni.clampEdge != 0) {\n    return textureSampleLevel(tex, smp, clamp(uv, vec2f(0.0), vec2f(1.0)), 0.0);\n  }\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {\n    return uni.edgeColor;\n  }\n  return textureSampleLevel(tex, smp, uv, 0.0);\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let offsetX = uni.matrixX / 2;\n  let offsetY = uni.matrixY / 2;\n  var sum = vec4f(0.0);\n  for (var ky : i32 = 0; ky < uni.matrixY; ky++) {\n    for (var kx : i32 = 0; kx < uni.matrixX; kx++) {\n      let weight = uni.matrix[ky * uni.matrixX + kx];\n      let off = vec2f(f32(kx - offsetX), f32(ky - offsetY)) * uni.texelSize;\n      sum += sampleAt(uv + off) * weight;\n    }\n  }\n  sum = sum / uni.divisor;\n  sum += uni.bias / 255.0;\n  sum = clamp(sum, vec4f(0.0), vec4f(1.0));\n  if (uni.preserveAlpha != 0) {\n    let origAlpha = textureSampleLevel(tex, smp, uv, 0.0).a;\n    let straightRGB = select(vec3f(0.0), clamp(sum.rgb / sum.a, vec3f(0.0), vec3f(1.0)), sum.a > 0.0);\n    sum = vec4f(straightRGB * origAlpha, origAlpha);\n  }\n  return sum;\n}';
+
+  public static final scratchEdgeColor__wgpuConvolutionEffect:Array<Float> = (cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
 }

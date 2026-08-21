@@ -12,4 +12,4 @@ typedef TiledInflate = flighthq._internal._UInt8Array->TiledCompression->Null<fl
 
 typedef TiledParseOptions = { @:optional var inflate:TiledInflate; };
 
-typedef TiledTilesetResolver = TiledTilesetRef->Null<flighthq._internal._Pick<TilemapData, String>>;
+typedef TiledTilesetResolver = TiledTilesetRef->Null<{ var atlas:Null<TextureAtlas>; var tileHeight:Float; var tileWidth:Float; }>;

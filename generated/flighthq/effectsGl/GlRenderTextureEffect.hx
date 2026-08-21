@@ -4,6 +4,7 @@ package flighthq.effectsGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlRenderEffectRegistry.getGlRenderEffectRunner;
+import flighthq.effectsGl.GlRenderEffectRegistry.isGlRenderEffectResolvable;
 import flighthq.renderGl.GlRenderStateBracket.withGlRenderState;
 import flighthq.renderGl.GlRenderTexture.explainGlRenderTexture;
 import flighthq.renderGl.GlRenderTexture.getGlRenderTextureTarget;
@@ -63,6 +64,7 @@ class GlRenderTextureEffect {
   public static function explainGlRenderEffectApplication(state:GlRenderState, effects:Array<RenderEffect>, sourceAvailable:Bool, destinationAvailable:Bool = false):GlRenderEffectApplicationExplanation {
     var getStatus:Void->flighthq._internal._IndexedAccess<GlRenderEffectApplicationExplanation, String> = cast _Runtime.UNDEFINED;
     var unregisteredKinds:Array<String> = cast _Runtime.UNDEFINED;
+    var unresolvedIndexes:Array<Float> = cast _Runtime.UNDEFINED;
     var requestedCount:Float = cast _Runtime.UNDEFINED;
     var registeredCount:Float = cast _Runtime.UNDEFINED;
     getStatus = (cast function getStatus():flighthq._internal._IndexedAccess<GlRenderEffectApplicationExplanation, String> {
@@ -70,13 +72,24 @@ class GlRenderTextureEffect {
       if ((cast ((cast destinationAvailable : Bool) && (cast _Runtime.orValue(!(cast sourceAvailable : Bool), function():Dynamic return cast _Runtime.strictEquals(registeredCount, 0.0)) : Bool)) : Bool)) { return cast 'stale-destination'; }
       if ((cast !(cast sourceAvailable : Bool) : Bool)) { return cast 'source-unavailable'; }
       if ((cast _Runtime.strictEquals(registeredCount, 0.0) : Bool)) { return cast 'unregistered-effects'; }
-      return cast ((cast ((cast _Runtime.field(unregisteredKinds, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'partial-registration' : Dynamic) : (cast 'complete' : Dynamic));
+      if ((cast ((cast _Runtime.field(unregisteredKinds, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { return cast 'partial-registration'; }
+      if ((cast _Runtime.strictEquals(_Runtime.field(unresolvedIndexes, 'length'), 0.0) : Bool)) { return cast 'complete'; }
+      return cast ((cast _Runtime.strictEquals(_Runtime.field(unresolvedIndexes, 'length'), registeredCount) : Bool) ? (cast 'unresolved-effects' : Dynamic) : (cast 'partial-resolution' : Dynamic));
       return cast _Runtime.UNDEFINED;
     });
-    unregisteredKinds = (cast _Runtime.mapArray((cast (cast _Runtime.filterArray((cast effects : Array<RenderEffect>), function(effect:RenderEffect, __unused2:Float, __unused3:Array<RenderEffect>):Bool return _Runtime.strictEquals((cast getGlRenderEffectRunner(({ final __callArgument16:Dynamic = state; __callArgument16; }), (cast _Runtime.field(effect, 'kind') : String)) : Null<GlRenderEffectRunner>), null), _Runtime.UNDEFINED)) : Array<RenderEffect>), function(effect:RenderEffect, __unused4:Float, __unused5:Array<RenderEffect>):String return _Runtime.field(effect, 'kind'), _Runtime.UNDEFINED));
+    unregisteredKinds = (cast cast ([] : Array<Dynamic>));
+    unresolvedIndexes = (cast cast ([] : Array<Dynamic>));
+    {
+      var index:Float = 0.0;
+      while ((cast ((cast index : Float) < (cast _Runtime.field(effects, 'length') : Float)) : Bool)) {
+        var effect:RenderEffect = flighthq._internal._StaticIndex.readArray(effects, index);
+        if ((cast _Runtime.strictEquals((cast getGlRenderEffectRunner(({ final __callArgument15:Dynamic = state; __callArgument15; }), (cast _Runtime.field(effect, 'kind') : String)) : Null<GlRenderEffectRunner>), null) : Bool)) { _Runtime.callProperty(unregisteredKinds, 'push', cast ([_Runtime.field(effect, 'kind')] : Array<Dynamic>)); } else { if ((cast !(cast (cast isGlRenderEffectResolvable(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = effect; __callArgument17; })) : Bool) : Bool) : Bool)) { _Runtime.callProperty(unresolvedIndexes, 'push', cast ([index] : Array<Dynamic>)); } }
+        index++;
+      }
+    }
     requestedCount = _Runtime.field(effects, 'length');
     registeredCount = _Runtime.subtractNumbers(requestedCount, _Runtime.field(unregisteredKinds, 'length'));
-    return cast { registeredCount: registeredCount, requestedCount: requestedCount, status: (cast getStatus() : GlRenderEffectApplicationStatus), unregisteredKinds: unregisteredKinds };
+    return cast { registeredCount: registeredCount, requestedCount: requestedCount, status: (cast getStatus() : GlRenderEffectApplicationStatus), unregisteredKinds: unregisteredKinds, unresolvedIndexes: unresolvedIndexes };
     return cast null;
   }
 

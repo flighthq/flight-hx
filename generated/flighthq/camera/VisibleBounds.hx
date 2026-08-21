@@ -15,9 +15,27 @@ import flighthq.types.Rectangle.RectangleLike;
 class VisibleBounds {
   public static function getCamera2DVisibleBounds(camera:Camera2D, out:RectangleLike):Void {
     getCamera2DViewMatrix(({ final __callArgument0:Dynamic = camera; __callArgument0; }), ({ final __callArgument1:Dynamic = VisibleBounds.scratchMatrix__visibleBounds; __callArgument1; }));
-    (cast inverseMatrix(({ final __callArgument2:Dynamic = VisibleBounds.scratchInverse__visibleBounds; __callArgument2; }), ({ final __callArgument3:Dynamic = VisibleBounds.scratchMatrix__visibleBounds; __callArgument3; })) : Bool);
+    if ((cast !(cast (cast inverseMatrix(({ final __callArgument2:Dynamic = VisibleBounds.scratchInverse__visibleBounds; __callArgument2; }), ({ final __callArgument3:Dynamic = VisibleBounds.scratchMatrix__visibleBounds; __callArgument3; })) : Bool) : Bool) : Bool)) {
+      (out.x = cast (VisibleBounds.UNBOUNDED_ORIGIN__visibleBounds : Float));
+      (out.y = cast (VisibleBounds.UNBOUNDED_ORIGIN__visibleBounds : Float));
+      (out.width = cast (VisibleBounds.UNBOUNDED_EXTENT__visibleBounds : Float));
+      (out.height = cast (VisibleBounds.UNBOUNDED_EXTENT__visibleBounds : Float));
+      _Runtime.callOptionalValue(VisibleBounds.degenerateVisibleBoundsGuard__visibleBounds, cast ([camera] : Array<Dynamic>));
+      return;
+    }
     matrixTransformBounds(({ final __callArgument4:Dynamic = out; __callArgument4; }), ({ final __callArgument5:Dynamic = VisibleBounds.scratchInverse__visibleBounds; __callArgument5; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast camera.viewportWidth : Float), (cast camera.viewportHeight : Float));
   }
+
+  @:noCompletion
+  public static function setCamera2DVisibleBoundsGuard(guard:Null<Camera2D->Void>):Void {
+    (VisibleBounds.degenerateVisibleBoundsGuard__visibleBounds = cast (guard : Dynamic));
+  }
+
+  public static final UNBOUNDED_EXTENT__visibleBounds:Float = _Runtime.NUMBER_MAX_VALUE;
+
+  public static final UNBOUNDED_ORIGIN__visibleBounds:Float = (-_Runtime.NUMBER_MAX_VALUE / 2.0);
+
+  public static var degenerateVisibleBoundsGuard__visibleBounds:Null<Camera2D->Void> = _Runtime.explicitNull();
 
   public static final scratchInverse__visibleBounds:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix);
 

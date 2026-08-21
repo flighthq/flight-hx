@@ -8,6 +8,27 @@ export function definePatches<const Patches extends readonly SemanticPatch[]>(pa
   return patches;
 }
 
+export function semanticBodyPatchFunctionNames(
+  patches: readonly SemanticPatch[],
+  packageName: string,
+  source: string,
+): ReadonlySet<string> {
+  const privateSuffix = path
+    .basename(source)
+    .replace(/\.tsx?$/u, '')
+    .replace(/[^A-Za-z0-9]/gu, '_');
+  const names = new Set<string>();
+  for (const patch of patches) {
+    if (patch.operation !== 'replaceBody' || patch.target.package !== packageName || patch.target.source !== source) {
+      continue;
+    }
+    names.add(patch.target.export);
+    const suffix = `__${privateSuffix}`;
+    if (patch.target.export.endsWith(suffix)) names.add(patch.target.export.slice(0, -suffix.length));
+  }
+  return names;
+}
+
 export function applySemanticPatches(
   declarations: IrDeclaration[],
   patches: readonly SemanticPatch[],

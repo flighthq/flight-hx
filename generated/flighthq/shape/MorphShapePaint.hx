@@ -149,14 +149,14 @@ class MorphShapePaint {
     i = (cast binding : { var commandIndex:Float; }).commandIndex;
     if ((cast _Runtime.strictEquals((cast binding : { var kind:String; }).kind, 'color') : Bool)) {
       if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(commands, i), 'beginFill') : Bool)) { return; }
-      flighthq._internal._StaticIndex.writeArray(commands, (i + 2.0), (cast MorphShapePaint.interpolateRgb__morphShapePaint((cast (cast binding : MorphShapeColorPaintBinding).startColor : Float), (cast (cast binding : MorphShapeColorPaintBinding).endColor : Float), (cast progress : Float)) : Float));
+      flighthq._internal._StaticIndex.writeArray(commands, (i + 2.0), (cast MorphShapePaint.interpolateRgba__morphShapePaint((cast (cast binding : MorphShapeColorPaintBinding).startColor : Float), (cast (cast binding : MorphShapeColorPaintBinding).endColor : Float), (cast progress : Float)) : Float));
       flighthq._internal._StaticIndex.writeArray(commands, (i + 3.0), (cast MorphShapePaint.interpolateNumber__morphShapePaint((cast (cast binding : MorphShapeColorPaintBinding).startAlpha : Float), (cast (cast binding : MorphShapeColorPaintBinding).endAlpha : Float), (cast progress : Float)) : Float));
       return;
     }
     if ((cast _Runtime.strictEquals((cast binding : { var kind:String; }).kind, 'line') : Bool)) {
       if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(commands, i), 'lineStyle') : Bool)) { return; }
       flighthq._internal._StaticIndex.writeArray(commands, (i + 2.0), (cast MorphShapePaint.interpolateNumber__morphShapePaint((cast (cast binding : MorphShapeLinePaintBinding).startThickness : Float), (cast (cast binding : MorphShapeLinePaintBinding).endThickness : Float), (cast progress : Float)) : Float));
-      flighthq._internal._StaticIndex.writeArray(commands, (i + 3.0), (cast MorphShapePaint.interpolateRgb__morphShapePaint((cast (cast binding : MorphShapeLinePaintBinding).startColor : Float), (cast (cast binding : MorphShapeLinePaintBinding).endColor : Float), (cast progress : Float)) : Float));
+      flighthq._internal._StaticIndex.writeArray(commands, (i + 3.0), (cast MorphShapePaint.interpolateRgba__morphShapePaint((cast (cast binding : MorphShapeLinePaintBinding).startColor : Float), (cast (cast binding : MorphShapeLinePaintBinding).endColor : Float), (cast progress : Float)) : Float));
       flighthq._internal._StaticIndex.writeArray(commands, (i + 4.0), (cast MorphShapePaint.interpolateNumber__morphShapePaint((cast (cast binding : MorphShapeLinePaintBinding).startAlpha : Float), (cast (cast binding : MorphShapeLinePaintBinding).endAlpha : Float), (cast progress : Float)) : Float));
       return;
     }
@@ -171,7 +171,7 @@ class MorphShapePaint {
     {
       var n:Float = 0.0;
       while ((cast ((cast n : Float) < (cast _Runtime.field((cast binding : MorphShapeGradientPaintBinding).startColors, 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast colors : Array<Float>), (cast n : Float), (cast (cast MorphShapePaint.interpolateRgb__morphShapePaint((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast binding : MorphShapeGradientPaintBinding).startColors : Array<Float>), (cast n : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast binding : MorphShapeGradientPaintBinding).endColors : Array<Float>), (cast n : Float)) : Float), (cast progress : Float)) : Float) : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast colors : Array<Float>), (cast n : Float), (cast (cast MorphShapePaint.interpolateRgba__morphShapePaint((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast binding : MorphShapeGradientPaintBinding).startColors : Array<Float>), (cast n : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast binding : MorphShapeGradientPaintBinding).endColors : Array<Float>), (cast n : Float)) : Float), (cast progress : Float)) : Float) : Float));
         flighthq._internal._StaticIndex.writeFloatArrayTyped((cast alphas : Array<Float>), (cast n : Float), (cast (cast MorphShapePaint.interpolateNumber__morphShapePaint((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast binding : MorphShapeGradientPaintBinding).startAlphas : Array<Float>), (cast n : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast binding : MorphShapeGradientPaintBinding).endAlphas : Array<Float>), (cast n : Float)) : Float), (cast progress : Float)) : Float) : Float));
         flighthq._internal._StaticIndex.writeFloatArrayTyped((cast ratios : Array<Float>), (cast n : Float), (cast (cast MorphShapePaint.interpolateNumber__morphShapePaint((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast binding : MorphShapeGradientPaintBinding).startRatios : Array<Float>), (cast n : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast binding : MorphShapeGradientPaintBinding).endRatios : Array<Float>), (cast n : Float)) : Float), (cast progress : Float)) : Float) : Float));
         n++;
@@ -206,14 +206,16 @@ class MorphShapePaint {
     return cast null;
   }
 
-  public static function interpolateRgb__morphShapePaint(start:Float, end:Float, progress:Float):Float {
+  public static function interpolateRgba__morphShapePaint(start:Float, end:Float, progress:Float):Float {
     var r:Float = cast _Runtime.UNDEFINED;
     var g:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
-    r = (cast MorphShapePaint.interpolateByte__morphShapePaint((cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(start), 16)) & 255) : Float), (cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(end), 16)) & 255) : Float), (cast progress : Float)) : Float);
-    g = (cast MorphShapePaint.interpolateByte__morphShapePaint((cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(start), 8)) & 255) : Float), (cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(end), 8)) & 255) : Float), (cast progress : Float)) : Float);
-    b = (cast MorphShapePaint.interpolateByte__morphShapePaint((cast (_Runtime.toInt32(start) & 255) : Float), (cast (_Runtime.toInt32(end) & 255) : Float), (cast progress : Float)) : Float);
-    return cast (((r * 65536.0) + (g * 256.0)) + b);
+    var a:Float = cast _Runtime.UNDEFINED;
+    r = (cast MorphShapePaint.interpolateByte__morphShapePaint((cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(start), 24)) & 255) : Float), (cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(end), 24)) & 255) : Float), (cast progress : Float)) : Float);
+    g = (cast MorphShapePaint.interpolateByte__morphShapePaint((cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(start), 16)) & 255) : Float), (cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(end), 16)) & 255) : Float), (cast progress : Float)) : Float);
+    b = (cast MorphShapePaint.interpolateByte__morphShapePaint((cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(start), 8)) & 255) : Float), (cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(end), 8)) & 255) : Float), (cast progress : Float)) : Float);
+    a = (cast MorphShapePaint.interpolateByte__morphShapePaint((cast (_Runtime.toInt32(start) & 255) : Float), (cast (_Runtime.toInt32(end) & 255) : Float), (cast progress : Float)) : Float);
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(r) << 24)) | _Runtime.toInt32((_Runtime.toInt32(g) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(b) << 8)))) | _Runtime.toInt32(a))), 0);
     return cast null;
   }
 

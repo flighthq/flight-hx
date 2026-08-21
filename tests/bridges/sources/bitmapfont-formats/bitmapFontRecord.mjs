@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const buildBitmapFontFromRecord = api.buildBitmapFontFromRecord;
+export const reportDroppedBitmapFontRecords = api.reportDroppedBitmapFontRecords;

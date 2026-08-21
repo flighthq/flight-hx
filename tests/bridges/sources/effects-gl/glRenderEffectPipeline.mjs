@@ -9,4 +9,5 @@ export const beginGlRenderEffectPipeline = api.beginGlRenderEffectPipeline;
 export const createGlRenderEffectPipeline = api.createGlRenderEffectPipeline;
 export const destroyGlRenderEffectPipeline = api.destroyGlRenderEffectPipeline;
 export const endGlRenderEffectPipeline = api.endGlRenderEffectPipeline;
+export const setGlRenderEffectPipelineSkipGuard = api.setGlRenderEffectPipelineSkipGuard;
 export const setGlRenderEffectVelocityTexture = api.setGlRenderEffectVelocityTexture;

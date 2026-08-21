@@ -6,3 +6,5 @@ __syncDependencies();
 export * from './enableSwfGuards.mjs';
 export * from './swfDocument.mjs';
 export * from './swfFilter.mjs';
+export { createSwfJpegAlphaBitmap } from './swfBitmap.mjs';
+export { registerSwfImageDecoders } from './swfImageDecoder.mjs';

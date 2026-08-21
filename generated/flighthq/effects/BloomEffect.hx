@@ -26,7 +26,7 @@ class BloomEffect {
     return cast null;
   }
 
-  public static function createBloomEffect(?options:flighthq._internal._Omit<flighthq.types.BloomEffect, String>):flighthq.types.BloomEffect {
+  public static function createBloomEffect(?options:{ @:optional var threshold:Null<Float>; @:optional var intensity:Null<Float>; @:optional var radius:Null<Float>; @:optional var passes:Null<Float>; }):flighthq.types.BloomEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'BloomEffect' }, options]);
     return cast null;

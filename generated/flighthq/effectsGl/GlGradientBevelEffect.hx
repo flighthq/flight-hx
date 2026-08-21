@@ -68,7 +68,7 @@ class GlGradientBevelEffect {
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
     sourceMode = _Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw');
     gl = (cast state : GlRenderState).gl;
-    applyGlEffectTintPass(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = src; __callArgument10; }), ({ final __callArgument11:Dynamic = s0; __callArgument11; }), (cast 16777215.0 : Float), (cast 1.0 : Float), (cast HxMath.min(1.0, strength) : Float));
+    applyGlEffectTintPass(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = src; __callArgument10; }), ({ final __callArgument11:Dynamic = s0; __callArgument11; }), (cast 4294967295.0 : Float), (cast 1.0 : Float), (cast HxMath.min(1.0, strength) : Float));
     applyGlEffectBoxBlur(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = s0; __callArgument13; }), ({ final __callArgument14:Dynamic = s1; __callArgument14; }), ({ final __callArgument15:Dynamic = s2; __callArgument15; }), ({ final __callArgument16:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 4.0), passes: quality }; __callArgument16; }));
     dx = _Runtime.multiplyNumbers(HxMath.cos(angle), distance);
     dy = _Runtime.multiplyNumbers(HxMath.sin(angle), distance);
@@ -94,7 +94,7 @@ class GlGradientBevelEffect {
   });
 
   public static function registerGlGradientBevelEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument43:Dynamic = state; __callArgument43; }), (cast 'GradientBevelEffect' : String), ({ final __callArgument44:Dynamic = defaultGlGradientBevelEffectRunner; __callArgument44; }));
+    registerGlRenderEffect(({ final __callArgument43:Dynamic = state; __callArgument43; }), (cast 'GradientBevelEffect' : String), ({ final __callArgument44:Dynamic = defaultGlGradientBevelEffectRunner; __callArgument44; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static function applyBevelApplyPass__glGradientBevelEffect(state:GlRenderState, encoded:GlRenderTarget, ramp:flighthq._internal.dom.WebGLTexture, source:GlRenderTarget, dest:GlRenderTarget):Void {

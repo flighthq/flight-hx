@@ -64,6 +64,11 @@ class Mesh {
     return cast null;
   }
 
+  public static function cloneMeshGeometryMetadata(source:MeshGeometry):MeshGeometry {
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometry.cloneMeshGeometryMetadata(source);
+    return cast null;
+  }
+
   public static function compactMeshGeometryVertices(geometry:MeshGeometry):MeshGeometry {
     return cast Facade_Mesh_flighthq_mesh_MeshGeometryIndex.compactMeshGeometryVertices(geometry);
     return cast null;
@@ -81,12 +86,17 @@ class Mesh {
     Facade_Mesh_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryFlatNormals(out, geometry);
   }
 
-  public static function computeMeshGeometryNormals(out:MeshGeometry, geometry:MeshGeometry):Void {
-    Facade_Mesh_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryNormals(out, geometry);
+  public static function computeMeshGeometryNormals(out:MeshGeometry, geometry:MeshGeometry, ?positionGroups:Null<flighthq._internal._UInt32Array>):Void {
+    Facade_Mesh_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryNormals(out, geometry, positionGroups);
   }
 
-  public static function computeMeshGeometryTangents(out:MeshGeometry, geometry:MeshGeometry):Void {
-    Facade_Mesh_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryTangents(out, geometry);
+  public static function computeMeshGeometryPositionGroups(geometry:MeshGeometry):flighthq._internal._UInt32Array {
+    return cast Facade_Mesh_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryPositionGroups(geometry);
+    return cast null;
+  }
+
+  public static function computeMeshGeometryTangents(out:MeshGeometry, geometry:MeshGeometry, ?positionGroups:Null<flighthq._internal._UInt32Array>):Void {
+    Facade_Mesh_flighthq_mesh_MeshGeometryCompute.computeMeshGeometryTangents(out, geometry, positionGroups);
   }
 
   public static function computeMeshGeometryWireframeIndices(geometry:MeshGeometry):flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array> {
@@ -410,9 +420,5 @@ class Mesh {
   public static function weldMeshGeometryVertices(geometry:MeshGeometry):MeshGeometry {
     return cast Facade_Mesh_flighthq_mesh_MeshGeometryIndex.weldMeshGeometryVertices(geometry);
     return cast null;
-  }
-
-  public static function wrapMeshGeometryUvs(geometry:MeshGeometry):Void {
-    Facade_Mesh_flighthq_mesh_MeshGeometryUvs.wrapMeshGeometryUvs(geometry);
   }
 }

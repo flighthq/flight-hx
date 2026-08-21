@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.SharpenEffect;
 
 class SharpenEffect {
-  public static function createSharpenEffect(?options:flighthq._internal._Omit<flighthq.types.SharpenEffect, String>):flighthq.types.SharpenEffect {
+  public static function createSharpenEffect(?options:{ @:optional var amount:Null<Float>; }):flighthq.types.SharpenEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'SharpenEffect' }, options]);
     return cast null;

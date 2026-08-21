@@ -67,9 +67,9 @@ class RiveScene2D {
     document = (cast parseRiveDocument(({ final __callArgument0:Dynamic = source; __callArgument0; }), ({ final __callArgument1:Dynamic = diagnostics; __callArgument1; })) : Null<RiveDocument>);
     if ((cast _Runtime.strictEquals(document, null) : Bool)) { return cast { artboards: cast ([] : Array<Dynamic>), assets: cast ([] : Array<Dynamic>) }; }
     graph = (cast createRiveObjectGraph(({ final __callArgument2:Dynamic = document; __callArgument2; }), ({ final __callArgument3:Dynamic = diagnostics; __callArgument3; })) : RiveObjectGraph);
-    assets = (cast createRiveFileAssets((cast document : RiveDocument).objects) : Array<RiveFileAsset>);
+    assets = (cast createRiveFileAssets((cast document : RiveDocument).objects, ({ final __callArgument4:Dynamic = diagnostics; __callArgument4; })) : Array<RiveFileAsset>);
     fontNames = (cast _Runtime.mapArray((cast assets : Array<RiveFileAsset>), function(asset:RiveFileAsset, __unused0:Float, __unused1:Array<RiveFileAsset>):String return asset.name, _Runtime.UNDEFINED));
-    return cast { artboards: (cast _Runtime.mapArray((cast (cast graph : RiveObjectGraph).artboards : Array<RiveArtboardGraph>), function(artboard:RiveArtboardGraph, __unused2:Float, __unused3:Array<RiveArtboardGraph>):RiveArtboardImport return (cast RiveScene2D.createRiveArtboardImport__riveScene2D(({ final __callArgument4:Dynamic = artboard; __callArgument4; }), (cast document : RiveDocument).objects, ({ final __callArgument5:Dynamic = fontNames; __callArgument5; }), ({ final __callArgument6:Dynamic = diagnostics; __callArgument6; })) : RiveArtboardImport), _Runtime.UNDEFINED)), assets: assets };
+    return cast { artboards: (cast _Runtime.mapArray((cast (cast graph : RiveObjectGraph).artboards : Array<RiveArtboardGraph>), function(artboard:RiveArtboardGraph, __unused2:Float, __unused3:Array<RiveArtboardGraph>):RiveArtboardImport return (cast RiveScene2D.createRiveArtboardImport__riveScene2D(({ final __callArgument5:Dynamic = artboard; __callArgument5; }), (cast document : RiveDocument).objects, ({ final __callArgument6:Dynamic = fontNames; __callArgument6; }), ({ final __callArgument7:Dynamic = diagnostics; __callArgument7; })) : RiveArtboardImport), _Runtime.UNDEFINED)), assets: assets };
     return cast null;
   }
 
@@ -89,13 +89,13 @@ class RiveScene2D {
     var layouts:Array<RiveLayoutImport> = cast _Runtime.UNDEFINED;
     var stateMachines:Array<RiveStateMachineDescriptor> = cast _Runtime.UNDEFINED;
     source = flighthq._internal._StaticIndex.readArray(artboard.objects, 0.0);
-    width = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument7:Dynamic = source; __callArgument7; }), (cast RiveScene2D.RIVE_WIDTH__riveScene2D : Float), (cast 0.0 : Float)) : Float);
-    height = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument8:Dynamic = source; __callArgument8; }), (cast RiveScene2D.RIVE_HEIGHT__riveScene2D : Float), (cast 0.0 : Float)) : Float);
-    name = (cast RiveScene2D.readRiveText__riveScene2D(({ final __callArgument9:Dynamic = source; __callArgument9; }), (cast RiveScene2D.RIVE_NAME__riveScene2D : Float), (cast '' : String)) : String);
+    width = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument8:Dynamic = source; __callArgument8; }), (cast RiveScene2D.RIVE_WIDTH__riveScene2D : Float), (cast 0.0 : Float)) : Float);
+    height = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument9:Dynamic = source; __callArgument9; }), (cast RiveScene2D.RIVE_HEIGHT__riveScene2D : Float), (cast 0.0 : Float)) : Float);
+    name = (cast RiveScene2D.readRiveText__riveScene2D(({ final __callArgument10:Dynamic = source; __callArgument10; }), (cast RiveScene2D.RIVE_NAME__riveScene2D : Float), (cast '' : String)) : String);
     root = (cast createDisplayObject((cast { name: name } : Dynamic)) : DisplayObject);
-    RiveScene2D.applyRiveTransform__riveScene2D(({ final __callArgument10:Dynamic = root; __callArgument10; }), ({ final __callArgument11:Dynamic = source; __callArgument11; }));
-    (root.pivotX = cast (((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument12:Dynamic = source; __callArgument12; }), (cast RiveScene2D.RIVE_ORIGIN_X__riveScene2D : Float), (cast 0.0 : Float)) : Float) * width) : Float));
-    (root.pivotY = cast (((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument13:Dynamic = source; __callArgument13; }), (cast RiveScene2D.RIVE_ORIGIN_Y__riveScene2D : Float), (cast 0.0 : Float)) : Float) * height) : Float));
+    RiveScene2D.applyRiveTransform__riveScene2D(({ final __callArgument11:Dynamic = root; __callArgument11; }), ({ final __callArgument12:Dynamic = source; __callArgument12; }));
+    (root.pivotX = cast (((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument13:Dynamic = source; __callArgument13; }), (cast RiveScene2D.RIVE_ORIGIN_X__riveScene2D : Float), (cast 0.0 : Float)) : Float) * width) : Float));
+    (root.pivotY = cast (((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument14:Dynamic = source; __callArgument14; }), (cast RiveScene2D.RIVE_ORIGIN_Y__riveScene2D : Float), (cast 0.0 : Float)) : Float) * height) : Float));
     advancedBlends = (cast cast ([] : Array<Dynamic>));
     nodes = (cast cast ([root] : Array<Dynamic>));
     shapePaths = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
@@ -105,7 +105,7 @@ class RiveScene2D {
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(artboard.objects, index);
         if ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveScene2D.RIVE_PATH_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool)) {
           _Runtime.callProperty(nodes, 'push', cast ([null] : Array<Dynamic>));
-          RiveScene2D.collectRivePathGeometry__riveScene2D(({ final __callArgument14:Dynamic = shapePaths; __callArgument14; }), ({ final __callArgument15:Dynamic = artboard; __callArgument15; }), (cast index : Float), ({ final __callArgument16:Dynamic = diagnostics; __callArgument16; }));
+          RiveScene2D.collectRivePathGeometry__riveScene2D(({ final __callArgument15:Dynamic = shapePaths; __callArgument15; }), ({ final __callArgument16:Dynamic = artboard; __callArgument16; }), (cast index : Float), ({ final __callArgument17:Dynamic = diagnostics; __callArgument17; }));
           index++;
           continue;
         }
@@ -114,93 +114,100 @@ class RiveScene2D {
           index++;
           continue;
         }
-        var node:DisplayObject = (cast RiveScene2D.createRiveDisplayNode__riveScene2D(({ final __callArgument17:Dynamic = object; __callArgument17; }), ({ final __callArgument18:Dynamic = artboard; __callArgument18; }), (cast index : Float), ({ final __callArgument19:Dynamic = fontNames; __callArgument19; })) : DisplayObject);
-        RiveScene2D.applyRiveTransform__riveScene2D(({ final __callArgument20:Dynamic = node; __callArgument20; }), ({ final __callArgument21:Dynamic = object; __callArgument21; }));
-        RiveScene2D.applyRiveBlendMode__riveScene2D(({ final __callArgument22:Dynamic = node; __callArgument22; }), ({ final __callArgument23:Dynamic = object; __callArgument23; }), ({ final __callArgument24:Dynamic = advancedBlends; __callArgument24; }));
+        var node:DisplayObject = (cast RiveScene2D.createRiveDisplayNode__riveScene2D(({ final __callArgument18:Dynamic = object; __callArgument18; }), ({ final __callArgument19:Dynamic = artboard; __callArgument19; }), (cast index : Float), ({ final __callArgument20:Dynamic = fontNames; __callArgument20; }), ({ final __callArgument21:Dynamic = diagnostics; __callArgument21; })) : DisplayObject);
+        RiveScene2D.applyRiveTransform__riveScene2D(({ final __callArgument22:Dynamic = node; __callArgument22; }), ({ final __callArgument23:Dynamic = object; __callArgument23; }));
+        RiveScene2D.applyRiveBlendMode__riveScene2D(({ final __callArgument24:Dynamic = node; __callArgument24; }), ({ final __callArgument25:Dynamic = object; __callArgument25; }), ({ final __callArgument26:Dynamic = advancedBlends; __callArgument26; }));
         _Runtime.callProperty(nodes, 'push', cast ([node] : Array<Dynamic>));
-        (cast addNodeChild((cast _Runtime.coalesce((cast RiveScene2D.findRiveDisplayParent__riveScene2D(({ final __callArgument25:Dynamic = nodes; __callArgument25; }), artboard.parentIndices, (cast index : Float)) : Null<DisplayObject>), function():Dynamic return cast root) : Dynamic), (cast node : Dynamic)) : NodeOf<Node2DTraits>);
+        (cast addNodeChild((cast _Runtime.coalesce((cast RiveScene2D.findRiveDisplayParent__riveScene2D(({ final __callArgument27:Dynamic = nodes; __callArgument27; }), artboard.parentIndices, (cast index : Float)) : Null<DisplayObject>), function():Dynamic return cast root) : Dynamic), (cast node : Dynamic)) : NodeOf<Node2DTraits>);
         index++;
       }
     }
-    applyRiveClipping(({ final __callArgument26:Dynamic = nodes; __callArgument26; }), ({ final __callArgument27:Dynamic = artboard; __callArgument27; }), ({ final __callArgument28:Dynamic = shapePaths; __callArgument28; }), ({ final __callArgument29:Dynamic = diagnostics; __callArgument29; }));
-    applyRiveDrawOrder((cast nodes : Dynamic), ({ final __callArgument30:Dynamic = artboard; __callArgument30; }), ({ final __callArgument31:Dynamic = root; __callArgument31; }), ({ final __callArgument32:Dynamic = diagnostics; __callArgument32; }));
-    applyRiveSolo((cast nodes : Dynamic), ({ final __callArgument33:Dynamic = artboard; __callArgument33; }), ({ final __callArgument34:Dynamic = diagnostics; __callArgument34; }));
+    applyRiveClipping(({ final __callArgument28:Dynamic = nodes; __callArgument28; }), ({ final __callArgument29:Dynamic = artboard; __callArgument29; }), ({ final __callArgument30:Dynamic = shapePaths; __callArgument30; }), ({ final __callArgument31:Dynamic = diagnostics; __callArgument31; }));
+    applyRiveDrawOrder((cast nodes : Dynamic), ({ final __callArgument32:Dynamic = artboard; __callArgument32; }), ({ final __callArgument33:Dynamic = root; __callArgument33; }), ({ final __callArgument34:Dynamic = diagnostics; __callArgument34; }));
+    applyRiveSolo((cast nodes : Dynamic), ({ final __callArgument35:Dynamic = artboard; __callArgument35; }), ({ final __callArgument36:Dynamic = diagnostics; __callArgument36; }));
     rebuilds = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     for (shapeIndex in _Runtime.iterable(((cast shapePaths : flighthq._internal._Map<Float, Array<RivePathRecord>>).keys()))) {
       var shape:Null<DisplayObject> = flighthq._internal._StaticIndex.readArray(nodes, shapeIndex);
       if ((cast ((cast _Runtime.strictEquals(shape, null) : Bool) || (cast _Runtime.strictEquals(shape, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { continue; }
       var rebuild:Void->Void = cast _Runtime.UNDEFINED;
-      rebuild = (cast function():Void { RiveScene2D.rebuildRiveShape__riveScene2D((cast shape : Shape), ({ final __callArgument37:Dynamic = artboard; __callArgument37; }), (cast shapeIndex : Float), ({ final __callArgument38:Dynamic = shapePaths; __callArgument38; })); });
+      rebuild = (cast function():Void { RiveScene2D.rebuildRiveShape__riveScene2D((cast shape : Shape), ({ final __callArgument39:Dynamic = artboard; __callArgument39; }), (cast shapeIndex : Float), ({ final __callArgument40:Dynamic = shapePaths; __callArgument40; }), ({ final __callArgument41:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument41; })); });
       ((cast rebuilds : flighthq._internal._Map<Float, Void->Void>).set(shapeIndex, (cast rebuild)));
-      rebuild();
+      RiveScene2D.rebuildRiveShape__riveScene2D((cast shape : Shape), ({ final __callArgument42:Dynamic = artboard; __callArgument42; }), (cast shapeIndex : Float), ({ final __callArgument43:Dynamic = shapePaths; __callArgument43; }), ({ final __callArgument44:Dynamic = diagnostics; __callArgument44; }));
     }
     span = (cast { end: artboard.streamEnd, start: artboard.streamStart });
-    skeleton = (cast createRiveSkeleton2D(({ final __callArgument39:Dynamic = artboard; __callArgument39; })) : Null<RiveSkeleton2DImport>);
-    animations = (cast createRiveAnimationClips(({ final __callArgument40:Dynamic = objects; __callArgument40; }), ({ final __callArgument41:Dynamic = span; __callArgument41; }), ({ final __callArgument42:Dynamic = nodes; __callArgument42; }), ({ final __callArgument43:Dynamic = artboard; __callArgument43; }), ({ final __callArgument44:Dynamic = rebuilds; __callArgument44; }), (cast skeleton : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Array<RiveAnimationClip>);
-    layouts = (cast createRiveLayoutImports(({ final __callArgument45:Dynamic = artboard; __callArgument45; }), ({ final __callArgument46:Dynamic = nodes; __callArgument46; }), ({ final __callArgument47:Dynamic = diagnostics; __callArgument47; })) : Array<RiveLayoutImport>);
-    stateMachines = (cast createRiveStateMachines(({ final __callArgument48:Dynamic = objects; __callArgument48; }), ({ final __callArgument49:Dynamic = span; __callArgument49; })) : Array<RiveStateMachineDescriptor>);
+    skeleton = (cast createRiveSkeleton2D(({ final __callArgument45:Dynamic = artboard; __callArgument45; })) : Null<RiveSkeleton2DImport>);
+    animations = (cast createRiveAnimationClips(({ final __callArgument46:Dynamic = objects; __callArgument46; }), ({ final __callArgument47:Dynamic = span; __callArgument47; }), ({ final __callArgument48:Dynamic = nodes; __callArgument48; }), ({ final __callArgument49:Dynamic = artboard; __callArgument49; }), ({ final __callArgument50:Dynamic = rebuilds; __callArgument50; }), (cast skeleton : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Array<RiveAnimationClip>);
+    layouts = (cast createRiveLayoutImports(({ final __callArgument51:Dynamic = artboard; __callArgument51; }), ({ final __callArgument52:Dynamic = nodes; __callArgument52; }), ({ final __callArgument53:Dynamic = diagnostics; __callArgument53; })) : Array<RiveLayoutImport>);
+    stateMachines = (cast createRiveStateMachines(({ final __callArgument54:Dynamic = objects; __callArgument54; }), ({ final __callArgument55:Dynamic = span; __callArgument55; }), ({ final __callArgument56:Dynamic = diagnostics; __callArgument56; })) : Array<RiveStateMachineDescriptor>);
     return cast { advancedBlends: advancedBlends, animations: animations, height: height, layouts: layouts, name: name, root: root, skeleton: skeleton, stateMachines: stateMachines, width: width };
     return cast null;
   }
 
-  public static function createRiveDisplayNode__riveScene2D(object:RiveCoreObject, artboard:RiveArtboardGraph, index:Float, fontNames:Array<String>):DisplayObject {
+  public static function createRiveDisplayNode__riveScene2D(object:RiveCoreObject, artboard:RiveArtboardGraph, index:Float, fontNames:Array<String>, diagnostics:Null<Array<ImportDiagnostic>>):DisplayObject {
     var name:String = cast _Runtime.UNDEFINED;
-    name = (cast RiveScene2D.readRiveText__riveScene2D(({ final __callArgument50:Dynamic = object; __callArgument50; }), (cast RiveScene2D.RIVE_NAME__riveScene2D : Float), (cast '' : String)) : String);
+    name = (cast RiveScene2D.readRiveText__riveScene2D(({ final __callArgument57:Dynamic = object; __callArgument57; }), (cast RiveScene2D.RIVE_NAME__riveScene2D : Float), (cast '' : String)) : String);
     if ((cast _Runtime.strictEquals(object.typeKey, RiveScene2D.RIVE_TEXT_TYPE_KEY__riveScene2D) : Bool)) {
-      var label:RichText = (cast createRiveRichText(({ final __callArgument51:Dynamic = artboard; __callArgument51; }), (cast index : Float), ({ final __callArgument52:Dynamic = fontNames; __callArgument52; })) : RichText);
+      var label:RichText = (cast createRiveRichText(({ final __callArgument58:Dynamic = artboard; __callArgument58; }), (cast index : Float), ({ final __callArgument59:Dynamic = fontNames; __callArgument59; }), ({ final __callArgument60:Dynamic = diagnostics; __callArgument60; })) : RichText);
       (label.name = cast (name : Null<String>));
       return cast label;
     }
     if ((cast _Runtime.strictEquals(object.typeKey, RiveScene2D.RIVE_IMAGE_TYPE_KEY__riveScene2D) : Bool)) {
-      return cast (cast createRiveImageSprite((cast name : String), (cast (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument53:Dynamic = object; __callArgument53; }), (cast RiveScene2D.RIVE_IMAGE_ASSET_ID__riveScene2D : Float), (cast -1.0 : Float)) : Float) : Float)) : DisplayObject);
+      return cast (cast createRiveImageSprite((cast name : String), (cast (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument61:Dynamic = object; __callArgument61; }), (cast RiveScene2D.RIVE_IMAGE_ASSET_ID__riveScene2D : Float), (cast -1.0 : Float)) : Float) : Float)) : DisplayObject);
     }
-    if ((cast _Runtime.strictEquals(object.typeKey, RiveScene2D.RIVE_NESTED_ARTBOARD_TYPE_KEY__riveScene2D) : Bool)) {
+    if ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveScene2D.RIVE_NESTED_ARTBOARD_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool)) {
       var node:DisplayObject = (cast createDisplayObject((cast { name: name } : Dynamic)) : DisplayObject);
-      markRiveNestedArtboard(({ final __callArgument54:Dynamic = node; __callArgument54; }), (cast (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument55:Dynamic = object; __callArgument55; }), (cast RiveScene2D.RIVE_NESTED_ARTBOARD_ID__riveScene2D : Float), (cast -1.0 : Float)) : Float) : Float));
+      markRiveNestedArtboard(({ final __callArgument62:Dynamic = node; __callArgument62; }), (cast (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument63:Dynamic = object; __callArgument63; }), (cast RiveScene2D.RIVE_NESTED_ARTBOARD_ID__riveScene2D : Float), (cast -1.0 : Float)) : Float) : Float));
       return cast node;
     }
     if ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveScene2D.RIVE_SHAPE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool)) { return cast (cast createShape((cast { name: name } : Dynamic)) : Shape); }
+    if ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveScene2D.RIVE_NSLICED_NODE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool)) {
+      reportImportDiagnostic(({ final __callArgument64:Dynamic = diagnostics; __callArgument64; }), ({ final __callArgument65:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument65; }), (cast 'rive.nine-slice-substituted' : String), (cast 'createRiveDisplayNode' : String), ({ final __callArgument66:Dynamic = { substitutedAs: 'container', typeKey: object.typeKey }; __callArgument66; }));
+      return cast (cast createDisplayObject((cast { name: name } : Dynamic)) : DisplayObject);
+    }
+    if ((cast ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveScene2D.RIVE_DRAWABLE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool) && (cast !(cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveScene2D.RIVE_LAYOUT_COMPONENT_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool) : Bool)) : Bool)) {
+      reportImportDiagnostic(({ final __callArgument67:Dynamic = diagnostics; __callArgument67; }), ({ final __callArgument68:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument68; }), (cast 'rive.drawable-kind-unsupported' : String), (cast 'createRiveDisplayNode' : String), ({ final __callArgument69:Dynamic = { typeKey: object.typeKey }; __callArgument69; }));
+    }
     return cast (cast createDisplayObject((cast { name: name } : Dynamic)) : DisplayObject);
     return cast null;
   }
 
-  public static function rebuildRiveShape__riveScene2D(shape:Shape, artboard:RiveArtboardGraph, shapeIndex:Float, shapePaths:flighthq._internal._Map<Float, Array<RivePathRecord>>):Void {
+  public static function rebuildRiveShape__riveScene2D(shape:Shape, artboard:RiveArtboardGraph, shapeIndex:Float, shapePaths:flighthq._internal._Map<Float, Array<RivePathRecord>>, diagnostics:Null<Array<ImportDiagnostic>>):Void {
     var records:Array<RivePathRecord> = cast _Runtime.UNDEFINED;
     records = (cast cast ([] : Array<Dynamic>));
-    for (pathIndex in _Runtime.iterable(_Runtime.coalesce(({ final __collection58:Dynamic = ((cast shapePaths : flighthq._internal._Map<Float, Array<RivePathRecord>>).get(shapeIndex)); __collection58 == null ? _Runtime.UNDEFINED : (cast _Runtime.mapArray((cast __collection58 : Array<RivePathRecord>), function(record:RivePathRecord, __unused4:Float, __unused5:Array<RivePathRecord>):Float return record.pathIndex, _Runtime.UNDEFINED)); }), function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
-      var record:Null<RivePathRecord> = (cast RiveScene2D.createRivePathRecord__riveScene2D(({ final __callArgument59:Dynamic = artboard; __callArgument59; }), (cast pathIndex : Float)) : Null<RivePathRecord>);
+    for (pathIndex in _Runtime.iterable(_Runtime.coalesce(({ final __collection72:Dynamic = ((cast shapePaths : flighthq._internal._Map<Float, Array<RivePathRecord>>).get(shapeIndex)); __collection72 == null ? _Runtime.UNDEFINED : (cast _Runtime.mapArray((cast __collection72 : Array<RivePathRecord>), function(record:RivePathRecord, __unused4:Float, __unused5:Array<RivePathRecord>):Float return record.pathIndex, _Runtime.UNDEFINED)); }), function():Dynamic return cast cast ([] : Array<Dynamic>)))) {
+      var record:Null<RivePathRecord> = (cast RiveScene2D.createRivePathRecord__riveScene2D(({ final __callArgument73:Dynamic = artboard; __callArgument73; }), (cast pathIndex : Float), ({ final __callArgument74:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument74; })) : Null<RivePathRecord>);
       if ((cast !_Runtime.strictEquals(record, null) : Bool)) { _Runtime.callProperty(records, 'push', cast ([record] : Array<Dynamic>)); }
     }
     ((cast shapePaths : flighthq._internal._Map<Float, Array<RivePathRecord>>).set(shapeIndex, (cast records)));
-    clearShapeCommands(({ final __callArgument60:Dynamic = shape; __callArgument60; }));
-    appendRiveShapePaint(({ final __callArgument61:Dynamic = shape; __callArgument61; }), ({ final __callArgument62:Dynamic = artboard; __callArgument62; }), (cast shapeIndex : Float), ({ final __callArgument63:Dynamic = records; __callArgument63; }));
+    clearShapeCommands(({ final __callArgument75:Dynamic = shape; __callArgument75; }));
+    appendRiveShapePaint(({ final __callArgument76:Dynamic = shape; __callArgument76; }), ({ final __callArgument77:Dynamic = artboard; __callArgument77; }), (cast shapeIndex : Float), ({ final __callArgument78:Dynamic = records; __callArgument78; }), ({ final __callArgument79:Dynamic = diagnostics; __callArgument79; }));
   }
 
   public static function collectRivePathGeometry__riveScene2D(shapePaths:flighthq._internal._Map<Float, Array<RivePathRecord>>, artboard:RiveArtboardGraph, index:Float, diagnostics:Null<Array<ImportDiagnostic>>):Void {
     var owner:Float = cast _Runtime.UNDEFINED;
     var record:Null<RivePathRecord> = cast _Runtime.UNDEFINED;
     var records:Array<RivePathRecord> = cast _Runtime.UNDEFINED;
-    owner = (cast RiveScene2D.findRiveShapeOwner__riveScene2D(({ final __callArgument64:Dynamic = artboard; __callArgument64; }), (cast index : Float)) : Float);
+    owner = (cast RiveScene2D.findRiveShapeOwner__riveScene2D(({ final __callArgument80:Dynamic = artboard; __callArgument80; }), (cast index : Float)) : Float);
     if ((cast ((cast owner : Float) < (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument65:Dynamic = diagnostics; __callArgument65; }), ({ final __callArgument66:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument66; }), (cast 'rive.path-outside-shape' : String), (cast 'createScene2DFromRiveDocument' : String), ({ final __callArgument67:Dynamic = { index: index }; __callArgument67; }));
+      reportImportDiagnostic(({ final __callArgument81:Dynamic = diagnostics; __callArgument81; }), ({ final __callArgument82:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument82; }), (cast 'rive.path-outside-shape' : String), (cast 'collectRivePathGeometry' : String), ({ final __callArgument83:Dynamic = { index: index }; __callArgument83; }));
       return;
     }
-    record = (cast RiveScene2D.createRivePathRecord__riveScene2D(({ final __callArgument68:Dynamic = artboard; __callArgument68; }), (cast index : Float)) : Null<RivePathRecord>);
+    record = (cast RiveScene2D.createRivePathRecord__riveScene2D(({ final __callArgument84:Dynamic = artboard; __callArgument84; }), (cast index : Float), ({ final __callArgument85:Dynamic = diagnostics; __callArgument85; })) : Null<RivePathRecord>);
     if ((cast _Runtime.strictEquals(record, null) : Bool)) { return; }
     records = _Runtime.coalesce(((cast shapePaths : flighthq._internal._Map<Float, Array<RivePathRecord>>).get(owner)), function():Dynamic return cast cast ([] : Array<Dynamic>));
     _Runtime.callProperty(records, 'push', cast ([record] : Array<Dynamic>));
     ((cast shapePaths : flighthq._internal._Map<Float, Array<RivePathRecord>>).set(owner, (cast records)));
   }
 
-  public static function createRivePathRecord__riveScene2D(artboard:RiveArtboardGraph, index:Float):Null<RivePathRecord> {
+  public static function createRivePathRecord__riveScene2D(artboard:RiveArtboardGraph, index:Float, diagnostics:Null<Array<ImportDiagnostic>>):Null<RivePathRecord> {
     var source:RiveCoreObject = cast _Runtime.UNDEFINED;
     var path:Null<Path> = cast _Runtime.UNDEFINED;
     var local:Matrix = cast _Runtime.UNDEFINED;
     var data:Array<Float> = cast _Runtime.UNDEFINED;
     source = flighthq._internal._StaticIndex.readArray(artboard.objects, index);
-    path = (cast createRivePath(({ final __callArgument69:Dynamic = source; __callArgument69; }), ({ final __callArgument70:Dynamic = artboard; __callArgument70; }), (cast index : Float)) : Null<Path>);
+    path = (cast createRivePath(({ final __callArgument86:Dynamic = source; __callArgument86; }), ({ final __callArgument87:Dynamic = artboard; __callArgument87; }), (cast index : Float), ({ final __callArgument88:Dynamic = diagnostics; __callArgument88; })) : Null<Path>);
     if ((cast ((cast _Runtime.strictEquals(path, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast path : Path).commands, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }
-    local = (cast RiveScene2D.createRivePathMatrix__riveScene2D(({ final __callArgument71:Dynamic = source; __callArgument71; })) : Matrix);
+    local = (cast RiveScene2D.createRivePathMatrix__riveScene2D(({ final __callArgument89:Dynamic = source; __callArgument89; })) : Matrix);
     data = _Runtime.slice((cast path : Path).data, 0, null);
     {
       var offset:Float = 0.0;
@@ -233,12 +240,12 @@ class RiveScene2D {
     var scaleY:Float = cast _Runtime.UNDEFINED;
     var cosine:Float = cast _Runtime.UNDEFINED;
     var sine:Float = cast _Runtime.UNDEFINED;
-    rotation = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument72:Dynamic = source; __callArgument72; }), (cast RiveScene2D.RIVE_ROTATION__riveScene2D : Float), (cast 0.0 : Float)) : Float);
-    scaleX = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument73:Dynamic = source; __callArgument73; }), (cast RiveScene2D.RIVE_SCALE_X__riveScene2D : Float), (cast 1.0 : Float)) : Float);
-    scaleY = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument74:Dynamic = source; __callArgument74; }), (cast RiveScene2D.RIVE_SCALE_Y__riveScene2D : Float), (cast 1.0 : Float)) : Float);
+    rotation = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument90:Dynamic = source; __callArgument90; }), (cast RiveScene2D.RIVE_ROTATION__riveScene2D : Float), (cast 0.0 : Float)) : Float);
+    scaleX = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument91:Dynamic = source; __callArgument91; }), (cast RiveScene2D.RIVE_SCALE_X__riveScene2D : Float), (cast 1.0 : Float)) : Float);
+    scaleY = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument92:Dynamic = source; __callArgument92; }), (cast RiveScene2D.RIVE_SCALE_Y__riveScene2D : Float), (cast 1.0 : Float)) : Float);
     cosine = HxMath.cos(rotation);
     sine = HxMath.sin(rotation);
-    return cast (cast createMatrix(({ final __callArgument75:Dynamic = (cosine * scaleX); __callArgument75; }), ({ final __callArgument76:Dynamic = (sine * scaleX); __callArgument76; }), ({ final __callArgument77:Dynamic = (-sine * scaleY); __callArgument77; }), ({ final __callArgument78:Dynamic = (cosine * scaleY); __callArgument78; }), ({ final __callArgument81:Dynamic = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument79:Dynamic = source; __callArgument79; }), (cast RiveScene2D.RIVE_X__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument80:Dynamic = source; __callArgument80; }), (cast RiveScene2D.RIVE_X_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Float); __callArgument81; }), ({ final __callArgument84:Dynamic = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument82:Dynamic = source; __callArgument82; }), (cast RiveScene2D.RIVE_Y__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument83:Dynamic = source; __callArgument83; }), (cast RiveScene2D.RIVE_Y_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Float); __callArgument84; })) : Matrix);
+    return cast (cast createMatrix(({ final __callArgument93:Dynamic = (cosine * scaleX); __callArgument93; }), ({ final __callArgument94:Dynamic = (sine * scaleX); __callArgument94; }), ({ final __callArgument95:Dynamic = (-sine * scaleY); __callArgument95; }), ({ final __callArgument96:Dynamic = (cosine * scaleY); __callArgument96; }), ({ final __callArgument99:Dynamic = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument97:Dynamic = source; __callArgument97; }), (cast RiveScene2D.RIVE_X__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument98:Dynamic = source; __callArgument98; }), (cast RiveScene2D.RIVE_X_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Float); __callArgument99; }), ({ final __callArgument102:Dynamic = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument100:Dynamic = source; __callArgument100; }), (cast RiveScene2D.RIVE_Y__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument101:Dynamic = source; __callArgument101; }), (cast RiveScene2D.RIVE_Y_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Float); __callArgument102; })) : Matrix);
     return cast null;
   }
 
@@ -255,12 +262,12 @@ class RiveScene2D {
   }
 
   public static function applyRiveTransform__riveScene2D(target:DisplayObject, source:RiveCoreObject):Void {
-    (target.x = cast ((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument85:Dynamic = source; __callArgument85; }), (cast RiveScene2D.RIVE_X__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument86:Dynamic = source; __callArgument86; }), (cast RiveScene2D.RIVE_X_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Float) : Float));
-    (target.y = cast ((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument87:Dynamic = source; __callArgument87; }), (cast RiveScene2D.RIVE_Y__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument88:Dynamic = source; __callArgument88; }), (cast RiveScene2D.RIVE_Y_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Float) : Float));
-    (target.rotation = cast (((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument89:Dynamic = source; __callArgument89; }), (cast RiveScene2D.RIVE_ROTATION__riveScene2D : Float), (cast 0.0 : Float)) : Float) * RAD_TO_DEG) : Float));
-    (target.scaleX = cast ((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument90:Dynamic = source; __callArgument90; }), (cast RiveScene2D.RIVE_SCALE_X__riveScene2D : Float), (cast 1.0 : Float)) : Float) : Float));
-    (target.scaleY = cast ((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument91:Dynamic = source; __callArgument91; }), (cast RiveScene2D.RIVE_SCALE_Y__riveScene2D : Float), (cast 1.0 : Float)) : Float) : Float));
-    (target.alpha = cast ((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument92:Dynamic = source; __callArgument92; }), (cast RiveScene2D.RIVE_OPACITY__riveScene2D : Float), (cast 1.0 : Float)) : Float) : Float));
+    (target.x = cast ((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument103:Dynamic = source; __callArgument103; }), (cast RiveScene2D.RIVE_X__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument104:Dynamic = source; __callArgument104; }), (cast RiveScene2D.RIVE_X_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Float) : Float));
+    (target.y = cast ((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument105:Dynamic = source; __callArgument105; }), (cast RiveScene2D.RIVE_Y__riveScene2D : Float), (cast (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument106:Dynamic = source; __callArgument106; }), (cast RiveScene2D.RIVE_Y_LEGACY__riveScene2D : Float), (cast 0.0 : Float)) : Float) : Float)) : Float) : Float));
+    (target.rotation = cast (((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument107:Dynamic = source; __callArgument107; }), (cast RiveScene2D.RIVE_ROTATION__riveScene2D : Float), (cast 0.0 : Float)) : Float) * RAD_TO_DEG) : Float));
+    (target.scaleX = cast ((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument108:Dynamic = source; __callArgument108; }), (cast RiveScene2D.RIVE_SCALE_X__riveScene2D : Float), (cast 1.0 : Float)) : Float) : Float));
+    (target.scaleY = cast ((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument109:Dynamic = source; __callArgument109; }), (cast RiveScene2D.RIVE_SCALE_Y__riveScene2D : Float), (cast 1.0 : Float)) : Float) : Float));
+    (target.alpha = cast ((cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument110:Dynamic = source; __callArgument110; }), (cast RiveScene2D.RIVE_OPACITY__riveScene2D : Float), (cast 1.0 : Float)) : Float) : Float));
   }
 
   public static function applyRiveBlendMode__riveScene2D(target:DisplayObject, source:RiveCoreObject, advanced:Array<RiveAdvancedBlend>):Void {
@@ -268,7 +275,7 @@ class RiveScene2D {
     var fixed:Null<String> = cast _Runtime.UNDEFINED;
     var mode:Null<String> = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast source.typeKey : Float), (cast RiveScene2D.RIVE_DRAWABLE_TYPE_KEY__riveScene2D : Float)) : Bool) : Bool) : Bool)) { return; }
-    value = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument93:Dynamic = source; __callArgument93; }), (cast RiveScene2D.RIVE_BLEND_MODE__riveScene2D : Float), (cast RiveScene2D.RIVE_BLEND_SRC_OVER__riveScene2D : Float)) : Float);
+    value = (cast RiveScene2D.readRiveNumber__riveScene2D(({ final __callArgument111:Dynamic = source; __callArgument111; }), (cast RiveScene2D.RIVE_BLEND_MODE__riveScene2D : Float), (cast RiveScene2D.RIVE_BLEND_SRC_OVER__riveScene2D : Float)) : Float);
     fixed = ((cast RiveScene2D.RIVE_FIXED_BLEND_MODES__riveScene2D : flighthq._internal._Map<Float, String>).get(value));
     if ((cast !_Runtime.strictEquals(fixed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (target.blendMode = cast (fixed : Null<String>));
@@ -300,6 +307,10 @@ class RiveScene2D {
   public static final RIVE_PATH_TYPE_KEY__riveScene2D:Float = 12.0;
 
   public static final RIVE_DRAWABLE_TYPE_KEY__riveScene2D:Float = 13.0;
+
+  public static final RIVE_LAYOUT_COMPONENT_TYPE_KEY__riveScene2D:Float = 409.0;
+
+  public static final RIVE_NSLICED_NODE_TYPE_KEY__riveScene2D:Float = 508.0;
 
   public static final RIVE_TEXT_TYPE_KEY__riveScene2D:Float = 134.0;
 

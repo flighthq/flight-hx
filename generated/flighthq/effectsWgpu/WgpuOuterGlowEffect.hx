@@ -42,7 +42,7 @@ class WgpuOuterGlowEffect {
     mask = (cast acquireWgpuRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = pool; __callArgument1; }), ({ final __callArgument2:Dynamic = descriptor; __callArgument2; })) : WgpuRenderTarget);
     blurred = (cast acquireWgpuRenderTarget(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = pool; __callArgument4; }), ({ final __callArgument5:Dynamic = descriptor; __callArgument5; })) : WgpuRenderTarget);
     blurTemp = (cast acquireWgpuRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pool; __callArgument7; }), ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : WgpuRenderTarget);
-    color = _Runtime.coalesce(effect.color, function():Dynamic return cast 16711680.0);
+    color = _Runtime.coalesce(effect.color, function():Dynamic return cast 4278190335.0);
     alpha = _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0);
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(effect.quality, function():Dynamic return cast 1.0)));

@@ -5,6 +5,7 @@ import flighthq.types.Vector2.Vector2Like;
 import flighthq._internal._Async;
 import flighthq._internal._HostValueLut;
 import flighthq._internal._Runtime;
+import flighthq._internal.DynamicObject;
 
 class CoreSmoke {
   static function main():Void {
@@ -47,6 +48,10 @@ class CoreSmoke {
     if (_Runtime.isError('not an error')) throw 'non-Error identity failed';
     if (!_Runtime.isError(_Runtime.error('expected'))) throw 'Error identity failed';
     if (_Runtime.fround(5.6789) != 5.678899765014648) throw 'Math.fround binary32 rounding failed';
+    if (!DynamicObject.is(Math.NaN, Math.NaN)) throw 'Object.is NaN identity failed';
+    final negativeZero = haxe.io.FPHelper.i64ToDouble(0, 0x80000000);
+    if (DynamicObject.is(0.0, negativeZero)) throw 'Object.is signed zero identity failed';
+    if (!_Runtime.isIterable([]) || _Runtime.isIterable({width: 1.0})) throw 'iterable presence probe failed';
 
     final dynamicProductLeft:Dynamic = {value: 0.8};
     final dynamicProductRight:Dynamic = {value: 1.0};
@@ -156,6 +161,16 @@ class CoreSmoke {
       [_Runtime.haxeArity(function(value:String):String return value.toUpperCase(), 1)]
     );
     if (dynamicMapped.join(',') != 'ONE,TWO') throw 'dynamic Array map callback ABI failed';
+
+    final cursorTokens:Array<flighthq.types.ShapeCommand.ShapeCommandToken> = cast (
+      ['moveTo', 2.0, 10.0, 20.0] : Array<Dynamic>
+    );
+    final cursorRuntime = new flighthq._internal.ShapeCommandArgumentCursorRuntime(cursorTokens);
+    flighthq.shape.ShapeBounds.setShapeCommandArgumentCursor__shapeBounds(cast cursorRuntime, 2.0, 2.0);
+    final publicCursor:flighthq.types.ShapeBounds.ShapeCommandArgumentCursor = cast cursorRuntime;
+    if (publicCursor.length != 2.0 || publicCursor.getArgument(0.0) != 10.0 || publicCursor.getArgument(2.0) != null) {
+      throw 'shape command cursor lost its portable derived length or indexed arguments';
+    }
 
     final circleCommands:Array<flighthq.types.ShapeCommand.ShapeCommandToken> = cast (
       [

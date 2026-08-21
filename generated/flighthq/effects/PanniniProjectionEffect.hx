@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.PanniniProjectionEffect;
 
 class PanniniProjectionEffect {
-  public static function createPanniniProjectionEffect(?options:flighthq._internal._Omit<flighthq.types.PanniniProjectionEffect, String>):flighthq.types.PanniniProjectionEffect {
+  public static function createPanniniProjectionEffect(?options:{ @:optional var compression:Null<Float>; @:optional var crop:Null<Float>; }):flighthq.types.PanniniProjectionEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'PanniniProjectionEffect' }, options]);
     return cast null;

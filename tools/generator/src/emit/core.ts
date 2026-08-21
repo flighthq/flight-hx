@@ -33,7 +33,7 @@ import type {
   LoweringDiagnostic,
   StaticLoweringEmissionCounts,
 } from '../model/ir.ts';
-import { applySemanticPatches } from '../patch/apply.ts';
+import { applySemanticPatches, semanticBodyPatchFunctionNames } from '../patch/apply.ts';
 import { sdkFacadeFunctionExtras, type FacadeFunctionExtra } from './facade-extras.ts';
 import {
   emitHaxeModule,
@@ -633,6 +633,18 @@ export function markContractOnlyDeclarationsNoCompletion(
   inventories: ReadonlyArray<PackageInventory>,
 ): { noCompletionDeclarations: number; protectedDeclarationIdentities: number } {
   const protectedIdentities = contractOnlyDeclarationIdentities(inventories);
+  const exportNamesByIdentity = new Map<string, Set<string>>();
+  for (const inventory of inventories) {
+    for (const lane of inventory.exportLanes) {
+      for (const record of lane.exports) {
+        for (const identity of exportDeclarationIdentities(record)) {
+          const names = exportNamesByIdentity.get(identity) ?? new Set<string>();
+          names.add(`${lane.specifier}.${record.name}`);
+          exportNamesByIdentity.set(identity, names);
+        }
+      }
+    }
+  }
   const declarationsByIdentity = new Map<string, IrDeclaration[]>();
   for (const module of modules) {
     for (const declaration of module.declarations) {
@@ -645,9 +657,10 @@ export function markContractOnlyDeclarationsNoCompletion(
   for (const identity of protectedIdentities) {
     const declarations = declarationsByIdentity.get(identity) ?? [];
     if (declarations.length !== 1) {
-      const [source] = identity.split('\0');
+      const [source, fingerprint] = identity.split('\0');
+      const exportNames = [...(exportNamesByIdentity.get(identity) ?? [])].sort().join(', ');
       throw new Error(
-        `Contract-only declaration ${source} resolves to ${String(declarations.length)} generated Haxe declarations`,
+        `Contract-only declaration ${source} (${exportNames || fingerprint}) resolves to ${String(declarations.length)} generated Haxe declarations`,
       );
     }
     declarations[0]!.noCompletion = true;
@@ -2069,7 +2082,7 @@ function collectAdjacentTestMocks(sourceFile: string): Map<string, MockedSpecifi
       const specifier = node.arguments[0].text;
       const policy = specifiers.get(specifier) ?? { allExports: false, exports: new Set<string>() };
       const factory = node.arguments[1];
-      const returnedObjects = collectMockFactoryObjects(factory);
+      const returnedObjects = collectMockFactoryObjects(factory, source);
       if (!factory) {
         policy.allExports = true;
       } else if (returnedObjects.length === 0) {
@@ -2166,28 +2179,62 @@ function collectTransitiveMockedPackageImports(
   );
 }
 
-function collectMockFactoryObjects(factory: ts.Expression | undefined): ts.ObjectLiteralExpression[] {
+function collectMockFactoryObjects(
+  factory: ts.Expression | undefined,
+  source: ts.SourceFile,
+  seenBindings = new Set<string>(),
+): ts.ObjectLiteralExpression[] {
   if (!factory) return [];
   if (ts.isArrowFunction(factory) && !ts.isBlock(factory.body)) {
-    let expression: ts.Expression = factory.body;
-    while (ts.isParenthesizedExpression(expression)) expression = expression.expression;
-    return ts.isObjectLiteralExpression(expression) ? [expression] : [];
+    return collectMockFactoryExpression(factory.body, source, seenBindings);
   }
   if (!(ts.isArrowFunction(factory) || ts.isFunctionExpression(factory)) || !ts.isBlock(factory.body)) return [];
   const objects: ts.ObjectLiteralExpression[] = [];
   const visit = (node: ts.Node): void => {
     if (node !== factory.body && ts.isFunctionLike(node)) return;
     if (ts.isReturnStatement(node) && node.expression) {
-      let expression = node.expression;
-      while (ts.isParenthesizedExpression(expression)) expression = expression.expression;
-      if (!ts.isObjectLiteralExpression(expression)) return;
-      objects.push(expression);
+      objects.push(...collectMockFactoryExpression(node.expression, source, seenBindings));
       return;
     }
     ts.forEachChild(node, visit);
   };
   visit(factory.body);
   return objects;
+}
+
+function collectMockFactoryExpression(
+  expression: ts.Expression,
+  source: ts.SourceFile,
+  seenBindings: Set<string>,
+): ts.ObjectLiteralExpression[] {
+  while (
+    ts.isParenthesizedExpression(expression) ||
+    ts.isAsExpression(expression) ||
+    ts.isSatisfiesExpression(expression) ||
+    ts.isTypeAssertionExpression(expression)
+  ) {
+    expression = expression.expression;
+  }
+  if (ts.isObjectLiteralExpression(expression)) return [expression];
+  if (ts.isArrowFunction(expression) || ts.isFunctionExpression(expression)) {
+    return collectMockFactoryObjects(expression, source, seenBindings);
+  }
+  if (
+    ts.isCallExpression(expression) &&
+    ts.isPropertyAccessExpression(expression.expression) &&
+    ts.isIdentifier(expression.expression.expression) &&
+    expression.expression.expression.text === 'vi' &&
+    expression.expression.name.text === 'hoisted'
+  ) {
+    return collectMockFactoryObjects(expression.arguments[0], source, seenBindings);
+  }
+  if (!ts.isIdentifier(expression) || seenBindings.has(expression.text)) return [];
+  const initializer = source.statements
+    .filter(ts.isVariableStatement)
+    .flatMap((statement) => [...statement.declarationList.declarations])
+    .find((declaration) => ts.isIdentifier(declaration.name) && declaration.name.text === expression.text)?.initializer;
+  if (!initializer) return [];
+  return collectMockFactoryExpression(initializer, source, new Set(seenBindings).add(expression.text));
 }
 
 function mockProvidesExport(
@@ -2264,7 +2311,11 @@ function lowerFiles(
   for (const file of files) {
     const source = program.getSourceFile(file);
     if (!source) throw new Error(`Upstream TypeScript program is missing source: ${file}`);
-    const result = lowerTypeScriptSource(source, packageName, workspaceDirectory, checker, typedStructs, { program });
+    const sourcePath = path.relative(workspaceDirectory, source.fileName);
+    const result = lowerTypeScriptSource(source, packageName, workspaceDirectory, checker, typedStructs, {
+      ownedFunctionBodies: semanticBodyPatchFunctionNames(patches, packageName, sourcePath),
+      program,
+    });
     namespacePrivateDeclarations(result.declarations);
     declarations.push(...result.declarations);
     diagnostics.push(...result.diagnostics);

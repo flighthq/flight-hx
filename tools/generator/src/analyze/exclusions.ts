@@ -7,6 +7,7 @@ import type { PackageExclusion, PackageInventory, UpstreamInventory } from '../m
 interface ExclusionFacts {
   hostDependencies: string[];
   hostImports: string[];
+  nodeEntrypoints: string[];
   nodeImports: string[];
   playwrightDependencies: string[];
   playwrightImports: string[];
@@ -40,13 +41,6 @@ export function derivePackageExclusions(
   const exclusions = claims.flatMap((claim) =>
     claim.exclusion ? ([[claim.packageName, claim.exclusion]] as const) : [],
   );
-  if (exclusions.length !== 1) {
-    throw new Error(
-      `Package exclusion derivation changed: expected exactly one node-playwright-tooling exclusion, found ${String(exclusions.length)}${
-        exclusions.length > 0 ? ` (${exclusions.map(([packageName]) => packageName).join(', ')})` : ''
-      }`,
-    );
-  }
   return new Map(exclusions);
 }
 
@@ -67,12 +61,14 @@ function exclusionClaim(workspaceDirectory: string, item: PackageInventory): Exc
   const imports = productionImports(path.join(packageDirectory, 'src'));
   const playwrightDependencies = dependencyNames.filter(isPlaywrightModule);
   const playwrightImports = imports.filter(isPlaywrightModule);
+  const nodeEntrypoints = productionNodeEntrypoints(path.join(packageDirectory, 'src'));
   const nodeImports = imports.filter((specifier) => specifier.startsWith('node:'));
   const hostDependencies = dependencyNames.filter(isHostModule);
   const hostImports = imports.filter(isHostModule);
   const facts: ExclusionFacts = {
     hostDependencies,
     hostImports,
+    nodeEntrypoints,
     nodeImports,
     playwrightDependencies,
     playwrightImports,
@@ -87,9 +83,15 @@ function exclusionClaim(workspaceDirectory: string, item: PackageInventory): Exc
   const missing: string[] = [];
   if (toolingBins.length === 0) missing.push('missing tooling bin lane');
   if (facts.sdkExposures.length > 0) missing.push(`present in SDK barrels (${facts.sdkExposures.join(', ')})`);
-  if (nodeImports.length === 0) missing.push('missing production node:* import');
-  if (playwrightDependencies.length === 0) missing.push('missing Playwright production dependency');
-  if (playwrightImports.length === 0) missing.push('missing production Playwright import');
+  if (nodeImports.length === 0 && nodeEntrypoints.length === 0) {
+    missing.push('missing production Node import or entrypoint');
+  }
+  if (playwrightDependencies.length === 0 && playwrightImports.length > 0) {
+    missing.push('missing Playwright production dependency');
+  }
+  if (playwrightDependencies.length > 0 && playwrightImports.length === 0) {
+    missing.push('missing production Playwright import');
+  }
   if (facts.unsupportedHostDependencies.length > 0) {
     missing.push(`unsupported host dependencies (${facts.unsupportedHostDependencies.join(', ')})`);
   }
@@ -103,20 +105,31 @@ function exclusionClaim(workspaceDirectory: string, item: PackageInventory): Exc
             evidence: {
               hostDependencies,
               hostImports,
+              nodeEntrypoints,
               nodeImports,
               playwrightDependencies,
               playwrightImports,
               sdkExposures: facts.sdkExposures,
               toolingBins,
             },
-            reason: `Tooling CLI (${String(toolingBins.length)} bin), absent from SDK barrels, with production host dependencies/imports limited to Node built-ins and Playwright (${String(hostDependencies.length)} dependency, ${String(hostImports.length)} imports).`,
-            rule: 'node-playwright-tooling',
+            reason:
+              playwrightDependencies.length > 0
+                ? `Tooling CLI (${String(toolingBins.length)} bin), absent from SDK barrels, with production host dependencies/imports limited to Node built-ins and Playwright (${String(hostDependencies.length)} dependency, ${String(hostImports.length)} imports).`
+                : `Tooling CLI (${String(toolingBins.length)} bin), absent from SDK barrels, with a production Node entrypoint and no portable SDK exposure.`,
+            rule: playwrightDependencies.length > 0 ? 'node-playwright-tooling' : 'node-cli-tooling',
           } satisfies PackageExclusion,
         }
       : {}),
     missing,
     packageName: item.name,
   };
+}
+
+function productionNodeEntrypoints(sourceDirectory: string): string[] {
+  return walkSourceFiles(sourceDirectory)
+    .filter((file) => readFileSync(file, 'utf8').startsWith('#!/usr/bin/env node'))
+    .map((file) => path.relative(process.cwd(), file))
+    .sort();
 }
 
 function manifestBins(value: unknown): string[] {

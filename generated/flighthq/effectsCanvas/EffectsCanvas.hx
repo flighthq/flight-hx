@@ -15,12 +15,15 @@ import flighthq.effectsCanvas.CanvasGradientGlowEffect as Facade_EffectsCanvas_f
 import flighthq.effectsCanvas.CanvasGradientRamp as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasGradientRamp;
 import flighthq.effectsCanvas.CanvasInnerGlowEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasInnerGlowEffect;
 import flighthq.effectsCanvas.CanvasInnerShadowEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasInnerShadowEffect;
+import flighthq.effectsCanvas.CanvasLensDistortionEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasLensDistortionEffect;
 import flighthq.effectsCanvas.CanvasOuterGlowEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasOuterGlowEffect;
 import flighthq.effectsCanvas.CanvasPixelateEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasPixelateEffect;
+import flighthq.effectsCanvas.CanvasPosterizeEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasPosterizeEffect;
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasRenderEffectPipeline;
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasRenderEffectRegistry;
 import flighthq.effectsCanvas.CanvasRenderTextureEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasRenderTextureEffect;
 import flighthq.effectsCanvas.CanvasScanlinesEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasScanlinesEffect;
+import flighthq.effectsCanvas.CanvasTiltShiftEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasTiltShiftEffect;
 import flighthq.effectsCanvas.CanvasVignetteEffect as Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasVignetteEffect;
 import flighthq.types.Adjustment;
 import flighthq.types.AdvancedBlendMode;
@@ -85,11 +88,17 @@ class EffectsCanvas {
 
   public static final defaultCanvasInnerShadowEffectRunner:CanvasRenderEffectRunner = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasInnerShadowEffect.defaultCanvasInnerShadowEffectRunner;
 
+  public static final defaultCanvasLensDistortionEffectRunner:CanvasRenderEffectRunner = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasLensDistortionEffect.defaultCanvasLensDistortionEffectRunner;
+
   public static final defaultCanvasOuterGlowEffectRunner:CanvasRenderEffectRunner = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasOuterGlowEffect.defaultCanvasOuterGlowEffectRunner;
 
   public static final defaultCanvasPixelateEffectRunner:CanvasRenderEffectRunner = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasPixelateEffect.defaultCanvasPixelateEffectRunner;
 
+  public static final defaultCanvasPosterizeEffectRunner:CanvasRenderEffectRunner = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasPosterizeEffect.defaultCanvasPosterizeEffectRunner;
+
   public static final defaultCanvasScanlinesEffectRunner:CanvasRenderEffectRunner = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasScanlinesEffect.defaultCanvasScanlinesEffectRunner;
+
+  public static final defaultCanvasTiltShiftEffectRunner:CanvasRenderEffectRunner = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasTiltShiftEffect.defaultCanvasTiltShiftEffectRunner;
 
   public static final defaultCanvasVignetteEffectRunner:CanvasRenderEffectRunner = Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasVignetteEffect.defaultCanvasVignetteEffectRunner;
 
@@ -160,6 +169,10 @@ class EffectsCanvas {
     Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasInnerShadowEffect.registerCanvasInnerShadowEffect(state);
   }
 
+  public static function registerCanvasLensDistortionEffect(state:CanvasRenderState):Void {
+    Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasLensDistortionEffect.registerCanvasLensDistortionEffect(state);
+  }
+
   public static function registerCanvasOuterGlowEffect(state:CanvasRenderState):Void {
     Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasOuterGlowEffect.registerCanvasOuterGlowEffect(state);
   }
@@ -168,12 +181,20 @@ class EffectsCanvas {
     Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasPixelateEffect.registerCanvasPixelateEffect(state);
   }
 
+  public static function registerCanvasPosterizeEffect(state:CanvasRenderState):Void {
+    Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasPosterizeEffect.registerCanvasPosterizeEffect(state);
+  }
+
   public static function registerCanvasRenderEffect(state:CanvasRenderState, kind:String, runner:CanvasRenderEffectRunner):Void {
     Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasRenderEffectRegistry.registerCanvasRenderEffect(state, kind, runner);
   }
 
   public static function registerCanvasScanlinesEffect(state:CanvasRenderState):Void {
     Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasScanlinesEffect.registerCanvasScanlinesEffect(state);
+  }
+
+  public static function registerCanvasTiltShiftEffect(state:CanvasRenderState):Void {
+    Facade_EffectsCanvas_flighthq_effectsCanvas_CanvasTiltShiftEffect.registerCanvasTiltShiftEffect(state);
   }
 
   public static function registerCanvasVignetteEffect(state:CanvasRenderState):Void {

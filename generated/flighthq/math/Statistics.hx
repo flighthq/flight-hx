@@ -6,8 +6,148 @@ import flighthq._internal._Runtime;
 
 class Statistics {
   public static function mean(values:Array<Float>):Float {
-    var sum:Float = cast _Runtime.UNDEFINED;
+    var scale:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
+    scale = (cast Statistics.finiteAbsoluteScale__statistics(({ final __callArgument0:Dynamic = values; __callArgument0; })) : Float);
+    if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([scale] : Array<Dynamic>)) : Bool) : Bool)) { return cast (cast Statistics.unscaledMean__statistics(({ final __callArgument1:Dynamic = values; __callArgument1; })) : Float); }
+    if ((cast _Runtime.strictEquals(scale, 0.0) : Bool)) { return cast 0.0; }
+    return cast (_Runtime.divideNumbers((cast Statistics.scaledSum__statistics(({ final __callArgument2:Dynamic = values; __callArgument2; }), (cast scale : Float)) : Float), _Runtime.field(values, 'length')) * scale);
+    return cast null;
+  }
+
+  public static function median(values:Array<Float>):Float {
+    var sorted:Array<Float> = cast _Runtime.UNDEFINED;
+    var mid:Float = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
+    sorted = _Runtime.sortAndReturn(_Runtime.slice(values, 0, null), function(a:Float, b:Float) return (a - b));
+    mid = HxMath.floor(_Runtime.divideNumbers(_Runtime.field(sorted, 'length'), 2.0));
+    return cast ((cast !_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(sorted, 'length'), 2.0), 0.0) : Bool) ? (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast sorted : Array<Float>), (cast mid : Float)) : Dynamic) : (cast (cast Statistics.midpoint__statistics((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast sorted : Array<Float>), (cast (mid - 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast sorted : Array<Float>), (cast mid : Float)) : Float)) : Float) : Dynamic));
+    return cast null;
+  }
+
+  public static function standardDeviation(values:Array<Float>):Float {
+    var scale:Float = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
+    scale = (cast Statistics.finiteAbsoluteScale__statistics(({ final __callArgument3:Dynamic = values; __callArgument3; })) : Float);
+    if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([scale] : Array<Dynamic>)) : Bool) : Bool)) { return cast HxMath.sqrt((cast Statistics.unscaledVariance__statistics(({ final __callArgument4:Dynamic = values; __callArgument4; })) : Float)); }
+    if ((cast _Runtime.strictEquals(scale, 0.0) : Bool)) { return cast 0.0; }
+    return cast _Runtime.multiplyNumbers(HxMath.sqrt((cast Statistics.scaledVariance__statistics(({ final __callArgument5:Dynamic = values; __callArgument5; }), (cast scale : Float)) : Float)), scale);
+    return cast null;
+  }
+
+  public static function variance(values:Array<Float>):Float {
+    var scale:Float = cast _Runtime.UNDEFINED;
+    var normalized:Float = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
+    scale = (cast Statistics.finiteAbsoluteScale__statistics(({ final __callArgument6:Dynamic = values; __callArgument6; })) : Float);
+    if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([scale] : Array<Dynamic>)) : Bool) : Bool)) { return cast (cast Statistics.unscaledVariance__statistics(({ final __callArgument7:Dynamic = values; __callArgument7; })) : Float); }
+    if ((cast _Runtime.strictEquals(scale, 0.0) : Bool)) { return cast 0.0; }
+    normalized = (cast Statistics.scaledVariance__statistics(({ final __callArgument8:Dynamic = values; __callArgument8; }), (cast scale : Float)) : Float);
+    if ((cast _Runtime.strictEquals(normalized, 0.0) : Bool)) { return cast 0.0; }
+    return cast ((normalized * scale) * scale);
+    return cast null;
+  }
+
+  public static function weightedAverage(values:Array<Float>, weights:Array<Float>):Float {
+    var valueScale:Float = cast _Runtime.UNDEFINED;
+    var weightScale:Float = cast _Runtime.UNDEFINED;
+    var sumWeights:Float = cast _Runtime.UNDEFINED;
+    var sumProduct:Float = cast _Runtime.UNDEFINED;
+    var correction:Float = cast _Runtime.UNDEFINED;
+    if ((cast !_Runtime.strictEquals(_Runtime.field(values, 'length'), _Runtime.field(weights, 'length')) : Bool)) {
+      _Runtime.throwValue(_Runtime.rangeError('weightedAverage: values and weights must have the same length'));
+    }
+    if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
+    valueScale = (cast Statistics.finiteAbsoluteScale__statistics(({ final __callArgument9:Dynamic = values; __callArgument9; })) : Float);
+    weightScale = (cast Statistics.finiteAbsoluteScale__statistics(({ final __callArgument10:Dynamic = weights; __callArgument10; })) : Float);
+    if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([valueScale] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([weightScale] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
+      return cast (cast Statistics.unscaledWeightedAverage__statistics(({ final __callArgument11:Dynamic = values; __callArgument11; }), ({ final __callArgument12:Dynamic = weights; __callArgument12; })) : Float);
+    }
+    if ((cast _Runtime.strictEquals(weightScale, 0.0) : Bool)) { return cast HxMath.NaN; }
+    sumWeights = (cast Statistics.scaledSum__statistics(({ final __callArgument13:Dynamic = weights; __callArgument13; }), (cast weightScale : Float)) : Float);
+    if ((cast _Runtime.strictEquals(sumWeights, 0.0) : Bool)) { return cast HxMath.NaN; }
+    if ((cast _Runtime.strictEquals(valueScale, 0.0) : Bool)) { return cast 0.0; }
+    sumProduct = 0.0;
+    correction = 0.0;
+    {
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
+        var term:Float = (((flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast i : Float)) / valueScale) * (flighthq._internal._StaticIndex.readFloatArrayTyped((cast weights : Array<Float>), (cast i : Float)) / weightScale)) - correction);
+        var next:Float = (sumProduct + term);
+        (correction = cast (((next - sumProduct) - term) : Dynamic));
+        (sumProduct = cast (next : Dynamic));
+        i++;
+      }
+    }
+    return cast ((sumProduct / sumWeights) * valueScale);
+    return cast null;
+  }
+
+  public static function finiteAbsoluteScale__statistics(values:Array<Float>):Float {
+    var scale:Float = cast _Runtime.UNDEFINED;
+    scale = 0.0;
+    {
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
+        (scale = cast (HxMath.max(scale, HxMath.abs(flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast i : Float)))) : Dynamic));
+        i++;
+      }
+    }
+    return cast scale;
+    return cast null;
+  }
+
+  public static function midpoint__statistics(a:Float, b:Float):Float {
+    if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([a] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([b] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast ((a + b) / 2.0); }
+    if ((cast flighthq._internal.DynamicObject.is(a, b) : Bool)) { return cast a; }
+    if ((cast ((cast _Runtime.andValue(((cast a : Float) >= (cast 0.0 : Float)), function():Dynamic return cast ((cast b : Float) >= (cast 0.0 : Float))) : Bool) || (cast _Runtime.andValue(((cast a : Float) <= (cast 0.0 : Float)), function():Dynamic return cast ((cast b : Float) <= (cast 0.0 : Float))) : Bool)) : Bool)) { return cast (a + ((b - a) / 2.0)); }
+    return cast ((a / 2.0) + (b / 2.0));
+    return cast null;
+  }
+
+  public static function scaledSum__statistics(values:Array<Float>, scale:Float):Float {
+    var sum:Float = cast _Runtime.UNDEFINED;
+    var correction:Float = cast _Runtime.UNDEFINED;
+    sum = 0.0;
+    correction = 0.0;
+    {
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
+        var term:Float = ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast i : Float)) / scale) - correction);
+        var next:Float = (sum + term);
+        (correction = cast (((next - sum) - term) : Dynamic));
+        (sum = cast (next : Dynamic));
+        i++;
+      }
+    }
+    return cast sum;
+    return cast null;
+  }
+
+  public static function scaledVariance__statistics(values:Array<Float>, scale:Float):Float {
+    var normalizedMean:Float = cast _Runtime.UNDEFINED;
+    var sum:Float = cast _Runtime.UNDEFINED;
+    var correction:Float = cast _Runtime.UNDEFINED;
+    normalizedMean = _Runtime.divideNumbers((cast Statistics.scaledSum__statistics(({ final __callArgument14:Dynamic = values; __callArgument14; }), (cast scale : Float)) : Float), _Runtime.field(values, 'length'));
+    sum = 0.0;
+    correction = 0.0;
+    {
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
+        var difference:Float = ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast i : Float)) / scale) - normalizedMean);
+        var term:Float = ((difference * difference) - correction);
+        var next:Float = (sum + term);
+        (correction = cast (((next - sum) - term) : Dynamic));
+        (sum = cast (next : Dynamic));
+        i++;
+      }
+    }
+    return cast HxMath.max(0.0, _Runtime.divideNumbers(sum, _Runtime.field(values, 'length')));
+    return cast null;
+  }
+
+  public static function unscaledMean__statistics(values:Array<Float>):Float {
+    var sum:Float = cast _Runtime.UNDEFINED;
     sum = 0.0;
     {
       var i:Float = 0.0;
@@ -20,32 +160,16 @@ class Statistics {
     return cast null;
   }
 
-  public static function median(values:Array<Float>):Float {
-    var sorted:Array<Float> = cast _Runtime.UNDEFINED;
-    var mid:Float = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
-    sorted = _Runtime.sortAndReturn(_Runtime.slice(values, 0, null), function(a:Float, b:Float) return (a - b));
-    mid = HxMath.floor(_Runtime.divideNumbers(_Runtime.field(sorted, 'length'), 2.0));
-    return cast ((cast !_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(sorted, 'length'), 2.0), 0.0) : Bool) ? (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast sorted : Array<Float>), (cast mid : Float)) : Dynamic) : (cast ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast sorted : Array<Float>), (cast (mid - 1.0) : Float)) + flighthq._internal._StaticIndex.readFloatArrayTyped((cast sorted : Array<Float>), (cast mid : Float))) / 2.0) : Dynamic));
-    return cast null;
-  }
-
-  public static function standardDeviation(values:Array<Float>):Float {
-    return cast HxMath.sqrt((cast variance(({ final __callArgument0:Dynamic = values; __callArgument0; })) : Float));
-    return cast null;
-  }
-
-  public static function variance(values:Array<Float>):Float {
-    var m:Float = cast _Runtime.UNDEFINED;
+  public static function unscaledVariance__statistics(values:Array<Float>):Float {
+    var average:Float = cast _Runtime.UNDEFINED;
     var sum:Float = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
-    m = (cast mean(({ final __callArgument1:Dynamic = values; __callArgument1; })) : Float);
+    average = (cast Statistics.unscaledMean__statistics(({ final __callArgument15:Dynamic = values; __callArgument15; })) : Float);
     sum = 0.0;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(values, 'length') : Float)) : Bool)) {
-        var d:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast i : Float)) - m);
-        (sum = cast ((sum + (d * d)) : Dynamic));
+        var difference:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast i : Float)) - average);
+        (sum = cast ((sum + (difference * difference)) : Dynamic));
         i++;
       }
     }
@@ -53,13 +177,9 @@ class Statistics {
     return cast null;
   }
 
-  public static function weightedAverage(values:Array<Float>, weights:Array<Float>):Float {
+  public static function unscaledWeightedAverage__statistics(values:Array<Float>, weights:Array<Float>):Float {
     var sumWeights:Float = cast _Runtime.UNDEFINED;
     var sumProduct:Float = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(_Runtime.field(values, 'length'), _Runtime.field(weights, 'length')) : Bool)) {
-      _Runtime.throwValue(_Runtime.rangeError('weightedAverage: values and weights must have the same length'));
-    }
-    if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
     sumWeights = 0.0;
     sumProduct = 0.0;
     {

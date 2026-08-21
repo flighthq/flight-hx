@@ -24,7 +24,7 @@ typedef Scene3DResourceResolverOptions = { @:optional var fetch:ImageResourceFet
 
 typedef Scene3DResourceInFlight = { var controller:flighthq._internal.dom.AbortController; var promise:flighthq._internal._Promise<flighthq._internal._Nothing>; var subscribers:flighthq._internal._Set<Texture>; };
 
-typedef Scene3DResourceResolverRuntime = { var inFlight:flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>; var loader:ResourceLoader; var resolved:flighthq._internal._Map<ImageResourceReference, Image>; var signals:Null<Scene3DResourceSignals>; };
+typedef Scene3DResourceResolverRuntime = { var inFlight:flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>; var loader:ResourceLoader; var resolved:flighthq._internal._Map<ImageResourceReference, TextureSource>; var signals:Null<Scene3DResourceSignals>; };
 
 typedef Scene3DResourceResolverWithRuntime = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var fetch:ImageResourceFetch; var registry:Scene3DMaterialTextureRegistry; @:optional var __Scene3DResourceResolverRuntimeKey:Scene3DResourceResolverRuntime; };
 
@@ -38,7 +38,7 @@ typedef LoadScene3DResourcesOptions = { @:optional var select:Texture->ImageReso
 
 typedef ResolveScene3DResourcesOptions = { @:optional var select:Texture->ImageResourceReference->Bool; };
 
-typedef Scene3DResourceResolution = { var ref:ImageResourceReference; var textures:Array<Texture>; var image:Image; };
+typedef Scene3DResourceResolution = { var ref:ImageResourceReference; var textures:Array<Texture>; var source:TextureSource; };
 
 typedef Scene3DResources = { var resolved:Array<Scene3DResourceResolution>; var scene:Scene3D; var unresolved:Array<Scene3DResourceWorkingSet>; };
 

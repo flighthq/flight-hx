@@ -3,6 +3,7 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './enableSkeleton3DGuards.mjs';
 export * from './getMeshSkinBounds.mjs';
 export * from './prepareScene3DSkinning.mjs';
 export * from './skeleton3d.mjs';

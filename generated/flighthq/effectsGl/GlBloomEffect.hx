@@ -61,7 +61,7 @@ class GlBloomEffect {
   });
 
   public static function registerGlBloomEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument33:Dynamic = state; __callArgument33; }), (cast 'BloomEffect' : String), ({ final __callArgument34:Dynamic = defaultGlBloomEffectRunner; __callArgument34; }));
+    registerGlRenderEffect(({ final __callArgument33:Dynamic = state; __callArgument33; }), (cast 'BloomEffect' : String), ({ final __callArgument34:Dynamic = defaultGlBloomEffectRunner; __callArgument34; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static final BLOOM_BRIGHT_FRAGMENT_SRC__glBloomEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_threshold;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float l = dot(c.rgb, vec3(0.2126, 0.7152, 0.0722));\n  float k = step(u_threshold, l);\n  o_color = vec4(c.rgb * k, c.a);\n}';

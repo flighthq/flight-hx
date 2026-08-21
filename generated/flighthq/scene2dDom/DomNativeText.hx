@@ -3,7 +3,7 @@ package flighthq.scene2dDom;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.color.PackColor.computeRgbHexString;
+import flighthq.color.PackColor.computeRgbaCssString;
 import flighthq.scene2dDom.DomStyle.applyDomStyle;
 import flighthq.scene2dDom.DomStyle.prepareDomElement;
 import flighthq.scene2dDom.DomStyle.setDomRendererElement;
@@ -103,7 +103,7 @@ class DomNativeText {
     weight = _Runtime.select(_Runtime.field(style, 'bold'), function():Dynamic return cast 'bold ', function():Dynamic return cast '');
     slant = _Runtime.select(_Runtime.field(style, 'italic'), function():Dynamic return cast 'italic ', function():Dynamic return cast '');
     ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).font = '' + Std.string(slant) + '' + Std.string(weight) + '' + Std.string(size) + 'px ' + Std.string(family) + '');
-    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).color = (cast computeRgbHexString((cast _Runtime.coalesce(_Runtime.field(style, 'color'), function():Dynamic return cast 0.0) : Float)) : String));
+    ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).color = (cast computeRgbaCssString((cast _Runtime.coalesce(_Runtime.field(style, 'color'), function():Dynamic return cast 255.0) : Float)) : String));
     if ((cast !_Runtime.strictEquals(_Runtime.field(style, 'align'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).textAlign = _Runtime.field(style, 'align')); }
     if ((cast !_Runtime.strictEquals(_Runtime.field(style, 'leading'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).lineHeight = '' + Std.string(_Runtime.addNumbers(size, _Runtime.field(style, 'leading'))) + 'px'); }
   }

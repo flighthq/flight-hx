@@ -38,7 +38,7 @@ class NextPowerOfTwo {
     (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> 4))));
     (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> 8))));
     (n = (_Runtime.toInt32(n) | _Runtime.toInt32((_Runtime.toInt32(n) >> 16))));
-    return cast (_Runtime.toInt32((n + 1.0)) >> 1);
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((n + 1.0)), 1);
     return cast null;
   }
 }

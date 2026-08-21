@@ -57,7 +57,7 @@ class GlDropShadowEffect {
     distance = _Runtime.coalesce(effect.distance, function():Dynamic return cast 4.0);
     dx = _Runtime.multiplyNumbers(HxMath.cos(angle), distance);
     dy = _Runtime.multiplyNumbers(HxMath.sin(angle), distance);
-    color = _Runtime.coalesce(effect.color, function():Dynamic return cast 0.0);
+    color = _Runtime.coalesce(effect.color, function():Dynamic return cast 255.0);
     alpha = _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0);
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(effect.quality, function():Dynamic return cast 1.0)));
@@ -93,6 +93,6 @@ class GlDropShadowEffect {
   });
 
   public static function registerGlDropShadowEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument34:Dynamic = state; __callArgument34; }), (cast 'DropShadowEffect' : String), ({ final __callArgument35:Dynamic = defaultGlDropShadowEffectRunner; __callArgument35; }));
+    registerGlRenderEffect(({ final __callArgument34:Dynamic = state; __callArgument34; }), (cast 'DropShadowEffect' : String), ({ final __callArgument35:Dynamic = defaultGlDropShadowEffectRunner; __callArgument35; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 }

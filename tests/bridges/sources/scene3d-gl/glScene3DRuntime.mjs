@@ -6,5 +6,6 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const destroyGlScene3DRuntime = api.destroyGlScene3DRuntime;
+export const ensureGlSkinNormalPalette = api.ensureGlSkinNormalPalette;
 export const ensureGlSkinPalette = api.ensureGlSkinPalette;
 export const getGlScene3DRuntime = api.getGlScene3DRuntime;

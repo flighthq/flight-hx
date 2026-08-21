@@ -21,15 +21,20 @@ import flighthq.types.MeshDeformer;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MorphTarget;
 import flighthq.types.MorphTarget.MeshMorph;
+import flighthq.types.Node.NodeData;
+import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node3D;
 import flighthq.types.Node3D.Node3DRuntime;
+import flighthq.types.Node3D.Node3DTraits;
 import flighthq.types.NodeSignals;
+import flighthq.types.Quaternion;
 import flighthq.types.Skin;
 import flighthq.types.Transform3D.Transform3DLike;
 import flighthq.types.Types.MeshDeformerMorph;
 import flighthq.types.Types.MeshDeformerNone;
 import flighthq.types.Types.MeshDeformerSkeletal;
 import flighthq.types.Types.MeshKind;
+import flighthq.types.Vector3;
 import flighthq.types._internal._MeshDeformerValues.MeshDeformerMorph;
 import flighthq.types._internal._MeshDeformerValues.MeshDeformerNone;
 import flighthq.types._internal._MeshDeformerValues.MeshDeformerSkeletal;
@@ -54,7 +59,7 @@ class Mesh {
     return cast null;
   }
 
-  public static function createMesh(geometry:MeshGeometry, materials:Array<Null<Material>>, ?kind:Kind, ?obj:flighthq._internal._Partial<flighthq._internal._Pick<flighthq.types.Mesh, String>>):flighthq.types.Mesh {
+  public static function createMesh(geometry:MeshGeometry, materials:Array<Null<Material>>, ?kind:Kind, ?obj:flighthq._internal._Partial<{ var enabled:Bool; var name:Null<String>; }>):flighthq.types.Mesh {
     if (kind == null) kind = cast (MeshKind : Dynamic);
     var mesh:flighthq.types.Mesh = cast _Runtime.UNDEFINED;
     mesh = (cast createNode3D((cast kind : String), ({ final __callArgument3:Dynamic = obj; __callArgument3; })) : flighthq.types.Mesh);
@@ -88,7 +93,7 @@ class Mesh {
   }
 
   public static function isMesh(source:flighthq._internal._Any):Bool {
-    return cast !_Runtime.looseEquals(_Runtime.field((cast source : flighthq._internal._Partial<flighthq.types.Mesh>), 'geometry'), null);
+    return cast !_Runtime.looseEquals((cast (cast source : { @:optional var geometry:Null<MeshGeometry>; @:optional var materials:Null<Array<Null<Material>>>; @:optional var morph:Null<MeshMorph>; @:optional var skin:Null<Skin>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node3DTraits>>; @:optional var data:Null<NodeData>; @:optional var enabled:Null<Bool>; @:optional var kind:Null<Kind>; @:optional var name:Null<String>; @:optional var alpha:Null<Float>; @:optional var visible:Null<Bool>; @:optional var position:Null<Vector3>; @:optional var rotation:Null<Quaternion>; @:optional var scale:Null<Vector3>; }) : { @:optional var geometry:Null<MeshGeometry>; @:optional var materials:Null<Array<Null<Material>>>; @:optional var morph:Null<MeshMorph>; @:optional var skin:Null<Skin>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node3DTraits>>; @:optional var data:Null<flighthq._internal._Object>; @:optional var enabled:Null<Bool>; @:optional var kind:Null<String>; @:optional var name:Null<String>; @:optional var alpha:Null<Float>; @:optional var visible:Null<Bool>; @:optional var position:Null<Vector3>; @:optional var rotation:Null<Quaternion>; @:optional var scale:Null<Vector3>; }).geometry, null);
     return cast null;
   }
 }

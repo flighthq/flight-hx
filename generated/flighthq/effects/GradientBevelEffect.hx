@@ -5,13 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effects.RenderEffectPadding.getDirectionalRenderEffectPadding;
 import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
+import flighthq.types.EffectSourceMode;
 import flighthq.types.GradientBevelEffect;
 import flighthq.types.RenderEffect;
 import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class GradientBevelEffect {
-  public static function createGradientBevelEffect(options:flighthq._internal._Omit<flighthq.types.GradientBevelEffect, String>):flighthq.types.GradientBevelEffect {
+  public static function createGradientBevelEffect(options:{ var alphas:Array<Float>; @:optional var angle:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; var colors:Array<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; var ratios:Array<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):flighthq.types.GradientBevelEffect {
     return cast _Runtime.mergeObjects([{ kind: 'GradientBevelEffect' }, options]);
     return cast null;
   }

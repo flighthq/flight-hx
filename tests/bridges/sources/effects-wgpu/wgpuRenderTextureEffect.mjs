@@ -6,3 +6,5 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const applyWgpuRenderEffectsToRenderTexture = api.applyWgpuRenderEffectsToRenderTexture;
+export const explainWgpuRenderEffectApplication = api.explainWgpuRenderEffectApplication;
+export const setWgpuRenderEffectApplicationGuard = api.setWgpuRenderEffectApplicationGuard;

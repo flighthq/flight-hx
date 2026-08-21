@@ -10,5 +10,7 @@ export const createGlOffscreenRenderState = api.createGlOffscreenRenderState;
 export const createGlRenderState = api.createGlRenderState;
 export const createGlRenderStateRuntime = api.createGlRenderStateRuntime;
 export const destroyGlRenderState = api.destroyGlRenderState;
+export const getGlColorAdjustmentMaterialFeature = api.getGlColorAdjustmentMaterialFeature;
+export const getGlColorAdjustmentMaterialFeatureGuard = api.getGlColorAdjustmentMaterialFeatureGuard;
 export const getGlRenderStateRuntime = api.getGlRenderStateRuntime;
 export const invalidateGlRenderStateCache = api.invalidateGlRenderStateCache;

@@ -8,6 +8,7 @@ import flighthq.bitmapfontFormats.BitmapFontJson as Facade_BitmapfontFormats_fli
 import flighthq.bitmapfontFormats.BitmapFontXml as Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontXml;
 import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFont.BitmapFontParseOptions;
+import flighthq.types.ImportDiagnostic;
 
 class BitmapfontFormats {
   public static function formatBitmapFontFnt(font:BitmapFont):String {
@@ -15,18 +16,18 @@ class BitmapfontFormats {
     return cast null;
   }
 
-  public static function parseBitmapFontFnt(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
-    return cast Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontFnt.parseBitmapFontFnt(text, options);
+  public static function parseBitmapFontFnt(text:String, ?options:BitmapFontParseOptions, ?diagnostics:Array<ImportDiagnostic>):Null<BitmapFont> {
+    return cast Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontFnt.parseBitmapFontFnt(text, options, diagnostics);
     return cast null;
   }
 
-  public static function parseBitmapFontJson(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
-    return cast Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontJson.parseBitmapFontJson(text, options);
+  public static function parseBitmapFontJson(text:String, ?options:BitmapFontParseOptions, ?diagnostics:Array<ImportDiagnostic>):Null<BitmapFont> {
+    return cast Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontJson.parseBitmapFontJson(text, options, diagnostics);
     return cast null;
   }
 
-  public static function parseBitmapFontXml(text:String, ?options:BitmapFontParseOptions):Null<BitmapFont> {
-    return cast Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontXml.parseBitmapFontXml(text, options);
+  public static function parseBitmapFontXml(text:String, ?options:BitmapFontParseOptions, ?diagnostics:Array<ImportDiagnostic>):Null<BitmapFont> {
+    return cast Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontXml.parseBitmapFontXml(text, options, diagnostics);
     return cast null;
   }
 }

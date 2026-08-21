@@ -3,6 +3,7 @@ package flighthq.scene3d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.node.HasAppearance.initAppearanceRuntimeTrait;
 import flighthq.node.HasAppearance.initAppearanceTrait;
 import flighthq.node.HasTransform3d.initTransform3DRuntimeTrait;
 import flighthq.node.HasTransform3d.initTransform3DTrait;
@@ -13,6 +14,7 @@ import flighthq.node.Node.getNodeRuntime;
 import flighthq.node.Node.getNodeSignals;
 import flighthq.types.Entity.Kind;
 import flighthq.types.HasAppearance;
+import flighthq.types.HasAppearance.HasAppearanceRuntime;
 import flighthq.types.HasTransform3D;
 import flighthq.types.HasTransform3D.HasTransform3DRuntime;
 import flighthq.types.Node;
@@ -27,10 +29,10 @@ import flighthq.types._internal._Node3DValues.Node3DKind;
 import flighthq.types._internal._Node3DValues.Node3DTraitsKey;
 
 class SceneNode {
-  public static function createNode3D(?kind:Kind, ?obj:flighthq._internal._Partial<flighthq._internal._Pick<Node3D, String>>):Node3D {
+  public static function createNode3D(?kind:Kind, ?obj:flighthq._internal._Partial<{ var enabled:Bool; var name:Null<String>; var alpha:Float; var visible:Bool; }>):Node3D {
     if (kind == null) kind = cast (Node3DKind : Dynamic);
     var node:{ >Node<Node3DTraits>, >Node3DTraits, } = cast _Runtime.UNDEFINED;
-    node = (cast createNode((cast kind : String), (cast obj : Dynamic), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic), (cast function(__unused0:Null<flighthq._internal._Any>):Node3DRuntime return createNode3DRuntime() : Dynamic)) : { >Node<Node3DTraits>, >Node3DTraits, });
+    node = (cast createNode((cast kind : String), (cast obj : Dynamic), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic), (cast function(__unused0:Dynamic):Node3DRuntime return createNode3DRuntime() : Dynamic)) : { >Node<Node3DTraits>, >Node3DTraits, });
     initAppearanceTrait(({ final __callArgument0:Dynamic = node; __callArgument0; }), ({ final __callArgument1:Dynamic = obj; __callArgument1; }));
     initTransform3DTrait(({ final __callArgument2:Dynamic = node; __callArgument2; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     return cast (cast node : Node3D);
@@ -42,11 +44,8 @@ class SceneNode {
     var out:Node3DRuntime = cast _Runtime.UNDEFINED;
     out = (cast createNodeRuntime(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Node3DRuntime);
     ((cast out : { @:optional var traits:Null<NodeTraitsKey<Node3DTraits>>; }).traits = Node3DTraitsKey);
-    ((cast out : { var worldAlpha:Null<Float>; }).worldAlpha = null);
-    ((cast out : { var worldAlphaUsingAppearanceId:Float; }).worldAlphaUsingAppearanceId = -1.0);
-    ((cast out : { var worldAlphaUsingParentAppearanceId:Float; }).worldAlphaUsingParentAppearanceId = -1.0);
-    ((cast out : { var worldAppearanceId:Float; }).worldAppearanceId = 0.0);
-    initTransform3DRuntimeTrait(({ final __callArgument3:Dynamic = out; __callArgument3; }));
+    initAppearanceRuntimeTrait(({ final __callArgument3:Dynamic = out; __callArgument3; }));
+    initTransform3DRuntimeTrait(({ final __callArgument4:Dynamic = out; __callArgument4; }));
     return cast out;
     return cast null;
   }

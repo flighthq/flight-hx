@@ -3,7 +3,7 @@ package flighthq.physics2d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionShape;
+import flighthq.types.Collision.CollisionBuiltInShape2D;
 import flighthq.types.Physics2D.Physics2DBodyType;
 import flighthq.types.Physics2D.Physics2DCollider;
 import flighthq.types.Physics2D.Physics2DCollisionFilter;
@@ -76,7 +76,7 @@ class StepValidation {
     return cast null;
   }
 
-  public static function isCollisionShapeStateValid__stepValidation(shape:CollisionShape):Bool {
+  public static function isCollisionShapeStateValid__stepValidation(shape:CollisionBuiltInShape2D):Bool {
     {
       var __switchValue = (cast shape : { var kind:String; }).kind;
       if (__switchValue == 'circle') {

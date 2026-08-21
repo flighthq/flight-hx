@@ -8,6 +8,7 @@ import flighthq.types.Bitmap;
 import flighthq.types.CompressedImage;
 import flighthq.types.CompressedImageData;
 import flighthq.types.Entity;
+import flighthq.types.Entity.EntityRuntime;
 import flighthq.types.Texture.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
@@ -18,7 +19,7 @@ import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind
 import flighthq.types._internal._TextureSourceKindValues.CompressedImageTextureSourceKind;
 
 class TextureAtlas {
-  public static function createTextureAtlas(?obj:flighthq._internal._Partial<flighthq.types.TextureAtlas>):flighthq.types.TextureAtlas {
+  public static function createTextureAtlas(?obj:{ @:optional var texture:Null<Texture2D>; @:optional var regions:Null<Array<TextureAtlasRegion>>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):flighthq.types.TextureAtlas {
     return cast (cast createEntity((cast { regions: _Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var regions:Null<Array<TextureAtlasRegion>>; }).regions; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), texture: _Runtime.coalesce(({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var texture:Null<Texture2D>; }).texture; }), function():Dynamic return cast null) } : Dynamic)) : { >Entity, var regions:Array<TextureAtlasRegion>; var texture:Null<Texture2D>; });
     return cast null;
   }

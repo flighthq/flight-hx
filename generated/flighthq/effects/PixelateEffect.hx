@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.PixelateEffect;
 
 class PixelateEffect {
-  public static function createPixelateEffect(?options:flighthq._internal._Omit<flighthq.types.PixelateEffect, String>):flighthq.types.PixelateEffect {
+  public static function createPixelateEffect(?options:{ @:optional var size:Null<Float>; }):flighthq.types.PixelateEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'PixelateEffect' }, options]);
     return cast null;

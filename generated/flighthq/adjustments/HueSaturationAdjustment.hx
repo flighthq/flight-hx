@@ -7,15 +7,15 @@ import flighthq.types.ColorTransformFunction;
 import flighthq.types.HueSaturationAdjustment;
 
 class HueSaturationAdjustment {
-  public static function createHueSaturationAdjustment(?options:flighthq._internal._Omit<flighthq.types.HueSaturationAdjustment, String>):flighthq.types.HueSaturationAdjustment {
+  public static function createHueSaturationAdjustment(?options:{ @:optional var hue:Null<Float>; @:optional var saturation:Null<Float>; @:optional var lightness:Null<Float>; }):flighthq.types.HueSaturationAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var hue:Float = cast _Runtime.UNDEFINED;
     var saturation:Float = cast _Runtime.UNDEFINED;
     var lightness:Float = cast _Runtime.UNDEFINED;
     var transform:ColorTransformFunction = cast _Runtime.UNDEFINED;
-    hue = _Runtime.divideNumbers(_Runtime.coalesce(_Runtime.field(options, 'hue'), function():Dynamic return cast 0.0), 360.0);
-    saturation = _Runtime.coalesce(_Runtime.field(options, 'saturation'), function():Dynamic return cast 1.0);
-    lightness = _Runtime.coalesce(_Runtime.field(options, 'lightness'), function():Dynamic return cast 0.0);
+    hue = _Runtime.divideNumbers(_Runtime.coalesce((cast options : { @:optional var saturation:Null<Float>; @:optional var hue:Null<Float>; @:optional var lightness:Null<Float>; }).hue, function():Dynamic return cast 0.0), 360.0);
+    saturation = _Runtime.coalesce((cast options : { @:optional var saturation:Null<Float>; @:optional var hue:Null<Float>; @:optional var lightness:Null<Float>; }).saturation, function():Dynamic return cast 1.0);
+    lightness = _Runtime.coalesce((cast options : { @:optional var saturation:Null<Float>; @:optional var hue:Null<Float>; @:optional var lightness:Null<Float>; }).lightness, function():Dynamic return cast 0.0);
     transform = function(out:Array<Float>, r:Float, g:Float, b:Float):Void {
       var mx:Float = cast _Runtime.UNDEFINED;
       var mn:Float = cast _Runtime.UNDEFINED;

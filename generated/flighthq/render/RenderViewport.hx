@@ -17,14 +17,14 @@ import flighthq.types.Renderable;
 
 class RenderViewport {
   @:noCompletion
-  public static function computeRenderProxyWorldBounds(out:flighthq._internal._Pick<Rectangle, String>, source:flighthq._internal._Any):Bool {
+  public static function computeRenderProxyWorldBounds(out:{ var height:Float; var width:Float; var x:Float; var y:Float; }, source:flighthq._internal._Any):Bool {
     var worldBounds:Rectangle = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast RenderViewport.isSpatial2DNode__renderViewport((cast source : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast false; }
     worldBounds = (cast getNodeWorldBoundsRectangle((cast source : Dynamic)) : Rectangle);
-    _Runtime.setField(out, 'x', worldBounds.x);
-    _Runtime.setField(out, 'y', worldBounds.y);
-    _Runtime.setField(out, 'width', worldBounds.width);
-    _Runtime.setField(out, 'height', worldBounds.height);
+    ((cast out : { var height:Float; var width:Float; var x:Float; var y:Float; }).x = worldBounds.x);
+    ((cast out : { var height:Float; var width:Float; var x:Float; var y:Float; }).y = worldBounds.y);
+    ((cast out : { var height:Float; var width:Float; var x:Float; var y:Float; }).width = worldBounds.width);
+    ((cast out : { var height:Float; var width:Float; var x:Float; var y:Float; }).height = worldBounds.height);
     return cast true;
     return cast null;
   }
@@ -46,10 +46,10 @@ class RenderViewport {
     var vpMinY:Float = cast _Runtime.UNDEFINED;
     var vpMaxX:Float = cast _Runtime.UNDEFINED;
     var vpMaxY:Float = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast computeRenderProxyWorldBounds((cast RenderViewport._scratchBounds__renderViewport : flighthq._internal._Any), (cast source : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast true; }
+    if ((cast !(cast (cast computeRenderProxyWorldBounds(({ final __callArgument0:Dynamic = RenderViewport._scratchBounds__renderViewport; __callArgument0; }), (cast source : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast true; }
     bounds = RenderViewport._scratchBounds__renderViewport;
     if ((cast !_Runtime.looseEquals(renderTransform2D, null) : Bool)) {
-      matrixTransformRectangle(({ final __callArgument0:Dynamic = RenderViewport._scratchTransformed__renderViewport; __callArgument0; }), ({ final __callArgument1:Dynamic = renderTransform2D; __callArgument1; }), ({ final __callArgument2:Dynamic = RenderViewport._scratchBounds__renderViewport; __callArgument2; }));
+      matrixTransformRectangle(({ final __callArgument1:Dynamic = RenderViewport._scratchTransformed__renderViewport; __callArgument1; }), ({ final __callArgument2:Dynamic = renderTransform2D; __callArgument2; }), ({ final __callArgument3:Dynamic = RenderViewport._scratchBounds__renderViewport; __callArgument3; }));
       (bounds = cast (RenderViewport._scratchTransformed__renderViewport : Dynamic));
     }
     objMinX = bounds.x;
@@ -66,7 +66,7 @@ class RenderViewport {
 
   @:noCompletion
   public static function isRenderProxyInViewport(proxy:RenderProxy2D, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
-    return cast (cast isRenderableInViewport((cast _Runtime.field(proxy, 'source') : flighthq._internal._Any), ({ final __callArgument3:Dynamic = viewport; __callArgument3; }), ({ final __callArgument4:Dynamic = renderTransform2D; __callArgument4; })) : Bool);
+    return cast (cast isRenderableInViewport((cast _Runtime.field(proxy, 'source') : flighthq._internal._Any), ({ final __callArgument4:Dynamic = viewport; __callArgument4; }), ({ final __callArgument5:Dynamic = renderTransform2D; __callArgument5; })) : Bool);
     return cast null;
   }
 

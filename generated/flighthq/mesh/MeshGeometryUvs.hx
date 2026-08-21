@@ -52,26 +52,4 @@ class MeshGeometryUvs {
     }
     if ((cast ((cast vertexCount : Float) > (cast 0.0 : Float)) : Bool)) { geometry.version++; }
   }
-
-  public static function wrapMeshGeometryUvs(geometry:MeshGeometry):Void {
-    var floatOffset:Float = cast _Runtime.UNDEFINED;
-    var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
-    var vertexCount:Float = cast _Runtime.UNDEFINED;
-    var verts:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    floatOffset = (cast getVertexAttributeFloatOffset(geometry.layout, ({ final __callArgument10:Dynamic = 'uv0'; __callArgument10; })) : Float);
-    if ((cast ((cast floatOffset : Float) < (cast 0.0 : Float)) : Bool)) { return; }
-    floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
-    vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(geometry.vertices, 'length'), floatsPerVertex)) : Dynamic) : (cast 0.0 : Dynamic));
-    verts = geometry.vertices;
-    {
-      var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast vertexCount : Float)) : Bool)) {
-        var base:Float = ((i * floatsPerVertex) + floatOffset);
-        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast verts : flighthq._internal._Float32Array), (cast base : Float), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast verts : flighthq._internal._Float32Array), (cast base : Float)), HxMath.floor(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast verts : flighthq._internal._Float32Array), (cast base : Float)))) : Float));
-        flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast verts : flighthq._internal._Float32Array), (cast (base + 1.0) : Float), (cast _Runtime.subtractNumbers(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast verts : flighthq._internal._Float32Array), (cast (base + 1.0) : Float)), HxMath.floor(flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast verts : flighthq._internal._Float32Array), (cast (base + 1.0) : Float)))) : Float));
-        i++;
-      }
-    }
-    if ((cast ((cast vertexCount : Float) > (cast 0.0 : Float)) : Bool)) { geometry.version++; }
-  }
 }

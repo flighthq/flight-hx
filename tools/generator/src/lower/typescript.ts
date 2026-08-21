@@ -158,6 +158,28 @@ type TypedArrayBinding = keyof typeof typedArrayTypeReferenceMap;
 
 const typedArrayBindings = Object.keys(typedArrayTypeReferenceMap) as TypedArrayBinding[];
 
+const typedArrayByteLengths = {
+  Float32Array: 4,
+  Float64Array: 8,
+  Int16Array: 2,
+  Int32Array: 4,
+  Int8Array: 1,
+  Uint16Array: 2,
+  Uint32Array: 4,
+  Uint8Array: 1,
+  Uint8ClampedArray: 1,
+} as const satisfies Readonly<Record<TypedArrayBinding, number>>;
+
+const standardMathConstants = {
+  E: Math.E,
+  LN10: Math.LN10,
+  LN2: Math.LN2,
+  LOG10E: Math.LOG10E,
+  LOG2E: Math.LOG2E,
+  SQRT1_2: Math.SQRT1_2,
+  SQRT2: Math.SQRT2,
+} as const;
+
 const portableTypeReferenceMap: Readonly<Record<string, string>> = {
   ArrayBuffer: 'haxe.io.Bytes',
   ArrayBufferLike: 'flighthq._internal._ArrayBufferLike',
@@ -216,6 +238,7 @@ const platformGlobalValues = new Set([
   'OffscreenCanvas',
   'Promise',
   'ResizeObserver',
+  'SharedArrayBuffer',
   'Notification',
   'Audio',
   'Date',
@@ -259,13 +282,20 @@ const webGpuConstantNamespaces = new Set([
   'GPUTextureUsage',
 ]);
 
+interface LoweringOptions {
+  expressionTypes?: boolean;
+  inferredTypes?: boolean;
+  ownedFunctionBodies?: ReadonlySet<string>;
+  program?: ts.Program;
+}
+
 export function lowerTypeScriptSource(
   sourceFile: ts.SourceFile,
   packageName: string,
   workspaceDirectory: string,
   checker?: ts.TypeChecker,
   typedStructs?: TypedStructRegistry,
-  options: { expressionTypes?: boolean; inferredTypes?: boolean; program?: ts.Program } = {},
+  options: LoweringOptions = {},
 ): LoweringResult {
   const diagnostics: LoweringDiagnostic[] = [];
   const declarations: IrDeclaration[] = [];
@@ -273,7 +303,9 @@ export function lowerTypeScriptSource(
   let accountedDeclarations = 0;
   const erasedLocalTypes = new Set<string>();
   const collectLocalTypes = (node: ts.Node): void => {
-    if (ts.isTypeAliasDeclaration(node) && !ts.isSourceFile(node.parent)) erasedLocalTypes.add(node.name.text);
+    if ((ts.isInterfaceDeclaration(node) || ts.isTypeAliasDeclaration(node)) && !ts.isSourceFile(node.parent)) {
+      erasedLocalTypes.add(node.name.text);
+    }
     ts.forEachChild(node, collectLocalTypes);
   };
   collectLocalTypes(sourceFile);
@@ -403,7 +435,7 @@ export function lowerTypeScriptSource(
   for (const statement of sourceFile.statements) {
     try {
       if (ts.isFunctionDeclaration(statement) && statement.name && statement.body) {
-        const declaration = lowerFunction(statement, context);
+        const declaration = lowerFunction(statement, context, options.ownedFunctionBodies?.has(statement.name.text));
         const signatures = overloads.get(statement.name.text);
         if (signatures?.length) declaration.overloads = signatures;
         overloads.delete(statement.name.text);
@@ -1174,7 +1206,11 @@ function enumMemberHasReverseMapping(member: ts.EnumMember, checker: ts.TypeChec
   );
 }
 
-function lowerFunction(node: ts.FunctionDeclaration, context: LoweringContext): IrFunctionDeclaration {
+function lowerFunction(
+  node: ts.FunctionDeclaration,
+  context: LoweringContext,
+  bodyOwnedByPatch = false,
+): IrFunctionDeclaration {
   if (!node.name || !node.body) throw new Error('Expected named function with a body');
   const previousClassThis = context.classThis;
   const previousDynamicThisCapture = context.dynamicThisCapture;
@@ -1185,7 +1221,7 @@ function lowerFunction(node: ts.FunctionDeclaration, context: LoweringContext): 
     const loweredParameters = lowerParameterList(node.parameters, context);
     return {
       async: hasModifier(node, ts.SyntaxKind.AsyncKeyword),
-      body: [...loweredParameters.prefix, ...lowerStatementList(node.body.statements, context)],
+      body: bodyOwnedByPatch ? [] : [...loweredParameters.prefix, ...lowerStatementList(node.body.statements, context)],
       exported: hasModifier(node, ts.SyntaxKind.ExportKeyword),
       kind: 'function',
       name: node.name.text,
@@ -1550,7 +1586,23 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
     if (name === 'DeepReadonly') {
       return { arguments: arguments_, kind: 'named', name: 'flighthq._internal._DeepReadonly' };
     }
-    if (context.erasedLocalTypes.has(name)) return { kind: 'dynamic' };
+    if (context.erasedLocalTypes.has(name)) {
+      const localDeclaration = symbol?.declarations?.find(
+        (declaration) =>
+          (ts.isInterfaceDeclaration(declaration) || ts.isTypeAliasDeclaration(declaration)) &&
+          !ts.isSourceFile(declaration.parent),
+      );
+      if (localDeclaration && context.checker) {
+        const localType = context.checker.getTypeFromTypeNode(node);
+        return (
+          lowerCheckerType(localType, node, context, new Set()) ??
+          checkerKnownUnrepresentable(localType, context.checker)
+        );
+      }
+      return { kind: 'dynamic', reason: 'source-unknown' };
+    }
+    const concreteMappedReference = lowerConcreteClosedMappedTypeReference(node, symbol, context);
+    if (concreteMappedReference) return concreteMappedReference;
     if (name === 'Error') return { arguments: [], kind: 'named', name: 'haxe.Exception' };
     const portableType = portableTypeReferenceMap[name];
     const standardType =
@@ -1694,6 +1746,10 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
       return { kind: 'primitive', name: 'Bool' };
     }
   }
+  // TypeScript template-literal types are refinements of string. Haxe cannot
+  // encode their pattern constraint, but retaining String preserves the
+  // source value domain without inventing an external toolkit identity.
+  if (ts.isTemplateLiteralTypeNode(node)) return { kind: 'primitive', name: 'String' };
   return unsupported(node, context, `type ${ts.SyntaxKind[node.kind] ?? node.kind}`);
 }
 
@@ -1852,6 +1908,8 @@ function lowerCheckerTypeUncached(
     }
     return { arguments: genericArguments, kind: 'named', name: standardGenericType.haxeType };
   }
+  const concreteMappedType = lowerConcreteClosedMappedCheckerType(type, node, context, nextSeen);
+  if (concreteMappedType) return concreteMappedType;
   // Preserve a source-visible alias before decomposing its union or
   // intersection. The alias is the portable identity; its implementation is
   // not a request to inline a potentially recursive structural graph.
@@ -2050,6 +2108,28 @@ function lowerConcreteClosedMappedAlias(
   if (!closedMappedAliasWrapper(wrapper, checker)) return undefined;
 
   const resolved = checker.getTypeFromTypeNode(declaration.type);
+  return lowerResolvedConcreteMappedType(resolved, declaration.type.typeArguments[0]!, declaration, context);
+}
+
+function lowerConcreteClosedMappedTypeReference(
+  node: ts.TypeReferenceNode,
+  symbol: ts.Symbol | undefined,
+  context: LoweringContext,
+): Extract<IrType, { kind: 'anonymous' }> | undefined {
+  const checker = context.checker;
+  const targetNode = node.typeArguments?.[0];
+  if (!checker || !targetNode || !closedMappedAliasWrapper(symbol, checker)) return undefined;
+  return lowerResolvedConcreteMappedType(checker.getTypeFromTypeNode(node), targetNode, node, context);
+}
+
+function lowerResolvedConcreteMappedType(
+  resolved: ts.Type,
+  targetNode: ts.TypeNode,
+  location: ts.Node,
+  context: LoweringContext,
+): Extract<IrType, { kind: 'anonymous' }> | undefined {
+  const checker = context.checker;
+  if (!checker) return undefined;
   if (
     (resolved.flags & ts.TypeFlags.Object) === 0 ||
     checker.getIndexInfosOfType(resolved).length > 0 ||
@@ -2062,8 +2142,12 @@ function lowerConcreteClosedMappedAlias(
   const resolvedProperties = new Map(
     checker.getPropertiesOfType(resolved).map((property) => [property.getName(), property]),
   );
-  const targetNode = declaration.type.typeArguments[0]!;
-  if (concreteAliasTargetIsGeneric(targetNode, checker)) return undefined;
+  if (
+    concreteAliasTargetIsGeneric(targetNode, checker) ||
+    checkerTypeContainsTypeParameter(checker.getTypeFromTypeNode(targetNode), checker)
+  ) {
+    return undefined;
+  }
   const target = checker.getTypeFromTypeNode(targetNode);
   const sourceOrder = concreteAliasTargetFieldOrder(targetNode, checker);
   const orderedProperties = checker
@@ -2090,7 +2174,53 @@ function lowerConcreteClosedMappedAlias(
     const name = concreteMappedPropertyName(property, propertyDeclaration, context);
     if (!name || fieldNames.has(name)) return undefined;
     const checkerType = checker.getTypeOfSymbolAtLocation(property, propertyDeclaration);
-    const fieldType = concreteMappedFieldType(checkerType, propertyDeclaration, declaration, context);
+    const fieldType = concreteMappedFieldType(checkerType, propertyDeclaration, location, context);
+    if (!fieldType) return undefined;
+    fieldNames.add(name);
+    fields.push({
+      name,
+      optional: (property.flags & ts.SymbolFlags.Optional) !== 0,
+      type: fieldType,
+    });
+  }
+  return { extends: [], fields, kind: 'anonymous' };
+}
+
+function lowerConcreteClosedMappedCheckerType(
+  type: ts.Type,
+  node: ts.Node,
+  context: LoweringContext,
+  seen: Set<ts.Type>,
+): Extract<IrType, { kind: 'anonymous' }> | undefined {
+  const checker = context.checker;
+  const symbol = type.aliasSymbol ?? type.getSymbol();
+  const typeArguments = checker ? checkerTypeArguments(type, checker) : [];
+  if (
+    !checker ||
+    !closedMappedAliasWrapper(symbol, checker) ||
+    typeArguments.length === 0 ||
+    typeArguments.some((argument) => checkerTypeContainsTypeParameter(argument, checker)) ||
+    (type.flags & ts.TypeFlags.Object) === 0 ||
+    checker.getIndexInfosOfType(type).length > 0 ||
+    checker.getSignaturesOfType(type, ts.SignatureKind.Call).length > 0 ||
+    checker.getSignaturesOfType(type, ts.SignatureKind.Construct).length > 0
+  ) {
+    return undefined;
+  }
+
+  const fields: IrTypeField[] = [];
+  const fieldNames = new Set<string>();
+  for (const property of checker.getPropertiesOfType(type)) {
+    const propertyDeclaration = property.valueDeclaration ?? property.declarations?.[0];
+    if (!propertyDeclaration || propertyDeclaration.getSourceFile().isDeclarationFile) return undefined;
+    const name = concreteMappedPropertyName(property, propertyDeclaration, context);
+    if (!name || fieldNames.has(name)) return undefined;
+    const fieldType = lowerCheckerType(
+      checker.getTypeOfSymbolAtLocation(property, propertyDeclaration),
+      node,
+      context,
+      seen,
+    );
     if (!fieldType) return undefined;
     fieldNames.add(name);
     fields.push({
@@ -2117,13 +2247,17 @@ function concreteAliasTargetIsGeneric(node: ts.TypeNode, checker: ts.TypeChecker
 function concreteMappedFieldType(
   checkerType: ts.Type,
   propertyDeclaration: ts.Declaration,
-  aliasDeclaration: ts.TypeAliasDeclaration,
+  location: ts.Node,
   context: LoweringContext,
 ): IrType | undefined {
   if (
     (ts.isPropertySignature(propertyDeclaration) || ts.isPropertyDeclaration(propertyDeclaration)) &&
     propertyDeclaration.type
   ) {
+    const checker = context.checker;
+    if (checker && checkerTypeContainsTypeParameter(checker.getTypeFromTypeNode(propertyDeclaration.type), checker)) {
+      return lowerCheckerType(checkerType, location, context, new Set());
+    }
     const declared = lowerType(propertyDeclaration.type, {
       ...context,
       sourceFile: propertyDeclaration.getSourceFile(),
@@ -2135,7 +2269,7 @@ function concreteMappedFieldType(
       ? { inner: declared, kind: 'nullable' }
       : declared;
   }
-  return lowerCheckerType(checkerType, aliasDeclaration, context, new Set());
+  return lowerCheckerType(checkerType, location, context, new Set());
 }
 
 function concreteAliasTargetFieldOrder(node: ts.TypeNode, checker: ts.TypeChecker): ReadonlyMap<string, number> {
@@ -2301,10 +2435,11 @@ function hasReturnValue(body: ts.Block): boolean {
 }
 
 function lowerStatementList(nodes: readonly ts.Statement[], context: LoweringContext): IrStatement[] {
-  const lowered = nodes.map((node) => lowerStatement(node, context));
+  const runtimeNodes = nodes.filter((node) => !ts.isInterfaceDeclaration(node) && !ts.isTypeAliasDeclaration(node));
+  const lowered = runtimeNodes.map((node) => lowerStatement(node, context));
   const hoisted: IrStatement[] = [];
   const ordered: IrStatement[] = [];
-  nodes.forEach((node, index) => {
+  runtimeNodes.forEach((node, index) => {
     const statement = lowered[index]!;
     if (ts.isFunctionDeclaration(node) && node.name && node.body) hoisted.push(statement);
     else ordered.push(statement);
@@ -3269,6 +3404,20 @@ function checkerTypeContainsTypeParameter(type: ts.Type, checker: ts.TypeChecker
   ) {
     return true;
   }
+  for (const signature of [...type.getCallSignatures(), ...type.getConstructSignatures()]) {
+    const location = signature.declaration;
+    if (
+      checkerTypeContainsTypeParameter(checker.getReturnTypeOfSignature(signature), checker, seen) ||
+      (location &&
+        signature
+          .getParameters()
+          .some((parameter) =>
+            checkerTypeContainsTypeParameter(checker.getTypeOfSymbolAtLocation(parameter, location), checker, seen),
+          ))
+    ) {
+      return true;
+    }
+  }
   return checkerTypeArguments(type, checker).some((argument) =>
     checkerTypeContainsTypeParameter(argument, checker, seen),
   );
@@ -3479,10 +3628,43 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
   if (ts.isPropertyAccessExpression(node)) {
     if (
       ts.isIdentifier(node.expression) &&
+      node.expression.text === 'Math' &&
+      !isLexicallyBound(node.expression, context) &&
+      node.name.text in standardMathConstants
+    ) {
+      return {
+        kind: 'literal',
+        value: standardMathConstants[node.name.text as keyof typeof standardMathConstants],
+      };
+    }
+    if (
+      ts.isIdentifier(node.expression) &&
+      node.expression.text in typedArrayByteLengths &&
+      !isLexicallyBound(node.expression, context) &&
+      node.name.text === 'BYTES_PER_ELEMENT'
+    ) {
+      return {
+        kind: 'literal',
+        value: typedArrayByteLengths[node.expression.text as TypedArrayBinding],
+      };
+    }
+    if (
+      ts.isIdentifier(node.expression) &&
       node.expression.text === 'Number' &&
       !isLexicallyBound(node.expression, context)
     ) {
-      if (['EPSILON', 'MAX_SAFE_INTEGER', 'NEGATIVE_INFINITY', 'POSITIVE_INFINITY'].includes(node.name.text)) {
+      if (
+        [
+          'EPSILON',
+          'MAX_SAFE_INTEGER',
+          'MAX_VALUE',
+          'MIN_SAFE_INTEGER',
+          'MIN_VALUE',
+          'NaN',
+          'NEGATIVE_INFINITY',
+          'POSITIVE_INFINITY',
+        ].includes(node.name.text)
+      ) {
         return { kind: 'property', name: node.name.text, object: { kind: 'identifier', name: 'Number' } };
       }
     }
@@ -3619,6 +3801,17 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     };
   }
   if (ts.isBinaryExpression(node)) {
+    const iterableProbe = symbolIteratorPresenceProbe(node, context);
+    if (iterableProbe) {
+      return {
+        arguments: [lowerExpression(iterableProbe, context)],
+        callee: { kind: 'identifier', name: '_Runtime.isIterable' },
+        direct: true,
+        kind: 'call',
+        type: { kind: 'primitive', name: 'Bool' },
+        typeArguments: [],
+      };
+    }
     const operator = node.operatorToken.getText(context.sourceFile);
     const assignment =
       node.operatorToken.kind >= ts.SyntaxKind.FirstAssignment &&
@@ -3686,6 +3879,26 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     }
   }
   return unsupported(node, context, `expression ${ts.SyntaxKind[node.kind] ?? node.kind}`);
+}
+
+function symbolIteratorPresenceProbe(node: ts.BinaryExpression, context: LoweringContext): ts.Expression | undefined {
+  if (
+    node.operatorToken.kind !== ts.SyntaxKind.InKeyword ||
+    !ts.isPropertyAccessExpression(node.left) ||
+    node.left.name.text !== 'iterator' ||
+    !ts.isIdentifier(node.left.expression) ||
+    node.left.expression.text !== 'Symbol' ||
+    isLexicallyBound(node.left.expression, context) ||
+    !ts.isCallExpression(node.right) ||
+    !ts.isIdentifier(node.right.expression) ||
+    node.right.expression.text !== 'Object' ||
+    isLexicallyBound(node.right.expression, context) ||
+    node.right.arguments.length !== 1 ||
+    ts.isSpreadElement(node.right.arguments[0]!)
+  ) {
+    return undefined;
+  }
+  return node.right.arguments[0];
 }
 
 function checkerCallIsTyped(node: ts.Expression, context: LoweringContext): boolean {

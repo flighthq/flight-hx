@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.AutoExposureEffect;
 
 class AutoExposureEffect {
-  public static function createAutoExposureEffect(?options:flighthq._internal._Omit<flighthq.types.AutoExposureEffect, String>):flighthq.types.AutoExposureEffect {
+  public static function createAutoExposureEffect(?options:{ @:optional var adaptationSpeed:Null<Float>; @:optional var exposureCompensation:Null<Float>; @:optional var maxExposure:Null<Float>; @:optional var minExposure:Null<Float>; }):flighthq.types.AutoExposureEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'AutoExposureEffect' }, options]);
     return cast null;

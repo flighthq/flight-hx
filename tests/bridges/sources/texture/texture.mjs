@@ -8,6 +8,7 @@ __syncDependencies();
 export const cloneTexture = api.cloneTexture;
 export const copyTexture = api.copyTexture;
 export const createTexture = api.createTexture;
+export const createTexture2D = api.createTexture2D;
 export const equalsTexture = api.equalsTexture;
 export const getTextureHeight = api.getTextureHeight;
 export const getTextureInverseUvMatrix = api.getTextureInverseUvMatrix;

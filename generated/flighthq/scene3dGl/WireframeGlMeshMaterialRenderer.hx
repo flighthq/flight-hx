@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.color.PackColor.unpackColorToLinear;
 import flighthq.scene3dGl.GlMeshMaterialRegistry.registerGlMeshMaterialRenderer;
 import flighthq.scene3dGl.GlMeshProgram.beginGlMeshDraw;
+import flighthq.scene3dGl.GlMeshProgram.bindGlMeshSkinPalette;
 import flighthq.scene3dGl.GlMeshProgram.setGlMeshViewProjection;
 import flighthq.scene3dGl.GlMeshProgram.uploadGlMeshDrawAlpha;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
@@ -53,6 +54,7 @@ class WireframeGlMeshMaterialRenderer {
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
+    var gpuSkinned:Bool = cast _Runtime.UNDEFINED;
     var upload:GlWireframeUpload = cast _Runtime.UNDEFINED;
     var subset:MeshSubset = cast _Runtime.UNDEFINED;
     var elementSize:Float = cast _Runtime.UNDEFINED;
@@ -61,14 +63,15 @@ class WireframeGlMeshMaterialRenderer {
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv(gl, (cast program : { var locModel:Null<flighthq._internal.dom.WebGLUniformLocation>; }).locModel, false, (cast proxy.worldMatrix : { var m:flighthq._internal._Float32Array; }).m);
     uploadGlMeshDrawAlpha(({ final __callArgument8:Dynamic = gl; __callArgument8; }), ({ final __callArgument9:Dynamic = program; __callArgument9; }), (cast _Runtime.coalesce(proxy.alpha, function():Dynamic return cast 1.0) : Float), ({ final __callArgument10:Dynamic = proxy.material; __callArgument10; }));
-    upload = (cast ensureGlWireframeUpload(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = geometry; __callArgument12; })) : GlWireframeUpload);
+    gpuSkinned = (cast bindGlMeshSkinPalette(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = program; __callArgument12; }), ({ final __callArgument13:Dynamic = proxy; __callArgument13; })) : Bool);
+    upload = (cast ensureGlWireframeUpload(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = geometry; __callArgument15; }), (cast gpuSkinned : Bool)) : GlWireframeUpload);
     subset = proxy.subset;
     elementSize = ((cast _Runtime.strictEquals(upload.indexType, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT)) : Bool) ? (cast 4.0 : Dynamic) : (cast 2.0 : Dynamic));
     flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINES', flighthq._internal.backend.WebGl2Backend.LINES), (subset.indexCount * 2.0), upload.indexType, ((subset.indexOffset * 2.0) * elementSize));
   } });
 
   public static function registerGlWireframeMaterial(state:GlRenderState):Void {
-    registerGlMeshMaterialRenderer(({ final __callArgument13:Dynamic = state; __callArgument13; }), (cast WireframeMaterialKind : String), ({ final __callArgument14:Dynamic = wireframeGlMeshMaterialRenderer; __callArgument14; }));
+    registerGlMeshMaterialRenderer(({ final __callArgument16:Dynamic = state; __callArgument16; }), (cast WireframeMaterialKind : String), ({ final __callArgument17:Dynamic = wireframeGlMeshMaterialRenderer; __callArgument17; }));
   }
 
   public static final scratchRgba__wireframeGlMeshMaterialRenderer:LinearColor = (cast cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));

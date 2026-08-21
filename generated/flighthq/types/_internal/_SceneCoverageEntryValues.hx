@@ -5,7 +5,8 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity.Kind;
 import flighthq.types.RenderRegistrySignals.RenderRegistry;
+import flighthq.types.RequirementFacet;
 
 class _SceneCoverageEntryValues {
-  public static final SceneCoverageValue:{ var Fallback:String; var Missing:String; var Satisfied:String; } = (cast { Fallback: 'Fallback', Missing: 'Missing', Satisfied: 'Satisfied' });
+  public static final SceneCoverageValue:{ var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; } = (cast { FallbackRemediable: 'FallbackRemediable', FallbackUnavailable: 'FallbackUnavailable', Satisfied: 'Satisfied', Unavailable: 'Unavailable', Unregistered: 'Unregistered' });
 }

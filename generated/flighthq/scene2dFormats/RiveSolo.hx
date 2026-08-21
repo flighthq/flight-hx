@@ -21,7 +21,7 @@ class RiveSolo {
         if ((cast !_Runtime.strictEquals((cast flighthq._internal._StaticIndex.readArray(artboard.objects, index) : { var typeKey:Float; }).typeKey, RiveSolo.RIVE_SOLO_TYPE_KEY__riveSolo) : Bool)) { index++; continue; }
         var active:Null<Float> = (cast RiveSolo.readRiveSoloActiveIndex__riveSolo(flighthq._internal._StaticIndex.readArray(artboard.objects, index)) : Null<Float>);
         if ((cast ((cast _Runtime.strictEquals(active, null) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast active : Float)), index) : Bool)) : Bool)) {
-          reportImportDiagnostic(({ final __callArgument0:Dynamic = diagnostics; __callArgument0; }), ({ final __callArgument1:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument1; }), (cast 'rive.solo-unresolved-active' : String), (cast 'applyRiveSolo' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+          reportImportDiagnostic(({ final __callArgument0:Dynamic = diagnostics; __callArgument0; }), ({ final __callArgument1:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument1; }), (cast 'rive.solo-unresolved-active' : String), (cast 'applyRiveSolo' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
           index++;
           continue;
         }

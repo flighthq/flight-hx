@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effects.BloomEffect.computeBloomBlurRadius;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasEffectPass;
+import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasImageDataPass;
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline.acquireCanvasRenderTarget;
 import flighthq.effectsCanvas.CanvasRenderEffectPipeline.releaseCanvasRenderTarget;
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
@@ -22,35 +23,49 @@ class CanvasBloomEffect {
     var threshold:Float = cast _Runtime.UNDEFINED;
     var intensity:Float = cast _Runtime.UNDEFINED;
     var radius:Float = cast _Runtime.UNDEFINED;
-    var contrast:Float = cast _Runtime.UNDEFINED;
-    var brightnessShift:Float = cast _Runtime.UNDEFINED;
     var bright:CanvasRenderTarget = cast _Runtime.UNDEFINED;
     var blurred:CanvasRenderTarget = cast _Runtime.UNDEFINED;
-    var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
+    var bloom:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.8);
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     radius = (cast computeBloomBlurRadius(({ final __callArgument0:Dynamic = effect; __callArgument0; })) : Float);
-    contrast = (1.0 + (threshold * 6.0));
-    brightnessShift = (1.0 - threshold);
     bright = (cast acquireCanvasRenderTarget(({ final __callArgument1:Dynamic = pool; __callArgument1; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
-    drawCanvasEffectPass(({ final __callArgument2:Dynamic = bright; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }), (cast 'contrast(' + Std.string(contrast) + ') brightness(' + Std.string(brightnessShift) + ')' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument4:Dynamic = pool; __callArgument4; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    drawCanvasImageDataPass(({ final __callArgument2:Dynamic = bright; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }), ({ final __callArgument4:Dynamic = function(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float):Void {
+      {
+        var pixel:Float = 0.0;
+        while ((cast ((cast pixel : Float) < (cast pixelCount : Float)) : Bool)) {
+          var at:Float = (pixel * 4.0);
+          var luminance:Float = ((((0.2126 * flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast at : Float))) + (0.7152 * flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (at + 1.0) : Float)))) + (0.0722 * flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (at + 2.0) : Float)))) / 255.0);
+          if ((cast ((cast luminance : Float) >= (cast threshold : Float)) : Bool)) { pixel++; continue; }
+          flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast at : Float), (cast 0.0 : Float));
+          flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (at + 1.0) : Float), (cast 0.0 : Float));
+          flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (at + 2.0) : Float), (cast 0.0 : Float));
+          pixel++;
+        }
+      }
+    }; __callArgument4; }));
+    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument5:Dynamic = pool; __callArgument5; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
     if ((cast ((cast radius : Float) > (cast 0.0 : Float)) : Bool)) {
-      drawCanvasEffectPass(({ final __callArgument5:Dynamic = blurred; __callArgument5; }), ({ final __callArgument6:Dynamic = bright; __callArgument6; }), (cast 'blur(' + Std.string(radius) + 'px)' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+      drawCanvasEffectPass(({ final __callArgument6:Dynamic = blurred; __callArgument6; }), ({ final __callArgument7:Dynamic = bright; __callArgument7; }), (cast 'blur(' + Std.string(radius) + 'px)' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     } else {
-      drawCanvasEffectPass(({ final __callArgument7:Dynamic = blurred; __callArgument7; }), ({ final __callArgument8:Dynamic = bright; __callArgument8; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+      drawCanvasEffectPass(({ final __callArgument8:Dynamic = blurred; __callArgument8; }), ({ final __callArgument9:Dynamic = bright; __callArgument9; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     }
-    drawCanvasEffectPass(({ final __callArgument9:Dynamic = dest; __callArgument9; }), ({ final __callArgument10:Dynamic = source; __callArgument10; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    ctx = dest.context;
-    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', 'lighter');
-    flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalAlpha', HxMath.max(0.0, HxMath.min(1.0, intensity)));
-    flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'filter', 'none');
-    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([blurred.canvas, 0.0, 0.0] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
-    releaseCanvasRenderTarget(({ final __callArgument11:Dynamic = pool; __callArgument11; }), ({ final __callArgument12:Dynamic = bright; __callArgument12; }));
-    releaseCanvasRenderTarget(({ final __callArgument13:Dynamic = pool; __callArgument13; }), ({ final __callArgument14:Dynamic = blurred; __callArgument14; }));
+    drawCanvasEffectPass(({ final __callArgument10:Dynamic = dest; __callArgument10; }), ({ final __callArgument11:Dynamic = source; __callArgument11; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    bloom = (cast flighthq._internal.backend.Canvas2dBackend.call(blurred.context, 'getImageData', cast ([0.0, 0.0, blurred.width, blurred.height] : Array<Dynamic>)) : flighthq._internal.dom.ImageData).data;
+    drawCanvasImageDataPass(({ final __callArgument12:Dynamic = dest; __callArgument12; }), ({ final __callArgument13:Dynamic = dest; __callArgument13; }), ({ final __callArgument14:Dynamic = function(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float):Void {
+      {
+        var pixel:Float = 0.0;
+        while ((cast ((cast pixel : Float) < (cast pixelCount : Float)) : Bool)) {
+          var at:Float = (pixel * 4.0);
+          flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast at : Float), (cast (flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast at : Float)) + (flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast bloom : flighthq._internal._UInt8ClampedArray), (cast at : Float)) * intensity)) : Float));
+          flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (at + 1.0) : Float), (cast (flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (at + 1.0) : Float)) + (flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast bloom : flighthq._internal._UInt8ClampedArray), (cast (at + 1.0) : Float)) * intensity)) : Float));
+          flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (at + 2.0) : Float), (cast (flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (at + 2.0) : Float)) + (flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast bloom : flighthq._internal._UInt8ClampedArray), (cast (at + 2.0) : Float)) * intensity)) : Float));
+          pixel++;
+        }
+      }
+    }; __callArgument14; }));
+    releaseCanvasRenderTarget(({ final __callArgument15:Dynamic = pool; __callArgument15; }), ({ final __callArgument16:Dynamic = bright; __callArgument16; }));
+    releaseCanvasRenderTarget(({ final __callArgument17:Dynamic = pool; __callArgument17; }), ({ final __callArgument18:Dynamic = blurred; __callArgument18; }));
   }
 
   public static final defaultCanvasBloomEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
@@ -58,6 +73,6 @@ class CanvasBloomEffect {
   });
 
   public static function registerCanvasBloomEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument15:Dynamic = state; __callArgument15; }), (cast 'BloomEffect' : String), ({ final __callArgument16:Dynamic = defaultCanvasBloomEffectRunner; __callArgument16; }));
+    registerCanvasRenderEffect(({ final __callArgument19:Dynamic = state; __callArgument19; }), (cast 'BloomEffect' : String), ({ final __callArgument20:Dynamic = defaultCanvasBloomEffectRunner; __callArgument20; }));
   }
 }

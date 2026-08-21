@@ -4,34 +4,44 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef CollisionShapeKind = String;
+typedef CollisionShapeKind2D = String;
 
-typedef CollisionCircle = { var x:Float; var y:Float; var radius:Float; };
+typedef CollisionCircle2D = { var x:Float; var y:Float; var radius:Float; };
 
-typedef CollisionAabb = { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; };
+typedef CollisionAabb2D = { var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; };
 
-typedef CollisionObb = { var x:Float; var y:Float; var halfW:Float; var halfH:Float; var rotation:Float; };
+typedef CollisionObb2D = { var x:Float; var y:Float; var halfW:Float; var halfH:Float; var rotation:Float; };
 
-typedef CollisionPolygon = { var points:Array<Float>; };
+typedef CollisionPolygon2D = { var points:Array<Float>; };
 
-typedef CollisionSegment = { var x0:Float; var y0:Float; var x1:Float; var y1:Float; };
+typedef CollisionSegment2D = { var x0:Float; var y0:Float; var x1:Float; var y1:Float; };
 
-typedef CollisionPoint = { var x:Float; var y:Float; };
+typedef CollisionPoint2D = { var x:Float; var y:Float; };
 
-typedef CollisionShape = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<{ >CollisionCircle, var kind:String; }, { >CollisionAabb, var kind:String; }>, { >CollisionObb, var kind:String; }>, { >CollisionPolygon, var kind:String; }>, { >CollisionSegment, var kind:String; }>, { >CollisionPoint, var kind:String; }>;
+typedef CollisionBuiltInShape2D = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<{ >CollisionCircle2D, var kind:String; }, { >CollisionAabb2D, var kind:String; }>, { >CollisionObb2D, var kind:String; }>, { >CollisionPolygon2D, var kind:String; }>, { >CollisionSegment2D, var kind:String; }>, { >CollisionPoint2D, var kind:String; }>;
 
-typedef CollisionManifold = { var overlapping:Bool; var normalX:Float; var normalY:Float; var depth:Float; };
+typedef CollisionVendorShape2D = { var kind:CollisionVendorKind2D; };
 
-typedef CollisionRaycastHit = { var fraction:Float; var x:Float; var y:Float; var normalX:Float; var normalY:Float; };
+typedef CollisionVendorKind2D = String;
 
-typedef CollisionTimeOfImpact = { var fraction:Float; var x:Float; var y:Float; var normalX:Float; var normalY:Float; };
+typedef CollisionShape2D = flighthq._internal._Union2<CollisionBuiltInShape2D, CollisionVendorShape2D>;
 
-typedef CollisionTestExplanation = { var kind:Null<CollisionShapeKind>; var overlapping:Bool; var shapeIndex:Null<Float>; var status:CollisionTestStatus; };
+typedef CollisionManifold2D = { var overlapping:Bool; var normalX:Float; var normalY:Float; var depth:Float; };
+
+typedef CollisionRaycastHit2D = { var fraction:Float; var x:Float; var y:Float; var normalX:Float; var normalY:Float; };
+
+typedef CollisionTimeOfImpact2D = { var fraction:Float; var x:Float; var y:Float; var normalX:Float; var normalY:Float; };
+
+typedef CollisionTestExplanation2D = { var kind:Null<CollisionShapeKind2D>; var overlapping:Bool; var shapeIndex:Null<Float>; var status:CollisionTestStatus; };
 
 typedef CollisionTestStatus = String;
 
-typedef CollisionTestGuard = CollisionShape->CollisionShape->Void;
+typedef CollisionSupport2D = CollisionShape2D->Float->Float->Array<Float>->Void;
 
-typedef CollisionContactPoint = { var x:Float; var y:Float; var depth:Float; var featureId:Float; };
+typedef CollisionPairTest2D = CollisionShape2D->CollisionShape2D->CollisionManifold2D->Bool;
 
-typedef CollisionContactManifold = { var overlapping:Bool; var normalX:Float; var normalY:Float; var depth:Float; var pointCount:Float; var points:Array<CollisionContactPoint>; };
+typedef CollisionTestGuard2D = CollisionShape2D->CollisionShape2D->Void;
+
+typedef CollisionContactPoint2D = { var x:Float; var y:Float; var depth:Float; var featureId:Float; };
+
+typedef CollisionContactManifold2D = { var overlapping:Bool; var normalX:Float; var normalY:Float; var depth:Float; var pointCount:Float; var points:Array<CollisionContactPoint2D>; };

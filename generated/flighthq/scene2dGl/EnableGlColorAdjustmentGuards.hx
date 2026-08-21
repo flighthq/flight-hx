@@ -4,26 +4,37 @@ package flighthq.scene2dGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
+import flighthq.registry.RegistryTable.createSlotTable;
+import flighthq.renderGl.GlRenderState.getGlColorAdjustmentMaterialFeatureGuard;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
-import flighthq.types.ColorScaleBias;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeatureGuard;
+import flighthq.types.GlRenderState.GlRenderRegistries;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.Log.LogLevel;
-import flighthq.types.TintMaterialData;
+import flighthq.types.RegistryTable.RegistryEntryState;
+import flighthq.types.RegistryTable.SlotTable;
+import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 class EnableGlColorAdjustmentGuards {
   @:noCompletion
   public static function areGlColorAdjustmentGuardsEnabled(state:GlRenderState):Bool {
-    return cast !_Runtime.looseEquals((cast (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime) : { @:optional var glColorAdjustmentMaterialFeatureGuard:Null<GlRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>; }).glColorAdjustmentMaterialFeatureGuard, null);
+    return cast !_Runtime.looseEquals((cast getGlColorAdjustmentMaterialFeatureGuard(({ final __callArgument0:Dynamic = state; __callArgument0; })) : Null<GlColorAdjustmentMaterialFeatureGuard>), null);
     return cast null;
   }
 
   @:noCompletion
   public static function enableGlColorAdjustmentGuards(state:GlRenderState):Void {
-    ((cast (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime) : { @:optional var glColorAdjustmentMaterialFeatureGuard:Null<GlRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>; }).glColorAdjustmentMaterialFeatureGuard = cast (function(__unused0:GlRenderState, __unused1:flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>):Void { EnableGlColorAdjustmentGuards.warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards(); } : Null<GlRenderState->flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>->Void>));
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var table:SlotTable<GlColorAdjustmentMaterialFeatureGuard> = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime);
+    table = _Runtime.coalesce((cast runtime.registries : GlRenderRegistries).colorAdjustmentFeatureGuard, function():Dynamic return cast (cast createSlotTable((cast 'GlColorAdjustmentFeatureGuard' : String), (cast 'Disabled' : String)) : SlotTable<GlColorAdjustmentMaterialFeatureGuard>));
+    if ((cast ((cast !_Runtime.strictEquals(({ final __structural2 = (cast table : SlotTable<GlColorAdjustmentMaterialFeatureGuard>).entry; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) || (cast !_Runtime.strictEquals((cast (cast table : SlotTable<GlColorAdjustmentMaterialFeatureGuard>).entry : { var state:String; var value:GlColorAdjustmentMaterialFeatureGuard; }).value, EnableGlColorAdjustmentGuards.warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards) : Bool)) : Bool)) {
+      ((cast runtime.registries : GlRenderRegistries).colorAdjustmentFeatureGuard = _Runtime.mergeObjects([table, { entry: { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: EnableGlColorAdjustmentGuards.warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards } }]));
+    }
   }
 
   public static function warnGlColorAdjustmentNotEnabled__enableGlColorAdjustmentGuards():Void {
-    (cast logOnce((cast 'scene2d-gl:color-adjustment-not-enabled' : String), ({ final __callArgument2:Dynamic = LogLevel.Warn; __callArgument2; }), (cast { message: 'recordGlQuadBatchColorScaleBias: color adjustment present but GL color adjustment not enabled — call registerGlColorAdjustmentMaterialFeature(state)' } : Dynamic), ({ final __callArgument3:Dynamic = 'scene2d-gl'; __callArgument3; })) : Bool);
+    (cast logOnce((cast 'scene2d-gl:color-adjustment-not-enabled' : String), ({ final __callArgument3:Dynamic = LogLevel.Warn; __callArgument3; }), (cast { message: 'recordGlQuadBatchColorScaleBias: color adjustment present but GL color adjustment not enabled — call registerGlColorAdjustmentMaterialFeature(state)' } : Dynamic), ({ final __callArgument4:Dynamic = 'scene2d-gl'; __callArgument4; })) : Bool);
   }
 }

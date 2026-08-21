@@ -5,5 +5,5 @@ const api = compiled.flighthq.collision.CollisionShapeValidation;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const getCollisionPolygonValidationStatus = api.getCollisionPolygonValidationStatus;
-export const getCollisionShapeValidationStatus = api.getCollisionShapeValidationStatus;
+export const getCollisionPolygonValidationStatus2D = api.getCollisionPolygonValidationStatus2D;
+export const getCollisionShapeValidationStatus2D = api.getCollisionShapeValidationStatus2D;

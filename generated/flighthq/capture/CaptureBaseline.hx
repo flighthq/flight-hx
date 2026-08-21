@@ -4,6 +4,9 @@ package flighthq.capture;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CaptureBaseline;
+import flighthq.types.CaptureBaselineField;
+import flighthq.types.CaptureBaselineProvenance;
+import flighthq.types.CaptureBaselineProvenanceField;
 import flighthq.types.CaptureColumnBaseline;
 
 class CaptureBaseline {
@@ -21,14 +24,22 @@ class CaptureBaseline {
       if ((cast !_Runtime.strictEquals((cast entry : CaptureColumnBaseline).fingerprint, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : CaptureColumnBaseline).fingerprint = (cast entry : CaptureColumnBaseline).fingerprint); }
       if ((cast !_Runtime.strictEquals((cast entry : CaptureColumnBaseline).sourceHash, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : CaptureColumnBaseline).sourceHash = (cast entry : CaptureColumnBaseline).sourceHash); }
       if ((cast !_Runtime.strictEquals((cast entry : CaptureColumnBaseline).sha256, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : CaptureColumnBaseline).sha256 = (cast entry : CaptureColumnBaseline).sha256); }
+      if ((cast !_Runtime.strictEquals((cast entry : CaptureColumnBaseline).fingerprintProvenance, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : CaptureColumnBaseline).fingerprintProvenance = (cast entry : CaptureColumnBaseline).fingerprintProvenance); }
+      if ((cast !_Runtime.strictEquals((cast entry : CaptureColumnBaseline).sha256Provenance, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : CaptureColumnBaseline).sha256Provenance = (cast entry : CaptureColumnBaseline).sha256Provenance); }
       _Runtime.setIndex(sorted, column, out);
     }
     return cast (_Runtime.jsonStringify(sorted, null, 2.0) + '\n');
     return cast null;
   }
 
-  public static function getCaptureBaselineField(baseline:flighthq.types.CaptureBaseline, column:String, field:String):Null<String> {
+  public static function getCaptureBaselineField(baseline:flighthq.types.CaptureBaseline, column:String, field:CaptureBaselineField):Null<String> {
     return cast _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.getIndex(baseline, column), field), function():Dynamic return cast null);
+    return cast null;
+  }
+
+  @:noCompletion
+  public static function getCaptureBaselineProvenance(baseline:flighthq.types.CaptureBaseline, column:String, field:CaptureBaselineProvenanceField):Null<CaptureBaselineProvenance> {
+    return cast _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.getIndex(baseline, column), (cast CaptureBaseline.provenanceMember__captureBaseline(({ final __callArgument3:Dynamic = field; __callArgument3; })) : String)), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -44,7 +55,17 @@ class CaptureBaseline {
     return cast null;
   }
 
-  public static function setCaptureBaselineField(baseline:flighthq.types.CaptureBaseline, column:String, field:String, value:String):Void {
+  public static function setCaptureBaselineField(baseline:flighthq.types.CaptureBaseline, column:String, field:CaptureBaselineField, value:String):Void {
     _Runtime.setIndex(_Runtime.setIndex(baseline, column, (_Runtime.getIndex(baseline, column) ?? {  })), field, value);
+  }
+
+  @:noCompletion
+  public static function setCaptureBaselineProvenance(baseline:flighthq.types.CaptureBaseline, column:String, field:CaptureBaselineProvenanceField, provenance:CaptureBaselineProvenance):Void {
+    _Runtime.setIndex(_Runtime.setIndex(baseline, column, (_Runtime.getIndex(baseline, column) ?? {  })), (cast CaptureBaseline.provenanceMember__captureBaseline(({ final __callArgument4:Dynamic = field; __callArgument4; })) : String), _Runtime.mergeObjects([provenance]));
+  }
+
+  public static function provenanceMember__captureBaseline(field:CaptureBaselineProvenanceField):String {
+    return cast ((cast _Runtime.strictEquals(field, 'fingerprint') : Bool) ? (cast 'fingerprintProvenance' : Dynamic) : (cast 'sha256Provenance' : Dynamic));
+    return cast null;
   }
 }

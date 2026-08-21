@@ -12,6 +12,7 @@ import flighthq.geometry.Rectangle.enclosesRectangle;
 import flighthq.geometry.Rectangle.intersectsRectangle;
 import flighthq.geometry.Rectangle.isEmptyRectangle;
 import flighthq.geometry.Rectangle.mergeRectangle;
+import flighthq.math.Constants.CIRCLE_KAPPA;
 import flighthq.path.FlattenPath.flattenPath;
 import flighthq.path.Path.appendPathCubicCurveTo;
 import flighthq.path.Path.appendPathLineTo;
@@ -446,8 +447,6 @@ class ClipRegion {
 
   public static final NORMALIZE_EPSILON__clipRegion:Float = 0.000001;
 
-  public static final KAPPA__clipRegion:Float = 0.5522847498;
-
   public static final clipRegionPool__clipRegion:Array<flighthq.types.ClipRegion> = (cast cast ([] : Array<Dynamic>));
 
   public static function makeEmptyClipRegion__clipRegion():flighthq.types.ClipRegion {
@@ -499,7 +498,7 @@ class ClipRegion {
 
   public static function appendCircleToPath__clipRegion(path:Path, cx:Float, cy:Float, r:Float):Void {
     var k:Float = cast _Runtime.UNDEFINED;
-    k = (r * ClipRegion.KAPPA__clipRegion);
+    k = (r * CIRCLE_KAPPA);
     appendPathMoveTo(({ final __callArgument42:Dynamic = path; __callArgument42; }), (cast cx : Float), (cast (cy - r) : Float));
     appendPathCubicCurveTo(({ final __callArgument43:Dynamic = path; __callArgument43; }), (cast (cx + k) : Float), (cast (cy - r) : Float), (cast (cx + r) : Float), (cast (cy - k) : Float), (cast (cx + r) : Float), (cast cy : Float));
     appendPathCubicCurveTo(({ final __callArgument44:Dynamic = path; __callArgument44; }), (cast (cx + r) : Float), (cast (cy + k) : Float), (cast (cx + k) : Float), (cast (cy + r) : Float), (cast cx : Float), (cast (cy + r) : Float));
@@ -518,8 +517,8 @@ class ClipRegion {
     cy = (y + (h / 2.0));
     rx = (w / 2.0);
     ry = (h / 2.0);
-    kx = (rx * ClipRegion.KAPPA__clipRegion);
-    ky = (ry * ClipRegion.KAPPA__clipRegion);
+    kx = (rx * CIRCLE_KAPPA);
+    ky = (ry * CIRCLE_KAPPA);
     appendPathMoveTo(({ final __callArgument47:Dynamic = path; __callArgument47; }), (cast cx : Float), (cast (cy - ry) : Float));
     appendPathCubicCurveTo(({ final __callArgument48:Dynamic = path; __callArgument48; }), (cast (cx + kx) : Float), (cast (cy - ry) : Float), (cast (cx + rx) : Float), (cast (cy - ky) : Float), (cast (cx + rx) : Float), (cast cy : Float));
     appendPathCubicCurveTo(({ final __callArgument49:Dynamic = path; __callArgument49; }), (cast (cx + rx) : Float), (cast (cy + ky) : Float), (cast (cx + kx) : Float), (cast (cy + ry) : Float), (cast cx : Float), (cast (cy + ry) : Float));
@@ -537,7 +536,7 @@ class ClipRegion {
     var y2:Float = cast _Runtime.UNDEFINED;
     maxR = _Runtime.divideNumbers(HxMath.min(w, h), 2.0);
     cr = HxMath.min(r, maxR);
-    k = (cr * ClipRegion.KAPPA__clipRegion);
+    k = (cr * CIRCLE_KAPPA);
     x1 = (x + cr);
     x2 = ((x + w) - cr);
     y1 = (y + cr);

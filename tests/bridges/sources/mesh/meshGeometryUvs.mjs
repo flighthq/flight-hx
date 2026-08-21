@@ -7,4 +7,3 @@ __syncDependencies();
 
 export const offsetMeshGeometryUvs = api.offsetMeshGeometryUvs;
 export const scaleMeshGeometryUvs = api.scaleMeshGeometryUvs;
-export const wrapMeshGeometryUvs = api.wrapMeshGeometryUvs;

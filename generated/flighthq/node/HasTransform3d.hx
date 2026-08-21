@@ -3,13 +3,17 @@ package flighthq.node;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.geometry.Quaternion.cloneQuaternion;
 import flighthq.geometry.Quaternion.createQuaternion;
+import flighthq.geometry.Vector3.cloneVector3;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.types.HasTransform3D;
 import flighthq.types.HasTransform3D.HasTransform3DRuntime;
 import flighthq.types.Matrix4;
 import flighthq.types.Quaternion;
+import flighthq.types.Quaternion.QuaternionLike;
 import flighthq.types.Vector3;
+import flighthq.types.Vector3.Vector3Like;
 
 class HasTransform3d {
   @:noCompletion
@@ -20,9 +24,15 @@ class HasTransform3d {
   }
 
   @:noCompletion
-  public static function initTransform3DTrait(target:HasTransform3D, ?obj:flighthq._internal._Partial<HasTransform3D>):Void {
-    (target.rotation = cast (_Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var rotation:Null<Quaternion>; }).rotation; }), function():Dynamic return cast (cast createQuaternion(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Quaternion)) : Quaternion));
-    (target.scale = cast (_Runtime.coalesce(({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var scale:Null<Vector3>; }).scale; }), function():Dynamic return cast (cast createVector3(({ final __callArgument2:Dynamic = 1.0; __callArgument2; }), ({ final __callArgument3:Dynamic = 1.0; __callArgument3; }), ({ final __callArgument4:Dynamic = 1.0; __callArgument4; })) : Vector3)) : Vector3));
-    (target.position = cast (_Runtime.coalesce(({ final __structural5 = obj; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var position:Null<Vector3>; }).position; }), function():Dynamic return cast (cast createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Vector3)) : Vector3));
+  public static function initTransform3DTrait(target:HasTransform3D, ?obj:{ @:optional var position:Null<Vector3>; @:optional var rotation:Null<Quaternion>; @:optional var scale:Null<Vector3>; }):Void {
+    var position:Null<Vector3> = cast _Runtime.UNDEFINED;
+    var rotation:Null<Quaternion> = cast _Runtime.UNDEFINED;
+    var scale:Null<Vector3> = cast _Runtime.UNDEFINED;
+    position = ({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var position:Null<Vector3>; }).position; });
+    rotation = ({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var rotation:Null<Quaternion>; }).rotation; });
+    scale = ({ final __structural2 = obj; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var scale:Null<Vector3>; }).scale; });
+    (target.position = cast (((cast !_Runtime.strictEquals(position, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast cloneVector3(({ final __callArgument3:Dynamic = position; __callArgument3; })) : Vector3) : Dynamic) : (cast (cast createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Vector3) : Dynamic)) : Vector3));
+    (target.rotation = cast (((cast !_Runtime.strictEquals(rotation, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast cloneQuaternion(({ final __callArgument4:Dynamic = rotation; __callArgument4; })) : Quaternion) : Dynamic) : (cast (cast createQuaternion(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Quaternion) : Dynamic)) : Quaternion));
+    (target.scale = cast (((cast !_Runtime.strictEquals(scale, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast cloneVector3(({ final __callArgument5:Dynamic = scale; __callArgument5; })) : Vector3) : Dynamic) : (cast (cast createVector3(({ final __callArgument6:Dynamic = 1.0; __callArgument6; }), ({ final __callArgument7:Dynamic = 1.0; __callArgument7; }), ({ final __callArgument8:Dynamic = 1.0; __callArgument8; })) : Vector3) : Dynamic)) : Vector3));
   }
 }

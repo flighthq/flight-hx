@@ -95,7 +95,9 @@ import flighthq.types._internal._PointLightValues as Facade_Types_flighthq_types
 import flighthq.types._internal._QuadBatchValues as Facade_Types_flighthq_types__internal__QuadBatchValues;
 import flighthq.types._internal._RectangleColliderValues as Facade_Types_flighthq_types__internal__RectangleColliderValues;
 import flighthq.types._internal._RegionAttachment2DValues as Facade_Types_flighthq_types__internal__RegionAttachment2DValues;
+import flighthq.types._internal._RegistryTableValues as Facade_Types_flighthq_types__internal__RegistryTableValues;
 import flighthq.types._internal._RenderCacheValues as Facade_Types_flighthq_types__internal__RenderCacheValues;
+import flighthq.types._internal._RequirementFacetValues as Facade_Types_flighthq_types__internal__RequirementFacetValues;
 import flighthq.types._internal._ResourceResolutionStateValues as Facade_Types_flighthq_types__internal__ResourceResolutionStateValues;
 import flighthq.types._internal._RichTextValues as Facade_Types_flighthq_types__internal__RichTextValues;
 import flighthq.types._internal._RimModifierValues as Facade_Types_flighthq_types__internal__RimModifierValues;
@@ -224,7 +226,9 @@ class Types {
 
   public static final CompressedImageTextureSourceKind:String = Facade_Types_flighthq_types__internal__TextureSourceKindValues.CompressedImageTextureSourceKind;
 
-  public static final Compression:{ var Deflate:String; var Lzma:String; } = Facade_Types_flighthq_types__internal__CompressionValues.CompressionValue;
+  public static final Compression:{ var Brotli:String; var Deflate:String; var Lzma:String; } = Facade_Types_flighthq_types__internal__CompressionValues.CompressionValue;
+
+  public static final CompressionFraming:{ var Raw:String; var Rfc1950:String; } = Facade_Types_flighthq_types__internal__CompressionValues.CompressionFramingValue;
 
   public static final CubeFaceNegativeX:Float = Facade_Types_flighthq_types_TextureCubeFace.CubeFaceNegativeX;
 
@@ -440,9 +444,13 @@ class Types {
 
   public static final RegionAttachment2DKind:String = Facade_Types_flighthq_types__internal__RegionAttachment2DValues.RegionAttachment2DKind;
 
+  public static final RegistryEntryState:{ var Bound:String; var Tombstoned:String; } = Facade_Types_flighthq_types__internal__RegistryTableValues.RegistryEntryStateValue;
+
   public static final RenderCacheKind:String = Facade_Types_flighthq_types__internal__RenderCacheValues.RenderCacheKindValue;
 
   public static final RenderTargetTextureSourceKind:String = Facade_Types_flighthq_types__internal__TextureSourceKindValues.RenderTargetTextureSourceKind;
+
+  public static final RequirementFacet:{ var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; } = Facade_Types_flighthq_types__internal__RequirementFacetValues.RequirementFacetValue;
 
   public static final ResourceResolutionState:{ var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; } = Facade_Types_flighthq_types__internal__ResourceResolutionStateValues.ResourceResolutionStateValue;
 
@@ -492,7 +500,7 @@ class Types {
 
   public static final Scene3DResourceResolverRuntimeKey:flighthq._internal._Symbol = Facade_Types_flighthq_types__internal__Scene3DResourcesValues.Scene3DResourceResolverRuntimeKey;
 
-  public static final SceneCoverage:{ var Fallback:String; var Missing:String; var Satisfied:String; } = Facade_Types_flighthq_types__internal__SceneCoverageEntryValues.SceneCoverageValue;
+  public static final SceneCoverage:{ var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; } = Facade_Types_flighthq_types__internal__SceneCoverageEntryValues.SceneCoverageValue;
 
   public static final ShadedMaterialKind:String = Facade_Types_flighthq_types__internal__ShadedMaterialValues.ShadedMaterialKind;
 

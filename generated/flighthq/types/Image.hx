@@ -7,3 +7,5 @@ import flighthq.types.Entity.EntityRuntime;
 import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
 typedef Image = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var alphaType:AlphaType; var gamut:String; var height:Float; var kind:Dynamic; var version:Float; var width:Float; var source:flighthq._internal.dom.CanvasImageSource; };
+
+typedef ImageBackend = { var loadImageFromUrl:String->String->flighthq._internal.dom.AbortSignal->flighthq._internal._Promise<flighthq.types.Image>; };

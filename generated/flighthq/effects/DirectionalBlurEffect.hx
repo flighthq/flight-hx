@@ -10,7 +10,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class DirectionalBlurEffect {
-  public static function createDirectionalBlurEffect(?options:flighthq._internal._Omit<flighthq.types.DirectionalBlurEffect, String>):flighthq.types.DirectionalBlurEffect {
+  public static function createDirectionalBlurEffect(?options:{ @:optional var angle:Null<Float>; @:optional var length:Null<Float>; @:optional var samples:Null<Float>; }):flighthq.types.DirectionalBlurEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'DirectionalBlurEffect' }, options]);
     return cast null;
@@ -23,7 +23,7 @@ class DirectionalBlurEffect {
     var projectedY:Float = cast _Runtime.UNDEFINED;
     var horizontal:Float = cast _Runtime.UNDEFINED;
     var vertical:Float = cast _Runtime.UNDEFINED;
-    angle = _Runtime.coalesce(effect.angle, function():Dynamic return cast 0.0);
+    angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(effect.angle, function():Dynamic return cast 0.0), HxMath.PI) / 180.0);
     halfLength = _Runtime.multiplyNumbers(HxMath.max(0.0, _Runtime.coalesce(effect.length, function():Dynamic return cast 8.0)), 0.5);
     projectedX = HxMath.abs(_Runtime.multiplyNumbers(HxMath.cos(angle), halfLength));
     projectedY = HxMath.abs(_Runtime.multiplyNumbers(HxMath.sin(angle), halfLength));

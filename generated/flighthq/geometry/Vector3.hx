@@ -12,9 +12,21 @@ import flighthq.types.Vector4.Vector4Like;
 
 class Vector3 {
   public static function addVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
-    (out.x = cast ((a.x + b.x) : Float));
-    (out.y = cast ((a.y + b.y) : Float));
-    (out.z = cast ((a.z + b.z) : Float));
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var az:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    var bz:Float = cast _Runtime.UNDEFINED;
+    ax = a.x;
+    ay = a.y;
+    az = a.z;
+    bx = b.x;
+    by = b.y;
+    bz = b.z;
+    (out.x = cast ((ax + bx) : Float));
+    (out.y = cast ((ay + by) : Float));
+    (out.z = cast ((az + bz) : Float));
   }
 
   public static function clampVector3(out:Vector3Like, value:Vector3Like, min:Vector3Like, max:Vector3Like):Void {
@@ -47,9 +59,15 @@ class Vector3 {
   }
 
   public static function copyVector3(out:Vector3Like, source:Vector3Like):Void {
-    (out.x = cast (source.x : Float));
-    (out.y = cast (source.y : Float));
-    (out.z = cast (source.z : Float));
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var z:Float = cast _Runtime.UNDEFINED;
+    x = source.x;
+    y = source.y;
+    z = source.z;
+    (out.x = cast (x : Float));
+    (out.y = cast (y : Float));
+    (out.z = cast (z : Float));
   }
 
   public static function createVector3(?x:Float, ?y:Float, ?z:Float):flighthq.types.Vector3 {
@@ -97,7 +115,7 @@ class Vector3 {
 
   public static function equalsVector3(a:Null<Vector3Like>, b:Null<Vector3Like>):Bool {
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
-    return cast ((cast ((cast _Runtime.strictEquals((cast a : { var x:Float; }).x, (cast b : { var x:Float; }).x) : Bool) && (cast _Runtime.strictEquals((cast a : { var y:Float; }).y, (cast b : { var y:Float; }).y) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast a : { var z:Float; }).z, (cast b : { var z:Float; }).z) : Bool));
+    return cast ((cast _Runtime.strictEquals(a, b) : Bool) || (cast _Runtime.andValue(((cast _Runtime.strictEquals((cast a : { var x:Float; }).x, (cast b : { var x:Float; }).x) : Bool) && (cast _Runtime.strictEquals((cast a : { var y:Float; }).y, (cast b : { var y:Float; }).y) : Bool)), function():Dynamic return cast _Runtime.strictEquals((cast a : { var z:Float; }).z, (cast b : { var z:Float; }).z)) : Bool));
     return cast null;
   }
 
@@ -174,30 +192,72 @@ class Vector3 {
     var ax:Float = cast _Runtime.UNDEFINED;
     var ay:Float = cast _Runtime.UNDEFINED;
     var az:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    var bz:Float = cast _Runtime.UNDEFINED;
     ax = a.x;
     ay = a.y;
     az = a.z;
-    (out.x = cast ((ax + (t * (b.x - ax))) : Float));
-    (out.y = cast ((ay + (t * (b.y - ay))) : Float));
-    (out.z = cast ((az + (t * (b.z - az))) : Float));
+    bx = b.x;
+    by = b.y;
+    bz = b.z;
+    (out.x = cast ((ax + (t * (bx - ax))) : Float));
+    (out.y = cast ((ay + (t * (by - ay))) : Float));
+    (out.z = cast ((az + (t * (bz - az))) : Float));
   }
 
   public static function maxVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
-    (out.x = cast (((cast ((cast a.x : Float) > (cast b.x : Float)) : Bool) ? (cast a.x : Dynamic) : (cast b.x : Dynamic)) : Float));
-    (out.y = cast (((cast ((cast a.y : Float) > (cast b.y : Float)) : Bool) ? (cast a.y : Dynamic) : (cast b.y : Dynamic)) : Float));
-    (out.z = cast (((cast ((cast a.z : Float) > (cast b.z : Float)) : Bool) ? (cast a.z : Dynamic) : (cast b.z : Dynamic)) : Float));
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var az:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    var bz:Float = cast _Runtime.UNDEFINED;
+    ax = a.x;
+    ay = a.y;
+    az = a.z;
+    bx = b.x;
+    by = b.y;
+    bz = b.z;
+    (out.x = cast (((cast ((cast ax : Float) > (cast bx : Float)) : Bool) ? (cast ax : Dynamic) : (cast bx : Dynamic)) : Float));
+    (out.y = cast (((cast ((cast ay : Float) > (cast by : Float)) : Bool) ? (cast ay : Dynamic) : (cast by : Dynamic)) : Float));
+    (out.z = cast (((cast ((cast az : Float) > (cast bz : Float)) : Bool) ? (cast az : Dynamic) : (cast bz : Dynamic)) : Float));
   }
 
   public static function minVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
-    (out.x = cast (((cast ((cast a.x : Float) < (cast b.x : Float)) : Bool) ? (cast a.x : Dynamic) : (cast b.x : Dynamic)) : Float));
-    (out.y = cast (((cast ((cast a.y : Float) < (cast b.y : Float)) : Bool) ? (cast a.y : Dynamic) : (cast b.y : Dynamic)) : Float));
-    (out.z = cast (((cast ((cast a.z : Float) < (cast b.z : Float)) : Bool) ? (cast a.z : Dynamic) : (cast b.z : Dynamic)) : Float));
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var az:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    var bz:Float = cast _Runtime.UNDEFINED;
+    ax = a.x;
+    ay = a.y;
+    az = a.z;
+    bx = b.x;
+    by = b.y;
+    bz = b.z;
+    (out.x = cast (((cast ((cast ax : Float) < (cast bx : Float)) : Bool) ? (cast ax : Dynamic) : (cast bx : Dynamic)) : Float));
+    (out.y = cast (((cast ((cast ay : Float) < (cast by : Float)) : Bool) ? (cast ay : Dynamic) : (cast by : Dynamic)) : Float));
+    (out.z = cast (((cast ((cast az : Float) < (cast bz : Float)) : Bool) ? (cast az : Dynamic) : (cast bz : Dynamic)) : Float));
   }
 
   public static function multiplyVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
-    (out.x = cast ((a.x * b.x) : Float));
-    (out.y = cast ((a.y * b.y) : Float));
-    (out.z = cast ((a.z * b.z) : Float));
+    var ax:Float = cast _Runtime.UNDEFINED;
+    var ay:Float = cast _Runtime.UNDEFINED;
+    var az:Float = cast _Runtime.UNDEFINED;
+    var bx:Float = cast _Runtime.UNDEFINED;
+    var by:Float = cast _Runtime.UNDEFINED;
+    var bz:Float = cast _Runtime.UNDEFINED;
+    ax = a.x;
+    ay = a.y;
+    az = a.z;
+    bx = b.x;
+    by = b.y;
+    bz = b.z;
+    (out.x = cast ((ax * bx) : Float));
+    (out.y = cast ((ay * by) : Float));
+    (out.z = cast ((az * bz) : Float));
   }
 
   public static function nearEqualsVector3(a:Vector3Like, b:Vector3Like, tolerance:Float = 0.000001):Bool {
@@ -206,18 +266,30 @@ class Vector3 {
   }
 
   public static function negateVector3(out:Vector3Like, source:Vector3Like):Void {
-    (out.x = cast ((source.x * -1.0) : Float));
-    (out.y = cast ((source.y * -1.0) : Float));
-    (out.z = cast ((source.z * -1.0) : Float));
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var z:Float = cast _Runtime.UNDEFINED;
+    x = source.x;
+    y = source.y;
+    z = source.z;
+    (out.x = cast ((x * -1.0) : Float));
+    (out.y = cast ((y * -1.0) : Float));
+    (out.z = cast ((z * -1.0) : Float));
   }
 
   public static function normalizeVector3(out:Vector3Like, source:Vector3Like):Float {
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var z:Float = cast _Runtime.UNDEFINED;
     var l:Float = cast _Runtime.UNDEFINED;
-    l = (cast getVector3Length(({ final __callArgument9:Dynamic = source; __callArgument9; })) : Float);
+    x = source.x;
+    y = source.y;
+    z = source.z;
+    l = HxMath.sqrt(((HxMath.pow(x, 2.0) + HxMath.pow(y, 2.0)) + HxMath.pow(z, 2.0)));
     if ((cast !_Runtime.strictEquals(l, 0.0) : Bool)) {
-      (out.x = cast ((source.x / l) : Float));
-      (out.y = cast ((source.y / l) : Float));
-      (out.z = cast ((source.z / l) : Float));
+      (out.x = cast ((x / l) : Float));
+      (out.y = cast ((y / l) : Float));
+      (out.z = cast ((z / l) : Float));
     } else {
       (out.x = cast (0.0 : Float));
       (out.y = cast (0.0 : Float));
@@ -228,9 +300,15 @@ class Vector3 {
   }
 
   public static function offsetVector3(out:Vector3Like, source:Vector3Like, dx:Float, dy:Float, dz:Float):Void {
-    (out.x = cast ((source.x + dx) : Float));
-    (out.y = cast ((source.y + dy) : Float));
-    (out.z = cast ((source.z + dz) : Float));
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var z:Float = cast _Runtime.UNDEFINED;
+    x = source.x;
+    y = source.y;
+    z = source.z;
+    (out.x = cast ((x + dx) : Float));
+    (out.y = cast ((y + dy) : Float));
+    (out.z = cast ((z + dz) : Float));
   }
 
   public static function projectVector3(out:Vector2Like, source:Vector3Like):Void {
@@ -259,9 +337,15 @@ class Vector3 {
   }
 
   public static function scaleVector3(out:Vector3Like, source:Vector3Like, scalar:Float):Void {
-    (out.x = cast ((source.x * scalar) : Float));
-    (out.y = cast ((source.y * scalar) : Float));
-    (out.z = cast ((source.z * scalar) : Float));
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    var z:Float = cast _Runtime.UNDEFINED;
+    x = source.x;
+    y = source.y;
+    z = source.z;
+    (out.x = cast ((x * scalar) : Float));
+    (out.y = cast ((y * scalar) : Float));
+    (out.z = cast ((z * scalar) : Float));
   }
 
   public static function setVector3(out:Vector3Like, x:Float, y:Float, z:Float):Void {
@@ -297,9 +381,21 @@ class Vector3 {
   }
 
   public static function subtractVector3(out:Vector3Like, source:Vector3Like, other:Vector3Like):Void {
-    (out.x = cast ((source.x - other.x) : Float));
-    (out.y = cast ((source.y - other.y) : Float));
-    (out.z = cast ((source.z - other.z) : Float));
+    var sx:Float = cast _Runtime.UNDEFINED;
+    var sy:Float = cast _Runtime.UNDEFINED;
+    var sz:Float = cast _Runtime.UNDEFINED;
+    var ox:Float = cast _Runtime.UNDEFINED;
+    var oy:Float = cast _Runtime.UNDEFINED;
+    var oz:Float = cast _Runtime.UNDEFINED;
+    sx = source.x;
+    sy = source.y;
+    sz = source.z;
+    ox = other.x;
+    oy = other.y;
+    oz = other.z;
+    (out.x = cast ((sx - ox) : Float));
+    (out.y = cast ((sy - oy) : Float));
+    (out.z = cast ((sz - oz) : Float));
   }
 
   public static function transformVector3ByMatrix3(out:Vector3Like, source:Vector3Like, matrix:{ var m:flighthq._internal._Float32Array; }):Void {
@@ -322,9 +418,9 @@ class Vector3 {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float), (cast source.z : Float));
   }
 
-  public static final VECTOR3_X_AXIS:flighthq.types.Vector3 = (cast createVector3(({ final __callArgument10:Dynamic = 1.0; __callArgument10; }), ({ final __callArgument11:Dynamic = 0.0; __callArgument11; }), ({ final __callArgument12:Dynamic = 0.0; __callArgument12; })) : flighthq.types.Vector3);
+  public static final VECTOR3_X_AXIS:flighthq.types.Vector3 = (cast createVector3(({ final __callArgument9:Dynamic = 1.0; __callArgument9; }), ({ final __callArgument10:Dynamic = 0.0; __callArgument10; }), ({ final __callArgument11:Dynamic = 0.0; __callArgument11; })) : flighthq.types.Vector3);
 
-  public static final VECTOR3_Y_AXIS:flighthq.types.Vector3 = (cast createVector3(({ final __callArgument13:Dynamic = 0.0; __callArgument13; }), ({ final __callArgument14:Dynamic = 1.0; __callArgument14; }), ({ final __callArgument15:Dynamic = 0.0; __callArgument15; })) : flighthq.types.Vector3);
+  public static final VECTOR3_Y_AXIS:flighthq.types.Vector3 = (cast createVector3(({ final __callArgument12:Dynamic = 0.0; __callArgument12; }), ({ final __callArgument13:Dynamic = 1.0; __callArgument13; }), ({ final __callArgument14:Dynamic = 0.0; __callArgument14; })) : flighthq.types.Vector3);
 
-  public static final VECTOR3_Z_AXIS:flighthq.types.Vector3 = (cast createVector3(({ final __callArgument16:Dynamic = 0.0; __callArgument16; }), ({ final __callArgument17:Dynamic = 0.0; __callArgument17; }), ({ final __callArgument18:Dynamic = 1.0; __callArgument18; })) : flighthq.types.Vector3);
+  public static final VECTOR3_Z_AXIS:flighthq.types.Vector3 = (cast createVector3(({ final __callArgument15:Dynamic = 0.0; __callArgument15; }), ({ final __callArgument16:Dynamic = 0.0; __callArgument16; }), ({ final __callArgument17:Dynamic = 1.0; __callArgument17; })) : flighthq.types.Vector3);
 }

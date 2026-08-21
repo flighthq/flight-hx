@@ -5,13 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effects.RenderEffectPadding.getGaussianRenderEffectPadding;
 import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
+import flighthq.types.EffectSourceMode;
 import flighthq.types.OuterGlowEffect;
 import flighthq.types.RenderEffect;
 import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class OuterGlowEffect {
-  public static function createOuterGlowEffect(?options:flighthq._internal._Omit<flighthq.types.OuterGlowEffect, String>):flighthq.types.OuterGlowEffect {
+  public static function createOuterGlowEffect(?options:{ @:optional var alpha:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):flighthq.types.OuterGlowEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'OuterGlowEffect' }, options]);
     return cast null;

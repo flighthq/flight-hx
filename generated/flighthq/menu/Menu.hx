@@ -7,7 +7,9 @@ import flighthq.menu.MenuTemplates as Facade_Menu_flighthq_menu_MenuTemplates;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.Menu.MenuBackend;
+import flighthq.types.Menu.MenuItemRole;
 import flighthq.types.Menu.MenuItemTemplate;
+import flighthq.types.Menu.MenuItemType;
 import flighthq.types.MenuSignals;
 import flighthq.types.Signal;
 
@@ -199,7 +201,7 @@ class Menu {
     return cast null;
   }
 
-  public static function createMenuItemTemplate(?template:flighthq._internal._Partial<MenuItemTemplate>):MenuItemTemplate {
+  public static function createMenuItemTemplate(?template:{ @:optional var id:Null<String>; @:optional var label:Null<String>; @:optional var type:Null<MenuItemType>; @:optional var role:Null<MenuItemRole>; @:optional var accelerator:Null<String>; @:optional var enabled:Null<Bool>; @:optional var checked:Null<Bool>; @:optional var visible:Null<Bool>; @:optional var sublabel:Null<String>; @:optional var toolTip:Null<String>; @:optional var submenu:Null<Array<MenuItemTemplate>>; }):MenuItemTemplate {
     var item:MenuItemTemplate = cast _Runtime.UNDEFINED;
     item = (cast _Runtime.mergeObjects([{ type: 'normal' }, { enabled: true }, template]));
     if ((cast !_Runtime.strictEquals(item.submenu, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {

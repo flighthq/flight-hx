@@ -35,7 +35,7 @@ class GlToneMapEffect {
   });
 
   public static function registerGlToneMapEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'ToneMapEffect' : String), ({ final __callArgument6:Dynamic = defaultGlToneMapEffectRunner; __callArgument6; }));
+    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'ToneMapEffect' : String), ({ final __callArgument6:Dynamic = defaultGlToneMapEffectRunner; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static function buildToneMapFragment__glToneMapEffect(operator_:String):String {

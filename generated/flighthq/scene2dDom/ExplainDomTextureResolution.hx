@@ -6,18 +6,23 @@ import flighthq._internal._Runtime;
 import flighthq.scene2dDom.DomRenderState.getDomRenderStateRuntime;
 import flighthq.texture.Texture.getTextureSourceKind;
 import flighthq.types.DomRenderState;
+import flighthq.types.DomRenderState.DomRenderRegistries;
 import flighthq.types.DomRenderState.DomRenderStateRuntime;
 import flighthq.types.DomTextureResolver;
+import flighthq.types.RegistryTable.KeyedTable;
+import flighthq.types.RegistryTable.RegistryEntryState;
+import flighthq.types.RegistryTable.RegistryTableEntry;
 import flighthq.types.Texture;
 import flighthq.types.Texture.TextureLike;
 import flighthq.types.TextureResolutionExplanation;
+import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 class ExplainDomTextureResolution {
   public static function explainDomTextureResolution(state:DomRenderState, texture:Texture):TextureResolutionExplanation {
     var kind:Null<String> = cast _Runtime.UNDEFINED;
     kind = (cast getTextureSourceKind(({ final __callArgument0:Dynamic = texture; __callArgument0; })) : Null<String>);
     if ((cast _Runtime.strictEquals(kind, null) : Bool)) { return cast { kind: kind, status: 'missing-kind' }; }
-    return cast { kind: kind, status: ((cast _Runtime.strictEquals(({ final __collection3:Dynamic = (cast (cast getDomRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : DomRenderStateRuntime) : { @:optional var domTextureResolverRegistry:Null<flighthq._internal._Map<String, DomTextureResolver>>; }).domTextureResolverRegistry; __collection3 == null ? _Runtime.UNDEFINED : ((cast __collection3 : flighthq._internal._Map<String, DomTextureResolver>).has(kind)); }), true) : Bool) ? (cast 'registered' : Dynamic) : (cast 'missing-resolver' : Dynamic)) };
+    return cast { kind: kind, status: ((cast _Runtime.strictEquals(({ final __structural3 = ((cast (cast (cast (cast (cast getDomRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : DomRenderStateRuntime) : { var registries:DomRenderRegistries; }).registries : DomRenderRegistries).textureResolvers : KeyedTable<DomTextureResolver>).entries : flighthq._internal._Map<String, RegistryTableEntry<DomTextureResolver>>).get(kind)); __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast 'registered' : Dynamic) : (cast 'missing-resolver' : Dynamic)) };
     return cast null;
   }
 }

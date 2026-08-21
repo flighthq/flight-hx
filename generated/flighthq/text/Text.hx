@@ -18,6 +18,7 @@ import flighthq.types.RichTextContent;
 import flighthq.types.TextAutoSize;
 import flighthq.types.TextFieldSignals;
 import flighthq.types.TextFormat;
+import flighthq.types.TextFormat.TextFormatAlign;
 import flighthq.types.TextFormatRange;
 import flighthq.types.TextLabel;
 import flighthq.types.TextLayout.TextLayoutParams;
@@ -217,7 +218,7 @@ class Text {
     Facade_Text_flighthq_text_RichText.insertRichTextString(source, index, value);
   }
 
-  public static function patchNativeTextStyle(source:NativeText, patch:flighthq._internal._Partial<NativeTextStyle>):Void {
+  public static function patchNativeTextStyle(source:NativeText, patch:{ @:optional var align:Null<TextFormatAlign>; @:optional var bold:Null<Bool>; @:optional var color:Null<Float>; @:optional var font:Null<String>; @:optional var italic:Null<Bool>; @:optional var leading:Null<Float>; @:optional var size:Null<Float>; }):Void {
     Facade_Text_flighthq_text_NativeText.patchNativeTextStyle(source, patch);
   }
 

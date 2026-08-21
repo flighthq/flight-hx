@@ -2,6 +2,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import ts from 'typescript';
 
+import patches from '../../patches/manifest.ts';
 import type { UpstreamInventory } from '../model/inventory.ts';
 import { upstreamTypeScriptProgram } from './program.ts';
 import { excludedPackageDirectories } from './exclusions.ts';
@@ -14,6 +15,7 @@ import {
 } from './static-facts.ts';
 import { typedStructRegistry, type TypedStructRegistry } from './typed-structs.ts';
 import { lowerTypeScriptSource } from '../lower/typescript.ts';
+import { semanticBodyPatchFunctionNames } from '../patch/apply.ts';
 import type {
   LoweringDiagnostic,
   StaticFactAudit,
@@ -142,9 +144,11 @@ function auditPackage(
     const source = program.getSourceFile(file);
     if (!source) throw new Error(`Upstream TypeScript program is missing source: ${file}`);
     declarations += source.statements.filter(isCandidateDeclaration).length;
+    const sourcePath = path.relative(workspaceDirectory, source.fileName);
     const result = lowerTypeScriptSource(source, packageName, workspaceDirectory, checker, typedStructs, {
       expressionTypes: false,
       inferredTypes: false,
+      ownedFunctionBodies: semanticBodyPatchFunctionNames(patches, packageName, sourcePath),
       program,
     });
     lowered += result.accountedDeclarations;

@@ -13,6 +13,8 @@ import flighthq.types.RenderEffect;
 import flighthq.types.VignetteEffect;
 
 class CanvasVignetteEffect {
+  public static final RAMP_STOPS__canvasVignetteEffect:Float = 16.0;
+
   @:noCompletion
   public static function applyVignetteEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:VignetteEffect):Void {
     var intensity:Float = cast _Runtime.UNDEFINED;
@@ -24,15 +26,13 @@ class CanvasVignetteEffect {
     var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     var w:Float = cast _Runtime.UNDEFINED;
     var h:Float = cast _Runtime.UNDEFINED;
-    var cx:Float = cast _Runtime.UNDEFINED;
-    var cy:Float = cast _Runtime.UNDEFINED;
-    var outer:Float = cast _Runtime.UNDEFINED;
-    var inner:Float = cast _Runtime.UNDEFINED;
-    var ramp:Float = cast _Runtime.UNDEFINED;
+    var red:Float = cast _Runtime.UNDEFINED;
+    var green:Float = cast _Runtime.UNDEFINED;
+    var blue:Float = cast _Runtime.UNDEFINED;
+    var toUnitRadius:Float = cast _Runtime.UNDEFINED;
+    var outerRadius:Float = cast _Runtime.UNDEFINED;
+    var innerRadius:Float = cast _Runtime.UNDEFINED;
     var gradient:flighthq._internal.dom.CanvasGradient = cast _Runtime.UNDEFINED;
-    var r:Float = cast _Runtime.UNDEFINED;
-    var g:Float = cast _Runtime.UNDEFINED;
-    var b:Float = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(effect.intensity, function():Dynamic return cast 1.0);
     radius = _Runtime.coalesce(effect.radius, function():Dynamic return cast 0.75);
     softness = _Runtime.coalesce(effect.softness, function():Dynamic return cast 0.45);
@@ -43,23 +43,28 @@ class CanvasVignetteEffect {
     ctx = dest.context;
     w = dest.width;
     h = dest.height;
-    cx = (w * 0.5);
-    cy = (h * 0.5);
-    outer = HxMath.sqrt(((cx * cx) + (cy * cy)));
-    inner = _Runtime.multiplyNumbers(HxMath.max(0.0, HxMath.min(radius, 1.0)), outer);
-    ramp = HxMath.max(0.0, (inner - (softness * outer)));
-    gradient = flighthq._internal.backend.Canvas2dBackend.call(ctx, 'createRadialGradient', cast ([cx, cy, ramp, cx, cy, outer] : Array<Dynamic>));
-    r = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
-    g = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255);
-    b = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255);
-    (cast gradient : flighthq._internal.dom.CanvasGradient).addColorStop(0.0, 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',0)');
-    (cast gradient : flighthq._internal.dom.CanvasGradient).addColorStop(1.0, 'rgba(' + Std.string(r) + ',' + Std.string(g) + ',' + Std.string(b) + ',' + Std.string(_Runtime.toFixed(darken, 4.0)) + ')');
+    red = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
+    green = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 16)) & 255);
+    blue = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255);
+    toUnitRadius = (1.0 / 1.4142135623730951);
+    outerRadius = _Runtime.multiplyNumbers(HxMath.max(0.0, HxMath.min(radius, 1.0)), toUnitRadius);
+    innerRadius = HxMath.max(0.0, HxMath.min((outerRadius - (softness * toUnitRadius)), (outerRadius - 0.0001)));
+    gradient = flighthq._internal.backend.Canvas2dBackend.call(ctx, 'createRadialGradient', cast ([0.5, 0.5, innerRadius, 0.5, 0.5, outerRadius] : Array<Dynamic>));
+    {
+      var stop:Float = 0.0;
+      while ((cast ((cast stop : Float) <= (cast CanvasVignetteEffect.RAMP_STOPS__canvasVignetteEffect : Float)) : Bool)) {
+        var t:Float = (stop / CanvasVignetteEffect.RAMP_STOPS__canvasVignetteEffect);
+        var eased:Float = ((t * t) * (3.0 - (2.0 * t)));
+        (cast gradient : flighthq._internal.dom.CanvasGradient).addColorStop(t, 'rgba(' + Std.string(red) + ',' + Std.string(green) + ',' + Std.string(blue) + ',' + Std.string(_Runtime.toFixed((darken * eased), 4.0)) + ')');
+        stop++;
+      }
+    }
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
-    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([w, 0.0, 0.0, h, 0.0, 0.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'globalCompositeOperation', 'multiply');
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'filter', 'none');
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle', gradient);
-    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillRect', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
+    flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillRect', cast ([0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 

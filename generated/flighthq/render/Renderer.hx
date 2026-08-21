@@ -3,17 +3,30 @@ package flighthq.render;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.registry.RegistryTable.getRegistryTableEntry;
+import flighthq.registry.RegistryTable.withRegistryTableEntry;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.types.CanvasShapeRegistry.CanvasShapeCommand;
 import flighthq.types.Entity.Kind;
+import flighthq.types.Path;
+import flighthq.types.PathMesh;
+import flighthq.types.RegistryTable.KeyedTable;
+import flighthq.types.RegistryTable.RegistryEntryState;
+import flighthq.types.RegistryTable.RegistryTableEntry;
+import flighthq.types.RegistryTable.SlotTable;
 import flighthq.types.RenderEffectPadding.RenderEffectPaddingResolver;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderState;
+import flighthq.types.RenderState.ColorAdjustmentUnsupportedGuard;
+import flighthq.types.RenderState.RenderRegistries;
+import flighthq.types.RenderState.RenderRootGuard;
 import flighthq.types.RenderState.RenderStateRuntime;
 import flighthq.types.Renderable;
 import flighthq.types.Renderer;
 import flighthq.types.RendererData;
 import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
+import flighthq.types.StrokeStyle;
+import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 class Renderer {
   @:noCompletion
@@ -24,24 +37,41 @@ class Renderer {
 
   @:noCompletion
   public static function copyRenderersFromRenderState(target:RenderState, source:RenderState):Void {
-    ((cast (cast (cast getRenderStateRuntime(({ final __callArgument3:Dynamic = source; __callArgument3; })) : RenderStateRuntime) : { var rendererMap:flighthq._internal._Map<String, flighthq.types.Renderer>; }).rendererMap : flighthq._internal._Map<String, flighthq.types.Renderer>).forEach(function(renderer:flighthq.types.Renderer, kind:String, __unused0:flighthq._internal._Map<String, flighthq.types.Renderer>):Void {
-      registerRenderer(({ final __callArgument4:Dynamic = target; __callArgument4; }), (cast kind : String), ({ final __callArgument5:Dynamic = renderer; __callArgument5; }));
-    }));
+    var targetRuntime:RenderStateRuntime = cast _Runtime.UNDEFINED;
+    var sourceTable:KeyedTable<flighthq.types.Renderer> = cast _Runtime.UNDEFINED;
+    var targetTable:KeyedTable<flighthq.types.Renderer> = cast _Runtime.UNDEFINED;
+    targetRuntime = (cast getRenderStateRuntime(({ final __callArgument2:Dynamic = target; __callArgument2; })) : RenderStateRuntime);
+    sourceTable = (cast (cast (cast getRenderStateRuntime(({ final __callArgument3:Dynamic = source; __callArgument3; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : RenderRegistries).renderers;
+    targetTable = (cast targetRuntime.registries : RenderRegistries).renderers;
+    if ((cast _Runtime.strictEquals((cast (cast targetTable : KeyedTable<flighthq.types.Renderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<flighthq.types.Renderer>>).size, 0.0) : Bool)) {
+      var registrationCount:Float = 0.0;
+      for (entry in _Runtime.iterable(((cast (cast sourceTable : KeyedTable<flighthq.types.Renderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<flighthq.types.Renderer>>).values()))) {
+        if ((cast _Runtime.strictEquals((cast entry : { var state:String; }).state, (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { registrationCount++; }
+      }
+      if ((cast _Runtime.strictEquals(registrationCount, 0.0) : Bool)) { return; }
+      ((cast targetRuntime.registries : RenderRegistries).renderers = sourceTable);
+      (targetRuntime.rendererMapId = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((targetRuntime.rendererMapId + registrationCount)), 0) : Float));
+      return;
+    }
+    for (__iteration0 in _Runtime.iterable((cast sourceTable : KeyedTable<flighthq.types.Renderer>).entries)) {
+      var kind:String = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var entry:RegistryTableEntry<flighthq.types.Renderer> = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
+      if ((cast _Runtime.strictEquals((cast entry : { var state:String; }).state, (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { registerRenderer(({ final __callArgument8:Dynamic = target; __callArgument8; }), (cast kind : String), (cast entry : { var state:String; var value:flighthq.types.Renderer; }).value); }
+    }
   }
 
   @:noCompletion
   public static function copyRenderStateRegistrations(target:RenderState, source:RenderState):Void {
     var targetRuntime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var sourceRuntime:RenderStateRuntime = cast _Runtime.UNDEFINED;
-    var sourcePaddingRegistry:Null<flighthq._internal._Map<String, RenderEffectPaddingResolver>> = cast _Runtime.UNDEFINED;
-    var sourceShapeCommands:Null<flighthq._internal._Map<String, CanvasShapeCommand<String>>> = cast _Runtime.UNDEFINED;
-    targetRuntime = (cast getRenderStateRuntime(({ final __callArgument6:Dynamic = target; __callArgument6; })) : RenderStateRuntime);
-    sourceRuntime = (cast getRenderStateRuntime(({ final __callArgument7:Dynamic = source; __callArgument7; })) : RenderStateRuntime);
-    (targetRuntime.colorAdjustmentResolver = cast (sourceRuntime.colorAdjustmentResolver : Null<RenderState->RenderProxy->Null<RenderProxy>->Void>));
-    sourcePaddingRegistry = sourceRuntime.renderEffectPaddingResolverRegistry;
-    (targetRuntime.renderEffectPaddingResolverRegistry = cast (((cast ((cast _Runtime.strictEquals(sourcePaddingRegistry, null) : Bool) || (cast _Runtime.strictEquals(sourcePaddingRegistry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [sourcePaddingRegistry]) : Dynamic)) : Null<flighthq._internal._Map<String, RenderEffectPaddingResolver>>));
-    sourceShapeCommands = sourceRuntime.canvasShapeCommandRegistry;
-    (targetRuntime.canvasShapeCommandRegistry = cast (((cast ((cast _Runtime.strictEquals(sourceShapeCommands, null) : Bool) || (cast _Runtime.strictEquals(sourceShapeCommands, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) ? (cast null : Dynamic) : (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [sourceShapeCommands]) : Dynamic)) : Null<flighthq._internal._Map<String, CanvasShapeCommand<String>>>));
+    targetRuntime = (cast getRenderStateRuntime(({ final __callArgument9:Dynamic = target; __callArgument9; })) : RenderStateRuntime);
+    sourceRuntime = (cast getRenderStateRuntime(({ final __callArgument10:Dynamic = source; __callArgument10; })) : RenderStateRuntime);
+    ((cast targetRuntime.registries : RenderRegistries).colorAdjustments = (cast sourceRuntime.registries : RenderRegistries).colorAdjustments);
+    ((cast targetRuntime.registries : RenderRegistries).colorAdjustmentUnsupportedGuard = (cast sourceRuntime.registries : RenderRegistries).colorAdjustmentUnsupportedGuard);
+    ((cast targetRuntime.registries : RenderRegistries).effectPaddingResolvers = (cast sourceRuntime.registries : RenderRegistries).effectPaddingResolvers);
+    ((cast targetRuntime.registries : RenderRegistries).renderRootGuard = (cast sourceRuntime.registries : RenderRegistries).renderRootGuard);
+    ((cast targetRuntime.registries : RenderRegistries).canvasShapeCommands = (cast sourceRuntime.registries : RenderRegistries).canvasShapeCommands);
+    ((cast targetRuntime.registries : RenderRegistries).strokeTessellator = (cast sourceRuntime.registries : RenderRegistries).strokeTessellator);
   }
 
   @:noCompletion
@@ -52,10 +82,12 @@ class Renderer {
 
   public static function registerRenderer(state:RenderState, kind:Kind, renderer:flighthq.types.Renderer):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : RenderStateRuntime);
-    if ((cast _Runtime.strictEquals(((cast runtime.rendererMap : flighthq._internal._Map<String, flighthq.types.Renderer>).get(kind)), renderer) : Bool)) { return; }
+    var table:KeyedTable<flighthq.types.Renderer> = cast _Runtime.UNDEFINED;
+    runtime = (cast getRenderStateRuntime(({ final __callArgument11:Dynamic = state; __callArgument11; })) : RenderStateRuntime);
+    table = (cast runtime.registries : RenderRegistries).renderers;
+    if ((cast _Runtime.strictEquals((cast getRegistryTableEntry((cast table : Dynamic), (cast kind : String)) : Null<flighthq.types.Renderer>), renderer) : Bool)) { return; }
+    ((cast runtime.registries : RenderRegistries).renderers = (cast withRegistryTableEntry((cast table : Dynamic), (cast kind : String), ({ final __callArgument12:Dynamic = renderer; __callArgument12; })) : KeyedTable<flighthq.types.Renderer>));
     (runtime.rendererMapId = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((runtime.rendererMapId + 1.0)), 0) : Float));
-    ((cast runtime.rendererMap : flighthq._internal._Map<String, flighthq.types.Renderer>).set(kind, (cast renderer)));
   }
 
   @:noCompletion
@@ -63,7 +95,7 @@ class Renderer {
     for (__iteration1 in _Runtime.iterable(entries)) {
       var kind:String = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
       var renderer:flighthq.types.Renderer = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
-      registerRenderer(({ final __callArgument11:Dynamic = state; __callArgument11; }), (cast kind : String), ({ final __callArgument12:Dynamic = renderer; __callArgument12; }));
+      registerRenderer(({ final __callArgument15:Dynamic = state; __callArgument15; }), (cast kind : String), ({ final __callArgument16:Dynamic = renderer; __callArgument16; }));
     }
   }
 }

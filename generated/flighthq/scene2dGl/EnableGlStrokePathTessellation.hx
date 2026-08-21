@@ -6,13 +6,21 @@ import flighthq._internal._Runtime;
 import flighthq.path.TessellateStrokePath.tessellateStrokePath;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlRenderState.GlRenderRegistries;
 import flighthq.types.GlRenderState.GlRenderStateRuntime;
 import flighthq.types.Path;
 import flighthq.types.PathMesh;
+import flighthq.types.RegistryTable.RegistryEntryState;
+import flighthq.types.RegistryTable.SlotTable;
 import flighthq.types.StrokeStyle;
+import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 class EnableGlStrokePathTessellation {
   public static function enableGlStrokePathTessellation(state:GlRenderState):Void {
-    ((cast (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime) : { var strokeTessellator:Null<Path->StrokeStyle->Null<Float>->Null<PathMesh>>; }).strokeTessellator = cast (tessellateStrokePath : Null<Path->StrokeStyle->Null<Float>->Null<PathMesh>>));
+    var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
+    var table:SlotTable<Path->StrokeStyle->Null<Float>->Null<PathMesh>> = cast _Runtime.UNDEFINED;
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime);
+    table = (cast runtime.registries : GlRenderRegistries).strokeTessellator;
+    ((cast runtime.registries : GlRenderRegistries).strokeTessellator = _Runtime.mergeObjects([table, { entry: { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: tessellateStrokePath } }]));
   }
 }

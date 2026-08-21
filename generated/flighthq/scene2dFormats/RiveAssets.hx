@@ -3,15 +3,19 @@ package flighthq.scene2dFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.scene2dFormats.RiveCoreTypes.getRiveCoreTypeName;
 import flighthq.scene2dFormats.RiveCoreTypes.isRiveCoreTypeDerivedFrom;
+import flighthq.types.ImportDiagnostic;
+import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.RiveDocument.RiveCoreObject;
 import flighthq.types.RiveDocument.RiveFileAsset;
 import flighthq.types.RiveDocument.RiveProperty;
 import flighthq.types.RiveDocument.RiveValue;
+import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 class RiveAssets {
-  public static function createRiveFileAssets(objects:Array<RiveCoreObject>):Array<RiveFileAsset> {
+  public static function createRiveFileAssets(objects:Array<RiveCoreObject>, ?diagnostics:Array<ImportDiagnostic>):Array<RiveFileAsset> {
     var assets:Array<RiveFileAsset> = cast _Runtime.UNDEFINED;
     assets = (cast cast ([] : Array<Dynamic>));
     for (object in _Runtime.iterable(objects)) {
@@ -19,8 +23,12 @@ class RiveAssets {
         _Runtime.callProperty(assets, 'push', cast ([{ bytes: null, cdnBaseUrl: (cast RiveAssets.readRiveText__riveAssets(({ final __callArgument2:Dynamic = object; __callArgument2; }), (cast RiveAssets.RIVE_ASSET_CDN_BASE_URL__riveAssets : Float), (cast '' : String)) : String), height: (cast RiveAssets.readRiveNumber__riveAssets(({ final __callArgument3:Dynamic = object; __callArgument3; }), (cast RiveAssets.RIVE_ASSET_HEIGHT__riveAssets : Float), (cast 0.0 : Float)) : Float), kind: _Runtime.coalesce((cast getRiveCoreTypeName((cast object.typeKey : Float)) : Null<String>), function():Dynamic return cast ''), name: (cast RiveAssets.readRiveText__riveAssets(({ final __callArgument4:Dynamic = object; __callArgument4; }), (cast RiveAssets.RIVE_ASSET_NAME__riveAssets : Float), (cast '' : String)) : String), width: (cast RiveAssets.readRiveNumber__riveAssets(({ final __callArgument5:Dynamic = object; __callArgument5; }), (cast RiveAssets.RIVE_ASSET_WIDTH__riveAssets : Float), (cast 0.0 : Float)) : Float) }] : Array<Dynamic>));
         continue;
       }
-      if ((cast ((cast !_Runtime.strictEquals(object.typeKey, RiveAssets.RIVE_FILE_ASSET_CONTENTS__riveAssets) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(assets, 'length'), 0.0) : Bool)) : Bool)) { continue; }
-      ((cast flighthq._internal._StaticIndex.readArray(assets, _Runtime.subtractNumbers(_Runtime.field(assets, 'length'), 1.0)) : { var bytes:Null<flighthq._internal._UInt8Array>; }).bytes = cast ((cast RiveAssets.readRiveBytes__riveAssets(({ final __callArgument6:Dynamic = object; __callArgument6; }), (cast RiveAssets.RIVE_ASSET_BYTES__riveAssets : Float)) : Null<flighthq._internal._UInt8Array>) : Null<flighthq._internal._UInt8Array>));
+      if ((cast !_Runtime.strictEquals(object.typeKey, RiveAssets.RIVE_FILE_ASSET_CONTENTS__riveAssets) : Bool)) { continue; }
+      if ((cast _Runtime.strictEquals(_Runtime.field(assets, 'length'), 0.0) : Bool)) {
+        reportImportDiagnostic(({ final __callArgument6:Dynamic = diagnostics; __callArgument6; }), ({ final __callArgument7:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument7; }), (cast 'rive.asset-contents-unowned' : String), (cast 'createRiveFileAssets' : String), ({ final __callArgument9:Dynamic = { bytes: _Runtime.coalesce(_Runtime.optionalField((cast RiveAssets.readRiveBytes__riveAssets(({ final __callArgument8:Dynamic = object; __callArgument8; }), (cast RiveAssets.RIVE_ASSET_BYTES__riveAssets : Float)) : Null<flighthq._internal._UInt8Array>), 'length'), function():Dynamic return cast 0.0) }; __callArgument9; }));
+        continue;
+      }
+      ((cast flighthq._internal._StaticIndex.readArray(assets, _Runtime.subtractNumbers(_Runtime.field(assets, 'length'), 1.0)) : { var bytes:Null<flighthq._internal._UInt8Array>; }).bytes = cast ((cast RiveAssets.readRiveBytes__riveAssets(({ final __callArgument10:Dynamic = object; __callArgument10; }), (cast RiveAssets.RIVE_ASSET_BYTES__riveAssets : Float)) : Null<flighthq._internal._UInt8Array>) : Null<flighthq._internal._UInt8Array>));
     }
     return cast assets;
     return cast null;

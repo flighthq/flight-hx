@@ -6,12 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.effects.RenderEffectPadding.getDirectionalRenderEffectPadding;
 import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
 import flighthq.types.DropShadowEffect;
+import flighthq.types.EffectSourceMode;
 import flighthq.types.RenderEffect;
 import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class DropShadowEffect {
-  public static function createDropShadowEffect(?options:flighthq._internal._Omit<flighthq.types.DropShadowEffect, String>):flighthq.types.DropShadowEffect {
+  public static function createDropShadowEffect(?options:{ @:optional var alpha:Null<Float>; @:optional var angle:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var distance:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):flighthq.types.DropShadowEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'DropShadowEffect' }, options]);
     return cast null;

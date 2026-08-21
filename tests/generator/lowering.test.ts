@@ -157,6 +157,115 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain("_Runtime.field(sample, 'value')");
   });
 
+  it('lowers template-literal string refinements without external or Dynamic type debt', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/types/src/templateLiteral.ts',
+      `
+        export type VendorKind = \`${'${string}'}.${'${string}'}\`;
+        export interface VendorShape { kind: VendorKind; }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/types', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'TemplateLiteralFixture',
+      packageName: '@flighthq/types',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('typedef VendorKind = String;');
+    expect(output).toContain('typedef VendorShape = { var kind:VendorKind; };');
+    expect(output).not.toContain('Dynamic');
+  });
+
+  it('materializes concrete inline mapped wrappers while retaining open generic applications', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/entity/src/concreteMapped.ts',
+      `
+        interface Entity { runtime?: object; }
+        type EntityWithoutRuntime<Type extends Entity> = Omit<Type, 'runtime'>;
+        interface Bitmap extends Entity { width: number; format: string; }
+        interface Runtime<Traits> { test?: (value: Traits) => boolean; count: number; }
+        type MethodsOf<Type> = { [Key in keyof Type as Type[Key] extends (...args: any) => any ? Key : never]: Type[Key] };
+        type RuntimeMethods = Partial<MethodsOf<Runtime<string>> & Pick<Runtime<string>, 'test'>>;
+        declare function createEntity<Type extends object>(value: Type): Type & Entity;
+        export function concrete(bitmap: EntityWithoutRuntime<Bitmap>) { return createEntity(bitmap); }
+        export function generic<Type extends Entity>(value: EntityWithoutRuntime<Type>): EntityWithoutRuntime<Type> {
+          return value;
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/entity', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'ConcreteMappedFixture',
+      packageName: '@flighthq/entity',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('function concrete(bitmap:{ var width:Float; var format:String; })');
+    expect(output).toContain('):{ >Entity, var width:Float; var format:String; }');
+    expect(output).toContain(
+      'function generic<Type:Entity>(value:EntityWithoutRuntime<Type>):EntityWithoutRuntime<Type>',
+    );
+    expect(output).toContain('typedef RuntimeMethods = { @:optional var test:Null<String->Bool>; };');
+    expect(output).not.toContain('typedef RuntimeMethods = { @:optional var test:Null<Traits->Bool>; };');
+    expect(output).not.toContain('>EntityWithoutRuntime<Bitmap>');
+  });
+
+  it('routes SharedArrayBuffer runtime checks through the explicit host-value LUT', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/render-wgpu/src/sharedBuffer.ts',
+      `
+        export function isShared(value: unknown): boolean {
+          return typeof SharedArrayBuffer !== 'undefined' && value instanceof SharedArrayBuffer;
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/render-wgpu', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'SharedBufferFixture',
+      packageName: '@flighthq/render-wgpu',
+    });
+
+    expect(output).toContain("_HostValueLut.typeofValue('SharedArrayBuffer')");
+    expect(output).toContain("_HostValueLut.get('SharedArrayBuffer')");
+    expect(output).not.toMatch(/isInstanceOf\(value, SharedArrayBuffer\)/u);
+  });
+
+  it('erases local type declarations while retaining their strict structural field types', () => {
+    const { checker, program, source } = typedSource(
+      '/workspace/upstream/packages/example/src/localTypes.ts',
+      `
+        export function readRows(): number {
+          interface Row { data: Uint8Array; tag: number; }
+          type Pair = { left: number; right: string };
+          const rows: Row[] = [{ data: new Uint8Array(0), tag: 3 }];
+          const pair: Pair = { left: 2, right: 'ok' };
+          return rows[0].tag + pair.left;
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker, undefined, { program });
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'LocalTypesFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('rows:Array<{ var data:flighthq._internal._UInt8Array; var tag:Float; }>');
+    expect(output).toContain('pair:{ var left:Float; var right:String; }');
+    expect(output).not.toContain('interface Row');
+    expect(output).not.toContain('typedef Pair');
+    expect(output).not.toContain("_Runtime.field(pair, 'left')");
+  });
+
   it('keeps omitted and possibly undefined arguments nullable at typed call boundaries', () => {
     const { checker, source } = typedSource(
       '/workspace/upstream/packages/example/src/optional-default.ts',
@@ -2341,6 +2450,40 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain('Reflect.fields');
   });
 
+  it('lowers portable standard identity, constants, and iterable probes explicitly', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        export function inspect(size: number[] | { width: number }) {
+          return {
+            same: Object.is(0, -0),
+            diagonal: Math.SQRT2,
+            wordBytes: Uint16Array.BYTES_PER_ELEMENT,
+            positional: Symbol.iterator in Object(size),
+          };
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'StandardRuntimeFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('flighthq._internal.DynamicObject.is(0.0, -0.0)');
+    expect(output).toContain(`diagonal: ${String(Math.SQRT2)}`);
+    expect(output).toContain('wordBytes: 2.0');
+    expect(output).toContain('_Runtime.isIterable(size)');
+    expect(output).not.toContain('Symbol.iterator');
+    expect(output).not.toContain('Uint16Array.BYTES_PER_ELEMENT');
+  });
+
   it('keeps Object.keys results string-typed through keyof assertions', () => {
     const { checker, source } = typedSource(
       '/workspace/upstream/packages/example/src/objectKeys.ts',
@@ -3555,6 +3698,10 @@ describe('TypeScript lowering and Haxe emission', () => {
         Number.NEGATIVE_INFINITY,
         Number.EPSILON,
         Number.MAX_SAFE_INTEGER,
+        Number.MAX_VALUE,
+        Number.MIN_SAFE_INTEGER,
+        Number.MIN_VALUE,
+        Number.NaN,
       ];`,
       ts.ScriptTarget.Latest,
       true,
@@ -3573,6 +3720,10 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('HxMath.NEGATIVE_INFINITY');
     expect(output).toContain('_Runtime.NUMBER_EPSILON');
     expect(output).toContain('_Runtime.MAX_SAFE_INTEGER');
+    expect(output).toContain('_Runtime.NUMBER_MAX_VALUE');
+    expect(output).toContain('-_Runtime.MAX_SAFE_INTEGER');
+    expect(output).toContain('_Runtime.NUMBER_MIN_VALUE');
+    expect(output).toContain('HxMath.NaN');
     expect(output).not.toContain("flighthq._internal._HostValueLut.get('Number')");
   });
 

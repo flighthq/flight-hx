@@ -32,12 +32,12 @@ describe('public Haxe facades', () => {
       source.slice(0, source.indexOf(declaration)).trimEnd().split('\n').at(-1)?.trim();
 
     expect(firstIdentities).toEqual(secondIdentities);
-    expect(firstIdentities).toHaveLength(1_213);
+    expect(firstIdentities).toHaveLength(1_356);
     expect(core.contractSurface).toMatchObject({
-      noCompletionDeclarations: 1_213,
-      protectedDeclarationIdentities: 1_213,
+      noCompletionDeclarations: 1_356,
+      protectedDeclarationIdentities: 1_356,
     });
-    expect(core.contractSurface.omittedModules).toHaveLength(142);
+    expect(core.contractSurface.omittedModules).toHaveLength(148);
     expect(
       core.contractSurface.omittedModules.every((item) => item.reason === 'header-only-contract-export-lane'),
     ).toBe(true);
@@ -118,6 +118,10 @@ describe('public Haxe facades', () => {
       path.join(workspace, 'tests', 'bridges', 'sources', 'effects-gl', 'glDropShadowEffect.mjs'),
       'utf8',
     );
+    const glChromaticAberration = readFileSync(
+      path.join(workspace, 'tests', 'bridges', 'sources', 'effects-gl', 'glChromaticAberrationEffect.mjs'),
+      'utf8',
+    );
 
     expect(applicationGl).toContain("import * as __dependency0 from '@flighthq/node/contract';");
     expect(applicationGl).toContain("import * as __dependency1 from '@flighthq/render-gl/contract';");
@@ -136,6 +140,9 @@ describe('public Haxe facades', () => {
       'compiled.flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget = __dependency0.acquireGlRenderTarget;',
     );
     expect(glDropShadow).not.toContain('getGlRenderStateRuntime = __dependency0.getGlRenderStateRuntime;');
+    expect(glChromaticAberration).toContain(
+      'compiled.flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram = __dependency1.getGlEffectProgram;',
+    );
   });
 
   it('keeps callable contract, backend-registration, and test-helper exports live', () => {

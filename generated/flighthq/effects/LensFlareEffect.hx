@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.LensFlareEffect;
 
 class LensFlareEffect {
-  public static function createLensFlareEffect(?options:flighthq._internal._Omit<flighthq.types.LensFlareEffect, String>):flighthq.types.LensFlareEffect {
+  public static function createLensFlareEffect(?options:{ @:optional var threshold:Null<Float>; @:optional var intensity:Null<Float>; @:optional var ghosts:Null<Float>; @:optional var halo:Null<Float>; }):flighthq.types.LensFlareEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'LensFlareEffect' }, options]);
     return cast null;

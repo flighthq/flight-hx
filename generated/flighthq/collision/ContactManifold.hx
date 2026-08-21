@@ -3,11 +3,11 @@ package flighthq.collision;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionContactManifold;
-import flighthq.types.Collision.CollisionContactPoint;
+import flighthq.types.Collision.CollisionContactManifold2D;
+import flighthq.types.Collision.CollisionContactPoint2D;
 
 class ContactManifold {
-  public static function clearCollisionContactManifold(out:CollisionContactManifold):Void {
+  public static function clearCollisionContactManifold2D(out:CollisionContactManifold2D):Void {
     (out.overlapping = cast (false : Bool));
     (out.normalX = cast (0.0 : Float));
     (out.normalY = cast (0.0 : Float));
@@ -15,12 +15,12 @@ class ContactManifold {
     (out.pointCount = cast (0.0 : Float));
   }
 
-  public static function createCollisionContactManifold():CollisionContactManifold {
-    return cast { overlapping: false, normalX: 0.0, normalY: 0.0, depth: 0.0, pointCount: 0.0, points: cast ([(cast ContactManifold.createContactPoint__contactManifold() : CollisionContactPoint), (cast ContactManifold.createContactPoint__contactManifold() : CollisionContactPoint)] : Array<Dynamic>) };
+  public static function createCollisionContactManifold2D():CollisionContactManifold2D {
+    return cast { overlapping: false, normalX: 0.0, normalY: 0.0, depth: 0.0, pointCount: 0.0, points: cast ([(cast ContactManifold.createContactPoint__contactManifold() : CollisionContactPoint2D), (cast ContactManifold.createContactPoint__contactManifold() : CollisionContactPoint2D)] : Array<Dynamic>) };
     return cast null;
   }
 
-  public static function createContactPoint__contactManifold():CollisionContactPoint {
+  public static function createContactPoint__contactManifold():CollisionContactPoint2D {
     return cast { x: 0.0, y: 0.0, depth: 0.0, featureId: 0.0 };
     return cast null;
   }

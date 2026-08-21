@@ -7,12 +7,12 @@ import flighthq.types.ColorBlindSimulationAdjustment;
 import flighthq.types.ColorBlindSimulationAdjustment.ColorBlindType;
 
 class ColorBlindSimulationAdjustment {
-  public static function createColorBlindSimulationAdjustment(?options:flighthq._internal._Omit<flighthq.types.ColorBlindSimulationAdjustment, String>):flighthq.types.ColorBlindSimulationAdjustment {
+  public static function createColorBlindSimulationAdjustment(?options:{ @:optional var type:Null<ColorBlindType>; }):flighthq.types.ColorBlindSimulationAdjustment {
     if (options == null) options = cast ({  } : Dynamic);
     var type:ColorBlindType = cast _Runtime.UNDEFINED;
     var m:Array<Float> = cast _Runtime.UNDEFINED;
     var colorMatrix:Array<Float> = cast _Runtime.UNDEFINED;
-    type = _Runtime.coalesce(_Runtime.field(options, 'type'), function():Dynamic return cast 'deuteranopia');
+    type = _Runtime.coalesce((cast options : { @:optional var type:Null<String>; }).type, function():Dynamic return cast 'deuteranopia');
     m = _Runtime.getIndex(ColorBlindSimulationAdjustment.COLOR_BLIND_MATRICES__colorBlindSimulationAdjustment, type);
     colorMatrix = (cast cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast m : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast m : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast m : Array<Float>), (cast 2.0 : Float)), 0.0, 0.0, flighthq._internal._StaticIndex.readFloatArrayTyped((cast m : Array<Float>), (cast 3.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast m : Array<Float>), (cast 4.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast m : Array<Float>), (cast 5.0 : Float)), 0.0, 0.0, flighthq._internal._StaticIndex.readFloatArrayTyped((cast m : Array<Float>), (cast 6.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast m : Array<Float>), (cast 7.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast m : Array<Float>), (cast 8.0 : Float)), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>));
     return cast _Runtime.mergeObjects([{ kind: 'ColorBlindSimulationAdjustment' }, options, { colorMatrix: colorMatrix }]);

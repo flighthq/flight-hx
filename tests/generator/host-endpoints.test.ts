@@ -15,14 +15,14 @@ describe('checker-derived host endpoint contract', () => {
     const audit = auditHostEndpoints(workspace, 'fixture');
 
     expect(audit.summary).toEqual({
-      accesses: 3_558,
-      backendContractEndpoints: 379,
+      accesses: 3_681,
+      backendContractEndpoints: 394,
       bindings: 10,
-      calls: 2_267,
+      calls: 2_337,
       dynamicFallbackEndpoints: 12,
-      endpoints: 379,
-      reads: 1_035,
-      writes: 256,
+      endpoints: 394,
+      reads: 1_091,
+      writes: 253,
     });
     expect(audit.coverageIssues).toEqual([]);
     expect(() => validateHostEndpointCoverage(audit)).not.toThrow();
@@ -40,13 +40,25 @@ describe('checker-derived host endpoint contract', () => {
       'BLEND_EQUATION_RGB',
       'BLEND_SRC_ALPHA',
       'BLEND_SRC_RGB',
+      'CCW',
+      'COLOR_CLEAR_VALUE',
+      'COLOR_WRITEMASK',
       'CULL_FACE_MODE',
       'CURRENT_PROGRAM',
+      'CW',
       'DEPTH_FUNC',
       'DEPTH_WRITEMASK',
+      'FRONT_FACE',
       'MAX_TEXTURE_IMAGE_UNITS',
       'SCISSOR_BOX',
       'SRGB8_ALPHA8',
+      'STENCIL_BACK_FAIL',
+      'STENCIL_BACK_FUNC',
+      'STENCIL_BACK_PASS_DEPTH_FAIL',
+      'STENCIL_BACK_PASS_DEPTH_PASS',
+      'STENCIL_BACK_REF',
+      'STENCIL_BACK_VALUE_MASK',
+      'STENCIL_BACK_WRITEMASK',
       'STENCIL_FAIL',
       'STENCIL_FUNC',
       'STENCIL_PASS_DEPTH_FAIL',
@@ -59,10 +71,13 @@ describe('checker-derived host endpoint contract', () => {
       'VERTEX_ARRAY_BINDING',
       'blendEquationSeparate',
       'blendFuncSeparate',
+      'frontFace',
       'isEnabled',
+      'stencilFuncSeparate',
+      'stencilMaskSeparate',
     ];
 
-    expect(newWebGlEndpoints).toHaveLength(27);
+    expect(newWebGlEndpoints).toHaveLength(42);
     expect(newWebGlEndpoints.every((member) => keys.has(`WebGl2Backend:${member}`))).toBe(true);
     expect(audit.endpoints).toEqual(
       expect.arrayContaining([

@@ -64,7 +64,7 @@ class CanvasOuterGlowEffect {
     glowPasses = HxMath.max(1.0, HxMath.floor(strength));
     blur = HxMath.max(0.0, (_Runtime.addNumbers(_Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0), _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0)) / 2.0));
     sourceMode = _Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw');
-    drawCanvasTintedAlphaMask(({ final __callArgument11:Dynamic = mask; __callArgument11; }), ({ final __callArgument12:Dynamic = source; __callArgument12; }), (cast _Runtime.coalesce(effect.color, function():Dynamic return cast 16711680.0) : Float), (cast _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0) : Float), (cast tintStrength : Float));
+    drawCanvasTintedAlphaMask(({ final __callArgument11:Dynamic = mask; __callArgument11; }), ({ final __callArgument12:Dynamic = source; __callArgument12; }), (cast _Runtime.coalesce(effect.color, function():Dynamic return cast 4278190335.0) : Float), (cast _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0) : Float), (cast tintStrength : Float));
     drawCanvasEffectPass(({ final __callArgument13:Dynamic = blurred; __callArgument13; }), ({ final __callArgument14:Dynamic = mask; __callArgument14; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
     clearCanvasTarget(({ final __callArgument15:Dynamic = dest; __callArgument15; }));
     {

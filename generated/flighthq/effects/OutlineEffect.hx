@@ -10,7 +10,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
 class OutlineEffect {
-  public static function createOutlineEffect(?options:flighthq._internal._Omit<flighthq.types.OutlineEffect, String>):flighthq.types.OutlineEffect {
+  public static function createOutlineEffect(?options:{ @:optional var threshold:Null<Float>; @:optional var thickness:Null<Float>; @:optional var color:Null<Float>; }):flighthq.types.OutlineEffect {
     if (options == null) options = cast ({  } : Dynamic);
     return cast _Runtime.mergeObjects([{ kind: 'OutlineEffect' }, options]);
     return cast null;

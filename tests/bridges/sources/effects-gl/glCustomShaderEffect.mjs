@@ -8,5 +8,7 @@ __syncDependencies();
 export const applyCustomShaderEffectToGl = api.applyCustomShaderEffectToGl;
 export const defaultGlCustomShaderEffectRunner = api.defaultGlCustomShaderEffectRunner;
 export const getGlCustomShaderSource = api.getGlCustomShaderSource;
+export const isGlCustomShaderEffectResolvable = api.isGlCustomShaderEffectResolvable;
 export const registerGlCustomShaderEffect = api.registerGlCustomShaderEffect;
 export const registerGlCustomShaderSource = api.registerGlCustomShaderSource;
+export const setGlCustomShaderSourceGuard = api.setGlCustomShaderSourceGuard;

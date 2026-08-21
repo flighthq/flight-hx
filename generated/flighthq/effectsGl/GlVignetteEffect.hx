@@ -48,7 +48,7 @@ class GlVignetteEffect {
   });
 
   public static function registerGlVignetteEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'VignetteEffect' : String), ({ final __callArgument6:Dynamic = defaultGlVignetteEffectRunner; __callArgument6; }));
+    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'VignetteEffect' : String), ({ final __callArgument6:Dynamic = defaultGlVignetteEffectRunner; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
   }
 
   public static final VIGNETTE_FRAGMENT_SRC__glVignetteEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_radius;\nuniform float u_softness;\nuniform vec4 u_color;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  vec2 centered = v_texCoord - 0.5;\n  float dist = length(centered) * 1.41421356;\n  float vig = smoothstep(u_radius, u_radius - u_softness, dist);\n  float darken = (1.0 - vig) * u_intensity * u_color.a;\n  o_color = vec4(mix(c.rgb, u_color.rgb, darken), c.a);\n}';

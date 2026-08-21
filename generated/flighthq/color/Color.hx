@@ -41,6 +41,11 @@ class Color {
     return cast null;
   }
 
+  public static function computeRgbaCssString(color:Float):String {
+    return cast Facade_Color_flighthq_color_PackColor.computeRgbaCssString(color);
+    return cast null;
+  }
+
   public static function computeRgbHexString(color:Float):String {
     return cast Facade_Color_flighthq_color_PackColor.computeRgbHexString(color);
     return cast null;

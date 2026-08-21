@@ -3,8 +3,11 @@ package flighthq.scene2dFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.scene2dFormats.RiveCoreTypes.getRiveCoreTypeName;
 import flighthq.scene2dFormats.RiveCoreTypes.isRiveCoreTypeDerivedFrom;
+import flighthq.types.ImportDiagnostic;
+import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
 import flighthq.types.RiveDocument.RiveCoreObject;
 import flighthq.types.RiveDocument.RiveProperty;
 import flighthq.types.RiveDocument.RiveStateMachineDescriptor;
@@ -13,9 +16,10 @@ import flighthq.types.RiveDocument.RiveStateMachineLayer;
 import flighthq.types.RiveDocument.RiveStateMachineState;
 import flighthq.types.RiveDocument.RiveStateMachineTransition;
 import flighthq.types.RiveDocument.RiveValue;
+import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 class RiveStateMachine {
-  public static function createRiveStateMachines(objects:Array<RiveCoreObject>, range:{ var end:Float; var start:Float; }):Array<RiveStateMachineDescriptor> {
+  public static function createRiveStateMachines(objects:Array<RiveCoreObject>, range:{ var end:Float; var start:Float; }, ?diagnostics:Array<ImportDiagnostic>):Array<RiveStateMachineDescriptor> {
     var machines:Array<RiveStateMachineDescriptor> = cast _Runtime.UNDEFINED;
     var layers:Null<Array<RiveStateMachineLayer>> = cast _Runtime.UNDEFINED;
     var states:Null<Array<RiveStateMachineState>> = cast _Runtime.UNDEFINED;
@@ -36,28 +40,34 @@ class RiveStateMachine {
           index++;
           continue;
         }
-        if ((cast _Runtime.strictEquals(_Runtime.field(machines, 'length'), 0.0) : Bool)) { index++; continue; }
+        if ((cast _Runtime.strictEquals(_Runtime.field(machines, 'length'), 0.0) : Bool)) {
+          if ((cast ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveStateMachine.RIVE_STATE_MACHINE_COMPONENT__riveStateMachine : Float)) : Bool) : Bool) || (cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveStateMachine.RIVE_STATE_MACHINE_LAYER_COMPONENT__riveStateMachine : Float)) : Bool) : Bool)) : Bool)) {
+            reportImportDiagnostic(({ final __callArgument1:Dynamic = diagnostics; __callArgument1; }), ({ final __callArgument2:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument2; }), (cast 'rive.state-machine-part-unowned' : String), (cast 'createRiveStateMachines' : String), ({ final __callArgument3:Dynamic = { typeKey: object.typeKey }; __callArgument3; }));
+          }
+          index++;
+          continue;
+        }
         var machine:RiveStateMachineDescriptor = flighthq._internal._StaticIndex.readArray(machines, _Runtime.subtractNumbers(_Runtime.field(machines, 'length'), 1.0));
         if ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveStateMachine.RIVE_STATE_MACHINE_INPUT__riveStateMachine : Float)) : Bool) : Bool)) {
-          _Runtime.callProperty((cast machine : RiveStateMachineDescriptor).inputs, 'push', cast ([(cast RiveStateMachine.createRiveStateMachineInput__riveStateMachine(({ final __callArgument1:Dynamic = object; __callArgument1; })) : RiveStateMachineInput)] : Array<Dynamic>));
+          _Runtime.callProperty((cast machine : RiveStateMachineDescriptor).inputs, 'push', cast ([(cast RiveStateMachine.createRiveStateMachineInput__riveStateMachine(({ final __callArgument4:Dynamic = object; __callArgument4; })) : RiveStateMachineInput)] : Array<Dynamic>));
           index++;
           continue;
         }
         if ((cast _Runtime.strictEquals(object.typeKey, RiveStateMachine.RIVE_STATE_MACHINE_LAYER__riveStateMachine) : Bool)) {
           (states = cast (cast ([] : Array<Dynamic>) : Dynamic));
           (transitions = cast (null : Dynamic));
-          _Runtime.callOptionalProperty(layers, 'push', cast ([{ name: (cast RiveStateMachine.readRiveText__riveStateMachine(({ final __callArgument2:Dynamic = object; __callArgument2; }), (cast RiveStateMachine.RIVE_SM_NAME__riveStateMachine : Float), (cast '' : String)) : String), states: states }] : Array<Dynamic>));
+          _Runtime.callOptionalProperty(layers, 'push', cast ([{ name: (cast RiveStateMachine.readRiveText__riveStateMachine(({ final __callArgument5:Dynamic = object; __callArgument5; }), (cast RiveStateMachine.RIVE_SM_NAME__riveStateMachine : Float), (cast '' : String)) : String), states: states }] : Array<Dynamic>));
           index++;
           continue;
         }
         if ((cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveStateMachine.RIVE_LAYER_STATE__riveStateMachine : Float)) : Bool) : Bool)) {
           (transitions = cast (cast ([] : Array<Dynamic>) : Dynamic));
-          _Runtime.callOptionalProperty(states, 'push', cast ([{ animationId: (cast RiveStateMachine.readRiveNumber__riveStateMachine(({ final __callArgument3:Dynamic = object; __callArgument3; }), (cast RiveStateMachine.RIVE_STATE_ANIMATION_ID__riveStateMachine : Float), (cast -1.0 : Float)) : Float), kind: _Runtime.coalesce((cast getRiveCoreTypeName((cast object.typeKey : Float)) : Null<String>), function():Dynamic return cast ''), transitions: transitions }] : Array<Dynamic>));
+          _Runtime.callOptionalProperty(states, 'push', cast ([{ animationId: (cast RiveStateMachine.readRiveNumber__riveStateMachine(({ final __callArgument6:Dynamic = object; __callArgument6; }), (cast RiveStateMachine.RIVE_STATE_ANIMATION_ID__riveStateMachine : Float), (cast -1.0 : Float)) : Float), kind: _Runtime.coalesce((cast getRiveCoreTypeName((cast object.typeKey : Float)) : Null<String>), function():Dynamic return cast ''), transitions: transitions }] : Array<Dynamic>));
           index++;
           continue;
         }
         if ((cast _Runtime.strictEquals(object.typeKey, RiveStateMachine.RIVE_STATE_TRANSITION__riveStateMachine) : Bool)) {
-          _Runtime.callOptionalProperty(transitions, 'push', cast ([{ duration: (cast RiveStateMachine.readRiveNumber__riveStateMachine(({ final __callArgument4:Dynamic = object; __callArgument4; }), (cast RiveStateMachine.RIVE_TRANSITION_DURATION__riveStateMachine : Float), (cast 0.0 : Float)) : Float), exitTime: (cast RiveStateMachine.readRiveNumber__riveStateMachine(({ final __callArgument5:Dynamic = object; __callArgument5; }), (cast RiveStateMachine.RIVE_TRANSITION_EXIT_TIME__riveStateMachine : Float), (cast 0.0 : Float)) : Float), flags: (cast RiveStateMachine.readRiveNumber__riveStateMachine(({ final __callArgument6:Dynamic = object; __callArgument6; }), (cast RiveStateMachine.RIVE_TRANSITION_FLAGS__riveStateMachine : Float), (cast 0.0 : Float)) : Float), toStateId: (cast RiveStateMachine.readRiveNumber__riveStateMachine(({ final __callArgument7:Dynamic = object; __callArgument7; }), (cast RiveStateMachine.RIVE_TRANSITION_STATE_TO_ID__riveStateMachine : Float), (cast -1.0 : Float)) : Float) }] : Array<Dynamic>));
+          _Runtime.callOptionalProperty(transitions, 'push', cast ([{ duration: (cast RiveStateMachine.readRiveNumber__riveStateMachine(({ final __callArgument7:Dynamic = object; __callArgument7; }), (cast RiveStateMachine.RIVE_TRANSITION_DURATION__riveStateMachine : Float), (cast 0.0 : Float)) : Float), exitTime: (cast RiveStateMachine.readRiveNumber__riveStateMachine(({ final __callArgument8:Dynamic = object; __callArgument8; }), (cast RiveStateMachine.RIVE_TRANSITION_EXIT_TIME__riveStateMachine : Float), (cast 0.0 : Float)) : Float), flags: (cast RiveStateMachine.readRiveNumber__riveStateMachine(({ final __callArgument9:Dynamic = object; __callArgument9; }), (cast RiveStateMachine.RIVE_TRANSITION_FLAGS__riveStateMachine : Float), (cast 0.0 : Float)) : Float), toStateId: (cast RiveStateMachine.readRiveNumber__riveStateMachine(({ final __callArgument10:Dynamic = object; __callArgument10; }), (cast RiveStateMachine.RIVE_TRANSITION_STATE_TO_ID__riveStateMachine : Float), (cast -1.0 : Float)) : Float) }] : Array<Dynamic>));
         }
         index++;
       }
@@ -71,7 +81,7 @@ class RiveStateMachine {
     var number:Bool = cast _Runtime.UNDEFINED;
     bool = (cast isRiveCoreTypeDerivedFrom((cast source.typeKey : Float), (cast RiveStateMachine.RIVE_STATE_MACHINE_BOOL__riveStateMachine : Float)) : Bool);
     number = (cast isRiveCoreTypeDerivedFrom((cast source.typeKey : Float), (cast RiveStateMachine.RIVE_STATE_MACHINE_NUMBER__riveStateMachine : Float)) : Bool);
-    return cast { kind: _Runtime.coalesce((cast getRiveCoreTypeName((cast source.typeKey : Float)) : Null<String>), function():Dynamic return cast ''), name: (cast RiveStateMachine.readRiveText__riveStateMachine(({ final __callArgument8:Dynamic = source; __callArgument8; }), (cast RiveStateMachine.RIVE_SM_NAME__riveStateMachine : Float), (cast '' : String)) : String), value: ((cast bool : Bool) ? (cast !_Runtime.strictEquals((cast RiveStateMachine.readRiveNumber__riveStateMachine(({ final __callArgument9:Dynamic = source; __callArgument9; }), (cast RiveStateMachine.RIVE_INPUT_BOOL_VALUE__riveStateMachine : Float), (cast 0.0 : Float)) : Float), 0.0) : Dynamic) : (cast ((cast number : Bool) ? (cast (cast RiveStateMachine.readRiveNumber__riveStateMachine(({ final __callArgument10:Dynamic = source; __callArgument10; }), (cast RiveStateMachine.RIVE_INPUT_NUMBER_VALUE__riveStateMachine : Float), (cast 0.0 : Float)) : Float) : Dynamic) : (cast null : Dynamic)) : Dynamic)) };
+    return cast { kind: _Runtime.coalesce((cast getRiveCoreTypeName((cast source.typeKey : Float)) : Null<String>), function():Dynamic return cast ''), name: (cast RiveStateMachine.readRiveText__riveStateMachine(({ final __callArgument11:Dynamic = source; __callArgument11; }), (cast RiveStateMachine.RIVE_SM_NAME__riveStateMachine : Float), (cast '' : String)) : String), value: ((cast bool : Bool) ? (cast !_Runtime.strictEquals((cast RiveStateMachine.readRiveNumber__riveStateMachine(({ final __callArgument12:Dynamic = source; __callArgument12; }), (cast RiveStateMachine.RIVE_INPUT_BOOL_VALUE__riveStateMachine : Float), (cast 0.0 : Float)) : Float), 0.0) : Dynamic) : (cast ((cast number : Bool) ? (cast (cast RiveStateMachine.readRiveNumber__riveStateMachine(({ final __callArgument13:Dynamic = source; __callArgument13; }), (cast RiveStateMachine.RIVE_INPUT_NUMBER_VALUE__riveStateMachine : Float), (cast 0.0 : Float)) : Float) : Dynamic) : (cast null : Dynamic)) : Dynamic)) };
     return cast null;
   }
 
@@ -90,6 +100,10 @@ class RiveStateMachine {
   }
 
   public static final RIVE_STATE_MACHINE__riveStateMachine:Float = 53.0;
+
+  public static final RIVE_STATE_MACHINE_COMPONENT__riveStateMachine:Float = 54.0;
+
+  public static final RIVE_STATE_MACHINE_LAYER_COMPONENT__riveStateMachine:Float = 66.0;
 
   public static final RIVE_STATE_MACHINE_INPUT__riveStateMachine:Float = 55.0;
 

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.HasMaterial;
 import flighthq.types.Material;
+import flighthq.types.Material.MaterialData;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
@@ -12,9 +13,9 @@ import flighthq.types.Renderable;
 class RenderMaterial {
   @:noCompletion
   public static function updateRenderProxyMaterial(state:RenderState, data:RenderProxy, ?_parentData:RenderProxy):Void {
-    var source:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    source = (cast data.source : flighthq._internal._Partial<HasMaterial>);
-    (data.material = cast (_Runtime.coalesce(_Runtime.field(source, 'material'), function():Dynamic return cast null) : Null<Material>));
-    (data.materialData = cast (_Runtime.coalesce(_Runtime.field(source, 'materialData'), function():Dynamic return cast null) : Null<flighthq._internal._Object>));
+    var source:{ @:optional var material:Null<Material>; @:optional var materialData:Null<flighthq._internal._Object>; } = cast _Runtime.UNDEFINED;
+    source = (cast data.source : { @:optional var material:Null<Material>; @:optional var materialData:Null<MaterialData>; });
+    (data.material = cast (_Runtime.coalesce((cast source : { @:optional var material:Null<Material>; @:optional var materialData:Null<flighthq._internal._Object>; }).material, function():Dynamic return cast null) : Null<Material>));
+    (data.materialData = cast (_Runtime.coalesce((cast source : { @:optional var material:Null<Material>; @:optional var materialData:Null<flighthq._internal._Object>; }).materialData, function():Dynamic return cast null) : Null<flighthq._internal._Object>));
   }
 }

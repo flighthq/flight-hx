@@ -9,15 +9,17 @@ import flighthq.texture.Texture.cloneTexture;
 import flighthq.texture.Texture.copyTexture;
 import flighthq.texture.Texture.createTexture;
 import flighthq.texture.Texture.getTextureUvMatrix;
-import flighthq.types.Entity.EntityWithoutRuntime;
 import flighthq.types.Image;
 import flighthq.types.Matrix3.Matrix3Like;
+import flighthq.types.Sampler;
 import flighthq.types.Texture;
 import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture.TextureColorSpace;
 import flighthq.types.Texture.TextureLike;
 import flighthq.types.TextureSource;
 import flighthq.types.TextureUvTransform;
 import flighthq.types.Types.ImageTextureSourceKind;
+import flighthq.types.Vector2;
 import flighthq.types.VideoResource;
 import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
@@ -88,8 +90,8 @@ class VideoTexture {
 
   public static function setVideoTextureSource(texture:TextureLike, source:VideoResource):Void {
     if ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) { _Runtime.throwValue(_Runtime.error('setVideoTextureSource requires a Texture2D')); }
-    _Runtime.setField(texture, 'source', (cast VideoTexture.createVideoImageResource__videoTexture(({ final __callArgument17:Dynamic = source; __callArgument17; })) : Null<Image>));
-    _Runtime.setField(texture, 'version', VideoTexture.INITIAL_VIDEO_VERSION__videoTexture);
+    ((cast texture : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source = (cast VideoTexture.createVideoImageResource__videoTexture(({ final __callArgument17:Dynamic = source; __callArgument17; })) : Null<Image>));
+    ((cast texture : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).version = VideoTexture.INITIAL_VIDEO_VERSION__videoTexture);
   }
 
   public static function createVideoImageResource__videoTexture(source:VideoResource):Null<Image> {
@@ -107,7 +109,7 @@ class VideoTexture {
   }
 
   public static function getVideoImage__videoTexture(texture:TextureLike):Null<Image> {
-    return cast ((cast _Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) ? (cast (cast _Runtime.field(texture, 'source') : Null<Image>) : Dynamic) : (cast null : Dynamic));
+    return cast ((cast _Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) ? (cast (cast (cast texture : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source : Null<Image>) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
