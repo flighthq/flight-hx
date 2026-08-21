@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1271 |
-| Direct schemas | 733 |
+| Audit-only schemas | 1266 |
+| Direct schemas | 738 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 6127 |
-| Directly emitted accesses | 24539 |
+| Pending accesses | 6078 |
+| Directly emitted accesses | 24588 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1271 |
+| Newly discovered, audit-only | 1266 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -403,7 +403,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ContactShadowsEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ConvolutionEffect` | `direct` | `new` | — | reviewed escape-free convolution effect | 9 | 20 | 0 | 0 | 0 | 20 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CreateCubeTextureOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CreateExternalTextureOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CreateExternalTextureOptions` | `direct` | `new` | — | reviewed escape-free external-texture options | 4 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CreateRenderTextureOptions` | `direct` | `new` | — | reviewed escape-free render-texture options | 16 | 22 | 0 | 0 | 0 | 22 | 0 | 0 | yes | — |
 | `@flighthq/types:type#CreateTextureOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#CrtEffect` | `direct` | `new` | — | reviewed escape-free CRT effect | 5 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
@@ -1222,7 +1222,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ProximityReading` | `direct` | `preserved` | `@flighthq/types:interface#ProximityReading` | broad host document | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#QuadBatch` | `direct` | `new` | — | reviewed escape-free quad batch | 19 | 28 | 0 | 0 | 0 | 28 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#QuadBatchData` | `direct` | `new` | — | reviewed escape-free quad batch data | 6 | 121 | 9 | 0 | 0 | 130 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#QuadBatchRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 39 | 6 | 3 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#QuadBatchRuntime` | `direct` | `new` | — | reviewed escape-free quad-batch runtime | 39 | 6 | 3 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#QuadBatchSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#QuadTransformType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Quaternion` | `direct` | `preserved` | `@flighthq/types:interface#Quaternion` | four-component rotation leaf | 4 | 96 | 140 | 0 | 0 | 236 | 0 | 0 | yes | — |
@@ -1262,7 +1262,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#RenderProxyAdapter` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 7 | yes | — |
 | `@flighthq/types:type#RenderProxyResolver` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#RenderProxyVisitor` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#RenderQueue` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 8 | 2 | 0 | 10 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RenderQueue` | `direct` | `new` | — | reviewed escape-free render queue | 2 | 8 | 2 | 0 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderQueueEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderRegistryMiss` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderRegistryMissExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -1924,7 +1924,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#Vector4Like` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 339 | yes | — |
 | `@flighthq/types:interface#Velocity2D` | `direct` | `new` | — | reviewed escape-free 2D velocity | 2 | 50 | 36 | 0 | 0 | 86 | 0 | 0 | yes | — |
 | `@flighthq/types:type#VelocityContributor` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#VelocityField` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 10 | 1 | 0 | 11 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#VelocityField` | `direct` | `new` | — | reviewed escape-free velocity field | 2 | 10 | 1 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#VelocitySample` | `direct` | `new` | — | reviewed escape-free velocity sample | 4 | 25 | 4 | 0 | 0 | 29 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#VertexAttribute` | `direct` | `preserved` | `@flighthq/types:interface#VertexAttribute` | broad scene document | 3 | 60 | 0 | 0 | 0 | 60 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#VertexAttributeLayout` | `direct` | `preserved` | `@flighthq/types:interface#VertexAttributeLayout` | broad scene document | 2 | 67 | 0 | 0 | 0 | 67 | 0 | 0 | yes | — |
@@ -2027,7 +2027,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuShapeMesh` | `direct` | `new` | — | reviewed escape-free WebGPU shape mesh | 4 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuShapeMeshBuffers` | `direct` | `new` | — | reviewed escape-free WebGPU shape-mesh buffers | 8 | 24 | 0 | 0 | 0 | 24 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuShapeMeshPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuShapeRasterSurface` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuShapeRasterSurface` | `direct` | `new` | — | reviewed escape-free WebGPU shape raster surface | 3 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuShapeRendererData` | `direct` | `new` | — | reviewed escape-free WebGPU shape-renderer data | 8 | 11 | 7 | 0 | 0 | 18 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuSkinningAdapter` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 2 | 0 | 0 | 2 | 0 | 0 | 11 | yes | — |
 | `@flighthq/types:interface#WgpuTextureEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 22 | 2 | 0 | 24 | 0 | 0 | 1 | yes | — |

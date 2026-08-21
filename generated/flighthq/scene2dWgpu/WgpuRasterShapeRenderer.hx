@@ -95,14 +95,14 @@ class WgpuRasterShapeRenderer {
     if ((cast ((cast ((cast ((cast !_Runtime.strictEquals(version, (cast shapeData : { var lastContentId:Float; }).lastContentId) : Bool) || (cast !_Runtime.strictEquals(w, (cast shapeData : { var lastW:Float; }).lastW) : Bool)) : Bool) || (cast !_Runtime.strictEquals(h, (cast shapeData : { var lastH:Float; }).lastH) : Bool)) : Bool) || (cast !_Runtime.strictEquals(pixelRatio, (cast shapeData : { var lastPixelRatio:Float; }).lastPixelRatio) : Bool)) : Bool)) {
       var pw:Float = HxMath.ceil((w * pixelRatio));
       var ph:Float = HxMath.ceil((h * pixelRatio));
-      if ((cast !_Runtime.strictEquals(flighthq._internal.backend.CanvasElementBackend.field((cast surface : WgpuShapeRasterSurface).canvas, 'width'), pw) : Bool)) { flighthq._internal.backend.CanvasElementBackend.setField((cast surface : WgpuShapeRasterSurface).canvas, 'width', pw); }
-      if ((cast !_Runtime.strictEquals(flighthq._internal.backend.CanvasElementBackend.field((cast surface : WgpuShapeRasterSurface).canvas, 'height'), ph) : Bool)) { flighthq._internal.backend.CanvasElementBackend.setField((cast surface : WgpuShapeRasterSurface).canvas, 'height', ph); }
-      var ctx:flighthq._internal.dom.CanvasRenderingContext2D = (cast surface : WgpuShapeRasterSurface).ctx;
+      if ((cast !_Runtime.strictEquals(flighthq._internal.backend.CanvasElementBackend.field(surface.canvas, 'width'), pw) : Bool)) { flighthq._internal.backend.CanvasElementBackend.setField(surface.canvas, 'width', pw); }
+      if ((cast !_Runtime.strictEquals(flighthq._internal.backend.CanvasElementBackend.field(surface.canvas, 'height'), ph) : Bool)) { flighthq._internal.backend.CanvasElementBackend.setField(surface.canvas, 'height', ph); }
+      var ctx:flighthq._internal.dom.CanvasRenderingContext2D = surface.ctx;
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, (-bounds.x * pixelRatio), (-bounds.y * pixelRatio)] : Array<Dynamic>));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([bounds.x, bounds.y, w, h] : Array<Dynamic>));
       rasterizer(({ final __callArgument4:Dynamic = ctx; __callArgument4; }), (cast commands : Dynamic), ({ final __callArgument5:Dynamic = state; __callArgument5; }));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-      invalidateImageResource((cast surface : WgpuShapeRasterSurface).image);
+      invalidateImageResource(surface.image);
       ((cast shapeData : { var lastContentId:Float; }).lastContentId = cast (version : Float));
       ((cast shapeData : { var lastPixelRatio:Float; }).lastPixelRatio = cast (pixelRatio : Float));
       ((cast shapeData : { var lastW:Float; }).lastW = cast (w : Float));
@@ -112,7 +112,7 @@ class WgpuRasterShapeRenderer {
     t = (cast renderProxy : RenderProxy2D).transform2D;
     tx = ((t.tx + (t.a * bounds.x)) + (t.c * bounds.y));
     ty = ((t.ty + (t.b * bounds.x)) + (t.d * bounds.y));
-    textureEntry = (cast bindWgpuImageResourceTexture(({ final __callArgument7:Dynamic = state; __callArgument7; }), (cast surface : WgpuShapeRasterSurface).image, (cast false : Bool), (cast true : Bool), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<WgpuTextureEntry>);
+    textureEntry = (cast bindWgpuImageResourceTexture(({ final __callArgument7:Dynamic = state; __callArgument7; }), surface.image, (cast false : Bool), (cast true : Bool), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<WgpuTextureEntry>);
     if ((cast _Runtime.strictEquals(textureEntry, null) : Bool)) { return; }
     startCount = runtime.quadBatchWriterCount;
     base = (cast prepareWgpuQuadBatchWrite(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = textureEntry; __callArgument9; }), (cast null : Dynamic), (cast renderProxy : RenderProxy2D).blendMode, (cast material : Dynamic), ({ final __callArgument10:Dynamic = materialRenderer; __callArgument10; }), (cast 1.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);

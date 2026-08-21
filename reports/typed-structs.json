@@ -62528,9 +62528,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 10,
+        "directAccesses": 10,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -62576,7 +62576,7 @@
       },
       "name": "CreateExternalTextureOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free external-texture options",
       "reasons": [],
       "source": "upstream/packages/types/src/CreateExternalTextureOptions.ts",
       "sourceProvenance": {
@@ -250602,9 +250602,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -250930,7 +250930,7 @@
       },
       "name": "QuadBatchRuntime",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free quad-batch runtime",
       "reasons": [],
       "source": "upstream/packages/types/src/QuadBatch.ts",
       "sourceProvenance": {
@@ -261131,9 +261131,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 10,
+        "directAccesses": 10,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -261163,7 +261163,7 @@
       },
       "name": "RenderQueue",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free render queue",
       "reasons": [],
       "source": "upstream/packages/types/src/RenderQueue.ts",
       "sourceProvenance": {
@@ -400523,9 +400523,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 11,
+        "directAccesses": 11,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -400555,7 +400555,7 @@
       },
       "name": "VelocityField",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free velocity field",
       "reasons": [],
       "source": "upstream/packages/types/src/Velocity.ts",
       "sourceProvenance": {
@@ -418424,9 +418424,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -418464,7 +418464,7 @@
       },
       "name": "WgpuShapeRasterSurface",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free WebGPU shape raster surface",
       "reasons": [],
       "source": "upstream/packages/types/src/WgpuShapeRendererData.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1271,
+      "newAuditOnly": 1266,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1271,
+    "auditOnlySchemas": 1266,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 24539,
-    "directSchemas": 733,
+    "directAccesses": 24588,
+    "directSchemas": 738,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 6127,
+    "pendingAccesses": 6078,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

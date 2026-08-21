@@ -32,7 +32,7 @@ class TransformVelocity {
     ensureNodeWorldMatrix((cast mutableNode : Dynamic));
     world = (cast getNodeWorldMatrix((cast mutableNode : Dynamic)) : Matrix);
     sample = (cast ensureVelocitySample(({ final __callArgument1:Dynamic = field; __callArgument1; }), ({ final __callArgument2:Dynamic = node; __callArgument2; })) : VelocitySample);
-    if ((cast !_Runtime.strictEquals(sample.explicitFrameId, (cast field : VelocityField).frameId) : Bool)) {
+    if ((cast !_Runtime.strictEquals(sample.explicitFrameId, field.frameId) : Bool)) {
       if ((cast !_Runtime.strictEquals(sample.previousWorldTransform, null) : Bool)) {
         ((cast sample.velocity : { var x:Float; }).x = cast ((world.tx - (cast sample.previousWorldTransform : { var tx:Float; }).tx) : Float));
         ((cast sample.velocity : { var y:Float; }).y = cast ((world.ty - (cast sample.previousWorldTransform : { var ty:Float; }).ty) : Float));
@@ -40,7 +40,7 @@ class TransformVelocity {
         ((cast sample.velocity : { var x:Float; }).x = cast (0.0 : Float));
         ((cast sample.velocity : { var y:Float; }).y = cast (0.0 : Float));
       }
-      (sample.lastFrameId = cast ((cast field : VelocityField).frameId : Float));
+      (sample.lastFrameId = cast (field.frameId : Float));
     }
     if ((cast _Runtime.strictEquals(sample.previousWorldTransform, null) : Bool)) { (sample.previousWorldTransform = cast ((cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix) : Null<Matrix>)); }
     copyMatrix(({ final __callArgument3:Dynamic = sample.previousWorldTransform; __callArgument3; }), ({ final __callArgument4:Dynamic = world; __callArgument4; }));

@@ -56,7 +56,7 @@ class RenderQueue {
 
   @:noCompletion
   public static function clearRenderQueue(queue:flighthq.types.RenderQueue):Void {
-    ((cast queue : flighthq.types.RenderQueue).entryCount = 0.0);
+    (queue.entryCount = cast (0.0 : Float));
   }
 
   @:noCompletion
@@ -87,23 +87,23 @@ class RenderQueue {
   public static function pushRenderQueueEntry(queue:flighthq.types.RenderQueue, proxy:RenderProxy, sortKey:RenderSortKey):Void {
     var entry:{ var proxy:RenderProxy; var sortKey:Float; } = cast _Runtime.UNDEFINED;
     entry = (cast { proxy: proxy, sortKey: sortKey });
-    if ((cast ((cast (cast queue : flighthq.types.RenderQueue).entryCount : Float) < (cast _Runtime.field((cast queue : flighthq.types.RenderQueue).entries, 'length') : Float)) : Bool)) {
-      flighthq._internal._StaticIndex.writeArray((cast queue : flighthq.types.RenderQueue).entries, (cast queue : flighthq.types.RenderQueue).entryCount, entry);
+    if ((cast ((cast queue.entryCount : Float) < (cast _Runtime.field(queue.entries, 'length') : Float)) : Bool)) {
+      flighthq._internal._StaticIndex.writeArray(queue.entries, queue.entryCount, entry);
     } else {
-      _Runtime.callProperty((cast queue : flighthq.types.RenderQueue).entries, 'push', cast ([entry] : Array<Dynamic>));
+      _Runtime.callProperty(queue.entries, 'push', cast ([entry] : Array<Dynamic>));
     }
-    (cast queue : flighthq.types.RenderQueue).entryCount++;
+    queue.entryCount++;
   }
 
   @:noCompletion
   public static function sortRenderQueue(queue:flighthq.types.RenderQueue, ?compare:RenderQueueEntry->RenderQueueEntry->Float):Void {
     var slice:Array<RenderQueueEntry> = cast _Runtime.UNDEFINED;
-    slice = _Runtime.slice((cast queue : flighthq.types.RenderQueue).entries, 0.0, (cast queue : flighthq.types.RenderQueue).entryCount);
+    slice = _Runtime.slice(queue.entries, 0.0, queue.entryCount);
     _Runtime.callProperty(slice, 'sort', cast ([_Runtime.coalesce(compare, function():Dynamic return cast RenderQueue.compareRenderQueueEntriesByKey__renderQueue)] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(slice, 'length') : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray((cast queue : flighthq.types.RenderQueue).entries, i, flighthq._internal._StaticIndex.readArray(slice, i));
+        flighthq._internal._StaticIndex.writeArray(queue.entries, i, flighthq._internal._StaticIndex.readArray(slice, i));
         i++;
       }
     }

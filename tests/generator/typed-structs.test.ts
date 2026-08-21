@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_271,
+      newAuditOnly: 1_266,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(735);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(740);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_271);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_266);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(333);
+    expect(newDirect).toHaveLength(338);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1775,6 +1775,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'TimelineSignals',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free timeline signals',
+        }),
+        expect.objectContaining({
+          name: 'VelocityField',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free velocity field',
+        }),
+        expect.objectContaining({
+          name: 'CreateExternalTextureOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free external-texture options',
+        }),
+        expect.objectContaining({
+          name: 'RenderQueue',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free render queue',
+        }),
+        expect.objectContaining({
+          name: 'QuadBatchRuntime',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free quad-batch runtime',
+        }),
+        expect.objectContaining({
+          name: 'WgpuShapeRasterSurface',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free WebGPU shape raster surface',
         }),
       ]),
     );
@@ -3444,6 +3469,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#TimelineSignals',
         purpose: 'reviewed escape-free timeline signals',
       },
+      {
+        declarationFingerprint: 'sha256:705d00847da60afc2542ab08050acc46b9574d8b5be35d87aab6a6f3d9bfd8cb',
+        id: '@flighthq/types:interface#VelocityField',
+        purpose: 'reviewed escape-free velocity field',
+      },
+      {
+        declarationFingerprint: 'sha256:0c6e30c09f9b1aa220dd099bab1745b568ae3029b443ad4d3c91a0af35b21d56',
+        id: '@flighthq/types:interface#CreateExternalTextureOptions',
+        purpose: 'reviewed escape-free external-texture options',
+      },
+      {
+        declarationFingerprint: 'sha256:3ff8f98c70e258e788235d2d468ab190af55513ae4c7692f0bbf58b1b1de6803',
+        id: '@flighthq/types:interface#RenderQueue',
+        purpose: 'reviewed escape-free render queue',
+      },
+      {
+        declarationFingerprint: 'sha256:e420cd628a1440e52a58f0ec478200b7597ac27f4757124600f5951f22965216',
+        id: '@flighthq/types:interface#QuadBatchRuntime',
+        purpose: 'reviewed escape-free quad-batch runtime',
+      },
+      {
+        declarationFingerprint: 'sha256:aa2460bc8817e1063225259a5afe70eeef50b8dce6723d3f72a52fe6632c2cc8',
+        id: '@flighthq/types:interface#WgpuShapeRasterSurface',
+        purpose: 'reviewed escape-free WebGPU shape raster surface',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -4498,6 +4548,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const fortiethHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'VelocityField',
+            'CreateExternalTextureOptions',
+            'RenderQueue',
+            'QuadBatchRuntime',
+            'WgpuShapeRasterSurface',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -4538,22 +4601,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_271,
+      auditOnlySchemas: 1_266,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 24_539,
-      directSchemas: 733,
+      directAccesses: 24_588,
+      directSchemas: 738,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 6_127,
+      pendingAccesses: 6_078,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_271,
+      newAuditOnly: 1_266,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -4630,7 +4693,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(24_539);
+    expect(report.summary.directAccesses).toBe(24_588);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -6524,6 +6587,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(thirtyNinthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'VelocityField',
+        11,
+        'sha256:705d00847da60afc2542ab08050acc46b9574d8b5be35d87aab6a6f3d9bfd8cb',
+        'reviewed escape-free velocity field',
+      ],
+      [
+        'CreateExternalTextureOptions',
+        10,
+        'sha256:0c6e30c09f9b1aa220dd099bab1745b568ae3029b443ad4d3c91a0af35b21d56',
+        'reviewed escape-free external-texture options',
+      ],
+      [
+        'RenderQueue',
+        10,
+        'sha256:3ff8f98c70e258e788235d2d468ab190af55513ae4c7692f0bbf58b1b1de6803',
+        'reviewed escape-free render queue',
+      ],
+      [
+        'QuadBatchRuntime',
+        9,
+        'sha256:e420cd628a1440e52a58f0ec478200b7597ac27f4757124600f5951f22965216',
+        'reviewed escape-free quad-batch runtime',
+      ],
+      [
+        'WgpuShapeRasterSurface',
+        9,
+        'sha256:aa2460bc8817e1063225259a5afe70eeef50b8dce6723d3f72a52fe6632c2cc8',
+        'reviewed escape-free WebGPU shape raster surface',
+      ],
+    ] as const) {
+      expect(fortiethHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -8704,6 +8809,21 @@ describe('typed struct analysis', () => {
       if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
       else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
     }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#VelocityField', true, [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#CreateExternalTextureOptions', true, [], null],
+      ['@flighthq/types:interface#RenderQueue', true, [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#QuadBatchRuntime', false, ['cross-schema-transfer', 'dynamic-ingress'], null],
+      ['@flighthq/types:interface#WgpuShapeRasterSurface', true, [], { blockerReasons: [], closed: true }],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons: [],
+      });
+      if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
+      else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+    }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
@@ -10176,6 +10296,22 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:FlowStack|FlowState|TimelineAudioCue|TimelineLabel|TimelineSignals)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/quadbatch/QuadBatch.hx',
+      'generated/flighthq/render/RenderQueue.hx',
+      'generated/flighthq/renderGl/GlExternalTexture.hx',
+      'generated/flighthq/renderWgpu/WgpuExternalTexture.hx',
+      'generated/flighthq/scene2dGl/GlVelocity.hx',
+      'generated/flighthq/scene2dWgpu/WgpuRasterShapeRenderer.hx',
+      'generated/flighthq/scene2dWgpu/WgpuShapeData.hx',
+      'generated/flighthq/scene2dWgpu/WgpuVelocity.hx',
+      'generated/flighthq/velocity/TransformVelocity.hx',
+      'generated/flighthq/velocity/VelocityField.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:VelocityField|CreateExternalTextureOptions|RenderQueue|QuadBatchRuntime|WgpuShapeRasterSurface)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');

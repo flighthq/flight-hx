@@ -20,7 +20,7 @@ class VelocityField {
   }
 
   public static function beginVelocityFrame(field:flighthq.types.Velocity.VelocityField):Void {
-    (cast field : flighthq.types.Velocity.VelocityField).frameId++;
+    field.frameId++;
   }
 
   public static function clampVelocity(out:Velocity2D, velocity:Velocity2D, maxLength:Float):Velocity2D {
@@ -49,8 +49,8 @@ class VelocityField {
     sample = (cast ensureVelocitySample(({ final __callArgument0:Dynamic = field; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; })) : VelocitySample);
     ((cast sample.velocity : { var x:Float; }).x = cast (x : Float));
     ((cast sample.velocity : { var y:Float; }).y = cast (y : Float));
-    (sample.lastFrameId = cast ((cast field : flighthq.types.Velocity.VelocityField).frameId : Float));
-    (sample.explicitFrameId = cast ((cast field : flighthq.types.Velocity.VelocityField).frameId : Float));
+    (sample.lastFrameId = cast (field.frameId : Float));
+    (sample.explicitFrameId = cast (field.frameId : Float));
   }
 
   public static function copyVelocity(out:Velocity2D, source:Velocity2D):Velocity2D {
@@ -87,10 +87,10 @@ class VelocityField {
   @:noCompletion
   public static function ensureVelocitySample(field:flighthq.types.Velocity.VelocityField, source:flighthq._internal._Object):VelocitySample {
     var sample:Null<VelocitySample> = cast _Runtime.UNDEFINED;
-    sample = ((cast (cast field : flighthq.types.Velocity.VelocityField).samples : flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>).get(source));
+    sample = ((cast field.samples : flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>).get(source));
     if ((cast _Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (sample = cast ({ previousWorldTransform: null, velocity: { x: 0.0, y: 0.0 }, lastFrameId: -1.0, explicitFrameId: -1.0 } : Dynamic));
-      ((cast (cast field : flighthq.types.Velocity.VelocityField).samples : flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>).set(source, (cast sample)));
+      ((cast field.samples : flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>).set(source, (cast sample)));
     }
     return cast sample;
     return cast null;
@@ -98,8 +98,8 @@ class VelocityField {
 
   public static function getVelocity(field:flighthq.types.Velocity.VelocityField, source:flighthq._internal._Object, out:Velocity2D):Velocity2D {
     var sample:Null<VelocitySample> = cast _Runtime.UNDEFINED;
-    sample = ((cast (cast field : flighthq.types.Velocity.VelocityField).samples : flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>).get(source));
-    if ((cast ((cast _Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast sample : { var lastFrameId:Float; }).lastFrameId, (cast field : flighthq.types.Velocity.VelocityField).frameId) : Bool)) : Bool)) {
+    sample = ((cast field.samples : flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>).get(source));
+    if ((cast ((cast _Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast sample : { var lastFrameId:Float; }).lastFrameId, field.frameId) : Bool)) : Bool)) {
       (out.x = cast (0.0 : Float));
       (out.y = cast (0.0 : Float));
       return cast out;
@@ -112,8 +112,8 @@ class VelocityField {
 
   public static function hasVelocity(field:flighthq.types.Velocity.VelocityField, source:flighthq._internal._Object):Bool {
     var sample:Null<VelocitySample> = cast _Runtime.UNDEFINED;
-    sample = ((cast (cast field : flighthq.types.Velocity.VelocityField).samples : flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>).get(source));
-    return cast _Runtime.andValue(((cast !_Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast sample : { var lastFrameId:Float; }).lastFrameId, (cast field : flighthq.types.Velocity.VelocityField).frameId) : Bool)), function():Dynamic return cast _Runtime.orValue(!_Runtime.strictEquals((cast (cast sample : { var velocity:Velocity2D; }).velocity : { var x:Float; }).x, 0.0), function():Dynamic return cast !_Runtime.strictEquals((cast (cast sample : { var velocity:Velocity2D; }).velocity : { var y:Float; }).y, 0.0)));
+    sample = ((cast field.samples : flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>).get(source));
+    return cast _Runtime.andValue(((cast !_Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast sample : { var lastFrameId:Float; }).lastFrameId, field.frameId) : Bool)), function():Dynamic return cast _Runtime.orValue(!_Runtime.strictEquals((cast (cast sample : { var velocity:Velocity2D; }).velocity : { var x:Float; }).x, 0.0), function():Dynamic return cast !_Runtime.strictEquals((cast (cast sample : { var velocity:Velocity2D; }).velocity : { var y:Float; }).y, 0.0)));
     return cast null;
   }
 

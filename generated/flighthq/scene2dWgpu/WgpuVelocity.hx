@@ -162,7 +162,7 @@ class WgpuVelocity {
     batch = (cast (cast node : flighthq._internal._Any) : QuadBatch);
     data = batch.data;
     runtime = (cast _Runtime.getIndex((cast node : { @:optional var __EntityRuntimeKey:flighthq._internal._Any; }), EntityRuntimeKey) : QuadBatchRuntime);
-    instanceVelocities = (cast runtime : QuadBatchRuntime).instanceVelocities;
+    instanceVelocities = runtime.instanceVelocities;
     __destructure1 = data;
     atlas = __destructure1.atlas;
     ids = __destructure1.ids;

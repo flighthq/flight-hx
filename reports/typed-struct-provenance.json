@@ -39180,7 +39180,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 10,
       "fields": 2,
       "id": "@flighthq/types:interface#RenderQueue",
       "name": "RenderQueue",
@@ -54729,7 +54729,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 11,
       "fields": 2,
       "id": "@flighthq/types:interface#VelocityField",
       "name": "VelocityField",
@@ -56923,7 +56923,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 9,
       "fields": 3,
       "id": "@flighthq/types:interface#WgpuShapeRasterSurface",
       "name": "WgpuShapeRasterSurface",

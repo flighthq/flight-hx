@@ -1693,6 +1693,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#TimelineSignals',
     purpose: 'reviewed escape-free timeline signals',
   },
+  {
+    declarationFingerprint: 'sha256:705d00847da60afc2542ab08050acc46b9574d8b5be35d87aab6a6f3d9bfd8cb',
+    id: '@flighthq/types:interface#VelocityField',
+    purpose: 'reviewed escape-free velocity field',
+  },
+  {
+    declarationFingerprint: 'sha256:0c6e30c09f9b1aa220dd099bab1745b568ae3029b443ad4d3c91a0af35b21d56',
+    id: '@flighthq/types:interface#CreateExternalTextureOptions',
+    purpose: 'reviewed escape-free external-texture options',
+  },
+  {
+    declarationFingerprint: 'sha256:3ff8f98c70e258e788235d2d468ab190af55513ae4c7692f0bbf58b1b1de6803',
+    id: '@flighthq/types:interface#RenderQueue',
+    purpose: 'reviewed escape-free render queue',
+  },
+  {
+    declarationFingerprint: 'sha256:e420cd628a1440e52a58f0ec478200b7597ac27f4757124600f5951f22965216',
+    id: '@flighthq/types:interface#QuadBatchRuntime',
+    purpose: 'reviewed escape-free quad-batch runtime',
+  },
+  {
+    declarationFingerprint: 'sha256:aa2460bc8817e1063225259a5afe70eeef50b8dce6723d3f72a52fe6632c2cc8',
+    id: '@flighthq/types:interface#WgpuShapeRasterSurface',
+    purpose: 'reviewed escape-free WebGPU shape raster surface',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

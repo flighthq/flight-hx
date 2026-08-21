@@ -416,7 +416,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#RenderDrawContext` | 0 | 4 | 0 | 1 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderEffectPadding` | 12 | 4 | 1 | 0 | 0 | 0 | 1 | 2 | yes | — |
 | `@flighthq/types:interface#RenderEffectPaddingExplanation` | 0 | 3 | 0 | 1 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#RenderQueue` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#RenderQueue` | 10 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#RenderRegistryMiss` | 0 | 2 | 1 | 0 | 0 | 1 | 0 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#RenderRegistryMissExplanation` | 0 | 2 | 0 | 1 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#RenderRegistrySignals` | 0 | 1 | 5 | 1 | 5 | 0 | 3 | 6 | no | `normalization-provenance` |
@@ -681,7 +681,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#UpdaterError` | 0 | 2 | 1 | 0 | 1 | 0 | 0 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#UpdaterSignatureConfig` | 0 | 2 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#Velocity2D` | 86 | 2 | 1 | 0 | 0 | 0 | 5 | 3 | yes | — |
-| `@flighthq/types:interface#VelocityField` | 0 | 2 | 2 | 1 | 0 | 0 | 3 | 1 | yes | — |
+| `@flighthq/types:interface#VelocityField` | 11 | 2 | 2 | 1 | 0 | 0 | 3 | 1 | yes | — |
 | `@flighthq/types:interface#VelocitySample` | 29 | 4 | 1 | 2 | 0 | 0 | 4 | 2 | yes | — |
 | `@flighthq/types:interface#VertexAttribute` | 60 | 3 | 1 | 0 | 4 | 0 | 8 | 9 | no | `normalization-provenance` |
 | `@flighthq/types:interface#VertexAttributeLayout` | 67 | 2 | 2 | 1 | 4 | 0 | 8 | 8 | no | `normalization-provenance` |
@@ -722,7 +722,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#WgpuScene3DShadow` | 19 | 9 | 1 | 1 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuScissorRect` | 36 | 4 | 2 | 0 | 1 | 0 | 2 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#WgpuShapeMeshBuffers` | 24 | 8 | 1 | 0 | 0 | 0 | 2 | 1 | yes | — |
-| `@flighthq/types:interface#WgpuShapeRasterSurface` | 0 | 3 | 1 | 1 | 0 | 0 | 1 | 2 | yes | — |
+| `@flighthq/types:interface#WgpuShapeRasterSurface` | 9 | 3 | 1 | 1 | 0 | 0 | 1 | 2 | yes | — |
 | `@flighthq/types:interface#WgpuShapeRendererData` | 18 | 8 | 0 | 3 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuVelocityContext` | 11 | 5 | 0 | 2 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuWireframeUpload` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |

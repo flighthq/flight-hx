@@ -73,7 +73,7 @@ class QuadBatch {
   public static function copyLocalBoundsRectangle__quadBatch(out:Rectangle, source:Node<Dynamic>):Void {
     var runtime:QuadBatchRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getNode2DRuntime(({ final __callArgument4:Dynamic = (cast source : flighthq.types.QuadBatch); __callArgument4; })) : QuadBatchRuntime);
-    if ((cast !_Runtime.strictEquals((cast runtime : QuadBatchRuntime).localBoundsRectangle, null) : Bool)) { copyRectangle(({ final __callArgument5:Dynamic = out; __callArgument5; }), ({ final __callArgument6:Dynamic = (cast runtime : QuadBatchRuntime).localBoundsRectangle; __callArgument6; })); }
+    if ((cast !_Runtime.strictEquals(runtime.localBoundsRectangle, null) : Bool)) { copyRectangle(({ final __callArgument5:Dynamic = out; __callArgument5; }), ({ final __callArgument6:Dynamic = runtime.localBoundsRectangle; __callArgument6; })); }
   }
 
   public static function compactQuadBatch(target:flighthq.types.QuadBatch):Void {
@@ -224,8 +224,8 @@ class QuadBatch {
   public static function createQuadBatchRuntime():QuadBatchRuntime {
     var runtime:QuadBatchRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast createNode2DRuntime(({ final __callArgument13:Dynamic = QuadBatch.defaultMethods__quadBatch; __callArgument13; })) : QuadBatchRuntime);
-    ((cast runtime : QuadBatchRuntime).localBoundsRectangle = null);
-    ((cast runtime : QuadBatchRuntime).instanceVelocities = null);
+    (runtime.localBoundsRectangle = cast (null : Null<Rectangle>));
+    (runtime.instanceVelocities = cast (null : Null<flighthq._internal._Float32Array>));
     return cast runtime;
     return cast null;
   }
@@ -582,8 +582,8 @@ class QuadBatch {
   public static function setQuadBatchLocalBoundsRectangle(target:flighthq.types.QuadBatch, rect:Rectangle):Void {
     var runtime:QuadBatchRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getNode2DRuntime(({ final __callArgument22:Dynamic = target; __callArgument22; })) : QuadBatchRuntime);
-    if ((cast _Runtime.strictEquals((cast runtime : QuadBatchRuntime).localBoundsRectangle, null) : Bool)) { ((cast runtime : QuadBatchRuntime).localBoundsRectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle)); }
-    copyRectangle(({ final __callArgument23:Dynamic = (cast runtime : QuadBatchRuntime).localBoundsRectangle; __callArgument23; }), ({ final __callArgument24:Dynamic = rect; __callArgument24; }));
+    if ((cast _Runtime.strictEquals(runtime.localBoundsRectangle, null) : Bool)) { (runtime.localBoundsRectangle = cast ((cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle) : Null<Rectangle>)); }
+    copyRectangle(({ final __callArgument23:Dynamic = runtime.localBoundsRectangle; __callArgument23; }), ({ final __callArgument24:Dynamic = rect; __callArgument24; }));
     invalidateNodeLocalBounds((cast target : Dynamic));
   }
 
