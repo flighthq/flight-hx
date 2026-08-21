@@ -1743,6 +1743,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#BitmapGradientGlowOptions',
     purpose: 'reviewed escape-free bitmap gradient-glow options',
   },
+  {
+    declarationFingerprint: 'sha256:ee92865a82180e0ce674675c8bac3e1b141b827e87a26ad52b628cff1b27174c',
+    id: '@flighthq/types:interface#AttachmentSkin2D',
+    purpose: 'reviewed escape-free attachment skin',
+  },
+  {
+    declarationFingerprint: 'sha256:40a66fe8322fa267e67064792d5723c3deb89468073fc92abe8cb4df5603bcbf',
+    id: '@flighthq/types:interface#RegionAttachment2D',
+    purpose: 'reviewed escape-free region attachment',
+  },
+  {
+    declarationFingerprint: 'sha256:e9b6dcb1216bfc2e91a753d24eb0a7320ccca947cd062903bc3d24707bc4d426',
+    id: '@flighthq/types:interface#PathAttachment2D',
+    purpose: 'reviewed escape-free path attachment',
+  },
+  {
+    declarationFingerprint: 'sha256:8b6a11c7ae1419ecec6e1cc58e9b3fe2f0501773aef0e74d574670c48299165a',
+    id: '@flighthq/types:interface#PointAttachment2D',
+    purpose: 'reviewed escape-free point attachment',
+  },
+  {
+    declarationFingerprint: 'sha256:069b4df44a3486606cce30493977aebffc60f2fba30fa4e33ea784fbd06ba962',
+    id: '@flighthq/types:interface#ClippingAttachment2D',
+    purpose: 'reviewed escape-free clipping attachment',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

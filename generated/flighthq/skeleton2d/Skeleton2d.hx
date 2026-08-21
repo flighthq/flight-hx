@@ -288,7 +288,7 @@ class Skeleton2d {
     skins = skeleton.skins;
     if ((cast ((cast _Runtime.strictEquals(skins, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(skins, null) : Bool)) : Bool)) { return cast null; }
     for (skin in _Runtime.iterable(skins)) {
-      if ((cast _Runtime.strictEquals((cast skin : AttachmentSkin2D).name, name) : Bool)) { return cast skin; }
+      if ((cast _Runtime.strictEquals(skin.name, name) : Bool)) { return cast skin; }
     }
     return cast null;
     return cast null;
@@ -367,7 +367,7 @@ class Skeleton2d {
     var slots:Null<Array<Slot2D>> = cast _Runtime.UNDEFINED;
     slots = skeleton.slots;
     if ((cast ((cast _Runtime.strictEquals(slots, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(slots, null) : Bool)) : Bool)) { return; }
-    for (entry in _Runtime.iterable(_Runtime.field(skin, 'attachments'))) {
+    for (entry in _Runtime.iterable(skin.attachments)) {
       if ((cast ((cast ((cast entry.slotIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast entry.slotIndex : Float) < (cast _Runtime.field(slots, 'length') : Float)) : Bool)) : Bool)) { ((cast flighthq._internal._StaticIndex.readArray(slots, entry.slotIndex) : Slot2D).attachment = entry.attachment); }
     }
   }

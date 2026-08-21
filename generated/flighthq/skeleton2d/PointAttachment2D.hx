@@ -20,8 +20,8 @@ class PointAttachment2D {
     world = skeleton.worldMatrices;
     if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast (boneIndex * PointAttachment2D.MATRIX_STRIDE__pointAttachment2D) : Float) >= (cast _Runtime.field(world, 'length') : Float)) : Bool)) : Bool)) { return; }
     b = (boneIndex * PointAttachment2D.MATRIX_STRIDE__pointAttachment2D);
-    x = _Runtime.field(attachment, 'x');
-    y = _Runtime.field(attachment, 'y');
+    x = attachment.x;
+    y = attachment.y;
     (out.x = cast ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast b : Float)) * x) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 2.0) : Float)) * y)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 4.0) : Float))) : Float));
     (out.y = cast ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 1.0) : Float)) * x) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 3.0) : Float)) * y)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 5.0) : Float))) : Float));
   }
@@ -35,9 +35,9 @@ class PointAttachment2D {
     var x:Float = cast _Runtime.UNDEFINED;
     var y:Float = cast _Runtime.UNDEFINED;
     world = skeleton.worldMatrices;
-    if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast (boneIndex * PointAttachment2D.MATRIX_STRIDE__pointAttachment2D) : Float) >= (cast _Runtime.field(world, 'length') : Float)) : Bool)) : Bool)) { return cast _Runtime.field(attachment, 'rotation'); }
+    if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast (boneIndex * PointAttachment2D.MATRIX_STRIDE__pointAttachment2D) : Float) >= (cast _Runtime.field(world, 'length') : Float)) : Bool)) : Bool)) { return cast attachment.rotation; }
     b = (boneIndex * PointAttachment2D.MATRIX_STRIDE__pointAttachment2D);
-    radians = _Runtime.multiplyNumbers(_Runtime.field(attachment, 'rotation'), DEG_TO_RAD);
+    radians = (attachment.rotation * DEG_TO_RAD);
     cos = HxMath.cos(radians);
     sin = HxMath.sin(radians);
     x = ((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast b : Float)) * cos) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast world : flighthq._internal._Float32Array), (cast (b + 2.0) : Float)) * sin));

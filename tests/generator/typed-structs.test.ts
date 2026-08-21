@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_261,
+      newAuditOnly: 1_256,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(745);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(750);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_261);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_256);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(343);
+    expect(newDirect).toHaveLength(348);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1825,6 +1825,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'BitmapGradientGlowOptions',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free bitmap gradient-glow options',
+        }),
+        expect.objectContaining({
+          name: 'AttachmentSkin2D',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free attachment skin',
+        }),
+        expect.objectContaining({
+          name: 'RegionAttachment2D',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free region attachment',
+        }),
+        expect.objectContaining({
+          name: 'PathAttachment2D',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free path attachment',
+        }),
+        expect.objectContaining({
+          name: 'PointAttachment2D',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free point attachment',
+        }),
+        expect.objectContaining({
+          name: 'ClippingAttachment2D',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free clipping attachment',
         }),
       ]),
     );
@@ -3544,6 +3569,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#BitmapGradientGlowOptions',
         purpose: 'reviewed escape-free bitmap gradient-glow options',
       },
+      {
+        declarationFingerprint: 'sha256:ee92865a82180e0ce674675c8bac3e1b141b827e87a26ad52b628cff1b27174c',
+        id: '@flighthq/types:interface#AttachmentSkin2D',
+        purpose: 'reviewed escape-free attachment skin',
+      },
+      {
+        declarationFingerprint: 'sha256:40a66fe8322fa267e67064792d5723c3deb89468073fc92abe8cb4df5603bcbf',
+        id: '@flighthq/types:interface#RegionAttachment2D',
+        purpose: 'reviewed escape-free region attachment',
+      },
+      {
+        declarationFingerprint: 'sha256:e9b6dcb1216bfc2e91a753d24eb0a7320ccca947cd062903bc3d24707bc4d426',
+        id: '@flighthq/types:interface#PathAttachment2D',
+        purpose: 'reviewed escape-free path attachment',
+      },
+      {
+        declarationFingerprint: 'sha256:8b6a11c7ae1419ecec6e1cc58e9b3fe2f0501773aef0e74d574670c48299165a',
+        id: '@flighthq/types:interface#PointAttachment2D',
+        purpose: 'reviewed escape-free point attachment',
+      },
+      {
+        declarationFingerprint: 'sha256:069b4df44a3486606cce30493977aebffc60f2fba30fa4e33ea784fbd06ba962',
+        id: '@flighthq/types:interface#ClippingAttachment2D',
+        purpose: 'reviewed escape-free clipping attachment',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -4624,6 +4674,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const fortySecondHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'AttachmentSkin2D',
+            'RegionAttachment2D',
+            'PathAttachment2D',
+            'PointAttachment2D',
+            'ClippingAttachment2D',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -4664,22 +4727,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_261,
+      auditOnlySchemas: 1_256,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 24_623,
-      directSchemas: 743,
+      directAccesses: 24_651,
+      directSchemas: 748,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 6_043,
+      pendingAccesses: 6_015,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_261,
+      newAuditOnly: 1_256,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -4756,7 +4819,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(24_623);
+    expect(report.summary.directAccesses).toBe(24_651);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -6734,6 +6797,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(fortyFirstHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'AttachmentSkin2D',
+        9,
+        'sha256:ee92865a82180e0ce674675c8bac3e1b141b827e87a26ad52b628cff1b27174c',
+        'reviewed escape-free attachment skin',
+      ],
+      [
+        'RegionAttachment2D',
+        7,
+        'sha256:40a66fe8322fa267e67064792d5723c3deb89468073fc92abe8cb4df5603bcbf',
+        'reviewed escape-free region attachment',
+      ],
+      [
+        'PathAttachment2D',
+        5,
+        'sha256:e9b6dcb1216bfc2e91a753d24eb0a7320ccca947cd062903bc3d24707bc4d426',
+        'reviewed escape-free path attachment',
+      ],
+      [
+        'PointAttachment2D',
+        4,
+        'sha256:8b6a11c7ae1419ecec6e1cc58e9b3fe2f0501773aef0e74d574670c48299165a',
+        'reviewed escape-free point attachment',
+      ],
+      [
+        'ClippingAttachment2D',
+        3,
+        'sha256:069b4df44a3486606cce30493977aebffc60f2fba30fa4e33ea784fbd06ba962',
+        'reviewed escape-free clipping attachment',
+      ],
+    ] as const) {
+      expect(fortySecondHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -8943,6 +9048,26 @@ describe('typed struct analysis', () => {
       });
       expect(provenanceById.has(frontierId)).toBe(false);
     }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, nominalIdentity] of [
+      [
+        '@flighthq/types:interface#AttachmentSkin2D',
+        true,
+        [],
+        { blockerReasons: ['normalization-provenance'], closed: false },
+      ],
+      ['@flighthq/types:interface#RegionAttachment2D', true, [], null],
+      ['@flighthq/types:interface#PathAttachment2D', false, ['cross-schema-transfer'], null],
+      ['@flighthq/types:interface#PointAttachment2D', true, [], null],
+      ['@flighthq/types:interface#ClippingAttachment2D', true, [], null],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons: [],
+      });
+      if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
+      else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+    }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
@@ -10441,6 +10566,19 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:BitmapBevelOptions|BitmapDisplacementMapOptions|BitmapConvolutionOptions|BitmapGradientBevelOptions|BitmapGradientGlowOptions)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/skeleton2d/ClippingAttachment2D.hx',
+      'generated/flighthq/skeleton2d/DeformPathAttachment2D.hx',
+      'generated/flighthq/skeleton2d/PointAttachment2D.hx',
+      'generated/flighthq/skeleton2d/RegionAttachment2D.hx',
+      'generated/flighthq/skeleton2d/Skeleton2d.hx',
+      'generated/flighthq/skeleton2dFormats/SpineBinaryParse.hx',
+      'generated/flighthq/skeleton2dFormats/SpineParse.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AttachmentSkin2D|RegionAttachment2D|PathAttachment2D|PointAttachment2D|ClippingAttachment2D)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');

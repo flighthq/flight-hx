@@ -16,7 +16,7 @@ class DeformPathAttachment2D {
     var commands:Array<Float> = cast _Runtime.UNDEFINED;
     var data:Array<Float> = cast _Runtime.UNDEFINED;
     var outCommands:Array<Float> = cast _Runtime.UNDEFINED;
-    commands = _Runtime.field(attachment, 'commands');
+    commands = attachment.commands;
     data = (cast out : Path).data;
     outCommands = (cast out : Path).commands;
     _Runtime.setLength(outCommands, _Runtime.field(commands, 'length'));
@@ -27,8 +27,8 @@ class DeformPathAttachment2D {
         i++;
       }
     }
-    ((cast out : Path).winding = _Runtime.field(attachment, 'winding'));
-    _Runtime.setLength(data, _Runtime.multiplyNumbers(_Runtime.field(attachment, 'pointCount'), 2.0));
-    skinSkeleton2DAttachmentPoints(({ final __callArgument0:Dynamic = data; __callArgument0; }), (cast _Runtime.field(attachment, 'skin') : Dynamic), _Runtime.field(attachment, 'vertices'), ({ final __callArgument1:Dynamic = skeleton; __callArgument1; }), (cast boneIndex : Float), ({ final __callArgument2:Dynamic = deform; __callArgument2; }), (cast 'PathAttachment2D' : String));
+    ((cast out : Path).winding = attachment.winding);
+    _Runtime.setLength(data, (attachment.pointCount * 2.0));
+    skinSkeleton2DAttachmentPoints(({ final __callArgument0:Dynamic = data; __callArgument0; }), (cast attachment.skin : Dynamic), attachment.vertices, ({ final __callArgument1:Dynamic = skeleton; __callArgument1; }), (cast boneIndex : Float), ({ final __callArgument2:Dynamic = deform; __callArgument2; }), (cast 'PathAttachment2D' : String));
   }
 }

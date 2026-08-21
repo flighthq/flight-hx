@@ -64,7 +64,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#AssetLibraryRuntime` | 48 | 6 | 1 | 3 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#AssetLoaderAdapter` | 0 | 2 | 1 | 0 | 0 | 1 | 2 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#AssetLoadProgress` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#AttachmentSkin2D` | 0 | 2 | 1 | 1 | 1 | 0 | 3 | 6 | no | `normalization-provenance` |
+| `@flighthq/types:interface#AttachmentSkin2D` | 9 | 2 | 1 | 1 | 1 | 0 | 3 | 6 | no | `normalization-provenance` |
 | `@flighthq/types:interface#AudioBus` | 17 | 4 | 0 | 0 | 0 | 3 | 1 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#AudioChannel` | 40 | 8 | 0 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#AudioMixer` | 6 | 2 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |

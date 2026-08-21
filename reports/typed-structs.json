@@ -19934,9 +19934,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -19966,7 +19966,7 @@
       },
       "name": "AttachmentSkin2D",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free attachment skin",
       "reasons": [],
       "source": "upstream/packages/types/src/AttachmentSkin2D.ts",
       "sourceProvenance": {
@@ -52055,9 +52055,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 3,
+        "directAccesses": 3,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -52119,7 +52119,7 @@
       },
       "name": "ClippingAttachment2D",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free clipping attachment",
       "reasons": [],
       "source": "upstream/packages/types/src/ClippingAttachment2D.ts",
       "sourceProvenance": {
@@ -220603,9 +220603,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 5,
+        "directAccesses": 5,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -220675,7 +220675,7 @@
       },
       "name": "PathAttachment2D",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free path attachment",
       "reasons": [],
       "source": "upstream/packages/types/src/PathAttachment2D.ts",
       "sourceProvenance": {
@@ -244339,9 +244339,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 4,
+        "directAccesses": 4,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -244395,7 +244395,7 @@
       },
       "name": "PointAttachment2D",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free point attachment",
       "reasons": [],
       "source": "upstream/packages/types/src/PointAttachment2D.ts",
       "sourceProvenance": {
@@ -257157,9 +257157,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 7,
+        "directAccesses": 7,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -257245,7 +257245,7 @@
       },
       "name": "RegionAttachment2D",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free region attachment",
       "reasons": [],
       "source": "upstream/packages/types/src/RegionAttachment2D.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1261,
+      "newAuditOnly": 1256,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1261,
+    "auditOnlySchemas": 1256,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 24623,
-    "directSchemas": 743,
+    "directAccesses": 24651,
+    "directSchemas": 748,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 6043,
+    "pendingAccesses": 6015,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

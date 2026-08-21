@@ -15754,7 +15754,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 9,
       "fields": 2,
       "id": "@flighthq/types:interface#AttachmentSkin2D",
       "name": "AttachmentSkin2D",

@@ -230,9 +230,9 @@ class SpineParse {
 
   public static function resolveSpineSetupAttachments__spineParse(slots:Array<Slot2D>, attachmentNames:Array<Null<String>>, skins:Array<AttachmentSkin2D>):Void {
     var setup:AttachmentSkin2D = cast _Runtime.UNDEFINED;
-    setup = _Runtime.coalesce(_Runtime.find(skins, function(skin:AttachmentSkin2D, __unused4:Float, __unused5:Array<AttachmentSkin2D>):Bool return _Runtime.strictEquals((cast skin : AttachmentSkin2D).name, SpineParse.SPINE_DEFAULT_SKIN_NAME__spineParse)), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(skins, 0.0));
+    setup = _Runtime.coalesce(_Runtime.find(skins, function(skin:AttachmentSkin2D, __unused4:Float, __unused5:Array<AttachmentSkin2D>):Bool return _Runtime.strictEquals(skin.name, SpineParse.SPINE_DEFAULT_SKIN_NAME__spineParse)), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(skins, 0.0));
     if ((cast _Runtime.strictEquals(setup, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    for (entry in _Runtime.iterable((cast setup : AttachmentSkin2D).attachments)) {
+    for (entry in _Runtime.iterable(setup.attachments)) {
       if ((cast ((cast ((cast entry.slotIndex : Float) < (cast _Runtime.field(slots, 'length') : Float)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readArray(attachmentNames, entry.slotIndex), entry.name) : Bool)) : Bool)) {
         ((cast flighthq._internal._StaticIndex.readArray(slots, entry.slotIndex) : Slot2D).attachment = entry.attachment);
       }
@@ -533,7 +533,7 @@ class SpineParse {
     var times:Array<Float> = cast _Runtime.UNDEFINED;
     var values:Array<Float> = cast _Runtime.UNDEFINED;
     var track:AnimationTrack = cast _Runtime.UNDEFINED;
-    setup = _Runtime.coalesce(_Runtime.find(skins, function(skin:AttachmentSkin2D, __unused11:Float, __unused12:Array<AttachmentSkin2D>):Bool return _Runtime.strictEquals((cast skin : AttachmentSkin2D).name, SpineParse.SPINE_DEFAULT_SKIN_NAME__spineParse)), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(skins, 0.0));
+    setup = _Runtime.coalesce(_Runtime.find(skins, function(skin:AttachmentSkin2D, __unused11:Float, __unused12:Array<AttachmentSkin2D>):Bool return _Runtime.strictEquals(skin.name, SpineParse.SPINE_DEFAULT_SKIN_NAME__spineParse)), function():Dynamic return cast flighthq._internal._StaticIndex.readArray(skins, 0.0));
     attachments = (cast cast ([] : Array<Dynamic>));
     indexByName = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     times = (cast cast ([] : Array<Dynamic>));
@@ -549,7 +549,7 @@ class SpineParse {
       }
       var index:Null<Float> = ((cast indexByName : flighthq._internal._Map<String, Float>).get(name));
       if ((cast _Runtime.strictEquals(index, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        var found:Null<SkinAttachment2D> = _Runtime.callOptionalProperty(({ final __structural109 = setup; __structural109 == null ? _Runtime.UNDEFINED : (cast __structural109 : AttachmentSkin2D).attachments; }), 'find', cast ([function(entry:SkinAttachment2D, __unused13:Float, __unused14:Array<SkinAttachment2D>):Bool return ((cast _Runtime.strictEquals(entry.slotIndex, slotIndex) : Bool) && (cast _Runtime.strictEquals(entry.name, name) : Bool))] : Array<Dynamic>));
+        var found:Null<SkinAttachment2D> = _Runtime.callOptionalProperty(({ final __typedStruct109 = setup; __typedStruct109 == null ? _Runtime.UNDEFINED : __typedStruct109.attachments; }), 'find', cast ([function(entry:SkinAttachment2D, __unused13:Float, __unused14:Array<SkinAttachment2D>):Bool return ((cast _Runtime.strictEquals(entry.slotIndex, slotIndex) : Bool) && (cast _Runtime.strictEquals(entry.name, name) : Bool))] : Array<Dynamic>));
         (index = cast (((cast _Runtime.strictEquals(found, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast SpineParse.SPINE_NO_ATTACHMENT_INDEX__spineParse : Dynamic) : (cast _Runtime.subtractNumbers(_Runtime.callProperty(attachments, 'push', cast ([(cast found : { var attachment:Attachment2D; }).attachment] : Array<Dynamic>)), 1.0) : Dynamic)) : Dynamic));
         ((cast indexByName : flighthq._internal._Map<String, Float>).set(name, (cast index)));
       }
