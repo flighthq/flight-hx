@@ -19,6 +19,8 @@ Compiling green is not permission to move work between those layers. In particul
 
 The generated references are fully qualified, so modules without a host dependency do not gain unused toolkit imports. Global keys are explicitly declared, and the toolkit separately lists which ones have a portable implementation; the remaining keys are explicit JavaScript-only capabilities. An unknown global key throws, non-JavaScript module lookup throws with its complete key, and a missing type declaration or manifest provider fails generation.
 
+Constructor-shaped globals whose Haxe representation is not itself a class object use `_HostConstructor`. The token keeps construction, `instanceof`, and the small set of static members consumed by Flight behind one maintained value. `_Runtime.construct` and `_Runtime.isInstanceOf` dispatch through that token; generated code still refers only to the stable global key and does not know the target representation.
+
 ## Audit and Dynamic debt
 
 Generation writes `reports/host-toolkit.json` and `reports/host-toolkit.md` after emitting Haxe. The report scans the final generated tree, not an intended allowlist, and records stable sorted keys, use counts and locations, providers, and coverage. Generation aborts when any referenced key is missing.

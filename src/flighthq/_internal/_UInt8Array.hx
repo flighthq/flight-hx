@@ -40,6 +40,11 @@ abstract _UInt8Array(Dynamic) {
     #end
   }
 
+  /** Factory for reflective construction through `_HostValueLut`. */
+  public static function construct(source:Dynamic = 0, ?byteOffset:Int, ?length:Int):_UInt8Array {
+    return new _UInt8Array(source, byteOffset, length);
+  }
+
   @:arrayAccess public inline function arrayRead(index:Int):Int {
     #if (lime && !js)
     final values:lime.utils.UInt8Array = cast this.nativeView;

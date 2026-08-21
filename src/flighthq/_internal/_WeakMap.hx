@@ -12,7 +12,7 @@ package flighthq._internal;
 // generated WeakMap operations.
 @:keep
 class _WeakMap<K, V> {
-  final entries:haxe.ds.ObjectMap<{}, V> = new haxe.ds.ObjectMap();
+  final entries:_IdentityMap<V> = new _IdentityMap();
 
   public function new(?source:Dynamic) {
     if (source != null) for (pair in (cast source : Array<Dynamic>)) set(pair[0], pair[1]);
@@ -22,19 +22,19 @@ class _WeakMap<K, V> {
   @:native("delete")
   #end
   public function delete_(key:K):Bool {
-    return key != null && entries.remove(cast key);
+    return key != null && entries.remove(key);
   }
 
   public function get(key:K):Null<V> {
-    return key == null ? null : entries.get(cast key);
+    return key == null ? null : entries.get(key);
   }
 
   public function has(key:K):Bool {
-    return key != null && entries.exists(cast key);
+    return key != null && entries.exists(key);
   }
 
   public function set(key:K, value:V):_WeakMap<K, V> {
-    entries.set(cast key, value);
+    entries.set(key, value);
     return this;
   }
 }

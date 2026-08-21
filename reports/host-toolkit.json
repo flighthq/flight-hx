@@ -2,14 +2,14 @@
   "moduleValues": [],
   "schemaVersion": 1,
   "summary": {
-    "dynamicTypeEntries": 218,
+    "dynamicTypeEntries": 211,
     "externalTypeKeys": 4,
     "globalValueKeys": 69,
     "hostTypeKeys": 233,
-    "jsOnlyGlobalValueKeys": 54,
+    "jsOnlyGlobalValueKeys": 36,
     "missingEntries": 0,
     "moduleValueKeys": 0,
-    "portableGlobalValueKeys": 15,
+    "portableGlobalValueKeys": 33,
     "typeUses": 11278,
     "valueUses": 1681
   },
@@ -59,7 +59,7 @@
       "uses": 1
     },
     {
-      "coverage": "dynamic-stub",
+      "coverage": "typed",
       "haxeType": "flighthq._internal.dom.AbortController",
       "key": "host:AbortController",
       "kind": "host",
@@ -78,7 +78,7 @@
       "uses": 40
     },
     {
-      "coverage": "dynamic-stub",
+      "coverage": "typed",
       "haxeType": "flighthq._internal.dom.AbortSignal",
       "key": "host:AbortSignal",
       "kind": "host",
@@ -525,7 +525,7 @@
       "uses": 3
     },
     {
-      "coverage": "dynamic-stub",
+      "coverage": "typed",
       "haxeType": "flighthq._internal.dom.Console",
       "key": "host:Console",
       "kind": "host",
@@ -656,7 +656,7 @@
       "uses": 160
     },
     {
-      "coverage": "dynamic-stub",
+      "coverage": "typed",
       "haxeType": "flighthq._internal.dom.DOMException",
       "key": "host:DOMException",
       "kind": "host",
@@ -3144,7 +3144,7 @@
       "uses": 6
     },
     {
-      "coverage": "dynamic-stub",
+      "coverage": "typed",
       "haxeType": "flighthq._internal.dom.Performance",
       "key": "host:Performance",
       "kind": "host",
@@ -3159,7 +3159,7 @@
       "uses": 12
     },
     {
-      "coverage": "dynamic-stub",
+      "coverage": "typed",
       "haxeType": "flighthq._internal.dom.PerformanceNavigationTiming",
       "key": "host:PerformanceNavigationTiming",
       "kind": "host",
@@ -3512,7 +3512,7 @@
       "uses": 16
     },
     {
-      "coverage": "dynamic-stub",
+      "coverage": "typed",
       "haxeType": "flighthq._internal.dom.TextEncoder",
       "key": "host:TextEncoder",
       "kind": "host",
@@ -4410,7 +4410,7 @@
   "upstreamCommit": "598ef6f62b6f1ae2873956501069ed824699021a",
   "values": [
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:AbortController",
       "locations": [
         "generated/flighthq/connectivity/Connectivity.hx",
@@ -4425,7 +4425,7 @@
       "uses": 9
     },
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:AbortSignal",
       "locations": [
         "generated/flighthq/connectivity/Connectivity.hx"
@@ -4450,7 +4450,7 @@
       "uses": 13
     },
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:atob",
       "locations": [
         "generated/flighthq/audio/AudioResourceFrom.hx",
@@ -4492,7 +4492,7 @@
       "uses": 4
     },
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:btoa",
       "locations": [
         "generated/flighthq/hostCapacitor/CapacitorFileSystem.hx"
@@ -4501,7 +4501,7 @@
       "uses": 1
     },
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:cancelAnimationFrame",
       "locations": [
         "generated/flighthq/application/Application.hx",
@@ -4520,7 +4520,7 @@
       "uses": 4
     },
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:console",
       "locations": [
         "generated/flighthq/log/Log.hx"
@@ -4579,7 +4579,7 @@
       "uses": 41
     },
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:Date",
       "locations": [
         "generated/flighthq/connectivity/Connectivity.hx",
@@ -4595,7 +4595,7 @@
       "uses": 20
     },
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:decodeURIComponent",
       "locations": [
         "generated/flighthq/protocol/Protocol.hx",
@@ -4637,7 +4637,7 @@
       "uses": 25
     },
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:DOMException",
       "locations": [
         "generated/flighthq/loader/ResourceLoader.hx",
@@ -4648,7 +4648,7 @@
       "uses": 13
     },
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:encodeURIComponent",
       "locations": [
         "generated/flighthq/protocol/Protocol.hx"
@@ -4688,7 +4688,7 @@
       "uses": 4
     },
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:Float32Array",
       "locations": [
         "generated/flighthq/animation/AnimationTrack.hx",
@@ -5212,7 +5212,7 @@
       "uses": 40
     },
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:performance",
       "locations": [
         "generated/flighthq/application/Application.hx",
@@ -5243,7 +5243,7 @@
       "uses": 3
     },
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:RegExp",
       "locations": [
         "generated/flighthq/filesystem/Filesystem.hx",
@@ -5255,7 +5255,7 @@
       "uses": 5
     },
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:requestAnimationFrame",
       "locations": [
         "generated/flighthq/application/Application.hx",
@@ -5352,7 +5352,7 @@
       "uses": 113
     },
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:setInterval",
       "locations": [
         "generated/flighthq/log/Log.hx"
@@ -5370,7 +5370,7 @@
       "uses": 4
     },
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:structuredClone",
       "locations": [
         "generated/flighthq/snapshot/CaptureSnapshot.hx",
@@ -5397,7 +5397,7 @@
       "uses": 8
     },
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:TextEncoder",
       "locations": [
         "generated/flighthq/share/Share.hx"
@@ -5415,7 +5415,7 @@
       "uses": 1
     },
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:Uint8Array",
       "locations": [
         "generated/flighthq/audio/AudioFormat.hx",

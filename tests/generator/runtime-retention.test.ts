@@ -9,7 +9,17 @@ describe('reflective host-toolkit retention', () => {
     const toolkit = readFileSync(path.join(workspace, 'src', 'flighthq', '_internal', '_HostValueLut.hx'), 'utf8');
     const reflectiveClasses = [...toolkit.matchAll(/case '[^']+': (_[A-Za-z0-9]+);/gu)].map((match) => match[1]!);
 
-    expect(reflectiveClasses).toEqual(['_Map', '_Set', '_WeakMap', '_WeakSet', '_TextDecoder', '_DataView']);
+    expect(reflectiveClasses).toEqual([
+      '_AbortController',
+      '_Map',
+      '_Set',
+      '_WeakMap',
+      '_WeakSet',
+      '_DOMException',
+      '_TextDecoder',
+      '_TextEncoder',
+      '_DataView',
+    ]);
     for (const className of reflectiveClasses) {
       const source = readFileSync(path.join(workspace, 'src', 'flighthq', '_internal', `${className}.hx`), 'utf8');
       expect(source, `${className} is reachable only through reflection and must survive DCE`).toMatch(

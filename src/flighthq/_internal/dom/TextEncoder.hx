@@ -1,7 +1,13 @@
-// Maintained host-type declaration stub: every target currently sees this
-// type as Dynamic, exactly as before the literal host-type mapping. Upgrading
-// a platform means replacing its branch with a real declaration; see
-// HTMLCanvasElement.hx for the model.
+// Maintained host-type declaration for UTF-8 encoding.
 package flighthq._internal.dom;
 
-typedef TextEncoder = Dynamic;
+#if js
+@:native('TextEncoder')
+extern class TextEncoder {
+  var encoding(default, never):String;
+  function new():Void;
+  function encode(?source:String):flighthq._internal._UInt8Array;
+}
+#else
+typedef TextEncoder = flighthq._internal._TextEncoder;
+#end

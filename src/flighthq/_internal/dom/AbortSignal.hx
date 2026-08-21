@@ -1,7 +1,15 @@
-// Maintained host-type declaration stub: every target currently sees this
-// type as Dynamic, exactly as before the literal host-type mapping. Upgrading
-// a platform means replacing its branch with a real declaration; see
-// HTMLCanvasElement.hx for the model.
+// Maintained host-type declaration for the standard cancellation primitive.
 package flighthq._internal.dom;
 
-typedef AbortSignal = Dynamic;
+#if js
+@:native('AbortSignal')
+extern class AbortSignal {
+  var aborted(default, never):Bool;
+  var reason(default, never):Dynamic;
+  function addEventListener(type:String, listener:Dynamic, ?options:Dynamic):Void;
+  function removeEventListener(type:String, listener:Dynamic, ?options:Dynamic):Void;
+  function throwIfAborted():Void;
+}
+#else
+typedef AbortSignal = flighthq._internal._AbortSignal;
+#end

@@ -21,7 +21,20 @@ describe('host toolkit dependency boundary', () => {
     expect(audit).toEqual(committed);
     expect(audit.summary.missingEntries).toBe(0);
     expect(audit.types.find((entry) => entry.key === 'host:AudioBuffer')?.coverage).toBe('typed');
+    expect(audit.types.find((entry) => entry.key === 'host:AbortSignal')?.coverage).toBe('typed');
+    expect(audit.types.find((entry) => entry.key === 'host:Performance')?.coverage).toBe('typed');
     expect(audit.values.find((entry) => entry.key === 'global:TextDecoder')?.coverage).toBe('portable');
+    for (const key of [
+      'global:AbortController',
+      'global:Date',
+      'global:Float32Array',
+      'global:performance',
+      'global:structuredClone',
+      'global:TextEncoder',
+      'global:Uint8Array',
+    ]) {
+      expect(audit.values.find((entry) => entry.key === key)?.coverage, key).toBe('portable');
+    }
     expect(audit.values.some((entry) => entry.key === 'global:SHADOW_DEPTH_FORMAT')).toBe(false);
 
     const runtime = readFileSync(path.join(workspace, 'src', 'flighthq', '_internal', '_Runtime.hx'), 'utf8');

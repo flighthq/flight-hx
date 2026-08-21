@@ -10,11 +10,15 @@ abstract _Int16Array(Array<Int>) {
 #end
   public var length(get, never):Int;
 
-  public function new(source:Dynamic = 0) {
+  public function new(source:Dynamic = 0, ?byteOffset:Int, ?length:Int) {
     #if js
-    this = js.Syntax.code('new Int16Array({0})', source);
+    this = byteOffset == null
+      ? js.Syntax.code('new Int16Array({0})', source)
+      : length == null
+        ? js.Syntax.code('new Int16Array({0}, {1})', source, byteOffset)
+        : js.Syntax.code('new Int16Array({0}, {1}, {2})', source, byteOffset, length);
     #elseif lime
-    this = new _LimeTypedArray('int16', source);
+    this = new _LimeTypedArray('int16', source, byteOffset, length);
     #else
     if (Std.isOfType(source, Int) || Std.isOfType(source, Float)) {
       this = [for (_ in 0...Std.int(source)) 0];
@@ -23,6 +27,11 @@ abstract _Int16Array(Array<Int>) {
       this = [for (value in values) toInt16(value)];
     }
     #end
+  }
+
+  /** Factory for reflective construction through `_HostValueLut`. */
+  public static function construct(source:Dynamic = 0, ?byteOffset:Int, ?length:Int):_Int16Array {
+    return new _Int16Array(source, byteOffset, length);
   }
 
   @:arrayAccess public inline function arrayRead(index:Int):Int {

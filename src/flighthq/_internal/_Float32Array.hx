@@ -10,11 +10,15 @@ abstract _Float32Array(Array<Float>) {
 #end
   public var length(get, never):Int;
 
-  public function new(source:Dynamic = 0) {
+  public function new(source:Dynamic = 0, ?byteOffset:Int, ?length:Int) {
     #if js
-    this = js.Syntax.code('new Float32Array({0})', source);
+    this = byteOffset == null
+      ? js.Syntax.code('new Float32Array({0})', source)
+      : length == null
+        ? js.Syntax.code('new Float32Array({0}, {1})', source, byteOffset)
+        : js.Syntax.code('new Float32Array({0}, {1}, {2})', source, byteOffset, length);
     #elseif lime
-    this = new _LimeTypedArray('float32', source);
+    this = new _LimeTypedArray('float32', source, byteOffset, length);
     #else
     if (Std.isOfType(source, Int) || Std.isOfType(source, Float)) {
       this = [for (_ in 0...Std.int(source)) 0.0];
@@ -23,6 +27,11 @@ abstract _Float32Array(Array<Float>) {
       this = [for (value in values) (cast value : Float)];
     }
     #end
+  }
+
+  /** Factory for reflective construction through `_HostValueLut`. */
+  public static function construct(source:Dynamic = 0, ?byteOffset:Int, ?length:Int):_Float32Array {
+    return new _Float32Array(source, byteOffset, length);
   }
 
   @:arrayAccess public inline function arrayRead(index:Int):Float {

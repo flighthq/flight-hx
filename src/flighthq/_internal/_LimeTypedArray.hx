@@ -50,6 +50,10 @@ class _LimeTypedArray {
     return this;
   }
 
+  public function copy():_LimeTypedArray return new _LimeTypedArray(kind, this);
+
+  public function isKind(expected:String):Bool return kind == expected;
+
   public function get(index:Int):Dynamic {
     return switch (kind) {
       case 'float32':
@@ -150,7 +154,7 @@ class _LimeTypedArray {
     };
   }
 
-  static function typeToKind(type:lime.utils.ArrayBufferView.TypedArrayType):Null<String> {
+  public static function typeToKind(type:lime.utils.ArrayBufferView.TypedArrayType):Null<String> {
     return switch (type) {
       case lime.utils.ArrayBufferView.TypedArrayType.Int8: 'int8';
       case lime.utils.ArrayBufferView.TypedArrayType.Uint8: 'uint8';

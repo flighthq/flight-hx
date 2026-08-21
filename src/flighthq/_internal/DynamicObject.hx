@@ -7,6 +7,10 @@ package flighthq._internal;
  * on either Haxe Reflect or a JavaScript-only global Object value.
  */
 class DynamicObject {
+  #if !js
+  static final frozenObjects:_IdentityMap<Bool> = new _IdentityMap();
+  #end
+
   public static function assign(target:Dynamic, sources:haxe.Rest<Dynamic>):Dynamic {
     for (source in sources) {
       if (source == null) continue;
@@ -31,6 +35,7 @@ class DynamicObject {
     #if js
     return js.Syntax.code('Object.freeze({0})', source);
     #else
+    if (isObjectValue(source)) frozenObjects.set(source, true);
     return source;
     #end
   }
@@ -61,7 +66,7 @@ class DynamicObject {
     #if js
     return js.Syntax.code('Object.isFrozen({0})', source);
     #else
-    return false;
+    return !isObjectValue(source) || frozenObjects.exists(source);
     #end
   }
 
@@ -92,4 +97,15 @@ class DynamicObject {
     return null;
     #end
   }
+
+  #if !js
+  static function isObjectValue(value:Dynamic):Bool {
+    if (value == null) return false;
+    return switch (Type.typeof(value)) {
+      case TObject | TEnum(_): true;
+      case TClass(type): type != String;
+      default: false;
+    };
+  }
+  #end
 }

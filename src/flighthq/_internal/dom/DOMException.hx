@@ -1,7 +1,12 @@
-// Maintained host-type declaration stub: every target currently sees this
-// type as Dynamic, exactly as before the literal host-type mapping. Upgrading
-// a platform means replacing its branch with a real declaration; see
-// HTMLCanvasElement.hx for the model.
+// Maintained host-type declaration for the standard DOM error identity.
 package flighthq._internal.dom;
 
-typedef DOMException = Dynamic;
+#if js
+@:native('DOMException')
+extern class DOMException {
+  var message(default, never):String;
+  var name(default, never):String;
+}
+#else
+typedef DOMException = flighthq._internal._DOMException;
+#end

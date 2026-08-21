@@ -1,7 +1,12 @@
-// Maintained host-type declaration stub: every target currently sees this
-// type as Dynamic, exactly as before the literal host-type mapping. Upgrading
-// a platform means replacing its branch with a real declaration; see
-// HTMLCanvasElement.hx for the model.
+// Maintained host-type declaration for the standard monotonic clock.
 package flighthq._internal.dom;
 
-typedef Performance = Dynamic;
+#if js
+@:native('Performance')
+extern class Performance {
+  function getEntriesByType(type:String):Array<PerformanceNavigationTiming>;
+  function now():Float;
+}
+#else
+typedef Performance = flighthq._internal._Performance;
+#end

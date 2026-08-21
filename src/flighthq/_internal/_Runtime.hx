@@ -348,9 +348,9 @@ class _Runtime {
         break;
       }
     }
-    final position = expression.matchedPos();
-    setField(result, 'index', position.pos);
-    setField(result, 'input', text);
+    // Haxe arrays cannot carry JavaScript's extra `index` and `input` data
+    // properties on native targets. Flight's production RegExp consumers read
+    // only the indexed match and capture groups.
     return result;
   }
   #end
@@ -377,6 +377,9 @@ class _Runtime {
     // the host toolkit. Constructing a placeholder here would silently no-op every
     // later method call on it, so fail loudly at the construction site instead.
     if (constructor == null) throw 'Runtime: cannot construct a JavaScript global that has no portable implementation on this target';
+    if (Std.isOfType(constructor, _HostConstructor)) {
+      return (cast constructor : _HostConstructor).construct(arguments);
+    }
     // Abstract-typed globals map to factory functions instead of classes.
     if (Reflect.isFunction(constructor)) return Reflect.callMethod(null, constructor, arguments);
     // `Type.createInstance` passes arguments positionally without filling
@@ -621,7 +624,11 @@ class _Runtime {
     #if js
     return constructor != null && js.Syntax.code('{0} instanceof {1}', value, constructor);
     #else
-    return constructor != null && Std.isOfType(value, cast constructor);
+    if (constructor == null) return false;
+    if (Std.isOfType(constructor, _HostConstructor)) {
+      return (cast constructor : _HostConstructor).isInstance(value);
+    }
+    return Std.isOfType(value, cast constructor);
     #end
   }
 
@@ -1184,6 +1191,9 @@ class _Runtime {
     #if js
     return js.Syntax.code('{0} in {1}', key, source);
     #else
+    if (Std.isOfType(source, _HostConstructor)) {
+      return (cast source : _HostConstructor).hasStaticMember(Std.string(key));
+    }
     return source != null && Reflect.hasField(source, Std.string(key));
     #end
   }
@@ -1325,7 +1335,9 @@ class _Runtime {
     #if js
     return js.Syntax.code('globalThis.setInterval({0}, {1})', callback, delayMs);
     #else
-    return haxe.Timer.delay(callback, Std.int(delayMs));
+    final timer = new haxe.Timer(Std.int(Math.max(1.0, delayMs)));
+    timer.run = callback;
+    return timer;
     #end
   }
 
