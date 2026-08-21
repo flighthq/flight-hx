@@ -1,0 +1,19 @@
+{
+  "completedAt": "2026-08-20T23:53:28.822Z",
+  "failedPackages": 0,
+  "jobs": 12,
+  "packages": [
+    {
+      "durationMs": 13506,
+      "exitCode": 0,
+      "package": "connectivity",
+      "signal": null,
+      "status": "passed",
+      "summary": "32 passed (32)",
+      "testFiles": 1
+    }
+  ],
+  "schemaVersion": 1,
+  "selectedPackage": "connectivity",
+  "startedAt": "2026-08-20T23:53:15.314Z"
+}
