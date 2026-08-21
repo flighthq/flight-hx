@@ -410,8 +410,8 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Physics3DJointExplanation` | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#Physics3DMassData` | 77 | 10 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics3DMaterial` | 0 | 3 | 1 | 0 | 0 | 0 | 2 | 2 | yes | — |
-| `@flighthq/types:interface#Physics3DSequentialImpulseConfig` | 0 | 6 | 1 | 0 | 0 | 0 | 2 | 3 | yes | — |
-| `@flighthq/types:interface#Physics3DSequentialImpulseState` | 0 | 2 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DSequentialImpulseConfig` | 18 | 6 | 1 | 0 | 0 | 0 | 2 | 3 | yes | — |
+| `@flighthq/types:interface#Physics3DSequentialImpulseState` | 8 | 2 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics3DSolverConfig` | 25 | 8 | 1 | 1 | 0 | 0 | 2 | 2 | yes | — |
 | `@flighthq/types:interface#Physics3DStepExplanation` | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#PixiParseResult` | 2 | 2 | 0 | 2 | 0 | 0 | 0 | 1 | yes | — |

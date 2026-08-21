@@ -128,7 +128,7 @@ class World {
       }
     }
     if ((cast removedJoint : Bool)) { rebuildPhysics3DJointCollisionSuppressions(({ final __callArgument7:Dynamic = world; __callArgument7; })); }
-    ((cast (cast world.solver : Physics3DSequentialImpulseState).constraintByPair : flighthq._internal._Map<Float, Physics3DContactConstraint>).clear());
+    ((cast (cast world.solver : { var constraintByPair:flighthq._internal._Map<Float, Physics3DContactConstraint>; }).constraintByPair : flighthq._internal._Map<Float, Physics3DContactConstraint>).clear());
     return cast true;
     return cast null;
   }

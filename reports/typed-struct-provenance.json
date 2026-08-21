@@ -39199,7 +39199,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 18,
       "fields": 6,
       "id": "@flighthq/types:interface#Physics3DSequentialImpulseConfig",
       "name": "Physics3DSequentialImpulseConfig",
@@ -39253,7 +39253,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 8,
       "fields": 2,
       "id": "@flighthq/types:interface#Physics3DSequentialImpulseState",
       "name": "Physics3DSequentialImpulseState",

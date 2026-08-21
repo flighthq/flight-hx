@@ -246639,9 +246639,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 12,
+        "directAccesses": 12,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -246887,7 +246887,7 @@
       },
       "name": "Physics3DGeneric6DofJointOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Physics3D generic six-DOF joint options",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics3D.ts",
       "sourceProvenance": {
@@ -247780,9 +247780,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 8,
+        "directAccesses": 8,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -247932,7 +247932,7 @@
       },
       "name": "Physics3DJointFrameOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Physics3D joint-frame options",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics3D.ts",
       "sourceProvenance": {
@@ -248766,9 +248766,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -248854,7 +248854,7 @@
       },
       "name": "Physics3DJointOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Physics3D joint options",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics3D.ts",
       "sourceProvenance": {
@@ -249239,9 +249239,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 18,
+        "directAccesses": 18,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -249303,7 +249303,7 @@
       },
       "name": "Physics3DSequentialImpulseConfig",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Physics3D sequential-impulse config",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics3D.ts",
       "sourceProvenance": {
@@ -249325,9 +249325,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 8,
+        "directAccesses": 8,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -249357,7 +249357,7 @@
       },
       "name": "Physics3DSequentialImpulseState",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Physics3D sequential-impulse state",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics3D.ts",
       "sourceProvenance": {
@@ -441762,7 +441762,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1338,
+      "newAuditOnly": 1333,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -441771,16 +441771,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1338,
+    "auditOnlySchemas": 1333,
     "bindableAccesses": 33306,
     "candidates": 2118,
-    "directAccesses": 26101,
-    "directSchemas": 778,
+    "directAccesses": 26156,
+    "directSchemas": 783,
     "eligible": 1611,
     "escapes": 11129,
     "fields": 25393,
     "ineligible": 507,
-    "pendingAccesses": 7205,
+    "pendingAccesses": 7150,
     "reflectiveSurvivors": 451
   },
   "upstreamCommit": "598ef6f62b6f1ae2873956501069ed824699021a"

@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2118 |
 | Eligible | 1611 |
 | Ineligible | 507 |
-| Audit-only schemas | 1338 |
-| Direct schemas | 778 |
+| Audit-only schemas | 1333 |
+| Direct schemas | 783 |
 | Declared fields | 25393 |
 | Bindable accesses | 33306 |
-| Pending accesses | 7205 |
-| Directly emitted accesses | 26101 |
+| Pending accesses | 7150 |
+| Directly emitted accesses | 26156 |
 | Reflective survivors | 451 |
 | Dynamic escapes | 11129 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1338 |
+| Newly discovered, audit-only | 1333 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -1233,20 +1233,20 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#Physics3DFixedJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 30 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#Physics3DFixedJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DGeneric6DofJoint` | `direct` | `new` | — | reviewed escape-free Physics3D generic six-DOF joint | 44 | 24 | 0 | 0 | 0 | 24 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DGeneric6DofJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 29 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DGeneric6DofJointOptions` | `direct` | `new` | — | reviewed escape-free Physics3D generic six-DOF joint options | 29 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DHingeJoint` | `direct` | `new` | — | reviewed escape-free Physics3D hinge joint | 39 | 26 | 22 | 0 | 0 | 48 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DHingeJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 23 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 22 | 154 | 78 | 0 | 232 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#Physics3DJointExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DJointFrameOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 17 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DJointFrameOptions` | `direct` | `new` | — | reviewed escape-free Physics3D joint-frame options | 17 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DJointFrames` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 24 | 16 | 0 | 40 | 0 | 0 | 5 | yes | — |
 | `@flighthq/types:type#Physics3DJointKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#Physics3DJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DJointOptions` | `direct` | `new` | — | reviewed escape-free Physics3D joint options | 9 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DJointSolver` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 10 | 0 | 0 | 10 | 0 | 0 | 7 | yes | — |
 | `@flighthq/types:interface#Physics3DMassData` | `direct` | `new` | — | reviewed escape-free Physics3D mass data | 10 | 40 | 37 | 0 | 0 | 77 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DSequentialImpulseConfig` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 18 | 0 | 0 | 18 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DSequentialImpulseState` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 2 | 0 | 8 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DSequentialImpulseConfig` | `direct` | `new` | — | reviewed escape-free Physics3D sequential-impulse config | 6 | 18 | 0 | 0 | 0 | 18 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DSequentialImpulseState` | `direct` | `new` | — | reviewed escape-free Physics3D sequential-impulse state | 2 | 6 | 2 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DSliderJoint` | `direct` | `new` | — | reviewed escape-free Physics3D slider joint | 39 | 26 | 22 | 0 | 0 | 48 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DSliderJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 23 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DSolverConfig` | `direct` | `new` | — | reviewed escape-free Physics3D solver config | 8 | 25 | 0 | 0 | 0 | 25 | 0 | 0 | yes | — |

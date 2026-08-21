@@ -77,7 +77,7 @@ class Step {
     Step.forEachSolveIslandBody__step(({ final __callArgument12:Dynamic = world; __callArgument12; }), ({ final __callArgument14:Dynamic = function(body:RigidBody3D):Void { integrateRigidBody3DVelocity(({ final __callArgument13:Dynamic = body; __callArgument13; }), (cast world.gravityX : Float), (cast world.gravityY : Float), (cast world.gravityZ : Float), (cast dt : Float)); }; __callArgument14; }));
     preparePhysics3DContactConstraints(({ final __callArgument15:Dynamic = world; __callArgument15; }));
     Step.forEachSolveIslandJoint__step(({ final __callArgument16:Dynamic = world; __callArgument16; }), ({ final __callArgument17:Dynamic = function(joint:Physics3DJoint, solver:Physics3DJointSolver):Void { _Runtime.callProperty(solver, 'prepare', cast ([world, joint, dt] : Array<Dynamic>)); }; __callArgument17; }));
-    if ((cast (cast sequential : Physics3DSequentialImpulseConfig).warmStarting : Bool)) {
+    if ((cast sequential.warmStarting : Bool)) {
       warmStartPhysics3DContacts(({ final __callArgument18:Dynamic = world; __callArgument18; }));
       Step.forEachSolveIslandJoint__step(({ final __callArgument19:Dynamic = world; __callArgument19; }), ({ final __callArgument22:Dynamic = function(joint:Physics3DJoint, solver:Physics3DJointSolver):Void {
         if ((cast !_Runtime.strictEquals(_Runtime.field(solver, 'warmStart'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(solver, 'warmStart', cast ([world, joint] : Array<Dynamic>)); } else { Step.clearJointAccumulators__step(({ final __callArgument20:Dynamic = joint; __callArgument20; }), ({ final __callArgument21:Dynamic = solver; __callArgument21; })); }
@@ -87,7 +87,7 @@ class Step {
     }
     {
       var iteration:Float = 0.0;
-      while ((cast ((cast iteration : Float) < (cast (cast sequential : Physics3DSequentialImpulseConfig).velocityIterations : Float)) : Bool)) {
+      while ((cast ((cast iteration : Float) < (cast sequential.velocityIterations : Float)) : Bool)) {
         Step.forEachSolveIslandJoint__step(({ final __callArgument25:Dynamic = world; __callArgument25; }), ({ final __callArgument26:Dynamic = function(joint:Physics3DJoint, solver:Physics3DJointSolver):Void { _Runtime.callProperty(solver, 'solve', cast ([world, joint, dt] : Array<Dynamic>)); }; __callArgument26; }));
         solvePhysics3DContactVelocities(({ final __callArgument27:Dynamic = world; __callArgument27; }));
         (iteration = cast ((iteration + 1.0) : Dynamic));
@@ -96,7 +96,7 @@ class Step {
     Step.forEachSolveIslandPose__step(({ final __callArgument28:Dynamic = world; __callArgument28; }), (cast dt : Float));
     {
       var iteration:Float = 0.0;
-      while ((cast ((cast iteration : Float) < (cast (cast sequential : Physics3DSequentialImpulseConfig).positionIterations : Float)) : Bool)) {
+      while ((cast ((cast iteration : Float) < (cast sequential.positionIterations : Float)) : Bool)) {
         (cast solvePhysics3DContactPositions(({ final __callArgument29:Dynamic = world; __callArgument29; })) : Float);
         (iteration = cast ((iteration + 1.0) : Dynamic));
       }
@@ -192,7 +192,7 @@ class Step {
     if ((cast ((cast !(cast _Runtime.compare(previous, 0.0, '>') : Bool) : Bool) || (cast _Runtime.strictEquals(previous, dt) : Bool)) : Bool)) { return; }
     divided = (dt / previous);
     timestepRatio = ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([divided] : Array<Dynamic>)) : Bool) ? (cast divided : Dynamic) : (cast 0.0 : Dynamic));
-    for (constraint in _Runtime.iterable((cast world.solver : Physics3DSequentialImpulseState).constraints)) {
+    for (constraint in _Runtime.iterable((cast world.solver : { var constraints:Array<Physics3DContactConstraint>; }).constraints)) {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast constraint.pointCount : Float)) : Bool)) {

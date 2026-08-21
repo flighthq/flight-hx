@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_338,
+      newAuditOnly: 1_333,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_118);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(780);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(785);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_716);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_338);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_333);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(378);
+    expect(newDirect).toHaveLength(383);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -2000,6 +2000,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'Requirement',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free registry requirement',
+        }),
+        expect.objectContaining({
+          name: 'Physics3DGeneric6DofJointOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Physics3D generic six-DOF joint options',
+        }),
+        expect.objectContaining({
+          name: 'Physics3DJointFrameOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Physics3D joint-frame options',
+        }),
+        expect.objectContaining({
+          name: 'Physics3DJointOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Physics3D joint options',
+        }),
+        expect.objectContaining({
+          name: 'Physics3DSequentialImpulseConfig',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Physics3D sequential-impulse config',
+        }),
+        expect.objectContaining({
+          name: 'Physics3DSequentialImpulseState',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Physics3D sequential-impulse state',
         }),
       ]),
     );
@@ -3894,6 +3919,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#Requirement',
         purpose: 'reviewed escape-free registry requirement',
       },
+      {
+        declarationFingerprint: 'sha256:40930c997e8c14a8706c563ebe7385d8392f11fcbb0e0ed4ebc0d9f3d1d7c083',
+        id: '@flighthq/types:interface#Physics3DGeneric6DofJointOptions',
+        purpose: 'reviewed escape-free Physics3D generic six-DOF joint options',
+      },
+      {
+        declarationFingerprint: 'sha256:edac07364f90df64b39c2d1ac50a306e9877d7e8c4ab1c4d6c02dc7e80cb0395',
+        id: '@flighthq/types:interface#Physics3DJointFrameOptions',
+        purpose: 'reviewed escape-free Physics3D joint-frame options',
+      },
+      {
+        declarationFingerprint: 'sha256:3b0da11468a92a3dd675ec3d6cf7205335cf475811446c07dc627a00a60534f2',
+        id: '@flighthq/types:interface#Physics3DJointOptions',
+        purpose: 'reviewed escape-free Physics3D joint options',
+      },
+      {
+        declarationFingerprint: 'sha256:0de6797dfe9c8f540e889ae0af3a97e5cd7aff54d43a7d4cc885954bac19f8df',
+        id: '@flighthq/types:interface#Physics3DSequentialImpulseConfig',
+        purpose: 'reviewed escape-free Physics3D sequential-impulse config',
+      },
+      {
+        declarationFingerprint: 'sha256:30d66ea2af3409e1b0c2bd65a21eb638acbedf4459c976c4975d470e1a986b3e',
+        id: '@flighthq/types:interface#Physics3DSequentialImpulseState',
+        purpose: 'reviewed escape-free Physics3D sequential-impulse state',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -5061,6 +5111,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const fortyNinthHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'Physics3DGeneric6DofJointOptions',
+            'Physics3DJointFrameOptions',
+            'Physics3DJointOptions',
+            'Physics3DSequentialImpulseConfig',
+            'Physics3DSequentialImpulseState',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -5101,22 +5164,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_338,
+      auditOnlySchemas: 1_333,
       bindableAccesses: 33_306,
       candidates: 2_118,
-      directAccesses: 26_101,
-      directSchemas: 778,
+      directAccesses: 26_156,
+      directSchemas: 783,
       eligible: 1_611,
       escapes: 11_129,
       fields: 25_393,
       ineligible: 507,
-      pendingAccesses: 7_205,
+      pendingAccesses: 7_150,
       reflectiveSurvivors: 451,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_338,
+      newAuditOnly: 1_333,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -5193,7 +5256,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(26_101);
+    expect(report.summary.directAccesses).toBe(26_156);
     expect(rectangle?.emission).toEqual({
       directAccesses: 707,
       mode: 'direct',
@@ -7484,6 +7547,48 @@ describe('typed struct analysis', () => {
     }
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
+        'Physics3DGeneric6DofJointOptions',
+        12,
+        'sha256:40930c997e8c14a8706c563ebe7385d8392f11fcbb0e0ed4ebc0d9f3d1d7c083',
+        'reviewed escape-free Physics3D generic six-DOF joint options',
+      ],
+      [
+        'Physics3DJointFrameOptions',
+        8,
+        'sha256:edac07364f90df64b39c2d1ac50a306e9877d7e8c4ab1c4d6c02dc7e80cb0395',
+        'reviewed escape-free Physics3D joint-frame options',
+      ],
+      [
+        'Physics3DJointOptions',
+        9,
+        'sha256:3b0da11468a92a3dd675ec3d6cf7205335cf475811446c07dc627a00a60534f2',
+        'reviewed escape-free Physics3D joint options',
+      ],
+      [
+        'Physics3DSequentialImpulseConfig',
+        18,
+        'sha256:0de6797dfe9c8f540e889ae0af3a97e5cd7aff54d43a7d4cc885954bac19f8df',
+        'reviewed escape-free Physics3D sequential-impulse config',
+      ],
+      [
+        'Physics3DSequentialImpulseState',
+        8,
+        'sha256:30d66ea2af3409e1b0c2bd65a21eb638acbedf4459c976c4975d470e1a986b3e',
+        'reviewed escape-free Physics3D sequential-impulse state',
+      ],
+    ] as const) {
+      expect(fortyNinthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
         'TiledTilesetTile',
         14,
         'sha256:f20a5988a4c187a5ab14cafc6d9e22031b7dd254f8a130eb362beafdafe8fe92',
@@ -9392,6 +9497,21 @@ describe('typed struct analysis', () => {
         mechanicallyCompatible,
         normalizationReasons,
         observabilityReasons,
+      });
+      if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
+      else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+    }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#Physics3DGeneric6DofJointOptions', true, [], null],
+      ['@flighthq/types:interface#Physics3DJointFrameOptions', false, ['cross-schema-transfer'], null],
+      ['@flighthq/types:interface#Physics3DJointOptions', false, ['cross-schema-transfer'], null],
+      ['@flighthq/types:interface#Physics3DSequentialImpulseConfig', true, [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#Physics3DSequentialImpulseState', true, [], { blockerReasons: [], closed: true }],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons: [],
       });
       if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
       else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
@@ -11412,6 +11532,17 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:CatalogEntry|CatalogRegistration|RegistryCatalog|RegistryCatalogEntry|Requirement)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/physics3d/JointFactories.hx',
+      'generated/flighthq/physics3d/Solver.hx',
+      'generated/flighthq/physics3d/Step.hx',
+      'generated/flighthq/physics3d/StepValidation.hx',
+      'generated/flighthq/physics3d/World.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:Physics3DGeneric6DofJointOptions|Physics3DJointFrameOptions|Physics3DJointOptions|Physics3DSequentialImpulseConfig|Physics3DSequentialImpulseState)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');

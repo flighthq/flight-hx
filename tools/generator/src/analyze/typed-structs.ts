@@ -1918,6 +1918,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#Requirement',
     purpose: 'reviewed escape-free registry requirement',
   },
+  {
+    declarationFingerprint: 'sha256:40930c997e8c14a8706c563ebe7385d8392f11fcbb0e0ed4ebc0d9f3d1d7c083',
+    id: '@flighthq/types:interface#Physics3DGeneric6DofJointOptions',
+    purpose: 'reviewed escape-free Physics3D generic six-DOF joint options',
+  },
+  {
+    declarationFingerprint: 'sha256:edac07364f90df64b39c2d1ac50a306e9877d7e8c4ab1c4d6c02dc7e80cb0395',
+    id: '@flighthq/types:interface#Physics3DJointFrameOptions',
+    purpose: 'reviewed escape-free Physics3D joint-frame options',
+  },
+  {
+    declarationFingerprint: 'sha256:3b0da11468a92a3dd675ec3d6cf7205335cf475811446c07dc627a00a60534f2',
+    id: '@flighthq/types:interface#Physics3DJointOptions',
+    purpose: 'reviewed escape-free Physics3D joint options',
+  },
+  {
+    declarationFingerprint: 'sha256:0de6797dfe9c8f540e889ae0af3a97e5cd7aff54d43a7d4cc885954bac19f8df',
+    id: '@flighthq/types:interface#Physics3DSequentialImpulseConfig',
+    purpose: 'reviewed escape-free Physics3D sequential-impulse config',
+  },
+  {
+    declarationFingerprint: 'sha256:30d66ea2af3409e1b0c2bd65a21eb638acbedf4459c976c4975d470e1a986b3e',
+    id: '@flighthq/types:interface#Physics3DSequentialImpulseState',
+    purpose: 'reviewed escape-free Physics3D sequential-impulse state',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(
