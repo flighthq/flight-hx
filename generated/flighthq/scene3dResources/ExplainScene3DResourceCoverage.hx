@@ -60,14 +60,14 @@ class ExplainScene3DResourceCoverage {
     if ((cast _Runtime.strictEquals(registration, null) : Bool)) {
       return cast _Runtime.mergeObjects([base, { coverage: ((cast fallback : Bool) ? (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).FallbackUnavailable : Dynamic) : (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Unavailable : Dynamic)) }]);
     }
-    return cast _Runtime.mergeObjects([base, { coverage: ((cast fallback : Bool) ? (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).FallbackRemediable : Dynamic) : (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Unregistered : Dynamic)) }, { module: (cast registration : CatalogRegistration).module }, { registrar: (cast registration : CatalogRegistration).registrar }]);
+    return cast _Runtime.mergeObjects([base, { coverage: ((cast fallback : Bool) ? (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).FallbackRemediable : Dynamic) : (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Unregistered : Dynamic)) }, { module: (cast registration : { var module:String; }).module }, { registrar: (cast registration : { var registrar:String; }).registrar }]);
     return cast null;
   }
 
   public static function findCatalogRegistration__explainScene3DResourceCoverage(catalog:Null<SceneCoverageCatalog>, kind:Kind, registry:flighthq._internal._IndexedAccess<SceneCoverageEntry, String>):Null<CatalogRegistration> {
     if ((cast _Runtime.strictEquals(catalog, null) : Bool)) { return cast null; }
     for (entry in _Runtime.iterable(catalog)) {
-      if ((cast ((cast _Runtime.strictEquals((cast entry : CatalogEntry).kind, kind) : Bool) && (cast _Runtime.strictEquals((cast entry : CatalogEntry).registry, registry) : Bool)) : Bool)) { return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray((cast entry : CatalogEntry).registrations, 0.0), function():Dynamic return cast null); }
+      if ((cast ((cast _Runtime.strictEquals(entry.kind, kind) : Bool) && (cast _Runtime.strictEquals(entry.registry, registry) : Bool)) : Bool)) { return cast _Runtime.coalesce(flighthq._internal._StaticIndex.readArray(entry.registrations, 0.0), function():Dynamic return cast null); }
     }
     return cast null;
     return cast null;

@@ -18812,7 +18812,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 18,
       "fields": 3,
       "id": "@flighthq/types:interface#CatalogEntry",
       "name": "CatalogEntry",
@@ -18886,7 +18886,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 12,
       "fields": 2,
       "id": "@flighthq/types:interface#CatalogRegistration",
       "name": "CatalogRegistration",
@@ -39927,7 +39927,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 7,
       "fields": 1,
       "id": "@flighthq/types:interface#RegistryCatalog",
       "name": "RegistryCatalog",
@@ -40750,7 +40750,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 19,
       "fields": 2,
       "id": "@flighthq/types:interface#Requirement",
       "name": "Requirement",

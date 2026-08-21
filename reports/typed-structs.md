@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2118 |
 | Eligible | 1611 |
 | Ineligible | 507 |
-| Audit-only schemas | 1343 |
-| Direct schemas | 773 |
+| Audit-only schemas | 1338 |
+| Direct schemas | 778 |
 | Declared fields | 25393 |
 | Bindable accesses | 33306 |
-| Pending accesses | 7276 |
-| Directly emitted accesses | 26030 |
+| Pending accesses | 7205 |
+| Directly emitted accesses | 26101 |
 | Reflective survivors | 451 |
 | Dynamic escapes | 11129 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1343 |
+| Newly discovered, audit-only | 1338 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -345,8 +345,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CaptureCheckResult` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#CaptureCheckTier` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#CaptureColumnBaseline` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 10 | 5 | 0 | 15 | 0 | 0 | 4 | yes | — |
-| `@flighthq/types:interface#CatalogEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 18 | 0 | 0 | 18 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CatalogRegistration` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CatalogEntry` | `direct` | `new` | — | reviewed escape-free scene coverage catalog entry | 3 | 18 | 0 | 0 | 0 | 18 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CatalogRegistration` | `direct` | `new` | — | reviewed escape-free scene coverage catalog registration | 2 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CdlValues` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CffIndex` | `direct` | `new` | — | reviewed escape-free CFF index | 2 | 14 | 0 | 0 | 0 | 14 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CffIndexEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
@@ -1309,8 +1309,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#RectangleId` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#RectangleLike` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 391 | yes | — |
 | `@flighthq/types:interface#RegionAttachment2D` | `direct` | `new` | — | reviewed escape-free region attachment | 9 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#RegistryCatalog` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#RegistryCatalogEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 15 | 0 | 0 | 15 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RegistryCatalog` | `direct` | `new` | — | reviewed escape-free registry catalog | 1 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RegistryCatalogEntry` | `direct` | `new` | — | reviewed escape-free registry catalog entry | 7 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RegistryCodegenPlan` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#RegistryEntryState` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#RegistryId` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1367,7 +1367,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#RenderTexture` | `direct` | `new` | — | reviewed escape-free render texture | 10 | 22 | 8 | 0 | 0 | 30 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderViewport2D` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ReplaceTextInputOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Requirement` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 19 | 0 | 0 | 19 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Requirement` | `direct` | `new` | — | reviewed escape-free registry requirement | 2 | 19 | 0 | 0 | 0 | 19 | 0 | 0 | yes | — |
 | `@flighthq/types:type#RequirementFacet` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#RequirementSet` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ResolvedRenderTargetDescriptor` | `direct` | `new` | — | reviewed escape-free resolved render-target descriptor | 10 | 52 | 0 | 0 | 0 | 52 | 0 | 0 | yes | — |

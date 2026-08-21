@@ -52550,9 +52550,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 18,
+        "directAccesses": 18,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -52590,7 +52590,7 @@
       },
       "name": "CatalogEntry",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free scene coverage catalog entry",
       "reasons": [],
       "source": "upstream/packages/types/src/SceneCoverageCatalog.ts",
       "sourceProvenance": {
@@ -52612,9 +52612,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 12,
+        "directAccesses": 12,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -52644,7 +52644,7 @@
       },
       "name": "CatalogRegistration",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free scene coverage catalog registration",
       "reasons": [],
       "source": "upstream/packages/types/src/SceneCoverageCatalog.ts",
       "sourceProvenance": {
@@ -270350,9 +270350,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 7,
+        "directAccesses": 7,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -270374,7 +270374,7 @@
       },
       "name": "RegistryCatalog",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free registry catalog",
       "reasons": [],
       "source": "upstream/packages/types/src/RegistryCatalog.ts",
       "sourceProvenance": {
@@ -270396,9 +270396,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 15,
+        "directAccesses": 15,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -270468,7 +270468,7 @@
       },
       "name": "RegistryCatalogEntry",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free registry catalog entry",
       "reasons": [],
       "source": "upstream/packages/types/src/RegistryCatalog.ts",
       "sourceProvenance": {
@@ -281127,9 +281127,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 19,
+        "directAccesses": 19,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -281159,7 +281159,7 @@
       },
       "name": "Requirement",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free registry requirement",
       "reasons": [],
       "source": "upstream/packages/types/src/Requirement.ts",
       "sourceProvenance": {
@@ -441762,7 +441762,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1343,
+      "newAuditOnly": 1338,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -441771,16 +441771,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1343,
+    "auditOnlySchemas": 1338,
     "bindableAccesses": 33306,
     "candidates": 2118,
-    "directAccesses": 26030,
-    "directSchemas": 773,
+    "directAccesses": 26101,
+    "directSchemas": 778,
     "eligible": 1611,
     "escapes": 11129,
     "fields": 25393,
     "ineligible": 507,
-    "pendingAccesses": 7276,
+    "pendingAccesses": 7205,
     "reflectiveSurvivors": 451
   },
   "upstreamCommit": "598ef6f62b6f1ae2873956501069ed824699021a"

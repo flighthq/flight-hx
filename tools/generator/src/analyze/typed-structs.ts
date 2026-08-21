@@ -1893,6 +1893,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#Woff2TableEntry',
     purpose: 'reviewed escape-free WOFF2 table entry',
   },
+  {
+    declarationFingerprint: 'sha256:61e5a2afeb5fc4305782f3ec26802e743184324e02741a4f319c17f6fa1a4f71',
+    id: '@flighthq/types:interface#CatalogEntry',
+    purpose: 'reviewed escape-free scene coverage catalog entry',
+  },
+  {
+    declarationFingerprint: 'sha256:359fc1ad0b03454fe4b30b9b03e6c0d3168dc09661565639c4b852f15805603b',
+    id: '@flighthq/types:interface#CatalogRegistration',
+    purpose: 'reviewed escape-free scene coverage catalog registration',
+  },
+  {
+    declarationFingerprint: 'sha256:892e19dcdb6b8738da74754dfde8302f697b0f2a80e50e7ae89f82ca40b46abf',
+    id: '@flighthq/types:interface#RegistryCatalog',
+    purpose: 'reviewed escape-free registry catalog',
+  },
+  {
+    declarationFingerprint: 'sha256:c07292691d0d6993f70b9fa7dc7d3a6492cf5cd5c205c2aaff99343d7d1aec05',
+    id: '@flighthq/types:interface#RegistryCatalogEntry',
+    purpose: 'reviewed escape-free registry catalog entry',
+  },
+  {
+    declarationFingerprint: 'sha256:6c0abbca38fb4e58ed608773c6e6d182b4d2c2b128b40c7466834f2cf5adcb74',
+    id: '@flighthq/types:interface#Requirement',
+    purpose: 'reviewed escape-free registry requirement',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

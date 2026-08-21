@@ -132,8 +132,8 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#CapacitorSharePlugin` | 0 | 2 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorStatusBarPlugin` | 0 | 6 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#CaptureCheckResult` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#CatalogEntry` | 0 | 3 | 0 | 1 | 0 | 6 | 1 | 0 | no | `container-transfer` |
-| `@flighthq/types:interface#CatalogRegistration` | 0 | 2 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |
+| `@flighthq/types:interface#CatalogEntry` | 18 | 3 | 0 | 1 | 0 | 6 | 1 | 0 | no | `container-transfer` |
+| `@flighthq/types:interface#CatalogRegistration` | 12 | 2 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#CdlValues` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CffIndex` | 14 | 2 | 0 | 1 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#CffIndexEntry` | 0 | 2 | 5 | 0 | 0 | 6 | 0 | 2 | no | `container-transfer` |
@@ -427,7 +427,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#QuadBatchSignals` | 0 | 3 | 0 | 3 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#QuaternionReading` | 32 | 7 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#RateLimitedLogSink` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#RegistryCatalog` | 0 | 1 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#RegistryCatalog` | 7 | 1 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#RegistryCodegenPlan` | 0 | 3 | 0 | 2 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#RegistryTableBase` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderBatchKey` | 0 | 5 | 1 | 1 | 0 | 0 | 0 | 0 | yes | — |
@@ -444,7 +444,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#RenderTargetDimensions` | 0 | 2 | 1 | 0 | 1 | 4 | 2 | 2 | no | `container-transfer`, `normalization-provenance` |
 | `@flighthq/types:interface#RenderTargetExplanation` | 0 | 3 | 0 | 3 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#RenderViewport2D` | 0 | 4 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#Requirement` | 0 | 2 | 2 | 0 | 0 | 0 | 2 | 2 | yes | — |
+| `@flighthq/types:interface#Requirement` | 19 | 2 | 2 | 0 | 0 | 0 | 2 | 2 | yes | — |
 | `@flighthq/types:interface#RequirementSet` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#ResourceLoadBytes` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#ResourceLoadCounts` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
