@@ -133,7 +133,7 @@ class Islands {
       if ((cast ((cast _Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast solver : Physics3DJointSolver).usesBodyA, false) : Bool)) : Bool)) { continue; }
       Islands.unionDynamicPair__islands(({ final __callArgument38:Dynamic = world; __callArgument38; }), ({ final __callArgument39:Dynamic = parents; __callArgument39; }), (cast (cast joint : Physics3DJoint).bodyA : Float), (cast (cast joint : Physics3DJoint).bodyB : Float));
     }
-    if ((cast !(cast (cast config : Physics3DSolverConfig).allowSleeping : Bool) : Bool)) {
+    if ((cast !(cast config.allowSleeping : Bool) : Bool)) {
       for (body in _Runtime.iterable(bodies)) {
         ((cast body : RigidBody3D).sleeping = false);
         ((cast body : RigidBody3D).sleepTimer = 0.0);
@@ -147,7 +147,7 @@ class Islands {
         ((cast body : RigidBody3D).sleepTimer = 0.0);
         continue;
       }
-      if ((cast (cast Islands.isBodyStill__islands(({ final __callArgument44:Dynamic = body; __callArgument44; }), (cast (cast config : Physics3DSolverConfig).sleepLinearThreshold : Float), (cast (cast config : Physics3DSolverConfig).sleepAngularThreshold : Float)) : Bool) : Bool)) {
+      if ((cast (cast Islands.isBodyStill__islands(({ final __callArgument44:Dynamic = body; __callArgument44; }), (cast config.sleepLinearThreshold : Float), (cast config.sleepAngularThreshold : Float)) : Bool) : Bool)) {
         ((cast body : RigidBody3D).sleepTimer += dt);
       } else {
         ((cast body : RigidBody3D).sleepTimer = 0.0);
@@ -168,7 +168,7 @@ class Islands {
     for (body in _Runtime.iterable(bodies)) {
       if ((cast _Runtime.strictEquals((cast body : RigidBody3D).type, 'static') : Bool)) { continue; }
       var islandTimer:Float = _Runtime.coalesce(((cast islandTimers : flighthq._internal._Map<Float, Float>).get((cast Islands.islandRootOf__islands(({ final __callArgument55:Dynamic = parents; __callArgument55; }), (cast (cast body : RigidBody3D).index : Float)) : Float))), function():Dynamic return cast (cast body : RigidBody3D).sleepTimer);
-      var shouldSleep:Bool = ((cast (cast body : RigidBody3D).sleepEnabled : Bool) && (cast ((cast islandTimer : Float) >= (cast (cast config : Physics3DSolverConfig).timeToSleep : Float)) : Bool));
+      var shouldSleep:Bool = ((cast (cast body : RigidBody3D).sleepEnabled : Bool) && (cast ((cast islandTimer : Float) >= (cast config.timeToSleep : Float)) : Bool));
       if ((cast ((cast !(cast shouldSleep : Bool) : Bool) && (cast (cast body : RigidBody3D).sleeping : Bool)) : Bool)) {
         ((cast body : RigidBody3D).sleepTimer = 0.0);
       }

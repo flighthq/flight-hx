@@ -244597,9 +244597,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 40,
+        "directAccesses": 40,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -244925,7 +244925,7 @@
       },
       "name": "Physics3DConeTwistJoint",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Physics3D cone-twist joint",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics3D.ts",
       "sourceProvenance": {
@@ -245342,9 +245342,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 47,
+        "directAccesses": 47,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -245430,7 +245430,7 @@
       },
       "name": "Physics3DContactConstraint",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Physics3D contact constraint",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics3D.ts",
       "sourceProvenance": {
@@ -245452,9 +245452,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 39,
+        "directAccesses": 39,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -245532,7 +245532,7 @@
       },
       "name": "Physics3DContactConstraintPoint",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Physics3D contact-constraint point",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics3D.ts",
       "sourceProvenance": {
@@ -246249,9 +246249,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 24,
+        "directAccesses": 24,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -246617,7 +246617,7 @@
       },
       "name": "Physics3DGeneric6DofJoint",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Physics3D generic six-DOF joint",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics3D.ts",
       "sourceProvenance": {
@@ -249951,9 +249951,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 25,
+        "directAccesses": 25,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -250031,7 +250031,7 @@
       },
       "name": "Physics3DSolverConfig",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Physics3D solver config",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics3D.ts",
       "sourceProvenance": {
@@ -441762,7 +441762,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1358,
+      "newAuditOnly": 1353,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -441771,16 +441771,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1358,
+    "auditOnlySchemas": 1353,
     "bindableAccesses": 33306,
     "candidates": 2118,
-    "directAccesses": 25518,
-    "directSchemas": 758,
+    "directAccesses": 25693,
+    "directSchemas": 763,
     "eligible": 1611,
     "escapes": 11129,
     "fields": 25393,
     "ineligible": 507,
-    "pendingAccesses": 7788,
+    "pendingAccesses": 7613,
     "reflectiveSurvivors": 451
   },
   "upstreamCommit": "598ef6f62b6f1ae2873956501069ed824699021a"

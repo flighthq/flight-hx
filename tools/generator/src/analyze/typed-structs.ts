@@ -1818,6 +1818,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#Physics3DSliderJoint',
     purpose: 'reviewed escape-free Physics3D slider joint',
   },
+  {
+    declarationFingerprint: 'sha256:6d07842a2d670fb1682fd93b1839bfaa4fe0a59f9deb40eaf02e28f44c143c85',
+    id: '@flighthq/types:interface#Physics3DContactConstraint',
+    purpose: 'reviewed escape-free Physics3D contact constraint',
+  },
+  {
+    declarationFingerprint: 'sha256:262ba078e6dc17f030e8b05484f7767f17eec8b6912054f110ba8e1c96ebc41a',
+    id: '@flighthq/types:interface#Physics3DContactConstraintPoint',
+    purpose: 'reviewed escape-free Physics3D contact-constraint point',
+  },
+  {
+    declarationFingerprint: 'sha256:d9850010c5e1c18420f0c418abd2e3c55fff9bd10e447971605d96046db624a5',
+    id: '@flighthq/types:interface#Physics3DConeTwistJoint',
+    purpose: 'reviewed escape-free Physics3D cone-twist joint',
+  },
+  {
+    declarationFingerprint: 'sha256:4ccbdf1e8aedb77ad285e1cbb2fac79c0038c24d9301c0dd3e56c0a9c0e8dd85',
+    id: '@flighthq/types:interface#Physics3DGeneric6DofJoint',
+    purpose: 'reviewed escape-free Physics3D generic six-DOF joint',
+  },
+  {
+    declarationFingerprint: 'sha256:505d2ba56fc2f74759b113fadc396ec3e642b407eb3177163ae8edfcaae6972c',
+    id: '@flighthq/types:interface#Physics3DSolverConfig',
+    purpose: 'reviewed escape-free Physics3D solver config',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

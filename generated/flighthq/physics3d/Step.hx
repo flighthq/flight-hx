@@ -72,7 +72,7 @@ class Step {
 
   public static function stepPhysics3DInterval(world:Physics3DWorld, dt:Float):Void {
     var sequential:Physics3DSequentialImpulseConfig = cast _Runtime.UNDEFINED;
-    sequential = (cast world.config : Physics3DSolverConfig).sequentialImpulse;
+    sequential = (cast world.config : { var sequentialImpulse:Physics3DSequentialImpulseConfig; }).sequentialImpulse;
     Step.forEachSolveIslandBody__step(({ final __callArgument10:Dynamic = world; __callArgument10; }), ({ final __callArgument11:Dynamic = refreshRigidBody3DWorldInertia; __callArgument11; }));
     Step.forEachSolveIslandBody__step(({ final __callArgument12:Dynamic = world; __callArgument12; }), ({ final __callArgument14:Dynamic = function(body:RigidBody3D):Void { integrateRigidBody3DVelocity(({ final __callArgument13:Dynamic = body; __callArgument13; }), (cast world.gravityX : Float), (cast world.gravityY : Float), (cast world.gravityZ : Float), (cast dt : Float)); }; __callArgument14; }));
     preparePhysics3DContactConstraints(({ final __callArgument15:Dynamic = world; __callArgument15; }));
@@ -195,11 +195,11 @@ class Step {
     for (constraint in _Runtime.iterable((cast world.solver : Physics3DSequentialImpulseState).constraints)) {
       {
         var i:Float = 0.0;
-        while ((cast ((cast i : Float) < (cast (cast constraint : Physics3DContactConstraint).pointCount : Float)) : Bool)) {
-          var point:Physics3DContactConstraintPoint = flighthq._internal._StaticIndex.readArray((cast constraint : Physics3DContactConstraint).points, i);
-          ((cast point : Physics3DContactConstraintPoint).normalImpulse *= timestepRatio);
-          ((cast point : Physics3DContactConstraintPoint).tangentImpulse0 *= timestepRatio);
-          ((cast point : Physics3DContactConstraintPoint).tangentImpulse1 *= timestepRatio);
+        while ((cast ((cast i : Float) < (cast constraint.pointCount : Float)) : Bool)) {
+          var point:Physics3DContactConstraintPoint = flighthq._internal._StaticIndex.readArray(constraint.points, i);
+          (point.normalImpulse *= timestepRatio);
+          (point.tangentImpulse0 *= timestepRatio);
+          (point.tangentImpulse1 *= timestepRatio);
           (i = cast ((i + 1.0) : Dynamic));
         }
       }
@@ -217,14 +217,14 @@ class Step {
 
   public static function stepValidatedPhysics3D__step(world:Physics3DWorld, dt:Float):Void {
     var substepDt:Float = cast _Runtime.UNDEFINED;
-    substepDt = (dt / (cast world.config : Physics3DSolverConfig).substeps);
+    substepDt = (dt / (cast world.config : { var substeps:Float; }).substeps);
     Step.runPhysics3DContactHook__step(({ final __callArgument50:Dynamic = world; __callArgument50; }), (cast world.contactHooks : Physics3DContactHooks).preSolve, (cast 'pre-solve' : String));
     Step.scalePhysics3DWarmStartCaches__step(({ final __callArgument51:Dynamic = world; __callArgument51; }), (cast substepDt : Float));
     updatePhysics3DSleep(({ final __callArgument52:Dynamic = world; __callArgument52; }), (cast dt : Float));
     buildPhysics3DSolveIslands(({ final __callArgument53:Dynamic = world; __callArgument53; }));
     {
       var substep:Float = 0.0;
-      while ((cast ((cast substep : Float) < (cast (cast world.config : Physics3DSolverConfig).substeps : Float)) : Bool)) {
+      while ((cast ((cast substep : Float) < (cast (cast world.config : { var substeps:Float; }).substeps : Float)) : Bool)) {
         stepPhysics3DInterval(({ final __callArgument54:Dynamic = world; __callArgument54; }), (cast substepDt : Float));
         (substep = cast ((substep + 1.0) : Dynamic));
       }

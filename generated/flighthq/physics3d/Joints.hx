@@ -264,15 +264,15 @@ class Joints {
     ((cast joint : Physics3DJoint).impulse1 = 0.0);
     ((cast joint : Physics3DJoint).impulse2 = 0.0);
     cone = (cast joint : Physics3DConeTwistJoint);
-    ((cast cone : Physics3DConeTwistJoint).swingLimitImpulse = 0.0);
-    ((cast cone : Physics3DConeTwistJoint).lowerTwistImpulse = 0.0);
-    ((cast cone : Physics3DConeTwistJoint).upperTwistImpulse = 0.0);
+    (cone.swingLimitImpulse = cast (0.0 : Float));
+    (cone.lowerTwistImpulse = cast (0.0 : Float));
+    (cone.upperTwistImpulse = cast (0.0 : Float));
   }, scaleAccumulatedImpulses: function(joint:Physics3DJoint, timestepRatio:Float):Void {
     var cone:Physics3DConeTwistJoint = cast _Runtime.UNDEFINED;
     cone = (cast joint : Physics3DConeTwistJoint);
-    ((cast cone : Physics3DConeTwistJoint).swingLimitImpulse = _Runtime.multiplyNumbers(_Runtime.coalesce((cast cone : Physics3DConeTwistJoint).swingLimitImpulse, function():Dynamic return cast 0.0), timestepRatio));
-    ((cast cone : Physics3DConeTwistJoint).lowerTwistImpulse = _Runtime.multiplyNumbers(_Runtime.coalesce((cast cone : Physics3DConeTwistJoint).lowerTwistImpulse, function():Dynamic return cast 0.0), timestepRatio));
-    ((cast cone : Physics3DConeTwistJoint).upperTwistImpulse = _Runtime.multiplyNumbers(_Runtime.coalesce((cast cone : Physics3DConeTwistJoint).upperTwistImpulse, function():Dynamic return cast 0.0), timestepRatio));
+    (cone.swingLimitImpulse = cast (_Runtime.multiplyNumbers(_Runtime.coalesce(cone.swingLimitImpulse, function():Dynamic return cast 0.0), timestepRatio) : Float));
+    (cone.lowerTwistImpulse = cast (_Runtime.multiplyNumbers(_Runtime.coalesce(cone.lowerTwistImpulse, function():Dynamic return cast 0.0), timestepRatio) : Float));
+    (cone.upperTwistImpulse = cast (_Runtime.multiplyNumbers(_Runtime.coalesce(cone.upperTwistImpulse, function():Dynamic return cast 0.0), timestepRatio) : Float));
   }, swapEnds: function(joint:Physics3DJoint):Bool {
     return cast false;
     return cast _Runtime.UNDEFINED;
@@ -314,17 +314,17 @@ class Joints {
     writePhysics3DJointRelativeRotation((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast frameARotation : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast frameARotation : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast frameARotation : Array<Float>), (cast 2.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast frameARotation : Array<Float>), (cast 3.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast frameBRotation : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast frameBRotation : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast frameBRotation : Array<Float>), (cast 2.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast frameBRotation : Array<Float>), (cast 3.0 : Float)) : Float), ({ final __callArgument160:Dynamic = Joints.relativeRotation__joints; __callArgument160; }));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_TWIST_ANGLE__joints : Float), (cast _Runtime.multiplyNumbers(2.0, HxMath.atan2(flighthq._internal._StaticIndex.readFloatArrayTyped((cast Joints.relativeRotation__joints : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast Joints.relativeRotation__joints : Array<Float>), (cast 3.0 : Float)))) : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_LIMIT_BIAS__joints : Float), (cast (1.0 / dt) : Float));
-    ({ final __nullishOwner161 = cone; final __nullishValue162:Null<Float> = cast (cast __nullishOwner161 : Physics3DConeTwistJoint).swingLimitImpulse; __nullishValue162 == null ? ((cast __nullishOwner161 : Physics3DConeTwistJoint).swingLimitImpulse = (cast 0.0 : Float)) : (cast __nullishValue162 : Float); });
-    ({ final __nullishOwner163 = cone; final __nullishValue164:Null<Float> = cast (cast __nullishOwner163 : Physics3DConeTwistJoint).lowerTwistImpulse; __nullishValue164 == null ? ((cast __nullishOwner163 : Physics3DConeTwistJoint).lowerTwistImpulse = (cast 0.0 : Float)) : (cast __nullishValue164 : Float); });
-    ({ final __nullishOwner165 = cone; final __nullishValue166:Null<Float> = cast (cast __nullishOwner165 : Physics3DConeTwistJoint).upperTwistImpulse; __nullishValue166 == null ? ((cast __nullishOwner165 : Physics3DConeTwistJoint).upperTwistImpulse = (cast 0.0 : Float)) : (cast __nullishValue166 : Float); });
-    if ((cast !(cast (cast cone : Physics3DConeTwistJoint).enableSwingLimit : Bool) : Bool)) { ((cast cone : Physics3DConeTwistJoint).swingLimitImpulse = 0.0); }
-    if ((cast !(cast (cast cone : Physics3DConeTwistJoint).enableTwistLimit : Bool) : Bool)) {
-      ((cast cone : Physics3DConeTwistJoint).lowerTwistImpulse = 0.0);
-      ((cast cone : Physics3DConeTwistJoint).upperTwistImpulse = 0.0);
+    ({ final __nullishOwner161 = cone; final __nullishValue162:Null<Float> = cast __nullishOwner161.swingLimitImpulse; __nullishValue162 == null ? (__nullishOwner161.swingLimitImpulse = (cast 0.0 : Float)) : (cast __nullishValue162 : Float); });
+    ({ final __nullishOwner163 = cone; final __nullishValue164:Null<Float> = cast __nullishOwner163.lowerTwistImpulse; __nullishValue164 == null ? (__nullishOwner163.lowerTwistImpulse = (cast 0.0 : Float)) : (cast __nullishValue164 : Float); });
+    ({ final __nullishOwner165 = cone; final __nullishValue166:Null<Float> = cast __nullishOwner165.upperTwistImpulse; __nullishValue166 == null ? (__nullishOwner165.upperTwistImpulse = (cast 0.0 : Float)) : (cast __nullishValue166 : Float); });
+    if ((cast !(cast cone.enableSwingLimit : Bool) : Bool)) { (cone.swingLimitImpulse = cast (0.0 : Float)); }
+    if ((cast !(cast cone.enableTwistLimit : Bool) : Bool)) {
+      (cone.lowerTwistImpulse = cast (0.0 : Float));
+      (cone.upperTwistImpulse = cast (0.0 : Float));
     }
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_SWING_IMPULSE__joints : Float), (cast (cast cone : Physics3DConeTwistJoint).swingLimitImpulse : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_LOWER_TWIST_IMPULSE__joints : Float), (cast (cast cone : Physics3DConeTwistJoint).lowerTwistImpulse : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_UPPER_TWIST_IMPULSE__joints : Float), (cast (cast cone : Physics3DConeTwistJoint).upperTwistImpulse : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_SWING_IMPULSE__joints : Float), (cast cone.swingLimitImpulse : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_LOWER_TWIST_IMPULSE__joints : Float), (cast cone.lowerTwistImpulse : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_UPPER_TWIST_IMPULSE__joints : Float), (cast cone.upperTwistImpulse : Float));
   }, solve: function(world:Physics3DWorld, joint:Physics3DJoint, dt:Float):Void {
     var cone:Physics3DConeTwistJoint = cast _Runtime.UNDEFINED;
     var state:Null<Array<Float>> = cast _Runtime.UNDEFINED;
@@ -336,16 +336,16 @@ class Joints {
     bodyA = (cast findPhysics3DBody(({ final __callArgument168:Dynamic = world; __callArgument168; }), (cast (cast joint : Physics3DJoint).bodyA : Float)) : Null<RigidBody3D>);
     bodyB = (cast findPhysics3DBody(({ final __callArgument169:Dynamic = world; __callArgument169; }), (cast (cast joint : Physics3DJoint).bodyB : Float)) : Null<RigidBody3D>);
     if ((cast ((cast _Runtime.strictEquals(bodyA, null) : Bool) || (cast _Runtime.strictEquals(bodyB, null) : Bool)) : Bool)) { return; }
-    if ((cast ((cast ((cast (cast cone : Physics3DConeTwistJoint).enableSwingLimit : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_SWING_ACTIVE__joints : Float)), 1.0) : Bool)) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_SWING_MASS__joints : Float)) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast cone.enableSwingLimit : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_SWING_ACTIVE__joints : Float)), 1.0) : Bool)) : Bool) && (cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_SWING_MASS__joints : Float)) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       solveUpperLimitRow(({ final __callArgument170:Dynamic = bodyA; __callArgument170; }), ({ final __callArgument171:Dynamic = bodyB; __callArgument171; }), ({ final __callArgument172:Dynamic = state; __callArgument172; }), (cast Joints.CONE_SWING_ROW__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_SWING_MASS__joints : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_SWING_ERROR__joints : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_LIMIT_BIAS__joints : Float)) : Float), (cast Joints.CONE_SWING_IMPULSE__joints : Float));
-      ((cast cone : Physics3DConeTwistJoint).swingLimitImpulse = flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_SWING_IMPULSE__joints : Float)));
+      (cone.swingLimitImpulse = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_SWING_IMPULSE__joints : Float)) : Float));
     }
-    if ((cast ((cast (cast cone : Physics3DConeTwistJoint).enableTwistLimit : Bool) && (cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_TWIST_MASS__joints : Float)) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast cone.enableTwistLimit : Bool) && (cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_TWIST_MASS__joints : Float)) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       var twist:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_TWIST_ANGLE__joints : Float));
-      solveLowerLimitRow(({ final __callArgument173:Dynamic = bodyA; __callArgument173; }), ({ final __callArgument174:Dynamic = bodyB; __callArgument174; }), ({ final __callArgument175:Dynamic = state; __callArgument175; }), (cast Joints.CONE_TWIST_ROW__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_TWIST_MASS__joints : Float)) : Float), (cast (twist - (cast cone : Physics3DConeTwistJoint).lowerTwistAngle) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_LIMIT_BIAS__joints : Float)) : Float), (cast Joints.CONE_LOWER_TWIST_IMPULSE__joints : Float));
-      solveUpperLimitRow(({ final __callArgument176:Dynamic = bodyA; __callArgument176; }), ({ final __callArgument177:Dynamic = bodyB; __callArgument177; }), ({ final __callArgument178:Dynamic = state; __callArgument178; }), (cast Joints.CONE_TWIST_ROW__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_TWIST_MASS__joints : Float)) : Float), (cast ((cast cone : Physics3DConeTwistJoint).upperTwistAngle - twist) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_LIMIT_BIAS__joints : Float)) : Float), (cast Joints.CONE_UPPER_TWIST_IMPULSE__joints : Float));
-      ((cast cone : Physics3DConeTwistJoint).lowerTwistImpulse = flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_LOWER_TWIST_IMPULSE__joints : Float)));
-      ((cast cone : Physics3DConeTwistJoint).upperTwistImpulse = flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_UPPER_TWIST_IMPULSE__joints : Float)));
+      solveLowerLimitRow(({ final __callArgument173:Dynamic = bodyA; __callArgument173; }), ({ final __callArgument174:Dynamic = bodyB; __callArgument174; }), ({ final __callArgument175:Dynamic = state; __callArgument175; }), (cast Joints.CONE_TWIST_ROW__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_TWIST_MASS__joints : Float)) : Float), (cast (twist - cone.lowerTwistAngle) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_LIMIT_BIAS__joints : Float)) : Float), (cast Joints.CONE_LOWER_TWIST_IMPULSE__joints : Float));
+      solveUpperLimitRow(({ final __callArgument176:Dynamic = bodyA; __callArgument176; }), ({ final __callArgument177:Dynamic = bodyB; __callArgument177; }), ({ final __callArgument178:Dynamic = state; __callArgument178; }), (cast Joints.CONE_TWIST_ROW__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_TWIST_MASS__joints : Float)) : Float), (cast (cone.upperTwistAngle - twist) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_LIMIT_BIAS__joints : Float)) : Float), (cast Joints.CONE_UPPER_TWIST_IMPULSE__joints : Float));
+      (cone.lowerTwistImpulse = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_LOWER_TWIST_IMPULSE__joints : Float)) : Float));
+      (cone.upperTwistImpulse = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_UPPER_TWIST_IMPULSE__joints : Float)) : Float));
     }
     solvePointBlock(({ final __callArgument179:Dynamic = bodyA; __callArgument179; }), ({ final __callArgument180:Dynamic = bodyB; __callArgument180; }), ({ final __callArgument181:Dynamic = joint; __callArgument181; }), ({ final __callArgument182:Dynamic = state; __callArgument182; }));
   }, warmStart: function(world:Physics3DWorld, joint:Physics3DJoint):Void {
@@ -360,11 +360,11 @@ class Joints {
     bodyB = (cast findPhysics3DBody(({ final __callArgument185:Dynamic = world; __callArgument185; }), (cast (cast joint : Physics3DJoint).bodyB : Float)) : Null<RigidBody3D>);
     if ((cast ((cast _Runtime.strictEquals(bodyA, null) : Bool) || (cast _Runtime.strictEquals(bodyB, null) : Bool)) : Bool)) { return; }
     warmStartPointBlock(({ final __callArgument186:Dynamic = bodyA; __callArgument186; }), ({ final __callArgument187:Dynamic = bodyB; __callArgument187; }), ({ final __callArgument188:Dynamic = joint; __callArgument188; }));
-    if ((cast ((cast (cast cone : Physics3DConeTwistJoint).enableSwingLimit : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_SWING_ACTIVE__joints : Float)), 1.0) : Bool)) : Bool)) {
-      applyRow(({ final __callArgument189:Dynamic = bodyA; __callArgument189; }), ({ final __callArgument190:Dynamic = bodyB; __callArgument190; }), ({ final __callArgument191:Dynamic = state; __callArgument191; }), (cast Joints.CONE_SWING_ROW__joints : Float), (cast -(cast cone : Physics3DConeTwistJoint).swingLimitImpulse : Float));
+    if ((cast ((cast cone.enableSwingLimit : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.CONE_SWING_ACTIVE__joints : Float)), 1.0) : Bool)) : Bool)) {
+      applyRow(({ final __callArgument189:Dynamic = bodyA; __callArgument189; }), ({ final __callArgument190:Dynamic = bodyB; __callArgument190; }), ({ final __callArgument191:Dynamic = state; __callArgument191; }), (cast Joints.CONE_SWING_ROW__joints : Float), (cast -cone.swingLimitImpulse : Float));
     }
-    if ((cast (cast cone : Physics3DConeTwistJoint).enableTwistLimit : Bool)) {
-      applyRow(({ final __callArgument192:Dynamic = bodyA; __callArgument192; }), ({ final __callArgument193:Dynamic = bodyB; __callArgument193; }), ({ final __callArgument194:Dynamic = state; __callArgument194; }), (cast Joints.CONE_TWIST_ROW__joints : Float), (cast ((cast cone : Physics3DConeTwistJoint).lowerTwistImpulse - (cast cone : Physics3DConeTwistJoint).upperTwistImpulse) : Float));
+    if ((cast cone.enableTwistLimit : Bool)) {
+      applyRow(({ final __callArgument192:Dynamic = bodyA; __callArgument192; }), ({ final __callArgument193:Dynamic = bodyB; __callArgument193; }), ({ final __callArgument194:Dynamic = state; __callArgument194; }), (cast Joints.CONE_TWIST_ROW__joints : Float), (cast (cone.lowerTwistImpulse - cone.upperTwistImpulse) : Float));
     }
   } });
 
@@ -374,8 +374,8 @@ class Joints {
     {
       var axis:Float = 0.0;
       while ((cast ((cast axis : Float) < (cast 6.0 : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast dof : Physics3DGeneric6DofJoint).lowerLimitImpulses : Array<Float>), (cast axis : Float), (cast 0.0 : Float));
-        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast dof : Physics3DGeneric6DofJoint).upperLimitImpulses : Array<Float>), (cast axis : Float), (cast 0.0 : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast dof.lowerLimitImpulses : Array<Float>), (cast axis : Float), (cast 0.0 : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast dof.upperLimitImpulses : Array<Float>), (cast axis : Float), (cast 0.0 : Float));
         (axis = cast ((axis + 1.0) : Dynamic));
       }
     }
@@ -391,8 +391,8 @@ class Joints {
     {
       var axis:Float = 0.0;
       while ((cast ((cast axis : Float) < (cast 6.0 : Float)) : Bool)) {
-        ({ var __indexedObject195:Array<Float> = (cast dof : Physics3DGeneric6DofJoint).lowerLimitImpulses; var __indexedKey196:Float = axis; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject195 : Array<Float>), (cast __indexedKey196 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject195 : Array<Float>), (cast __indexedKey196 : Float)) * timestepRatio) : Float)); });
-        ({ var __indexedObject197:Array<Float> = (cast dof : Physics3DGeneric6DofJoint).upperLimitImpulses; var __indexedKey198:Float = axis; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject197 : Array<Float>), (cast __indexedKey198 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject197 : Array<Float>), (cast __indexedKey198 : Float)) * timestepRatio) : Float)); });
+        ({ var __indexedObject195:Array<Float> = dof.lowerLimitImpulses; var __indexedKey196:Float = axis; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject195 : Array<Float>), (cast __indexedKey196 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject195 : Array<Float>), (cast __indexedKey196 : Float)) * timestepRatio) : Float)); });
+        ({ var __indexedObject197:Array<Float> = dof.upperLimitImpulses; var __indexedKey198:Float = axis; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject197 : Array<Float>), (cast __indexedKey198 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject197 : Array<Float>), (cast __indexedKey198 : Float)) * timestepRatio) : Float)); });
         (axis = cast ((axis + 1.0) : Dynamic));
       }
     }
@@ -427,11 +427,11 @@ class Joints {
         var upper:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast Joints.dofUpper__joints : Array<Float>), (cast axis : Float));
         flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast (Joints.DOF_MODE__joints + axis) : Float), (cast ((cast ((cast lower : Float) > (cast upper : Float)) : Bool) ? (cast Joints.DOF_FREE__joints : Dynamic) : (cast ((cast _Runtime.strictEquals(lower, upper) : Bool) ? (cast Joints.DOF_LOCKED__joints : Dynamic) : (cast Joints.DOF_LIMITED__joints : Dynamic)) : Dynamic)) : Float));
         if ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast (Joints.DOF_MODE__joints + axis) : Float)), Joints.DOF_LIMITED__joints) : Bool)) {
-          flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast dof : Physics3DGeneric6DofJoint).lowerLimitImpulses : Array<Float>), (cast axis : Float), (cast 0.0 : Float));
-          flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast dof : Physics3DGeneric6DofJoint).upperLimitImpulses : Array<Float>), (cast axis : Float), (cast 0.0 : Float));
+          flighthq._internal._StaticIndex.writeFloatArrayTyped((cast dof.lowerLimitImpulses : Array<Float>), (cast axis : Float), (cast 0.0 : Float));
+          flighthq._internal._StaticIndex.writeFloatArrayTyped((cast dof.upperLimitImpulses : Array<Float>), (cast axis : Float), (cast 0.0 : Float));
         }
-        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast (Joints.DOF_LOWER_IMPULSE__joints + axis) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast dof : Physics3DGeneric6DofJoint).lowerLimitImpulses : Array<Float>), (cast axis : Float)) : Float));
-        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast (Joints.DOF_UPPER_IMPULSE__joints + axis) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast dof : Physics3DGeneric6DofJoint).upperLimitImpulses : Array<Float>), (cast axis : Float)) : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast (Joints.DOF_LOWER_IMPULSE__joints + axis) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dof.lowerLimitImpulses : Array<Float>), (cast axis : Float)) : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast (Joints.DOF_UPPER_IMPULSE__joints + axis) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dof.upperLimitImpulses : Array<Float>), (cast axis : Float)) : Float));
         if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast (Joints.DOF_MODE__joints + axis) : Float)), Joints.DOF_FREE__joints) : Bool)) { (axis = cast ((axis + 1.0) : Dynamic)); continue; }
         if ((cast ((cast axis : Float) < (cast 3.0 : Float)) : Bool)) {
           Joints.writeLinearAxisRow__joints(({ final __callArgument218:Dynamic = state; __callArgument218; }), (cast rowOffset : Float), ({ final __callArgument219:Dynamic = joint; __callArgument219; }), (cast basisOffset : Float));
@@ -472,8 +472,8 @@ class Joints {
         }
         solveLowerLimitRow(({ final __callArgument236:Dynamic = bodyA; __callArgument236; }), ({ final __callArgument237:Dynamic = bodyB; __callArgument237; }), ({ final __callArgument238:Dynamic = state; __callArgument238; }), (cast rowOffset : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast (Joints.DOF_MASS__joints + axis) : Float)) : Float), (cast (value - flighthq._internal._StaticIndex.readFloatArrayTyped((cast Joints.dofLower__joints : Array<Float>), (cast axis : Float))) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.DOF_LIMIT_BIAS__joints : Float)) : Float), (cast (Joints.DOF_LOWER_IMPULSE__joints + axis) : Float));
         solveUpperLimitRow(({ final __callArgument239:Dynamic = bodyA; __callArgument239; }), ({ final __callArgument240:Dynamic = bodyB; __callArgument240; }), ({ final __callArgument241:Dynamic = state; __callArgument241; }), (cast rowOffset : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast (Joints.DOF_MASS__joints + axis) : Float)) : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast Joints.dofUpper__joints : Array<Float>), (cast axis : Float)) - value) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.DOF_LIMIT_BIAS__joints : Float)) : Float), (cast (Joints.DOF_UPPER_IMPULSE__joints + axis) : Float));
-        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast dof : Physics3DGeneric6DofJoint).lowerLimitImpulses : Array<Float>), (cast axis : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast (Joints.DOF_LOWER_IMPULSE__joints + axis) : Float)) : Float));
-        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast dof : Physics3DGeneric6DofJoint).upperLimitImpulses : Array<Float>), (cast axis : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast (Joints.DOF_UPPER_IMPULSE__joints + axis) : Float)) : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast dof.lowerLimitImpulses : Array<Float>), (cast axis : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast (Joints.DOF_LOWER_IMPULSE__joints + axis) : Float)) : Float));
+        flighthq._internal._StaticIndex.writeFloatArrayTyped((cast dof.upperLimitImpulses : Array<Float>), (cast axis : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast (Joints.DOF_UPPER_IMPULSE__joints + axis) : Float)) : Float));
         (axis = cast ((axis + 1.0) : Dynamic));
       }
     }
@@ -496,7 +496,7 @@ class Joints {
         if ((cast _Runtime.strictEquals(mode, Joints.DOF_LOCKED__joints) : Bool)) {
           applyRow(({ final __callArgument245:Dynamic = bodyA; __callArgument245; }), ({ final __callArgument246:Dynamic = bodyB; __callArgument246; }), ({ final __callArgument247:Dynamic = state; __callArgument247; }), (cast rowOffset : Float), (cast (cast readJointImpulse(({ final __callArgument248:Dynamic = joint; __callArgument248; }), (cast axis : Float)) : Float) : Float));
         } else { if ((cast _Runtime.strictEquals(mode, Joints.DOF_LIMITED__joints) : Bool)) {
-          applyRow(({ final __callArgument249:Dynamic = bodyA; __callArgument249; }), ({ final __callArgument250:Dynamic = bodyB; __callArgument250; }), ({ final __callArgument251:Dynamic = state; __callArgument251; }), (cast rowOffset : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast dof : Physics3DGeneric6DofJoint).lowerLimitImpulses : Array<Float>), (cast axis : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast dof : Physics3DGeneric6DofJoint).upperLimitImpulses : Array<Float>), (cast axis : Float))) : Float));
+          applyRow(({ final __callArgument249:Dynamic = bodyA; __callArgument249; }), ({ final __callArgument250:Dynamic = bodyB; __callArgument250; }), ({ final __callArgument251:Dynamic = state; __callArgument251; }), (cast rowOffset : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast dof.lowerLimitImpulses : Array<Float>), (cast axis : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast dof.upperLimitImpulses : Array<Float>), (cast axis : Float))) : Float));
         } }
         (axis = cast ((axis + 1.0) : Dynamic));
       }
@@ -691,30 +691,30 @@ class Joints {
     var tilt:Float = cast _Runtime.UNDEFINED;
     var unitY:Float = cast _Runtime.UNDEFINED;
     var unitZ:Float = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast _Runtime.field(cone, 'swingLimitY') : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast _Runtime.field(cone, 'swingLimitZ') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast HxMath.min(_Runtime.field(cone, 'swingLimitY'), _Runtime.field(cone, 'swingLimitZ')); }
+    if ((cast ((cast ((cast cone.swingLimitY : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast cone.swingLimitZ : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast HxMath.min(cone.swingLimitY, cone.swingLimitZ); }
     towardY = (cast Joints.dot__joints(({ final __callArgument344:Dynamic = frameBBasis; __callArgument344; }), (cast 0.0 : Float), ({ final __callArgument345:Dynamic = frameABasis; __callArgument345; }), (cast 3.0 : Float)) : Float);
     towardZ = (cast Joints.dot__joints(({ final __callArgument346:Dynamic = frameBBasis; __callArgument346; }), (cast 0.0 : Float), ({ final __callArgument347:Dynamic = frameABasis; __callArgument347; }), (cast 6.0 : Float)) : Float);
     tilt = HxMath.sqrt(((towardY * towardY) + (towardZ * towardZ)));
-    if ((cast ((cast tilt : Float) <= (cast Joints.AXIS_EPSILON__joints : Float)) : Bool)) { return cast HxMath.min(_Runtime.field(cone, 'swingLimitY'), _Runtime.field(cone, 'swingLimitZ')); }
-    unitY = _Runtime.divideNumbers((towardY / tilt), _Runtime.field(cone, 'swingLimitY'));
-    unitZ = _Runtime.divideNumbers((towardZ / tilt), _Runtime.field(cone, 'swingLimitZ'));
+    if ((cast ((cast tilt : Float) <= (cast Joints.AXIS_EPSILON__joints : Float)) : Bool)) { return cast HxMath.min(cone.swingLimitY, cone.swingLimitZ); }
+    unitY = ((towardY / tilt) / cone.swingLimitY);
+    unitZ = ((towardZ / tilt) / cone.swingLimitZ);
     return cast _Runtime.divideNumbers(1.0, HxMath.sqrt(((unitY * unitY) + (unitZ * unitZ))));
     return cast null;
   }
 
   public static function readDofBounds__joints(dof:Physics3DGeneric6DofJoint):Void {
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofLower__joints : Array<Float>), (cast 0.0 : Float), (cast _Runtime.field(dof, 'lowerLinearX') : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofLower__joints : Array<Float>), (cast 1.0 : Float), (cast _Runtime.field(dof, 'lowerLinearY') : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofLower__joints : Array<Float>), (cast 2.0 : Float), (cast _Runtime.field(dof, 'lowerLinearZ') : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofLower__joints : Array<Float>), (cast 3.0 : Float), (cast _Runtime.field(dof, 'lowerAngularX') : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofLower__joints : Array<Float>), (cast 4.0 : Float), (cast _Runtime.field(dof, 'lowerAngularY') : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofLower__joints : Array<Float>), (cast 5.0 : Float), (cast _Runtime.field(dof, 'lowerAngularZ') : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofUpper__joints : Array<Float>), (cast 0.0 : Float), (cast _Runtime.field(dof, 'upperLinearX') : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofUpper__joints : Array<Float>), (cast 1.0 : Float), (cast _Runtime.field(dof, 'upperLinearY') : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofUpper__joints : Array<Float>), (cast 2.0 : Float), (cast _Runtime.field(dof, 'upperLinearZ') : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofUpper__joints : Array<Float>), (cast 3.0 : Float), (cast _Runtime.field(dof, 'upperAngularX') : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofUpper__joints : Array<Float>), (cast 4.0 : Float), (cast _Runtime.field(dof, 'upperAngularY') : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofUpper__joints : Array<Float>), (cast 5.0 : Float), (cast _Runtime.field(dof, 'upperAngularZ') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofLower__joints : Array<Float>), (cast 0.0 : Float), (cast dof.lowerLinearX : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofLower__joints : Array<Float>), (cast 1.0 : Float), (cast dof.lowerLinearY : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofLower__joints : Array<Float>), (cast 2.0 : Float), (cast dof.lowerLinearZ : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofLower__joints : Array<Float>), (cast 3.0 : Float), (cast dof.lowerAngularX : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofLower__joints : Array<Float>), (cast 4.0 : Float), (cast dof.lowerAngularY : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofLower__joints : Array<Float>), (cast 5.0 : Float), (cast dof.lowerAngularZ : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofUpper__joints : Array<Float>), (cast 0.0 : Float), (cast dof.upperLinearX : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofUpper__joints : Array<Float>), (cast 1.0 : Float), (cast dof.upperLinearY : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofUpper__joints : Array<Float>), (cast 2.0 : Float), (cast dof.upperLinearZ : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofUpper__joints : Array<Float>), (cast 3.0 : Float), (cast dof.upperAngularX : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofUpper__joints : Array<Float>), (cast 4.0 : Float), (cast dof.upperAngularY : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Joints.dofUpper__joints : Array<Float>), (cast 5.0 : Float), (cast dof.upperAngularZ : Float));
   }
 
   public static function writeLinearAxisRow__joints(state:Array<Float>, offset:Float, joint:Physics3DJoint, basisOffset:Float):Void {

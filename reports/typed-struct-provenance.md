@@ -403,8 +403,8 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Physics2DWorld` | 217 | 29 | 0 | 9 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics3DCollisionFilter` | 0 | 3 | 1 | 0 | 0 | 0 | 2 | 2 | yes | — |
 | `@flighthq/types:interface#Physics3DContact` | 83 | 12 | 3 | 1 | 0 | 0 | 2 | 2 | yes | — |
-| `@flighthq/types:interface#Physics3DContactConstraint` | 0 | 9 | 2 | 1 | 0 | 1 | 1 | 2 | no | `container-transfer` |
-| `@flighthq/types:interface#Physics3DContactConstraintPoint` | 0 | 8 | 1 | 0 | 0 | 0 | 1 | 3 | yes | — |
+| `@flighthq/types:interface#Physics3DContactConstraint` | 47 | 9 | 2 | 1 | 0 | 1 | 1 | 2 | no | `container-transfer` |
+| `@flighthq/types:interface#Physics3DContactConstraintPoint` | 39 | 8 | 1 | 0 | 0 | 0 | 1 | 3 | yes | — |
 | `@flighthq/types:interface#Physics3DContactEvents` | 0 | 2 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics3DContactHooks` | 0 | 2 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics3DJointExplanation` | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
@@ -412,7 +412,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Physics3DMaterial` | 0 | 3 | 1 | 0 | 0 | 0 | 2 | 2 | yes | — |
 | `@flighthq/types:interface#Physics3DSequentialImpulseConfig` | 0 | 6 | 1 | 0 | 0 | 0 | 2 | 3 | yes | — |
 | `@flighthq/types:interface#Physics3DSequentialImpulseState` | 0 | 2 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#Physics3DSolverConfig` | 0 | 8 | 1 | 1 | 0 | 0 | 2 | 2 | yes | — |
+| `@flighthq/types:interface#Physics3DSolverConfig` | 25 | 8 | 1 | 1 | 0 | 0 | 2 | 2 | yes | — |
 | `@flighthq/types:interface#Physics3DStepExplanation` | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#PixiParseResult` | 2 | 2 | 0 | 2 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#PlatformBackend` | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |

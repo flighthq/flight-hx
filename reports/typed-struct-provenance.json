@@ -38846,7 +38846,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 47,
       "fields": 9,
       "id": "@flighthq/types:interface#Physics3DContactConstraint",
       "name": "Physics3DContactConstraint",
@@ -38915,7 +38915,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 39,
       "fields": 8,
       "id": "@flighthq/types:interface#Physics3DContactConstraintPoint",
       "name": "Physics3DContactConstraintPoint",
@@ -39314,7 +39314,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 25,
       "fields": 8,
       "id": "@flighthq/types:interface#Physics3DSolverConfig",
       "name": "Physics3DSolverConfig",

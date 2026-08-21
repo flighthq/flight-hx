@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2118 |
 | Eligible | 1611 |
 | Ineligible | 507 |
-| Audit-only schemas | 1358 |
-| Direct schemas | 758 |
+| Audit-only schemas | 1353 |
+| Direct schemas | 763 |
 | Declared fields | 25393 |
 | Bindable accesses | 33306 |
-| Pending accesses | 7788 |
-| Directly emitted accesses | 25518 |
+| Pending accesses | 7613 |
+| Directly emitted accesses | 25693 |
 | Reflective survivors | 451 |
 | Dynamic escapes | 11129 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1358 |
+| Newly discovered, audit-only | 1353 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -1221,18 +1221,18 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#Physics3DBallAndSocketJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics3DBodyType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Physics3DCollisionFilter` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DConeTwistJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 39 | 25 | 15 | 0 | 40 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DConeTwistJoint` | `direct` | `new` | — | reviewed escape-free Physics3D cone-twist joint | 39 | 25 | 15 | 0 | 0 | 40 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DConeTwistJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 23 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DContact` | `direct` | `new` | — | reviewed escape-free Physics3D contact | 12 | 79 | 4 | 0 | 0 | 83 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics3DContactCallback` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#Physics3DContactConstraint` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 39 | 8 | 0 | 47 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DContactConstraintPoint` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 25 | 14 | 0 | 39 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DContactConstraint` | `direct` | `new` | — | reviewed escape-free Physics3D contact constraint | 9 | 39 | 8 | 0 | 0 | 47 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DContactConstraintPoint` | `direct` | `new` | — | reviewed escape-free Physics3D contact-constraint point | 8 | 25 | 14 | 0 | 0 | 39 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DContactEvents` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DContactHooks` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DContactPoint` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 69 | 0 | 0 | 69 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#Physics3DFixedJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 30 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#Physics3DFixedJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DGeneric6DofJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 44 | 24 | 0 | 0 | 24 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DGeneric6DofJoint` | `direct` | `new` | — | reviewed escape-free Physics3D generic six-DOF joint | 44 | 24 | 0 | 0 | 0 | 24 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DGeneric6DofJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 29 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DHingeJoint` | `direct` | `new` | — | reviewed escape-free Physics3D hinge joint | 39 | 26 | 22 | 0 | 0 | 48 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DHingeJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 23 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
@@ -1249,7 +1249,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Physics3DSequentialImpulseState` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 2 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DSliderJoint` | `direct` | `new` | — | reviewed escape-free Physics3D slider joint | 39 | 26 | 22 | 0 | 0 | 48 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DSliderJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 23 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DSolverConfig` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 25 | 0 | 0 | 25 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DSolverConfig` | `direct` | `new` | — | reviewed escape-free Physics3D solver config | 8 | 25 | 0 | 0 | 0 | 25 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DStepExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 2 | 0 | 0 | 2 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#Physics3DStepGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#Physics3DWorld` | `direct` | `new` | — | reviewed escape-free Physics3D world | 30 | 146 | 2 | 0 | 0 | 148 | 0 | 0 | yes | — |
