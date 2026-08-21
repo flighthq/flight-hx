@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_276,
+      newAuditOnly: 1_271,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(730);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(735);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_276);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_271);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(328);
+    expect(newDirect).toHaveLength(333);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1750,6 +1750,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'WireframeMaterial',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free wireframe material',
+        }),
+        expect.objectContaining({
+          name: 'FlowStack',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free flow stack',
+        }),
+        expect.objectContaining({
+          name: 'FlowState',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free flow state',
+        }),
+        expect.objectContaining({
+          name: 'TimelineAudioCue',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free timeline audio cue',
+        }),
+        expect.objectContaining({
+          name: 'TimelineLabel',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free timeline label',
+        }),
+        expect.objectContaining({
+          name: 'TimelineSignals',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free timeline signals',
         }),
       ]),
     );
@@ -3394,6 +3419,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#WireframeMaterial',
         purpose: 'reviewed escape-free wireframe material',
       },
+      {
+        declarationFingerprint: 'sha256:3e145f4a7645c5e37bb6f4d5be12c006ea332396a6f233562d12006faa6dd9e0',
+        id: '@flighthq/types:interface#FlowStack',
+        purpose: 'reviewed escape-free flow stack',
+      },
+      {
+        declarationFingerprint: 'sha256:1dcf59ee7b59c493adf889564e539b8495ed2a5e9f0b6145954c455cb28fe588',
+        id: '@flighthq/types:interface#FlowState',
+        purpose: 'reviewed escape-free flow state',
+      },
+      {
+        declarationFingerprint: 'sha256:377abc726388df0405759cb105b7d9a4595770d0c3b4ce711608981605770862',
+        id: '@flighthq/types:interface#TimelineAudioCue',
+        purpose: 'reviewed escape-free timeline audio cue',
+      },
+      {
+        declarationFingerprint: 'sha256:f1bcd87631389ed349560d3d4adc78ee8835215d5e36b96236cc9169f128a773',
+        id: '@flighthq/types:interface#TimelineLabel',
+        purpose: 'reviewed escape-free timeline label',
+      },
+      {
+        declarationFingerprint: 'sha256:c87cb1c6c826c9d4a5ac66245abd3b19328174cc315ae7f9153271c2700ce41c',
+        id: '@flighthq/types:interface#TimelineSignals',
+        purpose: 'reviewed escape-free timeline signals',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -4441,6 +4491,13 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const thirtyNinthHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          ['FlowStack', 'FlowState', 'TimelineAudioCue', 'TimelineLabel', 'TimelineSignals'].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -4481,22 +4538,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_276,
+      auditOnlySchemas: 1_271,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 24_496,
-      directSchemas: 728,
+      directAccesses: 24_539,
+      directSchemas: 733,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 6_170,
+      pendingAccesses: 6_127,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_276,
+      newAuditOnly: 1_271,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -4573,7 +4630,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(24_496);
+    expect(report.summary.directAccesses).toBe(24_539);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -6425,6 +6482,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(thirtyEighthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'FlowStack',
+        8,
+        'sha256:3e145f4a7645c5e37bb6f4d5be12c006ea332396a6f233562d12006faa6dd9e0',
+        'reviewed escape-free flow stack',
+      ],
+      [
+        'FlowState',
+        11,
+        'sha256:1dcf59ee7b59c493adf889564e539b8495ed2a5e9f0b6145954c455cb28fe588',
+        'reviewed escape-free flow state',
+      ],
+      [
+        'TimelineAudioCue',
+        7,
+        'sha256:377abc726388df0405759cb105b7d9a4595770d0c3b4ce711608981605770862',
+        'reviewed escape-free timeline audio cue',
+      ],
+      [
+        'TimelineLabel',
+        10,
+        'sha256:f1bcd87631389ed349560d3d4adc78ee8835215d5e36b96236cc9169f128a773',
+        'reviewed escape-free timeline label',
+      ],
+      [
+        'TimelineSignals',
+        7,
+        'sha256:c87cb1c6c826c9d4a5ac66245abd3b19328174cc315ae7f9153271c2700ce41c',
+        'reviewed escape-free timeline signals',
+      ],
+    ] as const) {
+      expect(thirtyNinthHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -8590,6 +8689,21 @@ describe('typed struct analysis', () => {
       });
       expect(provenanceById.has(frontierId)).toBe(false);
     }
+    for (const [frontierId, nominalIdentity] of [
+      ['@flighthq/types:interface#FlowStack', { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#FlowState', null],
+      ['@flighthq/types:interface#TimelineAudioCue', { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#TimelineLabel', { blockerReasons: ['normalization-provenance'], closed: false }],
+      ['@flighthq/types:interface#TimelineSignals', { blockerReasons: ['normalization-provenance'], closed: false }],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible: true,
+        normalizationReasons: [],
+        observabilityReasons: [],
+      });
+      if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
+      else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+    }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
@@ -10053,6 +10167,15 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AnisotropyPbrExtension|DepthMaterial|NormalMaterial|VertexColorMaterial|WireframeMaterial)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/flow/Flow.hx',
+      'generated/flighthq/swf/SwfDocument.hx',
+      'generated/flighthq/timeline/Timeline.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:FlowStack|FlowState|TimelineAudioCue|TimelineLabel|TimelineSignals)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');

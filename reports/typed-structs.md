@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1276 |
-| Direct schemas | 728 |
+| Audit-only schemas | 1271 |
+| Direct schemas | 733 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 6170 |
-| Directly emitted accesses | 24496 |
+| Pending accesses | 6127 |
+| Directly emitted accesses | 24539 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1276 |
+| Newly discovered, audit-only | 1271 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -533,8 +533,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#FlexLayoutItemStyle` | `direct` | `new` | — | reviewed escape-free flex item style | 4 | 8 | 5 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:type#FlexLayoutJustify` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#FlexLayoutWrap` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#FlowStack` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#FlowState` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 2 | 0 | 9 | 11 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#FlowStack` | `direct` | `new` | — | reviewed escape-free flow stack | 1 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#FlowState` | `direct` | `new` | — | reviewed escape-free flow state | 8 | 2 | 0 | 9 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#FlyCameraController` | `direct` | `new` | — | reviewed escape-free fly camera controller | 8 | 42 | 22 | 0 | 0 | 64 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#FlyCameraControllerOptions` | `direct` | `new` | — | reviewed escape-free fly-camera controller options | 6 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:type#FocusDirection` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1841,7 +1841,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#TilemapSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TiltShiftEffect` | `direct` | `new` | — | reviewed escape-free tilt-shift effect | 4 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Timeline` | `direct` | `new` | — | reviewed escape-free timeline state | 10 | 36 | 19 | 0 | 0 | 55 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TimelineAudioCue` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 4 | 3 | 0 | 7 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TimelineAudioCue` | `direct` | `new` | — | reviewed escape-free timeline audio cue | 10 | 4 | 3 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TimelineAudioEnvelopePoint` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TimelineCue` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#TimelineCueHandler` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
@@ -1850,10 +1850,10 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#TimelineFrameEntryCause` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#TimelineFrameEvent` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TimelineGotoCue` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TimelineLabel` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TimelineLabel` | `direct` | `new` | — | reviewed escape-free timeline label | 2 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TimelinePlaybackCue` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#TimelinePlayMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#TimelineSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TimelineSignals` | `direct` | `new` | — | reviewed escape-free timeline signals | 5 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TimelineSource` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 4 | 0 | 0 | 4 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#TimelineStreamAudioCue` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TintAdjustment` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |

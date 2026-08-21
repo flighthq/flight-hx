@@ -200,7 +200,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#FileSystemBackend` | 0 | 28 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#FileSystemUsage` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#FileWatchEvent` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#FlowStack` | 0 | 1 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#FlowStack` | 8 | 1 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#FocusEventData` | 0 | 3 | 0 | 6 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#FocusManager` | 10 | 3 | 0 | 4 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#FontResource` | 9 | 2 | 1 | 0 | 0 | 0 | 3 | 3 | yes | — |
@@ -646,15 +646,15 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#TiledTilesetTileFrame` | 2 | 2 | 1 | 0 | 0 | 2 | 1 | 3 | no | `container-transfer` |
 | `@flighthq/types:interface#TilemapData` | 70 | 7 | 1 | 1 | 1 | 2 | 2 | 2 | no | `container-transfer`, `normalization-provenance` |
 | `@flighthq/types:interface#TilemapSignals` | 0 | 3 | 0 | 3 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#TimelineAudioCue` | 0 | 10 | 0 | 2 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TimelineAudioCue` | 7 | 10 | 0 | 2 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TimelineAudioEnvelopePoint` | 0 | 3 | 1 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TimelineCueHandlerEntry` | 0 | 3 | 1 | 0 | 1 | 0 | 3 | 3 | no | `normalization-provenance` |
 | `@flighthq/types:interface#TimelineCueRegistry` | 0 | 1 | 1 | 1 | 1 | 0 | 3 | 3 | no | `normalization-provenance` |
 | `@flighthq/types:interface#TimelineFrameEvent` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TimelineGotoCue` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TimelineLabel` | 0 | 2 | 1 | 0 | 1 | 0 | 4 | 5 | no | `normalization-provenance` |
+| `@flighthq/types:interface#TimelineLabel` | 10 | 2 | 1 | 0 | 1 | 0 | 4 | 5 | no | `normalization-provenance` |
 | `@flighthq/types:interface#TimelinePlaybackCue` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TimelineSignals` | 0 | 5 | 2 | 5 | 2 | 0 | 3 | 5 | no | `normalization-provenance` |
+| `@flighthq/types:interface#TimelineSignals` | 7 | 5 | 2 | 5 | 2 | 0 | 3 | 5 | no | `normalization-provenance` |
 | `@flighthq/types:interface#TimelineSource` | 0 | 5 | 1 | 2 | 1 | 0 | 4 | 4 | no | `normalization-provenance` |
 | `@flighthq/types:interface#TimelineStreamAudioCue` | 0 | 4 | 0 | 1 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TintAdjustment` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |

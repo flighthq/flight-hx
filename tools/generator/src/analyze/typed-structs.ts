@@ -1668,6 +1668,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#WireframeMaterial',
     purpose: 'reviewed escape-free wireframe material',
   },
+  {
+    declarationFingerprint: 'sha256:3e145f4a7645c5e37bb6f4d5be12c006ea332396a6f233562d12006faa6dd9e0',
+    id: '@flighthq/types:interface#FlowStack',
+    purpose: 'reviewed escape-free flow stack',
+  },
+  {
+    declarationFingerprint: 'sha256:1dcf59ee7b59c493adf889564e539b8495ed2a5e9f0b6145954c455cb28fe588',
+    id: '@flighthq/types:interface#FlowState',
+    purpose: 'reviewed escape-free flow state',
+  },
+  {
+    declarationFingerprint: 'sha256:377abc726388df0405759cb105b7d9a4595770d0c3b4ce711608981605770862',
+    id: '@flighthq/types:interface#TimelineAudioCue',
+    purpose: 'reviewed escape-free timeline audio cue',
+  },
+  {
+    declarationFingerprint: 'sha256:f1bcd87631389ed349560d3d4adc78ee8835215d5e36b96236cc9169f128a773',
+    id: '@flighthq/types:interface#TimelineLabel',
+    purpose: 'reviewed escape-free timeline label',
+  },
+  {
+    declarationFingerprint: 'sha256:c87cb1c6c826c9d4a5ac66245abd3b19328174cc315ae7f9153271c2700ce41c',
+    id: '@flighthq/types:interface#TimelineSignals',
+    purpose: 'reviewed escape-free timeline signals',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

@@ -111877,9 +111877,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 8,
+        "directAccesses": 8,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -111901,7 +111901,7 @@
       },
       "name": "FlowStack",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free flow stack",
       "reasons": [],
       "source": "upstream/packages/types/src/Flow.ts",
       "sourceProvenance": {
@@ -111923,9 +111923,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 11,
+        "directAccesses": 11,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -112003,7 +112003,7 @@
       },
       "name": "FlowState",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free flow state",
       "reasons": [],
       "source": "upstream/packages/types/src/Flow.ts",
       "sourceProvenance": {
@@ -374727,9 +374727,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 7,
+        "directAccesses": 7,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -374823,7 +374823,7 @@
       },
       "name": "TimelineAudioCue",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free timeline audio cue",
       "reasons": [],
       "source": "upstream/packages/types/src/TimelineCue.ts",
       "sourceProvenance": {
@@ -375917,9 +375917,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 10,
+        "directAccesses": 10,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -375949,7 +375949,7 @@
       },
       "name": "TimelineLabel",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free timeline label",
       "reasons": [],
       "source": "upstream/packages/types/src/TimelineLabel.ts",
       "sourceProvenance": {
@@ -376704,9 +376704,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 7,
+        "directAccesses": 7,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -376760,7 +376760,7 @@
       },
       "name": "TimelineSignals",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free timeline signals",
       "reasons": [],
       "source": "upstream/packages/types/src/TimelineSignals.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1276,
+      "newAuditOnly": 1271,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1276,
+    "auditOnlySchemas": 1271,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 24496,
-    "directSchemas": 728,
+    "directAccesses": 24539,
+    "directSchemas": 733,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 6170,
+    "pendingAccesses": 6127,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

@@ -1247,7 +1247,7 @@ class SwfDocument {
     if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast null; }
     if ((cast _Runtime.strictEquals(_Runtime.field(frames, 'length'), 0.0) : Bool)) { _Runtime.callProperty(frames, 'push', cast ([placements] : Array<Dynamic>)); }
     SwfDocument.appendSwfStreamSoundCue__swfDocument((cast state : Dynamic), ({ final __callArgument170:Dynamic = cues; __callArgument170; }), ({ final __callArgument171:Dynamic = streamChunks; __callArgument171; }), (cast streamStartFrame : Float));
-    return cast { actions: actions, cues: (cast _Runtime.filterArray((cast cues : Array<TimelineCue>), function(cue:TimelineCue, __unused15:Float, __unused16:Array<TimelineCue>):Bool return ((cast (cast cue : TimelineCue).frame : Float) <= (cast _Runtime.field(frames, 'length') : Float)), _Runtime.UNDEFINED)), frames: frames, labels: _Runtime.callProperty((cast _Runtime.filterArray((cast labels : Array<TimelineLabel>), function(label:TimelineLabel, __unused17:Float, __unused18:Array<TimelineLabel>):Bool return ((cast (cast label : TimelineLabel).frame : Float) <= (cast _Runtime.field(frames, 'length') : Float)), _Runtime.UNDEFINED)), 'sort', cast ([SwfDocument.compareSwfTimelineLabelFrame__swfDocument] : Array<Dynamic>)) };
+    return cast { actions: actions, cues: (cast _Runtime.filterArray((cast cues : Array<TimelineCue>), function(cue:TimelineCue, __unused15:Float, __unused16:Array<TimelineCue>):Bool return ((cast (cast cue : TimelineCue).frame : Float) <= (cast _Runtime.field(frames, 'length') : Float)), _Runtime.UNDEFINED)), frames: frames, labels: _Runtime.callProperty((cast _Runtime.filterArray((cast labels : Array<TimelineLabel>), function(label:TimelineLabel, __unused17:Float, __unused18:Array<TimelineLabel>):Bool return ((cast label.frame : Float) <= (cast _Runtime.field(frames, 'length') : Float)), _Runtime.UNDEFINED)), 'sort', cast ([SwfDocument.compareSwfTimelineLabelFrame__swfDocument] : Array<Dynamic>)) };
     return cast null;
   }
 
@@ -1370,12 +1370,12 @@ class SwfDocument {
   }
 
   public static function addSwfTimelineLabel__swfDocument(labels:Array<TimelineLabel>, frame:Float, name:String):Void {
-    if ((cast ((cast !_Runtime.truthy(name) : Bool) || (cast _Runtime.callProperty(labels, 'some', cast ([function(label:TimelineLabel, __unused20:Float, __unused21:Array<TimelineLabel>):Bool return ((cast _Runtime.strictEquals((cast label : TimelineLabel).frame, frame) : Bool) && (cast _Runtime.strictEquals((cast label : TimelineLabel).name, name) : Bool))] : Array<Dynamic>)) : Bool)) : Bool)) { return; }
+    if ((cast ((cast !_Runtime.truthy(name) : Bool) || (cast _Runtime.callProperty(labels, 'some', cast ([function(label:TimelineLabel, __unused20:Float, __unused21:Array<TimelineLabel>):Bool return ((cast _Runtime.strictEquals(label.frame, frame) : Bool) && (cast _Runtime.strictEquals(label.name, name) : Bool))] : Array<Dynamic>)) : Bool)) : Bool)) { return; }
     _Runtime.callProperty(labels, 'push', cast ([{ frame: frame, name: name }] : Array<Dynamic>));
   }
 
   public static function compareSwfTimelineLabelFrame__swfDocument(a:TimelineLabel, b:TimelineLabel):Float {
-    return cast _Runtime.subtractNumbers(_Runtime.field(a, 'frame'), _Runtime.field(b, 'frame'));
+    return cast (a.frame - b.frame);
     return cast null;
   }
 
@@ -1745,7 +1745,7 @@ class SwfDocument {
       var characterId:Null<Float> = ((cast characterIds : flighthq._internal._Map<String, Float>).get((cast pending : { var className:String; var cue:TimelineAudioCue; }).className));
       if ((cast _Runtime.strictEquals(characterId, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
       var existing:Null<AudioResource> = ((cast (cast state : SwfParseState__swfDocument).soundResources : flighthq._internal._Map<Float, AudioResource>).get(characterId));
-      if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast (cast state : SwfParseState__swfDocument).soundResources : flighthq._internal._Map<Float, AudioResource>).set(characterId, (cast (cast (cast pending : { var className:String; var cue:TimelineAudioCue; }).cue : TimelineAudioCue).resource))); } else { ((cast (cast pending : { var className:String; var cue:TimelineAudioCue; }).cue : TimelineAudioCue).resource = existing); }
+      if ((cast _Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast (cast state : SwfParseState__swfDocument).soundResources : flighthq._internal._Map<Float, AudioResource>).set(characterId, (cast (cast (cast pending : { var className:String; var cue:TimelineAudioCue; }).cue : { var resource:AudioResource; }).resource))); } else { ((cast (cast pending : { var className:String; var cue:TimelineAudioCue; }).cue : { var resource:AudioResource; }).resource = cast (existing : AudioResource)); }
       _Runtime.callProperty((cast state : SwfParseState__swfDocument).soundCuesAwaitingRate, 'push', cast ([{ characterId: characterId, cue: (cast pending : { var className:String; var cue:TimelineAudioCue; }).cue }] : Array<Dynamic>));
     }
   }
@@ -1754,9 +1754,9 @@ class SwfDocument {
     for (pending in _Runtime.iterable((cast state : SwfParseState__swfDocument).soundCuesAwaitingRate)) {
       var sound:Null<SwfSoundPayload__swfDocument> = ((cast (cast state : SwfParseState__swfDocument).sounds : flighthq._internal._Map<Float, SwfSoundPayload__swfDocument>).get((cast pending : { var characterId:Float; var cue:TimelineAudioCue; }).characterId));
       if ((cast _Runtime.strictEquals(sound, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-      var inPoint:Float = ((cast (cast pending : { var characterId:Float; var cue:TimelineAudioCue; }).cue : TimelineAudioCue).offset / (cast sound : SwfSoundPayload__swfDocument).sampleRate);
-      ((cast (cast pending : { var characterId:Float; var cue:TimelineAudioCue; }).cue : TimelineAudioCue).duration = ((cast _Runtime.strictEquals((cast (cast pending : { var characterId:Float; var cue:TimelineAudioCue; }).cue : TimelineAudioCue).duration, null) : Bool) ? (cast null : Dynamic) : (cast (((cast (cast pending : { var characterId:Float; var cue:TimelineAudioCue; }).cue : TimelineAudioCue).duration / (cast sound : SwfSoundPayload__swfDocument).sampleRate) - inPoint) : Dynamic)));
-      ((cast (cast pending : { var characterId:Float; var cue:TimelineAudioCue; }).cue : TimelineAudioCue).offset = inPoint);
+      var inPoint:Float = ((cast (cast pending : { var characterId:Float; var cue:TimelineAudioCue; }).cue : { var offset:Float; }).offset / (cast sound : SwfSoundPayload__swfDocument).sampleRate);
+      ((cast (cast pending : { var characterId:Float; var cue:TimelineAudioCue; }).cue : { var duration:Null<Float>; }).duration = cast (((cast _Runtime.strictEquals((cast (cast pending : { var characterId:Float; var cue:TimelineAudioCue; }).cue : { var duration:Null<Float>; }).duration, null) : Bool) ? (cast null : Dynamic) : (cast (((cast (cast pending : { var characterId:Float; var cue:TimelineAudioCue; }).cue : { var duration:Null<Float>; }).duration / (cast sound : SwfSoundPayload__swfDocument).sampleRate) - inPoint) : Dynamic)) : Null<Float>));
+      ((cast (cast pending : { var characterId:Float; var cue:TimelineAudioCue; }).cue : { var offset:Float; }).offset = cast (inPoint : Float));
     }
   }
 

@@ -40,12 +40,12 @@ class Timeline {
           (timeline.isPlaying = cast (false : Bool));
           var completed:Float = totalFrames;
           var signals:Null<TimelineSignals> = timeline.signals;
-          if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : TimelineSignals).onComplete]]), 1); }
+          if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : { var onComplete:Signal<Void->Void>; }).onComplete]]), 1); }
           return cast completed;
         }
         (next = cast ((_Runtime.fmod((next - 1.0), totalFrames) + 1.0) : Dynamic));
         var signals:Null<TimelineSignals> = timeline.signals;
-        if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : TimelineSignals).onLoop]]), 1); }
+        if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : { var onLoop:Signal<Void->Void>; }).onLoop]]), 1); }
       }
       return cast next;
     }
@@ -54,11 +54,11 @@ class Timeline {
       if ((cast _Runtime.strictEquals(timeline.playMode, 'once') : Bool)) {
         (timeline.isPlaying = cast (false : Bool));
         var signals:Null<TimelineSignals> = timeline.signals;
-        if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : TimelineSignals).onComplete]]), 1); }
+        if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : { var onComplete:Signal<Void->Void>; }).onComplete]]), 1); }
         return cast totalFrames;
       }
       var signals:Null<TimelineSignals> = timeline.signals;
-      if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : TimelineSignals).onLoop]]), 1); }
+      if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : { var onLoop:Signal<Void->Void>; }).onLoop]]), 1); }
       return cast 1.0;
     }
     return cast next;
@@ -100,7 +100,7 @@ class Timeline {
   }
 
   public static function findTimelineLabel(timeline:flighthq.types.Timeline, name:String):Null<TimelineLabel> {
-    return cast _Runtime.coalesce(_Runtime.find((cast getTimelineLabels(({ final __callArgument19:Dynamic = timeline; __callArgument19; })) : Array<TimelineLabel>), function(l:TimelineLabel, __unused0:Float, __unused1:Array<TimelineLabel>):Bool return _Runtime.strictEquals((cast l : TimelineLabel).name, name)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(_Runtime.find((cast getTimelineLabels(({ final __callArgument19:Dynamic = timeline; __callArgument19; })) : Array<TimelineLabel>), function(l:TimelineLabel, __unused0:Float, __unused1:Array<TimelineLabel>):Bool return _Runtime.strictEquals(l.name, name)), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -116,15 +116,15 @@ class Timeline {
     signals = timeline.signals;
     target = timeline.target;
     frameEvent = (cast { frame: current, previousFrame: previous });
-    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : TimelineSignals).onExitFrame], [frameEvent]]), 1); }
+    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : { var onExitFrame:Signal<TimelineFrameEvent->Void>; }).onExitFrame], [frameEvent]]), 1); }
     (timeline.lastFrameUpdate = cast (current : Float));
-    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : TimelineSignals).onEnterFrame], [frameEvent]]), 1); }
+    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : { var onEnterFrame:Signal<TimelineFrameEvent->Void>; }).onEnterFrame], [frameEvent]]), 1); }
     if ((cast !_Runtime.strictEquals(target, null) : Bool)) { ({ final __optionalOwner21 = timeline.source; if (__optionalOwner21 != null) { final __optionalCall20 = (cast __optionalOwner21 : { var constructFrame:Node2D->Float->Void; }).constructFrame; if (__optionalCall20 != null) __optionalCall20(target, current); } }); }
     if ((cast !_Runtime.strictEquals(timeline.frameScripts, null) : Bool)) {
       var script:Null<FrameScript> = ((cast timeline.frameScripts : flighthq._internal._Map<Float, FrameScript>).get(current));
       if ((cast ((cast !_Runtime.strictEquals(script, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(target, null) : Bool)) : Bool)) { script(({ final __callArgument22:Dynamic = target; __callArgument22; }), (cast current : Float)); }
     }
-    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : TimelineSignals).onFrameConstructed], [frameEvent]]), 1); }
+    if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : { var onFrameConstructed:Signal<TimelineFrameEvent->Void>; }).onFrameConstructed], [frameEvent]]), 1); }
     return cast true;
     return cast null;
   }
@@ -137,8 +137,8 @@ class Timeline {
     frame = timeline.currentFrame;
     result = null;
     for (label in _Runtime.iterable(labels)) {
-      if ((cast ((cast (cast label : TimelineLabel).frame : Float) <= (cast frame : Float)) : Bool)) {
-        if ((cast ((cast _Runtime.strictEquals(result, null) : Bool) || (cast ((cast (cast label : TimelineLabel).frame : Float) >= (cast (cast result : TimelineLabel).frame : Float)) : Bool)) : Bool)) { (result = cast (label : Dynamic)); }
+      if ((cast ((cast label.frame : Float) <= (cast frame : Float)) : Bool)) {
+        if ((cast ((cast _Runtime.strictEquals(result, null) : Bool) || (cast ((cast label.frame : Float) >= (cast (cast result : { var frame:Float; }).frame : Float)) : Bool)) : Bool)) { (result = cast (label : Dynamic)); }
       }
     }
     return cast result;
@@ -215,7 +215,7 @@ class Timeline {
     if ((cast _Runtime.strictEquals(_Runtime.typeofValue(frame), 'number') : Bool)) { return cast frame; }
     label = (cast findTimelineLabel(({ final __callArgument46:Dynamic = timeline; __callArgument46; }), (cast frame : String)) : Null<TimelineLabel>);
     if ((cast !_Runtime.truthy(label) : Bool)) { _Runtime.throwValue(_Runtime.error('Frame label "' + Std.string(frame) + '" not found')); }
-    return cast (cast label : TimelineLabel).frame;
+    return cast (cast label : { var frame:Float; }).frame;
     return cast null;
   }
 

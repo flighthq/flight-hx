@@ -23010,7 +23010,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 8,
       "fields": 1,
       "id": "@flighthq/types:interface#FlowStack",
       "name": "FlowStack",
@@ -52672,7 +52672,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 7,
       "fields": 10,
       "id": "@flighthq/types:interface#TimelineAudioCue",
       "name": "TimelineAudioCue",
@@ -53041,7 +53041,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 10,
       "fields": 2,
       "id": "@flighthq/types:interface#TimelineLabel",
       "name": "TimelineLabel",
@@ -53199,7 +53199,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 7,
       "fields": 5,
       "id": "@flighthq/types:interface#TimelineSignals",
       "name": "TimelineSignals",
