@@ -10,7 +10,7 @@ import flighthq.types.BitmapRegion;
 
 class BitmapConvolution {
   public static function convolveBitmap(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, options:BitmapConvolutionOptions):Void {
-    var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
+    var __destructure0:BitmapConvolutionOptions = cast _Runtime.UNDEFINED;
     var matrix:Array<Float> = cast _Runtime.UNDEFINED;
     var matrixX:Float = cast _Runtime.UNDEFINED;
     var matrixY:Float = cast _Runtime.UNDEFINED;
@@ -25,16 +25,16 @@ class BitmapConvolution {
     var bitmapHeight:Float = cast _Runtime.UNDEFINED;
     var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     __destructure0 = options;
-    matrix = _Runtime.field(__destructure0, 'matrix');
-    matrixX = _Runtime.field(__destructure0, 'matrixX');
-    matrixY = _Runtime.field(__destructure0, 'matrixY');
+    matrix = __destructure0.matrix;
+    matrixX = __destructure0.matrixX;
+    matrixY = __destructure0.matrixY;
     if ((cast ((cast ((cast matrixX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast matrixY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.throwValue(_Runtime.error('Convolution filter matrix dimensions must be positive')); }
     if ((cast ((cast _Runtime.field(matrix, 'length') : Float) < (cast (matrixX * matrixY) : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('Convolution filter matrix does not match its dimensions')); }
-    rawDivisor = _Runtime.coalesce(_Runtime.field(options, 'divisor'), function():Dynamic return cast (cast BitmapConvolution.getConvolutionDivisor__bitmapConvolution(({ final __callArgument0:Dynamic = matrix; __callArgument0; }), (cast (matrixX * matrixY) : Float)) : Float));
+    rawDivisor = _Runtime.coalesce(options.divisor, function():Dynamic return cast (cast BitmapConvolution.getConvolutionDivisor__bitmapConvolution(({ final __callArgument0:Dynamic = matrix; __callArgument0; }), (cast (matrixX * matrixY) : Float)) : Float));
     divisor = ((cast _Runtime.strictEquals(rawDivisor, 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast rawDivisor : Dynamic));
-    bias = _Runtime.coalesce(_Runtime.field(options, 'bias'), function():Dynamic return cast 0.0);
-    edge = _Runtime.coalesce(_Runtime.field(options, 'edge'), function():Dynamic return cast 'clamp');
-    preserveAlpha = _Runtime.coalesce(_Runtime.field(options, 'preserveAlpha'), function():Dynamic return cast true);
+    bias = _Runtime.coalesce(options.bias, function():Dynamic return cast 0.0);
+    edge = _Runtime.coalesce(options.edge, function():Dynamic return cast 'clamp');
+    preserveAlpha = _Runtime.coalesce(options.preserveAlpha, function():Dynamic return cast true);
     offsetX = HxMath.floor((matrixX / 2.0));
     offsetY = HxMath.floor((matrixY / 2.0));
     bitmapWidth = (cast source.bitmap : { var width:Float; }).width;

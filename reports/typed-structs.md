@@ -9,12 +9,12 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Candidates | 2006 |
 | Eligible | 1536 |
 | Ineligible | 470 |
-| Audit-only schemas | 1266 |
-| Direct schemas | 738 |
+| Audit-only schemas | 1261 |
+| Direct schemas | 743 |
 | Declared fields | 23912 |
 | Bindable accesses | 30666 |
-| Pending accesses | 6078 |
-| Directly emitted accesses | 24588 |
+| Pending accesses | 6043 |
+| Directly emitted accesses | 24623 |
 | Reflective survivors | 455 |
 | Dynamic escapes | 10973 |
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1266 |
+| Newly discovered, audit-only | 1261 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -191,13 +191,13 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#BinPackHeuristic` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#BinPackOptions` | `direct` | `preserved` | `@flighthq/types:interface#BinPackOptions` | bin-packing option record | 9 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Bitmap` | `direct` | `renamed` | `@flighthq/types:interface#Surface` | broad asset document | 8 | 467 | 3 | 0 | 0 | 470 | 2 | 2 | yes | — |
-| `@flighthq/types:interface#BitmapBevelOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#BitmapBevelOptions` | `direct` | `new` | — | reviewed escape-free bitmap bevel options | 9 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:type#BitmapBevelType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#BitmapBoxBlurOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#BitmapCompositeMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#BitmapConvolutionOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#BitmapConvolutionOptions` | `direct` | `new` | — | reviewed escape-free bitmap convolution options | 7 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:type#BitmapDisplacementMapMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#BitmapDisplacementMapOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#BitmapDisplacementMapOptions` | `direct` | `new` | — | reviewed escape-free bitmap displacement-map options | 8 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapDropShadowOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#BitmapEdgeMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#BitmapFingerprint` | `direct` | `new` | — | reviewed escape-free bitmap fingerprint | 2 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
@@ -216,8 +216,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#BitmapFontRecord` | `direct` | `relocated` | `@flighthq/bitmapfont-formats:interface#BitmapFontRecord` | broad serialization document | 6 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapFontSummary` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapGlowOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#BitmapGradientBevelOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#BitmapGradientGlowOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#BitmapGradientBevelOptions` | `direct` | `new` | — | reviewed escape-free bitmap gradient-bevel options | 7 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#BitmapGradientGlowOptions` | `direct` | `new` | — | reviewed escape-free bitmap gradient-glow options | 4 | 4 | 0 | 0 | 0 | 4 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapHistogram` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapInnerGlowOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BitmapInnerShadowOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |

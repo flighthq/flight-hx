@@ -7,7 +7,7 @@ This is a construction, structural-flow, and observability census. It does not e
 | Metric | Count |
 | --- | ---: |
 | Eligible canonical schemas | 1536 |
-| Direct field accesses | 24588 |
+| Direct field accesses | 24623 |
 | Declared optional fields | 1970 |
 | Declared required-undefined fields | 2 |
 | Production object literals | 1842 |
@@ -139,10 +139,10 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#Billboard` | 4 | 12 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#BinPackOptions` | 13 | 9 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 17 | 0 | yes | — | — |
 | `@flighthq/types:interface#Bitmap` | 470 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 29 | 13 | 4 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#BitmapBevelOptions` | 0 | 9 | 9 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 2 | 0 | yes | — | `optional-omission` |
+| `@flighthq/types:interface#BitmapBevelOptions` | 9 | 9 | 9 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 2 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#BitmapBoxBlurOptions` | 0 | 3 | 3 | 0 | 2 | 2 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 5 | 0 | yes | — | `optional-omission` |
-| `@flighthq/types:interface#BitmapConvolutionOptions` | 0 | 7 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 9 | 0 | yes | — | — |
-| `@flighthq/types:interface#BitmapDisplacementMapOptions` | 0 | 8 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 10 | 0 | yes | — | — |
+| `@flighthq/types:interface#BitmapConvolutionOptions` | 7 | 7 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 9 | 0 | yes | — | — |
+| `@flighthq/types:interface#BitmapDisplacementMapOptions` | 8 | 8 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 10 | 0 | yes | — | — |
 | `@flighthq/types:interface#BitmapDropShadowOptions` | 0 | 5 | 5 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 4 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#BitmapFingerprint` | 13 | 2 | 0 | 0 | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 2 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#BitmapFont` | 20 | 5 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10 | 6 | 0 | 0 | yes | — | — |
@@ -158,8 +158,8 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#BitmapFontRecord` | 9 | 6 | 0 | 0 | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 5 | 3 | yes | — | `object-spread` |
 | `@flighthq/types:interface#BitmapFontSummary` | 0 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#BitmapGlowOptions` | 0 | 5 | 5 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 4 | 0 | yes | — | `optional-omission` |
-| `@flighthq/types:interface#BitmapGradientBevelOptions` | 0 | 7 | 7 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | `optional-omission` |
-| `@flighthq/types:interface#BitmapGradientGlowOptions` | 0 | 4 | 4 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 3 | 0 | yes | — | `optional-omission` |
+| `@flighthq/types:interface#BitmapGradientBevelOptions` | 7 | 7 | 7 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | `optional-omission` |
+| `@flighthq/types:interface#BitmapGradientGlowOptions` | 4 | 4 | 4 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 3 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#BitmapHistogram` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#BitmapInnerGlowOptions` | 0 | 5 | 5 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 2 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#BitmapInnerShadowOptions` | 0 | 7 | 7 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 2 | 0 | yes | — | `optional-omission` |

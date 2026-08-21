@@ -1718,6 +1718,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#WgpuShapeRasterSurface',
     purpose: 'reviewed escape-free WebGPU shape raster surface',
   },
+  {
+    declarationFingerprint: 'sha256:0a011bdbca5a41569ee8a81d5ebca8c94dc47e164f8c24aef36dbdab9b78f282',
+    id: '@flighthq/types:interface#BitmapBevelOptions',
+    purpose: 'reviewed escape-free bitmap bevel options',
+  },
+  {
+    declarationFingerprint: 'sha256:c2fd0040fbc7b51bf0203d08bdd9632541b02207997542283e86c19175cd69c8',
+    id: '@flighthq/types:interface#BitmapDisplacementMapOptions',
+    purpose: 'reviewed escape-free bitmap displacement-map options',
+  },
+  {
+    declarationFingerprint: 'sha256:36622be26b0d6d74ad2b9612c9d5c08e151474680298a719a6cb4f5e3099003e',
+    id: '@flighthq/types:interface#BitmapConvolutionOptions',
+    purpose: 'reviewed escape-free bitmap convolution options',
+  },
+  {
+    declarationFingerprint: 'sha256:307bfb2ceb94a4971dc35171139a7328552f9ffa06a0d76954467b57d86f1f46',
+    id: '@flighthq/types:interface#BitmapGradientBevelOptions',
+    purpose: 'reviewed escape-free bitmap gradient-bevel options',
+  },
+  {
+    declarationFingerprint: 'sha256:5934bc8bbdd8f85c1b5ec613312ae1ec3003b2e0ea21b365a6e52226aee60329',
+    id: '@flighthq/types:interface#BitmapGradientGlowOptions',
+    purpose: 'reviewed escape-free bitmap gradient-glow options',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

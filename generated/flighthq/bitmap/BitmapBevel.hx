@@ -25,14 +25,14 @@ class BitmapBevel {
     var shadowColor:Float = cast _Runtime.UNDEFINED;
     w = source.width;
     h = source.height;
-    angle = _Runtime.coalesce(_Runtime.field(options, 'angle'), function():Dynamic return cast (HxMath.PI / 4.0));
-    distance = _Runtime.coalesce(_Runtime.field(options, 'distance'), function():Dynamic return cast 4.0);
+    angle = _Runtime.coalesce(options.angle, function():Dynamic return cast (HxMath.PI / 4.0));
+    distance = _Runtime.coalesce(options.distance, function():Dynamic return cast 4.0);
     offsetX = HxMath.round(_Runtime.multiplyNumbers(HxMath.cos(angle), distance));
     offsetY = HxMath.round(_Runtime.multiplyNumbers(HxMath.sin(angle), distance));
-    type = _Runtime.coalesce(_Runtime.field(options, 'type'), function():Dynamic return cast 'inner');
-    intensity = _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0);
-    highlightColor = _Runtime.coalesce(_Runtime.field(options, 'highlightColor'), function():Dynamic return cast 4294967295.0);
-    shadowColor = _Runtime.coalesce(_Runtime.field(options, 'shadowColor'), function():Dynamic return cast 255.0);
+    type = _Runtime.coalesce(options.type, function():Dynamic return cast 'inner');
+    intensity = _Runtime.coalesce(options.intensity, function():Dynamic return cast 1.0);
+    highlightColor = _Runtime.coalesce(options.highlightColor, function():Dynamic return cast 4294967295.0);
+    shadowColor = _Runtime.coalesce(options.shadowColor, function():Dynamic return cast 255.0);
     {
       var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
@@ -50,7 +50,7 @@ class BitmapBevel {
         py++;
       }
     }
-    BitmapBevel.blurField__bitmapBevel(({ final __callArgument1:Dynamic = scratch; __callArgument1; }), ({ final __callArgument2:Dynamic = out; __callArgument2; }), (cast w : Float), (cast h : Float), _Runtime.field(options, 'radiusX'), _Runtime.field(options, 'radiusY'), _Runtime.field(options, 'passes'));
+    BitmapBevel.blurField__bitmapBevel(({ final __callArgument1:Dynamic = scratch; __callArgument1; }), ({ final __callArgument2:Dynamic = out; __callArgument2; }), (cast w : Float), (cast h : Float), options.radiusX, options.radiusY, options.passes);
     {
       var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {

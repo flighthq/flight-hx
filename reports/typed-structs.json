@@ -27493,9 +27493,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 9,
+        "directAccesses": 9,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -27581,7 +27581,7 @@
       },
       "name": "BitmapBevelOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free bitmap bevel options",
       "reasons": [],
       "source": "upstream/packages/types/src/BitmapBevelOptions.ts",
       "sourceProvenance": {
@@ -29023,9 +29023,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 7,
+        "directAccesses": 7,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -29095,7 +29095,7 @@
       },
       "name": "BitmapConvolutionOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free bitmap convolution options",
       "reasons": [],
       "source": "upstream/packages/types/src/BitmapConvolutionOptions.ts",
       "sourceProvenance": {
@@ -29796,9 +29796,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 8,
+        "directAccesses": 8,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -29876,7 +29876,7 @@
       },
       "name": "BitmapDisplacementMapOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free bitmap displacement-map options",
       "reasons": [],
       "source": "upstream/packages/types/src/BitmapDisplacementMapOptions.ts",
       "sourceProvenance": {
@@ -33057,9 +33057,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 7,
+        "directAccesses": 7,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -33129,7 +33129,7 @@
       },
       "name": "BitmapGradientBevelOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free bitmap gradient-bevel options",
       "reasons": [],
       "source": "upstream/packages/types/src/BitmapGradientBevelOptions.ts",
       "sourceProvenance": {
@@ -33151,9 +33151,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 4,
+        "directAccesses": 4,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -33199,7 +33199,7 @@
       },
       "name": "BitmapGradientGlowOptions",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free bitmap gradient-glow options",
       "reasons": [],
       "source": "upstream/packages/types/src/BitmapGradientGlowOptions.ts",
       "sourceProvenance": {
@@ -421037,7 +421037,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1266,
+      "newAuditOnly": 1261,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -421046,16 +421046,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1266,
+    "auditOnlySchemas": 1261,
     "bindableAccesses": 30666,
     "candidates": 2006,
-    "directAccesses": 24588,
-    "directSchemas": 738,
+    "directAccesses": 24623,
+    "directSchemas": 743,
     "eligible": 1536,
     "escapes": 10973,
     "fields": 23912,
     "ineligible": 470,
-    "pendingAccesses": 6078,
+    "pendingAccesses": 6043,
     "reflectiveSurvivors": 455
   },
   "upstreamCommit": "cad72aa3ea4e6e76a050918a403dcb10efdfcb0d"

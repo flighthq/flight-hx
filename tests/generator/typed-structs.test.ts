@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_266,
+      newAuditOnly: 1_261,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_006);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(740);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(745);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_604);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_266);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_261);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(338);
+    expect(newDirect).toHaveLength(343);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1800,6 +1800,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'WgpuShapeRasterSurface',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free WebGPU shape raster surface',
+        }),
+        expect.objectContaining({
+          name: 'BitmapBevelOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free bitmap bevel options',
+        }),
+        expect.objectContaining({
+          name: 'BitmapDisplacementMapOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free bitmap displacement-map options',
+        }),
+        expect.objectContaining({
+          name: 'BitmapConvolutionOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free bitmap convolution options',
+        }),
+        expect.objectContaining({
+          name: 'BitmapGradientBevelOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free bitmap gradient-bevel options',
+        }),
+        expect.objectContaining({
+          name: 'BitmapGradientGlowOptions',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free bitmap gradient-glow options',
         }),
       ]),
     );
@@ -3494,6 +3519,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#WgpuShapeRasterSurface',
         purpose: 'reviewed escape-free WebGPU shape raster surface',
       },
+      {
+        declarationFingerprint: 'sha256:0a011bdbca5a41569ee8a81d5ebca8c94dc47e164f8c24aef36dbdab9b78f282',
+        id: '@flighthq/types:interface#BitmapBevelOptions',
+        purpose: 'reviewed escape-free bitmap bevel options',
+      },
+      {
+        declarationFingerprint: 'sha256:c2fd0040fbc7b51bf0203d08bdd9632541b02207997542283e86c19175cd69c8',
+        id: '@flighthq/types:interface#BitmapDisplacementMapOptions',
+        purpose: 'reviewed escape-free bitmap displacement-map options',
+      },
+      {
+        declarationFingerprint: 'sha256:36622be26b0d6d74ad2b9612c9d5c08e151474680298a719a6cb4f5e3099003e',
+        id: '@flighthq/types:interface#BitmapConvolutionOptions',
+        purpose: 'reviewed escape-free bitmap convolution options',
+      },
+      {
+        declarationFingerprint: 'sha256:307bfb2ceb94a4971dc35171139a7328552f9ffa06a0d76954467b57d86f1f46',
+        id: '@flighthq/types:interface#BitmapGradientBevelOptions',
+        purpose: 'reviewed escape-free bitmap gradient-bevel options',
+      },
+      {
+        declarationFingerprint: 'sha256:5934bc8bbdd8f85c1b5ec613312ae1ec3003b2e0ea21b365a6e52226aee60329',
+        id: '@flighthq/types:interface#BitmapGradientGlowOptions',
+        purpose: 'reviewed escape-free bitmap gradient-glow options',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -4561,6 +4611,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const fortyFirstHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'BitmapBevelOptions',
+            'BitmapDisplacementMapOptions',
+            'BitmapConvolutionOptions',
+            'BitmapGradientBevelOptions',
+            'BitmapGradientGlowOptions',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -4601,22 +4664,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_266,
+      auditOnlySchemas: 1_261,
       bindableAccesses: 30_666,
       candidates: 2_006,
-      directAccesses: 24_588,
-      directSchemas: 738,
+      directAccesses: 24_623,
+      directSchemas: 743,
       eligible: 1_536,
       escapes: 10_973,
       fields: 23_912,
       ineligible: 470,
-      pendingAccesses: 6_078,
+      pendingAccesses: 6_043,
       reflectiveSurvivors: 455,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_266,
+      newAuditOnly: 1_261,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -4693,7 +4756,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(24_588);
+    expect(report.summary.directAccesses).toBe(24_623);
     expect(rectangle?.emission).toEqual({
       directAccesses: 667,
       mode: 'direct',
@@ -6629,6 +6692,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(fortiethHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'BitmapBevelOptions',
+        9,
+        'sha256:0a011bdbca5a41569ee8a81d5ebca8c94dc47e164f8c24aef36dbdab9b78f282',
+        'reviewed escape-free bitmap bevel options',
+      ],
+      [
+        'BitmapDisplacementMapOptions',
+        8,
+        'sha256:c2fd0040fbc7b51bf0203d08bdd9632541b02207997542283e86c19175cd69c8',
+        'reviewed escape-free bitmap displacement-map options',
+      ],
+      [
+        'BitmapConvolutionOptions',
+        7,
+        'sha256:36622be26b0d6d74ad2b9612c9d5c08e151474680298a719a6cb4f5e3099003e',
+        'reviewed escape-free bitmap convolution options',
+      ],
+      [
+        'BitmapGradientBevelOptions',
+        7,
+        'sha256:307bfb2ceb94a4971dc35171139a7328552f9ffa06a0d76954467b57d86f1f46',
+        'reviewed escape-free bitmap gradient-bevel options',
+      ],
+      [
+        'BitmapGradientGlowOptions',
+        4,
+        'sha256:5934bc8bbdd8f85c1b5ec613312ae1ec3003b2e0ea21b365a6e52226aee60329',
+        'reviewed escape-free bitmap gradient-glow options',
+      ],
+    ] as const) {
+      expect(fortyFirstHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -8824,6 +8929,20 @@ describe('typed struct analysis', () => {
       if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
       else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
     }
+    for (const [frontierId, observabilityReasons] of [
+      ['@flighthq/types:interface#BitmapBevelOptions', ['optional-omission']],
+      ['@flighthq/types:interface#BitmapDisplacementMapOptions', []],
+      ['@flighthq/types:interface#BitmapConvolutionOptions', []],
+      ['@flighthq/types:interface#BitmapGradientBevelOptions', ['optional-omission']],
+      ['@flighthq/types:interface#BitmapGradientGlowOptions', ['optional-omission']],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible: true,
+        normalizationReasons: [],
+        observabilityReasons,
+      });
+      expect(provenanceById.has(frontierId)).toBe(false);
+    }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
@@ -10312,6 +10431,16 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:VelocityField|CreateExternalTextureOptions|RenderQueue|QuadBatchRuntime|WgpuShapeRasterSurface)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/bitmap/BitmapBevel.hx',
+      'generated/flighthq/bitmap/BitmapConvolution.hx',
+      'generated/flighthq/bitmap/BitmapDisplacement.hx',
+      'generated/flighthq/bitmap/BitmapGradient.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:BitmapBevelOptions|BitmapDisplacementMapOptions|BitmapConvolutionOptions|BitmapGradientBevelOptions|BitmapGradientGlowOptions)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
