@@ -21,11 +21,11 @@ import flighthq.types.Physics3D.RigidBody3D;
 
 class World {
   public static function addPhysics3DBody(world:Physics3DWorld, body:RigidBody3D):Float {
-    if ((cast ((cast ((cast (cast world : Physics3DWorld).bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).has((cast body : RigidBody3D).index)) : Bool) && (cast _Runtime.strictEquals(((cast (cast world : Physics3DWorld).bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get((cast body : RigidBody3D).index)), body) : Bool)) : Bool)) { return cast (cast body : RigidBody3D).index; }
-    ((cast body : RigidBody3D).index = (cast world : Physics3DWorld).nextBodyIndex);
-    ((cast world : Physics3DWorld).nextBodyIndex += 1.0);
-    _Runtime.callProperty((cast world : Physics3DWorld).bodies, 'push', cast ([body] : Array<Dynamic>));
-    ((cast (cast world : Physics3DWorld).bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).set((cast body : RigidBody3D).index, (cast body)));
+    if ((cast ((cast ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).has((cast body : RigidBody3D).index)) : Bool) && (cast _Runtime.strictEquals(((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get((cast body : RigidBody3D).index)), body) : Bool)) : Bool)) { return cast (cast body : RigidBody3D).index; }
+    ((cast body : RigidBody3D).index = world.nextBodyIndex);
+    (world.nextBodyIndex += 1.0);
+    _Runtime.callProperty(world.bodies, 'push', cast ([body] : Array<Dynamic>));
+    ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).set((cast body : RigidBody3D).index, (cast body)));
     refreshRigidBody3DWorldInertia(({ final __callArgument0:Dynamic = body; __callArgument0; }));
     return cast (cast body : RigidBody3D).index;
     return cast null;
@@ -94,7 +94,7 @@ class World {
   }
 
   public static function findPhysics3DBody(world:Physics3DWorld, index:Float):Null<RigidBody3D> {
-    return cast _Runtime.coalesce(((cast _Runtime.field(world, 'bodyByIndex') : flighthq._internal._Map<Float, RigidBody3D>).get(index)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get(index)), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -102,33 +102,33 @@ class World {
     var at:Float = cast _Runtime.UNDEFINED;
     var index:Float = cast _Runtime.UNDEFINED;
     var removedJoint:Bool = cast _Runtime.UNDEFINED;
-    at = _Runtime.callProperty((cast world : Physics3DWorld).bodies, 'indexOf', cast ([body] : Array<Dynamic>));
+    at = _Runtime.callProperty(world.bodies, 'indexOf', cast ([body] : Array<Dynamic>));
     if ((cast ((cast at : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
-    _Runtime.splice((cast world : Physics3DWorld).bodies, Std.int(at), Std.int(1.0), []);
-    ((cast (cast world : Physics3DWorld).bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).delete_((cast body : RigidBody3D).index));
+    _Runtime.splice(world.bodies, Std.int(at), Std.int(1.0), []);
+    ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).delete_((cast body : RigidBody3D).index));
     index = (cast body : RigidBody3D).index;
     {
-      var i:Float = _Runtime.subtractNumbers(_Runtime.field((cast world : Physics3DWorld).contacts, 'length'), 1.0);
+      var i:Float = _Runtime.subtractNumbers(_Runtime.field(world.contacts, 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        var contact:Physics3DContact = flighthq._internal._StaticIndex.readArray((cast world : Physics3DWorld).contacts, i);
-        if ((cast ((cast _Runtime.strictEquals((cast contact : Physics3DContact).bodyA, index) : Bool) || (cast _Runtime.strictEquals((cast contact : Physics3DContact).bodyB, index) : Bool)) : Bool)) { _Runtime.splice((cast world : Physics3DWorld).contacts, Std.int(i), Std.int(1.0), []); }
+        var contact:Physics3DContact = flighthq._internal._StaticIndex.readArray(world.contacts, i);
+        if ((cast ((cast _Runtime.strictEquals(contact.bodyA, index) : Bool) || (cast _Runtime.strictEquals(contact.bodyB, index) : Bool)) : Bool)) { _Runtime.splice(world.contacts, Std.int(i), Std.int(1.0), []); }
         i--;
       }
     }
     removedJoint = false;
     {
-      var i:Float = _Runtime.subtractNumbers(_Runtime.field((cast world : Physics3DWorld).joints, 'length'), 1.0);
+      var i:Float = _Runtime.subtractNumbers(_Runtime.field(world.joints, 'length'), 1.0);
       while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        var joint:Physics3DJoint = flighthq._internal._StaticIndex.readArray((cast world : Physics3DWorld).joints, i);
+        var joint:Physics3DJoint = flighthq._internal._StaticIndex.readArray(world.joints, i);
         if ((cast ((cast !_Runtime.strictEquals((cast joint : Physics3DJoint).bodyA, index) : Bool) && (cast !_Runtime.strictEquals((cast joint : Physics3DJoint).bodyB, index) : Bool)) : Bool)) { i--; continue; }
-        _Runtime.splice((cast world : Physics3DWorld).joints, Std.int(i), Std.int(1.0), []);
+        _Runtime.splice(world.joints, Std.int(i), Std.int(1.0), []);
         ((cast physics3DJointOwners : flighthq._internal._WeakMap<Physics3DJoint, Physics3DWorld>).delete_(joint));
         (removedJoint = cast (true : Dynamic));
         i--;
       }
     }
     if ((cast removedJoint : Bool)) { rebuildPhysics3DJointCollisionSuppressions(({ final __callArgument7:Dynamic = world; __callArgument7; })); }
-    ((cast (cast (cast world : Physics3DWorld).solver : Physics3DSequentialImpulseState).constraintByPair : flighthq._internal._Map<Float, Physics3DContactConstraint>).clear());
+    ((cast (cast world.solver : Physics3DSequentialImpulseState).constraintByPair : flighthq._internal._Map<Float, Physics3DContactConstraint>).clear());
     return cast true;
     return cast null;
   }
@@ -229,16 +229,16 @@ class World {
   public static final Physics3DWorldVersion:Float = 1.0;
 
   public static function refreshRigidBody3DMass__world(body:RigidBody3D):Void {
-    ((cast World.scratchMassData__world : Physics3DMassData).mass = (cast body : RigidBody3D).mass);
-    ((cast World.scratchMassData__world : Physics3DMassData).centerX = (cast body : RigidBody3D).centerX);
-    ((cast World.scratchMassData__world : Physics3DMassData).centerY = (cast body : RigidBody3D).centerY);
-    ((cast World.scratchMassData__world : Physics3DMassData).centerZ = (cast body : RigidBody3D).centerZ);
-    ((cast World.scratchMassData__world : Physics3DMassData).inertiaXX = (cast body : RigidBody3D).inertiaXX);
-    ((cast World.scratchMassData__world : Physics3DMassData).inertiaYY = (cast body : RigidBody3D).inertiaYY);
-    ((cast World.scratchMassData__world : Physics3DMassData).inertiaZZ = (cast body : RigidBody3D).inertiaZZ);
-    ((cast World.scratchMassData__world : Physics3DMassData).inertiaXY = (cast body : RigidBody3D).inertiaXY);
-    ((cast World.scratchMassData__world : Physics3DMassData).inertiaXZ = (cast body : RigidBody3D).inertiaXZ);
-    ((cast World.scratchMassData__world : Physics3DMassData).inertiaYZ = (cast body : RigidBody3D).inertiaYZ);
+    (World.scratchMassData__world.mass = cast ((cast body : RigidBody3D).mass : Float));
+    (World.scratchMassData__world.centerX = cast ((cast body : RigidBody3D).centerX : Float));
+    (World.scratchMassData__world.centerY = cast ((cast body : RigidBody3D).centerY : Float));
+    (World.scratchMassData__world.centerZ = cast ((cast body : RigidBody3D).centerZ : Float));
+    (World.scratchMassData__world.inertiaXX = cast ((cast body : RigidBody3D).inertiaXX : Float));
+    (World.scratchMassData__world.inertiaYY = cast ((cast body : RigidBody3D).inertiaYY : Float));
+    (World.scratchMassData__world.inertiaZZ = cast ((cast body : RigidBody3D).inertiaZZ : Float));
+    (World.scratchMassData__world.inertiaXY = cast ((cast body : RigidBody3D).inertiaXY : Float));
+    (World.scratchMassData__world.inertiaXZ = cast ((cast body : RigidBody3D).inertiaXZ : Float));
+    (World.scratchMassData__world.inertiaYZ = cast ((cast body : RigidBody3D).inertiaYZ : Float));
     setRigidBody3DMassData(({ final __callArgument13:Dynamic = body; __callArgument13; }), ({ final __callArgument14:Dynamic = World.scratchMassData__world; __callArgument14; }));
   }
 

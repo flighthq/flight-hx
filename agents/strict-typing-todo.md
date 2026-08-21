@@ -4,15 +4,15 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 
 ## Baseline
 
-- 1,536 public schemas are semantically eligible for typed structural lowering.
-- 713 schemas currently emit direct fields, covering 24,365 accesses.
-- 823 eligible schemas remain audit-only, covering 6,301 pending accesses.
-- 566 audit-only schemas have no recorded escape, covering 1,547 pending accesses.
-- Direct schemas retain 455 operation-local reflective survivors: 197 incompatible-union, 90 unknown-member, 70 width-sensitive, 41 dynamic-enumeration, 40 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
-- Generated Haxe contains 346 `_Partial`, 24 `_Pick`, 197 `_Omit`, 191 `_IndexedAccess`, ten `_Conditional`, and 618 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
-- The maintained host toolkit exposes 218 `dynamic-stub` type entries across 10,963 generated type uses.
-- The cpp provenance audit has 551 closed nominal-identity candidates; only `Camera2D` and `ParticleEmitterState` are enabled.
-- Generated `Dynamic` occurrences fell from 49,168 to 46,946 across checker-derived typed-struct assignments and the reviewed escape-free tranches.
+- 1,611 public schemas are semantically eligible for typed structural lowering.
+- 758 schemas currently emit direct fields, covering 25,518 accesses.
+- 853 eligible schemas remain audit-only, covering 7,788 pending accesses.
+- 578 audit-only schemas have no recorded escape, covering 1,974 pending accesses.
+- Direct schemas retain 451 operation-local reflective survivors: 197 incompatible-union, 87 unknown-member, 70 width-sensitive, 42 dynamic-enumeration, 38 computed-key, 12 receiver-sensitive-method, and five presence-sensitive accesses.
+- Generated Haxe contains 49 `_Partial`, zero `_Pick`, three `_Omit`, 200 `_IndexedAccess`, nine `_Conditional`, and 654 `_Record` instantiations. These are occurrence counts, not claims that every instantiation is safely materializable.
+- The maintained host toolkit exposes 218 `dynamic-stub` type entries across 11,278 generated type uses.
+- The cpp provenance audit has 582 closed nominal-identity candidates; only `Camera2D` and `ParticleEmitterState` are enabled.
+- Generated Haxe on the `598ef6f6` upstream pin contains 50,694 `Dynamic` occurrences and zero `Reflect`; pass 44 leaves `Dynamic` unchanged while moving 404 additional accesses to direct typed fields.
 
 ## 1. Closed mapped aliases
 
@@ -101,6 +101,7 @@ Status: active. The first implementation slice generalizes closed mapped-alias m
 - [x] Promote the forty-first high-access zero-escape frontier: `BitmapBevelOptions`, `BitmapDisplacementMapOptions`, `BitmapConvolutionOptions`, `BitmapGradientBevelOptions`, and `BitmapGradientGlowOptions`. Their 35 accesses now emit directly across four generated bitmap modules. Optional omission keeps the bevel and two gradient option records structural; the convolution and displacement-map options have no production construction sites; and none has closed nominal construction provenance. The tranche removes one generated `Dynamic` annotation and 35 `_Runtime.field` calls while generated `Reflect` and type-erasure debt remain unchanged.
 - [x] Promote the forty-second high-access zero-escape frontier: `AttachmentSkin2D`, `RegionAttachment2D`, `PathAttachment2D`, `PointAttachment2D`, and `ClippingAttachment2D`. Their 28 accesses now emit directly across seven generated Skeleton2D and format-parser modules. Normalization provenance keeps the attachment skin structural, cross-schema transfer keeps the path attachment structural, and the other three attachment records have no closed nominal construction provenance. The tranche removes 20 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [x] Promote the forty-third high-access zero-escape frontier: `MorphShapeLineEndpoint`, `MorphShapeColorEndpoint`, `MorphShapePathBinding`, `MorphShapeAnimationTarget`, and `SwfMorphShapePaths`. Their 25 accesses now emit directly across four generated shape and SWF modules. Dynamic ingress and strict-equality observation keep the animation target structural, normalization provenance keeps the path binding structural, the two endpoint records have no closed construction provenance, and the provenance-closed SWF paths remain structural pending separate cpp review. The tranche removes 15 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
+- [x] Promote the forty-fourth high-access zero-escape frontier: `Physics3DWorld`, `Physics3DContact`, `Physics3DMassData`, `Physics3DHingeJoint`, and `Physics3DSliderJoint`. Their 404 accesses now emit directly across 11 generated Physics3D modules. Test enumeration keeps the world structural; cross-schema transfer plus object-literal spread keep both joint records structural; and the provenance-closed contact and mass data remain structural pending separate cpp review. The tranche removes 63 `_Runtime.field` calls while generated `Dynamic`, `Reflect`, and type-erasure debt remain unchanged.
 - [ ] Review the next cohesive five-row zero-escape tranche from the refreshed audit, preserving exact fingerprint, provenance, Haxe, portability, and affected-parity gates.
 - [x] Require an exact report delta, generated Haxe review, Haxe namespace compile, upstream affected-package tests, and the portable target matrix for every tranche.
 

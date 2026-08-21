@@ -15,9 +15,9 @@ import flighthq.types.Physics3D.RigidBody3D;
 class StepValidation {
   @:noCompletion
   public static function isPhysics3DBodyStateValid(world:Physics3DWorld):Bool {
-    if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(world, 'nextBodyIndex')] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast _Runtime.field(world, 'nextBodyIndex') : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
-    for (body in _Runtime.iterable(_Runtime.field(world, 'bodies'))) {
-      if ((cast ((cast !(cast (cast StepValidation.isRigidBody3DStateValid__stepValidation(({ final __callArgument2:Dynamic = body; __callArgument2; })) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals(((cast _Runtime.field(world, 'bodyByIndex') : flighthq._internal._Map<Float, RigidBody3D>).get((cast body : RigidBody3D).index)), body) : Bool)) : Bool)) { return cast false; }
+    if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([world.nextBodyIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast world.nextBodyIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
+    for (body in _Runtime.iterable(world.bodies)) {
+      if ((cast ((cast !(cast (cast StepValidation.isRigidBody3DStateValid__stepValidation(({ final __callArgument2:Dynamic = body; __callArgument2; })) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals(((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get((cast body : RigidBody3D).index)), body) : Bool)) : Bool)) { return cast false; }
     }
     return cast true;
     return cast null;
@@ -25,7 +25,7 @@ class StepValidation {
 
   @:noCompletion
   public static function isPhysics3DContactStateValid(world:Physics3DWorld):Bool {
-    for (contact in _Runtime.iterable(_Runtime.field(world, 'contacts'))) {
+    for (contact in _Runtime.iterable(world.contacts)) {
       if ((cast !(cast (cast isPhysics3DContactValid(({ final __callArgument5:Dynamic = contact; __callArgument5; })) : Bool) : Bool) : Bool)) { return cast false; }
     }
     return cast true;
@@ -34,13 +34,13 @@ class StepValidation {
 
   @:noCompletion
   public static function isPhysics3DContactValid(contact:Physics3DContact):Bool {
-    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(contact, 'bodyA')] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(contact, 'bodyB')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(contact, 'pointCount')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(contact, 'pointCount') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(contact, 'pointCount') : Float) > (cast _Runtime.field(_Runtime.field(contact, 'points'), 'length') : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(contact, 'normalX')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(contact, 'normalY')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(contact, 'normalZ')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(contact, 'friction')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(contact, 'friction') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(contact, 'restitution')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(contact, 'restitution') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(contact, 'enabled')), 'boolean') : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(contact, 'sensor')), 'boolean') : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(contact, 'touching')), 'boolean') : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([contact.bodyA] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([contact.bodyB] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([contact.pointCount] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast contact.pointCount : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast contact.pointCount : Float) > (cast _Runtime.field(contact.points, 'length') : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([contact.normalX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([contact.normalY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([contact.normalZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([contact.friction] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast contact.friction : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([contact.restitution] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast contact.restitution : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(contact.enabled), 'boolean') : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(contact.sensor), 'boolean') : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(contact.touching), 'boolean') : Bool)) : Bool)) {
       return cast false;
     }
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(contact, 'pointCount') : Float)) : Bool)) {
-        var point:Physics3DContactPoint = flighthq._internal._StaticIndex.readArray(_Runtime.field(contact, 'points'), i);
+      while ((cast ((cast i : Float) < (cast contact.pointCount : Float)) : Bool)) {
+        var point:Physics3DContactPoint = flighthq._internal._StaticIndex.readArray(contact.points, i);
         if ((cast _Runtime.strictEquals(point, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
         for (key in _Runtime.forInKeys(point)) {
           var value:Float = _Runtime.getIndex(point, (cast key : String));
@@ -55,13 +55,13 @@ class StepValidation {
 
   @:noCompletion
   public static function isPhysics3DGravityValid(world:Physics3DWorld):Bool {
-    return cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(world, 'gravityX')] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(world, 'gravityY')] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(world, 'gravityZ')] : Array<Dynamic>)) : Bool));
+    return cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([world.gravityX] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([world.gravityY] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([world.gravityZ] : Array<Dynamic>)) : Bool));
     return cast null;
   }
 
   @:noCompletion
   public static function isPhysics3DJointStateValid(world:Physics3DWorld):Bool {
-    for (joint in _Runtime.iterable(_Runtime.field(world, 'joints'))) {
+    for (joint in _Runtime.iterable(world.joints)) {
       if ((cast !(cast (cast StepValidation.isPhysics3DJointValid__stepValidation(({ final __callArgument8:Dynamic = joint; __callArgument8; })) : Bool) : Bool) : Bool)) { return cast false; }
     }
     return cast true;

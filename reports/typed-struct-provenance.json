@@ -38784,7 +38784,7 @@
           }
         ]
       },
-      "directAccesses": 0,
+      "directAccesses": 83,
       "fields": 12,
       "id": "@flighthq/types:interface#Physics3DContact",
       "name": "Physics3DContact",
@@ -39075,7 +39075,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 77,
       "fields": 10,
       "id": "@flighthq/types:interface#Physics3DMassData",
       "name": "Physics3DMassData",

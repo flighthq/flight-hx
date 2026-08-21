@@ -29,7 +29,7 @@ class ExplainPhysics3DStep {
     var velocityIterationsValid:Bool = cast _Runtime.UNDEFINED;
     var positionIterationsValid:Bool = cast _Runtime.UNDEFINED;
     var ready:Bool = cast _Runtime.UNDEFINED;
-    config = _Runtime.field(world, 'config');
+    config = world.config;
     bodyStateValid = (cast isPhysics3DBodyStateValid(({ final __callArgument0:Dynamic = world; __callArgument0; })) : Bool);
     contactStateValid = (cast isPhysics3DContactStateValid(({ final __callArgument1:Dynamic = world; __callArgument1; })) : Bool);
     gravityValid = (cast isPhysics3DGravityValid(({ final __callArgument2:Dynamic = world; __callArgument2; })) : Bool);

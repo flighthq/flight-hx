@@ -1793,6 +1793,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#SwfMorphShapePaths',
     purpose: 'reviewed escape-free SWF morph-shape paths',
   },
+  {
+    declarationFingerprint: 'sha256:478fc67f4c76a013a87b78935ea0183d26e38fcb81c608e340f38357ab1bde6a',
+    id: '@flighthq/types:interface#Physics3DWorld',
+    purpose: 'reviewed escape-free Physics3D world',
+  },
+  {
+    declarationFingerprint: 'sha256:80fa54977329f20751f7c2bd023c5b0b1b6ece290cfa9bcd5edaf93f43aa9ec5',
+    id: '@flighthq/types:interface#Physics3DContact',
+    purpose: 'reviewed escape-free Physics3D contact',
+  },
+  {
+    declarationFingerprint: 'sha256:280e588114daf5dcd9e2597b4995772ffbf8cb4fecc34588b8f09d93669e2ca3',
+    id: '@flighthq/types:interface#Physics3DMassData',
+    purpose: 'reviewed escape-free Physics3D mass data',
+  },
+  {
+    declarationFingerprint: 'sha256:3617e061adc1153c05c953faf6638b850bdd8a7cf5dc7ea4924c776b3ae87730',
+    id: '@flighthq/types:interface#Physics3DHingeJoint',
+    purpose: 'reviewed escape-free Physics3D hinge joint',
+  },
+  {
+    declarationFingerprint: 'sha256:2e63948889100e2121b93104f31cca5a88c20e619e5fe18c77d2df4c201b07fd',
+    id: '@flighthq/types:interface#Physics3DSliderJoint',
+    purpose: 'reviewed escape-free Physics3D slider joint',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

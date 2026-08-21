@@ -245169,9 +245169,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 83,
+        "directAccesses": 83,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -245281,7 +245281,7 @@
       },
       "name": "Physics3DContact",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Physics3D contact",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics3D.ts",
       "sourceProvenance": {
@@ -246909,9 +246909,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 48,
+        "directAccesses": 48,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -247237,7 +247237,7 @@
       },
       "name": "Physics3DHingeJoint",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Physics3D hinge joint",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics3D.ts",
       "sourceProvenance": {
@@ -249059,9 +249059,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 77,
+        "directAccesses": 77,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -249155,7 +249155,7 @@
       },
       "name": "Physics3DMassData",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Physics3D mass data",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics3D.ts",
       "sourceProvenance": {
@@ -249379,9 +249379,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 48,
+        "directAccesses": 48,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -249707,7 +249707,7 @@
       },
       "name": "Physics3DSliderJoint",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Physics3D slider joint",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics3D.ts",
       "sourceProvenance": {
@@ -250217,9 +250217,9 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 0,
-        "mode": "audit-only",
-        "pendingAccesses": 148,
+        "directAccesses": 148,
+        "mode": "direct",
+        "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -250473,7 +250473,7 @@
       },
       "name": "Physics3DWorld",
       "packageName": "@flighthq/types",
-      "purpose": "checker-discovered public declaration",
+      "purpose": "reviewed escape-free Physics3D world",
       "reasons": [],
       "source": "upstream/packages/types/src/Physics3D.ts",
       "sourceProvenance": {
@@ -441762,7 +441762,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 2,
-      "newAuditOnly": 1363,
+      "newAuditOnly": 1358,
       "preserved": 231,
       "relocated": 146,
       "removed": 3,
@@ -441771,16 +441771,16 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 1363,
+    "auditOnlySchemas": 1358,
     "bindableAccesses": 33306,
     "candidates": 2118,
-    "directAccesses": 25114,
-    "directSchemas": 753,
+    "directAccesses": 25518,
+    "directSchemas": 758,
     "eligible": 1611,
     "escapes": 11129,
     "fields": 25393,
     "ineligible": 507,
-    "pendingAccesses": 8192,
+    "pendingAccesses": 7788,
     "reflectiveSurvivors": 451
   },
   "upstreamCommit": "598ef6f62b6f1ae2873956501069ed824699021a"

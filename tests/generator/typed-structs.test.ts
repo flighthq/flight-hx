@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_363,
+      newAuditOnly: 1_358,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -54,7 +54,7 @@ describe('typed struct stable declaration identity', () => {
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
     expect(discovery.candidates).toHaveLength(2_118);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(755);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(760);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -106,9 +106,9 @@ describe('typed struct stable declaration identity', () => {
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
     expect(newlyDiscovered).toHaveLength(1_716);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_363);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_358);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(353);
+    expect(newDirect).toHaveLength(358);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -1875,6 +1875,31 @@ describe('typed struct stable declaration identity', () => {
           name: 'SwfMorphShapePaths',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free SWF morph-shape paths',
+        }),
+        expect.objectContaining({
+          name: 'Physics3DWorld',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Physics3D world',
+        }),
+        expect.objectContaining({
+          name: 'Physics3DContact',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Physics3D contact',
+        }),
+        expect.objectContaining({
+          name: 'Physics3DMassData',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Physics3D mass data',
+        }),
+        expect.objectContaining({
+          name: 'Physics3DHingeJoint',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Physics3D hinge joint',
+        }),
+        expect.objectContaining({
+          name: 'Physics3DSliderJoint',
+          packageName: '@flighthq/types',
+          purpose: 'reviewed escape-free Physics3D slider joint',
         }),
       ]),
     );
@@ -3644,6 +3669,31 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#SwfMorphShapePaths',
         purpose: 'reviewed escape-free SWF morph-shape paths',
       },
+      {
+        declarationFingerprint: 'sha256:478fc67f4c76a013a87b78935ea0183d26e38fcb81c608e340f38357ab1bde6a',
+        id: '@flighthq/types:interface#Physics3DWorld',
+        purpose: 'reviewed escape-free Physics3D world',
+      },
+      {
+        declarationFingerprint: 'sha256:80fa54977329f20751f7c2bd023c5b0b1b6ece290cfa9bcd5edaf93f43aa9ec5',
+        id: '@flighthq/types:interface#Physics3DContact',
+        purpose: 'reviewed escape-free Physics3D contact',
+      },
+      {
+        declarationFingerprint: 'sha256:280e588114daf5dcd9e2597b4995772ffbf8cb4fecc34588b8f09d93669e2ca3',
+        id: '@flighthq/types:interface#Physics3DMassData',
+        purpose: 'reviewed escape-free Physics3D mass data',
+      },
+      {
+        declarationFingerprint: 'sha256:3617e061adc1153c05c953faf6638b850bdd8a7cf5dc7ea4924c776b3ae87730',
+        id: '@flighthq/types:interface#Physics3DHingeJoint',
+        purpose: 'reviewed escape-free Physics3D hinge joint',
+      },
+      {
+        declarationFingerprint: 'sha256:2e63948889100e2121b93104f31cca5a88c20e619e5fe18c77d2df4c201b07fd',
+        id: '@flighthq/types:interface#Physics3DSliderJoint',
+        purpose: 'reviewed escape-free Physics3D slider joint',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -4754,6 +4804,19 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const fortyFourthHighAccessFrontierCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'Physics3DWorld',
+            'Physics3DContact',
+            'Physics3DMassData',
+            'Physics3DHingeJoint',
+            'Physics3DSliderJoint',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -4794,22 +4857,22 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_363,
+      auditOnlySchemas: 1_358,
       bindableAccesses: 33_306,
       candidates: 2_118,
-      directAccesses: 25_114,
-      directSchemas: 753,
+      directAccesses: 25_518,
+      directSchemas: 758,
       eligible: 1_611,
       escapes: 11_129,
       fields: 25_393,
       ineligible: 507,
-      pendingAccesses: 8_192,
+      pendingAccesses: 7_788,
       reflectiveSurvivors: 451,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_363,
+      newAuditOnly: 1_358,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -4886,7 +4949,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(25_114);
+    expect(report.summary.directAccesses).toBe(25_518);
     expect(rectangle?.emission).toEqual({
       directAccesses: 707,
       mode: 'direct',
@@ -6956,6 +7019,48 @@ describe('typed struct analysis', () => {
       ],
     ] as const) {
       expect(fortyThirdHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'Physics3DWorld',
+        148,
+        'sha256:478fc67f4c76a013a87b78935ea0183d26e38fcb81c608e340f38357ab1bde6a',
+        'reviewed escape-free Physics3D world',
+      ],
+      [
+        'Physics3DContact',
+        83,
+        'sha256:80fa54977329f20751f7c2bd023c5b0b1b6ece290cfa9bcd5edaf93f43aa9ec5',
+        'reviewed escape-free Physics3D contact',
+      ],
+      [
+        'Physics3DMassData',
+        77,
+        'sha256:280e588114daf5dcd9e2597b4995772ffbf8cb4fecc34588b8f09d93669e2ca3',
+        'reviewed escape-free Physics3D mass data',
+      ],
+      [
+        'Physics3DHingeJoint',
+        48,
+        'sha256:3617e061adc1153c05c953faf6638b850bdd8a7cf5dc7ea4924c776b3ae87730',
+        'reviewed escape-free Physics3D hinge joint',
+      ],
+      [
+        'Physics3DSliderJoint',
+        48,
+        'sha256:2e63948889100e2121b93104f31cca5a88c20e619e5fe18c77d2df4c201b07fd',
+        'reviewed escape-free Physics3D slider joint',
+      ],
+    ] as const) {
+      expect(fortyFourthHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -9207,6 +9312,33 @@ describe('typed struct analysis', () => {
       else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
     }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
+      ['@flighthq/types:interface#Physics3DWorld', true, [], ['enumeration'], null],
+      ['@flighthq/types:interface#Physics3DContact', true, [], [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#Physics3DMassData', true, [], [], { blockerReasons: [], closed: true }],
+      [
+        '@flighthq/types:interface#Physics3DHingeJoint',
+        false,
+        ['cross-schema-transfer', 'object-literal-spread'],
+        [],
+        null,
+      ],
+      [
+        '@flighthq/types:interface#Physics3DSliderJoint',
+        false,
+        ['cross-schema-transfer', 'object-literal-spread'],
+        [],
+        null,
+      ],
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible,
+        normalizationReasons,
+        observabilityReasons,
+      });
+      if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
+      else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+    }
+    for (const [frontierId, mechanicallyCompatible, normalizationReasons, observabilityReasons, nominalIdentity] of [
       [
         '@flighthq/types:interface#GlColorScaleBiasInstancedShader',
         true,
@@ -10727,6 +10859,23 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:MorphShapeLineEndpoint|MorphShapeColorEndpoint|MorphShapePathBinding|MorphShapeAnimationTarget|SwfMorphShapePaths)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/physics3d/ExplainPhysics3DJoints.hx',
+      'generated/flighthq/physics3d/ExplainPhysics3DStep.hx',
+      'generated/flighthq/physics3d/Islands.hx',
+      'generated/flighthq/physics3d/JointCollisionSuppression.hx',
+      'generated/flighthq/physics3d/JointRegistry.hx',
+      'generated/flighthq/physics3d/Joints.hx',
+      'generated/flighthq/physics3d/MassProperties.hx',
+      'generated/flighthq/physics3d/Solver.hx',
+      'generated/flighthq/physics3d/Step.hx',
+      'generated/flighthq/physics3d/StepValidation.hx',
+      'generated/flighthq/physics3d/World.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:Physics3DWorld|Physics3DContact|Physics3DMassData|Physics3DHingeJoint|Physics3DSliderJoint)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');

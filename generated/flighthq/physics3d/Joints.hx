@@ -146,29 +146,29 @@ class Joints {
     ((cast joint : Physics3DJoint).impulse3 = 0.0);
     ((cast joint : Physics3DJoint).impulse4 = 0.0);
     hinge = (cast joint : Physics3DHingeJoint);
-    ((cast hinge : Physics3DHingeJoint).motorImpulse = 0.0);
-    ((cast hinge : Physics3DHingeJoint).lowerLimitImpulse = 0.0);
-    ((cast hinge : Physics3DHingeJoint).upperLimitImpulse = 0.0);
+    (hinge.motorImpulse = cast (0.0 : Float));
+    (hinge.lowerLimitImpulse = cast (0.0 : Float));
+    (hinge.upperLimitImpulse = cast (0.0 : Float));
   }, scaleAccumulatedImpulses: function(joint:Physics3DJoint, timestepRatio:Float):Void {
     var hinge:Physics3DHingeJoint = cast _Runtime.UNDEFINED;
     hinge = (cast joint : Physics3DHingeJoint);
-    ((cast hinge : Physics3DHingeJoint).motorImpulse = _Runtime.multiplyNumbers(_Runtime.coalesce((cast hinge : Physics3DHingeJoint).motorImpulse, function():Dynamic return cast 0.0), timestepRatio));
-    ((cast hinge : Physics3DHingeJoint).lowerLimitImpulse = _Runtime.multiplyNumbers(_Runtime.coalesce((cast hinge : Physics3DHingeJoint).lowerLimitImpulse, function():Dynamic return cast 0.0), timestepRatio));
-    ((cast hinge : Physics3DHingeJoint).upperLimitImpulse = _Runtime.multiplyNumbers(_Runtime.coalesce((cast hinge : Physics3DHingeJoint).upperLimitImpulse, function():Dynamic return cast 0.0), timestepRatio));
+    (hinge.motorImpulse = cast (_Runtime.multiplyNumbers(_Runtime.coalesce(hinge.motorImpulse, function():Dynamic return cast 0.0), timestepRatio) : Float));
+    (hinge.lowerLimitImpulse = cast (_Runtime.multiplyNumbers(_Runtime.coalesce(hinge.lowerLimitImpulse, function():Dynamic return cast 0.0), timestepRatio) : Float));
+    (hinge.upperLimitImpulse = cast (_Runtime.multiplyNumbers(_Runtime.coalesce(hinge.upperLimitImpulse, function():Dynamic return cast 0.0), timestepRatio) : Float));
   }, swapEnds: function(joint:Physics3DJoint):Bool {
     var hinge:Physics3DHingeJoint = cast _Runtime.UNDEFINED;
     var lower:Float = cast _Runtime.UNDEFINED;
     var lowerImpulse:Float = cast _Runtime.UNDEFINED;
     hinge = (cast joint : Physics3DHingeJoint);
     swapPhysics3DJointFrames(({ final __callArgument53:Dynamic = hinge; __callArgument53; }));
-    lower = (cast hinge : Physics3DHingeJoint).lowerAngle;
-    ((cast hinge : Physics3DHingeJoint).lowerAngle = -(cast hinge : Physics3DHingeJoint).upperAngle);
-    ((cast hinge : Physics3DHingeJoint).upperAngle = -lower);
-    ((cast hinge : Physics3DHingeJoint).motorSpeed = -(cast hinge : Physics3DHingeJoint).motorSpeed);
-    ((cast hinge : Physics3DHingeJoint).motorImpulse = -_Runtime.coalesce((cast hinge : Physics3DHingeJoint).motorImpulse, function():Dynamic return cast 0.0));
-    lowerImpulse = _Runtime.coalesce((cast hinge : Physics3DHingeJoint).lowerLimitImpulse, function():Dynamic return cast 0.0);
-    ((cast hinge : Physics3DHingeJoint).lowerLimitImpulse = _Runtime.coalesce((cast hinge : Physics3DHingeJoint).upperLimitImpulse, function():Dynamic return cast 0.0));
-    ((cast hinge : Physics3DHingeJoint).upperLimitImpulse = lowerImpulse);
+    lower = hinge.lowerAngle;
+    (hinge.lowerAngle = cast (-hinge.upperAngle : Float));
+    (hinge.upperAngle = cast (-lower : Float));
+    (hinge.motorSpeed = cast (-hinge.motorSpeed : Float));
+    (hinge.motorImpulse = cast (-_Runtime.coalesce(hinge.motorImpulse, function():Dynamic return cast 0.0) : Float));
+    lowerImpulse = _Runtime.coalesce(hinge.lowerLimitImpulse, function():Dynamic return cast 0.0);
+    (hinge.lowerLimitImpulse = cast (_Runtime.coalesce(hinge.upperLimitImpulse, function():Dynamic return cast 0.0) : Float));
+    (hinge.upperLimitImpulse = cast (lowerImpulse : Float));
     return cast true;
     return cast _Runtime.UNDEFINED;
   }, prepare: function(world:Physics3DWorld, joint:Physics3DJoint, dt:Float):Void {
@@ -199,20 +199,20 @@ class Joints {
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_ANGLE__joints : Float), (cast (cast Joints.getSignedAxisAngle__joints(({ final __callArgument85:Dynamic = frameABasis; __callArgument85; }), ({ final __callArgument86:Dynamic = frameBBasis; __callArgument86; })) : Float) : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_LOCK_BIAS__joints : Float), (cast (Joints.BAUMGARTE__joints / dt) : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_LIMIT_BIAS__joints : Float), (cast (1.0 / dt) : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_MAX_MOTOR__joints : Float), (cast HxMath.max(0.0, (dt * (cast hinge : Physics3DHingeJoint).maxMotorTorque)) : Float));
-    ({ final __nullishOwner87 = hinge; final __nullishValue88:Null<Float> = cast (cast __nullishOwner87 : Physics3DHingeJoint).lowerLimitImpulse; __nullishValue88 == null ? ((cast __nullishOwner87 : Physics3DHingeJoint).lowerLimitImpulse = (cast 0.0 : Float)) : (cast __nullishValue88 : Float); });
-    ({ final __nullishOwner89 = hinge; final __nullishValue90:Null<Float> = cast (cast __nullishOwner89 : Physics3DHingeJoint).upperLimitImpulse; __nullishValue90 == null ? ((cast __nullishOwner89 : Physics3DHingeJoint).upperLimitImpulse = (cast 0.0 : Float)) : (cast __nullishValue90 : Float); });
-    if ((cast !(cast (cast hinge : Physics3DHingeJoint).enableLimit : Bool) : Bool)) {
-      ((cast hinge : Physics3DHingeJoint).lowerLimitImpulse = 0.0);
-      ((cast hinge : Physics3DHingeJoint).upperLimitImpulse = 0.0);
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_MAX_MOTOR__joints : Float), (cast HxMath.max(0.0, (dt * hinge.maxMotorTorque)) : Float));
+    ({ final __nullishOwner87 = hinge; final __nullishValue88:Null<Float> = cast __nullishOwner87.lowerLimitImpulse; __nullishValue88 == null ? (__nullishOwner87.lowerLimitImpulse = (cast 0.0 : Float)) : (cast __nullishValue88 : Float); });
+    ({ final __nullishOwner89 = hinge; final __nullishValue90:Null<Float> = cast __nullishOwner89.upperLimitImpulse; __nullishValue90 == null ? (__nullishOwner89.upperLimitImpulse = (cast 0.0 : Float)) : (cast __nullishValue90 : Float); });
+    if ((cast !(cast hinge.enableLimit : Bool) : Bool)) {
+      (hinge.lowerLimitImpulse = cast (0.0 : Float));
+      (hinge.upperLimitImpulse = cast (0.0 : Float));
     }
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_LOWER_IMPULSE__joints : Float), (cast (cast hinge : Physics3DHingeJoint).lowerLimitImpulse : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_UPPER_IMPULSE__joints : Float), (cast (cast hinge : Physics3DHingeJoint).upperLimitImpulse : Float));
-    ({ final __nullishOwner91 = hinge; final __nullishValue92:Null<Float> = cast (cast __nullishOwner91 : Physics3DHingeJoint).motorImpulse; __nullishValue92 == null ? ((cast __nullishOwner91 : Physics3DHingeJoint).motorImpulse = (cast 0.0 : Float)) : (cast __nullishValue92 : Float); });
-    if ((cast (cast hinge : Physics3DHingeJoint).enableMotor : Bool)) {
-      ((cast hinge : Physics3DHingeJoint).motorImpulse = (cast Joints.clamp__joints((cast (cast hinge : Physics3DHingeJoint).motorImpulse : Float), (cast -flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_MAX_MOTOR__joints : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_MAX_MOTOR__joints : Float)) : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_LOWER_IMPULSE__joints : Float), (cast hinge.lowerLimitImpulse : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_UPPER_IMPULSE__joints : Float), (cast hinge.upperLimitImpulse : Float));
+    ({ final __nullishOwner91 = hinge; final __nullishValue92:Null<Float> = cast __nullishOwner91.motorImpulse; __nullishValue92 == null ? (__nullishOwner91.motorImpulse = (cast 0.0 : Float)) : (cast __nullishValue92 : Float); });
+    if ((cast hinge.enableMotor : Bool)) {
+      (hinge.motorImpulse = cast ((cast Joints.clamp__joints((cast hinge.motorImpulse : Float), (cast -flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_MAX_MOTOR__joints : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_MAX_MOTOR__joints : Float)) : Float)) : Float) : Float));
     } else {
-      ((cast hinge : Physics3DHingeJoint).motorImpulse = 0.0);
+      (hinge.motorImpulse = cast (0.0 : Float));
     }
   }, solve: function(world:Physics3DWorld, joint:Physics3DJoint, dt:Float):Void {
     var hinge:Physics3DHingeJoint = cast _Runtime.UNDEFINED;
@@ -225,15 +225,15 @@ class Joints {
     bodyA = (cast findPhysics3DBody(({ final __callArgument94:Dynamic = world; __callArgument94; }), (cast (cast joint : Physics3DJoint).bodyA : Float)) : Null<RigidBody3D>);
     bodyB = (cast findPhysics3DBody(({ final __callArgument95:Dynamic = world; __callArgument95; }), (cast (cast joint : Physics3DJoint).bodyB : Float)) : Null<RigidBody3D>);
     if ((cast ((cast _Runtime.strictEquals(bodyA, null) : Bool) || (cast _Runtime.strictEquals(bodyB, null) : Bool)) : Bool)) { return; }
-    if ((cast ((cast (cast hinge : Physics3DHingeJoint).enableMotor : Bool) && (cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_AXIS_MASS__joints : Float)) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      ((cast hinge : Physics3DHingeJoint).motorImpulse = (cast solveMotorRow(({ final __callArgument96:Dynamic = bodyA; __callArgument96; }), ({ final __callArgument97:Dynamic = bodyB; __callArgument97; }), ({ final __callArgument98:Dynamic = state; __callArgument98; }), (cast Joints.HINGE_AXIS_ROW__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_AXIS_MASS__joints : Float)) : Float), (cast (cast hinge : Physics3DHingeJoint).motorSpeed : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_MAX_MOTOR__joints : Float)) : Float), (cast (cast hinge : Physics3DHingeJoint).motorImpulse : Float)) : Float));
+    if ((cast ((cast hinge.enableMotor : Bool) && (cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_AXIS_MASS__joints : Float)) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      (hinge.motorImpulse = cast ((cast solveMotorRow(({ final __callArgument96:Dynamic = bodyA; __callArgument96; }), ({ final __callArgument97:Dynamic = bodyB; __callArgument97; }), ({ final __callArgument98:Dynamic = state; __callArgument98; }), (cast Joints.HINGE_AXIS_ROW__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_AXIS_MASS__joints : Float)) : Float), (cast hinge.motorSpeed : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_MAX_MOTOR__joints : Float)) : Float), (cast hinge.motorImpulse : Float)) : Float) : Float));
     }
-    if ((cast ((cast (cast hinge : Physics3DHingeJoint).enableLimit : Bool) && (cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_AXIS_MASS__joints : Float)) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast hinge.enableLimit : Bool) && (cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_AXIS_MASS__joints : Float)) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       var angle:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_ANGLE__joints : Float));
-      solveLowerLimitRow(({ final __callArgument99:Dynamic = bodyA; __callArgument99; }), ({ final __callArgument100:Dynamic = bodyB; __callArgument100; }), ({ final __callArgument101:Dynamic = state; __callArgument101; }), (cast Joints.HINGE_AXIS_ROW__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_AXIS_MASS__joints : Float)) : Float), (cast (angle - (cast hinge : Physics3DHingeJoint).lowerAngle) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_LIMIT_BIAS__joints : Float)) : Float), (cast Joints.HINGE_LOWER_IMPULSE__joints : Float));
-      solveUpperLimitRow(({ final __callArgument102:Dynamic = bodyA; __callArgument102; }), ({ final __callArgument103:Dynamic = bodyB; __callArgument103; }), ({ final __callArgument104:Dynamic = state; __callArgument104; }), (cast Joints.HINGE_AXIS_ROW__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_AXIS_MASS__joints : Float)) : Float), (cast ((cast hinge : Physics3DHingeJoint).upperAngle - angle) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_LIMIT_BIAS__joints : Float)) : Float), (cast Joints.HINGE_UPPER_IMPULSE__joints : Float));
-      ((cast hinge : Physics3DHingeJoint).lowerLimitImpulse = flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_LOWER_IMPULSE__joints : Float)));
-      ((cast hinge : Physics3DHingeJoint).upperLimitImpulse = flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_UPPER_IMPULSE__joints : Float)));
+      solveLowerLimitRow(({ final __callArgument99:Dynamic = bodyA; __callArgument99; }), ({ final __callArgument100:Dynamic = bodyB; __callArgument100; }), ({ final __callArgument101:Dynamic = state; __callArgument101; }), (cast Joints.HINGE_AXIS_ROW__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_AXIS_MASS__joints : Float)) : Float), (cast (angle - hinge.lowerAngle) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_LIMIT_BIAS__joints : Float)) : Float), (cast Joints.HINGE_LOWER_IMPULSE__joints : Float));
+      solveUpperLimitRow(({ final __callArgument102:Dynamic = bodyA; __callArgument102; }), ({ final __callArgument103:Dynamic = bodyB; __callArgument103; }), ({ final __callArgument104:Dynamic = state; __callArgument104; }), (cast Joints.HINGE_AXIS_ROW__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_AXIS_MASS__joints : Float)) : Float), (cast (hinge.upperAngle - angle) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_LIMIT_BIAS__joints : Float)) : Float), (cast Joints.HINGE_UPPER_IMPULSE__joints : Float));
+      (hinge.lowerLimitImpulse = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_LOWER_IMPULSE__joints : Float)) : Float));
+      (hinge.upperLimitImpulse = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_UPPER_IMPULSE__joints : Float)) : Float));
     }
     solveEqualityRow(({ final __callArgument105:Dynamic = bodyA; __callArgument105; }), ({ final __callArgument106:Dynamic = bodyB; __callArgument106; }), ({ final __callArgument107:Dynamic = joint; __callArgument107; }), (cast 3.0 : Float), ({ final __callArgument108:Dynamic = state; __callArgument108; }), (cast Joints.HINGE_LOCK_ROW0__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_LOCK_MASS0__joints : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_LOCK_ERROR0__joints : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_LOCK_BIAS__joints : Float)) : Float));
     solveEqualityRow(({ final __callArgument109:Dynamic = bodyA; __callArgument109; }), ({ final __callArgument110:Dynamic = bodyB; __callArgument110; }), ({ final __callArgument111:Dynamic = joint; __callArgument111; }), (cast 4.0 : Float), ({ final __callArgument112:Dynamic = state; __callArgument112; }), (cast Joints.HINGE_LOCK_ROW1__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_LOCK_MASS1__joints : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_LOCK_ERROR1__joints : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.HINGE_LOCK_BIAS__joints : Float)) : Float));
@@ -252,9 +252,9 @@ class Joints {
     warmStartPointBlock(({ final __callArgument120:Dynamic = bodyA; __callArgument120; }), ({ final __callArgument121:Dynamic = bodyB; __callArgument121; }), ({ final __callArgument122:Dynamic = joint; __callArgument122; }));
     applyRow(({ final __callArgument123:Dynamic = bodyA; __callArgument123; }), ({ final __callArgument124:Dynamic = bodyB; __callArgument124; }), ({ final __callArgument125:Dynamic = state; __callArgument125; }), (cast Joints.HINGE_LOCK_ROW0__joints : Float), (cast (cast joint : Physics3DJoint).impulse3 : Float));
     applyRow(({ final __callArgument126:Dynamic = bodyA; __callArgument126; }), ({ final __callArgument127:Dynamic = bodyB; __callArgument127; }), ({ final __callArgument128:Dynamic = state; __callArgument128; }), (cast Joints.HINGE_LOCK_ROW1__joints : Float), (cast (cast joint : Physics3DJoint).impulse4 : Float));
-    if ((cast (cast hinge : Physics3DHingeJoint).enableMotor : Bool)) { applyRow(({ final __callArgument129:Dynamic = bodyA; __callArgument129; }), ({ final __callArgument130:Dynamic = bodyB; __callArgument130; }), ({ final __callArgument131:Dynamic = state; __callArgument131; }), (cast Joints.HINGE_AXIS_ROW__joints : Float), (cast (cast hinge : Physics3DHingeJoint).motorImpulse : Float)); }
-    if ((cast (cast hinge : Physics3DHingeJoint).enableLimit : Bool)) {
-      applyRow(({ final __callArgument132:Dynamic = bodyA; __callArgument132; }), ({ final __callArgument133:Dynamic = bodyB; __callArgument133; }), ({ final __callArgument134:Dynamic = state; __callArgument134; }), (cast Joints.HINGE_AXIS_ROW__joints : Float), (cast ((cast hinge : Physics3DHingeJoint).lowerLimitImpulse - (cast hinge : Physics3DHingeJoint).upperLimitImpulse) : Float));
+    if ((cast hinge.enableMotor : Bool)) { applyRow(({ final __callArgument129:Dynamic = bodyA; __callArgument129; }), ({ final __callArgument130:Dynamic = bodyB; __callArgument130; }), ({ final __callArgument131:Dynamic = state; __callArgument131; }), (cast Joints.HINGE_AXIS_ROW__joints : Float), (cast hinge.motorImpulse : Float)); }
+    if ((cast hinge.enableLimit : Bool)) {
+      applyRow(({ final __callArgument132:Dynamic = bodyA; __callArgument132; }), ({ final __callArgument133:Dynamic = bodyB; __callArgument133; }), ({ final __callArgument134:Dynamic = state; __callArgument134; }), (cast Joints.HINGE_AXIS_ROW__joints : Float), (cast (hinge.lowerLimitImpulse - hinge.upperLimitImpulse) : Float));
     }
   } });
 
@@ -511,29 +511,29 @@ class Joints {
     ((cast joint : Physics3DJoint).impulse4 = 0.0);
     ((cast joint : Physics3DJoint).impulse5 = 0.0);
     slider = (cast joint : Physics3DSliderJoint);
-    ((cast slider : Physics3DSliderJoint).motorImpulse = 0.0);
-    ((cast slider : Physics3DSliderJoint).lowerLimitImpulse = 0.0);
-    ((cast slider : Physics3DSliderJoint).upperLimitImpulse = 0.0);
+    (slider.motorImpulse = cast (0.0 : Float));
+    (slider.lowerLimitImpulse = cast (0.0 : Float));
+    (slider.upperLimitImpulse = cast (0.0 : Float));
   }, scaleAccumulatedImpulses: function(joint:Physics3DJoint, timestepRatio:Float):Void {
     var slider:Physics3DSliderJoint = cast _Runtime.UNDEFINED;
     slider = (cast joint : Physics3DSliderJoint);
-    ((cast slider : Physics3DSliderJoint).motorImpulse = _Runtime.multiplyNumbers(_Runtime.coalesce((cast slider : Physics3DSliderJoint).motorImpulse, function():Dynamic return cast 0.0), timestepRatio));
-    ((cast slider : Physics3DSliderJoint).lowerLimitImpulse = _Runtime.multiplyNumbers(_Runtime.coalesce((cast slider : Physics3DSliderJoint).lowerLimitImpulse, function():Dynamic return cast 0.0), timestepRatio));
-    ((cast slider : Physics3DSliderJoint).upperLimitImpulse = _Runtime.multiplyNumbers(_Runtime.coalesce((cast slider : Physics3DSliderJoint).upperLimitImpulse, function():Dynamic return cast 0.0), timestepRatio));
+    (slider.motorImpulse = cast (_Runtime.multiplyNumbers(_Runtime.coalesce(slider.motorImpulse, function():Dynamic return cast 0.0), timestepRatio) : Float));
+    (slider.lowerLimitImpulse = cast (_Runtime.multiplyNumbers(_Runtime.coalesce(slider.lowerLimitImpulse, function():Dynamic return cast 0.0), timestepRatio) : Float));
+    (slider.upperLimitImpulse = cast (_Runtime.multiplyNumbers(_Runtime.coalesce(slider.upperLimitImpulse, function():Dynamic return cast 0.0), timestepRatio) : Float));
   }, swapEnds: function(joint:Physics3DJoint):Bool {
     var slider:Physics3DSliderJoint = cast _Runtime.UNDEFINED;
     var lower:Float = cast _Runtime.UNDEFINED;
     var lowerImpulse:Float = cast _Runtime.UNDEFINED;
     slider = (cast joint : Physics3DSliderJoint);
     swapPhysics3DJointFrames(({ final __callArgument252:Dynamic = slider; __callArgument252; }));
-    lower = (cast slider : Physics3DSliderJoint).lowerTranslation;
-    ((cast slider : Physics3DSliderJoint).lowerTranslation = -(cast slider : Physics3DSliderJoint).upperTranslation);
-    ((cast slider : Physics3DSliderJoint).upperTranslation = -lower);
-    ((cast slider : Physics3DSliderJoint).motorSpeed = -(cast slider : Physics3DSliderJoint).motorSpeed);
-    ((cast slider : Physics3DSliderJoint).motorImpulse = -_Runtime.coalesce((cast slider : Physics3DSliderJoint).motorImpulse, function():Dynamic return cast 0.0));
-    lowerImpulse = _Runtime.coalesce((cast slider : Physics3DSliderJoint).lowerLimitImpulse, function():Dynamic return cast 0.0);
-    ((cast slider : Physics3DSliderJoint).lowerLimitImpulse = _Runtime.coalesce((cast slider : Physics3DSliderJoint).upperLimitImpulse, function():Dynamic return cast 0.0));
-    ((cast slider : Physics3DSliderJoint).upperLimitImpulse = lowerImpulse);
+    lower = slider.lowerTranslation;
+    (slider.lowerTranslation = cast (-slider.upperTranslation : Float));
+    (slider.upperTranslation = cast (-lower : Float));
+    (slider.motorSpeed = cast (-slider.motorSpeed : Float));
+    (slider.motorImpulse = cast (-_Runtime.coalesce(slider.motorImpulse, function():Dynamic return cast 0.0) : Float));
+    lowerImpulse = _Runtime.coalesce(slider.lowerLimitImpulse, function():Dynamic return cast 0.0);
+    (slider.lowerLimitImpulse = cast (_Runtime.coalesce(slider.upperLimitImpulse, function():Dynamic return cast 0.0) : Float));
+    (slider.upperLimitImpulse = cast (lowerImpulse : Float));
     return cast true;
     return cast _Runtime.UNDEFINED;
   }, prepare: function(world:Physics3DWorld, joint:Physics3DJoint, dt:Float):Void {
@@ -565,20 +565,20 @@ class Joints {
     prepareAngularBlock(({ final __callArgument291:Dynamic = bodyA; __callArgument291; }), ({ final __callArgument292:Dynamic = bodyB; __callArgument292; }), ({ final __callArgument293:Dynamic = state; __callArgument293; }), (cast Joints.SLIDER_ANGULAR_MASS__joints : Float), (cast Joints.SLIDER_ANGULAR_BIAS__joints : Float), (cast dt : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_LOCK_BIAS__joints : Float), (cast (Joints.BAUMGARTE__joints / dt) : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_LIMIT_BIAS__joints : Float), (cast (1.0 / dt) : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_MAX_MOTOR__joints : Float), (cast HxMath.max(0.0, (dt * (cast slider : Physics3DSliderJoint).maxMotorForce)) : Float));
-    ({ final __nullishOwner294 = slider; final __nullishValue295:Null<Float> = cast (cast __nullishOwner294 : Physics3DSliderJoint).lowerLimitImpulse; __nullishValue295 == null ? ((cast __nullishOwner294 : Physics3DSliderJoint).lowerLimitImpulse = (cast 0.0 : Float)) : (cast __nullishValue295 : Float); });
-    ({ final __nullishOwner296 = slider; final __nullishValue297:Null<Float> = cast (cast __nullishOwner296 : Physics3DSliderJoint).upperLimitImpulse; __nullishValue297 == null ? ((cast __nullishOwner296 : Physics3DSliderJoint).upperLimitImpulse = (cast 0.0 : Float)) : (cast __nullishValue297 : Float); });
-    if ((cast !(cast (cast slider : Physics3DSliderJoint).enableLimit : Bool) : Bool)) {
-      ((cast slider : Physics3DSliderJoint).lowerLimitImpulse = 0.0);
-      ((cast slider : Physics3DSliderJoint).upperLimitImpulse = 0.0);
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_MAX_MOTOR__joints : Float), (cast HxMath.max(0.0, (dt * slider.maxMotorForce)) : Float));
+    ({ final __nullishOwner294 = slider; final __nullishValue295:Null<Float> = cast __nullishOwner294.lowerLimitImpulse; __nullishValue295 == null ? (__nullishOwner294.lowerLimitImpulse = (cast 0.0 : Float)) : (cast __nullishValue295 : Float); });
+    ({ final __nullishOwner296 = slider; final __nullishValue297:Null<Float> = cast __nullishOwner296.upperLimitImpulse; __nullishValue297 == null ? (__nullishOwner296.upperLimitImpulse = (cast 0.0 : Float)) : (cast __nullishValue297 : Float); });
+    if ((cast !(cast slider.enableLimit : Bool) : Bool)) {
+      (slider.lowerLimitImpulse = cast (0.0 : Float));
+      (slider.upperLimitImpulse = cast (0.0 : Float));
     }
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_LOWER_IMPULSE__joints : Float), (cast (cast slider : Physics3DSliderJoint).lowerLimitImpulse : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_UPPER_IMPULSE__joints : Float), (cast (cast slider : Physics3DSliderJoint).upperLimitImpulse : Float));
-    ({ final __nullishOwner298 = slider; final __nullishValue299:Null<Float> = cast (cast __nullishOwner298 : Physics3DSliderJoint).motorImpulse; __nullishValue299 == null ? ((cast __nullishOwner298 : Physics3DSliderJoint).motorImpulse = (cast 0.0 : Float)) : (cast __nullishValue299 : Float); });
-    if ((cast (cast slider : Physics3DSliderJoint).enableMotor : Bool)) {
-      ((cast slider : Physics3DSliderJoint).motorImpulse = (cast Joints.clamp__joints((cast (cast slider : Physics3DSliderJoint).motorImpulse : Float), (cast -flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_MAX_MOTOR__joints : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_MAX_MOTOR__joints : Float)) : Float)) : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_LOWER_IMPULSE__joints : Float), (cast slider.lowerLimitImpulse : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_UPPER_IMPULSE__joints : Float), (cast slider.upperLimitImpulse : Float));
+    ({ final __nullishOwner298 = slider; final __nullishValue299:Null<Float> = cast __nullishOwner298.motorImpulse; __nullishValue299 == null ? (__nullishOwner298.motorImpulse = (cast 0.0 : Float)) : (cast __nullishValue299 : Float); });
+    if ((cast slider.enableMotor : Bool)) {
+      (slider.motorImpulse = cast ((cast Joints.clamp__joints((cast slider.motorImpulse : Float), (cast -flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_MAX_MOTOR__joints : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_MAX_MOTOR__joints : Float)) : Float)) : Float) : Float));
     } else {
-      ((cast slider : Physics3DSliderJoint).motorImpulse = 0.0);
+      (slider.motorImpulse = cast (0.0 : Float));
     }
   }, solve: function(world:Physics3DWorld, joint:Physics3DJoint, dt:Float):Void {
     var slider:Physics3DSliderJoint = cast _Runtime.UNDEFINED;
@@ -591,15 +591,15 @@ class Joints {
     bodyA = (cast findPhysics3DBody(({ final __callArgument301:Dynamic = world; __callArgument301; }), (cast (cast joint : Physics3DJoint).bodyA : Float)) : Null<RigidBody3D>);
     bodyB = (cast findPhysics3DBody(({ final __callArgument302:Dynamic = world; __callArgument302; }), (cast (cast joint : Physics3DJoint).bodyB : Float)) : Null<RigidBody3D>);
     if ((cast ((cast _Runtime.strictEquals(bodyA, null) : Bool) || (cast _Runtime.strictEquals(bodyB, null) : Bool)) : Bool)) { return; }
-    if ((cast ((cast (cast slider : Physics3DSliderJoint).enableMotor : Bool) && (cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_AXIS_MASS__joints : Float)) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
-      ((cast slider : Physics3DSliderJoint).motorImpulse = (cast solveMotorRow(({ final __callArgument303:Dynamic = bodyA; __callArgument303; }), ({ final __callArgument304:Dynamic = bodyB; __callArgument304; }), ({ final __callArgument305:Dynamic = state; __callArgument305; }), (cast Joints.SLIDER_AXIS_ROW__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_AXIS_MASS__joints : Float)) : Float), (cast (cast slider : Physics3DSliderJoint).motorSpeed : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_MAX_MOTOR__joints : Float)) : Float), (cast (cast slider : Physics3DSliderJoint).motorImpulse : Float)) : Float));
+    if ((cast ((cast slider.enableMotor : Bool) && (cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_AXIS_MASS__joints : Float)) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+      (slider.motorImpulse = cast ((cast solveMotorRow(({ final __callArgument303:Dynamic = bodyA; __callArgument303; }), ({ final __callArgument304:Dynamic = bodyB; __callArgument304; }), ({ final __callArgument305:Dynamic = state; __callArgument305; }), (cast Joints.SLIDER_AXIS_ROW__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_AXIS_MASS__joints : Float)) : Float), (cast slider.motorSpeed : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_MAX_MOTOR__joints : Float)) : Float), (cast slider.motorImpulse : Float)) : Float) : Float));
     }
-    if ((cast ((cast (cast slider : Physics3DSliderJoint).enableLimit : Bool) && (cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_AXIS_MASS__joints : Float)) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
+    if ((cast ((cast slider.enableLimit : Bool) && (cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_AXIS_MASS__joints : Float)) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       var translation:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_TRANSLATION__joints : Float));
-      solveLowerLimitRow(({ final __callArgument306:Dynamic = bodyA; __callArgument306; }), ({ final __callArgument307:Dynamic = bodyB; __callArgument307; }), ({ final __callArgument308:Dynamic = state; __callArgument308; }), (cast Joints.SLIDER_AXIS_ROW__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_AXIS_MASS__joints : Float)) : Float), (cast (translation - (cast slider : Physics3DSliderJoint).lowerTranslation) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_LIMIT_BIAS__joints : Float)) : Float), (cast Joints.SLIDER_LOWER_IMPULSE__joints : Float));
-      solveUpperLimitRow(({ final __callArgument309:Dynamic = bodyA; __callArgument309; }), ({ final __callArgument310:Dynamic = bodyB; __callArgument310; }), ({ final __callArgument311:Dynamic = state; __callArgument311; }), (cast Joints.SLIDER_AXIS_ROW__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_AXIS_MASS__joints : Float)) : Float), (cast ((cast slider : Physics3DSliderJoint).upperTranslation - translation) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_LIMIT_BIAS__joints : Float)) : Float), (cast Joints.SLIDER_UPPER_IMPULSE__joints : Float));
-      ((cast slider : Physics3DSliderJoint).lowerLimitImpulse = flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_LOWER_IMPULSE__joints : Float)));
-      ((cast slider : Physics3DSliderJoint).upperLimitImpulse = flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_UPPER_IMPULSE__joints : Float)));
+      solveLowerLimitRow(({ final __callArgument306:Dynamic = bodyA; __callArgument306; }), ({ final __callArgument307:Dynamic = bodyB; __callArgument307; }), ({ final __callArgument308:Dynamic = state; __callArgument308; }), (cast Joints.SLIDER_AXIS_ROW__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_AXIS_MASS__joints : Float)) : Float), (cast (translation - slider.lowerTranslation) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_LIMIT_BIAS__joints : Float)) : Float), (cast Joints.SLIDER_LOWER_IMPULSE__joints : Float));
+      solveUpperLimitRow(({ final __callArgument309:Dynamic = bodyA; __callArgument309; }), ({ final __callArgument310:Dynamic = bodyB; __callArgument310; }), ({ final __callArgument311:Dynamic = state; __callArgument311; }), (cast Joints.SLIDER_AXIS_ROW__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_AXIS_MASS__joints : Float)) : Float), (cast (slider.upperTranslation - translation) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_LIMIT_BIAS__joints : Float)) : Float), (cast Joints.SLIDER_UPPER_IMPULSE__joints : Float));
+      (slider.lowerLimitImpulse = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_LOWER_IMPULSE__joints : Float)) : Float));
+      (slider.upperLimitImpulse = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_UPPER_IMPULSE__joints : Float)) : Float));
     }
     solveAngularBlock(({ final __callArgument312:Dynamic = bodyA; __callArgument312; }), ({ final __callArgument313:Dynamic = bodyB; __callArgument313; }), ({ final __callArgument314:Dynamic = joint; __callArgument314; }), ({ final __callArgument315:Dynamic = state; __callArgument315; }), (cast Joints.SLIDER_ANGULAR_MASS__joints : Float), (cast Joints.SLIDER_ANGULAR_BIAS__joints : Float));
     solveEqualityRow(({ final __callArgument316:Dynamic = bodyA; __callArgument316; }), ({ final __callArgument317:Dynamic = bodyB; __callArgument317; }), ({ final __callArgument318:Dynamic = joint; __callArgument318; }), (cast 0.0 : Float), ({ final __callArgument319:Dynamic = state; __callArgument319; }), (cast Joints.SLIDER_PERP_ROW0__joints : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_PERP_MASS0__joints : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_PERP_ERROR0__joints : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast state : Array<Float>), (cast Joints.SLIDER_LOCK_BIAS__joints : Float)) : Float));
@@ -618,9 +618,9 @@ class Joints {
     warmStartAngularBlock(({ final __callArgument327:Dynamic = bodyA; __callArgument327; }), ({ final __callArgument328:Dynamic = bodyB; __callArgument328; }), ({ final __callArgument329:Dynamic = joint; __callArgument329; }));
     applyRow(({ final __callArgument330:Dynamic = bodyA; __callArgument330; }), ({ final __callArgument331:Dynamic = bodyB; __callArgument331; }), ({ final __callArgument332:Dynamic = state; __callArgument332; }), (cast Joints.SLIDER_PERP_ROW0__joints : Float), (cast (cast joint : Physics3DJoint).impulse0 : Float));
     applyRow(({ final __callArgument333:Dynamic = bodyA; __callArgument333; }), ({ final __callArgument334:Dynamic = bodyB; __callArgument334; }), ({ final __callArgument335:Dynamic = state; __callArgument335; }), (cast Joints.SLIDER_PERP_ROW1__joints : Float), (cast (cast joint : Physics3DJoint).impulse1 : Float));
-    if ((cast (cast slider : Physics3DSliderJoint).enableMotor : Bool)) { applyRow(({ final __callArgument336:Dynamic = bodyA; __callArgument336; }), ({ final __callArgument337:Dynamic = bodyB; __callArgument337; }), ({ final __callArgument338:Dynamic = state; __callArgument338; }), (cast Joints.SLIDER_AXIS_ROW__joints : Float), (cast (cast slider : Physics3DSliderJoint).motorImpulse : Float)); }
-    if ((cast (cast slider : Physics3DSliderJoint).enableLimit : Bool)) {
-      applyRow(({ final __callArgument339:Dynamic = bodyA; __callArgument339; }), ({ final __callArgument340:Dynamic = bodyB; __callArgument340; }), ({ final __callArgument341:Dynamic = state; __callArgument341; }), (cast Joints.SLIDER_AXIS_ROW__joints : Float), (cast ((cast slider : Physics3DSliderJoint).lowerLimitImpulse - (cast slider : Physics3DSliderJoint).upperLimitImpulse) : Float));
+    if ((cast slider.enableMotor : Bool)) { applyRow(({ final __callArgument336:Dynamic = bodyA; __callArgument336; }), ({ final __callArgument337:Dynamic = bodyB; __callArgument337; }), ({ final __callArgument338:Dynamic = state; __callArgument338; }), (cast Joints.SLIDER_AXIS_ROW__joints : Float), (cast slider.motorImpulse : Float)); }
+    if ((cast slider.enableLimit : Bool)) {
+      applyRow(({ final __callArgument339:Dynamic = bodyA; __callArgument339; }), ({ final __callArgument340:Dynamic = bodyB; __callArgument340; }), ({ final __callArgument341:Dynamic = state; __callArgument341; }), (cast Joints.SLIDER_AXIS_ROW__joints : Float), (cast (slider.lowerLimitImpulse - slider.upperLimitImpulse) : Float));
     }
   } });
 

@@ -22,35 +22,35 @@ class MassProperties {
     var centerX:Float = cast _Runtime.UNDEFINED;
     var centerY:Float = cast _Runtime.UNDEFINED;
     var centerZ:Float = cast _Runtime.UNDEFINED;
-    totalMass = _Runtime.addNumbers((cast target : Physics3DMassData).mass, _Runtime.field(addend, 'mass'));
+    totalMass = (target.mass + addend.mass);
     if ((cast ((cast totalMass : Float) <= (cast 0.0 : Float)) : Bool)) {
-      ((cast target : Physics3DMassData).mass = 0.0);
-      ((cast target : Physics3DMassData).inertiaXX = 0.0);
-      ((cast target : Physics3DMassData).inertiaYY = 0.0);
-      ((cast target : Physics3DMassData).inertiaZZ = 0.0);
-      ((cast target : Physics3DMassData).inertiaXY = 0.0);
-      ((cast target : Physics3DMassData).inertiaXZ = 0.0);
-      ((cast target : Physics3DMassData).inertiaYZ = 0.0);
+      (target.mass = cast (0.0 : Float));
+      (target.inertiaXX = cast (0.0 : Float));
+      (target.inertiaYY = cast (0.0 : Float));
+      (target.inertiaZZ = cast (0.0 : Float));
+      (target.inertiaXY = cast (0.0 : Float));
+      (target.inertiaXZ = cast (0.0 : Float));
+      (target.inertiaYZ = cast (0.0 : Float));
       return;
     }
     inverseTotal = (1.0 / totalMass);
-    centerX = ((((cast target : Physics3DMassData).centerX * (cast target : Physics3DMassData).mass) + _Runtime.multiplyNumbers(_Runtime.field(addend, 'centerX'), _Runtime.field(addend, 'mass'))) * inverseTotal);
-    centerY = ((((cast target : Physics3DMassData).centerY * (cast target : Physics3DMassData).mass) + _Runtime.multiplyNumbers(_Runtime.field(addend, 'centerY'), _Runtime.field(addend, 'mass'))) * inverseTotal);
-    centerZ = ((((cast target : Physics3DMassData).centerZ * (cast target : Physics3DMassData).mass) + _Runtime.multiplyNumbers(_Runtime.field(addend, 'centerZ'), _Runtime.field(addend, 'mass'))) * inverseTotal);
+    centerX = (((target.centerX * target.mass) + (addend.centerX * addend.mass)) * inverseTotal);
+    centerY = (((target.centerY * target.mass) + (addend.centerY * addend.mass)) * inverseTotal);
+    centerZ = (((target.centerZ * target.mass) + (addend.centerZ * addend.mass)) * inverseTotal);
     MassProperties.readTensor__massProperties(({ final __callArgument0:Dynamic = target; __callArgument0; }), ({ final __callArgument1:Dynamic = MassProperties.scratchTensorA__massProperties; __callArgument1; }));
-    translateSymmetricTensor(({ final __callArgument2:Dynamic = MassProperties.scratchTensorA__massProperties; __callArgument2; }), (cast (cast target : Physics3DMassData).mass : Float), (cast ((cast target : Physics3DMassData).centerX - centerX) : Float), (cast ((cast target : Physics3DMassData).centerY - centerY) : Float), (cast ((cast target : Physics3DMassData).centerZ - centerZ) : Float), ({ final __callArgument3:Dynamic = MassProperties.scratchTensorA__massProperties; __callArgument3; }));
+    translateSymmetricTensor(({ final __callArgument2:Dynamic = MassProperties.scratchTensorA__massProperties; __callArgument2; }), (cast target.mass : Float), (cast (target.centerX - centerX) : Float), (cast (target.centerY - centerY) : Float), (cast (target.centerZ - centerZ) : Float), ({ final __callArgument3:Dynamic = MassProperties.scratchTensorA__massProperties; __callArgument3; }));
     MassProperties.readTensor__massProperties(({ final __callArgument4:Dynamic = addend; __callArgument4; }), ({ final __callArgument5:Dynamic = MassProperties.scratchTensorB__massProperties; __callArgument5; }));
-    translateSymmetricTensor(({ final __callArgument6:Dynamic = MassProperties.scratchTensorB__massProperties; __callArgument6; }), (cast _Runtime.field(addend, 'mass') : Float), (cast _Runtime.subtractNumbers(_Runtime.field(addend, 'centerX'), centerX) : Float), (cast _Runtime.subtractNumbers(_Runtime.field(addend, 'centerY'), centerY) : Float), (cast _Runtime.subtractNumbers(_Runtime.field(addend, 'centerZ'), centerZ) : Float), ({ final __callArgument7:Dynamic = MassProperties.scratchTensorB__massProperties; __callArgument7; }));
-    ((cast target : Physics3DMassData).mass = totalMass);
-    ((cast target : Physics3DMassData).centerX = centerX);
-    ((cast target : Physics3DMassData).centerY = centerY);
-    ((cast target : Physics3DMassData).centerZ = centerZ);
-    ((cast target : Physics3DMassData).inertiaXX = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorA__massProperties : Array<Float>), (cast TENSOR_XX : Float)) + flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_XX : Float))));
-    ((cast target : Physics3DMassData).inertiaYY = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorA__massProperties : Array<Float>), (cast TENSOR_YY : Float)) + flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_YY : Float))));
-    ((cast target : Physics3DMassData).inertiaZZ = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorA__massProperties : Array<Float>), (cast TENSOR_ZZ : Float)) + flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_ZZ : Float))));
-    ((cast target : Physics3DMassData).inertiaXY = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorA__massProperties : Array<Float>), (cast TENSOR_XY : Float)) + flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_XY : Float))));
-    ((cast target : Physics3DMassData).inertiaXZ = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorA__massProperties : Array<Float>), (cast TENSOR_XZ : Float)) + flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_XZ : Float))));
-    ((cast target : Physics3DMassData).inertiaYZ = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorA__massProperties : Array<Float>), (cast TENSOR_YZ : Float)) + flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_YZ : Float))));
+    translateSymmetricTensor(({ final __callArgument6:Dynamic = MassProperties.scratchTensorB__massProperties; __callArgument6; }), (cast addend.mass : Float), (cast (addend.centerX - centerX) : Float), (cast (addend.centerY - centerY) : Float), (cast (addend.centerZ - centerZ) : Float), ({ final __callArgument7:Dynamic = MassProperties.scratchTensorB__massProperties; __callArgument7; }));
+    (target.mass = cast (totalMass : Float));
+    (target.centerX = cast (centerX : Float));
+    (target.centerY = cast (centerY : Float));
+    (target.centerZ = cast (centerZ : Float));
+    (target.inertiaXX = cast ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorA__massProperties : Array<Float>), (cast TENSOR_XX : Float)) + flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_XX : Float))) : Float));
+    (target.inertiaYY = cast ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorA__massProperties : Array<Float>), (cast TENSOR_YY : Float)) + flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_YY : Float))) : Float));
+    (target.inertiaZZ = cast ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorA__massProperties : Array<Float>), (cast TENSOR_ZZ : Float)) + flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_ZZ : Float))) : Float));
+    (target.inertiaXY = cast ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorA__massProperties : Array<Float>), (cast TENSOR_XY : Float)) + flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_XY : Float))) : Float));
+    (target.inertiaXZ = cast ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorA__massProperties : Array<Float>), (cast TENSOR_XZ : Float)) + flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_XZ : Float))) : Float));
+    (target.inertiaYZ = cast ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorA__massProperties : Array<Float>), (cast TENSOR_YZ : Float)) + flighthq._internal._StaticIndex.readFloatArrayTyped((cast MassProperties.scratchTensorB__massProperties : Array<Float>), (cast TENSOR_YZ : Float))) : Float));
   }
 
   public static function computePhysics3DBoxMassData(halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, density:Float, out:Physics3DMassData):Void {
@@ -102,18 +102,18 @@ class MassProperties {
 
   public static function setRigidBody3DMassData(body:RigidBody3D, data:Physics3DMassData):Void {
     var movable:Bool = cast _Runtime.UNDEFINED;
-    ((cast body : RigidBody3D).mass = _Runtime.field(data, 'mass'));
-    ((cast body : RigidBody3D).centerX = _Runtime.field(data, 'centerX'));
-    ((cast body : RigidBody3D).centerY = _Runtime.field(data, 'centerY'));
-    ((cast body : RigidBody3D).centerZ = _Runtime.field(data, 'centerZ'));
-    ((cast body : RigidBody3D).inertiaXX = _Runtime.field(data, 'inertiaXX'));
-    ((cast body : RigidBody3D).inertiaYY = _Runtime.field(data, 'inertiaYY'));
-    ((cast body : RigidBody3D).inertiaZZ = _Runtime.field(data, 'inertiaZZ'));
-    ((cast body : RigidBody3D).inertiaXY = _Runtime.field(data, 'inertiaXY'));
-    ((cast body : RigidBody3D).inertiaXZ = _Runtime.field(data, 'inertiaXZ'));
-    ((cast body : RigidBody3D).inertiaYZ = _Runtime.field(data, 'inertiaYZ'));
-    movable = ((cast _Runtime.strictEquals((cast body : RigidBody3D).type, 'dynamic') : Bool) && (cast ((cast _Runtime.field(data, 'mass') : Float) > (cast 0.0 : Float)) : Bool));
-    ((cast body : RigidBody3D).inverseMass = ((cast movable : Bool) ? (cast _Runtime.divideNumbers(1.0, _Runtime.field(data, 'mass')) : Dynamic) : (cast 0.0 : Dynamic)));
+    ((cast body : RigidBody3D).mass = data.mass);
+    ((cast body : RigidBody3D).centerX = data.centerX);
+    ((cast body : RigidBody3D).centerY = data.centerY);
+    ((cast body : RigidBody3D).centerZ = data.centerZ);
+    ((cast body : RigidBody3D).inertiaXX = data.inertiaXX);
+    ((cast body : RigidBody3D).inertiaYY = data.inertiaYY);
+    ((cast body : RigidBody3D).inertiaZZ = data.inertiaZZ);
+    ((cast body : RigidBody3D).inertiaXY = data.inertiaXY);
+    ((cast body : RigidBody3D).inertiaXZ = data.inertiaXZ);
+    ((cast body : RigidBody3D).inertiaYZ = data.inertiaYZ);
+    movable = ((cast _Runtime.strictEquals((cast body : RigidBody3D).type, 'dynamic') : Bool) && (cast ((cast data.mass : Float) > (cast 0.0 : Float)) : Bool));
+    ((cast body : RigidBody3D).inverseMass = ((cast movable : Bool) ? (cast (1.0 / data.mass) : Dynamic) : (cast 0.0 : Dynamic)));
     if ((cast ((cast !(cast movable : Bool) : Bool) || (cast (cast body : RigidBody3D).fixedRotation : Bool)) : Bool)) {
       ((cast body : RigidBody3D).inverseInertiaXX = 0.0);
       ((cast body : RigidBody3D).inverseInertiaYY = 0.0);
@@ -134,25 +134,25 @@ class MassProperties {
   }
 
   public static function readTensor__massProperties(data:Physics3DMassData, out:Array<Float>):Void {
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_XX : Float), (cast _Runtime.field(data, 'inertiaXX') : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_YY : Float), (cast _Runtime.field(data, 'inertiaYY') : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_ZZ : Float), (cast _Runtime.field(data, 'inertiaZZ') : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_XY : Float), (cast _Runtime.field(data, 'inertiaXY') : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_XZ : Float), (cast _Runtime.field(data, 'inertiaXZ') : Float));
-    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_YZ : Float), (cast _Runtime.field(data, 'inertiaYZ') : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_XX : Float), (cast data.inertiaXX : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_YY : Float), (cast data.inertiaYY : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_ZZ : Float), (cast data.inertiaZZ : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_XY : Float), (cast data.inertiaXY : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_XZ : Float), (cast data.inertiaXZ : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast TENSOR_YZ : Float), (cast data.inertiaYZ : Float));
   }
 
   public static function writeDiagonal__massProperties(out:Physics3DMassData, mass:Float, inertiaXX:Float, inertiaYY:Float, inertiaZZ:Float):Void {
-    ((cast out : Physics3DMassData).mass = mass);
-    ((cast out : Physics3DMassData).inertiaXX = inertiaXX);
-    ((cast out : Physics3DMassData).inertiaYY = inertiaYY);
-    ((cast out : Physics3DMassData).inertiaZZ = inertiaZZ);
-    ((cast out : Physics3DMassData).inertiaXY = 0.0);
-    ((cast out : Physics3DMassData).inertiaXZ = 0.0);
-    ((cast out : Physics3DMassData).inertiaYZ = 0.0);
-    ((cast out : Physics3DMassData).centerX = 0.0);
-    ((cast out : Physics3DMassData).centerY = 0.0);
-    ((cast out : Physics3DMassData).centerZ = 0.0);
+    (out.mass = cast (mass : Float));
+    (out.inertiaXX = cast (inertiaXX : Float));
+    (out.inertiaYY = cast (inertiaYY : Float));
+    (out.inertiaZZ = cast (inertiaZZ : Float));
+    (out.inertiaXY = cast (0.0 : Float));
+    (out.inertiaXZ = cast (0.0 : Float));
+    (out.inertiaYZ = cast (0.0 : Float));
+    (out.centerX = cast (0.0 : Float));
+    (out.centerY = cast (0.0 : Float));
+    (out.centerZ = cast (0.0 : Float));
   }
 
   public static final scratchTensorA__massProperties:Array<Float> = (cast cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));

@@ -18,12 +18,12 @@ class JointRegistry {
   public static function addPhysics3DJoint<T:Physics3DJoint>(world:Physics3DWorld, joint:T):T {
     var active:Bool = cast _Runtime.UNDEFINED;
     assertPhysics3DWorldNotStepping(({ final __callArgument0:Dynamic = world; __callArgument0; }));
-    if ((cast ((cast ((cast physics3DJointOwners : flighthq._internal._WeakMap<Physics3DJoint, Physics3DWorld>).has(joint)) : Bool) || (cast _Runtime.includes((cast world : Physics3DWorld).joints, joint) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast physics3DJointOwners : flighthq._internal._WeakMap<Physics3DJoint, Physics3DWorld>).has(joint)) : Bool) || (cast _Runtime.includes(world.joints, joint) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('Cannot add a physics joint that already belongs to a physics world'));
     }
     active = !_Runtime.strictEquals((cast getPhysics3DJointSolver(({ final __callArgument1:Dynamic = world; __callArgument1; }), (cast _Runtime.field(joint, 'kind') : String)) : Null<Physics3DJointSolver>), null);
     if ((cast active : Bool)) { JointRegistry.canonicalizeJointEnds__jointRegistry(({ final __callArgument2:Dynamic = world; __callArgument2; }), ({ final __callArgument3:Dynamic = joint; __callArgument3; })); }
-    _Runtime.callProperty((cast world : Physics3DWorld).joints, 'push', cast ([joint] : Array<Dynamic>));
+    _Runtime.callProperty(world.joints, 'push', cast ([joint] : Array<Dynamic>));
     ((cast physics3DJointOwners : flighthq._internal._WeakMap<Physics3DJoint, Physics3DWorld>).set(joint, (cast world)));
     rebuildPhysics3DJointCollisionSuppressions(({ final __callArgument4:Dynamic = world; __callArgument4; }));
     if ((cast active : Bool)) { JointRegistry.wakeJointBodies__jointRegistry(({ final __callArgument5:Dynamic = world; __callArgument5; }), ({ final __callArgument6:Dynamic = joint; __callArgument6; })); }
@@ -32,13 +32,13 @@ class JointRegistry {
   }
 
   public static function getPhysics3DJointSolver(world:Physics3DWorld, kind:Physics3DJointKind):Null<Physics3DJointSolver> {
-    return cast _Runtime.coalesce(((cast _Runtime.field(world, 'jointSolvers') : flighthq._internal._Map<String, Physics3DJointSolver>).get(kind)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(((cast world.jointSolvers : flighthq._internal._Map<String, Physics3DJointSolver>).get(kind)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function invalidatePhysics3DJoint(world:Physics3DWorld, joint:Physics3DJoint):Bool {
     assertPhysics3DWorldNotStepping(({ final __callArgument7:Dynamic = world; __callArgument7; }));
-    if ((cast ((cast !_Runtime.strictEquals(((cast physics3DJointOwners : flighthq._internal._WeakMap<Physics3DJoint, Physics3DWorld>).get(joint)), world) : Bool) || (cast !(cast _Runtime.includes((cast world : Physics3DWorld).joints, joint) : Bool) : Bool)) : Bool)) { return cast false; }
+    if ((cast ((cast !_Runtime.strictEquals(((cast physics3DJointOwners : flighthq._internal._WeakMap<Physics3DJoint, Physics3DWorld>).get(joint)), world) : Bool) || (cast !(cast _Runtime.includes(world.joints, joint) : Bool) : Bool)) : Bool)) { return cast false; }
     ({ final __optionalOwner11 = (cast getPhysics3DJointSolver(({ final __callArgument12:Dynamic = world; __callArgument12; }), (cast (cast joint : Physics3DJoint).kind : String)) : Null<Physics3DJointSolver>); if (__optionalOwner11 != null) { final __optionalCall10 = (cast __optionalOwner11 : { @:optional var clearAccumulatedImpulses:Null<Physics3DJoint->Void>; }).clearAccumulatedImpulses; if (__optionalCall10 != null) __optionalCall10(joint); } });
     ((cast joint : Physics3DJoint).impulse0 = 0.0);
     ((cast joint : Physics3DJoint).impulse1 = 0.0);
@@ -60,8 +60,8 @@ class JointRegistry {
 
   public static function registerPhysics3DJointSolver(world:Physics3DWorld, kind:Physics3DJointKind, solver:Physics3DJointSolver):Void {
     assertPhysics3DWorldNotStepping(({ final __callArgument16:Dynamic = world; __callArgument16; }));
-    ((cast (cast world : Physics3DWorld).jointSolvers : flighthq._internal._Map<String, Physics3DJointSolver>).set(kind, (cast solver)));
-    for (joint in _Runtime.iterable((cast world : Physics3DWorld).joints)) {
+    ((cast world.jointSolvers : flighthq._internal._Map<String, Physics3DJointSolver>).set(kind, (cast solver)));
+    for (joint in _Runtime.iterable(world.joints)) {
       if ((cast !_Runtime.strictEquals((cast joint : Physics3DJoint).kind, kind) : Bool)) { continue; }
       JointRegistry.canonicalizeJointEnds__jointRegistry(({ final __callArgument19:Dynamic = world; __callArgument19; }), ({ final __callArgument20:Dynamic = joint; __callArgument20; }));
       JointRegistry.wakeJointBodies__jointRegistry(({ final __callArgument21:Dynamic = world; __callArgument21; }), ({ final __callArgument22:Dynamic = joint; __callArgument22; }));
@@ -72,10 +72,10 @@ class JointRegistry {
   public static function removePhysics3DJoint(world:Physics3DWorld, joint:Physics3DJoint):Bool {
     var at:Float = cast _Runtime.UNDEFINED;
     assertPhysics3DWorldNotStepping(({ final __callArgument24:Dynamic = world; __callArgument24; }));
-    at = _Runtime.callProperty((cast world : Physics3DWorld).joints, 'indexOf', cast ([joint] : Array<Dynamic>));
+    at = _Runtime.callProperty(world.joints, 'indexOf', cast ([joint] : Array<Dynamic>));
     if ((cast ((cast at : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
     if ((cast !_Runtime.strictEquals((cast getPhysics3DJointSolver(({ final __callArgument25:Dynamic = world; __callArgument25; }), (cast (cast joint : Physics3DJoint).kind : String)) : Null<Physics3DJointSolver>), null) : Bool)) { JointRegistry.wakeJointBodies__jointRegistry(({ final __callArgument26:Dynamic = world; __callArgument26; }), ({ final __callArgument27:Dynamic = joint; __callArgument27; })); }
-    _Runtime.splice((cast world : Physics3DWorld).joints, Std.int(at), Std.int(1.0), []);
+    _Runtime.splice(world.joints, Std.int(at), Std.int(1.0), []);
     ((cast physics3DJointOwners : flighthq._internal._WeakMap<Physics3DJoint, Physics3DWorld>).delete_(joint));
     rebuildPhysics3DJointCollisionSuppressions(({ final __callArgument28:Dynamic = world; __callArgument28; }));
     return cast true;

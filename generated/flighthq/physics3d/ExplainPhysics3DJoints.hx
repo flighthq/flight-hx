@@ -16,9 +16,9 @@ class ExplainPhysics3DJoints {
     explanations = (cast cast ([] : Array<Dynamic>));
     {
       var index:Float = 0.0;
-      while ((cast ((cast index : Float) < (cast _Runtime.field(_Runtime.field(world, 'joints'), 'length') : Float)) : Bool)) {
-        var joint:Physics3DJoint = flighthq._internal._StaticIndex.readArray(_Runtime.field(world, 'joints'), index);
-        var solver:Null<Physics3DJointSolver> = ((cast _Runtime.field(world, 'jointSolvers') : flighthq._internal._Map<String, Physics3DJointSolver>).get((cast joint : Physics3DJoint).kind));
+      while ((cast ((cast index : Float) < (cast _Runtime.field(world.joints, 'length') : Float)) : Bool)) {
+        var joint:Physics3DJoint = flighthq._internal._StaticIndex.readArray(world.joints, index);
+        var solver:Null<Physics3DJointSolver> = ((cast world.jointSolvers : flighthq._internal._Map<String, Physics3DJointSolver>).get((cast joint : Physics3DJoint).kind));
         var hasSolver:Bool = !_Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED'));
         var bodyAResolvable:Bool = ((cast _Runtime.strictEquals(({ final __structural0 = solver; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var usesBodyA:Null<Bool>; }).usesBodyA; }), false) : Bool) || (cast !_Runtime.strictEquals((cast findPhysics3DBody(({ final __callArgument1:Dynamic = world; __callArgument1; }), (cast (cast joint : Physics3DJoint).bodyA : Float)) : Null<RigidBody3D>), null) : Bool));
         var bodiesResolvable:Bool = ((cast bodyAResolvable : Bool) && (cast !_Runtime.strictEquals((cast findPhysics3DBody(({ final __callArgument2:Dynamic = world; __callArgument2; }), (cast (cast joint : Physics3DJoint).bodyB : Float)) : Null<RigidBody3D>), null) : Bool));

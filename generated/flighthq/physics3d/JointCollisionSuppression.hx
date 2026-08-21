@@ -13,18 +13,18 @@ class JointCollisionSuppression {
     var second:Float = cast _Runtime.UNDEFINED;
     first = HxMath.min(bodyA, bodyB);
     second = HxMath.max(bodyA, bodyB);
-    return cast ((cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast _Runtime.field(world, 'jointCollisionSuppressions') : flighthq._internal._Map<Float, flighthq._internal._Map<Float, Float>>).get(first)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<Float, Float>).get(second)); }), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float));
+    return cast ((cast _Runtime.coalesce(({ final __collection0:Dynamic = ((cast world.jointCollisionSuppressions : flighthq._internal._Map<Float, flighthq._internal._Map<Float, Float>>).get(first)); __collection0 == null ? _Runtime.UNDEFINED : ((cast __collection0 : flighthq._internal._Map<Float, Float>).get(second)); }), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float));
     return cast null;
   }
 
   @:noCompletion
   public static function rebuildPhysics3DJointCollisionSuppressions(world:Physics3DWorld):Void {
     var suppressions:flighthq._internal._Map<Float, flighthq._internal._Map<Float, Float>> = cast _Runtime.UNDEFINED;
-    suppressions = (cast world : Physics3DWorld).jointCollisionSuppressions;
+    suppressions = world.jointCollisionSuppressions;
     ((cast suppressions : flighthq._internal._Map<Float, flighthq._internal._Map<Float, Float>>).clear());
-    for (joint in _Runtime.iterable((cast world : Physics3DWorld).joints)) {
+    for (joint in _Runtime.iterable(world.joints)) {
       if ((cast (cast joint : Physics3DJoint).collideConnected : Bool)) { continue; }
-      var solver:Null<Physics3DJointSolver> = ((cast (cast world : Physics3DWorld).jointSolvers : flighthq._internal._Map<String, Physics3DJointSolver>).get((cast joint : Physics3DJoint).kind));
+      var solver:Null<Physics3DJointSolver> = ((cast world.jointSolvers : flighthq._internal._Map<String, Physics3DJointSolver>).get((cast joint : Physics3DJoint).kind));
       if ((cast ((cast _Runtime.strictEquals(solver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals((cast solver : Physics3DJointSolver).usesBodyA, false) : Bool)) : Bool)) { continue; }
       var first:Float = HxMath.min((cast joint : Physics3DJoint).bodyA, (cast joint : Physics3DJoint).bodyB);
       var second:Float = HxMath.max((cast joint : Physics3DJoint).bodyA, (cast joint : Physics3DJoint).bodyB);
