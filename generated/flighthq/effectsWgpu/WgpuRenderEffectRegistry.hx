@@ -18,20 +18,20 @@ class WgpuRenderEffectRegistry {
   @:noCompletion
   public static function getWgpuRenderEffectRunner(state:WgpuRenderState, kind:String):Null<WgpuRenderEffectRunner> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:WgpuRenderEffectRunner; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : WgpuRenderRegistries).renderEffects : KeyedTable<WgpuRenderEffectRunner>).entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuRenderEffectRunner>>).get(kind));
+    entry = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : { var renderEffects:KeyedTable<WgpuRenderEffectRunner>; }).renderEffects : KeyedTable<WgpuRenderEffectRunner>).entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuRenderEffectRunner>>).get(kind));
     return cast ((cast _Runtime.strictEquals(({ final __structural2 = entry; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:WgpuRenderEffectRunner; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   @:noCompletion
   public static function hasWgpuRenderEffectRunner(state:WgpuRenderState, kind:String):Bool {
-    return cast _Runtime.strictEquals(({ final __structural5 = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : WgpuRenderRegistries).renderEffects : KeyedTable<WgpuRenderEffectRunner>).entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuRenderEffectRunner>>).get(kind)); __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
+    return cast _Runtime.strictEquals(({ final __structural5 = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : { var renderEffects:KeyedTable<WgpuRenderEffectRunner>; }).renderEffects : KeyedTable<WgpuRenderEffectRunner>).entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuRenderEffectRunner>>).get(kind)); __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
     return cast null;
   }
 
   public static function registerWgpuRenderEffect(state:WgpuRenderState, kind:String, runner:WgpuRenderEffectRunner):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : WgpuRenderStateRuntime);
-    ((cast runtime.registries : WgpuRenderRegistries).renderEffects = (cast withRegistryTableEntry((cast (cast runtime.registries : WgpuRenderRegistries).renderEffects : Dynamic), (cast kind : String), ({ final __callArgument7:Dynamic = runner; __callArgument7; })) : KeyedTable<WgpuRenderEffectRunner>));
+    ((cast runtime.registries : { var renderEffects:KeyedTable<WgpuRenderEffectRunner>; }).renderEffects = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var renderEffects:KeyedTable<WgpuRenderEffectRunner>; }).renderEffects : Dynamic), (cast kind : String), ({ final __callArgument7:Dynamic = runner; __callArgument7; })) : KeyedTable<WgpuRenderEffectRunner>) : KeyedTable<WgpuRenderEffectRunner>));
   }
 }

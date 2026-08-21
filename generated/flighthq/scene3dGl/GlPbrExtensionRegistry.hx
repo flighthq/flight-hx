@@ -49,7 +49,7 @@ class GlPbrExtensionRegistry {
   public static function bindGlPbrExtensions(state:GlRenderState, program:flighthq._internal.dom.WebGLProgram, extensions:Array<PbrExtension>):Bool {
     var entries:flighthq._internal._Map<String, RegistryTableEntry<GlPbrExtensionRegistration>> = cast _Runtime.UNDEFINED;
     var context:GlPbrExtensionBindContext = cast _Runtime.UNDEFINED;
-    entries = (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).pbrExtensions : KeyedTable<GlPbrExtensionRegistration>).entries;
+    entries = (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var pbrExtensions:KeyedTable<GlPbrExtensionRegistration>; }).pbrExtensions : KeyedTable<GlPbrExtensionRegistration>).entries;
     context = (cast GlPbrExtensionRegistry.createGlPbrExtensionBindContext__glPbrExtensionRegistry(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; })) : GlPbrExtensionBindContext);
     {
       var i:Float = 0.0;
@@ -75,7 +75,7 @@ class GlPbrExtensionRegistry {
     var activeTarget:Null<GlRenderTarget> = cast _Runtime.UNDEFINED;
     issues = (cast cast ([] : Array<Dynamic>));
     kinds = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
-    entries = (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).pbrExtensions : KeyedTable<GlPbrExtensionRegistration>).entries;
+    entries = (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var pbrExtensions:KeyedTable<GlPbrExtensionRegistration>; }).pbrExtensions : KeyedTable<GlPbrExtensionRegistration>).entries;
     transmissionSceneColorKind = null;
     textureCount = 0.0;
     shaderContext = (cast GlPbrExtensionRegistry.createGlPbrExtensionShaderContext__glPbrExtensionRegistry(({ final __callArgument6:Dynamic = state; __callArgument6; })) : GlPbrExtensionShaderContext);
@@ -121,7 +121,7 @@ class GlPbrExtensionRegistry {
 
   public static function getGlPbrExtensionRegistration(state:GlRenderState, kind:Kind):Null<GlPbrExtensionRegistration> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlPbrExtensionRegistration; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).pbrExtensions : KeyedTable<GlPbrExtensionRegistration>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlPbrExtensionRegistration>>).get(kind));
+    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var pbrExtensions:KeyedTable<GlPbrExtensionRegistration>; }).pbrExtensions : KeyedTable<GlPbrExtensionRegistration>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlPbrExtensionRegistration>>).get(kind));
     return cast ((cast _Runtime.strictEquals(({ final __structural17 = entry; __structural17 == null ? _Runtime.UNDEFINED : (cast __structural17 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:GlPbrExtensionRegistration; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -129,8 +129,8 @@ class GlPbrExtensionRegistry {
   public static function registerGlPbrExtension(state:GlRenderState, kind:Kind, registration:GlPbrExtensionRegistration):Void {
     var registries:GlRenderRegistries = cast _Runtime.UNDEFINED;
     registries = (cast (cast getGlRenderStateRuntime(({ final __callArgument18:Dynamic = state; __callArgument18; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries;
-    ((cast registries : GlRenderRegistries).pbrExtensions = (cast withRegistryTableEntry((cast (cast registries : GlRenderRegistries).pbrExtensions : Dynamic), (cast kind : String), ({ final __callArgument19:Dynamic = registration; __callArgument19; })) : KeyedTable<GlPbrExtensionRegistration>));
-    (cast registries : GlRenderRegistries).pbrExtensionRevision++;
+    (registries.pbrExtensions = cast ((cast withRegistryTableEntry((cast registries.pbrExtensions : Dynamic), (cast kind : String), ({ final __callArgument19:Dynamic = registration; __callArgument19; })) : KeyedTable<GlPbrExtensionRegistration>) : KeyedTable<GlPbrExtensionRegistration>));
+    registries.pbrExtensionRevision++;
   }
 
   @:noCompletion
@@ -139,7 +139,7 @@ class GlPbrExtensionRegistry {
     var context:GlPbrExtensionShaderContext = cast _Runtime.UNDEFINED;
     var contributions:Array<GlPbrExtensionShaderContribution> = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.field((cast explainGlPbrExtensions(({ final __callArgument20:Dynamic = state; __callArgument20; }), ({ final __callArgument21:Dynamic = extensions; __callArgument21; })) : Array<GlPbrExtensionIssue>), 'length') : Float) > (cast 0.0 : Float)) : Bool)) { return cast null; }
-    entries = (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument22:Dynamic = state; __callArgument22; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).pbrExtensions : KeyedTable<GlPbrExtensionRegistration>).entries;
+    entries = (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument22:Dynamic = state; __callArgument22; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var pbrExtensions:KeyedTable<GlPbrExtensionRegistration>; }).pbrExtensions : KeyedTable<GlPbrExtensionRegistration>).entries;
     context = (cast GlPbrExtensionRegistry.createGlPbrExtensionShaderContext__glPbrExtensionRegistry(({ final __callArgument23:Dynamic = state; __callArgument23; })) : GlPbrExtensionShaderContext);
     contributions = (cast cast ([] : Array<Dynamic>));
     {

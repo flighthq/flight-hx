@@ -90,7 +90,7 @@ class ShadedGlMeshMaterialRenderer {
     var ordered:Array<Modifier> = cast _Runtime.UNDEFINED;
     var nextTextureUnit:Float = cast _Runtime.UNDEFINED;
     var context:GlModifierBindContext = cast _Runtime.UNDEFINED;
-    entries = (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument27:Dynamic = state; __callArgument27; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).modifierSnippets : KeyedTable<GlModifierSnippet>).entries;
+    entries = (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument27:Dynamic = state; __callArgument27; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var modifierSnippets:KeyedTable<GlModifierSnippet>; }).modifierSnippets : KeyedTable<GlModifierSnippet>).entries;
     ordered = (cast orderModifierStack(({ final __callArgument28:Dynamic = modifiers; __callArgument28; })) : Array<Modifier>);
     nextTextureUnit = ShadedGlMeshMaterialRenderer.MODIFIER_TEXTURE_UNIT_BASE__shadedGlMeshMaterialRenderer;
     context = (cast { acquireModifierTextureUnit: function():Float return ((cast ((cast nextTextureUnit : Float) < (cast ShadedGlMeshMaterialRenderer.MODIFIER_TEXTURE_UNIT_LIMIT__shadedGlMeshMaterialRenderer : Float)) : Bool) ? (cast nextTextureUnit++ : Dynamic) : (cast -1.0 : Dynamic)), index: 0.0, program: program.program, state: state });

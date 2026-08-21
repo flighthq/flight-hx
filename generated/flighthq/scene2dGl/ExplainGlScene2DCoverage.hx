@@ -52,7 +52,7 @@ class ExplainGlScene2DCoverage {
     var hasStandard:Bool = cast _Runtime.UNDEFINED;
     found = false;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : GlRenderStateRuntime);
-    blendModes = (cast (cast runtime.registries : GlRenderRegistries).blendRealizations : KeyedTable<GlBlendRealization>).entries;
+    blendModes = (cast (cast runtime.registries : { var blendRealizations:KeyedTable<GlBlendRealization>; }).blendRealizations : KeyedTable<GlBlendRealization>).entries;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(usage.blendModes, 'length') : Float)) : Bool)) {
@@ -68,7 +68,7 @@ class ExplainGlScene2DCoverage {
         i++;
       }
     }
-    materials = (cast (cast runtime.registries : GlRenderRegistries).materialRenderers : KeyedTable<GlMaterialRenderer>).entries;
+    materials = (cast (cast runtime.registries : { var materialRenderers:KeyedTable<GlMaterialRenderer>; }).materialRenderers : KeyedTable<GlMaterialRenderer>).entries;
     hasStandard = _Runtime.strictEquals(({ final __structural19 = ((cast materials : flighthq._internal._Map<String, RegistryTableEntry<GlMaterialRenderer>>).get(StandardMaterialKindValue)); __structural19 == null ? _Runtime.UNDEFINED : (cast __structural19 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
     {
       var i:Float = 0.0;

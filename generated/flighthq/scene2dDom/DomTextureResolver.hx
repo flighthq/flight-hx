@@ -25,10 +25,10 @@ class DomTextureResolver {
     var table:KeyedTable<flighthq.types.DomTextureResolver> = cast _Runtime.UNDEFINED;
     var entries:flighthq._internal._Map<String, RegistryTableEntry<flighthq.types.DomTextureResolver>> = cast _Runtime.UNDEFINED;
     runtime = (cast getDomRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : DomRenderStateRuntime);
-    table = (cast runtime.registries : DomRenderRegistries).textureResolvers;
+    table = (cast runtime.registries : { var textureResolvers:KeyedTable<flighthq.types.DomTextureResolver>; }).textureResolvers;
     entries = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [(cast table : KeyedTable<flighthq.types.DomTextureResolver>).entries]);
     if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast entries : flighthq._internal._Map<String, RegistryTableEntry<flighthq.types.DomTextureResolver>>).delete_(sourceKind)); } else { ((cast entries : flighthq._internal._Map<String, RegistryTableEntry<flighthq.types.DomTextureResolver>>).set(sourceKind, (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: resolver }))); }
-    ((cast runtime.registries : DomRenderRegistries).textureResolvers = _Runtime.mergeObjects([table, { entries: entries }]));
+    ((cast runtime.registries : { var textureResolvers:KeyedTable<flighthq.types.DomTextureResolver>; }).textureResolvers = cast (_Runtime.mergeObjects([table, { entries: entries }]) : KeyedTable<flighthq.types.DomTextureResolver>));
   }
 
   @:noCompletion
@@ -40,7 +40,7 @@ class DomTextureResolver {
     sourceKind = (cast getTextureSourceKind(({ final __callArgument1:Dynamic = texture; __callArgument1; })) : Null<String>);
     if ((cast _Runtime.strictEquals(sourceKind, null) : Bool)) { return cast null; }
     runtime = (cast getDomRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : DomRenderStateRuntime);
-    entry = ((cast (cast (cast runtime.registries : DomRenderRegistries).textureResolvers : KeyedTable<flighthq.types.DomTextureResolver>).entries : flighthq._internal._Map<String, RegistryTableEntry<flighthq.types.DomTextureResolver>>).get(sourceKind));
+    entry = ((cast (cast (cast runtime.registries : { var textureResolvers:KeyedTable<flighthq.types.DomTextureResolver>; }).textureResolvers : KeyedTable<flighthq.types.DomTextureResolver>).entries : flighthq._internal._Map<String, RegistryTableEntry<flighthq.types.DomTextureResolver>>).get(sourceKind));
     if ((cast !_Runtime.strictEquals(({ final __structural3 = entry; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
       _Runtime.callOptionalValue(runtime.registryMiss, cast ([RenderRegistry.TextureResolver, sourceKind] : Array<Dynamic>));
       return cast null;

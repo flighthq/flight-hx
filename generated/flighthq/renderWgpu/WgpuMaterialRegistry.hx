@@ -24,7 +24,7 @@ class WgpuMaterialRegistry {
   @:noCompletion
   public static function getWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMaterialRenderer> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:WgpuMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : WgpuRenderRegistries).materialRenderers : KeyedTable<WgpuMaterialRenderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuMaterialRenderer>>).get(kind));
+    entry = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : { var materialRenderers:KeyedTable<WgpuMaterialRenderer>; }).materialRenderers : KeyedTable<WgpuMaterialRenderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuMaterialRenderer>>).get(kind));
     return cast ((cast _Runtime.strictEquals(({ final __structural2 = entry; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:WgpuMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -33,7 +33,7 @@ class WgpuMaterialRegistry {
   public static function registerWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind, renderer:WgpuMaterialRenderer):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuRenderStateRuntime);
-    ((cast runtime.registries : WgpuRenderRegistries).materialRenderers = (cast withRegistryTableEntry((cast (cast runtime.registries : WgpuRenderRegistries).materialRenderers : Dynamic), (cast kind : String), ({ final __callArgument4:Dynamic = renderer; __callArgument4; })) : KeyedTable<WgpuMaterialRenderer>));
+    ((cast runtime.registries : { var materialRenderers:KeyedTable<WgpuMaterialRenderer>; }).materialRenderers = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var materialRenderers:KeyedTable<WgpuMaterialRenderer>; }).materialRenderers : Dynamic), (cast kind : String), ({ final __callArgument4:Dynamic = renderer; __callArgument4; })) : KeyedTable<WgpuMaterialRenderer>) : KeyedTable<WgpuMaterialRenderer>));
   }
 
   @:noCompletion
@@ -44,7 +44,7 @@ class WgpuMaterialRegistry {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:WgpuMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
     var fallback:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:WgpuMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuRenderStateRuntime);
-    entries = (cast (cast runtime.registries : WgpuRenderRegistries).materialRenderers : KeyedTable<WgpuMaterialRenderer>).entries;
+    entries = (cast (cast runtime.registries : { var materialRenderers:KeyedTable<WgpuMaterialRenderer>; }).materialRenderers : KeyedTable<WgpuMaterialRenderer>).entries;
     kind = _Runtime.coalesce(({ final __structural6 = material; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var kind:String; }).kind; }), function():Dynamic return cast StandardMaterialKindValue);
     entry = ((cast entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuMaterialRenderer>>).get(kind));
     if ((cast _Runtime.strictEquals(({ final __structural7 = entry; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { return cast (cast entry : { var state:String; var value:WgpuMaterialRenderer; }).value; }

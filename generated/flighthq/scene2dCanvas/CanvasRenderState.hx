@@ -44,7 +44,7 @@ class CanvasRenderState {
     ((cast target : { var applyBlendMode:Null<flighthq.types.CanvasRenderState->Null<String>->Void>; }).applyBlendMode = (cast (cast source : flighthq.types.CanvasRenderState).applyBlendMode));
     ((cast target : { var canvasCssFilterResolver:Null<flighthq.types.CanvasRenderState->RenderProxy2D->Null<String>>; }).canvasCssFilterResolver = (cast (cast source : flighthq.types.CanvasRenderState).canvasCssFilterResolver));
     ((cast targetRuntime.canvasTextureResolvers : CanvasTextureResolvers).registry = (cast CanvasRenderState.copyMap__canvasRenderState((cast (cast sourceRuntime.canvasTextureResolvers : CanvasTextureResolvers).registry : Dynamic)) : Null<flighthq._internal._Map<String, CanvasTextureResolver>>));
-    (targetRuntime.registries = cast ({ materialRenderers: (cast sourceRuntime.registries : CanvasRenderRegistries).materialRenderers, renderEffects: (cast sourceRuntime.registries : CanvasRenderRegistries).renderEffects, renderers: (cast targetRuntime.registries : CanvasRenderRegistries).renderers, strokeTessellator: (cast targetRuntime.registries : CanvasRenderRegistries).strokeTessellator } : CanvasRenderRegistries));
+    (targetRuntime.registries = cast ({ materialRenderers: (cast sourceRuntime.registries : { @:optional var materialRenderers:Null<KeyedTable<CanvasMaterialRenderer>>; }).materialRenderers, renderEffects: (cast sourceRuntime.registries : { var renderEffects:KeyedTable<CanvasRenderEffectRunner>; }).renderEffects, renderers: (cast targetRuntime.registries : { var renderers:KeyedTable<Renderer>; }).renderers, strokeTessellator: (cast targetRuntime.registries : { var strokeTessellator:SlotTable<Path->StrokeStyle->Null<Float>->Null<PathMesh>>; }).strokeTessellator } : CanvasRenderRegistries));
     copyRenderStateRegistrations(({ final __callArgument2:Dynamic = target; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }));
   }
 
@@ -79,7 +79,7 @@ class CanvasRenderState {
   public static function createCanvasRenderStateRuntime():CanvasRenderStateRuntime {
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast createRenderStateRuntime() : CanvasRenderStateRuntime);
-    (runtime.registries = cast ({ renderEffects: (cast createKeyedTable((cast 'CanvasRenderEffect' : String), (cast 'Unregistered' : String)) : KeyedTable<CanvasRenderEffectRunner>), renderers: (cast runtime.registries : CanvasRenderRegistries).renderers, strokeTessellator: (cast runtime.registries : CanvasRenderRegistries).strokeTessellator } : CanvasRenderRegistries));
+    (runtime.registries = cast ({ renderEffects: (cast createKeyedTable((cast 'CanvasRenderEffect' : String), (cast 'Unregistered' : String)) : KeyedTable<CanvasRenderEffectRunner>), renderers: (cast runtime.registries : { var renderers:KeyedTable<Renderer>; }).renderers, strokeTessellator: (cast runtime.registries : { var strokeTessellator:SlotTable<Path->StrokeStyle->Null<Float>->Null<PathMesh>>; }).strokeTessellator } : CanvasRenderRegistries));
     return cast runtime;
     return cast null;
   }

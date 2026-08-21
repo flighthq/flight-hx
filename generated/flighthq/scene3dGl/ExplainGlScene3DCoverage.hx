@@ -46,7 +46,7 @@ class ExplainGlScene3DCoverage {
     var resolvers:KeyedTable<GlTextureResolver> = cast _Runtime.UNDEFINED;
     var snippets:flighthq._internal._Map<String, RegistryTableEntry<GlModifierSnippet>> = cast _Runtime.UNDEFINED;
     found = false;
-    materials = (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).meshMaterialRenderers : KeyedTable<GlMeshMaterialRenderer>).entries;
+    materials = (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var meshMaterialRenderers:KeyedTable<GlMeshMaterialRenderer>; }).meshMaterialRenderers : KeyedTable<GlMeshMaterialRenderer>).entries;
     hasStandard = _Runtime.strictEquals(({ final __structural9 = ((cast materials : flighthq._internal._Map<String, RegistryTableEntry<GlMeshMaterialRenderer>>).get(StandardMaterialKindValue)); __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
     {
       var i:Float = 0.0;
@@ -63,7 +63,7 @@ class ExplainGlScene3DCoverage {
         i++;
       }
     }
-    resolvers = (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).textureResolvers;
+    resolvers = (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var textureResolvers:KeyedTable<GlTextureResolver>; }).textureResolvers;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(usage.textureSourceKinds, 'length') : Float)) : Bool)) {
@@ -79,7 +79,7 @@ class ExplainGlScene3DCoverage {
         i++;
       }
     }
-    snippets = (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument19:Dynamic = state; __callArgument19; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).modifierSnippets : KeyedTable<GlModifierSnippet>).entries;
+    snippets = (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument19:Dynamic = state; __callArgument19; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var modifierSnippets:KeyedTable<GlModifierSnippet>; }).modifierSnippets : KeyedTable<GlModifierSnippet>).entries;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(usage.modifierKinds, 'length') : Float)) : Bool)) {

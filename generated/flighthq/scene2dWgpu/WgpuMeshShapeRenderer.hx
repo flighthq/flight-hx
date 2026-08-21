@@ -57,7 +57,7 @@ class WgpuMeshShapeRenderer {
     __destructure0 = source.data;
     commands = __destructure0.commands;
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool) || (cast _Runtime.strictEquals((cast renderProxy : RenderProxy2D).rendererData, null) : Bool)) : Bool)) { return cast false; }
-    tessellatorEntry = (cast (cast runtime.registries : WgpuRenderRegistries).strokeTessellator : SlotTable<Path->StrokeStyle->Null<Float>->Null<PathMesh>>).entry;
+    tessellatorEntry = (cast (cast runtime.registries : { var strokeTessellator:SlotTable<Path->StrokeStyle->Null<Float>->Null<PathMesh>>; }).strokeTessellator : SlotTable<Path->StrokeStyle->Null<Float>->Null<PathMesh>>).entry;
     strokePathTessellator = ((cast _Runtime.strictEquals(({ final __structural1 = tessellatorEntry; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast tessellatorEntry : { var state:String; var value:Path->StrokeStyle->Null<Float>->Null<PathMesh>; }).value : Dynamic) : (cast null : Dynamic));
     regions = (cast WgpuMeshShapeRenderer.resolveWgpuShapeMeshRegions__wgpuMeshShapeRenderer(({ final __callArgument2:Dynamic = commands; __callArgument2; }), (cast !_Runtime.strictEquals(strokePathTessellator, null) : Bool)) : Null<Array<flighthq._internal._Union2<ShapeFillRegion, ShapeStrokeRegion>>>);
     if ((cast ((cast _Runtime.strictEquals(regions, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(regions, 'length'), 0.0) : Bool)) : Bool)) { return cast false; }

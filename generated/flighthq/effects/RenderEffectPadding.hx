@@ -44,7 +44,7 @@ class RenderEffectPadding {
     var top:Float = cast _Runtime.UNDEFINED;
     var missingKinds:Array<Kind> = cast _Runtime.UNDEFINED;
     list = ((cast _Runtime.isArray(effects) : Bool) ? (cast effects : Dynamic) : (cast cast ([effects] : Array<Dynamic>) : Dynamic));
-    entries = ({ final __structural7 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : RenderRegistries).effectPaddingResolvers; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var entries:flighthq._internal._Map<String, RegistryTableEntry<RenderEffectPaddingResolver>>; }).entries; });
+    entries = ({ final __structural7 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { @:optional var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>; }).effectPaddingResolvers; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var entries:flighthq._internal._Map<String, RegistryTableEntry<RenderEffectPaddingResolver>>; }).entries; });
     bottom = 0.0;
     left = 0.0;
     right = 0.0;
@@ -90,12 +90,12 @@ class RenderEffectPadding {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:Null<KeyedTable<RenderEffectPaddingResolver>> = cast _Runtime.UNDEFINED;
     runtime = (cast getRenderStateRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : RenderStateRuntime);
-    table = (cast runtime.registries : RenderRegistries).effectPaddingResolvers;
+    table = (cast runtime.registries : { @:optional var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>; }).effectPaddingResolvers;
     if ((cast _Runtime.strictEquals(resolver, null) : Bool)) {
-      if ((cast !_Runtime.strictEquals(table, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast runtime.registries : RenderRegistries).effectPaddingResolvers = (cast withoutRegistryTableEntry((cast table : Dynamic), (cast kind : String)) : KeyedTable<RenderEffectPaddingResolver>)); }
+      if ((cast !_Runtime.strictEquals(table, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast runtime.registries : { @:optional var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>; }).effectPaddingResolvers = cast ((cast withoutRegistryTableEntry((cast table : Dynamic), (cast kind : String)) : KeyedTable<RenderEffectPaddingResolver>) : Null<KeyedTable<RenderEffectPaddingResolver>>)); }
       return;
     }
-    ((cast runtime.registries : RenderRegistries).effectPaddingResolvers = (cast withRegistryTableEntry((cast _Runtime.coalesce(table, function():Dynamic return cast (cast createKeyedTable((cast 'RenderEffectPaddingResolver' : String), (cast 'Zero' : String)) : KeyedTable<RenderEffectPaddingResolver>)) : Dynamic), (cast kind : String), ({ final __callArgument14:Dynamic = resolver; __callArgument14; })) : KeyedTable<RenderEffectPaddingResolver>));
+    ((cast runtime.registries : { @:optional var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>; }).effectPaddingResolvers = cast ((cast withRegistryTableEntry((cast _Runtime.coalesce(table, function():Dynamic return cast (cast createKeyedTable((cast 'RenderEffectPaddingResolver' : String), (cast 'Zero' : String)) : KeyedTable<RenderEffectPaddingResolver>)) : Dynamic), (cast kind : String), ({ final __callArgument14:Dynamic = resolver; __callArgument14; })) : KeyedTable<RenderEffectPaddingResolver>) : Null<KeyedTable<RenderEffectPaddingResolver>>));
   }
 
   public static function sanitizePadding__renderEffectPadding(value:Float):Float {

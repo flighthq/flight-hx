@@ -169,7 +169,7 @@ class RenderProxy {
     (cast updateRenderProxyAppearance(({ final __callArgument23:Dynamic = state; __callArgument23; }), ({ final __callArgument24:Dynamic = data; __callArgument24; }), ({ final __callArgument25:Dynamic = parentData; __callArgument25; })) : Bool);
     (cast updateRenderProxy2DTransform(({ final __callArgument26:Dynamic = state; __callArgument26; }), ({ final __callArgument27:Dynamic = data; __callArgument27; }), ({ final __callArgument28:Dynamic = parentData; __callArgument28; })) : Bool);
     updateRenderProxyMaterial(({ final __callArgument29:Dynamic = state; __callArgument29; }), ({ final __callArgument30:Dynamic = data; __callArgument30; }), ({ final __callArgument31:Dynamic = parentData; __callArgument31; }));
-    colorAdjustmentResolver = ({ final __structural33 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument32:Dynamic = state; __callArgument32; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : RenderRegistries).colorAdjustments; __structural33 == null ? _Runtime.UNDEFINED : (cast __structural33 : { var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:RenderState->flighthq.types.RenderProxy->Null<flighthq.types.RenderProxy>->Void; }>>; }).entry; });
+    colorAdjustmentResolver = ({ final __structural33 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument32:Dynamic = state; __callArgument32; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { @:optional var colorAdjustments:Null<SlotTable<RenderState->flighthq.types.RenderProxy->Null<flighthq.types.RenderProxy>->Void>>; }).colorAdjustments; __structural33 == null ? _Runtime.UNDEFINED : (cast __structural33 : { var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:RenderState->flighthq.types.RenderProxy->Null<flighthq.types.RenderProxy>->Void; }>>; }).entry; });
     if ((cast _Runtime.strictEquals(({ final __structural34 = colorAdjustmentResolver; __structural34 == null ? _Runtime.UNDEFINED : (cast __structural34 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
       (cast colorAdjustmentResolver : { var state:String; var value:RenderState->flighthq.types.RenderProxy->Null<flighthq.types.RenderProxy>->Void; }).value(({ final __callArgument35:Dynamic = state; __callArgument35; }), ({ final __callArgument36:Dynamic = data; __callArgument36; }), ({ final __callArgument37:Dynamic = parentData; __callArgument37; }));
     }
@@ -199,7 +199,7 @@ class RenderProxy {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:Renderer; }>> = cast _Runtime.UNDEFINED;
     runtime = (cast getRenderStateRuntime(({ final __callArgument51:Dynamic = state; __callArgument51; })) : RenderStateRuntime);
-    entry = ((cast (cast (cast runtime.registries : RenderRegistries).renderers : KeyedTable<Renderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<Renderer>>).get(kind));
+    entry = ((cast (cast (cast runtime.registries : { var renderers:KeyedTable<Renderer>; }).renderers : KeyedTable<Renderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<Renderer>>).get(kind));
     if ((cast !_Runtime.strictEquals(({ final __structural52 = entry; __structural52 == null ? _Runtime.UNDEFINED : (cast __structural52 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
       _Runtime.callOptionalValue(runtime.registryMiss, cast ([RenderRegistry.NodeRenderer, kind] : Array<Dynamic>));
       return cast null;
@@ -218,7 +218,7 @@ class RenderProxy {
     var lastParent:Null<Node<Dynamic>> = cast _Runtime.UNDEFINED;
     var treeDirty:Bool = cast _Runtime.UNDEFINED;
     runtime = (cast getRenderStateRuntime(({ final __callArgument53:Dynamic = state; __callArgument53; })) : RenderStateRuntime);
-    rootGuardTable = (cast runtime.registries : RenderRegistries).renderRootGuard;
+    rootGuardTable = (cast runtime.registries : { @:optional var renderRootGuard:Null<SlotTable<RenderRootGuard>>; }).renderRootGuard;
     if (_Runtime.truthy(rootGuardTable)) { _Runtime.callOptionalValue((cast getRegistryTableEntry((cast rootGuardTable : Dynamic), (cast (cast rootGuardTable : SlotTable<RenderRootGuard>).registry : String)) : Null<RenderRootGuard>), cast ([state, root] : Array<Dynamic>)); }
     ++runtime.currentFrameId;
     tempStack = runtime.tempStack;

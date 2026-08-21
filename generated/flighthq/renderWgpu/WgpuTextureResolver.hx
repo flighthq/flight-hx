@@ -69,8 +69,8 @@ class WgpuTextureResolver {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:KeyedTable<flighthq.types.WgpuTextureResolver> = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument11:Dynamic = state; __callArgument11; })) : WgpuRenderStateRuntime);
-    table = (cast runtime.registries : WgpuRenderRegistries).textureResolvers;
-    ((cast runtime.registries : WgpuRenderRegistries).textureResolvers = ((cast _Runtime.strictEquals(resolver, null) : Bool) ? (cast (cast withoutRegistryTableEntry((cast table : Dynamic), (cast sourceKind : String)) : KeyedTable<flighthq.types.WgpuTextureResolver>) : Dynamic) : (cast (cast withRegistryTableEntry((cast table : Dynamic), (cast sourceKind : String), ({ final __callArgument12:Dynamic = resolver; __callArgument12; })) : KeyedTable<flighthq.types.WgpuTextureResolver>) : Dynamic)));
+    table = (cast runtime.registries : { var textureResolvers:KeyedTable<flighthq.types.WgpuTextureResolver>; }).textureResolvers;
+    ((cast runtime.registries : { var textureResolvers:KeyedTable<flighthq.types.WgpuTextureResolver>; }).textureResolvers = cast (((cast _Runtime.strictEquals(resolver, null) : Bool) ? (cast (cast withoutRegistryTableEntry((cast table : Dynamic), (cast sourceKind : String)) : KeyedTable<flighthq.types.WgpuTextureResolver>) : Dynamic) : (cast (cast withRegistryTableEntry((cast table : Dynamic), (cast sourceKind : String), ({ final __callArgument12:Dynamic = resolver; __callArgument12; })) : KeyedTable<flighthq.types.WgpuTextureResolver>) : Dynamic)) : KeyedTable<flighthq.types.WgpuTextureResolver>));
   }
 
   public static function resolveWgpuTexture(state:WgpuRenderState, texture:TextureLike, premultiply:Bool = false, workingColorSpace:RenderTargetColorSpace = 'linear'):Null<WgpuTextureEntry> {
@@ -80,7 +80,7 @@ class WgpuTextureResolver {
     sourceKind = (cast getTextureSourceKind(({ final __callArgument13:Dynamic = texture; __callArgument13; })) : Null<String>);
     if ((cast _Runtime.strictEquals(sourceKind, null) : Bool)) { return cast null; }
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : WgpuRenderStateRuntime);
-    entry = ((cast (cast (cast runtime.registries : WgpuRenderRegistries).textureResolvers : KeyedTable<flighthq.types.WgpuTextureResolver>).entries : flighthq._internal._Map<String, RegistryTableEntry<flighthq.types.WgpuTextureResolver>>).get(sourceKind));
+    entry = ((cast (cast (cast runtime.registries : { var textureResolvers:KeyedTable<flighthq.types.WgpuTextureResolver>; }).textureResolvers : KeyedTable<flighthq.types.WgpuTextureResolver>).entries : flighthq._internal._Map<String, RegistryTableEntry<flighthq.types.WgpuTextureResolver>>).get(sourceKind));
     if ((cast !_Runtime.strictEquals(({ final __structural15 = entry; __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
       _Runtime.callOptionalValue(runtime.registryMiss, cast ([RenderRegistry.TextureResolver, sourceKind] : Array<Dynamic>));
       return cast null;

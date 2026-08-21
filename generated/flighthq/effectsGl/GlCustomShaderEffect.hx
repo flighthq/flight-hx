@@ -76,7 +76,7 @@ class GlCustomShaderEffect {
 
   public static function getGlCustomShaderSource(state:GlRenderState, shaderKey:String):Null<String> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:String; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).customEffectShaders : KeyedTable<String>).entries : flighthq._internal._Map<String, RegistryTableEntry<String>>).get(shaderKey));
+    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var customEffectShaders:KeyedTable<String>; }).customEffectShaders : KeyedTable<String>).entries : flighthq._internal._Map<String, RegistryTableEntry<String>>).get(shaderKey));
     return cast ((cast _Runtime.strictEquals(({ final __structural17 = entry; __structural17 == null ? _Runtime.UNDEFINED : (cast __structural17 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:String; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -99,7 +99,7 @@ class GlCustomShaderEffect {
     if ((cast ((cast !_Runtime.strictEquals(previousSource, null) : Bool) && (cast !_Runtime.strictEquals(previousSource, fragmentSource) : Bool)) : Bool)) {
       _Runtime.callOptionalValue(((cast GlCustomShaderEffect._sourceGuards__glCustomShaderEffect : flighthq._internal._WeakMap<GlRenderState, GlCustomShaderSourceGuard>).get(state)), cast ([state, shaderKey, previousSource, fragmentSource] : Array<Dynamic>));
     }
-    ((cast runtime.registries : GlRenderRegistries).customEffectShaders = (cast withRegistryTableEntry((cast (cast runtime.registries : GlRenderRegistries).customEffectShaders : Dynamic), (cast shaderKey : String), (cast fragmentSource : String)) : KeyedTable<String>));
+    ((cast runtime.registries : { var customEffectShaders:KeyedTable<String>; }).customEffectShaders = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var customEffectShaders:KeyedTable<String>; }).customEffectShaders : Dynamic), (cast shaderKey : String), (cast fragmentSource : String)) : KeyedTable<String>) : KeyedTable<String>));
   }
 
   @:noCompletion

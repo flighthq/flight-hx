@@ -62,8 +62,8 @@ class GlTextureResolver {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:KeyedTable<flighthq.types.GlTextureResolver> = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : GlRenderStateRuntime);
-    table = (cast runtime.registries : GlRenderRegistries).textureResolvers;
-    ((cast runtime.registries : GlRenderRegistries).textureResolvers = ((cast _Runtime.strictEquals(resolver, null) : Bool) ? (cast (cast withoutRegistryTableEntry((cast table : Dynamic), (cast sourceKind : String)) : KeyedTable<flighthq.types.GlTextureResolver>) : Dynamic) : (cast (cast withRegistryTableEntry((cast table : Dynamic), (cast sourceKind : String), ({ final __callArgument9:Dynamic = resolver; __callArgument9; })) : KeyedTable<flighthq.types.GlTextureResolver>) : Dynamic)));
+    table = (cast runtime.registries : { var textureResolvers:KeyedTable<flighthq.types.GlTextureResolver>; }).textureResolvers;
+    ((cast runtime.registries : { var textureResolvers:KeyedTable<flighthq.types.GlTextureResolver>; }).textureResolvers = cast (((cast _Runtime.strictEquals(resolver, null) : Bool) ? (cast (cast withoutRegistryTableEntry((cast table : Dynamic), (cast sourceKind : String)) : KeyedTable<flighthq.types.GlTextureResolver>) : Dynamic) : (cast (cast withRegistryTableEntry((cast table : Dynamic), (cast sourceKind : String), ({ final __callArgument9:Dynamic = resolver; __callArgument9; })) : KeyedTable<flighthq.types.GlTextureResolver>) : Dynamic)) : KeyedTable<flighthq.types.GlTextureResolver>));
   }
 
   public static function registerStandardGlTextureResolvers(state:GlRenderState):Void {
@@ -79,7 +79,7 @@ class GlTextureResolver {
     sourceKind = (cast getTextureSourceKind(({ final __callArgument13:Dynamic = texture; __callArgument13; })) : Null<String>);
     if ((cast _Runtime.strictEquals(sourceKind, null) : Bool)) { return cast null; }
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : GlRenderStateRuntime);
-    entry = ((cast (cast (cast runtime.registries : GlRenderRegistries).textureResolvers : KeyedTable<flighthq.types.GlTextureResolver>).entries : flighthq._internal._Map<String, RegistryTableEntry<flighthq.types.GlTextureResolver>>).get(sourceKind));
+    entry = ((cast (cast (cast runtime.registries : { var textureResolvers:KeyedTable<flighthq.types.GlTextureResolver>; }).textureResolvers : KeyedTable<flighthq.types.GlTextureResolver>).entries : flighthq._internal._Map<String, RegistryTableEntry<flighthq.types.GlTextureResolver>>).get(sourceKind));
     if ((cast !_Runtime.strictEquals(({ final __structural15 = entry; __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
       _Runtime.callOptionalValue(runtime.registryMiss, cast ([RenderRegistry.TextureResolver, sourceKind] : Array<Dynamic>));
       return cast null;

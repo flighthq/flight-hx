@@ -418,9 +418,9 @@ class WgpuDraw {
     var uploadEntry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:WgpuCompressedTextureUploader; }>> = cast _Runtime.UNDEFINED;
     var decoderEntry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:WgpuCompressedTextureDecoder; }>> = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument85:Dynamic = state; __callArgument85; })) : WgpuRenderStateRuntime);
-    uploadEntry = (cast (cast runtime.registries : WgpuRenderRegistries).compressedTextureUpload : SlotTable<WgpuCompressedTextureUploader>).entry;
+    uploadEntry = (cast (cast runtime.registries : { var compressedTextureUpload:SlotTable<WgpuCompressedTextureUploader>; }).compressedTextureUpload : SlotTable<WgpuCompressedTextureUploader>).entry;
     if ((cast !_Runtime.strictEquals(({ final __structural86 = uploadEntry; __structural86 == null ? _Runtime.UNDEFINED : (cast __structural86 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { return cast null; }
-    decoderEntry = (cast (cast runtime.registries : WgpuRenderRegistries).compressedTextureDecoder : SlotTable<WgpuCompressedTextureDecoder>).entry;
+    decoderEntry = (cast (cast runtime.registries : { var compressedTextureDecoder:SlotTable<WgpuCompressedTextureDecoder>; }).compressedTextureDecoder : SlotTable<WgpuCompressedTextureDecoder>).entry;
     return cast (cast uploadEntry : { var state:String; var value:WgpuCompressedTextureUploader; }).value(({ final __callArgument87:Dynamic = state; __callArgument87; }), (cast image : CompressedImage), (cast ((cast _Runtime.strictEquals(({ final __structural88 = decoderEntry; __structural88 == null ? _Runtime.UNDEFINED : (cast __structural88 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast decoderEntry : { var state:String; var value:WgpuCompressedTextureDecoder; }).value : Dynamic) : (cast null : Dynamic)) : Dynamic), ({ final __callArgument89:Dynamic = colorSpace; __callArgument89; }));
     return cast null;
   }

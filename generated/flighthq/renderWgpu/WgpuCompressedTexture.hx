@@ -57,16 +57,16 @@ class WgpuCompressedTexture {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:SlotTable<WgpuCompressedTextureDecoder> = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuRenderStateRuntime);
-    table = (cast runtime.registries : WgpuRenderRegistries).compressedTextureDecoder;
-    ((cast runtime.registries : WgpuRenderRegistries).compressedTextureDecoder = _Runtime.mergeObjects([table, { entry: ((cast _Runtime.strictEquals(decode, null) : Bool) ? (cast null : Dynamic) : (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: decode } : Dynamic)) }]));
+    table = (cast runtime.registries : { var compressedTextureDecoder:SlotTable<WgpuCompressedTextureDecoder>; }).compressedTextureDecoder;
+    ((cast runtime.registries : { var compressedTextureDecoder:SlotTable<WgpuCompressedTextureDecoder>; }).compressedTextureDecoder = cast (_Runtime.mergeObjects([table, { entry: ((cast _Runtime.strictEquals(decode, null) : Bool) ? (cast null : Dynamic) : (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: decode } : Dynamic)) }]) : SlotTable<WgpuCompressedTextureDecoder>));
   }
 
   public static function registerWgpuCompressedTextureUpload(state:WgpuRenderState, ?uploader:Dynamic):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:SlotTable<WgpuCompressedTextureUploader> = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuRenderStateRuntime);
-    table = (cast runtime.registries : WgpuRenderRegistries).compressedTextureUpload;
-    ((cast runtime.registries : WgpuRenderRegistries).compressedTextureUpload = _Runtime.mergeObjects([table, { entry: ((cast _Runtime.strictEquals(uploader, null) : Bool) ? (cast null : Dynamic) : (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: WgpuCompressedTexture.uploadWgpuCompressedImage__wgpuCompressedTexture } : Dynamic)) }]));
+    table = (cast runtime.registries : { var compressedTextureUpload:SlotTable<WgpuCompressedTextureUploader>; }).compressedTextureUpload;
+    ((cast runtime.registries : { var compressedTextureUpload:SlotTable<WgpuCompressedTextureUploader>; }).compressedTextureUpload = cast (_Runtime.mergeObjects([table, { entry: ((cast _Runtime.strictEquals(uploader, null) : Bool) ? (cast null : Dynamic) : (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: WgpuCompressedTexture.uploadWgpuCompressedImage__wgpuCompressedTexture } : Dynamic)) }]) : SlotTable<WgpuCompressedTextureUploader>));
   }
 
   @:noCompletion

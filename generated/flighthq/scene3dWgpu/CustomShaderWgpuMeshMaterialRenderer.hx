@@ -97,7 +97,7 @@ class CustomShaderWgpuMeshMaterialRenderer {
   @:noCompletion
   public static function getWgpuCustomMaterialShaderSource(state:WgpuRenderState, shaderKey:String):Null<WgpuCustomMaterialShaderSource> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:String; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument24:Dynamic = state; __callArgument24; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : WgpuRenderRegistries).customMaterialShaders : KeyedTable<String>).entries : flighthq._internal._Map<String, RegistryTableEntry<String>>).get(shaderKey));
+    entry = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument24:Dynamic = state; __callArgument24; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : { var customMaterialShaders:KeyedTable<String>; }).customMaterialShaders : KeyedTable<String>).entries : flighthq._internal._Map<String, RegistryTableEntry<String>>).get(shaderKey));
     return cast ((cast _Runtime.strictEquals(({ final __structural25 = entry; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:String; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -105,7 +105,7 @@ class CustomShaderWgpuMeshMaterialRenderer {
   public static function registerWgpuCustomMaterialShader(state:WgpuRenderState, shaderKey:String, wgslSource:WgpuCustomMaterialShaderSource):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument26:Dynamic = state; __callArgument26; })) : WgpuRenderStateRuntime);
-    ((cast runtime.registries : WgpuRenderRegistries).customMaterialShaders = (cast withRegistryTableEntry((cast (cast runtime.registries : WgpuRenderRegistries).customMaterialShaders : Dynamic), (cast shaderKey : String), (cast wgslSource : String)) : KeyedTable<String>));
+    ((cast runtime.registries : { var customMaterialShaders:KeyedTable<String>; }).customMaterialShaders = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var customMaterialShaders:KeyedTable<String>; }).customMaterialShaders : Dynamic), (cast shaderKey : String), (cast wgslSource : String)) : KeyedTable<String>) : KeyedTable<String>));
   }
 
   public static function registerWgpuCustomShaderMaterial(state:WgpuRenderState):Void {

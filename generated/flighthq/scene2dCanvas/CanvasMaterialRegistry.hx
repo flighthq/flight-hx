@@ -41,7 +41,7 @@ class CanvasMaterialRegistry {
   @:noCompletion
   public static function getCanvasMaterialRenderer(state:CanvasRenderState, kind:Kind):Null<CanvasMaterialRenderer> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:CanvasMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
-    entry = ({ final __collection7:Dynamic = ({ final __structural6 = (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : CanvasRenderRegistries).materialRenderers; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var entries:flighthq._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>; }).entries; }); __collection7 == null ? _Runtime.UNDEFINED : ((cast __collection7 : flighthq._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>).get(kind)); });
+    entry = ({ final __collection7:Dynamic = ({ final __structural6 = (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : { @:optional var materialRenderers:Null<KeyedTable<CanvasMaterialRenderer>>; }).materialRenderers; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var entries:flighthq._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>; }).entries; }); __collection7 == null ? _Runtime.UNDEFINED : ((cast __collection7 : flighthq._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>).get(kind)); });
     return cast ((cast _Runtime.strictEquals(({ final __structural8 = entry; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:CanvasMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -51,15 +51,15 @@ class CanvasMaterialRegistry {
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:KeyedTable<CanvasMaterialRenderer> = cast _Runtime.UNDEFINED;
     runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : CanvasRenderStateRuntime);
-    table = _Runtime.coalesce((cast runtime.registries : CanvasRenderRegistries).materialRenderers, function():Dynamic return cast (cast createKeyedTable((cast 'CanvasMaterialRenderer' : String), (cast 'StandardMaterial' : String)) : KeyedTable<CanvasMaterialRenderer>));
-    ((cast runtime.registries : CanvasRenderRegistries).materialRenderers = (cast withRegistryTableEntry((cast table : Dynamic), (cast kind : String), ({ final __callArgument10:Dynamic = renderer; __callArgument10; })) : KeyedTable<CanvasMaterialRenderer>));
+    table = _Runtime.coalesce((cast runtime.registries : { @:optional var materialRenderers:Null<KeyedTable<CanvasMaterialRenderer>>; }).materialRenderers, function():Dynamic return cast (cast createKeyedTable((cast 'CanvasMaterialRenderer' : String), (cast 'StandardMaterial' : String)) : KeyedTable<CanvasMaterialRenderer>));
+    ((cast runtime.registries : { @:optional var materialRenderers:Null<KeyedTable<CanvasMaterialRenderer>>; }).materialRenderers = cast ((cast withRegistryTableEntry((cast table : Dynamic), (cast kind : String), ({ final __callArgument10:Dynamic = renderer; __callArgument10; })) : KeyedTable<CanvasMaterialRenderer>) : Null<KeyedTable<CanvasMaterialRenderer>>));
   }
 
   @:noCompletion
   public static function resolveCanvasMaterialRenderer(state:CanvasRenderState, material:Null<Material>):Null<CanvasMaterialRenderer> {
     var entries:Null<flighthq._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>> = cast _Runtime.UNDEFINED;
     var fallback:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:CanvasMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
-    entries = ({ final __structural12 = (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument11:Dynamic = state; __callArgument11; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : CanvasRenderRegistries).materialRenderers; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { var entries:flighthq._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>; }).entries; });
+    entries = ({ final __structural12 = (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument11:Dynamic = state; __callArgument11; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : { @:optional var materialRenderers:Null<KeyedTable<CanvasMaterialRenderer>>; }).materialRenderers; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { var entries:flighthq._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>; }).entries; });
     if ((cast _Runtime.strictEquals(entries, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     if ((cast !_Runtime.strictEquals(material, null) : Bool)) {
       var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:CanvasMaterialRenderer; }>> = ((cast entries : flighthq._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>).get((cast material : Material).kind));

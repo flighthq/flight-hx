@@ -58,7 +58,7 @@ class DomRenderState {
   public static function createDomRenderStateRuntime():DomRenderStateRuntime {
     var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast createRenderStateRuntime() : DomRenderStateRuntime);
-    (runtime.registries = cast ({ renderers: (cast runtime.registries : DomRenderRegistries).renderers, shapeRasterizer: { entry: null, onMiss: 'Unregistered', registry: 'DomShapeRasterizer', shape: 'slot' }, strokeTessellator: (cast runtime.registries : DomRenderRegistries).strokeTessellator, textureResolvers: { entries: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), onMiss: 'Unregistered', registry: 'DomTextureResolver', shape: 'keyed' } } : DomRenderRegistries));
+    (runtime.registries = cast ({ renderers: (cast runtime.registries : { var renderers:KeyedTable<Renderer>; }).renderers, shapeRasterizer: { entry: null, onMiss: 'Unregistered', registry: 'DomShapeRasterizer', shape: 'slot' }, strokeTessellator: (cast runtime.registries : { var strokeTessellator:SlotTable<Path->StrokeStyle->Null<Float>->Null<PathMesh>>; }).strokeTessellator, textureResolvers: { entries: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), onMiss: 'Unregistered', registry: 'DomTextureResolver', shape: 'keyed' } } : DomRenderRegistries));
     return cast runtime;
     return cast null;
   }

@@ -215,12 +215,12 @@ class WgpuShadedPrelude {
     var colorMatrix:Bool = cast _Runtime.UNDEFINED;
     var key:String = cast _Runtime.UNDEFINED;
     registries = (cast (cast getWgpuRenderStateRuntime(({ final __callArgument18:Dynamic = state; __callArgument18; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries;
-    registry = (cast registries : WgpuRenderRegistries).modifierSnippets;
+    registry = registries.modifierSnippets;
     defineKey = (cast buildWgpuShadedCacheKey(({ final __callArgument19:Dynamic = material; __callArgument19; }), (cast registry : Dynamic)) : String);
     plan = (cast WgpuShadedPrelude.getCachedModifierPlan__wgpuShadedPrelude(({ final __callArgument20:Dynamic = state; __callArgument20; }), ({ final __callArgument21:Dynamic = material; __callArgument21; }), (cast registry : Dynamic), ({ final __callArgument22:Dynamic = defineKey; __callArgument22; })) : ShadedModifierPlan__wgpuShadedPrelude);
     colorAdjusted = (cast (cast getWgpuScene3DRuntime(({ final __callArgument23:Dynamic = state; __callArgument23; })) : WgpuScene3DRuntime) : { var activeColorAdjustmentRun:Bool; }).activeColorAdjustmentRun;
     colorMatrix = (cast (cast getWgpuScene3DRuntime(({ final __callArgument24:Dynamic = state; __callArgument24; })) : WgpuScene3DRuntime) : { var activeColorMatrixRun:Bool; }).activeColorMatrixRun;
-    key = '' + Std.string(defineKey) + '|registry:' + Std.string((cast registries : WgpuRenderRegistries).modifierSnippetRevision) + '|' + Std.string(format) + '|' + Std.string(((cast colorMatrix : Bool) ? (cast 'color-matrix' : Dynamic) : (cast ((cast colorAdjusted : Bool) ? (cast 'color-adjusted' : Dynamic) : (cast 'base' : Dynamic)) : Dynamic))) + '';
+    key = '' + Std.string(defineKey) + '|registry:' + Std.string(registries.modifierSnippetRevision) + '|' + Std.string(format) + '|' + Std.string(((cast colorMatrix : Bool) ? (cast 'color-matrix' : Dynamic) : (cast ((cast colorAdjusted : Bool) ? (cast 'color-adjusted' : Dynamic) : (cast 'base' : Dynamic)) : Dynamic))) + '';
     return cast (cast (cast ensureWgpuScene3DPipeline : WgpuRenderState->String->(Bool->Bool->WgpuMeshPipeline)->WgpuMeshPipeline)(({ final __callArgument25:Dynamic = state; __callArgument25; }), (cast key : String), ({ final __callArgument33:Dynamic = function(blended:Bool, skinned:Bool):WgpuMeshPipeline {
       var entries:Array<flighthq._internal.dom.GPUBindGroupLayoutEntry> = cast _Runtime.UNDEFINED;
       var materialBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout = cast _Runtime.UNDEFINED;
@@ -597,7 +597,7 @@ class WgpuShadedPrelude {
   }
 
   public static function getModifierSnippetTable__wgpuShadedPrelude(state:WgpuRenderState):KeyedTable<WgpuModifierSnippet> {
-    return cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument83:Dynamic = state; __callArgument83; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : WgpuRenderRegistries).modifierSnippets;
+    return cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument83:Dynamic = state; __callArgument83; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : { var modifierSnippets:KeyedTable<WgpuModifierSnippet>; }).modifierSnippets;
     return cast null;
   }
 

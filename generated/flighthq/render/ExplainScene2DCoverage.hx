@@ -48,7 +48,7 @@ class ExplainScene2DCoverage {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(usage.nodeKinds, 'length') : Float)) : Bool)) {
         var kind:String = flighthq._internal._StaticIndex.readArray(usage.nodeKinds, i);
-        if ((cast _Runtime.strictEquals(({ final __structural9 = ((cast (cast (cast runtime.registries : RenderRegistries).renderers : KeyedTable<Renderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<Renderer>>).get(kind)); __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
+        if ((cast _Runtime.strictEquals(({ final __structural9 = ((cast (cast (cast runtime.registries : { var renderers:KeyedTable<Renderer>; }).renderers : KeyedTable<Renderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<Renderer>>).get(kind)); __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Satisfied, facet: (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneNodeKind, kind: kind, registry: RenderRegistry.NodeRenderer }] : Array<Dynamic>));
           i++;
           continue;
@@ -59,7 +59,7 @@ class ExplainScene2DCoverage {
         i++;
       }
     }
-    commands = ({ final __structural13 = (cast runtime.registries : RenderRegistries).canvasShapeCommands; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { var entries:flighthq._internal._Map<String, RegistryTableEntry<CanvasShapeCommand<String>>>; }).entries; });
+    commands = ({ final __structural13 = (cast runtime.registries : { @:optional var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>; }).canvasShapeCommands; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { var entries:flighthq._internal._Map<String, RegistryTableEntry<CanvasShapeCommand<String>>>; }).entries; });
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(usage.shapeCommandKeys, 'length') : Float)) : Bool)) {

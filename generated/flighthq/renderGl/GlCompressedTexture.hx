@@ -211,16 +211,16 @@ class GlCompressedTexture {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:SlotTable<GlCompressedTextureDecoder> = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument43:Dynamic = state; __callArgument43; })) : GlRenderStateRuntime);
-    table = (cast runtime.registries : GlRenderRegistries).compressedTextureDecoder;
-    ((cast runtime.registries : GlRenderRegistries).compressedTextureDecoder = _Runtime.mergeObjects([table, { entry: ((cast _Runtime.strictEquals(decode, null) : Bool) ? (cast null : Dynamic) : (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: decode } : Dynamic)) }]));
+    table = (cast runtime.registries : { var compressedTextureDecoder:SlotTable<GlCompressedTextureDecoder>; }).compressedTextureDecoder;
+    ((cast runtime.registries : { var compressedTextureDecoder:SlotTable<GlCompressedTextureDecoder>; }).compressedTextureDecoder = cast (_Runtime.mergeObjects([table, { entry: ((cast _Runtime.strictEquals(decode, null) : Bool) ? (cast null : Dynamic) : (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: decode } : Dynamic)) }]) : SlotTable<GlCompressedTextureDecoder>));
   }
 
   public static function registerGlCompressedTextureUpload(state:GlRenderState, ?uploader:Dynamic):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:SlotTable<GlCompressedTextureUploader> = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument44:Dynamic = state; __callArgument44; })) : GlRenderStateRuntime);
-    table = (cast runtime.registries : GlRenderRegistries).compressedTextureUpload;
-    ((cast runtime.registries : GlRenderRegistries).compressedTextureUpload = _Runtime.mergeObjects([table, { entry: ((cast _Runtime.strictEquals(uploader, null) : Bool) ? (cast null : Dynamic) : (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: GlCompressedTexture.uploadGlCompressedImage__glCompressedTexture } : Dynamic)) }]));
+    table = (cast runtime.registries : { var compressedTextureUpload:SlotTable<GlCompressedTextureUploader>; }).compressedTextureUpload;
+    ((cast runtime.registries : { var compressedTextureUpload:SlotTable<GlCompressedTextureUploader>; }).compressedTextureUpload = cast (_Runtime.mergeObjects([table, { entry: ((cast _Runtime.strictEquals(uploader, null) : Bool) ? (cast null : Dynamic) : (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: GlCompressedTexture.uploadGlCompressedImage__glCompressedTexture } : Dynamic)) }]) : SlotTable<GlCompressedTextureUploader>));
   }
 
   public static function uploadGlCompressedTextureContainer(gl:flighthq._internal.dom.WebGL2RenderingContext, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:GlCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Bool {

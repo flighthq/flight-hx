@@ -18,20 +18,20 @@ class CanvasRenderEffectRegistry {
   @:noCompletion
   public static function getCanvasRenderEffectRunner(state:CanvasRenderState, kind:String):Null<CanvasRenderEffectRunner> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:CanvasRenderEffectRunner; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : CanvasRenderRegistries).renderEffects : KeyedTable<CanvasRenderEffectRunner>).entries : flighthq._internal._Map<String, RegistryTableEntry<CanvasRenderEffectRunner>>).get(kind));
+    entry = ((cast (cast (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : { var renderEffects:KeyedTable<CanvasRenderEffectRunner>; }).renderEffects : KeyedTable<CanvasRenderEffectRunner>).entries : flighthq._internal._Map<String, RegistryTableEntry<CanvasRenderEffectRunner>>).get(kind));
     return cast ((cast _Runtime.strictEquals(({ final __structural2 = entry; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:CanvasRenderEffectRunner; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   @:noCompletion
   public static function hasCanvasRenderEffectRunner(state:CanvasRenderState, kind:String):Bool {
-    return cast _Runtime.strictEquals(({ final __structural5 = ((cast (cast (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : CanvasRenderRegistries).renderEffects : KeyedTable<CanvasRenderEffectRunner>).entries : flighthq._internal._Map<String, RegistryTableEntry<CanvasRenderEffectRunner>>).get(kind)); __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
+    return cast _Runtime.strictEquals(({ final __structural5 = ((cast (cast (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : { var renderEffects:KeyedTable<CanvasRenderEffectRunner>; }).renderEffects : KeyedTable<CanvasRenderEffectRunner>).entries : flighthq._internal._Map<String, RegistryTableEntry<CanvasRenderEffectRunner>>).get(kind)); __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
     return cast null;
   }
 
   public static function registerCanvasRenderEffect(state:CanvasRenderState, kind:String, runner:CanvasRenderEffectRunner):Void {
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : CanvasRenderStateRuntime);
-    ((cast runtime.registries : CanvasRenderRegistries).renderEffects = (cast withRegistryTableEntry((cast (cast runtime.registries : CanvasRenderRegistries).renderEffects : Dynamic), (cast kind : String), ({ final __callArgument7:Dynamic = runner; __callArgument7; })) : KeyedTable<CanvasRenderEffectRunner>));
+    ((cast runtime.registries : { var renderEffects:KeyedTable<CanvasRenderEffectRunner>; }).renderEffects = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var renderEffects:KeyedTable<CanvasRenderEffectRunner>; }).renderEffects : Dynamic), (cast kind : String), ({ final __callArgument7:Dynamic = runner; __callArgument7; })) : KeyedTable<CanvasRenderEffectRunner>) : KeyedTable<CanvasRenderEffectRunner>));
   }
 }

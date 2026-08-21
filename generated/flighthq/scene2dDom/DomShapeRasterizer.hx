@@ -15,7 +15,7 @@ import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 class DomShapeRasterizer {
   public static function getDomShapeRasterizer(state:DomRenderState):Null<ShapeRasterizer> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:ShapeRasterizer; }>> = cast _Runtime.UNDEFINED;
-    entry = (cast (cast (cast (cast getDomRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : DomRenderStateRuntime) : { var registries:DomRenderRegistries; }).registries : DomRenderRegistries).shapeRasterizer : SlotTable<ShapeRasterizer>).entry;
+    entry = (cast (cast (cast (cast getDomRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : DomRenderStateRuntime) : { var registries:DomRenderRegistries; }).registries : { var shapeRasterizer:SlotTable<ShapeRasterizer>; }).shapeRasterizer : SlotTable<ShapeRasterizer>).entry;
     return cast ((cast _Runtime.strictEquals(({ final __structural1 = entry; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:ShapeRasterizer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -24,7 +24,7 @@ class DomShapeRasterizer {
     var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:SlotTable<ShapeRasterizer> = cast _Runtime.UNDEFINED;
     runtime = (cast getDomRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : DomRenderStateRuntime);
-    table = (cast runtime.registries : DomRenderRegistries).shapeRasterizer;
-    ((cast runtime.registries : DomRenderRegistries).shapeRasterizer = _Runtime.mergeObjects([table, { entry: ((cast _Runtime.strictEquals(rasterizer, null) : Bool) ? (cast null : Dynamic) : (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: rasterizer } : Dynamic)) }]));
+    table = (cast runtime.registries : { var shapeRasterizer:SlotTable<ShapeRasterizer>; }).shapeRasterizer;
+    ((cast runtime.registries : { var shapeRasterizer:SlotTable<ShapeRasterizer>; }).shapeRasterizer = cast (_Runtime.mergeObjects([table, { entry: ((cast _Runtime.strictEquals(rasterizer, null) : Bool) ? (cast null : Dynamic) : (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: rasterizer } : Dynamic)) }]) : SlotTable<ShapeRasterizer>));
   }
 }

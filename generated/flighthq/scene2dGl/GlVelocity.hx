@@ -277,7 +277,7 @@ class GlVelocity {
   @:noCompletion
   public static function getGlVelocityWriter(state:GlRenderState, kind:Kind):Null<GlVelocityWriter> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlVelocityWriter; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument11:Dynamic = state; __callArgument11; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).velocityWriters : KeyedTable<GlVelocityWriter>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlVelocityWriter>>).get(kind));
+    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument11:Dynamic = state; __callArgument11; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var velocityWriters:KeyedTable<GlVelocityWriter>; }).velocityWriters : KeyedTable<GlVelocityWriter>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlVelocityWriter>>).get(kind));
     return cast ((cast _Runtime.strictEquals(({ final __structural12 = entry; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:GlVelocityWriter; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -287,10 +287,10 @@ class GlVelocity {
     var table:KeyedTable<GlVelocityWriter> = cast _Runtime.UNDEFINED;
     var entries:flighthq._internal._Map<String, RegistryTableEntry<GlVelocityWriter>> = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : GlRenderStateRuntime);
-    table = (cast runtime.registries : GlRenderRegistries).velocityWriters;
+    table = (cast runtime.registries : { var velocityWriters:KeyedTable<GlVelocityWriter>; }).velocityWriters;
     entries = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [(cast table : KeyedTable<GlVelocityWriter>).entries]);
     ((cast entries : flighthq._internal._Map<String, RegistryTableEntry<GlVelocityWriter>>).set(kind, (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: writer })));
-    ((cast runtime.registries : GlRenderRegistries).velocityWriters = _Runtime.mergeObjects([table, { entries: entries }]));
+    ((cast runtime.registries : { var velocityWriters:KeyedTable<GlVelocityWriter>; }).velocityWriters = cast (_Runtime.mergeObjects([table, { entries: entries }]) : KeyedTable<GlVelocityWriter>));
   }
 
   public static function renderGlVelocity<Traits:flighthq._internal._Object>(state:GlRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:GlRenderTarget):Void {

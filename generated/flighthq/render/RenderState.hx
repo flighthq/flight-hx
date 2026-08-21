@@ -71,14 +71,14 @@ class RenderState {
     }
     ({ final __optionalOwner18 = runtime.registryMiss; if (__optionalOwner18 != null) { final __optionalCall17 = (cast __optionalOwner18 : { var clear:Void->Void; }).clear; if (__optionalCall17 != null) __optionalCall17(); } });
     (runtime.registryMiss = cast (null : Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>));
-    ((cast runtime.registries : RenderRegistries).effectPaddingResolvers = _Runtime.field(_Runtime, 'UNDEFINED'));
+    ((cast runtime.registries : { @:optional var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>; }).effectPaddingResolvers = cast (_Runtime.field(_Runtime, 'UNDEFINED') : Null<KeyedTable<RenderEffectPaddingResolver>>));
     _Runtime.setLength(runtime.tempStack, 0.0);
   }
 
   @:noCompletion
   public static function getColorAdjustmentUnsupportedGuard(state:flighthq.types.RenderState):Null<ColorAdjustmentUnsupportedGuard> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:ColorAdjustmentUnsupportedGuard; }>> = cast _Runtime.UNDEFINED;
-    entry = ({ final __structural20 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument19:Dynamic = state; __callArgument19; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : RenderRegistries).colorAdjustmentUnsupportedGuard; __structural20 == null ? _Runtime.UNDEFINED : (cast __structural20 : { var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:ColorAdjustmentUnsupportedGuard; }>>; }).entry; });
+    entry = ({ final __structural20 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument19:Dynamic = state; __callArgument19; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { @:optional var colorAdjustmentUnsupportedGuard:Null<SlotTable<ColorAdjustmentUnsupportedGuard>>; }).colorAdjustmentUnsupportedGuard; __structural20 == null ? _Runtime.UNDEFINED : (cast __structural20 : { var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:ColorAdjustmentUnsupportedGuard; }>>; }).entry; });
     return cast ((cast _Runtime.strictEquals(({ final __structural21 = entry; __structural21 == null ? _Runtime.UNDEFINED : (cast __structural21 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:ColorAdjustmentUnsupportedGuard; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }

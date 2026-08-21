@@ -288,7 +288,7 @@ class WgpuVelocity {
   @:noCompletion
   public static function getWgpuVelocityWriter(state:WgpuRenderState, kind:Kind):Null<WgpuVelocityWriter> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:WgpuVelocityWriter; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : WgpuRenderRegistries).velocityWriters : KeyedTable<WgpuVelocityWriter>).entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuVelocityWriter>>).get(kind));
+    entry = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : { var velocityWriters:KeyedTable<WgpuVelocityWriter>; }).velocityWriters : KeyedTable<WgpuVelocityWriter>).entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuVelocityWriter>>).get(kind));
     return cast ((cast _Runtime.strictEquals(({ final __structural11 = entry; __structural11 == null ? _Runtime.UNDEFINED : (cast __structural11 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:WgpuVelocityWriter; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -298,10 +298,10 @@ class WgpuVelocity {
     var table:KeyedTable<WgpuVelocityWriter> = cast _Runtime.UNDEFINED;
     var entries:flighthq._internal._Map<String, RegistryTableEntry<WgpuVelocityWriter>> = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument12:Dynamic = state; __callArgument12; })) : WgpuRenderStateRuntime);
-    table = (cast runtime.registries : WgpuRenderRegistries).velocityWriters;
+    table = (cast runtime.registries : { var velocityWriters:KeyedTable<WgpuVelocityWriter>; }).velocityWriters;
     entries = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), [(cast table : KeyedTable<WgpuVelocityWriter>).entries]);
     ((cast entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuVelocityWriter>>).set(kind, (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: writer })));
-    ((cast runtime.registries : WgpuRenderRegistries).velocityWriters = _Runtime.mergeObjects([table, { entries: entries }]));
+    ((cast runtime.registries : { var velocityWriters:KeyedTable<WgpuVelocityWriter>; }).velocityWriters = cast (_Runtime.mergeObjects([table, { entries: entries }]) : KeyedTable<WgpuVelocityWriter>));
   }
 
   public static function renderWgpuVelocity<Traits:flighthq._internal._Object>(state:WgpuRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:WgpuRenderTarget):Void {

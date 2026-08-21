@@ -24,7 +24,7 @@ class GlMaterialRegistry {
   @:noCompletion
   public static function getGlMaterialRenderer(state:GlRenderState, kind:Kind):Null<GlMaterialRenderer> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).materialRenderers : KeyedTable<GlMaterialRenderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlMaterialRenderer>>).get(kind));
+    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var materialRenderers:KeyedTable<GlMaterialRenderer>; }).materialRenderers : KeyedTable<GlMaterialRenderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlMaterialRenderer>>).get(kind));
     return cast ((cast _Runtime.strictEquals(({ final __structural2 = entry; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:GlMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -33,7 +33,7 @@ class GlMaterialRegistry {
   public static function registerGlMaterialRenderer(state:GlRenderState, kind:Kind, renderer:GlMaterialRenderer):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : GlRenderStateRuntime);
-    ((cast runtime.registries : GlRenderRegistries).materialRenderers = (cast withRegistryTableEntry((cast (cast runtime.registries : GlRenderRegistries).materialRenderers : Dynamic), (cast kind : String), ({ final __callArgument4:Dynamic = renderer; __callArgument4; })) : KeyedTable<GlMaterialRenderer>));
+    ((cast runtime.registries : { var materialRenderers:KeyedTable<GlMaterialRenderer>; }).materialRenderers = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var materialRenderers:KeyedTable<GlMaterialRenderer>; }).materialRenderers : Dynamic), (cast kind : String), ({ final __callArgument4:Dynamic = renderer; __callArgument4; })) : KeyedTable<GlMaterialRenderer>) : KeyedTable<GlMaterialRenderer>));
   }
 
   @:noCompletion
@@ -44,7 +44,7 @@ class GlMaterialRegistry {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
     var fallback:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlRenderStateRuntime);
-    entries = (cast (cast runtime.registries : GlRenderRegistries).materialRenderers : KeyedTable<GlMaterialRenderer>).entries;
+    entries = (cast (cast runtime.registries : { var materialRenderers:KeyedTable<GlMaterialRenderer>; }).materialRenderers : KeyedTable<GlMaterialRenderer>).entries;
     kind = _Runtime.coalesce(({ final __structural6 = material; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var kind:String; }).kind; }), function():Dynamic return cast StandardMaterialKindValue);
     entry = ((cast entries : flighthq._internal._Map<String, RegistryTableEntry<GlMaterialRenderer>>).get(kind));
     if ((cast _Runtime.strictEquals(({ final __structural7 = entry; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { return cast (cast entry : { var state:String; var value:GlMaterialRenderer; }).value; }

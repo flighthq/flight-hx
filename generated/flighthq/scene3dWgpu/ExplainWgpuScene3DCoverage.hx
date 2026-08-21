@@ -48,7 +48,7 @@ class ExplainWgpuScene3DCoverage {
     var resolvers:KeyedTable<WgpuTextureResolver> = cast _Runtime.UNDEFINED;
     var snippets:flighthq._internal._Map<String, RegistryTableEntry<WgpuModifierSnippet>> = cast _Runtime.UNDEFINED;
     found = false;
-    materials = (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : WgpuRenderRegistries).meshMaterialRenderers : KeyedTable<WgpuMeshMaterialRenderer>).entries;
+    materials = (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : { var meshMaterialRenderers:KeyedTable<WgpuMeshMaterialRenderer>; }).meshMaterialRenderers : KeyedTable<WgpuMeshMaterialRenderer>).entries;
     hasStandard = _Runtime.strictEquals(({ final __structural9 = ((cast materials : flighthq._internal._Map<String, RegistryTableEntry<WgpuMeshMaterialRenderer>>).get(StandardMaterialKindValue)); __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
     {
       var i:Float = 0.0;
@@ -65,7 +65,7 @@ class ExplainWgpuScene3DCoverage {
         i++;
       }
     }
-    resolvers = (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : WgpuRenderRegistries).textureResolvers;
+    resolvers = (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : { var textureResolvers:KeyedTable<WgpuTextureResolver>; }).textureResolvers;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(usage.textureSourceKinds, 'length') : Float)) : Bool)) {
@@ -81,7 +81,7 @@ class ExplainWgpuScene3DCoverage {
         i++;
       }
     }
-    snippets = (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument19:Dynamic = state; __callArgument19; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : WgpuRenderRegistries).modifierSnippets : KeyedTable<WgpuModifierSnippet>).entries;
+    snippets = (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument19:Dynamic = state; __callArgument19; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : { var modifierSnippets:KeyedTable<WgpuModifierSnippet>; }).modifierSnippets : KeyedTable<WgpuModifierSnippet>).entries;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(usage.modifierKinds, 'length') : Float)) : Bool)) {

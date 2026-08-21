@@ -72,7 +72,7 @@ class CustomShaderGlMeshMaterialRenderer {
   @:noCompletion
   public static function getGlCustomMaterialShaderSource(state:GlRenderState, shaderKey:String):Null<GlCustomMaterialShaderSource> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlCustomMaterialShaderSource; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument23:Dynamic = state; __callArgument23; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).customMaterialShaders : KeyedTable<GlCustomMaterialShaderSource>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlCustomMaterialShaderSource>>).get(shaderKey));
+    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument23:Dynamic = state; __callArgument23; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var customMaterialShaders:KeyedTable<GlCustomMaterialShaderSource>; }).customMaterialShaders : KeyedTable<GlCustomMaterialShaderSource>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlCustomMaterialShaderSource>>).get(shaderKey));
     return cast ((cast _Runtime.strictEquals(({ final __structural24 = entry; __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:GlCustomMaterialShaderSource; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -80,7 +80,7 @@ class CustomShaderGlMeshMaterialRenderer {
   public static function registerGlCustomMaterialShader(state:GlRenderState, shaderKey:String, source:GlCustomMaterialShaderSource):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument25:Dynamic = state; __callArgument25; })) : GlRenderStateRuntime);
-    ((cast runtime.registries : GlRenderRegistries).customMaterialShaders = (cast withRegistryTableEntry((cast (cast runtime.registries : GlRenderRegistries).customMaterialShaders : Dynamic), (cast shaderKey : String), ({ final __callArgument26:Dynamic = source; __callArgument26; })) : KeyedTable<GlCustomMaterialShaderSource>));
+    ((cast runtime.registries : { var customMaterialShaders:KeyedTable<GlCustomMaterialShaderSource>; }).customMaterialShaders = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var customMaterialShaders:KeyedTable<GlCustomMaterialShaderSource>; }).customMaterialShaders : Dynamic), (cast shaderKey : String), ({ final __callArgument26:Dynamic = source; __callArgument26; })) : KeyedTable<GlCustomMaterialShaderSource>) : KeyedTable<GlCustomMaterialShaderSource>));
   }
 
   public static function registerGlCustomShaderMaterial(state:GlRenderState):Void {

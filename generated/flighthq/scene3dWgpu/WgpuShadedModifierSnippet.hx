@@ -20,14 +20,14 @@ class WgpuShadedModifierSnippet {
   public static function registerWgpuModifierSnippet(state:WgpuRenderState, snippet:WgpuModifierSnippet):Void {
     var registries:WgpuRenderRegistries = cast _Runtime.UNDEFINED;
     registries = (cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries;
-    ((cast registries : WgpuRenderRegistries).modifierSnippets = (cast withRegistryTableEntry((cast (cast registries : WgpuRenderRegistries).modifierSnippets : Dynamic), (cast _Runtime.field(snippet, 'kind') : String), ({ final __callArgument1:Dynamic = snippet; __callArgument1; })) : KeyedTable<WgpuModifierSnippet>));
-    (cast registries : WgpuRenderRegistries).modifierSnippetRevision++;
+    (registries.modifierSnippets = cast ((cast withRegistryTableEntry((cast registries.modifierSnippets : Dynamic), (cast _Runtime.field(snippet, 'kind') : String), ({ final __callArgument1:Dynamic = snippet; __callArgument1; })) : KeyedTable<WgpuModifierSnippet>) : KeyedTable<WgpuModifierSnippet>));
+    registries.modifierSnippetRevision++;
   }
 
   @:noCompletion
   public static function resolveWgpuModifierSnippet(state:WgpuRenderState, kind:ModifierKind):Null<WgpuModifierSnippet> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:WgpuModifierSnippet; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : WgpuRenderRegistries).modifierSnippets : KeyedTable<WgpuModifierSnippet>).entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuModifierSnippet>>).get(kind));
+    entry = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : { var modifierSnippets:KeyedTable<WgpuModifierSnippet>; }).modifierSnippets : KeyedTable<WgpuModifierSnippet>).entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuModifierSnippet>>).get(kind));
     return cast ((cast _Runtime.strictEquals(({ final __structural4 = entry; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:WgpuModifierSnippet; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }

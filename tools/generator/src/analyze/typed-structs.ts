@@ -1843,6 +1843,31 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#Physics3DSolverConfig',
     purpose: 'reviewed escape-free Physics3D solver config',
   },
+  {
+    declarationFingerprint: 'sha256:bf54026159b9f0b3aa3951ced7856cb58c83480a7bfffbc5dd32f36ea5a03b02',
+    id: '@flighthq/types:interface#CanvasRenderRegistries',
+    purpose: 'reviewed escape-free Canvas render registries',
+  },
+  {
+    declarationFingerprint: 'sha256:3b8ef9dbbfa02ffa5cbfa60a7794d052d50f559167276292a2a620425bedb3e0',
+    id: '@flighthq/types:interface#DomRenderRegistries',
+    purpose: 'reviewed escape-free DOM render registries',
+  },
+  {
+    declarationFingerprint: 'sha256:43740eafc1e1c310207dcce7ac38be6340b29e9a1a67fcec617ff72fef5634ea',
+    id: '@flighthq/types:interface#GlRenderRegistries',
+    purpose: 'reviewed escape-free WebGL render registries',
+  },
+  {
+    declarationFingerprint: 'sha256:025737da9ae647cb9dbb97d5b4a0fcee009a6fde35836d07bb03683375d9a3dc',
+    id: '@flighthq/types:interface#RenderRegistries',
+    purpose: 'reviewed escape-free render registries',
+  },
+  {
+    declarationFingerprint: 'sha256:9fc24ca0be8f86d689020a89a978acdd3d9e5b24efa7cb8473fe58deb4f117df',
+    id: '@flighthq/types:interface#WgpuRenderRegistries',
+    purpose: 'reviewed escape-free WebGPU render registries',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(
