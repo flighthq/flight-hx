@@ -102,4 +102,5 @@ export const updateRigidBody3DMassData = compiled.flighthq.physics3d.Physics3d.u
 export const wakePhysics3DBody = compiled.flighthq.physics3d.Physics3d.wakePhysics3DBody;
 export const writePhysics3DDebugGeometry = compiled.flighthq.physics3d.Physics3d.writePhysics3DDebugGeometry;
 export const writePhysics3DJointReaction = compiled.flighthq.physics3d.Physics3d.writePhysics3DJointReaction;
+export const writePhysics3DRotationalCcdEnvelope = compiled.flighthq.physics3d.Physics3d.writePhysics3DRotationalCcdEnvelope;
 export const writeRigidBody3DWorldCenter = compiled.flighthq.physics3d.Physics3d.writeRigidBody3DWorldCenter;

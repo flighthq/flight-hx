@@ -7,3 +7,4 @@ __syncDependencies();
 
 export const hasActivePhysics3DBullet = api.hasActivePhysics3DBullet;
 export const integratePhysics3DContinuous = api.integratePhysics3DContinuous;
+export const writePhysics3DRotationalCcdEnvelope = api.writePhysics3DRotationalCcdEnvelope;

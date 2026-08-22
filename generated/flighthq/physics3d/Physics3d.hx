@@ -54,6 +54,7 @@ import flighthq.types.Physics3D.Physics3DMaterial;
 import flighthq.types.Physics3D.Physics3DQueryFilter;
 import flighthq.types.Physics3D.Physics3DQueryResult;
 import flighthq.types.Physics3D.Physics3DRayResult;
+import flighthq.types.Physics3D.Physics3DRotationalCcdEnvelope;
 import flighthq.types.Physics3D.Physics3DSequentialImpulseConfig;
 import flighthq.types.Physics3D.Physics3DShapeCastResult;
 import flighthq.types.Physics3D.Physics3DSliderJoint;
@@ -491,6 +492,11 @@ class Physics3d {
 
   public static function writePhysics3DJointReaction(world:Physics3DWorld, joint:Physics3DJoint, dt:Float, out:Physics3DJointReaction):Bool {
     return cast Facade_Physics3d_flighthq_physics3d_JointReaction.writePhysics3DJointReaction(world, joint, dt, out);
+    return cast null;
+  }
+
+  public static function writePhysics3DRotationalCcdEnvelope(angularSpeed:Float, maximumRadius:Float, dt:Float, maxSubsteps:Float, out:Physics3DRotationalCcdEnvelope):Bool {
+    return cast Facade_Physics3d_flighthq_physics3d_Continuous.writePhysics3DRotationalCcdEnvelope(angularSpeed, maximumRadius, dt, maxSubsteps, out);
     return cast null;
   }
 

@@ -833,6 +833,14 @@
     },
     {
       "byReason": {
+        "standard-toolkit-boundary": 50
+      },
+      "module": "flighthq.collision.CapsuleContact2D",
+      "source": "upstream/packages/collision/src/capsuleContact2D.ts",
+      "total": 50
+    },
+    {
+      "byReason": {
         "standard-toolkit-boundary": 6
       },
       "module": "flighthq.collision.CollideContactManifold3D",
@@ -1003,12 +1011,13 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 32,
+        "source-null": 3,
+        "standard-toolkit-boundary": 35,
         "unclassified": 1
       },
       "module": "flighthq.collision.SweepCollisionShape2D",
       "source": "upstream/packages/collision/src/sweepCollisionShape2D.ts",
-      "total": 33
+      "total": 39
     },
     {
       "byReason": {
@@ -4555,11 +4564,11 @@
     {
       "byReason": {
         "source-any": 2,
-        "standard-toolkit-boundary": 17
+        "standard-toolkit-boundary": 13
       },
       "module": "flighthq.physics2d.EnablePhysics2DGuards",
       "source": "upstream/packages/physics2d/src/enablePhysics2DGuards.ts",
-      "total": 19
+      "total": 15
     },
     {
       "byReason": {
@@ -4726,12 +4735,12 @@
     },
     {
       "byReason": {
-        "source-any": 10,
-        "standard-toolkit-boundary": 26
+        "source-any": 18,
+        "standard-toolkit-boundary": 67
       },
       "module": "flighthq.physics3d.Continuous",
       "source": "upstream/packages/physics3d/src/continuous.ts",
-      "total": 36
+      "total": 85
     },
     {
       "byReason": {
@@ -4743,11 +4752,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 8
+        "standard-toolkit-boundary": 11
       },
       "module": "flighthq.physics3d.EnablePhysics3DGuards",
       "source": "upstream/packages/physics3d/src/enablePhysics3DGuards.ts",
-      "total": 8
+      "total": 11
     },
     {
       "byReason": {
@@ -4872,6 +4881,14 @@
     },
     {
       "byReason": {
+        "standard-toolkit-boundary": 7
+      },
+      "module": "flighthq.physics3d.Physics3DBroadphasePublication",
+      "source": "upstream/packages/physics3d/src/physics3DBroadphasePublication.ts",
+      "total": 7
+    },
+    {
+      "byReason": {
         "standard-toolkit-boundary": 28
       },
       "module": "flighthq.physics3d.Solver",
@@ -4880,11 +4897,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 9
+        "standard-toolkit-boundary": 10
       },
       "module": "flighthq.physics3d.Step",
       "source": "upstream/packages/physics3d/src/step.ts",
-      "total": 9
+      "total": 10
     },
     {
       "byReason": {
@@ -4920,6 +4937,33 @@
       "module": "flighthq.physics3d.WorldQueries",
       "source": "upstream/packages/physics3d/src/worldQueries.ts",
       "total": 56
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 19
+      },
+      "module": "flighthq.physics3dAbi.Physics3DAbiBuffer",
+      "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts",
+      "total": 19
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 210,
+        "unclassified": 5
+      },
+      "module": "flighthq.physics3dAbi.Physics3DAbiCommand",
+      "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts",
+      "total": 215
+    },
+    {
+      "byReason": {
+        "source-any": 12,
+        "standard-toolkit-boundary": 234,
+        "unclassified": 6
+      },
+      "module": "flighthq.physics3dAbi.ReferencePhysics3DAbi",
+      "source": "upstream/packages/physics3d-abi/src/referencePhysics3DAbi.ts",
+      "total": 252
     },
     {
       "byReason": {
@@ -8521,11 +8565,11 @@
     {
       "byReason": {
         "source-any": 6,
-        "standard-toolkit-boundary": 99
+        "standard-toolkit-boundary": 103
       },
       "module": "flighthq.spatial.Bvh3D",
       "source": "upstream/packages/spatial/src/bvh3D.ts",
-      "total": 105
+      "total": 109
     },
     {
       "byReason": {
@@ -10005,16 +10049,16 @@
   "summary": {
     "byReason": {
       "external-toolkit-boundary": 618,
-      "source-any": 935,
+      "source-any": 955,
       "source-never": 120,
-      "source-null": 83,
+      "source-null": 86,
       "source-undefined": 267,
       "source-unknown": 3874,
-      "standard-toolkit-boundary": 19412,
-      "unclassified": 409
+      "standard-toolkit-boundary": 19980,
+      "unclassified": 420
     },
     "checkerKnownUnrepresentable": 0,
-    "modules": 1178,
-    "total": 25718
+    "modules": 1183,
+    "total": 26320
   }
 }

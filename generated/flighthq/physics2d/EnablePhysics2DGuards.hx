@@ -38,23 +38,6 @@ class EnablePhysics2DGuards {
     (EnablePhysics2DGuards.physics2DGuardsEnabled__enablePhysics2DGuards = cast (true : Dynamic));
   }
 
-  public static function warnOnUndetectablePhysics2DColliders__enablePhysics2DGuards(world:Physics2DWorld):Void {
-    var explanation:Physics2DCollisionExplanation = cast _Runtime.UNDEFINED;
-    var kinds:Array<String> = cast _Runtime.UNDEFINED;
-    var arealess:Array<String> = cast _Runtime.UNDEFINED;
-    var unimplemented:Array<String> = cast _Runtime.UNDEFINED;
-    var areaFix:String = cast _Runtime.UNDEFINED;
-    var gapFix:String = cast _Runtime.UNDEFINED;
-    explanation = (cast explainPhysics2DCollision(({ final __callArgument0:Dynamic = world; __callArgument0; })) : Physics2DCollisionExplanation);
-    if ((cast _Runtime.strictEquals((cast explanation : Physics2DCollisionExplanation).status, 'ready') : Bool)) { return; }
-    kinds = (cast explanation : Physics2DCollisionExplanation).unsupportedKinds;
-    arealess = (cast _Runtime.filterArray((cast kinds : Array<String>), function(kind:String, __unused0:Float, __unused1:Array<String>):Bool return ((cast _Runtime.strictEquals(kind, 'segment') : Bool) || (cast _Runtime.strictEquals(kind, 'point') : Bool)), _Runtime.UNDEFINED));
-    unimplemented = (cast _Runtime.filterArray((cast kinds : Array<String>), function(kind:String, __unused2:Float, __unused3:Array<String>):Bool return ((cast !_Runtime.strictEquals(kind, 'segment') : Bool) && (cast !_Runtime.strictEquals(kind, 'point') : Bool)), _Runtime.UNDEFINED));
-    areaFix = ((cast ((cast _Runtime.field(arealess, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast ' ' + Std.string(_Runtime.join(arealess, ' and ')) + ' carr' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(arealess, 'length'), 1.0) : Bool) ? (cast 'ies' : Dynamic) : (cast 'y' : Dynamic))) + ' no area and so no contact, and cannot be a rigid body\'s collider — give the body a shape with area.' : Dynamic) : (cast '' : Dynamic));
-    gapFix = ((cast ((cast _Runtime.field(unimplemented, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast ' collideContactManifold2D has no pair functions for ' + Std.string(_Runtime.join(unimplemented, ', ')) + ' yet, so ' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(unimplemented, 'length'), 1.0) : Bool) ? (cast 'it is' : Dynamic) : (cast 'they are' : Dynamic))) + ' usable for queries and raycasts but not as a simulated collider.' : Dynamic) : (cast '' : Dynamic));
-    (cast logOnce((cast 'physics2d:' + Std.string((cast explanation : Physics2DCollisionExplanation).status) + ':' + Std.string(_Runtime.join(kinds, ',')) + '' : String), ({ final __callArgument1:Dynamic = LogLevel.Warn; __callArgument1; }), (cast { kinds: kinds, message: 'stepPhysics2D: collider kind' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(kinds, 'length'), 1.0) : Bool) ? (cast '' : Dynamic) : (cast 's' : Dynamic))) + ' ' + Std.string(_Runtime.join(kinds, ', ')) + ' generate' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(kinds, 'length'), 1.0) : Bool) ? (cast 's' : Dynamic) : (cast '' : Dynamic))) + ' no contacts, so the bodies carrying ' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(kinds, 'length'), 1.0) : Bool) ? (cast 'it' : Dynamic) : (cast 'them' : Dynamic))) + ' pass through everything.' + Std.string(areaFix) + '' + Std.string(gapFix) + ' Call explainPhysics2DCollision(world) for the same finding as data.', status: (cast explanation : Physics2DCollisionExplanation).status } : Dynamic), ({ final __callArgument2:Dynamic = 'physics2d'; __callArgument2; })) : Bool);
-  }
-
   public static function getFailingPhysics2DPreconditions__enablePhysics2DGuards(explanation:Physics2DStepExplanation):Array<String> {
     var failing:Array<String> = cast _Runtime.UNDEFINED;
     failing = (cast cast ([] : Array<Dynamic>));
@@ -76,6 +59,15 @@ class EnablePhysics2DGuards {
     return cast null;
   }
 
+  public static function warnOnUndetectablePhysics2DColliders__enablePhysics2DGuards(world:Physics2DWorld):Void {
+    var explanation:Physics2DCollisionExplanation = cast _Runtime.UNDEFINED;
+    var kinds:Array<String> = cast _Runtime.UNDEFINED;
+    explanation = (cast explainPhysics2DCollision(({ final __callArgument4:Dynamic = world; __callArgument4; })) : Physics2DCollisionExplanation);
+    if ((cast _Runtime.strictEquals((cast explanation : Physics2DCollisionExplanation).status, 'ready') : Bool)) { return; }
+    kinds = (cast explanation : Physics2DCollisionExplanation).unsupportedKinds;
+    (cast logOnce((cast 'physics2d:' + Std.string((cast explanation : Physics2DCollisionExplanation).status) + ':' + Std.string(_Runtime.join(kinds, ',')) + '' : String), ({ final __callArgument5:Dynamic = LogLevel.Warn; __callArgument5; }), (cast { kinds: kinds, message: 'stepPhysics2D: collider kind' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(kinds, 'length'), 1.0) : Bool) ? (cast '' : Dynamic) : (cast 's' : Dynamic))) + ' ' + Std.string(_Runtime.join(kinds, ', ')) + ' enclose' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(kinds, 'length'), 1.0) : Bool) ? (cast 's' : Dynamic) : (cast '' : Dynamic))) + ' no area and so generate' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(kinds, 'length'), 1.0) : Bool) ? (cast 's' : Dynamic) : (cast '' : Dynamic))) + ' no contacts, and the bodies carrying ' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(kinds, 'length'), 1.0) : Bool) ? (cast 'it' : Dynamic) : (cast 'them' : Dynamic))) + ' pass through everything — give the body a shape with area. Call explainPhysics2DCollision(world) for the same finding as data.', status: (cast explanation : Physics2DCollisionExplanation).status } : Dynamic), ({ final __callArgument6:Dynamic = 'physics2d'; __callArgument6; })) : Bool);
+  }
+
   public static function warnOnUnresolvedPhysics2DJoints__enablePhysics2DGuards(world:Physics2DWorld):Void {
     var explanation:Physics2DJointResolutionExplanation = cast _Runtime.UNDEFINED;
     var faults:Array<String> = cast _Runtime.UNDEFINED;
@@ -87,8 +79,8 @@ class EnablePhysics2DGuards {
     explanation = (cast explainPhysics2DJoints(({ final __callArgument7:Dynamic = world; __callArgument7; })) : Physics2DJointResolutionExplanation);
     if ((cast _Runtime.strictEquals((cast explanation : Physics2DJointResolutionExplanation).status, 'complete') : Bool)) { return; }
     faults = (cast EnablePhysics2DGuards.getUnresolvedPhysics2DJointFaults__enablePhysics2DGuards(({ final __callArgument8:Dynamic = explanation; __callArgument8; })) : Array<String>);
-    unregistered = _Runtime.callProperty(faults, 'some', cast ([function(fault:String, __unused4:Float, __unused5:Array<String>):Bool return StringTools.endsWith(Std.string(fault), ':solver-unregistered')] : Array<Dynamic>));
-    missing = _Runtime.callProperty(faults, 'some', cast ([function(fault:String, __unused6:Float, __unused7:Array<String>):Bool return !(cast StringTools.endsWith(Std.string(fault), ':solver-unregistered') : Bool)] : Array<Dynamic>));
+    unregistered = _Runtime.callProperty(faults, 'some', cast ([function(fault:String, __unused0:Float, __unused1:Array<String>):Bool return StringTools.endsWith(Std.string(fault), ':solver-unregistered')] : Array<Dynamic>));
+    missing = _Runtime.callProperty(faults, 'some', cast ([function(fault:String, __unused2:Float, __unused3:Array<String>):Bool return !(cast StringTools.endsWith(Std.string(fault), ':solver-unregistered') : Bool)] : Array<Dynamic>));
     unresolvedCount = _Runtime.subtractNumbers(_Runtime.field((cast explanation : Physics2DJointResolutionExplanation).joints, 'length'), (cast explanation : Physics2DJointResolutionExplanation).readyCount);
     advice = ((cast unregistered : Bool) ? (cast ' — an unregistered kind is never solved and its constraint simply does not exist, so call registerBuiltInPhysics2DJointSolvers(world) or registerPhysics2DJointSolver(world, kind, solver) for your own kind' : Dynamic) : (cast '' : Dynamic));
     endpointAdvice = ((cast missing : Bool) ? (cast ' — a joint whose endpoint body is gone is skipped for the rest of the world\'s life and should be removed with the body' : Dynamic) : (cast '' : Dynamic));

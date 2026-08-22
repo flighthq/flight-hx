@@ -489,6 +489,7 @@ export * from './PerspectiveProjectionOptions.mjs';
 export * from './PhongMaterial.mjs';
 export * from './Physics2D.mjs';
 export * from './Physics3D.mjs';
+export * from './Physics3DAbi.mjs';
 export * from './PixelFormat.mjs';
 export * from './PixelOrder.mjs';
 export * from './PixelateEffect.mjs';

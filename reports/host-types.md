@@ -1,6 +1,6 @@
 # Host Type Census
 
-Upstream commit: `9b3b71b019ff48ea6329c16020f37fb72c3123d1`
+Upstream commit: `9db114b3fe1db90a90a11541649cb3af8bb5ca62`
 
 Host identities are derived from the TypeScript checker and their ambient declaration origins. Every emitted identity maps mechanically to `flighthq._internal.dom.<SameTypeName>`; this census is descriptive, not an eligibility list.
 

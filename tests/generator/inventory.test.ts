@@ -26,15 +26,17 @@ describe('analyzeUpstream', () => {
     const geometry = inventory.packages.find((item) => item.name === '@flighthq/geometry');
     const sdk = inventory.packages.find((item) => item.name === '@flighthq/sdk');
     const hostElectron = inventory.packages.find((item) => item.name === '@flighthq/host-electron');
+    const physics3DAbi = inventory.packages.find((item) => item.name === '@flighthq/physics3d-abi');
     const toolCapture = inventory.packages.find((item) => item.name === '@flighthq/tool-capture');
     const toolRegistry = inventory.packages.find((item) => item.name === '@flighthq/tool-registry');
-    if (!abc || !compression || !geometry || !sdk || !hostElectron || !toolCapture || !toolRegistry) {
+    if (!abc || !compression || !geometry || !sdk || !hostElectron || !physics3DAbi || !toolCapture || !toolRegistry) {
       throw new Error('Expected representative packages');
     }
     const abcRoot = resolvePackageExportLane(inventoryByName, '@flighthq/abc');
     const compressionRoot = resolvePackageExportLane(inventoryByName, '@flighthq/compression');
     const geometryRoot = resolvePackageExportLane(inventoryByName, '@flighthq/geometry');
     const geometryContract = resolvePackageExportLane(inventoryByName, '@flighthq/geometry/contract');
+    const physics3DAbiRoot = resolvePackageExportLane(inventoryByName, '@flighthq/physics3d-abi');
     const rootVector = geometryRoot.exports.find((item) => item.name === 'createVector2');
     const contractVector = geometryContract.exports.find((item) => item.name === 'createVector2');
 
@@ -42,12 +44,12 @@ describe('analyzeUpstream', () => {
     expect(inventory.summary).toMatchObject({
       excludedPackages: 2,
       exportConflicts: 0,
-      exportLanes: 313,
-      exports: 35_241,
-      packages: 150,
-      rootExports: 13_659,
-      sourceFiles: 2_691,
-      testFiles: 1_544,
+      exportLanes: 315,
+      exports: 35_605,
+      packages: 151,
+      rootExports: 13_833,
+      sourceFiles: 2_703,
+      testFiles: 1_553,
     });
     expect(inventory.packages.every((item) => item.exportLanes.some((lane) => lane.entry === '.'))).toBe(true);
     expect(inventory.packages.every((item) => item.exportLanes.some((lane) => lane.entry === './contract'))).toBe(true);
@@ -56,6 +58,12 @@ describe('analyzeUpstream', () => {
     expect(abcRoot.exports).toContainEqual(expect.objectContaining({ kind: 'function', name: 'readAbcFile' }));
     expect(compressionRoot.exports).toContainEqual(
       expect.objectContaining({ kind: 'variable', name: 'inflateDeflate' }),
+    );
+    expect(physics3DAbiRoot.exports).toContainEqual(
+      expect.objectContaining({ kind: 'function', name: 'createPhysics3DAbi' }),
+    );
+    expect(physics3DAbiRoot.exports).toContainEqual(
+      expect.objectContaining({ kind: 'function', name: 'stepPhysics3DAbiWorld' }),
     );
     const pathContract = resolvePackageExportLane(inventoryByName, '@flighthq/path/contract');
     expect(pathContract.exports.find((item) => item.name === 'StrokeStyle')).toMatchObject({
@@ -77,6 +85,8 @@ describe('analyzeUpstream', () => {
       'Package import uses an unaccounted export lane: @flighthq/geometry/private',
     );
     expect(geometry.haxeModule).toBe('flighthq.geometry.Geometry');
+    expect(physics3DAbi.haxeModule).toBe('flighthq.physics3dAbi.Physics3dAbi');
+    expect(physics3DAbi.sdkIncluded).toBe(true);
     expect(packageRootExportLane(geometry)).toBe(geometryRoot);
     expect(sdk.exportLanes).toHaveLength(15);
     expect(sdk.sdkIncluded).toBe(false);
@@ -223,7 +233,7 @@ describe('auditLowering', () => {
     const audit = auditLowering(path.resolve('.'));
     const math = audit.packages.find((item) => item.packageName === '@flighthq/math');
 
-    expect(audit.summary.packages).toBe(148);
+    expect(audit.summary.packages).toBe(149);
     expect(audit.summary.declarations).toBeGreaterThan(5_000);
     expect(audit.summary.lowered).toBe(audit.summary.declarations);
     expect(audit.summary.diagnostics).toBe(0);

@@ -10,12 +10,19 @@ import flighthq.collision.ConvexVertices2D.writeAabbVertices;
 import flighthq.collision.ConvexVertices2D.writeObbVertices;
 import flighthq.types.Collision.CollisionAabb2D;
 import flighthq.types.Collision.CollisionBuiltInShape2D;
+import flighthq.types.Collision.CollisionCapsule2D;
+import flighthq.types.Collision.CollisionCircle2D;
 import flighthq.types.Collision.CollisionContactManifold2D;
 import flighthq.types.Collision.CollisionObb2D;
+import flighthq.types.Collision.CollisionPoint2D;
+import flighthq.types.Collision.CollisionPolygon2D;
+import flighthq.types.Collision.CollisionSegment2D;
 import flighthq.types.Collision.CollisionShape2D;
 import flighthq.types.Collision.CollisionTimeOfImpact2D;
 
-typedef CollisionSweepScratch__sweepCollisionShape2D = { var manifold:Dynamic; var verticesA:flighthq._internal._Float64Array; var verticesB:flighthq._internal._Float64Array; var projectionMin:Float; var projectionMax:Float; var entry:Float; var exit:Float; var normalX:Float; var normalY:Float; };
+typedef CollisionSweepScratch__sweepCollisionShape2D = { var manifold:Dynamic; var verticesA:flighthq._internal._Float64Array; var verticesB:flighthq._internal._Float64Array; var piecesA:Array<CollisionSweepPiece__sweepCollisionShape2D>; var piecesB:Array<CollisionSweepPiece__sweepCollisionShape2D>; var pieceHit:CollisionTimeOfImpact2D; var projectionMin:Float; var projectionMax:Float; var entry:Float; var exit:Float; var normalX:Float; var normalY:Float; };
+
+typedef CollisionSweepPiece__sweepCollisionShape2D = { var x:Float; var y:Float; var radius:Float; var vertices:Null<flighthq._internal._ArrayLike<Float>>; var storage:flighthq._internal._Float64Array; };
 
 class SweepCollisionShape2D {
   public static function createCollisionTimeOfImpact2D():CollisionTimeOfImpact2D {
@@ -63,39 +70,150 @@ class SweepCollisionShape2D {
     relativeX = (translationAX - translationBX);
     relativeY = (translationAY - translationBY);
     hit = false;
-    if ((cast _Runtime.strictEquals((cast shapeA : { var kind:String; }).kind, 'circle') : Bool)) {
+    if ((cast ((cast _Runtime.strictEquals((cast shapeA : { var kind:String; }).kind, 'capsule') : Bool) || (cast _Runtime.strictEquals((cast shapeB : { var kind:String; }).kind, 'capsule') : Bool)) : Bool)) {
+      (hit = cast ((cast SweepCollisionShape2D.sweepCapsulePair__sweepCollisionShape2D(({ final __callArgument12:Dynamic = shapeA; __callArgument12; }), ({ final __callArgument13:Dynamic = shapeB; __callArgument13; }), (cast relativeX : Float), (cast relativeY : Float), (cast maxFraction : Float), ({ final __callArgument14:Dynamic = out; __callArgument14; }), (cast scratch : Dynamic)) : Bool) : Dynamic));
+    } else { if ((cast _Runtime.strictEquals((cast shapeA : { var kind:String; }).kind, 'circle') : Bool)) {
       if ((cast _Runtime.strictEquals((cast shapeB : { var kind:String; }).kind, 'circle') : Bool)) {
-        (hit = cast ((cast SweepCollisionShape2D.sweepCircleCircle__sweepCollisionShape2D((cast (cast shapeA : { var x:Float; }).x : Float), (cast (cast shapeA : { var y:Float; }).y : Float), (cast (cast shapeA : { var radius:Float; }).radius : Float), (cast (cast shapeB : { var x:Float; }).x : Float), (cast (cast shapeB : { var y:Float; }).y : Float), (cast (cast shapeB : { var radius:Float; }).radius : Float), (cast relativeX : Float), (cast relativeY : Float), ({ final __callArgument12:Dynamic = out; __callArgument12; })) : Bool) : Dynamic));
+        (hit = cast ((cast SweepCollisionShape2D.sweepCircleCircle__sweepCollisionShape2D((cast (cast shapeA : { var x:Float; }).x : Float), (cast (cast shapeA : { var y:Float; }).y : Float), (cast (cast shapeA : { var radius:Float; }).radius : Float), (cast (cast shapeB : { var x:Float; }).x : Float), (cast (cast shapeB : { var y:Float; }).y : Float), (cast (cast shapeB : { var radius:Float; }).radius : Float), (cast relativeX : Float), (cast relativeY : Float), ({ final __callArgument15:Dynamic = out; __callArgument15; })) : Bool) : Dynamic));
       } else {
-        var verticesB:Null<flighthq._internal._ArrayLike<Float>> = (cast SweepCollisionShape2D.writeShapeVertices__sweepCollisionShape2D(({ final __callArgument13:Dynamic = shapeB; __callArgument13; }), (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).verticesB) : Null<flighthq._internal._ArrayLike<Float>>);
+        var verticesB:Null<flighthq._internal._ArrayLike<Float>> = (cast SweepCollisionShape2D.writeShapeVertices__sweepCollisionShape2D(({ final __callArgument16:Dynamic = shapeB; __callArgument16; }), (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).verticesB) : Null<flighthq._internal._ArrayLike<Float>>);
         if ((cast !_Runtime.strictEquals(verticesB, null) : Bool)) {
-          (hit = cast ((cast SweepCollisionShape2D.sweepCirclePolygon__sweepCollisionShape2D((cast (cast shapeA : { var x:Float; }).x : Float), (cast (cast shapeA : { var y:Float; }).y : Float), (cast (cast shapeA : { var radius:Float; }).radius : Float), ({ final __callArgument14:Dynamic = verticesB; __callArgument14; }), (cast relativeX : Float), (cast relativeY : Float), ({ final __callArgument15:Dynamic = out; __callArgument15; })) : Bool) : Dynamic));
+          (hit = cast ((cast SweepCollisionShape2D.sweepCirclePolygon__sweepCollisionShape2D((cast (cast shapeA : { var x:Float; }).x : Float), (cast (cast shapeA : { var y:Float; }).y : Float), (cast (cast shapeA : { var radius:Float; }).radius : Float), ({ final __callArgument17:Dynamic = verticesB; __callArgument17; }), (cast relativeX : Float), (cast relativeY : Float), ({ final __callArgument18:Dynamic = out; __callArgument18; })) : Bool) : Dynamic));
         }
       }
     } else { if ((cast _Runtime.strictEquals((cast shapeB : { var kind:String; }).kind, 'circle') : Bool)) {
-      var verticesA:Null<flighthq._internal._ArrayLike<Float>> = (cast SweepCollisionShape2D.writeShapeVertices__sweepCollisionShape2D(({ final __callArgument16:Dynamic = shapeA; __callArgument16; }), (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).verticesA) : Null<flighthq._internal._ArrayLike<Float>>);
+      var verticesA:Null<flighthq._internal._ArrayLike<Float>> = (cast SweepCollisionShape2D.writeShapeVertices__sweepCollisionShape2D(({ final __callArgument19:Dynamic = shapeA; __callArgument19; }), (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).verticesA) : Null<flighthq._internal._ArrayLike<Float>>);
       if ((cast !_Runtime.strictEquals(verticesA, null) : Bool)) {
-        (hit = cast ((cast SweepCollisionShape2D.sweepCirclePolygon__sweepCollisionShape2D((cast (cast shapeB : { var x:Float; }).x : Float), (cast (cast shapeB : { var y:Float; }).y : Float), (cast (cast shapeB : { var radius:Float; }).radius : Float), ({ final __callArgument17:Dynamic = verticesA; __callArgument17; }), (cast -relativeX : Float), (cast -relativeY : Float), ({ final __callArgument18:Dynamic = out; __callArgument18; })) : Bool) : Dynamic));
+        (hit = cast ((cast SweepCollisionShape2D.sweepCirclePolygon__sweepCollisionShape2D((cast (cast shapeB : { var x:Float; }).x : Float), (cast (cast shapeB : { var y:Float; }).y : Float), (cast (cast shapeB : { var radius:Float; }).radius : Float), ({ final __callArgument20:Dynamic = verticesA; __callArgument20; }), (cast -relativeX : Float), (cast -relativeY : Float), ({ final __callArgument21:Dynamic = out; __callArgument21; })) : Bool) : Dynamic));
         if ((cast hit : Bool)) {
           (out.normalX = cast (-out.normalX : Float));
           (out.normalY = cast (-out.normalY : Float));
         }
       }
     } else {
-      var verticesA:Null<flighthq._internal._ArrayLike<Float>> = (cast SweepCollisionShape2D.writeShapeVertices__sweepCollisionShape2D(({ final __callArgument19:Dynamic = shapeA; __callArgument19; }), (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).verticesA) : Null<flighthq._internal._ArrayLike<Float>>);
-      var verticesB:Null<flighthq._internal._ArrayLike<Float>> = (cast SweepCollisionShape2D.writeShapeVertices__sweepCollisionShape2D(({ final __callArgument20:Dynamic = shapeB; __callArgument20; }), (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).verticesB) : Null<flighthq._internal._ArrayLike<Float>>);
+      var verticesA:Null<flighthq._internal._ArrayLike<Float>> = (cast SweepCollisionShape2D.writeShapeVertices__sweepCollisionShape2D(({ final __callArgument22:Dynamic = shapeA; __callArgument22; }), (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).verticesA) : Null<flighthq._internal._ArrayLike<Float>>);
+      var verticesB:Null<flighthq._internal._ArrayLike<Float>> = (cast SweepCollisionShape2D.writeShapeVertices__sweepCollisionShape2D(({ final __callArgument23:Dynamic = shapeB; __callArgument23; }), (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).verticesB) : Null<flighthq._internal._ArrayLike<Float>>);
       if ((cast ((cast !_Runtime.strictEquals(verticesA, null) : Bool) && (cast !_Runtime.strictEquals(verticesB, null) : Bool)) : Bool)) {
-        (hit = cast ((cast SweepCollisionShape2D.sweepPolygonPolygon__sweepCollisionShape2D(({ final __callArgument21:Dynamic = verticesA; __callArgument21; }), ({ final __callArgument22:Dynamic = verticesB; __callArgument22; }), (cast relativeX : Float), (cast relativeY : Float), (cast maxFraction : Float), ({ final __callArgument23:Dynamic = out; __callArgument23; }), (cast scratch : Dynamic)) : Bool) : Dynamic));
+        (hit = cast ((cast SweepCollisionShape2D.sweepPolygonPolygon__sweepCollisionShape2D(({ final __callArgument24:Dynamic = verticesA; __callArgument24; }), ({ final __callArgument25:Dynamic = verticesB; __callArgument25; }), (cast relativeX : Float), (cast relativeY : Float), (cast maxFraction : Float), ({ final __callArgument26:Dynamic = out; __callArgument26; }), (cast scratch : Dynamic)) : Bool) : Dynamic));
       }
-    } }
+    } } }
     if ((cast ((cast ((cast !(cast hit : Bool) : Bool) || (cast ((cast out.fraction : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast out.fraction : Float) > (cast maxFraction : Float)) : Bool)) : Bool)) {
-      SweepCollisionShape2D.clearCollisionTimeOfImpact__sweepCollisionShape2D(({ final __callArgument24:Dynamic = out; __callArgument24; }));
+      SweepCollisionShape2D.clearCollisionTimeOfImpact__sweepCollisionShape2D(({ final __callArgument27:Dynamic = out; __callArgument27; }));
       return cast false;
     }
     (out.normalX = cast ((cast SweepCollisionShape2D.canonicalZero__sweepCollisionShape2D((cast out.normalX : Float)) : Float) : Float));
     (out.normalY = cast ((cast SweepCollisionShape2D.canonicalZero__sweepCollisionShape2D((cast out.normalY : Float)) : Float) : Float));
-    SweepCollisionShape2D.writeShapeASupport__sweepCollisionShape2D(({ final __callArgument25:Dynamic = shapeA; __callArgument25; }), (cast (translationAX * out.fraction) : Float), (cast (translationAY * out.fraction) : Float), ({ final __callArgument26:Dynamic = out; __callArgument26; }), (cast scratch : Dynamic));
+    SweepCollisionShape2D.writeShapeASupport__sweepCollisionShape2D(({ final __callArgument28:Dynamic = shapeA; __callArgument28; }), (cast (translationAX * out.fraction) : Float), (cast (translationAY * out.fraction) : Float), ({ final __callArgument29:Dynamic = out; __callArgument29; }), (cast scratch : Dynamic));
     return cast true;
+    return cast null;
+  }
+
+  public static function sweepCapsulePair__sweepCollisionShape2D(shapeA:CollisionBuiltInShape2D, shapeB:CollisionBuiltInShape2D, velocityX:Float, velocityY:Float, maxFraction:Float, out:CollisionTimeOfImpact2D, scratch:CollisionSweepScratch__sweepCollisionShape2D):Bool {
+    var piecesA:Array<CollisionSweepPiece__sweepCollisionShape2D> = cast _Runtime.UNDEFINED;
+    var piecesB:Array<CollisionSweepPiece__sweepCollisionShape2D> = cast _Runtime.UNDEFINED;
+    var pieceHit:CollisionTimeOfImpact2D = cast _Runtime.UNDEFINED;
+    var countA:Float = cast _Runtime.UNDEFINED;
+    var countB:Float = cast _Runtime.UNDEFINED;
+    var hit:Bool = cast _Runtime.UNDEFINED;
+    var bestFraction:Float = cast _Runtime.UNDEFINED;
+    piecesA = (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).piecesA;
+    piecesB = (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).piecesB;
+    pieceHit = (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).pieceHit;
+    countA = (cast SweepCollisionShape2D.writeCapsulePieces__sweepCollisionShape2D(({ final __callArgument30:Dynamic = shapeA; __callArgument30; }), (cast piecesA : Dynamic)) : Float);
+    countB = (cast SweepCollisionShape2D.writeCapsulePieces__sweepCollisionShape2D(({ final __callArgument31:Dynamic = shapeB; __callArgument31; }), (cast piecesB : Dynamic)) : Float);
+    if ((cast ((cast _Runtime.strictEquals(countA, 0.0) : Bool) || (cast _Runtime.strictEquals(countB, 0.0) : Bool)) : Bool)) { return cast false; }
+    hit = false;
+    bestFraction = HxMath.POSITIVE_INFINITY;
+    {
+      var indexA:Float = 0.0;
+      while ((cast ((cast indexA : Float) < (cast countA : Float)) : Bool)) {
+        {
+          var indexB:Float = 0.0;
+          while ((cast ((cast indexB : Float) < (cast countB : Float)) : Bool)) {
+            if ((cast !(cast (cast SweepCollisionShape2D.sweepPiecePair__sweepCollisionShape2D((cast flighthq._internal._StaticIndex.readArray(piecesA, indexA) : Dynamic), (cast flighthq._internal._StaticIndex.readArray(piecesB, indexB) : Dynamic), (cast velocityX : Float), (cast velocityY : Float), (cast maxFraction : Float), ({ final __callArgument32:Dynamic = pieceHit; __callArgument32; }), (cast scratch : Dynamic)) : Bool) : Bool) : Bool)) {
+              (indexB = cast ((indexB + 1.0) : Dynamic));
+              continue;
+            }
+            if ((cast ((cast pieceHit.fraction : Float) >= (cast bestFraction : Float)) : Bool)) { (indexB = cast ((indexB + 1.0) : Dynamic)); continue; }
+            (bestFraction = cast (pieceHit.fraction : Dynamic));
+            (hit = cast (true : Dynamic));
+            (out.fraction = cast (pieceHit.fraction : Float));
+            (out.normalX = cast (pieceHit.normalX : Float));
+            (out.normalY = cast (pieceHit.normalY : Float));
+            (out.x = cast (pieceHit.x : Float));
+            (out.y = cast (pieceHit.y : Float));
+            (indexB = cast ((indexB + 1.0) : Dynamic));
+          }
+        }
+        (indexA = cast ((indexA + 1.0) : Dynamic));
+      }
+    }
+    return cast hit;
+    return cast null;
+  }
+
+  public static function sweepPiecePair__sweepCollisionShape2D(a:CollisionSweepPiece__sweepCollisionShape2D, b:CollisionSweepPiece__sweepCollisionShape2D, velocityX:Float, velocityY:Float, maxFraction:Float, out:CollisionTimeOfImpact2D, scratch:CollisionSweepScratch__sweepCollisionShape2D):Bool {
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(a, 'vertices'), null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(b, 'vertices'), null) : Bool)) : Bool)) {
+      return cast (cast SweepCollisionShape2D.sweepCircleCircle__sweepCollisionShape2D((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), (cast _Runtime.field(b, 'x') : Float), (cast _Runtime.field(b, 'y') : Float), (cast _Runtime.field(b, 'radius') : Float), (cast velocityX : Float), (cast velocityY : Float), ({ final __callArgument33:Dynamic = out; __callArgument33; })) : Bool);
+    }
+    if ((cast _Runtime.strictEquals(_Runtime.field(a, 'vertices'), null) : Bool)) {
+      return cast (cast SweepCollisionShape2D.sweepCirclePolygon__sweepCollisionShape2D((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), ({ final __callArgument34:Dynamic = _Runtime.field(b, 'vertices'); __callArgument34; }), (cast velocityX : Float), (cast velocityY : Float), ({ final __callArgument35:Dynamic = out; __callArgument35; })) : Bool);
+    }
+    if ((cast _Runtime.strictEquals(_Runtime.field(b, 'vertices'), null) : Bool)) {
+      if ((cast !(cast (cast SweepCollisionShape2D.sweepCirclePolygon__sweepCollisionShape2D((cast _Runtime.field(b, 'x') : Float), (cast _Runtime.field(b, 'y') : Float), (cast _Runtime.field(b, 'radius') : Float), _Runtime.field(a, 'vertices'), (cast -velocityX : Float), (cast -velocityY : Float), ({ final __callArgument36:Dynamic = out; __callArgument36; })) : Bool) : Bool) : Bool)) { return cast false; }
+      (out.normalX = cast (-out.normalX : Float));
+      (out.normalY = cast (-out.normalY : Float));
+      return cast true;
+    }
+    return cast (cast SweepCollisionShape2D.sweepPolygonPolygon__sweepCollisionShape2D(_Runtime.field(a, 'vertices'), _Runtime.field(b, 'vertices'), (cast velocityX : Float), (cast velocityY : Float), (cast maxFraction : Float), ({ final __callArgument37:Dynamic = out; __callArgument37; }), (cast scratch : Dynamic)) : Bool);
+    return cast null;
+  }
+
+  public static function writeCapsulePieces__sweepCollisionShape2D(shape:CollisionBuiltInShape2D, pieces:Array<CollisionSweepPiece__sweepCollisionShape2D>):Float {
+    var axisX:Float = cast _Runtime.UNDEFINED;
+    var axisY:Float = cast _Runtime.UNDEFINED;
+    var length:Float = cast _Runtime.UNDEFINED;
+    var offsetX:Float = cast _Runtime.UNDEFINED;
+    var offsetY:Float = cast _Runtime.UNDEFINED;
+    var storage:flighthq._internal._Float64Array = cast _Runtime.UNDEFINED;
+    if ((cast !_Runtime.strictEquals((cast shape : { var kind:String; }).kind, 'capsule') : Bool)) {
+      if ((cast _Runtime.strictEquals((cast shape : { var kind:String; }).kind, 'circle') : Bool)) {
+        ((cast flighthq._internal._StaticIndex.readArray(pieces, 0.0) : CollisionSweepPiece__sweepCollisionShape2D).x = (cast shape : { var x:Float; }).x);
+        ((cast flighthq._internal._StaticIndex.readArray(pieces, 0.0) : CollisionSweepPiece__sweepCollisionShape2D).y = (cast shape : { var y:Float; }).y);
+        ((cast flighthq._internal._StaticIndex.readArray(pieces, 0.0) : CollisionSweepPiece__sweepCollisionShape2D).radius = (cast shape : { var radius:Float; }).radius);
+        ((cast flighthq._internal._StaticIndex.readArray(pieces, 0.0) : CollisionSweepPiece__sweepCollisionShape2D).vertices = null);
+        return cast 1.0;
+      }
+      var vertices:Null<flighthq._internal._ArrayLike<Float>> = (cast SweepCollisionShape2D.writeShapeVertices__sweepCollisionShape2D(({ final __callArgument38:Dynamic = shape; __callArgument38; }), (cast flighthq._internal._StaticIndex.readArray(pieces, 0.0) : CollisionSweepPiece__sweepCollisionShape2D).storage) : Null<flighthq._internal._ArrayLike<Float>>);
+      if ((cast _Runtime.strictEquals(vertices, null) : Bool)) { return cast 0.0; }
+      ((cast flighthq._internal._StaticIndex.readArray(pieces, 0.0) : CollisionSweepPiece__sweepCollisionShape2D).vertices = vertices);
+      return cast 1.0;
+    }
+    ((cast flighthq._internal._StaticIndex.readArray(pieces, 0.0) : CollisionSweepPiece__sweepCollisionShape2D).x = (cast shape : { var x0:Float; }).x0);
+    ((cast flighthq._internal._StaticIndex.readArray(pieces, 0.0) : CollisionSweepPiece__sweepCollisionShape2D).y = (cast shape : { var y0:Float; }).y0);
+    ((cast flighthq._internal._StaticIndex.readArray(pieces, 0.0) : CollisionSweepPiece__sweepCollisionShape2D).radius = (cast shape : { var radius:Float; }).radius);
+    ((cast flighthq._internal._StaticIndex.readArray(pieces, 0.0) : CollisionSweepPiece__sweepCollisionShape2D).vertices = null);
+    axisX = ((cast shape : { var x1:Float; }).x1 - (cast shape : { var x0:Float; }).x0);
+    axisY = ((cast shape : { var y1:Float; }).y1 - (cast shape : { var y0:Float; }).y0);
+    length = _Runtime.hypot(axisX, axisY);
+    if ((cast ((cast length : Float) <= (cast SweepCollisionShape2D.SWEEP_EPSILON__sweepCollisionShape2D : Float)) : Bool)) { return cast 1.0; }
+    ((cast flighthq._internal._StaticIndex.readArray(pieces, 1.0) : CollisionSweepPiece__sweepCollisionShape2D).x = (cast shape : { var x1:Float; }).x1);
+    ((cast flighthq._internal._StaticIndex.readArray(pieces, 1.0) : CollisionSweepPiece__sweepCollisionShape2D).y = (cast shape : { var y1:Float; }).y1);
+    ((cast flighthq._internal._StaticIndex.readArray(pieces, 1.0) : CollisionSweepPiece__sweepCollisionShape2D).radius = (cast shape : { var radius:Float; }).radius);
+    ((cast flighthq._internal._StaticIndex.readArray(pieces, 1.0) : CollisionSweepPiece__sweepCollisionShape2D).vertices = null);
+    offsetX = ((-axisY / length) * (cast shape : { var radius:Float; }).radius);
+    offsetY = ((axisX / length) * (cast shape : { var radius:Float; }).radius);
+    storage = (cast flighthq._internal._StaticIndex.readArray(pieces, 2.0) : CollisionSweepPiece__sweepCollisionShape2D).storage;
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast storage : flighthq._internal._Float64Array), (cast 0.0 : Float), (cast ((cast shape : { var x0:Float; }).x0 + offsetX) : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast storage : flighthq._internal._Float64Array), (cast 1.0 : Float), (cast ((cast shape : { var y0:Float; }).y0 + offsetY) : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast storage : flighthq._internal._Float64Array), (cast 2.0 : Float), (cast ((cast shape : { var x1:Float; }).x1 + offsetX) : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast storage : flighthq._internal._Float64Array), (cast 3.0 : Float), (cast ((cast shape : { var y1:Float; }).y1 + offsetY) : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast storage : flighthq._internal._Float64Array), (cast 4.0 : Float), (cast ((cast shape : { var x1:Float; }).x1 - offsetX) : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast storage : flighthq._internal._Float64Array), (cast 5.0 : Float), (cast ((cast shape : { var y1:Float; }).y1 - offsetY) : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast storage : flighthq._internal._Float64Array), (cast 6.0 : Float), (cast ((cast shape : { var x0:Float; }).x0 - offsetX) : Float));
+    flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast storage : flighthq._internal._Float64Array), (cast 7.0 : Float), (cast ((cast shape : { var y0:Float; }).y0 - offsetY) : Float));
+    ((cast flighthq._internal._StaticIndex.readArray(pieces, 2.0) : CollisionSweepPiece__sweepCollisionShape2D).vertices = storage);
+    return cast 3.0;
     return cast null;
   }
 
@@ -143,7 +261,7 @@ class SweepCollisionShape2D {
     bestNormalX = 0.0;
     bestNormalY = 0.0;
     count = (_Runtime.toInt32(_Runtime.field(vertices, 'length')) >> 1);
-    winding = ((cast ((cast (cast SweepCollisionShape2D.polygonAreaTwice__sweepCollisionShape2D(({ final __callArgument27:Dynamic = vertices; __callArgument27; })) : Float) : Float) >= (cast 0.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic));
+    winding = ((cast ((cast (cast SweepCollisionShape2D.polygonAreaTwice__sweepCollisionShape2D(({ final __callArgument39:Dynamic = vertices; __callArgument39; })) : Float) : Float) >= (cast 0.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
@@ -198,8 +316,8 @@ class SweepCollisionShape2D {
     ((cast scratch : CollisionSweepScratch__sweepCollisionShape2D).exit = maxFraction);
     ((cast scratch : CollisionSweepScratch__sweepCollisionShape2D).normalX = 0.0);
     ((cast scratch : CollisionSweepScratch__sweepCollisionShape2D).normalY = 0.0);
-    if ((cast !(cast (cast SweepCollisionShape2D.sweepPolygonAxes__sweepCollisionShape2D(({ final __callArgument28:Dynamic = verticesA; __callArgument28; }), ({ final __callArgument29:Dynamic = verticesA; __callArgument29; }), ({ final __callArgument30:Dynamic = verticesB; __callArgument30; }), (cast velocityX : Float), (cast velocityY : Float), (cast scratch : Dynamic)) : Bool) : Bool) : Bool)) { return cast false; }
-    if ((cast !(cast (cast SweepCollisionShape2D.sweepPolygonAxes__sweepCollisionShape2D(({ final __callArgument31:Dynamic = verticesB; __callArgument31; }), ({ final __callArgument32:Dynamic = verticesA; __callArgument32; }), ({ final __callArgument33:Dynamic = verticesB; __callArgument33; }), (cast velocityX : Float), (cast velocityY : Float), (cast scratch : Dynamic)) : Bool) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast (cast SweepCollisionShape2D.sweepPolygonAxes__sweepCollisionShape2D(({ final __callArgument40:Dynamic = verticesA; __callArgument40; }), ({ final __callArgument41:Dynamic = verticesA; __callArgument41; }), ({ final __callArgument42:Dynamic = verticesB; __callArgument42; }), (cast velocityX : Float), (cast velocityY : Float), (cast scratch : Dynamic)) : Bool) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast (cast SweepCollisionShape2D.sweepPolygonAxes__sweepCollisionShape2D(({ final __callArgument43:Dynamic = verticesB; __callArgument43; }), ({ final __callArgument44:Dynamic = verticesA; __callArgument44; }), ({ final __callArgument45:Dynamic = verticesB; __callArgument45; }), (cast velocityX : Float), (cast velocityY : Float), (cast scratch : Dynamic)) : Bool) : Bool) : Bool)) { return cast false; }
     if ((cast ((cast ((cast ((cast (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).entry : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).entry : Float) > (cast (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).exit : Float)) : Bool)) : Bool) || (cast ((cast (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).entry : Float) > (cast maxFraction : Float)) : Bool)) : Bool)) { return cast false; }
     (out.fraction = cast ((cast scratch : CollisionSweepScratch__sweepCollisionShape2D).entry : Float));
     (out.normalX = cast ((cast scratch : CollisionSweepScratch__sweepCollisionShape2D).normalX : Float));
@@ -221,10 +339,10 @@ class SweepCollisionShape2D {
         if ((cast !(cast _Runtime.compare(length, 0.0, '>') : Bool) : Bool)) { i++; continue; }
         var axisX:Float = (-edgeY / length);
         var axisY:Float = (edgeX / length);
-        SweepCollisionShape2D.projectVertices__sweepCollisionShape2D(({ final __callArgument34:Dynamic = verticesA; __callArgument34; }), (cast axisX : Float), (cast axisY : Float), (cast scratch : Dynamic));
+        SweepCollisionShape2D.projectVertices__sweepCollisionShape2D(({ final __callArgument46:Dynamic = verticesA; __callArgument46; }), (cast axisX : Float), (cast axisY : Float), (cast scratch : Dynamic));
         var minA:Float = (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).projectionMin;
         var maxA:Float = (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).projectionMax;
-        SweepCollisionShape2D.projectVertices__sweepCollisionShape2D(({ final __callArgument35:Dynamic = verticesB; __callArgument35; }), (cast axisX : Float), (cast axisY : Float), (cast scratch : Dynamic));
+        SweepCollisionShape2D.projectVertices__sweepCollisionShape2D(({ final __callArgument47:Dynamic = verticesB; __callArgument47; }), (cast axisX : Float), (cast axisY : Float), (cast scratch : Dynamic));
         var minB:Float = (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).projectionMin;
         var maxB:Float = (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).projectionMax;
         var speed:Float = ((velocityX * axisX) + (velocityY * axisY));
@@ -281,11 +399,11 @@ class SweepCollisionShape2D {
     {
       var __switchValue = (cast shape : { var kind:String; }).kind;
       if (__switchValue == 'aabb') {
-        writeAabbVertices(({ final __callArgument36:Dynamic = shape; __callArgument36; }), ({ final __callArgument37:Dynamic = scratch; __callArgument37; }));
+        writeAabbVertices(({ final __callArgument48:Dynamic = shape; __callArgument48; }), ({ final __callArgument49:Dynamic = scratch; __callArgument49; }));
         return cast scratch;
       }
       else if (__switchValue == 'obb') {
-        writeObbVertices(({ final __callArgument38:Dynamic = shape; __callArgument38; }), ({ final __callArgument39:Dynamic = scratch; __callArgument39; }));
+        writeObbVertices(({ final __callArgument50:Dynamic = shape; __callArgument50; }), ({ final __callArgument51:Dynamic = scratch; __callArgument51; }));
         return cast scratch;
       }
       else if (__switchValue == 'polygon') {
@@ -310,7 +428,16 @@ class SweepCollisionShape2D {
       (out.y = cast ((((cast shape : { var y:Float; }).y + translationY) - (out.normalY * (cast shape : { var radius:Float; }).radius)) : Float));
       return;
     }
-    vertices = (cast SweepCollisionShape2D.writeShapeVertices__sweepCollisionShape2D(({ final __callArgument40:Dynamic = shape; __callArgument40; }), (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).verticesA) : Null<flighthq._internal._ArrayLike<Float>>);
+    if ((cast _Runtime.strictEquals((cast shape : { var kind:String; }).kind, 'capsule') : Bool)) {
+      var projection0:Float = (((cast shape : { var x0:Float; }).x0 * out.normalX) + ((cast shape : { var y0:Float; }).y0 * out.normalY));
+      var projection1:Float = (((cast shape : { var x1:Float; }).x1 * out.normalX) + ((cast shape : { var y1:Float; }).y1 * out.normalY));
+      var axisX:Float = ((cast ((cast projection0 : Float) <= (cast projection1 : Float)) : Bool) ? (cast (cast shape : { var x0:Float; }).x0 : Dynamic) : (cast (cast shape : { var x1:Float; }).x1 : Dynamic));
+      var axisY:Float = ((cast ((cast projection0 : Float) <= (cast projection1 : Float)) : Bool) ? (cast (cast shape : { var y0:Float; }).y0 : Dynamic) : (cast (cast shape : { var y1:Float; }).y1 : Dynamic));
+      (out.x = cast (((axisX + translationX) - (out.normalX * (cast shape : { var radius:Float; }).radius)) : Float));
+      (out.y = cast (((axisY + translationY) - (out.normalY * (cast shape : { var radius:Float; }).radius)) : Float));
+      return;
+    }
+    vertices = (cast SweepCollisionShape2D.writeShapeVertices__sweepCollisionShape2D(({ final __callArgument52:Dynamic = shape; __callArgument52; }), (cast scratch : CollisionSweepScratch__sweepCollisionShape2D).verticesA) : Null<flighthq._internal._ArrayLike<Float>>);
     if ((cast _Runtime.strictEquals(vertices, null) : Bool)) { return; }
     best = HxMath.NEGATIVE_INFINITY;
     {
@@ -392,7 +519,7 @@ class SweepCollisionShape2D {
   }
 
   public static function createCollisionSweepScratch__sweepCollisionShape2D():CollisionSweepScratch__sweepCollisionShape2D {
-    return cast { manifold: (cast createCollisionContactManifold2D() : CollisionContactManifold2D), verticesA: new flighthq._internal._Float64Array(8.0), verticesB: new flighthq._internal._Float64Array(8.0), projectionMin: 0.0, projectionMax: 0.0, entry: 0.0, exit: 0.0, normalX: 0.0, normalY: 0.0 };
+    return cast { manifold: (cast createCollisionContactManifold2D() : CollisionContactManifold2D), verticesA: new flighthq._internal._Float64Array(8.0), verticesB: new flighthq._internal._Float64Array(8.0), piecesA: (cast SweepCollisionShape2D.createSweepPieces__sweepCollisionShape2D() : Array<CollisionSweepPiece__sweepCollisionShape2D>), piecesB: (cast SweepCollisionShape2D.createSweepPieces__sweepCollisionShape2D() : Array<CollisionSweepPiece__sweepCollisionShape2D>), pieceHit: { fraction: 0.0, x: 0.0, y: 0.0, normalX: 0.0, normalY: 0.0 }, projectionMin: 0.0, projectionMax: 0.0, entry: 0.0, exit: 0.0, normalX: 0.0, normalY: 0.0 };
     return cast null;
   }
 
@@ -401,4 +528,11 @@ class SweepCollisionShape2D {
   }
 
   public static final collisionSweepScratchPool__sweepCollisionShape2D:Array<CollisionSweepScratch__sweepCollisionShape2D> = (cast cast ([(cast SweepCollisionShape2D.createCollisionSweepScratch__sweepCollisionShape2D() : CollisionSweepScratch__sweepCollisionShape2D)] : Array<Dynamic>));
+
+  public static function createSweepPieces__sweepCollisionShape2D():Array<CollisionSweepPiece__sweepCollisionShape2D> {
+    return cast (cast _Runtime.mapArray((cast cast ([0.0, 1.0, 2.0] : Array<Dynamic>) : Array<Dynamic>), function(__unused0:Float, __unused1:Float, __unused2:Array<Float>):{ var radius:Float; var storage:flighthq._internal._Float64Array; var vertices:flighthq._internal._Any; var x:Float; var y:Float; } return { radius: 0.0, storage: new flighthq._internal._Float64Array(8.0), vertices: null, x: 0.0, y: 0.0 }, _Runtime.UNDEFINED));
+    return cast null;
+  }
+
+  public static final SWEEP_EPSILON__sweepCollisionShape2D:Float = 1e-9;
 }

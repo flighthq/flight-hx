@@ -465,6 +465,12 @@
         "source": "upstream/packages/physics3d/src/contract.ts"
       },
       {
+        "module": "flighthq.physics3dAbi.Contract",
+        "packageName": "@flighthq/physics3d-abi",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/physics3d-abi/src/contract.ts"
+      },
+      {
         "module": "flighthq.picking.Contract",
         "packageName": "@flighthq/picking",
         "reason": "header-only-contract-export-lane",
@@ -1620,6 +1626,11 @@
       "module": "flighthq.clock.ClockSignals"
     },
     {
+      "declarations": 24,
+      "diagnostics": [],
+      "module": "flighthq.collision.CapsuleContact2D"
+    },
+    {
       "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.collision.CollideContactManifold2D"
@@ -1775,7 +1786,7 @@
       "module": "flighthq.collision.ShapeContact2D"
     },
     {
-      "declarations": 19,
+      "declarations": 25,
       "diagnostics": [],
       "module": "flighthq.collision.SweepCollisionShape2D"
     },
@@ -4980,7 +4991,7 @@
       "module": "flighthq.physics3d.Contacts"
     },
     {
-      "declarations": 33,
+      "declarations": 46,
       "diagnostics": [],
       "module": "flighthq.physics3d.Continuous"
     },
@@ -4990,7 +5001,7 @@
       "module": "flighthq.physics3d.DebugGeometry"
     },
     {
-      "declarations": 9,
+      "declarations": 13,
       "diagnostics": [],
       "module": "flighthq.physics3d.EnablePhysics3DGuards"
     },
@@ -5075,9 +5086,19 @@
       "module": "flighthq.physics3d.Ownership"
     },
     {
-      "declarations": 102,
+      "declarations": 103,
       "diagnostics": [],
       "module": "flighthq.physics3d.Physics3d"
+    },
+    {
+      "declarations": 5,
+      "diagnostics": [],
+      "module": "flighthq.physics3d.Physics3DBroadphasePublication"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.physics3d.Physics3DSpatialIndexingGuards"
     },
     {
       "declarations": 1,
@@ -5090,7 +5111,7 @@
       "module": "flighthq.physics3d.Solver"
     },
     {
-      "declarations": 12,
+      "declarations": 13,
       "diagnostics": [],
       "module": "flighthq.physics3d.Step"
     },
@@ -5113,6 +5134,41 @@
       "declarations": 28,
       "diagnostics": [],
       "module": "flighthq.physics3d.WorldQueries"
+    },
+    {
+      "declarations": 70,
+      "diagnostics": [],
+      "module": "flighthq.physics3dAbi.Physics3dAbi"
+    },
+    {
+      "declarations": 9,
+      "diagnostics": [],
+      "module": "flighthq.physics3dAbi.Physics3DAbi"
+    },
+    {
+      "declarations": 9,
+      "diagnostics": [],
+      "module": "flighthq.physics3dAbi.Physics3DAbiBuffer"
+    },
+    {
+      "declarations": 37,
+      "diagnostics": [],
+      "module": "flighthq.physics3dAbi.Physics3DAbiCommand"
+    },
+    {
+      "declarations": 33,
+      "diagnostics": [],
+      "module": "flighthq.physics3dAbi.Physics3DAbiLayout"
+    },
+    {
+      "declarations": 5,
+      "diagnostics": [],
+      "module": "flighthq.physics3dAbi.Physics3DAbiQuery"
+    },
+    {
+      "declarations": 55,
+      "diagnostics": [],
+      "module": "flighthq.physics3dAbi.ReferencePhysics3DAbi"
     },
     {
       "declarations": 11,
@@ -7390,7 +7446,7 @@
       "module": "flighthq.sdk.Scene3d"
     },
     {
-      "declarations": 4618,
+      "declarations": 4689,
       "diagnostics": [],
       "module": "flighthq.sdk.Sdk"
     },
@@ -11650,9 +11706,14 @@
       "module": "flighthq.types.Physics2D"
     },
     {
-      "declarations": 56,
+      "declarations": 57,
       "diagnostics": [],
       "module": "flighthq.types.Physics3D"
+    },
+    {
+      "declarations": 15,
+      "diagnostics": [],
+      "module": "flighthq.types.Physics3DAbi"
     },
     {
       "declarations": 1,
@@ -13702,10 +13763,10 @@
   ],
   "schemaVersion": 6,
   "staticLowering": {
-    "booleanAndExpressions": 2517,
-    "booleanConditionalExpressions": 3222,
-    "booleanOrExpressions": 3001,
-    "booleanTruthinessUses": 15073,
+    "booleanAndExpressions": 2589,
+    "booleanConditionalExpressions": 3280,
+    "booleanOrExpressions": 3116,
+    "booleanTruthinessUses": 15541,
     "destructuringEscapes": {
       "regexp-result-array": {
         "assignment": 0,
@@ -13802,13 +13863,13 @@
       "asyncFlowForOfValues": 8
     },
     "indexedAccesses": {
-      "reads": 9065,
-      "writes": 4148
+      "reads": 9321,
+      "writes": 4308
     },
     "indexedReceivers": {
       "Array": {
-        "reads": 6180,
-        "writes": 1320
+        "reads": 6432,
+        "writes": 1396
       },
       "ArrayOrFloat32Array": {
         "reads": 13,
@@ -13819,8 +13880,8 @@
         "writes": 2113
       },
       "Float64Array": {
-        "reads": 174,
-        "writes": 118
+        "reads": 176,
+        "writes": 188
       },
       "Int16Array": {
         "reads": 5,
@@ -13843,8 +13904,8 @@
         "writes": 0
       },
       "Uint32Array": {
-        "reads": 47,
-        "writes": 33
+        "reads": 49,
+        "writes": 47
       },
       "Uint8Array": {
         "reads": 356,
@@ -13855,10 +13916,10 @@
         "writes": 402
       }
     },
-    "numericRelations": 7342,
+    "numericRelations": 7501,
     "syntheticArrayReads": {
       "highArityArguments": 27,
-      "iterationBindings": 162
+      "iterationBindings": 172
     },
     "typedArraySetCalls": 90,
     "typedArraySetReceivers": {
@@ -14709,6 +14770,14 @@
       },
       {
         "byReason": {
+          "standard-toolkit-boundary": 50
+        },
+        "module": "flighthq.collision.CapsuleContact2D",
+        "source": "upstream/packages/collision/src/capsuleContact2D.ts",
+        "total": 50
+      },
+      {
+        "byReason": {
           "standard-toolkit-boundary": 6
         },
         "module": "flighthq.collision.CollideContactManifold3D",
@@ -14879,12 +14948,13 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 32,
+          "source-null": 3,
+          "standard-toolkit-boundary": 35,
           "unclassified": 1
         },
         "module": "flighthq.collision.SweepCollisionShape2D",
         "source": "upstream/packages/collision/src/sweepCollisionShape2D.ts",
-        "total": 33
+        "total": 39
       },
       {
         "byReason": {
@@ -18431,11 +18501,11 @@
       {
         "byReason": {
           "source-any": 2,
-          "standard-toolkit-boundary": 17
+          "standard-toolkit-boundary": 13
         },
         "module": "flighthq.physics2d.EnablePhysics2DGuards",
         "source": "upstream/packages/physics2d/src/enablePhysics2DGuards.ts",
-        "total": 19
+        "total": 15
       },
       {
         "byReason": {
@@ -18602,12 +18672,12 @@
       },
       {
         "byReason": {
-          "source-any": 10,
-          "standard-toolkit-boundary": 26
+          "source-any": 18,
+          "standard-toolkit-boundary": 67
         },
         "module": "flighthq.physics3d.Continuous",
         "source": "upstream/packages/physics3d/src/continuous.ts",
-        "total": 36
+        "total": 85
       },
       {
         "byReason": {
@@ -18619,11 +18689,11 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 8
+          "standard-toolkit-boundary": 11
         },
         "module": "flighthq.physics3d.EnablePhysics3DGuards",
         "source": "upstream/packages/physics3d/src/enablePhysics3DGuards.ts",
-        "total": 8
+        "total": 11
       },
       {
         "byReason": {
@@ -18748,6 +18818,14 @@
       },
       {
         "byReason": {
+          "standard-toolkit-boundary": 7
+        },
+        "module": "flighthq.physics3d.Physics3DBroadphasePublication",
+        "source": "upstream/packages/physics3d/src/physics3DBroadphasePublication.ts",
+        "total": 7
+      },
+      {
+        "byReason": {
           "standard-toolkit-boundary": 28
         },
         "module": "flighthq.physics3d.Solver",
@@ -18756,11 +18834,11 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 9
+          "standard-toolkit-boundary": 10
         },
         "module": "flighthq.physics3d.Step",
         "source": "upstream/packages/physics3d/src/step.ts",
-        "total": 9
+        "total": 10
       },
       {
         "byReason": {
@@ -18796,6 +18874,33 @@
         "module": "flighthq.physics3d.WorldQueries",
         "source": "upstream/packages/physics3d/src/worldQueries.ts",
         "total": 56
+      },
+      {
+        "byReason": {
+          "standard-toolkit-boundary": 19
+        },
+        "module": "flighthq.physics3dAbi.Physics3DAbiBuffer",
+        "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts",
+        "total": 19
+      },
+      {
+        "byReason": {
+          "standard-toolkit-boundary": 210,
+          "unclassified": 5
+        },
+        "module": "flighthq.physics3dAbi.Physics3DAbiCommand",
+        "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts",
+        "total": 215
+      },
+      {
+        "byReason": {
+          "source-any": 12,
+          "standard-toolkit-boundary": 234,
+          "unclassified": 6
+        },
+        "module": "flighthq.physics3dAbi.ReferencePhysics3DAbi",
+        "source": "upstream/packages/physics3d-abi/src/referencePhysics3DAbi.ts",
+        "total": 252
       },
       {
         "byReason": {
@@ -22397,11 +22502,11 @@
       {
         "byReason": {
           "source-any": 6,
-          "standard-toolkit-boundary": 99
+          "standard-toolkit-boundary": 103
         },
         "module": "flighthq.spatial.Bvh3D",
         "source": "upstream/packages/spatial/src/bvh3D.ts",
-        "total": 105
+        "total": 109
       },
       {
         "byReason": {
@@ -23881,17 +23986,17 @@
     "summary": {
       "byReason": {
         "external-toolkit-boundary": 618,
-        "source-any": 935,
+        "source-any": 955,
         "source-never": 120,
-        "source-null": 83,
+        "source-null": 86,
         "source-undefined": 267,
         "source-unknown": 3874,
-        "standard-toolkit-boundary": 19412,
-        "unclassified": 409
+        "standard-toolkit-boundary": 19980,
+        "unclassified": 420
       },
       "checkerKnownUnrepresentable": 0,
-      "modules": 1178,
-      "total": 25718
+      "modules": 1183,
+      "total": 26320
     }
   }
 }

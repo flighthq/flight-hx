@@ -5,12 +5,15 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.physics3d.ColliderTransform.updatePhysics3DColliderWorldShape;
 import flighthq.physics3d.ColliderTransform.writePhysics3DColliderBounds;
+import flighthq.physics3d.Physics3DBroadphasePublication.getPhysics3DBroadphaseBodyIndices;
+import flighthq.physics3d.Physics3DBroadphasePublication.publishPhysics3DBroadphaseBody;
+import flighthq.physics3d.Physics3DBroadphasePublication.withdrawPhysics3DBroadphaseBody;
+import flighthq.physics3d.Physics3DSpatialIndexingGuards.reportPhysics3DSpatialIndexing;
 import flighthq.types.Physics3D.Physics3DBodyType;
 import flighthq.types.Physics3D.Physics3DCollider;
 import flighthq.types.Physics3D.Physics3DWorld;
 import flighthq.types.Physics3D.RigidBody3D;
 import flighthq.types.Spatial.SpatialAabb3D;
-import flighthq.types.Spatial.SpatialIndexBackend3D;
 
 typedef Physics3DBroadphaseScratch__broadphase = { var bounds:SpatialAabb3D; var bodyBounds:SpatialAabb3D; };
 
@@ -54,6 +57,8 @@ class Broadphase {
   }
 
   public static function synchronizePhysics3DBroadphaseWithScratch__broadphase(world:Physics3DWorld, scratch:Physics3DBroadphaseScratch__broadphase, dt:Float):Void {
+    var publishedBodyIndices:flighthq._internal._Set<Float> = cast _Runtime.UNDEFINED;
+    publishedBodyIndices = (cast getPhysics3DBroadphaseBodyIndices(({ final __callArgument4:Dynamic = world; __callArgument4; })) : flighthq._internal._Set<Float>);
     {
       var bodyIndex:Float = 0.0;
       while ((cast ((cast bodyIndex : Float) < (cast _Runtime.field(world.bodies, 'length') : Float)) : Bool)) {
@@ -69,8 +74,8 @@ class Broadphase {
           var colliderIndex:Float = 0.0;
           while ((cast ((cast colliderIndex : Float) < (cast _Runtime.field((cast body : RigidBody3D).colliders, 'length') : Float)) : Bool)) {
             var collider:Physics3DCollider = flighthq._internal._StaticIndex.readArray((cast body : RigidBody3D).colliders, colliderIndex);
-            updatePhysics3DColliderWorldShape(({ final __callArgument4:Dynamic = collider; __callArgument4; }), ({ final __callArgument5:Dynamic = body; __callArgument5; }));
-            writePhysics3DColliderBounds(({ final __callArgument6:Dynamic = collider; __callArgument6; }), (cast scratch : Physics3DBroadphaseScratch__broadphase).bounds);
+            updatePhysics3DColliderWorldShape(({ final __callArgument5:Dynamic = collider; __callArgument5; }), ({ final __callArgument6:Dynamic = body; __callArgument6; }));
+            writePhysics3DColliderBounds(({ final __callArgument7:Dynamic = collider; __callArgument7; }), (cast scratch : Physics3DBroadphaseScratch__broadphase).bounds);
             if ((cast ((cast (cast (cast scratch : Physics3DBroadphaseScratch__broadphase).bounds : SpatialAabb3D).minX : Float) < (cast minX : Float)) : Bool)) { (minX = cast ((cast (cast scratch : Physics3DBroadphaseScratch__broadphase).bounds : SpatialAabb3D).minX : Dynamic)); }
             if ((cast ((cast (cast (cast scratch : Physics3DBroadphaseScratch__broadphase).bounds : SpatialAabb3D).minY : Float) < (cast minY : Float)) : Bool)) { (minY = cast ((cast (cast scratch : Physics3DBroadphaseScratch__broadphase).bounds : SpatialAabb3D).minY : Dynamic)); }
             if ((cast ((cast (cast (cast scratch : Physics3DBroadphaseScratch__broadphase).bounds : SpatialAabb3D).minZ : Float) < (cast minZ : Float)) : Bool)) { (minZ = cast ((cast (cast scratch : Physics3DBroadphaseScratch__broadphase).bounds : SpatialAabb3D).minZ : Dynamic)); }
@@ -88,7 +93,7 @@ class Broadphase {
           }
         }
         if ((cast ((cast minX : Float) > (cast maxX : Float)) : Bool)) {
-          (cast world.index : SpatialIndexBackend3D).removeSpatialObject((cast (cast body : RigidBody3D).index : Float));
+          withdrawPhysics3DBroadphaseBody(({ final __callArgument8:Dynamic = world; __callArgument8; }), (cast (cast body : RigidBody3D).index : Float), ({ final __callArgument9:Dynamic = publishedBodyIndices; __callArgument9; }));
           (bodyIndex = cast ((bodyIndex + 1.0) : Dynamic));
           continue;
         }
@@ -112,7 +117,7 @@ class Broadphase {
           }
         }
         if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([minX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([minY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([minZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([maxX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([maxY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([maxZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast (maxX - minX) : Float) > (cast Broadphase.MAX_SIMULATED_EXTENT__broadphase : Float)) : Bool)) : Bool) || (cast ((cast (maxY - minY) : Float) > (cast Broadphase.MAX_SIMULATED_EXTENT__broadphase : Float)) : Bool)) : Bool) || (cast ((cast (maxZ - minZ) : Float) > (cast Broadphase.MAX_SIMULATED_EXTENT__broadphase : Float)) : Bool)) : Bool)) {
-          (cast world.index : SpatialIndexBackend3D).removeSpatialObject((cast (cast body : RigidBody3D).index : Float));
+          withdrawPhysics3DBroadphaseBody(({ final __callArgument10:Dynamic = world; __callArgument10; }), (cast (cast body : RigidBody3D).index : Float), ({ final __callArgument11:Dynamic = publishedBodyIndices; __callArgument11; }));
           (bodyIndex = cast ((bodyIndex + 1.0) : Dynamic));
           continue;
         }
@@ -122,10 +127,11 @@ class Broadphase {
         ((cast (cast scratch : Physics3DBroadphaseScratch__broadphase).bodyBounds : SpatialAabb3D).maxX = (cast Broadphase.paddedUpperBound__broadphase((cast maxX : Float)) : Float));
         ((cast (cast scratch : Physics3DBroadphaseScratch__broadphase).bodyBounds : SpatialAabb3D).maxY = (cast Broadphase.paddedUpperBound__broadphase((cast maxY : Float)) : Float));
         ((cast (cast scratch : Physics3DBroadphaseScratch__broadphase).bodyBounds : SpatialAabb3D).maxZ = (cast Broadphase.paddedUpperBound__broadphase((cast maxZ : Float)) : Float));
-        (cast world.index : SpatialIndexBackend3D).updateSpatialObject((cast (cast body : RigidBody3D).index : Float), (cast scratch : Physics3DBroadphaseScratch__broadphase).bodyBounds);
+        publishPhysics3DBroadphaseBody(({ final __callArgument12:Dynamic = world; __callArgument12; }), (cast (cast body : RigidBody3D).index : Float), (cast scratch : Physics3DBroadphaseScratch__broadphase).bodyBounds, ({ final __callArgument13:Dynamic = publishedBodyIndices; __callArgument13; }));
         (bodyIndex = cast ((bodyIndex + 1.0) : Dynamic));
       }
     }
+    reportPhysics3DSpatialIndexing(({ final __callArgument14:Dynamic = world; __callArgument14; }));
   }
 
   public static function paddedUpperBound__broadphase(value:Float):Float {

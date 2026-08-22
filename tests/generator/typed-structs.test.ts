@@ -43,7 +43,7 @@ describe('typed struct stable declaration identity', () => {
     expect(discovery.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_396,
+      newAuditOnly: 1_404,
       preserved: 231,
       relocated: 146,
       removed: 3,
@@ -53,8 +53,8 @@ describe('typed struct stable declaration identity', () => {
       baselineUpstreamCommit: '5d24729f7360475e28a105ae0caeeaa2e1328260',
       sourceReportSha256: '01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c7c59f410a3',
     });
-    expect(discovery.candidates).toHaveLength(2_178);
-    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(782);
+    expect(discovery.candidates).toHaveLength(2_194);
+    expect(discovery.candidates.filter((candidate) => candidate.emission === 'direct')).toHaveLength(790);
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
     expect(relocated).toHaveLength(146);
     expect(
@@ -105,10 +105,10 @@ describe('typed struct stable declaration identity', () => {
     );
 
     const newlyDiscovered = discovery.candidates.filter((candidate) => candidate.migration.status === 'new');
-    expect(newlyDiscovered).toHaveLength(1_776);
-    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_396);
+    expect(newlyDiscovered).toHaveLength(1_792);
+    expect(newlyDiscovered.filter((candidate) => candidate.emission === 'audit-only')).toHaveLength(1_404);
     const newDirect = newlyDiscovered.filter((candidate) => candidate.emission === 'direct');
-    expect(newDirect).toHaveLength(380);
+    expect(newDirect).toHaveLength(388);
     expect(newDirect).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -3914,6 +3914,46 @@ describe('typed struct stable declaration identity', () => {
         id: '@flighthq/types:interface#Physics3DSequentialImpulseConfig',
         purpose: 'reviewed escape-free Physics3D sequential-impulse config',
       },
+      {
+        declarationFingerprint: 'sha256:12a0644da563b2ee03d54d165a4f82450dc0c2c3f0b91efcf202796d89a86966',
+        id: '@flighthq/types:interface#Physics3DAbiBodyBuffer',
+        purpose: 'reviewed escape-free Physics3D ABI body buffer',
+      },
+      {
+        declarationFingerprint: 'sha256:344bf545e06f4e1231e04047048a038aa36ce6c322e2dcb7a7952c66f10b1476',
+        id: '@flighthq/types:interface#Physics3DAbiCommandBuffer',
+        purpose: 'reviewed escape-free Physics3D ABI command buffer',
+      },
+      {
+        declarationFingerprint: 'sha256:8c8cfb7227ae63c538fd07f3e9812decc564d7e6a15be244c2e15578ebd43c4e',
+        id: '@flighthq/types:interface#Physics3DAbiContactBuffer',
+        purpose: 'reviewed escape-free Physics3D ABI contact buffer',
+      },
+      {
+        declarationFingerprint: 'sha256:39fa096a0116e610a50835a085a2034e132dca54573c19203348e8b450e5cdaa',
+        id: '@flighthq/types:interface#Physics3DAbiContactHooks',
+        purpose: 'reviewed escape-free Physics3D ABI contact hooks',
+      },
+      {
+        declarationFingerprint: 'sha256:e232874df593acd78d53e3976d1775517dc020564d8ee4cb42d2c27e4b4c4c36',
+        id: '@flighthq/types:interface#Physics3DAbiExecutionResult',
+        purpose: 'reviewed escape-free Physics3D ABI execution result',
+      },
+      {
+        declarationFingerprint: 'sha256:fd9990b1ea1d2d95da9a48ffe73617a18a78364b58f571f88d9e86bbaa225d61',
+        id: '@flighthq/types:interface#Physics3DAbiJointBuffer',
+        purpose: 'reviewed escape-free Physics3D ABI joint buffer',
+      },
+      {
+        declarationFingerprint: 'sha256:821df23149ae8b3765a926b09e971b64583f169a123723d6d18539453b27ec00',
+        id: '@flighthq/types:interface#Physics3DAbiQueryBuffer',
+        purpose: 'reviewed escape-free Physics3D ABI query buffer',
+      },
+      {
+        declarationFingerprint: 'sha256:187b301955811c3de7115138e2c44a0d076c84a92749130d9bb5050b498bb95d',
+        id: '@flighthq/types:interface#Physics3DRotationalCcdEnvelope',
+        purpose: 'reviewed escape-free Physics3D rotational CCD envelope',
+      },
     ]);
     expect(byId.get('@flighthq/types:interface#ColorScaleBias')?.migration).toEqual({
       baselineId: '@flighthq/types:interface#ColorTransform',
@@ -5094,6 +5134,22 @@ describe('typed struct analysis', () => {
         )
         .map((candidate) => [candidate.name, candidate]),
     );
+    const physics3DAbiDirectCandidates = new Map(
+      report.candidates
+        .filter((candidate) =>
+          [
+            'Physics3DAbiBodyBuffer',
+            'Physics3DAbiCommandBuffer',
+            'Physics3DAbiContactBuffer',
+            'Physics3DAbiContactHooks',
+            'Physics3DAbiExecutionResult',
+            'Physics3DAbiJointBuffer',
+            'Physics3DAbiQueryBuffer',
+            'Physics3DRotationalCcdEnvelope',
+          ].includes(candidate.name),
+        )
+        .map((candidate) => [candidate.name, candidate]),
+    );
 
     expect(cppStructInitTypedStructIds).toEqual([
       '@flighthq/types:interface#Camera2D',
@@ -5134,40 +5190,40 @@ describe('typed struct analysis', () => {
     );
 
     expect(report.summary).toMatchObject({
-      auditOnlySchemas: 1_396,
-      bindableAccesses: 36_349,
-      candidates: 2_178,
-      directAccesses: 26_293,
-      directSchemas: 780,
-      eligible: 1_655,
-      escapes: 12_026,
-      fields: 25_954,
-      ineligible: 523,
-      pendingAccesses: 10_056,
+      auditOnlySchemas: 1_404,
+      bindableAccesses: 37_358,
+      candidates: 2_194,
+      directAccesses: 26_653,
+      directSchemas: 788,
+      eligible: 1_664,
+      escapes: 12_346,
+      fields: 26_217,
+      ineligible: 530,
+      pendingAccesses: 10_705,
       reflectiveSurvivors: 451,
     });
     expect(report.migration.summary).toEqual({
       baseline: 405,
       kindChanged: 2,
-      newAuditOnly: 1_396,
+      newAuditOnly: 1_404,
       preserved: 231,
       relocated: 146,
       removed: 3,
       renamed: 23,
     });
-    expect(classAudit.summary.schemas).toBe(1_655);
+    expect(classAudit.summary.schemas).toBe(1_664);
     expect(provenance.summary).toMatchObject({
-      candidateSchemas: 806,
-      closedSchemas: 613,
-      containmentEdges: 2_191,
+      candidateSchemas: 813,
+      closedSchemas: 618,
+      containmentEdges: 2_192,
     });
     expect(typeErasureReport.summary).toMatchObject({
       byReason: expect.objectContaining({
         'source-never': 120,
         'source-unknown': 3_874,
-        'standard-toolkit-boundary': 19_412,
+        'standard-toolkit-boundary': 19_980,
       }),
-      total: 25_718,
+      total: 26_320,
     });
     expect(
       typeErasureReport.modules
@@ -5226,7 +5282,7 @@ describe('typed struct analysis', () => {
       baselineId: '@flighthq/types:interface#ColorTransform',
       status: 'renamed',
     });
-    expect(report.summary.directAccesses).toBe(26_293);
+    expect(report.summary.directAccesses).toBe(26_653);
     expect(rectangle?.emission).toEqual({
       directAccesses: 707,
       mode: 'direct',
@@ -7308,7 +7364,7 @@ describe('typed struct analysis', () => {
     for (const [name, directAccesses, declarationFingerprint, purpose] of [
       [
         'Physics3DWorld',
-        244,
+        287,
         'sha256:e5725966d9ef05f5946cb352fed09496a74c30c0931384dfe860330c0b994b4f',
         'reviewed escape-free Physics3D world',
       ],
@@ -7320,13 +7376,13 @@ describe('typed struct analysis', () => {
       ],
       [
         'Physics3DHingeJoint',
-        56,
+        65,
         'sha256:7cdcbd182487a3c0fea4385828ea058a2622c2848a1e377996500b7d691bb753',
         'reviewed escape-free Physics3D hinge joint',
       ],
       [
         'Physics3DSliderJoint',
-        56,
+        65,
         'sha256:050a531fd480fabcd1aea7602a27f733b1e2c3ef774e92d8c8679c5810e9c6c9',
         'reviewed escape-free Physics3D slider joint',
       ],
@@ -7356,13 +7412,13 @@ describe('typed struct analysis', () => {
       ],
       [
         'Physics3DConeTwistJoint',
-        51,
+        60,
         'sha256:799f1e572fee32caea94d4bd140ed192e65896eee0d7ea6eaa43a7cc93803755',
         'reviewed escape-free Physics3D cone-twist joint',
       ],
       [
         'Physics3DGeneric6DofJoint',
-        29,
+        44,
         'sha256:5e4c27794d880512671571711e950187f564950a5e70b027e9a1917bc8c16f99',
         'reviewed escape-free Physics3D generic six-DOF joint',
       ],
@@ -7524,12 +7580,72 @@ describe('typed struct analysis', () => {
       ],
       [
         'Physics3DSequentialImpulseConfig',
-        20,
+        28,
         'sha256:0de6797dfe9c8f540e889ae0af3a97e5cd7aff54d43a7d4cc885954bac19f8df',
         'reviewed escape-free Physics3D sequential-impulse config',
       ],
     ] as const) {
       expect(fortyNinthHighAccessFrontierCandidates.get(name)).toMatchObject({
+        declarationFingerprint,
+        eligible: true,
+        emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
+        escapes: [],
+        migration: { baselineId: null, status: 'new' },
+        purpose,
+        reasons: [],
+      });
+    }
+    for (const [name, directAccesses, declarationFingerprint, purpose] of [
+      [
+        'Physics3DAbiBodyBuffer',
+        48,
+        'sha256:12a0644da563b2ee03d54d165a4f82450dc0c2c3f0b91efcf202796d89a86966',
+        'reviewed escape-free Physics3D ABI body buffer',
+      ],
+      [
+        'Physics3DAbiCommandBuffer',
+        49,
+        'sha256:344bf545e06f4e1231e04047048a038aa36ce6c322e2dcb7a7952c66f10b1476',
+        'reviewed escape-free Physics3D ABI command buffer',
+      ],
+      [
+        'Physics3DAbiContactBuffer',
+        51,
+        'sha256:8c8cfb7227ae63c538fd07f3e9812decc564d7e6a15be244c2e15578ebd43c4e',
+        'reviewed escape-free Physics3D ABI contact buffer',
+      ],
+      [
+        'Physics3DAbiContactHooks',
+        13,
+        'sha256:39fa096a0116e610a50835a085a2034e132dca54573c19203348e8b450e5cdaa',
+        'reviewed escape-free Physics3D ABI contact hooks',
+      ],
+      [
+        'Physics3DAbiExecutionResult',
+        8,
+        'sha256:e232874df593acd78d53e3976d1775517dc020564d8ee4cb42d2c27e4b4c4c36',
+        'reviewed escape-free Physics3D ABI execution result',
+      ],
+      [
+        'Physics3DAbiJointBuffer',
+        16,
+        'sha256:fd9990b1ea1d2d95da9a48ffe73617a18a78364b58f571f88d9e86bbaa225d61',
+        'reviewed escape-free Physics3D ABI joint buffer',
+      ],
+      [
+        'Physics3DAbiQueryBuffer',
+        18,
+        'sha256:821df23149ae8b3765a926b09e971b64583f169a123723d6d18539453b27ec00',
+        'reviewed escape-free Physics3D ABI query buffer',
+      ],
+      [
+        'Physics3DRotationalCcdEnvelope',
+        10,
+        'sha256:187b301955811c3de7115138e2c44a0d076c84a92749130d9bb5050b498bb95d',
+        'reviewed escape-free Physics3D rotational CCD envelope',
+      ],
+    ] as const) {
+      expect(physics3DAbiDirectCandidates.get(name)).toMatchObject({
         declarationFingerprint,
         eligible: true,
         emission: { directAccesses, mode: 'direct', pendingAccesses: 0, reflectiveSurvivors: [] },
@@ -7884,7 +8000,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'CollisionTimeOfImpact2D',
-        68,
+        92,
         'sha256:c0ed0a556d84d92379c5ceea6f10db4b92255b6633ea4e34a9d102483f40da61',
         'reviewed escape-free 2D collision time of impact after dimension-explicit upstream rename',
       ],
@@ -7902,7 +8018,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'CollisionContactManifold2D',
-        44,
+        62,
         'sha256:70433e9e6573de517e1e3ff1ea8550a8fbcd0d69578f822f81a548ac128a2cc3',
         'reviewed escape-free 2D collision contact manifold after dimension-explicit upstream rename',
       ],
@@ -8112,7 +8228,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'CollisionContactPoint2D',
-        25,
+        37,
         'sha256:49d86e4cbb8bd06a2c29ad03a6c6f45088a9596d1f200bb9bb55f07c6842ee10',
         'reviewed escape-free 2D collision contact point after dimension-explicit upstream rename',
       ],
@@ -9454,10 +9570,25 @@ describe('typed struct analysis', () => {
       else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
     }
     for (const [frontierId, mechanicallyCompatible, normalizationReasons, nominalIdentity] of [
-      ['@flighthq/types:interface#Physics3DGeneric6DofJointOptions', true, [], null],
-      ['@flighthq/types:interface#Physics3DJointFrameOptions', false, ['cross-schema-transfer'], null],
-      ['@flighthq/types:interface#Physics3DJointOptions', false, ['cross-schema-transfer'], null],
-      ['@flighthq/types:interface#Physics3DSequentialImpulseConfig', true, [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#Physics3DGeneric6DofJointOptions', false, ['object-literal-spread'], null],
+      [
+        '@flighthq/types:interface#Physics3DJointFrameOptions',
+        false,
+        ['anonymous-structural-transfer', 'cross-schema-transfer'],
+        null,
+      ],
+      [
+        '@flighthq/types:interface#Physics3DJointOptions',
+        false,
+        ['anonymous-structural-transfer', 'cross-schema-transfer'],
+        null,
+      ],
+      [
+        '@flighthq/types:interface#Physics3DSequentialImpulseConfig',
+        true,
+        [],
+        { blockerReasons: ['normalization-provenance'], closed: false },
+      ],
       ['@flighthq/types:interface#Physics3DSequentialImpulseState', true, [], { blockerReasons: [], closed: true }],
     ] as const) {
       expect(classAuditById.get(frontierId)?.migration).toEqual({
@@ -9467,6 +9598,23 @@ describe('typed struct analysis', () => {
       });
       if (nominalIdentity === null) expect(provenanceById.has(frontierId)).toBe(false);
       else expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual(nominalIdentity);
+    }
+    for (const frontierId of [
+      '@flighthq/types:interface#Physics3DAbiBodyBuffer',
+      '@flighthq/types:interface#Physics3DAbiCommandBuffer',
+      '@flighthq/types:interface#Physics3DAbiContactBuffer',
+      '@flighthq/types:interface#Physics3DAbiContactHooks',
+      '@flighthq/types:interface#Physics3DAbiExecutionResult',
+      '@flighthq/types:interface#Physics3DAbiJointBuffer',
+      '@flighthq/types:interface#Physics3DAbiQueryBuffer',
+      '@flighthq/types:interface#Physics3DRotationalCcdEnvelope',
+    ] as const) {
+      expect(classAuditById.get(frontierId)?.migration).toEqual({
+        mechanicallyCompatible: true,
+        normalizationReasons: [],
+        observabilityReasons: [],
+      });
+      expect(provenanceById.get(frontierId)?.nominalIdentity).toEqual({ blockerReasons: [], closed: true });
     }
     for (const [frontierId, observabilityReasons, nominalIdentity] of [
       ['@flighthq/types:interface#CatalogEntry', [], { blockerReasons: ['container-transfer'], closed: false }],
@@ -9892,7 +10040,7 @@ describe('typed struct analysis', () => {
         ['cross-schema-transfer', 'object-literal-spread'],
         null,
       ],
-      ['@flighthq/types:interface#Physics3DSolverConfig', true, [], { blockerReasons: [], closed: true }],
+      ['@flighthq/types:interface#Physics3DSolverConfig', false, ['anonymous-structural-transfer'], null],
     ] as const) {
       expect(classAuditById.get(frontierId)?.migration).toEqual({
         mechanicallyCompatible,
@@ -11501,6 +11649,18 @@ describe('typed struct analysis', () => {
     ]) {
       expect(readFileSync(path, 'utf8')).not.toMatch(
         /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:Physics3DGeneric6DofJointOptions|Physics3DJointFrameOptions|Physics3DJointOptions|Physics3DSequentialImpulseConfig)\)\./u,
+      );
+    }
+    for (const path of [
+      'generated/flighthq/physics3d/Continuous.hx',
+      'generated/flighthq/physics3dAbi/Physics3DAbi.hx',
+      'generated/flighthq/physics3dAbi/Physics3DAbiBuffer.hx',
+      'generated/flighthq/physics3dAbi/Physics3DAbiCommand.hx',
+      'generated/flighthq/physics3dAbi/Physics3DAbiQuery.hx',
+      'generated/flighthq/physics3dAbi/ReferencePhysics3DAbi.hx',
+    ]) {
+      expect(readFileSync(path, 'utf8')).not.toMatch(
+        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:Physics3DAbiBodyBuffer|Physics3DAbiCommandBuffer|Physics3DAbiContactBuffer|Physics3DAbiContactHooks|Physics3DAbiExecutionResult|Physics3DAbiJointBuffer|Physics3DAbiQueryBuffer|Physics3DRotationalCcdEnvelope)\)\./u,
       );
     }
     const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');

@@ -37,7 +37,7 @@ describe('public Haxe facades', () => {
       noCompletionDeclarations: 1_381,
       protectedDeclarationIdentities: 1_381,
     });
-    expect(core.contractSurface.omittedModules).toHaveLength(148);
+    expect(core.contractSurface.omittedModules).toHaveLength(149);
     expect(
       core.contractSurface.omittedModules.every((item) => item.reason === 'header-only-contract-export-lane'),
     ).toBe(true);

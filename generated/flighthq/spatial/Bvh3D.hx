@@ -12,6 +12,7 @@ import flighthq.types.SpatialIndexing.SpatialIndexingExplanation;
 import flighthq.types.SpatialIndexing.SpatialIndexingMode;
 import flighthq.types.SpatialIndexing.SpatialIndexingNotice;
 import flighthq.types.SpatialIndexing.SpatialIndexingOperation;
+import flighthq.types.SpatialIndexing.SpatialIndexingReason;
 
 typedef Bvh3D__bvh3D = { var margin:Float; var root:Float; var minX:Array<Float>; var minY:Array<Float>; var minZ:Array<Float>; var maxX:Array<Float>; var maxY:Array<Float>; var maxZ:Array<Float>; var parent:Array<Float>; var child1:Array<Float>; var child2:Array<Float>; var height:Array<Float>; var object:Array<Float>; var freeList:Array<Float>; var count:Float; var leafByObject:flighthq._internal._Map<SpatialObjectId, Float>; var bounds:flighthq._internal._Map<SpatialObjectId, SpatialAabb3D>; var declined:flighthq._internal._Map<SpatialObjectId, String>; var stack:Array<Float>; };
 
@@ -19,7 +20,20 @@ class Bvh3D {
   public static function createBvhSpatialBackend3D(margin:Float = 2.0):SpatialIndexBackend3D {
     var tree:Bvh3D__bvh3D = cast _Runtime.UNDEFINED;
     tree = (cast Bvh3D.createBvh3D__bvh3D((cast margin : Float)) : Bvh3D__bvh3D);
-    return cast { clearSpatialIndex: function():Void { Bvh3D.clearBvh3D__bvh3D((cast tree : Dynamic)); }, explainSpatialIndexing: function(id:Float):SpatialIndexingExplanation return (cast Bvh3D.explainBvh3D__bvh3D((cast tree : Dynamic), (cast id : Float)) : SpatialIndexingExplanation), insertSpatialObject: function(id:Float, bounds:SpatialAabb3D):Bool return (cast Bvh3D.insertBvh3D__bvh3D((cast tree : Dynamic), (cast id : Float), ({ final __callArgument0:Dynamic = bounds; __callArgument0; }), ({ final __callArgument1:Dynamic = 'insert'; __callArgument1; })) : Bool), querySpatialPairs: function(out:Array<SpatialPair>):Void { Bvh3D.queryBvh3DPairs__bvh3D((cast tree : Dynamic), ({ final __callArgument2:Dynamic = out; __callArgument2; })); }, querySpatialPoint: function(x:Float, y:Float, z:Float, out:Array<Float>):Void { Bvh3D.queryBvh3DPoint__bvh3D((cast tree : Dynamic), (cast x : Float), (cast y : Float), (cast z : Float), ({ final __callArgument3:Dynamic = out; __callArgument3; })); }, querySpatialRay: function(x:Float, y:Float, z:Float, dx:Float, dy:Float, dz:Float, out:Array<Float>):Void { Bvh3D.queryBvh3DRay__bvh3D((cast tree : Dynamic), (cast x : Float), (cast y : Float), (cast z : Float), (cast dx : Float), (cast dy : Float), (cast dz : Float), ({ final __callArgument4:Dynamic = out; __callArgument4; })); }, querySpatialRegion: function(region:SpatialAabb3D, out:Array<Float>):Void { Bvh3D.queryBvh3DRegion__bvh3D((cast tree : Dynamic), ({ final __callArgument5:Dynamic = region; __callArgument5; }), ({ final __callArgument6:Dynamic = out; __callArgument6; })); }, removeSpatialObject: function(id:Float):Void { Bvh3D.removeBvh3D__bvh3D((cast tree : Dynamic), (cast id : Float)); }, updateSpatialObject: function(id:Float, bounds:SpatialAabb3D):Bool return (cast Bvh3D.insertBvh3D__bvh3D((cast tree : Dynamic), (cast id : Float), ({ final __callArgument7:Dynamic = bounds; __callArgument7; }), ({ final __callArgument8:Dynamic = 'update'; __callArgument8; })) : Bool) };
+    return cast { clearSpatialIndex: function():Void { Bvh3D.clearBvh3D__bvh3D((cast tree : Dynamic)); }, explainSpatialIndexing: function(id:Float):SpatialIndexingExplanation return (cast Bvh3D.explainBvh3D__bvh3D((cast tree : Dynamic), (cast id : Float)) : SpatialIndexingExplanation), insertSpatialObject: function(id:Float, bounds:SpatialAabb3D):Bool return (cast Bvh3D.insertBvh3D__bvh3D((cast tree : Dynamic), (cast id : Float), ({ final __callArgument0:Dynamic = bounds; __callArgument0; }), ({ final __callArgument1:Dynamic = 'insert'; __callArgument1; })) : Bool), querySpatialPairs: function(out:Array<SpatialPair>):Void { Bvh3D.queryBvh3DPairs__bvh3D((cast tree : Dynamic), ({ final __callArgument2:Dynamic = out; __callArgument2; })); }, querySpatialPoint: function(x:Float, y:Float, z:Float, out:Array<Float>):Void { Bvh3D.queryBvh3DPoint__bvh3D((cast tree : Dynamic), (cast x : Float), (cast y : Float), (cast z : Float), ({ final __callArgument3:Dynamic = out; __callArgument3; })); }, querySpatialRay: function(x:Float, y:Float, z:Float, dx:Float, dy:Float, dz:Float, out:Array<Float>):Void { Bvh3D.queryBvh3DRay__bvh3D((cast tree : Dynamic), (cast x : Float), (cast y : Float), (cast z : Float), (cast dx : Float), (cast dy : Float), (cast dz : Float), ({ final __callArgument4:Dynamic = out; __callArgument4; })); }, querySpatialRegion: function(region:SpatialAabb3D, out:Array<Float>):Void { Bvh3D.queryBvh3DRegion__bvh3D((cast tree : Dynamic), ({ final __callArgument5:Dynamic = region; __callArgument5; }), ({ final __callArgument6:Dynamic = out; __callArgument6; })); }, removeSpatialObject: function(id:Float):Void {
+      var wasMissing:Bool = cast _Runtime.UNDEFINED;
+      wasMissing = ((cast !(cast ((cast (cast tree : Bvh3D__bvh3D).leafByObject : flighthq._internal._Map<Float, Float>).has(id)) : Bool) : Bool) && (cast !(cast ((cast (cast tree : Bvh3D__bvh3D).declined : flighthq._internal._Map<Float, String>).has(id)) : Bool) : Bool));
+      Bvh3D.removeBvh3D__bvh3D((cast tree : Dynamic), (cast id : Float));
+      if ((cast wasMissing : Bool)) { Bvh3D.reportBvh3DIndexing__bvh3D((cast tree : Dynamic), (cast id : Float), ({ final __callArgument7:Dynamic = 'absent'; __callArgument7; }), ({ final __callArgument8:Dynamic = 'remove'; __callArgument8; }), ({ final __callArgument9:Dynamic = 'missing-id'; __callArgument9; })); }
+    }, updateSpatialObject: function(id:Float, bounds:SpatialAabb3D):Bool {
+      var wasMissing:Bool = cast _Runtime.UNDEFINED;
+      var inserted:Bool = cast _Runtime.UNDEFINED;
+      wasMissing = ((cast !(cast ((cast (cast tree : Bvh3D__bvh3D).leafByObject : flighthq._internal._Map<Float, Float>).has(id)) : Bool) : Bool) && (cast !(cast ((cast (cast tree : Bvh3D__bvh3D).declined : flighthq._internal._Map<Float, String>).has(id)) : Bool) : Bool));
+      inserted = (cast Bvh3D.insertBvh3D__bvh3D((cast tree : Dynamic), (cast id : Float), ({ final __callArgument10:Dynamic = bounds; __callArgument10; }), ({ final __callArgument11:Dynamic = 'update'; __callArgument11; })) : Bool);
+      if ((cast wasMissing : Bool)) { Bvh3D.reportBvh3DIndexing__bvh3D((cast tree : Dynamic), (cast id : Float), (cast (cast Bvh3D.explainBvh3D__bvh3D((cast tree : Dynamic), (cast id : Float)) : SpatialIndexingExplanation) : SpatialIndexingExplanation).mode, ({ final __callArgument12:Dynamic = 'update'; __callArgument12; }), ({ final __callArgument13:Dynamic = 'missing-id'; __callArgument13; })); }
+      return cast inserted;
+      return cast _Runtime.UNDEFINED;
+    } };
     return cast null;
   }
 
@@ -64,21 +78,20 @@ class Bvh3D {
     if ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(bounds, 'minX')] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(bounds, 'minY')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(bounds, 'minZ')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(bounds, 'maxX')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(bounds, 'maxY')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(bounds, 'maxZ')] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       Bvh3D.removeBvh3D__bvh3D((cast tree : Dynamic), (cast id : Float));
       ((cast (cast tree : Bvh3D__bvh3D).declined : flighthq._internal._Map<Float, String>).set(id, (cast 'non-finite-bounds')));
-      Bvh3D.reportBvh3DIndexing__bvh3D((cast tree : Dynamic), (cast id : Float), ({ final __callArgument9:Dynamic = 'declined'; __callArgument9; }), ({ final __callArgument10:Dynamic = operation; __callArgument10; }), ({ final __callArgument11:Dynamic = 'non-finite-bounds'; __callArgument11; }));
+      Bvh3D.reportBvh3DIndexing__bvh3D((cast tree : Dynamic), (cast id : Float), ({ final __callArgument14:Dynamic = 'declined'; __callArgument14; }), ({ final __callArgument15:Dynamic = operation; __callArgument15; }), ({ final __callArgument16:Dynamic = 'non-finite-bounds'; __callArgument16; }));
       return cast false;
     }
     if ((cast ((cast ((cast ((cast _Runtime.field(bounds, 'maxX') : Float) < (cast _Runtime.field(bounds, 'minX') : Float)) : Bool) || (cast ((cast _Runtime.field(bounds, 'maxY') : Float) < (cast _Runtime.field(bounds, 'minY') : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(bounds, 'maxZ') : Float) < (cast _Runtime.field(bounds, 'minZ') : Float)) : Bool)) : Bool)) {
       Bvh3D.removeBvh3D__bvh3D((cast tree : Dynamic), (cast id : Float));
       ((cast (cast tree : Bvh3D__bvh3D).declined : flighthq._internal._Map<Float, String>).set(id, (cast 'inverted-bounds')));
-      Bvh3D.reportBvh3DIndexing__bvh3D((cast tree : Dynamic), (cast id : Float), ({ final __callArgument12:Dynamic = 'declined'; __callArgument12; }), ({ final __callArgument13:Dynamic = operation; __callArgument13; }), ({ final __callArgument14:Dynamic = 'inverted-bounds'; __callArgument14; }));
+      Bvh3D.reportBvh3DIndexing__bvh3D((cast tree : Dynamic), (cast id : Float), ({ final __callArgument17:Dynamic = 'declined'; __callArgument17; }), ({ final __callArgument18:Dynamic = operation; __callArgument18; }), ({ final __callArgument19:Dynamic = 'inverted-bounds'; __callArgument19; }));
       return cast false;
     }
     ((cast (cast tree : Bvh3D__bvh3D).declined : flighthq._internal._Map<Float, String>).delete_(id));
     existing = ((cast (cast tree : Bvh3D__bvh3D).leafByObject : flighthq._internal._Map<Float, Float>).get(id));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       if ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(bounds, 'minX') : Float) >= (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast tree : Bvh3D__bvh3D).minX : Array<Float>), (cast existing : Float)) : Float)) : Bool) && (cast ((cast _Runtime.field(bounds, 'minY') : Float) >= (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast tree : Bvh3D__bvh3D).minY : Array<Float>), (cast existing : Float)) : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(bounds, 'minZ') : Float) >= (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast tree : Bvh3D__bvh3D).minZ : Array<Float>), (cast existing : Float)) : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(bounds, 'maxX') : Float) <= (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast tree : Bvh3D__bvh3D).maxX : Array<Float>), (cast existing : Float)) : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(bounds, 'maxY') : Float) <= (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast tree : Bvh3D__bvh3D).maxY : Array<Float>), (cast existing : Float)) : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(bounds, 'maxZ') : Float) <= (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast tree : Bvh3D__bvh3D).maxZ : Array<Float>), (cast existing : Float)) : Float)) : Bool)) : Bool)) {
-        Bvh3D.copyBounds3D__bvh3D(({ final __callArgument15:Dynamic = bounds; __callArgument15; }), (cast ((cast (cast tree : Bvh3D__bvh3D).bounds : flighthq._internal._Map<Float, SpatialAabb3D>).get(id)) : SpatialAabb3D));
-        Bvh3D.reportBvh3DIndexing__bvh3D((cast tree : Dynamic), (cast id : Float), ({ final __callArgument16:Dynamic = 'cells'; __callArgument16; }), ({ final __callArgument17:Dynamic = operation; __callArgument17; }), ({ final __callArgument18:Dynamic = null; __callArgument18; }));
+        Bvh3D.copyBounds3D__bvh3D(({ final __callArgument20:Dynamic = bounds; __callArgument20; }), (cast ((cast (cast tree : Bvh3D__bvh3D).bounds : flighthq._internal._Map<Float, SpatialAabb3D>).get(id)) : SpatialAabb3D));
         return cast true;
       }
       Bvh3D.removeBvh3D__bvh3D((cast tree : Dynamic), (cast id : Float));
@@ -99,7 +112,6 @@ class Bvh3D {
     ((cast (cast tree : Bvh3D__bvh3D).bounds : flighthq._internal._Map<Float, SpatialAabb3D>).set(id, (cast { maxX: _Runtime.field(bounds, 'maxX'), maxY: _Runtime.field(bounds, 'maxY'), maxZ: _Runtime.field(bounds, 'maxZ'), minX: _Runtime.field(bounds, 'minX'), minY: _Runtime.field(bounds, 'minY'), minZ: _Runtime.field(bounds, 'minZ') })));
     ((cast tree : Bvh3D__bvh3D).count += 1.0);
     Bvh3D.insertBvh3DLeaf__bvh3D((cast tree : Dynamic), (cast leaf : Float));
-    Bvh3D.reportBvh3DIndexing__bvh3D((cast tree : Dynamic), (cast id : Float), ({ final __callArgument19:Dynamic = 'cells'; __callArgument19; }), ({ final __callArgument20:Dynamic = operation; __callArgument20; }), ({ final __callArgument21:Dynamic = null; __callArgument21; }));
     return cast true;
     return cast null;
   }
@@ -248,12 +260,12 @@ class Bvh3D {
       while ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
         var node:Float = (cast _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>)) : Float);
         if ((cast ((cast _Runtime.strictEquals(node, Bvh3D.NIL__bvh3D) : Bool) || (cast _Runtime.strictEquals(node, leaf) : Bool)) : Bool)) { continue; }
-        if ((cast !(cast (cast Bvh3D.nodeOverlapsBounds__bvh3D((cast tree : Dynamic), (cast node : Float), ({ final __callArgument22:Dynamic = exact; __callArgument22; })) : Bool) : Bool) : Bool)) { continue; }
+        if ((cast !(cast (cast Bvh3D.nodeOverlapsBounds__bvh3D((cast tree : Dynamic), (cast node : Float), ({ final __callArgument21:Dynamic = exact; __callArgument21; })) : Bool) : Bool) : Bool)) { continue; }
         if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(tree, 'height') : Array<Float>), (cast node : Float)), 0.0) : Bool)) {
           var other:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(tree, 'object') : Array<Float>), (cast node : Float));
           if ((cast ((cast other : Float) <= (cast id : Float)) : Bool)) { continue; }
           var otherExact:Null<SpatialAabb3D> = ((cast _Runtime.field(tree, 'bounds') : flighthq._internal._Map<Float, SpatialAabb3D>).get(other));
-          if ((cast ((cast !_Runtime.strictEquals(otherExact, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast Bvh3D.boundsOverlap3D__bvh3D(({ final __callArgument23:Dynamic = exact; __callArgument23; }), ({ final __callArgument24:Dynamic = otherExact; __callArgument24; })) : Bool) : Bool)) : Bool)) {
+          if ((cast ((cast !_Runtime.strictEquals(otherExact, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast Bvh3D.boundsOverlap3D__bvh3D(({ final __callArgument22:Dynamic = exact; __callArgument22; }), ({ final __callArgument23:Dynamic = otherExact; __callArgument23; })) : Bool) : Bool)) : Bool)) {
             var pair:SpatialPair = flighthq._internal._StaticIndex.readArray(out, written);
             if ((cast _Runtime.strictEquals(pair, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(out, 'push', cast ([{ a: id, b: other }] : Array<Dynamic>)); } else {
               ((cast pair : SpatialPair).a = id);
@@ -329,10 +341,10 @@ class Bvh3D {
     _Runtime.callProperty(stack, 'push', cast ([_Runtime.field(tree, 'root')] : Array<Dynamic>));
     while ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       var node:Float = (cast _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>)) : Float);
-      if ((cast ((cast _Runtime.strictEquals(node, Bvh3D.NIL__bvh3D) : Bool) || (cast !(cast (cast Bvh3D.nodeOverlapsBounds__bvh3D((cast tree : Dynamic), (cast node : Float), ({ final __callArgument25:Dynamic = region; __callArgument25; })) : Bool) : Bool) : Bool)) : Bool)) { continue; }
+      if ((cast ((cast _Runtime.strictEquals(node, Bvh3D.NIL__bvh3D) : Bool) || (cast !(cast (cast Bvh3D.nodeOverlapsBounds__bvh3D((cast tree : Dynamic), (cast node : Float), ({ final __callArgument24:Dynamic = region; __callArgument24; })) : Bool) : Bool) : Bool)) : Bool)) { continue; }
       if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(tree, 'height') : Array<Float>), (cast node : Float)), 0.0) : Bool)) {
         var exact:Null<SpatialAabb3D> = ((cast _Runtime.field(tree, 'bounds') : flighthq._internal._Map<Float, SpatialAabb3D>).get(flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(tree, 'object') : Array<Float>), (cast node : Float))));
-        if ((cast ((cast !_Runtime.strictEquals(exact, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast Bvh3D.boundsOverlap3D__bvh3D(({ final __callArgument26:Dynamic = exact; __callArgument26; }), ({ final __callArgument27:Dynamic = region; __callArgument27; })) : Bool) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(tree, 'object') : Array<Float>), (cast node : Float))] : Array<Dynamic>)); }
+        if ((cast ((cast !_Runtime.strictEquals(exact, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast Bvh3D.boundsOverlap3D__bvh3D(({ final __callArgument25:Dynamic = exact; __callArgument25; }), ({ final __callArgument26:Dynamic = region; __callArgument26; })) : Bool) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(tree, 'object') : Array<Float>), (cast node : Float))] : Array<Dynamic>)); }
         continue;
       }
       _Runtime.callProperty(stack, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(tree, 'child1') : Array<Float>), (cast node : Float))] : Array<Dynamic>));
@@ -461,8 +473,8 @@ class Bvh3D {
     return cast null;
   }
 
-  public static function reportBvh3DIndexing__bvh3D(tree:Bvh3D__bvh3D, id:SpatialObjectId, mode:flighthq._internal._IndexedAccess<SpatialIndexingExplanation, String>, operation:SpatialIndexingOperation, reason:flighthq._internal._IndexedAccess<SpatialIndexingExplanation, String>):Void {
-    reportSpatialIndexing(({ final __callArgument28:Dynamic = { cellSize: _Runtime.field(tree, 'margin'), id: id, mode: mode, operation: operation, reason: reason, wouldOccupyBucketCount: 0.0 }; __callArgument28; }));
+  public static function reportBvh3DIndexing__bvh3D(tree:Bvh3D__bvh3D, id:SpatialObjectId, mode:SpatialIndexingMode, operation:SpatialIndexingOperation, reason:Null<SpatialIndexingReason>):Void {
+    reportSpatialIndexing(({ final __callArgument27:Dynamic = { cellSize: _Runtime.field(tree, 'margin'), id: id, mode: mode, operation: operation, reason: reason, wouldOccupyBucketCount: 0.0 }; __callArgument27; }));
   }
 
   public static function unionBounds__bvh3D(tree:Bvh3D__bvh3D, target:Float, a:Float, b:Float):Void {

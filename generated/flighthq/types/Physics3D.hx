@@ -38,6 +38,8 @@ typedef Physics3DSequentialImpulseConfig = { var velocityIterations:Float; var p
 
 typedef Physics3DSolverConfig = { var allowSleeping:Bool; var sleepLinearThreshold:Float; var sleepAngularThreshold:Float; var timeToSleep:Float; var substeps:Float; var continuousCollision:Bool; var maxCcdSubsteps:Float; var maxCcdRotationSubsteps:Float; var sequentialImpulse:Physics3DSequentialImpulseConfig; };
 
+typedef Physics3DRotationalCcdEnvelope = { var angularTravel:Float; var sampleCount:Float; var maxAngularIncrement:Float; var maxPointArcTravel:Float; var targetIncrementMet:Bool; };
+
 typedef Physics3DCollisionExplanation = { var unsupportedKinds:Array<String>; var status:String; };
 
 typedef Physics3DStepExplanation = { var bodyStateValid:Bool; var colliderStateValid:Bool; var contactStateValid:Bool; var gravityValid:Bool; var jointStateValid:Bool; var solverConfigValid:Bool; var substepsValid:Bool; var timestepValid:Bool; var velocityIterationsValid:Bool; var positionIterationsValid:Bool; var status:String; };

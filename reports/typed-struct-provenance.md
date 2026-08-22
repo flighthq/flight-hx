@@ -1,27 +1,27 @@
 # Typed Struct Provenance Audit
 
-Upstream commit: `9b3b71b019ff48ea6329c16020f37fb72c3123d1`
+Upstream commit: `9db114b3fe1db90a90a11541649cb3af8bb5ca62`
 
 This reporting-only audit tests nominal-identity closure for the clean required-field set. It does not enable class emission. Bridge exposure is reported separately and is not itself a closure blocker.
 
 | Metric | Count |
 | --- | ---: |
-| Clean required-field candidates | 805 |
-| Nominally closed candidates | 613 |
-| Blocked candidates | 192 |
-| Normalization-provenance blockers only | 119 |
-| Container-transfer blockers only | 58 |
+| Clean required-field candidates | 812 |
+| Nominally closed candidates | 618 |
+| Blocked candidates | 194 |
+| Normalization-provenance blockers only | 120 |
+| Container-transfer blockers only | 59 |
 | Both blocker classes | 15 |
-| Normalization roots (all eligible schemas) | 429 |
+| Normalization roots (all eligible schemas) | 435 |
 | JSON.parse roots | 10 |
-| Containment edges (all eligible schemas) | 2191 |
-| Candidates blocked by normalization provenance | 134 |
-| Candidates blocked by container transfers | 73 |
+| Containment edges (all eligible schemas) | 2192 |
+| Candidates blocked by normalization provenance | 135 |
+| Candidates blocked by container transfers | 74 |
 | Candidates with anonymous container transfers | 52 |
 | Candidates with cross-schema container transfers | 11 |
-| Candidates with dynamic container transfers | 19 |
-| Candidates exposed through bridge inputs | 513 |
-| Candidates exposed through bridge outputs | 555 |
+| Candidates with dynamic container transfers | 20 |
+| Candidates exposed through bridge inputs | 520 |
+| Candidates exposed through bridge outputs | 560 |
 
 Exact containment paths, roots, transfer locations, and bridge paths are in `typed-struct-provenance.json`.
 
@@ -147,10 +147,9 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#CocosPlistDocument` | 7 | 2 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CocosPlistMetadata` | 7 | 3 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CocosPlistParsed` | 0 | 2 | 0 | 2 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#CollisionCapsule2D` | 0 | 5 | 2 | 0 | 0 | 0 | 7 | 7 | yes | — |
-| `@flighthq/types:interface#CollisionContactManifold2D` | 44 | 6 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#CollisionContactManifold2D` | 62 | 6 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CollisionContactManifold3D` | 0 | 6 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#CollisionContactPoint2D` | 25 | 4 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#CollisionContactPoint2D` | 37 | 4 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CollisionContactPoint3D` | 0 | 5 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CollisionDistance3D` | 0 | 11 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CollisionManifold2D` | 49 | 4 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
@@ -161,7 +160,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#CollisionSegment2D` | 0 | 4 | 2 | 0 | 0 | 0 | 7 | 7 | yes | — |
 | `@flighthq/types:interface#CollisionTestExplanation2D` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#CollisionTestExplanation3D` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#CollisionTimeOfImpact2D` | 68 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#CollisionTimeOfImpact2D` | 92 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CollisionTimeOfImpact3D` | 0 | 7 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#CollisionVendorShape2D` | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#CollisionVendorShape3D` | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
@@ -415,7 +414,15 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Physics2DSolverConfig` | 55 | 13 | 1 | 0 | 0 | 0 | 2 | 2 | yes | — |
 | `@flighthq/types:interface#Physics2DStepExplanation` | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DWorld` | 225 | 30 | 0 | 10 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#Physics3DCollider` | 0 | 5 | 4 | 20 | 0 | 0 | 6 | 6 | yes | — |
+| `@flighthq/types:interface#Physics3DAbi` | 0 | 14 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DAbiBodyBuffer` | 48 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DAbiCommandBuffer` | 49 | 3 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DAbiContactBuffer` | 51 | 11 | 1 | 0 | 0 | 0 | 2 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DAbiContactHooks` | 13 | 3 | 0 | 1 | 0 | 0 | 1 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DAbiExecutionResult` | 8 | 4 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DAbiJointBuffer` | 16 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DAbiQueryBuffer` | 18 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DCollider` | 0 | 5 | 4 | 20 | 0 | 1 | 6 | 6 | no | `container-transfer` |
 | `@flighthq/types:interface#Physics3DCollisionExplanation` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#Physics3DCollisionFilter` | 0 | 3 | 1 | 0 | 0 | 0 | 7 | 6 | yes | — |
 | `@flighthq/types:interface#Physics3DContact` | 0 | 14 | 4 | 1 | 0 | 2 | 2 | 2 | no | `container-transfer` |
@@ -437,10 +444,10 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#Physics3DQueryResult` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics3DRayHit` | 0 | 10 | 1 | 2 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics3DRayResult` | 0 | 2 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#Physics3DSequentialImpulseConfig` | 20 | 6 | 1 | 0 | 0 | 0 | 2 | 3 | yes | — |
+| `@flighthq/types:interface#Physics3DRotationalCcdEnvelope` | 10 | 5 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DSequentialImpulseConfig` | 28 | 6 | 1 | 0 | 1 | 0 | 2 | 3 | no | `normalization-provenance` |
 | `@flighthq/types:interface#Physics3DSequentialImpulseState` | 0 | 2 | 1 | 3 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics3DShapeCastResult` | 0 | 11 | 0 | 2 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#Physics3DSolverConfig` | 0 | 9 | 1 | 1 | 0 | 0 | 2 | 2 | yes | — |
 | `@flighthq/types:interface#Physics3DStepExplanation` | 0 | 11 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#PixiParseResult` | 2 | 2 | 0 | 2 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#PlatformBackend` | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
@@ -480,7 +487,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#ResourceLoadHandle` | 2 | 2 | 0 | 0 | 0 | 1 | 0 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#RichTextContent` | 48 | 2 | 1 | 1 | 1 | 0 | 2 | 2 | no | `normalization-provenance` |
 | `@flighthq/types:interface#RigidBody2D` | 0 | 26 | 5 | 1 | 0 | 1 | 5 | 5 | no | `container-transfer` |
-| `@flighthq/types:interface#RigidBody3D` | 0 | 53 | 5 | 1 | 0 | 1 | 5 | 5 | no | `container-transfer` |
+| `@flighthq/types:interface#RigidBody3D` | 0 | 53 | 5 | 1 | 0 | 3 | 5 | 5 | no | `container-transfer` |
 | `@flighthq/types:interface#RiveAdvancedBlend` | 0 | 2 | 1 | 1 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#RiveAnimationClip` | 0 | 6 | 1 | 1 | 0 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:interface#RiveArtboardGraph` | 101 | 4 | 1 | 1 | 0 | 0 | 1 | 1 | yes | — |

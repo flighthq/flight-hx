@@ -11,7 +11,7 @@
     "moduleValueKeys": 0,
     "portableGlobalValueKeys": 33,
     "typeUses": 11278,
-    "valueUses": 1921
+    "valueUses": 1964
   },
   "types": [
     {
@@ -4407,7 +4407,7 @@
       "uses": 4
     }
   ],
-  "upstreamCommit": "9b3b71b019ff48ea6329c16020f37fb72c3123d1",
+  "upstreamCommit": "9db114b3fe1db90a90a11541649cb3af8bb5ca62",
   "values": [
     {
       "coverage": "portable",
@@ -4566,6 +4566,9 @@
         "generated/flighthq/fontFormats/WoffFont.hx",
         "generated/flighthq/mesh/MeshGeometryAttributes.hx",
         "generated/flighthq/mesh/MeshGeometryLayout.hx",
+        "generated/flighthq/physics3dAbi/Physics3DAbiBuffer.hx",
+        "generated/flighthq/physics3dAbi/Physics3DAbiCommand.hx",
+        "generated/flighthq/physics3dAbi/ReferencePhysics3DAbi.hx",
         "generated/flighthq/renderWgpu/_internal/_WgpuTestHelper.hx",
         "generated/flighthq/scene2dFormats/RiveDocument.hx",
         "generated/flighthq/scene3dFormats/Awd2Parse.hx",
@@ -4576,7 +4579,7 @@
         "generated/flighthq/textureFormats/ByteReader.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
-      "uses": 41
+      "uses": 45
     },
     {
       "coverage": "portable",
@@ -4914,6 +4917,7 @@
         "generated/flighthq/physics2d/World.hx",
         "generated/flighthq/physics3d/JointCollisionSuppression.hx",
         "generated/flighthq/physics3d/World.hx",
+        "generated/flighthq/physics3dAbi/ReferencePhysics3DAbi.hx",
         "generated/flighthq/registry/RegistryTable.hx",
         "generated/flighthq/renderGl/GlRenderState.hx",
         "generated/flighthq/renderGl/GlShaderBinding.hx",
@@ -4997,7 +5001,7 @@
         "generated/flighthq/tween/TweenManager.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
-      "uses": 319
+      "uses": 326
     },
     {
       "coverage": "js-only",
@@ -5110,6 +5114,7 @@
         "generated/flighthq/physics2d/World.hx",
         "generated/flighthq/physics2d/WorldQueries.hx",
         "generated/flighthq/physics3d/Broadphase.hx",
+        "generated/flighthq/physics3d/Continuous.hx",
         "generated/flighthq/physics3d/Integrate.hx",
         "generated/flighthq/physics3d/JointBreakage.hx",
         "generated/flighthq/physics3d/Step.hx",
@@ -5117,6 +5122,9 @@
         "generated/flighthq/physics3d/SymmetricTensor.hx",
         "generated/flighthq/physics3d/World.hx",
         "generated/flighthq/physics3d/WorldQueries.hx",
+        "generated/flighthq/physics3dAbi/Physics3DAbiBuffer.hx",
+        "generated/flighthq/physics3dAbi/Physics3DAbiCommand.hx",
+        "generated/flighthq/physics3dAbi/ReferencePhysics3DAbi.hx",
         "generated/flighthq/registry/RegistryTable.hx",
         "generated/flighthq/render/SceneRender.hx",
         "generated/flighthq/renderGl/GlCompressedTexture.hx",
@@ -5163,7 +5171,7 @@
         "generated/flighthq/xml/XmlQuery.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
-      "uses": 704
+      "uses": 732
     },
     {
       "coverage": "js-only",
@@ -5326,6 +5334,7 @@
         "generated/flighthq/physics2d/ExplainPhysics2DCollision.hx",
         "generated/flighthq/physics2d/World.hx",
         "generated/flighthq/physics3d/ExplainPhysics3DCollision.hx",
+        "generated/flighthq/physics3d/Physics3DBroadphasePublication.hx",
         "generated/flighthq/physics3d/StepValidation.hx",
         "generated/flighthq/physics3d/World.hx",
         "generated/flighthq/protocol/Protocol.hx",
@@ -5372,7 +5381,7 @@
         "generated/flighthq/tilemapFormats/TiledProject.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
-      "uses": 122
+      "uses": 123
     },
     {
       "coverage": "portable",
@@ -5535,8 +5544,10 @@
         "generated/flighthq/movieclip/SpritesheetTimelineSource.hx",
         "generated/flighthq/physics2d/Joints.hx",
         "generated/flighthq/physics2d/Ownership.hx",
+        "generated/flighthq/physics3d/EnablePhysics3DGuards.hx",
         "generated/flighthq/physics3d/JointRows.hx",
         "generated/flighthq/physics3d/Ownership.hx",
+        "generated/flighthq/physics3d/Physics3DBroadphasePublication.hx",
         "generated/flighthq/power/Power.hx",
         "generated/flighthq/protocol/Protocol.hx",
         "generated/flighthq/render/RenderRegistryGuards.hx",
@@ -5607,7 +5618,7 @@
         "generated/flighthq/velocity/VelocityField.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
-      "uses": 199
+      "uses": 201
     },
     {
       "coverage": "portable",
@@ -5616,6 +5627,7 @@
         "generated/flighthq/effectsGl/EnableGlRenderEffectGuards.hx",
         "generated/flighthq/effectsWgpu/EnableWgpuRenderEffectGuards.hx",
         "generated/flighthq/physics2d/Ownership.hx",
+        "generated/flighthq/physics3d/Continuous.hx",
         "generated/flighthq/physics3d/Ownership.hx",
         "generated/flighthq/render/EnableColorAdjustments.hx",
         "generated/flighthq/renderGl/EnableGlRenderTextureGuards.hx",
@@ -5626,7 +5638,7 @@
         "generated/flighthq/textshaper/TextShaperPool.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
-      "uses": 12
+      "uses": 13
     },
     {
       "coverage": "js-only",

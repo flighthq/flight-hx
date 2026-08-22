@@ -27,7 +27,7 @@ class ExplainPhysics2DCollision {
   }
 
   public static function isPhysics2DContactSupportedKind__explainPhysics2DCollision(kind:CollisionShapeKind2D):Bool {
-    return cast ((cast ((cast ((cast _Runtime.strictEquals(kind, 'circle') : Bool) || (cast _Runtime.strictEquals(kind, 'aabb') : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, 'obb') : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, 'polygon') : Bool));
+    return cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(kind, 'circle') : Bool) || (cast _Runtime.strictEquals(kind, 'capsule') : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, 'aabb') : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, 'obb') : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, 'polygon') : Bool));
     return cast null;
   }
 }

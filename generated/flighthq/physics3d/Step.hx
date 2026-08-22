@@ -270,8 +270,19 @@ class Step {
         (bodyIndex = cast ((bodyIndex + 1.0) : Dynamic));
       }
     }
+    if ((cast ((cast (cast world.config : Physics3DSolverConfig).continuousCollision : Bool) && (cast (cast hasActivePhysics3DBullet(({ final __callArgument57:Dynamic = world; __callArgument57; })) : Bool) : Bool)) : Bool)) {
+      _Runtime.callProperty(world.contacts, 'sort', cast ([Step.comparePhysics3DContactIdentity__step] : Array<Dynamic>));
+    }
     (world.previousTimestep = cast (substepDt : Float));
-    Step.runPhysics3DContactHook__step(({ final __callArgument57:Dynamic = world; __callArgument57; }), (cast world.contactHooks : Physics3DContactHooks).postSolve, (cast 'post-solve' : String));
+    Step.runPhysics3DContactHook__step(({ final __callArgument58:Dynamic = world; __callArgument58; }), (cast world.contactHooks : Physics3DContactHooks).postSolve, (cast 'post-solve' : String));
+  }
+
+  public static function comparePhysics3DContactIdentity__step(left:Physics3DContact, right:Physics3DContact):Float {
+    if ((cast !_Runtime.strictEquals(_Runtime.field(left, 'bodyA'), _Runtime.field(right, 'bodyA')) : Bool)) { return cast _Runtime.subtractNumbers(_Runtime.field(left, 'bodyA'), _Runtime.field(right, 'bodyA')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(left, 'bodyB'), _Runtime.field(right, 'bodyB')) : Bool)) { return cast _Runtime.subtractNumbers(_Runtime.field(left, 'bodyB'), _Runtime.field(right, 'bodyB')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(left, 'colliderA'), _Runtime.field(right, 'colliderA')) : Bool)) { return cast _Runtime.subtractNumbers(_Runtime.field(left, 'colliderA'), _Runtime.field(right, 'colliderA')); }
+    return cast _Runtime.subtractNumbers(_Runtime.field(left, 'colliderB'), _Runtime.field(right, 'colliderB'));
+    return cast null;
   }
 
   public static var physics3DStepGuard__step:Null<Physics3DStepGuard> = _Runtime.explicitNull();

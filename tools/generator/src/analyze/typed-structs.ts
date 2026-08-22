@@ -1928,6 +1928,46 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     id: '@flighthq/types:interface#Physics3DSequentialImpulseConfig',
     purpose: 'reviewed escape-free Physics3D sequential-impulse config',
   },
+  {
+    declarationFingerprint: 'sha256:12a0644da563b2ee03d54d165a4f82450dc0c2c3f0b91efcf202796d89a86966',
+    id: '@flighthq/types:interface#Physics3DAbiBodyBuffer',
+    purpose: 'reviewed escape-free Physics3D ABI body buffer',
+  },
+  {
+    declarationFingerprint: 'sha256:344bf545e06f4e1231e04047048a038aa36ce6c322e2dcb7a7952c66f10b1476',
+    id: '@flighthq/types:interface#Physics3DAbiCommandBuffer',
+    purpose: 'reviewed escape-free Physics3D ABI command buffer',
+  },
+  {
+    declarationFingerprint: 'sha256:8c8cfb7227ae63c538fd07f3e9812decc564d7e6a15be244c2e15578ebd43c4e',
+    id: '@flighthq/types:interface#Physics3DAbiContactBuffer',
+    purpose: 'reviewed escape-free Physics3D ABI contact buffer',
+  },
+  {
+    declarationFingerprint: 'sha256:39fa096a0116e610a50835a085a2034e132dca54573c19203348e8b450e5cdaa',
+    id: '@flighthq/types:interface#Physics3DAbiContactHooks',
+    purpose: 'reviewed escape-free Physics3D ABI contact hooks',
+  },
+  {
+    declarationFingerprint: 'sha256:e232874df593acd78d53e3976d1775517dc020564d8ee4cb42d2c27e4b4c4c36',
+    id: '@flighthq/types:interface#Physics3DAbiExecutionResult',
+    purpose: 'reviewed escape-free Physics3D ABI execution result',
+  },
+  {
+    declarationFingerprint: 'sha256:fd9990b1ea1d2d95da9a48ffe73617a18a78364b58f571f88d9e86bbaa225d61',
+    id: '@flighthq/types:interface#Physics3DAbiJointBuffer',
+    purpose: 'reviewed escape-free Physics3D ABI joint buffer',
+  },
+  {
+    declarationFingerprint: 'sha256:821df23149ae8b3765a926b09e971b64583f169a123723d6d18539453b27ec00',
+    id: '@flighthq/types:interface#Physics3DAbiQueryBuffer',
+    purpose: 'reviewed escape-free Physics3D ABI query buffer',
+  },
+  {
+    declarationFingerprint: 'sha256:187b301955811c3de7115138e2c44a0d076c84a92749130d9bb5050b498bb95d',
+    id: '@flighthq/types:interface#Physics3DRotationalCcdEnvelope',
+    purpose: 'reviewed escape-free Physics3D rotational CCD envelope',
+  },
 ];
 
 const reviewedTypedStructDirectAdditionsById = new Map(

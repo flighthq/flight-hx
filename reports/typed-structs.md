@@ -1,22 +1,22 @@
 # Typed Struct Audit
 
-Upstream commit: `9b3b71b019ff48ea6329c16020f37fb72c3123d1`
+Upstream commit: `9db114b3fe1db90a90a11541649cb3af8bb5ca62`
 
 The candidate universe is checker-derived. Member escapes, presence and width sensitivity, class feasibility, containment, and provenance are applied as rules. Eligibility is audited independently from emission; newly discovered schemas remain reflective until their audit diff is approved.
 
 | Metric | Count |
 | --- | ---: |
-| Candidates | 2178 |
-| Eligible | 1655 |
-| Ineligible | 523 |
-| Audit-only schemas | 1396 |
-| Direct schemas | 780 |
-| Declared fields | 25954 |
-| Bindable accesses | 36349 |
-| Pending accesses | 10056 |
-| Directly emitted accesses | 26293 |
+| Candidates | 2194 |
+| Eligible | 1664 |
+| Ineligible | 530 |
+| Audit-only schemas | 1404 |
+| Direct schemas | 788 |
+| Declared fields | 26217 |
+| Bindable accesses | 37358 |
+| Pending accesses | 10705 |
+| Directly emitted accesses | 26653 |
 | Reflective survivors | 451 |
-| Dynamic escapes | 12026 |
+| Dynamic escapes | 12346 |
 
 ## Migration lock
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1396 |
+| Newly discovered, audit-only | 1404 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -369,41 +369,41 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CocosPlistFrame` | `direct` | `relocated` | `@flighthq/spritesheet-formats:interface#CocosPlistFrame` | broad serialization document | 7 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CocosPlistMetadata` | `direct` | `relocated` | `@flighthq/spritesheet-formats:interface#CocosPlistMetadata` | broad serialization document | 3 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CocosPlistParsed` | `direct` | `relocated` | `@flighthq/spritesheet-formats:interface#CocosPlistParsed` | broad serialization document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CollisionAabb2D` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 88 | 0 | 0 | 88 | 0 | 0 | 62 | yes | — |
-| `@flighthq/types:interface#CollisionAabb3D` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 144 | 18 | 0 | 162 | 0 | 0 | 82 | yes | — |
-| `@flighthq/types:interface#CollisionBox3D` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 176 | 20 | 0 | 196 | 0 | 0 | 83 | yes | — |
+| `@flighthq/types:interface#CollisionAabb2D` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 88 | 0 | 0 | 88 | 0 | 0 | 68 | yes | — |
+| `@flighthq/types:interface#CollisionAabb3D` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 150 | 18 | 0 | 168 | 0 | 0 | 99 | yes | — |
+| `@flighthq/types:interface#CollisionBox3D` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 186 | 20 | 0 | 206 | 0 | 0 | 103 | yes | — |
 | `@flighthq/types:type#CollisionBuiltInShape2D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#CollisionBuiltInShape3D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/types:interface#CollisionCapsule2D` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 96 | 5 | 0 | 101 | 0 | 0 | 62 | yes | — |
-| `@flighthq/types:interface#CollisionCapsule3D` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 169 | 7 | 0 | 176 | 0 | 0 | 83 | yes | — |
-| `@flighthq/types:interface#CollisionCircle2D` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 103 | 3 | 0 | 106 | 0 | 0 | 62 | yes | — |
+| `@flighthq/types:interface#CollisionCapsule2D` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 262 | 5 | 0 | 267 | 0 | 0 | 64 | yes | — |
+| `@flighthq/types:interface#CollisionCapsule3D` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 169 | 7 | 0 | 176 | 0 | 0 | 113 | yes | — |
+| `@flighthq/types:interface#CollisionCircle2D` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 114 | 3 | 0 | 117 | 0 | 0 | 67 | yes | — |
 | `@flighthq/types:type#CollisionColliderShape3D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/types:interface#CollisionCone3D` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 112 | 7 | 0 | 119 | 0 | 0 | 83 | yes | — |
-| `@flighthq/types:interface#CollisionContactManifold2D` | `direct` | `new` | — | reviewed escape-free 2D collision contact manifold after dimension-explicit upstream rename | 6 | 23 | 21 | 0 | 0 | 44 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CollisionContactManifold3D` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 55 | 22 | 0 | 77 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CollisionContactPoint2D` | `direct` | `new` | — | reviewed escape-free 2D collision contact point after dimension-explicit upstream rename | 4 | 13 | 12 | 0 | 0 | 25 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CollisionContactPoint3D` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 35 | 21 | 0 | 56 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CollisionConvex3D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 14 | 1 | 0 | 15 | 0 | 0 | 80 | yes | — |
-| `@flighthq/types:interface#CollisionCylinder3D` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 106 | 7 | 0 | 113 | 0 | 0 | 83 | yes | — |
+| `@flighthq/types:interface#CollisionCone3D` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 119 | 7 | 0 | 126 | 0 | 0 | 112 | yes | — |
+| `@flighthq/types:interface#CollisionContactManifold2D` | `direct` | `new` | — | reviewed escape-free 2D collision contact manifold after dimension-explicit upstream rename | 6 | 26 | 36 | 0 | 0 | 62 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CollisionContactManifold3D` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 59 | 22 | 0 | 81 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CollisionContactPoint2D` | `direct` | `new` | — | reviewed escape-free 2D collision contact point after dimension-explicit upstream rename | 4 | 13 | 24 | 0 | 0 | 37 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CollisionContactPoint3D` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 39 | 21 | 0 | 60 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#CollisionConvex3D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 16 | 1 | 0 | 17 | 0 | 0 | 112 | yes | — |
+| `@flighthq/types:interface#CollisionCylinder3D` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 106 | 7 | 0 | 113 | 0 | 0 | 116 | yes | — |
 | `@flighthq/types:interface#CollisionDistance3D` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 12 | 24 | 0 | 36 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#CollisionFaceQuery3D` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#CollisionHeightfield3D` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 102 | 7 | 0 | 109 | 0 | 0 | 87 | yes | — |
+| `@flighthq/types:interface#CollisionHeightfield3D` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 119 | 7 | 0 | 126 | 0 | 0 | 123 | yes | — |
 | `@flighthq/types:interface#CollisionManifold2D` | `direct` | `new` | — | reviewed escape-free 2D collision manifold after dimension-explicit upstream rename | 4 | 7 | 42 | 0 | 0 | 49 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CollisionManifold3D` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 7 | 42 | 0 | 49 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CollisionObb2D` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 97 | 15 | 0 | 112 | 0 | 0 | 62 | yes | — |
+| `@flighthq/types:interface#CollisionObb2D` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 97 | 15 | 0 | 112 | 0 | 0 | 68 | yes | — |
 | `@flighthq/types:type#CollisionPairTest2D` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#CollisionPairTest3D` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#CollisionPoint2D` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 32 | 2 | 0 | 34 | 0 | 0 | 60 | yes | — |
-| `@flighthq/types:interface#CollisionPolygon2D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 32 | 0 | 0 | 32 | 0 | 0 | 62 | yes | — |
+| `@flighthq/types:interface#CollisionPoint2D` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 32 | 2 | 0 | 34 | 0 | 0 | 66 | yes | — |
+| `@flighthq/types:interface#CollisionPolygon2D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 34 | 0 | 0 | 34 | 0 | 0 | 68 | yes | — |
 | `@flighthq/types:interface#CollisionRaycastHit2D` | `direct` | `new` | — | reviewed escape-free 2D collision raycast hit after dimension-explicit upstream rename | 5 | 31 | 15 | 0 | 0 | 46 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CollisionRaycastHit3D` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 28 | 24 | 0 | 52 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CollisionResponse` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CollisionSegment2D` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 88 | 4 | 0 | 92 | 0 | 0 | 62 | yes | — |
+| `@flighthq/types:interface#CollisionSegment2D` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 88 | 4 | 0 | 92 | 0 | 0 | 68 | yes | — |
 | `@flighthq/types:type#CollisionShape2D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#CollisionShape3D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#CollisionShapeKind2D` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#CollisionShapeKind3D` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#CollisionSphere3D` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 77 | 7 | 0 | 84 | 0 | 0 | 83 | yes | — |
+| `@flighthq/types:interface#CollisionSphere3D` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 81 | 7 | 0 | 88 | 0 | 0 | 97 | yes | — |
 | `@flighthq/types:type#CollisionStaticShape3D` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#CollisionSupport2D` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#CollisionSupport3D` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
@@ -412,9 +412,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#CollisionTestGuard2D` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#CollisionTestGuard3D` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#CollisionTestStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#CollisionTimeOfImpact2D` | `direct` | `new` | — | reviewed escape-free 2D collision time of impact after dimension-explicit upstream rename | 5 | 39 | 29 | 0 | 0 | 68 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CollisionTimeOfImpact3D` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 32 | 31 | 0 | 63 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CollisionTriangleMesh3D` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 140 | 11 | 0 | 151 | 0 | 0 | 75 | yes | — |
+| `@flighthq/types:interface#CollisionTimeOfImpact2D` | `direct` | `new` | — | reviewed escape-free 2D collision time of impact after dimension-explicit upstream rename | 5 | 54 | 38 | 0 | 0 | 92 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CollisionTimeOfImpact3D` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 41 | 31 | 0 | 72 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#CollisionTriangleMesh3D` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 154 | 11 | 0 | 165 | 0 | 0 | 107 | yes | — |
 | `@flighthq/types:type#CollisionVendorKind2D` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#CollisionVendorKind3D` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#CollisionVendorShape2D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 21 | yes | — |
@@ -1253,61 +1253,77 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Physics2DWheelJoint` | `direct` | `new` | — | reviewed escape-free physics wheel joint | 26 | 22 | 6 | 0 | 0 | 28 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DWheelJointOptions` | `direct` | `new` | — | reviewed escape-free physics wheel-joint options | 17 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DWorld` | `direct` | `new` | — | reviewed escape-free physics world | 30 | 222 | 3 | 0 | 0 | 225 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DAbi` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 13 | yes | — |
+| `@flighthq/types:interface#Physics3DAbiBodyBuffer` | `direct` | `new` | — | reviewed escape-free Physics3D ABI body buffer | 5 | 42 | 6 | 0 | 0 | 48 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DAbiCommandBuffer` | `direct` | `new` | — | reviewed escape-free Physics3D ABI command buffer | 3 | 45 | 4 | 0 | 0 | 49 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DAbiContactBuffer` | `direct` | `new` | — | reviewed escape-free Physics3D ABI contact buffer | 11 | 39 | 12 | 0 | 0 | 51 | 0 | 0 | yes | — |
+| `@flighthq/types:type#Physics3DAbiContactHook` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
+| `@flighthq/types:interface#Physics3DAbiContactHooks` | `direct` | `new` | — | reviewed escape-free Physics3D ABI contact hooks | 3 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#Physics3DAbiExecutionResult` | `direct` | `new` | — | reviewed escape-free Physics3D ABI execution result | 4 | 0 | 8 | 0 | 0 | 8 | 0 | 0 | yes | — |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#Physics3DAbiJointBuffer` | `direct` | `new` | — | reviewed escape-free Physics3D ABI joint buffer | 5 | 13 | 3 | 0 | 0 | 16 | 0 | 0 | yes | — |
+| `@flighthq/types:type#Physics3DAbiObjectId` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#Physics3DAbiQueryBuffer` | `direct` | `new` | — | reviewed escape-free Physics3D ABI query buffer | 5 | 13 | 5 | 0 | 0 | 18 | 0 | 0 | yes | — |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:type#Physics3DAbiWorldHandle` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#Physics3DBallAndSocketJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 25 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics3DBallAndSocketJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics3DBodyType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#Physics3DCollider` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 49 | 2 | 0 | 51 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DCollider` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 70 | 2 | 0 | 72 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DCollisionExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DCollisionFilter` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 24 | 0 | 0 | 24 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DConeTwistJoint` | `direct` | `new` | — | reviewed escape-free Physics3D cone-twist joint | 45 | 36 | 15 | 0 | 0 | 51 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DCollisionFilter` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 30 | 0 | 0 | 30 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DConeTwistJoint` | `direct` | `new` | — | reviewed escape-free Physics3D cone-twist joint | 45 | 45 | 15 | 0 | 0 | 60 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DConeTwistJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 28 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DContact` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 115 | 14 | 0 | 129 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#Physics3DContact` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 172 | 26 | 0 | 198 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:type#Physics3DContactCallback` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#Physics3DContactConstraint` | `direct` | `new` | — | reviewed escape-free Physics3D contact constraint | 9 | 38 | 9 | 0 | 0 | 47 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DContactConstraintPoint` | `direct` | `new` | — | reviewed escape-free Physics3D contact-constraint point | 8 | 24 | 17 | 0 | 0 | 41 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DContactEvents` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DContactHooks` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DContactEvents` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DContactHooks` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 5 | 4 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics3DContactIntakeGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#Physics3DContactPoint` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 79 | 11 | 0 | 90 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DContactPoint` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 102 | 33 | 0 | 135 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics3DDebugFeature` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Physics3DDebugGeometry` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 6 | 4 | 0 | 10 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DDebugGeometryOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DDebugLine` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 0 | 9 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DDebugSphere` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 7 | 0 | 7 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DDistanceJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 34 | 18 | 8 | 0 | 26 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DDistanceJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 34 | 25 | 8 | 0 | 33 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DDistanceJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 18 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics3DFixedJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 33 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#Physics3DFixedJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DGeneric6DofJoint` | `direct` | `new` | — | reviewed escape-free Physics3D generic six-DOF joint | 50 | 29 | 0 | 0 | 0 | 29 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DGeneric6DofJoint` | `direct` | `new` | — | reviewed escape-free Physics3D generic six-DOF joint | 50 | 44 | 0 | 0 | 0 | 44 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DGeneric6DofJointOptions` | `direct` | `new` | — | reviewed escape-free Physics3D generic six-DOF joint options | 34 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DHingeJoint` | `direct` | `new` | — | reviewed escape-free Physics3D hinge joint | 45 | 34 | 22 | 0 | 0 | 56 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DHingeJoint` | `direct` | `new` | — | reviewed escape-free Physics3D hinge joint | 45 | 43 | 22 | 0 | 0 | 65 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DHingeJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 28 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 25 | 220 | 87 | 0 | 307 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 25 | 238 | 88 | 0 | 326 | 0 | 0 | 10 | yes | — |
 | `@flighthq/types:interface#Physics3DJointEvents` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DJointExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DJointFrameOptions` | `direct` | `new` | — | reviewed escape-free Physics3D joint-frame options | 19 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DJointFrames` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 24 | 16 | 0 | 40 | 0 | 0 | 5 | yes | — |
+| `@flighthq/types:interface#Physics3DJointFrames` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 24 | 16 | 0 | 40 | 0 | 0 | 13 | yes | — |
 | `@flighthq/types:type#Physics3DJointKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Physics3DJointOptions` | `direct` | `new` | — | reviewed escape-free Physics3D joint options | 11 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DJointReaction` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 12 | 18 | 0 | 30 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DJointReaction` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 18 | 18 | 0 | 36 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics3DJointResolutionGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#Physics3DJointSolver` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 13 | 0 | 0 | 13 | 0 | 0 | 9 | yes | — |
 | `@flighthq/types:interface#Physics3DMassData` | `direct` | `new` | — | reviewed escape-free Physics3D mass data | 10 | 45 | 87 | 0 | 0 | 132 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 16 | 0 | 0 | 16 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 25 | 0 | 0 | 25 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DQueryFilter` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DQueryHit` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 3 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DQueryResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 3 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DRayHit` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 15 | 20 | 0 | 35 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DRayResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 11 | 2 | 0 | 13 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DSequentialImpulseConfig` | `direct` | `new` | — | reviewed escape-free Physics3D sequential-impulse config | 6 | 20 | 0 | 0 | 0 | 20 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DQueryHit` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 2 | 3 | 0 | 5 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DQueryResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 3 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DRayHit` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 24 | 20 | 0 | 44 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DRayResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 14 | 2 | 0 | 16 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DRotationalCcdEnvelope` | `direct` | `new` | — | reviewed escape-free Physics3D rotational CCD envelope | 5 | 0 | 10 | 0 | 0 | 10 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DSequentialImpulseConfig` | `direct` | `new` | — | reviewed escape-free Physics3D sequential-impulse config | 6 | 28 | 0 | 0 | 0 | 28 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DSequentialImpulseState` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 9 | 2 | 0 | 11 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#Physics3DShapeCastResult` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 0 | 22 | 0 | 22 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DSliderJoint` | `direct` | `new` | — | reviewed escape-free Physics3D slider joint | 45 | 34 | 22 | 0 | 0 | 56 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DShapeCastResult` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 13 | 22 | 0 | 35 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DSliderJoint` | `direct` | `new` | — | reviewed escape-free Physics3D slider joint | 45 | 43 | 22 | 0 | 0 | 65 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DSliderJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 28 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics3DSolverConfig` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 34 | 0 | 0 | 34 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#Physics3DSolverConfig` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 54 | 0 | 0 | 54 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#Physics3DStepExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 2 | 0 | 0 | 2 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#Physics3DStepGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#Physics3DWorld` | `direct` | `new` | — | reviewed escape-free Physics3D world | 32 | 241 | 3 | 0 | 0 | 244 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics3DWorld` | `direct` | `new` | — | reviewed escape-free Physics3D world | 32 | 280 | 7 | 0 | 0 | 287 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PixelateEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#PixelFormat` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#PixelOrder` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1445,7 +1461,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#RichTextData` | `direct` | `new` | — | reviewed escape-free rich-text data | 21 | 188 | 61 | 0 | 0 | 249 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RichTextRuntime` | `direct` | `new` | — | reviewed escape-free rich-text runtime | 46 | 37 | 23 | 0 | 0 | 60 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RigidBody2D` | `audit-only` | `new` | — | checker-discovered public declaration | 26 | 620 | 130 | 0 | 750 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#RigidBody3D` | `audit-only` | `new` | — | checker-discovered public declaration | 53 | 593 | 189 | 0 | 782 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#RigidBody3D` | `audit-only` | `new` | — | checker-discovered public declaration | 53 | 710 | 212 | 0 | 922 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#RimModifier` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RimModifierOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RiveAdvancedBlend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -1719,8 +1735,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#SpatialIndex2D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SpatialIndex3D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SpatialIndexBackend2D` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 19 | yes | — |
-| `@flighthq/types:interface#SpatialIndexBackend3D` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 21 | yes | — |
-| `@flighthq/types:interface#SpatialIndexingExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SpatialIndexBackend3D` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 25 | yes | — |
+| `@flighthq/types:interface#SpatialIndexingExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#SpatialIndexingGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#SpatialIndexingMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#SpatialIndexingNotice` | `direct` | `new` | — | reviewed escape-free spatial-indexing notice | 6 | 22 | 0 | 0 | 0 | 22 | 0 | 0 | yes | — |
@@ -1729,7 +1745,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#SpatialIndexRuntime2D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SpatialIndexRuntime3D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#SpatialObjectId` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/types:interface#SpatialPair` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 8 | 4 | 0 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SpatialPair` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 10 | 4 | 0 | 14 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SpecularGlossinessPbrMaterial` | `direct` | `new` | — | reviewed escape-free specular-glossiness PBR material | 18 | 36 | 16 | 0 | 0 | 52 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SpecularPbrExtension` | `direct` | `new` | — | reviewed escape-free specular PBR extension | 7 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SphereCollider` | `direct` | `preserved` | `@flighthq/types:interface#SphereCollider` | broad asset document | 8 | 22 | 0 | 0 | 0 | 22 | 1 | 1 | yes | — |
@@ -10186,6 +10202,226 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Physics2DJointSolver` | `swapEnds` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2D.ts:709` |
 | `@flighthq/types:interface#Physics2DJointSolver` | `warmStart` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2D.ts:720` |
 | `@flighthq/types:interface#Physics2DJointSolver` | `writeReaction` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2D.ts:738` |
+| `@flighthq/types:interface#Physics3DAbi` | `createWorld` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:120` |
+| `@flighthq/types:interface#Physics3DAbi` | `destroyWorld` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:121` |
+| `@flighthq/types:interface#Physics3DAbi` | `execute` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:123` |
+| `@flighthq/types:interface#Physics3DAbi` | `getWorldStatus` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:122` |
+| `@flighthq/types:interface#Physics3DAbi` | `queryPoint` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:144` |
+| `@flighthq/types:interface#Physics3DAbi` | `queryRay` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:152` |
+| `@flighthq/types:interface#Physics3DAbi` | `queryRegion` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:165` |
+| `@flighthq/types:interface#Physics3DAbi` | `queryShapeCast` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:171` |
+| `@flighthq/types:interface#Physics3DAbi` | `readBodies` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:133` |
+| `@flighthq/types:interface#Physics3DAbi` | `readContacts` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:138` |
+| `@flighthq/types:interface#Physics3DAbi` | `readJoints` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:143` |
+| `@flighthq/types:interface#Physics3DAbi` | `step` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:128` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#Physics3DAbiContactSelection` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#Physics3DAbiExecutionStatus` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:type#Physics3DAbiObjectId` | `toExponential` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:576` |
+| `@flighthq/types:type#Physics3DAbiObjectId` | `toFixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:570` |
+| `@flighthq/types:type#Physics3DAbiObjectId` | `toLocaleString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:4578` |
+| `@flighthq/types:type#Physics3DAbiObjectId` | `toPrecision` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:582` |
+| `@flighthq/types:type#Physics3DAbiObjectId` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:564` |
+| `@flighthq/types:type#Physics3DAbiObjectId` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:585` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#Physics3DAbiStepStatus` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:type#Physics3DAbiWorldHandle` | `toExponential` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:576` |
+| `@flighthq/types:type#Physics3DAbiWorldHandle` | `toFixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:570` |
+| `@flighthq/types:type#Physics3DAbiWorldHandle` | `toLocaleString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:4578` |
+| `@flighthq/types:type#Physics3DAbiWorldHandle` | `toPrecision` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:582` |
+| `@flighthq/types:type#Physics3DAbiWorldHandle` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:564` |
+| `@flighthq/types:type#Physics3DAbiWorldHandle` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:585` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#Physics3DAbiWorldStatus` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:type#Physics3DBodyType` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#Physics3DBodyType` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#Physics3DBodyType` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -10333,13 +10569,13 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#Physics3DJointKind` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#Physics3DJointKind` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#Physics3DJointKind` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#Physics3DJointSolver` | `clearAccumulatedImpulses` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3D.ts:603` |
-| `@flighthq/types:interface#Physics3DJointSolver` | `prepare` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3D.ts:571` |
-| `@flighthq/types:interface#Physics3DJointSolver` | `scaleAccumulatedImpulses` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3D.ts:600` |
-| `@flighthq/types:interface#Physics3DJointSolver` | `solve` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3D.ts:572` |
-| `@flighthq/types:interface#Physics3DJointSolver` | `swapEnds` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3D.ts:585` |
-| `@flighthq/types:interface#Physics3DJointSolver` | `warmStart` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3D.ts:597` |
-| `@flighthq/types:interface#Physics3DJointSolver` | `writeReaction` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3D.ts:593` |
+| `@flighthq/types:interface#Physics3DJointSolver` | `clearAccumulatedImpulses` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3D.ts:629` |
+| `@flighthq/types:interface#Physics3DJointSolver` | `prepare` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3D.ts:597` |
+| `@flighthq/types:interface#Physics3DJointSolver` | `scaleAccumulatedImpulses` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3D.ts:626` |
+| `@flighthq/types:interface#Physics3DJointSolver` | `solve` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3D.ts:598` |
+| `@flighthq/types:interface#Physics3DJointSolver` | `swapEnds` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3D.ts:611` |
+| `@flighthq/types:interface#Physics3DJointSolver` | `warmStart` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3D.ts:623` |
+| `@flighthq/types:interface#Physics3DJointSolver` | `writeReaction` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3D.ts:619` |
 | `@flighthq/types:type#PixelFormat` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#PixelFormat` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#PixelFormat` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |

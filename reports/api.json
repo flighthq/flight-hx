@@ -9358,7 +9358,7 @@
               "source": "upstream/packages/collision/src/triangleMesh3D.ts"
             },
             {
-              "fingerprint": "sha256:32543b797a2195485b7ce75fb81f32e652a19042bbfd65cb6e293a9477a9bbf5",
+              "fingerprint": "sha256:22d8d3debf78ffebad26f53e2334c1c20ed956630842224e9cad3dbd2d8fcdfb",
               "kind": "function",
               "name": "collideContactManifold2D",
               "runtime": true,
@@ -10120,7 +10120,7 @@
               "source": "upstream/packages/collision/src/triangleMesh3D.ts"
             },
             {
-              "fingerprint": "sha256:32543b797a2195485b7ce75fb81f32e652a19042bbfd65cb6e293a9477a9bbf5",
+              "fingerprint": "sha256:22d8d3debf78ffebad26f53e2334c1c20ed956630842224e9cad3dbd2d8fcdfb",
               "kind": "function",
               "name": "collideContactManifold2D",
               "runtime": true,
@@ -46490,14 +46490,14 @@
               "source": "upstream/packages/physics3d/src/world.ts"
             },
             {
-              "fingerprint": "sha256:1e286e58639dc768b35eb7fb33d8fbed0a3155c52d310ec8d33d40ebd8eebc83",
+              "fingerprint": "sha256:ba8eb16853537cd7953b24751df5560a0d7ccfc522aeb2cff44afebbf16d04a5",
               "kind": "function",
               "name": "disablePhysics3DGuards",
               "runtime": true,
               "source": "upstream/packages/physics3d/src/enablePhysics3DGuards.ts"
             },
             {
-              "fingerprint": "sha256:ff371f59eb7dd9c5b40769d74984b8da44dd90e4703089182c1c0edb3851b455",
+              "fingerprint": "sha256:b5714c36ad536e037ccdab0e71d6d481055b85d73e659730506b0faa613ade3d",
               "kind": "function",
               "name": "enablePhysics3DGuards",
               "runtime": true,
@@ -46574,7 +46574,7 @@
               "source": "upstream/packages/physics3d/src/world.ts"
             },
             {
-              "fingerprint": "sha256:63e3b057f037757094094753be0cdc9fbcefe654e240daf009f8a134ae74c3ed",
+              "fingerprint": "sha256:121726dfea94bb4fbfcada4d4c76923a986a092cc4126b55d7f33ee2d2dcd36d",
               "kind": "function",
               "name": "integratePhysics3DContinuous",
               "runtime": true,
@@ -46798,7 +46798,7 @@
               "source": "upstream/packages/physics3d/src/jointRegistry.ts"
             },
             {
-              "fingerprint": "sha256:4b1fdec75f263da89329fa2c0ea1856743c5272302a4489ac95e69bff94154d0",
+              "fingerprint": "sha256:c61e289a7c72d3572553234847b341327562b56f608fbf97039629041ed9aa15",
               "kind": "function",
               "name": "removePhysics3DBody",
               "runtime": true,
@@ -46901,6 +46901,13 @@
               "name": "writePhysics3DJointReaction",
               "runtime": true,
               "source": "upstream/packages/physics3d/src/jointReaction.ts"
+            },
+            {
+              "fingerprint": "sha256:49ac12fde69f52470f05953e502e7ca28fe9f4c61d75a98ea6b75ab3589e6ce5",
+              "kind": "function",
+              "name": "writePhysics3DRotationalCcdEnvelope",
+              "runtime": true,
+              "source": "upstream/packages/physics3d/src/continuous.ts"
             },
             {
               "fingerprint": "sha256:e520afc96d52e3068a8870931051cc907d7906032cab61f1cc396531ea8f7e47",
@@ -47259,14 +47266,14 @@
               "source": "upstream/packages/physics3d/src/world.ts"
             },
             {
-              "fingerprint": "sha256:1e286e58639dc768b35eb7fb33d8fbed0a3155c52d310ec8d33d40ebd8eebc83",
+              "fingerprint": "sha256:ba8eb16853537cd7953b24751df5560a0d7ccfc522aeb2cff44afebbf16d04a5",
               "kind": "function",
               "name": "disablePhysics3DGuards",
               "runtime": true,
               "source": "upstream/packages/physics3d/src/enablePhysics3DGuards.ts"
             },
             {
-              "fingerprint": "sha256:ff371f59eb7dd9c5b40769d74984b8da44dd90e4703089182c1c0edb3851b455",
+              "fingerprint": "sha256:b5714c36ad536e037ccdab0e71d6d481055b85d73e659730506b0faa613ade3d",
               "kind": "function",
               "name": "enablePhysics3DGuards",
               "runtime": true,
@@ -47343,7 +47350,7 @@
               "source": "upstream/packages/physics3d/src/world.ts"
             },
             {
-              "fingerprint": "sha256:63e3b057f037757094094753be0cdc9fbcefe654e240daf009f8a134ae74c3ed",
+              "fingerprint": "sha256:121726dfea94bb4fbfcada4d4c76923a986a092cc4126b55d7f33ee2d2dcd36d",
               "kind": "function",
               "name": "integratePhysics3DContinuous",
               "runtime": true,
@@ -47679,7 +47686,7 @@
               "source": "upstream/packages/physics3d/src/jointRegistry.ts"
             },
             {
-              "fingerprint": "sha256:4b1fdec75f263da89329fa2c0ea1856743c5272302a4489ac95e69bff94154d0",
+              "fingerprint": "sha256:c61e289a7c72d3572553234847b341327562b56f608fbf97039629041ed9aa15",
               "kind": "function",
               "name": "removePhysics3DBody",
               "runtime": true,
@@ -47861,6 +47868,13 @@
               "source": "upstream/packages/physics3d/src/jointReaction.ts"
             },
             {
+              "fingerprint": "sha256:49ac12fde69f52470f05953e502e7ca28fe9f4c61d75a98ea6b75ab3589e6ce5",
+              "kind": "function",
+              "name": "writePhysics3DRotationalCcdEnvelope",
+              "runtime": true,
+              "source": "upstream/packages/physics3d/src/continuous.ts"
+            },
+            {
               "fingerprint": "sha256:e520afc96d52e3068a8870931051cc907d7906032cab61f1cc396531ea8f7e47",
               "kind": "function",
               "name": "writeRigidBody3DWorldCenter",
@@ -47882,6 +47896,1043 @@
         {
           "sdkLane": "@flighthq/sdk/game",
           "target": "@flighthq/physics3d"
+        }
+      ],
+      "sdkIncluded": true
+    },
+    {
+      "exportLanes": [
+        {
+          "conditions": [
+            {
+              "condition": "default",
+              "source": "upstream/packages/physics3d-abi/src/index.ts",
+              "target": "./dist/index.js"
+            },
+            {
+              "condition": "types",
+              "source": "upstream/packages/physics3d-abi/src/index.ts",
+              "target": "./dist/index.d.ts"
+            }
+          ],
+          "entry": ".",
+          "exportConflicts": [],
+          "exports": [
+            {
+              "fingerprint": "sha256:e852ee1c181d1110551db2bddd5f2d6b855939810fc334c9cd7106430d177f0b",
+              "kind": "function",
+              "name": "clearPhysics3DAbiCommandBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:daaf6bb71ef0cb1836150dca986507324cef9ee488db04e7f882db827be22ee4",
+              "kind": "function",
+              "name": "createPhysics3DAbi",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:b1fd78b6c5615f2e2a4c69847d6d647e63dab670998ecba64b7d6ab30e95c4d9",
+              "kind": "function",
+              "name": "createPhysics3DAbiBodyBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:dedfa5e7eeceea0d1ed99de26c351b7b918f65f6006174413d676122b327ca32",
+              "kind": "function",
+              "name": "createPhysics3DAbiCommandBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:b303dbaf263b6f0848f24063a2940921f3c873977d8dec2546754336b1d6e08b",
+              "kind": "function",
+              "name": "createPhysics3DAbiContactBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:4deb49dafd2400dc2c838b3746f09c75b7c842ffcb48ad25af265e19961faf52",
+              "kind": "function",
+              "name": "createPhysics3DAbiExecutionResult",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:9db20013e3cb601505d3e6c70bd6ec068a504860abc28045a487810d1330ac1d",
+              "kind": "function",
+              "name": "createPhysics3DAbiJointBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:83b29cbd811e7cdd698a329b589fecddd194ae3b8a8cf049eaa52c181e585792",
+              "kind": "function",
+              "name": "createPhysics3DAbiQueryBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:835e0d1fa83cb69c93f2aacd42f076d3513c3189620a769236b7987c49b686db",
+              "kind": "function",
+              "name": "createPhysics3DAbiWorld",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:e959087e1c7fb2850a48d6ca5aa01372f1bacb29463bbf8c5e967de437727e08",
+              "kind": "function",
+              "name": "destroyPhysics3DAbiWorld",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:80b7f98b4b24b3b6d066503f452d082c5258a4b19af0f828549bcc7a1f95c729",
+              "kind": "function",
+              "name": "executePhysics3DAbiCommands",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:1ee12364aa01e0f2ad814ca22a8ec189d1bf4573f5502525cd988a218d9f72b9",
+              "kind": "function",
+              "name": "getPhysics3DAbiCommandBufferRemainingByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:5b4eea19a799bea667b7341f70e167d09c3297e3bc92c7765253802c7604cbf5",
+              "kind": "function",
+              "name": "getPhysics3DAbiSetColliderCommandByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:213bdc55b430e7155c25cc60220ee33683f33d93b00aa6d2df8c6d3997c08f34",
+              "kind": "function",
+              "name": "getPhysics3DAbiWorldStatus",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:0c5eb30f803b4cbbd0e19d179441f3cf7233827549e8fa705273b9c7dfc98077",
+              "kind": "variable",
+              "name": "Physics3DAbiBodyFlag",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:a204cb3646bba9a1b6a13349c40a92f6a53deeffece279b651526c1fed2da3d0",
+              "kind": "variable",
+              "name": "Physics3DAbiBodyType",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:3c96b847ff22c1c8ddd017ff991c2a4135387c0a94729b8c1d071d69ecc12b78",
+              "kind": "variable",
+              "name": "Physics3DAbiBodyValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:f28de640c13c83a5df184a9bf43db26eb017a98b0cac73f0f859af43c1cef2ea",
+              "kind": "variable",
+              "name": "Physics3DAbiBodyValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:af7eab5a8425099878b2857a08491116d324c090bdd8e6931b87602bd238d02b",
+              "kind": "variable",
+              "name": "Physics3DAbiCapability",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:1c05bbea4eae9302f36c13d1417bc689f341da10ef3e9cce9f29d0baad2bbd56",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:66c8c5e5fa1f48c26e46014bdb7a41d2af109fa3fc4ad80e45dac407a1479cc9",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandHeaderByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:44a066d506d000256f6ff56df3c29b37e3bff20f19cc7c3cd666648e67a5b41e",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandHeaderOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:1799628a15c93698a776d99522b1ba93d976db05da1ebda2d2e135a412bbf860",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandKind",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:457f4c303bde47162f497d62608b7bef38f01d73b0d76738bc4973b62f2b645c",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandMagic",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:d28fe01a80fea0862f0d103e2ce320f7c117cae9747ca2ac198fde6e3ae7cde8",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandRecordHeaderByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:e3ec865d45addb96b14ccada94829f847df7c368ad69bbb5788787811ddd4219",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandRecordOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:0a2e1100201d3977051d2df1a767dfe79a17bb3fa1c92cf34b071b4e032cec73",
+              "kind": "variable",
+              "name": "Physics3DAbiContactFlag",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:a9f59d6cb4694ba744f8d422241a708366535fa4cc53856df987be0e15448a85",
+              "kind": "variable",
+              "name": "Physics3DAbiContactId",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:5340f0a5fff34d69841226284da87efa151c79c199dd0c5ea2cc81972f17b0b9",
+              "kind": "variable",
+              "name": "Physics3DAbiContactIdStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:0bbfd34c4463e25cba3169d0d34d0a179b3fcb921b17106f7ff5332d19a884da",
+              "kind": "variable",
+              "name": "Physics3DAbiContactPointValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:b1c59aeb5b7c02284c629677cac9b887e9d6da118ed5d20eb9afe55e61f34b21",
+              "kind": "variable",
+              "name": "Physics3DAbiContactPointValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:357b5e675448256b01d45f4672470d9a018faefb43bd9e28729d7a548171344a",
+              "kind": "variable",
+              "name": "Physics3DAbiContactValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:be27d23238d94897c03b2879f8a10fc403e528ace7ed52b437cc9271809e90ad",
+              "kind": "variable",
+              "name": "Physics3DAbiContactValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:a177aba23d14d03f18f08af91fa2095f0233c11ceda472773d443724dbb9c3ab",
+              "kind": "variable",
+              "name": "Physics3DAbiJointFlag",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:d512cb9bc648288e6f86a231dea051563cd2ce0021c5030a8881aa4883405930",
+              "kind": "variable",
+              "name": "Physics3DAbiJointKind",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:f34de3a6d47b51dba25f71d69ec318527414ab50be93bc41fbdb3cfe365bfc07",
+              "kind": "variable",
+              "name": "Physics3DAbiJointValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:d9848ddba9d00fbbb183e5331251692041489fb2672f9d29be2c6efd505e84fb",
+              "kind": "variable",
+              "name": "Physics3DAbiJointValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:33e7b0e8be25a12467db8bccd9779587e661d00ec94d15c37b1f8239643cb596",
+              "kind": "variable",
+              "name": "Physics3DAbiQueryValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:1e138055f497f93d6afd465d47addb2e53f62a6f9502564894cb3081b455dd28",
+              "kind": "variable",
+              "name": "Physics3DAbiQueryValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:069214b1003637dd20408a18a960cc62143be168c0a0944d0d78aae4bdac29c4",
+              "kind": "variable",
+              "name": "Physics3DAbiSetBodyPayloadOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:194636f87b6e51cf3421596fb7f6ffc0d809121aac30190638e7576a892f28f9",
+              "kind": "variable",
+              "name": "Physics3DAbiSetColliderPayloadOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:77b9aacb84df7d19d710d33001de37ccc3ab131d33ddb592fbeb89bbd07a5c37",
+              "kind": "variable",
+              "name": "Physics3DAbiSetJointPayloadOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:f37468f33d9901dce271b497b708f2f78f0948dac932982f285907394925cf54",
+              "kind": "variable",
+              "name": "Physics3DAbiSetSolverConfigPayloadOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:522edec1406bda6977abe3d936a98ac9a07a310910bc62d49c72e33a6b00f0e9",
+              "kind": "variable",
+              "name": "Physics3DAbiShapeHeaderByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:df093faf36ea91e4f1254f077e58d916eaeb47563407a1ab473863cf753ce39d",
+              "kind": "variable",
+              "name": "Physics3DAbiShapeHeaderOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:5977afefb62fe1b947582d24be18093dd3daba505eb5918266098065425f4b24",
+              "kind": "variable",
+              "name": "Physics3DAbiShapeKind",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:b06d7caf9c31da0408e730cbcd41fafc5370a47e252fe29ba18534736f6d2655",
+              "kind": "variable",
+              "name": "Physics3DAbiVersion",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:add64885c319b84e3bec5df8302edaf3ddd2c5f4a411896aec5592d6f77f9028",
+              "kind": "function",
+              "name": "queryPhysics3DAbiPoint",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
+              "fingerprint": "sha256:06b3191ace7a6805ade40f5ba6aea139796e502259eb7991cabda9e6edb862ec",
+              "kind": "function",
+              "name": "queryPhysics3DAbiRay",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
+              "fingerprint": "sha256:aa6eb1b8e5ebaec7838eccd5fb3b5367d4c10142768db1f93dbd80f742817a68",
+              "kind": "function",
+              "name": "queryPhysics3DAbiRayClosest",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
+              "fingerprint": "sha256:02b287457bcb538cf524d26d204339cdb89f2aa5f36578085385a3a522579f04",
+              "kind": "function",
+              "name": "queryPhysics3DAbiRegion",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
+              "fingerprint": "sha256:3db086b8a71ff92674752577cc1e18def20d760932ce76ba5f5247b99da29f1c",
+              "kind": "function",
+              "name": "queryPhysics3DAbiShapeCast",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
+              "fingerprint": "sha256:ef1410a77c7593599d970f43113cc6a188b179b9fc92432ba28b8451194a0779",
+              "kind": "function",
+              "name": "readPhysics3DAbiBodies",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:140979aeedaf27dd06d1dae9f6daa815e0f49ed89fcd8704db47babc57a0ab73",
+              "kind": "function",
+              "name": "readPhysics3DAbiContacts",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:f75833bf0a2909b301e581ce98da298ffda9df2485db6f3675a5b28704ff667e",
+              "kind": "function",
+              "name": "readPhysics3DAbiJoints",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:974feb9aafcceadc49572d4f2b778dcdfbffd4705821bb3203e9647749201d49",
+              "kind": "function",
+              "name": "stepPhysics3DAbiWorld",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:e7c3438367062c2bc4fcb329d2d92fd23b3527bd7729896b7ec3804a19efd03c",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyForceAtPointCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:601325a2c0527e8dffda272a27fd38a8e712f1abe69393a02bc7c7c9a236ca1e",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyForceCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:802528285e1572b9740cd6a7143711228a8d7d8282b74f3bc5bd77d93929ca9e",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyLinearImpulseAtPointCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:f2cb2d499455475292a15223cdcbb21a55f31e5f5af7a861819567ecdfac5a9f",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyLinearImpulseCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:0b9a9f9ab674278a96101bf677fbc49e8ad822bd1371dbbc951001cd2bca0943",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyTorqueCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:a40784fcbc4c1509d2b673363e95c0e47e6c7451072f0afa5a5beb0e6cdbcf6c",
+              "kind": "function",
+              "name": "writePhysics3DAbiDestroyBodyCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:ffb831ac8fc3772d9e617299dba8893313df5b1ee6528a66e396bf318752f2d2",
+              "kind": "function",
+              "name": "writePhysics3DAbiDestroyColliderCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:a98c4f367265ab746361d0d1c08061d486c63b2360812a3630bf3a213b417d64",
+              "kind": "function",
+              "name": "writePhysics3DAbiDestroyJointCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:fc1821e10497f2a9c97aa0c82531a2e0fb98e502c7a5aa5ddc7382ec9c6fa327",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetBodyCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:884173884028f17fd6189608eb73617cbaafb9fcd17f68bc2fcc06a8314ba443",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetColliderCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:d53c6ce5edb6d78a46d6f2cabcde6bfcd282f0722510b9f0b5d04a5c40464798",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetGravityCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:32f922863a67c9be9d1e95ad48df914e561a36c1c415bd59b72ace33d5602698",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetJointCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:01f0ba58325b9890a5373593dbbdeb54d9096a76e4753bef306c590f7e8a0598",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetSolverConfigCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:fed9e0f7c2dbead137aa3442d14e2b076adbf1a28c7628d3171c902ba24e7bb0",
+              "kind": "function",
+              "name": "writePhysics3DAbiWakeBodyCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            }
+          ],
+          "source": "upstream/packages/physics3d-abi/src/index.ts",
+          "specifier": "@flighthq/physics3d-abi"
+        },
+        {
+          "conditions": [
+            {
+              "condition": "default",
+              "source": "upstream/packages/physics3d-abi/src/contract.ts",
+              "target": "./dist/contract.js"
+            },
+            {
+              "condition": "types",
+              "source": "upstream/packages/physics3d-abi/src/contract.ts",
+              "target": "./dist/contract.d.ts"
+            }
+          ],
+          "entry": "./contract",
+          "exportConflicts": [],
+          "exports": [
+            {
+              "fingerprint": "sha256:e852ee1c181d1110551db2bddd5f2d6b855939810fc334c9cd7106430d177f0b",
+              "kind": "function",
+              "name": "clearPhysics3DAbiCommandBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:daaf6bb71ef0cb1836150dca986507324cef9ee488db04e7f882db827be22ee4",
+              "kind": "function",
+              "name": "createPhysics3DAbi",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:b1fd78b6c5615f2e2a4c69847d6d647e63dab670998ecba64b7d6ab30e95c4d9",
+              "kind": "function",
+              "name": "createPhysics3DAbiBodyBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:dedfa5e7eeceea0d1ed99de26c351b7b918f65f6006174413d676122b327ca32",
+              "kind": "function",
+              "name": "createPhysics3DAbiCommandBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:b303dbaf263b6f0848f24063a2940921f3c873977d8dec2546754336b1d6e08b",
+              "kind": "function",
+              "name": "createPhysics3DAbiContactBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:4deb49dafd2400dc2c838b3746f09c75b7c842ffcb48ad25af265e19961faf52",
+              "kind": "function",
+              "name": "createPhysics3DAbiExecutionResult",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:9db20013e3cb601505d3e6c70bd6ec068a504860abc28045a487810d1330ac1d",
+              "kind": "function",
+              "name": "createPhysics3DAbiJointBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:83b29cbd811e7cdd698a329b589fecddd194ae3b8a8cf049eaa52c181e585792",
+              "kind": "function",
+              "name": "createPhysics3DAbiQueryBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:835e0d1fa83cb69c93f2aacd42f076d3513c3189620a769236b7987c49b686db",
+              "kind": "function",
+              "name": "createPhysics3DAbiWorld",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:e959087e1c7fb2850a48d6ca5aa01372f1bacb29463bbf8c5e967de437727e08",
+              "kind": "function",
+              "name": "destroyPhysics3DAbiWorld",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:80b7f98b4b24b3b6d066503f452d082c5258a4b19af0f828549bcc7a1f95c729",
+              "kind": "function",
+              "name": "executePhysics3DAbiCommands",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:1ee12364aa01e0f2ad814ca22a8ec189d1bf4573f5502525cd988a218d9f72b9",
+              "kind": "function",
+              "name": "getPhysics3DAbiCommandBufferRemainingByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:5b4eea19a799bea667b7341f70e167d09c3297e3bc92c7765253802c7604cbf5",
+              "kind": "function",
+              "name": "getPhysics3DAbiSetColliderCommandByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:213bdc55b430e7155c25cc60220ee33683f33d93b00aa6d2df8c6d3997c08f34",
+              "kind": "function",
+              "name": "getPhysics3DAbiWorldStatus",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:0c5eb30f803b4cbbd0e19d179441f3cf7233827549e8fa705273b9c7dfc98077",
+              "kind": "variable",
+              "name": "Physics3DAbiBodyFlag",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:a204cb3646bba9a1b6a13349c40a92f6a53deeffece279b651526c1fed2da3d0",
+              "kind": "variable",
+              "name": "Physics3DAbiBodyType",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:3c96b847ff22c1c8ddd017ff991c2a4135387c0a94729b8c1d071d69ecc12b78",
+              "kind": "variable",
+              "name": "Physics3DAbiBodyValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:f28de640c13c83a5df184a9bf43db26eb017a98b0cac73f0f859af43c1cef2ea",
+              "kind": "variable",
+              "name": "Physics3DAbiBodyValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:af7eab5a8425099878b2857a08491116d324c090bdd8e6931b87602bd238d02b",
+              "kind": "variable",
+              "name": "Physics3DAbiCapability",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:1c05bbea4eae9302f36c13d1417bc689f341da10ef3e9cce9f29d0baad2bbd56",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:66c8c5e5fa1f48c26e46014bdb7a41d2af109fa3fc4ad80e45dac407a1479cc9",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandHeaderByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:44a066d506d000256f6ff56df3c29b37e3bff20f19cc7c3cd666648e67a5b41e",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandHeaderOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:1799628a15c93698a776d99522b1ba93d976db05da1ebda2d2e135a412bbf860",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandKind",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:457f4c303bde47162f497d62608b7bef38f01d73b0d76738bc4973b62f2b645c",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandMagic",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:d28fe01a80fea0862f0d103e2ce320f7c117cae9747ca2ac198fde6e3ae7cde8",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandRecordHeaderByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:e3ec865d45addb96b14ccada94829f847df7c368ad69bbb5788787811ddd4219",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandRecordOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:0a2e1100201d3977051d2df1a767dfe79a17bb3fa1c92cf34b071b4e032cec73",
+              "kind": "variable",
+              "name": "Physics3DAbiContactFlag",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:a9f59d6cb4694ba744f8d422241a708366535fa4cc53856df987be0e15448a85",
+              "kind": "variable",
+              "name": "Physics3DAbiContactId",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:5340f0a5fff34d69841226284da87efa151c79c199dd0c5ea2cc81972f17b0b9",
+              "kind": "variable",
+              "name": "Physics3DAbiContactIdStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:0bbfd34c4463e25cba3169d0d34d0a179b3fcb921b17106f7ff5332d19a884da",
+              "kind": "variable",
+              "name": "Physics3DAbiContactPointValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:b1c59aeb5b7c02284c629677cac9b887e9d6da118ed5d20eb9afe55e61f34b21",
+              "kind": "variable",
+              "name": "Physics3DAbiContactPointValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:357b5e675448256b01d45f4672470d9a018faefb43bd9e28729d7a548171344a",
+              "kind": "variable",
+              "name": "Physics3DAbiContactValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:be27d23238d94897c03b2879f8a10fc403e528ace7ed52b437cc9271809e90ad",
+              "kind": "variable",
+              "name": "Physics3DAbiContactValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:a177aba23d14d03f18f08af91fa2095f0233c11ceda472773d443724dbb9c3ab",
+              "kind": "variable",
+              "name": "Physics3DAbiJointFlag",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:d512cb9bc648288e6f86a231dea051563cd2ce0021c5030a8881aa4883405930",
+              "kind": "variable",
+              "name": "Physics3DAbiJointKind",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:f34de3a6d47b51dba25f71d69ec318527414ab50be93bc41fbdb3cfe365bfc07",
+              "kind": "variable",
+              "name": "Physics3DAbiJointValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:d9848ddba9d00fbbb183e5331251692041489fb2672f9d29be2c6efd505e84fb",
+              "kind": "variable",
+              "name": "Physics3DAbiJointValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:33e7b0e8be25a12467db8bccd9779587e661d00ec94d15c37b1f8239643cb596",
+              "kind": "variable",
+              "name": "Physics3DAbiQueryValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:1e138055f497f93d6afd465d47addb2e53f62a6f9502564894cb3081b455dd28",
+              "kind": "variable",
+              "name": "Physics3DAbiQueryValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:069214b1003637dd20408a18a960cc62143be168c0a0944d0d78aae4bdac29c4",
+              "kind": "variable",
+              "name": "Physics3DAbiSetBodyPayloadOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:194636f87b6e51cf3421596fb7f6ffc0d809121aac30190638e7576a892f28f9",
+              "kind": "variable",
+              "name": "Physics3DAbiSetColliderPayloadOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:77b9aacb84df7d19d710d33001de37ccc3ab131d33ddb592fbeb89bbd07a5c37",
+              "kind": "variable",
+              "name": "Physics3DAbiSetJointPayloadOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:f37468f33d9901dce271b497b708f2f78f0948dac932982f285907394925cf54",
+              "kind": "variable",
+              "name": "Physics3DAbiSetSolverConfigPayloadOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:522edec1406bda6977abe3d936a98ac9a07a310910bc62d49c72e33a6b00f0e9",
+              "kind": "variable",
+              "name": "Physics3DAbiShapeHeaderByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:df093faf36ea91e4f1254f077e58d916eaeb47563407a1ab473863cf753ce39d",
+              "kind": "variable",
+              "name": "Physics3DAbiShapeHeaderOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:5977afefb62fe1b947582d24be18093dd3daba505eb5918266098065425f4b24",
+              "kind": "variable",
+              "name": "Physics3DAbiShapeKind",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:b06d7caf9c31da0408e730cbcd41fafc5370a47e252fe29ba18534736f6d2655",
+              "kind": "variable",
+              "name": "Physics3DAbiVersion",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:add64885c319b84e3bec5df8302edaf3ddd2c5f4a411896aec5592d6f77f9028",
+              "kind": "function",
+              "name": "queryPhysics3DAbiPoint",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
+              "fingerprint": "sha256:06b3191ace7a6805ade40f5ba6aea139796e502259eb7991cabda9e6edb862ec",
+              "kind": "function",
+              "name": "queryPhysics3DAbiRay",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
+              "fingerprint": "sha256:aa6eb1b8e5ebaec7838eccd5fb3b5367d4c10142768db1f93dbd80f742817a68",
+              "kind": "function",
+              "name": "queryPhysics3DAbiRayClosest",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
+              "fingerprint": "sha256:02b287457bcb538cf524d26d204339cdb89f2aa5f36578085385a3a522579f04",
+              "kind": "function",
+              "name": "queryPhysics3DAbiRegion",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
+              "fingerprint": "sha256:3db086b8a71ff92674752577cc1e18def20d760932ce76ba5f5247b99da29f1c",
+              "kind": "function",
+              "name": "queryPhysics3DAbiShapeCast",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
+              "fingerprint": "sha256:ef1410a77c7593599d970f43113cc6a188b179b9fc92432ba28b8451194a0779",
+              "kind": "function",
+              "name": "readPhysics3DAbiBodies",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:140979aeedaf27dd06d1dae9f6daa815e0f49ed89fcd8704db47babc57a0ab73",
+              "kind": "function",
+              "name": "readPhysics3DAbiContacts",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:f75833bf0a2909b301e581ce98da298ffda9df2485db6f3675a5b28704ff667e",
+              "kind": "function",
+              "name": "readPhysics3DAbiJoints",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:974feb9aafcceadc49572d4f2b778dcdfbffd4705821bb3203e9647749201d49",
+              "kind": "function",
+              "name": "stepPhysics3DAbiWorld",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:e7c3438367062c2bc4fcb329d2d92fd23b3527bd7729896b7ec3804a19efd03c",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyForceAtPointCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:601325a2c0527e8dffda272a27fd38a8e712f1abe69393a02bc7c7c9a236ca1e",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyForceCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:802528285e1572b9740cd6a7143711228a8d7d8282b74f3bc5bd77d93929ca9e",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyLinearImpulseAtPointCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:f2cb2d499455475292a15223cdcbb21a55f31e5f5af7a861819567ecdfac5a9f",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyLinearImpulseCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:0b9a9f9ab674278a96101bf677fbc49e8ad822bd1371dbbc951001cd2bca0943",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyTorqueCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:a40784fcbc4c1509d2b673363e95c0e47e6c7451072f0afa5a5beb0e6cdbcf6c",
+              "kind": "function",
+              "name": "writePhysics3DAbiDestroyBodyCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:ffb831ac8fc3772d9e617299dba8893313df5b1ee6528a66e396bf318752f2d2",
+              "kind": "function",
+              "name": "writePhysics3DAbiDestroyColliderCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:a98c4f367265ab746361d0d1c08061d486c63b2360812a3630bf3a213b417d64",
+              "kind": "function",
+              "name": "writePhysics3DAbiDestroyJointCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:fc1821e10497f2a9c97aa0c82531a2e0fb98e502c7a5aa5ddc7382ec9c6fa327",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetBodyCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:884173884028f17fd6189608eb73617cbaafb9fcd17f68bc2fcc06a8314ba443",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetColliderCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:d53c6ce5edb6d78a46d6f2cabcde6bfcd282f0722510b9f0b5d04a5c40464798",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetGravityCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:32f922863a67c9be9d1e95ad48df914e561a36c1c415bd59b72ace33d5602698",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetJointCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:01f0ba58325b9890a5373593dbbdeb54d9096a76e4753bef306c590f7e8a0598",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetSolverConfigCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:fed9e0f7c2dbead137aa3442d14e2b076adbf1a28c7628d3171c902ba24e7bb0",
+              "kind": "function",
+              "name": "writePhysics3DAbiWakeBodyCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            }
+          ],
+          "source": "upstream/packages/physics3d-abi/src/contract.ts",
+          "specifier": "@flighthq/physics3d-abi/contract"
+        }
+      ],
+      "haxeModule": "flighthq.physics3dAbi.Physics3dAbi",
+      "name": "@flighthq/physics3d-abi",
+      "sdkExposures": [
+        {
+          "sdkLane": "@flighthq/sdk",
+          "target": "@flighthq/physics3d-abi"
+        },
+        {
+          "sdkLane": "@flighthq/sdk/game",
+          "target": "@flighthq/physics3d-abi"
         }
       ],
       "sdkIncluded": true
@@ -67913,6 +68964,13 @@
               "source": "upstream/packages/particleemitter/src/particleEmitter3D.ts"
             },
             {
+              "fingerprint": "sha256:e852ee1c181d1110551db2bddd5f2d6b855939810fc334c9cd7106430d177f0b",
+              "kind": "function",
+              "name": "clearPhysics3DAbiCommandBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
               "fingerprint": "sha256:087aa4e7b4cff85a1c33db12f663237d84c79de23ffaddc32b205d4d1079a4e2",
               "kind": "function",
               "name": "clearPhysics3DJointReaction",
@@ -68704,7 +69762,7 @@
               "source": "upstream/packages/collision/src/triangleMesh3D.ts"
             },
             {
-              "fingerprint": "sha256:32543b797a2195485b7ce75fb81f32e652a19042bbfd65cb6e293a9477a9bbf5",
+              "fingerprint": "sha256:22d8d3debf78ffebad26f53e2334c1c20ed956630842224e9cad3dbd2d8fcdfb",
               "kind": "function",
               "name": "collideContactManifold2D",
               "runtime": true,
@@ -71190,7 +72248,7 @@
               "source": "upstream/packages/scene3d-resources/src/sceneResourceResolver.ts"
             },
             {
-              "fingerprint": "sha256:897d516c0786306c6fa37311008905e242634b89824b5d4ce8576d5d5bdd4441",
+              "fingerprint": "sha256:9d3e1c6642ddc1a21e7555cda0411f36286eabab5590524360c218508a7621f8",
               "kind": "function",
               "name": "createBvhSpatialBackend3D",
               "runtime": true,
@@ -72833,6 +73891,62 @@
               "name": "createPhysics2DWorld",
               "runtime": true,
               "source": "upstream/packages/physics2d/src/world.ts"
+            },
+            {
+              "fingerprint": "sha256:daaf6bb71ef0cb1836150dca986507324cef9ee488db04e7f882db827be22ee4",
+              "kind": "function",
+              "name": "createPhysics3DAbi",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:b1fd78b6c5615f2e2a4c69847d6d647e63dab670998ecba64b7d6ab30e95c4d9",
+              "kind": "function",
+              "name": "createPhysics3DAbiBodyBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:dedfa5e7eeceea0d1ed99de26c351b7b918f65f6006174413d676122b327ca32",
+              "kind": "function",
+              "name": "createPhysics3DAbiCommandBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:b303dbaf263b6f0848f24063a2940921f3c873977d8dec2546754336b1d6e08b",
+              "kind": "function",
+              "name": "createPhysics3DAbiContactBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:4deb49dafd2400dc2c838b3746f09c75b7c842ffcb48ad25af265e19961faf52",
+              "kind": "function",
+              "name": "createPhysics3DAbiExecutionResult",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:9db20013e3cb601505d3e6c70bd6ec068a504860abc28045a487810d1330ac1d",
+              "kind": "function",
+              "name": "createPhysics3DAbiJointBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:83b29cbd811e7cdd698a329b589fecddd194ae3b8a8cf049eaa52c181e585792",
+              "kind": "function",
+              "name": "createPhysics3DAbiQueryBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:835e0d1fa83cb69c93f2aacd42f076d3513c3189620a769236b7987c49b686db",
+              "kind": "function",
+              "name": "createPhysics3DAbiWorld",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
             },
             {
               "fingerprint": "sha256:fbb2a74e03e5756086853610492698763c0169c488c1baacc550b635f9e534ee",
@@ -76013,6 +77127,13 @@
               "source": "upstream/packages/mesh/src/meshGeometry.ts"
             },
             {
+              "fingerprint": "sha256:e959087e1c7fb2850a48d6ca5aa01372f1bacb29463bbf8c5e967de437727e08",
+              "kind": "function",
+              "name": "destroyPhysics3DAbiWorld",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
               "fingerprint": "sha256:d6c19de0b4c32397b5da375299e26a2d7aab4bf4afcecc79bcacb65905599e75",
               "kind": "function",
               "name": "destroyRenderState",
@@ -76615,7 +77736,7 @@
               "source": "upstream/packages/physics2d/src/enablePhysics2DGuards.ts"
             },
             {
-              "fingerprint": "sha256:1e286e58639dc768b35eb7fb33d8fbed0a3155c52d310ec8d33d40ebd8eebc83",
+              "fingerprint": "sha256:ba8eb16853537cd7953b24751df5560a0d7ccfc522aeb2cff44afebbf16d04a5",
               "kind": "function",
               "name": "disablePhysics3DGuards",
               "runtime": true,
@@ -78524,7 +79645,7 @@
               "source": "upstream/packages/physics2d/src/enablePhysics2DGuards.ts"
             },
             {
-              "fingerprint": "sha256:ff371f59eb7dd9c5b40769d74984b8da44dd90e4703089182c1c0edb3851b455",
+              "fingerprint": "sha256:b5714c36ad536e037ccdab0e71d6d481055b85d73e659730506b0faa613ade3d",
               "kind": "function",
               "name": "enablePhysics3DGuards",
               "runtime": true,
@@ -79180,6 +80301,13 @@
               "name": "evaluatePhysics3DJointBreakage",
               "runtime": true,
               "source": "upstream/packages/physics3d/src/jointBreakage.ts"
+            },
+            {
+              "fingerprint": "sha256:80b7f98b4b24b3b6d066503f452d082c5258a4b19af0f828549bcc7a1f95c729",
+              "kind": "function",
+              "name": "executePhysics3DAbiCommands",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
             },
             {
               "fingerprint": "sha256:63210f4392e35f58213aecc96f101c028fc8db618d5183f19de33281200a179a",
@@ -80496,7 +81624,7 @@
               "source": "upstream/packages/shape-formats/src/shapeJson.ts"
             },
             {
-              "fingerprint": "sha256:e03c250dcb83d5443af1e0c8dd132edc6ff34c7c37ab433f46dbf46211d79121",
+              "fingerprint": "sha256:1822ccfa981d7ef29ebed3d2864c0e852ab2c5494fd952cdf92815a61a6cf495",
               "kind": "function",
               "name": "formatSpatialIndexingNotice",
               "runtime": true,
@@ -83045,6 +84173,27 @@
               "name": "getPhysics2DJointSolver",
               "runtime": true,
               "source": "upstream/packages/physics2d/src/jointRegistry.ts"
+            },
+            {
+              "fingerprint": "sha256:1ee12364aa01e0f2ad814ca22a8ec189d1bf4573f5502525cd988a218d9f72b9",
+              "kind": "function",
+              "name": "getPhysics3DAbiCommandBufferRemainingByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:5b4eea19a799bea667b7341f70e167d09c3297e3bc92c7765253802c7604cbf5",
+              "kind": "function",
+              "name": "getPhysics3DAbiSetColliderCommandByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:213bdc55b430e7155c25cc60220ee33683f33d93b00aa6d2df8c6d3997c08f34",
+              "kind": "function",
+              "name": "getPhysics3DAbiWorldStatus",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
             },
             {
               "fingerprint": "sha256:cc17f648927536185dc339e3b742c70b860f7ccb9147be413b1c02f8cdfbf1a4",
@@ -87484,7 +88633,7 @@
               "source": "upstream/packages/types/src/InstancedMesh.ts"
             },
             {
-              "fingerprint": "sha256:63e3b057f037757094094753be0cdc9fbcefe654e240daf009f8a134ae74c3ed",
+              "fingerprint": "sha256:121726dfea94bb4fbfcada4d4c76923a986a092cc4126b55d7f33ee2d2dcd36d",
               "kind": "function",
               "name": "integratePhysics3DContinuous",
               "runtime": true,
@@ -93905,6 +95054,342 @@
               "source": "upstream/packages/physics2d/src/world.ts"
             },
             {
+              "fingerprint": "sha256:2d2ff2058241c552f9fbae4d75e70fdb7cb599cc1758b241875360a016d606bf",
+              "kind": "interface",
+              "name": "Physics3DAbi",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:12a0644da563b2ee03d54d165a4f82450dc0c2c3f0b91efcf202796d89a86966",
+              "kind": "interface",
+              "name": "Physics3DAbiBodyBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:0c5eb30f803b4cbbd0e19d179441f3cf7233827549e8fa705273b9c7dfc98077",
+              "kind": "variable",
+              "name": "Physics3DAbiBodyFlag",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:a204cb3646bba9a1b6a13349c40a92f6a53deeffece279b651526c1fed2da3d0",
+              "kind": "variable",
+              "name": "Physics3DAbiBodyType",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:3c96b847ff22c1c8ddd017ff991c2a4135387c0a94729b8c1d071d69ecc12b78",
+              "kind": "variable",
+              "name": "Physics3DAbiBodyValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:f28de640c13c83a5df184a9bf43db26eb017a98b0cac73f0f859af43c1cef2ea",
+              "kind": "variable",
+              "name": "Physics3DAbiBodyValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:af7eab5a8425099878b2857a08491116d324c090bdd8e6931b87602bd238d02b",
+              "kind": "variable",
+              "name": "Physics3DAbiCapability",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:344bf545e06f4e1231e04047048a038aa36ce6c322e2dcb7a7952c66f10b1476",
+              "kind": "interface",
+              "name": "Physics3DAbiCommandBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:1c05bbea4eae9302f36c13d1417bc689f341da10ef3e9cce9f29d0baad2bbd56",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:66c8c5e5fa1f48c26e46014bdb7a41d2af109fa3fc4ad80e45dac407a1479cc9",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandHeaderByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:44a066d506d000256f6ff56df3c29b37e3bff20f19cc7c3cd666648e67a5b41e",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandHeaderOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:1799628a15c93698a776d99522b1ba93d976db05da1ebda2d2e135a412bbf860",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandKind",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:457f4c303bde47162f497d62608b7bef38f01d73b0d76738bc4973b62f2b645c",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandMagic",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:d28fe01a80fea0862f0d103e2ce320f7c117cae9747ca2ac198fde6e3ae7cde8",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandRecordHeaderByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:e3ec865d45addb96b14ccada94829f847df7c368ad69bbb5788787811ddd4219",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandRecordOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:8c8cfb7227ae63c538fd07f3e9812decc564d7e6a15be244c2e15578ebd43c4e",
+              "kind": "interface",
+              "name": "Physics3DAbiContactBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:0a2e1100201d3977051d2df1a767dfe79a17bb3fa1c92cf34b071b4e032cec73",
+              "kind": "variable",
+              "name": "Physics3DAbiContactFlag",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:30d4834f2a643f5ba36a43b51788ff4522e3ec7c491a352a599d585b0e2a1816",
+              "kind": "type",
+              "name": "Physics3DAbiContactHook",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:39fa096a0116e610a50835a085a2034e132dca54573c19203348e8b450e5cdaa",
+              "kind": "interface",
+              "name": "Physics3DAbiContactHooks",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:a9f59d6cb4694ba744f8d422241a708366535fa4cc53856df987be0e15448a85",
+              "kind": "variable",
+              "name": "Physics3DAbiContactId",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:5340f0a5fff34d69841226284da87efa151c79c199dd0c5ea2cc81972f17b0b9",
+              "kind": "variable",
+              "name": "Physics3DAbiContactIdStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:0bbfd34c4463e25cba3169d0d34d0a179b3fcb921b17106f7ff5332d19a884da",
+              "kind": "variable",
+              "name": "Physics3DAbiContactPointValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:b1c59aeb5b7c02284c629677cac9b887e9d6da118ed5d20eb9afe55e61f34b21",
+              "kind": "variable",
+              "name": "Physics3DAbiContactPointValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:7a2bee6b216ffc4a42ce736e4f14a2a3dd5a3ec764e160fb7fbfdd9ef39982cd",
+              "kind": "type",
+              "name": "Physics3DAbiContactSelection",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:357b5e675448256b01d45f4672470d9a018faefb43bd9e28729d7a548171344a",
+              "kind": "variable",
+              "name": "Physics3DAbiContactValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:be27d23238d94897c03b2879f8a10fc403e528ace7ed52b437cc9271809e90ad",
+              "kind": "variable",
+              "name": "Physics3DAbiContactValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:e232874df593acd78d53e3976d1775517dc020564d8ee4cb42d2c27e4b4c4c36",
+              "kind": "interface",
+              "name": "Physics3DAbiExecutionResult",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:8a35dc161d0b0b563a22a9816b6e3c724357755d640886f7f21380fc34e3fb12",
+              "kind": "type",
+              "name": "Physics3DAbiExecutionStatus",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:fd9990b1ea1d2d95da9a48ffe73617a18a78364b58f571f88d9e86bbaa225d61",
+              "kind": "interface",
+              "name": "Physics3DAbiJointBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:a177aba23d14d03f18f08af91fa2095f0233c11ceda472773d443724dbb9c3ab",
+              "kind": "variable",
+              "name": "Physics3DAbiJointFlag",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:d512cb9bc648288e6f86a231dea051563cd2ce0021c5030a8881aa4883405930",
+              "kind": "variable",
+              "name": "Physics3DAbiJointKind",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:f34de3a6d47b51dba25f71d69ec318527414ab50be93bc41fbdb3cfe365bfc07",
+              "kind": "variable",
+              "name": "Physics3DAbiJointValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:d9848ddba9d00fbbb183e5331251692041489fb2672f9d29be2c6efd505e84fb",
+              "kind": "variable",
+              "name": "Physics3DAbiJointValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:08d16ffaacd477fee129e301dda7d6155e68a7f168c3ed03e4d1fb2462d631b5",
+              "kind": "type",
+              "name": "Physics3DAbiObjectId",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:821df23149ae8b3765a926b09e971b64583f169a123723d6d18539453b27ec00",
+              "kind": "interface",
+              "name": "Physics3DAbiQueryBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:33e7b0e8be25a12467db8bccd9779587e661d00ec94d15c37b1f8239643cb596",
+              "kind": "variable",
+              "name": "Physics3DAbiQueryValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:1e138055f497f93d6afd465d47addb2e53f62a6f9502564894cb3081b455dd28",
+              "kind": "variable",
+              "name": "Physics3DAbiQueryValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:069214b1003637dd20408a18a960cc62143be168c0a0944d0d78aae4bdac29c4",
+              "kind": "variable",
+              "name": "Physics3DAbiSetBodyPayloadOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:194636f87b6e51cf3421596fb7f6ffc0d809121aac30190638e7576a892f28f9",
+              "kind": "variable",
+              "name": "Physics3DAbiSetColliderPayloadOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:77b9aacb84df7d19d710d33001de37ccc3ab131d33ddb592fbeb89bbd07a5c37",
+              "kind": "variable",
+              "name": "Physics3DAbiSetJointPayloadOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:f37468f33d9901dce271b497b708f2f78f0948dac932982f285907394925cf54",
+              "kind": "variable",
+              "name": "Physics3DAbiSetSolverConfigPayloadOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:522edec1406bda6977abe3d936a98ac9a07a310910bc62d49c72e33a6b00f0e9",
+              "kind": "variable",
+              "name": "Physics3DAbiShapeHeaderByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:df093faf36ea91e4f1254f077e58d916eaeb47563407a1ab473863cf753ce39d",
+              "kind": "variable",
+              "name": "Physics3DAbiShapeHeaderOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:5977afefb62fe1b947582d24be18093dd3daba505eb5918266098065425f4b24",
+              "kind": "variable",
+              "name": "Physics3DAbiShapeKind",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:9e4330a8ea1482ec1dc1121e6bd6f0400b05c128e2a35e76960a7b3f6246b69d",
+              "kind": "type",
+              "name": "Physics3DAbiStepStatus",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:b06d7caf9c31da0408e730cbcd41fafc5370a47e252fe29ba18534736f6d2655",
+              "kind": "variable",
+              "name": "Physics3DAbiVersion",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:b4ff0e90957ca2842a9d42792c51e7e6254322e7a0967dc3fc650a85333d3476",
+              "kind": "type",
+              "name": "Physics3DAbiWorldHandle",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:dace997c1d4195150e08a1aa8b711649144c845390eda1834d2f87dbecb98ae7",
+              "kind": "type",
+              "name": "Physics3DAbiWorldStatus",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
               "fingerprint": "sha256:757088138e3362c0c0cb7259922734c69c19eb0cee7423a4a77895a1de6d83bc",
               "kind": "type",
               "name": "Physics3DBallAndSocketJoint",
@@ -94307,6 +95792,13 @@
               "fingerprint": "sha256:85ae043e27341cf0996a4ab25092dc51a312146c74cc155913c6d4be1670f7d6",
               "kind": "interface",
               "name": "Physics3DRayResult",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3D.ts"
+            },
+            {
+              "fingerprint": "sha256:187b301955811c3de7115138e2c44a0d076c84a92749130d9bb5050b498bb95d",
+              "kind": "interface",
+              "name": "Physics3DRotationalCcdEnvelope",
               "runtime": false,
               "source": "upstream/packages/types/src/Physics3D.ts"
             },
@@ -95130,6 +96622,41 @@
               "source": "upstream/packages/physics2d/src/worldQueries.ts"
             },
             {
+              "fingerprint": "sha256:add64885c319b84e3bec5df8302edaf3ddd2c5f4a411896aec5592d6f77f9028",
+              "kind": "function",
+              "name": "queryPhysics3DAbiPoint",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
+              "fingerprint": "sha256:06b3191ace7a6805ade40f5ba6aea139796e502259eb7991cabda9e6edb862ec",
+              "kind": "function",
+              "name": "queryPhysics3DAbiRay",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
+              "fingerprint": "sha256:aa6eb1b8e5ebaec7838eccd5fb3b5367d4c10142768db1f93dbd80f742817a68",
+              "kind": "function",
+              "name": "queryPhysics3DAbiRayClosest",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
+              "fingerprint": "sha256:02b287457bcb538cf524d26d204339cdb89f2aa5f36578085385a3a522579f04",
+              "kind": "function",
+              "name": "queryPhysics3DAbiRegion",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
+              "fingerprint": "sha256:3db086b8a71ff92674752577cc1e18def20d760932ce76ba5f5247b99da29f1c",
+              "kind": "function",
+              "name": "queryPhysics3DAbiShapeCast",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
               "fingerprint": "sha256:e862616f1f08dfa0b577d31177b3b35ff39466966c42bf7fbb4ab3a61e756445",
               "kind": "function",
               "name": "queryPhysics3DPoint",
@@ -95548,6 +97075,27 @@
               "name": "readFileSymlink",
               "runtime": true,
               "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "fingerprint": "sha256:ef1410a77c7593599d970f43113cc6a188b179b9fc92432ba28b8451194a0779",
+              "kind": "function",
+              "name": "readPhysics3DAbiBodies",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:140979aeedaf27dd06d1dae9f6daa815e0f49ed89fcd8704db47babc57a0ab73",
+              "kind": "function",
+              "name": "readPhysics3DAbiContacts",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:f75833bf0a2909b301e581ce98da298ffda9df2485db6f3675a5b28704ff667e",
+              "kind": "function",
+              "name": "readPhysics3DAbiJoints",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
             },
             {
               "fingerprint": "sha256:be9612b4caa0a90b6da6624eaa47168bf9f6437047b90da92c882e96a0b0acde",
@@ -98026,7 +99574,7 @@
               "source": "upstream/packages/physics2d/src/jointRegistry.ts"
             },
             {
-              "fingerprint": "sha256:4b1fdec75f263da89329fa2c0ea1856743c5272302a4489ac95e69bff94154d0",
+              "fingerprint": "sha256:c61e289a7c72d3572553234847b341327562b56f608fbf97039629041ed9aa15",
               "kind": "function",
               "name": "removePhysics3DBody",
               "runtime": true,
@@ -105288,6 +106836,13 @@
               "source": "upstream/packages/physics3d/src/step.ts"
             },
             {
+              "fingerprint": "sha256:974feb9aafcceadc49572d4f2b778dcdfbffd4705821bb3203e9647749201d49",
+              "kind": "function",
+              "name": "stepPhysics3DAbiWorld",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
               "fingerprint": "sha256:a40878d59a666108b389f2e3def8ad8ea7079266c4eb935c0f5aba27c096d914",
               "kind": "function",
               "name": "stepPhysics3DInterval",
@@ -110443,6 +111998,104 @@
               "source": "upstream/packages/physics2d/src/jointReactions.ts"
             },
             {
+              "fingerprint": "sha256:e7c3438367062c2bc4fcb329d2d92fd23b3527bd7729896b7ec3804a19efd03c",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyForceAtPointCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:601325a2c0527e8dffda272a27fd38a8e712f1abe69393a02bc7c7c9a236ca1e",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyForceCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:802528285e1572b9740cd6a7143711228a8d7d8282b74f3bc5bd77d93929ca9e",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyLinearImpulseAtPointCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:f2cb2d499455475292a15223cdcbb21a55f31e5f5af7a861819567ecdfac5a9f",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyLinearImpulseCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:0b9a9f9ab674278a96101bf677fbc49e8ad822bd1371dbbc951001cd2bca0943",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyTorqueCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:a40784fcbc4c1509d2b673363e95c0e47e6c7451072f0afa5a5beb0e6cdbcf6c",
+              "kind": "function",
+              "name": "writePhysics3DAbiDestroyBodyCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:ffb831ac8fc3772d9e617299dba8893313df5b1ee6528a66e396bf318752f2d2",
+              "kind": "function",
+              "name": "writePhysics3DAbiDestroyColliderCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:a98c4f367265ab746361d0d1c08061d486c63b2360812a3630bf3a213b417d64",
+              "kind": "function",
+              "name": "writePhysics3DAbiDestroyJointCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:fc1821e10497f2a9c97aa0c82531a2e0fb98e502c7a5aa5ddc7382ec9c6fa327",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetBodyCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:884173884028f17fd6189608eb73617cbaafb9fcd17f68bc2fcc06a8314ba443",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetColliderCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:d53c6ce5edb6d78a46d6f2cabcde6bfcd282f0722510b9f0b5d04a5c40464798",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetGravityCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:32f922863a67c9be9d1e95ad48df914e561a36c1c415bd59b72ace33d5602698",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetJointCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:01f0ba58325b9890a5373593dbbdeb54d9096a76e4753bef306c590f7e8a0598",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetSolverConfigCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:fed9e0f7c2dbead137aa3442d14e2b076adbf1a28c7628d3171c902ba24e7bb0",
+              "kind": "function",
+              "name": "writePhysics3DAbiWakeBodyCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
               "fingerprint": "sha256:22a8d7a99b2f727a3cb3ec2e6dfcd6ad44d5c4ddd085ebebf35189bff4164296",
               "kind": "function",
               "name": "writePhysics3DDebugGeometry",
@@ -110455,6 +112108,13 @@
               "name": "writePhysics3DJointReaction",
               "runtime": true,
               "source": "upstream/packages/physics3d/src/jointReaction.ts"
+            },
+            {
+              "fingerprint": "sha256:49ac12fde69f52470f05953e502e7ca28fe9f4c61d75a98ea6b75ab3589e6ce5",
+              "kind": "function",
+              "name": "writePhysics3DRotationalCcdEnvelope",
+              "runtime": true,
+              "source": "upstream/packages/physics3d/src/continuous.ts"
             },
             {
               "fingerprint": "sha256:e520afc96d52e3068a8870931051cc907d7906032cab61f1cc396531ea8f7e47",
@@ -119195,7 +120855,7 @@
               "source": "upstream/packages/collision/src/triangleMesh3D.ts"
             },
             {
-              "fingerprint": "sha256:32543b797a2195485b7ce75fb81f32e652a19042bbfd65cb6e293a9477a9bbf5",
+              "fingerprint": "sha256:22d8d3debf78ffebad26f53e2334c1c20ed956630842224e9cad3dbd2d8fcdfb",
               "kind": "function",
               "name": "collideContactManifold2D",
               "runtime": true,
@@ -121618,7 +123278,7 @@
               "source": "upstream/packages/scene3d-resources/src/sceneResourceResolver.ts"
             },
             {
-              "fingerprint": "sha256:897d516c0786306c6fa37311008905e242634b89824b5d4ce8576d5d5bdd4441",
+              "fingerprint": "sha256:9d3e1c6642ddc1a21e7555cda0411f36286eabab5590524360c218508a7621f8",
               "kind": "function",
               "name": "createBvhSpatialBackend3D",
               "runtime": true,
@@ -130483,7 +132143,7 @@
               "source": "upstream/packages/shape-formats/src/shapeJson.ts"
             },
             {
-              "fingerprint": "sha256:e03c250dcb83d5443af1e0c8dd132edc6ff34c7c37ab433f46dbf46211d79121",
+              "fingerprint": "sha256:1822ccfa981d7ef29ebed3d2864c0e852ab2c5494fd952cdf92815a61a6cf495",
               "kind": "function",
               "name": "formatSpatialIndexingNotice",
               "runtime": true,
@@ -143549,6 +145209,111 @@
               "source": "upstream/packages/types/src/Physics2D.ts"
             },
             {
+              "fingerprint": "sha256:2d2ff2058241c552f9fbae4d75e70fdb7cb599cc1758b241875360a016d606bf",
+              "kind": "interface",
+              "name": "Physics3DAbi",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:12a0644da563b2ee03d54d165a4f82450dc0c2c3f0b91efcf202796d89a86966",
+              "kind": "interface",
+              "name": "Physics3DAbiBodyBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:344bf545e06f4e1231e04047048a038aa36ce6c322e2dcb7a7952c66f10b1476",
+              "kind": "interface",
+              "name": "Physics3DAbiCommandBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:8c8cfb7227ae63c538fd07f3e9812decc564d7e6a15be244c2e15578ebd43c4e",
+              "kind": "interface",
+              "name": "Physics3DAbiContactBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:30d4834f2a643f5ba36a43b51788ff4522e3ec7c491a352a599d585b0e2a1816",
+              "kind": "type",
+              "name": "Physics3DAbiContactHook",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:39fa096a0116e610a50835a085a2034e132dca54573c19203348e8b450e5cdaa",
+              "kind": "interface",
+              "name": "Physics3DAbiContactHooks",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:7a2bee6b216ffc4a42ce736e4f14a2a3dd5a3ec764e160fb7fbfdd9ef39982cd",
+              "kind": "type",
+              "name": "Physics3DAbiContactSelection",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:e232874df593acd78d53e3976d1775517dc020564d8ee4cb42d2c27e4b4c4c36",
+              "kind": "interface",
+              "name": "Physics3DAbiExecutionResult",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:8a35dc161d0b0b563a22a9816b6e3c724357755d640886f7f21380fc34e3fb12",
+              "kind": "type",
+              "name": "Physics3DAbiExecutionStatus",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:fd9990b1ea1d2d95da9a48ffe73617a18a78364b58f571f88d9e86bbaa225d61",
+              "kind": "interface",
+              "name": "Physics3DAbiJointBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:08d16ffaacd477fee129e301dda7d6155e68a7f168c3ed03e4d1fb2462d631b5",
+              "kind": "type",
+              "name": "Physics3DAbiObjectId",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:821df23149ae8b3765a926b09e971b64583f169a123723d6d18539453b27ec00",
+              "kind": "interface",
+              "name": "Physics3DAbiQueryBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:9e4330a8ea1482ec1dc1121e6bd6f0400b05c128e2a35e76960a7b3f6246b69d",
+              "kind": "type",
+              "name": "Physics3DAbiStepStatus",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:b4ff0e90957ca2842a9d42792c51e7e6254322e7a0967dc3fc650a85333d3476",
+              "kind": "type",
+              "name": "Physics3DAbiWorldHandle",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:dace997c1d4195150e08a1aa8b711649144c845390eda1834d2f87dbecb98ae7",
+              "kind": "type",
+              "name": "Physics3DAbiWorldStatus",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
               "fingerprint": "sha256:757088138e3362c0c0cb7259922734c69c19eb0cee7423a4a77895a1de6d83bc",
               "kind": "type",
               "name": "Physics3DBallAndSocketJoint",
@@ -143867,6 +145632,13 @@
               "fingerprint": "sha256:85ae043e27341cf0996a4ab25092dc51a312146c74cc155913c6d4be1670f7d6",
               "kind": "interface",
               "name": "Physics3DRayResult",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3D.ts"
+            },
+            {
+              "fingerprint": "sha256:187b301955811c3de7115138e2c44a0d076c84a92749130d9bb5050b498bb95d",
+              "kind": "interface",
+              "name": "Physics3DRotationalCcdEnvelope",
               "runtime": false,
               "source": "upstream/packages/types/src/Physics3D.ts"
             },
@@ -171992,6 +173764,111 @@
               "source": "upstream/packages/types/src/Physics2D.ts"
             },
             {
+              "fingerprint": "sha256:2d2ff2058241c552f9fbae4d75e70fdb7cb599cc1758b241875360a016d606bf",
+              "kind": "interface",
+              "name": "Physics3DAbi",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:12a0644da563b2ee03d54d165a4f82450dc0c2c3f0b91efcf202796d89a86966",
+              "kind": "interface",
+              "name": "Physics3DAbiBodyBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:344bf545e06f4e1231e04047048a038aa36ce6c322e2dcb7a7952c66f10b1476",
+              "kind": "interface",
+              "name": "Physics3DAbiCommandBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:8c8cfb7227ae63c538fd07f3e9812decc564d7e6a15be244c2e15578ebd43c4e",
+              "kind": "interface",
+              "name": "Physics3DAbiContactBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:30d4834f2a643f5ba36a43b51788ff4522e3ec7c491a352a599d585b0e2a1816",
+              "kind": "type",
+              "name": "Physics3DAbiContactHook",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:39fa096a0116e610a50835a085a2034e132dca54573c19203348e8b450e5cdaa",
+              "kind": "interface",
+              "name": "Physics3DAbiContactHooks",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:7a2bee6b216ffc4a42ce736e4f14a2a3dd5a3ec764e160fb7fbfdd9ef39982cd",
+              "kind": "type",
+              "name": "Physics3DAbiContactSelection",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:e232874df593acd78d53e3976d1775517dc020564d8ee4cb42d2c27e4b4c4c36",
+              "kind": "interface",
+              "name": "Physics3DAbiExecutionResult",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:8a35dc161d0b0b563a22a9816b6e3c724357755d640886f7f21380fc34e3fb12",
+              "kind": "type",
+              "name": "Physics3DAbiExecutionStatus",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:fd9990b1ea1d2d95da9a48ffe73617a18a78364b58f571f88d9e86bbaa225d61",
+              "kind": "interface",
+              "name": "Physics3DAbiJointBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:08d16ffaacd477fee129e301dda7d6155e68a7f168c3ed03e4d1fb2462d631b5",
+              "kind": "type",
+              "name": "Physics3DAbiObjectId",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:821df23149ae8b3765a926b09e971b64583f169a123723d6d18539453b27ec00",
+              "kind": "interface",
+              "name": "Physics3DAbiQueryBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:9e4330a8ea1482ec1dc1121e6bd6f0400b05c128e2a35e76960a7b3f6246b69d",
+              "kind": "type",
+              "name": "Physics3DAbiStepStatus",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:b4ff0e90957ca2842a9d42792c51e7e6254322e7a0967dc3fc650a85333d3476",
+              "kind": "type",
+              "name": "Physics3DAbiWorldHandle",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:dace997c1d4195150e08a1aa8b711649144c845390eda1834d2f87dbecb98ae7",
+              "kind": "type",
+              "name": "Physics3DAbiWorldStatus",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
               "fingerprint": "sha256:757088138e3362c0c0cb7259922734c69c19eb0cee7423a4a77895a1de6d83bc",
               "kind": "type",
               "name": "Physics3DBallAndSocketJoint",
@@ -172310,6 +174187,13 @@
               "fingerprint": "sha256:85ae043e27341cf0996a4ab25092dc51a312146c74cc155913c6d4be1670f7d6",
               "kind": "interface",
               "name": "Physics3DRayResult",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3D.ts"
+            },
+            {
+              "fingerprint": "sha256:187b301955811c3de7115138e2c44a0d076c84a92749130d9bb5050b498bb95d",
+              "kind": "interface",
+              "name": "Physics3DRotationalCcdEnvelope",
               "runtime": false,
               "source": "upstream/packages/types/src/Physics3D.ts"
             },
@@ -182774,6 +184658,13 @@
               "source": "upstream/packages/particleemitter/src/particleEmitter3D.ts"
             },
             {
+              "fingerprint": "sha256:e852ee1c181d1110551db2bddd5f2d6b855939810fc334c9cd7106430d177f0b",
+              "kind": "function",
+              "name": "clearPhysics3DAbiCommandBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
               "fingerprint": "sha256:087aa4e7b4cff85a1c33db12f663237d84c79de23ffaddc32b205d4d1079a4e2",
               "kind": "function",
               "name": "clearPhysics3DJointReaction",
@@ -182893,7 +184784,7 @@
               "source": "upstream/packages/collision/src/triangleMesh3D.ts"
             },
             {
-              "fingerprint": "sha256:32543b797a2195485b7ce75fb81f32e652a19042bbfd65cb6e293a9477a9bbf5",
+              "fingerprint": "sha256:22d8d3debf78ffebad26f53e2334c1c20ed956630842224e9cad3dbd2d8fcdfb",
               "kind": "function",
               "name": "collideContactManifold2D",
               "runtime": true,
@@ -183033,7 +184924,7 @@
               "source": "upstream/packages/camera-controls/src/orbitCameraController.ts"
             },
             {
-              "fingerprint": "sha256:897d516c0786306c6fa37311008905e242634b89824b5d4ce8576d5d5bdd4441",
+              "fingerprint": "sha256:9d3e1c6642ddc1a21e7555cda0411f36286eabab5590524360c218508a7621f8",
               "kind": "function",
               "name": "createBvhSpatialBackend3D",
               "runtime": true,
@@ -183292,6 +185183,62 @@
               "source": "upstream/packages/physics2d/src/world.ts"
             },
             {
+              "fingerprint": "sha256:daaf6bb71ef0cb1836150dca986507324cef9ee488db04e7f882db827be22ee4",
+              "kind": "function",
+              "name": "createPhysics3DAbi",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:b1fd78b6c5615f2e2a4c69847d6d647e63dab670998ecba64b7d6ab30e95c4d9",
+              "kind": "function",
+              "name": "createPhysics3DAbiBodyBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:dedfa5e7eeceea0d1ed99de26c351b7b918f65f6006174413d676122b327ca32",
+              "kind": "function",
+              "name": "createPhysics3DAbiCommandBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:b303dbaf263b6f0848f24063a2940921f3c873977d8dec2546754336b1d6e08b",
+              "kind": "function",
+              "name": "createPhysics3DAbiContactBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:4deb49dafd2400dc2c838b3746f09c75b7c842ffcb48ad25af265e19961faf52",
+              "kind": "function",
+              "name": "createPhysics3DAbiExecutionResult",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:9db20013e3cb601505d3e6c70bd6ec068a504860abc28045a487810d1330ac1d",
+              "kind": "function",
+              "name": "createPhysics3DAbiJointBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:83b29cbd811e7cdd698a329b589fecddd194ae3b8a8cf049eaa52c181e585792",
+              "kind": "function",
+              "name": "createPhysics3DAbiQueryBuffer",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:835e0d1fa83cb69c93f2aacd42f076d3513c3189620a769236b7987c49b686db",
+              "kind": "function",
+              "name": "createPhysics3DAbiWorld",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
               "fingerprint": "sha256:fbb2a74e03e5756086853610492698763c0169c488c1baacc550b635f9e534ee",
               "kind": "function",
               "name": "createPhysics3DBallAndSocketJoint",
@@ -183481,6 +185428,13 @@
               "source": "upstream/packages/spatial/src/uniformGrid3D.ts"
             },
             {
+              "fingerprint": "sha256:e959087e1c7fb2850a48d6ca5aa01372f1bacb29463bbf8c5e967de437727e08",
+              "kind": "function",
+              "name": "destroyPhysics3DAbiWorld",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
               "fingerprint": "sha256:aa40908feaa9bb52f3af9edeb817396b7b88dfc35257ecb4e0d1060b2d76c531",
               "kind": "function",
               "name": "disableCollisionGuards",
@@ -183495,7 +185449,7 @@
               "source": "upstream/packages/physics2d/src/enablePhysics2DGuards.ts"
             },
             {
-              "fingerprint": "sha256:1e286e58639dc768b35eb7fb33d8fbed0a3155c52d310ec8d33d40ebd8eebc83",
+              "fingerprint": "sha256:ba8eb16853537cd7953b24751df5560a0d7ccfc522aeb2cff44afebbf16d04a5",
               "kind": "function",
               "name": "disablePhysics3DGuards",
               "runtime": true,
@@ -183558,7 +185512,7 @@
               "source": "upstream/packages/physics2d/src/enablePhysics2DGuards.ts"
             },
             {
-              "fingerprint": "sha256:ff371f59eb7dd9c5b40769d74984b8da44dd90e4703089182c1c0edb3851b455",
+              "fingerprint": "sha256:b5714c36ad536e037ccdab0e71d6d481055b85d73e659730506b0faa613ade3d",
               "kind": "function",
               "name": "enablePhysics3DGuards",
               "runtime": true,
@@ -183598,6 +185552,13 @@
               "name": "evaluatePhysics3DJointBreakage",
               "runtime": true,
               "source": "upstream/packages/physics3d/src/jointBreakage.ts"
+            },
+            {
+              "fingerprint": "sha256:80b7f98b4b24b3b6d066503f452d082c5258a4b19af0f828549bcc7a1f95c729",
+              "kind": "function",
+              "name": "executePhysics3DAbiCommands",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
             },
             {
               "fingerprint": "sha256:3b4c34af54df6646eb403c369aa392151b9ab2ec6c0489350f3a97718fc7cacd",
@@ -183698,7 +185659,7 @@
               "source": "upstream/packages/statechart/src/statechart.ts"
             },
             {
-              "fingerprint": "sha256:e03c250dcb83d5443af1e0c8dd132edc6ff34c7c37ab433f46dbf46211d79121",
+              "fingerprint": "sha256:1822ccfa981d7ef29ebed3d2864c0e852ab2c5494fd952cdf92815a61a6cf495",
               "kind": "function",
               "name": "formatSpatialIndexingNotice",
               "runtime": true,
@@ -183873,6 +185834,27 @@
               "source": "upstream/packages/physics2d/src/jointRegistry.ts"
             },
             {
+              "fingerprint": "sha256:1ee12364aa01e0f2ad814ca22a8ec189d1bf4573f5502525cd988a218d9f72b9",
+              "kind": "function",
+              "name": "getPhysics3DAbiCommandBufferRemainingByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiBuffer.ts"
+            },
+            {
+              "fingerprint": "sha256:5b4eea19a799bea667b7341f70e167d09c3297e3bc92c7765253802c7604cbf5",
+              "kind": "function",
+              "name": "getPhysics3DAbiSetColliderCommandByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:213bdc55b430e7155c25cc60220ee33683f33d93b00aa6d2df8c6d3997c08f34",
+              "kind": "function",
+              "name": "getPhysics3DAbiWorldStatus",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
               "fingerprint": "sha256:cc17f648927536185dc339e3b742c70b860f7ccb9147be413b1c02f8cdfbf1a4",
               "kind": "function",
               "name": "getPhysics3DJointReactionForce",
@@ -183957,7 +185939,7 @@
               "source": "upstream/packages/spatial/src/spatialIndex3D.ts"
             },
             {
-              "fingerprint": "sha256:63e3b057f037757094094753be0cdc9fbcefe654e240daf009f8a134ae74c3ed",
+              "fingerprint": "sha256:121726dfea94bb4fbfcada4d4c76923a986a092cc4126b55d7f33ee2d2dcd36d",
               "kind": "function",
               "name": "integratePhysics3DContinuous",
               "runtime": true,
@@ -184335,6 +186317,237 @@
               "source": "upstream/packages/physics2d/src/world.ts"
             },
             {
+              "fingerprint": "sha256:0c5eb30f803b4cbbd0e19d179441f3cf7233827549e8fa705273b9c7dfc98077",
+              "kind": "variable",
+              "name": "Physics3DAbiBodyFlag",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:a204cb3646bba9a1b6a13349c40a92f6a53deeffece279b651526c1fed2da3d0",
+              "kind": "variable",
+              "name": "Physics3DAbiBodyType",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:3c96b847ff22c1c8ddd017ff991c2a4135387c0a94729b8c1d071d69ecc12b78",
+              "kind": "variable",
+              "name": "Physics3DAbiBodyValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:f28de640c13c83a5df184a9bf43db26eb017a98b0cac73f0f859af43c1cef2ea",
+              "kind": "variable",
+              "name": "Physics3DAbiBodyValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:af7eab5a8425099878b2857a08491116d324c090bdd8e6931b87602bd238d02b",
+              "kind": "variable",
+              "name": "Physics3DAbiCapability",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:1c05bbea4eae9302f36c13d1417bc689f341da10ef3e9cce9f29d0baad2bbd56",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:66c8c5e5fa1f48c26e46014bdb7a41d2af109fa3fc4ad80e45dac407a1479cc9",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandHeaderByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:44a066d506d000256f6ff56df3c29b37e3bff20f19cc7c3cd666648e67a5b41e",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandHeaderOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:1799628a15c93698a776d99522b1ba93d976db05da1ebda2d2e135a412bbf860",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandKind",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:457f4c303bde47162f497d62608b7bef38f01d73b0d76738bc4973b62f2b645c",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandMagic",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:d28fe01a80fea0862f0d103e2ce320f7c117cae9747ca2ac198fde6e3ae7cde8",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandRecordHeaderByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:e3ec865d45addb96b14ccada94829f847df7c368ad69bbb5788787811ddd4219",
+              "kind": "variable",
+              "name": "Physics3DAbiCommandRecordOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:0a2e1100201d3977051d2df1a767dfe79a17bb3fa1c92cf34b071b4e032cec73",
+              "kind": "variable",
+              "name": "Physics3DAbiContactFlag",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:a9f59d6cb4694ba744f8d422241a708366535fa4cc53856df987be0e15448a85",
+              "kind": "variable",
+              "name": "Physics3DAbiContactId",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:5340f0a5fff34d69841226284da87efa151c79c199dd0c5ea2cc81972f17b0b9",
+              "kind": "variable",
+              "name": "Physics3DAbiContactIdStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:0bbfd34c4463e25cba3169d0d34d0a179b3fcb921b17106f7ff5332d19a884da",
+              "kind": "variable",
+              "name": "Physics3DAbiContactPointValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:b1c59aeb5b7c02284c629677cac9b887e9d6da118ed5d20eb9afe55e61f34b21",
+              "kind": "variable",
+              "name": "Physics3DAbiContactPointValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:357b5e675448256b01d45f4672470d9a018faefb43bd9e28729d7a548171344a",
+              "kind": "variable",
+              "name": "Physics3DAbiContactValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:be27d23238d94897c03b2879f8a10fc403e528ace7ed52b437cc9271809e90ad",
+              "kind": "variable",
+              "name": "Physics3DAbiContactValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:a177aba23d14d03f18f08af91fa2095f0233c11ceda472773d443724dbb9c3ab",
+              "kind": "variable",
+              "name": "Physics3DAbiJointFlag",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:d512cb9bc648288e6f86a231dea051563cd2ce0021c5030a8881aa4883405930",
+              "kind": "variable",
+              "name": "Physics3DAbiJointKind",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:f34de3a6d47b51dba25f71d69ec318527414ab50be93bc41fbdb3cfe365bfc07",
+              "kind": "variable",
+              "name": "Physics3DAbiJointValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:d9848ddba9d00fbbb183e5331251692041489fb2672f9d29be2c6efd505e84fb",
+              "kind": "variable",
+              "name": "Physics3DAbiJointValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:33e7b0e8be25a12467db8bccd9779587e661d00ec94d15c37b1f8239643cb596",
+              "kind": "variable",
+              "name": "Physics3DAbiQueryValue",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:1e138055f497f93d6afd465d47addb2e53f62a6f9502564894cb3081b455dd28",
+              "kind": "variable",
+              "name": "Physics3DAbiQueryValueStride",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:069214b1003637dd20408a18a960cc62143be168c0a0944d0d78aae4bdac29c4",
+              "kind": "variable",
+              "name": "Physics3DAbiSetBodyPayloadOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:194636f87b6e51cf3421596fb7f6ffc0d809121aac30190638e7576a892f28f9",
+              "kind": "variable",
+              "name": "Physics3DAbiSetColliderPayloadOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:77b9aacb84df7d19d710d33001de37ccc3ab131d33ddb592fbeb89bbd07a5c37",
+              "kind": "variable",
+              "name": "Physics3DAbiSetJointPayloadOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:f37468f33d9901dce271b497b708f2f78f0948dac932982f285907394925cf54",
+              "kind": "variable",
+              "name": "Physics3DAbiSetSolverConfigPayloadOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:522edec1406bda6977abe3d936a98ac9a07a310910bc62d49c72e33a6b00f0e9",
+              "kind": "variable",
+              "name": "Physics3DAbiShapeHeaderByteLength",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:df093faf36ea91e4f1254f077e58d916eaeb47563407a1ab473863cf753ce39d",
+              "kind": "variable",
+              "name": "Physics3DAbiShapeHeaderOffset",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:5977afefb62fe1b947582d24be18093dd3daba505eb5918266098065425f4b24",
+              "kind": "variable",
+              "name": "Physics3DAbiShapeKind",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
+              "fingerprint": "sha256:b06d7caf9c31da0408e730cbcd41fafc5370a47e252fe29ba18534736f6d2655",
+              "kind": "variable",
+              "name": "Physics3DAbiVersion",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiLayout.ts"
+            },
+            {
               "fingerprint": "sha256:772a24f3abab334260e65e9739c4cece40d1daf49a279e6770241fa39683ce08",
               "kind": "variable",
               "name": "Physics3DBallAndSocketJointKind",
@@ -184531,6 +186744,41 @@
               "source": "upstream/packages/physics2d/src/worldQueries.ts"
             },
             {
+              "fingerprint": "sha256:add64885c319b84e3bec5df8302edaf3ddd2c5f4a411896aec5592d6f77f9028",
+              "kind": "function",
+              "name": "queryPhysics3DAbiPoint",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
+              "fingerprint": "sha256:06b3191ace7a6805ade40f5ba6aea139796e502259eb7991cabda9e6edb862ec",
+              "kind": "function",
+              "name": "queryPhysics3DAbiRay",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
+              "fingerprint": "sha256:aa6eb1b8e5ebaec7838eccd5fb3b5367d4c10142768db1f93dbd80f742817a68",
+              "kind": "function",
+              "name": "queryPhysics3DAbiRayClosest",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
+              "fingerprint": "sha256:02b287457bcb538cf524d26d204339cdb89f2aa5f36578085385a3a522579f04",
+              "kind": "function",
+              "name": "queryPhysics3DAbiRegion",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
+              "fingerprint": "sha256:3db086b8a71ff92674752577cc1e18def20d760932ce76ba5f5247b99da29f1c",
+              "kind": "function",
+              "name": "queryPhysics3DAbiShapeCast",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiQuery.ts"
+            },
+            {
               "fingerprint": "sha256:e862616f1f08dfa0b577d31177b3b35ff39466966c42bf7fbb4ab3a61e756445",
               "kind": "function",
               "name": "queryPhysics3DPoint",
@@ -184662,6 +186910,27 @@
               "name": "raycastCollisionTriangleMesh3D",
               "runtime": true,
               "source": "upstream/packages/collision/src/triangleMesh3D.ts"
+            },
+            {
+              "fingerprint": "sha256:ef1410a77c7593599d970f43113cc6a188b179b9fc92432ba28b8451194a0779",
+              "kind": "function",
+              "name": "readPhysics3DAbiBodies",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:140979aeedaf27dd06d1dae9f6daa815e0f49ed89fcd8704db47babc57a0ab73",
+              "kind": "function",
+              "name": "readPhysics3DAbiContacts",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:f75833bf0a2909b301e581ce98da298ffda9df2485db6f3675a5b28704ff667e",
+              "kind": "function",
+              "name": "readPhysics3DAbiJoints",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
             },
             {
               "fingerprint": "sha256:88933c40bc21c46a511737d240efa6a66f2109f59dc4e69f39c02fc4afb76d27",
@@ -184811,7 +187080,7 @@
               "source": "upstream/packages/physics2d/src/jointRegistry.ts"
             },
             {
-              "fingerprint": "sha256:4b1fdec75f263da89329fa2c0ea1856743c5272302a4489ac95e69bff94154d0",
+              "fingerprint": "sha256:c61e289a7c72d3572553234847b341327562b56f608fbf97039629041ed9aa15",
               "kind": "function",
               "name": "removePhysics3DBody",
               "runtime": true,
@@ -185152,6 +187421,13 @@
               "name": "stepPhysics3D",
               "runtime": true,
               "source": "upstream/packages/physics3d/src/step.ts"
+            },
+            {
+              "fingerprint": "sha256:974feb9aafcceadc49572d4f2b778dcdfbffd4705821bb3203e9647749201d49",
+              "kind": "function",
+              "name": "stepPhysics3DAbiWorld",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbi.ts"
             },
             {
               "fingerprint": "sha256:a40878d59a666108b389f2e3def8ad8ea7079266c4eb935c0f5aba27c096d914",
@@ -185616,6 +187892,104 @@
               "source": "upstream/packages/physics2d/src/jointReactions.ts"
             },
             {
+              "fingerprint": "sha256:e7c3438367062c2bc4fcb329d2d92fd23b3527bd7729896b7ec3804a19efd03c",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyForceAtPointCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:601325a2c0527e8dffda272a27fd38a8e712f1abe69393a02bc7c7c9a236ca1e",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyForceCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:802528285e1572b9740cd6a7143711228a8d7d8282b74f3bc5bd77d93929ca9e",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyLinearImpulseAtPointCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:f2cb2d499455475292a15223cdcbb21a55f31e5f5af7a861819567ecdfac5a9f",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyLinearImpulseCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:0b9a9f9ab674278a96101bf677fbc49e8ad822bd1371dbbc951001cd2bca0943",
+              "kind": "function",
+              "name": "writePhysics3DAbiApplyTorqueCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:a40784fcbc4c1509d2b673363e95c0e47e6c7451072f0afa5a5beb0e6cdbcf6c",
+              "kind": "function",
+              "name": "writePhysics3DAbiDestroyBodyCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:ffb831ac8fc3772d9e617299dba8893313df5b1ee6528a66e396bf318752f2d2",
+              "kind": "function",
+              "name": "writePhysics3DAbiDestroyColliderCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:a98c4f367265ab746361d0d1c08061d486c63b2360812a3630bf3a213b417d64",
+              "kind": "function",
+              "name": "writePhysics3DAbiDestroyJointCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:fc1821e10497f2a9c97aa0c82531a2e0fb98e502c7a5aa5ddc7382ec9c6fa327",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetBodyCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:884173884028f17fd6189608eb73617cbaafb9fcd17f68bc2fcc06a8314ba443",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetColliderCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:d53c6ce5edb6d78a46d6f2cabcde6bfcd282f0722510b9f0b5d04a5c40464798",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetGravityCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:32f922863a67c9be9d1e95ad48df914e561a36c1c415bd59b72ace33d5602698",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetJointCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:01f0ba58325b9890a5373593dbbdeb54d9096a76e4753bef306c590f7e8a0598",
+              "kind": "function",
+              "name": "writePhysics3DAbiSetSolverConfigCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
+              "fingerprint": "sha256:fed9e0f7c2dbead137aa3442d14e2b076adbf1a28c7628d3171c902ba24e7bb0",
+              "kind": "function",
+              "name": "writePhysics3DAbiWakeBodyCommand",
+              "runtime": true,
+              "source": "upstream/packages/physics3d-abi/src/physics3DAbiCommand.ts"
+            },
+            {
               "fingerprint": "sha256:22a8d7a99b2f727a3cb3ec2e6dfcd6ad44d5c4ddd085ebebf35189bff4164296",
               "kind": "function",
               "name": "writePhysics3DDebugGeometry",
@@ -185628,6 +188002,13 @@
               "name": "writePhysics3DJointReaction",
               "runtime": true,
               "source": "upstream/packages/physics3d/src/jointReaction.ts"
+            },
+            {
+              "fingerprint": "sha256:49ac12fde69f52470f05953e502e7ca28fe9f4c61d75a98ea6b75ab3589e6ce5",
+              "kind": "function",
+              "name": "writePhysics3DRotationalCcdEnvelope",
+              "runtime": true,
+              "source": "upstream/packages/physics3d/src/continuous.ts"
             },
             {
               "fingerprint": "sha256:e520afc96d52e3068a8870931051cc907d7906032cab61f1cc396531ea8f7e47",
@@ -208999,7 +211380,7 @@
               "source": "upstream/packages/spatial/src/spatialIndex3D.ts"
             },
             {
-              "fingerprint": "sha256:897d516c0786306c6fa37311008905e242634b89824b5d4ce8576d5d5bdd4441",
+              "fingerprint": "sha256:9d3e1c6642ddc1a21e7555cda0411f36286eabab5590524360c218508a7621f8",
               "kind": "function",
               "name": "createBvhSpatialBackend3D",
               "runtime": true,
@@ -209048,7 +211429,7 @@
               "source": "upstream/packages/spatial/src/explainSpatialIndexing3D.ts"
             },
             {
-              "fingerprint": "sha256:e03c250dcb83d5443af1e0c8dd132edc6ff34c7c37ab433f46dbf46211d79121",
+              "fingerprint": "sha256:1822ccfa981d7ef29ebed3d2864c0e852ab2c5494fd952cdf92815a61a6cf495",
               "kind": "function",
               "name": "formatSpatialIndexingNotice",
               "runtime": true,
@@ -209215,7 +211596,7 @@
               "source": "upstream/packages/spatial/src/spatialIndex3D.ts"
             },
             {
-              "fingerprint": "sha256:897d516c0786306c6fa37311008905e242634b89824b5d4ce8576d5d5bdd4441",
+              "fingerprint": "sha256:9d3e1c6642ddc1a21e7555cda0411f36286eabab5590524360c218508a7621f8",
               "kind": "function",
               "name": "createBvhSpatialBackend3D",
               "runtime": true,
@@ -209264,7 +211645,7 @@
               "source": "upstream/packages/spatial/src/explainSpatialIndexing3D.ts"
             },
             {
-              "fingerprint": "sha256:e03c250dcb83d5443af1e0c8dd132edc6ff34c7c37ab433f46dbf46211d79121",
+              "fingerprint": "sha256:1822ccfa981d7ef29ebed3d2864c0e852ab2c5494fd952cdf92815a61a6cf495",
               "kind": "function",
               "name": "formatSpatialIndexingNotice",
               "runtime": true,
@@ -230702,6 +233083,111 @@
               "source": "upstream/packages/types/src/Physics2D.ts"
             },
             {
+              "fingerprint": "sha256:2d2ff2058241c552f9fbae4d75e70fdb7cb599cc1758b241875360a016d606bf",
+              "kind": "interface",
+              "name": "Physics3DAbi",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:12a0644da563b2ee03d54d165a4f82450dc0c2c3f0b91efcf202796d89a86966",
+              "kind": "interface",
+              "name": "Physics3DAbiBodyBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:344bf545e06f4e1231e04047048a038aa36ce6c322e2dcb7a7952c66f10b1476",
+              "kind": "interface",
+              "name": "Physics3DAbiCommandBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:8c8cfb7227ae63c538fd07f3e9812decc564d7e6a15be244c2e15578ebd43c4e",
+              "kind": "interface",
+              "name": "Physics3DAbiContactBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:30d4834f2a643f5ba36a43b51788ff4522e3ec7c491a352a599d585b0e2a1816",
+              "kind": "type",
+              "name": "Physics3DAbiContactHook",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:39fa096a0116e610a50835a085a2034e132dca54573c19203348e8b450e5cdaa",
+              "kind": "interface",
+              "name": "Physics3DAbiContactHooks",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:7a2bee6b216ffc4a42ce736e4f14a2a3dd5a3ec764e160fb7fbfdd9ef39982cd",
+              "kind": "type",
+              "name": "Physics3DAbiContactSelection",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:e232874df593acd78d53e3976d1775517dc020564d8ee4cb42d2c27e4b4c4c36",
+              "kind": "interface",
+              "name": "Physics3DAbiExecutionResult",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:8a35dc161d0b0b563a22a9816b6e3c724357755d640886f7f21380fc34e3fb12",
+              "kind": "type",
+              "name": "Physics3DAbiExecutionStatus",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:fd9990b1ea1d2d95da9a48ffe73617a18a78364b58f571f88d9e86bbaa225d61",
+              "kind": "interface",
+              "name": "Physics3DAbiJointBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:08d16ffaacd477fee129e301dda7d6155e68a7f168c3ed03e4d1fb2462d631b5",
+              "kind": "type",
+              "name": "Physics3DAbiObjectId",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:821df23149ae8b3765a926b09e971b64583f169a123723d6d18539453b27ec00",
+              "kind": "interface",
+              "name": "Physics3DAbiQueryBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:9e4330a8ea1482ec1dc1121e6bd6f0400b05c128e2a35e76960a7b3f6246b69d",
+              "kind": "type",
+              "name": "Physics3DAbiStepStatus",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:b4ff0e90957ca2842a9d42792c51e7e6254322e7a0967dc3fc650a85333d3476",
+              "kind": "type",
+              "name": "Physics3DAbiWorldHandle",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:dace997c1d4195150e08a1aa8b711649144c845390eda1834d2f87dbecb98ae7",
+              "kind": "type",
+              "name": "Physics3DAbiWorldStatus",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
               "fingerprint": "sha256:757088138e3362c0c0cb7259922734c69c19eb0cee7423a4a77895a1de6d83bc",
               "kind": "type",
               "name": "Physics3DBallAndSocketJoint",
@@ -231020,6 +233506,13 @@
               "fingerprint": "sha256:85ae043e27341cf0996a4ab25092dc51a312146c74cc155913c6d4be1670f7d6",
               "kind": "interface",
               "name": "Physics3DRayResult",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3D.ts"
+            },
+            {
+              "fingerprint": "sha256:187b301955811c3de7115138e2c44a0d076c84a92749130d9bb5050b498bb95d",
+              "kind": "interface",
+              "name": "Physics3DRotationalCcdEnvelope",
               "runtime": false,
               "source": "upstream/packages/types/src/Physics3D.ts"
             },
@@ -247903,6 +250396,111 @@
               "source": "upstream/packages/types/src/Physics2D.ts"
             },
             {
+              "fingerprint": "sha256:2d2ff2058241c552f9fbae4d75e70fdb7cb599cc1758b241875360a016d606bf",
+              "kind": "interface",
+              "name": "Physics3DAbi",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:12a0644da563b2ee03d54d165a4f82450dc0c2c3f0b91efcf202796d89a86966",
+              "kind": "interface",
+              "name": "Physics3DAbiBodyBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:344bf545e06f4e1231e04047048a038aa36ce6c322e2dcb7a7952c66f10b1476",
+              "kind": "interface",
+              "name": "Physics3DAbiCommandBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:8c8cfb7227ae63c538fd07f3e9812decc564d7e6a15be244c2e15578ebd43c4e",
+              "kind": "interface",
+              "name": "Physics3DAbiContactBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:30d4834f2a643f5ba36a43b51788ff4522e3ec7c491a352a599d585b0e2a1816",
+              "kind": "type",
+              "name": "Physics3DAbiContactHook",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:39fa096a0116e610a50835a085a2034e132dca54573c19203348e8b450e5cdaa",
+              "kind": "interface",
+              "name": "Physics3DAbiContactHooks",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:7a2bee6b216ffc4a42ce736e4f14a2a3dd5a3ec764e160fb7fbfdd9ef39982cd",
+              "kind": "type",
+              "name": "Physics3DAbiContactSelection",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:e232874df593acd78d53e3976d1775517dc020564d8ee4cb42d2c27e4b4c4c36",
+              "kind": "interface",
+              "name": "Physics3DAbiExecutionResult",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:8a35dc161d0b0b563a22a9816b6e3c724357755d640886f7f21380fc34e3fb12",
+              "kind": "type",
+              "name": "Physics3DAbiExecutionStatus",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:fd9990b1ea1d2d95da9a48ffe73617a18a78364b58f571f88d9e86bbaa225d61",
+              "kind": "interface",
+              "name": "Physics3DAbiJointBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:08d16ffaacd477fee129e301dda7d6155e68a7f168c3ed03e4d1fb2462d631b5",
+              "kind": "type",
+              "name": "Physics3DAbiObjectId",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:821df23149ae8b3765a926b09e971b64583f169a123723d6d18539453b27ec00",
+              "kind": "interface",
+              "name": "Physics3DAbiQueryBuffer",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:9e4330a8ea1482ec1dc1121e6bd6f0400b05c128e2a35e76960a7b3f6246b69d",
+              "kind": "type",
+              "name": "Physics3DAbiStepStatus",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:b4ff0e90957ca2842a9d42792c51e7e6254322e7a0967dc3fc650a85333d3476",
+              "kind": "type",
+              "name": "Physics3DAbiWorldHandle",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
+              "fingerprint": "sha256:dace997c1d4195150e08a1aa8b711649144c845390eda1834d2f87dbecb98ae7",
+              "kind": "type",
+              "name": "Physics3DAbiWorldStatus",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3DAbi.ts"
+            },
+            {
               "fingerprint": "sha256:757088138e3362c0c0cb7259922734c69c19eb0cee7423a4a77895a1de6d83bc",
               "kind": "type",
               "name": "Physics3DBallAndSocketJoint",
@@ -248221,6 +250819,13 @@
               "fingerprint": "sha256:85ae043e27341cf0996a4ab25092dc51a312146c74cc155913c6d4be1670f7d6",
               "kind": "interface",
               "name": "Physics3DRayResult",
+              "runtime": false,
+              "source": "upstream/packages/types/src/Physics3D.ts"
+            },
+            {
+              "fingerprint": "sha256:187b301955811c3de7115138e2c44a0d076c84a92749130d9bb5050b498bb95d",
+              "kind": "interface",
+              "name": "Physics3DRotationalCcdEnvelope",
               "runtime": false,
               "source": "upstream/packages/types/src/Physics3D.ts"
             },
@@ -257306,5 +259911,5 @@
     }
   ],
   "schemaVersion": 3,
-  "upstreamCommit": "9b3b71b019ff48ea6329c16020f37fb72c3123d1"
+  "upstreamCommit": "9db114b3fe1db90a90a11541649cb3af8bb5ca62"
 }
