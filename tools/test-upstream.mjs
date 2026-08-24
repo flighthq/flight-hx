@@ -38,11 +38,14 @@ if (shard && shard.index > shard.total) {
 }
 const serial = process.argv.includes('--serial');
 const requestedJobs = Number(argValue('--jobs'));
+// Each process loads the full compiled bridge. Keep the implicit pool aligned
+// with the proven parity workflow setting so larger upstream pins do not turn
+// green suites into resource-exhaustion failures; callers can still override it.
 const jobs = serial
   ? 1
   : Number.isFinite(requestedJobs) && requestedJobs > 0
     ? Math.floor(requestedJobs)
-    : Math.max(1, Math.min(12, availableParallelism() - 1));
+    : Math.max(1, Math.min(3, availableParallelism() - 1));
 
 const reportFile = path.join(
   repositoryRoot,
