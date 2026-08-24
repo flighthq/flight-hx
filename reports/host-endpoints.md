@@ -6,11 +6,11 @@ Receiver identities and member use are checker-derived. The shared contract sele
 
 | Metric | Count |
 | --- | ---: |
-| Receiver bindings | 9 |
-| Canonical endpoints | 388 |
-| Property accesses | 3622 |
-| Calls | 2287 |
-| Reads | 1082 |
+| Receiver bindings | 10 |
+| Canonical endpoints | 394 |
+| Property accesses | 3682 |
+| Calls | 2337 |
+| Reads | 1092 |
 | Writes | 253 |
 | Backend contract endpoints | 394 |
 | Dynamic-fallback endpoints in use | 12 |
@@ -391,18 +391,24 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `WebGl2Backend` | `viewport` | `call` | `viewport` | `backend` | 13 | `src/flighthq/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `VIEWPORT` | `read` | `VIEWPORT` | `backend` | 4 | `src/flighthq/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `ZERO` | `read` | `ZERO` | `backend` | 12 | `src/flighthq/_internal/backend/WebGl2Backend.hx` |
+| `WebGpuCanvasContextBackend` | `configure` | `call` | `configure` | `backend` | 1 | `src/flighthq/_internal/backend/WebGpuCanvasContextBackend.hx` |
 | `WebGpuCanvasContextBackend` | `getCurrentTexture` | `call` | `getCurrentTexture` | `backend` | 1 | `src/flighthq/_internal/backend/WebGpuCanvasContextBackend.hx` |
-| `WebGpuDeviceBackend` | `createBindGroup` | `call` | `createBindGroup` | `backend` | 56 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
+| `WebGpuDeviceBackend` | `createBindGroup` | `call` | `createBindGroup` | `backend` | 57 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `createBindGroupLayout` | `call` | `createBindGroupLayout` | `backend` | 39 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
-| `WebGpuDeviceBackend` | `createBuffer` | `call` | `createBuffer` | `backend` | 35 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
+| `WebGpuDeviceBackend` | `createBuffer` | `call` | `createBuffer` | `backend` | 36 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `createCommandEncoder` | `call` | `createCommandEncoder` | `backend` | 4 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `createPipelineLayout` | `call` | `createPipelineLayout` | `backend` | 23 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `createRenderPipeline` | `call` | `createRenderPipeline` | `backend` | 23 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
-| `WebGpuDeviceBackend` | `createSampler` | `call` | `createSampler` | `backend` | 8 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
+| `WebGpuDeviceBackend` | `createSampler` | `call` | `createSampler` | `backend` | 10 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `createShaderModule` | `call` | `createShaderModule` | `backend` | 35 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `createTexture` | `call` | `createTexture` | `backend` | 29 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `features` | `read` | `features` | `dynamic-fallback` | 3 | `src/flighthq/_internal/_Runtime.hx` |
-| `WebGpuDeviceBackend` | `limits` | `read` | `limits` | `backend` | 6 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
+| `WebGpuDeviceBackend` | `limits` | `read` | `limits` | `backend` | 7 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `queue` | `read` | `queue` | `backend` | 50 | `src/flighthq/_internal/backend/WebGpuDeviceBackend.hx` |
+| `WebGpuLimitsBackend` | `maxBindGroups` | `read` | `maxBindGroups` | `backend` | 1 | `src/flighthq/_internal/backend/WebGpuLimitsBackend.hx` |
+| `WebGpuLimitsBackend` | `maxTextureDimension2D` | `read` | `maxTextureDimension2D` | `backend` | 7 | `src/flighthq/_internal/backend/WebGpuLimitsBackend.hx` |
+| `WebGpuLimitsBackend` | `minUniformBufferOffsetAlignment` | `read` | `minUniformBufferOffsetAlignment` | `backend` | 1 | `src/flighthq/_internal/backend/WebGpuLimitsBackend.hx` |
 | `WebGpuQueueBackend` | `copyExternalImageToTexture` | `call` | `copyExternalImageToTexture` | `backend` | 1 | `src/flighthq/_internal/backend/WebGpuQueueBackend.hx` |
-| `WebGpuQueueBackend` | `writeBuffer` | `call` | `writeBuffer` | `backend` | 4 | `src/flighthq/_internal/backend/WebGpuQueueBackend.hx` |
+| `WebGpuQueueBackend` | `submit` | `call` | `submit` | `backend` | 4 | `src/flighthq/_internal/backend/WebGpuQueueBackend.hx` |
+| `WebGpuQueueBackend` | `writeBuffer` | `call` | `writeBuffer` | `backend` | 35 | `src/flighthq/_internal/backend/WebGpuQueueBackend.hx` |
+| `WebGpuQueueBackend` | `writeTexture` | `call` | `writeTexture` | `backend` | 10 | `src/flighthq/_internal/backend/WebGpuQueueBackend.hx` |

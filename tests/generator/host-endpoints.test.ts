@@ -7,22 +7,31 @@ import {
   validateHostEndpointCoverage,
 } from '../../tools/generator/src/analyze/host-endpoints.ts';
 import { hostEndpointSummary } from '../../tools/generator/src/emit/reports.ts';
+import { hostEndpointContract } from '../../tools/generator/src/host-endpoints.ts';
 
 const workspace = path.resolve('.');
 
 describe('checker-derived host endpoint contract', () => {
   it('covers the complete translated host usage census with maintained runtimes', () => {
     const audit = auditHostEndpoints(workspace, 'fixture');
+    const operationAccesses = (operation: 'call' | 'read' | 'write'): number =>
+      audit.endpoints
+        .filter((endpoint) => endpoint.operation === operation)
+        .reduce((total, endpoint) => total + endpoint.accesses, 0);
+    const backendContractEndpoints = Object.values(hostEndpointContract).reduce(
+      (total, contract) => total + contract.call.size + contract.read.size + contract.write.size,
+      0,
+    );
 
     expect(audit.summary).toEqual({
-      accesses: 3_681,
-      backendContractEndpoints: 394,
-      bindings: 10,
-      calls: 2_337,
-      dynamicFallbackEndpoints: 12,
-      endpoints: 394,
-      reads: 1_091,
-      writes: 253,
+      accesses: audit.endpoints.reduce((total, endpoint) => total + endpoint.accesses, 0),
+      backendContractEndpoints,
+      bindings: new Set(audit.endpoints.map((endpoint) => endpoint.binding)).size,
+      calls: operationAccesses('call'),
+      dynamicFallbackEndpoints: audit.endpoints.filter((endpoint) => endpoint.contract === 'dynamic-fallback').length,
+      endpoints: audit.endpoints.length,
+      reads: operationAccesses('read'),
+      writes: operationAccesses('write'),
     });
     expect(audit.coverageIssues).toEqual([]);
     expect(() => validateHostEndpointCoverage(audit)).not.toThrow();

@@ -3,9 +3,6 @@ package flighthq.scene3dWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq._internal.WebExterns.GPUBindGroup;
-import flighthq._internal.WebExterns.GPUBindGroupLayout;
-import flighthq._internal.WebExterns.GPUTexture;
 import flighthq.renderWgpu.WgpuBackground.retireWgpuTexture;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
@@ -30,82 +27,82 @@ class WgpuSkinPalette {
   public static function destroyWgpuSkinPalette(state:WgpuRenderState):Void {
     var runtime:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuScene3DRuntime);
-    _Runtime.callOptionalProperty(runtime.skinPaletteTexture, 'destroy', cast ([] : Array<Dynamic>));
-    (runtime.skinPaletteTexture = cast (null : flighthq._internal._Any));
-    (runtime.skinPaletteView = cast (null : flighthq._internal._Any));
+    ({ final __hostTypeCall1 = runtime.skinPaletteTexture; __hostTypeCall1 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall1 : flighthq._internal.dom.GPUTexture).destroy(); });
+    (runtime.skinPaletteTexture = cast (null : Null<flighthq._internal.dom.GPUTexture>));
+    (runtime.skinPaletteView = cast (null : Null<flighthq._internal.dom.GPUTextureView>));
     (runtime.skinPaletteArenaCursor = cast (0.0 : Float));
     (runtime.skinPaletteArenaRows = cast (0.0 : Float));
     (runtime.skinPaletteArenaBases = cast (null : Null<flighthq._internal._Map<flighthq._internal._Float32Array, Float>>));
-    (runtime.skinArenaFrame = cast (null : flighthq._internal._Any));
-    (runtime.skinDrawBindGroup = cast (null : flighthq._internal._Any));
-    _Runtime.callOptionalProperty(runtime.skinNormalPaletteTexture, 'destroy', cast ([] : Array<Dynamic>));
-    (runtime.skinNormalPaletteTexture = cast (null : flighthq._internal._Any));
-    (runtime.skinNormalPaletteView = cast (null : flighthq._internal._Any));
+    (runtime.skinArenaFrame = cast (null : Null<flighthq._internal.dom.GPUCommandEncoder>));
+    (runtime.skinDrawBindGroup = cast (null : Null<flighthq._internal.dom.GPUBindGroup>));
+    ({ final __hostTypeCall2 = runtime.skinNormalPaletteTexture; __hostTypeCall2 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall2 : flighthq._internal.dom.GPUTexture).destroy(); });
+    (runtime.skinNormalPaletteTexture = cast (null : Null<flighthq._internal.dom.GPUTexture>));
+    (runtime.skinNormalPaletteView = cast (null : Null<flighthq._internal.dom.GPUTextureView>));
     (runtime.skinNormalPaletteArenaCursor = cast (0.0 : Float));
     (runtime.skinNormalPaletteArenaRows = cast (0.0 : Float));
     (runtime.skinNormalPaletteArenaBases = cast (null : Null<flighthq._internal._Map<flighthq._internal._Float32Array, Float>>));
-    (runtime.skinMeshDrawBindGroup = cast (null : flighthq._internal._Any));
+    (runtime.skinMeshDrawBindGroup = cast (null : Null<flighthq._internal.dom.GPUBindGroup>));
   }
 
   @:noCompletion
-  public static function ensureWgpuSkinDrawBindGroup(state:WgpuRenderState, jointMatrices:flighthq._internal._Float32Array):GPUBindGroup {
+  public static function ensureWgpuSkinDrawBindGroup(state:WgpuRenderState, jointMatrices:flighthq._internal._Float32Array):flighthq._internal.dom.GPUBindGroup {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    scene = (cast getWgpuScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuScene3DRuntime);
-    stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
-    (cast uploadWgpuSkinPalette(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = jointMatrices; __callArgument4; })) : Float);
+    var view:flighthq._internal.dom.GPUTextureView = cast _Runtime.UNDEFINED;
+    scene = (cast getWgpuScene3DRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuScene3DRuntime);
+    stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuRenderStateRuntime);
+    (cast uploadWgpuSkinPalette(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = jointMatrices; __callArgument6; })) : Float);
     view = scene.skinPaletteView;
     if ((cast _Runtime.strictEquals(scene.skinDrawBindGroup, null) : Bool)) {
-      (scene.skinDrawBindGroup = cast (flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: ensureWgpuSkinDrawLayout(({ final __callArgument5:Dynamic = state; __callArgument5; })), entries: cast ([{ binding: 0.0, resource: { buffer: stateRuntime.uniformBuffer, size: 176.0 } }, { binding: 1.0, resource: view }] : Array<Dynamic>) }] : Array<Dynamic>)) : flighthq._internal._Any));
+      (scene.skinDrawBindGroup = cast (flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast ensureWgpuSkinDrawLayout(({ final __callArgument7:Dynamic = state; __callArgument7; })) : flighthq._internal.dom.GPUBindGroupLayout), entries: cast ([{ binding: 0.0, resource: { buffer: stateRuntime.uniformBuffer, size: 176.0 } }, { binding: 1.0, resource: view }] : Array<Dynamic>) }] : Array<Dynamic>)) : Null<flighthq._internal.dom.GPUBindGroup>));
     }
     return cast scene.skinDrawBindGroup;
     return cast null;
   }
 
   @:noCompletion
-  public static function ensureWgpuSkinDrawLayout(state:WgpuRenderState):GPUBindGroupLayout {
+  public static function ensureWgpuSkinDrawLayout(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroupLayout {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
-    scene = (cast getWgpuScene3DRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : WgpuScene3DRuntime);
+    scene = (cast getWgpuScene3DRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : WgpuScene3DRuntime);
     if ((cast _Runtime.strictEquals(scene.skinDrawBindGroupLayout, null) : Bool)) {
-      (scene.skinDrawBindGroupLayout = cast (flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'))), buffer: { type: 'uniform', hasDynamicOffset: true } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX'), texture: { sampleType: 'unfilterable-float' } }] : Array<Dynamic>) }] : Array<Dynamic>)) : flighthq._internal._Any));
+      (scene.skinDrawBindGroupLayout = cast (flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'))), buffer: { type: 'uniform', hasDynamicOffset: true } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX'), texture: { sampleType: 'unfilterable-float' } }] : Array<Dynamic>) }] : Array<Dynamic>)) : Null<flighthq._internal.dom.GPUBindGroupLayout>));
     }
     return cast scene.skinDrawBindGroupLayout;
     return cast null;
   }
 
   @:noCompletion
-  public static function ensureWgpuSkinMeshDrawBindGroup(state:WgpuRenderState, jointMatrices:flighthq._internal._Float32Array, normalMatrices:flighthq._internal._Float32Array):GPUBindGroup {
+  public static function ensureWgpuSkinMeshDrawBindGroup(state:WgpuRenderState, jointMatrices:flighthq._internal._Float32Array, normalMatrices:flighthq._internal._Float32Array):flighthq._internal.dom.GPUBindGroup {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    var poseView:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    var normalView:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    scene = (cast getWgpuScene3DRuntime(({ final __callArgument7:Dynamic = state; __callArgument7; })) : WgpuScene3DRuntime);
-    stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : WgpuRenderStateRuntime);
-    (cast uploadWgpuSkinPalette(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = jointMatrices; __callArgument10; })) : Float);
-    (cast uploadWgpuSkinNormalPalette(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = normalMatrices; __callArgument12; })) : Float);
+    var poseView:flighthq._internal.dom.GPUTextureView = cast _Runtime.UNDEFINED;
+    var normalView:flighthq._internal.dom.GPUTextureView = cast _Runtime.UNDEFINED;
+    scene = (cast getWgpuScene3DRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : WgpuScene3DRuntime);
+    stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : WgpuRenderStateRuntime);
+    (cast uploadWgpuSkinPalette(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = jointMatrices; __callArgument12; })) : Float);
+    (cast uploadWgpuSkinNormalPalette(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = normalMatrices; __callArgument14; })) : Float);
     poseView = scene.skinPaletteView;
     normalView = scene.skinNormalPaletteView;
     if ((cast _Runtime.strictEquals(scene.skinMeshDrawBindGroup, null) : Bool)) {
-      (scene.skinMeshDrawBindGroup = cast (flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: ensureWgpuSkinMeshDrawLayout(({ final __callArgument13:Dynamic = state; __callArgument13; })), entries: cast ([{ binding: 0.0, resource: { buffer: stateRuntime.uniformBuffer, size: 176.0 } }, { binding: 1.0, resource: poseView }, { binding: 2.0, resource: normalView }] : Array<Dynamic>) }] : Array<Dynamic>)) : flighthq._internal._Any));
+      (scene.skinMeshDrawBindGroup = cast (flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast ensureWgpuSkinMeshDrawLayout(({ final __callArgument15:Dynamic = state; __callArgument15; })) : flighthq._internal.dom.GPUBindGroupLayout), entries: cast ([{ binding: 0.0, resource: { buffer: stateRuntime.uniformBuffer, size: 176.0 } }, { binding: 1.0, resource: poseView }, { binding: 2.0, resource: normalView }] : Array<Dynamic>) }] : Array<Dynamic>)) : Null<flighthq._internal.dom.GPUBindGroup>));
     }
     return cast scene.skinMeshDrawBindGroup;
     return cast null;
   }
 
   @:noCompletion
-  public static function ensureWgpuSkinMeshDrawLayout(state:WgpuRenderState):GPUBindGroupLayout {
+  public static function ensureWgpuSkinMeshDrawLayout(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroupLayout {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
-    scene = (cast getWgpuScene3DRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : WgpuScene3DRuntime);
+    scene = (cast getWgpuScene3DRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : WgpuScene3DRuntime);
     if ((cast _Runtime.strictEquals(scene.skinMeshDrawBindGroupLayout, null) : Bool)) {
-      (scene.skinMeshDrawBindGroupLayout = cast (flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'))), buffer: { type: 'uniform', hasDynamicOffset: true } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX'), texture: { sampleType: 'unfilterable-float' } }, { binding: 2.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX'), texture: { sampleType: 'unfilterable-float' } }] : Array<Dynamic>) }] : Array<Dynamic>)) : flighthq._internal._Any));
+      (scene.skinMeshDrawBindGroupLayout = cast (flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'))), buffer: { type: 'uniform', hasDynamicOffset: true } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX'), texture: { sampleType: 'unfilterable-float' } }, { binding: 2.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX'), texture: { sampleType: 'unfilterable-float' } }] : Array<Dynamic>) }] : Array<Dynamic>)) : Null<flighthq._internal.dom.GPUBindGroupLayout>));
     }
     return cast scene.skinMeshDrawBindGroupLayout;
     return cast null;
   }
 
   public static function registerWgpuGpuSkinning(state:WgpuRenderState):Void {
-    ((cast (cast getWgpuScene3DRuntime(({ final __callArgument15:Dynamic = state; __callArgument15; })) : WgpuScene3DRuntime) : { var skinningAdapter:flighthq._internal._Any; }).skinningAdapter = cast (WgpuSkinPalette.WGPU_SKINNING_ADAPTER__wgpuSkinPalette : flighthq._internal._Any));
+    ((cast (cast getWgpuScene3DRuntime(({ final __callArgument17:Dynamic = state; __callArgument17; })) : WgpuScene3DRuntime) : { var skinningAdapter:flighthq._internal._Any; }).skinningAdapter = cast (WgpuSkinPalette.WGPU_SKINNING_ADAPTER__wgpuSkinPalette : flighthq._internal._Any));
   }
 
   @:noCompletion
@@ -116,8 +113,8 @@ class WgpuSkinPalette {
     var texels:Float = cast _Runtime.UNDEFINED;
     var base:Float = cast _Runtime.UNDEFINED;
     var rows:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuScene3DRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : WgpuScene3DRuntime);
-    WgpuSkinPalette.beginWgpuSkinArenaFrame__wgpuSkinPalette(({ final __callArgument17:Dynamic = state; __callArgument17; }));
+    runtime = (cast getWgpuScene3DRuntime(({ final __callArgument18:Dynamic = state; __callArgument18; })) : WgpuScene3DRuntime);
+    WgpuSkinPalette.beginWgpuSkinArenaFrame__wgpuSkinPalette(({ final __callArgument19:Dynamic = state; __callArgument19; }));
     bases = runtime.skinNormalPaletteArenaBases;
     existing = ((cast bases : flighthq._internal._Map<flighthq._internal._Float32Array, Float>).get(normalMatrices));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
@@ -125,18 +122,18 @@ class WgpuSkinPalette {
     base = runtime.skinNormalPaletteArenaCursor;
     rows = (cast WgpuSkinPalette.getWgpuSkinArenaRowCount__wgpuSkinPalette((cast (base + texels) : Float)) : Float);
     if ((cast ((cast rows : Float) > (cast runtime.skinNormalPaletteArenaRows : Float)) : Bool)) {
-      if ((cast !_Runtime.strictEquals(runtime.skinNormalPaletteTexture, null) : Bool)) { retireWgpuTexture(({ final __callArgument18:Dynamic = state; __callArgument18; }), (cast runtime.skinNormalPaletteTexture : flighthq._internal._Any)); }
-      (runtime.skinNormalPaletteTexture = cast (WgpuSkinPalette.createWgpuSkinArenaTexture__wgpuSkinPalette(({ final __callArgument19:Dynamic = state; __callArgument19; }), (cast rows : Float)) : flighthq._internal._Any));
-      (runtime.skinNormalPaletteView = cast (_Runtime.callProperty(runtime.skinNormalPaletteTexture, 'createView', cast ([] : Array<Dynamic>)) : flighthq._internal._Any));
+      if ((cast !_Runtime.strictEquals(runtime.skinNormalPaletteTexture, null) : Bool)) { retireWgpuTexture(({ final __callArgument20:Dynamic = state; __callArgument20; }), runtime.skinNormalPaletteTexture); }
+      (runtime.skinNormalPaletteTexture = cast ((cast WgpuSkinPalette.createWgpuSkinArenaTexture__wgpuSkinPalette(({ final __callArgument21:Dynamic = state; __callArgument21; }), (cast rows : Float)) : flighthq._internal.dom.GPUTexture) : Null<flighthq._internal.dom.GPUTexture>));
+      (runtime.skinNormalPaletteView = cast ((cast runtime.skinNormalPaletteTexture : flighthq._internal.dom.GPUTexture).createView() : Null<flighthq._internal.dom.GPUTextureView>));
       (runtime.skinNormalPaletteArenaRows = cast (rows : Float));
-      (runtime.skinMeshDrawBindGroup = cast (null : flighthq._internal._Any));
+      (runtime.skinMeshDrawBindGroup = cast (null : Null<flighthq._internal.dom.GPUBindGroup>));
       for (__iteration0 in _Runtime.iterable(bases)) {
         var palette:flighthq._internal._Float32Array = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
         var replayBase:Float = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
-        WgpuSkinPalette.writeWgpuSkinArenaRegion__wgpuSkinPalette(({ final __callArgument22:Dynamic = state; __callArgument22; }), (cast runtime.skinNormalPaletteTexture : flighthq._internal._Any), ({ final __callArgument23:Dynamic = palette; __callArgument23; }), (cast replayBase : Float));
+        WgpuSkinPalette.writeWgpuSkinArenaRegion__wgpuSkinPalette(({ final __callArgument24:Dynamic = state; __callArgument24; }), runtime.skinNormalPaletteTexture, ({ final __callArgument25:Dynamic = palette; __callArgument25; }), (cast replayBase : Float));
       }
     }
-    WgpuSkinPalette.writeWgpuSkinArenaRegion__wgpuSkinPalette(({ final __callArgument24:Dynamic = state; __callArgument24; }), (cast runtime.skinNormalPaletteTexture : flighthq._internal._Any), ({ final __callArgument25:Dynamic = normalMatrices; __callArgument25; }), (cast base : Float));
+    WgpuSkinPalette.writeWgpuSkinArenaRegion__wgpuSkinPalette(({ final __callArgument26:Dynamic = state; __callArgument26; }), ({ final __callArgument27:Dynamic = runtime.skinNormalPaletteTexture; __callArgument27; }), ({ final __callArgument28:Dynamic = normalMatrices; __callArgument28; }), (cast base : Float));
     (runtime.skinNormalPaletteArenaCursor = cast ((base + (cast WgpuSkinPalette.rowAlignedWgpuSkinArenaTexels__wgpuSkinPalette((cast texels : Float)) : Float)) : Float));
     ((cast bases : flighthq._internal._Map<flighthq._internal._Float32Array, Float>).set(normalMatrices, (cast base)));
     (runtime.pendingSkinNormalPaletteBase = cast (base : Float));
@@ -152,8 +149,8 @@ class WgpuSkinPalette {
     var texels:Float = cast _Runtime.UNDEFINED;
     var base:Float = cast _Runtime.UNDEFINED;
     var rows:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuScene3DRuntime(({ final __callArgument26:Dynamic = state; __callArgument26; })) : WgpuScene3DRuntime);
-    WgpuSkinPalette.beginWgpuSkinArenaFrame__wgpuSkinPalette(({ final __callArgument27:Dynamic = state; __callArgument27; }));
+    runtime = (cast getWgpuScene3DRuntime(({ final __callArgument29:Dynamic = state; __callArgument29; })) : WgpuScene3DRuntime);
+    WgpuSkinPalette.beginWgpuSkinArenaFrame__wgpuSkinPalette(({ final __callArgument30:Dynamic = state; __callArgument30; }));
     bases = runtime.skinPaletteArenaBases;
     existing = ((cast bases : flighthq._internal._Map<flighthq._internal._Float32Array, Float>).get(jointMatrices));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -164,19 +161,19 @@ class WgpuSkinPalette {
     base = runtime.skinPaletteArenaCursor;
     rows = (cast WgpuSkinPalette.getWgpuSkinArenaRowCount__wgpuSkinPalette((cast (base + texels) : Float)) : Float);
     if ((cast ((cast rows : Float) > (cast runtime.skinPaletteArenaRows : Float)) : Bool)) {
-      if ((cast !_Runtime.strictEquals(runtime.skinPaletteTexture, null) : Bool)) { retireWgpuTexture(({ final __callArgument28:Dynamic = state; __callArgument28; }), (cast runtime.skinPaletteTexture : flighthq._internal._Any)); }
-      (runtime.skinPaletteTexture = cast (WgpuSkinPalette.createWgpuSkinArenaTexture__wgpuSkinPalette(({ final __callArgument29:Dynamic = state; __callArgument29; }), (cast rows : Float)) : flighthq._internal._Any));
-      (runtime.skinPaletteView = cast (_Runtime.callProperty(runtime.skinPaletteTexture, 'createView', cast ([] : Array<Dynamic>)) : flighthq._internal._Any));
+      if ((cast !_Runtime.strictEquals(runtime.skinPaletteTexture, null) : Bool)) { retireWgpuTexture(({ final __callArgument31:Dynamic = state; __callArgument31; }), runtime.skinPaletteTexture); }
+      (runtime.skinPaletteTexture = cast ((cast WgpuSkinPalette.createWgpuSkinArenaTexture__wgpuSkinPalette(({ final __callArgument32:Dynamic = state; __callArgument32; }), (cast rows : Float)) : flighthq._internal.dom.GPUTexture) : Null<flighthq._internal.dom.GPUTexture>));
+      (runtime.skinPaletteView = cast ((cast runtime.skinPaletteTexture : flighthq._internal.dom.GPUTexture).createView() : Null<flighthq._internal.dom.GPUTextureView>));
       (runtime.skinPaletteArenaRows = cast (rows : Float));
-      (runtime.skinDrawBindGroup = cast (null : flighthq._internal._Any));
-      (runtime.skinMeshDrawBindGroup = cast (null : flighthq._internal._Any));
+      (runtime.skinDrawBindGroup = cast (null : Null<flighthq._internal.dom.GPUBindGroup>));
+      (runtime.skinMeshDrawBindGroup = cast (null : Null<flighthq._internal.dom.GPUBindGroup>));
       for (__iteration1 in _Runtime.iterable(bases)) {
         var palette:flighthq._internal._Float32Array = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
         var replayBase:Float = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
-        WgpuSkinPalette.writeWgpuSkinArenaRegion__wgpuSkinPalette(({ final __callArgument32:Dynamic = state; __callArgument32; }), (cast runtime.skinPaletteTexture : flighthq._internal._Any), ({ final __callArgument33:Dynamic = palette; __callArgument33; }), (cast replayBase : Float));
+        WgpuSkinPalette.writeWgpuSkinArenaRegion__wgpuSkinPalette(({ final __callArgument35:Dynamic = state; __callArgument35; }), runtime.skinPaletteTexture, ({ final __callArgument36:Dynamic = palette; __callArgument36; }), (cast replayBase : Float));
       }
     }
-    WgpuSkinPalette.writeWgpuSkinArenaRegion__wgpuSkinPalette(({ final __callArgument34:Dynamic = state; __callArgument34; }), (cast runtime.skinPaletteTexture : flighthq._internal._Any), ({ final __callArgument35:Dynamic = jointMatrices; __callArgument35; }), (cast base : Float));
+    WgpuSkinPalette.writeWgpuSkinArenaRegion__wgpuSkinPalette(({ final __callArgument37:Dynamic = state; __callArgument37; }), ({ final __callArgument38:Dynamic = runtime.skinPaletteTexture; __callArgument38; }), ({ final __callArgument39:Dynamic = jointMatrices; __callArgument39; }), (cast base : Float));
     (runtime.skinPaletteArenaCursor = cast ((base + (cast WgpuSkinPalette.rowAlignedWgpuSkinArenaTexels__wgpuSkinPalette((cast texels : Float)) : Float)) : Float));
     ((cast bases : flighthq._internal._Map<flighthq._internal._Float32Array, Float>).set(jointMatrices, (cast base)));
     (runtime.pendingSkinPaletteBase = cast (base : Float));
@@ -186,18 +183,18 @@ class WgpuSkinPalette {
 
   public static function beginWgpuSkinArenaFrame__wgpuSkinPalette(state:WgpuRenderState):Void {
     var runtime:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
-    var encoder:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuScene3DRuntime(({ final __callArgument36:Dynamic = state; __callArgument36; })) : WgpuScene3DRuntime);
-    encoder = (cast (cast getWgpuRenderStateRuntime(({ final __callArgument37:Dynamic = state; __callArgument37; })) : WgpuRenderStateRuntime) : { var commandEncoder:flighthq._internal._Any; }).commandEncoder;
+    var encoder:Null<flighthq._internal.dom.GPUCommandEncoder> = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuScene3DRuntime(({ final __callArgument40:Dynamic = state; __callArgument40; })) : WgpuScene3DRuntime);
+    encoder = (cast (cast getWgpuRenderStateRuntime(({ final __callArgument41:Dynamic = state; __callArgument41; })) : WgpuRenderStateRuntime) : { var commandEncoder:Null<flighthq._internal.dom.GPUCommandEncoder>; }).commandEncoder;
     if ((cast ((cast _Runtime.strictEquals(runtime.skinArenaFrame, encoder) : Bool) && (cast !_Runtime.strictEquals(runtime.skinPaletteArenaBases, null) : Bool)) : Bool)) { return; }
-    (runtime.skinArenaFrame = cast (encoder : flighthq._internal._Any));
+    (runtime.skinArenaFrame = cast (encoder : Null<flighthq._internal.dom.GPUCommandEncoder>));
     (runtime.skinPaletteArenaCursor = cast (0.0 : Float));
     (runtime.skinNormalPaletteArenaCursor = cast (0.0 : Float));
     (runtime.skinPaletteArenaBases = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<flighthq._internal._Float32Array, Float>>));
     (runtime.skinNormalPaletteArenaBases = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<flighthq._internal._Float32Array, Float>>));
   }
 
-  public static function createWgpuSkinArenaTexture__wgpuSkinPalette(state:WgpuRenderState, rows:Float):GPUTexture {
+  public static function createWgpuSkinArenaTexture__wgpuSkinPalette(state:WgpuRenderState, rows:Float):flighthq._internal.dom.GPUTexture {
     return cast flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createTexture', cast ([{ size: cast ([WgpuSkinPalette.WGPU_SKIN_ARENA_WIDTH__wgpuSkinPalette, rows, 1.0] : Array<Dynamic>), format: 'rgba32float', usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
     return cast null;
   }
@@ -212,12 +209,12 @@ class WgpuSkinPalette {
     return cast null;
   }
 
-  public static function writeWgpuSkinArenaRegion__wgpuSkinPalette(state:WgpuRenderState, texture:GPUTexture, palette:flighthq._internal._Float32Array, base:Float):Void {
+  public static function writeWgpuSkinArenaRegion__wgpuSkinPalette(state:WgpuRenderState, texture:flighthq._internal.dom.GPUTexture, palette:flighthq._internal._Float32Array, base:Float):Void {
     var texels:Float = cast _Runtime.UNDEFINED;
     var startRow:Float = cast _Runtime.UNDEFINED;
     var fullRows:Float = cast _Runtime.UNDEFINED;
     var remainder:Float = cast _Runtime.UNDEFINED;
-    var queue:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var queue:flighthq._internal.dom.GPUQueue = cast _Runtime.UNDEFINED;
     var data:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     texels = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(palette, 'length'), 4.0)) | 0);
     startRow = (base / WgpuSkinPalette.WGPU_SKIN_ARENA_WIDTH__wgpuSkinPalette);
@@ -226,10 +223,10 @@ class WgpuSkinPalette {
     queue = flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue');
     data = (cast palette : flighthq._internal._Float32Array);
     if ((cast ((cast fullRows : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callProperty(queue, 'writeTexture', cast ([{ texture: texture, origin: cast ([0.0, startRow, 0.0] : Array<Dynamic>) }, data, { bytesPerRow: (WgpuSkinPalette.WGPU_SKIN_ARENA_WIDTH__wgpuSkinPalette * 16.0), rowsPerImage: fullRows }, cast ([WgpuSkinPalette.WGPU_SKIN_ARENA_WIDTH__wgpuSkinPalette, fullRows, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
+      flighthq._internal.backend.WebGpuQueueBackend.call(queue, 'writeTexture', cast ([{ texture: texture, origin: cast ([0.0, startRow, 0.0] : Array<Dynamic>) }, data, { bytesPerRow: (WgpuSkinPalette.WGPU_SKIN_ARENA_WIDTH__wgpuSkinPalette * 16.0), rowsPerImage: fullRows }, cast ([WgpuSkinPalette.WGPU_SKIN_ARENA_WIDTH__wgpuSkinPalette, fullRows, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
     }
     if ((cast ((cast remainder : Float) > (cast 0.0 : Float)) : Bool)) {
-      _Runtime.callProperty(queue, 'writeTexture', cast ([{ texture: texture, origin: cast ([0.0, (startRow + fullRows), 0.0] : Array<Dynamic>) }, data, { offset: ((fullRows * WgpuSkinPalette.WGPU_SKIN_ARENA_WIDTH__wgpuSkinPalette) * 16.0), bytesPerRow: (remainder * 16.0) }, cast ([remainder, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
+      flighthq._internal.backend.WebGpuQueueBackend.call(queue, 'writeTexture', cast ([{ texture: texture, origin: cast ([0.0, (startRow + fullRows), 0.0] : Array<Dynamic>) }, data, { offset: ((fullRows * WgpuSkinPalette.WGPU_SKIN_ARENA_WIDTH__wgpuSkinPalette) * 16.0), bytesPerRow: (remainder * 16.0) }, cast ([remainder, 1.0, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
     }
   }
 
@@ -278,16 +275,16 @@ class WgpuSkinPalette {
     var runtime:Null<MeshGeometryRuntime> = cast _Runtime.UNDEFINED;
     var bindPose:Null<MeshSkinBindPose> = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    bindPose = ((cast _Runtime.looseEquals(({ final __typedStruct38 = runtime; __typedStruct38 == null ? _Runtime.UNDEFINED : (cast __typedStruct38 : { var morphBindPose:Null<MeshMorphBindPose>; }).morphBindPose; }), null) : Bool) ? (cast ({ final __typedStruct39 = runtime; __typedStruct39 == null ? _Runtime.UNDEFINED : (cast __typedStruct39 : { var skinBindPose:Null<MeshSkinBindPose>; }).skinBindPose; }) : Dynamic) : (cast null : Dynamic));
+    bindPose = ((cast _Runtime.looseEquals(({ final __typedStruct42 = runtime; __typedStruct42 == null ? _Runtime.UNDEFINED : (cast __typedStruct42 : { var morphBindPose:Null<MeshMorphBindPose>; }).morphBindPose; }), null) : Bool) ? (cast ({ final __typedStruct43 = runtime; __typedStruct43 == null ? _Runtime.UNDEFINED : (cast __typedStruct43 : { var skinBindPose:Null<MeshSkinBindPose>; }).skinBindPose; }) : Dynamic) : (cast null : Dynamic));
     if ((cast _Runtime.looseEquals(bindPose, null) : Bool)) { return cast null; }
-    return cast (cast WgpuSkinPalette.buildSkinBindVertices__wgpuSkinPalette(({ final __callArgument40:Dynamic = geometry; __callArgument40; }), ({ final __callArgument41:Dynamic = bindPose; __callArgument41; })) : flighthq._internal._Float32Array);
+    return cast (cast WgpuSkinPalette.buildSkinBindVertices__wgpuSkinPalette(({ final __callArgument44:Dynamic = geometry; __callArgument44; }), ({ final __callArgument45:Dynamic = bindPose; __callArgument45; })) : flighthq._internal._Float32Array);
     return cast null;
   }
 
   public static function hasBindPose__wgpuSkinPalette(geometry:MeshGeometry):Bool {
     var runtime:Null<MeshGeometryRuntime> = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    return cast ((cast _Runtime.looseEquals(({ final __typedStruct42 = runtime; __typedStruct42 == null ? _Runtime.UNDEFINED : (cast __typedStruct42 : { var morphBindPose:Null<MeshMorphBindPose>; }).morphBindPose; }), null) : Bool) && (cast !_Runtime.looseEquals(({ final __typedStruct43 = runtime; __typedStruct43 == null ? _Runtime.UNDEFINED : (cast __typedStruct43 : { var skinBindPose:Null<MeshSkinBindPose>; }).skinBindPose; }), null) : Bool));
+    return cast ((cast _Runtime.looseEquals(({ final __typedStruct46 = runtime; __typedStruct46 == null ? _Runtime.UNDEFINED : (cast __typedStruct46 : { var morphBindPose:Null<MeshMorphBindPose>; }).morphBindPose; }), null) : Bool) && (cast !_Runtime.looseEquals(({ final __typedStruct47 = runtime; __typedStruct47 == null ? _Runtime.UNDEFINED : (cast __typedStruct47 : { var skinBindPose:Null<MeshSkinBindPose>; }).skinBindPose; }), null) : Bool));
     return cast null;
   }
 
@@ -299,8 +296,8 @@ class WgpuSkinPalette {
     var vertexCount:Float = cast _Runtime.UNDEFINED;
     out = _Runtime.slice(geometry.vertices, 0, null);
     floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
-    positionOffset = (cast WgpuSkinPalette.floatOffsetForSemantic__wgpuSkinPalette(({ final __callArgument44:Dynamic = geometry; __callArgument44; }), (cast 'position' : String)) : Float);
-    normalOffset = (cast WgpuSkinPalette.floatOffsetForSemantic__wgpuSkinPalette(({ final __callArgument45:Dynamic = geometry; __callArgument45; }), (cast 'normal' : String)) : Float);
+    positionOffset = (cast WgpuSkinPalette.floatOffsetForSemantic__wgpuSkinPalette(({ final __callArgument48:Dynamic = geometry; __callArgument48; }), (cast 'position' : String)) : Float);
+    normalOffset = (cast WgpuSkinPalette.floatOffsetForSemantic__wgpuSkinPalette(({ final __callArgument49:Dynamic = geometry; __callArgument49; }), (cast 'normal' : String)) : Float);
     vertexCount = (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(bindPose.positions, 'length'), 3.0)) | 0);
     {
       var v:Float = 0.0;

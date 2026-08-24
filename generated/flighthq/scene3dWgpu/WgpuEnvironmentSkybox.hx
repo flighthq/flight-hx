@@ -3,13 +3,6 @@ package flighthq.scene3dWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq._internal.WebExterns.GPUBindGroup;
-import flighthq._internal.WebExterns.GPUBindGroupLayout;
-import flighthq._internal.WebExterns.GPUBuffer;
-import flighthq._internal.WebExterns.GPURenderPipeline;
-import flighthq._internal.WebExterns.GPUSampler;
-import flighthq._internal.WebExterns.GPUTextureFormat;
-import flighthq._internal.WebExterns.GPUTextureView;
 import flighthq.camera.Camera.updateCamera3DInverseViewProjection;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.scene3dWgpu.WgpuEnvironmentCube.ensureWgpuEnvironmentSourceCube;
@@ -21,26 +14,26 @@ import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
 import flighthq.types.WgpuScene3DRuntime;
 
-typedef WgpuSkybox__wgpuEnvironmentSkybox = { var cubeBindGroup:Null<GPUBindGroup>; var cubeBindGroupLayout:GPUBindGroupLayout; var cubeView:Null<GPUTextureView>; var pipeline:GPURenderPipeline; var uniformBindGroup:GPUBindGroup; var uniformBuffer:GPUBuffer; };
+typedef WgpuSkybox__wgpuEnvironmentSkybox = { var cubeBindGroup:Null<flighthq._internal.dom.GPUBindGroup>; var cubeBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var cubeView:Null<flighthq._internal.dom.GPUTextureView>; var pipeline:flighthq._internal.dom.GPURenderPipeline; var uniformBindGroup:flighthq._internal.dom.GPUBindGroup; var uniformBuffer:flighthq._internal.dom.GPUBuffer; };
 
 class WgpuEnvironmentSkybox {
   public static function drawWgpuEnvironmentSkybox(state:WgpuRenderState, environment:Environment, camera:Camera3D, aspect:Float):Void {
-    var cubeView:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var cubeView:Null<flighthq._internal.dom.GPUTextureView> = cast _Runtime.UNDEFINED;
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    var pass:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
-    var format:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var format:String = cast _Runtime.UNDEFINED;
     var sky:WgpuSkybox__wgpuEnvironmentSkybox = cast _Runtime.UNDEFINED;
     var u:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    cubeView = ensureWgpuEnvironmentSourceCube(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = environment; __callArgument1; }));
+    cubeView = (cast ensureWgpuEnvironmentSourceCube(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = environment; __callArgument1; })) : Null<flighthq._internal.dom.GPUTextureView>);
     if ((cast _Runtime.strictEquals(cubeView, null) : Bool)) { return; }
     stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
     pass = stateRuntime.renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuScene3DRuntime);
     format = _Runtime.coalesce(stateRuntime.currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
-    sky = (cast WgpuEnvironmentSkybox.ensureWgpuSkyboxPipeline__wgpuEnvironmentSkybox(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast format : flighthq._internal._Any)) : WgpuSkybox__wgpuEnvironmentSkybox);
+    sky = (cast WgpuEnvironmentSkybox.ensureWgpuSkyboxPipeline__wgpuEnvironmentSkybox(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast format : String)) : WgpuSkybox__wgpuEnvironmentSkybox);
     if ((cast !(cast (cast updateCamera3DInverseViewProjection(({ final __callArgument5:Dynamic = camera; __callArgument5; }), (cast aspect : Float)) : Bool) : Bool) : Bool)) { return; }
     u = WgpuEnvironmentSkybox._skyScratch__wgpuEnvironmentSkybox;
     m = (cast camera.inverseViewProjection : { var m:flighthq._internal._Float32Array; }).m;
@@ -55,35 +48,35 @@ class WgpuEnvironmentSkybox {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 17.0 : Float), (cast 0.0 : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 18.0 : Float), (cast 0.0 : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast u : flighthq._internal._Float32Array), (cast 19.0 : Float), (cast 0.0 : Float));
-    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([(cast sky : WgpuSkybox__wgpuEnvironmentSkybox).uniformBuffer, 0.0, _Runtime.field(u, 'buffer'), 0.0, WgpuEnvironmentSkybox.SKYBOX_UNIFORM_BYTES__wgpuEnvironmentSkybox] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([(cast sky : WgpuSkybox__wgpuEnvironmentSkybox).uniformBuffer, 0.0, _Runtime.field(u, 'buffer'), 0.0, WgpuEnvironmentSkybox.SKYBOX_UNIFORM_BYTES__wgpuEnvironmentSkybox] : Array<Dynamic>));
     if ((cast ((cast _Runtime.strictEquals((cast sky : WgpuSkybox__wgpuEnvironmentSkybox).cubeBindGroup, null) : Bool) || (cast !_Runtime.strictEquals((cast sky : WgpuSkybox__wgpuEnvironmentSkybox).cubeView, cubeView) : Bool)) : Bool)) {
-      ((cast sky : WgpuSkybox__wgpuEnvironmentSkybox).cubeBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast sky : WgpuSkybox__wgpuEnvironmentSkybox).cubeBindGroupLayout, entries: cast ([{ binding: 0.0, resource: cubeView }, { binding: 1.0, resource: WgpuEnvironmentSkybox.getWgpuSkyboxSampler__wgpuEnvironmentSkybox(({ final __callArgument6:Dynamic = state; __callArgument6; })) }] : Array<Dynamic>) }] : Array<Dynamic>)));
+      ((cast sky : WgpuSkybox__wgpuEnvironmentSkybox).cubeBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast sky : WgpuSkybox__wgpuEnvironmentSkybox).cubeBindGroupLayout, entries: cast ([{ binding: 0.0, resource: cubeView }, { binding: 1.0, resource: (cast WgpuEnvironmentSkybox.getWgpuSkyboxSampler__wgpuEnvironmentSkybox(({ final __callArgument6:Dynamic = state; __callArgument6; })) : flighthq._internal.dom.GPUSampler) }] : Array<Dynamic>) }] : Array<Dynamic>)));
       ((cast sky : WgpuSkybox__wgpuEnvironmentSkybox).cubeView = cubeView);
     }
-    _Runtime.callProperty(pass, 'setPipeline', cast ([(cast sky : WgpuSkybox__wgpuEnvironmentSkybox).pipeline] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, (cast sky : WgpuSkybox__wgpuEnvironmentSkybox).uniformBindGroup] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, (cast sky : WgpuSkybox__wgpuEnvironmentSkybox).cubeBindGroup] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'draw', cast ([3.0] : Array<Dynamic>));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline((cast sky : WgpuSkybox__wgpuEnvironmentSkybox).pipeline);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, (cast sky : WgpuSkybox__wgpuEnvironmentSkybox).uniformBindGroup);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, (cast sky : WgpuSkybox__wgpuEnvironmentSkybox).cubeBindGroup);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(3.0);
     _Runtime.voidValue(scene);
   }
 
-  public static function ensureWgpuSkyboxPipeline__wgpuEnvironmentSkybox(state:WgpuRenderState, format:GPUTextureFormat):WgpuSkybox__wgpuEnvironmentSkybox {
-    var byState:Null<flighthq._internal._Map<flighthq._internal._Any, WgpuSkybox__wgpuEnvironmentSkybox>> = cast _Runtime.UNDEFINED;
+  public static function ensureWgpuSkyboxPipeline__wgpuEnvironmentSkybox(state:WgpuRenderState, format:flighthq._internal.dom.GPUTextureFormat):WgpuSkybox__wgpuEnvironmentSkybox {
+    var byState:Null<flighthq._internal._Map<String, WgpuSkybox__wgpuEnvironmentSkybox>> = cast _Runtime.UNDEFINED;
     var sky:Null<WgpuSkybox__wgpuEnvironmentSkybox> = cast _Runtime.UNDEFINED;
-    var device:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    var module:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    var uniformBindGroupLayout:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    var cubeBindGroupLayout:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    var layout:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    var pipeline:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    var uniformBuffer:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    var uniformBindGroup:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    byState = ((cast WgpuEnvironmentSkybox._skyboxes__wgpuEnvironmentSkybox : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<flighthq._internal._Any, WgpuSkybox__wgpuEnvironmentSkybox>>).get(state));
+    var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
+    var module:flighthq._internal.dom.GPUShaderModule = cast _Runtime.UNDEFINED;
+    var uniformBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout = cast _Runtime.UNDEFINED;
+    var cubeBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout = cast _Runtime.UNDEFINED;
+    var layout:flighthq._internal.dom.GPUPipelineLayout = cast _Runtime.UNDEFINED;
+    var pipeline:flighthq._internal.dom.GPURenderPipeline = cast _Runtime.UNDEFINED;
+    var uniformBuffer:flighthq._internal.dom.GPUBuffer = cast _Runtime.UNDEFINED;
+    var uniformBindGroup:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
+    byState = ((cast WgpuEnvironmentSkybox._skyboxes__wgpuEnvironmentSkybox : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuSkybox__wgpuEnvironmentSkybox>>).get(state));
     if ((cast _Runtime.strictEquals(byState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (byState = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-      ((cast WgpuEnvironmentSkybox._skyboxes__wgpuEnvironmentSkybox : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<flighthq._internal._Any, WgpuSkybox__wgpuEnvironmentSkybox>>).set(state, (cast byState)));
+      ((cast WgpuEnvironmentSkybox._skyboxes__wgpuEnvironmentSkybox : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuSkybox__wgpuEnvironmentSkybox>>).set(state, (cast byState)));
     }
-    sky = ((cast byState : flighthq._internal._Map<flighthq._internal._Any, WgpuSkybox__wgpuEnvironmentSkybox>).get(format));
+    sky = ((cast byState : flighthq._internal._Map<String, WgpuSkybox__wgpuEnvironmentSkybox>).get(format));
     if ((cast !_Runtime.strictEquals(sky, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast sky; }
     device = (cast state : WgpuRenderState).device;
     module = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: WgpuEnvironmentSkybox.SKYBOX_WGSL__wgpuEnvironmentSkybox }] : Array<Dynamic>));
@@ -94,31 +87,31 @@ class WgpuEnvironmentSkybox {
     uniformBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBuffer', cast ([{ size: WgpuEnvironmentSkybox.SKYBOX_UNIFORM_BYTES__wgpuEnvironmentSkybox, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
     uniformBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: uniformBindGroupLayout, entries: cast ([{ binding: 0.0, resource: { buffer: uniformBuffer } }] : Array<Dynamic>) }] : Array<Dynamic>));
     (sky = cast ({ cubeBindGroup: null, cubeBindGroupLayout: cubeBindGroupLayout, cubeView: null, pipeline: pipeline, uniformBindGroup: uniformBindGroup, uniformBuffer: uniformBuffer } : Dynamic));
-    ((cast byState : flighthq._internal._Map<flighthq._internal._Any, WgpuSkybox__wgpuEnvironmentSkybox>).set(format, (cast sky)));
+    ((cast byState : flighthq._internal._Map<String, WgpuSkybox__wgpuEnvironmentSkybox>).set(format, (cast sky)));
     return cast sky;
     return cast null;
   }
 
-  public static function getWgpuSkyboxSampler__wgpuEnvironmentSkybox(state:WgpuRenderState):GPUSampler {
-    var sampler:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    sampler = ((cast WgpuEnvironmentSkybox._skyboxSamplers__wgpuEnvironmentSkybox : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Any>).get(state));
+  public static function getWgpuSkyboxSampler__wgpuEnvironmentSkybox(state:WgpuRenderState):flighthq._internal.dom.GPUSampler {
+    var sampler:Null<flighthq._internal.dom.GPUSampler> = cast _Runtime.UNDEFINED;
+    sampler = ((cast WgpuEnvironmentSkybox._skyboxSamplers__wgpuEnvironmentSkybox : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal.dom.GPUSampler>).get(state));
     if ((cast _Runtime.strictEquals(sampler, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (sampler = cast (flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createSampler', cast ([{ magFilter: 'linear', minFilter: 'linear' }] : Array<Dynamic>)) : Dynamic));
-      ((cast WgpuEnvironmentSkybox._skyboxSamplers__wgpuEnvironmentSkybox : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Any>).set(state, (cast sampler)));
+      ((cast WgpuEnvironmentSkybox._skyboxSamplers__wgpuEnvironmentSkybox : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal.dom.GPUSampler>).set(state, (cast sampler)));
     }
     return cast sampler;
     return cast null;
   }
 
-  public static final SKYBOX_DEPTH_STENCIL_FORMAT__wgpuEnvironmentSkybox:GPUTextureFormat = 'depth24plus-stencil8';
+  public static final SKYBOX_DEPTH_STENCIL_FORMAT__wgpuEnvironmentSkybox:flighthq._internal.dom.GPUTextureFormat = 'depth24plus-stencil8';
 
   public static final SKYBOX_UNIFORM_BYTES__wgpuEnvironmentSkybox:Float = 80.0;
 
   public static final _skyScratch__wgpuEnvironmentSkybox:flighthq._internal._Float32Array = new flighthq._internal._Float32Array((WgpuEnvironmentSkybox.SKYBOX_UNIFORM_BYTES__wgpuEnvironmentSkybox / 4.0));
 
-  public static final _skyboxes__wgpuEnvironmentSkybox:flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<flighthq._internal._Any, WgpuSkybox__wgpuEnvironmentSkybox>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _skyboxes__wgpuEnvironmentSkybox:flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuSkybox__wgpuEnvironmentSkybox>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _skyboxSamplers__wgpuEnvironmentSkybox:flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Any> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _skyboxSamplers__wgpuEnvironmentSkybox:flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal.dom.GPUSampler> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static final SKYBOX_WGSL__wgpuEnvironmentSkybox:String = '\nstruct SkyUniform {\n  inverseViewProjection : mat4x4f,\n  params : vec4f,   // x = intensity\n};\n\n@group(0) @binding(0) var<uniform> sky : SkyUniform;\n@group(1) @binding(0) var envCube : texture_cube<f32>;\n@group(1) @binding(1) var envSampler : sampler;\n\nstruct VertexOutput {\n  @builtin(position) clipPosition : vec4f,\n  @location(0) ndc : vec2f,\n};\n\n@vertex fn vs_main(@builtin(vertex_index) vi : u32) -> VertexOutput {\n  var out : VertexOutput;\n  // Full-screen triangle from the vertex index alone (no vertex buffer).\n  let x = f32((vi & 1u) << 2u) - 1.0;\n  let y = f32((vi & 2u) << 1u) - 1.0;\n  out.ndc = vec2f(x, y);\n  // Emit at the far plane (WebGPU clip z in 0..1) so the backdrop sits at maximum depth.\n  out.clipPosition = vec4f(x, y, 1.0, 1.0);\n  return out;\n}\n\n@fragment fn fs_main(in : VertexOutput) -> @location(0) vec4f {\n  // Reconstruct the world-space ray through this pixel from the near- and far-plane unprojections. The\n  // projection is GL-convention (clip z in -1..1), so unproject at z = -1 (near) and z = +1 (far),\n  // matching scene-gl\'s skybox exactly.\n  let nearW = sky.inverseViewProjection * vec4f(in.ndc, -1.0, 1.0);\n  let farW = sky.inverseViewProjection * vec4f(in.ndc, 1.0, 1.0);\n  let dir = normalize(farW.xyz / farW.w - nearW.xyz / nearW.w);\n  let color = textureSampleLevel(envCube, envSampler, dir, 0.0).rgb * sky.params.x;\n  return vec4f(color, 1.0);\n}\n';
 }

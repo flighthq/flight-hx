@@ -3,10 +3,6 @@ package flighthq.scene2dWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq._internal.WebExterns.GPUBuffer;
-import flighthq._internal.WebExterns.GPURenderPipeline;
-import flighthq._internal.WebExterns.GPUStencilOperation;
-import flighthq._internal.WebExterns.GPUVertexBufferLayout;
 import flighthq.renderWgpu.WgpuBackground.retireWgpuBuffer;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.scene2dWgpu.WgpuQuadBatchWriter.flushWgpuQuadBatchWriter;
@@ -26,7 +22,7 @@ class WgpuClipContours {
   public static function popWgpuClipContours(state:WgpuRenderState):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var entry:Null<WgpuClipContourEntry> = cast _Runtime.UNDEFINED;
-    var pass:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
     flushWgpuQuadBatchWriter(({ final __callArgument1:Dynamic = state; __callArgument1; }));
     entry = _Runtime.callProperty(runtime.clipContourStack, 'pop', cast ([] : Array<Dynamic>));
@@ -34,60 +30,60 @@ class WgpuClipContours {
     pass = runtime.renderPass;
     if ((cast ((cast !_Runtime.strictEquals(pass, null) : Bool) && (cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
       var pipelines:WgpuClipContourPipelines = (cast WgpuClipContours.ensureClipContourPipelines__wgpuClipContours(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuClipContourPipelines);
-      _Runtime.callProperty(pass, 'setPipeline', cast ([(cast pipelines : WgpuClipContourPipelines).erase] : Array<Dynamic>));
-      _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, (cast entry : WgpuClipContourEntry).bindGroup] : Array<Dynamic>));
-      _Runtime.callProperty(pass, 'setVertexBuffer', cast ([0.0, (cast entry : WgpuClipContourEntry).vertexBuffer] : Array<Dynamic>));
-      _Runtime.callProperty(pass, 'setStencilReference', cast ([((cast entry : WgpuClipContourEntry).depth + 1.0)] : Array<Dynamic>));
-      if ((cast ((cast (cast entry : WgpuClipContourEntry).vertexCount : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(pass, 'draw', cast ([(cast entry : WgpuClipContourEntry).vertexCount] : Array<Dynamic>)); }
+      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline((cast pipelines : WgpuClipContourPipelines).erase);
+      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, (cast entry : WgpuClipContourEntry).bindGroup);
+      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, (cast entry : WgpuClipContourEntry).vertexBuffer);
+      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setStencilReference(((cast entry : WgpuClipContourEntry).depth + 1.0));
+      if ((cast ((cast (cast entry : WgpuClipContourEntry).vertexCount : Float) > (cast 0.0 : Float)) : Bool)) { (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw((cast entry : WgpuClipContourEntry).vertexCount); }
     }
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      retireWgpuBuffer(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast (cast entry : WgpuClipContourEntry).vertexBuffer : flighthq._internal._Any));
-      retireWgpuBuffer(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast (cast entry : WgpuClipContourEntry).uniformBuffer : flighthq._internal._Any));
+      retireWgpuBuffer(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast entry : WgpuClipContourEntry).vertexBuffer);
+      retireWgpuBuffer(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast entry : WgpuClipContourEntry).uniformBuffer);
     }
   }
 
   @:noCompletion
   public static function pushWgpuClipContours(state:WgpuRenderState, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Matrix):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    var device:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
     var depth:Float = cast _Runtime.UNDEFINED;
     var pipelines:WgpuClipContourPipelines = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var vertexBuffer:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var vertexBuffer:flighthq._internal.dom.GPUBuffer = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
-    var uniformBuffer:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    var bindGroup:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    var pass:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var uniformBuffer:flighthq._internal.dom.GPUBuffer = cast _Runtime.UNDEFINED;
+    var bindGroup:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
+    var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuRenderStateRuntime);
     flushWgpuQuadBatchWriter(({ final __callArgument6:Dynamic = state; __callArgument6; }));
     _Runtime.voidValue(winding);
     device = (cast state : WgpuRenderState).device;
     depth = runtime.currentMaskDepth;
     pipelines = (cast WgpuClipContours.ensureClipContourPipelines__wgpuClipContours(({ final __callArgument7:Dynamic = state; __callArgument7; })) : WgpuClipContourPipelines);
-    __destructure0 = (cast WgpuClipContours.createClipContourVertexBuffer__wgpuClipContours(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = contours; __callArgument9; })) : { var vertexBuffer:flighthq._internal._Any; var vertexCount:Float; });
+    __destructure0 = (cast WgpuClipContours.createClipContourVertexBuffer__wgpuClipContours(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = contours; __callArgument9; })) : { var vertexBuffer:flighthq._internal.dom.GPUBuffer; var vertexCount:Float; });
     vertexBuffer = _Runtime.field(__destructure0, 'vertexBuffer');
     vertexCount = _Runtime.field(__destructure0, 'vertexCount');
-    uniformBuffer = WgpuClipContours.createClipContourUniformBuffer__wgpuClipContours(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = worldTransform; __callArgument11; }));
+    uniformBuffer = (cast WgpuClipContours.createClipContourUniformBuffer__wgpuClipContours(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = worldTransform; __callArgument11; })) : flighthq._internal.dom.GPUBuffer);
     bindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: (cast pipelines : WgpuClipContourPipelines).bindGroupLayout, entries: cast ([{ binding: 0.0, resource: { buffer: uniformBuffer } }] : Array<Dynamic>) }] : Array<Dynamic>));
     pass = runtime.renderPass;
     if ((cast !_Runtime.strictEquals(pass, null) : Bool)) {
-      _Runtime.callProperty(pass, 'setPipeline', cast ([(cast pipelines : WgpuClipContourPipelines).write] : Array<Dynamic>));
-      _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, bindGroup] : Array<Dynamic>));
-      _Runtime.callProperty(pass, 'setVertexBuffer', cast ([0.0, vertexBuffer] : Array<Dynamic>));
-      _Runtime.callProperty(pass, 'setStencilReference', cast ([depth] : Array<Dynamic>));
-      if ((cast ((cast vertexCount : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(pass, 'draw', cast ([vertexCount] : Array<Dynamic>)); }
+      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline((cast pipelines : WgpuClipContourPipelines).write);
+      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, bindGroup);
+      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, vertexBuffer);
+      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setStencilReference(depth);
+      if ((cast ((cast vertexCount : Float) > (cast 0.0 : Float)) : Bool)) { (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(vertexCount); }
     }
     _Runtime.callProperty(runtime.clipContourStack, 'push', cast ([{ vertexBuffer: vertexBuffer, vertexCount: vertexCount, uniformBuffer: uniformBuffer, bindGroup: bindGroup, depth: depth }] : Array<Dynamic>));
     (runtime.currentMaskDepth = cast ((depth + 1.0) : Float));
   }
 
-  public static function createClipContourUniformBuffer__wgpuClipContours(state:WgpuRenderState, t:Matrix):GPUBuffer {
+  public static function createClipContourUniformBuffer__wgpuClipContours(state:WgpuRenderState, t:Matrix):flighthq._internal.dom.GPUBuffer {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var viewport:{ var width:Float; var height:Float; } = cast _Runtime.UNDEFINED;
     var iw:Float = cast _Runtime.UNDEFINED;
     var ih:Float = cast _Runtime.UNDEFINED;
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    var buffer:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var buffer:flighthq._internal.dom.GPUBuffer = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument12:Dynamic = state; __callArgument12; })) : WgpuRenderStateRuntime);
     viewport = _Runtime.coalesce(runtime.renderTargetViewport, function():Dynamic return cast (cast state : WgpuRenderState).canvas);
     iw = (2.0 / (cast viewport : { var width:Float; var height:Float; }).width);
@@ -103,16 +99,16 @@ class WgpuClipContours {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 9.0 : Float), (cast ((-t.ty * ih) + 1.0) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 10.0 : Float), (cast 1.0 : Float));
     buffer = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBuffer', cast ([{ size: WgpuClipContours.CLIP_UNIFORM_BYTES__wgpuClipContours, usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'UNIFORM')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
-    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([buffer, 0.0, m] : Array<Dynamic>));
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([buffer, 0.0, m] : Array<Dynamic>));
     return cast buffer;
     return cast null;
   }
 
-  public static function createClipContourVertexBuffer__wgpuClipContours(state:WgpuRenderState, contours:Array<Array<Float>>):{ var vertexBuffer:GPUBuffer; var vertexCount:Float; } {
+  public static function createClipContourVertexBuffer__wgpuClipContours(state:WgpuRenderState, contours:Array<Array<Float>>):{ var vertexBuffer:flighthq._internal.dom.GPUBuffer; var vertexCount:Float; } {
     var tris:Array<Float> = cast _Runtime.UNDEFINED;
     var data:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
-    var vertexBuffer:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var vertexBuffer:flighthq._internal.dom.GPUBuffer = cast _Runtime.UNDEFINED;
     tris = (cast cast ([] : Array<Dynamic>));
     {
       var c:Float = 0.0;
@@ -133,26 +129,26 @@ class WgpuClipContours {
     data = new flighthq._internal._Float32Array(tris);
     vertexCount = (_Runtime.toInt32(_Runtime.field(data, 'length')) >> 1);
     vertexBuffer = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBuffer', cast ([{ size: HxMath.max(4.0, _Runtime.field(data, 'byteLength')), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.field(data, 'byteLength') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([vertexBuffer, 0.0, data] : Array<Dynamic>)); }
+    if ((cast ((cast _Runtime.field(data, 'byteLength') : Float) > (cast 0.0 : Float)) : Bool)) { flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([vertexBuffer, 0.0, data] : Array<Dynamic>)); }
     return cast { vertexBuffer: vertexBuffer, vertexCount: vertexCount };
     return cast null;
   }
 
   public static function ensureClipContourPipelines__wgpuClipContours(state:WgpuRenderState):WgpuClipContourPipelines {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    var format:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var format:String = cast _Runtime.UNDEFINED;
     var cache:flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     var existing:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    var device:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    var module:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    var bindGroupLayout:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    var layout:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    var vertexBuffers:Array<GPUVertexBufferLayout> = cast _Runtime.UNDEFINED;
-    var make:flighthq._internal._Any->flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
+    var module:flighthq._internal.dom.GPUShaderModule = cast _Runtime.UNDEFINED;
+    var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout = cast _Runtime.UNDEFINED;
+    var layout:flighthq._internal.dom.GPUPipelineLayout = cast _Runtime.UNDEFINED;
+    var vertexBuffers:Array<flighthq._internal.dom.GPUVertexBufferLayout> = cast _Runtime.UNDEFINED;
+    var make:String->flighthq._internal.dom.GPURenderPipeline = cast _Runtime.UNDEFINED;
     var pipelines:WgpuClipContourPipelines = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : WgpuRenderStateRuntime);
     format = _Runtime.coalesce(runtime.currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
-    cache = _Runtime.coalesce(runtime.clipContourPipelines, function():Dynamic return cast (runtime.clipContourPipelines = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<flighthq._internal._Any, WgpuClipContourPipelines>>)));
+    cache = _Runtime.coalesce(runtime.clipContourPipelines, function():Dynamic return cast (runtime.clipContourPipelines = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, WgpuClipContourPipelines>>)));
     existing = ((cast cache : flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>).get(format));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     device = (cast state : WgpuRenderState).device;
@@ -160,8 +156,8 @@ class WgpuClipContours {
     bindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX'), buffer: { type: 'uniform' } }] : Array<Dynamic>) }] : Array<Dynamic>));
     layout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([bindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>));
     vertexBuffers = (cast cast ([{ arrayStride: 8.0, attributes: cast ([{ shaderLocation: 0.0, offset: 0.0, format: 'float32x2' }] : Array<Dynamic>) }] : Array<Dynamic>));
-    make = (cast function(passOp:GPUStencilOperation):GPURenderPipeline return flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: module, entryPoint: 'vs_main', buffers: vertexBuffers }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format, writeMask: 0.0 }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list', cullMode: 'none' }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: { compare: 'equal', passOp: passOp, failOp: 'keep', depthFailOp: 'keep' }, stencilBack: { compare: 'equal', passOp: passOp, failOp: 'keep', depthFailOp: 'keep' }, stencilReadMask: 255.0, stencilWriteMask: 255.0 } }] : Array<Dynamic>)));
-    pipelines = (cast { write: make((cast 'increment-clamp' : flighthq._internal._Any)), erase: make((cast 'decrement-clamp' : flighthq._internal._Any)), bindGroupLayout: bindGroupLayout });
+    make = (cast function(passOp:flighthq._internal.dom.GPUStencilOperation):flighthq._internal.dom.GPURenderPipeline return flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: module, entryPoint: 'vs_main', buffers: vertexBuffers }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: format, writeMask: 0.0 }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list', cullMode: 'none' }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: { compare: 'equal', passOp: passOp, failOp: 'keep', depthFailOp: 'keep' }, stencilBack: { compare: 'equal', passOp: passOp, failOp: 'keep', depthFailOp: 'keep' }, stencilReadMask: 255.0, stencilWriteMask: 255.0 } }] : Array<Dynamic>)));
+    pipelines = (cast { write: (cast make((cast 'increment-clamp' : String)) : flighthq._internal.dom.GPURenderPipeline), erase: (cast make((cast 'decrement-clamp' : String)) : flighthq._internal.dom.GPURenderPipeline), bindGroupLayout: bindGroupLayout });
     ((cast cache : flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>).set(format, (cast pipelines)));
     return cast pipelines;
     return cast null;

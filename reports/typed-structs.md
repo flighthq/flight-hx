@@ -1,24 +1,24 @@
 # Typed Struct Audit
 
-Upstream commit: `9db114b3fe1db90a90a11541649cb3af8bb5ca62`
+Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
 
-The candidate universe is checker-derived. Member escapes, presence and width sensitivity, class feasibility, containment, and provenance are applied as rules. Eligibility is audited independently from emission; newly discovered schemas remain reflective until their audit diff is approved.
+The candidate universe is checker-derived. Member escapes, presence and width sensitivity, class feasibility, containment, and provenance are applied as rules. Eligibility is audited independently from emission; newly discovered schemas are reported as unreviewed and remain reflective until their audit diff is approved.
 
 | Metric | Count |
 | --- | ---: |
-| Candidates | 2194 |
-| Eligible | 1664 |
-| Ineligible | 530 |
-| Audit-only schemas | 1404 |
+| Candidates | 2216 |
+| Eligible | 1677 |
+| Ineligible | 539 |
+| Audit-only schemas | 1426 |
 | Direct schemas | 788 |
-| Declared fields | 26217 |
-| Bindable accesses | 37358 |
-| Pending accesses | 10705 |
-| Directly emitted accesses | 26653 |
-| Reflective survivors | 451 |
-| Dynamic escapes | 12346 |
+| Declared fields | 26548 |
+| Bindable accesses | 37860 |
+| Pending accesses | 11088 |
+| Directly emitted accesses | 26772 |
+| Reflective survivors | 454 |
+| Dynamic escapes | 12504 |
 
-## Migration lock
+## Review status since baseline
 
 Baseline upstream commit: `5d24729f7360475e28a105ae0caeeaa2e1328260`
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 23 |
 | Declaration-kind changes | 2 |
 | Replacement removals | 3 |
-| Newly discovered, audit-only | 1404 |
+| Unreviewed additions, audit-only | 1426 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -180,6 +180,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#AudioResourceReferenceResolutionExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AudioResourceUrl` | `direct` | `preserved` | `@flighthq/types:interface#AudioResourceUrl` | broad asset document | 2 | 3 | 0 | 0 | 0 | 3 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AutoExposureEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#BackendExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BarrelDistortionEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BevelEffect` | `direct` | `new` | — | reviewed escape-free bevel effect | 13 | 39 | 0 | 0 | 0 | 39 | 0 | 0 | yes | — |
 | `@flighthq/types:type#BidiClass` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -260,6 +261,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Camera3DOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Camera3DViewExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CameraMotionBlurEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CameraShake` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 14 | 5 | 0 | 19 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CameraShakeOffset` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 12 | 0 | 12 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CameraShakeOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#CanvasEffectSourceMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#CanvasImageSourceKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#CanvasMaterialRenderer` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
@@ -369,14 +373,14 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CocosPlistFrame` | `direct` | `relocated` | `@flighthq/spritesheet-formats:interface#CocosPlistFrame` | broad serialization document | 7 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CocosPlistMetadata` | `direct` | `relocated` | `@flighthq/spritesheet-formats:interface#CocosPlistMetadata` | broad serialization document | 3 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CocosPlistParsed` | `direct` | `relocated` | `@flighthq/spritesheet-formats:interface#CocosPlistParsed` | broad serialization document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CollisionAabb2D` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 88 | 0 | 0 | 88 | 0 | 0 | 68 | yes | — |
+| `@flighthq/types:interface#CollisionAabb2D` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 96 | 0 | 0 | 96 | 0 | 0 | 76 | yes | — |
 | `@flighthq/types:interface#CollisionAabb3D` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 150 | 18 | 0 | 168 | 0 | 0 | 99 | yes | — |
 | `@flighthq/types:interface#CollisionBox3D` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 186 | 20 | 0 | 206 | 0 | 0 | 103 | yes | — |
 | `@flighthq/types:type#CollisionBuiltInShape2D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#CollisionBuiltInShape3D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/types:interface#CollisionCapsule2D` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 262 | 5 | 0 | 267 | 0 | 0 | 64 | yes | — |
+| `@flighthq/types:interface#CollisionCapsule2D` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 268 | 5 | 0 | 273 | 0 | 0 | 80 | yes | — |
 | `@flighthq/types:interface#CollisionCapsule3D` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 169 | 7 | 0 | 176 | 0 | 0 | 113 | yes | — |
-| `@flighthq/types:interface#CollisionCircle2D` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 114 | 3 | 0 | 117 | 0 | 0 | 67 | yes | — |
+| `@flighthq/types:interface#CollisionCircle2D` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 118 | 3 | 0 | 121 | 0 | 0 | 71 | yes | — |
 | `@flighthq/types:type#CollisionColliderShape3D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#CollisionCone3D` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 119 | 7 | 0 | 126 | 0 | 0 | 112 | yes | — |
 | `@flighthq/types:interface#CollisionContactManifold2D` | `direct` | `new` | — | reviewed escape-free 2D collision contact manifold after dimension-explicit upstream rename | 6 | 26 | 36 | 0 | 0 | 62 | 0 | 0 | yes | — |
@@ -390,15 +394,15 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CollisionHeightfield3D` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 119 | 7 | 0 | 126 | 0 | 0 | 123 | yes | — |
 | `@flighthq/types:interface#CollisionManifold2D` | `direct` | `new` | — | reviewed escape-free 2D collision manifold after dimension-explicit upstream rename | 4 | 7 | 42 | 0 | 0 | 49 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CollisionManifold3D` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 7 | 42 | 0 | 49 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CollisionObb2D` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 97 | 15 | 0 | 112 | 0 | 0 | 68 | yes | — |
+| `@flighthq/types:interface#CollisionObb2D` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 104 | 15 | 0 | 119 | 0 | 0 | 80 | yes | — |
 | `@flighthq/types:type#CollisionPairTest2D` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#CollisionPairTest3D` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#CollisionPoint2D` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 32 | 2 | 0 | 34 | 0 | 0 | 66 | yes | — |
-| `@flighthq/types:interface#CollisionPolygon2D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 34 | 0 | 0 | 34 | 0 | 0 | 68 | yes | — |
+| `@flighthq/types:interface#CollisionPoint2D` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 34 | 2 | 0 | 36 | 0 | 0 | 89 | yes | — |
+| `@flighthq/types:interface#CollisionPolygon2D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 38 | 0 | 0 | 38 | 0 | 0 | 88 | yes | — |
 | `@flighthq/types:interface#CollisionRaycastHit2D` | `direct` | `new` | — | reviewed escape-free 2D collision raycast hit after dimension-explicit upstream rename | 5 | 31 | 15 | 0 | 0 | 46 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CollisionRaycastHit3D` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 28 | 24 | 0 | 52 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CollisionResponse` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CollisionSegment2D` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 88 | 4 | 0 | 92 | 0 | 0 | 68 | yes | — |
+| `@flighthq/types:interface#CollisionSegment2D` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 92 | 4 | 0 | 96 | 0 | 0 | 91 | yes | — |
 | `@flighthq/types:type#CollisionShape2D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#CollisionShape3D` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#CollisionShapeKind2D` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -930,7 +934,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#LogTimer` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LogTransportBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 2 | 0 | 0 | 2 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:interface#LookupTableGradeAdjustment` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#LoopBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | yes | — |
+| `@flighthq/types:interface#LoopBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 11 | yes | — |
 | `@flighthq/types:interface#LottieAdvancedBlend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#LottieAnimatable` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#LottieAnimatedProperty` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 10 | 0 | 0 | 10 | 0 | 0 | 4 | yes | — |
@@ -1010,7 +1014,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#MenuItemTemplate` | `direct` | `preserved` | `@flighthq/types:interface#MenuItemTemplate` | broad host document | 11 | 91 | 2 | 0 | 0 | 93 | 1 | 1 | yes | — |
 | `@flighthq/types:type#MenuItemType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#MenuSignals` | `direct` | `preserved` | `@flighthq/types:interface#MenuSignals` | broad host document | 4 | 5 | 0 | 0 | 0 | 5 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Mesh` | `direct` | `preserved` | `@flighthq/types:interface#Mesh` | broad scene document | 13 | 71 | 7 | 0 | 0 | 78 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Mesh` | `direct` | `preserved` | `@flighthq/types:interface#Mesh` | broad scene document | 13 | 72 | 8 | 0 | 0 | 80 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MeshAttachment2D` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#MeshDeformer` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#MeshDeformRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | yes | — |
@@ -1076,8 +1080,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#NetResponse` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#NetResponseBody` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#NetResponseType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#Node` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 9 | 2 | 0 | 11 | 0 | 0 | 194 | yes | — |
-| `@flighthq/types:type#Node2D` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 91 | no | `unsupported-shape` |
+| `@flighthq/types:interface#Node` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 9 | 2 | 0 | 11 | 0 | 0 | 209 | yes | — |
+| `@flighthq/types:type#Node2D` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 94 | no | `unsupported-shape` |
 | `@flighthq/types:type#Node2DAnimationPath` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Node2DAnimationTarget` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Node2DData` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -1085,10 +1089,10 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#Node2DInteractionSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Node2DRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 38 | 0 | 0 | 0 | 0 | 0 | 0 | 16 | no | `unsupported-shape` |
 | `@flighthq/types:type#Node2DRuntimeFactory` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#Node2DTraits` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 91 | yes | — |
-| `@flighthq/types:type#Node3D` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 16 | no | `unsupported-shape` |
+| `@flighthq/types:interface#Node2DTraits` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 94 | yes | — |
+| `@flighthq/types:type#Node3D` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 28 | no | `unsupported-shape` |
 | `@flighthq/types:type#Node3DRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 34 | 0 | 0 | 0 | 0 | 0 | 0 | 23 | no | `unsupported-shape` |
-| `@flighthq/types:interface#Node3DTraits` | `direct` | `renamed` | `@flighthq/types:interface#SceneNodeTraits` | broad scene document | 5 | 7 | 2 | 0 | 0 | 9 | 7 | 7 | yes | — |
+| `@flighthq/types:interface#Node3DTraits` | `direct` | `renamed` | `@flighthq/types:interface#SceneNodeTraits` | broad scene document | 5 | 16 | 2 | 0 | 0 | 18 | 10 | 10 | yes | — |
 | `@flighthq/types:type#Node3DVisitor` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#NodeAny` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 21 | yes | — |
 | `@flighthq/types:type#NodeData` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
@@ -1196,63 +1200,78 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#PerspectiveProjection` | `direct` | `relocated` | `@flighthq/types:interface#PerspectiveProjection` | perspective-camera projection aggregate | 3 | 8 | 1 | 0 | 0 | 9 | 12 | 12 | yes | — |
 | `@flighthq/types:interface#PerspectiveProjectionOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PhongMaterial` | `direct` | `new` | — | reviewed escape-free Phong material | 13 | 36 | 7 | 0 | 0 | 43 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DAbi` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 13 | yes | — |
+| `@flighthq/types:interface#Physics2DAbiBodyBuffer` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 22 | 2 | 0 | 24 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DAbiCommandBuffer` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 42 | 4 | 0 | 46 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DAbiContactBuffer` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 31 | 12 | 0 | 43 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#Physics2DAbiContactHook` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
+| `@flighthq/types:interface#Physics2DAbiContactHooks` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 13 | 0 | 0 | 13 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#Physics2DAbiExecutionResult` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 8 | 0 | 8 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#Physics2DAbiJointBuffer` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 13 | 2 | 0 | 15 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#Physics2DAbiObjectId` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#Physics2DAbiQueryBuffer` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 13 | 8 | 0 | 21 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:type#Physics2DAbiWorldHandle` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#Physics2DBodyType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#Physics2DBrokenJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DCollider` | `direct` | `new` | — | reviewed escape-free physics collider | 5 | 49 | 2 | 0 | 0 | 51 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DBrokenJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DCollider` | `direct` | `new` | — | reviewed escape-free physics collider | 5 | 62 | 2 | 0 | 0 | 64 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DCollisionExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DCollisionFilter` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 13 | 0 | 0 | 13 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#Physics2DContact` | `direct` | `new` | — | reviewed escape-free physics contact | 13 | 144 | 13 | 0 | 0 | 157 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DCollisionFilter` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 19 | 0 | 0 | 19 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#Physics2DContact` | `direct` | `new` | — | reviewed escape-free physics contact | 13 | 162 | 16 | 0 | 0 | 178 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics2DContactCallback` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#Physics2DContactEvents` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DContactHooks` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DContactEvents` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DContactHooks` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 4 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics2DContactIntakeGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#Physics2DContactPoint` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 67 | 23 | 0 | 90 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DContactPoint` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 75 | 23 | 0 | 98 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DDebugCircle` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 6 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics2DDebugFeature` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Physics2DDebugGeometry` | `direct` | `new` | — | reviewed escape-free physics debug geometry | 4 | 10 | 4 | 0 | 0 | 14 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DDebugGeometryOptions` | `direct` | `new` | — | reviewed escape-free physics debug-geometry options | 7 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DDebugLine` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 7 | 0 | 7 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DDistanceJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 20 | 3 | 1 | 0 | 4 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DDistanceJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 20 | 6 | 1 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DDistanceJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 12 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics2DGearCoordinateKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#Physics2DGearJoint` | `direct` | `new` | — | reviewed escape-free physics gear joint | 25 | 21 | 8 | 0 | 0 | 29 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DGearJoint` | `direct` | `new` | — | reviewed escape-free physics gear joint | 25 | 29 | 8 | 0 | 0 | 37 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DGearJointOptions` | `direct` | `new` | — | reviewed escape-free physics gear-joint options | 17 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 17 | 327 | 68 | 0 | 395 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#Physics2DJointEvents` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 17 | 337 | 68 | 0 | 405 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#Physics2DJointEvents` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics2DJointKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Physics2DJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DJointReaction` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 6 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DJointReaction` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 6 | 6 | 0 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DJointResolution` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DJointResolutionExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Physics2DJointResolutionGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#Physics2DJointResolutionStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Physics2DJointSolver` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 14 | 0 | 0 | 14 | 0 | 0 | 9 | yes | — |
 | `@flighthq/types:interface#Physics2DMassData` | `direct` | `new` | — | reviewed escape-free physics mass data | 4 | 17 | 32 | 0 | 0 | 49 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 15 | 0 | 0 | 15 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#Physics2DMouseJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 22 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 18 | 0 | 0 | 18 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#Physics2DMouseJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 22 | 13 | 0 | 0 | 13 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DMouseJointOptions` | `direct` | `new` | — | reviewed escape-free physics mouse-joint options | 10 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DPrismaticJoint` | `direct` | `new` | — | reviewed escape-free physics prismatic joint | 30 | 40 | 10 | 0 | 0 | 50 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DPrismaticJoint` | `direct` | `new` | — | reviewed escape-free physics prismatic joint | 30 | 52 | 10 | 0 | 0 | 62 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DPrismaticJointOptions` | `direct` | `new` | — | reviewed escape-free physics prismatic-joint options | 21 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DPulleyJoint` | `direct` | `new` | — | reviewed escape-free physics pulley joint | 23 | 23 | 6 | 0 | 0 | 29 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DPulleyJoint` | `direct` | `new` | — | reviewed escape-free physics pulley joint | 23 | 29 | 6 | 0 | 0 | 35 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DPulleyJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 15 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DQueryFilter` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DQueryHit` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 3 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DQueryResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 3 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DRayHit` | `direct` | `new` | — | reviewed escape-free physics ray hit | 8 | 15 | 16 | 0 | 0 | 31 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DRayResult` | `direct` | `new` | — | reviewed escape-free physics ray result | 2 | 11 | 2 | 0 | 0 | 13 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DRevoluteJoint` | `direct` | `new` | — | reviewed escape-free physics revolute joint | 28 | 22 | 10 | 0 | 0 | 32 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DQueryHit` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 2 | 3 | 0 | 5 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DQueryResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 3 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DRayHit` | `direct` | `new` | — | reviewed escape-free physics ray hit | 8 | 20 | 16 | 0 | 0 | 36 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DRayResult` | `direct` | `new` | — | reviewed escape-free physics ray result | 2 | 14 | 2 | 0 | 0 | 16 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DRevoluteJoint` | `direct` | `new` | — | reviewed escape-free physics revolute joint | 28 | 32 | 10 | 0 | 0 | 42 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DRevoluteJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DRopeJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 18 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DRopeJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 18 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DRopeJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DShapeCastResult` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 0 | 18 | 0 | 18 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DSolverConfig` | `direct` | `new` | — | reviewed escape-free physics solver config | 13 | 52 | 3 | 0 | 0 | 55 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DShapeCastResult` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 11 | 18 | 0 | 29 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DSolverConfig` | `direct` | `new` | — | reviewed escape-free physics solver config | 13 | 69 | 3 | 0 | 0 | 72 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DStepExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 2 | 0 | 0 | 2 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#Physics2DStepGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#Physics2DWeldJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 18 | 2 | 1 | 0 | 3 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DWeldJoint` | `audit-only` | `new` | — | checker-discovered public declaration | 18 | 3 | 1 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DWeldJointOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DWheelJoint` | `direct` | `new` | — | reviewed escape-free physics wheel joint | 26 | 22 | 6 | 0 | 0 | 28 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DWheelJoint` | `direct` | `new` | — | reviewed escape-free physics wheel joint | 26 | 30 | 6 | 0 | 0 | 36 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics2DWheelJointOptions` | `direct` | `new` | — | reviewed escape-free physics wheel-joint options | 17 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Physics2DWorld` | `direct` | `new` | — | reviewed escape-free physics world | 30 | 222 | 3 | 0 | 0 | 225 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Physics2DWorld` | `direct` | `new` | — | reviewed escape-free physics world | 30 | 233 | 6 | 0 | 0 | 239 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DAbi` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 13 | yes | — |
 | `@flighthq/types:interface#Physics3DAbiBodyBuffer` | `direct` | `new` | — | reviewed escape-free Physics3D ABI body buffer | 5 | 42 | 6 | 0 | 0 | 48 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Physics3DAbiCommandBuffer` | `direct` | `new` | — | reviewed escape-free Physics3D ABI command buffer | 3 | 45 | 4 | 0 | 0 | 49 | 0 | 0 | yes | — |
@@ -1367,7 +1386,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#QuadBatchRuntime` | `direct` | `new` | — | reviewed escape-free quad-batch runtime | 39 | 6 | 3 | 0 | 0 | 9 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#QuadBatchSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#QuadTransformType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#Quaternion` | `direct` | `preserved` | `@flighthq/types:interface#Quaternion` | four-component rotation leaf | 4 | 96 | 140 | 0 | 0 | 236 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Quaternion` | `direct` | `preserved` | `@flighthq/types:interface#Quaternion` | four-component rotation leaf | 4 | 96 | 144 | 0 | 0 | 240 | 1 | 1 | yes | — |
 | `@flighthq/types:type#QuaternionLike` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 204 | yes | — |
 | `@flighthq/types:interface#QuaternionReading` | `direct` | `preserved` | `@flighthq/types:interface#QuaternionReading` | broad host document | 7 | 15 | 17 | 0 | 0 | 32 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RadialBlurEffect` | `direct` | `new` | — | reviewed escape-free radial-blur effect | 5 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
@@ -1460,14 +1479,14 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#RichTextContent` | `direct` | `new` | — | reviewed escape-free rich-text content | 2 | 45 | 3 | 0 | 0 | 48 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RichTextData` | `direct` | `new` | — | reviewed escape-free rich-text data | 21 | 188 | 61 | 0 | 0 | 249 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RichTextRuntime` | `direct` | `new` | — | reviewed escape-free rich-text runtime | 46 | 37 | 23 | 0 | 0 | 60 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#RigidBody2D` | `audit-only` | `new` | — | checker-discovered public declaration | 26 | 620 | 130 | 0 | 750 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#RigidBody3D` | `audit-only` | `new` | — | checker-discovered public declaration | 53 | 710 | 212 | 0 | 922 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#RigidBody2D` | `audit-only` | `new` | — | checker-discovered public declaration | 26 | 674 | 141 | 0 | 815 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#RigidBody3D` | `audit-only` | `new` | — | checker-discovered public declaration | 53 | 717 | 212 | 0 | 929 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#RimModifier` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RimModifierOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RiveAdvancedBlend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RiveAnimationClip` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#RiveAnimationLoop` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#RiveArtboardGraph` | `direct` | `new` | — | reviewed escape-free Rive artboard graph | 4 | 100 | 1 | 0 | 0 | 101 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RiveArtboardGraph` | `direct` | `new` | — | reviewed escape-free Rive artboard graph | 4 | 105 | 1 | 0 | 0 | 106 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RiveArtboardImport` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RiveCoreObject` | `direct` | `new` | — | reviewed escape-free Rive core object | 2 | 115 | 0 | 0 | 0 | 115 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RiveDocument` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
@@ -1750,6 +1769,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#SpecularPbrExtension` | `direct` | `new` | — | reviewed escape-free specular PBR extension | 7 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SphereCollider` | `direct` | `preserved` | `@flighthq/types:interface#SphereCollider` | broad asset document | 8 | 22 | 0 | 0 | 0 | 22 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#SpineAlphaKeyframe` | `direct` | `relocated` | `@flighthq/particles-formats:interface#SpineAlphaKeyframe` | broad serialization document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#SpineBinaryParser` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
+| `@flighthq/types:interface#SpineBinaryVersionFailure` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 2 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#SpineBlendMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#SpineParsed` | `direct` | `relocated` | `@flighthq/particles-formats:interface#SpineParsed` | broad serialization document | 3 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SpineParticleDocument` | `direct` | `relocated` | `@flighthq/particles-formats:interface#SpineParticleDocument` | broad serialization document | 24 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -2095,7 +2117,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#UpdateScene3DResourceStreamingOptions` | `direct` | `renamed` | `@flighthq/scene-resources:interface#ResolveSceneResourcesOptions` | broad scene document | 2 | 2 | 0 | 2 | 0 | 4 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Vector2` | `direct` | `preserved` | `@flighthq/types:interface#Vector2` | two-component numeric geometry leaf | 2 | 227 | 163 | 0 | 0 | 390 | 1 | 1 | yes | — |
 | `@flighthq/types:type#Vector2Like` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 266 | yes | — |
-| `@flighthq/types:interface#Vector3` | `direct` | `preserved` | `@flighthq/types:interface#Vector3` | three-component numeric geometry leaf | 3 | 871 | 477 | 0 | 0 | 1348 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#Vector3` | `direct` | `preserved` | `@flighthq/types:interface#Vector3` | three-component numeric geometry leaf | 3 | 871 | 480 | 0 | 0 | 1351 | 1 | 1 | yes | — |
 | `@flighthq/types:type#Vector3Like` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 892 | yes | — |
 | `@flighthq/types:interface#Vector4` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 4 | 0 | 4 | 0 | 0 | 324 | yes | — |
 | `@flighthq/types:type#Vector4Like` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 323 | yes | — |
@@ -2187,11 +2209,11 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#WgpuRenderEffectRunner` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#WgpuRenderOptions` | `direct` | `new` | — | reviewed escape-free WebGPU render options | 8 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderRegistries` | `direct` | `new` | — | reviewed escape-free WebGPU render registries | 20 | 71 | 14 | 0 | 0 | 85 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuRenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 17 | 290 | 8 | 0 | 298 | 0 | 0 | 6 | yes | — |
+| `@flighthq/types:interface#WgpuRenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 17 | 291 | 8 | 0 | 299 | 0 | 0 | 6 | yes | — |
 | `@flighthq/types:interface#WgpuRenderStateRuntime` | `direct` | `new` | — | reviewed escape-free WebGPU render-state runtime | 98 | 484 | 326 | 12 | 0 | 822 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderStateSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderStats` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuRenderTarget` | `direct` | `new` | — | reviewed escape-free WebGPU render target | 12 | 144 | 17 | 0 | 0 | 161 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuRenderTarget` | `direct` | `new` | — | reviewed escape-free WebGPU render target | 12 | 123 | 17 | 0 | 0 | 140 | 0 | 0 | yes | — |
 | `@flighthq/types:type#WgpuRenderTargetPool` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderTextureEntry` | `direct` | `new` | — | reviewed escape-free WebGPU render-texture entry | 2 | 18 | 5 | 0 | 0 | 23 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderTextureExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -4027,6 +4049,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#BoundsNode` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Node.ts:20` |
 | `@flighthq/types:type#BoundsNodeAny` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Node.ts:20` |
 | `@flighthq/types:interface#Camera3D` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#CameraShake` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#CanvasEffectSourceMode` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#CanvasEffectSourceMode` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#CanvasEffectSourceMode` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -8217,9 +8240,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#LogTransportBackend` | `dispose` | `receiver-sensitive-method` | `upstream/packages/types/src/Log.ts:55` |
 | `@flighthq/types:interface#LogTransportBackend` | `flush` | `receiver-sensitive-method` | `upstream/packages/types/src/Log.ts:54` |
 | `@flighthq/types:interface#LogTransportBackend` | `write` | `receiver-sensitive-method` | `upstream/packages/types/src/Log.ts:53` |
-| `@flighthq/types:interface#LoopBackend` | `cancelFrame` | `receiver-sensitive-method` | `upstream/packages/types/src/LoopBackend.ts:7` |
-| `@flighthq/types:interface#LoopBackend` | `now` | `receiver-sensitive-method` | `upstream/packages/types/src/LoopBackend.ts:9` |
-| `@flighthq/types:interface#LoopBackend` | `requestFrame` | `receiver-sensitive-method` | `upstream/packages/types/src/LoopBackend.ts:5` |
+| `@flighthq/types:interface#LoopBackend` | `cancelFrame` | `receiver-sensitive-method` | `upstream/packages/types/src/LoopBackend.ts:3` |
+| `@flighthq/types:interface#LoopBackend` | `now` | `receiver-sensitive-method` | `upstream/packages/types/src/LoopBackend.ts:4` |
+| `@flighthq/types:interface#LoopBackend` | `requestFrame` | `receiver-sensitive-method` | `upstream/packages/types/src/LoopBackend.ts:2` |
 | `@flighthq/types:interface#MatcapMaterial` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#Material` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#MaterialAlphaMode` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
@@ -9950,6 +9973,226 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#PermissionStateSource` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#PermissionStateSource` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:interface#PhongMaterial` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#Physics2DAbi` | `createWorld` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2DAbi.ts:123` |
+| `@flighthq/types:interface#Physics2DAbi` | `destroyWorld` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2DAbi.ts:124` |
+| `@flighthq/types:interface#Physics2DAbi` | `execute` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2DAbi.ts:126` |
+| `@flighthq/types:interface#Physics2DAbi` | `getWorldStatus` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2DAbi.ts:125` |
+| `@flighthq/types:interface#Physics2DAbi` | `queryPoint` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2DAbi.ts:147` |
+| `@flighthq/types:interface#Physics2DAbi` | `queryRay` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2DAbi.ts:154` |
+| `@flighthq/types:interface#Physics2DAbi` | `queryRegion` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2DAbi.ts:165` |
+| `@flighthq/types:interface#Physics2DAbi` | `queryShapeCast` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2DAbi.ts:171` |
+| `@flighthq/types:interface#Physics2DAbi` | `readBodies` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2DAbi.ts:136` |
+| `@flighthq/types:interface#Physics2DAbi` | `readContacts` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2DAbi.ts:141` |
+| `@flighthq/types:interface#Physics2DAbi` | `readJoints` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2DAbi.ts:146` |
+| `@flighthq/types:interface#Physics2DAbi` | `step` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2DAbi.ts:131` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#Physics2DAbiContactSelection` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#Physics2DAbiExecutionStatus` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:type#Physics2DAbiObjectId` | `toExponential` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:576` |
+| `@flighthq/types:type#Physics2DAbiObjectId` | `toFixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:570` |
+| `@flighthq/types:type#Physics2DAbiObjectId` | `toLocaleString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:4578` |
+| `@flighthq/types:type#Physics2DAbiObjectId` | `toPrecision` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:582` |
+| `@flighthq/types:type#Physics2DAbiObjectId` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:564` |
+| `@flighthq/types:type#Physics2DAbiObjectId` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:585` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#Physics2DAbiStepStatus` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:type#Physics2DAbiWorldHandle` | `toExponential` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:576` |
+| `@flighthq/types:type#Physics2DAbiWorldHandle` | `toFixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:570` |
+| `@flighthq/types:type#Physics2DAbiWorldHandle` | `toLocaleString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:4578` |
+| `@flighthq/types:type#Physics2DAbiWorldHandle` | `toPrecision` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:582` |
+| `@flighthq/types:type#Physics2DAbiWorldHandle` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:564` |
+| `@flighthq/types:type#Physics2DAbiWorldHandle` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:585` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#Physics2DAbiWorldStatus` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:type#Physics2DBodyType` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#Physics2DBodyType` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#Physics2DBodyType` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -10202,18 +10445,18 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Physics2DJointSolver` | `swapEnds` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2D.ts:709` |
 | `@flighthq/types:interface#Physics2DJointSolver` | `warmStart` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2D.ts:720` |
 | `@flighthq/types:interface#Physics2DJointSolver` | `writeReaction` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2D.ts:738` |
-| `@flighthq/types:interface#Physics3DAbi` | `createWorld` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:120` |
-| `@flighthq/types:interface#Physics3DAbi` | `destroyWorld` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:121` |
-| `@flighthq/types:interface#Physics3DAbi` | `execute` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:123` |
-| `@flighthq/types:interface#Physics3DAbi` | `getWorldStatus` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:122` |
-| `@flighthq/types:interface#Physics3DAbi` | `queryPoint` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:144` |
-| `@flighthq/types:interface#Physics3DAbi` | `queryRay` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:152` |
-| `@flighthq/types:interface#Physics3DAbi` | `queryRegion` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:165` |
-| `@flighthq/types:interface#Physics3DAbi` | `queryShapeCast` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:171` |
-| `@flighthq/types:interface#Physics3DAbi` | `readBodies` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:133` |
-| `@flighthq/types:interface#Physics3DAbi` | `readContacts` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:138` |
-| `@flighthq/types:interface#Physics3DAbi` | `readJoints` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:143` |
-| `@flighthq/types:interface#Physics3DAbi` | `step` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:128` |
+| `@flighthq/types:interface#Physics3DAbi` | `createWorld` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:121` |
+| `@flighthq/types:interface#Physics3DAbi` | `destroyWorld` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:122` |
+| `@flighthq/types:interface#Physics3DAbi` | `execute` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:124` |
+| `@flighthq/types:interface#Physics3DAbi` | `getWorldStatus` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:123` |
+| `@flighthq/types:interface#Physics3DAbi` | `queryPoint` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:145` |
+| `@flighthq/types:interface#Physics3DAbi` | `queryRay` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:153` |
+| `@flighthq/types:interface#Physics3DAbi` | `queryRegion` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:166` |
+| `@flighthq/types:interface#Physics3DAbi` | `queryShapeCast` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:172` |
+| `@flighthq/types:interface#Physics3DAbi` | `readBodies` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:134` |
+| `@flighthq/types:interface#Physics3DAbi` | `readContacts` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:139` |
+| `@flighthq/types:interface#Physics3DAbi` | `readJoints` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:144` |
+| `@flighthq/types:interface#Physics3DAbi` | `step` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics3DAbi.ts:129` |
 | `@flighthq/types:type#Physics3DAbiContactSelection` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#Physics3DAbiContactSelection` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#Physics3DAbiContactSelection` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -14883,6 +15126,55 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#SpatialObjectId` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:585` |
 | `@flighthq/types:interface#SpecularGlossinessPbrMaterial` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#SpecularPbrExtension` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#SpineBinaryVersionFailureReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:type#SpineBlendMode` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#SpineBlendMode` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#SpineBlendMode` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |

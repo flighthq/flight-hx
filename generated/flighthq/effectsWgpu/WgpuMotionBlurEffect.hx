@@ -3,7 +3,6 @@ package flighthq.effectsWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq._internal.WebExterns.GPUTexture;
 import flighthq.effectsWgpu.WgpuEffectPass.createWgpuDualSourceEffectPipeline;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuDualSourceEffectPass;
 import flighthq.effectsWgpu.WgpuEffectTexelScale.getWgpuEffectLogicalResolution;
@@ -20,7 +19,7 @@ import flighthq.types.WgpuRenderTarget;
 
 class WgpuMotionBlurEffect {
   @:noCompletion
-  public static function applyMotionBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, velocityTexture:Null<GPUTexture>, effect:MotionBlurEffect):Void {
+  public static function applyMotionBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, velocityTexture:Null<flighthq._internal.dom.GPUTexture>, effect:MotionBlurEffect):Void {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var samples:Float = cast _Runtime.UNDEFINED;
     var resolution:{ var height:Float; var texelsPerLogicalPixel:Float; var width:Float; } = cast _Runtime.UNDEFINED;
@@ -40,7 +39,7 @@ class WgpuMotionBlurEffect {
       }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument6; }));
       return;
     }
-    velocitySource = (cast { view: _Runtime.callProperty(velocityTexture, 'createView', cast ([] : Array<Dynamic>)) } : WgpuRenderTarget);
+    velocitySource = (cast { view: velocityTexture.createView() } : WgpuRenderTarget);
     drawWgpuDualSourceEffectPass(({ final __callArgument7:Dynamic = state; __callArgument7; }), (cast source : WgpuRenderTarget), ({ final __callArgument8:Dynamic = velocitySource; __callArgument8; }), ({ final __callArgument9:Dynamic = (cast dest : WgpuRenderTarget); __callArgument9; }), ({ final __callArgument10:Dynamic = pipeline; __callArgument10; }), ({ final __callArgument11:Dynamic = function(__unused4:flighthq._internal._Float32Array, __unused5:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast intensity : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast samples : Float));
@@ -51,7 +50,7 @@ class WgpuMotionBlurEffect {
   }
 
   public static final defaultWgpuMotionBlurEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    applyMotionBlurEffectToWgpu(ctx.state, ctx.source, ctx.dest, (cast ctx.sceneVelocityTexture : flighthq._internal._Any), (cast effect : MotionBlurEffect));
+    applyMotionBlurEffectToWgpu(ctx.state, ctx.source, ctx.dest, ctx.sceneVelocityTexture, (cast effect : MotionBlurEffect));
   });
 
   public static function registerWgpuMotionBlurEffect(state:WgpuRenderState):Void {

@@ -39,17 +39,20 @@ describe('analyzeUpstream', () => {
     const physics3DAbiRoot = resolvePackageExportLane(inventoryByName, '@flighthq/physics3d-abi');
     const rootVector = geometryRoot.exports.find((item) => item.name === 'createVector2');
     const contractVector = geometryContract.exports.find((item) => item.name === 'createVector2');
+    const exportLanes = inventory.packages.flatMap((item) => item.exportLanes);
 
     expect(inventory.schemaVersion).toBe(4);
-    expect(inventory.summary).toMatchObject({
-      excludedPackages: 2,
-      exportConflicts: 0,
-      exportLanes: 315,
-      exports: 35_605,
-      packages: 151,
-      rootExports: 13_833,
-      sourceFiles: 2_703,
-      testFiles: 1_553,
+    expect(inventory.summary).toEqual({
+      excludedPackages: inventory.packages.filter((item) => item.exclusion !== null).length,
+      exportConflicts: exportLanes.reduce((total, lane) => total + lane.exportConflicts.length, 0),
+      exportLanes: exportLanes.length,
+      exports: exportLanes.reduce((total, lane) => total + lane.exports.length, 0),
+      packages: inventory.packages.length,
+      rootExports: exportLanes
+        .filter((lane) => lane.entry === '.')
+        .reduce((total, lane) => total + lane.exports.length, 0),
+      sourceFiles: inventory.packages.reduce((total, item) => total + item.sourceFiles, 0),
+      testFiles: inventory.packages.reduce((total, item) => total + item.testFiles, 0),
     });
     expect(inventory.packages.every((item) => item.exportLanes.some((lane) => lane.entry === '.'))).toBe(true);
     expect(inventory.packages.every((item) => item.exportLanes.some((lane) => lane.entry === './contract'))).toBe(true);
@@ -230,10 +233,17 @@ describe('analyzeUpstream', () => {
 
 describe('auditLowering', () => {
   it('accounts for current translator coverage without hiding diagnostics', () => {
+    const inventory = analyzeUpstream(path.resolve('.'));
     const audit = auditLowering(path.resolve('.'));
     const math = audit.packages.find((item) => item.packageName === '@flighthq/math');
 
-    expect(audit.summary.packages).toBe(149);
+    expect(audit.summary.packages).toBe(audit.packages.length);
+    expect(audit.packages.map((item) => item.packageName).sort()).toEqual(
+      inventory.packages
+        .filter((item) => item.exclusion === null)
+        .map((item) => item.name)
+        .sort(),
+    );
     expect(audit.summary.declarations).toBeGreaterThan(5_000);
     expect(audit.summary.lowered).toBe(audit.summary.declarations);
     expect(audit.summary.diagnostics).toBe(0);

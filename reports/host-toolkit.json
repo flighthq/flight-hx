@@ -10,8 +10,8 @@
     "missingEntries": 0,
     "moduleValueKeys": 0,
     "portableGlobalValueKeys": 33,
-    "typeUses": 11278,
-    "valueUses": 1964
+    "typeUses": 11280,
+    "valueUses": 1999
   },
   "types": [
     {
@@ -277,7 +277,7 @@
         "upstream/packages/effects-canvas/src/canvasScanlinesEffect.ts",
         "upstream/packages/effects-canvas/src/canvasSourceModeCompositing.ts",
         "upstream/packages/effects-canvas/src/canvasVignetteEffect.ts",
-        "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts",
+        "upstream/packages/host-web/src/webGlyphRasterizer.ts",
         "upstream/packages/scene2d-canvas/src/canvasBackground.ts",
         "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts",
         "upstream/packages/scene2d-canvas/src/canvasRichText.ts",
@@ -359,7 +359,7 @@
         "upstream/packages/effects-canvas/src/canvasScanlinesEffect.ts",
         "upstream/packages/effects-canvas/src/canvasSourceModeCompositing.ts",
         "upstream/packages/effects-canvas/src/canvasVignetteEffect.ts",
-        "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts",
+        "upstream/packages/host-web/src/webGlyphRasterizer.ts",
         "upstream/packages/scene2d-canvas/src/canvasBackground.ts",
         "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts",
         "upstream/packages/scene2d-canvas/src/canvasRichText.ts",
@@ -398,7 +398,7 @@
         "upstream/packages/effects-canvas/src/canvasScanlinesEffect.ts",
         "upstream/packages/effects-canvas/src/canvasSourceModeCompositing.ts",
         "upstream/packages/effects-canvas/src/canvasVignetteEffect.ts",
-        "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts",
+        "upstream/packages/host-web/src/webGlyphRasterizer.ts",
         "upstream/packages/image/src/imageResourceFrom.ts",
         "upstream/packages/scene2d-canvas/src/canvasBackground.ts",
         "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts",
@@ -555,7 +555,7 @@
         "upstream/packages/accessibility/src/accessibility.ts",
         "upstream/packages/application/src/window.ts",
         "upstream/packages/device/src/device.ts",
-        "upstream/packages/interaction/src/cursorBackend.ts",
+        "upstream/packages/host-web/src/webCursor.ts",
         "upstream/packages/menu/src/menu.ts",
         "upstream/packages/render-gl/src/glElement.ts",
         "upstream/packages/render-wgpu/src/wgpuElement.ts",
@@ -616,7 +616,7 @@
         "upstream/packages/dialog/src/dialog.ts",
         "upstream/packages/font/src/_fontFaceLoad.ts",
         "upstream/packages/font/src/fontStatus.ts",
-        "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts",
+        "upstream/packages/host-web/src/webGlyphRasterizer.ts",
         "upstream/packages/image/src/imageResourceFrom.ts",
         "upstream/packages/input/src/inputManager.ts",
         "upstream/packages/lifecycle/src/lifecycle.ts",
@@ -2416,8 +2416,9 @@
         "upstream/packages/effects-gl/src/glRenderEffectPipeline.ts",
         "upstream/packages/effects-wgpu/src/wgpuBlurEffect.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
+        "upstream/packages/effects-wgpu/src/wgpuEffectTexelScale.ts",
         "upstream/packages/effects-wgpu/src/wgpuRenderEffectPipeline.ts",
-        "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts",
+        "upstream/packages/host-web/src/webGlyphRasterizer.ts",
         "upstream/packages/image/src/imageResource.ts",
         "upstream/packages/image/src/imageResourceFrom.ts",
         "upstream/packages/media/src/videoChannel.ts",
@@ -2503,7 +2504,7 @@
         "upstream/packages/video/src/videoResource.ts"
       ],
       "provider": "src/flighthq/_internal/dom/HTMLCanvasElement.hx",
-      "uses": 403
+      "uses": 405
     },
     {
       "coverage": "dynamic-stub",
@@ -2531,8 +2532,8 @@
         "upstream/packages/accessibility/src/accessibility.ts",
         "upstream/packages/application/src/window.ts",
         "upstream/packages/device/src/device.ts",
+        "upstream/packages/host-web/src/webCursor.ts",
         "upstream/packages/input/src/inputManager.ts",
-        "upstream/packages/interaction/src/cursorBackend.ts",
         "upstream/packages/menu/src/menu.ts",
         "upstream/packages/scene2d-dom/src/domBackground.ts",
         "upstream/packages/scene2d-dom/src/domCache.ts",
@@ -2795,7 +2796,7 @@
         "upstream/packages/bitmap/src/bitmapFrom.ts",
         "upstream/packages/effects-canvas/src/canvasBloomEffect.ts",
         "upstream/packages/effects-canvas/src/canvasEffectCompositing.ts",
-        "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts",
+        "upstream/packages/host-web/src/webGlyphRasterizer.ts",
         "upstream/packages/image-codec/src/registerWebImageDecoders.ts",
         "upstream/packages/image-codec/src/registerWebImageEncoders.ts",
         "upstream/packages/image/src/imageResourceFrom.ts",
@@ -2824,7 +2825,7 @@
       "key": "host:ImageDataSettings",
       "kind": "host",
       "locations": [
-        "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+        "upstream/packages/host-web/src/webGlyphRasterizer.ts"
       ],
       "provider": "src/flighthq/_internal/dom/ImageDataSettings.hx",
       "uses": 1
@@ -3085,7 +3086,7 @@
       "key": "host:OffscreenCanvas",
       "kind": "host",
       "locations": [
-        "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts",
+        "upstream/packages/host-web/src/webGlyphRasterizer.ts",
         "upstream/packages/image-codec/src/registerWebImageDecoders.ts",
         "upstream/packages/image-codec/src/registerWebImageEncoders.ts",
         "upstream/packages/image/src/imageResource.ts",
@@ -3122,7 +3123,7 @@
       "key": "host:OffscreenCanvasRenderingContext2D",
       "kind": "host",
       "locations": [
-        "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts",
+        "upstream/packages/host-web/src/webGlyphRasterizer.ts",
         "upstream/packages/image-codec/src/registerWebImageDecoders.ts",
         "upstream/packages/image-codec/src/registerWebImageEncoders.ts",
         "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts"
@@ -3528,7 +3529,7 @@
       "key": "host:TextMetrics",
       "kind": "host",
       "locations": [
-        "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts",
+        "upstream/packages/host-web/src/webGlyphRasterizer.ts",
         "upstream/packages/scene2d-canvas/src/canvasRichText.ts",
         "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts",
         "upstream/packages/scene2d-canvas/src/canvasTextMeasure.ts",
@@ -4407,7 +4408,7 @@
       "uses": 4
     }
   ],
-  "upstreamCommit": "9db114b3fe1db90a90a11541649cb3af8bb5ca62",
+  "upstreamCommit": "443275fa278b1f0415c49b6be710891ef8a64bf1",
   "values": [
     {
       "coverage": "portable",
@@ -4566,6 +4567,9 @@
         "generated/flighthq/fontFormats/WoffFont.hx",
         "generated/flighthq/mesh/MeshGeometryAttributes.hx",
         "generated/flighthq/mesh/MeshGeometryLayout.hx",
+        "generated/flighthq/physics2dAbi/Physics2DAbiBuffer.hx",
+        "generated/flighthq/physics2dAbi/Physics2DAbiCommand.hx",
+        "generated/flighthq/physics2dAbi/ReferencePhysics2DAbi.hx",
         "generated/flighthq/physics3dAbi/Physics3DAbiBuffer.hx",
         "generated/flighthq/physics3dAbi/Physics3DAbiCommand.hx",
         "generated/flighthq/physics3dAbi/ReferencePhysics3DAbi.hx",
@@ -4579,7 +4583,7 @@
         "generated/flighthq/textureFormats/ByteReader.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
-      "uses": 45
+      "uses": 49
     },
     {
       "coverage": "portable",
@@ -4626,7 +4630,7 @@
         "generated/flighthq/application/Window.hx",
         "generated/flighthq/device/Device.hx",
         "generated/flighthq/dialog/Dialog.hx",
-        "generated/flighthq/glyphatlas/GlyphRasterizerBackend.hx",
+        "generated/flighthq/hostWeb/WebGlyphRasterizer.hx",
         "generated/flighthq/lifecycle/Lifecycle.hx",
         "generated/flighthq/menu/Menu.hx",
         "generated/flighthq/power/Power.hx",
@@ -4915,6 +4919,7 @@
         "generated/flighthq/pathBoolean/MartinezKernel.hx",
         "generated/flighthq/physics2d/JointCollisionSuppression.hx",
         "generated/flighthq/physics2d/World.hx",
+        "generated/flighthq/physics2dAbi/ReferencePhysics2DAbi.hx",
         "generated/flighthq/physics3d/JointCollisionSuppression.hx",
         "generated/flighthq/physics3d/World.hx",
         "generated/flighthq/physics3dAbi/ReferencePhysics3DAbi.hx",
@@ -4974,6 +4979,7 @@
         "generated/flighthq/skeleton2d/Skeleton2dConstraint.hx",
         "generated/flighthq/skeleton2dFormats/DragonBonesParse.hx",
         "generated/flighthq/skeleton2dFormats/SpineBinaryParse.hx",
+        "generated/flighthq/skeleton2dFormats/SpineBinaryVersioned.hx",
         "generated/flighthq/skeleton2dFormats/SpineParse.hx",
         "generated/flighthq/skeleton3d/Skeleton3d.hx",
         "generated/flighthq/snapshot/EnableSnapshotGuards.hx",
@@ -5001,7 +5007,7 @@
         "generated/flighthq/tween/TweenManager.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
-      "uses": 326
+      "uses": 334
     },
     {
       "coverage": "js-only",
@@ -5073,7 +5079,7 @@
         "generated/flighthq/collision/TriangleMesh3D.hx",
         "generated/flighthq/easing/CreateEasingSamples.hx",
         "generated/flighthq/effects/RenderEffectPadding.hx",
-        "generated/flighthq/effectsWgpu/WgpuBlurEffect.hx",
+        "generated/flighthq/effectsWgpu/WgpuEffectTexelScale.hx",
         "generated/flighthq/font/GlyphOutlineSource.hx",
         "generated/flighthq/fontFormats/CffDict.hx",
         "generated/flighthq/hostCapacitor/CapacitorNotification.hx",
@@ -5113,6 +5119,9 @@
         "generated/flighthq/physics2d/StepValidation.hx",
         "generated/flighthq/physics2d/World.hx",
         "generated/flighthq/physics2d/WorldQueries.hx",
+        "generated/flighthq/physics2dAbi/Physics2DAbiBuffer.hx",
+        "generated/flighthq/physics2dAbi/Physics2DAbiCommand.hx",
+        "generated/flighthq/physics2dAbi/ReferencePhysics2DAbi.hx",
         "generated/flighthq/physics3d/Broadphase.hx",
         "generated/flighthq/physics3d/Continuous.hx",
         "generated/flighthq/physics3d/Integrate.hx",
@@ -5134,6 +5143,7 @@
         "generated/flighthq/renderWgpu/_internal/_WgpuTestHelper.hx",
         "generated/flighthq/scene2dDom/DomClipRectangle.hx",
         "generated/flighthq/scene2dFormats/LottieDocument.hx",
+        "generated/flighthq/scene2dFormats/RiveClipping.hx",
         "generated/flighthq/scene2dFormats/RiveLayout.hx",
         "generated/flighthq/scene2dFormats/SvgDocument.hx",
         "generated/flighthq/scene3dFormats/GltfParse.hx",
@@ -5171,13 +5181,13 @@
         "generated/flighthq/xml/XmlQuery.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
-      "uses": 732
+      "uses": 755
     },
     {
       "coverage": "js-only",
       "key": "global:OffscreenCanvas",
       "locations": [
-        "generated/flighthq/glyphatlas/GlyphRasterizerBackend.hx",
+        "generated/flighthq/hostWeb/WebGlyphRasterizer.hx",
         "generated/flighthq/imageCodec/RegisterWebImageDecoders.hx",
         "generated/flighthq/imageCodec/RegisterWebImageEncoders.hx",
         "generated/flighthq/renderWgpu/WgpuDraw.hx",

@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq._internal.WebExterns.GPUTexture;
 
-typedef WgpuColorLutTextureCache = { var texture:Null<GPUTexture>; var size:Float; var lut:Null<ColorLut>; };
+typedef WgpuColorLutTextureCache = { var texture:Null<flighthq._internal.dom.GPUTexture>; var size:Float; var lut:Null<ColorLut>; };

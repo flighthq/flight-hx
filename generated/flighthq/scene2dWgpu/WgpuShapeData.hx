@@ -55,22 +55,22 @@ class WgpuShapeData {
     if ((cast !_Runtime.strictEquals(surface, null) : Bool)) {
       var entry:Null<WgpuTextureSourceTextureEntry> = ((cast runtime.textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, WgpuTextureSourceTextureEntry>).get((cast surface : { var image:Image; }).image));
       if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        _Runtime.callProperty((cast entry : { var texture:flighthq._internal._Any; }).texture, 'destroy', cast ([] : Array<Dynamic>));
+        (cast (cast entry : { var texture:flighthq._internal.dom.GPUTexture; }).texture : flighthq._internal.dom.GPUTexture).destroy();
         ((cast runtime.textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, WgpuTextureSourceTextureEntry>).delete_((cast surface : { var image:Image; }).image));
       }
     }
     b = (cast shapeData : { var meshBuffers:WgpuShapeMeshBuffers; }).meshBuffers;
     for (buffer in _Runtime.iterable(b.vertexBuffers)) {
-      _Runtime.callProperty(buffer, 'destroy', cast ([] : Array<Dynamic>));
+      (cast buffer : flighthq._internal.dom.GPUBuffer).destroy();
     }
     for (buffer in _Runtime.iterable(b.indexBuffers)) {
-      _Runtime.callProperty(buffer, 'destroy', cast ([] : Array<Dynamic>));
+      (cast buffer : flighthq._internal.dom.GPUBuffer).destroy();
     }
     for (buffer in _Runtime.iterable(b.uniformBuffers)) {
-      _Runtime.callProperty(buffer, 'destroy', cast ([] : Array<Dynamic>));
+      (cast buffer : flighthq._internal.dom.GPUBuffer).destroy();
     }
     for (buffer in _Runtime.iterable(b.colorScaleBiasUniformBuffers)) {
-      _Runtime.callProperty(buffer, 'destroy', cast ([] : Array<Dynamic>));
+      (cast buffer : flighthq._internal.dom.GPUBuffer).destroy();
     }
     _Runtime.setLength(b.vertexBuffers, 0.0);
     _Runtime.setLength(b.vertexCapacities, 0.0);

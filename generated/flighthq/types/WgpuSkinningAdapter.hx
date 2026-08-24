@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq._internal.WebExterns.GPUBindGroup;
-import flighthq._internal.WebExterns.GPUBindGroupLayout;
-import flighthq._internal.WebExterns.GPUVertexBufferLayout;
 
-typedef WgpuSkinningAdapter = { var extendMeshPrelude:String->String; var extendShadowDepthPrelude:String->String; var getDrawBindGroup:WgpuRenderState->flighthq._internal._Float32Array->GPUBindGroup; var getDrawLayout:WgpuRenderState->GPUBindGroupLayout; var getMeshDrawBindGroup:WgpuRenderState->flighthq._internal._Float32Array->flighthq._internal._Float32Array->GPUBindGroup; var getMeshDrawLayout:WgpuRenderState->GPUBindGroupLayout; var getUploadVertices:MeshGeometry->Null<flighthq._internal._Float32Array>; var hasBindPose:MeshGeometry->Bool; var isGpuSkinned:Mesh->Bool; var vertexBufferLayouts:Array<GPUVertexBufferLayout>; };
+typedef WgpuSkinningAdapter = { var extendMeshPrelude:String->String; var extendShadowDepthPrelude:String->String; var getDrawBindGroup:WgpuRenderState->flighthq._internal._Float32Array->flighthq._internal.dom.GPUBindGroup; var getDrawLayout:WgpuRenderState->flighthq._internal.dom.GPUBindGroupLayout; var getMeshDrawBindGroup:WgpuRenderState->flighthq._internal._Float32Array->flighthq._internal._Float32Array->flighthq._internal.dom.GPUBindGroup; var getMeshDrawLayout:WgpuRenderState->flighthq._internal.dom.GPUBindGroupLayout; var getUploadVertices:MeshGeometry->Null<flighthq._internal._Float32Array>; var hasBindPose:MeshGeometry->Bool; var isGpuSkinned:Mesh->Bool; var vertexBufferLayouts:Array<flighthq._internal.dom.GPUVertexBufferLayout>; };

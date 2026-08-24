@@ -26,7 +26,7 @@ class WgpuInnerGlowEffect {
   public static function applyInnerGlowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:InnerGlowEffect):Void {
     var src:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     var dst:WgpuRenderTarget = cast _Runtime.UNDEFINED;
-    var descriptor:{ var width:Float; var height:Float; var format:flighthq._internal._Any; } = cast _Runtime.UNDEFINED;
+    var descriptor:{ var width:Float; var height:Float; var format:String; } = cast _Runtime.UNDEFINED;
     var s0:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     var s1:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     var s2:WgpuRenderTarget = cast _Runtime.UNDEFINED;

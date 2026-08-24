@@ -41,9 +41,9 @@ class WgpuBlurEffect {
   }
 
   public static final defaultWgpuBlurEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    var descriptor:{ var width:Float; var height:Float; var format:flighthq._internal._Any; } = cast _Runtime.UNDEFINED;
+    var descriptor:{ var width:Float; var height:Float; var format:String; } = cast _Runtime.UNDEFINED;
     var temp:WgpuRenderTarget = cast _Runtime.UNDEFINED;
-    descriptor = (cast { width: (cast ctx.source : { var width:Float; }).width, height: (cast ctx.source : { var height:Float; }).height, format: (cast ctx.source : { var format:flighthq._internal._Any; }).format });
+    descriptor = (cast { width: (cast ctx.source : { var width:Float; }).width, height: (cast ctx.source : { var height:Float; }).height, format: (cast ctx.source : { var format:String; }).format });
     temp = (cast acquireWgpuRenderTarget(ctx.state, ctx.pool, ({ final __callArgument11:Dynamic = descriptor; __callArgument11; })) : WgpuRenderTarget);
     applyBlurEffectToWgpu(ctx.state, ctx.source, ctx.dest, ({ final __callArgument12:Dynamic = temp; __callArgument12; }), (cast effect : BlurEffect));
     releaseWgpuRenderTarget(ctx.pool, ({ final __callArgument13:Dynamic = temp; __callArgument13; }));

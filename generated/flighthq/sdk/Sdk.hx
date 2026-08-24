@@ -3,10 +3,6 @@ package flighthq.sdk;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq._internal.WebExterns.GPUBindGroup;
-import flighthq._internal.WebExterns.GPUBindGroupLayout;
-import flighthq._internal.WebExterns.GPUTexture;
-import flighthq._internal.WebExterns.GPUTextureFormat;
 import flighthq.abc.AbcFile as Facade_Sdk_flighthq_abc_AbcFile;
 import flighthq.abc.AbcInstruction as Facade_Sdk_flighthq_abc_AbcInstruction;
 import flighthq.accessibility.Accessibility as Facade_Sdk_flighthq_accessibility_Accessibility;
@@ -6148,7 +6144,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createExternalWgpuTexture(state:WgpuRenderState, handle:GPUTexture, options:CreateExternalTextureOptions):Texture {
+  public static function createExternalWgpuTexture(state:WgpuRenderState, handle:flighthq._internal.dom.GPUTexture, options:CreateExternalTextureOptions):Texture {
     return cast Facade_Sdk_flighthq_renderWgpu_WgpuExternalTexture.createExternalWgpuTexture(state, handle, options);
     return cast null;
   }
@@ -7989,7 +7985,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWgpuRenderTarget(state:WgpuRenderState, width:Float, height:Float, ?format:GPUTextureFormat, ?colorSpace:RenderTargetColorSpace, ?sampleCount:Float):WgpuRenderTarget {
+  public static function createWgpuRenderTarget(state:WgpuRenderState, width:Float, height:Float, ?format:flighthq._internal.dom.GPUTextureFormat, ?colorSpace:RenderTargetColorSpace, ?sampleCount:Float):WgpuRenderTarget {
     return cast Facade_Sdk_flighthq_renderWgpu_WgpuRenderTarget.createWgpuRenderTarget(state, width, height, format, colorSpace, sampleCount);
     return cast null;
   }
@@ -9879,7 +9875,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function ensureWgpuShadowSampleLayout(state:WgpuRenderState):GPUBindGroupLayout {
+  public static function ensureWgpuShadowSampleLayout(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroupLayout {
     return cast Facade_Sdk_flighthq_scene3dWgpu_WgpuMeshPipeline.ensureWgpuShadowSampleLayout(state);
     return cast null;
   }
@@ -19103,7 +19099,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function resolveWgpuSmoothingBindGroup(state:WgpuRenderState, entry:WgpuTextureEntry, smoothing:Null<Bool>):GPUBindGroup {
+  public static function resolveWgpuSmoothingBindGroup(state:WgpuRenderState, entry:WgpuTextureEntry, smoothing:Null<Bool>):flighthq._internal.dom.GPUBindGroup {
     return cast Facade_Sdk_flighthq_renderWgpu_WgpuDraw.resolveWgpuSmoothingBindGroup(state, entry, smoothing);
     return cast null;
   }
@@ -20805,7 +20801,7 @@ class Sdk {
     Facade_Sdk_flighthq_texture_VideoTexture.setVideoTextureSource(texture, source);
   }
 
-  public static function setWgpuRenderEffectVelocityTexture(pipeline:WgpuRenderEffectPipeline, texture:Null<GPUTexture>):Void {
+  public static function setWgpuRenderEffectVelocityTexture(pipeline:WgpuRenderEffectPipeline, texture:Null<flighthq._internal.dom.GPUTexture>):Void {
     Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectPipeline.setWgpuRenderEffectVelocityTexture(pipeline, texture);
   }
 
@@ -22639,7 +22635,7 @@ class Sdk {
     Facade_Sdk_flighthq_geometry_Vector4.writeVector4ToFloat32Array(out, offset, source);
   }
 
-  public static function writeWgpuDrawUniform(state:WgpuRenderState, proxy:Scene3DRenderProxy):GPUBindGroup {
+  public static function writeWgpuDrawUniform(state:WgpuRenderState, proxy:Scene3DRenderProxy):flighthq._internal.dom.GPUBindGroup {
     return cast Facade_Sdk_flighthq_scene3dWgpu_WgpuMeshPipeline.writeWgpuDrawUniform(state, proxy);
     return cast null;
   }

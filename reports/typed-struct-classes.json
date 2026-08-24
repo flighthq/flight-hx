@@ -3112,7 +3112,7 @@
         {
           "column": 100,
           "kind": "optional-omission",
-          "line": 201,
+          "line": 247,
           "scope": "production",
           "source": "upstream/packages/application/src/application.ts"
         }
@@ -4623,7 +4623,7 @@
         {
           "column": 32,
           "kind": "cross-schema-transfer",
-          "line": 673,
+          "line": 674,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RegionAttachment2D"
           ],
@@ -4633,7 +4633,7 @@
         {
           "column": 31,
           "kind": "cross-schema-transfer",
-          "line": 674,
+          "line": 675,
           "relatedSchemaIds": [
             "@flighthq/types:interface#MeshAttachment2D"
           ],
@@ -5317,6 +5317,52 @@
         }
       ],
       "source": "upstream/packages/types/src/AutoExposureEffect.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 2
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 6,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 6,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#BackendExplanation",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "BackendExplanation",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/BackendExplanation.ts"
     },
     {
       "bridge": {
@@ -8355,7 +8401,7 @@
         {
           "column": 64,
           "kind": "cross-schema-transfer",
-          "line": 61,
+          "line": 64,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderEffect"
           ],
@@ -9133,6 +9179,157 @@
         }
       ],
       "source": "upstream/packages/types/src/CameraMotionBlurEffect.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 3,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 6
+      },
+      "id": "@flighthq/types:interface#CameraShake",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "cross-schema-transfer"
+        ],
+        "observabilityReasons": []
+      },
+      "name": "CameraShake",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 1,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 10,
+          "kind": "cross-schema-transfer",
+          "line": 10,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Entity"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/camera-controls/src/cameraShake.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/CameraShake.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 6
+      },
+      "id": "@flighthq/types:interface#CameraShakeOffset",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "CameraShakeOffset",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/CameraShake.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 6
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 4,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#CameraShakeOptions",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "CameraShakeOptions",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/CameraShake.ts"
     },
     {
       "bridge": {
@@ -13922,7 +14119,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 35,
+        "inputSignatures": 36,
         "outputSignatures": 1
       },
       "construction": {
@@ -13954,7 +14151,7 @@
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
-        "objectSpreads": 1,
+        "objectSpreads": 2,
         "prototypeObservations": 0,
         "strictEqualityAssertions": 0
       },
@@ -14070,6 +14267,13 @@
           ],
           "scope": "production",
           "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
+        },
+        {
+          "column": 14,
+          "kind": "object-spread",
+          "line": 269,
+          "scope": "test",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiLayout.test.ts"
         }
       ],
       "source": "upstream/packages/types/src/Collision.ts"
@@ -14363,7 +14567,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 29,
+        "inputSignatures": 30,
         "outputSignatures": 1
       },
       "construction": {
@@ -14393,7 +14597,7 @@
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
-        "objectSpreads": 2,
+        "objectSpreads": 3,
         "prototypeObservations": 0,
         "strictEqualityAssertions": 0
       },
@@ -14420,6 +14624,13 @@
           "line": 249,
           "scope": "test",
           "source": "upstream/packages/collision/src/sweepCollisionShape2D.test.ts"
+        },
+        {
+          "column": 7,
+          "kind": "object-spread",
+          "line": 276,
+          "scope": "test",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiLayout.test.ts"
         }
       ],
       "source": "upstream/packages/types/src/Collision.ts"
@@ -14555,7 +14766,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 34,
+        "inputSignatures": 35,
         "outputSignatures": 1
       },
       "construction": {
@@ -14587,7 +14798,7 @@
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
-        "objectSpreads": 1,
+        "objectSpreads": 2,
         "prototypeObservations": 0,
         "strictEqualityAssertions": 0
       },
@@ -14703,6 +14914,13 @@
           ],
           "scope": "production",
           "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
+        },
+        {
+          "column": 41,
+          "kind": "object-spread",
+          "line": 267,
+          "scope": "test",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiLayout.test.ts"
         }
       ],
       "source": "upstream/packages/types/src/Collision.ts"
@@ -15323,7 +15541,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 35,
+        "inputSignatures": 36,
         "outputSignatures": 1
       },
       "construction": {
@@ -15355,7 +15573,7 @@
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
-        "objectSpreads": 1,
+        "objectSpreads": 2,
         "prototypeObservations": 0,
         "strictEqualityAssertions": 0
       },
@@ -15471,13 +15689,20 @@
           ],
           "scope": "production",
           "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
+        },
+        {
+          "column": 38,
+          "kind": "object-spread",
+          "line": 271,
+          "scope": "test",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiLayout.test.ts"
         }
       ],
       "source": "upstream/packages/types/src/Collision.ts"
     },
     {
       "bridge": {
-        "inputSignatures": 22,
+        "inputSignatures": 23,
         "outputSignatures": 1
       },
       "construction": {
@@ -15523,7 +15748,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 34,
+        "inputSignatures": 35,
         "outputSignatures": 1
       },
       "construction": {
@@ -15555,7 +15780,7 @@
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
-        "objectSpreads": 1,
+        "objectSpreads": 2,
         "prototypeObservations": 0,
         "strictEqualityAssertions": 0
       },
@@ -15671,6 +15896,13 @@
           ],
           "scope": "production",
           "source": "upstream/packages/collision/src/registerBuiltInCollisionPairTests2D.ts"
+        },
+        {
+          "column": 12,
+          "kind": "object-spread",
+          "line": 292,
+          "scope": "test",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiLayout.test.ts"
         }
       ],
       "source": "upstream/packages/types/src/Collision.ts"
@@ -15815,7 +16047,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 29,
+        "inputSignatures": 30,
         "outputSignatures": 1
       },
       "construction": {
@@ -17785,7 +18017,7 @@
         {
           "column": 57,
           "kind": "cross-schema-transfer",
-          "line": 31,
+          "line": 33,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderEffect"
           ],
@@ -18670,7 +18902,7 @@
         {
           "column": 69,
           "kind": "cross-schema-transfer",
-          "line": 35,
+          "line": 37,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderEffect"
           ],
@@ -18899,7 +19131,7 @@
         {
           "column": 66,
           "kind": "cross-schema-transfer",
-          "line": 34,
+          "line": 36,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderEffect"
           ],
@@ -19334,7 +19566,7 @@
         {
           "column": 60,
           "kind": "cross-schema-transfer",
-          "line": 26,
+          "line": 28,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderEffect"
           ],
@@ -24936,7 +25168,7 @@
         {
           "column": 58,
           "kind": "cross-schema-transfer",
-          "line": 27,
+          "line": 30,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderEffect"
           ],
@@ -26328,7 +26560,7 @@
         {
           "column": 60,
           "kind": "cross-schema-transfer",
-          "line": 32,
+          "line": 34,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderEffect"
           ],
@@ -32395,7 +32627,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 50
+        "testObjectLiterals": 52
       },
       "directAccesses": 13,
       "fields": {
@@ -32792,7 +33024,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 4,
-        "testObjectLiterals": 10
+        "testObjectLiterals": 11
       },
       "directAccesses": 27,
       "fields": {
@@ -32838,7 +33070,7 @@
         "objectLiteralsOmittingOptionalFields": 4,
         "objectLiteralsWithSpread": 1,
         "plainObjectLiterals": 4,
-        "testObjectLiterals": 11
+        "testObjectLiterals": 17
       },
       "directAccesses": 9,
       "fields": {
@@ -32915,15 +33147,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 4
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 3,
-        "objectLiteralsOmittingOptionalFields": 1,
+        "objectLiterals": 4,
+        "objectLiteralsOmittingOptionalFields": 2,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 3,
+        "plainObjectLiterals": 4,
         "testObjectLiterals": 21
       },
       "directAccesses": 0,
@@ -32962,7 +33194,14 @@
         {
           "column": 10,
           "kind": "optional-omission",
-          "line": 15,
+          "line": 4,
+          "scope": "production",
+          "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+        },
+        {
+          "column": 43,
+          "kind": "optional-omission",
+          "line": 95,
           "scope": "production",
           "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
         }
@@ -35615,7 +35854,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 60,
+        "inputSignatures": 61,
         "outputSignatures": 1
       },
       "construction": {
@@ -37555,7 +37794,7 @@
         {
           "column": 62,
           "kind": "cross-schema-transfer",
-          "line": 32,
+          "line": 34,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderEffect"
           ],
@@ -39769,15 +40008,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 2
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 1,
+        "objectLiterals": 2,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 1,
+        "plainObjectLiterals": 2,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -43272,7 +43511,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 78,
+      "directAccesses": 80,
       "fields": {
         "optional": 2,
         "requiredUndefined": 0,
@@ -45424,7 +45663,7 @@
         {
           "column": 90,
           "kind": "cross-schema-transfer",
-          "line": 70,
+          "line": 72,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderEffect"
           ],
@@ -46334,8 +46573,8 @@
     },
     {
       "bridge": {
-        "inputSignatures": 301,
-        "outputSignatures": 37
+        "inputSignatures": 304,
+        "outputSignatures": 38
       },
       "construction": {
         "computedObjectLiterals": 1,
@@ -46371,7 +46610,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 298,
+        "crossSchemaTransfers": 303,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -47026,6 +47265,26 @@
           ],
           "scope": "production",
           "source": "upstream/packages/particleemitter/src/updateParticleEmitter2D.ts"
+        },
+        {
+          "column": 32,
+          "kind": "cross-schema-transfer",
+          "line": 12,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Node2DTraits"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d/src/nodeSync.ts"
+        },
+        {
+          "column": 32,
+          "kind": "cross-schema-transfer",
+          "line": 16,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Node3DTraits"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics3d/src/nodeSync.ts"
         },
         {
           "column": 35,
@@ -48172,6 +48431,36 @@
           ],
           "scope": "production",
           "source": "upstream/packages/scene3d/src/billboardCamera.ts"
+        },
+        {
+          "column": 39,
+          "kind": "cross-schema-transfer",
+          "line": 19,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Node3DTraits"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/scene3d/src/cloneNode3DSubtree.ts"
+        },
+        {
+          "column": 18,
+          "kind": "cross-schema-transfer",
+          "line": 20,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Node3DTraits"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/scene3d/src/cloneNode3DSubtree.ts"
+        },
+        {
+          "column": 25,
+          "kind": "cross-schema-transfer",
+          "line": 20,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Node3DTraits"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/scene3d/src/cloneNode3DSubtree.ts"
         },
         {
           "column": 28,
@@ -49510,7 +49799,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 35,
+        "inputSignatures": 36,
         "outputSignatures": 5
       },
       "construction": {
@@ -49556,8 +49845,8 @@
     },
     {
       "bridge": {
-        "inputSignatures": 33,
-        "outputSignatures": 8
+        "inputSignatures": 35,
+        "outputSignatures": 9
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -49567,7 +49856,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 9,
+      "directAccesses": 18,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -53615,6 +53904,374 @@
     },
     {
       "bridge": {
+        "inputSignatures": 13,
+        "outputSignatures": 2
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 14
+      },
+      "id": "@flighthq/types:interface#Physics2DAbi",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics2DAbi",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics2DAbi.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 5
+      },
+      "id": "@flighthq/types:interface#Physics2DAbiBodyBuffer",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics2DAbiBodyBuffer",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics2DAbi.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 17,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#Physics2DAbiCommandBuffer",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics2DAbiCommandBuffer",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics2DAbi.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 11
+      },
+      "id": "@flighthq/types:interface#Physics2DAbiContactBuffer",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics2DAbiContactBuffer",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics2DAbi.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#Physics2DAbiContactHooks",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics2DAbiContactHooks",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics2DAbi.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#Physics2DAbiExecutionResult",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics2DAbiExecutionResult",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics2DAbi.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 5
+      },
+      "id": "@flighthq/types:interface#Physics2DAbiJointBuffer",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics2DAbiJointBuffer",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics2DAbi.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 5,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 5
+      },
+      "id": "@flighthq/types:interface#Physics2DAbiQueryBuffer",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "Physics2DAbiQueryBuffer",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Physics2DAbi.ts"
+    },
+    {
+      "bridge": {
         "inputSignatures": 0,
         "outputSignatures": 0
       },
@@ -53661,7 +54318,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 6,
+        "inputSignatures": 8,
         "outputSignatures": 3
       },
       "construction": {
@@ -53672,7 +54329,7 @@
         "plainObjectLiterals": 2,
         "testObjectLiterals": 0
       },
-      "directAccesses": 51,
+      "directAccesses": 64,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -53758,11 +54415,11 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 3,
+        "objectLiterals": 4,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 1,
-        "plainObjectLiterals": 2,
-        "testObjectLiterals": 3
+        "plainObjectLiterals": 3,
+        "testObjectLiterals": 4
       },
       "directAccesses": 0,
       "fields": {
@@ -53837,7 +54494,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 3
       },
-      "directAccesses": 157,
+      "directAccesses": 178,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -54227,13 +54884,13 @@
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
-        "objectSpreads": 6,
+        "objectSpreads": 7,
         "prototypeObservations": 0,
         "strictEqualityAssertions": 0
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 1,
+        "crossSchemaTransfers": 2,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -54241,6 +54898,23 @@
         "objectSpreads": 0
       },
       "sites": [
+        {
+          "column": 64,
+          "kind": "object-spread",
+          "line": 288,
+          "scope": "test",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiCommand.test.ts"
+        },
+        {
+          "column": 19,
+          "kind": "cross-schema-transfer",
+          "line": 420,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiCommand.ts"
+        },
         {
           "column": 7,
           "kind": "object-spread",
@@ -54310,11 +54984,11 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
+        "objectLiteralsWithSpread": 1,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 11
+        "testObjectLiterals": 13
       },
       "directAccesses": 0,
       "fields": {
@@ -54324,8 +54998,10 @@
       },
       "id": "@flighthq/types:interface#Physics2DDistanceJointOptions",
       "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "object-literal-spread"
+        ],
         "observabilityReasons": []
       },
       "name": "Physics2DDistanceJointOptions",
@@ -54346,7 +55022,15 @@
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 41,
+          "kind": "object-literal-spread",
+          "line": 741,
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/referencePhysics2DAbi.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/Physics2D.ts"
     },
     {
@@ -54362,7 +55046,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 1
       },
-      "directAccesses": 29,
+      "directAccesses": 37,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -54388,7 +55072,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 2,
+        "crossSchemaTransfers": 4,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -54396,6 +55080,26 @@
         "objectSpreads": 0
       },
       "sites": [
+        {
+          "column": 19,
+          "kind": "cross-schema-transfer",
+          "line": 380,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiCommand.ts"
+        },
+        {
+          "column": 19,
+          "kind": "cross-schema-transfer",
+          "line": 473,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiCommand.ts"
+        },
         {
           "column": 10,
           "kind": "object-literal-spread",
@@ -54433,11 +55137,11 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
+        "objectLiteralsWithSpread": 1,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 1
+        "testObjectLiterals": 3
       },
       "directAccesses": 8,
       "fields": {
@@ -54447,8 +55151,10 @@
       },
       "id": "@flighthq/types:interface#Physics2DGearJointOptions",
       "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "object-literal-spread"
+        ],
         "observabilityReasons": []
       },
       "name": "Physics2DGearJointOptions",
@@ -54469,12 +55175,20 @@
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 37,
+          "kind": "object-literal-spread",
+          "line": 830,
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/referencePhysics2DAbi.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/Physics2D.ts"
     },
     {
       "bridge": {
-        "inputSignatures": 4,
+        "inputSignatures": 5,
         "outputSignatures": 2
       },
       "construction": {
@@ -54483,7 +55197,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 22
+        "testObjectLiterals": 23
       },
       "directAccesses": 0,
       "fields": {
@@ -54512,7 +55226,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 8,
+        "crossSchemaTransfers": 17,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -54520,6 +55234,96 @@
         "objectSpreads": 0
       },
       "sites": [
+        {
+          "column": 12,
+          "kind": "cross-schema-transfer",
+          "line": 741,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DDistanceJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/referencePhysics2DAbi.ts"
+        },
+        {
+          "column": 12,
+          "kind": "cross-schema-transfer",
+          "line": 749,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DRevoluteJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/referencePhysics2DAbi.ts"
+        },
+        {
+          "column": 12,
+          "kind": "cross-schema-transfer",
+          "line": 764,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DPrismaticJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/referencePhysics2DAbi.ts"
+        },
+        {
+          "column": 12,
+          "kind": "cross-schema-transfer",
+          "line": 781,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DWeldJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/referencePhysics2DAbi.ts"
+        },
+        {
+          "column": 12,
+          "kind": "cross-schema-transfer",
+          "line": 784,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DWheelJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/referencePhysics2DAbi.ts"
+        },
+        {
+          "column": 12,
+          "kind": "cross-schema-transfer",
+          "line": 797,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DRopeJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/referencePhysics2DAbi.ts"
+        },
+        {
+          "column": 12,
+          "kind": "cross-schema-transfer",
+          "line": 805,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DMouseJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/referencePhysics2DAbi.ts"
+        },
+        {
+          "column": 12,
+          "kind": "cross-schema-transfer",
+          "line": 819,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DPulleyJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/referencePhysics2DAbi.ts"
+        },
+        {
+          "column": 12,
+          "kind": "cross-schema-transfer",
+          "line": 830,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DGearJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/referencePhysics2DAbi.ts"
+        },
         {
           "column": 32,
           "kind": "object-spread",
@@ -55116,11 +55920,11 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
+        "objectLiterals": 3,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 1,
-        "plainObjectLiterals": 1,
-        "testObjectLiterals": 11
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 12
       },
       "directAccesses": 0,
       "fields": {
@@ -55219,7 +56023,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 3,
+        "crossSchemaTransfers": 4,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -55227,6 +56031,16 @@
         "objectSpreads": 0
       },
       "sites": [
+        {
+          "column": 19,
+          "kind": "cross-schema-transfer",
+          "line": 458,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiCommand.ts"
+        },
         {
           "column": 19,
           "kind": "cross-schema-transfer",
@@ -55267,11 +56081,11 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
-        "testObjectLiterals": 1
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 2
       },
       "directAccesses": 11,
       "fields": {
@@ -55319,7 +56133,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 3
       },
-      "directAccesses": 50,
+      "directAccesses": 62,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -55345,7 +56159,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 7,
+        "crossSchemaTransfers": 9,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -55353,6 +56167,26 @@
         "objectSpreads": 0
       },
       "sites": [
+        {
+          "column": 19,
+          "kind": "cross-schema-transfer",
+          "line": 373,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiCommand.ts"
+        },
+        {
+          "column": 19,
+          "kind": "cross-schema-transfer",
+          "line": 434,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiCommand.ts"
+        },
         {
           "column": 10,
           "kind": "object-literal-spread",
@@ -55440,11 +56274,11 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
+        "objectLiteralsWithSpread": 1,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 1
+        "testObjectLiterals": 2
       },
       "directAccesses": 12,
       "fields": {
@@ -55454,8 +56288,10 @@
       },
       "id": "@flighthq/types:interface#Physics2DPrismaticJointOptions",
       "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "object-literal-spread"
+        ],
         "observabilityReasons": []
       },
       "name": "Physics2DPrismaticJointOptions",
@@ -55476,7 +56312,15 @@
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 42,
+          "kind": "object-literal-spread",
+          "line": 764,
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/referencePhysics2DAbi.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/Physics2D.ts"
     },
     {
@@ -55492,7 +56336,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 2
       },
-      "directAccesses": 29,
+      "directAccesses": 35,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -55518,7 +56362,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 3,
+        "crossSchemaTransfers": 4,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -55526,6 +56370,16 @@
         "objectSpreads": 0
       },
       "sites": [
+        {
+          "column": 19,
+          "kind": "cross-schema-transfer",
+          "line": 465,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiCommand.ts"
+        },
         {
           "column": 20,
           "kind": "cross-schema-transfer",
@@ -55573,11 +56427,11 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
+        "objectLiteralsWithSpread": 1,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 1
+        "testObjectLiterals": 2
       },
       "directAccesses": 0,
       "fields": {
@@ -55587,8 +56441,10 @@
       },
       "id": "@flighthq/types:interface#Physics2DPulleyJointOptions",
       "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "object-literal-spread"
+        ],
         "observabilityReasons": []
       },
       "name": "Physics2DPulleyJointOptions",
@@ -55609,12 +56465,20 @@
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 39,
+          "kind": "object-literal-spread",
+          "line": 819,
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/referencePhysics2DAbi.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/Physics2D.ts"
     },
     {
       "bridge": {
-        "inputSignatures": 5,
+        "inputSignatures": 10,
         "outputSignatures": 1
       },
       "construction": {
@@ -55679,8 +56543,10 @@
       },
       "id": "@flighthq/types:interface#Physics2DQueryHit",
       "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "cross-schema-transfer"
+        ],
         "observabilityReasons": []
       },
       "name": "Physics2DQueryHit",
@@ -55694,14 +56560,25 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 0,
+        "crossSchemaTransfers": 1,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 31,
+          "kind": "cross-schema-transfer",
+          "line": 1198,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DRayHit"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/referencePhysics2DAbi.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/Physics2D.ts"
     },
     {
@@ -55763,7 +56640,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 31,
+      "directAccesses": 36,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -55809,7 +56686,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 13,
+      "directAccesses": 16,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -55855,7 +56732,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 2
       },
-      "directAccesses": 32,
+      "directAccesses": 42,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -55881,7 +56758,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 7,
+        "crossSchemaTransfers": 9,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -55889,6 +56766,26 @@
         "objectSpreads": 0
       },
       "sites": [
+        {
+          "column": 19,
+          "kind": "cross-schema-transfer",
+          "line": 368,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiCommand.ts"
+        },
+        {
+          "column": 19,
+          "kind": "cross-schema-transfer",
+          "line": 425,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiCommand.ts"
+        },
         {
           "column": 10,
           "kind": "object-literal-spread",
@@ -55976,11 +56873,11 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
+        "objectLiteralsWithSpread": 1,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 1
+        "testObjectLiterals": 9
       },
       "directAccesses": 0,
       "fields": {
@@ -55990,8 +56887,10 @@
       },
       "id": "@flighthq/types:interface#Physics2DRevoluteJointOptions",
       "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "object-literal-spread"
+        ],
         "observabilityReasons": []
       },
       "name": "Physics2DRevoluteJointOptions",
@@ -56012,7 +56911,15 @@
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 41,
+          "kind": "object-literal-spread",
+          "line": 749,
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/referencePhysics2DAbi.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/Physics2D.ts"
     },
     {
@@ -56054,7 +56961,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 1,
+        "crossSchemaTransfers": 2,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -56062,6 +56969,16 @@
         "objectSpreads": 0
       },
       "sites": [
+        {
+          "column": 18,
+          "kind": "cross-schema-transfer",
+          "line": 456,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiCommand.ts"
+        },
         {
           "column": 10,
           "kind": "object-literal-spread",
@@ -56089,11 +57006,11 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
+        "objectLiteralsWithSpread": 1,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 1
+        "testObjectLiterals": 2
       },
       "directAccesses": 0,
       "fields": {
@@ -56103,8 +57020,10 @@
       },
       "id": "@flighthq/types:interface#Physics2DRopeJointOptions",
       "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "object-literal-spread"
+        ],
         "observabilityReasons": []
       },
       "name": "Physics2DRopeJointOptions",
@@ -56125,7 +57044,15 @@
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 37,
+          "kind": "object-literal-spread",
+          "line": 797,
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/referencePhysics2DAbi.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/Physics2D.ts"
     },
     {
@@ -56176,18 +57103,18 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 1
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 1,
+        "objectLiterals": 2,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 1,
-        "testObjectLiterals": 0
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 1
       },
-      "directAccesses": 55,
+      "directAccesses": 72,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -56197,14 +57124,16 @@
       "migration": {
         "mechanicallyCompatible": true,
         "normalizationReasons": [],
-        "observabilityReasons": []
+        "observabilityReasons": [
+          "object-spread"
+        ]
       },
       "name": "Physics2DSolverConfig",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
-        "objectSpreads": 0,
+        "objectSpreads": 1,
         "prototypeObservations": 0,
         "strictEqualityAssertions": 0
       },
@@ -56217,7 +57146,15 @@
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 57,
+          "kind": "object-spread",
+          "line": 325,
+          "scope": "test",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiCommand.test.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/Physics2D.ts"
     },
     {
@@ -56305,7 +57242,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 2,
+        "crossSchemaTransfers": 3,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -56313,6 +57250,16 @@
         "objectSpreads": 0
       },
       "sites": [
+        {
+          "column": 18,
+          "kind": "cross-schema-transfer",
+          "line": 445,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiCommand.ts"
+        },
         {
           "column": 10,
           "kind": "object-literal-spread",
@@ -56350,11 +57297,11 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
+        "objectLiteralsWithSpread": 1,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 1
+        "testObjectLiterals": 2
       },
       "directAccesses": 0,
       "fields": {
@@ -56364,8 +57311,10 @@
       },
       "id": "@flighthq/types:interface#Physics2DWeldJointOptions",
       "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "object-literal-spread"
+        ],
         "observabilityReasons": []
       },
       "name": "Physics2DWeldJointOptions",
@@ -56386,7 +57335,15 @@
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 37,
+          "kind": "object-literal-spread",
+          "line": 781,
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/referencePhysics2DAbi.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/Physics2D.ts"
     },
     {
@@ -56402,7 +57359,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 1
       },
-      "directAccesses": 28,
+      "directAccesses": 36,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -56428,7 +57385,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 6,
+        "crossSchemaTransfers": 8,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -56436,6 +57393,26 @@
         "objectSpreads": 0
       },
       "sites": [
+        {
+          "column": 10,
+          "kind": "cross-schema-transfer",
+          "line": 378,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiCommand.ts"
+        },
+        {
+          "column": 19,
+          "kind": "cross-schema-transfer",
+          "line": 447,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Physics2DJoint"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/physics2DAbiCommand.ts"
+        },
         {
           "column": 10,
           "kind": "object-literal-spread",
@@ -56513,11 +57490,11 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
+        "objectLiteralsWithSpread": 1,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 1
+        "testObjectLiterals": 2
       },
       "directAccesses": 8,
       "fields": {
@@ -56527,8 +57504,10 @@
       },
       "id": "@flighthq/types:interface#Physics2DWheelJointOptions",
       "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "object-literal-spread"
+        ],
         "observabilityReasons": []
       },
       "name": "Physics2DWheelJointOptions",
@@ -56549,7 +57528,15 @@
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 38,
+          "kind": "object-literal-spread",
+          "line": 784,
+          "scope": "production",
+          "source": "upstream/packages/physics2d-abi/src/referencePhysics2DAbi.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/Physics2D.ts"
     },
     {
@@ -56565,7 +57552,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 225,
+      "directAccesses": 239,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -57290,7 +58277,7 @@
         {
           "column": 42,
           "kind": "object-literal-spread",
-          "line": 809,
+          "line": 810,
           "scope": "production",
           "source": "upstream/packages/physics3d-abi/src/referencePhysics3DAbi.ts"
         }
@@ -57943,7 +58930,7 @@
         {
           "column": 41,
           "kind": "object-literal-spread",
-          "line": 768,
+          "line": 769,
           "scope": "production",
           "source": "upstream/packages/physics3d-abi/src/referencePhysics3DAbi.ts"
         }
@@ -58136,7 +59123,7 @@
         {
           "column": 44,
           "kind": "object-literal-spread",
-          "line": 823,
+          "line": 824,
           "scope": "production",
           "source": "upstream/packages/physics3d-abi/src/referencePhysics3DAbi.ts"
         }
@@ -58339,7 +59326,7 @@
         {
           "column": 38,
           "kind": "object-literal-spread",
-          "line": 781,
+          "line": 782,
           "scope": "production",
           "source": "upstream/packages/physics3d-abi/src/referencePhysics3DAbi.ts"
         }
@@ -58396,7 +59383,7 @@
         {
           "column": 12,
           "kind": "cross-schema-transfer",
-          "line": 768,
+          "line": 769,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DDistanceJoint"
           ],
@@ -58406,7 +59393,7 @@
         {
           "column": 52,
           "kind": "cross-schema-transfer",
-          "line": 779,
+          "line": 780,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DJointFrames"
           ],
@@ -58416,7 +59403,7 @@
         {
           "column": 12,
           "kind": "cross-schema-transfer",
-          "line": 781,
+          "line": 782,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DHingeJoint"
           ],
@@ -58426,7 +59413,7 @@
         {
           "column": 12,
           "kind": "cross-schema-transfer",
-          "line": 795,
+          "line": 796,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DSliderJoint"
           ],
@@ -58436,7 +59423,7 @@
         {
           "column": 12,
           "kind": "cross-schema-transfer",
-          "line": 809,
+          "line": 810,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DConeTwistJoint"
           ],
@@ -58446,7 +59433,7 @@
         {
           "column": 12,
           "kind": "cross-schema-transfer",
-          "line": 823,
+          "line": 824,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Physics3DGeneric6DofJoint"
           ],
@@ -58605,7 +59592,7 @@
         {
           "column": 78,
           "kind": "anonymous-structural-transfer",
-          "line": 779,
+          "line": 780,
           "scope": "production",
           "source": "upstream/packages/physics3d-abi/src/referencePhysics3DAbi.ts"
         },
@@ -58908,7 +59895,7 @@
         {
           "column": 94,
           "kind": "anonymous-structural-transfer",
-          "line": 766,
+          "line": 767,
           "scope": "production",
           "source": "upstream/packages/physics3d-abi/src/referencePhysics3DAbi.ts"
         },
@@ -59821,7 +60808,7 @@
         {
           "column": 39,
           "kind": "object-literal-spread",
-          "line": 795,
+          "line": 796,
           "scope": "production",
           "source": "upstream/packages/physics3d-abi/src/referencePhysics3DAbi.ts"
         }
@@ -59877,13 +60864,6 @@
         {
           "column": 31,
           "kind": "anonymous-structural-transfer",
-          "line": 425,
-          "scope": "production",
-          "source": "upstream/packages/physics3d-abi/src/referencePhysics3DAbi.ts"
-        },
-        {
-          "column": 41,
-          "kind": "anonymous-structural-transfer",
           "line": 426,
           "scope": "production",
           "source": "upstream/packages/physics3d-abi/src/referencePhysics3DAbi.ts"
@@ -59896,16 +60876,23 @@
           "source": "upstream/packages/physics3d-abi/src/referencePhysics3DAbi.ts"
         },
         {
-          "column": 35,
+          "column": 41,
           "kind": "anonymous-structural-transfer",
           "line": 428,
           "scope": "production",
           "source": "upstream/packages/physics3d-abi/src/referencePhysics3DAbi.ts"
         },
         {
+          "column": 35,
+          "kind": "anonymous-structural-transfer",
+          "line": 429,
+          "scope": "production",
+          "source": "upstream/packages/physics3d-abi/src/referencePhysics3DAbi.ts"
+        },
+        {
           "column": 24,
           "kind": "anonymous-structural-transfer",
-          "line": 432,
+          "line": 433,
           "scope": "production",
           "source": "upstream/packages/physics3d-abi/src/referencePhysics3DAbi.ts"
         }
@@ -60091,7 +61078,7 @@
         {
           "column": 62,
           "kind": "cross-schema-transfer",
-          "line": 30,
+          "line": 32,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderEffect"
           ],
@@ -61540,7 +62527,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 236,
+      "directAccesses": 240,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -66620,7 +67607,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 27,
+        "inputSignatures": 29,
         "outputSignatures": 5
       },
       "construction": {
@@ -66629,7 +67616,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 1,
-        "testObjectLiterals": 0
+        "testObjectLiterals": 1
       },
       "directAccesses": 0,
       "fields": {
@@ -66666,7 +67653,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 80,
+        "inputSignatures": 81,
         "outputSignatures": 4
       },
       "construction": {
@@ -66675,7 +67662,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 1,
-        "testObjectLiterals": 1
+        "testObjectLiterals": 2
       },
       "directAccesses": 0,
       "fields": {
@@ -66930,7 +67917,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 13
       },
-      "directAccesses": 101,
+      "directAccesses": 106,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -74401,7 +75388,7 @@
         {
           "column": 61,
           "kind": "cross-schema-transfer",
-          "line": 30,
+          "line": 32,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderEffect"
           ],
@@ -75776,7 +76763,7 @@
     {
       "bridge": {
         "inputSignatures": 0,
-        "outputSignatures": 4
+        "outputSignatures": 5
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -75868,7 +76855,7 @@
         {
           "column": 21,
           "kind": "optional-omission",
-          "line": 177,
+          "line": 178,
           "scope": "production",
           "source": "upstream/packages/skeleton2d-formats/src/dragonBonesParse.ts"
         }
@@ -76541,7 +77528,7 @@
         {
           "column": 16,
           "kind": "optional-omission",
-          "line": 892,
+          "line": 893,
           "scope": "production",
           "source": "upstream/packages/skeleton2d-formats/src/dragonBonesParse.ts"
         },
@@ -77007,7 +77994,7 @@
         {
           "column": 58,
           "kind": "cross-schema-transfer",
-          "line": 28,
+          "line": 31,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderEffect"
           ],
@@ -77658,7 +78645,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 4,
+        "inputSignatures": 5,
         "outputSignatures": 0
       },
       "construction": {
@@ -77667,7 +78654,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 4,
-        "testObjectLiterals": 133
+        "testObjectLiterals": 134
       },
       "directAccesses": 114,
       "fields": {
@@ -78683,6 +79670,52 @@
         }
       ],
       "source": "upstream/packages/types/src/SpineParticleSchema.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#SpineBinaryVersionFailure",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "SpineBinaryVersionFailure",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/SpineBinaryVersion.ts"
     },
     {
       "bridge": {
@@ -80476,7 +81509,7 @@
         {
           "column": 58,
           "kind": "cross-schema-transfer",
-          "line": 30,
+          "line": 32,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderEffect"
           ],
@@ -88247,7 +89280,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 4,
-        "testObjectLiterals": 13
+        "testObjectLiterals": 24
       },
       "directAccesses": 62,
       "fields": {
@@ -88366,7 +89399,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 5,
-        "testObjectLiterals": 12
+        "testObjectLiterals": 34
       },
       "directAccesses": 32,
       "fields": {
@@ -90733,7 +91766,7 @@
         {
           "column": 63,
           "kind": "cross-schema-transfer",
-          "line": 35,
+          "line": 37,
           "relatedSchemaIds": [
             "@flighthq/types:interface#RenderEffect"
           ],
@@ -94565,7 +95598,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 8
       },
-      "directAccesses": 1348,
+      "directAccesses": 1351,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -98390,7 +99423,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 372,
+        "inputSignatures": 373,
         "outputSignatures": 5
       },
       "construction": {
@@ -98399,7 +99432,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 3
+        "testObjectLiterals": 4
       },
       "directAccesses": 0,
       "fields": {
@@ -98676,7 +99709,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 128,
+        "inputSignatures": 129,
         "outputSignatures": 7
       },
       "construction": {
@@ -98687,7 +99720,7 @@
         "plainObjectLiterals": 2,
         "testObjectLiterals": 7
       },
-      "directAccesses": 161,
+      "directAccesses": 140,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -103745,27 +104778,27 @@
   ],
   "summary": {
     "anonymousStructuralTransfers": 165,
-    "bridgeInputSignatures": 9244,
-    "bridgeOutputSignatures": 1787,
-    "crossSchemaTransfers": 1516,
-    "directAccesses": 26653,
+    "bridgeInputSignatures": 9320,
+    "bridgeOutputSignatures": 1803,
+    "crossSchemaTransfers": 1545,
+    "directAccesses": 26772,
     "dynamicIngresses": 68,
-    "mechanicallyCompatibleSchemas": 1235,
-    "normalizationRequiredSchemas": 429,
-    "objectLiterals": 2035,
-    "objectLiteralsOmittingOptionalFields": 414,
+    "mechanicallyCompatibleSchemas": 1238,
+    "normalizationRequiredSchemas": 439,
+    "objectLiterals": 2064,
+    "objectLiteralsOmittingOptionalFields": 415,
     "objectLiteralsWithComputedKeys": 2,
-    "objectLiteralsWithSpread": 220,
-    "observabilityReviewSchemas": 270,
-    "optionalFields": 2213,
-    "oracleObservations": 315,
+    "objectLiteralsWithSpread": 228,
+    "observabilityReviewSchemas": 271,
+    "optionalFields": 2217,
+    "oracleObservations": 322,
     "productionEnumerations": 8,
     "productionJsonSerializations": 6,
     "productionObjectRests": 0,
     "productionObjectSpreads": 130,
     "requiredUndefinedFields": 2,
-    "schemas": 1664,
-    "testObjectLiterals": 6110
+    "schemas": 1677,
+    "testObjectLiterals": 6184
   },
-  "upstreamCommit": "9db114b3fe1db90a90a11541649cb3af8bb5ca62"
+  "upstreamCommit": "443275fa278b1f0415c49b6be710891ef8a64bf1"
 }

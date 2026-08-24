@@ -34,7 +34,7 @@ class WgpuBevelEffect {
   public static function applyBevelEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:BevelEffect):Void {
     var src:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     var dst:WgpuRenderTarget = cast _Runtime.UNDEFINED;
-    var descriptor:{ var width:Float; var height:Float; var format:flighthq._internal._Any; } = cast _Runtime.UNDEFINED;
+    var descriptor:{ var width:Float; var height:Float; var format:String; } = cast _Runtime.UNDEFINED;
     var tinted:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     var blurred:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     var blurTemp:WgpuRenderTarget = cast _Runtime.UNDEFINED;

@@ -1,6 +1,6 @@
 # Host Toolkit Dependency Audit
 
-Upstream commit: `9db114b3fe1db90a90a11541649cb3af8bb5ca62`
+Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
 
 Generated code owns checker-known source types and stable lookup keys. Maintained source owns the declarations, target values, and adapters behind those keys. Generation fails when a referenced key has no declared toolkit provider; Dynamic compatibility declarations remain visible as toolkit debt rather than changing the generated type or member expression.
 
@@ -13,8 +13,8 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | Portable global value keys | 33 |
 | JavaScript-only global value keys | 36 |
 | Module value keys | 0 |
-| Type uses | 11278 |
-| Value uses | 1964 |
+| Type uses | 11280 |
+| Value uses | 1999 |
 | Missing toolkit entries | 0 |
 
 ## Types
@@ -155,7 +155,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:GPUVertexBufferLayout` | `host` | `flighthq._internal.dom.GPUVertexBufferLayout` | `src/flighthq/_internal/dom/GPUVertexBufferLayout.hx` | `dynamic-stub` | 23 |
 | `host:Headers` | `host` | `flighthq._internal.dom.Headers` | `src/flighthq/_internal/dom/Headers.hx` | `dynamic-stub` | 10 |
 | `host:HTMLAudioElement` | `host` | `flighthq._internal.dom.HTMLAudioElement` | `src/flighthq/_internal/dom/HTMLAudioElement.hx` | `dynamic-stub` | 2 |
-| `host:HTMLCanvasElement` | `host` | `flighthq._internal.dom.HTMLCanvasElement` | `src/flighthq/_internal/dom/HTMLCanvasElement.hx` | `dynamic-stub` | 403 |
+| `host:HTMLCanvasElement` | `host` | `flighthq._internal.dom.HTMLCanvasElement` | `src/flighthq/_internal/dom/HTMLCanvasElement.hx` | `dynamic-stub` | 405 |
 | `host:HTMLDivElement` | `host` | `flighthq._internal.dom.HTMLDivElement` | `src/flighthq/_internal/dom/HTMLDivElement.hx` | `dynamic-stub` | 38 |
 | `host:HTMLElement` | `host` | `flighthq._internal.dom.HTMLElement` | `src/flighthq/_internal/dom/HTMLElement.hx` | `dynamic-stub` | 298 |
 | `host:HTMLHeadElement` | `host` | `flighthq._internal.dom.HTMLHeadElement` | `src/flighthq/_internal/dom/HTMLHeadElement.hx` | `dynamic-stub` | 8 |
@@ -276,7 +276,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `global:console` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 6 |
 | `global:createImageBitmap` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 1 |
 | `global:crypto` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 3 |
-| `global:DataView` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 45 |
+| `global:DataView` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 49 |
 | `global:Date` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 20 |
 | `global:decodeURIComponent` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 2 |
 | `global:DeviceMotionEvent` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 7 |
@@ -301,11 +301,11 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `global:KeyboardEvent` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 5 |
 | `global:localStorage` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 4 |
 | `global:location` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 8 |
-| `global:Map` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 326 |
+| `global:Map` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 334 |
 | `global:MediaMetadata` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 2 |
 | `global:navigator` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 42 |
 | `global:Notification` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 19 |
-| `global:Number` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 732 |
+| `global:Number` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 755 |
 | `global:OffscreenCanvas` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 10 |
 | `global:parseFloat` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 84 |
 | `global:parseInt` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 40 |

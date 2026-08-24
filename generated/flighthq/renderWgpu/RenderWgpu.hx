@@ -3,9 +3,6 @@ package flighthq.renderWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq._internal.WebExterns.GPUBindGroup;
-import flighthq._internal.WebExterns.GPUTexture;
-import flighthq._internal.WebExterns.GPUTextureFormat;
 import flighthq.renderWgpu.EnableWgpuTextureResolverGuards as Facade_RenderWgpu_flighthq_renderWgpu_EnableWgpuTextureResolverGuards;
 import flighthq.renderWgpu.ExplainWgpuTextureResolution as Facade_RenderWgpu_flighthq_renderWgpu_ExplainWgpuTextureResolution;
 import flighthq.renderWgpu.WgpuBackground as Facade_RenderWgpu_flighthq_renderWgpu_WgpuBackground;
@@ -68,7 +65,7 @@ class RenderWgpu {
     return cast null;
   }
 
-  public static function createExternalWgpuTexture(state:WgpuRenderState, handle:GPUTexture, options:CreateExternalTextureOptions):Texture {
+  public static function createExternalWgpuTexture(state:WgpuRenderState, handle:flighthq._internal.dom.GPUTexture, options:CreateExternalTextureOptions):Texture {
     return cast Facade_RenderWgpu_flighthq_renderWgpu_WgpuExternalTexture.createExternalWgpuTexture(state, handle, options);
     return cast null;
   }
@@ -88,7 +85,7 @@ class RenderWgpu {
     return cast null;
   }
 
-  public static function createWgpuRenderTarget(state:WgpuRenderState, width:Float, height:Float, ?format:GPUTextureFormat, ?colorSpace:RenderTargetColorSpace, ?sampleCount:Float):WgpuRenderTarget {
+  public static function createWgpuRenderTarget(state:WgpuRenderState, width:Float, height:Float, ?format:flighthq._internal.dom.GPUTextureFormat, ?colorSpace:RenderTargetColorSpace, ?sampleCount:Float):WgpuRenderTarget {
     return cast Facade_RenderWgpu_flighthq_renderWgpu_WgpuRenderTarget.createWgpuRenderTarget(state, width, height, format, colorSpace, sampleCount);
     return cast null;
   }
@@ -199,7 +196,7 @@ class RenderWgpu {
     return cast null;
   }
 
-  public static function resolveWgpuSmoothingBindGroup(state:WgpuRenderState, entry:WgpuTextureEntry, smoothing:Null<Bool>):GPUBindGroup {
+  public static function resolveWgpuSmoothingBindGroup(state:WgpuRenderState, entry:WgpuTextureEntry, smoothing:Null<Bool>):flighthq._internal.dom.GPUBindGroup {
     return cast Facade_RenderWgpu_flighthq_renderWgpu_WgpuDraw.resolveWgpuSmoothingBindGroup(state, entry, smoothing);
     return cast null;
   }

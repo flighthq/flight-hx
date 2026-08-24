@@ -3,7 +3,6 @@ package flighthq.scene3dWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq._internal.WebExterns.GPUBindGroup;
 import flighthq.color.PackColor.unpackColorToLinear;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.scene3dWgpu.WgpuMeshMaterialRegistry.registerWgpuMeshMaterialRenderer;
@@ -37,33 +36,33 @@ class WireframeWgpuMeshMaterialRenderer {
   @:noCompletion
   public static final wireframeWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    var pass:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var wireframe:Null<WireframeMaterial> = cast _Runtime.UNDEFINED;
-    var format:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var format:String = cast _Runtime.UNDEFINED;
     var pipeline:WgpuWireframePipeline = cast _Runtime.UNDEFINED;
-    var group:GPUBindGroup = cast _Runtime.UNDEFINED;
+    var group:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
     stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
     pass = stateRuntime.renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     wireframe = (cast material : Null<WireframeMaterial>);
     format = _Runtime.coalesce(stateRuntime.currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
-    pipeline = (cast ensureWgpuWireframePipeline(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast format : flighthq._internal._Any), (cast _Runtime.strictEquals(({ final __typedStruct2 = wireframe; __typedStruct2 == null ? _Runtime.UNDEFINED : (cast __typedStruct2 : { var alphaMode:MaterialAlphaMode; }).alphaMode; }), 'mask') : Bool)) : WgpuWireframePipeline);
+    pipeline = (cast ensureWgpuWireframePipeline(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast format : String), (cast _Runtime.strictEquals(({ final __typedStruct2 = wireframe; __typedStruct2 == null ? _Runtime.UNDEFINED : (cast __typedStruct2 : { var alphaMode:MaterialAlphaMode; }).alphaMode; }), 'mask') : Bool)) : WgpuWireframePipeline);
     writeWgpuFrameUniform(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = camera; __callArgument4; }), ({ final __callArgument5:Dynamic = _lights; __callArgument5; }));
     if ((cast _Runtime.strictEquals(wireframe, null) : Bool)) {
-      (group = cast (bindWgpuWireframeColor(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pipeline; __callArgument7; }), ({ final __callArgument8:Dynamic = WireframeWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__wireframeWgpuMeshMaterialRenderer; __callArgument8; }), ({ final __callArgument9:Dynamic = WireframeWgpuMeshMaterialRenderer.WHITE__wireframeWgpuMeshMaterialRenderer; __callArgument9; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Dynamic));
+      (group = cast ((cast bindWgpuWireframeColor(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pipeline; __callArgument7; }), ({ final __callArgument8:Dynamic = WireframeWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__wireframeWgpuMeshMaterialRenderer; __callArgument8; }), ({ final __callArgument9:Dynamic = WireframeWgpuMeshMaterialRenderer.WHITE__wireframeWgpuMeshMaterialRenderer; __callArgument9; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     } else {
       (cast unpackColorToLinear(({ final __callArgument10:Dynamic = WireframeWgpuMeshMaterialRenderer._scratch__wireframeWgpuMeshMaterialRenderer; __callArgument10; }), (cast (cast wireframe : { var color:Float; }).color : Float)) : LinearColor);
-      (group = cast (bindWgpuWireframeColor(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = pipeline; __callArgument12; }), ({ final __callArgument13:Dynamic = wireframe; __callArgument13; }), ({ final __callArgument14:Dynamic = WireframeWgpuMeshMaterialRenderer._scratch__wireframeWgpuMeshMaterialRenderer; __callArgument14; }), (cast (cast wireframe : { var alphaCutoff:Float; }).alphaCutoff : Float)) : Dynamic));
+      (group = cast ((cast bindWgpuWireframeColor(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = pipeline; __callArgument12; }), ({ final __callArgument13:Dynamic = wireframe; __callArgument13; }), ({ final __callArgument14:Dynamic = WireframeWgpuMeshMaterialRenderer._scratch__wireframeWgpuMeshMaterialRenderer; __callArgument14; }), (cast (cast wireframe : { var alphaCutoff:Float; }).alphaCutoff : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     }
     beginWgpuMeshDraw(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = pipeline; __callArgument16; }));
-    _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, group] : Array<Dynamic>));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    var pass:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var subset:MeshSubset = cast _Runtime.UNDEFINED;
     var upload:Null<WgpuWireframeUpload> = cast _Runtime.UNDEFINED;
-    var drawBindGroup:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var drawBindGroup:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
     stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument17:Dynamic = state; __callArgument17; })) : WgpuRenderStateRuntime);
     pass = stateRuntime.renderPass;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument18:Dynamic = state; __callArgument18; })) : WgpuScene3DRuntime);
@@ -72,12 +71,12 @@ class WireframeWgpuMeshMaterialRenderer {
     if ((cast _Runtime.strictEquals(subset.indexCount, 0.0) : Bool)) { return; }
     upload = (cast ensureWgpuWireframeUpload(({ final __callArgument19:Dynamic = state; __callArgument19; }), ({ final __callArgument20:Dynamic = geometry; __callArgument20; })) : Null<WgpuWireframeUpload>);
     if ((cast _Runtime.strictEquals(upload, null) : Bool)) { return; }
-    drawBindGroup = writeWgpuDrawUniform(({ final __callArgument21:Dynamic = state; __callArgument21; }), ({ final __callArgument22:Dynamic = proxy; __callArgument22; }));
+    drawBindGroup = (cast writeWgpuDrawUniform(({ final __callArgument21:Dynamic = state; __callArgument21; }), ({ final __callArgument22:Dynamic = proxy; __callArgument22; })) : flighthq._internal.dom.GPUBindGroup);
     flighthq._internal._StaticIndex.writeUint32ArrayTyped((cast WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer : flighthq._internal._UInt32Array), (cast 0.0 : Float), (cast scene.pendingDrawOffset : Float));
-    _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, drawBindGroup, WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'setVertexBuffer', cast ([0.0, (cast upload : WgpuWireframeUpload).vertexBuffer] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'setIndexBuffer', cast ([(cast upload : WgpuWireframeUpload).lineIndexBuffer, (cast upload : WgpuWireframeUpload).indexFormat] : Array<Dynamic>));
-    _Runtime.callProperty(pass, 'drawIndexed', cast ([(subset.indexCount * 2.0), 1.0, (subset.indexOffset * 2.0), 0.0, 0.0] : Array<Dynamic>));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, drawBindGroup, WireframeWgpuMeshMaterialRenderer._dynamicOffsets__wireframeWgpuMeshMaterialRenderer);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setVertexBuffer(0.0, (cast upload : WgpuWireframeUpload).vertexBuffer);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setIndexBuffer((cast upload : WgpuWireframeUpload).lineIndexBuffer, (cast upload : WgpuWireframeUpload).indexFormat);
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).drawIndexed((subset.indexCount * 2.0), 1.0, (subset.indexOffset * 2.0), 0.0, 0.0);
   } });
 
   public static function registerWgpuWireframeMaterial(state:WgpuRenderState):Void {

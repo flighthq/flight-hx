@@ -26,7 +26,7 @@ class WgpuDropShadowEffect {
   public static function applyDropShadowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:DropShadowEffect):Void {
     var src:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     var dst:WgpuRenderTarget = cast _Runtime.UNDEFINED;
-    var descriptor:{ var width:Float; var height:Float; var format:flighthq._internal._Any; } = cast _Runtime.UNDEFINED;
+    var descriptor:{ var width:Float; var height:Float; var format:String; } = cast _Runtime.UNDEFINED;
     var mask:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     var blurred:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     var blurTemp:WgpuRenderTarget = cast _Runtime.UNDEFINED;

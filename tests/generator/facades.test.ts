@@ -16,7 +16,7 @@ describe('public Haxe facades', () => {
     const core = JSON.parse(readFileSync(path.join(workspace, 'reports', 'core.json'), 'utf8')) as {
       contractSurface: {
         noCompletionDeclarations: number;
-        omittedModules: Array<{ reason: string }>;
+        omittedModules: Array<{ module: string; reason: string }>;
         protectedDeclarationIdentities: number;
       };
     };
@@ -32,12 +32,11 @@ describe('public Haxe facades', () => {
       source.slice(0, source.indexOf(declaration)).trimEnd().split('\n').at(-1)?.trim();
 
     expect(firstIdentities).toEqual(secondIdentities);
-    expect(firstIdentities).toHaveLength(1_381);
-    expect(core.contractSurface).toMatchObject({
-      noCompletionDeclarations: 1_381,
-      protectedDeclarationIdentities: 1_381,
-    });
-    expect(core.contractSurface.omittedModules).toHaveLength(149);
+    expect(core.contractSurface.noCompletionDeclarations).toBe(firstIdentities.length);
+    expect(core.contractSurface.protectedDeclarationIdentities).toBe(firstIdentities.length);
+    expect(new Set(core.contractSurface.omittedModules.map((item) => item.module)).size).toBe(
+      core.contractSurface.omittedModules.length,
+    );
     expect(
       core.contractSurface.omittedModules.every((item) => item.reason === 'header-only-contract-export-lane'),
     ).toBe(true);

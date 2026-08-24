@@ -3,26 +3,22 @@ package flighthq.renderWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq._internal.WebExterns.GPUCopyExternalImageSource;
-import flighthq._internal.WebExterns.GPUDevice;
-import flighthq._internal.WebExterns.GPUOrigin3D;
-import flighthq._internal.WebExterns.GPUTexture;
 import flighthq.renderWgpu.WgpuExternalImageSource.tryCopyWgpuExternalImageToTexture;
 import flighthq.types.Image;
 
 class WgpuTextureUpload {
   @:noCompletion
-  public static function uploadWgpuTextureData(device:GPUDevice, texture:GPUTexture, origin:GPUOrigin3D, width:Float, height:Float, data:flighthq._internal._UInt8ClampedArray):Void {
-    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeTexture', cast ([{ texture: texture, origin: origin }, (cast data : flighthq._internal._UInt8ClampedArray), { bytesPerRow: (width * 4.0), rowsPerImage: height }, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
+  public static function uploadWgpuTextureData(device:flighthq._internal.dom.GPUDevice, texture:flighthq._internal.dom.GPUTexture, origin:flighthq._internal.dom.GPUOrigin3D, width:Float, height:Float, data:flighthq._internal._UInt8ClampedArray):Void {
+    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeTexture', cast ([{ texture: texture, origin: origin }, (cast data : flighthq._internal._UInt8ClampedArray), { bytesPerRow: (width * 4.0), rowsPerImage: height }, cast ([width, height, 1.0] : Array<Dynamic>)] : Array<Dynamic>));
   }
 
   @:noCompletion
-  public static function uploadWgpuTextureElement(device:GPUDevice, texture:GPUTexture, origin:GPUOrigin3D, width:Float, height:Float, source:GPUCopyExternalImageSource):Void {
-    (cast tryCopyWgpuExternalImageToTexture((cast flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue') : flighthq._internal._Any), (cast { source: source } : flighthq._internal._Any), (cast { texture: texture, origin: origin } : flighthq._internal._Any), (cast width : Float), (cast height : Float)) : Bool);
+  public static function uploadWgpuTextureElement(device:flighthq._internal.dom.GPUDevice, texture:flighthq._internal.dom.GPUTexture, origin:flighthq._internal.dom.GPUOrigin3D, width:Float, height:Float, source:flighthq._internal.dom.GPUCopyExternalImageSource):Void {
+    (cast tryCopyWgpuExternalImageToTexture(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), ({ final __callArgument0:Dynamic = { source: source }; __callArgument0; }), ({ final __callArgument1:Dynamic = { texture: texture, origin: origin }; __callArgument1; }), (cast width : Float), (cast height : Float)) : Bool);
   }
 
   @:noCompletion
-  public static function uploadWgpuTextureImageResource(device:GPUDevice, texture:GPUTexture, origin:GPUOrigin3D, image:Image):Void {
-    uploadWgpuTextureElement((cast device : flighthq._internal._Any), (cast texture : flighthq._internal._Any), (cast origin : flighthq._internal._Any), (cast _Runtime.field(image, 'width') : Float), (cast _Runtime.field(image, 'height') : Float), (cast (cast _Runtime.field(image, 'source') : GPUCopyExternalImageSource) : flighthq._internal._Any));
+  public static function uploadWgpuTextureImageResource(device:flighthq._internal.dom.GPUDevice, texture:flighthq._internal.dom.GPUTexture, origin:flighthq._internal.dom.GPUOrigin3D, image:Image):Void {
+    uploadWgpuTextureElement(({ final __callArgument2:Dynamic = device; __callArgument2; }), ({ final __callArgument3:Dynamic = texture; __callArgument3; }), (cast origin : flighthq._internal._Any), (cast _Runtime.field(image, 'width') : Float), (cast _Runtime.field(image, 'height') : Float), ({ final __callArgument4:Dynamic = (cast _Runtime.field(image, 'source') : flighthq._internal.dom.GPUCopyExternalImageSource); __callArgument4; }));
   }
 }

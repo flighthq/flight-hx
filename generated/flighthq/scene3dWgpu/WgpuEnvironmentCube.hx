@@ -3,10 +3,6 @@ package flighthq.scene3dWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq._internal.WebExterns.GPUDevice;
-import flighthq._internal.WebExterns.GPUTexture;
-import flighthq._internal.WebExterns.GPUTextureFormat;
-import flighthq._internal.WebExterns.GPUTextureView;
 import flighthq.renderWgpu.WgpuTextureUpload.uploadWgpuTextureData;
 import flighthq.renderWgpu.WgpuTextureUpload.uploadWgpuTextureImageResource;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
@@ -31,15 +27,15 @@ import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
 class WgpuEnvironmentCube {
   @:noCompletion
-  public static function ensureWgpuEnvironmentSourceCube(state:WgpuRenderState, environment:Environment):Null<GPUTextureView> {
+  public static function ensureWgpuEnvironmentSourceCube(state:WgpuRenderState, environment:Environment):Null<flighthq._internal.dom.GPUTextureView> {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var cube:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9767:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9767:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9767:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
     var sources:TextureSourceCubeFaces = cast _Runtime.UNDEFINED;
     var size:Float = cast _Runtime.UNDEFINED;
-    var device:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    var format:GPUTextureFormat = cast _Runtime.UNDEFINED;
-    var texture:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
+    var format:flighthq._internal.dom.GPUTextureFormat = cast _Runtime.UNDEFINED;
+    var texture:flighthq._internal.dom.GPUTexture = cast _Runtime.UNDEFINED;
+    var view:flighthq._internal.dom.GPUTextureView = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuScene3DRuntime);
     if ((cast !_Runtime.strictEquals(scene.environmentSourceCubeView, null) : Bool)) { return cast scene.environmentSourceCubeView; }
     cube = _Runtime.field(environment, 'environment');
@@ -52,23 +48,23 @@ class WgpuEnvironmentCube {
     {
       var face:Float = 0.0;
       while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
-        WgpuEnvironmentCube.uploadWgpuEnvironmentImage__wgpuEnvironmentCube((cast device : flighthq._internal._Any), (cast texture : flighthq._internal._Any), (cast face : Float), ({ final __callArgument2:Dynamic = flighthq._internal._StaticIndex.readArray(sources, face); __callArgument2; }));
+        WgpuEnvironmentCube.uploadWgpuEnvironmentImage__wgpuEnvironmentCube(({ final __callArgument2:Dynamic = device; __callArgument2; }), ({ final __callArgument3:Dynamic = texture; __callArgument3; }), (cast face : Float), ({ final __callArgument4:Dynamic = flighthq._internal._StaticIndex.readArray(sources, face); __callArgument4; }));
         face++;
       }
     }
-    view = _Runtime.callProperty(texture, 'createView', cast ([{ dimension: 'cube' }] : Array<Dynamic>));
-    (scene.environmentSourceCube = cast (texture : flighthq._internal._Any));
-    (scene.environmentSourceCubeView = cast (view : flighthq._internal._Any));
+    view = (cast texture : flighthq._internal.dom.GPUTexture).createView({ dimension: 'cube' });
+    (scene.environmentSourceCube = cast (texture : Null<flighthq._internal.dom.GPUTexture>));
+    (scene.environmentSourceCubeView = cast (view : Null<flighthq._internal.dom.GPUTextureView>));
     return cast view;
     return cast null;
   }
 
   @:noCompletion
   public static function updateWgpuEnvironmentCubeFace(state:WgpuRenderState, face:Float, image:TextureSource):Bool {
-    var texture:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-    texture = (cast (cast getWgpuScene3DRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuScene3DRuntime) : { var environmentSourceCube:flighthq._internal._Any; }).environmentSourceCube;
+    var texture:Null<flighthq._internal.dom.GPUTexture> = cast _Runtime.UNDEFINED;
+    texture = (cast (cast getWgpuScene3DRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuScene3DRuntime) : { var environmentSourceCube:Null<flighthq._internal.dom.GPUTexture>; }).environmentSourceCube;
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return cast false; }
-    WgpuEnvironmentCube.uploadWgpuEnvironmentImage__wgpuEnvironmentCube((cast (cast state : WgpuRenderState).device : flighthq._internal._Any), (cast texture : flighthq._internal._Any), (cast face : Float), ({ final __callArgument4:Dynamic = image; __callArgument4; }));
+    WgpuEnvironmentCube.uploadWgpuEnvironmentImage__wgpuEnvironmentCube((cast state : WgpuRenderState).device, ({ final __callArgument6:Dynamic = texture; __callArgument6; }), (cast face : Float), ({ final __callArgument7:Dynamic = image; __callArgument7; }));
     return cast true;
     return cast null;
   }
@@ -89,12 +85,12 @@ class WgpuEnvironmentCube {
     return cast null;
   }
 
-  public static function uploadWgpuEnvironmentImage__wgpuEnvironmentCube(device:GPUDevice, texture:GPUTexture, face:Float, image:TextureSource):Void {
+  public static function uploadWgpuEnvironmentImage__wgpuEnvironmentCube(device:flighthq._internal.dom.GPUDevice, texture:flighthq._internal.dom.GPUTexture, face:Float, image:TextureSource):Void {
     if ((cast _Runtime.strictEquals(image.kind, BitmapTextureSourceKind) : Bool)) {
       var bitmap:Bitmap = (cast image : Bitmap);
-      uploadWgpuTextureData((cast device : flighthq._internal._Any), (cast texture : flighthq._internal._Any), (cast cast ([0.0, 0.0, face] : Array<Dynamic>) : flighthq._internal._Any), (cast bitmap.width : Float), (cast bitmap.height : Float), bitmap.data);
+      uploadWgpuTextureData(({ final __callArgument8:Dynamic = device; __callArgument8; }), ({ final __callArgument9:Dynamic = texture; __callArgument9; }), (cast cast ([0.0, 0.0, face] : Array<Dynamic>) : flighthq._internal._Any), (cast bitmap.width : Float), (cast bitmap.height : Float), bitmap.data);
     } else {
-      uploadWgpuTextureImageResource((cast device : flighthq._internal._Any), (cast texture : flighthq._internal._Any), (cast cast ([0.0, 0.0, face] : Array<Dynamic>) : flighthq._internal._Any), (cast image : Image));
+      uploadWgpuTextureImageResource(({ final __callArgument10:Dynamic = device; __callArgument10; }), ({ final __callArgument11:Dynamic = texture; __callArgument11; }), (cast cast ([0.0, 0.0, face] : Array<Dynamic>) : flighthq._internal._Any), (cast image : Image));
     }
   }
 }

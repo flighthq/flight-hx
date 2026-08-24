@@ -60,7 +60,7 @@ class WgpuScale9Shape {
     var shapeData:Null<WgpuScale9ShapeData__wgpuScale9Shape> = cast _Runtime.UNDEFINED;
     shapeData = (cast getWgpuRendererData(({ final __callArgument0:Dynamic = data; __callArgument0; })) : Null<WgpuScale9ShapeData__wgpuScale9Shape>);
     if ((cast _Runtime.strictEquals(shapeData, null) : Bool)) { return; }
-    _Runtime.callOptionalProperty(({ final __structural2 = (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var texture:flighthq._internal._Any; }).texture; }), 'destroy', cast ([] : Array<Dynamic>));
+    ({ final __hostTypeCall4 = ({ final __structural3 = (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var texture:flighthq._internal.dom.GPUTexture; }).texture; }); __hostTypeCall4 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall4 : flighthq._internal.dom.GPUTexture).destroy(); });
   }
 
   @:noCompletion
@@ -83,9 +83,9 @@ class WgpuScale9Shape {
     var b:Float = cast _Runtime.UNDEFINED;
     var c:Float = cast _Runtime.UNDEFINED;
     var d:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuRenderStateRuntime);
     if ((cast _Runtime.strictEquals(runtime.renderPass, null) : Bool)) { return; }
-    flushWgpuQuadBatchWriter(({ final __callArgument4:Dynamic = state; __callArgument4; }));
+    flushWgpuQuadBatchWriter(({ final __callArgument6:Dynamic = state; __callArgument6; }));
     source = (cast (cast renderProxy : RenderProxy2D).source : Scale9Shape);
     __destructure0 = source.data;
     commands = _Runtime.field(__destructure0, 'commands');
@@ -93,18 +93,18 @@ class WgpuScale9Shape {
     version = (cast getNodeLocalContentRevision((cast source : Dynamic)) : Float);
     if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
     if ((cast _Runtime.strictEquals((cast renderProxy : RenderProxy2D).rendererData, null) : Bool)) { return; }
-    rasterizer = (cast getWgpuShapeRasterizer(({ final __callArgument5:Dynamic = state; __callArgument5; })) : Null<ShapeRasterizer>);
+    rasterizer = (cast getWgpuShapeRasterizer(({ final __callArgument7:Dynamic = state; __callArgument7; })) : Null<ShapeRasterizer>);
     if ((cast _Runtime.strictEquals(rasterizer, null) : Bool)) {
-      _Runtime.callOptionalValue((cast (cast getWgpuRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : WgpuRenderStateRuntime) : { var registryMiss:Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss, cast ([RenderRegistry.ShapeRasterizer, Scale9ShapeKind] : Array<Dynamic>));
+      _Runtime.callOptionalValue((cast (cast getWgpuRenderStateRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : WgpuRenderStateRuntime) : { var registryMiss:Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss, cast ([RenderRegistry.ShapeRasterizer, Scale9ShapeKind] : Array<Dynamic>));
       return;
     }
     bounds = (cast getNodeLocalBoundsRectangle((cast source : Dynamic)) : Rectangle);
-    mapper = (cast buildWgpuScale9Mapper(({ final __callArgument9:Dynamic = bounds; __callArgument9; }), ({ final __callArgument10:Dynamic = scale9Grid; __callArgument10; }), (cast source.scaleX : Float), (cast source.scaleY : Float)) : Null<Scale9Mapper>);
+    mapper = (cast buildWgpuScale9Mapper(({ final __callArgument11:Dynamic = bounds; __callArgument11; }), ({ final __callArgument12:Dynamic = scale9Grid; __callArgument12; }), (cast source.scaleX : Float), (cast source.scaleY : Float)) : Null<Scale9Mapper>);
     if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
-      drawWgpuShape(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = renderProxy; __callArgument12; }));
+      drawWgpuShape(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = renderProxy; __callArgument14; }));
       return;
     }
-    shapeData = (cast getWgpuRendererData(({ final __callArgument13:Dynamic = (cast renderProxy : RenderProxy2D).rendererData; __callArgument13; })) : Null<WgpuScale9ShapeData__wgpuScale9Shape>);
+    shapeData = (cast getWgpuRendererData(({ final __callArgument15:Dynamic = (cast renderProxy : RenderProxy2D).rendererData; __callArgument15; })) : Null<WgpuScale9ShapeData__wgpuScale9Shape>);
     pixelRatio = (cast state : WgpuRenderState).pixelRatio;
     if ((cast _Runtime.strictEquals(shapeData, null) : Bool)) { return; }
     w = HxMath.ceil((bounds.width * source.scaleX));
@@ -118,16 +118,16 @@ class WgpuScale9Shape {
       var ctx:flighthq._internal.dom.CanvasRenderingContext2D = (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).ctx;
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, (-bounds.x * pixelRatio), (-bounds.y * pixelRatio)] : Array<Dynamic>));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'clearRect', cast ([bounds.x, bounds.y, w, h] : Array<Dynamic>));
-      mapScale9ShapeCommands(({ final __callArgument14:Dynamic = WgpuScale9Shape._remappedCommands__wgpuScale9Shape; __callArgument14; }), ({ final __callArgument15:Dynamic = commands; __callArgument15; }), ({ final __callArgument16:Dynamic = mapper; __callArgument16; }));
-      rasterizer(({ final __callArgument17:Dynamic = ctx; __callArgument17; }), ({ final __callArgument18:Dynamic = WgpuScale9Shape._remappedCommands__wgpuScale9Shape; __callArgument18; }), ({ final __callArgument19:Dynamic = state; __callArgument19; }));
+      mapScale9ShapeCommands(({ final __callArgument16:Dynamic = WgpuScale9Shape._remappedCommands__wgpuScale9Shape; __callArgument16; }), ({ final __callArgument17:Dynamic = commands; __callArgument17; }), ({ final __callArgument18:Dynamic = mapper; __callArgument18; }));
+      rasterizer(({ final __callArgument19:Dynamic = ctx; __callArgument19; }), ({ final __callArgument20:Dynamic = WgpuScale9Shape._remappedCommands__wgpuScale9Shape; __callArgument20; }), ({ final __callArgument21:Dynamic = state; __callArgument21; }));
       flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
       if ((cast ((cast ((cast ((cast _Runtime.strictEquals((cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry, null) : Bool) || (cast !_Runtime.strictEquals((cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).lastW, w) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).lastH, h) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).lastPixelRatio, pixelRatio) : Bool)) : Bool)) {
-        var nextEntry:Null<WgpuTextureEntry> = (cast createWgpuTextureEntry(({ final __callArgument20:Dynamic = state; __callArgument20; }), (cast pw : Float), (cast ph : Float), (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).canvas) : Null<WgpuTextureEntry>);
+        var nextEntry:Null<WgpuTextureEntry> = (cast createWgpuTextureEntry(({ final __callArgument22:Dynamic = state; __callArgument22; }), (cast pw : Float), (cast ph : Float), (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).canvas) : Null<WgpuTextureEntry>);
         if ((cast _Runtime.strictEquals(nextEntry, null) : Bool)) { return; }
-        if ((cast !_Runtime.strictEquals((cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry, null) : Bool)) { retireWgpuTexture(({ final __callArgument21:Dynamic = state; __callArgument21; }), (cast (cast (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry : WgpuTextureEntry).texture : flighthq._internal._Any)); }
+        if ((cast !_Runtime.strictEquals((cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry, null) : Bool)) { retireWgpuTexture(({ final __callArgument23:Dynamic = state; __callArgument23; }), (cast (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry : WgpuTextureEntry).texture); }
         ((cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry = nextEntry);
       } else {
-        updateWgpuTextureEntry(({ final __callArgument22:Dynamic = state; __callArgument22; }), (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry, (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).canvas);
+        updateWgpuTextureEntry(({ final __callArgument24:Dynamic = state; __callArgument24; }), (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry, (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).canvas);
       }
       ((cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).lastH = h);
       ((cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).lastScaleX = source.scaleX);
@@ -142,12 +142,12 @@ class WgpuScale9Shape {
     b = ((cast !_Runtime.strictEquals(source.scaleX, 0.0) : Bool) ? (cast (t.b / source.scaleX) : Dynamic) : (cast t.b : Dynamic));
     c = ((cast !_Runtime.strictEquals(source.scaleY, 0.0) : Bool) ? (cast (t.c / source.scaleY) : Dynamic) : (cast t.c : Dynamic));
     d = ((cast !_Runtime.strictEquals(source.scaleY, 0.0) : Bool) ? (cast (t.d / source.scaleY) : Dynamic) : (cast t.d : Dynamic));
-    drawWgpuQuadWithTransform(({ final __callArgument23:Dynamic = state; __callArgument23; }), ({ final __callArgument24:Dynamic = renderProxy; __callArgument24; }), ({ final __callArgument25:Dynamic = { a: a, b: b, c: c, d: d, tx: t.tx, ty: t.ty }; __callArgument25; }), (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry, (cast 0.0 : Float), (cast 0.0 : Float), (cast w : Float), (cast h : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
+    drawWgpuQuadWithTransform(({ final __callArgument25:Dynamic = state; __callArgument25; }), ({ final __callArgument26:Dynamic = renderProxy; __callArgument26; }), ({ final __callArgument27:Dynamic = { a: a, b: b, c: c, d: d, tx: t.tx, ty: t.ty }; __callArgument27; }), (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry, (cast 0.0 : Float), (cast 0.0 : Float), (cast w : Float), (cast h : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
   }
 
   @:noCompletion
   public static function drawWgpuScale9ShapeMask(state:WgpuRenderState, data:RenderProxy2D):Void {
-    drawWgpuScale9Shape(({ final __callArgument26:Dynamic = state; __callArgument26; }), ({ final __callArgument27:Dynamic = data; __callArgument27; }));
+    drawWgpuScale9Shape(({ final __callArgument28:Dynamic = state; __callArgument28; }), ({ final __callArgument29:Dynamic = data; __callArgument29; }));
   }
 
   public static final defaultWgpuScale9ShapeRenderer:Scene2DRenderer = (cast { createData: createWgpuScale9ShapeData, destroyData: destroyWgpuScale9ShapeData, submit: drawWgpuScale9Shape });
