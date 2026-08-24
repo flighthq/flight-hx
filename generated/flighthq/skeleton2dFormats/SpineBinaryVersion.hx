@@ -17,7 +17,7 @@ class SpineBinaryVersion {
     var v4Candidate:Null<String> = cast _Runtime.UNDEFINED;
     var failure:SpineBinaryVersionFailure = cast _Runtime.UNDEFINED;
     v3Candidate = (cast SpineBinaryVersion._readSpineBinaryVersionV3__spineBinaryVersion(({ final __callArgument0:Dynamic = bytes; __callArgument0; })) : Null<String>);
-    v4Candidate = (cast SpineBinaryVersion._readSpineBinaryVersionV4__spineBinaryVersion(({ final __callArgument1:Dynamic = bytes; __callArgument1; })) : Null<String>);
+    v4Candidate = (cast SpineBinaryVersion._readSpineBinaryVersionV4__spineBinaryVersion(({ final __callArgument2:Dynamic = bytes; __callArgument2; })) : Null<String>);
     failure = (cast { bytes: _Runtime.field(bytes, 'byteLength'), reason: 'no-strategy-matched', v3Candidate: v3Candidate, v4Candidate: v4Candidate });
     if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast SpineBinaryVersion.SPINE_BINARY_MINIMUM_HEADER_BYTES__spineBinaryVersion : Float)) : Bool)) { ((cast failure : SpineBinaryVersionFailure).reason = 'too-short'); } else { if ((cast ((cast !_Runtime.strictEquals(v3Candidate, null) : Bool) && (cast !_Runtime.strictEquals(v4Candidate, null) : Bool)) : Bool)) { ((cast failure : SpineBinaryVersionFailure).reason = 'strategies-disagree'); } }
     return cast failure;
@@ -28,8 +28,8 @@ class SpineBinaryVersion {
     var v3Candidate:Null<String> = cast _Runtime.UNDEFINED;
     var v4Candidate:Null<String> = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast SpineBinaryVersion.SPINE_BINARY_MINIMUM_HEADER_BYTES__spineBinaryVersion : Float)) : Bool)) { return cast null; }
-    v3Candidate = (cast SpineBinaryVersion._readSpineBinaryVersionV3__spineBinaryVersion(({ final __callArgument2:Dynamic = bytes; __callArgument2; })) : Null<String>);
-    v4Candidate = (cast SpineBinaryVersion._readSpineBinaryVersionV4__spineBinaryVersion(({ final __callArgument3:Dynamic = bytes; __callArgument3; })) : Null<String>);
+    v3Candidate = (cast SpineBinaryVersion._readSpineBinaryVersionV3__spineBinaryVersion(({ final __callArgument4:Dynamic = bytes; __callArgument4; })) : Null<String>);
+    v4Candidate = (cast SpineBinaryVersion._readSpineBinaryVersionV4__spineBinaryVersion(({ final __callArgument6:Dynamic = bytes; __callArgument6; })) : Null<String>);
     if ((cast ((cast !_Runtime.strictEquals(v3Candidate, null) : Bool) && (cast !_Runtime.strictEquals(v4Candidate, null) : Bool)) : Bool)) { return cast null; }
     return cast _Runtime.coalesce(v3Candidate, function():Dynamic return cast v4Candidate);
     return cast null;
@@ -39,11 +39,11 @@ class SpineBinaryVersion {
     var reader:ByteReader = cast _Runtime.UNDEFINED;
     var hash:Null<String> = cast _Runtime.UNDEFINED;
     var version:Null<String> = cast _Runtime.UNDEFINED;
-    reader = (cast createSpineBinaryReader(({ final __callArgument4:Dynamic = bytes; __callArgument4; })) : ByteReader);
-    hash = (cast readSpineBinaryString(({ final __callArgument5:Dynamic = reader; __callArgument5; })) : Null<String>);
-    if ((cast ((cast ((cast (cast isSpineBinaryReaderOverrun(({ final __callArgument6:Dynamic = reader; __callArgument6; })) : Bool) : Bool) || (cast _Runtime.strictEquals(hash, null) : Bool)) : Bool) || (cast !(cast (cast SpineBinaryVersion._isPrintableAscii__spineBinaryVersion((cast hash : String)) : Bool) : Bool) : Bool)) : Bool)) { return cast null; }
-    version = (cast readSpineBinaryString(({ final __callArgument7:Dynamic = reader; __callArgument7; })) : Null<String>);
-    if ((cast ((cast (cast isSpineBinaryReaderOverrun(({ final __callArgument8:Dynamic = reader; __callArgument8; })) : Bool) : Bool) || (cast _Runtime.strictEquals(version, null) : Bool)) : Bool)) { return cast null; }
+    reader = (cast createSpineBinaryReader(({ final __callArgument8:Dynamic = bytes; __callArgument8; })) : ByteReader);
+    hash = (cast readSpineBinaryString(({ final __callArgument10:Dynamic = reader; __callArgument10; })) : Null<String>);
+    if ((cast ((cast ((cast (cast isSpineBinaryReaderOverrun(({ final __callArgument12:Dynamic = reader; __callArgument12; })) : Bool) : Bool) || (cast _Runtime.strictEquals(hash, null) : Bool)) : Bool) || (cast !(cast (cast SpineBinaryVersion._isPrintableAscii__spineBinaryVersion((cast hash : String)) : Bool) : Bool) : Bool)) : Bool)) { return cast null; }
+    version = (cast readSpineBinaryString(({ final __callArgument14:Dynamic = reader; __callArgument14; })) : Null<String>);
+    if ((cast ((cast (cast isSpineBinaryReaderOverrun(({ final __callArgument16:Dynamic = reader; __callArgument16; })) : Bool) : Bool) || (cast _Runtime.strictEquals(version, null) : Bool)) : Bool)) { return cast null; }
     return cast ((cast (cast SpineBinaryVersion._isVersionShaped__spineBinaryVersion((cast version : String)) : Bool) : Bool) ? (cast version : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -51,10 +51,10 @@ class SpineBinaryVersion {
   public static function _readSpineBinaryVersionV4__spineBinaryVersion(bytes:flighthq._internal._UInt8Array):Null<String> {
     var reader:ByteReader = cast _Runtime.UNDEFINED;
     var version:Null<String> = cast _Runtime.UNDEFINED;
-    reader = (cast createSpineBinaryReader(({ final __callArgument9:Dynamic = bytes; __callArgument9; })) : ByteReader);
-    skipSpineBinaryBytes(({ final __callArgument10:Dynamic = reader; __callArgument10; }), (cast SpineBinaryVersion.SPINE_BINARY_V4_HASH_BYTES__spineBinaryVersion : Float));
-    version = (cast readSpineBinaryString(({ final __callArgument11:Dynamic = reader; __callArgument11; })) : Null<String>);
-    if ((cast ((cast (cast isSpineBinaryReaderOverrun(({ final __callArgument12:Dynamic = reader; __callArgument12; })) : Bool) : Bool) || (cast _Runtime.strictEquals(version, null) : Bool)) : Bool)) { return cast null; }
+    reader = (cast createSpineBinaryReader(({ final __callArgument18:Dynamic = bytes; __callArgument18; })) : ByteReader);
+    skipSpineBinaryBytes(({ final __callArgument20:Dynamic = reader; __callArgument20; }), (cast SpineBinaryVersion.SPINE_BINARY_V4_HASH_BYTES__spineBinaryVersion : Float));
+    version = (cast readSpineBinaryString(({ final __callArgument22:Dynamic = reader; __callArgument22; })) : Null<String>);
+    if ((cast ((cast (cast isSpineBinaryReaderOverrun(({ final __callArgument24:Dynamic = reader; __callArgument24; })) : Bool) : Bool) || (cast _Runtime.strictEquals(version, null) : Bool)) : Bool)) { return cast null; }
     return cast ((cast (cast SpineBinaryVersion._isVersionShaped__spineBinaryVersion((cast version : String)) : Bool) : Bool) ? (cast version : Dynamic) : (cast null : Dynamic));
     return cast null;
   }

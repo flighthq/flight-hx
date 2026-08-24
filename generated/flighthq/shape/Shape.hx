@@ -259,7 +259,7 @@ class Shape {
 
   @:noCompletion
   public static function createShapeData(?data:{ @:optional var commands:Null<Array<ShapeCommandToken>>; }):ShapeData {
-    return cast { commands: _Runtime.coalesce(({ final __structural2 = data; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)) };
+    return cast { commands: _Runtime.coalesce(({ final __structural4 = data; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
@@ -305,8 +305,8 @@ class Shape {
   public static function getShapeBounds(out:Rectangle, source:flighthq.types.Shape, mode:ShapeBoundsMode = 'ink'):Bool {
     var complete:Bool = cast _Runtime.UNDEFINED;
     var runtime:ShapeRuntime = cast _Runtime.UNDEFINED;
-    complete = (cast computeShapeBoundsRectangle(({ final __callArgument3:Dynamic = out; __callArgument3; }), ({ final __callArgument4:Dynamic = source; __callArgument4; }), ({ final __callArgument5:Dynamic = mode; __callArgument5; })) : Bool);
-    runtime = (cast getNode2DRuntime(({ final __callArgument6:Dynamic = source; __callArgument6; })) : ShapeRuntime);
+    complete = (cast computeShapeBoundsRectangle(({ final __callArgument5:Dynamic = out; __callArgument5; }), ({ final __callArgument6:Dynamic = source; __callArgument6; }), ({ final __callArgument7:Dynamic = mode; __callArgument7; })) : Bool);
+    runtime = (cast getNode2DRuntime(({ final __callArgument11:Dynamic = source; __callArgument11; })) : ShapeRuntime);
     ((cast runtime : ShapeRuntime).shapeBoundsCommandRegistryRevision = (cast getShapeBoundsCommandRegistryRevision() : Float));
     if ((cast !(cast complete : Bool) : Bool)) {
       (out.x = cast (0.0 : Float));
@@ -341,7 +341,7 @@ class Shape {
 
   @:noCompletion
   public static function getShapeRuntime(source:flighthq.types.Shape):ShapeRuntime {
-    return cast (cast getNode2DRuntime(({ final __callArgument7:Dynamic = source; __callArgument7; })) : ShapeRuntime);
+    return cast (cast getNode2DRuntime(({ final __callArgument13:Dynamic = source; __callArgument13; })) : ShapeRuntime);
     return cast null;
   }
 
@@ -377,7 +377,7 @@ class Shape {
 
   public static function isShapeLocalBoundsRectangleValid__shape(source:BoundsNodeAny):Bool {
     var runtime:ShapeRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getNode2DRuntime(({ final __callArgument8:Dynamic = (cast (cast source : flighthq._internal._Any) : flighthq.types.Shape); __callArgument8; })) : ShapeRuntime);
+    runtime = (cast getNode2DRuntime(({ final __callArgument15:Dynamic = (cast (cast source : flighthq._internal._Any) : flighthq.types.Shape); __callArgument15; })) : ShapeRuntime);
     return cast _Runtime.strictEquals((cast runtime : ShapeRuntime).shapeBoundsCommandRegistryRevision, (cast getShapeBoundsCommandRegistryRevision() : Float));
     return cast null;
   }

@@ -27,7 +27,7 @@ class QuaternionPool {
     if ((cast ((cast _Runtime.field(QuaternionPool.pool__quaternionPool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       (q = cast ((cast _Runtime.callProperty(QuaternionPool.pool__quaternionPool, 'pop', cast ([] : Array<Dynamic>)) : Quaternion) : Dynamic));
     } else {
-      (q = cast ((cast createQuaternion(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Quaternion) : Dynamic));
+      (q = cast ((cast (#if js _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>)) #else createQuaternion(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Quaternion) : Dynamic));
     }
     return cast q;
     return cast null;

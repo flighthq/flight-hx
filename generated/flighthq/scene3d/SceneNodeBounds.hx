@@ -26,7 +26,7 @@ import flighthq.types.Vector3;
 class SceneNodeBounds {
   public static function getNode3DWorldBounds(out:AabbLike, node:Node3D):Void {
     setAabb(({ final __callArgument0:Dynamic = out; __callArgument0; }), (cast HxMath.POSITIVE_INFINITY : Float), (cast HxMath.POSITIVE_INFINITY : Float), (cast HxMath.POSITIVE_INFINITY : Float), (cast HxMath.NEGATIVE_INFINITY : Float), (cast HxMath.NEGATIVE_INFINITY : Float), (cast HxMath.NEGATIVE_INFINITY : Float));
-    SceneNodeBounds._accumulateWorldBounds__sceneNodeBounds(({ final __callArgument1:Dynamic = out; __callArgument1; }), ({ final __callArgument2:Dynamic = node; __callArgument2; }));
+    SceneNodeBounds._accumulateWorldBounds__sceneNodeBounds(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = node; __callArgument3; }));
   }
 
   public static function _accumulateWorldBounds__sceneNodeBounds(out:AabbLike, node:Node3D):Void {
@@ -36,8 +36,8 @@ class SceneNodeBounds {
       if ((cast ((cast !_Runtime.strictEquals(localBounds, null) : Bool) && (cast ((cast (cast (cast localBounds : { var min:Vector3; }).min : { var x:Float; }).x : Float) <= (cast (cast (cast localBounds : { var max:Vector3; }).max : { var x:Float; }).x : Float)) : Bool)) : Bool)) {
         ensureNodeWorldMatrix4((cast node : Dynamic));
         var worldMatrix:Matrix4Like = (cast getNodeWorldMatrix4((cast node : Dynamic)) : Matrix4Like);
-        transformAabbByMatrix4(({ final __callArgument3:Dynamic = SceneNodeBounds._scratchWorldAabb__sceneNodeBounds; __callArgument3; }), ({ final __callArgument4:Dynamic = localBounds; __callArgument4; }), ({ final __callArgument5:Dynamic = worldMatrix; __callArgument5; }));
-        unionAabb(({ final __callArgument6:Dynamic = out; __callArgument6; }), ({ final __callArgument7:Dynamic = out; __callArgument7; }), ({ final __callArgument8:Dynamic = SceneNodeBounds._scratchWorldAabb__sceneNodeBounds; __callArgument8; }));
+        transformAabbByMatrix4(({ final __callArgument6:Dynamic = SceneNodeBounds._scratchWorldAabb__sceneNodeBounds; __callArgument6; }), ({ final __callArgument7:Dynamic = localBounds; __callArgument7; }), ({ final __callArgument8:Dynamic = worldMatrix; __callArgument8; }));
+        unionAabb(({ final __callArgument12:Dynamic = out; __callArgument12; }), ({ final __callArgument13:Dynamic = out; __callArgument13; }), ({ final __callArgument14:Dynamic = SceneNodeBounds._scratchWorldAabb__sceneNodeBounds; __callArgument14; }));
       }
     }
     children = _Runtime.field((cast getNodeRuntime((cast node : Dynamic)) : NodeRuntime<Node3DTraits>), 'children');
@@ -45,12 +45,12 @@ class SceneNodeBounds {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          SceneNodeBounds._accumulateWorldBounds__sceneNodeBounds(({ final __callArgument9:Dynamic = out; __callArgument9; }), (cast flighthq._internal._StaticIndex.readArray(children, i) : Node3D));
+          SceneNodeBounds._accumulateWorldBounds__sceneNodeBounds(({ final __callArgument18:Dynamic = out; __callArgument18; }), (cast flighthq._internal._StaticIndex.readArray(children, i) : Node3D));
           i++;
         }
       }
     }
   }
 
-  public static final _scratchWorldAabb__sceneNodeBounds:Aabb = (cast createAabb(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Aabb);
+  public static final _scratchWorldAabb__sceneNodeBounds:Aabb = (cast (#if js _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>)) #else createAabb(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Aabb);
 }

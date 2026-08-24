@@ -28,13 +28,13 @@ class ConvexHull3D {
     b = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
     c = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
     d = flighthq._internal._StaticIndex.readArray(__destructure0, 3.0);
-    ConvexHull3D.addTetrahedronFaces__convexHull3D(({ final __callArgument1:Dynamic = points; __callArgument1; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), ({ final __callArgument2:Dynamic = faces; __callArgument2; }), ({ final __callArgument3:Dynamic = alive; __callArgument3; }));
+    ConvexHull3D.addTetrahedronFaces__convexHull3D(({ final __callArgument2:Dynamic = points; __callArgument2; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), ({ final __callArgument3:Dynamic = faces; __callArgument3; }), ({ final __callArgument4:Dynamic = alive; __callArgument4; }));
     horizon = (cast cast ([] : Array<Dynamic>));
     {
       var p:Float = 0.0;
       while ((cast ((cast p : Float) < (cast count : Float)) : Bool)) {
         if ((cast ((cast ((cast ((cast _Runtime.strictEquals(p, a) : Bool) || (cast _Runtime.strictEquals(p, b) : Bool)) : Bool) || (cast _Runtime.strictEquals(p, c) : Bool)) : Bool) || (cast _Runtime.strictEquals(p, d) : Bool)) : Bool)) { (p = cast ((p + 1.0) : Dynamic)); continue; }
-        ConvexHull3D.addPointToHull__convexHull3D(({ final __callArgument4:Dynamic = points; __callArgument4; }), (cast p : Float), ({ final __callArgument5:Dynamic = faces; __callArgument5; }), ({ final __callArgument6:Dynamic = alive; __callArgument6; }), ({ final __callArgument7:Dynamic = horizon; __callArgument7; }));
+        ConvexHull3D.addPointToHull__convexHull3D(({ final __callArgument8:Dynamic = points; __callArgument8; }), (cast p : Float), ({ final __callArgument9:Dynamic = faces; __callArgument9; }), ({ final __callArgument10:Dynamic = alive; __callArgument10; }), ({ final __callArgument11:Dynamic = horizon; __callArgument11; }));
         (p = cast ((p + 1.0) : Dynamic));
       }
     }
@@ -60,15 +60,15 @@ class ConvexHull3D {
       var f:Float = 0.0;
       while ((cast ((cast f : Float) < (cast faceCount : Float)) : Bool)) {
         if ((cast !(cast flighthq._internal._StaticIndex.readArray(alive, f) : Bool) : Bool)) { (f = cast ((f + 1.0) : Dynamic)); continue; }
-        if ((cast !(cast (cast ConvexHull3D.isFaceVisibleFrom__convexHull3D(({ final __callArgument8:Dynamic = points; __callArgument8; }), ({ final __callArgument9:Dynamic = faces; __callArgument9; }), (cast f : Float), (cast p : Float)) : Bool) : Bool) : Bool)) { (f = cast ((f + 1.0) : Dynamic)); continue; }
+        if ((cast !(cast (cast ConvexHull3D.isFaceVisibleFrom__convexHull3D(({ final __callArgument16:Dynamic = points; __callArgument16; }), ({ final __callArgument17:Dynamic = faces; __callArgument17; }), (cast f : Float), (cast p : Float)) : Bool) : Bool) : Bool)) { (f = cast ((f + 1.0) : Dynamic)); continue; }
         flighthq._internal._StaticIndex.writeArray(alive, f, false);
         (anyVisible = cast (true : Dynamic));
         var i0:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast faces : Array<Float>), (cast (f * 3.0) : Float));
         var i1:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast faces : Array<Float>), (cast ((f * 3.0) + 1.0) : Float));
         var i2:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast faces : Array<Float>), (cast ((f * 3.0) + 2.0) : Float));
-        ConvexHull3D.pushHorizonEdge__convexHull3D(({ final __callArgument10:Dynamic = horizon; __callArgument10; }), (cast i0 : Float), (cast i1 : Float));
-        ConvexHull3D.pushHorizonEdge__convexHull3D(({ final __callArgument11:Dynamic = horizon; __callArgument11; }), (cast i1 : Float), (cast i2 : Float));
-        ConvexHull3D.pushHorizonEdge__convexHull3D(({ final __callArgument12:Dynamic = horizon; __callArgument12; }), (cast i2 : Float), (cast i0 : Float));
+        ConvexHull3D.pushHorizonEdge__convexHull3D(({ final __callArgument20:Dynamic = horizon; __callArgument20; }), (cast i0 : Float), (cast i1 : Float));
+        ConvexHull3D.pushHorizonEdge__convexHull3D(({ final __callArgument22:Dynamic = horizon; __callArgument22; }), (cast i1 : Float), (cast i2 : Float));
+        ConvexHull3D.pushHorizonEdge__convexHull3D(({ final __callArgument24:Dynamic = horizon; __callArgument24; }), (cast i2 : Float), (cast i0 : Float));
         (f = cast ((f + 1.0) : Dynamic));
       }
     }
@@ -105,7 +105,7 @@ class ConvexHull3D {
       var i1:Float = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
       var i2:Float = flighthq._internal._StaticIndex.readArray(__iteration1, 2.0);
       var opposite:Float = flighthq._internal._StaticIndex.readArray(__iteration1, 3.0);
-      if ((cast ((cast (cast ConvexHull3D.isPointAbovePlane__convexHull3D(({ final __callArgument15:Dynamic = points; __callArgument15; }), (cast i0 : Float), (cast i1 : Float), (cast i2 : Float), (cast opposite : Float)) : Float) : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.pushMany(faces, cast ([i0, i2, i1] : Array<Dynamic>)); } else { _Runtime.pushMany(faces, cast ([i0, i1, i2] : Array<Dynamic>)); }
+      if ((cast ((cast (cast ConvexHull3D.isPointAbovePlane__convexHull3D(({ final __callArgument28:Dynamic = points; __callArgument28; }), (cast i0 : Float), (cast i1 : Float), (cast i2 : Float), (cast opposite : Float)) : Float) : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.pushMany(faces, cast ([i0, i2, i1] : Array<Dynamic>)); } else { _Runtime.pushMany(faces, cast ([i0, i1, i2] : Array<Dynamic>)); }
       _Runtime.callProperty(alive, 'push', cast ([true] : Array<Dynamic>));
     }
   }
@@ -125,7 +125,7 @@ class ConvexHull3D {
         {
           var j:Float = (i + 1.0);
           while ((cast ((cast j : Float) < (cast count : Float)) : Bool)) {
-            var distance:Float = (cast ConvexHull3D.squaredDistance__convexHull3D(({ final __callArgument16:Dynamic = points; __callArgument16; }), (cast i : Float), (cast j : Float)) : Float);
+            var distance:Float = (cast ConvexHull3D.squaredDistance__convexHull3D(({ final __callArgument30:Dynamic = points; __callArgument30; }), (cast i : Float), (cast j : Float)) : Float);
             if ((cast ((cast distance : Float) > (cast best : Float)) : Bool)) {
               (best = cast (distance : Dynamic));
               (a = cast (i : Dynamic));
@@ -144,7 +144,7 @@ class ConvexHull3D {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         if ((cast ((cast _Runtime.strictEquals(i, a) : Bool) || (cast _Runtime.strictEquals(i, b) : Bool)) : Bool)) { (i = cast ((i + 1.0) : Dynamic)); continue; }
-        var area:Float = (cast ConvexHull3D.squaredTriangleArea__convexHull3D(({ final __callArgument17:Dynamic = points; __callArgument17; }), (cast a : Float), (cast b : Float), (cast i : Float)) : Float);
+        var area:Float = (cast ConvexHull3D.squaredTriangleArea__convexHull3D(({ final __callArgument32:Dynamic = points; __callArgument32; }), (cast a : Float), (cast b : Float), (cast i : Float)) : Float);
         if ((cast ((cast area : Float) > (cast best : Float)) : Bool)) {
           (best = cast (area : Dynamic));
           (c = cast (i : Dynamic));
@@ -159,7 +159,7 @@ class ConvexHull3D {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         if ((cast ((cast ((cast _Runtime.strictEquals(i, a) : Bool) || (cast _Runtime.strictEquals(i, b) : Bool)) : Bool) || (cast _Runtime.strictEquals(i, c) : Bool)) : Bool)) { (i = cast ((i + 1.0) : Dynamic)); continue; }
-        var volume:Float = HxMath.abs((cast ConvexHull3D.isPointAbovePlane__convexHull3D(({ final __callArgument18:Dynamic = points; __callArgument18; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast i : Float)) : Float));
+        var volume:Float = HxMath.abs((cast ConvexHull3D.isPointAbovePlane__convexHull3D(({ final __callArgument34:Dynamic = points; __callArgument34; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast i : Float)) : Float));
         if ((cast ((cast volume : Float) > (cast best : Float)) : Bool)) {
           (best = cast (volume : Dynamic));
           (d = cast (i : Dynamic));
@@ -202,7 +202,7 @@ class ConvexHull3D {
   }
 
   public static function isFaceVisibleFrom__convexHull3D(points:Array<Float>, faces:Array<Float>, f:Float, p:Float):Bool {
-    return cast ((cast (cast ConvexHull3D.isPointAbovePlane__convexHull3D(({ final __callArgument19:Dynamic = points; __callArgument19; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast faces : Array<Float>), (cast (f * 3.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast faces : Array<Float>), (cast ((f * 3.0) + 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast faces : Array<Float>), (cast ((f * 3.0) + 2.0) : Float)) : Float), (cast p : Float)) : Float) : Float) > (cast ConvexHull3D.HULL_EPSILON__convexHull3D : Float));
+    return cast ((cast (cast ConvexHull3D.isPointAbovePlane__convexHull3D(({ final __callArgument36:Dynamic = points; __callArgument36; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast faces : Array<Float>), (cast (f * 3.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast faces : Array<Float>), (cast ((f * 3.0) + 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast faces : Array<Float>), (cast ((f * 3.0) + 2.0) : Float)) : Float), (cast p : Float)) : Float) : Float) > (cast ConvexHull3D.HULL_EPSILON__convexHull3D : Float));
     return cast null;
   }
 

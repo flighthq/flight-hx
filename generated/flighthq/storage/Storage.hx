@@ -132,7 +132,7 @@ class Storage {
 
       }; }
       handler = (cast function(event:flighthq._internal.dom.StorageEvent):Void {
-        listener(({ final __callArgument3:Dynamic = { key: event.key, oldValue: event.oldValue, newValue: event.newValue }; __callArgument3; }));
+        listener(({ final __callArgument4:Dynamic = { key: event.key, oldValue: event.oldValue, newValue: event.newValue }; __callArgument4; }));
       });
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['storage', handler] : Array<Dynamic>));
       return cast function():Void { flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'removeEventListener', cast (['storage', handler] : Array<Dynamic>)); };
@@ -161,9 +161,9 @@ class Storage {
     (Storage._signalsActive__storage = cast (true : Dynamic));
     backend = (cast getStorageBackend() : StorageBackend);
     if ((cast !_Runtime.strictEquals((cast backend : StorageBackend).subscribeChanges, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (Storage._crossTabUnsubscribe__storage = cast ((cast backend : StorageBackend).subscribeChanges(({ final __callArgument5:Dynamic = function(change:StorageChange):Void {
-        Storage._emitStorageChange__storage(({ final __callArgument4:Dynamic = change; __callArgument4; }));
-      }; __callArgument5; })) : Dynamic));
+      (Storage._crossTabUnsubscribe__storage = cast ((cast backend : StorageBackend).subscribeChanges(({ final __callArgument8:Dynamic = function(change:StorageChange):Void {
+        Storage._emitStorageChange__storage(({ final __callArgument6:Dynamic = change; __callArgument6; }));
+      }; __callArgument8; })) : Dynamic));
     }
     return cast Storage._signals__storage;
     return cast null;
@@ -209,7 +209,7 @@ class Storage {
   }
 
   public static function getNamespacedStorageItem(namespace:StorageNamespace, key:String):Null<String> {
-    return cast (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem((cast (cast Storage._namespacedKey__storage(({ final __callArgument10:Dynamic = namespace; __callArgument10; }), (cast key : String)) : String) : String));
+    return cast (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem((cast (cast Storage._namespacedKey__storage(({ final __callArgument13:Dynamic = namespace; __callArgument13; }), (cast key : String)) : String) : String));
     return cast null;
   }
 
@@ -359,31 +359,31 @@ class Storage {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
         var storage:flighthq._internal._Intersection2<flighthq._internal.dom.StorageManager, { @:optional var estimate:Null<Void->flighthq._internal._Promise<{ @:optional var usage:Null<Float>; @:optional var quota:Null<Float>; }>>; }> = cast _Runtime.UNDEFINED;
-        var __flowBranch18:Dynamic;
+        var __flowBranch22:Dynamic;
         if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) {
-          __flowBranch18 = flighthq._internal._Async.protect(function():Dynamic {
+          __flowBranch22 = flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flowReturn(null);
           });
         } else {
-          __flowBranch18 = flighthq._internal._Async.flowNormal();
+          __flowBranch22 = flighthq._internal._Async.flowNormal();
         }
-        return flighthq._internal._Async.continueFlow(__flowBranch18, function():Dynamic {
+        return flighthq._internal._Async.continueFlow(__flowBranch22, function():Dynamic {
           storage = flighthq._internal.backend.DomNavigatorBackend.field((cast flighthq._internal.backend.DomNavigatorBackend.value() : flighthq._internal._Intersection2<flighthq._internal.dom.Navigator, { @:optional var storage:{ @:optional var estimate:Void->flighthq._internal._Promise<{ @:optional var usage:Float; @:optional var quota:Float; }>; }; }>), 'storage');
-          var __flowBranch20:Dynamic;
-          if ((cast _Runtime.strictEquals(({ final __structural19 = storage; __structural19 == null ? _Runtime.UNDEFINED : (cast __structural19 : { var estimate:Void->flighthq._internal._Promise<{ @:optional var usage:Null<Float>; @:optional var quota:Null<Float>; }>; }).estimate; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-            __flowBranch20 = flighthq._internal._Async.protect(function():Dynamic {
+          var __flowBranch24:Dynamic;
+          if ((cast _Runtime.strictEquals(({ final __structural23 = storage; __structural23 == null ? _Runtime.UNDEFINED : (cast __structural23 : { var estimate:Void->flighthq._internal._Promise<{ @:optional var usage:Null<Float>; @:optional var quota:Null<Float>; }>; }).estimate; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+            __flowBranch24 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch20 = flighthq._internal._Async.flowNormal();
+            __flowBranch24 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch20, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch24, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var estimate:flighthq._internal.dom.StorageEstimate = cast _Runtime.UNDEFINED;
               var used:Float = cast _Runtime.UNDEFINED;
               var available:Float = cast _Runtime.UNDEFINED;
-              return flighthq._internal._Async.flatMap((cast storage : { var estimate:Void->flighthq._internal._Promise<{ @:optional var usage:Null<Float>; @:optional var quota:Null<Float>; }>; }).estimate(), function(__awaitValue21:Dynamic):Dynamic {
-                estimate = __awaitValue21;
+              return flighthq._internal._Async.flatMap((cast storage : { var estimate:Void->flighthq._internal._Promise<{ @:optional var usage:Null<Float>; @:optional var quota:Null<Float>; }>; }).estimate(), function(__awaitValue25:Dynamic):Dynamic {
+                estimate = __awaitValue25;
                 used = ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast estimate : flighthq._internal.dom.StorageEstimate).usage), 'number') : Bool) ? (cast (cast estimate : flighthq._internal.dom.StorageEstimate).usage : Dynamic) : (cast -1.0 : Dynamic));
                 available = ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast estimate : flighthq._internal.dom.StorageEstimate).quota), 'number') : Bool) && (cast ((cast (cast estimate : flighthq._internal.dom.StorageEstimate).quota : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) ? (cast _Runtime.subtractNumbers((cast estimate : flighthq._internal.dom.StorageEstimate).quota, ((cast ((cast used : Float) >= (cast 0.0 : Float)) : Bool) ? (cast used : Dynamic) : (cast 0.0 : Dynamic))) : Dynamic) : (cast -1.0 : Dynamic));
                 return flighthq._internal._Async.flowReturn({ used: used, available: available });
@@ -418,7 +418,7 @@ class Storage {
   }
 
   public static function hasNamespacedStorageItem(namespace:StorageNamespace, key:String):Bool {
-    return cast !_Runtime.strictEquals((cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem((cast (cast Storage._namespacedKey__storage(({ final __callArgument22:Dynamic = namespace; __callArgument22; }), (cast key : String)) : String) : String)), null);
+    return cast !_Runtime.strictEquals((cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem((cast (cast Storage._namespacedKey__storage(({ final __callArgument26:Dynamic = namespace; __callArgument26; }), (cast key : String)) : String) : String)), null);
     return cast null;
   }
 
@@ -434,21 +434,21 @@ class Storage {
     var sorted:Array<StorageMigration> = cast _Runtime.UNDEFINED;
     var newVersion:Float = cast _Runtime.UNDEFINED;
     versionKey = '__flight_storage_version';
-    raw = ((cast !_Runtime.strictEquals(namespace, null) : Bool) ? (cast (cast getNamespacedStorageItem(({ final __callArgument23:Dynamic = namespace; __callArgument23; }), (cast versionKey : String)) : Null<String>) : Dynamic) : (cast (cast getStorageItem((cast versionKey : String)) : Null<String>) : Dynamic));
+    raw = ((cast !_Runtime.strictEquals(namespace, null) : Bool) ? (cast (cast getNamespacedStorageItem(({ final __callArgument28:Dynamic = namespace; __callArgument28; }), (cast versionKey : String)) : Null<String>) : Dynamic) : (cast (cast getStorageItem((cast versionKey : String)) : Null<String>) : Dynamic));
     currentVersion = ((cast !_Runtime.strictEquals(raw, null) : Bool) ? (cast _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([raw, 10.0] : Array<Dynamic>)) : Dynamic) : (cast 0.0 : Dynamic));
     sorted = _Runtime.sortAndReturn(_Runtime.concatArrays([_Runtime.toArray(migrations)]), function(a:StorageMigration, b:StorageMigration) return (a.version - b.version));
     newVersion = currentVersion;
     for (migration in _Runtime.iterable(sorted)) {
       if ((cast ((cast migration.version : Float) <= (cast currentVersion : Float)) : Bool)) { continue; }
       try {
-        _Runtime.callProperty(migration, 'migrate', cast ([_Runtime.coalesce(({ final __typedStruct26 = namespace; __typedStruct26 == null ? _Runtime.UNDEFINED : (cast __typedStruct26 : { var prefix:String; }).prefix; }), function():Dynamic return cast null)] : Array<Dynamic>));
+        _Runtime.callProperty(migration, 'migrate', cast ([_Runtime.coalesce(({ final __typedStruct32 = namespace; __typedStruct32 == null ? _Runtime.UNDEFINED : (cast __typedStruct32 : { var prefix:String; }).prefix; }), function():Dynamic return cast null)] : Array<Dynamic>));
       } catch (__error:Dynamic) {
         return cast -1.0;
       }
       (newVersion = cast (migration.version : Dynamic));
     }
     if ((cast !_Runtime.strictEquals(newVersion, currentVersion) : Bool)) {
-      var stored:Bool = ((cast !_Runtime.strictEquals(namespace, null) : Bool) ? (cast (cast setNamespacedStorageItem(({ final __callArgument27:Dynamic = namespace; __callArgument27; }), (cast versionKey : String), (cast Std.string(newVersion) : String)) : Bool) : Dynamic) : (cast (cast setStorageItem((cast versionKey : String), (cast Std.string(newVersion) : String)) : Bool) : Dynamic));
+      var stored:Bool = ((cast !_Runtime.strictEquals(namespace, null) : Bool) ? (cast (cast setNamespacedStorageItem(({ final __callArgument33:Dynamic = namespace; __callArgument33; }), (cast versionKey : String), (cast Std.string(newVersion) : String)) : Bool) : Dynamic) : (cast (cast setStorageItem((cast versionKey : String), (cast Std.string(newVersion) : String)) : Bool) : Dynamic));
       if ((cast !(cast stored : Bool) : Bool)) { return cast -1.0; }
     }
     return cast newVersion;
@@ -456,7 +456,7 @@ class Storage {
   }
 
   public static function removeNamespacedStorageItem(namespace:StorageNamespace, key:String):Bool {
-    return cast (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).removeItem((cast (cast Storage._namespacedKey__storage(({ final __callArgument28:Dynamic = namespace; __callArgument28; }), (cast key : String)) : String) : String));
+    return cast (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).removeItem((cast (cast Storage._namespacedKey__storage(({ final __callArgument35:Dynamic = namespace; __callArgument35; }), (cast key : String)) : String) : String));
     return cast null;
   }
 
@@ -466,7 +466,7 @@ class Storage {
     oldValue = ((cast Storage._signalsActive__storage : Bool) ? (cast (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem((cast key : String)) : Dynamic) : (cast null : Dynamic));
     result = (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).removeItem((cast key : String));
     if ((cast ((cast Storage._signalsActive__storage : Bool) && (cast result : Bool)) : Bool)) {
-      Storage._emitStorageChange__storage(({ final __callArgument29:Dynamic = { key: key, oldValue: oldValue, newValue: null }; __callArgument29; }));
+      Storage._emitStorageChange__storage(({ final __callArgument37:Dynamic = { key: key, oldValue: oldValue, newValue: null }; __callArgument37; }));
     }
     return cast result;
     return cast null;
@@ -485,7 +485,7 @@ class Storage {
   }
 
   public static function setNamespacedStorageItem(namespace:StorageNamespace, key:String, value:String):Bool {
-    return cast (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).setItem((cast (cast Storage._namespacedKey__storage(({ final __callArgument32:Dynamic = namespace; __callArgument32; }), (cast key : String)) : String) : String), (cast value : String));
+    return cast (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).setItem((cast (cast Storage._namespacedKey__storage(({ final __callArgument41:Dynamic = namespace; __callArgument41; }), (cast key : String)) : String) : String), (cast value : String));
     return cast null;
   }
 
@@ -499,9 +499,9 @@ class Storage {
     if ((cast Storage._signalsActive__storage : Bool)) {
       var b:StorageBackend = (cast getStorageBackend() : StorageBackend);
       if ((cast !_Runtime.strictEquals((cast b : StorageBackend).subscribeChanges, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-        (Storage._crossTabUnsubscribe__storage = cast ((cast b : StorageBackend).subscribeChanges(({ final __callArgument34:Dynamic = function(change:StorageChange):Void {
-          Storage._emitStorageChange__storage(({ final __callArgument33:Dynamic = change; __callArgument33; }));
-        }; __callArgument34; })) : Dynamic));
+        (Storage._crossTabUnsubscribe__storage = cast ((cast b : StorageBackend).subscribeChanges(({ final __callArgument45:Dynamic = function(change:StorageChange):Void {
+          Storage._emitStorageChange__storage(({ final __callArgument43:Dynamic = change; __callArgument43; }));
+        }; __callArgument45; })) : Dynamic));
       }
     }
   }
@@ -517,7 +517,7 @@ class Storage {
     oldValue = ((cast Storage._signalsActive__storage : Bool) ? (cast (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem((cast key : String)) : Dynamic) : (cast null : Dynamic));
     result = (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).setItem((cast key : String), (cast value : String));
     if ((cast ((cast Storage._signalsActive__storage : Bool) && (cast result : Bool)) : Bool)) {
-      Storage._emitStorageChange__storage(({ final __callArgument35:Dynamic = { key: key, oldValue: oldValue, newValue: value }; __callArgument35; }));
+      Storage._emitStorageChange__storage(({ final __callArgument46:Dynamic = { key: key, oldValue: oldValue, newValue: value }; __callArgument46; }));
     }
     return cast result;
     return cast null;

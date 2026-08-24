@@ -20,7 +20,7 @@ class WgpuClipRectangle {
     var previous:Null<WgpuScissorRect> = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
-    flushWgpuQuadBatchWriter(({ final __callArgument1:Dynamic = state; __callArgument1; }));
+    flushWgpuQuadBatchWriter(({ final __callArgument2:Dynamic = state; __callArgument2; }));
     stack = runtime.scissorStack;
     _Runtime.callProperty(stack, 'pop', cast ([] : Array<Dynamic>));
     previous = ((cast ((cast _Runtime.field(stack, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(stack, _Runtime.subtractNumbers(_Runtime.field(stack, 'length'), 1.0)) : Dynamic) : (cast null : Dynamic));
@@ -29,11 +29,11 @@ class WgpuClipRectangle {
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     if ((cast _Runtime.strictEquals(previous, null) : Bool)) {
       var viewport:{ var width:Float; var height:Float; } = _Runtime.coalesce(runtime.renderTargetViewport, function():Dynamic return cast (cast state : WgpuRenderState).canvas);
-      setWgpuRenderPassScissorRect(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = pass; __callArgument3; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast (cast viewport : { var width:Float; var height:Float; }).width : Float), (cast (cast viewport : { var width:Float; var height:Float; }).height : Float));
+      setWgpuRenderPassScissorRect(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = pass; __callArgument5; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast (cast viewport : { var width:Float; var height:Float; }).width : Float), (cast (cast viewport : { var width:Float; var height:Float; }).height : Float));
     } else { if ((cast ((cast ((cast (cast previous : { var width:Float; }).width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast (cast previous : { var height:Float; }).height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
-      setWgpuRenderPassScissorRect(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = pass; __callArgument5; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
+      setWgpuRenderPassScissorRect(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = pass; __callArgument9; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
     } else {
-      setWgpuRenderPassScissorRect(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pass; __callArgument7; }), (cast (cast previous : { var x:Float; }).x : Float), (cast (cast previous : { var y:Float; }).y : Float), (cast (cast previous : { var width:Float; }).width : Float), (cast (cast previous : { var height:Float; }).height : Float));
+      setWgpuRenderPassScissorRect(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = pass; __callArgument13; }), (cast (cast previous : { var x:Float; }).x : Float), (cast (cast previous : { var y:Float; }).y : Float), (cast (cast previous : { var width:Float; }).width : Float), (cast (cast previous : { var height:Float; }).height : Float));
     } }
   }
 
@@ -42,17 +42,17 @@ class WgpuClipRectangle {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var next:WgpuScissorRect = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : WgpuRenderStateRuntime);
-    flushWgpuQuadBatchWriter(({ final __callArgument9:Dynamic = state; __callArgument9; }));
-    next = (cast WgpuClipRectangle.intersectWgpuScissorRect__wgpuClipRectangle(({ final __callArgument10:Dynamic = _Runtime.coalesce(runtime.currentScissorRect, function():Dynamic return cast null); __callArgument10; }), (cast WgpuClipRectangle.computeWgpuScissorRect__wgpuClipRectangle(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = rect; __callArgument12; }), ({ final __callArgument13:Dynamic = transform; __callArgument13; })) : WgpuScissorRect)) : WgpuScissorRect);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : WgpuRenderStateRuntime);
+    flushWgpuQuadBatchWriter(({ final __callArgument18:Dynamic = state; __callArgument18; }));
+    next = (cast WgpuClipRectangle.intersectWgpuScissorRect__wgpuClipRectangle(({ final __callArgument20:Dynamic = _Runtime.coalesce(runtime.currentScissorRect, function():Dynamic return cast null); __callArgument20; }), (cast WgpuClipRectangle.computeWgpuScissorRect__wgpuClipRectangle(({ final __callArgument21:Dynamic = state; __callArgument21; }), ({ final __callArgument22:Dynamic = rect; __callArgument22; }), ({ final __callArgument23:Dynamic = transform; __callArgument23; })) : WgpuScissorRect)) : WgpuScissorRect);
     (runtime.currentScissorRect = cast (next : Null<WgpuScissorRect>));
     _Runtime.callProperty(runtime.scissorStack, 'push', cast ([next] : Array<Dynamic>));
     pass = runtime.renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     if ((cast ((cast ((cast next.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast next.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
-      setWgpuRenderPassScissorRect(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = pass; __callArgument15; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
+      setWgpuRenderPassScissorRect(({ final __callArgument34:Dynamic = state; __callArgument34; }), ({ final __callArgument35:Dynamic = pass; __callArgument35; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
     } else {
-      setWgpuRenderPassScissorRect(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = pass; __callArgument17; }), (cast next.x : Float), (cast next.y : Float), (cast next.width : Float), (cast next.height : Float));
+      setWgpuRenderPassScissorRect(({ final __callArgument38:Dynamic = state; __callArgument38; }), ({ final __callArgument39:Dynamic = pass; __callArgument39; }), (cast next.x : Float), (cast next.y : Float), (cast next.width : Float), (cast next.height : Float));
     }
   }
 
@@ -71,7 +71,7 @@ class WgpuClipRectangle {
     var maxX:Float = cast _Runtime.UNDEFINED;
     var minY:Float = cast _Runtime.UNDEFINED;
     var maxY:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument18:Dynamic = state; __callArgument18; })) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument42:Dynamic = state; __callArgument42; })) : WgpuRenderStateRuntime);
     x0 = (((transform.a * rect.x) + (transform.c * rect.y)) + transform.tx);
     y0 = (((transform.b * rect.x) + (transform.d * rect.y)) + transform.ty);
     x1 = (((transform.a * (rect.x + rect.width)) + (transform.c * rect.y)) + transform.tx);

@@ -87,7 +87,7 @@ class BitmapGradientFill {
             var dx:Float = (px - focalX);
             var dy:Float = (py - focalY);
             var t:Float = (_Runtime.multiplyNumbers(HxMath.sqrt(((dx * dx) + (dy * dy))), invRadius) - ((((dx * fdx) + (dy * fdy)) * invRadius) * invRadius));
-            var idx:Float = (cast BitmapGradientFill.spreadIndex__bitmapGradientFill((cast t : Float), ({ final __callArgument1:Dynamic = spread; __callArgument1; })) : Float);
+            var idx:Float = (cast BitmapGradientFill.spreadIndex__bitmapGradientFill((cast t : Float), ({ final __callArgument2:Dynamic = spread; __callArgument2; })) : Float);
             var ri:Float = (idx * 4.0);
             var i:Float = (((y * bitmapWidth) + x) * 4.0);
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast i : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast ramp : flighthq._internal._UInt8ClampedArray), (cast ri : Float)) : Float));

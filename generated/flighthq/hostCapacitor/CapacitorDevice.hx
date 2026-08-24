@@ -70,18 +70,18 @@ class CapacitorDevice {
       (out.isJailbroken = cast (false : Bool));
       (out.isLowEndDevice = cast (false : Bool));
       (out.isRooted = cast (false : Bool));
-      (out.isVirtual = cast (_Runtime.coalesce(({ final __typedStruct1 = info; __typedStruct1 == null ? _Runtime.UNDEFINED : (cast __typedStruct1 : { var isVirtual:Bool; }).isVirtual; }), function():Dynamic return cast false) : Bool));
-      (out.manufacturer = cast (_Runtime.coalesce(({ final __typedStruct2 = info; __typedStruct2 == null ? _Runtime.UNDEFINED : (cast __typedStruct2 : { var manufacturer:String; }).manufacturer; }), function():Dynamic return cast '') : String));
-      (out.marketingName = cast (_Runtime.coalesce(({ final __typedStruct3 = info; __typedStruct3 == null ? _Runtime.UNDEFINED : (cast __typedStruct3 : { @:optional var name:Null<String>; }).name; }), function():Dynamic return cast '') : String));
-      (out.model = cast (_Runtime.coalesce(({ final __typedStruct4 = info; __typedStruct4 == null ? _Runtime.UNDEFINED : (cast __typedStruct4 : { var model:String; }).model; }), function():Dynamic return cast '') : String));
+      (out.isVirtual = cast (_Runtime.coalesce(({ final __typedStruct2 = info; __typedStruct2 == null ? _Runtime.UNDEFINED : (cast __typedStruct2 : { var isVirtual:Bool; }).isVirtual; }), function():Dynamic return cast false) : Bool));
+      (out.manufacturer = cast (_Runtime.coalesce(({ final __typedStruct3 = info; __typedStruct3 == null ? _Runtime.UNDEFINED : (cast __typedStruct3 : { var manufacturer:String; }).manufacturer; }), function():Dynamic return cast '') : String));
+      (out.marketingName = cast (_Runtime.coalesce(({ final __typedStruct4 = info; __typedStruct4 == null ? _Runtime.UNDEFINED : (cast __typedStruct4 : { @:optional var name:Null<String>; }).name; }), function():Dynamic return cast '') : String));
+      (out.model = cast (_Runtime.coalesce(({ final __typedStruct5 = info; __typedStruct5 == null ? _Runtime.UNDEFINED : (cast __typedStruct5 : { var model:String; }).model; }), function():Dynamic return cast '') : String));
       (out.osBuild = cast ('' : String));
-      (out.osName = cast (_Runtime.coalesce(({ final __typedStruct5 = info; __typedStruct5 == null ? _Runtime.UNDEFINED : (cast __typedStruct5 : { var operatingSystem:String; }).operatingSystem; }), function():Dynamic return cast '') : String));
-      (out.osVersion = cast (_Runtime.coalesce(({ final __typedStruct6 = info; __typedStruct6 == null ? _Runtime.UNDEFINED : (cast __typedStruct6 : { var osVersion:String; }).osVersion; }), function():Dynamic return cast '') : String));
-      (out.platformString = cast (_Runtime.coalesce(({ final __typedStruct7 = info; __typedStruct7 == null ? _Runtime.UNDEFINED : (cast __typedStruct7 : { var platform:String; }).platform; }), function():Dynamic return cast '') : String));
-      (out.productName = cast (_Runtime.coalesce(({ final __typedStruct8 = info; __typedStruct8 == null ? _Runtime.UNDEFINED : (cast __typedStruct8 : { var model:String; }).model; }), function():Dynamic return cast '') : String));
+      (out.osName = cast (_Runtime.coalesce(({ final __typedStruct6 = info; __typedStruct6 == null ? _Runtime.UNDEFINED : (cast __typedStruct6 : { var operatingSystem:String; }).operatingSystem; }), function():Dynamic return cast '') : String));
+      (out.osVersion = cast (_Runtime.coalesce(({ final __typedStruct7 = info; __typedStruct7 == null ? _Runtime.UNDEFINED : (cast __typedStruct7 : { var osVersion:String; }).osVersion; }), function():Dynamic return cast '') : String));
+      (out.platformString = cast (_Runtime.coalesce(({ final __typedStruct8 = info; __typedStruct8 == null ? _Runtime.UNDEFINED : (cast __typedStruct8 : { var platform:String; }).platform; }), function():Dynamic return cast '') : String));
+      (out.productName = cast (_Runtime.coalesce(({ final __typedStruct9 = info; __typedStruct9 == null ? _Runtime.UNDEFINED : (cast __typedStruct9 : { var model:String; }).model; }), function():Dynamic return cast '') : String));
       (out.supportedAbis = cast (cast ([] : Array<Dynamic>) : Array<String>));
       (out.totalMemory = cast (-1.0 : Float));
-      (out.webViewVersion = cast (_Runtime.coalesce(({ final __typedStruct9 = info; __typedStruct9 == null ? _Runtime.UNDEFINED : (cast __typedStruct9 : { var webViewVersion:String; }).webViewVersion; }), function():Dynamic return cast '') : String));
+      (out.webViewVersion = cast (_Runtime.coalesce(({ final __typedStruct10 = info; __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : { var webViewVersion:String; }).webViewVersion; }), function():Dynamic return cast '') : String));
       return cast out;
       return cast _Runtime.UNDEFINED;
     }, getSafeAreaInsets: function(out:SafeAreaInsets):SafeAreaInsets {

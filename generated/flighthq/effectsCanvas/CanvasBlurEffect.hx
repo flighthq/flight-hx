@@ -21,7 +21,7 @@ class CanvasBlurEffect {
     blurX = _Runtime.coalesce(effect.blurX, function():Dynamic return cast 4.0);
     blurY = _Runtime.coalesce(effect.blurY, function():Dynamic return cast 4.0);
     radius = HxMath.max(0.0, ((blurX + blurY) / 2.0));
-    drawCanvasEffectPass(({ final __callArgument0:Dynamic = dest; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), (cast ((cast ((cast radius : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(radius) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument2:Dynamic = dest; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }), (cast ((cast ((cast radius : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(radius) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument0:Dynamic = dest; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), (cast ((cast ((cast radius : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(radius) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final defaultCanvasBlurEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
@@ -29,6 +29,6 @@ class CanvasBlurEffect {
   });
 
   public static function registerCanvasBlurEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast 'BlurEffect' : String), ({ final __callArgument3:Dynamic = defaultCanvasBlurEffectRunner; __callArgument3; }));
+    registerCanvasRenderEffect(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast 'BlurEffect' : String), ({ final __callArgument5:Dynamic = defaultCanvasBlurEffectRunner; __callArgument5; }));
   }
 }

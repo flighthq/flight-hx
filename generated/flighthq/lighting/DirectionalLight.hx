@@ -23,8 +23,8 @@ class DirectionalLight {
 
   public static function createDirectionalLight(?options:DirectionalLightOptions):flighthq.types.DirectionalLight {
     var direction:Null<Vector3Like> = cast _Runtime.UNDEFINED;
-    direction = ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.direction; });
-    return cast (cast createEntity((cast { castsShadow: _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.castsShadow; }), function():Dynamic return cast false), color: _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.color; }), function():Dynamic return cast 4294967295.0), direction: _Runtime.select(direction, function():Dynamic return cast (cast cloneVector3(({ final __callArgument4:Dynamic = direction; __callArgument4; })) : Vector3), function():Dynamic return cast (cast createVector3(({ final __callArgument5:Dynamic = 0.0; __callArgument5; }), ({ final __callArgument6:Dynamic = -1.0; __callArgument6; }), ({ final __callArgument7:Dynamic = 0.0; __callArgument7; })) : Vector3)), intensity: _Runtime.coalesce(({ final __typedStruct8 = options; __typedStruct8 == null ? _Runtime.UNDEFINED : __typedStruct8.intensity; }), function():Dynamic return cast 1.0), kind: DirectionalLightKind, normalBias: _Runtime.coalesce(({ final __typedStruct9 = options; __typedStruct9 == null ? _Runtime.UNDEFINED : __typedStruct9.normalBias; }), function():Dynamic return cast 0.0), pcfRadius: _Runtime.coalesce(({ final __typedStruct10 = options; __typedStruct10 == null ? _Runtime.UNDEFINED : __typedStruct10.pcfRadius; }), function():Dynamic return cast 0.0), shadowBias: _Runtime.coalesce(({ final __typedStruct11 = options; __typedStruct11 == null ? _Runtime.UNDEFINED : __typedStruct11.shadowBias; }), function():Dynamic return cast 0.0) } : Dynamic)) : { >Entity, var castsShadow:Bool; var color:Float; var direction:Vector3; var intensity:Float; var kind:String; var normalBias:Float; var pcfRadius:Float; var shadowBias:Float; });
+    direction = ({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.direction; });
+    return cast (cast createEntity((cast { castsShadow: _Runtime.coalesce(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.castsShadow; }), function():Dynamic return cast false), color: _Runtime.coalesce(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.color; }), function():Dynamic return cast 4294967295.0), direction: _Runtime.select(direction, function():Dynamic return cast (cast cloneVector3(({ final __callArgument7:Dynamic = direction; __callArgument7; })) : Vector3), function():Dynamic return cast (cast createVector3(({ final __callArgument9:Dynamic = 0.0; __callArgument9; }), ({ final __callArgument10:Dynamic = -1.0; __callArgument10; }), ({ final __callArgument11:Dynamic = 0.0; __callArgument11; })) : Vector3)), intensity: _Runtime.coalesce(({ final __typedStruct15 = options; __typedStruct15 == null ? _Runtime.UNDEFINED : __typedStruct15.intensity; }), function():Dynamic return cast 1.0), kind: DirectionalLightKind, normalBias: _Runtime.coalesce(({ final __typedStruct16 = options; __typedStruct16 == null ? _Runtime.UNDEFINED : __typedStruct16.normalBias; }), function():Dynamic return cast 0.0), pcfRadius: _Runtime.coalesce(({ final __typedStruct17 = options; __typedStruct17 == null ? _Runtime.UNDEFINED : __typedStruct17.pcfRadius; }), function():Dynamic return cast 0.0), shadowBias: _Runtime.coalesce(({ final __typedStruct18 = options; __typedStruct18 == null ? _Runtime.UNDEFINED : __typedStruct18.shadowBias; }), function():Dynamic return cast 0.0) } : Dynamic)) : { >Entity, var castsShadow:Bool; var color:Float; var direction:Vector3; var intensity:Float; var kind:String; var normalBias:Float; var pcfRadius:Float; var shadowBias:Float; });
     return cast null;
   }
 
@@ -38,7 +38,7 @@ class DirectionalLight {
     lz = z;
     len = HxMath.sqrt((((lx * lx) + (ly * ly)) + (lz * lz)));
     if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
-      setVector3(({ final __callArgument12:Dynamic = out.direction; __callArgument12; }), (cast (lx / len) : Float), (cast (ly / len) : Float), (cast (lz / len) : Float));
+      setVector3(({ final __callArgument33:Dynamic = out.direction; __callArgument33; }), (cast (lx / len) : Float), (cast (ly / len) : Float), (cast (lz / len) : Float));
     }
   }
 
@@ -52,7 +52,7 @@ class DirectionalLight {
     dz = (toZ - fromZ);
     len = HxMath.sqrt((((dx * dx) + (dy * dy)) + (dz * dz)));
     if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
-      setVector3(({ final __callArgument13:Dynamic = out.direction; __callArgument13; }), (cast (dx / len) : Float), (cast (dy / len) : Float), (cast (dz / len) : Float));
+      setVector3(({ final __callArgument35:Dynamic = out.direction; __callArgument35; }), (cast (dx / len) : Float), (cast (dy / len) : Float), (cast (dz / len) : Float));
     }
   }
 }

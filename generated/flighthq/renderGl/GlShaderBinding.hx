@@ -21,7 +21,7 @@ class GlShaderBinding {
 
   @:noCompletion
   public static function getGlMaterialShader(state:GlRenderState, kind:Kind):Null<GlBitmapShader> {
-    return cast _Runtime.coalesce(({ final __collection2:Dynamic = (cast (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime) : { @:optional var materialBitmapShaderMap:Null<flighthq._internal._Map<String, GlBitmapShader>>; }).materialBitmapShaderMap; __collection2 == null ? _Runtime.UNDEFINED : ((cast __collection2 : flighthq._internal._Map<String, GlBitmapShader>).get(kind)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection4:Dynamic = (cast (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime) : { @:optional var materialBitmapShaderMap:Null<flighthq._internal._Map<String, GlBitmapShader>>; }).materialBitmapShaderMap; __collection4 == null ? _Runtime.UNDEFINED : ((cast __collection4 : flighthq._internal._Map<String, GlBitmapShader>).get(kind)); }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -34,8 +34,8 @@ class GlShaderBinding {
   @:noCompletion
   public static function registerGlMaterialShader(state:GlRenderState, kind:Kind, shader:GlBitmapShader):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : GlRenderStateRuntime);
-    ((cast ({ final __nullishOwner6 = runtime; final __nullishValue7:Null<flighthq._internal._Map<String, GlBitmapShader>> = cast __nullishOwner6.materialBitmapShaderMap; __nullishValue7 == null ? (__nullishOwner6.materialBitmapShaderMap = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, GlBitmapShader>>)) : (cast __nullishValue7 : Null<flighthq._internal._Map<String, GlBitmapShader>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast shader)));
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlRenderStateRuntime);
+    ((cast ({ final __nullishOwner9 = runtime; final __nullishValue10:Null<flighthq._internal._Map<String, GlBitmapShader>> = cast __nullishOwner9.materialBitmapShaderMap; __nullishValue10 == null ? (__nullishOwner9.materialBitmapShaderMap = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Null<flighthq._internal._Map<String, GlBitmapShader>>)) : (cast __nullishValue10 : Null<flighthq._internal._Map<String, GlBitmapShader>>); }) : flighthq._internal._Map<Dynamic, Dynamic>).set(kind, (cast shader)));
   }
 
   @:noCompletion
@@ -43,30 +43,30 @@ class GlShaderBinding {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var resolver:Null<RenderProxy2D->Null<GlBitmapShader>> = cast _Runtime.UNDEFINED;
     var material:Null<Material> = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument11:Dynamic = state; __callArgument11; })) : GlRenderStateRuntime);
     resolver = runtime.webglShaderBindingResolver;
     if ((cast !_Runtime.strictEquals(resolver, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var shader:Null<GlBitmapShader> = (cast resolver(({ final __callArgument9:Dynamic = renderProxy; __callArgument9; })) : Null<GlBitmapShader>);
+      var shader:Null<GlBitmapShader> = (cast resolver(({ final __callArgument13:Dynamic = renderProxy; __callArgument13; })) : Null<GlBitmapShader>);
       if ((cast !_Runtime.strictEquals(shader, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast shader; }
     }
     material = (cast renderProxy : RenderProxy2D).material;
     if ((cast !_Runtime.strictEquals(material, null) : Bool)) {
-      var shader:Null<GlBitmapShader> = ({ final __collection10:Dynamic = runtime.materialBitmapShaderMap; __collection10 == null ? _Runtime.UNDEFINED : ((cast __collection10 : flighthq._internal._Map<String, GlBitmapShader>).get((cast material : Material).kind)); });
+      var shader:Null<GlBitmapShader> = ({ final __collection15:Dynamic = runtime.materialBitmapShaderMap; __collection15 == null ? _Runtime.UNDEFINED : ((cast __collection15 : flighthq._internal._Map<String, GlBitmapShader>).get((cast material : Material).kind)); });
       if ((cast !_Runtime.strictEquals(shader, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast shader; }
     }
-    return cast (cast ensureDefaultGlBitmapShader(({ final __callArgument11:Dynamic = state; __callArgument11; })) : GlBitmapShader);
+    return cast (cast ensureDefaultGlBitmapShader(({ final __callArgument16:Dynamic = state; __callArgument16; })) : GlBitmapShader);
     return cast null;
   }
 
   @:noCompletion
   public static function setGlShader(state:GlRenderState, node:Node2D, shader:Null<GlBitmapShader>):Void {
     var renderProxy:RenderProxy2D = cast _Runtime.UNDEFINED;
-    renderProxy = (cast getOrCreateRenderProxy2D(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = node; __callArgument13; })) : RenderProxy2D);
+    renderProxy = (cast getOrCreateRenderProxy2D(({ final __callArgument18:Dynamic = state; __callArgument18; }), ({ final __callArgument19:Dynamic = node; __callArgument19; })) : RenderProxy2D);
     if ((cast _Runtime.strictEquals(shader, null) : Bool)) {
       ((cast GlShaderBinding._shaderBindings__glShaderBinding : flighthq._internal._WeakMap<RenderProxy2D, GlBitmapShader>).delete_(renderProxy));
       return;
     }
     ((cast GlShaderBinding._shaderBindings__glShaderBinding : flighthq._internal._WeakMap<RenderProxy2D, GlBitmapShader>).set(renderProxy, (cast shader)));
-    ((cast (cast getGlRenderStateRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : GlRenderStateRuntime) : { @:optional var webglShaderBindingResolver:Null<RenderProxy2D->Null<GlBitmapShader>>; }).webglShaderBindingResolver = cast (getGlShader : Null<RenderProxy2D->Null<GlBitmapShader>>));
+    ((cast (cast getGlRenderStateRuntime(({ final __callArgument22:Dynamic = state; __callArgument22; })) : GlRenderStateRuntime) : { @:optional var webglShaderBindingResolver:Null<RenderProxy2D->Null<GlBitmapShader>>; }).webglShaderBindingResolver = cast (getGlShader : Null<RenderProxy2D->Null<GlBitmapShader>>));
   }
 }

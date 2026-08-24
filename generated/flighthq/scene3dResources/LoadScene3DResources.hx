@@ -33,7 +33,7 @@ class LoadScene3DResources {
         var loaded:Float = cast _Runtime.UNDEFINED;
         var pending:Array<flighthq._internal._Promise<flighthq._internal._Nothing>> = cast _Runtime.UNDEFINED;
         var progress:Null<Signal<Scene3DResourceLoadProgress->Void>> = cast _Runtime.UNDEFINED;
-        resources = (cast updateScene3DResourceStreaming(({ final __callArgument5:Dynamic = scene; __callArgument5; }), ({ final __callArgument6:Dynamic = resolver; __callArgument6; }), (cast options : Dynamic)) : Scene3DResources);
+        resources = (cast updateScene3DResourceStreaming(({ final __callArgument7:Dynamic = scene; __callArgument7; }), ({ final __callArgument8:Dynamic = resolver; __callArgument8; }), (cast options : Dynamic)) : Scene3DResources);
         refs = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
         {
           var i:Float = 0.0;
@@ -53,7 +53,7 @@ class LoadScene3DResources {
         total = (cast refs : flighthq._internal._Set<ImageResourceReference>).size;
         loaded = 0.0;
         pending = cast ([] : Array<Dynamic>);
-        progress = ({ final __typedStruct7 = options; __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.progress; });
+        progress = ({ final __typedStruct11 = options; __typedStruct11 == null ? _Runtime.UNDEFINED : __typedStruct11.progress; });
         for (ref in _Runtime.iterable(refs)) {
           if ((cast ((cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved) : Bool) || (cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed) : Bool)) : Bool)) {
             loaded++;
@@ -66,18 +66,18 @@ class LoadScene3DResources {
             if ((cast !_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ loaded: loaded, total: total }]]), 1); }
           }] : Array<Dynamic>))] : Array<Dynamic>));
         }
-        var __flowBranch10:Dynamic;
+        var __flowBranch14:Dynamic;
         if ((cast !_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          __flowBranch10 = flighthq._internal._Async.protect(function():Dynamic {
+          __flowBranch14 = flighthq._internal._Async.protect(function():Dynamic {
             _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ loaded: loaded, total: total }]]), 1);
             return flighthq._internal._Async.flowNormal();
           });
         } else {
-          __flowBranch10 = flighthq._internal._Async.flowNormal();
+          __flowBranch14 = flighthq._internal._Async.flowNormal();
         }
-        return flighthq._internal._Async.continueFlow(__flowBranch10, function():Dynamic {
-          return flighthq._internal._Async.flatMap(flighthq._internal._Async.allSettled(pending), function(__awaitValue11:Dynamic):Dynamic {
-            __awaitValue11;
+        return flighthq._internal._Async.continueFlow(__flowBranch14, function():Dynamic {
+          return flighthq._internal._Async.flatMap(flighthq._internal._Async.allSettled(pending), function(__awaitValue15:Dynamic):Dynamic {
+            __awaitValue15;
             return flighthq._internal._Async.flowNormal();
           });
         });
@@ -95,8 +95,8 @@ class LoadScene3DResources {
         for (entry in _Runtime.iterable(((cast runtime.inFlight : flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).values()))) {
           _Runtime.callProperty(promises, 'push', cast ([entry.promise] : Array<Dynamic>));
         }
-        return flighthq._internal._Async.flatMap(flighthq._internal._Async.allSettled(promises), function(__awaitValue16:Dynamic):Dynamic {
-          __awaitValue16;
+        return flighthq._internal._Async.flatMap(flighthq._internal._Async.allSettled(promises), function(__awaitValue20:Dynamic):Dynamic {
+          __awaitValue20;
           return flighthq._internal._Async.flowNormal();
         });
       })

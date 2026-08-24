@@ -28,7 +28,7 @@ class ParseBasis {
   }
 
   public static function parseBasis(bytes:flighthq._internal._UInt8Array):Null<TextureContainer> {
-    return cast (cast ParseBasis.parseBasisInternal__parseBasis(({ final __callArgument1:Dynamic = bytes; __callArgument1; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<TextureContainer>);
+    return cast (cast (#if js _Runtime.callValue(ParseBasis.parseBasisInternal__parseBasis, cast ([({ final __callArgument3:Dynamic = bytes; __callArgument3; })] : Array<Dynamic>)) #else ParseBasis.parseBasisInternal__parseBasis(({ final __callArgument2:Dynamic = bytes; __callArgument2; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Null<TextureContainer>);
     return cast null;
   }
 
@@ -45,21 +45,21 @@ class ParseBasis {
     var baseWidth:Float = cast _Runtime.UNDEFINED;
     var baseHeight:Float = cast _Runtime.UNDEFINED;
     var maxLevel:Float = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast ParseBasis.hasBasisSignature__parseBasis(({ final __callArgument2:Dynamic = bytes; __callArgument2; })) : Bool) : Bool) : Bool)) { return cast (cast ParseBasis.reject__parseBasis((cast failure : Dynamic), ({ final __callArgument3:Dynamic = 'container-unrecognized'; __callArgument3; })) : Null<TextureContainer>); }
-    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast ParseBasis.basisHeaderMinSize__parseBasis : Float)) : Bool)) { return cast (cast ParseBasis.reject__parseBasis((cast failure : Dynamic), ({ final __callArgument4:Dynamic = 'header-truncated'; __callArgument4; })) : Null<TextureContainer>); }
-    header = (cast createByteReader(({ final __callArgument5:Dynamic = bytes; __callArgument5; }), (cast ParseBasis.basisTotalSlicesOffset__parseBasis : Float)) : ByteReader);
-    totalSlices = (cast readByteReaderU24(({ final __callArgument6:Dynamic = header; __callArgument6; })) : Float);
-    totalImages = (cast readByteReaderU24(({ final __callArgument7:Dynamic = header; __callArgument7; })) : Float);
+    if ((cast !(cast (cast ParseBasis.hasBasisSignature__parseBasis(({ final __callArgument4:Dynamic = bytes; __callArgument4; })) : Bool) : Bool) : Bool)) { return cast (cast ParseBasis.reject__parseBasis((cast failure : Dynamic), ({ final __callArgument6:Dynamic = 'container-unrecognized'; __callArgument6; })) : Null<TextureContainer>); }
+    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast ParseBasis.basisHeaderMinSize__parseBasis : Float)) : Bool)) { return cast (cast ParseBasis.reject__parseBasis((cast failure : Dynamic), ({ final __callArgument8:Dynamic = 'header-truncated'; __callArgument8; })) : Null<TextureContainer>); }
+    header = (cast createByteReader(({ final __callArgument10:Dynamic = bytes; __callArgument10; }), (cast ParseBasis.basisTotalSlicesOffset__parseBasis : Float)) : ByteReader);
+    totalSlices = (cast readByteReaderU24(({ final __callArgument12:Dynamic = header; __callArgument12; })) : Float);
+    totalImages = (cast readByteReaderU24(({ final __callArgument14:Dynamic = header; __callArgument14; })) : Float);
     format = _Runtime.getIndex(ParseBasis.basisTexFormat__parseBasis, flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast ParseBasis.basisTexFormatOffset__parseBasis : Float)));
-    if ((cast _Runtime.strictEquals(format, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast ParseBasis.reject__parseBasis((cast failure : Dynamic), ({ final __callArgument8:Dynamic = 'format-unsupported'; __callArgument8; })) : Null<TextureContainer>); }
-    if ((cast _Runtime.strictEquals(totalSlices, 0.0) : Bool)) { return cast (cast ParseBasis.reject__parseBasis((cast failure : Dynamic), ({ final __callArgument9:Dynamic = 'structure-invalid'; __callArgument9; })) : Null<TextureContainer>); }
+    if ((cast _Runtime.strictEquals(format, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast ParseBasis.reject__parseBasis((cast failure : Dynamic), ({ final __callArgument16:Dynamic = 'format-unsupported'; __callArgument16; })) : Null<TextureContainer>); }
+    if ((cast _Runtime.strictEquals(totalSlices, 0.0) : Bool)) { return cast (cast ParseBasis.reject__parseBasis((cast failure : Dynamic), ({ final __callArgument18:Dynamic = 'structure-invalid'; __callArgument18; })) : Null<TextureContainer>); }
     shape = (cast ParseBasis.getBasisTextureShape__parseBasis((cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast ParseBasis.basisTexTypeOffset__parseBasis : Float)) : Float), (cast totalImages : Float)) : Null<{ var depth:Float; var faces:Float; var layers:Float; }>);
-    if ((cast _Runtime.strictEquals(shape, null) : Bool)) { return cast (cast ParseBasis.reject__parseBasis((cast failure : Dynamic), ({ final __callArgument10:Dynamic = 'format-unsupported'; __callArgument10; })) : Null<TextureContainer>); }
-    sliceDescReader = (cast createByteReader(({ final __callArgument11:Dynamic = bytes; __callArgument11; }), (cast ParseBasis.basisSliceDescOffsetField__parseBasis : Float)) : ByteReader);
-    sliceDescOffset = (cast readByteReaderU32(({ final __callArgument12:Dynamic = sliceDescReader; __callArgument12; })) : Float);
-    table = (cast createByteReader(({ final __callArgument13:Dynamic = bytes; __callArgument13; }), (cast sliceDescOffset : Float)) : ByteReader);
-    if ((cast !(cast (cast hasByteReaderBytes(({ final __callArgument14:Dynamic = table; __callArgument14; }), (cast (totalSlices * ParseBasis.basisSliceDescSize__parseBasis) : Float)) : Bool) : Bool) : Bool)) {
-      return cast (cast ParseBasis.reject__parseBasis((cast failure : Dynamic), ({ final __callArgument15:Dynamic = 'level-range-out-of-bounds'; __callArgument15; })) : Null<TextureContainer>);
+    if ((cast _Runtime.strictEquals(shape, null) : Bool)) { return cast (cast ParseBasis.reject__parseBasis((cast failure : Dynamic), ({ final __callArgument20:Dynamic = 'format-unsupported'; __callArgument20; })) : Null<TextureContainer>); }
+    sliceDescReader = (cast createByteReader(({ final __callArgument22:Dynamic = bytes; __callArgument22; }), (cast ParseBasis.basisSliceDescOffsetField__parseBasis : Float)) : ByteReader);
+    sliceDescOffset = (cast readByteReaderU32(({ final __callArgument24:Dynamic = sliceDescReader; __callArgument24; })) : Float);
+    table = (cast createByteReader(({ final __callArgument26:Dynamic = bytes; __callArgument26; }), (cast sliceDescOffset : Float)) : ByteReader);
+    if ((cast !(cast (cast hasByteReaderBytes(({ final __callArgument28:Dynamic = table; __callArgument28; }), (cast (totalSlices * ParseBasis.basisSliceDescSize__parseBasis) : Float)) : Bool) : Bool) : Bool)) {
+      return cast (cast ParseBasis.reject__parseBasis((cast failure : Dynamic), ({ final __callArgument30:Dynamic = 'level-range-out-of-bounds'; __callArgument30; })) : Null<TextureContainer>);
     }
     levels = (cast cast ([] : Array<Dynamic>));
     baseWidth = 0.0;
@@ -68,17 +68,17 @@ class ParseBasis {
     {
       var slice:Float = 0.0;
       while ((cast ((cast slice : Float) < (cast totalSlices : Float)) : Bool)) {
-        var imageIndex:Float = (cast readByteReaderU24(({ final __callArgument16:Dynamic = table; __callArgument16; })) : Float);
-        var levelIndex:Float = (cast readByteReaderU8(({ final __callArgument17:Dynamic = table; __callArgument17; })) : Float);
-        (cast readByteReaderU8(({ final __callArgument18:Dynamic = table; __callArgument18; })) : Float);
-        var width:Float = (cast readByteReaderU16(({ final __callArgument19:Dynamic = table; __callArgument19; })) : Float);
-        var height:Float = (cast readByteReaderU16(({ final __callArgument20:Dynamic = table; __callArgument20; })) : Float);
-        (cast readByteReaderU16(({ final __callArgument21:Dynamic = table; __callArgument21; })) : Float);
-        (cast readByteReaderU16(({ final __callArgument22:Dynamic = table; __callArgument22; })) : Float);
-        var byteOffset:Float = (cast readByteReaderU32(({ final __callArgument23:Dynamic = table; __callArgument23; })) : Float);
-        var byteLength:Float = (cast readByteReaderU32(({ final __callArgument24:Dynamic = table; __callArgument24; })) : Float);
-        (cast readByteReaderU16(({ final __callArgument25:Dynamic = table; __callArgument25; })) : Float);
-        if ((cast ((cast (byteOffset + byteLength) : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) { return cast (cast ParseBasis.reject__parseBasis((cast failure : Dynamic), ({ final __callArgument26:Dynamic = 'level-range-out-of-bounds'; __callArgument26; })) : Null<TextureContainer>); }
+        var imageIndex:Float = (cast readByteReaderU24(({ final __callArgument32:Dynamic = table; __callArgument32; })) : Float);
+        var levelIndex:Float = (cast readByteReaderU8(({ final __callArgument34:Dynamic = table; __callArgument34; })) : Float);
+        (cast readByteReaderU8(({ final __callArgument36:Dynamic = table; __callArgument36; })) : Float);
+        var width:Float = (cast readByteReaderU16(({ final __callArgument38:Dynamic = table; __callArgument38; })) : Float);
+        var height:Float = (cast readByteReaderU16(({ final __callArgument40:Dynamic = table; __callArgument40; })) : Float);
+        (cast readByteReaderU16(({ final __callArgument42:Dynamic = table; __callArgument42; })) : Float);
+        (cast readByteReaderU16(({ final __callArgument44:Dynamic = table; __callArgument44; })) : Float);
+        var byteOffset:Float = (cast readByteReaderU32(({ final __callArgument46:Dynamic = table; __callArgument46; })) : Float);
+        var byteLength:Float = (cast readByteReaderU32(({ final __callArgument48:Dynamic = table; __callArgument48; })) : Float);
+        (cast readByteReaderU16(({ final __callArgument50:Dynamic = table; __callArgument50; })) : Float);
+        if ((cast ((cast (byteOffset + byteLength) : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) { return cast (cast ParseBasis.reject__parseBasis((cast failure : Dynamic), ({ final __callArgument52:Dynamic = 'level-range-out-of-bounds'; __callArgument52; })) : Null<TextureContainer>); }
         if ((cast ((cast _Runtime.strictEquals(imageIndex, 0.0) : Bool) && (cast _Runtime.strictEquals(levelIndex, 0.0) : Bool)) : Bool)) {
           (baseWidth = cast (width : Dynamic));
           (baseHeight = cast (height : Dynamic));
@@ -88,7 +88,7 @@ class ParseBasis {
         (slice = cast ((slice + 1.0) : Dynamic));
       }
     }
-    return cast { depth: (cast shape : { var depth:Float; var faces:Float; var layers:Float; }).depth, faces: (cast shape : { var depth:Float; var faces:Float; var layers:Float; }).faces, format: format, height: _Runtime.orValue(baseHeight, function():Dynamic return cast _Runtime.coalesce(({ final __typedStruct27 = flighthq._internal._StaticIndex.readArray(levels, 0.0); __typedStruct27 == null ? _Runtime.UNDEFINED : (cast __typedStruct27 : { var height:Float; }).height; }), function():Dynamic return cast 0.0)), layers: (cast shape : { var depth:Float; var faces:Float; var layers:Float; }).layers, levels: levels, mipLevels: HxMath.max(1.0, maxLevel), supercompression: 'None', width: _Runtime.orValue(baseWidth, function():Dynamic return cast _Runtime.coalesce(({ final __typedStruct28 = flighthq._internal._StaticIndex.readArray(levels, 0.0); __typedStruct28 == null ? _Runtime.UNDEFINED : (cast __typedStruct28 : { var width:Float; }).width; }), function():Dynamic return cast 0.0)) };
+    return cast { depth: (cast shape : { var depth:Float; var faces:Float; var layers:Float; }).depth, faces: (cast shape : { var depth:Float; var faces:Float; var layers:Float; }).faces, format: format, height: _Runtime.orValue(baseHeight, function():Dynamic return cast _Runtime.coalesce(({ final __typedStruct54 = flighthq._internal._StaticIndex.readArray(levels, 0.0); __typedStruct54 == null ? _Runtime.UNDEFINED : (cast __typedStruct54 : { var height:Float; }).height; }), function():Dynamic return cast 0.0)), layers: (cast shape : { var depth:Float; var faces:Float; var layers:Float; }).layers, levels: levels, mipLevels: HxMath.max(1.0, maxLevel), supercompression: 'None', width: _Runtime.orValue(baseWidth, function():Dynamic return cast _Runtime.coalesce(({ final __typedStruct55 = flighthq._internal._StaticIndex.readArray(levels, 0.0); __typedStruct55 == null ? _Runtime.UNDEFINED : (cast __typedStruct55 : { var width:Float; }).width; }), function():Dynamic return cast 0.0)) };
     return cast null;
   }
 

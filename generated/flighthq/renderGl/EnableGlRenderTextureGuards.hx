@@ -24,7 +24,7 @@ class EnableGlRenderTextureGuards {
   }
 
   public static function enableGlRenderTextureGuards(state:GlRenderState):Void {
-    setGlRenderTextureGuard(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast EnableGlRenderTextureGuards.warnGlRenderTextureUnavailable__enableGlRenderTextureGuards : Dynamic));
+    setGlRenderTextureGuard(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast EnableGlRenderTextureGuards.warnGlRenderTextureUnavailable__enableGlRenderTextureGuards : Dynamic));
     ((cast EnableGlRenderTextureGuards._guardedContexts__enableGlRenderTextureGuards : flighthq._internal._WeakSet<flighthq._internal.dom.WebGL2RenderingContext>).add((cast state : GlRenderState).gl));
   }
 
@@ -35,7 +35,7 @@ class EnableGlRenderTextureGuards {
   public static function warnGlRenderTextureUnavailable__enableGlRenderTextureGuards(_state:GlRenderState, renderTexture:RenderTexture, explanation:GlRenderTextureExplanation):Void {
     var writing:Bool = cast _Runtime.UNDEFINED;
     writing = _Runtime.strictEquals(_Runtime.field(explanation, 'status'), 'writing');
-    (cast logOnce((cast 'render-gl:render-texture-' + Std.string(_Runtime.field(explanation, 'status')) + '' : String), ({ final __callArgument3:Dynamic = LogLevel.Warn; __callArgument3; }), (cast { height: _Runtime.field(explanation, 'height'), message: ((cast writing : Bool) ? (cast 'bindGlRenderTexture: the render Texture is still bound for writing; sampling it would be a read-after-write feedback hazard.' : Dynamic) : (cast 'bindGlRenderTexture: the render Texture has not completed renderIntoGlRenderTexture; sampling uses the empty sentinel.' : Dynamic)), renderTexture: renderTexture, status: _Runtime.field(explanation, 'status'), width: _Runtime.field(explanation, 'width') } : Dynamic), ({ final __callArgument4:Dynamic = 'render-gl'; __callArgument4; })) : Bool);
+    (cast logOnce((cast 'render-gl:render-texture-' + Std.string(_Runtime.field(explanation, 'status')) + '' : String), ({ final __callArgument6:Dynamic = LogLevel.Warn; __callArgument6; }), (cast { height: _Runtime.field(explanation, 'height'), message: ((cast writing : Bool) ? (cast 'bindGlRenderTexture: the render Texture is still bound for writing; sampling it would be a read-after-write feedback hazard.' : Dynamic) : (cast 'bindGlRenderTexture: the render Texture has not completed renderIntoGlRenderTexture; sampling uses the empty sentinel.' : Dynamic)), renderTexture: renderTexture, status: _Runtime.field(explanation, 'status'), width: _Runtime.field(explanation, 'width') } : Dynamic), ({ final __callArgument7:Dynamic = 'render-gl'; __callArgument7; })) : Bool);
   }
 
   public static final _guardedContexts__enableGlRenderTextureGuards:flighthq._internal._WeakSet<flighthq._internal.dom.WebGL2RenderingContext> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);

@@ -20,7 +20,7 @@ class Broadphase {
   }
 
   public static function synchronizePhysics2DSweptBroadphase(world:Physics2DWorld, dt:Float):Void {
-    Broadphase.synchronizePhysics2DBroadphaseBounds__broadphase(({ final __callArgument1:Dynamic = world; __callArgument1; }), (cast dt : Float));
+    Broadphase.synchronizePhysics2DBroadphaseBounds__broadphase(({ final __callArgument2:Dynamic = world; __callArgument2; }), (cast dt : Float));
   }
 
   public static function synchronizePhysics2DBroadphaseBounds__broadphase(world:Physics2DWorld, dt:Float):Void {
@@ -28,13 +28,13 @@ class Broadphase {
     scratch = (cast Broadphase.acquirePhysics2DBroadphaseScratch__broadphase() : Physics2DBroadphaseScratch__broadphase);
     try {
       try {
-        Broadphase.synchronizePhysics2DBroadphaseBoundsWithScratch__broadphase(({ final __callArgument2:Dynamic = world; __callArgument2; }), (cast dt : Float), (cast scratch : Dynamic));
+        Broadphase.synchronizePhysics2DBroadphaseBoundsWithScratch__broadphase(({ final __callArgument4:Dynamic = world; __callArgument4; }), (cast dt : Float), (cast scratch : Dynamic));
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError3:Dynamic) {
+    } catch (__finallyError6:Dynamic) {
       {
         Broadphase.releasePhysics2DBroadphaseScratch__broadphase((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError3);
+      _Runtime.throwValue(__finallyError6);
     }
     {
       Broadphase.releasePhysics2DBroadphaseScratch__broadphase((cast scratch : Dynamic));
@@ -49,8 +49,8 @@ class Broadphase {
       var maxY:Float = -HxMath.POSITIVE_INFINITY;
       var rotationRadiusSquared:Float = 0.0;
       for (collider in _Runtime.iterable((cast body : RigidBody2D).colliders)) {
-        updatePhysics2DColliderWorldShape(({ final __callArgument8:Dynamic = collider; __callArgument8; }), ({ final __callArgument9:Dynamic = body; __callArgument9; }));
-        writePhysics2DColliderBounds(({ final __callArgument10:Dynamic = collider; __callArgument10; }), ({ final __callArgument11:Dynamic = (cast scratch : Physics2DBroadphaseScratch__broadphase).bounds; __callArgument11; }));
+        updatePhysics2DColliderWorldShape(({ final __callArgument11:Dynamic = collider; __callArgument11; }), ({ final __callArgument12:Dynamic = body; __callArgument12; }));
+        writePhysics2DColliderBounds(({ final __callArgument15:Dynamic = collider; __callArgument15; }), ({ final __callArgument16:Dynamic = (cast scratch : Physics2DBroadphaseScratch__broadphase).bounds; __callArgument16; }));
         if ((cast ((cast (cast (cast scratch : Physics2DBroadphaseScratch__broadphase).bounds : { var minX:Float; }).minX : Float) < (cast minX : Float)) : Bool)) { (minX = cast ((cast (cast scratch : Physics2DBroadphaseScratch__broadphase).bounds : { var minX:Float; }).minX : Dynamic)); }
         if ((cast ((cast (cast (cast scratch : Physics2DBroadphaseScratch__broadphase).bounds : { var minY:Float; }).minY : Float) < (cast minY : Float)) : Bool)) { (minY = cast ((cast (cast scratch : Physics2DBroadphaseScratch__broadphase).bounds : { var minY:Float; }).minY : Dynamic)); }
         if ((cast ((cast (cast (cast scratch : Physics2DBroadphaseScratch__broadphase).bounds : { var maxX:Float; }).maxX : Float) > (cast maxX : Float)) : Bool)) { (maxX = cast ((cast (cast scratch : Physics2DBroadphaseScratch__broadphase).bounds : { var maxX:Float; }).maxX : Dynamic)); }

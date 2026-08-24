@@ -30,8 +30,8 @@ class WgpuRenderTexture {
   public static function bindWgpuRenderTexture(state:WgpuRenderState, renderTexture:RenderTexture):Null<WgpuTextureEntry> {
     var entry:Null<WgpuRenderTextureEntry> = cast _Runtime.UNDEFINED;
     entry = (cast WgpuRenderTexture.getWgpuRenderTextureEntry__wgpuRenderTexture(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = renderTexture; __callArgument1; })) : Null<WgpuRenderTextureEntry>);
-    if ((cast _Runtime.strictEquals(({ final __typedStruct2 = entry; __typedStruct2 == null ? _Runtime.UNDEFINED : (cast __typedStruct2 : { var status:WgpuRenderTextureStatus; }).status; }), 'ready') : Bool)) { return cast (cast entry : { var target:WgpuRenderTarget; }).target; }
-    WgpuRenderTexture.notifyGuard__wgpuRenderTexture(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = renderTexture; __callArgument4; }));
+    if ((cast _Runtime.strictEquals(({ final __typedStruct4 = entry; __typedStruct4 == null ? _Runtime.UNDEFINED : (cast __typedStruct4 : { var status:WgpuRenderTextureStatus; }).status; }), 'ready') : Bool)) { return cast (cast entry : { var target:WgpuRenderTarget; }).target; }
+    WgpuRenderTexture.notifyGuard__wgpuRenderTexture(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = renderTexture; __callArgument6; }));
     return cast null;
     return cast null;
   }
@@ -39,26 +39,26 @@ class WgpuRenderTexture {
   public static function destroyWgpuRenderTexture(state:WgpuRenderState, renderTexture:RenderTexture):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var entry:Null<WgpuRenderTextureEntry> = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuRenderStateRuntime);
-    entry = ({ final __collection6:Dynamic = runtime.wgpuRenderTextureCache; __collection6 == null ? _Runtime.UNDEFINED : ((cast __collection6 : flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>).get(renderTexture)); });
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : WgpuRenderStateRuntime);
+    entry = ({ final __collection11:Dynamic = runtime.wgpuRenderTextureCache; __collection11 == null ? _Runtime.UNDEFINED : ((cast __collection11 : flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>).get(renderTexture)); });
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    destroyWgpuRenderTarget(({ final __callArgument7:Dynamic = state; __callArgument7; }), (cast entry : { var target:WgpuRenderTarget; }).target);
+    destroyWgpuRenderTarget(({ final __callArgument12:Dynamic = state; __callArgument12; }), (cast entry : { var target:WgpuRenderTarget; }).target);
     ((cast runtime.wgpuRenderTextureCache : flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>).delete_(renderTexture));
   }
 
   public static function explainWgpuRenderTexture(state:WgpuRenderState, renderTexture:RenderTexture):WgpuRenderTextureExplanation {
     var entry:Null<WgpuRenderTextureEntry> = cast _Runtime.UNDEFINED;
-    entry = (cast WgpuRenderTexture.getWgpuRenderTextureEntry__wgpuRenderTexture(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = renderTexture; __callArgument9; })) : Null<WgpuRenderTextureEntry>);
-    return cast { height: _Runtime.coalesce(({ final __typedStruct11 = ({ final __typedStruct10 = entry; __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : { var target:WgpuRenderTarget; }).target; }); __typedStruct11 == null ? _Runtime.UNDEFINED : (cast __typedStruct11 : { var height:Float; }).height; }), function():Dynamic return cast (cast renderTexture.source : { var height:Float; }).height), status: _Runtime.coalesce(({ final __typedStruct12 = entry; __typedStruct12 == null ? _Runtime.UNDEFINED : (cast __typedStruct12 : { var status:WgpuRenderTextureStatus; }).status; }), function():Dynamic return cast 'unrendered'), width: _Runtime.coalesce(({ final __typedStruct14 = ({ final __typedStruct13 = entry; __typedStruct13 == null ? _Runtime.UNDEFINED : (cast __typedStruct13 : { var target:WgpuRenderTarget; }).target; }); __typedStruct14 == null ? _Runtime.UNDEFINED : (cast __typedStruct14 : { var width:Float; }).width; }), function():Dynamic return cast (cast renderTexture.source : { var width:Float; }).width) };
+    entry = (cast WgpuRenderTexture.getWgpuRenderTextureEntry__wgpuRenderTexture(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = renderTexture; __callArgument15; })) : Null<WgpuRenderTextureEntry>);
+    return cast { height: _Runtime.coalesce(({ final __typedStruct19 = ({ final __typedStruct18 = entry; __typedStruct18 == null ? _Runtime.UNDEFINED : (cast __typedStruct18 : { var target:WgpuRenderTarget; }).target; }); __typedStruct19 == null ? _Runtime.UNDEFINED : (cast __typedStruct19 : { var height:Float; }).height; }), function():Dynamic return cast (cast renderTexture.source : { var height:Float; }).height), status: _Runtime.coalesce(({ final __typedStruct20 = entry; __typedStruct20 == null ? _Runtime.UNDEFINED : (cast __typedStruct20 : { var status:WgpuRenderTextureStatus; }).status; }), function():Dynamic return cast 'unrendered'), width: _Runtime.coalesce(({ final __typedStruct22 = ({ final __typedStruct21 = entry; __typedStruct21 == null ? _Runtime.UNDEFINED : (cast __typedStruct21 : { var target:WgpuRenderTarget; }).target; }); __typedStruct22 == null ? _Runtime.UNDEFINED : (cast __typedStruct22 : { var width:Float; }).width; }), function():Dynamic return cast (cast renderTexture.source : { var width:Float; }).width) };
     return cast null;
   }
 
   @:noCompletion
   public static function getWgpuRenderTextureTarget(state:WgpuRenderState, renderTexture:RenderTexture):Null<flighthq._internal._IndexedAccess<WgpuRenderTextureEntry, String>> {
     var entry:Null<WgpuRenderTextureEntry> = cast _Runtime.UNDEFINED;
-    entry = (cast WgpuRenderTexture.getWgpuRenderTextureEntry__wgpuRenderTexture(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = renderTexture; __callArgument16; })) : Null<WgpuRenderTextureEntry>);
-    if ((cast _Runtime.strictEquals(({ final __typedStruct17 = entry; __typedStruct17 == null ? _Runtime.UNDEFINED : (cast __typedStruct17 : { var status:WgpuRenderTextureStatus; }).status; }), 'ready') : Bool)) { return cast (cast entry : { var target:WgpuRenderTarget; }).target; }
-    WgpuRenderTexture.notifyGuard__wgpuRenderTexture(({ final __callArgument18:Dynamic = state; __callArgument18; }), ({ final __callArgument19:Dynamic = renderTexture; __callArgument19; }));
+    entry = (cast WgpuRenderTexture.getWgpuRenderTextureEntry__wgpuRenderTexture(({ final __callArgument23:Dynamic = state; __callArgument23; }), ({ final __callArgument24:Dynamic = renderTexture; __callArgument24; })) : Null<WgpuRenderTextureEntry>);
+    if ((cast _Runtime.strictEquals(({ final __typedStruct27 = entry; __typedStruct27 == null ? _Runtime.UNDEFINED : (cast __typedStruct27 : { var status:WgpuRenderTextureStatus; }).status; }), 'ready') : Bool)) { return cast (cast entry : { var target:WgpuRenderTarget; }).target; }
+    WgpuRenderTexture.notifyGuard__wgpuRenderTexture(({ final __callArgument28:Dynamic = state; __callArgument28; }), ({ final __callArgument29:Dynamic = renderTexture; __callArgument29; }));
     return cast null;
     return cast null;
   }
@@ -66,40 +66,40 @@ class WgpuRenderTexture {
   @:noCompletion
   public static function invalidateWgpuRenderTexture(state:WgpuRenderState, renderTexture:RenderTexture, status:String = 'unrendered'):Void {
     var entry:Null<WgpuRenderTextureEntry> = cast _Runtime.UNDEFINED;
-    entry = (cast WgpuRenderTexture.getWgpuRenderTextureEntry__wgpuRenderTexture(({ final __callArgument20:Dynamic = state; __callArgument20; }), ({ final __callArgument21:Dynamic = renderTexture; __callArgument21; })) : Null<WgpuRenderTextureEntry>);
+    entry = (cast WgpuRenderTexture.getWgpuRenderTextureEntry__wgpuRenderTexture(({ final __callArgument32:Dynamic = state; __callArgument32; }), ({ final __callArgument33:Dynamic = renderTexture; __callArgument33; })) : Null<WgpuRenderTextureEntry>);
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast entry : { var status:WgpuRenderTextureStatus; }).status = cast (status : WgpuRenderTextureStatus)); }
   }
 
   public static function isWgpuRenderTextureReady(state:WgpuRenderState, renderTexture:RenderTexture):Bool {
     var ready:Bool = cast _Runtime.UNDEFINED;
-    ready = _Runtime.strictEquals(({ final __typedStruct24 = (cast WgpuRenderTexture.getWgpuRenderTextureEntry__wgpuRenderTexture(({ final __callArgument22:Dynamic = state; __callArgument22; }), ({ final __callArgument23:Dynamic = renderTexture; __callArgument23; })) : Null<WgpuRenderTextureEntry>); __typedStruct24 == null ? _Runtime.UNDEFINED : (cast __typedStruct24 : { var status:WgpuRenderTextureStatus; }).status; }), 'ready');
-    if ((cast !(cast ready : Bool) : Bool)) { WgpuRenderTexture.notifyGuard__wgpuRenderTexture(({ final __callArgument25:Dynamic = state; __callArgument25; }), ({ final __callArgument26:Dynamic = renderTexture; __callArgument26; })); }
+    ready = _Runtime.strictEquals(({ final __typedStruct40 = (cast WgpuRenderTexture.getWgpuRenderTextureEntry__wgpuRenderTexture(({ final __callArgument36:Dynamic = state; __callArgument36; }), ({ final __callArgument37:Dynamic = renderTexture; __callArgument37; })) : Null<WgpuRenderTextureEntry>); __typedStruct40 == null ? _Runtime.UNDEFINED : (cast __typedStruct40 : { var status:WgpuRenderTextureStatus; }).status; }), 'ready');
+    if ((cast !(cast ready : Bool) : Bool)) { WgpuRenderTexture.notifyGuard__wgpuRenderTexture(({ final __callArgument41:Dynamic = state; __callArgument41; }), ({ final __callArgument42:Dynamic = renderTexture; __callArgument42; })); }
     return cast ready;
     return cast null;
   }
 
   public static function renderIntoWgpuRenderTexture(state:WgpuRenderState, renderTexture:RenderTexture, callback:WgpuRenderState->Void):Void {
-    writeWgpuRenderTextureTarget(({ final __callArgument27:Dynamic = state; __callArgument27; }), ({ final __callArgument28:Dynamic = renderTexture; __callArgument28; }), (cast function(target:WgpuRenderTarget):Void {
-      beginWgpuRenderPass(({ final __callArgument29:Dynamic = state; __callArgument29; }), ({ final __callArgument30:Dynamic = target; __callArgument30; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    writeWgpuRenderTextureTarget(({ final __callArgument45:Dynamic = state; __callArgument45; }), ({ final __callArgument46:Dynamic = renderTexture; __callArgument46; }), (cast function(target:WgpuRenderTarget):Void {
+      (#if js _Runtime.callValue(beginWgpuRenderPass, cast ([({ final __callArgument49:Dynamic = state; __callArgument49; }), ({ final __callArgument50:Dynamic = target; __callArgument50; })] : Array<Dynamic>)) #else beginWgpuRenderPass(({ final __callArgument47:Dynamic = state; __callArgument47; }), ({ final __callArgument48:Dynamic = target; __callArgument48; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
       try {
         try {
-          callback(({ final __callArgument31:Dynamic = state; __callArgument31; }));
+          callback(({ final __callArgument51:Dynamic = state; __callArgument51; }));
         } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-      } catch (__finallyError32:Dynamic) {
+      } catch (__finallyError53:Dynamic) {
         {
-          endWgpuRenderPass(({ final __callArgument33:Dynamic = state; __callArgument33; }));
+          endWgpuRenderPass(({ final __callArgument54:Dynamic = state; __callArgument54; }));
         }
-        _Runtime.throwValue(__finallyError32);
+        _Runtime.throwValue(__finallyError53);
       }
       {
-        endWgpuRenderPass(({ final __callArgument34:Dynamic = state; __callArgument34; }));
+        endWgpuRenderPass(({ final __callArgument56:Dynamic = state; __callArgument56; }));
       }
     } : Dynamic));
   }
 
   @:noCompletion
   public static function setWgpuRenderTextureGuard(state:WgpuRenderState, guard:Null<WgpuRenderTextureGuard>):Void {
-    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument35:Dynamic = state; __callArgument35; })) : WgpuRenderStateRuntime) : { @:optional var wgpuRenderTextureGuard:Null<WgpuRenderTextureGuard>; }).wgpuRenderTextureGuard = cast (guard : Null<WgpuRenderTextureGuard>));
+    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument71:Dynamic = state; __callArgument71; })) : WgpuRenderStateRuntime) : { @:optional var wgpuRenderTextureGuard:Null<WgpuRenderTextureGuard>; }).wgpuRenderTextureGuard = cast (guard : Null<WgpuRenderTextureGuard>));
   }
 
   @:noCompletion
@@ -107,7 +107,7 @@ class WgpuRenderTexture {
     var entry:WgpuRenderTextureEntry = cast _Runtime.UNDEFINED;
     var previousStatus:WgpuRenderTextureStatus = cast _Runtime.UNDEFINED;
     var rendered:Bool = cast _Runtime.UNDEFINED;
-    entry = (cast WgpuRenderTexture.ensureWgpuRenderTextureEntry__wgpuRenderTexture(({ final __callArgument36:Dynamic = state; __callArgument36; }), ({ final __callArgument37:Dynamic = renderTexture; __callArgument37; })) : WgpuRenderTextureEntry);
+    entry = (cast WgpuRenderTexture.ensureWgpuRenderTextureEntry__wgpuRenderTexture(({ final __callArgument73:Dynamic = state; __callArgument73; }), ({ final __callArgument74:Dynamic = renderTexture; __callArgument74; })) : WgpuRenderTextureEntry);
     previousStatus = entry.status;
     (entry.status = cast ('writing' : WgpuRenderTextureStatus));
     rendered = false;
@@ -115,7 +115,7 @@ class WgpuRenderTexture {
       try {
         var result:T = (cast callback(entry.target) : T);
         (rendered = cast (true : Dynamic));
-        var __returnValue38:Dynamic = result;
+        var __returnValue77:Dynamic = result;
         {
           (entry.status = cast (((cast rendered : Bool) ? (cast 'ready' : Dynamic) : (cast ((cast _Runtime.strictEquals(previousStatus, 'writing') : Bool) ? (cast 'writing' : Dynamic) : (cast 'unrendered' : Dynamic)) : Dynamic)) : WgpuRenderTextureStatus));
           if ((cast rendered : Bool)) {
@@ -123,9 +123,9 @@ class WgpuRenderTexture {
             (renderTexture.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((renderTexture.version + 1.0)), 0) : Float));
           }
         }
-        return cast __returnValue38;
+        return cast __returnValue77;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError39:Dynamic) {
+    } catch (__finallyError78:Dynamic) {
       {
         (entry.status = cast (((cast rendered : Bool) ? (cast 'ready' : Dynamic) : (cast ((cast _Runtime.strictEquals(previousStatus, 'writing') : Bool) ? (cast 'writing' : Dynamic) : (cast 'unrendered' : Dynamic)) : Dynamic)) : WgpuRenderTextureStatus));
         if ((cast rendered : Bool)) {
@@ -133,7 +133,7 @@ class WgpuRenderTexture {
           (renderTexture.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((renderTexture.version + 1.0)), 0) : Float));
         }
       }
-      _Runtime.throwValue(__finallyError39);
+      _Runtime.throwValue(__finallyError78);
     }
     {
       (entry.status = cast (((cast rendered : Bool) ? (cast 'ready' : Dynamic) : (cast ((cast _Runtime.strictEquals(previousStatus, 'writing') : Bool) ? (cast 'writing' : Dynamic) : (cast 'unrendered' : Dynamic)) : Dynamic)) : WgpuRenderTextureStatus));
@@ -154,25 +154,25 @@ class WgpuRenderTexture {
     var entries:flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry> = cast _Runtime.UNDEFINED;
     var entry:Null<WgpuRenderTextureEntry> = cast _Runtime.UNDEFINED;
     descriptor = renderTexture.source;
-    requested = (cast resolveRenderTargetDescriptor(({ final __callArgument40:Dynamic = descriptor; __callArgument40; })) : ResolvedRenderTargetDescriptor);
-    format = (cast WgpuRenderTexture.getWgpuRenderTextureFormat__wgpuRenderTexture(({ final __callArgument41:Dynamic = state; __callArgument41; }), ({ final __callArgument42:Dynamic = requested.format; __callArgument42; })) : String);
+    requested = (cast resolveRenderTargetDescriptor(({ final __callArgument79:Dynamic = descriptor; __callArgument79; })) : ResolvedRenderTargetDescriptor);
+    format = (cast WgpuRenderTexture.getWgpuRenderTextureFormat__wgpuRenderTexture(({ final __callArgument81:Dynamic = state; __callArgument81; }), ({ final __callArgument82:Dynamic = requested.format; __callArgument82; })) : String);
     colorSpace = _Runtime.coalesce(descriptor.colorSpace, function():Dynamic return cast renderTexture.colorSpace);
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument43:Dynamic = state; __callArgument43; })) : WgpuRenderStateRuntime);
-    entries = ({ final __nullishOwner44 = runtime; final __nullishValue45:Null<flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>> = cast __nullishOwner44.wgpuRenderTextureCache; __nullishValue45 == null ? (__nullishOwner44.wgpuRenderTextureCache = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Null<flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>>)) : (cast __nullishValue45 : Null<flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>>); });
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument85:Dynamic = state; __callArgument85; })) : WgpuRenderStateRuntime);
+    entries = ({ final __nullishOwner87 = runtime; final __nullishValue88:Null<flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>> = cast __nullishOwner87.wgpuRenderTextureCache; __nullishValue88 == null ? (__nullishOwner87.wgpuRenderTextureCache = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Null<flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>>)) : (cast __nullishValue88 : Null<flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>>); });
     entry = ((cast entries : flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>).get(renderTexture));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var target:WgpuRenderTarget = (cast createWgpuRenderTarget(({ final __callArgument46:Dynamic = state; __callArgument46; }), (cast requested.width : Float), (cast requested.height : Float), (cast format : String), ({ final __callArgument47:Dynamic = colorSpace; __callArgument47; }), (cast requested.sampleCount : Float)) : WgpuRenderTarget);
+      var target:WgpuRenderTarget = (cast createWgpuRenderTarget(({ final __callArgument89:Dynamic = state; __callArgument89; }), (cast requested.width : Float), (cast requested.height : Float), (cast format : String), ({ final __callArgument90:Dynamic = colorSpace; __callArgument90; }), (cast requested.sampleCount : Float)) : WgpuRenderTarget);
       (target.clearColors = cast (_Runtime.concatArrays([_Runtime.toArray(requested.clearColors)]) : Array<Float>));
       (target.clearDepth = cast (requested.clearDepth : Float));
       (entry = cast ({ status: 'unrendered', target: target } : Dynamic));
       ((cast entries : flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>).set(renderTexture, (cast entry)));
     } else {
       if ((cast !_Runtime.strictEquals((cast (cast entry : { var target:WgpuRenderTarget; }).target : { var format:String; }).format, format) : Bool)) {
-        destroyWgpuRenderTarget(({ final __callArgument48:Dynamic = state; __callArgument48; }), (cast entry : { var target:WgpuRenderTarget; }).target);
-        ((cast entry : { var target:WgpuRenderTarget; }).target = cast ((cast createWgpuRenderTarget(({ final __callArgument49:Dynamic = state; __callArgument49; }), (cast requested.width : Float), (cast requested.height : Float), (cast format : String), ({ final __callArgument50:Dynamic = colorSpace; __callArgument50; }), (cast requested.sampleCount : Float)) : WgpuRenderTarget) : WgpuRenderTarget));
+        destroyWgpuRenderTarget(({ final __callArgument93:Dynamic = state; __callArgument93; }), (cast entry : { var target:WgpuRenderTarget; }).target);
+        ((cast entry : { var target:WgpuRenderTarget; }).target = cast ((cast createWgpuRenderTarget(({ final __callArgument95:Dynamic = state; __callArgument95; }), (cast requested.width : Float), (cast requested.height : Float), (cast format : String), ({ final __callArgument96:Dynamic = colorSpace; __callArgument96; }), (cast requested.sampleCount : Float)) : WgpuRenderTarget) : WgpuRenderTarget));
         ((cast entry : { var status:WgpuRenderTextureStatus; }).status = cast ('unrendered' : WgpuRenderTextureStatus));
       } else {
-        resizeWgpuRenderTarget(({ final __callArgument51:Dynamic = state; __callArgument51; }), (cast entry : { var target:WgpuRenderTarget; }).target, (cast requested.width : Float), (cast requested.height : Float), (cast requested.sampleCount : Float));
+        resizeWgpuRenderTarget(({ final __callArgument99:Dynamic = state; __callArgument99; }), (cast entry : { var target:WgpuRenderTarget; }).target, (cast requested.width : Float), (cast requested.height : Float), (cast requested.sampleCount : Float));
         ((cast (cast entry : { var target:WgpuRenderTarget; }).target : { var colorSpace:RenderTargetColorSpace; }).colorSpace = cast (colorSpace : RenderTargetColorSpace));
       }
       ((cast (cast entry : { var target:WgpuRenderTarget; }).target : { var clearColors:Array<Float>; }).clearColors = cast (_Runtime.concatArrays([_Runtime.toArray(requested.clearColors)]) : Array<Float>));
@@ -183,7 +183,7 @@ class WgpuRenderTexture {
   }
 
   public static function getWgpuRenderTextureEntry__wgpuRenderTexture(state:WgpuRenderState, renderTexture:RenderTexture):Null<WgpuRenderTextureEntry> {
-    return cast ({ final __collection54:Dynamic = (cast (cast getWgpuRenderStateRuntime(({ final __callArgument53:Dynamic = state; __callArgument53; })) : WgpuRenderStateRuntime) : { @:optional var wgpuRenderTextureCache:Null<flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>>; }).wgpuRenderTextureCache; __collection54 == null ? _Runtime.UNDEFINED : ((cast __collection54 : flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>).get(renderTexture)); });
+    return cast ({ final __collection105:Dynamic = (cast (cast getWgpuRenderStateRuntime(({ final __callArgument103:Dynamic = state; __callArgument103; })) : WgpuRenderStateRuntime) : { @:optional var wgpuRenderTextureCache:Null<flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>>; }).wgpuRenderTextureCache; __collection105 == null ? _Runtime.UNDEFINED : ((cast __collection105 : flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>).get(renderTexture)); });
     return cast null;
   }
 
@@ -195,6 +195,6 @@ class WgpuRenderTexture {
   }
 
   public static function notifyGuard__wgpuRenderTexture(state:WgpuRenderState, renderTexture:RenderTexture):Void {
-    _Runtime.callOptionalValue((cast (cast getWgpuRenderStateRuntime(({ final __callArgument57:Dynamic = state; __callArgument57; })) : WgpuRenderStateRuntime) : { @:optional var wgpuRenderTextureGuard:Null<WgpuRenderTextureGuard>; }).wgpuRenderTextureGuard, cast ([state, renderTexture, (cast explainWgpuRenderTexture(({ final __callArgument58:Dynamic = state; __callArgument58; }), ({ final __callArgument59:Dynamic = renderTexture; __callArgument59; })) : WgpuRenderTextureExplanation)] : Array<Dynamic>));
+    _Runtime.callOptionalValue((cast (cast getWgpuRenderStateRuntime(({ final __callArgument110:Dynamic = state; __callArgument110; })) : WgpuRenderStateRuntime) : { @:optional var wgpuRenderTextureGuard:Null<WgpuRenderTextureGuard>; }).wgpuRenderTextureGuard, cast ([state, renderTexture, (cast explainWgpuRenderTexture(({ final __callArgument112:Dynamic = state; __callArgument112; }), ({ final __callArgument113:Dynamic = renderTexture; __callArgument113; })) : WgpuRenderTextureExplanation)] : Array<Dynamic>));
   }
 }

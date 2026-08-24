@@ -83,14 +83,14 @@ class GlTilemap {
     tileHeight = __destructure0.tileHeight;
     tileWidth = __destructure0.tileWidth;
     tiles = __destructure0.tiles;
-    if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast !(cast (cast hasTextureSource(({ final __callArgument1:Dynamic = atlas.texture; __callArgument1; })) : Bool) : Bool) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast !(cast (cast hasTextureSource(({ final __callArgument2:Dynamic = atlas.texture; __callArgument2; })) : Bool) : Bool) : Bool)) : Bool)) { return; }
     if ((cast ((cast _Runtime.strictEquals(columns, 0.0) : Bool) || (cast _Runtime.strictEquals(rows, 0.0) : Bool)) : Bool)) { return; }
-    (cast ensureGlQuadBatchShader(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlQuadBatchShader);
+    (cast ensureGlQuadBatchShader(({ final __callArgument4:Dynamic = state; __callArgument4; })) : GlQuadBatchShader);
     material = (cast tilemapNode : RenderProxy2D).material;
-    materialRenderer = (cast resolveGlMaterialRenderer(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast material : Dynamic)) : Null<GlMaterialRenderer>);
+    materialRenderer = (cast resolveGlMaterialRenderer(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast material : Dynamic)) : Null<GlMaterialRenderer>);
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     texture = atlas.texture;
-    glTexture = (cast resolveGlTexture(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = texture; __callArgument5; }), (cast true : Bool), ({ final __callArgument6:Dynamic = SCENE2D_WORKING_COLOR_SPACE; __callArgument6; })) : Null<flighthq._internal.dom.WebGLTexture>);
+    glTexture = (cast resolveGlTexture(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = texture; __callArgument9; }), (cast true : Bool), ({ final __callArgument10:Dynamic = SCENE2D_WORKING_COLOR_SPACE; __callArgument10; })) : Null<flighthq._internal.dom.WebGLTexture>);
     if ((cast _Runtime.strictEquals(glTexture, null) : Bool)) { return; }
     straightAlpha = runtime.currentTextureStraightAlpha;
     nodeMaterialData = (cast tilemapNode : RenderProxy2D).materialData;
@@ -98,11 +98,11 @@ class GlTilemap {
     nodeColorScaleBias = (cast tilemapNode : RenderProxy2D).colorScaleBias;
     nodeColorMatrix = (cast tilemapNode : RenderProxy2D).colorMatrix;
     startCount = runtime.quadBatchWriterCount;
-    base = (cast prepareGlQuadBatchWrite(({ final __callArgument7:Dynamic = state; __callArgument7; }), ({ final __callArgument8:Dynamic = glTexture; __callArgument8; }), (cast straightAlpha : Bool), (cast (cast texture : Texture2D).sampler : Dynamic), (cast tilemapNode : RenderProxy2D).blendMode, (cast material : Dynamic), ({ final __callArgument9:Dynamic = materialRenderer; __callArgument9; }), (cast (columns * rows) : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
+    base = (cast (#if js _Runtime.callValue(prepareGlQuadBatchWrite, cast ([({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = glTexture; __callArgument18; }), (cast straightAlpha : Bool), (cast (cast texture : Texture2D).sampler : Dynamic), (cast tilemapNode : RenderProxy2D).blendMode, (cast material : Dynamic), ({ final __callArgument19:Dynamic = materialRenderer; __callArgument19; }), (cast (columns * rows) : Float)] : Array<Dynamic>)) #else prepareGlQuadBatchWrite(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = glTexture; __callArgument15; }), (cast straightAlpha : Bool), (cast (cast texture : Texture2D).sampler : Dynamic), (cast tilemapNode : RenderProxy2D).blendMode, (cast material : Dynamic), ({ final __callArgument16:Dynamic = materialRenderer; __callArgument16; }), (cast (columns * rows) : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Float);
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
-    iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth(({ final __callArgument10:Dynamic = texture; __callArgument10; })) : Float)));
-    ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight(({ final __callArgument11:Dynamic = texture; __callArgument11; })) : Float)));
+    iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth(({ final __callArgument20:Dynamic = texture; __callArgument20; })) : Float)));
+    ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight(({ final __callArgument22:Dynamic = texture; __callArgument22; })) : Float)));
     instanceData = runtime.quadBatchWriterInstanceData;
     pt = (cast tilemapNode : RenderProxy2D).transform2D;
     pa = pt.a;
@@ -139,9 +139,9 @@ class GlTilemap {
             flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast instanceData : flighthq._internal._Float32Array), (cast (writeBase + 10.0) : Float), (cast ((region.x + region.width) * iw) : Float));
             flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast instanceData : flighthq._internal._Float32Array), (cast (writeBase + 11.0) : Float), (cast ((region.y + region.height) * ih) : Float));
             flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast instanceData : flighthq._internal._Float32Array), (cast (writeBase + 12.0) : Float), (cast alpha : Float));
-            packGlQuadBatchMaterialInstance(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = nodeMaterialData; __callArgument13; }), (cast (startCount + drawCount) : Float));
+            packGlQuadBatchMaterialInstance(({ final __callArgument24:Dynamic = state; __callArgument24; }), ({ final __callArgument25:Dynamic = nodeMaterialData; __callArgument25; }), (cast (startCount + drawCount) : Float));
             var colorScaleBias:Null<flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>> = _Runtime.coalesce(_Runtime.coalesce((cast _Runtime.optionalIndex(perTileColorScaleBias, ((row * columns) + col)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, Array<Float>>>), function():Dynamic return cast nodeColorMatrix), function():Dynamic return cast nodeColorScaleBias);
-            recordGlQuadBatchColorScaleBias(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = colorScaleBias; __callArgument15; }), (cast (startCount + drawCount) : Float));
+            recordGlQuadBatchColorScaleBias(({ final __callArgument28:Dynamic = state; __callArgument28; }), ({ final __callArgument29:Dynamic = colorScaleBias; __callArgument29; }), (cast (startCount + drawCount) : Float));
             (writeBase = cast ((writeBase + GlTilemap.INSTANCE_FLOATS__glTilemap) : Dynamic));
             drawCount++;
             col++;

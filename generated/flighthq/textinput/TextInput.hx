@@ -17,25 +17,25 @@ class TextInput {
   public static function enableTextInput(node:RichText, ?options:TextInputOptions):TextInputState {
     var runtime:RichTextRuntime = cast _Runtime.UNDEFINED;
     var state:Null<TextInputState> = cast _Runtime.UNDEFINED;
-    runtime = (cast getRichTextRuntime(({ final __callArgument1:Dynamic = node; __callArgument1; })) : RichTextRuntime);
+    runtime = (cast getRichTextRuntime(({ final __callArgument2:Dynamic = node; __callArgument2; })) : RichTextRuntime);
     state = runtime.input;
     if ((cast _Runtime.strictEquals(state, null) : Bool)) {
-      (state = cast ((cast TextInput.createTextInputState__textInput(({ final __callArgument2:Dynamic = options; __callArgument2; })) : TextInputState) : Dynamic));
+      (state = cast ((cast TextInput.createTextInputState__textInput(({ final __callArgument4:Dynamic = options; __callArgument4; })) : TextInputState) : Dynamic));
       (runtime.input = cast (state : Null<TextInputState>));
     } else { if ((cast !_Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      TextInput.applyTextInputOptions__textInput(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = options; __callArgument4; }));
+      TextInput.applyTextInputOptions__textInput(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = options; __callArgument7; }));
     } }
     return cast state;
     return cast null;
   }
 
   public static function getTextInputState(node:RichText):Null<TextInputState> {
-    return cast (cast (cast getRichTextRuntime(({ final __callArgument5:Dynamic = node; __callArgument5; })) : RichTextRuntime) : { var input:Null<TextInputState>; }).input;
+    return cast (cast (cast getRichTextRuntime(({ final __callArgument10:Dynamic = node; __callArgument10; })) : RichTextRuntime) : { var input:Null<TextInputState>; }).input;
     return cast null;
   }
 
   public static function hasTextInput(node:RichText):Bool {
-    return cast !_Runtime.strictEquals((cast (cast getRichTextRuntime(({ final __callArgument6:Dynamic = node; __callArgument6; })) : RichTextRuntime) : { var input:Null<TextInputState>; }).input, null);
+    return cast !_Runtime.strictEquals((cast (cast getRichTextRuntime(({ final __callArgument12:Dynamic = node; __callArgument12; })) : RichTextRuntime) : { var input:Null<TextInputState>; }).input, null);
     return cast null;
   }
 
@@ -52,7 +52,7 @@ class TextInput {
   }
 
   public static function createTextInputState__textInput(?options:TextInputOptions):TextInputState {
-    return cast { alwaysShowSelection: _Runtime.coalesce(({ final __typedStruct7 = options; __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.alwaysShowSelection; }), function():Dynamic return cast false), caretColor: _Runtime.coalesce(({ final __typedStruct8 = options; __typedStruct8 == null ? _Runtime.UNDEFINED : __typedStruct8.caretColor; }), function():Dynamic return cast 0.0), caretIndex: 0.0, caretWidth: _Runtime.coalesce(({ final __typedStruct9 = options; __typedStruct9 == null ? _Runtime.UNDEFINED : __typedStruct9.caretWidth; }), function():Dynamic return cast 1.0), desiredCaretX: -1.0, displayAsPassword: _Runtime.coalesce(({ final __typedStruct10 = options; __typedStruct10 == null ? _Runtime.UNDEFINED : __typedStruct10.displayAsPassword; }), function():Dynamic return cast false), focused: false, history: cast ([] : Array<Dynamic>), historyIndex: -1.0, historyLimit: ((cast !_Runtime.strictEquals(({ final __typedStruct11 = options; __typedStruct11 == null ? _Runtime.UNDEFINED : __typedStruct11.historyLimit; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast HxMath.max(0.0, options.historyLimit) : Dynamic) : (cast 100.0 : Dynamic)), passwordCharacter: _Runtime.coalesce(({ final __typedStruct12 = options; __typedStruct12 == null ? _Runtime.UNDEFINED : __typedStruct12.passwordCharacter; }), function():Dynamic return cast '•'), restrict: _Runtime.coalesce(({ final __typedStruct13 = options; __typedStruct13 == null ? _Runtime.UNDEFINED : __typedStruct13.restrict; }), function():Dynamic return cast ''), selectionAlpha: _Runtime.coalesce(({ final __typedStruct14 = options; __typedStruct14 == null ? _Runtime.UNDEFINED : __typedStruct14.selectionAlpha; }), function():Dynamic return cast 0.35), selectionColor: _Runtime.coalesce(({ final __typedStruct15 = options; __typedStruct15 == null ? _Runtime.UNDEFINED : __typedStruct15.selectionColor; }), function():Dynamic return cast 30935.0), selectionIndex: 0.0 };
+    return cast { alwaysShowSelection: _Runtime.coalesce(({ final __typedStruct14 = options; __typedStruct14 == null ? _Runtime.UNDEFINED : __typedStruct14.alwaysShowSelection; }), function():Dynamic return cast false), caretColor: _Runtime.coalesce(({ final __typedStruct15 = options; __typedStruct15 == null ? _Runtime.UNDEFINED : __typedStruct15.caretColor; }), function():Dynamic return cast 0.0), caretIndex: 0.0, caretWidth: _Runtime.coalesce(({ final __typedStruct16 = options; __typedStruct16 == null ? _Runtime.UNDEFINED : __typedStruct16.caretWidth; }), function():Dynamic return cast 1.0), desiredCaretX: -1.0, displayAsPassword: _Runtime.coalesce(({ final __typedStruct17 = options; __typedStruct17 == null ? _Runtime.UNDEFINED : __typedStruct17.displayAsPassword; }), function():Dynamic return cast false), focused: false, history: cast ([] : Array<Dynamic>), historyIndex: -1.0, historyLimit: ((cast !_Runtime.strictEquals(({ final __typedStruct18 = options; __typedStruct18 == null ? _Runtime.UNDEFINED : __typedStruct18.historyLimit; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast HxMath.max(0.0, options.historyLimit) : Dynamic) : (cast 100.0 : Dynamic)), passwordCharacter: _Runtime.coalesce(({ final __typedStruct19 = options; __typedStruct19 == null ? _Runtime.UNDEFINED : __typedStruct19.passwordCharacter; }), function():Dynamic return cast '•'), restrict: _Runtime.coalesce(({ final __typedStruct20 = options; __typedStruct20 == null ? _Runtime.UNDEFINED : __typedStruct20.restrict; }), function():Dynamic return cast ''), selectionAlpha: _Runtime.coalesce(({ final __typedStruct21 = options; __typedStruct21 == null ? _Runtime.UNDEFINED : __typedStruct21.selectionAlpha; }), function():Dynamic return cast 0.35), selectionColor: _Runtime.coalesce(({ final __typedStruct22 = options; __typedStruct22 == null ? _Runtime.UNDEFINED : __typedStruct22.selectionColor; }), function():Dynamic return cast 30935.0), selectionIndex: 0.0 };
     return cast null;
   }
 }

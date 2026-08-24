@@ -20,7 +20,7 @@ class Intersection {
     if ((cast !(cast (cast getCamera3DWorldToScreen(({ final __callArgument0:Dynamic = Intersection.__scratchNdc__intersection; __callArgument0; }), ({ final __callArgument1:Dynamic = camera; __callArgument1; }), ({ final __callArgument2:Dynamic = sphere.center; __callArgument2; }), (cast aspect : Float)) : Bool) : Bool) : Bool)) {
       return cast false;
     }
-    return cast (cast getCamera3DScreenToWorldRay(({ final __callArgument3:Dynamic = out; __callArgument3; }), ({ final __callArgument4:Dynamic = camera; __callArgument4; }), (cast Intersection.__scratchNdc__intersection.x : Float), (cast Intersection.__scratchNdc__intersection.y : Float), (cast aspect : Float)) : Bool);
+    return cast (cast getCamera3DScreenToWorldRay(({ final __callArgument6:Dynamic = out; __callArgument6; }), ({ final __callArgument7:Dynamic = camera; __callArgument7; }), (cast Intersection.__scratchNdc__intersection.x : Float), (cast Intersection.__scratchNdc__intersection.y : Float), (cast aspect : Float)) : Bool);
     return cast null;
   }
 

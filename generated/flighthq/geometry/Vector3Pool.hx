@@ -26,7 +26,7 @@ class Vector3Pool {
     if ((cast ((cast _Runtime.field(Vector3Pool.pool__vector3Pool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       (v = cast ((cast _Runtime.callProperty(Vector3Pool.pool__vector3Pool, 'pop', cast ([] : Array<Dynamic>)) : Vector3) : Dynamic));
     } else {
-      (v = cast ((cast createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Vector3) : Dynamic));
+      (v = cast ((cast (#if js _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) #else createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector3) : Dynamic));
     }
     return cast v;
     return cast null;

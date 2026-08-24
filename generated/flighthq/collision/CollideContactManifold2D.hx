@@ -37,9 +37,9 @@ class CollideContactManifold2D {
     var hi:CollisionBuiltInShape2D = cast _Runtime.UNDEFINED;
     var overlapping:Bool = cast _Runtime.UNDEFINED;
     rankA = (cast CollideContactManifold2D.contactShapeKindRank__collideContactManifold2D(({ final __callArgument0:Dynamic = (cast a : { var kind:String; }).kind; __callArgument0; })) : Float);
-    rankB = (cast CollideContactManifold2D.contactShapeKindRank__collideContactManifold2D(({ final __callArgument1:Dynamic = (cast b : { var kind:String; }).kind; __callArgument1; })) : Float);
+    rankB = (cast CollideContactManifold2D.contactShapeKindRank__collideContactManifold2D(({ final __callArgument2:Dynamic = (cast b : { var kind:String; }).kind; __callArgument2; })) : Float);
     if ((cast ((cast ((cast rankA : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast rankB : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
-      clearCollisionContactManifold2D(({ final __callArgument2:Dynamic = out; __callArgument2; }));
+      clearCollisionContactManifold2D(({ final __callArgument4:Dynamic = out; __callArgument4; }));
       return cast false;
     }
     swapped = ((cast rankA : Float) > (cast rankB : Float));
@@ -52,19 +52,19 @@ class CollideContactManifold2D {
         {
           var __switchValue = (cast hi : { var kind:String; }).kind;
           if (__switchValue == 'circle') {
-            (overlapping = cast ((cast collideCircleCircleContactManifold2D(({ final __callArgument3:Dynamic = lo; __callArgument3; }), ({ final __callArgument4:Dynamic = hi; __callArgument4; }), ({ final __callArgument5:Dynamic = out; __callArgument5; })) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideCircleCircleContactManifold2D(({ final __callArgument6:Dynamic = lo; __callArgument6; }), ({ final __callArgument7:Dynamic = hi; __callArgument7; }), ({ final __callArgument8:Dynamic = out; __callArgument8; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'capsule') {
-            (overlapping = cast ((cast collideCircleCapsuleContactManifold2D(({ final __callArgument6:Dynamic = lo; __callArgument6; }), ({ final __callArgument7:Dynamic = hi; __callArgument7; }), ({ final __callArgument8:Dynamic = out; __callArgument8; })) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideCircleCapsuleContactManifold2D(({ final __callArgument12:Dynamic = lo; __callArgument12; }), ({ final __callArgument13:Dynamic = hi; __callArgument13; }), ({ final __callArgument14:Dynamic = out; __callArgument14; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'aabb') {
-            (overlapping = cast ((cast collideCircleAabbContactManifold2D(({ final __callArgument9:Dynamic = lo; __callArgument9; }), ({ final __callArgument10:Dynamic = hi; __callArgument10; }), ({ final __callArgument11:Dynamic = out; __callArgument11; })) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideCircleAabbContactManifold2D(({ final __callArgument18:Dynamic = lo; __callArgument18; }), ({ final __callArgument19:Dynamic = hi; __callArgument19; }), ({ final __callArgument20:Dynamic = out; __callArgument20; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'obb') {
-            (overlapping = cast ((cast collideCircleObbContactManifold2D(({ final __callArgument12:Dynamic = lo; __callArgument12; }), ({ final __callArgument13:Dynamic = hi; __callArgument13; }), ({ final __callArgument14:Dynamic = out; __callArgument14; })) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideCircleObbContactManifold2D(({ final __callArgument24:Dynamic = lo; __callArgument24; }), ({ final __callArgument25:Dynamic = hi; __callArgument25; }), ({ final __callArgument26:Dynamic = out; __callArgument26; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'polygon') {
-            (overlapping = cast ((cast collideCirclePolygonContactManifold2D(({ final __callArgument15:Dynamic = lo; __callArgument15; }), ({ final __callArgument16:Dynamic = hi; __callArgument16; }), ({ final __callArgument17:Dynamic = out; __callArgument17; })) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideCirclePolygonContactManifold2D(({ final __callArgument30:Dynamic = lo; __callArgument30; }), ({ final __callArgument31:Dynamic = hi; __callArgument31; }), ({ final __callArgument32:Dynamic = out; __callArgument32; })) : Bool) : Dynamic));
           }
         }
       }
@@ -72,16 +72,16 @@ class CollideContactManifold2D {
         {
           var __switchValue = (cast hi : { var kind:String; }).kind;
           if (__switchValue == 'capsule') {
-            (overlapping = cast ((cast collideCapsuleCapsuleContactManifold2D(({ final __callArgument18:Dynamic = lo; __callArgument18; }), ({ final __callArgument19:Dynamic = hi; __callArgument19; }), ({ final __callArgument20:Dynamic = out; __callArgument20; })) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideCapsuleCapsuleContactManifold2D(({ final __callArgument36:Dynamic = lo; __callArgument36; }), ({ final __callArgument37:Dynamic = hi; __callArgument37; }), ({ final __callArgument38:Dynamic = out; __callArgument38; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'aabb') {
-            (overlapping = cast ((cast collideCapsuleAabbContactManifold2D(({ final __callArgument21:Dynamic = lo; __callArgument21; }), ({ final __callArgument22:Dynamic = hi; __callArgument22; }), ({ final __callArgument23:Dynamic = out; __callArgument23; })) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideCapsuleAabbContactManifold2D(({ final __callArgument42:Dynamic = lo; __callArgument42; }), ({ final __callArgument43:Dynamic = hi; __callArgument43; }), ({ final __callArgument44:Dynamic = out; __callArgument44; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'obb') {
-            (overlapping = cast ((cast collideCapsuleObbContactManifold2D(({ final __callArgument24:Dynamic = lo; __callArgument24; }), ({ final __callArgument25:Dynamic = hi; __callArgument25; }), ({ final __callArgument26:Dynamic = out; __callArgument26; })) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideCapsuleObbContactManifold2D(({ final __callArgument48:Dynamic = lo; __callArgument48; }), ({ final __callArgument49:Dynamic = hi; __callArgument49; }), ({ final __callArgument50:Dynamic = out; __callArgument50; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'polygon') {
-            (overlapping = cast ((cast collideCapsulePolygonContactManifold2D(({ final __callArgument27:Dynamic = lo; __callArgument27; }), ({ final __callArgument28:Dynamic = hi; __callArgument28; }), ({ final __callArgument29:Dynamic = out; __callArgument29; })) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideCapsulePolygonContactManifold2D(({ final __callArgument54:Dynamic = lo; __callArgument54; }), ({ final __callArgument55:Dynamic = hi; __callArgument55; }), ({ final __callArgument56:Dynamic = out; __callArgument56; })) : Bool) : Dynamic));
           }
           else  {
           }
@@ -91,13 +91,13 @@ class CollideContactManifold2D {
         {
           var __switchValue = (cast hi : { var kind:String; }).kind;
           if (__switchValue == 'aabb') {
-            (overlapping = cast ((cast collideAabbAabbContactManifold2D(({ final __callArgument30:Dynamic = lo; __callArgument30; }), ({ final __callArgument31:Dynamic = hi; __callArgument31; }), ({ final __callArgument32:Dynamic = out; __callArgument32; })) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideAabbAabbContactManifold2D(({ final __callArgument60:Dynamic = lo; __callArgument60; }), ({ final __callArgument61:Dynamic = hi; __callArgument61; }), ({ final __callArgument62:Dynamic = out; __callArgument62; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'obb') {
-            (overlapping = cast ((cast collideAabbObbContactManifold2D(({ final __callArgument33:Dynamic = lo; __callArgument33; }), ({ final __callArgument34:Dynamic = hi; __callArgument34; }), ({ final __callArgument35:Dynamic = out; __callArgument35; })) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideAabbObbContactManifold2D(({ final __callArgument66:Dynamic = lo; __callArgument66; }), ({ final __callArgument67:Dynamic = hi; __callArgument67; }), ({ final __callArgument68:Dynamic = out; __callArgument68; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'polygon') {
-            (overlapping = cast ((cast collideAabbPolygonContactManifold2D(({ final __callArgument36:Dynamic = lo; __callArgument36; }), ({ final __callArgument37:Dynamic = hi; __callArgument37; }), ({ final __callArgument38:Dynamic = out; __callArgument38; })) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideAabbPolygonContactManifold2D(({ final __callArgument72:Dynamic = lo; __callArgument72; }), ({ final __callArgument73:Dynamic = hi; __callArgument73; }), ({ final __callArgument74:Dynamic = out; __callArgument74; })) : Bool) : Dynamic));
           }
         }
       }
@@ -105,16 +105,16 @@ class CollideContactManifold2D {
         {
           var __switchValue = (cast hi : { var kind:String; }).kind;
           if (__switchValue == 'obb') {
-            (overlapping = cast ((cast collideObbObbContactManifold2D(({ final __callArgument39:Dynamic = lo; __callArgument39; }), ({ final __callArgument40:Dynamic = hi; __callArgument40; }), ({ final __callArgument41:Dynamic = out; __callArgument41; })) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideObbObbContactManifold2D(({ final __callArgument78:Dynamic = lo; __callArgument78; }), ({ final __callArgument79:Dynamic = hi; __callArgument79; }), ({ final __callArgument80:Dynamic = out; __callArgument80; })) : Bool) : Dynamic));
           }
           else if (__switchValue == 'polygon') {
-            (overlapping = cast ((cast collideObbPolygonContactManifold2D(({ final __callArgument42:Dynamic = lo; __callArgument42; }), ({ final __callArgument43:Dynamic = hi; __callArgument43; }), ({ final __callArgument44:Dynamic = out; __callArgument44; })) : Bool) : Dynamic));
+            (overlapping = cast ((cast collideObbPolygonContactManifold2D(({ final __callArgument84:Dynamic = lo; __callArgument84; }), ({ final __callArgument85:Dynamic = hi; __callArgument85; }), ({ final __callArgument86:Dynamic = out; __callArgument86; })) : Bool) : Dynamic));
           }
         }
       }
       else if (__switchValue == 'polygon') {
         if ((cast _Runtime.strictEquals((cast hi : { var kind:String; }).kind, 'polygon') : Bool)) {
-          (overlapping = cast ((cast collidePolygonPolygonContactManifold2D(({ final __callArgument45:Dynamic = lo; __callArgument45; }), ({ final __callArgument46:Dynamic = hi; __callArgument46; }), ({ final __callArgument47:Dynamic = out; __callArgument47; })) : Bool) : Dynamic));
+          (overlapping = cast ((cast collidePolygonPolygonContactManifold2D(({ final __callArgument90:Dynamic = lo; __callArgument90; }), ({ final __callArgument91:Dynamic = hi; __callArgument91; }), ({ final __callArgument92:Dynamic = out; __callArgument92; })) : Bool) : Dynamic));
         }
       }
     }

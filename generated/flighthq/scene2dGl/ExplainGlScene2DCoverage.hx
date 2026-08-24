@@ -34,13 +34,13 @@ class ExplainGlScene2DCoverage {
   @:noCompletion
   public static function explainGlScene2DCoverage(out:Array<SceneCoverageEntry>, state:GlRenderState, usage:Scene2DKindUsage, catalog:SceneCoverageCatalog):Void {
     explainScene2DCoverage(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = usage; __callArgument2; }), ({ final __callArgument3:Dynamic = catalog; __callArgument3; }));
-    (cast ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage(({ final __callArgument4:Dynamic = out; __callArgument4; }), ({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = usage; __callArgument6; }), (cast false : Bool), ({ final __callArgument7:Dynamic = catalog; __callArgument7; })) : Bool);
+    (cast ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = usage; __callArgument10; }), (cast false : Bool), ({ final __callArgument11:Dynamic = catalog; __callArgument11; })) : Bool);
   }
 
   @:noCompletion
   public static function hasGlScene2DCoverage(state:GlRenderState, usage:Scene2DKindUsage):Bool {
-    if ((cast !(cast (cast hasScene2DCoverage(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = usage; __callArgument9; })) : Bool) : Bool) : Bool)) { return cast false; }
-    return cast !(cast (cast ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage(({ final __callArgument10:Dynamic = null; __callArgument10; }), ({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = usage; __callArgument12; }), (cast true : Bool), ({ final __callArgument13:Dynamic = null; __callArgument13; })) : Bool) : Bool);
+    if ((cast !(cast (cast hasScene2DCoverage(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = usage; __callArgument17; })) : Bool) : Bool) : Bool)) { return cast false; }
+    return cast !(cast (cast ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage(({ final __callArgument20:Dynamic = null; __callArgument20; }), ({ final __callArgument21:Dynamic = state; __callArgument21; }), ({ final __callArgument22:Dynamic = usage; __callArgument22; }), (cast true : Bool), ({ final __callArgument23:Dynamic = null; __callArgument23; })) : Bool) : Bool);
     return cast null;
   }
 
@@ -51,37 +51,37 @@ class ExplainGlScene2DCoverage {
     var materials:flighthq._internal._Map<String, RegistryTableEntry<GlMaterialRenderer>> = cast _Runtime.UNDEFINED;
     var hasStandard:Bool = cast _Runtime.UNDEFINED;
     found = false;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument28:Dynamic = state; __callArgument28; })) : GlRenderStateRuntime);
     blendModes = (cast (cast runtime.registries : { var blendRealizations:KeyedTable<GlBlendRealization>; }).blendRealizations : KeyedTable<GlBlendRealization>).entries;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(usage.blendModes, 'length') : Float)) : Bool)) {
         var kind:String = flighthq._internal._StaticIndex.readArray(usage.blendModes, i);
-        if ((cast _Runtime.strictEquals(({ final __structural15 = ((cast blendModes : flighthq._internal._Map<String, RegistryTableEntry<GlBlendRealization>>).get(kind)); __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
+        if ((cast _Runtime.strictEquals(({ final __structural30 = ((cast blendModes : flighthq._internal._Map<String, RegistryTableEntry<GlBlendRealization>>).get(kind)); __structural30 == null ? _Runtime.UNDEFINED : (cast __structural30 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Satisfied, facet: (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneBlendMode, kind: kind, registry: RenderRegistry.BlendRealization }] : Array<Dynamic>));
           i++;
           continue;
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([(cast ExplainGlScene2DCoverage.createShortfallEntry__explainGlScene2DCoverage(({ final __callArgument16:Dynamic = catalog; __callArgument16; }), (cast true : Bool), ({ final __callArgument17:Dynamic = (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneBlendMode; __callArgument17; }), (cast kind : String), ({ final __callArgument18:Dynamic = RenderRegistry.BlendRealization; __callArgument18; })) : SceneCoverageEntry)] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([(cast ExplainGlScene2DCoverage.createShortfallEntry__explainGlScene2DCoverage(({ final __callArgument31:Dynamic = catalog; __callArgument31; }), (cast true : Bool), ({ final __callArgument32:Dynamic = (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneBlendMode; __callArgument32; }), (cast kind : String), ({ final __callArgument33:Dynamic = RenderRegistry.BlendRealization; __callArgument33; })) : SceneCoverageEntry)] : Array<Dynamic>));
         i++;
       }
     }
     materials = (cast (cast runtime.registries : { var materialRenderers:KeyedTable<GlMaterialRenderer>; }).materialRenderers : KeyedTable<GlMaterialRenderer>).entries;
-    hasStandard = _Runtime.strictEquals(({ final __structural19 = ((cast materials : flighthq._internal._Map<String, RegistryTableEntry<GlMaterialRenderer>>).get(StandardMaterialKindValue)); __structural19 == null ? _Runtime.UNDEFINED : (cast __structural19 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
+    hasStandard = _Runtime.strictEquals(({ final __structural37 = ((cast materials : flighthq._internal._Map<String, RegistryTableEntry<GlMaterialRenderer>>).get(StandardMaterialKindValue)); __structural37 == null ? _Runtime.UNDEFINED : (cast __structural37 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(usage.materialKinds, 'length') : Float)) : Bool)) {
         var kind:String = flighthq._internal._StaticIndex.readArray(usage.materialKinds, i);
-        if ((cast _Runtime.strictEquals(({ final __structural20 = ((cast materials : flighthq._internal._Map<String, RegistryTableEntry<GlMaterialRenderer>>).get(kind)); __structural20 == null ? _Runtime.UNDEFINED : (cast __structural20 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
+        if ((cast _Runtime.strictEquals(({ final __structural38 = ((cast materials : flighthq._internal._Map<String, RegistryTableEntry<GlMaterialRenderer>>).get(kind)); __structural38 == null ? _Runtime.UNDEFINED : (cast __structural38 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Satisfied, facet: (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneMaterialKind, kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
           i++;
           continue;
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([(cast ExplainGlScene2DCoverage.createShortfallEntry__explainGlScene2DCoverage(({ final __callArgument21:Dynamic = catalog; __callArgument21; }), (cast hasStandard : Bool), ({ final __callArgument22:Dynamic = (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneMaterialKind; __callArgument22; }), (cast kind : String), ({ final __callArgument23:Dynamic = RenderRegistry.MaterialRenderer; __callArgument23; })) : SceneCoverageEntry)] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([(cast ExplainGlScene2DCoverage.createShortfallEntry__explainGlScene2DCoverage(({ final __callArgument39:Dynamic = catalog; __callArgument39; }), (cast hasStandard : Bool), ({ final __callArgument40:Dynamic = (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneMaterialKind; __callArgument40; }), (cast kind : String), ({ final __callArgument41:Dynamic = RenderRegistry.MaterialRenderer; __callArgument41; })) : SceneCoverageEntry)] : Array<Dynamic>));
         i++;
       }
     }
@@ -92,7 +92,7 @@ class ExplainGlScene2DCoverage {
   public static function createShortfallEntry__explainGlScene2DCoverage(catalog:Null<SceneCoverageCatalog>, fallback:Bool, facet:flighthq._internal._IndexedAccess<SceneCoverageEntry, String>, kind:Kind, registry:flighthq._internal._IndexedAccess<SceneCoverageEntry, String>):SceneCoverageEntry {
     var registration:Null<CatalogRegistration> = cast _Runtime.UNDEFINED;
     var base:{ var facet:RequirementFacet; var kind:String; var registry:RenderRegistry; } = cast _Runtime.UNDEFINED;
-    registration = (cast ExplainGlScene2DCoverage.findCatalogRegistration__explainGlScene2DCoverage(({ final __callArgument24:Dynamic = catalog; __callArgument24; }), (cast kind : String), ({ final __callArgument25:Dynamic = registry; __callArgument25; })) : Null<CatalogRegistration>);
+    registration = (cast ExplainGlScene2DCoverage.findCatalogRegistration__explainGlScene2DCoverage(({ final __callArgument45:Dynamic = catalog; __callArgument45; }), (cast kind : String), ({ final __callArgument46:Dynamic = registry; __callArgument46; })) : Null<CatalogRegistration>);
     base = (cast { facet: facet, kind: kind, registry: registry });
     if ((cast _Runtime.strictEquals(registration, null) : Bool)) {
       return cast _Runtime.mergeObjects([base, { coverage: ((cast fallback : Bool) ? (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).FallbackUnavailable : Dynamic) : (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Unavailable : Dynamic)) }]);

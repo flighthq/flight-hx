@@ -49,7 +49,7 @@ class NativeText {
 
   @:noCompletion
   public static function createNativeTextData(?data:{ @:optional var autoSize:Null<TextAutoSize>; @:optional var height:Null<Float>; @:optional var style:Null<NativeTextStyle>; @:optional var text:Null<String>; @:optional var verticalAlign:Null<TextVerticalAlign>; @:optional var width:Null<Float>; }):NativeTextData {
-    return cast { autoSize: _Runtime.coalesce(({ final __structural1 = data; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var autoSize:Null<String>; }).autoSize; }), function():Dynamic return cast 'none'), height: _Runtime.coalesce(({ final __structural2 = data; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast 100.0), style: _Runtime.coalesce(({ final __structural3 = data; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var style:Null<NativeTextStyle>; }).style; }), function():Dynamic return cast {  }), text: _Runtime.coalesce(({ final __structural4 = data; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var text:Null<String>; }).text; }), function():Dynamic return cast ''), verticalAlign: _Runtime.coalesce(({ final __structural5 = data; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var verticalAlign:Null<String>; }).verticalAlign; }), function():Dynamic return cast 'top'), width: _Runtime.coalesce(({ final __structural6 = data; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast 100.0) };
+    return cast { autoSize: _Runtime.coalesce(({ final __structural2 = data; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var autoSize:Null<String>; }).autoSize; }), function():Dynamic return cast 'none'), height: _Runtime.coalesce(({ final __structural3 = data; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast 100.0), style: _Runtime.coalesce(({ final __structural4 = data; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var style:Null<NativeTextStyle>; }).style; }), function():Dynamic return cast {  }), text: _Runtime.coalesce(({ final __structural5 = data; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var text:Null<String>; }).text; }), function():Dynamic return cast ''), verticalAlign: _Runtime.coalesce(({ final __structural6 = data; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var verticalAlign:Null<String>; }).verticalAlign; }), function():Dynamic return cast 'top'), width: _Runtime.coalesce(({ final __structural7 = data; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast 100.0) };
     return cast null;
   }
 
@@ -65,18 +65,18 @@ class NativeText {
   }
 
   public static function getNativeTextMeasuredHeight(source:flighthq.types.NativeText):Float {
-    return cast (cast (cast getNode2DRuntime(({ final __callArgument7:Dynamic = source; __callArgument7; })) : NativeTextRuntime) : { var measuredHeight:Float; }).measuredHeight;
+    return cast (cast (cast getNode2DRuntime(({ final __callArgument8:Dynamic = source; __callArgument8; })) : NativeTextRuntime) : { var measuredHeight:Float; }).measuredHeight;
     return cast null;
   }
 
   public static function getNativeTextMeasuredWidth(source:flighthq.types.NativeText):Float {
-    return cast (cast (cast getNode2DRuntime(({ final __callArgument8:Dynamic = source; __callArgument8; })) : NativeTextRuntime) : { var measuredWidth:Float; }).measuredWidth;
+    return cast (cast (cast getNode2DRuntime(({ final __callArgument10:Dynamic = source; __callArgument10; })) : NativeTextRuntime) : { var measuredWidth:Float; }).measuredWidth;
     return cast null;
   }
 
   @:noCompletion
   public static function getNativeTextRuntime(source:flighthq.types.NativeText):NativeTextRuntime {
-    return cast (cast getNode2DRuntime(({ final __callArgument9:Dynamic = source; __callArgument9; })) : NativeTextRuntime);
+    return cast (cast getNode2DRuntime(({ final __callArgument12:Dynamic = source; __callArgument12; })) : NativeTextRuntime);
     return cast null;
   }
 

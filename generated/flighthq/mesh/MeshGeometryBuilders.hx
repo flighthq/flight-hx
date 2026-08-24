@@ -69,8 +69,8 @@ class MeshGeometryBuilders {
     var ringVertexCount:Float = cast _Runtime.UNDEFINED;
     var ringCount:Float = cast _Runtime.UNDEFINED;
     var vDivisor:Float = cast _Runtime.UNDEFINED;
-    rSeg = (cast MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast radialSegments : Float), (cast 3.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
-    cSeg = (cast MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast capSegments : Float), (cast 1.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
+    rSeg = (cast (#if js _Runtime.callValue(MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders, cast ([(cast radialSegments : Float), (cast 3.0 : Float)] : Array<Dynamic>)) #else MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast radialSegments : Float), (cast 3.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Float);
+    cSeg = (cast (#if js _Runtime.callValue(MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders, cast ([(cast capSegments : Float), (cast 1.0 : Float)] : Array<Dynamic>)) #else MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast capSegments : Float), (cast 1.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Float);
     halfH = (height * 0.5);
     positions = (cast cast ([] : Array<Dynamic>));
     normals = (cast cast ([] : Array<Dynamic>));
@@ -146,7 +146,7 @@ class MeshGeometryBuilders {
         j++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument4:Dynamic = positions; __callArgument4; }), ({ final __callArgument5:Dynamic = normals; __callArgument5; }), ({ final __callArgument6:Dynamic = uvs; __callArgument6; }), ({ final __callArgument7:Dynamic = indices; __callArgument7; })) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument8:Dynamic = positions; __callArgument8; }), ({ final __callArgument9:Dynamic = normals; __callArgument9; }), ({ final __callArgument10:Dynamic = uvs; __callArgument10; }), ({ final __callArgument11:Dynamic = indices; __callArgument11; })) : MeshGeometry);
     return cast null;
   }
 
@@ -156,13 +156,13 @@ class MeshGeometryBuilders {
     var normals:Array<Float> = cast _Runtime.UNDEFINED;
     var uvs:Array<Float> = cast _Runtime.UNDEFINED;
     var indices:Array<Float> = cast _Runtime.UNDEFINED;
-    segs = (cast MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast segments : Float), (cast 3.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
+    segs = (cast (#if js _Runtime.callValue(MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders, cast ([(cast segments : Float), (cast 3.0 : Float)] : Array<Dynamic>)) #else MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast segments : Float), (cast 3.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Float);
     positions = (cast cast ([] : Array<Dynamic>));
     normals = (cast cast ([] : Array<Dynamic>));
     uvs = (cast cast ([] : Array<Dynamic>));
     indices = (cast cast ([] : Array<Dynamic>));
-    MeshGeometryBuilders.addDisc__meshGeometryBuilders(({ final __callArgument8:Dynamic = positions; __callArgument8; }), ({ final __callArgument9:Dynamic = normals; __callArgument9; }), ({ final __callArgument10:Dynamic = uvs; __callArgument10; }), ({ final __callArgument11:Dynamic = indices; __callArgument11; }), (cast segs : Float), (cast radius : Float), (cast 0.0 : Float), (cast 1.0 : Float));
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument12:Dynamic = positions; __callArgument12; }), ({ final __callArgument13:Dynamic = normals; __callArgument13; }), ({ final __callArgument14:Dynamic = uvs; __callArgument14; }), ({ final __callArgument15:Dynamic = indices; __callArgument15; })) : MeshGeometry);
+    MeshGeometryBuilders.addDisc__meshGeometryBuilders(({ final __callArgument16:Dynamic = positions; __callArgument16; }), ({ final __callArgument17:Dynamic = normals; __callArgument17; }), ({ final __callArgument18:Dynamic = uvs; __callArgument18; }), ({ final __callArgument19:Dynamic = indices; __callArgument19; }), (cast segs : Float), (cast radius : Float), (cast 0.0 : Float), (cast 1.0 : Float));
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument24:Dynamic = positions; __callArgument24; }), ({ final __callArgument25:Dynamic = normals; __callArgument25; }), ({ final __callArgument26:Dynamic = uvs; __callArgument26; }), ({ final __callArgument27:Dynamic = indices; __callArgument27; })) : MeshGeometry);
     return cast null;
   }
 
@@ -182,7 +182,7 @@ class MeshGeometryBuilders {
     var sideStart:Float = cast _Runtime.UNDEFINED;
     var topCollapsed:Bool = cast _Runtime.UNDEFINED;
     var bottomCollapsed:Bool = cast _Runtime.UNDEFINED;
-    segments = (cast MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast radialSegments : Float), (cast 3.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
+    segments = (cast (#if js _Runtime.callValue(MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders, cast ([(cast radialSegments : Float), (cast 3.0 : Float)] : Array<Dynamic>)) #else MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast radialSegments : Float), (cast 3.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Float);
     halfHeight = (height * 0.5);
     positions = (cast cast ([] : Array<Dynamic>));
     normals = (cast cast ([] : Array<Dynamic>));
@@ -233,23 +233,23 @@ class MeshGeometryBuilders {
     }
     if ((cast capped : Bool)) {
       if ((cast ((cast bottomRadius : Float) > (cast 0.0 : Float)) : Bool)) {
-        MeshGeometryBuilders.addDisc__meshGeometryBuilders(({ final __callArgument16:Dynamic = positions; __callArgument16; }), ({ final __callArgument17:Dynamic = normals; __callArgument17; }), ({ final __callArgument18:Dynamic = uvs; __callArgument18; }), ({ final __callArgument19:Dynamic = indices; __callArgument19; }), (cast segments : Float), (cast bottomRadius : Float), (cast -halfHeight : Float), (cast -1.0 : Float));
+        MeshGeometryBuilders.addDisc__meshGeometryBuilders(({ final __callArgument32:Dynamic = positions; __callArgument32; }), ({ final __callArgument33:Dynamic = normals; __callArgument33; }), ({ final __callArgument34:Dynamic = uvs; __callArgument34; }), ({ final __callArgument35:Dynamic = indices; __callArgument35; }), (cast segments : Float), (cast bottomRadius : Float), (cast -halfHeight : Float), (cast -1.0 : Float));
       }
       if ((cast ((cast topRadius : Float) > (cast 0.0 : Float)) : Bool)) {
-        MeshGeometryBuilders.addDisc__meshGeometryBuilders(({ final __callArgument20:Dynamic = positions; __callArgument20; }), ({ final __callArgument21:Dynamic = normals; __callArgument21; }), ({ final __callArgument22:Dynamic = uvs; __callArgument22; }), ({ final __callArgument23:Dynamic = indices; __callArgument23; }), (cast segments : Float), (cast topRadius : Float), (cast halfHeight : Float), (cast 1.0 : Float));
+        MeshGeometryBuilders.addDisc__meshGeometryBuilders(({ final __callArgument40:Dynamic = positions; __callArgument40; }), ({ final __callArgument41:Dynamic = normals; __callArgument41; }), ({ final __callArgument42:Dynamic = uvs; __callArgument42; }), ({ final __callArgument43:Dynamic = indices; __callArgument43; }), (cast segments : Float), (cast topRadius : Float), (cast halfHeight : Float), (cast 1.0 : Float));
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument24:Dynamic = positions; __callArgument24; }), ({ final __callArgument25:Dynamic = normals; __callArgument25; }), ({ final __callArgument26:Dynamic = uvs; __callArgument26; }), ({ final __callArgument27:Dynamic = indices; __callArgument27; })) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument48:Dynamic = positions; __callArgument48; }), ({ final __callArgument49:Dynamic = normals; __callArgument49; }), ({ final __callArgument50:Dynamic = uvs; __callArgument50; }), ({ final __callArgument51:Dynamic = indices; __callArgument51; })) : MeshGeometry);
     return cast null;
   }
 
   public static function createDodecahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
-    return cast (cast createPolyhedronMeshGeometry(({ final __callArgument28:Dynamic = MeshGeometryBuilders.DODECAHEDRON_VERTS__meshGeometryBuilders; __callArgument28; }), ({ final __callArgument29:Dynamic = MeshGeometryBuilders.DODECAHEDRON_FACES__meshGeometryBuilders; __callArgument29; }), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
+    return cast (cast createPolyhedronMeshGeometry(({ final __callArgument56:Dynamic = MeshGeometryBuilders.DODECAHEDRON_VERTS__meshGeometryBuilders; __callArgument56; }), ({ final __callArgument57:Dynamic = MeshGeometryBuilders.DODECAHEDRON_FACES__meshGeometryBuilders; __callArgument57; }), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
     return cast null;
   }
 
   public static function createIcosahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
-    return cast (cast createPolyhedronMeshGeometry(({ final __callArgument30:Dynamic = MeshGeometryBuilders.ICOSAHEDRON_VERTS__meshGeometryBuilders; __callArgument30; }), ({ final __callArgument31:Dynamic = MeshGeometryBuilders.ICOSAHEDRON_FACES__meshGeometryBuilders; __callArgument31; }), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
+    return cast (cast createPolyhedronMeshGeometry(({ final __callArgument60:Dynamic = MeshGeometryBuilders.ICOSAHEDRON_VERTS__meshGeometryBuilders; __callArgument60; }), ({ final __callArgument61:Dynamic = MeshGeometryBuilders.ICOSAHEDRON_FACES__meshGeometryBuilders; __callArgument61; }), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
     return cast null;
   }
 
@@ -359,12 +359,12 @@ class MeshGeometryBuilders {
         i++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument36:Dynamic = positions; __callArgument36; }), ({ final __callArgument37:Dynamic = normals; __callArgument37; }), ({ final __callArgument38:Dynamic = uvs; __callArgument38; }), ({ final __callArgument39:Dynamic = faceIndices; __callArgument39; })) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument68:Dynamic = positions; __callArgument68; }), ({ final __callArgument69:Dynamic = normals; __callArgument69; }), ({ final __callArgument70:Dynamic = uvs; __callArgument70; }), ({ final __callArgument71:Dynamic = faceIndices; __callArgument71; })) : MeshGeometry);
     return cast null;
   }
 
   public static function createOctahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
-    return cast (cast createPolyhedronMeshGeometry(({ final __callArgument40:Dynamic = MeshGeometryBuilders.OCTAHEDRON_VERTS__meshGeometryBuilders; __callArgument40; }), ({ final __callArgument41:Dynamic = MeshGeometryBuilders.OCTAHEDRON_FACES__meshGeometryBuilders; __callArgument41; }), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
+    return cast (cast createPolyhedronMeshGeometry(({ final __callArgument76:Dynamic = MeshGeometryBuilders.OCTAHEDRON_VERTS__meshGeometryBuilders; __callArgument76; }), ({ final __callArgument77:Dynamic = MeshGeometryBuilders.OCTAHEDRON_FACES__meshGeometryBuilders; __callArgument77; }), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
     return cast null;
   }
 
@@ -378,8 +378,8 @@ class MeshGeometryBuilders {
     var uvs:Array<Float> = cast _Runtime.UNDEFINED;
     var indices:Array<Float> = cast _Runtime.UNDEFINED;
     var rowStride:Float = cast _Runtime.UNDEFINED;
-    wSeg = (cast MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast widthSegments : Float), (cast 1.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
-    dSeg = (cast MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast depthSegments : Float), (cast 1.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
+    wSeg = (cast (#if js _Runtime.callValue(MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders, cast ([(cast widthSegments : Float), (cast 1.0 : Float)] : Array<Dynamic>)) #else MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast widthSegments : Float), (cast 1.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Float);
+    dSeg = (cast (#if js _Runtime.callValue(MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders, cast ([(cast depthSegments : Float), (cast 1.0 : Float)] : Array<Dynamic>)) #else MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast depthSegments : Float), (cast 1.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Float);
     hw = (width * 0.5);
     hd = (depth * 0.5);
     positions = (cast cast ([] : Array<Dynamic>));
@@ -423,7 +423,7 @@ class MeshGeometryBuilders {
         iz++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument42:Dynamic = positions; __callArgument42; }), ({ final __callArgument43:Dynamic = normals; __callArgument43; }), ({ final __callArgument44:Dynamic = uvs; __callArgument44; }), ({ final __callArgument45:Dynamic = indices; __callArgument45; })) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument80:Dynamic = positions; __callArgument80; }), ({ final __callArgument81:Dynamic = normals; __callArgument81; }), ({ final __callArgument82:Dynamic = uvs; __callArgument82; }), ({ final __callArgument83:Dynamic = indices; __callArgument83; })) : MeshGeometry);
     return cast null;
   }
 
@@ -530,7 +530,7 @@ class MeshGeometryBuilders {
         i++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument50:Dynamic = positions; __callArgument50; }), ({ final __callArgument51:Dynamic = normals; __callArgument51; }), ({ final __callArgument52:Dynamic = uvs; __callArgument52; }), ({ final __callArgument53:Dynamic = flatIndices; __callArgument53; })) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument92:Dynamic = positions; __callArgument92; }), ({ final __callArgument93:Dynamic = normals; __callArgument93; }), ({ final __callArgument94:Dynamic = uvs; __callArgument94; }), ({ final __callArgument95:Dynamic = flatIndices; __callArgument95; })) : MeshGeometry);
     return cast null;
   }
 
@@ -547,7 +547,7 @@ class MeshGeometryBuilders {
     normals = (cast cast ([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0] : Array<Dynamic>));
     uvs = (cast cast ([0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0] : Array<Dynamic>));
     indices = (cast cast ([0.0, 1.0, 2.0, 2.0, 1.0, 3.0] : Array<Dynamic>));
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument54:Dynamic = positions; __callArgument54; }), ({ final __callArgument55:Dynamic = normals; __callArgument55; }), ({ final __callArgument56:Dynamic = uvs; __callArgument56; }), ({ final __callArgument57:Dynamic = indices; __callArgument57; })) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument100:Dynamic = positions; __callArgument100; }), ({ final __callArgument101:Dynamic = normals; __callArgument101; }), ({ final __callArgument102:Dynamic = uvs; __callArgument102; }), ({ final __callArgument103:Dynamic = indices; __callArgument103; })) : MeshGeometry);
     return cast null;
   }
 
@@ -557,7 +557,7 @@ class MeshGeometryBuilders {
     var normals:Array<Float> = cast _Runtime.UNDEFINED;
     var uvs:Array<Float> = cast _Runtime.UNDEFINED;
     var indices:Array<Float> = cast _Runtime.UNDEFINED;
-    segs = (cast MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast segments : Float), (cast 3.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
+    segs = (cast (#if js _Runtime.callValue(MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders, cast ([(cast segments : Float), (cast 3.0 : Float)] : Array<Dynamic>)) #else MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast segments : Float), (cast 3.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Float);
     positions = (cast cast ([] : Array<Dynamic>));
     normals = (cast cast ([] : Array<Dynamic>));
     uvs = (cast cast ([] : Array<Dynamic>));
@@ -588,7 +588,7 @@ class MeshGeometryBuilders {
         i++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument58:Dynamic = positions; __callArgument58; }), ({ final __callArgument59:Dynamic = normals; __callArgument59; }), ({ final __callArgument60:Dynamic = uvs; __callArgument60; }), ({ final __callArgument61:Dynamic = indices; __callArgument61; })) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument108:Dynamic = positions; __callArgument108; }), ({ final __callArgument109:Dynamic = normals; __callArgument109; }), ({ final __callArgument110:Dynamic = uvs; __callArgument110; }), ({ final __callArgument111:Dynamic = indices; __callArgument111; })) : MeshGeometry);
     return cast null;
   }
 
@@ -600,8 +600,8 @@ class MeshGeometryBuilders {
     var uvs:Array<Float> = cast _Runtime.UNDEFINED;
     var indices:Array<Float> = cast _Runtime.UNDEFINED;
     var rowStride:Float = cast _Runtime.UNDEFINED;
-    wSeg = (cast MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast widthSegments : Float), (cast 3.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
-    hSeg = (cast MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast heightSegments : Float), (cast 2.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
+    wSeg = (cast (#if js _Runtime.callValue(MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders, cast ([(cast widthSegments : Float), (cast 3.0 : Float)] : Array<Dynamic>)) #else MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast widthSegments : Float), (cast 3.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Float);
+    hSeg = (cast (#if js _Runtime.callValue(MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders, cast ([(cast heightSegments : Float), (cast 2.0 : Float)] : Array<Dynamic>)) #else MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast heightSegments : Float), (cast 2.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Float);
     positions = (cast cast ([] : Array<Dynamic>));
     normals = (cast cast ([] : Array<Dynamic>));
     uvs = (cast cast ([] : Array<Dynamic>));
@@ -650,12 +650,12 @@ class MeshGeometryBuilders {
         iy++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument62:Dynamic = positions; __callArgument62; }), ({ final __callArgument63:Dynamic = normals; __callArgument63; }), ({ final __callArgument64:Dynamic = uvs; __callArgument64; }), ({ final __callArgument65:Dynamic = indices; __callArgument65; })) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument116:Dynamic = positions; __callArgument116; }), ({ final __callArgument117:Dynamic = normals; __callArgument117; }), ({ final __callArgument118:Dynamic = uvs; __callArgument118; }), ({ final __callArgument119:Dynamic = indices; __callArgument119; })) : MeshGeometry);
     return cast null;
   }
 
   public static function createTetrahedronMeshGeometry(radius:Float = 0.5, detail:Float = 0.0):MeshGeometry {
-    return cast (cast createPolyhedronMeshGeometry(({ final __callArgument66:Dynamic = MeshGeometryBuilders.TETRAHEDRON_VERTS__meshGeometryBuilders; __callArgument66; }), ({ final __callArgument67:Dynamic = MeshGeometryBuilders.TETRAHEDRON_FACES__meshGeometryBuilders; __callArgument67; }), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
+    return cast (cast createPolyhedronMeshGeometry(({ final __callArgument124:Dynamic = MeshGeometryBuilders.TETRAHEDRON_VERTS__meshGeometryBuilders; __callArgument124; }), ({ final __callArgument125:Dynamic = MeshGeometryBuilders.TETRAHEDRON_FACES__meshGeometryBuilders; __callArgument125; }), (cast radius : Float), (cast detail : Float)) : MeshGeometry);
     return cast null;
   }
 
@@ -668,8 +668,8 @@ class MeshGeometryBuilders {
     var indices:Array<Float> = cast _Runtime.UNDEFINED;
     var curvePoint:Float->Array<Float> = cast _Runtime.UNDEFINED;
     var rowStride:Float = cast _Runtime.UNDEFINED;
-    tSeg = (cast MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast tubularSegments : Float), (cast 3.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
-    rSeg = (cast MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast radialSegments : Float), (cast 3.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
+    tSeg = (cast (#if js _Runtime.callValue(MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders, cast ([(cast tubularSegments : Float), (cast 3.0 : Float)] : Array<Dynamic>)) #else MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast tubularSegments : Float), (cast 3.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Float);
+    rSeg = (cast (#if js _Runtime.callValue(MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders, cast ([(cast radialSegments : Float), (cast 3.0 : Float)] : Array<Dynamic>)) #else MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast radialSegments : Float), (cast 3.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Float);
     positions = (cast cast ([] : Array<Dynamic>));
     normals = (cast cast ([] : Array<Dynamic>));
     uvs = (cast cast ([] : Array<Dynamic>));
@@ -763,7 +763,7 @@ class MeshGeometryBuilders {
         i++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument68:Dynamic = positions; __callArgument68; }), ({ final __callArgument69:Dynamic = normals; __callArgument69; }), ({ final __callArgument70:Dynamic = uvs; __callArgument70; }), ({ final __callArgument71:Dynamic = indices; __callArgument71; })) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument128:Dynamic = positions; __callArgument128; }), ({ final __callArgument129:Dynamic = normals; __callArgument129; }), ({ final __callArgument130:Dynamic = uvs; __callArgument130; }), ({ final __callArgument131:Dynamic = indices; __callArgument131; })) : MeshGeometry);
     return cast null;
   }
 
@@ -775,8 +775,8 @@ class MeshGeometryBuilders {
     var uvs:Array<Float> = cast _Runtime.UNDEFINED;
     var indices:Array<Float> = cast _Runtime.UNDEFINED;
     var rowStride:Float = cast _Runtime.UNDEFINED;
-    rSeg = (cast MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast radialSegments : Float), (cast 3.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
-    tSeg = (cast MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast tubularSegments : Float), (cast 3.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
+    rSeg = (cast (#if js _Runtime.callValue(MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders, cast ([(cast radialSegments : Float), (cast 3.0 : Float)] : Array<Dynamic>)) #else MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast radialSegments : Float), (cast 3.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Float);
+    tSeg = (cast (#if js _Runtime.callValue(MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders, cast ([(cast tubularSegments : Float), (cast 3.0 : Float)] : Array<Dynamic>)) #else MeshGeometryBuilders.normalizeMeshCount__meshGeometryBuilders((cast tubularSegments : Float), (cast 3.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Float);
     positions = (cast cast ([] : Array<Dynamic>));
     normals = (cast cast ([] : Array<Dynamic>));
     uvs = (cast cast ([] : Array<Dynamic>));
@@ -832,7 +832,7 @@ class MeshGeometryBuilders {
         j++;
       }
     }
-    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument72:Dynamic = positions; __callArgument72; }), ({ final __callArgument73:Dynamic = normals; __callArgument73; }), ({ final __callArgument74:Dynamic = uvs; __callArgument74; }), ({ final __callArgument75:Dynamic = indices; __callArgument75; })) : MeshGeometry);
+    return cast (cast MeshGeometryBuilders.buildCanonicalMeshGeometry__meshGeometryBuilders(({ final __callArgument136:Dynamic = positions; __callArgument136; }), ({ final __callArgument137:Dynamic = normals; __callArgument137; }), ({ final __callArgument138:Dynamic = uvs; __callArgument138; }), ({ final __callArgument139:Dynamic = indices; __callArgument139; })) : MeshGeometry);
     return cast null;
   }
 
@@ -902,7 +902,7 @@ class MeshGeometryBuilders {
       var max:Float = _Runtime.callProperty(HxMath, 'max', _Runtime.concatArrays([_Runtime.toArray((cast _Runtime.mapArray((cast defined : Array<Float>), function(i:Float, __unused23:Float, __unused24:Array<Float>):Float return flighthq._internal._StaticIndex.readFloatArrayTyped((cast u : Array<Float>), (cast i : Float)), _Runtime.UNDEFINED)))]));
       if ((cast ((cast (max - min) : Float) > (cast 0.5 : Float)) : Bool)) {
         for (i in _Runtime.iterable(defined)) {
-          if ((cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast u : Array<Float>), (cast i : Float)) : Float) < (cast 0.5 : Float)) : Bool)) { ({ var __indexedObject78:Array<Float> = u; var __indexedKey79:Float = i; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject78 : Array<Float>), (cast __indexedKey79 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject78 : Array<Float>), (cast __indexedKey79 : Float)) + 1.0) : Float)); }); }
+          if ((cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast u : Array<Float>), (cast i : Float)) : Float) < (cast 0.5 : Float)) : Bool)) { ({ var __indexedObject146:Array<Float> = u; var __indexedKey147:Float = i; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject146 : Array<Float>), (cast __indexedKey147 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject146 : Array<Float>), (cast __indexedKey147 : Float)) + 1.0) : Float)); }); }
         }
       }
       var mean:Float = _Runtime.divideNumbers(_Runtime.reduce(defined, function(sum:Float, i:Float, __unused25:Float, __unused26:Array<Float>):Float return (sum + flighthq._internal._StaticIndex.readFloatArrayTyped((cast u : Array<Float>), (cast i : Float))), 0.0), _Runtime.field(defined, 'length'));
@@ -944,9 +944,9 @@ class MeshGeometryBuilders {
     }
     indexArray = new flighthq._internal._UInt32Array(_Runtime.field(indices, 'length'));
     (cast indexArray : flighthq._internal._UInt32Array).set(indices);
-    geometry = (cast createMeshGeometry(({ final __callArgument80:Dynamic = { indices: indexArray, layout: MeshGeometryBuilders.CANONICAL_VERTEX_LAYOUT__meshGeometryBuilders, vertices: vertices }; __callArgument80; })) : MeshGeometry);
-    computeMeshGeometryTangents(({ final __callArgument81:Dynamic = geometry; __callArgument81; }), ({ final __callArgument82:Dynamic = geometry; __callArgument82; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    refreshMeshGeometryBounds(({ final __callArgument83:Dynamic = geometry; __callArgument83; }));
+    geometry = (cast createMeshGeometry(({ final __callArgument148:Dynamic = { indices: indexArray, layout: MeshGeometryBuilders.CANONICAL_VERTEX_LAYOUT__meshGeometryBuilders, vertices: vertices }; __callArgument148; })) : MeshGeometry);
+    (#if js _Runtime.callValue(computeMeshGeometryTangents, cast ([({ final __callArgument152:Dynamic = geometry; __callArgument152; }), ({ final __callArgument153:Dynamic = geometry; __callArgument153; })] : Array<Dynamic>)) #else computeMeshGeometryTangents(({ final __callArgument150:Dynamic = geometry; __callArgument150; }), ({ final __callArgument151:Dynamic = geometry; __callArgument151; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    refreshMeshGeometryBounds(({ final __callArgument154:Dynamic = geometry; __callArgument154; }));
     return cast geometry;
     return cast null;
   }

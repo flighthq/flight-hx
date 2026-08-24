@@ -19,7 +19,7 @@ class DisplayObjectOverlap {
   }
 
   public static function getNode2DOverlapRectangle(source:Node2D, other:Node2D, out:Rectangle):Rectangle {
-    computeRectangleIntersection(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast getNodeWorldBoundsRectangle((cast source : Dynamic)) : Rectangle); __callArgument3; }), ({ final __callArgument4:Dynamic = (cast getNodeWorldBoundsRectangle((cast other : Dynamic)) : Rectangle); __callArgument4; }));
+    computeRectangleIntersection(({ final __callArgument4:Dynamic = out; __callArgument4; }), ({ final __callArgument5:Dynamic = (cast getNodeWorldBoundsRectangle((cast source : Dynamic)) : Rectangle); __callArgument5; }), ({ final __callArgument6:Dynamic = (cast getNodeWorldBoundsRectangle((cast other : Dynamic)) : Rectangle); __callArgument6; }));
     return cast out;
     return cast null;
   }
@@ -33,12 +33,12 @@ class DisplayObjectOverlap {
     var bCenterY:Float = cast _Runtime.UNDEFINED;
     a = (cast getNodeWorldBoundsRectangle((cast source : Dynamic)) : Rectangle);
     b = (cast getNodeWorldBoundsRectangle((cast other : Dynamic)) : Rectangle);
-    if ((cast !(cast (cast intersectsRectangle(({ final __callArgument5:Dynamic = a; __callArgument5; }), ({ final __callArgument6:Dynamic = b; __callArgument6; })) : Bool) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast (cast intersectsRectangle(({ final __callArgument10:Dynamic = a; __callArgument10; }), ({ final __callArgument11:Dynamic = b; __callArgument11; })) : Bool) : Bool) : Bool)) { return cast false; }
     aCenterX = (a.x + (a.width * 0.5));
     aCenterY = (a.y + (a.height * 0.5));
     bCenterX = (b.x + (b.width * 0.5));
     bCenterY = (b.y + (b.height * 0.5));
-    return cast ((cast (cast containsRectanglePointXY(({ final __callArgument7:Dynamic = a; __callArgument7; }), (cast bCenterX : Float), (cast bCenterY : Float)) : Bool) : Bool) || (cast (cast containsRectanglePointXY(({ final __callArgument8:Dynamic = b; __callArgument8; }), (cast aCenterX : Float), (cast aCenterY : Float)) : Bool) : Bool));
+    return cast ((cast (cast containsRectanglePointXY(({ final __callArgument14:Dynamic = a; __callArgument14; }), (cast bCenterX : Float), (cast bCenterY : Float)) : Bool) : Bool) || (cast (cast containsRectanglePointXY(({ final __callArgument16:Dynamic = b; __callArgument16; }), (cast aCenterX : Float), (cast aCenterY : Float)) : Bool) : Bool));
     return cast null;
   }
 }

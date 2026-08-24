@@ -40,8 +40,8 @@ class SceneMaterial {
   }
 
   public static function getScene3DMaterials(root:Node3D, out:Array<Material>):Void {
-    SceneMaterial.collectNodeMaterials__sceneMaterial(({ final __callArgument1:Dynamic = root; __callArgument1; }), ({ final __callArgument2:Dynamic = out; __callArgument2; }));
-    forEachNodeDescendant((cast root : Dynamic), (cast function(node:Node<Node3DTraits>):Void { SceneMaterial.collectNodeMaterials__sceneMaterial((cast node : Node3D), ({ final __callArgument3:Dynamic = out; __callArgument3; })); } : Dynamic));
+    SceneMaterial.collectNodeMaterials__sceneMaterial(({ final __callArgument2:Dynamic = root; __callArgument2; }), ({ final __callArgument3:Dynamic = out; __callArgument3; }));
+    forEachNodeDescendant((cast root : Dynamic), (cast function(node:Node<Node3DTraits>):Void { SceneMaterial.collectNodeMaterials__sceneMaterial((cast node : Node3D), ({ final __callArgument6:Dynamic = out; __callArgument6; })); } : Dynamic));
   }
 
   public static function collectNodeMaterials__sceneMaterial(node:Node3D, out:Array<Material>):Void {

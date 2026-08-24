@@ -89,16 +89,16 @@ class GlRichText {
     var richTextData:GlRichTextData__glRichText = cast _Runtime.UNDEFINED;
     var texture:Null<flighthq._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;
     var offsetX:Float = cast _Runtime.UNDEFINED;
-    flushGlQuadBatchWriter(({ final __callArgument3:Dynamic = state; __callArgument3; }));
+    flushGlQuadBatchWriter(({ final __callArgument6:Dynamic = state; __callArgument6; }));
     source = (cast (cast renderProxy : RenderProxy2D).source : RichText);
     data = source.data;
-    richTextRuntime = (cast getRichTextRuntime(({ final __callArgument4:Dynamic = source; __callArgument4; })) : RichTextRuntime);
-    content = (cast getRichTextContent(({ final __callArgument5:Dynamic = richTextRuntime; __callArgument5; })) : RichTextContent);
-    computeRichTextContent(({ final __callArgument6:Dynamic = content; __callArgument6; }), ({ final __callArgument7:Dynamic = data; __callArgument7; }), (cast getRichTextPasswordCharacter(({ final __callArgument8:Dynamic = source; __callArgument8; })) : Null<String>));
+    richTextRuntime = (cast getRichTextRuntime(({ final __callArgument8:Dynamic = source; __callArgument8; })) : RichTextRuntime);
+    content = (cast getRichTextContent(({ final __callArgument10:Dynamic = richTextRuntime; __callArgument10; })) : RichTextContent);
+    computeRichTextContent(({ final __callArgument12:Dynamic = content; __callArgument12; }), ({ final __callArgument13:Dynamic = data; __callArgument13; }), (cast getRichTextPasswordCharacter(({ final __callArgument14:Dynamic = source; __callArgument14; })) : Null<String>));
     if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(content.text, 'length'), 0.0) : Bool) && (cast !(cast data.background : Bool) : Bool)) : Bool) && (cast !(cast data.border : Bool) : Bool)) : Bool)) { return; }
-    result = (cast GlRichText.layoutRichText__glRichText(({ final __callArgument9:Dynamic = source; __callArgument9; }), ({ final __callArgument10:Dynamic = richTextRuntime; __callArgument10; }), (cast content.text : String), (cast content.formatRanges : Dynamic)) : TextLayoutResult);
-    fieldW = HxMath.ceil((cast computeTextBoundsWidth((cast data : Dynamic), ({ final __callArgument11:Dynamic = result; __callArgument11; })) : Float));
-    fieldH = HxMath.ceil((cast computeTextBoundsHeight((cast data : Dynamic), ({ final __callArgument12:Dynamic = result; __callArgument12; })) : Float));
+    result = (cast GlRichText.layoutRichText__glRichText(({ final __callArgument20:Dynamic = source; __callArgument20; }), ({ final __callArgument21:Dynamic = richTextRuntime; __callArgument21; }), (cast content.text : String), (cast content.formatRanges : Dynamic)) : TextLayoutResult);
+    fieldW = HxMath.ceil((cast computeTextBoundsWidth((cast data : Dynamic), ({ final __callArgument24:Dynamic = result; __callArgument24; })) : Float));
+    fieldH = HxMath.ceil((cast computeTextBoundsHeight((cast data : Dynamic), ({ final __callArgument26:Dynamic = result; __callArgument26; })) : Float));
     if ((cast ((cast ((cast fieldW : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast fieldH : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     pixelRatio = (cast state : GlRenderState).pixelRatio;
     offCtx = (cast GlRichText.getOffscreenCanvas__glRichText((cast fieldW : Float), (cast fieldH : Float), (cast pixelRatio : Float)) : flighthq._internal.dom.CanvasRenderingContext2D);
@@ -114,22 +114,22 @@ class GlRichText {
       flighthq._internal.backend.Canvas2dBackend.call(offCtx, 'strokeRect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
     }
     if ((cast ((cast _Runtime.field(content.text, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-      GlRichText.drawRichTextToCanvas__glRichText(({ final __callArgument13:Dynamic = offCtx; __callArgument13; }), ({ final __callArgument14:Dynamic = source; __callArgument14; }), ({ final __callArgument15:Dynamic = result; __callArgument15; }), (cast fieldW : Float), (cast fieldH : Float), (cast content.text : String));
+      GlRichText.drawRichTextToCanvas__glRichText(({ final __callArgument28:Dynamic = offCtx; __callArgument28; }), ({ final __callArgument29:Dynamic = source; __callArgument29; }), ({ final __callArgument30:Dynamic = result; __callArgument30; }), (cast fieldW : Float), (cast fieldH : Float), (cast content.text : String));
     }
     _Runtime.callOptionalValue(overlay, cast ([offCtx, source, result, fieldW, fieldH, content.text] : Array<Dynamic>));
-    shader = (cast resolveGlShader(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = renderProxy; __callArgument17; })) : GlBitmapShader);
-    useGlProgram(({ final __callArgument18:Dynamic = state; __callArgument18; }), (cast shader : Dynamic));
+    shader = (cast resolveGlShader(({ final __callArgument34:Dynamic = state; __callArgument34; }), ({ final __callArgument35:Dynamic = renderProxy; __callArgument35; })) : GlBitmapShader);
+    useGlProgram(({ final __callArgument38:Dynamic = state; __callArgument38; }), (cast shader : Dynamic));
     if ((cast _Runtime.strictEquals((cast renderProxy : RenderProxy2D).rendererData, null) : Bool)) { return; }
     richTextData = (cast (cast (cast renderProxy : RenderProxy2D).rendererData : flighthq._internal._Any) : GlRichTextData__glRichText);
     texture = (cast richTextData : GlRichTextData__glRichText).texture;
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) {
-      (texture = cast ((cast createGlTexture(({ final __callArgument19:Dynamic = state; __callArgument19; })) : flighthq._internal.dom.WebGLTexture) : Dynamic));
+      (texture = cast ((cast createGlTexture(({ final __callArgument40:Dynamic = state; __callArgument40; })) : flighthq._internal.dom.WebGLTexture) : Dynamic));
       ((cast richTextData : GlRichTextData__glRichText).texture = texture);
     }
-    updateGlTexture(({ final __callArgument20:Dynamic = state; __callArgument20; }), ({ final __callArgument21:Dynamic = texture; __callArgument21; }), ({ final __callArgument22:Dynamic = GlRichText._offscreenCanvas__glRichText; __callArgument22; }));
-    (cast shader : { var bind:flighthq._internal.dom.WebGL2RenderingContext->GlRenderState->RenderProxy2D->Void; }).bind((cast state : GlRenderState).gl, ({ final __callArgument23:Dynamic = state; __callArgument23; }), ({ final __callArgument24:Dynamic = renderProxy; __callArgument24; }));
-    offsetX = (cast computeTextBoundsOffsetX((cast data : Dynamic), ({ final __callArgument25:Dynamic = result; __callArgument25; })) : Float);
-    drawGlQuad(({ final __callArgument26:Dynamic = state; __callArgument26; }), (cast offsetX : Float), (cast 0.0 : Float), (cast (offsetX + fieldW) : Float), (cast fieldH : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
+    updateGlTexture(({ final __callArgument42:Dynamic = state; __callArgument42; }), ({ final __callArgument43:Dynamic = texture; __callArgument43; }), ({ final __callArgument44:Dynamic = GlRichText._offscreenCanvas__glRichText; __callArgument44; }));
+    (cast shader : { var bind:flighthq._internal.dom.WebGL2RenderingContext->GlRenderState->RenderProxy2D->Void; }).bind((cast state : GlRenderState).gl, ({ final __callArgument48:Dynamic = state; __callArgument48; }), ({ final __callArgument49:Dynamic = renderProxy; __callArgument49; }));
+    offsetX = (cast computeTextBoundsOffsetX((cast data : Dynamic), ({ final __callArgument50:Dynamic = result; __callArgument50; })) : Float);
+    drawGlQuad(({ final __callArgument52:Dynamic = state; __callArgument52; }), (cast offsetX : Float), (cast 0.0 : Float), (cast (offsetX + fieldW) : Float), (cast fieldH : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
   }
 
   @:noCompletion
@@ -191,13 +191,13 @@ class GlRichText {
     data = source.data;
     measure = (cast function(value:String, format:TextFormat):Float {
       var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
-      context = (cast GlRichText.getOffscreenCanvas__glRichText((cast 1.0 : Float), (cast 1.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : flighthq._internal.dom.CanvasRenderingContext2D);
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', (cast computeTextFormatFontString(({ final __callArgument29:Dynamic = format; __callArgument29; })) : String));
+      context = (cast (#if js _Runtime.callValue(GlRichText.getOffscreenCanvas__glRichText, cast ([(cast 1.0 : Float), (cast 1.0 : Float)] : Array<Dynamic>)) #else GlRichText.getOffscreenCanvas__glRichText((cast 1.0 : Float), (cast 1.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flighthq._internal.dom.CanvasRenderingContext2D);
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', (cast computeTextFormatFontString(({ final __callArgument56:Dynamic = format; __callArgument56; })) : String));
       return cast (cast flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([value] : Array<Dynamic>)) : flighthq._internal.dom.TextMetrics).width;
       return cast _Runtime.UNDEFINED;
     });
     result = (cast getTextLayoutResult((cast richTextRuntime : TextLabelRuntime)) : TextLayoutResult);
-    computeTextLayout(({ final __callArgument30:Dynamic = result; __callArgument30; }), ({ final __callArgument31:Dynamic = { text: text, formatRanges: formatRanges, width: data.width, height: data.height, measure: measure, multiline: data.multiline, verticalAlign: ((cast _Runtime.strictEquals(data.autoSize, 'none') : Bool) ? (cast data.verticalAlign : Dynamic) : (cast 'top' : Dynamic)), wordWrap: data.wordWrap }; __callArgument31; }));
+    computeTextLayout(({ final __callArgument58:Dynamic = result; __callArgument58; }), ({ final __callArgument59:Dynamic = { text: text, formatRanges: formatRanges, width: data.width, height: data.height, measure: measure, multiline: data.multiline, verticalAlign: ((cast _Runtime.strictEquals(data.autoSize, 'none') : Bool) ? (cast data.verticalAlign : Dynamic) : (cast 'top' : Dynamic)), wordWrap: data.wordWrap }; __callArgument59; }));
     return cast result;
     return cast null;
   }

@@ -69,14 +69,14 @@ class WgpuRichText {
     var richData:Null<WgpuRichTextData__wgpuRichText> = cast _Runtime.UNDEFINED;
     richData = (cast getWgpuRendererData(({ final __callArgument0:Dynamic = data; __callArgument0; })) : Null<WgpuRichTextData__wgpuRichText>);
     if ((cast _Runtime.strictEquals(richData, null) : Bool)) { return; }
-    ({ final __hostTypeCall4 = ({ final __structural3 = (cast richData : WgpuRichTextData__wgpuRichText).entry; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var texture:flighthq._internal.dom.GPUTexture; }).texture; }); __hostTypeCall4 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall4 : flighthq._internal.dom.GPUTexture).destroy(); });
+    ({ final __hostTypeCall5 = ({ final __structural4 = (cast richData : WgpuRichTextData__wgpuRichText).entry; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var texture:flighthq._internal.dom.GPUTexture; }).texture; }); __hostTypeCall5 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall5 : flighthq._internal.dom.GPUTexture).destroy(); });
   }
 
   @:noCompletion
   public static function drawWgpuRichText(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var overlay:Null<WgpuRichTextOverlay> = cast _Runtime.UNDEFINED;
     overlay = ((cast ((cast !_Runtime.strictEquals(WgpuRichText._webgpuTextInputOverlay__wgpuRichText, null) : Bool) && (cast !_Runtime.strictEquals((cast (cast getRichTextRuntime((cast (cast renderProxy : RenderProxy2D).source : RichText)) : RichTextRuntime) : { var input:Null<TextInputState>; }).input, null) : Bool)) : Bool) ? (cast WgpuRichText._webgpuTextInputOverlay__wgpuRichText : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
-    drawWgpuRichTextWithOverlay(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = renderProxy; __callArgument6; }), ({ final __callArgument7:Dynamic = overlay; __callArgument7; }));
+    drawWgpuRichTextWithOverlay(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = renderProxy; __callArgument7; }), ({ final __callArgument8:Dynamic = overlay; __callArgument8; }));
   }
 
   @:noCompletion
@@ -98,21 +98,21 @@ class WgpuRichText {
     var ph:Float = cast _Runtime.UNDEFINED;
     var entry:Null<WgpuTextureEntry> = cast _Runtime.UNDEFINED;
     var offsetX:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument12:Dynamic = state; __callArgument12; })) : WgpuRenderStateRuntime);
     if ((cast _Runtime.strictEquals(runtime.renderPass, null) : Bool)) { return; }
-    flushWgpuQuadBatchWriter(({ final __callArgument9:Dynamic = state; __callArgument9; }));
+    flushWgpuQuadBatchWriter(({ final __callArgument14:Dynamic = state; __callArgument14; }));
     source = (cast (cast renderProxy : RenderProxy2D).source : RichText);
     data = source.data;
-    richTextRuntime = (cast getRichTextRuntime(({ final __callArgument10:Dynamic = source; __callArgument10; })) : RichTextRuntime);
-    content = (cast getRichTextContent(({ final __callArgument11:Dynamic = richTextRuntime; __callArgument11; })) : RichTextContent);
-    computeRichTextContent(({ final __callArgument12:Dynamic = content; __callArgument12; }), ({ final __callArgument13:Dynamic = data; __callArgument13; }), (cast getRichTextPasswordCharacter(({ final __callArgument14:Dynamic = source; __callArgument14; })) : Null<String>));
+    richTextRuntime = (cast getRichTextRuntime(({ final __callArgument16:Dynamic = source; __callArgument16; })) : RichTextRuntime);
+    content = (cast getRichTextContent(({ final __callArgument18:Dynamic = richTextRuntime; __callArgument18; })) : RichTextContent);
+    computeRichTextContent(({ final __callArgument20:Dynamic = content; __callArgument20; }), ({ final __callArgument21:Dynamic = data; __callArgument21; }), (cast getRichTextPasswordCharacter(({ final __callArgument22:Dynamic = source; __callArgument22; })) : Null<String>));
     if ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.field(content.text, 'length'), 0.0) : Bool) && (cast !(cast data.background : Bool) : Bool)) : Bool) && (cast !(cast data.border : Bool) : Bool)) : Bool)) { return; }
-    result = (cast WgpuRichText.layoutRichText__wgpuRichText(({ final __callArgument15:Dynamic = source; __callArgument15; }), ({ final __callArgument16:Dynamic = richTextRuntime; __callArgument16; }), (cast content.text : String), (cast content.formatRanges : Dynamic), ({ final __callArgument17:Dynamic = state; __callArgument17; })) : TextLayoutResult);
+    result = (cast WgpuRichText.layoutRichText__wgpuRichText(({ final __callArgument28:Dynamic = source; __callArgument28; }), ({ final __callArgument29:Dynamic = richTextRuntime; __callArgument29; }), (cast content.text : String), (cast content.formatRanges : Dynamic), ({ final __callArgument30:Dynamic = state; __callArgument30; })) : TextLayoutResult);
     maxTexDim = flighthq._internal.backend.WebGpuLimitsBackend.field(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'limits'), 'maxTextureDimension2D');
     pixelRatio = (cast state : WgpuRenderState).pixelRatio;
     maxLogical = HxMath.floor((maxTexDim / pixelRatio));
-    fieldW = HxMath.min(HxMath.ceil((cast computeTextBoundsWidth((cast data : Dynamic), ({ final __callArgument18:Dynamic = result; __callArgument18; })) : Float)), maxLogical);
-    fieldH = HxMath.min(HxMath.ceil((cast computeTextBoundsHeight((cast data : Dynamic), ({ final __callArgument19:Dynamic = result; __callArgument19; })) : Float)), maxLogical);
+    fieldW = HxMath.min(HxMath.ceil((cast computeTextBoundsWidth((cast data : Dynamic), ({ final __callArgument34:Dynamic = result; __callArgument34; })) : Float)), maxLogical);
+    fieldH = HxMath.min(HxMath.ceil((cast computeTextBoundsHeight((cast data : Dynamic), ({ final __callArgument36:Dynamic = result; __callArgument36; })) : Float)), maxLogical);
     if ((cast ((cast ((cast fieldW : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast fieldH : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     offCtx = (cast WgpuRichText.getOffscreenCanvas__wgpuRichText((cast fieldW : Float), (cast fieldH : Float), (cast pixelRatio : Float)) : flighthq._internal.dom.CanvasRenderingContext2D);
     flighthq._internal.backend.Canvas2dBackend.call(offCtx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, 0.0, 0.0] : Array<Dynamic>));
@@ -127,28 +127,28 @@ class WgpuRichText {
       flighthq._internal.backend.Canvas2dBackend.call(offCtx, 'strokeRect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
     }
     if ((cast ((cast _Runtime.field(content.text, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-      WgpuRichText.drawRichTextToCanvas__wgpuRichText(({ final __callArgument20:Dynamic = offCtx; __callArgument20; }), ({ final __callArgument21:Dynamic = source; __callArgument21; }), ({ final __callArgument22:Dynamic = result; __callArgument22; }), (cast fieldW : Float), (cast fieldH : Float), (cast content.text : String));
+      WgpuRichText.drawRichTextToCanvas__wgpuRichText(({ final __callArgument38:Dynamic = offCtx; __callArgument38; }), ({ final __callArgument39:Dynamic = source; __callArgument39; }), ({ final __callArgument40:Dynamic = result; __callArgument40; }), (cast fieldW : Float), (cast fieldH : Float), (cast content.text : String));
     }
     _Runtime.callOptionalValue(overlay, cast ([offCtx, source, result, fieldW, fieldH, content.text] : Array<Dynamic>));
-    _Runtime.callOptionalValue((cast resolveWgpuApplyBlendMode(({ final __callArgument23:Dynamic = state; __callArgument23; })) : Null<WgpuRenderState->Null<String>->Void>), cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
+    _Runtime.callOptionalValue((cast resolveWgpuApplyBlendMode(({ final __callArgument44:Dynamic = state; __callArgument44; })) : Null<WgpuRenderState->Null<String>->Void>), cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
     richData = (cast getWgpuRendererData((cast renderProxy : RenderProxy2D).rendererData) : Null<WgpuRichTextData__wgpuRichText>);
     if ((cast _Runtime.strictEquals(richData, null) : Bool)) { return; }
     pw = flighthq._internal.backend.CanvasElementBackend.field(WgpuRichText._offscreenCanvas__wgpuRichText, 'width');
     ph = flighthq._internal.backend.CanvasElementBackend.field(WgpuRichText._offscreenCanvas__wgpuRichText, 'height');
     entry = (cast richData : WgpuRichTextData__wgpuRichText).entry;
     if ((cast ((cast ((cast _Runtime.strictEquals(entry, null) : Bool) || (cast !_Runtime.strictEquals((cast richData : WgpuRichTextData__wgpuRichText).w, pw) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast richData : WgpuRichTextData__wgpuRichText).h, ph) : Bool)) : Bool)) {
-      var nextEntry:Null<WgpuTextureEntry> = (cast createWgpuTextureEntry(({ final __callArgument24:Dynamic = state; __callArgument24; }), (cast pw : Float), (cast ph : Float), ({ final __callArgument25:Dynamic = WgpuRichText._offscreenCanvas__wgpuRichText; __callArgument25; })) : Null<WgpuTextureEntry>);
+      var nextEntry:Null<WgpuTextureEntry> = (cast createWgpuTextureEntry(({ final __callArgument46:Dynamic = state; __callArgument46; }), (cast pw : Float), (cast ph : Float), ({ final __callArgument47:Dynamic = WgpuRichText._offscreenCanvas__wgpuRichText; __callArgument47; })) : Null<WgpuTextureEntry>);
       if ((cast _Runtime.strictEquals(nextEntry, null) : Bool)) { return; }
-      if ((cast !_Runtime.strictEquals(entry, null) : Bool)) { retireWgpuTexture(({ final __callArgument26:Dynamic = state; __callArgument26; }), (cast entry : WgpuTextureEntry).texture); }
+      if ((cast !_Runtime.strictEquals(entry, null) : Bool)) { retireWgpuTexture(({ final __callArgument50:Dynamic = state; __callArgument50; }), (cast entry : WgpuTextureEntry).texture); }
       (entry = cast (nextEntry : Dynamic));
       ((cast richData : WgpuRichTextData__wgpuRichText).entry = nextEntry);
       ((cast richData : WgpuRichTextData__wgpuRichText).w = pw);
       ((cast richData : WgpuRichTextData__wgpuRichText).h = ph);
     } else {
-      updateWgpuTextureEntry(({ final __callArgument27:Dynamic = state; __callArgument27; }), ({ final __callArgument28:Dynamic = entry; __callArgument28; }), ({ final __callArgument29:Dynamic = WgpuRichText._offscreenCanvas__wgpuRichText; __callArgument29; }));
+      updateWgpuTextureEntry(({ final __callArgument52:Dynamic = state; __callArgument52; }), ({ final __callArgument53:Dynamic = entry; __callArgument53; }), ({ final __callArgument54:Dynamic = WgpuRichText._offscreenCanvas__wgpuRichText; __callArgument54; }));
     }
-    offsetX = (cast computeTextBoundsOffsetX((cast data : Dynamic), ({ final __callArgument30:Dynamic = result; __callArgument30; })) : Float);
-    drawWgpuQuad(({ final __callArgument31:Dynamic = state; __callArgument31; }), ({ final __callArgument32:Dynamic = renderProxy; __callArgument32; }), ({ final __callArgument33:Dynamic = entry; __callArgument33; }), (cast offsetX : Float), (cast 0.0 : Float), (cast (offsetX + fieldW) : Float), (cast fieldH : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
+    offsetX = (cast computeTextBoundsOffsetX((cast data : Dynamic), ({ final __callArgument58:Dynamic = result; __callArgument58; })) : Float);
+    drawWgpuQuad(({ final __callArgument60:Dynamic = state; __callArgument60; }), ({ final __callArgument61:Dynamic = renderProxy; __callArgument61; }), ({ final __callArgument62:Dynamic = entry; __callArgument62; }), (cast offsetX : Float), (cast 0.0 : Float), (cast (offsetX + fieldW) : Float), (cast fieldH : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
   }
 
   @:noCompletion
@@ -229,13 +229,13 @@ class WgpuRichText {
     maxLogical = HxMath.floor((maxTexDim / (cast state : WgpuRenderState).pixelRatio));
     measure = (cast function(value:String, format:TextFormat):Float {
       var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
-      context = (cast WgpuRichText.getOffscreenCanvas__wgpuRichText((cast 1.0 : Float), (cast 1.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : flighthq._internal.dom.CanvasRenderingContext2D);
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', (cast computeTextFormatFontString(({ final __callArgument36:Dynamic = format; __callArgument36; })) : String));
+      context = (cast (#if js _Runtime.callValue(WgpuRichText.getOffscreenCanvas__wgpuRichText, cast ([(cast 1.0 : Float), (cast 1.0 : Float)] : Array<Dynamic>)) #else WgpuRichText.getOffscreenCanvas__wgpuRichText((cast 1.0 : Float), (cast 1.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flighthq._internal.dom.CanvasRenderingContext2D);
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', (cast computeTextFormatFontString(({ final __callArgument68:Dynamic = format; __callArgument68; })) : String));
       return cast (cast flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([value] : Array<Dynamic>)) : flighthq._internal.dom.TextMetrics).width;
       return cast _Runtime.UNDEFINED;
     });
     result = (cast getTextLayoutResult((cast richTextRuntime : TextLabelRuntime)) : TextLayoutResult);
-    computeTextLayout(({ final __callArgument37:Dynamic = result; __callArgument37; }), ({ final __callArgument38:Dynamic = { formatRanges: formatRanges, height: HxMath.min(data.height, maxLogical), measure: measure, multiline: data.multiline, text: text, verticalAlign: ((cast _Runtime.strictEquals(data.autoSize, 'none') : Bool) ? (cast data.verticalAlign : Dynamic) : (cast 'top' : Dynamic)), width: HxMath.min(((cast data.wordWrap : Bool) ? (cast data.width : Dynamic) : (cast 10000.0 : Dynamic)), maxLogical), wordWrap: data.wordWrap }; __callArgument38; }));
+    computeTextLayout(({ final __callArgument70:Dynamic = result; __callArgument70; }), ({ final __callArgument71:Dynamic = { formatRanges: formatRanges, height: HxMath.min(data.height, maxLogical), measure: measure, multiline: data.multiline, text: text, verticalAlign: ((cast _Runtime.strictEquals(data.autoSize, 'none') : Bool) ? (cast data.verticalAlign : Dynamic) : (cast 'top' : Dynamic)), width: HxMath.min(((cast data.wordWrap : Bool) ? (cast data.width : Dynamic) : (cast 10000.0 : Dynamic)), maxLogical), wordWrap: data.wordWrap }; __callArgument71; }));
     return cast result;
     return cast null;
   }

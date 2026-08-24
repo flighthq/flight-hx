@@ -21,7 +21,7 @@ class SpriteHitTests {
 
   @:noCompletion
   public static function defaultTilemapHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
-    return cast (cast defaultSpriteHitTestHandler(({ final __callArgument1:Dynamic = source; __callArgument1; }), (cast x : Float), (cast y : Float)) : Bool);
+    return cast (cast defaultSpriteHitTestHandler(({ final __callArgument2:Dynamic = source; __callArgument2; }), (cast x : Float), (cast y : Float)) : Bool);
     return cast null;
   }
 }

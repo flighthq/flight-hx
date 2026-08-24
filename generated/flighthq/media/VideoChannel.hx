@@ -61,28 +61,28 @@ class VideoChannel {
     var runtime:Null<VideoChannelRuntime__videoChannel> = cast _Runtime.UNDEFINED;
     var channel:flighthq.types.VideoResource.VideoChannel = cast _Runtime.UNDEFINED;
     var onEnded:Void->Void = cast _Runtime.UNDEFINED;
-    element = (cast VideoChannel.getVideoElement__videoChannel(({ final __callArgument1:Dynamic = source; __callArgument1; })) : Null<flighthq._internal.dom.HTMLVideoElement>);
+    element = (cast VideoChannel.getVideoElement__videoChannel(({ final __callArgument2:Dynamic = source; __callArgument2; })) : Null<flighthq._internal.dom.HTMLVideoElement>);
     if ((cast _Runtime.strictEquals(element, null) : Bool)) { return cast null; }
     runtime = ((cast VideoChannel.videoChannelRuntimes__videoChannel : flighthq._internal._WeakMap<flighthq._internal.dom.HTMLVideoElement, VideoChannelRuntime__videoChannel>).get(element));
     if ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (cast element : flighthq._internal.dom.HTMLVideoElement).removeEventListener('ended', (cast runtime : VideoChannelRuntime__videoChannel).onEnded);
     }
-    channel = (cast { currentTime: _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.currentTime; }), function():Dynamic return cast 0.0), gain: _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.gain; }), function():Dynamic return cast 1.0), length: ((cast _Runtime.callValue(flighthq._internal._HostValueLut.get('isNaN'), cast ([(cast element : flighthq._internal.dom.HTMLVideoElement).duration] : Array<Dynamic>)) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers((cast element : flighthq._internal.dom.HTMLVideoElement).duration, 1000.0) : Dynamic)), loops: _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.loops; }), function():Dynamic return cast 0.0), playbackRate: _Runtime.coalesce(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.playbackRate; }), function():Dynamic return cast 1.0), source: source, state: 'stopped', onComplete: (cast createSignal() : Signal<Void->Void>) });
-    onEnded = (cast function():Void { VideoChannel.completeVideoChannel__videoChannel(({ final __callArgument6:Dynamic = channel; __callArgument6; })); });
+    channel = (cast { currentTime: _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.currentTime; }), function():Dynamic return cast 0.0), gain: _Runtime.coalesce(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.gain; }), function():Dynamic return cast 1.0), length: ((cast _Runtime.callValue(flighthq._internal._HostValueLut.get('isNaN'), cast ([(cast element : flighthq._internal.dom.HTMLVideoElement).duration] : Array<Dynamic>)) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers((cast element : flighthq._internal.dom.HTMLVideoElement).duration, 1000.0) : Dynamic)), loops: _Runtime.coalesce(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.loops; }), function():Dynamic return cast 0.0), playbackRate: _Runtime.coalesce(({ final __typedStruct7 = options; __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.playbackRate; }), function():Dynamic return cast 1.0), source: source, state: 'stopped', onComplete: (cast createSignal() : Signal<Void->Void>) });
+    onEnded = (cast function():Void { VideoChannel.completeVideoChannel__videoChannel(({ final __callArgument8:Dynamic = channel; __callArgument8; })); });
     ((cast VideoChannel.videoChannelRuntimes__videoChannel : flighthq._internal._WeakMap<flighthq._internal.dom.HTMLVideoElement, VideoChannelRuntime__videoChannel>).set(element, (cast { loopsRemaining: channel.loops, onEnded: onEnded })));
     ((cast element : flighthq._internal.dom.HTMLVideoElement).currentTime = (channel.currentTime / 1000.0));
     ((cast element : flighthq._internal.dom.HTMLVideoElement).volume = channel.gain);
     ((cast element : flighthq._internal.dom.HTMLVideoElement).playbackRate = channel.playbackRate);
     ((cast element : flighthq._internal.dom.HTMLVideoElement).loop = false);
     (cast element : flighthq._internal.dom.HTMLVideoElement).addEventListener('ended', onEnded);
-    VideoChannel.startVideoChannel__videoChannel(({ final __callArgument7:Dynamic = channel; __callArgument7; }));
+    VideoChannel.startVideoChannel__videoChannel(({ final __callArgument10:Dynamic = channel; __callArgument10; }));
     return cast channel;
     return cast null;
   }
 
   public static function resumeVideoChannel(channel:flighthq.types.VideoResource.VideoChannel):Void {
     if ((cast ((cast _Runtime.strictEquals(channel.state, 'playing') : Bool) || (cast _Runtime.strictEquals((cast VideoChannel.getVideoElement__videoChannel(channel.source) : Null<flighthq._internal.dom.HTMLVideoElement>), null) : Bool)) : Bool)) { return; }
-    VideoChannel.startVideoChannel__videoChannel(({ final __callArgument8:Dynamic = channel; __callArgument8; }));
+    VideoChannel.startVideoChannel__videoChannel(({ final __callArgument12:Dynamic = channel; __callArgument12; }));
   }
 
   public static function setVideoChannelCurrentTime(channel:flighthq.types.VideoResource.VideoChannel, value:Float):Float {
@@ -146,7 +146,7 @@ class VideoChannel {
     if ((cast ((cast !_Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals((cast runtime : VideoChannelRuntime__videoChannel).loopsRemaining, 0.0) : Bool)) : Bool)) {
       if ((cast ((cast (cast runtime : VideoChannelRuntime__videoChannel).loopsRemaining : Float) > (cast 0.0 : Float)) : Bool)) { (cast runtime : VideoChannelRuntime__videoChannel).loopsRemaining--; }
       (channel.currentTime = cast (0.0 : Float));
-      VideoChannel.startVideoChannel__videoChannel(({ final __callArgument9:Dynamic = channel; __callArgument9; }));
+      VideoChannel.startVideoChannel__videoChannel(({ final __callArgument14:Dynamic = channel; __callArgument14; }));
       return;
     }
     (channel.currentTime = cast (channel.length : Float));

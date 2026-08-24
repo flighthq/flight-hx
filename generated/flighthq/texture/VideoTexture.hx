@@ -28,7 +28,7 @@ class VideoTexture {
     var image:Null<Image> = cast _Runtime.UNDEFINED;
     image = (cast VideoTexture.getVideoImage__videoTexture(({ final __callArgument0:Dynamic = texture; __callArgument0; })) : Null<Image>);
     if ((cast _Runtime.looseEquals(image, null) : Bool)) { return cast (cast texture : { var version:Float; }).version; }
-    VideoTexture.updateVideoImageSize__videoTexture(({ final __callArgument1:Dynamic = image; __callArgument1; }));
+    VideoTexture.updateVideoImageSize__videoTexture(({ final __callArgument2:Dynamic = image; __callArgument2; }));
     ((cast image : Image).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast image : Image).version + 1.0)), 0));
     ((cast texture : { var version:Float; }).version = (cast image : Image).version);
     return cast (cast texture : { var version:Float; }).version;
@@ -36,75 +36,75 @@ class VideoTexture {
   }
 
   public static function cloneVideoTexture(source:TextureLike):Texture {
-    return cast (cast cloneTexture(({ final __callArgument2:Dynamic = source; __callArgument2; })) : Texture);
+    return cast (cast cloneTexture(({ final __callArgument4:Dynamic = source; __callArgument4; })) : Texture);
     return cast null;
   }
 
   public static function copyVideoTexture(out:TextureLike, source:TextureLike):Void {
-    copyTexture(({ final __callArgument3:Dynamic = out; __callArgument3; }), ({ final __callArgument4:Dynamic = source; __callArgument4; }));
+    copyTexture(({ final __callArgument6:Dynamic = out; __callArgument6; }), ({ final __callArgument7:Dynamic = source; __callArgument7; }));
   }
 
   public static function createVideoTexture(source:VideoResource, ?opts:flighthq._internal._Partial<TextureLike>):Texture {
     var image:Null<Image> = cast _Runtime.UNDEFINED;
-    image = (cast VideoTexture.createVideoImageResource__videoTexture(({ final __callArgument5:Dynamic = source; __callArgument5; })) : Null<Image>);
-    return cast (cast createTexture((cast _Runtime.mergeObjects([opts, { dimension: '2d' }, { source: image }, { version: _Runtime.coalesce(({ final __structural6 = image; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var version:Float; }).version; }), function():Dynamic return cast VideoTexture.INITIAL_VIDEO_VERSION__videoTexture) }]) : Dynamic)) : Texture2D);
+    image = (cast VideoTexture.createVideoImageResource__videoTexture(({ final __callArgument10:Dynamic = source; __callArgument10; })) : Null<Image>);
+    return cast (cast createTexture((cast _Runtime.mergeObjects([opts, { dimension: '2d' }, { source: image }, { version: _Runtime.coalesce(({ final __structural12 = image; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { var version:Float; }).version; }), function():Dynamic return cast VideoTexture.INITIAL_VIDEO_VERSION__videoTexture) }]) : Dynamic)) : Texture2D);
     return cast null;
   }
 
   public static function getVideoTextureHeight(texture:TextureLike):Float {
     var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
-    element = (cast VideoTexture.getVideoElement__videoTexture(({ final __callArgument7:Dynamic = texture; __callArgument7; })) : Null<flighthq._internal.dom.HTMLVideoElement>);
+    element = (cast VideoTexture.getVideoElement__videoTexture(({ final __callArgument14:Dynamic = texture; __callArgument14; })) : Null<flighthq._internal.dom.HTMLVideoElement>);
     return cast ((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
   public static function getVideoTextureInverseUvMatrix(out:Matrix3Like, texture:TextureLike):Void {
-    getVideoTextureUvMatrix(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = texture; __callArgument9; }));
-    (cast inverseMatrix3(({ final __callArgument10:Dynamic = out; __callArgument10; }), ({ final __callArgument11:Dynamic = out; __callArgument11; })) : Bool);
+    getVideoTextureUvMatrix(({ final __callArgument16:Dynamic = out; __callArgument16; }), ({ final __callArgument17:Dynamic = texture; __callArgument17; }));
+    (cast inverseMatrix3(({ final __callArgument20:Dynamic = out; __callArgument20; }), ({ final __callArgument21:Dynamic = out; __callArgument21; })) : Bool);
   }
 
   public static function getVideoTextureUvMatrix(out:Matrix3Like, texture:TextureLike):Void {
-    getTextureUvMatrix(({ final __callArgument12:Dynamic = out; __callArgument12; }), ({ final __callArgument13:Dynamic = texture; __callArgument13; }));
+    getTextureUvMatrix(({ final __callArgument24:Dynamic = out; __callArgument24; }), ({ final __callArgument25:Dynamic = texture; __callArgument25; }));
   }
 
   public static function getVideoTextureWidth(texture:TextureLike):Float {
     var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
-    element = (cast VideoTexture.getVideoElement__videoTexture(({ final __callArgument14:Dynamic = texture; __callArgument14; })) : Null<flighthq._internal.dom.HTMLVideoElement>);
+    element = (cast VideoTexture.getVideoElement__videoTexture(({ final __callArgument28:Dynamic = texture; __callArgument28; })) : Null<flighthq._internal.dom.HTMLVideoElement>);
     return cast ((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth : Dynamic) : (cast -1.0 : Dynamic));
     return cast null;
   }
 
   public static function isVideoTextureFrameReady(texture:TextureLike):Bool {
     var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
-    element = (cast VideoTexture.getVideoElement__videoTexture(({ final __callArgument15:Dynamic = texture; __callArgument15; })) : Null<flighthq._internal.dom.HTMLVideoElement>);
+    element = (cast VideoTexture.getVideoElement__videoTexture(({ final __callArgument30:Dynamic = texture; __callArgument30; })) : Null<flighthq._internal.dom.HTMLVideoElement>);
     return cast _Runtime.andValue(((cast ((cast !_Runtime.strictEquals(element, null) : Bool) && (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).readyState : Float) >= (cast VideoTexture.HAVE_CURRENT_DATA__videoTexture : Float)) : Bool)) : Bool) && (cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth : Float) > (cast 0.0 : Float)) : Bool)), function():Dynamic return cast ((cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight : Float) > (cast 0.0 : Float)));
     return cast null;
   }
 
   public static function resetVideoTextureFrame(texture:TextureLike):Void {
     var image:Null<Image> = cast _Runtime.UNDEFINED;
-    image = (cast VideoTexture.getVideoImage__videoTexture(({ final __callArgument16:Dynamic = texture; __callArgument16; })) : Null<Image>);
+    image = (cast VideoTexture.getVideoImage__videoTexture(({ final __callArgument32:Dynamic = texture; __callArgument32; })) : Null<Image>);
     if ((cast !_Runtime.looseEquals(image, null) : Bool)) { ((cast image : Image).version = VideoTexture.INITIAL_VIDEO_VERSION__videoTexture); }
     ((cast texture : { var version:Float; }).version = VideoTexture.INITIAL_VIDEO_VERSION__videoTexture);
   }
 
   public static function setVideoTextureSource(texture:TextureLike, source:VideoResource):Void {
     if ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) { _Runtime.throwValue(_Runtime.error('setVideoTextureSource requires a Texture2D')); }
-    ((cast texture : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source = (cast VideoTexture.createVideoImageResource__videoTexture(({ final __callArgument17:Dynamic = source; __callArgument17; })) : Null<Image>));
+    ((cast texture : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source = (cast VideoTexture.createVideoImageResource__videoTexture(({ final __callArgument34:Dynamic = source; __callArgument34; })) : Null<Image>));
     ((cast texture : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).version = VideoTexture.INITIAL_VIDEO_VERSION__videoTexture);
   }
 
   public static function createVideoImageResource__videoTexture(source:VideoResource):Null<Image> {
     var image:Image = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(source.element, null) : Bool)) { return cast null; }
-    image = (cast createEntity(({ final __callArgument18:Dynamic = { height: 0.0, alphaType: 'straight', gamut: 'srgb', kind: ImageTextureSourceKind, source: source.element, version: VideoTexture.INITIAL_VIDEO_VERSION__videoTexture, width: 0.0 }; __callArgument18; })) : Image);
-    VideoTexture.updateVideoImageSize__videoTexture(({ final __callArgument19:Dynamic = image; __callArgument19; }));
+    image = (cast createEntity(({ final __callArgument36:Dynamic = { height: 0.0, alphaType: 'straight', gamut: 'srgb', kind: ImageTextureSourceKind, source: source.element, version: VideoTexture.INITIAL_VIDEO_VERSION__videoTexture, width: 0.0 }; __callArgument36; })) : Image);
+    VideoTexture.updateVideoImageSize__videoTexture(({ final __callArgument38:Dynamic = image; __callArgument38; }));
     return cast image;
     return cast null;
   }
 
   public static function getVideoElement__videoTexture(texture:TextureLike):Null<flighthq._internal.dom.HTMLVideoElement> {
-    return cast _Runtime.coalesce((cast ({ final __structural21 = (cast VideoTexture.getVideoImage__videoTexture(({ final __callArgument20:Dynamic = texture; __callArgument20; })) : Null<Image>); __structural21 == null ? _Runtime.UNDEFINED : (cast __structural21 : { var source:flighthq._internal._Any; }).source; }) : Null<flighthq._internal.dom.HTMLVideoElement>), function():Dynamic return cast null);
+    return cast _Runtime.coalesce((cast ({ final __structural42 = (cast VideoTexture.getVideoImage__videoTexture(({ final __callArgument40:Dynamic = texture; __callArgument40; })) : Null<Image>); __structural42 == null ? _Runtime.UNDEFINED : (cast __structural42 : { var source:flighthq._internal._Any; }).source; }) : Null<flighthq._internal.dom.HTMLVideoElement>), function():Dynamic return cast null);
     return cast null;
   }
 

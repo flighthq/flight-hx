@@ -44,8 +44,8 @@ class WgpuInnerShadowEffect {
     dst = (cast dest : WgpuRenderTarget);
     descriptor = (cast { width: source.width, height: source.height, format: source.format });
     s0 = (cast acquireWgpuRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = pool; __callArgument1; }), ({ final __callArgument2:Dynamic = descriptor; __callArgument2; })) : WgpuRenderTarget);
-    s1 = (cast acquireWgpuRenderTarget(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = pool; __callArgument4; }), ({ final __callArgument5:Dynamic = descriptor; __callArgument5; })) : WgpuRenderTarget);
-    s2 = (cast acquireWgpuRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pool; __callArgument7; }), ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : WgpuRenderTarget);
+    s1 = (cast acquireWgpuRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pool; __callArgument7; }), ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : WgpuRenderTarget);
+    s2 = (cast acquireWgpuRenderTarget(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = pool; __callArgument13; }), ({ final __callArgument14:Dynamic = descriptor; __callArgument14; })) : WgpuRenderTarget);
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(effect.angle, function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(effect.distance, function():Dynamic return cast 4.0);
     dx = _Runtime.multiplyNumbers(HxMath.cos(angle), distance);
@@ -55,18 +55,18 @@ class WgpuInnerShadowEffect {
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(effect.quality, function():Dynamic return cast 1.0)));
     sourceMode = _Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw');
-    applyWgpuEffectInvertTintPass(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = src; __callArgument10; }), ({ final __callArgument11:Dynamic = s0; __callArgument11; }), (cast color : Float), (cast alpha : Float), (cast strength : Float));
-    applyWgpuEffectBoxBlur(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = s0; __callArgument13; }), ({ final __callArgument14:Dynamic = s1; __callArgument14; }), ({ final __callArgument15:Dynamic = s2; __callArgument15; }), ({ final __callArgument16:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 4.0), edgeColor: (cast WgpuInnerShadowEffect.getInvertTintEdgeColor__wgpuInnerShadowEffect((cast color : Float), (cast alpha : Float), (cast strength : Float)) : Array<Float>), passes: quality }; __callArgument16; }));
-    applyWgpuEffectBlitOffsetPass(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = s1; __callArgument18; }), ({ final __callArgument19:Dynamic = s0; __callArgument19; }), (cast dx : Float), (cast dy : Float));
-    applyWgpuEffectInnerClipPass(({ final __callArgument20:Dynamic = state; __callArgument20; }), ({ final __callArgument21:Dynamic = s0; __callArgument21; }), ({ final __callArgument22:Dynamic = src; __callArgument22; }), ({ final __callArgument23:Dynamic = s1; __callArgument23; }));
-    clearWgpuEffectTarget(({ final __callArgument24:Dynamic = state; __callArgument24; }), ({ final __callArgument25:Dynamic = dst; __callArgument25; }));
+    applyWgpuEffectInvertTintPass(({ final __callArgument18:Dynamic = state; __callArgument18; }), ({ final __callArgument19:Dynamic = src; __callArgument19; }), ({ final __callArgument20:Dynamic = s0; __callArgument20; }), (cast color : Float), (cast alpha : Float), (cast strength : Float));
+    applyWgpuEffectBoxBlur(({ final __callArgument24:Dynamic = state; __callArgument24; }), ({ final __callArgument25:Dynamic = s0; __callArgument25; }), ({ final __callArgument26:Dynamic = s1; __callArgument26; }), ({ final __callArgument27:Dynamic = s2; __callArgument27; }), ({ final __callArgument28:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 4.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 4.0), edgeColor: (cast WgpuInnerShadowEffect.getInvertTintEdgeColor__wgpuInnerShadowEffect((cast color : Float), (cast alpha : Float), (cast strength : Float)) : Array<Float>), passes: quality }; __callArgument28; }));
+    applyWgpuEffectBlitOffsetPass(({ final __callArgument34:Dynamic = state; __callArgument34; }), ({ final __callArgument35:Dynamic = s1; __callArgument35; }), ({ final __callArgument36:Dynamic = s0; __callArgument36; }), (cast dx : Float), (cast dy : Float));
+    applyWgpuEffectInnerClipPass(({ final __callArgument40:Dynamic = state; __callArgument40; }), ({ final __callArgument41:Dynamic = s0; __callArgument41; }), ({ final __callArgument42:Dynamic = src; __callArgument42; }), ({ final __callArgument43:Dynamic = s1; __callArgument43; }));
+    clearWgpuEffectTarget(({ final __callArgument48:Dynamic = state; __callArgument48; }), ({ final __callArgument49:Dynamic = dst; __callArgument49; }));
     if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      applyWgpuEffectBlitPass(({ final __callArgument26:Dynamic = state; __callArgument26; }), ({ final __callArgument27:Dynamic = src; __callArgument27; }), ({ final __callArgument28:Dynamic = dst; __callArgument28; }));
+      applyWgpuEffectBlitPass(({ final __callArgument52:Dynamic = state; __callArgument52; }), ({ final __callArgument53:Dynamic = src; __callArgument53; }), ({ final __callArgument54:Dynamic = dst; __callArgument54; }));
     }
-    applyWgpuEffectBlitPass(({ final __callArgument29:Dynamic = state; __callArgument29; }), ({ final __callArgument30:Dynamic = s1; __callArgument30; }), ({ final __callArgument31:Dynamic = dst; __callArgument31; }));
-    releaseWgpuRenderTarget(({ final __callArgument32:Dynamic = pool; __callArgument32; }), ({ final __callArgument33:Dynamic = s0; __callArgument33; }));
-    releaseWgpuRenderTarget(({ final __callArgument34:Dynamic = pool; __callArgument34; }), ({ final __callArgument35:Dynamic = s1; __callArgument35; }));
-    releaseWgpuRenderTarget(({ final __callArgument36:Dynamic = pool; __callArgument36; }), ({ final __callArgument37:Dynamic = s2; __callArgument37; }));
+    applyWgpuEffectBlitPass(({ final __callArgument58:Dynamic = state; __callArgument58; }), ({ final __callArgument59:Dynamic = s1; __callArgument59; }), ({ final __callArgument60:Dynamic = dst; __callArgument60; }));
+    releaseWgpuRenderTarget(({ final __callArgument64:Dynamic = pool; __callArgument64; }), ({ final __callArgument65:Dynamic = s0; __callArgument65; }));
+    releaseWgpuRenderTarget(({ final __callArgument68:Dynamic = pool; __callArgument68; }), ({ final __callArgument69:Dynamic = s1; __callArgument69; }));
+    releaseWgpuRenderTarget(({ final __callArgument72:Dynamic = pool; __callArgument72; }), ({ final __callArgument73:Dynamic = s2; __callArgument73; }));
   }
 
   public static final defaultWgpuInnerShadowEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
@@ -74,12 +74,12 @@ class WgpuInnerShadowEffect {
   });
 
   public static function registerWgpuInnerShadowEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect(({ final __callArgument38:Dynamic = state; __callArgument38; }), (cast 'InnerShadowEffect' : String), ({ final __callArgument39:Dynamic = defaultWgpuInnerShadowEffectRunner; __callArgument39; }));
+    registerWgpuRenderEffect(({ final __callArgument76:Dynamic = state; __callArgument76; }), (cast 'InnerShadowEffect' : String), ({ final __callArgument77:Dynamic = defaultWgpuInnerShadowEffectRunner; __callArgument77; }));
   }
 
   public static function getInvertTintEdgeColor__wgpuInnerShadowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
     var edgeAlpha:Float = cast _Runtime.UNDEFINED;
-    unpackColorRgba(({ final __callArgument40:Dynamic = WgpuInnerShadowEffect.scratchEdge__wgpuInnerShadowEffect; __callArgument40; }), (cast color : Float));
+    unpackColorRgba(({ final __callArgument80:Dynamic = WgpuInnerShadowEffect.scratchEdge__wgpuInnerShadowEffect; __callArgument80; }), (cast color : Float));
     edgeAlpha = HxMath.min(1.0, ((alpha * flighthq._internal._StaticIndex.readFloatArrayTyped((cast WgpuInnerShadowEffect.scratchEdge__wgpuInnerShadowEffect : Array<Float>), (cast 3.0 : Float))) * strength));
     return cast cast ([(flighthq._internal._StaticIndex.readFloatArrayTyped((cast WgpuInnerShadowEffect.scratchEdge__wgpuInnerShadowEffect : Array<Float>), (cast 0.0 : Float)) * edgeAlpha), (flighthq._internal._StaticIndex.readFloatArrayTyped((cast WgpuInnerShadowEffect.scratchEdge__wgpuInnerShadowEffect : Array<Float>), (cast 1.0 : Float)) * edgeAlpha), (flighthq._internal._StaticIndex.readFloatArrayTyped((cast WgpuInnerShadowEffect.scratchEdge__wgpuInnerShadowEffect : Array<Float>), (cast 2.0 : Float)) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
     return cast null;

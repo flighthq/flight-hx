@@ -179,7 +179,7 @@ class Device {
     if ((cast !_Runtime.strictEquals(observer, null) : Bool)) { (cast observer : flighthq._internal.dom.ResizeObserver).observe(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'documentElement')); }
     return cast function():Void {
       if ((cast !_Runtime.strictEquals(observer, null) : Bool)) { (cast observer : flighthq._internal.dom.ResizeObserver).disconnect(); }
-      ({ final __hostTypeCall5 = (cast el : flighthq._internal.dom.HTMLDivElement).parentNode; __hostTypeCall5 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall5 : flighthq._internal.dom.ParentNode).removeChild(el); });
+      ({ final __hostTypeCall6 = (cast el : flighthq._internal.dom.HTMLDivElement).parentNode; __hostTypeCall6 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall6 : flighthq._internal.dom.ParentNode).removeChild(el); });
       (Device._safeAreaInsets__device = cast (null : Dynamic));
     };
     return cast null;
@@ -193,12 +193,12 @@ class Device {
   }
 
   public static function getDeviceCapabilities(out:DeviceCapabilities):DeviceCapabilities {
-    return cast (cast (cast getDeviceBackend() : DeviceBackend) : DeviceBackend).getCapabilities(({ final __callArgument6:Dynamic = out; __callArgument6; }));
+    return cast (cast (cast getDeviceBackend() : DeviceBackend) : DeviceBackend).getCapabilities(({ final __callArgument7:Dynamic = out; __callArgument7; }));
     return cast null;
   }
 
   public static function getDeviceDisplayMetrics(out:DeviceDisplayMetrics):DeviceDisplayMetrics {
-    return cast (cast (cast getDeviceBackend() : DeviceBackend) : DeviceBackend).getDisplayMetrics(({ final __callArgument7:Dynamic = out; __callArgument7; }));
+    return cast (cast (cast getDeviceBackend() : DeviceBackend) : DeviceBackend).getDisplayMetrics(({ final __callArgument8:Dynamic = out; __callArgument8; }));
     return cast null;
   }
 
@@ -208,12 +208,12 @@ class Device {
   }
 
   public static function getDeviceInfo(out:DeviceInfo):DeviceInfo {
-    return cast (cast (cast getDeviceBackend() : DeviceBackend) : DeviceBackend).getInfo(({ final __callArgument8:Dynamic = out; __callArgument8; }));
+    return cast (cast (cast getDeviceBackend() : DeviceBackend) : DeviceBackend).getInfo(({ final __callArgument9:Dynamic = out; __callArgument9; }));
     return cast null;
   }
 
   public static function getSafeAreaInsets(out:SafeAreaInsets):SafeAreaInsets {
-    return cast (cast (cast getDeviceBackend() : DeviceBackend) : DeviceBackend).getSafeAreaInsets(({ final __callArgument9:Dynamic = out; __callArgument9; }));
+    return cast (cast (cast getDeviceBackend() : DeviceBackend) : DeviceBackend).getSafeAreaInsets(({ final __callArgument10:Dynamic = out; __callArgument10; }));
     return cast null;
   }
 

@@ -27,16 +27,16 @@ import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 class EnableColorAdjustments {
   public static function areColorAdjustmentsEnabled(state:RenderState):Bool {
-    return cast _Runtime.strictEquals(({ final __structural2 = ({ final __structural1 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { @:optional var colorAdjustments:Null<SlotTable<RenderState->RenderProxy->Null<RenderProxy>->Void>>; }).colorAdjustments; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:RenderState->RenderProxy->Null<RenderProxy>->Void; }>>; }).entry; }); __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
+    return cast _Runtime.strictEquals(({ final __structural3 = ({ final __structural2 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { @:optional var colorAdjustments:Null<SlotTable<RenderState->RenderProxy->Null<RenderProxy>->Void>>; }).colorAdjustments; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:RenderState->RenderProxy->Null<RenderProxy>->Void; }>>; }).entry; }); __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
     return cast null;
   }
 
   public static function enableColorAdjustments(state:RenderState):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:SlotTable<RenderState->RenderProxy->Null<RenderProxy>->Void> = cast _Runtime.UNDEFINED;
-    runtime = (cast getRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : RenderStateRuntime);
+    runtime = (cast getRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : RenderStateRuntime);
     table = _Runtime.coalesce((cast runtime.registries : { @:optional var colorAdjustments:Null<SlotTable<RenderState->RenderProxy->Null<RenderProxy>->Void>>; }).colorAdjustments, function():Dynamic return cast (cast createSlotTable((cast 'ColorAdjustments' : String), (cast 'Disabled' : String)) : SlotTable<RenderState->RenderProxy->Null<RenderProxy>->Void>));
-    if ((cast ((cast _Runtime.strictEquals(({ final __structural4 = (cast table : SlotTable<RenderState->RenderProxy->Null<RenderProxy>->Void>).entry; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) && (cast _Runtime.strictEquals((cast (cast table : SlotTable<RenderState->RenderProxy->Null<RenderProxy>->Void>).entry : { var state:String; var value:RenderState->RenderProxy->Null<RenderProxy>->Void; }).value, EnableColorAdjustments.updateRenderProxyColorScaleBias__enableColorAdjustments) : Bool)) : Bool)) { return; }
+    if ((cast ((cast _Runtime.strictEquals(({ final __structural6 = (cast table : SlotTable<RenderState->RenderProxy->Null<RenderProxy>->Void>).entry; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) && (cast _Runtime.strictEquals((cast (cast table : SlotTable<RenderState->RenderProxy->Null<RenderProxy>->Void>).entry : { var state:String; var value:RenderState->RenderProxy->Null<RenderProxy>->Void; }).value, EnableColorAdjustments.updateRenderProxyColorScaleBias__enableColorAdjustments) : Bool)) : Bool)) { return; }
     ((cast runtime.registries : { @:optional var colorAdjustments:Null<SlotTable<RenderState->RenderProxy->Null<RenderProxy>->Void>>; }).colorAdjustments = cast (_Runtime.mergeObjects([table, { entry: { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: EnableColorAdjustments.updateRenderProxyColorScaleBias__enableColorAdjustments } }]) : Null<SlotTable<RenderState->RenderProxy->Null<RenderProxy>->Void>>));
   }
 
@@ -49,17 +49,17 @@ class EnableColorAdjustments {
     runtime = (cast getNodeRuntime((cast (cast data.source : Node<Dynamic>) : Dynamic)) : { @:optional var colorAdjustments:Null<Array<Adjustment>>; @:optional var colorAdjustmentsUnsupported:Null<Bool>; @:optional var resolvedColorMatrix:Null<Array<Float>>; @:optional var resolvedColorScaleBias:Null<ColorScaleBias>; });
     localColorScaleBias = _Runtime.coalesce((cast runtime : { @:optional var colorAdjustments:Null<Array<Adjustment>>; @:optional var colorAdjustmentsUnsupported:Null<Bool>; @:optional var resolvedColorMatrix:Null<Array<Float>>; @:optional var resolvedColorScaleBias:Null<ColorScaleBias>; }).resolvedColorScaleBias, function():Dynamic return cast null);
     localColorMatrix = _Runtime.coalesce((cast runtime : { @:optional var colorAdjustments:Null<Array<Adjustment>>; @:optional var colorAdjustmentsUnsupported:Null<Bool>; @:optional var resolvedColorMatrix:Null<Array<Float>>; @:optional var resolvedColorScaleBias:Null<ColorScaleBias>; }).resolvedColorMatrix, function():Dynamic return cast null);
-    parentColorScaleBias = _Runtime.coalesce(({ final __typedStruct5 = parentData; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.colorScaleBias; }), function():Dynamic return cast null);
-    parentColorMatrix = _Runtime.coalesce(({ final __typedStruct6 = parentData; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.colorMatrix; }), function():Dynamic return cast null);
+    parentColorScaleBias = _Runtime.coalesce(({ final __typedStruct7 = parentData; __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.colorScaleBias; }), function():Dynamic return cast null);
+    parentColorMatrix = _Runtime.coalesce(({ final __typedStruct8 = parentData; __typedStruct8 == null ? _Runtime.UNDEFINED : __typedStruct8.colorMatrix; }), function():Dynamic return cast null);
     if ((cast ((cast !_Runtime.strictEquals(localColorMatrix, null) : Bool) || (cast !_Runtime.strictEquals(parentColorMatrix, null) : Bool)) : Bool)) {
-      (data.colorMatrix = cast ((cast EnableColorAdjustments.resolveInheritedColorMatrix__enableColorAdjustments(data.colorMatrix, ({ final __callArgument7:Dynamic = parentColorMatrix; __callArgument7; }), ({ final __callArgument8:Dynamic = parentColorScaleBias; __callArgument8; }), ({ final __callArgument9:Dynamic = localColorMatrix; __callArgument9; }), ({ final __callArgument10:Dynamic = localColorScaleBias; __callArgument10; })) : Array<Float>) : Null<Array<Float>>));
+      (data.colorMatrix = cast ((cast EnableColorAdjustments.resolveInheritedColorMatrix__enableColorAdjustments(data.colorMatrix, ({ final __callArgument9:Dynamic = parentColorMatrix; __callArgument9; }), ({ final __callArgument10:Dynamic = parentColorScaleBias; __callArgument10; }), ({ final __callArgument11:Dynamic = localColorMatrix; __callArgument11; }), ({ final __callArgument12:Dynamic = localColorScaleBias; __callArgument12; })) : Array<Float>) : Null<Array<Float>>));
       (data.colorScaleBias = cast (null : Null<ColorScaleBias>));
     } else {
       (data.colorMatrix = cast (null : Null<Array<Float>>));
-      (data.colorScaleBias = cast ((cast EnableColorAdjustments.resolveInheritedColorScaleBias__enableColorAdjustments(data.colorScaleBias, ({ final __callArgument11:Dynamic = parentColorScaleBias; __callArgument11; }), ({ final __callArgument12:Dynamic = localColorScaleBias; __callArgument12; })) : Null<ColorScaleBias>) : Null<ColorScaleBias>));
+      (data.colorScaleBias = cast ((cast EnableColorAdjustments.resolveInheritedColorScaleBias__enableColorAdjustments(data.colorScaleBias, ({ final __callArgument17:Dynamic = parentColorScaleBias; __callArgument17; }), ({ final __callArgument18:Dynamic = localColorScaleBias; __callArgument18; })) : Null<ColorScaleBias>) : Null<ColorScaleBias>));
     }
     if (_Runtime.truthy((cast runtime : { @:optional var colorAdjustments:Null<Array<Adjustment>>; @:optional var colorAdjustmentsUnsupported:Null<Bool>; @:optional var resolvedColorMatrix:Null<Array<Float>>; @:optional var resolvedColorScaleBias:Null<ColorScaleBias>; }).colorAdjustmentsUnsupported)) {
-      _Runtime.callOptionalValue((cast getColorAdjustmentUnsupportedGuard(({ final __callArgument13:Dynamic = state; __callArgument13; })) : Null<ColorAdjustmentUnsupportedGuard>), cast ([state, (cast data.source : Renderable)] : Array<Dynamic>));
+      _Runtime.callOptionalValue((cast getColorAdjustmentUnsupportedGuard(({ final __callArgument21:Dynamic = state; __callArgument21; })) : Null<ColorAdjustmentUnsupportedGuard>), cast ([state, (cast data.source : Renderable)] : Array<Dynamic>));
     }
   }
 
@@ -68,7 +68,7 @@ class EnableColorAdjustments {
     if ((cast _Runtime.strictEquals(parent, null) : Bool)) { return cast local; }
     if ((cast _Runtime.strictEquals(local, null) : Bool)) { return cast parent; }
     out = ((cast ((cast ((cast ((cast !_Runtime.strictEquals(previous, parent) : Bool) && (cast !_Runtime.strictEquals(previous, local) : Bool)) : Bool) && (cast !_Runtime.strictEquals(previous, null) : Bool)) : Bool) && (cast ((cast EnableColorAdjustments.inheritedColorScaleBiases__enableColorAdjustments : flighthq._internal._WeakSet<ColorScaleBias>).has(previous)) : Bool)) : Bool) ? (cast previous : Dynamic) : (cast (cast EnableColorAdjustments.createInheritedColorScaleBias__enableColorAdjustments() : ColorScaleBias) : Dynamic));
-    concatColorScaleBias(({ final __callArgument14:Dynamic = out; __callArgument14; }), ({ final __callArgument15:Dynamic = parent; __callArgument15; }), ({ final __callArgument16:Dynamic = local; __callArgument16; }));
+    concatColorScaleBias(({ final __callArgument23:Dynamic = out; __callArgument23; }), ({ final __callArgument24:Dynamic = parent; __callArgument24; }), ({ final __callArgument25:Dynamic = local; __callArgument25; }));
     return cast out;
     return cast null;
   }
@@ -79,10 +79,10 @@ class EnableColorAdjustments {
     var out:Array<Float> = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(parentMatrix, null) : Bool) && (cast _Runtime.strictEquals(parentColorScaleBias, null) : Bool)) : Bool)) { return cast localMatrix; }
     if ((cast ((cast _Runtime.strictEquals(localMatrix, null) : Bool) && (cast _Runtime.strictEquals(localColorScaleBias, null) : Bool)) : Bool)) { return cast parentMatrix; }
-    parent = _Runtime.coalesce(parentMatrix, function():Dynamic return cast (cast EnableColorAdjustments.writeColorScaleBiasMatrix__enableColorAdjustments(({ final __callArgument17:Dynamic = EnableColorAdjustments.parentColorMatrixScratch__enableColorAdjustments; __callArgument17; }), ({ final __callArgument18:Dynamic = parentColorScaleBias; __callArgument18; })) : Array<Float>));
-    local = _Runtime.coalesce(localMatrix, function():Dynamic return cast (cast EnableColorAdjustments.writeColorScaleBiasMatrix__enableColorAdjustments(({ final __callArgument19:Dynamic = EnableColorAdjustments.localColorMatrixScratch__enableColorAdjustments; __callArgument19; }), ({ final __callArgument20:Dynamic = localColorScaleBias; __callArgument20; })) : Array<Float>));
+    parent = _Runtime.coalesce(parentMatrix, function():Dynamic return cast (cast EnableColorAdjustments.writeColorScaleBiasMatrix__enableColorAdjustments(({ final __callArgument29:Dynamic = EnableColorAdjustments.parentColorMatrixScratch__enableColorAdjustments; __callArgument29; }), ({ final __callArgument30:Dynamic = parentColorScaleBias; __callArgument30; })) : Array<Float>));
+    local = _Runtime.coalesce(localMatrix, function():Dynamic return cast (cast EnableColorAdjustments.writeColorScaleBiasMatrix__enableColorAdjustments(({ final __callArgument33:Dynamic = EnableColorAdjustments.localColorMatrixScratch__enableColorAdjustments; __callArgument33; }), ({ final __callArgument34:Dynamic = localColorScaleBias; __callArgument34; })) : Array<Float>));
     out = ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(previous, parentMatrix) : Bool) && (cast !_Runtime.strictEquals(previous, localMatrix) : Bool)) : Bool) && (cast !_Runtime.strictEquals(previous, null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) && (cast ((cast EnableColorAdjustments.inheritedColorMatrices__enableColorAdjustments : flighthq._internal._WeakSet<Array<Float>>).has(previous)) : Bool)) : Bool) ? (cast (cast previous : Array<Float>) : Dynamic) : (cast (cast EnableColorAdjustments.createInheritedColorMatrix__enableColorAdjustments() : Array<Float>) : Dynamic));
-    return cast (cast multiplyColorMatrix(({ final __callArgument21:Dynamic = parent; __callArgument21; }), ({ final __callArgument22:Dynamic = local; __callArgument22; }), ({ final __callArgument23:Dynamic = out; __callArgument23; })) : Array<Float>);
+    return cast (cast multiplyColorMatrix(({ final __callArgument37:Dynamic = parent; __callArgument37; }), ({ final __callArgument38:Dynamic = local; __callArgument38; }), ({ final __callArgument39:Dynamic = out; __callArgument39; })) : Array<Float>);
     return cast null;
   }
 
@@ -113,7 +113,7 @@ class EnableColorAdjustments {
 
   public static function createInheritedColorScaleBias__enableColorAdjustments():ColorScaleBias {
     var value:ColorScaleBias = cast _Runtime.UNDEFINED;
-    value = (cast createColorScaleBias(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ColorScaleBias);
+    value = (cast (#if js _Runtime.callValue(createColorScaleBias, cast ([] : Array<Dynamic>)) #else createColorScaleBias(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : ColorScaleBias);
     ((cast EnableColorAdjustments.inheritedColorScaleBiases__enableColorAdjustments : flighthq._internal._WeakSet<ColorScaleBias>).add(value));
     return cast value;
     return cast null;

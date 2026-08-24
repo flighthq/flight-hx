@@ -53,7 +53,7 @@ class CanvasRenderEffectPipeline {
     } else {
       resizeCanvasRenderTarget(pipeline.sceneTarget, (cast w : Float), (cast h : Float));
     }
-    beginCanvasRenderPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), pipeline.sceneTarget, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(beginCanvasRenderPass, cast ([({ final __callArgument3:Dynamic = state; __callArgument3; }), pipeline.sceneTarget] : Array<Dynamic>)) #else beginCanvasRenderPass(({ final __callArgument2:Dynamic = state; __callArgument2; }), pipeline.sceneTarget, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static function createCanvasRenderEffectPipeline(_state:CanvasRenderState, ?options:RenderEffectPipelineOptions):flighthq.types.CanvasRenderEffectPipeline {
@@ -88,15 +88,15 @@ class CanvasRenderEffectPipeline {
     var flushAdjustments:Void->Void = cast _Runtime.UNDEFINED;
     scene = pipeline.sceneTarget;
     if ((cast _Runtime.strictEquals(scene, null) : Bool)) { return; }
-    endCanvasRenderPass(({ final __callArgument2:Dynamic = state; __callArgument2; }));
+    endCanvasRenderPass(({ final __callArgument4:Dynamic = state; __callArgument4; }));
     pool = pipeline.pool;
     source = scene;
     scratchA = null;
     scratchB = null;
     pending = (cast cast ([] : Array<Dynamic>));
     ensureScratch = (cast function():Void {
-      if ((cast _Runtime.strictEquals(scratchA, null) : Bool)) { (scratchA = cast ((cast acquireCanvasRenderTarget(({ final __callArgument3:Dynamic = pool; __callArgument3; }), (cast (cast scene : { var width:Float; }).width : Float), (cast (cast scene : { var height:Float; }).height : Float)) : CanvasRenderTarget) : Dynamic)); }
-      if ((cast _Runtime.strictEquals(scratchB, null) : Bool)) { (scratchB = cast ((cast acquireCanvasRenderTarget(({ final __callArgument4:Dynamic = pool; __callArgument4; }), (cast (cast scene : { var width:Float; }).width : Float), (cast (cast scene : { var height:Float; }).height : Float)) : CanvasRenderTarget) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchA, null) : Bool)) { (scratchA = cast ((cast acquireCanvasRenderTarget(({ final __callArgument6:Dynamic = pool; __callArgument6; }), (cast (cast scene : { var width:Float; }).width : Float), (cast (cast scene : { var height:Float; }).height : Float)) : CanvasRenderTarget) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchB, null) : Bool)) { (scratchB = cast ((cast acquireCanvasRenderTarget(({ final __callArgument8:Dynamic = pool; __callArgument8; }), (cast (cast scene : { var width:Float; }).width : Float), (cast (cast scene : { var height:Float; }).height : Float)) : CanvasRenderTarget) : Dynamic)); }
     });
     flushAdjustments = (cast function():Void {
       var dest:CanvasRenderTarget = cast _Runtime.UNDEFINED;
@@ -104,34 +104,34 @@ class CanvasRenderEffectPipeline {
       ensureScratch();
       dest = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
       if ((cast _Runtime.callProperty(pending, 'some', cast ([isColorLutAdjustment] : Array<Dynamic>)) : Bool)) {
-        applyColorLutPassToCanvas(({ final __callArgument5:Dynamic = source; __callArgument5; }), ({ final __callArgument6:Dynamic = dest; __callArgument6; }), (cast bakeColorLutForRun(pipeline.lutCache, ({ final __callArgument7:Dynamic = pending; __callArgument7; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ColorLut));
+        applyColorLutPassToCanvas(({ final __callArgument10:Dynamic = source; __callArgument10; }), ({ final __callArgument11:Dynamic = dest; __callArgument11; }), (cast (#if js _Runtime.callValue(bakeColorLutForRun, cast ([pipeline.lutCache, ({ final __callArgument13:Dynamic = pending; __callArgument13; })] : Array<Dynamic>)) #else bakeColorLutForRun(pipeline.lutCache, ({ final __callArgument12:Dynamic = pending; __callArgument12; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : ColorLut));
       } else {
         var matrices:Array<Array<Float>> = (cast cast ([] : Array<Dynamic>));
         for (op in _Runtime.iterable(pending)) {
-          var matrix:Null<Array<Float>> = (cast getAdjustmentColorMatrix(({ final __callArgument10:Dynamic = op; __callArgument10; })) : Null<Array<Float>>);
+          var matrix:Null<Array<Float>> = (cast getAdjustmentColorMatrix(({ final __callArgument20:Dynamic = op; __callArgument20; })) : Null<Array<Float>>);
           if ((cast !_Runtime.strictEquals(matrix, null) : Bool)) { _Runtime.callProperty(matrices, 'push', cast ([matrix] : Array<Dynamic>)); }
         }
-        applyColorMatrixPassToCanvas(({ final __callArgument11:Dynamic = source; __callArgument11; }), ({ final __callArgument12:Dynamic = dest; __callArgument12; }), (cast fuseColorMatrices(({ final __callArgument13:Dynamic = matrices; __callArgument13; })) : Array<Float>));
+        applyColorMatrixPassToCanvas(({ final __callArgument22:Dynamic = source; __callArgument22; }), ({ final __callArgument23:Dynamic = dest; __callArgument23; }), (cast fuseColorMatrices(({ final __callArgument24:Dynamic = matrices; __callArgument24; })) : Array<Float>));
       }
       (source = cast (dest : Dynamic));
       (pending = cast (cast ([] : Array<Dynamic>) : Dynamic));
     });
     for (operation in _Runtime.iterable(operations)) {
-      if ((cast ((cast !_Runtime.strictEquals((cast getAdjustmentColorMatrix(({ final __callArgument16:Dynamic = operation; __callArgument16; })) : Null<Array<Float>>), null) : Bool) || (cast (cast isColorLutAdjustment(({ final __callArgument17:Dynamic = operation; __callArgument17; })) : Bool) : Bool)) : Bool)) {
+      if ((cast ((cast !_Runtime.strictEquals((cast getAdjustmentColorMatrix(({ final __callArgument32:Dynamic = operation; __callArgument32; })) : Null<Array<Float>>), null) : Bool) || (cast (cast isColorLutAdjustment(({ final __callArgument34:Dynamic = operation; __callArgument34; })) : Bool) : Bool)) : Bool)) {
         _Runtime.callProperty(pending, 'push', cast ([(cast operation : Adjustment)] : Array<Dynamic>));
         continue;
       }
-      var runner:Null<CanvasRenderEffectRunner> = (cast getCanvasRenderEffectRunner(({ final __callArgument18:Dynamic = state; __callArgument18; }), (cast (cast operation : { var kind:String; }).kind : String)) : Null<CanvasRenderEffectRunner>);
+      var runner:Null<CanvasRenderEffectRunner> = (cast getCanvasRenderEffectRunner(({ final __callArgument36:Dynamic = state; __callArgument36; }), (cast (cast operation : { var kind:String; }).kind : String)) : Null<CanvasRenderEffectRunner>);
       flushAdjustments();
       ensureScratch();
       var dest:CanvasRenderTarget = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
-      if ((cast _Runtime.strictEquals(runner, null) : Bool)) { drawCanvasEffectPass(({ final __callArgument19:Dynamic = dest; __callArgument19; }), ({ final __callArgument20:Dynamic = source; __callArgument20; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end); } else { runner(({ final __callArgument21:Dynamic = { state: state, source: source, dest: dest, pool: pool }; __callArgument21; }), ({ final __callArgument22:Dynamic = operation; __callArgument22; })); }
+      if ((cast _Runtime.strictEquals(runner, null) : Bool)) { (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument40:Dynamic = dest; __callArgument40; }), ({ final __callArgument41:Dynamic = source; __callArgument41; }), (cast 'none' : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument38:Dynamic = dest; __callArgument38; }), ({ final __callArgument39:Dynamic = source; __callArgument39; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end); } else { runner(({ final __callArgument42:Dynamic = { state: state, source: source, dest: dest, pool: pool }; __callArgument42; }), ({ final __callArgument43:Dynamic = operation; __callArgument43; })); }
       (source = cast (dest : Dynamic));
     }
     flushAdjustments();
-    CanvasRenderEffectPipeline.presentCanvasRenderEffectResult__canvasRenderEffectPipeline(({ final __callArgument23:Dynamic = state; __callArgument23; }), ({ final __callArgument24:Dynamic = source; __callArgument24; }));
-    if ((cast !_Runtime.strictEquals(scratchA, null) : Bool)) { releaseCanvasRenderTarget(({ final __callArgument25:Dynamic = pool; __callArgument25; }), ({ final __callArgument26:Dynamic = scratchA; __callArgument26; })); }
-    if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { releaseCanvasRenderTarget(({ final __callArgument27:Dynamic = pool; __callArgument27; }), ({ final __callArgument28:Dynamic = scratchB; __callArgument28; })); }
+    CanvasRenderEffectPipeline.presentCanvasRenderEffectResult__canvasRenderEffectPipeline(({ final __callArgument46:Dynamic = state; __callArgument46; }), ({ final __callArgument47:Dynamic = source; __callArgument47; }));
+    if ((cast !_Runtime.strictEquals(scratchA, null) : Bool)) { releaseCanvasRenderTarget(({ final __callArgument50:Dynamic = pool; __callArgument50; }), ({ final __callArgument51:Dynamic = scratchA; __callArgument51; })); }
+    if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { releaseCanvasRenderTarget(({ final __callArgument54:Dynamic = pool; __callArgument54; }), ({ final __callArgument55:Dynamic = scratchB; __callArgument55; })); }
   }
 
   @:noCompletion

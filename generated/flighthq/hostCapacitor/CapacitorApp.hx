@@ -127,7 +127,7 @@ class CapacitorApp {
       };
       return cast _Runtime.UNDEFINED;
     }, subscribeOpenFile: function(listener:String->Void):Void->Void {
-      return cast (cast CapacitorApp.toUnsubscribe__capacitorApp((cast app : CapacitorAppPlugin).addListener((cast 'appUrlOpen' : String), ({ final __callArgument1:Dynamic = function(event:{ var url:String; }):Void { listener((cast (cast event : { var url:String; }).url : String)); }; __callArgument1; }))) : Void->Void);
+      return cast (cast CapacitorApp.toUnsubscribe__capacitorApp((cast app : CapacitorAppPlugin).addListener((cast 'appUrlOpen' : String), ({ final __callArgument2:Dynamic = function(event:{ var url:String; }):Void { listener((cast (cast event : { var url:String; }).url : String)); }; __callArgument2; }))) : Void->Void);
       return cast _Runtime.UNDEFINED;
     }, subscribeQuitRequest: function():Void->Void {
       return cast function():Void {

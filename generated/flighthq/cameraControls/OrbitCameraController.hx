@@ -19,7 +19,7 @@ import flighthq.types.Vector3.Vector3Like;
 class OrbitCameraController {
   public static function cloneOrbitCameraController(source:flighthq.types.OrbitCameraController):flighthq.types.OrbitCameraController {
     var clone:flighthq.types.OrbitCameraController = cast _Runtime.UNDEFINED;
-    clone = (cast createOrbitCameraController(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : flighthq.types.OrbitCameraController);
+    clone = (cast (#if js _Runtime.callValue(createOrbitCameraController, cast ([] : Array<Dynamic>)) #else createOrbitCameraController(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flighthq.types.OrbitCameraController);
     copyOrbitCameraController(({ final __callArgument0:Dynamic = clone; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }));
     return cast clone;
     return cast null;
@@ -47,11 +47,11 @@ class OrbitCameraController {
     var polar:Float = cast _Runtime.UNDEFINED;
     var distance:Float = cast _Runtime.UNDEFINED;
     var target:Null<Vector3Like> = cast _Runtime.UNDEFINED;
-    azimuth = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.azimuth; }), function():Dynamic return cast 0.0);
-    polar = _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.polar; }), function():Dynamic return cast 0.0);
-    distance = _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.distance; }), function():Dynamic return cast 10.0);
-    target = ({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.target; });
-    return cast (cast createEntity((cast { azimuth: azimuth, distance: distance, goalAzimuth: azimuth, goalDistance: distance, goalPolar: polar, maxDistance: _Runtime.coalesce(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.maxDistance; }), function():Dynamic return cast HxMath.POSITIVE_INFINITY), maxPolar: _Runtime.coalesce(({ final __typedStruct7 = options; __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.maxPolar; }), function():Dynamic return cast OrbitCameraController.DEFAULT_MAX_POLAR__orbitCameraController), minDistance: _Runtime.coalesce(({ final __typedStruct8 = options; __typedStruct8 == null ? _Runtime.UNDEFINED : __typedStruct8.minDistance; }), function():Dynamic return cast OrbitCameraController.DEFAULT_MIN_DISTANCE__orbitCameraController), minPolar: _Runtime.coalesce(({ final __typedStruct9 = options; __typedStruct9 == null ? _Runtime.UNDEFINED : __typedStruct9.minPolar; }), function():Dynamic return cast OrbitCameraController.DEFAULT_MIN_POLAR__orbitCameraController), polar: polar, smoothTime: _Runtime.coalesce(({ final __typedStruct10 = options; __typedStruct10 == null ? _Runtime.UNDEFINED : __typedStruct10.smoothTime; }), function():Dynamic return cast 0.0), target: (cast createVector3(({ final __callArgument12:Dynamic = _Runtime.coalesce(({ final __typedStruct11 = target; __typedStruct11 == null ? _Runtime.UNDEFINED : (cast __typedStruct11 : { var x:Float; }).x; }), function():Dynamic return cast 0.0); __callArgument12; }), ({ final __callArgument14:Dynamic = _Runtime.coalesce(({ final __typedStruct13 = target; __typedStruct13 == null ? _Runtime.UNDEFINED : (cast __typedStruct13 : { var y:Float; }).y; }), function():Dynamic return cast 0.0); __callArgument14; }), ({ final __callArgument16:Dynamic = _Runtime.coalesce(({ final __typedStruct15 = target; __typedStruct15 == null ? _Runtime.UNDEFINED : (cast __typedStruct15 : { var z:Float; }).z; }), function():Dynamic return cast 0.0); __callArgument16; })) : Vector3) } : Dynamic)) : { >Entity, var azimuth:Float; var distance:Float; var goalAzimuth:Float; var goalDistance:Float; var goalPolar:Float; var maxDistance:Float; var maxPolar:Float; var minDistance:Float; var minPolar:Float; var polar:Float; var smoothTime:Float; var target:Vector3; });
+    azimuth = _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.azimuth; }), function():Dynamic return cast 0.0);
+    polar = _Runtime.coalesce(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.polar; }), function():Dynamic return cast 0.0);
+    distance = _Runtime.coalesce(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.distance; }), function():Dynamic return cast 10.0);
+    target = ({ final __typedStruct7 = options; __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.target; });
+    return cast (cast createEntity((cast { azimuth: azimuth, distance: distance, goalAzimuth: azimuth, goalDistance: distance, goalPolar: polar, maxDistance: _Runtime.coalesce(({ final __typedStruct8 = options; __typedStruct8 == null ? _Runtime.UNDEFINED : __typedStruct8.maxDistance; }), function():Dynamic return cast HxMath.POSITIVE_INFINITY), maxPolar: _Runtime.coalesce(({ final __typedStruct9 = options; __typedStruct9 == null ? _Runtime.UNDEFINED : __typedStruct9.maxPolar; }), function():Dynamic return cast OrbitCameraController.DEFAULT_MAX_POLAR__orbitCameraController), minDistance: _Runtime.coalesce(({ final __typedStruct10 = options; __typedStruct10 == null ? _Runtime.UNDEFINED : __typedStruct10.minDistance; }), function():Dynamic return cast OrbitCameraController.DEFAULT_MIN_DISTANCE__orbitCameraController), minPolar: _Runtime.coalesce(({ final __typedStruct11 = options; __typedStruct11 == null ? _Runtime.UNDEFINED : __typedStruct11.minPolar; }), function():Dynamic return cast OrbitCameraController.DEFAULT_MIN_POLAR__orbitCameraController), polar: polar, smoothTime: _Runtime.coalesce(({ final __typedStruct12 = options; __typedStruct12 == null ? _Runtime.UNDEFINED : __typedStruct12.smoothTime; }), function():Dynamic return cast 0.0), target: (cast createVector3(({ final __callArgument14:Dynamic = _Runtime.coalesce(({ final __typedStruct13 = target; __typedStruct13 == null ? _Runtime.UNDEFINED : (cast __typedStruct13 : { var x:Float; }).x; }), function():Dynamic return cast 0.0); __callArgument14; }), ({ final __callArgument16:Dynamic = _Runtime.coalesce(({ final __typedStruct15 = target; __typedStruct15 == null ? _Runtime.UNDEFINED : (cast __typedStruct15 : { var y:Float; }).y; }), function():Dynamic return cast 0.0); __callArgument16; }), ({ final __callArgument18:Dynamic = _Runtime.coalesce(({ final __typedStruct17 = target; __typedStruct17 == null ? _Runtime.UNDEFINED : (cast __typedStruct17 : { var z:Float; }).z; }), function():Dynamic return cast 0.0); __callArgument18; })) : Vector3) } : Dynamic)) : { >Entity, var azimuth:Float; var distance:Float; var goalAzimuth:Float; var goalDistance:Float; var goalPolar:Float; var maxDistance:Float; var maxPolar:Float; var minDistance:Float; var minPolar:Float; var polar:Float; var smoothTime:Float; var target:Vector3; });
     return cast null;
   }
 
@@ -92,24 +92,24 @@ class OrbitCameraController {
     var polar:Float = cast _Runtime.UNDEFINED;
     var distance:Float = cast _Runtime.UNDEFINED;
     var target:Null<Vector3Like> = cast _Runtime.UNDEFINED;
-    azimuth = _Runtime.coalesce(({ final __typedStruct17 = options; __typedStruct17 == null ? _Runtime.UNDEFINED : __typedStruct17.azimuth; }), function():Dynamic return cast 0.0);
-    polar = _Runtime.coalesce(({ final __typedStruct18 = options; __typedStruct18 == null ? _Runtime.UNDEFINED : __typedStruct18.polar; }), function():Dynamic return cast 0.0);
-    distance = _Runtime.coalesce(({ final __typedStruct19 = options; __typedStruct19 == null ? _Runtime.UNDEFINED : __typedStruct19.distance; }), function():Dynamic return cast 10.0);
-    target = ({ final __typedStruct20 = options; __typedStruct20 == null ? _Runtime.UNDEFINED : __typedStruct20.target; });
+    azimuth = _Runtime.coalesce(({ final __typedStruct42 = options; __typedStruct42 == null ? _Runtime.UNDEFINED : __typedStruct42.azimuth; }), function():Dynamic return cast 0.0);
+    polar = _Runtime.coalesce(({ final __typedStruct43 = options; __typedStruct43 == null ? _Runtime.UNDEFINED : __typedStruct43.polar; }), function():Dynamic return cast 0.0);
+    distance = _Runtime.coalesce(({ final __typedStruct44 = options; __typedStruct44 == null ? _Runtime.UNDEFINED : __typedStruct44.distance; }), function():Dynamic return cast 10.0);
+    target = ({ final __typedStruct45 = options; __typedStruct45 == null ? _Runtime.UNDEFINED : __typedStruct45.target; });
     (controller.azimuth = cast (azimuth : Float));
     (controller.distance = cast (distance : Float));
     (controller.goalAzimuth = cast (azimuth : Float));
     (controller.goalDistance = cast (distance : Float));
     (controller.goalPolar = cast (polar : Float));
-    (controller.maxDistance = cast (_Runtime.coalesce(({ final __typedStruct21 = options; __typedStruct21 == null ? _Runtime.UNDEFINED : __typedStruct21.maxDistance; }), function():Dynamic return cast HxMath.POSITIVE_INFINITY) : Float));
-    (controller.maxPolar = cast (_Runtime.coalesce(({ final __typedStruct22 = options; __typedStruct22 == null ? _Runtime.UNDEFINED : __typedStruct22.maxPolar; }), function():Dynamic return cast OrbitCameraController.DEFAULT_MAX_POLAR__orbitCameraController) : Float));
-    (controller.minDistance = cast (_Runtime.coalesce(({ final __typedStruct23 = options; __typedStruct23 == null ? _Runtime.UNDEFINED : __typedStruct23.minDistance; }), function():Dynamic return cast OrbitCameraController.DEFAULT_MIN_DISTANCE__orbitCameraController) : Float));
-    (controller.minPolar = cast (_Runtime.coalesce(({ final __typedStruct24 = options; __typedStruct24 == null ? _Runtime.UNDEFINED : __typedStruct24.minPolar; }), function():Dynamic return cast OrbitCameraController.DEFAULT_MIN_POLAR__orbitCameraController) : Float));
+    (controller.maxDistance = cast (_Runtime.coalesce(({ final __typedStruct46 = options; __typedStruct46 == null ? _Runtime.UNDEFINED : __typedStruct46.maxDistance; }), function():Dynamic return cast HxMath.POSITIVE_INFINITY) : Float));
+    (controller.maxPolar = cast (_Runtime.coalesce(({ final __typedStruct47 = options; __typedStruct47 == null ? _Runtime.UNDEFINED : __typedStruct47.maxPolar; }), function():Dynamic return cast OrbitCameraController.DEFAULT_MAX_POLAR__orbitCameraController) : Float));
+    (controller.minDistance = cast (_Runtime.coalesce(({ final __typedStruct48 = options; __typedStruct48 == null ? _Runtime.UNDEFINED : __typedStruct48.minDistance; }), function():Dynamic return cast OrbitCameraController.DEFAULT_MIN_DISTANCE__orbitCameraController) : Float));
+    (controller.minPolar = cast (_Runtime.coalesce(({ final __typedStruct49 = options; __typedStruct49 == null ? _Runtime.UNDEFINED : __typedStruct49.minPolar; }), function():Dynamic return cast OrbitCameraController.DEFAULT_MIN_POLAR__orbitCameraController) : Float));
     (controller.polar = cast (polar : Float));
-    (controller.smoothTime = cast (_Runtime.coalesce(({ final __typedStruct25 = options; __typedStruct25 == null ? _Runtime.UNDEFINED : __typedStruct25.smoothTime; }), function():Dynamic return cast 0.0) : Float));
-    ((cast controller.target : { var x:Float; }).x = cast (_Runtime.coalesce(({ final __typedStruct26 = target; __typedStruct26 == null ? _Runtime.UNDEFINED : (cast __typedStruct26 : { var x:Float; }).x; }), function():Dynamic return cast 0.0) : Float));
-    ((cast controller.target : { var y:Float; }).y = cast (_Runtime.coalesce(({ final __typedStruct27 = target; __typedStruct27 == null ? _Runtime.UNDEFINED : (cast __typedStruct27 : { var y:Float; }).y; }), function():Dynamic return cast 0.0) : Float));
-    ((cast controller.target : { var z:Float; }).z = cast (_Runtime.coalesce(({ final __typedStruct28 = target; __typedStruct28 == null ? _Runtime.UNDEFINED : (cast __typedStruct28 : { var z:Float; }).z; }), function():Dynamic return cast 0.0) : Float));
+    (controller.smoothTime = cast (_Runtime.coalesce(({ final __typedStruct50 = options; __typedStruct50 == null ? _Runtime.UNDEFINED : __typedStruct50.smoothTime; }), function():Dynamic return cast 0.0) : Float));
+    ((cast controller.target : { var x:Float; }).x = cast (_Runtime.coalesce(({ final __typedStruct51 = target; __typedStruct51 == null ? _Runtime.UNDEFINED : (cast __typedStruct51 : { var x:Float; }).x; }), function():Dynamic return cast 0.0) : Float));
+    ((cast controller.target : { var y:Float; }).y = cast (_Runtime.coalesce(({ final __typedStruct52 = target; __typedStruct52 == null ? _Runtime.UNDEFINED : (cast __typedStruct52 : { var y:Float; }).y; }), function():Dynamic return cast 0.0) : Float));
+    ((cast controller.target : { var z:Float; }).z = cast (_Runtime.coalesce(({ final __typedStruct53 = target; __typedStruct53 == null ? _Runtime.UNDEFINED : (cast __typedStruct53 : { var z:Float; }).z; }), function():Dynamic return cast 0.0) : Float));
   }
 
   public static function rotateOrbitCameraController(controller:flighthq.types.OrbitCameraController, deltaAzimuth:Float, deltaPolar:Float):Void {
@@ -152,7 +152,7 @@ class OrbitCameraController {
     (OrbitCameraController.scratchEye__orbitCameraController.x = cast ((target.x + ((controller.distance * sinAzimuth) * cosPolar)) : Float));
     (OrbitCameraController.scratchEye__orbitCameraController.y = cast ((target.y + (controller.distance * sinPolar)) : Float));
     (OrbitCameraController.scratchEye__orbitCameraController.z = cast ((target.z + ((controller.distance * cosAzimuth) * cosPolar)) : Float));
-    setCamera3DViewMatrix4FromLookAt(({ final __callArgument29:Dynamic = camera; __callArgument29; }), ({ final __callArgument30:Dynamic = OrbitCameraController.scratchEye__orbitCameraController; __callArgument30; }), ({ final __callArgument31:Dynamic = target; __callArgument31; }), ({ final __callArgument32:Dynamic = OrbitCameraController.WORLD_UP__orbitCameraController; __callArgument32; }));
+    setCamera3DViewMatrix4FromLookAt(({ final __callArgument54:Dynamic = camera; __callArgument54; }), ({ final __callArgument55:Dynamic = OrbitCameraController.scratchEye__orbitCameraController; __callArgument55; }), ({ final __callArgument56:Dynamic = target; __callArgument56; }), ({ final __callArgument57:Dynamic = OrbitCameraController.WORLD_UP__orbitCameraController; __callArgument57; }));
   }
 
   public static final DEFAULT_MAX_POLAR__orbitCameraController:Float = ((HxMath.PI / 2.0) - 0.01);
@@ -161,7 +161,7 @@ class OrbitCameraController {
 
   public static final DEFAULT_MIN_POLAR__orbitCameraController:Float = ((-HxMath.PI / 2.0) + 0.01);
 
-  public static final WORLD_UP__orbitCameraController:Vector3 = (cast createVector3(({ final __callArgument33:Dynamic = 0.0; __callArgument33; }), ({ final __callArgument34:Dynamic = 1.0; __callArgument34; }), ({ final __callArgument35:Dynamic = 0.0; __callArgument35; })) : Vector3);
+  public static final WORLD_UP__orbitCameraController:Vector3 = (cast createVector3(({ final __callArgument62:Dynamic = 0.0; __callArgument62; }), ({ final __callArgument63:Dynamic = 1.0; __callArgument63; }), ({ final __callArgument64:Dynamic = 0.0; __callArgument64; })) : Vector3);
 
-  public static final scratchEye__orbitCameraController:Vector3 = (cast createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Vector3);
+  public static final scratchEye__orbitCameraController:Vector3 = (cast (#if js _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) #else createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector3);
 }

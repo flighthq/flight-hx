@@ -141,7 +141,7 @@ class CapacitorNotification {
       var numericId:Null<Float> = cast _Runtime.UNDEFINED;
       numericId = (cast CapacitorNotification.findNumericId__capacitorNotification(({ final __callArgument8:Dynamic = idByNumber; __callArgument8; }), (cast id : String)) : Null<Float>);
       if ((cast _Runtime.strictEquals(numericId, null) : Bool)) { return; }
-      flighthq._internal._Async.recover((cast notifications : CapacitorLocalNotificationsPlugin).cancel(({ final __callArgument10:Dynamic = { notifications: cast ([{ id: numericId }] : Array<Dynamic>) }; __callArgument10; })), function(__unused3:flighthq._internal._Any):Void {
+      flighthq._internal._Async.recover((cast notifications : CapacitorLocalNotificationsPlugin).cancel(({ final __callArgument11:Dynamic = { notifications: cast ([{ id: numericId }] : Array<Dynamic>) }; __callArgument11; })), function(__unused3:flighthq._internal._Any):Void {
 
       });
     }, closeNotification: function():Void {

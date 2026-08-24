@@ -23,6 +23,6 @@ class Spring2D {
 
   public static function updateSpring2D(spring2D:flighthq.types.Spring.Spring2D, targetX:Float, targetY:Float, config:SpringConfig, deltaTime:Float):Void {
     updateSpring((cast spring2D : flighthq.types.Spring.Spring2D).x, (cast targetX : Float), ({ final __callArgument0:Dynamic = config; __callArgument0; }), (cast deltaTime : Float));
-    updateSpring((cast spring2D : flighthq.types.Spring.Spring2D).y, (cast targetY : Float), ({ final __callArgument1:Dynamic = config; __callArgument1; }), (cast deltaTime : Float));
+    updateSpring((cast spring2D : flighthq.types.Spring.Spring2D).y, (cast targetY : Float), ({ final __callArgument2:Dynamic = config; __callArgument2; }), (cast deltaTime : Float));
   }
 }

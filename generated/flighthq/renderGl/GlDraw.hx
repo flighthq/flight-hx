@@ -55,7 +55,7 @@ class GlDraw {
     (runtime.currentBlendMode = cast (blendMode : Null<String>));
     gl = (cast state : GlRenderState).gl;
     entry = ((cast !_Runtime.strictEquals(blendMode, null) : Bool) ? (cast ((cast (cast (cast runtime.registries : { var blendRealizations:KeyedTable<GlBlendRealization>; }).blendRealizations : KeyedTable<GlBlendRealization>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlBlendRealization>>).get(blendMode)) : Dynamic) : (cast null : Dynamic));
-    realization = ((cast _Runtime.strictEquals(({ final __structural1 = entry; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:GlBlendRealization; }).value : Dynamic) : (cast GlDraw.NORMAL_BLEND__glDraw : Dynamic));
+    realization = ((cast _Runtime.strictEquals(({ final __structural2 = entry; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:GlBlendRealization; }).value : Dynamic) : (cast GlDraw.NORMAL_BLEND__glDraw : Dynamic));
     flighthq._internal.backend.WebGl2Backend.blendEquation(gl, (switch (_Runtime.coalesce((cast realization : GlBlendRealization).equation, function():Dynamic return cast 'FUNC_ADD')) { case 'FUNC_ADD': flighthq._internal.backend.WebGl2Backend.FUNC_ADD; case 'FUNC_REVERSE_SUBTRACT': flighthq._internal.backend.WebGl2Backend.FUNC_REVERSE_SUBTRACT; case 'MAX': flighthq._internal.backend.WebGl2Backend.MAX; case 'MIN': flighthq._internal.backend.WebGl2Backend.MIN; default: _Runtime.throwValue('WebGL2 computed constant is outside the closed GlBlendEquation domain: upstream/packages/render-gl/src/glDraw.ts'); }));
     flighthq._internal.backend.WebGl2Backend.blendFunc(gl, (switch ((cast realization : GlBlendRealization).src) { case 'DST_COLOR': flighthq._internal.backend.WebGl2Backend.DST_COLOR; case 'ONE': flighthq._internal.backend.WebGl2Backend.ONE; case 'ONE_MINUS_SRC_ALPHA': flighthq._internal.backend.WebGl2Backend.ONE_MINUS_SRC_ALPHA; case 'ONE_MINUS_SRC_COLOR': flighthq._internal.backend.WebGl2Backend.ONE_MINUS_SRC_COLOR; case 'ZERO': flighthq._internal.backend.WebGl2Backend.ZERO; default: _Runtime.throwValue('WebGL2 computed constant is outside the closed GlBlendFactor domain: upstream/packages/render-gl/src/glDraw.ts'); }), (switch ((cast realization : GlBlendRealization).dst) { case 'DST_COLOR': flighthq._internal.backend.WebGl2Backend.DST_COLOR; case 'ONE': flighthq._internal.backend.WebGl2Backend.ONE; case 'ONE_MINUS_SRC_ALPHA': flighthq._internal.backend.WebGl2Backend.ONE_MINUS_SRC_ALPHA; case 'ONE_MINUS_SRC_COLOR': flighthq._internal.backend.WebGl2Backend.ONE_MINUS_SRC_COLOR; case 'ZERO': flighthq._internal.backend.WebGl2Backend.ZERO; default: _Runtime.throwValue('WebGL2 computed constant is outside the closed GlBlendFactor domain: upstream/packages/render-gl/src/glDraw.ts'); }));
   }
@@ -77,17 +77,17 @@ class GlDraw {
       return;
     }
     useMips = ((cast (cast sampler : { var mipmaps:Bool; }).mipmaps : Bool) && (cast (cast GlDraw.isGlMipmapFilter__glDraw((cast sampler : { var minFilter:TextureFilter; }).minFilter) : Bool) : Bool));
-    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_MIN_FILTER', flighthq._internal.backend.WebGl2Backend.TEXTURE_MIN_FILTER), (cast GlDraw.glMinFilterValue__glDraw(({ final __callArgument2:Dynamic = gl; __callArgument2; }), (cast sampler : { var minFilter:TextureFilter; }).minFilter, (cast useMips : Bool)) : Float));
-    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_MAG_FILTER', flighthq._internal.backend.WebGl2Backend.TEXTURE_MAG_FILTER), (cast GlDraw.glMagFilterValue__glDraw(({ final __callArgument3:Dynamic = gl; __callArgument3; }), (cast sampler : { var magFilter:TextureFilter; }).magFilter) : Float));
-    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_WRAP_S', flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_S), (cast GlDraw.glTextureWrapValue__glDraw(({ final __callArgument4:Dynamic = gl; __callArgument4; }), (cast sampler : { var wrapU:TextureWrap; }).wrapU) : Float));
-    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_WRAP_T', flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_T), (cast GlDraw.glTextureWrapValue__glDraw(({ final __callArgument5:Dynamic = gl; __callArgument5; }), (cast sampler : { var wrapV:TextureWrap; }).wrapV) : Float));
-    ext = (cast GlDraw.ensureGlAnisotropyExt__glDraw(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = runtime; __callArgument7; })) : Null<flighthq._internal.dom.EXT_texture_filter_anisotropic>);
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_MIN_FILTER', flighthq._internal.backend.WebGl2Backend.TEXTURE_MIN_FILTER), (cast GlDraw.glMinFilterValue__glDraw(({ final __callArgument3:Dynamic = gl; __callArgument3; }), (cast sampler : { var minFilter:TextureFilter; }).minFilter, (cast useMips : Bool)) : Float));
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_MAG_FILTER', flighthq._internal.backend.WebGl2Backend.TEXTURE_MAG_FILTER), (cast GlDraw.glMagFilterValue__glDraw(({ final __callArgument5:Dynamic = gl; __callArgument5; }), (cast sampler : { var magFilter:TextureFilter; }).magFilter) : Float));
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_WRAP_S', flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_S), (cast GlDraw.glTextureWrapValue__glDraw(({ final __callArgument7:Dynamic = gl; __callArgument7; }), (cast sampler : { var wrapU:TextureWrap; }).wrapU) : Float));
+    flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_WRAP_T', flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_T), (cast GlDraw.glTextureWrapValue__glDraw(({ final __callArgument9:Dynamic = gl; __callArgument9; }), (cast sampler : { var wrapV:TextureWrap; }).wrapV) : Float));
+    ext = (cast GlDraw.ensureGlAnisotropyExt__glDraw(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = runtime; __callArgument12; })) : Null<flighthq._internal.dom.EXT_texture_filter_anisotropic>);
     if (_Runtime.truthy(ext)) {
       var level:Float = HxMath.max(1.0, HxMath.min((cast sampler : { var anisotropy:Float; }).anisotropy, _Runtime.coalesce(runtime.maxAnisotropy, function():Dynamic return cast 1.0)));
       flighthq._internal.backend.WebGl2Backend.texParameterf(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), (cast ext : flighthq._internal.dom.EXT_texture_filter_anisotropic).TEXTURE_MAX_ANISOTROPY_EXT, level);
     }
     if ((cast useMips : Bool)) {
-      var mipped:flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture> = ({ final __nullishOwner8 = runtime; final __nullishValue9:Null<flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture>> = cast __nullishOwner8.mipmappedTextures; __nullishValue9 == null ? (__nullishOwner8.mipmappedTextures = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []) : Null<flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture>>)) : (cast __nullishValue9 : Null<flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture>>); });
+      var mipped:flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture> = ({ final __nullishOwner15 = runtime; final __nullishValue16:Null<flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture>> = cast __nullishOwner15.mipmappedTextures; __nullishValue16 == null ? (__nullishOwner15.mipmappedTextures = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []) : Null<flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture>>)) : (cast __nullishValue16 : Null<flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture>>); });
       if ((cast !(cast ((cast mipped : flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture>).has(texture)) : Bool) : Bool)) {
         flighthq._internal.backend.WebGl2Backend.generateMipmap(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D));
         ((cast mipped : flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture>).add(texture));
@@ -97,18 +97,18 @@ class GlDraw {
 
   @:noCompletion
   public static function bindGlBitmapTexture(state:GlRenderState, bitmap:Bitmap, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, premultiply:Bool = false, colorSpace:TextureColorSpace = 'linear'):flighthq._internal.dom.WebGLTexture {
-    return cast (cast GlDraw.bindGlTextureSourceTexture__glDraw(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = bitmap; __callArgument11; }), ({ final __callArgument12:Dynamic = sampler; __callArgument12; }), ({ final __callArgument13:Dynamic = smoothingOverride; __callArgument13; }), (cast premultiply : Bool), (cast false : Bool), ({ final __callArgument14:Dynamic = colorSpace; __callArgument14; }), (cast GlDraw.uploadGlBitmap__glDraw : Dynamic)) : flighthq._internal.dom.WebGLTexture);
+    return cast (cast GlDraw.bindGlTextureSourceTexture__glDraw(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = bitmap; __callArgument18; }), ({ final __callArgument19:Dynamic = sampler; __callArgument19; }), ({ final __callArgument20:Dynamic = smoothingOverride; __callArgument20; }), (cast premultiply : Bool), (cast false : Bool), ({ final __callArgument21:Dynamic = colorSpace; __callArgument21; }), (cast GlDraw.uploadGlBitmap__glDraw : Dynamic)) : flighthq._internal.dom.WebGLTexture);
     return cast null;
   }
 
   @:noCompletion
   public static function bindGlCompressedImageTexture(state:GlRenderState, image:CompressedImage, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, colorSpace:TextureColorSpace = 'linear'):flighthq._internal.dom.WebGLTexture {
-    return cast (cast GlDraw.bindGlTextureSourceTexture__glDraw(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = image; __callArgument16; }), ({ final __callArgument17:Dynamic = sampler; __callArgument17; }), ({ final __callArgument18:Dynamic = smoothingOverride; __callArgument18; }), (cast false : Bool), (cast true : Bool), ({ final __callArgument19:Dynamic = colorSpace; __callArgument19; }), (cast GlDraw.uploadGlCompressedImage__glDraw : Dynamic)) : flighthq._internal.dom.WebGLTexture);
+    return cast (cast GlDraw.bindGlTextureSourceTexture__glDraw(({ final __callArgument27:Dynamic = state; __callArgument27; }), ({ final __callArgument28:Dynamic = image; __callArgument28; }), ({ final __callArgument29:Dynamic = sampler; __callArgument29; }), ({ final __callArgument30:Dynamic = smoothingOverride; __callArgument30; }), (cast false : Bool), (cast true : Bool), ({ final __callArgument31:Dynamic = colorSpace; __callArgument31; }), (cast GlDraw.uploadGlCompressedImage__glDraw : Dynamic)) : flighthq._internal.dom.WebGLTexture);
     return cast null;
   }
 
   public static function bindGlImageResourceTexture(state:GlRenderState, image:Image, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, premultiply:Bool = false, colorSpace:TextureColorSpace = 'linear'):flighthq._internal.dom.WebGLTexture {
-    return cast (cast GlDraw.bindGlTextureSourceTexture__glDraw(({ final __callArgument20:Dynamic = state; __callArgument20; }), ({ final __callArgument21:Dynamic = image; __callArgument21; }), ({ final __callArgument22:Dynamic = sampler; __callArgument22; }), ({ final __callArgument23:Dynamic = smoothingOverride; __callArgument23; }), (cast premultiply : Bool), (cast false : Bool), ({ final __callArgument24:Dynamic = colorSpace; __callArgument24; }), (cast GlDraw.uploadGlImageResource__glDraw : Dynamic)) : flighthq._internal.dom.WebGLTexture);
+    return cast (cast GlDraw.bindGlTextureSourceTexture__glDraw(({ final __callArgument37:Dynamic = state; __callArgument37; }), ({ final __callArgument38:Dynamic = image; __callArgument38; }), ({ final __callArgument39:Dynamic = sampler; __callArgument39; }), ({ final __callArgument40:Dynamic = smoothingOverride; __callArgument40; }), (cast premultiply : Bool), (cast false : Bool), ({ final __callArgument41:Dynamic = colorSpace; __callArgument41; }), (cast GlDraw.uploadGlImageResource__glDraw : Dynamic)) : flighthq._internal.dom.WebGLTexture);
     return cast null;
   }
 
@@ -117,7 +117,7 @@ class GlDraw {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var cache:flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }> = cast _Runtime.UNDEFINED;
     var entry:Null<{ var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }> = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument25:Dynamic = state; __callArgument25; })) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument47:Dynamic = state; __callArgument47; })) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
     cache = ((cast premultiply : Bool) ? (cast ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast runtime.textureSourcePremultipliedSrgbTextureCache : Dynamic) : (cast runtime.textureSourcePremultipliedTextureCache : Dynamic)) : Dynamic) : (cast ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast runtime.textureSourceStraightSrgbTextureCache : Dynamic) : (cast runtime.textureSourceStraightTextureCache : Dynamic)) : Dynamic));
     entry = ((cast cache : flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }>).get(image));
@@ -129,10 +129,10 @@ class GlDraw {
     (runtime.currentTexture = cast ((cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }).texture : Null<flighthq._internal.dom.WebGLTexture>));
     (runtime.currentTextureStraightAlpha = cast (straightAlpha : Bool));
     if ((cast !_Runtime.strictEquals((cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }).version, image.version) : Bool)) {
-      upload(({ final __callArgument26:Dynamic = state; __callArgument26; }), ({ final __callArgument27:Dynamic = image; __callArgument27; }), (cast premultiply : Bool), ({ final __callArgument28:Dynamic = colorSpace; __callArgument28; }));
+      upload(({ final __callArgument49:Dynamic = state; __callArgument49; }), ({ final __callArgument50:Dynamic = image; __callArgument50; }), (cast premultiply : Bool), ({ final __callArgument51:Dynamic = colorSpace; __callArgument51; }));
       ((cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }).version = image.version);
     }
-    applyGlSamplerState(({ final __callArgument29:Dynamic = state; __callArgument29; }), ({ final __callArgument30:Dynamic = runtime; __callArgument30; }), (cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }).texture, ({ final __callArgument31:Dynamic = _Runtime.coalesce(sampler, function():Dynamic return cast null); __callArgument31; }), ({ final __callArgument32:Dynamic = _Runtime.coalesce(smoothingOverride, function():Dynamic return cast null); __callArgument32; }));
+    applyGlSamplerState(({ final __callArgument55:Dynamic = state; __callArgument55; }), ({ final __callArgument56:Dynamic = runtime; __callArgument56; }), (cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }).texture, ({ final __callArgument57:Dynamic = _Runtime.coalesce(sampler, function():Dynamic return cast null); __callArgument57; }), ({ final __callArgument58:Dynamic = _Runtime.coalesce(smoothingOverride, function():Dynamic return cast null); __callArgument58; }));
     return cast (cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }).texture;
     return cast null;
   }
@@ -142,7 +142,7 @@ class GlDraw {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var textureCache:flighthq._internal._WeakMap<flighthq._internal._Any, flighthq._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;
     var texture:Null<flighthq._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument33:Dynamic = state; __callArgument33; })) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument63:Dynamic = state; __callArgument63; })) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
     textureCache = runtime.textureCache;
     texture = ((cast textureCache : flighthq._internal._WeakMap<flighthq._internal._Any, flighthq._internal.dom.WebGLTexture>).get(imageSource));
@@ -159,7 +159,7 @@ class GlDraw {
       (runtime.currentTexture = cast (texture : Null<flighthq._internal.dom.WebGLTexture>));
       (runtime.currentTextureStraightAlpha = cast (false : Bool));
     }
-    applyGlSamplerState(({ final __callArgument34:Dynamic = state; __callArgument34; }), ({ final __callArgument35:Dynamic = runtime; __callArgument35; }), ({ final __callArgument36:Dynamic = texture; __callArgument36; }), ({ final __callArgument37:Dynamic = _Runtime.coalesce(sampler, function():Dynamic return cast null); __callArgument37; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(applyGlSamplerState, cast ([({ final __callArgument69:Dynamic = state; __callArgument69; }), ({ final __callArgument70:Dynamic = runtime; __callArgument70; }), ({ final __callArgument71:Dynamic = texture; __callArgument71; }), ({ final __callArgument72:Dynamic = _Runtime.coalesce(sampler, function():Dynamic return cast null); __callArgument72; })] : Array<Dynamic>)) #else applyGlSamplerState(({ final __callArgument65:Dynamic = state; __callArgument65; }), ({ final __callArgument66:Dynamic = runtime; __callArgument66; }), ({ final __callArgument67:Dynamic = texture; __callArgument67; }), ({ final __callArgument68:Dynamic = _Runtime.coalesce(sampler, function():Dynamic return cast null); __callArgument68; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     return cast texture;
     return cast null;
   }
@@ -171,10 +171,10 @@ class GlDraw {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var cache:flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }> = cast _Runtime.UNDEFINED;
     var entry:Null<{ var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }> = cast _Runtime.UNDEFINED;
-    image = (cast getTextureSource(({ final __callArgument38:Dynamic = texture; __callArgument38; })) : Image);
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument39:Dynamic = state; __callArgument39; })) : GlRenderStateRuntime);
+    image = (cast getTextureSource(({ final __callArgument73:Dynamic = texture; __callArgument73; })) : Image);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument75:Dynamic = state; __callArgument75; })) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
-    cache = ((cast _Runtime.strictEquals((cast texture : { var colorSpace:TextureColorSpace; }).colorSpace, 'srgb') : Bool) ? (cast ({ final __nullishOwner40 = runtime; final __nullishValue41:Null<flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>> = cast __nullishOwner40.videoSrgbTextureCache; __nullishValue41 == null ? (__nullishOwner40.videoSrgbTextureCache = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Null<flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>>)) : (cast __nullishValue41 : Null<flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>>); }) : Dynamic) : (cast ({ final __nullishOwner42 = runtime; final __nullishValue43:Null<flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>> = cast __nullishOwner42.videoTextureCache; __nullishValue43 == null ? (__nullishOwner42.videoTextureCache = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Null<flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>>)) : (cast __nullishValue43 : Null<flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>>); }) : Dynamic));
+    cache = ((cast _Runtime.strictEquals((cast texture : { var colorSpace:TextureColorSpace; }).colorSpace, 'srgb') : Bool) ? (cast ({ final __nullishOwner77 = runtime; final __nullishValue78:Null<flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>> = cast __nullishOwner77.videoSrgbTextureCache; __nullishValue78 == null ? (__nullishOwner77.videoSrgbTextureCache = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Null<flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>>)) : (cast __nullishValue78 : Null<flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>>); }) : Dynamic) : (cast ({ final __nullishOwner79 = runtime; final __nullishValue80:Null<flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>> = cast __nullishOwner79.videoTextureCache; __nullishValue80 == null ? (__nullishOwner79.videoTextureCache = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Null<flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>>)) : (cast __nullishValue80 : Null<flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>>); }) : Dynamic));
     entry = ((cast cache : flighthq._internal._WeakMap<Image, { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }>).get(image));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (entry = cast ({ texture: flighthq._internal.backend.WebGl2Backend.createTexture(gl), uploadedVersion: -1.0 } : Dynamic));
@@ -184,8 +184,8 @@ class GlDraw {
     (runtime.currentTexture = cast ((cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }).texture : Null<flighthq._internal.dom.WebGLTexture>));
     (runtime.currentTextureStraightAlpha = cast (false : Bool));
     flighthq._internal.backend.WebGl2Backend.pixelStorei(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL', flighthq._internal.backend.WebGl2Backend.UNPACK_PREMULTIPLY_ALPHA_WEBGL), true);
-    ((cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }).uploadedVersion = (cast uploadGlTextureVideoFrame(({ final __callArgument44:Dynamic = gl; __callArgument44; }), ({ final __callArgument45:Dynamic = image; __callArgument45; }), (cast (cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }).uploadedVersion : Float), (cast ((cast _Runtime.strictEquals((cast texture : { var colorSpace:TextureColorSpace; }).colorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SRGB8_ALPHA8', flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic)) : Float)) : Float));
-    applyGlSamplerState(({ final __callArgument46:Dynamic = state; __callArgument46; }), ({ final __callArgument47:Dynamic = runtime; __callArgument47; }), (cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }).texture, ({ final __callArgument48:Dynamic = _Runtime.coalesce(sampler, function():Dynamic return cast (cast texture : { var sampler:Sampler; }).sampler); __callArgument48; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    ((cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }).uploadedVersion = (cast uploadGlTextureVideoFrame(({ final __callArgument81:Dynamic = gl; __callArgument81; }), ({ final __callArgument82:Dynamic = image; __callArgument82; }), (cast (cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }).uploadedVersion : Float), (cast ((cast _Runtime.strictEquals((cast texture : { var colorSpace:TextureColorSpace; }).colorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SRGB8_ALPHA8', flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic)) : Float)) : Float));
+    (#if js _Runtime.callValue(applyGlSamplerState, cast ([({ final __callArgument88:Dynamic = state; __callArgument88; }), ({ final __callArgument89:Dynamic = runtime; __callArgument89; }), (cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }).texture, ({ final __callArgument90:Dynamic = _Runtime.coalesce(sampler, function():Dynamic return cast (cast texture : { var sampler:Sampler; }).sampler); __callArgument90; })] : Array<Dynamic>)) #else applyGlSamplerState(({ final __callArgument85:Dynamic = state; __callArgument85; }), ({ final __callArgument86:Dynamic = runtime; __callArgument86; }), (cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }).texture, ({ final __callArgument87:Dynamic = _Runtime.coalesce(sampler, function():Dynamic return cast (cast texture : { var sampler:Sampler; }).sampler); __callArgument87; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     return cast (cast entry : { var texture:flighthq._internal.dom.WebGLTexture; var uploadedVersion:Float; }).texture;
     return cast null;
   }
@@ -196,7 +196,7 @@ class GlDraw {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var filter:Float = cast _Runtime.UNDEFINED;
     var texture:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument49:Dynamic = state; __callArgument49; })) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument91:Dynamic = state; __callArgument91; })) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
     filter = ((cast (cast state : GlRenderState).allowSmoothing : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINEAR', flighthq._internal.backend.WebGl2Backend.LINEAR) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'NEAREST', flighthq._internal.backend.WebGl2Backend.NEAREST) : Dynamic));
     texture = flighthq._internal.backend.WebGl2Backend.createTexture(gl);
@@ -221,7 +221,7 @@ class GlDraw {
     var quadIndexBuffer:flighthq._internal.dom.WebGLBuffer = cast _Runtime.UNDEFINED;
     var shaderLoc:Null<GlShaderLocations> = cast _Runtime.UNDEFINED;
     var v:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument50:Dynamic = state; __callArgument50; })) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument93:Dynamic = state; __callArgument93; })) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
     __destructure0 = runtime;
     quadVertexData = __destructure0.quadVertexData;
@@ -248,18 +248,18 @@ class GlDraw {
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), quadVertexBuffer);
     flighthq._internal.backend.WebGl2Backend.bufferSubData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), 0.0, v);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), quadIndexBuffer);
-    setGlAttributes(({ final __callArgument51:Dynamic = gl; __callArgument51; }), ({ final __callArgument52:Dynamic = shaderLoc; __callArgument52; }));
+    setGlAttributes(({ final __callArgument95:Dynamic = gl; __callArgument95; }), ({ final __callArgument96:Dynamic = shaderLoc; __callArgument96; }));
     flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLES', flighthq._internal.backend.WebGl2Backend.TRIANGLES), 6.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT), 0.0);
   }
 
   public static function enableGlBlendModeSupport(state:GlRenderState):Void {
-    registerDefaultGlBlendModes(({ final __callArgument53:Dynamic = state; __callArgument53; }));
+    registerDefaultGlBlendModes(({ final __callArgument99:Dynamic = state; __callArgument99; }));
     ((cast state : { var applyBlendMode:Null<GlRenderState->Null<String>->Void>; }).applyBlendMode = (cast applyGlBlendMode));
   }
 
   @:noCompletion
   public static function isBlendModeSupported(state:GlRenderState, blendMode:BlendMode):Bool {
-    return cast _Runtime.strictEquals(({ final __structural56 = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument55:Dynamic = state; __callArgument55; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var blendRealizations:KeyedTable<GlBlendRealization>; }).blendRealizations : KeyedTable<GlBlendRealization>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlBlendRealization>>).get(blendMode)); __structural56 == null ? _Runtime.UNDEFINED : (cast __structural56 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
+    return cast _Runtime.strictEquals(({ final __structural105 = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument103:Dynamic = state; __callArgument103; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var blendRealizations:KeyedTable<GlBlendRealization>; }).blendRealizations : KeyedTable<GlBlendRealization>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlBlendRealization>>).get(blendMode)); __structural105 == null ? _Runtime.UNDEFINED : (cast __structural105 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
     return cast null;
   }
 
@@ -268,36 +268,36 @@ class GlDraw {
     for (__iteration1 in _Runtime.iterable(GlDraw.DEFAULT_GL_BLEND_MODES__glDraw)) {
       var mode:String = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
       var realization:GlBlendRealization = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
-      registerGlBlendMode(({ final __callArgument59:Dynamic = state; __callArgument59; }), (cast mode : String), ({ final __callArgument60:Dynamic = realization; __callArgument60; }));
+      registerGlBlendMode(({ final __callArgument108:Dynamic = state; __callArgument108; }), (cast mode : String), ({ final __callArgument109:Dynamic = realization; __callArgument109; }));
     }
   }
 
   @:noCompletion
   public static function registerGlBlendMode(state:GlRenderState, blendMode:BlendMode, realization:GlBlendRealization):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument61:Dynamic = state; __callArgument61; })) : GlRenderStateRuntime);
-    ((cast runtime.registries : { var blendRealizations:KeyedTable<GlBlendRealization>; }).blendRealizations = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var blendRealizations:KeyedTable<GlBlendRealization>; }).blendRealizations : Dynamic), (cast blendMode : String), ({ final __callArgument62:Dynamic = realization; __callArgument62; })) : KeyedTable<GlBlendRealization>) : KeyedTable<GlBlendRealization>));
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument112:Dynamic = state; __callArgument112; })) : GlRenderStateRuntime);
+    ((cast runtime.registries : { var blendRealizations:KeyedTable<GlBlendRealization>; }).blendRealizations = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var blendRealizations:KeyedTable<GlBlendRealization>; }).blendRealizations : Dynamic), (cast blendMode : String), ({ final __callArgument114:Dynamic = realization; __callArgument114; })) : KeyedTable<GlBlendRealization>) : KeyedTable<GlBlendRealization>));
   }
 
   @:noCompletion
   public static function setGlQuadMatrixFromOffset(state:GlRenderState, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float, dx:Float, dy:Float):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument63:Dynamic = state; __callArgument63; })) : GlRenderStateRuntime);
-    setGlMatrixFromValues((cast state : GlRenderState).gl, ({ final __callArgument64:Dynamic = runtime.shaderLoc; __callArgument64; }), runtime.matrixArray, (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast ((tx + (a * dx)) + (c * dy)) : Float), (cast ((ty + (b * dx)) + (d * dy)) : Float), ({ final __callArgument65:Dynamic = _Runtime.coalesce(runtime.renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas); __callArgument65; }));
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument116:Dynamic = state; __callArgument116; })) : GlRenderStateRuntime);
+    setGlMatrixFromValues((cast state : GlRenderState).gl, ({ final __callArgument118:Dynamic = runtime.shaderLoc; __callArgument118; }), runtime.matrixArray, (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast ((tx + (a * dx)) + (c * dy)) : Float), (cast ((ty + (b * dx)) + (d * dy)) : Float), ({ final __callArgument119:Dynamic = _Runtime.coalesce(runtime.renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas); __callArgument119; }));
   }
 
   @:noCompletion
   public static function updateGlTexture(state:GlRenderState, texture:flighthq._internal.dom.WebGLTexture, canvas:flighthq._internal.dom.HTMLCanvasElement):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument66:Dynamic = state; __callArgument66; })) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument122:Dynamic = state; __callArgument122; })) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), texture);
     (runtime.currentTexture = cast (texture : Null<flighthq._internal.dom.WebGLTexture>));
     (runtime.currentTextureStraightAlpha = cast (false : Bool));
     flighthq._internal.backend.WebGl2Backend.pixelStorei(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL', flighthq._internal.backend.WebGl2Backend.UNPACK_PREMULTIPLY_ALPHA_WEBGL), true);
     flighthq._internal.backend.WebGl2Backend.texImage2DSource(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_BYTE', flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE), canvas);
-    if (_Runtime.truthy(({ final __collection67:Dynamic = runtime.mipmappedTextures; __collection67 == null ? _Runtime.UNDEFINED : ((cast __collection67 : flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture>).has(texture)); }))) { flighthq._internal.backend.WebGl2Backend.generateMipmap(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D)); }
+    if (_Runtime.truthy(({ final __collection124:Dynamic = runtime.mipmappedTextures; __collection124 == null ? _Runtime.UNDEFINED : ((cast __collection124 : flighthq._internal._WeakSet<flighthq._internal.dom.WebGLTexture>).has(texture)); }))) { flighthq._internal.backend.WebGl2Backend.generateMipmap(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D)); }
   }
 
   public static function uploadGlBitmap__glDraw(state:GlRenderState, image:TextureSource, premultiply:Bool, colorSpace:TextureColorSpace):Void {
@@ -307,25 +307,25 @@ class GlDraw {
     bitmap = (cast image : Bitmap);
     gl = (cast state : GlRenderState).gl;
     data = ((cast ((cast premultiply : Bool) && (cast !_Runtime.strictEquals(bitmap.alphaType, 'premultiplied') : Bool)) : Bool) ? (cast (cast GlDraw.convertRgba8AlphaEncoding__glDraw(bitmap.data, (cast true : Bool)) : flighthq._internal._UInt8ClampedArray) : Dynamic) : (cast ((cast ((cast !(cast premultiply : Bool) : Bool) && (cast _Runtime.strictEquals(bitmap.alphaType, 'premultiplied') : Bool)) : Bool) ? (cast (cast GlDraw.convertRgba8AlphaEncoding__glDraw(bitmap.data, (cast false : Bool)) : flighthq._internal._UInt8ClampedArray) : Dynamic) : (cast bitmap.data : Dynamic)) : Dynamic));
-    uploadGlTextureData(({ final __callArgument68:Dynamic = gl; __callArgument68; }), (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D) : Float), (cast bitmap.width : Float), (cast bitmap.height : Float), ({ final __callArgument69:Dynamic = data; __callArgument69; }), (cast ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SRGB8_ALPHA8', flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic)) : Float));
+    uploadGlTextureData(({ final __callArgument125:Dynamic = gl; __callArgument125; }), (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D) : Float), (cast bitmap.width : Float), (cast bitmap.height : Float), ({ final __callArgument126:Dynamic = data; __callArgument126; }), (cast ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SRGB8_ALPHA8', flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic)) : Float));
   }
 
   public static function uploadGlCompressedImage__glDraw(state:GlRenderState, image:TextureSource, _premultiply:Bool, colorSpace:TextureColorSpace):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var uploadEntry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlCompressedTextureUploader; }>> = cast _Runtime.UNDEFINED;
     var decoderEntry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlCompressedTextureDecoder; }>> = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument70:Dynamic = state; __callArgument70; })) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument129:Dynamic = state; __callArgument129; })) : GlRenderStateRuntime);
     uploadEntry = (cast (cast runtime.registries : { var compressedTextureUpload:SlotTable<GlCompressedTextureUploader>; }).compressedTextureUpload : SlotTable<GlCompressedTextureUploader>).entry;
-    if ((cast !_Runtime.strictEquals(({ final __structural71 = uploadEntry; __structural71 == null ? _Runtime.UNDEFINED : (cast __structural71 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { return; }
+    if ((cast !_Runtime.strictEquals(({ final __structural131 = uploadEntry; __structural131 == null ? _Runtime.UNDEFINED : (cast __structural131 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { return; }
     decoderEntry = (cast (cast runtime.registries : { var compressedTextureDecoder:SlotTable<GlCompressedTextureDecoder>; }).compressedTextureDecoder : SlotTable<GlCompressedTextureDecoder>).entry;
-    (cast uploadEntry : { var state:String; var value:GlCompressedTextureUploader; }).value((cast state : GlRenderState).gl, (cast image : CompressedImage), (cast ((cast _Runtime.strictEquals(({ final __structural72 = decoderEntry; __structural72 == null ? _Runtime.UNDEFINED : (cast __structural72 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast decoderEntry : { var state:String; var value:GlCompressedTextureDecoder; }).value : Dynamic) : (cast null : Dynamic)) : Dynamic), ({ final __callArgument73:Dynamic = colorSpace; __callArgument73; }));
+    (cast uploadEntry : { var state:String; var value:GlCompressedTextureUploader; }).value((cast state : GlRenderState).gl, (cast image : CompressedImage), (cast ((cast _Runtime.strictEquals(({ final __structural132 = decoderEntry; __structural132 == null ? _Runtime.UNDEFINED : (cast __structural132 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast decoderEntry : { var state:String; var value:GlCompressedTextureDecoder; }).value : Dynamic) : (cast null : Dynamic)) : Dynamic), ({ final __callArgument133:Dynamic = colorSpace; __callArgument133; }));
   }
 
   public static function uploadGlImageResource__glDraw(state:GlRenderState, image:TextureSource, premultiply:Bool, colorSpace:TextureColorSpace):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.pixelStorei(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL', flighthq._internal.backend.WebGl2Backend.UNPACK_PREMULTIPLY_ALPHA_WEBGL), ((cast premultiply : Bool) && (cast !_Runtime.strictEquals(image.alphaType, 'premultiplied') : Bool)));
-    uploadGlTextureElement(({ final __callArgument74:Dynamic = gl; __callArgument74; }), (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D) : Float), (cast (cast _Runtime.field((cast image : Image), 'source') : flighthq._internal.dom.TexImageSource) : flighthq._internal._Any), (cast ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SRGB8_ALPHA8', flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic)) : Float));
+    uploadGlTextureElement(({ final __callArgument134:Dynamic = gl; __callArgument134; }), (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D) : Float), (cast (cast _Runtime.field((cast image : Image), 'source') : flighthq._internal.dom.TexImageSource) : flighthq._internal._Any), (cast ((cast _Runtime.strictEquals(colorSpace, 'srgb') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'SRGB8_ALPHA8', flighthq._internal.backend.WebGl2Backend.SRGB8_ALPHA8) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic)) : Float));
   }
 
   public static function convertRgba8AlphaEncoding__glDraw(data:flighthq._internal._UInt8ClampedArray, toPremultiplied:Bool):flighthq._internal._UInt8ClampedArray {
@@ -352,8 +352,8 @@ class GlDraw {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var resolved:GlBitmapShader = cast _Runtime.UNDEFINED;
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument75:Dynamic = state; __callArgument75; })) : GlRenderStateRuntime);
-    resolved = _Runtime.coalesce(shader, function():Dynamic return cast (cast ensureDefaultGlBitmapShader(({ final __callArgument76:Dynamic = state; __callArgument76; })) : GlBitmapShader));
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument136:Dynamic = state; __callArgument136; })) : GlRenderStateRuntime);
+    resolved = _Runtime.coalesce(shader, function():Dynamic return cast (cast ensureDefaultGlBitmapShader(({ final __callArgument138:Dynamic = state; __callArgument138; })) : GlBitmapShader));
     (runtime.shaderLoc = cast ((cast resolved : { var locations:GlShaderLocations; }).locations : Null<GlShaderLocations>));
     program = (cast resolved : { var program:flighthq._internal.dom.WebGLProgram; }).program;
     if ((cast !_Runtime.strictEquals(runtime.currentProgram, program) : Bool)) {
@@ -361,7 +361,7 @@ class GlDraw {
       (runtime.currentProgram = cast (program : Null<flighthq._internal.dom.WebGLProgram>));
       return;
     }
-    ({ final __optionalCall77 = runtime.bindingCacheGuard; if (__optionalCall77 != null) __optionalCall77(state, program); });
+    ({ final __optionalCall140 = runtime.bindingCacheGuard; if (__optionalCall140 != null) __optionalCall140(state, program); });
   }
 
   public static function ensureGlAnisotropyExt__glDraw(state:GlRenderState, runtime:GlRenderStateRuntime):Null<flighthq._internal.dom.EXT_texture_filter_anisotropic> {

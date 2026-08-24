@@ -34,7 +34,7 @@ class WgpuTextInput {
     flighthq._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'rect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'clip', cast ([] : Array<Dynamic>));
-    getTextInputSelectionRectangles(({ final __callArgument1:Dynamic = WgpuTextInput.selectionRectangles__wgpuTextInput; __callArgument1; }), ({ final __callArgument2:Dynamic = source; __callArgument2; }), ({ final __callArgument3:Dynamic = result; __callArgument3; }));
+    getTextInputSelectionRectangles(({ final __callArgument2:Dynamic = WgpuTextInput.selectionRectangles__wgpuTextInput; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }), ({ final __callArgument4:Dynamic = result; __callArgument4; }));
     if ((cast ((cast _Runtime.field(WgpuTextInput.selectionRectangles__wgpuTextInput, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', (cast computeRgbHexString((cast (cast input : { var selectionColor:Float; }).selectionColor : Float)) : String));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast input : { var selectionAlpha:Float; }).selectionAlpha);
@@ -42,8 +42,8 @@ class WgpuTextInput {
         flighthq._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([(rect.x - scrollXOffset), (rect.y - scrollYOffset), rect.width, rect.height] : Array<Dynamic>));
       }
     }
-    if ((cast ((cast (cast input : { var focused:Bool; }).focused : Bool) && (cast _Runtime.strictEquals((cast getTextInputSelectionBeginIndex(({ final __callArgument6:Dynamic = source; __callArgument6; })) : Float), (cast getTextInputSelectionEndIndex(({ final __callArgument7:Dynamic = source; __callArgument7; })) : Float)) : Bool)) : Bool)) {
-      getTextInputCaretRectangle(({ final __callArgument8:Dynamic = WgpuTextInput.caretRectangle__wgpuTextInput; __callArgument8; }), ({ final __callArgument9:Dynamic = source; __callArgument9; }), ({ final __callArgument10:Dynamic = result; __callArgument10; }));
+    if ((cast ((cast (cast input : { var focused:Bool; }).focused : Bool) && (cast _Runtime.strictEquals((cast getTextInputSelectionBeginIndex(({ final __callArgument10:Dynamic = source; __callArgument10; })) : Float), (cast getTextInputSelectionEndIndex(({ final __callArgument12:Dynamic = source; __callArgument12; })) : Float)) : Bool)) : Bool)) {
+      getTextInputCaretRectangle(({ final __callArgument14:Dynamic = WgpuTextInput.caretRectangle__wgpuTextInput; __callArgument14; }), ({ final __callArgument15:Dynamic = source; __callArgument15; }), ({ final __callArgument16:Dynamic = result; __callArgument16; }));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', WgpuTextInput.CARET_COLOR__wgpuTextInput);
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', 1.0);
       flighthq._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([((cast WgpuTextInput.caretRectangle__wgpuTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x - scrollXOffset), ((cast WgpuTextInput.caretRectangle__wgpuTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).y - scrollYOffset), WgpuTextInput.CARET_WIDTH__wgpuTextInput, (cast WgpuTextInput.caretRectangle__wgpuTextInput : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).height] : Array<Dynamic>));
@@ -52,7 +52,7 @@ class WgpuTextInput {
   }
 
   public static function enableWgpuTextInput():Void {
-    registerWgpuTextInputOverlay(({ final __callArgument11:Dynamic = drawWgpuTextInputOverlay; __callArgument11; }));
+    registerWgpuTextInputOverlay(({ final __callArgument20:Dynamic = drawWgpuTextInputOverlay; __callArgument20; }));
   }
 
   public static final CARET_COLOR__wgpuTextInput:String = '#000000';

@@ -29,13 +29,13 @@ class NodeTransform2d {
   }
 
   public static function convertNodeVector2LocalToGlobal<Traits:flighthq._internal._Object>(out:Vector2Like, source:Transform2DNode<Traits>, vector:Vector2Like):Void {
-    matrixTransformPointXY(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast getNodeWorldMatrix((cast source : Dynamic)) : Matrix); __callArgument3; }), (cast vector.x : Float), (cast vector.y : Float));
+    matrixTransformPointXY(({ final __callArgument4:Dynamic = out; __callArgument4; }), ({ final __callArgument5:Dynamic = (cast getNodeWorldMatrix((cast source : Dynamic)) : Matrix); __callArgument5; }), (cast vector.x : Float), (cast vector.y : Float));
   }
 
   @:noCompletion
   public static function ensureNodeLocalMatrix<Traits:flighthq._internal._Object>(target:Transform2DNode<Traits>):Void {
     var runtime:{ >NodeRuntime<Traits>, >HasTransform2DRuntime, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime(({ final __callArgument4:Dynamic = target; __callArgument4; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>);
+    runtime = (cast getEntityRuntime(({ final __callArgument8:Dynamic = target; __callArgument8; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>);
     if ((cast !_Runtime.strictEquals((cast runtime : { var localTransformUsingLocalTransformId:Float; }).localTransformUsingLocalTransformId, (cast runtime : { var localTransformId:Float; }).localTransformId) : Bool)) {
       NodeTransform2d.recomputeLocalTransform2D__nodeTransform2d((cast target : Dynamic), (cast runtime : Dynamic));
     }
@@ -47,12 +47,12 @@ class NodeTransform2d {
     var parent:Transform2DNode<Traits> = cast _Runtime.UNDEFINED;
     var parentRuntime:Null<{ >NodeRuntime<Traits>, >HasTransform2DRuntime, }> = cast _Runtime.UNDEFINED;
     var parentWorldTransformId:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime(({ final __callArgument5:Dynamic = target; __callArgument5; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>);
+    runtime = (cast getEntityRuntime(({ final __callArgument10:Dynamic = target; __callArgument10; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>);
     parent = (cast (cast runtime : { var parent:Null<Node<Traits>>; }).parent : Transform2DNode<Traits>);
     parentWorldTransformId = 0.0;
     if ((cast !_Runtime.strictEquals(parent, null) : Bool)) {
       ensureNodeWorldMatrix((cast parent : Dynamic));
-      (parentRuntime = cast ((cast getEntityRuntime(({ final __callArgument6:Dynamic = parent; __callArgument6; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>) : Dynamic));
+      (parentRuntime = cast ((cast getEntityRuntime(({ final __callArgument12:Dynamic = parent; __callArgument12; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>) : Dynamic));
       (parentWorldTransformId = cast ((cast parentRuntime : { var worldTransformId:Float; }).worldTransformId : Dynamic));
     }
     if ((cast ((cast !_Runtime.strictEquals((cast runtime : { var worldTransformUsingLocalTransformId:Float; }).worldTransformUsingLocalTransformId, (cast runtime : { var localTransformId:Float; }).localTransformId) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var worldTransformUsingParentTransformId:Float; }).worldTransformUsingParentTransformId, parentWorldTransformId) : Bool)) : Bool)) {
@@ -62,7 +62,7 @@ class NodeTransform2d {
 
   public static function getNodeLocalMatrix<Traits:flighthq._internal._Object>(target:Transform2DNode<Traits>):Matrix {
     ensureNodeLocalMatrix((cast target : Dynamic));
-    return cast (cast (cast getEntityRuntime(({ final __callArgument7:Dynamic = target; __callArgument7; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>) : { var localMatrix:Null<Matrix>; }).localMatrix;
+    return cast (cast (cast getEntityRuntime(({ final __callArgument14:Dynamic = target; __callArgument14; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>) : { var localMatrix:Null<Matrix>; }).localMatrix;
     return cast null;
   }
 
@@ -80,12 +80,12 @@ class NodeTransform2d {
 
   public static function getNodeWorldMatrix<Traits:flighthq._internal._Object>(target:Transform2DNode<Traits>):Matrix {
     ensureNodeWorldMatrix((cast target : Dynamic));
-    return cast (cast (cast getEntityRuntime(({ final __callArgument8:Dynamic = target; __callArgument8; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>) : { var worldMatrix:Null<Matrix>; }).worldMatrix;
+    return cast (cast (cast getEntityRuntime(({ final __callArgument16:Dynamic = target; __callArgument16; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform2DRuntime>) : { var worldMatrix:Null<Matrix>; }).worldMatrix;
     return cast null;
   }
 
   public static function setNodeLocalMatrix<Traits:flighthq._internal._Object>(target:Transform2DNode<Traits>, source:MatrixLike):Void {
-    decomposeMatrixToTransform2D(({ final __callArgument9:Dynamic = target; __callArgument9; }), ({ final __callArgument10:Dynamic = source; __callArgument10; }));
+    decomposeMatrixToTransform2D(({ final __callArgument18:Dynamic = target; __callArgument18; }), ({ final __callArgument19:Dynamic = source; __callArgument19; }));
     invalidateNodeLocalTransform((cast target : Dynamic));
   }
 
@@ -118,7 +118,7 @@ class NodeTransform2d {
       (runtime.rotationSine = cast (sin : Float));
       (runtime.rotationCosine = cast (cos : Float));
     }
-    if ((cast _Runtime.strictEquals(runtime.localMatrix, null) : Bool)) { (runtime.localMatrix = cast ((cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix) : Null<Matrix>)); }
+    if ((cast _Runtime.strictEquals(runtime.localMatrix, null) : Bool)) { (runtime.localMatrix = cast ((cast (#if js _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) #else createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix) : Null<Matrix>)); }
     matrix = runtime.localMatrix;
     if ((cast ((cast _Runtime.strictEquals(target.skewX, 0.0) : Bool) && (cast _Runtime.strictEquals(target.skewY, 0.0) : Bool)) : Bool)) {
       (matrix.a = cast ((runtime.rotationCosine * target.scaleX) : Float));
@@ -139,12 +139,12 @@ class NodeTransform2d {
   }
 
   public static function recomputeWorldTransform2D__nodeTransform2d<Traits:flighthq._internal._Object>(target:Transform2DNode<Traits>, runtime:{ >NodeRuntime<Traits>, >HasTransform2DRuntime, }, ?parentRuntime:{ >NodeRuntime<Traits>, >HasTransform2DRuntime, }):Void {
-    if ((cast _Runtime.strictEquals(runtime.worldMatrix, null) : Bool)) { (runtime.worldMatrix = cast ((cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix) : Null<Matrix>)); }
+    if ((cast _Runtime.strictEquals(runtime.worldMatrix, null) : Bool)) { (runtime.worldMatrix = cast ((cast (#if js _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) #else createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix) : Null<Matrix>)); }
     ensureNodeLocalMatrix((cast target : Dynamic));
     if ((cast !_Runtime.strictEquals(parentRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      multiplyMatrix(({ final __callArgument11:Dynamic = runtime.worldMatrix; __callArgument11; }), ({ final __callArgument12:Dynamic = parentRuntime.worldMatrix; __callArgument12; }), ({ final __callArgument13:Dynamic = runtime.localMatrix; __callArgument13; }));
+      multiplyMatrix(({ final __callArgument22:Dynamic = runtime.worldMatrix; __callArgument22; }), ({ final __callArgument23:Dynamic = parentRuntime.worldMatrix; __callArgument23; }), ({ final __callArgument24:Dynamic = runtime.localMatrix; __callArgument24; }));
     } else {
-      copyMatrix(({ final __callArgument14:Dynamic = runtime.worldMatrix; __callArgument14; }), ({ final __callArgument15:Dynamic = runtime.localMatrix; __callArgument15; }));
+      copyMatrix(({ final __callArgument28:Dynamic = runtime.worldMatrix; __callArgument28; }), ({ final __callArgument29:Dynamic = runtime.localMatrix; __callArgument29; }));
     }
     computeNodeWorldTransformRevision((cast runtime : Dynamic), (cast parentRuntime : Dynamic));
   }

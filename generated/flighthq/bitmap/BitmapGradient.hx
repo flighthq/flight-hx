@@ -91,7 +91,7 @@ class BitmapGradient {
         py++;
       }
     }
-    BitmapGradient.blurAlphaField__bitmapGradient(({ final __callArgument1:Dynamic = scratch; __callArgument1; }), ({ final __callArgument2:Dynamic = out; __callArgument2; }), (cast w : Float), (cast h : Float), options.radiusX, options.radiusY, options.passes);
+    BitmapGradient.blurAlphaField__bitmapGradient(({ final __callArgument2:Dynamic = scratch; __callArgument2; }), ({ final __callArgument3:Dynamic = out; __callArgument3; }), (cast w : Float), (cast h : Float), options.radiusX, options.radiusY, options.passes);
     {
       var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
@@ -99,12 +99,12 @@ class BitmapGradient {
           var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var di:Float = (((py * w) + px) * 4.0);
-            var lit:Float = (cast BitmapGradient.sampleField__bitmapGradient(({ final __callArgument3:Dynamic = scratch; __callArgument3; }), (cast w : Float), (cast h : Float), (cast (px - offsetX) : Float), (cast (py - offsetY) : Float)) : Float);
-            var shade:Float = (cast BitmapGradient.sampleField__bitmapGradient(({ final __callArgument4:Dynamic = scratch; __callArgument4; }), (cast w : Float), (cast h : Float), (cast (px + offsetX) : Float), (cast (py + offsetY) : Float)) : Float);
+            var lit:Float = (cast BitmapGradient.sampleField__bitmapGradient(({ final __callArgument6:Dynamic = scratch; __callArgument6; }), (cast w : Float), (cast h : Float), (cast (px - offsetX) : Float), (cast (py - offsetY) : Float)) : Float);
+            var shade:Float = (cast BitmapGradient.sampleField__bitmapGradient(({ final __callArgument8:Dynamic = scratch; __callArgument8; }), (cast w : Float), (cast h : Float), (cast (px + offsetX) : Float), (cast (py + offsetY) : Float)) : Float);
             var gradient:Float = (lit - shade);
             var idx:Float = HxMath.max(0.0, HxMath.min(255.0, HxMath.round((((gradient * 0.5) + 0.5) * 255.0))));
             var ri:Float = (idx * 4.0);
-            var clip:Float = ((cast _Runtime.strictEquals(type, 'inner') : Bool) ? (cast ((cast BitmapGradient.readSourceAlpha__bitmapGradient(({ final __callArgument5:Dynamic = source; __callArgument5; }), (cast px : Float), (cast py : Float)) : Float) / 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'outer') : Bool) ? (cast (1.0 - ((cast BitmapGradient.readSourceAlpha__bitmapGradient(({ final __callArgument6:Dynamic = source; __callArgument6; }), (cast px : Float), (cast py : Float)) : Float) / 255.0)) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
+            var clip:Float = ((cast _Runtime.strictEquals(type, 'inner') : Bool) ? (cast ((cast BitmapGradient.readSourceAlpha__bitmapGradient(({ final __callArgument10:Dynamic = source; __callArgument10; }), (cast px : Float), (cast py : Float)) : Float) / 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'outer') : Bool) ? (cast (1.0 - ((cast BitmapGradient.readSourceAlpha__bitmapGradient(({ final __callArgument12:Dynamic = source; __callArgument12; }), (cast px : Float), (cast py : Float)) : Float) / 255.0)) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast ramp : flighthq._internal._UInt8ClampedArray), (cast ri : Float)) : Float));
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast ramp : flighthq._internal._UInt8ClampedArray), (cast (ri + 1.0) : Float)) : Float));
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast ramp : flighthq._internal._UInt8ClampedArray), (cast (ri + 2.0) : Float)) : Float));
@@ -135,14 +135,14 @@ class BitmapGradient {
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast 0.0 : Float));
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast 0.0 : Float));
             flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast 0.0 : Float));
-            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast (cast BitmapGradient.readSourceAlpha__bitmapGradient(({ final __callArgument7:Dynamic = source; __callArgument7; }), (cast px : Float), (cast py : Float)) : Float) : Float));
+            flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast (cast BitmapGradient.readSourceAlpha__bitmapGradient(({ final __callArgument14:Dynamic = source; __callArgument14; }), (cast px : Float), (cast py : Float)) : Float) : Float));
             px++;
           }
         }
         py++;
       }
     }
-    BitmapGradient.blurAlphaField__bitmapGradient(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = scratch; __callArgument9; }), (cast w : Float), (cast h : Float), options.radiusX, options.radiusY, options.passes);
+    BitmapGradient.blurAlphaField__bitmapGradient(({ final __callArgument16:Dynamic = out; __callArgument16; }), ({ final __callArgument17:Dynamic = scratch; __callArgument17; }), (cast w : Float), (cast h : Float), options.radiusX, options.radiusY, options.passes);
     {
       var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
@@ -178,13 +178,13 @@ class BitmapGradient {
       var pass:Float = 0.0;
       while ((cast ((cast pass : Float) < (cast p : Float)) : Bool)) {
         if ((cast ((cast rx : Float) > (cast 0.0 : Float)) : Bool)) {
-          blurBitmapPixelsHorizontal(({ final __callArgument10:Dynamic = b; __callArgument10; }), ({ final __callArgument11:Dynamic = a; __callArgument11; }), (cast w : Float), (cast h : Float), (cast rx : Float));
+          blurBitmapPixelsHorizontal(({ final __callArgument20:Dynamic = b; __callArgument20; }), ({ final __callArgument21:Dynamic = a; __callArgument21; }), (cast w : Float), (cast h : Float), (cast rx : Float));
           var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
         }
         if ((cast ((cast ry : Float) > (cast 0.0 : Float)) : Bool)) {
-          blurBitmapPixelsVertical(({ final __callArgument12:Dynamic = b; __callArgument12; }), ({ final __callArgument13:Dynamic = a; __callArgument13; }), (cast w : Float), (cast h : Float), (cast ry : Float));
+          blurBitmapPixelsVertical(({ final __callArgument24:Dynamic = b; __callArgument24; }), ({ final __callArgument25:Dynamic = a; __callArgument25; }), (cast w : Float), (cast h : Float), (cast ry : Float));
           var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));

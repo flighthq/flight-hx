@@ -24,11 +24,11 @@ import flighthq.types.Physics3D.Physics3DWorld;
 class RegisterBuiltInPhysics3DJointSolvers {
   public static function registerBuiltInPhysics3DJointSolvers(world:Physics3DWorld):Void {
     registerPhysics3DJointSolver(({ final __callArgument0:Dynamic = world; __callArgument0; }), (cast Physics3DBallAndSocketJointKind : String), ({ final __callArgument1:Dynamic = physics3DBallAndSocketJointSolver; __callArgument1; }));
-    registerPhysics3DJointSolver(({ final __callArgument2:Dynamic = world; __callArgument2; }), (cast Physics3DConeTwistJointKind : String), ({ final __callArgument3:Dynamic = physics3DConeTwistJointSolver; __callArgument3; }));
-    registerPhysics3DJointSolver(({ final __callArgument4:Dynamic = world; __callArgument4; }), (cast Physics3DDistanceJointKind : String), ({ final __callArgument5:Dynamic = physics3DDistanceJointSolver; __callArgument5; }));
-    registerPhysics3DJointSolver(({ final __callArgument6:Dynamic = world; __callArgument6; }), (cast Physics3DFixedJointKind : String), ({ final __callArgument7:Dynamic = physics3DFixedJointSolver; __callArgument7; }));
-    registerPhysics3DJointSolver(({ final __callArgument8:Dynamic = world; __callArgument8; }), (cast Physics3DGeneric6DofJointKind : String), ({ final __callArgument9:Dynamic = physics3DGeneric6DofJointSolver; __callArgument9; }));
-    registerPhysics3DJointSolver(({ final __callArgument10:Dynamic = world; __callArgument10; }), (cast Physics3DHingeJointKind : String), ({ final __callArgument11:Dynamic = physics3DHingeJointSolver; __callArgument11; }));
-    registerPhysics3DJointSolver(({ final __callArgument12:Dynamic = world; __callArgument12; }), (cast Physics3DSliderJointKind : String), ({ final __callArgument13:Dynamic = physics3DSliderJointSolver; __callArgument13; }));
+    registerPhysics3DJointSolver(({ final __callArgument4:Dynamic = world; __callArgument4; }), (cast Physics3DConeTwistJointKind : String), ({ final __callArgument5:Dynamic = physics3DConeTwistJointSolver; __callArgument5; }));
+    registerPhysics3DJointSolver(({ final __callArgument8:Dynamic = world; __callArgument8; }), (cast Physics3DDistanceJointKind : String), ({ final __callArgument9:Dynamic = physics3DDistanceJointSolver; __callArgument9; }));
+    registerPhysics3DJointSolver(({ final __callArgument12:Dynamic = world; __callArgument12; }), (cast Physics3DFixedJointKind : String), ({ final __callArgument13:Dynamic = physics3DFixedJointSolver; __callArgument13; }));
+    registerPhysics3DJointSolver(({ final __callArgument16:Dynamic = world; __callArgument16; }), (cast Physics3DGeneric6DofJointKind : String), ({ final __callArgument17:Dynamic = physics3DGeneric6DofJointSolver; __callArgument17; }));
+    registerPhysics3DJointSolver(({ final __callArgument20:Dynamic = world; __callArgument20; }), (cast Physics3DHingeJointKind : String), ({ final __callArgument21:Dynamic = physics3DHingeJointSolver; __callArgument21; }));
+    registerPhysics3DJointSolver(({ final __callArgument24:Dynamic = world; __callArgument24; }), (cast Physics3DSliderJointKind : String), ({ final __callArgument25:Dynamic = physics3DSliderJointSolver; __callArgument25; }));
   }
 }

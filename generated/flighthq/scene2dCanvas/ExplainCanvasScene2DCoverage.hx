@@ -25,13 +25,13 @@ class ExplainCanvasScene2DCoverage {
   @:noCompletion
   public static function explainCanvasScene2DCoverage(out:Array<SceneCoverageEntry>, state:CanvasRenderState, usage:Scene2DKindUsage, catalog:SceneCoverageCatalog):Void {
     explainScene2DCoverage(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = usage; __callArgument2; }), ({ final __callArgument3:Dynamic = catalog; __callArgument3; }));
-    (cast ExplainCanvasScene2DCoverage.collectCanvasScene2DCoverageGaps__explainCanvasScene2DCoverage(({ final __callArgument4:Dynamic = out; __callArgument4; }), ({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = usage; __callArgument6; }), (cast false : Bool), ({ final __callArgument7:Dynamic = catalog; __callArgument7; })) : Bool);
+    (cast ExplainCanvasScene2DCoverage.collectCanvasScene2DCoverageGaps__explainCanvasScene2DCoverage(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = usage; __callArgument10; }), (cast false : Bool), ({ final __callArgument11:Dynamic = catalog; __callArgument11; })) : Bool);
   }
 
   @:noCompletion
   public static function hasCanvasScene2DCoverage(state:CanvasRenderState, usage:Scene2DKindUsage):Bool {
-    if ((cast !(cast (cast hasScene2DCoverage(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = usage; __callArgument9; })) : Bool) : Bool) : Bool)) { return cast false; }
-    return cast !(cast (cast ExplainCanvasScene2DCoverage.collectCanvasScene2DCoverageGaps__explainCanvasScene2DCoverage(({ final __callArgument10:Dynamic = null; __callArgument10; }), ({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = usage; __callArgument12; }), (cast true : Bool), ({ final __callArgument13:Dynamic = null; __callArgument13; })) : Bool) : Bool);
+    if ((cast !(cast (cast hasScene2DCoverage(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = usage; __callArgument17; })) : Bool) : Bool) : Bool)) { return cast false; }
+    return cast !(cast (cast ExplainCanvasScene2DCoverage.collectCanvasScene2DCoverageGaps__explainCanvasScene2DCoverage(({ final __callArgument20:Dynamic = null; __callArgument20; }), ({ final __callArgument21:Dynamic = state; __callArgument21; }), ({ final __callArgument22:Dynamic = usage; __callArgument22; }), (cast true : Bool), ({ final __callArgument23:Dynamic = null; __callArgument23; })) : Bool) : Bool);
     return cast null;
   }
 
@@ -42,14 +42,14 @@ class ExplainCanvasScene2DCoverage {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(usage.materialKinds, 'length') : Float)) : Bool)) {
         var kind:String = flighthq._internal._StaticIndex.readArray(usage.materialKinds, i);
-        if ((cast !_Runtime.strictEquals((cast getCanvasMaterialRenderer(({ final __callArgument14:Dynamic = state; __callArgument14; }), (cast kind : String)) : Null<CanvasMaterialRenderer>), null) : Bool)) {
+        if ((cast !_Runtime.strictEquals((cast getCanvasMaterialRenderer(({ final __callArgument28:Dynamic = state; __callArgument28; }), (cast kind : String)) : Null<CanvasMaterialRenderer>), null) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Satisfied, facet: (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneMaterialKind, kind: kind, registry: RenderRegistry.MaterialRenderer }] : Array<Dynamic>));
           i++;
           continue;
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([(cast ExplainCanvasScene2DCoverage.createShortfallEntry__explainCanvasScene2DCoverage(({ final __callArgument15:Dynamic = catalog; __callArgument15; }), (cast true : Bool), ({ final __callArgument16:Dynamic = (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneMaterialKind; __callArgument16; }), (cast kind : String), ({ final __callArgument17:Dynamic = RenderRegistry.MaterialRenderer; __callArgument17; })) : SceneCoverageEntry)] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([(cast ExplainCanvasScene2DCoverage.createShortfallEntry__explainCanvasScene2DCoverage(({ final __callArgument30:Dynamic = catalog; __callArgument30; }), (cast true : Bool), ({ final __callArgument31:Dynamic = (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneMaterialKind; __callArgument31; }), (cast kind : String), ({ final __callArgument32:Dynamic = RenderRegistry.MaterialRenderer; __callArgument32; })) : SceneCoverageEntry)] : Array<Dynamic>));
         i++;
       }
     }
@@ -60,7 +60,7 @@ class ExplainCanvasScene2DCoverage {
   public static function createShortfallEntry__explainCanvasScene2DCoverage(catalog:Null<SceneCoverageCatalog>, fallback:Bool, facet:flighthq._internal._IndexedAccess<SceneCoverageEntry, String>, kind:Kind, registry:flighthq._internal._IndexedAccess<SceneCoverageEntry, String>):SceneCoverageEntry {
     var registration:Null<CatalogRegistration> = cast _Runtime.UNDEFINED;
     var base:{ var facet:RequirementFacet; var kind:String; var registry:RenderRegistry; } = cast _Runtime.UNDEFINED;
-    registration = (cast ExplainCanvasScene2DCoverage.findCatalogRegistration__explainCanvasScene2DCoverage(({ final __callArgument18:Dynamic = catalog; __callArgument18; }), (cast kind : String), ({ final __callArgument19:Dynamic = registry; __callArgument19; })) : Null<CatalogRegistration>);
+    registration = (cast ExplainCanvasScene2DCoverage.findCatalogRegistration__explainCanvasScene2DCoverage(({ final __callArgument36:Dynamic = catalog; __callArgument36; }), (cast kind : String), ({ final __callArgument37:Dynamic = registry; __callArgument37; })) : Null<CatalogRegistration>);
     base = (cast { facet: facet, kind: kind, registry: registry });
     if ((cast _Runtime.strictEquals(registration, null) : Bool)) {
       return cast _Runtime.mergeObjects([base, { coverage: ((cast fallback : Bool) ? (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).FallbackUnavailable : Dynamic) : (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Unavailable : Dynamic)) }]);

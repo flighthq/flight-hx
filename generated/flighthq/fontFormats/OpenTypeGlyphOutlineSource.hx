@@ -37,7 +37,7 @@ class OpenTypeGlyphOutlineSource {
     format = (cast detectFontFormat(({ final __callArgument0:Dynamic = (cast source : flighthq._internal._UInt8Array); __callArgument0; })) : Null<String>);
     if ((cast ((cast _Runtime.strictEquals(format, 'truetype') : Bool) || (cast _Runtime.strictEquals(format, 'opentype') : Bool)) : Bool)) { return cast source; }
     if ((cast !_Runtime.strictEquals(format, 'woff') : Bool)) { return cast null; }
-    return cast (cast readWoffFont(({ final __callArgument1:Dynamic = source; __callArgument1; }), (cast (cast getDecompressor(({ final __callArgument2:Dynamic = WOFF_COMPRESSION; __callArgument2; })) : Null<Decompressor>) : Dynamic), ({ final __callArgument3:Dynamic = diagnostics; __callArgument3; })) : Null<flighthq._internal._UInt8Array>);
+    return cast (cast readWoffFont(({ final __callArgument2:Dynamic = source; __callArgument2; }), (cast (cast getDecompressor(({ final __callArgument3:Dynamic = WOFF_COMPRESSION; __callArgument3; })) : Null<Decompressor>) : Dynamic), ({ final __callArgument5:Dynamic = diagnostics; __callArgument5; })) : Null<flighthq._internal._UInt8Array>);
     return cast null;
   }
 
@@ -52,7 +52,7 @@ class OpenTypeGlyphOutlineSource {
     var glyphCount:Float = cast _Runtime.UNDEFINED;
     var metrics:GlyphOutlineMetrics = cast _Runtime.UNDEFINED;
     var ranges:Null<flighthq._internal._UInt32Array> = cast _Runtime.UNDEFINED;
-    parsed = (cast OpenTypeGlyphOutlineSource.readOpenTypeFontTables__openTypeGlyphOutlineSource(({ final __callArgument4:Dynamic = source; __callArgument4; }), ({ final __callArgument5:Dynamic = diagnostics; __callArgument5; })) : Null<OpenTypeFontTables__openTypeGlyphOutlineSource>);
+    parsed = (cast OpenTypeGlyphOutlineSource.readOpenTypeFontTables__openTypeGlyphOutlineSource(({ final __callArgument10:Dynamic = source; __callArgument10; }), ({ final __callArgument11:Dynamic = diagnostics; __callArgument11; })) : Null<OpenTypeFontTables__openTypeGlyphOutlineSource>);
     if ((cast _Runtime.strictEquals(parsed, null) : Bool)) { return cast null; }
     __destructure0 = parsed;
     advances = _Runtime.field(__destructure0, 'advances');
@@ -69,9 +69,9 @@ class OpenTypeGlyphOutlineSource {
         var charstring:CffIndexEntry = flighthq._internal._StaticIndex.readArray((cast cff : CffTable).charstrings, glyphIndex);
         if ((cast _Runtime.strictEquals(charstring, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
         var localSubrs:Array<CffIndexEntry> = _Runtime.coalesce(_Runtime.optionalIndex((cast cff : CffTable).localSubrsByGlyph, glyphIndex), function():Dynamic return cast (cast cff : CffTable).localSubrs);
-        return cast (cast runCffCharstring(({ final __callArgument6:Dynamic = out; __callArgument6; }), ({ final __callArgument7:Dynamic = bytes; __callArgument7; }), ({ final __callArgument8:Dynamic = charstring; __callArgument8; }), ({ final __callArgument9:Dynamic = localSubrs; __callArgument9; }), ({ final __callArgument10:Dynamic = (cast cff : CffTable).globalSubrs; __callArgument10; })) : Bool);
+        return cast (cast runCffCharstring(({ final __callArgument14:Dynamic = out; __callArgument14; }), ({ final __callArgument15:Dynamic = bytes; __callArgument15; }), ({ final __callArgument16:Dynamic = charstring; __callArgument16; }), ({ final __callArgument17:Dynamic = localSubrs; __callArgument17; }), ({ final __callArgument18:Dynamic = (cast cff : CffTable).globalSubrs; __callArgument18; })) : Bool);
       }
-      return cast ((cast _Runtime.strictEquals(ranges, null) : Bool) ? (cast false : Dynamic) : (cast (cast readOpenTypeGlyphOutline(({ final __callArgument11:Dynamic = out; __callArgument11; }), ({ final __callArgument12:Dynamic = bytes; __callArgument12; }), ({ final __callArgument13:Dynamic = directory; __callArgument13; }), ({ final __callArgument14:Dynamic = ranges; __callArgument14; }), (cast glyphIndex : Float)) : Bool) : Dynamic));
+      return cast ((cast _Runtime.strictEquals(ranges, null) : Bool) ? (cast false : Dynamic) : (cast (cast readOpenTypeGlyphOutline(({ final __callArgument24:Dynamic = out; __callArgument24; }), ({ final __callArgument25:Dynamic = bytes; __callArgument25; }), ({ final __callArgument26:Dynamic = directory; __callArgument26; }), ({ final __callArgument27:Dynamic = ranges; __callArgument27; }), (cast glyphIndex : Float)) : Bool) : Dynamic));
       return cast _Runtime.UNDEFINED;
     }, getGlyphOutlineAdvance: function(glyphIndex:Float):Float {
       return cast ((cast ((cast ((cast glyphIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast glyphIndex : Float) >= (cast glyphCount : Float)) : Bool)) : Bool) ? (cast 0.0 : Dynamic) : (cast flighthq._internal._StaticIndex.readInt32ArrayTyped((cast advances : flighthq._internal._Int32Array), (cast glyphIndex : Float)) : Dynamic));
@@ -93,19 +93,19 @@ class OpenTypeGlyphOutlineSource {
     var directory:Null<SfntTableDirectory> = cast _Runtime.UNDEFINED;
     var counted:{ var format:String; var readableTableCount:Float; var tableCount:Float; } = cast _Runtime.UNDEFINED;
     var parsed:Null<OpenTypeFontTables__openTypeGlyphOutlineSource> = cast _Runtime.UNDEFINED;
-    format = _Runtime.coalesce((cast detectFontFormat(({ final __callArgument15:Dynamic = (cast bytes : flighthq._internal._UInt8Array); __callArgument15; })) : Null<String>), function():Dynamic return cast '');
+    format = _Runtime.coalesce((cast detectFontFormat(({ final __callArgument32:Dynamic = (cast bytes : flighthq._internal._UInt8Array); __callArgument32; })) : Null<String>), function():Dynamic return cast '');
     empty = (cast { format: format, readableTableCount: 0.0, table: '', tableCount: 0.0 });
     if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast 12.0 : Float)) : Bool)) { return cast _Runtime.mergeObjects([empty, { accepted: false }, { reason: 'too-short' }]); }
     if ((cast _Runtime.strictEquals(format, '') : Bool)) { return cast _Runtime.mergeObjects([empty, { accepted: false }, { reason: 'unrecognized' }]); }
-    if ((cast ((cast _Runtime.strictEquals(format, 'woff') : Bool) && (cast _Runtime.strictEquals((cast getDecompressor(({ final __callArgument16:Dynamic = WOFF_COMPRESSION; __callArgument16; })) : Null<Decompressor>), null) : Bool)) : Bool)) {
+    if ((cast ((cast _Runtime.strictEquals(format, 'woff') : Bool) && (cast _Runtime.strictEquals((cast getDecompressor(({ final __callArgument34:Dynamic = WOFF_COMPRESSION; __callArgument34; })) : Null<Decompressor>), null) : Bool)) : Bool)) {
       return cast _Runtime.mergeObjects([empty, { accepted: false }, { reason: 'missing-decompressor' }]);
     }
     if ((cast ((cast ((cast !_Runtime.strictEquals(format, 'truetype') : Bool) && (cast !_Runtime.strictEquals(format, 'opentype') : Bool)) : Bool) && (cast !_Runtime.strictEquals(format, 'woff') : Bool)) : Bool)) {
       return cast _Runtime.mergeObjects([empty, { accepted: false }, { reason: 'unsupported-container' }]);
     }
-    unwrapped = ((cast _Runtime.strictEquals(format, 'woff') : Bool) ? (cast (cast readWoffFont(({ final __callArgument17:Dynamic = bytes; __callArgument17; }), (cast (cast getDecompressor(({ final __callArgument18:Dynamic = WOFF_COMPRESSION; __callArgument18; })) : Null<Decompressor>) : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<flighthq._internal._UInt8Array>) : Dynamic) : (cast bytes : Dynamic));
+    unwrapped = ((cast _Runtime.strictEquals(format, 'woff') : Bool) ? (cast (cast (#if js _Runtime.callValue(readWoffFont, cast ([({ final __callArgument39:Dynamic = bytes; __callArgument39; }), (cast (cast getDecompressor(({ final __callArgument40:Dynamic = WOFF_COMPRESSION; __callArgument40; })) : Null<Decompressor>) : Dynamic)] : Array<Dynamic>)) #else readWoffFont(({ final __callArgument36:Dynamic = bytes; __callArgument36; }), (cast (cast getDecompressor(({ final __callArgument37:Dynamic = WOFF_COMPRESSION; __callArgument37; })) : Null<Decompressor>) : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Null<flighthq._internal._UInt8Array>) : Dynamic) : (cast bytes : Dynamic));
     if ((cast _Runtime.strictEquals(unwrapped, null) : Bool)) { return cast _Runtime.mergeObjects([empty, { accepted: false }, { reason: 'malformed-table' }, { table: '' }]); }
-    directory = (cast readSfntTableDirectory(({ final __callArgument19:Dynamic = unwrapped; __callArgument19; })) : Null<SfntTableDirectory>);
+    directory = (cast readSfntTableDirectory(({ final __callArgument42:Dynamic = unwrapped; __callArgument42; })) : Null<SfntTableDirectory>);
     if ((cast _Runtime.strictEquals(directory, null) : Bool)) { return cast _Runtime.mergeObjects([empty, { accepted: false }, { reason: 'too-short' }]); }
     counted = (cast { format: format, readableTableCount: (cast (cast directory : { var tables:flighthq._internal._Map<String, SfntTableRange>; }).tables : flighthq._internal._Map<String, SfntTableRange>).size, tableCount: (cast directory : { var declaredTableCount:Float; }).declaredTableCount });
     _Runtime.voidValue(unwrapped);
@@ -122,7 +122,7 @@ class OpenTypeGlyphOutlineSource {
     } else { if ((cast !(cast ((cast (cast directory : { var tables:flighthq._internal._Map<String, SfntTableRange>; }).tables : flighthq._internal._Map<String, SfntTableRange>).has('loca')) : Bool) : Bool)) {
       return cast _Runtime.mergeObjects([counted, { accepted: false }, { reason: 'missing-required-table' }, { table: 'loca' }]);
     } }
-    parsed = (cast OpenTypeGlyphOutlineSource.readOpenTypeFontTables__openTypeGlyphOutlineSource(({ final __callArgument22:Dynamic = bytes; __callArgument22; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<OpenTypeFontTables__openTypeGlyphOutlineSource>);
+    parsed = (cast (#if js _Runtime.callValue(OpenTypeGlyphOutlineSource.readOpenTypeFontTables__openTypeGlyphOutlineSource, cast ([({ final __callArgument47:Dynamic = bytes; __callArgument47; })] : Array<Dynamic>)) #else OpenTypeGlyphOutlineSource.readOpenTypeFontTables__openTypeGlyphOutlineSource(({ final __callArgument46:Dynamic = bytes; __callArgument46; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Null<OpenTypeFontTables__openTypeGlyphOutlineSource>);
     if ((cast _Runtime.strictEquals(parsed, null) : Bool)) { return cast _Runtime.mergeObjects([counted, { accepted: false }, { reason: 'malformed-table' }, { table: '' }]); }
     return cast _Runtime.mergeObjects([counted, { accepted: true }, { reason: 'ok' }, { table: '' }]);
     return cast null;
@@ -137,24 +137,24 @@ class OpenTypeGlyphOutlineSource {
     var codepoints:Null<flighthq._internal._Map<Float, Float>> = cast _Runtime.UNDEFINED;
     var shared:{ var advances:flighthq._internal._Int32Array; var bytes:flighthq._internal._UInt8Array; var codepoints:flighthq._internal._Map<Float, Float>; var directory:SfntTableDirectory; var glyphCount:Float; var metrics:GlyphOutlineMetrics; } = cast _Runtime.UNDEFINED;
     var cff:Null<CffTable> = cast _Runtime.UNDEFINED;
-    bytes = (cast OpenTypeGlyphOutlineSource.unwrapFontContainer__openTypeGlyphOutlineSource(({ final __callArgument23:Dynamic = source; __callArgument23; }), ({ final __callArgument24:Dynamic = diagnostics; __callArgument24; })) : Null<flighthq._internal._UInt8Array>);
+    bytes = (cast OpenTypeGlyphOutlineSource.unwrapFontContainer__openTypeGlyphOutlineSource(({ final __callArgument48:Dynamic = source; __callArgument48; }), ({ final __callArgument49:Dynamic = diagnostics; __callArgument49; })) : Null<flighthq._internal._UInt8Array>);
     if ((cast _Runtime.strictEquals(bytes, null) : Bool)) { return cast null; }
-    directory = (cast readSfntTableDirectory(({ final __callArgument25:Dynamic = bytes; __callArgument25; })) : Null<SfntTableDirectory>);
+    directory = (cast readSfntTableDirectory(({ final __callArgument52:Dynamic = bytes; __callArgument52; })) : Null<SfntTableDirectory>);
     if ((cast _Runtime.strictEquals(directory, null) : Bool)) { return cast null; }
-    glyphCount = (cast readOpenTypeGlyphCount(({ final __callArgument26:Dynamic = bytes; __callArgument26; }), ({ final __callArgument27:Dynamic = directory; __callArgument27; })) : Float);
+    glyphCount = (cast readOpenTypeGlyphCount(({ final __callArgument54:Dynamic = bytes; __callArgument54; }), ({ final __callArgument55:Dynamic = directory; __callArgument55; })) : Float);
     if ((cast ((cast glyphCount : Float) <= (cast 0.0 : Float)) : Bool)) { return cast null; }
-    metrics = (cast readOpenTypeMetrics(({ final __callArgument28:Dynamic = bytes; __callArgument28; }), ({ final __callArgument29:Dynamic = directory; __callArgument29; })) : Null<GlyphOutlineMetrics>);
-    advances = (cast readOpenTypeAdvances(({ final __callArgument30:Dynamic = bytes; __callArgument30; }), ({ final __callArgument31:Dynamic = directory; __callArgument31; }), (cast glyphCount : Float)) : Null<flighthq._internal._Int32Array>);
-    codepoints = (cast readOpenTypeCodepointMap(({ final __callArgument32:Dynamic = bytes; __callArgument32; }), ({ final __callArgument33:Dynamic = directory; __callArgument33; })) : Null<flighthq._internal._Map<Float, Float>>);
+    metrics = (cast readOpenTypeMetrics(({ final __callArgument58:Dynamic = bytes; __callArgument58; }), ({ final __callArgument59:Dynamic = directory; __callArgument59; })) : Null<GlyphOutlineMetrics>);
+    advances = (cast readOpenTypeAdvances(({ final __callArgument62:Dynamic = bytes; __callArgument62; }), ({ final __callArgument63:Dynamic = directory; __callArgument63; }), (cast glyphCount : Float)) : Null<flighthq._internal._Int32Array>);
+    codepoints = (cast readOpenTypeCodepointMap(({ final __callArgument66:Dynamic = bytes; __callArgument66; }), ({ final __callArgument67:Dynamic = directory; __callArgument67; })) : Null<flighthq._internal._Map<Float, Float>>);
     if ((cast ((cast ((cast _Runtime.strictEquals(metrics, null) : Bool) || (cast _Runtime.strictEquals(advances, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(codepoints, null) : Bool)) : Bool)) { return cast null; }
     shared = (cast { advances: advances, bytes: bytes, codepoints: codepoints, directory: directory, glyphCount: glyphCount, metrics: metrics });
     if ((cast ((cast (cast directory : { var tables:flighthq._internal._Map<String, SfntTableRange>; }).tables : flighthq._internal._Map<String, SfntTableRange>).has('glyf')) : Bool)) {
-      var locaFormat:Float = (cast readOpenTypeLocaFormat(({ final __callArgument34:Dynamic = bytes; __callArgument34; }), ({ final __callArgument35:Dynamic = directory; __callArgument35; })) : Float);
+      var locaFormat:Float = (cast readOpenTypeLocaFormat(({ final __callArgument70:Dynamic = bytes; __callArgument70; }), ({ final __callArgument71:Dynamic = directory; __callArgument71; })) : Float);
       if ((cast _Runtime.strictEquals(locaFormat, -1.0) : Bool)) { return cast null; }
-      var ranges:Null<flighthq._internal._UInt32Array> = (cast readOpenTypeGlyphRanges(({ final __callArgument36:Dynamic = bytes; __callArgument36; }), ({ final __callArgument37:Dynamic = directory; __callArgument37; }), (cast glyphCount : Float), (cast locaFormat : Float)) : Null<flighthq._internal._UInt32Array>);
+      var ranges:Null<flighthq._internal._UInt32Array> = (cast readOpenTypeGlyphRanges(({ final __callArgument74:Dynamic = bytes; __callArgument74; }), ({ final __callArgument75:Dynamic = directory; __callArgument75; }), (cast glyphCount : Float), (cast locaFormat : Float)) : Null<flighthq._internal._UInt32Array>);
       return cast ((cast _Runtime.strictEquals(ranges, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.mergeObjects([shared, { cff: null }, { ranges: ranges }]) : Dynamic));
     }
-    cff = (cast readCffTable(({ final __callArgument38:Dynamic = bytes; __callArgument38; }), ({ final __callArgument39:Dynamic = directory; __callArgument39; })) : Null<CffTable>);
+    cff = (cast readCffTable(({ final __callArgument78:Dynamic = bytes; __callArgument78; }), ({ final __callArgument79:Dynamic = directory; __callArgument79; })) : Null<CffTable>);
     return cast ((cast _Runtime.strictEquals(cff, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.mergeObjects([shared, { cff: cff }, { ranges: null }]) : Dynamic));
     return cast null;
   }

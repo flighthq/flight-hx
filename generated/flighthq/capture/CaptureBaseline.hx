@@ -39,7 +39,7 @@ class CaptureBaseline {
 
   @:noCompletion
   public static function getCaptureBaselineProvenance(baseline:flighthq.types.CaptureBaseline, column:String, field:CaptureBaselineProvenanceField):Null<CaptureBaselineProvenance> {
-    return cast _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.getIndex(baseline, column), (cast CaptureBaseline.provenanceMember__captureBaseline(({ final __callArgument3:Dynamic = field; __callArgument3; })) : String)), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.getIndex(baseline, column), (cast CaptureBaseline.provenanceMember__captureBaseline(({ final __callArgument4:Dynamic = field; __callArgument4; })) : String)), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -61,7 +61,7 @@ class CaptureBaseline {
 
   @:noCompletion
   public static function setCaptureBaselineProvenance(baseline:flighthq.types.CaptureBaseline, column:String, field:CaptureBaselineProvenanceField, provenance:CaptureBaselineProvenance):Void {
-    _Runtime.setIndex(_Runtime.setIndex(baseline, column, (_Runtime.getIndex(baseline, column) ?? {  })), (cast CaptureBaseline.provenanceMember__captureBaseline(({ final __callArgument4:Dynamic = field; __callArgument4; })) : String), _Runtime.mergeObjects([provenance]));
+    _Runtime.setIndex(_Runtime.setIndex(baseline, column, (_Runtime.getIndex(baseline, column) ?? {  })), (cast CaptureBaseline.provenanceMember__captureBaseline(({ final __callArgument6:Dynamic = field; __callArgument6; })) : String), _Runtime.mergeObjects([provenance]));
   }
 
   public static function provenanceMember__captureBaseline(field:CaptureBaselineProvenanceField):String {

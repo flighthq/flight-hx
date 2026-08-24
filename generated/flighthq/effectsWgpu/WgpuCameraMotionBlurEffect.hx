@@ -23,10 +23,10 @@ class WgpuCameraMotionBlurEffect {
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.5);
     samples = _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0);
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'motion.cameraMotionBlur' : String), (cast WgpuCameraMotionBlurEffect.CAMERA_MOTION_BLUR_FRAGMENT_WGSL__wgpuCameraMotionBlurEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast source : WgpuRenderTarget), ({ final __callArgument2:Dynamic = (cast dest : WgpuRenderTarget); __callArgument2; }), ({ final __callArgument3:Dynamic = pipeline; __callArgument3; }), ({ final __callArgument4:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    drawWgpuEffectPass(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast source : WgpuRenderTarget), ({ final __callArgument3:Dynamic = (cast dest : WgpuRenderTarget); __callArgument3; }), ({ final __callArgument4:Dynamic = pipeline; __callArgument4; }), ({ final __callArgument5:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast intensity : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast samples : Float));
-    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument4; }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument5; }));
   }
 
   public static final defaultWgpuCameraMotionBlurEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
@@ -34,7 +34,7 @@ class WgpuCameraMotionBlurEffect {
   });
 
   public static function registerWgpuCameraMotionBlurEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'CameraMotionBlurEffect' : String), ({ final __callArgument6:Dynamic = defaultWgpuCameraMotionBlurEffectRunner; __callArgument6; }));
+    registerWgpuRenderEffect(({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast 'CameraMotionBlurEffect' : String), ({ final __callArgument11:Dynamic = defaultWgpuCameraMotionBlurEffectRunner; __callArgument11; }));
   }
 
   public static final CAMERA_MOTION_BLUR_FRAGMENT_WGSL__wgpuCameraMotionBlurEffect:String = '\nstruct Uniforms {\n  u_intensity : f32,\n  u_samples : f32,\n  _pad0 : f32,\n  _pad1 : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nconst SAMPLES : i32 = 16;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let toCenter = vec2f(0.5) - uv;\n  let count = min(uni.u_samples, 16.0);\n  var sum = vec4f(0.0);\n  var taken = 0.0;\n  for (var i = 0; i < SAMPLES; i = i + 1) {\n    if (f32(i) >= count) { break; }\n    let t = select(0.0, f32(i) / (count - 1.0), count > 1.0);\n    let p = uv + toCenter * (t * uni.u_intensity);\n    sum = sum + textureSampleLevel(tex, smp, p, 0.0);\n    taken = taken + 1.0;\n  }\n  return sum / max(taken, 1.0);\n}';

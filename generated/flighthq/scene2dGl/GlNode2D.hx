@@ -44,14 +44,14 @@ class GlNode2D {
     while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
       var current:Node2D = (cast flighthq._internal._StaticIndex.readArray(tempStack, --stackLength) : Node2D);
       if ((cast !(cast (cast current : { var enabled:Bool; }).enabled : Bool) : Bool)) { continue; }
-      var data:Null<RenderProxy2D> = (cast getRenderProxy2D(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = current; __callArgument2; })) : Null<RenderProxy2D>);
+      var data:Null<RenderProxy2D> = (cast getRenderProxy2D(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = current; __callArgument3; })) : Null<RenderProxy2D>);
       if ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-      ({ final __optionalOwner4 = clipHooks; if (__optionalOwner4 != null) { final __optionalCall3 = (cast __optionalOwner4 : { var popClip:RenderState->RenderProxy2D->Node2D->Void; }).popClip; if (__optionalCall3 != null) __optionalCall3(state, data, current); } });
-      if ((cast !(cast (cast isRenderProxyVisible(({ final __callArgument5:Dynamic = data; __callArgument5; })) : Bool) : Bool) : Bool)) { continue; }
-      ({ final __optionalOwner7 = clipHooks; if (__optionalOwner7 != null) { final __optionalCall6 = (cast __optionalOwner7 : { var pushClip:RenderState->RenderProxy2D->Node2D->Void; }).pushClip; if (__optionalCall6 != null) __optionalCall6(state, data, current); } });
-      ({ final __optionalOwner9 = (cast data : RenderProxy2D).renderer; if (__optionalOwner9 != null) { final __optionalCall8 = (cast __optionalOwner9 : { var submit:RenderState->RenderProxy->Void; }).submit; if (__optionalCall8 != null) __optionalCall8(state, data); } });
+      ({ final __optionalOwner7 = clipHooks; if (__optionalOwner7 != null) { final __optionalCall6 = (cast __optionalOwner7 : { var popClip:RenderState->RenderProxy2D->Node2D->Void; }).popClip; if (__optionalCall6 != null) __optionalCall6(state, data, current); } });
+      if ((cast !(cast (cast isRenderProxyVisible(({ final __callArgument8:Dynamic = data; __callArgument8; })) : Bool) : Bool) : Bool)) { continue; }
+      ({ final __optionalOwner11 = clipHooks; if (__optionalOwner11 != null) { final __optionalCall10 = (cast __optionalOwner11 : { var pushClip:RenderState->RenderProxy2D->Node2D->Void; }).pushClip; if (__optionalCall10 != null) __optionalCall10(state, data, current); } });
+      ({ final __optionalOwner13 = (cast data : RenderProxy2D).renderer; if (__optionalOwner13 != null) { final __optionalCall12 = (cast __optionalOwner13 : { var submit:RenderState->RenderProxy->Void; }).submit; if (__optionalCall12 != null) __optionalCall12(state, data); } });
       if ((cast (cast data : RenderProxy2D).traverseChildren : Bool)) {
-        var children:Null<Array<Node<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime(({ final __callArgument10:Dynamic = current; __callArgument10; })) : Node2DRuntime), 'children');
+        var children:Null<Array<Node<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime(({ final __callArgument14:Dynamic = current; __callArgument14; })) : Node2DRuntime), 'children');
         if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
           {
             var i:Float = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
@@ -63,8 +63,8 @@ class GlNode2D {
         }
       }
     }
-    flushGlQuadBatchWriter(({ final __callArgument11:Dynamic = state; __callArgument11; }));
-    ({ final __optionalOwner13 = clipHooks; if (__optionalOwner13 != null) { final __optionalCall12 = (cast __optionalOwner13 : { var finalize:RenderState->Void; }).finalize; if (__optionalCall12 != null) __optionalCall12(state); } });
+    flushGlQuadBatchWriter(({ final __callArgument16:Dynamic = state; __callArgument16; }));
+    ({ final __optionalOwner19 = clipHooks; if (__optionalOwner19 != null) { final __optionalCall18 = (cast __optionalOwner19 : { var finalize:RenderState->Void; }).finalize; if (__optionalCall18 != null) __optionalCall18(state); } });
   }
 
   @:noCompletion

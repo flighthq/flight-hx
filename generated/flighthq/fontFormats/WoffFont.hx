@@ -50,7 +50,7 @@ class WoffFont {
           (data = cast ((cast (cast decompress : flighthq._internal._UInt8Array->Float->CompressionFraming->Null<flighthq._internal._UInt8Array>)(({ final __callArgument0:Dynamic = raw; __callArgument0; }), (cast originalLength : Float), ({ final __callArgument1:Dynamic = (cast CompressionFramingValue : { var Raw:String; var Rfc1950:String; }).Rfc1950; __callArgument1; })) : Null<flighthq._internal._UInt8Array>) : Dynamic));
           if ((cast ((cast _Runtime.strictEquals(data, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(data, 'byteLength'), originalLength) : Bool)) : Bool)) { (index = cast ((index + 1.0) : Dynamic)); continue; }
         }
-        var computed:Float = (cast computeSfntTableChecksum(({ final __callArgument2:Dynamic = data; __callArgument2; }), (cast _Runtime.strictEquals(tag, WoffFont.HEAD_TAG__woffFont) : Bool)) : Float);
+        var computed:Float = (cast computeSfntTableChecksum(({ final __callArgument4:Dynamic = data; __callArgument4; }), (cast _Runtime.strictEquals(tag, WoffFont.HEAD_TAG__woffFont) : Bool)) : Float);
         if ((cast !_Runtime.strictEquals(computed, stored) : Bool)) {
           _Runtime.callProperty(mismatches, 'push', cast ([{ computed: computed, stored: stored, tag: (cast WoffFont.readWoffTagText__woffFont((cast view : flighthq._internal._Any), (cast record : Float)) : String) }] : Array<Dynamic>));
         }
@@ -95,19 +95,19 @@ class WoffFont {
           continue;
         }
         if ((cast _Runtime.strictEquals(decompress, null) : Bool)) {
-          reportImportDiagnostic(({ final __callArgument3:Dynamic = diagnostics; __callArgument3; }), ({ final __callArgument4:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument4; }), (cast 'woff.no-decompressor-registered' : String), (cast 'readWoffFont' : String), ({ final __callArgument5:Dynamic = { table: (cast WoffFont.readWoffTagText__woffFont((cast view : flighthq._internal._Any), (cast record : Float)) : String) }; __callArgument5; }));
+          reportImportDiagnostic(({ final __callArgument6:Dynamic = diagnostics; __callArgument6; }), ({ final __callArgument7:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument7; }), (cast 'woff.no-decompressor-registered' : String), (cast 'readWoffFont' : String), ({ final __callArgument8:Dynamic = { table: (cast WoffFont.readWoffTagText__woffFont((cast view : flighthq._internal._Any), (cast record : Float)) : String) }; __callArgument8; }));
           return cast null;
         }
-        var inflated:Null<flighthq._internal._UInt8Array> = (cast (cast decompress : flighthq._internal._UInt8Array->Float->CompressionFraming->Null<flighthq._internal._UInt8Array>)(({ final __callArgument6:Dynamic = stored; __callArgument6; }), (cast originalLength : Float), ({ final __callArgument7:Dynamic = (cast CompressionFramingValue : { var Raw:String; var Rfc1950:String; }).Rfc1950; __callArgument7; })) : Null<flighthq._internal._UInt8Array>);
+        var inflated:Null<flighthq._internal._UInt8Array> = (cast (cast decompress : flighthq._internal._UInt8Array->Float->CompressionFraming->Null<flighthq._internal._UInt8Array>)(({ final __callArgument12:Dynamic = stored; __callArgument12; }), (cast originalLength : Float), ({ final __callArgument13:Dynamic = (cast CompressionFramingValue : { var Raw:String; var Rfc1950:String; }).Rfc1950; __callArgument13; })) : Null<flighthq._internal._UInt8Array>);
         if ((cast ((cast _Runtime.strictEquals(inflated, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(inflated, 'byteLength'), originalLength) : Bool)) : Bool)) {
-          reportImportDiagnostic(({ final __callArgument8:Dynamic = diagnostics; __callArgument8; }), ({ final __callArgument9:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument9; }), (cast 'woff.decompression-failed' : String), (cast 'readWoffFont' : String), ({ final __callArgument10:Dynamic = { compressedLength: compressedLength, originalLength: originalLength, outputLength: _Runtime.coalesce(_Runtime.optionalField(inflated, 'byteLength'), function():Dynamic return cast -1.0), table: (cast WoffFont.readWoffTagText__woffFont((cast view : flighthq._internal._Any), (cast record : Float)) : String) }; __callArgument10; }));
+          reportImportDiagnostic(({ final __callArgument16:Dynamic = diagnostics; __callArgument16; }), ({ final __callArgument17:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument17; }), (cast 'woff.decompression-failed' : String), (cast 'readWoffFont' : String), ({ final __callArgument18:Dynamic = { compressedLength: compressedLength, originalLength: originalLength, outputLength: _Runtime.coalesce(_Runtime.optionalField(inflated, 'byteLength'), function():Dynamic return cast -1.0), table: (cast WoffFont.readWoffTagText__woffFont((cast view : flighthq._internal._Any), (cast record : Float)) : String) }; __callArgument18; }));
           return cast null;
         }
         _Runtime.callProperty(tables, 'push', cast ([{ data: inflated, tag: tag }] : Array<Dynamic>));
         (index = cast ((index + 1.0) : Dynamic));
       }
     }
-    return cast (cast assembleSfntFont((cast flavor : Float), ({ final __callArgument11:Dynamic = tables; __callArgument11; })) : flighthq._internal._UInt8Array);
+    return cast (cast assembleSfntFont((cast flavor : Float), ({ final __callArgument22:Dynamic = tables; __callArgument22; })) : flighthq._internal._UInt8Array);
     return cast null;
   }
 

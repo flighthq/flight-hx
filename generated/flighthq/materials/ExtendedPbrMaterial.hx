@@ -19,7 +19,7 @@ class ExtendedPbrMaterial {
     var material:flighthq.types.ExtendedPbrMaterial = cast _Runtime.UNDEFINED;
     material = (cast createSurfaceMaterial((cast ExtendedPbrMaterialKind : String), (cast opts : Dynamic)) : flighthq.types.ExtendedPbrMaterial);
     (material.extensions = cast (_Runtime.coalesce(({ final __structural0 = opts; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var extensions:Null<Array<PbrExtension>>; }).extensions; }), function():Dynamic return cast cast ([] : Array<Dynamic>)) : Array<PbrExtension>));
-    (material.standard = cast (_Runtime.coalesce(({ final __structural1 = opts; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var standard:Null<StandardPbrMaterialProperties>; }).standard; }), function():Dynamic return cast (cast createStandardPbrMaterialProperties(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : StandardPbrMaterialProperties)) : StandardPbrMaterialProperties));
+    (material.standard = cast (_Runtime.coalesce(({ final __structural1 = opts; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var standard:Null<StandardPbrMaterialProperties>; }).standard; }), function():Dynamic return cast (cast (#if js _Runtime.callValue(createStandardPbrMaterialProperties, cast ([] : Array<Dynamic>)) #else createStandardPbrMaterialProperties(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : StandardPbrMaterialProperties)) : StandardPbrMaterialProperties));
     return cast material;
     return cast null;
   }

@@ -25,10 +25,10 @@ class BitmapFontGlyphSource {
       return cast (cast getBitmapFontGlyph(({ final __callArgument2:Dynamic = font; __callArgument2; }), (cast codepoint : Float)) : Null<GlyphEntry>);
       return cast _Runtime.UNDEFINED;
     }, getGlyphKerning: function(left:Float, right:Float):Float {
-      return cast (cast getBitmapFontKerning(({ final __callArgument3:Dynamic = font; __callArgument3; }), (cast left : Float), (cast right : Float)) : Float);
+      return cast (cast getBitmapFontKerning(({ final __callArgument4:Dynamic = font; __callArgument4; }), (cast left : Float), (cast right : Float)) : Float);
       return cast _Runtime.UNDEFINED;
     }, getGlyphMetrics: function():GlyphMetrics {
-      return cast (cast getBitmapFontMetrics(({ final __callArgument4:Dynamic = font; __callArgument4; })) : GlyphMetrics);
+      return cast (cast getBitmapFontMetrics(({ final __callArgument6:Dynamic = font; __callArgument6; })) : GlyphMetrics);
       return cast _Runtime.UNDEFINED;
     } };
     return cast null;

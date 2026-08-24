@@ -202,7 +202,7 @@ class ColorMatrixMath {
     {
       var i:Float = 1.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(matrices, 'length') : Float)) : Bool)) {
-        (cast multiplyColorMatrix(flighthq._internal._StaticIndex.readArray(matrices, i), ({ final __callArgument3:Dynamic = out; __callArgument3; }), ({ final __callArgument4:Dynamic = out; __callArgument4; })) : Array<Float>);
+        (cast multiplyColorMatrix(flighthq._internal._StaticIndex.readArray(matrices, i), ({ final __callArgument6:Dynamic = out; __callArgument6; }), ({ final __callArgument7:Dynamic = out; __callArgument7; })) : Array<Float>);
         i++;
       }
     }

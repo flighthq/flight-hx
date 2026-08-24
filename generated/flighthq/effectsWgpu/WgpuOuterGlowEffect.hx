@@ -40,8 +40,8 @@ class WgpuOuterGlowEffect {
     dst = (cast dest : WgpuRenderTarget);
     descriptor = (cast { width: source.width, height: source.height, format: source.format });
     mask = (cast acquireWgpuRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = pool; __callArgument1; }), ({ final __callArgument2:Dynamic = descriptor; __callArgument2; })) : WgpuRenderTarget);
-    blurred = (cast acquireWgpuRenderTarget(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = pool; __callArgument4; }), ({ final __callArgument5:Dynamic = descriptor; __callArgument5; })) : WgpuRenderTarget);
-    blurTemp = (cast acquireWgpuRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pool; __callArgument7; }), ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : WgpuRenderTarget);
+    blurred = (cast acquireWgpuRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pool; __callArgument7; }), ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : WgpuRenderTarget);
+    blurTemp = (cast acquireWgpuRenderTarget(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = pool; __callArgument13; }), ({ final __callArgument14:Dynamic = descriptor; __callArgument14; })) : WgpuRenderTarget);
     color = _Runtime.coalesce(effect.color, function():Dynamic return cast 4278190335.0);
     alpha = _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0);
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
@@ -49,24 +49,24 @@ class WgpuOuterGlowEffect {
     sourceMode = _Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw');
     tintStrength = HxMath.min(1.0, strength);
     glowPasses = HxMath.max(1.0, HxMath.floor(strength));
-    applyWgpuEffectTintPass(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = src; __callArgument10; }), ({ final __callArgument11:Dynamic = mask; __callArgument11; }), (cast color : Float), (cast alpha : Float), (cast tintStrength : Float));
-    applyWgpuEffectBoxBlur(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = mask; __callArgument13; }), ({ final __callArgument14:Dynamic = blurred; __callArgument14; }), ({ final __callArgument15:Dynamic = blurTemp; __callArgument15; }), ({ final __callArgument16:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0), passes: quality }; __callArgument16; }));
-    clearWgpuEffectTarget(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = dst; __callArgument18; }));
+    applyWgpuEffectTintPass(({ final __callArgument18:Dynamic = state; __callArgument18; }), ({ final __callArgument19:Dynamic = src; __callArgument19; }), ({ final __callArgument20:Dynamic = mask; __callArgument20; }), (cast color : Float), (cast alpha : Float), (cast tintStrength : Float));
+    applyWgpuEffectBoxBlur(({ final __callArgument24:Dynamic = state; __callArgument24; }), ({ final __callArgument25:Dynamic = mask; __callArgument25; }), ({ final __callArgument26:Dynamic = blurred; __callArgument26; }), ({ final __callArgument27:Dynamic = blurTemp; __callArgument27; }), ({ final __callArgument28:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0), passes: quality }; __callArgument28; }));
+    clearWgpuEffectTarget(({ final __callArgument34:Dynamic = state; __callArgument34; }), ({ final __callArgument35:Dynamic = dst; __callArgument35; }));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast glowPasses : Float)) : Bool)) {
-        applyWgpuEffectBlitPass(({ final __callArgument19:Dynamic = state; __callArgument19; }), ({ final __callArgument20:Dynamic = blurred; __callArgument20; }), ({ final __callArgument21:Dynamic = dst; __callArgument21; }));
+        applyWgpuEffectBlitPass(({ final __callArgument38:Dynamic = state; __callArgument38; }), ({ final __callArgument39:Dynamic = blurred; __callArgument39; }), ({ final __callArgument40:Dynamic = dst; __callArgument40; }));
         i++;
       }
     }
     if ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool)) {
-      applyWgpuEffectErasePass(({ final __callArgument22:Dynamic = state; __callArgument22; }), ({ final __callArgument23:Dynamic = src; __callArgument23; }), ({ final __callArgument24:Dynamic = dst; __callArgument24; }));
+      applyWgpuEffectErasePass(({ final __callArgument44:Dynamic = state; __callArgument44; }), ({ final __callArgument45:Dynamic = src; __callArgument45; }), ({ final __callArgument46:Dynamic = dst; __callArgument46; }));
     } else { if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      applyWgpuEffectBlitPass(({ final __callArgument25:Dynamic = state; __callArgument25; }), ({ final __callArgument26:Dynamic = src; __callArgument26; }), ({ final __callArgument27:Dynamic = dst; __callArgument27; }));
+      applyWgpuEffectBlitPass(({ final __callArgument50:Dynamic = state; __callArgument50; }), ({ final __callArgument51:Dynamic = src; __callArgument51; }), ({ final __callArgument52:Dynamic = dst; __callArgument52; }));
     } }
-    releaseWgpuRenderTarget(({ final __callArgument28:Dynamic = pool; __callArgument28; }), ({ final __callArgument29:Dynamic = mask; __callArgument29; }));
-    releaseWgpuRenderTarget(({ final __callArgument30:Dynamic = pool; __callArgument30; }), ({ final __callArgument31:Dynamic = blurred; __callArgument31; }));
-    releaseWgpuRenderTarget(({ final __callArgument32:Dynamic = pool; __callArgument32; }), ({ final __callArgument33:Dynamic = blurTemp; __callArgument33; }));
+    releaseWgpuRenderTarget(({ final __callArgument56:Dynamic = pool; __callArgument56; }), ({ final __callArgument57:Dynamic = mask; __callArgument57; }));
+    releaseWgpuRenderTarget(({ final __callArgument60:Dynamic = pool; __callArgument60; }), ({ final __callArgument61:Dynamic = blurred; __callArgument61; }));
+    releaseWgpuRenderTarget(({ final __callArgument64:Dynamic = pool; __callArgument64; }), ({ final __callArgument65:Dynamic = blurTemp; __callArgument65; }));
   }
 
   public static final defaultWgpuOuterGlowEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
@@ -74,6 +74,6 @@ class WgpuOuterGlowEffect {
   });
 
   public static function registerWgpuOuterGlowEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect(({ final __callArgument34:Dynamic = state; __callArgument34; }), (cast 'OuterGlowEffect' : String), ({ final __callArgument35:Dynamic = defaultWgpuOuterGlowEffectRunner; __callArgument35; }));
+    registerWgpuRenderEffect(({ final __callArgument68:Dynamic = state; __callArgument68; }), (cast 'OuterGlowEffect' : String), ({ final __callArgument69:Dynamic = defaultWgpuOuterGlowEffectRunner; __callArgument69; }));
   }
 }

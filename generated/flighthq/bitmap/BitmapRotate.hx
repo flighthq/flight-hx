@@ -38,7 +38,7 @@ class BitmapRotate {
     var dStride:Float = cast _Runtime.UNDEFINED;
     w = HxMath.min(dest.width, source.width);
     h = HxMath.min(dest.height, source.height);
-    if ((cast (cast BitmapRotate.isSameRegion__bitmapRotate(({ final __callArgument5:Dynamic = dest; __callArgument5; }), ({ final __callArgument6:Dynamic = source; __callArgument6; })) : Bool) : Bool)) {
+    if ((cast (cast BitmapRotate.isSameRegion__bitmapRotate(({ final __callArgument10:Dynamic = dest; __callArgument10; }), ({ final __callArgument11:Dynamic = source; __callArgument11; })) : Bool) : Bool)) {
       var data:flighthq._internal._UInt8ClampedArray = (cast dest.bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data;
       var stride:Float = (cast dest.bitmap : { var width:Float; }).width;
       var total:Float = (w * h);
@@ -51,7 +51,7 @@ class BitmapRotate {
           var bx:Float = (dest.x + ((w - 1.0) - _Runtime.fmod(k, w)));
           var by:Float = (dest.y + _Runtime.subtractNumbers((h - 1.0), HxMath.floor((k / w))));
           if ((cast ((cast !(cast (cast BitmapRotate.inBounds__bitmapRotate((cast ax : Float), (cast ay : Float), (cast stride : Float), (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool) : Bool) : Bool) || (cast !(cast (cast BitmapRotate.inBounds__bitmapRotate((cast bx : Float), (cast by : Float), (cast stride : Float), (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool) : Bool) : Bool)) : Bool)) { k++; continue; }
-          BitmapRotate.swapPixels__bitmapRotate(({ final __callArgument7:Dynamic = data; __callArgument7; }), (cast (((ay * stride) + ax) * 4.0) : Float), (cast (((by * stride) + bx) * 4.0) : Float));
+          BitmapRotate.swapPixels__bitmapRotate(({ final __callArgument14:Dynamic = data; __callArgument14; }), (cast (((ay * stride) + ax) * 4.0) : Float), (cast (((by * stride) + bx) * 4.0) : Float));
           k++;
         }
       }
@@ -73,7 +73,7 @@ class BitmapRotate {
             var sx:Float = (source.x + ((w - 1.0) - px));
             var dx:Float = (dest.x + px);
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sStride : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { px++; continue; }
-            BitmapRotate.copyPixel__bitmapRotate(({ final __callArgument8:Dynamic = dd; __callArgument8; }), (cast (((dy * dStride) + dx) * 4.0) : Float), ({ final __callArgument9:Dynamic = sd; __callArgument9; }), (cast (((sy * sStride) + sx) * 4.0) : Float));
+            BitmapRotate.copyPixel__bitmapRotate(({ final __callArgument16:Dynamic = dd; __callArgument16; }), (cast (((dy * dStride) + dx) * 4.0) : Float), ({ final __callArgument17:Dynamic = sd; __callArgument17; }), (cast (((sy * sStride) + sx) * 4.0) : Float));
             px++;
           }
         }
@@ -109,7 +109,7 @@ class BitmapRotate {
             var dx:Float = (dest.x + ((sh - 1.0) - py));
             var dy:Float = (dest.y + px);
             if ((cast ((cast ((cast ((cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { px++; continue; }
-            BitmapRotate.copyPixel__bitmapRotate(({ final __callArgument10:Dynamic = dd; __callArgument10; }), (cast (((dy * dStride) + dx) * 4.0) : Float), ({ final __callArgument11:Dynamic = sd; __callArgument11; }), (cast (((sy * sStride) + sx) * 4.0) : Float));
+            BitmapRotate.copyPixel__bitmapRotate(({ final __callArgument20:Dynamic = dd; __callArgument20; }), (cast (((dy * dStride) + dx) * 4.0) : Float), ({ final __callArgument21:Dynamic = sd; __callArgument21; }), (cast (((sy * sStride) + sx) * 4.0) : Float));
             px++;
           }
         }
@@ -145,7 +145,7 @@ class BitmapRotate {
             var dx:Float = (dest.x + py);
             var dy:Float = (dest.y + ((sw - 1.0) - px));
             if ((cast ((cast ((cast ((cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { px++; continue; }
-            BitmapRotate.copyPixel__bitmapRotate(({ final __callArgument12:Dynamic = dd; __callArgument12; }), (cast (((dy * dStride) + dx) * 4.0) : Float), ({ final __callArgument13:Dynamic = sd; __callArgument13; }), (cast (((sy * sStride) + sx) * 4.0) : Float));
+            BitmapRotate.copyPixel__bitmapRotate(({ final __callArgument24:Dynamic = dd; __callArgument24; }), (cast (((dy * dStride) + dx) * 4.0) : Float), ({ final __callArgument25:Dynamic = sd; __callArgument25; }), (cast (((sy * sStride) + sx) * 4.0) : Float));
             px++;
           }
         }

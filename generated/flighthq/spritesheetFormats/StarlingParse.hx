@@ -93,7 +93,7 @@ class StarlingParse {
       var entries:Array<{ var name:String; var index:Float; }> = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
       if ((cast ((cast _Runtime.field(entries, 'length') : Float) < (cast 2.0 : Float)) : Bool)) { continue; }
       _Runtime.sortAndReturn(entries, function(a:{ var name:String; var index:Float; }, b:{ var name:String; var index:Float; }) return ((cast a : { var name:String; var index:Float; }).index - (cast b : { var name:String; var index:Float; }).index));
-      _Runtime.callProperty(animations, 'push', cast ([(cast createSpritesheetAnimationData(({ final __callArgument5:Dynamic = { frameDuration: frameDuration, frameNames: (cast _Runtime.mapArray((cast entries : Array<{ var name:String; var index:Float; }>), function(e:{ var name:String; var index:Float; }, __unused2:Float, __unused3:Array<{ var name:String; var index:Float; }>):String return (cast e : { var name:String; var index:Float; }).name, _Runtime.UNDEFINED)), name: base, repeatCount: -1.0 }; __callArgument5; })) : SpritesheetAnimationData)] : Array<Dynamic>));
+      _Runtime.callProperty(animations, 'push', cast ([(cast createSpritesheetAnimationData(({ final __callArgument6:Dynamic = { frameDuration: frameDuration, frameNames: (cast _Runtime.mapArray((cast entries : Array<{ var name:String; var index:Float; }>), function(e:{ var name:String; var index:Float; }, __unused2:Float, __unused3:Array<{ var name:String; var index:Float; }>):String return (cast e : { var name:String; var index:Float; }).name, _Runtime.UNDEFINED)), name: base, repeatCount: -1.0 }; __callArgument6; })) : SpritesheetAnimationData)] : Array<Dynamic>));
     }
     return cast animations;
     return cast null;
@@ -105,25 +105,25 @@ class StarlingParse {
     var animations:Array<SpritesheetAnimationData> = cast _Runtime.UNDEFINED;
     frames = (cast _Runtime.mapArray((cast regions : Array<TextureAtlasRegion>), StarlingParse.frameFromRegion__starlingParse, _Runtime.UNDEFINED));
     frameNames = (cast _Runtime.mapArray((cast frames : Array<SpritesheetFrameData>), function(f:SpritesheetFrameData, __unused4:Float, __unused5:Array<SpritesheetFrameData>):String return f.name, _Runtime.UNDEFINED));
-    animations = (cast StarlingParse.inferAnimations__starlingParse(({ final __callArgument6:Dynamic = frameNames; __callArgument6; }), (cast frameDuration : Float)) : Array<SpritesheetAnimationData>);
-    return cast (cast createSpritesheetData(({ final __callArgument7:Dynamic = { animations: animations, frames: frames, imageFile: doc.imagePath, imageHeight: 0.0, imageWidth: 0.0, scale: 1.0 }; __callArgument7; })) : SpritesheetData);
+    animations = (cast StarlingParse.inferAnimations__starlingParse(({ final __callArgument8:Dynamic = frameNames; __callArgument8; }), (cast frameDuration : Float)) : Array<SpritesheetAnimationData>);
+    return cast (cast createSpritesheetData(({ final __callArgument10:Dynamic = { animations: animations, frames: frames, imageFile: doc.imagePath, imageHeight: 0.0, imageWidth: 0.0, scale: 1.0 }; __callArgument10; })) : SpritesheetData);
     return cast null;
   }
 
   public static function regionsFromXml__starlingParse(xml:String):Array<TextureAtlasRegion> {
-    return cast (cast (cast parseTextureAtlasStarlingXml((cast xml : String), (cast createTextureAtlas(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : TextureAtlas), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : TextureAtlas) : { var regions:Array<TextureAtlasRegion>; }).regions;
+    return cast (cast (cast (#if js _Runtime.callValue(parseTextureAtlasStarlingXml, cast ([(cast xml : String), (cast (#if js _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>)) #else createTextureAtlas(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : TextureAtlas)] : Array<Dynamic>)) #else parseTextureAtlasStarlingXml((cast xml : String), (cast (#if js _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>)) #else createTextureAtlas(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : TextureAtlas), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : TextureAtlas) : { var regions:Array<TextureAtlasRegion>; }).regions;
     return cast null;
   }
 
   public static function parseStarlingSpritesheet(xml:String, ?options:StarlingParseOptions):SpritesheetData {
-    return cast (cast StarlingParse.documentToData__starlingParse((cast StarlingParse.parseStarlingXml__starlingParse((cast xml : String)) : StarlingDocument), (cast StarlingParse.regionsFromXml__starlingParse((cast xml : String)) : Array<TextureAtlasRegion>), (cast _Runtime.coalesce(({ final __typedStruct8 = options; __typedStruct8 == null ? _Runtime.UNDEFINED : __typedStruct8.frameDuration; }), function():Dynamic return cast 100.0) : Float)) : SpritesheetData);
+    return cast (cast StarlingParse.documentToData__starlingParse((cast StarlingParse.parseStarlingXml__starlingParse((cast xml : String)) : StarlingDocument), (cast StarlingParse.regionsFromXml__starlingParse((cast xml : String)) : Array<TextureAtlasRegion>), (cast _Runtime.coalesce(({ final __typedStruct12 = options; __typedStruct12 == null ? _Runtime.UNDEFINED : __typedStruct12.frameDuration; }), function():Dynamic return cast 100.0) : Float)) : SpritesheetData);
     return cast null;
   }
 
   public static function parseStarlingSpritesheetDocument(xml:String, ?options:StarlingParseOptions):StarlingParsed {
     var document:StarlingDocument = cast _Runtime.UNDEFINED;
     document = (cast StarlingParse.parseStarlingXml__starlingParse((cast xml : String)) : StarlingDocument);
-    return cast { data: (cast StarlingParse.documentToData__starlingParse(({ final __callArgument9:Dynamic = document; __callArgument9; }), (cast StarlingParse.regionsFromXml__starlingParse((cast xml : String)) : Array<TextureAtlasRegion>), (cast _Runtime.coalesce(({ final __typedStruct10 = options; __typedStruct10 == null ? _Runtime.UNDEFINED : __typedStruct10.frameDuration; }), function():Dynamic return cast 100.0) : Float)) : SpritesheetData), document: document };
+    return cast { data: (cast StarlingParse.documentToData__starlingParse(({ final __callArgument14:Dynamic = document; __callArgument14; }), (cast StarlingParse.regionsFromXml__starlingParse((cast xml : String)) : Array<TextureAtlasRegion>), (cast _Runtime.coalesce(({ final __typedStruct15 = options; __typedStruct15 == null ? _Runtime.UNDEFINED : __typedStruct15.frameDuration; }), function():Dynamic return cast 100.0) : Float)) : SpritesheetData), document: document };
     return cast null;
   }
 }

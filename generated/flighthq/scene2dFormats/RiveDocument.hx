@@ -29,11 +29,11 @@ class RiveDocument {
     cursor = (cast { bytes: source, overflowed: false, position: 0.0, unknownPropertyKey: 0.0 });
     header = (cast RiveDocument.readRiveHeader__riveDocument((cast cursor : Dynamic)) : Null<RiveDocumentHeader>);
     if ((cast _Runtime.strictEquals(header, null) : Bool)) {
-      RiveDocument.reportRiveReject__riveDocument(({ final __callArgument0:Dynamic = diagnostics; __callArgument0; }), (cast 'rive.invalid-header' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+      (#if js _Runtime.callValue(RiveDocument.reportRiveReject__riveDocument, cast ([({ final __callArgument1:Dynamic = diagnostics; __callArgument1; }), (cast 'rive.invalid-header' : String)] : Array<Dynamic>)) #else RiveDocument.reportRiveReject__riveDocument(({ final __callArgument0:Dynamic = diagnostics; __callArgument0; }), (cast 'rive.invalid-header' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
       return cast null;
     }
     if ((cast !_Runtime.strictEquals((cast header : RiveDocumentHeader).majorVersion, RiveDocument.RIVE_SUPPORTED_MAJOR_VERSION__riveDocument) : Bool)) {
-      RiveDocument.reportRiveReject__riveDocument(({ final __callArgument1:Dynamic = diagnostics; __callArgument1; }), (cast 'rive.unsupported-version' : String), ({ final __callArgument2:Dynamic = { major: (cast header : RiveDocumentHeader).majorVersion, supported: RiveDocument.RIVE_SUPPORTED_MAJOR_VERSION__riveDocument }; __callArgument2; }));
+      RiveDocument.reportRiveReject__riveDocument(({ final __callArgument2:Dynamic = diagnostics; __callArgument2; }), (cast 'rive.unsupported-version' : String), ({ final __callArgument3:Dynamic = { major: (cast header : RiveDocumentHeader).majorVersion, supported: RiveDocument.RIVE_SUPPORTED_MAJOR_VERSION__riveDocument }; __callArgument3; }));
       return cast null;
     }
     fieldTypes = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
@@ -42,9 +42,9 @@ class RiveDocument {
     }
     objects = (cast cast ([] : Array<Dynamic>));
     while ((cast ((cast (cast cursor : RiveCursor__riveDocument).position : Float) < (cast _Runtime.field((cast cursor : RiveCursor__riveDocument).bytes, 'length') : Float)) : Bool)) {
-      var object:Null<RiveCoreObject> = (cast RiveDocument.readRiveCoreObject__riveDocument((cast cursor : Dynamic), ({ final __callArgument5:Dynamic = fieldTypes; __callArgument5; })) : Null<RiveCoreObject>);
+      var object:Null<RiveCoreObject> = (cast RiveDocument.readRiveCoreObject__riveDocument((cast cursor : Dynamic), ({ final __callArgument8:Dynamic = fieldTypes; __callArgument8; })) : Null<RiveCoreObject>);
       if ((cast _Runtime.strictEquals(object, null) : Bool)) {
-        if ((cast (cast cursor : RiveCursor__riveDocument).overflowed : Bool)) { RiveDocument.reportRiveReject__riveDocument(({ final __callArgument6:Dynamic = diagnostics; __callArgument6; }), (cast 'rive.truncated-object-stream' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end); } else { RiveDocument.reportRiveReject__riveDocument(({ final __callArgument7:Dynamic = diagnostics; __callArgument7; }), (cast 'rive.unknown-property-width' : String), ({ final __callArgument8:Dynamic = { propertyKey: (cast cursor : RiveCursor__riveDocument).unknownPropertyKey }; __callArgument8; })); }
+        if ((cast (cast cursor : RiveCursor__riveDocument).overflowed : Bool)) { (#if js _Runtime.callValue(RiveDocument.reportRiveReject__riveDocument, cast ([({ final __callArgument11:Dynamic = diagnostics; __callArgument11; }), (cast 'rive.truncated-object-stream' : String)] : Array<Dynamic>)) #else RiveDocument.reportRiveReject__riveDocument(({ final __callArgument10:Dynamic = diagnostics; __callArgument10; }), (cast 'rive.truncated-object-stream' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end); } else { RiveDocument.reportRiveReject__riveDocument(({ final __callArgument12:Dynamic = diagnostics; __callArgument12; }), (cast 'rive.unknown-property-width' : String), ({ final __callArgument13:Dynamic = { propertyKey: (cast cursor : RiveCursor__riveDocument).unknownPropertyKey }; __callArgument13; })); }
         return cast null;
       }
       _Runtime.callProperty(objects, 'push', cast ([object] : Array<Dynamic>));
@@ -247,7 +247,7 @@ class RiveDocument {
   }
 
   public static function reportRiveReject__riveDocument(diagnostics:Null<Array<ImportDiagnostic>>, kind:String, ?detail:flighthq._internal._Record<String, Float>):Void {
-    reportImportDiagnostic(({ final __callArgument11:Dynamic = diagnostics; __callArgument11; }), ({ final __callArgument12:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument12; }), (cast kind : String), (cast 'parseRiveDocument' : String), ({ final __callArgument13:Dynamic = detail; __callArgument13; }));
+    reportImportDiagnostic(({ final __callArgument18:Dynamic = diagnostics; __callArgument18; }), ({ final __callArgument19:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument19; }), (cast kind : String), (cast 'parseRiveDocument' : String), ({ final __callArgument20:Dynamic = detail; __callArgument20; }));
   }
 
   public static final RIVE_FINGERPRINT__riveDocument:Array<Float> = (cast cast ([82.0, 73.0, 86.0, 69.0] : Array<Dynamic>));

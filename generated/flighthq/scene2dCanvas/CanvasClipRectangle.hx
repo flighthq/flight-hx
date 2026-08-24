@@ -43,7 +43,7 @@ class CanvasClipRectangle {
   @:noCompletion
   public static function pushCanvasClipRectangle(state:CanvasRenderState, rect:RectangleLike, transform:Matrix):Void {
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'save', cast ([] : Array<Dynamic>));
-    setCanvasTransform(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast state : CanvasRenderState).context, ({ final __callArgument3:Dynamic = transform; __callArgument3; }));
+    setCanvasTransform(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast state : CanvasRenderState).context, ({ final __callArgument5:Dynamic = transform; __callArgument5; }));
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'beginPath', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'rect', cast ([rect.x, rect.y, rect.width, rect.height] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'clip', cast ([] : Array<Dynamic>));

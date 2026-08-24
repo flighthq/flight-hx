@@ -12,7 +12,7 @@ class BitmapMorphological {
   }
 
   public static function erodeBitmap(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, radius:Float):Void {
-    BitmapMorphological.applyMorphological__bitmapMorphological(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }), (cast radius : Float), (cast false : Bool));
+    BitmapMorphological.applyMorphological__bitmapMorphological(({ final __callArgument4:Dynamic = out; __callArgument4; }), ({ final __callArgument5:Dynamic = source; __callArgument5; }), (cast radius : Float), (cast false : Bool));
   }
 
   public static function applyMorphological__bitmapMorphological(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, radius:Float, dilate:Bool):Void {

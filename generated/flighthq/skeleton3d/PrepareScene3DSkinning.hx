@@ -35,16 +35,16 @@ class PrepareScene3DSkinning {
     geometry = mesh.geometry;
     bindPose = (cast getMeshGeometrySkinBindPose(({ final __callArgument0:Dynamic = geometry; __callArgument0; })) : Null<MeshSkinBindPose>);
     if ((cast _Runtime.strictEquals(bindPose, null) : Bool)) {
-      (bindPose = cast ((cast captureMeshSkinBindPose(({ final __callArgument1:Dynamic = geometry; __callArgument1; })) : MeshSkinBindPose) : Dynamic));
-      setMeshGeometrySkinBindPose(({ final __callArgument2:Dynamic = geometry; __callArgument2; }), (cast bindPose : Dynamic));
+      (bindPose = cast ((cast captureMeshSkinBindPose(({ final __callArgument2:Dynamic = geometry; __callArgument2; })) : MeshSkinBindPose) : Dynamic));
+      setMeshGeometrySkinBindPose(({ final __callArgument4:Dynamic = geometry; __callArgument4; }), (cast bindPose : Dynamic));
     }
     runtime = (cast getNodeRuntime((cast (cast mesh : NodeAny) : Dynamic)) : MeshRuntime);
     bounds = (cast runtime : { @:optional var deformedLocalBounds:Null<Aabb>; }).deformedLocalBounds;
     if ((cast _Runtime.looseEquals(bounds, null) : Bool)) {
-      (bounds = cast ((cast createAabb(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Aabb) : Dynamic));
+      (bounds = cast ((cast (#if js _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>)) #else createAabb(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Aabb) : Dynamic));
       ((cast runtime : { @:optional var deformedLocalBounds:Null<Aabb>; }).deformedLocalBounds = bounds);
     }
-    getMeshSkinConservativeBounds(({ final __callArgument3:Dynamic = bounds; __callArgument3; }), ({ final __callArgument4:Dynamic = bindPose; __callArgument4; }), (cast skin : { var skeleton:Skeleton3D; }).skeleton);
+    getMeshSkinConservativeBounds(({ final __callArgument6:Dynamic = bounds; __callArgument6; }), ({ final __callArgument7:Dynamic = bindPose; __callArgument7; }), (cast skin : { var skeleton:Skeleton3D; }).skeleton);
   }
 
   public static function prepareScene3DSkinning(scene:NodeAny):Void {
@@ -52,13 +52,13 @@ class PrepareScene3DSkinning {
     var children:Null<Array<Node<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(scene, 'enabled') : Bool) : Bool)) { return; }
     mesh = (cast (cast scene : flighthq._internal._Any) : Mesh);
-    if ((cast !_Runtime.looseEquals(mesh.geometry, null) : Bool)) { prepareMeshSkinning(({ final __callArgument5:Dynamic = mesh; __callArgument5; })); }
+    if ((cast !_Runtime.looseEquals(mesh.geometry, null) : Bool)) { prepareMeshSkinning(({ final __callArgument10:Dynamic = mesh; __callArgument10; })); }
     children = _Runtime.field((cast getNodeRuntime((cast scene : Dynamic)) : NodeRuntime<flighthq._internal._Any>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          prepareScene3DSkinning(({ final __callArgument6:Dynamic = flighthq._internal._StaticIndex.readArray(children, i); __callArgument6; }));
+          prepareScene3DSkinning(({ final __callArgument12:Dynamic = flighthq._internal._StaticIndex.readArray(children, i); __callArgument12; }));
           i++;
         }
       }

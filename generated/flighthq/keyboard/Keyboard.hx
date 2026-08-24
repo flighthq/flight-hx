@@ -33,13 +33,13 @@ class Keyboard {
     var unsubscribe:Void->Void = cast _Runtime.UNDEFINED;
     detachSoftKeyboard(({ final __callArgument0:Dynamic = keyboard; __callArgument0; }));
     backend = (cast getSoftKeyboardBackend() : SoftKeyboardBackend);
-    wasVisible = (cast (cast backend : SoftKeyboardBackend).getInfo(({ final __callArgument1:Dynamic = Keyboard._scratch__keyboard; __callArgument1; })) : { var visible:Bool; }).visible;
-    unsubscribe = (cast backend : SoftKeyboardBackend).subscribe(({ final __callArgument3:Dynamic = function(phase:SoftKeyboardPhase, transition:SoftKeyboardTransition):Void {
+    wasVisible = (cast (cast backend : SoftKeyboardBackend).getInfo(({ final __callArgument2:Dynamic = Keyboard._scratch__keyboard; __callArgument2; })) : { var visible:Bool; }).visible;
+    unsubscribe = (cast backend : SoftKeyboardBackend).subscribe(({ final __callArgument4:Dynamic = function(phase:SoftKeyboardPhase, transition:SoftKeyboardTransition):Void {
       var prevVisible:Bool = cast _Runtime.UNDEFINED;
       var info:SoftKeyboardInfo = cast _Runtime.UNDEFINED;
       var nowVisible:Bool = cast _Runtime.UNDEFINED;
       prevVisible = wasVisible;
-      info = (cast backend : SoftKeyboardBackend).getInfo(({ final __callArgument2:Dynamic = Keyboard._scratch__keyboard; __callArgument2; }));
+      info = (cast backend : SoftKeyboardBackend).getInfo(({ final __callArgument3:Dynamic = Keyboard._scratch__keyboard; __callArgument3; }));
       nowVisible = info.visible;
       if ((cast _Runtime.strictEquals(phase, 'will') : Bool)) {
         if ((cast ((cast nowVisible : Bool) && (cast !(cast prevVisible : Bool) : Bool)) : Bool)) {
@@ -63,7 +63,7 @@ class Keyboard {
           }
         }
       }
-    }; __callArgument3; }));
+    }; __callArgument4; }));
     ((cast Keyboard._subscriptions__keyboard : flighthq._internal._WeakMap<SoftKeyboard, Void->Void>).set(keyboard, (cast unsubscribe)));
   }
 
@@ -104,11 +104,11 @@ class Keyboard {
 
       }; }
       transition = (cast { durationSeconds: 0.0, height: 0.0 });
-      fire = (cast function():Void { listener(({ final __callArgument4:Dynamic = 'did'; __callArgument4; }), ({ final __callArgument5:Dynamic = transition; __callArgument5; })); });
+      fire = (cast function():Void { listener(({ final __callArgument5:Dynamic = 'did'; __callArgument5; }), ({ final __callArgument6:Dynamic = transition; __callArgument6; })); });
       virtualKeyboard = (cast Keyboard.getVirtualKeyboard__keyboard() : Null<VirtualKeyboard__keyboard>);
       if ((cast !_Runtime.strictEquals(virtualKeyboard, null) : Bool)) {
-        (cast virtualKeyboard : VirtualKeyboard__keyboard).addEventListener((cast 'geometrychange' : String), ({ final __callArgument6:Dynamic = fire; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-        return cast function():Void { (cast virtualKeyboard : VirtualKeyboard__keyboard).removeEventListener((cast 'geometrychange' : String), ({ final __callArgument7:Dynamic = fire; __callArgument7; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end); };
+        (cast virtualKeyboard : VirtualKeyboard__keyboard).addEventListener((cast 'geometrychange' : String), ({ final __callArgument9:Dynamic = fire; __callArgument9; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+        return cast function():Void { (cast virtualKeyboard : VirtualKeyboard__keyboard).removeEventListener((cast 'geometrychange' : String), ({ final __callArgument10:Dynamic = fire; __callArgument10; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end); };
       }
       viewport = flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'visualViewport');
       if ((cast ((cast _Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(viewport, null) : Bool)) : Bool)) { return cast function():Void {
@@ -147,7 +147,7 @@ class Keyboard {
   }
 
   public static function disposeSoftKeyboard(keyboard:SoftKeyboard):Void {
-    detachSoftKeyboard(({ final __callArgument8:Dynamic = keyboard; __callArgument8; }));
+    detachSoftKeyboard(({ final __callArgument11:Dynamic = keyboard; __callArgument11; }));
   }
 
   @:noCompletion
@@ -158,12 +158,12 @@ class Keyboard {
   }
 
   public static function getSoftKeyboardHeight():Float {
-    return cast (cast (cast (cast getSoftKeyboardBackend() : SoftKeyboardBackend) : SoftKeyboardBackend).getInfo(({ final __callArgument9:Dynamic = Keyboard._scratch__keyboard; __callArgument9; })) : { var height:Float; }).height;
+    return cast (cast (cast (cast getSoftKeyboardBackend() : SoftKeyboardBackend) : SoftKeyboardBackend).getInfo(({ final __callArgument13:Dynamic = Keyboard._scratch__keyboard; __callArgument13; })) : { var height:Float; }).height;
     return cast null;
   }
 
   public static function getSoftKeyboardInfo(out:SoftKeyboardInfo):SoftKeyboardInfo {
-    return cast (cast (cast getSoftKeyboardBackend() : SoftKeyboardBackend) : SoftKeyboardBackend).getInfo(({ final __callArgument10:Dynamic = out; __callArgument10; }));
+    return cast (cast (cast getSoftKeyboardBackend() : SoftKeyboardBackend) : SoftKeyboardBackend).getInfo(({ final __callArgument14:Dynamic = out; __callArgument14; }));
     return cast null;
   }
 

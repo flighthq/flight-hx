@@ -154,8 +154,8 @@ class Node {
     var runtimeFactory:NodeRuntimeFactory<Runtime> = cast _Runtime.UNDEFINED;
     var out:flighthq._internal._Intersection2<flighthq.types.Node<Traits>, Traits> = cast _Runtime.UNDEFINED;
     runtimeFactory = _Runtime.coalesce(createNodeRuntimeFactory, function():Dynamic return cast (cast (cast createNodeRuntime : flighthq._internal._Any) : NodeRuntimeFactory<Runtime>));
-    out = (cast _Runtime.objectFromPairs([{ key: 'data', value: ((cast !_Runtime.strictEquals(createData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createData(({ final __callArgument1:Dynamic = (cast ({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var data:Null<flighthq._internal._Object>; }).data; }) : flighthq._internal._Partial<Data>); __callArgument1; })) : Data) : Dynamic) : (cast null : Dynamic)) }, { key: 'name', value: _Runtime.coalesce(({ final __structural2 = obj; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var name:Null<String>; }).name; }), function():Dynamic return cast null) }, { key: 'kind', value: nodeKind }, { key: EntityRuntimeKey, value: (cast runtimeFactory(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Runtime) }]) : flighthq._internal._Intersection2<flighthq.types.Node<Traits>, Traits>);
-    ((cast out : { var enabled:Bool; }).enabled = _Runtime.coalesce(({ final __structural3 = obj; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var enabled:Null<Bool>; }).enabled; }), function():Dynamic return cast true));
+    out = (cast _Runtime.objectFromPairs([{ key: 'data', value: ((cast !_Runtime.strictEquals(createData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createData(({ final __callArgument1:Dynamic = (cast ({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var data:Null<flighthq._internal._Object>; }).data; }) : flighthq._internal._Partial<Data>); __callArgument1; })) : Data) : Dynamic) : (cast null : Dynamic)) }, { key: 'name', value: _Runtime.coalesce(({ final __structural4 = obj; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var name:Null<String>; }).name; }), function():Dynamic return cast null) }, { key: 'kind', value: nodeKind }, { key: EntityRuntimeKey, value: (cast (#if js _Runtime.callValue(runtimeFactory, cast ([] : Array<Dynamic>)) #else runtimeFactory(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Runtime) }]) : flighthq._internal._Intersection2<flighthq.types.Node<Traits>, Traits>);
+    ((cast out : { var enabled:Bool; }).enabled = _Runtime.coalesce(({ final __structural5 = obj; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var enabled:Null<Bool>; }).enabled; }), function():Dynamic return cast true));
     return cast out;
     return cast null;
   }
@@ -172,7 +172,7 @@ class Node {
     ((cast out : NodeRuntime<Traits>).appearanceId = 0.0);
     ((cast out : NodeRuntime<Traits>).boundsUsingLocalBoundsId = -1.0);
     ((cast out : NodeRuntime<Traits>).boundsUsingLocalTransformId = -1.0);
-    ((cast out : { var canAddChild:flighthq.types.Node<Traits>->flighthq.types.Node<Traits>->Bool; }).canAddChild = (cast _Runtime.coalesce(({ final __structural4 = methods; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var canAddChild:Null<flighthq.types.Node<Traits>->flighthq.types.Node<Traits>->Bool>; }).canAddChild; }), function():Dynamic return cast defaultNodeRuntimeCanAddChild)));
+    ((cast out : { var canAddChild:flighthq.types.Node<Traits>->flighthq.types.Node<Traits>->Bool; }).canAddChild = (cast _Runtime.coalesce(({ final __structural6 = methods; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var canAddChild:Null<flighthq.types.Node<Traits>->flighthq.types.Node<Traits>->Bool>; }).canAddChild; }), function():Dynamic return cast defaultNodeRuntimeCanAddChild)));
     ((cast out : NodeRuntime<Traits>).children = null);
     ((cast out : NodeRuntime<Traits>).childrenId = 0.0);
     ((cast out : NodeRuntime<Traits>).colorAdjustments = null);
@@ -225,7 +225,7 @@ class Node {
     var children:Null<Array<flighthq.types.Node<Traits>>> = cast _Runtime.UNDEFINED;
     var nodeSignals:Null<NodeSignals> = cast _Runtime.UNDEFINED;
     var interactionSignals:Null<InteractionSignals> = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime(({ final __callArgument5:Dynamic = target; __callArgument5; })) : NodeRuntime<Traits>);
+    runtime = (cast getEntityRuntime(({ final __callArgument7:Dynamic = target; __callArgument7; })) : NodeRuntime<Traits>);
     parent = (cast (cast runtime : NodeRuntime<Traits>).parent : Null<flighthq.types.Node<Traits>>);
     if ((cast !_Runtime.strictEquals(parent, null) : Bool)) {
       (cast removeNodeChild((cast parent : Dynamic), (cast target : Dynamic)) : NodeOf<Traits>);
@@ -268,8 +268,8 @@ class Node {
 
   public static function enableNodeSignals<Traits:flighthq._internal._Object>(source:flighthq.types.Node<Traits>):NodeSignals {
     var runtime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
-    runtime = (cast getEntityRuntime(({ final __callArgument6:Dynamic = source; __callArgument6; })) : NodeRuntime<Traits>);
-    return cast ({ final __nullishOwner7 = runtime; final __nullishValue8:Null<NodeSignals> = cast (cast __nullishOwner7 : NodeRuntime<Traits>).nodeSignals; __nullishValue8 == null ? ((cast __nullishOwner7 : NodeRuntime<Traits>).nodeSignals = (cast (cast createNodeSignals() : NodeSignals) : Null<NodeSignals>)) : (cast __nullishValue8 : Null<NodeSignals>); });
+    runtime = (cast getEntityRuntime(({ final __callArgument9:Dynamic = source; __callArgument9; })) : NodeRuntime<Traits>);
+    return cast ({ final __nullishOwner11 = runtime; final __nullishValue12:Null<NodeSignals> = cast (cast __nullishOwner11 : NodeRuntime<Traits>).nodeSignals; __nullishValue12 == null ? ((cast __nullishOwner11 : NodeRuntime<Traits>).nodeSignals = (cast (cast createNodeSignals() : NodeSignals) : Null<NodeSignals>)) : (cast __nullishValue12 : Null<NodeSignals>); });
     return cast null;
   }
 
@@ -418,12 +418,12 @@ class Node {
 
   @:noCompletion
   public static function getNodeRuntime<Traits:flighthq._internal._Object>(source:flighthq.types.Node<Traits>):NodeRuntime<Traits> {
-    return cast (cast getEntityRuntime(({ final __callArgument9:Dynamic = source; __callArgument9; })) : NodeRuntime<Traits>);
+    return cast (cast getEntityRuntime(({ final __callArgument13:Dynamic = source; __callArgument13; })) : NodeRuntime<Traits>);
     return cast null;
   }
 
   public static function getNodeSignals<Traits:flighthq._internal._Object>(source:flighthq.types.Node<Traits>):Null<NodeSignals> {
-    return cast (cast (cast getEntityRuntime(({ final __callArgument10:Dynamic = source; __callArgument10; })) : NodeRuntime<Traits>) : NodeRuntime<Traits>).nodeSignals;
+    return cast (cast (cast getEntityRuntime(({ final __callArgument15:Dynamic = source; __callArgument15; })) : NodeRuntime<Traits>) : NodeRuntime<Traits>).nodeSignals;
     return cast null;
   }
 

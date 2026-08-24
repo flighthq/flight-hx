@@ -30,18 +30,18 @@ class ShapeContact2D {
     try {
       try {
         writeAabbVertices(({ final __callArgument0:Dynamic = a; __callArgument0; }), (cast scratch : ShapeContactScratch__shapeContact2D).verticesA);
-        writeAabbVertices(({ final __callArgument1:Dynamic = b; __callArgument1; }), (cast scratch : ShapeContactScratch__shapeContact2D).verticesB);
-        var __returnValue2:Dynamic = (cast ShapeContact2D.convexContact__shapeContact2D(({ final __callArgument3:Dynamic = (cast scratch : ShapeContactScratch__shapeContact2D).verticesA; __callArgument3; }), (cast 4.0 : Float), ({ final __callArgument4:Dynamic = (cast scratch : ShapeContactScratch__shapeContact2D).verticesB; __callArgument4; }), (cast 4.0 : Float), ({ final __callArgument5:Dynamic = out; __callArgument5; }), (cast scratch : Dynamic)) : Bool);
+        writeAabbVertices(({ final __callArgument2:Dynamic = b; __callArgument2; }), (cast scratch : ShapeContactScratch__shapeContact2D).verticesB);
+        var __returnValue4:Dynamic = (cast ShapeContact2D.convexContact__shapeContact2D(({ final __callArgument5:Dynamic = (cast scratch : ShapeContactScratch__shapeContact2D).verticesA; __callArgument5; }), (cast 4.0 : Float), ({ final __callArgument6:Dynamic = (cast scratch : ShapeContactScratch__shapeContact2D).verticesB; __callArgument6; }), (cast 4.0 : Float), ({ final __callArgument7:Dynamic = out; __callArgument7; }), (cast scratch : Dynamic)) : Bool);
         {
           ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
         }
-        return cast __returnValue2;
+        return cast __returnValue4;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError6:Dynamic) {
+    } catch (__finallyError11:Dynamic) {
       {
         ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError6);
+      _Runtime.throwValue(__finallyError11);
     }
     {
       ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
@@ -54,19 +54,19 @@ class ShapeContact2D {
     scratch = (cast ShapeContact2D.acquireShapeContactScratch__shapeContact2D() : ShapeContactScratch__shapeContact2D);
     try {
       try {
-        writeAabbVertices(({ final __callArgument7:Dynamic = a; __callArgument7; }), (cast scratch : ShapeContactScratch__shapeContact2D).verticesA);
-        writeObbVertices(({ final __callArgument8:Dynamic = b; __callArgument8; }), (cast scratch : ShapeContactScratch__shapeContact2D).verticesB);
-        var __returnValue9:Dynamic = (cast ShapeContact2D.convexContact__shapeContact2D(({ final __callArgument10:Dynamic = (cast scratch : ShapeContactScratch__shapeContact2D).verticesA; __callArgument10; }), (cast 4.0 : Float), ({ final __callArgument11:Dynamic = (cast scratch : ShapeContactScratch__shapeContact2D).verticesB; __callArgument11; }), (cast 4.0 : Float), ({ final __callArgument12:Dynamic = out; __callArgument12; }), (cast scratch : Dynamic)) : Bool);
+        writeAabbVertices(({ final __callArgument12:Dynamic = a; __callArgument12; }), (cast scratch : ShapeContactScratch__shapeContact2D).verticesA);
+        writeObbVertices(({ final __callArgument14:Dynamic = b; __callArgument14; }), (cast scratch : ShapeContactScratch__shapeContact2D).verticesB);
+        var __returnValue16:Dynamic = (cast ShapeContact2D.convexContact__shapeContact2D(({ final __callArgument17:Dynamic = (cast scratch : ShapeContactScratch__shapeContact2D).verticesA; __callArgument17; }), (cast 4.0 : Float), ({ final __callArgument18:Dynamic = (cast scratch : ShapeContactScratch__shapeContact2D).verticesB; __callArgument18; }), (cast 4.0 : Float), ({ final __callArgument19:Dynamic = out; __callArgument19; }), (cast scratch : Dynamic)) : Bool);
         {
           ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
         }
-        return cast __returnValue9;
+        return cast __returnValue16;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError13:Dynamic) {
+    } catch (__finallyError23:Dynamic) {
       {
         ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError13);
+      _Runtime.throwValue(__finallyError23);
     }
     {
       ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
@@ -81,74 +81,12 @@ class ShapeContact2D {
     scratch = (cast ShapeContact2D.acquireShapeContactScratch__shapeContact2D() : ShapeContactScratch__shapeContact2D);
     try {
       try {
-        writeAabbVertices(({ final __callArgument14:Dynamic = a; __callArgument14; }), (cast scratch : ShapeContactScratch__shapeContact2D).verticesA);
-        var __returnValue15:Dynamic = (cast ShapeContact2D.convexContact__shapeContact2D(({ final __callArgument16:Dynamic = (cast scratch : ShapeContactScratch__shapeContact2D).verticesA; __callArgument16; }), (cast 4.0 : Float), ({ final __callArgument17:Dynamic = bPoints; __callArgument17; }), (cast (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1) : Float), ({ final __callArgument18:Dynamic = out; __callArgument18; }), (cast scratch : Dynamic)) : Bool);
+        writeAabbVertices(({ final __callArgument24:Dynamic = a; __callArgument24; }), (cast scratch : ShapeContactScratch__shapeContact2D).verticesA);
+        var __returnValue26:Dynamic = (cast ShapeContact2D.convexContact__shapeContact2D(({ final __callArgument27:Dynamic = (cast scratch : ShapeContactScratch__shapeContact2D).verticesA; __callArgument27; }), (cast 4.0 : Float), ({ final __callArgument28:Dynamic = bPoints; __callArgument28; }), (cast (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1) : Float), ({ final __callArgument29:Dynamic = out; __callArgument29; }), (cast scratch : Dynamic)) : Bool);
         {
           ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
         }
-        return cast __returnValue15;
-      } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError19:Dynamic) {
-      {
-        ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
-      }
-      _Runtime.throwValue(__finallyError19);
-    }
-    {
-      ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
-    }
-    return cast null;
-  }
-
-  public static function collideCircleAabbContactManifold2D(a:CollisionCircle2D, b:CollisionAabb2D, out:CollisionContactManifold2D):Bool {
-    var scratch:ShapeContactScratch__shapeContact2D = cast _Runtime.UNDEFINED;
-    scratch = (cast ShapeContact2D.acquireShapeContactScratch__shapeContact2D() : ShapeContactScratch__shapeContact2D);
-    try {
-      try {
-        if ((cast !(cast (cast testCircleAabbCollision2D(({ final __callArgument20:Dynamic = a; __callArgument20; }), ({ final __callArgument21:Dynamic = b; __callArgument21; }), (cast scratch : ShapeContactScratch__shapeContact2D).leanManifold) : Bool) : Bool) : Bool)) {
-          clearCollisionContactManifold2D(({ final __callArgument22:Dynamic = out; __callArgument22; }));
-          var __returnValue23:Dynamic = false;
-          {
-            ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
-          }
-          return cast __returnValue23;
-        }
-        var __returnValue24:Dynamic = (cast ShapeContact2D.writeCircleContact__shapeContact2D((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), ({ final __callArgument25:Dynamic = out; __callArgument25; }), (cast scratch : Dynamic)) : Bool);
-        {
-          ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
-        }
-        return cast __returnValue24;
-      } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError26:Dynamic) {
-      {
-        ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
-      }
-      _Runtime.throwValue(__finallyError26);
-    }
-    {
-      ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
-    }
-    return cast null;
-  }
-
-  public static function collideCircleCircleContactManifold2D(a:CollisionCircle2D, b:CollisionCircle2D, out:CollisionContactManifold2D):Bool {
-    var scratch:ShapeContactScratch__shapeContact2D = cast _Runtime.UNDEFINED;
-    scratch = (cast ShapeContact2D.acquireShapeContactScratch__shapeContact2D() : ShapeContactScratch__shapeContact2D);
-    try {
-      try {
-        if ((cast !(cast (cast testCircleCircleCollision2D(({ final __callArgument27:Dynamic = a; __callArgument27; }), ({ final __callArgument28:Dynamic = b; __callArgument28; }), (cast scratch : ShapeContactScratch__shapeContact2D).leanManifold) : Bool) : Bool) : Bool)) {
-          clearCollisionContactManifold2D(({ final __callArgument29:Dynamic = out; __callArgument29; }));
-          var __returnValue30:Dynamic = false;
-          {
-            ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
-          }
-          return cast __returnValue30;
-        }
-        var __returnValue31:Dynamic = (cast ShapeContact2D.writeCircleContact__shapeContact2D((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), ({ final __callArgument32:Dynamic = out; __callArgument32; }), (cast scratch : Dynamic)) : Bool);
-        {
-          ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
-        }
-        return cast __returnValue31;
+        return cast __returnValue26;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
     } catch (__finallyError33:Dynamic) {
       {
@@ -162,30 +100,92 @@ class ShapeContact2D {
     return cast null;
   }
 
+  public static function collideCircleAabbContactManifold2D(a:CollisionCircle2D, b:CollisionAabb2D, out:CollisionContactManifold2D):Bool {
+    var scratch:ShapeContactScratch__shapeContact2D = cast _Runtime.UNDEFINED;
+    scratch = (cast ShapeContact2D.acquireShapeContactScratch__shapeContact2D() : ShapeContactScratch__shapeContact2D);
+    try {
+      try {
+        if ((cast !(cast (cast testCircleAabbCollision2D(({ final __callArgument34:Dynamic = a; __callArgument34; }), ({ final __callArgument35:Dynamic = b; __callArgument35; }), (cast scratch : ShapeContactScratch__shapeContact2D).leanManifold) : Bool) : Bool) : Bool)) {
+          clearCollisionContactManifold2D(({ final __callArgument38:Dynamic = out; __callArgument38; }));
+          var __returnValue40:Dynamic = false;
+          {
+            ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
+          }
+          return cast __returnValue40;
+        }
+        var __returnValue41:Dynamic = (cast ShapeContact2D.writeCircleContact__shapeContact2D((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), ({ final __callArgument42:Dynamic = out; __callArgument42; }), (cast scratch : Dynamic)) : Bool);
+        {
+          ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
+        }
+        return cast __returnValue41;
+      } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
+    } catch (__finallyError44:Dynamic) {
+      {
+        ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
+      }
+      _Runtime.throwValue(__finallyError44);
+    }
+    {
+      ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
+    }
+    return cast null;
+  }
+
+  public static function collideCircleCircleContactManifold2D(a:CollisionCircle2D, b:CollisionCircle2D, out:CollisionContactManifold2D):Bool {
+    var scratch:ShapeContactScratch__shapeContact2D = cast _Runtime.UNDEFINED;
+    scratch = (cast ShapeContact2D.acquireShapeContactScratch__shapeContact2D() : ShapeContactScratch__shapeContact2D);
+    try {
+      try {
+        if ((cast !(cast (cast testCircleCircleCollision2D(({ final __callArgument45:Dynamic = a; __callArgument45; }), ({ final __callArgument46:Dynamic = b; __callArgument46; }), (cast scratch : ShapeContactScratch__shapeContact2D).leanManifold) : Bool) : Bool) : Bool)) {
+          clearCollisionContactManifold2D(({ final __callArgument49:Dynamic = out; __callArgument49; }));
+          var __returnValue51:Dynamic = false;
+          {
+            ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
+          }
+          return cast __returnValue51;
+        }
+        var __returnValue52:Dynamic = (cast ShapeContact2D.writeCircleContact__shapeContact2D((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), ({ final __callArgument53:Dynamic = out; __callArgument53; }), (cast scratch : Dynamic)) : Bool);
+        {
+          ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
+        }
+        return cast __returnValue52;
+      } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
+    } catch (__finallyError55:Dynamic) {
+      {
+        ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
+      }
+      _Runtime.throwValue(__finallyError55);
+    }
+    {
+      ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
+    }
+    return cast null;
+  }
+
   public static function collideCircleObbContactManifold2D(a:CollisionCircle2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
     var scratch:ShapeContactScratch__shapeContact2D = cast _Runtime.UNDEFINED;
     scratch = (cast ShapeContact2D.acquireShapeContactScratch__shapeContact2D() : ShapeContactScratch__shapeContact2D);
     try {
       try {
-        if ((cast !(cast (cast testCircleObbCollision2D(({ final __callArgument34:Dynamic = a; __callArgument34; }), ({ final __callArgument35:Dynamic = b; __callArgument35; }), (cast scratch : ShapeContactScratch__shapeContact2D).leanManifold) : Bool) : Bool) : Bool)) {
-          clearCollisionContactManifold2D(({ final __callArgument36:Dynamic = out; __callArgument36; }));
-          var __returnValue37:Dynamic = false;
+        if ((cast !(cast (cast testCircleObbCollision2D(({ final __callArgument56:Dynamic = a; __callArgument56; }), ({ final __callArgument57:Dynamic = b; __callArgument57; }), (cast scratch : ShapeContactScratch__shapeContact2D).leanManifold) : Bool) : Bool) : Bool)) {
+          clearCollisionContactManifold2D(({ final __callArgument60:Dynamic = out; __callArgument60; }));
+          var __returnValue62:Dynamic = false;
           {
             ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
           }
-          return cast __returnValue37;
+          return cast __returnValue62;
         }
-        var __returnValue38:Dynamic = (cast ShapeContact2D.writeCircleContact__shapeContact2D((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), ({ final __callArgument39:Dynamic = out; __callArgument39; }), (cast scratch : Dynamic)) : Bool);
+        var __returnValue63:Dynamic = (cast ShapeContact2D.writeCircleContact__shapeContact2D((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), ({ final __callArgument64:Dynamic = out; __callArgument64; }), (cast scratch : Dynamic)) : Bool);
         {
           ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
         }
-        return cast __returnValue38;
+        return cast __returnValue63;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError40:Dynamic) {
+    } catch (__finallyError66:Dynamic) {
       {
         ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError40);
+      _Runtime.throwValue(__finallyError66);
     }
     {
       ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
@@ -198,25 +198,25 @@ class ShapeContact2D {
     scratch = (cast ShapeContact2D.acquireShapeContactScratch__shapeContact2D() : ShapeContactScratch__shapeContact2D);
     try {
       try {
-        if ((cast !(cast (cast testCirclePolygonCollision2D(({ final __callArgument41:Dynamic = a; __callArgument41; }), ({ final __callArgument42:Dynamic = b; __callArgument42; }), (cast scratch : ShapeContactScratch__shapeContact2D).leanManifold) : Bool) : Bool) : Bool)) {
-          clearCollisionContactManifold2D(({ final __callArgument43:Dynamic = out; __callArgument43; }));
-          var __returnValue44:Dynamic = false;
+        if ((cast !(cast (cast testCirclePolygonCollision2D(({ final __callArgument67:Dynamic = a; __callArgument67; }), ({ final __callArgument68:Dynamic = b; __callArgument68; }), (cast scratch : ShapeContactScratch__shapeContact2D).leanManifold) : Bool) : Bool) : Bool)) {
+          clearCollisionContactManifold2D(({ final __callArgument71:Dynamic = out; __callArgument71; }));
+          var __returnValue73:Dynamic = false;
           {
             ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
           }
-          return cast __returnValue44;
+          return cast __returnValue73;
         }
-        var __returnValue45:Dynamic = (cast ShapeContact2D.writeCircleContact__shapeContact2D((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), ({ final __callArgument46:Dynamic = out; __callArgument46; }), (cast scratch : Dynamic)) : Bool);
+        var __returnValue74:Dynamic = (cast ShapeContact2D.writeCircleContact__shapeContact2D((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), ({ final __callArgument75:Dynamic = out; __callArgument75; }), (cast scratch : Dynamic)) : Bool);
         {
           ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
         }
-        return cast __returnValue45;
+        return cast __returnValue74;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError47:Dynamic) {
+    } catch (__finallyError77:Dynamic) {
       {
         ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError47);
+      _Runtime.throwValue(__finallyError77);
     }
     {
       ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
@@ -229,19 +229,19 @@ class ShapeContact2D {
     scratch = (cast ShapeContact2D.acquireShapeContactScratch__shapeContact2D() : ShapeContactScratch__shapeContact2D);
     try {
       try {
-        writeObbVertices(({ final __callArgument48:Dynamic = a; __callArgument48; }), (cast scratch : ShapeContactScratch__shapeContact2D).verticesA);
-        writeObbVertices(({ final __callArgument49:Dynamic = b; __callArgument49; }), (cast scratch : ShapeContactScratch__shapeContact2D).verticesB);
-        var __returnValue50:Dynamic = (cast ShapeContact2D.convexContact__shapeContact2D(({ final __callArgument51:Dynamic = (cast scratch : ShapeContactScratch__shapeContact2D).verticesA; __callArgument51; }), (cast 4.0 : Float), ({ final __callArgument52:Dynamic = (cast scratch : ShapeContactScratch__shapeContact2D).verticesB; __callArgument52; }), (cast 4.0 : Float), ({ final __callArgument53:Dynamic = out; __callArgument53; }), (cast scratch : Dynamic)) : Bool);
+        writeObbVertices(({ final __callArgument78:Dynamic = a; __callArgument78; }), (cast scratch : ShapeContactScratch__shapeContact2D).verticesA);
+        writeObbVertices(({ final __callArgument80:Dynamic = b; __callArgument80; }), (cast scratch : ShapeContactScratch__shapeContact2D).verticesB);
+        var __returnValue82:Dynamic = (cast ShapeContact2D.convexContact__shapeContact2D(({ final __callArgument83:Dynamic = (cast scratch : ShapeContactScratch__shapeContact2D).verticesA; __callArgument83; }), (cast 4.0 : Float), ({ final __callArgument84:Dynamic = (cast scratch : ShapeContactScratch__shapeContact2D).verticesB; __callArgument84; }), (cast 4.0 : Float), ({ final __callArgument85:Dynamic = out; __callArgument85; }), (cast scratch : Dynamic)) : Bool);
         {
           ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
         }
-        return cast __returnValue50;
+        return cast __returnValue82;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError54:Dynamic) {
+    } catch (__finallyError89:Dynamic) {
       {
         ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError54);
+      _Runtime.throwValue(__finallyError89);
     }
     {
       ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
@@ -256,18 +256,18 @@ class ShapeContact2D {
     scratch = (cast ShapeContact2D.acquireShapeContactScratch__shapeContact2D() : ShapeContactScratch__shapeContact2D);
     try {
       try {
-        writeObbVertices(({ final __callArgument55:Dynamic = a; __callArgument55; }), (cast scratch : ShapeContactScratch__shapeContact2D).verticesA);
-        var __returnValue56:Dynamic = (cast ShapeContact2D.convexContact__shapeContact2D(({ final __callArgument57:Dynamic = (cast scratch : ShapeContactScratch__shapeContact2D).verticesA; __callArgument57; }), (cast 4.0 : Float), ({ final __callArgument58:Dynamic = bPoints; __callArgument58; }), (cast (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1) : Float), ({ final __callArgument59:Dynamic = out; __callArgument59; }), (cast scratch : Dynamic)) : Bool);
+        writeObbVertices(({ final __callArgument90:Dynamic = a; __callArgument90; }), (cast scratch : ShapeContactScratch__shapeContact2D).verticesA);
+        var __returnValue92:Dynamic = (cast ShapeContact2D.convexContact__shapeContact2D(({ final __callArgument93:Dynamic = (cast scratch : ShapeContactScratch__shapeContact2D).verticesA; __callArgument93; }), (cast 4.0 : Float), ({ final __callArgument94:Dynamic = bPoints; __callArgument94; }), (cast (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1) : Float), ({ final __callArgument95:Dynamic = out; __callArgument95; }), (cast scratch : Dynamic)) : Bool);
         {
           ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
         }
-        return cast __returnValue56;
+        return cast __returnValue92;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError60:Dynamic) {
+    } catch (__finallyError99:Dynamic) {
       {
         ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError60);
+      _Runtime.throwValue(__finallyError99);
     }
     {
       ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
@@ -284,17 +284,17 @@ class ShapeContact2D {
     scratch = (cast ShapeContact2D.acquireShapeContactScratch__shapeContact2D() : ShapeContactScratch__shapeContact2D);
     try {
       try {
-        var __returnValue61:Dynamic = (cast ShapeContact2D.convexContact__shapeContact2D(({ final __callArgument62:Dynamic = aPoints; __callArgument62; }), (cast (_Runtime.toInt32(_Runtime.field(aPoints, 'length')) >> 1) : Float), ({ final __callArgument63:Dynamic = bPoints; __callArgument63; }), (cast (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1) : Float), ({ final __callArgument64:Dynamic = out; __callArgument64; }), (cast scratch : Dynamic)) : Bool);
+        var __returnValue100:Dynamic = (cast ShapeContact2D.convexContact__shapeContact2D(({ final __callArgument101:Dynamic = aPoints; __callArgument101; }), (cast (_Runtime.toInt32(_Runtime.field(aPoints, 'length')) >> 1) : Float), ({ final __callArgument102:Dynamic = bPoints; __callArgument102; }), (cast (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1) : Float), ({ final __callArgument103:Dynamic = out; __callArgument103; }), (cast scratch : Dynamic)) : Bool);
         {
           ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
         }
-        return cast __returnValue61;
+        return cast __returnValue100;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError65:Dynamic) {
+    } catch (__finallyError107:Dynamic) {
       {
         ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError65);
+      _Runtime.throwValue(__finallyError107);
     }
     {
       ShapeContact2D.releaseShapeContactScratch__shapeContact2D((cast scratch : Dynamic));
@@ -341,20 +341,20 @@ class ShapeContact2D {
     var tangentSpan:Float = cast _Runtime.UNDEFINED;
     var referenceSeparation:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast ((cast ((cast an : Float) < (cast 3.0 : Float)) : Bool) || (cast ((cast bn : Float) < (cast 3.0 : Float)) : Bool)) : Bool) || (cast ((cast an : Float) > (cast FEATURE_INDEX_LIMIT : Float)) : Bool)) : Bool) || (cast ((cast bn : Float) > (cast FEATURE_INDEX_LIMIT : Float)) : Bool)) : Bool)) {
-      clearCollisionContactManifold2D(({ final __callArgument66:Dynamic = out; __callArgument66; }));
+      clearCollisionContactManifold2D(({ final __callArgument108:Dynamic = out; __callArgument108; }));
       return cast false;
     }
-    separationA = (cast ShapeContact2D.maxFaceSeparation__shapeContact2D(({ final __callArgument67:Dynamic = ax; __callArgument67; }), (cast an : Float), ({ final __callArgument68:Dynamic = bx; __callArgument68; }), (cast bn : Float), (cast scratch : Dynamic)) : Float);
+    separationA = (cast ShapeContact2D.maxFaceSeparation__shapeContact2D(({ final __callArgument110:Dynamic = ax; __callArgument110; }), (cast an : Float), ({ final __callArgument111:Dynamic = bx; __callArgument111; }), (cast bn : Float), (cast scratch : Dynamic)) : Float);
     if ((cast ((cast ((cast separationA : Float) >= (cast 0.0 : Float)) : Bool) || (cast ((cast (cast scratch : ShapeContactScratch__shapeContact2D).separationEdge : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
-      clearCollisionContactManifold2D(({ final __callArgument69:Dynamic = out; __callArgument69; }));
+      clearCollisionContactManifold2D(({ final __callArgument114:Dynamic = out; __callArgument114; }));
       return cast false;
     }
     edgeA = (cast scratch : ShapeContactScratch__shapeContact2D).separationEdge;
     normalAX = (cast scratch : ShapeContactScratch__shapeContact2D).separationNormalX;
     normalAY = (cast scratch : ShapeContactScratch__shapeContact2D).separationNormalY;
-    separationB = (cast ShapeContact2D.maxFaceSeparation__shapeContact2D(({ final __callArgument70:Dynamic = bx; __callArgument70; }), (cast bn : Float), ({ final __callArgument71:Dynamic = ax; __callArgument71; }), (cast an : Float), (cast scratch : Dynamic)) : Float);
+    separationB = (cast ShapeContact2D.maxFaceSeparation__shapeContact2D(({ final __callArgument116:Dynamic = bx; __callArgument116; }), (cast bn : Float), ({ final __callArgument117:Dynamic = ax; __callArgument117; }), (cast an : Float), (cast scratch : Dynamic)) : Float);
     if ((cast ((cast ((cast separationB : Float) >= (cast 0.0 : Float)) : Bool) || (cast ((cast (cast scratch : ShapeContactScratch__shapeContact2D).separationEdge : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
-      clearCollisionContactManifold2D(({ final __callArgument72:Dynamic = out; __callArgument72; }));
+      clearCollisionContactManifold2D(({ final __callArgument120:Dynamic = out; __callArgument120; }));
       return cast false;
     }
     edgeB = (cast scratch : ShapeContactScratch__shapeContact2D).separationEdge;
@@ -372,7 +372,7 @@ class ShapeContact2D {
     v1Y = _Runtime.getIndex(referenceX, ((_Runtime.toInt32(referenceEdge) << 1) + 1.0));
     v2X = _Runtime.getIndex(referenceX, (_Runtime.toInt32(referenceNext) << 1));
     v2Y = _Runtime.getIndex(referenceX, ((_Runtime.toInt32(referenceNext) << 1) + 1.0));
-    incidentEdge = (cast ShapeContact2D.mostAntiParallelEdge__shapeContact2D(({ final __callArgument73:Dynamic = incidentX; __callArgument73; }), (cast incidentCount : Float), (cast normalX : Float), (cast normalY : Float)) : Float);
+    incidentEdge = (cast ShapeContact2D.mostAntiParallelEdge__shapeContact2D(({ final __callArgument122:Dynamic = incidentX; __callArgument122; }), (cast incidentCount : Float), (cast normalX : Float), (cast normalY : Float)) : Float);
     incidentNext = ((cast _Runtime.strictEquals((incidentEdge + 1.0), incidentCount) : Bool) ? (cast 0.0 : Dynamic) : (cast (incidentEdge + 1.0) : Dynamic));
     p0X = _Runtime.getIndex(incidentX, (_Runtime.toInt32(incidentEdge) << 1));
     p0Y = _Runtime.getIndex(incidentX, ((_Runtime.toInt32(incidentEdge) << 1) + 1.0));
@@ -382,7 +382,7 @@ class ShapeContact2D {
     tangentY = (v2Y - v1Y);
     tangentLength = HxMath.sqrt(((tangentX * tangentX) + (tangentY * tangentY)));
     if ((cast ((cast tangentLength : Float) <= (cast ShapeContact2D.EPS__shapeContact2D : Float)) : Bool)) {
-      clearCollisionContactManifold2D(({ final __callArgument74:Dynamic = out; __callArgument74; }));
+      clearCollisionContactManifold2D(({ final __callArgument124:Dynamic = out; __callArgument124; }));
       return cast false;
     }
     (tangentX = cast ((tangentX / tangentLength) : Dynamic));
@@ -413,10 +413,10 @@ class ShapeContact2D {
     (out.pointCount = cast (0.0 : Float));
     if ((cast ((cast clipStart : Float) <= (cast clipEnd : Float)) : Bool)) {
       var first:Float = (cast packContactFeatureId((cast referenceIsA : Bool), (cast referenceEdge : Float), (cast incidentEdge : Float), (cast false : Bool)) : Float);
-      ShapeContact2D.appendClippedContact__shapeContact2D((cast p0X : Float), (cast p0Y : Float), (cast p1X : Float), (cast p1Y : Float), (cast clipStart : Float), (cast v1X : Float), (cast v1Y : Float), (cast normalX : Float), (cast normalY : Float), (cast first : Float), ({ final __callArgument75:Dynamic = out; __callArgument75; }));
+      ShapeContact2D.appendClippedContact__shapeContact2D((cast p0X : Float), (cast p0Y : Float), (cast p1X : Float), (cast p1Y : Float), (cast clipStart : Float), (cast v1X : Float), (cast v1Y : Float), (cast normalX : Float), (cast normalY : Float), (cast first : Float), ({ final __callArgument126:Dynamic = out; __callArgument126; }));
       if ((cast ((cast clipEnd : Float) > (cast clipStart : Float)) : Bool)) {
         var second:Float = (cast packContactFeatureId((cast referenceIsA : Bool), (cast referenceEdge : Float), (cast incidentEdge : Float), (cast true : Bool)) : Float);
-        ShapeContact2D.appendClippedContact__shapeContact2D((cast p0X : Float), (cast p0Y : Float), (cast p1X : Float), (cast p1Y : Float), (cast clipEnd : Float), (cast v1X : Float), (cast v1Y : Float), (cast normalX : Float), (cast normalY : Float), (cast second : Float), ({ final __callArgument76:Dynamic = out; __callArgument76; }));
+        ShapeContact2D.appendClippedContact__shapeContact2D((cast p0X : Float), (cast p0Y : Float), (cast p1X : Float), (cast p1Y : Float), (cast clipEnd : Float), (cast v1X : Float), (cast v1Y : Float), (cast normalX : Float), (cast normalY : Float), (cast second : Float), ({ final __callArgument128:Dynamic = out; __callArgument128; }));
       }
     }
     return cast true;

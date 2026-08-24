@@ -29,7 +29,7 @@ class Lifecycle {
     detachAppLifecycle(({ final __callArgument0:Dynamic = app; __callArgument0; }));
     backend = (cast getLifecycleBackend() : LifecycleBackend);
     previous = (cast backend : LifecycleBackend).getState();
-    unsubscribeState = (cast backend : LifecycleBackend).subscribe(({ final __callArgument1:Dynamic = function():Void {
+    unsubscribeState = (cast backend : LifecycleBackend).subscribe(({ final __callArgument2:Dynamic = function():Void {
       var state:AppLifecycleState = cast _Runtime.UNDEFINED;
       state = (cast backend : LifecycleBackend).getState();
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onStateChange], [state]]), 1);
@@ -46,7 +46,7 @@ class Lifecycle {
         ((cast Lifecycle._savedState__lifecycle : flighthq._internal._WeakMap<AppLifecycle, flighthq._internal._Record<String, flighthq._internal._Any>>).set(app, (cast stateBag)));
       } }
       (previous = cast (state : Dynamic));
-    }; __callArgument1; }));
+    }; __callArgument2; }));
     memSub = (cast backend : LifecycleBackend).subscribeMemoryWarning;
     if ((cast !_Runtime.strictEquals(memSub, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (unsubscribeMemory = cast (_Runtime.callProperty(memSub, 'call', cast ([backend, function(level:AppMemoryPressure):Void {
@@ -118,17 +118,17 @@ class Lifecycle {
         var detail:{ @:optional var pressure:Null<String>; } = cast _Runtime.UNDEFINED;
         var pressure:Null<String> = cast _Runtime.UNDEFINED;
         detail = (cast e : flighthq._internal.dom.CustomEvent<{ @:optional var pressure:String; }>).detail;
-        pressure = ({ final __structural2 = detail; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var pressure:Null<String>; }).pressure; });
+        pressure = ({ final __structural3 = detail; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var pressure:Null<String>; }).pressure; });
         if ((cast _Runtime.strictEquals(pressure, 'critical') : Bool)) {
-          listener(({ final __callArgument3:Dynamic = 'critical'; __callArgument3; }));
+          listener(({ final __callArgument4:Dynamic = 'critical'; __callArgument4; }));
         } else { if ((cast _Runtime.strictEquals(pressure, 'moderate') : Bool)) {
-          listener(({ final __callArgument4:Dynamic = 'moderate'; __callArgument4; }));
+          listener(({ final __callArgument6:Dynamic = 'moderate'; __callArgument6; }));
         } else {
-          listener(({ final __callArgument5:Dynamic = 'moderate'; __callArgument5; }));
+          listener(({ final __callArgument8:Dynamic = 'moderate'; __callArgument8; }));
         } }
       });
       onPressureRelieved = (cast function():Void {
-        listener(({ final __callArgument6:Dynamic = 'normal'; __callArgument6; }));
+        listener(({ final __callArgument10:Dynamic = 'normal'; __callArgument10; }));
       });
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['memory-pressure', onPressure] : Array<Dynamic>));
       flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener', cast (['memory-pressure-relieved', onPressureRelieved] : Array<Dynamic>));
@@ -151,7 +151,7 @@ class Lifecycle {
   }
 
   public static function disposeAppLifecycle(app:AppLifecycle):Void {
-    detachAppLifecycle(({ final __callArgument7:Dynamic = app; __callArgument7; }));
+    detachAppLifecycle(({ final __callArgument12:Dynamic = app; __callArgument12; }));
     ((cast Lifecycle._savedState__lifecycle : flighthq._internal._WeakMap<AppLifecycle, flighthq._internal._Record<String, flighthq._internal._Any>>).delete_(app));
   }
 
@@ -191,7 +191,7 @@ class Lifecycle {
 
   public static function requestAppBack(app:AppLifecycle):Bool {
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onBackButton]]), 1);
-    return cast !_Runtime.strictEquals(({ final __typedStruct8 = (cast app.onBackButton : { var data:Null<SignalData<Void->Void>>; }).data; __typedStruct8 == null ? _Runtime.UNDEFINED : (cast __typedStruct8 : { var cancelled:Bool; }).cancelled; }), true);
+    return cast !_Runtime.strictEquals(({ final __typedStruct14 = (cast app.onBackButton : { var data:Null<SignalData<Void->Void>>; }).data; __typedStruct14 == null ? _Runtime.UNDEFINED : (cast __typedStruct14 : { var cancelled:Bool; }).cancelled; }), true);
     return cast null;
   }
 

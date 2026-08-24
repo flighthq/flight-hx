@@ -49,14 +49,14 @@ class CanvasScale9Shape {
     __destructure1 = source;
     scaleX = __destructure1.scaleX;
     scaleY = __destructure1.scaleY;
-    mapper = (cast buildScale9Mapper(({ final __callArgument2:Dynamic = commands; __callArgument2; }), ({ final __callArgument3:Dynamic = scale9Grid; __callArgument3; }), (cast scaleX : Float), (cast scaleY : Float)) : Null<Scale9Mapper>);
+    mapper = (cast buildScale9Mapper(({ final __callArgument4:Dynamic = commands; __callArgument4; }), ({ final __callArgument5:Dynamic = scale9Grid; __callArgument5; }), (cast scaleX : Float), (cast scaleY : Float)) : Null<Scale9Mapper>);
     if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
-      setCanvasTransform(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = context; __callArgument5; }), (cast renderProxy : RenderProxy2D).transform2D);
-      renderCanvasShapeCommands(({ final __callArgument6:Dynamic = context; __callArgument6; }), ({ final __callArgument7:Dynamic = state; __callArgument7; }), ({ final __callArgument8:Dynamic = commands; __callArgument8; }), (cast getCanvasRenderStateTextureResolvers(({ final __callArgument9:Dynamic = state; __callArgument9; })) : CanvasTextureResolvers));
+      setCanvasTransform(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = context; __callArgument9; }), (cast renderProxy : RenderProxy2D).transform2D);
+      renderCanvasShapeCommands(({ final __callArgument12:Dynamic = context; __callArgument12; }), ({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = commands; __callArgument14; }), (cast getCanvasRenderStateTextureResolvers(({ final __callArgument15:Dynamic = state; __callArgument15; })) : CanvasTextureResolvers));
     } else {
-      CanvasScale9Shape.applyStrippedTransform__canvasScale9Shape(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = context; __callArgument11; }), ({ final __callArgument12:Dynamic = (cast renderProxy : RenderProxy2D).transform2D; __callArgument12; }), (cast scaleX : Float), (cast scaleY : Float));
-      mapScale9ShapeCommands(({ final __callArgument13:Dynamic = CanvasScale9Shape._remappedCommands__canvasScale9Shape; __callArgument13; }), ({ final __callArgument14:Dynamic = commands; __callArgument14; }), ({ final __callArgument15:Dynamic = mapper; __callArgument15; }));
-      renderCanvasShapeCommands(({ final __callArgument16:Dynamic = context; __callArgument16; }), ({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = CanvasScale9Shape._remappedCommands__canvasScale9Shape; __callArgument18; }), (cast getCanvasRenderStateTextureResolvers(({ final __callArgument19:Dynamic = state; __callArgument19; })) : CanvasTextureResolvers));
+      CanvasScale9Shape.applyStrippedTransform__canvasScale9Shape(({ final __callArgument22:Dynamic = state; __callArgument22; }), ({ final __callArgument23:Dynamic = context; __callArgument23; }), ({ final __callArgument24:Dynamic = (cast renderProxy : RenderProxy2D).transform2D; __callArgument24; }), (cast scaleX : Float), (cast scaleY : Float));
+      mapScale9ShapeCommands(({ final __callArgument28:Dynamic = CanvasScale9Shape._remappedCommands__canvasScale9Shape; __callArgument28; }), ({ final __callArgument29:Dynamic = commands; __callArgument29; }), ({ final __callArgument30:Dynamic = mapper; __callArgument30; }));
+      renderCanvasShapeCommands(({ final __callArgument34:Dynamic = context; __callArgument34; }), ({ final __callArgument35:Dynamic = state; __callArgument35; }), ({ final __callArgument36:Dynamic = CanvasScale9Shape._remappedCommands__canvasScale9Shape; __callArgument36; }), (cast getCanvasRenderStateTextureResolvers(({ final __callArgument37:Dynamic = state; __callArgument37; })) : CanvasTextureResolvers));
     }
   }
 

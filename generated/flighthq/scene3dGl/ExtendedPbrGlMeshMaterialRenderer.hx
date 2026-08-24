@@ -43,29 +43,29 @@ class ExtendedPbrGlMeshMaterialRenderer {
     var program:GlPbrProgram = cast _Runtime.UNDEFINED;
     extended = (cast material : Null<ExtendedPbrMaterial>);
     runtime = (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime);
-    extensions = _Runtime.coalesce(({ final __typedStruct1 = extended; __typedStruct1 == null ? _Runtime.UNDEFINED : (cast __typedStruct1 : { var extensions:Array<PbrExtension>; }).extensions; }), function():Dynamic return cast cast ([] : Array<Dynamic>));
-    contributions = (cast resolveGlPbrExtensionContributions(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast extensions : Dynamic)) : Null<Array<GlPbrExtensionShaderContribution>>);
+    extensions = _Runtime.coalesce(({ final __typedStruct2 = extended; __typedStruct2 == null ? _Runtime.UNDEFINED : (cast __typedStruct2 : { var extensions:Array<PbrExtension>; }).extensions; }), function():Dynamic return cast cast ([] : Array<Dynamic>));
+    contributions = (cast resolveGlPbrExtensionContributions(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast extensions : Dynamic)) : Null<Array<GlPbrExtensionShaderContribution>>);
     if ((cast _Runtime.strictEquals(contributions, null) : Bool)) {
-      ({ final __optionalCall3 = runtime.pbrExtensionGuard; if (__optionalCall3 != null) __optionalCall3(extensions); });
+      ({ final __optionalCall5 = runtime.pbrExtensionGuard; if (__optionalCall5 != null) __optionalCall5(extensions); });
       (runtime.activeMeshProgram = cast (null : Null<GlMeshProgram>));
       return;
     }
-    program = (cast ensureGlPbrProgram(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast buildGlPbrStandardDefineKey(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast _Runtime.coalesce(({ final __typedStruct6 = extended; __typedStruct6 == null ? _Runtime.UNDEFINED : (cast __typedStruct6 : { var standard:StandardPbrMaterialProperties; }).standard; }), function():Dynamic return cast null) : Dynamic), (cast extended : Dynamic)) : GlPbrDefineKey), (cast contributions : Dynamic)) : GlPbrProgram);
-    beginGlMeshDraw(({ final __callArgument7:Dynamic = state; __callArgument7; }), ({ final __callArgument8:Dynamic = program; __callArgument8; }), (cast _Runtime.coalesce(({ final __typedStruct9 = extended; __typedStruct9 == null ? _Runtime.UNDEFINED : (cast __typedStruct9 : { var doubleSided:Bool; }).doubleSided; }), function():Dynamic return cast false) : Bool));
-    setGlMeshViewProjection(({ final __callArgument10:Dynamic = state; __callArgument10; }), program.locViewProjection, ({ final __callArgument11:Dynamic = camera; __callArgument11; }));
-    setGlMeshCameraPosition((cast state : GlRenderState).gl, program.locCameraPosition, ({ final __callArgument12:Dynamic = camera; __callArgument12; }));
-    bindGlMeshLightBlock(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = program; __callArgument14; }), ({ final __callArgument15:Dynamic = lights; __callArgument15; }));
-    bindGlPbrStandardBlock(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = program; __callArgument17; }), (cast _Runtime.coalesce(({ final __typedStruct18 = extended; __typedStruct18 == null ? _Runtime.UNDEFINED : (cast __typedStruct18 : { var standard:StandardPbrMaterialProperties; }).standard; }), function():Dynamic return cast null) : Dynamic));
-    flighthq._internal.backend.WebGl2Backend.uniform1f((cast state : GlRenderState).gl, program.locAlphaCutoff, _Runtime.coalesce(({ final __typedStruct19 = extended; __typedStruct19 == null ? _Runtime.UNDEFINED : (cast __typedStruct19 : { var alphaCutoff:Float; }).alphaCutoff; }), function():Dynamic return cast 0.5));
-    (cast bindGlPbrExtensions(({ final __callArgument20:Dynamic = state; __callArgument20; }), program.program, (cast extensions : Dynamic)) : Bool);
+    program = (cast ensureGlPbrProgram(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast buildGlPbrStandardDefineKey(({ final __callArgument7:Dynamic = state; __callArgument7; }), (cast _Runtime.coalesce(({ final __typedStruct8 = extended; __typedStruct8 == null ? _Runtime.UNDEFINED : (cast __typedStruct8 : { var standard:StandardPbrMaterialProperties; }).standard; }), function():Dynamic return cast null) : Dynamic), (cast extended : Dynamic)) : GlPbrDefineKey), (cast contributions : Dynamic)) : GlPbrProgram);
+    beginGlMeshDraw(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = program; __callArgument17; }), (cast _Runtime.coalesce(({ final __typedStruct18 = extended; __typedStruct18 == null ? _Runtime.UNDEFINED : (cast __typedStruct18 : { var doubleSided:Bool; }).doubleSided; }), function():Dynamic return cast false) : Bool));
+    setGlMeshViewProjection(({ final __callArgument22:Dynamic = state; __callArgument22; }), program.locViewProjection, ({ final __callArgument23:Dynamic = camera; __callArgument23; }));
+    setGlMeshCameraPosition((cast state : GlRenderState).gl, program.locCameraPosition, ({ final __callArgument26:Dynamic = camera; __callArgument26; }));
+    bindGlMeshLightBlock(({ final __callArgument28:Dynamic = state; __callArgument28; }), ({ final __callArgument29:Dynamic = program; __callArgument29; }), ({ final __callArgument30:Dynamic = lights; __callArgument30; }));
+    bindGlPbrStandardBlock(({ final __callArgument34:Dynamic = state; __callArgument34; }), ({ final __callArgument35:Dynamic = program; __callArgument35; }), (cast _Runtime.coalesce(({ final __typedStruct36 = extended; __typedStruct36 == null ? _Runtime.UNDEFINED : (cast __typedStruct36 : { var standard:StandardPbrMaterialProperties; }).standard; }), function():Dynamic return cast null) : Dynamic));
+    flighthq._internal.backend.WebGl2Backend.uniform1f((cast state : GlRenderState).gl, program.locAlphaCutoff, _Runtime.coalesce(({ final __typedStruct40 = extended; __typedStruct40 == null ? _Runtime.UNDEFINED : (cast __typedStruct40 : { var alphaCutoff:Float; }).alphaCutoff; }), function():Dynamic return cast 0.5));
+    (cast bindGlPbrExtensions(({ final __callArgument41:Dynamic = state; __callArgument41; }), program.program, (cast extensions : Dynamic)) : Bool);
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime(({ final __callArgument21:Dynamic = state; __callArgument21; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime(({ final __callArgument43:Dynamic = state; __callArgument43; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    drawGlMeshSubset(({ final __callArgument22:Dynamic = state; __callArgument22; }), ({ final __callArgument23:Dynamic = program; __callArgument23; }), ({ final __callArgument24:Dynamic = proxy; __callArgument24; }), ({ final __callArgument25:Dynamic = geometry; __callArgument25; }));
+    drawGlMeshSubset(({ final __callArgument45:Dynamic = state; __callArgument45; }), ({ final __callArgument46:Dynamic = program; __callArgument46; }), ({ final __callArgument47:Dynamic = proxy; __callArgument47; }), ({ final __callArgument48:Dynamic = geometry; __callArgument48; }));
   } });
 
   public static function registerGlExtendedPbrMaterial(state:GlRenderState):Void {
-    registerGlMeshMaterialRenderer(({ final __callArgument26:Dynamic = state; __callArgument26; }), (cast ExtendedPbrMaterialKind : String), ({ final __callArgument27:Dynamic = extendedPbrGlMeshMaterialRenderer; __callArgument27; }));
+    registerGlMeshMaterialRenderer(({ final __callArgument53:Dynamic = state; __callArgument53; }), (cast ExtendedPbrMaterialKind : String), ({ final __callArgument54:Dynamic = extendedPbrGlMeshMaterialRenderer; __callArgument54; }));
   }
 }

@@ -83,16 +83,16 @@ class MassProperties {
     scratch = (cast MassProperties.acquirePhysics2DMassScratch__massProperties() : Physics2DMassData);
     try {
       try {
-        MassProperties.updateRigidBody2DMassDataWithScratch__massProperties(({ final __callArgument1:Dynamic = body; __callArgument1; }), ({ final __callArgument2:Dynamic = scratch; __callArgument2; }));
+        MassProperties.updateRigidBody2DMassDataWithScratch__massProperties(({ final __callArgument2:Dynamic = body; __callArgument2; }), ({ final __callArgument3:Dynamic = scratch; __callArgument3; }));
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError3:Dynamic) {
+    } catch (__finallyError6:Dynamic) {
       {
-        MassProperties.releasePhysics2DMassScratch__massProperties(({ final __callArgument4:Dynamic = scratch; __callArgument4; }));
+        MassProperties.releasePhysics2DMassScratch__massProperties(({ final __callArgument7:Dynamic = scratch; __callArgument7; }));
       }
-      _Runtime.throwValue(__finallyError3);
+      _Runtime.throwValue(__finallyError6);
     }
     {
-      MassProperties.releasePhysics2DMassScratch__massProperties(({ final __callArgument5:Dynamic = scratch; __callArgument5; }));
+      MassProperties.releasePhysics2DMassScratch__massProperties(({ final __callArgument9:Dynamic = scratch; __callArgument9; }));
     }
   }
 
@@ -106,7 +106,7 @@ class MassProperties {
     weightedX = 0.0;
     weightedY = 0.0;
     for (collider in _Runtime.iterable((cast body : RigidBody2D).colliders)) {
-      computePhysics2DColliderMassData(({ final __callArgument8:Dynamic = collider; __callArgument8; }), ({ final __callArgument9:Dynamic = scratch; __callArgument9; }));
+      computePhysics2DColliderMassData(({ final __callArgument13:Dynamic = collider; __callArgument13; }), ({ final __callArgument14:Dynamic = scratch; __callArgument14; }));
       (mass = cast ((mass + scratch.mass) : Dynamic));
       (weightedX = cast ((weightedX + (scratch.centerX * scratch.mass)) : Dynamic));
       (weightedY = cast ((weightedY + (scratch.centerY * scratch.mass)) : Dynamic));
@@ -120,7 +120,7 @@ class MassProperties {
     }
     inertia = 0.0;
     for (collider in _Runtime.iterable((cast body : RigidBody2D).colliders)) {
-      computePhysics2DColliderMassData(({ final __callArgument12:Dynamic = collider; __callArgument12; }), ({ final __callArgument13:Dynamic = scratch; __callArgument13; }));
+      computePhysics2DColliderMassData(({ final __callArgument19:Dynamic = collider; __callArgument19; }), ({ final __callArgument20:Dynamic = scratch; __callArgument20; }));
       var offsetX:Float = (scratch.centerX - (cast body : RigidBody2D).centerX);
       var offsetY:Float = (scratch.centerY - (cast body : RigidBody2D).centerY);
       (inertia = cast ((inertia + (scratch.inertia + (scratch.mass * ((offsetX * offsetX) + (offsetY * offsetY))))) : Dynamic));

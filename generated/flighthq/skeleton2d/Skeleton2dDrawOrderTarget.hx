@@ -72,7 +72,7 @@ class Skeleton2dDrawOrderTarget {
     if ((cast !_Runtime.strictEquals(track.interpolation, Skeleton2dDrawOrderTarget.STEP_INTERPOLATION__skeleton2dDrawOrderTarget) : Bool)) {
       reportSkeleton2DCoercedInterpolation((cast Skeleton2dDrawOrderTarget.DRAW_ORDER_SUBJECT__skeleton2dDrawOrderTarget : String), (cast track.interpolation : String), (cast Skeleton2dDrawOrderTarget.STEP_INTERPOLATION__skeleton2dDrawOrderTarget : String));
     }
-    (cast clearNodeOrderList : NodeOrderList<NodeTraits>->Void)(({ final __callArgument1:Dynamic = orderList; __callArgument1; }));
+    (cast clearNodeOrderList : NodeOrderList<NodeTraits>->Void)(({ final __callArgument2:Dynamic = orderList; __callArgument2; }));
     base = (keyframe * components);
     count = ((cast ((cast components : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool) ? (cast components : Dynamic) : (cast _Runtime.field(nodes, 'length') : Dynamic));
     {
@@ -80,7 +80,7 @@ class Skeleton2dDrawOrderTarget {
       while ((cast ((cast slot : Float) < (cast count : Float)) : Bool)) {
         var node:Null<Node<NodeTraits>> = flighthq._internal._StaticIndex.readArray(nodes, slot);
         if ((cast ((cast _Runtime.strictEquals(node, null) : Bool) || (cast _Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { slot++; continue; }
-        (cast addNodeOrderListEntry : NodeOrderList<NodeTraits>->Node<NodeTraits>->Float->Void)(({ final __callArgument2:Dynamic = orderList; __callArgument2; }), ({ final __callArgument3:Dynamic = node; __callArgument3; }), (cast _Runtime.getIndex(track.values, (base + slot)) : Float));
+        (cast addNodeOrderListEntry : NodeOrderList<NodeTraits>->Node<NodeTraits>->Float->Void)(({ final __callArgument4:Dynamic = orderList; __callArgument4; }), ({ final __callArgument5:Dynamic = node; __callArgument5; }), (cast _Runtime.getIndex(track.values, (base + slot)) : Float));
         slot++;
       }
     }

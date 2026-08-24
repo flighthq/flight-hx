@@ -26,11 +26,11 @@ class GjkDistance3D {
     var closestZ:Float = cast _Runtime.UNDEFINED;
     var distance:Float = cast _Runtime.UNDEFINED;
     GjkDistance3D.clearCollisionDistance3D__gjkDistance3D(({ final __callArgument0:Dynamic = out; __callArgument0; }));
-    supportA = (cast getCollisionSupport3D(({ final __callArgument1:Dynamic = (cast a : { var kind:String; }).kind; __callArgument1; })) : Null<CollisionSupport3D>);
-    supportB = (cast getCollisionSupport3D(({ final __callArgument2:Dynamic = (cast b : { var kind:String; }).kind; __callArgument2; })) : Null<CollisionSupport3D>);
+    supportA = (cast getCollisionSupport3D(({ final __callArgument2:Dynamic = (cast a : { var kind:String; }).kind; __callArgument2; })) : Null<CollisionSupport3D>);
+    supportB = (cast getCollisionSupport3D(({ final __callArgument4:Dynamic = (cast b : { var kind:String; }).kind; __callArgument4; })) : Null<CollisionSupport3D>);
     if ((cast ((cast _Runtime.strictEquals(supportA, null) : Bool) || (cast _Runtime.strictEquals(supportB, null) : Bool)) : Bool)) { return cast false; }
-    supportA(({ final __callArgument3:Dynamic = a; __callArgument3; }), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument4:Dynamic = GjkDistance3D.scratchSupportA__gjkDistance3D; __callArgument4; }));
-    supportB(({ final __callArgument5:Dynamic = b; __callArgument5; }), (cast -1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument6:Dynamic = GjkDistance3D.scratchSupportB__gjkDistance3D; __callArgument6; }));
+    supportA(({ final __callArgument6:Dynamic = a; __callArgument6; }), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument7:Dynamic = GjkDistance3D.scratchSupportA__gjkDistance3D; __callArgument7; }));
+    supportB(({ final __callArgument10:Dynamic = b; __callArgument10; }), (cast -1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument11:Dynamic = GjkDistance3D.scratchSupportB__gjkDistance3D; __callArgument11; }));
     GjkDistance3D.writeSimplexVertex__gjkDistance3D((cast 0.0 : Float), (cast offsetX : Float), (cast offsetY : Float), (cast offsetZ : Float));
     count = 1.0;
     (GjkDistance3D.reducedCount__gjkDistance3D = cast (1.0 : Dynamic));
@@ -47,8 +47,8 @@ class GjkDistance3D {
           ((cast out : CollisionDistance3D).overlapping = true);
           return cast false;
         }
-        supportA(({ final __callArgument7:Dynamic = a; __callArgument7; }), (cast -closestX : Float), (cast -closestY : Float), (cast -closestZ : Float), ({ final __callArgument8:Dynamic = GjkDistance3D.scratchSupportA__gjkDistance3D; __callArgument8; }));
-        supportB(({ final __callArgument9:Dynamic = b; __callArgument9; }), (cast closestX : Float), (cast closestY : Float), (cast closestZ : Float), ({ final __callArgument10:Dynamic = GjkDistance3D.scratchSupportB__gjkDistance3D; __callArgument10; }));
+        supportA(({ final __callArgument14:Dynamic = a; __callArgument14; }), (cast -closestX : Float), (cast -closestY : Float), (cast -closestZ : Float), ({ final __callArgument15:Dynamic = GjkDistance3D.scratchSupportA__gjkDistance3D; __callArgument15; }));
+        supportB(({ final __callArgument18:Dynamic = b; __callArgument18; }), (cast closestX : Float), (cast closestY : Float), (cast closestZ : Float), ({ final __callArgument19:Dynamic = GjkDistance3D.scratchSupportB__gjkDistance3D; __callArgument19; }));
         var nextX:Float = ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast GjkDistance3D.scratchSupportA__gjkDistance3D : Array<Float>), (cast 0.0 : Float)) + offsetX) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast GjkDistance3D.scratchSupportB__gjkDistance3D : Array<Float>), (cast 0.0 : Float)));
         var nextY:Float = ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast GjkDistance3D.scratchSupportA__gjkDistance3D : Array<Float>), (cast 1.0 : Float)) + offsetY) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast GjkDistance3D.scratchSupportB__gjkDistance3D : Array<Float>), (cast 1.0 : Float)));
         var nextZ:Float = ((flighthq._internal._StaticIndex.readFloatArrayTyped((cast GjkDistance3D.scratchSupportA__gjkDistance3D : Array<Float>), (cast 2.0 : Float)) + offsetZ) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast GjkDistance3D.scratchSupportB__gjkDistance3D : Array<Float>), (cast 2.0 : Float)));
@@ -57,7 +57,7 @@ class GjkDistance3D {
         if ((cast (cast GjkDistance3D.containsSimplexPoint__gjkDistance3D((cast count : Float), (cast nextX : Float), (cast nextY : Float), (cast nextZ : Float)) : Bool) : Bool)) { break; }
         GjkDistance3D.writeSimplexVertex__gjkDistance3D((cast count : Float), (cast offsetX : Float), (cast offsetY : Float), (cast offsetZ : Float));
         (count = cast ((count + 1.0) : Dynamic));
-        if ((cast _Runtime.strictEquals((cast GjkDistance3D.reduceSimplex__gjkDistance3D((cast count : Float), ({ final __callArgument11:Dynamic = GjkDistance3D.scratchClosest__gjkDistance3D; __callArgument11; })) : Float), 4.0) : Bool)) {
+        if ((cast _Runtime.strictEquals((cast GjkDistance3D.reduceSimplex__gjkDistance3D((cast count : Float), ({ final __callArgument22:Dynamic = GjkDistance3D.scratchClosest__gjkDistance3D; __callArgument22; })) : Float), 4.0) : Bool)) {
           ((cast out : CollisionDistance3D).overlapping = true);
           return cast false;
         }
@@ -78,7 +78,7 @@ class GjkDistance3D {
     ((cast out : CollisionDistance3D).directionX = (closestX / distance));
     ((cast out : CollisionDistance3D).directionY = (closestY / distance));
     ((cast out : CollisionDistance3D).directionZ = (closestZ / distance));
-    GjkDistance3D.writeWitnessPoints__gjkDistance3D(({ final __callArgument12:Dynamic = out; __callArgument12; }));
+    GjkDistance3D.writeWitnessPoints__gjkDistance3D(({ final __callArgument24:Dynamic = out; __callArgument24; }));
     return cast true;
     return cast null;
   }
@@ -184,9 +184,9 @@ class GjkDistance3D {
       flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast GjkDistance3D.simplex__gjkDistance3D : Array<Float>), (cast 2.0 : Float)) : Float));
       return cast (cast GjkDistance3D.writeReduction__gjkDistance3D((cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float)) : Float);
     }
-    if ((cast _Runtime.strictEquals(count, 2.0) : Bool)) { return cast (cast GjkDistance3D.reduceSegment__gjkDistance3D(({ final __callArgument13:Dynamic = out; __callArgument13; })) : Float); }
-    if ((cast _Runtime.strictEquals(count, 3.0) : Bool)) { return cast (cast GjkDistance3D.reduceTriangle__gjkDistance3D((cast 0.0 : Float), (cast 1.0 : Float), (cast 2.0 : Float), ({ final __callArgument14:Dynamic = out; __callArgument14; })) : Float); }
-    return cast (cast GjkDistance3D.reduceTetrahedron__gjkDistance3D(({ final __callArgument15:Dynamic = out; __callArgument15; })) : Float);
+    if ((cast _Runtime.strictEquals(count, 2.0) : Bool)) { return cast (cast GjkDistance3D.reduceSegment__gjkDistance3D(({ final __callArgument26:Dynamic = out; __callArgument26; })) : Float); }
+    if ((cast _Runtime.strictEquals(count, 3.0) : Bool)) { return cast (cast GjkDistance3D.reduceTriangle__gjkDistance3D((cast 0.0 : Float), (cast 1.0 : Float), (cast 2.0 : Float), ({ final __callArgument28:Dynamic = out; __callArgument28; })) : Float); }
+    return cast (cast GjkDistance3D.reduceTetrahedron__gjkDistance3D(({ final __callArgument30:Dynamic = out; __callArgument30; })) : Float);
     return cast null;
   }
 
@@ -246,7 +246,7 @@ class GjkDistance3D {
         var opposite:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast GjkDistance3D.TETRAHEDRON_FACES__gjkDistance3D : Array<Float>), (cast ((face * 4.0) + 3.0) : Float));
         if ((cast !(cast (cast GjkDistance3D.isOriginOutsideFace__gjkDistance3D((cast i0 : Float), (cast i1 : Float), (cast i2 : Float), (cast opposite : Float)) : Bool) : Bool) : Bool)) { (face = cast ((face + 1.0) : Dynamic)); continue; }
         (outside = cast (true : Dynamic));
-        (cast GjkDistance3D.reduceTriangle__gjkDistance3D((cast i0 : Float), (cast i1 : Float), (cast i2 : Float), ({ final __callArgument16:Dynamic = GjkDistance3D.scratchFaceClosest__gjkDistance3D; __callArgument16; })) : Float);
+        (cast GjkDistance3D.reduceTriangle__gjkDistance3D((cast i0 : Float), (cast i1 : Float), (cast i2 : Float), ({ final __callArgument32:Dynamic = GjkDistance3D.scratchFaceClosest__gjkDistance3D; __callArgument32; })) : Float);
         var distanceSquared:Float = (((flighthq._internal._StaticIndex.readFloatArrayTyped((cast GjkDistance3D.scratchFaceClosest__gjkDistance3D : Array<Float>), (cast 0.0 : Float)) * flighthq._internal._StaticIndex.readFloatArrayTyped((cast GjkDistance3D.scratchFaceClosest__gjkDistance3D : Array<Float>), (cast 0.0 : Float))) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast GjkDistance3D.scratchFaceClosest__gjkDistance3D : Array<Float>), (cast 1.0 : Float)) * flighthq._internal._StaticIndex.readFloatArrayTyped((cast GjkDistance3D.scratchFaceClosest__gjkDistance3D : Array<Float>), (cast 1.0 : Float)))) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast GjkDistance3D.scratchFaceClosest__gjkDistance3D : Array<Float>), (cast 2.0 : Float)) * flighthq._internal._StaticIndex.readFloatArrayTyped((cast GjkDistance3D.scratchFaceClosest__gjkDistance3D : Array<Float>), (cast 2.0 : Float))));
         if ((cast ((cast distanceSquared : Float) >= (cast bestDistanceSquared : Float)) : Bool)) { (face = cast ((face + 1.0) : Dynamic)); continue; }
         (bestDistanceSquared = cast (distanceSquared : Dynamic));
@@ -324,30 +324,30 @@ class GjkDistance3D {
     acZ = (cZ - aZ);
     d1 = (((abX * -aX) + (abY * -aY)) + (abZ * -aZ));
     d2 = (((acX * -aX) + (acY * -aY)) + (acZ * -aZ));
-    if ((cast ((cast ((cast d1 : Float) <= (cast 0.0 : Float)) : Bool) && (cast ((cast d2 : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast (cast GjkDistance3D.writeTriangleVertex__gjkDistance3D((cast aX : Float), (cast aY : Float), (cast aZ : Float), (cast i0 : Float), ({ final __callArgument17:Dynamic = out; __callArgument17; })) : Float); }
+    if ((cast ((cast ((cast d1 : Float) <= (cast 0.0 : Float)) : Bool) && (cast ((cast d2 : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast (cast GjkDistance3D.writeTriangleVertex__gjkDistance3D((cast aX : Float), (cast aY : Float), (cast aZ : Float), (cast i0 : Float), ({ final __callArgument34:Dynamic = out; __callArgument34; })) : Float); }
     d3 = (((abX * -bX) + (abY * -bY)) + (abZ * -bZ));
     d4 = (((acX * -bX) + (acY * -bY)) + (acZ * -bZ));
-    if ((cast ((cast ((cast d3 : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast d4 : Float) <= (cast d3 : Float)) : Bool)) : Bool)) { return cast (cast GjkDistance3D.writeTriangleVertex__gjkDistance3D((cast bX : Float), (cast bY : Float), (cast bZ : Float), (cast i1 : Float), ({ final __callArgument18:Dynamic = out; __callArgument18; })) : Float); }
+    if ((cast ((cast ((cast d3 : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast d4 : Float) <= (cast d3 : Float)) : Bool)) : Bool)) { return cast (cast GjkDistance3D.writeTriangleVertex__gjkDistance3D((cast bX : Float), (cast bY : Float), (cast bZ : Float), (cast i1 : Float), ({ final __callArgument36:Dynamic = out; __callArgument36; })) : Float); }
     d5 = (((abX * -cX) + (abY * -cY)) + (abZ * -cZ));
     d6 = (((acX * -cX) + (acY * -cY)) + (acZ * -cZ));
-    if ((cast ((cast ((cast d6 : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast d5 : Float) <= (cast d6 : Float)) : Bool)) : Bool)) { return cast (cast GjkDistance3D.writeTriangleVertex__gjkDistance3D((cast cX : Float), (cast cY : Float), (cast cZ : Float), (cast i2 : Float), ({ final __callArgument19:Dynamic = out; __callArgument19; })) : Float); }
+    if ((cast ((cast ((cast d6 : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast d5 : Float) <= (cast d6 : Float)) : Bool)) : Bool)) { return cast (cast GjkDistance3D.writeTriangleVertex__gjkDistance3D((cast cX : Float), (cast cY : Float), (cast cZ : Float), (cast i2 : Float), ({ final __callArgument38:Dynamic = out; __callArgument38; })) : Float); }
     vc = ((d1 * d4) - (d3 * d2));
     if ((cast ((cast ((cast ((cast vc : Float) <= (cast 0.0 : Float)) : Bool) && (cast ((cast d1 : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast d3 : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
       var t:Float = (d1 / (d1 - d3));
-      return cast (cast GjkDistance3D.writeTriangleEdge__gjkDistance3D((cast aX : Float), (cast aY : Float), (cast aZ : Float), (cast abX : Float), (cast abY : Float), (cast abZ : Float), (cast t : Float), (cast i0 : Float), (cast i1 : Float), ({ final __callArgument20:Dynamic = out; __callArgument20; })) : Float);
+      return cast (cast GjkDistance3D.writeTriangleEdge__gjkDistance3D((cast aX : Float), (cast aY : Float), (cast aZ : Float), (cast abX : Float), (cast abY : Float), (cast abZ : Float), (cast t : Float), (cast i0 : Float), (cast i1 : Float), ({ final __callArgument40:Dynamic = out; __callArgument40; })) : Float);
     }
     vb = ((d5 * d2) - (d1 * d6));
     if ((cast ((cast ((cast ((cast vb : Float) <= (cast 0.0 : Float)) : Bool) && (cast ((cast d2 : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast d6 : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
       var t:Float = (d2 / (d2 - d6));
-      return cast (cast GjkDistance3D.writeTriangleEdge__gjkDistance3D((cast aX : Float), (cast aY : Float), (cast aZ : Float), (cast acX : Float), (cast acY : Float), (cast acZ : Float), (cast t : Float), (cast i0 : Float), (cast i2 : Float), ({ final __callArgument21:Dynamic = out; __callArgument21; })) : Float);
+      return cast (cast GjkDistance3D.writeTriangleEdge__gjkDistance3D((cast aX : Float), (cast aY : Float), (cast aZ : Float), (cast acX : Float), (cast acY : Float), (cast acZ : Float), (cast t : Float), (cast i0 : Float), (cast i2 : Float), ({ final __callArgument42:Dynamic = out; __callArgument42; })) : Float);
     }
     va = ((d3 * d6) - (d5 * d4));
     if ((cast ((cast ((cast ((cast va : Float) <= (cast 0.0 : Float)) : Bool) && (cast ((cast (d4 - d3) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast (d5 - d6) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) {
       var t:Float = ((d4 - d3) / ((d4 - d3) + (d5 - d6)));
-      return cast (cast GjkDistance3D.writeTriangleEdge__gjkDistance3D((cast bX : Float), (cast bY : Float), (cast bZ : Float), (cast (cX - bX) : Float), (cast (cY - bY) : Float), (cast (cZ - bZ) : Float), (cast t : Float), (cast i1 : Float), (cast i2 : Float), ({ final __callArgument22:Dynamic = out; __callArgument22; })) : Float);
+      return cast (cast GjkDistance3D.writeTriangleEdge__gjkDistance3D((cast bX : Float), (cast bY : Float), (cast bZ : Float), (cast (cX - bX) : Float), (cast (cY - bY) : Float), (cast (cZ - bZ) : Float), (cast t : Float), (cast i1 : Float), (cast i2 : Float), ({ final __callArgument44:Dynamic = out; __callArgument44; })) : Float);
     }
     denominator = ((va + vb) + vc);
-    if ((cast !(cast _Runtime.compare(denominator, 0.0, '>') : Bool) : Bool)) { return cast (cast GjkDistance3D.writeTriangleVertex__gjkDistance3D((cast aX : Float), (cast aY : Float), (cast aZ : Float), (cast i0 : Float), ({ final __callArgument23:Dynamic = out; __callArgument23; })) : Float); }
+    if ((cast !(cast _Runtime.compare(denominator, 0.0, '>') : Bool) : Bool)) { return cast (cast GjkDistance3D.writeTriangleVertex__gjkDistance3D((cast aX : Float), (cast aY : Float), (cast aZ : Float), (cast i0 : Float), ({ final __callArgument46:Dynamic = out; __callArgument46; })) : Float); }
     v = (vb / denominator);
     w = (vc / denominator);
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast ((aX + (abX * v)) + (acX * w)) : Float));

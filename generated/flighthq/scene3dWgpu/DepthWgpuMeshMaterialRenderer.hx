@@ -39,21 +39,21 @@ class DepthWgpuMeshMaterialRenderer {
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     depth = (cast material : Null<DepthMaterial>);
     format = _Runtime.coalesce(stateRuntime.currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
-    pipeline = (cast ensureWgpuDebugPipeline(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = { hasNormalMap: false, mode: 'depth' }; __callArgument2; }), (cast format : String), (cast _Runtime.coalesce(({ final __typedStruct3 = depth; __typedStruct3 == null ? _Runtime.UNDEFINED : (cast __typedStruct3 : { var doubleSided:Bool; }).doubleSided; }), function():Dynamic return cast false) : Bool)) : WgpuDebugPipeline);
-    writeWgpuFrameUniform(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = camera; __callArgument5; }), ({ final __callArgument6:Dynamic = _lights; __callArgument6; }));
+    pipeline = (cast ensureWgpuDebugPipeline(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = { hasNormalMap: false, mode: 'depth' }; __callArgument3; }), (cast format : String), (cast _Runtime.coalesce(({ final __typedStruct4 = depth; __typedStruct4 == null ? _Runtime.UNDEFINED : (cast __typedStruct4 : { var doubleSided:Bool; }).doubleSided; }), function():Dynamic return cast false) : Bool)) : WgpuDebugPipeline);
+    writeWgpuFrameUniform(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = camera; __callArgument9; }), ({ final __callArgument10:Dynamic = _lights; __callArgument10; }));
     if ((cast _Runtime.strictEquals(depth, null) : Bool)) {
-      (group = cast ((cast bindWgpuDebugSurface(({ final __callArgument7:Dynamic = state; __callArgument7; }), ({ final __callArgument8:Dynamic = pipeline; __callArgument8; }), ({ final __callArgument9:Dynamic = DepthWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__depthWgpuMeshMaterialRenderer; __callArgument9; }), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (group = cast ((cast bindWgpuDebugSurface(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = pipeline; __callArgument15; }), ({ final __callArgument16:Dynamic = DepthWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__depthWgpuMeshMaterialRenderer; __callArgument16; }), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     } else {
-      (group = cast ((cast bindWgpuDebugSurface(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = pipeline; __callArgument11; }), ({ final __callArgument12:Dynamic = depth; __callArgument12; }), (cast (cast depth : { var near:Float; }).near : Float), (cast (cast depth : { var far:Float; }).far : Float), (cast 1.0 : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (group = cast ((cast bindWgpuDebugSurface(({ final __callArgument20:Dynamic = state; __callArgument20; }), ({ final __callArgument21:Dynamic = pipeline; __callArgument21; }), ({ final __callArgument22:Dynamic = depth; __callArgument22; }), (cast (cast depth : { var near:Float; }).near : Float), (cast (cast depth : { var far:Float; }).far : Float), (cast 1.0 : Float)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
     }
-    beginWgpuMeshDraw(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = pipeline; __callArgument14; }));
+    beginWgpuMeshDraw(({ final __callArgument26:Dynamic = state; __callArgument26; }), ({ final __callArgument27:Dynamic = pipeline; __callArgument27; }));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
-    drawWgpuMeshSubset(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = proxy; __callArgument16; }), ({ final __callArgument17:Dynamic = geometry; __callArgument17; }));
+    drawWgpuMeshSubset(({ final __callArgument30:Dynamic = state; __callArgument30; }), ({ final __callArgument31:Dynamic = proxy; __callArgument31; }), ({ final __callArgument32:Dynamic = geometry; __callArgument32; }));
   } });
 
   public static function registerWgpuDepthMaterial(state:WgpuRenderState):Void {
-    registerWgpuMeshMaterialRenderer(({ final __callArgument18:Dynamic = state; __callArgument18; }), (cast DepthMaterialKind : String), ({ final __callArgument19:Dynamic = depthWgpuMeshMaterialRenderer; __callArgument19; }));
+    registerWgpuMeshMaterialRenderer(({ final __callArgument36:Dynamic = state; __callArgument36; }), (cast DepthMaterialKind : String), ({ final __callArgument37:Dynamic = depthWgpuMeshMaterialRenderer; __callArgument37; }));
   }
 
   public static final FALLBACK_MATERIAL__depthWgpuMeshMaterialRenderer:DepthMaterial = (cast {  } : DepthMaterial);

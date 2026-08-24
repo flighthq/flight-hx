@@ -65,11 +65,11 @@ class RenderState {
 
   public static function destroyRenderState(state:flighthq.types.RenderState):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getRenderStateRuntime(({ final __callArgument12:Dynamic = state; __callArgument12; })) : RenderStateRuntime);
+    runtime = (cast getRenderStateRuntime(({ final __callArgument24:Dynamic = state; __callArgument24; })) : RenderStateRuntime);
     for (source in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(runtime.renderProxySources)]))) {
-      RenderState.disposeRenderProxyForShutdown__renderState(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = source; __callArgument16; }));
+      RenderState.disposeRenderProxyForShutdown__renderState(({ final __callArgument28:Dynamic = state; __callArgument28; }), ({ final __callArgument29:Dynamic = source; __callArgument29; }));
     }
-    ({ final __optionalOwner18 = runtime.registryMiss; if (__optionalOwner18 != null) { final __optionalCall17 = (cast __optionalOwner18 : { var clear:Void->Void; }).clear; if (__optionalCall17 != null) __optionalCall17(); } });
+    ({ final __optionalOwner33 = runtime.registryMiss; if (__optionalOwner33 != null) { final __optionalCall32 = (cast __optionalOwner33 : { var clear:Void->Void; }).clear; if (__optionalCall32 != null) __optionalCall32(); } });
     (runtime.registryMiss = cast (null : Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>));
     ((cast runtime.registries : { @:optional var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>; }).effectPaddingResolvers = cast (_Runtime.field(_Runtime, 'UNDEFINED') : Null<KeyedTable<RenderEffectPaddingResolver>>));
     _Runtime.setLength(runtime.tempStack, 0.0);
@@ -78,8 +78,8 @@ class RenderState {
   @:noCompletion
   public static function getColorAdjustmentUnsupportedGuard(state:flighthq.types.RenderState):Null<ColorAdjustmentUnsupportedGuard> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:ColorAdjustmentUnsupportedGuard; }>> = cast _Runtime.UNDEFINED;
-    entry = ({ final __structural20 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument19:Dynamic = state; __callArgument19; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { @:optional var colorAdjustmentUnsupportedGuard:Null<SlotTable<ColorAdjustmentUnsupportedGuard>>; }).colorAdjustmentUnsupportedGuard; __structural20 == null ? _Runtime.UNDEFINED : (cast __structural20 : { var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:ColorAdjustmentUnsupportedGuard; }>>; }).entry; });
-    return cast ((cast _Runtime.strictEquals(({ final __structural21 = entry; __structural21 == null ? _Runtime.UNDEFINED : (cast __structural21 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:ColorAdjustmentUnsupportedGuard; }).value : Dynamic) : (cast null : Dynamic));
+    entry = ({ final __structural36 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument34:Dynamic = state; __callArgument34; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { @:optional var colorAdjustmentUnsupportedGuard:Null<SlotTable<ColorAdjustmentUnsupportedGuard>>; }).colorAdjustmentUnsupportedGuard; __structural36 == null ? _Runtime.UNDEFINED : (cast __structural36 : { var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:ColorAdjustmentUnsupportedGuard; }>>; }).entry; });
+    return cast ((cast _Runtime.strictEquals(({ final __structural37 = entry; __structural37 == null ? _Runtime.UNDEFINED : (cast __structural37 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:ColorAdjustmentUnsupportedGuard; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
@@ -92,10 +92,10 @@ class RenderState {
   public static function disposeRenderProxyForShutdown__renderState(state:flighthq.types.RenderState, source:Renderable):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var proxy:Null<RenderProxy> = cast _Runtime.UNDEFINED;
-    runtime = (cast getRenderStateRuntime(({ final __callArgument22:Dynamic = state; __callArgument22; })) : RenderStateRuntime);
+    runtime = (cast getRenderStateRuntime(({ final __callArgument38:Dynamic = state; __callArgument38; })) : RenderStateRuntime);
     proxy = ((cast runtime.renderProxyMap : flighthq._internal._WeakMap<Renderable, RenderProxy>).get(source));
-    if ((cast ((cast !_Runtime.strictEquals(({ final __typedStruct23 = proxy; __typedStruct23 == null ? _Runtime.UNDEFINED : (cast __typedStruct23 : { var rendererData:Null<RendererData>; }).rendererData; }), null) : Bool) && (cast !_Runtime.strictEquals(({ final __typedStruct24 = proxy; __typedStruct24 == null ? _Runtime.UNDEFINED : (cast __typedStruct24 : { var rendererData:Null<RendererData>; }).rendererData; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
-      ({ final __optionalOwner26 = (cast proxy : { var renderer:Null<Renderer>; }).renderer; if (__optionalOwner26 != null) { final __optionalCall25 = (cast __optionalOwner26 : { @:optional var destroyData:Null<flighthq.types.RenderState->RendererData->Void>; }).destroyData; if (__optionalCall25 != null) __optionalCall25(state, (cast proxy : { var rendererData:Null<RendererData>; }).rendererData); } });
+    if ((cast ((cast !_Runtime.strictEquals(({ final __typedStruct40 = proxy; __typedStruct40 == null ? _Runtime.UNDEFINED : (cast __typedStruct40 : { var rendererData:Null<RendererData>; }).rendererData; }), null) : Bool) && (cast !_Runtime.strictEquals(({ final __typedStruct41 = proxy; __typedStruct41 == null ? _Runtime.UNDEFINED : (cast __typedStruct41 : { var rendererData:Null<RendererData>; }).rendererData; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
+      ({ final __optionalOwner43 = (cast proxy : { var renderer:Null<Renderer>; }).renderer; if (__optionalOwner43 != null) { final __optionalCall42 = (cast __optionalOwner43 : { @:optional var destroyData:Null<flighthq.types.RenderState->RendererData->Void>; }).destroyData; if (__optionalCall42 != null) __optionalCall42(state, (cast proxy : { var rendererData:Null<RendererData>; }).rendererData); } });
     }
     ((cast runtime.renderProxyMap : flighthq._internal._WeakMap<Renderable, RenderProxy>).delete_(source));
     ((cast runtime.renderProxySources : flighthq._internal._Set<Renderable>).delete_(source));

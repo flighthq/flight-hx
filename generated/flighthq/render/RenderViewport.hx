@@ -49,7 +49,7 @@ class RenderViewport {
     if ((cast !(cast (cast computeRenderProxyWorldBounds(({ final __callArgument0:Dynamic = RenderViewport._scratchBounds__renderViewport; __callArgument0; }), (cast source : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast true; }
     bounds = RenderViewport._scratchBounds__renderViewport;
     if ((cast !_Runtime.looseEquals(renderTransform2D, null) : Bool)) {
-      matrixTransformRectangle(({ final __callArgument1:Dynamic = RenderViewport._scratchTransformed__renderViewport; __callArgument1; }), ({ final __callArgument2:Dynamic = renderTransform2D; __callArgument2; }), ({ final __callArgument3:Dynamic = RenderViewport._scratchBounds__renderViewport; __callArgument3; }));
+      matrixTransformRectangle(({ final __callArgument2:Dynamic = RenderViewport._scratchTransformed__renderViewport; __callArgument2; }), ({ final __callArgument3:Dynamic = renderTransform2D; __callArgument3; }), ({ final __callArgument4:Dynamic = RenderViewport._scratchBounds__renderViewport; __callArgument4; }));
       (bounds = cast (RenderViewport._scratchTransformed__renderViewport : Dynamic));
     }
     objMinX = bounds.x;
@@ -66,7 +66,7 @@ class RenderViewport {
 
   @:noCompletion
   public static function isRenderProxyInViewport(proxy:RenderProxy2D, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
-    return cast (cast isRenderableInViewport((cast _Runtime.field(proxy, 'source') : flighthq._internal._Any), ({ final __callArgument4:Dynamic = viewport; __callArgument4; }), ({ final __callArgument5:Dynamic = renderTransform2D; __callArgument5; })) : Bool);
+    return cast (cast isRenderableInViewport((cast _Runtime.field(proxy, 'source') : flighthq._internal._Any), ({ final __callArgument8:Dynamic = viewport; __callArgument8; }), ({ final __callArgument9:Dynamic = renderTransform2D; __callArgument9; })) : Bool);
     return cast null;
   }
 
@@ -75,7 +75,7 @@ class RenderViewport {
     return cast null;
   }
 
-  public static final _scratchBounds__renderViewport:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle);
+  public static final _scratchBounds__renderViewport:Rectangle = (cast (#if js _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) #else createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Rectangle);
 
-  public static final _scratchTransformed__renderViewport:Rectangle = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle);
+  public static final _scratchTransformed__renderViewport:Rectangle = (cast (#if js _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) #else createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Rectangle);
 }

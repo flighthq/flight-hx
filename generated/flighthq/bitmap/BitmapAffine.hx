@@ -69,10 +69,10 @@ class BitmapAffine {
     if ((cast _Runtime.strictEquals(sampleMode, 'nearest') : Bool)) {
       var ix:Float = HxMath.round(sx);
       var iy:Float = HxMath.round(sy);
-      var cx:Null<Float> = (cast BitmapAffine.resolveEdge__bitmapAffine((cast ix : Float), (cast sw : Float), ({ final __callArgument4:Dynamic = edgeMode; __callArgument4; })) : Null<Float>);
-      var cy:Null<Float> = (cast BitmapAffine.resolveEdge__bitmapAffine((cast iy : Float), (cast sh : Float), ({ final __callArgument5:Dynamic = edgeMode; __callArgument5; })) : Null<Float>);
+      var cx:Null<Float> = (cast BitmapAffine.resolveEdge__bitmapAffine((cast ix : Float), (cast sw : Float), ({ final __callArgument8:Dynamic = edgeMode; __callArgument8; })) : Null<Float>);
+      var cy:Null<Float> = (cast BitmapAffine.resolveEdge__bitmapAffine((cast iy : Float), (cast sh : Float), ({ final __callArgument10:Dynamic = edgeMode; __callArgument10; })) : Null<Float>);
       if ((cast ((cast _Runtime.strictEquals(cx, null) : Bool) || (cast _Runtime.strictEquals(cy, null) : Bool)) : Bool)) {
-        BitmapAffine.writeTransparent__bitmapAffine(({ final __callArgument6:Dynamic = dd; __callArgument6; }), (cast di : Float));
+        BitmapAffine.writeTransparent__bitmapAffine(({ final __callArgument12:Dynamic = dd; __callArgument12; }), (cast di : Float));
         return;
       }
       var si:Float = ((((originY + cy) * sStride) + (originX + cx)) * 4.0);
@@ -83,10 +83,10 @@ class BitmapAffine {
       return;
     }
     if ((cast _Runtime.strictEquals(sampleMode, 'bicubic') : Bool)) {
-      BitmapAffine.sampleBicubic__bitmapAffine(({ final __callArgument7:Dynamic = dd; __callArgument7; }), (cast di : Float), ({ final __callArgument8:Dynamic = sd; __callArgument8; }), (cast sw : Float), (cast sh : Float), (cast originX : Float), (cast originY : Float), (cast sStride : Float), (cast sHeight : Float), (cast sx : Float), (cast sy : Float), ({ final __callArgument9:Dynamic = edgeMode; __callArgument9; }));
+      BitmapAffine.sampleBicubic__bitmapAffine(({ final __callArgument14:Dynamic = dd; __callArgument14; }), (cast di : Float), ({ final __callArgument15:Dynamic = sd; __callArgument15; }), (cast sw : Float), (cast sh : Float), (cast originX : Float), (cast originY : Float), (cast sStride : Float), (cast sHeight : Float), (cast sx : Float), (cast sy : Float), ({ final __callArgument16:Dynamic = edgeMode; __callArgument16; }));
       return;
     }
-    BitmapAffine.sampleBilinear__bitmapAffine(({ final __callArgument10:Dynamic = dd; __callArgument10; }), (cast di : Float), ({ final __callArgument11:Dynamic = sd; __callArgument11; }), (cast sw : Float), (cast sh : Float), (cast originX : Float), (cast originY : Float), (cast sStride : Float), (cast sHeight : Float), (cast sx : Float), (cast sy : Float), ({ final __callArgument12:Dynamic = edgeMode; __callArgument12; }));
+    BitmapAffine.sampleBilinear__bitmapAffine(({ final __callArgument20:Dynamic = dd; __callArgument20; }), (cast di : Float), ({ final __callArgument21:Dynamic = sd; __callArgument21; }), (cast sw : Float), (cast sh : Float), (cast originX : Float), (cast originY : Float), (cast sStride : Float), (cast sHeight : Float), (cast sx : Float), (cast sy : Float), ({ final __callArgument22:Dynamic = edgeMode; __callArgument22; }));
   }
 
   public static function sampleBilinear__bitmapAffine(dd:flighthq._internal._UInt8ClampedArray, di:Float, sd:flighthq._internal._UInt8ClampedArray, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, _sHeight:Float, sx:Float, sy:Float, edgeMode:BitmapEdgeMode):Void {
@@ -102,10 +102,10 @@ class BitmapAffine {
     y0 = HxMath.floor(sy);
     tx = (sx - x0);
     ty = (sy - y0);
-    cx00 = (cast BitmapAffine.resolveEdge__bitmapAffine((cast x0 : Float), (cast sw : Float), ({ final __callArgument13:Dynamic = edgeMode; __callArgument13; })) : Null<Float>);
-    cx10 = (cast BitmapAffine.resolveEdge__bitmapAffine((cast (x0 + 1.0) : Float), (cast sw : Float), ({ final __callArgument14:Dynamic = edgeMode; __callArgument14; })) : Null<Float>);
-    cy00 = (cast BitmapAffine.resolveEdge__bitmapAffine((cast y0 : Float), (cast sh : Float), ({ final __callArgument15:Dynamic = edgeMode; __callArgument15; })) : Null<Float>);
-    cy10 = (cast BitmapAffine.resolveEdge__bitmapAffine((cast (y0 + 1.0) : Float), (cast sh : Float), ({ final __callArgument16:Dynamic = edgeMode; __callArgument16; })) : Null<Float>);
+    cx00 = (cast BitmapAffine.resolveEdge__bitmapAffine((cast x0 : Float), (cast sw : Float), ({ final __callArgument26:Dynamic = edgeMode; __callArgument26; })) : Null<Float>);
+    cx10 = (cast BitmapAffine.resolveEdge__bitmapAffine((cast (x0 + 1.0) : Float), (cast sw : Float), ({ final __callArgument28:Dynamic = edgeMode; __callArgument28; })) : Null<Float>);
+    cy00 = (cast BitmapAffine.resolveEdge__bitmapAffine((cast y0 : Float), (cast sh : Float), ({ final __callArgument30:Dynamic = edgeMode; __callArgument30; })) : Null<Float>);
+    cy10 = (cast BitmapAffine.resolveEdge__bitmapAffine((cast (y0 + 1.0) : Float), (cast sh : Float), ({ final __callArgument32:Dynamic = edgeMode; __callArgument32; })) : Null<Float>);
     {
       var c:Float = 0.0;
       while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
@@ -138,12 +138,12 @@ class BitmapAffine {
           var m:Float = -1.0;
           while ((cast ((cast m : Float) <= (cast 2.0 : Float)) : Bool)) {
             var wy:Float = (cast BitmapAffine.catmullRomWeight__bitmapAffine((cast (ty - m) : Float)) : Float);
-            var ry:Null<Float> = (cast BitmapAffine.resolveEdge__bitmapAffine((cast (y1 + m) : Float), (cast sh : Float), ({ final __callArgument17:Dynamic = edgeMode; __callArgument17; })) : Null<Float>);
+            var ry:Null<Float> = (cast BitmapAffine.resolveEdge__bitmapAffine((cast (y1 + m) : Float), (cast sh : Float), ({ final __callArgument34:Dynamic = edgeMode; __callArgument34; })) : Null<Float>);
             {
               var n:Float = -1.0;
               while ((cast ((cast n : Float) <= (cast 2.0 : Float)) : Bool)) {
                 var wx:Float = (cast BitmapAffine.catmullRomWeight__bitmapAffine((cast (tx - n) : Float)) : Float);
-                var rx:Null<Float> = (cast BitmapAffine.resolveEdge__bitmapAffine((cast (x1 + n) : Float), (cast sw : Float), ({ final __callArgument18:Dynamic = edgeMode; __callArgument18; })) : Null<Float>);
+                var rx:Null<Float> = (cast BitmapAffine.resolveEdge__bitmapAffine((cast (x1 + n) : Float), (cast sw : Float), ({ final __callArgument36:Dynamic = edgeMode; __callArgument36; })) : Null<Float>);
                 var v:Float = ((cast ((cast !_Runtime.strictEquals(rx, null) : Bool) && (cast !_Runtime.strictEquals(ry, null) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast ((((((originY + ry) * sStride) + originX) + rx) * 4.0) + c) : Float)) : Dynamic) : (cast 0.0 : Dynamic));
                 (sum = cast ((sum + ((v * wy) * wx)) : Dynamic));
                 n++;

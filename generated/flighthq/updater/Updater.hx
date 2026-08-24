@@ -33,38 +33,38 @@ class Updater {
   public static function attachAppUpdater(updater:AppUpdater):Void {
     var backend:UpdaterBackend = cast _Runtime.UNDEFINED;
     var unsubscribes:Array<Void->Void> = cast _Runtime.UNDEFINED;
-    detachAppUpdater(({ final __callArgument1:Dynamic = updater; __callArgument1; }));
+    detachAppUpdater(({ final __callArgument2:Dynamic = updater; __callArgument2; }));
     backend = (cast getUpdaterBackend() : UpdaterBackend);
-    unsubscribes = (cast cast ([(cast backend : UpdaterBackend).subscribeChecking(({ final __callArgument4:Dynamic = function():Void {
-      Updater._setState__updater(({ final __callArgument2:Dynamic = updater; __callArgument2; }), ({ final __callArgument3:Dynamic = { phase: 'Checking', info: null, progress: null, error: null }; __callArgument3; }));
+    unsubscribes = (cast cast ([(cast backend : UpdaterBackend).subscribeChecking(({ final __callArgument8:Dynamic = function():Void {
+      Updater._setState__updater(({ final __callArgument4:Dynamic = updater; __callArgument4; }), ({ final __callArgument5:Dynamic = { phase: 'Checking', info: null, progress: null, error: null }; __callArgument5; }));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onChecking]]), 1);
-    }; __callArgument4; })), (cast backend : UpdaterBackend).subscribeUpdateAvailable(({ final __callArgument7:Dynamic = function(info:UpdateInfo):Void {
-      Updater._setState__updater(({ final __callArgument5:Dynamic = updater; __callArgument5; }), ({ final __callArgument6:Dynamic = { phase: 'UpdateAvailable', info: info, progress: null, error: null }; __callArgument6; }));
+    }; __callArgument8; })), (cast backend : UpdaterBackend).subscribeUpdateAvailable(({ final __callArgument13:Dynamic = function(info:UpdateInfo):Void {
+      Updater._setState__updater(({ final __callArgument9:Dynamic = updater; __callArgument9; }), ({ final __callArgument10:Dynamic = { phase: 'UpdateAvailable', info: info, progress: null, error: null }; __callArgument10; }));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onUpdateAvailable], [info]]), 1);
-    }; __callArgument7; })), (cast backend : UpdaterBackend).subscribeUpdateNotAvailable(({ final __callArgument10:Dynamic = function():Void {
-      Updater._setState__updater(({ final __callArgument8:Dynamic = updater; __callArgument8; }), ({ final __callArgument9:Dynamic = function(prev:UpdaterState):{ var phase:String; var info:Null<UpdateInfo>; var progress:Null<UpdateProgress>; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Idle' }]); __callArgument9; }));
+    }; __callArgument13; })), (cast backend : UpdaterBackend).subscribeUpdateNotAvailable(({ final __callArgument18:Dynamic = function():Void {
+      Updater._setState__updater(({ final __callArgument14:Dynamic = updater; __callArgument14; }), ({ final __callArgument15:Dynamic = function(prev:UpdaterState):{ var phase:String; var info:Null<UpdateInfo>; var progress:Null<UpdateProgress>; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Idle' }]); __callArgument15; }));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onUpdateNotAvailable]]), 1);
-    }; __callArgument10; })), (cast backend : UpdaterBackend).subscribeDownloadProgress((cast function(progress:UpdateProgress):Void {
-      Updater._setState__updater(({ final __callArgument11:Dynamic = updater; __callArgument11; }), ({ final __callArgument12:Dynamic = function(prev:UpdaterState):{ var phase:String; var progress:UpdateProgress; var info:Null<UpdateInfo>; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Downloading' }, { progress: progress }]); __callArgument12; }));
+    }; __callArgument18; })), (cast backend : UpdaterBackend).subscribeDownloadProgress((cast function(progress:UpdateProgress):Void {
+      Updater._setState__updater(({ final __callArgument19:Dynamic = updater; __callArgument19; }), ({ final __callArgument20:Dynamic = function(prev:UpdaterState):{ var phase:String; var progress:UpdateProgress; var info:Null<UpdateInfo>; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Downloading' }, { progress: progress }]); __callArgument20; }));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onDownloadProgress], [progress]]), 1);
-    } : Dynamic)), (cast backend : UpdaterBackend).subscribeUpdateDownloaded(({ final __callArgument15:Dynamic = function(info:UpdateInfo):Void {
-      Updater._setState__updater(({ final __callArgument13:Dynamic = updater; __callArgument13; }), ({ final __callArgument14:Dynamic = function(prev:UpdaterState):{ var phase:String; var info:UpdateInfo; var progress:flighthq._internal._Any; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Downloaded' }, { info: info }, { progress: null }]); __callArgument14; }));
+    } : Dynamic)), (cast backend : UpdaterBackend).subscribeUpdateDownloaded(({ final __callArgument27:Dynamic = function(info:UpdateInfo):Void {
+      Updater._setState__updater(({ final __callArgument23:Dynamic = updater; __callArgument23; }), ({ final __callArgument24:Dynamic = function(prev:UpdaterState):{ var phase:String; var info:UpdateInfo; var progress:flighthq._internal._Any; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Downloaded' }, { info: info }, { progress: null }]); __callArgument24; }));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onUpdateDownloaded], [info]]), 1);
-    }; __callArgument15; })), (cast backend : UpdaterBackend).subscribeError((cast function(error:UpdaterError):Void {
-      Updater._setState__updater(({ final __callArgument16:Dynamic = updater; __callArgument16; }), ({ final __callArgument17:Dynamic = function(prev:UpdaterState):{ var phase:String; var error:UpdaterError; var info:Null<UpdateInfo>; var progress:Null<UpdateProgress>; } return _Runtime.mergeObjects([prev, { phase: 'Error' }, { error: error }]); __callArgument17; }));
+    }; __callArgument27; })), (cast backend : UpdaterBackend).subscribeError((cast function(error:UpdaterError):Void {
+      Updater._setState__updater(({ final __callArgument28:Dynamic = updater; __callArgument28; }), ({ final __callArgument29:Dynamic = function(prev:UpdaterState):{ var phase:String; var error:UpdaterError; var info:Null<UpdateInfo>; var progress:Null<UpdateProgress>; } return _Runtime.mergeObjects([prev, { phase: 'Error' }, { error: error }]); __callArgument29; }));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onError], [error]]), 1);
-    } : Dynamic)), (cast backend : UpdaterBackend).subscribeUpdateCancelled(({ final __callArgument20:Dynamic = function():Void {
-      Updater._setState__updater(({ final __callArgument18:Dynamic = updater; __callArgument18; }), ({ final __callArgument19:Dynamic = function(prev:UpdaterState):{ var phase:String; var info:Null<UpdateInfo>; var progress:Null<UpdateProgress>; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Idle' }]); __callArgument19; }));
+    } : Dynamic)), (cast backend : UpdaterBackend).subscribeUpdateCancelled(({ final __callArgument36:Dynamic = function():Void {
+      Updater._setState__updater(({ final __callArgument32:Dynamic = updater; __callArgument32; }), ({ final __callArgument33:Dynamic = function(prev:UpdaterState):{ var phase:String; var info:Null<UpdateInfo>; var progress:Null<UpdateProgress>; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Idle' }]); __callArgument33; }));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onUpdateCancelled]]), 1);
-    }; __callArgument20; })), (cast backend : UpdaterBackend).subscribeUpdateStaging(({ final __callArgument23:Dynamic = function():Void {
-      Updater._setState__updater(({ final __callArgument21:Dynamic = updater; __callArgument21; }), ({ final __callArgument22:Dynamic = function(prev:UpdaterState):{ var phase:String; var info:Null<UpdateInfo>; var progress:Null<UpdateProgress>; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Staging' }]); __callArgument22; }));
+    }; __callArgument36; })), (cast backend : UpdaterBackend).subscribeUpdateStaging(({ final __callArgument41:Dynamic = function():Void {
+      Updater._setState__updater(({ final __callArgument37:Dynamic = updater; __callArgument37; }), ({ final __callArgument38:Dynamic = function(prev:UpdaterState):{ var phase:String; var info:Null<UpdateInfo>; var progress:Null<UpdateProgress>; var error:Null<UpdaterError>; } return _Runtime.mergeObjects([prev, { phase: 'Staging' }]); __callArgument38; }));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onUpdateStaging]]), 1);
-    }; __callArgument23; })), (cast backend : UpdaterBackend).subscribeUpdateVerified(({ final __callArgument24:Dynamic = function():Void {
+    }; __callArgument41; })), (cast backend : UpdaterBackend).subscribeUpdateVerified(({ final __callArgument42:Dynamic = function():Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onUpdateVerified]]), 1);
-    }; __callArgument24; })), (cast backend : UpdaterBackend).subscribeUpdateRolledBack(({ final __callArgument27:Dynamic = function():Void {
-      Updater._setState__updater(({ final __callArgument25:Dynamic = updater; __callArgument25; }), ({ final __callArgument26:Dynamic = function(prev:UpdaterState):{ var phase:String; var info:flighthq._internal._Any; var progress:flighthq._internal._Any; var error:flighthq._internal._Any; } return _Runtime.mergeObjects([prev, { phase: 'Idle' }, { info: null }, { progress: null }, { error: null }]); __callArgument26; }));
+    }; __callArgument42; })), (cast backend : UpdaterBackend).subscribeUpdateRolledBack(({ final __callArgument47:Dynamic = function():Void {
+      Updater._setState__updater(({ final __callArgument43:Dynamic = updater; __callArgument43; }), ({ final __callArgument44:Dynamic = function(prev:UpdaterState):{ var phase:String; var info:flighthq._internal._Any; var progress:flighthq._internal._Any; var error:flighthq._internal._Any; } return _Runtime.mergeObjects([prev, { phase: 'Idle' }, { info: null }, { progress: null }, { error: null }]); __callArgument44; }));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[updater.onUpdateRolledBack]]), 1);
-    }; __callArgument27; }))] : Array<Dynamic>));
+    }; __callArgument47; }))] : Array<Dynamic>));
     ((cast Updater._subscriptions__updater : flighthq._internal._WeakMap<AppUpdater, Void->Void>).set(updater, (cast function():Void {
       for (unsubscribe in _Runtime.iterable(unsubscribes)) {
         unsubscribe();
@@ -201,7 +201,7 @@ class Updater {
   }
 
   public static function disposeAppUpdater(updater:AppUpdater):Void {
-    detachAppUpdater(({ final __callArgument30:Dynamic = updater; __callArgument30; }));
+    detachAppUpdater(({ final __callArgument50:Dynamic = updater; __callArgument50; }));
   }
 
   public static function downloadAppUpdate():Void {
@@ -253,7 +253,7 @@ class Updater {
   }
 
   public static function setUpdaterConfig(config:UpdaterConfig):Void {
-    (cast (cast getUpdaterBackend() : UpdaterBackend) : UpdaterBackend).setConfig(({ final __callArgument31:Dynamic = config; __callArgument31; }));
+    (cast (cast getUpdaterBackend() : UpdaterBackend) : UpdaterBackend).setConfig(({ final __callArgument52:Dynamic = config; __callArgument52; }));
   }
 
   public static function setUpdaterFeedUrl(url:String):Void {
@@ -261,6 +261,6 @@ class Updater {
   }
 
   public static function setUpdaterSignatureConfig(config:Null<UpdaterSignatureConfig>):Void {
-    (cast (cast getUpdaterBackend() : UpdaterBackend) : UpdaterBackend).setSignatureConfig(({ final __callArgument32:Dynamic = config; __callArgument32; }));
+    (cast (cast getUpdaterBackend() : UpdaterBackend) : UpdaterBackend).setSignatureConfig(({ final __callArgument53:Dynamic = config; __callArgument53; }));
   }
 }

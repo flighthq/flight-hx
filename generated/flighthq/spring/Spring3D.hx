@@ -23,7 +23,7 @@ class Spring3D {
 
   public static function updateSpring3D(spring3D:flighthq.types.Spring.Spring3D, targetX:Float, targetY:Float, targetZ:Float, config:SpringConfig, deltaTime:Float):Void {
     updateSpring((cast spring3D : flighthq.types.Spring.Spring3D).x, (cast targetX : Float), ({ final __callArgument0:Dynamic = config; __callArgument0; }), (cast deltaTime : Float));
-    updateSpring((cast spring3D : flighthq.types.Spring.Spring3D).y, (cast targetY : Float), ({ final __callArgument1:Dynamic = config; __callArgument1; }), (cast deltaTime : Float));
-    updateSpring((cast spring3D : flighthq.types.Spring.Spring3D).z, (cast targetZ : Float), ({ final __callArgument2:Dynamic = config; __callArgument2; }), (cast deltaTime : Float));
+    updateSpring((cast spring3D : flighthq.types.Spring.Spring3D).y, (cast targetY : Float), ({ final __callArgument2:Dynamic = config; __callArgument2; }), (cast deltaTime : Float));
+    updateSpring((cast spring3D : flighthq.types.Spring.Spring3D).z, (cast targetZ : Float), ({ final __callArgument4:Dynamic = config; __callArgument4; }), (cast deltaTime : Float));
   }
 }

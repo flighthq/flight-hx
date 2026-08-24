@@ -16,7 +16,7 @@ class AudioResourceFrom {
     var buffer:flighthq._internal.dom.AudioBuffer = cast _Runtime.UNDEFINED;
     numberOfChannels = _Runtime.field(channels, 'length');
     length = ((cast ((cast numberOfChannels : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.field(flighthq._internal._StaticIndex.readArray(channels, 0.0), 'length') : Dynamic) : (cast 0.0 : Dynamic));
-    if ((cast ((cast _Runtime.strictEquals(numberOfChannels, 0.0) : Bool) || (cast _Runtime.strictEquals(length, 0.0) : Bool)) : Bool)) { return cast (cast createAudioResource(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : AudioResource); }
+    if ((cast ((cast _Runtime.strictEquals(numberOfChannels, 0.0) : Bool) || (cast _Runtime.strictEquals(length, 0.0) : Bool)) : Bool)) { return cast (cast (#if js _Runtime.callValue(createAudioResource, cast ([] : Array<Dynamic>)) #else createAudioResource(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : AudioResource); }
     buffer = _Runtime.construct(flighthq._internal._HostValueLut.get('AudioBuffer'), [{ length: length, numberOfChannels: numberOfChannels, sampleRate: sampleRate }]);
     {
       var channel:Float = 0.0;
@@ -42,7 +42,7 @@ class AudioResourceFrom {
           i++;
         }
       }
-      return cast (cast loadAudioResourceFromBytes(({ final __callArgument1:Dynamic = context; __callArgument1; }), ({ final __callArgument2:Dynamic = bytes; __callArgument2; }), ({ final __callArgument3:Dynamic = mimeType; __callArgument3; }), ({ final __callArgument4:Dynamic = signal; __callArgument4; })) : flighthq._internal._Promise<AudioResource>);
+      return cast (cast loadAudioResourceFromBytes(({ final __callArgument2:Dynamic = context; __callArgument2; }), ({ final __callArgument3:Dynamic = bytes; __callArgument3; }), ({ final __callArgument4:Dynamic = mimeType; __callArgument4; }), ({ final __callArgument5:Dynamic = signal; __callArgument5; })) : flighthq._internal._Promise<AudioResource>);
       return cast null;
     }));
   }
@@ -50,9 +50,9 @@ class AudioResourceFrom {
   public static function loadAudioResourceFromBlob(context:flighthq._internal.dom.AudioContext, blob:flighthq._internal.dom.Blob, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<AudioResource> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       var arrayBuffer:haxe.io.Bytes = cast _Runtime.UNDEFINED;
-      return flighthq._internal._Async.flatMap(blob.arrayBuffer(), function(__awaitValue8:Dynamic):Dynamic {
-        arrayBuffer = __awaitValue8;
-        return flighthq._internal._Async.resolve((cast loadAudioResourceFromBytes(({ final __callArgument9:Dynamic = context; __callArgument9; }), new flighthq._internal._UInt8Array(arrayBuffer), ({ final __callArgument10:Dynamic = _Runtime.orValue(blob.type, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')); __callArgument10; }), ({ final __callArgument11:Dynamic = signal; __callArgument11; })) : flighthq._internal._Promise<AudioResource>));
+      return flighthq._internal._Async.flatMap(blob.arrayBuffer(), function(__awaitValue16:Dynamic):Dynamic {
+        arrayBuffer = __awaitValue16;
+        return flighthq._internal._Async.resolve((cast loadAudioResourceFromBytes(({ final __callArgument17:Dynamic = context; __callArgument17; }), new flighthq._internal._UInt8Array(arrayBuffer), ({ final __callArgument18:Dynamic = _Runtime.orValue(blob.type, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')); __callArgument18; }), ({ final __callArgument19:Dynamic = signal; __callArgument19; })) : flighthq._internal._Promise<AudioResource>));
       });
     }));
   }
@@ -61,12 +61,12 @@ class AudioResourceFrom {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       var buffer:haxe.io.Bytes = cast _Runtime.UNDEFINED;
       var audioBuffer:flighthq._internal.dom.AudioBuffer = cast _Runtime.UNDEFINED;
-      ({ final __hostTypeCall15 = signal; __hostTypeCall15 == null ? _Runtime.UNDEFINED : __hostTypeCall15.throwIfAborted(); });
+      ({ final __hostTypeCall27 = signal; __hostTypeCall27 == null ? _Runtime.UNDEFINED : __hostTypeCall27.throwIfAborted(); });
       buffer = _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), _Runtime.addNumbers(_Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')));
-      return flighthq._internal._Async.flatMap(context.decodeAudioData(buffer), function(__awaitValue16:Dynamic):Dynamic {
-        audioBuffer = __awaitValue16;
-        ({ final __hostTypeCall17 = signal; __hostTypeCall17 == null ? _Runtime.UNDEFINED : __hostTypeCall17.throwIfAborted(); });
-        return flighthq._internal._Async.resolve((cast createAudioResource(({ final __callArgument18:Dynamic = audioBuffer; __callArgument18; })) : AudioResource));
+      return flighthq._internal._Async.flatMap(context.decodeAudioData(buffer), function(__awaitValue28:Dynamic):Dynamic {
+        audioBuffer = __awaitValue28;
+        ({ final __hostTypeCall29 = signal; __hostTypeCall29 == null ? _Runtime.UNDEFINED : __hostTypeCall29.throwIfAborted(); });
+        return flighthq._internal._Async.resolve((cast createAudioResource(({ final __callArgument30:Dynamic = audioBuffer; __callArgument30; })) : AudioResource));
       });
     }));
   }
@@ -76,20 +76,20 @@ class AudioResourceFrom {
       flighthq._internal._Async.protect(function():Dynamic {
         var response:flighthq._internal.dom.Response = cast _Runtime.UNDEFINED;
         var arrayBuffer:haxe.io.Bytes = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap(_Runtime.callValue(flighthq._internal._HostValueLut.get('fetch'), cast ([url, { signal: signal }] : Array<Dynamic>)), function(__awaitValue22:Dynamic):Dynamic {
-          response = __awaitValue22;
-          var __flowBranch23:Dynamic;
+        return flighthq._internal._Async.flatMap(_Runtime.callValue(flighthq._internal._HostValueLut.get('fetch'), cast ([url, { signal: signal }] : Array<Dynamic>)), function(__awaitValue38:Dynamic):Dynamic {
+          response = __awaitValue38;
+          var __flowBranch39:Dynamic;
           if ((cast !(cast (cast response : flighthq._internal.dom.Response).ok : Bool) : Bool)) {
-            __flowBranch23 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch39 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.reject(_Runtime.error('Failed to load audio: ' + Std.string(url) + ' (' + Std.string((cast response : flighthq._internal.dom.Response).status) + ' ' + Std.string((cast response : flighthq._internal.dom.Response).statusText) + ')'));
             });
           } else {
-            __flowBranch23 = flighthq._internal._Async.flowNormal();
+            __flowBranch39 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch23, function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast response : flighthq._internal.dom.Response).arrayBuffer(), function(__awaitValue24:Dynamic):Dynamic {
-              arrayBuffer = __awaitValue24;
-              return flighthq._internal._Async.flowReturn((cast loadAudioResourceFromBytes(({ final __callArgument25:Dynamic = context; __callArgument25; }), new flighthq._internal._UInt8Array(arrayBuffer), ({ final __callArgument26:Dynamic = _Runtime.coalesce((cast (cast response : flighthq._internal.dom.Response).headers : flighthq._internal.dom.Headers).get('content-type'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')); __callArgument26; }), ({ final __callArgument27:Dynamic = signal; __callArgument27; })) : flighthq._internal._Promise<AudioResource>));
+          return flighthq._internal._Async.continueFlow(__flowBranch39, function():Dynamic {
+            return flighthq._internal._Async.flatMap((cast response : flighthq._internal.dom.Response).arrayBuffer(), function(__awaitValue40:Dynamic):Dynamic {
+              arrayBuffer = __awaitValue40;
+              return flighthq._internal._Async.flowReturn((cast loadAudioResourceFromBytes(({ final __callArgument41:Dynamic = context; __callArgument41; }), new flighthq._internal._UInt8Array(arrayBuffer), ({ final __callArgument42:Dynamic = _Runtime.coalesce((cast (cast response : flighthq._internal.dom.Response).headers : flighthq._internal.dom.Headers).get('content-type'), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')); __callArgument42; }), ({ final __callArgument43:Dynamic = signal; __callArgument43; })) : flighthq._internal._Promise<AudioResource>));
             });
           });
         });
@@ -100,9 +100,9 @@ class AudioResourceFrom {
   public static function loadAudioResourceFromUrls(context:flighthq._internal.dom.AudioContext, sources:Array<AudioResourceUrl>, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<AudioResource> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       var selected:Null<String> = cast _Runtime.UNDEFINED;
-      selected = (cast selectAudioResourceUrl(({ final __callArgument28:Dynamic = sources; __callArgument28; })) : Null<String>);
-      if ((cast _Runtime.strictEquals(selected, null) : Bool)) { return cast (cast createAudioResource(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : AudioResource); }
-      return cast (cast loadAudioResourceFromUrl(({ final __callArgument29:Dynamic = context; __callArgument29; }), (cast selected : String), ({ final __callArgument30:Dynamic = signal; __callArgument30; })) : flighthq._internal._Promise<AudioResource>);
+      selected = (cast selectAudioResourceUrl(({ final __callArgument47:Dynamic = sources; __callArgument47; })) : Null<String>);
+      if ((cast _Runtime.strictEquals(selected, null) : Bool)) { return cast (cast (#if js _Runtime.callValue(createAudioResource, cast ([] : Array<Dynamic>)) #else createAudioResource(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : AudioResource); }
+      return cast (cast loadAudioResourceFromUrl(({ final __callArgument49:Dynamic = context; __callArgument49; }), (cast selected : String), ({ final __callArgument50:Dynamic = signal; __callArgument50; })) : flighthq._internal._Promise<AudioResource>);
       return cast null;
     }));
   }

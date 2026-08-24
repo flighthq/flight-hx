@@ -42,8 +42,8 @@ class GlShapeData {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var surface:Null<GlShapeRasterSurface> = cast _Runtime.UNDEFINED;
     var entry:Null<{ var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }> = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime);
-    surface = (cast (cast getGlShapeData(({ final __callArgument2:Dynamic = data; __callArgument2; })) : GlShapeRendererData) : { var surface:Null<GlShapeRasterSurface>; }).surface;
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime);
+    surface = (cast (cast getGlShapeData(({ final __callArgument4:Dynamic = data; __callArgument4; })) : GlShapeRendererData) : { var surface:Null<GlShapeRasterSurface>; }).surface;
     if ((cast _Runtime.strictEquals(surface, null) : Bool)) { return; }
     entry = ((cast runtime.textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, { var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }>).get((cast surface : GlShapeRasterSurface).image));
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {

@@ -22,8 +22,8 @@ class Throttle {
         (elapsed = cast (_Runtime.fmod(elapsed, period) : Dynamic));
       }
     });
-    connectSignal(({ final __callArgument0:Dynamic = source; __callArgument0; }), ({ final __callArgument1:Dynamic = handler; __callArgument1; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    return cast function():Void { (cast disconnectSignal : Signal<Float->Void>->(Float->Void)->Void)(({ final __callArgument2:Dynamic = source; __callArgument2; }), ({ final __callArgument3:Dynamic = handler; __callArgument3; })); };
+    (#if js _Runtime.callValue(connectSignal, cast ([({ final __callArgument2:Dynamic = source; __callArgument2; }), ({ final __callArgument3:Dynamic = handler; __callArgument3; })] : Array<Dynamic>)) #else connectSignal(({ final __callArgument0:Dynamic = source; __callArgument0; }), ({ final __callArgument1:Dynamic = handler; __callArgument1; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    return cast function():Void { (cast disconnectSignal : Signal<Float->Void>->(Float->Void)->Void)(({ final __callArgument4:Dynamic = source; __callArgument4; }), ({ final __callArgument5:Dynamic = handler; __callArgument5; })); };
     return cast null;
   }
 
@@ -35,8 +35,8 @@ class Throttle {
     var leadingFired:Bool = cast _Runtime.UNDEFINED;
     var clearTimer:Void->Void = cast _Runtime.UNDEFINED;
     var handler:T = cast _Runtime.UNDEFINED;
-    leading = _Runtime.coalesce(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.leading; }), function():Dynamic return cast false);
-    trailing = _Runtime.coalesce(({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.trailing; }), function():Dynamic return cast true);
+    leading = _Runtime.coalesce(({ final __typedStruct8 = options; __typedStruct8 == null ? _Runtime.UNDEFINED : __typedStruct8.leading; }), function():Dynamic return cast false);
+    trailing = _Runtime.coalesce(({ final __typedStruct9 = options; __typedStruct9 == null ? _Runtime.UNDEFINED : __typedStruct9.trailing; }), function():Dynamic return cast true);
     timer = null;
     lastArgs = null;
     leadingFired = false;
@@ -62,7 +62,7 @@ class Throttle {
         }
       }, delayMs) : Dynamic));
     }, 0) : T);
-    connectSignal((cast source : Dynamic), (cast handler : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast source : Dynamic), (cast handler : Dynamic)] : Array<Dynamic>)) #else connectSignal((cast source : Dynamic), (cast handler : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     return cast function():Void {
       disconnectSignal((cast source : Dynamic), (cast handler : Dynamic));
       clearTimer();
@@ -79,8 +79,8 @@ class Throttle {
     var clearTrailing:Void->Void = cast _Runtime.UNDEFINED;
     var scheduleTrailing:Float->Void = cast _Runtime.UNDEFINED;
     var handler:T = cast _Runtime.UNDEFINED;
-    leading = _Runtime.coalesce(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.leading; }), function():Dynamic return cast true);
-    trailing = _Runtime.coalesce(({ final __typedStruct7 = options; __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.trailing; }), function():Dynamic return cast true);
+    leading = _Runtime.coalesce(({ final __typedStruct10 = options; __typedStruct10 == null ? _Runtime.UNDEFINED : __typedStruct10.leading; }), function():Dynamic return cast true);
+    trailing = _Runtime.coalesce(({ final __typedStruct11 = options; __typedStruct11 == null ? _Runtime.UNDEFINED : __typedStruct11.trailing; }), function():Dynamic return cast true);
     lastFiredAt = -HxMath.POSITIVE_INFINITY;
     trailingTimer = null;
     lastArgs = null;
@@ -118,7 +118,7 @@ class Throttle {
         scheduleTrailing((cast remaining : Float));
       } }
     }, 0) : T);
-    connectSignal((cast source : Dynamic), (cast handler : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast source : Dynamic), (cast handler : Dynamic)] : Array<Dynamic>)) #else connectSignal((cast source : Dynamic), (cast handler : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     return cast function():Void {
       disconnectSignal((cast source : Dynamic), (cast handler : Dynamic));
       clearTrailing();

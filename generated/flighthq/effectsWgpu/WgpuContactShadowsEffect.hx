@@ -24,6 +24,6 @@ class WgpuContactShadowsEffect {
   });
 
   public static function registerWgpuContactShadowsEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast 'ContactShadowsEffect' : String), ({ final __callArgument5:Dynamic = defaultWgpuContactShadowsEffectRunner; __callArgument5; }));
+    registerWgpuRenderEffect(({ final __callArgument8:Dynamic = state; __callArgument8; }), (cast 'ContactShadowsEffect' : String), ({ final __callArgument9:Dynamic = defaultWgpuContactShadowsEffectRunner; __callArgument9; }));
   }
 }

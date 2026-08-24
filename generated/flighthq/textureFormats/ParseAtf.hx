@@ -26,7 +26,7 @@ class ParseAtf {
   }
 
   public static function parseAtf(bytes:flighthq._internal._UInt8Array):Null<Array<TextureContainer>> {
-    return cast (cast ParseAtf.parseAtfInternal__parseAtf(({ final __callArgument1:Dynamic = bytes; __callArgument1; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Null<Array<TextureContainer>>);
+    return cast (cast (#if js _Runtime.callValue(ParseAtf.parseAtfInternal__parseAtf, cast ([({ final __callArgument3:Dynamic = bytes; __callArgument3; })] : Array<Dynamic>)) #else ParseAtf.parseAtfInternal__parseAtf(({ final __callArgument2:Dynamic = bytes; __callArgument2; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Null<Array<TextureContainer>>);
     return cast null;
   }
 
@@ -52,14 +52,14 @@ class ParseAtf {
     var reader:ByteReader = cast _Runtime.UNDEFINED;
     var lengthWidth:Float = cast _Runtime.UNDEFINED;
     var containers:Array<TextureContainer> = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast ParseAtf.hasAtfSignature__parseAtf(({ final __callArgument2:Dynamic = bytes; __callArgument2; })) : Bool) : Bool) : Bool)) { return cast (cast ParseAtf.reject__parseAtf((cast failure : Dynamic), ({ final __callArgument3:Dynamic = 'container-unrecognized'; __callArgument3; })) : Null<Array<TextureContainer>>); }
+    if ((cast !(cast (cast ParseAtf.hasAtfSignature__parseAtf(({ final __callArgument4:Dynamic = bytes; __callArgument4; })) : Bool) : Bool) : Bool)) { return cast (cast ParseAtf.reject__parseAtf((cast failure : Dynamic), ({ final __callArgument6:Dynamic = 'container-unrecognized'; __callArgument6; })) : Null<Array<TextureContainer>>); }
     versioned = _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 6.0 : Float)), ParseAtf.atfNewVersionMarker__parseAtf);
     headerOffset = ((cast versioned : Bool) ? (cast ParseAtf.atfNewHeaderOffset__parseAtf : Dynamic) : (cast ParseAtf.atfLegacyHeaderOffset__parseAtf : Dynamic));
-    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast (headerOffset + 4.0) : Float)) : Bool)) { return cast (cast ParseAtf.reject__parseAtf((cast failure : Dynamic), ({ final __callArgument4:Dynamic = 'header-truncated'; __callArgument4; })) : Null<Array<TextureContainer>>); }
+    if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast (headerOffset + 4.0) : Float)) : Bool)) { return cast (cast ParseAtf.reject__parseAtf((cast failure : Dynamic), ({ final __callArgument8:Dynamic = 'header-truncated'; __callArgument8; })) : Null<Array<TextureContainer>>); }
     version = ((cast versioned : Bool) ? (cast flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 7.0 : Float)) : Dynamic) : (cast 0.0 : Dynamic));
-    lengthReader = (cast createByteReader(({ final __callArgument5:Dynamic = bytes; __callArgument5; }), (cast ((cast versioned : Bool) ? (cast 8.0 : Dynamic) : (cast 3.0 : Dynamic)) : Float)) : ByteReader);
-    payloadLength = ((cast versioned : Bool) ? (cast (cast readByteReaderU32BigEndian(({ final __callArgument6:Dynamic = lengthReader; __callArgument6; })) : Float) : Dynamic) : (cast (cast readByteReaderU24BigEndian(({ final __callArgument7:Dynamic = lengthReader; __callArgument7; })) : Float) : Dynamic));
-    if ((cast ((cast (headerOffset + payloadLength) : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) { return cast (cast ParseAtf.reject__parseAtf((cast failure : Dynamic), ({ final __callArgument8:Dynamic = 'level-range-out-of-bounds'; __callArgument8; })) : Null<Array<TextureContainer>>); }
+    lengthReader = (cast createByteReader(({ final __callArgument10:Dynamic = bytes; __callArgument10; }), (cast ((cast versioned : Bool) ? (cast 8.0 : Dynamic) : (cast 3.0 : Dynamic)) : Float)) : ByteReader);
+    payloadLength = ((cast versioned : Bool) ? (cast (cast readByteReaderU32BigEndian(({ final __callArgument12:Dynamic = lengthReader; __callArgument12; })) : Float) : Dynamic) : (cast (cast readByteReaderU24BigEndian(({ final __callArgument14:Dynamic = lengthReader; __callArgument14; })) : Float) : Dynamic));
+    if ((cast ((cast (headerOffset + payloadLength) : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) { return cast (cast ParseAtf.reject__parseAtf((cast failure : Dynamic), ({ final __callArgument16:Dynamic = 'level-range-out-of-bounds'; __callArgument16; })) : Null<Array<TextureContainer>>); }
     typeFormatByte = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast headerOffset : Float));
     log2Width = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast (headerOffset + 1.0) : Float));
     log2Height = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast (headerOffset + 2.0) : Float));
@@ -67,12 +67,12 @@ class ParseAtf {
     formatCode = (_Runtime.toInt32(typeFormatByte) & _Runtime.toInt32(ParseAtf.atfFormatCodeMask__parseAtf));
     alpha = ((cast ParseAtf.atfAlphaFormatCodes__parseAtf : flighthq._internal._Set<Float>).has(formatCode));
     if ((cast ((cast !(cast alpha : Bool) : Bool) && (cast !(cast ((cast ParseAtf.atfOpaqueFormatCodes__parseAtf : flighthq._internal._Set<Float>).has(formatCode)) : Bool) : Bool)) : Bool)) {
-      return cast (cast ParseAtf.reject__parseAtf((cast failure : Dynamic), ({ final __callArgument9:Dynamic = 'format-unsupported'; __callArgument9; })) : Null<Array<TextureContainer>>);
+      return cast (cast ParseAtf.reject__parseAtf((cast failure : Dynamic), ({ final __callArgument18:Dynamic = 'format-unsupported'; __callArgument18; })) : Null<Array<TextureContainer>>);
     }
     if ((cast ((cast ((cast log2Width : Float) > (cast ParseAtf.atfMaxLog2Dimension__parseAtf : Float)) : Bool) || (cast ((cast log2Height : Float) > (cast ParseAtf.atfMaxLog2Dimension__parseAtf : Float)) : Bool)) : Bool)) {
-      return cast (cast ParseAtf.reject__parseAtf((cast failure : Dynamic), ({ final __callArgument10:Dynamic = 'structure-invalid'; __callArgument10; })) : Null<Array<TextureContainer>>);
+      return cast (cast ParseAtf.reject__parseAtf((cast failure : Dynamic), ({ final __callArgument20:Dynamic = 'structure-invalid'; __callArgument20; })) : Null<Array<TextureContainer>>);
     }
-    if ((cast ((cast mipCount : Float) < (cast 1.0 : Float)) : Bool)) { return cast (cast ParseAtf.reject__parseAtf((cast failure : Dynamic), ({ final __callArgument11:Dynamic = 'structure-invalid'; __callArgument11; })) : Null<Array<TextureContainer>>); }
+    if ((cast ((cast mipCount : Float) < (cast 1.0 : Float)) : Bool)) { return cast (cast ParseAtf.reject__parseAtf((cast failure : Dynamic), ({ final __callArgument22:Dynamic = 'structure-invalid'; __callArgument22; })) : Null<Array<TextureContainer>>); }
     cube = !_Runtime.strictEquals((_Runtime.toInt32(typeFormatByte) & _Runtime.toInt32(ParseAtf.atfCubeFlag__parseAtf)), 0.0);
     faces = ((cast cube : Bool) ? (cast 6.0 : Dynamic) : (cast 1.0 : Dynamic));
     width = (1 << _Runtime.toInt32(log2Width));
@@ -87,7 +87,7 @@ class ParseAtf {
         (slot = cast ((slot + 1.0) : Dynamic));
       }
     }
-    reader = (cast createByteReader(({ final __callArgument12:Dynamic = bytes; __callArgument12; }), (cast (headerOffset + 4.0) : Float)) : ByteReader);
+    reader = (cast createByteReader(({ final __callArgument24:Dynamic = bytes; __callArgument24; }), (cast (headerOffset + 4.0) : Float)) : ByteReader);
     lengthWidth = ((cast _Runtime.strictEquals(version, 0.0) : Bool) ? (cast 3.0 : Dynamic) : (cast 4.0 : Dynamic));
     {
       var side:Float = 0.0;
@@ -98,9 +98,9 @@ class ParseAtf {
             {
               var slot:Float = 0.0;
               while ((cast ((cast slot : Float) < (cast slotCount : Float)) : Bool)) {
-                if ((cast !(cast (cast hasByteReaderBytes(({ final __callArgument13:Dynamic = reader; __callArgument13; }), (cast lengthWidth : Float)) : Bool) : Bool) : Bool)) { return cast (cast ParseAtf.reject__parseAtf((cast failure : Dynamic), ({ final __callArgument14:Dynamic = 'level-range-out-of-bounds'; __callArgument14; })) : Null<Array<TextureContainer>>); }
-                var blockLength:Float = ((cast _Runtime.strictEquals(version, 0.0) : Bool) ? (cast (cast readByteReaderU24BigEndian(({ final __callArgument15:Dynamic = reader; __callArgument15; })) : Float) : Dynamic) : (cast (cast readByteReaderU32BigEndian(({ final __callArgument16:Dynamic = reader; __callArgument16; })) : Float) : Dynamic));
-                if ((cast !(cast (cast hasByteReaderBytes(({ final __callArgument17:Dynamic = reader; __callArgument17; }), (cast blockLength : Float)) : Bool) : Bool) : Bool)) { return cast (cast ParseAtf.reject__parseAtf((cast failure : Dynamic), ({ final __callArgument18:Dynamic = 'level-range-out-of-bounds'; __callArgument18; })) : Null<Array<TextureContainer>>); }
+                if ((cast !(cast (cast hasByteReaderBytes(({ final __callArgument26:Dynamic = reader; __callArgument26; }), (cast lengthWidth : Float)) : Bool) : Bool) : Bool)) { return cast (cast ParseAtf.reject__parseAtf((cast failure : Dynamic), ({ final __callArgument28:Dynamic = 'level-range-out-of-bounds'; __callArgument28; })) : Null<Array<TextureContainer>>); }
+                var blockLength:Float = ((cast _Runtime.strictEquals(version, 0.0) : Bool) ? (cast (cast readByteReaderU24BigEndian(({ final __callArgument30:Dynamic = reader; __callArgument30; })) : Float) : Dynamic) : (cast (cast readByteReaderU32BigEndian(({ final __callArgument32:Dynamic = reader; __callArgument32; })) : Float) : Dynamic));
+                if ((cast !(cast (cast hasByteReaderBytes(({ final __callArgument34:Dynamic = reader; __callArgument34; }), (cast blockLength : Float)) : Bool) : Bool) : Bool)) { return cast (cast ParseAtf.reject__parseAtf((cast failure : Dynamic), ({ final __callArgument36:Dynamic = 'level-range-out-of-bounds'; __callArgument36; })) : Null<Array<TextureContainer>>); }
                 if ((cast _Runtime.strictEquals(blockLength, 0.0) : Bool)) { (slot = cast ((slot + 1.0) : Dynamic)); continue; }
                 var byteOffset:Float = reader.offset;
                 (reader.offset += blockLength);
@@ -124,7 +124,7 @@ class ParseAtf {
         (slot = cast ((slot + 1.0) : Dynamic));
       }
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(containers, 'length'), 0.0) : Bool)) { return cast (cast ParseAtf.reject__parseAtf((cast failure : Dynamic), ({ final __callArgument19:Dynamic = 'structure-invalid'; __callArgument19; })) : Null<Array<TextureContainer>>); }
+    if ((cast _Runtime.strictEquals(_Runtime.field(containers, 'length'), 0.0) : Bool)) { return cast (cast ParseAtf.reject__parseAtf((cast failure : Dynamic), ({ final __callArgument38:Dynamic = 'structure-invalid'; __callArgument38; })) : Null<Array<TextureContainer>>); }
     return cast containers;
     return cast null;
   }

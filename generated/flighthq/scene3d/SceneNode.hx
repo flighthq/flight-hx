@@ -34,7 +34,7 @@ class SceneNode {
     var node:{ >Node<Node3DTraits>, >Node3DTraits, } = cast _Runtime.UNDEFINED;
     node = (cast createNode((cast kind : String), (cast obj : Dynamic), (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic), (cast function(__unused0:Dynamic):Node3DRuntime return createNode3DRuntime() : Dynamic)) : { >Node<Node3DTraits>, >Node3DTraits, });
     initAppearanceTrait(({ final __callArgument0:Dynamic = node; __callArgument0; }), ({ final __callArgument1:Dynamic = obj; __callArgument1; }));
-    initTransform3DTrait(({ final __callArgument2:Dynamic = node; __callArgument2; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(initTransform3DTrait, cast ([({ final __callArgument5:Dynamic = node; __callArgument5; })] : Array<Dynamic>)) #else initTransform3DTrait(({ final __callArgument4:Dynamic = node; __callArgument4; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     return cast (cast node : Node3D);
     return cast null;
   }
@@ -42,10 +42,10 @@ class SceneNode {
   @:noCompletion
   public static function createNode3DRuntime():Node3DRuntime {
     var out:Node3DRuntime = cast _Runtime.UNDEFINED;
-    out = (cast createNodeRuntime(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Node3DRuntime);
+    out = (cast (#if js _Runtime.callValue(createNodeRuntime, cast ([] : Array<Dynamic>)) #else createNodeRuntime(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Node3DRuntime);
     ((cast out : { @:optional var traits:Null<NodeTraitsKey<Node3DTraits>>; }).traits = Node3DTraitsKey);
-    initAppearanceRuntimeTrait(({ final __callArgument3:Dynamic = out; __callArgument3; }));
-    initTransform3DRuntimeTrait(({ final __callArgument4:Dynamic = out; __callArgument4; }));
+    initAppearanceRuntimeTrait(({ final __callArgument6:Dynamic = out; __callArgument6; }));
+    initTransform3DRuntimeTrait(({ final __callArgument8:Dynamic = out; __callArgument8; }));
     return cast out;
     return cast null;
   }

@@ -36,7 +36,7 @@ class Tilemap {
   public static function cloneTilemap(source:flighthq.types.Tilemap):flighthq.types.Tilemap {
     var src:TilemapData = cast _Runtime.UNDEFINED;
     src = source.data;
-    return cast (cast createTilemap(({ final __callArgument1:Dynamic = { data: { atlas: src.atlas, columns: src.columns, materialData: ((cast !_Runtime.strictEquals(src.materialData, null) : Bool) ? (cast _Runtime.slice(src.materialData, 0, null) : Dynamic) : (cast null : Dynamic)), rows: src.rows, tileHeight: src.tileHeight, tileWidth: src.tileWidth, tiles: _Runtime.slice(src.tiles, 0, null) } }; __callArgument1; })) : flighthq.types.Tilemap);
+    return cast (cast createTilemap(({ final __callArgument2:Dynamic = { data: { atlas: src.atlas, columns: src.columns, materialData: ((cast !_Runtime.strictEquals(src.materialData, null) : Bool) ? (cast _Runtime.slice(src.materialData, 0, null) : Dynamic) : (cast null : Dynamic)), rows: src.rows, tileHeight: src.tileHeight, tileWidth: src.tileWidth, tiles: _Runtime.slice(src.tiles, 0, null) } }; __callArgument2; })) : flighthq.types.Tilemap);
     return cast null;
   }
 
@@ -70,9 +70,9 @@ class Tilemap {
   public static function createTilemapData(?data:{ @:optional var atlas:Null<TextureAtlas>; @:optional var columns:Null<Float>; @:optional var rows:Null<Float>; @:optional var tileHeight:Null<Float>; @:optional var tileWidth:Null<Float>; @:optional var tiles:Null<flighthq._internal._Int16Array>; @:optional var materialData:Null<Array<Null<MaterialData>>>; }):TilemapData {
     var columns:Float = cast _Runtime.UNDEFINED;
     var rows:Float = cast _Runtime.UNDEFINED;
-    columns = _Runtime.coalesce(({ final __structural2 = data; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var columns:Null<Float>; }).columns; }), function():Dynamic return cast 0.0);
-    rows = _Runtime.coalesce(({ final __structural3 = data; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var rows:Null<Float>; }).rows; }), function():Dynamic return cast 0.0);
-    return cast { atlas: _Runtime.coalesce(({ final __structural4 = data; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var atlas:Null<TextureAtlas>; }).atlas; }), function():Dynamic return cast null), columns: columns, materialData: _Runtime.coalesce(({ final __structural5 = data; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var materialData:Null<Array<Null<flighthq._internal._Object>>>; }).materialData; }), function():Dynamic return cast null), rows: rows, tileHeight: _Runtime.coalesce(({ final __structural6 = data; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var tileHeight:Null<Float>; }).tileHeight; }), function():Dynamic return cast 0.0), tileWidth: _Runtime.coalesce(({ final __structural7 = data; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var tileWidth:Null<Float>; }).tileWidth; }), function():Dynamic return cast 0.0), tiles: _Runtime.coalesce(({ final __structural8 = data; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var tiles:Null<flighthq._internal._Int16Array>; }).tiles; }), function():Dynamic return cast _Runtime.fill(new flighthq._internal._Int16Array((columns * rows)), -1.0, 0, null, 1)) };
+    columns = _Runtime.coalesce(({ final __structural4 = data; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var columns:Null<Float>; }).columns; }), function():Dynamic return cast 0.0);
+    rows = _Runtime.coalesce(({ final __structural5 = data; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var rows:Null<Float>; }).rows; }), function():Dynamic return cast 0.0);
+    return cast { atlas: _Runtime.coalesce(({ final __structural6 = data; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var atlas:Null<TextureAtlas>; }).atlas; }), function():Dynamic return cast null), columns: columns, materialData: _Runtime.coalesce(({ final __structural7 = data; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var materialData:Null<Array<Null<flighthq._internal._Object>>>; }).materialData; }), function():Dynamic return cast null), rows: rows, tileHeight: _Runtime.coalesce(({ final __structural8 = data; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var tileHeight:Null<Float>; }).tileHeight; }), function():Dynamic return cast 0.0), tileWidth: _Runtime.coalesce(({ final __structural9 = data; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var tileWidth:Null<Float>; }).tileWidth; }), function():Dynamic return cast 0.0), tiles: _Runtime.coalesce(({ final __structural10 = data; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { @:optional var tiles:Null<flighthq._internal._Int16Array>; }).tiles; }), function():Dynamic return cast _Runtime.fill(new flighthq._internal._Int16Array((columns * rows)), -1.0, 0, null, 1)) };
     return cast null;
   }
 
@@ -121,8 +121,8 @@ class Tilemap {
   public static function getTilemapColumnRowAtPoint(out:Vector2Like, source:flighthq.types.Tilemap, x:Float, y:Float):Bool {
     var col:Float = cast _Runtime.UNDEFINED;
     var row:Float = cast _Runtime.UNDEFINED;
-    col = (cast getTilemapColumnAtX(({ final __callArgument9:Dynamic = source; __callArgument9; }), (cast x : Float)) : Float);
-    row = (cast getTilemapRowAtY(({ final __callArgument10:Dynamic = source; __callArgument10; }), (cast y : Float)) : Float);
+    col = (cast getTilemapColumnAtX(({ final __callArgument11:Dynamic = source; __callArgument11; }), (cast x : Float)) : Float);
+    row = (cast getTilemapRowAtY(({ final __callArgument13:Dynamic = source; __callArgument13; }), (cast y : Float)) : Float);
     if ((cast ((cast ((cast col : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
     (out.x = cast (col : Float));
     (out.y = cast (row : Float));
@@ -149,7 +149,7 @@ class Tilemap {
 
   @:noCompletion
   public static function getTilemapRuntime(source:flighthq.types.Tilemap):TilemapRuntime {
-    return cast (cast getNode2DRuntime(({ final __callArgument11:Dynamic = source; __callArgument11; })) : TilemapRuntime);
+    return cast (cast getNode2DRuntime(({ final __callArgument15:Dynamic = source; __callArgument15; })) : TilemapRuntime);
     return cast null;
   }
 
@@ -173,17 +173,17 @@ class Tilemap {
   }
 
   public static function getTilemapTileAtPoint(source:flighthq.types.Tilemap, point:Vector2Like):Float {
-    return cast (cast getTilemapTileAtPointXY(({ final __callArgument12:Dynamic = source; __callArgument12; }), (cast point.x : Float), (cast point.y : Float)) : Float);
+    return cast (cast getTilemapTileAtPointXY(({ final __callArgument17:Dynamic = source; __callArgument17; }), (cast point.x : Float), (cast point.y : Float)) : Float);
     return cast null;
   }
 
   public static function getTilemapTileAtPointXY(source:flighthq.types.Tilemap, x:Float, y:Float):Float {
     var col:Float = cast _Runtime.UNDEFINED;
     var row:Float = cast _Runtime.UNDEFINED;
-    col = (cast getTilemapColumnAtX(({ final __callArgument13:Dynamic = source; __callArgument13; }), (cast x : Float)) : Float);
-    row = (cast getTilemapRowAtY(({ final __callArgument14:Dynamic = source; __callArgument14; }), (cast y : Float)) : Float);
+    col = (cast getTilemapColumnAtX(({ final __callArgument19:Dynamic = source; __callArgument19; }), (cast x : Float)) : Float);
+    row = (cast getTilemapRowAtY(({ final __callArgument21:Dynamic = source; __callArgument21; }), (cast y : Float)) : Float);
     if ((cast ((cast ((cast col : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast -1.0; }
-    return cast (cast getTilemapTile(({ final __callArgument15:Dynamic = source; __callArgument15; }), (cast col : Float), (cast row : Float)) : Float);
+    return cast (cast getTilemapTile(({ final __callArgument23:Dynamic = source; __callArgument23; }), (cast col : Float), (cast row : Float)) : Float);
     return cast null;
   }
 
@@ -248,7 +248,7 @@ class Tilemap {
     tiles = __destructure6.tiles;
     if ((cast ((cast ((cast ((cast ((cast column : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast column : Float) >= (cast columns : Float)) : Bool)) : Bool) || (cast ((cast row : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast row : Float) >= (cast rows : Float)) : Bool)) : Bool)) { return; }
     flighthq._internal._StaticIndex.writeInt16ArrayTyped((cast tiles : flighthq._internal._Int16Array), (cast ((row * columns) + column) : Float), (cast id : Float));
-    signals = (cast getTilemapSignals(({ final __callArgument16:Dynamic = tilemap; __callArgument16; })) : Null<TilemapSignals>);
+    signals = (cast getTilemapSignals(({ final __callArgument25:Dynamic = tilemap; __callArgument25; })) : Null<TilemapSignals>);
     if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { ((cast (cast signals : TilemapSignals).onTileChanged : { var emit:Float->Float->Float->Void; }).emit)((cast column : Float), (cast row : Float), (cast id : Float)); }
   }
 
@@ -279,7 +279,7 @@ class Tilemap {
         r++;
       }
     }
-    signals = (cast getTilemapSignals(({ final __callArgument17:Dynamic = tilemap; __callArgument17; })) : Null<TilemapSignals>);
+    signals = (cast getTilemapSignals(({ final __callArgument27:Dynamic = tilemap; __callArgument27; })) : Null<TilemapSignals>);
     if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { ((cast (cast signals : TilemapSignals).onTilesChanged : { var emit:Float->Float->Float->Float->Void; }).emit)((cast offsetColumn : Float), (cast offsetRow : Float), (cast width : Float), (cast height : Float)); }
   }
 

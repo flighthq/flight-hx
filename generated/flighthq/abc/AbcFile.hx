@@ -207,15 +207,15 @@ class AbcFile {
     integers = (cast cast ([0.0] : Array<Dynamic>));
     if ((cast !(cast (cast AbcFile.readAbcPool__abcFile((cast reader : Dynamic), ({ final __callArgument0:Dynamic = integers; __callArgument0; }), ({ final __callArgument1:Dynamic = function():Null<Float> return (cast reader : AbcReader__abcFile).readVarInt(); __callArgument1; })) : Bool) : Bool) : Bool)) { return cast null; }
     unsignedIntegers = (cast cast ([0.0] : Array<Dynamic>));
-    if ((cast !(cast (cast AbcFile.readAbcPool__abcFile((cast reader : Dynamic), ({ final __callArgument2:Dynamic = unsignedIntegers; __callArgument2; }), ({ final __callArgument3:Dynamic = function():Null<Float> return (cast reader : AbcReader__abcFile).readVarUint(); __callArgument3; })) : Bool) : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast (cast AbcFile.readAbcPool__abcFile((cast reader : Dynamic), ({ final __callArgument4:Dynamic = unsignedIntegers; __callArgument4; }), ({ final __callArgument5:Dynamic = function():Null<Float> return (cast reader : AbcReader__abcFile).readVarUint(); __callArgument5; })) : Bool) : Bool) : Bool)) { return cast null; }
     doubles = (cast cast ([HxMath.NaN] : Array<Dynamic>));
-    if ((cast !(cast (cast AbcFile.readAbcPool__abcFile((cast reader : Dynamic), ({ final __callArgument4:Dynamic = doubles; __callArgument4; }), ({ final __callArgument5:Dynamic = function():Null<Float> return (cast reader : AbcReader__abcFile).readDouble(); __callArgument5; })) : Bool) : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast (cast AbcFile.readAbcPool__abcFile((cast reader : Dynamic), ({ final __callArgument8:Dynamic = doubles; __callArgument8; }), ({ final __callArgument9:Dynamic = function():Null<Float> return (cast reader : AbcReader__abcFile).readDouble(); __callArgument9; })) : Bool) : Bool) : Bool)) { return cast null; }
     strings = (cast cast ([''] : Array<Dynamic>));
-    if ((cast !(cast (cast AbcFile.readAbcPool__abcFile((cast reader : Dynamic), ({ final __callArgument6:Dynamic = strings; __callArgument6; }), ({ final __callArgument7:Dynamic = function():Null<String> return (cast reader : AbcReader__abcFile).readString(); __callArgument7; })) : Bool) : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast (cast AbcFile.readAbcPool__abcFile((cast reader : Dynamic), ({ final __callArgument12:Dynamic = strings; __callArgument12; }), ({ final __callArgument13:Dynamic = function():Null<String> return (cast reader : AbcReader__abcFile).readString(); __callArgument13; })) : Bool) : Bool) : Bool)) { return cast null; }
     namespaces = (cast cast ([{ kind: 0.0, name: 0.0 }] : Array<Dynamic>));
-    if ((cast !(cast (cast AbcFile.readAbcPool__abcFile((cast reader : Dynamic), ({ final __callArgument8:Dynamic = namespaces; __callArgument8; }), ({ final __callArgument9:Dynamic = function():Null<{ var kind:Float; var name:Float; }> return { kind: (cast reader : AbcReader__abcFile).readUint8(), name: (cast reader : AbcReader__abcFile).readVarUint() }; __callArgument9; })) : Bool) : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast (cast AbcFile.readAbcPool__abcFile((cast reader : Dynamic), ({ final __callArgument16:Dynamic = namespaces; __callArgument16; }), ({ final __callArgument17:Dynamic = function():Null<{ var kind:Float; var name:Float; }> return { kind: (cast reader : AbcReader__abcFile).readUint8(), name: (cast reader : AbcReader__abcFile).readVarUint() }; __callArgument17; })) : Bool) : Bool) : Bool)) { return cast null; }
     namespaceSets = (cast cast ([cast ([] : Array<Dynamic>)] : Array<Dynamic>));
-    if ((cast !(cast (cast AbcFile.readAbcPool__abcFile((cast reader : Dynamic), ({ final __callArgument10:Dynamic = namespaceSets; __callArgument10; }), ({ final __callArgument11:Dynamic = function():Null<Array<Float>> {
+    if ((cast !(cast (cast AbcFile.readAbcPool__abcFile((cast reader : Dynamic), ({ final __callArgument20:Dynamic = namespaceSets; __callArgument20; }), ({ final __callArgument21:Dynamic = function():Null<Array<Float>> {
       var count:Float = cast _Runtime.UNDEFINED;
       var set:Array<Float> = cast _Runtime.UNDEFINED;
       count = (cast reader : AbcReader__abcFile).readVarUint();
@@ -230,11 +230,11 @@ class AbcFile {
       }
       return cast set;
       return cast _Runtime.UNDEFINED;
-    }; __callArgument11; })) : Bool) : Bool) : Bool)) {
+    }; __callArgument21; })) : Bool) : Bool) : Bool)) {
       return cast null;
     }
     multinames = (cast cast ([(cast AbcFile.createAbcMultiname__abcFile((cast 0.0 : Float)) : AbcMultiname)] : Array<Dynamic>));
-    if ((cast !(cast (cast AbcFile.readAbcPool__abcFile((cast reader : Dynamic), ({ final __callArgument12:Dynamic = multinames; __callArgument12; }), ({ final __callArgument13:Dynamic = function():Null<AbcMultiname> return (cast AbcFile.readAbcMultiname__abcFile((cast reader : Dynamic)) : Null<AbcMultiname>); __callArgument13; })) : Bool) : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast (cast AbcFile.readAbcPool__abcFile((cast reader : Dynamic), ({ final __callArgument24:Dynamic = multinames; __callArgument24; }), ({ final __callArgument25:Dynamic = function():Null<AbcMultiname> return (cast AbcFile.readAbcMultiname__abcFile((cast reader : Dynamic)) : Null<AbcMultiname>); __callArgument25; })) : Bool) : Bool) : Bool)) { return cast null; }
     return cast ((cast (cast reader : AbcReader__abcFile).valid : Bool) ? (cast { doubles: doubles, integers: integers, multinames: multinames, namespaceSets: namespaceSets, namespaces: namespaces, strings: strings, unsignedIntegers: unsignedIntegers } : Dynamic) : (cast null : Dynamic));
     return cast null;
   }

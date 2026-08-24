@@ -35,7 +35,7 @@ class DomHtmlView {
     setDomTransform(({ final __callArgument0:Dynamic = element; __callArgument0; }), (cast renderProxy : RenderProxy2D).transform2D, (cast (cast state : DomRenderState).roundPixels : Bool));
     ((cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast (cast renderProxy : RenderProxy2D).alpha : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string((cast renderProxy : RenderProxy2D).alpha) : Dynamic) : (cast '' : Dynamic)));
     _Runtime.callOptionalValue((cast state : DomRenderState).applyBlendMode, cast ([element, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
-    setDomRendererElement(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = element; __callArgument2; }));
+    setDomRendererElement(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = element; __callArgument3; }));
   }
 
   public static final defaultDomHtmlViewRenderer:Scene2DRenderer = (cast { createData: noopRendererData, submit: drawDomHtmlView });

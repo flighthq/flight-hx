@@ -31,11 +31,11 @@ class CubeTexture {
   }
 
   public static function copyCubeTexture(out:flighthq.types.CubeTexture, source:flighthq.types.CubeTexture):Void {
-    copyTexture(({ final __callArgument1:Dynamic = out; __callArgument1; }), ({ final __callArgument2:Dynamic = source; __callArgument2; }));
+    copyTexture(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }));
   }
 
   public static function createCubeTexture(?opts:CreateCubeTextureOptions):flighthq.types.CubeTexture {
-    return cast (cast createTexture((cast { colorSpace: _Runtime.coalesce(({ final __structural3 = opts; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var colorSpace:Null<String>; }).colorSpace; }), function():Dynamic return cast 'srgb'), sampler: _Runtime.select(({ final __structural4 = opts; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var sampler:Null<SamplerLike>; }).sampler; }), function():Dynamic return cast (cast cloneSampler(_Runtime.field(opts, 'sampler')) : Sampler), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), dimension: 'cube', sources: _Runtime.coalesce(({ final __structural5 = opts; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var sources:Null<TextureSourceCubeFaces>; }).sources; }), function():Dynamic return cast cast ([null, null, null, null, null, null] : Array<Dynamic>)) } : Dynamic)) : flighthq.types.CubeTexture);
+    return cast (cast createTexture((cast { colorSpace: _Runtime.coalesce(({ final __structural6 = opts; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var colorSpace:Null<String>; }).colorSpace; }), function():Dynamic return cast 'srgb'), sampler: _Runtime.select(({ final __structural7 = opts; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var sampler:Null<SamplerLike>; }).sampler; }), function():Dynamic return cast (cast cloneSampler(_Runtime.field(opts, 'sampler')) : Sampler), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), dimension: 'cube', sources: _Runtime.coalesce(({ final __structural8 = opts; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var sources:Null<TextureSourceCubeFaces>; }).sources; }), function():Dynamic return cast cast ([null, null, null, null, null, null] : Array<Dynamic>)) } : Dynamic)) : flighthq.types.CubeTexture);
     return cast null;
   }
 

@@ -52,19 +52,19 @@ class ClipRegion {
   }
 
   public static function clipRegionContainsRectangle(clip:flighthq.types.ClipRegion, rectangle:RectangleLike):Bool {
-    return cast (cast enclosesRectangle(({ final __callArgument1:Dynamic = clip.rect; __callArgument1; }), ({ final __callArgument2:Dynamic = rectangle; __callArgument2; })) : Bool);
+    return cast (cast enclosesRectangle(({ final __callArgument2:Dynamic = clip.rect; __callArgument2; }), ({ final __callArgument3:Dynamic = rectangle; __callArgument3; })) : Bool);
     return cast null;
   }
 
   public static function clipRegionIntersectsRectangle(clip:flighthq.types.ClipRegion, rectangle:RectangleLike):Bool {
-    return cast (cast intersectsRectangle(({ final __callArgument3:Dynamic = clip.rect; __callArgument3; }), ({ final __callArgument4:Dynamic = rectangle; __callArgument4; })) : Bool);
+    return cast (cast intersectsRectangle(({ final __callArgument6:Dynamic = clip.rect; __callArgument6; }), ({ final __callArgument7:Dynamic = rectangle; __callArgument7; })) : Bool);
     return cast null;
   }
 
   public static function cloneClipRegion(clip:flighthq.types.ClipRegion):flighthq.types.ClipRegion {
     var rect:Rectangle = cast _Runtime.UNDEFINED;
     var contours:Null<Array<Array<Float>>> = cast _Runtime.UNDEFINED;
-    rect = (cast cloneRectangle(({ final __callArgument5:Dynamic = clip.rect; __callArgument5; })) : Rectangle);
+    rect = (cast cloneRectangle(({ final __callArgument10:Dynamic = clip.rect; __callArgument10; })) : Rectangle);
     contours = ((cast _Runtime.strictEquals(clip.contours, null) : Bool) ? (cast null : Dynamic) : (cast (cast _Runtime.mapArray((cast clip.contours : Array<Array<Float>>), function(c:Array<Float>, __unused0:Float, __unused1:Array<Array<Float>>):Array<Float> return _Runtime.slice(c, 0, null), _Runtime.UNDEFINED)) : Dynamic));
     return cast { contours: contours, rect: rect, version: clip.version, winding: clip.winding };
     return cast null;
@@ -72,7 +72,7 @@ class ClipRegion {
 
   public static function copyClipRegion(out:flighthq.types.ClipRegion, source:flighthq.types.ClipRegion):Void {
     if ((cast _Runtime.strictEquals((cast out : flighthq._internal._Any), (cast source : flighthq._internal._Any)) : Bool)) { return; }
-    copyRectangle(({ final __callArgument6:Dynamic = out.rect; __callArgument6; }), ({ final __callArgument7:Dynamic = source.rect; __callArgument7; }));
+    copyRectangle(({ final __callArgument12:Dynamic = out.rect; __callArgument12; }), ({ final __callArgument13:Dynamic = source.rect; __callArgument13; }));
     (out.contours = cast (((cast _Runtime.strictEquals(source.contours, null) : Bool) ? (cast null : Dynamic) : (cast (cast _Runtime.mapArray((cast source.contours : Array<Array<Float>>), function(c:Array<Float>, __unused2:Float, __unused3:Array<Array<Float>>):Array<Float> return _Runtime.slice(c, 0, null), _Runtime.UNDEFINED)) : Dynamic)) : Null<Array<Array<Float>>>));
     (out.winding = cast (source.winding : PathWinding));
     (out.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((out.version + 1.0)), 0) : Float));
@@ -80,17 +80,17 @@ class ClipRegion {
 
   public static function createClipRegionFromCircle(x:Float, y:Float, radius:Float, tolerance:Float = 0.25):flighthq.types.ClipRegion {
     var path:Path = cast _Runtime.UNDEFINED;
-    path = (cast createPath(({ final __callArgument8:Dynamic = 'nonZero'; __callArgument8; })) : Path);
-    ClipRegion.appendCircleToPath__clipRegion(({ final __callArgument9:Dynamic = path; __callArgument9; }), (cast x : Float), (cast y : Float), (cast radius : Float));
-    return cast (cast createClipRegionFromPath(({ final __callArgument10:Dynamic = path; __callArgument10; }), (cast tolerance : Float)) : flighthq.types.ClipRegion);
+    path = (cast createPath(({ final __callArgument16:Dynamic = 'nonZero'; __callArgument16; })) : Path);
+    ClipRegion.appendCircleToPath__clipRegion(({ final __callArgument18:Dynamic = path; __callArgument18; }), (cast x : Float), (cast y : Float), (cast radius : Float));
+    return cast (cast createClipRegionFromPath(({ final __callArgument20:Dynamic = path; __callArgument20; }), (cast tolerance : Float)) : flighthq.types.ClipRegion);
     return cast null;
   }
 
   public static function createClipRegionFromContours(contours:Array<Array<Float>>, winding:PathWinding):flighthq.types.ClipRegion {
     var rect:Rectangle = cast _Runtime.UNDEFINED;
     var owned:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    rect = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle);
-    ClipRegion.setRectangleToContoursBounds__clipRegion(({ final __callArgument11:Dynamic = rect; __callArgument11; }), ({ final __callArgument12:Dynamic = contours; __callArgument12; }));
+    rect = (cast (#if js _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) #else createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Rectangle);
+    ClipRegion.setRectangleToContoursBounds__clipRegion(({ final __callArgument22:Dynamic = rect; __callArgument22; }), ({ final __callArgument23:Dynamic = contours; __callArgument23; }));
     owned = (cast _Runtime.mapArray((cast contours : Array<Array<Float>>), function(c:Array<Float>, __unused4:Float, __unused5:Array<Array<Float>>):Array<Float> return _Runtime.slice(c, 0, null), _Runtime.UNDEFINED));
     return cast { contours: owned, rect: rect, version: 0.0, winding: winding };
     return cast null;
@@ -98,33 +98,33 @@ class ClipRegion {
 
   public static function createClipRegionFromEllipse(rectangle:RectangleLike, tolerance:Float = 0.25):flighthq.types.ClipRegion {
     var path:Path = cast _Runtime.UNDEFINED;
-    path = (cast createPath(({ final __callArgument13:Dynamic = 'nonZero'; __callArgument13; })) : Path);
-    ClipRegion.appendEllipseToPath__clipRegion(({ final __callArgument14:Dynamic = path; __callArgument14; }), (cast rectangle.x : Float), (cast rectangle.y : Float), (cast rectangle.width : Float), (cast rectangle.height : Float));
-    return cast (cast createClipRegionFromPath(({ final __callArgument15:Dynamic = path; __callArgument15; }), (cast tolerance : Float)) : flighthq.types.ClipRegion);
+    path = (cast createPath(({ final __callArgument26:Dynamic = 'nonZero'; __callArgument26; })) : Path);
+    ClipRegion.appendEllipseToPath__clipRegion(({ final __callArgument28:Dynamic = path; __callArgument28; }), (cast rectangle.x : Float), (cast rectangle.y : Float), (cast rectangle.width : Float), (cast rectangle.height : Float));
+    return cast (cast createClipRegionFromPath(({ final __callArgument30:Dynamic = path; __callArgument30; }), (cast tolerance : Float)) : flighthq.types.ClipRegion);
     return cast null;
   }
 
   public static function createClipRegionFromPath(path:Path, tolerance:Float = 0.25):flighthq.types.ClipRegion {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var rect:Rectangle = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath(({ final __callArgument16:Dynamic = path; __callArgument16; }), (cast tolerance : Float)) : Array<Array<Float>>);
-    rect = (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle);
-    ClipRegion.setRectangleToContoursBounds__clipRegion(({ final __callArgument17:Dynamic = rect; __callArgument17; }), ({ final __callArgument18:Dynamic = contours; __callArgument18; }));
+    contours = (cast flattenPath(({ final __callArgument32:Dynamic = path; __callArgument32; }), (cast tolerance : Float)) : Array<Array<Float>>);
+    rect = (cast (#if js _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) #else createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Rectangle);
+    ClipRegion.setRectangleToContoursBounds__clipRegion(({ final __callArgument34:Dynamic = rect; __callArgument34; }), ({ final __callArgument35:Dynamic = contours; __callArgument35; }));
     return cast { contours: contours, rect: rect, version: 0.0, winding: _Runtime.field(path, 'winding') };
     return cast null;
   }
 
   public static function createClipRegionFromRectangle(rectangle:RectangleLike):flighthq.types.ClipRegion {
-    return cast { contours: null, rect: (cast cloneRectangle(({ final __callArgument19:Dynamic = rectangle; __callArgument19; })) : Rectangle), version: 0.0, winding: 'nonZero' };
+    return cast { contours: null, rect: (cast cloneRectangle(({ final __callArgument38:Dynamic = rectangle; __callArgument38; })) : Rectangle), version: 0.0, winding: 'nonZero' };
     return cast null;
   }
 
   public static function createClipRegionFromRoundedRectangle(rectangle:RectangleLike, radius:Float, tolerance:Float = 0.25):flighthq.types.ClipRegion {
     var path:Path = cast _Runtime.UNDEFINED;
-    if ((cast ((cast radius : Float) <= (cast 0.0 : Float)) : Bool)) { return cast (cast createClipRegionFromRectangle(({ final __callArgument20:Dynamic = rectangle; __callArgument20; })) : flighthq.types.ClipRegion); }
-    path = (cast createPath(({ final __callArgument21:Dynamic = 'nonZero'; __callArgument21; })) : Path);
-    ClipRegion.appendRoundedRectToPath__clipRegion(({ final __callArgument22:Dynamic = path; __callArgument22; }), (cast rectangle.x : Float), (cast rectangle.y : Float), (cast rectangle.width : Float), (cast rectangle.height : Float), (cast radius : Float));
-    return cast (cast createClipRegionFromPath(({ final __callArgument23:Dynamic = path; __callArgument23; }), (cast tolerance : Float)) : flighthq.types.ClipRegion);
+    if ((cast ((cast radius : Float) <= (cast 0.0 : Float)) : Bool)) { return cast (cast createClipRegionFromRectangle(({ final __callArgument40:Dynamic = rectangle; __callArgument40; })) : flighthq.types.ClipRegion); }
+    path = (cast createPath(({ final __callArgument42:Dynamic = 'nonZero'; __callArgument42; })) : Path);
+    ClipRegion.appendRoundedRectToPath__clipRegion(({ final __callArgument44:Dynamic = path; __callArgument44; }), (cast rectangle.x : Float), (cast rectangle.y : Float), (cast rectangle.width : Float), (cast rectangle.height : Float), (cast radius : Float));
+    return cast (cast createClipRegionFromPath(({ final __callArgument46:Dynamic = path; __callArgument46; }), (cast tolerance : Float)) : flighthq.types.ClipRegion);
     return cast null;
   }
 
@@ -246,7 +246,7 @@ class ClipRegion {
   }
 
   public static function isClipRegionEmpty(clip:flighthq.types.ClipRegion):Bool {
-    if ((cast (cast isEmptyRectangle(({ final __callArgument24:Dynamic = clip.rect; __callArgument24; })) : Bool) : Bool)) { return cast true; }
+    if ((cast (cast isEmptyRectangle(({ final __callArgument48:Dynamic = clip.rect; __callArgument48; })) : Bool) : Bool)) { return cast true; }
     if ((cast ((cast !_Runtime.strictEquals(clip.contours, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(clip.contours, 'length'), 0.0) : Bool)) : Bool)) { return cast true; }
     return cast false;
     return cast null;
@@ -265,7 +265,7 @@ class ClipRegion {
     inRect = clip.rect;
     inWinding = clip.winding;
     if ((cast _Runtime.strictEquals(inContours, null) : Bool)) {
-      copyRectangle(({ final __callArgument25:Dynamic = out.rect; __callArgument25; }), ({ final __callArgument26:Dynamic = inRect; __callArgument26; }));
+      copyRectangle(({ final __callArgument50:Dynamic = out.rect; __callArgument50; }), ({ final __callArgument51:Dynamic = inRect; __callArgument51; }));
       (out.contours = cast (null : Null<Array<Array<Float>>>));
       (out.winding = cast (inWinding : PathWinding));
       (out.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((out.version + 1.0)), 0) : Float));
@@ -318,14 +318,14 @@ class ClipRegion {
         return;
       }
     }
-    copyRectangle(({ final __callArgument27:Dynamic = out.rect; __callArgument27; }), ({ final __callArgument28:Dynamic = inRect; __callArgument28; }));
+    copyRectangle(({ final __callArgument54:Dynamic = out.rect; __callArgument54; }), ({ final __callArgument55:Dynamic = inRect; __callArgument55; }));
     (out.contours = cast ((cast _Runtime.mapArray((cast inContours : Array<Array<Float>>), function(c:Array<Float>, __unused12:Float, __unused13:Array<Array<Float>>):Array<Float> return _Runtime.slice(c, 0, null), _Runtime.UNDEFINED)) : Null<Array<Array<Float>>>));
     (out.winding = cast (inWinding : PathWinding));
     (out.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((out.version + 1.0)), 0) : Float));
   }
 
   public static function releaseClipRegion(clip:flighthq.types.ClipRegion):Void {
-    if ((cast ((cast !_Runtime.strictEquals(ClipRegion._releaseGuard__clipRegion, null) : Bool) && (cast _Runtime.includes(ClipRegion.clipRegionPool__clipRegion, clip) : Bool)) : Bool)) { (cast ClipRegion._releaseGuard__clipRegion : flighthq.types.ClipRegion->Void)(({ final __callArgument29:Dynamic = clip; __callArgument29; })); }
+    if ((cast ((cast !_Runtime.strictEquals(ClipRegion._releaseGuard__clipRegion, null) : Bool) && (cast _Runtime.includes(ClipRegion.clipRegionPool__clipRegion, clip) : Bool)) : Bool)) { (cast ClipRegion._releaseGuard__clipRegion : flighthq.types.ClipRegion->Void)(({ final __callArgument58:Dynamic = clip; __callArgument58; })); }
     _Runtime.callProperty(ClipRegion.clipRegionPool__clipRegion, 'push', cast ([clip] : Array<Dynamic>));
   }
 
@@ -337,7 +337,7 @@ class ClipRegion {
   public static var _releaseGuard__clipRegion:Null<ClipRegionReleaseGuard> = _Runtime.explicitNull();
 
   public static function setClipRegionToRectangle(out:flighthq.types.ClipRegion, rectangle:RectangleLike):Void {
-    copyRectangle(({ final __callArgument30:Dynamic = out.rect; __callArgument30; }), ({ final __callArgument31:Dynamic = rectangle; __callArgument31; }));
+    copyRectangle(({ final __callArgument60:Dynamic = out.rect; __callArgument60; }), ({ final __callArgument61:Dynamic = rectangle; __callArgument61; }));
     (out.contours = cast (null : Null<Array<Array<Float>>>));
     (out.winding = cast ('nonZero' : PathWinding));
     (out.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((out.version + 1.0)), 0) : Float));
@@ -365,7 +365,7 @@ class ClipRegion {
     if ((cast _Runtime.strictEquals(inContours, null) : Bool)) {
       var axisAligned:Bool = ((cast _Runtime.strictEquals(mb, 0.0) : Bool) && (cast _Runtime.strictEquals(mc, 0.0) : Bool));
       if ((cast axisAligned : Bool)) {
-        matrixTransformRectangle(({ final __callArgument32:Dynamic = out.rect; __callArgument32; }), ({ final __callArgument33:Dynamic = matrix; __callArgument33; }), ({ final __callArgument34:Dynamic = inRect; __callArgument34; }));
+        matrixTransformRectangle(({ final __callArgument64:Dynamic = out.rect; __callArgument64; }), ({ final __callArgument65:Dynamic = matrix; __callArgument65; }), ({ final __callArgument66:Dynamic = inRect; __callArgument66; }));
         (out.contours = cast (null : Null<Array<Array<Float>>>));
         (out.winding = cast ('nonZero' : PathWinding));
       } else {
@@ -384,7 +384,7 @@ class ClipRegion {
         var quad:Array<Float> = (cast cast ([tlX, tlY, trX, trY, brX, brY, blX, blY] : Array<Dynamic>));
         (out.contours = cast (cast ([quad] : Array<Dynamic>) : Null<Array<Array<Float>>>));
         (out.winding = cast ('nonZero' : PathWinding));
-        ClipRegion.setRectangleToContoursBounds__clipRegion(({ final __callArgument35:Dynamic = out.rect; __callArgument35; }), ({ final __callArgument36:Dynamic = cast ([quad] : Array<Dynamic>); __callArgument36; }));
+        ClipRegion.setRectangleToContoursBounds__clipRegion(({ final __callArgument70:Dynamic = out.rect; __callArgument70; }), ({ final __callArgument71:Dynamic = cast ([quad] : Array<Dynamic>); __callArgument71; }));
       }
     } else {
       var newContours:Array<Array<Float>> = _Runtime.createArray(_Runtime.field(inContours, 'length'));
@@ -409,7 +409,7 @@ class ClipRegion {
       }
       (out.contours = cast (newContours : Null<Array<Array<Float>>>));
       (out.winding = cast (inWinding : PathWinding));
-      ClipRegion.setRectangleToContoursBounds__clipRegion(({ final __callArgument37:Dynamic = out.rect; __callArgument37; }), ({ final __callArgument38:Dynamic = newContours; __callArgument38; }));
+      ClipRegion.setRectangleToContoursBounds__clipRegion(({ final __callArgument74:Dynamic = out.rect; __callArgument74; }), ({ final __callArgument75:Dynamic = newContours; __callArgument75; }));
     }
     (out.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((out.version + 1.0)), 0) : Float));
   }
@@ -427,7 +427,7 @@ class ClipRegion {
     bContours = b.contours;
     aWinding = a.winding;
     bWinding = b.winding;
-    mergeRectangle(({ final __callArgument39:Dynamic = out.rect; __callArgument39; }), ({ final __callArgument40:Dynamic = aRect; __callArgument40; }), ({ final __callArgument41:Dynamic = bRect; __callArgument41; }));
+    mergeRectangle(({ final __callArgument78:Dynamic = out.rect; __callArgument78; }), ({ final __callArgument79:Dynamic = aRect; __callArgument79; }), ({ final __callArgument80:Dynamic = bRect; __callArgument80; }));
     if ((cast ((cast _Runtime.strictEquals(aContours, null) : Bool) && (cast _Runtime.strictEquals(bContours, null) : Bool)) : Bool)) {
       (out.contours = cast (null : Null<Array<Array<Float>>>));
       (out.winding = cast ('nonZero' : PathWinding));
@@ -450,7 +450,7 @@ class ClipRegion {
   public static final clipRegionPool__clipRegion:Array<flighthq.types.ClipRegion> = (cast cast ([] : Array<Dynamic>));
 
   public static function makeEmptyClipRegion__clipRegion():flighthq.types.ClipRegion {
-    return cast { contours: null, rect: (cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle), version: 0.0, winding: 'nonZero' };
+    return cast { contours: null, rect: (cast (#if js _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) #else createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Rectangle), version: 0.0, winding: 'nonZero' };
     return cast null;
   }
 
@@ -499,11 +499,11 @@ class ClipRegion {
   public static function appendCircleToPath__clipRegion(path:Path, cx:Float, cy:Float, r:Float):Void {
     var k:Float = cast _Runtime.UNDEFINED;
     k = (r * CIRCLE_KAPPA);
-    appendPathMoveTo(({ final __callArgument42:Dynamic = path; __callArgument42; }), (cast cx : Float), (cast (cy - r) : Float));
-    appendPathCubicCurveTo(({ final __callArgument43:Dynamic = path; __callArgument43; }), (cast (cx + k) : Float), (cast (cy - r) : Float), (cast (cx + r) : Float), (cast (cy - k) : Float), (cast (cx + r) : Float), (cast cy : Float));
-    appendPathCubicCurveTo(({ final __callArgument44:Dynamic = path; __callArgument44; }), (cast (cx + r) : Float), (cast (cy + k) : Float), (cast (cx + k) : Float), (cast (cy + r) : Float), (cast cx : Float), (cast (cy + r) : Float));
-    appendPathCubicCurveTo(({ final __callArgument45:Dynamic = path; __callArgument45; }), (cast (cx - k) : Float), (cast (cy + r) : Float), (cast (cx - r) : Float), (cast (cy + k) : Float), (cast (cx - r) : Float), (cast cy : Float));
-    appendPathCubicCurveTo(({ final __callArgument46:Dynamic = path; __callArgument46; }), (cast (cx - r) : Float), (cast (cy - k) : Float), (cast (cx - k) : Float), (cast (cy - r) : Float), (cast cx : Float), (cast (cy - r) : Float));
+    appendPathMoveTo(({ final __callArgument84:Dynamic = path; __callArgument84; }), (cast cx : Float), (cast (cy - r) : Float));
+    appendPathCubicCurveTo(({ final __callArgument86:Dynamic = path; __callArgument86; }), (cast (cx + k) : Float), (cast (cy - r) : Float), (cast (cx + r) : Float), (cast (cy - k) : Float), (cast (cx + r) : Float), (cast cy : Float));
+    appendPathCubicCurveTo(({ final __callArgument88:Dynamic = path; __callArgument88; }), (cast (cx + r) : Float), (cast (cy + k) : Float), (cast (cx + k) : Float), (cast (cy + r) : Float), (cast cx : Float), (cast (cy + r) : Float));
+    appendPathCubicCurveTo(({ final __callArgument90:Dynamic = path; __callArgument90; }), (cast (cx - k) : Float), (cast (cy + r) : Float), (cast (cx - r) : Float), (cast (cy + k) : Float), (cast (cx - r) : Float), (cast cy : Float));
+    appendPathCubicCurveTo(({ final __callArgument92:Dynamic = path; __callArgument92; }), (cast (cx - r) : Float), (cast (cy - k) : Float), (cast (cx - k) : Float), (cast (cy - r) : Float), (cast cx : Float), (cast (cy - r) : Float));
   }
 
   public static function appendEllipseToPath__clipRegion(path:Path, x:Float, y:Float, w:Float, h:Float):Void {
@@ -519,11 +519,11 @@ class ClipRegion {
     ry = (h / 2.0);
     kx = (rx * CIRCLE_KAPPA);
     ky = (ry * CIRCLE_KAPPA);
-    appendPathMoveTo(({ final __callArgument47:Dynamic = path; __callArgument47; }), (cast cx : Float), (cast (cy - ry) : Float));
-    appendPathCubicCurveTo(({ final __callArgument48:Dynamic = path; __callArgument48; }), (cast (cx + kx) : Float), (cast (cy - ry) : Float), (cast (cx + rx) : Float), (cast (cy - ky) : Float), (cast (cx + rx) : Float), (cast cy : Float));
-    appendPathCubicCurveTo(({ final __callArgument49:Dynamic = path; __callArgument49; }), (cast (cx + rx) : Float), (cast (cy + ky) : Float), (cast (cx + kx) : Float), (cast (cy + ry) : Float), (cast cx : Float), (cast (cy + ry) : Float));
-    appendPathCubicCurveTo(({ final __callArgument50:Dynamic = path; __callArgument50; }), (cast (cx - kx) : Float), (cast (cy + ry) : Float), (cast (cx - rx) : Float), (cast (cy + ky) : Float), (cast (cx - rx) : Float), (cast cy : Float));
-    appendPathCubicCurveTo(({ final __callArgument51:Dynamic = path; __callArgument51; }), (cast (cx - rx) : Float), (cast (cy - ky) : Float), (cast (cx - kx) : Float), (cast (cy - ry) : Float), (cast cx : Float), (cast (cy - ry) : Float));
+    appendPathMoveTo(({ final __callArgument94:Dynamic = path; __callArgument94; }), (cast cx : Float), (cast (cy - ry) : Float));
+    appendPathCubicCurveTo(({ final __callArgument96:Dynamic = path; __callArgument96; }), (cast (cx + kx) : Float), (cast (cy - ry) : Float), (cast (cx + rx) : Float), (cast (cy - ky) : Float), (cast (cx + rx) : Float), (cast cy : Float));
+    appendPathCubicCurveTo(({ final __callArgument98:Dynamic = path; __callArgument98; }), (cast (cx + rx) : Float), (cast (cy + ky) : Float), (cast (cx + kx) : Float), (cast (cy + ry) : Float), (cast cx : Float), (cast (cy + ry) : Float));
+    appendPathCubicCurveTo(({ final __callArgument100:Dynamic = path; __callArgument100; }), (cast (cx - kx) : Float), (cast (cy + ry) : Float), (cast (cx - rx) : Float), (cast (cy + ky) : Float), (cast (cx - rx) : Float), (cast cy : Float));
+    appendPathCubicCurveTo(({ final __callArgument102:Dynamic = path; __callArgument102; }), (cast (cx - rx) : Float), (cast (cy - ky) : Float), (cast (cx - kx) : Float), (cast (cy - ry) : Float), (cast cx : Float), (cast (cy - ry) : Float));
   }
 
   public static function appendRoundedRectToPath__clipRegion(path:Path, x:Float, y:Float, w:Float, h:Float, r:Float):Void {
@@ -541,15 +541,15 @@ class ClipRegion {
     x2 = ((x + w) - cr);
     y1 = (y + cr);
     y2 = ((y + h) - cr);
-    appendPathMoveTo(({ final __callArgument52:Dynamic = path; __callArgument52; }), (cast x1 : Float), (cast y : Float));
-    appendPathLineTo(({ final __callArgument53:Dynamic = path; __callArgument53; }), (cast x2 : Float), (cast y : Float));
-    appendPathCubicCurveTo(({ final __callArgument54:Dynamic = path; __callArgument54; }), (cast (x2 + k) : Float), (cast y : Float), (cast (x + w) : Float), (cast (y1 - k) : Float), (cast (x + w) : Float), (cast y1 : Float));
-    appendPathLineTo(({ final __callArgument55:Dynamic = path; __callArgument55; }), (cast (x + w) : Float), (cast y2 : Float));
-    appendPathCubicCurveTo(({ final __callArgument56:Dynamic = path; __callArgument56; }), (cast (x + w) : Float), (cast (y2 + k) : Float), (cast (x2 + k) : Float), (cast (y + h) : Float), (cast x2 : Float), (cast (y + h) : Float));
-    appendPathLineTo(({ final __callArgument57:Dynamic = path; __callArgument57; }), (cast x1 : Float), (cast (y + h) : Float));
-    appendPathCubicCurveTo(({ final __callArgument58:Dynamic = path; __callArgument58; }), (cast (x1 - k) : Float), (cast (y + h) : Float), (cast x : Float), (cast (y2 + k) : Float), (cast x : Float), (cast y2 : Float));
-    appendPathLineTo(({ final __callArgument59:Dynamic = path; __callArgument59; }), (cast x : Float), (cast y1 : Float));
-    appendPathCubicCurveTo(({ final __callArgument60:Dynamic = path; __callArgument60; }), (cast x : Float), (cast (y1 - k) : Float), (cast (x1 - k) : Float), (cast y : Float), (cast x1 : Float), (cast y : Float));
+    appendPathMoveTo(({ final __callArgument104:Dynamic = path; __callArgument104; }), (cast x1 : Float), (cast y : Float));
+    appendPathLineTo(({ final __callArgument106:Dynamic = path; __callArgument106; }), (cast x2 : Float), (cast y : Float));
+    appendPathCubicCurveTo(({ final __callArgument108:Dynamic = path; __callArgument108; }), (cast (x2 + k) : Float), (cast y : Float), (cast (x + w) : Float), (cast (y1 - k) : Float), (cast (x + w) : Float), (cast y1 : Float));
+    appendPathLineTo(({ final __callArgument110:Dynamic = path; __callArgument110; }), (cast (x + w) : Float), (cast y2 : Float));
+    appendPathCubicCurveTo(({ final __callArgument112:Dynamic = path; __callArgument112; }), (cast (x + w) : Float), (cast (y2 + k) : Float), (cast (x2 + k) : Float), (cast (y + h) : Float), (cast x2 : Float), (cast (y + h) : Float));
+    appendPathLineTo(({ final __callArgument114:Dynamic = path; __callArgument114; }), (cast x1 : Float), (cast (y + h) : Float));
+    appendPathCubicCurveTo(({ final __callArgument116:Dynamic = path; __callArgument116; }), (cast (x1 - k) : Float), (cast (y + h) : Float), (cast x : Float), (cast (y2 + k) : Float), (cast x : Float), (cast y2 : Float));
+    appendPathLineTo(({ final __callArgument118:Dynamic = path; __callArgument118; }), (cast x : Float), (cast y1 : Float));
+    appendPathCubicCurveTo(({ final __callArgument120:Dynamic = path; __callArgument120; }), (cast x : Float), (cast (y1 - k) : Float), (cast (x1 - k) : Float), (cast y : Float), (cast x1 : Float), (cast y : Float));
   }
 
   public static function setRectangleToContoursBounds__clipRegion(out:RectangleLike, contours:Array<Array<Float>>):Void {

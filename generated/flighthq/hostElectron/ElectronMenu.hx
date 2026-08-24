@@ -21,11 +21,11 @@ class ElectronMenu {
     }, popupContextMenu: function(items:Array<MenuItemTemplate>, x:Float, y:Float):flighthq._internal._Promise<Null<String>> {
       return cast flighthq._internal._Async.create(function(resolve:flighthq._internal._Any, __unused0:flighthq._internal._Any):Void {
         var menu:flighthq.types.ElectronApi.ElectronMenu = cast _Runtime.UNDEFINED;
-        menu = (cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast ElectronMenu.toElectronTemplate__electronMenu(({ final __callArgument2:Dynamic = items; __callArgument2; }), ({ final __callArgument4:Dynamic = function(id:String):Void { resolve(({ final __callArgument3:Dynamic = id; __callArgument3; })); }; __callArgument4; })) : Array<ElectronMenuItemOptions>));
+        menu = (cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast ElectronMenu.toElectronTemplate__electronMenu(({ final __callArgument4:Dynamic = items; __callArgument4; }), ({ final __callArgument7:Dynamic = function(id:String):Void { resolve(({ final __callArgument5:Dynamic = id; __callArgument5; })); }; __callArgument7; })) : Array<ElectronMenuItemOptions>));
         try {
-          (cast menu : flighthq.types.ElectronApi.ElectronMenu).popup(({ final __callArgument5:Dynamic = { x: x, y: y }; __callArgument5; }));
+          (cast menu : flighthq.types.ElectronApi.ElectronMenu).popup(({ final __callArgument12:Dynamic = { x: x, y: y }; __callArgument12; }));
         } catch (__error:Dynamic) {
-          resolve(({ final __callArgument6:Dynamic = null; __callArgument6; }));
+          resolve(({ final __callArgument13:Dynamic = null; __callArgument13; }));
         }
       });
       return cast _Runtime.UNDEFINED;
@@ -44,7 +44,7 @@ class ElectronMenu {
       var options:ElectronMenuItemOptions = cast _Runtime.UNDEFINED;
       options = (cast { id: item.id, label: item.label, type: item.type, role: item.role, accelerator: item.accelerator, enabled: item.enabled, checked: item.checked });
       if (_Runtime.truthy(item.submenu)) {
-        ((cast options : ElectronMenuItemOptions).submenu = (cast ElectronMenu.toElectronTemplate__electronMenu(item.submenu, ({ final __callArgument7:Dynamic = onSelect; __callArgument7; })) : Array<ElectronMenuItemOptions>));
+        ((cast options : ElectronMenuItemOptions).submenu = (cast ElectronMenu.toElectronTemplate__electronMenu(item.submenu, ({ final __callArgument15:Dynamic = onSelect; __callArgument15; })) : Array<ElectronMenuItemOptions>));
       } else { if (_Runtime.truthy(_Runtime.andValue(onSelect, function():Dynamic return cast !_Runtime.strictEquals(item.id, _Runtime.field(_Runtime, 'UNDEFINED'))))) {
         ((cast options : { @:optional var click:Null<Void->Void>; }).click = (cast function():Void { onSelect((cast item.id : String)); }));
       } }

@@ -11,24 +11,24 @@ class GetPathPointAtDistance {
   public static function getPathPointAtDistance(path:Path, distance:Float, out:Vector2Like, tolerance:Float = 0.25):Bool {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     contours = (cast flattenPath(({ final __callArgument0:Dynamic = path; __callArgument0; }), (cast tolerance : Float)) : Array<Array<Float>>);
-    return cast (cast GetPathPointAtDistance.samplePathPoint__getPathPointAtDistance(({ final __callArgument1:Dynamic = contours; __callArgument1; }), (cast distance : Float), ({ final __callArgument2:Dynamic = out; __callArgument2; })) : Bool);
+    return cast (cast GetPathPointAtDistance.samplePathPoint__getPathPointAtDistance(({ final __callArgument2:Dynamic = contours; __callArgument2; }), (cast distance : Float), ({ final __callArgument3:Dynamic = out; __callArgument3; })) : Bool);
     return cast null;
   }
 
   public static function getPathPositionAtDistance(path:Path, distance:Float, pointOut:Vector2Like, tangentOut:Vector2Like, tolerance:Float = 0.25):Bool {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var hasPoint:Bool = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath(({ final __callArgument3:Dynamic = path; __callArgument3; }), (cast tolerance : Float)) : Array<Array<Float>>);
-    hasPoint = (cast GetPathPointAtDistance.samplePathPoint__getPathPointAtDistance(({ final __callArgument4:Dynamic = contours; __callArgument4; }), (cast distance : Float), ({ final __callArgument5:Dynamic = pointOut; __callArgument5; })) : Bool);
-    (cast GetPathPointAtDistance.samplePathTangent__getPathPointAtDistance(({ final __callArgument6:Dynamic = contours; __callArgument6; }), (cast distance : Float), ({ final __callArgument7:Dynamic = tangentOut; __callArgument7; })) : Bool);
+    contours = (cast flattenPath(({ final __callArgument6:Dynamic = path; __callArgument6; }), (cast tolerance : Float)) : Array<Array<Float>>);
+    hasPoint = (cast GetPathPointAtDistance.samplePathPoint__getPathPointAtDistance(({ final __callArgument8:Dynamic = contours; __callArgument8; }), (cast distance : Float), ({ final __callArgument9:Dynamic = pointOut; __callArgument9; })) : Bool);
+    (cast GetPathPointAtDistance.samplePathTangent__getPathPointAtDistance(({ final __callArgument12:Dynamic = contours; __callArgument12; }), (cast distance : Float), ({ final __callArgument13:Dynamic = tangentOut; __callArgument13; })) : Bool);
     return cast hasPoint;
     return cast null;
   }
 
   public static function getPathTangentAtDistance(path:Path, distance:Float, out:Vector2Like, tolerance:Float = 0.25):Bool {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath(({ final __callArgument8:Dynamic = path; __callArgument8; }), (cast tolerance : Float)) : Array<Array<Float>>);
-    return cast (cast GetPathPointAtDistance.samplePathTangent__getPathPointAtDistance(({ final __callArgument9:Dynamic = contours; __callArgument9; }), (cast distance : Float), ({ final __callArgument10:Dynamic = out; __callArgument10; })) : Bool);
+    contours = (cast flattenPath(({ final __callArgument16:Dynamic = path; __callArgument16; }), (cast tolerance : Float)) : Array<Array<Float>>);
+    return cast (cast GetPathPointAtDistance.samplePathTangent__getPathPointAtDistance(({ final __callArgument18:Dynamic = contours; __callArgument18; }), (cast distance : Float), ({ final __callArgument19:Dynamic = out; __callArgument19; })) : Bool);
     return cast null;
   }
 

@@ -48,11 +48,11 @@ class DisplayObject {
     var out:Node2D = cast _Runtime.UNDEFINED;
     out = (cast createNode((cast kind : String), (cast obj : Dynamic), (cast createData : Dynamic), (cast _Runtime.coalesce(createNode2DRuntimeFactory, function():Dynamic return cast (cast (cast createNode2DRuntime : flighthq._internal._Any) : NodeRuntimeFactory<R>)) : Dynamic)) : Node2D);
     initTransform2DTrait(({ final __callArgument0:Dynamic = out; __callArgument0; }), (cast obj : Dynamic));
-    initBoundsRectangleTrait(({ final __callArgument1:Dynamic = out; __callArgument1; }), (cast obj : Dynamic));
-    initAppearanceTrait(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = obj; __callArgument3; }));
-    initBlendModeTrait(({ final __callArgument4:Dynamic = out; __callArgument4; }), ({ final __callArgument5:Dynamic = obj; __callArgument5; }));
-    initMaterialTrait(({ final __callArgument6:Dynamic = out; __callArgument6; }), (cast obj : Dynamic));
-    initClipTrait(({ final __callArgument7:Dynamic = out; __callArgument7; }), (cast obj : Dynamic));
+    initBoundsRectangleTrait(({ final __callArgument2:Dynamic = out; __callArgument2; }), (cast obj : Dynamic));
+    initAppearanceTrait(({ final __callArgument4:Dynamic = out; __callArgument4; }), ({ final __callArgument5:Dynamic = obj; __callArgument5; }));
+    initBlendModeTrait(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = obj; __callArgument9; }));
+    initMaterialTrait(({ final __callArgument12:Dynamic = out; __callArgument12; }), (cast obj : Dynamic));
+    initClipTrait(({ final __callArgument14:Dynamic = out; __callArgument14; }), (cast obj : Dynamic));
     return cast out;
     return cast null;
   }
@@ -63,8 +63,8 @@ class DisplayObject {
     out = (cast createNodeRuntime((cast methods : Dynamic)) : Node2DRuntime);
     ((cast out : { @:optional var traits:Null<NodeTraitsKey<Node2DTraits>>; }).traits = Node2DTraitsKey);
     ((cast out : { var scene2d:Null<Scene2D>; }).scene2d = null);
-    initTransform2DRuntimeTrait(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = methods; __callArgument9; }));
-    initBoundsRectangleRuntimeTrait(({ final __callArgument10:Dynamic = out; __callArgument10; }), (cast methods : Dynamic));
+    initTransform2DRuntimeTrait(({ final __callArgument16:Dynamic = out; __callArgument16; }), ({ final __callArgument17:Dynamic = methods; __callArgument17; }));
+    initBoundsRectangleRuntimeTrait(({ final __callArgument20:Dynamic = out; __callArgument20; }), (cast methods : Dynamic));
     return cast out;
     return cast null;
   }

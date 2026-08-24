@@ -54,7 +54,7 @@ class GlPbrPrelude {
     if (_Runtime.truthy(_Runtime.andValue(_Runtime.orValue(_Runtime.field(key, 'hasColorAdjustment'), function():Dynamic return cast _Runtime.field(key, 'hasColorMatrix')), function():Dynamic return cast !_Runtime.strictEquals(colorAdjustmentFeature, null)))) {
       (body = cast (_Runtime.replace(body, 'precision highp float;', 'precision highp float;\n' + Std.string(_Runtime.select(_Runtime.field(key, 'hasColorMatrix'), function():Dynamic return cast _Runtime.field(colorAdjustmentFeature, 'matrixFragmentShaderChunk'), function():Dynamic return cast _Runtime.field(colorAdjustmentFeature, 'fragmentShaderChunk'))) + '', false) : Dynamic));
     }
-    return cast (((cast buildGlPbrDefineSource(({ final __callArgument1:Dynamic = key; __callArgument1; })) : String) + ((cast ((cast _Runtime.field(contributions, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast '#define HAS_PBR_EXTENSIONS\n' : Dynamic) : (cast '' : Dynamic))) + body);
+    return cast (((cast buildGlPbrDefineSource(({ final __callArgument2:Dynamic = key; __callArgument2; })) : String) + ((cast ((cast _Runtime.field(contributions, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast '#define HAS_PBR_EXTENSIONS\n' : Dynamic) : (cast '' : Dynamic))) + body);
     return cast null;
   }
 
@@ -71,7 +71,7 @@ class GlPbrPrelude {
 
   @:noCompletion
   public static function getGlPbrVertexSourceForKey(key:GlPbrDefineKey):String {
-    return cast (((cast buildGlPbrDefineSource(({ final __callArgument2:Dynamic = key; __callArgument2; })) : String) + _Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '')) + GlPbrPrelude.PBR_VERTEX_BODY__glPbrPrelude);
+    return cast (((cast buildGlPbrDefineSource(({ final __callArgument4:Dynamic = key; __callArgument4; })) : String) + _Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '')) + GlPbrPrelude.PBR_VERTEX_BODY__glPbrPrelude);
     return cast null;
   }
 

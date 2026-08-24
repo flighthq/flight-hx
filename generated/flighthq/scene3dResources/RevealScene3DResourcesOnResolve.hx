@@ -55,7 +55,7 @@ class RevealScene3DResourcesOnResolve {
     for (owner in _Runtime.iterable(owners)) {
       ((cast (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).node : { var alpha:Float; }).alpha = cast (from : Float));
     }
-    signals = (cast enableScene3DResourceSignals(({ final __callArgument7:Dynamic = resolver; __callArgument7; })) : Scene3DResourceSignals);
+    signals = (cast enableScene3DResourceSignals(({ final __callArgument9:Dynamic = resolver; __callArgument9; })) : Scene3DResourceSignals);
     slot = (cast function(event:{ var texture:Texture; }):Void {
       var textureOwners:Null<Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>> = cast _Runtime.UNDEFINED;
       textureOwners = ((cast ownersByTexture : flighthq._internal._Map<Texture, Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>>).get((cast event : { var texture:Texture; }).texture));
@@ -64,12 +64,12 @@ class RevealScene3DResourcesOnResolve {
       for (owner in _Runtime.iterable(textureOwners)) {
         ((cast (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).pending : flighthq._internal._Set<Texture>).delete_((cast event : { var texture:Texture; }).texture));
         if ((cast _Runtime.strictEquals((cast (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).pending : flighthq._internal._Set<Texture>).size, 0.0) : Bool)) {
-          (cast createTween(({ final __callArgument10:Dynamic = tweenManager; __callArgument10; }), (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).node, (cast fadeSeconds : Float), (cast { alpha: 1.0 } : Dynamic), (cast tweenOptions : Dynamic)) : Tween<Node3D>);
+          (cast createTween(({ final __callArgument13:Dynamic = tweenManager; __callArgument13; }), (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).node, (cast fadeSeconds : Float), (cast { alpha: 1.0 } : Dynamic), (cast tweenOptions : Dynamic)) : Tween<Node3D>);
         }
       }
     });
-    connectSignal((cast signals.onResourceResolved : Dynamic), (cast slot : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast signals.onResourceFailed : Dynamic), (cast slot : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast signals.onResourceResolved : Dynamic), (cast slot : Dynamic)] : Array<Dynamic>)) #else connectSignal((cast signals.onResourceResolved : Dynamic), (cast slot : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast signals.onResourceFailed : Dynamic), (cast slot : Dynamic)] : Array<Dynamic>)) #else connectSignal((cast signals.onResourceFailed : Dynamic), (cast slot : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     return cast function():Void {
       disconnectSignal((cast signals.onResourceResolved : Dynamic), (cast slot : Dynamic));
       disconnectSignal((cast signals.onResourceFailed : Dynamic), (cast slot : Dynamic));
@@ -95,13 +95,13 @@ class RevealScene3DResourcesOnResolve {
           var material:Null<Material> = (cast flighthq._internal._StaticIndex.readArray(materials, i) : Null<Material>);
           if ((cast _Runtime.strictEquals(material, null) : Bool)) { i++; continue; }
           _Runtime.setLength(slots, 0.0);
-          getScene3DMaterialTextures(resolver.registry, ({ final __callArgument11:Dynamic = material; __callArgument11; }), ({ final __callArgument12:Dynamic = slots; __callArgument12; }));
+          getScene3DMaterialTextures(resolver.registry, ({ final __callArgument15:Dynamic = material; __callArgument15; }), ({ final __callArgument16:Dynamic = slots; __callArgument16; }));
           {
             var j:Float = 0.0;
             while ((cast ((cast j : Float) < (cast _Runtime.field(slots, 'length') : Float)) : Bool)) {
               var texture:Texture = flighthq._internal._StaticIndex.readArray(slots, j);
-              var ref:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>> = (cast getScene3DTextureResourceReference(({ final __callArgument13:Dynamic = scene; __callArgument13; }), ({ final __callArgument14:Dynamic = texture; __callArgument14; })) : Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>);
-              if ((cast ((cast ((cast _Runtime.looseEquals(ref, null) : Bool) || (cast (cast hasTextureSource(({ final __callArgument15:Dynamic = texture; __callArgument15; })) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed) : Bool)) : Bool)) { j++; continue; }
+              var ref:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>> = (cast getScene3DTextureResourceReference(({ final __callArgument19:Dynamic = scene; __callArgument19; }), ({ final __callArgument20:Dynamic = texture; __callArgument20; })) : Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>);
+              if ((cast ((cast ((cast _Runtime.looseEquals(ref, null) : Bool) || (cast (cast hasTextureSource(({ final __callArgument23:Dynamic = texture; __callArgument23; })) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed) : Bool)) : Bool)) { j++; continue; }
               var ownerState:Null<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve> = ((cast ownersByNode : flighthq._internal._Map<Node3D, Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>).get(owner));
               if ((cast _Runtime.strictEquals(ownerState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                 (ownerState = cast ({ node: owner, pending: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []) } : Dynamic));

@@ -33,14 +33,14 @@ class GlRenderTextureEffect {
     sourceTarget = (cast getGlRenderTextureTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; })) : Null<GlRenderTarget>);
     operations = (cast _Runtime.flatMapArray((cast effects : Array<RenderEffect>), function(effect:RenderEffect, __unused0:Float, __unused1:Array<RenderEffect>):flighthq._internal._Union2<{ var effect:RenderEffect; var runner:GlRenderEffectRunner; }, Array<{ var effect:RenderEffect; var runner:GlRenderEffectRunner; }>> {
       var runner:Null<GlRenderEffectRunner> = cast _Runtime.UNDEFINED;
-      runner = (cast getGlRenderEffectRunner(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast _Runtime.field(effect, 'kind') : String)) : Null<GlRenderEffectRunner>);
+      runner = (cast getGlRenderEffectRunner(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast _Runtime.field(effect, 'kind') : String)) : Null<GlRenderEffectRunner>);
       return cast ((cast _Runtime.strictEquals(runner, null) : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([{ effect: effect, runner: runner }] : Array<Dynamic>) : Dynamic));
       return cast _Runtime.UNDEFINED;
     }, _Runtime.UNDEFINED));
-    GlRenderTextureEffect.reportGlRenderEffectApplication__glRenderTextureEffect(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast explainGlRenderEffectApplication(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = effects; __callArgument5; }), (cast !_Runtime.strictEquals(sourceTarget, null) : Bool), (cast _Runtime.strictEquals((cast (cast explainGlRenderTexture(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = dest; __callArgument7; })) : GlRenderTextureExplanation) : GlRenderTextureExplanation).status, 'ready') : Bool)) : GlRenderEffectApplicationExplanation));
+    GlRenderTextureEffect.reportGlRenderEffectApplication__glRenderTextureEffect(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast explainGlRenderEffectApplication(({ final __callArgument7:Dynamic = state; __callArgument7; }), ({ final __callArgument8:Dynamic = effects; __callArgument8; }), (cast !_Runtime.strictEquals(sourceTarget, null) : Bool), (cast _Runtime.strictEquals((cast (cast explainGlRenderTexture(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = dest; __callArgument10; })) : GlRenderTextureExplanation) : GlRenderTextureExplanation).status, 'ready') : Bool)) : GlRenderEffectApplicationExplanation));
     if ((cast _Runtime.strictEquals(sourceTarget, null) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(_Runtime.field(operations, 'length'), 0.0) : Bool)) { return cast false; }
-    (cast withGlRenderState : GlRenderState->(Void->Void)->Void)(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument14:Dynamic = function():Void {
+    (cast withGlRenderState : GlRenderState->(Void->Void)->Void)(({ final __callArgument32:Dynamic = state; __callArgument32; }), ({ final __callArgument43:Dynamic = function():Void {
       var current:GlRenderTarget = cast _Runtime.UNDEFINED;
       current = sourceTarget;
       {
@@ -49,14 +49,14 @@ class GlRenderTextureEffect {
           var operation:{ var effect:RenderEffect; var runner:GlRenderEffectRunner; } = flighthq._internal._StaticIndex.readArray(operations, index);
           var remaining:Float = _Runtime.subtractNumbers(_Runtime.field(operations, 'length'), index);
           var output:RenderTexture = ((cast _Runtime.strictEquals(_Runtime.fmod(remaining, 2.0), 1.0) : Bool) ? (cast dest : Dynamic) : (cast scratch : Dynamic));
-          writeGlRenderTextureTarget(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = output; __callArgument10; }), (cast function(target:GlRenderTarget):Void {
-            (cast operation : { var effect:RenderEffect; var runner:GlRenderEffectRunner; }).runner(({ final __callArgument11:Dynamic = { state: state, source: current, dest: target, pool: pool.effectTargets, sceneDepthTexture: null, sceneVelocityTexture: null }; __callArgument11; }), (cast operation : { var effect:RenderEffect; var runner:GlRenderEffectRunner; }).effect);
+          writeGlRenderTextureTarget(({ final __callArgument33:Dynamic = state; __callArgument33; }), ({ final __callArgument34:Dynamic = output; __callArgument34; }), (cast function(target:GlRenderTarget):Void {
+            (cast operation : { var effect:RenderEffect; var runner:GlRenderEffectRunner; }).runner(({ final __callArgument35:Dynamic = { state: state, source: current, dest: target, pool: pool.effectTargets, sceneDepthTexture: null, sceneVelocityTexture: null }; __callArgument35; }), (cast operation : { var effect:RenderEffect; var runner:GlRenderEffectRunner; }).effect);
           } : Dynamic));
-          (current = cast ((cast getGlRenderTextureTarget(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = output; __callArgument13; })) : Null<GlRenderTarget>) : Dynamic));
+          (current = cast ((cast getGlRenderTextureTarget(({ final __callArgument39:Dynamic = state; __callArgument39; }), ({ final __callArgument40:Dynamic = output; __callArgument40; })) : Null<GlRenderTarget>) : Dynamic));
           index++;
         }
       }
-    }; __callArgument14; }));
+    }; __callArgument43; }));
     return cast true;
     return cast null;
   }
@@ -83,7 +83,7 @@ class GlRenderTextureEffect {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(effects, 'length') : Float)) : Bool)) {
         var effect:RenderEffect = flighthq._internal._StaticIndex.readArray(effects, index);
-        if ((cast _Runtime.strictEquals((cast getGlRenderEffectRunner(({ final __callArgument15:Dynamic = state; __callArgument15; }), (cast _Runtime.field(effect, 'kind') : String)) : Null<GlRenderEffectRunner>), null) : Bool)) { _Runtime.callProperty(unregisteredKinds, 'push', cast ([_Runtime.field(effect, 'kind')] : Array<Dynamic>)); } else { if ((cast !(cast (cast isGlRenderEffectResolvable(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = effect; __callArgument17; })) : Bool) : Bool) : Bool)) { _Runtime.callProperty(unresolvedIndexes, 'push', cast ([index] : Array<Dynamic>)); } }
+        if ((cast _Runtime.strictEquals((cast getGlRenderEffectRunner(({ final __callArgument56:Dynamic = state; __callArgument56; }), (cast _Runtime.field(effect, 'kind') : String)) : Null<GlRenderEffectRunner>), null) : Bool)) { _Runtime.callProperty(unregisteredKinds, 'push', cast ([_Runtime.field(effect, 'kind')] : Array<Dynamic>)); } else { if ((cast !(cast (cast isGlRenderEffectResolvable(({ final __callArgument58:Dynamic = state; __callArgument58; }), ({ final __callArgument59:Dynamic = effect; __callArgument59; })) : Bool) : Bool) : Bool)) { _Runtime.callProperty(unresolvedIndexes, 'push', cast ([index] : Array<Dynamic>)); } }
         index++;
       }
     }

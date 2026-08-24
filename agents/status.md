@@ -5,6 +5,7 @@ Last updated: 2026-08-24
 ## Current State
 
 - The `443275fa` pin advances 68 Flight `develop` commits and inventories 153 packages, 319 public lanes, 36,109 exports, and 1,570 tests. Generator census tests now validate complete package coverage, report consistency, and reviewed emission safety instead of duplicating exact totals that fail on legitimate upstream additions. The typed-struct report labels 1,426 new schemas as unreviewed audit-only since the maintained baseline; they remain reflective unless separately fingerprint-approved. Repository checks and all 162 generator unit tests pass.
+- JavaScript direct calls now omit TypeScript-defaulted trailing arguments instead of materializing an observable extra `undefined`; static Haxe targets retain padded function arity, and `super` remains a direct constructor call. The historical `effects-canvas` default draw failures are closed, with focused parity passing 204/204. The upstream runner defaults to three package workers because each compiled bridge can consume multiple gigabytes; callers can still override `--jobs` explicitly.
 
 The preceding `9db114b3fe1db90a90a11541649cb3af8bb5ca62` pin inventories 151 packages: 149 translated and two source-derived Node CLI tooling exclusions. It accounts for 2,703 production source files, 1,553 routed test files, 315 public lanes, and 35,605 export records.
 

@@ -39,7 +39,7 @@ class CanvasRenderTarget {
     ((cast handles : { var context:flighthq._internal.dom.CanvasRenderingContext2D; }).context = target.context);
     flighthq._internal.backend.Canvas2dBackend.setField((cast handles : { var context:flighthq._internal.dom.CanvasRenderingContext2D; }).context, 'imageSmoothingEnabled', runtime.imageSmoothingEnabled);
     flighthq._internal.backend.Canvas2dBackend.setField((cast handles : { var context:flighthq._internal.dom.CanvasRenderingContext2D; }).context, 'imageSmoothingQuality', runtime.imageSmoothingQuality);
-    preserveColor = ({ final __structural1 = preserve; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var preserveColor:Null<flighthq._internal._Union2<Bool, Array<Bool>>>; }).preserveColor; });
+    preserveColor = ({ final __structural2 = preserve; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var preserveColor:Null<flighthq._internal._Union2<Bool, Array<Bool>>>; }).preserveColor; });
     preserved = ((cast _Runtime.strictEquals(_Runtime.typeofValue(preserveColor), 'boolean') : Bool) ? (cast preserveColor : Dynamic) : (cast _Runtime.strictEquals(_Runtime.optionalIndex(preserveColor, 0.0), true) : Dynamic));
     if ((cast !(cast preserved : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.call((cast handles : { var context:flighthq._internal.dom.CanvasRenderingContext2D; }).context, 'clearRect', cast ([0.0, 0.0, target.width, target.height] : Array<Dynamic>)); }
   }
@@ -88,8 +88,8 @@ class CanvasRenderTarget {
     var handles:CanvasRenderStateHandles__canvasRenderTarget = cast _Runtime.UNDEFINED;
     var next:Matrix = cast _Runtime.UNDEFINED;
     handles = (cast state : CanvasRenderStateHandles__canvasRenderTarget);
-    next = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix);
-    copyMatrix(({ final __callArgument2:Dynamic = next; __callArgument2; }), ({ final __callArgument3:Dynamic = transform; __callArgument3; }));
+    next = (cast (#if js _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) #else createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix);
+    copyMatrix(({ final __callArgument3:Dynamic = next; __callArgument3; }), ({ final __callArgument4:Dynamic = transform; __callArgument4; }));
     ((cast handles : { var renderTransform2D:Null<Matrix>; }).renderTransform2D = next);
   }
 }

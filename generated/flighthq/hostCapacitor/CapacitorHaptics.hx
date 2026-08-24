@@ -26,7 +26,7 @@ class CapacitorHaptics {
       return cast out;
       return cast _Runtime.UNDEFINED;
     }, impact: function(style:HapticImpactStyle):Bool {
-      flighthq._internal._Async.recover((cast haptics : CapacitorHapticsPlugin).impact(({ final __callArgument3:Dynamic = { style: (cast CapacitorHaptics.toCapacitorImpactStyle__capacitorHaptics(({ final __callArgument2:Dynamic = style; __callArgument2; })) : String) }; __callArgument3; })), function(__unused0:flighthq._internal._Any):Void {
+      flighthq._internal._Async.recover((cast haptics : CapacitorHapticsPlugin).impact(({ final __callArgument5:Dynamic = { style: (cast CapacitorHaptics.toCapacitorImpactStyle__capacitorHaptics(({ final __callArgument3:Dynamic = style; __callArgument3; })) : String) }; __callArgument5; })), function(__unused0:flighthq._internal._Any):Void {
 
       });
       return cast true;
@@ -35,7 +35,7 @@ class CapacitorHaptics {
       return cast true;
       return cast _Runtime.UNDEFINED;
     }, notification: function(type:HapticNotificationType):Bool {
-      flighthq._internal._Async.recover((cast haptics : CapacitorHapticsPlugin).notification(({ final __callArgument5:Dynamic = { type: (cast type : { var toUpperCase:flighthq._internal._Any; }).toUpperCase() }; __callArgument5; })), function(__unused1:flighthq._internal._Any):Void {
+      flighthq._internal._Async.recover((cast haptics : CapacitorHapticsPlugin).notification(({ final __callArgument7:Dynamic = { type: (cast type : { var toUpperCase:flighthq._internal._Any; }).toUpperCase() }; __callArgument7; })), function(__unused1:flighthq._internal._Any):Void {
 
       });
       return cast true;
@@ -47,7 +47,7 @@ class CapacitorHaptics {
       return cast true;
       return cast _Runtime.UNDEFINED;
     }, vibrate: function(durationMs:Float):Bool {
-      flighthq._internal._Async.recover((cast haptics : CapacitorHapticsPlugin).vibrate(({ final __callArgument7:Dynamic = { duration: durationMs }; __callArgument7; })), function(__unused3:flighthq._internal._Any):Void {
+      flighthq._internal._Async.recover((cast haptics : CapacitorHapticsPlugin).vibrate(({ final __callArgument9:Dynamic = { duration: durationMs }; __callArgument9; })), function(__unused3:flighthq._internal._Any):Void {
 
       });
       return cast true;

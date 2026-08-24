@@ -94,8 +94,8 @@ class Socket {
   public static function disposeSocket(socket:flighthq.types.Socket):Void {
     var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
     if ((cast (cast socket.runtime : { var disposed:Bool; }).disposed : Bool)) { return; }
-    closeSocket(({ final __callArgument4:Dynamic = socket; __callArgument4; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    detachSocket(({ final __callArgument5:Dynamic = socket; __callArgument5; }));
+    (#if js _Runtime.callValue(closeSocket, cast ([({ final __callArgument6:Dynamic = socket; __callArgument6; })] : Array<Dynamic>)) #else closeSocket(({ final __callArgument5:Dynamic = socket; __callArgument5; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    detachSocket(({ final __callArgument7:Dynamic = socket; __callArgument7; }));
     runtime = socket.runtime;
     (runtime.connection = cast (null : Null<SocketConnection>));
     (runtime.signals = cast (null : Null<SocketSignals>));
@@ -162,7 +162,7 @@ class Socket {
       return cast false;
     }
     if ((cast ((cast !_Runtime.strictEquals(runtime.readyState, 'open') : Bool) || (cast _Runtime.strictEquals(runtime.connection, null) : Bool)) : Bool)) { return cast false; }
-    return cast (cast runtime.connection : SocketConnection).sendSocketFrame(({ final __callArgument6:Dynamic = data; __callArgument6; }));
+    return cast (cast runtime.connection : SocketConnection).sendSocketFrame(({ final __callArgument9:Dynamic = data; __callArgument9; }));
     return cast null;
   }
 

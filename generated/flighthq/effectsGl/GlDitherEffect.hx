@@ -21,7 +21,7 @@ class GlDitherEffect {
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     levels = _Runtime.coalesce(_Runtime.field(effect, 'levels'), function():Dynamic return cast 4.0);
     program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'stylization.dither' : String), (cast GlDitherEffect.DITHER_FRAGMENT_SRC__glDitherEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; }), ({ final __callArgument3:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    drawGlFullscreenPass(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = program; __callArgument3; }), ({ final __callArgument4:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument4; }), ({ final __callArgument5:Dynamic = dest; __callArgument5; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_levels'), HxMath.max(2.0, levels));
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_resolution'), source.width, source.height);
     } : Dynamic));
@@ -32,7 +32,7 @@ class GlDitherEffect {
   });
 
   public static function registerGlDitherEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'DitherEffect' : String), ({ final __callArgument6:Dynamic = defaultGlDitherEffectRunner; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument12:Dynamic = state; __callArgument12; }), (cast 'DitherEffect' : String), ({ final __callArgument13:Dynamic = defaultGlDitherEffectRunner; __callArgument13; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast 'DitherEffect' : String), ({ final __callArgument11:Dynamic = defaultGlDitherEffectRunner; __callArgument11; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final DITHER_FRAGMENT_SRC__glDitherEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_levels;\nuniform vec2 u_resolution;\nout vec4 o_color;\nfloat bayer(ivec2 p) {\n  int x = p.x & 3;\n  int y = p.y & 3;\n  int m[16] = int[16](0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5);\n  return float(m[y * 4 + x]) / 16.0;\n}\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  ivec2 px = ivec2(v_texCoord * u_resolution);\n  float t = bayer(px) - 0.5;\n  float steps = u_levels - 1.0;\n  vec3 q = floor(c.rgb * steps + 0.5 + t) / steps;\n  o_color = vec4(clamp(q, 0.0, 1.0), c.a);\n}';

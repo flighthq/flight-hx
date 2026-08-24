@@ -21,10 +21,10 @@ class EnableWgpuScene3DForwardLightSelectionGuards {
 
   @:noCompletion
   public static function enableWgpuScene3DForwardLightSelectionGuards(state:WgpuRenderState):Void {
-    ((cast (cast getWgpuScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuScene3DRuntime) : { @:optional var forwardLightSelectionGuard:Null<Scene3DLightsLike->Void>; }).forwardLightSelectionGuard = cast (EnableWgpuScene3DForwardLightSelectionGuards.warnSelectionRequired__enableWgpuScene3DForwardLightSelectionGuards : Null<Scene3DLightsLike->Void>));
+    ((cast (cast getWgpuScene3DRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuScene3DRuntime) : { @:optional var forwardLightSelectionGuard:Null<Scene3DLightsLike->Void>; }).forwardLightSelectionGuard = cast (EnableWgpuScene3DForwardLightSelectionGuards.warnSelectionRequired__enableWgpuScene3DForwardLightSelectionGuards : Null<Scene3DLightsLike->Void>));
   }
 
   public static function warnSelectionRequired__enableWgpuScene3DForwardLightSelectionGuards(lights:Scene3DLightsLike):Void {
-    (cast logOnce((cast 'scene-wgpu:forward-light-selection-required' : String), ({ final __callArgument2:Dynamic = LogLevel.Warn; __callArgument2; }), (cast { message: 'drawWgpuScene3D: punctual lights exceed MAX_FORWARD_LIGHTS and will be input-order truncated — call prepareWgpuScene3DForwardLights after prepareScene3DRender and pass its result to drawWgpuScene3D.', pointLightCount: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(lights, 'point'), 'length'), function():Dynamic return cast 0.0), spotLightCount: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(lights, 'spot'), 'length'), function():Dynamic return cast 0.0) } : Dynamic), ({ final __callArgument3:Dynamic = 'scene-wgpu'; __callArgument3; })) : Bool);
+    (cast logOnce((cast 'scene-wgpu:forward-light-selection-required' : String), ({ final __callArgument4:Dynamic = LogLevel.Warn; __callArgument4; }), (cast { message: 'drawWgpuScene3D: punctual lights exceed MAX_FORWARD_LIGHTS and will be input-order truncated — call prepareWgpuScene3DForwardLights after prepareScene3DRender and pass its result to drawWgpuScene3D.', pointLightCount: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(lights, 'point'), 'length'), function():Dynamic return cast 0.0), spotLightCount: _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(lights, 'spot'), 'length'), function():Dynamic return cast 0.0) } : Dynamic), ({ final __callArgument5:Dynamic = 'scene-wgpu'; __callArgument5; })) : Bool);
   }
 }

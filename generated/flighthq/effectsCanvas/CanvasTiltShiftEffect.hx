@@ -78,7 +78,7 @@ class CanvasTiltShiftEffect {
   });
 
   public static function registerCanvasTiltShiftEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast 'TiltShiftEffect' : String), ({ final __callArgument4:Dynamic = defaultCanvasTiltShiftEffectRunner; __callArgument4; }));
+    registerCanvasRenderEffect(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast 'TiltShiftEffect' : String), ({ final __callArgument7:Dynamic = defaultCanvasTiltShiftEffectRunner; __callArgument7; }));
   }
 
   public static final TAP_REACH__canvasTiltShiftEffect:Float = 3.0;

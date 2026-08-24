@@ -35,7 +35,7 @@ class CanvasClip {
     s = (cast state : CanvasRenderState);
     target = _Runtime.subtractNumbers((cast data : RenderProxy2D).clipDepth, ((cast !_Runtime.looseEquals((cast source : { var clip:Null<ClipRegion>; }).clip, null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
     while ((cast ((cast (cast s : CanvasRenderState).currentClipDepth : Float) > (cast target : Float)) : Bool)) {
-      popCanvasClipRectangle(({ final __callArgument1:Dynamic = s; __callArgument1; }));
+      popCanvasClipRectangle(({ final __callArgument2:Dynamic = s; __callArgument2; }));
       (cast s : CanvasRenderState).currentClipDepth--;
     }
   }, pushClip: function(state:RenderState, data:RenderProxy2D, source:Node2D):Void {
@@ -45,9 +45,9 @@ class CanvasClip {
     clip = (cast source : { var clip:Null<ClipRegion>; }).clip;
     if ((cast _Runtime.strictEquals(clip, null) : Bool)) { return; }
     if ((cast _Runtime.strictEquals((cast clip : { var contours:Null<Array<Array<Float>>>; }).contours, null) : Bool)) {
-      pushCanvasClipRectangle(({ final __callArgument2:Dynamic = s; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast clip : { var rect:Rectangle; }).rect; __callArgument3; }), (cast data : RenderProxy2D).transform2D);
+      pushCanvasClipRectangle(({ final __callArgument4:Dynamic = s; __callArgument4; }), ({ final __callArgument5:Dynamic = (cast clip : { var rect:Rectangle; }).rect; __callArgument5; }), (cast data : RenderProxy2D).transform2D);
     } else {
-      pushCanvasClipContours(({ final __callArgument4:Dynamic = s; __callArgument4; }), (cast clip : { var contours:Null<Array<Array<Float>>>; }).contours, (cast clip : { var winding:PathWinding; }).winding, (cast data : RenderProxy2D).transform2D);
+      pushCanvasClipContours(({ final __callArgument8:Dynamic = s; __callArgument8; }), (cast clip : { var contours:Null<Array<Array<Float>>>; }).contours, (cast clip : { var winding:PathWinding; }).winding, (cast data : RenderProxy2D).transform2D);
     }
     (cast s : CanvasRenderState).currentClipDepth++;
   } });

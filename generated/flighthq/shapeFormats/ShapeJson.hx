@@ -84,7 +84,7 @@ class ShapeJson {
       _Runtime.callProperty(entries, 'push', cast ([{ key: key, args: args }] : Array<Dynamic>));
       (i = cast ((i + (argCount + 2.0)) : Dynamic));
     }
-    return cast _Runtime.jsonStringify({ shapeFormat: ShapeJson.SHAPE_JSON_FORMAT__shapeJson, commands: entries }, null, ({ final __typedStruct1 = options; __typedStruct1 == null ? _Runtime.UNDEFINED : __typedStruct1.space; }));
+    return cast _Runtime.jsonStringify({ shapeFormat: ShapeJson.SHAPE_JSON_FORMAT__shapeJson, commands: entries }, null, ({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.space; }));
     return cast null;
   }
 
@@ -102,8 +102,8 @@ class ShapeJson {
     if ((cast !_Runtime.strictEquals((cast root : { var shapeFormat:flighthq._internal._Any; }).shapeFormat, ShapeJson.SHAPE_JSON_FORMAT__shapeJson) : Bool)) { return cast null; }
     rawCommands = (cast root : { var commands:flighthq._internal._Any; }).commands;
     if ((cast !(cast _Runtime.isArray(rawCommands) : Bool) : Bool)) { return cast null; }
-    resolveTexture = ({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.resolveTexture; });
-    shape = (cast createShape(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Shape);
+    resolveTexture = ({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.resolveTexture; });
+    shape = (cast (#if js _Runtime.callValue(createShape, cast ([] : Array<Dynamic>)) #else createShape(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Shape);
     for (entry in _Runtime.iterable(rawCommands)) {
       if ((cast !(cast (cast ShapeJson.isPlainObject__shapeJson((cast entry : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast null; }
       var key:flighthq._internal._Any = (cast entry : { var key:flighthq._internal._Any; }).key;
@@ -123,7 +123,7 @@ class ShapeJson {
         _Runtime.callProperty(args, 'push', cast ([reconstructed] : Array<Dynamic>));
       }
       if ((cast drop : Bool)) { continue; }
-      if ((cast !(cast (cast ShapeJson.isValidShapeCommandArgs__shapeJson((cast key : String), ({ final __callArgument7:Dynamic = args; __callArgument7; })) : Bool) : Bool) : Bool)) { return cast null; }
+      if ((cast !(cast (cast ShapeJson.isValidShapeCommandArgs__shapeJson((cast key : String), ({ final __callArgument8:Dynamic = args; __callArgument8; })) : Bool) : Bool) : Bool)) { return cast null; }
       _Runtime.callHaxeRestValue(appender, _Runtime.concatArrays([[shape], _Runtime.toArray((cast args : Array<flighthq._internal._Any>))]), 1);
     }
     return cast shape;
@@ -142,7 +142,7 @@ class ShapeJson {
       return cast ((cast _Runtime.strictEquals(resolved, null) : Bool) ? (cast ShapeJson.DROP_COMMAND__shapeJson : Dynamic) : (cast resolved : Dynamic));
     }
     if ((cast (cast ShapeJson.isMatrixValue__shapeJson((cast value : flighthq._internal._Any)) : Bool) : Bool)) {
-      return cast (cast createMatrix(({ final __callArgument8:Dynamic = (cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).a; __callArgument8; }), ({ final __callArgument9:Dynamic = (cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).b; __callArgument9; }), ({ final __callArgument10:Dynamic = (cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).c; __callArgument10; }), ({ final __callArgument11:Dynamic = (cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).d; __callArgument11; }), ({ final __callArgument12:Dynamic = (cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).tx; __callArgument12; }), ({ final __callArgument13:Dynamic = (cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).ty; __callArgument13; })) : Matrix);
+      return cast (cast createMatrix(({ final __callArgument10:Dynamic = (cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).a; __callArgument10; }), ({ final __callArgument11:Dynamic = (cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).b; __callArgument11; }), ({ final __callArgument12:Dynamic = (cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).c; __callArgument12; }), ({ final __callArgument13:Dynamic = (cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).d; __callArgument13; }), ({ final __callArgument14:Dynamic = (cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).tx; __callArgument14; }), ({ final __callArgument15:Dynamic = (cast value : { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }).ty; __callArgument15; })) : Matrix);
     }
     return cast ShapeJson.MALFORMED_ARG__shapeJson;
     return cast null;

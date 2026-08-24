@@ -3203,10 +3203,23 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     const callee = expression.directCalleeType
       ? `(cast ${emitExpression(expression.callee)} : ${emitType(expression.directCalleeType)})`
       : emitExpression(expression.callee);
-    const arguments_ = expression.arguments.map((argument, index) =>
+    const staticArguments = expression.arguments.map((argument, index) =>
       emitCheckedCallArgument(expression, argument, index),
     );
-    const call = `${callee}(${arguments_.join(', ')})`;
+    const jsArguments = expression.arguments.flatMap((argument, index) =>
+      expression.omittedArguments?.[index] ? [] : [emitCheckedCallArgument(expression, argument, index)],
+    );
+    const directCall = (arguments_: string[]) => `${callee}(${arguments_.join(', ')})`;
+    // Function-valued variables need the padded Haxe arity on static targets,
+    // while JavaScript must preserve TypeScript's observable arguments.length.
+    // Haxe requires super constructor calls to stay syntactically direct.
+    const jsCall =
+      expression.callee.name === 'super'
+        ? directCall(jsArguments)
+        : `_Runtime.callValue(${callee}, cast ([${jsArguments.join(', ')}] : Array<Dynamic>))`;
+    const call = expression.omittedArguments?.some(Boolean)
+      ? `(#if js ${jsCall} #else ${directCall(staticArguments)} #end)`
+      : directCall(staticArguments);
     return expression.type &&
       expression.type.kind !== 'dynamic' &&
       !(expression.type.kind === 'primitive' && expression.type.name === 'Void')
@@ -3404,12 +3417,18 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     }
     if (expression.callee.generatedClass) {
       const generatedClass = expression.callee.generatedClass;
+      // Generated methods likewise expose Haxe optional/default parameters, so
+      // only explicit possibly-undefined arguments need a checked carrier.
       const call = (target: string) =>
         `(cast ${target} : ${safeName(generatedClass)}).${safeName(name)}(${expression.arguments
-          .map((argument, index) =>
-            expression.omittedArguments?.[index] || expression.undefinedArguments?.[index]
-              ? emitCheckedCallArgument(expression, argument, index)
-              : emitExpression(argument),
+          .flatMap((argument, index) =>
+            expression.omittedArguments?.[index]
+              ? []
+              : [
+                  expression.undefinedArguments?.[index]
+                    ? emitCheckedCallArgument(expression, argument, index)
+                    : emitExpression(argument),
+                ],
           )
           .join(', ')})`;
       if (!(expression.optional || expression.callee.optional)) return call(owner);

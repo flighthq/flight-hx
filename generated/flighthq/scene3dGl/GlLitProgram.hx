@@ -99,7 +99,7 @@ class GlLitProgram {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, program.locIblMaxMip, ((cast ibl : { var prefilteredMipCount:Float; }).prefilteredMipCount - 1.0));
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0));
     } else {
-      var placeholders:GlIblPlaceholders__glLitProgram = (cast GlLitProgram.ensureGlIblPlaceholders__glLitProgram(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlIblPlaceholders__glLitProgram);
+      var placeholders:GlIblPlaceholders__glLitProgram = (cast GlLitProgram.ensureGlIblPlaceholders__glLitProgram(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlIblPlaceholders__glLitProgram);
       flighthq._internal.backend.WebGl2Backend.activeTexture(gl, (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE0', flighthq._internal.backend.WebGl2Backend.TEXTURE0) + GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram));
       flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_CUBE_MAP', flighthq._internal.backend.WebGl2Backend.TEXTURE_CUBE_MAP), (cast placeholders : GlIblPlaceholders__glLitProgram).cube);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, program.locIblIrradiance, GlLitProgram.IBL_IRRADIANCE_TEXTURE_UNIT__glLitProgram);

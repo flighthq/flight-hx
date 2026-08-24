@@ -49,7 +49,7 @@ class Mesh {
     geometry = ((cast hasDeformation : Bool) ? (cast (cast cloneMeshGeometryForDeformation(source.geometry) : MeshGeometry) : Dynamic) : (cast source.geometry : Dynamic));
     clone = (cast createMesh(({ final __callArgument0:Dynamic = geometry; __callArgument0; }), _Runtime.slice(source.materials, 0, null), (cast source.kind : String), ({ final __callArgument1:Dynamic = { enabled: source.enabled, name: source.name }; __callArgument1; })) : flighthq.types.Mesh);
     (clone.alpha = cast (source.alpha : Float));
-    setNodeTransform3D((cast clone : Dynamic), ({ final __callArgument2:Dynamic = source; __callArgument2; }));
+    setNodeTransform3D((cast clone : Dynamic), ({ final __callArgument4:Dynamic = source; __callArgument4; }));
     if ((cast (cast isNodeLocalMatrix4Detached((cast source : Dynamic)) : Bool) : Bool)) { setNodeLocalMatrix4((cast clone : Dynamic), (cast getNodeLocalMatrix4((cast source : Dynamic)) : Matrix4Like)); }
     if ((cast !_Runtime.looseEquals(source.skin, null) : Bool)) { (clone.skin = cast (source.skin : Null<Skin>)); }
     if ((cast !_Runtime.looseEquals(source.morph, null) : Bool)) {
@@ -62,7 +62,7 @@ class Mesh {
   public static function createMesh(geometry:MeshGeometry, materials:Array<Null<Material>>, ?kind:Kind, ?obj:flighthq._internal._Partial<{ var enabled:Bool; var name:Null<String>; }>):flighthq.types.Mesh {
     if (kind == null) kind = cast (MeshKind : Dynamic);
     var mesh:flighthq.types.Mesh = cast _Runtime.UNDEFINED;
-    mesh = (cast createNode3D((cast kind : String), ({ final __callArgument3:Dynamic = obj; __callArgument3; })) : flighthq.types.Mesh);
+    mesh = (cast createNode3D((cast kind : String), ({ final __callArgument6:Dynamic = obj; __callArgument6; })) : flighthq.types.Mesh);
     (mesh.geometry = cast (geometry : MeshGeometry));
     (mesh.materials = cast (materials : Array<Null<Material>>));
     return cast mesh;
@@ -83,7 +83,7 @@ class Mesh {
 
   @:noCompletion
   public static function getMeshRuntime(source:flighthq.types.Mesh):MeshRuntime {
-    return cast (cast getNode3DRuntime(({ final __callArgument4:Dynamic = source; __callArgument4; })) : Node3DRuntime);
+    return cast (cast getNode3DRuntime(({ final __callArgument8:Dynamic = source; __callArgument8; })) : Node3DRuntime);
     return cast null;
   }
 

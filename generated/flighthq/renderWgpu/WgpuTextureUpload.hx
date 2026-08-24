@@ -19,6 +19,6 @@ class WgpuTextureUpload {
 
   @:noCompletion
   public static function uploadWgpuTextureImageResource(device:flighthq._internal.dom.GPUDevice, texture:flighthq._internal.dom.GPUTexture, origin:flighthq._internal.dom.GPUOrigin3D, image:Image):Void {
-    uploadWgpuTextureElement(({ final __callArgument2:Dynamic = device; __callArgument2; }), ({ final __callArgument3:Dynamic = texture; __callArgument3; }), (cast origin : flighthq._internal._Any), (cast _Runtime.field(image, 'width') : Float), (cast _Runtime.field(image, 'height') : Float), ({ final __callArgument4:Dynamic = (cast _Runtime.field(image, 'source') : flighthq._internal.dom.GPUCopyExternalImageSource); __callArgument4; }));
+    uploadWgpuTextureElement(({ final __callArgument4:Dynamic = device; __callArgument4; }), ({ final __callArgument5:Dynamic = texture; __callArgument5; }), (cast origin : flighthq._internal._Any), (cast _Runtime.field(image, 'width') : Float), (cast _Runtime.field(image, 'height') : Float), ({ final __callArgument6:Dynamic = (cast _Runtime.field(image, 'source') : flighthq._internal.dom.GPUCopyExternalImageSource); __callArgument6; }));
   }
 }

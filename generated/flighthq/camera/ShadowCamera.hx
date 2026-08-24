@@ -49,7 +49,7 @@ class ShadowCamera {
     setCamera3DViewMatrix4FromLookAt(({ final __callArgument0:Dynamic = camera; __callArgument0; }), ({ final __callArgument1:Dynamic = ShadowCamera._eye__shadowCamera; __callArgument1; }), ({ final __callArgument2:Dynamic = ShadowCamera._target__shadowCamera; __callArgument2; }), ({ final __callArgument3:Dynamic = up; __callArgument3; }));
     (camera.near = cast (radius : Float));
     (camera.far = cast ((radius * 3.0) : Float));
-    (camera.projection = cast ((cast createOrthographicProjection(({ final __callArgument4:Dynamic = { halfHeight: radius, halfWidth: radius }; __callArgument4; })) : OrthographicProjection) : Projection));
+    (camera.projection = cast ((cast createOrthographicProjection(({ final __callArgument8:Dynamic = { halfHeight: radius, halfWidth: radius }; __callArgument8; })) : OrthographicProjection) : Projection));
   }
 
   public static function configureDirectionalShadowCamera3DTightFit(camera:Camera3D, lightDirection:Vector3Like, worldBounds:AabbLike, padding:Float = 1.0):Void {
@@ -107,7 +107,7 @@ class ShadowCamera {
     (ShadowCamera._target__shadowCamera.x = cast (cx : Float));
     (ShadowCamera._target__shadowCamera.y = cast (cy : Float));
     (ShadowCamera._target__shadowCamera.z = cast (cz : Float));
-    setCamera3DViewMatrix4FromLookAt(({ final __callArgument5:Dynamic = camera; __callArgument5; }), ({ final __callArgument6:Dynamic = ShadowCamera._eye__shadowCamera; __callArgument6; }), ({ final __callArgument7:Dynamic = ShadowCamera._target__shadowCamera; __callArgument7; }), ((cast ((cast HxMath.abs(dy) : Float) > (cast 0.99 : Float)) : Bool) ? (cast ShadowCamera._upZ__shadowCamera : Dynamic) : (cast ShadowCamera._upY__shadowCamera : Dynamic)));
+    setCamera3DViewMatrix4FromLookAt(({ final __callArgument10:Dynamic = camera; __callArgument10; }), ({ final __callArgument11:Dynamic = ShadowCamera._eye__shadowCamera; __callArgument11; }), ({ final __callArgument12:Dynamic = ShadowCamera._target__shadowCamera; __callArgument12; }), ((cast ((cast HxMath.abs(dy) : Float) > (cast 0.99 : Float)) : Bool) ? (cast ShadowCamera._upZ__shadowCamera : Dynamic) : (cast ShadowCamera._upY__shadowCamera : Dynamic)));
     view = (cast camera.view : { var m:flighthq._internal._Float32Array; }).m;
     halfWidth = 0.0;
     halfHeight = 0.0;
@@ -133,7 +133,7 @@ class ShadowCamera {
     halfDepth = HxMath.max((((maxViewZ - minViewZ) * 0.5) * extentScale), 0.0001);
     (camera.near = cast (HxMath.max((-depthCenter - halfDepth), 0.0001) : Float));
     (camera.far = cast (HxMath.max((-depthCenter + halfDepth), (camera.near + 0.0001)) : Float));
-    (camera.projection = cast ((cast createOrthographicProjection(({ final __callArgument8:Dynamic = { halfHeight: HxMath.max((halfHeight * extentScale), 0.0001), halfWidth: HxMath.max((halfWidth * extentScale), 0.0001) }; __callArgument8; })) : OrthographicProjection) : Projection));
+    (camera.projection = cast ((cast createOrthographicProjection(({ final __callArgument16:Dynamic = { halfHeight: HxMath.max((halfHeight * extentScale), 0.0001), halfWidth: HxMath.max((halfWidth * extentScale), 0.0001) }; __callArgument16; })) : OrthographicProjection) : Projection));
   }
 
   public static final _eye__shadowCamera:Vector3Like = (cast { x: 0.0, y: 0.0, z: 0.0 });

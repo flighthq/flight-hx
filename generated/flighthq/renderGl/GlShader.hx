@@ -21,14 +21,14 @@ class GlShader {
 
   @:noCompletion
   public static function compileDefaultGlProgram(gl:flighthq._internal.dom.WebGL2RenderingContext):GlShaderLocations {
-    return cast (cast compileGlBitmapProgram(({ final __callArgument0:Dynamic = gl; __callArgument0; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : GlShaderLocations);
+    return cast (cast (#if js _Runtime.callValue(compileGlBitmapProgram, cast ([({ final __callArgument1:Dynamic = gl; __callArgument1; })] : Array<Dynamic>)) #else compileGlBitmapProgram(({ final __callArgument0:Dynamic = gl; __callArgument0; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : GlShaderLocations);
     return cast null;
   }
 
   @:noCompletion
   public static function compileGlBitmapProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, fragmentSrc:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform float u_alpha;\nout vec4 fragColor;\nvoid main() {\n  vec4 color = texture(u_texture, v_texCoord) * clamp(u_alpha, 0.0, 1.0);\n  if (color.a <= 0.0) discard;\n  fragColor = color;\n}'):GlShaderLocations {
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
-    program = (cast createGlProgram(({ final __callArgument1:Dynamic = gl; __callArgument1; }), (cast GlShader.VERTEX_SRC__glShader : String), (cast fragmentSrc : String), (cast 'Bitmap' : String)) : flighthq._internal.dom.WebGLProgram);
+    program = (cast createGlProgram(({ final __callArgument2:Dynamic = gl; __callArgument2; }), (cast GlShader.VERTEX_SRC__glShader : String), (cast fragmentSrc : String), (cast 'Bitmap' : String)) : flighthq._internal.dom.WebGLProgram);
     return cast { program: program, locPosition: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), locTexCoord: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_texCoord'), locMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_matrix'), locAlpha: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alpha'), locTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_texture') };
     return cast null;
   }
@@ -37,10 +37,10 @@ class GlShader {
   public static function createDefaultGlBitmapShader(shaderLoc:GlShaderLocations, matrixArray:flighthq._internal._Float32Array):GlBitmapShader {
     return cast { locations: shaderLoc, program: (cast shaderLoc : GlShaderLocations).program, bind: function(gl:flighthq._internal.dom.WebGL2RenderingContext, state:GlRenderState, renderProxy:RenderProxy2D):Void {
       var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-      runtime = (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime);
-      setGlAttributes(({ final __callArgument3:Dynamic = gl; __callArgument3; }), ({ final __callArgument4:Dynamic = shaderLoc; __callArgument4; }));
-      setGlMatrixFromTransform(({ final __callArgument5:Dynamic = gl; __callArgument5; }), ({ final __callArgument6:Dynamic = shaderLoc; __callArgument6; }), ({ final __callArgument7:Dynamic = matrixArray; __callArgument7; }), ({ final __callArgument8:Dynamic = (cast renderProxy : RenderProxy2D).transform2D; __callArgument8; }), ({ final __callArgument9:Dynamic = _Runtime.coalesce(runtime.renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas); __callArgument9; }));
-      setGlBaseUniforms(({ final __callArgument10:Dynamic = gl; __callArgument10; }), ({ final __callArgument11:Dynamic = shaderLoc; __callArgument11; }), ({ final __callArgument12:Dynamic = renderProxy; __callArgument12; }));
+      runtime = (cast getGlRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : GlRenderStateRuntime);
+      setGlAttributes(({ final __callArgument6:Dynamic = gl; __callArgument6; }), ({ final __callArgument7:Dynamic = shaderLoc; __callArgument7; }));
+      setGlMatrixFromTransform(({ final __callArgument10:Dynamic = gl; __callArgument10; }), ({ final __callArgument11:Dynamic = shaderLoc; __callArgument11; }), ({ final __callArgument12:Dynamic = matrixArray; __callArgument12; }), ({ final __callArgument13:Dynamic = (cast renderProxy : RenderProxy2D).transform2D; __callArgument13; }), ({ final __callArgument14:Dynamic = _Runtime.coalesce(runtime.renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas); __callArgument14; }));
+      setGlBaseUniforms(({ final __callArgument20:Dynamic = gl; __callArgument20; }), ({ final __callArgument21:Dynamic = shaderLoc; __callArgument21; }), ({ final __callArgument22:Dynamic = renderProxy; __callArgument22; }));
     } };
     return cast null;
   }
@@ -48,13 +48,13 @@ class GlShader {
   @:noCompletion
   public static function createGlBitmapShader(gl:flighthq._internal.dom.WebGL2RenderingContext, fragmentSrc:String, ?onBind:flighthq._internal.dom.WebGL2RenderingContext->GlShaderLocations->RenderProxy2D->Void):GlBitmapShader {
     var locations:GlShaderLocations = cast _Runtime.UNDEFINED;
-    locations = (cast compileGlBitmapProgram(({ final __callArgument13:Dynamic = gl; __callArgument13; }), (cast fragmentSrc : String)) : GlShaderLocations);
+    locations = (cast compileGlBitmapProgram(({ final __callArgument26:Dynamic = gl; __callArgument26; }), (cast fragmentSrc : String)) : GlShaderLocations);
     return cast { locations: locations, program: (cast locations : GlShaderLocations).program, bind: function(gl:flighthq._internal.dom.WebGL2RenderingContext, state:GlRenderState, renderProxy:RenderProxy2D):Void {
       var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-      runtime = (cast getGlRenderStateRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : GlRenderStateRuntime);
-      setGlAttributes(({ final __callArgument15:Dynamic = gl; __callArgument15; }), ({ final __callArgument16:Dynamic = locations; __callArgument16; }));
-      setGlMatrixFromTransform(({ final __callArgument17:Dynamic = gl; __callArgument17; }), ({ final __callArgument18:Dynamic = locations; __callArgument18; }), runtime.matrixArray, ({ final __callArgument19:Dynamic = (cast renderProxy : RenderProxy2D).transform2D; __callArgument19; }), ({ final __callArgument20:Dynamic = _Runtime.coalesce(runtime.renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas); __callArgument20; }));
-      setGlBaseUniforms(({ final __callArgument21:Dynamic = gl; __callArgument21; }), ({ final __callArgument22:Dynamic = locations; __callArgument22; }), ({ final __callArgument23:Dynamic = renderProxy; __callArgument23; }));
+      runtime = (cast getGlRenderStateRuntime(({ final __callArgument28:Dynamic = state; __callArgument28; })) : GlRenderStateRuntime);
+      setGlAttributes(({ final __callArgument30:Dynamic = gl; __callArgument30; }), ({ final __callArgument31:Dynamic = locations; __callArgument31; }));
+      setGlMatrixFromTransform(({ final __callArgument34:Dynamic = gl; __callArgument34; }), ({ final __callArgument35:Dynamic = locations; __callArgument35; }), runtime.matrixArray, ({ final __callArgument36:Dynamic = (cast renderProxy : RenderProxy2D).transform2D; __callArgument36; }), ({ final __callArgument37:Dynamic = _Runtime.coalesce(runtime.renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas); __callArgument37; }));
+      setGlBaseUniforms(({ final __callArgument42:Dynamic = gl; __callArgument42; }), ({ final __callArgument43:Dynamic = locations; __callArgument43; }), ({ final __callArgument44:Dynamic = renderProxy; __callArgument44; }));
       _Runtime.callOptionalValue(onBind, cast ([gl, locations, renderProxy] : Array<Dynamic>));
     } };
     return cast null;
@@ -65,10 +65,10 @@ class GlShader {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var shaderLoc:GlShaderLocations = cast _Runtime.UNDEFINED;
     var shader:GlBitmapShader = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument24:Dynamic = state; __callArgument24; })) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument48:Dynamic = state; __callArgument48; })) : GlRenderStateRuntime);
     if ((cast !_Runtime.strictEquals(runtime.defaultBitmapShader, null) : Bool)) { return cast runtime.defaultBitmapShader; }
     shaderLoc = (cast compileDefaultGlProgram((cast state : GlRenderState).gl) : GlShaderLocations);
-    shader = (cast createDefaultGlBitmapShader(({ final __callArgument25:Dynamic = shaderLoc; __callArgument25; }), runtime.matrixArray) : GlBitmapShader);
+    shader = (cast createDefaultGlBitmapShader(({ final __callArgument50:Dynamic = shaderLoc; __callArgument50; }), runtime.matrixArray) : GlBitmapShader);
     (runtime.defaultBitmapShader = cast (shader : Null<GlBitmapShader>));
     (runtime.shaderLoc = cast (shaderLoc : Null<GlShaderLocations>));
     return cast shader;

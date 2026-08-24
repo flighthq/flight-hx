@@ -46,7 +46,7 @@ class DomClip {
     if ((cast _Runtime.strictEquals(clip, null) : Bool)) { return; }
     runtime = (cast getDomRenderStateRuntime((cast state : DomRenderState)) : DomRenderStateRuntime);
     if ((cast _Runtime.strictEquals((cast clip : { var contours:Null<Array<Array<Float>>>; }).contours, null) : Bool)) {
-      pushDomClipRectangle((cast runtime.domClipStack : Dynamic), ({ final __callArgument1:Dynamic = (cast clip : { var rect:Rectangle; }).rect; __callArgument1; }), ({ final __callArgument2:Dynamic = (cast data : RenderProxy2D).transform2D; __callArgument2; }));
+      pushDomClipRectangle((cast runtime.domClipStack : Dynamic), ({ final __callArgument2:Dynamic = (cast clip : { var rect:Rectangle; }).rect; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast data : RenderProxy2D).transform2D; __callArgument3; }));
     } else {
       pushDomClipContours((cast runtime.domClipStack : Dynamic), (cast clip : { var contours:Null<Array<Array<Float>>>; }).contours, (cast clip : { var winding:PathWinding; }).winding, (cast data : RenderProxy2D).transform2D);
     }

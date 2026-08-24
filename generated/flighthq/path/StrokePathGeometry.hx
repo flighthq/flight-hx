@@ -80,7 +80,7 @@ class StrokePathGeometry {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(source, 'length') : Float)) : Bool)) {
         var subpath:StrokeSubpath__strokePathGeometry = flighthq._internal._StaticIndex.readArray(source, i);
-        var spans:Array<StrokeSubpath__strokePathGeometry> = ((cast ((cast _Runtime.field(dash, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast StrokePathGeometry.applyDash__strokePathGeometry((cast subpath : Dynamic), ({ final __callArgument1:Dynamic = dash; __callArgument1; }), (cast dashOffset : Float)) : Array<StrokeSubpath__strokePathGeometry>) : Dynamic) : (cast cast ([subpath] : Array<Dynamic>) : Dynamic));
+        var spans:Array<StrokeSubpath__strokePathGeometry> = ((cast ((cast _Runtime.field(dash, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast StrokePathGeometry.applyDash__strokePathGeometry((cast subpath : Dynamic), ({ final __callArgument2:Dynamic = dash; __callArgument2; }), (cast dashOffset : Float)) : Array<StrokeSubpath__strokePathGeometry>) : Dynamic) : (cast cast ([subpath] : Array<Dynamic>) : Dynamic));
         {
           var j:Float = 0.0;
           while ((cast ((cast j : Float) < (cast _Runtime.field(spans, 'length') : Float)) : Bool)) {
@@ -109,7 +109,7 @@ class StrokePathGeometry {
   public static function createStrokeSubpaths__strokePathGeometry(path:Path, tolerance:Float):Array<StrokeSubpath__strokePathGeometry> {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var result:Array<StrokeSubpath__strokePathGeometry> = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath(({ final __callArgument2:Dynamic = path; __callArgument2; }), (cast tolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath(({ final __callArgument4:Dynamic = path; __callArgument4; }), (cast tolerance : Float)) : Array<Array<Float>>);
     result = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
@@ -364,7 +364,7 @@ class StrokePathGeometry {
             (remaining = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast pattern : Array<Float>), (cast patternIndex : Float)) : Dynamic));
             (on = cast (_Runtime.strictEquals(_Runtime.fmod(patternIndex, 2.0), 0.0) : Dynamic));
             if ((cast ((cast !(cast on : Bool) : Bool) && (cast !_Runtime.strictEquals(current, null) : Bool)) : Bool)) {
-              StrokePathGeometry.pushDash__strokePathGeometry((cast result : Dynamic), ({ final __callArgument3:Dynamic = current; __callArgument3; }), (cast (cast subpath : StrokeSubpath__strokePathGeometry).sourceIndex : Float));
+              StrokePathGeometry.pushDash__strokePathGeometry((cast result : Dynamic), ({ final __callArgument6:Dynamic = current; __callArgument6; }), (cast (cast subpath : StrokeSubpath__strokePathGeometry).sourceIndex : Float));
               (current = cast (null : Dynamic));
             }
           }
@@ -378,7 +378,7 @@ class StrokePathGeometry {
             (current ??= cast ([startX, startY] : Array<Dynamic>));
             _Runtime.pushMany(current, cast ([endX, endY] : Array<Dynamic>));
           } else { if ((cast !_Runtime.strictEquals(current, null) : Bool)) {
-            StrokePathGeometry.pushDash__strokePathGeometry((cast result : Dynamic), ({ final __callArgument4:Dynamic = current; __callArgument4; }), (cast (cast subpath : StrokeSubpath__strokePathGeometry).sourceIndex : Float));
+            StrokePathGeometry.pushDash__strokePathGeometry((cast result : Dynamic), ({ final __callArgument8:Dynamic = current; __callArgument8; }), (cast (cast subpath : StrokeSubpath__strokePathGeometry).sourceIndex : Float));
             (current = cast (null : Dynamic));
           } }
           (remaining = cast ((remaining - step) : Dynamic));
@@ -386,7 +386,7 @@ class StrokePathGeometry {
         segment++;
       }
     }
-    if ((cast !_Runtime.strictEquals(current, null) : Bool)) { StrokePathGeometry.pushDash__strokePathGeometry((cast result : Dynamic), ({ final __callArgument5:Dynamic = current; __callArgument5; }), (cast (cast subpath : StrokeSubpath__strokePathGeometry).sourceIndex : Float)); }
+    if ((cast !_Runtime.strictEquals(current, null) : Bool)) { StrokePathGeometry.pushDash__strokePathGeometry((cast result : Dynamic), ({ final __callArgument10:Dynamic = current; __callArgument10; }), (cast (cast subpath : StrokeSubpath__strokePathGeometry).sourceIndex : Float)); }
     return cast result;
     return cast null;
   }
@@ -423,29 +423,29 @@ class StrokePathGeometry {
     left = (cast StrokePathGeometry.removeConsecutiveDuplicates__strokePathGeometry((cast piece : StrokePathPieceGeometry__strokePathGeometry).left) : Array<Float>);
     right = (cast StrokePathGeometry.removeConsecutiveDuplicates__strokePathGeometry((cast piece : StrokePathPieceGeometry__strokePathGeometry).right) : Array<Float>);
     if ((cast (cast piece : StrokePathPieceGeometry__strokePathGeometry).closed : Bool)) {
-      return cast _Runtime.orValue(((cast (cast StrokePathGeometry.hasPolylineSelfIntersection__strokePathGeometry(({ final __callArgument6:Dynamic = left; __callArgument6; }), (cast true : Bool)) : Bool) : Bool) || (cast (cast StrokePathGeometry.hasPolylineSelfIntersection__strokePathGeometry(({ final __callArgument7:Dynamic = right; __callArgument7; }), (cast true : Bool)) : Bool) : Bool)), function():Dynamic return cast (cast StrokePathGeometry.doPolylinesIntersect__strokePathGeometry(({ final __callArgument8:Dynamic = left; __callArgument8; }), (cast true : Bool), ({ final __callArgument9:Dynamic = right; __callArgument9; }), (cast true : Bool)) : Bool));
+      return cast _Runtime.orValue(((cast (cast StrokePathGeometry.hasPolylineSelfIntersection__strokePathGeometry(({ final __callArgument12:Dynamic = left; __callArgument12; }), (cast true : Bool)) : Bool) : Bool) || (cast (cast StrokePathGeometry.hasPolylineSelfIntersection__strokePathGeometry(({ final __callArgument14:Dynamic = right; __callArgument14; }), (cast true : Bool)) : Bool) : Bool)), function():Dynamic return cast (cast StrokePathGeometry.doPolylinesIntersect__strokePathGeometry(({ final __callArgument16:Dynamic = left; __callArgument16; }), (cast true : Bool), ({ final __callArgument17:Dynamic = right; __callArgument17; }), (cast true : Bool)) : Bool));
     }
-    outline = _Runtime.callProperty(left, 'concat', cast ([(cast piece : StrokePathPieceGeometry__strokePathGeometry).endCap, (cast StrokePathGeometry.reversePoints__strokePathGeometry(({ final __callArgument10:Dynamic = right; __callArgument10; })) : Array<Float>), (cast piece : StrokePathPieceGeometry__strokePathGeometry).startCap] : Array<Dynamic>));
-    return cast (cast StrokePathGeometry.hasPolylineSelfIntersection__strokePathGeometry((cast StrokePathGeometry.removeConsecutiveDuplicates__strokePathGeometry(({ final __callArgument11:Dynamic = outline; __callArgument11; })) : Array<Float>), (cast true : Bool)) : Bool);
+    outline = _Runtime.callProperty(left, 'concat', cast ([(cast piece : StrokePathPieceGeometry__strokePathGeometry).endCap, (cast StrokePathGeometry.reversePoints__strokePathGeometry(({ final __callArgument20:Dynamic = right; __callArgument20; })) : Array<Float>), (cast piece : StrokePathPieceGeometry__strokePathGeometry).startCap] : Array<Dynamic>));
+    return cast (cast StrokePathGeometry.hasPolylineSelfIntersection__strokePathGeometry((cast StrokePathGeometry.removeConsecutiveDuplicates__strokePathGeometry(({ final __callArgument22:Dynamic = outline; __callArgument22; })) : Array<Float>), (cast true : Bool)) : Bool);
     return cast null;
   }
 
   public static function hasPolylineSelfIntersection__strokePathGeometry(points:Array<Float>, closed:Bool):Bool {
     var count:Float = cast _Runtime.UNDEFINED;
     var segmentCount:Float = cast _Runtime.UNDEFINED;
-    count = (cast StrokePathGeometry.getPolylinePointCount__strokePathGeometry(({ final __callArgument12:Dynamic = points; __callArgument12; }), (cast closed : Bool)) : Float);
+    count = (cast StrokePathGeometry.getPolylinePointCount__strokePathGeometry(({ final __callArgument26:Dynamic = points; __callArgument26; }), (cast closed : Bool)) : Float);
     segmentCount = ((cast closed : Bool) ? (cast count : Dynamic) : (cast (count - 1.0) : Dynamic));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast segmentCount : Float)) : Bool)) {
         var iNext:Float = _Runtime.fmod((i + 1.0), count);
-        if ((cast (cast StrokePathGeometry.samePoint__strokePathGeometry(({ final __callArgument13:Dynamic = points; __callArgument13; }), (cast i : Float), (cast iNext : Float)) : Bool) : Bool)) { i++; continue; }
+        if ((cast (cast StrokePathGeometry.samePoint__strokePathGeometry(({ final __callArgument28:Dynamic = points; __callArgument28; }), (cast i : Float), (cast iNext : Float)) : Bool) : Bool)) { i++; continue; }
         {
           var j:Float = (i + 1.0);
           while ((cast ((cast j : Float) < (cast segmentCount : Float)) : Bool)) {
             var jNext:Float = _Runtime.fmod((j + 1.0), count);
-            if ((cast ((cast (cast StrokePathGeometry.samePoint__strokePathGeometry(({ final __callArgument14:Dynamic = points; __callArgument14; }), (cast j : Float), (cast jNext : Float)) : Bool) : Bool) || (cast (cast StrokePathGeometry.segmentsAreAdjacent__strokePathGeometry((cast i : Float), (cast j : Float), (cast segmentCount : Float), (cast closed : Bool)) : Bool) : Bool)) : Bool)) { j++; continue; }
-            if ((cast (cast StrokePathGeometry.segmentsIntersect__strokePathGeometry(({ final __callArgument15:Dynamic = points; __callArgument15; }), (cast i : Float), (cast iNext : Float), ({ final __callArgument16:Dynamic = points; __callArgument16; }), (cast j : Float), (cast jNext : Float)) : Bool) : Bool)) { return cast true; }
+            if ((cast ((cast (cast StrokePathGeometry.samePoint__strokePathGeometry(({ final __callArgument30:Dynamic = points; __callArgument30; }), (cast j : Float), (cast jNext : Float)) : Bool) : Bool) || (cast (cast StrokePathGeometry.segmentsAreAdjacent__strokePathGeometry((cast i : Float), (cast j : Float), (cast segmentCount : Float), (cast closed : Bool)) : Bool) : Bool)) : Bool)) { j++; continue; }
+            if ((cast (cast StrokePathGeometry.segmentsIntersect__strokePathGeometry(({ final __callArgument32:Dynamic = points; __callArgument32; }), (cast i : Float), (cast iNext : Float), ({ final __callArgument33:Dynamic = points; __callArgument33; }), (cast j : Float), (cast jNext : Float)) : Bool) : Bool)) { return cast true; }
             j++;
           }
         }
@@ -461,21 +461,21 @@ class StrokePathGeometry {
     var bCount:Float = cast _Runtime.UNDEFINED;
     var aSegments:Float = cast _Runtime.UNDEFINED;
     var bSegments:Float = cast _Runtime.UNDEFINED;
-    aCount = (cast StrokePathGeometry.getPolylinePointCount__strokePathGeometry(({ final __callArgument17:Dynamic = a; __callArgument17; }), (cast aClosed : Bool)) : Float);
-    bCount = (cast StrokePathGeometry.getPolylinePointCount__strokePathGeometry(({ final __callArgument18:Dynamic = b; __callArgument18; }), (cast bClosed : Bool)) : Float);
+    aCount = (cast StrokePathGeometry.getPolylinePointCount__strokePathGeometry(({ final __callArgument36:Dynamic = a; __callArgument36; }), (cast aClosed : Bool)) : Float);
+    bCount = (cast StrokePathGeometry.getPolylinePointCount__strokePathGeometry(({ final __callArgument38:Dynamic = b; __callArgument38; }), (cast bClosed : Bool)) : Float);
     aSegments = ((cast aClosed : Bool) ? (cast aCount : Dynamic) : (cast (aCount - 1.0) : Dynamic));
     bSegments = ((cast bClosed : Bool) ? (cast bCount : Dynamic) : (cast (bCount - 1.0) : Dynamic));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast aSegments : Float)) : Bool)) {
         var iNext:Float = _Runtime.fmod((i + 1.0), aCount);
-        if ((cast (cast StrokePathGeometry.samePoint__strokePathGeometry(({ final __callArgument19:Dynamic = a; __callArgument19; }), (cast i : Float), (cast iNext : Float)) : Bool) : Bool)) { i++; continue; }
+        if ((cast (cast StrokePathGeometry.samePoint__strokePathGeometry(({ final __callArgument40:Dynamic = a; __callArgument40; }), (cast i : Float), (cast iNext : Float)) : Bool) : Bool)) { i++; continue; }
         {
           var j:Float = 0.0;
           while ((cast ((cast j : Float) < (cast bSegments : Float)) : Bool)) {
             var jNext:Float = _Runtime.fmod((j + 1.0), bCount);
-            if ((cast (cast StrokePathGeometry.samePoint__strokePathGeometry(({ final __callArgument20:Dynamic = b; __callArgument20; }), (cast j : Float), (cast jNext : Float)) : Bool) : Bool)) { j++; continue; }
-            if ((cast (cast StrokePathGeometry.segmentsIntersect__strokePathGeometry(({ final __callArgument21:Dynamic = a; __callArgument21; }), (cast i : Float), (cast iNext : Float), ({ final __callArgument22:Dynamic = b; __callArgument22; }), (cast j : Float), (cast jNext : Float)) : Bool) : Bool)) { return cast true; }
+            if ((cast (cast StrokePathGeometry.samePoint__strokePathGeometry(({ final __callArgument42:Dynamic = b; __callArgument42; }), (cast j : Float), (cast jNext : Float)) : Bool) : Bool)) { j++; continue; }
+            if ((cast (cast StrokePathGeometry.segmentsIntersect__strokePathGeometry(({ final __callArgument44:Dynamic = a; __callArgument44; }), (cast i : Float), (cast iNext : Float), ({ final __callArgument45:Dynamic = b; __callArgument45; }), (cast j : Float), (cast jNext : Float)) : Bool) : Bool)) { return cast true; }
             j++;
           }
         }
@@ -489,7 +489,7 @@ class StrokePathGeometry {
   public static function getPolylinePointCount__strokePathGeometry(points:Array<Float>, closed:Bool):Float {
     var count:Float = cast _Runtime.UNDEFINED;
     count = (_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1);
-    return cast ((cast ((cast ((cast closed : Bool) && (cast ((cast count : Float) > (cast 1.0 : Float)) : Bool)) : Bool) && (cast (cast StrokePathGeometry.samePoint__strokePathGeometry(({ final __callArgument23:Dynamic = points; __callArgument23; }), (cast 0.0 : Float), (cast (count - 1.0) : Float)) : Bool) : Bool)) : Bool) ? (cast (count - 1.0) : Dynamic) : (cast count : Dynamic));
+    return cast ((cast ((cast ((cast closed : Bool) && (cast ((cast count : Float) > (cast 1.0 : Float)) : Bool)) : Bool) && (cast (cast StrokePathGeometry.samePoint__strokePathGeometry(({ final __callArgument48:Dynamic = points; __callArgument48; }), (cast 0.0 : Float), (cast (count - 1.0) : Float)) : Bool) : Bool)) : Bool) ? (cast (count - 1.0) : Dynamic) : (cast count : Dynamic));
     return cast null;
   }
 

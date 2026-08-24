@@ -27,14 +27,14 @@ class EnableColorAdjustmentGuards {
   public static function enableColorAdjustmentGuards(state:RenderState):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:SlotTable<ColorAdjustmentUnsupportedGuard> = cast _Runtime.UNDEFINED;
-    runtime = (cast getRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : RenderStateRuntime);
+    runtime = (cast getRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : RenderStateRuntime);
     table = _Runtime.coalesce((cast runtime.registries : { @:optional var colorAdjustmentUnsupportedGuard:Null<SlotTable<ColorAdjustmentUnsupportedGuard>>; }).colorAdjustmentUnsupportedGuard, function():Dynamic return cast (cast createSlotTable((cast 'ColorAdjustmentUnsupportedGuard' : String), (cast 'Disabled' : String)) : SlotTable<ColorAdjustmentUnsupportedGuard>));
-    if ((cast ((cast !_Runtime.strictEquals(({ final __structural2 = (cast table : SlotTable<ColorAdjustmentUnsupportedGuard>).entry; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) || (cast !_Runtime.strictEquals((cast (cast table : SlotTable<ColorAdjustmentUnsupportedGuard>).entry : { var state:String; var value:ColorAdjustmentUnsupportedGuard; }).value, EnableColorAdjustmentGuards.warnUnsupportedColorAdjustment__enableColorAdjustmentGuards) : Bool)) : Bool)) {
+    if ((cast ((cast !_Runtime.strictEquals(({ final __structural4 = (cast table : SlotTable<ColorAdjustmentUnsupportedGuard>).entry; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) || (cast !_Runtime.strictEquals((cast (cast table : SlotTable<ColorAdjustmentUnsupportedGuard>).entry : { var state:String; var value:ColorAdjustmentUnsupportedGuard; }).value, EnableColorAdjustmentGuards.warnUnsupportedColorAdjustment__enableColorAdjustmentGuards) : Bool)) : Bool)) {
       ((cast runtime.registries : { @:optional var colorAdjustmentUnsupportedGuard:Null<SlotTable<ColorAdjustmentUnsupportedGuard>>; }).colorAdjustmentUnsupportedGuard = cast (_Runtime.mergeObjects([table, { entry: { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: EnableColorAdjustmentGuards.warnUnsupportedColorAdjustment__enableColorAdjustmentGuards } }]) : Null<SlotTable<ColorAdjustmentUnsupportedGuard>>));
     }
   }
 
   public static function warnUnsupportedColorAdjustment__enableColorAdjustmentGuards():Void {
-    (cast logOnce((cast 'render:unsupported-color-adjustment' : String), ({ final __callArgument3:Dynamic = LogLevel.Warn; __callArgument3; }), (cast { message: 'enableColorAdjustments: a per-object color adjustment is not inline-able because it has no 4×5 matrix representation. Use an Effect pass for the unsupported operation.' } : Dynamic), ({ final __callArgument4:Dynamic = 'render'; __callArgument4; })) : Bool);
+    (cast logOnce((cast 'render:unsupported-color-adjustment' : String), ({ final __callArgument5:Dynamic = LogLevel.Warn; __callArgument5; }), (cast { message: 'enableColorAdjustments: a per-object color adjustment is not inline-able because it has no 4×5 matrix representation. Use an Effect pass for the unsupported operation.' } : Dynamic), ({ final __callArgument6:Dynamic = 'render'; __callArgument6; })) : Bool);
   }
 }

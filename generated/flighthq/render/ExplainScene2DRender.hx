@@ -31,8 +31,8 @@ class ExplainScene2DRender {
     var effectiveAlpha:Float = cast _Runtime.UNDEFINED;
     var reason:Scene2DRenderBlankReason = cast _Runtime.UNDEFINED;
     kind = (cast source : { var kind:String; }).kind;
-    hasRenderer = _Runtime.strictEquals(({ final __structural2 = ((cast (cast (cast (cast (cast getRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { var renderers:KeyedTable<Renderer>; }).renderers : KeyedTable<Renderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<Renderer>>).get(kind)); __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
-    proxy = (cast getRenderProxy2D(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = source; __callArgument4; })) : Null<RenderProxy2D>);
+    hasRenderer = _Runtime.strictEquals(({ final __structural4 = ((cast (cast (cast (cast (cast getRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { var renderers:KeyedTable<Renderer>; }).renderers : KeyedTable<Renderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<Renderer>>).get(kind)); __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
+    proxy = (cast getRenderProxy2D(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = source; __callArgument6; })) : Null<RenderProxy2D>);
     prepared = !_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED'));
     appearance = (cast (cast source : flighthq._internal._Any) : HasAppearance);
     visible = ((cast !_Runtime.strictEquals(proxy, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast proxy : RenderProxy2D).visible : Dynamic) : (cast (cast appearance : HasAppearance).visible : Dynamic));

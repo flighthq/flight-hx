@@ -27,14 +27,14 @@ class WgpuTiltShiftEffect {
     width = _Runtime.coalesce(effect.width, function():Dynamic return cast 0.3);
     blur = _Runtime.coalesce(effect.blur, function():Dynamic return cast 4.0);
     resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; })) : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; });
-    pipeline = (cast getWgpuEffectPipeline(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast 'lens.tiltShift' : String), (cast WgpuTiltShiftEffect.TILT_SHIFT_FRAGMENT_WGSL__wgpuTiltShiftEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast source : WgpuRenderTarget), ({ final __callArgument4:Dynamic = (cast dest : WgpuRenderTarget); __callArgument4; }), ({ final __callArgument5:Dynamic = pipeline; __callArgument5; }), ({ final __callArgument6:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    pipeline = (cast getWgpuEffectPipeline(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast 'lens.tiltShift' : String), (cast WgpuTiltShiftEffect.TILT_SHIFT_FRAGMENT_WGSL__wgpuTiltShiftEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast source : WgpuRenderTarget), ({ final __callArgument7:Dynamic = (cast dest : WgpuRenderTarget); __callArgument7; }), ({ final __callArgument8:Dynamic = pipeline; __callArgument8; }), ({ final __callArgument9:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast center : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast width : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast blur : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).width : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).height : Float));
-    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument6; }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument9; }));
   }
 
   public static final defaultWgpuTiltShiftEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
@@ -42,7 +42,7 @@ class WgpuTiltShiftEffect {
   });
 
   public static function registerWgpuTiltShiftEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect(({ final __callArgument7:Dynamic = state; __callArgument7; }), (cast 'TiltShiftEffect' : String), ({ final __callArgument8:Dynamic = defaultWgpuTiltShiftEffectRunner; __callArgument8; }));
+    registerWgpuRenderEffect(({ final __callArgument14:Dynamic = state; __callArgument14; }), (cast 'TiltShiftEffect' : String), ({ final __callArgument15:Dynamic = defaultWgpuTiltShiftEffectRunner; __callArgument15; }));
   }
 
   public static final TILT_SHIFT_FRAGMENT_WGSL__wgpuTiltShiftEffect:String = '\nstruct Uniforms {\n  u_center : f32,\n  u_width : f32,\n  u_blur : f32,\n  _pad0 : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let texel = vec2f(1.0) / uni.u_resolution;\n  let dist = abs(uv.y - uni.u_center);\n  let edge = uni.u_width * 0.5;\n  let amount = smoothstep(edge, edge + uni.u_width, dist);\n  let radius = amount * uni.u_blur;\n  var sum = vec4f(0.0);\n  var total = 0.0;\n  for (var i = -3; i <= 3; i = i + 1) {\n    let offset = vec2f(0.0, f32(i)) * radius * texel;\n    sum = sum + textureSampleLevel(tex, smp, uv + offset, 0.0);\n    total = total + 1.0;\n  }\n  return sum / total;\n}';

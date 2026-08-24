@@ -79,6 +79,6 @@ class TransformPath {
   }
 
   public static function translatePath(source:Path, dx:Float, dy:Float, out:Path):Void {
-    transformPath(({ final __callArgument2:Dynamic = source; __callArgument2; }), ({ final __callArgument3:Dynamic = { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: dx, ty: dy }; __callArgument3; }), ({ final __callArgument4:Dynamic = out; __callArgument4; }));
+    transformPath(({ final __callArgument4:Dynamic = source; __callArgument4; }), ({ final __callArgument5:Dynamic = { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: dx, ty: dy }; __callArgument5; }), ({ final __callArgument6:Dynamic = out; __callArgument6; }));
   }
 }

@@ -40,7 +40,7 @@ class PathMeshPool {
   public static function acquirePathMeshTyped(path:Path, tolerance:Float = 0.25):PathMeshTyped {
     var fresh:PathMeshTyped = cast _Runtime.UNDEFINED;
     var mesh:PathMeshTyped = cast _Runtime.UNDEFINED;
-    fresh = (cast tessellatePathTyped(({ final __callArgument1:Dynamic = path; __callArgument1; }), (cast tolerance : Float)) : PathMeshTyped);
+    fresh = (cast tessellatePathTyped(({ final __callArgument2:Dynamic = path; __callArgument2; }), (cast tolerance : Float)) : PathMeshTyped);
     mesh = ((cast ((cast _Runtime.field(PathMeshPool.typedPool__pathMeshPool, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.callProperty(PathMeshPool.typedPool__pathMeshPool, 'pop', cast ([] : Array<Dynamic>)) : Dynamic) : (cast { vertices: new flighthq._internal._Float32Array(0.0), indices: new flighthq._internal._UInt32Array(0.0) } : Dynamic));
     ((cast mesh : PathMeshTyped).vertices = (cast fresh : PathMeshTyped).vertices);
     ((cast mesh : PathMeshTyped).indices = (cast fresh : PathMeshTyped).indices);

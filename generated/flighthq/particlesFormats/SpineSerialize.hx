@@ -55,8 +55,8 @@ class SpineSerialize {
   public static function serializeSpineParticleDocument(config:ParticleEmitterConfig, ?existing:{ @:optional var name:Null<String>; @:optional var maxParticles:Null<Float>; @:optional var continuous:Null<Bool>; @:optional var duration:Null<Float>; @:optional var emission:Null<SpineRangeValue>; @:optional var life:Null<SpineRangeValue>; @:optional var lifeOffset:Null<SpineRangeValue>; @:optional var x:Null<SpineRangeValue>; @:optional var y:Null<SpineRangeValue>; @:optional var spawnShape:Null<String>; @:optional var spawnWidth:Null<SpineRangeValue>; @:optional var spawnHeight:Null<SpineRangeValue>; @:optional var velocity:Null<SpineRangeValue>; @:optional var angle:Null<SpineRangeValue>; @:optional var rotation:Null<SpineRangeValue>; @:optional var wind:Null<SpineRangeValue>; @:optional var gravity:Null<SpineRangeValue>; @:optional var scale:Null<SpineRangeValue>; @:optional var scaleEnd:Null<SpineRangeValue>; @:optional var tint:Null<Array<SpineTintKeyframe>>; @:optional var alpha:Null<Array<SpineAlphaKeyframe>>; @:optional var blendMode:Null<SpineBlendMode>; @:optional var premultiplied:Null<Bool>; @:optional var images:Null<Array<String>>; }):ParticleSerializeResult {
     var text:String = cast _Runtime.UNDEFINED;
     var warnings:Array<String> = cast _Runtime.UNDEFINED;
-    text = (cast serializeSpineParticle(({ final __callArgument1:Dynamic = config; __callArgument1; }), (cast existing : Dynamic)) : String);
-    warnings = (cast SpineSerialize.collectSpineSerializeWarnings__spineSerialize(({ final __callArgument2:Dynamic = config; __callArgument2; })) : Array<String>);
+    text = (cast serializeSpineParticle(({ final __callArgument2:Dynamic = config; __callArgument2; }), (cast existing : Dynamic)) : String);
+    warnings = (cast SpineSerialize.collectSpineSerializeWarnings__spineSerialize(({ final __callArgument4:Dynamic = config; __callArgument4; })) : Array<String>);
     return cast { text: text, warnings: warnings };
     return cast null;
   }

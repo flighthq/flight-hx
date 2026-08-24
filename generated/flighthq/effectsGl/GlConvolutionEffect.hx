@@ -52,8 +52,8 @@ class GlConvolutionEffect {
         i++;
       }
     }
-    program = (cast getGlEffectProgram(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast 'stylization.convolution' : String), (cast GlConvolutionEffect.CONVOLUTION_FRAGMENT_SRC__glConvolutionEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = program; __callArgument3; }), ({ final __callArgument4:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument4; }), ({ final __callArgument5:Dynamic = dest; __callArgument5; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast 'stylization.convolution' : String), (cast GlConvolutionEffect.CONVOLUTION_FRAGMENT_SRC__glConvolutionEffect : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = program; __callArgument5; }), ({ final __callArgument6:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument6; }), ({ final __callArgument7:Dynamic = dest; __callArgument7; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_texelSize'), (1.0 / source.width), (1.0 / source.height));
       flighthq._internal.backend.WebGl2Backend.uniform1fv(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_matrix[0]'), matrixData);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_matrixX'), matrixX);
@@ -62,7 +62,7 @@ class GlConvolutionEffect {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_bias'), bias);
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_clamp'), ((cast clampEdge : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
       flighthq._internal.backend.WebGl2Backend.uniform1i(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_preserveAlpha'), ((cast preserveAlpha : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)));
-      unpackColorRgba(({ final __callArgument6:Dynamic = GlConvolutionEffect.scratchEdgeColor__glConvolutionEffect; __callArgument6; }), (cast edgeColor : Float));
+      unpackColorRgba(({ final __callArgument8:Dynamic = GlConvolutionEffect.scratchEdgeColor__glConvolutionEffect; __callArgument8; }), (cast edgeColor : Float));
       flighthq._internal.backend.WebGl2Backend.uniform4f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_edgeColor'), flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlConvolutionEffect.scratchEdgeColor__glConvolutionEffect : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlConvolutionEffect.scratchEdgeColor__glConvolutionEffect : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlConvolutionEffect.scratchEdgeColor__glConvolutionEffect : Array<Float>), (cast 2.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlConvolutionEffect.scratchEdgeColor__glConvolutionEffect : Array<Float>), (cast 3.0 : Float)));
     } : Dynamic));
   }
@@ -72,7 +72,7 @@ class GlConvolutionEffect {
   });
 
   public static function registerGlConvolutionEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument7:Dynamic = state; __callArgument7; }), (cast 'ConvolutionEffect' : String), ({ final __callArgument8:Dynamic = defaultGlConvolutionEffectRunner; __callArgument8; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument18:Dynamic = state; __callArgument18; }), (cast 'ConvolutionEffect' : String), ({ final __callArgument19:Dynamic = defaultGlConvolutionEffectRunner; __callArgument19; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument16:Dynamic = state; __callArgument16; }), (cast 'ConvolutionEffect' : String), ({ final __callArgument17:Dynamic = defaultGlConvolutionEffectRunner; __callArgument17; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static function getAutoDivisor__glConvolutionEffect(matrix:Array<Float>, length:Float):Float {

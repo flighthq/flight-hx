@@ -36,19 +36,19 @@ class RiveSkin {
     skinIndex = (cast RiveSkin.findRiveSkin__riveSkin(({ final __callArgument0:Dynamic = artboard; __callArgument0; }), (cast skinnableIndex : Float)) : Float);
     if ((cast ((cast skinIndex : Float) < (cast 0.0 : Float)) : Bool)) { return cast null; }
     skinWorld = (cast RiveSkin.readRiveMatrix__riveSkin(flighthq._internal._StaticIndex.readArray(artboard.objects, skinIndex), (cast RiveSkin.RIVE_SKIN_XX__riveSkin : Float), (cast RiveSkin.RIVE_SKIN_YX__riveSkin : Float), (cast RiveSkin.RIVE_SKIN_XY__riveSkin : Float), (cast RiveSkin.RIVE_SKIN_YY__riveSkin : Float)) : Matrix);
-    tendons = (cast RiveSkin.collectRiveTendonBones__riveSkin(({ final __callArgument1:Dynamic = artboard; __callArgument1; }), (cast skinIndex : Float), ({ final __callArgument2:Dynamic = boneIndices; __callArgument2; })) : Array<RiveTendonBone__riveSkin>);
+    tendons = (cast RiveSkin.collectRiveTendonBones__riveSkin(({ final __callArgument2:Dynamic = artboard; __callArgument2; }), (cast skinIndex : Float), ({ final __callArgument3:Dynamic = boneIndices; __callArgument3; })) : Array<RiveTendonBone__riveSkin>);
     influenceCounts = new flighthq._internal._UInt16Array(_Runtime.field(points, 'length'));
     influences = (cast cast ([] : Array<Dynamic>));
     {
       var position:Float = 0.0;
       while ((cast ((cast position : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
         var point:RiveWeightedPoint = flighthq._internal._StaticIndex.readArray(points, position);
-        var weightIndex:Float = (cast RiveSkin.findRiveWeight__riveSkin(({ final __callArgument3:Dynamic = artboard; __callArgument3; }), (cast _Runtime.field(point, 'vertex') : Float)) : Float);
+        var weightIndex:Float = (cast RiveSkin.findRiveWeight__riveSkin(({ final __callArgument6:Dynamic = artboard; __callArgument6; }), (cast _Runtime.field(point, 'vertex') : Float)) : Float);
         if ((cast ((cast weightIndex : Float) < (cast 0.0 : Float)) : Bool)) { position++; continue; }
         var weight:RiveCoreObject = flighthq._internal._StaticIndex.readArray(artboard.objects, weightIndex);
-        var packed:Null<{ var indices:Float; var values:Float; }> = (cast RiveSkin.readRiveWeightSlots__riveSkin(({ final __callArgument4:Dynamic = weight; __callArgument4; }), _Runtime.field(point, 'kind')) : Null<{ var indices:Float; var values:Float; }>);
+        var packed:Null<{ var indices:Float; var values:Float; }> = (cast RiveSkin.readRiveWeightSlots__riveSkin(({ final __callArgument8:Dynamic = weight; __callArgument8; }), _Runtime.field(point, 'kind')) : Null<{ var indices:Float; var values:Float; }>);
         if ((cast _Runtime.strictEquals(packed, null) : Bool)) { position++; continue; }
-        matrixTransformPointXY(({ final __callArgument5:Dynamic = RiveSkin._bindSpace__riveSkin; __callArgument5; }), ({ final __callArgument6:Dynamic = skinWorld; __callArgument6; }), (cast _Runtime.field(point, 'x') : Float), (cast _Runtime.field(point, 'y') : Float));
+        matrixTransformPointXY(({ final __callArgument10:Dynamic = RiveSkin._bindSpace__riveSkin; __callArgument10; }), ({ final __callArgument11:Dynamic = skinWorld; __callArgument11; }), (cast _Runtime.field(point, 'x') : Float), (cast _Runtime.field(point, 'y') : Float));
         var written:Float = 0.0;
         {
           var slot:Float = 0.0;
@@ -57,12 +57,12 @@ class RiveSkin {
             if ((cast _Runtime.strictEquals(amount, 0.0) : Bool)) { slot++; continue; }
             var tendon:Float = (cast RiveSkin.readRivePackedByte__riveSkin((cast (cast packed : { var indices:Float; var values:Float; }).indices : Float), (cast slot : Float)) : Float);
             if ((cast ((cast _Runtime.strictEquals(tendon, RiveSkin.RIVE_IDENTITY_BONE_SLOT__riveSkin) : Bool) || (cast ((cast tendon : Float) > (cast _Runtime.field(tendons, 'length') : Float)) : Bool)) : Bool)) {
-              reportImportDiagnostic(({ final __callArgument7:Dynamic = diagnostics; __callArgument7; }), ({ final __callArgument8:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument8; }), (cast 'rive.unresolved-weight-bone' : String), (cast 'createRiveSkin2D' : String), ({ final __callArgument9:Dynamic = { index: tendon, vertex: _Runtime.field(point, 'vertex') }; __callArgument9; }));
+              reportImportDiagnostic(({ final __callArgument14:Dynamic = diagnostics; __callArgument14; }), ({ final __callArgument15:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument15; }), (cast 'rive.unresolved-weight-bone' : String), (cast 'createRiveSkin2D' : String), ({ final __callArgument16:Dynamic = { index: tendon, vertex: _Runtime.field(point, 'vertex') }; __callArgument16; }));
               slot++;
               continue;
             }
             var resolved:RiveTendonBone__riveSkin = flighthq._internal._StaticIndex.readArray(tendons, (tendon - 1.0));
-            inverseMatrixTransformPointXY(({ final __callArgument10:Dynamic = RiveSkin._boneSpace__riveSkin; __callArgument10; }), ({ final __callArgument11:Dynamic = (cast resolved : RiveTendonBone__riveSkin).bind; __callArgument11; }), (cast (cast RiveSkin._bindSpace__riveSkin : { var x:Float; var y:Float; }).x : Float), (cast (cast RiveSkin._bindSpace__riveSkin : { var x:Float; var y:Float; }).y : Float));
+            inverseMatrixTransformPointXY(({ final __callArgument20:Dynamic = RiveSkin._boneSpace__riveSkin; __callArgument20; }), ({ final __callArgument21:Dynamic = (cast resolved : RiveTendonBone__riveSkin).bind; __callArgument21; }), (cast (cast RiveSkin._bindSpace__riveSkin : { var x:Float; var y:Float; }).x : Float), (cast (cast RiveSkin._bindSpace__riveSkin : { var x:Float; var y:Float; }).y : Float));
             _Runtime.pushMany(influences, cast ([(cast resolved : RiveTendonBone__riveSkin).boneIndex, (cast RiveSkin._boneSpace__riveSkin : { var x:Float; var y:Float; }).x, (cast RiveSkin._boneSpace__riveSkin : { var x:Float; var y:Float; }).y, (amount / RiveSkin.RIVE_WEIGHT_SCALE__riveSkin)] : Array<Dynamic>));
             written++;
             slot++;
@@ -84,8 +84,8 @@ class RiveSkin {
       while ((cast ((cast index : Float) < (cast _Runtime.field(artboard.objects, 'length') : Float)) : Bool)) {
         var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(artboard.objects, index);
         if ((cast ((cast !_Runtime.strictEquals(object.typeKey, RiveSkin.RIVE_TENDON__riveSkin) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast index : Float)), skinIndex) : Bool)) : Bool)) { index++; continue; }
-        var bone:Float = (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument12:Dynamic = object; __callArgument12; }), (cast RiveSkin.RIVE_TENDON_BONE_ID__riveSkin : Float), (cast -1.0 : Float)) : Float);
-        _Runtime.callProperty(tendons, 'push', cast ([{ boneIndex: ((cast ((cast ((cast bone : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast bone : Float) < (cast _Runtime.field(boneIndices, 'length') : Float)) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast boneIndices : Array<Float>), (cast bone : Float)) : Dynamic) : (cast -1.0 : Dynamic)), bind: (cast RiveSkin.readRiveMatrix__riveSkin(({ final __callArgument13:Dynamic = object; __callArgument13; }), (cast RiveSkin.RIVE_TENDON_XX__riveSkin : Float), (cast RiveSkin.RIVE_TENDON_YX__riveSkin : Float), (cast RiveSkin.RIVE_TENDON_XY__riveSkin : Float), (cast RiveSkin.RIVE_TENDON_YY__riveSkin : Float)) : Matrix) }] : Array<Dynamic>));
+        var bone:Float = (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument24:Dynamic = object; __callArgument24; }), (cast RiveSkin.RIVE_TENDON_BONE_ID__riveSkin : Float), (cast -1.0 : Float)) : Float);
+        _Runtime.callProperty(tendons, 'push', cast ([{ boneIndex: ((cast ((cast ((cast bone : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast bone : Float) < (cast _Runtime.field(boneIndices, 'length') : Float)) : Bool)) : Bool) ? (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast boneIndices : Array<Float>), (cast bone : Float)) : Dynamic) : (cast -1.0 : Dynamic)), bind: (cast RiveSkin.readRiveMatrix__riveSkin(({ final __callArgument26:Dynamic = object; __callArgument26; }), (cast RiveSkin.RIVE_TENDON_XX__riveSkin : Float), (cast RiveSkin.RIVE_TENDON_YX__riveSkin : Float), (cast RiveSkin.RIVE_TENDON_XY__riveSkin : Float), (cast RiveSkin.RIVE_TENDON_YY__riveSkin : Float)) : Matrix) }] : Array<Dynamic>));
         index++;
       }
     }
@@ -120,13 +120,13 @@ class RiveSkin {
 
   public static function readRiveWeightSlots__riveSkin(weight:RiveCoreObject, kind:RiveWeightedPointKind):Null<{ var indices:Float; var values:Float; }> {
     if ((cast _Runtime.strictEquals(kind, (cast RiveWeightedPointKindValue : { var Point:String; var In:String; var Out:String; }).Point) : Bool)) {
-      return cast { indices: (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument14:Dynamic = weight; __callArgument14; }), (cast RiveSkin.RIVE_WEIGHT_INDICES__riveSkin : Float), (cast 0.0 : Float)) : Float), values: (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument15:Dynamic = weight; __callArgument15; }), (cast RiveSkin.RIVE_WEIGHT_VALUES__riveSkin : Float), (cast 0.0 : Float)) : Float) };
+      return cast { indices: (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument28:Dynamic = weight; __callArgument28; }), (cast RiveSkin.RIVE_WEIGHT_INDICES__riveSkin : Float), (cast 0.0 : Float)) : Float), values: (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument30:Dynamic = weight; __callArgument30; }), (cast RiveSkin.RIVE_WEIGHT_VALUES__riveSkin : Float), (cast 0.0 : Float)) : Float) };
     }
     if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast weight.typeKey : Float), (cast RiveSkin.RIVE_CUBIC_WEIGHT__riveSkin : Float)) : Bool) : Bool) : Bool)) { return cast null; }
     if ((cast _Runtime.strictEquals(kind, (cast RiveWeightedPointKindValue : { var Point:String; var In:String; var Out:String; }).In) : Bool)) {
-      return cast { indices: (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument16:Dynamic = weight; __callArgument16; }), (cast RiveSkin.RIVE_WEIGHT_IN_INDICES__riveSkin : Float), (cast 0.0 : Float)) : Float), values: (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument17:Dynamic = weight; __callArgument17; }), (cast RiveSkin.RIVE_WEIGHT_IN_VALUES__riveSkin : Float), (cast 0.0 : Float)) : Float) };
+      return cast { indices: (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument32:Dynamic = weight; __callArgument32; }), (cast RiveSkin.RIVE_WEIGHT_IN_INDICES__riveSkin : Float), (cast 0.0 : Float)) : Float), values: (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument34:Dynamic = weight; __callArgument34; }), (cast RiveSkin.RIVE_WEIGHT_IN_VALUES__riveSkin : Float), (cast 0.0 : Float)) : Float) };
     }
-    return cast { indices: (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument18:Dynamic = weight; __callArgument18; }), (cast RiveSkin.RIVE_WEIGHT_OUT_INDICES__riveSkin : Float), (cast 0.0 : Float)) : Float), values: (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument19:Dynamic = weight; __callArgument19; }), (cast RiveSkin.RIVE_WEIGHT_OUT_VALUES__riveSkin : Float), (cast 0.0 : Float)) : Float) };
+    return cast { indices: (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument36:Dynamic = weight; __callArgument36; }), (cast RiveSkin.RIVE_WEIGHT_OUT_INDICES__riveSkin : Float), (cast 0.0 : Float)) : Float), values: (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument38:Dynamic = weight; __callArgument38; }), (cast RiveSkin.RIVE_WEIGHT_OUT_VALUES__riveSkin : Float), (cast 0.0 : Float)) : Float) };
     return cast null;
   }
 
@@ -136,7 +136,7 @@ class RiveSkin {
   }
 
   public static function readRiveMatrix__riveSkin(source:RiveCoreObject, xxKey:Float, yxKey:Float, xyKey:Float, yyKey:Float):Matrix {
-    return cast (cast createMatrix(({ final __callArgument21:Dynamic = (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument20:Dynamic = source; __callArgument20; }), (cast xxKey : Float), (cast 1.0 : Float)) : Float); __callArgument21; }), ({ final __callArgument23:Dynamic = (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument22:Dynamic = source; __callArgument22; }), (cast xyKey : Float), (cast 0.0 : Float)) : Float); __callArgument23; }), ({ final __callArgument25:Dynamic = (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument24:Dynamic = source; __callArgument24; }), (cast yxKey : Float), (cast 0.0 : Float)) : Float); __callArgument25; }), ({ final __callArgument27:Dynamic = (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument26:Dynamic = source; __callArgument26; }), (cast yyKey : Float), (cast 1.0 : Float)) : Float); __callArgument27; }), ({ final __callArgument29:Dynamic = (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument28:Dynamic = source; __callArgument28; }), (cast (xxKey + RiveSkin.RIVE_MATRIX_TX_OFFSET__riveSkin) : Float), (cast 0.0 : Float)) : Float); __callArgument29; }), ({ final __callArgument31:Dynamic = (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument30:Dynamic = source; __callArgument30; }), (cast (xxKey + RiveSkin.RIVE_MATRIX_TY_OFFSET__riveSkin) : Float), (cast 0.0 : Float)) : Float); __callArgument31; })) : Matrix);
+    return cast (cast createMatrix(({ final __callArgument42:Dynamic = (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument40:Dynamic = source; __callArgument40; }), (cast xxKey : Float), (cast 1.0 : Float)) : Float); __callArgument42; }), ({ final __callArgument45:Dynamic = (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument43:Dynamic = source; __callArgument43; }), (cast xyKey : Float), (cast 0.0 : Float)) : Float); __callArgument45; }), ({ final __callArgument48:Dynamic = (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument46:Dynamic = source; __callArgument46; }), (cast yxKey : Float), (cast 0.0 : Float)) : Float); __callArgument48; }), ({ final __callArgument51:Dynamic = (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument49:Dynamic = source; __callArgument49; }), (cast yyKey : Float), (cast 1.0 : Float)) : Float); __callArgument51; }), ({ final __callArgument54:Dynamic = (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument52:Dynamic = source; __callArgument52; }), (cast (xxKey + RiveSkin.RIVE_MATRIX_TX_OFFSET__riveSkin) : Float), (cast 0.0 : Float)) : Float); __callArgument54; }), ({ final __callArgument57:Dynamic = (cast RiveSkin.readRiveNumber__riveSkin(({ final __callArgument55:Dynamic = source; __callArgument55; }), (cast (xxKey + RiveSkin.RIVE_MATRIX_TY_OFFSET__riveSkin) : Float), (cast 0.0 : Float)) : Float); __callArgument57; })) : Matrix);
     return cast null;
   }
 

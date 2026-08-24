@@ -63,7 +63,7 @@ class CanvasEffectCompositing {
     imageData = flighthq._internal.backend.Canvas2dBackend.call(srcCtx, 'getImageData', cast ([0.0, 0.0, w, h] : Array<Dynamic>));
     data = (cast imageData : flighthq._internal.dom.ImageData).data;
     pixelCount = (w * h);
-    transform(({ final __callArgument1:Dynamic = data; __callArgument1; }), (cast pixelCount : Float));
+    transform(({ final __callArgument2:Dynamic = data; __callArgument2; }), (cast pixelCount : Float));
     dstCtx = dest.context;
     flighthq._internal.backend.Canvas2dBackend.call(dstCtx, 'save', cast ([] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(dstCtx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
@@ -77,6 +77,6 @@ class CanvasEffectCompositing {
 
   @:noCompletion
   public static function passthroughCanvasEffectPass(dest:CanvasRenderTarget, source:CanvasRenderTarget):Void {
-    drawCanvasEffectPass(({ final __callArgument2:Dynamic = dest; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument6:Dynamic = dest; __callArgument6; }), ({ final __callArgument7:Dynamic = source; __callArgument7; }), (cast 'none' : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument4:Dynamic = dest; __callArgument4; }), ({ final __callArgument5:Dynamic = source; __callArgument5; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 }

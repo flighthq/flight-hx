@@ -29,7 +29,7 @@ class StepValidation {
   @:noCompletion
   public static function isPhysics2DContactStateValid(world:Physics2DWorld):Bool {
     for (contact in _Runtime.iterable(world.contacts)) {
-      if ((cast !(cast (cast isPhysics2DContactValid(({ final __callArgument5:Dynamic = contact; __callArgument5; })) : Bool) : Bool) : Bool)) { return cast false; }
+      if ((cast !(cast (cast isPhysics2DContactValid(({ final __callArgument6:Dynamic = contact; __callArgument6; })) : Bool) : Bool) : Bool)) { return cast false; }
     }
     return cast true;
     return cast null;
@@ -64,7 +64,7 @@ class StepValidation {
   @:noCompletion
   public static function isPhysics2DJointStateValid(world:Physics2DWorld):Bool {
     for (joint in _Runtime.iterable(world.joints)) {
-      if ((cast !(cast (cast StepValidation.isPhysics2DJointValid__stepValidation(({ final __callArgument8:Dynamic = joint; __callArgument8; })) : Bool) : Bool) : Bool)) { return cast false; }
+      if ((cast !(cast (cast StepValidation.isPhysics2DJointValid__stepValidation(({ final __callArgument10:Dynamic = joint; __callArgument10; })) : Bool) : Bool) : Bool)) { return cast false; }
     }
     return cast true;
     return cast null;
@@ -156,7 +156,7 @@ class StepValidation {
       if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.getIndex(body, key)] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
     }
     for (collider in _Runtime.iterable(_Runtime.field(body, 'colliders'))) {
-      if ((cast !(cast (cast StepValidation.isPhysics2DColliderStateValid__stepValidation(({ final __callArgument15:Dynamic = collider; __callArgument15; })) : Bool) : Bool) : Bool)) { return cast false; }
+      if ((cast !(cast (cast StepValidation.isPhysics2DColliderStateValid__stepValidation(({ final __callArgument18:Dynamic = collider; __callArgument18; })) : Bool) : Bool) : Bool)) { return cast false; }
     }
     return cast true;
     return cast null;

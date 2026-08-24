@@ -31,17 +31,17 @@ class GlExternalTexture {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     source = (cast createEntity(({ final __callArgument0:Dynamic = { height: options.height, kind: ExternalTextureSourceKind, version: 0.0, width: options.width }; __callArgument0; })) : ExternalTexture);
     texture = (cast createTexture((cast { colorSpace: options.colorSpace, sampler: _Runtime.select(options.sampler, function():Dynamic return cast (cast cloneSampler(options.sampler) : Sampler), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), dimension: '2d', source: source } : Dynamic)) : Texture2D);
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime);
-    ((cast ({ final __nullishOwner4 = runtime; final __nullishValue5:Null<flighthq._internal._WeakMap<ExternalTexture, flighthq._internal.dom.WebGLTexture>> = cast __nullishOwner4.glExternalTextureCache; __nullishValue5 == null ? (__nullishOwner4.glExternalTextureCache = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Null<flighthq._internal._WeakMap<ExternalTexture, flighthq._internal.dom.WebGLTexture>>)) : (cast __nullishValue5 : Null<flighthq._internal._WeakMap<ExternalTexture, flighthq._internal.dom.WebGLTexture>>); }) : flighthq._internal._WeakMap<Dynamic, Dynamic>).set(source, (cast handle)));
-    registerGlTextureResolver(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast ExternalTextureSourceKind : String), (cast function(__unused0:GlRenderState, __unused1:TextureLike, __unused2:Bool, __unused3:TextureColorSpace):Null<flighthq._internal.dom.WebGLTexture> return GlExternalTexture.resolveExternalGlTexture__glExternalTexture(__unused0, __unused1) : Dynamic));
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime);
+    ((cast ({ final __nullishOwner6 = runtime; final __nullishValue7:Null<flighthq._internal._WeakMap<ExternalTexture, flighthq._internal.dom.WebGLTexture>> = cast __nullishOwner6.glExternalTextureCache; __nullishValue7 == null ? (__nullishOwner6.glExternalTextureCache = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Null<flighthq._internal._WeakMap<ExternalTexture, flighthq._internal.dom.WebGLTexture>>)) : (cast __nullishValue7 : Null<flighthq._internal._WeakMap<ExternalTexture, flighthq._internal.dom.WebGLTexture>>); }) : flighthq._internal._WeakMap<Dynamic, Dynamic>).set(source, (cast handle)));
+    registerGlTextureResolver(({ final __callArgument8:Dynamic = state; __callArgument8; }), (cast ExternalTextureSourceKind : String), (cast function(__unused0:GlRenderState, __unused1:TextureLike, __unused2:Bool, __unused3:TextureColorSpace):Null<flighthq._internal.dom.WebGLTexture> return GlExternalTexture.resolveExternalGlTexture__glExternalTexture(__unused0, __unused1) : Dynamic));
     return cast texture;
     return cast null;
   }
 
   public static function disposeExternalGlTexture(state:GlRenderState, texture:Texture):Bool {
     var source:Null<ExternalTexture> = cast _Runtime.UNDEFINED;
-    source = (cast GlExternalTexture.getExternalTextureSource__glExternalTexture(({ final __callArgument7:Dynamic = texture; __callArgument7; })) : Null<ExternalTexture>);
-    return cast ((cast _Runtime.strictEquals(source, null) : Bool) ? (cast false : Dynamic) : (cast _Runtime.coalesce(({ final __collection10:Dynamic = (cast (cast getGlRenderStateRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : GlRenderStateRuntime) : { @:optional var glExternalTextureCache:Null<flighthq._internal._WeakMap<ExternalTexture, flighthq._internal.dom.WebGLTexture>>; }).glExternalTextureCache; __collection10 == null ? _Runtime.UNDEFINED : ((cast __collection10 : flighthq._internal._WeakMap<ExternalTexture, flighthq._internal.dom.WebGLTexture>).delete_(source)); }), function():Dynamic return cast false) : Dynamic));
+    source = (cast GlExternalTexture.getExternalTextureSource__glExternalTexture(({ final __callArgument10:Dynamic = texture; __callArgument10; })) : Null<ExternalTexture>);
+    return cast ((cast _Runtime.strictEquals(source, null) : Bool) ? (cast false : Dynamic) : (cast _Runtime.coalesce(({ final __collection16:Dynamic = (cast (cast getGlRenderStateRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : GlRenderStateRuntime) : { @:optional var glExternalTextureCache:Null<flighthq._internal._WeakMap<ExternalTexture, flighthq._internal.dom.WebGLTexture>>; }).glExternalTextureCache; __collection16 == null ? _Runtime.UNDEFINED : ((cast __collection16 : flighthq._internal._WeakMap<ExternalTexture, flighthq._internal.dom.WebGLTexture>).delete_(source)); }), function():Dynamic return cast false) : Dynamic));
     return cast null;
   }
 
@@ -49,19 +49,19 @@ class GlExternalTexture {
     var source:Null<ExternalTexture> = cast _Runtime.UNDEFINED;
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var handle:Null<flighthq._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;
-    source = (cast GlExternalTexture.getExternalTextureSource__glExternalTexture(({ final __callArgument11:Dynamic = texture; __callArgument11; })) : Null<ExternalTexture>);
+    source = (cast GlExternalTexture.getExternalTextureSource__glExternalTexture(({ final __callArgument17:Dynamic = texture; __callArgument17; })) : Null<ExternalTexture>);
     if ((cast _Runtime.strictEquals(source, null) : Bool)) { return cast null; }
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument12:Dynamic = state; __callArgument12; })) : GlRenderStateRuntime);
-    handle = ({ final __collection13:Dynamic = runtime.glExternalTextureCache; __collection13 == null ? _Runtime.UNDEFINED : ((cast __collection13 : flighthq._internal._WeakMap<ExternalTexture, flighthq._internal.dom.WebGLTexture>).get(source)); });
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument19:Dynamic = state; __callArgument19; })) : GlRenderStateRuntime);
+    handle = ({ final __collection21:Dynamic = runtime.glExternalTextureCache; __collection21 == null ? _Runtime.UNDEFINED : ((cast __collection21 : flighthq._internal._WeakMap<ExternalTexture, flighthq._internal.dom.WebGLTexture>).get(source)); });
     if ((cast _Runtime.strictEquals(handle, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
     flighthq._internal.backend.WebGl2Backend.bindTexture((cast state : GlRenderState).gl, flighthq._internal.backend.WebGl2Backend.contextConstant((cast state : GlRenderState).gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), handle);
-    applyGlSamplerState(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = runtime; __callArgument15; }), ({ final __callArgument16:Dynamic = handle; __callArgument16; }), (cast (cast texture : { var sampler:Sampler; }).sampler : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(applyGlSamplerState, cast ([({ final __callArgument25:Dynamic = state; __callArgument25; }), ({ final __callArgument26:Dynamic = runtime; __callArgument26; }), ({ final __callArgument27:Dynamic = handle; __callArgument27; }), (cast (cast texture : { var sampler:Sampler; }).sampler : Dynamic)] : Array<Dynamic>)) #else applyGlSamplerState(({ final __callArgument22:Dynamic = state; __callArgument22; }), ({ final __callArgument23:Dynamic = runtime; __callArgument23; }), ({ final __callArgument24:Dynamic = handle; __callArgument24; }), (cast (cast texture : { var sampler:Sampler; }).sampler : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     return cast handle;
     return cast null;
   }
 
   public static function getExternalTextureSource__glExternalTexture(texture:TextureLike):Null<ExternalTexture> {
-    if ((cast ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) || (cast !_Runtime.strictEquals(({ final __typedStruct17 = (cast texture : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source; __typedStruct17 == null ? _Runtime.UNDEFINED : (cast __typedStruct17 : { var kind:String; }).kind; }), ExternalTextureSourceKind) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) || (cast !_Runtime.strictEquals(({ final __typedStruct28 = (cast texture : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source; __typedStruct28 == null ? _Runtime.UNDEFINED : (cast __typedStruct28 : { var kind:String; }).kind; }), ExternalTextureSourceKind) : Bool)) : Bool)) { return cast null; }
     return cast (cast (cast texture : { var version:Float; var dimension:String; var source:Null<TextureSource>; var colorSpace:TextureColorSpace; var sampler:Sampler; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }).source : ExternalTexture);
     return cast null;
   }

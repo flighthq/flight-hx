@@ -11,7 +11,7 @@
     "moduleValueKeys": 0,
     "portableGlobalValueKeys": 33,
     "typeUses": 11280,
-    "valueUses": 1999
+    "valueUses": 2000
   },
   "types": [
     {
@@ -5181,7 +5181,7 @@
         "generated/flighthq/xml/XmlQuery.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
-      "uses": 755
+      "uses": 756
     },
     {
       "coverage": "js-only",

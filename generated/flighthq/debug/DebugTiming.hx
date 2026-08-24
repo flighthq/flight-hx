@@ -17,36 +17,36 @@ class DebugTiming {
   }
 
   public static function endDebugSpan(timer:Null<LogTimer>):Float {
-    return cast ((cast _Runtime.strictEquals(timer, null) : Bool) ? (cast -1.0 : Dynamic) : (cast (cast endLogTimer(({ final __callArgument1:Dynamic = timer; __callArgument1; })) : Float) : Dynamic));
+    return cast ((cast _Runtime.strictEquals(timer, null) : Bool) ? (cast -1.0 : Dynamic) : (cast (cast endLogTimer(({ final __callArgument2:Dynamic = timer; __callArgument2; })) : Float) : Dynamic));
     return cast null;
   }
 
   public static function markDebugFrame(?label:String, ?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
     if ((cast !(cast (cast isDebugEnabled() : Bool) : Bool) : Bool)) { return; }
-    logDebug((cast { frame: _Runtime.coalesce(label, function():Dynamic return cast ++DebugTiming._debugFrameNumber__debugTiming) } : Dynamic), ({ final __callArgument2:Dynamic = channel; __callArgument2; }));
+    logDebug((cast { frame: _Runtime.coalesce(label, function():Dynamic return cast ++DebugTiming._debugFrameNumber__debugTiming) } : Dynamic), ({ final __callArgument4:Dynamic = channel; __callArgument4; }));
   }
 
   public static function measureDebugSpan<T>(name:String, fn:Void->T, ?channel:Null<String>):T {
     if (channel == null) channel = cast (null : Dynamic);
     var timer:Null<LogTimer> = cast _Runtime.UNDEFINED;
-    timer = (cast beginDebugSpan((cast name : String), ({ final __callArgument3:Dynamic = channel; __callArgument3; })) : Null<LogTimer>);
+    timer = (cast beginDebugSpan((cast name : String), ({ final __callArgument6:Dynamic = channel; __callArgument6; })) : Null<LogTimer>);
     try {
       try {
-        var __returnValue4:Dynamic = (cast fn() : T);
+        var __returnValue8:Dynamic = (cast fn() : T);
         {
-          (cast endDebugSpan(({ final __callArgument5:Dynamic = timer; __callArgument5; })) : Float);
+          (cast endDebugSpan(({ final __callArgument9:Dynamic = timer; __callArgument9; })) : Float);
         }
-        return cast __returnValue4;
+        return cast __returnValue8;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError6:Dynamic) {
+    } catch (__finallyError11:Dynamic) {
       {
-        (cast endDebugSpan(({ final __callArgument7:Dynamic = timer; __callArgument7; })) : Float);
+        (cast endDebugSpan(({ final __callArgument12:Dynamic = timer; __callArgument12; })) : Float);
       }
-      _Runtime.throwValue(__finallyError6);
+      _Runtime.throwValue(__finallyError11);
     }
     {
-      (cast endDebugSpan(({ final __callArgument8:Dynamic = timer; __callArgument8; })) : Float);
+      (cast endDebugSpan(({ final __callArgument14:Dynamic = timer; __callArgument14; })) : Float);
     }
     return cast null;
   }

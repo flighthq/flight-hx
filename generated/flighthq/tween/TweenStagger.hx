@@ -30,7 +30,7 @@ class TweenStagger {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var staggerOffset:Float = (cast TweenStagger.computeStaggerDelay__tweenStagger((cast i : Float), (cast count : Float), (cast each : Float), ({ final __callArgument4:Dynamic = from; __callArgument4; }), ({ final __callArgument5:Dynamic = staggerEase; __callArgument5; })) : Float);
-        var tween:Tween<T> = (cast createTween(({ final __callArgument6:Dynamic = manager; __callArgument6; }), (cast flighthq._internal._StaticIndex.readArray(targets, i) : Dynamic), (cast duration : Float), (cast propertyMap : Dynamic), ({ final __callArgument7:Dynamic = _Runtime.mergeObjects([options, { delay: (baseDelay + staggerOffset) }]); __callArgument7; })) : Tween<T>);
+        var tween:Tween<T> = (cast createTween(({ final __callArgument8:Dynamic = manager; __callArgument8; }), (cast flighthq._internal._StaticIndex.readArray(targets, i) : Dynamic), (cast duration : Float), (cast propertyMap : Dynamic), ({ final __callArgument9:Dynamic = _Runtime.mergeObjects([options, { delay: (baseDelay + staggerOffset) }]); __callArgument9; })) : Tween<T>);
         _Runtime.callProperty(tweens, 'push', cast ([tween] : Array<Dynamic>));
         i++;
       }

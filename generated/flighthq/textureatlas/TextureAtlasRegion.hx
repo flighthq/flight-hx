@@ -23,19 +23,19 @@ import flighthq.types.Vector2.Vector2Like;
 
 class TextureAtlasRegion {
   public static function addTextureAtlasRegion(target:TextureAtlas, x:Float, y:Float, width:Float, height:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
-    _Runtime.callProperty(target.regions, 'push', cast ([(cast createTextureAtlasRegion(({ final __callArgument1:Dynamic = { x: x, y: y, width: width, height: height, id: (cast TextureAtlasRegion._nextTextureAtlasRegionId__textureAtlasRegion(({ final __callArgument0:Dynamic = target; __callArgument0; })) : Float), pivotX: _Runtime.coalesce(pivotX, function():Dynamic return cast null), pivotY: _Runtime.coalesce(pivotY, function():Dynamic return cast null), name: _Runtime.coalesce(name, function():Dynamic return cast null) }; __callArgument1; })) : flighthq.types.TextureAtlasRegion)] : Array<Dynamic>));
+    _Runtime.callProperty(target.regions, 'push', cast ([(cast createTextureAtlasRegion(({ final __callArgument2:Dynamic = { x: x, y: y, width: width, height: height, id: (cast TextureAtlasRegion._nextTextureAtlasRegionId__textureAtlasRegion(({ final __callArgument0:Dynamic = target; __callArgument0; })) : Float), pivotX: _Runtime.coalesce(pivotX, function():Dynamic return cast null), pivotY: _Runtime.coalesce(pivotY, function():Dynamic return cast null), name: _Runtime.coalesce(name, function():Dynamic return cast null) }; __callArgument2; })) : flighthq.types.TextureAtlasRegion)] : Array<Dynamic>));
   }
 
   public static function addTextureAtlasRegionCorners(target:TextureAtlas, ax:Float, ay:Float, bx:Float, by:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
-    addTextureAtlasRegion(({ final __callArgument2:Dynamic = target; __callArgument2; }), (cast ax : Float), (cast ay : Float), (cast (bx - ax) : Float), (cast (by - ay) : Float), ({ final __callArgument3:Dynamic = pivotX; __callArgument3; }), ({ final __callArgument4:Dynamic = pivotY; __callArgument4; }), ({ final __callArgument5:Dynamic = name; __callArgument5; }));
+    addTextureAtlasRegion(({ final __callArgument6:Dynamic = target; __callArgument6; }), (cast ax : Float), (cast ay : Float), (cast (bx - ax) : Float), (cast (by - ay) : Float), ({ final __callArgument7:Dynamic = pivotX; __callArgument7; }), ({ final __callArgument8:Dynamic = pivotY; __callArgument8; }), ({ final __callArgument9:Dynamic = name; __callArgument9; }));
   }
 
   public static function addTextureAtlasRegionRectangle(target:TextureAtlas, rect:RectangleLike, ?pivot:Vector2Like, ?name:String):Void {
-    addTextureAtlasRegion(({ final __callArgument6:Dynamic = target; __callArgument6; }), (cast rect.x : Float), (cast rect.y : Float), (cast rect.width : Float), (cast rect.height : Float), _Runtime.select(pivot, function():Dynamic return cast pivot.x, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), _Runtime.select(pivot, function():Dynamic return cast pivot.y, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), ({ final __callArgument7:Dynamic = name; __callArgument7; }));
+    addTextureAtlasRegion(({ final __callArgument14:Dynamic = target; __callArgument14; }), (cast rect.x : Float), (cast rect.y : Float), (cast rect.width : Float), (cast rect.height : Float), _Runtime.select(pivot, function():Dynamic return cast pivot.x, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), _Runtime.select(pivot, function():Dynamic return cast pivot.y, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), ({ final __callArgument15:Dynamic = name; __callArgument15; }));
   }
 
   public static function addTextureAtlasRegionVector2(target:TextureAtlas, a:Vector2Like, b:Vector2Like, ?pivot:Vector2Like, ?name:String):Void {
-    addTextureAtlasRegion(({ final __callArgument8:Dynamic = target; __callArgument8; }), (cast a.x : Float), (cast a.y : Float), (cast (b.x - a.x) : Float), (cast (b.y - a.y) : Float), _Runtime.select(pivot, function():Dynamic return cast pivot.x, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), _Runtime.select(pivot, function():Dynamic return cast pivot.y, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), ({ final __callArgument9:Dynamic = name; __callArgument9; }));
+    addTextureAtlasRegion(({ final __callArgument18:Dynamic = target; __callArgument18; }), (cast a.x : Float), (cast a.y : Float), (cast (b.x - a.x) : Float), (cast (b.y - a.y) : Float), _Runtime.select(pivot, function():Dynamic return cast pivot.x, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), _Runtime.select(pivot, function():Dynamic return cast pivot.y, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')), ({ final __callArgument19:Dynamic = name; __callArgument19; }));
   }
 
   public static function buildTextureAtlasRegionIndex(atlas:TextureAtlas):flighthq._internal._Map<String, flighthq.types.TextureAtlasRegion> {
@@ -53,12 +53,12 @@ class TextureAtlasRegion {
   }
 
   public static function createTextureAtlasRegion(?obj:{ @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var name:Null<String>; @:optional var id:Null<Float>; @:optional var originalHeight:Null<Float>; @:optional var originalWidth:Null<Float>; @:optional var rotated:Null<Bool>; @:optional var sourceX:Null<Float>; @:optional var sourceY:Null<Float>; @:optional var trimmed:Null<Bool>; }):flighthq.types.TextureAtlasRegion {
-    return cast (cast createEntity(({ final __callArgument26:Dynamic = { x: _Runtime.coalesce(({ final __structural12 = obj; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0), y: _Runtime.coalesce(({ final __structural13 = obj; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0), width: _Runtime.coalesce(({ final __structural14 = obj; __structural14 == null ? _Runtime.UNDEFINED : (cast __structural14 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast 0.0), height: _Runtime.coalesce(({ final __structural15 = obj; __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast 0.0), id: _Runtime.coalesce(({ final __structural16 = obj; __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : { @:optional var id:Null<Float>; }).id; }), function():Dynamic return cast -1.0), name: _Runtime.coalesce(({ final __structural17 = obj; __structural17 == null ? _Runtime.UNDEFINED : (cast __structural17 : { @:optional var name:Null<String>; }).name; }), function():Dynamic return cast null), originalHeight: _Runtime.coalesce(({ final __structural18 = obj; __structural18 == null ? _Runtime.UNDEFINED : (cast __structural18 : { @:optional var originalHeight:Null<Float>; }).originalHeight; }), function():Dynamic return cast null), originalWidth: _Runtime.coalesce(({ final __structural19 = obj; __structural19 == null ? _Runtime.UNDEFINED : (cast __structural19 : { @:optional var originalWidth:Null<Float>; }).originalWidth; }), function():Dynamic return cast null), pivotX: _Runtime.coalesce(({ final __structural20 = obj; __structural20 == null ? _Runtime.UNDEFINED : (cast __structural20 : { @:optional var pivotX:Null<Float>; }).pivotX; }), function():Dynamic return cast null), pivotY: _Runtime.coalesce(({ final __structural21 = obj; __structural21 == null ? _Runtime.UNDEFINED : (cast __structural21 : { @:optional var pivotY:Null<Float>; }).pivotY; }), function():Dynamic return cast null), rotated: _Runtime.coalesce(({ final __structural22 = obj; __structural22 == null ? _Runtime.UNDEFINED : (cast __structural22 : { @:optional var rotated:Null<Bool>; }).rotated; }), function():Dynamic return cast false), sourceX: _Runtime.coalesce(({ final __structural23 = obj; __structural23 == null ? _Runtime.UNDEFINED : (cast __structural23 : { @:optional var sourceX:Null<Float>; }).sourceX; }), function():Dynamic return cast 0.0), sourceY: _Runtime.coalesce(({ final __structural24 = obj; __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { @:optional var sourceY:Null<Float>; }).sourceY; }), function():Dynamic return cast 0.0), trimmed: _Runtime.coalesce(({ final __structural25 = obj; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { @:optional var trimmed:Null<Bool>; }).trimmed; }), function():Dynamic return cast false) }; __callArgument26; })) : { >Entity, var x:Float; var y:Float; var width:Float; var height:Float; var id:Float; var name:Null<String>; var originalHeight:Null<Float>; var originalWidth:Null<Float>; var pivotX:Null<Float>; var pivotY:Null<Float>; var rotated:Bool; var sourceX:Float; var sourceY:Float; var trimmed:Bool; });
+    return cast (cast createEntity(({ final __callArgument38:Dynamic = { x: _Runtime.coalesce(({ final __structural24 = obj; __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0), y: _Runtime.coalesce(({ final __structural25 = obj; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0), width: _Runtime.coalesce(({ final __structural26 = obj; __structural26 == null ? _Runtime.UNDEFINED : (cast __structural26 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast 0.0), height: _Runtime.coalesce(({ final __structural27 = obj; __structural27 == null ? _Runtime.UNDEFINED : (cast __structural27 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast 0.0), id: _Runtime.coalesce(({ final __structural28 = obj; __structural28 == null ? _Runtime.UNDEFINED : (cast __structural28 : { @:optional var id:Null<Float>; }).id; }), function():Dynamic return cast -1.0), name: _Runtime.coalesce(({ final __structural29 = obj; __structural29 == null ? _Runtime.UNDEFINED : (cast __structural29 : { @:optional var name:Null<String>; }).name; }), function():Dynamic return cast null), originalHeight: _Runtime.coalesce(({ final __structural30 = obj; __structural30 == null ? _Runtime.UNDEFINED : (cast __structural30 : { @:optional var originalHeight:Null<Float>; }).originalHeight; }), function():Dynamic return cast null), originalWidth: _Runtime.coalesce(({ final __structural31 = obj; __structural31 == null ? _Runtime.UNDEFINED : (cast __structural31 : { @:optional var originalWidth:Null<Float>; }).originalWidth; }), function():Dynamic return cast null), pivotX: _Runtime.coalesce(({ final __structural32 = obj; __structural32 == null ? _Runtime.UNDEFINED : (cast __structural32 : { @:optional var pivotX:Null<Float>; }).pivotX; }), function():Dynamic return cast null), pivotY: _Runtime.coalesce(({ final __structural33 = obj; __structural33 == null ? _Runtime.UNDEFINED : (cast __structural33 : { @:optional var pivotY:Null<Float>; }).pivotY; }), function():Dynamic return cast null), rotated: _Runtime.coalesce(({ final __structural34 = obj; __structural34 == null ? _Runtime.UNDEFINED : (cast __structural34 : { @:optional var rotated:Null<Bool>; }).rotated; }), function():Dynamic return cast false), sourceX: _Runtime.coalesce(({ final __structural35 = obj; __structural35 == null ? _Runtime.UNDEFINED : (cast __structural35 : { @:optional var sourceX:Null<Float>; }).sourceX; }), function():Dynamic return cast 0.0), sourceY: _Runtime.coalesce(({ final __structural36 = obj; __structural36 == null ? _Runtime.UNDEFINED : (cast __structural36 : { @:optional var sourceY:Null<Float>; }).sourceY; }), function():Dynamic return cast 0.0), trimmed: _Runtime.coalesce(({ final __structural37 = obj; __structural37 == null ? _Runtime.UNDEFINED : (cast __structural37 : { @:optional var trimmed:Null<Bool>; }).trimmed; }), function():Dynamic return cast false) }; __callArgument38; })) : { >Entity, var x:Float; var y:Float; var width:Float; var height:Float; var id:Float; var name:Null<String>; var originalHeight:Null<Float>; var originalWidth:Null<Float>; var pivotX:Null<Float>; var pivotY:Null<Float>; var rotated:Bool; var sourceX:Float; var sourceY:Float; var trimmed:Bool; });
     return cast null;
   }
 
   public static function explainTextureAtlasRegionTexture(atlas:TextureAtlas, regionId:Float):TextureAtlasRegionTextureExplanation {
-    if ((cast _Runtime.strictEquals((cast getTextureAtlasRegionById(({ final __callArgument27:Dynamic = atlas; __callArgument27; }), (cast regionId : Float)) : Null<flighthq.types.TextureAtlasRegion>), null) : Bool)) { return cast { status: 'missing-region' }; }
+    if ((cast _Runtime.strictEquals((cast getTextureAtlasRegionById(({ final __callArgument54:Dynamic = atlas; __callArgument54; }), (cast regionId : Float)) : Null<flighthq.types.TextureAtlasRegion>), null) : Bool)) { return cast { status: 'missing-region' }; }
     if ((cast _Runtime.strictEquals(atlas.texture, null) : Bool)) { return cast { status: 'missing-texture' }; }
     if ((cast !_Runtime.strictEquals((cast atlas.texture : Texture2D).uvRotation, 0.0) : Bool)) { return cast { status: 'rotated-page' }; }
     return cast { status: 'ready' };
@@ -84,7 +84,7 @@ class TextureAtlasRegion {
   public static function getTextureAtlasRegionByOrdinal(atlas:TextureAtlas, prefix:String, ordinal:Float):Null<flighthq.types.TextureAtlasRegion> {
     for (region in _Runtime.iterable(atlas.regions)) {
       if ((cast ((cast _Runtime.strictEquals(region.name, null) : Bool) || (cast !(cast StringTools.startsWith(region.name, prefix) : Bool) : Bool)) : Bool)) { continue; }
-      if ((cast _Runtime.strictEquals((cast getTextureAtlasRegionOrdinal(({ final __callArgument34:Dynamic = region; __callArgument34; })) : Float), ordinal) : Bool)) { return cast region; }
+      if ((cast _Runtime.strictEquals((cast getTextureAtlasRegionOrdinal(({ final __callArgument62:Dynamic = region; __callArgument62; })) : Float), ordinal) : Bool)) { return cast region; }
     }
     return cast null;
     return cast null;
@@ -178,12 +178,12 @@ class TextureAtlasRegion {
     var page:Texture2D = cast _Runtime.UNDEFINED;
     var textures:Null<flighthq._internal._WeakMap<flighthq.types.TextureAtlasRegion, Texture2D>> = cast _Runtime.UNDEFINED;
     var texture:Null<Texture2D> = cast _Runtime.UNDEFINED;
-    explanation = (cast explainTextureAtlasRegionTexture(({ final __callArgument37:Dynamic = atlas; __callArgument37; }), (cast regionId : Float)) : TextureAtlasRegionTextureExplanation);
+    explanation = (cast explainTextureAtlasRegionTexture(({ final __callArgument66:Dynamic = atlas; __callArgument66; }), (cast regionId : Float)) : TextureAtlasRegionTextureExplanation);
     if ((cast !_Runtime.strictEquals((cast explanation : TextureAtlasRegionTextureExplanation).status, 'ready') : Bool)) {
       _Runtime.callOptionalValue(TextureAtlasRegion.textureAtlasRegionTextureGuard__textureAtlasRegion, cast ([atlas, regionId, explanation] : Array<Dynamic>));
       return cast null;
     }
-    region = (cast getTextureAtlasRegionById(({ final __callArgument38:Dynamic = atlas; __callArgument38; }), (cast regionId : Float)) : Null<flighthq.types.TextureAtlasRegion>);
+    region = (cast getTextureAtlasRegionById(({ final __callArgument68:Dynamic = atlas; __callArgument68; }), (cast regionId : Float)) : Null<flighthq.types.TextureAtlasRegion>);
     page = atlas.texture;
     textures = ((cast TextureAtlasRegion.regionTextureCache__textureAtlasRegion : flighthq._internal._WeakMap<TextureAtlas, flighthq._internal._WeakMap<flighthq.types.TextureAtlasRegion, Texture2D>>).get(atlas));
     if ((cast _Runtime.strictEquals(textures, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -192,12 +192,12 @@ class TextureAtlasRegion {
     }
     texture = ((cast textures : flighthq._internal._WeakMap<flighthq.types.TextureAtlasRegion, Texture2D>).get(region));
     if ((cast _Runtime.strictEquals(texture, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (texture = cast ((cast cloneTexture(({ final __callArgument39:Dynamic = page; __callArgument39; })) : Texture2D) : Dynamic));
+      (texture = cast ((cast cloneTexture(({ final __callArgument70:Dynamic = page; __callArgument70; })) : Texture2D) : Dynamic));
       ((cast textures : flighthq._internal._WeakMap<flighthq.types.TextureAtlasRegion, Texture2D>).set(region, (cast texture)));
     } else {
-      copyTexture(({ final __callArgument40:Dynamic = texture; __callArgument40; }), ({ final __callArgument41:Dynamic = page; __callArgument41; }));
+      copyTexture(({ final __callArgument72:Dynamic = texture; __callArgument72; }), ({ final __callArgument73:Dynamic = page; __callArgument73; }));
     }
-    TextureAtlasRegion.setTextureAtlasRegionTextureWindow__textureAtlasRegion(({ final __callArgument42:Dynamic = texture; __callArgument42; }), ({ final __callArgument43:Dynamic = page; __callArgument43; }), ({ final __callArgument44:Dynamic = region; __callArgument44; }));
+    TextureAtlasRegion.setTextureAtlasRegionTextureWindow__textureAtlasRegion(({ final __callArgument76:Dynamic = texture; __callArgument76; }), ({ final __callArgument77:Dynamic = page; __callArgument77; }), ({ final __callArgument78:Dynamic = region; __callArgument78; }));
     return cast texture;
     return cast null;
   }
@@ -264,7 +264,7 @@ class TextureAtlasRegion {
   }
 
   public static function hasTextureAtlasRegion(atlas:TextureAtlas, name:String):Bool {
-    return cast !_Runtime.strictEquals((cast getTextureAtlasRegionByName(({ final __callArgument45:Dynamic = atlas; __callArgument45; }), (cast name : String)) : Null<flighthq.types.TextureAtlasRegion>), null);
+    return cast !_Runtime.strictEquals((cast getTextureAtlasRegionByName(({ final __callArgument82:Dynamic = atlas; __callArgument82; }), (cast name : String)) : Null<flighthq.types.TextureAtlasRegion>), null);
     return cast null;
   }
 
@@ -352,7 +352,7 @@ class TextureAtlasRegion {
 
   public static function _textureAtlasRegionSequenceKey__textureAtlasRegion(region:flighthq.types.TextureAtlasRegion):Float {
     var ordinal:Float = cast _Runtime.UNDEFINED;
-    ordinal = (cast getTextureAtlasRegionOrdinal(({ final __callArgument48:Dynamic = region; __callArgument48; })) : Float);
+    ordinal = (cast getTextureAtlasRegionOrdinal(({ final __callArgument86:Dynamic = region; __callArgument86; })) : Float);
     return cast ((cast ((cast ordinal : Float) < (cast 0.0 : Float)) : Bool) ? (cast _Runtime.MAX_SAFE_INTEGER : Dynamic) : (cast ordinal : Dynamic));
     return cast null;
   }
@@ -366,8 +366,8 @@ class TextureAtlasRegion {
     var pageHeight:Float = cast _Runtime.UNDEFINED;
     var x:Float = cast _Runtime.UNDEFINED;
     var y:Float = cast _Runtime.UNDEFINED;
-    sourceWidth = (cast getTextureWidth(({ final __callArgument49:Dynamic = page; __callArgument49; })) : Float);
-    sourceHeight = (cast getTextureHeight(({ final __callArgument50:Dynamic = page; __callArgument50; })) : Float);
+    sourceWidth = (cast getTextureWidth(({ final __callArgument88:Dynamic = page; __callArgument88; })) : Float);
+    sourceHeight = (cast getTextureHeight(({ final __callArgument90:Dynamic = page; __callArgument90; })) : Float);
     if ((cast ((cast ((cast sourceWidth : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast sourceHeight : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
       ((cast texture : Texture2D).flipX = false);
       ((cast texture : Texture2D).flipY = false);

@@ -75,6 +75,6 @@ class TweenProgress {
     var targetElapsed:Float = cast _Runtime.UNDEFINED;
     clamped = HxMath.max(0.0, HxMath.min(progress, 1.0));
     targetElapsed = (tween.delay + (clamped * tween.duration));
-    seekTween(({ final __callArgument5:Dynamic = tween; __callArgument5; }), (cast targetElapsed : Float));
+    seekTween(({ final __callArgument6:Dynamic = tween; __callArgument6; }), (cast targetElapsed : Float));
   }
 }

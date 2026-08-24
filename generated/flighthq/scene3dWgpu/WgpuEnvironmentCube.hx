@@ -39,7 +39,7 @@ class WgpuEnvironmentCube {
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuScene3DRuntime);
     if ((cast !_Runtime.strictEquals(scene.environmentSourceCubeView, null) : Bool)) { return cast scene.environmentSourceCubeView; }
     cube = _Runtime.field(environment, 'environment');
-    if ((cast ((cast ((cast _Runtime.strictEquals(cube, null) : Bool) || (cast !_Runtime.strictEquals((cast cube : { var dimension:String; }).dimension, 'cube') : Bool)) : Bool) || (cast !(cast (cast WgpuEnvironmentCube.hasWgpuCubeFacePixels__wgpuEnvironmentCube(({ final __callArgument1:Dynamic = cube; __callArgument1; })) : Bool) : Bool) : Bool)) : Bool)) { return cast null; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(cube, null) : Bool) || (cast !_Runtime.strictEquals((cast cube : { var dimension:String; }).dimension, 'cube') : Bool)) : Bool) || (cast !(cast (cast WgpuEnvironmentCube.hasWgpuCubeFacePixels__wgpuEnvironmentCube(({ final __callArgument2:Dynamic = cube; __callArgument2; })) : Bool) : Bool) : Bool)) : Bool)) { return cast null; }
     sources = (cast cube : { var sources:TextureSourceCubeFaces; }).sources;
     size = (cast flighthq._internal._StaticIndex.readArray(sources, 0.0) : { var width:Float; }).width;
     device = (cast state : WgpuRenderState).device;
@@ -48,7 +48,7 @@ class WgpuEnvironmentCube {
     {
       var face:Float = 0.0;
       while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
-        WgpuEnvironmentCube.uploadWgpuEnvironmentImage__wgpuEnvironmentCube(({ final __callArgument2:Dynamic = device; __callArgument2; }), ({ final __callArgument3:Dynamic = texture; __callArgument3; }), (cast face : Float), ({ final __callArgument4:Dynamic = flighthq._internal._StaticIndex.readArray(sources, face); __callArgument4; }));
+        WgpuEnvironmentCube.uploadWgpuEnvironmentImage__wgpuEnvironmentCube(({ final __callArgument4:Dynamic = device; __callArgument4; }), ({ final __callArgument5:Dynamic = texture; __callArgument5; }), (cast face : Float), ({ final __callArgument6:Dynamic = flighthq._internal._StaticIndex.readArray(sources, face); __callArgument6; }));
         face++;
       }
     }
@@ -62,9 +62,9 @@ class WgpuEnvironmentCube {
   @:noCompletion
   public static function updateWgpuEnvironmentCubeFace(state:WgpuRenderState, face:Float, image:TextureSource):Bool {
     var texture:Null<flighthq._internal.dom.GPUTexture> = cast _Runtime.UNDEFINED;
-    texture = (cast (cast getWgpuScene3DRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuScene3DRuntime) : { var environmentSourceCube:Null<flighthq._internal.dom.GPUTexture>; }).environmentSourceCube;
+    texture = (cast (cast getWgpuScene3DRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : WgpuScene3DRuntime) : { var environmentSourceCube:Null<flighthq._internal.dom.GPUTexture>; }).environmentSourceCube;
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return cast false; }
-    WgpuEnvironmentCube.uploadWgpuEnvironmentImage__wgpuEnvironmentCube((cast state : WgpuRenderState).device, ({ final __callArgument6:Dynamic = texture; __callArgument6; }), (cast face : Float), ({ final __callArgument7:Dynamic = image; __callArgument7; }));
+    WgpuEnvironmentCube.uploadWgpuEnvironmentImage__wgpuEnvironmentCube((cast state : WgpuRenderState).device, ({ final __callArgument12:Dynamic = texture; __callArgument12; }), (cast face : Float), ({ final __callArgument13:Dynamic = image; __callArgument13; }));
     return cast true;
     return cast null;
   }
@@ -88,9 +88,9 @@ class WgpuEnvironmentCube {
   public static function uploadWgpuEnvironmentImage__wgpuEnvironmentCube(device:flighthq._internal.dom.GPUDevice, texture:flighthq._internal.dom.GPUTexture, face:Float, image:TextureSource):Void {
     if ((cast _Runtime.strictEquals(image.kind, BitmapTextureSourceKind) : Bool)) {
       var bitmap:Bitmap = (cast image : Bitmap);
-      uploadWgpuTextureData(({ final __callArgument8:Dynamic = device; __callArgument8; }), ({ final __callArgument9:Dynamic = texture; __callArgument9; }), (cast cast ([0.0, 0.0, face] : Array<Dynamic>) : flighthq._internal._Any), (cast bitmap.width : Float), (cast bitmap.height : Float), bitmap.data);
+      uploadWgpuTextureData(({ final __callArgument16:Dynamic = device; __callArgument16; }), ({ final __callArgument17:Dynamic = texture; __callArgument17; }), (cast cast ([0.0, 0.0, face] : Array<Dynamic>) : flighthq._internal._Any), (cast bitmap.width : Float), (cast bitmap.height : Float), bitmap.data);
     } else {
-      uploadWgpuTextureImageResource(({ final __callArgument10:Dynamic = device; __callArgument10; }), ({ final __callArgument11:Dynamic = texture; __callArgument11; }), (cast cast ([0.0, 0.0, face] : Array<Dynamic>) : flighthq._internal._Any), (cast image : Image));
+      uploadWgpuTextureImageResource(({ final __callArgument20:Dynamic = device; __callArgument20; }), ({ final __callArgument21:Dynamic = texture; __callArgument21; }), (cast cast ([0.0, 0.0, face] : Array<Dynamic>) : flighthq._internal._Any), (cast image : Image));
     }
   }
 }

@@ -25,7 +25,7 @@ import flighthq.types._internal._TextLabelValues.TextLabelKind;
 class RegisterTextHitTest {
   public static function registerTextHitTest():Void {
     registerHitTestPrecise((cast TextLabelKind : String), ({ final __callArgument0:Dynamic = RegisterTextHitTest.resolveTextCharIndex__registerTextHitTest; __callArgument0; }));
-    registerHitTestPrecise((cast RichTextKind : String), ({ final __callArgument1:Dynamic = RegisterTextHitTest.resolveTextCharIndex__registerTextHitTest; __callArgument1; }));
+    registerHitTestPrecise((cast RichTextKind : String), ({ final __callArgument2:Dynamic = RegisterTextHitTest.resolveTextCharIndex__registerTextHitTest; __callArgument2; }));
   }
 
   public static function resolveTextCharIndex__registerTextHitTest(source:NodeAny, x:Float, y:Float):Float {
@@ -33,8 +33,8 @@ class RegisterTextHitTest {
     if ((cast !(cast (cast hitTestGraphLocalBounds((cast source : Dynamic), (cast x : Float), (cast y : Float)) : Bool) : Bool) : Bool)) { return cast -1.0; }
     layout = (cast getTextLayout((cast source : TextLabel)) : Null<TextLayoutResult>);
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return cast 0.0; }
-    inverseMatrixTransformPointXY(({ final __callArgument2:Dynamic = RegisterTextHitTest.textHitLocalPoint__registerTextHitTest; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast getNodeWorldMatrix((cast (cast source : Node2D) : Dynamic)) : Matrix); __callArgument3; }), (cast x : Float), (cast y : Float));
-    return cast (cast computeRichTextCharIndexAtPoint(({ final __callArgument4:Dynamic = layout; __callArgument4; }), (cast (cast RegisterTextHitTest.textHitLocalPoint__registerTextHitTest : { var x:Float; var y:Float; }).x : Float), (cast (cast RegisterTextHitTest.textHitLocalPoint__registerTextHitTest : { var x:Float; var y:Float; }).y : Float)) : Float);
+    inverseMatrixTransformPointXY(({ final __callArgument4:Dynamic = RegisterTextHitTest.textHitLocalPoint__registerTextHitTest; __callArgument4; }), ({ final __callArgument5:Dynamic = (cast getNodeWorldMatrix((cast (cast source : Node2D) : Dynamic)) : Matrix); __callArgument5; }), (cast x : Float), (cast y : Float));
+    return cast (cast computeRichTextCharIndexAtPoint(({ final __callArgument8:Dynamic = layout; __callArgument8; }), (cast (cast RegisterTextHitTest.textHitLocalPoint__registerTextHitTest : { var x:Float; var y:Float; }).x : Float), (cast (cast RegisterTextHitTest.textHitLocalPoint__registerTextHitTest : { var x:Float; var y:Float; }).y : Float)) : Float);
     return cast null;
   }
 

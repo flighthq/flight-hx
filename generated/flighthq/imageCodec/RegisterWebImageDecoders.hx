@@ -24,8 +24,8 @@ class RegisterWebImageDecoders {
         var canvas:flighthq._internal.dom.OffscreenCanvas = cast _Runtime.UNDEFINED;
         var context:flighthq._internal.dom.OffscreenCanvasRenderingContext2D = cast _Runtime.UNDEFINED;
         var data:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap(_Runtime.callValue(flighthq._internal._HostValueLut.get('createImageBitmap'), cast ([_Runtime.construct(flighthq._internal._HostValueLut.get('Blob'), [cast ([_Runtime.slice(bytes, 0, null)] : Array<Dynamic>)])] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
-          bitmap = __awaitValue3;
+        return flighthq._internal._Async.flatMap(_Runtime.callValue(flighthq._internal._HostValueLut.get('createImageBitmap'), cast ([_Runtime.construct(flighthq._internal._HostValueLut.get('Blob'), [cast ([_Runtime.slice(bytes, 0, null)] : Array<Dynamic>)])] : Array<Dynamic>)), function(__awaitValue4:Dynamic):Dynamic {
+          bitmap = __awaitValue4;
           width = (cast bitmap : flighthq._internal.dom.ImageBitmap).width;
           height = (cast bitmap : flighthq._internal.dom.ImageBitmap).height;
           canvas = _Runtime.construct(flighthq._internal._HostValueLut.get('OffscreenCanvas'), [width, height]);
@@ -33,16 +33,16 @@ class RegisterWebImageDecoders {
           (cast context : flighthq._internal.dom.OffscreenCanvasRenderingContext2D).drawImage(bitmap, 0.0, 0.0);
           (cast bitmap : flighthq._internal.dom.ImageBitmap).close();
           data = (cast (cast context : flighthq._internal.dom.OffscreenCanvasRenderingContext2D).getImageData(0.0, 0.0, width, height) : flighthq._internal.dom.ImageData).data;
-          var __flowBranch5:Dynamic;
-          if ((cast _Runtime.strictEquals(({ final __structural4 = options; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var premultiplyAlpha:Null<Bool>; }).premultiplyAlpha; }), true) : Bool)) {
-            __flowBranch5 = flighthq._internal._Async.protect(function():Dynamic {
-              RegisterWebImageDecoders.premultiplyRgbaInPlace__registerWebImageDecoders(({ final __callArgument6:Dynamic = data; __callArgument6; }));
+          var __flowBranch6:Dynamic;
+          if ((cast _Runtime.strictEquals(({ final __structural5 = options; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var premultiplyAlpha:Null<Bool>; }).premultiplyAlpha; }), true) : Bool)) {
+            __flowBranch6 = flighthq._internal._Async.protect(function():Dynamic {
+              RegisterWebImageDecoders.premultiplyRgbaInPlace__registerWebImageDecoders(({ final __callArgument7:Dynamic = data; __callArgument7; }));
               return flighthq._internal._Async.flowNormal();
             });
           } else {
-            __flowBranch5 = flighthq._internal._Async.flowNormal();
+            __flowBranch6 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch5, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch6, function():Dynamic {
             return flighthq._internal._Async.flowReturn({ data: data, width: width, height: height });
           });
         });

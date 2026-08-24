@@ -39,7 +39,7 @@ class CollideContactManifold3D {
     var clippedCount:Float = cast _Runtime.UNDEFINED;
     var planeOffset:Float = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast testCollision3D(({ final __callArgument0:Dynamic = a; __callArgument0; }), ({ final __callArgument1:Dynamic = b; __callArgument1; }), ({ final __callArgument2:Dynamic = CollideContactManifold3D.scratchManifold__collideContactManifold3D; __callArgument2; })) : Bool) : Bool) : Bool)) {
-      clearCollisionContactManifold3D(({ final __callArgument3:Dynamic = out; __callArgument3; }));
+      clearCollisionContactManifold3D(({ final __callArgument6:Dynamic = out; __callArgument6; }));
       return cast false;
     }
     normalX = (cast CollideContactManifold3D.scratchManifold__collideContactManifold3D : CollisionManifold3D).normalX;
@@ -51,15 +51,15 @@ class CollideContactManifold3D {
     ((cast out : CollisionContactManifold3D).normalY = normalY);
     ((cast out : CollisionContactManifold3D).normalZ = normalZ);
     ((cast out : CollisionContactManifold3D).pointCount = 0.0);
-    faceQueryA = (cast getCollisionFaceQuery3D(({ final __callArgument4:Dynamic = (cast a : { var kind:String; }).kind; __callArgument4; })) : Null<CollisionFaceQuery3D>);
-    faceQueryB = (cast getCollisionFaceQuery3D(({ final __callArgument5:Dynamic = (cast b : { var kind:String; }).kind; __callArgument5; })) : Null<CollisionFaceQuery3D>);
-    countA = ((cast _Runtime.strictEquals(faceQueryA, null) : Bool) ? (cast 0.0 : Dynamic) : (cast (cast faceQueryA(({ final __callArgument6:Dynamic = a; __callArgument6; }), (cast -normalX : Float), (cast -normalY : Float), (cast -normalZ : Float), ({ final __callArgument7:Dynamic = CollideContactManifold3D.faceA__collideContactManifold3D; __callArgument7; })) : Float) : Dynamic));
-    countB = ((cast _Runtime.strictEquals(faceQueryB, null) : Bool) ? (cast 0.0 : Dynamic) : (cast (cast faceQueryB(({ final __callArgument8:Dynamic = b; __callArgument8; }), (cast normalX : Float), (cast normalY : Float), (cast normalZ : Float), ({ final __callArgument9:Dynamic = CollideContactManifold3D.faceB__collideContactManifold3D; __callArgument9; })) : Float) : Dynamic));
+    faceQueryA = (cast getCollisionFaceQuery3D(({ final __callArgument8:Dynamic = (cast a : { var kind:String; }).kind; __callArgument8; })) : Null<CollisionFaceQuery3D>);
+    faceQueryB = (cast getCollisionFaceQuery3D(({ final __callArgument10:Dynamic = (cast b : { var kind:String; }).kind; __callArgument10; })) : Null<CollisionFaceQuery3D>);
+    countA = ((cast _Runtime.strictEquals(faceQueryA, null) : Bool) ? (cast 0.0 : Dynamic) : (cast (cast faceQueryA(({ final __callArgument12:Dynamic = a; __callArgument12; }), (cast -normalX : Float), (cast -normalY : Float), (cast -normalZ : Float), ({ final __callArgument13:Dynamic = CollideContactManifold3D.faceA__collideContactManifold3D; __callArgument13; })) : Float) : Dynamic));
+    countB = ((cast _Runtime.strictEquals(faceQueryB, null) : Bool) ? (cast 0.0 : Dynamic) : (cast (cast faceQueryB(({ final __callArgument16:Dynamic = b; __callArgument16; }), (cast normalX : Float), (cast normalY : Float), (cast normalZ : Float), ({ final __callArgument17:Dynamic = CollideContactManifold3D.faceB__collideContactManifold3D; __callArgument17; })) : Float) : Dynamic));
     if ((cast ((cast ((cast countA : Float) < (cast 2.0 : Float)) : Bool) || (cast ((cast countB : Float) < (cast 2.0 : Float)) : Bool)) : Bool)) {
-      CollideContactManifold3D.writeSingleContactPoint__collideContactManifold3D(({ final __callArgument10:Dynamic = a; __callArgument10; }), ({ final __callArgument11:Dynamic = b; __callArgument11; }), (cast normalX : Float), (cast normalY : Float), (cast normalZ : Float), (cast depth : Float), (cast countA : Float), (cast countB : Float), ({ final __callArgument12:Dynamic = out; __callArgument12; }));
+      CollideContactManifold3D.writeSingleContactPoint__collideContactManifold3D(({ final __callArgument20:Dynamic = a; __callArgument20; }), ({ final __callArgument21:Dynamic = b; __callArgument21; }), (cast normalX : Float), (cast normalY : Float), (cast normalZ : Float), (cast depth : Float), (cast countA : Float), (cast countB : Float), ({ final __callArgument22:Dynamic = out; __callArgument22; }));
       return cast true;
     }
-    referenceIsA = ((cast ((cast countA : Float) >= (cast 3.0 : Float)) : Bool) && (cast _Runtime.orValue(((cast countB : Float) < (cast 3.0 : Float)), function():Dynamic return cast ((cast (cast CollideContactManifold3D.faceAlignment__collideContactManifold3D(({ final __callArgument13:Dynamic = CollideContactManifold3D.faceA__collideContactManifold3D; __callArgument13; }), (cast countA : Float), (cast normalX : Float), (cast normalY : Float), (cast normalZ : Float)) : Float) : Float) >= (cast (cast CollideContactManifold3D.faceAlignment__collideContactManifold3D(({ final __callArgument14:Dynamic = CollideContactManifold3D.faceB__collideContactManifold3D; __callArgument14; }), (cast countB : Float), (cast normalX : Float), (cast normalY : Float), (cast normalZ : Float)) : Float) : Float))) : Bool));
+    referenceIsA = ((cast ((cast countA : Float) >= (cast 3.0 : Float)) : Bool) && (cast _Runtime.orValue(((cast countB : Float) < (cast 3.0 : Float)), function():Dynamic return cast ((cast (cast CollideContactManifold3D.faceAlignment__collideContactManifold3D(({ final __callArgument26:Dynamic = CollideContactManifold3D.faceA__collideContactManifold3D; __callArgument26; }), (cast countA : Float), (cast normalX : Float), (cast normalY : Float), (cast normalZ : Float)) : Float) : Float) >= (cast (cast CollideContactManifold3D.faceAlignment__collideContactManifold3D(({ final __callArgument28:Dynamic = CollideContactManifold3D.faceB__collideContactManifold3D; __callArgument28; }), (cast countB : Float), (cast normalX : Float), (cast normalY : Float), (cast normalZ : Float)) : Float) : Float))) : Bool));
     reference = ((cast referenceIsA : Bool) ? (cast CollideContactManifold3D.faceA__collideContactManifold3D : Dynamic) : (cast CollideContactManifold3D.faceB__collideContactManifold3D : Dynamic));
     referenceCount = ((cast referenceIsA : Bool) ? (cast countA : Dynamic) : (cast countB : Dynamic));
     incident = ((cast referenceIsA : Bool) ? (cast CollideContactManifold3D.faceB__collideContactManifold3D : Dynamic) : (cast CollideContactManifold3D.faceA__collideContactManifold3D : Dynamic));
@@ -67,9 +67,9 @@ class CollideContactManifold3D {
     planeX = ((cast referenceIsA : Bool) ? (cast -normalX : Dynamic) : (cast normalX : Dynamic));
     planeY = ((cast referenceIsA : Bool) ? (cast -normalY : Dynamic) : (cast normalY : Dynamic));
     planeZ = ((cast referenceIsA : Bool) ? (cast -normalZ : Dynamic) : (cast normalZ : Dynamic));
-    clippedCount = (cast CollideContactManifold3D.clipIncidentAgainstReference__collideContactManifold3D(({ final __callArgument15:Dynamic = reference; __callArgument15; }), (cast referenceCount : Float), ({ final __callArgument16:Dynamic = incident; __callArgument16; }), (cast incidentCount : Float), (cast planeX : Float), (cast planeY : Float), (cast planeZ : Float)) : Float);
+    clippedCount = (cast CollideContactManifold3D.clipIncidentAgainstReference__collideContactManifold3D(({ final __callArgument30:Dynamic = reference; __callArgument30; }), (cast referenceCount : Float), ({ final __callArgument31:Dynamic = incident; __callArgument31; }), (cast incidentCount : Float), (cast planeX : Float), (cast planeY : Float), (cast planeZ : Float)) : Float);
     if ((cast _Runtime.strictEquals(clippedCount, 0.0) : Bool)) {
-      CollideContactManifold3D.writeSingleContactPoint__collideContactManifold3D(({ final __callArgument17:Dynamic = a; __callArgument17; }), ({ final __callArgument18:Dynamic = b; __callArgument18; }), (cast normalX : Float), (cast normalY : Float), (cast normalZ : Float), (cast depth : Float), (cast countA : Float), (cast countB : Float), ({ final __callArgument19:Dynamic = out; __callArgument19; }));
+      CollideContactManifold3D.writeSingleContactPoint__collideContactManifold3D(({ final __callArgument34:Dynamic = a; __callArgument34; }), ({ final __callArgument35:Dynamic = b; __callArgument35; }), (cast normalX : Float), (cast normalY : Float), (cast normalZ : Float), (cast depth : Float), (cast countA : Float), (cast countB : Float), ({ final __callArgument36:Dynamic = out; __callArgument36; }));
       return cast true;
     }
     planeOffset = (((flighthq._internal._StaticIndex.readFloatArrayTyped((cast reference : Array<Float>), (cast 0.0 : Float)) * planeX) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast reference : Array<Float>), (cast 1.0 : Float)) * planeY)) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast reference : Array<Float>), (cast 2.0 : Float)) * planeZ));
@@ -91,7 +91,7 @@ class CollideContactManifold3D {
         (i = cast ((i + 1.0) : Dynamic));
       }
     }
-    if ((cast _Runtime.strictEquals((cast out : CollisionContactManifold3D).pointCount, 0.0) : Bool)) { CollideContactManifold3D.writeSingleContactPoint__collideContactManifold3D(({ final __callArgument20:Dynamic = a; __callArgument20; }), ({ final __callArgument21:Dynamic = b; __callArgument21; }), (cast normalX : Float), (cast normalY : Float), (cast normalZ : Float), (cast depth : Float), (cast countA : Float), (cast countB : Float), ({ final __callArgument22:Dynamic = out; __callArgument22; })); }
+    if ((cast _Runtime.strictEquals((cast out : CollisionContactManifold3D).pointCount, 0.0) : Bool)) { CollideContactManifold3D.writeSingleContactPoint__collideContactManifold3D(({ final __callArgument40:Dynamic = a; __callArgument40; }), ({ final __callArgument41:Dynamic = b; __callArgument41; }), (cast normalX : Float), (cast normalY : Float), (cast normalZ : Float), (cast depth : Float), (cast countA : Float), (cast countB : Float), ({ final __callArgument42:Dynamic = out; __callArgument42; })); }
     return cast true;
     return cast null;
   }
@@ -238,14 +238,14 @@ class CollideContactManifold3D {
     var projectionA:Float = cast _Runtime.UNDEFINED;
     var projectionB:Float = cast _Runtime.UNDEFINED;
     var middleProjection:Float = cast _Runtime.UNDEFINED;
-    supportA = (cast getCollisionSupport3D(({ final __callArgument23:Dynamic = (cast a : { var kind:String; }).kind; __callArgument23; })) : Null<CollisionSupport3D>);
-    supportB = (cast getCollisionSupport3D(({ final __callArgument24:Dynamic = (cast b : { var kind:String; }).kind; __callArgument24; })) : Null<CollisionSupport3D>);
+    supportA = (cast getCollisionSupport3D(({ final __callArgument46:Dynamic = (cast a : { var kind:String; }).kind; __callArgument46; })) : Null<CollisionSupport3D>);
+    supportB = (cast getCollisionSupport3D(({ final __callArgument48:Dynamic = (cast b : { var kind:String; }).kind; __callArgument48; })) : Null<CollisionSupport3D>);
     if ((cast ((cast _Runtime.strictEquals(supportA, null) : Bool) || (cast _Runtime.strictEquals(supportB, null) : Bool)) : Bool)) {
       ((cast out : CollisionContactManifold3D).pointCount = 0.0);
       return;
     }
-    supportA(({ final __callArgument25:Dynamic = a; __callArgument25; }), (cast -normalX : Float), (cast -normalY : Float), (cast -normalZ : Float), ({ final __callArgument26:Dynamic = CollideContactManifold3D.surfaceA__collideContactManifold3D; __callArgument26; }));
-    supportB(({ final __callArgument27:Dynamic = b; __callArgument27; }), (cast normalX : Float), (cast normalY : Float), (cast normalZ : Float), ({ final __callArgument28:Dynamic = CollideContactManifold3D.surfaceB__collideContactManifold3D; __callArgument28; }));
+    supportA(({ final __callArgument50:Dynamic = a; __callArgument50; }), (cast -normalX : Float), (cast -normalY : Float), (cast -normalZ : Float), ({ final __callArgument51:Dynamic = CollideContactManifold3D.surfaceA__collideContactManifold3D; __callArgument51; }));
+    supportB(({ final __callArgument54:Dynamic = b; __callArgument54; }), (cast normalX : Float), (cast normalY : Float), (cast normalZ : Float), ({ final __callArgument55:Dynamic = CollideContactManifold3D.surfaceB__collideContactManifold3D; __callArgument55; }));
     point = flighthq._internal._StaticIndex.readArray((cast out : CollisionContactManifold3D).points, 0.0);
     projectionA = (((flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollideContactManifold3D.surfaceA__collideContactManifold3D : Array<Float>), (cast 0.0 : Float)) * normalX) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollideContactManifold3D.surfaceA__collideContactManifold3D : Array<Float>), (cast 1.0 : Float)) * normalY)) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollideContactManifold3D.surfaceA__collideContactManifold3D : Array<Float>), (cast 2.0 : Float)) * normalZ));
     projectionB = (((flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollideContactManifold3D.surfaceB__collideContactManifold3D : Array<Float>), (cast 0.0 : Float)) * normalX) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollideContactManifold3D.surfaceB__collideContactManifold3D : Array<Float>), (cast 1.0 : Float)) * normalY)) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollideContactManifold3D.surfaceB__collideContactManifold3D : Array<Float>), (cast 2.0 : Float)) * normalZ));

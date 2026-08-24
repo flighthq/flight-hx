@@ -84,6 +84,6 @@ class CanvasLensDistortionEffect {
   });
 
   public static function registerCanvasLensDistortionEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast 'LensDistortionEffect' : String), ({ final __callArgument4:Dynamic = defaultCanvasLensDistortionEffectRunner; __callArgument4; }));
+    registerCanvasRenderEffect(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast 'LensDistortionEffect' : String), ({ final __callArgument7:Dynamic = defaultCanvasLensDistortionEffectRunner; __callArgument7; }));
   }
 }

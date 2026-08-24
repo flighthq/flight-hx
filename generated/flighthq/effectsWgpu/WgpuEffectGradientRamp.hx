@@ -86,7 +86,7 @@ class WgpuEffectGradientRamp {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
     var texture:flighthq._internal.dom.GPUTexture = cast _Runtime.UNDEFINED;
-    data = (cast WgpuEffectGradientRamp.buildRampData__wgpuEffectGradientRamp(({ final __callArgument4:Dynamic = colors; __callArgument4; }), ({ final __callArgument5:Dynamic = alphas; __callArgument5; }), ({ final __callArgument6:Dynamic = ratios; __callArgument6; })) : flighthq._internal._UInt8ClampedArray);
+    data = (cast WgpuEffectGradientRamp.buildRampData__wgpuEffectGradientRamp(({ final __callArgument8:Dynamic = colors; __callArgument8; }), ({ final __callArgument9:Dynamic = alphas; __callArgument9; }), ({ final __callArgument10:Dynamic = ratios; __callArgument10; })) : flighthq._internal._UInt8ClampedArray);
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
     texture = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([256.0, 1.0, 1.0] : Array<Dynamic>), format: 'rgba8unorm', usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>));

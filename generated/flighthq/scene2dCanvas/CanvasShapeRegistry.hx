@@ -21,8 +21,8 @@ class CanvasShapeRegistry {
   @:noCompletion
   public static function getCanvasShapeCommand(state:RenderState, key:String):Null<CanvasShapeCommand<String>> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:CanvasShapeCommand<String>; }>> = cast _Runtime.UNDEFINED;
-    entry = ({ final __collection4:Dynamic = ({ final __structural3 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { @:optional var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>; }).canvasShapeCommands; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var entries:flighthq._internal._Map<String, RegistryTableEntry<CanvasShapeCommand<String>>>; }).entries; }); __collection4 == null ? _Runtime.UNDEFINED : ((cast __collection4 : flighthq._internal._Map<String, RegistryTableEntry<CanvasShapeCommand<String>>>).get(key)); });
-    return cast ((cast _Runtime.strictEquals(({ final __structural5 = entry; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:CanvasShapeCommand<String>; }).value : Dynamic) : (cast null : Dynamic));
+    entry = ({ final __collection6:Dynamic = ({ final __structural5 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { @:optional var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>; }).canvasShapeCommands; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { var entries:flighthq._internal._Map<String, RegistryTableEntry<CanvasShapeCommand<String>>>; }).entries; }); __collection6 == null ? _Runtime.UNDEFINED : ((cast __collection6 : flighthq._internal._Map<String, RegistryTableEntry<CanvasShapeCommand<String>>>).get(key)); });
+    return cast ((cast _Runtime.strictEquals(({ final __structural7 = entry; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:CanvasShapeCommand<String>; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
@@ -31,14 +31,14 @@ class CanvasShapeRegistry {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:KeyedTable<CanvasShapeCommand<String>> = cast _Runtime.UNDEFINED;
     registerShapeBoundsCommand((cast command : Dynamic));
-    runtime = (cast getRenderStateRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : RenderStateRuntime);
+    runtime = (cast getRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : RenderStateRuntime);
     table = _Runtime.coalesce((cast runtime.registries : { @:optional var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>; }).canvasShapeCommands, function():Dynamic return cast (cast createKeyedTable((cast 'CanvasShapeCommand' : String), (cast 'Unregistered' : String)) : KeyedTable<CanvasShapeCommand<String>>));
-    ((cast runtime.registries : { @:optional var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>; }).canvasShapeCommands = cast ((cast withRegistryTableEntry((cast table : Dynamic), (cast (cast command : CanvasShapeCommand<K>).key : String), ({ final __callArgument7:Dynamic = command; __callArgument7; })) : KeyedTable<CanvasShapeCommand<String>>) : Null<KeyedTable<CanvasShapeCommand<String>>>));
+    ((cast runtime.registries : { @:optional var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>; }).canvasShapeCommands = cast ((cast withRegistryTableEntry((cast table : Dynamic), (cast (cast command : CanvasShapeCommand<K>).key : String), ({ final __callArgument10:Dynamic = command; __callArgument10; })) : KeyedTable<CanvasShapeCommand<String>>) : Null<KeyedTable<CanvasShapeCommand<String>>>));
   }
 
   public static function registerCanvasShapeCommands(state:RenderState, commands:Array<CanvasShapeCommand<String>>):Void {
     for (command in _Runtime.iterable(commands)) {
-      (cast registerCanvasShapeCommand : RenderState->CanvasShapeCommand<String>->Void)(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = command; __callArgument11; }));
+      (cast registerCanvasShapeCommand : RenderState->CanvasShapeCommand<String>->Void)(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = command; __callArgument15; }));
     }
   }
 }

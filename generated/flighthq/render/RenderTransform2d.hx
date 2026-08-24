@@ -27,7 +27,7 @@ class RenderTransform2d {
     parentDirty = ((cast !_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast parentData : RenderProxy2D).transformFrameId, (cast (cast getRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : RenderStateRuntime) : { var currentFrameId:Float; }).currentFrameId) : Bool));
     localDirty = ((cast _Runtime.strictEquals((cast state : RenderState).sceneGraphSyncPolicy, 'refreshDerivedState') : Bool) || (cast !_Runtime.strictEquals((cast data : RenderProxy2D).lastLocalTransformId, localTransformId) : Bool));
     if ((cast ((cast parentDirty : Bool) || (cast localDirty : Bool)) : Bool)) {
-      RenderTransform2d.recalculateRenderTransform2D__renderTransform2d(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = data; __callArgument2; }), ({ final __callArgument3:Dynamic = parentData; __callArgument3; }));
+      RenderTransform2d.recalculateRenderTransform2D__renderTransform2d(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = data; __callArgument3; }), ({ final __callArgument4:Dynamic = parentData; __callArgument4; }));
       ((cast data : RenderProxy2D).lastLocalTransformId = localTransformId);
       return cast true;
     }
@@ -41,10 +41,10 @@ class RenderTransform2d {
     transform2D = (cast getNodeLocalMatrix((cast (cast (cast data : RenderProxy2D).source : flighthq._internal._Intersection2<Node<Dynamic>, HasTransform2D>) : Dynamic)) : Matrix);
     parentTransform2D = ((cast !_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast parentData : RenderProxy2D).transform2D : Dynamic) : (cast (cast state : RenderState).renderTransform2D : Dynamic));
     if ((cast !_Runtime.strictEquals(parentTransform2D, null) : Bool)) {
-      multiplyMatrix(({ final __callArgument4:Dynamic = (cast data : RenderProxy2D).transform2D; __callArgument4; }), ({ final __callArgument5:Dynamic = parentTransform2D; __callArgument5; }), ({ final __callArgument6:Dynamic = transform2D; __callArgument6; }));
+      multiplyMatrix(({ final __callArgument8:Dynamic = (cast data : RenderProxy2D).transform2D; __callArgument8; }), ({ final __callArgument9:Dynamic = parentTransform2D; __callArgument9; }), ({ final __callArgument10:Dynamic = transform2D; __callArgument10; }));
     } else {
-      copyMatrix(({ final __callArgument7:Dynamic = (cast data : RenderProxy2D).transform2D; __callArgument7; }), ({ final __callArgument8:Dynamic = transform2D; __callArgument8; }));
+      copyMatrix(({ final __callArgument14:Dynamic = (cast data : RenderProxy2D).transform2D; __callArgument14; }), ({ final __callArgument15:Dynamic = transform2D; __callArgument15; }));
     }
-    ((cast data : RenderProxy2D).transformFrameId = (cast (cast getRenderStateRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : RenderStateRuntime) : { var currentFrameId:Float; }).currentFrameId);
+    ((cast data : RenderProxy2D).transformFrameId = (cast (cast getRenderStateRuntime(({ final __callArgument18:Dynamic = state; __callArgument18; })) : RenderStateRuntime) : { var currentFrameId:Float; }).currentFrameId);
   }
 }

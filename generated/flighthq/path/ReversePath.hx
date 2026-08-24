@@ -22,7 +22,7 @@ class ReversePath {
     _Runtime.setLength((cast out : Path).data, 0.0);
     ((cast out : Path).winding = _Runtime.field(source, 'winding'));
     for (subpath in _Runtime.iterable(subpaths)) {
-      ReversePath.encodeReversedSubpath__reversePath((cast subpath : Dynamic), ({ final __callArgument3:Dynamic = out; __callArgument3; }));
+      ReversePath.encodeReversedSubpath__reversePath((cast subpath : Dynamic), ({ final __callArgument4:Dynamic = out; __callArgument4; }));
     }
   }
 
@@ -40,7 +40,7 @@ class ReversePath {
       return cast current;
       return cast _Runtime.UNDEFINED;
     });
-    forEachPathSegment(({ final __callArgument4:Dynamic = path; __callArgument4; }), (cast function(segment:PathSegment):Void {
+    forEachPathSegment(({ final __callArgument6:Dynamic = path; __callArgument6; }), (cast function(segment:PathSegment):Void {
       if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'moveTo') : Bool)) {
         (current = cast ({ points: cast ([{ x: (cast segment : { var kind:String; var x:Float; var y:Float; }).x, y: (cast segment : { var kind:String; var x:Float; var y:Float; }).y, kind: 'move' }] : Array<Dynamic>), closed: false } : Dynamic));
         _Runtime.callProperty(subpaths, 'push', cast ([current] : Array<Dynamic>));

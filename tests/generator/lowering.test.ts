@@ -266,7 +266,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain("_Runtime.field(pair, 'left')");
   });
 
-  it('keeps omitted and possibly undefined arguments nullable at typed call boundaries', () => {
+  it('preserves omitted call arity while keeping possibly undefined arguments nullable', () => {
     const { checker, source } = typedSource(
       '/workspace/upstream/packages/example/src/optional-default.ts',
       `
@@ -293,9 +293,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain(
-      "withDefault(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end)",
-    );
+    expect(output).toContain('#if js _Runtime.callValue(withDefault, cast ([] : Array<Dynamic>)) #else withDefault(');
     expect(output).toContain(
       'withDefault(#if js (cast ({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var tolerance:Null<Float>; }).tolerance; }) : Float) #else (cast ({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var tolerance:Null<Float>; }).tolerance; }) : Null<Float>) #end)',
     );
@@ -1840,13 +1838,11 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('(cast counter : Counter).bump(1.0)');
     expect(output).toContain('(cast __generatedClass');
     expect(output).toContain(': Counter).bump(2.0)');
-    expect(output).toContain(
-      "(cast counter : Counter).read(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end)",
-    );
+    expect(output).toContain('(cast counter : Counter).read()');
     expect(output).toContain('(cast counter : Counter).read(#if js (cast ({ final __structural');
     expect(output).toContain(': Float) #else (cast ({ final __structural');
     expect(output).toContain(': Null<Float>) #end)');
-    expect(output).toMatch(/\(cast __generatedClass\d+ : Counter\)\.read\(#if js/);
+    expect(output).toMatch(/\(cast __generatedClass\d+ : Counter\)\.read\(\)/);
     expect(output).toContain("_Runtime.callProperty(counter, 'bump', _Runtime.concatArrays");
     expect(output).toContain("_Runtime.callProperty(dynamic_, 'bump'");
     expect(output).not.toContain("_Runtime.callProperty(counter, 'bump', cast ([1.0]");

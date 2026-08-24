@@ -37,11 +37,11 @@ class ShapeStrokeOutline {
     flush = (cast function():Void {
       var outline:Path = cast _Runtime.UNDEFINED;
       if ((cast ((cast ((cast _Runtime.strictEquals(style, null) : Bool) || (cast _Runtime.strictEquals(centerline, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast centerline : Path).commands, 'length'), 0.0) : Bool)) : Bool)) { return; }
-      if ((cast (cast ShapeStrokeOutline.isCenterlineClosed__shapeStrokeOutline(({ final __callArgument1:Dynamic = centerline; __callArgument1; })) : Bool) : Bool)) {
+      if ((cast (cast ShapeStrokeOutline.isCenterlineClosed__shapeStrokeOutline(({ final __callArgument2:Dynamic = centerline; __callArgument2; })) : Bool) : Bool)) {
         (deferred = cast (true : Dynamic));
         return;
       }
-      outline = (cast compactStrokePath(({ final __callArgument2:Dynamic = centerline; __callArgument2; }), ({ final __callArgument3:Dynamic = style; __callArgument3; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Path);
+      outline = (cast (#if js _Runtime.callValue(compactStrokePath, cast ([({ final __callArgument6:Dynamic = centerline; __callArgument6; }), ({ final __callArgument7:Dynamic = style; __callArgument7; })] : Array<Dynamic>)) #else compactStrokePath(({ final __callArgument4:Dynamic = centerline; __callArgument4; }), ({ final __callArgument5:Dynamic = style; __callArgument5; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Path);
       if ((cast ((cast _Runtime.field((cast outline : Path).commands, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(regions, 'push', cast ([{ path: outline, color: color, alpha: alpha }] : Array<Dynamic>)); }
     });
     i = 0.0;
@@ -70,7 +70,7 @@ class ShapeStrokeOutline {
             _Runtime.callProperty((cast centerline : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
             _Runtime.pushMany((cast centerline : Path).data, cast ([penX, penY] : Array<Dynamic>));
           }
-          appendShapeGeometryCommand(({ final __callArgument4:Dynamic = centerline; __callArgument4; }), (cast name : String), ({ final __callArgument5:Dynamic = commands; __callArgument5; }), (cast a : Float));
+          appendShapeGeometryCommand(({ final __callArgument8:Dynamic = centerline; __callArgument8; }), (cast name : String), ({ final __callArgument9:Dynamic = commands; __callArgument9; }), (cast a : Float));
         }
         if ((cast ((cast _Runtime.strictEquals(name, 'moveTo') : Bool) || (cast _Runtime.strictEquals(name, 'lineTo') : Bool)) : Bool)) {
           (penX = cast ((cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Dynamic));

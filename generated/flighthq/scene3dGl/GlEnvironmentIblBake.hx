@@ -35,7 +35,7 @@ class GlEnvironmentIblBake {
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'EXT_color_buffer_float');
     flighthq._internal.backend.WebGl2Backend.getExtension(gl, 'OES_texture_float_linear');
-    runtime = (cast getGlScene3DRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlScene3DRuntime);
+    runtime = (cast getGlScene3DRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : GlScene3DRuntime);
     if ((cast _Runtime.strictEquals(runtime.iblBakeFramebuffer, null) : Bool)) { (runtime.iblBakeFramebuffer = cast (flighthq._internal.backend.WebGl2Backend.createFramebuffer(gl) : Null<flighthq._internal.dom.WebGLFramebuffer>)); }
     fbo = runtime.iblBakeFramebuffer;
     prevFramebuffer = (cast flighthq._internal.backend.WebGl2Backend.getParameter(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER_BINDING', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER_BINDING)) : Null<flighthq._internal.dom.WebGLFramebuffer>);
@@ -46,11 +46,11 @@ class GlEnvironmentIblBake {
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flighthq._internal.backend.WebGl2Backend.DEPTH_TEST));
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flighthq._internal.backend.WebGl2Backend.CULL_FACE));
     flighthq._internal.backend.WebGl2Backend.disable(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flighthq._internal.backend.WebGl2Backend.BLEND));
-    irradianceCube = (cast GlEnvironmentIblBake.bakeGlIrradiance__glEnvironmentIblBake(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = fbo; __callArgument4; }), ({ final __callArgument5:Dynamic = sourceCube; __callArgument5; })) : flighthq._internal.dom.WebGLTexture);
-    __destructure0 = (cast GlEnvironmentIblBake.bakeGlPrefiltered__glEnvironmentIblBake(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = fbo; __callArgument7; }), ({ final __callArgument8:Dynamic = sourceCube; __callArgument8; })) : { var prefilteredCube:flighthq._internal.dom.WebGLTexture; var prefilteredMipCount:Float; });
+    irradianceCube = (cast GlEnvironmentIblBake.bakeGlIrradiance__glEnvironmentIblBake(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = fbo; __callArgument7; }), ({ final __callArgument8:Dynamic = sourceCube; __callArgument8; })) : flighthq._internal.dom.WebGLTexture);
+    __destructure0 = (cast GlEnvironmentIblBake.bakeGlPrefiltered__glEnvironmentIblBake(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = fbo; __callArgument13; }), ({ final __callArgument14:Dynamic = sourceCube; __callArgument14; })) : { var prefilteredCube:flighthq._internal.dom.WebGLTexture; var prefilteredMipCount:Float; });
     prefilteredCube = _Runtime.field(__destructure0, 'prefilteredCube');
     prefilteredMipCount = _Runtime.field(__destructure0, 'prefilteredMipCount');
-    brdfLut = _Runtime.coalesce(({ final __typedStruct9 = runtime.ibl; __typedStruct9 == null ? _Runtime.UNDEFINED : (cast __typedStruct9 : { var brdfLut:flighthq._internal.dom.WebGLTexture; }).brdfLut; }), function():Dynamic return cast (cast GlEnvironmentIblBake.bakeGlBrdfLut__glEnvironmentIblBake(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = fbo; __callArgument11; })) : flighthq._internal.dom.WebGLTexture));
+    brdfLut = _Runtime.coalesce(({ final __typedStruct18 = runtime.ibl; __typedStruct18 == null ? _Runtime.UNDEFINED : (cast __typedStruct18 : { var brdfLut:flighthq._internal.dom.WebGLTexture; }).brdfLut; }), function():Dynamic return cast (cast GlEnvironmentIblBake.bakeGlBrdfLut__glEnvironmentIblBake(({ final __callArgument19:Dynamic = state; __callArgument19; }), ({ final __callArgument20:Dynamic = fbo; __callArgument20; })) : flighthq._internal.dom.WebGLTexture));
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), prevFramebuffer);
     flighthq._internal.backend.WebGl2Backend.viewport(gl, flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 2.0 : Float)), flighthq._internal._StaticIndex.readInt32ArrayTyped((cast prevViewport : flighthq._internal._Int32Array), (cast 3.0 : Float)));
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, null);
@@ -80,12 +80,12 @@ class GlEnvironmentIblBake {
     var cube:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
     var program:GlBakeProgram__glEnvironmentIblBake = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
-    cube = (cast GlEnvironmentIblBake.createGlBakeCube__glEnvironmentIblBake(({ final __callArgument14:Dynamic = gl; __callArgument14; }), (cast GlEnvironmentIblBake.IRRADIANCE_SIZE__glEnvironmentIblBake : Float), (cast false : Bool)) : flighthq._internal.dom.WebGLTexture);
-    program = (cast GlEnvironmentIblBake.ensureGlBakeProgram__glEnvironmentIblBake(({ final __callArgument15:Dynamic = state; __callArgument15; }), (cast 'irradiance' : String), (cast GlEnvironmentIblBake.IRRADIANCE_FRAGMENT__glEnvironmentIblBake : String)) : GlBakeProgram__glEnvironmentIblBake);
+    cube = (cast GlEnvironmentIblBake.createGlBakeCube__glEnvironmentIblBake(({ final __callArgument25:Dynamic = gl; __callArgument25; }), (cast GlEnvironmentIblBake.IRRADIANCE_SIZE__glEnvironmentIblBake : Float), (cast false : Bool)) : flighthq._internal.dom.WebGLTexture);
+    program = (cast GlEnvironmentIblBake.ensureGlBakeProgram__glEnvironmentIblBake(({ final __callArgument27:Dynamic = state; __callArgument27; }), (cast 'irradiance' : String), (cast GlEnvironmentIblBake.IRRADIANCE_FRAGMENT__glEnvironmentIblBake : String)) : GlBakeProgram__glEnvironmentIblBake);
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), fbo);
     flighthq._internal.backend.WebGl2Backend.useProgram(gl, (cast program : GlBakeProgram__glEnvironmentIblBake).program);
-    GlEnvironmentIblBake.bindGlBakeSourceCube__glEnvironmentIblBake(({ final __callArgument16:Dynamic = gl; __callArgument16; }), (cast program : Dynamic), ({ final __callArgument17:Dynamic = sourceCube; __callArgument17; }));
-    GlEnvironmentIblBake.renderGlBakeCubeFaces__glEnvironmentIblBake(({ final __callArgument18:Dynamic = state; __callArgument18; }), ({ final __callArgument19:Dynamic = fbo; __callArgument19; }), (cast program : Dynamic), ({ final __callArgument20:Dynamic = cube; __callArgument20; }), (cast GlEnvironmentIblBake.IRRADIANCE_SIZE__glEnvironmentIblBake : Float), (cast 0.0 : Float));
+    GlEnvironmentIblBake.bindGlBakeSourceCube__glEnvironmentIblBake(({ final __callArgument29:Dynamic = gl; __callArgument29; }), (cast program : Dynamic), ({ final __callArgument30:Dynamic = sourceCube; __callArgument30; }));
+    GlEnvironmentIblBake.renderGlBakeCubeFaces__glEnvironmentIblBake(({ final __callArgument33:Dynamic = state; __callArgument33; }), ({ final __callArgument34:Dynamic = fbo; __callArgument34; }), (cast program : Dynamic), ({ final __callArgument35:Dynamic = cube; __callArgument35; }), (cast GlEnvironmentIblBake.IRRADIANCE_SIZE__glEnvironmentIblBake : Float), (cast 0.0 : Float));
     return cast cube;
     return cast null;
   }
@@ -96,11 +96,11 @@ class GlEnvironmentIblBake {
     var program:GlBakeProgram__glEnvironmentIblBake = cast _Runtime.UNDEFINED;
     var mipCount:Float = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
-    cube = (cast GlEnvironmentIblBake.createGlBakeCube__glEnvironmentIblBake(({ final __callArgument21:Dynamic = gl; __callArgument21; }), (cast GlEnvironmentIblBake.PREFILTERED_SIZE__glEnvironmentIblBake : Float), (cast true : Bool)) : flighthq._internal.dom.WebGLTexture);
-    program = (cast GlEnvironmentIblBake.ensureGlBakeProgram__glEnvironmentIblBake(({ final __callArgument22:Dynamic = state; __callArgument22; }), (cast 'prefiltered' : String), (cast GlEnvironmentIblBake.PREFILTERED_FRAGMENT__glEnvironmentIblBake : String)) : GlBakeProgram__glEnvironmentIblBake);
+    cube = (cast GlEnvironmentIblBake.createGlBakeCube__glEnvironmentIblBake(({ final __callArgument39:Dynamic = gl; __callArgument39; }), (cast GlEnvironmentIblBake.PREFILTERED_SIZE__glEnvironmentIblBake : Float), (cast true : Bool)) : flighthq._internal.dom.WebGLTexture);
+    program = (cast GlEnvironmentIblBake.ensureGlBakeProgram__glEnvironmentIblBake(({ final __callArgument41:Dynamic = state; __callArgument41; }), (cast 'prefiltered' : String), (cast GlEnvironmentIblBake.PREFILTERED_FRAGMENT__glEnvironmentIblBake : String)) : GlBakeProgram__glEnvironmentIblBake);
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), fbo);
     flighthq._internal.backend.WebGl2Backend.useProgram(gl, (cast program : GlBakeProgram__glEnvironmentIblBake).program);
-    GlEnvironmentIblBake.bindGlBakeSourceCube__glEnvironmentIblBake(({ final __callArgument23:Dynamic = gl; __callArgument23; }), (cast program : Dynamic), ({ final __callArgument24:Dynamic = sourceCube; __callArgument24; }));
+    GlEnvironmentIblBake.bindGlBakeSourceCube__glEnvironmentIblBake(({ final __callArgument43:Dynamic = gl; __callArgument43; }), (cast program : Dynamic), ({ final __callArgument44:Dynamic = sourceCube; __callArgument44; }));
     mipCount = GlEnvironmentIblBake.PREFILTERED_MIPS__glEnvironmentIblBake;
     {
       var mip:Float = 0.0;
@@ -108,7 +108,7 @@ class GlEnvironmentIblBake {
         var mipSize:Float = HxMath.max(1.0, (_Runtime.toInt32(GlEnvironmentIblBake.PREFILTERED_SIZE__glEnvironmentIblBake) >> _Runtime.toInt32(mip)));
         var roughness:Float = ((cast ((cast mipCount : Float) > (cast 1.0 : Float)) : Bool) ? (cast (mip / (mipCount - 1.0)) : Dynamic) : (cast 0.0 : Dynamic));
         flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast program : GlBakeProgram__glEnvironmentIblBake).locRoughness, roughness);
-        GlEnvironmentIblBake.renderGlBakeCubeFaces__glEnvironmentIblBake(({ final __callArgument25:Dynamic = state; __callArgument25; }), ({ final __callArgument26:Dynamic = fbo; __callArgument26; }), (cast program : Dynamic), ({ final __callArgument27:Dynamic = cube; __callArgument27; }), (cast mipSize : Float), (cast mip : Float));
+        GlEnvironmentIblBake.renderGlBakeCubeFaces__glEnvironmentIblBake(({ final __callArgument47:Dynamic = state; __callArgument47; }), ({ final __callArgument48:Dynamic = fbo; __callArgument48; }), (cast program : Dynamic), ({ final __callArgument49:Dynamic = cube; __callArgument49; }), (cast mipSize : Float), (cast mip : Float));
         mip++;
       }
     }
@@ -128,12 +128,12 @@ class GlEnvironmentIblBake {
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_MAG_FILTER', flighthq._internal.backend.WebGl2Backend.TEXTURE_MAG_FILTER), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINEAR', flighthq._internal.backend.WebGl2Backend.LINEAR));
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_WRAP_S', flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_S), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CLAMP_TO_EDGE', flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE));
     flighthq._internal.backend.WebGl2Backend.texParameteri(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_WRAP_T', flighthq._internal.backend.WebGl2Backend.TEXTURE_WRAP_T), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'CLAMP_TO_EDGE', flighthq._internal.backend.WebGl2Backend.CLAMP_TO_EDGE));
-    program = (cast GlEnvironmentIblBake.ensureGlBakeProgram__glEnvironmentIblBake(({ final __callArgument28:Dynamic = state; __callArgument28; }), (cast 'brdf' : String), (cast GlEnvironmentIblBake.BRDF_LUT_FRAGMENT__glEnvironmentIblBake : String)) : GlBakeProgram__glEnvironmentIblBake);
+    program = (cast GlEnvironmentIblBake.ensureGlBakeProgram__glEnvironmentIblBake(({ final __callArgument53:Dynamic = state; __callArgument53; }), (cast 'brdf' : String), (cast GlEnvironmentIblBake.BRDF_LUT_FRAGMENT__glEnvironmentIblBake : String)) : GlBakeProgram__glEnvironmentIblBake);
     flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), fbo);
     flighthq._internal.backend.WebGl2Backend.framebufferTexture2D(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR_ATTACHMENT0', flighthq._internal.backend.WebGl2Backend.COLOR_ATTACHMENT0), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), texture, 0.0);
     flighthq._internal.backend.WebGl2Backend.viewport(gl, 0.0, 0.0, GlEnvironmentIblBake.BRDF_LUT_SIZE__glEnvironmentIblBake, GlEnvironmentIblBake.BRDF_LUT_SIZE__glEnvironmentIblBake);
     flighthq._internal.backend.WebGl2Backend.useProgram(gl, (cast program : GlBakeProgram__glEnvironmentIblBake).program);
-    GlEnvironmentIblBake.drawGlBakeQuad__glEnvironmentIblBake(({ final __callArgument29:Dynamic = state; __callArgument29; }), (cast program : Dynamic));
+    GlEnvironmentIblBake.drawGlBakeQuad__glEnvironmentIblBake(({ final __callArgument55:Dynamic = state; __callArgument55; }), (cast program : Dynamic));
     return cast texture;
     return cast null;
   }
@@ -145,12 +145,12 @@ class GlEnvironmentIblBake {
     {
       var face:Float = 0.0;
       while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
-        flighthq._internal.backend.WebGl2Backend.framebufferTexture2D(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR_ATTACHMENT0', flighthq._internal.backend.WebGl2Backend.COLOR_ATTACHMENT0), (cast getGlCubeFaceTarget(({ final __callArgument30:Dynamic = gl; __callArgument30; }), (cast face : Float)) : Float), cube, mipLevel);
+        flighthq._internal.backend.WebGl2Backend.framebufferTexture2D(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR_ATTACHMENT0', flighthq._internal.backend.WebGl2Backend.COLOR_ATTACHMENT0), (cast getGlCubeFaceTarget(({ final __callArgument57:Dynamic = gl; __callArgument57; }), (cast face : Float)) : Float), cube, mipLevel);
         var b:Array<Float> = flighthq._internal._StaticIndex.readArray(GlEnvironmentIblBake.CUBE_FACE_BASIS__glEnvironmentIblBake, face);
         flighthq._internal.backend.WebGl2Backend.uniform3f(gl, (cast program : GlBakeProgram__glEnvironmentIblBake).locFaceForward, flighthq._internal._StaticIndex.readFloatArrayTyped((cast b : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast b : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast b : Array<Float>), (cast 2.0 : Float)));
         flighthq._internal.backend.WebGl2Backend.uniform3f(gl, (cast program : GlBakeProgram__glEnvironmentIblBake).locFaceRight, flighthq._internal._StaticIndex.readFloatArrayTyped((cast b : Array<Float>), (cast 3.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast b : Array<Float>), (cast 4.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast b : Array<Float>), (cast 5.0 : Float)));
         flighthq._internal.backend.WebGl2Backend.uniform3f(gl, (cast program : GlBakeProgram__glEnvironmentIblBake).locFaceUp, flighthq._internal._StaticIndex.readFloatArrayTyped((cast b : Array<Float>), (cast 6.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast b : Array<Float>), (cast 7.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast b : Array<Float>), (cast 8.0 : Float)));
-        GlEnvironmentIblBake.drawGlBakeQuad__glEnvironmentIblBake(({ final __callArgument31:Dynamic = state; __callArgument31; }), (cast program : Dynamic));
+        GlEnvironmentIblBake.drawGlBakeQuad__glEnvironmentIblBake(({ final __callArgument59:Dynamic = state; __callArgument59; }), (cast program : Dynamic));
         face++;
       }
     }
@@ -171,7 +171,7 @@ class GlEnvironmentIblBake {
         {
           var face:Float = 0.0;
           while ((cast ((cast face : Float) < (cast 6.0 : Float)) : Bool)) {
-            flighthq._internal.backend.WebGl2Backend.texImage2D(gl, (cast getGlCubeFaceTarget(({ final __callArgument32:Dynamic = gl; __callArgument32; }), (cast face : Float)) : Float), mip, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA16F', flighthq._internal.backend.WebGl2Backend.RGBA16F), mipSize, mipSize, 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'HALF_FLOAT', flighthq._internal.backend.WebGl2Backend.HALF_FLOAT), null);
+            flighthq._internal.backend.WebGl2Backend.texImage2D(gl, (cast getGlCubeFaceTarget(({ final __callArgument61:Dynamic = gl; __callArgument61; }), (cast face : Float)) : Float), mip, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA16F', flighthq._internal.backend.WebGl2Backend.RGBA16F), mipSize, mipSize, 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'HALF_FLOAT', flighthq._internal.backend.WebGl2Backend.HALF_FLOAT), null);
             face++;
           }
         }
@@ -210,7 +210,7 @@ class GlEnvironmentIblBake {
     }
     baked = ((cast byState : flighthq._internal._Map<String, GlBakeProgram__glEnvironmentIblBake>).get(key));
     if ((cast !_Runtime.strictEquals(baked, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast baked; }
-    program = (cast GlEnvironmentIblBake.linkGlBakeProgram__glEnvironmentIblBake(({ final __callArgument33:Dynamic = gl; __callArgument33; }), (cast fragment : String)) : flighthq._internal.dom.WebGLProgram);
+    program = (cast GlEnvironmentIblBake.linkGlBakeProgram__glEnvironmentIblBake(({ final __callArgument63:Dynamic = gl; __callArgument63; }), (cast fragment : String)) : flighthq._internal.dom.WebGLProgram);
     vao = flighthq._internal.backend.WebGl2Backend.createVertexArray(gl);
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, vao);
     buffer = flighthq._internal.backend.WebGl2Backend.createBuffer(gl);
@@ -233,7 +233,7 @@ class GlEnvironmentIblBake {
   }
 
   public static function linkGlBakeProgram__glEnvironmentIblBake(gl:flighthq._internal.dom.WebGL2RenderingContext, fragment:String):flighthq._internal.dom.WebGLProgram {
-    return cast (cast createGlProgram(({ final __callArgument34:Dynamic = gl; __callArgument34; }), (cast GlEnvironmentIblBake.BAKE_VERTEX__glEnvironmentIblBake : String), (cast fragment : String), (cast 'IBL bake' : String)) : flighthq._internal.dom.WebGLProgram);
+    return cast (cast createGlProgram(({ final __callArgument65:Dynamic = gl; __callArgument65; }), (cast GlEnvironmentIblBake.BAKE_VERTEX__glEnvironmentIblBake : String), (cast fragment : String), (cast 'IBL bake' : String)) : flighthq._internal.dom.WebGLProgram);
     return cast null;
   }
 

@@ -83,9 +83,9 @@ class Skeleton2d {
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var o:Float = (i * Skeleton2d.MATRIX_STRIDE__skeleton2d);
         Skeleton2d.readMatrix__skeleton2d(({ final __callArgument0:Dynamic = Skeleton2d._scratchA__skeleton2d; __callArgument0; }), ({ final __callArgument1:Dynamic = world; __callArgument1; }), (cast o : Float));
-        Skeleton2d.readMatrix__skeleton2d(({ final __callArgument2:Dynamic = Skeleton2d._scratchB__skeleton2d; __callArgument2; }), ({ final __callArgument3:Dynamic = invBind; __callArgument3; }), (cast o : Float));
-        multiplyMatrix(({ final __callArgument4:Dynamic = Skeleton2d._scratchC__skeleton2d; __callArgument4; }), ({ final __callArgument5:Dynamic = Skeleton2d._scratchA__skeleton2d; __callArgument5; }), ({ final __callArgument6:Dynamic = Skeleton2d._scratchB__skeleton2d; __callArgument6; }));
-        Skeleton2d.writeMatrix__skeleton2d(({ final __callArgument7:Dynamic = out; __callArgument7; }), (cast o : Float), ({ final __callArgument8:Dynamic = Skeleton2d._scratchC__skeleton2d; __callArgument8; }));
+        Skeleton2d.readMatrix__skeleton2d(({ final __callArgument4:Dynamic = Skeleton2d._scratchB__skeleton2d; __callArgument4; }), ({ final __callArgument5:Dynamic = invBind; __callArgument5; }), (cast o : Float));
+        multiplyMatrix(({ final __callArgument8:Dynamic = Skeleton2d._scratchC__skeleton2d; __callArgument8; }), ({ final __callArgument9:Dynamic = Skeleton2d._scratchA__skeleton2d; __callArgument9; }), ({ final __callArgument10:Dynamic = Skeleton2d._scratchB__skeleton2d; __callArgument10; }));
+        Skeleton2d.writeMatrix__skeleton2d(({ final __callArgument14:Dynamic = out; __callArgument14; }), (cast o : Float), ({ final __callArgument15:Dynamic = Skeleton2d._scratchC__skeleton2d; __callArgument15; }));
         i++;
       }
     }
@@ -196,7 +196,7 @@ class Skeleton2d {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
-        computeSkeleton2DBoneWorldTransform(({ final __callArgument9:Dynamic = skeleton; __callArgument9; }), (cast i : Float));
+        computeSkeleton2DBoneWorldTransform(({ final __callArgument18:Dynamic = skeleton; __callArgument18; }), (cast i : Float));
         i++;
       }
     }
@@ -282,7 +282,7 @@ class Skeleton2d {
 
   public static function getSkeleton2DBoneWorldMatrix(out:MatrixLike, skeleton:Skeleton2D, boneIndex:Float):Bool {
     if ((cast ((cast ((cast boneIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast boneIndex : Float) >= (cast _Runtime.field(skeleton.bones, 'length') : Float)) : Bool)) : Bool)) { return cast false; }
-    Skeleton2d.readMatrix__skeleton2d(({ final __callArgument10:Dynamic = out; __callArgument10; }), skeleton.worldMatrices, (cast (boneIndex * Skeleton2d.MATRIX_STRIDE__skeleton2d) : Float));
+    Skeleton2d.readMatrix__skeleton2d(({ final __callArgument20:Dynamic = out; __callArgument20; }), skeleton.worldMatrices, (cast (boneIndex * Skeleton2d.MATRIX_STRIDE__skeleton2d) : Float));
     return cast true;
     return cast null;
   }
@@ -364,9 +364,9 @@ class Skeleton2d {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
         var o:Float = (i * Skeleton2d.MATRIX_STRIDE__skeleton2d);
-        Skeleton2d.readMatrix__skeleton2d(({ final __callArgument13:Dynamic = Skeleton2d._scratchA__skeleton2d; __callArgument13; }), ({ final __callArgument14:Dynamic = world; __callArgument14; }), (cast o : Float));
-        if ((cast !(cast (cast inverseMatrix(({ final __callArgument15:Dynamic = Skeleton2d._scratchB__skeleton2d; __callArgument15; }), ({ final __callArgument16:Dynamic = Skeleton2d._scratchA__skeleton2d; __callArgument16; })) : Bool) : Bool) : Bool)) { Skeleton2d.setMatrixIdentityLocal__skeleton2d(({ final __callArgument17:Dynamic = Skeleton2d._scratchB__skeleton2d; __callArgument17; })); }
-        Skeleton2d.writeMatrix__skeleton2d(({ final __callArgument18:Dynamic = out; __callArgument18; }), (cast o : Float), ({ final __callArgument19:Dynamic = Skeleton2d._scratchB__skeleton2d; __callArgument19; }));
+        Skeleton2d.readMatrix__skeleton2d(({ final __callArgument24:Dynamic = Skeleton2d._scratchA__skeleton2d; __callArgument24; }), ({ final __callArgument25:Dynamic = world; __callArgument25; }), (cast o : Float));
+        if ((cast !(cast (cast inverseMatrix(({ final __callArgument28:Dynamic = Skeleton2d._scratchB__skeleton2d; __callArgument28; }), ({ final __callArgument29:Dynamic = Skeleton2d._scratchA__skeleton2d; __callArgument29; })) : Bool) : Bool) : Bool)) { Skeleton2d.setMatrixIdentityLocal__skeleton2d(({ final __callArgument32:Dynamic = Skeleton2d._scratchB__skeleton2d; __callArgument32; })); }
+        Skeleton2d.writeMatrix__skeleton2d(({ final __callArgument34:Dynamic = out; __callArgument34; }), (cast o : Float), ({ final __callArgument35:Dynamic = Skeleton2d._scratchB__skeleton2d; __callArgument35; }));
         i++;
       }
     }

@@ -24,6 +24,6 @@ class GlContactShadowsEffect {
   });
 
   public static function registerGlContactShadowsEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast 'ContactShadowsEffect' : String), ({ final __callArgument5:Dynamic = defaultGlContactShadowsEffectRunner; __callArgument5; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast 'ContactShadowsEffect' : String), ({ final __callArgument11:Dynamic = defaultGlContactShadowsEffectRunner; __callArgument11; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument8:Dynamic = state; __callArgument8; }), (cast 'ContactShadowsEffect' : String), ({ final __callArgument9:Dynamic = defaultGlContactShadowsEffectRunner; __callArgument9; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 }

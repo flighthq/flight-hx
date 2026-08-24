@@ -24,7 +24,7 @@ class TauriShortcut {
     }, register: function(accelerator:String, listener:ShortcutEvent->Void):Bool {
       ((cast registered : flighthq._internal._Set<String>).add(accelerator));
       flighthq._internal._Async.recover((cast globalShortcut : TauriGlobalShortcutPlugin).register((cast accelerator : String), (cast function(event:TauriShortcutEvent):Void {
-        if ((cast _Runtime.strictEquals(_Runtime.field(event, 'state'), 'Pressed') : Bool)) { listener(({ final __callArgument1:Dynamic = { accelerator: accelerator }; __callArgument1; })); }
+        if ((cast _Runtime.strictEquals(_Runtime.field(event, 'state'), 'Pressed') : Bool)) { listener(({ final __callArgument2:Dynamic = { accelerator: accelerator }; __callArgument2; })); }
       } : Dynamic)), function(__unused0:flighthq._internal._Any):Void {
         ((cast registered : flighthq._internal._Set<String>).delete_(accelerator));
       });

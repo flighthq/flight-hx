@@ -22,17 +22,17 @@ class ExplainCollisionTest3D {
     var overlapping:Bool = cast _Runtime.UNDEFINED;
     statusA = (cast getCollisionShapeValidationStatus3D(({ final __callArgument0:Dynamic = a; __callArgument0; })) : Null<String>);
     if ((cast !_Runtime.strictEquals(statusA, null) : Bool)) { return cast { kind: (cast a : { var kind:String; }).kind, overlapping: false, shapeIndex: 0.0, status: statusA }; }
-    statusB = (cast getCollisionShapeValidationStatus3D(({ final __callArgument1:Dynamic = b; __callArgument1; })) : Null<String>);
+    statusB = (cast getCollisionShapeValidationStatus3D(({ final __callArgument2:Dynamic = b; __callArgument2; })) : Null<String>);
     if ((cast !_Runtime.strictEquals(statusB, null) : Bool)) { return cast { kind: (cast b : { var kind:String; }).kind, overlapping: false, shapeIndex: 1.0, status: statusB }; }
-    if ((cast ((cast _Runtime.strictEquals((cast getCollisionPairTest3D(({ final __callArgument2:Dynamic = (cast a : { var kind:String; }).kind; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast b : { var kind:String; }).kind; __callArgument3; })) : Null<CollisionPairTest3D>), null) : Bool) && (cast _Runtime.strictEquals((cast getCollisionPairTest3D(({ final __callArgument4:Dynamic = (cast b : { var kind:String; }).kind; __callArgument4; }), ({ final __callArgument5:Dynamic = (cast a : { var kind:String; }).kind; __callArgument5; })) : Null<CollisionPairTest3D>), null) : Bool)) : Bool)) {
-      if ((cast _Runtime.strictEquals((cast getCollisionSupport3D(({ final __callArgument6:Dynamic = (cast a : { var kind:String; }).kind; __callArgument6; })) : Null<CollisionSupport3D>), null) : Bool)) {
+    if ((cast ((cast _Runtime.strictEquals((cast getCollisionPairTest3D(({ final __callArgument4:Dynamic = (cast a : { var kind:String; }).kind; __callArgument4; }), ({ final __callArgument5:Dynamic = (cast b : { var kind:String; }).kind; __callArgument5; })) : Null<CollisionPairTest3D>), null) : Bool) && (cast _Runtime.strictEquals((cast getCollisionPairTest3D(({ final __callArgument8:Dynamic = (cast b : { var kind:String; }).kind; __callArgument8; }), ({ final __callArgument9:Dynamic = (cast a : { var kind:String; }).kind; __callArgument9; })) : Null<CollisionPairTest3D>), null) : Bool)) : Bool)) {
+      if ((cast _Runtime.strictEquals((cast getCollisionSupport3D(({ final __callArgument12:Dynamic = (cast a : { var kind:String; }).kind; __callArgument12; })) : Null<CollisionSupport3D>), null) : Bool)) {
         return cast { kind: (cast a : { var kind:String; }).kind, overlapping: false, shapeIndex: 0.0, status: 'unsupported-shape-kind' };
       }
-      if ((cast _Runtime.strictEquals((cast getCollisionSupport3D(({ final __callArgument7:Dynamic = (cast b : { var kind:String; }).kind; __callArgument7; })) : Null<CollisionSupport3D>), null) : Bool)) {
+      if ((cast _Runtime.strictEquals((cast getCollisionSupport3D(({ final __callArgument14:Dynamic = (cast b : { var kind:String; }).kind; __callArgument14; })) : Null<CollisionSupport3D>), null) : Bool)) {
         return cast { kind: (cast b : { var kind:String; }).kind, overlapping: false, shapeIndex: 1.0, status: 'unsupported-shape-kind' };
       }
     }
-    overlapping = (cast testCollision3D(({ final __callArgument8:Dynamic = a; __callArgument8; }), ({ final __callArgument9:Dynamic = b; __callArgument9; }), (cast createCollisionManifold3D() : CollisionManifold3D)) : Bool);
+    overlapping = (cast testCollision3D(({ final __callArgument16:Dynamic = a; __callArgument16; }), ({ final __callArgument17:Dynamic = b; __callArgument17; }), (cast createCollisionManifold3D() : CollisionManifold3D)) : Bool);
     return cast { kind: null, overlapping: overlapping, shapeIndex: null, status: ((cast overlapping : Bool) ? (cast 'overlapping' : Dynamic) : (cast 'separated' : Dynamic)) };
     return cast null;
   }

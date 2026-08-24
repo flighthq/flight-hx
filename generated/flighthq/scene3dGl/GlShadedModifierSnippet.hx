@@ -20,15 +20,15 @@ class GlShadedModifierSnippet {
   public static function registerGlModifierSnippet(state:GlRenderState, snippet:GlModifierSnippet):Void {
     var registries:GlRenderRegistries = cast _Runtime.UNDEFINED;
     registries = (cast (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries;
-    (registries.modifierSnippets = cast ((cast withRegistryTableEntry((cast registries.modifierSnippets : Dynamic), (cast _Runtime.field(snippet, 'kind') : String), ({ final __callArgument1:Dynamic = snippet; __callArgument1; })) : KeyedTable<GlModifierSnippet>) : KeyedTable<GlModifierSnippet>));
+    (registries.modifierSnippets = cast ((cast withRegistryTableEntry((cast registries.modifierSnippets : Dynamic), (cast _Runtime.field(snippet, 'kind') : String), ({ final __callArgument2:Dynamic = snippet; __callArgument2; })) : KeyedTable<GlModifierSnippet>) : KeyedTable<GlModifierSnippet>));
     registries.modifierSnippetRevision++;
   }
 
   @:noCompletion
   public static function resolveGlModifierSnippet(state:GlRenderState, kind:ModifierKind):Null<GlModifierSnippet> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlModifierSnippet; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var modifierSnippets:KeyedTable<GlModifierSnippet>; }).modifierSnippets : KeyedTable<GlModifierSnippet>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlModifierSnippet>>).get(kind));
-    return cast ((cast _Runtime.strictEquals(({ final __structural4 = entry; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:GlModifierSnippet; }).value : Dynamic) : (cast null : Dynamic));
+    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var modifierSnippets:KeyedTable<GlModifierSnippet>; }).modifierSnippets : KeyedTable<GlModifierSnippet>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlModifierSnippet>>).get(kind));
+    return cast ((cast _Runtime.strictEquals(({ final __structural8 = entry; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:GlModifierSnippet; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 }

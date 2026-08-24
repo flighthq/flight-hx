@@ -37,23 +37,23 @@ class ContactIntake {
 
   @:noCompletion
   public static function refreshPhysics3DContacts(world:Physics3DWorld):Void {
-    ContactIntake.rebuildPhysics3DContacts__contactIntake(({ final __callArgument1:Dynamic = world; __callArgument1; }), (cast false : Bool), (cast true : Bool));
+    ContactIntake.rebuildPhysics3DContacts__contactIntake(({ final __callArgument2:Dynamic = world; __callArgument2; }), (cast false : Bool), (cast true : Bool));
   }
 
   public static function rebuildPhysics3DContacts__contactIntake(world:Physics3DWorld, clearEvents:Bool, preserveOverrides:Bool):Void {
     var scratch:Physics3DIntakeScratch__contactIntake = cast _Runtime.UNDEFINED;
     _Runtime.callOptionalValue(ContactIntake.physics3DIntakeGuard__contactIntake, cast ([world] : Array<Dynamic>));
-    synchronizePhysics3DBroadphase(({ final __callArgument2:Dynamic = world; __callArgument2; }));
+    synchronizePhysics3DBroadphase(({ final __callArgument4:Dynamic = world; __callArgument4; }));
     scratch = (cast ContactIntake.acquirePhysics3DIntakeScratch__contactIntake() : Physics3DIntakeScratch__contactIntake);
     try {
       try {
-        ContactIntake.buildPhysics3DContactsWithScratch__contactIntake(({ final __callArgument3:Dynamic = world; __callArgument3; }), (cast scratch : Dynamic), (cast clearEvents : Bool), (cast preserveOverrides : Bool));
+        ContactIntake.buildPhysics3DContactsWithScratch__contactIntake(({ final __callArgument6:Dynamic = world; __callArgument6; }), (cast scratch : Dynamic), (cast clearEvents : Bool), (cast preserveOverrides : Bool));
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError4:Dynamic) {
+    } catch (__finallyError8:Dynamic) {
       {
         ContactIntake.releasePhysics3DIntakeScratch__contactIntake((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError4);
+      _Runtime.throwValue(__finallyError8);
     }
     {
       ContactIntake.releasePhysics3DIntakeScratch__contactIntake((cast scratch : Dynamic));
@@ -86,8 +86,8 @@ class ContactIntake {
         var second:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get((cast pair : SpatialPair).b));
         if ((cast ((cast _Runtime.strictEquals(first, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(second, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (pairIndex = cast ((pairIndex + 1.0) : Dynamic)); continue; }
         var bothImmovable:Bool = ((cast _Runtime.strictEquals((cast first : RigidBody3D).inverseMass, 0.0) : Bool) && (cast _Runtime.strictEquals((cast second : RigidBody3D).inverseMass, 0.0) : Bool));
-        if ((cast ((cast ((cast bothImmovable : Bool) && (cast !(cast (cast ContactIntake.hasPhysics3DSensorCollider__contactIntake(({ final __callArgument5:Dynamic = first; __callArgument5; })) : Bool) : Bool) : Bool)) : Bool) && (cast !(cast (cast ContactIntake.hasPhysics3DSensorCollider__contactIntake(({ final __callArgument6:Dynamic = second; __callArgument6; })) : Bool) : Bool) : Bool)) : Bool)) { (pairIndex = cast ((pairIndex + 1.0) : Dynamic)); continue; }
-        if ((cast (cast isPhysics3DPairJointSuppressed(({ final __callArgument7:Dynamic = world; __callArgument7; }), (cast (cast first : RigidBody3D).index : Float), (cast (cast second : RigidBody3D).index : Float)) : Bool) : Bool)) { (pairIndex = cast ((pairIndex + 1.0) : Dynamic)); continue; }
+        if ((cast ((cast ((cast bothImmovable : Bool) && (cast !(cast (cast ContactIntake.hasPhysics3DSensorCollider__contactIntake(({ final __callArgument9:Dynamic = first; __callArgument9; })) : Bool) : Bool) : Bool)) : Bool) && (cast !(cast (cast ContactIntake.hasPhysics3DSensorCollider__contactIntake(({ final __callArgument11:Dynamic = second; __callArgument11; })) : Bool) : Bool) : Bool)) : Bool)) { (pairIndex = cast ((pairIndex + 1.0) : Dynamic)); continue; }
+        if ((cast (cast isPhysics3DPairJointSuppressed(({ final __callArgument13:Dynamic = world; __callArgument13; }), (cast (cast first : RigidBody3D).index : Float), (cast (cast second : RigidBody3D).index : Float)) : Bool) : Bool)) { (pairIndex = cast ((pairIndex + 1.0) : Dynamic)); continue; }
         var ordered:Bool = (cast isPhysics3DPairOrdered((cast (cast first : RigidBody3D).index : Float), (cast (cast second : RigidBody3D).index : Float)) : Bool);
         var bodyA:RigidBody3D = ((cast ordered : Bool) ? (cast first : Dynamic) : (cast second : Dynamic));
         var bodyB:RigidBody3D = ((cast ordered : Bool) ? (cast second : Dynamic) : (cast first : Dynamic));
@@ -99,11 +99,11 @@ class ContactIntake {
               while ((cast ((cast j : Float) < (cast _Runtime.field((cast bodyB : RigidBody3D).colliders, 'length') : Float)) : Bool)) {
                 var colliderA:Physics3DCollider = flighthq._internal._StaticIndex.readArray((cast bodyA : RigidBody3D).colliders, i);
                 var colliderB:Physics3DCollider = flighthq._internal._StaticIndex.readArray((cast bodyB : RigidBody3D).colliders, j);
-                if ((cast !(cast (cast ContactIntake.isPhysics3DColliderPairEnabled__contactIntake(({ final __callArgument8:Dynamic = colliderA; __callArgument8; }), ({ final __callArgument9:Dynamic = colliderB; __callArgument9; })) : Bool) : Bool) : Bool)) { (j = cast ((j + 1.0) : Dynamic)); continue; }
+                if ((cast !(cast (cast ContactIntake.isPhysics3DColliderPairEnabled__contactIntake(({ final __callArgument15:Dynamic = colliderA; __callArgument15; }), ({ final __callArgument16:Dynamic = colliderB; __callArgument16; })) : Bool) : Bool) : Bool)) { (j = cast ((j + 1.0) : Dynamic)); continue; }
                 var sensorPair:Bool = ((cast (cast colliderA : Physics3DCollider).sensor : Bool) || (cast (cast colliderB : Physics3DCollider).sensor : Bool));
                 if ((cast ((cast bothImmovable : Bool) && (cast !(cast sensorPair : Bool) : Bool)) : Bool)) { (j = cast ((j + 1.0) : Dynamic)); continue; }
                 if ((cast !(cast (cast collidePhysics3DColliderShapes((cast colliderA : Physics3DCollider).world, (cast colliderB : Physics3DCollider).world, (cast scratch : Physics3DIntakeScratch__contactIntake).manifold) : Bool) : Bool) : Bool)) { (j = cast ((j + 1.0) : Dynamic)); continue; }
-                ContactIntake.mergePhysics3DContact__contactIntake(({ final __callArgument10:Dynamic = world; __callArgument10; }), (cast (cast bodyA : RigidBody3D).index : Float), (cast (cast bodyB : RigidBody3D).index : Float), (cast i : Float), (cast j : Float), (cast scratch : Physics3DIntakeScratch__contactIntake).manifold, (cast sensorPair : Bool), (cast (cast mixPhysics3DFriction((cast (cast (cast colliderA : Physics3DCollider).material : Physics3DMaterial).friction : Float), (cast (cast (cast colliderB : Physics3DCollider).material : Physics3DMaterial).friction : Float)) : Float) : Float), (cast (cast mixPhysics3DRestitution((cast (cast (cast colliderA : Physics3DCollider).material : Physics3DMaterial).restitution : Float), (cast (cast (cast colliderB : Physics3DCollider).material : Physics3DMaterial).restitution : Float)) : Float) : Float), (cast preserveOverrides : Bool));
+                ContactIntake.mergePhysics3DContact__contactIntake(({ final __callArgument19:Dynamic = world; __callArgument19; }), (cast (cast bodyA : RigidBody3D).index : Float), (cast (cast bodyB : RigidBody3D).index : Float), (cast i : Float), (cast j : Float), (cast scratch : Physics3DIntakeScratch__contactIntake).manifold, (cast sensorPair : Bool), (cast (cast mixPhysics3DFriction((cast (cast (cast colliderA : Physics3DCollider).material : Physics3DMaterial).friction : Float), (cast (cast (cast colliderB : Physics3DCollider).material : Physics3DMaterial).friction : Float)) : Float) : Float), (cast (cast mixPhysics3DRestitution((cast (cast (cast colliderA : Physics3DCollider).material : Physics3DMaterial).restitution : Float), (cast (cast (cast colliderB : Physics3DCollider).material : Physics3DMaterial).restitution : Float)) : Float) : Float), (cast preserveOverrides : Bool));
                 (j = cast ((j + 1.0) : Dynamic));
               }
             }
@@ -191,8 +191,8 @@ class ContactIntake {
     }
     ((cast contact : Physics3DContact).touching = true);
     while ((cast ((cast _Runtime.field((cast contact : Physics3DContact).points, 'length') : Float) < (cast _Runtime.field(manifold, 'pointCount') : Float)) : Bool)) { _Runtime.callProperty((cast contact : Physics3DContact).points, 'push', cast ([(cast createPhysics3DContactPoint() : Physics3DContactPoint)] : Array<Dynamic>)); }
-    centerA = (cast ContactIntake.writePhysics3DBodyCenter__contactIntake(({ final __callArgument11:Dynamic = world; __callArgument11; }), (cast bodyA : Float), ({ final __callArgument12:Dynamic = ContactIntake.scratchCenterA__contactIntake; __callArgument12; })) : Array<Float>);
-    centerB = (cast ContactIntake.writePhysics3DBodyCenter__contactIntake(({ final __callArgument13:Dynamic = world; __callArgument13; }), (cast bodyB : Float), ({ final __callArgument14:Dynamic = ContactIntake.scratchCenterB__contactIntake; __callArgument14; })) : Array<Float>);
+    centerA = (cast ContactIntake.writePhysics3DBodyCenter__contactIntake(({ final __callArgument21:Dynamic = world; __callArgument21; }), (cast bodyA : Float), ({ final __callArgument22:Dynamic = ContactIntake.scratchCenterA__contactIntake; __callArgument22; })) : Array<Float>);
+    centerB = (cast ContactIntake.writePhysics3DBodyCenter__contactIntake(({ final __callArgument25:Dynamic = world; __callArgument25; }), (cast bodyB : Float), ({ final __callArgument26:Dynamic = ContactIntake.scratchCenterB__contactIntake; __callArgument26; })) : Array<Float>);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(manifold, 'pointCount') : Float)) : Bool)) {
@@ -224,7 +224,7 @@ class ContactIntake {
       flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast 0.0 : Float));
       return cast out;
     }
-    writeRigidBody3DWorldCenter(({ final __callArgument15:Dynamic = body; __callArgument15; }), ({ final __callArgument16:Dynamic = out; __callArgument16; }));
+    writeRigidBody3DWorldCenter(({ final __callArgument29:Dynamic = body; __callArgument29; }), ({ final __callArgument30:Dynamic = out; __callArgument30; }));
     return cast out;
     return cast null;
   }

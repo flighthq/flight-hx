@@ -58,20 +58,20 @@ class ElectronRegister {
   public static function registerElectronBackends(electron:ElectronApi, ?options:ElectronBackendOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     setPlatformBackend((cast (cast createElectronPlatformBackend(({ final __callArgument0:Dynamic = electron; __callArgument0; })) : PlatformBackend) : Dynamic));
-    setAppBackend((cast (cast createElectronAppBackend(({ final __callArgument1:Dynamic = electron; __callArgument1; })) : AppBackend) : Dynamic));
-    setWindowBackend((cast (cast createElectronWindowBackend(({ final __callArgument2:Dynamic = electron; __callArgument2; })) : WindowBackend) : Dynamic));
-    setDialogBackend((cast (cast createElectronDialogBackend(({ final __callArgument3:Dynamic = electron; __callArgument3; })) : DialogBackend) : Dynamic));
-    setClipboardBackend((cast (cast createElectronClipboardBackend(({ final __callArgument4:Dynamic = electron; __callArgument4; })) : ClipboardBackend) : Dynamic));
-    setMenuBackend((cast (cast createElectronMenuBackend(({ final __callArgument5:Dynamic = electron; __callArgument5; })) : MenuBackend) : Dynamic));
-    setTrayBackend((cast (cast createElectronTrayBackend(({ final __callArgument6:Dynamic = electron; __callArgument6; })) : TrayBackend) : Dynamic));
-    setShortcutBackend((cast (cast createElectronShortcutBackend(({ final __callArgument7:Dynamic = electron; __callArgument7; })) : ShortcutBackend) : Dynamic));
-    setScreenBackend((cast (cast createElectronScreenBackend(({ final __callArgument8:Dynamic = electron; __callArgument8; })) : ScreenBackend) : Dynamic));
-    setPowerBackend((cast (cast createElectronPowerBackend(({ final __callArgument9:Dynamic = electron; __callArgument9; })) : PowerBackend) : Dynamic));
-    setNotificationBackend((cast (cast createElectronNotificationBackend(({ final __callArgument10:Dynamic = electron; __callArgument10; })) : NotificationBackend) : Dynamic));
-    setShellBackend((cast (cast createElectronShellBackend(({ final __callArgument11:Dynamic = electron; __callArgument11; })) : ShellBackend) : Dynamic));
-    setStorageBackend((cast (cast createElectronStorageBackend(({ final __callArgument12:Dynamic = electron; __callArgument12; }), (cast _Runtime.field(options, 'storageFileName') : String)) : StorageBackend) : Dynamic));
-    setProtocolBackend((cast (cast createElectronProtocolBackend(({ final __callArgument13:Dynamic = electron; __callArgument13; })) : ProtocolBackend) : Dynamic));
-    setUpdaterBackend((cast (cast createElectronUpdaterBackend(({ final __callArgument14:Dynamic = electron; __callArgument14; })) : UpdaterBackend) : Dynamic));
-    setIpcBackend((cast (cast createElectronIpcBackend(({ final __callArgument15:Dynamic = electron; __callArgument15; })) : IpcBackend) : Dynamic));
+    setAppBackend((cast (cast createElectronAppBackend(({ final __callArgument4:Dynamic = electron; __callArgument4; })) : AppBackend) : Dynamic));
+    setWindowBackend((cast (cast createElectronWindowBackend(({ final __callArgument8:Dynamic = electron; __callArgument8; })) : WindowBackend) : Dynamic));
+    setDialogBackend((cast (cast createElectronDialogBackend(({ final __callArgument12:Dynamic = electron; __callArgument12; })) : DialogBackend) : Dynamic));
+    setClipboardBackend((cast (cast createElectronClipboardBackend(({ final __callArgument16:Dynamic = electron; __callArgument16; })) : ClipboardBackend) : Dynamic));
+    setMenuBackend((cast (cast createElectronMenuBackend(({ final __callArgument20:Dynamic = electron; __callArgument20; })) : MenuBackend) : Dynamic));
+    setTrayBackend((cast (cast createElectronTrayBackend(({ final __callArgument24:Dynamic = electron; __callArgument24; })) : TrayBackend) : Dynamic));
+    setShortcutBackend((cast (cast createElectronShortcutBackend(({ final __callArgument28:Dynamic = electron; __callArgument28; })) : ShortcutBackend) : Dynamic));
+    setScreenBackend((cast (cast createElectronScreenBackend(({ final __callArgument32:Dynamic = electron; __callArgument32; })) : ScreenBackend) : Dynamic));
+    setPowerBackend((cast (cast createElectronPowerBackend(({ final __callArgument36:Dynamic = electron; __callArgument36; })) : PowerBackend) : Dynamic));
+    setNotificationBackend((cast (cast createElectronNotificationBackend(({ final __callArgument40:Dynamic = electron; __callArgument40; })) : NotificationBackend) : Dynamic));
+    setShellBackend((cast (cast createElectronShellBackend(({ final __callArgument44:Dynamic = electron; __callArgument44; })) : ShellBackend) : Dynamic));
+    setStorageBackend((cast (cast createElectronStorageBackend(({ final __callArgument48:Dynamic = electron; __callArgument48; }), (cast _Runtime.field(options, 'storageFileName') : String)) : StorageBackend) : Dynamic));
+    setProtocolBackend((cast (cast createElectronProtocolBackend(({ final __callArgument52:Dynamic = electron; __callArgument52; })) : ProtocolBackend) : Dynamic));
+    setUpdaterBackend((cast (cast createElectronUpdaterBackend(({ final __callArgument56:Dynamic = electron; __callArgument56; })) : UpdaterBackend) : Dynamic));
+    setIpcBackend((cast (cast createElectronIpcBackend(({ final __callArgument60:Dynamic = electron; __callArgument60; })) : IpcBackend) : Dynamic));
   }
 }

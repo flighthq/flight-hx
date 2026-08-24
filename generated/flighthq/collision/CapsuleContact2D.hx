@@ -18,7 +18,7 @@ import flighthq.types.Collision.CollisionPolygon2D;
 class CapsuleContact2D {
   public static function collideCapsuleAabbContactManifold2D(a:CollisionCapsule2D, b:CollisionAabb2D, out:CollisionContactManifold2D):Bool {
     writeAabbVertices(({ final __callArgument0:Dynamic = b; __callArgument0; }), (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).vertices);
-    return cast (cast CapsuleContact2D.capsulePolygonContact__capsuleContact2D(({ final __callArgument1:Dynamic = a; __callArgument1; }), ({ final __callArgument2:Dynamic = (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).vertices; __callArgument2; }), (cast 4.0 : Float), ({ final __callArgument3:Dynamic = out; __callArgument3; })) : Bool);
+    return cast (cast CapsuleContact2D.capsulePolygonContact__capsuleContact2D(({ final __callArgument2:Dynamic = a; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).vertices; __callArgument3; }), (cast 4.0 : Float), ({ final __callArgument4:Dynamic = out; __callArgument4; })) : Bool);
     return cast null;
   }
 
@@ -34,7 +34,7 @@ class CapsuleContact2D {
     var axisLength:Float = cast _Runtime.UNDEFINED;
     var alongAxis:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast !(cast _Runtime.compare(_Runtime.field(a, 'radius'), 0.0, '>') : Bool) : Bool) || (cast !(cast _Runtime.compare(_Runtime.field(b, 'radius'), 0.0, '>') : Bool) : Bool)) : Bool)) {
-      clearCollisionContactManifold2D(({ final __callArgument4:Dynamic = out; __callArgument4; }));
+      clearCollisionContactManifold2D(({ final __callArgument8:Dynamic = out; __callArgument8; }));
       return cast false;
     }
     bestSeparation = HxMath.NEGATIVE_INFINITY;
@@ -49,7 +49,7 @@ class CapsuleContact2D {
     for (__iteration0 in _Runtime.iterable(cast ([cast ([perpAX, perpAY] : Array<Dynamic>), cast ([-perpAX, -perpAY] : Array<Dynamic>), cast ([perpBX, perpBY] : Array<Dynamic>), cast ([-perpBX, -perpBY] : Array<Dynamic>)] : Array<Dynamic>))) {
       var nx:Float = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
       var ny:Float = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
-      var separation:Float = (cast CapsuleContact2D.capsuleCapsuleSeparation__capsuleContact2D(({ final __callArgument7:Dynamic = a; __callArgument7; }), ({ final __callArgument8:Dynamic = b; __callArgument8; }), (cast nx : Float), (cast ny : Float)) : Float);
+      var separation:Float = (cast CapsuleContact2D.capsuleCapsuleSeparation__capsuleContact2D(({ final __callArgument12:Dynamic = a; __callArgument12; }), ({ final __callArgument13:Dynamic = b; __callArgument13; }), (cast nx : Float), (cast ny : Float)) : Float);
       if ((cast ((cast separation : Float) > (cast bestSeparation : Float)) : Bool)) {
         (bestSeparation = cast (separation : Dynamic));
         (bestNormalX = cast (nx : Dynamic));
@@ -66,7 +66,7 @@ class CapsuleContact2D {
         var dy:Float = (ay - by);
         var length:Float = _Runtime.hypot(dx, dy);
         if ((cast ((cast length : Float) <= (cast CapsuleContact2D.EPSILON__capsuleContact2D : Float)) : Bool)) { continue; }
-        var separation:Float = (cast CapsuleContact2D.capsuleCapsuleSeparation__capsuleContact2D(({ final __callArgument13:Dynamic = a; __callArgument13; }), ({ final __callArgument14:Dynamic = b; __callArgument14; }), (cast (dx / length) : Float), (cast (dy / length) : Float)) : Float);
+        var separation:Float = (cast CapsuleContact2D.capsuleCapsuleSeparation__capsuleContact2D(({ final __callArgument20:Dynamic = a; __callArgument20; }), ({ final __callArgument21:Dynamic = b; __callArgument21; }), (cast (dx / length) : Float), (cast (dy / length) : Float)) : Float);
         if ((cast ((cast separation : Float) > (cast bestSeparation : Float)) : Bool)) {
           (bestSeparation = cast (separation : Dynamic));
           (bestNormalX = cast ((dx / length) : Dynamic));
@@ -75,11 +75,11 @@ class CapsuleContact2D {
       }
     }
     if ((cast ((cast ((cast bestSeparation : Float) >= (cast 0.0 : Float)) : Bool) || (cast _Runtime.strictEquals(bestSeparation, HxMath.NEGATIVE_INFINITY) : Bool)) : Bool)) {
-      clearCollisionContactManifold2D(({ final __callArgument15:Dynamic = out; __callArgument15; }));
+      clearCollisionContactManifold2D(({ final __callArgument24:Dynamic = out; __callArgument24; }));
       return cast false;
     }
     depth = -bestSeparation;
-    if ((cast ((cast (cast CapsuleContact2D.writeParallelAxisOverlap__capsuleContact2D(({ final __callArgument16:Dynamic = a; __callArgument16; }), ({ final __callArgument17:Dynamic = b; __callArgument17; }), (cast bestNormalX : Float), (cast bestNormalY : Float)) : Float) : Float) > (cast 0.0 : Float)) : Bool)) {
+    if ((cast ((cast (cast CapsuleContact2D.writeParallelAxisOverlap__capsuleContact2D(({ final __callArgument26:Dynamic = a; __callArgument26; }), ({ final __callArgument27:Dynamic = b; __callArgument27; }), (cast bestNormalX : Float), (cast bestNormalY : Float)) : Float) : Float) > (cast 0.0 : Float)) : Bool)) {
       (out.overlapping = cast (true : Bool));
       (out.normalX = cast (bestNormalX : Float));
       (out.normalY = cast (bestNormalY : Float));
@@ -109,7 +109,7 @@ class CapsuleContact2D {
       flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).closest : Array<Float>), (cast 0.0 : Float), (cast _Runtime.field(a, 'x1') : Float));
       flighthq._internal._StaticIndex.writeFloatArrayTyped((cast (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).closest : Array<Float>), (cast 1.0 : Float), (cast _Runtime.field(a, 'y1') : Float));
     } }
-    return cast (cast CapsuleContact2D.writeSingleCapsulePoint__capsuleContact2D((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).closest : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).closest : Array<Float>), (cast 1.0 : Float)) : Float), (cast _Runtime.field(a, 'radius') : Float), (cast bestNormalX : Float), (cast bestNormalY : Float), (cast depth : Float), (cast 0.0 : Float), ({ final __callArgument18:Dynamic = out; __callArgument18; })) : Bool);
+    return cast (cast CapsuleContact2D.writeSingleCapsulePoint__capsuleContact2D((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).closest : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).closest : Array<Float>), (cast 1.0 : Float)) : Float), (cast _Runtime.field(a, 'radius') : Float), (cast bestNormalX : Float), (cast bestNormalY : Float), (cast depth : Float), (cast 0.0 : Float), ({ final __callArgument30:Dynamic = out; __callArgument30; })) : Bool);
     return cast null;
   }
 
@@ -123,13 +123,13 @@ class CapsuleContact2D {
   }
 
   public static function collideCapsuleObbContactManifold2D(a:CollisionCapsule2D, b:CollisionObb2D, out:CollisionContactManifold2D):Bool {
-    writeObbVertices(({ final __callArgument19:Dynamic = b; __callArgument19; }), (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).vertices);
-    return cast (cast CapsuleContact2D.capsulePolygonContact__capsuleContact2D(({ final __callArgument20:Dynamic = a; __callArgument20; }), ({ final __callArgument21:Dynamic = (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).vertices; __callArgument21; }), (cast 4.0 : Float), ({ final __callArgument22:Dynamic = out; __callArgument22; })) : Bool);
+    writeObbVertices(({ final __callArgument32:Dynamic = b; __callArgument32; }), (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).vertices);
+    return cast (cast CapsuleContact2D.capsulePolygonContact__capsuleContact2D(({ final __callArgument34:Dynamic = a; __callArgument34; }), ({ final __callArgument35:Dynamic = (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).vertices; __callArgument35; }), (cast 4.0 : Float), ({ final __callArgument36:Dynamic = out; __callArgument36; })) : Bool);
     return cast null;
   }
 
   public static function collideCapsulePolygonContactManifold2D(a:CollisionCapsule2D, b:CollisionPolygon2D, out:CollisionContactManifold2D):Bool {
-    return cast (cast CapsuleContact2D.capsulePolygonContact__capsuleContact2D(({ final __callArgument23:Dynamic = a; __callArgument23; }), ({ final __callArgument24:Dynamic = _Runtime.field(b, 'points'); __callArgument24; }), (cast (_Runtime.toInt32(_Runtime.field(_Runtime.field(b, 'points'), 'length')) >> 1) : Float), ({ final __callArgument25:Dynamic = out; __callArgument25; })) : Bool);
+    return cast (cast CapsuleContact2D.capsulePolygonContact__capsuleContact2D(({ final __callArgument40:Dynamic = a; __callArgument40; }), ({ final __callArgument41:Dynamic = _Runtime.field(b, 'points'); __callArgument41; }), (cast (_Runtime.toInt32(_Runtime.field(_Runtime.field(b, 'points'), 'length')) >> 1) : Float), ({ final __callArgument42:Dynamic = out; __callArgument42; })) : Bool);
     return cast null;
   }
 
@@ -148,7 +148,7 @@ class CapsuleContact2D {
     distance = _Runtime.hypot(normalX, normalY);
     sum = _Runtime.addNumbers(_Runtime.field(a, 'radius'), _Runtime.field(b, 'radius'));
     if ((cast ((cast distance : Float) >= (cast sum : Float)) : Bool)) {
-      clearCollisionContactManifold2D(({ final __callArgument26:Dynamic = out; __callArgument26; }));
+      clearCollisionContactManifold2D(({ final __callArgument46:Dynamic = out; __callArgument46; }));
       return cast false;
     }
     if ((cast ((cast distance : Float) > (cast CapsuleContact2D.EPSILON__capsuleContact2D : Float)) : Bool)) {
@@ -159,7 +159,7 @@ class CapsuleContact2D {
       (normalX = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).axis : Array<Float>), (cast 0.0 : Float)) : Dynamic));
       (normalY = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).axis : Array<Float>), (cast 1.0 : Float)) : Dynamic));
     }
-    return cast (cast CapsuleContact2D.writeSingleCapsulePoint__capsuleContact2D((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), (cast normalX : Float), (cast normalY : Float), (cast (sum - distance) : Float), (cast 0.0 : Float), ({ final __callArgument27:Dynamic = out; __callArgument27; })) : Bool);
+    return cast (cast CapsuleContact2D.writeSingleCapsulePoint__capsuleContact2D((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), (cast normalX : Float), (cast normalY : Float), (cast (sum - distance) : Float), (cast 0.0 : Float), ({ final __callArgument48:Dynamic = out; __callArgument48; })) : Bool);
     return cast null;
   }
 
@@ -172,7 +172,7 @@ class CapsuleContact2D {
     var bestIndex:Float = cast _Runtime.UNDEFINED;
     var depth:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast count : Float) < (cast 3.0 : Float)) : Bool) || (cast !(cast _Runtime.compare(_Runtime.field(a, 'radius'), 0.0, '>') : Bool) : Bool)) : Bool)) {
-      clearCollisionContactManifold2D(({ final __callArgument28:Dynamic = out; __callArgument28; }));
+      clearCollisionContactManifold2D(({ final __callArgument50:Dynamic = out; __callArgument50; }));
       return cast false;
     }
     bestSeparation = HxMath.NEGATIVE_INFINITY;
@@ -193,11 +193,11 @@ class CapsuleContact2D {
         if ((cast ((cast length : Float) <= (cast CapsuleContact2D.EPSILON__capsuleContact2D : Float)) : Bool)) { (face = cast ((face + 1.0) : Dynamic)); continue; }
         var normalX:Float = (edgeY / length);
         var normalY:Float = (-edgeX / length);
-        if ((cast !(cast (cast CapsuleContact2D.isOutwardFromPolygon__capsuleContact2D(({ final __callArgument29:Dynamic = vertices; __callArgument29; }), (cast count : Float), (cast x0 : Float), (cast y0 : Float), (cast normalX : Float), (cast normalY : Float)) : Bool) : Bool) : Bool)) {
+        if ((cast !(cast (cast CapsuleContact2D.isOutwardFromPolygon__capsuleContact2D(({ final __callArgument52:Dynamic = vertices; __callArgument52; }), (cast count : Float), (cast x0 : Float), (cast y0 : Float), (cast normalX : Float), (cast normalY : Float)) : Bool) : Bool) : Bool)) {
           (normalX = cast (-normalX : Dynamic));
           (normalY = cast (-normalY : Dynamic));
         }
-        var separation:Float = (cast CapsuleContact2D.capsuleSeparation__capsuleContact2D(({ final __callArgument30:Dynamic = a; __callArgument30; }), ({ final __callArgument31:Dynamic = vertices; __callArgument31; }), (cast count : Float), (cast normalX : Float), (cast normalY : Float)) : Float);
+        var separation:Float = (cast CapsuleContact2D.capsuleSeparation__capsuleContact2D(({ final __callArgument54:Dynamic = a; __callArgument54; }), ({ final __callArgument55:Dynamic = vertices; __callArgument55; }), (cast count : Float), (cast normalX : Float), (cast normalY : Float)) : Float);
         if ((cast ((cast separation : Float) > (cast bestSeparation : Float)) : Bool)) {
           (bestSeparation = cast (separation : Dynamic));
           (bestNormalX = cast (normalX : Dynamic));
@@ -215,7 +215,7 @@ class CapsuleContact2D {
       while ((cast ((cast side : Float) < (cast 2.0 : Float)) : Bool)) {
         var normalX:Float = ((cast _Runtime.strictEquals(side, 0.0) : Bool) ? (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).axis : Array<Float>), (cast 0.0 : Float)) : Dynamic) : (cast -flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).axis : Array<Float>), (cast 0.0 : Float)) : Dynamic));
         var normalY:Float = ((cast _Runtime.strictEquals(side, 0.0) : Bool) ? (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).axis : Array<Float>), (cast 1.0 : Float)) : Dynamic) : (cast -flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).axis : Array<Float>), (cast 1.0 : Float)) : Dynamic));
-        var separation:Float = (cast CapsuleContact2D.capsuleSeparation__capsuleContact2D(({ final __callArgument32:Dynamic = a; __callArgument32; }), ({ final __callArgument33:Dynamic = vertices; __callArgument33; }), (cast count : Float), (cast normalX : Float), (cast normalY : Float)) : Float);
+        var separation:Float = (cast CapsuleContact2D.capsuleSeparation__capsuleContact2D(({ final __callArgument58:Dynamic = a; __callArgument58; }), ({ final __callArgument59:Dynamic = vertices; __callArgument59; }), (cast count : Float), (cast normalX : Float), (cast normalY : Float)) : Float);
         if ((cast ((cast separation : Float) > (cast bestSeparation : Float)) : Bool)) {
           (bestSeparation = cast (separation : Dynamic));
           (bestNormalX = cast (normalX : Dynamic));
@@ -239,7 +239,7 @@ class CapsuleContact2D {
         if ((cast ((cast length : Float) <= (cast CapsuleContact2D.EPSILON__capsuleContact2D : Float)) : Bool)) { (vertex = cast ((vertex + 1.0) : Dynamic)); continue; }
         var normalX:Float = (dx / length);
         var normalY:Float = (dy / length);
-        var separation:Float = (cast CapsuleContact2D.capsuleSeparation__capsuleContact2D(({ final __callArgument34:Dynamic = a; __callArgument34; }), ({ final __callArgument35:Dynamic = vertices; __callArgument35; }), (cast count : Float), (cast normalX : Float), (cast normalY : Float)) : Float);
+        var separation:Float = (cast CapsuleContact2D.capsuleSeparation__capsuleContact2D(({ final __callArgument62:Dynamic = a; __callArgument62; }), ({ final __callArgument63:Dynamic = vertices; __callArgument63; }), (cast count : Float), (cast normalX : Float), (cast normalY : Float)) : Float);
         if ((cast ((cast separation : Float) > (cast bestSeparation : Float)) : Bool)) {
           (bestSeparation = cast (separation : Dynamic));
           (bestNormalX = cast (normalX : Dynamic));
@@ -252,11 +252,11 @@ class CapsuleContact2D {
       }
     }
     if ((cast ((cast ((cast bestSeparation : Float) >= (cast 0.0 : Float)) : Bool) || (cast _Runtime.strictEquals(bestSeparation, HxMath.NEGATIVE_INFINITY) : Bool)) : Bool)) {
-      clearCollisionContactManifold2D(({ final __callArgument36:Dynamic = out; __callArgument36; }));
+      clearCollisionContactManifold2D(({ final __callArgument66:Dynamic = out; __callArgument66; }));
       return cast false;
     }
     depth = -bestSeparation;
-    if ((cast ((cast _Runtime.strictEquals(bestSource, CapsuleContact2D.SOURCE_POLYGON_FACE__capsuleContact2D) : Bool) && (cast (cast CapsuleContact2D.writeFaceSpan__capsuleContact2D(({ final __callArgument37:Dynamic = a; __callArgument37; }), ({ final __callArgument38:Dynamic = vertices; __callArgument38; }), (cast count : Float), (cast bestFace : Float), (cast bestNormalX : Float), (cast bestNormalY : Float)) : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast _Runtime.strictEquals(bestSource, CapsuleContact2D.SOURCE_POLYGON_FACE__capsuleContact2D) : Bool) && (cast (cast CapsuleContact2D.writeFaceSpan__capsuleContact2D(({ final __callArgument68:Dynamic = a; __callArgument68; }), ({ final __callArgument69:Dynamic = vertices; __callArgument69; }), (cast count : Float), (cast bestFace : Float), (cast bestNormalX : Float), (cast bestNormalY : Float)) : Bool) : Bool)) : Bool)) {
       (out.overlapping = cast (true : Bool));
       (out.normalX = cast (bestNormalX : Float));
       (out.normalY = cast (bestNormalY : Float));
@@ -275,8 +275,8 @@ class CapsuleContact2D {
       (out.pointCount = cast (2.0 : Float));
       return cast true;
     }
-    CapsuleContact2D.writeDeepestAxisPoint__capsuleContact2D(({ final __callArgument39:Dynamic = a; __callArgument39; }), (cast bestNormalX : Float), (cast bestNormalY : Float), ({ final __callArgument40:Dynamic = vertices; __callArgument40; }), (cast count : Float), (cast bestSource : Float), (cast bestIndex : Float));
-    return cast (cast CapsuleContact2D.writeSingleCapsulePoint__capsuleContact2D((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).closest : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).closest : Array<Float>), (cast 1.0 : Float)) : Float), (cast _Runtime.field(a, 'radius') : Float), (cast bestNormalX : Float), (cast bestNormalY : Float), (cast depth : Float), (cast (cast packContactFeatureId((cast _Runtime.strictEquals(bestSource, CapsuleContact2D.SOURCE_CAPSULE_SIDE__capsuleContact2D) : Bool), (cast bestIndex : Float), (cast 0.0 : Float), (cast false : Bool)) : Float) : Float), ({ final __callArgument41:Dynamic = out; __callArgument41; })) : Bool);
+    CapsuleContact2D.writeDeepestAxisPoint__capsuleContact2D(({ final __callArgument72:Dynamic = a; __callArgument72; }), (cast bestNormalX : Float), (cast bestNormalY : Float), ({ final __callArgument73:Dynamic = vertices; __callArgument73; }), (cast count : Float), (cast bestSource : Float), (cast bestIndex : Float));
+    return cast (cast CapsuleContact2D.writeSingleCapsulePoint__capsuleContact2D((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).closest : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).closest : Array<Float>), (cast 1.0 : Float)) : Float), (cast _Runtime.field(a, 'radius') : Float), (cast bestNormalX : Float), (cast bestNormalY : Float), (cast depth : Float), (cast (cast packContactFeatureId((cast _Runtime.strictEquals(bestSource, CapsuleContact2D.SOURCE_CAPSULE_SIDE__capsuleContact2D) : Bool), (cast bestIndex : Float), (cast 0.0 : Float), (cast false : Bool)) : Float) : Float), ({ final __callArgument76:Dynamic = out; __callArgument76; })) : Bool);
     return cast null;
   }
 

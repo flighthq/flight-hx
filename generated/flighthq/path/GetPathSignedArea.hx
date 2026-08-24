@@ -22,7 +22,7 @@ class GetPathSignedArea {
   public static function getPathSignedArea(path:Path, tolerance:Float = 0.25):Float {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     var total:Float = cast _Runtime.UNDEFINED;
-    contours = (cast flattenPath(({ final __callArgument1:Dynamic = path; __callArgument1; }), (cast tolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath(({ final __callArgument2:Dynamic = path; __callArgument2; }), (cast tolerance : Float)) : Array<Array<Float>>);
     total = 0.0;
     {
       var ci:Float = 0.0;

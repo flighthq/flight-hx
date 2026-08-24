@@ -95,7 +95,7 @@ class Tray {
   }
 
   public static function displayTrayBalloon(tray:TrayIcon, options:TrayBalloonOptions):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).displayBalloon((cast tray.id : Float), ({ final __callArgument2:Dynamic = options; __callArgument2; }));
+    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).displayBalloon((cast tray.id : Float), ({ final __callArgument3:Dynamic = options; __callArgument3; }));
   }
 
   public static function enableTrayGuards():Void {
@@ -145,12 +145,12 @@ class Tray {
   }
 
   public static function onTrayEvent(listener:TrayEventData->Void):Void->Void {
-    return cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).subscribe(({ final __callArgument3:Dynamic = listener; __callArgument3; }));
+    return cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).subscribe(({ final __callArgument4:Dynamic = listener; __callArgument4; }));
     return cast null;
   }
 
   public static function popupTrayContextMenu(tray:TrayIcon, ?position:Vector2Like):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).popUpContextMenu((cast tray.id : Float), ({ final __callArgument4:Dynamic = position; __callArgument4; }));
+    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).popUpContextMenu((cast tray.id : Float), ({ final __callArgument5:Dynamic = position; __callArgument5; }));
   }
 
   public static function removeTrayBalloon(tray:TrayIcon):Void {
@@ -172,7 +172,7 @@ class Tray {
   }
 
   public static function setTrayIconContextMenu(tray:TrayIcon, items:Array<MenuItemTemplate>):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setContextMenu((cast tray.id : Float), ({ final __callArgument5:Dynamic = items; __callArgument5; }));
+    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setContextMenu((cast tray.id : Float), ({ final __callArgument6:Dynamic = items; __callArgument6; }));
   }
 
   public static function setTrayIconTemplate(tray:TrayIcon, isTemplate:Bool):Void {
@@ -200,12 +200,12 @@ class Tray {
     var handle:flighthq._internal.dom.Timeout = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(frames, 'length'), 0.0) : Bool)) { return cast Tray._noopStop__tray; }
     _Runtime.callOptionalValue(Tray._animationGuard__tray, cast ([tray, _Runtime.field(frames, 'length'), intervalMs] : Array<Dynamic>));
-    stopTrayIconAnimation(({ final __callArgument6:Dynamic = tray; __callArgument6; }));
+    stopTrayIconAnimation(({ final __callArgument7:Dynamic = tray; __callArgument7; }));
     index = 0.0;
-    setTrayIcon(({ final __callArgument7:Dynamic = tray; __callArgument7; }), (cast flighthq._internal._StaticIndex.readArray(frames, index) : String));
+    setTrayIcon(({ final __callArgument9:Dynamic = tray; __callArgument9; }), (cast flighthq._internal._StaticIndex.readArray(frames, index) : String));
     handle = _Runtime.setInterval(function():Void {
       (index = cast (_Runtime.fmod((index + 1.0), _Runtime.field(frames, 'length')) : Dynamic));
-      setTrayIcon(({ final __callArgument8:Dynamic = tray; __callArgument8; }), (cast flighthq._internal._StaticIndex.readArray(frames, index) : String));
+      setTrayIcon(({ final __callArgument11:Dynamic = tray; __callArgument11; }), (cast flighthq._internal._StaticIndex.readArray(frames, index) : String));
     }, intervalMs);
     ((cast Tray._animations__tray : flighthq._internal._Map<Float, flighthq._internal.dom.Timeout>).set(tray.id, (cast handle)));
     return cast function():Void {

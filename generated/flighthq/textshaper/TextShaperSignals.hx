@@ -21,11 +21,11 @@ class TextShaperSignals {
   public static function enableTextShaperSignals():flighthq.types.TextShaperSignals {
     if ((cast !_Runtime.strictEquals(TextShaperSignals._signals__textShaperSignals, null) : Bool)) { return cast TextShaperSignals._signals__textShaperSignals; }
     (TextShaperSignals._signals__textShaperSignals = cast ({ onBackendChanged: (cast createSignal() : Signal<Null<TextShaperBackend>->Void>) } : Dynamic));
-    _setTextShaperBackendHook(({ final __callArgument2:Dynamic = function(backend:Null<TextShaperBackend>):Void {
+    _setTextShaperBackendHook(({ final __callArgument3:Dynamic = function(backend:Null<TextShaperBackend>):Void {
       if ((cast !_Runtime.strictEquals(TextShaperSignals._signals__textShaperSignals, null) : Bool)) {
-        ((cast (cast TextShaperSignals._signals__textShaperSignals : flighthq.types.TextShaperSignals).onBackendChanged : { var emit:Null<TextShaperBackend>->Void; }).emit)(({ final __callArgument1:Dynamic = backend; __callArgument1; }));
+        ((cast (cast TextShaperSignals._signals__textShaperSignals : flighthq.types.TextShaperSignals).onBackendChanged : { var emit:Null<TextShaperBackend>->Void; }).emit)(({ final __callArgument2:Dynamic = backend; __callArgument2; }));
       }
-    }; __callArgument2; }));
+    }; __callArgument3; }));
     return cast TextShaperSignals._signals__textShaperSignals;
     return cast null;
   }

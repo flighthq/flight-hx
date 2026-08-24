@@ -39,7 +39,7 @@ class PathMorphGeometry {
       return cast { contour: null, issue: PathMorphIssueWindingMismatch, morph: null };
     }
     startContours = (cast PathMorphGeometry.decodeCubicContours__pathMorphGeometry(({ final __callArgument0:Dynamic = start; __callArgument0; })) : Array<CubicContour__pathMorphGeometry>);
-    endContours = (cast PathMorphGeometry.decodeCubicContours__pathMorphGeometry(({ final __callArgument1:Dynamic = end; __callArgument1; })) : Array<CubicContour__pathMorphGeometry>);
+    endContours = (cast PathMorphGeometry.decodeCubicContours__pathMorphGeometry(({ final __callArgument2:Dynamic = end; __callArgument2; })) : Array<CubicContour__pathMorphGeometry>);
     if ((cast !_Runtime.strictEquals(_Runtime.field(startContours, 'length'), _Runtime.field(endContours, 'length')) : Bool)) {
       return cast { contour: null, issue: PathMorphIssueContourCountMismatch, morph: null };
     }
@@ -72,7 +72,7 @@ class PathMorphGeometry {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(startContours, 'length') : Float)) : Bool)) {
-        PathMorphGeometry.appendCubicContourPair__pathMorphGeometry(({ final __callArgument2:Dynamic = commands; __callArgument2; }), ({ final __callArgument3:Dynamic = startData; __callArgument3; }), ({ final __callArgument4:Dynamic = endData; __callArgument4; }), (cast flighthq._internal._StaticIndex.readArray(startContours, i) : Dynamic), (cast flighthq._internal._StaticIndex.readArray(endContours, i) : Dynamic));
+        PathMorphGeometry.appendCubicContourPair__pathMorphGeometry(({ final __callArgument4:Dynamic = commands; __callArgument4; }), ({ final __callArgument5:Dynamic = startData; __callArgument5; }), ({ final __callArgument6:Dynamic = endData; __callArgument6; }), (cast flighthq._internal._StaticIndex.readArray(startContours, i) : Dynamic), (cast flighthq._internal._StaticIndex.readArray(endContours, i) : Dynamic));
         i++;
       }
     }
@@ -304,7 +304,7 @@ class PathMorphGeometry {
       return cast contour;
       return cast _Runtime.UNDEFINED;
     });
-    forEachPathSegment(({ final __callArgument5:Dynamic = path; __callArgument5; }), (cast function(segment:PathSegment):Void {
+    forEachPathSegment(({ final __callArgument10:Dynamic = path; __callArgument10; }), (cast function(segment:PathSegment):Void {
       if ((cast _Runtime.strictEquals((cast segment : { var kind:String; }).kind, 'moveTo') : Bool)) {
         (contour = cast ((cast PathMorphGeometry.createCubicContour__pathMorphGeometry((cast (cast segment : { var kind:String; var x:Float; var y:Float; }).x : Float), (cast (cast segment : { var kind:String; var x:Float; var y:Float; }).y : Float)) : CubicContour__pathMorphGeometry) : Dynamic));
         _Runtime.callProperty(contours, 'push', cast ([contour] : Array<Dynamic>));

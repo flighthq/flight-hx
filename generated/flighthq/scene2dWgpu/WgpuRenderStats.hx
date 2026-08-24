@@ -36,7 +36,7 @@ class WgpuRenderStats {
   @:noCompletion
   public static function resetWgpuRenderStats(state:WgpuRenderState):Void {
     var entry:Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats> = cast _Runtime.UNDEFINED;
-    entry = (cast WgpuRenderStats.ensureWgpuRenderStatsMutable__wgpuRenderStats(({ final __callArgument1:Dynamic = state; __callArgument1; })) : Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats>);
+    entry = (cast WgpuRenderStats.ensureWgpuRenderStatsMutable__wgpuRenderStats(({ final __callArgument2:Dynamic = state; __callArgument2; })) : Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats>);
     _Runtime.setField(entry, 'batchFlushCount', 0.0);
     _Runtime.setField(entry, 'drawCallCount', 0.0);
     _Runtime.setField(entry, 'instanceCount', 0.0);

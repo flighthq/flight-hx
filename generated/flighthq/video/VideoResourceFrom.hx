@@ -15,7 +15,7 @@ class VideoResourceFrom {
     var element:flighthq._internal.dom.HTMLVideoElement = cast _Runtime.UNDEFINED;
     element = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['video'] : Array<Dynamic>));
     ((cast element : flighthq._internal.dom.HTMLVideoElement).srcObject = stream);
-    return cast (cast createVideoResource(({ final __callArgument0:Dynamic = element; __callArgument0; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : VideoResource);
+    return cast (cast (#if js _Runtime.callValue(createVideoResource, cast ([({ final __callArgument1:Dynamic = element; __callArgument1; })] : Array<Dynamic>)) #else createVideoResource(({ final __callArgument0:Dynamic = element; __callArgument0; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : VideoResource);
     return cast null;
   }
 
@@ -26,8 +26,8 @@ class VideoResourceFrom {
         var resource:VideoResource = cast _Runtime.UNDEFINED;
         url = _Runtime.callProperty(flighthq._internal._HostValueLut.get('URL'), 'createObjectURL', cast ([blob] : Array<Dynamic>));
         return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-          return flighthq._internal._Async.flatMap((cast loadVideoResourceFromUrl((cast url : String), ({ final __callArgument4:Dynamic = options; __callArgument4; }), ({ final __callArgument5:Dynamic = signal; __callArgument5; })) : flighthq._internal._Promise<VideoResource>), function(__awaitValue3:Dynamic):Dynamic {
-            (resource = cast (__awaitValue3 : Dynamic));
+          return flighthq._internal._Async.flatMap((cast loadVideoResourceFromUrl((cast url : String), ({ final __callArgument7:Dynamic = options; __callArgument7; }), ({ final __callArgument8:Dynamic = signal; __callArgument8; })) : flighthq._internal._Promise<VideoResource>), function(__awaitValue6:Dynamic):Dynamic {
+            (resource = cast (__awaitValue6 : Dynamic));
             return flighthq._internal._Async.flowNormal();
           });
         }), function(__caughtError:Dynamic):Dynamic {
@@ -45,7 +45,7 @@ class VideoResourceFrom {
   }
 
   public static function loadVideoResourceFromUrl(url:String, ?options:VideoResourceLoadOptions, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<VideoResource> {
-    if (_Runtime.truthy(({ final __hostType6 = signal; __hostType6 == null ? _Runtime.UNDEFINED : __hostType6.aborted; }))) { return cast flighthq._internal._Async.reject(signal.reason); }
+    if (_Runtime.truthy(({ final __hostType11 = signal; __hostType11 == null ? _Runtime.UNDEFINED : __hostType11.aborted; }))) { return cast flighthq._internal._Async.reject(signal.reason); }
     return cast flighthq._internal._Async.create(function(resolve:flighthq._internal._Any, reject:flighthq._internal._Any):Void {
       var element:flighthq._internal.dom.HTMLVideoElement = cast _Runtime.UNDEFINED;
       var readyEvent:String = cast _Runtime.UNDEFINED;
@@ -54,23 +54,23 @@ class VideoResourceFrom {
       var onAbort:Void->Void = cast _Runtime.UNDEFINED;
       var cleanup:Void->Void = cast _Runtime.UNDEFINED;
       element = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['video'] : Array<Dynamic>));
-      ((cast element : flighthq._internal.dom.HTMLVideoElement).preload = (cast _Runtime.coalesce(({ final __typedStruct7 = options; __typedStruct7 == null ? _Runtime.UNDEFINED : __typedStruct7.preload; }), function():Dynamic return cast 'auto') : flighthq._internal._IndexedAccess<flighthq._internal.dom.HTMLMediaElement, String>));
-      if ((cast !_Runtime.strictEquals(({ final __typedStruct8 = options; __typedStruct8 == null ? _Runtime.UNDEFINED : __typedStruct8.crossOrigin; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast element : flighthq._internal.dom.HTMLVideoElement).crossOrigin = options.crossOrigin); }
-      if ((cast !_Runtime.strictEquals(({ final __typedStruct9 = options; __typedStruct9 == null ? _Runtime.UNDEFINED : __typedStruct9.muted; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast element : flighthq._internal.dom.HTMLVideoElement).muted = options.muted); }
-      if ((cast !_Runtime.strictEquals(({ final __typedStruct10 = options; __typedStruct10 == null ? _Runtime.UNDEFINED : __typedStruct10.playsInline; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast element : flighthq._internal.dom.HTMLVideoElement).playsInline = options.playsInline); }
-      readyEvent = (cast VideoResourceFrom.readinessEventName__videoResourceFrom(({ final __typedStruct11 = options; __typedStruct11 == null ? _Runtime.UNDEFINED : __typedStruct11.readiness; })) : String);
+      ((cast element : flighthq._internal.dom.HTMLVideoElement).preload = (cast _Runtime.coalesce(({ final __typedStruct12 = options; __typedStruct12 == null ? _Runtime.UNDEFINED : __typedStruct12.preload; }), function():Dynamic return cast 'auto') : flighthq._internal._IndexedAccess<flighthq._internal.dom.HTMLMediaElement, String>));
+      if ((cast !_Runtime.strictEquals(({ final __typedStruct13 = options; __typedStruct13 == null ? _Runtime.UNDEFINED : __typedStruct13.crossOrigin; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast element : flighthq._internal.dom.HTMLVideoElement).crossOrigin = options.crossOrigin); }
+      if ((cast !_Runtime.strictEquals(({ final __typedStruct14 = options; __typedStruct14 == null ? _Runtime.UNDEFINED : __typedStruct14.muted; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast element : flighthq._internal.dom.HTMLVideoElement).muted = options.muted); }
+      if ((cast !_Runtime.strictEquals(({ final __typedStruct15 = options; __typedStruct15 == null ? _Runtime.UNDEFINED : __typedStruct15.playsInline; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast element : flighthq._internal.dom.HTMLVideoElement).playsInline = options.playsInline); }
+      readyEvent = (cast VideoResourceFrom.readinessEventName__videoResourceFrom(({ final __typedStruct16 = options; __typedStruct16 == null ? _Runtime.UNDEFINED : __typedStruct16.readiness; })) : String);
       onReady = (cast function():Void {
         cleanup();
-        resolve((cast (cast createVideoResource(({ final __callArgument12:Dynamic = element; __callArgument12; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : VideoResource) : flighthq._internal._Any));
+        resolve((cast (cast (#if js _Runtime.callValue(createVideoResource, cast ([({ final __callArgument19:Dynamic = element; __callArgument19; })] : Array<Dynamic>)) #else createVideoResource(({ final __callArgument18:Dynamic = element; __callArgument18; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : VideoResource) : flighthq._internal._Any));
       });
       onError = (cast function():Void {
         cleanup();
-        disposeVideoResource((cast createVideoResource(({ final __callArgument13:Dynamic = element; __callArgument13; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : VideoResource));
+        disposeVideoResource((cast (#if js _Runtime.callValue(createVideoResource, cast ([({ final __callArgument23:Dynamic = element; __callArgument23; })] : Array<Dynamic>)) #else createVideoResource(({ final __callArgument22:Dynamic = element; __callArgument22; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : VideoResource));
         reject((cast _Runtime.error('Failed to load video: ' + Std.string(url) + '') : flighthq._internal._Any));
       });
       onAbort = (cast function():Void {
         cleanup();
-        disposeVideoResource((cast createVideoResource(({ final __callArgument14:Dynamic = element; __callArgument14; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : VideoResource));
+        disposeVideoResource((cast (#if js _Runtime.callValue(createVideoResource, cast ([({ final __callArgument27:Dynamic = element; __callArgument27; })] : Array<Dynamic>)) #else createVideoResource(({ final __callArgument26:Dynamic = element; __callArgument26; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : VideoResource));
         reject((cast signal.reason : flighthq._internal._Any));
       });
       cleanup = (cast function():Void {
@@ -88,9 +88,9 @@ class VideoResourceFrom {
 
   public static function loadVideoResourceFromUrls(sources:Array<VideoResourceUrl>, ?options:VideoResourceLoadOptions, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<VideoResource> {
     var selected:Null<VideoResourceUrl> = cast _Runtime.UNDEFINED;
-    selected = (cast selectVideoResourceUrl(({ final __callArgument15:Dynamic = sources; __callArgument15; })) : Null<VideoResourceUrl>);
-    if ((cast _Runtime.strictEquals(selected, null) : Bool)) { return cast flighthq._internal._Async.resolve((cast createVideoResource(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : VideoResource)); }
-    return cast (cast loadVideoResourceFromUrl((cast (cast selected : { var url:String; }).url : String), ({ final __callArgument16:Dynamic = options; __callArgument16; }), ({ final __callArgument17:Dynamic = signal; __callArgument17; })) : flighthq._internal._Promise<VideoResource>);
+    selected = (cast selectVideoResourceUrl(({ final __callArgument30:Dynamic = sources; __callArgument30; })) : Null<VideoResourceUrl>);
+    if ((cast _Runtime.strictEquals(selected, null) : Bool)) { return cast flighthq._internal._Async.resolve((cast (#if js _Runtime.callValue(createVideoResource, cast ([] : Array<Dynamic>)) #else createVideoResource(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : VideoResource)); }
+    return cast (cast loadVideoResourceFromUrl((cast (cast selected : { var url:String; }).url : String), ({ final __callArgument32:Dynamic = options; __callArgument32; }), ({ final __callArgument33:Dynamic = signal; __callArgument33; })) : flighthq._internal._Promise<VideoResource>);
     return cast null;
   }
 

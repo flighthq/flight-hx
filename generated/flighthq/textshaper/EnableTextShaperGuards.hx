@@ -14,10 +14,10 @@ class EnableTextShaperGuards {
   }
 
   public static function enableTextShaperGuards():Void {
-    setShapedRunReleaseGuard(({ final __callArgument1:Dynamic = EnableTextShaperGuards.warnOnDoubleRelease__enableTextShaperGuards; __callArgument1; }));
+    setShapedRunReleaseGuard(({ final __callArgument2:Dynamic = EnableTextShaperGuards.warnOnDoubleRelease__enableTextShaperGuards; __callArgument2; }));
   }
 
   public static function warnOnDoubleRelease__enableTextShaperGuards(_run:ShapedRun):Void {
-    (cast logOnce((cast 'textshaper:double-release' : String), ({ final __callArgument2:Dynamic = LogLevel.Warn; __callArgument2; }), (cast { message: 'releaseShapedRun: this run is already in the pool, so it is being released twice. The repeated release was ignored to preserve the pool, but it indicates an unbalanced bracket. Every acquireShapedRun call must pair with exactly one releaseShapedRun call, and the run must not be used after release.' } : Dynamic), ({ final __callArgument3:Dynamic = 'textshaper'; __callArgument3; })) : Bool);
+    (cast logOnce((cast 'textshaper:double-release' : String), ({ final __callArgument4:Dynamic = LogLevel.Warn; __callArgument4; }), (cast { message: 'releaseShapedRun: this run is already in the pool, so it is being released twice. The repeated release was ignored to preserve the pool, but it indicates an unbalanced bracket. Every acquireShapedRun call must pair with exactly one releaseShapedRun call, and the run must not be used after release.' } : Dynamic), ({ final __callArgument5:Dynamic = 'textshaper'; __callArgument5; })) : Bool);
   }
 }

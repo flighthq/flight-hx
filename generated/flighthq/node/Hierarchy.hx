@@ -300,36 +300,36 @@ class Hierarchy {
     try {
       try {
         copyMatrix(({ final __callArgument0:Dynamic = oldWorld; __callArgument0; }), ({ final __callArgument1:Dynamic = (cast getNodeWorldMatrix((cast child : Dynamic)) : Matrix); __callArgument1; }));
-        if ((cast !(cast (cast inverseMatrix(({ final __callArgument2:Dynamic = localM; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast getNodeWorldMatrix((cast newParent : Dynamic)) : Matrix); __callArgument3; })) : Bool) : Bool) : Bool)) {
+        if ((cast !(cast (cast inverseMatrix(({ final __callArgument4:Dynamic = localM; __callArgument4; }), ({ final __callArgument5:Dynamic = (cast getNodeWorldMatrix((cast newParent : Dynamic)) : Matrix); __callArgument5; })) : Bool) : Bool) : Bool)) {
           _Runtime.callOptionalValue(Hierarchy.reparentNodeGuard__hierarchy, cast ([(cast child : Node<Dynamic>), (cast newParent : Node<Dynamic>)] : Array<Dynamic>));
-          var __returnValue4:Dynamic = false;
+          var __returnValue8:Dynamic = false;
           {
-            releaseMatrix(({ final __callArgument5:Dynamic = oldWorld; __callArgument5; }));
-            releaseMatrix(({ final __callArgument6:Dynamic = localM; __callArgument6; }));
+            releaseMatrix(({ final __callArgument9:Dynamic = oldWorld; __callArgument9; }));
+            releaseMatrix(({ final __callArgument11:Dynamic = localM; __callArgument11; }));
           }
-          return cast __returnValue4;
+          return cast __returnValue8;
         }
         (cast addNodeChild((cast newParent : Dynamic), (cast child : Dynamic)) : NodeOf<Traits>);
-        multiplyMatrix(({ final __callArgument7:Dynamic = localM; __callArgument7; }), ({ final __callArgument8:Dynamic = localM; __callArgument8; }), ({ final __callArgument9:Dynamic = oldWorld; __callArgument9; }));
+        multiplyMatrix(({ final __callArgument13:Dynamic = localM; __callArgument13; }), ({ final __callArgument14:Dynamic = localM; __callArgument14; }), ({ final __callArgument15:Dynamic = oldWorld; __callArgument15; }));
         var pivotX:Float = child.pivotX;
         var pivotY:Float = child.pivotY;
-        decomposeMatrixToTransform2D(({ final __callArgument10:Dynamic = child; __callArgument10; }), ({ final __callArgument11:Dynamic = localM; __callArgument11; }));
+        decomposeMatrixToTransform2D(({ final __callArgument19:Dynamic = child; __callArgument19; }), ({ final __callArgument20:Dynamic = localM; __callArgument20; }));
         (child.pivotX = cast (pivotX : Float));
         (child.pivotY = cast (pivotY : Float));
         (child.x = cast ((localM.tx + ((localM.a * pivotX) + (localM.c * pivotY))) : Float));
         (child.y = cast ((localM.ty + ((localM.b * pivotX) + (localM.d * pivotY))) : Float));
         invalidateNodeLocalTransform((cast child : Dynamic));
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError12:Dynamic) {
+    } catch (__finallyError23:Dynamic) {
       {
-        releaseMatrix(({ final __callArgument13:Dynamic = oldWorld; __callArgument13; }));
-        releaseMatrix(({ final __callArgument14:Dynamic = localM; __callArgument14; }));
+        releaseMatrix(({ final __callArgument24:Dynamic = oldWorld; __callArgument24; }));
+        releaseMatrix(({ final __callArgument26:Dynamic = localM; __callArgument26; }));
       }
-      _Runtime.throwValue(__finallyError12);
+      _Runtime.throwValue(__finallyError23);
     }
     {
-      releaseMatrix(({ final __callArgument15:Dynamic = oldWorld; __callArgument15; }));
-      releaseMatrix(({ final __callArgument16:Dynamic = localM; __callArgument16; }));
+      releaseMatrix(({ final __callArgument28:Dynamic = oldWorld; __callArgument28; }));
+      releaseMatrix(({ final __callArgument30:Dynamic = localM; __callArgument30; }));
     }
     return cast true;
     return cast null;

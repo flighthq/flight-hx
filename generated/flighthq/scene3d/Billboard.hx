@@ -43,7 +43,7 @@ class Billboard {
 
   @:noCompletion
   public static function getBillboardRuntime(source:flighthq.types.Billboard):BillboardRuntime {
-    return cast (cast getNode3DRuntime(({ final __callArgument1:Dynamic = source; __callArgument1; })) : Node3DRuntime);
+    return cast (cast getNode3DRuntime(({ final __callArgument2:Dynamic = source; __callArgument2; })) : Node3DRuntime);
     return cast null;
   }
 

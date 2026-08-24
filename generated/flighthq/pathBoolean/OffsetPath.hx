@@ -25,30 +25,30 @@ class OffsetPath {
     miterLimit = _Runtime.coalesce(({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.miterLimit; }), function():Dynamic return cast OffsetPath.DEFAULT_MITER_LIMIT__offsetPath);
     arcTolerance = _Runtime.coalesce(({ final __typedStruct3 = options; __typedStruct3 == null ? _Runtime.UNDEFINED : __typedStruct3.arcTolerance; }), function():Dynamic return cast OffsetPath.DEFAULT_ARC_TOLERANCE__offsetPath);
     contours = (cast flattenPath(({ final __callArgument4:Dynamic = path; __callArgument4; }), #if js (cast ({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.tolerance; }) : Float) #else (cast ({ final __typedStruct5 = options; __typedStruct5 == null ? _Runtime.UNDEFINED : __typedStruct5.tolerance; }) : Null<Float>) #end) : Array<Array<Float>>);
-    pointEpsSq = HxMath.pow((cast OffsetPath.getContourPointEps__offsetPath(({ final __callArgument6:Dynamic = contours; __callArgument6; })) : Float), 2.0);
+    pointEpsSq = HxMath.pow((cast OffsetPath.getContourPointEps__offsetPath(({ final __callArgument8:Dynamic = contours; __callArgument8; })) : Float), 2.0);
     rawRings = (cast cast ([] : Array<Dynamic>));
     for (contour in _Runtime.iterable(contours)) {
-      var closed:Bool = (cast OffsetPath.isClosedContour__offsetPath(({ final __callArgument9:Dynamic = contour; __callArgument9; }), (cast pointEpsSq : Float)) : Bool);
-      var vertices:Array<Float> = (cast OffsetPath.getCleanContourVertices__offsetPath(({ final __callArgument10:Dynamic = contour; __callArgument10; }), (cast closed : Bool), (cast pointEpsSq : Float)) : Array<Float>);
+      var closed:Bool = (cast OffsetPath.isClosedContour__offsetPath(({ final __callArgument12:Dynamic = contour; __callArgument12; }), (cast pointEpsSq : Float)) : Bool);
+      var vertices:Array<Float> = (cast OffsetPath.getCleanContourVertices__offsetPath(({ final __callArgument14:Dynamic = contour; __callArgument14; }), (cast closed : Bool), (cast pointEpsSq : Float)) : Array<Float>);
       if ((cast closed : Bool)) {
         if ((cast ((cast _Runtime.field(vertices, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
-        var orientation:Float = (cast OffsetPath.getRingOrientationSign__offsetPath(({ final __callArgument11:Dynamic = vertices; __callArgument11; })) : Float);
-        var ring:Array<Float> = (cast OffsetPath.buildOffsetRing__offsetPath(({ final __callArgument12:Dynamic = vertices; __callArgument12; }), (cast (delta * orientation) : Float), ({ final __callArgument13:Dynamic = OffsetPath.NO_CAPS__offsetPath; __callArgument13; }), ({ final __callArgument14:Dynamic = join; __callArgument14; }), ({ final __callArgument15:Dynamic = end; __callArgument15; }), (cast miterLimit : Float), (cast arcTolerance : Float)) : Array<Float>);
+        var orientation:Float = (cast OffsetPath.getRingOrientationSign__offsetPath(({ final __callArgument16:Dynamic = vertices; __callArgument16; })) : Float);
+        var ring:Array<Float> = (cast OffsetPath.buildOffsetRing__offsetPath(({ final __callArgument18:Dynamic = vertices; __callArgument18; }), (cast (delta * orientation) : Float), ({ final __callArgument19:Dynamic = OffsetPath.NO_CAPS__offsetPath; __callArgument19; }), ({ final __callArgument20:Dynamic = join; __callArgument20; }), ({ final __callArgument21:Dynamic = end; __callArgument21; }), (cast miterLimit : Float), (cast arcTolerance : Float)) : Array<Float>);
         if ((cast ((cast _Runtime.field(ring, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
-        var offsetArea:Float = (cast OffsetPath.getRingSignedArea__offsetPath(({ final __callArgument16:Dynamic = ring; __callArgument16; })) : Float);
+        var offsetArea:Float = (cast OffsetPath.getRingSignedArea__offsetPath(({ final __callArgument26:Dynamic = ring; __callArgument26; })) : Float);
         var inverted:Bool = !_Runtime.strictEquals(_Runtime.sign(offsetArea), orientation);
-        var notReduced:Bool = ((cast ((cast delta : Float) < (cast 0.0 : Float)) : Bool) && (cast ((cast HxMath.abs(offsetArea) : Float) >= (cast HxMath.abs((cast OffsetPath.getRingSignedArea__offsetPath(({ final __callArgument17:Dynamic = vertices; __callArgument17; })) : Float)) : Float)) : Bool));
+        var notReduced:Bool = ((cast ((cast delta : Float) < (cast 0.0 : Float)) : Bool) && (cast ((cast HxMath.abs(offsetArea) : Float) >= (cast HxMath.abs((cast OffsetPath.getRingSignedArea__offsetPath(({ final __callArgument28:Dynamic = vertices; __callArgument28; })) : Float)) : Float)) : Bool));
         if ((cast ((cast inverted : Bool) || (cast notReduced : Bool)) : Bool)) { continue; }
-        _Runtime.callProperty(rawRings, 'push', cast ([((cast ((cast offsetArea : Float) < (cast 0.0 : Float)) : Bool) ? (cast (cast OffsetPath.reverseVertexLoop__offsetPath(({ final __callArgument18:Dynamic = ring; __callArgument18; })) : Array<Float>) : Dynamic) : (cast ring : Dynamic))] : Array<Dynamic>));
+        _Runtime.callProperty(rawRings, 'push', cast ([((cast ((cast offsetArea : Float) < (cast 0.0 : Float)) : Bool) ? (cast (cast OffsetPath.reverseVertexLoop__offsetPath(({ final __callArgument30:Dynamic = ring; __callArgument30; })) : Array<Float>) : Dynamic) : (cast ring : Dynamic))] : Array<Dynamic>));
       } else {
         if ((cast ((cast _Runtime.field(vertices, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { continue; }
         var caps:flighthq._internal._Set<Float> = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [cast ([0.0, (_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), 2.0) - 1.0)] : Array<Dynamic>)]);
-        var loop:Array<Float> = (cast OffsetPath.getOpenContourLoop__offsetPath(({ final __callArgument19:Dynamic = vertices; __callArgument19; })) : Array<Float>);
-        var ring:Array<Float> = (cast OffsetPath.buildOffsetRing__offsetPath(({ final __callArgument20:Dynamic = loop; __callArgument20; }), (cast HxMath.abs(delta) : Float), ({ final __callArgument21:Dynamic = caps; __callArgument21; }), ({ final __callArgument22:Dynamic = join; __callArgument22; }), ({ final __callArgument23:Dynamic = end; __callArgument23; }), (cast miterLimit : Float), (cast arcTolerance : Float)) : Array<Float>);
-        if ((cast ((cast _Runtime.field(ring, 'length') : Float) >= (cast 6.0 : Float)) : Bool)) { _Runtime.callProperty(rawRings, 'push', cast ([((cast ((cast (cast OffsetPath.getRingSignedArea__offsetPath(({ final __callArgument24:Dynamic = ring; __callArgument24; })) : Float) : Float) < (cast 0.0 : Float)) : Bool) ? (cast (cast OffsetPath.reverseVertexLoop__offsetPath(({ final __callArgument25:Dynamic = ring; __callArgument25; })) : Array<Float>) : Dynamic) : (cast ring : Dynamic))] : Array<Dynamic>)); }
+        var loop:Array<Float> = (cast OffsetPath.getOpenContourLoop__offsetPath(({ final __callArgument32:Dynamic = vertices; __callArgument32; })) : Array<Float>);
+        var ring:Array<Float> = (cast OffsetPath.buildOffsetRing__offsetPath(({ final __callArgument34:Dynamic = loop; __callArgument34; }), (cast HxMath.abs(delta) : Float), ({ final __callArgument35:Dynamic = caps; __callArgument35; }), ({ final __callArgument36:Dynamic = join; __callArgument36; }), ({ final __callArgument37:Dynamic = end; __callArgument37; }), (cast miterLimit : Float), (cast arcTolerance : Float)) : Array<Float>);
+        if ((cast ((cast _Runtime.field(ring, 'length') : Float) >= (cast 6.0 : Float)) : Bool)) { _Runtime.callProperty(rawRings, 'push', cast ([((cast ((cast (cast OffsetPath.getRingSignedArea__offsetPath(({ final __callArgument42:Dynamic = ring; __callArgument42; })) : Float) : Float) < (cast 0.0 : Float)) : Bool) ? (cast (cast OffsetPath.reverseVertexLoop__offsetPath(({ final __callArgument44:Dynamic = ring; __callArgument44; })) : Array<Float>) : Dynamic) : (cast ring : Dynamic))] : Array<Dynamic>)); }
       }
     }
-    return cast (cast resolvePathRegions((cast rawRings : Dynamic), ({ final __callArgument26:Dynamic = 'positive'; __callArgument26; })) : Path);
+    return cast (cast resolvePathRegions((cast rawRings : Dynamic), ({ final __callArgument46:Dynamic = 'positive'; __callArgument46; })) : Path);
     return cast null;
   }
 
@@ -91,9 +91,9 @@ class OffsetPath {
         var thisStartX:Float = (vx + (signedDelta * flighthq._internal._StaticIndex.readFloatArrayTyped((cast normalX : Array<Float>), (cast k : Float))));
         var thisStartY:Float = (vy + (signedDelta * flighthq._internal._StaticIndex.readFloatArrayTyped((cast normalY : Array<Float>), (cast k : Float))));
         if ((cast ((cast capIndices : flighthq._internal._Set<Float>).has(k)) : Bool)) {
-          OffsetPath.emitOffsetEndCap__offsetPath(({ final __callArgument27:Dynamic = ring; __callArgument27; }), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast previous : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast previous : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast k : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast k : Float)) : Float), (cast HxMath.abs(signedDelta) : Float), ({ final __callArgument28:Dynamic = end; __callArgument28; }), (cast arcTolerance : Float));
+          OffsetPath.emitOffsetEndCap__offsetPath(({ final __callArgument48:Dynamic = ring; __callArgument48; }), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast previous : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast previous : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast k : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast k : Float)) : Float), (cast HxMath.abs(signedDelta) : Float), ({ final __callArgument49:Dynamic = end; __callArgument49; }), (cast arcTolerance : Float));
         } else {
-          OffsetPath.emitOffsetJoin__offsetPath(({ final __callArgument29:Dynamic = ring; __callArgument29; }), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast previous : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast previous : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast k : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast k : Float)) : Float), (cast signedDelta : Float), ({ final __callArgument30:Dynamic = join; __callArgument30; }), (cast miterLimit : Float), (cast arcTolerance : Float));
+          OffsetPath.emitOffsetJoin__offsetPath(({ final __callArgument52:Dynamic = ring; __callArgument52; }), (cast vx : Float), (cast vy : Float), (cast previousEndX : Float), (cast previousEndY : Float), (cast thisStartX : Float), (cast thisStartY : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast previous : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast previous : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirX : Array<Float>), (cast k : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast dirY : Array<Float>), (cast k : Float)) : Float), (cast signedDelta : Float), ({ final __callArgument53:Dynamic = join; __callArgument53; }), (cast miterLimit : Float), (cast arcTolerance : Float));
         }
         k++;
       }
@@ -112,7 +112,7 @@ class OffsetPath {
       var midX:Float = HxMath.cos((startAngle + OffsetPath.HALF_PI__offsetPath));
       var midY:Float = HxMath.sin((startAngle + OffsetPath.HALF_PI__offsetPath));
       var sweep:Float = _Runtime.multiplyNumbers(((cast ((cast ((midX * previousDirX) + (midY * previousDirY)) : Float) >= (cast 0.0 : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic)), HxMath.PI);
-      OffsetPath.pushOffsetArc__offsetPath(({ final __callArgument31:Dynamic = ring; __callArgument31; }), (cast vx : Float), (cast vy : Float), (cast radius : Float), (cast startAngle : Float), (cast sweep : Float), (cast arcTolerance : Float));
+      OffsetPath.pushOffsetArc__offsetPath(({ final __callArgument56:Dynamic = ring; __callArgument56; }), (cast vx : Float), (cast vy : Float), (cast radius : Float), (cast startAngle : Float), (cast sweep : Float), (cast arcTolerance : Float));
     } }
     _Runtime.pushMany(ring, cast ([thisStartX, thisStartY] : Array<Dynamic>));
   }
@@ -145,7 +145,7 @@ class OffsetPath {
         var radius:Float = HxMath.abs(signedDelta);
         var startAngle:Float = HxMath.atan2((previousEndY - vy), (previousEndX - vx));
         var endAngle:Float = HxMath.atan2((thisStartY - vy), (thisStartX - vx));
-        OffsetPath.pushOffsetArc__offsetPath(({ final __callArgument32:Dynamic = ring; __callArgument32; }), (cast vx : Float), (cast vy : Float), (cast radius : Float), (cast startAngle : Float), (cast (cast OffsetPath.getShortSweep__offsetPath((cast startAngle : Float), (cast endAngle : Float)) : Float) : Float), (cast arcTolerance : Float));
+        OffsetPath.pushOffsetArc__offsetPath(({ final __callArgument58:Dynamic = ring; __callArgument58; }), (cast vx : Float), (cast vy : Float), (cast radius : Float), (cast startAngle : Float), (cast (cast OffsetPath.getShortSweep__offsetPath((cast startAngle : Float), (cast endAngle : Float)) : Float) : Float), (cast arcTolerance : Float));
       } } }
     }
     _Runtime.pushMany(ring, cast ([thisStartX, thisStartY] : Array<Dynamic>));
@@ -224,7 +224,7 @@ class OffsetPath {
 
   public static function getRingOrientationSign__offsetPath(vertices:Array<Float>):Float {
     var sign:Float = cast _Runtime.UNDEFINED;
-    sign = _Runtime.sign((cast OffsetPath.getRingSignedArea__offsetPath(({ final __callArgument35:Dynamic = vertices; __callArgument35; })) : Float));
+    sign = _Runtime.sign((cast OffsetPath.getRingSignedArea__offsetPath(({ final __callArgument62:Dynamic = vertices; __callArgument62; })) : Float));
     return cast ((cast _Runtime.strictEquals(sign, 0.0) : Bool) ? (cast 1.0 : Dynamic) : (cast sign : Dynamic));
     return cast null;
   }

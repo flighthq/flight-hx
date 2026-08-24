@@ -28,9 +28,11 @@ class RenderRegistryGuards {
     stateId = ++RenderRegistryGuards._nextStateId__renderRegistryGuards;
     ((cast RenderRegistryGuards._stateIds__renderRegistryGuards : flighthq._internal._WeakMap<RenderState, Float>).set(state, (cast stateId)));
     ((cast RenderRegistryGuards._stateMisses__renderRegistryGuards : flighthq._internal._WeakMap<RenderState, Array<RenderRegistryMiss>>).set(state, (cast cast ([] : Array<Dynamic>))));
-    connectSignal((cast (cast (cast enableRenderRegistrySignals(({ final __callArgument0:Dynamic = state; __callArgument0; })) : RenderRegistrySignals) : RenderRegistrySignals).onRegistryMiss : Dynamic), ({ final __callArgument3:Dynamic = function(registry:RenderRegistry, kind:String):Void {
-      RenderRegistryGuards.recordRenderRegistryMiss__renderRegistryGuards(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast stateId : Float), ({ final __callArgument2:Dynamic = registry; __callArgument2; }), (cast kind : String));
-    }; __callArgument3; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast (cast (cast enableRenderRegistrySignals(({ final __callArgument7:Dynamic = state; __callArgument7; })) : RenderRegistrySignals) : RenderRegistrySignals).onRegistryMiss : Dynamic), ({ final __callArgument13:Dynamic = function(registry:RenderRegistry, kind:String):Void {
+      RenderRegistryGuards.recordRenderRegistryMiss__renderRegistryGuards(({ final __callArgument9:Dynamic = state; __callArgument9; }), (cast stateId : Float), ({ final __callArgument10:Dynamic = registry; __callArgument10; }), (cast kind : String));
+    }; __callArgument13; })] : Array<Dynamic>)) #else connectSignal((cast (cast (cast enableRenderRegistrySignals(({ final __callArgument0:Dynamic = state; __callArgument0; })) : RenderRegistrySignals) : RenderRegistrySignals).onRegistryMiss : Dynamic), ({ final __callArgument6:Dynamic = function(registry:RenderRegistry, kind:String):Void {
+      RenderRegistryGuards.recordRenderRegistryMiss__renderRegistryGuards(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast stateId : Float), ({ final __callArgument3:Dynamic = registry; __callArgument3; }), (cast kind : String));
+    }; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static function explainRenderRegistryMisses(state:RenderState):RenderRegistryMissExplanation {
@@ -86,7 +88,7 @@ class RenderRegistryGuards {
     misses = ((cast RenderRegistryGuards._stateMisses__renderRegistryGuards : flighthq._internal._WeakMap<RenderState, Array<RenderRegistryMiss>>).get(state));
     if ((cast ((cast _Runtime.strictEquals(misses, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.callProperty(misses, 'some', cast ([function(miss:RenderRegistryMiss, __unused2:Float, __unused3:Array<RenderRegistryMiss>):Bool return ((cast _Runtime.strictEquals((cast miss : RenderRegistryMiss).registry, registry) : Bool) && (cast _Runtime.strictEquals((cast miss : RenderRegistryMiss).kind, kind) : Bool))] : Array<Dynamic>)) : Bool)) : Bool)) { return; }
     _Runtime.callProperty(misses, 'push', cast ([{ kind: kind, registry: registry }] : Array<Dynamic>));
-    (cast logOnce((cast 'render:registry-miss:' + Std.string(stateId) + ':' + Std.string(registry) + ':' + Std.string(kind) + '' : String), ({ final __callArgument4:Dynamic = LogLevel.Warn; __callArgument4; }), (cast { kind: kind, message: (cast RenderRegistryGuards.getRenderRegistryMissMessage__renderRegistryGuards(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = registry; __callArgument6; })) : String), registry: registry } : Dynamic), ({ final __callArgument7:Dynamic = 'render'; __callArgument7; })) : Bool);
+    (cast logOnce((cast 'render:registry-miss:' + Std.string(stateId) + ':' + Std.string(registry) + ':' + Std.string(kind) + '' : String), ({ final __callArgument14:Dynamic = LogLevel.Warn; __callArgument14; }), (cast { kind: kind, message: (cast RenderRegistryGuards.getRenderRegistryMissMessage__renderRegistryGuards(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = registry; __callArgument16; })) : String), registry: registry } : Dynamic), ({ final __callArgument19:Dynamic = 'render'; __callArgument19; })) : Bool);
   }
 
   public static final _stateIds__renderRegistryGuards:flighthq._internal._WeakMap<RenderState, Float> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);

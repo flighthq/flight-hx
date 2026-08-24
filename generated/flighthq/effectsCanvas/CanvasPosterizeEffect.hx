@@ -42,6 +42,6 @@ class CanvasPosterizeEffect {
   });
 
   public static function registerCanvasPosterizeEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast 'PosterizeEffect' : String), ({ final __callArgument4:Dynamic = defaultCanvasPosterizeEffectRunner; __callArgument4; }));
+    registerCanvasRenderEffect(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast 'PosterizeEffect' : String), ({ final __callArgument7:Dynamic = defaultCanvasPosterizeEffectRunner; __callArgument7; }));
   }
 }

@@ -18,7 +18,7 @@ class TextureColorSpace {
   }
 
   public static function shouldPremultiplyTextureOnUpload(source:flighthq.types.Texture.TextureColorSpace, working:RenderTargetColorSpace):Bool {
-    return cast !(cast (cast shouldDecodeTextureOnSample(({ final __callArgument2:Dynamic = source; __callArgument2; }), ({ final __callArgument3:Dynamic = working; __callArgument3; })) : Bool) : Bool);
+    return cast !(cast (cast shouldDecodeTextureOnSample(({ final __callArgument4:Dynamic = source; __callArgument4; }), ({ final __callArgument5:Dynamic = working; __callArgument5; })) : Bool) : Bool);
     return cast null;
   }
 }

@@ -38,20 +38,20 @@ class WgpuLensDirtEffect {
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
     descriptor = (cast { width: source.width, height: source.height, format: source.format });
     bright = (cast acquireWgpuRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = pool; __callArgument1; }), ({ final __callArgument2:Dynamic = descriptor; __callArgument2; })) : WgpuRenderTarget);
-    blurred = (cast acquireWgpuRenderTarget(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = pool; __callArgument4; }), ({ final __callArgument5:Dynamic = descriptor; __callArgument5; })) : WgpuRenderTarget);
-    temp = (cast acquireWgpuRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pool; __callArgument7; }), ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : WgpuRenderTarget);
-    brightPipeline = (cast getWgpuEffectPipeline(({ final __callArgument9:Dynamic = state; __callArgument9; }), (cast 'lens.lensDirt.bright' : String), (cast WgpuLensDirtEffect.LENS_DIRT_BRIGHT_FRAGMENT_WGSL__wgpuLensDirtEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass(({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast source : WgpuRenderTarget), ({ final __callArgument11:Dynamic = bright; __callArgument11; }), ({ final __callArgument12:Dynamic = brightPipeline; __callArgument12; }), ({ final __callArgument13:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    blurred = (cast acquireWgpuRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pool; __callArgument7; }), ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : WgpuRenderTarget);
+    temp = (cast acquireWgpuRenderTarget(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = pool; __callArgument13; }), ({ final __callArgument14:Dynamic = descriptor; __callArgument14; })) : WgpuRenderTarget);
+    brightPipeline = (cast getWgpuEffectPipeline(({ final __callArgument18:Dynamic = state; __callArgument18; }), (cast 'lens.lensDirt.bright' : String), (cast WgpuLensDirtEffect.LENS_DIRT_BRIGHT_FRAGMENT_WGSL__wgpuLensDirtEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass(({ final __callArgument20:Dynamic = state; __callArgument20; }), (cast source : WgpuRenderTarget), ({ final __callArgument21:Dynamic = bright; __callArgument21; }), ({ final __callArgument22:Dynamic = brightPipeline; __callArgument22; }), ({ final __callArgument23:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast threshold : Float));
-    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument13; }));
-    applyGaussianBlurToWgpu(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = bright; __callArgument15; }), ({ final __callArgument16:Dynamic = blurred; __callArgument16; }), ({ final __callArgument17:Dynamic = temp; __callArgument17; }), ({ final __callArgument18:Dynamic = { blurX: WgpuLensDirtEffect.LENS_DIRT_BLUR_SIGMA__wgpuLensDirtEffect, blurY: WgpuLensDirtEffect.LENS_DIRT_BLUR_SIGMA__wgpuLensDirtEffect }; __callArgument18; }));
-    drawWgpuDualSourceEffectPass(({ final __callArgument19:Dynamic = state; __callArgument19; }), (cast source : WgpuRenderTarget), ({ final __callArgument20:Dynamic = blurred; __callArgument20; }), ({ final __callArgument21:Dynamic = (cast dest : WgpuRenderTarget); __callArgument21; }), (cast WgpuLensDirtEffect.getLensDirtCompositePipeline__wgpuLensDirtEffect(({ final __callArgument22:Dynamic = state; __callArgument22; })) : WgpuEffectPipeline), ({ final __callArgument23:Dynamic = function(__unused4:flighthq._internal._Float32Array, __unused5:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void {
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument23; }));
+    applyGaussianBlurToWgpu(({ final __callArgument28:Dynamic = state; __callArgument28; }), ({ final __callArgument29:Dynamic = bright; __callArgument29; }), ({ final __callArgument30:Dynamic = blurred; __callArgument30; }), ({ final __callArgument31:Dynamic = temp; __callArgument31; }), ({ final __callArgument32:Dynamic = { blurX: WgpuLensDirtEffect.LENS_DIRT_BLUR_SIGMA__wgpuLensDirtEffect, blurY: WgpuLensDirtEffect.LENS_DIRT_BLUR_SIGMA__wgpuLensDirtEffect }; __callArgument32; }));
+    drawWgpuDualSourceEffectPass(({ final __callArgument38:Dynamic = state; __callArgument38; }), (cast source : WgpuRenderTarget), ({ final __callArgument39:Dynamic = blurred; __callArgument39; }), ({ final __callArgument40:Dynamic = (cast dest : WgpuRenderTarget); __callArgument40; }), (cast WgpuLensDirtEffect.getLensDirtCompositePipeline__wgpuLensDirtEffect(({ final __callArgument41:Dynamic = state; __callArgument41; })) : WgpuEffectPipeline), ({ final __callArgument43:Dynamic = function(__unused4:flighthq._internal._Float32Array, __unused5:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast intensity : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast seed : Float));
-    }, cast ([__unused4] : Array<Dynamic>)); }; __callArgument23; }));
-    releaseWgpuRenderTarget(({ final __callArgument24:Dynamic = pool; __callArgument24; }), ({ final __callArgument25:Dynamic = bright; __callArgument25; }));
-    releaseWgpuRenderTarget(({ final __callArgument26:Dynamic = pool; __callArgument26; }), ({ final __callArgument27:Dynamic = blurred; __callArgument27; }));
-    releaseWgpuRenderTarget(({ final __callArgument28:Dynamic = pool; __callArgument28; }), ({ final __callArgument29:Dynamic = temp; __callArgument29; }));
+    }, cast ([__unused4] : Array<Dynamic>)); }; __callArgument43; }));
+    releaseWgpuRenderTarget(({ final __callArgument50:Dynamic = pool; __callArgument50; }), ({ final __callArgument51:Dynamic = bright; __callArgument51; }));
+    releaseWgpuRenderTarget(({ final __callArgument54:Dynamic = pool; __callArgument54; }), ({ final __callArgument55:Dynamic = blurred; __callArgument55; }));
+    releaseWgpuRenderTarget(({ final __callArgument58:Dynamic = pool; __callArgument58; }), ({ final __callArgument59:Dynamic = temp; __callArgument59; }));
   }
 
   public static final defaultWgpuLensDirtEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
@@ -59,14 +59,14 @@ class WgpuLensDirtEffect {
   });
 
   public static function registerWgpuLensDirtEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect(({ final __callArgument30:Dynamic = state; __callArgument30; }), (cast 'LensDirtEffect' : String), ({ final __callArgument31:Dynamic = defaultWgpuLensDirtEffectRunner; __callArgument31; }));
+    registerWgpuRenderEffect(({ final __callArgument62:Dynamic = state; __callArgument62; }), (cast 'LensDirtEffect' : String), ({ final __callArgument63:Dynamic = defaultWgpuLensDirtEffectRunner; __callArgument63; }));
   }
 
   public static function getLensDirtCompositePipeline__wgpuLensDirtEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var pipeline:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
     pipeline = ((cast WgpuLensDirtEffect._compositePipelines__wgpuLensDirtEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (pipeline = cast ((cast createWgpuDualSourceEffectPipeline(({ final __callArgument32:Dynamic = state; __callArgument32; }), (cast WgpuLensDirtEffect.LENS_DIRT_COMPOSITE_FRAGMENT_WGSL__wgpuLensDirtEffect : String), ({ final __callArgument33:Dynamic = 'replace'; __callArgument33; })) : WgpuEffectPipeline) : Dynamic));
+      (pipeline = cast ((cast createWgpuDualSourceEffectPipeline(({ final __callArgument66:Dynamic = state; __callArgument66; }), (cast WgpuLensDirtEffect.LENS_DIRT_COMPOSITE_FRAGMENT_WGSL__wgpuLensDirtEffect : String), ({ final __callArgument67:Dynamic = 'replace'; __callArgument67; })) : WgpuEffectPipeline) : Dynamic));
       ((cast WgpuLensDirtEffect._compositePipelines__wgpuLensDirtEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, (cast pipeline)));
     }
     return cast pipeline;

@@ -37,13 +37,13 @@ class TextInputManager {
   public static function connectInputToTextInput(input:TextInputSource, manager:flighthq.types.TextInputManager):Void->Void {
     var onKeyDown:InputKeyboardData->Bool = cast _Runtime.UNDEFINED;
     var onTextInput:InputTextData->Bool = cast _Runtime.UNDEFINED;
-    onKeyDown = (cast function(data:InputKeyboardData):Bool return (cast dispatchTextInputKeyDown(({ final __callArgument1:Dynamic = manager; __callArgument1; }), ({ final __callArgument2:Dynamic = data; __callArgument2; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Bool));
-    onTextInput = (cast function(data:InputTextData):Bool return (cast dispatchTextInput(({ final __callArgument3:Dynamic = manager; __callArgument3; }), (cast data.text : String)) : Bool));
-    connectSignal((cast (cast input : TextInputSource).onKeyDown : Dynamic), ({ final __callArgument4:Dynamic = onKeyDown; __callArgument4; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast (cast input : TextInputSource).onTextInput : Dynamic), ({ final __callArgument5:Dynamic = onTextInput; __callArgument5; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    onKeyDown = (cast function(data:InputKeyboardData):Bool return (cast (#if js _Runtime.callValue(dispatchTextInputKeyDown, cast ([({ final __callArgument4:Dynamic = manager; __callArgument4; }), ({ final __callArgument5:Dynamic = data; __callArgument5; })] : Array<Dynamic>)) #else dispatchTextInputKeyDown(({ final __callArgument2:Dynamic = manager; __callArgument2; }), ({ final __callArgument3:Dynamic = data; __callArgument3; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Bool));
+    onTextInput = (cast function(data:InputTextData):Bool return (cast dispatchTextInput(({ final __callArgument6:Dynamic = manager; __callArgument6; }), (cast data.text : String)) : Bool));
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast (cast input : TextInputSource).onKeyDown : Dynamic), ({ final __callArgument9:Dynamic = onKeyDown; __callArgument9; })] : Array<Dynamic>)) #else connectSignal((cast (cast input : TextInputSource).onKeyDown : Dynamic), ({ final __callArgument8:Dynamic = onKeyDown; __callArgument8; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast (cast input : TextInputSource).onTextInput : Dynamic), ({ final __callArgument11:Dynamic = onTextInput; __callArgument11; })] : Array<Dynamic>)) #else connectSignal((cast (cast input : TextInputSource).onTextInput : Dynamic), ({ final __callArgument10:Dynamic = onTextInput; __callArgument10; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     return cast function():Void {
-      disconnectSignal((cast (cast input : TextInputSource).onKeyDown : Dynamic), ({ final __callArgument6:Dynamic = onKeyDown; __callArgument6; }));
-      disconnectSignal((cast (cast input : TextInputSource).onTextInput : Dynamic), ({ final __callArgument7:Dynamic = onTextInput; __callArgument7; }));
+      disconnectSignal((cast (cast input : TextInputSource).onKeyDown : Dynamic), ({ final __callArgument12:Dynamic = onKeyDown; __callArgument12; }));
+      disconnectSignal((cast (cast input : TextInputSource).onTextInput : Dynamic), ({ final __callArgument14:Dynamic = onTextInput; __callArgument14; }));
     };
     return cast null;
   }
@@ -55,9 +55,9 @@ class TextInputManager {
 
   public static function dispatchTextInput(manager:flighthq.types.TextInputManager, text:String):Bool {
     var target:Null<RichText> = cast _Runtime.UNDEFINED;
-    target = (cast TextInputManager.getTextInputFocusTarget__textInputManager(({ final __callArgument8:Dynamic = manager; __callArgument8; })) : Null<RichText>);
+    target = (cast TextInputManager.getTextInputFocusTarget__textInputManager(({ final __callArgument16:Dynamic = manager; __callArgument16; })) : Null<RichText>);
     if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(text, 'length'), 0.0) : Bool)) : Bool)) { return cast false; }
-    insertTextInput(({ final __callArgument9:Dynamic = target; __callArgument9; }), (cast text : String));
+    insertTextInput(({ final __callArgument18:Dynamic = target; __callArgument18; }), (cast text : String));
     return cast true;
     return cast null;
   }
@@ -65,26 +65,26 @@ class TextInputManager {
   public static function dispatchTextInputKeyDown(manager:flighthq.types.TextInputManager, data:InputKeyboardData, ?clipboardText:String, ?onCopy:String->Void):Bool {
     var target:Null<RichText> = cast _Runtime.UNDEFINED;
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
-    target = (cast TextInputManager.getTextInputFocusTarget__textInputManager(({ final __callArgument10:Dynamic = manager; __callArgument10; })) : Null<RichText>);
+    target = (cast TextInputManager.getTextInputFocusTarget__textInputManager(({ final __callArgument20:Dynamic = manager; __callArgument20; })) : Null<RichText>);
     if ((cast _Runtime.strictEquals(target, null) : Bool)) { return cast false; }
-    layout = _Runtime.coalesce((cast (cast getRichTextRuntime(({ final __callArgument11:Dynamic = target; __callArgument11; })) : RichTextRuntime) : { var textLayout:Null<TextLayoutResult>; }).textLayout, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
-    return cast (cast handleTextInputKeyboard(({ final __callArgument12:Dynamic = target; __callArgument12; }), ({ final __callArgument13:Dynamic = data; __callArgument13; }), (cast { clipboardText: clipboardText, layout: layout, onCopy: onCopy } : Dynamic)) : Bool);
+    layout = _Runtime.coalesce((cast (cast getRichTextRuntime(({ final __callArgument22:Dynamic = target; __callArgument22; })) : RichTextRuntime) : { var textLayout:Null<TextLayoutResult>; }).textLayout, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED'));
+    return cast (cast handleTextInputKeyboard(({ final __callArgument24:Dynamic = target; __callArgument24; }), ({ final __callArgument25:Dynamic = data; __callArgument25; }), (cast { clipboardText: clipboardText, layout: layout, onCopy: onCopy } : Dynamic)) : Bool);
     return cast null;
   }
 
   public static function dispatchTextInputPointerDown(manager:flighthq.types.TextInputManager, target:RichText, x:Float, y:Float, extend:Bool = false, clickCount:Float = 1.0):Void {
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;
     var index:Float = cast _Runtime.UNDEFINED;
-    focusTextInput(({ final __callArgument14:Dynamic = manager; __callArgument14; }), ({ final __callArgument15:Dynamic = target; __callArgument15; }));
-    layout = (cast (cast getRichTextRuntime(({ final __callArgument16:Dynamic = target; __callArgument16; })) : RichTextRuntime) : { var textLayout:Null<TextLayoutResult>; }).textLayout;
+    focusTextInput(({ final __callArgument28:Dynamic = manager; __callArgument28; }), ({ final __callArgument29:Dynamic = target; __callArgument29; }));
+    layout = (cast (cast getRichTextRuntime(({ final __callArgument32:Dynamic = target; __callArgument32; })) : RichTextRuntime) : { var textLayout:Null<TextLayoutResult>; }).textLayout;
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return; }
-    index = (cast getTextInputCharacterIndexAtPoint(({ final __callArgument17:Dynamic = target; __callArgument17; }), ({ final __callArgument18:Dynamic = layout; __callArgument18; }), (cast x : Float), (cast y : Float)) : Float);
+    index = (cast getTextInputCharacterIndexAtPoint(({ final __callArgument34:Dynamic = target; __callArgument34; }), ({ final __callArgument35:Dynamic = layout; __callArgument35; }), (cast x : Float), (cast y : Float)) : Float);
     if ((cast ((cast clickCount : Float) >= (cast 3.0 : Float)) : Bool)) {
-      selectLineAtTextInputIndex(({ final __callArgument19:Dynamic = target; __callArgument19; }), (cast index : Float));
+      selectLineAtTextInputIndex(({ final __callArgument38:Dynamic = target; __callArgument38; }), (cast index : Float));
     } else { if ((cast _Runtime.strictEquals(clickCount, 2.0) : Bool)) {
-      selectWordAtTextInputIndex(({ final __callArgument20:Dynamic = target; __callArgument20; }), (cast index : Float));
+      selectWordAtTextInputIndex(({ final __callArgument40:Dynamic = target; __callArgument40; }), (cast index : Float));
     } else {
-      moveTextInputCaret(({ final __callArgument21:Dynamic = target; __callArgument21; }), (cast index : Float), (cast extend : Bool));
+      moveTextInputCaret(({ final __callArgument42:Dynamic = target; __callArgument42; }), (cast index : Float), (cast extend : Bool));
     } }
   }
 
@@ -94,26 +94,26 @@ class TextInputManager {
     var index:Float = cast _Runtime.UNDEFINED;
     target = manager.focused;
     if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !(cast (cast target : { var enabled:Bool; }).enabled : Bool) : Bool)) : Bool)) { return; }
-    layout = (cast (cast getRichTextRuntime(({ final __callArgument22:Dynamic = target; __callArgument22; })) : RichTextRuntime) : { var textLayout:Null<TextLayoutResult>; }).textLayout;
+    layout = (cast (cast getRichTextRuntime(({ final __callArgument44:Dynamic = target; __callArgument44; })) : RichTextRuntime) : { var textLayout:Null<TextLayoutResult>; }).textLayout;
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return; }
-    index = (cast getTextInputCharacterIndexAtPoint(({ final __callArgument23:Dynamic = target; __callArgument23; }), ({ final __callArgument24:Dynamic = layout; __callArgument24; }), (cast x : Float), (cast y : Float)) : Float);
-    moveTextInputCaret(({ final __callArgument25:Dynamic = target; __callArgument25; }), (cast index : Float), (cast true : Bool));
+    index = (cast getTextInputCharacterIndexAtPoint(({ final __callArgument46:Dynamic = target; __callArgument46; }), ({ final __callArgument47:Dynamic = layout; __callArgument47; }), (cast x : Float), (cast y : Float)) : Float);
+    moveTextInputCaret(({ final __callArgument50:Dynamic = target; __callArgument50; }), (cast index : Float), (cast true : Bool));
   }
 
   public static function dispatchTextInputWheel(manager:flighthq.types.TextInputManager, deltaLines:Float):Void {
     var target:Null<RichText> = cast _Runtime.UNDEFINED;
     target = manager.focused;
     if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast !(cast (cast target : { var enabled:Bool; }).enabled : Bool) : Bool)) : Bool)) { return; }
-    setRichTextScrollV(({ final __callArgument26:Dynamic = target; __callArgument26; }), (cast _Runtime.addNumbers((cast (cast target : { var data:RichTextData; }).data : { var scrollV:Float; }).scrollV, HxMath.round(deltaLines)) : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(setRichTextScrollV, cast ([({ final __callArgument53:Dynamic = target; __callArgument53; }), (cast _Runtime.addNumbers((cast (cast target : { var data:RichTextData; }).data : { var scrollV:Float; }).scrollV, HxMath.round(deltaLines)) : Float)] : Array<Dynamic>)) #else setRichTextScrollV(({ final __callArgument52:Dynamic = target; __callArgument52; }), (cast _Runtime.addNumbers((cast (cast target : { var data:RichTextData; }).data : { var scrollV:Float; }).scrollV, HxMath.round(deltaLines)) : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static function focusTextInput(manager:flighthq.types.TextInputManager, target:RichText):Void {
     if ((cast !_Runtime.strictEquals(manager.focused, target) : Bool)) {
       var previous:Null<RichText> = manager.focused;
-      if ((cast !_Runtime.strictEquals(previous, null) : Bool)) { TextInputManager.setTextInputFocused__textInputManager(({ final __callArgument27:Dynamic = previous; __callArgument27; }), (cast false : Bool)); }
+      if ((cast !_Runtime.strictEquals(previous, null) : Bool)) { TextInputManager.setTextInputFocused__textInputManager(({ final __callArgument54:Dynamic = previous; __callArgument54; }), (cast false : Bool)); }
     }
     (manager.focused = cast (target : Null<RichText>));
-    TextInputManager.setTextInputFocused__textInputManager(({ final __callArgument28:Dynamic = target; __callArgument28; }), (cast true : Bool));
+    TextInputManager.setTextInputFocused__textInputManager(({ final __callArgument56:Dynamic = target; __callArgument56; }), (cast true : Bool));
   }
 
   public static function getTextInputFocusTarget__textInputManager(manager:flighthq.types.TextInputManager):Null<RichText> {
@@ -127,7 +127,7 @@ class TextInputManager {
 
   public static function setTextInputFocused__textInputManager(target:RichText, focused:Bool):Void {
     var state:Null<TextInputState> = cast _Runtime.UNDEFINED;
-    state = (cast getTextInputState(({ final __callArgument29:Dynamic = target; __callArgument29; })) : Null<TextInputState>);
+    state = (cast getTextInputState(({ final __callArgument58:Dynamic = target; __callArgument58; })) : Null<TextInputState>);
     if ((cast !_Runtime.strictEquals(state, null) : Bool)) { ((cast state : { var focused:Bool; }).focused = cast (focused : Bool)); }
   }
 }

@@ -58,19 +58,19 @@ class DomNode2D {
     while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
       var current:Node2D = (cast flighthq._internal._StaticIndex.readArray(tempStack, --stackLength) : Node2D);
       if ((cast !(cast (cast current : { var enabled:Bool; }).enabled : Bool) : Bool)) { continue; }
-      var data:Null<RenderProxy2D> = (cast getRenderProxy2D(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = current; __callArgument2; })) : Null<RenderProxy2D>);
+      var data:Null<RenderProxy2D> = (cast getRenderProxy2D(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = current; __callArgument3; })) : Null<RenderProxy2D>);
       if ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
-      ({ final __optionalOwner4 = clipHooks; if (__optionalOwner4 != null) { final __optionalCall3 = (cast __optionalOwner4 : { var popClip:RenderState->RenderProxy2D->Node2D->Void; }).popClip; if (__optionalCall3 != null) __optionalCall3(state, data, current); } });
-      if ((cast !(cast (cast isRenderProxyVisible(({ final __callArgument5:Dynamic = data; __callArgument5; })) : Bool) : Bool) : Bool)) { continue; }
-      ({ final __optionalOwner7 = clipHooks; if (__optionalOwner7 != null) { final __optionalCall6 = (cast __optionalOwner7 : { var pushClip:RenderState->RenderProxy2D->Node2D->Void; }).pushClip; if (__optionalCall6 != null) __optionalCall6(state, data, current); } });
+      ({ final __optionalOwner7 = clipHooks; if (__optionalOwner7 != null) { final __optionalCall6 = (cast __optionalOwner7 : { var popClip:RenderState->RenderProxy2D->Node2D->Void; }).popClip; if (__optionalCall6 != null) __optionalCall6(state, data, current); } });
+      if ((cast !(cast (cast isRenderProxyVisible(({ final __callArgument8:Dynamic = data; __callArgument8; })) : Bool) : Bool) : Bool)) { continue; }
+      ({ final __optionalOwner11 = clipHooks; if (__optionalOwner11 != null) { final __optionalCall10 = (cast __optionalOwner11 : { var pushClip:RenderState->RenderProxy2D->Node2D->Void; }).pushClip; if (__optionalCall10 != null) __optionalCall10(state, data, current); } });
       if ((cast !_Runtime.strictEquals((cast data : RenderProxy2D).renderer, null) : Bool)) {
-        var result:{ var newLength:Float; var needsReconcile:Bool; } = (cast processDomNode(({ final __callArgument8:Dynamic = runtime; __callArgument8; }), ({ final __callArgument9:Dynamic = data; __callArgument9; }), (cast frameId : Float), ({ final __callArgument12:Dynamic = function():Void { (cast (cast data : RenderProxy2D).renderer : Renderer).submit(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = data; __callArgument11; })); }; __callArgument12; }), (cast newLength : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : { var newLength:Float; var needsReconcile:Bool; });
+        var result:{ var newLength:Float; var needsReconcile:Bool; } = (cast (#if js _Runtime.callValue(processDomNode, cast ([({ final __callArgument17:Dynamic = runtime; __callArgument17; }), ({ final __callArgument18:Dynamic = data; __callArgument18; }), (cast frameId : Float), ({ final __callArgument21:Dynamic = function():Void { (cast (cast data : RenderProxy2D).renderer : Renderer).submit(({ final __callArgument19:Dynamic = state; __callArgument19; }), ({ final __callArgument20:Dynamic = data; __callArgument20; })); }; __callArgument21; }), (cast newLength : Float)] : Array<Dynamic>)) #else processDomNode(({ final __callArgument12:Dynamic = runtime; __callArgument12; }), ({ final __callArgument13:Dynamic = data; __callArgument13; }), (cast frameId : Float), ({ final __callArgument16:Dynamic = function():Void { (cast (cast data : RenderProxy2D).renderer : Renderer).submit(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = data; __callArgument15; })); }; __callArgument16; }), (cast newLength : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : { var newLength:Float; var needsReconcile:Bool; });
         (newLength = cast ((cast result : { var newLength:Float; var needsReconcile:Bool; }).newLength : Dynamic));
         if ((cast (cast result : { var newLength:Float; var needsReconcile:Bool; }).needsReconcile : Bool)) { (needsReconcile = cast (true : Dynamic)); }
-        ({ final __optionalOwner14 = applyClip; if (__optionalOwner14 != null) { final __optionalCall13 = (cast __optionalOwner14 : { var apply:DomRenderState->RenderProxy2D->Void; }).apply; if (__optionalCall13 != null) __optionalCall13(state, data); } });
+        ({ final __optionalOwner23 = applyClip; if (__optionalOwner23 != null) { final __optionalCall22 = (cast __optionalOwner23 : { var apply:DomRenderState->RenderProxy2D->Void; }).apply; if (__optionalCall22 != null) __optionalCall22(state, data); } });
       }
       if ((cast (cast data : RenderProxy2D).traverseChildren : Bool)) {
-        var children:Null<Array<Node<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime(({ final __callArgument15:Dynamic = current; __callArgument15; })) : Node2DRuntime), 'children');
+        var children:Null<Array<Node<Node2DTraits>>> = _Runtime.field((cast getNode2DRuntime(({ final __callArgument24:Dynamic = current; __callArgument24; })) : Node2DRuntime), 'children');
         if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
           {
             var i:Float = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
@@ -82,10 +82,10 @@ class DomNode2D {
         }
       }
     }
-    ({ final __optionalOwner17 = clipHooks; if (__optionalOwner17 != null) { final __optionalCall16 = (cast __optionalOwner17 : { var finalize:RenderState->Void; }).finalize; if (__optionalCall16 != null) __optionalCall16(state); } });
-    if ((cast (cast hasDomStructureChanged(({ final __callArgument18:Dynamic = runtime; __callArgument18; }), (cast newLength : Float), (cast needsReconcile : Bool)) : Bool) : Bool)) {
-      reconcileDomContainer(({ final __callArgument19:Dynamic = container; __callArgument19; }), ({ final __callArgument20:Dynamic = runtime; __callArgument20; }), (cast newLength : Float));
+    ({ final __optionalOwner27 = clipHooks; if (__optionalOwner27 != null) { final __optionalCall26 = (cast __optionalOwner27 : { var finalize:RenderState->Void; }).finalize; if (__optionalCall26 != null) __optionalCall26(state); } });
+    if ((cast (cast hasDomStructureChanged(({ final __callArgument28:Dynamic = runtime; __callArgument28; }), (cast newLength : Float), (cast needsReconcile : Bool)) : Bool) : Bool)) {
+      reconcileDomContainer(({ final __callArgument30:Dynamic = container; __callArgument30; }), ({ final __callArgument31:Dynamic = runtime; __callArgument31; }), (cast newLength : Float));
     }
-    swapDomOrderLists(({ final __callArgument21:Dynamic = runtime; __callArgument21; }), (cast newLength : Float));
+    swapDomOrderLists(({ final __callArgument34:Dynamic = runtime; __callArgument34; }), (cast newLength : Float));
   }
 }

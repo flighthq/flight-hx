@@ -88,18 +88,18 @@ class Md5Parse {
     var contradictions:Float = cast _Runtime.UNDEFINED;
     floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
     tangentOffset = (cast getVertexAttributeFloatOffset(geometry.layout, ({ final __callArgument0:Dynamic = 'tangent'; __callArgument0; })) : Float);
-    uvOffset = (cast getVertexAttributeFloatOffset(geometry.layout, ({ final __callArgument1:Dynamic = 'uv0'; __callArgument1; })) : Float);
+    uvOffset = (cast getVertexAttributeFloatOffset(geometry.layout, ({ final __callArgument2:Dynamic = 'uv0'; __callArgument2; })) : Float);
     if ((cast ((cast ((cast ((cast floatsPerVertex : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast tangentOffset : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast uvOffset : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     vertices = geometry.vertices;
     vertexCount = HxMath.floor(_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), floatsPerVertex));
-    triangleCount = (cast getMeshGeometryTriangleCount(({ final __callArgument2:Dynamic = geometry; __callArgument2; })) : Float);
+    triangleCount = (cast getMeshGeometryTriangleCount(({ final __callArgument4:Dynamic = geometry; __callArgument4; })) : Float);
     corner = (cast { i0: 0.0, i1: 0.0, i2: 0.0 });
     resolved = new flighthq._internal._Int8Array(vertexCount);
     contradictions = 0.0;
     {
       var triangle:Float = 0.0;
       while ((cast ((cast triangle : Float) < (cast triangleCount : Float)) : Bool)) {
-        if ((cast !(cast (cast getMeshGeometryTriangleVertexIndices(({ final __callArgument3:Dynamic = corner; __callArgument3; }), ({ final __callArgument4:Dynamic = geometry; __callArgument4; }), (cast triangle : Float)) : Bool) : Bool) : Bool)) { triangle++; continue; }
+        if ((cast !(cast (cast getMeshGeometryTriangleVertexIndices(({ final __callArgument6:Dynamic = corner; __callArgument6; }), ({ final __callArgument7:Dynamic = geometry; __callArgument7; }), (cast triangle : Float)) : Bool) : Bool) : Bool)) { triangle++; continue; }
         var u0:Float = (((cast corner : MeshTriangleVertexIndices).i0 * floatsPerVertex) + uvOffset);
         var u1:Float = (((cast corner : MeshTriangleVertexIndices).i1 * floatsPerVertex) + uvOffset);
         var u2:Float = (((cast corner : MeshTriangleVertexIndices).i2 * floatsPerVertex) + uvOffset);
@@ -113,7 +113,7 @@ class Md5Parse {
       }
     }
     if ((cast ((cast contradictions : Float) > (cast 0.0 : Float)) : Bool)) {
-      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument7:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument7; }), (cast 'md5mesh.tangent-handedness-contradiction' : String), (cast '' : String), ({ final __callArgument8:Dynamic = { firstVertices: contradictions }; __callArgument8; }));
+      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument12:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument12; }), (cast 'md5mesh.tangent-handedness-contradiction' : String), (cast '' : String), ({ final __callArgument13:Dynamic = { firstVertices: contradictions }; __callArgument13; }));
     }
     {
       var vertex:Float = 0.0;
@@ -126,7 +126,7 @@ class Md5Parse {
   }
 
   public static function createScene3DFromMd5Mesh(source:String, ?diagnostics:Array<ImportDiagnostic>):Scene3D {
-    return cast (cast createScene3DFromDocument((cast parseMd5Mesh((cast source : String), ({ final __callArgument9:Dynamic = diagnostics; __callArgument9; })) : Scene3DDocument), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Scene3D);
+    return cast (cast (#if js _Runtime.callValue(createScene3DFromDocument, cast ([(cast parseMd5Mesh((cast source : String), ({ final __callArgument18:Dynamic = diagnostics; __callArgument18; })) : Scene3DDocument)] : Array<Dynamic>)) #else createScene3DFromDocument((cast parseMd5Mesh((cast source : String), ({ final __callArgument16:Dynamic = diagnostics; __callArgument16; })) : Scene3DDocument), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Scene3D);
     return cast null;
   }
 
@@ -134,14 +134,14 @@ class Md5Parse {
     var scene:Scene3D = cast _Runtime.UNDEFINED;
     var joints:Null<Array<Node3D>> = cast _Runtime.UNDEFINED;
     var clip:Null<AnimationClip> = cast _Runtime.UNDEFINED;
-    scene = (cast createScene3DFromMd5Mesh((cast meshSource : String), ({ final __callArgument10:Dynamic = diagnostics; __callArgument10; })) : Scene3D);
+    scene = (cast createScene3DFromMd5Mesh((cast meshSource : String), ({ final __callArgument20:Dynamic = diagnostics; __callArgument20; })) : Scene3D);
     if ((cast _Runtime.looseEquals(animSource, null) : Bool)) { return cast scene; }
     joints = (cast findScene3DSkeletonJoints(scene.root) : Null<Array<Node3D>>);
     if ((cast _Runtime.strictEquals(joints, null) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument11:Dynamic = diagnostics; __callArgument11; }), ({ final __callArgument12:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument12; }), (cast 'md5mesh.animation-no-skeleton' : String), (cast 'importMd5Mesh' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+      (#if js _Runtime.callValue(reportImportDiagnostic, cast ([({ final __callArgument24:Dynamic = diagnostics; __callArgument24; }), ({ final __callArgument25:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument25; }), (cast 'md5mesh.animation-no-skeleton' : String), (cast 'importMd5Mesh' : String)] : Array<Dynamic>)) #else reportImportDiagnostic(({ final __callArgument22:Dynamic = diagnostics; __callArgument22; }), ({ final __callArgument23:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument23; }), (cast 'md5mesh.animation-no-skeleton' : String), (cast 'importMd5Mesh' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
       return cast scene;
     }
-    clip = (cast parseMd5Anim((cast animSource : String), (cast joints : Dynamic), ({ final __callArgument13:Dynamic = diagnostics; __callArgument13; })) : Null<AnimationClip>);
+    clip = (cast parseMd5Anim((cast animSource : String), (cast joints : Dynamic), ({ final __callArgument26:Dynamic = diagnostics; __callArgument26; })) : Null<AnimationClip>);
     if ((cast !_Runtime.strictEquals(clip, null) : Bool)) { ((cast scene.animations : { var default_:AnimationClip; }).default_ = clip); }
     return cast scene;
     return cast null;
@@ -170,7 +170,7 @@ class Md5Parse {
       if ((cast StringTools.startsWith(line, 'MD5Version') : Bool)) {
         var version:Float = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(_Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)), 1.0), 10.0] : Array<Dynamic>));
         if ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([version] : Array<Dynamic>)) : Bool) && (cast !_Runtime.strictEquals(version, 10.0) : Bool)) : Bool)) {
-          Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument14:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument14; }), (cast 'md5mesh.unsupported-version' : String), (cast '' : String), ({ final __callArgument15:Dynamic = { version: version }; __callArgument15; }));
+          Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument28:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument28; }), (cast 'md5mesh.unsupported-version' : String), (cast '' : String), ({ final __callArgument29:Dynamic = { version: version }; __callArgument29; }));
         }
         continue;
       }
@@ -178,22 +178,22 @@ class Md5Parse {
         continue;
       }
       if ((cast _Runtime.strictEquals(line, 'joints {') : Bool)) {
-        (i = cast ((cast Md5Parse.parseJointsBlock__md5Parse(({ final __callArgument16:Dynamic = lines; __callArgument16; }), (cast i : Float), ({ final __callArgument17:Dynamic = joints; __callArgument17; }), (cast md5Drops : Dynamic)) : Float) : Dynamic));
+        (i = cast ((cast Md5Parse.parseJointsBlock__md5Parse(({ final __callArgument32:Dynamic = lines; __callArgument32; }), (cast i : Float), ({ final __callArgument33:Dynamic = joints; __callArgument33; }), (cast md5Drops : Dynamic)) : Float) : Dynamic));
         continue;
       }
       if ((cast _Runtime.strictEquals(line, 'mesh {') : Bool)) {
-        var mesh:{ var nextLine:Float; var result:Md5Mesh; } = (cast Md5Parse.parseMeshBlock__md5Parse(({ final __callArgument18:Dynamic = lines; __callArgument18; }), (cast i : Float), (cast md5Drops : Dynamic)) : { var nextLine:Float; var result:Md5Mesh; });
+        var mesh:{ var nextLine:Float; var result:Md5Mesh; } = (cast Md5Parse.parseMeshBlock__md5Parse(({ final __callArgument36:Dynamic = lines; __callArgument36; }), (cast i : Float), (cast md5Drops : Dynamic)) : { var nextLine:Float; var result:Md5Mesh; });
         (i = cast ((cast mesh : { var nextLine:Float; var result:Md5Mesh; }).nextLine : Dynamic));
         _Runtime.callProperty(meshes, 'push', cast ([(cast mesh : { var nextLine:Float; var result:Md5Mesh; }).result] : Array<Dynamic>));
         continue;
       }
     }
     if ((cast ((cast _Runtime.strictEquals(_Runtime.field(joints, 'length'), 0.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(meshes, 'length'), 0.0) : Bool)) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument19:Dynamic = diagnostics; __callArgument19; }), ({ final __callArgument20:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument20; }), (cast 'md5mesh.no-data' : String), (cast 'parseMd5Mesh' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+      (#if js _Runtime.callValue(reportImportDiagnostic, cast ([({ final __callArgument40:Dynamic = diagnostics; __callArgument40; }), ({ final __callArgument41:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument41; }), (cast 'md5mesh.no-data' : String), (cast 'parseMd5Mesh' : String)] : Array<Dynamic>)) #else reportImportDiagnostic(({ final __callArgument38:Dynamic = diagnostics; __callArgument38; }), ({ final __callArgument39:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument39; }), (cast 'md5mesh.no-data' : String), (cast 'parseMd5Mesh' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     }
     if ((cast ((cast _Runtime.field(joints, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       (skinIndex = cast (_Runtime.field(document.skins, 'length') : Dynamic));
-      _Runtime.callProperty(document.skins, 'push', cast ([(cast Md5Parse.buildMd5SkeletonDocument__md5Parse(({ final __callArgument21:Dynamic = joints; __callArgument21; }), ({ final __callArgument22:Dynamic = document; __callArgument22; }), (cast md5Drops : Dynamic)) : Scene3DDocumentSkin)] : Array<Dynamic>));
+      _Runtime.callProperty(document.skins, 'push', cast ([(cast Md5Parse.buildMd5SkeletonDocument__md5Parse(({ final __callArgument42:Dynamic = joints; __callArgument42; }), ({ final __callArgument43:Dynamic = document; __callArgument43; }), (cast md5Drops : Dynamic)) : Scene3DDocumentSkin)] : Array<Dynamic>));
     }
     truncatedVertexCount = 0.0;
     maxObservedInfluences = 0.0;
@@ -215,12 +215,12 @@ class Md5Parse {
               while ((cast ((cast w : Float) < (cast vert.countWeights : Float)) : Bool)) {
                 var weightIndex:Float = (vert.startWeight + w);
                 if ((cast ((cast weightIndex : Float) >= (cast _Runtime.field(md5Mesh.weights, 'length') : Float)) : Bool)) {
-                  Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument23:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument23; }), (cast 'md5mesh.vertex-weight-out-of-range' : String), (cast '' : String), ({ final __callArgument24:Dynamic = { firstIndex: weightIndex, firstVertex: v }; __callArgument24; }));
+                  Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument46:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument46; }), (cast 'md5mesh.vertex-weight-out-of-range' : String), (cast '' : String), ({ final __callArgument47:Dynamic = { firstIndex: weightIndex, firstVertex: v }; __callArgument47; }));
                   break;
                 }
                 var weight:Md5Weight = flighthq._internal._StaticIndex.readArray(md5Mesh.weights, weightIndex);
                 if ((cast ((cast ((cast weight.jointIndex : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast weight.jointIndex : Float) >= (cast _Runtime.field(joints, 'length') : Float)) : Bool)) : Bool)) {
-                  Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument25:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument25; }), (cast 'md5mesh.weight-joint-out-of-range' : String), (cast '' : String), ({ final __callArgument26:Dynamic = { firstIndex: weight.jointIndex, firstWeight: weightIndex }; __callArgument26; }));
+                  Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument50:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument50; }), (cast 'md5mesh.weight-joint-out-of-range' : String), (cast '' : String), ({ final __callArgument51:Dynamic = { firstIndex: weight.jointIndex, firstWeight: weightIndex }; __callArgument51; }));
                   w++;
                   continue;
                 }
@@ -259,7 +259,7 @@ class Md5Parse {
                 i++;
               }
             }
-            packSkinInfluences(({ final __callArgument27:Dynamic = influences; __callArgument27; }), ({ final __callArgument28:Dynamic = jointScratch; __callArgument28; }), ({ final __callArgument29:Dynamic = weightScratch; __callArgument29; }));
+            packSkinInfluences(({ final __callArgument54:Dynamic = influences; __callArgument54; }), ({ final __callArgument55:Dynamic = jointScratch; __callArgument55; }), ({ final __callArgument56:Dynamic = weightScratch; __callArgument56; }));
             _Runtime.pushMany(vertices, cast ([px, py, pz] : Array<Dynamic>));
             _Runtime.pushMany(vertices, cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
             _Runtime.pushMany(vertices, cast ([0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
@@ -269,7 +269,7 @@ class Md5Parse {
             v++;
           }
         }
-        convertPositionsZUpToYUp(({ final __callArgument30:Dynamic = vertices; __callArgument30; }), (cast SKINNED_FLOATS_PER_VERTEX : Float), (cast 0.0 : Float));
+        convertPositionsZUpToYUp(({ final __callArgument60:Dynamic = vertices; __callArgument60; }), (cast SKINNED_FLOATS_PER_VERTEX : Float), (cast 0.0 : Float));
         var vertexCount:Float = _Runtime.field(md5Mesh.vertices, 'length');
         {
           var t:Float = 0.0;
@@ -278,7 +278,7 @@ class Md5Parse {
             var v1:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast md5Mesh.indices : Array<Float>), (cast (t + 1.0) : Float));
             var v2:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast md5Mesh.indices : Array<Float>), (cast (t + 2.0) : Float));
             if ((cast ((cast ((cast ((cast ((cast ((cast ((cast v0 : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast v1 : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast v2 : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast v0 : Float) >= (cast vertexCount : Float)) : Bool)) : Bool) || (cast ((cast v1 : Float) >= (cast vertexCount : Float)) : Bool)) : Bool) || (cast ((cast v2 : Float) >= (cast vertexCount : Float)) : Bool)) : Bool)) {
-              Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument31:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument31; }), (cast 'md5mesh.triangle-vertex-out-of-range' : String), (cast '' : String), ({ final __callArgument32:Dynamic = { firstCount: vertexCount, firstIndex: ((cast ((cast ((cast v0 : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast v0 : Float) >= (cast vertexCount : Float)) : Bool)) : Bool) ? (cast v0 : Dynamic) : (cast ((cast ((cast ((cast v1 : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast v1 : Float) >= (cast vertexCount : Float)) : Bool)) : Bool) ? (cast v1 : Dynamic) : (cast v2 : Dynamic)) : Dynamic)), firstTriangle: (t / 3.0) }; __callArgument32; }));
+              Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument62:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument62; }), (cast 'md5mesh.triangle-vertex-out-of-range' : String), (cast '' : String), ({ final __callArgument63:Dynamic = { firstCount: vertexCount, firstIndex: ((cast ((cast ((cast v0 : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast v0 : Float) >= (cast vertexCount : Float)) : Bool)) : Bool) ? (cast v0 : Dynamic) : (cast ((cast ((cast ((cast v1 : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast v1 : Float) >= (cast vertexCount : Float)) : Bool)) : Bool) ? (cast v1 : Dynamic) : (cast v2 : Dynamic)) : Dynamic)), firstTriangle: (t / 3.0) }; __callArgument63; }));
               (t = cast ((t + 3.0) : Dynamic));
               continue;
             }
@@ -286,16 +286,16 @@ class Md5Parse {
             (t = cast ((t + 3.0) : Dynamic));
           }
         }
-        reverseTriangleWinding(({ final __callArgument33:Dynamic = indices; __callArgument33; }));
+        reverseTriangleWinding(({ final __callArgument66:Dynamic = indices; __callArgument66; }));
         if ((cast ((cast _Runtime.field(indices, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-          var geometry:MeshGeometry = (cast createMeshGeometry(({ final __callArgument34:Dynamic = { indices: new flighthq._internal._UInt32Array(indices), layout: CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT, vertices: new flighthq._internal._Float32Array(vertices) }; __callArgument34; })) : MeshGeometry);
-          var positionGroups:flighthq._internal._UInt32Array = (cast computeMeshGeometryPositionGroups(({ final __callArgument35:Dynamic = geometry; __callArgument35; })) : flighthq._internal._UInt32Array);
-          computeMeshGeometryNormals(({ final __callArgument36:Dynamic = geometry; __callArgument36; }), ({ final __callArgument37:Dynamic = geometry; __callArgument37; }), ({ final __callArgument38:Dynamic = positionGroups; __callArgument38; }));
-          computeMeshGeometryTangents(({ final __callArgument39:Dynamic = geometry; __callArgument39; }), ({ final __callArgument40:Dynamic = geometry; __callArgument40; }), ({ final __callArgument41:Dynamic = positionGroups; __callArgument41; }));
-          canonicalizeMd5TangentHandedness(({ final __callArgument42:Dynamic = geometry; __callArgument42; }), (cast md5Drops : Dynamic));
+          var geometry:MeshGeometry = (cast createMeshGeometry(({ final __callArgument68:Dynamic = { indices: new flighthq._internal._UInt32Array(indices), layout: CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT, vertices: new flighthq._internal._Float32Array(vertices) }; __callArgument68; })) : MeshGeometry);
+          var positionGroups:flighthq._internal._UInt32Array = (cast computeMeshGeometryPositionGroups(({ final __callArgument70:Dynamic = geometry; __callArgument70; })) : flighthq._internal._UInt32Array);
+          computeMeshGeometryNormals(({ final __callArgument72:Dynamic = geometry; __callArgument72; }), ({ final __callArgument73:Dynamic = geometry; __callArgument73; }), ({ final __callArgument74:Dynamic = positionGroups; __callArgument74; }));
+          computeMeshGeometryTangents(({ final __callArgument78:Dynamic = geometry; __callArgument78; }), ({ final __callArgument79:Dynamic = geometry; __callArgument79; }), ({ final __callArgument80:Dynamic = positionGroups; __callArgument80; }));
+          canonicalizeMd5TangentHandedness(({ final __callArgument84:Dynamic = geometry; __callArgument84; }), (cast md5Drops : Dynamic));
           var meshMaterials:Array<Float> = (cast cast ([] : Array<Dynamic>));
           if ((cast ((cast _Runtime.field(md5Mesh.shader, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-            var material:Material = (cast (cast createBlinnPhongMaterial((cast { diffuseMap: (cast createExternalTextureRef((cast md5Mesh.shader : String), ({ final __callArgument43:Dynamic = null; __callArgument43; }), (cast document.resources : Dynamic)) : Texture) } : Dynamic)) : flighthq._internal._Any) : Material);
+            var material:Material = (cast (cast createBlinnPhongMaterial((cast { diffuseMap: (cast createExternalTextureRef((cast md5Mesh.shader : String), ({ final __callArgument86:Dynamic = null; __callArgument86; }), (cast document.resources : Dynamic)) : Texture) } : Dynamic)) : flighthq._internal._Any) : Material);
             ((cast material : Material).name = md5Mesh.shader);
             _Runtime.callProperty(meshMaterials, 'push', cast ([_Runtime.field(document.materials, 'length')] : Array<Dynamic>));
             _Runtime.callProperty(document.materials, 'push', cast ([(cast (cast material : flighthq._internal._Any) : MaterialLike)] : Array<Dynamic>));
@@ -308,17 +308,17 @@ class Md5Parse {
           _Runtime.callProperty(document.nodes, 'push', cast ([{ children: cast ([] : Array<Dynamic>), kind: MeshKind, mesh: meshIndex, transform: (cast createTransform3D() : Transform3D) }] : Array<Dynamic>));
           _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.scenes, 0.0) : { var rootNodes:Array<Float>; }).rootNodes, 'push', cast ([nodeIndex] : Array<Dynamic>));
         } else {
-          Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument44:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument44; }), (cast 'md5mesh.mesh-empty' : String), (cast '' : String), ({ final __callArgument45:Dynamic = {  }; __callArgument45; }));
+          Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument90:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument90; }), (cast 'md5mesh.mesh-empty' : String), (cast '' : String), ({ final __callArgument91:Dynamic = {  }; __callArgument91; }));
         }
         m++;
       }
     }
     if ((cast ((cast truncatedVertexCount : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument46:Dynamic = diagnostics; __callArgument46; }), ({ final __callArgument47:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument47; }), (cast 'md5mesh.vertex-over-influenced' : String), (cast 'parseMd5Mesh' : String), ({ final __callArgument48:Dynamic = { count: truncatedVertexCount, maxInfluences: maxObservedInfluences }; __callArgument48; }));
+      reportImportDiagnostic(({ final __callArgument94:Dynamic = diagnostics; __callArgument94; }), ({ final __callArgument95:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument95; }), (cast 'md5mesh.vertex-over-influenced' : String), (cast 'parseMd5Mesh' : String), ({ final __callArgument96:Dynamic = { count: truncatedVertexCount, maxInfluences: maxObservedInfluences }; __callArgument96; }));
     }
     if ((cast !_Runtime.strictEquals(md5Drops, null) : Bool)) {
       for (tally in _Runtime.iterable(((cast md5Drops : flighthq._internal._Map<String, Md5DropTally__md5Parse>).values()))) {
-        reportImportDiagnostic(({ final __callArgument51:Dynamic = diagnostics; __callArgument51; }), (cast tally : Md5DropTally__md5Parse).severity, (cast (cast tally : Md5DropTally__md5Parse).kind : String), (cast 'parseMd5Mesh' : String), ({ final __callArgument52:Dynamic = _Runtime.mergeObjects([(cast tally : Md5DropTally__md5Parse).detail, { count: (cast tally : Md5DropTally__md5Parse).count }]); __callArgument52; }));
+        reportImportDiagnostic(({ final __callArgument102:Dynamic = diagnostics; __callArgument102; }), (cast tally : Md5DropTally__md5Parse).severity, (cast (cast tally : Md5DropTally__md5Parse).kind : String), (cast 'parseMd5Mesh' : String), ({ final __callArgument103:Dynamic = _Runtime.mergeObjects([(cast tally : Md5DropTally__md5Parse).detail, { count: (cast tally : Md5DropTally__md5Parse).count }]); __callArgument103; }));
       }
     }
     return cast document;
@@ -344,8 +344,8 @@ class Md5Parse {
       _Runtime.pushMany(jointPositions, cast ([joint.positionX, joint.positionY, joint.positionZ] : Array<Dynamic>));
       _Runtime.pushMany(jointOrientations, cast ([joint.orientationX, joint.orientationY, joint.orientationZ, joint.orientationW] : Array<Dynamic>));
     }
-    convertPositionsZUpToYUp(({ final __callArgument55:Dynamic = jointPositions; __callArgument55; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    convertQuaternionsZUpToYUp(({ final __callArgument56:Dynamic = jointOrientations; __callArgument56; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(convertPositionsZUpToYUp, cast ([({ final __callArgument109:Dynamic = jointPositions; __callArgument109; })] : Array<Dynamic>)) #else convertPositionsZUpToYUp(({ final __callArgument108:Dynamic = jointPositions; __callArgument108; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(convertQuaternionsZUpToYUp, cast ([({ final __callArgument111:Dynamic = jointOrientations; __callArgument111; })] : Array<Dynamic>)) #else convertQuaternionsZUpToYUp(({ final __callArgument110:Dynamic = jointOrientations; __callArgument110; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     jointNodeIndices = (cast cast ([] : Array<Dynamic>));
     {
       var j:Float = 0.0;
@@ -355,9 +355,9 @@ class Md5Parse {
         j++;
       }
     }
-    parentConj = (cast createQuaternion(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Quaternion);
+    parentConj = (cast (#if js _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>)) #else createQuaternion(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Quaternion);
     relPos = (cast { x: 0.0, y: 0.0, z: 0.0 });
-    relQuat = (cast createQuaternion(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Quaternion);
+    relQuat = (cast (#if js _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>)) #else createQuaternion(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Quaternion);
     {
       var j:Float = 0.0;
       while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
@@ -371,12 +371,12 @@ class Md5Parse {
         var localQy:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointOrientations : Array<Float>), (cast (qi + 1.0) : Float));
         var localQz:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointOrientations : Array<Float>), (cast (qi + 2.0) : Float));
         var localQw:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointOrientations : Array<Float>), (cast (qi + 3.0) : Float));
-        if ((cast ((cast ((cast ((cast ((cast parentIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast parentIndex : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) : Bool) && (cast !_Runtime.strictEquals(parentIndex, j) : Bool)) : Bool) && (cast !(cast (cast Md5Parse.isMd5JointCycle__md5Parse(({ final __callArgument57:Dynamic = joints; __callArgument57; }), (cast j : Float)) : Bool) : Bool) : Bool)) : Bool)) {
+        if ((cast ((cast ((cast ((cast ((cast parentIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast parentIndex : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) : Bool) && (cast !_Runtime.strictEquals(parentIndex, j) : Bool)) : Bool) && (cast !(cast (cast Md5Parse.isMd5JointCycle__md5Parse(({ final __callArgument112:Dynamic = joints; __callArgument112; }), (cast j : Float)) : Bool) : Bool) : Bool)) : Bool)) {
           var ppi:Float = (parentIndex * 3.0);
           var pqi:Float = (parentIndex * 4.0);
-          conjugateQuaternion(({ final __callArgument58:Dynamic = parentConj; __callArgument58; }), ({ final __callArgument59:Dynamic = { w: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointOrientations : Array<Float>), (cast (pqi + 3.0) : Float)), x: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointOrientations : Array<Float>), (cast pqi : Float)), y: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointOrientations : Array<Float>), (cast (pqi + 1.0) : Float)), z: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointOrientations : Array<Float>), (cast (pqi + 2.0) : Float)) }; __callArgument59; }));
-          rotateVector3ByQuaternion(({ final __callArgument60:Dynamic = relPos; __callArgument60; }), ({ final __callArgument61:Dynamic = { x: (localPx - flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointPositions : Array<Float>), (cast ppi : Float))), y: (localPy - flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointPositions : Array<Float>), (cast (ppi + 1.0) : Float))), z: (localPz - flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointPositions : Array<Float>), (cast (ppi + 2.0) : Float))) }; __callArgument61; }), ({ final __callArgument62:Dynamic = parentConj; __callArgument62; }));
-          multiplyQuaternion(({ final __callArgument63:Dynamic = relQuat; __callArgument63; }), ({ final __callArgument64:Dynamic = parentConj; __callArgument64; }), ({ final __callArgument65:Dynamic = { w: localQw, x: localQx, y: localQy, z: localQz }; __callArgument65; }));
+          conjugateQuaternion(({ final __callArgument114:Dynamic = parentConj; __callArgument114; }), ({ final __callArgument115:Dynamic = { w: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointOrientations : Array<Float>), (cast (pqi + 3.0) : Float)), x: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointOrientations : Array<Float>), (cast pqi : Float)), y: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointOrientations : Array<Float>), (cast (pqi + 1.0) : Float)), z: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointOrientations : Array<Float>), (cast (pqi + 2.0) : Float)) }; __callArgument115; }));
+          rotateVector3ByQuaternion(({ final __callArgument118:Dynamic = relPos; __callArgument118; }), ({ final __callArgument119:Dynamic = { x: (localPx - flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointPositions : Array<Float>), (cast ppi : Float))), y: (localPy - flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointPositions : Array<Float>), (cast (ppi + 1.0) : Float))), z: (localPz - flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointPositions : Array<Float>), (cast (ppi + 2.0) : Float))) }; __callArgument119; }), ({ final __callArgument120:Dynamic = parentConj; __callArgument120; }));
+          multiplyQuaternion(({ final __callArgument124:Dynamic = relQuat; __callArgument124; }), ({ final __callArgument125:Dynamic = parentConj; __callArgument125; }), ({ final __callArgument126:Dynamic = { w: localQw, x: localQx, y: localQy, z: localQz }; __callArgument126; }));
           (localPx = cast ((cast relPos : { var x:Float; var y:Float; var z:Float; }).x : Dynamic));
           (localPy = cast ((cast relPos : { var x:Float; var y:Float; var z:Float; }).y : Dynamic));
           (localPz = cast ((cast relPos : { var x:Float; var y:Float; var z:Float; }).z : Dynamic));
@@ -385,11 +385,11 @@ class Md5Parse {
           (localQz = cast (relQuat.z : Dynamic));
           (localQw = cast (relQuat.w : Dynamic));
         } else { if ((cast !_Runtime.strictEquals(parentIndex, -1.0) : Bool)) {
-          Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument66:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument66; }), (cast 'md5mesh.joint-parent-out-of-range' : String), (cast '' : String), ({ final __callArgument67:Dynamic = { firstJoint: j, firstParent: parentIndex }; __callArgument67; }));
+          Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument130:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument130; }), (cast 'md5mesh.joint-parent-out-of-range' : String), (cast '' : String), ({ final __callArgument131:Dynamic = { firstJoint: j, firstParent: parentIndex }; __callArgument131; }));
         } }
         var transform:Transform3D = (cast flighthq._internal._StaticIndex.readArray(document.nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))) : { var transform:Transform3D; }).transform;
-        setVector3(({ final __callArgument68:Dynamic = (cast transform : Transform3D).position; __callArgument68; }), (cast localPx : Float), (cast localPy : Float), (cast localPz : Float));
-        setQuaternion(({ final __callArgument69:Dynamic = (cast transform : Transform3D).rotation; __callArgument69; }), (cast localQx : Float), (cast localQy : Float), (cast localQz : Float), (cast localQw : Float));
+        setVector3(({ final __callArgument134:Dynamic = (cast transform : Transform3D).position; __callArgument134; }), (cast localPx : Float), (cast localPy : Float), (cast localPz : Float));
+        setQuaternion(({ final __callArgument136:Dynamic = (cast transform : Transform3D).rotation; __callArgument136; }), (cast localQx : Float), (cast localQy : Float), (cast localQz : Float), (cast localQw : Float));
         j++;
       }
     }
@@ -397,7 +397,7 @@ class Md5Parse {
       var j:Float = 0.0;
       while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
         var parentIndex:Float = (cast flighthq._internal._StaticIndex.readArray(joints, j) : { var parentIndex:Float; }).parentIndex;
-        if ((cast ((cast ((cast ((cast ((cast parentIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast parentIndex : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) : Bool) && (cast !_Runtime.strictEquals(parentIndex, j) : Bool)) : Bool) && (cast !(cast (cast Md5Parse.isMd5JointCycle__md5Parse(({ final __callArgument70:Dynamic = joints; __callArgument70; }), (cast j : Float)) : Bool) : Bool) : Bool)) : Bool)) {
+        if ((cast ((cast ((cast ((cast ((cast parentIndex : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast parentIndex : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) : Bool) && (cast !_Runtime.strictEquals(parentIndex, j) : Bool)) : Bool) && (cast !(cast (cast Md5Parse.isMd5JointCycle__md5Parse(({ final __callArgument138:Dynamic = joints; __callArgument138; }), (cast j : Float)) : Bool) : Bool) : Bool)) : Bool)) {
           _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast parentIndex : Float))) : { var children:Array<Float>; }).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
         } else {
           _Runtime.callProperty((cast flighthq._internal._StaticIndex.readArray(document.nodes, skeletonRootIndex) : { var children:Array<Float>; }).children, 'push', cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointNodeIndices : Array<Float>), (cast j : Float))] : Array<Dynamic>));
@@ -406,15 +406,15 @@ class Md5Parse {
       }
     }
     inverseBind = (cast cast ([] : Array<Dynamic>));
-    bindWorld = (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4);
+    bindWorld = (cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix4);
     {
       var j:Float = 0.0;
       while ((cast ((cast j : Float) < (cast _Runtime.field(joints, 'length') : Float)) : Bool)) {
         var pi:Float = (j * 3.0);
         var qi:Float = (j * 4.0);
-        composeMatrix4(({ final __callArgument71:Dynamic = bindWorld; __callArgument71; }), ({ final __callArgument72:Dynamic = { x: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointPositions : Array<Float>), (cast pi : Float)), y: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointPositions : Array<Float>), (cast (pi + 1.0) : Float)), z: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointPositions : Array<Float>), (cast (pi + 2.0) : Float)) }; __callArgument72; }), ({ final __callArgument73:Dynamic = { w: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointOrientations : Array<Float>), (cast (qi + 3.0) : Float)), x: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointOrientations : Array<Float>), (cast qi : Float)), y: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointOrientations : Array<Float>), (cast (qi + 1.0) : Float)), z: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointOrientations : Array<Float>), (cast (qi + 2.0) : Float)) }; __callArgument73; }), ({ final __callArgument74:Dynamic = { x: 1.0, y: 1.0, z: 1.0 }; __callArgument74; }));
-        var inv:Matrix4 = (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4);
-        (cast inverseMatrix4(({ final __callArgument75:Dynamic = inv; __callArgument75; }), ({ final __callArgument76:Dynamic = bindWorld; __callArgument76; })) : Bool);
+        composeMatrix4(({ final __callArgument140:Dynamic = bindWorld; __callArgument140; }), ({ final __callArgument141:Dynamic = { x: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointPositions : Array<Float>), (cast pi : Float)), y: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointPositions : Array<Float>), (cast (pi + 1.0) : Float)), z: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointPositions : Array<Float>), (cast (pi + 2.0) : Float)) }; __callArgument141; }), ({ final __callArgument142:Dynamic = { w: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointOrientations : Array<Float>), (cast (qi + 3.0) : Float)), x: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointOrientations : Array<Float>), (cast qi : Float)), y: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointOrientations : Array<Float>), (cast (qi + 1.0) : Float)), z: flighthq._internal._StaticIndex.readFloatArrayTyped((cast jointOrientations : Array<Float>), (cast (qi + 2.0) : Float)) }; __callArgument142; }), ({ final __callArgument143:Dynamic = { x: 1.0, y: 1.0, z: 1.0 }; __callArgument143; }));
+        var inv:Matrix4 = (cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix4);
+        (cast inverseMatrix4(({ final __callArgument148:Dynamic = inv; __callArgument148; }), ({ final __callArgument149:Dynamic = bindWorld; __callArgument149; })) : Bool);
         _Runtime.callProperty(inverseBind, 'push', cast ([inv] : Array<Dynamic>));
         j++;
       }
@@ -439,7 +439,7 @@ class Md5Parse {
       var joint:Null<Md5Joint> = (cast Md5Parse.parseJointLine__md5Parse((cast line : String), (cast md5Drops : Dynamic), (cast (i - 1.0) : Float)) : Null<Md5Joint>);
       if ((cast !_Runtime.strictEquals(joint, null) : Bool)) { _Runtime.callProperty(joints, 'push', cast ([joint] : Array<Dynamic>)); }
     }
-    Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument77:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument77; }), (cast 'md5mesh.joints-block-unclosed' : String), (cast '' : String), ({ final __callArgument78:Dynamic = {  }; __callArgument78; }));
+    Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument152:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument152; }), (cast 'md5mesh.joints-block-unclosed' : String), (cast '' : String), ({ final __callArgument153:Dynamic = {  }; __callArgument153; }));
     return cast i;
     return cast null;
   }
@@ -462,14 +462,14 @@ class Md5Parse {
     nameStart = _Runtime.callProperty(line, 'indexOf', cast (['"'] : Array<Dynamic>));
     nameEnd = _Runtime.callProperty(line, 'indexOf', cast (['"', (nameStart + 1.0)] : Array<Dynamic>));
     if ((cast ((cast ((cast nameStart : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast nameEnd : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
-      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument79:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument79; }), (cast 'md5mesh.malformed-joint' : String), (cast 'missing-name-quotes' : String), ({ final __callArgument80:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'missing-name-quotes' }; __callArgument80; }));
+      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument156:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument156; }), (cast 'md5mesh.malformed-joint' : String), (cast 'missing-name-quotes' : String), ({ final __callArgument157:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'missing-name-quotes' }; __callArgument157; }));
       return cast null;
     }
     name = _Runtime.slice(line, (nameStart + 1.0), nameEnd);
     rest = StringTools.trim(Std.string(_Runtime.slice(line, (nameEnd + 1.0), null)));
     tokens = (cast _Runtime.filterArray((cast _Runtime.callProperty(_Runtime.replace(rest, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)) : Array<String>), function(t:String, __unused0:Float, __unused1:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float)), _Runtime.UNDEFINED));
     if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 7.0 : Float)) : Bool)) {
-      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument81:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument81; }), (cast 'md5mesh.malformed-joint' : String), (cast 'not-enough-components' : String), ({ final __callArgument82:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }; __callArgument82; }));
+      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument160:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument160; }), (cast 'md5mesh.malformed-joint' : String), (cast 'not-enough-components' : String), ({ final __callArgument161:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }; __callArgument161; }));
       return cast null;
     }
     parentIndex = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 0.0), 10.0] : Array<Dynamic>));
@@ -480,12 +480,12 @@ class Md5Parse {
     orientationY = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 5.0)] : Array<Dynamic>));
     orientationZ = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 6.0)] : Array<Dynamic>));
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([parentIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([positionX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([positionY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([positionZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([orientationX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([orientationY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([orientationZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument83:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument83; }), (cast 'md5mesh.malformed-joint' : String), (cast 'non-numeric' : String), ({ final __callArgument84:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'non-numeric' }; __callArgument84; }));
+      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument164:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument164; }), (cast 'md5mesh.malformed-joint' : String), (cast 'non-numeric' : String), ({ final __callArgument165:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'non-numeric' }; __callArgument165; }));
       return cast null;
     }
     sumSq = (((orientationX * orientationX) + (orientationY * orientationY)) + (orientationZ * orientationZ));
     if ((cast ((cast sumSq : Float) > (cast (1.0 + Md5Parse.QUATERNION_SUM_TOLERANCE__md5Parse) : Float)) : Bool)) {
-      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument85:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument85; }), (cast 'md5mesh.joint-orientation-not-unit' : String), (cast '' : String), ({ final __callArgument86:Dynamic = { firstLine: (lineIndex + 1.0) }; __callArgument86; }));
+      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument168:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument168; }), (cast 'md5mesh.joint-orientation-not-unit' : String), (cast '' : String), ({ final __callArgument169:Dynamic = { firstLine: (lineIndex + 1.0) }; __callArgument169; }));
       var scale:Float = _Runtime.divideNumbers(1.0, HxMath.sqrt(sumSq));
       (orientationX = cast ((orientationX * scale) : Dynamic));
       (orientationY = cast ((orientationY * scale) : Dynamic));
@@ -532,7 +532,7 @@ class Md5Parse {
         if ((cast ((cast ((cast nameStart : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast nameEnd : Float) > (cast nameStart : Float)) : Bool)) : Bool)) {
           (shader = cast (_Runtime.slice(line, (nameStart + 1.0), nameEnd) : Dynamic));
         } else {
-          Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument87:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument87; }), (cast 'md5mesh.shader-unquoted' : String), (cast '' : String), ({ final __callArgument88:Dynamic = { firstLine: i }; __callArgument88; }));
+          Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument172:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument172; }), (cast 'md5mesh.shader-unquoted' : String), (cast '' : String), ({ final __callArgument173:Dynamic = { firstLine: i }; __callArgument173; }));
         }
         continue;
       }
@@ -551,7 +551,7 @@ class Md5Parse {
       if ((cast StringTools.startsWith(line, 'vert ') : Bool)) {
         var vert:Null<{ var index:Float; var record:Md5Vertex; }> = (cast Md5Parse.parseVertLine__md5Parse((cast line : String), (cast md5Drops : Dynamic), (cast (i - 1.0) : Float)) : Null<{ var index:Float; var record:Md5Vertex; }>);
         if ((cast !_Runtime.strictEquals(vert, null) : Bool)) {
-          Md5Parse.alignMd5Records__md5Parse(({ final __callArgument89:Dynamic = vertices; __callArgument89; }), (cast (cast vert : { var index:Float; var record:Md5Vertex; }).index : Float), (cast md5Drops : Dynamic), (cast 'vert' : String), ({ final __callArgument90:Dynamic = function():{ var countWeights:Float; var startWeight:Float; var u:Float; var v:Float; } return { countWeights: 0.0, startWeight: 0.0, u: 0.0, v: 0.0 }; __callArgument90; }));
+          Md5Parse.alignMd5Records__md5Parse(({ final __callArgument176:Dynamic = vertices; __callArgument176; }), (cast (cast vert : { var index:Float; var record:Md5Vertex; }).index : Float), (cast md5Drops : Dynamic), (cast 'vert' : String), ({ final __callArgument177:Dynamic = function():{ var countWeights:Float; var startWeight:Float; var u:Float; var v:Float; } return { countWeights: 0.0, startWeight: 0.0, u: 0.0, v: 0.0 }; __callArgument177; }));
           if ((cast _Runtime.strictEquals((cast vert : { var index:Float; var record:Md5Vertex; }).index, _Runtime.field(vertices, 'length')) : Bool)) { _Runtime.callProperty(vertices, 'push', cast ([(cast vert : { var index:Float; var record:Md5Vertex; }).record] : Array<Dynamic>)); }
         }
         continue;
@@ -559,7 +559,7 @@ class Md5Parse {
       if ((cast StringTools.startsWith(line, 'tri ') : Bool)) {
         var tri:Null<{ var index:Float; var record:Array<Float>; }> = (cast Md5Parse.parseTriLine__md5Parse((cast line : String), (cast md5Drops : Dynamic), (cast (i - 1.0) : Float)) : Null<{ var index:Float; var record:Array<Float>; }>);
         if ((cast !_Runtime.strictEquals(tri, null) : Bool)) {
-          Md5Parse.alignMd5Records__md5Parse(({ final __callArgument91:Dynamic = triangles; __callArgument91; }), (cast (cast tri : { var index:Float; var record:Array<Float>; }).index : Float), (cast md5Drops : Dynamic), (cast 'tri' : String), ({ final __callArgument92:Dynamic = function():Array<Float> return cast ([0.0, 0.0, 0.0] : Array<Dynamic>); __callArgument92; }));
+          Md5Parse.alignMd5Records__md5Parse(({ final __callArgument180:Dynamic = triangles; __callArgument180; }), (cast (cast tri : { var index:Float; var record:Array<Float>; }).index : Float), (cast md5Drops : Dynamic), (cast 'tri' : String), ({ final __callArgument181:Dynamic = function():Array<Float> return cast ([0.0, 0.0, 0.0] : Array<Dynamic>); __callArgument181; }));
           if ((cast _Runtime.strictEquals((cast tri : { var index:Float; var record:Array<Float>; }).index, _Runtime.field(triangles, 'length')) : Bool)) { _Runtime.callProperty(triangles, 'push', cast ([(cast tri : { var index:Float; var record:Array<Float>; }).record] : Array<Dynamic>)); }
         }
         continue;
@@ -567,7 +567,7 @@ class Md5Parse {
       if ((cast StringTools.startsWith(line, 'weight ') : Bool)) {
         var weight:Null<{ var index:Float; var record:Md5Weight; }> = (cast Md5Parse.parseWeightLine__md5Parse((cast line : String), (cast md5Drops : Dynamic), (cast (i - 1.0) : Float)) : Null<{ var index:Float; var record:Md5Weight; }>);
         if ((cast !_Runtime.strictEquals(weight, null) : Bool)) {
-          Md5Parse.alignMd5Records__md5Parse(({ final __callArgument93:Dynamic = weights; __callArgument93; }), (cast (cast weight : { var index:Float; var record:Md5Weight; }).index : Float), (cast md5Drops : Dynamic), (cast 'weight' : String), ({ final __callArgument94:Dynamic = function():{ var bias:Float; var jointIndex:Float; var positionX:Float; var positionY:Float; var positionZ:Float; } return { bias: 0.0, jointIndex: -1.0, positionX: 0.0, positionY: 0.0, positionZ: 0.0 }; __callArgument94; }));
+          Md5Parse.alignMd5Records__md5Parse(({ final __callArgument184:Dynamic = weights; __callArgument184; }), (cast (cast weight : { var index:Float; var record:Md5Weight; }).index : Float), (cast md5Drops : Dynamic), (cast 'weight' : String), ({ final __callArgument185:Dynamic = function():{ var bias:Float; var jointIndex:Float; var positionX:Float; var positionY:Float; var positionZ:Float; } return { bias: 0.0, jointIndex: -1.0, positionX: 0.0, positionY: 0.0, positionZ: 0.0 }; __callArgument185; }));
           if ((cast _Runtime.strictEquals((cast weight : { var index:Float; var record:Md5Weight; }).index, _Runtime.field(weights, 'length')) : Bool)) { _Runtime.callProperty(weights, 'push', cast ([(cast weight : { var index:Float; var record:Md5Weight; }).record] : Array<Dynamic>)); }
         }
         continue;
@@ -579,7 +579,7 @@ class Md5Parse {
     for (tri in _Runtime.iterable(triangles)) {
       _Runtime.pushMany(indices, cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast tri : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast tri : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast tri : Array<Float>), (cast 2.0 : Float))] : Array<Dynamic>));
     }
-    if ((cast !(cast closed : Bool) : Bool)) { Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument97:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument97; }), (cast 'md5mesh.mesh-block-unclosed' : String), (cast '' : String), ({ final __callArgument98:Dynamic = {  }; __callArgument98; })); }
+    if ((cast !(cast closed : Bool) : Bool)) { Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument190:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument190; }), (cast 'md5mesh.mesh-block-unclosed' : String), (cast '' : String), ({ final __callArgument191:Dynamic = {  }; __callArgument191; })); }
     return cast { nextLine: i, result: { indices: indices, shader: shader, vertices: vertices, weights: weights } };
     return cast null;
   }
@@ -593,7 +593,7 @@ class Md5Parse {
     var index:Float = cast _Runtime.UNDEFINED;
     tokens = (cast _Runtime.filterArray((cast _Runtime.callProperty(_Runtime.replace(line, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)) : Array<String>), function(t:String, __unused2:Float, __unused3:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float)), _Runtime.UNDEFINED));
     if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 6.0 : Float)) : Bool)) {
-      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument99:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument99; }), (cast 'md5mesh.malformed-vert' : String), (cast 'not-enough-components' : String), ({ final __callArgument100:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }; __callArgument100; }));
+      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument194:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument194; }), (cast 'md5mesh.malformed-vert' : String), (cast 'not-enough-components' : String), ({ final __callArgument195:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }; __callArgument195; }));
       return cast null;
     }
     u = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 2.0)] : Array<Dynamic>));
@@ -601,16 +601,16 @@ class Md5Parse {
     startWeight = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 4.0), 10.0] : Array<Dynamic>));
     countWeights = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 5.0), 10.0] : Array<Dynamic>));
     if ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([u] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([startWeight] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([countWeights] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument101:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument101; }), (cast 'md5mesh.malformed-vert' : String), (cast 'non-numeric' : String), ({ final __callArgument102:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'non-numeric' }; __callArgument102; }));
+      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument198:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument198; }), (cast 'md5mesh.malformed-vert' : String), (cast 'non-numeric' : String), ({ final __callArgument199:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'non-numeric' }; __callArgument199; }));
       return cast null;
     }
     if ((cast ((cast ((cast startWeight : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast countWeights : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
-      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument103:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument103; }), (cast 'md5mesh.malformed-vert' : String), (cast 'weight-range' : String), ({ final __callArgument104:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'weight-range' }; __callArgument104; }));
+      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument202:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument202; }), (cast 'md5mesh.malformed-vert' : String), (cast 'weight-range' : String), ({ final __callArgument203:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'weight-range' }; __callArgument203; }));
       return cast null;
     }
     index = (cast Md5Parse.parseMd5RecordOrdinal__md5Parse((cast flighthq._internal._StaticIndex.readArray(tokens, 1.0) : String)) : Float);
     if ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool)) {
-      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument105:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument105; }), (cast 'md5mesh.malformed-vert' : String), (cast 'bad-index' : String), ({ final __callArgument106:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'bad-index' }; __callArgument106; }));
+      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument206:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument206; }), (cast 'md5mesh.malformed-vert' : String), (cast 'bad-index' : String), ({ final __callArgument207:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'bad-index' }; __callArgument207; }));
       return cast null;
     }
     return cast { index: index, record: { countWeights: countWeights, startWeight: startWeight, u: u, v: v } };
@@ -625,19 +625,19 @@ class Md5Parse {
     var index:Float = cast _Runtime.UNDEFINED;
     tokens = (cast _Runtime.filterArray((cast _Runtime.callProperty(line, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)) : Array<String>), function(t:String, __unused4:Float, __unused5:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float)), _Runtime.UNDEFINED));
     if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 5.0 : Float)) : Bool)) {
-      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument107:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument107; }), (cast 'md5mesh.malformed-tri' : String), (cast 'not-enough-components' : String), ({ final __callArgument108:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }; __callArgument108; }));
+      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument210:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument210; }), (cast 'md5mesh.malformed-tri' : String), (cast 'not-enough-components' : String), ({ final __callArgument211:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }; __callArgument211; }));
       return cast null;
     }
     v0 = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 2.0), 10.0] : Array<Dynamic>));
     v1 = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 3.0), 10.0] : Array<Dynamic>));
     v2 = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 4.0), 10.0] : Array<Dynamic>));
     if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v0] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v1] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([v2] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument109:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument109; }), (cast 'md5mesh.malformed-tri' : String), (cast 'non-numeric' : String), ({ final __callArgument110:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'non-numeric' }; __callArgument110; }));
+      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument214:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument214; }), (cast 'md5mesh.malformed-tri' : String), (cast 'non-numeric' : String), ({ final __callArgument215:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'non-numeric' }; __callArgument215; }));
       return cast null;
     }
     index = (cast Md5Parse.parseMd5RecordOrdinal__md5Parse((cast flighthq._internal._StaticIndex.readArray(tokens, 1.0) : String)) : Float);
     if ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool)) {
-      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument111:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument111; }), (cast 'md5mesh.malformed-tri' : String), (cast 'bad-index' : String), ({ final __callArgument112:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'bad-index' }; __callArgument112; }));
+      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument218:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument218; }), (cast 'md5mesh.malformed-tri' : String), (cast 'bad-index' : String), ({ final __callArgument219:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'bad-index' }; __callArgument219; }));
       return cast null;
     }
     return cast { index: index, record: cast ([v0, v1, v2] : Array<Dynamic>) };
@@ -654,7 +654,7 @@ class Md5Parse {
     var index:Float = cast _Runtime.UNDEFINED;
     tokens = (cast _Runtime.filterArray((cast _Runtime.callProperty(_Runtime.replace(line, _Runtime.regexp('[()]', 'g'), '', false), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)) : Array<String>), function(t:String, __unused6:Float, __unused7:Array<String>):Bool return ((cast _Runtime.field(t, 'length') : Float) > (cast 0.0 : Float)), _Runtime.UNDEFINED));
     if ((cast ((cast _Runtime.field(tokens, 'length') : Float) < (cast 7.0 : Float)) : Bool)) {
-      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument113:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument113; }), (cast 'md5mesh.malformed-weight' : String), (cast 'not-enough-components' : String), ({ final __callArgument114:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }; __callArgument114; }));
+      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument222:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument222; }), (cast 'md5mesh.malformed-weight' : String), (cast 'not-enough-components' : String), ({ final __callArgument223:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'not-enough-components' }; __callArgument223; }));
       return cast null;
     }
     jointIndex = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseInt'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 2.0), 10.0] : Array<Dynamic>));
@@ -663,12 +663,12 @@ class Md5Parse {
     positionY = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 5.0)] : Array<Dynamic>));
     positionZ = _Runtime.callValue(flighthq._internal._HostValueLut.get('parseFloat'), cast ([flighthq._internal._StaticIndex.readArray(tokens, 6.0)] : Array<Dynamic>));
     if ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([jointIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([bias] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([positionX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([positionY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([positionZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument115:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument115; }), (cast 'md5mesh.malformed-weight' : String), (cast 'non-numeric' : String), ({ final __callArgument116:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'non-numeric' }; __callArgument116; }));
+      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument226:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument226; }), (cast 'md5mesh.malformed-weight' : String), (cast 'non-numeric' : String), ({ final __callArgument227:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'non-numeric' }; __callArgument227; }));
       return cast null;
     }
     index = (cast Md5Parse.parseMd5RecordOrdinal__md5Parse((cast flighthq._internal._StaticIndex.readArray(tokens, 1.0) : String)) : Float);
     if ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool)) {
-      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument117:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument117; }), (cast 'md5mesh.malformed-weight' : String), (cast 'bad-index' : String), ({ final __callArgument118:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'bad-index' }; __callArgument118; }));
+      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument230:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument230; }), (cast 'md5mesh.malformed-weight' : String), (cast 'bad-index' : String), ({ final __callArgument231:Dynamic = { firstLine: (lineIndex + 1.0), reason: 'bad-index' }; __callArgument231; }));
       return cast null;
     }
     return cast { index: index, record: { bias: bias, jointIndex: jointIndex, positionX: positionX, positionY: positionY, positionZ: positionZ } };
@@ -727,16 +727,16 @@ class Md5Parse {
   public static function alignMd5Records__md5Parse<T>(records:Array<T>, index:Float, md5Drops:Null<flighthq._internal._Map<String, Md5DropTally__md5Parse>>, record:String, placeholder:Void->T):Void {
     if ((cast _Runtime.strictEquals(index, _Runtime.field(records, 'length')) : Bool)) { return; }
     if ((cast ((cast index : Float) < (cast _Runtime.field(records, 'length') : Float)) : Bool)) {
-      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument119:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument119; }), (cast 'md5mesh.' + Std.string(record) + '-index-repeated' : String), (cast record : String), ({ final __callArgument120:Dynamic = { firstExpected: _Runtime.field(records, 'length'), firstIndex: index }; __callArgument120; }));
+      Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument234:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument234; }), (cast 'md5mesh.' + Std.string(record) + '-index-repeated' : String), (cast record : String), ({ final __callArgument235:Dynamic = { firstExpected: _Runtime.field(records, 'length'), firstIndex: index }; __callArgument235; }));
       return;
     }
-    Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument121:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument121; }), (cast 'md5mesh.' + Std.string(record) + '-index-gap' : String), (cast record : String), ({ final __callArgument122:Dynamic = { firstExpected: _Runtime.field(records, 'length'), firstIndex: index }; __callArgument122; }));
+    Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument238:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument238; }), (cast 'md5mesh.' + Std.string(record) + '-index-gap' : String), (cast record : String), ({ final __callArgument239:Dynamic = { firstExpected: _Runtime.field(records, 'length'), firstIndex: index }; __callArgument239; }));
     while ((cast ((cast _Runtime.field(records, 'length') : Float) < (cast index : Float)) : Bool)) { _Runtime.callProperty(records, 'push', cast ([(cast placeholder() : T)] : Array<Dynamic>)); }
   }
 
   public static function reportMd5CountDisagreement__md5Parse(md5Drops:Null<flighthq._internal._Map<String, Md5DropTally__md5Parse>>, record:String, declared:Float, actual:Float):Void {
     if ((cast ((cast ((cast declared : Float) < (cast 0.0 : Float)) : Bool) || (cast _Runtime.strictEquals(declared, actual) : Bool)) : Bool)) { return; }
-    Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument123:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument123; }), (cast 'md5mesh.' + Std.string(record) + '-count-mismatch' : String), (cast record : String), ({ final __callArgument124:Dynamic = { firstActual: actual, firstExpected: declared }; __callArgument124; }));
+    Md5Parse.tallyMd5Drop__md5Parse((cast md5Drops : Dynamic), ({ final __callArgument242:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument242; }), (cast 'md5mesh.' + Std.string(record) + '-count-mismatch' : String), (cast record : String), ({ final __callArgument243:Dynamic = { firstActual: actual, firstExpected: declared }; __callArgument243; }));
   }
 
   public static function parseMd5RecordOrdinal__md5Parse(token:String):Float {

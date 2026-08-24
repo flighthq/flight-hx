@@ -9,9 +9,9 @@ class Statistics {
     var scale:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
     scale = (cast Statistics.finiteAbsoluteScale__statistics(({ final __callArgument0:Dynamic = values; __callArgument0; })) : Float);
-    if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([scale] : Array<Dynamic>)) : Bool) : Bool)) { return cast (cast Statistics.unscaledMean__statistics(({ final __callArgument1:Dynamic = values; __callArgument1; })) : Float); }
+    if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([scale] : Array<Dynamic>)) : Bool) : Bool)) { return cast (cast Statistics.unscaledMean__statistics(({ final __callArgument2:Dynamic = values; __callArgument2; })) : Float); }
     if ((cast _Runtime.strictEquals(scale, 0.0) : Bool)) { return cast 0.0; }
-    return cast (_Runtime.divideNumbers((cast Statistics.scaledSum__statistics(({ final __callArgument2:Dynamic = values; __callArgument2; }), (cast scale : Float)) : Float), _Runtime.field(values, 'length')) * scale);
+    return cast (_Runtime.divideNumbers((cast Statistics.scaledSum__statistics(({ final __callArgument4:Dynamic = values; __callArgument4; }), (cast scale : Float)) : Float), _Runtime.field(values, 'length')) * scale);
     return cast null;
   }
 
@@ -28,10 +28,10 @@ class Statistics {
   public static function standardDeviation(values:Array<Float>):Float {
     var scale:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
-    scale = (cast Statistics.finiteAbsoluteScale__statistics(({ final __callArgument3:Dynamic = values; __callArgument3; })) : Float);
-    if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([scale] : Array<Dynamic>)) : Bool) : Bool)) { return cast HxMath.sqrt((cast Statistics.unscaledVariance__statistics(({ final __callArgument4:Dynamic = values; __callArgument4; })) : Float)); }
+    scale = (cast Statistics.finiteAbsoluteScale__statistics(({ final __callArgument6:Dynamic = values; __callArgument6; })) : Float);
+    if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([scale] : Array<Dynamic>)) : Bool) : Bool)) { return cast HxMath.sqrt((cast Statistics.unscaledVariance__statistics(({ final __callArgument8:Dynamic = values; __callArgument8; })) : Float)); }
     if ((cast _Runtime.strictEquals(scale, 0.0) : Bool)) { return cast 0.0; }
-    return cast _Runtime.multiplyNumbers(HxMath.sqrt((cast Statistics.scaledVariance__statistics(({ final __callArgument5:Dynamic = values; __callArgument5; }), (cast scale : Float)) : Float)), scale);
+    return cast _Runtime.multiplyNumbers(HxMath.sqrt((cast Statistics.scaledVariance__statistics(({ final __callArgument10:Dynamic = values; __callArgument10; }), (cast scale : Float)) : Float)), scale);
     return cast null;
   }
 
@@ -39,10 +39,10 @@ class Statistics {
     var scale:Float = cast _Runtime.UNDEFINED;
     var normalized:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
-    scale = (cast Statistics.finiteAbsoluteScale__statistics(({ final __callArgument6:Dynamic = values; __callArgument6; })) : Float);
-    if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([scale] : Array<Dynamic>)) : Bool) : Bool)) { return cast (cast Statistics.unscaledVariance__statistics(({ final __callArgument7:Dynamic = values; __callArgument7; })) : Float); }
+    scale = (cast Statistics.finiteAbsoluteScale__statistics(({ final __callArgument12:Dynamic = values; __callArgument12; })) : Float);
+    if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([scale] : Array<Dynamic>)) : Bool) : Bool)) { return cast (cast Statistics.unscaledVariance__statistics(({ final __callArgument14:Dynamic = values; __callArgument14; })) : Float); }
     if ((cast _Runtime.strictEquals(scale, 0.0) : Bool)) { return cast 0.0; }
-    normalized = (cast Statistics.scaledVariance__statistics(({ final __callArgument8:Dynamic = values; __callArgument8; }), (cast scale : Float)) : Float);
+    normalized = (cast Statistics.scaledVariance__statistics(({ final __callArgument16:Dynamic = values; __callArgument16; }), (cast scale : Float)) : Float);
     if ((cast _Runtime.strictEquals(normalized, 0.0) : Bool)) { return cast 0.0; }
     return cast ((normalized * scale) * scale);
     return cast null;
@@ -58,13 +58,13 @@ class Statistics {
       _Runtime.throwValue(_Runtime.rangeError('weightedAverage: values and weights must have the same length'));
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(values, 'length'), 0.0) : Bool)) { return cast HxMath.NaN; }
-    valueScale = (cast Statistics.finiteAbsoluteScale__statistics(({ final __callArgument9:Dynamic = values; __callArgument9; })) : Float);
-    weightScale = (cast Statistics.finiteAbsoluteScale__statistics(({ final __callArgument10:Dynamic = weights; __callArgument10; })) : Float);
+    valueScale = (cast Statistics.finiteAbsoluteScale__statistics(({ final __callArgument18:Dynamic = values; __callArgument18; })) : Float);
+    weightScale = (cast Statistics.finiteAbsoluteScale__statistics(({ final __callArgument20:Dynamic = weights; __callArgument20; })) : Float);
     if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([valueScale] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([weightScale] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-      return cast (cast Statistics.unscaledWeightedAverage__statistics(({ final __callArgument11:Dynamic = values; __callArgument11; }), ({ final __callArgument12:Dynamic = weights; __callArgument12; })) : Float);
+      return cast (cast Statistics.unscaledWeightedAverage__statistics(({ final __callArgument22:Dynamic = values; __callArgument22; }), ({ final __callArgument23:Dynamic = weights; __callArgument23; })) : Float);
     }
     if ((cast _Runtime.strictEquals(weightScale, 0.0) : Bool)) { return cast HxMath.NaN; }
-    sumWeights = (cast Statistics.scaledSum__statistics(({ final __callArgument13:Dynamic = weights; __callArgument13; }), (cast weightScale : Float)) : Float);
+    sumWeights = (cast Statistics.scaledSum__statistics(({ final __callArgument26:Dynamic = weights; __callArgument26; }), (cast weightScale : Float)) : Float);
     if ((cast _Runtime.strictEquals(sumWeights, 0.0) : Bool)) { return cast HxMath.NaN; }
     if ((cast _Runtime.strictEquals(valueScale, 0.0) : Bool)) { return cast 0.0; }
     sumProduct = 0.0;
@@ -128,7 +128,7 @@ class Statistics {
     var normalizedMean:Float = cast _Runtime.UNDEFINED;
     var sum:Float = cast _Runtime.UNDEFINED;
     var correction:Float = cast _Runtime.UNDEFINED;
-    normalizedMean = _Runtime.divideNumbers((cast Statistics.scaledSum__statistics(({ final __callArgument14:Dynamic = values; __callArgument14; }), (cast scale : Float)) : Float), _Runtime.field(values, 'length'));
+    normalizedMean = _Runtime.divideNumbers((cast Statistics.scaledSum__statistics(({ final __callArgument28:Dynamic = values; __callArgument28; }), (cast scale : Float)) : Float), _Runtime.field(values, 'length'));
     sum = 0.0;
     correction = 0.0;
     {
@@ -163,7 +163,7 @@ class Statistics {
   public static function unscaledVariance__statistics(values:Array<Float>):Float {
     var average:Float = cast _Runtime.UNDEFINED;
     var sum:Float = cast _Runtime.UNDEFINED;
-    average = (cast Statistics.unscaledMean__statistics(({ final __callArgument15:Dynamic = values; __callArgument15; })) : Float);
+    average = (cast Statistics.unscaledMean__statistics(({ final __callArgument30:Dynamic = values; __callArgument30; })) : Float);
     sum = 0.0;
     {
       var i:Float = 0.0;

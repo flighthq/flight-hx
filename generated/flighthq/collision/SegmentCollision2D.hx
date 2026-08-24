@@ -87,8 +87,8 @@ class SegmentCollision2D {
     points = _Runtime.field(b, 'points');
     if ((cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus2D(({ final __callArgument0:Dynamic = points; __callArgument0; })) : Null<String>), null) : Bool)) { return cast false; }
     pn = (_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1);
-    if ((cast (cast SegmentCollision2D.isPointInConvexPolygon__segmentCollision2D((cast _Runtime.field(a, 'x0') : Float), (cast _Runtime.field(a, 'y0') : Float), ({ final __callArgument1:Dynamic = points; __callArgument1; }), (cast pn : Float)) : Bool) : Bool)) { return cast true; }
-    if ((cast (cast SegmentCollision2D.isPointInConvexPolygon__segmentCollision2D((cast _Runtime.field(a, 'x1') : Float), (cast _Runtime.field(a, 'y1') : Float), ({ final __callArgument2:Dynamic = points; __callArgument2; }), (cast pn : Float)) : Bool) : Bool)) { return cast true; }
+    if ((cast (cast SegmentCollision2D.isPointInConvexPolygon__segmentCollision2D((cast _Runtime.field(a, 'x0') : Float), (cast _Runtime.field(a, 'y0') : Float), ({ final __callArgument2:Dynamic = points; __callArgument2; }), (cast pn : Float)) : Bool) : Bool)) { return cast true; }
+    if ((cast (cast SegmentCollision2D.isPointInConvexPolygon__segmentCollision2D((cast _Runtime.field(a, 'x1') : Float), (cast _Runtime.field(a, 'y1') : Float), ({ final __callArgument4:Dynamic = points; __callArgument4; }), (cast pn : Float)) : Bool) : Bool)) { return cast true; }
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast pn : Float)) : Bool)) {
@@ -112,7 +112,7 @@ class SegmentCollision2D {
     var epsilon:Float = cast _Runtime.UNDEFINED;
     var positive:Bool = cast _Runtime.UNDEFINED;
     var negative:Bool = cast _Runtime.UNDEFINED;
-    epsilon = (cast SegmentCollision2D.relativeEpsilon__segmentCollision2D((cast (cast SegmentCollision2D.getPolygonExtent__segmentCollision2D(({ final __callArgument3:Dynamic = px; __callArgument3; }), (cast pn : Float)) : Float) : Float)) : Float);
+    epsilon = (cast SegmentCollision2D.relativeEpsilon__segmentCollision2D((cast (cast SegmentCollision2D.getPolygonExtent__segmentCollision2D(({ final __callArgument6:Dynamic = px; __callArgument6; }), (cast pn : Float)) : Float) : Float)) : Float);
     positive = false;
     negative = false;
     {
@@ -264,7 +264,7 @@ class SegmentCollision2D {
   public static final clipRange__segmentCollision2D:{ var t0:Float; var t1:Float; } = (cast { t0: 0.0, t1: 1.0 });
 
   public static function segmentSegmentDistanceSquared__segmentCollision2D(ax0:Float, ay0:Float, ax1:Float, ay1:Float, bx0:Float, by0:Float, bx1:Float, by1:Float):Float {
-    if ((cast (cast testSegmentSegmentCollision2D(({ final __callArgument4:Dynamic = { x0: ax0, y0: ay0, x1: ax1, y1: ay1 }; __callArgument4; }), ({ final __callArgument5:Dynamic = { x0: bx0, y0: by0, x1: bx1, y1: by1 }; __callArgument5; })) : Bool) : Bool)) {
+    if ((cast (cast testSegmentSegmentCollision2D(({ final __callArgument10:Dynamic = { x0: ax0, y0: ay0, x1: ax1, y1: ay1 }; __callArgument10; }), ({ final __callArgument11:Dynamic = { x0: bx0, y0: by0, x1: bx1, y1: by1 }; __callArgument11; })) : Bool) : Bool)) {
       return cast 0.0;
     }
     return cast HxMath.min(HxMath.min(HxMath.min((cast SegmentCollision2D.pointSegmentDistanceSquared__segmentCollision2D((cast ax0 : Float), (cast ay0 : Float), (cast bx0 : Float), (cast by0 : Float), (cast bx1 : Float), (cast by1 : Float)) : Float), (cast SegmentCollision2D.pointSegmentDistanceSquared__segmentCollision2D((cast ax1 : Float), (cast ay1 : Float), (cast bx0 : Float), (cast by0 : Float), (cast bx1 : Float), (cast by1 : Float)) : Float)), (cast SegmentCollision2D.pointSegmentDistanceSquared__segmentCollision2D((cast bx0 : Float), (cast by0 : Float), (cast ax0 : Float), (cast ay0 : Float), (cast ax1 : Float), (cast ay1 : Float)) : Float)), (cast SegmentCollision2D.pointSegmentDistanceSquared__segmentCollision2D((cast bx1 : Float), (cast by1 : Float), (cast ax0 : Float), (cast ay0 : Float), (cast ax1 : Float), (cast ay1 : Float)) : Float));

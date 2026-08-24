@@ -28,25 +28,25 @@ class WgpuMotionBlurEffect {
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     samples = _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0);
     resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; })) : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; });
-    pipeline = (cast WgpuMotionBlurEffect.getMotionBlurPipeline__wgpuMotionBlurEffect(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuEffectPipeline);
+    pipeline = (cast WgpuMotionBlurEffect.getMotionBlurPipeline__wgpuMotionBlurEffect(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuEffectPipeline);
     if ((cast _Runtime.strictEquals(velocityTexture, null) : Bool)) {
-      drawWgpuDualSourceEffectPass(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast source : WgpuRenderTarget), (cast source : WgpuRenderTarget), ({ final __callArgument4:Dynamic = (cast dest : WgpuRenderTarget); __callArgument4; }), ({ final __callArgument5:Dynamic = pipeline; __callArgument5; }), ({ final __callArgument6:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+      drawWgpuDualSourceEffectPass(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast source : WgpuRenderTarget), (cast source : WgpuRenderTarget), ({ final __callArgument7:Dynamic = (cast dest : WgpuRenderTarget); __callArgument7; }), ({ final __callArgument8:Dynamic = pipeline; __callArgument8; }), ({ final __callArgument9:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
         flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast intensity : Float));
         flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast samples : Float));
         flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).width : Float));
         flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).height : Float));
         flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast 0.0 : Float));
-      }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument6; }));
+      }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument9; }));
       return;
     }
     velocitySource = (cast { view: velocityTexture.createView() } : WgpuRenderTarget);
-    drawWgpuDualSourceEffectPass(({ final __callArgument7:Dynamic = state; __callArgument7; }), (cast source : WgpuRenderTarget), ({ final __callArgument8:Dynamic = velocitySource; __callArgument8; }), ({ final __callArgument9:Dynamic = (cast dest : WgpuRenderTarget); __callArgument9; }), ({ final __callArgument10:Dynamic = pipeline; __callArgument10; }), ({ final __callArgument11:Dynamic = function(__unused4:flighthq._internal._Float32Array, __unused5:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void {
+    drawWgpuDualSourceEffectPass(({ final __callArgument14:Dynamic = state; __callArgument14; }), (cast source : WgpuRenderTarget), ({ final __callArgument15:Dynamic = velocitySource; __callArgument15; }), ({ final __callArgument16:Dynamic = (cast dest : WgpuRenderTarget); __callArgument16; }), ({ final __callArgument17:Dynamic = pipeline; __callArgument17; }), ({ final __callArgument18:Dynamic = function(__unused4:flighthq._internal._Float32Array, __unused5:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast intensity : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast samples : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).width : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).height : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast 1.0 : Float));
-    }, cast ([__unused4] : Array<Dynamic>)); }; __callArgument11; }));
+    }, cast ([__unused4] : Array<Dynamic>)); }; __callArgument18; }));
   }
 
   public static final defaultWgpuMotionBlurEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
@@ -54,14 +54,14 @@ class WgpuMotionBlurEffect {
   });
 
   public static function registerWgpuMotionBlurEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect(({ final __callArgument12:Dynamic = state; __callArgument12; }), (cast 'MotionBlurEffect' : String), ({ final __callArgument13:Dynamic = defaultWgpuMotionBlurEffectRunner; __callArgument13; }));
+    registerWgpuRenderEffect(({ final __callArgument24:Dynamic = state; __callArgument24; }), (cast 'MotionBlurEffect' : String), ({ final __callArgument25:Dynamic = defaultWgpuMotionBlurEffectRunner; __callArgument25; }));
   }
 
   public static function getMotionBlurPipeline__wgpuMotionBlurEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var pipeline:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
     pipeline = ((cast WgpuMotionBlurEffect._motionBlurPipelines__wgpuMotionBlurEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (pipeline = cast ((cast createWgpuDualSourceEffectPipeline(({ final __callArgument14:Dynamic = state; __callArgument14; }), (cast WgpuMotionBlurEffect.MOTION_BLUR_FRAGMENT_WGSL__wgpuMotionBlurEffect : String), ({ final __callArgument15:Dynamic = 'replace'; __callArgument15; })) : WgpuEffectPipeline) : Dynamic));
+      (pipeline = cast ((cast createWgpuDualSourceEffectPipeline(({ final __callArgument28:Dynamic = state; __callArgument28; }), (cast WgpuMotionBlurEffect.MOTION_BLUR_FRAGMENT_WGSL__wgpuMotionBlurEffect : String), ({ final __callArgument29:Dynamic = 'replace'; __callArgument29; })) : WgpuEffectPipeline) : Dynamic));
       ((cast WgpuMotionBlurEffect._motionBlurPipelines__wgpuMotionBlurEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, (cast pipeline)));
     }
     return cast pipeline;

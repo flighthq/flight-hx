@@ -60,7 +60,7 @@ class ShapeStroke {
             _Runtime.callProperty((cast centerline : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
             _Runtime.pushMany((cast centerline : Path).data, cast ([penX, penY] : Array<Dynamic>));
           }
-          appendShapeGeometryCommand(({ final __callArgument1:Dynamic = centerline; __callArgument1; }), (cast name : String), ({ final __callArgument2:Dynamic = commands; __callArgument2; }), (cast a : Float));
+          appendShapeGeometryCommand(({ final __callArgument2:Dynamic = centerline; __callArgument2; }), (cast name : String), ({ final __callArgument3:Dynamic = commands; __callArgument3; }), (cast a : Float));
         }
         if ((cast ((cast _Runtime.strictEquals(name, 'moveTo') : Bool) || (cast _Runtime.strictEquals(name, 'lineTo') : Bool)) : Bool)) {
           (penX = cast ((cast flighthq._internal._StaticIndex.readArray(commands, a) : Float) : Dynamic));

@@ -54,17 +54,17 @@ class ImageResourceFrom {
   }
 
   public static function createImageResourceFromCanvas(canvas:flighthq._internal.dom.HTMLCanvasElement):Image {
-    return cast (cast createEntity(({ final __callArgument1:Dynamic = { alphaType: ImageResourceFrom.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: ImageResourceFrom.DECODED_GAMUT__imageResourceFrom, height: flighthq._internal.backend.CanvasElementBackend.field(canvas, 'height'), kind: ImageTextureSourceKind, source: canvas, version: 0.0, width: flighthq._internal.backend.CanvasElementBackend.field(canvas, 'width') }; __callArgument1; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flighthq._internal.dom.HTMLCanvasElement; var version:Float; var width:Float; });
+    return cast (cast createEntity(({ final __callArgument2:Dynamic = { alphaType: ImageResourceFrom.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: ImageResourceFrom.DECODED_GAMUT__imageResourceFrom, height: flighthq._internal.backend.CanvasElementBackend.field(canvas, 'height'), kind: ImageTextureSourceKind, source: canvas, version: 0.0, width: flighthq._internal.backend.CanvasElementBackend.field(canvas, 'width') }; __callArgument2; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flighthq._internal.dom.HTMLCanvasElement; var version:Float; var width:Float; });
     return cast null;
   }
 
   public static function createImageResourceFromImageBitmap(bitmap:flighthq._internal.dom.ImageBitmap):Image {
-    return cast (cast createEntity(({ final __callArgument2:Dynamic = { alphaType: ImageResourceFrom.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: ImageResourceFrom.DECODED_GAMUT__imageResourceFrom, height: bitmap.height, kind: ImageTextureSourceKind, source: bitmap, version: 0.0, width: bitmap.width }; __callArgument2; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flighthq._internal.dom.ImageBitmap; var version:Float; var width:Float; });
+    return cast (cast createEntity(({ final __callArgument4:Dynamic = { alphaType: ImageResourceFrom.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: ImageResourceFrom.DECODED_GAMUT__imageResourceFrom, height: bitmap.height, kind: ImageTextureSourceKind, source: bitmap, version: 0.0, width: bitmap.width }; __callArgument4; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flighthq._internal.dom.ImageBitmap; var version:Float; var width:Float; });
     return cast null;
   }
 
   public static function createImageResourceFromImageElement(img:flighthq._internal.dom.HTMLImageElement):Image {
-    return cast (cast createEntity(({ final __callArgument3:Dynamic = { alphaType: ImageResourceFrom.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: ImageResourceFrom.DECODED_GAMUT__imageResourceFrom, height: img.height, kind: ImageTextureSourceKind, source: img, version: 0.0, width: img.width }; __callArgument3; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flighthq._internal.dom.HTMLImageElement; var version:Float; var width:Float; });
+    return cast (cast createEntity(({ final __callArgument6:Dynamic = { alphaType: ImageResourceFrom.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: ImageResourceFrom.DECODED_GAMUT__imageResourceFrom, height: img.height, kind: ImageTextureSourceKind, source: img, version: 0.0, width: img.width }; __callArgument6; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flighthq._internal.dom.HTMLImageElement; var version:Float; var width:Float; });
     return cast null;
   }
 
@@ -80,7 +80,7 @@ class ImageResourceFrom {
 
   public static function loadImageResourceFromBase64(base64:String, mimeType:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Image> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-      return flighthq._internal._Async.resolve((cast loadImageResourceFromUrl((cast 'data:' + Std.string(mimeType) + ';base64,' + Std.string(base64) + '' : String), ({ final __callArgument6:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument6; }), ({ final __callArgument7:Dynamic = signal; __callArgument7; })) : flighthq._internal._Promise<Image>));
+      return flighthq._internal._Async.resolve((cast loadImageResourceFromUrl((cast 'data:' + Std.string(mimeType) + ';base64,' + Std.string(base64) + '' : String), ({ final __callArgument12:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument12; }), ({ final __callArgument13:Dynamic = signal; __callArgument13; })) : flighthq._internal._Promise<Image>));
     }));
   }
 
@@ -90,8 +90,8 @@ class ImageResourceFrom {
         var url:String = cast _Runtime.UNDEFINED;
         url = _Runtime.callProperty(flighthq._internal._HostValueLut.get('URL'), 'createObjectURL', cast ([blob] : Array<Dynamic>));
         return flighthq._internal._Async.continueFlow(flighthq._internal._Async.finalizeFlow(flighthq._internal._Async.protect(function():Dynamic {
-          return flighthq._internal._Async.flatMap((cast loadImageResourceFromUrl((cast url : String), ({ final __callArgument13:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument13; }), ({ final __callArgument14:Dynamic = signal; __callArgument14; })) : flighthq._internal._Promise<Image>), function(__awaitValue12:Dynamic):Dynamic {
-            return flighthq._internal._Async.flowReturn(__awaitValue12);
+          return flighthq._internal._Async.flatMap((cast loadImageResourceFromUrl((cast url : String), ({ final __callArgument23:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument23; }), ({ final __callArgument24:Dynamic = signal; __callArgument24; })) : flighthq._internal._Promise<Image>), function(__awaitValue22:Dynamic):Dynamic {
+            return flighthq._internal._Async.flowReturn(__awaitValue22);
           });
         }), function():Dynamic {
           _Runtime.callProperty(flighthq._internal._HostValueLut.get('URL'), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
@@ -107,19 +107,19 @@ class ImageResourceFrom {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       var type:Null<String> = cast _Runtime.UNDEFINED;
       var buf:haxe.io.Bytes = cast _Runtime.UNDEFINED;
-      type = _Runtime.coalesce(mimeType, function():Dynamic return cast (cast detectImageMimeType(({ final __callArgument15:Dynamic = bytes; __callArgument15; })) : Null<String>));
+      type = _Runtime.coalesce(mimeType, function():Dynamic return cast (cast detectImageMimeType(({ final __callArgument27:Dynamic = bytes; __callArgument27; })) : Null<String>));
       if ((cast _Runtime.strictEquals(type, null) : Bool)) {
         _Runtime.throwValue(_Runtime.error('Unable to determine image type from bytes'));
       }
       buf = _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), _Runtime.addNumbers(_Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')));
-      return cast (cast loadImageResourceFromBlob(_Runtime.construct(flighthq._internal._HostValueLut.get('Blob'), [cast ([buf] : Array<Dynamic>), { type: type }]), ({ final __callArgument16:Dynamic = signal; __callArgument16; })) : flighthq._internal._Promise<Image>);
+      return cast (cast loadImageResourceFromBlob(_Runtime.construct(flighthq._internal._HostValueLut.get('Blob'), [cast ([buf] : Array<Dynamic>), { type: type }]), ({ final __callArgument29:Dynamic = signal; __callArgument29; })) : flighthq._internal._Promise<Image>);
       return cast null;
     }));
   }
 
   public static function loadImageResourceFromUrl(url:String, ?crossOrigin:String, ?signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Image> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-      return flighthq._internal._Async.resolve((cast (cast getImageBackend() : ImageBackend) : ImageBackend).loadImageFromUrl((cast url : String), ({ final __callArgument19:Dynamic = crossOrigin; __callArgument19; }), ({ final __callArgument20:Dynamic = signal; __callArgument20; })));
+      return flighthq._internal._Async.resolve((cast (cast getImageBackend() : ImageBackend) : ImageBackend).loadImageFromUrl((cast url : String), ({ final __callArgument33:Dynamic = crossOrigin; __callArgument33; }), ({ final __callArgument34:Dynamic = signal; __callArgument34; })));
     }));
   }
 

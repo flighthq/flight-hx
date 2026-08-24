@@ -59,7 +59,7 @@ class SweepCollisionShape3D {
     {
       var iteration:Float = 0.0;
       while ((cast ((cast iteration : Float) < (cast SweepCollisionShape3D.MAX_SWEEP_ITERATIONS__sweepCollisionShape3D : Float)) : Bool)) {
-        var separated:Bool = (cast writeCollisionDistance3D(({ final __callArgument1:Dynamic = shapeA; __callArgument1; }), ({ final __callArgument2:Dynamic = shapeB; __callArgument2; }), ({ final __callArgument3:Dynamic = SweepCollisionShape3D.scratchDistance__sweepCollisionShape3D; __callArgument3; }), (cast (relativeX * fraction) : Float), (cast (relativeY * fraction) : Float), (cast (relativeZ * fraction) : Float)) : Bool);
+        var separated:Bool = (cast writeCollisionDistance3D(({ final __callArgument2:Dynamic = shapeA; __callArgument2; }), ({ final __callArgument3:Dynamic = shapeB; __callArgument3; }), ({ final __callArgument4:Dynamic = SweepCollisionShape3D.scratchDistance__sweepCollisionShape3D; __callArgument4; }), (cast (relativeX * fraction) : Float), (cast (relativeY * fraction) : Float), (cast (relativeZ * fraction) : Float)) : Bool);
         if ((cast !(cast separated : Bool) : Bool)) {
           if ((cast !(cast (cast SweepCollisionShape3D.scratchDistance__sweepCollisionShape3D : CollisionDistance3D).overlapping : Bool) : Bool)) { return cast false; }
           (impacted = cast (true : Dynamic));

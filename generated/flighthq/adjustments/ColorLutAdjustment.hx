@@ -15,7 +15,7 @@ class ColorLutAdjustment {
     transform = (cast (cast operation : { @:optional var transform:Null<ColorTransformFunction>; @:optional var kind:Null<AdjustmentKind>; }) : { @:optional var transform:Null<ColorTransformFunction>; @:optional var kind:Null<String>; }).transform;
     if ((cast _Runtime.strictEquals(_Runtime.typeofValue(transform), 'function') : Bool)) { return cast transform; }
     matrix = (cast getAdjustmentColorMatrix(({ final __callArgument0:Dynamic = operation; __callArgument0; })) : Null<Array<Float>>);
-    return cast ((cast _Runtime.strictEquals(matrix, null) : Bool) ? (cast null : Dynamic) : (cast (cast ColorLutAdjustment.colorMatrixTransform__colorLutAdjustment(({ final __callArgument1:Dynamic = matrix; __callArgument1; })) : ColorTransformFunction) : Dynamic));
+    return cast ((cast _Runtime.strictEquals(matrix, null) : Bool) ? (cast null : Dynamic) : (cast (cast ColorLutAdjustment.colorMatrixTransform__colorLutAdjustment(({ final __callArgument2:Dynamic = matrix; __callArgument2; })) : ColorTransformFunction) : Dynamic));
     return cast null;
   }
 

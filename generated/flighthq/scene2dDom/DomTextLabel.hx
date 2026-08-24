@@ -73,16 +73,16 @@ class DomTextLabel {
     if ((cast _Runtime.strictEquals(ctx, null) : Bool)) { return; }
     if ((cast _Runtime.strictEquals((cast data : DomTextData__domTextLabel).div, null) : Bool)) {
       ((cast data : DomTextData__domTextLabel).div = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['div'] : Array<Dynamic>)));
-      prepareDomElement(({ final __callArgument1:Dynamic = (cast data : DomTextData__domTextLabel).div; __callArgument1; }));
+      prepareDomElement(({ final __callArgument2:Dynamic = (cast data : DomTextData__domTextLabel).div; __callArgument2; }));
       ((cast (cast (cast data : DomTextData__domTextLabel).div : flighthq._internal.dom.HTMLDivElement).style : flighthq._internal.dom.CSSStyleDeclaration).overflow = 'hidden');
     }
     measure = (cast function(t:String, format:TextFormat):Float {
-      flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'font', (cast computeTextFormatFontString(({ final __callArgument2:Dynamic = format; __callArgument2; })) : String));
+      flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'font', (cast computeTextFormatFontString(({ final __callArgument4:Dynamic = format; __callArgument4; })) : String));
       return cast (cast flighthq._internal.backend.Canvas2dBackend.call(ctx, 'measureText', cast ([t] : Array<Dynamic>)) : flighthq._internal.dom.TextMetrics).width;
       return cast _Runtime.UNDEFINED;
     });
-    result = (cast getTextLayoutResult((cast getTextLabelRuntime(({ final __callArgument3:Dynamic = source; __callArgument3; })) : TextLabelRuntime)) : TextLayoutResult);
-    computeTextLayout(({ final __callArgument4:Dynamic = result; __callArgument4; }), ({ final __callArgument6:Dynamic = { text: text, formatRanges: cast ([(cast createTextFormatRange(({ final __callArgument5:Dynamic = textFormat; __callArgument5; }), (cast 0.0 : Float), (cast _Runtime.field(text, 'length') : Float)) : TextFormatRange)] : Array<Dynamic>), width: (cast source.data : { var width:Float; }).width, height: (cast source.data : { var height:Float; }).height, measure: measure, verticalAlign: ((cast _Runtime.strictEquals((cast source.data : { var autoSize:TextAutoSize; }).autoSize, 'none') : Bool) ? (cast (cast source.data : { var verticalAlign:TextVerticalAlign; }).verticalAlign : Dynamic) : (cast 'top' : Dynamic)) }; __callArgument6; }));
+    result = (cast getTextLayoutResult((cast getTextLabelRuntime(({ final __callArgument6:Dynamic = source; __callArgument6; })) : TextLabelRuntime)) : TextLayoutResult);
+    computeTextLayout(({ final __callArgument10:Dynamic = result; __callArgument10; }), ({ final __callArgument13:Dynamic = { text: text, formatRanges: cast ([(cast createTextFormatRange(({ final __callArgument11:Dynamic = textFormat; __callArgument11; }), (cast 0.0 : Float), (cast _Runtime.field(text, 'length') : Float)) : TextFormatRange)] : Array<Dynamic>), width: (cast source.data : { var width:Float; }).width, height: (cast source.data : { var height:Float; }).height, measure: measure, verticalAlign: ((cast _Runtime.strictEquals((cast source.data : { var autoSize:TextAutoSize; }).autoSize, 'none') : Bool) ? (cast (cast source.data : { var verticalAlign:TextVerticalAlign; }).verticalAlign : Dynamic) : (cast 'top' : Dynamic)) }; __callArgument13; }));
     divWidth = 0.0;
     for (group in _Runtime.iterable(result.groups)) {
       var right:Float = (group.offsetX + group.width);
@@ -96,14 +96,14 @@ class DomTextLabel {
       var slice:String = (cast escapeDomHtmlString((cast _Runtime.substring(text, group.startIndex, group.endIndex) : String)) : String);
       var x:Float = group.offsetX;
       var y:Float = group.offsetY;
-      var style:String = 'position:absolute;left:' + Std.string(x) + 'px;top:' + Std.string(y) + 'px;font:' + Std.string((cast computeTextFormatFontString(({ final __callArgument11:Dynamic = fmt; __callArgument11; })) : String)) + ';';
+      var style:String = 'position:absolute;left:' + Std.string(x) + 'px;top:' + Std.string(y) + 'px;font:' + Std.string((cast computeTextFormatFontString(({ final __callArgument22:Dynamic = fmt; __callArgument22; })) : String)) + ';';
       (style = cast ((style + 'color:' + Std.string((cast computeRgbaCssString((cast _Runtime.coalesce((cast fmt : TextFormat).color, function():Dynamic return cast 255.0) : Float)) : String)) + ';white-space:nowrap;') : Dynamic));
       if (_Runtime.truthy((cast fmt : TextFormat).underline)) { (style = cast ((style + 'text-decoration:underline;') : Dynamic)); }
       (html = cast ((html + '<div style="' + Std.string(style) + '">' + Std.string(slice) + '</div>') : Dynamic));
     }
     ((cast (cast data : DomTextData__domTextLabel).div : flighthq._internal.dom.HTMLDivElement).innerHTML = html);
-    applyDomStyle(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = (cast data : DomTextData__domTextLabel).div; __callArgument13; }), ({ final __callArgument14:Dynamic = renderProxy; __callArgument14; }));
-    setDomRendererElement(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = (cast data : DomTextData__domTextLabel).div; __callArgument16; }));
+    applyDomStyle(({ final __callArgument24:Dynamic = state; __callArgument24; }), ({ final __callArgument25:Dynamic = (cast data : DomTextData__domTextLabel).div; __callArgument25; }), ({ final __callArgument26:Dynamic = renderProxy; __callArgument26; }));
+    setDomRendererElement(({ final __callArgument30:Dynamic = state; __callArgument30; }), ({ final __callArgument31:Dynamic = (cast data : DomTextData__domTextLabel).div; __callArgument31; }));
   }
 
   public static final defaultDomTextLabelRenderer:Scene2DRenderer = (cast { createData: DomTextLabel.createDomTextData__domTextLabel, submit: drawDomTextLabel });

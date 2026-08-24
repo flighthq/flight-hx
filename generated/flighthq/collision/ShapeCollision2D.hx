@@ -39,7 +39,7 @@ class ShapeCollision2D {
     var penDownY:Float = cast _Runtime.UNDEFINED;
     var penUpY:Float = cast _Runtime.UNDEFINED;
     var overlapY:Float = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast (cast ShapeCollision2D.isValidAabb__shapeCollision2D(({ final __callArgument0:Dynamic = a; __callArgument0; })) : Bool) : Bool) : Bool) || (cast !(cast (cast ShapeCollision2D.isValidAabb__shapeCollision2D(({ final __callArgument1:Dynamic = b; __callArgument1; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument2:Dynamic = out; __callArgument2; })) : Bool); }
+    if ((cast ((cast !(cast (cast ShapeCollision2D.isValidAabb__shapeCollision2D(({ final __callArgument0:Dynamic = a; __callArgument0; })) : Bool) : Bool) : Bool) || (cast !(cast (cast ShapeCollision2D.isValidAabb__shapeCollision2D(({ final __callArgument2:Dynamic = b; __callArgument2; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument4:Dynamic = out; __callArgument4; })) : Bool); }
     aMinX = _Runtime.field(a, 'minX');
     aMinY = _Runtime.field(a, 'minY');
     aMaxX = _Runtime.field(a, 'maxX');
@@ -55,7 +55,7 @@ class ShapeCollision2D {
     penUpY = (bMaxY - aMinY);
     overlapY = ((cast ((cast penDownY : Float) < (cast penUpY : Float)) : Bool) ? (cast penDownY : Dynamic) : (cast penUpY : Dynamic));
     if ((cast ((cast ((cast overlapX : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast overlapY : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) {
-      clearCollisionManifold2D(({ final __callArgument3:Dynamic = out; __callArgument3; }));
+      clearCollisionManifold2D(({ final __callArgument6:Dynamic = out; __callArgument6; }));
       return cast false;
     }
     if ((cast ((cast overlapX : Float) <= (cast overlapY : Float)) : Bool)) {
@@ -74,23 +74,23 @@ class ShapeCollision2D {
 
   public static function testAabbObbCollision2D(a:CollisionAabb2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
     var scratch:ShapeCollisionScratch__shapeCollision2D = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast (cast ShapeCollision2D.isValidAabb__shapeCollision2D(({ final __callArgument4:Dynamic = a; __callArgument4; })) : Bool) : Bool) : Bool) || (cast !(cast (cast ShapeCollision2D.isValidObb__shapeCollision2D(({ final __callArgument5:Dynamic = b; __callArgument5; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument6:Dynamic = out; __callArgument6; })) : Bool); }
+    if ((cast ((cast !(cast (cast ShapeCollision2D.isValidAabb__shapeCollision2D(({ final __callArgument8:Dynamic = a; __callArgument8; })) : Bool) : Bool) : Bool) || (cast !(cast (cast ShapeCollision2D.isValidObb__shapeCollision2D(({ final __callArgument10:Dynamic = b; __callArgument10; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument12:Dynamic = out; __callArgument12; })) : Bool); }
     scratch = (cast ShapeCollision2D.acquireShapeCollisionScratch__shapeCollision2D() : ShapeCollisionScratch__shapeCollision2D);
     try {
       try {
-        writeAabbVertices(({ final __callArgument7:Dynamic = a; __callArgument7; }), (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesA);
-        writeObbVertices(({ final __callArgument8:Dynamic = b; __callArgument8; }), (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesB);
-        var __returnValue9:Dynamic = (cast ShapeCollision2D.satConvexOverlap__shapeCollision2D(({ final __callArgument10:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesA; __callArgument10; }), (cast 4.0 : Float), ({ final __callArgument11:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesB; __callArgument11; }), (cast 4.0 : Float), ({ final __callArgument12:Dynamic = out; __callArgument12; }), (cast scratch : Dynamic)) : Bool);
+        writeAabbVertices(({ final __callArgument14:Dynamic = a; __callArgument14; }), (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesA);
+        writeObbVertices(({ final __callArgument16:Dynamic = b; __callArgument16; }), (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesB);
+        var __returnValue18:Dynamic = (cast ShapeCollision2D.satConvexOverlap__shapeCollision2D(({ final __callArgument19:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesA; __callArgument19; }), (cast 4.0 : Float), ({ final __callArgument20:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesB; __callArgument20; }), (cast 4.0 : Float), ({ final __callArgument21:Dynamic = out; __callArgument21; }), (cast scratch : Dynamic)) : Bool);
         {
           ShapeCollision2D.releaseShapeCollisionScratch__shapeCollision2D((cast scratch : Dynamic));
         }
-        return cast __returnValue9;
+        return cast __returnValue18;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError13:Dynamic) {
+    } catch (__finallyError25:Dynamic) {
       {
         ShapeCollision2D.releaseShapeCollisionScratch__shapeCollision2D((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError13);
+      _Runtime.throwValue(__finallyError25);
     }
     {
       ShapeCollision2D.releaseShapeCollisionScratch__shapeCollision2D((cast scratch : Dynamic));
@@ -101,25 +101,25 @@ class ShapeCollision2D {
   public static function testAabbPolygonCollision2D(a:CollisionAabb2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
     var bPoints:Array<Float> = cast _Runtime.UNDEFINED;
     var scratch:ShapeCollisionScratch__shapeCollision2D = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast (cast ShapeCollision2D.isValidAabb__shapeCollision2D(({ final __callArgument14:Dynamic = a; __callArgument14; })) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus2D(_Runtime.field(b, 'points')) : Null<String>), null) : Bool)) : Bool)) {
-      return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument15:Dynamic = out; __callArgument15; })) : Bool);
+    if ((cast ((cast !(cast (cast ShapeCollision2D.isValidAabb__shapeCollision2D(({ final __callArgument26:Dynamic = a; __callArgument26; })) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus2D(_Runtime.field(b, 'points')) : Null<String>), null) : Bool)) : Bool)) {
+      return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument28:Dynamic = out; __callArgument28; })) : Bool);
     }
     bPoints = _Runtime.field(b, 'points');
     scratch = (cast ShapeCollision2D.acquireShapeCollisionScratch__shapeCollision2D() : ShapeCollisionScratch__shapeCollision2D);
     try {
       try {
-        writeAabbVertices(({ final __callArgument16:Dynamic = a; __callArgument16; }), (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesA);
-        var __returnValue17:Dynamic = (cast ShapeCollision2D.satConvexOverlap__shapeCollision2D(({ final __callArgument18:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesA; __callArgument18; }), (cast 4.0 : Float), ({ final __callArgument19:Dynamic = bPoints; __callArgument19; }), (cast (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1) : Float), ({ final __callArgument20:Dynamic = out; __callArgument20; }), (cast scratch : Dynamic)) : Bool);
+        writeAabbVertices(({ final __callArgument30:Dynamic = a; __callArgument30; }), (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesA);
+        var __returnValue32:Dynamic = (cast ShapeCollision2D.satConvexOverlap__shapeCollision2D(({ final __callArgument33:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesA; __callArgument33; }), (cast 4.0 : Float), ({ final __callArgument34:Dynamic = bPoints; __callArgument34; }), (cast (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1) : Float), ({ final __callArgument35:Dynamic = out; __callArgument35; }), (cast scratch : Dynamic)) : Bool);
         {
           ShapeCollision2D.releaseShapeCollisionScratch__shapeCollision2D((cast scratch : Dynamic));
         }
-        return cast __returnValue17;
+        return cast __returnValue32;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError21:Dynamic) {
+    } catch (__finallyError39:Dynamic) {
       {
         ShapeCollision2D.releaseShapeCollisionScratch__shapeCollision2D((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError21);
+      _Runtime.throwValue(__finallyError39);
     }
     {
       ShapeCollision2D.releaseShapeCollisionScratch__shapeCollision2D((cast scratch : Dynamic));
@@ -128,8 +128,8 @@ class ShapeCollision2D {
   }
 
   public static function testCircleAabbCollision2D(a:CollisionCircle2D, b:CollisionAabb2D, out:CollisionManifold2D):Bool {
-    if ((cast ((cast !(cast (cast ShapeCollision2D.isValidCircle__shapeCollision2D(({ final __callArgument22:Dynamic = a; __callArgument22; })) : Bool) : Bool) : Bool) || (cast !(cast (cast ShapeCollision2D.isValidAabb__shapeCollision2D(({ final __callArgument23:Dynamic = b; __callArgument23; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument24:Dynamic = out; __callArgument24; })) : Bool); }
-    return cast (cast ShapeCollision2D.circleAabbOverlap__shapeCollision2D((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), (cast _Runtime.field(b, 'minX') : Float), (cast _Runtime.field(b, 'minY') : Float), (cast _Runtime.field(b, 'maxX') : Float), (cast _Runtime.field(b, 'maxY') : Float), ({ final __callArgument25:Dynamic = out; __callArgument25; })) : Bool);
+    if ((cast ((cast !(cast (cast ShapeCollision2D.isValidCircle__shapeCollision2D(({ final __callArgument40:Dynamic = a; __callArgument40; })) : Bool) : Bool) : Bool) || (cast !(cast (cast ShapeCollision2D.isValidAabb__shapeCollision2D(({ final __callArgument42:Dynamic = b; __callArgument42; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument44:Dynamic = out; __callArgument44; })) : Bool); }
+    return cast (cast ShapeCollision2D.circleAabbOverlap__shapeCollision2D((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), (cast _Runtime.field(b, 'minX') : Float), (cast _Runtime.field(b, 'minY') : Float), (cast _Runtime.field(b, 'maxX') : Float), (cast _Runtime.field(b, 'maxY') : Float), ({ final __callArgument46:Dynamic = out; __callArgument46; })) : Bool);
     return cast null;
   }
 
@@ -143,7 +143,7 @@ class ShapeCollision2D {
     var dy:Float = cast _Runtime.UNDEFINED;
     var distSquared:Float = cast _Runtime.UNDEFINED;
     var dist:Float = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast (cast ShapeCollision2D.isValidCircle__shapeCollision2D(({ final __callArgument26:Dynamic = a; __callArgument26; })) : Bool) : Bool) : Bool) || (cast !(cast (cast ShapeCollision2D.isValidCircle__shapeCollision2D(({ final __callArgument27:Dynamic = b; __callArgument27; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument28:Dynamic = out; __callArgument28; })) : Bool); }
+    if ((cast ((cast !(cast (cast ShapeCollision2D.isValidCircle__shapeCollision2D(({ final __callArgument48:Dynamic = a; __callArgument48; })) : Bool) : Bool) : Bool) || (cast !(cast (cast ShapeCollision2D.isValidCircle__shapeCollision2D(({ final __callArgument50:Dynamic = b; __callArgument50; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument52:Dynamic = out; __callArgument52; })) : Bool); }
     ax = _Runtime.field(a, 'x');
     ay = _Runtime.field(a, 'y');
     bx = _Runtime.field(b, 'x');
@@ -153,7 +153,7 @@ class ShapeCollision2D {
     dy = (ay - by);
     distSquared = ((dx * dx) + (dy * dy));
     if ((cast ((cast distSquared : Float) >= (cast (radiusSum * radiusSum) : Float)) : Bool)) {
-      clearCollisionManifold2D(({ final __callArgument29:Dynamic = out; __callArgument29; }));
+      clearCollisionManifold2D(({ final __callArgument54:Dynamic = out; __callArgument54; }));
       return cast false;
     }
     dist = HxMath.sqrt(distSquared);
@@ -186,7 +186,7 @@ class ShapeCollision2D {
     var localY:Float = cast _Runtime.UNDEFINED;
     var localNormalX:Float = cast _Runtime.UNDEFINED;
     var localNormalY:Float = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast (cast ShapeCollision2D.isValidCircle__shapeCollision2D(({ final __callArgument30:Dynamic = a; __callArgument30; })) : Bool) : Bool) : Bool) || (cast !(cast (cast ShapeCollision2D.isValidObb__shapeCollision2D(({ final __callArgument31:Dynamic = b; __callArgument31; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument32:Dynamic = out; __callArgument32; })) : Bool); }
+    if ((cast ((cast !(cast (cast ShapeCollision2D.isValidCircle__shapeCollision2D(({ final __callArgument56:Dynamic = a; __callArgument56; })) : Bool) : Bool) : Bool) || (cast !(cast (cast ShapeCollision2D.isValidObb__shapeCollision2D(({ final __callArgument58:Dynamic = b; __callArgument58; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument60:Dynamic = out; __callArgument60; })) : Bool); }
     cx = _Runtime.field(a, 'x');
     cy = _Runtime.field(a, 'y');
     radius = _Runtime.field(a, 'radius');
@@ -198,7 +198,7 @@ class ShapeCollision2D {
     dy = _Runtime.subtractNumbers(cy, _Runtime.field(b, 'y'));
     localX = ((dx * cos) + (dy * sin));
     localY = ((-dx * sin) + (dy * cos));
-    if ((cast !(cast (cast ShapeCollision2D.circleAabbOverlap__shapeCollision2D((cast localX : Float), (cast localY : Float), (cast radius : Float), (cast -halfW : Float), (cast -halfH : Float), (cast halfW : Float), (cast halfH : Float), ({ final __callArgument33:Dynamic = out; __callArgument33; })) : Bool) : Bool) : Bool)) {
+    if ((cast !(cast (cast ShapeCollision2D.circleAabbOverlap__shapeCollision2D((cast localX : Float), (cast localY : Float), (cast radius : Float), (cast -halfW : Float), (cast -halfH : Float), (cast halfW : Float), (cast halfH : Float), ({ final __callArgument62:Dynamic = out; __callArgument62; })) : Bool) : Bool) : Bool)) {
       return cast false;
     }
     localNormalX = out.normalX;
@@ -212,24 +212,24 @@ class ShapeCollision2D {
   public static function testCirclePolygonCollision2D(a:CollisionCircle2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
     var points:Array<Float> = cast _Runtime.UNDEFINED;
     var scratch:ShapeCollisionScratch__shapeCollision2D = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast (cast ShapeCollision2D.isValidCircle__shapeCollision2D(({ final __callArgument34:Dynamic = a; __callArgument34; })) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus2D(_Runtime.field(b, 'points')) : Null<String>), null) : Bool)) : Bool)) {
-      return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument35:Dynamic = out; __callArgument35; })) : Bool);
+    if ((cast ((cast !(cast (cast ShapeCollision2D.isValidCircle__shapeCollision2D(({ final __callArgument64:Dynamic = a; __callArgument64; })) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus2D(_Runtime.field(b, 'points')) : Null<String>), null) : Bool)) : Bool)) {
+      return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument66:Dynamic = out; __callArgument66; })) : Bool);
     }
     points = _Runtime.field(b, 'points');
     scratch = (cast ShapeCollision2D.acquireShapeCollisionScratch__shapeCollision2D() : ShapeCollisionScratch__shapeCollision2D);
     try {
       try {
-        var __returnValue36:Dynamic = (cast ShapeCollision2D.satCircleConvexOverlap__shapeCollision2D((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), ({ final __callArgument37:Dynamic = points; __callArgument37; }), (cast (_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1) : Float), ({ final __callArgument38:Dynamic = out; __callArgument38; }), (cast scratch : Dynamic)) : Bool);
+        var __returnValue68:Dynamic = (cast ShapeCollision2D.satCircleConvexOverlap__shapeCollision2D((cast _Runtime.field(a, 'x') : Float), (cast _Runtime.field(a, 'y') : Float), (cast _Runtime.field(a, 'radius') : Float), ({ final __callArgument69:Dynamic = points; __callArgument69; }), (cast (_Runtime.toInt32(_Runtime.field(points, 'length')) >> 1) : Float), ({ final __callArgument70:Dynamic = out; __callArgument70; }), (cast scratch : Dynamic)) : Bool);
         {
           ShapeCollision2D.releaseShapeCollisionScratch__shapeCollision2D((cast scratch : Dynamic));
         }
-        return cast __returnValue36;
+        return cast __returnValue68;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError39:Dynamic) {
+    } catch (__finallyError73:Dynamic) {
       {
         ShapeCollision2D.releaseShapeCollisionScratch__shapeCollision2D((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError39);
+      _Runtime.throwValue(__finallyError73);
     }
     {
       ShapeCollision2D.releaseShapeCollisionScratch__shapeCollision2D((cast scratch : Dynamic));
@@ -239,23 +239,23 @@ class ShapeCollision2D {
 
   public static function testObbObbCollision2D(a:CollisionObb2D, b:CollisionObb2D, out:CollisionManifold2D):Bool {
     var scratch:ShapeCollisionScratch__shapeCollision2D = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast (cast ShapeCollision2D.isValidObb__shapeCollision2D(({ final __callArgument40:Dynamic = a; __callArgument40; })) : Bool) : Bool) : Bool) || (cast !(cast (cast ShapeCollision2D.isValidObb__shapeCollision2D(({ final __callArgument41:Dynamic = b; __callArgument41; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument42:Dynamic = out; __callArgument42; })) : Bool); }
+    if ((cast ((cast !(cast (cast ShapeCollision2D.isValidObb__shapeCollision2D(({ final __callArgument74:Dynamic = a; __callArgument74; })) : Bool) : Bool) : Bool) || (cast !(cast (cast ShapeCollision2D.isValidObb__shapeCollision2D(({ final __callArgument76:Dynamic = b; __callArgument76; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument78:Dynamic = out; __callArgument78; })) : Bool); }
     scratch = (cast ShapeCollision2D.acquireShapeCollisionScratch__shapeCollision2D() : ShapeCollisionScratch__shapeCollision2D);
     try {
       try {
-        writeObbVertices(({ final __callArgument43:Dynamic = a; __callArgument43; }), (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesA);
-        writeObbVertices(({ final __callArgument44:Dynamic = b; __callArgument44; }), (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesB);
-        var __returnValue45:Dynamic = (cast ShapeCollision2D.satConvexOverlap__shapeCollision2D(({ final __callArgument46:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesA; __callArgument46; }), (cast 4.0 : Float), ({ final __callArgument47:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesB; __callArgument47; }), (cast 4.0 : Float), ({ final __callArgument48:Dynamic = out; __callArgument48; }), (cast scratch : Dynamic)) : Bool);
+        writeObbVertices(({ final __callArgument80:Dynamic = a; __callArgument80; }), (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesA);
+        writeObbVertices(({ final __callArgument82:Dynamic = b; __callArgument82; }), (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesB);
+        var __returnValue84:Dynamic = (cast ShapeCollision2D.satConvexOverlap__shapeCollision2D(({ final __callArgument85:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesA; __callArgument85; }), (cast 4.0 : Float), ({ final __callArgument86:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesB; __callArgument86; }), (cast 4.0 : Float), ({ final __callArgument87:Dynamic = out; __callArgument87; }), (cast scratch : Dynamic)) : Bool);
         {
           ShapeCollision2D.releaseShapeCollisionScratch__shapeCollision2D((cast scratch : Dynamic));
         }
-        return cast __returnValue45;
+        return cast __returnValue84;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError49:Dynamic) {
+    } catch (__finallyError91:Dynamic) {
       {
         ShapeCollision2D.releaseShapeCollisionScratch__shapeCollision2D((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError49);
+      _Runtime.throwValue(__finallyError91);
     }
     {
       ShapeCollision2D.releaseShapeCollisionScratch__shapeCollision2D((cast scratch : Dynamic));
@@ -266,25 +266,25 @@ class ShapeCollision2D {
   public static function testObbPolygonCollision2D(a:CollisionObb2D, b:CollisionPolygon2D, out:CollisionManifold2D):Bool {
     var bPoints:Array<Float> = cast _Runtime.UNDEFINED;
     var scratch:ShapeCollisionScratch__shapeCollision2D = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast (cast ShapeCollision2D.isValidObb__shapeCollision2D(({ final __callArgument50:Dynamic = a; __callArgument50; })) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus2D(_Runtime.field(b, 'points')) : Null<String>), null) : Bool)) : Bool)) {
-      return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument51:Dynamic = out; __callArgument51; })) : Bool);
+    if ((cast ((cast !(cast (cast ShapeCollision2D.isValidObb__shapeCollision2D(({ final __callArgument92:Dynamic = a; __callArgument92; })) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus2D(_Runtime.field(b, 'points')) : Null<String>), null) : Bool)) : Bool)) {
+      return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument94:Dynamic = out; __callArgument94; })) : Bool);
     }
     bPoints = _Runtime.field(b, 'points');
     scratch = (cast ShapeCollision2D.acquireShapeCollisionScratch__shapeCollision2D() : ShapeCollisionScratch__shapeCollision2D);
     try {
       try {
-        writeObbVertices(({ final __callArgument52:Dynamic = a; __callArgument52; }), (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesA);
-        var __returnValue53:Dynamic = (cast ShapeCollision2D.satConvexOverlap__shapeCollision2D(({ final __callArgument54:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesA; __callArgument54; }), (cast 4.0 : Float), ({ final __callArgument55:Dynamic = bPoints; __callArgument55; }), (cast (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1) : Float), ({ final __callArgument56:Dynamic = out; __callArgument56; }), (cast scratch : Dynamic)) : Bool);
+        writeObbVertices(({ final __callArgument96:Dynamic = a; __callArgument96; }), (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesA);
+        var __returnValue98:Dynamic = (cast ShapeCollision2D.satConvexOverlap__shapeCollision2D(({ final __callArgument99:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).verticesA; __callArgument99; }), (cast 4.0 : Float), ({ final __callArgument100:Dynamic = bPoints; __callArgument100; }), (cast (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1) : Float), ({ final __callArgument101:Dynamic = out; __callArgument101; }), (cast scratch : Dynamic)) : Bool);
         {
           ShapeCollision2D.releaseShapeCollisionScratch__shapeCollision2D((cast scratch : Dynamic));
         }
-        return cast __returnValue53;
+        return cast __returnValue98;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError57:Dynamic) {
+    } catch (__finallyError105:Dynamic) {
       {
         ShapeCollision2D.releaseShapeCollisionScratch__shapeCollision2D((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError57);
+      _Runtime.throwValue(__finallyError105);
     }
     {
       ShapeCollision2D.releaseShapeCollisionScratch__shapeCollision2D((cast scratch : Dynamic));
@@ -297,24 +297,24 @@ class ShapeCollision2D {
     var bPoints:Array<Float> = cast _Runtime.UNDEFINED;
     var scratch:ShapeCollisionScratch__shapeCollision2D = cast _Runtime.UNDEFINED;
     if ((cast ((cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus2D(_Runtime.field(a, 'points')) : Null<String>), null) : Bool) || (cast !_Runtime.strictEquals((cast getCollisionPolygonValidationStatus2D(_Runtime.field(b, 'points')) : Null<String>), null) : Bool)) : Bool)) {
-      return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument58:Dynamic = out; __callArgument58; })) : Bool);
+      return cast (cast ShapeCollision2D.clearInvalidCollisionManifold__shapeCollision2D(({ final __callArgument106:Dynamic = out; __callArgument106; })) : Bool);
     }
     aPoints = _Runtime.field(a, 'points');
     bPoints = _Runtime.field(b, 'points');
     scratch = (cast ShapeCollision2D.acquireShapeCollisionScratch__shapeCollision2D() : ShapeCollisionScratch__shapeCollision2D);
     try {
       try {
-        var __returnValue59:Dynamic = (cast ShapeCollision2D.satConvexOverlap__shapeCollision2D(({ final __callArgument60:Dynamic = aPoints; __callArgument60; }), (cast (_Runtime.toInt32(_Runtime.field(aPoints, 'length')) >> 1) : Float), ({ final __callArgument61:Dynamic = bPoints; __callArgument61; }), (cast (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1) : Float), ({ final __callArgument62:Dynamic = out; __callArgument62; }), (cast scratch : Dynamic)) : Bool);
+        var __returnValue108:Dynamic = (cast ShapeCollision2D.satConvexOverlap__shapeCollision2D(({ final __callArgument109:Dynamic = aPoints; __callArgument109; }), (cast (_Runtime.toInt32(_Runtime.field(aPoints, 'length')) >> 1) : Float), ({ final __callArgument110:Dynamic = bPoints; __callArgument110; }), (cast (_Runtime.toInt32(_Runtime.field(bPoints, 'length')) >> 1) : Float), ({ final __callArgument111:Dynamic = out; __callArgument111; }), (cast scratch : Dynamic)) : Bool);
         {
           ShapeCollision2D.releaseShapeCollisionScratch__shapeCollision2D((cast scratch : Dynamic));
         }
-        return cast __returnValue59;
+        return cast __returnValue108;
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError63:Dynamic) {
+    } catch (__finallyError115:Dynamic) {
       {
         ShapeCollision2D.releaseShapeCollisionScratch__shapeCollision2D((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError63);
+      _Runtime.throwValue(__finallyError115);
     }
     {
       ShapeCollision2D.releaseShapeCollisionScratch__shapeCollision2D((cast scratch : Dynamic));
@@ -345,7 +345,7 @@ class ShapeCollision2D {
     if ((cast ((cast distSquared : Float) > (cast (epsilon * epsilon) : Float)) : Bool)) {
       var dist:Float = HxMath.sqrt(distSquared);
       if ((cast ((cast dist : Float) >= (cast radius : Float)) : Bool)) {
-        clearCollisionManifold2D(({ final __callArgument64:Dynamic = out; __callArgument64; }));
+        clearCollisionManifold2D(({ final __callArgument116:Dynamic = out; __callArgument116; }));
         return cast false;
       }
       var inv:Float = (1.0 / dist);
@@ -395,7 +395,7 @@ class ShapeCollision2D {
     var nearestY:Float = cast _Runtime.UNDEFINED;
     var nearestDistSquared:Float = cast _Runtime.UNDEFINED;
     var vertexAxisLen:Float = cast _Runtime.UNDEFINED;
-    epsilon = (cast ShapeCollision2D.relativeEpsilon__shapeCollision2D((cast HxMath.max((cast ShapeCollision2D.getPolygonExtent__shapeCollision2D(({ final __callArgument65:Dynamic = px; __callArgument65; }), (cast pn : Float)) : Float), radius) : Float)) : Float);
+    epsilon = (cast ShapeCollision2D.relativeEpsilon__shapeCollision2D((cast HxMath.max((cast ShapeCollision2D.getPolygonExtent__shapeCollision2D(({ final __callArgument118:Dynamic = px; __callArgument118; }), (cast pn : Float)) : Float), radius) : Float)) : Float);
     minOverlap = HxMath.POSITIVE_INFINITY;
     minOverlapSign = 1.0;
     normalX = 0.0;
@@ -410,14 +410,14 @@ class ShapeCollision2D {
         var y1:Float = _Runtime.getIndex(px, ((_Runtime.toInt32(j) << 1) + 1.0));
         ((cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis : { var x:Float; }).x = cast ((y1 - y0) : Float));
         ((cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis : { var y:Float; }).y = cast (-(x1 - x0) : Float));
-        var len:Float = (cast normalizeVector2(({ final __callArgument66:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis; __callArgument66; }), ({ final __callArgument67:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis; __callArgument67; })) : Float);
+        var len:Float = (cast normalizeVector2(({ final __callArgument122:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis; __callArgument122; }), ({ final __callArgument123:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis; __callArgument123; })) : Float);
         if ((cast ((cast len : Float) <= (cast epsilon : Float)) : Bool)) { i++; continue; }
         ShapeCollision2D.canonicalizeScratchAxis__shapeCollision2D((cast scratch : Dynamic));
         var axisX:Float = (cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis : { var x:Float; }).x;
         var axisY:Float = (cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis : { var y:Float; }).y;
-        var overlap:Float = (cast ShapeCollision2D.circlePolygonAxisOverlap__shapeCollision2D((cast axisX : Float), (cast axisY : Float), (cast cx : Float), (cast cy : Float), (cast radius : Float), ({ final __callArgument68:Dynamic = px; __callArgument68; }), (cast pn : Float)) : Float);
+        var overlap:Float = (cast ShapeCollision2D.circlePolygonAxisOverlap__shapeCollision2D((cast axisX : Float), (cast axisY : Float), (cast cx : Float), (cast cy : Float), (cast radius : Float), ({ final __callArgument126:Dynamic = px; __callArgument126; }), (cast pn : Float)) : Float);
         if ((cast ((cast overlap : Float) <= (cast epsilon : Float)) : Bool)) {
-          clearCollisionManifold2D(({ final __callArgument69:Dynamic = out; __callArgument69; }));
+          clearCollisionManifold2D(({ final __callArgument128:Dynamic = out; __callArgument128; }));
           return cast false;
         }
         if ((cast (cast ShapeCollision2D.isPreferredAxis__shapeCollision2D((cast overlap : Float), (cast axisX : Float), (cast axisY : Float), (cast minOverlap : Float), (cast normalX : Float), (cast normalY : Float), (cast epsilon : Float)) : Bool) : Bool)) {
@@ -450,14 +450,14 @@ class ShapeCollision2D {
     }
     ((cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis : { var x:Float; }).x = cast ((cx - nearestX) : Float));
     ((cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis : { var y:Float; }).y = cast ((cy - nearestY) : Float));
-    vertexAxisLen = (cast normalizeVector2(({ final __callArgument70:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis; __callArgument70; }), ({ final __callArgument71:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis; __callArgument71; })) : Float);
+    vertexAxisLen = (cast normalizeVector2(({ final __callArgument130:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis; __callArgument130; }), ({ final __callArgument131:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis; __callArgument131; })) : Float);
     if ((cast ((cast vertexAxisLen : Float) > (cast epsilon : Float)) : Bool)) {
       ShapeCollision2D.canonicalizeScratchAxis__shapeCollision2D((cast scratch : Dynamic));
       var axisX:Float = (cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis : { var x:Float; }).x;
       var axisY:Float = (cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis : { var y:Float; }).y;
-      var overlap:Float = (cast ShapeCollision2D.circlePolygonAxisOverlap__shapeCollision2D((cast axisX : Float), (cast axisY : Float), (cast cx : Float), (cast cy : Float), (cast radius : Float), ({ final __callArgument72:Dynamic = px; __callArgument72; }), (cast pn : Float)) : Float);
+      var overlap:Float = (cast ShapeCollision2D.circlePolygonAxisOverlap__shapeCollision2D((cast axisX : Float), (cast axisY : Float), (cast cx : Float), (cast cy : Float), (cast radius : Float), ({ final __callArgument134:Dynamic = px; __callArgument134; }), (cast pn : Float)) : Float);
       if ((cast ((cast overlap : Float) <= (cast epsilon : Float)) : Bool)) {
-        clearCollisionManifold2D(({ final __callArgument73:Dynamic = out; __callArgument73; }));
+        clearCollisionManifold2D(({ final __callArgument136:Dynamic = out; __callArgument136; }));
         return cast false;
       }
       if ((cast (cast ShapeCollision2D.isPreferredAxis__shapeCollision2D((cast overlap : Float), (cast axisX : Float), (cast axisY : Float), (cast minOverlap : Float), (cast normalX : Float), (cast normalY : Float), (cast epsilon : Float)) : Bool) : Bool)) {
@@ -468,7 +468,7 @@ class ShapeCollision2D {
       }
     }
     if ((cast _Runtime.strictEquals(minOverlap, HxMath.POSITIVE_INFINITY) : Bool)) {
-      clearCollisionManifold2D(({ final __callArgument74:Dynamic = out; __callArgument74; }));
+      clearCollisionManifold2D(({ final __callArgument138:Dynamic = out; __callArgument138; }));
       return cast false;
     }
     (normalX = cast ((normalX * minOverlapSign) : Dynamic));
@@ -522,15 +522,15 @@ class ShapeCollision2D {
     var epsilon:Float = cast _Runtime.UNDEFINED;
     var normalX:Float = cast _Runtime.UNDEFINED;
     var normalY:Float = cast _Runtime.UNDEFINED;
-    epsilon = (cast ShapeCollision2D.relativeEpsilon__shapeCollision2D((cast HxMath.max((cast ShapeCollision2D.getPolygonExtent__shapeCollision2D(({ final __callArgument75:Dynamic = ax; __callArgument75; }), (cast an : Float)) : Float), (cast ShapeCollision2D.getPolygonExtent__shapeCollision2D(({ final __callArgument76:Dynamic = bx; __callArgument76; }), (cast bn : Float)) : Float)) : Float)) : Float);
+    epsilon = (cast ShapeCollision2D.relativeEpsilon__shapeCollision2D((cast HxMath.max((cast ShapeCollision2D.getPolygonExtent__shapeCollision2D(({ final __callArgument140:Dynamic = ax; __callArgument140; }), (cast an : Float)) : Float), (cast ShapeCollision2D.getPolygonExtent__shapeCollision2D(({ final __callArgument142:Dynamic = bx; __callArgument142; }), (cast bn : Float)) : Float)) : Float)) : Float);
     ((cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).minOverlapAxis : { var overlap:Float; var sign:Float; var x:Float; var y:Float; }).overlap = HxMath.POSITIVE_INFINITY);
     ((cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).minOverlapAxis : { var overlap:Float; var sign:Float; var x:Float; var y:Float; }).sign = 1.0);
     ((cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).minOverlapAxis : { var overlap:Float; var sign:Float; var x:Float; var y:Float; }).x = 0.0);
     ((cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).minOverlapAxis : { var overlap:Float; var sign:Float; var x:Float; var y:Float; }).y = 0.0);
-    if ((cast !(cast (cast ShapeCollision2D.accumulatePolygonAxes__shapeCollision2D(({ final __callArgument77:Dynamic = ax; __callArgument77; }), (cast an : Float), ({ final __callArgument78:Dynamic = ax; __callArgument78; }), (cast an : Float), ({ final __callArgument79:Dynamic = bx; __callArgument79; }), (cast bn : Float), (cast epsilon : Float), ({ final __callArgument80:Dynamic = out; __callArgument80; }), (cast scratch : Dynamic)) : Bool) : Bool) : Bool)) { return cast false; }
-    if ((cast !(cast (cast ShapeCollision2D.accumulatePolygonAxes__shapeCollision2D(({ final __callArgument81:Dynamic = bx; __callArgument81; }), (cast bn : Float), ({ final __callArgument82:Dynamic = ax; __callArgument82; }), (cast an : Float), ({ final __callArgument83:Dynamic = bx; __callArgument83; }), (cast bn : Float), (cast epsilon : Float), ({ final __callArgument84:Dynamic = out; __callArgument84; }), (cast scratch : Dynamic)) : Bool) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast (cast ShapeCollision2D.accumulatePolygonAxes__shapeCollision2D(({ final __callArgument148:Dynamic = ax; __callArgument148; }), (cast an : Float), ({ final __callArgument149:Dynamic = ax; __callArgument149; }), (cast an : Float), ({ final __callArgument150:Dynamic = bx; __callArgument150; }), (cast bn : Float), (cast epsilon : Float), ({ final __callArgument151:Dynamic = out; __callArgument151; }), (cast scratch : Dynamic)) : Bool) : Bool) : Bool)) { return cast false; }
+    if ((cast !(cast (cast ShapeCollision2D.accumulatePolygonAxes__shapeCollision2D(({ final __callArgument156:Dynamic = bx; __callArgument156; }), (cast bn : Float), ({ final __callArgument157:Dynamic = ax; __callArgument157; }), (cast an : Float), ({ final __callArgument158:Dynamic = bx; __callArgument158; }), (cast bn : Float), (cast epsilon : Float), ({ final __callArgument159:Dynamic = out; __callArgument159; }), (cast scratch : Dynamic)) : Bool) : Bool) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals((cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).minOverlapAxis : { var overlap:Float; var sign:Float; var x:Float; var y:Float; }).overlap, HxMath.POSITIVE_INFINITY) : Bool)) {
-      clearCollisionManifold2D(({ final __callArgument85:Dynamic = out; __callArgument85; }));
+      clearCollisionManifold2D(({ final __callArgument164:Dynamic = out; __callArgument164; }));
       return cast false;
     }
     normalX = ((cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).minOverlapAxis : { var overlap:Float; var sign:Float; var x:Float; var y:Float; }).x * (cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).minOverlapAxis : { var overlap:Float; var sign:Float; var x:Float; var y:Float; }).sign);
@@ -554,14 +554,14 @@ class ShapeCollision2D {
         var y1:Float = _Runtime.getIndex(sx, ((_Runtime.toInt32(j) << 1) + 1.0));
         ((cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis : { var x:Float; }).x = cast ((y1 - y0) : Float));
         ((cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis : { var y:Float; }).y = cast (-(x1 - x0) : Float));
-        var len:Float = (cast normalizeVector2(({ final __callArgument86:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis; __callArgument86; }), ({ final __callArgument87:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis; __callArgument87; })) : Float);
+        var len:Float = (cast normalizeVector2(({ final __callArgument166:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis; __callArgument166; }), ({ final __callArgument167:Dynamic = (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis; __callArgument167; })) : Float);
         if ((cast ((cast len : Float) <= (cast epsilon : Float)) : Bool)) { i++; continue; }
         ShapeCollision2D.canonicalizeScratchAxis__shapeCollision2D((cast scratch : Dynamic));
         var axisX:Float = (cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis : { var x:Float; }).x;
         var axisY:Float = (cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).axis : { var y:Float; }).y;
-        var overlap:Float = (cast ShapeCollision2D.polygonAxisOverlap__shapeCollision2D((cast axisX : Float), (cast axisY : Float), ({ final __callArgument88:Dynamic = ax; __callArgument88; }), (cast an : Float), ({ final __callArgument89:Dynamic = bx; __callArgument89; }), (cast bn : Float)) : Float);
+        var overlap:Float = (cast ShapeCollision2D.polygonAxisOverlap__shapeCollision2D((cast axisX : Float), (cast axisY : Float), ({ final __callArgument170:Dynamic = ax; __callArgument170; }), (cast an : Float), ({ final __callArgument171:Dynamic = bx; __callArgument171; }), (cast bn : Float)) : Float);
         if ((cast ((cast overlap : Float) <= (cast epsilon : Float)) : Bool)) {
-          clearCollisionManifold2D(({ final __callArgument90:Dynamic = out; __callArgument90; }));
+          clearCollisionManifold2D(({ final __callArgument174:Dynamic = out; __callArgument174; }));
           return cast false;
         }
         if ((cast (cast ShapeCollision2D.isPreferredAxis__shapeCollision2D((cast overlap : Float), (cast axisX : Float), (cast axisY : Float), (cast (cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).minOverlapAxis : { var overlap:Float; var sign:Float; var x:Float; var y:Float; }).overlap : Float), (cast (cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).minOverlapAxis : { var overlap:Float; var sign:Float; var x:Float; var y:Float; }).x : Float), (cast (cast (cast scratch : ShapeCollisionScratch__shapeCollision2D).minOverlapAxis : { var overlap:Float; var sign:Float; var x:Float; var y:Float; }).y : Float), (cast epsilon : Float)) : Bool) : Bool)) {
@@ -629,7 +629,7 @@ class ShapeCollision2D {
   }
 
   public static function clearInvalidCollisionManifold__shapeCollision2D(out:CollisionManifold2D):Bool {
-    clearCollisionManifold2D(({ final __callArgument91:Dynamic = out; __callArgument91; }));
+    clearCollisionManifold2D(({ final __callArgument176:Dynamic = out; __callArgument176; }));
     return cast false;
     return cast null;
   }
@@ -693,7 +693,7 @@ class ShapeCollision2D {
   }
 
   public static function createShapeCollisionScratch__shapeCollision2D():ShapeCollisionScratch__shapeCollision2D {
-    return cast { verticesA: new flighthq._internal._Float64Array(8.0), verticesB: new flighthq._internal._Float64Array(8.0), axis: (cast createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Vector2), minOverlapAxis: { overlap: HxMath.POSITIVE_INFINITY, sign: 1.0, x: 0.0, y: 0.0 } };
+    return cast { verticesA: new flighthq._internal._Float64Array(8.0), verticesB: new flighthq._internal._Float64Array(8.0), axis: (cast (#if js _Runtime.callValue(createVector2, cast ([] : Array<Dynamic>)) #else createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector2), minOverlapAxis: { overlap: HxMath.POSITIVE_INFINITY, sign: 1.0, x: 0.0, y: 0.0 } };
     return cast null;
   }
 

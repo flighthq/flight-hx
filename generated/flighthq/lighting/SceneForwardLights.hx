@@ -24,7 +24,7 @@ class SceneForwardLights {
     points = _Runtime.field(lights, 'point');
     spots = _Runtime.field(lights, 'spot');
     pointCount = (cast SceneForwardLights.selectStrongestLights__sceneForwardLights(({ final __callArgument0:Dynamic = points; __callArgument0; }), ({ final __callArgument1:Dynamic = bounds; __callArgument1; }), ({ final __callArgument2:Dynamic = SceneForwardLights.scratchSelectedPointLights__sceneForwardLights; __callArgument2; }), ({ final __callArgument3:Dynamic = SceneForwardLights.scratchSelectedPointIndices__sceneForwardLights; __callArgument3; }), ({ final __callArgument4:Dynamic = SceneForwardLights.scratchSelectedPointScores__sceneForwardLights; __callArgument4; })) : Float);
-    spotCount = (cast SceneForwardLights.selectStrongestLights__sceneForwardLights(({ final __callArgument5:Dynamic = spots; __callArgument5; }), ({ final __callArgument6:Dynamic = bounds; __callArgument6; }), ({ final __callArgument7:Dynamic = SceneForwardLights.scratchSelectedSpotLights__sceneForwardLights; __callArgument7; }), ({ final __callArgument8:Dynamic = SceneForwardLights.scratchSelectedSpotIndices__sceneForwardLights; __callArgument8; }), ({ final __callArgument9:Dynamic = SceneForwardLights.scratchSelectedSpotScores__sceneForwardLights; __callArgument9; })) : Float);
+    spotCount = (cast SceneForwardLights.selectStrongestLights__sceneForwardLights(({ final __callArgument10:Dynamic = spots; __callArgument10; }), ({ final __callArgument11:Dynamic = bounds; __callArgument11; }), ({ final __callArgument12:Dynamic = SceneForwardLights.scratchSelectedSpotLights__sceneForwardLights; __callArgument12; }), ({ final __callArgument13:Dynamic = SceneForwardLights.scratchSelectedSpotIndices__sceneForwardLights; __callArgument13; }), ({ final __callArgument14:Dynamic = SceneForwardLights.scratchSelectedSpotScores__sceneForwardLights; __callArgument14; })) : Float);
     outPoints = out.point;
     outSpots = out.spot;
     outIndices = out.indices;
@@ -57,7 +57,7 @@ class SceneForwardLights {
       var inputIndex:Float = 0.0;
       while ((cast ((cast inputIndex : Float) < (cast _Runtime.field(lights, 'length') : Float)) : Bool)) {
         var light:flighthq._internal._Union2<PointLight, SpotLight> = flighthq._internal._StaticIndex.readArray(lights, inputIndex);
-        var score:Float = (cast getLightContributionAtBoundingSphere(({ final __callArgument10:Dynamic = light; __callArgument10; }), ({ final __callArgument11:Dynamic = bounds; __callArgument11; })) : Float);
+        var score:Float = (cast getLightContributionAtBoundingSphere(({ final __callArgument20:Dynamic = light; __callArgument20; }), ({ final __callArgument21:Dynamic = bounds; __callArgument21; })) : Float);
         if ((cast !(cast _Runtime.compare(score, 0.0, '>') : Bool) : Bool)) { inputIndex++; continue; }
         var insertAt:Float = selectedCount;
         while ((cast ((cast insertAt : Float) > (cast 0.0 : Float)) : Bool)) {

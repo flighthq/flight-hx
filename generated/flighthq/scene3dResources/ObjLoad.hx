@@ -16,19 +16,19 @@ class ObjLoad {
       flighthq._internal._Async.protect(function():Dynamic {
         var source:Null<String> = cast _Runtime.UNDEFINED;
         var document:Scene3DDocument = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap((cast loadScene3DDocumentTextFromUrl((cast url : String), ({ final __callArgument7:Dynamic = options; __callArgument7; })) : flighthq._internal._Promise<Null<String>>), function(__awaitValue3:Dynamic):Dynamic {
-          source = __awaitValue3;
-          var __flowBranch4:Dynamic;
+        return flighthq._internal._Async.flatMap((cast loadScene3DDocumentTextFromUrl((cast url : String), ({ final __callArgument12:Dynamic = options; __callArgument12; })) : flighthq._internal._Promise<Null<String>>), function(__awaitValue6:Dynamic):Dynamic {
+          source = __awaitValue6;
+          var __flowBranch7:Dynamic;
           if ((cast _Runtime.strictEquals(source, null) : Bool)) {
-            __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch7 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch4 = flighthq._internal._Async.flowNormal();
+            __flowBranch7 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch4, function():Dynamic {
-            document = (cast parseObj((cast source : String), ({ final __callArgument5:Dynamic = materials; __callArgument5; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Scene3DDocument);
-            setScene3DDocumentResourceBasePathFromUrl(({ final __callArgument6:Dynamic = document; __callArgument6; }), (cast url : String));
+          return flighthq._internal._Async.continueFlow(__flowBranch7, function():Dynamic {
+            document = (cast (#if js _Runtime.callValue(parseObj, cast ([(cast source : String), ({ final __callArgument9:Dynamic = materials; __callArgument9; })] : Array<Dynamic>)) #else parseObj((cast source : String), ({ final __callArgument8:Dynamic = materials; __callArgument8; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Scene3DDocument);
+            setScene3DDocumentResourceBasePathFromUrl(({ final __callArgument10:Dynamic = document; __callArgument10; }), (cast url : String));
             return flighthq._internal._Async.flowReturn(document);
           });
         });

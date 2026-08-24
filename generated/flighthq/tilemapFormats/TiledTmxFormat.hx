@@ -27,21 +27,21 @@ class TiledTmxFormat {
     var open:String = cast _Runtime.UNDEFINED;
     lines = (cast cast (['<?xml version="1.0" encoding="UTF-8"?>'] : Array<Dynamic>));
     open = '<map' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'version' : String), ({ final __callArgument0:Dynamic = map.version; __callArgument0; })) : String)) + '';
-    if ((cast !_Runtime.strictEquals(map.tiledVersion, null) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tiledversion' : String), ({ final __callArgument1:Dynamic = map.tiledVersion; __callArgument1; })) : String)) : Dynamic)); }
-    (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'orientation' : String), ({ final __callArgument2:Dynamic = map.orientation; __callArgument2; })) : String)) : Dynamic));
-    (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'renderorder' : String), ({ final __callArgument3:Dynamic = map.renderOrder; __callArgument3; })) : String)) : Dynamic));
-    (open = cast ((open + ((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'width' : String), ({ final __callArgument4:Dynamic = map.width; __callArgument4; })) : String) + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'height' : String), ({ final __callArgument5:Dynamic = map.height; __callArgument5; })) : String))) : Dynamic));
-    (open = cast ((open + ((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tilewidth' : String), ({ final __callArgument6:Dynamic = map.tileWidth; __callArgument6; })) : String) + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tileheight' : String), ({ final __callArgument7:Dynamic = map.tileHeight; __callArgument7; })) : String))) : Dynamic));
-    (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'infinite' : String), ({ final __callArgument8:Dynamic = ((cast map.infinite : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)); __callArgument8; })) : String)) : Dynamic));
-    if ((cast !_Runtime.strictEquals(map.backgroundColor, null) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'backgroundcolor' : String), ({ final __callArgument9:Dynamic = (cast formatTiledColor((cast map.backgroundColor : Float)) : String); __callArgument9; })) : String)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(map.tiledVersion, null) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tiledversion' : String), ({ final __callArgument2:Dynamic = map.tiledVersion; __callArgument2; })) : String)) : Dynamic)); }
+    (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'orientation' : String), ({ final __callArgument4:Dynamic = map.orientation; __callArgument4; })) : String)) : Dynamic));
+    (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'renderorder' : String), ({ final __callArgument6:Dynamic = map.renderOrder; __callArgument6; })) : String)) : Dynamic));
+    (open = cast ((open + ((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'width' : String), ({ final __callArgument8:Dynamic = map.width; __callArgument8; })) : String) + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'height' : String), ({ final __callArgument10:Dynamic = map.height; __callArgument10; })) : String))) : Dynamic));
+    (open = cast ((open + ((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tilewidth' : String), ({ final __callArgument12:Dynamic = map.tileWidth; __callArgument12; })) : String) + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tileheight' : String), ({ final __callArgument14:Dynamic = map.tileHeight; __callArgument14; })) : String))) : Dynamic));
+    (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'infinite' : String), ({ final __callArgument16:Dynamic = ((cast map.infinite : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)); __callArgument16; })) : String)) : Dynamic));
+    if ((cast !_Runtime.strictEquals(map.backgroundColor, null) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'backgroundcolor' : String), ({ final __callArgument18:Dynamic = (cast formatTiledColor((cast map.backgroundColor : Float)) : String); __callArgument18; })) : String)) : Dynamic)); }
     _Runtime.callProperty(lines, 'push', cast (['' + Std.string(open) + '>'] : Array<Dynamic>));
     for (ref in _Runtime.iterable(map.tilesets)) {
-      TiledTmxFormat.writeTilesetRef__tiledTmxFormat(({ final __callArgument12:Dynamic = lines; __callArgument12; }), ({ final __callArgument13:Dynamic = ref; __callArgument13; }));
+      TiledTmxFormat.writeTilesetRef__tiledTmxFormat(({ final __callArgument22:Dynamic = lines; __callArgument22; }), ({ final __callArgument23:Dynamic = ref; __callArgument23; }));
     }
     for (layer in _Runtime.iterable(map.layers)) {
-      TiledTmxFormat.writeLayer__tiledTmxFormat(({ final __callArgument16:Dynamic = lines; __callArgument16; }), ({ final __callArgument17:Dynamic = layer; __callArgument17; }));
+      TiledTmxFormat.writeLayer__tiledTmxFormat(({ final __callArgument28:Dynamic = lines; __callArgument28; }), ({ final __callArgument29:Dynamic = layer; __callArgument29; }));
     }
-    TiledTmxFormat.writeProperties__tiledTmxFormat(({ final __callArgument18:Dynamic = lines; __callArgument18; }), map.properties);
+    TiledTmxFormat.writeProperties__tiledTmxFormat(({ final __callArgument32:Dynamic = lines; __callArgument32; }), map.properties);
     _Runtime.callProperty(lines, 'push', cast (['</map>'] : Array<Dynamic>));
     return cast _Runtime.join(lines, '\n');
     return cast null;
@@ -59,11 +59,11 @@ class TiledTmxFormat {
 
   public static function formatLayerBaseAttrs__tiledTmxFormat(layer:TiledLayer):String {
     var out:String = cast _Runtime.UNDEFINED;
-    out = ((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'id' : String), ({ final __callArgument19:Dynamic = (cast layer : { var id:Float; }).id; __callArgument19; })) : String) + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'name' : String), ({ final __callArgument20:Dynamic = (cast layer : { var name:String; }).name; __callArgument20; })) : String));
-    if ((cast !_Runtime.strictEquals((cast layer : { var opacity:Float; }).opacity, 1.0) : Bool)) { (out = cast ((out + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'opacity' : String), ({ final __callArgument21:Dynamic = (cast layer : { var opacity:Float; }).opacity; __callArgument21; })) : String)) : Dynamic)); }
-    if ((cast !(cast (cast layer : { var visible:Bool; }).visible : Bool) : Bool)) { (out = cast ((out + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'visible' : String), ({ final __callArgument22:Dynamic = 0.0; __callArgument22; })) : String)) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals((cast layer : { var offsetX:Float; }).offsetX, 0.0) : Bool)) { (out = cast ((out + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'offsetx' : String), ({ final __callArgument23:Dynamic = (cast layer : { var offsetX:Float; }).offsetX; __callArgument23; })) : String)) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals((cast layer : { var offsetY:Float; }).offsetY, 0.0) : Bool)) { (out = cast ((out + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'offsety' : String), ({ final __callArgument24:Dynamic = (cast layer : { var offsetY:Float; }).offsetY; __callArgument24; })) : String)) : Dynamic)); }
+    out = ((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'id' : String), ({ final __callArgument34:Dynamic = (cast layer : { var id:Float; }).id; __callArgument34; })) : String) + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'name' : String), ({ final __callArgument36:Dynamic = (cast layer : { var name:String; }).name; __callArgument36; })) : String));
+    if ((cast !_Runtime.strictEquals((cast layer : { var opacity:Float; }).opacity, 1.0) : Bool)) { (out = cast ((out + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'opacity' : String), ({ final __callArgument38:Dynamic = (cast layer : { var opacity:Float; }).opacity; __callArgument38; })) : String)) : Dynamic)); }
+    if ((cast !(cast (cast layer : { var visible:Bool; }).visible : Bool) : Bool)) { (out = cast ((out + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'visible' : String), ({ final __callArgument40:Dynamic = 0.0; __callArgument40; })) : String)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals((cast layer : { var offsetX:Float; }).offsetX, 0.0) : Bool)) { (out = cast ((out + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'offsetx' : String), ({ final __callArgument42:Dynamic = (cast layer : { var offsetX:Float; }).offsetX; __callArgument42; })) : String)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals((cast layer : { var offsetY:Float; }).offsetY, 0.0) : Bool)) { (out = cast ((out + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'offsety' : String), ({ final __callArgument44:Dynamic = (cast layer : { var offsetY:Float; }).offsetY; __callArgument44; })) : String)) : Dynamic)); }
     return cast out;
     return cast null;
   }
@@ -75,9 +75,9 @@ class TiledTmxFormat {
 
   public static function writeLayer__tiledTmxFormat(lines:Array<String>, layer:TiledLayer):Void {
     var base:String = cast _Runtime.UNDEFINED;
-    base = (cast TiledTmxFormat.formatLayerBaseAttrs__tiledTmxFormat(({ final __callArgument25:Dynamic = layer; __callArgument25; })) : String);
+    base = (cast TiledTmxFormat.formatLayerBaseAttrs__tiledTmxFormat(({ final __callArgument46:Dynamic = layer; __callArgument46; })) : String);
     if ((cast _Runtime.strictEquals((cast layer : { var type:String; }).type, 'tilelayer') : Bool)) {
-      _Runtime.callProperty(lines, 'push', cast (['<layer' + Std.string(base) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'width' : String), ({ final __callArgument26:Dynamic = _Runtime.field(layer, 'width'); __callArgument26; })) : String)) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'height' : String), ({ final __callArgument27:Dynamic = _Runtime.field(layer, 'height'); __callArgument27; })) : String)) + '>'] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['<layer' + Std.string(base) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'width' : String), ({ final __callArgument48:Dynamic = _Runtime.field(layer, 'width'); __callArgument48; })) : String)) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'height' : String), ({ final __callArgument50:Dynamic = _Runtime.field(layer, 'height'); __callArgument50; })) : String)) + '>'] : Array<Dynamic>));
       _Runtime.callProperty(lines, 'push', cast (['<data encoding="csv">'] : Array<Dynamic>));
       _Runtime.callProperty(lines, 'push', cast ([_Runtime.join((cast _Runtime.toArray(_Runtime.field(layer, 'data')) : Array<Float>), ',')] : Array<Dynamic>));
       _Runtime.callProperty(lines, 'push', cast (['</data>'] : Array<Dynamic>));
@@ -87,37 +87,37 @@ class TiledTmxFormat {
     if ((cast _Runtime.strictEquals((cast layer : { var type:String; }).type, 'objectgroup') : Bool)) {
       _Runtime.callProperty(lines, 'push', cast (['<objectgroup' + Std.string(base) + '>'] : Array<Dynamic>));
       for (object in _Runtime.iterable(_Runtime.field(layer, 'objects'))) {
-        TiledTmxFormat.writeObject__tiledTmxFormat(({ final __callArgument30:Dynamic = lines; __callArgument30; }), ({ final __callArgument31:Dynamic = object; __callArgument31; }));
+        TiledTmxFormat.writeObject__tiledTmxFormat(({ final __callArgument54:Dynamic = lines; __callArgument54; }), ({ final __callArgument55:Dynamic = object; __callArgument55; }));
       }
-      TiledTmxFormat.writeProperties__tiledTmxFormat(({ final __callArgument32:Dynamic = lines; __callArgument32; }), _Runtime.field(layer, 'properties'));
+      TiledTmxFormat.writeProperties__tiledTmxFormat(({ final __callArgument58:Dynamic = lines; __callArgument58; }), _Runtime.field(layer, 'properties'));
       _Runtime.callProperty(lines, 'push', cast (['</objectgroup>'] : Array<Dynamic>));
       return;
     }
     if ((cast _Runtime.strictEquals((cast layer : { var type:String; }).type, 'imagelayer') : Bool)) {
       _Runtime.callProperty(lines, 'push', cast (['<imagelayer' + Std.string(base) + '>'] : Array<Dynamic>));
-      _Runtime.callProperty(lines, 'push', cast (['<image' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'source' : String), ({ final __callArgument33:Dynamic = _Runtime.field(layer, 'image'); __callArgument33; })) : String)) + '/>'] : Array<Dynamic>));
-      TiledTmxFormat.writeProperties__tiledTmxFormat(({ final __callArgument34:Dynamic = lines; __callArgument34; }), _Runtime.field(layer, 'properties'));
+      _Runtime.callProperty(lines, 'push', cast (['<image' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'source' : String), ({ final __callArgument60:Dynamic = _Runtime.field(layer, 'image'); __callArgument60; })) : String)) + '/>'] : Array<Dynamic>));
+      TiledTmxFormat.writeProperties__tiledTmxFormat(({ final __callArgument62:Dynamic = lines; __callArgument62; }), _Runtime.field(layer, 'properties'));
       _Runtime.callProperty(lines, 'push', cast (['</imagelayer>'] : Array<Dynamic>));
       return;
     }
     _Runtime.callProperty(lines, 'push', cast (['<group' + Std.string(base) + '>'] : Array<Dynamic>));
     for (child in _Runtime.iterable(_Runtime.field(layer, 'layers'))) {
-      TiledTmxFormat.writeLayer__tiledTmxFormat(({ final __callArgument37:Dynamic = lines; __callArgument37; }), ({ final __callArgument38:Dynamic = child; __callArgument38; }));
+      TiledTmxFormat.writeLayer__tiledTmxFormat(({ final __callArgument66:Dynamic = lines; __callArgument66; }), ({ final __callArgument67:Dynamic = child; __callArgument67; }));
     }
-    TiledTmxFormat.writeProperties__tiledTmxFormat(({ final __callArgument39:Dynamic = lines; __callArgument39; }), _Runtime.field(layer, 'properties'));
+    TiledTmxFormat.writeProperties__tiledTmxFormat(({ final __callArgument70:Dynamic = lines; __callArgument70; }), _Runtime.field(layer, 'properties'));
     _Runtime.callProperty(lines, 'push', cast (['</group>'] : Array<Dynamic>));
   }
 
   public static function writeObject__tiledTmxFormat(lines:Array<String>, object:TiledObject):Void {
     var open:String = cast _Runtime.UNDEFINED;
     var hasBody:Bool = cast _Runtime.UNDEFINED;
-    open = '<object' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'id' : String), ({ final __callArgument40:Dynamic = object.id; __callArgument40; })) : String)) + '';
-    if ((cast !_Runtime.strictEquals(object.name, '') : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'name' : String), ({ final __callArgument41:Dynamic = object.name; __callArgument41; })) : String)) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(object.type, '') : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'type' : String), ({ final __callArgument42:Dynamic = object.type; __callArgument42; })) : String)) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(object.gid, null) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'gid' : String), ({ final __callArgument43:Dynamic = object.gid; __callArgument43; })) : String)) : Dynamic)); }
-    (open = cast ((open + ((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'x' : String), ({ final __callArgument44:Dynamic = object.x; __callArgument44; })) : String) + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'y' : String), ({ final __callArgument45:Dynamic = object.y; __callArgument45; })) : String))) : Dynamic));
-    if ((cast !_Runtime.strictEquals(object.width, 0.0) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'width' : String), ({ final __callArgument46:Dynamic = object.width; __callArgument46; })) : String)) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(object.height, 0.0) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'height' : String), ({ final __callArgument47:Dynamic = object.height; __callArgument47; })) : String)) : Dynamic)); }
+    open = '<object' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'id' : String), ({ final __callArgument72:Dynamic = object.id; __callArgument72; })) : String)) + '';
+    if ((cast !_Runtime.strictEquals(object.name, '') : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'name' : String), ({ final __callArgument74:Dynamic = object.name; __callArgument74; })) : String)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(object.type, '') : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'type' : String), ({ final __callArgument76:Dynamic = object.type; __callArgument76; })) : String)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(object.gid, null) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'gid' : String), ({ final __callArgument78:Dynamic = object.gid; __callArgument78; })) : String)) : Dynamic)); }
+    (open = cast ((open + ((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'x' : String), ({ final __callArgument80:Dynamic = object.x; __callArgument80; })) : String) + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'y' : String), ({ final __callArgument82:Dynamic = object.y; __callArgument82; })) : String))) : Dynamic));
+    if ((cast !_Runtime.strictEquals(object.width, 0.0) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'width' : String), ({ final __callArgument84:Dynamic = object.width; __callArgument84; })) : String)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(object.height, 0.0) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'height' : String), ({ final __callArgument86:Dynamic = object.height; __callArgument86; })) : String)) : Dynamic)); }
     hasBody = ((cast ((cast ((cast ((cast object.point : Bool) || (cast object.ellipse : Bool)) : Bool) || (cast !_Runtime.strictEquals(object.polygon, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(object.polyline, null) : Bool)) : Bool) || (cast ((cast _Runtime.field(object.properties, 'length') : Float) > (cast 0.0 : Float)) : Bool));
     if ((cast !(cast hasBody : Bool) : Bool)) {
       _Runtime.callProperty(lines, 'push', cast (['' + Std.string(open) + '/>'] : Array<Dynamic>));
@@ -126,9 +126,9 @@ class TiledTmxFormat {
     _Runtime.callProperty(lines, 'push', cast (['' + Std.string(open) + '>'] : Array<Dynamic>));
     if ((cast object.point : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<point/>'] : Array<Dynamic>)); }
     if ((cast object.ellipse : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<ellipse/>'] : Array<Dynamic>)); }
-    if ((cast !_Runtime.strictEquals(object.polygon, null) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<polygon' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'points' : String), ({ final __callArgument49:Dynamic = (cast TiledTmxFormat.formatPoints__tiledTmxFormat(({ final __callArgument48:Dynamic = object.polygon; __callArgument48; })) : String); __callArgument49; })) : String)) + '/>'] : Array<Dynamic>)); }
-    if ((cast !_Runtime.strictEquals(object.polyline, null) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<polyline' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'points' : String), ({ final __callArgument51:Dynamic = (cast TiledTmxFormat.formatPoints__tiledTmxFormat(({ final __callArgument50:Dynamic = object.polyline; __callArgument50; })) : String); __callArgument51; })) : String)) + '/>'] : Array<Dynamic>)); }
-    TiledTmxFormat.writeProperties__tiledTmxFormat(({ final __callArgument52:Dynamic = lines; __callArgument52; }), object.properties);
+    if ((cast !_Runtime.strictEquals(object.polygon, null) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<polygon' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'points' : String), ({ final __callArgument90:Dynamic = (cast TiledTmxFormat.formatPoints__tiledTmxFormat(({ final __callArgument88:Dynamic = object.polygon; __callArgument88; })) : String); __callArgument90; })) : String)) + '/>'] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(object.polyline, null) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<polyline' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'points' : String), ({ final __callArgument96:Dynamic = (cast TiledTmxFormat.formatPoints__tiledTmxFormat(({ final __callArgument94:Dynamic = object.polyline; __callArgument94; })) : String); __callArgument96; })) : String)) + '/>'] : Array<Dynamic>)); }
+    TiledTmxFormat.writeProperties__tiledTmxFormat(({ final __callArgument100:Dynamic = lines; __callArgument100; }), object.properties);
     _Runtime.callProperty(lines, 'push', cast (['</object>'] : Array<Dynamic>));
   }
 
@@ -136,9 +136,9 @@ class TiledTmxFormat {
     if ((cast _Runtime.strictEquals(_Runtime.field(properties, 'length'), 0.0) : Bool)) { return; }
     _Runtime.callProperty(lines, 'push', cast (['<properties>'] : Array<Dynamic>));
     for (property in _Runtime.iterable(properties)) {
-      var out:String = '<property' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'name' : String), ({ final __callArgument55:Dynamic = property.name; __callArgument55; })) : String)) + '';
-      if ((cast !_Runtime.strictEquals(property.type, 'string') : Bool)) { (out = cast ((out + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'type' : String), ({ final __callArgument56:Dynamic = property.type; __callArgument56; })) : String)) : Dynamic)); }
-      (out = cast ((out + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'value' : String), ({ final __callArgument57:Dynamic = Std.string(property.value); __callArgument57; })) : String)) : Dynamic));
+      var out:String = '<property' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'name' : String), ({ final __callArgument104:Dynamic = property.name; __callArgument104; })) : String)) + '';
+      if ((cast !_Runtime.strictEquals(property.type, 'string') : Bool)) { (out = cast ((out + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'type' : String), ({ final __callArgument106:Dynamic = property.type; __callArgument106; })) : String)) : Dynamic)); }
+      (out = cast ((out + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'value' : String), ({ final __callArgument108:Dynamic = Std.string(property.value); __callArgument108; })) : String)) : Dynamic));
       _Runtime.callProperty(lines, 'push', cast (['' + Std.string(out) + '/>'] : Array<Dynamic>));
     }
     _Runtime.callProperty(lines, 'push', cast (['</properties>'] : Array<Dynamic>));
@@ -146,57 +146,57 @@ class TiledTmxFormat {
 
   public static function writeTileset__tiledTmxFormat(lines:Array<String>, tileset:TiledTileset, firstGid:Float):Void {
     var open:String = cast _Runtime.UNDEFINED;
-    open = '<tileset' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'firstgid' : String), ({ final __callArgument58:Dynamic = firstGid; __callArgument58; })) : String)) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'name' : String), ({ final __callArgument59:Dynamic = tileset.name; __callArgument59; })) : String)) + '';
-    (open = cast ((open + ((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tilewidth' : String), ({ final __callArgument60:Dynamic = tileset.tileWidth; __callArgument60; })) : String) + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tileheight' : String), ({ final __callArgument61:Dynamic = tileset.tileHeight; __callArgument61; })) : String))) : Dynamic));
-    (open = cast ((open + ((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tilecount' : String), ({ final __callArgument62:Dynamic = tileset.tileCount; __callArgument62; })) : String) + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'columns' : String), ({ final __callArgument63:Dynamic = tileset.columns; __callArgument63; })) : String))) : Dynamic));
-    if ((cast !_Runtime.strictEquals(tileset.margin, 0.0) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'margin' : String), ({ final __callArgument64:Dynamic = tileset.margin; __callArgument64; })) : String)) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(tileset.spacing, 0.0) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'spacing' : String), ({ final __callArgument65:Dynamic = tileset.spacing; __callArgument65; })) : String)) : Dynamic)); }
+    open = '<tileset' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'firstgid' : String), ({ final __callArgument110:Dynamic = firstGid; __callArgument110; })) : String)) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'name' : String), ({ final __callArgument112:Dynamic = tileset.name; __callArgument112; })) : String)) + '';
+    (open = cast ((open + ((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tilewidth' : String), ({ final __callArgument114:Dynamic = tileset.tileWidth; __callArgument114; })) : String) + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tileheight' : String), ({ final __callArgument116:Dynamic = tileset.tileHeight; __callArgument116; })) : String))) : Dynamic));
+    (open = cast ((open + ((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tilecount' : String), ({ final __callArgument118:Dynamic = tileset.tileCount; __callArgument118; })) : String) + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'columns' : String), ({ final __callArgument120:Dynamic = tileset.columns; __callArgument120; })) : String))) : Dynamic));
+    if ((cast !_Runtime.strictEquals(tileset.margin, 0.0) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'margin' : String), ({ final __callArgument122:Dynamic = tileset.margin; __callArgument122; })) : String)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(tileset.spacing, 0.0) : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'spacing' : String), ({ final __callArgument124:Dynamic = tileset.spacing; __callArgument124; })) : String)) : Dynamic)); }
     _Runtime.callProperty(lines, 'push', cast (['' + Std.string(open) + '>'] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(tileset.image, null) : Bool)) {
-      _Runtime.callProperty(lines, 'push', cast (['<image' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'source' : String), ({ final __callArgument66:Dynamic = tileset.image; __callArgument66; })) : String)) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'width' : String), ({ final __callArgument67:Dynamic = tileset.imageWidth; __callArgument67; })) : String)) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'height' : String), ({ final __callArgument68:Dynamic = tileset.imageHeight; __callArgument68; })) : String)) + '/>'] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['<image' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'source' : String), ({ final __callArgument126:Dynamic = tileset.image; __callArgument126; })) : String)) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'width' : String), ({ final __callArgument128:Dynamic = tileset.imageWidth; __callArgument128; })) : String)) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'height' : String), ({ final __callArgument130:Dynamic = tileset.imageHeight; __callArgument130; })) : String)) + '/>'] : Array<Dynamic>));
     }
     for (tile in _Runtime.iterable(tileset.tiles)) {
-      TiledTmxFormat.writeTilesetTile__tiledTmxFormat(({ final __callArgument71:Dynamic = lines; __callArgument71; }), ({ final __callArgument72:Dynamic = tile; __callArgument72; }));
+      TiledTmxFormat.writeTilesetTile__tiledTmxFormat(({ final __callArgument134:Dynamic = lines; __callArgument134; }), ({ final __callArgument135:Dynamic = tile; __callArgument135; }));
     }
-    TiledTmxFormat.writeProperties__tiledTmxFormat(({ final __callArgument73:Dynamic = lines; __callArgument73; }), tileset.properties);
+    TiledTmxFormat.writeProperties__tiledTmxFormat(({ final __callArgument138:Dynamic = lines; __callArgument138; }), tileset.properties);
     _Runtime.callProperty(lines, 'push', cast (['</tileset>'] : Array<Dynamic>));
   }
 
   public static function writeTilesetRef__tiledTmxFormat(lines:Array<String>, ref:TiledTilesetRef):Void {
     if ((cast !_Runtime.strictEquals(ref.source, null) : Bool)) {
-      _Runtime.callProperty(lines, 'push', cast (['<tileset' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'firstgid' : String), ({ final __callArgument74:Dynamic = ref.firstGid; __callArgument74; })) : String)) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'source' : String), ({ final __callArgument75:Dynamic = ref.source; __callArgument75; })) : String)) + '/>'] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['<tileset' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'firstgid' : String), ({ final __callArgument140:Dynamic = ref.firstGid; __callArgument140; })) : String)) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'source' : String), ({ final __callArgument142:Dynamic = ref.source; __callArgument142; })) : String)) + '/>'] : Array<Dynamic>));
       return;
     }
-    if ((cast !_Runtime.strictEquals(ref.tileset, null) : Bool)) { TiledTmxFormat.writeTileset__tiledTmxFormat(({ final __callArgument76:Dynamic = lines; __callArgument76; }), ref.tileset, (cast ref.firstGid : Float)); }
+    if ((cast !_Runtime.strictEquals(ref.tileset, null) : Bool)) { TiledTmxFormat.writeTileset__tiledTmxFormat(({ final __callArgument144:Dynamic = lines; __callArgument144; }), ref.tileset, (cast ref.firstGid : Float)); }
   }
 
   public static function writeTilesetTile__tiledTmxFormat(lines:Array<String>, tile:TiledTilesetTile):Void {
     var open:String = cast _Runtime.UNDEFINED;
     var hasBody:Bool = cast _Runtime.UNDEFINED;
-    open = '<tile' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'id' : String), ({ final __callArgument77:Dynamic = tile.id; __callArgument77; })) : String)) + '';
-    if ((cast !_Runtime.strictEquals(tile.type, '') : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'type' : String), ({ final __callArgument78:Dynamic = tile.type; __callArgument78; })) : String)) : Dynamic)); }
+    open = '<tile' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'id' : String), ({ final __callArgument146:Dynamic = tile.id; __callArgument146; })) : String)) + '';
+    if ((cast !_Runtime.strictEquals(tile.type, '') : Bool)) { (open = cast ((open + (cast TiledTmxFormat.attr__tiledTmxFormat((cast 'type' : String), ({ final __callArgument148:Dynamic = tile.type; __callArgument148; })) : String)) : Dynamic)); }
     hasBody = ((cast ((cast ((cast !_Runtime.strictEquals(tile.image, null) : Bool) || (cast !_Runtime.strictEquals(tile.animation, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(tile.objects, null) : Bool)) : Bool) || (cast ((cast _Runtime.field(tile.properties, 'length') : Float) > (cast 0.0 : Float)) : Bool));
     if ((cast !(cast hasBody : Bool) : Bool)) {
       _Runtime.callProperty(lines, 'push', cast (['' + Std.string(open) + '/>'] : Array<Dynamic>));
       return;
     }
     _Runtime.callProperty(lines, 'push', cast (['' + Std.string(open) + '>'] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(tile.image, null) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<image' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'source' : String), ({ final __callArgument79:Dynamic = tile.image; __callArgument79; })) : String)) + '/>'] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(tile.image, null) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<image' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'source' : String), ({ final __callArgument150:Dynamic = tile.image; __callArgument150; })) : String)) + '/>'] : Array<Dynamic>)); }
     if ((cast !_Runtime.strictEquals(tile.animation, null) : Bool)) {
       _Runtime.callProperty(lines, 'push', cast (['<animation>'] : Array<Dynamic>));
       for (frame in _Runtime.iterable(tile.animation)) {
-        _Runtime.callProperty(lines, 'push', cast (['<frame' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tileid' : String), ({ final __callArgument82:Dynamic = frame.tileId; __callArgument82; })) : String)) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'duration' : String), ({ final __callArgument83:Dynamic = frame.duration; __callArgument83; })) : String)) + '/>'] : Array<Dynamic>));
+        _Runtime.callProperty(lines, 'push', cast (['<frame' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'tileid' : String), ({ final __callArgument154:Dynamic = frame.tileId; __callArgument154; })) : String)) + '' + Std.string((cast TiledTmxFormat.attr__tiledTmxFormat((cast 'duration' : String), ({ final __callArgument156:Dynamic = frame.duration; __callArgument156; })) : String)) + '/>'] : Array<Dynamic>));
       }
       _Runtime.callProperty(lines, 'push', cast (['</animation>'] : Array<Dynamic>));
     }
     if ((cast !_Runtime.strictEquals(tile.objects, null) : Bool)) {
       _Runtime.callProperty(lines, 'push', cast (['<objectgroup>'] : Array<Dynamic>));
       for (object in _Runtime.iterable(tile.objects)) {
-        TiledTmxFormat.writeObject__tiledTmxFormat(({ final __callArgument86:Dynamic = lines; __callArgument86; }), ({ final __callArgument87:Dynamic = object; __callArgument87; }));
+        TiledTmxFormat.writeObject__tiledTmxFormat(({ final __callArgument160:Dynamic = lines; __callArgument160; }), ({ final __callArgument161:Dynamic = object; __callArgument161; }));
       }
       _Runtime.callProperty(lines, 'push', cast (['</objectgroup>'] : Array<Dynamic>));
     }
-    TiledTmxFormat.writeProperties__tiledTmxFormat(({ final __callArgument88:Dynamic = lines; __callArgument88; }), tile.properties);
+    TiledTmxFormat.writeProperties__tiledTmxFormat(({ final __callArgument164:Dynamic = lines; __callArgument164; }), tile.properties);
     _Runtime.callProperty(lines, 'push', cast (['</tile>'] : Array<Dynamic>));
   }
 }

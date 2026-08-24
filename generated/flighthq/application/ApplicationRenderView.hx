@@ -27,8 +27,8 @@ class ApplicationRenderView {
     var runtime:ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions> = cast _Runtime.UNDEFINED;
     runtime = (cast ApplicationRenderView.getApplicationRenderViewRuntime__applicationRenderView(({ final __callArgument0:Dynamic = view; __callArgument0; })) : ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions>);
     if ((cast (cast runtime : ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions>).attached : Bool)) { disconnectSignal((cast (cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).window : { var onResize:Signal<Void->Void>; }).onResize : Dynamic), (cast runtime : ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions>).synchronize); }
-    synchronizeApplicationRenderView(({ final __callArgument1:Dynamic = view; __callArgument1; }));
-    connectSignal((cast (cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).window : { var onResize:Signal<Void->Void>; }).onResize : Dynamic), (cast runtime : ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions>).synchronize, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    synchronizeApplicationRenderView(({ final __callArgument2:Dynamic = view; __callArgument2; }));
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast (cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).window : { var onResize:Signal<Void->Void>; }).onResize : Dynamic), (cast runtime : ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions>).synchronize] : Array<Dynamic>)) #else connectSignal((cast (cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).window : { var onResize:Signal<Void->Void>; }).onResize : Dynamic), (cast runtime : ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions>).synchronize, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     ((cast runtime : ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions>).attached = true);
   }
 
@@ -39,16 +39,16 @@ class ApplicationRenderView {
     runtime = (cast createEntityRuntime() : ApplicationRenderViewRuntime__applicationRenderView<State, Target>);
     ((cast runtime : ApplicationRenderViewRuntime__applicationRenderView<State, Target>).attached = false);
     ((cast runtime : { var resize:ApplicationRenderViewResize<State, Target>; }).resize = resize);
-    ((cast runtime : { var synchronize:Void->Void; }).synchronize = (cast function():Void { synchronizeApplicationRenderView(({ final __callArgument2:Dynamic = view; __callArgument2; })); }));
+    ((cast runtime : { var synchronize:Void->Void; }).synchronize = (cast function():Void { synchronizeApplicationRenderView(({ final __callArgument4:Dynamic = view; __callArgument4; })); }));
     _Runtime.setIndex(view, EntityRuntimeKey, runtime);
-    synchronizeApplicationRenderView(({ final __callArgument3:Dynamic = view; __callArgument3; }));
+    synchronizeApplicationRenderView(({ final __callArgument6:Dynamic = view; __callArgument6; }));
     return cast view;
     return cast null;
   }
 
   public static function detachApplicationRenderView(view:flighthq.types.ApplicationRenderView<Dynamic, Dynamic>):Void {
     var runtime:ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions> = cast _Runtime.UNDEFINED;
-    runtime = (cast ApplicationRenderView.getApplicationRenderViewRuntime__applicationRenderView(({ final __callArgument4:Dynamic = view; __callArgument4; })) : ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions>);
+    runtime = (cast ApplicationRenderView.getApplicationRenderViewRuntime__applicationRenderView(({ final __callArgument8:Dynamic = view; __callArgument8; })) : ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions>);
     if ((cast !(cast (cast runtime : ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions>).attached : Bool) : Bool)) { return; }
     disconnectSignal((cast (cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).window : { var onResize:Signal<Void->Void>; }).onResize : Dynamic), (cast runtime : ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions>).synchronize);
     ((cast runtime : ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions>).attached = false);
@@ -62,7 +62,7 @@ class ApplicationRenderView {
     devicePixelRatio = (cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).window : { var devicePixelRatio:Float; }).devicePixelRatio;
     width = HxMath.max(0.0, HxMath.round(((cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).window : { var width:Float; }).width * devicePixelRatio)));
     height = HxMath.max(0.0, HxMath.round(((cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).window : { var height:Float; }).height * devicePixelRatio)));
-    runtime = (cast ApplicationRenderView.getApplicationRenderViewRuntime__applicationRenderView(({ final __callArgument5:Dynamic = view; __callArgument5; })) : ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions>);
+    runtime = (cast ApplicationRenderView.getApplicationRenderViewRuntime__applicationRenderView(({ final __callArgument10:Dynamic = view; __callArgument10; })) : ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions>);
     (cast runtime : ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions>).resize((cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).renderState, (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).renderTarget, (cast width : Float), (cast height : Float));
     ((cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).viewport : { var devicePixelRatio:Float; }).devicePixelRatio = cast (devicePixelRatio : Float));
     ((cast (cast view : flighthq.types.ApplicationRenderView<RenderState, RenderTargetDimensions>).viewport : { var height:Float; }).height = cast (height : Float));

@@ -15,7 +15,7 @@ import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKi
 class RegisterWgpuStandardPbrMaterial {
   public static function registerWgpuStandardPbrMaterial(state:WgpuRenderState):Void {
     registerWgpuBitmapTextureResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }));
-    registerWgpuImageTextureResolver(({ final __callArgument1:Dynamic = state; __callArgument1; }));
-    registerWgpuMeshMaterialRenderer(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast StandardPbrMaterialKind : String), ({ final __callArgument3:Dynamic = standardPbrWgpuMeshMaterialRenderer; __callArgument3; }));
+    registerWgpuImageTextureResolver(({ final __callArgument2:Dynamic = state; __callArgument2; }));
+    registerWgpuMeshMaterialRenderer(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast StandardPbrMaterialKind : String), ({ final __callArgument5:Dynamic = standardPbrWgpuMeshMaterialRenderer; __callArgument5; }));
   }
 }

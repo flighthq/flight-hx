@@ -26,10 +26,10 @@ class WgpuToneMapEffect {
     exposure = _Runtime.coalesce(_Runtime.field(effect, 'exposure'), function():Dynamic return cast 1.0);
     white = _Runtime.coalesce(_Runtime.field(effect, 'white'), function():Dynamic return cast 1.0);
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'toneMap.' + Std.string(operator_) + '' : String), (cast (cast WgpuToneMapEffect.buildToneMapFragment__wgpuToneMapEffect((cast operator_ : String)) : String) : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast source : WgpuRenderTarget), ({ final __callArgument2:Dynamic = (cast dest : WgpuRenderTarget); __callArgument2; }), ({ final __callArgument3:Dynamic = pipeline; __callArgument3; }), ({ final __callArgument4:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    drawWgpuEffectPass(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast source : WgpuRenderTarget), ({ final __callArgument3:Dynamic = (cast dest : WgpuRenderTarget); __callArgument3; }), ({ final __callArgument4:Dynamic = pipeline; __callArgument4; }), ({ final __callArgument5:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast exposure : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast white : Float));
-    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument4; }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument5; }));
   }
 
   public static final defaultWgpuToneMapEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
@@ -37,7 +37,7 @@ class WgpuToneMapEffect {
   });
 
   public static function registerWgpuToneMapEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'ToneMapEffect' : String), ({ final __callArgument6:Dynamic = defaultWgpuToneMapEffectRunner; __callArgument6; }));
+    registerWgpuRenderEffect(({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast 'ToneMapEffect' : String), ({ final __callArgument11:Dynamic = defaultWgpuToneMapEffectRunner; __callArgument11; }));
   }
 
   public static function buildToneMapFragment__wgpuToneMapEffect(operator_:String):String {

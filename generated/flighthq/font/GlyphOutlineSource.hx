@@ -53,12 +53,12 @@ class GlyphOutlineSource {
     metrics = (cast source : flighthq.types.GlyphOutlineSource).getGlyphOutlineMetrics();
     scale = (cast GlyphOutlineSource.resolveGlyphOutlineScale__glyphOutlineSource((cast _Runtime.field(metrics, 'unitsPerEm') : Float), (cast options.fontSize : Float)) : Null<Float>);
     if ((cast _Runtime.strictEquals(scale, null) : Bool)) { return cast null; }
-    path = (cast createPath(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Path);
-    if ((cast !(cast (cast source : flighthq.types.GlyphOutlineSource).getGlyphOutline(({ final __callArgument2:Dynamic = path; __callArgument2; }), (cast glyphIndex : Float)) : Bool) : Bool)) { return cast null; }
+    path = (cast (#if js _Runtime.callValue(createPath, cast ([] : Array<Dynamic>)) #else createPath(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Path);
+    if ((cast !(cast (cast source : flighthq.types.GlyphOutlineSource).getGlyphOutline(({ final __callArgument4:Dynamic = path; __callArgument4; }), (cast glyphIndex : Float)) : Bool) : Bool)) { return cast null; }
     advance = _Runtime.multiplyNumbers((cast source : flighthq.types.GlyphOutlineSource).getGlyphOutlineAdvance((cast glyphIndex : Float)), scale);
     if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([advance] : Array<Dynamic>)) : Bool) : Bool)) { return cast null; }
     bounds = (cast { height: 0.0, width: 0.0, x: 0.0, y: 0.0 });
-    if ((cast ((cast ((cast !(cast (cast getPathBounds(({ final __callArgument3:Dynamic = path; __callArgument3; }), ({ final __callArgument4:Dynamic = bounds; __callArgument4; })) : Bool) : Bool) : Bool) || (cast _Runtime.strictEquals(bounds.width, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(bounds.height, 0.0) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast !(cast (cast getPathBounds(({ final __callArgument5:Dynamic = path; __callArgument5; }), ({ final __callArgument6:Dynamic = bounds; __callArgument6; })) : Bool) : Bool) : Bool) || (cast _Runtime.strictEquals(bounds.width, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(bounds.height, 0.0) : Bool)) : Bool)) {
       return cast { advance: advance, bearingX: 0.0, bearingY: 0.0, height: 0.0, pixels: new flighthq._internal._UInt8ClampedArray(), width: 0.0 };
     }
     left = _Runtime.subtractNumbers(HxMath.floor((bounds.x * scale)), GlyphOutlineSource.RASTER_GUARD__glyphOutlineSource);
@@ -68,7 +68,7 @@ class GlyphOutlineSource {
     width = (right - left);
     height = (bottom - top);
     if ((cast ((cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast null; }
-    contours = (cast flattenPath(({ final __callArgument5:Dynamic = path; __callArgument5; }), (cast (0.25 / scale) : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath(({ final __callArgument9:Dynamic = path; __callArgument9; }), (cast (0.25 / scale) : Float)) : Array<Array<Float>>);
     pixels = new flighthq._internal._UInt8ClampedArray(((width * height) * 4.0));
     {
       var pixelY:Float = 0.0;
@@ -85,7 +85,7 @@ class GlyphOutlineSource {
                   var sampleX:Float = 0.0;
                   while ((cast ((cast sampleX : Float) < (cast GlyphOutlineSource.RASTER_SAMPLE_AXIS__glyphOutlineSource : Float)) : Bool)) {
                     var x:Float = (((left + pixelX) + ((sampleX + 0.5) / GlyphOutlineSource.RASTER_SAMPLE_AXIS__glyphOutlineSource)) / scale);
-                    if ((cast (cast GlyphOutlineSource.containsFlattenedGlyphOutlinePoint__glyphOutlineSource(({ final __callArgument6:Dynamic = contours; __callArgument6; }), (cast (cast path : Path).winding : String), (cast x : Float), (cast y : Float)) : Bool) : Bool)) { covered++; }
+                    if ((cast (cast GlyphOutlineSource.containsFlattenedGlyphOutlinePoint__glyphOutlineSource(({ final __callArgument11:Dynamic = contours; __callArgument11; }), (cast (cast path : Path).winding : String), (cast x : Float), (cast y : Float)) : Bool) : Bool)) { covered++; }
                     sampleX++;
                   }
                 }

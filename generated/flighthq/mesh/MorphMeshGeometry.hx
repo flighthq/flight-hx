@@ -55,10 +55,10 @@ class MorphMeshGeometry {
         var target:MorphTarget = flighthq._internal._StaticIndex.readArray(targets, t);
         MorphMeshGeometry.accumulateDeltas__morphMeshGeometry(({ final __callArgument0:Dynamic = blendedPositions; __callArgument0; }), (cast target : MorphTarget).positionDeltas, (cast weight : Float), (cast floats : Float));
         if ((cast ((cast !_Runtime.strictEquals(blendedNormals, null) : Bool) && (cast !_Runtime.strictEquals((cast target : MorphTarget).normalDeltas, null) : Bool)) : Bool)) {
-          MorphMeshGeometry.accumulateDeltas__morphMeshGeometry(({ final __callArgument1:Dynamic = blendedNormals; __callArgument1; }), (cast target : MorphTarget).normalDeltas, (cast weight : Float), (cast floats : Float));
+          MorphMeshGeometry.accumulateDeltas__morphMeshGeometry(({ final __callArgument2:Dynamic = blendedNormals; __callArgument2; }), (cast target : MorphTarget).normalDeltas, (cast weight : Float), (cast floats : Float));
         }
         if ((cast ((cast !_Runtime.strictEquals(blendedTangents, null) : Bool) && (cast !_Runtime.strictEquals((cast target : MorphTarget).tangentDeltas, null) : Bool)) : Bool)) {
-          MorphMeshGeometry.accumulateDeltas__morphMeshGeometry(({ final __callArgument2:Dynamic = blendedTangents; __callArgument2; }), (cast target : MorphTarget).tangentDeltas, (cast weight : Float), (cast floats : Float));
+          MorphMeshGeometry.accumulateDeltas__morphMeshGeometry(({ final __callArgument4:Dynamic = blendedTangents; __callArgument4; }), (cast target : MorphTarget).tangentDeltas, (cast weight : Float), (cast floats : Float));
         }
         t++;
       }
@@ -67,9 +67,9 @@ class MorphMeshGeometry {
     layout = __destructure1.layout;
     vertices = __destructure1.vertices;
     floatsPerVertex = (layout.stride / 4.0);
-    positionOffset = (cast getVertexAttributeFloatOffset(({ final __callArgument3:Dynamic = layout; __callArgument3; }), ({ final __callArgument4:Dynamic = 'position'; __callArgument4; })) : Float);
-    normalOffset = (cast getVertexAttributeFloatOffset(({ final __callArgument5:Dynamic = layout; __callArgument5; }), ({ final __callArgument6:Dynamic = 'normal'; __callArgument6; })) : Float);
-    tangentOffset = (cast getVertexAttributeFloatOffset(({ final __callArgument7:Dynamic = layout; __callArgument7; }), ({ final __callArgument8:Dynamic = 'tangent'; __callArgument8; })) : Float);
+    positionOffset = (cast getVertexAttributeFloatOffset(({ final __callArgument6:Dynamic = layout; __callArgument6; }), ({ final __callArgument7:Dynamic = 'position'; __callArgument7; })) : Float);
+    normalOffset = (cast getVertexAttributeFloatOffset(({ final __callArgument10:Dynamic = layout; __callArgument10; }), ({ final __callArgument11:Dynamic = 'normal'; __callArgument11; })) : Float);
+    tangentOffset = (cast getVertexAttributeFloatOffset(({ final __callArgument14:Dynamic = layout; __callArgument14; }), ({ final __callArgument15:Dynamic = 'tangent'; __callArgument15; })) : Float);
     {
       var v:Float = 0.0;
       while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {
@@ -113,9 +113,9 @@ class MorphMeshGeometry {
     vertices = __destructure2.vertices;
     floatsPerVertex = (layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), floatsPerVertex)) | 0) : Dynamic) : (cast 0.0 : Dynamic));
-    positionOffset = (cast getVertexAttributeFloatOffset(({ final __callArgument9:Dynamic = layout; __callArgument9; }), ({ final __callArgument10:Dynamic = 'position'; __callArgument10; })) : Float);
-    normalOffset = (cast getVertexAttributeFloatOffset(({ final __callArgument11:Dynamic = layout; __callArgument11; }), ({ final __callArgument12:Dynamic = 'normal'; __callArgument12; })) : Float);
-    tangentOffset = (cast getVertexAttributeFloatOffset(({ final __callArgument13:Dynamic = layout; __callArgument13; }), ({ final __callArgument14:Dynamic = 'tangent'; __callArgument14; })) : Float);
+    positionOffset = (cast getVertexAttributeFloatOffset(({ final __callArgument18:Dynamic = layout; __callArgument18; }), ({ final __callArgument19:Dynamic = 'position'; __callArgument19; })) : Float);
+    normalOffset = (cast getVertexAttributeFloatOffset(({ final __callArgument22:Dynamic = layout; __callArgument22; }), ({ final __callArgument23:Dynamic = 'normal'; __callArgument23; })) : Float);
+    tangentOffset = (cast getVertexAttributeFloatOffset(({ final __callArgument26:Dynamic = layout; __callArgument26; }), ({ final __callArgument27:Dynamic = 'tangent'; __callArgument27; })) : Float);
     positions = new flighthq._internal._Float32Array((vertexCount * 3.0));
     normals = ((cast ((cast normalOffset : Float) >= (cast 0.0 : Float)) : Bool) ? (cast new flighthq._internal._Float32Array((vertexCount * 3.0)) : Dynamic) : (cast null : Dynamic));
     tangents = ((cast ((cast tangentOffset : Float) >= (cast 0.0 : Float)) : Bool) ? (cast new flighthq._internal._Float32Array((vertexCount * 3.0)) : Dynamic) : (cast null : Dynamic));
@@ -152,7 +152,7 @@ class MorphMeshGeometry {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast n : Float)) : Bool)) {
-        ({ var __indexedObject15:flighthq._internal._Float32Array = accumulator; var __indexedKey16:Float = i; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject15 : flighthq._internal._Float32Array), (cast __indexedKey16 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject15 : flighthq._internal._Float32Array), (cast __indexedKey16 : Float)) + (weight * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast deltas : flighthq._internal._Float32Array), (cast i : Float)))) : Float)); });
+        ({ var __indexedObject30:flighthq._internal._Float32Array = accumulator; var __indexedKey31:Float = i; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject30 : flighthq._internal._Float32Array), (cast __indexedKey31 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject30 : flighthq._internal._Float32Array), (cast __indexedKey31 : Float)) + (weight * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast deltas : flighthq._internal._Float32Array), (cast i : Float)))) : Float)); });
         i++;
       }
     }

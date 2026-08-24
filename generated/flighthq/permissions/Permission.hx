@@ -18,7 +18,7 @@ class Permission {
       return cast (cast Permission.readWebPermissionState__permission(({ final __callArgument0:Dynamic = name; __callArgument0; })) : flighthq._internal._Promise<PermissionState>);
       return cast _Runtime.UNDEFINED;
     }, request: function(name:PermissionName):flighthq._internal._Promise<PermissionState> {
-      return cast (cast Permission.requestWebPermission__permission(({ final __callArgument1:Dynamic = name; __callArgument1; })) : flighthq._internal._Promise<PermissionState>);
+      return cast (cast Permission.requestWebPermission__permission(({ final __callArgument2:Dynamic = name; __callArgument2; })) : flighthq._internal._Promise<PermissionState>);
       return cast _Runtime.UNDEFINED;
     } };
     return cast null;
@@ -30,41 +30,41 @@ class Permission {
         var backend:PermissionBackend = cast _Runtime.UNDEFINED;
         var permissions:Null<flighthq._internal.dom.Permissions> = cast _Runtime.UNDEFINED;
         backend = (cast getPermissionBackend() : PermissionBackend);
-        var __flowBranch5:Dynamic;
+        var __flowBranch9:Dynamic;
         if ((cast !_Runtime.strictEquals(backend, Permission._webBackend__permission) : Bool)) {
-          __flowBranch5 = flighthq._internal._Async.protect(function():Dynamic {
+          __flowBranch9 = flighthq._internal._Async.protect(function():Dynamic {
             var state:PermissionState = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap((cast backend : PermissionBackend).getState(({ final __callArgument7:Dynamic = name; __callArgument7; })), function(__awaitValue6:Dynamic):Dynamic {
-              state = __awaitValue6;
+            return flighthq._internal._Async.flatMap((cast backend : PermissionBackend).getState(({ final __callArgument11:Dynamic = name; __callArgument11; })), function(__awaitValue10:Dynamic):Dynamic {
+              state = __awaitValue10;
               return flighthq._internal._Async.flowReturn({ name: name, source: ((cast _Runtime.strictEquals(state, 'prompt') : Bool) ? (cast 'undecided' : Dynamic) : (cast 'decided' : Dynamic)), state: state });
             });
           });
         } else {
-          __flowBranch5 = flighthq._internal._Async.flowNormal();
+          __flowBranch9 = flighthq._internal._Async.flowNormal();
         }
-        return flighthq._internal._Async.continueFlow(__flowBranch5, function():Dynamic {
+        return flighthq._internal._Async.continueFlow(__flowBranch9, function():Dynamic {
           permissions = (cast Permission.getWebPermissions__permission() : Null<flighthq._internal.dom.Permissions>);
-          var __flowBranch8:Dynamic;
+          var __flowBranch12:Dynamic;
           if ((cast _Runtime.strictEquals(permissions, null) : Bool)) {
-            __flowBranch8 = flighthq._internal._Async.protect(function():Dynamic {
-              return flighthq._internal._Async.flowReturn({ name: name, source: 'unsupported', state: (cast Permission.readWebFallbackPermissionState__permission(({ final __callArgument9:Dynamic = name; __callArgument9; })) : PermissionState) });
+            __flowBranch12 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flowReturn({ name: name, source: 'unsupported', state: (cast Permission.readWebFallbackPermissionState__permission(({ final __callArgument13:Dynamic = name; __callArgument13; })) : PermissionState) });
             });
           } else {
-            __flowBranch8 = flighthq._internal._Async.flowNormal();
+            __flowBranch12 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch8, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch12, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var status:flighthq._internal.dom.PermissionStatus = cast _Runtime.UNDEFINED;
               var state:PermissionState = cast _Runtime.UNDEFINED;
-              return flighthq._internal._Async.flatMap((cast permissions : flighthq._internal.dom.Permissions).query((cast (cast { name: name } : flighthq._internal._Any) : flighthq._internal.dom.PermissionDescriptor)), function(__awaitValue10:Dynamic):Dynamic {
-                status = __awaitValue10;
+              return flighthq._internal._Async.flatMap((cast permissions : flighthq._internal.dom.Permissions).query((cast (cast { name: name } : flighthq._internal._Any) : flighthq._internal.dom.PermissionDescriptor)), function(__awaitValue15:Dynamic):Dynamic {
+                status = __awaitValue15;
                 state = (cast (cast status : flighthq._internal.dom.PermissionStatus).state : PermissionState);
                 return flighthq._internal._Async.flowReturn({ name: name, source: ((cast _Runtime.strictEquals(state, 'prompt') : Bool) ? (cast 'undecided' : Dynamic) : (cast 'decided' : Dynamic)), state: state });
               });
             }), function(__caughtError:Dynamic):Dynamic {
               var __error:Dynamic = __caughtError;
               return flighthq._internal._Async.protect(function():Dynamic {
-                return flighthq._internal._Async.flowReturn({ name: name, source: 'unqueryable', state: (cast Permission.readWebFallbackPermissionState__permission(({ final __callArgument11:Dynamic = name; __callArgument11; })) : PermissionState) });
+                return flighthq._internal._Async.flowReturn({ name: name, source: 'unqueryable', state: (cast Permission.readWebFallbackPermissionState__permission(({ final __callArgument16:Dynamic = name; __callArgument16; })) : PermissionState) });
               });
             }), function():Dynamic {
               return flighthq._internal._Async.flowNormal();
@@ -86,17 +86,17 @@ class Permission {
   }
 
   public static function getPermissionState(name:PermissionName):flighthq._internal._Promise<PermissionState> {
-    return cast (cast (cast getPermissionBackend() : PermissionBackend) : PermissionBackend).getState(({ final __callArgument12:Dynamic = name; __callArgument12; }));
+    return cast (cast (cast getPermissionBackend() : PermissionBackend) : PermissionBackend).getState(({ final __callArgument18:Dynamic = name; __callArgument18; }));
     return cast null;
   }
 
   public static function getPermissionStates(names:Array<PermissionName>):flighthq._internal._Promise<Array<PermissionState>> {
-    return cast flighthq._internal._Async.all((cast _Runtime.mapArray((cast names : Array<PermissionName>), function(name:PermissionName, __unused0:Float, __unused1:Array<PermissionName>):flighthq._internal._Promise<PermissionState> return (cast getPermissionState(({ final __callArgument13:Dynamic = name; __callArgument13; })) : flighthq._internal._Promise<PermissionState>), _Runtime.UNDEFINED)));
+    return cast flighthq._internal._Async.all((cast _Runtime.mapArray((cast names : Array<PermissionName>), function(name:PermissionName, __unused0:Float, __unused1:Array<PermissionName>):flighthq._internal._Promise<PermissionState> return (cast getPermissionState(({ final __callArgument19:Dynamic = name; __callArgument19; })) : flighthq._internal._Promise<PermissionState>), _Runtime.UNDEFINED)));
     return cast null;
   }
 
   public static function requestPermission(name:PermissionName):flighthq._internal._Promise<PermissionState> {
-    return cast (cast (cast getPermissionBackend() : PermissionBackend) : PermissionBackend).request(({ final __callArgument14:Dynamic = name; __callArgument14; }));
+    return cast (cast (cast getPermissionBackend() : PermissionBackend) : PermissionBackend).request(({ final __callArgument21:Dynamic = name; __callArgument21; }));
     return cast null;
   }
 
@@ -130,13 +130,13 @@ class Permission {
       flighthq._internal._Async.protect(function():Dynamic {
         var permissions:Null<flighthq._internal.dom.Permissions> = cast _Runtime.UNDEFINED;
         permissions = (cast Permission.getWebPermissions__permission() : Null<flighthq._internal.dom.Permissions>);
-        var __flowBranch16:Dynamic;
+        var __flowBranch24:Dynamic;
         if ((cast !_Runtime.strictEquals(permissions, null) : Bool)) {
-          __flowBranch16 = flighthq._internal._Async.protect(function():Dynamic {
+          __flowBranch24 = flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var status:flighthq._internal.dom.PermissionStatus = cast _Runtime.UNDEFINED;
-              return flighthq._internal._Async.flatMap((cast permissions : flighthq._internal.dom.Permissions).query((cast (cast { name: name } : flighthq._internal._Any) : flighthq._internal.dom.PermissionDescriptor)), function(__awaitValue17:Dynamic):Dynamic {
-                status = __awaitValue17;
+              return flighthq._internal._Async.flatMap((cast permissions : flighthq._internal.dom.Permissions).query((cast (cast { name: name } : flighthq._internal._Any) : flighthq._internal.dom.PermissionDescriptor)), function(__awaitValue25:Dynamic):Dynamic {
+                status = __awaitValue25;
                 return flighthq._internal._Async.flowReturn((cast (cast status : flighthq._internal.dom.PermissionStatus).state : PermissionState));
               });
             }), function(__caughtError:Dynamic):Dynamic {
@@ -149,10 +149,10 @@ class Permission {
             });
           });
         } else {
-          __flowBranch16 = flighthq._internal._Async.flowNormal();
+          __flowBranch24 = flighthq._internal._Async.flowNormal();
         }
-        return flighthq._internal._Async.continueFlow(__flowBranch16, function():Dynamic {
-          return flighthq._internal._Async.flowReturn((cast Permission.readWebFallbackPermissionState__permission(({ final __callArgument18:Dynamic = name; __callArgument18; })) : PermissionState));
+        return flighthq._internal._Async.continueFlow(__flowBranch24, function():Dynamic {
+          return flighthq._internal._Async.flowReturn((cast Permission.readWebFallbackPermissionState__permission(({ final __callArgument26:Dynamic = name; __callArgument26; })) : PermissionState));
         });
       })
     );
@@ -180,20 +180,20 @@ class Permission {
       flighthq._internal._Async.protect(function():Dynamic {
         var mediaDevices:Null<flighthq._internal.dom.MediaDevices> = cast _Runtime.UNDEFINED;
         mediaDevices = (cast Permission.getWebMediaDevices__permission() : Null<flighthq._internal.dom.MediaDevices>);
-        var __flowBranch20:Dynamic;
+        var __flowBranch30:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(mediaDevices, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast mediaDevices : flighthq._internal.dom.MediaDevices).getUserMedia), 'function') : Bool)) : Bool)) {
-          __flowBranch20 = flighthq._internal._Async.protect(function():Dynamic {
+          __flowBranch30 = flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flowReturn('prompt');
           });
         } else {
-          __flowBranch20 = flighthq._internal._Async.flowNormal();
+          __flowBranch30 = flighthq._internal._Async.flowNormal();
         }
-        return flighthq._internal._Async.continueFlow(__flowBranch20, function():Dynamic {
+        return flighthq._internal._Async.continueFlow(__flowBranch30, function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             var stream:flighthq._internal.dom.MediaStream = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap((cast mediaDevices : flighthq._internal.dom.MediaDevices).getUserMedia(((cast _Runtime.strictEquals(kind, 'video') : Bool) ? (cast { video: true } : Dynamic) : (cast { audio: true } : Dynamic))), function(__awaitValue21:Dynamic):Dynamic {
-              stream = __awaitValue21;
-              Permission.stopMediaStreamTracks__permission(({ final __callArgument22:Dynamic = stream; __callArgument22; }));
+            return flighthq._internal._Async.flatMap((cast mediaDevices : flighthq._internal.dom.MediaDevices).getUserMedia(((cast _Runtime.strictEquals(kind, 'video') : Bool) ? (cast { video: true } : Dynamic) : (cast { audio: true } : Dynamic))), function(__awaitValue31:Dynamic):Dynamic {
+              stream = __awaitValue31;
+              Permission.stopMediaStreamTracks__permission(({ final __callArgument32:Dynamic = stream; __callArgument32; }));
               return flighthq._internal._Async.flowReturn('granted');
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -214,19 +214,19 @@ class Permission {
       flighthq._internal._Async.protect(function():Dynamic {
         var notification:Null<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
         notification = (cast Permission.getWebNotification__permission() : Null<flighthq._internal._Any>);
-        var __flowBranch23:Dynamic;
+        var __flowBranch34:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(notification, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(notification, 'requestPermission')), 'function') : Bool)) : Bool)) {
-          __flowBranch23 = flighthq._internal._Async.protect(function():Dynamic {
+          __flowBranch34 = flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flowReturn('prompt');
           });
         } else {
-          __flowBranch23 = flighthq._internal._Async.flowNormal();
+          __flowBranch34 = flighthq._internal._Async.flowNormal();
         }
-        return flighthq._internal._Async.continueFlow(__flowBranch23, function():Dynamic {
+        return flighthq._internal._Async.continueFlow(__flowBranch34, function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             var result:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap(_Runtime.callProperty(notification, 'requestPermission', cast ([] : Array<Dynamic>)), function(__awaitValue24:Dynamic):Dynamic {
-              result = __awaitValue24;
+            return flighthq._internal._Async.flatMap(_Runtime.callProperty(notification, 'requestPermission', cast ([] : Array<Dynamic>)), function(__awaitValue35:Dynamic):Dynamic {
+              result = __awaitValue35;
               return flighthq._internal._Async.flowReturn(((cast _Runtime.strictEquals(result, 'default') : Bool) ? (cast 'prompt' : Dynamic) : (cast (cast result : PermissionState) : Dynamic)));
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -246,28 +246,28 @@ class Permission {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
         var request:Void->flighthq._internal._Promise<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
-        var __flowBranch25:Dynamic;
+        var __flowBranch36:Dynamic;
         if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) {
-          __flowBranch25 = flighthq._internal._Async.protect(function():Dynamic {
+          __flowBranch36 = flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flowReturn('prompt');
           });
         } else {
-          __flowBranch25 = flighthq._internal._Async.flowNormal();
+          __flowBranch36 = flighthq._internal._Async.flowNormal();
         }
-        return flighthq._internal._Async.continueFlow(__flowBranch25, function():Dynamic {
+        return flighthq._internal._Async.continueFlow(__flowBranch36, function():Dynamic {
           request = (cast (cast flighthq._internal.backend.DomNavigatorBackend.value() : flighthq._internal._Intersection2<flighthq._internal.dom.Navigator, { @:optional var requestMIDIAccess:Void->flighthq._internal._Promise<flighthq._internal._Any>; }>) : { var requestMIDIAccess:Void->flighthq._internal._Promise<flighthq._internal._Any>; }).requestMIDIAccess;
-          var __flowBranch26:Dynamic;
+          var __flowBranch37:Dynamic;
           if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(request), 'function') : Bool)) {
-            __flowBranch26 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch37 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn('prompt');
             });
           } else {
-            __flowBranch26 = flighthq._internal._Async.flowNormal();
+            __flowBranch37 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch26, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch37, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-              return flighthq._internal._Async.flatMap((cast request : { var call:flighthq._internal._Any; }).call(flighthq._internal.backend.DomNavigatorBackend.value()), function(__awaitValue27:Dynamic):Dynamic {
-                __awaitValue27;
+              return flighthq._internal._Async.flatMap((cast request : { var call:flighthq._internal._Any; }).call(flighthq._internal.backend.DomNavigatorBackend.value()), function(__awaitValue38:Dynamic):Dynamic {
+                __awaitValue38;
                 return flighthq._internal._Async.flowReturn('granted');
               });
             }), function(__caughtError:Dynamic):Dynamic {
@@ -289,18 +289,18 @@ class Permission {
       flighthq._internal._Async.protect(function():Dynamic {
         var storage:Null<flighthq._internal.dom.StorageManager> = cast _Runtime.UNDEFINED;
         storage = (cast Permission.getWebStorageManager__permission() : Null<flighthq._internal.dom.StorageManager>);
-        var __flowBranch28:Dynamic;
+        var __flowBranch39:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(storage, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast storage : flighthq._internal.dom.StorageManager).persist), 'function') : Bool)) : Bool)) {
-          __flowBranch28 = flighthq._internal._Async.protect(function():Dynamic {
+          __flowBranch39 = flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flowReturn('prompt');
           });
         } else {
-          __flowBranch28 = flighthq._internal._Async.flowNormal();
+          __flowBranch39 = flighthq._internal._Async.flowNormal();
         }
-        return flighthq._internal._Async.continueFlow(__flowBranch28, function():Dynamic {
+        return flighthq._internal._Async.continueFlow(__flowBranch39, function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast storage : flighthq._internal.dom.StorageManager).persist(), function(__awaitValue29:Dynamic):Dynamic {
-              if ((cast __awaitValue29 : Bool)) {
+            return flighthq._internal._Async.flatMap((cast storage : flighthq._internal.dom.StorageManager).persist(), function(__awaitValue40:Dynamic):Dynamic {
+              if ((cast __awaitValue40 : Bool)) {
                 return flighthq._internal._Async.flowReturn('granted');
               } else {
                 return flighthq._internal._Async.flowReturn('prompt');
@@ -323,41 +323,41 @@ class Permission {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
         var wakeLock:flighthq._internal._Intersection2<flighthq._internal.dom.WakeLock, { @:optional var request:Null<String->flighthq._internal._Promise<WakeLockLike__permission>>; }> = cast _Runtime.UNDEFINED;
-        var __flowBranch32:Dynamic;
+        var __flowBranch43:Dynamic;
         if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) {
-          __flowBranch32 = flighthq._internal._Async.protect(function():Dynamic {
+          __flowBranch43 = flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flowReturn('prompt');
           });
         } else {
-          __flowBranch32 = flighthq._internal._Async.flowNormal();
+          __flowBranch43 = flighthq._internal._Async.flowNormal();
         }
-        return flighthq._internal._Async.continueFlow(__flowBranch32, function():Dynamic {
+        return flighthq._internal._Async.continueFlow(__flowBranch43, function():Dynamic {
           wakeLock = flighthq._internal.backend.DomNavigatorBackend.field((cast flighthq._internal.backend.DomNavigatorBackend.value() : flighthq._internal._Intersection2<flighthq._internal.dom.Navigator, { @:optional var wakeLock:{ @:optional var request:String->flighthq._internal._Promise<WakeLockLike__permission>; }; }>), 'wakeLock');
-          var __flowBranch33:Dynamic;
+          var __flowBranch44:Dynamic;
           if ((cast ((cast _Runtime.strictEquals(wakeLock, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast wakeLock : { var request:String->flighthq._internal._Promise<WakeLockLike__permission>; }).request), 'function') : Bool)) : Bool)) {
-            __flowBranch33 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch44 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn('prompt');
             });
           } else {
-            __flowBranch33 = flighthq._internal._Async.flowNormal();
+            __flowBranch44 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch33, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch44, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var sentinel:flighthq._internal.dom.WakeLockSentinel = cast _Runtime.UNDEFINED;
-              return flighthq._internal._Async.flatMap((cast wakeLock : { var request:String->flighthq._internal._Promise<WakeLockLike__permission>; }).request(({ final __callArgument38:Dynamic = 'screen'; __callArgument38; })), function(__awaitValue34:Dynamic):Dynamic {
-                sentinel = __awaitValue34;
-                var __flowBranch36:Dynamic;
-                if ((cast _Runtime.strictEquals(_Runtime.typeofValue(({ final __hostType35 = sentinel; __hostType35 == null ? _Runtime.UNDEFINED : (cast __hostType35 : flighthq._internal.dom.WakeLockSentinel).release; })), 'function') : Bool)) {
-                  __flowBranch36 = flighthq._internal._Async.protect(function():Dynamic {
-                    return flighthq._internal._Async.flatMap((cast sentinel : flighthq._internal.dom.WakeLockSentinel).release(), function(__awaitValue37:Dynamic):Dynamic {
-                      __awaitValue37;
+              return flighthq._internal._Async.flatMap((cast wakeLock : { var request:String->flighthq._internal._Promise<WakeLockLike__permission>; }).request(({ final __callArgument49:Dynamic = 'screen'; __callArgument49; })), function(__awaitValue45:Dynamic):Dynamic {
+                sentinel = __awaitValue45;
+                var __flowBranch47:Dynamic;
+                if ((cast _Runtime.strictEquals(_Runtime.typeofValue(({ final __hostType46 = sentinel; __hostType46 == null ? _Runtime.UNDEFINED : (cast __hostType46 : flighthq._internal.dom.WakeLockSentinel).release; })), 'function') : Bool)) {
+                  __flowBranch47 = flighthq._internal._Async.protect(function():Dynamic {
+                    return flighthq._internal._Async.flatMap((cast sentinel : flighthq._internal.dom.WakeLockSentinel).release(), function(__awaitValue48:Dynamic):Dynamic {
+                      __awaitValue48;
                       return flighthq._internal._Async.flowNormal();
                     });
                   });
                 } else {
-                  __flowBranch36 = flighthq._internal._Async.flowNormal();
+                  __flowBranch47 = flighthq._internal._Async.flowNormal();
                 }
-                return flighthq._internal._Async.continueFlow(__flowBranch36, function():Dynamic {
+                return flighthq._internal._Async.continueFlow(__flowBranch47, function():Dynamic {
                   return flighthq._internal._Async.flowReturn('granted');
                 });
               });
@@ -381,19 +381,19 @@ class Permission {
         var router:Void->flighthq._internal._Promise<PermissionState> = cast _Runtime.UNDEFINED;
         var state:PermissionState = cast _Runtime.UNDEFINED;
         router = _Runtime.getIndex(Permission._permissionRequestRouters__permission, name);
-        var __flowBranch40:Dynamic;
+        var __flowBranch52:Dynamic;
         if ((cast !_Runtime.strictEquals(router, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          __flowBranch40 = flighthq._internal._Async.protect(function():Dynamic {
-            return flighthq._internal._Async.flatMap((cast router() : flighthq._internal._Promise<PermissionState>), function(__awaitValue41:Dynamic):Dynamic {
-              return flighthq._internal._Async.flowReturn(__awaitValue41);
+          __flowBranch52 = flighthq._internal._Async.protect(function():Dynamic {
+            return flighthq._internal._Async.flatMap((cast router() : flighthq._internal._Promise<PermissionState>), function(__awaitValue53:Dynamic):Dynamic {
+              return flighthq._internal._Async.flowReturn(__awaitValue53);
             });
           });
         } else {
-          __flowBranch40 = flighthq._internal._Async.flowNormal();
+          __flowBranch52 = flighthq._internal._Async.flowNormal();
         }
-        return flighthq._internal._Async.continueFlow(__flowBranch40, function():Dynamic {
-          return flighthq._internal._Async.flatMap((cast Permission.readWebPermissionState__permission(({ final __callArgument43:Dynamic = name; __callArgument43; })) : flighthq._internal._Promise<PermissionState>), function(__awaitValue42:Dynamic):Dynamic {
-            state = __awaitValue42;
+        return flighthq._internal._Async.continueFlow(__flowBranch52, function():Dynamic {
+          return flighthq._internal._Async.flatMap((cast Permission.readWebPermissionState__permission(({ final __callArgument55:Dynamic = name; __callArgument55; })) : flighthq._internal._Promise<PermissionState>), function(__awaitValue54:Dynamic):Dynamic {
+            state = __awaitValue54;
             _Runtime.callOptionalValue(Permission._requestFallbackGuard__permission, cast ([name, state] : Array<Dynamic>));
             return flighthq._internal._Async.flowReturn(state);
           });

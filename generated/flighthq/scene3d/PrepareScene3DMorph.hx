@@ -23,7 +23,7 @@ class PrepareScene3DMorph {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          prepareScene3DMorph(({ final __callArgument1:Dynamic = flighthq._internal._StaticIndex.readArray(children, i); __callArgument1; }));
+          prepareScene3DMorph(({ final __callArgument2:Dynamic = flighthq._internal._StaticIndex.readArray(children, i); __callArgument2; }));
           i++;
         }
       }

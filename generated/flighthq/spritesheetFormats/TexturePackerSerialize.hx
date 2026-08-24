@@ -45,14 +45,14 @@ class TexturePackerSerialize {
     for (frame in _Runtime.iterable(data.frames)) {
       _Runtime.setIndex(frames, frame.name, (cast TexturePackerSerialize.frameToEntry__texturePackerSerialize(({ final __callArgument2:Dynamic = frame; __callArgument2; })) : TexturePackerHashFrame));
     }
-    return cast { frames: frames, meta: (cast TexturePackerSerialize.dataToMeta__texturePackerSerialize(({ final __callArgument3:Dynamic = data; __callArgument3; }), (cast _Runtime.coalesce((cast existing : { @:optional var frames:Null<flighthq._internal._Record<String, TexturePackerHashFrame>>; @:optional var meta:Null<TexturePackerMeta>; }).meta, function():Dynamic return cast {  }) : Dynamic)) : TexturePackerMeta) };
+    return cast { frames: frames, meta: (cast TexturePackerSerialize.dataToMeta__texturePackerSerialize(({ final __callArgument4:Dynamic = data; __callArgument4; }), (cast _Runtime.coalesce((cast existing : { @:optional var frames:Null<flighthq._internal._Record<String, TexturePackerHashFrame>>; @:optional var meta:Null<TexturePackerMeta>; }).meta, function():Dynamic return cast {  }) : Dynamic)) : TexturePackerMeta) };
     return cast null;
   }
 
   public static function dataToArrayDocument__texturePackerSerialize(data:SpritesheetData, existing:{ @:optional var frames:Null<Array<TexturePackerArrayFrame>>; @:optional var meta:Null<TexturePackerMeta>; }):TexturePackerArrayDocument {
     var frames:Array<TexturePackerArrayFrame> = cast _Runtime.UNDEFINED;
-    frames = (cast _Runtime.mapArray((cast data.frames : Array<SpritesheetFrameData>), function(frame:SpritesheetFrameData, __unused6:Float, __unused7:Array<SpritesheetFrameData>):{ var frame:TexturePackerRect; @:optional var pivot:Null<TexturePackerPivot>; var rotated:Bool; var sourceSize:TexturePackerSize; var spriteSourceSize:TexturePackerRect; var trimmed:Bool; var filename:String; } return _Runtime.mergeObjects([{ filename: frame.name }, (cast TexturePackerSerialize.frameToEntry__texturePackerSerialize(({ final __callArgument4:Dynamic = frame; __callArgument4; })) : TexturePackerHashFrame)]), _Runtime.UNDEFINED));
-    return cast { frames: frames, meta: (cast TexturePackerSerialize.dataToMeta__texturePackerSerialize(({ final __callArgument5:Dynamic = data; __callArgument5; }), (cast _Runtime.coalesce((cast existing : { @:optional var frames:Null<Array<TexturePackerArrayFrame>>; @:optional var meta:Null<TexturePackerMeta>; }).meta, function():Dynamic return cast {  }) : Dynamic)) : TexturePackerMeta) };
+    frames = (cast _Runtime.mapArray((cast data.frames : Array<SpritesheetFrameData>), function(frame:SpritesheetFrameData, __unused6:Float, __unused7:Array<SpritesheetFrameData>):{ var frame:TexturePackerRect; @:optional var pivot:Null<TexturePackerPivot>; var rotated:Bool; var sourceSize:TexturePackerSize; var spriteSourceSize:TexturePackerRect; var trimmed:Bool; var filename:String; } return _Runtime.mergeObjects([{ filename: frame.name }, (cast TexturePackerSerialize.frameToEntry__texturePackerSerialize(({ final __callArgument6:Dynamic = frame; __callArgument6; })) : TexturePackerHashFrame)]), _Runtime.UNDEFINED));
+    return cast { frames: frames, meta: (cast TexturePackerSerialize.dataToMeta__texturePackerSerialize(({ final __callArgument8:Dynamic = data; __callArgument8; }), (cast _Runtime.coalesce((cast existing : { @:optional var frames:Null<Array<TexturePackerArrayFrame>>; @:optional var meta:Null<TexturePackerMeta>; }).meta, function():Dynamic return cast {  }) : Dynamic)) : TexturePackerMeta) };
     return cast null;
   }
 
@@ -61,12 +61,12 @@ class TexturePackerSerialize {
     var variant:String = cast _Runtime.UNDEFINED;
     var doc:TexturePackerHashDocument = cast _Runtime.UNDEFINED;
     existingIsArray = ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.isArray((cast (cast existing : TexturePackerArrayDocument) : { var frames:Array<TexturePackerArrayFrame>; }).frames) : Bool));
-    variant = _Runtime.coalesce(({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.variant; }), function():Dynamic return cast ((cast existingIsArray : Bool) ? (cast 'array' : Dynamic) : (cast 'hash' : Dynamic)));
+    variant = _Runtime.coalesce(({ final __typedStruct10 = options; __typedStruct10 == null ? _Runtime.UNDEFINED : __typedStruct10.variant; }), function():Dynamic return cast ((cast existingIsArray : Bool) ? (cast 'array' : Dynamic) : (cast 'hash' : Dynamic)));
     if ((cast _Runtime.strictEquals(variant, 'array') : Bool)) {
-      var doc:TexturePackerArrayDocument = (cast TexturePackerSerialize.dataToArrayDocument__texturePackerSerialize(({ final __callArgument7:Dynamic = data; __callArgument7; }), ({ final __callArgument8:Dynamic = _Runtime.coalesce((cast existing : { @:optional var frames:Null<Array<TexturePackerArrayFrame>>; @:optional var meta:Null<TexturePackerMeta>; }), function():Dynamic return cast {  }); __callArgument8; })) : TexturePackerArrayDocument);
+      var doc:TexturePackerArrayDocument = (cast TexturePackerSerialize.dataToArrayDocument__texturePackerSerialize(({ final __callArgument11:Dynamic = data; __callArgument11; }), ({ final __callArgument12:Dynamic = _Runtime.coalesce((cast existing : { @:optional var frames:Null<Array<TexturePackerArrayFrame>>; @:optional var meta:Null<TexturePackerMeta>; }), function():Dynamic return cast {  }); __callArgument12; })) : TexturePackerArrayDocument);
       return cast _Runtime.jsonStringify(doc, null, 2.0);
     }
-    doc = (cast TexturePackerSerialize.dataToHashDocument__texturePackerSerialize(({ final __callArgument9:Dynamic = data; __callArgument9; }), ({ final __callArgument10:Dynamic = _Runtime.coalesce((cast existing : { @:optional var frames:Null<flighthq._internal._Record<String, TexturePackerHashFrame>>; @:optional var meta:Null<TexturePackerMeta>; }), function():Dynamic return cast {  }); __callArgument10; })) : TexturePackerHashDocument);
+    doc = (cast TexturePackerSerialize.dataToHashDocument__texturePackerSerialize(({ final __callArgument15:Dynamic = data; __callArgument15; }), ({ final __callArgument16:Dynamic = _Runtime.coalesce((cast existing : { @:optional var frames:Null<flighthq._internal._Record<String, TexturePackerHashFrame>>; @:optional var meta:Null<TexturePackerMeta>; }), function():Dynamic return cast {  }); __callArgument16; })) : TexturePackerHashDocument);
     return cast _Runtime.jsonStringify(doc, null, 2.0);
     return cast null;
   }

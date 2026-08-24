@@ -59,8 +59,8 @@ class SpritesheetFrom {
   public static function createSpritesheetFromGrid(options:GridSliceOptions):Spritesheet {
     var atlas:TextureAtlas = cast _Runtime.UNDEFINED;
     var frames:Array<SpritesheetFrame> = cast _Runtime.UNDEFINED;
-    atlas = (cast createTextureAtlasFromGrid(({ final __callArgument5:Dynamic = options; __callArgument5; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : TextureAtlas);
-    frames = (cast _Runtime.mapArray((cast atlas.regions : Array<TextureAtlasRegion>), function(region:TextureAtlasRegion, __unused5:Float, __unused6:Array<TextureAtlasRegion>):SpritesheetFrame return (cast createSpritesheetFrame(({ final __callArgument6:Dynamic = { id: region.id }; __callArgument6; })) : SpritesheetFrame), _Runtime.UNDEFINED));
+    atlas = (cast (#if js _Runtime.callValue(createTextureAtlasFromGrid, cast ([({ final __callArgument7:Dynamic = options; __callArgument7; })] : Array<Dynamic>)) #else createTextureAtlasFromGrid(({ final __callArgument6:Dynamic = options; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : TextureAtlas);
+    frames = (cast _Runtime.mapArray((cast atlas.regions : Array<TextureAtlasRegion>), function(region:TextureAtlasRegion, __unused5:Float, __unused6:Array<TextureAtlasRegion>):SpritesheetFrame return (cast createSpritesheetFrame(({ final __callArgument8:Dynamic = { id: region.id }; __callArgument8; })) : SpritesheetFrame), _Runtime.UNDEFINED));
     return cast (cast createSpritesheet((cast { atlas: atlas, frames: frames } : Dynamic)) : Spritesheet);
     return cast null;
   }

@@ -21,7 +21,7 @@ class DisplayContainer {
 
   @:noCompletion
   public static function createDisplayObjectRuntime():DisplayObjectRuntime {
-    return cast (cast createNode2DRuntime(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : DisplayObjectRuntime);
+    return cast (cast (#if js _Runtime.callValue(createNode2DRuntime, cast ([] : Array<Dynamic>)) #else createNode2DRuntime(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : DisplayObjectRuntime);
     return cast null;
   }
 

@@ -9,19 +9,19 @@ import flighthq.types.LocaleInput;
 
 class Plural {
   public static function selectOrdinalCategory(value:Float, locale:LocaleInput, ?options:Dynamic):Dynamic {
-    return cast _Runtime.callProperty(Plural.getPluralRules__plural(({ final __callArgument2:Dynamic = locale; __callArgument2; }), (cast _Runtime.mergeObjects([{ type: 'ordinal' }, options]) : flighthq._internal._Any)), 'select', cast ([value] : Array<Dynamic>));
+    return cast _Runtime.callProperty(Plural.getPluralRules__plural(({ final __callArgument4:Dynamic = locale; __callArgument4; }), (cast _Runtime.mergeObjects([{ type: 'ordinal' }, options]) : flighthq._internal._Any)), 'select', cast ([value] : Array<Dynamic>));
     return cast null;
   }
 
   public static function selectPluralCategory(value:Float, locale:LocaleInput, ?options:Dynamic):Dynamic {
-    return cast _Runtime.callProperty(Plural.getPluralRules__plural(({ final __callArgument5:Dynamic = locale; __callArgument5; }), (cast _Runtime.mergeObjects([{ type: 'cardinal' }, options]) : flighthq._internal._Any)), 'select', cast ([value] : Array<Dynamic>));
+    return cast _Runtime.callProperty(Plural.getPluralRules__plural(({ final __callArgument10:Dynamic = locale; __callArgument10; }), (cast _Runtime.mergeObjects([{ type: 'cardinal' }, options]) : flighthq._internal._Any)), 'select', cast ([value] : Array<Dynamic>));
     return cast null;
   }
 
   public static function getPluralRules__plural(locale:LocaleInput, options:Dynamic):Dynamic {
     var key:String = cast _Runtime.UNDEFINED;
-    key = (cast getCacheKey((cast 'plural' : String), ({ final __callArgument6:Dynamic = locale; __callArgument6; }), ({ final __callArgument7:Dynamic = options; __callArgument7; })) : String);
-    return cast (cast getCached : String->(Void->flighthq._internal._Any)->flighthq._internal._Any)((cast key : String), ({ final __callArgument8:Dynamic = function():flighthq._internal._Any return _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'PluralRules'), [(cast locale : flighthq._internal._Union2<String, Array<String>>), options]); __callArgument8; }));
+    key = (cast getCacheKey((cast 'plural' : String), ({ final __callArgument12:Dynamic = locale; __callArgument12; }), ({ final __callArgument13:Dynamic = options; __callArgument13; })) : String);
+    return cast (cast getCached : String->(Void->flighthq._internal._Any)->flighthq._internal._Any)((cast key : String), ({ final __callArgument16:Dynamic = function():flighthq._internal._Any return _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'PluralRules'), [(cast locale : flighthq._internal._Union2<String, Array<String>>), options]); __callArgument16; }));
     return cast null;
   }
 }

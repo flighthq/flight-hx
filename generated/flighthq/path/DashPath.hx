@@ -18,12 +18,12 @@ class DashPath {
     ((cast out : Path).winding = _Runtime.field(source, 'winding'));
     totalDashLength = (cast DashPath.dashTotal__dashPath(({ final __callArgument0:Dynamic = dash; __callArgument0; })) : Float);
     if ((cast ((cast totalDashLength : Float) <= (cast 0.0 : Float)) : Bool)) {
-      DashPath.copyCommands__dashPath(({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument2:Dynamic = out; __callArgument2; }));
+      DashPath.copyCommands__dashPath(({ final __callArgument2:Dynamic = source; __callArgument2; }), ({ final __callArgument3:Dynamic = out; __callArgument3; }));
       return;
     }
-    contours = (cast flattenPath(({ final __callArgument3:Dynamic = source; __callArgument3; }), (cast tolerance : Float)) : Array<Array<Float>>);
+    contours = (cast flattenPath(({ final __callArgument6:Dynamic = source; __callArgument6; }), (cast tolerance : Float)) : Array<Array<Float>>);
     for (contour in _Runtime.iterable(contours)) {
-      DashPath.applyDashToContour__dashPath(({ final __callArgument6:Dynamic = contour; __callArgument6; }), ({ final __callArgument7:Dynamic = dash; __callArgument7; }), (cast dashOffset : Float), (cast totalDashLength : Float), ({ final __callArgument8:Dynamic = out; __callArgument8; }));
+      DashPath.applyDashToContour__dashPath(({ final __callArgument10:Dynamic = contour; __callArgument10; }), ({ final __callArgument11:Dynamic = dash; __callArgument11; }), (cast dashOffset : Float), (cast totalDashLength : Float), ({ final __callArgument12:Dynamic = out; __callArgument12; }));
     }
   }
 

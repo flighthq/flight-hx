@@ -161,7 +161,7 @@ class BitmapTransform {
         py++;
       }
     }
-    invalidateBitmap(({ final __callArgument1:Dynamic = out; __callArgument1; }));
+    invalidateBitmap(({ final __callArgument2:Dynamic = out; __callArgument2; }));
   }
 
   public static function compare__bitmapTransform(a:Float, op:ThresholdOperation, b:Float):Bool {

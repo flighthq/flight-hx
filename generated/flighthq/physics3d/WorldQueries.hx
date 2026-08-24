@@ -71,26 +71,26 @@ class WorldQueries {
         _Runtime.callProperty((cast scratch : Physics3DQueryScratch__worldQueries).candidateBodies, 'sort', cast ([WorldQueries.compareNumbers__worldQueries] : Array<Dynamic>));
         for (bodyIndex in _Runtime.iterable((cast scratch : Physics3DQueryScratch__worldQueries).candidateBodies)) {
           var body:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get(bodyIndex));
-          if ((cast ((cast _Runtime.strictEquals(body, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast (cast WorldQueries.passesBodyFilter__worldQueries(({ final __callArgument3:Dynamic = body; __callArgument3; }), ({ final __callArgument4:Dynamic = filter; __callArgument4; })) : Bool) : Bool) : Bool)) : Bool)) { continue; }
+          if ((cast ((cast _Runtime.strictEquals(body, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast (cast WorldQueries.passesBodyFilter__worldQueries(({ final __callArgument4:Dynamic = body; __callArgument4; }), ({ final __callArgument5:Dynamic = filter; __callArgument5; })) : Bool) : Bool) : Bool)) : Bool)) { continue; }
           {
             var colliderIndex:Float = 0.0;
             while ((cast ((cast colliderIndex : Float) < (cast _Runtime.field((cast body : RigidBody3D).colliders, 'length') : Float)) : Bool)) {
               var collider:Physics3DCollider = flighthq._internal._StaticIndex.readArray((cast body : RigidBody3D).colliders, colliderIndex);
-              if ((cast !(cast (cast WorldQueries.passesColliderFilter__worldQueries(({ final __callArgument5:Dynamic = collider; __callArgument5; }), ({ final __callArgument6:Dynamic = filter; __callArgument6; })) : Bool) : Bool) : Bool)) { (colliderIndex = cast ((colliderIndex + 1.0) : Dynamic)); continue; }
+              if ((cast !(cast (cast WorldQueries.passesColliderFilter__worldQueries(({ final __callArgument8:Dynamic = collider; __callArgument8; }), ({ final __callArgument9:Dynamic = filter; __callArgument9; })) : Bool) : Bool) : Bool)) { (colliderIndex = cast ((colliderIndex + 1.0) : Dynamic)); continue; }
               var shape:CollisionColliderShape3D = (cast collider : Physics3DCollider).world;
               if ((cast ((cast _Runtime.strictEquals((cast shape : { var kind:String; }).kind, 'triangle-mesh') : Bool) || (cast _Runtime.strictEquals((cast shape : { var kind:String; }).kind, 'heightfield') : Bool)) : Bool)) { (colliderIndex = cast ((colliderIndex + 1.0) : Dynamic)); continue; }
-              if ((cast !(cast (cast getCollisionShapeContainsPoint3D(({ final __callArgument7:Dynamic = shape; __callArgument7; }), (cast x : Float), (cast y : Float), (cast z : Float)) : Bool) : Bool) : Bool)) { (colliderIndex = cast ((colliderIndex + 1.0) : Dynamic)); continue; }
-              WorldQueries.writeQueryHit__worldQueries(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = body; __callArgument9; }), ({ final __callArgument10:Dynamic = collider; __callArgument10; }), (cast colliderIndex : Float));
+              if ((cast !(cast (cast getCollisionShapeContainsPoint3D(({ final __callArgument12:Dynamic = shape; __callArgument12; }), (cast x : Float), (cast y : Float), (cast z : Float)) : Bool) : Bool) : Bool)) { (colliderIndex = cast ((colliderIndex + 1.0) : Dynamic)); continue; }
+              WorldQueries.writeQueryHit__worldQueries(({ final __callArgument14:Dynamic = out; __callArgument14; }), ({ final __callArgument15:Dynamic = body; __callArgument15; }), ({ final __callArgument16:Dynamic = collider; __callArgument16; }), (cast colliderIndex : Float));
               (colliderIndex = cast ((colliderIndex + 1.0) : Dynamic));
             }
           }
         }
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError11:Dynamic) {
+    } catch (__finallyError20:Dynamic) {
       {
         WorldQueries.releasePhysics3DQueryScratch__worldQueries((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError11);
+      _Runtime.throwValue(__finallyError20);
     }
     {
       WorldQueries.releasePhysics3DQueryScratch__worldQueries((cast scratch : Dynamic));
@@ -99,45 +99,45 @@ class WorldQueries {
 
   public static function queryPhysics3DRay(world:Physics3DWorld, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:Physics3DRayResult, ?maxFraction:Float, ?filter:Physics3DQueryFilter):Void {
     if (maxFraction == null) maxFraction = cast (HxMath.POSITIVE_INFINITY : Dynamic);
-    WorldQueries.queryPhysics3DRayInternal__worldQueries(({ final __callArgument12:Dynamic = world; __callArgument12; }), (cast originX : Float), (cast originY : Float), (cast originZ : Float), (cast directionX : Float), (cast directionY : Float), (cast directionZ : Float), ({ final __callArgument13:Dynamic = out; __callArgument13; }), (cast maxFraction : Float), ({ final __callArgument14:Dynamic = filter; __callArgument14; }), (cast false : Bool));
+    WorldQueries.queryPhysics3DRayInternal__worldQueries(({ final __callArgument21:Dynamic = world; __callArgument21; }), (cast originX : Float), (cast originY : Float), (cast originZ : Float), (cast directionX : Float), (cast directionY : Float), (cast directionZ : Float), ({ final __callArgument22:Dynamic = out; __callArgument22; }), (cast maxFraction : Float), ({ final __callArgument23:Dynamic = filter; __callArgument23; }), (cast false : Bool));
   }
 
   public static function queryPhysics3DRayClosest(world:Physics3DWorld, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:Physics3DRayResult, ?maxFraction:Float, ?filter:Physics3DQueryFilter):Void {
     if (maxFraction == null) maxFraction = cast (HxMath.POSITIVE_INFINITY : Dynamic);
-    WorldQueries.queryPhysics3DRayInternal__worldQueries(({ final __callArgument15:Dynamic = world; __callArgument15; }), (cast originX : Float), (cast originY : Float), (cast originZ : Float), (cast directionX : Float), (cast directionY : Float), (cast directionZ : Float), ({ final __callArgument16:Dynamic = out; __callArgument16; }), (cast maxFraction : Float), ({ final __callArgument17:Dynamic = filter; __callArgument17; }), (cast true : Bool));
+    WorldQueries.queryPhysics3DRayInternal__worldQueries(({ final __callArgument27:Dynamic = world; __callArgument27; }), (cast originX : Float), (cast originY : Float), (cast originZ : Float), (cast directionX : Float), (cast directionY : Float), (cast directionZ : Float), ({ final __callArgument28:Dynamic = out; __callArgument28; }), (cast maxFraction : Float), ({ final __callArgument29:Dynamic = filter; __callArgument29; }), (cast true : Bool));
   }
 
   public static function queryPhysics3DRegion(world:Physics3DWorld, region:SpatialAabb3D, out:Physics3DQueryResult, ?filter:Physics3DQueryFilter):Void {
     var scratch:Physics3DQueryScratch__worldQueries = cast _Runtime.UNDEFINED;
     ((cast out : Physics3DQueryResult).hitCount = 0.0);
-    if ((cast !(cast (cast WorldQueries.isValidRegion__worldQueries(({ final __callArgument18:Dynamic = region; __callArgument18; })) : Bool) : Bool) : Bool)) { return; }
+    if ((cast !(cast (cast WorldQueries.isValidRegion__worldQueries(({ final __callArgument33:Dynamic = region; __callArgument33; })) : Bool) : Bool) : Bool)) { return; }
     scratch = (cast WorldQueries.acquirePhysics3DQueryScratch__worldQueries() : Physics3DQueryScratch__worldQueries);
     try {
       try {
-        synchronizePhysics3DBroadphase(({ final __callArgument19:Dynamic = world; __callArgument19; }));
-        (cast world.index : SpatialIndexBackend3D).querySpatialRegion(({ final __callArgument20:Dynamic = region; __callArgument20; }), (cast scratch : Physics3DQueryScratch__worldQueries).candidateBodies);
+        synchronizePhysics3DBroadphase(({ final __callArgument35:Dynamic = world; __callArgument35; }));
+        (cast world.index : SpatialIndexBackend3D).querySpatialRegion(({ final __callArgument37:Dynamic = region; __callArgument37; }), (cast scratch : Physics3DQueryScratch__worldQueries).candidateBodies);
         _Runtime.callProperty((cast scratch : Physics3DQueryScratch__worldQueries).candidateBodies, 'sort', cast ([WorldQueries.compareNumbers__worldQueries] : Array<Dynamic>));
         for (bodyIndex in _Runtime.iterable((cast scratch : Physics3DQueryScratch__worldQueries).candidateBodies)) {
           var body:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get(bodyIndex));
-          if ((cast ((cast _Runtime.strictEquals(body, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast (cast WorldQueries.passesBodyFilter__worldQueries(({ final __callArgument23:Dynamic = body; __callArgument23; }), ({ final __callArgument24:Dynamic = filter; __callArgument24; })) : Bool) : Bool) : Bool)) : Bool)) { continue; }
+          if ((cast ((cast _Runtime.strictEquals(body, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast (cast WorldQueries.passesBodyFilter__worldQueries(({ final __callArgument40:Dynamic = body; __callArgument40; }), ({ final __callArgument41:Dynamic = filter; __callArgument41; })) : Bool) : Bool) : Bool)) : Bool)) { continue; }
           {
             var colliderIndex:Float = 0.0;
             while ((cast ((cast colliderIndex : Float) < (cast _Runtime.field((cast body : RigidBody3D).colliders, 'length') : Float)) : Bool)) {
               var collider:Physics3DCollider = flighthq._internal._StaticIndex.readArray((cast body : RigidBody3D).colliders, colliderIndex);
-              if ((cast !(cast (cast WorldQueries.passesColliderFilter__worldQueries(({ final __callArgument25:Dynamic = collider; __callArgument25; }), ({ final __callArgument26:Dynamic = filter; __callArgument26; })) : Bool) : Bool) : Bool)) { (colliderIndex = cast ((colliderIndex + 1.0) : Dynamic)); continue; }
-              writePhysics3DColliderBounds(({ final __callArgument27:Dynamic = collider; __callArgument27; }), (cast scratch : Physics3DQueryScratch__worldQueries).colliderBounds);
-              if ((cast !(cast (cast WorldQueries.boundsOverlap__worldQueries((cast scratch : Physics3DQueryScratch__worldQueries).colliderBounds, ({ final __callArgument28:Dynamic = region; __callArgument28; })) : Bool) : Bool) : Bool)) { (colliderIndex = cast ((colliderIndex + 1.0) : Dynamic)); continue; }
-              WorldQueries.writeQueryHit__worldQueries(({ final __callArgument29:Dynamic = out; __callArgument29; }), ({ final __callArgument30:Dynamic = body; __callArgument30; }), ({ final __callArgument31:Dynamic = collider; __callArgument31; }), (cast colliderIndex : Float));
+              if ((cast !(cast (cast WorldQueries.passesColliderFilter__worldQueries(({ final __callArgument44:Dynamic = collider; __callArgument44; }), ({ final __callArgument45:Dynamic = filter; __callArgument45; })) : Bool) : Bool) : Bool)) { (colliderIndex = cast ((colliderIndex + 1.0) : Dynamic)); continue; }
+              writePhysics3DColliderBounds(({ final __callArgument48:Dynamic = collider; __callArgument48; }), (cast scratch : Physics3DQueryScratch__worldQueries).colliderBounds);
+              if ((cast !(cast (cast WorldQueries.boundsOverlap__worldQueries((cast scratch : Physics3DQueryScratch__worldQueries).colliderBounds, ({ final __callArgument50:Dynamic = region; __callArgument50; })) : Bool) : Bool) : Bool)) { (colliderIndex = cast ((colliderIndex + 1.0) : Dynamic)); continue; }
+              WorldQueries.writeQueryHit__worldQueries(({ final __callArgument52:Dynamic = out; __callArgument52; }), ({ final __callArgument53:Dynamic = body; __callArgument53; }), ({ final __callArgument54:Dynamic = collider; __callArgument54; }), (cast colliderIndex : Float));
               (colliderIndex = cast ((colliderIndex + 1.0) : Dynamic));
             }
           }
         }
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError32:Dynamic) {
+    } catch (__finallyError58:Dynamic) {
       {
         WorldQueries.releasePhysics3DQueryScratch__worldQueries((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError32);
+      _Runtime.throwValue(__finallyError58);
     }
     {
       WorldQueries.releasePhysics3DQueryScratch__worldQueries((cast scratch : Dynamic));
@@ -146,14 +146,14 @@ class WorldQueries {
 
   public static function queryPhysics3DShapeCast(world:Physics3DWorld, shape:CollisionBuiltInShape3D, dx:Float, dy:Float, dz:Float, out:Physics3DShapeCastResult, maxFraction:Float = 1.0, ?filter:Physics3DQueryFilter):Void {
     var scratch:Physics3DQueryScratch__worldQueries = cast _Runtime.UNDEFINED;
-    WorldQueries.clearShapeCastResult__worldQueries(({ final __callArgument33:Dynamic = out; __callArgument33; }));
+    WorldQueries.clearShapeCastResult__worldQueries(({ final __callArgument59:Dynamic = out; __callArgument59; }));
     if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([dx] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([dy] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([dz] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return; }
     if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([maxFraction] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast maxFraction : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     scratch = (cast WorldQueries.acquirePhysics3DQueryScratch__worldQueries() : Physics3DQueryScratch__worldQueries);
     try {
       try {
-        synchronizePhysics3DBroadphase(({ final __callArgument34:Dynamic = world; __callArgument34; }));
-        if ((cast !(cast (cast WorldQueries.writeSweptShapeBounds__worldQueries(({ final __callArgument35:Dynamic = shape; __callArgument35; }), (cast (dx * maxFraction) : Float), (cast (dy * maxFraction) : Float), (cast (dz * maxFraction) : Float), (cast scratch : Physics3DQueryScratch__worldQueries).colliderBounds) : Bool) : Bool) : Bool)) {
+        synchronizePhysics3DBroadphase(({ final __callArgument61:Dynamic = world; __callArgument61; }));
+        if ((cast !(cast (cast WorldQueries.writeSweptShapeBounds__worldQueries(({ final __callArgument63:Dynamic = shape; __callArgument63; }), (cast (dx * maxFraction) : Float), (cast (dy * maxFraction) : Float), (cast (dz * maxFraction) : Float), (cast scratch : Physics3DQueryScratch__worldQueries).colliderBounds) : Bool) : Bool) : Bool)) {
           {
             WorldQueries.releasePhysics3DQueryScratch__worldQueries((cast scratch : Dynamic));
           }
@@ -164,13 +164,13 @@ class WorldQueries {
         var bestFraction:Float = HxMath.POSITIVE_INFINITY;
         for (bodyIndex in _Runtime.iterable((cast scratch : Physics3DQueryScratch__worldQueries).candidateBodies)) {
           var body:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get(bodyIndex));
-          if ((cast ((cast _Runtime.strictEquals(body, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast (cast WorldQueries.passesBodyFilter__worldQueries(({ final __callArgument38:Dynamic = body; __callArgument38; }), ({ final __callArgument39:Dynamic = filter; __callArgument39; })) : Bool) : Bool) : Bool)) : Bool)) { continue; }
+          if ((cast ((cast _Runtime.strictEquals(body, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast (cast WorldQueries.passesBodyFilter__worldQueries(({ final __callArgument67:Dynamic = body; __callArgument67; }), ({ final __callArgument68:Dynamic = filter; __callArgument68; })) : Bool) : Bool) : Bool)) : Bool)) { continue; }
           {
             var colliderIndex:Float = 0.0;
             while ((cast ((cast colliderIndex : Float) < (cast _Runtime.field((cast body : RigidBody3D).colliders, 'length') : Float)) : Bool)) {
               var collider:Physics3DCollider = flighthq._internal._StaticIndex.readArray((cast body : RigidBody3D).colliders, colliderIndex);
-              if ((cast !(cast (cast WorldQueries.passesColliderFilter__worldQueries(({ final __callArgument40:Dynamic = collider; __callArgument40; }), ({ final __callArgument41:Dynamic = filter; __callArgument41; })) : Bool) : Bool) : Bool)) { (colliderIndex = cast ((colliderIndex + 1.0) : Dynamic)); continue; }
-              if ((cast !(cast (cast sweepPhysics3DColliderShapes(({ final __callArgument42:Dynamic = shape; __callArgument42; }), (cast dx : Float), (cast dy : Float), (cast dz : Float), (cast collider : Physics3DCollider).world, (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast scratch : Physics3DQueryScratch__worldQueries).timeOfImpact, (cast maxFraction : Float)) : Bool) : Bool) : Bool)) {
+              if ((cast !(cast (cast WorldQueries.passesColliderFilter__worldQueries(({ final __callArgument71:Dynamic = collider; __callArgument71; }), ({ final __callArgument72:Dynamic = filter; __callArgument72; })) : Bool) : Bool) : Bool)) { (colliderIndex = cast ((colliderIndex + 1.0) : Dynamic)); continue; }
+              if ((cast !(cast (cast sweepPhysics3DColliderShapes(({ final __callArgument75:Dynamic = shape; __callArgument75; }), (cast dx : Float), (cast dy : Float), (cast dz : Float), (cast collider : Physics3DCollider).world, (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast scratch : Physics3DQueryScratch__worldQueries).timeOfImpact, (cast maxFraction : Float)) : Bool) : Bool) : Bool)) {
                 (colliderIndex = cast ((colliderIndex + 1.0) : Dynamic));
                 continue;
               }
@@ -192,11 +192,11 @@ class WorldQueries {
           }
         }
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError43:Dynamic) {
+    } catch (__finallyError77:Dynamic) {
       {
         WorldQueries.releasePhysics3DQueryScratch__worldQueries((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError43);
+      _Runtime.throwValue(__finallyError77);
     }
     {
       WorldQueries.releasePhysics3DQueryScratch__worldQueries((cast scratch : Dynamic));
@@ -212,33 +212,33 @@ class WorldQueries {
     scratch = (cast WorldQueries.acquirePhysics3DQueryScratch__worldQueries() : Physics3DQueryScratch__worldQueries);
     try {
       try {
-        synchronizePhysics3DBroadphase(({ final __callArgument44:Dynamic = world; __callArgument44; }));
+        synchronizePhysics3DBroadphase(({ final __callArgument78:Dynamic = world; __callArgument78; }));
         (cast world.index : SpatialIndexBackend3D).querySpatialRay((cast originX : Float), (cast originY : Float), (cast originZ : Float), (cast directionX : Float), (cast directionY : Float), (cast directionZ : Float), (cast scratch : Physics3DQueryScratch__worldQueries).candidateBodies);
         _Runtime.callProperty((cast scratch : Physics3DQueryScratch__worldQueries).candidateBodies, 'sort', cast ([WorldQueries.compareNumbers__worldQueries] : Array<Dynamic>));
         for (bodyIndex in _Runtime.iterable((cast scratch : Physics3DQueryScratch__worldQueries).candidateBodies)) {
           var body:Null<RigidBody3D> = ((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody3D>).get(bodyIndex));
-          if ((cast ((cast _Runtime.strictEquals(body, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast (cast WorldQueries.passesBodyFilter__worldQueries(({ final __callArgument47:Dynamic = body; __callArgument47; }), ({ final __callArgument48:Dynamic = filter; __callArgument48; })) : Bool) : Bool) : Bool)) : Bool)) { continue; }
+          if ((cast ((cast _Runtime.strictEquals(body, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !(cast (cast WorldQueries.passesBodyFilter__worldQueries(({ final __callArgument82:Dynamic = body; __callArgument82; }), ({ final __callArgument83:Dynamic = filter; __callArgument83; })) : Bool) : Bool) : Bool)) : Bool)) { continue; }
           {
             var colliderIndex:Float = 0.0;
             while ((cast ((cast colliderIndex : Float) < (cast _Runtime.field((cast body : RigidBody3D).colliders, 'length') : Float)) : Bool)) {
               var collider:Physics3DCollider = flighthq._internal._StaticIndex.readArray((cast body : RigidBody3D).colliders, colliderIndex);
-              if ((cast !(cast (cast WorldQueries.passesColliderFilter__worldQueries(({ final __callArgument49:Dynamic = collider; __callArgument49; }), ({ final __callArgument50:Dynamic = filter; __callArgument50; })) : Bool) : Bool) : Bool)) { (colliderIndex = cast ((colliderIndex + 1.0) : Dynamic)); continue; }
+              if ((cast !(cast (cast WorldQueries.passesColliderFilter__worldQueries(({ final __callArgument86:Dynamic = collider; __callArgument86; }), ({ final __callArgument87:Dynamic = filter; __callArgument87; })) : Bool) : Bool) : Bool)) { (colliderIndex = cast ((colliderIndex + 1.0) : Dynamic)); continue; }
               if ((cast !(cast (cast raycastPhysics3DColliderShape((cast collider : Physics3DCollider).world, (cast originX : Float), (cast originY : Float), (cast originZ : Float), (cast directionX : Float), (cast directionY : Float), (cast directionZ : Float), (cast scratch : Physics3DQueryScratch__worldQueries).raycastHit, (cast maxFraction : Float)) : Bool) : Bool) : Bool)) {
                 (colliderIndex = cast ((colliderIndex + 1.0) : Dynamic));
                 continue;
               }
-              if ((cast closestOnly : Bool)) { WorldQueries.writeClosestRayHit__worldQueries(({ final __callArgument51:Dynamic = out; __callArgument51; }), ({ final __callArgument52:Dynamic = body; __callArgument52; }), ({ final __callArgument53:Dynamic = collider; __callArgument53; }), (cast colliderIndex : Float), (cast scratch : Physics3DQueryScratch__worldQueries).raycastHit); } else { WorldQueries.writeRayHit__worldQueries(({ final __callArgument54:Dynamic = out; __callArgument54; }), ({ final __callArgument55:Dynamic = body; __callArgument55; }), ({ final __callArgument56:Dynamic = collider; __callArgument56; }), (cast colliderIndex : Float), (cast scratch : Physics3DQueryScratch__worldQueries).raycastHit); }
+              if ((cast closestOnly : Bool)) { WorldQueries.writeClosestRayHit__worldQueries(({ final __callArgument90:Dynamic = out; __callArgument90; }), ({ final __callArgument91:Dynamic = body; __callArgument91; }), ({ final __callArgument92:Dynamic = collider; __callArgument92; }), (cast colliderIndex : Float), (cast scratch : Physics3DQueryScratch__worldQueries).raycastHit); } else { WorldQueries.writeRayHit__worldQueries(({ final __callArgument96:Dynamic = out; __callArgument96; }), ({ final __callArgument97:Dynamic = body; __callArgument97; }), ({ final __callArgument98:Dynamic = collider; __callArgument98; }), (cast colliderIndex : Float), (cast scratch : Physics3DQueryScratch__worldQueries).raycastHit); }
               (colliderIndex = cast ((colliderIndex + 1.0) : Dynamic));
             }
           }
         }
-        if ((cast !(cast closestOnly : Bool) : Bool)) { WorldQueries.sortLiveRayHits__worldQueries(({ final __callArgument57:Dynamic = out; __callArgument57; })); }
+        if ((cast !(cast closestOnly : Bool) : Bool)) { WorldQueries.sortLiveRayHits__worldQueries(({ final __callArgument102:Dynamic = out; __callArgument102; })); }
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError58:Dynamic) {
+    } catch (__finallyError104:Dynamic) {
       {
         WorldQueries.releasePhysics3DQueryScratch__worldQueries((cast scratch : Dynamic));
       }
-      _Runtime.throwValue(__finallyError58);
+      _Runtime.throwValue(__finallyError104);
     }
     {
       WorldQueries.releasePhysics3DQueryScratch__worldQueries((cast scratch : Dynamic));
@@ -288,7 +288,7 @@ class WorldQueries {
       while ((cast ((cast i : Float) < (cast (cast out : Physics3DRayResult).hitCount : Float)) : Bool)) {
         var value:Physics3DRayHit = flighthq._internal._StaticIndex.readArray((cast out : Physics3DRayResult).hits, i);
         var at:Float = i;
-        while ((cast ((cast ((cast at : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast (cast WorldQueries.compareRayHits__worldQueries(({ final __callArgument59:Dynamic = value; __callArgument59; }), flighthq._internal._StaticIndex.readArray((cast out : Physics3DRayResult).hits, (at - 1.0))) : Float) : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
+        while ((cast ((cast ((cast at : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast (cast WorldQueries.compareRayHits__worldQueries(({ final __callArgument105:Dynamic = value; __callArgument105; }), flighthq._internal._StaticIndex.readArray((cast out : Physics3DRayResult).hits, (at - 1.0))) : Float) : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) {
           flighthq._internal._StaticIndex.writeArray((cast out : Physics3DRayResult).hits, at, flighthq._internal._StaticIndex.readArray((cast out : Physics3DRayResult).hits, (at - 1.0)));
           (at = cast ((at - 1.0) : Dynamic));
         }
@@ -301,7 +301,7 @@ class WorldQueries {
   public static function writeClosestRayHit__worldQueries(out:Physics3DRayResult, body:RigidBody3D, collider:Physics3DCollider, colliderIndex:Float, source:CollisionRaycastHit3D):Void {
     var current:Physics3DRayHit = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals((cast out : Physics3DRayResult).hitCount, 0.0) : Bool)) {
-      WorldQueries.writeRayHit__worldQueries(({ final __callArgument60:Dynamic = out; __callArgument60; }), ({ final __callArgument61:Dynamic = body; __callArgument61; }), ({ final __callArgument62:Dynamic = collider; __callArgument62; }), (cast colliderIndex : Float), ({ final __callArgument63:Dynamic = source; __callArgument63; }));
+      WorldQueries.writeRayHit__worldQueries(({ final __callArgument107:Dynamic = out; __callArgument107; }), ({ final __callArgument108:Dynamic = body; __callArgument108; }), ({ final __callArgument109:Dynamic = collider; __callArgument109; }), (cast colliderIndex : Float), ({ final __callArgument110:Dynamic = source; __callArgument110; }));
       return;
     }
     current = flighthq._internal._StaticIndex.readArray((cast out : Physics3DRayResult).hits, 0.0);
@@ -367,7 +367,7 @@ class WorldQueries {
 
   public static function writeSweptShapeBounds__worldQueries(shape:CollisionBuiltInShape3D, dx:Float, dy:Float, dz:Float, out:SpatialAabb3D):Bool {
     ((cast WorldQueries.shapeCastProbe__worldQueries : Physics3DCollider).world = (cast shape : CollisionBuiltInShape3D));
-    writePhysics3DColliderBounds(({ final __callArgument64:Dynamic = WorldQueries.shapeCastProbe__worldQueries; __callArgument64; }), ({ final __callArgument65:Dynamic = out; __callArgument65; }));
+    writePhysics3DColliderBounds(({ final __callArgument115:Dynamic = WorldQueries.shapeCastProbe__worldQueries; __callArgument115; }), ({ final __callArgument116:Dynamic = out; __callArgument116; }));
     if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast out : SpatialAabb3D).minX] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([(cast out : SpatialAabb3D).maxZ] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast false; }
     if ((cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) { ((cast out : SpatialAabb3D).minX += dx); } else { ((cast out : SpatialAabb3D).maxX += dx); }
     if ((cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) { ((cast out : SpatialAabb3D).minY += dy); } else { ((cast out : SpatialAabb3D).maxY += dy); }

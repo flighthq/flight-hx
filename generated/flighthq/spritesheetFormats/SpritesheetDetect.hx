@@ -104,7 +104,7 @@ class SpritesheetDetect {
     if ((cast !_Runtime.truthy(kind) : Bool)) { return cast null; }
     registered = (cast getRegistryTableEntry((cast (cast SpritesheetDetect.getRegistry__spritesheetDetect() : KeyedTable<RegisteredFormatEntry__spritesheetDetect>) : Dynamic), (cast kind : String)) : Null<RegisteredFormatEntry__spritesheetDetect>);
     if ((cast _Runtime.strictEquals(registered, null) : Bool)) { return cast null; }
-    return cast (cast (cast registered : RegisteredFormatEntry__spritesheetDetect).entry : FormatEntry__spritesheetDetect).parse((cast text : String), ({ final __callArgument4:Dynamic = opts; __callArgument4; }));
+    return cast (cast (cast registered : RegisteredFormatEntry__spritesheetDetect).entry : FormatEntry__spritesheetDetect).parse((cast text : String), ({ final __callArgument5:Dynamic = opts; __callArgument5; }));
     return cast null;
   }
 
@@ -121,7 +121,7 @@ class SpritesheetDetect {
     var current:Null<RegisteredFormatEntry__spritesheetDetect> = cast _Runtime.UNDEFINED;
     registry = (cast SpritesheetDetect.getRegistry__spritesheetDetect() : KeyedTable<RegisteredFormatEntry__spritesheetDetect>);
     current = (cast getRegistryTableEntry((cast registry : Dynamic), (cast kind : String)) : Null<RegisteredFormatEntry__spritesheetDetect>);
-    (SpritesheetDetect._registry__spritesheetDetect = cast ((cast withRegistryTableEntry((cast registry : Dynamic), (cast kind : String), (cast { entry: entry, order: _Runtime.coalesce(({ final __structural5 = current; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { var order:Float; }).order; }), function():Dynamic return cast SpritesheetDetect._nextFormatOrder__spritesheetDetect++) } : Dynamic)) : KeyedTable<{ var entry:FormatEntry__spritesheetDetect; var order:Float; }>) : Dynamic));
+    (SpritesheetDetect._registry__spritesheetDetect = cast ((cast withRegistryTableEntry((cast registry : Dynamic), (cast kind : String), (cast { entry: entry, order: _Runtime.coalesce(({ final __structural6 = current; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var order:Float; }).order; }), function():Dynamic return cast SpritesheetDetect._nextFormatOrder__spritesheetDetect++) } : Dynamic)) : KeyedTable<{ var entry:FormatEntry__spritesheetDetect; var order:Float; }>) : Dynamic));
   }
 
   public static function getSpritesheetFormatsInDetectionOrder__spritesheetDetect():Array<Array<flighthq._internal._Union2<SpritesheetFormatKind, RegisteredFormatEntry__spritesheetDetect>>> {

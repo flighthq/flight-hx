@@ -41,7 +41,7 @@ class WebGlyphRasterizer {
         return cast null;
       }
       observeGlyphRasterizerHostResult((cast 'rasterize' : String), (cast true : Bool));
-      return cast (cast WebGlyphRasterizer._rasterizeGlyphOnContext__webGlyphRasterizer(({ final __callArgument2:Dynamic = context; __callArgument2; }), (cast codepoint : Float), ({ final __callArgument3:Dynamic = options; __callArgument3; })) : Null<GlyphRasterizedBitmap>);
+      return cast (cast WebGlyphRasterizer._rasterizeGlyphOnContext__webGlyphRasterizer(({ final __callArgument4:Dynamic = context; __callArgument4; }), (cast codepoint : Float), ({ final __callArgument5:Dynamic = options; __callArgument5; })) : Null<GlyphRasterizedBitmap>);
       return cast _Runtime.UNDEFINED;
     } };
     return cast null;
@@ -92,7 +92,7 @@ class WebGlyphRasterizer {
     var canvas:flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, flighthq._internal.dom.OffscreenCanvas> = cast _Runtime.UNDEFINED;
     var image:flighthq._internal.dom.ImageData = cast _Runtime.UNDEFINED;
     text = _Runtime.fromCodePoint(codepoint);
-    WebGlyphRasterizer._applyGlyphRasterFont__webGlyphRasterizer(({ final __callArgument4:Dynamic = context; __callArgument4; }), ({ final __callArgument5:Dynamic = options; __callArgument5; }));
+    WebGlyphRasterizer._applyGlyphRasterFont__webGlyphRasterizer(({ final __callArgument8:Dynamic = context; __callArgument8; }), ({ final __callArgument9:Dynamic = options; __callArgument9; }));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textBaseline', 'alphabetic');
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textAlign', 'left');
     metrics = flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([text] : Array<Dynamic>));
@@ -108,7 +108,7 @@ class WebGlyphRasterizer {
     canvas = flighthq._internal.backend.Canvas2dBackend.field(context, 'canvas');
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', width);
     flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', height);
-    WebGlyphRasterizer._applyGlyphRasterFont__webGlyphRasterizer(({ final __callArgument6:Dynamic = context; __callArgument6; }), ({ final __callArgument7:Dynamic = options; __callArgument7; }));
+    WebGlyphRasterizer._applyGlyphRasterFont__webGlyphRasterizer(({ final __callArgument12:Dynamic = context; __callArgument12; }), ({ final __callArgument13:Dynamic = options; __callArgument13; }));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textBaseline', 'alphabetic');
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'textAlign', 'left');
     flighthq._internal.backend.Canvas2dBackend.call(context, 'clearRect', cast ([0.0, 0.0, width, height] : Array<Dynamic>));

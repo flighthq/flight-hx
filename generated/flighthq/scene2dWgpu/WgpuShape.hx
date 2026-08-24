@@ -16,7 +16,7 @@ class WgpuShape {
   @:noCompletion
   public static function drawWgpuShape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     if ((cast (cast drawWgpuMeshShape(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = renderProxy; __callArgument1; })) : Bool) : Bool)) { return; }
-    drawWgpuRasterShape(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = renderProxy; __callArgument3; }));
+    drawWgpuRasterShape(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = renderProxy; __callArgument5; }));
   }
 
   public static final defaultWgpuShapeRenderer:Scene2DRenderer = (cast { format: BatchFormat.Quad, createData: createWgpuShapeData, destroyData: destroyWgpuShapeData, submit: drawWgpuShape });

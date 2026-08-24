@@ -34,7 +34,7 @@ class ExplainScene2DCoverage {
 
   @:noCompletion
   public static function hasScene2DCoverage(state:RenderState, usage:Scene2DKindUsage):Bool {
-    return cast !(cast (cast ExplainScene2DCoverage.collectScene2DCoverageGaps__explainScene2DCoverage(({ final __callArgument4:Dynamic = null; __callArgument4; }), ({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = usage; __callArgument6; }), (cast true : Bool), ({ final __callArgument7:Dynamic = null; __callArgument7; })) : Bool) : Bool);
+    return cast !(cast (cast ExplainScene2DCoverage.collectScene2DCoverageGaps__explainScene2DCoverage(({ final __callArgument8:Dynamic = null; __callArgument8; }), ({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = usage; __callArgument10; }), (cast true : Bool), ({ final __callArgument11:Dynamic = null; __callArgument11; })) : Bool) : Bool);
     return cast null;
   }
 
@@ -43,35 +43,35 @@ class ExplainScene2DCoverage {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var commands:Null<flighthq._internal._Map<String, RegistryTableEntry<CanvasShapeCommand<String>>>> = cast _Runtime.UNDEFINED;
     found = false;
-    runtime = (cast getRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : RenderStateRuntime);
+    runtime = (cast getRenderStateRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : RenderStateRuntime);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(usage.nodeKinds, 'length') : Float)) : Bool)) {
         var kind:String = flighthq._internal._StaticIndex.readArray(usage.nodeKinds, i);
-        if ((cast _Runtime.strictEquals(({ final __structural9 = ((cast (cast (cast runtime.registries : { var renderers:KeyedTable<Renderer>; }).renderers : KeyedTable<Renderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<Renderer>>).get(kind)); __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
+        if ((cast _Runtime.strictEquals(({ final __structural18 = ((cast (cast (cast runtime.registries : { var renderers:KeyedTable<Renderer>; }).renderers : KeyedTable<Renderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<Renderer>>).get(kind)); __structural18 == null ? _Runtime.UNDEFINED : (cast __structural18 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Satisfied, facet: (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneNodeKind, kind: kind, registry: RenderRegistry.NodeRenderer }] : Array<Dynamic>));
           i++;
           continue;
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([(cast ExplainScene2DCoverage.createShortfallEntry__explainScene2DCoverage(({ final __callArgument10:Dynamic = catalog; __callArgument10; }), (cast false : Bool), ({ final __callArgument11:Dynamic = (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneNodeKind; __callArgument11; }), (cast kind : String), ({ final __callArgument12:Dynamic = RenderRegistry.NodeRenderer; __callArgument12; })) : SceneCoverageEntry)] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([(cast ExplainScene2DCoverage.createShortfallEntry__explainScene2DCoverage(({ final __callArgument19:Dynamic = catalog; __callArgument19; }), (cast false : Bool), ({ final __callArgument20:Dynamic = (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneNodeKind; __callArgument20; }), (cast kind : String), ({ final __callArgument21:Dynamic = RenderRegistry.NodeRenderer; __callArgument21; })) : SceneCoverageEntry)] : Array<Dynamic>));
         i++;
       }
     }
-    commands = ({ final __structural13 = (cast runtime.registries : { @:optional var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>; }).canvasShapeCommands; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { var entries:flighthq._internal._Map<String, RegistryTableEntry<CanvasShapeCommand<String>>>; }).entries; });
+    commands = ({ final __structural25 = (cast runtime.registries : { @:optional var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>; }).canvasShapeCommands; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { var entries:flighthq._internal._Map<String, RegistryTableEntry<CanvasShapeCommand<String>>>; }).entries; });
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(usage.shapeCommandKeys, 'length') : Float)) : Bool)) {
         var kind:String = flighthq._internal._StaticIndex.readArray(usage.shapeCommandKeys, i);
-        if ((cast _Runtime.strictEquals(({ final __structural15 = ({ final __collection14:Dynamic = commands; __collection14 == null ? _Runtime.UNDEFINED : ((cast __collection14 : flighthq._internal._Map<String, RegistryTableEntry<CanvasShapeCommand<String>>>).get(kind)); }); __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { var state:String; }).state; }), 'bound') : Bool)) {
+        if ((cast _Runtime.strictEquals(({ final __structural27 = ({ final __collection26:Dynamic = commands; __collection26 == null ? _Runtime.UNDEFINED : ((cast __collection26 : flighthq._internal._Map<String, RegistryTableEntry<CanvasShapeCommand<String>>>).get(kind)); }); __structural27 == null ? _Runtime.UNDEFINED : (cast __structural27 : { var state:String; }).state; }), 'bound') : Bool)) {
           _Runtime.callOptionalProperty(out, 'push', cast ([{ coverage: (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Satisfied, facet: (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneShapeCommand, kind: kind, registry: RenderRegistry.ShapeCommandHandler }] : Array<Dynamic>));
           i++;
           continue;
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([(cast ExplainScene2DCoverage.createShortfallEntry__explainScene2DCoverage(({ final __callArgument16:Dynamic = catalog; __callArgument16; }), (cast false : Bool), ({ final __callArgument17:Dynamic = (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneShapeCommand; __callArgument17; }), (cast kind : String), ({ final __callArgument18:Dynamic = RenderRegistry.ShapeCommandHandler; __callArgument18; })) : SceneCoverageEntry)] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([(cast ExplainScene2DCoverage.createShortfallEntry__explainScene2DCoverage(({ final __callArgument28:Dynamic = catalog; __callArgument28; }), (cast false : Bool), ({ final __callArgument29:Dynamic = (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneShapeCommand; __callArgument29; }), (cast kind : String), ({ final __callArgument30:Dynamic = RenderRegistry.ShapeCommandHandler; __callArgument30; })) : SceneCoverageEntry)] : Array<Dynamic>));
         i++;
       }
     }
@@ -82,7 +82,7 @@ class ExplainScene2DCoverage {
   public static function createShortfallEntry__explainScene2DCoverage(catalog:Null<SceneCoverageCatalog>, fallback:Bool, facet:flighthq._internal._IndexedAccess<SceneCoverageEntry, String>, kind:Kind, registry:flighthq._internal._IndexedAccess<SceneCoverageEntry, String>):SceneCoverageEntry {
     var registration:Null<CatalogRegistration> = cast _Runtime.UNDEFINED;
     var base:{ var facet:RequirementFacet; var kind:String; var registry:RenderRegistry; } = cast _Runtime.UNDEFINED;
-    registration = (cast ExplainScene2DCoverage.findCatalogRegistration__explainScene2DCoverage(({ final __callArgument19:Dynamic = catalog; __callArgument19; }), (cast kind : String), ({ final __callArgument20:Dynamic = registry; __callArgument20; })) : Null<CatalogRegistration>);
+    registration = (cast ExplainScene2DCoverage.findCatalogRegistration__explainScene2DCoverage(({ final __callArgument34:Dynamic = catalog; __callArgument34; }), (cast kind : String), ({ final __callArgument35:Dynamic = registry; __callArgument35; })) : Null<CatalogRegistration>);
     base = (cast { facet: facet, kind: kind, registry: registry });
     if ((cast _Runtime.strictEquals(registration, null) : Bool)) {
       return cast _Runtime.mergeObjects([base, { coverage: ((cast fallback : Bool) ? (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).FallbackUnavailable : Dynamic) : (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Unavailable : Dynamic)) }]);

@@ -26,7 +26,7 @@ class BitmapFormat {
     srcG = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
     srcB = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
     srcA = flighthq._internal._StaticIndex.readArray(__destructure0, 3.0);
-    __destructure1 = (cast BitmapFormat.channelOffsets__bitmapFormat(({ final __callArgument1:Dynamic = to; __callArgument1; })) : Array<Float>);
+    __destructure1 = (cast BitmapFormat.channelOffsets__bitmapFormat(({ final __callArgument2:Dynamic = to; __callArgument2; })) : Array<Float>);
     dstR = flighthq._internal._StaticIndex.readArray(__destructure1, 0.0);
     dstG = flighthq._internal._StaticIndex.readArray(__destructure1, 1.0);
     dstB = flighthq._internal._StaticIndex.readArray(__destructure1, 2.0);

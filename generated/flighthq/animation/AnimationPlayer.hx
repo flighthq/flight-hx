@@ -35,17 +35,17 @@ class AnimationPlayer {
     time = (player.time + (dt * player.speed));
     if ((cast !(cast player.loop : Bool) : Bool)) {
       if ((cast ((cast time : Float) >= (cast duration : Float)) : Bool)) {
-        AnimationPlayer.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument0:Dynamic = player; __callArgument0; }), (cast fromTime : Float), (cast duration : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+        (#if js _Runtime.callValue(AnimationPlayer.emitAnimationPlayerEvents__animationPlayer, cast ([({ final __callArgument1:Dynamic = player; __callArgument1; }), (cast fromTime : Float), (cast duration : Float)] : Array<Dynamic>)) #else AnimationPlayer.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument0:Dynamic = player; __callArgument0; }), (cast fromTime : Float), (cast duration : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
         (player.time = cast (duration : Float));
         (player.playing = cast (false : Bool));
-        AnimationPlayer.emitAnimationPlayerFinished__animationPlayer(({ final __callArgument1:Dynamic = player; __callArgument1; }));
+        AnimationPlayer.emitAnimationPlayerFinished__animationPlayer(({ final __callArgument2:Dynamic = player; __callArgument2; }));
       } else { if ((cast ((cast time : Float) < (cast 0.0 : Float)) : Bool)) {
-        AnimationPlayer.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument2:Dynamic = player; __callArgument2; }), (cast fromTime : Float), (cast 0.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+        (#if js _Runtime.callValue(AnimationPlayer.emitAnimationPlayerEvents__animationPlayer, cast ([({ final __callArgument5:Dynamic = player; __callArgument5; }), (cast fromTime : Float), (cast 0.0 : Float)] : Array<Dynamic>)) #else AnimationPlayer.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument4:Dynamic = player; __callArgument4; }), (cast fromTime : Float), (cast 0.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
         (player.time = cast (0.0 : Float));
         (player.playing = cast (false : Bool));
-        AnimationPlayer.emitAnimationPlayerFinished__animationPlayer(({ final __callArgument3:Dynamic = player; __callArgument3; }));
+        AnimationPlayer.emitAnimationPlayerFinished__animationPlayer(({ final __callArgument6:Dynamic = player; __callArgument6; }));
       } else {
-        AnimationPlayer.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument4:Dynamic = player; __callArgument4; }), (cast fromTime : Float), (cast time : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+        (#if js _Runtime.callValue(AnimationPlayer.emitAnimationPlayerEvents__animationPlayer, cast ([({ final __callArgument9:Dynamic = player; __callArgument9; }), (cast fromTime : Float), (cast time : Float)] : Array<Dynamic>)) #else AnimationPlayer.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument8:Dynamic = player; __callArgument8; }), (cast fromTime : Float), (cast time : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
         (player.time = cast (time : Float));
       } }
       return;
@@ -57,9 +57,9 @@ class AnimationPlayer {
       {
         while (true) {
           if ((cast ((cast time : Float) > (cast duration : Float)) : Bool)) {
-            AnimationPlayer.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument5:Dynamic = player; __callArgument5; }), (cast segmentStart : Float), (cast duration : Float), (cast includeSegmentStart : Bool));
-            if ((cast !(cast (cast AnimationPlayer.consumeAnimationPlayerLoop__animationPlayer(({ final __callArgument6:Dynamic = player; __callArgument6; })) : Bool) : Bool) : Bool)) {
-              AnimationPlayer.finishAnimationPlayerAt__animationPlayer(({ final __callArgument7:Dynamic = player; __callArgument7; }), (cast duration : Float));
+            AnimationPlayer.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument10:Dynamic = player; __callArgument10; }), (cast segmentStart : Float), (cast duration : Float), (cast includeSegmentStart : Bool));
+            if ((cast !(cast (cast AnimationPlayer.consumeAnimationPlayerLoop__animationPlayer(({ final __callArgument12:Dynamic = player; __callArgument12; })) : Bool) : Bool) : Bool)) {
+              AnimationPlayer.finishAnimationPlayerAt__animationPlayer(({ final __callArgument14:Dynamic = player; __callArgument14; }), (cast duration : Float));
               return;
             }
             (time = cast (((2.0 * duration) - time) : Dynamic));
@@ -68,9 +68,9 @@ class AnimationPlayer {
             (includeSegmentStart = cast (false : Dynamic));
             (looped = cast (true : Dynamic));
           } else { if ((cast ((cast time : Float) < (cast 0.0 : Float)) : Bool)) {
-            AnimationPlayer.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument8:Dynamic = player; __callArgument8; }), (cast segmentStart : Float), (cast 0.0 : Float), (cast includeSegmentStart : Bool));
-            if ((cast !(cast (cast AnimationPlayer.consumeAnimationPlayerLoop__animationPlayer(({ final __callArgument9:Dynamic = player; __callArgument9; })) : Bool) : Bool) : Bool)) {
-              AnimationPlayer.finishAnimationPlayerAt__animationPlayer(({ final __callArgument10:Dynamic = player; __callArgument10; }), (cast 0.0 : Float));
+            AnimationPlayer.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument16:Dynamic = player; __callArgument16; }), (cast segmentStart : Float), (cast 0.0 : Float), (cast includeSegmentStart : Bool));
+            if ((cast !(cast (cast AnimationPlayer.consumeAnimationPlayerLoop__animationPlayer(({ final __callArgument18:Dynamic = player; __callArgument18; })) : Bool) : Bool) : Bool)) {
+              AnimationPlayer.finishAnimationPlayerAt__animationPlayer(({ final __callArgument20:Dynamic = player; __callArgument20; }), (cast 0.0 : Float));
               return;
             }
             (time = cast (-time : Dynamic));
@@ -83,12 +83,12 @@ class AnimationPlayer {
           } }
         }
       }
-      AnimationPlayer.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument11:Dynamic = player; __callArgument11; }), (cast segmentStart : Float), (cast time : Float), (cast includeSegmentStart : Bool));
+      AnimationPlayer.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument22:Dynamic = player; __callArgument22; }), (cast segmentStart : Float), (cast time : Float), (cast includeSegmentStart : Bool));
     } else {
       while ((cast ((cast time : Float) >= (cast duration : Float)) : Bool)) {
-        AnimationPlayer.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument12:Dynamic = player; __callArgument12; }), (cast segmentStart : Float), (cast duration : Float), (cast includeSegmentStart : Bool));
-        if ((cast !(cast (cast AnimationPlayer.consumeAnimationPlayerLoop__animationPlayer(({ final __callArgument13:Dynamic = player; __callArgument13; })) : Bool) : Bool) : Bool)) {
-          AnimationPlayer.finishAnimationPlayerAt__animationPlayer(({ final __callArgument14:Dynamic = player; __callArgument14; }), (cast duration : Float));
+        AnimationPlayer.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument24:Dynamic = player; __callArgument24; }), (cast segmentStart : Float), (cast duration : Float), (cast includeSegmentStart : Bool));
+        if ((cast !(cast (cast AnimationPlayer.consumeAnimationPlayerLoop__animationPlayer(({ final __callArgument26:Dynamic = player; __callArgument26; })) : Bool) : Bool) : Bool)) {
+          AnimationPlayer.finishAnimationPlayerAt__animationPlayer(({ final __callArgument28:Dynamic = player; __callArgument28; }), (cast duration : Float));
           return;
         }
         (time = cast ((time - duration) : Dynamic));
@@ -97,9 +97,9 @@ class AnimationPlayer {
         (looped = cast (true : Dynamic));
       }
       while ((cast ((cast time : Float) < (cast 0.0 : Float)) : Bool)) {
-        AnimationPlayer.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument15:Dynamic = player; __callArgument15; }), (cast segmentStart : Float), (cast 0.0 : Float), (cast includeSegmentStart : Bool));
-        if ((cast !(cast (cast AnimationPlayer.consumeAnimationPlayerLoop__animationPlayer(({ final __callArgument16:Dynamic = player; __callArgument16; })) : Bool) : Bool) : Bool)) {
-          AnimationPlayer.finishAnimationPlayerAt__animationPlayer(({ final __callArgument17:Dynamic = player; __callArgument17; }), (cast 0.0 : Float));
+        AnimationPlayer.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument30:Dynamic = player; __callArgument30; }), (cast segmentStart : Float), (cast 0.0 : Float), (cast includeSegmentStart : Bool));
+        if ((cast !(cast (cast AnimationPlayer.consumeAnimationPlayerLoop__animationPlayer(({ final __callArgument32:Dynamic = player; __callArgument32; })) : Bool) : Bool) : Bool)) {
+          AnimationPlayer.finishAnimationPlayerAt__animationPlayer(({ final __callArgument34:Dynamic = player; __callArgument34; }), (cast 0.0 : Float));
           return;
         }
         (time = cast ((time + duration) : Dynamic));
@@ -107,19 +107,19 @@ class AnimationPlayer {
         (includeSegmentStart = cast (true : Dynamic));
         (looped = cast (true : Dynamic));
       }
-      AnimationPlayer.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument18:Dynamic = player; __callArgument18; }), (cast segmentStart : Float), (cast time : Float), (cast includeSegmentStart : Bool));
+      AnimationPlayer.emitAnimationPlayerEvents__animationPlayer(({ final __callArgument36:Dynamic = player; __callArgument36; }), (cast segmentStart : Float), (cast time : Float), (cast includeSegmentStart : Bool));
     }
     (player.time = cast (time : Float));
-    if ((cast looped : Bool)) { AnimationPlayer.emitAnimationPlayerLooped__animationPlayer(({ final __callArgument19:Dynamic = player; __callArgument19; })); }
+    if ((cast looped : Bool)) { AnimationPlayer.emitAnimationPlayerLooped__animationPlayer(({ final __callArgument38:Dynamic = player; __callArgument38; })); }
   }
 
   public static function cloneAnimationPlayer(player:flighthq.types.AnimationPlayer):flighthq.types.AnimationPlayer {
-    return cast (cast createEntity(({ final __callArgument20:Dynamic = { clip: player.clip, loop: player.loop, loopMode: player.loopMode, onEvent: null, onFinished: null, onLooped: null, playing: player.playing, repeatCount: player.repeatCount, speed: player.speed, time: player.time }; __callArgument20; })) : { >Entity, var clip:AnimationClip; var loop:Bool; var loopMode:Null<String>; var onEvent:flighthq._internal._Any; var onFinished:flighthq._internal._Any; var onLooped:flighthq._internal._Any; var playing:Bool; var repeatCount:Null<Float>; var speed:Float; var time:Float; });
+    return cast (cast createEntity(({ final __callArgument40:Dynamic = { clip: player.clip, loop: player.loop, loopMode: player.loopMode, onEvent: null, onFinished: null, onLooped: null, playing: player.playing, repeatCount: player.repeatCount, speed: player.speed, time: player.time }; __callArgument40; })) : { >Entity, var clip:AnimationClip; var loop:Bool; var loopMode:Null<String>; var onEvent:flighthq._internal._Any; var onFinished:flighthq._internal._Any; var onLooped:flighthq._internal._Any; var playing:Bool; var repeatCount:Null<Float>; var speed:Float; var time:Float; });
     return cast null;
   }
 
   public static function createAnimationPlayer(clip:AnimationClip, ?opts:{ @:optional var loop:Bool; @:optional var loopMode:AnimationLoopMode; @:optional var playing:Bool; @:optional var repeatCount:Float; @:optional var speed:Float; @:optional var time:Float; }):flighthq.types.AnimationPlayer {
-    return cast (cast createEntity(({ final __callArgument27:Dynamic = { clip: clip, loop: _Runtime.coalesce(({ final __structural21 = opts; __structural21 == null ? _Runtime.UNDEFINED : (cast __structural21 : { @:optional var loop:Null<Bool>; }).loop; }), function():Dynamic return cast true), loopMode: _Runtime.coalesce(({ final __structural22 = opts; __structural22 == null ? _Runtime.UNDEFINED : (cast __structural22 : { @:optional var loopMode:Null<String>; }).loopMode; }), function():Dynamic return cast AnimationLoopModeRepeat), onEvent: null, onFinished: null, onLooped: null, playing: _Runtime.coalesce(({ final __structural23 = opts; __structural23 == null ? _Runtime.UNDEFINED : (cast __structural23 : { @:optional var playing:Null<Bool>; }).playing; }), function():Dynamic return cast true), repeatCount: _Runtime.coalesce(({ final __structural24 = opts; __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { @:optional var repeatCount:Null<Float>; }).repeatCount; }), function():Dynamic return cast -1.0), speed: _Runtime.coalesce(({ final __structural25 = opts; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { @:optional var speed:Null<Float>; }).speed; }), function():Dynamic return cast 1.0), time: _Runtime.coalesce(({ final __structural26 = opts; __structural26 == null ? _Runtime.UNDEFINED : (cast __structural26 : { @:optional var time:Null<Float>; }).time; }), function():Dynamic return cast 0.0) }; __callArgument27; })) : { >Entity, var clip:AnimationClip; var loop:Bool; var loopMode:AnimationLoopMode; var onEvent:flighthq._internal._Any; var onFinished:flighthq._internal._Any; var onLooped:flighthq._internal._Any; var playing:Bool; var repeatCount:Float; var speed:Float; var time:Float; });
+    return cast (cast createEntity(({ final __callArgument48:Dynamic = { clip: clip, loop: _Runtime.coalesce(({ final __structural42 = opts; __structural42 == null ? _Runtime.UNDEFINED : (cast __structural42 : { @:optional var loop:Null<Bool>; }).loop; }), function():Dynamic return cast true), loopMode: _Runtime.coalesce(({ final __structural43 = opts; __structural43 == null ? _Runtime.UNDEFINED : (cast __structural43 : { @:optional var loopMode:Null<String>; }).loopMode; }), function():Dynamic return cast AnimationLoopModeRepeat), onEvent: null, onFinished: null, onLooped: null, playing: _Runtime.coalesce(({ final __structural44 = opts; __structural44 == null ? _Runtime.UNDEFINED : (cast __structural44 : { @:optional var playing:Null<Bool>; }).playing; }), function():Dynamic return cast true), repeatCount: _Runtime.coalesce(({ final __structural45 = opts; __structural45 == null ? _Runtime.UNDEFINED : (cast __structural45 : { @:optional var repeatCount:Null<Float>; }).repeatCount; }), function():Dynamic return cast -1.0), speed: _Runtime.coalesce(({ final __structural46 = opts; __structural46 == null ? _Runtime.UNDEFINED : (cast __structural46 : { @:optional var speed:Null<Float>; }).speed; }), function():Dynamic return cast 1.0), time: _Runtime.coalesce(({ final __structural47 = opts; __structural47 == null ? _Runtime.UNDEFINED : (cast __structural47 : { @:optional var time:Null<Float>; }).time; }), function():Dynamic return cast 0.0) }; __callArgument48; })) : { >Entity, var clip:AnimationClip; var loop:Bool; var loopMode:AnimationLoopMode; var onEvent:flighthq._internal._Any; var onFinished:flighthq._internal._Any; var onLooped:flighthq._internal._Any; var playing:Bool; var repeatCount:Float; var speed:Float; var time:Float; });
     return cast null;
   }
 
@@ -206,6 +206,6 @@ class AnimationPlayer {
   public static function finishAnimationPlayerAt__animationPlayer(player:flighthq.types.AnimationPlayer, time:Float):Void {
     (player.time = cast (time : Float));
     (player.playing = cast (false : Bool));
-    AnimationPlayer.emitAnimationPlayerFinished__animationPlayer(({ final __callArgument32:Dynamic = player; __callArgument32; }));
+    AnimationPlayer.emitAnimationPlayerFinished__animationPlayer(({ final __callArgument60:Dynamic = player; __callArgument60; }));
   }
 }

@@ -82,7 +82,7 @@ class Deflate {
     } else { if ((cast !_Runtime.strictEquals(framing, (cast CompressionFramingValue : { var Raw:String; var Rfc1950:String; }).Raw) : Bool)) { return cast null; } }
     try {
       var output:flighthq._internal._UInt8Array = (cast Deflate.rawInflate__deflate((cast input : flighthq._internal._UInt8Array).subarray(Std.int(0.0), Std.int(end)), (cast start : Float), (cast uncompressedLength : Float)) : flighthq._internal._UInt8Array);
-      if ((cast ((cast _Runtime.strictEquals(framing, (cast CompressionFramingValue : { var Raw:String; var Rfc1950:String; }).Rfc1950) : Bool) && (cast !_Runtime.strictEquals((cast Deflate.readZlibAdler32__deflate(({ final __callArgument0:Dynamic = input; __callArgument0; }), (cast end : Float)) : Float), (cast Deflate.computeAdler32__deflate(({ final __callArgument1:Dynamic = output; __callArgument1; })) : Float)) : Bool)) : Bool)) { return cast null; }
+      if ((cast ((cast _Runtime.strictEquals(framing, (cast CompressionFramingValue : { var Raw:String; var Rfc1950:String; }).Rfc1950) : Bool) && (cast !_Runtime.strictEquals((cast Deflate.readZlibAdler32__deflate(({ final __callArgument0:Dynamic = input; __callArgument0; }), (cast end : Float)) : Float), (cast Deflate.computeAdler32__deflate(({ final __callArgument2:Dynamic = output; __callArgument2; })) : Float)) : Bool)) : Bool)) { return cast null; }
       return cast output;
     } catch (__error:Dynamic) {
       return cast null;
@@ -91,7 +91,7 @@ class Deflate {
   });
 
   public static function registerDeflateDecompressor():Void {
-    registerDecompressor(({ final __callArgument2:Dynamic = (cast CompressionValue : { var Brotli:String; var Deflate:String; var Lzma:String; }).Deflate; __callArgument2; }), ({ final __callArgument3:Dynamic = inflateDeflate; __callArgument3; }));
+    registerDecompressor(({ final __callArgument4:Dynamic = (cast CompressionValue : { var Brotli:String; var Deflate:String; var Lzma:String; }).Deflate; __callArgument4; }), ({ final __callArgument5:Dynamic = inflateDeflate; __callArgument5; }));
   }
 
   public static final LENGTH_BASE__deflate:Array<Float> = (cast cast ([3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 13.0, 15.0, 17.0, 19.0, 23.0, 27.0, 31.0, 35.0, 43.0, 51.0, 59.0, 67.0, 83.0, 99.0, 115.0, 131.0, 163.0, 195.0, 227.0, 258.0] : Array<Dynamic>));
@@ -190,7 +190,7 @@ class Deflate {
         i++;
       }
     }
-    codeLengthTree = (cast Deflate.buildHuffmanTree__deflate(({ final __callArgument4:Dynamic = codeLengthLengths; __callArgument4; }), (cast 19.0 : Float)) : HuffmanTree__deflate);
+    codeLengthTree = (cast Deflate.buildHuffmanTree__deflate(({ final __callArgument8:Dynamic = codeLengthLengths; __callArgument8; }), (cast 19.0 : Float)) : HuffmanTree__deflate);
     lengths = _Runtime.fill(_Runtime.createArray((literalCount + distanceCount)), 0.0, 0, null, 1);
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(lengths, 'length') : Float)) : Bool)) {
@@ -348,7 +348,7 @@ class Deflate {
         i++;
       }
     }
-    return cast (cast Deflate.buildHuffmanTree__deflate(({ final __callArgument7:Dynamic = lengths; __callArgument7; }), (cast 288.0 : Float)) : HuffmanTree__deflate);
+    return cast (cast Deflate.buildHuffmanTree__deflate(({ final __callArgument12:Dynamic = lengths; __callArgument12; }), (cast 288.0 : Float)) : HuffmanTree__deflate);
     return cast null;
   }
 

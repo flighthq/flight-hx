@@ -44,16 +44,16 @@ import flighthq.types.StatusBar.StatusBarBackend;
 class CapacitorRegister {
   public static function registerCapacitorBackends(capacitor:CapacitorApi):Void {
     setAppBackend((cast (cast createCapacitorAppBackend(({ final __callArgument0:Dynamic = capacitor; __callArgument0; })) : AppBackend) : Dynamic));
-    setClipboardBackend((cast (cast createCapacitorClipboardBackend(({ final __callArgument1:Dynamic = capacitor; __callArgument1; })) : ClipboardBackend) : Dynamic));
-    setConnectivityBackend((cast (cast createCapacitorConnectivityBackend(({ final __callArgument2:Dynamic = capacitor; __callArgument2; })) : ConnectivityBackend) : Dynamic));
-    setDeviceBackend((cast (cast createCapacitorDeviceBackend(({ final __callArgument3:Dynamic = capacitor; __callArgument3; })) : DeviceBackend) : Dynamic));
-    setDialogBackend((cast (cast createCapacitorDialogBackend(({ final __callArgument4:Dynamic = capacitor; __callArgument4; })) : DialogBackend) : Dynamic));
-    setFileSystemBackend((cast (cast createCapacitorFileSystemBackend(({ final __callArgument5:Dynamic = capacitor; __callArgument5; })) : FileSystemBackend) : Dynamic));
-    setGeolocationBackend((cast (cast createCapacitorGeolocationBackend(({ final __callArgument6:Dynamic = capacitor; __callArgument6; })) : GeolocationBackend) : Dynamic));
-    setHapticsBackend((cast (cast createCapacitorHapticsBackend(({ final __callArgument7:Dynamic = capacitor; __callArgument7; })) : HapticsBackend) : Dynamic));
-    setNotificationBackend((cast (cast createCapacitorNotificationBackend(({ final __callArgument8:Dynamic = capacitor; __callArgument8; })) : NotificationBackend) : Dynamic));
-    setShareBackend((cast (cast createCapacitorShareBackend(({ final __callArgument9:Dynamic = capacitor; __callArgument9; })) : ShareBackend) : Dynamic));
-    setSoftKeyboardBackend((cast (cast createCapacitorKeyboardBackend(({ final __callArgument10:Dynamic = capacitor; __callArgument10; })) : SoftKeyboardBackend) : Dynamic));
-    setStatusBarBackend((cast (cast createCapacitorStatusBarBackend(({ final __callArgument11:Dynamic = capacitor; __callArgument11; })) : StatusBarBackend) : Dynamic));
+    setClipboardBackend((cast (cast createCapacitorClipboardBackend(({ final __callArgument4:Dynamic = capacitor; __callArgument4; })) : ClipboardBackend) : Dynamic));
+    setConnectivityBackend((cast (cast createCapacitorConnectivityBackend(({ final __callArgument8:Dynamic = capacitor; __callArgument8; })) : ConnectivityBackend) : Dynamic));
+    setDeviceBackend((cast (cast createCapacitorDeviceBackend(({ final __callArgument12:Dynamic = capacitor; __callArgument12; })) : DeviceBackend) : Dynamic));
+    setDialogBackend((cast (cast createCapacitorDialogBackend(({ final __callArgument16:Dynamic = capacitor; __callArgument16; })) : DialogBackend) : Dynamic));
+    setFileSystemBackend((cast (cast createCapacitorFileSystemBackend(({ final __callArgument20:Dynamic = capacitor; __callArgument20; })) : FileSystemBackend) : Dynamic));
+    setGeolocationBackend((cast (cast createCapacitorGeolocationBackend(({ final __callArgument24:Dynamic = capacitor; __callArgument24; })) : GeolocationBackend) : Dynamic));
+    setHapticsBackend((cast (cast createCapacitorHapticsBackend(({ final __callArgument28:Dynamic = capacitor; __callArgument28; })) : HapticsBackend) : Dynamic));
+    setNotificationBackend((cast (cast createCapacitorNotificationBackend(({ final __callArgument32:Dynamic = capacitor; __callArgument32; })) : NotificationBackend) : Dynamic));
+    setShareBackend((cast (cast createCapacitorShareBackend(({ final __callArgument36:Dynamic = capacitor; __callArgument36; })) : ShareBackend) : Dynamic));
+    setSoftKeyboardBackend((cast (cast createCapacitorKeyboardBackend(({ final __callArgument40:Dynamic = capacitor; __callArgument40; })) : SoftKeyboardBackend) : Dynamic));
+    setStatusBarBackend((cast (cast createCapacitorStatusBarBackend(({ final __callArgument44:Dynamic = capacitor; __callArgument44; })) : StatusBarBackend) : Dynamic));
   }
 }

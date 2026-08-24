@@ -38,7 +38,7 @@ class Protocol {
     for (url in _Runtime.iterable(pending)) {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[handler.onOpenUrl], [url]]), 1);
     }
-    unsubscribe = (cast backend : ProtocolBackend).subscribe(({ final __callArgument3:Dynamic = function(url:String):Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[handler.onOpenUrl], [url]]), 1); }; __callArgument3; }));
+    unsubscribe = (cast backend : ProtocolBackend).subscribe(({ final __callArgument4:Dynamic = function(url:String):Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[handler.onOpenUrl], [url]]), 1); }; __callArgument4; }));
     ((cast Protocol._subscriptions__protocol : flighthq._internal._WeakMap<ProtocolHandler, Void->Void>).set(handler, (cast unsubscribe)));
   }
 
@@ -95,7 +95,7 @@ class Protocol {
       nav = (cast flighthq._internal.backend.DomNavigatorBackend.value() : flighthq._internal._Intersection2<flighthq._internal.dom.Navigator, { @:optional var registerProtocolHandler:String->String->Void; }>);
       if ((cast !_Runtime.strictEquals(_Runtime.typeofValue((cast nav : { var registerProtocolHandler:String->String->Void; }).registerProtocolHandler), 'function') : Bool)) { return cast false; }
       try {
-        (cast nav : { var registerProtocolHandler:String->String->Void; }).registerProtocolHandler((cast scheme : String), ({ final __callArgument4:Dynamic = ((cast flighthq._internal._HostValueLut.get('location') : flighthq._internal.dom.Location).origin + '/?url=%s'); __callArgument4; }));
+        (cast nav : { var registerProtocolHandler:String->String->Void; }).registerProtocolHandler((cast scheme : String), ({ final __callArgument5:Dynamic = ((cast flighthq._internal._HostValueLut.get('location') : flighthq._internal.dom.Location).origin + '/?url=%s'); __callArgument5; }));
         if ((cast !(cast _Runtime.includes(_registeredSchemes, scheme) : Bool) : Bool)) { _Runtime.callProperty(_registeredSchemes, 'push', cast ([scheme] : Array<Dynamic>)); }
         return cast true;
       } catch (__error:Dynamic) {
@@ -155,7 +155,7 @@ class Protocol {
   }
 
   public static function disposeProtocolHandler(handler:ProtocolHandler):Void {
-    detachProtocolHandler(({ final __callArgument5:Dynamic = handler; __callArgument5; }));
+    detachProtocolHandler(({ final __callArgument6:Dynamic = handler; __callArgument6; }));
   }
 
   @:noCompletion

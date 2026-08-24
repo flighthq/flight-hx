@@ -48,7 +48,7 @@ class WgpuRenderTargetPool {
   @:noCompletion
   public static function destroyWgpuRenderTargetPool(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool):Void {
     for (target in _Runtime.iterable((cast pool : flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool).free)) {
-      destroyWgpuRenderTarget(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = target; __callArgument5; }));
+      destroyWgpuRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = target; __callArgument7; }));
     }
     _Runtime.setLength((cast pool : flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool).free, 0.0);
   }

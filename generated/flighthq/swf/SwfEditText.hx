@@ -75,8 +75,8 @@ class SwfEditText {
     format = (cast { align: _Runtime.field(field, 'align'), indent: _Runtime.field(field, 'indent'), leading: _Runtime.field(field, 'leading'), leftMargin: _Runtime.field(field, 'leftMargin'), rightMargin: _Runtime.field(field, 'rightMargin'), size: _Runtime.field(field, 'fontHeight') });
     if ((cast _Runtime.field(field, 'hasColor') : Bool)) { ((cast format : TextFormat).color = _Runtime.field(field, 'color')); }
     if ((cast !_Runtime.strictEquals(fontName, '') : Bool)) { ((cast format : TextFormat).font = fontName); }
-    content = ((cast _Runtime.field(field, 'html') : Bool) ? (cast (cast parseTextMarkup((cast _Runtime.field(field, 'text') : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : RichTextContent) : Dynamic) : (cast null : Dynamic));
-    node = (cast createRichText(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : RichText);
+    content = ((cast _Runtime.field(field, 'html') : Bool) ? (cast (cast (#if js _Runtime.callValue(parseTextMarkup, cast ([(cast _Runtime.field(field, 'text') : String)] : Array<Dynamic>)) #else parseTextMarkup((cast _Runtime.field(field, 'text') : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : RichTextContent) : Dynamic) : (cast null : Dynamic));
+    node = (cast (#if js _Runtime.callValue(createRichText, cast ([] : Array<Dynamic>)) #else createRichText(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : RichText);
     ((cast node.data : { var border:Bool; }).border = cast (_Runtime.field(field, 'border') : Bool));
     ((cast node.data : { var defaultTextFormat:TextFormat; }).defaultTextFormat = cast (format : TextFormat));
     ((cast node.data : { var height:Float; }).height = cast (_Runtime.field(field, 'height') : Float));

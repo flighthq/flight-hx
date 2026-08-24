@@ -56,6 +56,6 @@ class BitmapPixel {
     flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast i : Float), (cast (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) : Float));
     flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast (i + 1.0) : Float), (cast (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255) : Float));
     flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flighthq._internal._UInt8ClampedArray), (cast (i + 2.0) : Float), (cast (_Runtime.toInt32(color) & 255) : Float));
-    invalidateBitmap(({ final __callArgument1:Dynamic = out; __callArgument1; }));
+    invalidateBitmap(({ final __callArgument2:Dynamic = out; __callArgument2; }));
   }
 }

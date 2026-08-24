@@ -16,7 +16,7 @@ class DomStyle {
     setDomTransform(({ final __callArgument0:Dynamic = element; __callArgument0; }), (cast node : RenderProxy2D).transform2D, (cast (cast state : DomRenderState).roundPixels : Bool));
     ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast (cast node : RenderProxy2D).alpha : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string((cast node : RenderProxy2D).alpha) : Dynamic) : (cast '' : Dynamic)));
     ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).imageRendering = ((cast (cast state : DomRenderState).allowSmoothing : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
-    if ((cast !_Runtime.strictEquals((cast state : DomRenderState).domCssFilterResolver, null) : Bool)) { ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).filter = _Runtime.coalesce((cast state : DomRenderState).domCssFilterResolver(({ final __callArgument1:Dynamic = node; __callArgument1; })), function():Dynamic return cast '')); }
+    if ((cast !_Runtime.strictEquals((cast state : DomRenderState).domCssFilterResolver, null) : Bool)) { ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).filter = _Runtime.coalesce((cast state : DomRenderState).domCssFilterResolver(({ final __callArgument2:Dynamic = node; __callArgument2; })), function():Dynamic return cast '')); }
     _Runtime.callOptionalValue((cast state : DomRenderState).applyBlendMode, cast ([element, (cast node : RenderProxy2D).blendMode] : Array<Dynamic>));
   }
 
@@ -31,6 +31,6 @@ class DomStyle {
 
   @:noCompletion
   public static function setDomRendererElement(state:DomRenderState, element:flighthq._internal.dom.HTMLElement):Void {
-    ((cast (cast getDomRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : DomRenderStateRuntime) : { var domCurrentElement:Null<flighthq._internal.dom.HTMLElement>; }).domCurrentElement = cast (element : Null<flighthq._internal.dom.HTMLElement>));
+    ((cast (cast getDomRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : DomRenderStateRuntime) : { var domCurrentElement:Null<flighthq._internal.dom.HTMLElement>; }).domCurrentElement = cast (element : Null<flighthq._internal.dom.HTMLElement>));
   }
 }

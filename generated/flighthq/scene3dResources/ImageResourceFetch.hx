@@ -14,21 +14,21 @@ class ImageResourceFetch {
         var url:String = cast _Runtime.UNDEFINED;
         url = (cast resolveImageResourceUri((cast ref.uri : String), ref.basePath) : String);
         return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-          return flighthq._internal._Async.flatMap((cast loadImageResourceFromUrl((cast url : String), ({ final __callArgument3:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument3; }), ({ final __callArgument4:Dynamic = signal; __callArgument4; })) : flighthq._internal._Promise<Image>), function(__awaitValue2:Dynamic):Dynamic {
-            return flighthq._internal._Async.flowReturn(__awaitValue2);
+          return flighthq._internal._Async.flatMap((cast loadImageResourceFromUrl((cast url : String), ({ final __callArgument5:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument5; }), ({ final __callArgument6:Dynamic = signal; __callArgument6; })) : flighthq._internal._Promise<Image>), function(__awaitValue4:Dynamic):Dynamic {
+            return flighthq._internal._Async.flowReturn(__awaitValue4);
           });
         }), function(__caughtError:Dynamic):Dynamic {
           var error:Dynamic = __caughtError;
           return flighthq._internal._Async.protect(function():Dynamic {
-            var __flowBranch5:Dynamic;
+            var __flowBranch9:Dynamic;
             if ((cast signal.aborted : Bool)) {
-              __flowBranch5 = flighthq._internal._Async.protect(function():Dynamic {
+              __flowBranch9 = flighthq._internal._Async.protect(function():Dynamic {
                 return flighthq._internal._Async.reject(error);
               });
             } else {
-              __flowBranch5 = flighthq._internal._Async.flowNormal();
+              __flowBranch9 = flighthq._internal._Async.flowNormal();
             }
-            return flighthq._internal._Async.continueFlow(__flowBranch5, function():Dynamic {
+            return flighthq._internal._Async.continueFlow(__flowBranch9, function():Dynamic {
               return flighthq._internal._Async.flowReturn(null);
             });
           });

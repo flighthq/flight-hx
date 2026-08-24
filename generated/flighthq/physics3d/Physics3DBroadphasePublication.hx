@@ -38,20 +38,20 @@ class Physics3DBroadphasePublication {
     if (bodyIndices == null) bodyIndices = cast ((cast getPhysics3DBroadphaseBodyIndices(({ final __callArgument0:Dynamic = world; __callArgument0; })) : flighthq._internal._Set<Float>) : Dynamic);
     var inserted:Bool = cast _Runtime.UNDEFINED;
     if ((cast ((cast bodyIndices : flighthq._internal._Set<Float>).has(bodyIndex)) : Bool)) {
-      var updated:Bool = (cast world.index : SpatialIndexBackend3D).updateSpatialObject((cast bodyIndex : Float), ({ final __callArgument1:Dynamic = bounds; __callArgument1; }));
+      var updated:Bool = (cast world.index : SpatialIndexBackend3D).updateSpatialObject((cast bodyIndex : Float), ({ final __callArgument2:Dynamic = bounds; __callArgument2; }));
       if ((cast ((cast !(cast updated : Bool) : Bool) && (cast _Runtime.strictEquals((cast (cast world.index : SpatialIndexBackend3D).explainSpatialIndexing((cast bodyIndex : Float)) : SpatialIndexingExplanation).mode, 'absent') : Bool)) : Bool)) {
         ((cast bodyIndices : flighthq._internal._Set<Float>).delete_(bodyIndex));
       }
       return;
     }
-    inserted = (cast world.index : SpatialIndexBackend3D).insertSpatialObject((cast bodyIndex : Float), ({ final __callArgument2:Dynamic = bounds; __callArgument2; }));
+    inserted = (cast world.index : SpatialIndexBackend3D).insertSpatialObject((cast bodyIndex : Float), ({ final __callArgument3:Dynamic = bounds; __callArgument3; }));
     if ((cast ((cast inserted : Bool) || (cast !_Runtime.strictEquals((cast (cast world.index : SpatialIndexBackend3D).explainSpatialIndexing((cast bodyIndex : Float)) : SpatialIndexingExplanation).mode, 'absent') : Bool)) : Bool)) {
       ((cast bodyIndices : flighthq._internal._Set<Float>).add(bodyIndex));
     }
   }
 
   public static function withdrawPhysics3DBroadphaseBody(world:Physics3DWorld, bodyIndex:Float, ?bodyIndices:flighthq._internal._Set<Float>):Void {
-    if (bodyIndices == null) bodyIndices = cast ((cast getPhysics3DBroadphaseBodyIndices(({ final __callArgument3:Dynamic = world; __callArgument3; })) : flighthq._internal._Set<Float>) : Dynamic);
+    if (bodyIndices == null) bodyIndices = cast ((cast getPhysics3DBroadphaseBodyIndices(({ final __callArgument4:Dynamic = world; __callArgument4; })) : flighthq._internal._Set<Float>) : Dynamic);
     if ((cast !(cast ((cast bodyIndices : flighthq._internal._Set<Float>).delete_(bodyIndex)) : Bool) : Bool)) {
       if ((cast _Runtime.strictEquals((cast (cast world.index : SpatialIndexBackend3D).explainSpatialIndexing((cast bodyIndex : Float)) : SpatialIndexingExplanation).mode, 'absent') : Bool)) { return; }
     }

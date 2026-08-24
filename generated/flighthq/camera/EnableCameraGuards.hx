@@ -20,25 +20,25 @@ class EnableCameraGuards {
 
   public static function disableCameraGuards():Void {
     setCamera3DViewGuard(({ final __callArgument0:Dynamic = null; __callArgument0; }));
-    setCamera2DVisibleBoundsGuard(({ final __callArgument1:Dynamic = null; __callArgument1; }));
+    setCamera2DVisibleBoundsGuard(({ final __callArgument2:Dynamic = null; __callArgument2; }));
     (EnableCameraGuards.cameraGuardsEnabled__enableCameraGuards = cast (false : Dynamic));
   }
 
   public static function enableCameraGuards():Void {
-    setCamera3DViewGuard(({ final __callArgument2:Dynamic = EnableCameraGuards.warnOnNonOrthonormalCamera3DView__enableCameraGuards; __callArgument2; }));
-    setCamera2DVisibleBoundsGuard(({ final __callArgument3:Dynamic = EnableCameraGuards.warnOnDegenerateCamera2DVisibleBounds__enableCameraGuards; __callArgument3; }));
+    setCamera3DViewGuard(({ final __callArgument4:Dynamic = EnableCameraGuards.warnOnNonOrthonormalCamera3DView__enableCameraGuards; __callArgument4; }));
+    setCamera2DVisibleBoundsGuard(({ final __callArgument6:Dynamic = EnableCameraGuards.warnOnDegenerateCamera2DVisibleBounds__enableCameraGuards; __callArgument6; }));
     (EnableCameraGuards.cameraGuardsEnabled__enableCameraGuards = cast (true : Dynamic));
   }
 
   public static function warnOnDegenerateCamera2DVisibleBounds__enableCameraGuards(camera:Camera2D):Void {
-    (cast logOnce((cast 'camera:degenerate-visible-bounds:' + Std.string(camera.zoom) + '' : String), ({ final __callArgument4:Dynamic = LogLevel.Warn; __callArgument4; }), (cast { message: 'getCamera2DVisibleBounds: the view matrix has no inverse, so the visible rectangle is unbounded and nothing is culled — a zoom of 0 is the usual cause; set a non-zero zoom.', zoom: camera.zoom } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Bool);
+    (cast (#if js _Runtime.callValue(logOnce, cast ([(cast 'camera:degenerate-visible-bounds:' + Std.string(camera.zoom) + '' : String), ({ final __callArgument9:Dynamic = LogLevel.Warn; __callArgument9; }), (cast { message: 'getCamera2DVisibleBounds: the view matrix has no inverse, so the visible rectangle is unbounded and nothing is culled — a zoom of 0 is the usual cause; set a non-zero zoom.', zoom: camera.zoom } : Dynamic)] : Array<Dynamic>)) #else logOnce((cast 'camera:degenerate-visible-bounds:' + Std.string(camera.zoom) + '' : String), ({ final __callArgument8:Dynamic = LogLevel.Warn; __callArgument8; }), (cast { message: 'getCamera2DVisibleBounds: the view matrix has no inverse, so the visible rectangle is unbounded and nothing is culled — a zoom of 0 is the usual cause; set a non-zero zoom.', zoom: camera.zoom } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Bool);
   }
 
   public static function warnOnNonOrthonormalCamera3DView__enableCameraGuards(camera:Camera3D):Void {
     var explanation:Camera3DViewExplanation = cast _Runtime.UNDEFINED;
-    explanation = (cast explainCamera3DView(({ final __callArgument5:Dynamic = camera; __callArgument5; })) : Camera3DViewExplanation);
+    explanation = (cast explainCamera3DView(({ final __callArgument10:Dynamic = camera; __callArgument10; })) : Camera3DViewExplanation);
     if ((cast (cast explanation : Camera3DViewExplanation).isOrthonormal : Bool)) { return; }
-    (cast logOnce((cast 'camera:non-orthonormal-view' : String), ({ final __callArgument6:Dynamic = LogLevel.Warn; __callArgument6; }), (cast { message: 'setCamera3DViewMatrix4FromMatrix4: the view matrix is not orthonormal, which its consumers rely on — a scaled matrix is the usual cause. Reflections are fine; scale is not. Call explainCamera3DView(camera) for the measured deviations.', scaleDeviation: (cast explanation : Camera3DViewExplanation).scaleDeviation, shearDeviation: (cast explanation : Camera3DViewExplanation).shearDeviation } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Bool);
+    (cast (#if js _Runtime.callValue(logOnce, cast ([(cast 'camera:non-orthonormal-view' : String), ({ final __callArgument13:Dynamic = LogLevel.Warn; __callArgument13; }), (cast { message: 'setCamera3DViewMatrix4FromMatrix4: the view matrix is not orthonormal, which its consumers rely on — a scaled matrix is the usual cause. Reflections are fine; scale is not. Call explainCamera3DView(camera) for the measured deviations.', scaleDeviation: (cast explanation : Camera3DViewExplanation).scaleDeviation, shearDeviation: (cast explanation : Camera3DViewExplanation).shearDeviation } : Dynamic)] : Array<Dynamic>)) #else logOnce((cast 'camera:non-orthonormal-view' : String), ({ final __callArgument12:Dynamic = LogLevel.Warn; __callArgument12; }), (cast { message: 'setCamera3DViewMatrix4FromMatrix4: the view matrix is not orthonormal, which its consumers rely on — a scaled matrix is the usual cause. Reflections are fine; scale is not. Call explainCamera3DView(camera) for the measured deviations.', scaleDeviation: (cast explanation : Camera3DViewExplanation).scaleDeviation, shearDeviation: (cast explanation : Camera3DViewExplanation).shearDeviation } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Bool);
   }
 
   public static var cameraGuardsEnabled__enableCameraGuards:Bool = false;

@@ -28,8 +28,8 @@ class XmlParse {
     var entities:flighthq._internal._Record<String, String> = cast _Runtime.UNDEFINED;
     src = _Runtime.replace((cast XmlParse.stripXmlComments__xmlParse((cast xml : String)) : String), _Runtime.regexp('\\r\\n?', 'g'), '\n', false);
     entities = (cast {  });
-    (src = cast (StringTools.trim(Std.string((cast XmlParse.stripXmlDoctypes__xmlParse((cast _Runtime.replace(src, _Runtime.regexp('<\\?[\\s\\S]*?\\?>', 'g'), '', false) : String), ({ final __callArgument1:Dynamic = entities; __callArgument1; })) : String))) : Dynamic));
-    return cast (cast XmlParse.parseElement__xmlParse((cast (cast XmlParse.expandXmlEntities__xmlParse((cast src : String), ({ final __callArgument2:Dynamic = entities; __callArgument2; })) : String) : String), (cast { depth: 0.0, depthExceeded: false, pos: 0.0 } : Dynamic)) : Null<XmlElement>);
+    (src = cast (StringTools.trim(Std.string((cast XmlParse.stripXmlDoctypes__xmlParse((cast _Runtime.replace(src, _Runtime.regexp('<\\?[\\s\\S]*?\\?>', 'g'), '', false) : String), ({ final __callArgument2:Dynamic = entities; __callArgument2; })) : String))) : Dynamic));
+    return cast (cast XmlParse.parseElement__xmlParse((cast (cast XmlParse.expandXmlEntities__xmlParse((cast src : String), ({ final __callArgument4:Dynamic = entities; __callArgument4; })) : String) : String), (cast { depth: 0.0, depthExceeded: false, pos: 0.0 } : Dynamic)) : Null<XmlElement>);
     return cast null;
   }
 
@@ -234,7 +234,7 @@ class XmlParse {
         } } } } }
         pos++;
       }
-      XmlParse.collectXmlEntityDeclarations__xmlParse((cast _Runtime.slice(xml, doctypeStart, pos) : String), ({ final __callArgument3:Dynamic = out; __callArgument3; }));
+      XmlParse.collectXmlEntityDeclarations__xmlParse((cast _Runtime.slice(xml, doctypeStart, pos) : String), ({ final __callArgument8:Dynamic = out; __callArgument8; }));
       (copyStart = cast (pos : Dynamic));
     }
     return cast (output + _Runtime.slice(xml, copyStart, null));

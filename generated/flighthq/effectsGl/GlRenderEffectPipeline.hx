@@ -59,10 +59,10 @@ class GlRenderEffectPipeline {
     if ((cast _Runtime.strictEquals(pipeline.sceneTarget, null) : Bool)) {
       (pipeline.sceneTarget = cast ((cast createGlRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = { width: w, height: h, sampleCount: sampleCount, format: format, depth: depth, colorSpace: colorSpace }; __callArgument1; })) : GlRenderTarget) : Null<GlRenderTarget>));
     } else {
-      resizeGlRenderTarget(({ final __callArgument2:Dynamic = state; __callArgument2; }), pipeline.sceneTarget, (cast w : Float), (cast h : Float));
+      resizeGlRenderTarget(({ final __callArgument4:Dynamic = state; __callArgument4; }), pipeline.sceneTarget, (cast w : Float), (cast h : Float));
     }
     ((cast pipeline.sceneTarget : { var colorSpace:RenderTargetColorSpace; }).colorSpace = cast (colorSpace : RenderTargetColorSpace));
-    beginGlRenderPass(({ final __callArgument3:Dynamic = state; __callArgument3; }), pipeline.sceneTarget, (cast { preserveColor: true, preserveDepth: true } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(beginGlRenderPass, cast ([({ final __callArgument7:Dynamic = state; __callArgument7; }), pipeline.sceneTarget, (cast { preserveColor: true, preserveDepth: true } : Dynamic)] : Array<Dynamic>)) #else beginGlRenderPass(({ final __callArgument6:Dynamic = state; __callArgument6; }), pipeline.sceneTarget, (cast { preserveColor: true, preserveDepth: true } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static function createGlRenderEffectPipeline(_state:GlRenderState, ?options:RenderEffectPipelineOptions):flighthq.types.GlRenderEffectPipeline {
@@ -74,10 +74,10 @@ class GlRenderEffectPipeline {
   @:noCompletion
   public static function destroyGlRenderEffectPipeline(state:GlRenderState, pipeline:flighthq.types.GlRenderEffectPipeline):Void {
     if (_Runtime.truthy(pipeline.sceneTarget)) {
-      destroyGlRenderTarget(({ final __callArgument4:Dynamic = state; __callArgument4; }), pipeline.sceneTarget);
+      destroyGlRenderTarget(({ final __callArgument8:Dynamic = state; __callArgument8; }), pipeline.sceneTarget);
       (pipeline.sceneTarget = cast (null : Null<GlRenderTarget>));
     }
-    destroyGlRenderTargetPool(({ final __callArgument5:Dynamic = state; __callArgument5; }), pipeline.pool);
+    destroyGlRenderTargetPool(({ final __callArgument10:Dynamic = state; __callArgument10; }), pipeline.pool);
     if ((cast !_Runtime.strictEquals((cast pipeline.lutTexture : { var texture:Null<flighthq._internal.dom.WebGLTexture>; }).texture, null) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.deleteTexture((cast state : GlRenderState).gl, (cast pipeline.lutTexture : { var texture:Null<flighthq._internal.dom.WebGLTexture>; }).texture);
       ((cast pipeline.lutTexture : { var texture:Null<flighthq._internal.dom.WebGLTexture>; }).texture = cast (null : Null<flighthq._internal.dom.WebGLTexture>));
@@ -99,7 +99,7 @@ class GlRenderEffectPipeline {
     var flushAdjustments:Void->Void = cast _Runtime.UNDEFINED;
     scene = pipeline.sceneTarget;
     if ((cast _Runtime.strictEquals(scene, null) : Bool)) { return; }
-    endGlRenderPass(({ final __callArgument6:Dynamic = state; __callArgument6; }));
+    endGlRenderPass(({ final __callArgument12:Dynamic = state; __callArgument12; }));
     format = _Runtime.coalesce(_Runtime.field(pipeline.options, 'format'), function():Dynamic return cast 'rgba8');
     descriptor = (cast { width: (cast scene : { var width:Float; }).width, height: (cast scene : { var height:Float; }).height, format: format, colorSpace: (cast scene : { var colorSpace:RenderTargetColorSpace; }).colorSpace });
     source = scene;
@@ -107,49 +107,49 @@ class GlRenderEffectPipeline {
     scratchB = null;
     pending = (cast cast ([] : Array<Dynamic>));
     ensureScratch = (cast function():Void {
-      if ((cast _Runtime.strictEquals(scratchA, null) : Bool)) { (scratchA = cast ((cast acquireGlRenderTarget(({ final __callArgument7:Dynamic = state; __callArgument7; }), pipeline.pool, ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : GlRenderTarget) : Dynamic)); }
-      if ((cast _Runtime.strictEquals(scratchB, null) : Bool)) { (scratchB = cast ((cast acquireGlRenderTarget(({ final __callArgument9:Dynamic = state; __callArgument9; }), pipeline.pool, ({ final __callArgument10:Dynamic = descriptor; __callArgument10; })) : GlRenderTarget) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchA, null) : Bool)) { (scratchA = cast ((cast acquireGlRenderTarget(({ final __callArgument14:Dynamic = state; __callArgument14; }), pipeline.pool, ({ final __callArgument15:Dynamic = descriptor; __callArgument15; })) : GlRenderTarget) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchB, null) : Bool)) { (scratchB = cast ((cast acquireGlRenderTarget(({ final __callArgument18:Dynamic = state; __callArgument18; }), pipeline.pool, ({ final __callArgument19:Dynamic = descriptor; __callArgument19; })) : GlRenderTarget) : Dynamic)); }
     });
     flushAdjustments = (cast function():Void {
       var dest:GlRenderTarget = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(_Runtime.field(pending, 'length'), 0.0) : Bool)) { return; }
       ensureScratch();
       dest = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
-      clearGlRenderTarget(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = dest; __callArgument12; }));
+      clearGlRenderTarget(({ final __callArgument22:Dynamic = state; __callArgument22; }), ({ final __callArgument23:Dynamic = dest; __callArgument23; }));
       if ((cast _Runtime.callProperty(pending, 'some', cast ([isColorLutAdjustment] : Array<Dynamic>)) : Bool)) {
-        applyColorLutPassToGl(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = source; __callArgument14; }), ({ final __callArgument15:Dynamic = dest; __callArgument15; }), (cast bakeColorLutForRun(pipeline.lutCache, ({ final __callArgument16:Dynamic = pending; __callArgument16; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ColorLut), pipeline.lutTexture);
+        applyColorLutPassToGl(({ final __callArgument26:Dynamic = state; __callArgument26; }), ({ final __callArgument27:Dynamic = source; __callArgument27; }), ({ final __callArgument28:Dynamic = dest; __callArgument28; }), (cast (#if js _Runtime.callValue(bakeColorLutForRun, cast ([pipeline.lutCache, ({ final __callArgument30:Dynamic = pending; __callArgument30; })] : Array<Dynamic>)) #else bakeColorLutForRun(pipeline.lutCache, ({ final __callArgument29:Dynamic = pending; __callArgument29; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : ColorLut), pipeline.lutTexture);
       } else {
         var matrices:Array<Array<Float>> = (cast cast ([] : Array<Dynamic>));
         for (op in _Runtime.iterable(pending)) {
-          var matrix:Null<Array<Float>> = (cast getAdjustmentColorMatrix(({ final __callArgument19:Dynamic = op; __callArgument19; })) : Null<Array<Float>>);
+          var matrix:Null<Array<Float>> = (cast getAdjustmentColorMatrix(({ final __callArgument38:Dynamic = op; __callArgument38; })) : Null<Array<Float>>);
           if ((cast !_Runtime.strictEquals(matrix, null) : Bool)) { _Runtime.callProperty(matrices, 'push', cast ([matrix] : Array<Dynamic>)); }
         }
-        applyColorMatrixPassToGl(({ final __callArgument20:Dynamic = state; __callArgument20; }), ({ final __callArgument21:Dynamic = source; __callArgument21; }), ({ final __callArgument22:Dynamic = dest; __callArgument22; }), (cast fuseColorMatrices(({ final __callArgument23:Dynamic = matrices; __callArgument23; })) : Array<Float>));
+        applyColorMatrixPassToGl(({ final __callArgument40:Dynamic = state; __callArgument40; }), ({ final __callArgument41:Dynamic = source; __callArgument41; }), ({ final __callArgument42:Dynamic = dest; __callArgument42; }), (cast fuseColorMatrices(({ final __callArgument43:Dynamic = matrices; __callArgument43; })) : Array<Float>));
       }
       (source = cast (dest : Dynamic));
       (pending = cast (cast ([] : Array<Dynamic>) : Dynamic));
     });
     for (operation in _Runtime.iterable(operations)) {
-      if ((cast ((cast !_Runtime.strictEquals((cast getAdjustmentColorMatrix(({ final __callArgument26:Dynamic = operation; __callArgument26; })) : Null<Array<Float>>), null) : Bool) || (cast (cast isColorLutAdjustment(({ final __callArgument27:Dynamic = operation; __callArgument27; })) : Bool) : Bool)) : Bool)) {
+      if ((cast ((cast !_Runtime.strictEquals((cast getAdjustmentColorMatrix(({ final __callArgument52:Dynamic = operation; __callArgument52; })) : Null<Array<Float>>), null) : Bool) || (cast (cast isColorLutAdjustment(({ final __callArgument54:Dynamic = operation; __callArgument54; })) : Bool) : Bool)) : Bool)) {
         _Runtime.callProperty(pending, 'push', cast ([(cast operation : Adjustment)] : Array<Dynamic>));
         continue;
       }
-      var runner:Null<GlRenderEffectRunner> = (cast getGlRenderEffectRunner(({ final __callArgument28:Dynamic = state; __callArgument28; }), (cast (cast operation : { var kind:String; }).kind : String)) : Null<GlRenderEffectRunner>);
+      var runner:Null<GlRenderEffectRunner> = (cast getGlRenderEffectRunner(({ final __callArgument56:Dynamic = state; __callArgument56; }), (cast (cast operation : { var kind:String; }).kind : String)) : Null<GlRenderEffectRunner>);
       if ((cast _Runtime.strictEquals(runner, null) : Bool)) {
-        GlRenderEffectPipeline.reportGlRenderEffectPipelineSkip__glRenderEffectPipeline(({ final __callArgument29:Dynamic = state; __callArgument29; }), (cast (cast operation : { var kind:String; }).kind : String));
+        GlRenderEffectPipeline.reportGlRenderEffectPipelineSkip__glRenderEffectPipeline(({ final __callArgument58:Dynamic = state; __callArgument58; }), (cast (cast operation : { var kind:String; }).kind : String));
         continue;
       }
       flushAdjustments();
       ensureScratch();
       var dest:GlRenderTarget = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
-      clearGlRenderTarget(({ final __callArgument30:Dynamic = state; __callArgument30; }), ({ final __callArgument31:Dynamic = dest; __callArgument31; }));
-      runner(({ final __callArgument32:Dynamic = { state: state, source: source, dest: dest, pool: pipeline.pool, sceneDepthTexture: (cast scene : { var depthTexture:Null<flighthq._internal.dom.WebGLTexture>; }).depthTexture, sceneVelocityTexture: pipeline.velocityTexture }; __callArgument32; }), ({ final __callArgument33:Dynamic = operation; __callArgument33; }));
+      clearGlRenderTarget(({ final __callArgument60:Dynamic = state; __callArgument60; }), ({ final __callArgument61:Dynamic = dest; __callArgument61; }));
+      runner(({ final __callArgument64:Dynamic = { state: state, source: source, dest: dest, pool: pipeline.pool, sceneDepthTexture: (cast scene : { var depthTexture:Null<flighthq._internal.dom.WebGLTexture>; }).depthTexture, sceneVelocityTexture: pipeline.velocityTexture }; __callArgument64; }), ({ final __callArgument65:Dynamic = operation; __callArgument65; }));
       (source = cast (dest : Dynamic));
     }
     flushAdjustments();
-    GlRenderEffectPipeline.presentGlRenderEffectResult__glRenderEffectPipeline(({ final __callArgument34:Dynamic = state; __callArgument34; }), ({ final __callArgument35:Dynamic = source; __callArgument35; }));
-    if ((cast !_Runtime.strictEquals(scratchA, null) : Bool)) { releaseGlRenderTarget(pipeline.pool, ({ final __callArgument36:Dynamic = scratchA; __callArgument36; })); }
-    if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { releaseGlRenderTarget(pipeline.pool, ({ final __callArgument37:Dynamic = scratchB; __callArgument37; })); }
+    GlRenderEffectPipeline.presentGlRenderEffectResult__glRenderEffectPipeline(({ final __callArgument68:Dynamic = state; __callArgument68; }), ({ final __callArgument69:Dynamic = source; __callArgument69; }));
+    if ((cast !_Runtime.strictEquals(scratchA, null) : Bool)) { releaseGlRenderTarget(pipeline.pool, ({ final __callArgument72:Dynamic = scratchA; __callArgument72; })); }
+    if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { releaseGlRenderTarget(pipeline.pool, ({ final __callArgument74:Dynamic = scratchB; __callArgument74; })); }
   }
 
   @:noCompletion
@@ -164,11 +164,11 @@ class GlRenderEffectPipeline {
   public static function presentGlRenderEffectResult__glRenderEffectPipeline(state:GlRenderState, source:GlRenderTarget):Void {
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(source.colorSpace, 'linear') : Bool)) {
-      drawGlLinearToSrgbPass(({ final __callArgument38:Dynamic = state; __callArgument38; }), ({ final __callArgument39:Dynamic = source; __callArgument39; }), ({ final __callArgument40:Dynamic = null; __callArgument40; }));
+      drawGlLinearToSrgbPass(({ final __callArgument76:Dynamic = state; __callArgument76; }), ({ final __callArgument77:Dynamic = source; __callArgument77; }), ({ final __callArgument78:Dynamic = null; __callArgument78; }));
       return;
     }
-    program = (cast getGlEffectProgram(({ final __callArgument41:Dynamic = state; __callArgument41; }), (cast 'effect.present' : String), (cast GlRenderEffectPipeline.PRESENT_FRAGMENT_SRC__glRenderEffectPipeline : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument42:Dynamic = state; __callArgument42; }), ({ final __callArgument43:Dynamic = program; __callArgument43; }), ({ final __callArgument44:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument44; }), ({ final __callArgument45:Dynamic = null; __callArgument45; }), (cast function(__unused3:flighthq._internal.dom.WebGL2RenderingContext, __unused4:GlFullscreenProgram):Void { _Runtime.callValue(function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void {
+    program = (cast getGlEffectProgram(({ final __callArgument82:Dynamic = state; __callArgument82; }), (cast 'effect.present' : String), (cast GlRenderEffectPipeline.PRESENT_FRAGMENT_SRC__glRenderEffectPipeline : String)) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument84:Dynamic = state; __callArgument84; }), ({ final __callArgument85:Dynamic = program; __callArgument85; }), ({ final __callArgument86:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument86; }), ({ final __callArgument87:Dynamic = null; __callArgument87; }), (cast function(__unused3:flighthq._internal.dom.WebGL2RenderingContext, __unused4:GlFullscreenProgram):Void { _Runtime.callValue(function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void {
 
     }, cast ([] : Array<Dynamic>)); } : Dynamic));
   }

@@ -22,12 +22,12 @@ class Woff2GlyfTransform {
       if ((cast _Runtime.strictEquals(glyfBytes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
       streams = (cast readWoff2GlyfStreams(({ final __callArgument0:Dynamic = glyfBytes; __callArgument0; })) : Null<Woff2GlyfStreams>);
       if ((cast _Runtime.strictEquals(streams, null) : Bool)) { return cast false; }
-      (reversed = cast ((cast reverseWoff2GlyfTransform(({ final __callArgument1:Dynamic = streams; __callArgument1; })) : Null<{ var glyf:flighthq._internal._UInt8Array; var loca:flighthq._internal._UInt8Array; }>) : Dynamic));
+      (reversed = cast ((cast reverseWoff2GlyfTransform(({ final __callArgument2:Dynamic = streams; __callArgument2; })) : Null<{ var glyf:flighthq._internal._UInt8Array; var loca:flighthq._internal._UInt8Array; }>) : Dynamic));
       return cast !_Runtime.strictEquals(reversed, null);
       return cast _Runtime.UNDEFINED;
     });
     return cast function(tag:String, transformed:flighthq._internal._UInt8Array, tables:flighthq._internal._Map<String, flighthq._internal._UInt8Array>):Null<flighthq._internal._UInt8Array> {
-      if ((cast _Runtime.strictEquals(tag, 'glyf') : Bool)) { return cast ((cast (cast reverse(({ final __callArgument2:Dynamic = transformed; __callArgument2; })) : Bool) : Bool) ? (cast (cast reversed : { var glyf:flighthq._internal._UInt8Array; var loca:flighthq._internal._UInt8Array; }).glyf : Dynamic) : (cast null : Dynamic)); }
+      if ((cast _Runtime.strictEquals(tag, 'glyf') : Bool)) { return cast ((cast (cast reverse(({ final __callArgument4:Dynamic = transformed; __callArgument4; })) : Bool) : Bool) ? (cast (cast reversed : { var glyf:flighthq._internal._UInt8Array; var loca:flighthq._internal._UInt8Array; }).glyf : Dynamic) : (cast null : Dynamic)); }
       if ((cast _Runtime.strictEquals(tag, 'loca') : Bool)) { return cast ((cast (cast reverse(((cast tables : flighthq._internal._Map<String, flighthq._internal._UInt8Array>).get('glyf'))) : Bool) : Bool) ? (cast (cast reversed : { var glyf:flighthq._internal._UInt8Array; var loca:flighthq._internal._UInt8Array; }).loca : Dynamic) : (cast null : Dynamic)); }
       return cast null;
       return cast _Runtime.UNDEFINED;
@@ -302,12 +302,12 @@ class Woff2GlyfTransform {
           (compositeAt = cast ((compositeAt + (cast measured : { var byteLength:Float; var hasInstructions:Bool; }).byteLength) : Dynamic));
           var instructions:flighthq._internal._UInt8Array = Woff2GlyfTransform.EMPTY_BYTES__woff2GlyfTransform;
           if ((cast (cast measured : { var byteLength:Float; var hasInstructions:Bool; }).hasInstructions : Bool)) {
-            var length:Float = (cast readWoff2Short(streams.glyphStream, ({ final __callArgument5:Dynamic = glyph; __callArgument5; }), (cast _Runtime.field(streams.glyphStream, 'byteLength') : Float)) : Float);
+            var length:Float = (cast readWoff2Short(streams.glyphStream, ({ final __callArgument8:Dynamic = glyph; __callArgument8; }), (cast _Runtime.field(streams.glyphStream, 'byteLength') : Float)) : Float);
             if ((cast ((cast ((cast length : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast (instructionAt + length) : Float) > (cast _Runtime.field(streams.instructionStream, 'byteLength') : Float)) : Bool)) : Bool)) { return cast null; }
             (instructions = cast ((cast streams.instructionStream : flighthq._internal._UInt8Array).subarray(Std.int(instructionAt), Std.int((instructionAt + length))) : Dynamic));
             (instructionAt = cast ((instructionAt + length) : Dynamic));
           }
-          _Runtime.callProperty(records, 'push', cast ([(cast Woff2GlyfTransform.padToEven__woff2GlyfTransform((cast encodeSfntCompositeGlyph(({ final __callArgument6:Dynamic = components; __callArgument6; }), ({ final __callArgument7:Dynamic = instructions; __callArgument7; }), ({ final __callArgument8:Dynamic = stored; __callArgument8; }), (cast (cast measured : { var byteLength:Float; var hasInstructions:Bool; }).hasInstructions : Bool)) : flighthq._internal._UInt8Array)) : flighthq._internal._UInt8Array)] : Array<Dynamic>));
+          _Runtime.callProperty(records, 'push', cast ([(cast Woff2GlyfTransform.padToEven__woff2GlyfTransform((cast encodeSfntCompositeGlyph(({ final __callArgument10:Dynamic = components; __callArgument10; }), ({ final __callArgument11:Dynamic = instructions; __callArgument11; }), ({ final __callArgument12:Dynamic = stored; __callArgument12; }), (cast (cast measured : { var byteLength:Float; var hasInstructions:Bool; }).hasInstructions : Bool)) : flighthq._internal._UInt8Array)) : flighthq._internal._UInt8Array)] : Array<Dynamic>));
           (index = cast ((index + 1.0) : Dynamic));
           continue;
         }
@@ -316,7 +316,7 @@ class Woff2GlyfTransform {
         {
           var contour:Float = 0.0;
           while ((cast ((cast contour : Float) < (cast contours : Float)) : Bool)) {
-            var count:Float = (cast readWoff2Short(streams.nPointsStream, ({ final __callArgument9:Dynamic = points; __callArgument9; }), (cast _Runtime.field(streams.nPointsStream, 'byteLength') : Float)) : Float);
+            var count:Float = (cast readWoff2Short(streams.nPointsStream, ({ final __callArgument22:Dynamic = points; __callArgument22; }), (cast _Runtime.field(streams.nPointsStream, 'byteLength') : Float)) : Float);
             if ((cast ((cast count : Float) < (cast 0.0 : Float)) : Bool)) { return cast null; }
             (pointCount = cast ((pointCount + count) : Dynamic));
             _Runtime.callProperty(endPtsOfContours, 'push', cast ([(pointCount - 1.0)] : Array<Dynamic>));
@@ -345,12 +345,12 @@ class Woff2GlyfTransform {
           }
         }
         (flagAt = cast ((flagAt + pointCount) : Dynamic));
-        var instructionLength:Float = (cast readWoff2Short(streams.glyphStream, ({ final __callArgument10:Dynamic = glyph; __callArgument10; }), (cast _Runtime.field(streams.glyphStream, 'byteLength') : Float)) : Float);
+        var instructionLength:Float = (cast readWoff2Short(streams.glyphStream, ({ final __callArgument24:Dynamic = glyph; __callArgument24; }), (cast _Runtime.field(streams.glyphStream, 'byteLength') : Float)) : Float);
         if ((cast ((cast ((cast instructionLength : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast (instructionAt + instructionLength) : Float) > (cast _Runtime.field(streams.instructionStream, 'byteLength') : Float)) : Bool)) : Bool)) { return cast null; }
         var instructions:flighthq._internal._UInt8Array = (cast streams.instructionStream : flighthq._internal._UInt8Array).subarray(Std.int(instructionAt), Std.int((instructionAt + instructionLength)));
         (instructionAt = cast ((instructionAt + instructionLength) : Dynamic));
-        var bounds:{ var xMax:Float; var xMin:Float; var yMax:Float; var yMin:Float; } = _Runtime.coalesce(stored, function():Dynamic return cast (cast Woff2GlyfTransform.measurePointBounds__woff2GlyfTransform(({ final __callArgument11:Dynamic = xs; __callArgument11; }), ({ final __callArgument12:Dynamic = ys; __callArgument12; })) : { var xMax:Float; var xMin:Float; var yMax:Float; var yMin:Float; }));
-        _Runtime.callProperty(records, 'push', cast ([(cast Woff2GlyfTransform.padToEven__woff2GlyfTransform((cast encodeSfntSimpleGlyph(({ final __callArgument13:Dynamic = endPtsOfContours; __callArgument13; }), ({ final __callArgument14:Dynamic = xs; __callArgument14; }), ({ final __callArgument15:Dynamic = ys; __callArgument15; }), ({ final __callArgument16:Dynamic = onCurve; __callArgument16; }), ({ final __callArgument17:Dynamic = instructions; __callArgument17; }), ({ final __callArgument18:Dynamic = bounds; __callArgument18; })) : flighthq._internal._UInt8Array)) : flighthq._internal._UInt8Array)] : Array<Dynamic>));
+        var bounds:{ var xMax:Float; var xMin:Float; var yMax:Float; var yMin:Float; } = _Runtime.coalesce(stored, function():Dynamic return cast (cast Woff2GlyfTransform.measurePointBounds__woff2GlyfTransform(({ final __callArgument26:Dynamic = xs; __callArgument26; }), ({ final __callArgument27:Dynamic = ys; __callArgument27; })) : { var xMax:Float; var xMin:Float; var yMax:Float; var yMin:Float; }));
+        _Runtime.callProperty(records, 'push', cast ([(cast Woff2GlyfTransform.padToEven__woff2GlyfTransform((cast encodeSfntSimpleGlyph(({ final __callArgument30:Dynamic = endPtsOfContours; __callArgument30; }), ({ final __callArgument31:Dynamic = xs; __callArgument31; }), ({ final __callArgument32:Dynamic = ys; __callArgument32; }), ({ final __callArgument33:Dynamic = onCurve; __callArgument33; }), ({ final __callArgument34:Dynamic = instructions; __callArgument34; }), ({ final __callArgument35:Dynamic = bounds; __callArgument35; })) : flighthq._internal._UInt8Array)) : flighthq._internal._UInt8Array)] : Array<Dynamic>));
         (index = cast ((index + 1.0) : Dynamic));
       }
     }

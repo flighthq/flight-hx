@@ -13,8 +13,8 @@ class FontStatus {
 
   public static function whenFontsReady():flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-      return flighthq._internal._Async.flatMap((cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'fonts') : flighthq._internal.dom.FontFaceSet).ready, function(__awaitValue1:Dynamic):Dynamic {
-        __awaitValue1;
+      return flighthq._internal._Async.flatMap((cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'fonts') : flighthq._internal.dom.FontFaceSet).ready, function(__awaitValue2:Dynamic):Dynamic {
+        __awaitValue2;
         return flighthq._internal._Async.resolve(_Runtime.UNDEFINED);
       });
     }));

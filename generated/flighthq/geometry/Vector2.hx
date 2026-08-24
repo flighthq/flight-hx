@@ -55,14 +55,14 @@ class Vector2 {
   }
 
   public static function createVector2(?x:Float, ?y:Float):flighthq.types.Vector2 {
-    return cast (cast createEntity(({ final __callArgument2:Dynamic = { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0) }; __callArgument2; })) : { >Entity, var x:Float; var y:Float; });
+    return cast (cast createEntity(({ final __callArgument4:Dynamic = { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0) }; __callArgument4; })) : { >Entity, var x:Float; var y:Float; });
     return cast null;
   }
 
   public static function createVector2FromPolar(length:Float, angle:Float):flighthq.types.Vector2 {
     var out:flighthq.types.Vector2 = cast _Runtime.UNDEFINED;
-    out = (cast createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : flighthq.types.Vector2);
-    setVector2FromPolar(({ final __callArgument3:Dynamic = out; __callArgument3; }), (cast length : Float), (cast angle : Float));
+    out = (cast (#if js _Runtime.callValue(createVector2, cast ([] : Array<Dynamic>)) #else createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flighthq.types.Vector2);
+    setVector2FromPolar(({ final __callArgument6:Dynamic = out; __callArgument6; }), (cast length : Float), (cast angle : Float));
     return cast out;
     return cast null;
   }
@@ -90,10 +90,10 @@ class Vector2 {
     var la:Float = cast _Runtime.UNDEFINED;
     var lb:Float = cast _Runtime.UNDEFINED;
     var _dot:Float = cast _Runtime.UNDEFINED;
-    la = (cast getVector2Length(({ final __callArgument4:Dynamic = a; __callArgument4; })) : Float);
-    lb = (cast getVector2Length(({ final __callArgument5:Dynamic = b; __callArgument5; })) : Float);
+    la = (cast getVector2Length(({ final __callArgument8:Dynamic = a; __callArgument8; })) : Float);
+    lb = (cast getVector2Length(({ final __callArgument10:Dynamic = b; __callArgument10; })) : Float);
     if ((cast ((cast _Runtime.strictEquals(la, 0.0) : Bool) || (cast _Runtime.strictEquals(lb, 0.0) : Bool)) : Bool)) { return cast HxMath.NaN; }
-    _dot = ((cast getVector2Dot(({ final __callArgument6:Dynamic = a; __callArgument6; }), ({ final __callArgument7:Dynamic = b; __callArgument7; })) : Float) / (la * lb));
+    _dot = ((cast getVector2Dot(({ final __callArgument12:Dynamic = a; __callArgument12; }), ({ final __callArgument13:Dynamic = b; __callArgument13; })) : Float) / (la * lb));
     return cast HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, _dot)));
     return cast null;
   }
@@ -303,7 +303,7 @@ class Vector2 {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float), (cast source.y : Float));
   }
 
-  public static final VECTOR2_X_AXIS:flighthq.types.Vector2 = (cast createVector2(({ final __callArgument8:Dynamic = 1.0; __callArgument8; }), ({ final __callArgument9:Dynamic = 0.0; __callArgument9; })) : flighthq.types.Vector2);
+  public static final VECTOR2_X_AXIS:flighthq.types.Vector2 = (cast createVector2(({ final __callArgument16:Dynamic = 1.0; __callArgument16; }), ({ final __callArgument17:Dynamic = 0.0; __callArgument17; })) : flighthq.types.Vector2);
 
-  public static final VECTOR2_Y_AXIS:flighthq.types.Vector2 = (cast createVector2(({ final __callArgument10:Dynamic = 0.0; __callArgument10; }), ({ final __callArgument11:Dynamic = 1.0; __callArgument11; })) : flighthq.types.Vector2);
+  public static final VECTOR2_Y_AXIS:flighthq.types.Vector2 = (cast createVector2(({ final __callArgument20:Dynamic = 0.0; __callArgument20; }), ({ final __callArgument21:Dynamic = 1.0; __callArgument21; })) : flighthq.types.Vector2);
 }

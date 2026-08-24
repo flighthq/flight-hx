@@ -15,6 +15,6 @@ class GlScene3DTime {
   }
 
   public static function setGlScene3DTime(state:GlRenderState, timeSeconds:Float):Void {
-    ((cast (cast getGlScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlScene3DRuntime) : { var time:Float; }).time = cast (timeSeconds : Float));
+    ((cast (cast getGlScene3DRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlScene3DRuntime) : { var time:Float; }).time = cast (timeSeconds : Float));
   }
 }

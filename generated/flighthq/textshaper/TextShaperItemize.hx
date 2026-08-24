@@ -71,7 +71,7 @@ class TextShaperItemize {
     for (item in _Runtime.iterable(items)) {
       var sub:String = _Runtime.slice(text, (cast item : TextItem).start, (cast item : TextItem).end);
       var runOptions:{ var direction:Null<String>; var script:String; @:optional var features:Null<Array<TextFeature>>; @:optional var language:Null<String>; @:optional var variations:Null<Array<FontVariation>>; } = (cast _Runtime.mergeObjects([options, { direction: ((cast _Runtime.strictEquals((cast item : TextItem).direction, 'TopToBottom') : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast (cast item : TextItem).direction : Dynamic)) }, { script: (cast item : TextItem).script }]));
-      var run:Null<ShapedRun> = (cast shapeTextRun((cast sub : String), ({ final __callArgument5:Dynamic = format; __callArgument5; }), (cast runOptions : Dynamic)) : Null<ShapedRun>);
+      var run:Null<ShapedRun> = (cast shapeTextRun((cast sub : String), ({ final __callArgument7:Dynamic = format; __callArgument7; }), (cast runOptions : Dynamic)) : Null<ShapedRun>);
       if ((cast !_Runtime.strictEquals(run, null) : Bool)) { _Runtime.callProperty(result, 'push', cast ([run] : Array<Dynamic>)); }
     }
     return cast result;

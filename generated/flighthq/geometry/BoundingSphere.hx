@@ -40,7 +40,7 @@ class BoundingSphere {
 
   public static function createBoundingSphere(?centerX:Float, ?centerY:Float, ?centerZ:Float, ?radius:Float):flighthq.types.BoundingSphere {
     var center:Vector3 = cast _Runtime.UNDEFINED;
-    center = (cast createVector3(({ final __callArgument4:Dynamic = _Runtime.coalesce(centerX, function():Dynamic return cast 0.0); __callArgument4; }), ({ final __callArgument5:Dynamic = _Runtime.coalesce(centerY, function():Dynamic return cast 0.0); __callArgument5; }), ({ final __callArgument6:Dynamic = _Runtime.coalesce(centerZ, function():Dynamic return cast 0.0); __callArgument6; })) : Vector3);
+    center = (cast createVector3(({ final __callArgument8:Dynamic = _Runtime.coalesce(centerX, function():Dynamic return cast 0.0); __callArgument8; }), ({ final __callArgument9:Dynamic = _Runtime.coalesce(centerY, function():Dynamic return cast 0.0); __callArgument9; }), ({ final __callArgument10:Dynamic = _Runtime.coalesce(centerZ, function():Dynamic return cast 0.0); __callArgument10; })) : Vector3);
     return cast (cast createEntity((cast { center: center, radius: _Runtime.coalesce(radius, function():Dynamic return cast -1.0) } : Dynamic)) : { >Entity, var center:Vector3; var radius:Float; });
     return cast null;
   }

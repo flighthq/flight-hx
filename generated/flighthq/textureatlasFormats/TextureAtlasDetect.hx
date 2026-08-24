@@ -34,9 +34,9 @@ class TextureAtlasDetect {
     if ((cast !_Runtime.strictEquals(TextureAtlasDetect._registry__textureAtlasDetect, null) : Bool)) { return cast TextureAtlasDetect._registry__textureAtlasDetect; }
     (TextureAtlasDetect._registry__textureAtlasDetect = cast ((cast createKeyedTable((cast 'TextureAtlasFormat' : String), (cast 'Unclaimed' : String)) : KeyedTable<RegisteredFormatEntry__textureAtlasDetect>) : Dynamic));
     TextureAtlasDetect.bindTextureAtlasFormat__textureAtlasDetect((cast TextureAtlasFormatKindAseprite : String), (cast { detect: TextureAtlasDetect.detectAseprite__textureAtlasDetect, parse: function(content:String, atlas:TextureAtlas, __unused0:TextureAtlasParseOptions):TextureAtlas return (cast parseTextureAtlasAsepriteJson((cast content : String), ({ final __callArgument0:Dynamic = atlas; __callArgument0; })) : TextureAtlas) } : Dynamic));
-    TextureAtlasDetect.bindTextureAtlasFormat__textureAtlasDetect((cast TextureAtlasFormatKindLibgdxAtlas : String), (cast { detect: TextureAtlasDetect.detectLibgdxAtlas__textureAtlasDetect, parse: function(content:String, atlas:TextureAtlas, __unused1:TextureAtlasParseOptions):TextureAtlas return (cast parseTextureAtlasLibgdxAtlas((cast content : String), ({ final __callArgument1:Dynamic = atlas; __callArgument1; })) : TextureAtlas) } : Dynamic));
-    TextureAtlasDetect.bindTextureAtlasFormat__textureAtlasDetect((cast TextureAtlasFormatKindStarling : String), (cast { detect: TextureAtlasDetect.detectStarling__textureAtlasDetect, parse: function(content:String, atlas:TextureAtlas, options:TextureAtlasParseOptions):TextureAtlas return (cast parseTextureAtlasStarlingXml((cast content : String), ({ final __callArgument2:Dynamic = atlas; __callArgument2; }), (cast options : Dynamic)) : TextureAtlas) } : Dynamic));
-    TextureAtlasDetect.bindTextureAtlasFormat__textureAtlasDetect((cast TextureAtlasFormatKindTexturePacker : String), (cast { detect: TextureAtlasDetect.detectTexturePacker__textureAtlasDetect, parse: function(content:String, atlas:TextureAtlas, options:TextureAtlasParseOptions):TextureAtlas return (cast parseTextureAtlasPackerJson((cast content : String), ({ final __callArgument3:Dynamic = atlas; __callArgument3; }), (cast options : Dynamic)) : TextureAtlas) } : Dynamic));
+    TextureAtlasDetect.bindTextureAtlasFormat__textureAtlasDetect((cast TextureAtlasFormatKindLibgdxAtlas : String), (cast { detect: TextureAtlasDetect.detectLibgdxAtlas__textureAtlasDetect, parse: function(content:String, atlas:TextureAtlas, __unused1:TextureAtlasParseOptions):TextureAtlas return (cast parseTextureAtlasLibgdxAtlas((cast content : String), ({ final __callArgument4:Dynamic = atlas; __callArgument4; })) : TextureAtlas) } : Dynamic));
+    TextureAtlasDetect.bindTextureAtlasFormat__textureAtlasDetect((cast TextureAtlasFormatKindStarling : String), (cast { detect: TextureAtlasDetect.detectStarling__textureAtlasDetect, parse: function(content:String, atlas:TextureAtlas, options:TextureAtlasParseOptions):TextureAtlas return (cast parseTextureAtlasStarlingXml((cast content : String), ({ final __callArgument8:Dynamic = atlas; __callArgument8; }), (cast options : Dynamic)) : TextureAtlas) } : Dynamic));
+    TextureAtlasDetect.bindTextureAtlasFormat__textureAtlasDetect((cast TextureAtlasFormatKindTexturePacker : String), (cast { detect: TextureAtlasDetect.detectTexturePacker__textureAtlasDetect, parse: function(content:String, atlas:TextureAtlas, options:TextureAtlasParseOptions):TextureAtlas return (cast parseTextureAtlasPackerJson((cast content : String), ({ final __callArgument12:Dynamic = atlas; __callArgument12; }), (cast options : Dynamic)) : TextureAtlas) } : Dynamic));
     return cast TextureAtlasDetect._registry__textureAtlasDetect;
     return cast null;
   }
@@ -101,14 +101,14 @@ class TextureAtlasDetect {
   }
 
   public static function getTextureAtlasFormat(kind:TextureAtlasFormatKind):Null<{ var detect:String->Bool; var parse:String->TextureAtlas->TextureAtlasParseOptions->TextureAtlas; }> {
-    return cast _Runtime.coalesce(({ final __structural6 = (cast getRegistryTableEntry((cast (cast TextureAtlasDetect.getRegistry__textureAtlasDetect() : KeyedTable<RegisteredFormatEntry__textureAtlasDetect>) : Dynamic), (cast kind : String)) : Null<RegisteredFormatEntry__textureAtlasDetect>); __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var entry:FormatEntry__textureAtlasDetect; }).entry; }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __structural18 = (cast getRegistryTableEntry((cast (cast TextureAtlasDetect.getRegistry__textureAtlasDetect() : KeyedTable<RegisteredFormatEntry__textureAtlasDetect>) : Dynamic), (cast kind : String)) : Null<RegisteredFormatEntry__textureAtlasDetect>); __structural18 == null ? _Runtime.UNDEFINED : (cast __structural18 : { var entry:FormatEntry__textureAtlasDetect; }).entry; }), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function getTextureAtlasFormatKinds():Array<TextureAtlasFormatKind> {
     var kinds:Array<TextureAtlasFormatKind> = cast _Runtime.UNDEFINED;
     kinds = (cast cast ([] : Array<Dynamic>));
-    getRegistryTableKeys(({ final __callArgument7:Dynamic = kinds; __callArgument7; }), (cast (cast TextureAtlasDetect.getRegistry__textureAtlasDetect() : KeyedTable<RegisteredFormatEntry__textureAtlasDetect>) : Dynamic));
+    getRegistryTableKeys(({ final __callArgument19:Dynamic = kinds; __callArgument19; }), (cast (cast TextureAtlasDetect.getRegistry__textureAtlasDetect() : KeyedTable<RegisteredFormatEntry__textureAtlasDetect>) : Dynamic));
     return cast kinds;
     return cast null;
   }
@@ -120,7 +120,7 @@ class TextureAtlasDetect {
     if ((cast ((cast _Runtime.strictEquals(kind, null) : Bool) || (cast _Runtime.strictEquals(kind, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast null; }
     registered = (cast getRegistryTableEntry((cast (cast TextureAtlasDetect.getRegistry__textureAtlasDetect() : KeyedTable<RegisteredFormatEntry__textureAtlasDetect>) : Dynamic), (cast kind : String)) : Null<RegisteredFormatEntry__textureAtlasDetect>);
     if ((cast _Runtime.strictEquals(registered, null) : Bool)) { return cast null; }
-    return cast (cast (cast registered : RegisteredFormatEntry__textureAtlasDetect).entry : FormatEntry__textureAtlasDetect).parse((cast content : String), ({ final __callArgument8:Dynamic = atlas; __callArgument8; }), ({ final __callArgument9:Dynamic = _Runtime.coalesce(options, function():Dynamic return cast {  }); __callArgument9; }));
+    return cast (cast (cast registered : RegisteredFormatEntry__textureAtlasDetect).entry : FormatEntry__textureAtlasDetect).parse((cast content : String), ({ final __callArgument21:Dynamic = atlas; __callArgument21; }), ({ final __callArgument22:Dynamic = _Runtime.coalesce(options, function():Dynamic return cast {  }); __callArgument22; }));
     return cast null;
   }
 
@@ -137,7 +137,7 @@ class TextureAtlasDetect {
     var current:Null<RegisteredFormatEntry__textureAtlasDetect> = cast _Runtime.UNDEFINED;
     registry = (cast TextureAtlasDetect.getRegistry__textureAtlasDetect() : KeyedTable<RegisteredFormatEntry__textureAtlasDetect>);
     current = (cast getRegistryTableEntry((cast registry : Dynamic), (cast kind : String)) : Null<RegisteredFormatEntry__textureAtlasDetect>);
-    (TextureAtlasDetect._registry__textureAtlasDetect = cast ((cast withRegistryTableEntry((cast registry : Dynamic), (cast kind : String), (cast { entry: entry, order: _Runtime.coalesce(({ final __structural10 = current; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { var order:Float; }).order; }), function():Dynamic return cast TextureAtlasDetect._nextFormatOrder__textureAtlasDetect++) } : Dynamic)) : KeyedTable<{ var entry:FormatEntry__textureAtlasDetect; var order:Float; }>) : Dynamic));
+    (TextureAtlasDetect._registry__textureAtlasDetect = cast ((cast withRegistryTableEntry((cast registry : Dynamic), (cast kind : String), (cast { entry: entry, order: _Runtime.coalesce(({ final __structural23 = current; __structural23 == null ? _Runtime.UNDEFINED : (cast __structural23 : { var order:Float; }).order; }), function():Dynamic return cast TextureAtlasDetect._nextFormatOrder__textureAtlasDetect++) } : Dynamic)) : KeyedTable<{ var entry:FormatEntry__textureAtlasDetect; var order:Float; }>) : Dynamic));
   }
 
   public static function getTextureAtlasFormatsInDetectionOrder__textureAtlasDetect():Array<Array<flighthq._internal._Union2<TextureAtlasFormatKind, RegisteredFormatEntry__textureAtlasDetect>>> {

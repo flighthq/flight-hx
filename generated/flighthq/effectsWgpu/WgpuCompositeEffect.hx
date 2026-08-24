@@ -26,10 +26,10 @@ class WgpuCompositeEffect {
     var hasBackdrop:Bool = cast _Runtime.UNDEFINED;
     backdrop = (cast getWgpuBlendEffectBackdrop(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = _Runtime.coalesce(_Runtime.field(effect, 'backdropKey'), function():Dynamic return cast null); __callArgument1; })) : Null<WgpuRenderTarget>);
     hasBackdrop = !_Runtime.strictEquals(backdrop, null);
-    drawWgpuDualSourceEffectPass(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast source : WgpuRenderTarget), (cast _Runtime.coalesce(backdrop, function():Dynamic return cast source) : WgpuRenderTarget), ({ final __callArgument3:Dynamic = (cast dest : WgpuRenderTarget); __callArgument3; }), (cast WgpuCompositeEffect.getWgpuCompositeEffectPipeline__wgpuCompositeEffect(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuEffectPipeline), ({ final __callArgument5:Dynamic = function(_f32:flighthq._internal._Float32Array, i32:flighthq._internal._Int32Array):Void {
+    drawWgpuDualSourceEffectPass(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast source : WgpuRenderTarget), (cast _Runtime.coalesce(backdrop, function():Dynamic return cast source) : WgpuRenderTarget), ({ final __callArgument5:Dynamic = (cast dest : WgpuRenderTarget); __callArgument5; }), (cast WgpuCompositeEffect.getWgpuCompositeEffectPipeline__wgpuCompositeEffect(({ final __callArgument6:Dynamic = state; __callArgument6; })) : WgpuEffectPipeline), ({ final __callArgument8:Dynamic = function(_f32:flighthq._internal._Float32Array, i32:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeInt32ArrayTyped((cast i32 : flighthq._internal._Int32Array), (cast 0.0 : Float), (cast (cast getWgpuCompositeEffectOperatorIndex((cast _Runtime.field(effect, 'operator') : String)) : Float) : Float));
       flighthq._internal._StaticIndex.writeInt32ArrayTyped((cast i32 : flighthq._internal._Int32Array), (cast 1.0 : Float), (cast ((cast hasBackdrop : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Float));
-    }; __callArgument5; }));
+    }; __callArgument8; }));
   }
 
   public static final defaultWgpuCompositeEffectRunner:WgpuRenderEffectRunner = (cast function(context:WgpuRenderEffectContext, effect:RenderEffect):Void {
@@ -43,14 +43,14 @@ class WgpuCompositeEffect {
   }
 
   public static function registerWgpuCompositeEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast 'CompositeEffect' : String), ({ final __callArgument7:Dynamic = defaultWgpuCompositeEffectRunner; __callArgument7; }));
+    registerWgpuRenderEffect(({ final __callArgument14:Dynamic = state; __callArgument14; }), (cast 'CompositeEffect' : String), ({ final __callArgument15:Dynamic = defaultWgpuCompositeEffectRunner; __callArgument15; }));
   }
 
   public static function getWgpuCompositeEffectPipeline__wgpuCompositeEffect(state:WgpuRenderState):WgpuDualSourceEffectPipeline {
     var pipeline:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
     pipeline = ((cast WgpuCompositeEffect.pipelines__wgpuCompositeEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (pipeline = cast ((cast createWgpuDualSourceEffectPipeline(({ final __callArgument8:Dynamic = state; __callArgument8; }), (cast WGPU_COMPOSITE_FRAGMENT_WGSL : String), ({ final __callArgument9:Dynamic = 'replace'; __callArgument9; })) : WgpuEffectPipeline) : Dynamic));
+      (pipeline = cast ((cast createWgpuDualSourceEffectPipeline(({ final __callArgument18:Dynamic = state; __callArgument18; }), (cast WGPU_COMPOSITE_FRAGMENT_WGSL : String), ({ final __callArgument19:Dynamic = 'replace'; __callArgument19; })) : WgpuEffectPipeline) : Dynamic));
       ((cast WgpuCompositeEffect.pipelines__wgpuCompositeEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, (cast pipeline)));
     }
     return cast pipeline;

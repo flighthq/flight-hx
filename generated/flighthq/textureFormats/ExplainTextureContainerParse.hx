@@ -18,7 +18,7 @@ class ExplainTextureContainerParse {
     var reason:Null<String> = cast _Runtime.UNDEFINED;
     container = (cast detectTextureContainer(({ final __callArgument0:Dynamic = bytes; __callArgument0; })) : Null<String>);
     if ((cast _Runtime.strictEquals(container, null) : Bool)) { return cast { container: null, reason: 'container-unrecognized' }; }
-    reason = (cast ExplainTextureContainerParse.getParseFailureReason__explainTextureContainerParse((cast container : flighthq._internal._Any), ({ final __callArgument1:Dynamic = bytes; __callArgument1; })) : Null<String>);
+    reason = (cast ExplainTextureContainerParse.getParseFailureReason__explainTextureContainerParse((cast container : flighthq._internal._Any), ({ final __callArgument2:Dynamic = bytes; __callArgument2; })) : Null<String>);
     return cast ((cast _Runtime.strictEquals(reason, null) : Bool) ? (cast null : Dynamic) : (cast { container: container, reason: reason } : Dynamic));
     return cast null;
   }
@@ -27,16 +27,16 @@ class ExplainTextureContainerParse {
     {
       var __switchValue = container;
       if (__switchValue == 'atf') {
-        return cast (cast getAtfParseFailureReason(({ final __callArgument2:Dynamic = bytes; __callArgument2; })) : Null<String>);
+        return cast (cast getAtfParseFailureReason(({ final __callArgument4:Dynamic = bytes; __callArgument4; })) : Null<String>);
       }
       else if (__switchValue == 'basis') {
-        return cast (cast getBasisParseFailureReason(({ final __callArgument3:Dynamic = bytes; __callArgument3; })) : Null<String>);
+        return cast (cast getBasisParseFailureReason(({ final __callArgument6:Dynamic = bytes; __callArgument6; })) : Null<String>);
       }
       else if (__switchValue == 'dds') {
-        return cast (cast getDdsParseFailureReason(({ final __callArgument4:Dynamic = bytes; __callArgument4; })) : Null<String>);
+        return cast (cast getDdsParseFailureReason(({ final __callArgument8:Dynamic = bytes; __callArgument8; })) : Null<String>);
       }
       else if (__switchValue == 'ktx2') {
-        return cast (cast getKtx2ParseFailureReason(({ final __callArgument5:Dynamic = bytes; __callArgument5; })) : Null<String>);
+        return cast (cast getKtx2ParseFailureReason(({ final __callArgument10:Dynamic = bytes; __callArgument10; })) : Null<String>);
       }
     }
     return cast null;

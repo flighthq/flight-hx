@@ -13,6 +13,6 @@ class ViewMatrix {
     var zoom:Float = cast _Runtime.UNDEFINED;
     zoom = camera.zoom;
     setTransformMatrix(({ final __callArgument0:Dynamic = out; __callArgument0; }), (cast zoom : Float), (cast zoom : Float), (cast -camera.rotation : Float), (cast (camera.viewportWidth * 0.5) : Float), (cast (camera.viewportHeight * 0.5) : Float));
-    translateMatrixByVectorXY(({ final __callArgument1:Dynamic = out; __callArgument1; }), ({ final __callArgument2:Dynamic = out; __callArgument2; }), (cast -camera.x : Float), (cast -camera.y : Float));
+    translateMatrixByVectorXY(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = out; __callArgument3; }), (cast -camera.x : Float), (cast -camera.y : Float));
   }
 }

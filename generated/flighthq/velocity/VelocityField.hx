@@ -182,7 +182,7 @@ class VelocityField {
   }
 
   public static function suppressVelocity(field:flighthq.types.Velocity.VelocityField, source:flighthq._internal._Object):Void {
-    contributeVelocity(({ final __callArgument2:Dynamic = field; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }), (cast 0.0 : Float), (cast 0.0 : Float));
+    contributeVelocity(({ final __callArgument4:Dynamic = field; __callArgument4; }), ({ final __callArgument5:Dynamic = source; __callArgument5; }), (cast 0.0 : Float), (cast 0.0 : Float));
   }
 
   public static function zeroVelocity(out:Velocity2D):Velocity2D {

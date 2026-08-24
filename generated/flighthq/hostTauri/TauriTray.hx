@@ -54,8 +54,8 @@ class TauriTray {
       ((cast trays : flighthq._internal._Map<Float, TrayRecord__tauriTray>).set(id, (cast record)));
       flighthq._internal._Async.recover(_Runtime.callProperty((cast (cast trayModule : TauriTrayModule).TrayIcon : TauriTrayIconFactory).new_((cast { icon: options.icon, title: options.title, tooltip: options.tooltip, action: function(event:TauriTrayIconEvent):Void {
         var type:Null<String> = cast _Runtime.UNDEFINED;
-        type = (cast TauriTray.toTrayEventType__tauriTray(({ final __callArgument10:Dynamic = event; __callArgument10; })) : Null<String>);
-        if ((cast !_Runtime.strictEquals(type, null) : Bool)) { emit((cast id : Float), ({ final __callArgument11:Dynamic = type; __callArgument11; })); }
+        type = (cast TauriTray.toTrayEventType__tauriTray(({ final __callArgument20:Dynamic = event; __callArgument20; })) : Null<String>);
+        if ((cast !_Runtime.strictEquals(type, null) : Bool)) { emit((cast id : Float), ({ final __callArgument22:Dynamic = type; __callArgument22; })); }
       } } : Dynamic)), 'then', cast ([function(icon:TauriTrayIcon):Void {
         ((cast record : TrayRecord__tauriTray).icon = icon);
       }] : Array<Dynamic>)), function(__unused0:flighthq._internal._Any):Void {
@@ -67,7 +67,7 @@ class TauriTray {
       var record:Null<TrayRecord__tauriTray> = cast _Runtime.UNDEFINED;
       record = ((cast trays : flighthq._internal._Map<Float, TrayRecord__tauriTray>).get(id));
       if ((cast !_Runtime.truthy(record) : Bool)) { return; }
-      _Runtime.callOptionalProperty(_Runtime.callOptionalValue(({ final __structural13 = (cast record : TrayRecord__tauriTray).icon; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; }).close; }), cast ([] : Array<Dynamic>)), 'catch', cast ([function(__unused1:flighthq._internal._Any):Void {
+      _Runtime.callOptionalProperty(_Runtime.callOptionalValue(({ final __structural25 = (cast record : TrayRecord__tauriTray).icon; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { var close:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; }).close; }), cast ([] : Array<Dynamic>)), 'catch', cast ([function(__unused1:flighthq._internal._Any):Void {
 
       }] : Array<Dynamic>));
       ((cast trays : flighthq._internal._Map<Float, TrayRecord__tauriTray>).delete_(id));
@@ -82,10 +82,10 @@ class TauriTray {
       return cast { balloon: false, bounds: false, clickEvents: true, dropFiles: false, pressedIcon: false, title: true };
       return cast _Runtime.UNDEFINED;
     }, getTitle: function(id:Float):String {
-      return cast _Runtime.coalesce(({ final __structural14 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__tauriTray>).get(id)); __structural14 == null ? _Runtime.UNDEFINED : (cast __structural14 : { var title:String; }).title; }), function():Dynamic return cast '');
+      return cast _Runtime.coalesce(({ final __structural26 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__tauriTray>).get(id)); __structural26 == null ? _Runtime.UNDEFINED : (cast __structural26 : { var title:String; }).title; }), function():Dynamic return cast '');
       return cast _Runtime.UNDEFINED;
     }, getTooltip: function(id:Float):String {
-      return cast _Runtime.coalesce(({ final __structural15 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__tauriTray>).get(id)); __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { var tooltip:String; }).tooltip; }), function():Dynamic return cast '');
+      return cast _Runtime.coalesce(({ final __structural27 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__tauriTray>).get(id)); __structural27 == null ? _Runtime.UNDEFINED : (cast __structural27 : { var tooltip:String; }).tooltip; }), function():Dynamic return cast '');
       return cast _Runtime.UNDEFINED;
     }, isDestroyed: function(id:Float):Bool {
       return cast !(cast ((cast trays : flighthq._internal._Map<Float, TrayRecord__tauriTray>).has(id)) : Bool);
@@ -103,12 +103,12 @@ class TauriTray {
         return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
           var built:Array<TauriMenuItemHandle> = cast _Runtime.UNDEFINED;
           var menu:TauriMenu = cast _Runtime.UNDEFINED;
-          return flighthq._internal._Async.flatMap((cast TauriTray.buildTrayItems__tauriTray(({ final __callArgument26:Dynamic = menuModule; __callArgument26; }), ({ final __callArgument27:Dynamic = items; __callArgument27; })) : flighthq._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue22:Dynamic):Dynamic {
-            built = __awaitValue22;
-            return flighthq._internal._Async.flatMap((cast (cast menuModule : TauriMenuModule).Menu : TauriMenuFactory).new_((cast { items: built } : Dynamic)), function(__awaitValue23:Dynamic):Dynamic {
-              menu = __awaitValue23;
-              return flighthq._internal._Async.flatMap(_Runtime.callOptionalValue(({ final __structural25 = (cast record : TrayRecord__tauriTray).icon; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { var setMenu:Null<TauriMenu>->flighthq._internal._Promise<flighthq._internal._Nothing>; }).setMenu; }), cast ([menu] : Array<Dynamic>)), function(__awaitValue24:Dynamic):Dynamic {
-                __awaitValue24;
+          return flighthq._internal._Async.flatMap((cast TauriTray.buildTrayItems__tauriTray(({ final __callArgument40:Dynamic = menuModule; __callArgument40; }), ({ final __callArgument41:Dynamic = items; __callArgument41; })) : flighthq._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue36:Dynamic):Dynamic {
+            built = __awaitValue36;
+            return flighthq._internal._Async.flatMap((cast (cast menuModule : TauriMenuModule).Menu : TauriMenuFactory).new_((cast { items: built } : Dynamic)), function(__awaitValue37:Dynamic):Dynamic {
+              menu = __awaitValue37;
+              return flighthq._internal._Async.flatMap(_Runtime.callOptionalValue(({ final __structural39 = (cast record : TrayRecord__tauriTray).icon; __structural39 == null ? _Runtime.UNDEFINED : (cast __structural39 : { var setMenu:Null<TauriMenu>->flighthq._internal._Promise<flighthq._internal._Nothing>; }).setMenu; }), cast ([menu] : Array<Dynamic>)), function(__awaitValue38:Dynamic):Dynamic {
+                __awaitValue38;
                 return flighthq._internal._Async.resolve(_Runtime.UNDEFINED);
               });
             });
@@ -118,7 +118,7 @@ class TauriTray {
 
       }));
     }, setIcon: function(id:Float, icon:String):Void {
-      _Runtime.callOptionalProperty(_Runtime.callOptionalValue(({ final __structural35 = ({ final __structural34 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__tauriTray>).get(id)); __structural34 == null ? _Runtime.UNDEFINED : (cast __structural34 : { var icon:Null<TauriTrayIcon>; }).icon; }); __structural35 == null ? _Runtime.UNDEFINED : (cast __structural35 : { var setIcon:Null<String>->flighthq._internal._Promise<flighthq._internal._Nothing>; }).setIcon; }), cast ([icon] : Array<Dynamic>)), 'catch', cast ([function(__unused3:flighthq._internal._Any):Void {
+      _Runtime.callOptionalProperty(_Runtime.callOptionalValue(({ final __structural51 = ({ final __structural50 = ((cast trays : flighthq._internal._Map<Float, TrayRecord__tauriTray>).get(id)); __structural50 == null ? _Runtime.UNDEFINED : (cast __structural50 : { var icon:Null<TauriTrayIcon>; }).icon; }); __structural51 == null ? _Runtime.UNDEFINED : (cast __structural51 : { var setIcon:Null<String>->flighthq._internal._Promise<flighthq._internal._Nothing>; }).setIcon; }), cast ([icon] : Array<Dynamic>)), 'catch', cast ([function(__unused3:flighthq._internal._Any):Void {
 
       }] : Array<Dynamic>));
     }, setIgnoreDoubleClickEvents: function():Void {
@@ -132,7 +132,7 @@ class TauriTray {
       record = ((cast trays : flighthq._internal._Map<Float, TrayRecord__tauriTray>).get(id));
       if ((cast !_Runtime.truthy(record) : Bool)) { return; }
       ((cast record : TrayRecord__tauriTray).title = title);
-      _Runtime.callOptionalProperty(_Runtime.callOptionalValue(({ final __structural37 = (cast record : TrayRecord__tauriTray).icon; __structural37 == null ? _Runtime.UNDEFINED : (cast __structural37 : { var setTitle:Null<String>->flighthq._internal._Promise<flighthq._internal._Nothing>; }).setTitle; }), cast ([title] : Array<Dynamic>)), 'catch', cast ([function(__unused4:flighthq._internal._Any):Void {
+      _Runtime.callOptionalProperty(_Runtime.callOptionalValue(({ final __structural53 = (cast record : TrayRecord__tauriTray).icon; __structural53 == null ? _Runtime.UNDEFINED : (cast __structural53 : { var setTitle:Null<String>->flighthq._internal._Promise<flighthq._internal._Nothing>; }).setTitle; }), cast ([title] : Array<Dynamic>)), 'catch', cast ([function(__unused4:flighthq._internal._Any):Void {
 
       }] : Array<Dynamic>));
     }, setTooltip: function(id:Float, tooltip:String):Void {
@@ -140,7 +140,7 @@ class TauriTray {
       record = ((cast trays : flighthq._internal._Map<Float, TrayRecord__tauriTray>).get(id));
       if ((cast !_Runtime.truthy(record) : Bool)) { return; }
       ((cast record : TrayRecord__tauriTray).tooltip = tooltip);
-      _Runtime.callOptionalProperty(_Runtime.callOptionalValue(({ final __structural39 = (cast record : TrayRecord__tauriTray).icon; __structural39 == null ? _Runtime.UNDEFINED : (cast __structural39 : { var setTooltip:Null<String>->flighthq._internal._Promise<flighthq._internal._Nothing>; }).setTooltip; }), cast ([tooltip] : Array<Dynamic>)), 'catch', cast ([function(__unused5:flighthq._internal._Any):Void {
+      _Runtime.callOptionalProperty(_Runtime.callOptionalValue(({ final __structural55 = (cast record : TrayRecord__tauriTray).icon; __structural55 == null ? _Runtime.UNDEFINED : (cast __structural55 : { var setTooltip:Null<String>->flighthq._internal._Promise<flighthq._internal._Nothing>; }).setTooltip; }), cast ([tooltip] : Array<Dynamic>)), 'catch', cast ([function(__unused5:flighthq._internal._Any):Void {
 
       }] : Array<Dynamic>));
     }, subscribe: function(listener:TrayEventData->Void):Void->Void {
@@ -165,45 +165,45 @@ class TauriTray {
       flighthq._internal._Async.protect(function():Dynamic {
         var built:Array<TauriMenuItemHandle> = cast _Runtime.UNDEFINED;
         built = cast ([] : Array<Dynamic>);
-        var __flowIterator44:Array<Dynamic> = _Runtime.iterable(items);
-        var __flowIndex45:Int = 0;
+        var __flowIterator61:Array<Dynamic> = _Runtime.iterable(items);
+        var __flowIndex62:Int = 0;
         return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
-          if (__flowIndex45 >= __flowIterator44.length) return flighthq._internal._Async.flowBreak();
-          var item:Dynamic = __flowIterator44[__flowIndex45++];
-          var __flowBranch46:Dynamic;
+          if (__flowIndex62 >= __flowIterator61.length) return flighthq._internal._Async.flowBreak();
+          var item:Dynamic = __flowIterator61[__flowIndex62++];
+          var __flowBranch63:Dynamic;
           if ((cast _Runtime.strictEquals(item.type, 'separator') : Bool)) {
-            __flowBranch46 = flighthq._internal._Async.protect(function():Dynamic {
-              return flighthq._internal._Async.flatMap((cast (cast menuModule : { var PredefinedMenuItem:TauriPredefinedMenuItemFactory; }).PredefinedMenuItem : TauriPredefinedMenuItemFactory).new_(({ final __callArgument48:Dynamic = { item: 'Separator' }; __callArgument48; })), function(__awaitValue47:Dynamic):Dynamic {
-                _Runtime.callProperty(built, 'push', cast ([__awaitValue47] : Array<Dynamic>));
+            __flowBranch63 = flighthq._internal._Async.protect(function():Dynamic {
+              return flighthq._internal._Async.flatMap((cast (cast menuModule : { var PredefinedMenuItem:TauriPredefinedMenuItemFactory; }).PredefinedMenuItem : TauriPredefinedMenuItemFactory).new_(({ final __callArgument65:Dynamic = { item: 'Separator' }; __callArgument65; })), function(__awaitValue64:Dynamic):Dynamic {
+                _Runtime.callProperty(built, 'push', cast ([__awaitValue64] : Array<Dynamic>));
                 return flighthq._internal._Async.flowNormal();
               });
             });
           } else {
-            __flowBranch46 = flighthq._internal._Async.protect(function():Dynamic {
-              var __flowBranch49:Dynamic;
+            __flowBranch63 = flighthq._internal._Async.protect(function():Dynamic {
+              var __flowBranch66:Dynamic;
               if (_Runtime.truthy(item.submenu)) {
-                __flowBranch49 = flighthq._internal._Async.protect(function():Dynamic {
-                  return flighthq._internal._Async.flatMap((cast TauriTray.buildTrayItems__tauriTray(({ final __callArgument52:Dynamic = menuModule; __callArgument52; }), item.submenu) : flighthq._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue50:Dynamic):Dynamic {
-                    return flighthq._internal._Async.flatMap((cast (cast menuModule : { var Submenu:TauriSubmenuFactory; }).Submenu : TauriSubmenuFactory).new_((cast { text: item.label, enabled: item.enabled, items: __awaitValue50 } : Dynamic)), function(__awaitValue51:Dynamic):Dynamic {
-                      _Runtime.callProperty(built, 'push', cast ([__awaitValue51] : Array<Dynamic>));
+                __flowBranch66 = flighthq._internal._Async.protect(function():Dynamic {
+                  return flighthq._internal._Async.flatMap((cast TauriTray.buildTrayItems__tauriTray(({ final __callArgument69:Dynamic = menuModule; __callArgument69; }), item.submenu) : flighthq._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue67:Dynamic):Dynamic {
+                    return flighthq._internal._Async.flatMap((cast (cast menuModule : { var Submenu:TauriSubmenuFactory; }).Submenu : TauriSubmenuFactory).new_((cast { text: item.label, enabled: item.enabled, items: __awaitValue67 } : Dynamic)), function(__awaitValue68:Dynamic):Dynamic {
+                      _Runtime.callProperty(built, 'push', cast ([__awaitValue68] : Array<Dynamic>));
                       return flighthq._internal._Async.flowNormal();
                     });
                   });
                 });
               } else {
-                __flowBranch49 = flighthq._internal._Async.protect(function():Dynamic {
-                  return flighthq._internal._Async.flatMap((cast (cast menuModule : { var MenuItem:TauriMenuItemFactory; }).MenuItem : TauriMenuItemFactory).new_((cast { id: item.id, text: item.label, enabled: item.enabled } : Dynamic)), function(__awaitValue53:Dynamic):Dynamic {
-                    _Runtime.callProperty(built, 'push', cast ([__awaitValue53] : Array<Dynamic>));
+                __flowBranch66 = flighthq._internal._Async.protect(function():Dynamic {
+                  return flighthq._internal._Async.flatMap((cast (cast menuModule : { var MenuItem:TauriMenuItemFactory; }).MenuItem : TauriMenuItemFactory).new_((cast { id: item.id, text: item.label, enabled: item.enabled } : Dynamic)), function(__awaitValue71:Dynamic):Dynamic {
+                    _Runtime.callProperty(built, 'push', cast ([__awaitValue71] : Array<Dynamic>));
                     return flighthq._internal._Async.flowNormal();
                   });
                 });
               }
-              return flighthq._internal._Async.continueFlow(__flowBranch49, function():Dynamic {
+              return flighthq._internal._Async.continueFlow(__flowBranch66, function():Dynamic {
                 return flighthq._internal._Async.flowNormal();
               });
             });
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch46, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch63, function():Dynamic {
             return flighthq._internal._Async.flowNormal();
           });
         }), function():Dynamic {

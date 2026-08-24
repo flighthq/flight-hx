@@ -24,7 +24,7 @@ class BitmapFontXml {
     var record:Null<BitmapFontRecord> = cast _Runtime.UNDEFINED;
     record = (cast BitmapFontXml.parseBitmapFontXmlRecord__bitmapFontXml((cast text : String), ({ final __callArgument0:Dynamic = diagnostics; __callArgument0; })) : Null<BitmapFontRecord>);
     if ((cast _Runtime.strictEquals(record, null) : Bool)) { return cast null; }
-    return cast (cast buildBitmapFontFromRecord(({ final __callArgument1:Dynamic = record; __callArgument1; }), ({ final __callArgument2:Dynamic = options; __callArgument2; })) : Null<BitmapFont>);
+    return cast (cast buildBitmapFontFromRecord(({ final __callArgument2:Dynamic = record; __callArgument2; }), ({ final __callArgument3:Dynamic = options; __callArgument3; })) : Null<BitmapFont>);
     return cast null;
   }
 
@@ -44,40 +44,40 @@ class BitmapFontXml {
     var kerningsElement:Null<XmlElement> = cast _Runtime.UNDEFINED;
     root = (cast parseXmlDocument((cast text : String)) : Null<XmlElement>);
     if ((cast ((cast _Runtime.strictEquals(root, null) : Bool) || (cast !_Runtime.strictEquals((cast root : { var name:String; }).name, 'font') : Bool)) : Bool)) { return cast null; }
-    common = (cast getXmlElementChildByName(({ final __callArgument3:Dynamic = root; __callArgument3; }), (cast 'common' : String)) : Null<XmlElement>);
+    common = (cast getXmlElementChildByName(({ final __callArgument6:Dynamic = root; __callArgument6; }), (cast 'common' : String)) : Null<XmlElement>);
     if ((cast _Runtime.strictEquals(common, null) : Bool)) { return cast null; }
-    lineHeight = (cast getXmlElementAttributeNumber(({ final __callArgument4:Dynamic = common; __callArgument4; }), (cast 'lineHeight' : String)) : Null<Float>);
-    base = (cast getXmlElementAttributeNumber(({ final __callArgument5:Dynamic = common; __callArgument5; }), (cast 'base' : String)) : Null<Float>);
+    lineHeight = (cast getXmlElementAttributeNumber(({ final __callArgument8:Dynamic = common; __callArgument8; }), (cast 'lineHeight' : String)) : Null<Float>);
+    base = (cast getXmlElementAttributeNumber(({ final __callArgument10:Dynamic = common; __callArgument10; }), (cast 'base' : String)) : Null<Float>);
     if ((cast ((cast _Runtime.strictEquals(lineHeight, null) : Bool) || (cast _Runtime.strictEquals(base, null) : Bool)) : Bool)) { return cast null; }
     pages = (cast cast ([] : Array<Dynamic>));
     droppedPages = 0.0;
     droppedChars = 0.0;
     droppedKernings = 0.0;
-    pagesElement = (cast getXmlElementChildByName(({ final __callArgument6:Dynamic = root; __callArgument6; }), (cast 'pages' : String)) : Null<XmlElement>);
+    pagesElement = (cast getXmlElementChildByName(({ final __callArgument12:Dynamic = root; __callArgument12; }), (cast 'pages' : String)) : Null<XmlElement>);
     if ((cast !_Runtime.strictEquals(pagesElement, null) : Bool)) {
-      for (pageElement in _Runtime.iterable((cast getXmlElementChildrenByName(({ final __callArgument9:Dynamic = pagesElement; __callArgument9; }), (cast 'page' : String)) : Array<XmlElement>))) {
-        var id:Null<Float> = (cast getXmlElementAttributeNumber(({ final __callArgument10:Dynamic = pageElement; __callArgument10; }), (cast 'id' : String)) : Null<Float>);
-        if ((cast _Runtime.strictEquals(id, null) : Bool)) { droppedPages++; } else { _Runtime.callProperty(pages, 'push', cast ([{ file: _Runtime.coalesce((cast getXmlElementAttribute(({ final __callArgument11:Dynamic = pageElement; __callArgument11; }), (cast 'file' : String)) : Null<String>), function():Dynamic return cast ''), id: id }] : Array<Dynamic>)); }
+      for (pageElement in _Runtime.iterable((cast getXmlElementChildrenByName(({ final __callArgument16:Dynamic = pagesElement; __callArgument16; }), (cast 'page' : String)) : Array<XmlElement>))) {
+        var id:Null<Float> = (cast getXmlElementAttributeNumber(({ final __callArgument18:Dynamic = pageElement; __callArgument18; }), (cast 'id' : String)) : Null<Float>);
+        if ((cast _Runtime.strictEquals(id, null) : Bool)) { droppedPages++; } else { _Runtime.callProperty(pages, 'push', cast ([{ file: _Runtime.coalesce((cast getXmlElementAttribute(({ final __callArgument20:Dynamic = pageElement; __callArgument20; }), (cast 'file' : String)) : Null<String>), function():Dynamic return cast ''), id: id }] : Array<Dynamic>)); }
       }
     }
     chars = (cast cast ([] : Array<Dynamic>));
-    charsElement = (cast getXmlElementChildByName(({ final __callArgument12:Dynamic = root; __callArgument12; }), (cast 'chars' : String)) : Null<XmlElement>);
+    charsElement = (cast getXmlElementChildByName(({ final __callArgument22:Dynamic = root; __callArgument22; }), (cast 'chars' : String)) : Null<XmlElement>);
     if ((cast !_Runtime.strictEquals(charsElement, null) : Bool)) {
-      for (charElement in _Runtime.iterable((cast getXmlElementChildrenByName(({ final __callArgument15:Dynamic = charsElement; __callArgument15; }), (cast 'char' : String)) : Array<XmlElement>))) {
-        var char:Null<BitmapFontCharRecord> = (cast BitmapFontXml.readXmlChar__bitmapFontXml(({ final __callArgument16:Dynamic = charElement; __callArgument16; })) : Null<BitmapFontCharRecord>);
+      for (charElement in _Runtime.iterable((cast getXmlElementChildrenByName(({ final __callArgument26:Dynamic = charsElement; __callArgument26; }), (cast 'char' : String)) : Array<XmlElement>))) {
+        var char:Null<BitmapFontCharRecord> = (cast BitmapFontXml.readXmlChar__bitmapFontXml(({ final __callArgument28:Dynamic = charElement; __callArgument28; })) : Null<BitmapFontCharRecord>);
         if ((cast _Runtime.strictEquals(char, null) : Bool)) { droppedChars++; } else { _Runtime.callProperty(chars, 'push', cast ([char] : Array<Dynamic>)); }
       }
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(chars, 'length'), 0.0) : Bool)) { return cast null; }
     kernings = (cast cast ([] : Array<Dynamic>));
-    kerningsElement = (cast getXmlElementChildByName(({ final __callArgument17:Dynamic = root; __callArgument17; }), (cast 'kernings' : String)) : Null<XmlElement>);
+    kerningsElement = (cast getXmlElementChildByName(({ final __callArgument30:Dynamic = root; __callArgument30; }), (cast 'kernings' : String)) : Null<XmlElement>);
     if ((cast !_Runtime.strictEquals(kerningsElement, null) : Bool)) {
-      for (kerningElement in _Runtime.iterable((cast getXmlElementChildrenByName(({ final __callArgument20:Dynamic = kerningsElement; __callArgument20; }), (cast 'kerning' : String)) : Array<XmlElement>))) {
-        var kerning:Null<BitmapFontKerningRecord> = (cast BitmapFontXml.readXmlKerning__bitmapFontXml(({ final __callArgument21:Dynamic = kerningElement; __callArgument21; })) : Null<BitmapFontKerningRecord>);
+      for (kerningElement in _Runtime.iterable((cast getXmlElementChildrenByName(({ final __callArgument34:Dynamic = kerningsElement; __callArgument34; }), (cast 'kerning' : String)) : Array<XmlElement>))) {
+        var kerning:Null<BitmapFontKerningRecord> = (cast BitmapFontXml.readXmlKerning__bitmapFontXml(({ final __callArgument36:Dynamic = kerningElement; __callArgument36; })) : Null<BitmapFontKerningRecord>);
         if ((cast _Runtime.strictEquals(kerning, null) : Bool)) { droppedKernings++; } else { _Runtime.callProperty(kernings, 'push', cast ([kerning] : Array<Dynamic>)); }
       }
     }
-    reportDroppedBitmapFontRecords(({ final __callArgument22:Dynamic = diagnostics; __callArgument22; }), (cast 'parseBitmapFontXmlRecord' : String), (cast droppedPages : Float), (cast droppedChars : Float), (cast droppedKernings : Float));
+    reportDroppedBitmapFontRecords(({ final __callArgument38:Dynamic = diagnostics; __callArgument38; }), (cast 'parseBitmapFontXmlRecord' : String), (cast droppedPages : Float), (cast droppedChars : Float), (cast droppedKernings : Float));
     return cast { base: base, chars: chars, encoding: 'raster', kernings: kernings, lineHeight: lineHeight, pages: pages };
     return cast null;
   }
@@ -91,18 +91,18 @@ class BitmapFontXml {
     var xoffset:Null<Float> = cast _Runtime.UNDEFINED;
     var yoffset:Null<Float> = cast _Runtime.UNDEFINED;
     var xadvance:Null<Float> = cast _Runtime.UNDEFINED;
-    id = (cast getXmlElementAttributeNumber(({ final __callArgument23:Dynamic = element; __callArgument23; }), (cast 'id' : String)) : Null<Float>);
-    x = (cast getXmlElementAttributeNumber(({ final __callArgument24:Dynamic = element; __callArgument24; }), (cast 'x' : String)) : Null<Float>);
-    y = (cast getXmlElementAttributeNumber(({ final __callArgument25:Dynamic = element; __callArgument25; }), (cast 'y' : String)) : Null<Float>);
-    width = (cast getXmlElementAttributeNumber(({ final __callArgument26:Dynamic = element; __callArgument26; }), (cast 'width' : String)) : Null<Float>);
-    height = (cast getXmlElementAttributeNumber(({ final __callArgument27:Dynamic = element; __callArgument27; }), (cast 'height' : String)) : Null<Float>);
-    xoffset = (cast getXmlElementAttributeNumber(({ final __callArgument28:Dynamic = element; __callArgument28; }), (cast 'xoffset' : String)) : Null<Float>);
-    yoffset = (cast getXmlElementAttributeNumber(({ final __callArgument29:Dynamic = element; __callArgument29; }), (cast 'yoffset' : String)) : Null<Float>);
-    xadvance = (cast getXmlElementAttributeNumber(({ final __callArgument30:Dynamic = element; __callArgument30; }), (cast 'xadvance' : String)) : Null<Float>);
+    id = (cast getXmlElementAttributeNumber(({ final __callArgument40:Dynamic = element; __callArgument40; }), (cast 'id' : String)) : Null<Float>);
+    x = (cast getXmlElementAttributeNumber(({ final __callArgument42:Dynamic = element; __callArgument42; }), (cast 'x' : String)) : Null<Float>);
+    y = (cast getXmlElementAttributeNumber(({ final __callArgument44:Dynamic = element; __callArgument44; }), (cast 'y' : String)) : Null<Float>);
+    width = (cast getXmlElementAttributeNumber(({ final __callArgument46:Dynamic = element; __callArgument46; }), (cast 'width' : String)) : Null<Float>);
+    height = (cast getXmlElementAttributeNumber(({ final __callArgument48:Dynamic = element; __callArgument48; }), (cast 'height' : String)) : Null<Float>);
+    xoffset = (cast getXmlElementAttributeNumber(({ final __callArgument50:Dynamic = element; __callArgument50; }), (cast 'xoffset' : String)) : Null<Float>);
+    yoffset = (cast getXmlElementAttributeNumber(({ final __callArgument52:Dynamic = element; __callArgument52; }), (cast 'yoffset' : String)) : Null<Float>);
+    xadvance = (cast getXmlElementAttributeNumber(({ final __callArgument54:Dynamic = element; __callArgument54; }), (cast 'xadvance' : String)) : Null<Float>);
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(id, null) : Bool) || (cast _Runtime.strictEquals(x, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(y, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(width, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(height, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(xoffset, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(yoffset, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(xadvance, null) : Bool)) : Bool)) {
       return cast null;
     }
-    return cast { height: height, id: id, page: _Runtime.coalesce((cast getXmlElementAttributeNumber(({ final __callArgument31:Dynamic = element; __callArgument31; }), (cast 'page' : String)) : Null<Float>), function():Dynamic return cast 0.0), width: width, x: x, xadvance: xadvance, xoffset: xoffset, y: y, yoffset: yoffset };
+    return cast { height: height, id: id, page: _Runtime.coalesce((cast getXmlElementAttributeNumber(({ final __callArgument56:Dynamic = element; __callArgument56; }), (cast 'page' : String)) : Null<Float>), function():Dynamic return cast 0.0), width: width, x: x, xadvance: xadvance, xoffset: xoffset, y: y, yoffset: yoffset };
     return cast null;
   }
 
@@ -110,9 +110,9 @@ class BitmapFontXml {
     var first:Null<Float> = cast _Runtime.UNDEFINED;
     var second:Null<Float> = cast _Runtime.UNDEFINED;
     var amount:Null<Float> = cast _Runtime.UNDEFINED;
-    first = (cast getXmlElementAttributeNumber(({ final __callArgument32:Dynamic = element; __callArgument32; }), (cast 'first' : String)) : Null<Float>);
-    second = (cast getXmlElementAttributeNumber(({ final __callArgument33:Dynamic = element; __callArgument33; }), (cast 'second' : String)) : Null<Float>);
-    amount = (cast getXmlElementAttributeNumber(({ final __callArgument34:Dynamic = element; __callArgument34; }), (cast 'amount' : String)) : Null<Float>);
+    first = (cast getXmlElementAttributeNumber(({ final __callArgument58:Dynamic = element; __callArgument58; }), (cast 'first' : String)) : Null<Float>);
+    second = (cast getXmlElementAttributeNumber(({ final __callArgument60:Dynamic = element; __callArgument60; }), (cast 'second' : String)) : Null<Float>);
+    amount = (cast getXmlElementAttributeNumber(({ final __callArgument62:Dynamic = element; __callArgument62; }), (cast 'amount' : String)) : Null<Float>);
     if ((cast ((cast ((cast _Runtime.strictEquals(first, null) : Bool) || (cast _Runtime.strictEquals(second, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(amount, null) : Bool)) : Bool)) { return cast null; }
     return cast { amount: amount, first: first, second: second };
     return cast null;

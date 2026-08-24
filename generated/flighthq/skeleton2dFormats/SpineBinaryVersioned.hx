@@ -17,15 +17,15 @@ class SpineBinaryVersioned {
     var parser:Null<SpineBinaryParser> = cast _Runtime.UNDEFINED;
     version = (cast getSpineBinaryVersion(({ final __callArgument0:Dynamic = bytes; __callArgument0; })) : Null<String>);
     if ((cast _Runtime.strictEquals(version, null) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument1:Dynamic = diagnostics; __callArgument1; }), ({ final __callArgument2:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument2; }), (cast 'spine.binary-header-unreadable' : String), (cast 'parseSpineSkeletonBinaryVersioned' : String), ({ final __callArgument3:Dynamic = { bytes: _Runtime.field(bytes, 'byteLength') }; __callArgument3; }));
+      reportImportDiagnostic(({ final __callArgument2:Dynamic = diagnostics; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument3; }), (cast 'spine.binary-header-unreadable' : String), (cast 'parseSpineSkeletonBinaryVersioned' : String), ({ final __callArgument4:Dynamic = { bytes: _Runtime.field(bytes, 'byteLength') }; __callArgument4; }));
       return cast null;
     }
     parser = ((cast SpineBinaryVersioned._parsers__spineBinaryVersioned : flighthq._internal._Map<String, SpineBinaryParser>).get((cast toSpineBinaryLayoutKey((cast version : String)) : String)));
     if ((cast _Runtime.strictEquals(parser, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument4:Dynamic = diagnostics; __callArgument4; }), ({ final __callArgument5:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument5; }), (cast 'spine.binary-version-unsupported' : String), (cast 'parseSpineSkeletonBinaryVersioned' : String), ({ final __callArgument6:Dynamic = { version: version }; __callArgument6; }));
+      reportImportDiagnostic(({ final __callArgument8:Dynamic = diagnostics; __callArgument8; }), ({ final __callArgument9:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument9; }), (cast 'spine.binary-version-unsupported' : String), (cast 'parseSpineSkeletonBinaryVersioned' : String), ({ final __callArgument10:Dynamic = { version: version }; __callArgument10; }));
       return cast null;
     }
-    return cast (cast parser(({ final __callArgument7:Dynamic = bytes; __callArgument7; }), ({ final __callArgument8:Dynamic = diagnostics; __callArgument8; })) : Null<Skeleton2DImport>);
+    return cast (cast parser(({ final __callArgument14:Dynamic = bytes; __callArgument14; }), ({ final __callArgument15:Dynamic = diagnostics; __callArgument15; })) : Null<Skeleton2DImport>);
     return cast null;
   }
 

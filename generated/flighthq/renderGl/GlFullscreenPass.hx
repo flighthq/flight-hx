@@ -40,7 +40,7 @@ class GlFullscreenPass {
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
     var textures:Array<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
     var single:Null<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
-    program = (cast createGlProgram(({ final __callArgument1:Dynamic = gl; __callArgument1; }), (cast GlFullscreenPass.FULLSCREEN_VERTEX_SRC__glFullscreenPass : String), (cast fragmentSource : String), (cast 'Fullscreen pass' : String)) : flighthq._internal.dom.WebGLProgram);
+    program = (cast createGlProgram(({ final __callArgument2:Dynamic = gl; __callArgument2; }), (cast GlFullscreenPass.FULLSCREEN_VERTEX_SRC__glFullscreenPass : String), (cast fragmentSource : String), (cast 'Fullscreen pass' : String)) : flighthq._internal.dom.WebGLProgram);
     textures = (cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
@@ -63,19 +63,19 @@ class GlFullscreenPass {
     var destFramebuffer:Null<flighthq._internal.dom.WebGLFramebuffer> = cast _Runtime.UNDEFINED;
     var destWidth:Float = cast _Runtime.UNDEFINED;
     var destHeight:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
     if ((cast !_Runtime.strictEquals(runtime.currentProgram, _Runtime.field(program, 'program')) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.useProgram(gl, _Runtime.field(program, 'program'));
       (runtime.currentProgram = cast (_Runtime.field(program, 'program') : Null<flighthq._internal.dom.WebGLProgram>));
     }
-    destFramebuffer = _Runtime.coalesce(({ final __typedStruct3 = dest; __typedStruct3 == null ? _Runtime.UNDEFINED : (cast __typedStruct3 : { var framebuffer:flighthq._internal.dom.WebGLFramebuffer; }).framebuffer; }), function():Dynamic return cast null);
+    destFramebuffer = _Runtime.coalesce(({ final __typedStruct6 = dest; __typedStruct6 == null ? _Runtime.UNDEFINED : (cast __typedStruct6 : { var framebuffer:flighthq._internal.dom.WebGLFramebuffer; }).framebuffer; }), function():Dynamic return cast null);
     if ((cast !_Runtime.strictEquals(runtime.currentFramebuffer, destFramebuffer) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.bindFramebuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER', flighthq._internal.backend.WebGl2Backend.FRAMEBUFFER), destFramebuffer);
       (runtime.currentFramebuffer = cast (destFramebuffer : Null<flighthq._internal.dom.WebGLFramebuffer>));
     }
-    destWidth = _Runtime.coalesce(({ final __typedStruct4 = dest; __typedStruct4 == null ? _Runtime.UNDEFINED : (cast __typedStruct4 : { var width:Float; }).width; }), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : GlRenderState).canvas, 'width'));
-    destHeight = _Runtime.coalesce(({ final __typedStruct5 = dest; __typedStruct5 == null ? _Runtime.UNDEFINED : (cast __typedStruct5 : { var height:Float; }).height; }), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : GlRenderState).canvas, 'height'));
+    destWidth = _Runtime.coalesce(({ final __typedStruct7 = dest; __typedStruct7 == null ? _Runtime.UNDEFINED : (cast __typedStruct7 : { var width:Float; }).width; }), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : GlRenderState).canvas, 'width'));
+    destHeight = _Runtime.coalesce(({ final __typedStruct8 = dest; __typedStruct8 == null ? _Runtime.UNDEFINED : (cast __typedStruct8 : { var height:Float; }).height; }), function():Dynamic return cast flighthq._internal.backend.CanvasElementBackend.field((cast state : GlRenderState).canvas, 'height'));
     flighthq._internal.backend.WebGl2Backend.viewport(gl, 0.0, 0.0, destWidth, destHeight);
     (runtime.renderTargetViewport = cast (_Runtime.select(dest, function():Dynamic return cast { height: destHeight, width: destWidth, x: 0.0, y: 0.0 }, function():Dynamic return cast null) : Null<GlViewportRect>));
     {
@@ -92,8 +92,8 @@ class GlFullscreenPass {
     flighthq._internal.backend.WebGl2Backend.blendEquation(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FUNC_ADD', flighthq._internal.backend.WebGl2Backend.FUNC_ADD));
     flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flighthq._internal.backend.WebGl2Backend.ONE), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE_MINUS_SRC_ALPHA', flighthq._internal.backend.WebGl2Backend.ONE_MINUS_SRC_ALPHA));
     (runtime.currentBlendMode = cast (null : Null<String>));
-    setUniforms(({ final __callArgument6:Dynamic = gl; __callArgument6; }), ({ final __callArgument7:Dynamic = program; __callArgument7; }));
-    GlFullscreenPass.drawGlFullscreenQuad__glFullscreenPass(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = program; __callArgument9; }));
+    setUniforms(({ final __callArgument9:Dynamic = gl; __callArgument9; }), ({ final __callArgument10:Dynamic = program; __callArgument10; }));
+    GlFullscreenPass.drawGlFullscreenQuad__glFullscreenPass(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = program; __callArgument14; }));
     flighthq._internal.backend.WebGl2Backend.blendEquation(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FUNC_ADD', flighthq._internal.backend.WebGl2Backend.FUNC_ADD));
     flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flighthq._internal.backend.WebGl2Backend.ONE), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE_MINUS_SRC_ALPHA', flighthq._internal.backend.WebGl2Backend.ONE_MINUS_SRC_ALPHA));
     (runtime.currentBlendMode = cast (null : Null<String>));
@@ -113,7 +113,7 @@ class GlFullscreenPass {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var quadVao:Null<flighthq._internal.dom.WebGLVertexArrayObject> = cast _Runtime.UNDEFINED;
     var v:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument17:Dynamic = state; __callArgument17; })) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
     quadVao = ((cast GlFullscreenPass._quadVaos__glFullscreenPass : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, flighthq._internal.dom.WebGLVertexArrayObject>).get(gl));
     if ((cast _Runtime.strictEquals(quadVao, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -147,7 +147,7 @@ class GlFullscreenPass {
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, _Runtime.field(program, 'locTexCoord'), 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 16.0, 8.0);
     flighthq._internal.backend.WebGl2Backend.drawElements(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLES', flighthq._internal.backend.WebGl2Backend.TRIANGLES), 6.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT), 0.0);
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, null);
-    (runtime.shaderLoc = cast ((cast (cast ensureDefaultGlBitmapShader(({ final __callArgument11:Dynamic = state; __callArgument11; })) : GlBitmapShader) : { var locations:GlShaderLocations; }).locations : Null<GlShaderLocations>));
+    (runtime.shaderLoc = cast ((cast (cast ensureDefaultGlBitmapShader(({ final __callArgument19:Dynamic = state; __callArgument19; })) : GlBitmapShader) : { var locations:GlShaderLocations; }).locations : Null<GlShaderLocations>));
   }
 
   public static final _quadVaos__glFullscreenPass:flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, flighthq._internal.dom.WebGLVertexArrayObject> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);

@@ -55,8 +55,8 @@ class StarlingSerialize {
 
   public static function serializeStarlingSpritesheet(data:SpritesheetData, ?existing:{ @:optional var imagePath:Null<String>; @:optional var subTextures:Null<Array<StarlingSubTexture>>; }):String {
     var doc:StarlingDocument = cast _Runtime.UNDEFINED;
-    doc = (cast { imagePath: _Runtime.orValue(_Runtime.orValue(data.imageFile, function():Dynamic return cast ({ final __structural3 = existing; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var imagePath:Null<String>; }).imagePath; })), function():Dynamic return cast ''), subTextures: (cast _Runtime.mapArray((cast data.frames : Array<SpritesheetFrameData>), StarlingSerialize.frameToSubTexture__starlingSerialize, _Runtime.UNDEFINED)) });
-    return cast (cast StarlingSerialize.documentToXml__starlingSerialize(({ final __callArgument4:Dynamic = doc; __callArgument4; })) : String);
+    doc = (cast { imagePath: _Runtime.orValue(_Runtime.orValue(data.imageFile, function():Dynamic return cast ({ final __structural4 = existing; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var imagePath:Null<String>; }).imagePath; })), function():Dynamic return cast ''), subTextures: (cast _Runtime.mapArray((cast data.frames : Array<SpritesheetFrameData>), StarlingSerialize.frameToSubTexture__starlingSerialize, _Runtime.UNDEFINED)) });
+    return cast (cast StarlingSerialize.documentToXml__starlingSerialize(({ final __callArgument5:Dynamic = doc; __callArgument5; })) : String);
     return cast null;
   }
 }

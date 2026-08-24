@@ -39,7 +39,7 @@ class CanvasVignetteEffect {
     color = _Runtime.coalesce(effect.color, function():Dynamic return cast 255.0);
     colorAlpha = ((_Runtime.toInt32(color) & 255) / 255.0);
     darken = HxMath.max(0.0, HxMath.min(1.0, (intensity * colorAlpha)));
-    drawCanvasEffectPass(({ final __callArgument0:Dynamic = dest; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument2:Dynamic = dest; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }), (cast 'none' : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument0:Dynamic = dest; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     ctx = dest.context;
     w = dest.width;
     h = dest.height;
@@ -73,6 +73,6 @@ class CanvasVignetteEffect {
   });
 
   public static function registerCanvasVignetteEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast 'VignetteEffect' : String), ({ final __callArgument3:Dynamic = defaultCanvasVignetteEffectRunner; __callArgument3; }));
+    registerCanvasRenderEffect(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast 'VignetteEffect' : String), ({ final __callArgument5:Dynamic = defaultCanvasVignetteEffectRunner; __callArgument5; }));
   }
 }

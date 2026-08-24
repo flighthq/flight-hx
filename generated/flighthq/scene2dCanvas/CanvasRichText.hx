@@ -44,13 +44,13 @@ class CanvasRichText {
   public static function drawCanvasRichText(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
     CanvasRichText.drawCanvasRichTextField__canvasRichText(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = renderProxy; __callArgument1; }));
     if ((cast ((cast !_Runtime.strictEquals(CanvasRichText._canvasTextInputOverlay__canvasRichText, null) : Bool) && (cast !_Runtime.strictEquals((cast (cast getRichTextRuntime((cast (cast renderProxy : RenderProxy2D).source : RichText)) : RichTextRuntime) : { var input:Null<TextInputState>; }).input, null) : Bool)) : Bool)) {
-      (cast CanvasRichText._canvasTextInputOverlay__canvasRichText : CanvasRenderState->RenderProxy2D->Void)(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = renderProxy; __callArgument3; }));
+      (cast CanvasRichText._canvasTextInputOverlay__canvasRichText : CanvasRenderState->RenderProxy2D->Void)(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = renderProxy; __callArgument5; }));
     }
   }
 
   @:noCompletion
   public static function drawCanvasRichTextMask(state:CanvasRenderState, data:RenderProxy2D):Void {
-    drawCanvasScene2D(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = data; __callArgument5; }));
+    drawCanvasScene2D(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = data; __callArgument9; }));
   }
 
   public static function drawCanvasRichTextField__canvasRichText(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
@@ -69,27 +69,27 @@ class CanvasRichText {
     var scrollYOffset:Float = cast _Runtime.UNDEFINED;
     var scrollXOffset:Float = cast _Runtime.UNDEFINED;
     var bulletLines:flighthq._internal._Set<Float> = cast _Runtime.UNDEFINED;
-    drawCanvasScene2D(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = renderProxy; __callArgument7; }));
+    drawCanvasScene2D(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = renderProxy; __callArgument13; }));
     source = (cast (cast renderProxy : RenderProxy2D).source : RichText);
     data = source.data;
     context = (cast state : CanvasRenderState).context;
     _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast renderProxy : RenderProxy2D).alpha);
-    setCanvasTransform(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = context; __callArgument9; }), (cast renderProxy : RenderProxy2D).transform2D);
-    richTextRuntime = (cast getRichTextRuntime(({ final __callArgument10:Dynamic = source; __callArgument10; })) : RichTextRuntime);
-    content = (cast getRichTextContent(({ final __callArgument11:Dynamic = richTextRuntime; __callArgument11; })) : RichTextContent);
-    computeRichTextContent(({ final __callArgument12:Dynamic = content; __callArgument12; }), ({ final __callArgument13:Dynamic = data; __callArgument13; }), (cast getRichTextPasswordCharacter(({ final __callArgument14:Dynamic = source; __callArgument14; })) : Null<String>));
+    setCanvasTransform(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = context; __callArgument17; }), (cast renderProxy : RenderProxy2D).transform2D);
+    richTextRuntime = (cast getRichTextRuntime(({ final __callArgument20:Dynamic = source; __callArgument20; })) : RichTextRuntime);
+    content = (cast getRichTextContent(({ final __callArgument22:Dynamic = richTextRuntime; __callArgument22; })) : RichTextContent);
+    computeRichTextContent(({ final __callArgument24:Dynamic = content; __callArgument24; }), ({ final __callArgument25:Dynamic = data; __callArgument25; }), (cast getRichTextPasswordCharacter(({ final __callArgument26:Dynamic = source; __callArgument26; })) : Null<String>));
     __destructure0 = content;
     text = __destructure0.text;
     measure = (cast function(t:String, fmt:TextFormat):Float {
-      flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', (cast computeTextFormatFontString(({ final __callArgument15:Dynamic = fmt; __callArgument15; })) : String));
+      flighthq._internal.backend.Canvas2dBackend.setField(context, 'font', (cast computeTextFormatFontString(({ final __callArgument32:Dynamic = fmt; __callArgument32; })) : String));
       return cast (cast flighthq._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([t] : Array<Dynamic>)) : flighthq._internal.dom.TextMetrics).width;
       return cast _Runtime.UNDEFINED;
     });
     result = (cast getTextLayoutResult((cast richTextRuntime : TextLabelRuntime)) : TextLayoutResult);
-    computeTextLayout(({ final __callArgument16:Dynamic = result; __callArgument16; }), ({ final __callArgument17:Dynamic = { text: text, formatRanges: content.formatRanges, width: data.width, height: data.height, measure: measure, multiline: data.multiline, verticalAlign: ((cast _Runtime.strictEquals(data.autoSize, 'none') : Bool) ? (cast data.verticalAlign : Dynamic) : (cast 'top' : Dynamic)), wordWrap: data.wordWrap }; __callArgument17; }));
-    fieldW = (cast computeTextBoundsWidth((cast data : Dynamic), ({ final __callArgument18:Dynamic = result; __callArgument18; })) : Float);
-    fieldH = (cast computeTextBoundsHeight((cast data : Dynamic), ({ final __callArgument19:Dynamic = result; __callArgument19; })) : Float);
+    computeTextLayout(({ final __callArgument34:Dynamic = result; __callArgument34; }), ({ final __callArgument35:Dynamic = { text: text, formatRanges: content.formatRanges, width: data.width, height: data.height, measure: measure, multiline: data.multiline, verticalAlign: ((cast _Runtime.strictEquals(data.autoSize, 'none') : Bool) ? (cast data.verticalAlign : Dynamic) : (cast 'top' : Dynamic)), wordWrap: data.wordWrap }; __callArgument35; }));
+    fieldW = (cast computeTextBoundsWidth((cast data : Dynamic), ({ final __callArgument38:Dynamic = result; __callArgument38; })) : Float);
+    fieldH = (cast computeTextBoundsHeight((cast data : Dynamic), ({ final __callArgument40:Dynamic = result; __callArgument40; })) : Float);
     if ((cast data.background : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', (cast computeRgbHexString((cast data.backgroundColor : Float)) : String));
       flighthq._internal.backend.Canvas2dBackend.call(context, 'fillRect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
@@ -108,7 +108,7 @@ class CanvasRichText {
     flighthq._internal.backend.Canvas2dBackend.call(context, 'rect', cast ([0.0, 0.0, fieldW, fieldH] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.call(context, 'clip', cast ([] : Array<Dynamic>));
     if ((cast ((cast (cast source.data : { var selectable:Bool; }).selectable : Bool) && (cast !_Runtime.strictEquals(richTextRuntime.selectionBeginIndex, richTextRuntime.selectionEndIndex) : Bool)) : Bool)) {
-      getRichTextSelectionRectangles(({ final __callArgument20:Dynamic = CanvasRichText._richTextSelectionRectangles__canvasRichText; __callArgument20; }), (cast richTextRuntime.selectionBeginIndex : Float), (cast richTextRuntime.selectionEndIndex : Float), ({ final __callArgument21:Dynamic = result; __callArgument21; }));
+      getRichTextSelectionRectangles(({ final __callArgument42:Dynamic = CanvasRichText._richTextSelectionRectangles__canvasRichText; __callArgument42; }), (cast richTextRuntime.selectionBeginIndex : Float), (cast richTextRuntime.selectionEndIndex : Float), ({ final __callArgument43:Dynamic = result; __callArgument43; }));
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'fillStyle', CanvasRichText.SELECTION_COLOR__canvasRichText);
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', HxMath.min(1.0, ((cast renderProxy : RenderProxy2D).alpha * CanvasRichText.SELECTION_ALPHA__canvasRichText)));
       for (rectangle in _Runtime.iterable(CanvasRichText._richTextSelectionRectangles__canvasRichText)) {

@@ -82,7 +82,7 @@ class Ipc {
   public static function getIpcListenerCount(channel:flighthq._internal._Union2<String, IpcChannel>):Float {
     var name:String = cast _Runtime.UNDEFINED;
     name = (cast Ipc.resolveChannel__ipc(({ final __callArgument0:Dynamic = channel; __callArgument0; })) : String);
-    return cast _Runtime.coalesce(({ final __collection1:Dynamic = ((cast Ipc._listeners__ipc : flighthq._internal._Map<String, flighthq._internal._Set<Void->Void>>).get(name)); __collection1 == null ? _Runtime.UNDEFINED : (cast __collection1 : flighthq._internal._Set<Void->Void>).size; }), function():Dynamic return cast 0.0);
+    return cast _Runtime.coalesce(({ final __collection2:Dynamic = ((cast Ipc._listeners__ipc : flighthq._internal._Map<String, flighthq._internal._Set<Void->Void>>).get(name)); __collection2 == null ? _Runtime.UNDEFINED : (cast __collection2 : flighthq._internal._Set<Void->Void>).size; }), function():Dynamic return cast 0.0);
     return cast null;
   }
 
@@ -98,7 +98,7 @@ class Ipc {
   }
 
   public static function invokeIpc(channel:flighthq._internal._Union2<String, IpcChannel>, ...args:flighthq._internal._Any):flighthq._internal._Promise<flighthq._internal._Any> {
-    return cast (cast (cast getIpcBackend() : IpcBackend) : IpcBackend).invoke((cast (cast Ipc.resolveChannel__ipc(({ final __callArgument2:Dynamic = channel; __callArgument2; })) : String) : String), ({ final __callArgument3:Dynamic = args; __callArgument3; }));
+    return cast (cast (cast getIpcBackend() : IpcBackend) : IpcBackend).invoke((cast (cast Ipc.resolveChannel__ipc(({ final __callArgument3:Dynamic = channel; __callArgument3; })) : String) : String), ({ final __callArgument5:Dynamic = args; __callArgument5; }));
     return cast null;
   }
 
@@ -106,8 +106,8 @@ class Ipc {
     var name:String = cast _Runtime.UNDEFINED;
     var invoke:flighthq._internal._Promise<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     var timeout:flighthq._internal._Promise<flighthq._internal._Any> = cast _Runtime.UNDEFINED;
-    name = (cast Ipc.resolveChannel__ipc(({ final __callArgument4:Dynamic = channel; __callArgument4; })) : String);
-    invoke = (cast (cast getIpcBackend() : IpcBackend) : IpcBackend).invoke((cast name : String), ({ final __callArgument5:Dynamic = args; __callArgument5; }));
+    name = (cast Ipc.resolveChannel__ipc(({ final __callArgument6:Dynamic = channel; __callArgument6; })) : String);
+    invoke = (cast (cast getIpcBackend() : IpcBackend) : IpcBackend).invoke((cast name : String), ({ final __callArgument8:Dynamic = args; __callArgument8; }));
     timeout = flighthq._internal._Async.create(function(_:flighthq._internal._Any, reject:flighthq._internal._Any):Void {
       var id:flighthq._internal.dom.Timeout = cast _Runtime.UNDEFINED;
       id = _Runtime.setTimeout(function():Void { reject((cast new IpcTimeoutError(name, timeoutMs) : flighthq._internal._Any)); }, timeoutMs);
@@ -120,10 +120,10 @@ class Ipc {
   public static function onceIpcMessage(channel:flighthq._internal._Union2<String, IpcChannel>, listener:Array<flighthq._internal._Any>->Void):Void->Void {
     var unsubscribe:Null<Void->Void> = cast _Runtime.UNDEFINED;
     unsubscribe = null;
-    (unsubscribe = cast ((cast onIpcMessage(({ final __callArgument6:Dynamic = channel; __callArgument6; }), ({ final __callArgument7:Dynamic = _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
+    (unsubscribe = cast ((cast onIpcMessage(({ final __callArgument9:Dynamic = channel; __callArgument9; }), ({ final __callArgument10:Dynamic = _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void {
       _Runtime.callOptionalValue(unsubscribe, cast ([] : Array<Dynamic>));
       _Runtime.callHaxeRestValue(listener, _Runtime.concatArrays([_Runtime.toArray(args)]), 0);
-    }, 0); __callArgument7; })) : Void->Void) : Dynamic));
+    }, 0); __callArgument10; })) : Void->Void) : Dynamic));
     return cast unsubscribe;
     return cast null;
   }
@@ -134,7 +134,7 @@ class Ipc {
     if ((cast !_Runtime.strictEquals(_Runtime.typeofValue((cast backend : IpcBackend).handle), 'function') : Bool)) { return cast function():Void {
 
     }; }
-    return cast (cast backend : IpcBackend).handle((cast (cast Ipc.resolveChannel__ipc(({ final __callArgument8:Dynamic = channel; __callArgument8; })) : String) : String), ({ final __callArgument9:Dynamic = handler; __callArgument9; }));
+    return cast (cast backend : IpcBackend).handle((cast (cast Ipc.resolveChannel__ipc(({ final __callArgument13:Dynamic = channel; __callArgument13; })) : String) : String), ({ final __callArgument15:Dynamic = handler; __callArgument15; }));
     return cast null;
   }
 
@@ -144,18 +144,18 @@ class Ipc {
     var signals:Null<IpcSignals> = cast _Runtime.UNDEFINED;
     var unsubscribe:Void->Void = cast _Runtime.UNDEFINED;
     var tracked:Void->Void = cast _Runtime.UNDEFINED;
-    name = (cast Ipc.resolveChannel__ipc(({ final __callArgument10:Dynamic = channel; __callArgument10; })) : String);
+    name = (cast Ipc.resolveChannel__ipc(({ final __callArgument16:Dynamic = channel; __callArgument16; })) : String);
     backend = (cast getIpcBackend() : IpcBackend);
     signals = Ipc._ipcSignals__ipc;
-    unsubscribe = (cast backend : IpcBackend).subscribe((cast name : String), ({ final __callArgument11:Dynamic = function(args:Array<flighthq._internal._Any>):Void {
+    unsubscribe = (cast backend : IpcBackend).subscribe((cast name : String), ({ final __callArgument18:Dynamic = function(args:Array<flighthq._internal._Any>):Void {
       if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : { var onChannelMessage:Signal<String->Void>; }).onChannelMessage], [name]]), 1); }
       _Runtime.callHaxeRestValue(listener, _Runtime.concatArrays([_Runtime.toArray(args)]), 0);
-    }; __callArgument11; }));
+    }; __callArgument18; }));
     tracked = (cast function():Void {
       unsubscribe();
-      Ipc._untrackListener__ipc((cast name : String), ({ final __callArgument12:Dynamic = tracked; __callArgument12; }));
+      Ipc._untrackListener__ipc((cast name : String), ({ final __callArgument19:Dynamic = tracked; __callArgument19; }));
     });
-    Ipc._trackListener__ipc((cast name : String), ({ final __callArgument13:Dynamic = tracked; __callArgument13; }));
+    Ipc._trackListener__ipc((cast name : String), ({ final __callArgument21:Dynamic = tracked; __callArgument21; }));
     return cast tracked;
     return cast null;
   }
@@ -166,10 +166,10 @@ class Ipc {
     var signals:Null<IpcSignals> = cast _Runtime.UNDEFINED;
     var unsubscribe:Void->Void = cast _Runtime.UNDEFINED;
     var tracked:Void->Void = cast _Runtime.UNDEFINED;
-    name = (cast Ipc.resolveChannel__ipc(({ final __callArgument14:Dynamic = channel; __callArgument14; })) : String);
+    name = (cast Ipc.resolveChannel__ipc(({ final __callArgument23:Dynamic = channel; __callArgument23; })) : String);
     backend = (cast getIpcBackend() : IpcBackend);
     signals = Ipc._ipcSignals__ipc;
-    unsubscribe = (cast backend : IpcBackend).subscribe((cast name : String), ({ final __callArgument16:Dynamic = function(args:Array<flighthq._internal._Any>):Void {
+    unsubscribe = (cast backend : IpcBackend).subscribe((cast name : String), ({ final __callArgument27:Dynamic = function(args:Array<flighthq._internal._Any>):Void {
       var event:IpcMessageEvent = cast _Runtime.UNDEFINED;
       if ((cast !_Runtime.strictEquals(signals, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast signals : { var onChannelMessage:Signal<String->Void>; }).onChannelMessage], [name]]), 1); }
       event = (cast { channel: name, senderId: -1.0, args: args, reply: _Runtime.haxeRest(function(...replyArgs:flighthq._internal._Any):Void {
@@ -177,20 +177,20 @@ class Ipc {
         if ((cast _Runtime.strictEquals((cast __thisValue2 : { var senderId:Float; }).senderId, -1.0) : Bool)) { return; }
         _Runtime.callOptionalValue((cast backend : IpcBackend).sendTo, cast ([{ windowId: (cast __thisValue2 : { var senderId:Float; }).senderId }, name, replyArgs] : Array<Dynamic>));
       }, 0) });
-      listener(({ final __callArgument15:Dynamic = event; __callArgument15; }));
-    }; __callArgument16; }));
+      listener(({ final __callArgument25:Dynamic = event; __callArgument25; }));
+    }; __callArgument27; }));
     tracked = (cast function():Void {
       unsubscribe();
-      Ipc._untrackListener__ipc((cast name : String), ({ final __callArgument17:Dynamic = tracked; __callArgument17; }));
+      Ipc._untrackListener__ipc((cast name : String), ({ final __callArgument28:Dynamic = tracked; __callArgument28; }));
     });
-    Ipc._trackListener__ipc((cast name : String), ({ final __callArgument18:Dynamic = tracked; __callArgument18; }));
+    Ipc._trackListener__ipc((cast name : String), ({ final __callArgument30:Dynamic = tracked; __callArgument30; }));
     return cast tracked;
     return cast null;
   }
 
   public static function removeAllIpcListeners(?channel:flighthq._internal._Union2<String, IpcChannel>):Void {
     if ((cast !_Runtime.strictEquals(channel, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var name:String = (cast Ipc.resolveChannel__ipc(({ final __callArgument19:Dynamic = channel; __callArgument19; })) : String);
+      var name:String = (cast Ipc.resolveChannel__ipc(({ final __callArgument32:Dynamic = channel; __callArgument32; })) : String);
       var set:Null<flighthq._internal._Set<Void->Void>> = ((cast Ipc._listeners__ipc : flighthq._internal._Map<String, flighthq._internal._Set<Void->Void>>).get(name));
       if ((cast !_Runtime.strictEquals(set, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         for (unsubscribe in _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray(set)]))) {
@@ -213,11 +213,11 @@ class Ipc {
   }
 
   public static function sendIpcMessage(channel:flighthq._internal._Union2<String, IpcChannel>, ...args:flighthq._internal._Any):Void {
-    (cast (cast getIpcBackend() : IpcBackend) : IpcBackend).send((cast (cast Ipc.resolveChannel__ipc(({ final __callArgument26:Dynamic = channel; __callArgument26; })) : String) : String), ({ final __callArgument27:Dynamic = args; __callArgument27; }));
+    (cast (cast getIpcBackend() : IpcBackend) : IpcBackend).send((cast (cast Ipc.resolveChannel__ipc(({ final __callArgument40:Dynamic = channel; __callArgument40; })) : String) : String), ({ final __callArgument42:Dynamic = args; __callArgument42; }));
   }
 
   public static function sendIpcMessageTo(target:IpcTarget, channel:flighthq._internal._Union2<String, IpcChannel>, ...args:flighthq._internal._Any):Void {
-    _Runtime.callOptionalValue((cast (cast getIpcBackend() : IpcBackend) : IpcBackend).sendTo, cast ([target, (cast Ipc.resolveChannel__ipc(({ final __callArgument28:Dynamic = channel; __callArgument28; })) : String), args] : Array<Dynamic>));
+    _Runtime.callOptionalValue((cast (cast getIpcBackend() : IpcBackend) : IpcBackend).sendTo, cast ([target, (cast Ipc.resolveChannel__ipc(({ final __callArgument43:Dynamic = channel; __callArgument43; })) : String), args] : Array<Dynamic>));
   }
 
   @:noCompletion

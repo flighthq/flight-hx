@@ -21,20 +21,20 @@ class EnableGlRenderEffectGuards {
 
   public static function disableGlRenderEffectGuards(state:GlRenderState):Void {
     setGlRenderEffectApplicationGuard(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast null : Dynamic));
-    setGlCustomShaderSourceGuard(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast null : Dynamic));
-    setGlRenderEffectPipelineSkipGuard(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast null : Dynamic));
+    setGlCustomShaderSourceGuard(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast null : Dynamic));
+    setGlRenderEffectPipelineSkipGuard(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast null : Dynamic));
     ((cast EnableGlRenderEffectGuards._guardedStates__enableGlRenderEffectGuards : flighthq._internal._WeakSet<GlRenderState>).delete_(state));
   }
 
   public static function enableGlRenderEffectGuards(state:GlRenderState):Void {
-    setGlRenderEffectApplicationGuard(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast EnableGlRenderEffectGuards.warnGlRenderEffectApplication__enableGlRenderEffectGuards : Dynamic));
-    setGlCustomShaderSourceGuard(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast EnableGlRenderEffectGuards.warnGlCustomShaderSourceReregistered__enableGlRenderEffectGuards : Dynamic));
-    setGlRenderEffectPipelineSkipGuard(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast EnableGlRenderEffectGuards.warnGlRenderEffectPipelineSkip__enableGlRenderEffectGuards : Dynamic));
+    setGlRenderEffectApplicationGuard(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast EnableGlRenderEffectGuards.warnGlRenderEffectApplication__enableGlRenderEffectGuards : Dynamic));
+    setGlCustomShaderSourceGuard(({ final __callArgument8:Dynamic = state; __callArgument8; }), (cast EnableGlRenderEffectGuards.warnGlCustomShaderSourceReregistered__enableGlRenderEffectGuards : Dynamic));
+    setGlRenderEffectPipelineSkipGuard(({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast EnableGlRenderEffectGuards.warnGlRenderEffectPipelineSkip__enableGlRenderEffectGuards : Dynamic));
     ((cast EnableGlRenderEffectGuards._guardedStates__enableGlRenderEffectGuards : flighthq._internal._WeakSet<GlRenderState>).add(state));
   }
 
   public static function warnGlCustomShaderSourceReregistered__enableGlRenderEffectGuards(_state:GlRenderState, shaderKey:String, _previousSource:String, _nextSource:String):Void {
-    (cast logOnce((cast 'effects-gl:custom-shader-source-reregistered:' + Std.string(shaderKey) + '' : String), ({ final __callArgument6:Dynamic = LogLevel.Warn; __callArgument6; }), (cast { message: 'registerGlCustomShaderSource: shaderKey "' + Std.string(shaderKey) + '" already held DIFFERENT source, and the compiled program is cached by key — the new source will NOT run and the effect keeps drawing with the old one; register edited source under a new key and point the effect at it', shaderKey: shaderKey } : Dynamic), ({ final __callArgument7:Dynamic = 'effects-gl'; __callArgument7; })) : Bool);
+    (cast logOnce((cast 'effects-gl:custom-shader-source-reregistered:' + Std.string(shaderKey) + '' : String), ({ final __callArgument12:Dynamic = LogLevel.Warn; __callArgument12; }), (cast { message: 'registerGlCustomShaderSource: shaderKey "' + Std.string(shaderKey) + '" already held DIFFERENT source, and the compiled program is cached by key — the new source will NOT run and the effect keeps drawing with the old one; register edited source under a new key and point the effect at it', shaderKey: shaderKey } : Dynamic), ({ final __callArgument13:Dynamic = 'effects-gl'; __callArgument13; })) : Bool);
   }
 
   public static function getGlRenderEffectApplicationMessage__enableGlRenderEffectGuards(explanation:GlRenderEffectApplicationExplanation):String {
@@ -63,11 +63,11 @@ class EnableGlRenderEffectGuards {
   }
 
   public static function warnGlRenderEffectApplication__enableGlRenderEffectGuards(_state:GlRenderState, explanation:GlRenderEffectApplicationExplanation):Void {
-    (cast logOnce((cast 'effects-gl:effect-application:' + Std.string(explanation.status) + ':' + Std.string(_Runtime.join(explanation.unregisteredKinds, ',')) + ':' + Std.string(_Runtime.join(explanation.unresolvedIndexes, ',')) + '' : String), ({ final __callArgument8:Dynamic = LogLevel.Warn; __callArgument8; }), (cast { message: (cast EnableGlRenderEffectGuards.getGlRenderEffectApplicationMessage__enableGlRenderEffectGuards(({ final __callArgument9:Dynamic = explanation; __callArgument9; })) : String), registeredCount: explanation.registeredCount, requestedCount: explanation.requestedCount, status: explanation.status, unregisteredKinds: explanation.unregisteredKinds } : Dynamic), ({ final __callArgument10:Dynamic = 'effects-gl'; __callArgument10; })) : Bool);
+    (cast logOnce((cast 'effects-gl:effect-application:' + Std.string(explanation.status) + ':' + Std.string(_Runtime.join(explanation.unregisteredKinds, ',')) + ':' + Std.string(_Runtime.join(explanation.unresolvedIndexes, ',')) + '' : String), ({ final __callArgument16:Dynamic = LogLevel.Warn; __callArgument16; }), (cast { message: (cast EnableGlRenderEffectGuards.getGlRenderEffectApplicationMessage__enableGlRenderEffectGuards(({ final __callArgument17:Dynamic = explanation; __callArgument17; })) : String), registeredCount: explanation.registeredCount, requestedCount: explanation.requestedCount, status: explanation.status, unregisteredKinds: explanation.unregisteredKinds } : Dynamic), ({ final __callArgument19:Dynamic = 'effects-gl'; __callArgument19; })) : Bool);
   }
 
   public static function warnGlRenderEffectPipelineSkip__enableGlRenderEffectGuards(_state:GlRenderState, kind:String):Void {
-    (cast logOnce((cast 'effects-gl:pipeline-effect-skipped:' + Std.string(kind) + '' : String), ({ final __callArgument11:Dynamic = LogLevel.Warn; __callArgument11; }), (cast { kind: kind, message: 'endGlRenderEffectPipeline: effect kind "' + Std.string(kind) + '" has no registered runner, so the pass was SKIPPED — the frame was written without it and nothing else reports this; call registerGlRenderEffect(state, "' + Std.string(kind) + '", runner), or check whether this kind has a runner on this backend at all' } : Dynamic), ({ final __callArgument12:Dynamic = 'effects-gl'; __callArgument12; })) : Bool);
+    (cast logOnce((cast 'effects-gl:pipeline-effect-skipped:' + Std.string(kind) + '' : String), ({ final __callArgument24:Dynamic = LogLevel.Warn; __callArgument24; }), (cast { kind: kind, message: 'endGlRenderEffectPipeline: effect kind "' + Std.string(kind) + '" has no registered runner, so the pass was SKIPPED — the frame was written without it and nothing else reports this; call registerGlRenderEffect(state, "' + Std.string(kind) + '", runner), or check whether this kind has a runner on this backend at all' } : Dynamic), ({ final __callArgument25:Dynamic = 'effects-gl'; __callArgument25; })) : Bool);
   }
 
   public static final _guardedStates__enableGlRenderEffectGuards:flighthq._internal._WeakSet<GlRenderState> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);

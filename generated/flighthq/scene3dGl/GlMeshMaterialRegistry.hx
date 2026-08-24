@@ -22,29 +22,29 @@ class GlMeshMaterialRegistry {
   @:noCompletion
   public static function getGlMeshMaterialRenderer(state:GlRenderState, kind:Kind):Null<GlMeshMaterialRenderer> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlMeshMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var meshMaterialRenderers:KeyedTable<GlMeshMaterialRenderer>; }).meshMaterialRenderers : KeyedTable<GlMeshMaterialRenderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlMeshMaterialRenderer>>).get(kind));
-    return cast ((cast _Runtime.strictEquals(({ final __structural2 = entry; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:GlMeshMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
+    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var meshMaterialRenderers:KeyedTable<GlMeshMaterialRenderer>; }).meshMaterialRenderers : KeyedTable<GlMeshMaterialRenderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlMeshMaterialRenderer>>).get(kind));
+    return cast ((cast _Runtime.strictEquals(({ final __structural4 = entry; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:GlMeshMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   @:noCompletion
   public static function registerGlMeshMaterialRenderer(state:GlRenderState, kind:Kind, renderer:GlMeshMaterialRenderer):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : GlRenderStateRuntime);
-    ((cast runtime.registries : { var meshMaterialRenderers:KeyedTable<GlMeshMaterialRenderer>; }).meshMaterialRenderers = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var meshMaterialRenderers:KeyedTable<GlMeshMaterialRenderer>; }).meshMaterialRenderers : Dynamic), (cast kind : String), ({ final __callArgument4:Dynamic = renderer; __callArgument4; })) : KeyedTable<GlMeshMaterialRenderer>) : KeyedTable<GlMeshMaterialRenderer>));
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlRenderStateRuntime);
+    ((cast runtime.registries : { var meshMaterialRenderers:KeyedTable<GlMeshMaterialRenderer>; }).meshMaterialRenderers = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var meshMaterialRenderers:KeyedTable<GlMeshMaterialRenderer>; }).meshMaterialRenderers : Dynamic), (cast kind : String), ({ final __callArgument7:Dynamic = renderer; __callArgument7; })) : KeyedTable<GlMeshMaterialRenderer>) : KeyedTable<GlMeshMaterialRenderer>));
   }
 
   @:noCompletion
   public static function resolveGlMeshMaterialRenderer(state:GlRenderState, material:Null<Material>):Null<GlMeshMaterialRenderer> {
     var entries:flighthq._internal._Map<String, RegistryTableEntry<GlMeshMaterialRenderer>> = cast _Runtime.UNDEFINED;
     var fallback:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlMeshMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
-    entries = (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var meshMaterialRenderers:KeyedTable<GlMeshMaterialRenderer>; }).meshMaterialRenderers : KeyedTable<GlMeshMaterialRenderer>).entries;
+    entries = (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var meshMaterialRenderers:KeyedTable<GlMeshMaterialRenderer>; }).meshMaterialRenderers : KeyedTable<GlMeshMaterialRenderer>).entries;
     if ((cast !_Runtime.strictEquals(material, null) : Bool)) {
       var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlMeshMaterialRenderer; }>> = ((cast entries : flighthq._internal._Map<String, RegistryTableEntry<GlMeshMaterialRenderer>>).get(_Runtime.field(material, 'kind')));
-      if ((cast _Runtime.strictEquals(({ final __structural6 = entry; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { return cast (cast entry : { var state:String; var value:GlMeshMaterialRenderer; }).value; }
+      if ((cast _Runtime.strictEquals(({ final __structural11 = entry; __structural11 == null ? _Runtime.UNDEFINED : (cast __structural11 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { return cast (cast entry : { var state:String; var value:GlMeshMaterialRenderer; }).value; }
     }
     fallback = ((cast entries : flighthq._internal._Map<String, RegistryTableEntry<GlMeshMaterialRenderer>>).get(StandardMaterialKindValue));
-    return cast ((cast _Runtime.strictEquals(({ final __structural7 = fallback; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast fallback : { var state:String; var value:GlMeshMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
+    return cast ((cast _Runtime.strictEquals(({ final __structural12 = fallback; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast fallback : { var state:String; var value:GlMeshMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 }

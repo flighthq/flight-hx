@@ -26,11 +26,11 @@ class DetectImageMimeType {
     if ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast 16.0 : Float)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 4.0 : Float)), 102.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 5.0 : Float)), 116.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 6.0 : Float)), 121.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 7.0 : Float)), 112.0) : Bool)) : Bool)) { return cast false; }
     boxSize = ((((flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 0.0 : Float)) * 16777216.0) + (flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 1.0 : Float)) * 65536.0)) + (flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 2.0 : Float)) * 256.0)) + flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 3.0 : Float)));
     if ((cast ((cast ((cast ((cast boxSize : Float) < (cast 16.0 : Float)) : Bool) || (cast ((cast boxSize : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.fmod((boxSize - 16.0), 4.0), 0.0) : Bool)) : Bool)) { return cast false; }
-    if ((cast (cast DetectImageMimeType.isAvifBrand__detectImageMimeType(({ final __callArgument1:Dynamic = bytes; __callArgument1; }), (cast 8.0 : Float)) : Bool) : Bool)) { return cast true; }
+    if ((cast (cast DetectImageMimeType.isAvifBrand__detectImageMimeType(({ final __callArgument2:Dynamic = bytes; __callArgument2; }), (cast 8.0 : Float)) : Bool) : Bool)) { return cast true; }
     {
       var offset:Float = 16.0;
       while ((cast ((cast offset : Float) < (cast boxSize : Float)) : Bool)) {
-        if ((cast (cast DetectImageMimeType.isAvifBrand__detectImageMimeType(({ final __callArgument2:Dynamic = bytes; __callArgument2; }), (cast offset : Float)) : Bool) : Bool)) { return cast true; }
+        if ((cast (cast DetectImageMimeType.isAvifBrand__detectImageMimeType(({ final __callArgument4:Dynamic = bytes; __callArgument4; }), (cast offset : Float)) : Bool) : Bool)) { return cast true; }
         (offset = cast ((offset + 4.0) : Dynamic));
       }
     }

@@ -24,7 +24,7 @@ class Scale9Shape {
 
   @:noCompletion
   public static function createScale9ShapeData(scale9Grid:RectangleLike, ?data:{ @:optional var scale9Grid:Null<RectangleLike>; @:optional var commands:Null<Array<ShapeCommandToken>>; }):Scale9ShapeData {
-    return cast { commands: _Runtime.coalesce(({ final __structural1 = data; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), scale9Grid: scale9Grid };
+    return cast { commands: _Runtime.coalesce(({ final __structural4 = data; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), scale9Grid: scale9Grid };
     return cast null;
   }
 
@@ -36,7 +36,7 @@ class Scale9Shape {
 
   @:noCompletion
   public static function getScale9ShapeRuntime(source:flighthq.types.Scale9Shape):Scale9ShapeRuntime {
-    return cast (cast getNode2DRuntime(({ final __callArgument2:Dynamic = source; __callArgument2; })) : Scale9ShapeRuntime);
+    return cast (cast getNode2DRuntime(({ final __callArgument5:Dynamic = source; __callArgument5; })) : Scale9ShapeRuntime);
     return cast null;
   }
 }

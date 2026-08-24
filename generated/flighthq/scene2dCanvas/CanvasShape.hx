@@ -40,26 +40,26 @@ class CanvasShape {
     context = (cast state : CanvasRenderState).context;
     _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(context, 'globalAlpha', (cast renderProxy : RenderProxy2D).alpha);
-    setCanvasTransform(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = context; __callArgument3; }), (cast renderProxy : RenderProxy2D).transform2D);
-    renderCanvasShapeCommands(({ final __callArgument4:Dynamic = context; __callArgument4; }), ({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = commands; __callArgument6; }), (cast getCanvasRenderStateTextureResolvers(({ final __callArgument7:Dynamic = state; __callArgument7; })) : CanvasTextureResolvers));
+    setCanvasTransform(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = context; __callArgument5; }), (cast renderProxy : RenderProxy2D).transform2D);
+    renderCanvasShapeCommands(({ final __callArgument8:Dynamic = context; __callArgument8; }), ({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = commands; __callArgument10; }), (cast getCanvasRenderStateTextureResolvers(({ final __callArgument11:Dynamic = state; __callArgument11; })) : CanvasTextureResolvers));
   }
 
   @:noCompletion
   public static function renderCanvasShapeCommands(context:flighthq._internal.dom.CanvasRenderingContext2D, state:RenderState, commands:Array<flighthq._internal._Any>, resolvers:CanvasTextureResolvers):Void {
     var drawState:CanvasShapeDrawState = cast _Runtime.UNDEFINED;
     var i:Float = cast _Runtime.UNDEFINED;
-    drawState = (cast CanvasShape.createCanvasShapeDrawState__canvasShape(({ final __callArgument8:Dynamic = context; __callArgument8; }), ({ final __callArgument9:Dynamic = resolvers; __callArgument9; }), (cast (cast state : RenderState).allowSmoothing : Bool)) : CanvasShapeDrawState);
+    drawState = (cast CanvasShape.createCanvasShapeDrawState__canvasShape(({ final __callArgument18:Dynamic = context; __callArgument18; }), ({ final __callArgument19:Dynamic = resolvers; __callArgument19; }), (cast (cast state : RenderState).allowSmoothing : Bool)) : CanvasShapeDrawState);
     flighthq._internal.backend.Canvas2dBackend.call(context, 'beginPath', cast ([] : Array<Dynamic>));
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(commands, 'length') : Float)) : Bool)) {
       var key:String = (cast flighthq._internal._StaticIndex.readArray(commands, i) : String);
       var argCount:Float = (cast flighthq._internal._StaticIndex.readArray(commands, (i + 1.0)) : Float);
-      var def:Null<CanvasShapeCommand<String>> = (cast getCanvasShapeCommand(({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast key : String)) : Null<CanvasShapeCommand<String>>);
-      if ((cast !_Runtime.strictEquals(def, null) : Bool)) { (cast def : CanvasShapeCommand<String>).draw(({ final __callArgument11:Dynamic = context; __callArgument11; }), ({ final __callArgument12:Dynamic = drawState; __callArgument12; }), ({ final __callArgument13:Dynamic = commands; __callArgument13; }), (cast (i + 2.0) : Float)); } else { _Runtime.callOptionalValue((cast (cast getRenderStateRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : RenderStateRuntime) : { var registryMiss:Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss, cast ([RenderRegistry.ShapeCommandHandler, key] : Array<Dynamic>)); }
+      var def:Null<CanvasShapeCommand<String>> = (cast getCanvasShapeCommand(({ final __callArgument22:Dynamic = state; __callArgument22; }), (cast key : String)) : Null<CanvasShapeCommand<String>>);
+      if ((cast !_Runtime.strictEquals(def, null) : Bool)) { (cast def : CanvasShapeCommand<String>).draw(({ final __callArgument24:Dynamic = context; __callArgument24; }), ({ final __callArgument25:Dynamic = drawState; __callArgument25; }), ({ final __callArgument26:Dynamic = commands; __callArgument26; }), (cast (i + 2.0) : Float)); } else { _Runtime.callOptionalValue((cast (cast getRenderStateRuntime(({ final __callArgument31:Dynamic = state; __callArgument31; })) : RenderStateRuntime) : { var registryMiss:Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss, cast ([RenderRegistry.ShapeCommandHandler, key] : Array<Dynamic>)); }
       (i = cast ((i + (argCount + 2.0)) : Dynamic));
     }
     if ((cast ((cast drawState.hasPendingPath : Bool) && (cast _Runtime.orValue(drawState.hasFill, function():Dynamic return cast drawState.hasStroke) : Bool)) : Bool)) {
-      CanvasShape.flushCanvasShapePath__canvasShape(({ final __callArgument17:Dynamic = context; __callArgument17; }), ({ final __callArgument18:Dynamic = drawState; __callArgument18; }));
+      CanvasShape.flushCanvasShapePath__canvasShape(({ final __callArgument33:Dynamic = context; __callArgument33; }), ({ final __callArgument34:Dynamic = drawState; __callArgument34; }));
     }
   }
 
@@ -69,7 +69,7 @@ class CanvasShape {
 
   public static function createCanvasShapeDrawState__canvasShape(context:flighthq._internal.dom.CanvasRenderingContext2D, resolvers:CanvasTextureResolvers, allowSmoothing:Bool):CanvasShapeDrawState {
     var state:CanvasShapeDrawState = cast _Runtime.UNDEFINED;
-    state = (cast { allowSmoothing: allowSmoothing, bitmapH: 0.0, bitmapSrc: null, bitmapW: 0.0, canvasTextureResolvers: resolvers, fillMatrix: null, fillMatrixInverse: null, fillStyle: '', hasFill: false, hasPendingPath: false, hasCurrentPoint: false, hasStroke: false, strokeStyle: '', strokeWidth: 1.0, windingRule: 'evenodd', flush: function():Void { CanvasShape.flushCanvasShapePath__canvasShape(({ final __callArgument19:Dynamic = context; __callArgument19; }), ({ final __callArgument20:Dynamic = state; __callArgument20; })); } });
+    state = (cast { allowSmoothing: allowSmoothing, bitmapH: 0.0, bitmapSrc: null, bitmapW: 0.0, canvasTextureResolvers: resolvers, fillMatrix: null, fillMatrixInverse: null, fillStyle: '', hasFill: false, hasPendingPath: false, hasCurrentPoint: false, hasStroke: false, strokeStyle: '', strokeWidth: 1.0, windingRule: 'evenodd', flush: function():Void { CanvasShape.flushCanvasShapePath__canvasShape(({ final __callArgument37:Dynamic = context; __callArgument37; }), ({ final __callArgument38:Dynamic = state; __callArgument38; })); } });
     return cast state;
     return cast null;
   }

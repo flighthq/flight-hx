@@ -25,12 +25,12 @@ class GlShapeMesh {
     var nodeAlpha:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(meshes, 'length'), 0.0) : Bool)) { return; }
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime);
-    flushGlQuadBatchWriter(({ final __callArgument1:Dynamic = state; __callArgument1; }));
+    flushGlQuadBatchWriter(({ final __callArgument2:Dynamic = state; __callArgument2; }));
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.useProgram(gl, binding.program);
     (runtime.currentProgram = cast (binding.program : Null<flighthq._internal.dom.WebGLProgram>));
     _Runtime.callOptionalValue((cast state : GlRenderState).applyBlendMode, cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
-    flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, binding.matrixLocation, false, (cast GlShapeMesh.shapeMeshMatrix__glShapeMesh(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = renderProxy; __callArgument3; })) : flighthq._internal._Float32Array));
+    flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, binding.matrixLocation, false, (cast GlShapeMesh.shapeMeshMatrix__glShapeMesh(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = renderProxy; __callArgument5; })) : flighthq._internal._Float32Array));
     _Runtime.callOptionalValue(onProgramBound, cast ([state] : Array<Dynamic>));
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), binding.vertexBuffer);
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, binding.positionLocation);
@@ -62,12 +62,12 @@ class GlShapeMesh {
   public static function drawGlShapeMeshes(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.GlShapeMesh>):Void {
     var fold:Null<GlColorAdjustmentMaterialFeature> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(meshes, 'length'), 0.0) : Bool)) { return; }
-    fold = (cast getGlColorAdjustmentMaterialFeature(({ final __callArgument4:Dynamic = state; __callArgument4; })) : Null<GlColorAdjustmentMaterialFeature>);
+    fold = (cast getGlColorAdjustmentMaterialFeature(({ final __callArgument8:Dynamic = state; __callArgument8; })) : Null<GlColorAdjustmentMaterialFeature>);
     if ((cast ((cast !_Runtime.looseEquals(fold, null) : Bool) && (cast _Runtime.orValue(!_Runtime.looseEquals((cast renderProxy : RenderProxy2D).colorMatrix, null), function():Dynamic return cast !_Runtime.looseEquals((cast renderProxy : RenderProxy2D).colorScaleBias, null)) : Bool)) : Bool)) {
       _Runtime.callProperty(fold, 'drawShapeMeshes', cast ([state, renderProxy, meshes] : Array<Dynamic>));
       return;
     }
-    drawGlShapeMeshBatch(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = renderProxy; __callArgument6; }), ({ final __callArgument7:Dynamic = meshes; __callArgument7; }), (cast ensureGlShapeMeshProgram(({ final __callArgument8:Dynamic = state; __callArgument8; })) : GlShapeMeshBinding), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(drawGlShapeMeshBatch, cast ([({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = renderProxy; __callArgument16; }), ({ final __callArgument17:Dynamic = meshes; __callArgument17; }), (cast ensureGlShapeMeshProgram(({ final __callArgument18:Dynamic = state; __callArgument18; })) : GlShapeMeshBinding)] : Array<Dynamic>)) #else drawGlShapeMeshBatch(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = renderProxy; __callArgument11; }), ({ final __callArgument12:Dynamic = meshes; __callArgument12; }), (cast ensureGlShapeMeshProgram(({ final __callArgument13:Dynamic = state; __callArgument13; })) : GlShapeMeshBinding), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   @:noCompletion
@@ -79,7 +79,7 @@ class GlShapeMesh {
     gl = (cast state : GlRenderState).gl;
     existing = ((cast GlShapeMesh.shapeMeshPrograms__glShapeMesh : flighthq._internal._WeakMap<flighthq._internal.dom.WebGLRenderingContext, GlShapeMeshBinding>).get(gl));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
-    program = (cast GlShapeMesh.compileShapeMeshProgram__glShapeMesh(({ final __callArgument9:Dynamic = gl; __callArgument9; })) : flighthq._internal.dom.WebGLProgram);
+    program = (cast GlShapeMesh.compileShapeMeshProgram__glShapeMesh(({ final __callArgument20:Dynamic = gl; __callArgument20; })) : flighthq._internal.dom.WebGLProgram);
     created = (cast { program: program, vertexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), indexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), positionLocation: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), matrixLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_matrix'), colorLocation: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_color') });
     ((cast GlShapeMesh.shapeMeshPrograms__glShapeMesh : flighthq._internal._WeakMap<flighthq._internal.dom.WebGLRenderingContext, GlShapeMeshBinding>).set(gl, (cast created)));
     return cast created;
@@ -93,7 +93,7 @@ class GlShapeMesh {
   public static final shapeMeshPrograms__glShapeMesh:flighthq._internal._WeakMap<flighthq._internal.dom.WebGLRenderingContext, GlShapeMeshBinding> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static function compileShapeMeshProgram__glShapeMesh(gl:flighthq._internal.dom.WebGL2RenderingContext):flighthq._internal.dom.WebGLProgram {
-    return cast (cast createGlProgram(({ final __callArgument10:Dynamic = gl; __callArgument10; }), (cast GlShapeMesh.VERTEX_SOURCE__glShapeMesh : String), (cast GlShapeMesh.FRAGMENT_SOURCE__glShapeMesh : String), (cast 'Shape-mesh' : String)) : flighthq._internal.dom.WebGLProgram);
+    return cast (cast createGlProgram(({ final __callArgument22:Dynamic = gl; __callArgument22; }), (cast GlShapeMesh.VERTEX_SOURCE__glShapeMesh : String), (cast GlShapeMesh.FRAGMENT_SOURCE__glShapeMesh : String), (cast 'Shape-mesh' : String)) : flighthq._internal.dom.WebGLProgram);
     return cast null;
   }
 
@@ -102,7 +102,7 @@ class GlShapeMesh {
     var iw:Float = cast _Runtime.UNDEFINED;
     var ih:Float = cast _Runtime.UNDEFINED;
     var t:Matrix = cast _Runtime.UNDEFINED;
-    viewport = _Runtime.coalesce((cast (cast getGlRenderStateRuntime(({ final __callArgument11:Dynamic = state; __callArgument11; })) : GlRenderStateRuntime) : { var renderTargetViewport:Null<GlViewportRect>; }).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas);
+    viewport = _Runtime.coalesce((cast (cast getGlRenderStateRuntime(({ final __callArgument24:Dynamic = state; __callArgument24; })) : GlRenderStateRuntime) : { var renderTargetViewport:Null<GlViewportRect>; }).renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas);
     iw = _Runtime.divideNumbers(2.0, _Runtime.orValue(flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width'), function():Dynamic return cast 1.0));
     ih = _Runtime.divideNumbers(2.0, _Runtime.orValue(flighthq._internal.backend.CanvasElementBackend.field(viewport, 'height'), function():Dynamic return cast 1.0));
     t = (cast renderProxy : RenderProxy2D).transform2D;

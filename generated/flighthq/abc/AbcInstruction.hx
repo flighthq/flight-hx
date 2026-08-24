@@ -24,14 +24,14 @@ class AbcInstruction {
         if ((cast _Runtime.strictEquals(target, null) : Bool)) { return cast null; }
         _Runtime.callProperty(operands, 'push', cast ([target] : Array<Dynamic>));
         (pos = cast ((pos + 3.0) : Dynamic));
-        var count:Null<{ var pos:Float; var value:Float; }> = (cast AbcInstruction.readAbcVarUint__abcInstruction(({ final __callArgument1:Dynamic = source; __callArgument1; }), (cast pos : Float)) : Null<{ var pos:Float; var value:Float; }>);
+        var count:Null<{ var pos:Float; var value:Float; }> = (cast AbcInstruction.readAbcVarUint__abcInstruction(({ final __callArgument2:Dynamic = source; __callArgument2; }), (cast pos : Float)) : Null<{ var pos:Float; var value:Float; }>);
         if ((cast ((cast _Runtime.strictEquals(count, null) : Bool) || (cast ((cast (cast count : { var pos:Float; var value:Float; }).value : Float) > (cast AbcInstruction.MAX_SWITCH_CASES__abcInstruction : Float)) : Bool)) : Bool)) { return cast null; }
         _Runtime.callProperty(operands, 'push', cast ([(cast count : { var pos:Float; var value:Float; }).value] : Array<Dynamic>));
         (pos = cast ((cast count : { var pos:Float; var value:Float; }).pos : Dynamic));
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) <= (cast (cast count : { var pos:Float; var value:Float; }).value : Float)) : Bool)) {
-            var caseTarget:Null<Float> = (cast AbcInstruction.readAbcSignedOffset__abcInstruction(({ final __callArgument2:Dynamic = source; __callArgument2; }), (cast pos : Float)) : Null<Float>);
+            var caseTarget:Null<Float> = (cast AbcInstruction.readAbcSignedOffset__abcInstruction(({ final __callArgument4:Dynamic = source; __callArgument4; }), (cast pos : Float)) : Null<Float>);
             if ((cast _Runtime.strictEquals(caseTarget, null) : Bool)) { return cast null; }
             _Runtime.callProperty(operands, 'push', cast ([caseTarget] : Array<Dynamic>));
             (pos = cast ((pos + 3.0) : Dynamic));
@@ -48,12 +48,12 @@ class AbcInstruction {
           if ((cast ((cast pos : Float) >= (cast _Runtime.field(source, 'length') : Float)) : Bool)) { return cast null; }
           _Runtime.callProperty(operands, 'push', cast ([flighthq._internal._StaticIndex.readUint8ArrayTyped((cast source : flighthq._internal._UInt8Array), (cast pos++ : Float))] : Array<Dynamic>));
         } else { if ((cast _Runtime.strictEquals(kind, AbcInstruction.OPERAND_SIGNED_OFFSET__abcInstruction) : Bool)) {
-          var value:Null<Float> = (cast AbcInstruction.readAbcSignedOffset__abcInstruction(({ final __callArgument5:Dynamic = source; __callArgument5; }), (cast pos : Float)) : Null<Float>);
+          var value:Null<Float> = (cast AbcInstruction.readAbcSignedOffset__abcInstruction(({ final __callArgument8:Dynamic = source; __callArgument8; }), (cast pos : Float)) : Null<Float>);
           if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast null; }
           _Runtime.callProperty(operands, 'push', cast ([value] : Array<Dynamic>));
           (pos = cast ((pos + 3.0) : Dynamic));
         } else {
-          var value:Null<{ var pos:Float; var value:Float; }> = (cast AbcInstruction.readAbcVarUint__abcInstruction(({ final __callArgument6:Dynamic = source; __callArgument6; }), (cast pos : Float)) : Null<{ var pos:Float; var value:Float; }>);
+          var value:Null<{ var pos:Float; var value:Float; }> = (cast AbcInstruction.readAbcVarUint__abcInstruction(({ final __callArgument10:Dynamic = source; __callArgument10; }), (cast pos : Float)) : Null<{ var pos:Float; var value:Float; }>);
           if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast null; }
           _Runtime.callProperty(operands, 'push', cast ([(cast value : { var pos:Float; var value:Float; }).value] : Array<Dynamic>));
           (pos = cast ((cast value : { var pos:Float; var value:Float; }).pos : Dynamic));

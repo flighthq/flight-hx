@@ -19,7 +19,7 @@ class RenderAppearance {
     var appearanceId:Float = cast _Runtime.UNDEFINED;
     appearanceId = (cast getNodeAppearanceRevision((cast (cast data.source : Node<Dynamic>) : Dynamic)) : Float);
     if ((cast ((cast _Runtime.andValue(!_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(parentData.appearanceFrameId, (cast (cast getRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : RenderStateRuntime) : { var currentFrameId:Float; }).currentFrameId)) : Bool) || (cast !_Runtime.strictEquals(data.lastAppearanceId, appearanceId) : Bool)) : Bool)) {
-      RenderAppearance.recalculateAppearance__renderAppearance(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = data; __callArgument2; }), ({ final __callArgument3:Dynamic = parentData; __callArgument3; }));
+      RenderAppearance.recalculateAppearance__renderAppearance(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = data; __callArgument3; }), ({ final __callArgument4:Dynamic = parentData; __callArgument4; }));
       (data.lastAppearanceId = cast (appearanceId : Float));
       return cast true;
     }
@@ -43,6 +43,6 @@ class RenderAppearance {
       if ((cast ((cast data.alpha : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
       (data.blendMode = cast (((cast !_Runtime.strictEquals((cast state : RenderState).renderBlendMode, null) : Bool) ? (cast (cast state : RenderState).renderBlendMode : Dynamic) : (cast (cast source : { var blendMode:Null<String>; }).blendMode : Dynamic)) : Null<String>));
     }
-    (data.appearanceFrameId = cast ((cast (cast getRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : RenderStateRuntime) : { var currentFrameId:Float; }).currentFrameId : Float));
+    (data.appearanceFrameId = cast ((cast (cast getRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : RenderStateRuntime) : { var currentFrameId:Float; }).currentFrameId : Float));
   }
 }

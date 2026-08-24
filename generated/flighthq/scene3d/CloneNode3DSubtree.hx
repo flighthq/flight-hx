@@ -26,7 +26,7 @@ class CloneNode3DSubtree {
     var clone:Node3D = cast _Runtime.UNDEFINED;
     clone = (cast CloneNode3DSubtree.cloneNode3DShallow__cloneNode3DSubtree(({ final __callArgument0:Dynamic = source; __callArgument0; }), ({ final __callArgument1:Dynamic = materialOverride; __callArgument1; })) : Node3D);
     for (child in _Runtime.iterable((cast getNodeChildren((cast source : Dynamic)) : Array<NodeOf<Node3DTraits>>))) {
-      (cast addNodeChild((cast clone : Dynamic), (cast (cast cloneNode3DSubtree(({ final __callArgument4:Dynamic = child; __callArgument4; }), ({ final __callArgument5:Dynamic = materialOverride; __callArgument5; })) : Node3D) : Dynamic)) : NodeOf<Node3DTraits>);
+      (cast addNodeChild((cast clone : Dynamic), (cast (cast cloneNode3DSubtree(({ final __callArgument6:Dynamic = child; __callArgument6; }), ({ final __callArgument7:Dynamic = materialOverride; __callArgument7; })) : Node3D) : Dynamic)) : NodeOf<Node3DTraits>);
     }
     return cast clone;
     return cast null;
@@ -35,14 +35,14 @@ class CloneNode3DSubtree {
   public static function cloneNode3DShallow__cloneNode3DSubtree(source:Node3D, materialOverride:Null<Null<Material>->Null<Material>>):Node3D {
     var clone:Node3D = cast _Runtime.UNDEFINED;
     if ((cast (cast isMesh((cast source : flighthq._internal._Any)) : Bool) : Bool)) {
-      var clone:Mesh = (cast cloneMesh(({ final __callArgument6:Dynamic = source; __callArgument6; })) : Mesh);
+      var clone:Mesh = (cast cloneMesh(({ final __callArgument14:Dynamic = source; __callArgument14; })) : Mesh);
       if ((cast !_Runtime.strictEquals(materialOverride, null) : Bool)) {
         (clone.materials = cast ((cast _Runtime.mapArray((cast clone.materials : Array<Null<Material>>), materialOverride, _Runtime.UNDEFINED)) : Array<Null<Material>>));
       }
       return cast clone;
     }
-    clone = (cast createNode3D((cast _Runtime.field(source, 'kind') : String), ({ final __callArgument7:Dynamic = { alpha: source.alpha, enabled: _Runtime.field(source, 'enabled'), name: _Runtime.field(source, 'name'), visible: source.visible }; __callArgument7; })) : Node3D);
-    setNodeTransform3D((cast clone : Dynamic), ({ final __callArgument8:Dynamic = source; __callArgument8; }));
+    clone = (cast createNode3D((cast _Runtime.field(source, 'kind') : String), ({ final __callArgument16:Dynamic = { alpha: source.alpha, enabled: _Runtime.field(source, 'enabled'), name: _Runtime.field(source, 'name'), visible: source.visible }; __callArgument16; })) : Node3D);
+    setNodeTransform3D((cast clone : Dynamic), ({ final __callArgument18:Dynamic = source; __callArgument18; }));
     if ((cast (cast isNodeLocalMatrix4Detached((cast source : Dynamic)) : Bool) : Bool)) {
       setNodeLocalMatrix4((cast clone : Dynamic), (cast getNodeLocalMatrix4((cast source : Dynamic)) : Matrix4Like));
     }

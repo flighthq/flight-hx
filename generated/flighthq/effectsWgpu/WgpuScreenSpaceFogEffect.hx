@@ -29,12 +29,12 @@ class WgpuScreenSpaceFogEffect {
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(packed), 8)) & 255) / 255.0);
     density = _Runtime.coalesce(_Runtime.field(effect, 'density'), function():Dynamic return cast 1.0);
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'atmospheric.screenSpaceFog' : String), (cast WgpuScreenSpaceFogEffect.SCREEN_SPACE_FOG_FRAGMENT_WGSL__wgpuScreenSpaceFogEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast source : WgpuRenderTarget), ({ final __callArgument2:Dynamic = (cast dest : WgpuRenderTarget); __callArgument2; }), ({ final __callArgument3:Dynamic = pipeline; __callArgument3; }), ({ final __callArgument4:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    drawWgpuEffectPass(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast source : WgpuRenderTarget), ({ final __callArgument3:Dynamic = (cast dest : WgpuRenderTarget); __callArgument3; }), ({ final __callArgument4:Dynamic = pipeline; __callArgument4; }), ({ final __callArgument5:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast density : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast r : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast g : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 6.0 : Float), (cast b : Float));
-    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument4; }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument5; }));
   }
 
   public static final defaultWgpuScreenSpaceFogEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
@@ -42,7 +42,7 @@ class WgpuScreenSpaceFogEffect {
   });
 
   public static function registerWgpuScreenSpaceFogEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'ScreenSpaceFogEffect' : String), ({ final __callArgument6:Dynamic = defaultWgpuScreenSpaceFogEffectRunner; __callArgument6; }));
+    registerWgpuRenderEffect(({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast 'ScreenSpaceFogEffect' : String), ({ final __callArgument11:Dynamic = defaultWgpuScreenSpaceFogEffectRunner; __callArgument11; }));
   }
 
   public static final SCREEN_SPACE_FOG_FRAGMENT_WGSL__wgpuScreenSpaceFogEffect:String = '\nstruct Uniforms {\n  u_density : f32,\n  _pad0 : f32,\n  _pad1 : f32,\n  _pad2 : f32,\n  u_fogColor : vec3f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  // Color-only fallback: no depth G-buffer in Wgpu yet — screen-Y gradient as a depth proxy.\n  // The real version reads depth and computes fog = 1 - exp(-density * remap(depth, near, far)).\n  let fog = clamp((1.0 - uv.y) * uni.u_density, 0.0, 1.0);\n  return vec4f(mix(c.rgb, uni.u_fogColor, fog), c.a);\n}';

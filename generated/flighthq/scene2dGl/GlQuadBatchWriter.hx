@@ -46,7 +46,7 @@ class GlQuadBatchWriter {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var stride:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), runtime.quadBatchCornerBuffer);
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, locCorner);
@@ -80,10 +80,10 @@ class GlQuadBatchWriter {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var cornerData:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var cornerBuf:flighthq._internal.dom.WebGLBuffer = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : GlRenderStateRuntime);
     if (_Runtime.truthy(runtime.quadBatchShader)) { return cast runtime.quadBatchShader; }
     gl = (cast state : GlRenderState).gl;
-    (runtime.quadBatchShader = cast ((cast GlQuadBatchWriter.compileQuadBatchWriterShader__glQuadBatchWriter(({ final __callArgument3:Dynamic = gl; __callArgument3; })) : GlQuadBatchShader) : Null<GlQuadBatchShader>));
+    (runtime.quadBatchShader = cast ((cast GlQuadBatchWriter.compileQuadBatchWriterShader__glQuadBatchWriter(({ final __callArgument6:Dynamic = gl; __callArgument6; })) : GlQuadBatchShader) : Null<GlQuadBatchShader>));
     cornerData = new flighthq._internal._Float32Array(cast ([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0] : Array<Dynamic>));
     cornerBuf = flighthq._internal.backend.WebGl2Backend.createBuffer(gl);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), cornerBuf);
@@ -107,7 +107,7 @@ class GlQuadBatchWriter {
     var smoothing:Null<Bool> = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var ctHandled:Bool = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : GlRenderStateRuntime);
     count = runtime.quadBatchWriterCount;
     if ((cast _Runtime.strictEquals(count, 0.0) : Bool)) { return; }
     texture = runtime.quadBatchWriterTexture;
@@ -140,8 +140,8 @@ class GlQuadBatchWriter {
     flighthq._internal.backend.WebGl2Backend.bindTexture(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TEXTURE_2D', flighthq._internal.backend.WebGl2Backend.TEXTURE_2D), texture);
     (runtime.currentTexture = cast (texture : Null<flighthq._internal.dom.WebGLTexture>));
     (runtime.currentTextureStraightAlpha = cast (straightAlpha : Bool));
-    applyGlSamplerState(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = runtime; __callArgument6; }), ({ final __callArgument7:Dynamic = texture; __callArgument7; }), ({ final __callArgument8:Dynamic = sampler; __callArgument8; }), ({ final __callArgument9:Dynamic = smoothing; __callArgument9; }));
-    ctHandled = _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural13 = (cast getGlColorAdjustmentMaterialFeature(({ final __callArgument12:Dynamic = state; __callArgument12; })) : Null<GlColorAdjustmentMaterialFeature>); __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { var flush:GlRenderState->Float->Bool; }).flush; }), cast ([state, count] : Array<Dynamic>)), function():Dynamic return cast false);
+    applyGlSamplerState(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = runtime; __callArgument11; }), ({ final __callArgument12:Dynamic = texture; __callArgument12; }), ({ final __callArgument13:Dynamic = sampler; __callArgument13; }), ({ final __callArgument14:Dynamic = smoothing; __callArgument14; }));
+    ctHandled = _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural26 = (cast getGlColorAdjustmentMaterialFeature(({ final __callArgument24:Dynamic = state; __callArgument24; })) : Null<GlColorAdjustmentMaterialFeature>); __structural26 == null ? _Runtime.UNDEFINED : (cast __structural26 : { var flush:GlRenderState->Float->Bool; }).flush; }), cast ([state, count] : Array<Dynamic>)), function():Dynamic return cast false);
     if ((cast !(cast ctHandled : Bool) : Bool)) {
       if ((cast ((cast floats : Float) > (cast 0.0 : Float)) : Bool)) {
         if ((cast _Runtime.strictEquals(runtime.quadBatchWriterMaterialBuffer, null) : Bool)) {
@@ -153,7 +153,7 @@ class GlQuadBatchWriter {
         }
         flighthq._internal.backend.WebGl2Backend.bufferSubData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), 0.0, runtime.quadBatchWriterMaterialData, 0.0, (count * floats));
       }
-      (cast renderer : GlMaterialRenderer).bind(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = material; __callArgument15; }));
+      (cast renderer : GlMaterialRenderer).bind(({ final __callArgument27:Dynamic = state; __callArgument27; }), ({ final __callArgument28:Dynamic = material; __callArgument28; }));
     }
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ELEMENT_ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ELEMENT_ARRAY_BUFFER), runtime.quadIndexBuffer);
     flighthq._internal.backend.WebGl2Backend.drawElementsInstanced(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLES', flighthq._internal.backend.WebGl2Backend.TRIANGLES), 6.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT), 0.0, count);
@@ -170,10 +170,10 @@ class GlQuadBatchWriter {
   public static function packGlQuadBatchMaterialInstance(state:GlRenderState, materialData:Null<MaterialData>, instanceIndex:Float):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var renderer:Null<GlMaterialRenderer> = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument29:Dynamic = state; __callArgument29; })) : GlRenderStateRuntime);
     renderer = runtime.quadBatchWriterMaterialRenderer;
     if ((cast ((cast _Runtime.strictEquals(renderer, null) : Bool) || (cast _Runtime.strictEquals((cast renderer : GlMaterialRenderer).packInstance, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
-    (cast renderer : GlMaterialRenderer).packInstance(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = materialData; __callArgument18; }), runtime.quadBatchWriterMaterialData, (cast (instanceIndex * runtime.quadBatchWriterMaterialFloats) : Float));
+    (cast renderer : GlMaterialRenderer).packInstance(({ final __callArgument31:Dynamic = state; __callArgument31; }), ({ final __callArgument32:Dynamic = materialData; __callArgument32; }), runtime.quadBatchWriterMaterialData, (cast (instanceIndex * runtime.quadBatchWriterMaterialFloats) : Float));
   }
 
   @:noCompletion
@@ -182,10 +182,10 @@ class GlQuadBatchWriter {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var floats:Float = cast _Runtime.UNDEFINED;
     var needed:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument19:Dynamic = state; __callArgument19; })) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument33:Dynamic = state; __callArgument33; })) : GlRenderStateRuntime);
     (runtime.flushPendingDraws = cast (flushGlQuadBatchWriter : Null<GlRenderState->Void>));
     if ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(texture, runtime.quadBatchWriterTexture) : Bool) || (cast !_Runtime.strictEquals(straightAlpha, runtime.quadBatchWriterStraightAlpha) : Bool)) : Bool) || (cast !_Runtime.strictEquals(sampler, runtime.quadBatchWriterSampler) : Bool)) : Bool) || (cast !_Runtime.strictEquals(blendMode, runtime.quadBatchWriterBlendMode) : Bool)) : Bool) || (cast !_Runtime.strictEquals(material, runtime.quadBatchWriterMaterial) : Bool)) : Bool) || (cast !_Runtime.strictEquals(smoothing, runtime.quadBatchWriterSmoothing) : Bool)) : Bool)) {
-      flushGlQuadBatchWriter(({ final __callArgument20:Dynamic = state; __callArgument20; }));
+      flushGlQuadBatchWriter(({ final __callArgument35:Dynamic = state; __callArgument35; }));
     }
     (runtime.quadBatchWriterTexture = cast (texture : Null<flighthq._internal.dom.WebGLTexture>));
     (runtime.quadBatchWriterSampler = cast (sampler : Null<SamplerLike>));
@@ -226,13 +226,13 @@ class GlQuadBatchWriter {
   public static function recordGlQuadBatchColorScaleBias(state:GlRenderState, colorScaleBias:Null<flighthq._internal._Union2<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, Array<Float>>>, instanceIndex:Float):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var fold:Null<GlColorAdjustmentMaterialFeature> = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument21:Dynamic = state; __callArgument21; })) : GlRenderStateRuntime);
-    fold = (cast getGlColorAdjustmentMaterialFeature(({ final __callArgument22:Dynamic = state; __callArgument22; })) : Null<GlColorAdjustmentMaterialFeature>);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument37:Dynamic = state; __callArgument37; })) : GlRenderStateRuntime);
+    fold = (cast getGlColorAdjustmentMaterialFeature(({ final __callArgument39:Dynamic = state; __callArgument39; })) : Null<GlColorAdjustmentMaterialFeature>);
     if ((cast !_Runtime.looseEquals(fold, null) : Bool)) {
       _Runtime.callProperty(fold, 'record', cast ([runtime, colorScaleBias, instanceIndex] : Array<Dynamic>));
       return;
     }
-    if ((cast !_Runtime.looseEquals(colorScaleBias, null) : Bool)) { _Runtime.callOptionalValue((cast getGlColorAdjustmentMaterialFeatureGuard(({ final __callArgument23:Dynamic = state; __callArgument23; })) : Null<GlColorAdjustmentMaterialFeatureGuard>), cast ([state, colorScaleBias] : Array<Dynamic>)); }
+    if ((cast !_Runtime.looseEquals(colorScaleBias, null) : Bool)) { _Runtime.callOptionalValue((cast getGlColorAdjustmentMaterialFeatureGuard(({ final __callArgument41:Dynamic = state; __callArgument41; })) : Null<GlColorAdjustmentMaterialFeatureGuard>), cast ([state, colorScaleBias] : Array<Dynamic>)); }
   }
 
   @:noCompletion
@@ -243,7 +243,7 @@ class GlQuadBatchWriter {
     var clipW:Float = cast _Runtime.UNDEFINED;
     var clipH:Float = cast _Runtime.UNDEFINED;
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument24:Dynamic = state; __callArgument24; })) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument43:Dynamic = state; __callArgument43; })) : GlRenderStateRuntime);
     gl = (cast state : GlRenderState).gl;
     viewport = _Runtime.coalesce(runtime.renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas);
     clipW = (2.0 / flighthq._internal.backend.CanvasElementBackend.field(viewport, 'width'));
@@ -268,7 +268,7 @@ class GlQuadBatchWriter {
   @:noCompletion
   public static function useGlQuadBatchProgram(state:GlRenderState, program:flighthq._internal.dom.WebGLProgram):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getGlRenderStateRuntime(({ final __callArgument25:Dynamic = state; __callArgument25; })) : GlRenderStateRuntime);
+    runtime = (cast getGlRenderStateRuntime(({ final __callArgument45:Dynamic = state; __callArgument45; })) : GlRenderStateRuntime);
     if ((cast !_Runtime.strictEquals(runtime.currentProgram, program) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.useProgram((cast state : GlRenderState).gl, program);
       (runtime.currentProgram = cast (program : Null<flighthq._internal.dom.WebGLProgram>));

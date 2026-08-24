@@ -95,7 +95,7 @@ class BitmapCrop {
               flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast (si + 3.0) : Float)) : Float));
             } else {
               var cx:Null<Float> = (cast BitmapCrop.resolveEdge__bitmapCrop((cast sx : Float), (cast sw : Float), ({ final __callArgument0:Dynamic = edgeMode; __callArgument0; })) : Null<Float>);
-              var cy:Null<Float> = (cast BitmapCrop.resolveEdge__bitmapCrop((cast sy : Float), (cast sh : Float), ({ final __callArgument1:Dynamic = edgeMode; __callArgument1; })) : Null<Float>);
+              var cy:Null<Float> = (cast BitmapCrop.resolveEdge__bitmapCrop((cast sy : Float), (cast sh : Float), ({ final __callArgument2:Dynamic = edgeMode; __callArgument2; })) : Null<Float>);
               if ((cast ((cast !_Runtime.strictEquals(cx, null) : Bool) && (cast !_Runtime.strictEquals(cy, null) : Bool)) : Bool)) {
                 var si:Float = (((cy * sw) + cx) * 4.0);
                 flighthq._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flighthq._internal._UInt8ClampedArray), (cast di : Float), (cast flighthq._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flighthq._internal._UInt8ClampedArray), (cast si : Float)) : Float));
@@ -156,7 +156,7 @@ class BitmapCrop {
     if ((cast ((cast maxX : Float) < (cast 0.0 : Float)) : Bool)) {
       return cast (cast createEntity((cast { alphaType: source.alphaType, gamut: source.gamut, data: new flighthq._internal._UInt8ClampedArray(4.0), format: source.format, height: 1.0, kind: BitmapTextureSourceKind, version: 0.0, width: 1.0 } : Dynamic)) : { >Entity, var alphaType:AlphaType; var gamut:String; var data:flighthq._internal._UInt8ClampedArray; var format:PixelFormat; var height:Float; var kind:String; var version:Float; var width:Float; });
     }
-    return cast (cast cropBitmap(({ final __callArgument2:Dynamic = source; __callArgument2; }), ({ final __callArgument3:Dynamic = { x: minX, y: minY, width: ((maxX - minX) + 1.0), height: ((maxY - minY) + 1.0) }; __callArgument3; })) : Bitmap);
+    return cast (cast cropBitmap(({ final __callArgument4:Dynamic = source; __callArgument4; }), ({ final __callArgument5:Dynamic = { x: minX, y: minY, width: ((maxX - minX) + 1.0), height: ((maxY - minY) + 1.0) }; __callArgument5; })) : Bitmap);
     return cast null;
   }
 

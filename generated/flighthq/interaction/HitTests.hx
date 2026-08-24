@@ -40,7 +40,7 @@ class HitTests {
     ((cast out : HitTestResult).localX = (cast HitTests.hitTestScratchPoint__hitTests : { var x:Float; var y:Float; }).x);
     ((cast out : HitTestResult).localY = (cast HitTests.hitTestScratchPoint__hitTests : { var x:Float; var y:Float; }).y);
     exact = ((cast HitTests.hitTestExactRegistry__hitTests : flighthq._internal._Map<String, HitTestPreciseFunction>).get(_Runtime.field(node, 'kind')));
-    ((cast out : HitTestResult).subIndex = _Runtime.select(exact, function():Dynamic return cast (cast exact(({ final __callArgument2:Dynamic = node; __callArgument2; }), (cast x : Float), (cast y : Float)) : Float), function():Dynamic return cast -1.0));
+    ((cast out : HitTestResult).subIndex = _Runtime.select(exact, function():Dynamic return cast (cast exact(({ final __callArgument4:Dynamic = node; __callArgument4; }), (cast x : Float), (cast y : Float)) : Float), function():Dynamic return cast -1.0));
   }
 
   public static function findGraphHitTarget<Traits:flighthq._internal._Object>(source:Node<Traits>, x:Float, y:Float):Null<Node<Traits>> {
@@ -70,8 +70,8 @@ class HitTests {
   }
 
   public static function hitTestGraphLocalBounds<Traits:flighthq._internal._Object>(source:Node<Traits>, x:Float, y:Float):Bool {
-    inverseMatrixTransformPointXY(({ final __callArgument3:Dynamic = HitTests.hitTestScratchPoint__hitTests; __callArgument3; }), ({ final __callArgument4:Dynamic = (cast getNodeWorldMatrix((cast (cast source : Node2D) : Dynamic)) : Matrix); __callArgument4; }), (cast x : Float), (cast y : Float));
-    return cast (cast containsRectanglePointXY(({ final __callArgument5:Dynamic = (cast getNodeLocalBoundsRectangle((cast (cast source : Node2D) : Dynamic)) : Rectangle); __callArgument5; }), (cast (cast HitTests.hitTestScratchPoint__hitTests : { var x:Float; var y:Float; }).x : Float), (cast (cast HitTests.hitTestScratchPoint__hitTests : { var x:Float; var y:Float; }).y : Float)) : Bool);
+    inverseMatrixTransformPointXY(({ final __callArgument6:Dynamic = HitTests.hitTestScratchPoint__hitTests; __callArgument6; }), ({ final __callArgument7:Dynamic = (cast getNodeWorldMatrix((cast (cast source : Node2D) : Dynamic)) : Matrix); __callArgument7; }), (cast x : Float), (cast y : Float));
+    return cast (cast containsRectanglePointXY(({ final __callArgument10:Dynamic = (cast getNodeLocalBoundsRectangle((cast (cast source : Node2D) : Dynamic)) : Rectangle); __callArgument10; }), (cast (cast HitTests.hitTestScratchPoint__hitTests : { var x:Float; var y:Float; }).x : Float), (cast (cast HitTests.hitTestScratchPoint__hitTests : { var x:Float; var y:Float; }).y : Float)) : Bool);
     return cast null;
   }
 
@@ -87,7 +87,7 @@ class HitTests {
 
   public static function hitTestNode2Ds(source:Node2D, other:Node2D):Bool {
     if ((cast ((cast !_Runtime.strictEquals((cast getNodeParent((cast source : Dynamic)) : Null<NodeOf<Node2DTraits>>), null) : Bool) && (cast !_Runtime.strictEquals((cast getNodeParent((cast other : Dynamic)) : Null<NodeOf<Node2DTraits>>), null) : Bool)) : Bool)) {
-      return cast (cast intersectsRectangle(({ final __callArgument6:Dynamic = (cast getNodeWorldBoundsRectangle((cast source : Dynamic)) : Rectangle); __callArgument6; }), ({ final __callArgument7:Dynamic = (cast getNodeWorldBoundsRectangle((cast other : Dynamic)) : Rectangle); __callArgument7; })) : Bool);
+      return cast (cast intersectsRectangle(({ final __callArgument12:Dynamic = (cast getNodeWorldBoundsRectangle((cast source : Dynamic)) : Rectangle); __callArgument12; }), ({ final __callArgument13:Dynamic = (cast getNodeWorldBoundsRectangle((cast other : Dynamic)) : Rectangle); __callArgument13; })) : Bool);
     }
     return cast false;
     return cast null;
@@ -95,9 +95,9 @@ class HitTests {
 
   public static function hitTestNodeRegion(source:NodeAny, x:Float, y:Float, precise:Bool = false):Bool {
     var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Path, Rectangle>, String>, NodeAny>> = cast _Runtime.UNDEFINED;
-    hitArea = _Runtime.coalesce(({ final __typedStruct9 = (cast getNodeInteractionState(({ final __callArgument8:Dynamic = source; __callArgument8; })) : Null<NodeInteractionState>); __typedStruct9 == null ? _Runtime.UNDEFINED : (cast __typedStruct9 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Path, Rectangle>, String>, NodeAny>>; }).hitArea; }), function():Dynamic return cast null);
-    if ((cast !_Runtime.strictEquals(hitArea, null) : Bool)) { return cast (cast HitTests.hitAreaContainsPoint__hitTests(({ final __callArgument10:Dynamic = source; __callArgument10; }), ({ final __callArgument11:Dynamic = hitArea; __callArgument11; }), (cast x : Float), (cast y : Float)) : Bool); }
-    return cast (cast HitTests.testNodeGeometry__hitTests(({ final __callArgument12:Dynamic = source; __callArgument12; }), (cast x : Float), (cast y : Float), (cast precise : Bool)) : Bool);
+    hitArea = _Runtime.coalesce(({ final __typedStruct18 = (cast getNodeInteractionState(({ final __callArgument16:Dynamic = source; __callArgument16; })) : Null<NodeInteractionState>); __typedStruct18 == null ? _Runtime.UNDEFINED : (cast __typedStruct18 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Path, Rectangle>, String>, NodeAny>>; }).hitArea; }), function():Dynamic return cast null);
+    if ((cast !_Runtime.strictEquals(hitArea, null) : Bool)) { return cast (cast HitTests.hitAreaContainsPoint__hitTests(({ final __callArgument19:Dynamic = source; __callArgument19; }), ({ final __callArgument20:Dynamic = hitArea; __callArgument20; }), (cast x : Float), (cast y : Float)) : Bool); }
+    return cast (cast HitTests.testNodeGeometry__hitTests(({ final __callArgument23:Dynamic = source; __callArgument23; }), (cast x : Float), (cast y : Float), (cast precise : Bool)) : Bool);
     return cast null;
   }
 
@@ -115,13 +115,13 @@ class HitTests {
     var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Path, Rectangle>, String>, NodeAny>> = cast _Runtime.UNDEFINED;
     var children:Null<Array<Node<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return cast null; }
-    state = (cast getNodeInteractionState(({ final __callArgument13:Dynamic = node; __callArgument13; })) : Null<NodeInteractionState>);
-    enabled = _Runtime.strictEquals(({ final __typedStruct14 = state; __typedStruct14 == null ? _Runtime.UNDEFINED : (cast __typedStruct14 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
-    hitArea = _Runtime.coalesce(({ final __typedStruct15 = state; __typedStruct15 == null ? _Runtime.UNDEFINED : (cast __typedStruct15 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Path, Rectangle>, String>, NodeAny>>; }).hitArea; }), function():Dynamic return cast null);
+    state = (cast getNodeInteractionState(({ final __callArgument25:Dynamic = node; __callArgument25; })) : Null<NodeInteractionState>);
+    enabled = _Runtime.strictEquals(({ final __typedStruct27 = state; __typedStruct27 == null ? _Runtime.UNDEFINED : (cast __typedStruct27 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
+    hitArea = _Runtime.coalesce(({ final __typedStruct28 = state; __typedStruct28 == null ? _Runtime.UNDEFINED : (cast __typedStruct28 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Path, Rectangle>, String>, NodeAny>>; }).hitArea; }), function():Dynamic return cast null);
     if ((cast ((cast enabled : Bool) && (cast !_Runtime.strictEquals(hitArea, null) : Bool)) : Bool)) {
-      return cast ((cast (cast HitTests.hitAreaContainsPoint__hitTests(({ final __callArgument16:Dynamic = node; __callArgument16; }), ({ final __callArgument17:Dynamic = hitArea; __callArgument17; }), (cast x : Float), (cast y : Float)) : Bool) : Bool) ? (cast node : Dynamic) : (cast null : Dynamic));
+      return cast ((cast (cast HitTests.hitAreaContainsPoint__hitTests(({ final __callArgument29:Dynamic = node; __callArgument29; }), ({ final __callArgument30:Dynamic = hitArea; __callArgument30; }), (cast x : Float), (cast y : Float)) : Bool) : Bool) ? (cast node : Dynamic) : (cast null : Dynamic));
     }
-    children = _Runtime.field((cast getNodeRuntime(({ final __callArgument18:Dynamic = node; __callArgument18; })) : NodeRuntime<flighthq._internal._Any>), 'children');
+    children = _Runtime.field((cast getNodeRuntime(({ final __callArgument33:Dynamic = node; __callArgument33; })) : NodeRuntime<flighthq._internal._Any>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
         var i:Float = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
@@ -132,7 +132,7 @@ class HitTests {
         }
       }
     }
-    if ((cast ((cast enabled : Bool) && (cast (cast HitTests.testNodeGeometry__hitTests(({ final __callArgument19:Dynamic = node; __callArgument19; }), (cast x : Float), (cast y : Float), (cast precise : Bool)) : Bool) : Bool)) : Bool)) { return cast node; }
+    if ((cast ((cast enabled : Bool) && (cast (cast HitTests.testNodeGeometry__hitTests(({ final __callArgument35:Dynamic = node; __callArgument35; }), (cast x : Float), (cast y : Float), (cast precise : Bool)) : Bool) : Bool)) : Bool)) { return cast node; }
     return cast null;
     return cast null;
   }
@@ -143,12 +143,12 @@ class HitTests {
     var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Path, Rectangle>, String>, NodeAny>> = cast _Runtime.UNDEFINED;
     var children:Null<Array<Node<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return cast false; }
-    state = (cast getNodeInteractionState(({ final __callArgument20:Dynamic = node; __callArgument20; })) : Null<NodeInteractionState>);
-    enabled = _Runtime.strictEquals(({ final __typedStruct21 = state; __typedStruct21 == null ? _Runtime.UNDEFINED : (cast __typedStruct21 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
-    hitArea = _Runtime.coalesce(({ final __typedStruct22 = state; __typedStruct22 == null ? _Runtime.UNDEFINED : (cast __typedStruct22 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Path, Rectangle>, String>, NodeAny>>; }).hitArea; }), function():Dynamic return cast null);
-    if ((cast ((cast enabled : Bool) && (cast !_Runtime.strictEquals(hitArea, null) : Bool)) : Bool)) { return cast (cast HitTests.hitAreaContainsPoint__hitTests(({ final __callArgument23:Dynamic = node; __callArgument23; }), ({ final __callArgument24:Dynamic = hitArea; __callArgument24; }), (cast x : Float), (cast y : Float)) : Bool); }
-    if ((cast ((cast enabled : Bool) && (cast (cast HitTests.testNodeGeometry__hitTests(({ final __callArgument25:Dynamic = node; __callArgument25; }), (cast x : Float), (cast y : Float), (cast precise : Bool)) : Bool) : Bool)) : Bool)) { return cast true; }
-    children = _Runtime.field((cast getNodeRuntime(({ final __callArgument26:Dynamic = node; __callArgument26; })) : NodeRuntime<flighthq._internal._Any>), 'children');
+    state = (cast getNodeInteractionState(({ final __callArgument37:Dynamic = node; __callArgument37; })) : Null<NodeInteractionState>);
+    enabled = _Runtime.strictEquals(({ final __typedStruct39 = state; __typedStruct39 == null ? _Runtime.UNDEFINED : (cast __typedStruct39 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
+    hitArea = _Runtime.coalesce(({ final __typedStruct40 = state; __typedStruct40 == null ? _Runtime.UNDEFINED : (cast __typedStruct40 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Path, Rectangle>, String>, NodeAny>>; }).hitArea; }), function():Dynamic return cast null);
+    if ((cast ((cast enabled : Bool) && (cast !_Runtime.strictEquals(hitArea, null) : Bool)) : Bool)) { return cast (cast HitTests.hitAreaContainsPoint__hitTests(({ final __callArgument41:Dynamic = node; __callArgument41; }), ({ final __callArgument42:Dynamic = hitArea; __callArgument42; }), (cast x : Float), (cast y : Float)) : Bool); }
+    if ((cast ((cast enabled : Bool) && (cast (cast HitTests.testNodeGeometry__hitTests(({ final __callArgument45:Dynamic = node; __callArgument45; }), (cast x : Float), (cast y : Float), (cast precise : Bool)) : Bool) : Bool)) : Bool)) { return cast true; }
+    children = _Runtime.field((cast getNodeRuntime(({ final __callArgument47:Dynamic = node; __callArgument47; })) : NodeRuntime<flighthq._internal._Any>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
         if ((cast (cast HitTests.anyHit__hitTests((cast child : NodeAny), (cast x : Float), (cast y : Float), (cast precise : Bool)) : Bool) : Bool)) { return cast true; }
@@ -164,51 +164,51 @@ class HitTests {
     var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Path, Rectangle>, String>, NodeAny>> = cast _Runtime.UNDEFINED;
     var children:Null<Array<Node<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return; }
-    state = (cast getNodeInteractionState(({ final __callArgument29:Dynamic = node; __callArgument29; })) : Null<NodeInteractionState>);
-    enabled = _Runtime.strictEquals(({ final __typedStruct30 = state; __typedStruct30 == null ? _Runtime.UNDEFINED : (cast __typedStruct30 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
-    hitArea = _Runtime.coalesce(({ final __typedStruct31 = state; __typedStruct31 == null ? _Runtime.UNDEFINED : (cast __typedStruct31 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Path, Rectangle>, String>, NodeAny>>; }).hitArea; }), function():Dynamic return cast null);
+    state = (cast getNodeInteractionState(({ final __callArgument51:Dynamic = node; __callArgument51; })) : Null<NodeInteractionState>);
+    enabled = _Runtime.strictEquals(({ final __typedStruct53 = state; __typedStruct53 == null ? _Runtime.UNDEFINED : (cast __typedStruct53 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
+    hitArea = _Runtime.coalesce(({ final __typedStruct54 = state; __typedStruct54 == null ? _Runtime.UNDEFINED : (cast __typedStruct54 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Path, Rectangle>, String>, NodeAny>>; }).hitArea; }), function():Dynamic return cast null);
     if ((cast ((cast enabled : Bool) && (cast !_Runtime.strictEquals(hitArea, null) : Bool)) : Bool)) {
-      if ((cast (cast HitTests.hitAreaContainsPoint__hitTests(({ final __callArgument32:Dynamic = node; __callArgument32; }), ({ final __callArgument33:Dynamic = hitArea; __callArgument33; }), (cast x : Float), (cast y : Float)) : Bool) : Bool)) { _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>)); }
+      if ((cast (cast HitTests.hitAreaContainsPoint__hitTests(({ final __callArgument55:Dynamic = node; __callArgument55; }), ({ final __callArgument56:Dynamic = hitArea; __callArgument56; }), (cast x : Float), (cast y : Float)) : Bool) : Bool)) { _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>)); }
       return;
     }
-    children = _Runtime.field((cast getNodeRuntime(({ final __callArgument34:Dynamic = node; __callArgument34; })) : NodeRuntime<flighthq._internal._Any>), 'children');
+    children = _Runtime.field((cast getNodeRuntime(({ final __callArgument59:Dynamic = node; __callArgument59; })) : NodeRuntime<flighthq._internal._Any>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
         var i:Float = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-          HitTests.collectHits__hitTests((cast flighthq._internal._StaticIndex.readArray(children, i) : NodeAny), (cast x : Float), (cast y : Float), (cast precise : Bool), ({ final __callArgument35:Dynamic = out; __callArgument35; }));
+          HitTests.collectHits__hitTests((cast flighthq._internal._StaticIndex.readArray(children, i) : NodeAny), (cast x : Float), (cast y : Float), (cast precise : Bool), ({ final __callArgument61:Dynamic = out; __callArgument61; }));
           i--;
         }
       }
     }
-    if ((cast ((cast enabled : Bool) && (cast (cast HitTests.testNodeGeometry__hitTests(({ final __callArgument36:Dynamic = node; __callArgument36; }), (cast x : Float), (cast y : Float), (cast precise : Bool)) : Bool) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>)); }
+    if ((cast ((cast enabled : Bool) && (cast (cast HitTests.testNodeGeometry__hitTests(({ final __callArgument63:Dynamic = node; __callArgument63; }), (cast x : Float), (cast y : Float), (cast precise : Bool)) : Bool) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>)); }
   }
 
   public static function testNodeGeometry__hitTests(node:NodeAny, x:Float, y:Float, precise:Bool):Bool {
     var coarse:Null<HitTestFunction> = cast _Runtime.UNDEFINED;
     if ((cast precise : Bool)) {
       var exact:Null<HitTestPreciseFunction> = ((cast HitTests.hitTestExactRegistry__hitTests : flighthq._internal._Map<String, HitTestPreciseFunction>).get(_Runtime.field(node, 'kind')));
-      if ((cast !_Runtime.strictEquals(exact, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast ((cast (cast exact(({ final __callArgument37:Dynamic = node; __callArgument37; }), (cast x : Float), (cast y : Float)) : Float) : Float) >= (cast 0.0 : Float)); }
+      if ((cast !_Runtime.strictEquals(exact, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast ((cast (cast exact(({ final __callArgument65:Dynamic = node; __callArgument65; }), (cast x : Float), (cast y : Float)) : Float) : Float) >= (cast 0.0 : Float)); }
     }
     coarse = ((cast HitTests.hitTestRegistry__hitTests : flighthq._internal._Map<String, HitTestFunction>).get(_Runtime.field(node, 'kind')));
-    return cast _Runtime.select(coarse, function():Dynamic return cast (cast coarse(({ final __callArgument38:Dynamic = node; __callArgument38; }), (cast x : Float), (cast y : Float)) : Bool), function():Dynamic return cast false);
+    return cast _Runtime.select(coarse, function():Dynamic return cast (cast coarse(({ final __callArgument67:Dynamic = node; __callArgument67; }), (cast x : Float), (cast y : Float)) : Bool), function():Dynamic return cast false);
     return cast null;
   }
 
   public static function hitAreaContainsPoint__hitTests(node:NodeAny, hitArea:HitArea, x:Float, y:Float):Bool {
     var lx:Float = cast _Runtime.UNDEFINED;
     var ly:Float = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(hitArea, 'bounds') : Bool)) { return cast (cast (cast hitTestGraphLocalBounds : Node<flighthq._internal._Any>->Float->Float->Bool)(({ final __callArgument39:Dynamic = node; __callArgument39; }), (cast x : Float), (cast y : Float)) : Bool); }
+    if ((cast _Runtime.strictEquals(hitArea, 'bounds') : Bool)) { return cast (cast (cast hitTestGraphLocalBounds : Node<flighthq._internal._Any>->Float->Float->Bool)(({ final __callArgument69:Dynamic = node; __callArgument69; }), (cast x : Float), (cast y : Float)) : Bool); }
     if ((cast _Runtime.hasField(hitArea, 'kind') : Bool)) {
       var proxy:NodeAny = (cast hitArea : NodeAny);
       var proxyHit:Null<HitTestFunction> = ((cast HitTests.hitTestRegistry__hitTests : flighthq._internal._Map<String, HitTestFunction>).get(_Runtime.field(proxy, 'kind')));
-      return cast _Runtime.select(proxyHit, function():Dynamic return cast (cast proxyHit(({ final __callArgument40:Dynamic = proxy; __callArgument40; }), (cast x : Float), (cast y : Float)) : Bool), function():Dynamic return cast (cast (cast hitTestGraphLocalBounds : Node<flighthq._internal._Any>->Float->Float->Bool)(({ final __callArgument41:Dynamic = proxy; __callArgument41; }), (cast x : Float), (cast y : Float)) : Bool));
+      return cast _Runtime.select(proxyHit, function():Dynamic return cast (cast proxyHit(({ final __callArgument71:Dynamic = proxy; __callArgument71; }), (cast x : Float), (cast y : Float)) : Bool), function():Dynamic return cast (cast (cast hitTestGraphLocalBounds : Node<flighthq._internal._Any>->Float->Float->Bool)(({ final __callArgument73:Dynamic = proxy; __callArgument73; }), (cast x : Float), (cast y : Float)) : Bool));
     }
-    inverseMatrixTransformPointXY(({ final __callArgument42:Dynamic = HitTests.hitTestScratchPoint__hitTests; __callArgument42; }), ({ final __callArgument43:Dynamic = (cast getNodeWorldMatrix((cast (cast node : Node2D) : Dynamic)) : Matrix); __callArgument43; }), (cast x : Float), (cast y : Float));
+    inverseMatrixTransformPointXY(({ final __callArgument75:Dynamic = HitTests.hitTestScratchPoint__hitTests; __callArgument75; }), ({ final __callArgument76:Dynamic = (cast getNodeWorldMatrix((cast (cast node : Node2D) : Dynamic)) : Matrix); __callArgument76; }), (cast x : Float), (cast y : Float));
     lx = (cast HitTests.hitTestScratchPoint__hitTests : { var x:Float; var y:Float; }).x;
     ly = (cast HitTests.hitTestScratchPoint__hitTests : { var x:Float; var y:Float; }).y;
-    if ((cast _Runtime.hasField(hitArea, 'commands') : Bool)) { return cast (cast containsPathPoint((cast hitArea : Path), (cast lx : Float), (cast ly : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Bool); }
-    return cast (cast containsRectanglePointXY(({ final __callArgument44:Dynamic = (cast hitArea : Rectangle); __callArgument44; }), (cast lx : Float), (cast ly : Float)) : Bool);
+    if ((cast _Runtime.hasField(hitArea, 'commands') : Bool)) { return cast (cast (#if js _Runtime.callValue(containsPathPoint, cast ([(cast hitArea : Path), (cast lx : Float), (cast ly : Float)] : Array<Dynamic>)) #else containsPathPoint((cast hitArea : Path), (cast lx : Float), (cast ly : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Bool); }
+    return cast (cast containsRectanglePointXY(({ final __callArgument79:Dynamic = (cast hitArea : Rectangle); __callArgument79; }), (cast lx : Float), (cast ly : Float)) : Bool);
     return cast null;
   }
 

@@ -23,9 +23,9 @@ class GlStandardMaterial {
   @:noCompletion
   public static final standardGlMaterialRenderer:GlMaterialRenderer = (cast { instanceFloatCount: 0.0, bind: function(state:GlRenderState, material:Null<Material>):Void {
     var shader:GlQuadBatchShader = cast _Runtime.UNDEFINED;
-    shader = (cast ensureGlQuadBatchShader(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlQuadBatchShader);
-    useGlQuadBatchProgram(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast shader : GlQuadBatchShader).program);
-    setGlQuadBatchWorldAndTexture(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast shader : GlQuadBatchShader).locWorldMatrix, (cast shader : GlQuadBatchShader).locTexture, ({ final __callArgument5:Dynamic = (cast shader : GlQuadBatchShader).locStraightTextureAlpha; __callArgument5; }));
-    bindGlQuadBatchBaseAttributes(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast (cast shader : GlQuadBatchShader).locCorner : Float));
+    shader = (cast ensureGlQuadBatchShader(({ final __callArgument4:Dynamic = state; __callArgument4; })) : GlQuadBatchShader);
+    useGlQuadBatchProgram(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast shader : GlQuadBatchShader).program);
+    setGlQuadBatchWorldAndTexture(({ final __callArgument8:Dynamic = state; __callArgument8; }), (cast shader : GlQuadBatchShader).locWorldMatrix, (cast shader : GlQuadBatchShader).locTexture, ({ final __callArgument9:Dynamic = (cast shader : GlQuadBatchShader).locStraightTextureAlpha; __callArgument9; }));
+    bindGlQuadBatchBaseAttributes(({ final __callArgument12:Dynamic = state; __callArgument12; }), (cast (cast shader : GlQuadBatchShader).locCorner : Float));
   } });
 }

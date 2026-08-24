@@ -105,7 +105,7 @@ class Path {
     sinStart = HxMath.sin(startAngle);
     cosEnd = HxMath.cos(endAngle);
     sinEnd = HxMath.sin(endAngle);
-    appendPathCubicCurveTo(({ final __callArgument1:Dynamic = path; __callArgument1; }), (cast ((cx + (cosStart * radius)) - (sinStart * k)) : Float), (cast ((cy + (sinStart * radius)) + (cosStart * k)) : Float), (cast ((cx + (cosEnd * radius)) + (sinEnd * k)) : Float), (cast ((cy + (sinEnd * radius)) - (cosEnd * k)) : Float), (cast (cx + (cosEnd * radius)) : Float), (cast (cy + (sinEnd * radius)) : Float));
+    appendPathCubicCurveTo(({ final __callArgument2:Dynamic = path; __callArgument2; }), (cast ((cx + (cosStart * radius)) - (sinStart * k)) : Float), (cast ((cy + (sinStart * radius)) + (cosStart * k)) : Float), (cast ((cx + (cosEnd * radius)) + (sinEnd * k)) : Float), (cast ((cy + (sinEnd * radius)) - (cosEnd * k)) : Float), (cast (cx + (cosEnd * radius)) : Float), (cast (cy + (sinEnd * radius)) : Float));
   }
 
   public static function appendPathArc(path:flighthq.types.Path, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, anticlockwise:Bool = false, connectToCurrent:Bool = false):Void {
@@ -122,11 +122,11 @@ class Path {
     arcStartX = (cx + _Runtime.multiplyNumbers(HxMath.cos(startAngle), radius));
     arcStartY = (cy + _Runtime.multiplyNumbers(HxMath.sin(startAngle), radius));
     if ((cast connectToCurrent : Bool)) {
-      appendPathLineTo(({ final __callArgument2:Dynamic = path; __callArgument2; }), (cast arcStartX : Float), (cast arcStartY : Float));
+      appendPathLineTo(({ final __callArgument4:Dynamic = path; __callArgument4; }), (cast arcStartX : Float), (cast arcStartY : Float));
     } else {
-      appendPathMoveTo(({ final __callArgument3:Dynamic = path; __callArgument3; }), (cast arcStartX : Float), (cast arcStartY : Float));
+      appendPathMoveTo(({ final __callArgument6:Dynamic = path; __callArgument6; }), (cast arcStartX : Float), (cast arcStartY : Float));
     }
-    Path.appendArcCubics__path(({ final __callArgument4:Dynamic = path; __callArgument4; }), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast radius : Float), (cast 0.0 : Float), (cast startAngle : Float), (cast sweep : Float));
+    Path.appendArcCubics__path(({ final __callArgument8:Dynamic = path; __callArgument8; }), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast radius : Float), (cast 0.0 : Float), (cast startAngle : Float), (cast sweep : Float));
   }
 
   public static function appendPathArcTo(path:flighthq.types.Path, radiusX:Float, radiusY:Float, xAxisRotation:Float, largeArc:Bool, sweep:Bool, endX:Float, endY:Float):Void {
@@ -164,13 +164,13 @@ class Path {
     var theta1:Float = cast _Runtime.UNDEFINED;
     var dtheta:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(radiusX, 0.0) : Bool) || (cast _Runtime.strictEquals(radiusY, 0.0) : Bool)) : Bool)) {
-      appendPathLineTo(({ final __callArgument5:Dynamic = path; __callArgument5; }), (cast endX : Float), (cast endY : Float));
+      appendPathLineTo(({ final __callArgument10:Dynamic = path; __callArgument10; }), (cast endX : Float), (cast endY : Float));
       return;
     }
     x1 = 0.0;
     y1 = 0.0;
     {
-      var last:Null<Array<Float>> = (cast getPathLastPoint(({ final __callArgument6:Dynamic = path; __callArgument6; })) : Null<Array<Float>>);
+      var last:Null<Array<Float>> = (cast getPathLastPoint(({ final __callArgument12:Dynamic = path; __callArgument12; })) : Null<Array<Float>>);
       if ((cast !_Runtime.strictEquals(last, null) : Bool)) {
         (x1 = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast last : Array<Float>), (cast 0.0 : Float)) : Dynamic));
         (y1 = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast last : Array<Float>), (cast 1.0 : Float)) : Dynamic));
@@ -215,11 +215,11 @@ class Path {
     dtheta = (cast Path.vectorAngle__path((cast ux : Float), (cast uy : Float), (cast vx : Float), (cast vy : Float)) : Float);
     if ((cast ((cast !(cast sweep : Bool) : Bool) && (cast ((cast dtheta : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { (dtheta = cast ((dtheta - (HxMath.PI * 2.0)) : Dynamic)); }
     if ((cast ((cast sweep : Bool) && (cast ((cast dtheta : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { (dtheta = cast ((dtheta + (HxMath.PI * 2.0)) : Dynamic)); }
-    Path.appendArcCubics__path(({ final __callArgument7:Dynamic = path; __callArgument7; }), (cast cx : Float), (cast cy : Float), (cast rx : Float), (cast ry : Float), (cast xAxisRotation : Float), (cast theta1 : Float), (cast dtheta : Float));
+    Path.appendArcCubics__path(({ final __callArgument14:Dynamic = path; __callArgument14; }), (cast cx : Float), (cast cy : Float), (cast rx : Float), (cast ry : Float), (cast xAxisRotation : Float), (cast theta1 : Float), (cast dtheta : Float));
   }
 
   public static function appendPathCircle(path:flighthq.types.Path, cx:Float, cy:Float, radius:Float):Void {
-    appendPathEllipse(({ final __callArgument8:Dynamic = path; __callArgument8; }), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast radius : Float));
+    appendPathEllipse(({ final __callArgument16:Dynamic = path; __callArgument16; }), (cast cx : Float), (cast cy : Float), (cast radius : Float), (cast radius : Float));
   }
 
   public static function appendPathClose(path:flighthq.types.Path):Void {
@@ -241,12 +241,12 @@ class Path {
     var ky:Float = cast _Runtime.UNDEFINED;
     kx = (radiusX * CIRCLE_KAPPA);
     ky = (radiusY * CIRCLE_KAPPA);
-    appendPathMoveTo(({ final __callArgument9:Dynamic = path; __callArgument9; }), (cast (cx + radiusX) : Float), (cast cy : Float));
-    appendPathCubicCurveTo(({ final __callArgument10:Dynamic = path; __callArgument10; }), (cast (cx + radiusX) : Float), (cast (cy - ky) : Float), (cast (cx + kx) : Float), (cast (cy - radiusY) : Float), (cast cx : Float), (cast (cy - radiusY) : Float));
-    appendPathCubicCurveTo(({ final __callArgument11:Dynamic = path; __callArgument11; }), (cast (cx - kx) : Float), (cast (cy - radiusY) : Float), (cast (cx - radiusX) : Float), (cast (cy - ky) : Float), (cast (cx - radiusX) : Float), (cast cy : Float));
-    appendPathCubicCurveTo(({ final __callArgument12:Dynamic = path; __callArgument12; }), (cast (cx - radiusX) : Float), (cast (cy + ky) : Float), (cast (cx - kx) : Float), (cast (cy + radiusY) : Float), (cast cx : Float), (cast (cy + radiusY) : Float));
-    appendPathCubicCurveTo(({ final __callArgument13:Dynamic = path; __callArgument13; }), (cast (cx + kx) : Float), (cast (cy + radiusY) : Float), (cast (cx + radiusX) : Float), (cast (cy + ky) : Float), (cast (cx + radiusX) : Float), (cast cy : Float));
-    appendPathClose(({ final __callArgument14:Dynamic = path; __callArgument14; }));
+    appendPathMoveTo(({ final __callArgument18:Dynamic = path; __callArgument18; }), (cast (cx + radiusX) : Float), (cast cy : Float));
+    appendPathCubicCurveTo(({ final __callArgument20:Dynamic = path; __callArgument20; }), (cast (cx + radiusX) : Float), (cast (cy - ky) : Float), (cast (cx + kx) : Float), (cast (cy - radiusY) : Float), (cast cx : Float), (cast (cy - radiusY) : Float));
+    appendPathCubicCurveTo(({ final __callArgument22:Dynamic = path; __callArgument22; }), (cast (cx - kx) : Float), (cast (cy - radiusY) : Float), (cast (cx - radiusX) : Float), (cast (cy - ky) : Float), (cast (cx - radiusX) : Float), (cast cy : Float));
+    appendPathCubicCurveTo(({ final __callArgument24:Dynamic = path; __callArgument24; }), (cast (cx - radiusX) : Float), (cast (cy + ky) : Float), (cast (cx - kx) : Float), (cast (cy + radiusY) : Float), (cast cx : Float), (cast (cy + radiusY) : Float));
+    appendPathCubicCurveTo(({ final __callArgument26:Dynamic = path; __callArgument26; }), (cast (cx + kx) : Float), (cast (cy + radiusY) : Float), (cast (cx + radiusX) : Float), (cast (cy + ky) : Float), (cast (cx + radiusX) : Float), (cast cy : Float));
+    appendPathClose(({ final __callArgument28:Dynamic = path; __callArgument28; }));
   }
 
   public static function appendPathLineTo(path:flighthq.types.Path, x:Float, y:Float):Void {
@@ -261,35 +261,35 @@ class Path {
 
   public static function appendPathPolygon(path:flighthq.types.Path, points:Array<Float>):Void {
     if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { return; }
-    appendPathMoveTo(({ final __callArgument15:Dynamic = path; __callArgument15; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float)) : Float));
+    appendPathMoveTo(({ final __callArgument30:Dynamic = path; __callArgument30; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float)) : Float));
     {
       var i:Float = 2.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
-        appendPathLineTo(({ final __callArgument16:Dynamic = path; __callArgument16; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i + 1.0) : Float)) : Float));
+        appendPathLineTo(({ final __callArgument32:Dynamic = path; __callArgument32; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i + 1.0) : Float)) : Float));
         (i = cast ((i + 2.0) : Dynamic));
       }
     }
-    appendPathClose(({ final __callArgument17:Dynamic = path; __callArgument17; }));
+    appendPathClose(({ final __callArgument34:Dynamic = path; __callArgument34; }));
   }
 
   public static function appendPathPolyline(path:flighthq.types.Path, points:Array<Float>):Void {
     if ((cast ((cast _Runtime.field(points, 'length') : Float) < (cast 4.0 : Float)) : Bool)) { return; }
-    appendPathMoveTo(({ final __callArgument18:Dynamic = path; __callArgument18; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float)) : Float));
+    appendPathMoveTo(({ final __callArgument36:Dynamic = path; __callArgument36; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float)) : Float));
     {
       var i:Float = 2.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(points, 'length') : Float)) : Bool)) {
-        appendPathLineTo(({ final __callArgument19:Dynamic = path; __callArgument19; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i + 1.0) : Float)) : Float));
+        appendPathLineTo(({ final __callArgument38:Dynamic = path; __callArgument38; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast (i + 1.0) : Float)) : Float));
         (i = cast ((i + 2.0) : Dynamic));
       }
     }
   }
 
   public static function appendPathRectangle(path:flighthq.types.Path, x:Float, y:Float, width:Float, height:Float):Void {
-    appendPathMoveTo(({ final __callArgument20:Dynamic = path; __callArgument20; }), (cast x : Float), (cast y : Float));
-    appendPathLineTo(({ final __callArgument21:Dynamic = path; __callArgument21; }), (cast (x + width) : Float), (cast y : Float));
-    appendPathLineTo(({ final __callArgument22:Dynamic = path; __callArgument22; }), (cast (x + width) : Float), (cast (y + height) : Float));
-    appendPathLineTo(({ final __callArgument23:Dynamic = path; __callArgument23; }), (cast x : Float), (cast (y + height) : Float));
-    appendPathClose(({ final __callArgument24:Dynamic = path; __callArgument24; }));
+    appendPathMoveTo(({ final __callArgument40:Dynamic = path; __callArgument40; }), (cast x : Float), (cast y : Float));
+    appendPathLineTo(({ final __callArgument42:Dynamic = path; __callArgument42; }), (cast (x + width) : Float), (cast y : Float));
+    appendPathLineTo(({ final __callArgument44:Dynamic = path; __callArgument44; }), (cast (x + width) : Float), (cast (y + height) : Float));
+    appendPathLineTo(({ final __callArgument46:Dynamic = path; __callArgument46; }), (cast x : Float), (cast (y + height) : Float));
+    appendPathClose(({ final __callArgument48:Dynamic = path; __callArgument48; }));
   }
 
   public static function appendPathRoundRectangle(path:flighthq.types.Path, x:Float, y:Float, width:Float, height:Float, radius:flighthq._internal._Union2<Float, Array<Float>>):Void {
@@ -298,21 +298,21 @@ class Path {
     var rtr:Float = cast _Runtime.UNDEFINED;
     var rbr:Float = cast _Runtime.UNDEFINED;
     var rbl:Float = cast _Runtime.UNDEFINED;
-    __destructure0 = (cast Path.normalizeCornerRadii__path(({ final __callArgument25:Dynamic = radius; __callArgument25; }), (cast width : Float), (cast height : Float)) : Array<Float>);
+    __destructure0 = (cast Path.normalizeCornerRadii__path(({ final __callArgument50:Dynamic = radius; __callArgument50; }), (cast width : Float), (cast height : Float)) : Array<Float>);
     rtl = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
     rtr = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
     rbr = flighthq._internal._StaticIndex.readArray(__destructure0, 2.0);
     rbl = flighthq._internal._StaticIndex.readArray(__destructure0, 3.0);
-    appendPathMoveTo(({ final __callArgument26:Dynamic = path; __callArgument26; }), (cast (x + rtl) : Float), (cast y : Float));
-    appendPathLineTo(({ final __callArgument27:Dynamic = path; __callArgument27; }), (cast ((x + width) - rtr) : Float), (cast y : Float));
-    Path.appendCornerArc__path(({ final __callArgument28:Dynamic = path; __callArgument28; }), (cast ((x + width) - rtr) : Float), (cast (y + rtr) : Float), (cast rtr : Float), (cast (-HxMath.PI / 2.0) : Float), (cast 0.0 : Float));
-    appendPathLineTo(({ final __callArgument29:Dynamic = path; __callArgument29; }), (cast (x + width) : Float), (cast ((y + height) - rbr) : Float));
-    Path.appendCornerArc__path(({ final __callArgument30:Dynamic = path; __callArgument30; }), (cast ((x + width) - rbr) : Float), (cast ((y + height) - rbr) : Float), (cast rbr : Float), (cast 0.0 : Float), (cast (HxMath.PI / 2.0) : Float));
-    appendPathLineTo(({ final __callArgument31:Dynamic = path; __callArgument31; }), (cast (x + rbl) : Float), (cast (y + height) : Float));
-    Path.appendCornerArc__path(({ final __callArgument32:Dynamic = path; __callArgument32; }), (cast (x + rbl) : Float), (cast ((y + height) - rbl) : Float), (cast rbl : Float), (cast (HxMath.PI / 2.0) : Float), (cast HxMath.PI : Float));
-    appendPathLineTo(({ final __callArgument33:Dynamic = path; __callArgument33; }), (cast x : Float), (cast (y + rtl) : Float));
-    Path.appendCornerArc__path(({ final __callArgument34:Dynamic = path; __callArgument34; }), (cast (x + rtl) : Float), (cast (y + rtl) : Float), (cast rtl : Float), (cast HxMath.PI : Float), (cast ((HxMath.PI * 3.0) / 2.0) : Float));
-    appendPathClose(({ final __callArgument35:Dynamic = path; __callArgument35; }));
+    appendPathMoveTo(({ final __callArgument52:Dynamic = path; __callArgument52; }), (cast (x + rtl) : Float), (cast y : Float));
+    appendPathLineTo(({ final __callArgument54:Dynamic = path; __callArgument54; }), (cast ((x + width) - rtr) : Float), (cast y : Float));
+    Path.appendCornerArc__path(({ final __callArgument56:Dynamic = path; __callArgument56; }), (cast ((x + width) - rtr) : Float), (cast (y + rtr) : Float), (cast rtr : Float), (cast (-HxMath.PI / 2.0) : Float), (cast 0.0 : Float));
+    appendPathLineTo(({ final __callArgument58:Dynamic = path; __callArgument58; }), (cast (x + width) : Float), (cast ((y + height) - rbr) : Float));
+    Path.appendCornerArc__path(({ final __callArgument60:Dynamic = path; __callArgument60; }), (cast ((x + width) - rbr) : Float), (cast ((y + height) - rbr) : Float), (cast rbr : Float), (cast 0.0 : Float), (cast (HxMath.PI / 2.0) : Float));
+    appendPathLineTo(({ final __callArgument62:Dynamic = path; __callArgument62; }), (cast (x + rbl) : Float), (cast (y + height) : Float));
+    Path.appendCornerArc__path(({ final __callArgument64:Dynamic = path; __callArgument64; }), (cast (x + rbl) : Float), (cast ((y + height) - rbl) : Float), (cast rbl : Float), (cast (HxMath.PI / 2.0) : Float), (cast HxMath.PI : Float));
+    appendPathLineTo(({ final __callArgument66:Dynamic = path; __callArgument66; }), (cast x : Float), (cast (y + rtl) : Float));
+    Path.appendCornerArc__path(({ final __callArgument68:Dynamic = path; __callArgument68; }), (cast (x + rtl) : Float), (cast (y + rtl) : Float), (cast rtl : Float), (cast HxMath.PI : Float), (cast ((HxMath.PI * 3.0) / 2.0) : Float));
+    appendPathClose(({ final __callArgument70:Dynamic = path; __callArgument70; }));
   }
 
   public static function cleanPath(source:flighthq.types.Path, tolerance:Float, out:flighthq.types.Path, ?flattenTolerance:Float):Void {

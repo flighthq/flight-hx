@@ -32,7 +32,7 @@ class CollisionFace3D {
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast CollisionFace3D.rotation__collisionFace3D : Array<Float>), (cast 1.0 : Float), (cast (cast box : CollisionBox3D).rotationY : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast CollisionFace3D.rotation__collisionFace3D : Array<Float>), (cast 2.0 : Float), (cast (cast box : CollisionBox3D).rotationZ : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast CollisionFace3D.rotation__collisionFace3D : Array<Float>), (cast 3.0 : Float), (cast (cast box : CollisionBox3D).rotationW : Float));
-    CollisionFace3D.writeBoxFaceCorners__collisionFace3D((cast (cast box : CollisionBox3D).x : Float), (cast (cast box : CollisionBox3D).y : Float), (cast (cast box : CollisionBox3D).z : Float), (cast (cast box : CollisionBox3D).halfX : Float), (cast (cast box : CollisionBox3D).halfY : Float), (cast (cast box : CollisionBox3D).halfZ : Float), (cast dirX : Float), (cast dirY : Float), (cast dirZ : Float), ({ final __callArgument2:Dynamic = CollisionFace3D.rotation__collisionFace3D; __callArgument2; }), ({ final __callArgument3:Dynamic = out; __callArgument3; }));
+    CollisionFace3D.writeBoxFaceCorners__collisionFace3D((cast (cast box : CollisionBox3D).x : Float), (cast (cast box : CollisionBox3D).y : Float), (cast (cast box : CollisionBox3D).z : Float), (cast (cast box : CollisionBox3D).halfX : Float), (cast (cast box : CollisionBox3D).halfY : Float), (cast (cast box : CollisionBox3D).halfZ : Float), (cast dirX : Float), (cast dirY : Float), (cast dirZ : Float), ({ final __callArgument4:Dynamic = CollisionFace3D.rotation__collisionFace3D; __callArgument4; }), ({ final __callArgument5:Dynamic = out; __callArgument5; }));
     return cast 4.0;
     return cast null;
   }
@@ -108,16 +108,16 @@ class CollisionFace3D {
       }
     }
     if ((cast ((cast written : Float) < (cast 3.0 : Float)) : Bool)) { return cast written; }
-    CollisionFace3D.sortFaceVerticesByAngle__collisionFace3D(({ final __callArgument4:Dynamic = out; __callArgument4; }), (cast written : Float), (cast unitX : Float), (cast unitY : Float), (cast unitZ : Float));
+    CollisionFace3D.sortFaceVerticesByAngle__collisionFace3D(({ final __callArgument8:Dynamic = out; __callArgument8; }), (cast written : Float), (cast unitX : Float), (cast unitY : Float), (cast unitZ : Float));
     return cast written;
     return cast null;
   }
 
   public static function registerBuiltInCollisionFaceQueries3D():Void {
-    registerCollisionFaceQuery3D(({ final __callArgument5:Dynamic = 'aabb'; __callArgument5; }), ({ final __callArgument6:Dynamic = queryCollisionAabbFace3D; __callArgument6; }));
-    registerCollisionFaceQuery3D(({ final __callArgument7:Dynamic = 'box'; __callArgument7; }), ({ final __callArgument8:Dynamic = queryCollisionBoxFace3D; __callArgument8; }));
-    registerCollisionFaceQuery3D(({ final __callArgument9:Dynamic = 'capsule'; __callArgument9; }), ({ final __callArgument10:Dynamic = queryCollisionCapsuleFace3D; __callArgument10; }));
-    registerCollisionFaceQuery3D(({ final __callArgument11:Dynamic = 'convex'; __callArgument11; }), ({ final __callArgument12:Dynamic = queryCollisionConvexFace3D; __callArgument12; }));
+    registerCollisionFaceQuery3D(({ final __callArgument10:Dynamic = 'aabb'; __callArgument10; }), ({ final __callArgument11:Dynamic = queryCollisionAabbFace3D; __callArgument11; }));
+    registerCollisionFaceQuery3D(({ final __callArgument14:Dynamic = 'box'; __callArgument14; }), ({ final __callArgument15:Dynamic = queryCollisionBoxFace3D; __callArgument15; }));
+    registerCollisionFaceQuery3D(({ final __callArgument18:Dynamic = 'capsule'; __callArgument18; }), ({ final __callArgument19:Dynamic = queryCollisionCapsuleFace3D; __callArgument19; }));
+    registerCollisionFaceQuery3D(({ final __callArgument22:Dynamic = 'convex'; __callArgument22; }), ({ final __callArgument23:Dynamic = queryCollisionConvexFace3D; __callArgument23; }));
   }
 
   public static function registerCollisionFaceQuery3D(kind:CollisionShapeKind3D, query:CollisionFaceQuery3D):Void {
@@ -165,7 +165,7 @@ class CollisionFace3D {
     (centroidX = cast ((centroidX / count) : Dynamic));
     (centroidY = cast ((centroidY / count) : Dynamic));
     (centroidZ = cast ((centroidZ / count) : Dynamic));
-    CollisionFace3D.writeFacePlaneAxis__collisionFace3D((cast normalX : Float), (cast normalY : Float), (cast normalZ : Float), ({ final __callArgument13:Dynamic = CollisionFace3D.planeAxisU__collisionFace3D; __callArgument13; }));
+    CollisionFace3D.writeFacePlaneAxis__collisionFace3D((cast normalX : Float), (cast normalY : Float), (cast normalZ : Float), ({ final __callArgument26:Dynamic = CollisionFace3D.planeAxisU__collisionFace3D; __callArgument26; }));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast CollisionFace3D.planeAxisV__collisionFace3D : Array<Float>), (cast 0.0 : Float), (cast ((normalY * flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionFace3D.planeAxisU__collisionFace3D : Array<Float>), (cast 2.0 : Float))) - (normalZ * flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionFace3D.planeAxisU__collisionFace3D : Array<Float>), (cast 1.0 : Float)))) : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast CollisionFace3D.planeAxisV__collisionFace3D : Array<Float>), (cast 1.0 : Float), (cast ((normalZ * flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionFace3D.planeAxisU__collisionFace3D : Array<Float>), (cast 0.0 : Float))) - (normalX * flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionFace3D.planeAxisU__collisionFace3D : Array<Float>), (cast 2.0 : Float)))) : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast CollisionFace3D.planeAxisV__collisionFace3D : Array<Float>), (cast 2.0 : Float), (cast ((normalX * flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionFace3D.planeAxisU__collisionFace3D : Array<Float>), (cast 1.0 : Float))) - (normalY * flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionFace3D.planeAxisU__collisionFace3D : Array<Float>), (cast 0.0 : Float)))) : Float));
@@ -243,7 +243,7 @@ class CollisionFace3D {
     var absZ:Float = cast _Runtime.UNDEFINED;
     var axis:Float = cast _Runtime.UNDEFINED;
     var sign:Float = cast _Runtime.UNDEFINED;
-    CollisionFace3D.rotateFaceVector__collisionFace3D((cast dirX : Float), (cast dirY : Float), (cast dirZ : Float), ({ final __callArgument14:Dynamic = quaternion; __callArgument14; }), (cast true : Bool), ({ final __callArgument15:Dynamic = CollisionFace3D.localFaceDirection__collisionFace3D; __callArgument15; }));
+    CollisionFace3D.rotateFaceVector__collisionFace3D((cast dirX : Float), (cast dirY : Float), (cast dirZ : Float), ({ final __callArgument28:Dynamic = quaternion; __callArgument28; }), (cast true : Bool), ({ final __callArgument29:Dynamic = CollisionFace3D.localFaceDirection__collisionFace3D; __callArgument29; }));
     localX = flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionFace3D.localFaceDirection__collisionFace3D : Array<Float>), (cast 0.0 : Float));
     localY = flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionFace3D.localFaceDirection__collisionFace3D : Array<Float>), (cast 1.0 : Float));
     localZ = flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionFace3D.localFaceDirection__collisionFace3D : Array<Float>), (cast 2.0 : Float));
@@ -271,7 +271,7 @@ class CollisionFace3D {
           flighthq._internal._StaticIndex.writeFloatArrayTyped((cast CollisionFace3D.localFaceCorner__collisionFace3D : Array<Float>), (cast 1.0 : Float), (cast (halfY * vSign) : Float));
           flighthq._internal._StaticIndex.writeFloatArrayTyped((cast CollisionFace3D.localFaceCorner__collisionFace3D : Array<Float>), (cast 2.0 : Float), (cast (halfZ * sign) : Float));
         } }
-        CollisionFace3D.rotateFaceVector__collisionFace3D((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionFace3D.localFaceCorner__collisionFace3D : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionFace3D.localFaceCorner__collisionFace3D : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionFace3D.localFaceCorner__collisionFace3D : Array<Float>), (cast 2.0 : Float)) : Float), ({ final __callArgument16:Dynamic = quaternion; __callArgument16; }), (cast false : Bool), ({ final __callArgument17:Dynamic = CollisionFace3D.rotatedCorner__collisionFace3D; __callArgument17; }));
+        CollisionFace3D.rotateFaceVector__collisionFace3D((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionFace3D.localFaceCorner__collisionFace3D : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionFace3D.localFaceCorner__collisionFace3D : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionFace3D.localFaceCorner__collisionFace3D : Array<Float>), (cast 2.0 : Float)) : Float), ({ final __callArgument32:Dynamic = quaternion; __callArgument32; }), (cast false : Bool), ({ final __callArgument33:Dynamic = CollisionFace3D.rotatedCorner__collisionFace3D; __callArgument33; }));
         flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast (corner * 3.0) : Float), (cast (centreX + flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionFace3D.rotatedCorner__collisionFace3D : Array<Float>), (cast 0.0 : Float))) : Float));
         flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast ((corner * 3.0) + 1.0) : Float), (cast (centreY + flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionFace3D.rotatedCorner__collisionFace3D : Array<Float>), (cast 1.0 : Float))) : Float));
         flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast ((corner * 3.0) + 2.0) : Float), (cast (centreZ + flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionFace3D.rotatedCorner__collisionFace3D : Array<Float>), (cast 2.0 : Float))) : Float));

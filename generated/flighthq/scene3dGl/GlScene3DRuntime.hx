@@ -50,16 +50,16 @@ class GlScene3DRuntime {
     }
     destroyGlEnvironmentIblBakePrograms(({ final __callArgument2:Dynamic = state; __callArgument2; }));
     if ((cast !_Runtime.strictEquals((cast scene : { var shadowTarget:Null<GlRenderTarget>; }).shadowTarget, null) : Bool)) {
-      destroyGlRenderTarget(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast scene : { var shadowTarget:Null<GlRenderTarget>; }).shadowTarget);
+      destroyGlRenderTarget(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast scene : { var shadowTarget:Null<GlRenderTarget>; }).shadowTarget);
       ((cast scene : { var shadowTarget:Null<GlRenderTarget>; }).shadowTarget = cast (null : Null<GlRenderTarget>));
     }
     ((cast scene : { var shadow:Null<GlScene3DShadow>; }).shadow = cast (null : Null<GlScene3DShadow>));
     if ((cast !_Runtime.strictEquals((cast scene : { var skinNormalPalette:Null<GlSkinPaletteTexture>; }).skinNormalPalette, null) : Bool)) {
-      destroyGlSkinPaletteTexture(({ final __callArgument4:Dynamic = gl; __callArgument4; }), (cast scene : { var skinNormalPalette:Null<GlSkinPaletteTexture>; }).skinNormalPalette);
+      destroyGlSkinPaletteTexture(({ final __callArgument6:Dynamic = gl; __callArgument6; }), (cast scene : { var skinNormalPalette:Null<GlSkinPaletteTexture>; }).skinNormalPalette);
       ((cast scene : { var skinNormalPalette:Null<GlSkinPaletteTexture>; }).skinNormalPalette = cast (null : Null<GlSkinPaletteTexture>));
     }
     if ((cast !_Runtime.strictEquals((cast scene : { var skinPalette:Null<GlSkinPaletteTexture>; }).skinPalette, null) : Bool)) {
-      destroyGlSkinPaletteTexture(({ final __callArgument5:Dynamic = gl; __callArgument5; }), (cast scene : { var skinPalette:Null<GlSkinPaletteTexture>; }).skinPalette);
+      destroyGlSkinPaletteTexture(({ final __callArgument8:Dynamic = gl; __callArgument8; }), (cast scene : { var skinPalette:Null<GlSkinPaletteTexture>; }).skinPalette);
       ((cast scene : { var skinPalette:Null<GlSkinPaletteTexture>; }).skinPalette = cast (null : Null<GlSkinPaletteTexture>));
     }
     _Runtime.setLength((cast scene : { var blendedDrawList:Array<GlScene3DDrawEntry>; }).blendedDrawList, 0.0);
@@ -72,7 +72,7 @@ class GlScene3DRuntime {
   public static function ensureGlSkinNormalPalette(state:GlRenderState):GlSkinPaletteTexture {
     var scene:flighthq.types.GlScene3DRuntime = cast _Runtime.UNDEFINED;
     var palette:Null<GlSkinPaletteTexture> = cast _Runtime.UNDEFINED;
-    scene = (cast getGlScene3DRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : flighthq.types.GlScene3DRuntime);
+    scene = (cast getGlScene3DRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : flighthq.types.GlScene3DRuntime);
     palette = scene.skinNormalPalette;
     if ((cast _Runtime.strictEquals(palette, null) : Bool)) {
       (palette = cast ((cast createGlSkinPaletteTexture((cast state : GlRenderState).gl) : GlSkinPaletteTexture) : Dynamic));
@@ -86,7 +86,7 @@ class GlScene3DRuntime {
   public static function ensureGlSkinPalette(state:GlRenderState):GlSkinPaletteTexture {
     var scene:flighthq.types.GlScene3DRuntime = cast _Runtime.UNDEFINED;
     var palette:Null<GlSkinPaletteTexture> = cast _Runtime.UNDEFINED;
-    scene = (cast getGlScene3DRuntime(({ final __callArgument7:Dynamic = state; __callArgument7; })) : flighthq.types.GlScene3DRuntime);
+    scene = (cast getGlScene3DRuntime(({ final __callArgument12:Dynamic = state; __callArgument12; })) : flighthq.types.GlScene3DRuntime);
     palette = scene.skinPalette;
     if ((cast _Runtime.strictEquals(palette, null) : Bool)) {
       (palette = cast ((cast createGlSkinPaletteTexture((cast state : GlRenderState).gl) : GlSkinPaletteTexture) : Dynamic));

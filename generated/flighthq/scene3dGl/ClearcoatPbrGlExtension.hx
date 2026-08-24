@@ -32,8 +32,8 @@ class ClearcoatPbrGlExtension {
     (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightClearcoatRoughness' : String), (cast extension.clearcoatRoughness : Float));
     (cast context : GlPbrExtensionBindContext).setFloat((cast 'u_flightClearcoatNormalScale' : String), (cast extension.clearcoatNormalScale : Float));
     ClearcoatPbrGlExtension.bindMap__clearcoatPbrGlExtension(({ final __callArgument0:Dynamic = context; __callArgument0; }), (cast 'Clearcoat' : String), (cast extension.clearcoatMap : Dynamic), extension.clearcoatMapUvSet);
-    ClearcoatPbrGlExtension.bindMap__clearcoatPbrGlExtension(({ final __callArgument1:Dynamic = context; __callArgument1; }), (cast 'ClearcoatRoughness' : String), (cast extension.clearcoatRoughnessMap : Dynamic), extension.clearcoatRoughnessMapUvSet);
-    ClearcoatPbrGlExtension.bindMap__clearcoatPbrGlExtension(({ final __callArgument2:Dynamic = context; __callArgument2; }), (cast 'ClearcoatNormal' : String), (cast extension.clearcoatNormalMap : Dynamic), extension.clearcoatNormalMapUvSet);
+    ClearcoatPbrGlExtension.bindMap__clearcoatPbrGlExtension(({ final __callArgument2:Dynamic = context; __callArgument2; }), (cast 'ClearcoatRoughness' : String), (cast extension.clearcoatRoughnessMap : Dynamic), extension.clearcoatRoughnessMapUvSet);
+    ClearcoatPbrGlExtension.bindMap__clearcoatPbrGlExtension(({ final __callArgument4:Dynamic = context; __callArgument4; }), (cast 'ClearcoatNormal' : String), (cast extension.clearcoatNormalMap : Dynamic), extension.clearcoatNormalMapUvSet);
   }, createShaderContribution: function(context:GlPbrExtensionShaderContext, value:PbrExtension):GlPbrExtensionShaderContribution {
     var extension:ClearcoatPbrExtension = cast _Runtime.UNDEFINED;
     var factorMap:Bool = cast _Runtime.UNDEFINED;
@@ -51,11 +51,11 @@ class ClearcoatPbrGlExtension {
   } });
 
   public static function registerGlClearcoatPbrExtension(state:GlRenderState):Void {
-    registerGlPbrExtension(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast ClearcoatPbrExtensionKind : String), ({ final __callArgument4:Dynamic = clearcoatPbrGlExtension; __callArgument4; }));
+    registerGlPbrExtension(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast ClearcoatPbrExtensionKind : String), ({ final __callArgument7:Dynamic = clearcoatPbrGlExtension; __callArgument7; }));
   }
 
   public static function bindMap__clearcoatPbrGlExtension(context:GlPbrExtensionBindContext, name:String, texture:Null<Texture>, uvSet:PbrUvSet):Void {
-    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flight' + Std.string(name) + 'Map' : String), (cast 'u_flight' + Std.string(name) + 'MapUvSet' : String), (cast 'u_flight' + Std.string(name) + 'MapTransform' : String), (cast texture : Dynamic), ({ final __callArgument5:Dynamic = uvSet; __callArgument5; }));
+    (cast context : GlPbrExtensionBindContext).bindTexture((cast 'u_flight' + Std.string(name) + 'Map' : String), (cast 'u_flight' + Std.string(name) + 'MapUvSet' : String), (cast 'u_flight' + Std.string(name) + 'MapTransform' : String), (cast texture : Dynamic), ({ final __callArgument10:Dynamic = uvSet; __callArgument10; }));
   }
 
   public static function mapDeclarations__clearcoatPbrGlExtension(name:String, enabled:Bool):String {

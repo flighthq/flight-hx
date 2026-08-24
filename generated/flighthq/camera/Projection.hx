@@ -48,6 +48,6 @@ class Projection {
     }
     halfWidth = (cast projection : { var halfWidth:Float; }).halfWidth;
     halfHeight = (cast projection : { var halfHeight:Float; }).halfHeight;
-    setOrthographicMatrix4(({ final __callArgument1:Dynamic = out; __callArgument1; }), (cast -halfWidth : Float), (cast halfWidth : Float), (cast -halfHeight : Float), (cast halfHeight : Float), (cast near : Float), (cast far : Float));
+    setOrthographicMatrix4(({ final __callArgument2:Dynamic = out; __callArgument2; }), (cast -halfWidth : Float), (cast halfWidth : Float), (cast -halfHeight : Float), (cast halfHeight : Float), (cast near : Float), (cast far : Float));
   }
 }

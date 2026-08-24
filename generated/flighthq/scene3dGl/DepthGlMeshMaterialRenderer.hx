@@ -33,22 +33,22 @@ class DepthGlMeshMaterialRenderer {
     var program:GlDebugProgram = cast _Runtime.UNDEFINED;
     depth = (cast material : Null<DepthMaterial>);
     program = (cast ensureGlDebugProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = { hasNormalMap: false, mode: 'depth' }; __callArgument1; })) : GlDebugProgram);
-    beginGlMeshDraw(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = program; __callArgument3; }), (cast ((cast !_Runtime.strictEquals(depth, null) : Bool) && (cast (cast depth : { var doubleSided:Bool; }).doubleSided : Bool)) : Bool));
-    setGlMeshViewProjection(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast program : GlDebugProgram).locViewProjection, ({ final __callArgument5:Dynamic = camera; __callArgument5; }));
+    beginGlMeshDraw(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = program; __callArgument5; }), (cast ((cast !_Runtime.strictEquals(depth, null) : Bool) && (cast (cast depth : { var doubleSided:Bool; }).doubleSided : Bool)) : Bool));
+    setGlMeshViewProjection(({ final __callArgument8:Dynamic = state; __callArgument8; }), (cast program : GlDebugProgram).locViewProjection, ({ final __callArgument9:Dynamic = camera; __callArgument9; }));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv((cast state : GlRenderState).gl, (cast program : GlDebugProgram).locView, false, (cast camera.view : { var m:flighthq._internal._Float32Array; }).m);
     if ((cast _Runtime.strictEquals(depth, null) : Bool)) {
-      bindGlDebugRange(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = program; __callArgument7; }), (cast 0.0 : Float), (cast 1.0 : Float));
+      bindGlDebugRange(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = program; __callArgument13; }), (cast 0.0 : Float), (cast 1.0 : Float));
       return;
     }
-    bindGlDebugRange(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = program; __callArgument9; }), (cast (cast depth : { var near:Float; }).near : Float), (cast (cast depth : { var far:Float; }).far : Float));
+    bindGlDebugRange(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = program; __callArgument17; }), (cast (cast depth : { var near:Float; }).near : Float), (cast (cast depth : { var far:Float; }).far : Float));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime(({ final __callArgument20:Dynamic = state; __callArgument20; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    drawGlMeshSubset(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = program; __callArgument12; }), ({ final __callArgument13:Dynamic = proxy; __callArgument13; }), ({ final __callArgument14:Dynamic = geometry; __callArgument14; }));
+    drawGlMeshSubset(({ final __callArgument22:Dynamic = state; __callArgument22; }), ({ final __callArgument23:Dynamic = program; __callArgument23; }), ({ final __callArgument24:Dynamic = proxy; __callArgument24; }), ({ final __callArgument25:Dynamic = geometry; __callArgument25; }));
   } });
 
   public static function registerGlDepthMaterial(state:GlRenderState):Void {
-    registerGlMeshMaterialRenderer(({ final __callArgument15:Dynamic = state; __callArgument15; }), (cast DepthMaterialKind : String), ({ final __callArgument16:Dynamic = depthGlMeshMaterialRenderer; __callArgument16; }));
+    registerGlMeshMaterialRenderer(({ final __callArgument30:Dynamic = state; __callArgument30; }), (cast DepthMaterialKind : String), ({ final __callArgument31:Dynamic = depthGlMeshMaterialRenderer; __callArgument31; }));
   }
 }

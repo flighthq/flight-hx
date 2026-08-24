@@ -37,15 +37,15 @@ class DomTextureResolver {
     var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:flighthq.types.DomTextureResolver; }>> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) { return cast null; }
-    sourceKind = (cast getTextureSourceKind(({ final __callArgument1:Dynamic = texture; __callArgument1; })) : Null<String>);
+    sourceKind = (cast getTextureSourceKind(({ final __callArgument2:Dynamic = texture; __callArgument2; })) : Null<String>);
     if ((cast _Runtime.strictEquals(sourceKind, null) : Bool)) { return cast null; }
-    runtime = (cast getDomRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : DomRenderStateRuntime);
+    runtime = (cast getDomRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : DomRenderStateRuntime);
     entry = ((cast (cast (cast runtime.registries : { var textureResolvers:KeyedTable<flighthq.types.DomTextureResolver>; }).textureResolvers : KeyedTable<flighthq.types.DomTextureResolver>).entries : flighthq._internal._Map<String, RegistryTableEntry<flighthq.types.DomTextureResolver>>).get(sourceKind));
-    if ((cast !_Runtime.strictEquals(({ final __structural3 = entry; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
+    if ((cast !_Runtime.strictEquals(({ final __structural6 = entry; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) {
       _Runtime.callOptionalValue(runtime.registryMiss, cast ([RenderRegistry.TextureResolver, sourceKind] : Array<Dynamic>));
       return cast null;
     }
-    return cast (cast entry : { var state:String; var value:flighthq.types.DomTextureResolver; }).value(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = texture; __callArgument5; }));
+    return cast (cast entry : { var state:String; var value:flighthq.types.DomTextureResolver; }).value(({ final __callArgument7:Dynamic = state; __callArgument7; }), ({ final __callArgument8:Dynamic = texture; __callArgument8; }));
     return cast null;
   }
 }

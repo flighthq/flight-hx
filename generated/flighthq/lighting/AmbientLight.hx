@@ -17,7 +17,7 @@ class AmbientLight {
   }
 
   public static function createAmbientLight(?options:AmbientLightOptions):flighthq.types.AmbientLight {
-    return cast (cast createEntity(({ final __callArgument3:Dynamic = { color: _Runtime.coalesce(({ final __structural1 = options; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var color:Null<Float>; }).color; }), function():Dynamic return cast 4294967295.0), intensity: _Runtime.coalesce(({ final __structural2 = options; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var intensity:Null<Float>; }).intensity; }), function():Dynamic return cast 1.0), kind: AmbientLightKind }; __callArgument3; })) : { >Entity, var color:Float; var intensity:Float; var kind:String; });
+    return cast (cast createEntity(({ final __callArgument4:Dynamic = { color: _Runtime.coalesce(({ final __structural2 = options; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var color:Null<Float>; }).color; }), function():Dynamic return cast 4294967295.0), intensity: _Runtime.coalesce(({ final __structural3 = options; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var intensity:Null<Float>; }).intensity; }), function():Dynamic return cast 1.0), kind: AmbientLightKind }; __callArgument4; })) : { >Entity, var color:Float; var intensity:Float; var kind:String; });
     return cast null;
   }
 }

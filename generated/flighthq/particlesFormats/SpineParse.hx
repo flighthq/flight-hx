@@ -156,13 +156,13 @@ class SpineParse {
       return cast _Runtime.UNDEFINED;
     });
     if ((cast (cast nonZeroRange((cast 'lifeOffset' : String)) : Bool) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument1:Dynamic = diagnostics; __callArgument1; }), ({ final __callArgument2:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument2; }), (cast 'spine.life-offset-unsupported' : String), (cast 'collectSpineDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+      (#if js _Runtime.callValue(reportImportDiagnostic, cast ([({ final __callArgument4:Dynamic = diagnostics; __callArgument4; }), ({ final __callArgument5:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument5; }), (cast 'spine.life-offset-unsupported' : String), (cast 'collectSpineDiagnostics' : String)] : Array<Dynamic>)) #else reportImportDiagnostic(({ final __callArgument2:Dynamic = diagnostics; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument3; }), (cast 'spine.life-offset-unsupported' : String), (cast 'collectSpineDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     }
     if ((cast ((cast (cast nonZeroRange((cast 'x' : String)) : Bool) : Bool) || (cast (cast nonZeroRange((cast 'y' : String)) : Bool) : Bool)) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument3:Dynamic = diagnostics; __callArgument3; }), ({ final __callArgument4:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument4; }), (cast 'spine.position-range-unsupported' : String), (cast 'collectSpineDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+      (#if js _Runtime.callValue(reportImportDiagnostic, cast ([({ final __callArgument8:Dynamic = diagnostics; __callArgument8; }), ({ final __callArgument9:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument9; }), (cast 'spine.position-range-unsupported' : String), (cast 'collectSpineDiagnostics' : String)] : Array<Dynamic>)) #else reportImportDiagnostic(({ final __callArgument6:Dynamic = diagnostics; __callArgument6; }), ({ final __callArgument7:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument7; }), (cast 'spine.position-range-unsupported' : String), (cast 'collectSpineDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     }
     if ((cast _Runtime.strictEquals((cast raw : { var premultiplied:flighthq._internal._Any; }).premultiplied, true) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument5:Dynamic = diagnostics; __callArgument5; }), ({ final __callArgument6:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument6; }), (cast 'spine.premultiplied-informational' : String), (cast 'collectSpineDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+      (#if js _Runtime.callValue(reportImportDiagnostic, cast ([({ final __callArgument12:Dynamic = diagnostics; __callArgument12; }), ({ final __callArgument13:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument13; }), (cast 'spine.premultiplied-informational' : String), (cast 'collectSpineDiagnostics' : String)] : Array<Dynamic>)) #else reportImportDiagnostic(({ final __callArgument10:Dynamic = diagnostics; __callArgument10; }), ({ final __callArgument11:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument11; }), (cast 'spine.premultiplied-informational' : String), (cast 'collectSpineDiagnostics' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     }
     return cast diagnostics;
     return cast null;
@@ -184,7 +184,7 @@ class SpineParse {
         i++;
       }
     }
-    return cast (cast particleColorCurveFromKeyframes(({ final __callArgument7:Dynamic = keys; __callArgument7; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Array<Float>);
+    return cast (cast (#if js _Runtime.callValue(particleColorCurveFromKeyframes, cast ([({ final __callArgument15:Dynamic = keys; __callArgument15; })] : Array<Dynamic>)) #else particleColorCurveFromKeyframes(({ final __callArgument14:Dynamic = keys; __callArgument14; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Array<Float>);
     return cast null;
   }
 
@@ -200,7 +200,7 @@ class SpineParse {
         i++;
       }
     }
-    return cast (cast particleCurveFromKeyframes(({ final __callArgument8:Dynamic = keys; __callArgument8; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Array<Float>);
+    return cast (cast (#if js _Runtime.callValue(particleCurveFromKeyframes, cast ([({ final __callArgument17:Dynamic = keys; __callArgument17; })] : Array<Dynamic>)) #else particleCurveFromKeyframes(({ final __callArgument16:Dynamic = keys; __callArgument16; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Array<Float>);
     return cast null;
   }
 
@@ -238,7 +238,7 @@ class SpineParse {
   public static function parseSpineParticleDocument(json:String):SpineParsed {
     var raw:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     raw = (cast SpineParse.parseSpineJson__spineParse((cast json : String)) : flighthq._internal._Record<String, flighthq._internal._Any>);
-    return cast { config: (cast SpineParse.rawToConfig__spineParse(({ final __callArgument9:Dynamic = raw; __callArgument9; })) : ParticleEmitterConfig), diagnostics: (cast SpineParse.collectSpineDiagnostics__spineParse(({ final __callArgument10:Dynamic = raw; __callArgument10; })) : Array<ImportDiagnostic>), document: (cast SpineParse.rawToDocument__spineParse(({ final __callArgument11:Dynamic = raw; __callArgument11; })) : SpineParticleDocument) };
+    return cast { config: (cast SpineParse.rawToConfig__spineParse(({ final __callArgument18:Dynamic = raw; __callArgument18; })) : ParticleEmitterConfig), diagnostics: (cast SpineParse.collectSpineDiagnostics__spineParse(({ final __callArgument20:Dynamic = raw; __callArgument20; })) : Array<ImportDiagnostic>), document: (cast SpineParse.rawToDocument__spineParse(({ final __callArgument22:Dynamic = raw; __callArgument22; })) : SpineParticleDocument) };
     return cast null;
   }
 }

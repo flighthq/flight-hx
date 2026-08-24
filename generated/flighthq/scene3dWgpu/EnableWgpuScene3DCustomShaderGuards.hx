@@ -23,7 +23,7 @@ class EnableWgpuScene3DCustomShaderGuards {
 
   @:noCompletion
   public static function enableWgpuScene3DCustomShaderGuards(state:WgpuRenderState):Void {
-    ((cast (cast getWgpuScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuScene3DRuntime) : { @:optional var customShaderGuard:Null<WgpuRenderState->String->String->CustomShaderMaterial->Void>; }).customShaderGuard = cast (runWgpuCustomShaderGuards : Null<WgpuRenderState->String->String->CustomShaderMaterial->Void>));
+    ((cast (cast getWgpuScene3DRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuScene3DRuntime) : { @:optional var customShaderGuard:Null<WgpuRenderState->String->String->CustomShaderMaterial->Void>; }).customShaderGuard = cast (runWgpuCustomShaderGuards : Null<WgpuRenderState->String->String->CustomShaderMaterial->Void>));
   }
 
   @:noCompletion
@@ -32,7 +32,7 @@ class EnableWgpuScene3DCustomShaderGuards {
     var uniformNames:Array<String> = cast _Runtime.UNDEFINED;
     var textureCount:Float = cast _Runtime.UNDEFINED;
     var required:Array<Array<flighthq._internal._Union2<Float, String>>> = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.looseEquals((cast (cast getWgpuScene3DRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuScene3DRuntime) : { @:optional var customShaderGuard:Null<WgpuRenderState->String->String->CustomShaderMaterial->Void>; }).customShaderGuard, null) : Bool)) { return; }
+    if ((cast _Runtime.looseEquals((cast (cast getWgpuScene3DRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuScene3DRuntime) : { @:optional var customShaderGuard:Null<WgpuRenderState->String->String->CustomShaderMaterial->Void>; }).customShaderGuard, null) : Bool)) { return; }
     uniforms = _Runtime.coalesce(material.uniforms, function():Dynamic return cast {  });
     uniformNames = _Runtime.callProperty(flighthq._internal.DynamicObject.keys(uniforms), 'sort', cast ([] : Array<Dynamic>));
     for (name in _Runtime.iterable(uniformNames)) {
@@ -76,6 +76,6 @@ class EnableWgpuScene3DCustomShaderGuards {
   }
 
   public static function warn__enableWgpuScene3DCustomShaderGuards(key:String, message:String):Void {
-    (cast logOnce((cast 'scene-wgpu:custom-shader:' + Std.string(key) + '' : String), ({ final __callArgument7:Dynamic = LogLevel.Warn; __callArgument7; }), (cast { message: message } : Dynamic), ({ final __callArgument8:Dynamic = 'scene-wgpu'; __callArgument8; })) : Bool);
+    (cast logOnce((cast 'scene-wgpu:custom-shader:' + Std.string(key) + '' : String), ({ final __callArgument10:Dynamic = LogLevel.Warn; __callArgument10; }), (cast { message: message } : Dynamic), ({ final __callArgument11:Dynamic = 'scene-wgpu'; __callArgument11; })) : Bool);
   }
 }

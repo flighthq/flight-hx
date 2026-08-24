@@ -21,20 +21,20 @@ class EnableWgpuRenderEffectGuards {
 
   public static function disableWgpuRenderEffectGuards(state:WgpuRenderState):Void {
     setWgpuRenderEffectApplicationGuard(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast null : Dynamic));
-    setWgpuRenderEffectPipelineSampleCountGuard(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast null : Dynamic));
-    setWgpuRenderEffectPipelineSkipGuard(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast null : Dynamic));
+    setWgpuRenderEffectPipelineSampleCountGuard(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast null : Dynamic));
+    setWgpuRenderEffectPipelineSkipGuard(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast null : Dynamic));
     ((cast EnableWgpuRenderEffectGuards._guardedStates__enableWgpuRenderEffectGuards : flighthq._internal._WeakSet<WgpuRenderState>).delete_(state));
   }
 
   public static function enableWgpuRenderEffectGuards(state:WgpuRenderState):Void {
-    setWgpuRenderEffectApplicationGuard(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast EnableWgpuRenderEffectGuards.warnWgpuRenderEffectApplication__enableWgpuRenderEffectGuards : Dynamic));
-    setWgpuRenderEffectPipelineSampleCountGuard(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast EnableWgpuRenderEffectGuards.warnWgpuRenderEffectPipelineSampleCount__enableWgpuRenderEffectGuards : Dynamic));
-    setWgpuRenderEffectPipelineSkipGuard(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast EnableWgpuRenderEffectGuards.warnWgpuRenderEffectPipelineSkip__enableWgpuRenderEffectGuards : Dynamic));
+    setWgpuRenderEffectApplicationGuard(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast EnableWgpuRenderEffectGuards.warnWgpuRenderEffectApplication__enableWgpuRenderEffectGuards : Dynamic));
+    setWgpuRenderEffectPipelineSampleCountGuard(({ final __callArgument8:Dynamic = state; __callArgument8; }), (cast EnableWgpuRenderEffectGuards.warnWgpuRenderEffectPipelineSampleCount__enableWgpuRenderEffectGuards : Dynamic));
+    setWgpuRenderEffectPipelineSkipGuard(({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast EnableWgpuRenderEffectGuards.warnWgpuRenderEffectPipelineSkip__enableWgpuRenderEffectGuards : Dynamic));
     ((cast EnableWgpuRenderEffectGuards._guardedStates__enableWgpuRenderEffectGuards : flighthq._internal._WeakSet<WgpuRenderState>).add(state));
   }
 
   public static function warnWgpuRenderEffectPipelineSampleCount__enableWgpuRenderEffectGuards(_state:WgpuRenderState, requestedSampleCount:Float, appliedSampleCount:Float):Void {
-    (cast logOnce((cast 'effects-wgpu:pipeline-sample-count-substituted:' + Std.string(requestedSampleCount) + '' : String), ({ final __callArgument6:Dynamic = LogLevel.Warn; __callArgument6; }), (cast { appliedSampleCount: appliedSampleCount, message: 'createWgpuRenderEffectPipeline: sampleCount ' + Std.string(requestedSampleCount) + ' requested, but WGPU effect targets support 1 or 4 — continuing with sampleCount ' + Std.string(appliedSampleCount) + '', requestedSampleCount: requestedSampleCount } : Dynamic), ({ final __callArgument7:Dynamic = 'effects-wgpu'; __callArgument7; })) : Bool);
+    (cast logOnce((cast 'effects-wgpu:pipeline-sample-count-substituted:' + Std.string(requestedSampleCount) + '' : String), ({ final __callArgument12:Dynamic = LogLevel.Warn; __callArgument12; }), (cast { appliedSampleCount: appliedSampleCount, message: 'createWgpuRenderEffectPipeline: sampleCount ' + Std.string(requestedSampleCount) + ' requested, but WGPU effect targets support 1 or 4 — continuing with sampleCount ' + Std.string(appliedSampleCount) + '', requestedSampleCount: requestedSampleCount } : Dynamic), ({ final __callArgument13:Dynamic = 'effects-wgpu'; __callArgument13; })) : Bool);
   }
 
   public static function getWgpuRenderEffectApplicationMessage__enableWgpuRenderEffectGuards(explanation:WgpuRenderEffectApplicationExplanation):String {
@@ -57,11 +57,11 @@ class EnableWgpuRenderEffectGuards {
   }
 
   public static function warnWgpuRenderEffectApplication__enableWgpuRenderEffectGuards(_state:WgpuRenderState, explanation:WgpuRenderEffectApplicationExplanation):Void {
-    (cast logOnce((cast 'effects-wgpu:effect-application:' + Std.string(_Runtime.field(explanation, 'status')) + ':' + Std.string(_Runtime.join(_Runtime.field(explanation, 'unregisteredKinds'), ',')) + '' : String), ({ final __callArgument8:Dynamic = LogLevel.Warn; __callArgument8; }), (cast { message: (cast EnableWgpuRenderEffectGuards.getWgpuRenderEffectApplicationMessage__enableWgpuRenderEffectGuards(({ final __callArgument9:Dynamic = explanation; __callArgument9; })) : String), registeredCount: _Runtime.field(explanation, 'registeredCount'), requestedCount: _Runtime.field(explanation, 'requestedCount'), status: _Runtime.field(explanation, 'status'), unregisteredKinds: _Runtime.field(explanation, 'unregisteredKinds') } : Dynamic), ({ final __callArgument10:Dynamic = 'effects-wgpu'; __callArgument10; })) : Bool);
+    (cast logOnce((cast 'effects-wgpu:effect-application:' + Std.string(_Runtime.field(explanation, 'status')) + ':' + Std.string(_Runtime.join(_Runtime.field(explanation, 'unregisteredKinds'), ',')) + '' : String), ({ final __callArgument16:Dynamic = LogLevel.Warn; __callArgument16; }), (cast { message: (cast EnableWgpuRenderEffectGuards.getWgpuRenderEffectApplicationMessage__enableWgpuRenderEffectGuards(({ final __callArgument17:Dynamic = explanation; __callArgument17; })) : String), registeredCount: _Runtime.field(explanation, 'registeredCount'), requestedCount: _Runtime.field(explanation, 'requestedCount'), status: _Runtime.field(explanation, 'status'), unregisteredKinds: _Runtime.field(explanation, 'unregisteredKinds') } : Dynamic), ({ final __callArgument19:Dynamic = 'effects-wgpu'; __callArgument19; })) : Bool);
   }
 
   public static function warnWgpuRenderEffectPipelineSkip__enableWgpuRenderEffectGuards(_state:WgpuRenderState, kind:String):Void {
-    (cast logOnce((cast 'effects-wgpu:pipeline-effect-skipped:' + Std.string(kind) + '' : String), ({ final __callArgument11:Dynamic = LogLevel.Warn; __callArgument11; }), (cast { kind: kind, message: 'endWgpuRenderEffectPipeline: effect kind "' + Std.string(kind) + '" has no registered runner, so the pass was SKIPPED — the frame was written without it and nothing else reports this; call registerWgpuRenderEffect(state, "' + Std.string(kind) + '", runner), or check whether this kind has a runner on this backend at all' } : Dynamic), ({ final __callArgument12:Dynamic = 'effects-wgpu'; __callArgument12; })) : Bool);
+    (cast logOnce((cast 'effects-wgpu:pipeline-effect-skipped:' + Std.string(kind) + '' : String), ({ final __callArgument24:Dynamic = LogLevel.Warn; __callArgument24; }), (cast { kind: kind, message: 'endWgpuRenderEffectPipeline: effect kind "' + Std.string(kind) + '" has no registered runner, so the pass was SKIPPED — the frame was written without it and nothing else reports this; call registerWgpuRenderEffect(state, "' + Std.string(kind) + '", runner), or check whether this kind has a runner on this backend at all' } : Dynamic), ({ final __callArgument25:Dynamic = 'effects-wgpu'; __callArgument25; })) : Bool);
   }
 
   public static final _guardedStates__enableWgpuRenderEffectGuards:flighthq._internal._WeakSet<WgpuRenderState> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakSet'), []);

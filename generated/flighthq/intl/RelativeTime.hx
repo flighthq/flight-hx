@@ -12,7 +12,7 @@ class RelativeTime {
     var key:String = cast _Runtime.UNDEFINED;
     var formatter:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     key = (cast getCacheKey((cast 'relativetime' : String), ({ final __callArgument0:Dynamic = locale; __callArgument0; }), ({ final __callArgument1:Dynamic = options; __callArgument1; })) : String);
-    formatter = (cast getCached : String->(Void->flighthq._internal._Any)->flighthq._internal._Any)((cast key : String), ({ final __callArgument2:Dynamic = function():flighthq._internal._Any return _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'RelativeTimeFormat'), [(cast locale : flighthq._internal._Union2<String, Array<String>>), options]); __callArgument2; }));
+    formatter = (cast getCached : String->(Void->flighthq._internal._Any)->flighthq._internal._Any)((cast key : String), ({ final __callArgument4:Dynamic = function():flighthq._internal._Any return _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'RelativeTimeFormat'), [(cast locale : flighthq._internal._Union2<String, Array<String>>), options]); __callArgument4; }));
     return cast _Runtime.callProperty(formatter, 'format', cast ([value, unit] : Array<Dynamic>));
     return cast null;
   }

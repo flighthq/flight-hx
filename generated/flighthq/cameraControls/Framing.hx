@@ -19,7 +19,7 @@ class Framing {
       if ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([distance] : Array<Dynamic>)) : Bool) : Bool)) { return cast false; }
       (controller.goalDistance = cast ((cast clamp((cast distance : Float), (cast controller.minDistance : Float), (cast controller.maxDistance : Float)) : Float) : Float));
     } else {
-      setOrthographicProjectionFrameToSphere(({ final __callArgument1:Dynamic = projection; __callArgument1; }), (cast sphere.radius : Float), (cast aspect : Float), (cast padding : Float));
+      setOrthographicProjectionFrameToSphere(({ final __callArgument2:Dynamic = projection; __callArgument2; }), (cast sphere.radius : Float), (cast aspect : Float), (cast padding : Float));
     }
     ((cast controller.target : { var x:Float; }).x = cast ((cast sphere.center : { var x:Float; }).x : Float));
     ((cast controller.target : { var y:Float; }).y = cast ((cast sphere.center : { var y:Float; }).y : Float));

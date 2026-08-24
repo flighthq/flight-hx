@@ -53,33 +53,33 @@ class PickScene3D {
   }
 
   public static function pickScene3D(scene:Node3D, camera:Camera3D, screenX:Float, screenY:Float, out:Scene3DHit, ?options:Scene3DPickOptions):Null<Scene3DHit> {
-    if ((cast !(cast (cast PickScene3D.buildCameraPickRay__pickScene3D(({ final __callArgument1:Dynamic = PickScene3D._cameraRay__pickScene3D; __callArgument1; }), ({ final __callArgument2:Dynamic = camera; __callArgument2; }), (cast screenX : Float), (cast screenY : Float)) : Bool) : Bool) : Bool)) { return cast null; }
-    return cast (cast pickScene3DWithRay3D(({ final __callArgument3:Dynamic = scene; __callArgument3; }), ({ final __callArgument4:Dynamic = PickScene3D._cameraRay__pickScene3D; __callArgument4; }), ({ final __callArgument5:Dynamic = out; __callArgument5; }), ({ final __callArgument6:Dynamic = options; __callArgument6; })) : Null<Scene3DHit>);
+    if ((cast !(cast (cast PickScene3D.buildCameraPickRay__pickScene3D(({ final __callArgument2:Dynamic = PickScene3D._cameraRay__pickScene3D; __callArgument2; }), ({ final __callArgument3:Dynamic = camera; __callArgument3; }), (cast screenX : Float), (cast screenY : Float)) : Bool) : Bool) : Bool)) { return cast null; }
+    return cast (cast pickScene3DWithRay3D(({ final __callArgument6:Dynamic = scene; __callArgument6; }), ({ final __callArgument7:Dynamic = PickScene3D._cameraRay__pickScene3D; __callArgument7; }), ({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = options; __callArgument9; })) : Null<Scene3DHit>);
     return cast null;
   }
 
   public static function pickScene3DAll(scene:Node3D, camera:Camera3D, screenX:Float, screenY:Float, outArray:Array<Scene3DHit>, ?options:Scene3DPickOptions):Array<Scene3DHit> {
-    if ((cast !(cast (cast PickScene3D.buildCameraPickRay__pickScene3D(({ final __callArgument7:Dynamic = PickScene3D._cameraRay__pickScene3D; __callArgument7; }), ({ final __callArgument8:Dynamic = camera; __callArgument8; }), (cast screenX : Float), (cast screenY : Float)) : Bool) : Bool) : Bool)) {
+    if ((cast !(cast (cast PickScene3D.buildCameraPickRay__pickScene3D(({ final __callArgument14:Dynamic = PickScene3D._cameraRay__pickScene3D; __callArgument14; }), ({ final __callArgument15:Dynamic = camera; __callArgument15; }), (cast screenX : Float), (cast screenY : Float)) : Bool) : Bool) : Bool)) {
       _Runtime.setLength(outArray, 0.0);
       return cast outArray;
     }
-    return cast (cast pickScene3DAllWithRay3D(({ final __callArgument9:Dynamic = scene; __callArgument9; }), ({ final __callArgument10:Dynamic = PickScene3D._cameraRay__pickScene3D; __callArgument10; }), ({ final __callArgument11:Dynamic = outArray; __callArgument11; }), ({ final __callArgument12:Dynamic = options; __callArgument12; })) : Array<Scene3DHit>);
+    return cast (cast pickScene3DAllWithRay3D(({ final __callArgument18:Dynamic = scene; __callArgument18; }), ({ final __callArgument19:Dynamic = PickScene3D._cameraRay__pickScene3D; __callArgument19; }), ({ final __callArgument20:Dynamic = outArray; __callArgument20; }), ({ final __callArgument21:Dynamic = options; __callArgument21; })) : Array<Scene3DHit>);
     return cast null;
   }
 
   public static function pickScene3DAllWithRay3D(scene:Node3D, ray:Ray3D, outArray:Array<Scene3DHit>, ?options:Scene3DPickOptions):Array<Scene3DHit> {
     var count:Float = cast _Runtime.UNDEFINED;
     count = 0.0;
-    PickScene3D.forEachScene3DRayHit__pickScene3D(({ final __callArgument13:Dynamic = scene; __callArgument13; }), ({ final __callArgument14:Dynamic = ray; __callArgument14; }), ({ final __callArgument15:Dynamic = options; __callArgument15; }), ({ final __callArgument18:Dynamic = function(hit:Scene3DHit):Void {
+    PickScene3D.forEachScene3DRayHit__pickScene3D(({ final __callArgument26:Dynamic = scene; __callArgument26; }), ({ final __callArgument27:Dynamic = ray; __callArgument27; }), ({ final __callArgument28:Dynamic = options; __callArgument28; }), ({ final __callArgument33:Dynamic = function(hit:Scene3DHit):Void {
       var slot:Scene3DHit = cast _Runtime.UNDEFINED;
       slot = flighthq._internal._StaticIndex.readArray(outArray, count);
       if ((cast _Runtime.strictEquals(slot, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         (slot = cast ((cast createScene3DHit() : Scene3DHit) : Dynamic));
         flighthq._internal._StaticIndex.writeArray(outArray, count, slot);
       }
-      PickScene3D.copyScene3DHit__pickScene3D(({ final __callArgument16:Dynamic = slot; __callArgument16; }), ({ final __callArgument17:Dynamic = hit; __callArgument17; }));
+      PickScene3D.copyScene3DHit__pickScene3D(({ final __callArgument29:Dynamic = slot; __callArgument29; }), ({ final __callArgument30:Dynamic = hit; __callArgument30; }));
       count++;
-    }; __callArgument18; }));
+    }; __callArgument33; }));
     _Runtime.setLength(outArray, count);
     _Runtime.callProperty(outArray, 'sort', cast ([PickScene3D.compareScene3DHitByDistance__pickScene3D] : Array<Dynamic>));
     return cast outArray;
@@ -91,12 +91,12 @@ class PickScene3D {
     var bestT:Float = cast _Runtime.UNDEFINED;
     found = false;
     bestT = HxMath.POSITIVE_INFINITY;
-    PickScene3D.forEachScene3DRayHit__pickScene3D(({ final __callArgument19:Dynamic = scene; __callArgument19; }), ({ final __callArgument20:Dynamic = ray; __callArgument20; }), ({ final __callArgument21:Dynamic = options; __callArgument21; }), ({ final __callArgument24:Dynamic = function(hit:Scene3DHit):Void {
+    PickScene3D.forEachScene3DRayHit__pickScene3D(({ final __callArgument42:Dynamic = scene; __callArgument42; }), ({ final __callArgument43:Dynamic = ray; __callArgument43; }), ({ final __callArgument44:Dynamic = options; __callArgument44; }), ({ final __callArgument49:Dynamic = function(hit:Scene3DHit):Void {
       if ((cast ((cast hit.distance : Float) >= (cast bestT : Float)) : Bool)) { return; }
       (bestT = cast (hit.distance : Dynamic));
       (found = cast (true : Dynamic));
-      PickScene3D.copyScene3DHit__pickScene3D(({ final __callArgument22:Dynamic = out; __callArgument22; }), ({ final __callArgument23:Dynamic = hit; __callArgument23; }));
-    }; __callArgument24; }));
+      PickScene3D.copyScene3DHit__pickScene3D(({ final __callArgument45:Dynamic = out; __callArgument45; }), ({ final __callArgument46:Dynamic = hit; __callArgument46; }));
+    }; __callArgument49; }));
     return cast ((cast found : Bool) ? (cast out : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -104,7 +104,7 @@ class PickScene3D {
   public static function buildCameraPickRay__pickScene3D(out:Ray3D, camera:Camera3D, screenX:Float, screenY:Float):Bool {
     var aspect:Float = cast _Runtime.UNDEFINED;
     aspect = ((cast _Runtime.strictEquals((cast camera.projection : { var kind:String; }).kind, 'perspective') : Bool) ? (cast (cast camera.projection : { var aspect:Float; }).aspect : Dynamic) : (cast 1.0 : Dynamic));
-    return cast (cast getCamera3DScreenToWorldRay(({ final __callArgument25:Dynamic = out; __callArgument25; }), ({ final __callArgument26:Dynamic = camera; __callArgument26; }), (cast screenX : Float), (cast screenY : Float), (cast aspect : Float)) : Bool);
+    return cast (cast getCamera3DScreenToWorldRay(({ final __callArgument58:Dynamic = out; __callArgument58; }), ({ final __callArgument59:Dynamic = camera; __callArgument59; }), (cast screenX : Float), (cast screenY : Float), (cast aspect : Float)) : Bool);
     return cast null;
   }
 
@@ -132,24 +132,24 @@ class PickScene3D {
     var predicate:Null<Mesh->Bool> = cast _Runtime.UNDEFINED;
     var maxDistance:Float = cast _Runtime.UNDEFINED;
     var cullBackfaces:Bool = cast _Runtime.UNDEFINED;
-    predicate = ({ final __structural27 = options; __structural27 == null ? _Runtime.UNDEFINED : (cast __structural27 : { @:optional var predicate:Null<Mesh->Bool>; }).predicate; });
-    maxDistance = _Runtime.coalesce(({ final __structural28 = options; __structural28 == null ? _Runtime.UNDEFINED : (cast __structural28 : { @:optional var maxDistance:Null<Float>; }).maxDistance; }), function():Dynamic return cast HxMath.POSITIVE_INFINITY);
-    cullBackfaces = _Runtime.coalesce(({ final __structural29 = options; __structural29 == null ? _Runtime.UNDEFINED : (cast __structural29 : { @:optional var cullBackfaces:Null<Bool>; }).cullBackfaces; }), function():Dynamic return cast false);
-    PickScene3D.pickNode__pickScene3D((cast (cast scene : flighthq._internal._Any) : Node3D), ({ final __callArgument30:Dynamic = ray; __callArgument30; }), ({ final __callArgument31:Dynamic = predicate; __callArgument31; }), (cast maxDistance : Float), (cast cullBackfaces : Bool), ({ final __callArgument32:Dynamic = onHit; __callArgument32; }));
+    predicate = ({ final __structural62 = options; __structural62 == null ? _Runtime.UNDEFINED : (cast __structural62 : { @:optional var predicate:Null<Mesh->Bool>; }).predicate; });
+    maxDistance = _Runtime.coalesce(({ final __structural63 = options; __structural63 == null ? _Runtime.UNDEFINED : (cast __structural63 : { @:optional var maxDistance:Null<Float>; }).maxDistance; }), function():Dynamic return cast HxMath.POSITIVE_INFINITY);
+    cullBackfaces = _Runtime.coalesce(({ final __structural64 = options; __structural64 == null ? _Runtime.UNDEFINED : (cast __structural64 : { @:optional var cullBackfaces:Null<Bool>; }).cullBackfaces; }), function():Dynamic return cast false);
+    PickScene3D.pickNode__pickScene3D((cast (cast scene : flighthq._internal._Any) : Node3D), ({ final __callArgument65:Dynamic = ray; __callArgument65; }), ({ final __callArgument66:Dynamic = predicate; __callArgument66; }), (cast maxDistance : Float), (cast cullBackfaces : Bool), ({ final __callArgument67:Dynamic = onHit; __callArgument67; }));
   }
 
   public static function pickNode__pickScene3D(node:Node3D, ray:Ray3D, predicate:Null<Mesh->Bool>, maxDistance:Float, cullBackfaces:Bool, onHit:Scene3DHit->Void):Void {
     var children:Null<Array<Node<Node3DTraits>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return; }
-    if ((cast ((cast (cast isMesh((cast node : flighthq._internal._Any)) : Bool) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(predicate, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast (cast (cast predicate : Mesh->Bool)(({ final __callArgument33:Dynamic = node; __callArgument33; })) : Bool)) : Bool)) : Bool)) {
-      PickScene3D.intersectMeshTriangles__pickScene3D(({ final __callArgument34:Dynamic = node; __callArgument34; }), ({ final __callArgument35:Dynamic = ray; __callArgument35; }), (cast maxDistance : Float), (cast cullBackfaces : Bool), ({ final __callArgument36:Dynamic = onHit; __callArgument36; }));
+    if ((cast ((cast (cast isMesh((cast node : flighthq._internal._Any)) : Bool) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(predicate, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast (cast (cast predicate : Mesh->Bool)(({ final __callArgument71:Dynamic = node; __callArgument71; })) : Bool)) : Bool)) : Bool)) {
+      PickScene3D.intersectMeshTriangles__pickScene3D(({ final __callArgument73:Dynamic = node; __callArgument73; }), ({ final __callArgument74:Dynamic = ray; __callArgument74; }), (cast maxDistance : Float), (cast cullBackfaces : Bool), ({ final __callArgument75:Dynamic = onHit; __callArgument75; }));
     }
     children = _Runtime.field((cast getNodeRuntime((cast node : Dynamic)) : NodeRuntime<Node3DTraits>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          PickScene3D.pickNode__pickScene3D((cast flighthq._internal._StaticIndex.readArray(children, i) : Node3D), ({ final __callArgument37:Dynamic = ray; __callArgument37; }), ({ final __callArgument38:Dynamic = predicate; __callArgument38; }), (cast maxDistance : Float), (cast cullBackfaces : Bool), ({ final __callArgument39:Dynamic = onHit; __callArgument39; }));
+          PickScene3D.pickNode__pickScene3D((cast flighthq._internal._StaticIndex.readArray(children, i) : Node3D), ({ final __callArgument79:Dynamic = ray; __callArgument79; }), ({ final __callArgument80:Dynamic = predicate; __callArgument80; }), (cast maxDistance : Float), (cast cullBackfaces : Bool), ({ final __callArgument81:Dynamic = onHit; __callArgument81; }));
           i++;
         }
       }
@@ -164,31 +164,31 @@ class PickScene3D {
     posedLocalBounds = (cast (cast getNodeRuntime((cast (cast mesh : NodeAny) : Dynamic)) : MeshRuntime) : { @:optional var deformedLocalBounds:Null<Aabb>; }).deformedLocalBounds;
     if ((cast !_Runtime.looseEquals(posedLocalBounds, null) : Bool)) {
       ensureNodeWorldMatrix4((cast mesh : Dynamic));
-      transformAabbByMatrix4(({ final __callArgument40:Dynamic = PickScene3D._worldBounds__pickScene3D; __callArgument40; }), ({ final __callArgument41:Dynamic = posedLocalBounds; __callArgument41; }), (cast getNodeWorldMatrix4((cast mesh : Dynamic)) : Matrix4Like));
+      transformAabbByMatrix4(({ final __callArgument85:Dynamic = PickScene3D._worldBounds__pickScene3D; __callArgument85; }), ({ final __callArgument86:Dynamic = posedLocalBounds; __callArgument86; }), (cast getNodeWorldMatrix4((cast mesh : Dynamic)) : Matrix4Like));
     } else {
-      getNode3DWorldBounds(({ final __callArgument42:Dynamic = PickScene3D._worldBounds__pickScene3D; __callArgument42; }), ({ final __callArgument43:Dynamic = mesh; __callArgument43; }));
+      getNode3DWorldBounds(({ final __callArgument89:Dynamic = PickScene3D._worldBounds__pickScene3D; __callArgument89; }), ({ final __callArgument90:Dynamic = mesh; __callArgument90; }));
     }
-    if ((cast ((cast (cast intersectRay3DAabb(({ final __callArgument44:Dynamic = ray; __callArgument44; }), ({ final __callArgument45:Dynamic = PickScene3D._worldBounds__pickScene3D; __callArgument45; })) : Float) : Float) < (cast 0.0 : Float)) : Bool)) { return; }
+    if ((cast ((cast (cast intersectRay3DAabb(({ final __callArgument93:Dynamic = ray; __callArgument93; }), ({ final __callArgument94:Dynamic = PickScene3D._worldBounds__pickScene3D; __callArgument94; })) : Float) : Float) < (cast 0.0 : Float)) : Bool)) { return; }
     ensureNodeWorldMatrix4((cast mesh : Dynamic));
     worldMatrix = (cast getNodeWorldMatrix4((cast mesh : Dynamic)) : Matrix4Like);
-    if ((cast !(cast (cast inverseMatrix4(({ final __callArgument46:Dynamic = PickScene3D._inverseWorld__pickScene3D; __callArgument46; }), ({ final __callArgument47:Dynamic = worldMatrix; __callArgument47; })) : Bool) : Bool) : Bool)) { return; }
+    if ((cast !(cast (cast inverseMatrix4(({ final __callArgument97:Dynamic = PickScene3D._inverseWorld__pickScene3D; __callArgument97; }), ({ final __callArgument98:Dynamic = worldMatrix; __callArgument98; })) : Bool) : Bool) : Bool)) { return; }
     PickScene3D.transformPointByMatrix4__pickScene3D(PickScene3D._localRay__pickScene3D.origin, ray.origin, PickScene3D._inverseWorld__pickScene3D.m);
     PickScene3D.transformDirectionByMatrix4__pickScene3D(PickScene3D._localRay__pickScene3D.direction, ray.direction, PickScene3D._inverseWorld__pickScene3D.m);
     geometry = mesh.geometry;
-    triangleCount = (cast getMeshGeometryTriangleCount(({ final __callArgument48:Dynamic = geometry; __callArgument48; })) : Float);
+    triangleCount = (cast getMeshGeometryTriangleCount(({ final __callArgument101:Dynamic = geometry; __callArgument101; })) : Float);
     {
       var triangle:Float = 0.0;
       while ((cast ((cast triangle : Float) < (cast triangleCount : Float)) : Bool)) {
-        if ((cast !(cast (cast getMeshGeometryTriangleVertexIndices(({ final __callArgument49:Dynamic = PickScene3D._triangle__pickScene3D; __callArgument49; }), ({ final __callArgument50:Dynamic = geometry; __callArgument50; }), (cast triangle : Float)) : Bool) : Bool) : Bool)) { triangle++; continue; }
-        (cast getMeshGeometryVertexPosition(({ final __callArgument51:Dynamic = PickScene3D._a__pickScene3D; __callArgument51; }), ({ final __callArgument52:Dynamic = geometry; __callArgument52; }), (cast (cast PickScene3D._triangle__pickScene3D : { var i0:Float; var i1:Float; var i2:Float; }).i0 : Float)) : Bool);
-        (cast getMeshGeometryVertexPosition(({ final __callArgument53:Dynamic = PickScene3D._b__pickScene3D; __callArgument53; }), ({ final __callArgument54:Dynamic = geometry; __callArgument54; }), (cast (cast PickScene3D._triangle__pickScene3D : { var i0:Float; var i1:Float; var i2:Float; }).i1 : Float)) : Bool);
-        (cast getMeshGeometryVertexPosition(({ final __callArgument55:Dynamic = PickScene3D._c__pickScene3D; __callArgument55; }), ({ final __callArgument56:Dynamic = geometry; __callArgument56; }), (cast (cast PickScene3D._triangle__pickScene3D : { var i0:Float; var i1:Float; var i2:Float; }).i2 : Float)) : Bool);
-        var t:Float = (cast intersectRay3DTriangle(({ final __callArgument57:Dynamic = PickScene3D._localRay__pickScene3D; __callArgument57; }), ({ final __callArgument58:Dynamic = PickScene3D._a__pickScene3D; __callArgument58; }), ({ final __callArgument59:Dynamic = PickScene3D._b__pickScene3D; __callArgument59; }), ({ final __callArgument60:Dynamic = PickScene3D._c__pickScene3D; __callArgument60; })) : Float);
+        if ((cast !(cast (cast getMeshGeometryTriangleVertexIndices(({ final __callArgument103:Dynamic = PickScene3D._triangle__pickScene3D; __callArgument103; }), ({ final __callArgument104:Dynamic = geometry; __callArgument104; }), (cast triangle : Float)) : Bool) : Bool) : Bool)) { triangle++; continue; }
+        (cast getMeshGeometryVertexPosition(({ final __callArgument107:Dynamic = PickScene3D._a__pickScene3D; __callArgument107; }), ({ final __callArgument108:Dynamic = geometry; __callArgument108; }), (cast (cast PickScene3D._triangle__pickScene3D : { var i0:Float; var i1:Float; var i2:Float; }).i0 : Float)) : Bool);
+        (cast getMeshGeometryVertexPosition(({ final __callArgument111:Dynamic = PickScene3D._b__pickScene3D; __callArgument111; }), ({ final __callArgument112:Dynamic = geometry; __callArgument112; }), (cast (cast PickScene3D._triangle__pickScene3D : { var i0:Float; var i1:Float; var i2:Float; }).i1 : Float)) : Bool);
+        (cast getMeshGeometryVertexPosition(({ final __callArgument115:Dynamic = PickScene3D._c__pickScene3D; __callArgument115; }), ({ final __callArgument116:Dynamic = geometry; __callArgument116; }), (cast (cast PickScene3D._triangle__pickScene3D : { var i0:Float; var i1:Float; var i2:Float; }).i2 : Float)) : Bool);
+        var t:Float = (cast intersectRay3DTriangle(({ final __callArgument119:Dynamic = PickScene3D._localRay__pickScene3D; __callArgument119; }), ({ final __callArgument120:Dynamic = PickScene3D._a__pickScene3D; __callArgument120; }), ({ final __callArgument121:Dynamic = PickScene3D._b__pickScene3D; __callArgument121; }), ({ final __callArgument122:Dynamic = PickScene3D._c__pickScene3D; __callArgument122; })) : Float);
         if ((cast ((cast ((cast t : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast t : Float) > (cast maxDistance : Float)) : Bool)) : Bool)) { triangle++; continue; }
-        PickScene3D.transformPointByMatrix4__pickScene3D(({ final __callArgument61:Dynamic = PickScene3D._wa__pickScene3D; __callArgument61; }), ({ final __callArgument62:Dynamic = PickScene3D._a__pickScene3D; __callArgument62; }), worldMatrix.m);
-        PickScene3D.transformPointByMatrix4__pickScene3D(({ final __callArgument63:Dynamic = PickScene3D._wb__pickScene3D; __callArgument63; }), ({ final __callArgument64:Dynamic = PickScene3D._b__pickScene3D; __callArgument64; }), worldMatrix.m);
-        PickScene3D.transformPointByMatrix4__pickScene3D(({ final __callArgument65:Dynamic = PickScene3D._wc__pickScene3D; __callArgument65; }), ({ final __callArgument66:Dynamic = PickScene3D._c__pickScene3D; __callArgument66; }), worldMatrix.m);
-        if ((cast !(cast (cast PickScene3D.writeFaceNormal__pickScene3D(({ final __callArgument67:Dynamic = PickScene3D._worldNormal__pickScene3D; __callArgument67; }), ({ final __callArgument68:Dynamic = PickScene3D._wa__pickScene3D; __callArgument68; }), ({ final __callArgument69:Dynamic = PickScene3D._wb__pickScene3D; __callArgument69; }), ({ final __callArgument70:Dynamic = PickScene3D._wc__pickScene3D; __callArgument70; })) : Bool) : Bool) : Bool)) { triangle++; continue; }
+        PickScene3D.transformPointByMatrix4__pickScene3D(({ final __callArgument127:Dynamic = PickScene3D._wa__pickScene3D; __callArgument127; }), ({ final __callArgument128:Dynamic = PickScene3D._a__pickScene3D; __callArgument128; }), worldMatrix.m);
+        PickScene3D.transformPointByMatrix4__pickScene3D(({ final __callArgument131:Dynamic = PickScene3D._wb__pickScene3D; __callArgument131; }), ({ final __callArgument132:Dynamic = PickScene3D._b__pickScene3D; __callArgument132; }), worldMatrix.m);
+        PickScene3D.transformPointByMatrix4__pickScene3D(({ final __callArgument135:Dynamic = PickScene3D._wc__pickScene3D; __callArgument135; }), ({ final __callArgument136:Dynamic = PickScene3D._c__pickScene3D; __callArgument136; }), worldMatrix.m);
+        if ((cast !(cast (cast PickScene3D.writeFaceNormal__pickScene3D(({ final __callArgument139:Dynamic = PickScene3D._worldNormal__pickScene3D; __callArgument139; }), ({ final __callArgument140:Dynamic = PickScene3D._wa__pickScene3D; __callArgument140; }), ({ final __callArgument141:Dynamic = PickScene3D._wb__pickScene3D; __callArgument141; }), ({ final __callArgument142:Dynamic = PickScene3D._wc__pickScene3D; __callArgument142; })) : Bool) : Bool) : Bool)) { triangle++; continue; }
         if ((cast ((cast cullBackfaces : Bool) && (cast ((cast ((((cast ray.direction : { var x:Float; }).x * PickScene3D._worldNormal__pickScene3D.x) + ((cast ray.direction : { var y:Float; }).y * PickScene3D._worldNormal__pickScene3D.y)) + ((cast ray.direction : { var z:Float; }).z * PickScene3D._worldNormal__pickScene3D.z)) : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
           triangle++;
           continue;
@@ -199,13 +199,13 @@ class PickScene3D {
         (PickScene3D._hit__pickScene3D.normalX = cast (PickScene3D._worldNormal__pickScene3D.x : Float));
         (PickScene3D._hit__pickScene3D.normalY = cast (PickScene3D._worldNormal__pickScene3D.y : Float));
         (PickScene3D._hit__pickScene3D.normalZ = cast (PickScene3D._worldNormal__pickScene3D.z : Float));
-        getRay3DPointAt(({ final __callArgument71:Dynamic = PickScene3D._worldPoint__pickScene3D; __callArgument71; }), ({ final __callArgument72:Dynamic = ray; __callArgument72; }), (cast t : Float));
+        getRay3DPointAt(({ final __callArgument147:Dynamic = PickScene3D._worldPoint__pickScene3D; __callArgument147; }), ({ final __callArgument148:Dynamic = ray; __callArgument148; }), (cast t : Float));
         (PickScene3D._hit__pickScene3D.pointX = cast (PickScene3D._worldPoint__pickScene3D.x : Float));
         (PickScene3D._hit__pickScene3D.pointY = cast (PickScene3D._worldPoint__pickScene3D.y : Float));
         (PickScene3D._hit__pickScene3D.pointZ = cast (PickScene3D._worldPoint__pickScene3D.z : Float));
-        getRay3DPointAt(({ final __callArgument73:Dynamic = PickScene3D._localPoint__pickScene3D; __callArgument73; }), ({ final __callArgument74:Dynamic = PickScene3D._localRay__pickScene3D; __callArgument74; }), (cast t : Float));
-        PickScene3D.writeBarycentric__pickScene3D(({ final __callArgument75:Dynamic = PickScene3D._hit__pickScene3D; __callArgument75; }), ({ final __callArgument76:Dynamic = PickScene3D._localPoint__pickScene3D; __callArgument76; }), ({ final __callArgument77:Dynamic = PickScene3D._a__pickScene3D; __callArgument77; }), ({ final __callArgument78:Dynamic = PickScene3D._b__pickScene3D; __callArgument78; }), ({ final __callArgument79:Dynamic = PickScene3D._c__pickScene3D; __callArgument79; }));
-        onHit(({ final __callArgument80:Dynamic = PickScene3D._hit__pickScene3D; __callArgument80; }));
+        getRay3DPointAt(({ final __callArgument151:Dynamic = PickScene3D._localPoint__pickScene3D; __callArgument151; }), ({ final __callArgument152:Dynamic = PickScene3D._localRay__pickScene3D; __callArgument152; }), (cast t : Float));
+        PickScene3D.writeBarycentric__pickScene3D(({ final __callArgument155:Dynamic = PickScene3D._hit__pickScene3D; __callArgument155; }), ({ final __callArgument156:Dynamic = PickScene3D._localPoint__pickScene3D; __callArgument156; }), ({ final __callArgument157:Dynamic = PickScene3D._a__pickScene3D; __callArgument157; }), ({ final __callArgument158:Dynamic = PickScene3D._b__pickScene3D; __callArgument158; }), ({ final __callArgument159:Dynamic = PickScene3D._c__pickScene3D; __callArgument159; }));
+        onHit(({ final __callArgument165:Dynamic = PickScene3D._hit__pickScene3D; __callArgument165; }));
         triangle++;
       }
     }
@@ -314,31 +314,31 @@ class PickScene3D {
     (out.z = cast ((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 2.0 : Float)) * x) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float)) * y)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 10.0 : Float)) * z)) : Float));
   }
 
-  public static final _cameraRay__pickScene3D:Ray3D = (cast createRay3D(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Ray3D);
+  public static final _cameraRay__pickScene3D:Ray3D = (cast (#if js _Runtime.callValue(createRay3D, cast ([] : Array<Dynamic>)) #else createRay3D(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Ray3D);
 
-  public static final _localRay__pickScene3D:Ray3D = (cast createRay3D(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Ray3D);
+  public static final _localRay__pickScene3D:Ray3D = (cast (#if js _Runtime.callValue(createRay3D, cast ([] : Array<Dynamic>)) #else createRay3D(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Ray3D);
 
-  public static final _inverseWorld__pickScene3D:Matrix4 = (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4);
+  public static final _inverseWorld__pickScene3D:Matrix4 = (cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix4);
 
-  public static final _worldBounds__pickScene3D:Aabb = (cast createAabb(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Aabb);
+  public static final _worldBounds__pickScene3D:Aabb = (cast (#if js _Runtime.callValue(createAabb, cast ([] : Array<Dynamic>)) #else createAabb(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Aabb);
 
-  public static final _a__pickScene3D:Vector3 = (cast createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Vector3);
+  public static final _a__pickScene3D:Vector3 = (cast (#if js _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) #else createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector3);
 
-  public static final _b__pickScene3D:Vector3 = (cast createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Vector3);
+  public static final _b__pickScene3D:Vector3 = (cast (#if js _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) #else createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector3);
 
-  public static final _c__pickScene3D:Vector3 = (cast createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Vector3);
+  public static final _c__pickScene3D:Vector3 = (cast (#if js _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) #else createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector3);
 
-  public static final _wa__pickScene3D:Vector3 = (cast createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Vector3);
+  public static final _wa__pickScene3D:Vector3 = (cast (#if js _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) #else createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector3);
 
-  public static final _wb__pickScene3D:Vector3 = (cast createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Vector3);
+  public static final _wb__pickScene3D:Vector3 = (cast (#if js _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) #else createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector3);
 
-  public static final _wc__pickScene3D:Vector3 = (cast createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Vector3);
+  public static final _wc__pickScene3D:Vector3 = (cast (#if js _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) #else createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector3);
 
-  public static final _worldNormal__pickScene3D:Vector3 = (cast createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Vector3);
+  public static final _worldNormal__pickScene3D:Vector3 = (cast (#if js _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) #else createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector3);
 
-  public static final _localPoint__pickScene3D:Vector3 = (cast createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Vector3);
+  public static final _localPoint__pickScene3D:Vector3 = (cast (#if js _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) #else createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector3);
 
-  public static final _worldPoint__pickScene3D:Vector3 = (cast createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Vector3);
+  public static final _worldPoint__pickScene3D:Vector3 = (cast (#if js _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) #else createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector3);
 
   public static final _hit__pickScene3D:Scene3DHit = (cast createScene3DHit() : Scene3DHit);
 

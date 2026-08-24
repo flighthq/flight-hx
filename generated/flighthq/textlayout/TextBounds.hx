@@ -31,12 +31,12 @@ class TextBounds {
   public static function computeTextBoundsRectangle(out:RectangleLike, spec:TextBoundsSpec, layout:TextLayoutResult):Void {
     var width:Float = cast _Runtime.UNDEFINED;
     var slack:Float = cast _Runtime.UNDEFINED;
-    width = (cast computeTextBoundsWidth((cast spec : Dynamic), ({ final __callArgument1:Dynamic = layout; __callArgument1; })) : Float);
+    width = (cast computeTextBoundsWidth((cast spec : Dynamic), ({ final __callArgument2:Dynamic = layout; __callArgument2; })) : Float);
     slack = ((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).width - width);
     (out.x = cast (((cast _Runtime.strictEquals((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).autoSize, 'right') : Bool) ? (cast slack : Dynamic) : (cast ((cast _Runtime.strictEquals((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).autoSize, 'center') : Bool) ? (cast (slack / 2.0) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic)) : Float));
     (out.y = cast (0.0 : Float));
     (out.width = cast (width : Float));
-    (out.height = cast ((cast computeTextBoundsHeight((cast spec : Dynamic), ({ final __callArgument2:Dynamic = layout; __callArgument2; })) : Float) : Float));
+    (out.height = cast ((cast computeTextBoundsHeight((cast spec : Dynamic), ({ final __callArgument4:Dynamic = layout; __callArgument4; })) : Float) : Float));
   }
 
   public static function computeTextBoundsWidth(spec:TextBoundsSpec, layout:TextLayoutResult):Float {

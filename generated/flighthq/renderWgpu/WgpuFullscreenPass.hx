@@ -54,10 +54,10 @@ class WgpuFullscreenPass {
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(wgpuPipeline, 'pipeline'));
     if ((cast !_Runtime.strictEquals(setUniforms, null) : Bool)) {
-      var uniformBindGroup:flighthq._internal.dom.GPUBindGroup = (cast (cast setUniforms : WgpuRenderState->flighthq._internal.dom.GPUBindGroupLayout->flighthq._internal.dom.GPUBindGroup)(({ final __callArgument1:Dynamic = state; __callArgument1; }), _Runtime.field(wgpuPipeline, 'uniformBindGroupLayout')) : flighthq._internal.dom.GPUBindGroup);
+      var uniformBindGroup:flighthq._internal.dom.GPUBindGroup = (cast (cast setUniforms : WgpuRenderState->flighthq._internal.dom.GPUBindGroupLayout->flighthq._internal.dom.GPUBindGroup)(({ final __callArgument2:Dynamic = state; __callArgument2; }), _Runtime.field(wgpuPipeline, 'uniformBindGroupLayout')) : flighthq._internal.dom.GPUBindGroup);
       (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, uniformBindGroup);
     }
-    runtime2 = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
+    runtime2 = (cast getWgpuRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuRenderStateRuntime);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(inputs, 'length') : Float)) : Bool)) {

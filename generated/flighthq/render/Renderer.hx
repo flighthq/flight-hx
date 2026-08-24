@@ -40,8 +40,8 @@ class Renderer {
     var targetRuntime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var sourceTable:KeyedTable<flighthq.types.Renderer> = cast _Runtime.UNDEFINED;
     var targetTable:KeyedTable<flighthq.types.Renderer> = cast _Runtime.UNDEFINED;
-    targetRuntime = (cast getRenderStateRuntime(({ final __callArgument2:Dynamic = target; __callArgument2; })) : RenderStateRuntime);
-    sourceTable = (cast (cast (cast getRenderStateRuntime(({ final __callArgument3:Dynamic = source; __callArgument3; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { var renderers:KeyedTable<flighthq.types.Renderer>; }).renderers;
+    targetRuntime = (cast getRenderStateRuntime(({ final __callArgument4:Dynamic = target; __callArgument4; })) : RenderStateRuntime);
+    sourceTable = (cast (cast (cast getRenderStateRuntime(({ final __callArgument6:Dynamic = source; __callArgument6; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { var renderers:KeyedTable<flighthq.types.Renderer>; }).renderers;
     targetTable = (cast targetRuntime.registries : { var renderers:KeyedTable<flighthq.types.Renderer>; }).renderers;
     if ((cast _Runtime.strictEquals((cast (cast targetTable : KeyedTable<flighthq.types.Renderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<flighthq.types.Renderer>>).size, 0.0) : Bool)) {
       var registrationCount:Float = 0.0;
@@ -56,7 +56,7 @@ class Renderer {
     for (__iteration0 in _Runtime.iterable((cast sourceTable : KeyedTable<flighthq.types.Renderer>).entries)) {
       var kind:String = flighthq._internal._StaticIndex.readArray(__iteration0, 0.0);
       var entry:RegistryTableEntry<flighthq.types.Renderer> = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
-      if ((cast _Runtime.strictEquals((cast entry : { var state:String; }).state, (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { registerRenderer(({ final __callArgument8:Dynamic = target; __callArgument8; }), (cast kind : String), (cast entry : { var state:String; var value:flighthq.types.Renderer; }).value); }
+      if ((cast _Runtime.strictEquals((cast entry : { var state:String; }).state, (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { registerRenderer(({ final __callArgument12:Dynamic = target; __callArgument12; }), (cast kind : String), (cast entry : { var state:String; var value:flighthq.types.Renderer; }).value); }
     }
   }
 
@@ -64,8 +64,8 @@ class Renderer {
   public static function copyRenderStateRegistrations(target:RenderState, source:RenderState):Void {
     var targetRuntime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var sourceRuntime:RenderStateRuntime = cast _Runtime.UNDEFINED;
-    targetRuntime = (cast getRenderStateRuntime(({ final __callArgument9:Dynamic = target; __callArgument9; })) : RenderStateRuntime);
-    sourceRuntime = (cast getRenderStateRuntime(({ final __callArgument10:Dynamic = source; __callArgument10; })) : RenderStateRuntime);
+    targetRuntime = (cast getRenderStateRuntime(({ final __callArgument14:Dynamic = target; __callArgument14; })) : RenderStateRuntime);
+    sourceRuntime = (cast getRenderStateRuntime(({ final __callArgument16:Dynamic = source; __callArgument16; })) : RenderStateRuntime);
     ((cast targetRuntime.registries : { @:optional var colorAdjustments:Null<SlotTable<RenderState->RenderProxy->Null<RenderProxy>->Void>>; }).colorAdjustments = cast ((cast sourceRuntime.registries : { @:optional var colorAdjustments:Null<SlotTable<RenderState->RenderProxy->Null<RenderProxy>->Void>>; }).colorAdjustments : Null<SlotTable<RenderState->RenderProxy->Null<RenderProxy>->Void>>));
     ((cast targetRuntime.registries : { @:optional var colorAdjustmentUnsupportedGuard:Null<SlotTable<ColorAdjustmentUnsupportedGuard>>; }).colorAdjustmentUnsupportedGuard = cast ((cast sourceRuntime.registries : { @:optional var colorAdjustmentUnsupportedGuard:Null<SlotTable<ColorAdjustmentUnsupportedGuard>>; }).colorAdjustmentUnsupportedGuard : Null<SlotTable<ColorAdjustmentUnsupportedGuard>>));
     ((cast targetRuntime.registries : { @:optional var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>; }).effectPaddingResolvers = cast ((cast sourceRuntime.registries : { @:optional var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>; }).effectPaddingResolvers : Null<KeyedTable<RenderEffectPaddingResolver>>));
@@ -83,10 +83,10 @@ class Renderer {
   public static function registerRenderer(state:RenderState, kind:Kind, renderer:flighthq.types.Renderer):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:KeyedTable<flighthq.types.Renderer> = cast _Runtime.UNDEFINED;
-    runtime = (cast getRenderStateRuntime(({ final __callArgument11:Dynamic = state; __callArgument11; })) : RenderStateRuntime);
+    runtime = (cast getRenderStateRuntime(({ final __callArgument18:Dynamic = state; __callArgument18; })) : RenderStateRuntime);
     table = (cast runtime.registries : { var renderers:KeyedTable<flighthq.types.Renderer>; }).renderers;
     if ((cast _Runtime.strictEquals((cast getRegistryTableEntry((cast table : Dynamic), (cast kind : String)) : Null<flighthq.types.Renderer>), renderer) : Bool)) { return; }
-    ((cast runtime.registries : { var renderers:KeyedTable<flighthq.types.Renderer>; }).renderers = cast ((cast withRegistryTableEntry((cast table : Dynamic), (cast kind : String), ({ final __callArgument12:Dynamic = renderer; __callArgument12; })) : KeyedTable<flighthq.types.Renderer>) : KeyedTable<flighthq.types.Renderer>));
+    ((cast runtime.registries : { var renderers:KeyedTable<flighthq.types.Renderer>; }).renderers = cast ((cast withRegistryTableEntry((cast table : Dynamic), (cast kind : String), ({ final __callArgument20:Dynamic = renderer; __callArgument20; })) : KeyedTable<flighthq.types.Renderer>) : KeyedTable<flighthq.types.Renderer>));
     (runtime.rendererMapId = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((runtime.rendererMapId + 1.0)), 0) : Float));
   }
 
@@ -95,7 +95,7 @@ class Renderer {
     for (__iteration1 in _Runtime.iterable(entries)) {
       var kind:String = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
       var renderer:flighthq.types.Renderer = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
-      registerRenderer(({ final __callArgument15:Dynamic = state; __callArgument15; }), (cast kind : String), ({ final __callArgument16:Dynamic = renderer; __callArgument16; }));
+      registerRenderer(({ final __callArgument24:Dynamic = state; __callArgument24; }), (cast kind : String), ({ final __callArgument25:Dynamic = renderer; __callArgument25; }));
     }
   }
 }

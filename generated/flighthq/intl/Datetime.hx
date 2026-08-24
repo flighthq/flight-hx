@@ -14,12 +14,12 @@ class Datetime {
   }
 
   public static function formatDateTime(date:flighthq._internal._Union2<Date, Float>, locale:LocaleInput, ?options:Dynamic):String {
-    return cast (cast Datetime.formatDateValue__datetime((cast date : flighthq._internal._Any), ({ final __callArgument1:Dynamic = locale; __callArgument1; }), (cast _Runtime.coalesce(options, function():Dynamic return cast Datetime.defaultDateTimeOptions__datetime) : flighthq._internal._Any)) : String);
+    return cast (cast Datetime.formatDateValue__datetime((cast date : flighthq._internal._Any), ({ final __callArgument2:Dynamic = locale; __callArgument2; }), (cast _Runtime.coalesce(options, function():Dynamic return cast Datetime.defaultDateTimeOptions__datetime) : flighthq._internal._Any)) : String);
     return cast null;
   }
 
   public static function formatTime(date:flighthq._internal._Union2<Date, Float>, locale:LocaleInput, ?options:Dynamic):String {
-    return cast (cast Datetime.formatDateValue__datetime((cast date : flighthq._internal._Any), ({ final __callArgument2:Dynamic = locale; __callArgument2; }), (cast _Runtime.coalesce(options, function():Dynamic return cast Datetime.defaultTimeOptions__datetime) : flighthq._internal._Any)) : String);
+    return cast (cast Datetime.formatDateValue__datetime((cast date : flighthq._internal._Any), ({ final __callArgument4:Dynamic = locale; __callArgument4; }), (cast _Runtime.coalesce(options, function():Dynamic return cast Datetime.defaultTimeOptions__datetime) : flighthq._internal._Any)) : String);
     return cast null;
   }
 
@@ -29,8 +29,8 @@ class Datetime {
     var formatter:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     time = ((cast _Runtime.strictEquals(_Runtime.typeofValue(date), 'number') : Bool) ? (cast date : Dynamic) : (cast _Runtime.callProperty(date, 'getTime', cast ([] : Array<Dynamic>)) : Dynamic));
     if ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isNaN', cast ([time] : Array<Dynamic>)) : Bool)) { return cast 'Invalid Date'; }
-    key = (cast getCacheKey((cast 'datetime' : String), ({ final __callArgument3:Dynamic = locale; __callArgument3; }), ({ final __callArgument4:Dynamic = options; __callArgument4; })) : String);
-    formatter = (cast getCached : String->(Void->flighthq._internal._Any)->flighthq._internal._Any)((cast key : String), ({ final __callArgument5:Dynamic = function():flighthq._internal._Any return _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'DateTimeFormat'), [(cast locale : flighthq._internal._Union2<String, Array<String>>), options]); __callArgument5; }));
+    key = (cast getCacheKey((cast 'datetime' : String), ({ final __callArgument6:Dynamic = locale; __callArgument6; }), ({ final __callArgument7:Dynamic = options; __callArgument7; })) : String);
+    formatter = (cast getCached : String->(Void->flighthq._internal._Any)->flighthq._internal._Any)((cast key : String), ({ final __callArgument10:Dynamic = function():flighthq._internal._Any return _Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'DateTimeFormat'), [(cast locale : flighthq._internal._Union2<String, Array<String>>), options]); __callArgument10; }));
     return cast _Runtime.callProperty(formatter, 'format', cast ([date] : Array<Dynamic>));
     return cast null;
   }

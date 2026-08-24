@@ -37,20 +37,20 @@ class Clock {
 
   public static function createChildClock(parent:flighthq.types.Clock, ?options:ClockOptions):flighthq.types.Clock {
     var child:flighthq.types.Clock = cast _Runtime.UNDEFINED;
-    child = (cast createClock(({ final __callArgument1:Dynamic = options; __callArgument1; })) : flighthq.types.Clock);
-    addClockChild(({ final __callArgument2:Dynamic = parent; __callArgument2; }), ({ final __callArgument3:Dynamic = child; __callArgument3; }));
+    child = (cast createClock(({ final __callArgument2:Dynamic = options; __callArgument2; })) : flighthq.types.Clock);
+    addClockChild(({ final __callArgument4:Dynamic = parent; __callArgument4; }), ({ final __callArgument5:Dynamic = child; __callArgument5; }));
     return cast child;
     return cast null;
   }
 
   public static function createClock(?options:ClockOptions):flighthq.types.Clock {
-    return cast { scale: _Runtime.coalesce(({ final __structural4 = options; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var scale:Null<Float>; }).scale; }), function():Dynamic return cast 1.0), paused: _Runtime.coalesce(({ final __structural5 = options; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var paused:Null<Bool>; }).paused; }), function():Dynamic return cast false), deltaTime: 0.0, elapsed: 0.0, parent: null, children: cast ([] : Array<Dynamic>), onTick: null };
+    return cast { scale: _Runtime.coalesce(({ final __structural8 = options; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var scale:Null<Float>; }).scale; }), function():Dynamic return cast 1.0), paused: _Runtime.coalesce(({ final __structural9 = options; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var paused:Null<Bool>; }).paused; }), function():Dynamic return cast false), deltaTime: 0.0, elapsed: 0.0, parent: null, children: cast ([] : Array<Dynamic>), onTick: null };
     return cast null;
   }
 
   public static function disposeClock(clock:flighthq.types.Clock):Void {
     var children:Array<flighthq.types.Clock> = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals(clock.parent, null) : Bool)) { removeClockChild(clock.parent, ({ final __callArgument6:Dynamic = clock; __callArgument6; })); }
+    if ((cast !_Runtime.strictEquals(clock.parent, null) : Bool)) { removeClockChild(clock.parent, ({ final __callArgument10:Dynamic = clock; __callArgument10; })); }
     children = clock.children;
     {
       var i:Float = 0.0;

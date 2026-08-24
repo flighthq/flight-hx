@@ -40,7 +40,7 @@ class BloomEffect {
   }
 
   public static function registerBloomEffectPaddingResolver(state:RenderState):Void {
-    registerRenderEffectPaddingResolver(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast 'BloomEffect' : String), (cast BloomEffect.resolveBloomEffectPadding__bloomEffect : Dynamic));
+    registerRenderEffectPaddingResolver(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast 'BloomEffect' : String), (cast BloomEffect.resolveBloomEffectPadding__bloomEffect : Dynamic));
   }
 
   public static function resolveBloomEffectPadding__bloomEffect(effect:RenderEffect):RenderEffectPadding {

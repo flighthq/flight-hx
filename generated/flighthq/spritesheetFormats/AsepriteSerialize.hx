@@ -59,14 +59,14 @@ class AsepriteSerialize {
     for (frame in _Runtime.iterable(data.frames)) {
       _Runtime.setIndex(frames, frame.name, (cast AsepriteSerialize.frameToEntry__asepriteSerialize(({ final __callArgument5:Dynamic = frame; __callArgument5; }), (cast (cast AsepriteSerialize.resolveFrameDuration__asepriteSerialize(({ final __callArgument6:Dynamic = data; __callArgument6; }), (cast frame.name : String)) : Float) : Float)) : AsepriteBaseFrame));
     }
-    return cast { frames: frames, meta: (cast AsepriteSerialize.dataToMeta__asepriteSerialize(({ final __callArgument7:Dynamic = data; __callArgument7; }), (cast _Runtime.coalesce((cast existing : { @:optional var frames:Null<flighthq._internal._Record<String, AsepriteBaseFrame>>; @:optional var meta:Null<AsepriteMeta>; }).meta, function():Dynamic return cast {  }) : Dynamic)) : AsepriteMeta) };
+    return cast { frames: frames, meta: (cast AsepriteSerialize.dataToMeta__asepriteSerialize(({ final __callArgument11:Dynamic = data; __callArgument11; }), (cast _Runtime.coalesce((cast existing : { @:optional var frames:Null<flighthq._internal._Record<String, AsepriteBaseFrame>>; @:optional var meta:Null<AsepriteMeta>; }).meta, function():Dynamic return cast {  }) : Dynamic)) : AsepriteMeta) };
     return cast null;
   }
 
   public static function dataToArrayDocument__asepriteSerialize(data:SpritesheetData, existing:{ @:optional var frames:Null<Array<AsepriteArrayFrame>>; @:optional var meta:Null<AsepriteMeta>; }):AsepriteArrayDocument {
     var frames:Array<AsepriteArrayFrame> = cast _Runtime.UNDEFINED;
-    frames = (cast _Runtime.mapArray((cast data.frames : Array<SpritesheetFrameData>), function(frame:SpritesheetFrameData, __unused5:Float, __unused6:Array<SpritesheetFrameData>):{ var duration:Float; var frame:AsepriteRect; var rotated:Bool; var sourceSize:AsepriteSize; var spriteSourceSize:AsepriteRect; var trimmed:Bool; var filename:String; } return _Runtime.mergeObjects([{ filename: frame.name }, (cast AsepriteSerialize.frameToEntry__asepriteSerialize(({ final __callArgument8:Dynamic = frame; __callArgument8; }), (cast (cast AsepriteSerialize.resolveFrameDuration__asepriteSerialize(({ final __callArgument9:Dynamic = data; __callArgument9; }), (cast frame.name : String)) : Float) : Float)) : AsepriteBaseFrame)]), _Runtime.UNDEFINED));
-    return cast { frames: frames, meta: (cast AsepriteSerialize.dataToMeta__asepriteSerialize(({ final __callArgument10:Dynamic = data; __callArgument10; }), (cast _Runtime.coalesce((cast existing : { @:optional var frames:Null<Array<AsepriteArrayFrame>>; @:optional var meta:Null<AsepriteMeta>; }).meta, function():Dynamic return cast {  }) : Dynamic)) : AsepriteMeta) };
+    frames = (cast _Runtime.mapArray((cast data.frames : Array<SpritesheetFrameData>), function(frame:SpritesheetFrameData, __unused5:Float, __unused6:Array<SpritesheetFrameData>):{ var duration:Float; var frame:AsepriteRect; var rotated:Bool; var sourceSize:AsepriteSize; var spriteSourceSize:AsepriteRect; var trimmed:Bool; var filename:String; } return _Runtime.mergeObjects([{ filename: frame.name }, (cast AsepriteSerialize.frameToEntry__asepriteSerialize(({ final __callArgument13:Dynamic = frame; __callArgument13; }), (cast (cast AsepriteSerialize.resolveFrameDuration__asepriteSerialize(({ final __callArgument14:Dynamic = data; __callArgument14; }), (cast frame.name : String)) : Float) : Float)) : AsepriteBaseFrame)]), _Runtime.UNDEFINED));
+    return cast { frames: frames, meta: (cast AsepriteSerialize.dataToMeta__asepriteSerialize(({ final __callArgument19:Dynamic = data; __callArgument19; }), (cast _Runtime.coalesce((cast existing : { @:optional var frames:Null<Array<AsepriteArrayFrame>>; @:optional var meta:Null<AsepriteMeta>; }).meta, function():Dynamic return cast {  }) : Dynamic)) : AsepriteMeta) };
     return cast null;
   }
 
@@ -75,12 +75,12 @@ class AsepriteSerialize {
     var variant:String = cast _Runtime.UNDEFINED;
     var doc:AsepriteHashDocument = cast _Runtime.UNDEFINED;
     existingIsArray = ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.isArray((cast (cast existing : AsepriteArrayDocument) : { var frames:Array<AsepriteArrayFrame>; }).frames) : Bool));
-    variant = _Runtime.coalesce(({ final __typedStruct11 = options; __typedStruct11 == null ? _Runtime.UNDEFINED : __typedStruct11.variant; }), function():Dynamic return cast ((cast existingIsArray : Bool) ? (cast 'array' : Dynamic) : (cast 'hash' : Dynamic)));
+    variant = _Runtime.coalesce(({ final __typedStruct21 = options; __typedStruct21 == null ? _Runtime.UNDEFINED : __typedStruct21.variant; }), function():Dynamic return cast ((cast existingIsArray : Bool) ? (cast 'array' : Dynamic) : (cast 'hash' : Dynamic)));
     if ((cast _Runtime.strictEquals(variant, 'array') : Bool)) {
-      var doc:AsepriteArrayDocument = (cast AsepriteSerialize.dataToArrayDocument__asepriteSerialize(({ final __callArgument12:Dynamic = data; __callArgument12; }), ({ final __callArgument13:Dynamic = _Runtime.coalesce((cast existing : { @:optional var frames:Null<Array<AsepriteArrayFrame>>; @:optional var meta:Null<AsepriteMeta>; }), function():Dynamic return cast {  }); __callArgument13; })) : AsepriteArrayDocument);
+      var doc:AsepriteArrayDocument = (cast AsepriteSerialize.dataToArrayDocument__asepriteSerialize(({ final __callArgument22:Dynamic = data; __callArgument22; }), ({ final __callArgument23:Dynamic = _Runtime.coalesce((cast existing : { @:optional var frames:Null<Array<AsepriteArrayFrame>>; @:optional var meta:Null<AsepriteMeta>; }), function():Dynamic return cast {  }); __callArgument23; })) : AsepriteArrayDocument);
       return cast _Runtime.jsonStringify(doc, null, 2.0);
     }
-    doc = (cast AsepriteSerialize.dataToHashDocument__asepriteSerialize(({ final __callArgument14:Dynamic = data; __callArgument14; }), ({ final __callArgument15:Dynamic = _Runtime.coalesce((cast existing : { @:optional var frames:Null<flighthq._internal._Record<String, AsepriteHashFrame>>; @:optional var meta:Null<AsepriteMeta>; }), function():Dynamic return cast {  }); __callArgument15; })) : AsepriteHashDocument);
+    doc = (cast AsepriteSerialize.dataToHashDocument__asepriteSerialize(({ final __callArgument26:Dynamic = data; __callArgument26; }), ({ final __callArgument27:Dynamic = _Runtime.coalesce((cast existing : { @:optional var frames:Null<flighthq._internal._Record<String, AsepriteHashFrame>>; @:optional var meta:Null<AsepriteMeta>; }), function():Dynamic return cast {  }); __callArgument27; })) : AsepriteHashDocument);
     return cast _Runtime.jsonStringify(doc, null, 2.0);
     return cast null;
   }

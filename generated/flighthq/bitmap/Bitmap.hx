@@ -288,7 +288,7 @@ class Bitmap {
         }
       }
     }
-    return cast (cast createEntity(({ final __callArgument1:Dynamic = { alphaType: 'straight', gamut: 'srgb', data: data, format: 'rgba8unorm', height: height, kind: BitmapTextureSourceKind, version: 0.0, width: width }; __callArgument1; })) : { >Entity, var alphaType:String; var gamut:String; var data:flighthq._internal._UInt8ClampedArray; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; });
+    return cast (cast createEntity(({ final __callArgument2:Dynamic = { alphaType: 'straight', gamut: 'srgb', data: data, format: 'rgba8unorm', height: height, kind: BitmapTextureSourceKind, version: 0.0, width: width }; __callArgument2; })) : { >Entity, var alphaType:String; var gamut:String; var data:flighthq._internal._UInt8ClampedArray; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; });
     return cast null;
   }
 

@@ -18,7 +18,7 @@ class GlPresentRenderTarget {
       drawGlLinearToSrgbPass(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = target; __callArgument1; }), ({ final __callArgument2:Dynamic = dest; __callArgument2; }));
       return;
     }
-    drawGlFullscreenPass(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast GlPresentRenderTarget.getGlCopyProgram__glPresentRenderTarget(({ final __callArgument4:Dynamic = state; __callArgument4; })) : GlFullscreenProgram), ({ final __callArgument5:Dynamic = cast ([target.texture] : Array<Dynamic>); __callArgument5; }), ({ final __callArgument6:Dynamic = dest; __callArgument6; }), ({ final __callArgument7:Dynamic = function(__unused0:flighthq._internal.dom.WebGL2RenderingContext, __unused1:GlFullscreenProgram):Void { GlPresentRenderTarget.NOOP__glPresentRenderTarget(); }; __callArgument7; }));
+    drawGlFullscreenPass(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast GlPresentRenderTarget.getGlCopyProgram__glPresentRenderTarget(({ final __callArgument7:Dynamic = state; __callArgument7; })) : GlFullscreenProgram), ({ final __callArgument9:Dynamic = cast ([target.texture] : Array<Dynamic>); __callArgument9; }), ({ final __callArgument10:Dynamic = dest; __callArgument10; }), ({ final __callArgument11:Dynamic = function(__unused0:flighthq._internal.dom.WebGL2RenderingContext, __unused1:GlFullscreenProgram):Void { GlPresentRenderTarget.NOOP__glPresentRenderTarget(); }; __callArgument11; }));
   }
 
   public static function getGlCopyProgram__glPresentRenderTarget(state:GlRenderState):GlFullscreenProgram {

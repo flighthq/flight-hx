@@ -25,49 +25,49 @@ class BooleanPaths {
     var result:Array<PathBooleanContour> = cast _Runtime.UNDEFINED;
     fillRule = _Runtime.coalesce(({ final __typedStruct0 = options; __typedStruct0 == null ? _Runtime.UNDEFINED : __typedStruct0.fillRule; }), function():Dynamic return cast 'nonZero');
     subjectContours = (cast flattenPath(({ final __callArgument1:Dynamic = subject; __callArgument1; }), #if js (cast ({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.tolerance; }) : Float) #else (cast ({ final __typedStruct2 = options; __typedStruct2 == null ? _Runtime.UNDEFINED : __typedStruct2.tolerance; }) : Null<Float>) #end) : Array<Array<Float>>);
-    clipContours = (cast flattenPath(({ final __callArgument3:Dynamic = clip; __callArgument3; }), #if js (cast ({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.tolerance; }) : Float) #else (cast ({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.tolerance; }) : Null<Float>) #end) : Array<Array<Float>>);
-    result = (cast (cast getPathBooleanBackend() : PathBooleanBackend) : PathBooleanBackend).computePathBoolean((cast subjectContours : Dynamic), (cast clipContours : Dynamic), ({ final __callArgument5:Dynamic = operation; __callArgument5; }), ({ final __callArgument6:Dynamic = fillRule; __callArgument6; }));
-    return cast (cast BooleanPaths.writeContours__booleanPaths(({ final __callArgument7:Dynamic = result; __callArgument7; }), ({ final __callArgument8:Dynamic = out; __callArgument8; })) : Path);
+    clipContours = (cast flattenPath(({ final __callArgument5:Dynamic = clip; __callArgument5; }), #if js (cast ({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.tolerance; }) : Float) #else (cast ({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.tolerance; }) : Null<Float>) #end) : Array<Array<Float>>);
+    result = (cast (cast getPathBooleanBackend() : PathBooleanBackend) : PathBooleanBackend).computePathBoolean((cast subjectContours : Dynamic), (cast clipContours : Dynamic), ({ final __callArgument9:Dynamic = operation; __callArgument9; }), ({ final __callArgument10:Dynamic = fillRule; __callArgument10; }));
+    return cast (cast BooleanPaths.writeContours__booleanPaths(({ final __callArgument11:Dynamic = result; __callArgument11; }), ({ final __callArgument12:Dynamic = out; __callArgument12; })) : Path);
     return cast null;
   }
 
   public static function differencePaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
-    return cast (cast booleanPaths(({ final __callArgument9:Dynamic = a; __callArgument9; }), ({ final __callArgument10:Dynamic = b; __callArgument10; }), ({ final __callArgument11:Dynamic = 'difference'; __callArgument11; }), ({ final __callArgument12:Dynamic = out; __callArgument12; }), ({ final __callArgument13:Dynamic = options; __callArgument13; })) : Path);
+    return cast (cast booleanPaths(({ final __callArgument15:Dynamic = a; __callArgument15; }), ({ final __callArgument16:Dynamic = b; __callArgument16; }), ({ final __callArgument17:Dynamic = 'difference'; __callArgument17; }), ({ final __callArgument18:Dynamic = out; __callArgument18; }), ({ final __callArgument19:Dynamic = options; __callArgument19; })) : Path);
     return cast null;
   }
 
   public static function intersectPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
-    return cast (cast booleanPaths(({ final __callArgument14:Dynamic = a; __callArgument14; }), ({ final __callArgument15:Dynamic = b; __callArgument15; }), ({ final __callArgument16:Dynamic = 'intersection'; __callArgument16; }), ({ final __callArgument17:Dynamic = out; __callArgument17; }), ({ final __callArgument18:Dynamic = options; __callArgument18; })) : Path);
+    return cast (cast booleanPaths(({ final __callArgument25:Dynamic = a; __callArgument25; }), ({ final __callArgument26:Dynamic = b; __callArgument26; }), ({ final __callArgument27:Dynamic = 'intersection'; __callArgument27; }), ({ final __callArgument28:Dynamic = out; __callArgument28; }), ({ final __callArgument29:Dynamic = options; __callArgument29; })) : Path);
     return cast null;
   }
 
   public static function unionPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
-    return cast (cast booleanPaths(({ final __callArgument19:Dynamic = a; __callArgument19; }), ({ final __callArgument20:Dynamic = b; __callArgument20; }), ({ final __callArgument21:Dynamic = 'union'; __callArgument21; }), ({ final __callArgument22:Dynamic = out; __callArgument22; }), ({ final __callArgument23:Dynamic = options; __callArgument23; })) : Path);
+    return cast (cast booleanPaths(({ final __callArgument35:Dynamic = a; __callArgument35; }), ({ final __callArgument36:Dynamic = b; __callArgument36; }), ({ final __callArgument37:Dynamic = 'union'; __callArgument37; }), ({ final __callArgument38:Dynamic = out; __callArgument38; }), ({ final __callArgument39:Dynamic = options; __callArgument39; })) : Path);
     return cast null;
   }
 
   public static function xorPaths(a:Path, b:Path, ?out:Path, ?options:PathBooleanOptions):Path {
-    return cast (cast booleanPaths(({ final __callArgument24:Dynamic = a; __callArgument24; }), ({ final __callArgument25:Dynamic = b; __callArgument25; }), ({ final __callArgument26:Dynamic = 'xor'; __callArgument26; }), ({ final __callArgument27:Dynamic = out; __callArgument27; }), ({ final __callArgument28:Dynamic = options; __callArgument28; })) : Path);
+    return cast (cast booleanPaths(({ final __callArgument45:Dynamic = a; __callArgument45; }), ({ final __callArgument46:Dynamic = b; __callArgument46; }), ({ final __callArgument47:Dynamic = 'xor'; __callArgument47; }), ({ final __callArgument48:Dynamic = out; __callArgument48; }), ({ final __callArgument49:Dynamic = options; __callArgument49; })) : Path);
     return cast null;
   }
 
   public static function writeContours__booleanPaths(contours:Array<Array<Float>>, ?out:Path):Path {
     var path:Path = cast _Runtime.UNDEFINED;
-    path = _Runtime.coalesce(out, function():Dynamic return cast (cast createPath(({ final __callArgument29:Dynamic = 'nonZero'; __callArgument29; })) : Path));
+    path = _Runtime.coalesce(out, function():Dynamic return cast (cast createPath(({ final __callArgument55:Dynamic = 'nonZero'; __callArgument55; })) : Path));
     _Runtime.setLength((cast path : Path).commands, 0.0);
     _Runtime.setLength((cast path : Path).data, 0.0);
     ((cast path : Path).winding = 'nonZero');
     for (ring in _Runtime.iterable(contours)) {
       if ((cast ((cast _Runtime.field(ring, 'length') : Float) < (cast 6.0 : Float)) : Bool)) { continue; }
-      appendPathMoveTo(({ final __callArgument32:Dynamic = path; __callArgument32; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 1.0 : Float)) : Float));
+      appendPathMoveTo(({ final __callArgument59:Dynamic = path; __callArgument59; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast 1.0 : Float)) : Float));
       {
         var i:Float = 2.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(ring, 'length') : Float)) : Bool)) {
-          appendPathLineTo(({ final __callArgument33:Dynamic = path; __callArgument33; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast (i + 1.0) : Float)) : Float));
+          appendPathLineTo(({ final __callArgument61:Dynamic = path; __callArgument61; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast i : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast ring : Array<Float>), (cast (i + 1.0) : Float)) : Float));
           (i = cast ((i + 2.0) : Dynamic));
         }
       }
-      appendPathClose(({ final __callArgument34:Dynamic = path; __callArgument34; }));
+      appendPathClose(({ final __callArgument63:Dynamic = path; __callArgument63; }));
     }
     return cast path;
     return cast null;

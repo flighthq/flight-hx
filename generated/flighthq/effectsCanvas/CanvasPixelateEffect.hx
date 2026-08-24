@@ -48,7 +48,7 @@ class CanvasPixelateEffect {
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([small.canvas, 0.0, 0.0, smallW, smallH, 0.0, 0.0, dest.width, dest.height] : Array<Dynamic>));
     flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'imageSmoothingEnabled', true);
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
-    releaseCanvasRenderTarget(({ final __callArgument1:Dynamic = pool; __callArgument1; }), ({ final __callArgument2:Dynamic = small; __callArgument2; }));
+    releaseCanvasRenderTarget(({ final __callArgument2:Dynamic = pool; __callArgument2; }), ({ final __callArgument3:Dynamic = small; __callArgument3; }));
   }
 
   public static final defaultCanvasPixelateEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
@@ -56,6 +56,6 @@ class CanvasPixelateEffect {
   });
 
   public static function registerCanvasPixelateEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast 'PixelateEffect' : String), ({ final __callArgument4:Dynamic = defaultCanvasPixelateEffectRunner; __callArgument4; }));
+    registerCanvasRenderEffect(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast 'PixelateEffect' : String), ({ final __callArgument7:Dynamic = defaultCanvasPixelateEffectRunner; __callArgument7; }));
   }
 }

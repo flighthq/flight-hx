@@ -10,6 +10,6 @@ import flighthq.types.Mesh;
 class UpdateMeshDeformation {
   public static function updateMeshDeformation(mesh:Mesh):Void {
     updateMeshMorph(({ final __callArgument0:Dynamic = mesh; __callArgument0; }));
-    updateMeshSkin(({ final __callArgument1:Dynamic = mesh; __callArgument1; }));
+    updateMeshSkin(({ final __callArgument2:Dynamic = mesh; __callArgument2; }));
   }
 }

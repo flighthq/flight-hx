@@ -85,7 +85,7 @@ class Vector4 {
   }
 
   public static function createVector4(?x:Float, ?y:Float, ?z:Float, ?w:Float):flighthq.types.Vector4 {
-    return cast (cast createEntity(({ final __callArgument4:Dynamic = { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0), w: _Runtime.coalesce(w, function():Dynamic return cast 0.0) }; __callArgument4; })) : { >Entity, var x:Float; var y:Float; var z:Float; var w:Float; });
+    return cast (cast createEntity(({ final __callArgument8:Dynamic = { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0), w: _Runtime.coalesce(w, function():Dynamic return cast 0.0) }; __callArgument8; })) : { >Entity, var x:Float; var y:Float; var z:Float; var w:Float; });
     return cast null;
   }
 
@@ -122,10 +122,10 @@ class Vector4 {
     var la:Float = cast _Runtime.UNDEFINED;
     var lb:Float = cast _Runtime.UNDEFINED;
     var _dot:Float = cast _Runtime.UNDEFINED;
-    la = (cast getVector4Length(({ final __callArgument5:Dynamic = a; __callArgument5; })) : Float);
-    lb = (cast getVector4Length(({ final __callArgument6:Dynamic = b; __callArgument6; })) : Float);
+    la = (cast getVector4Length(({ final __callArgument10:Dynamic = a; __callArgument10; })) : Float);
+    lb = (cast getVector4Length(({ final __callArgument12:Dynamic = b; __callArgument12; })) : Float);
     if ((cast ((cast _Runtime.strictEquals(la, 0.0) : Bool) || (cast _Runtime.strictEquals(lb, 0.0) : Bool)) : Bool)) { return cast HxMath.NaN; }
-    _dot = ((cast getVector4Dot(({ final __callArgument7:Dynamic = a; __callArgument7; }), ({ final __callArgument8:Dynamic = b; __callArgument8; })) : Float) / (la * lb));
+    _dot = ((cast getVector4Dot(({ final __callArgument14:Dynamic = a; __callArgument14; }), ({ final __callArgument15:Dynamic = b; __callArgument15; })) : Float) / (la * lb));
     return cast HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, _dot)));
     return cast null;
   }
@@ -427,11 +427,11 @@ class Vector4 {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 3.0) : Float), (cast _Runtime.field(source, 'w') : Float));
   }
 
-  public static final VECTOR4_W_UNIT:flighthq.types.Vector4 = (cast createVector4(({ final __callArgument9:Dynamic = 0.0; __callArgument9; }), ({ final __callArgument10:Dynamic = 0.0; __callArgument10; }), ({ final __callArgument11:Dynamic = 0.0; __callArgument11; }), ({ final __callArgument12:Dynamic = 1.0; __callArgument12; })) : flighthq.types.Vector4);
+  public static final VECTOR4_W_UNIT:flighthq.types.Vector4 = (cast createVector4(({ final __callArgument18:Dynamic = 0.0; __callArgument18; }), ({ final __callArgument19:Dynamic = 0.0; __callArgument19; }), ({ final __callArgument20:Dynamic = 0.0; __callArgument20; }), ({ final __callArgument21:Dynamic = 1.0; __callArgument21; })) : flighthq.types.Vector4);
 
-  public static final VECTOR4_X_AXIS:flighthq.types.Vector4 = (cast createVector4(({ final __callArgument13:Dynamic = 1.0; __callArgument13; }), ({ final __callArgument14:Dynamic = 0.0; __callArgument14; }), ({ final __callArgument15:Dynamic = 0.0; __callArgument15; }), ({ final __callArgument16:Dynamic = 0.0; __callArgument16; })) : flighthq.types.Vector4);
+  public static final VECTOR4_X_AXIS:flighthq.types.Vector4 = (cast createVector4(({ final __callArgument26:Dynamic = 1.0; __callArgument26; }), ({ final __callArgument27:Dynamic = 0.0; __callArgument27; }), ({ final __callArgument28:Dynamic = 0.0; __callArgument28; }), ({ final __callArgument29:Dynamic = 0.0; __callArgument29; })) : flighthq.types.Vector4);
 
-  public static final VECTOR4_Y_AXIS:flighthq.types.Vector4 = (cast createVector4(({ final __callArgument17:Dynamic = 0.0; __callArgument17; }), ({ final __callArgument18:Dynamic = 1.0; __callArgument18; }), ({ final __callArgument19:Dynamic = 0.0; __callArgument19; }), ({ final __callArgument20:Dynamic = 0.0; __callArgument20; })) : flighthq.types.Vector4);
+  public static final VECTOR4_Y_AXIS:flighthq.types.Vector4 = (cast createVector4(({ final __callArgument34:Dynamic = 0.0; __callArgument34; }), ({ final __callArgument35:Dynamic = 1.0; __callArgument35; }), ({ final __callArgument36:Dynamic = 0.0; __callArgument36; }), ({ final __callArgument37:Dynamic = 0.0; __callArgument37; })) : flighthq.types.Vector4);
 
-  public static final VECTOR4_Z_AXIS:flighthq.types.Vector4 = (cast createVector4(({ final __callArgument21:Dynamic = 0.0; __callArgument21; }), ({ final __callArgument22:Dynamic = 0.0; __callArgument22; }), ({ final __callArgument23:Dynamic = 1.0; __callArgument23; }), ({ final __callArgument24:Dynamic = 0.0; __callArgument24; })) : flighthq.types.Vector4);
+  public static final VECTOR4_Z_AXIS:flighthq.types.Vector4 = (cast createVector4(({ final __callArgument42:Dynamic = 0.0; __callArgument42; }), ({ final __callArgument43:Dynamic = 0.0; __callArgument43; }), ({ final __callArgument44:Dynamic = 1.0; __callArgument44; }), ({ final __callArgument45:Dynamic = 0.0; __callArgument45; })) : flighthq.types.Vector4);
 }

@@ -23,7 +23,7 @@ class GlScanlinesEffect {
     count = _Runtime.coalesce(_Runtime.field(effect, 'count'), function():Dynamic return cast 240.0);
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.3);
     program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'stylization.scanlines' : String), (cast GlScanlinesEffect.SCANLINES_FRAGMENT_SRC__glScanlinesEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; }), ({ final __callArgument3:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    drawGlFullscreenPass(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = program; __callArgument3; }), ({ final __callArgument4:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument4; }), ({ final __callArgument5:Dynamic = dest; __callArgument5; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_count'), count);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
     } : Dynamic));
@@ -34,7 +34,7 @@ class GlScanlinesEffect {
   });
 
   public static function registerGlScanlinesEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'ScanlinesEffect' : String), ({ final __callArgument6:Dynamic = defaultGlScanlinesEffectRunner; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument12:Dynamic = state; __callArgument12; }), (cast 'ScanlinesEffect' : String), ({ final __callArgument13:Dynamic = defaultGlScanlinesEffectRunner; __callArgument13; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast 'ScanlinesEffect' : String), ({ final __callArgument11:Dynamic = defaultGlScanlinesEffectRunner; __callArgument11; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final SCANLINES_FRAGMENT_SRC__glScanlinesEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_count;\nuniform float u_intensity;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  // Counted down the image so a given line index falls on the same row whichever origin the target\n  // uses; a render target is bottom-left, so the row has to be measured from the far edge first.\n  float line = sin((1.0 - v_texCoord.y) * u_count * 3.14159265) * 0.5 + 0.5;\n  o_color = vec4(c.rgb * (1.0 - u_intensity * (1.0 - line)), c.a);\n}';

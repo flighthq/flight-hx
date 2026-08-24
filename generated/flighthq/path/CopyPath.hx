@@ -8,7 +8,7 @@ import flighthq.types.ShapeCommand.PathWinding;
 
 class CopyPath {
   public static function clonePath(source:Path):Path {
-    return cast (cast copyPath(({ final __callArgument0:Dynamic = source; __callArgument0; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Path);
+    return cast (cast (#if js _Runtime.callValue(copyPath, cast ([({ final __callArgument1:Dynamic = source; __callArgument1; })] : Array<Dynamic>)) #else copyPath(({ final __callArgument0:Dynamic = source; __callArgument0; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Path);
     return cast null;
   }
 

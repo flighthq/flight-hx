@@ -190,13 +190,13 @@ class MartinezKernel {
     var unique:Array<UniqueSegment__martinezKernel> = cast _Runtime.UNDEFINED;
     var kept:Array<Array<Float>> = cast _Runtime.UNDEFINED;
     (MartinezKernel.nextEventId__martinezKernel = cast (0.0 : Dynamic));
-    (MartinezKernel.vertexSnap__martinezKernel = cast ((cast MartinezKernel.computeVertexSnap__martinezKernel(({ final __callArgument6:Dynamic = subject; __callArgument6; }), ({ final __callArgument7:Dynamic = clip; __callArgument7; })) : Float) : Dynamic));
-    segments = (cast MartinezKernel.buildArrangement__martinezKernel(({ final __callArgument8:Dynamic = subject; __callArgument8; }), ({ final __callArgument9:Dynamic = clip; __callArgument9; })) : Array<ArrangementSegment__martinezKernel>);
+    (MartinezKernel.vertexSnap__martinezKernel = cast ((cast MartinezKernel.computeVertexSnap__martinezKernel(({ final __callArgument10:Dynamic = subject; __callArgument10; }), ({ final __callArgument11:Dynamic = clip; __callArgument11; })) : Float) : Dynamic));
+    segments = (cast MartinezKernel.buildArrangement__martinezKernel(({ final __callArgument14:Dynamic = subject; __callArgument14; }), ({ final __callArgument15:Dynamic = clip; __callArgument15; })) : Array<ArrangementSegment__martinezKernel>);
     if ((cast _Runtime.strictEquals(_Runtime.field(segments, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
     unique = (cast MartinezKernel.mergeCoincidentSegments__martinezKernel((cast segments : Dynamic)) : Array<UniqueSegment__martinezKernel>);
-    kept = (cast MartinezKernel.classifySegments__martinezKernel((cast unique : Dynamic), ({ final __callArgument10:Dynamic = operation; __callArgument10; }), ({ final __callArgument11:Dynamic = fillRule; __callArgument11; })) : Array<Array<Float>>);
+    kept = (cast MartinezKernel.classifySegments__martinezKernel((cast unique : Dynamic), ({ final __callArgument18:Dynamic = operation; __callArgument18; }), ({ final __callArgument19:Dynamic = fillRule; __callArgument19; })) : Array<Array<Float>>);
     if ((cast _Runtime.strictEquals(_Runtime.field(kept, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
-    return cast (cast MartinezKernel.traceRings__martinezKernel(({ final __callArgument12:Dynamic = kept; __callArgument12; })) : Array<PathBooleanContour>);
+    return cast (cast MartinezKernel.traceRings__martinezKernel(({ final __callArgument22:Dynamic = kept; __callArgument22; })) : Array<PathBooleanContour>);
     return cast null;
   }
 
@@ -205,8 +205,8 @@ class MartinezKernel {
     var status:Array<SweepEvent__martinezKernel> = cast _Runtime.UNDEFINED;
     var segments:Array<ArrangementSegment__martinezKernel> = cast _Runtime.UNDEFINED;
     heap = new EventHeap__martinezKernel();
-    MartinezKernel.fillQueue__martinezKernel(({ final __callArgument13:Dynamic = subject; __callArgument13; }), (cast true : Bool), (cast heap : Dynamic));
-    MartinezKernel.fillQueue__martinezKernel(({ final __callArgument14:Dynamic = clip; __callArgument14; }), (cast false : Bool), (cast heap : Dynamic));
+    MartinezKernel.fillQueue__martinezKernel(({ final __callArgument24:Dynamic = subject; __callArgument24; }), (cast true : Bool), (cast heap : Dynamic));
+    MartinezKernel.fillQueue__martinezKernel(({ final __callArgument26:Dynamic = clip; __callArgument26; }), (cast false : Bool), (cast heap : Dynamic));
     status = (cast cast ([] : Array<Dynamic>));
     segments = (cast cast ([] : Array<Dynamic>));
     while ((cast !(cast (cast heap : EventHeap__martinezKernel).isEmpty() : Bool) : Bool)) {
@@ -511,12 +511,12 @@ class MartinezKernel {
       var eps:Float = (len * 0.0001);
       var nlx:Float = ((-dy / len) * eps);
       var nly:Float = ((dx / len) * eps);
-      var leftInSubject:Bool = (cast MartinezKernel.isInside__martinezKernel((cast (cast MartinezKernel.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx + nlx) : Float), (cast (my + nly) : Float), (cast true : Bool)) : Float) : Float), ({ final __callArgument21:Dynamic = fillRule; __callArgument21; })) : Bool);
-      var leftInClip:Bool = (cast MartinezKernel.isInside__martinezKernel((cast (cast MartinezKernel.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx + nlx) : Float), (cast (my + nly) : Float), (cast false : Bool)) : Float) : Float), ({ final __callArgument22:Dynamic = fillRule; __callArgument22; })) : Bool);
-      var rightInSubject:Bool = (cast MartinezKernel.isInside__martinezKernel((cast (cast MartinezKernel.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx - nlx) : Float), (cast (my - nly) : Float), (cast true : Bool)) : Float) : Float), ({ final __callArgument23:Dynamic = fillRule; __callArgument23; })) : Bool);
-      var rightInClip:Bool = (cast MartinezKernel.isInside__martinezKernel((cast (cast MartinezKernel.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx - nlx) : Float), (cast (my - nly) : Float), (cast false : Bool)) : Float) : Float), ({ final __callArgument24:Dynamic = fillRule; __callArgument24; })) : Bool);
-      var filledLeft:Bool = (cast MartinezKernel.combine__martinezKernel(({ final __callArgument25:Dynamic = operation; __callArgument25; }), (cast leftInSubject : Bool), (cast leftInClip : Bool)) : Bool);
-      var filledRight:Bool = (cast MartinezKernel.combine__martinezKernel(({ final __callArgument26:Dynamic = operation; __callArgument26; }), (cast rightInSubject : Bool), (cast rightInClip : Bool)) : Bool);
+      var leftInSubject:Bool = (cast MartinezKernel.isInside__martinezKernel((cast (cast MartinezKernel.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx + nlx) : Float), (cast (my + nly) : Float), (cast true : Bool)) : Float) : Float), ({ final __callArgument34:Dynamic = fillRule; __callArgument34; })) : Bool);
+      var leftInClip:Bool = (cast MartinezKernel.isInside__martinezKernel((cast (cast MartinezKernel.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx + nlx) : Float), (cast (my + nly) : Float), (cast false : Bool)) : Float) : Float), ({ final __callArgument36:Dynamic = fillRule; __callArgument36; })) : Bool);
+      var rightInSubject:Bool = (cast MartinezKernel.isInside__martinezKernel((cast (cast MartinezKernel.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx - nlx) : Float), (cast (my - nly) : Float), (cast true : Bool)) : Float) : Float), ({ final __callArgument38:Dynamic = fillRule; __callArgument38; })) : Bool);
+      var rightInClip:Bool = (cast MartinezKernel.isInside__martinezKernel((cast (cast MartinezKernel.windingAt__martinezKernel((cast unique : Dynamic), (cast (mx - nlx) : Float), (cast (my - nly) : Float), (cast false : Bool)) : Float) : Float), ({ final __callArgument40:Dynamic = fillRule; __callArgument40; })) : Bool);
+      var filledLeft:Bool = (cast MartinezKernel.combine__martinezKernel(({ final __callArgument42:Dynamic = operation; __callArgument42; }), (cast leftInSubject : Bool), (cast leftInClip : Bool)) : Bool);
+      var filledRight:Bool = (cast MartinezKernel.combine__martinezKernel(({ final __callArgument44:Dynamic = operation; __callArgument44; }), (cast rightInSubject : Bool), (cast rightInClip : Bool)) : Bool);
       if ((cast _Runtime.strictEquals(filledLeft, filledRight) : Bool)) { continue; }
       if ((cast filledLeft : Bool)) { _Runtime.callProperty(kept, 'push', cast ([cast ([(cast seg : UniqueSegment__martinezKernel).ax, (cast seg : UniqueSegment__martinezKernel).ay, (cast seg : UniqueSegment__martinezKernel).bx, (cast seg : UniqueSegment__martinezKernel).by] : Array<Dynamic>)] : Array<Dynamic>)); } else { _Runtime.callProperty(kept, 'push', cast ([cast ([(cast seg : UniqueSegment__martinezKernel).bx, (cast seg : UniqueSegment__martinezKernel).by, (cast seg : UniqueSegment__martinezKernel).ax, (cast seg : UniqueSegment__martinezKernel).ay] : Array<Dynamic>)] : Array<Dynamic>)); }
     }

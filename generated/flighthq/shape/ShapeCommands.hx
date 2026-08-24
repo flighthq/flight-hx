@@ -140,7 +140,7 @@ class ShapeCommands {
     segmentCount = HxMath.max(1.0, HxMath.ceil(_Runtime.divideNumbers(HxMath.abs(sweep), (HxMath.PI / 2.0))));
     segmentAngle = (sweep / segmentCount);
     alpha = _Runtime.multiplyNumbers((4.0 / 3.0), HxMath.tan((segmentAngle / 4.0)));
-    ShapeCommands.pushArcCubics__shapeCommands(({ final __callArgument1:Dynamic = cmds; __callArgument1; }), (cast ocx : Float), (cast ocy : Float), (cast radius : Float), (cast startA : Float), (cast segmentCount : Float), (cast segmentAngle : Float), (cast alpha : Float));
+    ShapeCommands.pushArcCubics__shapeCommands(({ final __callArgument2:Dynamic = cmds; __callArgument2; }), (cast ocx : Float), (cast ocy : Float), (cast radius : Float), (cast startA : Float), (cast segmentCount : Float), (cast segmentAngle : Float), (cast alpha : Float));
     invalidateContent((cast shape : Dynamic));
   }
 

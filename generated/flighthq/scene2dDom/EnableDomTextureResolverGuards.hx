@@ -16,6 +16,6 @@ class EnableDomTextureResolverGuards {
   }
 
   public static function enableDomTextureResolverGuards(state:DomRenderState):Void {
-    enableRenderRegistryGuards(({ final __callArgument1:Dynamic = state; __callArgument1; }));
+    enableRenderRegistryGuards(({ final __callArgument2:Dynamic = state; __callArgument2; }));
   }
 }

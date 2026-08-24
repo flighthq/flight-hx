@@ -16,20 +16,20 @@ import flighthq.types.Scene3DLights.Scene3DLightsLike;
 class PresentGlScene3D {
   @:noCompletion
   public static function presentGlScene3D(state:GlRenderState, target:GlRenderTarget, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike):Void {
-    beginGlRenderPass(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = target; __callArgument1; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(beginGlRenderPass, cast ([({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = target; __callArgument3; })] : Array<Dynamic>)) #else beginGlRenderPass(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = target; __callArgument1; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     try {
       try {
-        drawGlScene3D(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = scene; __callArgument3; }), ({ final __callArgument4:Dynamic = camera; __callArgument4; }), ({ final __callArgument5:Dynamic = lights; __callArgument5; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+        (#if js _Runtime.callValue(drawGlScene3D, cast ([({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = scene; __callArgument9; }), ({ final __callArgument10:Dynamic = camera; __callArgument10; }), ({ final __callArgument11:Dynamic = lights; __callArgument11; })] : Array<Dynamic>)) #else drawGlScene3D(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = scene; __callArgument5; }), ({ final __callArgument6:Dynamic = camera; __callArgument6; }), ({ final __callArgument7:Dynamic = lights; __callArgument7; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
       } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
-    } catch (__finallyError6:Dynamic) {
+    } catch (__finallyError12:Dynamic) {
       {
-        endGlRenderPass(({ final __callArgument7:Dynamic = state; __callArgument7; }));
+        endGlRenderPass(({ final __callArgument13:Dynamic = state; __callArgument13; }));
       }
-      _Runtime.throwValue(__finallyError6);
+      _Runtime.throwValue(__finallyError12);
     }
     {
-      endGlRenderPass(({ final __callArgument8:Dynamic = state; __callArgument8; }));
+      endGlRenderPass(({ final __callArgument15:Dynamic = state; __callArgument15; }));
     }
-    presentGlRenderTarget(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = target; __callArgument10; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(presentGlRenderTarget, cast ([({ final __callArgument19:Dynamic = state; __callArgument19; }), ({ final __callArgument20:Dynamic = target; __callArgument20; })] : Array<Dynamic>)) #else presentGlRenderTarget(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = target; __callArgument18; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 }

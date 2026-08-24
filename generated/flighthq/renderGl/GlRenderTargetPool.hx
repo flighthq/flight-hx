@@ -29,24 +29,24 @@ class GlRenderTargetPool {
     var requested:ResolvedRenderTargetDescriptor = cast _Runtime.UNDEFINED;
     var effective:Null<RenderTargetAxes> = cast _Runtime.UNDEFINED;
     requested = (cast resolveRenderTargetDescriptor(({ final __callArgument0:Dynamic = descriptor; __callArgument0; })) : ResolvedRenderTargetDescriptor);
-    effective = (cast (cast resolveGlRenderTargetAxes : GlRenderState->RenderTargetDescriptor->RenderTargetFormatPolicy->Null<RenderTargetAxes>)(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = requested; __callArgument2; }), ({ final __callArgument3:Dynamic = formatPolicy; __callArgument3; })) : Null<RenderTargetAxes>);
+    effective = (cast (cast resolveGlRenderTargetAxes : GlRenderState->RenderTargetDescriptor->RenderTargetFormatPolicy->Null<RenderTargetAxes>)(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = requested; __callArgument3; }), ({ final __callArgument4:Dynamic = formatPolicy; __callArgument4; })) : Null<RenderTargetAxes>);
     if ((cast !_Runtime.truthy(effective) : Bool)) { return cast null; }
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, 'length') : Float)) : Bool)) {
         var candidate:GlRenderTarget = flighthq._internal._StaticIndex.readArray((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, i);
-        if ((cast (cast GlRenderTargetPool.matchesGlRenderTargetAxes__glRenderTargetPool(({ final __callArgument4:Dynamic = candidate; __callArgument4; }), ({ final __callArgument5:Dynamic = effective; __callArgument5; })) : Bool) : Bool)) {
+        if ((cast (cast GlRenderTargetPool.matchesGlRenderTargetAxes__glRenderTargetPool(({ final __callArgument8:Dynamic = candidate; __callArgument8; }), ({ final __callArgument9:Dynamic = effective; __callArgument9; })) : Bool) : Bool)) {
           _Runtime.splice((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, Std.int(i), Std.int(1.0), []);
           (candidate.requestedAxes = cast ({ width: requested.width, height: requested.height, format: requested.format, colorAttachments: requested.colorAttachments, colorFormats: _Runtime.concatArrays([_Runtime.toArray(requested.colorFormats)]), sampleCount: requested.sampleCount, depth: requested.depth, colorSpace: requested.colorSpace } : RenderTargetAxes));
           (candidate.clearColors = cast (_Runtime.concatArrays([_Runtime.toArray(requested.clearColors)]) : Array<Float>));
           (candidate.clearDepth = cast (requested.clearDepth : Float));
-          clearGlRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = candidate; __callArgument7; }));
+          clearGlRenderTarget(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = candidate; __callArgument13; }));
           return cast candidate;
         }
         i++;
       }
     }
-    return cast (cast (cast createGlRenderTarget : GlRenderState->RenderTargetDescriptor->RenderTargetFormatPolicy->Null<GlRenderTarget>)(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = descriptor; __callArgument9; }), ({ final __callArgument10:Dynamic = formatPolicy; __callArgument10; })) : Null<GlRenderTarget>);
+    return cast (cast (cast createGlRenderTarget : GlRenderState->RenderTargetDescriptor->RenderTargetFormatPolicy->Null<GlRenderTarget>)(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = descriptor; __callArgument17; }), ({ final __callArgument18:Dynamic = formatPolicy; __callArgument18; })) : Null<GlRenderTarget>);
     return cast null;
   }
 
@@ -59,7 +59,7 @@ class GlRenderTargetPool {
   @:noCompletion
   public static function destroyGlRenderTargetPool(state:GlRenderState, pool:flighthq.types.GlRenderTarget.GlRenderTargetPool):Void {
     for (target in _Runtime.iterable((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free)) {
-      destroyGlRenderTarget(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = target; __callArgument14; }));
+      destroyGlRenderTarget(({ final __callArgument24:Dynamic = state; __callArgument24; }), ({ final __callArgument25:Dynamic = target; __callArgument25; }));
     }
     _Runtime.setLength((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, 0.0);
   }

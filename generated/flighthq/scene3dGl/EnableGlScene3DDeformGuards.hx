@@ -29,17 +29,17 @@ class EnableGlScene3DDeformGuards {
 
   @:noCompletion
   public static function enableGlScene3DDeformGuards(state:GlRenderState):Void {
-    ((cast (cast getGlScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlScene3DRuntime) : { @:optional var deformGuard:Null<Mesh->Void>; }).deformGuard = cast (EnableGlScene3DDeformGuards.warnGlScene3DMeshDrawnUndeformed__enableGlScene3DDeformGuards : Null<Mesh->Void>));
+    ((cast (cast getGlScene3DRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlScene3DRuntime) : { @:optional var deformGuard:Null<Mesh->Void>; }).deformGuard = cast (EnableGlScene3DDeformGuards.warnGlScene3DMeshDrawnUndeformed__enableGlScene3DDeformGuards : Null<Mesh->Void>));
   }
 
   public static function warnGlScene3DMeshDrawnUndeformed__enableGlScene3DDeformGuards(mesh:Mesh):Void {
     if ((cast ((cast !_Runtime.looseEquals(mesh.morph, null) : Bool) && (cast _Runtime.strictEquals((cast getMeshGeometryMorphBindPose(mesh.geometry) : Null<MeshMorphBindPose>), null) : Bool)) : Bool)) {
-      (cast logOnce((cast 'scene-gl:morph-drawn-without-prepare' : String), ({ final __callArgument2:Dynamic = LogLevel.Warn; __callArgument2; }), (cast { message: 'drawGlScene3D: a morphed mesh reached the draw un-blended (it will draw the bind pose) — call prepareScene3DMorph(scene) before prepareScene3DRender.' } : Dynamic), ({ final __callArgument3:Dynamic = 'scene-gl'; __callArgument3; })) : Bool);
+      (cast logOnce((cast 'scene-gl:morph-drawn-without-prepare' : String), ({ final __callArgument4:Dynamic = LogLevel.Warn; __callArgument4; }), (cast { message: 'drawGlScene3D: a morphed mesh reached the draw un-blended (it will draw the bind pose) — call prepareScene3DMorph(scene) before prepareScene3DRender.' } : Dynamic), ({ final __callArgument5:Dynamic = 'scene-gl'; __callArgument5; })) : Bool);
     }
     if ((cast ((cast !_Runtime.looseEquals(mesh.skin, null) : Bool) && (cast (cast hasMeshGeometrySkin(mesh.geometry) : Bool) : Bool)) : Bool)) {
       var runtime:MeshRuntime = (cast getNodeRuntime((cast (cast mesh : NodeAny) : Dynamic)) : MeshRuntime);
       if ((cast _Runtime.looseEquals((cast runtime : { @:optional var deformedLocalBounds:Null<Aabb>; }).deformedLocalBounds, null) : Bool)) {
-        (cast logOnce((cast 'scene-gl:skin-drawn-without-prepare' : String), ({ final __callArgument4:Dynamic = LogLevel.Warn; __callArgument4; }), (cast { message: 'drawGlScene3D: a GPU-skinned mesh reached the draw un-posed (its joint palette is uncomputed, collapsing it to the origin) — call prepareScene3DSkinning(scene) before prepareScene3DRender.' } : Dynamic), ({ final __callArgument5:Dynamic = 'scene-gl'; __callArgument5; })) : Bool);
+        (cast logOnce((cast 'scene-gl:skin-drawn-without-prepare' : String), ({ final __callArgument8:Dynamic = LogLevel.Warn; __callArgument8; }), (cast { message: 'drawGlScene3D: a GPU-skinned mesh reached the draw un-posed (its joint palette is uncomputed, collapsing it to the origin) — call prepareScene3DSkinning(scene) before prepareScene3DRender.' } : Dynamic), ({ final __callArgument9:Dynamic = 'scene-gl'; __callArgument9; })) : Bool);
       }
     }
   }

@@ -14,16 +14,16 @@ import flighthq.types.ImageDecoder;
 
 class SwfImageDecoder {
   public static function registerSwfImageDecoders():Void {
-    registerImageDecoder((cast SWF_LOSSLESS_MIME_TYPE : String), ({ final __callArgument2:Dynamic = function(bytes:flighthq._internal._UInt8Array, options:Null<ImageDecodeOptions>):flighthq._internal._Promise<DecodedImage> return (cast SwfImageDecoder.decodeSwfLosslessImage__swfImageDecoder(({ final __callArgument0:Dynamic = bytes; __callArgument0; }), (cast false : Bool), ({ final __callArgument1:Dynamic = options; __callArgument1; })) : flighthq._internal._Promise<DecodedImage>); __callArgument2; }));
-    registerImageDecoder((cast SWF_LOSSLESS_ALPHA_MIME_TYPE : String), ({ final __callArgument5:Dynamic = function(bytes:flighthq._internal._UInt8Array, options:Null<ImageDecodeOptions>):flighthq._internal._Promise<DecodedImage> return (cast SwfImageDecoder.decodeSwfLosslessImage__swfImageDecoder(({ final __callArgument3:Dynamic = bytes; __callArgument3; }), (cast true : Bool), ({ final __callArgument4:Dynamic = options; __callArgument4; })) : flighthq._internal._Promise<DecodedImage>); __callArgument5; }));
+    registerImageDecoder((cast SWF_LOSSLESS_MIME_TYPE : String), ({ final __callArgument4:Dynamic = function(bytes:flighthq._internal._UInt8Array, options:Null<ImageDecodeOptions>):flighthq._internal._Promise<DecodedImage> return (cast SwfImageDecoder.decodeSwfLosslessImage__swfImageDecoder(({ final __callArgument0:Dynamic = bytes; __callArgument0; }), (cast false : Bool), ({ final __callArgument1:Dynamic = options; __callArgument1; })) : flighthq._internal._Promise<DecodedImage>); __callArgument4; }));
+    registerImageDecoder((cast SWF_LOSSLESS_ALPHA_MIME_TYPE : String), ({ final __callArgument14:Dynamic = function(bytes:flighthq._internal._UInt8Array, options:Null<ImageDecodeOptions>):flighthq._internal._Promise<DecodedImage> return (cast SwfImageDecoder.decodeSwfLosslessImage__swfImageDecoder(({ final __callArgument10:Dynamic = bytes; __callArgument10; }), (cast true : Bool), ({ final __callArgument11:Dynamic = options; __callArgument11; })) : flighthq._internal._Promise<DecodedImage>); __callArgument14; }));
   }
 
   public static function decodeSwfLosslessImage__swfImageDecoder(bytes:flighthq._internal._UInt8Array, hasAlpha:Bool, ?options:ImageDecodeOptions):flighthq._internal._Promise<DecodedImage> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       var bitmap:Null<Bitmap> = cast _Runtime.UNDEFINED;
-      bitmap = (cast createSwfLosslessBitmap(({ final __callArgument6:Dynamic = bytes; __callArgument6; }), (cast hasAlpha : Bool)) : Null<Bitmap>);
+      bitmap = (cast createSwfLosslessBitmap(({ final __callArgument20:Dynamic = bytes; __callArgument20; }), (cast hasAlpha : Bool)) : Null<Bitmap>);
       if ((cast _Runtime.strictEquals(bitmap, null) : Bool)) { _Runtime.throwValue(_Runtime.error('Could not unpack SWF lossless image payload')); }
-      if ((cast ((cast hasAlpha : Bool) && (cast !_Runtime.strictEquals(({ final __structural7 = options; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var premultiplyAlpha:Null<Bool>; }).premultiplyAlpha; }), true) : Bool)) : Bool)) { convertBitmapAlphaType(({ final __callArgument8:Dynamic = bitmap; __callArgument8; }), ({ final __callArgument9:Dynamic = 'straight'; __callArgument9; })); }
+      if ((cast ((cast hasAlpha : Bool) && (cast !_Runtime.strictEquals(({ final __structural22 = options; __structural22 == null ? _Runtime.UNDEFINED : (cast __structural22 : { @:optional var premultiplyAlpha:Null<Bool>; }).premultiplyAlpha; }), true) : Bool)) : Bool)) { convertBitmapAlphaType(({ final __callArgument23:Dynamic = bitmap; __callArgument23; }), ({ final __callArgument24:Dynamic = 'straight'; __callArgument24; })); }
       return cast { data: (cast bitmap : { var data:flighthq._internal._UInt8ClampedArray; }).data, height: (cast bitmap : { var height:Float; }).height, width: (cast bitmap : { var width:Float; }).width };
       return cast null;
     }));

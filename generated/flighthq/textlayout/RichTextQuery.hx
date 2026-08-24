@@ -43,7 +43,7 @@ class RichTextQuery {
       }
       return cast lineEnd;
     }
-    lineStart = ((cast ((cast _Runtime.field(layout.groups, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.coalesce(({ final __typedStruct3 = flighthq._internal._StaticIndex.readArray(layout.groups, _Runtime.subtractNumbers(_Runtime.field(layout.groups, 'length'), 1.0)); __typedStruct3 == null ? _Runtime.UNDEFINED : (cast __typedStruct3 : { var endIndex:Float; }).endIndex; }), function():Dynamic return cast 0.0) : Dynamic) : (cast 0.0 : Dynamic));
+    lineStart = ((cast ((cast _Runtime.field(layout.groups, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast _Runtime.coalesce(({ final __typedStruct4 = flighthq._internal._StaticIndex.readArray(layout.groups, _Runtime.subtractNumbers(_Runtime.field(layout.groups, 'length'), 1.0)); __typedStruct4 == null ? _Runtime.UNDEFINED : (cast __typedStruct4 : { var endIndex:Float; }).endIndex; }), function():Dynamic return cast 0.0) : Dynamic) : (cast 0.0 : Dynamic));
     lineEnd = 0.0;
     for (group in _Runtime.iterable(layout.groups)) {
       if ((cast !_Runtime.strictEquals(group.lineIndex, closestLineIndex) : Bool)) { continue; }
@@ -100,7 +100,7 @@ class RichTextQuery {
     var x:Float = cast _Runtime.UNDEFINED;
     var limit:Float = cast _Runtime.UNDEFINED;
     var charWidth:Float = cast _Runtime.UNDEFINED;
-    group = (cast RichTextQuery.getGroupContainingIndex__richTextQuery(({ final __callArgument8:Dynamic = layout; __callArgument8; }), (cast charIndex : Float)) : Null<TextLayoutGroup>);
+    group = (cast RichTextQuery.getGroupContainingIndex__richTextQuery(({ final __callArgument9:Dynamic = layout; __callArgument9; }), (cast charIndex : Float)) : Null<TextLayoutGroup>);
     if ((cast _Runtime.strictEquals(group, null) : Bool)) { return cast false; }
     x = (cast group : { var offsetX:Float; }).offsetX;
     limit = HxMath.min((charIndex - (cast group : { var startIndex:Float; }).startIndex), _Runtime.field((cast group : { var positions:Array<Float>; }).positions, 'length'));
@@ -142,7 +142,7 @@ class RichTextQuery {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(layout.lineHeights, 'length') : Float)) : Bool)) {
-        var lineTop:Float = (cast RichTextQuery.getLineOffsetY__richTextQuery(({ final __callArgument9:Dynamic = layout; __callArgument9; }), (cast i : Float)) : Float);
+        var lineTop:Float = (cast RichTextQuery.getLineOffsetY__richTextQuery(({ final __callArgument11:Dynamic = layout; __callArgument11; }), (cast i : Float)) : Float);
         var lineBottom:Float = (lineTop + flighthq._internal._StaticIndex.readFloatArrayTyped((cast layout.lineHeights : Array<Float>), (cast i : Float)));
         var dist:Float = ((cast ((cast y : Float) < (cast lineTop : Float)) : Bool) ? (cast (lineTop - y) : Dynamic) : (cast ((cast ((cast y : Float) > (cast lineBottom : Float)) : Bool) ? (cast (y - lineBottom) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
         if ((cast ((cast dist : Float) < (cast closestDist : Float)) : Bool)) {
@@ -158,8 +158,8 @@ class RichTextQuery {
 
   public static function getRichTextLineIndexOfChar(layout:TextLayoutResult, charIndex:Float):Float {
     var group:Null<TextLayoutGroup> = cast _Runtime.UNDEFINED;
-    group = (cast RichTextQuery.getGroupContainingIndex__richTextQuery(({ final __callArgument10:Dynamic = layout; __callArgument10; }), (cast charIndex : Float)) : Null<TextLayoutGroup>);
-    return cast _Runtime.coalesce(({ final __typedStruct11 = group; __typedStruct11 == null ? _Runtime.UNDEFINED : (cast __typedStruct11 : { var lineIndex:Float; }).lineIndex; }), function():Dynamic return cast 0.0);
+    group = (cast RichTextQuery.getGroupContainingIndex__richTextQuery(({ final __callArgument13:Dynamic = layout; __callArgument13; }), (cast charIndex : Float)) : Null<TextLayoutGroup>);
+    return cast _Runtime.coalesce(({ final __typedStruct15 = group; __typedStruct15 == null ? _Runtime.UNDEFINED : (cast __typedStruct15 : { var lineIndex:Float; }).lineIndex; }), function():Dynamic return cast 0.0);
     return cast null;
   }
 
@@ -232,8 +232,8 @@ class RichTextQuery {
       var groupStart:Float = HxMath.max(start, group.startIndex);
       var groupEnd:Float = HxMath.min(end, group.endIndex);
       if ((cast ((cast groupStart : Float) >= (cast groupEnd : Float)) : Bool)) { continue; }
-      var x:Float = (cast RichTextQuery.getCaretX__richTextQuery(({ final __callArgument22:Dynamic = group; __callArgument22; }), (cast groupStart : Float)) : Float);
-      var right:Float = (cast RichTextQuery.getCaretX__richTextQuery(({ final __callArgument23:Dynamic = group; __callArgument23; }), (cast groupEnd : Float)) : Float);
+      var x:Float = (cast RichTextQuery.getCaretX__richTextQuery(({ final __callArgument26:Dynamic = group; __callArgument26; }), (cast groupStart : Float)) : Float);
+      var right:Float = (cast RichTextQuery.getCaretX__richTextQuery(({ final __callArgument28:Dynamic = group; __callArgument28; }), (cast groupEnd : Float)) : Float);
       _Runtime.callProperty(out, 'push', cast ([{ height: group.height, lineIndex: group.lineIndex, width: (right - x), x: x, y: group.offsetY }] : Array<Dynamic>));
     }
   }

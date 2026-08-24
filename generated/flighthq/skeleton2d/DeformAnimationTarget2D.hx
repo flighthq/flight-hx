@@ -35,8 +35,8 @@ class DeformAnimationTarget2D {
     components = (cast channel.track : { var components:Float; }).components;
     if ((cast ((cast components : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     if ((cast ((cast _Runtime.field(DeformAnimationTarget2D._scratch__deformAnimationTarget2D, 'length') : Float) < (cast components : Float)) : Bool)) { (DeformAnimationTarget2D._scratch__deformAnimationTarget2D = cast (new flighthq._internal._Float32Array(components) : Dynamic)); }
-    sampleAnimationTrack(({ final __callArgument1:Dynamic = DeformAnimationTarget2D._scratch__deformAnimationTarget2D; __callArgument1; }), channel.track, (cast time : Float));
-    (cast setSkeleton2DSlotDeform(flighthq._internal._StaticIndex.readArray(slots, slotIndex), (cast _Runtime.coalesce(_Runtime.field(deformTarget, 'attachment'), function():Dynamic return cast null) : Dynamic), ({ final __callArgument2:Dynamic = (cast DeformAnimationTarget2D._scratch__deformAnimationTarget2D : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int(components)); __callArgument2; })) : Null<Skeleton2DSlotDeform>);
+    sampleAnimationTrack(({ final __callArgument2:Dynamic = DeformAnimationTarget2D._scratch__deformAnimationTarget2D; __callArgument2; }), channel.track, (cast time : Float));
+    (cast setSkeleton2DSlotDeform(flighthq._internal._StaticIndex.readArray(slots, slotIndex), (cast _Runtime.coalesce(_Runtime.field(deformTarget, 'attachment'), function():Dynamic return cast null) : Dynamic), ({ final __callArgument4:Dynamic = (cast DeformAnimationTarget2D._scratch__deformAnimationTarget2D : flighthq._internal._Float32Array).subarray(Std.int(0.0), Std.int(components)); __callArgument4; })) : Null<Skeleton2DSlotDeform>);
   }
 
   public static var _scratch__deformAnimationTarget2D:flighthq._internal._Float32Array = new flighthq._internal._Float32Array(0.0);

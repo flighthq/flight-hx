@@ -27,14 +27,14 @@ class SceneResourceRecovery {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(textures, 'length') : Float)) : Bool)) {
         var texture:Texture = flighthq._internal._StaticIndex.readArray(textures, i);
-        var ref:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>> = (cast getScene3DTextureResourceReference(({ final __callArgument2:Dynamic = scene; __callArgument2; }), ({ final __callArgument3:Dynamic = texture; __callArgument3; })) : Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>);
+        var ref:Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>> = (cast getScene3DTextureResourceReference(({ final __callArgument4:Dynamic = scene; __callArgument4; }), ({ final __callArgument5:Dynamic = texture; __callArgument5; })) : Null<flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>);
         if ((cast ((cast _Runtime.looseEquals(ref, null) : Bool) || (cast ((cast reset : flighthq._internal._Set<ImageResourceReference>).has(ref)) : Bool)) : Bool)) { i++; continue; }
-        if ((cast ((cast !_Runtime.strictEquals(({ final __typedStruct4 = options; __typedStruct4 == null ? _Runtime.UNDEFINED : __typedStruct4.select; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast (options.select)(({ final __callArgument5:Dynamic = texture; __callArgument5; }), ({ final __callArgument6:Dynamic = ref; __callArgument6; })) : Bool) : Bool)) : Bool)) { i++; continue; }
-        if ((cast (cast resetFailedImageResourceReference(({ final __callArgument7:Dynamic = ref; __callArgument7; })) : Bool) : Bool)) { ((cast reset : flighthq._internal._Set<ImageResourceReference>).add(ref)); }
+        if ((cast ((cast !_Runtime.strictEquals(({ final __typedStruct8 = options; __typedStruct8 == null ? _Runtime.UNDEFINED : __typedStruct8.select; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast (options.select)(({ final __callArgument9:Dynamic = texture; __callArgument9; }), ({ final __callArgument10:Dynamic = ref; __callArgument10; })) : Bool) : Bool)) : Bool)) { i++; continue; }
+        if ((cast (cast resetFailedImageResourceReference(({ final __callArgument11:Dynamic = ref; __callArgument11; })) : Bool) : Bool)) { ((cast reset : flighthq._internal._Set<ImageResourceReference>).add(ref)); }
         i++;
       }
     }
-    (cast updateScene3DResourceStreaming(({ final __callArgument8:Dynamic = scene; __callArgument8; }), ({ final __callArgument9:Dynamic = resolver; __callArgument9; }), ({ final __callArgument10:Dynamic = options; __callArgument10; })) : Scene3DResources);
+    (cast updateScene3DResourceStreaming(({ final __callArgument13:Dynamic = scene; __callArgument13; }), ({ final __callArgument14:Dynamic = resolver; __callArgument14; }), ({ final __callArgument15:Dynamic = options; __callArgument15; })) : Scene3DResources);
     return cast (cast reset : flighthq._internal._Set<ImageResourceReference>).size;
     return cast null;
   }

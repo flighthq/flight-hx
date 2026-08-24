@@ -39,10 +39,10 @@ typedef CollisionTriangleContactCandidate3D__triangleMesh3D = { var x:Float; var
 class TriangleMesh3D {
   public static function collideCollisionHeightfield3D(convex:CollisionShape3D, heightfield:CollisionHeightfield3D, out:CollisionContactManifold3D):Bool {
     if ((cast !_Runtime.strictEquals((cast getCollisionHeightfieldValidationStatus3D(({ final __callArgument0:Dynamic = heightfield; __callArgument0; })) : Null<String>), null) : Bool)) {
-      clearCollisionContactManifold3D(({ final __callArgument1:Dynamic = out; __callArgument1; }));
+      clearCollisionContactManifold3D(({ final __callArgument2:Dynamic = out; __callArgument2; }));
       return cast false;
     }
-    return cast (cast collideCollisionTriangleMesh3D(({ final __callArgument2:Dynamic = convex; __callArgument2; }), (cast TriangleMesh3D.getCollisionHeightfieldTriangleMesh3D__triangleMesh3D(({ final __callArgument3:Dynamic = heightfield; __callArgument3; })) : CollisionTriangleMesh3D), ({ final __callArgument4:Dynamic = out; __callArgument4; })) : Bool);
+    return cast (cast collideCollisionTriangleMesh3D(({ final __callArgument4:Dynamic = convex; __callArgument4; }), (cast TriangleMesh3D.getCollisionHeightfieldTriangleMesh3D__triangleMesh3D(({ final __callArgument5:Dynamic = heightfield; __callArgument5; })) : CollisionTriangleMesh3D), ({ final __callArgument7:Dynamic = out; __callArgument7; })) : Bool);
     return cast null;
   }
 
@@ -52,21 +52,21 @@ class TriangleMesh3D {
     var bestNormalX:Float = cast _Runtime.UNDEFINED;
     var bestNormalY:Float = cast _Runtime.UNDEFINED;
     var bestNormalZ:Float = cast _Runtime.UNDEFINED;
-    clearCollisionContactManifold3D(({ final __callArgument5:Dynamic = out; __callArgument5; }));
-    support = (cast getCollisionSupport3D(({ final __callArgument6:Dynamic = (cast convex : { var kind:String; }).kind; __callArgument6; })) : Null<CollisionSupport3D>);
-    if ((cast ((cast _Runtime.strictEquals(support, null) : Bool) || (cast !_Runtime.strictEquals((cast getCollisionTriangleMeshValidationStatus3D(({ final __callArgument7:Dynamic = mesh; __callArgument7; })) : Null<String>), null) : Bool)) : Bool)) { return cast false; }
-    TriangleMesh3D.writeCollisionShapeBounds3D__triangleMesh3D(({ final __callArgument8:Dynamic = convex; __callArgument8; }), ({ final __callArgument9:Dynamic = support; __callArgument9; }), (cast TriangleMesh3D.scratchBounds__triangleMesh3D : Dynamic));
-    TriangleMesh3D.writeWorldBoundsInCollisionTriangleMeshLocal3D__triangleMesh3D(({ final __callArgument10:Dynamic = mesh; __callArgument10; }), (cast TriangleMesh3D.scratchBounds__triangleMesh3D : Dynamic), (cast TriangleMesh3D.scratchLocalBounds__triangleMesh3D : Dynamic));
-    TriangleMesh3D.queryCollisionTriangleMeshCandidates3D__triangleMesh3D(({ final __callArgument11:Dynamic = mesh; __callArgument11; }), (cast TriangleMesh3D.scratchLocalBounds__triangleMesh3D : Dynamic), ({ final __callArgument12:Dynamic = TriangleMesh3D.scratchTriangles__triangleMesh3D; __callArgument12; }));
+    clearCollisionContactManifold3D(({ final __callArgument12:Dynamic = out; __callArgument12; }));
+    support = (cast getCollisionSupport3D(({ final __callArgument14:Dynamic = (cast convex : { var kind:String; }).kind; __callArgument14; })) : Null<CollisionSupport3D>);
+    if ((cast ((cast _Runtime.strictEquals(support, null) : Bool) || (cast !_Runtime.strictEquals((cast getCollisionTriangleMeshValidationStatus3D(({ final __callArgument16:Dynamic = mesh; __callArgument16; })) : Null<String>), null) : Bool)) : Bool)) { return cast false; }
+    TriangleMesh3D.writeCollisionShapeBounds3D__triangleMesh3D(({ final __callArgument18:Dynamic = convex; __callArgument18; }), ({ final __callArgument19:Dynamic = support; __callArgument19; }), (cast TriangleMesh3D.scratchBounds__triangleMesh3D : Dynamic));
+    TriangleMesh3D.writeWorldBoundsInCollisionTriangleMeshLocal3D__triangleMesh3D(({ final __callArgument22:Dynamic = mesh; __callArgument22; }), (cast TriangleMesh3D.scratchBounds__triangleMesh3D : Dynamic), (cast TriangleMesh3D.scratchLocalBounds__triangleMesh3D : Dynamic));
+    TriangleMesh3D.queryCollisionTriangleMeshCandidates3D__triangleMesh3D(({ final __callArgument24:Dynamic = mesh; __callArgument24; }), (cast TriangleMesh3D.scratchLocalBounds__triangleMesh3D : Dynamic), ({ final __callArgument25:Dynamic = TriangleMesh3D.scratchTriangles__triangleMesh3D; __callArgument25; }));
     _Runtime.setLength(TriangleMesh3D.scratchContactCandidates__triangleMesh3D, 0.0);
     bestDepth = -HxMath.POSITIVE_INFINITY;
     bestNormalX = 0.0;
     bestNormalY = 0.0;
     bestNormalZ = 0.0;
     for (triangle in _Runtime.iterable(TriangleMesh3D.scratchTriangles__triangleMesh3D)) {
-      TriangleMesh3D.writeCollisionTriangleMeshTriangleWorld3D__triangleMesh3D(({ final __callArgument15:Dynamic = mesh; __callArgument15; }), (cast triangle : Float), (cast TriangleMesh3D.scratchTriangle__triangleMesh3D : { var points:Array<Float>; }).points);
-      if ((cast !(cast (cast collideContactManifold3D(({ final __callArgument16:Dynamic = convex; __callArgument16; }), ({ final __callArgument17:Dynamic = TriangleMesh3D.scratchTriangle__triangleMesh3D; __callArgument17; }), ({ final __callArgument18:Dynamic = TriangleMesh3D.scratchManifold__triangleMesh3D; __callArgument18; })) : Bool) : Bool) : Bool)) { continue; }
-      var depth:Float = (cast TriangleMesh3D.getCollisionContactManifoldDepth3D__triangleMesh3D(({ final __callArgument19:Dynamic = TriangleMesh3D.scratchManifold__triangleMesh3D; __callArgument19; })) : Float);
+      TriangleMesh3D.writeCollisionTriangleMeshTriangleWorld3D__triangleMesh3D(({ final __callArgument30:Dynamic = mesh; __callArgument30; }), (cast triangle : Float), (cast TriangleMesh3D.scratchTriangle__triangleMesh3D : { var points:Array<Float>; }).points);
+      if ((cast !(cast (cast collideContactManifold3D(({ final __callArgument32:Dynamic = convex; __callArgument32; }), ({ final __callArgument33:Dynamic = TriangleMesh3D.scratchTriangle__triangleMesh3D; __callArgument33; }), ({ final __callArgument34:Dynamic = TriangleMesh3D.scratchManifold__triangleMesh3D; __callArgument34; })) : Bool) : Bool) : Bool)) { continue; }
+      var depth:Float = (cast TriangleMesh3D.getCollisionContactManifoldDepth3D__triangleMesh3D(({ final __callArgument38:Dynamic = TriangleMesh3D.scratchManifold__triangleMesh3D; __callArgument38; })) : Float);
       var alignment:Float = ((((cast TriangleMesh3D.scratchManifold__triangleMesh3D : CollisionContactManifold3D).normalX * bestNormalX) + ((cast TriangleMesh3D.scratchManifold__triangleMesh3D : CollisionContactManifold3D).normalY * bestNormalY)) + ((cast TriangleMesh3D.scratchManifold__triangleMesh3D : CollisionContactManifold3D).normalZ * bestNormalZ));
       if ((cast ((cast _Runtime.strictEquals(bestDepth, -HxMath.POSITIVE_INFINITY) : Bool) || (cast _Runtime.andValue(((cast depth : Float) > (cast (bestDepth + TriangleMesh3D.CONTACT_DEPTH_EPSILON__triangleMesh3D) : Float)), function():Dynamic return cast ((cast alignment : Float) < (cast TriangleMesh3D.CONTACT_NORMAL_ALIGNMENT__triangleMesh3D : Float))) : Bool)) : Bool)) {
         (bestDepth = cast (depth : Dynamic));
@@ -92,7 +92,7 @@ class TriangleMesh3D {
     ((cast out : CollisionContactManifold3D).normalX = bestNormalX);
     ((cast out : CollisionContactManifold3D).normalY = bestNormalY);
     ((cast out : CollisionContactManifold3D).normalZ = bestNormalZ);
-    TriangleMesh3D.writeReducedCollisionTriangleContactCandidates3D__triangleMesh3D(({ final __callArgument20:Dynamic = out; __callArgument20; }));
+    TriangleMesh3D.writeReducedCollisionTriangleContactCandidates3D__triangleMesh3D(({ final __callArgument40:Dynamic = out; __callArgument40; }));
     return cast true;
     return cast null;
   }
@@ -110,7 +110,7 @@ class TriangleMesh3D {
   public static function getCollisionHeightfieldValidationStatus3D(heightfield:CollisionHeightfield3D):Null<CollisionTestStatus> {
     var cached:Null<CollisionHeightfieldValidationCache3D__triangleMesh3D> = cast _Runtime.UNDEFINED;
     var status:Null<CollisionTestStatus> = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(heightfield, 'columns')] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(heightfield, 'rows')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(heightfield, 'columns') : Float) < (cast 2.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(heightfield, 'rows') : Float) < (cast 2.0 : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(heightfield, 'heights'), 'length'), _Runtime.multiplyNumbers(_Runtime.field(heightfield, 'columns'), _Runtime.field(heightfield, 'rows'))) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(heightfield, 'cellSizeX')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(heightfield, 'cellSizeZ')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(heightfield, 'cellSizeX') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(heightfield, 'cellSizeZ') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(heightfield, 'version')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(heightfield, 'version') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast (cast TriangleMesh3D.isCollisionTriangleSurfacePoseValid3D__triangleMesh3D(({ final __callArgument21:Dynamic = heightfield; __callArgument21; })) : Bool) : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(heightfield, 'columns')] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(heightfield, 'rows')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(heightfield, 'columns') : Float) < (cast 2.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(heightfield, 'rows') : Float) < (cast 2.0 : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(heightfield, 'heights'), 'length'), _Runtime.multiplyNumbers(_Runtime.field(heightfield, 'columns'), _Runtime.field(heightfield, 'rows'))) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(heightfield, 'cellSizeX')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(heightfield, 'cellSizeZ')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(heightfield, 'cellSizeX') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(heightfield, 'cellSizeZ') : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(heightfield, 'version')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(heightfield, 'version') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast (cast TriangleMesh3D.isCollisionTriangleSurfacePoseValid3D__triangleMesh3D(({ final __callArgument42:Dynamic = heightfield; __callArgument42; })) : Bool) : Bool) : Bool)) : Bool)) {
       return cast 'degenerate-shape';
     }
     cached = ((cast TriangleMesh3D.collisionHeightfieldValidations3D__triangleMesh3D : flighthq._internal._WeakMap<CollisionHeightfield3D, CollisionHeightfieldValidationCache3D__triangleMesh3D>).get(heightfield));
@@ -133,7 +133,7 @@ class TriangleMesh3D {
     var cached:Null<CollisionTriangleMeshValidationCache3D__triangleMesh3D> = cast _Runtime.UNDEFINED;
     var status:Null<CollisionTestStatus> = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
-    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(_Runtime.field(mesh, 'points'), 'length') : Float) < (cast 9.0 : Float)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(_Runtime.field(mesh, 'points'), 'length'), 3.0), 0.0) : Bool)) : Bool) || (cast ((cast _Runtime.field(_Runtime.field(mesh, 'indices'), 'length') : Float) < (cast 3.0 : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(_Runtime.field(mesh, 'indices'), 'length'), 3.0), 0.0) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(mesh, 'version')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(mesh, 'version') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast (cast TriangleMesh3D.isCollisionTriangleSurfacePoseValid3D__triangleMesh3D(({ final __callArgument24:Dynamic = mesh; __callArgument24; })) : Bool) : Bool) : Bool)) : Bool)) {
+    if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.field(_Runtime.field(mesh, 'points'), 'length') : Float) < (cast 9.0 : Float)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(_Runtime.field(mesh, 'points'), 'length'), 3.0), 0.0) : Bool)) : Bool) || (cast ((cast _Runtime.field(_Runtime.field(mesh, 'indices'), 'length') : Float) < (cast 3.0 : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.fmod(_Runtime.field(_Runtime.field(mesh, 'indices'), 'length'), 3.0), 0.0) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(mesh, 'version')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(mesh, 'version') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast (cast TriangleMesh3D.isCollisionTriangleSurfacePoseValid3D__triangleMesh3D(({ final __callArgument46:Dynamic = mesh; __callArgument46; })) : Bool) : Bool) : Bool)) : Bool)) {
       return cast 'degenerate-shape';
     }
     cached = ((cast TriangleMesh3D.collisionTriangleMeshValidations3D__triangleMesh3D : flighthq._internal._WeakMap<CollisionTriangleMesh3D, CollisionTriangleMeshValidationCache3D__triangleMesh3D>).get(mesh));
@@ -160,7 +160,7 @@ class TriangleMesh3D {
       {
         var triangle:Float = 0.0;
         while ((cast ((cast triangle : Float) < (cast _Runtime.divideNumbers(_Runtime.field(_Runtime.field(mesh, 'indices'), 'length'), 3.0) : Float)) : Bool)) {
-          if ((cast !(cast (cast TriangleMesh3D.isCollisionTriangleMeshTriangleValid3D__triangleMesh3D(({ final __callArgument29:Dynamic = mesh; __callArgument29; }), (cast triangle : Float)) : Bool) : Bool) : Bool)) {
+          if ((cast !(cast (cast TriangleMesh3D.isCollisionTriangleMeshTriangleValid3D__triangleMesh3D(({ final __callArgument52:Dynamic = mesh; __callArgument52; }), (cast triangle : Float)) : Bool) : Bool) : Bool)) {
             (status = cast ('degenerate-shape' : Dynamic));
             break;
           }
@@ -183,8 +183,8 @@ class TriangleMesh3D {
 
   public static function raycastCollisionHeightfield3D(heightfield:CollisionHeightfield3D, originX:Float, originY:Float, originZ:Float, directionX:Float, directionY:Float, directionZ:Float, out:CollisionRaycastHit3D, ?maxFraction:Float):Bool {
     if (maxFraction == null) maxFraction = cast (HxMath.POSITIVE_INFINITY : Dynamic);
-    if ((cast !_Runtime.strictEquals((cast getCollisionHeightfieldValidationStatus3D(({ final __callArgument30:Dynamic = heightfield; __callArgument30; })) : Null<String>), null) : Bool)) { return cast false; }
-    return cast (cast raycastCollisionTriangleMesh3D((cast TriangleMesh3D.getCollisionHeightfieldTriangleMesh3D__triangleMesh3D(({ final __callArgument31:Dynamic = heightfield; __callArgument31; })) : CollisionTriangleMesh3D), (cast originX : Float), (cast originY : Float), (cast originZ : Float), (cast directionX : Float), (cast directionY : Float), (cast directionZ : Float), ({ final __callArgument32:Dynamic = out; __callArgument32; }), (cast maxFraction : Float)) : Bool);
+    if ((cast !_Runtime.strictEquals((cast getCollisionHeightfieldValidationStatus3D(({ final __callArgument54:Dynamic = heightfield; __callArgument54; })) : Null<String>), null) : Bool)) { return cast false; }
+    return cast (cast raycastCollisionTriangleMesh3D((cast TriangleMesh3D.getCollisionHeightfieldTriangleMesh3D__triangleMesh3D(({ final __callArgument56:Dynamic = heightfield; __callArgument56; })) : CollisionTriangleMesh3D), (cast originX : Float), (cast originY : Float), (cast originZ : Float), (cast directionX : Float), (cast directionY : Float), (cast directionZ : Float), ({ final __callArgument58:Dynamic = out; __callArgument58; }), (cast maxFraction : Float)) : Bool);
     return cast null;
   }
 
@@ -193,10 +193,10 @@ class TriangleMesh3D {
     var cache:CollisionTriangleMeshAcceleration3D__triangleMesh3D = cast _Runtime.UNDEFINED;
     var fraction:Float = cast _Runtime.UNDEFINED;
     var triangleHit:Float = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !_Runtime.strictEquals((cast getCollisionTriangleMeshValidationStatus3D(({ final __callArgument33:Dynamic = mesh; __callArgument33; })) : Null<String>), null) : Bool) || (cast ((cast maxFraction : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
-    TriangleMesh3D.writeCollisionTriangleMeshLocalPoint3D__triangleMesh3D(({ final __callArgument34:Dynamic = mesh; __callArgument34; }), (cast originX : Float), (cast originY : Float), (cast originZ : Float), ({ final __callArgument35:Dynamic = TriangleMesh3D.scratchLocalOrigin__triangleMesh3D; __callArgument35; }));
-    TriangleMesh3D.writeCollisionTriangleMeshLocalDirection3D__triangleMesh3D(({ final __callArgument36:Dynamic = mesh; __callArgument36; }), (cast directionX : Float), (cast directionY : Float), (cast directionZ : Float), ({ final __callArgument37:Dynamic = TriangleMesh3D.scratchLocalDirection__triangleMesh3D; __callArgument37; }));
-    cache = (cast TriangleMesh3D.getCollisionTriangleMeshAcceleration3D__triangleMesh3D(({ final __callArgument38:Dynamic = mesh; __callArgument38; })) : CollisionTriangleMeshAcceleration3D__triangleMesh3D);
+    if ((cast ((cast !_Runtime.strictEquals((cast getCollisionTriangleMeshValidationStatus3D(({ final __callArgument62:Dynamic = mesh; __callArgument62; })) : Null<String>), null) : Bool) || (cast ((cast maxFraction : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
+    TriangleMesh3D.writeCollisionTriangleMeshLocalPoint3D__triangleMesh3D(({ final __callArgument64:Dynamic = mesh; __callArgument64; }), (cast originX : Float), (cast originY : Float), (cast originZ : Float), ({ final __callArgument65:Dynamic = TriangleMesh3D.scratchLocalOrigin__triangleMesh3D; __callArgument65; }));
+    TriangleMesh3D.writeCollisionTriangleMeshLocalDirection3D__triangleMesh3D(({ final __callArgument68:Dynamic = mesh; __callArgument68; }), (cast directionX : Float), (cast directionY : Float), (cast directionZ : Float), ({ final __callArgument69:Dynamic = TriangleMesh3D.scratchLocalDirection__triangleMesh3D; __callArgument69; }));
+    cache = (cast TriangleMesh3D.getCollisionTriangleMeshAcceleration3D__triangleMesh3D(({ final __callArgument72:Dynamic = mesh; __callArgument72; })) : CollisionTriangleMeshAcceleration3D__triangleMesh3D);
     fraction = maxFraction;
     triangleHit = -1.0;
     _Runtime.setLength(TriangleMesh3D.scratchNodeStack__triangleMesh3D, 0.0);
@@ -217,7 +217,7 @@ class TriangleMesh3D {
         var i:Float = (cast node : CollisionTriangleMeshNode3D__triangleMesh3D).start;
         while ((cast ((cast i : Float) < (cast ((cast node : CollisionTriangleMeshNode3D__triangleMesh3D).start + (cast node : CollisionTriangleMeshNode3D__triangleMesh3D).count) : Float)) : Bool)) {
           var triangle:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast cache : CollisionTriangleMeshAcceleration3D__triangleMesh3D).order : Array<Float>), (cast i : Float));
-          if ((cast !(cast (cast TriangleMesh3D.raycastCollisionTriangleLocal3D__triangleMesh3D(({ final __callArgument39:Dynamic = mesh; __callArgument39; }), (cast triangle : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchLocalOrigin__triangleMesh3D : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchLocalOrigin__triangleMesh3D : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchLocalOrigin__triangleMesh3D : Array<Float>), (cast 2.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchLocalDirection__triangleMesh3D : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchLocalDirection__triangleMesh3D : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchLocalDirection__triangleMesh3D : Array<Float>), (cast 2.0 : Float)) : Float), ({ final __callArgument40:Dynamic = TriangleMesh3D.scratchRay__triangleMesh3D; __callArgument40; }), (cast fraction : Float)) : Bool) : Bool) : Bool)) {
+          if ((cast !(cast (cast TriangleMesh3D.raycastCollisionTriangleLocal3D__triangleMesh3D(({ final __callArgument74:Dynamic = mesh; __callArgument74; }), (cast triangle : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchLocalOrigin__triangleMesh3D : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchLocalOrigin__triangleMesh3D : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchLocalOrigin__triangleMesh3D : Array<Float>), (cast 2.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchLocalDirection__triangleMesh3D : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchLocalDirection__triangleMesh3D : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchLocalDirection__triangleMesh3D : Array<Float>), (cast 2.0 : Float)) : Float), ({ final __callArgument75:Dynamic = TriangleMesh3D.scratchRay__triangleMesh3D; __callArgument75; }), (cast fraction : Float)) : Bool) : Bool) : Bool)) {
             (i = cast ((i + 1.0) : Dynamic));
             continue;
           }
@@ -228,13 +228,13 @@ class TriangleMesh3D {
       }
     }
     if ((cast ((cast triangleHit : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
-    TriangleMesh3D.writeCollisionTriangleMeshTriangleNormalLocal3D__triangleMesh3D(({ final __callArgument41:Dynamic = mesh; __callArgument41; }), (cast triangleHit : Float), ({ final __callArgument42:Dynamic = TriangleMesh3D.scratchNormal__triangleMesh3D; __callArgument42; }));
+    TriangleMesh3D.writeCollisionTriangleMeshTriangleNormalLocal3D__triangleMesh3D(({ final __callArgument78:Dynamic = mesh; __callArgument78; }), (cast triangleHit : Float), ({ final __callArgument79:Dynamic = TriangleMesh3D.scratchNormal__triangleMesh3D; __callArgument79; }));
     if ((cast ((cast (((flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchNormal__triangleMesh3D : Array<Float>), (cast 0.0 : Float)) * flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchLocalDirection__triangleMesh3D : Array<Float>), (cast 0.0 : Float))) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchNormal__triangleMesh3D : Array<Float>), (cast 1.0 : Float)) * flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchLocalDirection__triangleMesh3D : Array<Float>), (cast 1.0 : Float)))) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchNormal__triangleMesh3D : Array<Float>), (cast 2.0 : Float)) * flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchLocalDirection__triangleMesh3D : Array<Float>), (cast 2.0 : Float)))) : Float) > (cast 0.0 : Float)) : Bool)) {
       flighthq._internal._StaticIndex.writeFloatArrayTyped((cast TriangleMesh3D.scratchNormal__triangleMesh3D : Array<Float>), (cast 0.0 : Float), (cast -flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchNormal__triangleMesh3D : Array<Float>), (cast 0.0 : Float)) : Float));
       flighthq._internal._StaticIndex.writeFloatArrayTyped((cast TriangleMesh3D.scratchNormal__triangleMesh3D : Array<Float>), (cast 1.0 : Float), (cast -flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchNormal__triangleMesh3D : Array<Float>), (cast 1.0 : Float)) : Float));
       flighthq._internal._StaticIndex.writeFloatArrayTyped((cast TriangleMesh3D.scratchNormal__triangleMesh3D : Array<Float>), (cast 2.0 : Float), (cast -flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchNormal__triangleMesh3D : Array<Float>), (cast 2.0 : Float)) : Float));
     }
-    TriangleMesh3D.writeCollisionTriangleMeshWorldDirection3D__triangleMesh3D(({ final __callArgument43:Dynamic = mesh; __callArgument43; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchNormal__triangleMesh3D : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchNormal__triangleMesh3D : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchNormal__triangleMesh3D : Array<Float>), (cast 2.0 : Float)) : Float), ({ final __callArgument44:Dynamic = TriangleMesh3D.scratchWorldNormal__triangleMesh3D; __callArgument44; }));
+    TriangleMesh3D.writeCollisionTriangleMeshWorldDirection3D__triangleMesh3D(({ final __callArgument82:Dynamic = mesh; __callArgument82; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchNormal__triangleMesh3D : Array<Float>), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchNormal__triangleMesh3D : Array<Float>), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchNormal__triangleMesh3D : Array<Float>), (cast 2.0 : Float)) : Float), ({ final __callArgument83:Dynamic = TriangleMesh3D.scratchWorldNormal__triangleMesh3D; __callArgument83; }));
     ((cast out : CollisionRaycastHit3D).fraction = fraction);
     ((cast out : CollisionRaycastHit3D).x = (originX + (directionX * fraction)));
     ((cast out : CollisionRaycastHit3D).y = (originY + (directionY * fraction)));
@@ -247,8 +247,8 @@ class TriangleMesh3D {
   }
 
   public static function sweepCollisionHeightfield3D(convex:CollisionShape3D, deltaX:Float, deltaY:Float, deltaZ:Float, heightfield:CollisionHeightfield3D, out:CollisionTimeOfImpact3D, maxFraction:Float = 1.0):Bool {
-    if ((cast !_Runtime.strictEquals((cast getCollisionHeightfieldValidationStatus3D(({ final __callArgument45:Dynamic = heightfield; __callArgument45; })) : Null<String>), null) : Bool)) { return cast false; }
-    return cast (cast sweepCollisionTriangleMesh3D(({ final __callArgument46:Dynamic = convex; __callArgument46; }), (cast deltaX : Float), (cast deltaY : Float), (cast deltaZ : Float), (cast TriangleMesh3D.getCollisionHeightfieldTriangleMesh3D__triangleMesh3D(({ final __callArgument47:Dynamic = heightfield; __callArgument47; })) : CollisionTriangleMesh3D), ({ final __callArgument48:Dynamic = out; __callArgument48; }), (cast maxFraction : Float)) : Bool);
+    if ((cast !_Runtime.strictEquals((cast getCollisionHeightfieldValidationStatus3D(({ final __callArgument86:Dynamic = heightfield; __callArgument86; })) : Null<String>), null) : Bool)) { return cast false; }
+    return cast (cast sweepCollisionTriangleMesh3D(({ final __callArgument88:Dynamic = convex; __callArgument88; }), (cast deltaX : Float), (cast deltaY : Float), (cast deltaZ : Float), (cast TriangleMesh3D.getCollisionHeightfieldTriangleMesh3D__triangleMesh3D(({ final __callArgument89:Dynamic = heightfield; __callArgument89; })) : CollisionTriangleMesh3D), ({ final __callArgument91:Dynamic = out; __callArgument91; }), (cast maxFraction : Float)) : Bool);
     return cast null;
   }
 
@@ -256,22 +256,22 @@ class TriangleMesh3D {
     var support:Null<CollisionSupport3D> = cast _Runtime.UNDEFINED;
     var fraction:Float = cast _Runtime.UNDEFINED;
     var hit:Bool = cast _Runtime.UNDEFINED;
-    support = (cast getCollisionSupport3D(({ final __callArgument49:Dynamic = (cast convex : { var kind:String; }).kind; __callArgument49; })) : Null<CollisionSupport3D>);
-    if ((cast ((cast _Runtime.strictEquals(support, null) : Bool) || (cast !_Runtime.strictEquals((cast getCollisionTriangleMeshValidationStatus3D(({ final __callArgument50:Dynamic = mesh; __callArgument50; })) : Null<String>), null) : Bool)) : Bool)) { return cast false; }
-    TriangleMesh3D.writeCollisionShapeBounds3D__triangleMesh3D(({ final __callArgument51:Dynamic = convex; __callArgument51; }), ({ final __callArgument52:Dynamic = support; __callArgument52; }), (cast TriangleMesh3D.scratchBounds__triangleMesh3D : Dynamic));
+    support = (cast getCollisionSupport3D(({ final __callArgument96:Dynamic = (cast convex : { var kind:String; }).kind; __callArgument96; })) : Null<CollisionSupport3D>);
+    if ((cast ((cast _Runtime.strictEquals(support, null) : Bool) || (cast !_Runtime.strictEquals((cast getCollisionTriangleMeshValidationStatus3D(({ final __callArgument98:Dynamic = mesh; __callArgument98; })) : Null<String>), null) : Bool)) : Bool)) { return cast false; }
+    TriangleMesh3D.writeCollisionShapeBounds3D__triangleMesh3D(({ final __callArgument100:Dynamic = convex; __callArgument100; }), ({ final __callArgument101:Dynamic = support; __callArgument101; }), (cast TriangleMesh3D.scratchBounds__triangleMesh3D : Dynamic));
     ((cast TriangleMesh3D.scratchBounds__triangleMesh3D : CollisionBounds3D__triangleMesh3D).minX = HxMath.min((cast TriangleMesh3D.scratchBounds__triangleMesh3D : CollisionBounds3D__triangleMesh3D).minX, ((cast TriangleMesh3D.scratchBounds__triangleMesh3D : CollisionBounds3D__triangleMesh3D).minX + (deltaX * maxFraction))));
     ((cast TriangleMesh3D.scratchBounds__triangleMesh3D : CollisionBounds3D__triangleMesh3D).minY = HxMath.min((cast TriangleMesh3D.scratchBounds__triangleMesh3D : CollisionBounds3D__triangleMesh3D).minY, ((cast TriangleMesh3D.scratchBounds__triangleMesh3D : CollisionBounds3D__triangleMesh3D).minY + (deltaY * maxFraction))));
     ((cast TriangleMesh3D.scratchBounds__triangleMesh3D : CollisionBounds3D__triangleMesh3D).minZ = HxMath.min((cast TriangleMesh3D.scratchBounds__triangleMesh3D : CollisionBounds3D__triangleMesh3D).minZ, ((cast TriangleMesh3D.scratchBounds__triangleMesh3D : CollisionBounds3D__triangleMesh3D).minZ + (deltaZ * maxFraction))));
     ((cast TriangleMesh3D.scratchBounds__triangleMesh3D : CollisionBounds3D__triangleMesh3D).maxX = HxMath.max((cast TriangleMesh3D.scratchBounds__triangleMesh3D : CollisionBounds3D__triangleMesh3D).maxX, ((cast TriangleMesh3D.scratchBounds__triangleMesh3D : CollisionBounds3D__triangleMesh3D).maxX + (deltaX * maxFraction))));
     ((cast TriangleMesh3D.scratchBounds__triangleMesh3D : CollisionBounds3D__triangleMesh3D).maxY = HxMath.max((cast TriangleMesh3D.scratchBounds__triangleMesh3D : CollisionBounds3D__triangleMesh3D).maxY, ((cast TriangleMesh3D.scratchBounds__triangleMesh3D : CollisionBounds3D__triangleMesh3D).maxY + (deltaY * maxFraction))));
     ((cast TriangleMesh3D.scratchBounds__triangleMesh3D : CollisionBounds3D__triangleMesh3D).maxZ = HxMath.max((cast TriangleMesh3D.scratchBounds__triangleMesh3D : CollisionBounds3D__triangleMesh3D).maxZ, ((cast TriangleMesh3D.scratchBounds__triangleMesh3D : CollisionBounds3D__triangleMesh3D).maxZ + (deltaZ * maxFraction))));
-    TriangleMesh3D.writeWorldBoundsInCollisionTriangleMeshLocal3D__triangleMesh3D(({ final __callArgument53:Dynamic = mesh; __callArgument53; }), (cast TriangleMesh3D.scratchBounds__triangleMesh3D : Dynamic), (cast TriangleMesh3D.scratchLocalBounds__triangleMesh3D : Dynamic));
-    TriangleMesh3D.queryCollisionTriangleMeshCandidates3D__triangleMesh3D(({ final __callArgument54:Dynamic = mesh; __callArgument54; }), (cast TriangleMesh3D.scratchLocalBounds__triangleMesh3D : Dynamic), ({ final __callArgument55:Dynamic = TriangleMesh3D.scratchTriangles__triangleMesh3D; __callArgument55; }));
+    TriangleMesh3D.writeWorldBoundsInCollisionTriangleMeshLocal3D__triangleMesh3D(({ final __callArgument104:Dynamic = mesh; __callArgument104; }), (cast TriangleMesh3D.scratchBounds__triangleMesh3D : Dynamic), (cast TriangleMesh3D.scratchLocalBounds__triangleMesh3D : Dynamic));
+    TriangleMesh3D.queryCollisionTriangleMeshCandidates3D__triangleMesh3D(({ final __callArgument106:Dynamic = mesh; __callArgument106; }), (cast TriangleMesh3D.scratchLocalBounds__triangleMesh3D : Dynamic), ({ final __callArgument107:Dynamic = TriangleMesh3D.scratchTriangles__triangleMesh3D; __callArgument107; }));
     fraction = maxFraction;
     hit = false;
     for (triangle in _Runtime.iterable(TriangleMesh3D.scratchTriangles__triangleMesh3D)) {
-      TriangleMesh3D.writeCollisionTriangleMeshTriangleWorld3D__triangleMesh3D(({ final __callArgument58:Dynamic = mesh; __callArgument58; }), (cast triangle : Float), (cast TriangleMesh3D.scratchTriangle__triangleMesh3D : { var points:Array<Float>; }).points);
-      if ((cast !(cast (cast sweepCollisionShape3D(({ final __callArgument59:Dynamic = convex; __callArgument59; }), (cast deltaX : Float), (cast deltaY : Float), (cast deltaZ : Float), ({ final __callArgument60:Dynamic = TriangleMesh3D.scratchTriangle__triangleMesh3D; __callArgument60; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument61:Dynamic = TriangleMesh3D.scratchTimeOfImpact__triangleMesh3D; __callArgument61; }), (cast fraction : Float)) : Bool) : Bool) : Bool)) {
+      TriangleMesh3D.writeCollisionTriangleMeshTriangleWorld3D__triangleMesh3D(({ final __callArgument112:Dynamic = mesh; __callArgument112; }), (cast triangle : Float), (cast TriangleMesh3D.scratchTriangle__triangleMesh3D : { var points:Array<Float>; }).points);
+      if ((cast !(cast (cast sweepCollisionShape3D(({ final __callArgument114:Dynamic = convex; __callArgument114; }), (cast deltaX : Float), (cast deltaY : Float), (cast deltaZ : Float), ({ final __callArgument115:Dynamic = TriangleMesh3D.scratchTriangle__triangleMesh3D; __callArgument115; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument116:Dynamic = TriangleMesh3D.scratchTimeOfImpact__triangleMesh3D; __callArgument116; }), (cast fraction : Float)) : Bool) : Bool) : Bool)) {
         continue;
       }
       (fraction = cast ((cast TriangleMesh3D.scratchTimeOfImpact__triangleMesh3D : CollisionTimeOfImpact3D).fraction : Dynamic));
@@ -289,21 +289,21 @@ class TriangleMesh3D {
   }
 
   public static function writeCollisionHeightfieldBounds3D(heightfield:CollisionHeightfield3D, out:CollisionAabb3D):Void {
-    if ((cast !_Runtime.strictEquals((cast getCollisionHeightfieldValidationStatus3D(({ final __callArgument62:Dynamic = heightfield; __callArgument62; })) : Null<String>), null) : Bool)) {
-      TriangleMesh3D.clearCollisionBounds3D__triangleMesh3D(({ final __callArgument63:Dynamic = out; __callArgument63; }));
+    if ((cast !_Runtime.strictEquals((cast getCollisionHeightfieldValidationStatus3D(({ final __callArgument120:Dynamic = heightfield; __callArgument120; })) : Null<String>), null) : Bool)) {
+      TriangleMesh3D.clearCollisionBounds3D__triangleMesh3D(({ final __callArgument122:Dynamic = out; __callArgument122; }));
       return;
     }
-    writeCollisionTriangleMeshBounds3D((cast TriangleMesh3D.getCollisionHeightfieldTriangleMesh3D__triangleMesh3D(({ final __callArgument64:Dynamic = heightfield; __callArgument64; })) : CollisionTriangleMesh3D), ({ final __callArgument65:Dynamic = out; __callArgument65; }));
+    writeCollisionTriangleMeshBounds3D((cast TriangleMesh3D.getCollisionHeightfieldTriangleMesh3D__triangleMesh3D(({ final __callArgument124:Dynamic = heightfield; __callArgument124; })) : CollisionTriangleMesh3D), ({ final __callArgument126:Dynamic = out; __callArgument126; }));
   }
 
   public static function writeCollisionTriangleMeshBounds3D(mesh:CollisionTriangleMesh3D, out:CollisionAabb3D):Void {
     var acceleration:CollisionTriangleMeshAcceleration3D__triangleMesh3D = cast _Runtime.UNDEFINED;
     var root:CollisionTriangleMeshNode3D__triangleMesh3D = cast _Runtime.UNDEFINED;
-    if ((cast !_Runtime.strictEquals((cast getCollisionTriangleMeshValidationStatus3D(({ final __callArgument66:Dynamic = mesh; __callArgument66; })) : Null<String>), null) : Bool)) {
-      TriangleMesh3D.clearCollisionBounds3D__triangleMesh3D(({ final __callArgument67:Dynamic = out; __callArgument67; }));
+    if ((cast !_Runtime.strictEquals((cast getCollisionTriangleMeshValidationStatus3D(({ final __callArgument130:Dynamic = mesh; __callArgument130; })) : Null<String>), null) : Bool)) {
+      TriangleMesh3D.clearCollisionBounds3D__triangleMesh3D(({ final __callArgument132:Dynamic = out; __callArgument132; }));
       return;
     }
-    acceleration = (cast TriangleMesh3D.getCollisionTriangleMeshAcceleration3D__triangleMesh3D(({ final __callArgument68:Dynamic = mesh; __callArgument68; })) : CollisionTriangleMeshAcceleration3D__triangleMesh3D);
+    acceleration = (cast TriangleMesh3D.getCollisionTriangleMeshAcceleration3D__triangleMesh3D(({ final __callArgument134:Dynamic = mesh; __callArgument134; })) : CollisionTriangleMeshAcceleration3D__triangleMesh3D);
     root = flighthq._internal._StaticIndex.readArray((cast acceleration : CollisionTriangleMeshAcceleration3D__triangleMesh3D).nodes, 0.0);
     ((cast out : CollisionAabb3D).minX = HxMath.POSITIVE_INFINITY);
     ((cast out : CollisionAabb3D).minY = HxMath.POSITIVE_INFINITY);
@@ -314,7 +314,7 @@ class TriangleMesh3D {
     {
       var corner:Float = 0.0;
       while ((cast ((cast corner : Float) < (cast 8.0 : Float)) : Bool)) {
-        TriangleMesh3D.writeCollisionTriangleMeshWorldPoint3D__triangleMesh3D(({ final __callArgument69:Dynamic = mesh; __callArgument69; }), (cast ((cast _Runtime.strictEquals((_Runtime.toInt32(corner) & 1), 0.0) : Bool) ? (cast (cast root : CollisionTriangleMeshNode3D__triangleMesh3D).minX : Dynamic) : (cast (cast root : CollisionTriangleMeshNode3D__triangleMesh3D).maxX : Dynamic)) : Float), (cast ((cast _Runtime.strictEquals((_Runtime.toInt32(corner) & 2), 0.0) : Bool) ? (cast (cast root : CollisionTriangleMeshNode3D__triangleMesh3D).minY : Dynamic) : (cast (cast root : CollisionTriangleMeshNode3D__triangleMesh3D).maxY : Dynamic)) : Float), (cast ((cast _Runtime.strictEquals((_Runtime.toInt32(corner) & 4), 0.0) : Bool) ? (cast (cast root : CollisionTriangleMeshNode3D__triangleMesh3D).minZ : Dynamic) : (cast (cast root : CollisionTriangleMeshNode3D__triangleMesh3D).maxZ : Dynamic)) : Float), ({ final __callArgument70:Dynamic = TriangleMesh3D.scratchWorldPoint__triangleMesh3D; __callArgument70; }));
+        TriangleMesh3D.writeCollisionTriangleMeshWorldPoint3D__triangleMesh3D(({ final __callArgument136:Dynamic = mesh; __callArgument136; }), (cast ((cast _Runtime.strictEquals((_Runtime.toInt32(corner) & 1), 0.0) : Bool) ? (cast (cast root : CollisionTriangleMeshNode3D__triangleMesh3D).minX : Dynamic) : (cast (cast root : CollisionTriangleMeshNode3D__triangleMesh3D).maxX : Dynamic)) : Float), (cast ((cast _Runtime.strictEquals((_Runtime.toInt32(corner) & 2), 0.0) : Bool) ? (cast (cast root : CollisionTriangleMeshNode3D__triangleMesh3D).minY : Dynamic) : (cast (cast root : CollisionTriangleMeshNode3D__triangleMesh3D).maxY : Dynamic)) : Float), (cast ((cast _Runtime.strictEquals((_Runtime.toInt32(corner) & 4), 0.0) : Bool) ? (cast (cast root : CollisionTriangleMeshNode3D__triangleMesh3D).minZ : Dynamic) : (cast (cast root : CollisionTriangleMeshNode3D__triangleMesh3D).maxZ : Dynamic)) : Float), ({ final __callArgument137:Dynamic = TriangleMesh3D.scratchWorldPoint__triangleMesh3D; __callArgument137; }));
         ((cast out : CollisionAabb3D).minX = HxMath.min((cast out : CollisionAabb3D).minX, flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchWorldPoint__triangleMesh3D : Array<Float>), (cast 0.0 : Float))));
         ((cast out : CollisionAabb3D).minY = HxMath.min((cast out : CollisionAabb3D).minY, flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchWorldPoint__triangleMesh3D : Array<Float>), (cast 1.0 : Float))));
         ((cast out : CollisionAabb3D).minZ = HxMath.min((cast out : CollisionAabb3D).minZ, flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchWorldPoint__triangleMesh3D : Array<Float>), (cast 2.0 : Float))));
@@ -361,7 +361,7 @@ class TriangleMesh3D {
         (triangle = cast ((triangle + 1.0) : Dynamic));
       }
     }
-    (cast TriangleMesh3D.buildCollisionTriangleMeshNode3D__triangleMesh3D(({ final __callArgument73:Dynamic = mesh; __callArgument73; }), (cast acceleration : Dynamic), (cast 0.0 : Float), (cast triangleCount : Float)) : Float);
+    (cast TriangleMesh3D.buildCollisionTriangleMeshNode3D__triangleMesh3D(({ final __callArgument142:Dynamic = mesh; __callArgument142; }), (cast acceleration : Dynamic), (cast 0.0 : Float), (cast triangleCount : Float)) : Float);
     return cast acceleration;
     return cast null;
   }
@@ -381,7 +381,7 @@ class TriangleMesh3D {
     {
       var i:Float = start;
       while ((cast ((cast i : Float) < (cast (start + count) : Float)) : Bool)) {
-        TriangleMesh3D.writeCollisionTriangleMeshTriangleBounds3D__triangleMesh3D(({ final __callArgument74:Dynamic = mesh; __callArgument74; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast acceleration : CollisionTriangleMeshAcceleration3D__triangleMesh3D).order : Array<Float>), (cast i : Float)) : Float), (cast TriangleMesh3D.scratchTriangleBounds__triangleMesh3D : Dynamic));
+        TriangleMesh3D.writeCollisionTriangleMeshTriangleBounds3D__triangleMesh3D(({ final __callArgument144:Dynamic = mesh; __callArgument144; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast acceleration : CollisionTriangleMeshAcceleration3D__triangleMesh3D).order : Array<Float>), (cast i : Float)) : Float), (cast TriangleMesh3D.scratchTriangleBounds__triangleMesh3D : Dynamic));
         TriangleMesh3D.includeCollisionBounds3D__triangleMesh3D((cast node : Dynamic), (cast TriangleMesh3D.scratchTriangleBounds__triangleMesh3D : Dynamic));
         (i = cast ((i + 1.0) : Dynamic));
       }
@@ -392,7 +392,7 @@ class TriangleMesh3D {
     extentZ = ((cast node : CollisionTriangleMeshNode3D__triangleMesh3D).maxZ - (cast node : CollisionTriangleMeshNode3D__triangleMesh3D).minZ);
     axis = ((cast ((cast ((cast extentX : Float) >= (cast extentY : Float)) : Bool) && (cast ((cast extentX : Float) >= (cast extentZ : Float)) : Bool)) : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast ((cast extentY : Float) >= (cast extentZ : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast 2.0 : Dynamic)) : Dynamic));
     ordered = _Runtime.slice((cast acceleration : CollisionTriangleMeshAcceleration3D__triangleMesh3D).order, start, (start + count));
-    _Runtime.sortAndReturn(ordered, function(a:Float, b:Float) return _Runtime.orValue(((cast TriangleMesh3D.getCollisionTriangleMeshTriangleCentroidAxis3D__triangleMesh3D(({ final __callArgument75:Dynamic = mesh; __callArgument75; }), (cast a : Float), (cast axis : Float)) : Float) - (cast TriangleMesh3D.getCollisionTriangleMeshTriangleCentroidAxis3D__triangleMesh3D(({ final __callArgument76:Dynamic = mesh; __callArgument76; }), (cast b : Float), (cast axis : Float)) : Float)), function():Dynamic return cast (a - b)));
+    _Runtime.sortAndReturn(ordered, function(a:Float, b:Float) return _Runtime.orValue(((cast TriangleMesh3D.getCollisionTriangleMeshTriangleCentroidAxis3D__triangleMesh3D(({ final __callArgument146:Dynamic = mesh; __callArgument146; }), (cast a : Float), (cast axis : Float)) : Float) - (cast TriangleMesh3D.getCollisionTriangleMeshTriangleCentroidAxis3D__triangleMesh3D(({ final __callArgument148:Dynamic = mesh; __callArgument148; }), (cast b : Float), (cast axis : Float)) : Float)), function():Dynamic return cast (a - b)));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
@@ -401,8 +401,8 @@ class TriangleMesh3D {
       }
     }
     leftCount = HxMath.floor((count / 2.0));
-    ((cast node : CollisionTriangleMeshNode3D__triangleMesh3D).left = (cast TriangleMesh3D.buildCollisionTriangleMeshNode3D__triangleMesh3D(({ final __callArgument77:Dynamic = mesh; __callArgument77; }), (cast acceleration : Dynamic), (cast start : Float), (cast leftCount : Float)) : Float));
-    ((cast node : CollisionTriangleMeshNode3D__triangleMesh3D).right = (cast TriangleMesh3D.buildCollisionTriangleMeshNode3D__triangleMesh3D(({ final __callArgument78:Dynamic = mesh; __callArgument78; }), (cast acceleration : Dynamic), (cast (start + leftCount) : Float), (cast (count - leftCount) : Float)) : Float));
+    ((cast node : CollisionTriangleMeshNode3D__triangleMesh3D).left = (cast TriangleMesh3D.buildCollisionTriangleMeshNode3D__triangleMesh3D(({ final __callArgument150:Dynamic = mesh; __callArgument150; }), (cast acceleration : Dynamic), (cast start : Float), (cast leftCount : Float)) : Float));
+    ((cast node : CollisionTriangleMeshNode3D__triangleMesh3D).right = (cast TriangleMesh3D.buildCollisionTriangleMeshNode3D__triangleMesh3D(({ final __callArgument152:Dynamic = mesh; __callArgument152; }), (cast acceleration : Dynamic), (cast (start + leftCount) : Float), (cast (count - leftCount) : Float)) : Float));
     ((cast node : CollisionTriangleMeshNode3D__triangleMesh3D).count = 0.0);
     return cast nodeIndex;
     return cast null;
@@ -470,7 +470,7 @@ class TriangleMesh3D {
           (row = cast ((row + 1.0) : Dynamic));
         }
       }
-      (cache = cast ({ heights: _Runtime.field(heightfield, 'heights'), columns: _Runtime.field(heightfield, 'columns'), rows: _Runtime.field(heightfield, 'rows'), cellSizeX: _Runtime.field(heightfield, 'cellSizeX'), cellSizeZ: _Runtime.field(heightfield, 'cellSizeZ'), version: _Runtime.field(heightfield, 'version'), mesh: (cast createCollisionTriangleMesh3D(({ final __callArgument79:Dynamic = points; __callArgument79; }), ({ final __callArgument80:Dynamic = indices; __callArgument80; })) : CollisionTriangleMesh3D) } : Dynamic));
+      (cache = cast ({ heights: _Runtime.field(heightfield, 'heights'), columns: _Runtime.field(heightfield, 'columns'), rows: _Runtime.field(heightfield, 'rows'), cellSizeX: _Runtime.field(heightfield, 'cellSizeX'), cellSizeZ: _Runtime.field(heightfield, 'cellSizeZ'), version: _Runtime.field(heightfield, 'version'), mesh: (cast createCollisionTriangleMesh3D(({ final __callArgument154:Dynamic = points; __callArgument154; }), ({ final __callArgument155:Dynamic = indices; __callArgument155; })) : CollisionTriangleMesh3D) } : Dynamic));
       ((cast TriangleMesh3D.collisionHeightfieldMeshes3D__triangleMesh3D : flighthq._internal._WeakMap<CollisionHeightfield3D, CollisionHeightfieldMeshCache3D__triangleMesh3D>).set(heightfield, (cast cache)));
     }
     mesh = (cast cache : CollisionHeightfieldMeshCache3D__triangleMesh3D).mesh;
@@ -489,7 +489,7 @@ class TriangleMesh3D {
     var acceleration:Null<CollisionTriangleMeshAcceleration3D__triangleMesh3D> = cast _Runtime.UNDEFINED;
     acceleration = ((cast TriangleMesh3D.collisionTriangleMeshAccelerations3D__triangleMesh3D : flighthq._internal._WeakMap<CollisionTriangleMesh3D, CollisionTriangleMeshAcceleration3D__triangleMesh3D>).get(mesh));
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(acceleration, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast acceleration : CollisionTriangleMeshAcceleration3D__triangleMesh3D).points, _Runtime.field(mesh, 'points')) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast acceleration : CollisionTriangleMeshAcceleration3D__triangleMesh3D).indices, _Runtime.field(mesh, 'indices')) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast acceleration : CollisionTriangleMeshAcceleration3D__triangleMesh3D).version, _Runtime.field(mesh, 'version')) : Bool)) : Bool)) {
-      (acceleration = cast ((cast TriangleMesh3D.buildCollisionTriangleMeshAcceleration3D__triangleMesh3D(({ final __callArgument81:Dynamic = mesh; __callArgument81; })) : CollisionTriangleMeshAcceleration3D__triangleMesh3D) : Dynamic));
+      (acceleration = cast ((cast TriangleMesh3D.buildCollisionTriangleMeshAcceleration3D__triangleMesh3D(({ final __callArgument158:Dynamic = mesh; __callArgument158; })) : CollisionTriangleMeshAcceleration3D__triangleMesh3D) : Dynamic));
       ((cast TriangleMesh3D.collisionTriangleMeshAccelerations3D__triangleMesh3D : flighthq._internal._WeakMap<CollisionTriangleMesh3D, CollisionTriangleMeshAcceleration3D__triangleMesh3D>).set(mesh, (cast acceleration)));
     }
     return cast acceleration;
@@ -572,7 +572,7 @@ class TriangleMesh3D {
   public static function queryCollisionTriangleMeshCandidates3D__triangleMesh3D(mesh:CollisionTriangleMesh3D, bounds:CollisionBounds3D__triangleMesh3D, out:Array<Float>):Void {
     var acceleration:CollisionTriangleMeshAcceleration3D__triangleMesh3D = cast _Runtime.UNDEFINED;
     _Runtime.setLength(out, 0.0);
-    acceleration = (cast TriangleMesh3D.getCollisionTriangleMeshAcceleration3D__triangleMesh3D(({ final __callArgument82:Dynamic = mesh; __callArgument82; })) : CollisionTriangleMeshAcceleration3D__triangleMesh3D);
+    acceleration = (cast TriangleMesh3D.getCollisionTriangleMeshAcceleration3D__triangleMesh3D(({ final __callArgument160:Dynamic = mesh; __callArgument160; })) : CollisionTriangleMeshAcceleration3D__triangleMesh3D);
     _Runtime.setLength(TriangleMesh3D.scratchNodeStack__triangleMesh3D, 0.0);
     if ((cast ((cast _Runtime.field((cast acceleration : CollisionTriangleMeshAcceleration3D__triangleMesh3D).nodes, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(TriangleMesh3D.scratchNodeStack__triangleMesh3D, 'push', cast ([0.0] : Array<Dynamic>)); }
     while ((cast ((cast _Runtime.field(TriangleMesh3D.scratchNodeStack__triangleMesh3D, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
@@ -701,26 +701,26 @@ class TriangleMesh3D {
   }
 
   public static function writeCollisionShapeBounds3D__triangleMesh3D(shape:CollisionShape3D, support:Dynamic, out:CollisionBounds3D__triangleMesh3D):Void {
-    support(({ final __callArgument83:Dynamic = shape; __callArgument83; }), (cast -1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument84:Dynamic = TriangleMesh3D.scratchSupport__triangleMesh3D; __callArgument84; }));
+    support(({ final __callArgument162:Dynamic = shape; __callArgument162; }), (cast -1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument163:Dynamic = TriangleMesh3D.scratchSupport__triangleMesh3D; __callArgument163; }));
     ((cast out : CollisionBounds3D__triangleMesh3D).minX = flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchSupport__triangleMesh3D : Array<Float>), (cast 0.0 : Float)));
-    support(({ final __callArgument85:Dynamic = shape; __callArgument85; }), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument86:Dynamic = TriangleMesh3D.scratchSupport__triangleMesh3D; __callArgument86; }));
+    support(({ final __callArgument166:Dynamic = shape; __callArgument166; }), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument167:Dynamic = TriangleMesh3D.scratchSupport__triangleMesh3D; __callArgument167; }));
     ((cast out : CollisionBounds3D__triangleMesh3D).maxX = flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchSupport__triangleMesh3D : Array<Float>), (cast 0.0 : Float)));
-    support(({ final __callArgument87:Dynamic = shape; __callArgument87; }), (cast 0.0 : Float), (cast -1.0 : Float), (cast 0.0 : Float), ({ final __callArgument88:Dynamic = TriangleMesh3D.scratchSupport__triangleMesh3D; __callArgument88; }));
+    support(({ final __callArgument170:Dynamic = shape; __callArgument170; }), (cast 0.0 : Float), (cast -1.0 : Float), (cast 0.0 : Float), ({ final __callArgument171:Dynamic = TriangleMesh3D.scratchSupport__triangleMesh3D; __callArgument171; }));
     ((cast out : CollisionBounds3D__triangleMesh3D).minY = flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchSupport__triangleMesh3D : Array<Float>), (cast 1.0 : Float)));
-    support(({ final __callArgument89:Dynamic = shape; __callArgument89; }), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), ({ final __callArgument90:Dynamic = TriangleMesh3D.scratchSupport__triangleMesh3D; __callArgument90; }));
+    support(({ final __callArgument174:Dynamic = shape; __callArgument174; }), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), ({ final __callArgument175:Dynamic = TriangleMesh3D.scratchSupport__triangleMesh3D; __callArgument175; }));
     ((cast out : CollisionBounds3D__triangleMesh3D).maxY = flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchSupport__triangleMesh3D : Array<Float>), (cast 1.0 : Float)));
-    support(({ final __callArgument91:Dynamic = shape; __callArgument91; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast -1.0 : Float), ({ final __callArgument92:Dynamic = TriangleMesh3D.scratchSupport__triangleMesh3D; __callArgument92; }));
+    support(({ final __callArgument178:Dynamic = shape; __callArgument178; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast -1.0 : Float), ({ final __callArgument179:Dynamic = TriangleMesh3D.scratchSupport__triangleMesh3D; __callArgument179; }));
     ((cast out : CollisionBounds3D__triangleMesh3D).minZ = flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchSupport__triangleMesh3D : Array<Float>), (cast 2.0 : Float)));
-    support(({ final __callArgument93:Dynamic = shape; __callArgument93; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), ({ final __callArgument94:Dynamic = TriangleMesh3D.scratchSupport__triangleMesh3D; __callArgument94; }));
+    support(({ final __callArgument182:Dynamic = shape; __callArgument182; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), ({ final __callArgument183:Dynamic = TriangleMesh3D.scratchSupport__triangleMesh3D; __callArgument183; }));
     ((cast out : CollisionBounds3D__triangleMesh3D).maxZ = flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchSupport__triangleMesh3D : Array<Float>), (cast 2.0 : Float)));
   }
 
   public static function writeCollisionTriangleMeshLocalDirection3D__triangleMesh3D(mesh:CollisionTriangleMesh3D, x:Float, y:Float, z:Float, out:Array<Float>):Void {
-    TriangleMesh3D.rotateCollisionVectorByQuaternion3D__triangleMesh3D((cast -_Runtime.field(mesh, 'rotationX') : Float), (cast -_Runtime.field(mesh, 'rotationY') : Float), (cast -_Runtime.field(mesh, 'rotationZ') : Float), (cast _Runtime.field(mesh, 'rotationW') : Float), (cast x : Float), (cast y : Float), (cast z : Float), ({ final __callArgument95:Dynamic = out; __callArgument95; }));
+    TriangleMesh3D.rotateCollisionVectorByQuaternion3D__triangleMesh3D((cast -_Runtime.field(mesh, 'rotationX') : Float), (cast -_Runtime.field(mesh, 'rotationY') : Float), (cast -_Runtime.field(mesh, 'rotationZ') : Float), (cast _Runtime.field(mesh, 'rotationW') : Float), (cast x : Float), (cast y : Float), (cast z : Float), ({ final __callArgument186:Dynamic = out; __callArgument186; }));
   }
 
   public static function writeCollisionTriangleMeshLocalPoint3D__triangleMesh3D(mesh:CollisionTriangleMesh3D, x:Float, y:Float, z:Float, out:Array<Float>):Void {
-    TriangleMesh3D.writeCollisionTriangleMeshLocalDirection3D__triangleMesh3D(({ final __callArgument96:Dynamic = mesh; __callArgument96; }), (cast _Runtime.subtractNumbers(x, _Runtime.field(mesh, 'x')) : Float), (cast _Runtime.subtractNumbers(y, _Runtime.field(mesh, 'y')) : Float), (cast _Runtime.subtractNumbers(z, _Runtime.field(mesh, 'z')) : Float), ({ final __callArgument97:Dynamic = out; __callArgument97; }));
+    TriangleMesh3D.writeCollisionTriangleMeshLocalDirection3D__triangleMesh3D(({ final __callArgument188:Dynamic = mesh; __callArgument188; }), (cast _Runtime.subtractNumbers(x, _Runtime.field(mesh, 'x')) : Float), (cast _Runtime.subtractNumbers(y, _Runtime.field(mesh, 'y')) : Float), (cast _Runtime.subtractNumbers(z, _Runtime.field(mesh, 'z')) : Float), ({ final __callArgument189:Dynamic = out; __callArgument189; }));
   }
 
   public static function writeCollisionTriangleMeshTriangleBounds3D__triangleMesh3D(mesh:CollisionTriangleMesh3D, triangle:Float, out:CollisionBounds3D__triangleMesh3D):Void {
@@ -781,7 +781,7 @@ class TriangleMesh3D {
       var vertex:Float = 0.0;
       while ((cast ((cast vertex : Float) < (cast 3.0 : Float)) : Bool)) {
         var source:Float = (flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(mesh, 'indices') : Array<Float>), (cast (offset + vertex) : Float)) * 3.0);
-        TriangleMesh3D.writeCollisionTriangleMeshWorldPoint3D__triangleMesh3D(({ final __callArgument98:Dynamic = mesh; __callArgument98; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(mesh, 'points') : Array<Float>), (cast source : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(mesh, 'points') : Array<Float>), (cast (source + 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(mesh, 'points') : Array<Float>), (cast (source + 2.0) : Float)) : Float), ({ final __callArgument99:Dynamic = TriangleMesh3D.scratchWorldPoint__triangleMesh3D; __callArgument99; }));
+        TriangleMesh3D.writeCollisionTriangleMeshWorldPoint3D__triangleMesh3D(({ final __callArgument192:Dynamic = mesh; __callArgument192; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(mesh, 'points') : Array<Float>), (cast source : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(mesh, 'points') : Array<Float>), (cast (source + 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast _Runtime.field(mesh, 'points') : Array<Float>), (cast (source + 2.0) : Float)) : Float), ({ final __callArgument193:Dynamic = TriangleMesh3D.scratchWorldPoint__triangleMesh3D; __callArgument193; }));
         var target:Float = (vertex * 3.0);
         flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast target : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchWorldPoint__triangleMesh3D : Array<Float>), (cast 0.0 : Float)) : Float));
         flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast (target + 1.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchWorldPoint__triangleMesh3D : Array<Float>), (cast 1.0 : Float)) : Float));
@@ -792,14 +792,14 @@ class TriangleMesh3D {
   }
 
   public static function writeCollisionTriangleMeshWorldDirection3D__triangleMesh3D(mesh:CollisionTriangleMesh3D, x:Float, y:Float, z:Float, out:Array<Float>):Void {
-    TriangleMesh3D.rotateCollisionVectorByQuaternion3D__triangleMesh3D((cast _Runtime.field(mesh, 'rotationX') : Float), (cast _Runtime.field(mesh, 'rotationY') : Float), (cast _Runtime.field(mesh, 'rotationZ') : Float), (cast _Runtime.field(mesh, 'rotationW') : Float), (cast x : Float), (cast y : Float), (cast z : Float), ({ final __callArgument100:Dynamic = out; __callArgument100; }));
+    TriangleMesh3D.rotateCollisionVectorByQuaternion3D__triangleMesh3D((cast _Runtime.field(mesh, 'rotationX') : Float), (cast _Runtime.field(mesh, 'rotationY') : Float), (cast _Runtime.field(mesh, 'rotationZ') : Float), (cast _Runtime.field(mesh, 'rotationW') : Float), (cast x : Float), (cast y : Float), (cast z : Float), ({ final __callArgument196:Dynamic = out; __callArgument196; }));
   }
 
   public static function writeCollisionTriangleMeshWorldPoint3D__triangleMesh3D(mesh:CollisionTriangleMesh3D, x:Float, y:Float, z:Float, out:Array<Float>):Void {
-    TriangleMesh3D.writeCollisionTriangleMeshWorldDirection3D__triangleMesh3D(({ final __callArgument101:Dynamic = mesh; __callArgument101; }), (cast x : Float), (cast y : Float), (cast z : Float), ({ final __callArgument102:Dynamic = out; __callArgument102; }));
-    ({ var __indexedObject103:Array<Float> = out; var __indexedKey104:Float = 0.0; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject103 : Array<Float>), (cast __indexedKey104 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject103 : Array<Float>), (cast __indexedKey104 : Float)) + _Runtime.field(mesh, 'x')) : Float)); });
-    ({ var __indexedObject105:Array<Float> = out; var __indexedKey106:Float = 1.0; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject105 : Array<Float>), (cast __indexedKey106 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject105 : Array<Float>), (cast __indexedKey106 : Float)) + _Runtime.field(mesh, 'y')) : Float)); });
-    ({ var __indexedObject107:Array<Float> = out; var __indexedKey108:Float = 2.0; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject107 : Array<Float>), (cast __indexedKey108 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject107 : Array<Float>), (cast __indexedKey108 : Float)) + _Runtime.field(mesh, 'z')) : Float)); });
+    TriangleMesh3D.writeCollisionTriangleMeshWorldDirection3D__triangleMesh3D(({ final __callArgument198:Dynamic = mesh; __callArgument198; }), (cast x : Float), (cast y : Float), (cast z : Float), ({ final __callArgument199:Dynamic = out; __callArgument199; }));
+    ({ var __indexedObject202:Array<Float> = out; var __indexedKey203:Float = 0.0; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject202 : Array<Float>), (cast __indexedKey203 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject202 : Array<Float>), (cast __indexedKey203 : Float)) + _Runtime.field(mesh, 'x')) : Float)); });
+    ({ var __indexedObject204:Array<Float> = out; var __indexedKey205:Float = 1.0; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject204 : Array<Float>), (cast __indexedKey205 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject204 : Array<Float>), (cast __indexedKey205 : Float)) + _Runtime.field(mesh, 'y')) : Float)); });
+    ({ var __indexedObject206:Array<Float> = out; var __indexedKey207:Float = 2.0; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject206 : Array<Float>), (cast __indexedKey207 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject206 : Array<Float>), (cast __indexedKey207 : Float)) + _Runtime.field(mesh, 'z')) : Float)); });
   }
 
   public static function writeReducedCollisionTriangleContactCandidates3D__triangleMesh3D(out:CollisionContactManifold3D):Void {
@@ -872,7 +872,7 @@ class TriangleMesh3D {
     {
       var corner:Float = 0.0;
       while ((cast ((cast corner : Float) < (cast 8.0 : Float)) : Bool)) {
-        TriangleMesh3D.writeCollisionTriangleMeshLocalPoint3D__triangleMesh3D(({ final __callArgument111:Dynamic = mesh; __callArgument111; }), (cast ((cast _Runtime.strictEquals((_Runtime.toInt32(corner) & 1), 0.0) : Bool) ? (cast _Runtime.field(bounds, 'minX') : Dynamic) : (cast _Runtime.field(bounds, 'maxX') : Dynamic)) : Float), (cast ((cast _Runtime.strictEquals((_Runtime.toInt32(corner) & 2), 0.0) : Bool) ? (cast _Runtime.field(bounds, 'minY') : Dynamic) : (cast _Runtime.field(bounds, 'maxY') : Dynamic)) : Float), (cast ((cast _Runtime.strictEquals((_Runtime.toInt32(corner) & 4), 0.0) : Bool) ? (cast _Runtime.field(bounds, 'minZ') : Dynamic) : (cast _Runtime.field(bounds, 'maxZ') : Dynamic)) : Float), ({ final __callArgument112:Dynamic = TriangleMesh3D.scratchLocalPoint__triangleMesh3D; __callArgument112; }));
+        TriangleMesh3D.writeCollisionTriangleMeshLocalPoint3D__triangleMesh3D(({ final __callArgument210:Dynamic = mesh; __callArgument210; }), (cast ((cast _Runtime.strictEquals((_Runtime.toInt32(corner) & 1), 0.0) : Bool) ? (cast _Runtime.field(bounds, 'minX') : Dynamic) : (cast _Runtime.field(bounds, 'maxX') : Dynamic)) : Float), (cast ((cast _Runtime.strictEquals((_Runtime.toInt32(corner) & 2), 0.0) : Bool) ? (cast _Runtime.field(bounds, 'minY') : Dynamic) : (cast _Runtime.field(bounds, 'maxY') : Dynamic)) : Float), (cast ((cast _Runtime.strictEquals((_Runtime.toInt32(corner) & 4), 0.0) : Bool) ? (cast _Runtime.field(bounds, 'minZ') : Dynamic) : (cast _Runtime.field(bounds, 'maxZ') : Dynamic)) : Float), ({ final __callArgument211:Dynamic = TriangleMesh3D.scratchLocalPoint__triangleMesh3D; __callArgument211; }));
         ((cast out : CollisionBounds3D__triangleMesh3D).minX = HxMath.min((cast out : CollisionBounds3D__triangleMesh3D).minX, flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchLocalPoint__triangleMesh3D : Array<Float>), (cast 0.0 : Float))));
         ((cast out : CollisionBounds3D__triangleMesh3D).minY = HxMath.min((cast out : CollisionBounds3D__triangleMesh3D).minY, flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchLocalPoint__triangleMesh3D : Array<Float>), (cast 1.0 : Float))));
         ((cast out : CollisionBounds3D__triangleMesh3D).minZ = HxMath.min((cast out : CollisionBounds3D__triangleMesh3D).minZ, flighthq._internal._StaticIndex.readFloatArrayTyped((cast TriangleMesh3D.scratchLocalPoint__triangleMesh3D : Array<Float>), (cast 2.0 : Float))));

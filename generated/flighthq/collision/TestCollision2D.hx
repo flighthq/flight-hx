@@ -21,16 +21,16 @@ class TestCollision2D {
     var forward:Null<CollisionPairTest2D> = cast _Runtime.UNDEFINED;
     var reversed:Null<CollisionPairTest2D> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(TestCollision2D.collisionTestGuard__testCollision2D, null) : Bool)) { (cast TestCollision2D.collisionTestGuard__testCollision2D : CollisionShape2D->CollisionShape2D->Void)(({ final __callArgument0:Dynamic = a; __callArgument0; }), ({ final __callArgument1:Dynamic = b; __callArgument1; })); }
-    forward = (cast getCollisionPairTest2D(({ final __callArgument2:Dynamic = (cast a : { var kind:String; }).kind; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast b : { var kind:String; }).kind; __callArgument3; })) : Null<CollisionPairTest2D>);
-    if ((cast !_Runtime.strictEquals(forward, null) : Bool)) { return cast (cast forward(({ final __callArgument4:Dynamic = a; __callArgument4; }), ({ final __callArgument5:Dynamic = b; __callArgument5; }), ({ final __callArgument6:Dynamic = out; __callArgument6; })) : Bool); }
-    reversed = (cast getCollisionPairTest2D(({ final __callArgument7:Dynamic = (cast b : { var kind:String; }).kind; __callArgument7; }), ({ final __callArgument8:Dynamic = (cast a : { var kind:String; }).kind; __callArgument8; })) : Null<CollisionPairTest2D>);
+    forward = (cast getCollisionPairTest2D(({ final __callArgument4:Dynamic = (cast a : { var kind:String; }).kind; __callArgument4; }), ({ final __callArgument5:Dynamic = (cast b : { var kind:String; }).kind; __callArgument5; })) : Null<CollisionPairTest2D>);
+    if ((cast !_Runtime.strictEquals(forward, null) : Bool)) { return cast (cast forward(({ final __callArgument8:Dynamic = a; __callArgument8; }), ({ final __callArgument9:Dynamic = b; __callArgument9; }), ({ final __callArgument10:Dynamic = out; __callArgument10; })) : Bool); }
+    reversed = (cast getCollisionPairTest2D(({ final __callArgument14:Dynamic = (cast b : { var kind:String; }).kind; __callArgument14; }), ({ final __callArgument15:Dynamic = (cast a : { var kind:String; }).kind; __callArgument15; })) : Null<CollisionPairTest2D>);
     if ((cast !_Runtime.strictEquals(reversed, null) : Bool)) {
-      if ((cast !(cast (cast reversed(({ final __callArgument9:Dynamic = b; __callArgument9; }), ({ final __callArgument10:Dynamic = a; __callArgument10; }), ({ final __callArgument11:Dynamic = out; __callArgument11; })) : Bool) : Bool) : Bool)) { return cast false; }
+      if ((cast !(cast (cast reversed(({ final __callArgument18:Dynamic = b; __callArgument18; }), ({ final __callArgument19:Dynamic = a; __callArgument19; }), ({ final __callArgument20:Dynamic = out; __callArgument20; })) : Bool) : Bool) : Bool)) { return cast false; }
       (out.normalX = cast (-out.normalX : Float));
       (out.normalY = cast (-out.normalY : Float));
       return cast true;
     }
-    return cast (cast testCollisionSupport2D(({ final __callArgument12:Dynamic = a; __callArgument12; }), ({ final __callArgument13:Dynamic = b; __callArgument13; }), ({ final __callArgument14:Dynamic = out; __callArgument14; })) : Bool);
+    return cast (cast testCollisionSupport2D(({ final __callArgument24:Dynamic = a; __callArgument24; }), ({ final __callArgument25:Dynamic = b; __callArgument25; }), ({ final __callArgument26:Dynamic = out; __callArgument26; })) : Bool);
     return cast null;
   }
 

@@ -47,7 +47,7 @@ class ParseParticleConfig {
   public static function parseParticleConfig(text:String, ?options:ParseParticleConfigOptions):ParticleEmitterConfig {
     var format:Null<flighthq._internal._Union2<flighthq._internal._Intersection2<String, flighthq._internal._Record<flighthq._internal._Any, flighthq._internal._Any>>, String>> = cast _Runtime.UNDEFINED;
     format = (cast detectParticleFormat((cast text : String)) : Null<flighthq._internal._Union2<flighthq._internal._Intersection2<String, flighthq._internal._Record<flighthq._internal._Any, flighthq._internal._Any>>, String>>);
-    if ((cast _Runtime.strictEquals(format, null) : Bool)) { return cast (cast createParticleEmitterConfig(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ParticleEmitterConfig); }
+    if ((cast _Runtime.strictEquals(format, null) : Bool)) { return cast (cast (#if js _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)) #else createParticleEmitterConfig(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : ParticleEmitterConfig); }
     try {
       if ((cast _Runtime.strictEquals(format, LibgdxParticleFormatKind) : Bool)) { return cast (cast parseLibgdxParticle((cast text : String), (cast options : Dynamic)) : ParticleEmitterConfig); }
       if ((cast _Runtime.strictEquals(format, ParticleDesignerFormatKind) : Bool)) { return cast (cast parseParticleDesignerPlist((cast text : String), (cast options : Dynamic)) : ParticleEmitterConfig); }
@@ -56,9 +56,9 @@ class ParseParticleConfig {
       if ((cast _Runtime.strictEquals(format, StarlingPexFormatKind) : Bool)) { return cast (cast parseStarlingPex((cast text : String), (cast options : Dynamic)) : ParticleEmitterConfig); }
       if ((cast _Runtime.strictEquals(format, UnityParticleFormatKind) : Bool)) { return cast (cast parseUnityParticle((cast text : String), (cast options : Dynamic)) : ParticleEmitterConfig); }
     } catch (__error:Dynamic) {
-      return cast (cast createParticleEmitterConfig(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ParticleEmitterConfig);
+      return cast (cast (#if js _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)) #else createParticleEmitterConfig(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : ParticleEmitterConfig);
     }
-    return cast (cast createParticleEmitterConfig(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ParticleEmitterConfig);
+    return cast (cast (#if js _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)) #else createParticleEmitterConfig(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : ParticleEmitterConfig);
     return cast null;
   }
 
@@ -69,7 +69,7 @@ class ParseParticleConfig {
     if ((cast _Runtime.strictEquals(format, null) : Bool)) {
       var diagnostics:Array<ImportDiagnostic> = (cast cast ([] : Array<Dynamic>));
       reportImportDiagnostic(({ final __callArgument0:Dynamic = diagnostics; __callArgument0; }), ({ final __callArgument1:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument1; }), (cast 'particles.unknown-format' : String), (cast 'parseParticleConfigDocument' : String), ({ final __callArgument2:Dynamic = { reason: 'no-format-detected' }; __callArgument2; }));
-      return cast { config: (cast createParticleEmitterConfig(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ParticleEmitterConfig), diagnostics: diagnostics, format: null };
+      return cast { config: (cast (#if js _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)) #else createParticleEmitterConfig(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : ParticleEmitterConfig), diagnostics: diagnostics, format: null };
     }
     try {
       if ((cast _Runtime.strictEquals(format, LibgdxParticleFormatKind) : Bool)) {
@@ -98,12 +98,12 @@ class ParseParticleConfig {
       }
     } catch (err:Dynamic) {
       var diagnostics:Array<ImportDiagnostic> = (cast cast ([] : Array<Dynamic>));
-      reportImportDiagnostic(({ final __callArgument3:Dynamic = diagnostics; __callArgument3; }), ({ final __callArgument4:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument4; }), (cast 'particles.parse-error' : String), (cast 'parseParticleConfigDocument' : String), ({ final __callArgument5:Dynamic = { message: _Runtime.field((cast err : haxe.Exception), 'message') }; __callArgument5; }));
-      return cast { config: (cast createParticleEmitterConfig(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ParticleEmitterConfig), diagnostics: diagnostics, format: format };
+      reportImportDiagnostic(({ final __callArgument6:Dynamic = diagnostics; __callArgument6; }), ({ final __callArgument7:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument7; }), (cast 'particles.parse-error' : String), (cast 'parseParticleConfigDocument' : String), ({ final __callArgument8:Dynamic = { message: _Runtime.field((cast err : haxe.Exception), 'message') }; __callArgument8; }));
+      return cast { config: (cast (#if js _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)) #else createParticleEmitterConfig(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : ParticleEmitterConfig), diagnostics: diagnostics, format: format };
     }
     diagnostics = (cast cast ([] : Array<Dynamic>));
-    reportImportDiagnostic(({ final __callArgument6:Dynamic = diagnostics; __callArgument6; }), ({ final __callArgument7:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument7; }), (cast 'particles.unknown-format' : String), (cast 'parseParticleConfigDocument' : String), ({ final __callArgument8:Dynamic = { reason: 'no-registered-parser' }; __callArgument8; }));
-    return cast { config: (cast createParticleEmitterConfig(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : ParticleEmitterConfig), diagnostics: diagnostics, format: format };
+    reportImportDiagnostic(({ final __callArgument12:Dynamic = diagnostics; __callArgument12; }), ({ final __callArgument13:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument13; }), (cast 'particles.unknown-format' : String), (cast 'parseParticleConfigDocument' : String), ({ final __callArgument14:Dynamic = { reason: 'no-registered-parser' }; __callArgument14; }));
+    return cast { config: (cast (#if js _Runtime.callValue(createParticleEmitterConfig, cast ([] : Array<Dynamic>)) #else createParticleEmitterConfig(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : ParticleEmitterConfig), diagnostics: diagnostics, format: format };
     return cast null;
   }
 }

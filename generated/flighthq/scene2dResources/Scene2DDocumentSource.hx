@@ -18,19 +18,19 @@ class Scene2DDocumentSource {
       flighthq._internal._Async.protect(function():Dynamic {
         var signal:flighthq._internal.dom.AbortSignal = cast _Runtime.UNDEFINED;
         var source:Null<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;
-        signal = _Runtime.coalesce(({ final __structural7 = options; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var signal:Null<flighthq._internal.dom.AbortSignal>; }).signal; }), function():Dynamic return cast (cast _Runtime.construct(flighthq._internal._HostValueLut.get('AbortController'), []) : flighthq._internal.dom.AbortController).signal);
-        return flighthq._internal._Async.flatMap((cast fetchDocument((cast url : String), ({ final __callArgument14:Dynamic = signal; __callArgument14; }), (cast _Runtime.coalesce(({ final __structural15 = options; __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { @:optional var progress:Null<Signal<Scene2DDocumentFetchProgress->Void>>; }).progress; }), function():Dynamic return cast null) : Dynamic)) : flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>>), function(__awaitValue8:Dynamic):Dynamic {
-          source = __awaitValue8;
-          var __flowBranch9:Dynamic;
+        signal = _Runtime.coalesce(({ final __structural13 = options; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { @:optional var signal:Null<flighthq._internal.dom.AbortSignal>; }).signal; }), function():Dynamic return cast (cast _Runtime.construct(flighthq._internal._HostValueLut.get('AbortController'), []) : flighthq._internal.dom.AbortController).signal);
+        return flighthq._internal._Async.flatMap((cast fetchDocument((cast url : String), ({ final __callArgument24:Dynamic = signal; __callArgument24; }), (cast _Runtime.coalesce(({ final __structural25 = options; __structural25 == null ? _Runtime.UNDEFINED : (cast __structural25 : { @:optional var progress:Null<Signal<Scene2DDocumentFetchProgress->Void>>; }).progress; }), function():Dynamic return cast null) : Dynamic)) : flighthq._internal._Promise<Null<flighthq._internal._UInt8Array>>), function(__awaitValue14:Dynamic):Dynamic {
+          source = __awaitValue14;
+          var __flowBranch15:Dynamic;
           if ((cast _Runtime.strictEquals(source, null) : Bool)) {
-            __flowBranch9 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch15 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch9 = flighthq._internal._Async.flowNormal();
+            __flowBranch15 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch9, function():Dynamic {
-            return flighthq._internal._Async.flowReturn((cast createScene2DDocumentFromBytes(({ final __callArgument10:Dynamic = source; __callArgument10; }), ({ final __callArgument11:Dynamic = registry; __callArgument11; }), ({ final __callArgument13:Dynamic = { mimeType: _Runtime.coalesce(({ final __structural12 = options; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { @:optional var mimeType:Null<String>; }).mimeType; }), function():Dynamic return cast null), url: url }; __callArgument13; })) : Null<Scene2DDocument>));
+          return flighthq._internal._Async.continueFlow(__flowBranch15, function():Dynamic {
+            return flighthq._internal._Async.flowReturn((cast createScene2DDocumentFromBytes(({ final __callArgument16:Dynamic = source; __callArgument16; }), ({ final __callArgument17:Dynamic = registry; __callArgument17; }), ({ final __callArgument19:Dynamic = { mimeType: _Runtime.coalesce(({ final __structural18 = options; __structural18 == null ? _Runtime.UNDEFINED : (cast __structural18 : { @:optional var mimeType:Null<String>; }).mimeType; }), function():Dynamic return cast null), url: url }; __callArgument19; })) : Null<Scene2DDocument>));
           });
         });
       })

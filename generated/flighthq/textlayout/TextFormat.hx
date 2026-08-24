@@ -20,7 +20,7 @@ class TextFormat {
   }
 
   public static function getTextFormatHeight(format:flighthq.types.TextFormat):Float {
-    return cast (((cast getTextFormatAscent(({ final __callArgument0:Dynamic = format; __callArgument0; })) : Float) + (cast getTextFormatDescent(({ final __callArgument1:Dynamic = format; __callArgument1; })) : Float)) + (cast getTextFormatLeading(({ final __callArgument2:Dynamic = format; __callArgument2; })) : Float));
+    return cast (((cast getTextFormatAscent(({ final __callArgument0:Dynamic = format; __callArgument0; })) : Float) + (cast getTextFormatDescent(({ final __callArgument2:Dynamic = format; __callArgument2; })) : Float)) + (cast getTextFormatLeading(({ final __callArgument4:Dynamic = format; __callArgument4; })) : Float));
     return cast null;
   }
 

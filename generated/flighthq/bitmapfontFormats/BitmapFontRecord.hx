@@ -63,13 +63,13 @@ class BitmapFontRecord {
 
   public static function reportDroppedBitmapFontRecords(diagnostics:Null<Array<ImportDiagnostic>>, origin:String, pages:Float, chars:Float, kernings:Float):Void {
     if ((cast ((cast pages : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument6:Dynamic = diagnostics; __callArgument6; }), ({ final __callArgument7:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument7; }), (cast 'bmfont.page-unreadable' : String), (cast origin : String), ({ final __callArgument8:Dynamic = { records: pages }; __callArgument8; }));
+      reportImportDiagnostic(({ final __callArgument7:Dynamic = diagnostics; __callArgument7; }), ({ final __callArgument8:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument8; }), (cast 'bmfont.page-unreadable' : String), (cast origin : String), ({ final __callArgument9:Dynamic = { records: pages }; __callArgument9; }));
     }
     if ((cast ((cast chars : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument9:Dynamic = diagnostics; __callArgument9; }), ({ final __callArgument10:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument10; }), (cast 'bmfont.char-unreadable' : String), (cast origin : String), ({ final __callArgument11:Dynamic = { records: chars }; __callArgument11; }));
+      reportImportDiagnostic(({ final __callArgument13:Dynamic = diagnostics; __callArgument13; }), ({ final __callArgument14:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument14; }), (cast 'bmfont.char-unreadable' : String), (cast origin : String), ({ final __callArgument15:Dynamic = { records: chars }; __callArgument15; }));
     }
     if ((cast ((cast kernings : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument12:Dynamic = diagnostics; __callArgument12; }), ({ final __callArgument13:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument13; }), (cast 'bmfont.kerning-unreadable' : String), (cast origin : String), ({ final __callArgument14:Dynamic = { records: kernings }; __callArgument14; }));
+      reportImportDiagnostic(({ final __callArgument19:Dynamic = diagnostics; __callArgument19; }), ({ final __callArgument20:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument20; }), (cast 'bmfont.kerning-unreadable' : String), (cast origin : String), ({ final __callArgument21:Dynamic = { records: kernings }; __callArgument21; }));
     }
   }
 }

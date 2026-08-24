@@ -41,7 +41,7 @@ class InteractionSpatialIndex {
         var rank:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast InteractionSpatialIndex.spatialQueryOut__interactionSpatialIndex : Array<Float>), (cast i : Float));
         if ((cast ((cast rank : Float) >= (cast bestRank : Float)) : Bool)) { i++; continue; }
         var node:Null<N> = (cast flighthq._internal._StaticIndex.readArray(nodes, rank) : Null<N>);
-        if ((cast ((cast !_Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast hitTestNodeRegion(({ final __callArgument2:Dynamic = node; __callArgument2; }), (cast x : Float), (cast y : Float), (cast precise : Bool)) : Bool) : Bool)) : Bool)) {
+        if ((cast ((cast !_Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast hitTestNodeRegion(({ final __callArgument4:Dynamic = node; __callArgument4; }), (cast x : Float), (cast y : Float), (cast precise : Bool)) : Bool) : Bool)) : Bool)) {
           (best = cast (node : Dynamic));
           (bestRank = cast (rank : Dynamic));
         }
@@ -58,9 +58,9 @@ class InteractionSpatialIndex {
     index = manager.spatialIndex;
     if ((cast _Runtime.strictEquals(index, null) : Bool)) { return; }
     nodes = (cast cast ([] : Array<Dynamic>));
-    InteractionSpatialIndex.collectSpatialCandidates__interactionSpatialIndex(({ final __callArgument3:Dynamic = manager.root; __callArgument3; }), ({ final __callArgument4:Dynamic = nodes; __callArgument4; }));
+    InteractionSpatialIndex.collectSpatialCandidates__interactionSpatialIndex(({ final __callArgument6:Dynamic = manager.root; __callArgument6; }), ({ final __callArgument7:Dynamic = nodes; __callArgument7; }));
     ((cast InteractionSpatialIndex.managerCandidates__interactionSpatialIndex : flighthq._internal._WeakMap<flighthq._internal._Object, Array<NodeAny>>).set(manager, (cast nodes)));
-    clearSpatialIndex2D(({ final __callArgument5:Dynamic = index; __callArgument5; }));
+    clearSpatialIndex2D(({ final __callArgument10:Dynamic = index; __callArgument10; }));
     {
       var rank:Float = 0.0;
       while ((cast ((cast rank : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
@@ -69,7 +69,7 @@ class InteractionSpatialIndex {
         (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.minY = cast (bounds.y : Float));
         (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.maxX = cast ((bounds.x + bounds.width) : Float));
         (InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex.maxY = cast ((bounds.y + bounds.height) : Float));
-        (cast insertSpatialObject2D(({ final __callArgument6:Dynamic = index; __callArgument6; }), (cast (cast rank : SpatialObjectId) : Float), ({ final __callArgument7:Dynamic = InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex; __callArgument7; })) : Bool);
+        (cast insertSpatialObject2D(({ final __callArgument12:Dynamic = index; __callArgument12; }), (cast (cast rank : SpatialObjectId) : Float), ({ final __callArgument13:Dynamic = InteractionSpatialIndex.spatialInsertAabb__interactionSpatialIndex; __callArgument13; })) : Bool);
         rank++;
       }
     }
@@ -80,9 +80,9 @@ class InteractionSpatialIndex {
     var enabled:Bool = cast _Runtime.UNDEFINED;
     var children:Null<Array<Node<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return; }
-    state = (cast getNodeInteractionState(({ final __callArgument8:Dynamic = node; __callArgument8; })) : Null<NodeInteractionState>);
-    enabled = _Runtime.strictEquals(({ final __typedStruct9 = state; __typedStruct9 == null ? _Runtime.UNDEFINED : (cast __typedStruct9 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
-    if ((cast ((cast enabled : Bool) && (cast !_Runtime.looseEquals(({ final __typedStruct10 = state; __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Path, Rectangle>, String>, NodeAny>>; }).hitArea; }), null) : Bool)) : Bool)) {
+    state = (cast getNodeInteractionState(({ final __callArgument16:Dynamic = node; __callArgument16; })) : Null<NodeInteractionState>);
+    enabled = _Runtime.strictEquals(({ final __typedStruct18 = state; __typedStruct18 == null ? _Runtime.UNDEFINED : (cast __typedStruct18 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
+    if ((cast ((cast enabled : Bool) && (cast !_Runtime.looseEquals(({ final __typedStruct19 = state; __typedStruct19 == null ? _Runtime.UNDEFINED : (cast __typedStruct19 : { var hitArea:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Path, Rectangle>, String>, NodeAny>>; }).hitArea; }), null) : Bool)) : Bool)) {
       _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>));
       return;
     }
@@ -91,7 +91,7 @@ class InteractionSpatialIndex {
       {
         var i:Float = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
         while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-          InteractionSpatialIndex.collectSpatialCandidates__interactionSpatialIndex(({ final __callArgument11:Dynamic = flighthq._internal._StaticIndex.readArray(children, i); __callArgument11; }), ({ final __callArgument12:Dynamic = out; __callArgument12; }));
+          InteractionSpatialIndex.collectSpatialCandidates__interactionSpatialIndex(({ final __callArgument20:Dynamic = flighthq._internal._StaticIndex.readArray(children, i); __callArgument20; }), ({ final __callArgument21:Dynamic = out; __callArgument21; }));
           i--;
         }
       }

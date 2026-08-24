@@ -28,13 +28,13 @@ class UniformGrid3D {
       return cast (cast UniformGrid3D._insertIntoGrid3D__uniformGrid3D((cast grid : Dynamic), (cast id : Float), ({ final __callArgument0:Dynamic = bounds; __callArgument0; }), ({ final __callArgument1:Dynamic = 'insert'; __callArgument1; })) : Bool);
       return cast _Runtime.UNDEFINED;
     }, updateSpatialObject: function(id:Float, bounds:SpatialAabb3D):Bool {
-      return cast (cast UniformGrid3D._updateGrid3DObject__uniformGrid3D((cast grid : Dynamic), (cast id : Float), ({ final __callArgument2:Dynamic = bounds; __callArgument2; })) : Bool);
+      return cast (cast UniformGrid3D._updateGrid3DObject__uniformGrid3D((cast grid : Dynamic), (cast id : Float), ({ final __callArgument4:Dynamic = bounds; __callArgument4; })) : Bool);
       return cast _Runtime.UNDEFINED;
     }, removeSpatialObject: function(id:Float):Void {
       var wasMissing:Bool = cast _Runtime.UNDEFINED;
       wasMissing = ((cast !(cast ((cast (cast grid : UniformGrid3D__uniformGrid3D).bounds : flighthq._internal._Map<Float, SpatialAabb3D>).has(id)) : Bool) : Bool) && (cast !(cast ((cast (cast grid : UniformGrid3D__uniformGrid3D).declined : flighthq._internal._Map<Float, SpatialDeclineReason>).has(id)) : Bool) : Bool));
       UniformGrid3D._removeFromGrid3D__uniformGrid3D((cast grid : Dynamic), (cast id : Float));
-      if ((cast wasMissing : Bool)) { UniformGrid3D._reportGrid3DIndexing__uniformGrid3D((cast grid : Dynamic), (cast id : Float), ({ final __callArgument3:Dynamic = 'absent'; __callArgument3; }), ({ final __callArgument4:Dynamic = 'remove'; __callArgument4; }), ({ final __callArgument5:Dynamic = 'missing-id'; __callArgument5; }), (cast 0.0 : Float)); }
+      if ((cast wasMissing : Bool)) { UniformGrid3D._reportGrid3DIndexing__uniformGrid3D((cast grid : Dynamic), (cast id : Float), ({ final __callArgument6:Dynamic = 'absent'; __callArgument6; }), ({ final __callArgument7:Dynamic = 'remove'; __callArgument7; }), ({ final __callArgument8:Dynamic = 'missing-id'; __callArgument8; }), (cast 0.0 : Float)); }
     }, clearSpatialIndex: function():Void {
       ((cast (cast grid : UniformGrid3D__uniformGrid3D).cells : flighthq._internal._Map<String, GridCell3D__uniformGrid3D>).clear());
       ((cast (cast grid : UniformGrid3D__uniformGrid3D).bounds : flighthq._internal._Map<Float, SpatialAabb3D>).clear());
@@ -46,13 +46,13 @@ class UniformGrid3D {
       return cast (cast UniformGrid3D._explainGrid3DIndexing__uniformGrid3D((cast grid : Dynamic), (cast id : Float)) : SpatialIndexingExplanation);
       return cast _Runtime.UNDEFINED;
     }, querySpatialPairs: function(out:Array<SpatialPair>):Void {
-      UniformGrid3D._queryGrid3DPairs__uniformGrid3D((cast grid : Dynamic), ({ final __callArgument6:Dynamic = out; __callArgument6; }));
+      UniformGrid3D._queryGrid3DPairs__uniformGrid3D((cast grid : Dynamic), ({ final __callArgument12:Dynamic = out; __callArgument12; }));
     }, querySpatialRegion: function(region:SpatialAabb3D, out:Array<Float>):Void {
-      UniformGrid3D._queryGrid3DRegion__uniformGrid3D((cast grid : Dynamic), ({ final __callArgument7:Dynamic = region; __callArgument7; }), ({ final __callArgument8:Dynamic = out; __callArgument8; }));
+      UniformGrid3D._queryGrid3DRegion__uniformGrid3D((cast grid : Dynamic), ({ final __callArgument14:Dynamic = region; __callArgument14; }), ({ final __callArgument15:Dynamic = out; __callArgument15; }));
     }, querySpatialPoint: function(x:Float, y:Float, z:Float, out:Array<Float>):Void {
-      UniformGrid3D._queryGrid3DPoint__uniformGrid3D((cast grid : Dynamic), (cast x : Float), (cast y : Float), (cast z : Float), ({ final __callArgument9:Dynamic = out; __callArgument9; }));
+      UniformGrid3D._queryGrid3DPoint__uniformGrid3D((cast grid : Dynamic), (cast x : Float), (cast y : Float), (cast z : Float), ({ final __callArgument18:Dynamic = out; __callArgument18; }));
     }, querySpatialRay: function(x:Float, y:Float, z:Float, dx:Float, dy:Float, dz:Float, out:Array<Float>):Void {
-      UniformGrid3D._queryGrid3DRay__uniformGrid3D((cast grid : Dynamic), (cast x : Float), (cast y : Float), (cast z : Float), (cast dx : Float), (cast dy : Float), (cast dz : Float), ({ final __callArgument10:Dynamic = out; __callArgument10; }));
+      UniformGrid3D._queryGrid3DRay__uniformGrid3D((cast grid : Dynamic), (cast x : Float), (cast y : Float), (cast z : Float), (cast dx : Float), (cast dy : Float), (cast dz : Float), ({ final __callArgument20:Dynamic = out; __callArgument20; }));
     } };
     return cast null;
   }
@@ -75,7 +75,7 @@ class UniformGrid3D {
     if ((cast ((cast (cast grid : UniformGrid3D__uniformGrid3D).overflow : flighthq._internal._Set<Float>).has(id)) : Bool)) { return cast { bucketCount: 0.0, id: id, mode: 'overflow', reason: null }; }
     bounds = ((cast (cast grid : UniformGrid3D__uniformGrid3D).bounds : flighthq._internal._Map<Float, SpatialAabb3D>).get(id));
     if ((cast _Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { bucketCount: 0.0, id: id, mode: 'absent', reason: null }; }
-    return cast { bucketCount: (cast UniformGrid3D._spannedCellCount3D__uniformGrid3D((cast (cast grid : UniformGrid3D__uniformGrid3D).cellSize : Float), ({ final __callArgument11:Dynamic = bounds; __callArgument11; })) : Float), id: id, mode: 'cells', reason: null };
+    return cast { bucketCount: (cast UniformGrid3D._spannedCellCount3D__uniformGrid3D((cast (cast grid : UniformGrid3D__uniformGrid3D).cellSize : Float), ({ final __callArgument22:Dynamic = bounds; __callArgument22; })) : Float), id: id, mode: 'cells', reason: null };
     return cast null;
   }
 
@@ -92,12 +92,12 @@ class UniformGrid3D {
     var hadCells:Bool = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(bounds, 'minX')] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(bounds, 'minY')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(bounds, 'minZ')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(bounds, 'maxX')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(bounds, 'maxY')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(bounds, 'maxZ')] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
       ((cast (cast grid : UniformGrid3D__uniformGrid3D).declined : flighthq._internal._Map<Float, SpatialDeclineReason>).set(id, (cast 'non-finite-bounds')));
-      UniformGrid3D._reportGrid3DIndexing__uniformGrid3D((cast grid : Dynamic), (cast id : Float), ({ final __callArgument12:Dynamic = 'declined'; __callArgument12; }), ({ final __callArgument13:Dynamic = operation; __callArgument13; }), ({ final __callArgument14:Dynamic = 'non-finite-bounds'; __callArgument14; }), (cast 0.0 : Float));
+      UniformGrid3D._reportGrid3DIndexing__uniformGrid3D((cast grid : Dynamic), (cast id : Float), ({ final __callArgument24:Dynamic = 'declined'; __callArgument24; }), ({ final __callArgument25:Dynamic = operation; __callArgument25; }), ({ final __callArgument26:Dynamic = 'non-finite-bounds'; __callArgument26; }), (cast 0.0 : Float));
       return cast false;
     }
     if ((cast ((cast ((cast ((cast _Runtime.field(bounds, 'maxX') : Float) < (cast _Runtime.field(bounds, 'minX') : Float)) : Bool) || (cast ((cast _Runtime.field(bounds, 'maxY') : Float) < (cast _Runtime.field(bounds, 'minY') : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(bounds, 'maxZ') : Float) < (cast _Runtime.field(bounds, 'minZ') : Float)) : Bool)) : Bool)) {
       ((cast (cast grid : UniformGrid3D__uniformGrid3D).declined : flighthq._internal._Map<Float, SpatialDeclineReason>).set(id, (cast 'inverted-bounds')));
-      UniformGrid3D._reportGrid3DIndexing__uniformGrid3D((cast grid : Dynamic), (cast id : Float), ({ final __callArgument15:Dynamic = 'declined'; __callArgument15; }), ({ final __callArgument16:Dynamic = operation; __callArgument16; }), ({ final __callArgument17:Dynamic = 'inverted-bounds'; __callArgument17; }), (cast 0.0 : Float));
+      UniformGrid3D._reportGrid3DIndexing__uniformGrid3D((cast grid : Dynamic), (cast id : Float), ({ final __callArgument30:Dynamic = 'declined'; __callArgument30; }), ({ final __callArgument31:Dynamic = operation; __callArgument31; }), ({ final __callArgument32:Dynamic = 'inverted-bounds'; __callArgument32; }), (cast 0.0 : Float));
       return cast false;
     }
     cs = (cast grid : UniformGrid3D__uniformGrid3D).cellSize;
@@ -105,14 +105,14 @@ class UniformGrid3D {
     if ((cast !(cast _Runtime.andValue(((cast cs : Float) > (cast 0.0 : Float)), function():Dynamic return cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([cs] : Array<Dynamic>))) : Bool) : Bool)) {
       ((cast (cast grid : UniformGrid3D__uniformGrid3D).bounds : flighthq._internal._Map<Float, SpatialAabb3D>).set(id, (cast copy)));
       ((cast (cast grid : UniformGrid3D__uniformGrid3D).overflow : flighthq._internal._Set<Float>).add(id));
-      UniformGrid3D._reportGrid3DIndexing__uniformGrid3D((cast grid : Dynamic), (cast id : Float), ({ final __callArgument18:Dynamic = 'overflow'; __callArgument18; }), ({ final __callArgument19:Dynamic = operation; __callArgument19; }), ({ final __callArgument20:Dynamic = 'invalid-cell-size'; __callArgument20; }), (cast 0.0 : Float));
+      UniformGrid3D._reportGrid3DIndexing__uniformGrid3D((cast grid : Dynamic), (cast id : Float), ({ final __callArgument36:Dynamic = 'overflow'; __callArgument36; }), ({ final __callArgument37:Dynamic = operation; __callArgument37; }), ({ final __callArgument38:Dynamic = 'invalid-cell-size'; __callArgument38; }), (cast 0.0 : Float));
       return cast true;
     }
-    spanned = (cast UniformGrid3D._spannedCellCount3D__uniformGrid3D((cast cs : Float), ({ final __callArgument21:Dynamic = copy; __callArgument21; })) : Float);
+    spanned = (cast UniformGrid3D._spannedCellCount3D__uniformGrid3D((cast cs : Float), ({ final __callArgument42:Dynamic = copy; __callArgument42; })) : Float);
     if ((cast !(cast _Runtime.compare(spanned, MAX_INDEXED_CELLS_PER_OBJECT, '<=') : Bool) : Bool)) {
       ((cast (cast grid : UniformGrid3D__uniformGrid3D).bounds : flighthq._internal._Map<Float, SpatialAabb3D>).set(id, (cast copy)));
       ((cast (cast grid : UniformGrid3D__uniformGrid3D).overflow : flighthq._internal._Set<Float>).add(id));
-      UniformGrid3D._reportGrid3DIndexing__uniformGrid3D((cast grid : Dynamic), (cast id : Float), ({ final __callArgument22:Dynamic = 'overflow'; __callArgument22; }), ({ final __callArgument23:Dynamic = operation; __callArgument23; }), ({ final __callArgument24:Dynamic = null; __callArgument24; }), (cast spanned : Float));
+      UniformGrid3D._reportGrid3DIndexing__uniformGrid3D((cast grid : Dynamic), (cast id : Float), ({ final __callArgument44:Dynamic = 'overflow'; __callArgument44; }), ({ final __callArgument45:Dynamic = operation; __callArgument45; }), ({ final __callArgument46:Dynamic = null; __callArgument46; }), (cast spanned : Float));
       return cast true;
     }
     cx0 = (cast UniformGrid3D._cellIndex3D__uniformGrid3D((cast (cast copy : { var minX:Float; var minY:Float; var minZ:Float; var maxX:Float; var maxY:Float; var maxZ:Float; }).minX : Float), (cast cs : Float)) : Float);
@@ -222,8 +222,8 @@ class UniformGrid3D {
         var otherBounds:SpatialAabb3D = flighthq._internal._StaticIndex.readArray(__iteration0, 1.0);
         if ((cast _Runtime.strictEquals(otherId, id) : Bool)) { continue; }
         if ((cast ((cast ((cast (cast grid : UniformGrid3D__uniformGrid3D).overflow : flighthq._internal._Set<Float>).has(otherId)) : Bool) && (cast ((cast otherId : Float) < (cast id : Float)) : Bool)) : Bool)) { continue; }
-        if ((cast !(cast (cast UniformGrid3D._isSpatialAabb3DOverlapping__uniformGrid3D(({ final __callArgument29:Dynamic = bounds; __callArgument29; }), ({ final __callArgument30:Dynamic = otherBounds; __callArgument30; })) : Bool) : Bool) : Bool)) { continue; }
-        (written = cast (((cast ((cast id : Float) < (cast otherId : Float)) : Bool) ? (cast (cast UniformGrid3D._writeGrid3DPair__uniformGrid3D(({ final __callArgument31:Dynamic = out; __callArgument31; }), (cast written : Float), (cast id : Float), (cast otherId : Float)) : Float) : Dynamic) : (cast (cast UniformGrid3D._writeGrid3DPair__uniformGrid3D(({ final __callArgument32:Dynamic = out; __callArgument32; }), (cast written : Float), (cast otherId : Float), (cast id : Float)) : Float) : Dynamic)) : Dynamic));
+        if ((cast !(cast (cast UniformGrid3D._isSpatialAabb3DOverlapping__uniformGrid3D(({ final __callArgument54:Dynamic = bounds; __callArgument54; }), ({ final __callArgument55:Dynamic = otherBounds; __callArgument55; })) : Bool) : Bool) : Bool)) { continue; }
+        (written = cast (((cast ((cast id : Float) < (cast otherId : Float)) : Bool) ? (cast (cast UniformGrid3D._writeGrid3DPair__uniformGrid3D(({ final __callArgument58:Dynamic = out; __callArgument58; }), (cast written : Float), (cast id : Float), (cast otherId : Float)) : Float) : Dynamic) : (cast (cast UniformGrid3D._writeGrid3DPair__uniformGrid3D(({ final __callArgument60:Dynamic = out; __callArgument60; }), (cast written : Float), (cast otherId : Float), (cast id : Float)) : Float) : Dynamic)) : Dynamic));
       }
     }
     return cast written;
@@ -264,7 +264,7 @@ class UniformGrid3D {
               var canonicalY:Float = HxMath.max((cast UniformGrid3D._cellIndex3D__uniformGrid3D((cast (cast ab : SpatialAabb3D).minY : Float), (cast cs : Float)) : Float), (cast UniformGrid3D._cellIndex3D__uniformGrid3D((cast (cast bb : SpatialAabb3D).minY : Float), (cast cs : Float)) : Float));
               var canonicalZ:Float = HxMath.max((cast UniformGrid3D._cellIndex3D__uniformGrid3D((cast (cast ab : SpatialAabb3D).minZ : Float), (cast cs : Float)) : Float), (cast UniformGrid3D._cellIndex3D__uniformGrid3D((cast (cast bb : SpatialAabb3D).minZ : Float), (cast cs : Float)) : Float));
               if ((cast ((cast ((cast _Runtime.strictEquals((cast cell : GridCell3D__uniformGrid3D).cx, canonicalX) : Bool) && (cast _Runtime.strictEquals((cast cell : GridCell3D__uniformGrid3D).cy, canonicalY) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast cell : GridCell3D__uniformGrid3D).cz, canonicalZ) : Bool)) : Bool)) {
-                (written = cast ((cast UniformGrid3D._writeGrid3DPair__uniformGrid3D(({ final __callArgument37:Dynamic = out; __callArgument37; }), (cast written : Float), (cast a : Float), (cast b : Float)) : Float) : Dynamic));
+                (written = cast ((cast UniformGrid3D._writeGrid3DPair__uniformGrid3D(({ final __callArgument66:Dynamic = out; __callArgument66; }), (cast written : Float), (cast a : Float), (cast b : Float)) : Float) : Dynamic));
               }
               j++;
             }
@@ -273,7 +273,7 @@ class UniformGrid3D {
         }
       }
     }
-    if ((cast !_Runtime.strictEquals((cast (cast grid : UniformGrid3D__uniformGrid3D).overflow : flighthq._internal._Set<Float>).size, 0.0) : Bool)) { (written = cast ((cast UniformGrid3D._queryGrid3DOverflowPairs__uniformGrid3D((cast grid : Dynamic), ({ final __callArgument38:Dynamic = out; __callArgument38; }), (cast written : Float)) : Float) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals((cast (cast grid : UniformGrid3D__uniformGrid3D).overflow : flighthq._internal._Set<Float>).size, 0.0) : Bool)) { (written = cast ((cast UniformGrid3D._queryGrid3DOverflowPairs__uniformGrid3D((cast grid : Dynamic), ({ final __callArgument68:Dynamic = out; __callArgument68; }), (cast written : Float)) : Float) : Dynamic)); }
     _Runtime.setLength(out, written);
   }
 
@@ -297,12 +297,12 @@ class UniformGrid3D {
     if ((cast !_Runtime.strictEquals(cell, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       for (id in _Runtime.iterable((cast cell : GridCell3D__uniformGrid3D).ids)) {
         var bounds:Null<SpatialAabb3D> = ((cast (cast grid : UniformGrid3D__uniformGrid3D).bounds : flighthq._internal._Map<Float, SpatialAabb3D>).get(id));
-        if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast UniformGrid3D._isSpatialAabb3DContainsPoint__uniformGrid3D(({ final __callArgument41:Dynamic = bounds; __callArgument41; }), (cast x : Float), (cast y : Float), (cast z : Float)) : Bool) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
+        if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast UniformGrid3D._isSpatialAabb3DContainsPoint__uniformGrid3D(({ final __callArgument72:Dynamic = bounds; __callArgument72; }), (cast x : Float), (cast y : Float), (cast z : Float)) : Bool) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
       }
     }
     for (id in _Runtime.iterable((cast grid : UniformGrid3D__uniformGrid3D).overflow)) {
       var bounds:Null<SpatialAabb3D> = ((cast (cast grid : UniformGrid3D__uniformGrid3D).bounds : flighthq._internal._Map<Float, SpatialAabb3D>).get(id));
-      if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast UniformGrid3D._isSpatialAabb3DContainsPoint__uniformGrid3D(({ final __callArgument44:Dynamic = bounds; __callArgument44; }), (cast x : Float), (cast y : Float), (cast z : Float)) : Bool) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
+      if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast UniformGrid3D._isSpatialAabb3DContainsPoint__uniformGrid3D(({ final __callArgument76:Dynamic = bounds; __callArgument76; }), (cast x : Float), (cast y : Float), (cast z : Float)) : Bool) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
     }
   }
 
@@ -329,16 +329,16 @@ class UniformGrid3D {
     seen = (cast grid : UniformGrid3D__uniformGrid3D).seen;
     ((cast seen : flighthq._internal._Set<Float>).clear());
     if ((cast ((cast ((cast _Runtime.strictEquals(dx, 0.0) : Bool) && (cast _Runtime.strictEquals(dy, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(dz, 0.0) : Bool)) : Bool)) {
-      UniformGrid3D._queryGrid3DPoint__uniformGrid3D((cast grid : Dynamic), (cast ox : Float), (cast oy : Float), (cast oz : Float), ({ final __callArgument45:Dynamic = out; __callArgument45; }));
+      UniformGrid3D._queryGrid3DPoint__uniformGrid3D((cast grid : Dynamic), (cast ox : Float), (cast oy : Float), (cast oz : Float), ({ final __callArgument78:Dynamic = out; __callArgument78; }));
       return;
     }
     for (id in _Runtime.iterable((cast grid : UniformGrid3D__uniformGrid3D).overflow)) {
       var bounds:Null<SpatialAabb3D> = ((cast (cast grid : UniformGrid3D__uniformGrid3D).bounds : flighthq._internal._Map<Float, SpatialAabb3D>).get(id));
-      if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast (cast UniformGrid3D._rayBox3DEntryT__uniformGrid3D((cast ox : Float), (cast oy : Float), (cast oz : Float), (cast dx : Float), (cast dy : Float), (cast dz : Float), ({ final __callArgument48:Dynamic = bounds; __callArgument48; })) : Float) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
+      if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast (cast UniformGrid3D._rayBox3DEntryT__uniformGrid3D((cast ox : Float), (cast oy : Float), (cast oz : Float), (cast dx : Float), (cast dy : Float), (cast dz : Float), ({ final __callArgument82:Dynamic = bounds; __callArgument82; })) : Float) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
     }
     if ((cast _Runtime.strictEquals((cast (cast grid : UniformGrid3D__uniformGrid3D).cells : flighthq._internal._Map<String, GridCell3D__uniformGrid3D>).size, 0.0) : Bool)) { return; }
     rangeBounds = (cast { minX: ((cast grid : UniformGrid3D__uniformGrid3D).minCellX * cs), minY: ((cast grid : UniformGrid3D__uniformGrid3D).minCellY * cs), minZ: ((cast grid : UniformGrid3D__uniformGrid3D).minCellZ * cs), maxX: (((cast grid : UniformGrid3D__uniformGrid3D).maxCellX + 1.0) * cs), maxY: (((cast grid : UniformGrid3D__uniformGrid3D).maxCellY + 1.0) * cs), maxZ: (((cast grid : UniformGrid3D__uniformGrid3D).maxCellZ + 1.0) * cs) });
-    tEnter = (cast UniformGrid3D._rayBox3DEntryT__uniformGrid3D((cast ox : Float), (cast oy : Float), (cast oz : Float), (cast dx : Float), (cast dy : Float), (cast dz : Float), ({ final __callArgument49:Dynamic = rangeBounds; __callArgument49; })) : Float);
+    tEnter = (cast UniformGrid3D._rayBox3DEntryT__uniformGrid3D((cast ox : Float), (cast oy : Float), (cast oz : Float), (cast dx : Float), (cast dy : Float), (cast dz : Float), ({ final __callArgument84:Dynamic = rangeBounds; __callArgument84; })) : Float);
     if ((cast ((cast tEnter : Float) < (cast 0.0 : Float)) : Bool)) { return; }
     cx = (cast UniformGrid3D._cellIndex3D__uniformGrid3D((cast (ox + (tEnter * dx)) : Float), (cast cs : Float)) : Float);
     cy = (cast UniformGrid3D._cellIndex3D__uniformGrid3D((cast (oy + (tEnter * dy)) : Float), (cast cs : Float)) : Float);
@@ -395,7 +395,7 @@ class UniformGrid3D {
     }
     for (id in _Runtime.iterable(seen)) {
       var bounds:Null<SpatialAabb3D> = ((cast (cast grid : UniformGrid3D__uniformGrid3D).bounds : flighthq._internal._Map<Float, SpatialAabb3D>).get(id));
-      if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast (cast UniformGrid3D._rayBox3DEntryT__uniformGrid3D((cast ox : Float), (cast oy : Float), (cast oz : Float), (cast dx : Float), (cast dy : Float), (cast dz : Float), ({ final __callArgument54:Dynamic = bounds; __callArgument54; })) : Float) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
+      if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast (cast UniformGrid3D._rayBox3DEntryT__uniformGrid3D((cast ox : Float), (cast oy : Float), (cast oz : Float), (cast dx : Float), (cast dy : Float), (cast dz : Float), ({ final __callArgument90:Dynamic = bounds; __callArgument90; })) : Float) : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
     }
   }
 
@@ -412,11 +412,11 @@ class UniformGrid3D {
     cs = (cast grid : UniformGrid3D__uniformGrid3D).cellSize;
     seen = (cast grid : UniformGrid3D__uniformGrid3D).seen;
     ((cast seen : flighthq._internal._Set<Float>).clear());
-    if ((cast !(cast _Runtime.compare((cast UniformGrid3D._spannedCellCount3D__uniformGrid3D((cast cs : Float), ({ final __callArgument55:Dynamic = region; __callArgument55; })) : Float), (cast (cast grid : UniformGrid3D__uniformGrid3D).cells : flighthq._internal._Map<String, GridCell3D__uniformGrid3D>).size, '<=') : Bool) : Bool)) {
+    if ((cast !(cast _Runtime.compare((cast UniformGrid3D._spannedCellCount3D__uniformGrid3D((cast cs : Float), ({ final __callArgument92:Dynamic = region; __callArgument92; })) : Float), (cast (cast grid : UniformGrid3D__uniformGrid3D).cells : flighthq._internal._Map<String, GridCell3D__uniformGrid3D>).size, '<=') : Bool) : Bool)) {
       for (__iteration1 in _Runtime.iterable((cast grid : UniformGrid3D__uniformGrid3D).bounds)) {
         var id:Float = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
         var bounds:SpatialAabb3D = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
-        if ((cast (cast UniformGrid3D._isSpatialAabb3DOverlapping__uniformGrid3D(({ final __callArgument58:Dynamic = bounds; __callArgument58; }), ({ final __callArgument59:Dynamic = region; __callArgument59; })) : Bool) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
+        if ((cast (cast UniformGrid3D._isSpatialAabb3DOverlapping__uniformGrid3D(({ final __callArgument96:Dynamic = bounds; __callArgument96; }), ({ final __callArgument97:Dynamic = region; __callArgument97; })) : Bool) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
       }
       return;
     }
@@ -441,7 +441,7 @@ class UniformGrid3D {
                   if ((cast ((cast seen : flighthq._internal._Set<Float>).has(id)) : Bool)) { continue; }
                   ((cast seen : flighthq._internal._Set<Float>).add(id));
                   var bounds:Null<SpatialAabb3D> = ((cast (cast grid : UniformGrid3D__uniformGrid3D).bounds : flighthq._internal._Map<Float, SpatialAabb3D>).get(id));
-                  if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast UniformGrid3D._isSpatialAabb3DOverlapping__uniformGrid3D(({ final __callArgument62:Dynamic = bounds; __callArgument62; }), ({ final __callArgument63:Dynamic = region; __callArgument63; })) : Bool) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
+                  if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast UniformGrid3D._isSpatialAabb3DOverlapping__uniformGrid3D(({ final __callArgument102:Dynamic = bounds; __callArgument102; }), ({ final __callArgument103:Dynamic = region; __callArgument103; })) : Bool) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
                 }
                 cx++;
               }
@@ -454,7 +454,7 @@ class UniformGrid3D {
     }
     for (id in _Runtime.iterable((cast grid : UniformGrid3D__uniformGrid3D).overflow)) {
       var bounds:Null<SpatialAabb3D> = ((cast (cast grid : UniformGrid3D__uniformGrid3D).bounds : flighthq._internal._Map<Float, SpatialAabb3D>).get(id));
-      if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast UniformGrid3D._isSpatialAabb3DOverlapping__uniformGrid3D(({ final __callArgument66:Dynamic = bounds; __callArgument66; }), ({ final __callArgument67:Dynamic = region; __callArgument67; })) : Bool) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
+      if ((cast ((cast !_Runtime.strictEquals(bounds, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast (cast UniformGrid3D._isSpatialAabb3DOverlapping__uniformGrid3D(({ final __callArgument108:Dynamic = bounds; __callArgument108; }), ({ final __callArgument109:Dynamic = region; __callArgument109; })) : Bool) : Bool)) : Bool)) { _Runtime.callProperty(out, 'push', cast ([id] : Array<Dynamic>)); }
     }
   }
 
@@ -560,7 +560,7 @@ class UniformGrid3D {
   }
 
   public static function _reportGrid3DIndexing__uniformGrid3D(grid:UniformGrid3D__uniformGrid3D, id:SpatialObjectId, mode:SpatialIndexingMode, operation:SpatialIndexingOperation, reason:Null<SpatialIndexingReason>, wouldOccupyBucketCount:Float):Void {
-    reportSpatialIndexing(({ final __callArgument68:Dynamic = { cellSize: _Runtime.field(grid, 'cellSize'), id: id, mode: mode, operation: operation, reason: reason, wouldOccupyBucketCount: wouldOccupyBucketCount }; __callArgument68; }));
+    reportSpatialIndexing(({ final __callArgument112:Dynamic = { cellSize: _Runtime.field(grid, 'cellSize'), id: id, mode: mode, operation: operation, reason: reason, wouldOccupyBucketCount: wouldOccupyBucketCount }; __callArgument112; }));
   }
 
   public static function _spannedCellCount3D__uniformGrid3D(cellSize:Float, aabb:SpatialAabb3D):Float {
@@ -588,7 +588,7 @@ class UniformGrid3D {
     previous = ((cast (cast grid : UniformGrid3D__uniformGrid3D).bounds : flighthq._internal._Map<Float, SpatialAabb3D>).get(id));
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(previous, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast ((cast (cast grid : UniformGrid3D__uniformGrid3D).overflow : flighthq._internal._Set<Float>).has(id)) : Bool) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(bounds, 'minX')] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(bounds, 'minY')] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(bounds, 'minZ')] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(bounds, 'maxX')] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(bounds, 'maxY')] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(bounds, 'maxZ')] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast _Runtime.field(bounds, 'minX') : Float) <= (cast _Runtime.field(bounds, 'maxX') : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(bounds, 'minY') : Float) <= (cast _Runtime.field(bounds, 'maxY') : Float)) : Bool)) : Bool) && (cast ((cast _Runtime.field(bounds, 'minZ') : Float) <= (cast _Runtime.field(bounds, 'maxZ') : Float)) : Bool)) : Bool)) {
       var cs:Float = (cast grid : UniformGrid3D__uniformGrid3D).cellSize;
-      var spanned:Float = (cast UniformGrid3D._spannedCellCount3D__uniformGrid3D((cast cs : Float), ({ final __callArgument69:Dynamic = bounds; __callArgument69; })) : Float);
+      var spanned:Float = (cast UniformGrid3D._spannedCellCount3D__uniformGrid3D((cast cs : Float), ({ final __callArgument114:Dynamic = bounds; __callArgument114; })) : Float);
       if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast spanned : Float) <= (cast MAX_INDEXED_CELLS_PER_OBJECT : Float)) : Bool) && (cast _Runtime.strictEquals((cast UniformGrid3D._cellIndex3D__uniformGrid3D((cast (cast previous : SpatialAabb3D).minX : Float), (cast cs : Float)) : Float), (cast UniformGrid3D._cellIndex3D__uniformGrid3D((cast _Runtime.field(bounds, 'minX') : Float), (cast cs : Float)) : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast UniformGrid3D._cellIndex3D__uniformGrid3D((cast (cast previous : SpatialAabb3D).minY : Float), (cast cs : Float)) : Float), (cast UniformGrid3D._cellIndex3D__uniformGrid3D((cast _Runtime.field(bounds, 'minY') : Float), (cast cs : Float)) : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast UniformGrid3D._cellIndex3D__uniformGrid3D((cast (cast previous : SpatialAabb3D).minZ : Float), (cast cs : Float)) : Float), (cast UniformGrid3D._cellIndex3D__uniformGrid3D((cast _Runtime.field(bounds, 'minZ') : Float), (cast cs : Float)) : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast UniformGrid3D._cellIndex3D__uniformGrid3D((cast (cast previous : SpatialAabb3D).maxX : Float), (cast cs : Float)) : Float), (cast UniformGrid3D._cellIndex3D__uniformGrid3D((cast _Runtime.field(bounds, 'maxX') : Float), (cast cs : Float)) : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast UniformGrid3D._cellIndex3D__uniformGrid3D((cast (cast previous : SpatialAabb3D).maxY : Float), (cast cs : Float)) : Float), (cast UniformGrid3D._cellIndex3D__uniformGrid3D((cast _Runtime.field(bounds, 'maxY') : Float), (cast cs : Float)) : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast UniformGrid3D._cellIndex3D__uniformGrid3D((cast (cast previous : SpatialAabb3D).maxZ : Float), (cast cs : Float)) : Float), (cast UniformGrid3D._cellIndex3D__uniformGrid3D((cast _Runtime.field(bounds, 'maxZ') : Float), (cast cs : Float)) : Float)) : Bool)) : Bool)) {
         ((cast previous : SpatialAabb3D).minX = _Runtime.field(bounds, 'minX'));
         ((cast previous : SpatialAabb3D).minY = _Runtime.field(bounds, 'minY'));
@@ -600,10 +600,10 @@ class UniformGrid3D {
       }
     }
     UniformGrid3D._removeFromGrid3D__uniformGrid3D((cast grid : Dynamic), (cast id : Float));
-    inserted = (cast UniformGrid3D._insertIntoGrid3D__uniformGrid3D((cast grid : Dynamic), (cast id : Float), ({ final __callArgument70:Dynamic = bounds; __callArgument70; }), ({ final __callArgument71:Dynamic = 'update'; __callArgument71; })) : Bool);
+    inserted = (cast UniformGrid3D._insertIntoGrid3D__uniformGrid3D((cast grid : Dynamic), (cast id : Float), ({ final __callArgument116:Dynamic = bounds; __callArgument116; }), ({ final __callArgument117:Dynamic = 'update'; __callArgument117; })) : Bool);
     if ((cast wasMissing : Bool)) {
       var explanation:SpatialIndexingExplanation = (cast UniformGrid3D._explainGrid3DIndexing__uniformGrid3D((cast grid : Dynamic), (cast id : Float)) : SpatialIndexingExplanation);
-      UniformGrid3D._reportGrid3DIndexing__uniformGrid3D((cast grid : Dynamic), (cast id : Float), (cast explanation : SpatialIndexingExplanation).mode, ({ final __callArgument72:Dynamic = 'update'; __callArgument72; }), ({ final __callArgument73:Dynamic = 'missing-id'; __callArgument73; }), (cast 0.0 : Float));
+      UniformGrid3D._reportGrid3DIndexing__uniformGrid3D((cast grid : Dynamic), (cast id : Float), (cast explanation : SpatialIndexingExplanation).mode, ({ final __callArgument120:Dynamic = 'update'; __callArgument120; }), ({ final __callArgument121:Dynamic = 'missing-id'; __callArgument121; }), (cast 0.0 : Float));
     }
     return cast inserted;
     return cast null;

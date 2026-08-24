@@ -71,7 +71,7 @@ class RiveScene2DDocument {
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast (cast getNodeChildCount((cast node : Dynamic)) : Float) : Float)) : Bool)) {
-        RiveScene2DDocument.collectRiveSlots__riveScene2DDocument((cast getNodeChildAt((cast node : Dynamic), (cast index : Float)) : Node2D), ({ final __callArgument5:Dynamic = artboards; __callArgument5; }), ({ final __callArgument6:Dynamic = slots; __callArgument6; }));
+        RiveScene2DDocument.collectRiveSlots__riveScene2DDocument((cast getNodeChildAt((cast node : Dynamic), (cast index : Float)) : Node2D), ({ final __callArgument8:Dynamic = artboards; __callArgument8; }), ({ final __callArgument9:Dynamic = slots; __callArgument9; }));
         index++;
       }
     }
@@ -85,8 +85,8 @@ class RiveScene2DDocument {
       while ((cast ((cast index : Float) < (cast _Runtime.field(imported.assets, 'length') : Float)) : Bool)) {
         var asset:RiveFileAsset = flighthq._internal._StaticIndex.readArray(imported.assets, index);
         if ((cast ((cast !_Runtime.strictEquals(asset.kind, RiveScene2DDocument.RIVE_IMAGE_ASSET_KIND__riveScene2DDocument) : Bool) || (cast _Runtime.strictEquals(asset.bytes, null) : Bool)) : Bool)) { index++; continue; }
-        var reference:EmbeddedImageResourceReference = (cast createEmbeddedImageResourceReference(asset.bytes, (cast RiveScene2DDocument.toRiveMimeType__riveScene2DDocument(asset.bytes, (cast index : Float), ({ final __callArgument7:Dynamic = diagnostics; __callArgument7; })) : Null<String>), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : EmbeddedImageResourceReference);
-        (reference.textures = cast ((cast RiveScene2DDocument.collectRiveTexturesForAsset__riveScene2DDocument(({ final __callArgument8:Dynamic = imported; __callArgument8; }), (cast index : Float)) : Array<Texture>) : Null<Array<Texture>>));
+        var reference:EmbeddedImageResourceReference = (cast (#if js _Runtime.callValue(createEmbeddedImageResourceReference, cast ([asset.bytes, (cast RiveScene2DDocument.toRiveMimeType__riveScene2DDocument(asset.bytes, (cast index : Float), ({ final __callArgument14:Dynamic = diagnostics; __callArgument14; })) : Null<String>)] : Array<Dynamic>)) #else createEmbeddedImageResourceReference(asset.bytes, (cast RiveScene2DDocument.toRiveMimeType__riveScene2DDocument(asset.bytes, (cast index : Float), ({ final __callArgument12:Dynamic = diagnostics; __callArgument12; })) : Null<String>), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : EmbeddedImageResourceReference);
+        (reference.textures = cast ((cast RiveScene2DDocument.collectRiveTexturesForAsset__riveScene2DDocument(({ final __callArgument16:Dynamic = imported; __callArgument16; }), (cast index : Float)) : Array<Texture>) : Null<Array<Texture>>));
         _Runtime.callProperty(references, 'push', cast ([reference] : Array<Dynamic>));
         index++;
       }
@@ -112,7 +112,7 @@ class RiveScene2DDocument {
           }
         }
       });
-      walk(({ final __callArgument11:Dynamic = (cast artboard : RiveArtboardImport).root; __callArgument11; }));
+      walk(({ final __callArgument20:Dynamic = (cast artboard : RiveArtboardImport).root; __callArgument20; }));
     }
     return cast textures;
     return cast null;
@@ -122,13 +122,13 @@ class RiveScene2DDocument {
   public static function createScene2DDocumentFromRiveDocument(source:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<RiveScene2DDocumentResult> {
     var imported:RiveDocumentImportResult = cast _Runtime.UNDEFINED;
     var root:DisplayObject = cast _Runtime.UNDEFINED;
-    imported = (cast createScene2DFromRiveDocument(({ final __callArgument12:Dynamic = source; __callArgument12; }), ({ final __callArgument13:Dynamic = diagnostics; __callArgument13; })) : RiveDocumentImportResult);
+    imported = (cast createScene2DFromRiveDocument(({ final __callArgument22:Dynamic = source; __callArgument22; }), ({ final __callArgument23:Dynamic = diagnostics; __callArgument23; })) : RiveDocumentImportResult);
     if ((cast _Runtime.strictEquals(_Runtime.field(imported.artboards, 'length'), 0.0) : Bool)) { return cast null; }
     root = (cast createDisplayObject((cast { name: 'Rive' } : Dynamic)) : DisplayObject);
     for (artboard in _Runtime.iterable(imported.artboards)) {
       (cast addNodeChild((cast root : Dynamic), (cast (cast artboard : RiveArtboardImport).root : Dynamic)) : NodeOf<Node2DTraits>);
     }
-    return cast { imageResources: (cast RiveScene2DDocument.createRiveImageResources__riveScene2DDocument(({ final __callArgument16:Dynamic = imported; __callArgument16; }), ({ final __callArgument17:Dynamic = diagnostics; __callArgument17; })) : Array<ImageResourceReference>), imported: imported, root: root, slots: (cast RiveScene2DDocument.createRiveSlots__riveScene2DDocument(imported.artboards) : Array<Scene2DSlotReference>) };
+    return cast { imageResources: (cast RiveScene2DDocument.createRiveImageResources__riveScene2DDocument(({ final __callArgument28:Dynamic = imported; __callArgument28; }), ({ final __callArgument29:Dynamic = diagnostics; __callArgument29; })) : Array<ImageResourceReference>), imported: imported, root: root, slots: (cast RiveScene2DDocument.createRiveSlots__riveScene2DDocument(imported.artboards) : Array<Scene2DSlotReference>) };
     return cast null;
   }
 
@@ -141,7 +141,7 @@ class RiveScene2DDocument {
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 0.0 : Float)), 137.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 1.0 : Float)), 80.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 2.0 : Float)), 78.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 3.0 : Float)), 71.0) : Bool)) : Bool)) { return cast 'image/png'; }
     if ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 0.0 : Float)), 255.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 1.0 : Float)), 216.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 2.0 : Float)), 255.0) : Bool)) : Bool)) { return cast 'image/jpeg'; }
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 0.0 : Float)), 82.0) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 1.0 : Float)), 73.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 2.0 : Float)), 70.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast 3.0 : Float)), 70.0) : Bool)) : Bool)) { return cast 'image/webp'; }
-    reportImportDiagnostic(({ final __callArgument18:Dynamic = diagnostics; __callArgument18; }), ({ final __callArgument19:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument19; }), (cast 'rive.image-mime-type-undetected' : String), (cast 'toRiveMimeType' : String), ({ final __callArgument20:Dynamic = { assetIndex: assetIndex }; __callArgument20; }));
+    reportImportDiagnostic(({ final __callArgument32:Dynamic = diagnostics; __callArgument32; }), ({ final __callArgument33:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument33; }), (cast 'rive.image-mime-type-undetected' : String), (cast 'toRiveMimeType' : String), ({ final __callArgument34:Dynamic = { assetIndex: assetIndex }; __callArgument34; }));
     return cast null;
     return cast null;
   }

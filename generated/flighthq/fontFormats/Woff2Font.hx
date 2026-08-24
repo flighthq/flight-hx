@@ -40,7 +40,7 @@ class Woff2Font {
     totalCompressedSize = _Runtime.callProperty(view, 'getUint32', cast ([20.0] : Array<Dynamic>));
     streamEnd = ((cast directory : Woff2TableDirectory).streamStart + totalCompressedSize);
     if ((cast ((cast streamEnd : Float) > (cast _Runtime.field(bytes, 'byteLength') : Float)) : Bool)) { return cast null; }
-    stream = (cast (cast decompress : flighthq._internal._UInt8Array->Float->CompressionFraming->Null<flighthq._internal._UInt8Array>)((cast bytes : flighthq._internal._UInt8Array).subarray(Std.int((cast directory : Woff2TableDirectory).streamStart), Std.int(streamEnd)), (cast (cast directory : Woff2TableDirectory).totalUncompressedLength : Float), ({ final __callArgument1:Dynamic = (cast CompressionFramingValue : { var Raw:String; var Rfc1950:String; }).Raw; __callArgument1; })) : Null<flighthq._internal._UInt8Array>);
+    stream = (cast (cast decompress : flighthq._internal._UInt8Array->Float->CompressionFraming->Null<flighthq._internal._UInt8Array>)((cast bytes : flighthq._internal._UInt8Array).subarray(Std.int((cast directory : Woff2TableDirectory).streamStart), Std.int(streamEnd)), (cast (cast directory : Woff2TableDirectory).totalUncompressedLength : Float), ({ final __callArgument2:Dynamic = (cast CompressionFramingValue : { var Raw:String; var Rfc1950:String; }).Raw; __callArgument2; })) : Null<flighthq._internal._UInt8Array>);
     if ((cast ((cast _Runtime.strictEquals(stream, null) : Bool) || (cast ((cast _Runtime.field(stream, 'byteLength') : Float) < (cast (cast directory : Woff2TableDirectory).totalUncompressedLength : Float)) : Bool)) : Bool)) { return cast null; }
     raw = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     at = 0.0;
@@ -58,11 +58,11 @@ class Woff2Font {
         continue;
       }
       if ((cast _Runtime.strictEquals(reverseTransform, null) : Bool)) { return cast null; }
-      var restored:Null<flighthq._internal._UInt8Array> = (cast (cast reverseTransform : String->flighthq._internal._UInt8Array->flighthq._internal._Map<String, flighthq._internal._UInt8Array>->Null<flighthq._internal._UInt8Array>)((cast entry.tag : String), ({ final __callArgument6:Dynamic = stored; __callArgument6; }), ({ final __callArgument7:Dynamic = raw; __callArgument7; })) : Null<flighthq._internal._UInt8Array>);
+      var restored:Null<flighthq._internal._UInt8Array> = (cast (cast reverseTransform : String->flighthq._internal._UInt8Array->flighthq._internal._Map<String, flighthq._internal._UInt8Array>->Null<flighthq._internal._UInt8Array>)((cast entry.tag : String), ({ final __callArgument8:Dynamic = stored; __callArgument8; }), ({ final __callArgument9:Dynamic = raw; __callArgument9; })) : Null<flighthq._internal._UInt8Array>);
       if ((cast _Runtime.strictEquals(restored, null) : Bool)) { return cast null; }
       _Runtime.callProperty(tables, 'push', cast ([{ data: restored, tag: (cast packSfntTag((cast entry.tag : String)) : Float) }] : Array<Dynamic>));
     }
-    return cast (cast assembleSfntFont((cast flavor : Float), ({ final __callArgument8:Dynamic = tables; __callArgument8; })) : flighthq._internal._UInt8Array);
+    return cast (cast assembleSfntFont((cast flavor : Float), ({ final __callArgument12:Dynamic = tables; __callArgument12; })) : flighthq._internal._UInt8Array);
     return cast null;
   }
 
@@ -96,13 +96,13 @@ class Woff2Font {
         } else {
           (tag = cast (flighthq._internal._StaticIndex.readArray(Woff2Font.WOFF2_KNOWN_TAGS__woff2Font, tagIndex) : Dynamic));
         }
-        var originalLength:Float = (cast Woff2Font.readWoff2Base128__woff2Font((cast view : flighthq._internal._Any), ({ final __callArgument9:Dynamic = cursor; __callArgument9; }), (cast _Runtime.field(bytes, 'byteLength') : Float)) : Float);
+        var originalLength:Float = (cast Woff2Font.readWoff2Base128__woff2Font((cast view : flighthq._internal._Any), ({ final __callArgument14:Dynamic = cursor; __callArgument14; }), (cast _Runtime.field(bytes, 'byteLength') : Float)) : Float);
         if ((cast ((cast originalLength : Float) < (cast 0.0 : Float)) : Bool)) { return cast null; }
         var isGlyphPair:Bool = ((cast _Runtime.strictEquals(tag, 'glyf') : Bool) || (cast _Runtime.strictEquals(tag, 'loca') : Bool));
         var transformed:Bool = ((cast isGlyphPair : Bool) ? (cast !_Runtime.strictEquals(transformVersion, 3.0) : Dynamic) : (cast !_Runtime.strictEquals(transformVersion, 0.0) : Dynamic));
         var transformLength:Float = originalLength;
         if ((cast transformed : Bool)) {
-          (transformLength = cast ((cast Woff2Font.readWoff2Base128__woff2Font((cast view : flighthq._internal._Any), ({ final __callArgument10:Dynamic = cursor; __callArgument10; }), (cast _Runtime.field(bytes, 'byteLength') : Float)) : Float) : Dynamic));
+          (transformLength = cast ((cast Woff2Font.readWoff2Base128__woff2Font((cast view : flighthq._internal._Any), ({ final __callArgument16:Dynamic = cursor; __callArgument16; }), (cast _Runtime.field(bytes, 'byteLength') : Float)) : Float) : Dynamic));
           if ((cast ((cast transformLength : Float) < (cast 0.0 : Float)) : Bool)) { return cast null; }
         }
         _Runtime.callProperty(entries, 'push', cast ([{ originalLength: originalLength, tag: tag, transformLength: transformLength, transformVersion: transformVersion, transformed: transformed }] : Array<Dynamic>));

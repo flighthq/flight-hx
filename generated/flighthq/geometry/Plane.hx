@@ -23,7 +23,7 @@ class Plane {
   }
 
   public static function createPlane(?a:Float, ?b:Float, ?c:Float, ?d:Float):flighthq.types.Plane {
-    return cast (cast createEntity(({ final __callArgument4:Dynamic = { a: _Runtime.coalesce(a, function():Dynamic return cast 0.0), b: _Runtime.coalesce(b, function():Dynamic return cast 0.0), c: _Runtime.coalesce(c, function():Dynamic return cast 0.0), d: _Runtime.coalesce(d, function():Dynamic return cast 0.0) }; __callArgument4; })) : { >Entity, var a:Float; var b:Float; var c:Float; var d:Float; });
+    return cast (cast createEntity(({ final __callArgument8:Dynamic = { a: _Runtime.coalesce(a, function():Dynamic return cast 0.0), b: _Runtime.coalesce(b, function():Dynamic return cast 0.0), c: _Runtime.coalesce(c, function():Dynamic return cast 0.0), d: _Runtime.coalesce(d, function():Dynamic return cast 0.0) }; __callArgument8; })) : { >Entity, var a:Float; var b:Float; var c:Float; var d:Float; });
     return cast null;
   }
 

@@ -26,7 +26,7 @@ class ExplainScene3DResourceCoverage {
 
   @:noCompletion
   public static function hasScene3DResourceCoverage(resolver:Scene3DResourceResolver, usage:Scene3DKindUsage):Bool {
-    return cast !(cast (cast ExplainScene3DResourceCoverage.collectScene3DResourceCoverageGaps__explainScene3DResourceCoverage(({ final __callArgument4:Dynamic = null; __callArgument4; }), ({ final __callArgument5:Dynamic = resolver; __callArgument5; }), ({ final __callArgument6:Dynamic = usage; __callArgument6; }), (cast true : Bool), ({ final __callArgument7:Dynamic = null; __callArgument7; })) : Bool) : Bool);
+    return cast !(cast (cast ExplainScene3DResourceCoverage.collectScene3DResourceCoverageGaps__explainScene3DResourceCoverage(({ final __callArgument8:Dynamic = null; __callArgument8; }), ({ final __callArgument9:Dynamic = resolver; __callArgument9; }), ({ final __callArgument10:Dynamic = usage; __callArgument10; }), (cast true : Bool), ({ final __callArgument11:Dynamic = null; __callArgument11; })) : Bool) : Bool);
     return cast null;
   }
 
@@ -44,7 +44,7 @@ class ExplainScene3DResourceCoverage {
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([(cast ExplainScene3DResourceCoverage.createShortfallEntry__explainScene3DResourceCoverage(({ final __callArgument8:Dynamic = catalog; __callArgument8; }), (cast false : Bool), ({ final __callArgument9:Dynamic = (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneMaterialKind; __callArgument9; }), (cast kind : String), ({ final __callArgument10:Dynamic = RenderRegistry.MaterialTextureLister; __callArgument10; })) : SceneCoverageEntry)] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([(cast ExplainScene3DResourceCoverage.createShortfallEntry__explainScene3DResourceCoverage(({ final __callArgument16:Dynamic = catalog; __callArgument16; }), (cast false : Bool), ({ final __callArgument17:Dynamic = (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneMaterialKind; __callArgument17; }), (cast kind : String), ({ final __callArgument18:Dynamic = RenderRegistry.MaterialTextureLister; __callArgument18; })) : SceneCoverageEntry)] : Array<Dynamic>));
         i++;
       }
     }
@@ -55,7 +55,7 @@ class ExplainScene3DResourceCoverage {
   public static function createShortfallEntry__explainScene3DResourceCoverage(catalog:Null<SceneCoverageCatalog>, fallback:Bool, facet:flighthq._internal._IndexedAccess<SceneCoverageEntry, String>, kind:Kind, registry:flighthq._internal._IndexedAccess<SceneCoverageEntry, String>):SceneCoverageEntry {
     var registration:Null<CatalogRegistration> = cast _Runtime.UNDEFINED;
     var base:{ var facet:RequirementFacet; var kind:String; var registry:RenderRegistry; } = cast _Runtime.UNDEFINED;
-    registration = (cast ExplainScene3DResourceCoverage.findCatalogRegistration__explainScene3DResourceCoverage(({ final __callArgument11:Dynamic = catalog; __callArgument11; }), (cast kind : String), ({ final __callArgument12:Dynamic = registry; __callArgument12; })) : Null<CatalogRegistration>);
+    registration = (cast ExplainScene3DResourceCoverage.findCatalogRegistration__explainScene3DResourceCoverage(({ final __callArgument22:Dynamic = catalog; __callArgument22; }), (cast kind : String), ({ final __callArgument23:Dynamic = registry; __callArgument23; })) : Null<CatalogRegistration>);
     base = (cast { facet: facet, kind: kind, registry: registry });
     if ((cast _Runtime.strictEquals(registration, null) : Bool)) {
       return cast _Runtime.mergeObjects([base, { coverage: ((cast fallback : Bool) ? (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).FallbackUnavailable : Dynamic) : (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Unavailable : Dynamic)) }]);

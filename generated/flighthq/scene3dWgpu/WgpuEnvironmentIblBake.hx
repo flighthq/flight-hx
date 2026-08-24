@@ -27,13 +27,13 @@ class WgpuEnvironmentIblBake {
     var ibl:WgpuScene3DIbl = cast _Runtime.UNDEFINED;
     sourceCubeView = (cast ensureWgpuEnvironmentSourceCube(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = environment; __callArgument1; })) : Null<flighthq._internal.dom.GPUTextureView>);
     if ((cast _Runtime.strictEquals(sourceCubeView, null) : Bool)) { return; }
-    scene = (cast getWgpuScene3DRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuScene3DRuntime);
-    programs = (cast WgpuEnvironmentIblBake.ensureWgpuBakePrograms__wgpuEnvironmentIblBake(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuBakePrograms__wgpuEnvironmentIblBake);
+    scene = (cast getWgpuScene3DRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuScene3DRuntime);
+    programs = (cast WgpuEnvironmentIblBake.ensureWgpuBakePrograms__wgpuEnvironmentIblBake(({ final __callArgument6:Dynamic = state; __callArgument6; })) : WgpuBakePrograms__wgpuEnvironmentIblBake);
     sourceBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: (cast programs : WgpuBakePrograms__wgpuEnvironmentIblBake).sourceBindGroupLayout, entries: cast ([{ binding: 0.0, resource: sourceCubeView }, { binding: 1.0, resource: (cast programs : WgpuBakePrograms__wgpuEnvironmentIblBake).sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
-    irradiance = (cast WgpuEnvironmentIblBake.bakeWgpuIrradiance__wgpuEnvironmentIblBake(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast programs : Dynamic), ({ final __callArgument5:Dynamic = sourceBindGroup; __callArgument5; })) : WgpuBakedCube__wgpuEnvironmentIblBake);
-    prefiltered = (cast WgpuEnvironmentIblBake.bakeWgpuPrefiltered__wgpuEnvironmentIblBake(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast programs : Dynamic), ({ final __callArgument7:Dynamic = sourceBindGroup; __callArgument7; })) : WgpuBakedCube__wgpuEnvironmentIblBake);
-    brdf = _Runtime.coalesce(({ final __typedStruct8 = scene.ibl; __typedStruct8 == null ? _Runtime.UNDEFINED : (cast __typedStruct8 : { var brdfLut:flighthq._internal.dom.GPUTexture; }).brdfLut; }), function():Dynamic return cast (cast WgpuEnvironmentIblBake.bakeWgpuBrdfLut__wgpuEnvironmentIblBake(({ final __callArgument9:Dynamic = state; __callArgument9; }), (cast programs : Dynamic)) : flighthq._internal.dom.GPUTexture));
-    brdfView = _Runtime.coalesce(({ final __typedStruct10 = scene.ibl; __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : { var brdfLutView:flighthq._internal.dom.GPUTextureView; }).brdfLutView; }), function():Dynamic return cast (cast brdf : flighthq._internal.dom.GPUTexture).createView());
+    irradiance = (cast WgpuEnvironmentIblBake.bakeWgpuIrradiance__wgpuEnvironmentIblBake(({ final __callArgument8:Dynamic = state; __callArgument8; }), (cast programs : Dynamic), ({ final __callArgument9:Dynamic = sourceBindGroup; __callArgument9; })) : WgpuBakedCube__wgpuEnvironmentIblBake);
+    prefiltered = (cast WgpuEnvironmentIblBake.bakeWgpuPrefiltered__wgpuEnvironmentIblBake(({ final __callArgument12:Dynamic = state; __callArgument12; }), (cast programs : Dynamic), ({ final __callArgument13:Dynamic = sourceBindGroup; __callArgument13; })) : WgpuBakedCube__wgpuEnvironmentIblBake);
+    brdf = _Runtime.coalesce(({ final __typedStruct16 = scene.ibl; __typedStruct16 == null ? _Runtime.UNDEFINED : (cast __typedStruct16 : { var brdfLut:flighthq._internal.dom.GPUTexture; }).brdfLut; }), function():Dynamic return cast (cast WgpuEnvironmentIblBake.bakeWgpuBrdfLut__wgpuEnvironmentIblBake(({ final __callArgument17:Dynamic = state; __callArgument17; }), (cast programs : Dynamic)) : flighthq._internal.dom.GPUTexture));
+    brdfView = _Runtime.coalesce(({ final __typedStruct19 = scene.ibl; __typedStruct19 == null ? _Runtime.UNDEFINED : (cast __typedStruct19 : { var brdfLutView:flighthq._internal.dom.GPUTextureView; }).brdfLutView; }), function():Dynamic return cast (cast brdf : flighthq._internal.dom.GPUTexture).createView());
     ibl = (cast { brdfLut: brdf, brdfLutView: brdfView, intensity: _Runtime.field(environment, 'intensity'), irradianceCube: (cast irradiance : WgpuBakedCube__wgpuEnvironmentIblBake).texture, irradianceCubeView: (cast irradiance : WgpuBakedCube__wgpuEnvironmentIblBake).view, prefilteredCube: (cast prefiltered : WgpuBakedCube__wgpuEnvironmentIblBake).texture, prefilteredCubeView: (cast prefiltered : WgpuBakedCube__wgpuEnvironmentIblBake).view, prefilteredMipCount: WgpuEnvironmentIblBake.PREFILTERED_MIPS__wgpuEnvironmentIblBake });
     (scene.ibl = cast (ibl : Null<WgpuScene3DIbl>));
   }
@@ -41,7 +41,7 @@ class WgpuEnvironmentIblBake {
   @:noCompletion
   public static function destroyWgpuScene3DIbl(state:WgpuRenderState):Void {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
-    scene = (cast getWgpuScene3DRuntime(({ final __callArgument11:Dynamic = state; __callArgument11; })) : WgpuScene3DRuntime);
+    scene = (cast getWgpuScene3DRuntime(({ final __callArgument20:Dynamic = state; __callArgument20; })) : WgpuScene3DRuntime);
     if ((cast !_Runtime.strictEquals(scene.ibl, null) : Bool)) {
       (cast (cast scene.ibl : { var brdfLut:flighthq._internal.dom.GPUTexture; }).brdfLut : flighthq._internal.dom.GPUTexture).destroy();
       (cast (cast scene.ibl : { var irradianceCube:flighthq._internal.dom.GPUTexture; }).irradianceCube : flighthq._internal.dom.GPUTexture).destroy();
@@ -78,21 +78,21 @@ class WgpuEnvironmentIblBake {
 
   public static function bakeWgpuIrradiance__wgpuEnvironmentIblBake(state:WgpuRenderState, programs:WgpuBakePrograms__wgpuEnvironmentIblBake, sourceBindGroup:flighthq._internal.dom.GPUBindGroup):WgpuBakedCube__wgpuEnvironmentIblBake {
     var texture:flighthq._internal.dom.GPUTexture = cast _Runtime.UNDEFINED;
-    texture = (cast WgpuEnvironmentIblBake.createWgpuBakeCube__wgpuEnvironmentIblBake(({ final __callArgument12:Dynamic = state; __callArgument12; }), (cast WgpuEnvironmentIblBake.IRRADIANCE_SIZE__wgpuEnvironmentIblBake : Float), (cast 1.0 : Float)) : flighthq._internal.dom.GPUTexture);
-    WgpuEnvironmentIblBake.renderWgpuBakeCubeFaces__wgpuEnvironmentIblBake(({ final __callArgument13:Dynamic = state; __callArgument13; }), _Runtime.field(programs, 'irradiancePipeline'), (cast programs : Dynamic), ({ final __callArgument14:Dynamic = texture; __callArgument14; }), (cast WgpuEnvironmentIblBake.IRRADIANCE_SIZE__wgpuEnvironmentIblBake : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument15:Dynamic = sourceBindGroup; __callArgument15; }));
+    texture = (cast WgpuEnvironmentIblBake.createWgpuBakeCube__wgpuEnvironmentIblBake(({ final __callArgument22:Dynamic = state; __callArgument22; }), (cast WgpuEnvironmentIblBake.IRRADIANCE_SIZE__wgpuEnvironmentIblBake : Float), (cast 1.0 : Float)) : flighthq._internal.dom.GPUTexture);
+    WgpuEnvironmentIblBake.renderWgpuBakeCubeFaces__wgpuEnvironmentIblBake(({ final __callArgument24:Dynamic = state; __callArgument24; }), _Runtime.field(programs, 'irradiancePipeline'), (cast programs : Dynamic), ({ final __callArgument25:Dynamic = texture; __callArgument25; }), (cast WgpuEnvironmentIblBake.IRRADIANCE_SIZE__wgpuEnvironmentIblBake : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument26:Dynamic = sourceBindGroup; __callArgument26; }));
     return cast { texture: texture, view: (cast texture : flighthq._internal.dom.GPUTexture).createView({ dimension: 'cube' }) };
     return cast null;
   }
 
   public static function bakeWgpuPrefiltered__wgpuEnvironmentIblBake(state:WgpuRenderState, programs:WgpuBakePrograms__wgpuEnvironmentIblBake, sourceBindGroup:flighthq._internal.dom.GPUBindGroup):WgpuBakedCube__wgpuEnvironmentIblBake {
     var texture:flighthq._internal.dom.GPUTexture = cast _Runtime.UNDEFINED;
-    texture = (cast WgpuEnvironmentIblBake.createWgpuBakeCube__wgpuEnvironmentIblBake(({ final __callArgument16:Dynamic = state; __callArgument16; }), (cast WgpuEnvironmentIblBake.PREFILTERED_SIZE__wgpuEnvironmentIblBake : Float), (cast WgpuEnvironmentIblBake.PREFILTERED_MIPS__wgpuEnvironmentIblBake : Float)) : flighthq._internal.dom.GPUTexture);
+    texture = (cast WgpuEnvironmentIblBake.createWgpuBakeCube__wgpuEnvironmentIblBake(({ final __callArgument30:Dynamic = state; __callArgument30; }), (cast WgpuEnvironmentIblBake.PREFILTERED_SIZE__wgpuEnvironmentIblBake : Float), (cast WgpuEnvironmentIblBake.PREFILTERED_MIPS__wgpuEnvironmentIblBake : Float)) : flighthq._internal.dom.GPUTexture);
     {
       var mip:Float = 0.0;
       while ((cast ((cast mip : Float) < (cast WgpuEnvironmentIblBake.PREFILTERED_MIPS__wgpuEnvironmentIblBake : Float)) : Bool)) {
         var mipSize:Float = HxMath.max(1.0, (_Runtime.toInt32(WgpuEnvironmentIblBake.PREFILTERED_SIZE__wgpuEnvironmentIblBake) >> _Runtime.toInt32(mip)));
         var roughness:Float = ((cast ((cast WgpuEnvironmentIblBake.PREFILTERED_MIPS__wgpuEnvironmentIblBake : Float) > (cast 1.0 : Float)) : Bool) ? (cast (mip / (WgpuEnvironmentIblBake.PREFILTERED_MIPS__wgpuEnvironmentIblBake - 1.0)) : Dynamic) : (cast 0.0 : Dynamic));
-        WgpuEnvironmentIblBake.renderWgpuBakeCubeFaces__wgpuEnvironmentIblBake(({ final __callArgument17:Dynamic = state; __callArgument17; }), _Runtime.field(programs, 'prefilteredPipeline'), (cast programs : Dynamic), ({ final __callArgument18:Dynamic = texture; __callArgument18; }), (cast mipSize : Float), (cast mip : Float), (cast roughness : Float), ({ final __callArgument19:Dynamic = sourceBindGroup; __callArgument19; }));
+        WgpuEnvironmentIblBake.renderWgpuBakeCubeFaces__wgpuEnvironmentIblBake(({ final __callArgument32:Dynamic = state; __callArgument32; }), _Runtime.field(programs, 'prefilteredPipeline'), (cast programs : Dynamic), ({ final __callArgument33:Dynamic = texture; __callArgument33; }), (cast mipSize : Float), (cast mip : Float), (cast roughness : Float), ({ final __callArgument34:Dynamic = sourceBindGroup; __callArgument34; }));
         mip++;
       }
     }

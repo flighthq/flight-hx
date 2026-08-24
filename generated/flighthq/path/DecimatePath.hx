@@ -24,7 +24,7 @@ class DecimatePath {
       var keep:flighthq._internal._UInt8Array = new flighthq._internal._UInt8Array(last);
       flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast keep : flighthq._internal._UInt8Array), (cast 0.0 : Float), (cast 1.0 : Float));
       flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast keep : flighthq._internal._UInt8Array), (cast (last - 1.0) : Float), (cast 1.0 : Float));
-      DecimatePath.douglasPeucker__decimatePath(({ final __callArgument3:Dynamic = contour; __callArgument3; }), (cast 0.0 : Float), (cast (last - 1.0) : Float), (cast (tolerance * tolerance) : Float), ({ final __callArgument4:Dynamic = keep; __callArgument4; }));
+      DecimatePath.douglasPeucker__decimatePath(({ final __callArgument4:Dynamic = contour; __callArgument4; }), (cast 0.0 : Float), (cast (last - 1.0) : Float), (cast (tolerance * tolerance) : Float), ({ final __callArgument5:Dynamic = keep; __callArgument5; }));
       var first:Bool = true;
       {
         var i:Float = 0.0;
@@ -89,8 +89,8 @@ class DecimatePath {
     }
     if ((cast ((cast maxDistSq : Float) > (cast toleranceSq : Float)) : Bool)) {
       flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast keep : flighthq._internal._UInt8Array), (cast maxIdx : Float), (cast 1.0 : Float));
-      DecimatePath.douglasPeucker__decimatePath(({ final __callArgument5:Dynamic = pts; __callArgument5; }), (cast first : Float), (cast maxIdx : Float), (cast toleranceSq : Float), ({ final __callArgument6:Dynamic = keep; __callArgument6; }));
-      DecimatePath.douglasPeucker__decimatePath(({ final __callArgument7:Dynamic = pts; __callArgument7; }), (cast maxIdx : Float), (cast last : Float), (cast toleranceSq : Float), ({ final __callArgument8:Dynamic = keep; __callArgument8; }));
+      DecimatePath.douglasPeucker__decimatePath(({ final __callArgument8:Dynamic = pts; __callArgument8; }), (cast first : Float), (cast maxIdx : Float), (cast toleranceSq : Float), ({ final __callArgument9:Dynamic = keep; __callArgument9; }));
+      DecimatePath.douglasPeucker__decimatePath(({ final __callArgument12:Dynamic = pts; __callArgument12; }), (cast maxIdx : Float), (cast last : Float), (cast toleranceSq : Float), ({ final __callArgument13:Dynamic = keep; __callArgument13; }));
     }
   }
 }

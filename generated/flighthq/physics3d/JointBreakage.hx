@@ -23,9 +23,9 @@ class JointBreakage {
     for (joint in _Runtime.iterable(world.joints)) {
       if ((cast (cast joint : Physics3DJoint).broken : Bool)) { continue; }
       if ((cast !(cast (cast isPhysics3DJointBreakable(({ final __callArgument2:Dynamic = joint; __callArgument2; })) : Bool) : Bool) : Bool)) { continue; }
-      if ((cast !(cast (cast writePhysics3DJointReaction(({ final __callArgument3:Dynamic = world; __callArgument3; }), ({ final __callArgument4:Dynamic = joint; __callArgument4; }), (cast dt : Float), ({ final __callArgument5:Dynamic = JointBreakage.breakageReaction__jointBreakage; __callArgument5; })) : Bool) : Bool) : Bool)) { continue; }
-      if ((cast ((cast ((cast (cast getPhysics3DJointReactionForce(({ final __callArgument6:Dynamic = JointBreakage.breakageReaction__jointBreakage; __callArgument6; })) : Float) : Float) > (cast (cast joint : Physics3DJoint).breakForce : Float)) : Bool) || (cast ((cast (cast getPhysics3DJointReactionTorque(({ final __callArgument7:Dynamic = JointBreakage.breakageReaction__jointBreakage; __callArgument7; })) : Float) : Float) > (cast (cast joint : Physics3DJoint).breakTorque : Float)) : Bool)) : Bool)) {
-        breakPhysics3DJoint(({ final __callArgument8:Dynamic = world; __callArgument8; }), ({ final __callArgument9:Dynamic = joint; __callArgument9; }));
+      if ((cast !(cast (cast writePhysics3DJointReaction(({ final __callArgument4:Dynamic = world; __callArgument4; }), ({ final __callArgument5:Dynamic = joint; __callArgument5; }), (cast dt : Float), ({ final __callArgument6:Dynamic = JointBreakage.breakageReaction__jointBreakage; __callArgument6; })) : Bool) : Bool) : Bool)) { continue; }
+      if ((cast ((cast ((cast (cast getPhysics3DJointReactionForce(({ final __callArgument10:Dynamic = JointBreakage.breakageReaction__jointBreakage; __callArgument10; })) : Float) : Float) > (cast (cast joint : Physics3DJoint).breakForce : Float)) : Bool) || (cast ((cast (cast getPhysics3DJointReactionTorque(({ final __callArgument12:Dynamic = JointBreakage.breakageReaction__jointBreakage; __callArgument12; })) : Float) : Float) > (cast (cast joint : Physics3DJoint).breakTorque : Float)) : Bool)) : Bool)) {
+        breakPhysics3DJoint(({ final __callArgument14:Dynamic = world; __callArgument14; }), ({ final __callArgument15:Dynamic = joint; __callArgument15; }));
       }
     }
   }

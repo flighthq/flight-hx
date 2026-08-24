@@ -16,7 +16,7 @@ class BitmapCompare {
     if ((cast ((cast !_Runtime.strictEquals(source.width, other.width) : Bool) || (cast !_Runtime.strictEquals(source.height, other.height) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('compareBitmap: bitmap dimensions do not match (' + Std.string(source.width) + '×' + Std.string(source.height) + ' vs ' + Std.string(other.width) + '×' + Std.string(other.height) + ')'));
     }
-    result = (cast createBitmap((cast source.width : Float), (cast source.height : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Bitmap);
+    result = (cast (#if js _Runtime.callValue(createBitmap, cast ([(cast source.width : Float), (cast source.height : Float)] : Array<Dynamic>)) #else createBitmap((cast source.width : Float), (cast source.height : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Bitmap);
     hasDiff = false;
     {
       var i:Float = 0.0;

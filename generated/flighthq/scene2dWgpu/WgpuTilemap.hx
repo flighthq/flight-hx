@@ -83,24 +83,24 @@ class WgpuTilemap {
     tileHeight = __destructure0.tileHeight;
     tileWidth = __destructure0.tileWidth;
     tiles = __destructure0.tiles;
-    if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast !(cast (cast hasTextureSource(({ final __callArgument1:Dynamic = atlas.texture; __callArgument1; })) : Bool) : Bool) : Bool)) : Bool)) { return; }
+    if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast !(cast (cast hasTextureSource(({ final __callArgument2:Dynamic = atlas.texture; __callArgument2; })) : Bool) : Bool) : Bool)) : Bool)) { return; }
     if ((cast ((cast _Runtime.strictEquals(columns, 0.0) : Bool) || (cast _Runtime.strictEquals(rows, 0.0) : Bool)) : Bool)) { return; }
     material = (cast tilemapNode : RenderProxy2D).material;
-    materialRenderer = (cast resolveWgpuMaterialRenderer(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast material : Dynamic)) : Null<WgpuMaterialRenderer>);
+    materialRenderer = (cast resolveWgpuMaterialRenderer(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast material : Dynamic)) : Null<WgpuMaterialRenderer>);
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     texture = atlas.texture;
-    textureEntry = (cast resolveWgpuTexture(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = texture; __callArgument4; }), (cast true : Bool), ({ final __callArgument5:Dynamic = SCENE2D_WORKING_COLOR_SPACE; __callArgument5; })) : Null<WgpuTextureEntry>);
+    textureEntry = (cast resolveWgpuTexture(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = texture; __callArgument7; }), (cast true : Bool), ({ final __callArgument8:Dynamic = SCENE2D_WORKING_COLOR_SPACE; __callArgument8; })) : Null<WgpuTextureEntry>);
     if ((cast _Runtime.strictEquals(textureEntry, null) : Bool)) { return; }
     nodeMaterialData = (cast tilemapNode : RenderProxy2D).materialData;
     perTileColorScaleBias = (cast source.data : { var materialData:Null<Array<Null<flighthq._internal._Object>>>; }).materialData;
     nodeColorScaleBias = (cast tilemapNode : RenderProxy2D).colorScaleBias;
     nodeColorMatrix = (cast tilemapNode : RenderProxy2D).colorMatrix;
     startCount = runtime.quadBatchWriterCount;
-    base = (cast prepareWgpuQuadBatchWrite(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = textureEntry; __callArgument7; }), (cast (cast texture : Texture2D).sampler : Dynamic), (cast tilemapNode : RenderProxy2D).blendMode, (cast material : Dynamic), ({ final __callArgument8:Dynamic = materialRenderer; __callArgument8; }), (cast (columns * rows) : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
+    base = (cast (#if js _Runtime.callValue(prepareWgpuQuadBatchWrite, cast ([({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = textureEntry; __callArgument16; }), (cast (cast texture : Texture2D).sampler : Dynamic), (cast tilemapNode : RenderProxy2D).blendMode, (cast material : Dynamic), ({ final __callArgument17:Dynamic = materialRenderer; __callArgument17; }), (cast (columns * rows) : Float)] : Array<Dynamic>)) #else prepareWgpuQuadBatchWrite(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = textureEntry; __callArgument13; }), (cast (cast texture : Texture2D).sampler : Dynamic), (cast tilemapNode : RenderProxy2D).blendMode, (cast material : Dynamic), ({ final __callArgument14:Dynamic = materialRenderer; __callArgument14; }), (cast (columns * rows) : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Float);
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
-    iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth(({ final __callArgument9:Dynamic = texture; __callArgument9; })) : Float)));
-    ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight(({ final __callArgument10:Dynamic = texture; __callArgument10; })) : Float)));
+    iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth(({ final __callArgument18:Dynamic = texture; __callArgument18; })) : Float)));
+    ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight(({ final __callArgument20:Dynamic = texture; __callArgument20; })) : Float)));
     instanceData = runtime.quadBatchWriterInstanceData;
     pt = (cast tilemapNode : RenderProxy2D).transform2D;
     pa = pt.a;
@@ -137,9 +137,9 @@ class WgpuTilemap {
             flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast instanceData : flighthq._internal._Float32Array), (cast (writeBase + 10.0) : Float), (cast ((region.x + region.width) * iw) : Float));
             flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast instanceData : flighthq._internal._Float32Array), (cast (writeBase + 11.0) : Float), (cast ((region.y + region.height) * ih) : Float));
             flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast instanceData : flighthq._internal._Float32Array), (cast (writeBase + 12.0) : Float), (cast alpha : Float));
-            packWgpuQuadBatchMaterialInstance(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = nodeMaterialData; __callArgument12; }), (cast (startCount + drawCount) : Float));
+            packWgpuQuadBatchMaterialInstance(({ final __callArgument22:Dynamic = state; __callArgument22; }), ({ final __callArgument23:Dynamic = nodeMaterialData; __callArgument23; }), (cast (startCount + drawCount) : Float));
             var colorScaleBias:Null<flighthq._internal._Union2<flighthq._internal._Union2<Array<Float>, ColorScaleBias>, TintMaterialData>> = _Runtime.coalesce(_Runtime.coalesce((cast _Runtime.optionalIndex(perTileColorScaleBias, ((row * columns) + col)) : Null<flighthq._internal._Union2<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, Array<Float>>>), function():Dynamic return cast nodeColorMatrix), function():Dynamic return cast nodeColorScaleBias);
-            recordWgpuQuadBatchColorScaleBias(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = colorScaleBias; __callArgument14; }), (cast (startCount + drawCount) : Float));
+            recordWgpuQuadBatchColorScaleBias(({ final __callArgument26:Dynamic = state; __callArgument26; }), ({ final __callArgument27:Dynamic = colorScaleBias; __callArgument27; }), (cast (startCount + drawCount) : Float));
             (writeBase = cast ((writeBase + WgpuTilemap.INSTANCE_STRIDE_FLOATS__wgpuTilemap) : Dynamic));
             drawCount++;
             col++;

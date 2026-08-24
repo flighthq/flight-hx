@@ -15,21 +15,21 @@ class Gjk3D {
     var supportA:Null<CollisionSupport3D> = cast _Runtime.UNDEFINED;
     var supportB:Null<CollisionSupport3D> = cast _Runtime.UNDEFINED;
     clearCollisionManifold3D(({ final __callArgument0:Dynamic = out; __callArgument0; }));
-    supportA = (cast getCollisionSupport3D(({ final __callArgument1:Dynamic = (cast a : { var kind:String; }).kind; __callArgument1; })) : Null<CollisionSupport3D>);
-    supportB = (cast getCollisionSupport3D(({ final __callArgument2:Dynamic = (cast b : { var kind:String; }).kind; __callArgument2; })) : Null<CollisionSupport3D>);
+    supportA = (cast getCollisionSupport3D(({ final __callArgument2:Dynamic = (cast a : { var kind:String; }).kind; __callArgument2; })) : Null<CollisionSupport3D>);
+    supportB = (cast getCollisionSupport3D(({ final __callArgument4:Dynamic = (cast b : { var kind:String; }).kind; __callArgument4; })) : Null<CollisionSupport3D>);
     if ((cast ((cast _Runtime.strictEquals(supportA, null) : Bool) || (cast _Runtime.strictEquals(supportB, null) : Bool)) : Bool)) { return cast false; }
-    if ((cast !_Runtime.strictEquals((cast Gjk3D.runGjk3D__gjk3D(({ final __callArgument3:Dynamic = a; __callArgument3; }), ({ final __callArgument4:Dynamic = supportA; __callArgument4; }), ({ final __callArgument5:Dynamic = b; __callArgument5; }), ({ final __callArgument6:Dynamic = supportB; __callArgument6; })) : Float), Gjk3D.GJK_OVERLAPPING__gjk3D) : Bool)) { return cast false; }
-    return cast (cast Gjk3D.writeEpa3DPenetration__gjk3D(({ final __callArgument7:Dynamic = a; __callArgument7; }), ({ final __callArgument8:Dynamic = supportA; __callArgument8; }), ({ final __callArgument9:Dynamic = b; __callArgument9; }), ({ final __callArgument10:Dynamic = supportB; __callArgument10; }), ({ final __callArgument11:Dynamic = out; __callArgument11; })) : Bool);
+    if ((cast !_Runtime.strictEquals((cast Gjk3D.runGjk3D__gjk3D(({ final __callArgument6:Dynamic = a; __callArgument6; }), ({ final __callArgument7:Dynamic = supportA; __callArgument7; }), ({ final __callArgument8:Dynamic = b; __callArgument8; }), ({ final __callArgument9:Dynamic = supportB; __callArgument9; })) : Float), Gjk3D.GJK_OVERLAPPING__gjk3D) : Bool)) { return cast false; }
+    return cast (cast Gjk3D.writeEpa3DPenetration__gjk3D(({ final __callArgument14:Dynamic = a; __callArgument14; }), ({ final __callArgument15:Dynamic = supportA; __callArgument15; }), ({ final __callArgument16:Dynamic = b; __callArgument16; }), ({ final __callArgument17:Dynamic = supportB; __callArgument17; }), ({ final __callArgument18:Dynamic = out; __callArgument18; })) : Bool);
     return cast null;
   }
 
   public static function testCollisionSupportOverlap3D(a:CollisionShape3D, b:CollisionShape3D):Bool {
     var supportA:Null<CollisionSupport3D> = cast _Runtime.UNDEFINED;
     var supportB:Null<CollisionSupport3D> = cast _Runtime.UNDEFINED;
-    supportA = (cast getCollisionSupport3D(({ final __callArgument12:Dynamic = (cast a : { var kind:String; }).kind; __callArgument12; })) : Null<CollisionSupport3D>);
-    supportB = (cast getCollisionSupport3D(({ final __callArgument13:Dynamic = (cast b : { var kind:String; }).kind; __callArgument13; })) : Null<CollisionSupport3D>);
+    supportA = (cast getCollisionSupport3D(({ final __callArgument24:Dynamic = (cast a : { var kind:String; }).kind; __callArgument24; })) : Null<CollisionSupport3D>);
+    supportB = (cast getCollisionSupport3D(({ final __callArgument26:Dynamic = (cast b : { var kind:String; }).kind; __callArgument26; })) : Null<CollisionSupport3D>);
     if ((cast ((cast _Runtime.strictEquals(supportA, null) : Bool) || (cast _Runtime.strictEquals(supportB, null) : Bool)) : Bool)) { return cast false; }
-    return cast _Runtime.strictEquals((cast Gjk3D.runGjk3D__gjk3D(({ final __callArgument14:Dynamic = a; __callArgument14; }), ({ final __callArgument15:Dynamic = supportA; __callArgument15; }), ({ final __callArgument16:Dynamic = b; __callArgument16; }), ({ final __callArgument17:Dynamic = supportB; __callArgument17; })) : Float), Gjk3D.GJK_OVERLAPPING__gjk3D);
+    return cast _Runtime.strictEquals((cast Gjk3D.runGjk3D__gjk3D(({ final __callArgument28:Dynamic = a; __callArgument28; }), ({ final __callArgument29:Dynamic = supportA; __callArgument29; }), ({ final __callArgument30:Dynamic = b; __callArgument30; }), ({ final __callArgument31:Dynamic = supportB; __callArgument31; })) : Float), Gjk3D.GJK_OVERLAPPING__gjk3D);
     return cast null;
   }
 
@@ -113,7 +113,7 @@ class Gjk3D {
     var directionX:Float = cast _Runtime.UNDEFINED;
     var directionY:Float = cast _Runtime.UNDEFINED;
     var directionZ:Float = cast _Runtime.UNDEFINED;
-    Gjk3D.writeMinkowskiSupport3D__gjk3D(({ final __callArgument18:Dynamic = a; __callArgument18; }), ({ final __callArgument19:Dynamic = supportA; __callArgument19; }), ({ final __callArgument20:Dynamic = b; __callArgument20; }), ({ final __callArgument21:Dynamic = supportB; __callArgument21; }), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument22:Dynamic = Gjk3D.minkowski__gjk3D; __callArgument22; }));
+    Gjk3D.writeMinkowskiSupport3D__gjk3D(({ final __callArgument36:Dynamic = a; __callArgument36; }), ({ final __callArgument37:Dynamic = supportA; __callArgument37; }), ({ final __callArgument38:Dynamic = b; __callArgument38; }), ({ final __callArgument39:Dynamic = supportB; __callArgument39; }), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), ({ final __callArgument40:Dynamic = Gjk3D.minkowski__gjk3D; __callArgument40; }));
     flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast Gjk3D.simplex__gjk3D : flighthq._internal._Float64Array), (cast 0.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast Gjk3D.minkowski__gjk3D : Array<Float>), (cast 0.0 : Float)) : Float));
     flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast Gjk3D.simplex__gjk3D : flighthq._internal._Float64Array), (cast 1.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast Gjk3D.minkowski__gjk3D : Array<Float>), (cast 1.0 : Float)) : Float));
     flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast Gjk3D.simplex__gjk3D : flighthq._internal._Float64Array), (cast 2.0 : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast Gjk3D.minkowski__gjk3D : Array<Float>), (cast 2.0 : Float)) : Float));
@@ -127,7 +127,7 @@ class Gjk3D {
         if ((cast ((cast ((cast _Runtime.strictEquals(directionX, 0.0) : Bool) && (cast _Runtime.strictEquals(directionY, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(directionZ, 0.0) : Bool)) : Bool)) {
           return cast Gjk3D.GJK_SEPARATED__gjk3D;
         }
-        Gjk3D.writeMinkowskiSupport3D__gjk3D(({ final __callArgument23:Dynamic = a; __callArgument23; }), ({ final __callArgument24:Dynamic = supportA; __callArgument24; }), ({ final __callArgument25:Dynamic = b; __callArgument25; }), ({ final __callArgument26:Dynamic = supportB; __callArgument26; }), (cast directionX : Float), (cast directionY : Float), (cast directionZ : Float), ({ final __callArgument27:Dynamic = Gjk3D.minkowski__gjk3D; __callArgument27; }));
+        Gjk3D.writeMinkowskiSupport3D__gjk3D(({ final __callArgument46:Dynamic = a; __callArgument46; }), ({ final __callArgument47:Dynamic = supportA; __callArgument47; }), ({ final __callArgument48:Dynamic = b; __callArgument48; }), ({ final __callArgument49:Dynamic = supportB; __callArgument49; }), (cast directionX : Float), (cast directionY : Float), (cast directionZ : Float), ({ final __callArgument50:Dynamic = Gjk3D.minkowski__gjk3D; __callArgument50; }));
         if ((cast ((cast (((flighthq._internal._StaticIndex.readFloatArrayTyped((cast Gjk3D.minkowski__gjk3D : Array<Float>), (cast 0.0 : Float)) * directionX) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast Gjk3D.minkowski__gjk3D : Array<Float>), (cast 1.0 : Float)) * directionY)) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast Gjk3D.minkowski__gjk3D : Array<Float>), (cast 2.0 : Float)) * directionZ)) : Float) <= (cast 0.0 : Float)) : Bool)) {
           return cast Gjk3D.GJK_SEPARATED__gjk3D;
         }
@@ -172,9 +172,9 @@ class Gjk3D {
       var abY:Float = (by - ay);
       var abZ:Float = (bz - az);
       if ((cast ((cast (((abX * aoX) + (abY * aoY)) + (abZ * aoZ)) : Float) > (cast 0.0 : Float)) : Bool)) {
-        Gjk3D.writeTripleProduct__gjk3D((cast abX : Float), (cast abY : Float), (cast abZ : Float), (cast aoX : Float), (cast aoY : Float), (cast aoZ : Float), (cast abX : Float), (cast abY : Float), (cast abZ : Float), ({ final __callArgument28:Dynamic = Gjk3D.searchDirection__gjk3D; __callArgument28; }));
-        if ((cast (cast Gjk3D.isNearZeroVector__gjk3D(({ final __callArgument29:Dynamic = Gjk3D.searchDirection__gjk3D; __callArgument29; })) : Bool) : Bool)) {
-          Gjk3D.writeAnyPerpendicular__gjk3D((cast abX : Float), (cast abY : Float), (cast abZ : Float), ({ final __callArgument30:Dynamic = Gjk3D.searchDirection__gjk3D; __callArgument30; }));
+        Gjk3D.writeTripleProduct__gjk3D((cast abX : Float), (cast abY : Float), (cast abZ : Float), (cast aoX : Float), (cast aoY : Float), (cast aoZ : Float), (cast abX : Float), (cast abY : Float), (cast abZ : Float), ({ final __callArgument56:Dynamic = Gjk3D.searchDirection__gjk3D; __callArgument56; }));
+        if ((cast (cast Gjk3D.isNearZeroVector__gjk3D(({ final __callArgument58:Dynamic = Gjk3D.searchDirection__gjk3D; __callArgument58; })) : Bool) : Bool)) {
+          Gjk3D.writeAnyPerpendicular__gjk3D((cast abX : Float), (cast abY : Float), (cast abZ : Float), ({ final __callArgument60:Dynamic = Gjk3D.searchDirection__gjk3D; __callArgument60; }));
         }
         return cast false;
       }
@@ -287,7 +287,7 @@ class Gjk3D {
       flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast Gjk3D.simplex__gjk3D : flighthq._internal._Float64Array), (cast 4.0 : Float), (cast ay : Float));
       flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast Gjk3D.simplex__gjk3D : flighthq._internal._Float64Array), (cast 5.0 : Float), (cast az : Float));
       (Gjk3D.simplexCount__gjk3D = cast (2.0 : Dynamic));
-      Gjk3D.writeTripleProduct__gjk3D((cast acX : Float), (cast acY : Float), (cast acZ : Float), (cast aoX : Float), (cast aoY : Float), (cast aoZ : Float), (cast acX : Float), (cast acY : Float), (cast acZ : Float), ({ final __callArgument31:Dynamic = Gjk3D.searchDirection__gjk3D; __callArgument31; }));
+      Gjk3D.writeTripleProduct__gjk3D((cast acX : Float), (cast acY : Float), (cast acZ : Float), (cast aoX : Float), (cast aoY : Float), (cast aoZ : Float), (cast acX : Float), (cast acY : Float), (cast acZ : Float), ({ final __callArgument62:Dynamic = Gjk3D.searchDirection__gjk3D; __callArgument62; }));
       return cast false;
     }
     abSideX = ((abY * normalZ) - (abZ * normalY));
@@ -301,7 +301,7 @@ class Gjk3D {
       flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast Gjk3D.simplex__gjk3D : flighthq._internal._Float64Array), (cast 4.0 : Float), (cast ay : Float));
       flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast Gjk3D.simplex__gjk3D : flighthq._internal._Float64Array), (cast 5.0 : Float), (cast az : Float));
       (Gjk3D.simplexCount__gjk3D = cast (2.0 : Dynamic));
-      Gjk3D.writeTripleProduct__gjk3D((cast abX : Float), (cast abY : Float), (cast abZ : Float), (cast aoX : Float), (cast aoY : Float), (cast aoZ : Float), (cast abX : Float), (cast abY : Float), (cast abZ : Float), ({ final __callArgument32:Dynamic = Gjk3D.searchDirection__gjk3D; __callArgument32; }));
+      Gjk3D.writeTripleProduct__gjk3D((cast abX : Float), (cast abY : Float), (cast abZ : Float), (cast aoX : Float), (cast aoY : Float), (cast aoZ : Float), (cast abX : Float), (cast abY : Float), (cast abZ : Float), ({ final __callArgument64:Dynamic = Gjk3D.searchDirection__gjk3D; __callArgument64; }));
       return cast false;
     }
     if ((cast ((cast (((normalX * aoX) + (normalY * aoY)) + (normalZ * aoZ)) : Float) > (cast 0.0 : Float)) : Bool)) {
@@ -319,7 +319,7 @@ class Gjk3D {
       flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Gjk3D.searchDirection__gjk3D : Array<Float>), (cast 1.0 : Float), (cast -normalY : Float));
       flighthq._internal._StaticIndex.writeFloatArrayTyped((cast Gjk3D.searchDirection__gjk3D : Array<Float>), (cast 2.0 : Float), (cast -normalZ : Float));
     }
-    if ((cast (cast Gjk3D.isNearZeroVector__gjk3D(({ final __callArgument33:Dynamic = Gjk3D.searchDirection__gjk3D; __callArgument33; })) : Bool) : Bool)) { Gjk3D.writeAnyPerpendicular__gjk3D((cast abX : Float), (cast abY : Float), (cast abZ : Float), ({ final __callArgument34:Dynamic = Gjk3D.searchDirection__gjk3D; __callArgument34; })); }
+    if ((cast (cast Gjk3D.isNearZeroVector__gjk3D(({ final __callArgument66:Dynamic = Gjk3D.searchDirection__gjk3D; __callArgument66; })) : Bool) : Bool)) { Gjk3D.writeAnyPerpendicular__gjk3D((cast abX : Float), (cast abY : Float), (cast abZ : Float), ({ final __callArgument68:Dynamic = Gjk3D.searchDirection__gjk3D; __callArgument68; })); }
     return cast false;
     return cast null;
   }
@@ -405,7 +405,7 @@ class Gjk3D {
         (bestNormalX = cast (flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast Gjk3D.faceNormals__gjk3D : flighthq._internal._Float64Array), (cast (closest * 3.0) : Float)) : Dynamic));
         (bestNormalY = cast (flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast Gjk3D.faceNormals__gjk3D : flighthq._internal._Float64Array), (cast ((closest * 3.0) + 1.0) : Float)) : Dynamic));
         (bestNormalZ = cast (flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast Gjk3D.faceNormals__gjk3D : flighthq._internal._Float64Array), (cast ((closest * 3.0) + 2.0) : Float)) : Dynamic));
-        Gjk3D.writeMinkowskiSupport3D__gjk3D(({ final __callArgument35:Dynamic = a; __callArgument35; }), ({ final __callArgument36:Dynamic = supportA; __callArgument36; }), ({ final __callArgument37:Dynamic = b; __callArgument37; }), ({ final __callArgument38:Dynamic = supportB; __callArgument38; }), (cast bestNormalX : Float), (cast bestNormalY : Float), (cast bestNormalZ : Float), ({ final __callArgument39:Dynamic = Gjk3D.minkowski__gjk3D; __callArgument39; }));
+        Gjk3D.writeMinkowskiSupport3D__gjk3D(({ final __callArgument70:Dynamic = a; __callArgument70; }), ({ final __callArgument71:Dynamic = supportA; __callArgument71; }), ({ final __callArgument72:Dynamic = b; __callArgument72; }), ({ final __callArgument73:Dynamic = supportB; __callArgument73; }), (cast bestNormalX : Float), (cast bestNormalY : Float), (cast bestNormalZ : Float), ({ final __callArgument74:Dynamic = Gjk3D.minkowski__gjk3D; __callArgument74; }));
         var reach:Float = (((flighthq._internal._StaticIndex.readFloatArrayTyped((cast Gjk3D.minkowski__gjk3D : Array<Float>), (cast 0.0 : Float)) * bestNormalX) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast Gjk3D.minkowski__gjk3D : Array<Float>), (cast 1.0 : Float)) * bestNormalY)) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast Gjk3D.minkowski__gjk3D : Array<Float>), (cast 2.0 : Float)) * bestNormalZ));
         if ((cast ((cast (reach - bestDistance) : Float) <= (cast Gjk3D.EPA_TOLERANCE__gjk3D : Float)) : Bool)) { break; }
         if ((cast ((cast Gjk3D.polytopeCount__gjk3D : Float) >= (cast Gjk3D.MAX_POLYTOPE_VERTICES__gjk3D : Float)) : Bool)) { break; }
@@ -473,8 +473,8 @@ class Gjk3D {
   }
 
   public static function writeMinkowskiSupport3D__gjk3D(a:CollisionShape3D, supportA:CollisionSupport3D, b:CollisionShape3D, supportB:CollisionSupport3D, directionX:Float, directionY:Float, directionZ:Float, out:Array<Float>):Void {
-    supportA(({ final __callArgument40:Dynamic = a; __callArgument40; }), (cast directionX : Float), (cast directionY : Float), (cast directionZ : Float), ({ final __callArgument41:Dynamic = Gjk3D.supportPointA__gjk3D; __callArgument41; }));
-    supportB(({ final __callArgument42:Dynamic = b; __callArgument42; }), (cast -directionX : Float), (cast -directionY : Float), (cast -directionZ : Float), ({ final __callArgument43:Dynamic = Gjk3D.supportPointB__gjk3D; __callArgument43; }));
+    supportA(({ final __callArgument80:Dynamic = a; __callArgument80; }), (cast directionX : Float), (cast directionY : Float), (cast directionZ : Float), ({ final __callArgument81:Dynamic = Gjk3D.supportPointA__gjk3D; __callArgument81; }));
+    supportB(({ final __callArgument84:Dynamic = b; __callArgument84; }), (cast -directionX : Float), (cast -directionY : Float), (cast -directionZ : Float), ({ final __callArgument85:Dynamic = Gjk3D.supportPointB__gjk3D; __callArgument85; }));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast Gjk3D.supportPointA__gjk3D : Array<Float>), (cast 0.0 : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast Gjk3D.supportPointB__gjk3D : Array<Float>), (cast 0.0 : Float))) : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast Gjk3D.supportPointA__gjk3D : Array<Float>), (cast 1.0 : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast Gjk3D.supportPointB__gjk3D : Array<Float>), (cast 1.0 : Float))) : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast Gjk3D.supportPointA__gjk3D : Array<Float>), (cast 2.0 : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast Gjk3D.supportPointB__gjk3D : Array<Float>), (cast 2.0 : Float))) : Float));

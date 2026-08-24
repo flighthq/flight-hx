@@ -93,7 +93,7 @@ class InputManager {
       var prev:GamepadPollState__inputManager = cast _Runtime.UNDEFINED;
       if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       pad = (cast e : flighthq._internal.dom.GamepadEvent).gamepad;
-      prev = (cast InputManager.getOrCreateGamepadPollState__inputManager(({ final __callArgument1:Dynamic = manager; __callArgument1; })) : GamepadPollState__inputManager);
+      prev = (cast InputManager.getOrCreateGamepadPollState__inputManager(({ final __callArgument2:Dynamic = manager; __callArgument2; })) : GamepadPollState__inputManager);
       ((cast (cast prev : GamepadPollState__inputManager).axes : flighthq._internal._Map<Float, Array<Float>>).delete_((cast pad : flighthq._internal.dom.Gamepad).index));
       ((cast (cast prev : GamepadPollState__inputManager).buttons : flighthq._internal._Map<Float, Array<Bool>>).delete_((cast pad : flighthq._internal.dom.Gamepad).index));
       (InputManager._connectData__inputManager.gamepad = cast ((cast pad : flighthq._internal.dom.Gamepad).index : Float));
@@ -103,17 +103,17 @@ class InputManager {
     });
     rafId = 0.0;
     loop = (cast function():Void {
-      pollGamepadInput(({ final __callArgument2:Dynamic = manager; __callArgument2; }));
+      pollGamepadInput(({ final __callArgument4:Dynamic = manager; __callArgument4; }));
       (rafId = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('requestAnimationFrame'), cast ([loop] : Array<Dynamic>)) : Dynamic));
     });
     flighthq._internal.backend.DomWindowBackend.call(target, 'addEventListener', cast (['gamepadconnected', onGamepadConnected] : Array<Dynamic>));
     flighthq._internal.backend.DomWindowBackend.call(target, 'addEventListener', cast (['gamepaddisconnected', onGamepadDisconnected] : Array<Dynamic>));
     (rafId = cast (_Runtime.callValue(flighthq._internal._HostValueLut.get('requestAnimationFrame'), cast ([loop] : Array<Dynamic>)) : Dynamic));
-    InputManager.setInputBinding__inputManager(({ final __callArgument3:Dynamic = manager; __callArgument3; }), ({ final __callArgument4:Dynamic = target; __callArgument4; }), ({ final __callArgument5:Dynamic = InputManager.kGamepadInput__inputManager; __callArgument5; }), ({ final __callArgument6:Dynamic = function():Void {
+    InputManager.setInputBinding__inputManager(({ final __callArgument6:Dynamic = manager; __callArgument6; }), ({ final __callArgument7:Dynamic = target; __callArgument7; }), ({ final __callArgument8:Dynamic = InputManager.kGamepadInput__inputManager; __callArgument8; }), ({ final __callArgument9:Dynamic = function():Void {
       flighthq._internal.backend.DomWindowBackend.call(target, 'removeEventListener', cast (['gamepadconnected', onGamepadConnected] : Array<Dynamic>));
       flighthq._internal.backend.DomWindowBackend.call(target, 'removeEventListener', cast (['gamepaddisconnected', onGamepadDisconnected] : Array<Dynamic>));
       _Runtime.callValue(flighthq._internal._HostValueLut.get('cancelAnimationFrame'), cast ([rafId] : Array<Dynamic>));
-    }; __callArgument6; }));
+    }; __callArgument9; }));
     _Runtime.voidValue(options);
   }
 
@@ -121,13 +121,13 @@ class InputManager {
     var preventDefault:Bool = cast _Runtime.UNDEFINED;
     var onKeyDown:flighthq._internal.dom.Event->Void = cast _Runtime.UNDEFINED;
     var onKeyUp:flighthq._internal.dom.Event->Void = cast _Runtime.UNDEFINED;
-    preventDefault = _Runtime.coalesce(({ final __structural7 = options; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var preventDefault:Null<Bool>; }).preventDefault; }), function():Dynamic return cast true);
+    preventDefault = _Runtime.coalesce(({ final __structural14 = options; __structural14 == null ? _Runtime.UNDEFINED : (cast __structural14 : { @:optional var preventDefault:Null<Bool>; }).preventDefault; }), function():Dynamic return cast true);
     onKeyDown = (cast function(e:flighthq._internal.dom.Event):Void {
       var ke:flighthq._internal.dom.KeyboardEvent = cast _Runtime.UNDEFINED;
       if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       ke = (cast e : flighthq._internal.dom.KeyboardEvent);
       if ((cast preventDefault : Bool)) { (cast ke : flighthq._internal.dom.KeyboardEvent).preventDefault(); }
-      InputManager.setInputKeyboardData__inputManager(({ final __callArgument8:Dynamic = InputManager._keyboardData__inputManager; __callArgument8; }), ({ final __callArgument9:Dynamic = ke; __callArgument9; }));
+      InputManager.setInputKeyboardData__inputManager(({ final __callArgument15:Dynamic = InputManager._keyboardData__inputManager; __callArgument15; }), ({ final __callArgument16:Dynamic = ke; __callArgument16; }));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onKeyDown], [InputManager._keyboardData__inputManager]]), 1);
     });
     onKeyUp = (cast function(e:flighthq._internal.dom.Event):Void {
@@ -135,15 +135,15 @@ class InputManager {
       if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       ke = (cast e : flighthq._internal.dom.KeyboardEvent);
       if ((cast preventDefault : Bool)) { (cast ke : flighthq._internal.dom.KeyboardEvent).preventDefault(); }
-      InputManager.setInputKeyboardData__inputManager(({ final __callArgument10:Dynamic = InputManager._keyboardData__inputManager; __callArgument10; }), ({ final __callArgument11:Dynamic = ke; __callArgument11; }));
+      InputManager.setInputKeyboardData__inputManager(({ final __callArgument19:Dynamic = InputManager._keyboardData__inputManager; __callArgument19; }), ({ final __callArgument20:Dynamic = ke; __callArgument20; }));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onKeyUp], [InputManager._keyboardData__inputManager]]), 1);
     });
     target.addEventListener('keydown', onKeyDown);
     target.addEventListener('keyup', onKeyUp);
-    InputManager.setInputBinding__inputManager(({ final __callArgument12:Dynamic = manager; __callArgument12; }), ({ final __callArgument13:Dynamic = target; __callArgument13; }), ({ final __callArgument14:Dynamic = InputManager.kKeyboardInput__inputManager; __callArgument14; }), ({ final __callArgument15:Dynamic = function():Void {
+    InputManager.setInputBinding__inputManager(({ final __callArgument23:Dynamic = manager; __callArgument23; }), ({ final __callArgument24:Dynamic = target; __callArgument24; }), ({ final __callArgument25:Dynamic = InputManager.kKeyboardInput__inputManager; __callArgument25; }), ({ final __callArgument26:Dynamic = function():Void {
       target.removeEventListener('keydown', onKeyDown);
       target.removeEventListener('keyup', onKeyUp);
-    }; __callArgument15; }));
+    }; __callArgument26; }));
   }
 
   public static function attachPointerInput(manager:flighthq.types.InputManager, element:flighthq._internal.dom.HTMLElement, ?options:AttachInputOptions):Void {
@@ -153,32 +153,32 @@ class InputManager {
     var onPointerDown:flighthq._internal.dom.Event->Void = cast _Runtime.UNDEFINED;
     var onPointerMove:flighthq._internal.dom.Event->Void = cast _Runtime.UNDEFINED;
     var onPointerUp:flighthq._internal.dom.Event->Void = cast _Runtime.UNDEFINED;
-    preventDefault = _Runtime.coalesce(({ final __structural16 = options; __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : { @:optional var preventDefault:Null<Bool>; }).preventDefault; }), function():Dynamic return cast true);
+    preventDefault = _Runtime.coalesce(({ final __structural31 = options; __structural31 == null ? _Runtime.UNDEFINED : (cast __structural31 : { @:optional var preventDefault:Null<Bool>; }).preventDefault; }), function():Dynamic return cast true);
     onContextMenu = (cast function(e:flighthq._internal.dom.Event):Void {
       if ((cast preventDefault : Bool)) { e.preventDefault(); }
     });
     onPointerCancel = (cast function(e:flighthq._internal.dom.Event):Void {
       if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       if ((cast preventDefault : Bool)) { e.preventDefault(); }
-      InputManager.setInputPointerData__inputManager(({ final __callArgument17:Dynamic = InputManager._pointerData__inputManager; __callArgument17; }), ({ final __callArgument18:Dynamic = (cast e : flighthq._internal.dom.PointerEvent); __callArgument18; }), (cast 0.0 : Float), (cast 0.0 : Float));
+      InputManager.setInputPointerData__inputManager(({ final __callArgument32:Dynamic = InputManager._pointerData__inputManager; __callArgument32; }), ({ final __callArgument33:Dynamic = (cast e : flighthq._internal.dom.PointerEvent); __callArgument33; }), (cast 0.0 : Float), (cast 0.0 : Float));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onPointerCancel], [InputManager._pointerData__inputManager]]), 1);
     });
     onPointerDown = (cast function(e:flighthq._internal.dom.Event):Void {
       if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       if ((cast preventDefault : Bool)) { e.preventDefault(); }
-      InputManager.setInputPointerData__inputManager(({ final __callArgument19:Dynamic = InputManager._pointerData__inputManager; __callArgument19; }), ({ final __callArgument20:Dynamic = (cast e : flighthq._internal.dom.PointerEvent); __callArgument20; }), (cast 0.0 : Float), (cast 0.0 : Float));
+      InputManager.setInputPointerData__inputManager(({ final __callArgument36:Dynamic = InputManager._pointerData__inputManager; __callArgument36; }), ({ final __callArgument37:Dynamic = (cast e : flighthq._internal.dom.PointerEvent); __callArgument37; }), (cast 0.0 : Float), (cast 0.0 : Float));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onPointerDown], [InputManager._pointerData__inputManager]]), 1);
     });
     onPointerMove = (cast function(e:flighthq._internal.dom.Event):Void {
       if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       if ((cast preventDefault : Bool)) { e.preventDefault(); }
-      InputManager.setInputPointerData__inputManager(({ final __callArgument21:Dynamic = InputManager._pointerData__inputManager; __callArgument21; }), ({ final __callArgument22:Dynamic = (cast e : flighthq._internal.dom.PointerEvent); __callArgument22; }), (cast 0.0 : Float), (cast 0.0 : Float));
+      InputManager.setInputPointerData__inputManager(({ final __callArgument40:Dynamic = InputManager._pointerData__inputManager; __callArgument40; }), ({ final __callArgument41:Dynamic = (cast e : flighthq._internal.dom.PointerEvent); __callArgument41; }), (cast 0.0 : Float), (cast 0.0 : Float));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onPointerMove], [InputManager._pointerData__inputManager]]), 1);
     });
     onPointerUp = (cast function(e:flighthq._internal.dom.Event):Void {
       if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       if ((cast preventDefault : Bool)) { e.preventDefault(); }
-      InputManager.setInputPointerData__inputManager(({ final __callArgument23:Dynamic = InputManager._pointerData__inputManager; __callArgument23; }), ({ final __callArgument24:Dynamic = (cast e : flighthq._internal.dom.PointerEvent); __callArgument24; }), (cast 0.0 : Float), (cast 0.0 : Float));
+      InputManager.setInputPointerData__inputManager(({ final __callArgument44:Dynamic = InputManager._pointerData__inputManager; __callArgument44; }), ({ final __callArgument45:Dynamic = (cast e : flighthq._internal.dom.PointerEvent); __callArgument45; }), (cast 0.0 : Float), (cast 0.0 : Float));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onPointerUp], [InputManager._pointerData__inputManager]]), 1);
     });
     element.addEventListener('contextmenu', onContextMenu);
@@ -186,31 +186,31 @@ class InputManager {
     element.addEventListener('pointerdown', onPointerDown);
     element.addEventListener('pointermove', onPointerMove);
     element.addEventListener('pointerup', onPointerUp);
-    InputManager.setInputBinding__inputManager(({ final __callArgument25:Dynamic = manager; __callArgument25; }), ({ final __callArgument26:Dynamic = element; __callArgument26; }), ({ final __callArgument27:Dynamic = InputManager.kPointerInput__inputManager; __callArgument27; }), ({ final __callArgument28:Dynamic = function():Void {
+    InputManager.setInputBinding__inputManager(({ final __callArgument48:Dynamic = manager; __callArgument48; }), ({ final __callArgument49:Dynamic = element; __callArgument49; }), ({ final __callArgument50:Dynamic = InputManager.kPointerInput__inputManager; __callArgument50; }), ({ final __callArgument51:Dynamic = function():Void {
       element.removeEventListener('contextmenu', onContextMenu);
       element.removeEventListener('pointercancel', onPointerCancel);
       element.removeEventListener('pointerdown', onPointerDown);
       element.removeEventListener('pointermove', onPointerMove);
       element.removeEventListener('pointerup', onPointerUp);
-    }; __callArgument28; }));
+    }; __callArgument51; }));
   }
 
   public static function attachRelativePointerInput(manager:flighthq.types.InputManager, element:flighthq._internal.dom.HTMLElement, ?options:AttachInputOptions):Void {
     var preventDefault:Bool = cast _Runtime.UNDEFINED;
     var target:flighthq._internal.dom.Document = cast _Runtime.UNDEFINED;
     var handler:flighthq._internal.dom.Event->Void = cast _Runtime.UNDEFINED;
-    preventDefault = _Runtime.coalesce(({ final __structural29 = options; __structural29 == null ? _Runtime.UNDEFINED : (cast __structural29 : { @:optional var preventDefault:Null<Bool>; }).preventDefault; }), function():Dynamic return cast true);
+    preventDefault = _Runtime.coalesce(({ final __structural56 = options; __structural56 == null ? _Runtime.UNDEFINED : (cast __structural56 : { @:optional var preventDefault:Null<Bool>; }).preventDefault; }), function():Dynamic return cast true);
     target = element.ownerDocument;
     handler = (cast function(e:flighthq._internal.dom.Event):Void {
       var me:flighthq._internal.dom.MouseEvent = cast _Runtime.UNDEFINED;
       if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       me = (cast e : flighthq._internal.dom.MouseEvent);
       if ((cast preventDefault : Bool)) { (cast me : flighthq._internal.dom.MouseEvent).preventDefault(); }
-      InputManager.setInputPointerData__inputManager(({ final __callArgument30:Dynamic = InputManager._pointerData__inputManager; __callArgument30; }), ({ final __callArgument31:Dynamic = me; __callArgument31; }), (cast (cast me : flighthq._internal.dom.MouseEvent).movementX : Float), (cast (cast me : flighthq._internal.dom.MouseEvent).movementY : Float));
+      InputManager.setInputPointerData__inputManager(({ final __callArgument57:Dynamic = InputManager._pointerData__inputManager; __callArgument57; }), ({ final __callArgument58:Dynamic = me; __callArgument58; }), (cast (cast me : flighthq._internal.dom.MouseEvent).movementX : Float), (cast (cast me : flighthq._internal.dom.MouseEvent).movementY : Float));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onPointerMoveRelative], [InputManager._pointerData__inputManager]]), 1);
     });
     flighthq._internal.backend.DomDocumentBackend.call(target, 'addEventListener', cast (['mousemove', handler] : Array<Dynamic>));
-    InputManager.setInputBinding__inputManager(({ final __callArgument32:Dynamic = manager; __callArgument32; }), ({ final __callArgument33:Dynamic = element; __callArgument33; }), ({ final __callArgument34:Dynamic = InputManager.kRelativePointerInput__inputManager; __callArgument34; }), ({ final __callArgument35:Dynamic = function():Void { flighthq._internal.backend.DomDocumentBackend.call(target, 'removeEventListener', cast (['mousemove', handler] : Array<Dynamic>)); }; __callArgument35; }));
+    InputManager.setInputBinding__inputManager(({ final __callArgument61:Dynamic = manager; __callArgument61; }), ({ final __callArgument62:Dynamic = element; __callArgument62; }), ({ final __callArgument63:Dynamic = InputManager.kRelativePointerInput__inputManager; __callArgument63; }), ({ final __callArgument64:Dynamic = function():Void { flighthq._internal.backend.DomDocumentBackend.call(target, 'removeEventListener', cast (['mousemove', handler] : Array<Dynamic>)); }; __callArgument64; }));
   }
 
   public static function attachTextInput(manager:flighthq.types.InputManager, element:flighthq._internal.dom.HTMLElement, ?options:AttachInputOptions):Void {
@@ -238,28 +238,28 @@ class InputManager {
     });
     element.addEventListener('beforeinput', onBeforeInput);
     element.addEventListener('compositionupdate', onCompositionUpdate);
-    InputManager.setInputBinding__inputManager(({ final __callArgument36:Dynamic = manager; __callArgument36; }), ({ final __callArgument37:Dynamic = element; __callArgument37; }), ({ final __callArgument38:Dynamic = InputManager.kTextInput__inputManager; __callArgument38; }), ({ final __callArgument39:Dynamic = function():Void {
+    InputManager.setInputBinding__inputManager(({ final __callArgument69:Dynamic = manager; __callArgument69; }), ({ final __callArgument70:Dynamic = element; __callArgument70; }), ({ final __callArgument71:Dynamic = InputManager.kTextInput__inputManager; __callArgument71; }), ({ final __callArgument72:Dynamic = function():Void {
       element.removeEventListener('beforeinput', onBeforeInput);
       element.removeEventListener('compositionupdate', onCompositionUpdate);
-    }; __callArgument39; }));
+    }; __callArgument72; }));
     _Runtime.voidValue(options);
   }
 
   public static function attachWheelInput(manager:flighthq.types.InputManager, element:flighthq._internal.dom.HTMLElement, ?options:AttachInputOptions):Void {
     var preventDefault:Bool = cast _Runtime.UNDEFINED;
     var handler:flighthq._internal.dom.Event->Void = cast _Runtime.UNDEFINED;
-    preventDefault = _Runtime.coalesce(({ final __structural40 = options; __structural40 == null ? _Runtime.UNDEFINED : (cast __structural40 : { @:optional var preventDefault:Null<Bool>; }).preventDefault; }), function():Dynamic return cast true);
+    preventDefault = _Runtime.coalesce(({ final __structural77 = options; __structural77 == null ? _Runtime.UNDEFINED : (cast __structural77 : { @:optional var preventDefault:Null<Bool>; }).preventDefault; }), function():Dynamic return cast true);
     handler = (cast function(e:flighthq._internal.dom.Event):Void {
       var we:flighthq._internal.dom.WheelEvent = cast _Runtime.UNDEFINED;
       if ((cast !(cast manager.enabled : Bool) : Bool)) { return; }
       we = (cast e : flighthq._internal.dom.WheelEvent);
       if ((cast preventDefault : Bool)) { (cast we : flighthq._internal.dom.WheelEvent).preventDefault(); }
-      InputManager.setInputPointerData__inputManager(({ final __callArgument41:Dynamic = InputManager._pointerData__inputManager; __callArgument41; }), ({ final __callArgument42:Dynamic = we; __callArgument42; }), (cast (cast we : flighthq._internal.dom.WheelEvent).deltaX : Float), (cast (cast we : flighthq._internal.dom.WheelEvent).deltaY : Float));
-      (InputManager._pointerData__inputManager.wheelMode = cast ((cast getMouseWheelModeFromDomWheelEvent(({ final __callArgument43:Dynamic = we; __callArgument43; })) : MouseWheelMode) : MouseWheelMode));
+      InputManager.setInputPointerData__inputManager(({ final __callArgument78:Dynamic = InputManager._pointerData__inputManager; __callArgument78; }), ({ final __callArgument79:Dynamic = we; __callArgument79; }), (cast (cast we : flighthq._internal.dom.WheelEvent).deltaX : Float), (cast (cast we : flighthq._internal.dom.WheelEvent).deltaY : Float));
+      (InputManager._pointerData__inputManager.wheelMode = cast ((cast getMouseWheelModeFromDomWheelEvent(({ final __callArgument82:Dynamic = we; __callArgument82; })) : MouseWheelMode) : MouseWheelMode));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[manager.onWheel], [InputManager._pointerData__inputManager]]), 1);
     });
     element.addEventListener('wheel', handler, { passive: !(cast preventDefault : Bool) });
-    InputManager.setInputBinding__inputManager(({ final __callArgument44:Dynamic = manager; __callArgument44; }), ({ final __callArgument45:Dynamic = element; __callArgument45; }), ({ final __callArgument46:Dynamic = InputManager.kWheelInput__inputManager; __callArgument46; }), ({ final __callArgument47:Dynamic = function():Void { element.removeEventListener('wheel', handler); }; __callArgument47; }));
+    InputManager.setInputBinding__inputManager(({ final __callArgument84:Dynamic = manager; __callArgument84; }), ({ final __callArgument85:Dynamic = element; __callArgument85; }), ({ final __callArgument86:Dynamic = InputManager.kWheelInput__inputManager; __callArgument86; }), ({ final __callArgument87:Dynamic = function():Void { element.removeEventListener('wheel', handler); }; __callArgument87; }));
   }
 
   public static function connectInputStateToInputManager(state:InputState, manager:flighthq.types.InputManager):Void->Void {
@@ -353,27 +353,27 @@ class InputManager {
         }
       }
     });
-    connectSignal((cast manager.onKeyDown : Dynamic), ({ final __callArgument48:Dynamic = onKeyDown; __callArgument48; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast manager.onKeyUp : Dynamic), ({ final __callArgument49:Dynamic = onKeyUp; __callArgument49; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast manager.onPointerDown : Dynamic), ({ final __callArgument50:Dynamic = onPointerDown; __callArgument50; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast manager.onPointerUp : Dynamic), ({ final __callArgument51:Dynamic = onPointerUp; __callArgument51; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast manager.onPointerCancel : Dynamic), ({ final __callArgument52:Dynamic = onPointerCancel; __callArgument52; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast manager.onGamepadButtonDown : Dynamic), ({ final __callArgument53:Dynamic = onGamepadButtonDown; __callArgument53; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast manager.onGamepadButtonUp : Dynamic), ({ final __callArgument54:Dynamic = onGamepadButtonUp; __callArgument54; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast manager.onGamepadAxisMove : Dynamic), ({ final __callArgument55:Dynamic = onGamepadAxisMove; __callArgument55; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast manager.onGamepadConnect : Dynamic), ({ final __callArgument56:Dynamic = onGamepadConnect; __callArgument56; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    connectSignal((cast manager.onGamepadDisconnect : Dynamic), ({ final __callArgument57:Dynamic = onGamepadDisconnect; __callArgument57; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast manager.onKeyDown : Dynamic), ({ final __callArgument93:Dynamic = onKeyDown; __callArgument93; })] : Array<Dynamic>)) #else connectSignal((cast manager.onKeyDown : Dynamic), ({ final __callArgument92:Dynamic = onKeyDown; __callArgument92; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast manager.onKeyUp : Dynamic), ({ final __callArgument95:Dynamic = onKeyUp; __callArgument95; })] : Array<Dynamic>)) #else connectSignal((cast manager.onKeyUp : Dynamic), ({ final __callArgument94:Dynamic = onKeyUp; __callArgument94; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast manager.onPointerDown : Dynamic), ({ final __callArgument97:Dynamic = onPointerDown; __callArgument97; })] : Array<Dynamic>)) #else connectSignal((cast manager.onPointerDown : Dynamic), ({ final __callArgument96:Dynamic = onPointerDown; __callArgument96; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast manager.onPointerUp : Dynamic), ({ final __callArgument99:Dynamic = onPointerUp; __callArgument99; })] : Array<Dynamic>)) #else connectSignal((cast manager.onPointerUp : Dynamic), ({ final __callArgument98:Dynamic = onPointerUp; __callArgument98; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast manager.onPointerCancel : Dynamic), ({ final __callArgument101:Dynamic = onPointerCancel; __callArgument101; })] : Array<Dynamic>)) #else connectSignal((cast manager.onPointerCancel : Dynamic), ({ final __callArgument100:Dynamic = onPointerCancel; __callArgument100; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast manager.onGamepadButtonDown : Dynamic), ({ final __callArgument103:Dynamic = onGamepadButtonDown; __callArgument103; })] : Array<Dynamic>)) #else connectSignal((cast manager.onGamepadButtonDown : Dynamic), ({ final __callArgument102:Dynamic = onGamepadButtonDown; __callArgument102; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast manager.onGamepadButtonUp : Dynamic), ({ final __callArgument105:Dynamic = onGamepadButtonUp; __callArgument105; })] : Array<Dynamic>)) #else connectSignal((cast manager.onGamepadButtonUp : Dynamic), ({ final __callArgument104:Dynamic = onGamepadButtonUp; __callArgument104; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast manager.onGamepadAxisMove : Dynamic), ({ final __callArgument107:Dynamic = onGamepadAxisMove; __callArgument107; })] : Array<Dynamic>)) #else connectSignal((cast manager.onGamepadAxisMove : Dynamic), ({ final __callArgument106:Dynamic = onGamepadAxisMove; __callArgument106; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast manager.onGamepadConnect : Dynamic), ({ final __callArgument109:Dynamic = onGamepadConnect; __callArgument109; })] : Array<Dynamic>)) #else connectSignal((cast manager.onGamepadConnect : Dynamic), ({ final __callArgument108:Dynamic = onGamepadConnect; __callArgument108; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast manager.onGamepadDisconnect : Dynamic), ({ final __callArgument111:Dynamic = onGamepadDisconnect; __callArgument111; })] : Array<Dynamic>)) #else connectSignal((cast manager.onGamepadDisconnect : Dynamic), ({ final __callArgument110:Dynamic = onGamepadDisconnect; __callArgument110; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     return cast function():Void {
-      disconnectSignal((cast manager.onKeyDown : Dynamic), ({ final __callArgument58:Dynamic = onKeyDown; __callArgument58; }));
-      disconnectSignal((cast manager.onKeyUp : Dynamic), ({ final __callArgument59:Dynamic = onKeyUp; __callArgument59; }));
-      disconnectSignal((cast manager.onPointerDown : Dynamic), ({ final __callArgument60:Dynamic = onPointerDown; __callArgument60; }));
-      disconnectSignal((cast manager.onPointerUp : Dynamic), ({ final __callArgument61:Dynamic = onPointerUp; __callArgument61; }));
-      disconnectSignal((cast manager.onPointerCancel : Dynamic), ({ final __callArgument62:Dynamic = onPointerCancel; __callArgument62; }));
-      disconnectSignal((cast manager.onGamepadButtonDown : Dynamic), ({ final __callArgument63:Dynamic = onGamepadButtonDown; __callArgument63; }));
-      disconnectSignal((cast manager.onGamepadButtonUp : Dynamic), ({ final __callArgument64:Dynamic = onGamepadButtonUp; __callArgument64; }));
-      disconnectSignal((cast manager.onGamepadAxisMove : Dynamic), ({ final __callArgument65:Dynamic = onGamepadAxisMove; __callArgument65; }));
-      disconnectSignal((cast manager.onGamepadConnect : Dynamic), ({ final __callArgument66:Dynamic = onGamepadConnect; __callArgument66; }));
-      disconnectSignal((cast manager.onGamepadDisconnect : Dynamic), ({ final __callArgument67:Dynamic = onGamepadDisconnect; __callArgument67; }));
+      disconnectSignal((cast manager.onKeyDown : Dynamic), ({ final __callArgument112:Dynamic = onKeyDown; __callArgument112; }));
+      disconnectSignal((cast manager.onKeyUp : Dynamic), ({ final __callArgument114:Dynamic = onKeyUp; __callArgument114; }));
+      disconnectSignal((cast manager.onPointerDown : Dynamic), ({ final __callArgument116:Dynamic = onPointerDown; __callArgument116; }));
+      disconnectSignal((cast manager.onPointerUp : Dynamic), ({ final __callArgument118:Dynamic = onPointerUp; __callArgument118; }));
+      disconnectSignal((cast manager.onPointerCancel : Dynamic), ({ final __callArgument120:Dynamic = onPointerCancel; __callArgument120; }));
+      disconnectSignal((cast manager.onGamepadButtonDown : Dynamic), ({ final __callArgument122:Dynamic = onGamepadButtonDown; __callArgument122; }));
+      disconnectSignal((cast manager.onGamepadButtonUp : Dynamic), ({ final __callArgument124:Dynamic = onGamepadButtonUp; __callArgument124; }));
+      disconnectSignal((cast manager.onGamepadAxisMove : Dynamic), ({ final __callArgument126:Dynamic = onGamepadAxisMove; __callArgument126; }));
+      disconnectSignal((cast manager.onGamepadConnect : Dynamic), ({ final __callArgument128:Dynamic = onGamepadConnect; __callArgument128; }));
+      disconnectSignal((cast manager.onGamepadDisconnect : Dynamic), ({ final __callArgument130:Dynamic = onGamepadDisconnect; __callArgument130; }));
     };
     return cast null;
   }
@@ -420,27 +420,27 @@ class InputManager {
   }
 
   public static function detachGamepadInput(manager:flighthq.types.InputManager, target:flighthq._internal.dom.Window):Void {
-    InputManager.clearInputBinding__inputManager(({ final __callArgument68:Dynamic = manager; __callArgument68; }), ({ final __callArgument69:Dynamic = target; __callArgument69; }), ({ final __callArgument70:Dynamic = InputManager.kGamepadInput__inputManager; __callArgument70; }));
+    InputManager.clearInputBinding__inputManager(({ final __callArgument132:Dynamic = manager; __callArgument132; }), ({ final __callArgument133:Dynamic = target; __callArgument133; }), ({ final __callArgument134:Dynamic = InputManager.kGamepadInput__inputManager; __callArgument134; }));
   }
 
   public static function detachKeyboardInput(manager:flighthq.types.InputManager, target:flighthq._internal.dom.EventTarget):Void {
-    InputManager.clearInputBinding__inputManager(({ final __callArgument71:Dynamic = manager; __callArgument71; }), ({ final __callArgument72:Dynamic = target; __callArgument72; }), ({ final __callArgument73:Dynamic = InputManager.kKeyboardInput__inputManager; __callArgument73; }));
+    InputManager.clearInputBinding__inputManager(({ final __callArgument138:Dynamic = manager; __callArgument138; }), ({ final __callArgument139:Dynamic = target; __callArgument139; }), ({ final __callArgument140:Dynamic = InputManager.kKeyboardInput__inputManager; __callArgument140; }));
   }
 
   public static function detachPointerInput(manager:flighthq.types.InputManager, element:flighthq._internal.dom.HTMLElement):Void {
-    InputManager.clearInputBinding__inputManager(({ final __callArgument74:Dynamic = manager; __callArgument74; }), ({ final __callArgument75:Dynamic = element; __callArgument75; }), ({ final __callArgument76:Dynamic = InputManager.kPointerInput__inputManager; __callArgument76; }));
+    InputManager.clearInputBinding__inputManager(({ final __callArgument144:Dynamic = manager; __callArgument144; }), ({ final __callArgument145:Dynamic = element; __callArgument145; }), ({ final __callArgument146:Dynamic = InputManager.kPointerInput__inputManager; __callArgument146; }));
   }
 
   public static function detachRelativePointerInput(manager:flighthq.types.InputManager, element:flighthq._internal.dom.HTMLElement):Void {
-    InputManager.clearInputBinding__inputManager(({ final __callArgument77:Dynamic = manager; __callArgument77; }), ({ final __callArgument78:Dynamic = element; __callArgument78; }), ({ final __callArgument79:Dynamic = InputManager.kRelativePointerInput__inputManager; __callArgument79; }));
+    InputManager.clearInputBinding__inputManager(({ final __callArgument150:Dynamic = manager; __callArgument150; }), ({ final __callArgument151:Dynamic = element; __callArgument151; }), ({ final __callArgument152:Dynamic = InputManager.kRelativePointerInput__inputManager; __callArgument152; }));
   }
 
   public static function detachTextInput(manager:flighthq.types.InputManager, element:flighthq._internal.dom.HTMLElement):Void {
-    InputManager.clearInputBinding__inputManager(({ final __callArgument80:Dynamic = manager; __callArgument80; }), ({ final __callArgument81:Dynamic = element; __callArgument81; }), ({ final __callArgument82:Dynamic = InputManager.kTextInput__inputManager; __callArgument82; }));
+    InputManager.clearInputBinding__inputManager(({ final __callArgument156:Dynamic = manager; __callArgument156; }), ({ final __callArgument157:Dynamic = element; __callArgument157; }), ({ final __callArgument158:Dynamic = InputManager.kTextInput__inputManager; __callArgument158; }));
   }
 
   public static function detachWheelInput(manager:flighthq.types.InputManager, element:flighthq._internal.dom.HTMLElement):Void {
-    InputManager.clearInputBinding__inputManager(({ final __callArgument83:Dynamic = manager; __callArgument83; }), ({ final __callArgument84:Dynamic = element; __callArgument84; }), ({ final __callArgument85:Dynamic = InputManager.kWheelInput__inputManager; __callArgument85; }));
+    InputManager.clearInputBinding__inputManager(({ final __callArgument162:Dynamic = manager; __callArgument162; }), ({ final __callArgument163:Dynamic = element; __callArgument163; }), ({ final __callArgument164:Dynamic = InputManager.kWheelInput__inputManager; __callArgument164; }));
   }
 
   public static function endInputStateFrame(state:InputState):Void {
@@ -461,12 +461,12 @@ class InputManager {
     coalesced = ((cast _Runtime.strictEquals(_Runtime.typeofValue(event.getCoalescedEvents), 'function') : Bool) ? (cast event.getCoalescedEvents() : Dynamic) : (cast null : Dynamic));
     if ((cast ((cast !_Runtime.strictEquals(coalesced, null) : Bool) && (cast ((cast _Runtime.field(coalesced, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       for (e in _Runtime.iterable(coalesced)) {
-        InputManager.setInputPointerData__inputManager(({ final __callArgument88:Dynamic = InputManager._pointerData__inputManager; __callArgument88; }), ({ final __callArgument89:Dynamic = e; __callArgument89; }), (cast 0.0 : Float), (cast 0.0 : Float));
-        callback(({ final __callArgument90:Dynamic = InputManager._pointerData__inputManager; __callArgument90; }));
+        InputManager.setInputPointerData__inputManager(({ final __callArgument170:Dynamic = InputManager._pointerData__inputManager; __callArgument170; }), ({ final __callArgument171:Dynamic = e; __callArgument171; }), (cast 0.0 : Float), (cast 0.0 : Float));
+        callback(({ final __callArgument174:Dynamic = InputManager._pointerData__inputManager; __callArgument174; }));
       }
     } else {
-      InputManager.setInputPointerData__inputManager(({ final __callArgument91:Dynamic = InputManager._pointerData__inputManager; __callArgument91; }), ({ final __callArgument92:Dynamic = event; __callArgument92; }), (cast 0.0 : Float), (cast 0.0 : Float));
-      callback(({ final __callArgument93:Dynamic = InputManager._pointerData__inputManager; __callArgument93; }));
+      InputManager.setInputPointerData__inputManager(({ final __callArgument176:Dynamic = InputManager._pointerData__inputManager; __callArgument176; }), ({ final __callArgument177:Dynamic = event; __callArgument177; }), (cast 0.0 : Float), (cast 0.0 : Float));
+      callback(({ final __callArgument180:Dynamic = InputManager._pointerData__inputManager; __callArgument180; }));
     }
   }
 
@@ -543,7 +543,7 @@ class InputManager {
     var gamepads:Array<Null<flighthq._internal.dom.Gamepad>> = cast _Runtime.UNDEFINED;
     if ((cast ((cast !(cast manager.enabled : Bool) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'getGamepads')), 'function') : Bool)) : Bool)) { return; }
     now = (cast flighthq._internal._HostValueLut.get('performance') : flighthq._internal.dom.Performance).now();
-    prev = (cast InputManager.getOrCreateGamepadPollState__inputManager(({ final __callArgument94:Dynamic = manager; __callArgument94; })) : GamepadPollState__inputManager);
+    prev = (cast InputManager.getOrCreateGamepadPollState__inputManager(({ final __callArgument182:Dynamic = manager; __callArgument182; })) : GamepadPollState__inputManager);
     gamepads = flighthq._internal.backend.DomNavigatorBackend.call(flighthq._internal.backend.DomNavigatorBackend.value(), 'getGamepads', cast ([] : Array<Dynamic>));
     for (pad in _Runtime.iterable(gamepads)) {
       if ((cast _Runtime.strictEquals(pad, null) : Bool)) { continue; }
@@ -648,13 +648,13 @@ class InputManager {
 
   public static function setInputKeyboardData__inputManager(out:InputKeyboardData, event:flighthq._internal.dom.KeyboardEvent):Void {
     var modifier:Float = cast _Runtime.UNDEFINED;
-    modifier = (cast getKeyModifierFromDomKeyboardEvent(({ final __callArgument97:Dynamic = event; __callArgument97; })) : Float);
+    modifier = (cast getKeyModifierFromDomKeyboardEvent(({ final __callArgument186:Dynamic = event; __callArgument186; })) : Float);
     (out.altKey = cast (event.altKey : Bool));
     (out.capsLock = cast (!_Runtime.strictEquals((_Runtime.toInt32(modifier) & _Runtime.toInt32((cast KeyModifierValue : { var ALT:Float; var CAPS_LOCK:Float; var CTRL:Float; var LEFT_ALT:Float; var LEFT_CTRL:Float; var LEFT_META:Float; var LEFT_SHIFT:Float; var META:Float; var MODE:Float; var NONE:Float; var NUM_LOCK:Float; var RIGHT_ALT:Float; var RIGHT_CTRL:Float; var RIGHT_META:Float; var RIGHT_SHIFT:Float; var SHIFT:Float; }).CAPS_LOCK)), 0.0) : Bool));
     (out.code = cast (event.code : String));
     (out.ctrlKey = cast (event.ctrlKey : Bool));
     (out.key = cast (event.key : String));
-    (out.keyCode = cast ((cast getKeyCodeFromDomKeyboardEvent(({ final __callArgument98:Dynamic = event; __callArgument98; })) : Float) : Float));
+    (out.keyCode = cast ((cast getKeyCodeFromDomKeyboardEvent(({ final __callArgument188:Dynamic = event; __callArgument188; })) : Float) : Float));
     (out.location = cast (event.location : Float));
     (out.metaKey = cast (event.metaKey : Bool));
     (out.modifier = cast (modifier : Float));
@@ -740,8 +740,8 @@ class InputManager {
   public static function clearInputBinding__inputManager(manager:flighthq.types.InputManager, target:flighthq._internal.dom.EventTarget, kind:flighthq._internal._Symbol):Void {
     var byKind:Null<flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>> = cast _Runtime.UNDEFINED;
     var cleanup:Null<Void->Void> = cast _Runtime.UNDEFINED;
-    byKind = ({ final __collection99:Dynamic = ((cast InputManager._inputBindings__inputManager : flighthq._internal._WeakMap<flighthq.types.InputManager, flighthq._internal._Map<flighthq._internal.dom.EventTarget, flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>>>).get(manager)); __collection99 == null ? _Runtime.UNDEFINED : ((cast __collection99 : flighthq._internal._Map<flighthq._internal.dom.EventTarget, flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>>).get(target)); });
-    cleanup = ({ final __collection100:Dynamic = byKind; __collection100 == null ? _Runtime.UNDEFINED : ((cast __collection100 : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).get(kind)); });
+    byKind = ({ final __collection190:Dynamic = ((cast InputManager._inputBindings__inputManager : flighthq._internal._WeakMap<flighthq.types.InputManager, flighthq._internal._Map<flighthq._internal.dom.EventTarget, flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>>>).get(manager)); __collection190 == null ? _Runtime.UNDEFINED : ((cast __collection190 : flighthq._internal._Map<flighthq._internal.dom.EventTarget, flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>>).get(target)); });
+    cleanup = ({ final __collection191:Dynamic = byKind; __collection191 == null ? _Runtime.UNDEFINED : ((cast __collection191 : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).get(kind)); });
     if ((cast _Runtime.strictEquals(cleanup, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     cleanup();
     ((cast byKind : flighthq._internal._Map<Dynamic, Dynamic>).delete_(kind));

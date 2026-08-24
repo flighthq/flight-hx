@@ -23,10 +23,10 @@ class WgpuWhiteBalanceEffect {
     temperature = _Runtime.coalesce(_Runtime.field(effect, 'temperature'), function():Dynamic return cast 0.0);
     tint = _Runtime.coalesce(_Runtime.field(effect, 'tint'), function():Dynamic return cast 0.0);
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'colorGrade.whiteBalance' : String), (cast WgpuWhiteBalanceEffect.WHITE_BALANCE_FRAGMENT_WGSL__wgpuWhiteBalanceEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast source : WgpuRenderTarget), ({ final __callArgument2:Dynamic = (cast dest : WgpuRenderTarget); __callArgument2; }), ({ final __callArgument3:Dynamic = pipeline; __callArgument3; }), ({ final __callArgument4:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    drawWgpuEffectPass(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast source : WgpuRenderTarget), ({ final __callArgument3:Dynamic = (cast dest : WgpuRenderTarget); __callArgument3; }), ({ final __callArgument4:Dynamic = pipeline; __callArgument4; }), ({ final __callArgument5:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast temperature : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast tint : Float));
-    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument4; }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument5; }));
   }
 
   public static final defaultWgpuWhiteBalanceEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
@@ -34,7 +34,7 @@ class WgpuWhiteBalanceEffect {
   });
 
   public static function registerWgpuWhiteBalanceEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'WhiteBalanceEffect' : String), ({ final __callArgument6:Dynamic = defaultWgpuWhiteBalanceEffectRunner; __callArgument6; }));
+    registerWgpuRenderEffect(({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast 'WhiteBalanceEffect' : String), ({ final __callArgument11:Dynamic = defaultWgpuWhiteBalanceEffectRunner; __callArgument11; }));
   }
 
   public static final WHITE_BALANCE_FRAGMENT_WGSL__wgpuWhiteBalanceEffect:String = '\nstruct Uniforms { u_temperature : f32, u_tint : f32, _pad0 : f32, _pad1 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  var rgb = c.rgb;\n  rgb.r += uni.u_temperature * 0.5;\n  rgb.b -= uni.u_temperature * 0.5;\n  rgb.g += uni.u_tint * 0.5;\n  return vec4f(clamp(rgb, vec3f(0.0), vec3f(1.0)), c.a);\n}';

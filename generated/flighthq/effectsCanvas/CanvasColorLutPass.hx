@@ -13,7 +13,7 @@ class CanvasColorLutPass {
   public static function applyColorLutPassToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, lut:ColorLut):Void {
     var rgb:Array<Float> = cast _Runtime.UNDEFINED;
     rgb = (cast cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
-    drawCanvasImageDataPass(({ final __callArgument0:Dynamic = dest; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument4:Dynamic = function(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float):Void {
+    drawCanvasImageDataPass(({ final __callArgument0:Dynamic = dest; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument6:Dynamic = function(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float):Void {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast pixelCount : Float)) : Bool)) {
@@ -25,6 +25,6 @@ class CanvasColorLutPass {
           i++;
         }
       }
-    }; __callArgument4; }));
+    }; __callArgument6; }));
   }
 }

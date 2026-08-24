@@ -18,7 +18,7 @@ class CanvasImageTextureResolver {
   }
 
   public static function resolveCanvasImageTexture__canvasImageTextureResolver(_resolvers:CanvasTextureResolvers, texture:Texture):Null<flighthq._internal.dom.CanvasImageSource> {
-    return cast _Runtime.coalesce(({ final __structural2 = (cast getTextureSource(({ final __callArgument1:Dynamic = texture; __callArgument1; })) : Null<Image>); __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var source:flighthq._internal._Any; }).source; }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __structural4 = (cast getTextureSource(({ final __callArgument2:Dynamic = texture; __callArgument2; })) : Null<Image>); __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var source:flighthq._internal._Any; }).source; }), function():Dynamic return cast null);
     return cast null;
   }
 }

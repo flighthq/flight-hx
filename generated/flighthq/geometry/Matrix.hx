@@ -16,7 +16,7 @@ import flighthq.types.Vector3.Vector3Like;
 class Matrix {
   public static function cloneMatrix(source:MatrixLike):flighthq.types.Matrix {
     var m:flighthq.types.Matrix = cast _Runtime.UNDEFINED;
-    m = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : flighthq.types.Matrix);
+    m = (cast (#if js _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) #else createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flighthq.types.Matrix);
     copyMatrix(({ final __callArgument0:Dynamic = m; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }));
     return cast m;
     return cast null;
@@ -37,7 +37,7 @@ class Matrix {
     d = __destructure0.d;
     tx = __destructure0.tx;
     ty = __destructure0.ty;
-    setMatrix(({ final __callArgument2:Dynamic = out; __callArgument2; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast tx : Float), (cast ty : Float));
+    setMatrix(({ final __callArgument4:Dynamic = out; __callArgument4; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast tx : Float), (cast ty : Float));
   }
 
   public static function copyMatrixColumnFromVector3(out:MatrixLike, column:Float, source:Vector3Like):Void {
@@ -182,21 +182,21 @@ class Matrix {
 
   public static function createGradientTransformMatrix(width:Float, height:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):flighthq.types.Matrix {
     var out:flighthq.types.Matrix = cast _Runtime.UNDEFINED;
-    out = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : flighthq.types.Matrix);
-    setGradientTransformMatrix(({ final __callArgument3:Dynamic = out; __callArgument3; }), (cast width : Float), (cast height : Float), (cast rotation : Float), (cast tx : Float), (cast ty : Float));
+    out = (cast (#if js _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) #else createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flighthq.types.Matrix);
+    setGradientTransformMatrix(({ final __callArgument6:Dynamic = out; __callArgument6; }), (cast width : Float), (cast height : Float), (cast rotation : Float), (cast tx : Float), (cast ty : Float));
     return cast out;
     return cast null;
   }
 
   public static function createMatrix(?a:Float, ?b:Float, ?c:Float, ?d:Float, ?tx:Float, ?ty:Float):flighthq.types.Matrix {
-    return cast (cast createEntity(({ final __callArgument4:Dynamic = { a: _Runtime.coalesce(a, function():Dynamic return cast 1.0), b: _Runtime.coalesce(b, function():Dynamic return cast 0.0), c: _Runtime.coalesce(c, function():Dynamic return cast 0.0), d: _Runtime.coalesce(d, function():Dynamic return cast 1.0), tx: _Runtime.coalesce(tx, function():Dynamic return cast 0.0), ty: _Runtime.coalesce(ty, function():Dynamic return cast 0.0) }; __callArgument4; })) : { >Entity, var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; });
+    return cast (cast createEntity(({ final __callArgument8:Dynamic = { a: _Runtime.coalesce(a, function():Dynamic return cast 1.0), b: _Runtime.coalesce(b, function():Dynamic return cast 0.0), c: _Runtime.coalesce(c, function():Dynamic return cast 0.0), d: _Runtime.coalesce(d, function():Dynamic return cast 1.0), tx: _Runtime.coalesce(tx, function():Dynamic return cast 0.0), ty: _Runtime.coalesce(ty, function():Dynamic return cast 0.0) }; __callArgument8; })) : { >Entity, var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; });
     return cast null;
   }
 
   public static function createTransformMatrix(scaleX:Float, scaleY:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):flighthq.types.Matrix {
     var out:flighthq.types.Matrix = cast _Runtime.UNDEFINED;
-    out = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : flighthq.types.Matrix);
-    setTransformMatrix(({ final __callArgument5:Dynamic = out; __callArgument5; }), (cast scaleX : Float), (cast scaleY : Float), (cast rotation : Float), (cast tx : Float), (cast ty : Float));
+    out = (cast (#if js _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) #else createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flighthq.types.Matrix);
+    setTransformMatrix(({ final __callArgument10:Dynamic = out; __callArgument10; }), (cast scaleX : Float), (cast scaleY : Float), (cast rotation : Float), (cast tx : Float), (cast ty : Float));
     return cast out;
     return cast null;
   }
@@ -250,7 +250,7 @@ class Matrix {
   }
 
   public static function inverseMatrixTransformPoint(out:Vector2Like, matrix:MatrixLike, point:Vector2Like):Void {
-    inverseMatrixTransformPointXY(({ final __callArgument6:Dynamic = out; __callArgument6; }), ({ final __callArgument7:Dynamic = matrix; __callArgument7; }), (cast point.x : Float), (cast point.y : Float));
+    inverseMatrixTransformPointXY(({ final __callArgument12:Dynamic = out; __callArgument12; }), ({ final __callArgument13:Dynamic = matrix; __callArgument13; }), (cast point.x : Float), (cast point.y : Float));
   }
 
   public static function inverseMatrixTransformPointXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
@@ -267,7 +267,7 @@ class Matrix {
   }
 
   public static function inverseMatrixTransformVector(out:Vector2Like, matrix:MatrixLike, vector:Vector2Like):Void {
-    inverseMatrixTransformVectorXY(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = matrix; __callArgument9; }), (cast vector.x : Float), (cast vector.y : Float));
+    inverseMatrixTransformVectorXY(({ final __callArgument16:Dynamic = out; __callArgument16; }), ({ final __callArgument17:Dynamic = matrix; __callArgument17; }), (cast vector.x : Float), (cast vector.y : Float));
   }
 
   public static function inverseMatrixTransformVectorXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
@@ -340,11 +340,11 @@ class Matrix {
   }
 
   public static function matrixTransformBoundsVector2(out:RectangleLike, matrix:MatrixLike, a:Vector2Like, b:Vector2Like):Void {
-    matrixTransformBounds(({ final __callArgument10:Dynamic = out; __callArgument10; }), ({ final __callArgument11:Dynamic = matrix; __callArgument11; }), (cast a.x : Float), (cast a.y : Float), (cast b.x : Float), (cast b.y : Float));
+    matrixTransformBounds(({ final __callArgument20:Dynamic = out; __callArgument20; }), ({ final __callArgument21:Dynamic = matrix; __callArgument21; }), (cast a.x : Float), (cast a.y : Float), (cast b.x : Float), (cast b.y : Float));
   }
 
   public static function matrixTransformPoint(out:Vector2Like, matrix:MatrixLike, point:Vector2Like):Void {
-    matrixTransformPointXY(({ final __callArgument12:Dynamic = out; __callArgument12; }), ({ final __callArgument13:Dynamic = matrix; __callArgument13; }), (cast point.x : Float), (cast point.y : Float));
+    matrixTransformPointXY(({ final __callArgument24:Dynamic = out; __callArgument24; }), ({ final __callArgument25:Dynamic = matrix; __callArgument25; }), (cast point.x : Float), (cast point.y : Float));
   }
 
   public static function matrixTransformPointXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
@@ -353,11 +353,11 @@ class Matrix {
   }
 
   public static function matrixTransformRectangle(out:RectangleLike, matrix:MatrixLike, source:RectangleLike):Void {
-    matrixTransformBounds(({ final __callArgument14:Dynamic = out; __callArgument14; }), ({ final __callArgument15:Dynamic = matrix; __callArgument15; }), (cast source.x : Float), (cast source.y : Float), (cast (source.x + source.width) : Float), (cast (source.y + source.height) : Float));
+    matrixTransformBounds(({ final __callArgument28:Dynamic = out; __callArgument28; }), ({ final __callArgument29:Dynamic = matrix; __callArgument29; }), (cast source.x : Float), (cast source.y : Float), (cast (source.x + source.width) : Float), (cast (source.y + source.height) : Float));
   }
 
   public static function matrixTransformVector(out:Vector2Like, matrix:MatrixLike, vector:Vector2Like):Void {
-    matrixTransformVectorXY(({ final __callArgument16:Dynamic = out; __callArgument16; }), ({ final __callArgument17:Dynamic = matrix; __callArgument17; }), (cast vector.x : Float), (cast vector.y : Float));
+    matrixTransformVectorXY(({ final __callArgument32:Dynamic = out; __callArgument32; }), ({ final __callArgument33:Dynamic = matrix; __callArgument33; }), (cast vector.x : Float), (cast vector.y : Float));
   }
 
   public static function matrixTransformVectorXY(out:Vector2Like, source:MatrixLike, x:Float, y:Float):Void {
@@ -493,7 +493,7 @@ class Matrix {
   public static function setMatrixFromMatrix3(out:MatrixLike, source:Matrix3Like):Void {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     m = source.m;
-    setMatrix(({ final __callArgument18:Dynamic = out; __callArgument18; }), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 4.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float)) : Float));
+    setMatrix(({ final __callArgument36:Dynamic = out; __callArgument36; }), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 0.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 1.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 4.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 6.0 : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float)) : Float));
   }
 
   public static function setMatrixFromMatrix4(out:MatrixLike, source:Matrix4Like):Void {
@@ -508,7 +508,7 @@ class Matrix {
   }
 
   public static function setMatrixIdentity(out:MatrixLike):Void {
-    setMatrix(({ final __callArgument19:Dynamic = out; __callArgument19; }), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float));
+    setMatrix(({ final __callArgument38:Dynamic = out; __callArgument38; }), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 0.0 : Float), (cast 0.0 : Float));
   }
 
   public static function setTransformMatrix(out:MatrixLike, scaleX:Float, scaleY:Float, rotation:Float = 0.0, tx:Float = 0.0, ty:Float = 0.0):Void {
@@ -544,11 +544,11 @@ class Matrix {
     d = __destructure6.d;
     tx = __destructure6.tx;
     ty = __destructure6.ty;
-    setMatrix(({ final __callArgument20:Dynamic = out; __callArgument20; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast (tx + dx) : Float), (cast (ty + dy) : Float));
+    setMatrix(({ final __callArgument40:Dynamic = out; __callArgument40; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast (tx + dx) : Float), (cast (ty + dy) : Float));
   }
 
   public static function translateMatrixByVector(out:MatrixLike, matrix:MatrixLike, vector:Vector2Like):Void {
-    translateMatrixByVectorXY(({ final __callArgument21:Dynamic = out; __callArgument21; }), ({ final __callArgument22:Dynamic = matrix; __callArgument22; }), (cast vector.x : Float), (cast vector.y : Float));
+    translateMatrixByVectorXY(({ final __callArgument42:Dynamic = out; __callArgument42; }), ({ final __callArgument43:Dynamic = matrix; __callArgument43; }), (cast vector.x : Float), (cast vector.y : Float));
   }
 
   public static function translateMatrixByVectorXY(out:MatrixLike, source:MatrixLike, x:Float, y:Float):Void {
@@ -566,7 +566,7 @@ class Matrix {
     d = __destructure7.d;
     tx = __destructure7.tx;
     ty = __destructure7.ty;
-    setMatrix(({ final __callArgument23:Dynamic = out; __callArgument23; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast ((tx + (a * x)) + (c * y)) : Float), (cast ((ty + (b * x)) + (d * y)) : Float));
+    setMatrix(({ final __callArgument46:Dynamic = out; __callArgument46; }), (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast ((tx + (a * x)) + (c * y)) : Float), (cast ((ty + (b * x)) + (d * y)) : Float));
   }
 
   public static function writeMatrixToFloat32Array(out:flighthq._internal._Float32Array, offset:Float, source:MatrixLike):Void {

@@ -78,8 +78,8 @@ class GlMeshUpload {
     var vertexCount:Float = cast _Runtime.UNDEFINED;
     out = _Runtime.slice(geometry.vertices, 0, null);
     floatsPerVertex = ((cast geometry.layout : { var stride:Float; }).stride / 4.0);
-    positionOffset = (cast GlMeshUpload.floatOffsetForSemantic__glMeshUpload(({ final __callArgument1:Dynamic = geometry; __callArgument1; }), (cast 'position' : String)) : Float);
-    normalOffset = (cast GlMeshUpload.floatOffsetForSemantic__glMeshUpload(({ final __callArgument2:Dynamic = geometry; __callArgument2; }), (cast 'normal' : String)) : Float);
+    positionOffset = (cast GlMeshUpload.floatOffsetForSemantic__glMeshUpload(({ final __callArgument2:Dynamic = geometry; __callArgument2; }), (cast 'position' : String)) : Float);
+    normalOffset = (cast GlMeshUpload.floatOffsetForSemantic__glMeshUpload(({ final __callArgument4:Dynamic = geometry; __callArgument4; }), (cast 'normal' : String)) : Float);
     __destructure1 = bindPose;
     normals = __destructure1.normals;
     positions = __destructure1.positions;
@@ -131,11 +131,11 @@ class GlMeshUpload {
     var bindPose:Null<MeshSkinBindPose> = cast _Runtime.UNDEFINED;
     var stride:Float = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
-    cache = (cast (cast getGlScene3DRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : GlScene3DRuntime) : { var uploadCache:flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlScene3DRuntime.GlMeshUpload>; }).uploadCache;
+    cache = (cast (cast getGlScene3DRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : GlScene3DRuntime) : { var uploadCache:flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlScene3DRuntime.GlMeshUpload>; }).uploadCache;
     upload = ((cast cache : flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlScene3DRuntime.GlMeshUpload>).get((cast geometry : MeshGeometry)));
-    primitiveMode = (cast GlMeshUpload.getGlPrimitiveMode__glMeshUpload(({ final __callArgument4:Dynamic = gl; __callArgument4; }), geometry.topology) : Float);
-    morphed = !_Runtime.strictEquals((cast getMeshGeometryMorphBindPose(({ final __callArgument5:Dynamic = geometry; __callArgument5; })) : Null<MeshMorphBindPose>), null);
-    bindPose = ((cast ((cast gpuSkinned : Bool) && (cast !(cast morphed : Bool) : Bool)) : Bool) ? (cast (cast getMeshGeometrySkinBindPose(({ final __callArgument6:Dynamic = geometry; __callArgument6; })) : Null<MeshSkinBindPose>) : Dynamic) : (cast null : Dynamic));
+    primitiveMode = (cast GlMeshUpload.getGlPrimitiveMode__glMeshUpload(({ final __callArgument8:Dynamic = gl; __callArgument8; }), geometry.topology) : Float);
+    morphed = !_Runtime.strictEquals((cast getMeshGeometryMorphBindPose(({ final __callArgument10:Dynamic = geometry; __callArgument10; })) : Null<MeshMorphBindPose>), null);
+    bindPose = ((cast ((cast gpuSkinned : Bool) && (cast !(cast morphed : Bool) : Bool)) : Bool) ? (cast (cast getMeshGeometrySkinBindPose(({ final __callArgument12:Dynamic = geometry; __callArgument12; })) : Null<MeshSkinBindPose>) : Dynamic) : (cast null : Dynamic));
     if ((cast ((cast !_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast !_Runtime.strictEquals(bindPose, null) : Bool) ? (cast _Runtime.strictEquals((cast upload : { @:optional var skinBindUploaded:Null<Bool>; }).skinBindUploaded, true) : Dynamic) : (cast _Runtime.strictEquals((cast upload : { var version:Float; }).version, geometry.version) : Dynamic)) : Bool)) : Bool)) {
       ((cast upload : { var primitiveMode:Float; }).primitiveMode = cast (primitiveMode : Float));
       flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : { var vao:flighthq._internal.dom.WebGLVertexArrayObject; }).vao);
@@ -147,13 +147,13 @@ class GlMeshUpload {
     }
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : { var vao:flighthq._internal.dom.WebGLVertexArrayObject; }).vao);
     flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), (cast upload : { var vertexBuffer:flighthq._internal.dom.WebGLBuffer; }).vertexBuffer);
-    flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), ((cast !_Runtime.strictEquals(bindPose, null) : Bool) ? (cast (cast GlMeshUpload.buildSkinBindVertices__glMeshUpload(({ final __callArgument7:Dynamic = geometry; __callArgument7; }), ({ final __callArgument8:Dynamic = bindPose; __callArgument8; })) : flighthq._internal._Float32Array) : Dynamic) : (cast geometry.vertices : Dynamic)), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STATIC_DRAW', flighthq._internal.backend.WebGl2Backend.STATIC_DRAW));
+    flighthq._internal.backend.WebGl2Backend.bufferData(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), ((cast !_Runtime.strictEquals(bindPose, null) : Bool) ? (cast (cast GlMeshUpload.buildSkinBindVertices__glMeshUpload(({ final __callArgument14:Dynamic = geometry; __callArgument14; }), ({ final __callArgument15:Dynamic = bindPose; __callArgument15; })) : flighthq._internal._Float32Array) : Dynamic) : (cast geometry.vertices : Dynamic)), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'STATIC_DRAW', flighthq._internal.backend.WebGl2Backend.STATIC_DRAW));
     ((cast upload : { @:optional var skinBindUploaded:Null<Bool>; }).skinBindUploaded = cast (!_Runtime.strictEquals(bindPose, null) : Null<Bool>));
     stride = (cast geometry.layout : { var stride:Float; }).stride;
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast geometry.layout : { var attributes:Array<VertexAttribute>; }).attributes, 'length') : Float)) : Bool)) {
-        bindGlVertexAttribute(({ final __callArgument9:Dynamic = gl; __callArgument9; }), flighthq._internal._StaticIndex.readArray((cast geometry.layout : { var attributes:Array<VertexAttribute>; }).attributes, i), (cast stride : Float));
+        bindGlVertexAttribute(({ final __callArgument18:Dynamic = gl; __callArgument18; }), flighthq._internal._StaticIndex.readArray((cast geometry.layout : { var attributes:Array<VertexAttribute>; }).attributes, i), (cast stride : Float));
         i++;
       }
     }

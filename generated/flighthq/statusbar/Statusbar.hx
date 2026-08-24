@@ -103,9 +103,9 @@ class Statusbar {
     var unsubscribe:Void->Void = cast _Runtime.UNDEFINED;
     detachStatusBar(({ final __callArgument8:Dynamic = bar; __callArgument8; }));
     backend = (cast getStatusBarBackend() : StatusBarBackend);
-    unsubscribe = (cast backend : StatusBarBackend).subscribe(({ final __callArgument9:Dynamic = function():Void {
+    unsubscribe = (cast backend : StatusBarBackend).subscribe(({ final __callArgument10:Dynamic = function():Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[bar.onChange], [(cast backend : StatusBarBackend).getInfo((cast createStatusBarInfo() : StatusBarInfo))]]), 1);
-    }; __callArgument9; }));
+    }; __callArgument10; }));
     ((cast Statusbar._subscriptions__statusbar : flighthq._internal._WeakMap<StatusBar, Void->Void>).set(bar, (cast unsubscribe)));
   }
 
@@ -174,7 +174,7 @@ class Statusbar {
   }
 
   public static function disposeStatusBar(bar:StatusBar):Void {
-    detachStatusBar(({ final __callArgument10:Dynamic = bar; __callArgument10; }));
+    detachStatusBar(({ final __callArgument11:Dynamic = bar; __callArgument11; }));
   }
 
   @:noCompletion
@@ -185,12 +185,12 @@ class Statusbar {
   }
 
   public static function getStatusBarHeight():Float {
-    return cast (cast (cast (cast getStatusBarBackend() : StatusBarBackend) : StatusBarBackend).getInfo(({ final __callArgument11:Dynamic = Statusbar._scratchInfo__statusbar; __callArgument11; })) : { var height:Float; }).height;
+    return cast (cast (cast (cast getStatusBarBackend() : StatusBarBackend) : StatusBarBackend).getInfo(({ final __callArgument13:Dynamic = Statusbar._scratchInfo__statusbar; __callArgument13; })) : { var height:Float; }).height;
     return cast null;
   }
 
   public static function getStatusBarInfo(out:StatusBarInfo):StatusBarInfo {
-    return cast (cast (cast getStatusBarBackend() : StatusBarBackend) : StatusBarBackend).getInfo(({ final __callArgument12:Dynamic = out; __callArgument12; }));
+    return cast (cast (cast getStatusBarBackend() : StatusBarBackend) : StatusBarBackend).getInfo(({ final __callArgument14:Dynamic = out; __callArgument14; }));
     return cast null;
   }
 
@@ -237,7 +237,7 @@ class Statusbar {
   }
 
   public static function setStatusBarColor(color:Float, ?animated:Bool):Void {
-    (cast (cast getStatusBarBackend() : StatusBarBackend) : StatusBarBackend).setBackgroundColor((cast color : Float), ({ final __callArgument13:Dynamic = animated; __callArgument13; }));
+    (cast (cast getStatusBarBackend() : StatusBarBackend) : StatusBarBackend).setBackgroundColor((cast color : Float), ({ final __callArgument15:Dynamic = animated; __callArgument15; }));
   }
 
   public static function setStatusBarOverlaysContent(overlay:Bool):Void {
@@ -245,10 +245,10 @@ class Statusbar {
   }
 
   public static function setStatusBarStyle(style:StatusBarStyle):Void {
-    (cast (cast getStatusBarBackend() : StatusBarBackend) : StatusBarBackend).setStyle(({ final __callArgument14:Dynamic = style; __callArgument14; }));
+    (cast (cast getStatusBarBackend() : StatusBarBackend) : StatusBarBackend).setStyle(({ final __callArgument16:Dynamic = style; __callArgument16; }));
   }
 
   public static function setStatusBarVisible(visible:Bool, ?animation:StatusBarAnimation):Void {
-    (cast (cast getStatusBarBackend() : StatusBarBackend) : StatusBarBackend).setVisible((cast visible : Bool), ({ final __callArgument15:Dynamic = animation; __callArgument15; }));
+    (cast (cast getStatusBarBackend() : StatusBarBackend) : StatusBarBackend).setVisible((cast visible : Bool), ({ final __callArgument17:Dynamic = animation; __callArgument17; }));
   }
 }

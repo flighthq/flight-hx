@@ -28,13 +28,13 @@ import flighthq.types.Physics2D.Physics2DWorld;
 class RegisterBuiltInPhysics2DJointSolvers {
   public static function registerBuiltInPhysics2DJointSolvers(world:Physics2DWorld):Void {
     registerPhysics2DJointSolver(({ final __callArgument0:Dynamic = world; __callArgument0; }), (cast Physics2DDistanceJointKind : String), ({ final __callArgument1:Dynamic = physics2DDistanceJointSolver; __callArgument1; }));
-    registerPhysics2DJointSolver(({ final __callArgument2:Dynamic = world; __callArgument2; }), (cast Physics2DGearJointKind : String), ({ final __callArgument3:Dynamic = physics2DGearJointSolver; __callArgument3; }));
-    registerPhysics2DJointSolver(({ final __callArgument4:Dynamic = world; __callArgument4; }), (cast Physics2DMouseJointKind : String), ({ final __callArgument5:Dynamic = physics2DMouseJointSolver; __callArgument5; }));
-    registerPhysics2DJointSolver(({ final __callArgument6:Dynamic = world; __callArgument6; }), (cast Physics2DPrismaticJointKind : String), ({ final __callArgument7:Dynamic = physics2DPrismaticJointSolver; __callArgument7; }));
-    registerPhysics2DJointSolver(({ final __callArgument8:Dynamic = world; __callArgument8; }), (cast Physics2DPulleyJointKind : String), ({ final __callArgument9:Dynamic = physics2DPulleyJointSolver; __callArgument9; }));
-    registerPhysics2DJointSolver(({ final __callArgument10:Dynamic = world; __callArgument10; }), (cast Physics2DRevoluteJointKind : String), ({ final __callArgument11:Dynamic = physics2DRevoluteJointSolver; __callArgument11; }));
-    registerPhysics2DJointSolver(({ final __callArgument12:Dynamic = world; __callArgument12; }), (cast Physics2DRopeJointKind : String), ({ final __callArgument13:Dynamic = physics2DRopeJointSolver; __callArgument13; }));
-    registerPhysics2DJointSolver(({ final __callArgument14:Dynamic = world; __callArgument14; }), (cast Physics2DWeldJointKind : String), ({ final __callArgument15:Dynamic = physics2DWeldJointSolver; __callArgument15; }));
-    registerPhysics2DJointSolver(({ final __callArgument16:Dynamic = world; __callArgument16; }), (cast Physics2DWheelJointKind : String), ({ final __callArgument17:Dynamic = physics2DWheelJointSolver; __callArgument17; }));
+    registerPhysics2DJointSolver(({ final __callArgument4:Dynamic = world; __callArgument4; }), (cast Physics2DGearJointKind : String), ({ final __callArgument5:Dynamic = physics2DGearJointSolver; __callArgument5; }));
+    registerPhysics2DJointSolver(({ final __callArgument8:Dynamic = world; __callArgument8; }), (cast Physics2DMouseJointKind : String), ({ final __callArgument9:Dynamic = physics2DMouseJointSolver; __callArgument9; }));
+    registerPhysics2DJointSolver(({ final __callArgument12:Dynamic = world; __callArgument12; }), (cast Physics2DPrismaticJointKind : String), ({ final __callArgument13:Dynamic = physics2DPrismaticJointSolver; __callArgument13; }));
+    registerPhysics2DJointSolver(({ final __callArgument16:Dynamic = world; __callArgument16; }), (cast Physics2DPulleyJointKind : String), ({ final __callArgument17:Dynamic = physics2DPulleyJointSolver; __callArgument17; }));
+    registerPhysics2DJointSolver(({ final __callArgument20:Dynamic = world; __callArgument20; }), (cast Physics2DRevoluteJointKind : String), ({ final __callArgument21:Dynamic = physics2DRevoluteJointSolver; __callArgument21; }));
+    registerPhysics2DJointSolver(({ final __callArgument24:Dynamic = world; __callArgument24; }), (cast Physics2DRopeJointKind : String), ({ final __callArgument25:Dynamic = physics2DRopeJointSolver; __callArgument25; }));
+    registerPhysics2DJointSolver(({ final __callArgument28:Dynamic = world; __callArgument28; }), (cast Physics2DWeldJointKind : String), ({ final __callArgument29:Dynamic = physics2DWeldJointSolver; __callArgument29; }));
+    registerPhysics2DJointSolver(({ final __callArgument32:Dynamic = world; __callArgument32; }), (cast Physics2DWheelJointKind : String), ({ final __callArgument33:Dynamic = physics2DWheelJointSolver; __callArgument33; }));
   }
 }

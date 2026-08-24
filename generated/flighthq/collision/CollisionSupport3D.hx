@@ -27,17 +27,17 @@ class CollisionSupport3D {
   }
 
   public static function registerBuiltInCollisionSupports3D():Void {
-    registerCollisionSupport3D(({ final __callArgument2:Dynamic = 'aabb'; __callArgument2; }), ({ final __callArgument3:Dynamic = supportCollisionAabb3D; __callArgument3; }));
-    registerCollisionSupport3D(({ final __callArgument4:Dynamic = 'box'; __callArgument4; }), ({ final __callArgument5:Dynamic = supportCollisionBox3D; __callArgument5; }));
-    registerCollisionSupport3D(({ final __callArgument6:Dynamic = 'capsule'; __callArgument6; }), ({ final __callArgument7:Dynamic = supportCollisionCapsule3D; __callArgument7; }));
-    registerCollisionSupport3D(({ final __callArgument8:Dynamic = 'cone'; __callArgument8; }), ({ final __callArgument9:Dynamic = supportCollisionCone3D; __callArgument9; }));
-    registerCollisionSupport3D(({ final __callArgument10:Dynamic = 'convex'; __callArgument10; }), ({ final __callArgument11:Dynamic = supportCollisionConvex3D; __callArgument11; }));
-    registerCollisionSupport3D(({ final __callArgument12:Dynamic = 'cylinder'; __callArgument12; }), ({ final __callArgument13:Dynamic = supportCollisionCylinder3D; __callArgument13; }));
-    registerCollisionSupport3D(({ final __callArgument14:Dynamic = 'sphere'; __callArgument14; }), ({ final __callArgument15:Dynamic = supportCollisionSphere3D; __callArgument15; }));
+    registerCollisionSupport3D(({ final __callArgument4:Dynamic = 'aabb'; __callArgument4; }), ({ final __callArgument5:Dynamic = supportCollisionAabb3D; __callArgument5; }));
+    registerCollisionSupport3D(({ final __callArgument8:Dynamic = 'box'; __callArgument8; }), ({ final __callArgument9:Dynamic = supportCollisionBox3D; __callArgument9; }));
+    registerCollisionSupport3D(({ final __callArgument12:Dynamic = 'capsule'; __callArgument12; }), ({ final __callArgument13:Dynamic = supportCollisionCapsule3D; __callArgument13; }));
+    registerCollisionSupport3D(({ final __callArgument16:Dynamic = 'cone'; __callArgument16; }), ({ final __callArgument17:Dynamic = supportCollisionCone3D; __callArgument17; }));
+    registerCollisionSupport3D(({ final __callArgument20:Dynamic = 'convex'; __callArgument20; }), ({ final __callArgument21:Dynamic = supportCollisionConvex3D; __callArgument21; }));
+    registerCollisionSupport3D(({ final __callArgument24:Dynamic = 'cylinder'; __callArgument24; }), ({ final __callArgument25:Dynamic = supportCollisionCylinder3D; __callArgument25; }));
+    registerCollisionSupport3D(({ final __callArgument28:Dynamic = 'sphere'; __callArgument28; }), ({ final __callArgument29:Dynamic = supportCollisionSphere3D; __callArgument29; }));
   }
 
   public static function registerCollisionPairTest3D(kindA:CollisionShapeKind3D, kindB:CollisionShapeKind3D, test:CollisionPairTest3D):Void {
-    ((cast CollisionSupport3D.collisionPairTests3D__collisionSupport3D : flighthq._internal._Map<String, CollisionPairTest3D>).set((cast CollisionSupport3D.getCollisionPairKey3D__collisionSupport3D(({ final __callArgument16:Dynamic = kindA; __callArgument16; }), ({ final __callArgument17:Dynamic = kindB; __callArgument17; })) : String), (cast test)));
+    ((cast CollisionSupport3D.collisionPairTests3D__collisionSupport3D : flighthq._internal._Map<String, CollisionPairTest3D>).set((cast CollisionSupport3D.getCollisionPairKey3D__collisionSupport3D(({ final __callArgument32:Dynamic = kindA; __callArgument32; }), ({ final __callArgument33:Dynamic = kindB; __callArgument33; })) : String), (cast test)));
   }
 
   public static function registerCollisionSupport3D(kind:CollisionShapeKind3D, support:flighthq.types.Collision.CollisionSupport3D):Void {
@@ -58,11 +58,11 @@ class CollisionSupport3D {
     var cornerY:Float = cast _Runtime.UNDEFINED;
     var cornerZ:Float = cast _Runtime.UNDEFINED;
     box = (cast shape : CollisionBox3D);
-    CollisionSupport3D.rotateVectorByQuaternion__collisionSupport3D((cast dirX : Float), (cast dirY : Float), (cast dirZ : Float), (cast -(cast box : CollisionBox3D).rotationX : Float), (cast -(cast box : CollisionBox3D).rotationY : Float), (cast -(cast box : CollisionBox3D).rotationZ : Float), (cast (cast box : CollisionBox3D).rotationW : Float), ({ final __callArgument18:Dynamic = CollisionSupport3D.localDirection__collisionSupport3D; __callArgument18; }));
+    CollisionSupport3D.rotateVectorByQuaternion__collisionSupport3D((cast dirX : Float), (cast dirY : Float), (cast dirZ : Float), (cast -(cast box : CollisionBox3D).rotationX : Float), (cast -(cast box : CollisionBox3D).rotationY : Float), (cast -(cast box : CollisionBox3D).rotationZ : Float), (cast (cast box : CollisionBox3D).rotationW : Float), ({ final __callArgument36:Dynamic = CollisionSupport3D.localDirection__collisionSupport3D; __callArgument36; }));
     cornerX = ((cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionSupport3D.localDirection__collisionSupport3D : Array<Float>), (cast 0.0 : Float)) : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (cast box : CollisionBox3D).halfX : Dynamic) : (cast -(cast box : CollisionBox3D).halfX : Dynamic));
     cornerY = ((cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionSupport3D.localDirection__collisionSupport3D : Array<Float>), (cast 1.0 : Float)) : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (cast box : CollisionBox3D).halfY : Dynamic) : (cast -(cast box : CollisionBox3D).halfY : Dynamic));
     cornerZ = ((cast ((cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionSupport3D.localDirection__collisionSupport3D : Array<Float>), (cast 2.0 : Float)) : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (cast box : CollisionBox3D).halfZ : Dynamic) : (cast -(cast box : CollisionBox3D).halfZ : Dynamic));
-    CollisionSupport3D.rotateVectorByQuaternion__collisionSupport3D((cast cornerX : Float), (cast cornerY : Float), (cast cornerZ : Float), (cast (cast box : CollisionBox3D).rotationX : Float), (cast (cast box : CollisionBox3D).rotationY : Float), (cast (cast box : CollisionBox3D).rotationZ : Float), (cast (cast box : CollisionBox3D).rotationW : Float), ({ final __callArgument19:Dynamic = CollisionSupport3D.localCorner__collisionSupport3D; __callArgument19; }));
+    CollisionSupport3D.rotateVectorByQuaternion__collisionSupport3D((cast cornerX : Float), (cast cornerY : Float), (cast cornerZ : Float), (cast (cast box : CollisionBox3D).rotationX : Float), (cast (cast box : CollisionBox3D).rotationY : Float), (cast (cast box : CollisionBox3D).rotationZ : Float), (cast (cast box : CollisionBox3D).rotationW : Float), ({ final __callArgument38:Dynamic = CollisionSupport3D.localCorner__collisionSupport3D; __callArgument38; }));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast ((cast box : CollisionBox3D).x + flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionSupport3D.localCorner__collisionSupport3D : Array<Float>), (cast 0.0 : Float))) : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 1.0 : Float), (cast ((cast box : CollisionBox3D).y + flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionSupport3D.localCorner__collisionSupport3D : Array<Float>), (cast 1.0 : Float))) : Float));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast ((cast box : CollisionBox3D).z + flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionSupport3D.localCorner__collisionSupport3D : Array<Float>), (cast 2.0 : Float))) : Float));
@@ -106,7 +106,7 @@ class CollisionSupport3D {
     var scale:Float = cast _Runtime.UNDEFINED;
     cone = (cast shape : CollisionCone3D);
     apexProjection = ((((cast cone : CollisionCone3D).apexX * dirX) + ((cast cone : CollisionCone3D).apexY * dirY)) + ((cast cone : CollisionCone3D).apexZ * dirZ));
-    CollisionSupport3D.writeRadialComponent3D__collisionSupport3D((cast ((cast cone : CollisionCone3D).baseX - (cast cone : CollisionCone3D).apexX) : Float), (cast ((cast cone : CollisionCone3D).baseY - (cast cone : CollisionCone3D).apexY) : Float), (cast ((cast cone : CollisionCone3D).baseZ - (cast cone : CollisionCone3D).apexZ) : Float), (cast dirX : Float), (cast dirY : Float), (cast dirZ : Float), ({ final __callArgument20:Dynamic = CollisionSupport3D.radialScratch__collisionSupport3D; __callArgument20; }));
+    CollisionSupport3D.writeRadialComponent3D__collisionSupport3D((cast ((cast cone : CollisionCone3D).baseX - (cast cone : CollisionCone3D).apexX) : Float), (cast ((cast cone : CollisionCone3D).baseY - (cast cone : CollisionCone3D).apexY) : Float), (cast ((cast cone : CollisionCone3D).baseZ - (cast cone : CollisionCone3D).apexZ) : Float), (cast dirX : Float), (cast dirY : Float), (cast dirZ : Float), ({ final __callArgument40:Dynamic = CollisionSupport3D.radialScratch__collisionSupport3D; __callArgument40; }));
     radialLength = flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionSupport3D.radialScratch__collisionSupport3D : Array<Float>), (cast 3.0 : Float));
     rimProjection = (((((cast cone : CollisionCone3D).baseX * dirX) + ((cast cone : CollisionCone3D).baseY * dirY)) + ((cast cone : CollisionCone3D).baseZ * dirZ)) + ((cast cone : CollisionCone3D).radius * radialLength));
     if ((cast ((cast apexProjection : Float) >= (cast rimProjection : Float)) : Bool)) {
@@ -124,7 +124,7 @@ class CollisionSupport3D {
   public static function supportCollisionConvex3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
     var points:Array<Float> = cast _Runtime.UNDEFINED;
     points = (cast (cast shape : CollisionConvex3D) : CollisionConvex3D).points;
-    writeVertexListSupport3D(({ final __callArgument21:Dynamic = points; __callArgument21; }), (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(points, 'length'), 3.0)) : Float), (cast dirX : Float), (cast dirY : Float), (cast dirZ : Float), ({ final __callArgument22:Dynamic = out; __callArgument22; }));
+    writeVertexListSupport3D(({ final __callArgument42:Dynamic = points; __callArgument42; }), (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(points, 'length'), 3.0)) : Float), (cast dirX : Float), (cast dirY : Float), (cast dirZ : Float), ({ final __callArgument43:Dynamic = out; __callArgument43; }));
   }
 
   public static function supportCollisionCylinder3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
@@ -146,7 +146,7 @@ class CollisionSupport3D {
     baseX = ((cast useSecond : Bool) ? (cast (cast cylinder : CollisionCylinder3D).x1 : Dynamic) : (cast (cast cylinder : CollisionCylinder3D).x0 : Dynamic));
     baseY = ((cast useSecond : Bool) ? (cast (cast cylinder : CollisionCylinder3D).y1 : Dynamic) : (cast (cast cylinder : CollisionCylinder3D).y0 : Dynamic));
     baseZ = ((cast useSecond : Bool) ? (cast (cast cylinder : CollisionCylinder3D).z1 : Dynamic) : (cast (cast cylinder : CollisionCylinder3D).z0 : Dynamic));
-    CollisionSupport3D.writeRadialComponent3D__collisionSupport3D((cast axisX : Float), (cast axisY : Float), (cast axisZ : Float), (cast dirX : Float), (cast dirY : Float), (cast dirZ : Float), ({ final __callArgument23:Dynamic = CollisionSupport3D.radialScratch__collisionSupport3D; __callArgument23; }));
+    CollisionSupport3D.writeRadialComponent3D__collisionSupport3D((cast axisX : Float), (cast axisY : Float), (cast axisZ : Float), (cast dirX : Float), (cast dirY : Float), (cast dirZ : Float), ({ final __callArgument46:Dynamic = CollisionSupport3D.radialScratch__collisionSupport3D; __callArgument46; }));
     radialLength = flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionSupport3D.radialScratch__collisionSupport3D : Array<Float>), (cast 3.0 : Float));
     scale = ((cast ((cast radialLength : Float) > (cast 0.0 : Float)) : Bool) ? (cast ((cast cylinder : CollisionCylinder3D).radius / radialLength) : Dynamic) : (cast 0.0 : Dynamic));
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast (baseX + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast CollisionSupport3D.radialScratch__collisionSupport3D : Array<Float>), (cast 0.0 : Float)) * scale)) : Float));

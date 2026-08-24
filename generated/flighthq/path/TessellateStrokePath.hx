@@ -19,7 +19,7 @@ class TessellateStrokePath {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).pieces, 'length') : Float)) : Bool)) {
-        TessellateStrokePath.appendStrokePieceMesh__tessellateStrokePath(({ final __callArgument2:Dynamic = mesh; __callArgument2; }), ({ final __callArgument3:Dynamic = flighthq._internal._StaticIndex.readArray((cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).pieces, i); __callArgument3; }));
+        TessellateStrokePath.appendStrokePieceMesh__tessellateStrokePath(({ final __callArgument4:Dynamic = mesh; __callArgument4; }), ({ final __callArgument5:Dynamic = flighthq._internal._StaticIndex.readArray((cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).pieces, i); __callArgument5; }));
         i++;
       }
     }
@@ -50,21 +50,21 @@ class TessellateStrokePath {
         var right:Float = (left + 1.0);
         var nextLeft:Float = (base + (next * 2.0));
         var nextRight:Float = (nextLeft + 1.0);
-        TessellateStrokePath.appendTriangle__tessellateStrokePath(({ final __callArgument4:Dynamic = mesh; __callArgument4; }), (cast left : Float), (cast right : Float), (cast nextLeft : Float));
-        TessellateStrokePath.appendTriangle__tessellateStrokePath(({ final __callArgument5:Dynamic = mesh; __callArgument5; }), (cast nextLeft : Float), (cast right : Float), (cast nextRight : Float));
+        TessellateStrokePath.appendTriangle__tessellateStrokePath(({ final __callArgument8:Dynamic = mesh; __callArgument8; }), (cast left : Float), (cast right : Float), (cast nextLeft : Float));
+        TessellateStrokePath.appendTriangle__tessellateStrokePath(({ final __callArgument10:Dynamic = mesh; __callArgument10; }), (cast nextLeft : Float), (cast right : Float), (cast nextRight : Float));
         i++;
       }
     }
     if ((cast ((cast !(cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).closed : Bool) : Bool) && (cast ((cast _Runtime.field((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).startCap, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       var right:Array<Float> = (cast cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right : Array<Float>), (cast 1.0 : Float))] : Array<Dynamic>));
       var left:Array<Float> = (cast cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left : Array<Float>), (cast 1.0 : Float))] : Array<Dynamic>));
-      TessellateStrokePath.appendRoundCap__tessellateStrokePath(({ final __callArgument6:Dynamic = mesh; __callArgument6; }), ({ final __callArgument7:Dynamic = right; __callArgument7; }), (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).startCap, ({ final __callArgument8:Dynamic = left; __callArgument8; }));
+      TessellateStrokePath.appendRoundCap__tessellateStrokePath(({ final __callArgument12:Dynamic = mesh; __callArgument12; }), ({ final __callArgument13:Dynamic = right; __callArgument13; }), (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).startCap, ({ final __callArgument14:Dynamic = left; __callArgument14; }));
     }
     if ((cast ((cast !(cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).closed : Bool) : Bool) && (cast ((cast _Runtime.field((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).endCap, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       var end:Float = _Runtime.subtractNumbers(_Runtime.field((cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left, 'length'), 2.0);
       var left:Array<Float> = (cast cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left : Array<Float>), (cast end : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).left : Array<Float>), (cast (end + 1.0) : Float))] : Array<Dynamic>));
       var right:Array<Float> = (cast cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right : Array<Float>), (cast end : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).right : Array<Float>), (cast (end + 1.0) : Float))] : Array<Dynamic>));
-      TessellateStrokePath.appendRoundCap__tessellateStrokePath(({ final __callArgument9:Dynamic = mesh; __callArgument9; }), ({ final __callArgument10:Dynamic = left; __callArgument10; }), (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).endCap, ({ final __callArgument11:Dynamic = right; __callArgument11; }));
+      TessellateStrokePath.appendRoundCap__tessellateStrokePath(({ final __callArgument18:Dynamic = mesh; __callArgument18; }), ({ final __callArgument19:Dynamic = left; __callArgument19; }), (cast piece : { var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }).endCap, ({ final __callArgument20:Dynamic = right; __callArgument20; }));
     }
   }
 
@@ -80,7 +80,7 @@ class TessellateStrokePath {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast (arcCount - 1.0) : Float)) : Bool)) {
-        TessellateStrokePath.appendTriangle__tessellateStrokePath(({ final __callArgument12:Dynamic = mesh; __callArgument12; }), (cast center : Float), (cast (arcBase + i) : Float), (cast ((arcBase + i) + 1.0) : Float));
+        TessellateStrokePath.appendTriangle__tessellateStrokePath(({ final __callArgument24:Dynamic = mesh; __callArgument24; }), (cast center : Float), (cast (arcBase + i) : Float), (cast ((arcBase + i) + 1.0) : Float));
         i++;
       }
     }

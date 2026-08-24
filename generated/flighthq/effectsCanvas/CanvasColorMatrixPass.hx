@@ -9,9 +9,9 @@ import flighthq.types.CanvasRenderTarget;
 class CanvasColorMatrixPass {
   @:noCompletion
   public static function applyColorMatrixPassToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, matrix:Array<Float>):Void {
-    drawCanvasImageDataPass(({ final __callArgument0:Dynamic = dest; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument4:Dynamic = function(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float):Void {
+    drawCanvasImageDataPass(({ final __callArgument0:Dynamic = dest; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument6:Dynamic = function(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float):Void {
       applyColorMatrixToImageDataBytes(({ final __callArgument2:Dynamic = data; __callArgument2; }), (cast pixelCount : Float), ({ final __callArgument3:Dynamic = matrix; __callArgument3; }));
-    }; __callArgument4; }));
+    }; __callArgument6; }));
   }
 
   @:noCompletion

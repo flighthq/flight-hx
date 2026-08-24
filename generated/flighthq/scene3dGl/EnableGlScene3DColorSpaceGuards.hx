@@ -18,10 +18,10 @@ class EnableGlScene3DColorSpaceGuards {
 
   @:noCompletion
   public static function enableGlScene3DColorSpaceGuards(state:GlRenderState):Void {
-    ((cast (cast getGlScene3DRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlScene3DRuntime) : { @:optional var colorSpaceGuard:Null<Void->Void>; }).colorSpaceGuard = cast (EnableGlScene3DColorSpaceGuards.warnGlScene3DDrawnToCanvas__enableGlScene3DColorSpaceGuards : Null<Void->Void>));
+    ((cast (cast getGlScene3DRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlScene3DRuntime) : { @:optional var colorSpaceGuard:Null<Void->Void>; }).colorSpaceGuard = cast (EnableGlScene3DColorSpaceGuards.warnGlScene3DDrawnToCanvas__enableGlScene3DColorSpaceGuards : Null<Void->Void>));
   }
 
   public static function warnGlScene3DDrawnToCanvas__enableGlScene3DColorSpaceGuards():Void {
-    (cast logOnce((cast 'scene-gl:scene-drawn-to-canvas-unencoded' : String), ({ final __callArgument2:Dynamic = LogLevel.Warn; __callArgument2; }), (cast { message: 'drawGlScene3D: scene drawn directly to the canvas — linear radiance is not sRGB-encoded (output will be dark). Render into a target and present with presentGlScene3D, or draw through the effect pipeline.' } : Dynamic), ({ final __callArgument3:Dynamic = 'scene-gl'; __callArgument3; })) : Bool);
+    (cast logOnce((cast 'scene-gl:scene-drawn-to-canvas-unencoded' : String), ({ final __callArgument4:Dynamic = LogLevel.Warn; __callArgument4; }), (cast { message: 'drawGlScene3D: scene drawn directly to the canvas — linear radiance is not sRGB-encoded (output will be dark). Render into a target and present with presentGlScene3D, or draw through the effect pipeline.' } : Dynamic), ({ final __callArgument5:Dynamic = 'scene-gl'; __callArgument5; })) : Bool);
   }
 }

@@ -55,15 +55,15 @@ class DomShape {
     __destructure0 = source.data;
     commands = __destructure0.commands;
     if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
-    rasterizer = (cast getDomShapeRasterizer(({ final __callArgument1:Dynamic = state; __callArgument1; })) : Null<ShapeRasterizer>);
+    rasterizer = (cast getDomShapeRasterizer(({ final __callArgument2:Dynamic = state; __callArgument2; })) : Null<ShapeRasterizer>);
     if ((cast _Runtime.strictEquals(rasterizer, null) : Bool)) {
-      _Runtime.callOptionalValue((cast (cast getDomRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : DomRenderStateRuntime) : { var registryMiss:Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss, cast ([RenderRegistry.ShapeRasterizer, ShapeKind] : Array<Dynamic>));
+      _Runtime.callOptionalValue((cast (cast getDomRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : DomRenderStateRuntime) : { var registryMiss:Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss, cast ([RenderRegistry.ShapeRasterizer, ShapeKind] : Array<Dynamic>));
       return;
     }
     if ((cast _Runtime.strictEquals((cast data : DomShapeData__domShape).canvas, null) : Bool)) {
       ((cast data : DomShapeData__domShape).canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)));
       ((cast data : DomShapeData__domShape).context = flighthq._internal.backend.CanvasElementBackend.call((cast data : DomShapeData__domShape).canvas, 'getContext', cast (['2d'] : Array<Dynamic>)));
-      prepareDomElement(({ final __callArgument5:Dynamic = (cast data : DomShapeData__domShape).canvas; __callArgument5; }));
+      prepareDomElement(({ final __callArgument10:Dynamic = (cast data : DomShapeData__domShape).canvas; __callArgument10; }));
     }
     bounds = (cast getNodeLocalBoundsRectangle((cast source : Dynamic)) : Rectangle);
     w = HxMath.max(1.0, HxMath.ceil(bounds.width));
@@ -75,14 +75,14 @@ class DomShape {
     ((cast (cast (cast data : DomShapeData__domShape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string(h) + 'px');
     ctx = (cast data : DomShapeData__domShape).context;
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, (-bounds.x * pixelRatio), (-bounds.y * pixelRatio)] : Array<Dynamic>));
-    rasterizer(({ final __callArgument6:Dynamic = ctx; __callArgument6; }), (cast commands : Dynamic), ({ final __callArgument7:Dynamic = state; __callArgument7; }));
+    rasterizer(({ final __callArgument12:Dynamic = ctx; __callArgument12; }), (cast commands : Dynamic), ({ final __callArgument13:Dynamic = state; __callArgument13; }));
     ((cast (cast (cast data : DomShapeData__domShape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast (cast renderProxy : RenderProxy2D).alpha : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string((cast renderProxy : RenderProxy2D).alpha) : Dynamic) : (cast '' : Dynamic)));
     if ((cast !_Runtime.strictEquals((cast state : DomRenderState).domCssFilterResolver, null) : Bool)) {
-      ((cast (cast (cast data : DomShapeData__domShape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).filter = _Runtime.coalesce((cast state : DomRenderState).domCssFilterResolver(({ final __callArgument8:Dynamic = renderProxy; __callArgument8; })), function():Dynamic return cast ''));
+      ((cast (cast (cast data : DomShapeData__domShape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).filter = _Runtime.coalesce((cast state : DomRenderState).domCssFilterResolver(({ final __callArgument16:Dynamic = renderProxy; __callArgument16; })), function():Dynamic return cast ''));
     }
     _Runtime.callOptionalValue((cast state : DomRenderState).applyBlendMode, cast ([(cast data : DomShapeData__domShape).canvas, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
-    setDomTransformWithOffset(({ final __callArgument9:Dynamic = (cast data : DomShapeData__domShape).canvas; __callArgument9; }), (cast renderProxy : RenderProxy2D).transform2D, (cast bounds.x : Float), (cast bounds.y : Float), (cast (cast state : DomRenderState).roundPixels : Bool));
-    setDomRendererElement(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = (cast data : DomShapeData__domShape).canvas; __callArgument11; }));
+    setDomTransformWithOffset(({ final __callArgument17:Dynamic = (cast data : DomShapeData__domShape).canvas; __callArgument17; }), (cast renderProxy : RenderProxy2D).transform2D, (cast bounds.x : Float), (cast bounds.y : Float), (cast (cast state : DomRenderState).roundPixels : Bool));
+    setDomRendererElement(({ final __callArgument19:Dynamic = state; __callArgument19; }), ({ final __callArgument20:Dynamic = (cast data : DomShapeData__domShape).canvas; __callArgument20; }));
   }
 
   public static final defaultDomShapeRenderer:Scene2DRenderer = (cast { createData: DomShape.createDomShapeData__domShape, submit: drawDomShape });

@@ -20,9 +20,11 @@ class ColorTween {
     fromColor = _Runtime.coalesce(_Runtime.getIndex(target, property), function():Dynamic return cast 0.0);
     components = (cast { b: (_Runtime.toInt32(fromColor) & 255), g: (_Runtime.toInt32((_Runtime.toInt32(fromColor) >> 8)) & 255), r: (_Runtime.toInt32((_Runtime.toInt32(fromColor) >> 16)) & 255) });
     tween = (cast createTween(({ final __callArgument0:Dynamic = manager; __callArgument0; }), (cast components : Dynamic), (cast duration : Float), (cast { b: (_Runtime.toInt32(toColor) & 255), g: (_Runtime.toInt32((_Runtime.toInt32(toColor) >> 8)) & 255), r: (_Runtime.toInt32((_Runtime.toInt32(toColor) >> 16)) & 255) } : Dynamic), ({ final __callArgument1:Dynamic = options; __callArgument1; })) : Tween<ColorComponents__colorTween>);
-    connectSignal((cast tween.onUpdate : Dynamic), ({ final __callArgument2:Dynamic = function():Void {
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast tween.onUpdate : Dynamic), ({ final __callArgument5:Dynamic = function():Void {
       _Runtime.setIndex(target, property, (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round((cast components : ColorComponents__colorTween).r)) & 255)) << 16)) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round((cast components : ColorComponents__colorTween).g)) & 255)) << 8)))) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round((cast components : ColorComponents__colorTween).b)) & 255))));
-    }; __callArgument2; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    }; __callArgument5; })] : Array<Dynamic>)) #else connectSignal((cast tween.onUpdate : Dynamic), ({ final __callArgument4:Dynamic = function():Void {
+      _Runtime.setIndex(target, property, (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round((cast components : ColorComponents__colorTween).r)) & 255)) << 16)) | _Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(HxMath.round((cast components : ColorComponents__colorTween).g)) & 255)) << 8)))) | _Runtime.toInt32((_Runtime.toInt32(HxMath.round((cast components : ColorComponents__colorTween).b)) & 255))));
+    }; __callArgument4; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     return cast tween;
     return cast null;
   }

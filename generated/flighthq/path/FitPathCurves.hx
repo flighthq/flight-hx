@@ -33,7 +33,7 @@ class FitPathCurves {
         if ((cast closed : Bool)) { _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).CLOSE] : Array<Dynamic>)); }
         continue;
       }
-      var corners:Array<Float> = (cast FitPathCurves.findCorners__fitPathCurves(({ final __callArgument3:Dynamic = pts; __callArgument3; }), (cast pn : Float)) : Array<Float>);
+      var corners:Array<Float> = (cast FitPathCurves.findCorners__fitPathCurves(({ final __callArgument4:Dynamic = pts; __callArgument4; }), (cast pn : Float)) : Array<Float>);
       _Runtime.callProperty((cast out : Path).commands, 'push', cast ([(cast PathCommandValue : { var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; }).MOVE_TO] : Array<Dynamic>));
       _Runtime.pushMany((cast out : Path).data, cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast 1.0 : Float))] : Array<Dynamic>));
       {
@@ -47,9 +47,9 @@ class FitPathCurves {
             ci++;
             continue;
           }
-          var tHat1:Array<Float> = (cast FitPathCurves.computeLeftTangent__fitPathCurves(({ final __callArgument4:Dynamic = pts; __callArgument4; }), (cast first : Float)) : Array<Float>);
-          var tHat2:Array<Float> = (cast FitPathCurves.computeRightTangent__fitPathCurves(({ final __callArgument5:Dynamic = pts; __callArgument5; }), (cast last : Float)) : Array<Float>);
-          FitPathCurves.fitCubic__fitPathCurves(({ final __callArgument6:Dynamic = pts; __callArgument6; }), (cast first : Float), (cast last : Float), ({ final __callArgument7:Dynamic = tHat1; __callArgument7; }), ({ final __callArgument8:Dynamic = tHat2; __callArgument8; }), (cast toleranceSq : Float), ({ final __callArgument9:Dynamic = out; __callArgument9; }));
+          var tHat1:Array<Float> = (cast FitPathCurves.computeLeftTangent__fitPathCurves(({ final __callArgument6:Dynamic = pts; __callArgument6; }), (cast first : Float)) : Array<Float>);
+          var tHat2:Array<Float> = (cast FitPathCurves.computeRightTangent__fitPathCurves(({ final __callArgument8:Dynamic = pts; __callArgument8; }), (cast last : Float)) : Array<Float>);
+          FitPathCurves.fitCubic__fitPathCurves(({ final __callArgument10:Dynamic = pts; __callArgument10; }), (cast first : Float), (cast last : Float), ({ final __callArgument11:Dynamic = tHat1; __callArgument11; }), ({ final __callArgument12:Dynamic = tHat2; __callArgument12; }), (cast toleranceSq : Float), ({ final __callArgument13:Dynamic = out; __callArgument13; }));
           ci++;
         }
       }
@@ -120,7 +120,7 @@ class FitPathCurves {
       {
         var i:Float = 1.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(u, 'length') : Float)) : Bool)) {
-          ({ var __indexedObject10:Array<Float> = u; var __indexedKey11:Float = i; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject10 : Array<Float>), (cast __indexedKey11 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject10 : Array<Float>), (cast __indexedKey11 : Float)) / total) : Float)); });
+          ({ var __indexedObject18:Array<Float> = u; var __indexedKey19:Float = i; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject18 : Array<Float>), (cast __indexedKey19 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject18 : Array<Float>), (cast __indexedKey19 : Float)) / total) : Float)); });
           i++;
         }
       }
@@ -141,13 +141,13 @@ class FitPathCurves {
       _Runtime.pushMany((cast out : Path).data, cast ([(flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast (first * 2.0) : Float)) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast tHat1 : Array<Float>), (cast 0.0 : Float)) * d)), (flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast ((first * 2.0) + 1.0) : Float)) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast tHat1 : Array<Float>), (cast 1.0 : Float)) * d)), (flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast (last * 2.0) : Float)) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast tHat2 : Array<Float>), (cast 0.0 : Float)) * d)), (flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast ((last * 2.0) + 1.0) : Float)) + (flighthq._internal._StaticIndex.readFloatArrayTyped((cast tHat2 : Array<Float>), (cast 1.0 : Float)) * d)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast (last * 2.0) : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast ((last * 2.0) + 1.0) : Float))] : Array<Dynamic>));
       return;
     }
-    u = (cast FitPathCurves.chordLengthParameterize__fitPathCurves(({ final __callArgument12:Dynamic = pts; __callArgument12; }), (cast first : Float), (cast last : Float)) : Array<Float>);
+    u = (cast FitPathCurves.chordLengthParameterize__fitPathCurves(({ final __callArgument20:Dynamic = pts; __callArgument20; }), (cast first : Float), (cast last : Float)) : Array<Float>);
     MAX_ITERATIONS = 4.0;
     {
       var iter:Float = 0.0;
       while ((cast ((cast iter : Float) <= (cast MAX_ITERATIONS : Float)) : Bool)) {
-        var bezier:Array<Float> = (cast FitPathCurves.generateBezier__fitPathCurves(({ final __callArgument13:Dynamic = pts; __callArgument13; }), (cast first : Float), (cast last : Float), ({ final __callArgument14:Dynamic = u; __callArgument14; }), ({ final __callArgument15:Dynamic = tHat1; __callArgument15; }), ({ final __callArgument16:Dynamic = tHat2; __callArgument16; })) : Array<Float>);
-        var __destructure0 = (cast FitPathCurves.computeMaxError__fitPathCurves(({ final __callArgument17:Dynamic = pts; __callArgument17; }), (cast first : Float), (cast last : Float), ({ final __callArgument18:Dynamic = bezier; __callArgument18; }), ({ final __callArgument19:Dynamic = u; __callArgument19; })) : Array<Float>);
+        var bezier:Array<Float> = (cast FitPathCurves.generateBezier__fitPathCurves(({ final __callArgument22:Dynamic = pts; __callArgument22; }), (cast first : Float), (cast last : Float), ({ final __callArgument23:Dynamic = u; __callArgument23; }), ({ final __callArgument24:Dynamic = tHat1; __callArgument24; }), ({ final __callArgument25:Dynamic = tHat2; __callArgument25; })) : Array<Float>);
+        var __destructure0 = (cast FitPathCurves.computeMaxError__fitPathCurves(({ final __callArgument30:Dynamic = pts; __callArgument30; }), (cast first : Float), (cast last : Float), ({ final __callArgument31:Dynamic = bezier; __callArgument31; }), ({ final __callArgument32:Dynamic = u; __callArgument32; })) : Array<Float>);
         var maxErr:Float = flighthq._internal._StaticIndex.readArray(__destructure0, 0.0);
         var splitPoint:Float = flighthq._internal._StaticIndex.readArray(__destructure0, 1.0);
         if ((cast ((cast maxErr : Float) < (cast toleranceSq : Float)) : Bool)) {
@@ -156,11 +156,11 @@ class FitPathCurves {
           return;
         }
         if ((cast ((cast iter : Float) < (cast MAX_ITERATIONS : Float)) : Bool)) {
-          (u = cast ((cast FitPathCurves.reparameterize__fitPathCurves(({ final __callArgument20:Dynamic = pts; __callArgument20; }), (cast first : Float), (cast last : Float), ({ final __callArgument21:Dynamic = u; __callArgument21; }), ({ final __callArgument22:Dynamic = bezier; __callArgument22; })) : Array<Float>) : Dynamic));
+          (u = cast ((cast FitPathCurves.reparameterize__fitPathCurves(({ final __callArgument36:Dynamic = pts; __callArgument36; }), (cast first : Float), (cast last : Float), ({ final __callArgument37:Dynamic = u; __callArgument37; }), ({ final __callArgument38:Dynamic = bezier; __callArgument38; })) : Array<Float>) : Dynamic));
         } else {
-          var tHatCenter:Array<Float> = (cast FitPathCurves.computeCenterTangent__fitPathCurves(({ final __callArgument23:Dynamic = pts; __callArgument23; }), (cast splitPoint : Float)) : Array<Float>);
-          FitPathCurves.fitCubic__fitPathCurves(({ final __callArgument24:Dynamic = pts; __callArgument24; }), (cast first : Float), (cast splitPoint : Float), ({ final __callArgument25:Dynamic = tHat1; __callArgument25; }), ({ final __callArgument26:Dynamic = cast ([-flighthq._internal._StaticIndex.readFloatArrayTyped((cast tHatCenter : Array<Float>), (cast 0.0 : Float)), -flighthq._internal._StaticIndex.readFloatArrayTyped((cast tHatCenter : Array<Float>), (cast 1.0 : Float))] : Array<Dynamic>); __callArgument26; }), (cast toleranceSq : Float), ({ final __callArgument27:Dynamic = out; __callArgument27; }));
-          FitPathCurves.fitCubic__fitPathCurves(({ final __callArgument28:Dynamic = pts; __callArgument28; }), (cast splitPoint : Float), (cast last : Float), ({ final __callArgument29:Dynamic = tHatCenter; __callArgument29; }), ({ final __callArgument30:Dynamic = tHat2; __callArgument30; }), (cast toleranceSq : Float), ({ final __callArgument31:Dynamic = out; __callArgument31; }));
+          var tHatCenter:Array<Float> = (cast FitPathCurves.computeCenterTangent__fitPathCurves(({ final __callArgument42:Dynamic = pts; __callArgument42; }), (cast splitPoint : Float)) : Array<Float>);
+          FitPathCurves.fitCubic__fitPathCurves(({ final __callArgument44:Dynamic = pts; __callArgument44; }), (cast first : Float), (cast splitPoint : Float), ({ final __callArgument45:Dynamic = tHat1; __callArgument45; }), ({ final __callArgument46:Dynamic = cast ([-flighthq._internal._StaticIndex.readFloatArrayTyped((cast tHatCenter : Array<Float>), (cast 0.0 : Float)), -flighthq._internal._StaticIndex.readFloatArrayTyped((cast tHatCenter : Array<Float>), (cast 1.0 : Float))] : Array<Dynamic>); __callArgument46; }), (cast toleranceSq : Float), ({ final __callArgument47:Dynamic = out; __callArgument47; }));
+          FitPathCurves.fitCubic__fitPathCurves(({ final __callArgument52:Dynamic = pts; __callArgument52; }), (cast splitPoint : Float), (cast last : Float), ({ final __callArgument53:Dynamic = tHatCenter; __callArgument53; }), ({ final __callArgument54:Dynamic = tHat2; __callArgument54; }), (cast toleranceSq : Float), ({ final __callArgument55:Dynamic = out; __callArgument55; }));
         }
         iter++;
       }
@@ -256,7 +256,7 @@ class FitPathCurves {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) <= (cast (last - first) : Float)) : Bool)) {
-        _Runtime.callProperty(uPrime, 'push', cast ([(cast FitPathCurves.newtonRaphsonRootFind__fitPathCurves(({ final __callArgument32:Dynamic = bezier; __callArgument32; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast ((first + i) * 2.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast (((first + i) * 2.0) + 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast u : Array<Float>), (cast i : Float)) : Float)) : Float)] : Array<Dynamic>));
+        _Runtime.callProperty(uPrime, 'push', cast ([(cast FitPathCurves.newtonRaphsonRootFind__fitPathCurves(({ final __callArgument60:Dynamic = bezier; __callArgument60; }), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast ((first + i) * 2.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast pts : Array<Float>), (cast (((first + i) * 2.0) + 1.0) : Float)) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast u : Array<Float>), (cast i : Float)) : Float)) : Float)] : Array<Dynamic>));
         i++;
       }
     }

@@ -26,14 +26,14 @@ class WgpuBlendEffect {
     var modeIndex:Float = cast _Runtime.UNDEFINED;
     var hasBackdrop:Bool = cast _Runtime.UNDEFINED;
     backdrop = (cast getWgpuBlendEffectBackdrop(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = _Runtime.coalesce(effect.backdropKey, function():Dynamic return cast null); __callArgument1; })) : Null<WgpuRenderTarget>);
-    pipeline = (cast WgpuBlendEffect.getWgpuBlendEffectPipeline__wgpuBlendEffect(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuEffectPipeline);
+    pipeline = (cast WgpuBlendEffect.getWgpuBlendEffectPipeline__wgpuBlendEffect(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuEffectPipeline);
     modeIndex = (cast getWgpuBlendEffectModeIndex((cast effect.mode : String)) : Float);
     hasBackdrop = !_Runtime.strictEquals(backdrop, null);
-    drawWgpuDualSourceEffectPass(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast source : WgpuRenderTarget), (cast _Runtime.coalesce(backdrop, function():Dynamic return cast source) : WgpuRenderTarget), ({ final __callArgument4:Dynamic = (cast dest : WgpuRenderTarget); __callArgument4; }), ({ final __callArgument5:Dynamic = pipeline; __callArgument5; }), ({ final __callArgument6:Dynamic = function(f32:flighthq._internal._Float32Array, i32:flighthq._internal._Int32Array):Void {
+    drawWgpuDualSourceEffectPass(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast source : WgpuRenderTarget), (cast _Runtime.coalesce(backdrop, function():Dynamic return cast source) : WgpuRenderTarget), ({ final __callArgument7:Dynamic = (cast dest : WgpuRenderTarget); __callArgument7; }), ({ final __callArgument8:Dynamic = pipeline; __callArgument8; }), ({ final __callArgument9:Dynamic = function(f32:flighthq._internal._Float32Array, i32:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeInt32ArrayTyped((cast i32 : flighthq._internal._Int32Array), (cast 0.0 : Float), (cast modeIndex : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast _Runtime.coalesce(effect.opacity, function():Dynamic return cast 1.0) : Float));
       flighthq._internal._StaticIndex.writeInt32ArrayTyped((cast i32 : flighthq._internal._Int32Array), (cast 2.0 : Float), (cast ((cast hasBackdrop : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Float));
-    }; __callArgument6; }));
+    }; __callArgument9; }));
   }
 
   public static final defaultWgpuBlendEffectRunner:WgpuRenderEffectRunner = (cast function(context:WgpuRenderEffectContext, effect:RenderEffect):Void {
@@ -43,7 +43,7 @@ class WgpuBlendEffect {
   @:noCompletion
   public static function getWgpuBlendEffectBackdrop(state:WgpuRenderState, backdropKey:Null<String>):Null<WgpuRenderTarget> {
     if ((cast _Runtime.strictEquals(backdropKey, null) : Bool)) { return cast null; }
-    return cast _Runtime.coalesce(({ final __collection7:Dynamic = ((cast WgpuBlendEffect.backdrops__wgpuBlendEffect : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuRenderTarget>>).get(state)); __collection7 == null ? _Runtime.UNDEFINED : ((cast __collection7 : flighthq._internal._Map<String, WgpuRenderTarget>).get(backdropKey)); }), function():Dynamic return cast null);
+    return cast _Runtime.coalesce(({ final __collection14:Dynamic = ((cast WgpuBlendEffect.backdrops__wgpuBlendEffect : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuRenderTarget>>).get(state)); __collection14 == null ? _Runtime.UNDEFINED : ((cast __collection14 : flighthq._internal._Map<String, WgpuRenderTarget>).get(backdropKey)); }), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -54,7 +54,7 @@ class WgpuBlendEffect {
   }
 
   public static function registerWgpuBlendEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect(({ final __callArgument8:Dynamic = state; __callArgument8; }), (cast 'BlendEffect' : String), ({ final __callArgument9:Dynamic = defaultWgpuBlendEffectRunner; __callArgument9; }));
+    registerWgpuRenderEffect(({ final __callArgument15:Dynamic = state; __callArgument15; }), (cast 'BlendEffect' : String), ({ final __callArgument16:Dynamic = defaultWgpuBlendEffectRunner; __callArgument16; }));
   }
 
   public static function registerWgpuBlendEffectBackdrop(state:WgpuRenderState, backdropKey:String, target:WgpuRenderTarget):Void {
@@ -69,7 +69,7 @@ class WgpuBlendEffect {
 
   @:noCompletion
   public static function unregisterWgpuBlendEffectBackdrop(state:WgpuRenderState, backdropKey:String):Bool {
-    return cast _Runtime.coalesce(({ final __collection10:Dynamic = ((cast WgpuBlendEffect.backdrops__wgpuBlendEffect : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuRenderTarget>>).get(state)); __collection10 == null ? _Runtime.UNDEFINED : ((cast __collection10 : flighthq._internal._Map<String, WgpuRenderTarget>).delete_(backdropKey)); }), function():Dynamic return cast false);
+    return cast _Runtime.coalesce(({ final __collection19:Dynamic = ((cast WgpuBlendEffect.backdrops__wgpuBlendEffect : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuRenderTarget>>).get(state)); __collection19 == null ? _Runtime.UNDEFINED : ((cast __collection19 : flighthq._internal._Map<String, WgpuRenderTarget>).delete_(backdropKey)); }), function():Dynamic return cast false);
     return cast null;
   }
 
@@ -77,7 +77,7 @@ class WgpuBlendEffect {
     var pipeline:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
     pipeline = ((cast WgpuBlendEffect.pipelines__wgpuBlendEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).get(state));
     if ((cast _Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (pipeline = cast ((cast createWgpuDualSourceEffectPipeline(({ final __callArgument11:Dynamic = state; __callArgument11; }), (cast WGPU_BLEND_FRAGMENT_WGSL : String), ({ final __callArgument12:Dynamic = 'replace'; __callArgument12; })) : WgpuEffectPipeline) : Dynamic));
+      (pipeline = cast ((cast createWgpuDualSourceEffectPipeline(({ final __callArgument20:Dynamic = state; __callArgument20; }), (cast WGPU_BLEND_FRAGMENT_WGSL : String), ({ final __callArgument21:Dynamic = 'replace'; __callArgument21; })) : WgpuEffectPipeline) : Dynamic));
       ((cast WgpuBlendEffect.pipelines__wgpuBlendEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline>).set(state, (cast pipeline)));
     }
     return cast pipeline;

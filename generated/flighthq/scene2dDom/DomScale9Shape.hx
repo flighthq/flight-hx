@@ -66,21 +66,21 @@ class DomScale9Shape {
     commands = _Runtime.field(__destructure0, 'commands');
     scale9Grid = _Runtime.field(__destructure0, 'scale9Grid');
     if ((cast _Runtime.strictEquals(_Runtime.field(commands, 'length'), 0.0) : Bool)) { return; }
-    rasterizer = (cast getDomShapeRasterizer(({ final __callArgument1:Dynamic = state; __callArgument1; })) : Null<ShapeRasterizer>);
+    rasterizer = (cast getDomShapeRasterizer(({ final __callArgument2:Dynamic = state; __callArgument2; })) : Null<ShapeRasterizer>);
     if ((cast _Runtime.strictEquals(rasterizer, null) : Bool)) {
-      _Runtime.callOptionalValue((cast (cast getDomRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : DomRenderStateRuntime) : { var registryMiss:Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss, cast ([RenderRegistry.ShapeRasterizer, Scale9ShapeKind] : Array<Dynamic>));
+      _Runtime.callOptionalValue((cast (cast getDomRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : DomRenderStateRuntime) : { var registryMiss:Null<flighthq._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; }).registryMiss, cast ([RenderRegistry.ShapeRasterizer, Scale9ShapeKind] : Array<Dynamic>));
       return;
     }
     bounds = (cast getNodeLocalBoundsRectangle((cast source : Dynamic)) : Rectangle);
-    mapper = (cast buildDomScale9Mapper(({ final __callArgument5:Dynamic = bounds; __callArgument5; }), ({ final __callArgument6:Dynamic = scale9Grid; __callArgument6; }), (cast source.scaleX : Float), (cast source.scaleY : Float)) : Null<Scale9Mapper>);
+    mapper = (cast buildDomScale9Mapper(({ final __callArgument10:Dynamic = bounds; __callArgument10; }), ({ final __callArgument11:Dynamic = scale9Grid; __callArgument11; }), (cast source.scaleX : Float), (cast source.scaleY : Float)) : Null<Scale9Mapper>);
     if ((cast _Runtime.strictEquals(mapper, null) : Bool)) {
-      drawDomShape(({ final __callArgument7:Dynamic = state; __callArgument7; }), ({ final __callArgument8:Dynamic = renderProxy; __callArgument8; }));
+      drawDomShape(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = renderProxy; __callArgument15; }));
       return;
     }
     if ((cast _Runtime.strictEquals((cast data : DomScale9ShapeData__domScale9Shape).canvas, null) : Bool)) {
       ((cast data : DomScale9ShapeData__domScale9Shape).canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>)));
       ((cast data : DomScale9ShapeData__domScale9Shape).context = flighthq._internal.backend.CanvasElementBackend.call((cast data : DomScale9ShapeData__domScale9Shape).canvas, 'getContext', cast (['2d'] : Array<Dynamic>)));
-      prepareDomElement(({ final __callArgument9:Dynamic = (cast data : DomScale9ShapeData__domScale9Shape).canvas; __callArgument9; }));
+      prepareDomElement(({ final __callArgument18:Dynamic = (cast data : DomScale9ShapeData__domScale9Shape).canvas; __callArgument18; }));
     }
     w = HxMath.max(1.0, HxMath.ceil((bounds.width * source.scaleX)));
     h = HxMath.max(1.0, HxMath.ceil((bounds.height * source.scaleY)));
@@ -90,14 +90,14 @@ class DomScale9Shape {
     ((cast (cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).width = '' + Std.string(w) + 'px');
     ((cast (cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).height = '' + Std.string(h) + 'px');
     ctx = (cast data : DomScale9ShapeData__domScale9Shape).context;
-    mapScale9ShapeCommands(({ final __callArgument10:Dynamic = DomScale9Shape._remappedCommands__domScale9Shape; __callArgument10; }), ({ final __callArgument11:Dynamic = commands; __callArgument11; }), ({ final __callArgument12:Dynamic = mapper; __callArgument12; }));
+    mapScale9ShapeCommands(({ final __callArgument20:Dynamic = DomScale9Shape._remappedCommands__domScale9Shape; __callArgument20; }), ({ final __callArgument21:Dynamic = commands; __callArgument21; }), ({ final __callArgument22:Dynamic = mapper; __callArgument22; }));
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'setTransform', cast ([pixelRatio, 0.0, 0.0, pixelRatio, (-bounds.x * pixelRatio), (-bounds.y * pixelRatio)] : Array<Dynamic>));
-    rasterizer(({ final __callArgument13:Dynamic = ctx; __callArgument13; }), ({ final __callArgument14:Dynamic = DomScale9Shape._remappedCommands__domScale9Shape; __callArgument14; }), ({ final __callArgument15:Dynamic = state; __callArgument15; }));
+    rasterizer(({ final __callArgument26:Dynamic = ctx; __callArgument26; }), ({ final __callArgument27:Dynamic = DomScale9Shape._remappedCommands__domScale9Shape; __callArgument27; }), ({ final __callArgument28:Dynamic = state; __callArgument28; }));
     ((cast (cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast (cast renderProxy : RenderProxy2D).alpha : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string((cast renderProxy : RenderProxy2D).alpha) : Dynamic) : (cast '' : Dynamic)));
     ((cast (cast (cast data : DomScale9ShapeData__domScale9Shape).canvas : flighthq._internal.dom.HTMLCanvasElement).style : flighthq._internal.dom.CSSStyleDeclaration).imageRendering = ((cast (cast state : DomRenderState).allowSmoothing : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
     _Runtime.callOptionalValue((cast state : DomRenderState).applyBlendMode, cast ([(cast data : DomScale9ShapeData__domScale9Shape).canvas, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
-    DomScale9Shape.setStrippedDomTransform__domScale9Shape(({ final __callArgument16:Dynamic = (cast data : DomScale9ShapeData__domScale9Shape).canvas; __callArgument16; }), ({ final __callArgument17:Dynamic = (cast renderProxy : RenderProxy2D).transform2D; __callArgument17; }), (cast source.scaleX : Float), (cast source.scaleY : Float), (cast (cast state : DomRenderState).roundPixels : Bool));
-    setDomRendererElement(({ final __callArgument18:Dynamic = state; __callArgument18; }), ({ final __callArgument19:Dynamic = (cast data : DomScale9ShapeData__domScale9Shape).canvas; __callArgument19; }));
+    DomScale9Shape.setStrippedDomTransform__domScale9Shape(({ final __callArgument32:Dynamic = (cast data : DomScale9ShapeData__domScale9Shape).canvas; __callArgument32; }), ({ final __callArgument33:Dynamic = (cast renderProxy : RenderProxy2D).transform2D; __callArgument33; }), (cast source.scaleX : Float), (cast source.scaleY : Float), (cast (cast state : DomRenderState).roundPixels : Bool));
+    setDomRendererElement(({ final __callArgument36:Dynamic = state; __callArgument36; }), ({ final __callArgument37:Dynamic = (cast data : DomScale9ShapeData__domScale9Shape).canvas; __callArgument37; }));
   }
 
   public static final defaultDomScale9ShapeRenderer:Scene2DRenderer = (cast { createData: createDomScale9ShapeData, submit: drawDomScale9Shape });

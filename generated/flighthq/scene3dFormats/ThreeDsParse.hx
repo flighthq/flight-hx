@@ -155,7 +155,7 @@ typedef ThreeDsDropTally__threeDsParse = { var count:Float; var detail:flighthq.
 
 class ThreeDsParse {
   public static function createScene3DFrom3ds(bytes:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Scene3D {
-    return cast (cast createScene3DFromDocument((cast parse3ds(({ final __callArgument0:Dynamic = bytes; __callArgument0; }), ({ final __callArgument1:Dynamic = diagnostics; __callArgument1; })) : Scene3DDocument), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Scene3D);
+    return cast (cast (#if js _Runtime.callValue(createScene3DFromDocument, cast ([(cast parse3ds(({ final __callArgument4:Dynamic = bytes; __callArgument4; }), ({ final __callArgument5:Dynamic = diagnostics; __callArgument5; })) : Scene3DDocument)] : Array<Dynamic>)) #else createScene3DFromDocument((cast parse3ds(({ final __callArgument0:Dynamic = bytes; __callArgument0; }), ({ final __callArgument1:Dynamic = diagnostics; __callArgument1; })) : Scene3DDocument), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Scene3D);
     return cast null;
   }
 
@@ -173,14 +173,14 @@ class ThreeDsParse {
     var materialIndexByName:flighthq._internal._Map<String, Float> = cast _Runtime.UNDEFINED;
     document = (cast { animations: cast ([] : Array<Dynamic>), cameras: cast ([] : Array<Dynamic>), lights: cast ([] : Array<Dynamic>), materials: cast ([] : Array<Dynamic>), meshes: cast ([] : Array<Dynamic>), metadata: null, nodes: cast ([] : Array<Dynamic>), resources: cast ([] : Array<Dynamic>), scenes: cast ([{ rootNodes: cast ([] : Array<Dynamic>) }] : Array<Dynamic>), skins: cast ([] : Array<Dynamic>) });
     if ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) < (cast THREE_DS_CHUNK_HEADER_BYTES : Float)) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument2:Dynamic = diagnostics; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument3; }), (cast '3ds.input-too-small' : String), (cast 'parse3ds' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+      (#if js _Runtime.callValue(reportImportDiagnostic, cast ([({ final __callArgument10:Dynamic = diagnostics; __callArgument10; }), ({ final __callArgument11:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument11; }), (cast '3ds.input-too-small' : String), (cast 'parse3ds' : String)] : Array<Dynamic>)) #else reportImportDiagnostic(({ final __callArgument8:Dynamic = diagnostics; __callArgument8; }), ({ final __callArgument9:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument9; }), (cast '3ds.input-too-small' : String), (cast 'parse3ds' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
       return cast document;
     }
     source = (cast bytes : flighthq._internal._UInt8Array);
     view = _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(source, 'buffer'), _Runtime.field(source, 'byteOffset'), _Runtime.field(source, 'byteLength')]);
     mainId = _Runtime.callProperty(view, 'getUint16', cast ([0.0, true] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(mainId, THREE_DS_MAIN) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument4:Dynamic = diagnostics; __callArgument4; }), ({ final __callArgument5:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument5; }), (cast '3ds.wrong-main-chunk' : String), (cast 'parse3ds' : String), ({ final __callArgument6:Dynamic = { foundId: mainId }; __callArgument6; }));
+      reportImportDiagnostic(({ final __callArgument12:Dynamic = diagnostics; __callArgument12; }), ({ final __callArgument13:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument13; }), (cast '3ds.wrong-main-chunk' : String), (cast 'parse3ds' : String), ({ final __callArgument14:Dynamic = { foundId: mainId }; __callArgument14; }));
       return cast document;
     }
     threeDsDrops = _Runtime.select(diagnostics, function():Dynamic return cast _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), function():Dynamic return cast null);
@@ -188,33 +188,33 @@ class ThreeDsParse {
     meshes = (cast cast ([] : Array<Dynamic>));
     lights = (cast cast ([] : Array<Dynamic>));
     cameras = (cast cast ([] : Array<Dynamic>));
-    ThreeDsParse.collectThreeDsObjects__threeDsParse((cast view : flighthq._internal._Any), (cast 0.0 : Float), ({ final __callArgument7:Dynamic = materials; __callArgument7; }), ({ final __callArgument8:Dynamic = meshes; __callArgument8; }), ({ final __callArgument9:Dynamic = lights; __callArgument9; }), ({ final __callArgument10:Dynamic = cameras; __callArgument10; }), (cast threeDsDrops : Dynamic));
+    ThreeDsParse.collectThreeDsObjects__threeDsParse((cast view : flighthq._internal._Any), (cast 0.0 : Float), ({ final __callArgument18:Dynamic = materials; __callArgument18; }), ({ final __callArgument19:Dynamic = meshes; __callArgument19; }), ({ final __callArgument20:Dynamic = lights; __callArgument20; }), ({ final __callArgument21:Dynamic = cameras; __callArgument21; }), (cast threeDsDrops : Dynamic));
     pivots = (cast ThreeDsParse.collectThreeDsPivots__threeDsParse((cast view : flighthq._internal._Any), (cast 0.0 : Float)) : flighthq._internal._Map<String, Array<Float>>);
     materialIndexByName = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(meshes, 'length') : Float)) : Bool)) {
-        ThreeDsParse.appendMeshDocument__threeDsParse(flighthq._internal._StaticIndex.readArray(meshes, i), ({ final __callArgument11:Dynamic = materials; __callArgument11; }), ({ final __callArgument12:Dynamic = materialIndexByName; __callArgument12; }), ({ final __callArgument13:Dynamic = pivots; __callArgument13; }), ({ final __callArgument14:Dynamic = document; __callArgument14; }), (cast threeDsDrops : Dynamic));
+        ThreeDsParse.appendMeshDocument__threeDsParse(flighthq._internal._StaticIndex.readArray(meshes, i), ({ final __callArgument26:Dynamic = materials; __callArgument26; }), ({ final __callArgument27:Dynamic = materialIndexByName; __callArgument27; }), ({ final __callArgument28:Dynamic = pivots; __callArgument28; }), ({ final __callArgument29:Dynamic = document; __callArgument29; }), (cast threeDsDrops : Dynamic));
         i++;
       }
     }
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(lights, 'length') : Float)) : Bool)) {
-        ThreeDsParse.appendThreeDsLightDocument__threeDsParse(flighthq._internal._StaticIndex.readArray(lights, i), ({ final __callArgument15:Dynamic = document; __callArgument15; }), (cast threeDsDrops : Dynamic));
+        ThreeDsParse.appendThreeDsLightDocument__threeDsParse(flighthq._internal._StaticIndex.readArray(lights, i), ({ final __callArgument34:Dynamic = document; __callArgument34; }), (cast threeDsDrops : Dynamic));
         i++;
       }
     }
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(cameras, 'length') : Float)) : Bool)) {
-        ThreeDsParse.appendThreeDsCameraDocument__threeDsParse(flighthq._internal._StaticIndex.readArray(cameras, i), ({ final __callArgument16:Dynamic = document; __callArgument16; }));
+        ThreeDsParse.appendThreeDsCameraDocument__threeDsParse(flighthq._internal._StaticIndex.readArray(cameras, i), ({ final __callArgument36:Dynamic = document; __callArgument36; }));
         i++;
       }
     }
     if ((cast !_Runtime.strictEquals(threeDsDrops, null) : Bool)) {
       for (tally in _Runtime.iterable(((cast threeDsDrops : flighthq._internal._Map<String, ThreeDsDropTally__threeDsParse>).values()))) {
-        reportImportDiagnostic(({ final __callArgument19:Dynamic = diagnostics; __callArgument19; }), (cast tally : ThreeDsDropTally__threeDsParse).severity, (cast (cast tally : ThreeDsDropTally__threeDsParse).kind : String), (cast 'parse3ds' : String), ({ final __callArgument20:Dynamic = _Runtime.mergeObjects([(cast tally : ThreeDsDropTally__threeDsParse).detail, { count: (cast tally : ThreeDsDropTally__threeDsParse).count }]); __callArgument20; }));
+        reportImportDiagnostic(({ final __callArgument40:Dynamic = diagnostics; __callArgument40; }), (cast tally : ThreeDsDropTally__threeDsParse).severity, (cast (cast tally : ThreeDsDropTally__threeDsParse).kind : String), (cast 'parse3ds' : String), ({ final __callArgument41:Dynamic = _Runtime.mergeObjects([(cast tally : ThreeDsDropTally__threeDsParse).detail, { count: (cast tally : ThreeDsDropTally__threeDsParse).count }]); __callArgument41; }));
       }
     }
     return cast document;
@@ -231,13 +231,13 @@ class ThreeDsParse {
       var chunkLength:Float = (cast ThreeDsParse.readChunkLength__threeDsParse((cast view : flighthq._internal._Any), (cast cursor : Float)) : Float);
       var chunkEnd:Float = (cast ThreeDsParse.readChunkEnd__threeDsParse((cast view : flighthq._internal._Any), (cast cursor : Float), (cast end : Float)) : Float);
       if ((cast ((cast chunkEnd : Float) < (cast 0.0 : Float)) : Bool)) {
-        ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument21:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument21; }), (cast '3ds.chunk-exceeds-parent' : String), (cast '' : String), ({ final __callArgument22:Dynamic = { firstChunkId: chunkId, firstLength: chunkLength, firstOffset: cursor }; __callArgument22; }));
+        ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument44:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument44; }), (cast '3ds.chunk-exceeds-parent' : String), (cast '' : String), ({ final __callArgument45:Dynamic = { firstChunkId: chunkId, firstLength: chunkLength, firstOffset: cursor }; __callArgument45; }));
         break;
       }
       if ((cast ((cast _Runtime.strictEquals(chunkId, THREE_DS_EDITOR) : Bool) || (cast _Runtime.strictEquals(chunkId, THREE_DS_MAIN) : Bool)) : Bool)) {
-        ThreeDsParse.collectThreeDsObjects__threeDsParse((cast view : flighthq._internal._Any), (cast cursor : Float), ({ final __callArgument23:Dynamic = materials; __callArgument23; }), ({ final __callArgument24:Dynamic = meshes; __callArgument24; }), ({ final __callArgument25:Dynamic = lights; __callArgument25; }), ({ final __callArgument26:Dynamic = cameras; __callArgument26; }), (cast threeDsDrops : Dynamic));
+        ThreeDsParse.collectThreeDsObjects__threeDsParse((cast view : flighthq._internal._Any), (cast cursor : Float), ({ final __callArgument48:Dynamic = materials; __callArgument48; }), ({ final __callArgument49:Dynamic = meshes; __callArgument49; }), ({ final __callArgument50:Dynamic = lights; __callArgument50; }), ({ final __callArgument51:Dynamic = cameras; __callArgument51; }), (cast threeDsDrops : Dynamic));
       } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_OBJECT) : Bool)) {
-        ThreeDsParse.parseThreeDsObject__threeDsParse((cast view : flighthq._internal._Any), (cast cursor : Float), (cast chunkEnd : Float), ({ final __callArgument27:Dynamic = meshes; __callArgument27; }), ({ final __callArgument28:Dynamic = lights; __callArgument28; }), ({ final __callArgument29:Dynamic = cameras; __callArgument29; }), (cast threeDsDrops : Dynamic));
+        ThreeDsParse.parseThreeDsObject__threeDsParse((cast view : flighthq._internal._Any), (cast cursor : Float), (cast chunkEnd : Float), ({ final __callArgument56:Dynamic = meshes; __callArgument56; }), ({ final __callArgument57:Dynamic = lights; __callArgument57; }), ({ final __callArgument58:Dynamic = cameras; __callArgument58; }), (cast threeDsDrops : Dynamic));
       } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_MATERIAL) : Bool)) {
         var material:ThreeDsMaterial = (cast ThreeDsParse.parseMaterial__threeDsParse((cast view : flighthq._internal._Any), (cast cursor : Float), (cast chunkEnd : Float)) : ThreeDsMaterial);
         if ((cast ((cast _Runtime.field(material.name, 'length') : Float) > (cast 0.0 : Float)) : Bool)) { ((cast materials : flighthq._internal._Map<String, ThreeDsMaterial>).set(material.name, (cast material))); }
@@ -256,7 +256,7 @@ class ThreeDsParse {
       var chunkId:Float = _Runtime.callProperty(view, 'getUint16', cast ([cursor, true] : Array<Dynamic>));
       var chunkEnd:Float = (cast ThreeDsParse.readChunkEnd__threeDsParse((cast view : flighthq._internal._Any), (cast cursor : Float), (cast end : Float)) : Float);
       if ((cast ((cast chunkEnd : Float) < (cast 0.0 : Float)) : Bool)) {
-        ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument30:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument30; }), (cast '3ds.subchunk-exceeds-object' : String), (cast '' : String), ({ final __callArgument31:Dynamic = { firstOffset: cursor }; __callArgument31; }));
+        ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument62:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument62; }), (cast '3ds.subchunk-exceeds-object' : String), (cast '' : String), ({ final __callArgument63:Dynamic = { firstOffset: cursor }; __callArgument63; }));
         return;
       }
       if ((cast _Runtime.strictEquals(chunkId, THREE_DS_TRIMESH) : Bool)) {
@@ -276,7 +276,7 @@ class ThreeDsParse {
       }
       (cursor = cast (chunkEnd : Dynamic));
     }
-    ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument32:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument32; }), (cast '3ds.non-entity-object' : String), (cast '' : String), ({ final __callArgument33:Dynamic = { firstName: name }; __callArgument33; }));
+    ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument66:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument66; }), (cast '3ds.non-entity-object' : String), (cast '' : String), ({ final __callArgument67:Dynamic = { firstName: name }; __callArgument67; }));
   }
 
   public static function parseThreeDsLight__threeDsParse(view:Dynamic, offset:Float, end:Float, name:String, threeDsDrops:Null<flighthq._internal._Map<String, ThreeDsDropTally__threeDsParse>>):Null<ThreeDsLight> {
@@ -292,7 +292,7 @@ class ThreeDsParse {
     var target:Null<Array<Float>> = cast _Runtime.UNDEFINED;
     cursor = (offset + THREE_DS_CHUNK_HEADER_BYTES);
     if ((cast ((cast (cursor + 12.0) : Float) > (cast end : Float)) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument34:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument34; }), (cast '3ds.light-truncated' : String), (cast '' : String), ({ final __callArgument35:Dynamic = { firstName: name }; __callArgument35; }));
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument70:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument70; }), (cast '3ds.light-truncated' : String), (cast '' : String), ({ final __callArgument71:Dynamic = { firstName: name }; __callArgument71; }));
       return cast null;
     }
     position = (cast cast ([_Runtime.callProperty(view, 'getFloat32', cast ([cursor, true] : Array<Dynamic>)), _Runtime.callProperty(view, 'getFloat32', cast ([(cursor + 4.0), true] : Array<Dynamic>)), _Runtime.callProperty(view, 'getFloat32', cast ([(cursor + 8.0), true] : Array<Dynamic>))] : Array<Dynamic>));
@@ -309,7 +309,7 @@ class ThreeDsParse {
       var chunkId:Float = _Runtime.callProperty(view, 'getUint16', cast ([cursor, true] : Array<Dynamic>));
       var chunkEnd:Float = (cast ThreeDsParse.readChunkEnd__threeDsParse((cast view : flighthq._internal._Any), (cast cursor : Float), (cast end : Float)) : Float);
       if ((cast ((cast chunkEnd : Float) < (cast 0.0 : Float)) : Bool)) {
-        ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument36:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument36; }), (cast '3ds.subchunk-exceeds-light' : String), (cast '' : String), ({ final __callArgument37:Dynamic = { firstName: name }; __callArgument37; }));
+        ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument74:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument74; }), (cast '3ds.subchunk-exceeds-light' : String), (cast '' : String), ({ final __callArgument75:Dynamic = { firstName: name }; __callArgument75; }));
         break;
       }
       var dataStart:Float = (cursor + THREE_DS_CHUNK_HEADER_BYTES);
@@ -330,7 +330,7 @@ class ThreeDsParse {
           (hotspot = cast (_Runtime.callProperty(view, 'getFloat32', cast ([(dataStart + 12.0), true] : Array<Dynamic>)) : Dynamic));
           (falloff = cast (_Runtime.callProperty(view, 'getFloat32', cast ([(dataStart + 16.0), true] : Array<Dynamic>)) : Dynamic));
         } else {
-          ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument38:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument38; }), (cast '3ds.light-spot-truncated' : String), (cast '' : String), ({ final __callArgument39:Dynamic = { firstName: name }; __callArgument39; }));
+          ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument78:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument78; }), (cast '3ds.light-spot-truncated' : String), (cast '' : String), ({ final __callArgument79:Dynamic = { firstName: name }; __callArgument79; }));
         }
       } } } } } }
       (cursor = cast (chunkEnd : Dynamic));
@@ -349,7 +349,7 @@ class ThreeDsParse {
     var near:Null<Float> = cast _Runtime.UNDEFINED;
     cursor = (offset + THREE_DS_CHUNK_HEADER_BYTES);
     if ((cast ((cast (cursor + 32.0) : Float) > (cast end : Float)) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument40:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument40; }), (cast '3ds.camera-truncated' : String), (cast '' : String), ({ final __callArgument41:Dynamic = { firstName: name }; __callArgument41; }));
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument82:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument82; }), (cast '3ds.camera-truncated' : String), (cast '' : String), ({ final __callArgument83:Dynamic = { firstName: name }; __callArgument83; }));
       return cast null;
     }
     position = (cast cast ([_Runtime.callProperty(view, 'getFloat32', cast ([cursor, true] : Array<Dynamic>)), _Runtime.callProperty(view, 'getFloat32', cast ([(cursor + 4.0), true] : Array<Dynamic>)), _Runtime.callProperty(view, 'getFloat32', cast ([(cursor + 8.0), true] : Array<Dynamic>))] : Array<Dynamic>));
@@ -363,7 +363,7 @@ class ThreeDsParse {
       var chunkId:Float = _Runtime.callProperty(view, 'getUint16', cast ([cursor, true] : Array<Dynamic>));
       var chunkEnd:Float = (cast ThreeDsParse.readChunkEnd__threeDsParse((cast view : flighthq._internal._Any), (cast cursor : Float), (cast end : Float)) : Float);
       if ((cast ((cast chunkEnd : Float) < (cast 0.0 : Float)) : Bool)) {
-        ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument42:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument42; }), (cast '3ds.subchunk-exceeds-camera' : String), (cast '' : String), ({ final __callArgument43:Dynamic = { firstName: name }; __callArgument43; }));
+        ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument86:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument86; }), (cast '3ds.subchunk-exceeds-camera' : String), (cast '' : String), ({ final __callArgument87:Dynamic = { firstName: name }; __callArgument87; }));
         break;
       }
       var dataStart:Float = (cursor + THREE_DS_CHUNK_HEADER_BYTES);
@@ -396,7 +396,7 @@ class ThreeDsParse {
       var chunkId:Float = _Runtime.callProperty(view, 'getUint16', cast ([cursor, true] : Array<Dynamic>));
       var chunkEnd:Float = (cast ThreeDsParse.readChunkEnd__threeDsParse((cast view : flighthq._internal._Any), (cast cursor : Float), (cast end : Float)) : Float);
       if ((cast ((cast chunkEnd : Float) < (cast 0.0 : Float)) : Bool)) {
-        ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument44:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument44; }), (cast '3ds.subchunk-exceeds-trimesh' : String), (cast '' : String), ({ final __callArgument45:Dynamic = { firstChunkId: chunkId, firstName: name }; __callArgument45; }));
+        ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument90:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument90; }), (cast '3ds.subchunk-exceeds-trimesh' : String), (cast '' : String), ({ final __callArgument91:Dynamic = { firstChunkId: chunkId, firstName: name }; __callArgument91; }));
         break;
       }
       var dataStart:Float = (cursor + THREE_DS_CHUNK_HEADER_BYTES);
@@ -417,7 +417,7 @@ class ThreeDsParse {
       (cursor = cast (chunkEnd : Dynamic));
     }
     if ((cast ((cast _Runtime.strictEquals(vertices, null) : Bool) || (cast _Runtime.strictEquals(faces, null) : Bool)) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument46:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument46; }), (cast '3ds.mesh-missing-geometry' : String), (cast ((cast _Runtime.strictEquals(vertices, null) : Bool) ? (cast 'vertices' : Dynamic) : (cast 'faces' : Dynamic)) : String), ({ final __callArgument47:Dynamic = { firstName: name, missing: ((cast _Runtime.strictEquals(vertices, null) : Bool) ? (cast 'vertices' : Dynamic) : (cast 'faces' : Dynamic)) }; __callArgument47; }));
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument94:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument94; }), (cast '3ds.mesh-missing-geometry' : String), (cast ((cast _Runtime.strictEquals(vertices, null) : Bool) ? (cast 'vertices' : Dynamic) : (cast 'faces' : Dynamic)) : String), ({ final __callArgument95:Dynamic = { firstName: name, missing: ((cast _Runtime.strictEquals(vertices, null) : Bool) ? (cast 'vertices' : Dynamic) : (cast 'faces' : Dynamic)) }; __callArgument95; }));
       return cast null;
     }
     return cast { faces: faces, localMatrix: localMatrix, materialGroups: materialGroups, name: name, smoothingGroups: smoothingGroups, uvs: uvs, vertices: vertices };
@@ -427,7 +427,7 @@ class ThreeDsParse {
   public static function parseLocalMatrix__threeDsParse(view:Dynamic, offset:Float, end:Float, name:String, threeDsDrops:Null<flighthq._internal._Map<String, ThreeDsDropTally__threeDsParse>>):Null<flighthq._internal._Float32Array> {
     var values:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     if ((cast ((cast (offset + 48.0) : Float) > (cast end : Float)) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument48:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument48; }), (cast '3ds.local-matrix-truncated' : String), (cast '' : String), ({ final __callArgument49:Dynamic = { firstName: name }; __callArgument49; }));
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument98:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument98; }), (cast '3ds.local-matrix-truncated' : String), (cast '' : String), ({ final __callArgument99:Dynamic = { firstName: name }; __callArgument99; }));
       return cast null;
     }
     values = new flighthq._internal._Float32Array(12.0);
@@ -449,14 +449,14 @@ class ThreeDsParse {
     var vertices:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var offset:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast (dataStart + 2.0) : Float) > (cast end : Float)) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument50:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument50; }), (cast '3ds.vertices-truncated' : String), (cast 'no-count' : String), ({ final __callArgument51:Dynamic = { reason: 'no-count' }; __callArgument51; }));
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument102:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument102; }), (cast '3ds.vertices-truncated' : String), (cast 'no-count' : String), ({ final __callArgument103:Dynamic = { reason: 'no-count' }; __callArgument103; }));
       return cast null;
     }
     count = _Runtime.callProperty(view, 'getUint16', cast ([dataStart, true] : Array<Dynamic>));
     floatsNeeded = (count * 3.0);
     bytesNeeded = ((dataStart + 2.0) + (floatsNeeded * 4.0));
     if ((cast ((cast bytesNeeded : Float) > (cast end : Float)) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument52:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument52; }), (cast '3ds.vertices-truncated' : String), (cast 'truncated' : String), ({ final __callArgument53:Dynamic = { firstCount: count, reason: 'truncated' }; __callArgument53; }));
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument106:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument106; }), (cast '3ds.vertices-truncated' : String), (cast 'truncated' : String), ({ final __callArgument107:Dynamic = { firstCount: count, reason: 'truncated' }; __callArgument107; }));
       return cast null;
     }
     vertices = new flighthq._internal._Float32Array(floatsNeeded);
@@ -482,13 +482,13 @@ class ThreeDsParse {
     var smoothingGroups:Null<flighthq._internal._UInt32Array> = cast _Runtime.UNDEFINED;
     var cursor:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast (dataStart + 2.0) : Float) > (cast end : Float)) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument54:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument54; }), (cast '3ds.faces-truncated' : String), (cast 'no-count' : String), ({ final __callArgument55:Dynamic = { reason: 'no-count' }; __callArgument55; }));
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument110:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument110; }), (cast '3ds.faces-truncated' : String), (cast 'no-count' : String), ({ final __callArgument111:Dynamic = { reason: 'no-count' }; __callArgument111; }));
       return cast null;
     }
     count = _Runtime.callProperty(view, 'getUint16', cast ([dataStart, true] : Array<Dynamic>));
     facesEnd = ((dataStart + 2.0) + ((count * 4.0) * 2.0));
     if ((cast ((cast facesEnd : Float) > (cast end : Float)) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument56:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument56; }), (cast '3ds.faces-truncated' : String), (cast 'truncated' : String), ({ final __callArgument57:Dynamic = { firstCount: count, reason: 'truncated' }; __callArgument57; }));
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument114:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument114; }), (cast '3ds.faces-truncated' : String), (cast 'truncated' : String), ({ final __callArgument115:Dynamic = { firstCount: count, reason: 'truncated' }; __callArgument115; }));
       return cast null;
     }
     faces = new flighthq._internal._UInt16Array((count * 3.0));
@@ -511,7 +511,7 @@ class ThreeDsParse {
       var subLength:Float = (cast ThreeDsParse.readChunkLength__threeDsParse((cast view : flighthq._internal._Any), (cast cursor : Float)) : Float);
       var subEnd:Float = (cursor + subLength);
       if ((cast ((cast ((cast subLength : Float) < (cast THREE_DS_CHUNK_HEADER_BYTES : Float)) : Bool) || (cast ((cast subEnd : Float) > (cast end : Float)) : Bool)) : Bool)) {
-        ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument58:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument58; }), (cast '3ds.face-subchunk-exceeds' : String), (cast '' : String), ({ final __callArgument59:Dynamic = {  }; __callArgument59; }));
+        ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument118:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument118; }), (cast '3ds.face-subchunk-exceeds' : String), (cast '' : String), ({ final __callArgument119:Dynamic = {  }; __callArgument119; }));
         break;
       }
       var dataOffset:Float = (cursor + THREE_DS_CHUNK_HEADER_BYTES);
@@ -537,13 +537,13 @@ class ThreeDsParse {
     if ((cast _Runtime.strictEquals(_Runtime.field(name, 'length'), 0.0) : Bool)) { return cast null; }
     offset = (_Runtime.addNumbers(dataStart, _Runtime.field(name, 'length')) + 1.0);
     if ((cast ((cast (offset + 2.0) : Float) > (cast end : Float)) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument60:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument60; }), (cast '3ds.material-group-truncated' : String), (cast 'no-count' : String), ({ final __callArgument61:Dynamic = { firstName: name, reason: 'no-count' }; __callArgument61; }));
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument122:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument122; }), (cast '3ds.material-group-truncated' : String), (cast 'no-count' : String), ({ final __callArgument123:Dynamic = { firstName: name, reason: 'no-count' }; __callArgument123; }));
       return cast null;
     }
     groupFaceCount = _Runtime.callProperty(view, 'getUint16', cast ([offset, true] : Array<Dynamic>));
     (offset = cast ((offset + 2.0) : Dynamic));
     if ((cast ((cast (offset + (groupFaceCount * 2.0)) : Float) > (cast end : Float)) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument62:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument62; }), (cast '3ds.material-group-truncated' : String), (cast 'truncated' : String), ({ final __callArgument63:Dynamic = { firstCount: groupFaceCount, firstName: name, reason: 'truncated' }; __callArgument63; }));
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument126:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument126; }), (cast '3ds.material-group-truncated' : String), (cast 'truncated' : String), ({ final __callArgument127:Dynamic = { firstCount: groupFaceCount, firstName: name, reason: 'truncated' }; __callArgument127; }));
       return cast null;
     }
     faces = new flighthq._internal._UInt16Array(groupFaceCount);
@@ -557,7 +557,7 @@ class ThreeDsParse {
       }
     }
     if ((cast ((cast kept : Float) < (cast groupFaceCount : Float)) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument64:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument64; }), (cast '3ds.material-group-face-out-of-range' : String), (cast '' : String), ({ final __callArgument65:Dynamic = { firstFaceCount: faceCount, firstName: name }; __callArgument65; }));
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument130:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument130; }), (cast '3ds.material-group-face-out-of-range' : String), (cast '' : String), ({ final __callArgument131:Dynamic = { firstFaceCount: faceCount, firstName: name }; __callArgument131; }));
     }
     return cast { faces: (cast faces : flighthq._internal._UInt16Array).subarray(Std.int(0.0), Std.int(kept)), name: name };
     return cast null;
@@ -566,7 +566,7 @@ class ThreeDsParse {
   public static function parseSmoothingGroups__threeDsParse(view:Dynamic, dataStart:Float, end:Float, faceCount:Float, threeDsDrops:Null<flighthq._internal._Map<String, ThreeDsDropTally__threeDsParse>>):Null<flighthq._internal._UInt32Array> {
     var groups:flighthq._internal._UInt32Array = cast _Runtime.UNDEFINED;
     if ((cast ((cast (dataStart + (faceCount * 4.0)) : Float) > (cast end : Float)) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument66:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument66; }), (cast '3ds.smoothing-truncated' : String), (cast '' : String), ({ final __callArgument67:Dynamic = { firstFaceCount: faceCount }; __callArgument67; }));
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument134:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument134; }), (cast '3ds.smoothing-truncated' : String), (cast '' : String), ({ final __callArgument135:Dynamic = { firstFaceCount: faceCount }; __callArgument135; }));
       return cast null;
     }
     groups = new flighthq._internal._UInt32Array(faceCount);
@@ -588,14 +588,14 @@ class ThreeDsParse {
     var uvCoords:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var offset:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast (dataStart + 2.0) : Float) > (cast end : Float)) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument68:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument68; }), (cast '3ds.uv-truncated' : String), (cast 'no-count' : String), ({ final __callArgument69:Dynamic = { reason: 'no-count' }; __callArgument69; }));
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument138:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument138; }), (cast '3ds.uv-truncated' : String), (cast 'no-count' : String), ({ final __callArgument139:Dynamic = { reason: 'no-count' }; __callArgument139; }));
       return cast null;
     }
     count = _Runtime.callProperty(view, 'getUint16', cast ([dataStart, true] : Array<Dynamic>));
     floatsNeeded = (count * 2.0);
     bytesNeeded = ((dataStart + 2.0) + (floatsNeeded * 4.0));
     if ((cast ((cast bytesNeeded : Float) > (cast end : Float)) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument70:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument70; }), (cast '3ds.uv-truncated' : String), (cast 'truncated' : String), ({ final __callArgument71:Dynamic = { firstCount: count, reason: 'truncated' }; __callArgument71; }));
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument142:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument142; }), (cast '3ds.uv-truncated' : String), (cast 'truncated' : String), ({ final __callArgument143:Dynamic = { firstCount: count, reason: 'truncated' }; __callArgument143; }));
       return cast null;
     }
     uvCoords = new flighthq._internal._Float32Array(floatsNeeded);
@@ -641,7 +641,7 @@ class ThreeDsParse {
     vertexCount = _Runtime.divideNumbers(_Runtime.field(mesh.vertices, 'length'), 3.0);
     faceCount = _Runtime.divideNumbers(_Runtime.field(mesh.faces, 'length'), 3.0);
     if ((cast ((cast _Runtime.strictEquals(vertexCount, 0.0) : Bool) || (cast _Runtime.strictEquals(faceCount, 0.0) : Bool)) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument72:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument72; }), (cast '3ds.mesh-empty' : String), (cast '' : String), ({ final __callArgument73:Dynamic = { firstName: mesh.name }; __callArgument73; }));
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument146:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument146; }), (cast '3ds.mesh-empty' : String), (cast '' : String), ({ final __callArgument147:Dynamic = { firstName: mesh.name }; __callArgument147; }));
       return;
     }
     positions = (cast (cast _Runtime.toArray(mesh.vertices) : Array<Float>) : Array<Float>);
@@ -649,10 +649,10 @@ class ThreeDsParse {
     pivot = _Runtime.coalesce(((cast pivots : flighthq._internal._Map<String, Array<Float>>).get(mesh.name)), function():Dynamic return cast null);
     localized = false;
     if ((cast !_Runtime.strictEquals(mesh.localMatrix, null) : Bool)) {
-      (localized = cast ((cast ThreeDsParse.localizeThreeDsPositions__threeDsParse(({ final __callArgument74:Dynamic = positions; __callArgument74; }), mesh.localMatrix, ({ final __callArgument75:Dynamic = pivot; __callArgument75; }), ({ final __callArgument76:Dynamic = transform; __callArgument76; }), (cast mesh.name : String), (cast threeDsDrops : Dynamic)) : Bool) : Dynamic));
+      (localized = cast ((cast ThreeDsParse.localizeThreeDsPositions__threeDsParse(({ final __callArgument150:Dynamic = positions; __callArgument150; }), mesh.localMatrix, ({ final __callArgument151:Dynamic = pivot; __callArgument151; }), ({ final __callArgument152:Dynamic = transform; __callArgument152; }), (cast mesh.name : String), (cast threeDsDrops : Dynamic)) : Bool) : Dynamic));
     }
     faces = ((cast ((cast ((cast localized : Bool) && (cast !_Runtime.strictEquals(mesh.localMatrix, null) : Bool)) : Bool) && (cast ((cast (cast ThreeDsParse.threeDsLocalMatrixDeterminant__threeDsParse(mesh.localMatrix) : Float) : Float) < (cast 0.0 : Float)) : Bool)) : Bool) ? (cast (cast ThreeDsParse.reverseThreeDsFaceWinding__threeDsParse(mesh.faces) : flighthq._internal._UInt16Array) : Dynamic) : (cast mesh.faces : Dynamic));
-    convertPositionsZUpToYUp(({ final __callArgument77:Dynamic = positions; __callArgument77; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(convertPositionsZUpToYUp, cast ([({ final __callArgument157:Dynamic = positions; __callArgument157; })] : Array<Dynamic>)) #else convertPositionsZUpToYUp(({ final __callArgument156:Dynamic = positions; __callArgument156; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     faceNormals = new flighthq._internal._Float64Array((faceCount * 3.0));
     incidentFaces = (cast _Runtime.toArray({ length: vertexCount }, function(__unused0:flighthq._internal._Any, __unused1:Float):Array<flighthq._internal._Any> return cast ([] : Array<Dynamic>)) : Array<Array<Float>>);
     faceValid = new flighthq._internal._UInt8Array(faceCount);
@@ -685,7 +685,7 @@ class ThreeDsParse {
       }
     }
     if ((cast ((cast droppedFaces : Float) > (cast 0.0 : Float)) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument78:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument78; }), (cast '3ds.face-index-out-of-range' : String), (cast '' : String), ({ final __callArgument79:Dynamic = { firstDroppedFaces: droppedFaces, firstName: mesh.name, firstVertexCount: vertexCount }; __callArgument79; }));
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument158:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument158; }), (cast '3ds.face-index-out-of-range' : String), (cast '' : String), ({ final __callArgument159:Dynamic = { firstDroppedFaces: droppedFaces, firstName: mesh.name, firstVertexCount: vertexCount }; __callArgument159; }));
     }
     smoothing = mesh.smoothingGroups;
     outVertices = (cast cast ([] : Array<Dynamic>));
@@ -776,11 +776,11 @@ class ThreeDsParse {
       }
     });
     _Runtime.forEachArray((cast mesh.materialGroups : Array<ThreeDsMaterialGroup>), function(group:ThreeDsMaterialGroup, groupIndex:Float, __unused5:Array<ThreeDsMaterialGroup>):Void {
-      emitSubset(({ final __callArgument80:Dynamic = function(f:Float):Bool return _Runtime.strictEquals(flighthq._internal._StaticIndex.readInt32ArrayTyped((cast faceGroup : flighthq._internal._Int32Array), (cast f : Float)), groupIndex); __callArgument80; }), (cast (cast ThreeDsParse.resolveThreeDsMaterial__threeDsParse((cast (cast group : ThreeDsMaterialGroup).name : String), ({ final __callArgument81:Dynamic = materials; __callArgument81; }), ({ final __callArgument82:Dynamic = materialIndexByName; __callArgument82; }), ({ final __callArgument83:Dynamic = document; __callArgument83; }), (cast threeDsDrops : Dynamic)) : Float) : Float));
+      emitSubset(({ final __callArgument162:Dynamic = function(f:Float):Bool return _Runtime.strictEquals(flighthq._internal._StaticIndex.readInt32ArrayTyped((cast faceGroup : flighthq._internal._Int32Array), (cast f : Float)), groupIndex); __callArgument162; }), (cast (cast ThreeDsParse.resolveThreeDsMaterial__threeDsParse((cast (cast group : ThreeDsMaterialGroup).name : String), ({ final __callArgument163:Dynamic = materials; __callArgument163; }), ({ final __callArgument164:Dynamic = materialIndexByName; __callArgument164; }), ({ final __callArgument165:Dynamic = document; __callArgument165; }), (cast threeDsDrops : Dynamic)) : Float) : Float));
     }, _Runtime.UNDEFINED);
-    emitSubset(({ final __callArgument84:Dynamic = function(f:Float):Bool return _Runtime.strictEquals(flighthq._internal._StaticIndex.readInt32ArrayTyped((cast faceGroup : flighthq._internal._Int32Array), (cast f : Float)), -1.0); __callArgument84; }), (cast -1.0 : Float));
+    emitSubset(({ final __callArgument176:Dynamic = function(f:Float):Bool return _Runtime.strictEquals(flighthq._internal._StaticIndex.readInt32ArrayTyped((cast faceGroup : flighthq._internal._Int32Array), (cast f : Float)), -1.0); __callArgument176; }), (cast -1.0 : Float));
     if ((cast _Runtime.strictEquals(_Runtime.field(subsets, 'length'), 0.0) : Bool)) { return; }
-    geometry = (cast createMeshGeometry(({ final __callArgument85:Dynamic = { indices: new flighthq._internal._UInt32Array(indices), layout: CANONICAL_LAYOUT, subsets: subsets, vertices: new flighthq._internal._Float32Array(outVertices) }; __callArgument85; })) : MeshGeometry);
+    geometry = (cast createMeshGeometry(({ final __callArgument178:Dynamic = { indices: new flighthq._internal._UInt32Array(indices), layout: CANONICAL_LAYOUT, subsets: subsets, vertices: new flighthq._internal._Float32Array(outVertices) }; __callArgument178; })) : MeshGeometry);
     documentMesh = (cast { geometry: geometry, materials: meshMaterials });
     meshIndex = _Runtime.field(document.meshes, 'length');
     _Runtime.callProperty(document.meshes, 'push', cast ([documentMesh] : Array<Dynamic>));
@@ -802,13 +802,13 @@ class ThreeDsParse {
     ((cast (cast transform : Transform3D).position : { var y:Float; }).y = cast (position.y : Float));
     ((cast (cast transform : Transform3D).position : { var z:Float; }).z = cast (position.z : Float));
     aim = (cast ThreeDsParse.convertThreeDsPointZUpToYUp__threeDsParse(camera.target) : Vector3);
-    subtractVector3(({ final __callArgument86:Dynamic = aim; __callArgument86; }), ({ final __callArgument87:Dynamic = aim; __callArgument87; }), ({ final __callArgument88:Dynamic = position; __callArgument88; }));
-    if ((cast ((cast (cast normalizeVector3(({ final __callArgument89:Dynamic = aim; __callArgument89; }), ({ final __callArgument90:Dynamic = aim; __callArgument90; })) : Float) : Float) > (cast 0.0 : Float)) : Bool)) {
-      setQuaternionFromUnitVectors(({ final __callArgument91:Dynamic = (cast transform : Transform3D).rotation; __callArgument91; }), ({ final __callArgument92:Dynamic = ThreeDsParse.DOCUMENT_VIEW_LOCAL_AXIS__threeDsParse; __callArgument92; }), ({ final __callArgument93:Dynamic = aim; __callArgument93; }));
+    subtractVector3(({ final __callArgument180:Dynamic = aim; __callArgument180; }), ({ final __callArgument181:Dynamic = aim; __callArgument181; }), ({ final __callArgument182:Dynamic = position; __callArgument182; }));
+    if ((cast ((cast (cast normalizeVector3(({ final __callArgument186:Dynamic = aim; __callArgument186; }), ({ final __callArgument187:Dynamic = aim; __callArgument187; })) : Float) : Float) > (cast 0.0 : Float)) : Bool)) {
+      setQuaternionFromUnitVectors(({ final __callArgument190:Dynamic = (cast transform : Transform3D).rotation; __callArgument190; }), ({ final __callArgument191:Dynamic = ThreeDsParse.DOCUMENT_VIEW_LOCAL_AXIS__threeDsParse; __callArgument191; }), ({ final __callArgument192:Dynamic = aim; __callArgument192; }));
       if ((cast !_Runtime.strictEquals(camera.roll, 0.0) : Bool)) {
-        var roll:Quaternion = (cast createQuaternion(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Quaternion);
-        setQuaternionFromAxisAngle(({ final __callArgument94:Dynamic = roll; __callArgument94; }), ({ final __callArgument95:Dynamic = aim; __callArgument95; }), (cast (camera.roll * DEG_TO_RAD) : Float));
-        multiplyQuaternion(({ final __callArgument96:Dynamic = (cast transform : Transform3D).rotation; __callArgument96; }), ({ final __callArgument97:Dynamic = roll; __callArgument97; }), ({ final __callArgument98:Dynamic = (cast transform : Transform3D).rotation; __callArgument98; }));
+        var roll:Quaternion = (cast (#if js _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>)) #else createQuaternion(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Quaternion);
+        setQuaternionFromAxisAngle(({ final __callArgument196:Dynamic = roll; __callArgument196; }), ({ final __callArgument197:Dynamic = aim; __callArgument197; }), (cast (camera.roll * DEG_TO_RAD) : Float));
+        multiplyQuaternion(({ final __callArgument200:Dynamic = (cast transform : Transform3D).rotation; __callArgument200; }), ({ final __callArgument201:Dynamic = roll; __callArgument201; }), ({ final __callArgument202:Dynamic = (cast transform : Transform3D).rotation; __callArgument202; }));
       }
     }
     focalLength = ((cast ((cast camera.focalLength : Float) > (cast 0.0 : Float)) : Bool) ? (cast camera.focalLength : Dynamic) : (cast ThreeDsParse.THREE_DS_DEFAULT_FOCAL_LENGTH_MM__threeDsParse : Dynamic));
@@ -827,20 +827,20 @@ class ThreeDsParse {
     ((cast (cast transform : Transform3D).position : { var x:Float; }).x = cast (position.x : Float));
     ((cast (cast transform : Transform3D).position : { var y:Float; }).y = cast (position.y : Float));
     ((cast (cast transform : Transform3D).position : { var z:Float; }).z = cast (position.z : Float));
-    color = (cast ThreeDsParse.packThreeDsColor__threeDsParse(light.color, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
+    color = (cast (#if js _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([light.color] : Array<Dynamic>)) #else ThreeDsParse.packThreeDsColor__threeDsParse(light.color, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Float);
     range = _Runtime.coalesce(light.outerRange, function():Dynamic return cast -1.0);
     if ((cast !_Runtime.strictEquals(light.innerRange, null) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument99:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument99; }), (cast '3ds.light-inner-range-dropped' : String), (cast '' : String), ({ final __callArgument100:Dynamic = { firstName: light.name }; __callArgument100; }));
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument206:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument206; }), (cast '3ds.light-inner-range-dropped' : String), (cast '' : String), ({ final __callArgument207:Dynamic = { firstName: light.name }; __callArgument207; }));
     }
     intensity = ((cast light.enabled : Bool) ? (cast light.multiplier : Dynamic) : (cast 0.0 : Dynamic));
     if ((cast !(cast light.enabled : Bool) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument101:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument101; }), (cast '3ds.light-disabled' : String), (cast '' : String), ({ final __callArgument102:Dynamic = { firstName: light.name }; __callArgument102; }));
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument210:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Skip; __callArgument210; }), (cast '3ds.light-disabled' : String), (cast '' : String), ({ final __callArgument211:Dynamic = { firstName: light.name }; __callArgument211; }));
     }
     if ((cast !_Runtime.strictEquals(light.target, null) : Bool)) {
       var aim:Vector3 = (cast ThreeDsParse.convertThreeDsPointZUpToYUp__threeDsParse(light.target) : Vector3);
-      subtractVector3(({ final __callArgument103:Dynamic = aim; __callArgument103; }), ({ final __callArgument104:Dynamic = aim; __callArgument104; }), ({ final __callArgument105:Dynamic = position; __callArgument105; }));
-      if ((cast ((cast (cast normalizeVector3(({ final __callArgument106:Dynamic = aim; __callArgument106; }), ({ final __callArgument107:Dynamic = aim; __callArgument107; })) : Float) : Float) > (cast 0.0 : Float)) : Bool)) {
-        setQuaternionFromUnitVectors(({ final __callArgument108:Dynamic = (cast transform : Transform3D).rotation; __callArgument108; }), ({ final __callArgument109:Dynamic = ThreeDsParse.DOCUMENT_VIEW_LOCAL_AXIS__threeDsParse; __callArgument109; }), ({ final __callArgument110:Dynamic = aim; __callArgument110; }));
+      subtractVector3(({ final __callArgument214:Dynamic = aim; __callArgument214; }), ({ final __callArgument215:Dynamic = aim; __callArgument215; }), ({ final __callArgument216:Dynamic = position; __callArgument216; }));
+      if ((cast ((cast (cast normalizeVector3(({ final __callArgument220:Dynamic = aim; __callArgument220; }), ({ final __callArgument221:Dynamic = aim; __callArgument221; })) : Float) : Float) > (cast 0.0 : Float)) : Bool)) {
+        setQuaternionFromUnitVectors(({ final __callArgument224:Dynamic = (cast transform : Transform3D).rotation; __callArgument224; }), ({ final __callArgument225:Dynamic = ThreeDsParse.DOCUMENT_VIEW_LOCAL_AXIS__threeDsParse; __callArgument225; }), ({ final __callArgument226:Dynamic = aim; __callArgument226; }));
       }
       (descriptor = cast ((cast createSpotLight((cast { color: color, direction: ThreeDsParse.DOCUMENT_VIEW_LOCAL_AXIS__threeDsParse, innerConeDegrees: (light.hotspot / 2.0), intensity: intensity, outerConeDegrees: (light.falloff / 2.0), range: range } : Dynamic)) : SpotLight) : Dynamic));
     } else {
@@ -867,7 +867,7 @@ class ThreeDsParse {
           ((cast pivots : flighthq._internal._Map<String, Array<Float>>).set(name, (cast pivot)));
         }
       } else { if ((cast _Runtime.strictEquals(chunkId, THREE_DS_KEYFRAME) : Bool)) {
-        ThreeDsParse.collectThreeDsNodePivots__threeDsParse((cast view : flighthq._internal._Any), (cast cursor : Float), (cast chunkEnd : Float), ({ final __callArgument113:Dynamic = pivots; __callArgument113; }));
+        ThreeDsParse.collectThreeDsNodePivots__threeDsParse((cast view : flighthq._internal._Any), (cast cursor : Float), (cast chunkEnd : Float), ({ final __callArgument232:Dynamic = pivots; __callArgument232; }));
       } }
       (cursor = cast (chunkEnd : Dynamic));
     }
@@ -911,20 +911,20 @@ class ThreeDsParse {
     var inverse:Matrix4 = cast _Runtime.UNDEFINED;
     var point:Vector3 = cast _Runtime.UNDEFINED;
     var conjugated:Matrix4 = cast _Runtime.UNDEFINED;
-    placement = (cast createMatrix4(({ final __callArgument114:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 0.0 : Float)); __callArgument114; }), ({ final __callArgument115:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 1.0 : Float)); __callArgument115; }), ({ final __callArgument116:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 2.0 : Float)); __callArgument116; }), ({ final __callArgument117:Dynamic = 0.0; __callArgument117; }), ({ final __callArgument118:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 3.0 : Float)); __callArgument118; }), ({ final __callArgument119:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 4.0 : Float)); __callArgument119; }), ({ final __callArgument120:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 5.0 : Float)); __callArgument120; }), ({ final __callArgument121:Dynamic = 0.0; __callArgument121; }), ({ final __callArgument122:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 6.0 : Float)); __callArgument122; }), ({ final __callArgument123:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 7.0 : Float)); __callArgument123; }), ({ final __callArgument124:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 8.0 : Float)); __callArgument124; }), ({ final __callArgument125:Dynamic = 0.0; __callArgument125; }), ({ final __callArgument126:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 9.0 : Float)); __callArgument126; }), ({ final __callArgument127:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 10.0 : Float)); __callArgument127; }), ({ final __callArgument128:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 11.0 : Float)); __callArgument128; }), ({ final __callArgument129:Dynamic = 1.0; __callArgument129; })) : Matrix4);
-    inverse = (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4);
-    if ((cast !(cast (cast inverseMatrix4(({ final __callArgument130:Dynamic = inverse; __callArgument130; }), ({ final __callArgument131:Dynamic = placement; __callArgument131; })) : Bool) : Bool) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument132:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument132; }), (cast '3ds.local-matrix-singular' : String), (cast '' : String), ({ final __callArgument133:Dynamic = { firstName: name }; __callArgument133; }));
+    placement = (cast createMatrix4(({ final __callArgument234:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 0.0 : Float)); __callArgument234; }), ({ final __callArgument235:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 1.0 : Float)); __callArgument235; }), ({ final __callArgument236:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 2.0 : Float)); __callArgument236; }), ({ final __callArgument237:Dynamic = 0.0; __callArgument237; }), ({ final __callArgument238:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 3.0 : Float)); __callArgument238; }), ({ final __callArgument239:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 4.0 : Float)); __callArgument239; }), ({ final __callArgument240:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 5.0 : Float)); __callArgument240; }), ({ final __callArgument241:Dynamic = 0.0; __callArgument241; }), ({ final __callArgument242:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 6.0 : Float)); __callArgument242; }), ({ final __callArgument243:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 7.0 : Float)); __callArgument243; }), ({ final __callArgument244:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 8.0 : Float)); __callArgument244; }), ({ final __callArgument245:Dynamic = 0.0; __callArgument245; }), ({ final __callArgument246:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 9.0 : Float)); __callArgument246; }), ({ final __callArgument247:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 10.0 : Float)); __callArgument247; }), ({ final __callArgument248:Dynamic = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast localMatrix : flighthq._internal._Float32Array), (cast 11.0 : Float)); __callArgument248; }), ({ final __callArgument249:Dynamic = 1.0; __callArgument249; })) : Matrix4);
+    inverse = (cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix4);
+    if ((cast !(cast (cast inverseMatrix4(({ final __callArgument266:Dynamic = inverse; __callArgument266; }), ({ final __callArgument267:Dynamic = placement; __callArgument267; })) : Bool) : Bool) : Bool)) {
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument270:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument270; }), (cast '3ds.local-matrix-singular' : String), (cast '' : String), ({ final __callArgument271:Dynamic = { firstName: name }; __callArgument271; }));
       return cast false;
     }
-    point = (cast createVector3(({ final __callArgument134:Dynamic = 0.0; __callArgument134; }), ({ final __callArgument135:Dynamic = 0.0; __callArgument135; }), ({ final __callArgument136:Dynamic = 0.0; __callArgument136; })) : Vector3);
+    point = (cast createVector3(({ final __callArgument274:Dynamic = 0.0; __callArgument274; }), ({ final __callArgument275:Dynamic = 0.0; __callArgument275; }), ({ final __callArgument276:Dynamic = 0.0; __callArgument276; })) : Vector3);
     {
       var i:Float = 0.0;
       while ((cast ((cast (i + 2.0) : Float) < (cast _Runtime.field(positions, 'length') : Float)) : Bool)) {
         (point.x = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast positions : Array<Float>), (cast i : Float)) : Float));
         (point.y = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast positions : Array<Float>), (cast (i + 1.0) : Float)) : Float));
         (point.z = cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast positions : Array<Float>), (cast (i + 2.0) : Float)) : Float));
-        matrix4TransformPoint(({ final __callArgument137:Dynamic = point; __callArgument137; }), ({ final __callArgument138:Dynamic = inverse; __callArgument138; }), ({ final __callArgument139:Dynamic = point; __callArgument139; }));
+        matrix4TransformPoint(({ final __callArgument280:Dynamic = point; __callArgument280; }), ({ final __callArgument281:Dynamic = inverse; __callArgument281; }), ({ final __callArgument282:Dynamic = point; __callArgument282; }));
         flighthq._internal._StaticIndex.writeFloatArrayTyped((cast positions : Array<Float>), (cast i : Float), (cast point.x : Float));
         flighthq._internal._StaticIndex.writeFloatArrayTyped((cast positions : Array<Float>), (cast (i + 1.0) : Float), (cast point.y : Float));
         flighthq._internal._StaticIndex.writeFloatArrayTyped((cast positions : Array<Float>), (cast (i + 2.0) : Float), (cast point.z : Float));
@@ -935,19 +935,19 @@ class ThreeDsParse {
       {
         var i:Float = 0.0;
         while ((cast ((cast (i + 2.0) : Float) < (cast _Runtime.field(positions, 'length') : Float)) : Bool)) {
-          ({ var __indexedObject140:Array<Float> = positions; var __indexedKey141:Float = i; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject140 : Array<Float>), (cast __indexedKey141 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject140 : Array<Float>), (cast __indexedKey141 : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast pivot : Array<Float>), (cast 0.0 : Float))) : Float)); });
-          ({ var __indexedObject142:Array<Float> = positions; var __indexedKey143:Float = (i + 1.0); flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject142 : Array<Float>), (cast __indexedKey143 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject142 : Array<Float>), (cast __indexedKey143 : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast pivot : Array<Float>), (cast 1.0 : Float))) : Float)); });
-          ({ var __indexedObject144:Array<Float> = positions; var __indexedKey145:Float = (i + 2.0); flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject144 : Array<Float>), (cast __indexedKey145 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject144 : Array<Float>), (cast __indexedKey145 : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast pivot : Array<Float>), (cast 2.0 : Float))) : Float)); });
+          ({ var __indexedObject286:Array<Float> = positions; var __indexedKey287:Float = i; flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject286 : Array<Float>), (cast __indexedKey287 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject286 : Array<Float>), (cast __indexedKey287 : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast pivot : Array<Float>), (cast 0.0 : Float))) : Float)); });
+          ({ var __indexedObject288:Array<Float> = positions; var __indexedKey289:Float = (i + 1.0); flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject288 : Array<Float>), (cast __indexedKey289 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject288 : Array<Float>), (cast __indexedKey289 : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast pivot : Array<Float>), (cast 1.0 : Float))) : Float)); });
+          ({ var __indexedObject290:Array<Float> = positions; var __indexedKey291:Float = (i + 2.0); flighthq._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject290 : Array<Float>), (cast __indexedKey291 : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject290 : Array<Float>), (cast __indexedKey291 : Float)) - flighthq._internal._StaticIndex.readFloatArrayTyped((cast pivot : Array<Float>), (cast 2.0 : Float))) : Float)); });
           (i = cast ((i + 3.0) : Dynamic));
         }
       }
-      var pivotTranslation:Matrix4 = (cast createMatrix4(({ final __callArgument146:Dynamic = 1.0; __callArgument146; }), ({ final __callArgument147:Dynamic = 0.0; __callArgument147; }), ({ final __callArgument148:Dynamic = 0.0; __callArgument148; }), ({ final __callArgument149:Dynamic = 0.0; __callArgument149; }), ({ final __callArgument150:Dynamic = 0.0; __callArgument150; }), ({ final __callArgument151:Dynamic = 1.0; __callArgument151; }), ({ final __callArgument152:Dynamic = 0.0; __callArgument152; }), ({ final __callArgument153:Dynamic = 0.0; __callArgument153; }), ({ final __callArgument154:Dynamic = 0.0; __callArgument154; }), ({ final __callArgument155:Dynamic = 0.0; __callArgument155; }), ({ final __callArgument156:Dynamic = 1.0; __callArgument156; }), ({ final __callArgument157:Dynamic = 0.0; __callArgument157; }), ({ final __callArgument158:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast pivot : Array<Float>), (cast 0.0 : Float)); __callArgument158; }), ({ final __callArgument159:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast pivot : Array<Float>), (cast 1.0 : Float)); __callArgument159; }), ({ final __callArgument160:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast pivot : Array<Float>), (cast 2.0 : Float)); __callArgument160; }), ({ final __callArgument161:Dynamic = 1.0; __callArgument161; })) : Matrix4);
-      multiplyMatrix4(({ final __callArgument162:Dynamic = placement; __callArgument162; }), ({ final __callArgument163:Dynamic = placement; __callArgument163; }), ({ final __callArgument164:Dynamic = pivotTranslation; __callArgument164; }));
+      var pivotTranslation:Matrix4 = (cast createMatrix4(({ final __callArgument292:Dynamic = 1.0; __callArgument292; }), ({ final __callArgument293:Dynamic = 0.0; __callArgument293; }), ({ final __callArgument294:Dynamic = 0.0; __callArgument294; }), ({ final __callArgument295:Dynamic = 0.0; __callArgument295; }), ({ final __callArgument296:Dynamic = 0.0; __callArgument296; }), ({ final __callArgument297:Dynamic = 1.0; __callArgument297; }), ({ final __callArgument298:Dynamic = 0.0; __callArgument298; }), ({ final __callArgument299:Dynamic = 0.0; __callArgument299; }), ({ final __callArgument300:Dynamic = 0.0; __callArgument300; }), ({ final __callArgument301:Dynamic = 0.0; __callArgument301; }), ({ final __callArgument302:Dynamic = 1.0; __callArgument302; }), ({ final __callArgument303:Dynamic = 0.0; __callArgument303; }), ({ final __callArgument304:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast pivot : Array<Float>), (cast 0.0 : Float)); __callArgument304; }), ({ final __callArgument305:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast pivot : Array<Float>), (cast 1.0 : Float)); __callArgument305; }), ({ final __callArgument306:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast pivot : Array<Float>), (cast 2.0 : Float)); __callArgument306; }), ({ final __callArgument307:Dynamic = 1.0; __callArgument307; })) : Matrix4);
+      multiplyMatrix4(({ final __callArgument324:Dynamic = placement; __callArgument324; }), ({ final __callArgument325:Dynamic = placement; __callArgument325; }), ({ final __callArgument326:Dynamic = pivotTranslation; __callArgument326; }));
     }
-    conjugated = (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4);
-    multiplyMatrix4(({ final __callArgument165:Dynamic = conjugated; __callArgument165; }), ({ final __callArgument166:Dynamic = ThreeDsParse.THREE_DS_Z_UP_TO_Y_UP__threeDsParse; __callArgument166; }), ({ final __callArgument167:Dynamic = placement; __callArgument167; }));
-    multiplyMatrix4(({ final __callArgument168:Dynamic = conjugated; __callArgument168; }), ({ final __callArgument169:Dynamic = conjugated; __callArgument169; }), ({ final __callArgument170:Dynamic = ThreeDsParse.THREE_DS_Y_UP_TO_Z_UP__threeDsParse; __callArgument170; }));
-    decomposeMatrix4ToTransform3D(({ final __callArgument171:Dynamic = out; __callArgument171; }), ({ final __callArgument172:Dynamic = conjugated; __callArgument172; }));
+    conjugated = (cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix4);
+    multiplyMatrix4(({ final __callArgument330:Dynamic = conjugated; __callArgument330; }), ({ final __callArgument331:Dynamic = ThreeDsParse.THREE_DS_Z_UP_TO_Y_UP__threeDsParse; __callArgument331; }), ({ final __callArgument332:Dynamic = placement; __callArgument332; }));
+    multiplyMatrix4(({ final __callArgument336:Dynamic = conjugated; __callArgument336; }), ({ final __callArgument337:Dynamic = conjugated; __callArgument337; }), ({ final __callArgument338:Dynamic = ThreeDsParse.THREE_DS_Y_UP_TO_Z_UP__threeDsParse; __callArgument338; }));
+    decomposeMatrix4ToTransform3D(({ final __callArgument342:Dynamic = out; __callArgument342; }), ({ final __callArgument343:Dynamic = conjugated; __callArgument343; }));
     return cast true;
     return cast null;
   }
@@ -977,8 +977,8 @@ class ThreeDsParse {
   public static function convertThreeDsPointZUpToYUp__threeDsParse(point:Array<Float>):Vector3 {
     var values:Array<Float> = cast _Runtime.UNDEFINED;
     values = (cast cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast point : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast point : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast point : Array<Float>), (cast 2.0 : Float))] : Array<Dynamic>));
-    convertPositionsZUpToYUp(({ final __callArgument173:Dynamic = values; __callArgument173; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-    return cast (cast createVector3(({ final __callArgument174:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float)); __callArgument174; }), ({ final __callArgument175:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 1.0 : Float)); __callArgument175; }), ({ final __callArgument176:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 2.0 : Float)); __callArgument176; })) : Vector3);
+    (#if js _Runtime.callValue(convertPositionsZUpToYUp, cast ([({ final __callArgument347:Dynamic = values; __callArgument347; })] : Array<Dynamic>)) #else convertPositionsZUpToYUp(({ final __callArgument346:Dynamic = values; __callArgument346; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    return cast (cast createVector3(({ final __callArgument348:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 0.0 : Float)); __callArgument348; }), ({ final __callArgument349:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 1.0 : Float)); __callArgument349; }), ({ final __callArgument350:Dynamic = flighthq._internal._StaticIndex.readFloatArrayTyped((cast values : Array<Float>), (cast 2.0 : Float)); __callArgument350; })) : Vector3);
     return cast null;
   }
 
@@ -989,13 +989,13 @@ class ThreeDsParse {
     if ((cast _Runtime.strictEquals(_Runtime.field(name, 'length'), 0.0) : Bool)) { return cast -1.0; }
     parsed = ((cast materials : flighthq._internal._Map<String, ThreeDsMaterial>).get(name));
     if ((cast _Runtime.strictEquals(parsed, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument177:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument177; }), (cast '3ds.material-missing' : String), (cast '' : String), ({ final __callArgument178:Dynamic = { firstName: name }; __callArgument178; }));
+      ThreeDsParse.tallyThreeDsDrop__threeDsParse((cast threeDsDrops : Dynamic), ({ final __callArgument354:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument354; }), (cast '3ds.material-missing' : String), (cast '' : String), ({ final __callArgument355:Dynamic = { firstName: name }; __callArgument355; }));
       return cast -1.0;
     }
     cached = ((cast materialIndexByName : flighthq._internal._Map<String, Float>).get(name));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     index = _Runtime.field(document.materials, 'length');
-    _Runtime.callProperty(document.materials, 'push', cast ([(cast (cast ThreeDsParse.threeDsMaterialToBlinnPhong__threeDsParse(({ final __callArgument179:Dynamic = parsed; __callArgument179; }), ({ final __callArgument180:Dynamic = document; __callArgument180; })) : flighthq._internal._Any) : MaterialLike)] : Array<Dynamic>));
+    _Runtime.callProperty(document.materials, 'push', cast ([(cast (cast ThreeDsParse.threeDsMaterialToBlinnPhong__threeDsParse(({ final __callArgument358:Dynamic = parsed; __callArgument358; }), ({ final __callArgument359:Dynamic = document; __callArgument359; })) : flighthq._internal._Any) : MaterialLike)] : Array<Dynamic>));
     ((cast materialIndexByName : flighthq._internal._Map<String, Float>).set(name, (cast index)));
     return cast index;
     return cast null;
@@ -1003,7 +1003,7 @@ class ThreeDsParse {
 
   public static function threeDsMaterialToBlinnPhong__threeDsParse(material:ThreeDsMaterial, document:Scene3DDocument):Material {
     var result:BlinnPhongMaterial = cast _Runtime.UNDEFINED;
-    result = (cast createBlinnPhongMaterial((cast _Runtime.mergeObjects([{ alphaMap: ((cast !_Runtime.strictEquals(material.opacityFilename, null) : Bool) ? (cast (cast createExternalTextureRef((cast material.opacityFilename : String), ({ final __callArgument181:Dynamic = null; __callArgument181; }), (cast document.resources : Dynamic)) : Texture) : Dynamic) : (cast null : Dynamic)) }, { diffuse: (cast ThreeDsParse.packThreeDsColor__threeDsParse(material.diffuse, (cast material.opacity : Float)) : Float) }, { diffuseMap: ((cast !_Runtime.strictEquals(material.textureFilename, null) : Bool) ? (cast (cast createExternalTextureRef((cast material.textureFilename : String), ({ final __callArgument182:Dynamic = null; __callArgument182; }), (cast document.resources : Dynamic)) : Texture) : Dynamic) : (cast null : Dynamic)) }, { specular: (cast ThreeDsParse.packThreeDsColor__threeDsParse(material.specular, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float) }, ((cast !_Runtime.strictEquals(material.shininess, null) : Bool) ? (cast { shininess: material.shininess } : Dynamic) : (cast {  } : Dynamic))]) : Dynamic)) : BlinnPhongMaterial);
+    result = (cast createBlinnPhongMaterial((cast _Runtime.mergeObjects([{ alphaMap: ((cast !_Runtime.strictEquals(material.opacityFilename, null) : Bool) ? (cast (cast createExternalTextureRef((cast material.opacityFilename : String), ({ final __callArgument362:Dynamic = null; __callArgument362; }), (cast document.resources : Dynamic)) : Texture) : Dynamic) : (cast null : Dynamic)) }, { diffuse: (cast ThreeDsParse.packThreeDsColor__threeDsParse(material.diffuse, (cast material.opacity : Float)) : Float) }, { diffuseMap: ((cast !_Runtime.strictEquals(material.textureFilename, null) : Bool) ? (cast (cast createExternalTextureRef((cast material.textureFilename : String), ({ final __callArgument364:Dynamic = null; __callArgument364; }), (cast document.resources : Dynamic)) : Texture) : Dynamic) : (cast null : Dynamic)) }, { specular: (cast (#if js _Runtime.callValue(ThreeDsParse.packThreeDsColor__threeDsParse, cast ([material.specular] : Array<Dynamic>)) #else ThreeDsParse.packThreeDsColor__threeDsParse(material.specular, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Float) }, ((cast !_Runtime.strictEquals(material.shininess, null) : Bool) ? (cast { shininess: material.shininess } : Dynamic) : (cast {  } : Dynamic))]) : Dynamic)) : BlinnPhongMaterial);
     (result.name = cast (((cast ((cast _Runtime.field(material.name, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast material.name : Dynamic) : (cast null : Dynamic)) : Null<String>));
     if ((cast ((cast ((cast material.opacity : Float) < (cast 1.0 : Float)) : Bool) || (cast !_Runtime.strictEquals(material.opacityFilename, null) : Bool)) : Bool)) { (result.alphaMode = cast ('blend' : MaterialAlphaMode)); }
     return cast (cast (cast result : flighthq._internal._Any) : Material);
@@ -1163,11 +1163,11 @@ class ThreeDsParse {
     return cast null;
   }
 
-  public static final DOCUMENT_VIEW_LOCAL_AXIS__threeDsParse:Vector3 = (cast createVector3(({ final __callArgument183:Dynamic = 0.0; __callArgument183; }), ({ final __callArgument184:Dynamic = 0.0; __callArgument184; }), ({ final __callArgument185:Dynamic = -1.0; __callArgument185; })) : Vector3);
+  public static final DOCUMENT_VIEW_LOCAL_AXIS__threeDsParse:Vector3 = (cast createVector3(({ final __callArgument370:Dynamic = 0.0; __callArgument370; }), ({ final __callArgument371:Dynamic = 0.0; __callArgument371; }), ({ final __callArgument372:Dynamic = -1.0; __callArgument372; })) : Vector3);
 
-  public static final THREE_DS_Z_UP_TO_Y_UP__threeDsParse:Matrix4 = (cast createMatrix4(({ final __callArgument186:Dynamic = 1.0; __callArgument186; }), ({ final __callArgument187:Dynamic = 0.0; __callArgument187; }), ({ final __callArgument188:Dynamic = 0.0; __callArgument188; }), ({ final __callArgument189:Dynamic = 0.0; __callArgument189; }), ({ final __callArgument190:Dynamic = 0.0; __callArgument190; }), ({ final __callArgument191:Dynamic = 0.0; __callArgument191; }), ({ final __callArgument192:Dynamic = -1.0; __callArgument192; }), ({ final __callArgument193:Dynamic = 0.0; __callArgument193; }), ({ final __callArgument194:Dynamic = 0.0; __callArgument194; }), ({ final __callArgument195:Dynamic = 1.0; __callArgument195; }), ({ final __callArgument196:Dynamic = 0.0; __callArgument196; }), ({ final __callArgument197:Dynamic = 0.0; __callArgument197; }), ({ final __callArgument198:Dynamic = 0.0; __callArgument198; }), ({ final __callArgument199:Dynamic = 0.0; __callArgument199; }), ({ final __callArgument200:Dynamic = 0.0; __callArgument200; }), ({ final __callArgument201:Dynamic = 1.0; __callArgument201; })) : Matrix4);
+  public static final THREE_DS_Z_UP_TO_Y_UP__threeDsParse:Matrix4 = (cast createMatrix4(({ final __callArgument376:Dynamic = 1.0; __callArgument376; }), ({ final __callArgument377:Dynamic = 0.0; __callArgument377; }), ({ final __callArgument378:Dynamic = 0.0; __callArgument378; }), ({ final __callArgument379:Dynamic = 0.0; __callArgument379; }), ({ final __callArgument380:Dynamic = 0.0; __callArgument380; }), ({ final __callArgument381:Dynamic = 0.0; __callArgument381; }), ({ final __callArgument382:Dynamic = -1.0; __callArgument382; }), ({ final __callArgument383:Dynamic = 0.0; __callArgument383; }), ({ final __callArgument384:Dynamic = 0.0; __callArgument384; }), ({ final __callArgument385:Dynamic = 1.0; __callArgument385; }), ({ final __callArgument386:Dynamic = 0.0; __callArgument386; }), ({ final __callArgument387:Dynamic = 0.0; __callArgument387; }), ({ final __callArgument388:Dynamic = 0.0; __callArgument388; }), ({ final __callArgument389:Dynamic = 0.0; __callArgument389; }), ({ final __callArgument390:Dynamic = 0.0; __callArgument390; }), ({ final __callArgument391:Dynamic = 1.0; __callArgument391; })) : Matrix4);
 
-  public static final THREE_DS_Y_UP_TO_Z_UP__threeDsParse:Matrix4 = (cast createMatrix4(({ final __callArgument202:Dynamic = 1.0; __callArgument202; }), ({ final __callArgument203:Dynamic = 0.0; __callArgument203; }), ({ final __callArgument204:Dynamic = 0.0; __callArgument204; }), ({ final __callArgument205:Dynamic = 0.0; __callArgument205; }), ({ final __callArgument206:Dynamic = 0.0; __callArgument206; }), ({ final __callArgument207:Dynamic = 0.0; __callArgument207; }), ({ final __callArgument208:Dynamic = 1.0; __callArgument208; }), ({ final __callArgument209:Dynamic = 0.0; __callArgument209; }), ({ final __callArgument210:Dynamic = 0.0; __callArgument210; }), ({ final __callArgument211:Dynamic = -1.0; __callArgument211; }), ({ final __callArgument212:Dynamic = 0.0; __callArgument212; }), ({ final __callArgument213:Dynamic = 0.0; __callArgument213; }), ({ final __callArgument214:Dynamic = 0.0; __callArgument214; }), ({ final __callArgument215:Dynamic = 0.0; __callArgument215; }), ({ final __callArgument216:Dynamic = 0.0; __callArgument216; }), ({ final __callArgument217:Dynamic = 1.0; __callArgument217; })) : Matrix4);
+  public static final THREE_DS_Y_UP_TO_Z_UP__threeDsParse:Matrix4 = (cast createMatrix4(({ final __callArgument408:Dynamic = 1.0; __callArgument408; }), ({ final __callArgument409:Dynamic = 0.0; __callArgument409; }), ({ final __callArgument410:Dynamic = 0.0; __callArgument410; }), ({ final __callArgument411:Dynamic = 0.0; __callArgument411; }), ({ final __callArgument412:Dynamic = 0.0; __callArgument412; }), ({ final __callArgument413:Dynamic = 0.0; __callArgument413; }), ({ final __callArgument414:Dynamic = 1.0; __callArgument414; }), ({ final __callArgument415:Dynamic = 0.0; __callArgument415; }), ({ final __callArgument416:Dynamic = 0.0; __callArgument416; }), ({ final __callArgument417:Dynamic = -1.0; __callArgument417; }), ({ final __callArgument418:Dynamic = 0.0; __callArgument418; }), ({ final __callArgument419:Dynamic = 0.0; __callArgument419; }), ({ final __callArgument420:Dynamic = 0.0; __callArgument420; }), ({ final __callArgument421:Dynamic = 0.0; __callArgument421; }), ({ final __callArgument422:Dynamic = 0.0; __callArgument422; }), ({ final __callArgument423:Dynamic = 1.0; __callArgument423; })) : Matrix4);
 
   public static final THREE_DS_DEFAULT_FAR__threeDsParse:Float = 1000.0;
 

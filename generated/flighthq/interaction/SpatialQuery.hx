@@ -26,7 +26,7 @@ class SpatialQuery {
     children = _Runtime.field((cast getNodeRuntime((cast root : Dynamic)) : NodeRuntime<Node2DTraits>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        (cast hitTestAreaQuery((cast child : Node2D), ({ final __callArgument4:Dynamic = rect; __callArgument4; }), ({ final __callArgument5:Dynamic = out; __callArgument5; })) : Array<Node2D>);
+        (cast hitTestAreaQuery((cast child : Node2D), ({ final __callArgument6:Dynamic = rect; __callArgument6; }), ({ final __callArgument7:Dynamic = out; __callArgument7; })) : Array<Node2D>);
       }
     }
     return cast out;
@@ -53,7 +53,7 @@ class SpatialQuery {
     children = _Runtime.field((cast getNodeRuntime((cast root : Dynamic)) : NodeRuntime<Node2DTraits>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        (cast hitTestAreaQueryCircle((cast child : Node2D), (cast cx : Float), (cast cy : Float), (cast radius : Float), ({ final __callArgument8:Dynamic = out; __callArgument8; })) : Array<Node2D>);
+        (cast hitTestAreaQueryCircle((cast child : Node2D), (cast cx : Float), (cast cy : Float), (cast radius : Float), ({ final __callArgument12:Dynamic = out; __callArgument12; })) : Array<Node2D>);
       }
     }
     return cast out;

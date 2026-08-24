@@ -47,8 +47,8 @@ class GlInnerGlowEffect {
     var sourceMode:InnerEffectSourceMode = cast _Runtime.UNDEFINED;
     descriptor = (cast { width: source.width, height: source.height, format: source.format });
     s0 = (cast acquireGlRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = pool; __callArgument1; }), ({ final __callArgument2:Dynamic = descriptor; __callArgument2; })) : GlRenderTarget);
-    s1 = (cast acquireGlRenderTarget(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = pool; __callArgument4; }), ({ final __callArgument5:Dynamic = descriptor; __callArgument5; })) : GlRenderTarget);
-    s2 = (cast acquireGlRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pool; __callArgument7; }), ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : GlRenderTarget);
+    s1 = (cast acquireGlRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pool; __callArgument7; }), ({ final __callArgument8:Dynamic = descriptor; __callArgument8; })) : GlRenderTarget);
+    s2 = (cast acquireGlRenderTarget(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = pool; __callArgument13; }), ({ final __callArgument14:Dynamic = descriptor; __callArgument14; })) : GlRenderTarget);
     src = (cast source : GlRenderTarget);
     dst = (cast dest : GlRenderTarget);
     color = _Runtime.coalesce(effect.color, function():Dynamic return cast 4278190335.0);
@@ -56,18 +56,18 @@ class GlInnerGlowEffect {
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
     quality = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(effect.quality, function():Dynamic return cast 1.0)));
     sourceMode = _Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw');
-    applyGlEffectInvertTintPass(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = src; __callArgument10; }), ({ final __callArgument11:Dynamic = s0; __callArgument11; }), (cast color : Float), (cast alpha : Float), (cast strength : Float));
-    applyGlEffectBoxBlur(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = s0; __callArgument13; }), ({ final __callArgument14:Dynamic = s1; __callArgument14; }), ({ final __callArgument15:Dynamic = s2; __callArgument15; }), ({ final __callArgument16:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0), edgeColor: (cast GlInnerGlowEffect.getInvertTintEdgeColor__glInnerGlowEffect((cast color : Float), (cast alpha : Float), (cast strength : Float)) : Array<Float>), passes: quality }; __callArgument16; }));
-    clearGlRenderTarget(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = s0; __callArgument18; }));
-    GlInnerGlowEffect.applyGlInnerClipPass__glInnerGlowEffect(({ final __callArgument19:Dynamic = state; __callArgument19; }), ({ final __callArgument20:Dynamic = s1; __callArgument20; }), ({ final __callArgument21:Dynamic = src; __callArgument21; }), ({ final __callArgument22:Dynamic = s0; __callArgument22; }));
-    clearGlRenderTarget(({ final __callArgument23:Dynamic = state; __callArgument23; }), ({ final __callArgument24:Dynamic = dst; __callArgument24; }));
+    applyGlEffectInvertTintPass(({ final __callArgument18:Dynamic = state; __callArgument18; }), ({ final __callArgument19:Dynamic = src; __callArgument19; }), ({ final __callArgument20:Dynamic = s0; __callArgument20; }), (cast color : Float), (cast alpha : Float), (cast strength : Float));
+    applyGlEffectBoxBlur(({ final __callArgument24:Dynamic = state; __callArgument24; }), ({ final __callArgument25:Dynamic = s0; __callArgument25; }), ({ final __callArgument26:Dynamic = s1; __callArgument26; }), ({ final __callArgument27:Dynamic = s2; __callArgument27; }), ({ final __callArgument28:Dynamic = { blurX: _Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0), blurY: _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0), edgeColor: (cast GlInnerGlowEffect.getInvertTintEdgeColor__glInnerGlowEffect((cast color : Float), (cast alpha : Float), (cast strength : Float)) : Array<Float>), passes: quality }; __callArgument28; }));
+    clearGlRenderTarget(({ final __callArgument34:Dynamic = state; __callArgument34; }), ({ final __callArgument35:Dynamic = s0; __callArgument35; }));
+    GlInnerGlowEffect.applyGlInnerClipPass__glInnerGlowEffect(({ final __callArgument38:Dynamic = state; __callArgument38; }), ({ final __callArgument39:Dynamic = s1; __callArgument39; }), ({ final __callArgument40:Dynamic = src; __callArgument40; }), ({ final __callArgument41:Dynamic = s0; __callArgument41; }));
+    clearGlRenderTarget(({ final __callArgument46:Dynamic = state; __callArgument46; }), ({ final __callArgument47:Dynamic = dst; __callArgument47; }));
     if ((cast _Runtime.strictEquals(sourceMode, 'draw') : Bool)) {
-      applyGlEffectBlitPass(({ final __callArgument25:Dynamic = state; __callArgument25; }), ({ final __callArgument26:Dynamic = src; __callArgument26; }), ({ final __callArgument27:Dynamic = dst; __callArgument27; }));
+      applyGlEffectBlitPass(({ final __callArgument50:Dynamic = state; __callArgument50; }), ({ final __callArgument51:Dynamic = src; __callArgument51; }), ({ final __callArgument52:Dynamic = dst; __callArgument52; }));
     }
-    applyGlEffectBlitPass(({ final __callArgument28:Dynamic = state; __callArgument28; }), ({ final __callArgument29:Dynamic = s0; __callArgument29; }), ({ final __callArgument30:Dynamic = dst; __callArgument30; }));
-    releaseGlRenderTarget(({ final __callArgument31:Dynamic = pool; __callArgument31; }), ({ final __callArgument32:Dynamic = s0; __callArgument32; }));
-    releaseGlRenderTarget(({ final __callArgument33:Dynamic = pool; __callArgument33; }), ({ final __callArgument34:Dynamic = s1; __callArgument34; }));
-    releaseGlRenderTarget(({ final __callArgument35:Dynamic = pool; __callArgument35; }), ({ final __callArgument36:Dynamic = s2; __callArgument36; }));
+    applyGlEffectBlitPass(({ final __callArgument56:Dynamic = state; __callArgument56; }), ({ final __callArgument57:Dynamic = s0; __callArgument57; }), ({ final __callArgument58:Dynamic = dst; __callArgument58; }));
+    releaseGlRenderTarget(({ final __callArgument62:Dynamic = pool; __callArgument62; }), ({ final __callArgument63:Dynamic = s0; __callArgument63; }));
+    releaseGlRenderTarget(({ final __callArgument66:Dynamic = pool; __callArgument66; }), ({ final __callArgument67:Dynamic = s1; __callArgument67; }));
+    releaseGlRenderTarget(({ final __callArgument70:Dynamic = pool; __callArgument70; }), ({ final __callArgument71:Dynamic = s2; __callArgument71; }));
   }
 
   public static final defaultGlInnerGlowEffectRunner:GlRenderEffectRunner = (cast function(ctx:GlRenderEffectContext, effect:RenderEffect):Void {
@@ -75,15 +75,15 @@ class GlInnerGlowEffect {
   });
 
   public static function registerGlInnerGlowEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument37:Dynamic = state; __callArgument37; }), (cast 'InnerGlowEffect' : String), ({ final __callArgument38:Dynamic = defaultGlInnerGlowEffectRunner; __callArgument38; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument76:Dynamic = state; __callArgument76; }), (cast 'InnerGlowEffect' : String), ({ final __callArgument77:Dynamic = defaultGlInnerGlowEffectRunner; __callArgument77; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument74:Dynamic = state; __callArgument74; }), (cast 'InnerGlowEffect' : String), ({ final __callArgument75:Dynamic = defaultGlInnerGlowEffectRunner; __callArgument75; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static function applyGlInnerClipPass__glInnerGlowEffect(state:GlRenderState, glow:GlRenderTarget, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:GlFullscreenProgram = cast _Runtime.UNDEFINED;
-    loc = (cast GlInnerGlowEffect.getClipShader__glInnerGlowEffect(({ final __callArgument39:Dynamic = state; __callArgument39; })) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument40:Dynamic = state; __callArgument40; }), ({ final __callArgument41:Dynamic = loc; __callArgument41; }), ({ final __callArgument42:Dynamic = cast ([glow.texture, source.texture] : Array<Dynamic>); __callArgument42; }), ({ final __callArgument43:Dynamic = dest; __callArgument43; }), ({ final __callArgument44:Dynamic = function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
+    loc = (cast GlInnerGlowEffect.getClipShader__glInnerGlowEffect(({ final __callArgument78:Dynamic = state; __callArgument78; })) : GlFullscreenProgram);
+    drawGlFullscreenPass(({ final __callArgument80:Dynamic = state; __callArgument80; }), ({ final __callArgument81:Dynamic = loc; __callArgument81; }), ({ final __callArgument82:Dynamic = cast ([glow.texture, source.texture] : Array<Dynamic>); __callArgument82; }), ({ final __callArgument83:Dynamic = dest; __callArgument83; }), ({ final __callArgument84:Dynamic = function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.blendFunc(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ONE', flighthq._internal.backend.WebGl2Backend.ONE), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ZERO', flighthq._internal.backend.WebGl2Backend.ZERO));
-    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument44; }));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument84; }));
   }
 
   public static function getClipShader__glInnerGlowEffect(state:GlRenderState):InnerClipLocations__glInnerGlowEffect {
@@ -91,7 +91,7 @@ class GlInnerGlowEffect {
     loc = ((cast GlInnerGlowEffect.clipShaders__glInnerGlowEffect : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram>).get((cast state : GlRenderState).gl));
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var gl:flighthq._internal.dom.WebGL2RenderingContext = (cast state : GlRenderState).gl;
-      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument45:Dynamic = gl; __callArgument45; }), (cast GlInnerGlowEffect.INNER_CLIP_FRAGMENT_SRC__glInnerGlowEffect : String)) : GlFullscreenProgram);
+      var base:GlFullscreenProgram = (cast compileGlFullscreenProgram(({ final __callArgument90:Dynamic = gl; __callArgument90; }), (cast GlInnerGlowEffect.INNER_CLIP_FRAGMENT_SRC__glInnerGlowEffect : String)) : GlFullscreenProgram);
       (loc = cast (_Runtime.mergeObjects([base]) : Dynamic));
       ((cast GlInnerGlowEffect.clipShaders__glInnerGlowEffect : flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram>).set((cast state : GlRenderState).gl, (cast loc)));
     }
@@ -101,7 +101,7 @@ class GlInnerGlowEffect {
 
   public static function getInvertTintEdgeColor__glInnerGlowEffect(color:Float, alpha:Float, strength:Float):Array<Float> {
     var edgeAlpha:Float = cast _Runtime.UNDEFINED;
-    unpackColorRgba(({ final __callArgument46:Dynamic = GlInnerGlowEffect.scratchEdge__glInnerGlowEffect; __callArgument46; }), (cast color : Float));
+    unpackColorRgba(({ final __callArgument92:Dynamic = GlInnerGlowEffect.scratchEdge__glInnerGlowEffect; __callArgument92; }), (cast color : Float));
     edgeAlpha = HxMath.min(1.0, ((alpha * flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlInnerGlowEffect.scratchEdge__glInnerGlowEffect : Array<Float>), (cast 3.0 : Float))) * strength));
     return cast cast ([(flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlInnerGlowEffect.scratchEdge__glInnerGlowEffect : Array<Float>), (cast 0.0 : Float)) * edgeAlpha), (flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlInnerGlowEffect.scratchEdge__glInnerGlowEffect : Array<Float>), (cast 1.0 : Float)) * edgeAlpha), (flighthq._internal._StaticIndex.readFloatArrayTyped((cast GlInnerGlowEffect.scratchEdge__glInnerGlowEffect : Array<Float>), (cast 2.0 : Float)) * edgeAlpha), edgeAlpha] : Array<Dynamic>);
     return cast null;

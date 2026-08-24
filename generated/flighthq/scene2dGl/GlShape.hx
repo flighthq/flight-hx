@@ -16,7 +16,7 @@ class GlShape {
   @:noCompletion
   public static function drawGlShape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     if ((cast (cast drawGlMeshShape(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = renderProxy; __callArgument1; })) : Bool) : Bool)) { return; }
-    drawGlRasterShape(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = renderProxy; __callArgument3; }));
+    drawGlRasterShape(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = renderProxy; __callArgument5; }));
   }
 
   public static final defaultGlShapeRenderer:Scene2DRenderer = (cast { format: BatchFormat.Quad, createData: createGlShapeData, destroyData: destroyGlShapeData, submit: drawGlShape });

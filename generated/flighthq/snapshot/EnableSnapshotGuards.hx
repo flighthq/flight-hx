@@ -13,7 +13,7 @@ class EnableSnapshotGuards {
   }
 
   public static function enableSnapshotGuards():Void {
-    setSnapshotCaptureGuard(({ final __callArgument1:Dynamic = EnableSnapshotGuards.warnOnUnsupportedSnapshotSource__enableSnapshotGuards; __callArgument1; }));
+    setSnapshotCaptureGuard(({ final __callArgument2:Dynamic = EnableSnapshotGuards.warnOnUnsupportedSnapshotSource__enableSnapshotGuards; __callArgument2; }));
   }
 
   public static function warnOnUnsupportedSnapshotSource__enableSnapshotGuards(source:flighthq._internal._Any):Void {
@@ -32,7 +32,7 @@ class EnableSnapshotGuards {
         return;
       }
       ((cast seen : flighthq._internal._Set<flighthq._internal._Object>).add(value));
-      kind = (cast EnableSnapshotGuards.nonPlainSnapshotKind__enableSnapshotGuards(({ final __callArgument2:Dynamic = value; __callArgument2; })) : Null<String>);
+      kind = (cast EnableSnapshotGuards.nonPlainSnapshotKind__enableSnapshotGuards(({ final __callArgument4:Dynamic = value; __callArgument4; })) : Null<String>);
       if ((cast !_Runtime.strictEquals(kind, null) : Bool)) {
         ((cast nonPlain : flighthq._internal._Set<String>).add(kind));
         return;
@@ -49,10 +49,10 @@ class EnableSnapshotGuards {
     });
     visit((cast source : flighthq._internal._Any));
     if ((cast ((cast (cast nonPlain : flighthq._internal._Set<String>).size : Float) > (cast 0.0 : Float)) : Bool)) {
-      (cast logOnce((cast 'snapshot:non-plain-source' : String), ({ final __callArgument7:Dynamic = LogLevel.Warn; __callArgument7; }), (cast { message: (('captureSnapshot: source contains non-plain value(s) (' + Std.string(_Runtime.join(_Runtime.callProperty((cast _Runtime.toArray(nonPlain) : Array<String>), 'sort', cast ([] : Array<Dynamic>)), ', ')) + '). ' + 'They clone, but a frozen Map/Set stays mutable and equalsSnapshot compares them by reference, ') + 'so the snapshot is neither immutable nor comparable. Convert to plain arrays/objects first.') } : Dynamic), ({ final __callArgument8:Dynamic = 'snapshot'; __callArgument8; })) : Bool);
+      (cast logOnce((cast 'snapshot:non-plain-source' : String), ({ final __callArgument10:Dynamic = LogLevel.Warn; __callArgument10; }), (cast { message: (('captureSnapshot: source contains non-plain value(s) (' + Std.string(_Runtime.join(_Runtime.callProperty((cast _Runtime.toArray(nonPlain) : Array<String>), 'sort', cast ([] : Array<Dynamic>)), ', ')) + '). ' + 'They clone, but a frozen Map/Set stays mutable and equalsSnapshot compares them by reference, ') + 'so the snapshot is neither immutable nor comparable. Convert to plain arrays/objects first.') } : Dynamic), ({ final __callArgument11:Dynamic = 'snapshot'; __callArgument11; })) : Bool);
     }
     if ((cast cyclic : Bool)) {
-      (cast logOnce((cast 'snapshot:cyclic-source' : String), ({ final __callArgument9:Dynamic = LogLevel.Warn; __callArgument9; }), (cast { message: (('captureSnapshot: source contains a cycle. Capture handles it, but equalsSnapshot, ' + 'interpolateSnapshots, and restoreSnapshot recurse without cycle tracking and will overflow ') + 'the stack — restoreSnapshot only on the second restore into the same target.') } : Dynamic), ({ final __callArgument10:Dynamic = 'snapshot'; __callArgument10; })) : Bool);
+      (cast logOnce((cast 'snapshot:cyclic-source' : String), ({ final __callArgument14:Dynamic = LogLevel.Warn; __callArgument14; }), (cast { message: (('captureSnapshot: source contains a cycle. Capture handles it, but equalsSnapshot, ' + 'interpolateSnapshots, and restoreSnapshot recurse without cycle tracking and will overflow ') + 'the stack — restoreSnapshot only on the second restore into the same target.') } : Dynamic), ({ final __callArgument15:Dynamic = 'snapshot'; __callArgument15; })) : Bool);
     }
   }
 

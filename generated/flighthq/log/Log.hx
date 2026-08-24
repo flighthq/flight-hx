@@ -80,7 +80,7 @@ class Log {
 
   public static function _emitToSinks__log(entry:LogEntry):Void {
     for (sink in _Runtime.iterable(Log._sinks__log)) {
-      sink(({ final __callArgument8:Dynamic = entry; __callArgument8; }));
+      sink(({ final __callArgument10:Dynamic = entry; __callArgument10; }));
     }
     if ((cast !_Runtime.strictEquals(Log._logSignals__log, null) : Bool)) {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast Log._logSignals__log : LogSignals).onLogEntry], [entry]]), 1);
@@ -148,7 +148,7 @@ class Log {
     next = _Runtime.getIndex(obj, key);
     if ((cast ((cast ((cast !_Runtime.strictEquals(next, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(next), 'object') : Bool)) : Bool) && (cast !(cast _Runtime.isArray(next) : Bool) : Bool)) : Bool)) {
       _Runtime.setIndex(obj, key, _Runtime.mergeObjects([(cast next : flighthq._internal._Record<String, flighthq._internal._Any>)]));
-      Log._redactPath__log((cast _Runtime.getIndex(obj, key) : flighthq._internal._Record<String, flighthq._internal._Any>), ({ final __callArgument11:Dynamic = parts; __callArgument11; }), (cast (idx + 1.0) : Float));
+      Log._redactPath__log((cast _Runtime.getIndex(obj, key) : flighthq._internal._Record<String, flighthq._internal._Any>), ({ final __callArgument14:Dynamic = parts; __callArgument14; }), (cast (idx + 1.0) : Float));
     }
   }
 
@@ -173,7 +173,7 @@ class Log {
     __destructure13 = entry;
     level = __destructure13.level;
     channel = __destructure13.channel;
-    (cast flighthq._internal._HostValueLut.get('console') : flighthq._internal.dom.Console).debug((cast envelopeFormatter(({ final __callArgument12:Dynamic = entry; __callArgument12; })) : String));
+    (cast flighthq._internal._HostValueLut.get('console') : flighthq._internal.dom.Console).debug((cast envelopeFormatter(({ final __callArgument16:Dynamic = entry; __callArgument16; })) : String));
     if ((cast ((cast !_Runtime.strictEquals(level, LogLevel.None) : Bool) && (cast ((cast Log._consoleLevel__log : Float) >= (cast level : Float)) : Bool)) : Bool)) {
       var method:String = _Runtime.getIndex(Log._consoleMethods__log, level);
       var prefix:String = ((cast !_Runtime.strictEquals(channel, null) : Bool) ? (cast '[' + Std.string(channel) + ']' : Dynamic) : (cast '[flight]' : Dynamic));
@@ -185,7 +185,7 @@ class Log {
 
   public static function _writeConsoleLogEntry__log(entry:LogEntry, formatter:LogFormatter):Void {
     if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('console'), 'undefined') : Bool)) { return; }
-    _Runtime.callValue(_Runtime.getIndex(flighthq._internal._HostValueLut.get('console'), _Runtime.getIndex(Log._consoleMethods__log, entry.level)), cast ([(cast formatter(({ final __callArgument13:Dynamic = entry; __callArgument13; })) : String)] : Array<Dynamic>));
+    _Runtime.callValue(_Runtime.getIndex(flighthq._internal._HostValueLut.get('console'), _Runtime.getIndex(Log._consoleMethods__log, entry.level)), cast ([(cast formatter(({ final __callArgument18:Dynamic = entry; __callArgument18; })) : String)] : Array<Dynamic>));
   }
 
   public static function addLogSink(sink:LogSink):Void {
@@ -196,8 +196,8 @@ class Log {
   public static function beginLogGroup(label:String, ?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
     Log._groupDepth__log++;
-    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument14:Dynamic = LogLevel.Debug; __callArgument14; }), ({ final __callArgument15:Dynamic = channel; __callArgument15; })) : Bool) : Bool) : Bool)) { return; }
-    Log._emitToSinks__log(({ final __callArgument16:Dynamic = { level: LogLevel.Debug, channel: channel, data: { msg: label, group: 'begin', depth: Log._groupDepth__log } }; __callArgument16; }));
+    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument20:Dynamic = LogLevel.Debug; __callArgument20; }), ({ final __callArgument21:Dynamic = channel; __callArgument21; })) : Bool) : Bool) : Bool)) { return; }
+    Log._emitToSinks__log(({ final __callArgument24:Dynamic = { level: LogLevel.Debug, channel: channel, data: { msg: label, group: 'begin', depth: Log._groupDepth__log } }; __callArgument24; }));
   }
 
   public static function clearLogChannelLevel(channel:String):Void {
@@ -253,7 +253,7 @@ class Log {
       if ((cast _Runtime.strictEquals(_Runtime.field((cast state : BufferedLogSinkState__log).buf, 'length'), 0.0) : Bool)) { return; }
       batch = _Runtime.splice((cast state : BufferedLogSinkState__log).buf, Std.int(0.0), Std.int((cast state : BufferedLogSinkState__log).buf.length - Std.int(0.0)), []);
       for (entry in _Runtime.iterable(batch)) {
-        target(({ final __callArgument19:Dynamic = entry; __callArgument19; }));
+        target(({ final __callArgument28:Dynamic = entry; __callArgument28; }));
       }
     });
     sink = function(entry:LogEntry):Void {
@@ -283,15 +283,15 @@ class Log {
     if (options == null) options = cast ({  } : Dynamic);
     var envelopeFormatter:LogFormatter = cast _Runtime.UNDEFINED;
     envelopeFormatter = _Runtime.coalesce((cast options : { @:optional var formatter:Null<LogFormatter>; }).formatter, function():Dynamic return cast Log._defaultJsonFormatter__log);
-    return cast function(entry:LogEntry):Void { Log._writeConsoleCaptureEntry__log(({ final __callArgument20:Dynamic = entry; __callArgument20; }), ({ final __callArgument21:Dynamic = envelopeFormatter; __callArgument21; })); };
+    return cast function(entry:LogEntry):Void { Log._writeConsoleCaptureEntry__log(({ final __callArgument30:Dynamic = entry; __callArgument30; }), ({ final __callArgument31:Dynamic = envelopeFormatter; __callArgument31; })); };
     return cast null;
   }
 
   public static function createConsoleLogSink(?options:{ @:optional var formatter:LogFormatter; }):LogSink {
     if (options == null) options = cast ({  } : Dynamic);
     var formatter:LogFormatter = cast _Runtime.UNDEFINED;
-    formatter = _Runtime.coalesce((cast options : { @:optional var formatter:Null<LogFormatter>; }).formatter, function():Dynamic return cast (cast createTextLogFormatter(({ final __callArgument22:Dynamic = { levelPrefix: true }; __callArgument22; })) : LogFormatter));
-    return cast function(entry:LogEntry):Void { Log._writeConsoleLogEntry__log(({ final __callArgument23:Dynamic = entry; __callArgument23; }), ({ final __callArgument24:Dynamic = formatter; __callArgument24; })); };
+    formatter = _Runtime.coalesce((cast options : { @:optional var formatter:Null<LogFormatter>; }).formatter, function():Dynamic return cast (cast createTextLogFormatter(({ final __callArgument34:Dynamic = { levelPrefix: true }; __callArgument34; })) : LogFormatter));
+    return cast function(entry:LogEntry):Void { Log._writeConsoleLogEntry__log(({ final __callArgument36:Dynamic = entry; __callArgument36; }), ({ final __callArgument37:Dynamic = formatter; __callArgument37; })); };
     return cast null;
   }
 
@@ -300,7 +300,7 @@ class Log {
     list = _Runtime.slice(sinks, 0, null);
     return cast function(entry:LogEntry):Void {
       for (s in _Runtime.iterable(list)) {
-        s(({ final __callArgument27:Dynamic = entry; __callArgument27; }));
+        s(({ final __callArgument42:Dynamic = entry; __callArgument42; }));
       }
     };
     return cast null;
@@ -316,7 +316,7 @@ class Log {
       var backend:Null<LogTransportBackend> = cast _Runtime.UNDEFINED;
       backend = Log._transportBackend__log;
       if ((cast _Runtime.strictEquals(backend, null) : Bool)) { return; }
-      (cast backend : LogTransportBackend).write((cast ((cast formatter(({ final __callArgument28:Dynamic = entry; __callArgument28; })) : String) + '\n') : String));
+      (cast backend : LogTransportBackend).write((cast ((cast formatter(({ final __callArgument44:Dynamic = entry; __callArgument44; })) : String) + '\n') : String));
     };
     handle = (cast { sink: sink });
     return cast handle;
@@ -325,7 +325,7 @@ class Log {
 
   public static function createFilterLogSink(target:LogSink, predicate:LogEntry->Bool):LogSink {
     return cast function(entry:LogEntry):Void {
-      if ((cast (cast predicate(({ final __callArgument29:Dynamic = entry; __callArgument29; })) : Bool) : Bool)) { target(({ final __callArgument30:Dynamic = entry; __callArgument30; })); }
+      if ((cast (cast predicate(({ final __callArgument46:Dynamic = entry; __callArgument46; })) : Bool) : Bool)) { target(({ final __callArgument48:Dynamic = entry; __callArgument48; })); }
     };
     return cast null;
   }
@@ -343,7 +343,7 @@ class Log {
       channel = __destructure0.channel;
       data = __destructure0.data;
       serialized = (cast Log._applySerializers__log(((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'string') : Bool) ? (cast { msg: data } : Dynamic) : (cast (cast data : flighthq._internal._Record<String, flighthq._internal._Any>) : Dynamic))) : flighthq._internal._Record<String, flighthq._internal._Any>);
-      redacted = ((cast ((cast _Runtime.field(Log._redactionPaths__log, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast Log._applyRedaction__log(({ final __callArgument31:Dynamic = serialized; __callArgument31; })) : flighthq._internal._Record<String, flighthq._internal._Any>) : Dynamic) : (cast serialized : Dynamic));
+      redacted = ((cast ((cast _Runtime.field(Log._redactionPaths__log, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast Log._applyRedaction__log(({ final __callArgument50:Dynamic = serialized; __callArgument50; })) : flighthq._internal._Record<String, flighthq._internal._Any>) : Dynamic) : (cast serialized : Dynamic));
       return cast _Runtime.jsonStringify({ __flight: true, t: (cast Log._timestamp__log() : Float), level: _Runtime.getIndex(Log._levelNames__log, level), channel: channel, data: redacted });
       return cast _Runtime.UNDEFINED;
     };
@@ -411,7 +411,7 @@ class Log {
       current = _Runtime.coalesce(((cast counts : flighthq._internal._Map<Null<String>, Float>).get(key)), function():Dynamic return cast 0.0);
       if ((cast ((cast current : Float) >= (cast maxPerInterval : Float)) : Bool)) { return; }
       ((cast counts : flighthq._internal._Map<Null<String>, Float>).set(key, (cast (current + 1.0))));
-      target(({ final __callArgument32:Dynamic = entry; __callArgument32; }));
+      target(({ final __callArgument52:Dynamic = entry; __callArgument52; }));
     };
     return cast { sink: sink };
     return cast null;
@@ -423,7 +423,7 @@ class Log {
     counter = 0.0;
     return cast function(entry:LogEntry):Void {
       (counter = cast (_Runtime.fmod((counter + 1.0), rate) : Dynamic));
-      if ((cast _Runtime.strictEquals(counter, 0.0) : Bool)) { target(({ final __callArgument33:Dynamic = entry; __callArgument33; })); }
+      if ((cast _Runtime.strictEquals(counter, 0.0) : Bool)) { target(({ final __callArgument54:Dynamic = entry; __callArgument54; })); }
     };
     return cast null;
   }
@@ -488,14 +488,14 @@ class Log {
     if (channel == null) channel = cast (null : Dynamic);
     if ((cast ((cast Log._groupDepth__log : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
     Log._groupDepth__log--;
-    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument34:Dynamic = LogLevel.Debug; __callArgument34; }), ({ final __callArgument35:Dynamic = channel; __callArgument35; })) : Bool) : Bool) : Bool)) { return; }
-    Log._emitToSinks__log(({ final __callArgument36:Dynamic = { level: LogLevel.Debug, channel: channel, data: { group: 'end', depth: (Log._groupDepth__log + 1.0) } }; __callArgument36; }));
+    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument56:Dynamic = LogLevel.Debug; __callArgument56; }), ({ final __callArgument57:Dynamic = channel; __callArgument57; })) : Bool) : Bool) : Bool)) { return; }
+    Log._emitToSinks__log(({ final __callArgument60:Dynamic = { level: LogLevel.Debug, channel: channel, data: { group: 'end', depth: (Log._groupDepth__log + 1.0) } }; __callArgument60; }));
   }
 
   public static function endLogTimer(timer:LogTimer):Float {
     var elapsed:Float = cast _Runtime.UNDEFINED;
     elapsed = _Runtime.subtractNumbers((cast Log._timestamp__log() : Float), _Runtime.field(timer, 'startedAt'));
-    logDebug(({ final __callArgument37:Dynamic = { label: _Runtime.field(timer, 'label'), elapsedMs: elapsed }; __callArgument37; }), _Runtime.field(timer, 'channel'));
+    logDebug(({ final __callArgument62:Dynamic = { label: _Runtime.field(timer, 'label'), elapsedMs: elapsed }; __callArgument62; }), _Runtime.field(timer, 'channel'));
     return cast elapsed;
     return cast null;
   }
@@ -561,27 +561,27 @@ class Log {
     if (channel == null) channel = cast (null : Dynamic);
     var resolved:LogData = cast _Runtime.UNDEFINED;
     var entry:LogEntry = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument38:Dynamic = level; __callArgument38; }), ({ final __callArgument39:Dynamic = channel; __callArgument39; })) : Bool) : Bool) : Bool)) { return; }
+    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument64:Dynamic = level; __callArgument64; }), ({ final __callArgument65:Dynamic = channel; __callArgument65; })) : Bool) : Bool) : Bool)) { return; }
     resolved = ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'function') : Bool) ? (cast (cast (cast data : Void->LogData)() : LogData) : Dynamic) : (cast data : Dynamic));
-    entry = (cast { level: level, channel: channel, data: (cast Log._mergeSpanFields__log(({ final __callArgument40:Dynamic = resolved; __callArgument40; }), ({ final __callArgument41:Dynamic = channel; __callArgument41; })) : LogData) });
-    Log._emitToSinks__log(({ final __callArgument42:Dynamic = entry; __callArgument42; }));
+    entry = (cast { level: level, channel: channel, data: (cast Log._mergeSpanFields__log(({ final __callArgument68:Dynamic = resolved; __callArgument68; }), ({ final __callArgument69:Dynamic = channel; __callArgument69; })) : LogData) });
+    Log._emitToSinks__log(({ final __callArgument72:Dynamic = entry; __callArgument72; }));
   }
 
   public static function logAssert(condition:Bool, data:flighthq._internal._Union2<LogData, LogDataProvider>, ?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
     var resolved:LogData = cast _Runtime.UNDEFINED;
     if ((cast condition : Bool)) { return; }
-    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument43:Dynamic = LogLevel.Error; __callArgument43; }), ({ final __callArgument44:Dynamic = channel; __callArgument44; })) : Bool) : Bool) : Bool)) { return; }
+    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument74:Dynamic = LogLevel.Error; __callArgument74; }), ({ final __callArgument75:Dynamic = channel; __callArgument75; })) : Bool) : Bool) : Bool)) { return; }
     resolved = ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'function') : Bool) ? (cast (cast (cast data : Void->LogData)() : LogData) : Dynamic) : (cast data : Dynamic));
-    Log._emitToSinks__log(({ final __callArgument47:Dynamic = { level: LogLevel.Error, channel: channel, data: (cast Log._mergeSpanFields__log(({ final __callArgument45:Dynamic = resolved; __callArgument45; }), ({ final __callArgument46:Dynamic = channel; __callArgument46; })) : LogData) }; __callArgument47; }));
+    Log._emitToSinks__log(({ final __callArgument82:Dynamic = { level: LogLevel.Error, channel: channel, data: (cast Log._mergeSpanFields__log(({ final __callArgument78:Dynamic = resolved; __callArgument78; }), ({ final __callArgument79:Dynamic = channel; __callArgument79; })) : LogData) }; __callArgument82; }));
   }
 
   public static function logDebug(data:flighthq._internal._Union2<LogData, LogDataProvider>, ?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
     var resolved:LogData = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument48:Dynamic = LogLevel.Debug; __callArgument48; }), ({ final __callArgument49:Dynamic = channel; __callArgument49; })) : Bool) : Bool) : Bool)) { return; }
+    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument88:Dynamic = LogLevel.Debug; __callArgument88; }), ({ final __callArgument89:Dynamic = channel; __callArgument89; })) : Bool) : Bool) : Bool)) { return; }
     resolved = ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'function') : Bool) ? (cast (cast (cast data : Void->LogData)() : LogData) : Dynamic) : (cast data : Dynamic));
-    Log._emitToSinks__log(({ final __callArgument52:Dynamic = { level: LogLevel.Debug, channel: channel, data: (cast Log._mergeSpanFields__log(({ final __callArgument50:Dynamic = resolved; __callArgument50; }), ({ final __callArgument51:Dynamic = channel; __callArgument51; })) : LogData) }; __callArgument52; }));
+    Log._emitToSinks__log(({ final __callArgument96:Dynamic = { level: LogLevel.Debug, channel: channel, data: (cast Log._mergeSpanFields__log(({ final __callArgument92:Dynamic = resolved; __callArgument92; }), ({ final __callArgument93:Dynamic = channel; __callArgument93; })) : LogData) }; __callArgument96; }));
   }
 
   public static function logDebugWith(context:LogContext, data:flighthq._internal._Union2<LogData, LogDataProvider>):Void {
@@ -590,17 +590,17 @@ class Log {
     var resolved:LogData = cast _Runtime.UNDEFINED;
     __destructure4 = context;
     channel = _Runtime.field(__destructure4, 'channel');
-    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument53:Dynamic = LogLevel.Debug; __callArgument53; }), ({ final __callArgument54:Dynamic = channel; __callArgument54; })) : Bool) : Bool) : Bool)) { return; }
+    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument102:Dynamic = LogLevel.Debug; __callArgument102; }), ({ final __callArgument103:Dynamic = channel; __callArgument103; })) : Bool) : Bool) : Bool)) { return; }
     resolved = ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'function') : Bool) ? (cast (cast (cast data : Void->LogData)() : LogData) : Dynamic) : (cast data : Dynamic));
-    Log._emitToSinks__log(({ final __callArgument58:Dynamic = { level: LogLevel.Debug, channel: channel, data: (cast Log._mergeContextFields__log(({ final __callArgument55:Dynamic = context; __callArgument55; }), (cast Log._mergeSpanFields__log(({ final __callArgument56:Dynamic = resolved; __callArgument56; }), ({ final __callArgument57:Dynamic = channel; __callArgument57; })) : LogData)) : LogData) }; __callArgument58; }));
+    Log._emitToSinks__log(({ final __callArgument116:Dynamic = { level: LogLevel.Debug, channel: channel, data: (cast Log._mergeContextFields__log(({ final __callArgument106:Dynamic = context; __callArgument106; }), (cast Log._mergeSpanFields__log(({ final __callArgument107:Dynamic = resolved; __callArgument107; }), ({ final __callArgument108:Dynamic = channel; __callArgument108; })) : LogData)) : LogData) }; __callArgument116; }));
   }
 
   public static function logError(data:flighthq._internal._Union2<LogData, LogDataProvider>, ?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
     var resolved:LogData = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument59:Dynamic = LogLevel.Error; __callArgument59; }), ({ final __callArgument60:Dynamic = channel; __callArgument60; })) : Bool) : Bool) : Bool)) { return; }
+    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument128:Dynamic = LogLevel.Error; __callArgument128; }), ({ final __callArgument129:Dynamic = channel; __callArgument129; })) : Bool) : Bool) : Bool)) { return; }
     resolved = ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'function') : Bool) ? (cast (cast (cast data : Void->LogData)() : LogData) : Dynamic) : (cast data : Dynamic));
-    Log._emitToSinks__log(({ final __callArgument63:Dynamic = { level: LogLevel.Error, channel: channel, data: (cast Log._mergeSpanFields__log(({ final __callArgument61:Dynamic = resolved; __callArgument61; }), ({ final __callArgument62:Dynamic = channel; __callArgument62; })) : LogData) }; __callArgument63; }));
+    Log._emitToSinks__log(({ final __callArgument136:Dynamic = { level: LogLevel.Error, channel: channel, data: (cast Log._mergeSpanFields__log(({ final __callArgument132:Dynamic = resolved; __callArgument132; }), ({ final __callArgument133:Dynamic = channel; __callArgument133; })) : LogData) }; __callArgument136; }));
   }
 
   public static function logErrorWith(context:LogContext, data:flighthq._internal._Union2<LogData, LogDataProvider>):Void {
@@ -609,17 +609,17 @@ class Log {
     var resolved:LogData = cast _Runtime.UNDEFINED;
     __destructure5 = context;
     channel = _Runtime.field(__destructure5, 'channel');
-    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument64:Dynamic = LogLevel.Error; __callArgument64; }), ({ final __callArgument65:Dynamic = channel; __callArgument65; })) : Bool) : Bool) : Bool)) { return; }
+    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument142:Dynamic = LogLevel.Error; __callArgument142; }), ({ final __callArgument143:Dynamic = channel; __callArgument143; })) : Bool) : Bool) : Bool)) { return; }
     resolved = ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'function') : Bool) ? (cast (cast (cast data : Void->LogData)() : LogData) : Dynamic) : (cast data : Dynamic));
-    Log._emitToSinks__log(({ final __callArgument69:Dynamic = { level: LogLevel.Error, channel: channel, data: (cast Log._mergeContextFields__log(({ final __callArgument66:Dynamic = context; __callArgument66; }), (cast Log._mergeSpanFields__log(({ final __callArgument67:Dynamic = resolved; __callArgument67; }), ({ final __callArgument68:Dynamic = channel; __callArgument68; })) : LogData)) : LogData) }; __callArgument69; }));
+    Log._emitToSinks__log(({ final __callArgument156:Dynamic = { level: LogLevel.Error, channel: channel, data: (cast Log._mergeContextFields__log(({ final __callArgument146:Dynamic = context; __callArgument146; }), (cast Log._mergeSpanFields__log(({ final __callArgument147:Dynamic = resolved; __callArgument147; }), ({ final __callArgument148:Dynamic = channel; __callArgument148; })) : LogData)) : LogData) }; __callArgument156; }));
   }
 
   public static function logInfo(data:flighthq._internal._Union2<LogData, LogDataProvider>, ?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
     var resolved:LogData = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument70:Dynamic = LogLevel.Info; __callArgument70; }), ({ final __callArgument71:Dynamic = channel; __callArgument71; })) : Bool) : Bool) : Bool)) { return; }
+    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument168:Dynamic = LogLevel.Info; __callArgument168; }), ({ final __callArgument169:Dynamic = channel; __callArgument169; })) : Bool) : Bool) : Bool)) { return; }
     resolved = ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'function') : Bool) ? (cast (cast (cast data : Void->LogData)() : LogData) : Dynamic) : (cast data : Dynamic));
-    Log._emitToSinks__log(({ final __callArgument74:Dynamic = { level: LogLevel.Info, channel: channel, data: (cast Log._mergeSpanFields__log(({ final __callArgument72:Dynamic = resolved; __callArgument72; }), ({ final __callArgument73:Dynamic = channel; __callArgument73; })) : LogData) }; __callArgument74; }));
+    Log._emitToSinks__log(({ final __callArgument176:Dynamic = { level: LogLevel.Info, channel: channel, data: (cast Log._mergeSpanFields__log(({ final __callArgument172:Dynamic = resolved; __callArgument172; }), ({ final __callArgument173:Dynamic = channel; __callArgument173; })) : LogData) }; __callArgument176; }));
   }
 
   public static function logInfoWith(context:LogContext, data:flighthq._internal._Union2<LogData, LogDataProvider>):Void {
@@ -628,16 +628,16 @@ class Log {
     var resolved:LogData = cast _Runtime.UNDEFINED;
     __destructure6 = context;
     channel = _Runtime.field(__destructure6, 'channel');
-    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument75:Dynamic = LogLevel.Info; __callArgument75; }), ({ final __callArgument76:Dynamic = channel; __callArgument76; })) : Bool) : Bool) : Bool)) { return; }
+    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument182:Dynamic = LogLevel.Info; __callArgument182; }), ({ final __callArgument183:Dynamic = channel; __callArgument183; })) : Bool) : Bool) : Bool)) { return; }
     resolved = ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'function') : Bool) ? (cast (cast (cast data : Void->LogData)() : LogData) : Dynamic) : (cast data : Dynamic));
-    Log._emitToSinks__log(({ final __callArgument80:Dynamic = { level: LogLevel.Info, channel: channel, data: (cast Log._mergeContextFields__log(({ final __callArgument77:Dynamic = context; __callArgument77; }), (cast Log._mergeSpanFields__log(({ final __callArgument78:Dynamic = resolved; __callArgument78; }), ({ final __callArgument79:Dynamic = channel; __callArgument79; })) : LogData)) : LogData) }; __callArgument80; }));
+    Log._emitToSinks__log(({ final __callArgument196:Dynamic = { level: LogLevel.Info, channel: channel, data: (cast Log._mergeContextFields__log(({ final __callArgument186:Dynamic = context; __callArgument186; }), (cast Log._mergeSpanFields__log(({ final __callArgument187:Dynamic = resolved; __callArgument187; }), ({ final __callArgument188:Dynamic = channel; __callArgument188; })) : LogData)) : LogData) }; __callArgument196; }));
   }
 
   public static function logOnce(key:String, level:LogLevel, data:flighthq._internal._Union2<LogData, LogDataProvider>, ?channel:Null<String>):Bool {
     if (channel == null) channel = cast (null : Dynamic);
     if ((cast ((cast Log._onceKeys__log : flighthq._internal._Set<String>).has(key)) : Bool)) { return cast false; }
     ((cast Log._onceKeys__log : flighthq._internal._Set<String>).add(key));
-    log(({ final __callArgument81:Dynamic = level; __callArgument81; }), ({ final __callArgument82:Dynamic = data; __callArgument82; }), ({ final __callArgument83:Dynamic = channel; __callArgument83; }));
+    log(({ final __callArgument208:Dynamic = level; __callArgument208; }), ({ final __callArgument209:Dynamic = data; __callArgument209; }), ({ final __callArgument210:Dynamic = channel; __callArgument210; }));
     return cast true;
     return cast null;
   }
@@ -645,9 +645,9 @@ class Log {
   public static function logVerbose(data:flighthq._internal._Union2<LogData, LogDataProvider>, ?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
     var resolved:LogData = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument84:Dynamic = LogLevel.Verbose; __callArgument84; }), ({ final __callArgument85:Dynamic = channel; __callArgument85; })) : Bool) : Bool) : Bool)) { return; }
+    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument214:Dynamic = LogLevel.Verbose; __callArgument214; }), ({ final __callArgument215:Dynamic = channel; __callArgument215; })) : Bool) : Bool) : Bool)) { return; }
     resolved = ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'function') : Bool) ? (cast (cast (cast data : Void->LogData)() : LogData) : Dynamic) : (cast data : Dynamic));
-    Log._emitToSinks__log(({ final __callArgument88:Dynamic = { level: LogLevel.Verbose, channel: channel, data: (cast Log._mergeSpanFields__log(({ final __callArgument86:Dynamic = resolved; __callArgument86; }), ({ final __callArgument87:Dynamic = channel; __callArgument87; })) : LogData) }; __callArgument88; }));
+    Log._emitToSinks__log(({ final __callArgument222:Dynamic = { level: LogLevel.Verbose, channel: channel, data: (cast Log._mergeSpanFields__log(({ final __callArgument218:Dynamic = resolved; __callArgument218; }), ({ final __callArgument219:Dynamic = channel; __callArgument219; })) : LogData) }; __callArgument222; }));
   }
 
   public static function logVerboseWith(context:LogContext, data:flighthq._internal._Union2<LogData, LogDataProvider>):Void {
@@ -656,17 +656,17 @@ class Log {
     var resolved:LogData = cast _Runtime.UNDEFINED;
     __destructure7 = context;
     channel = _Runtime.field(__destructure7, 'channel');
-    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument89:Dynamic = LogLevel.Verbose; __callArgument89; }), ({ final __callArgument90:Dynamic = channel; __callArgument90; })) : Bool) : Bool) : Bool)) { return; }
+    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument228:Dynamic = LogLevel.Verbose; __callArgument228; }), ({ final __callArgument229:Dynamic = channel; __callArgument229; })) : Bool) : Bool) : Bool)) { return; }
     resolved = ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'function') : Bool) ? (cast (cast (cast data : Void->LogData)() : LogData) : Dynamic) : (cast data : Dynamic));
-    Log._emitToSinks__log(({ final __callArgument94:Dynamic = { level: LogLevel.Verbose, channel: channel, data: (cast Log._mergeContextFields__log(({ final __callArgument91:Dynamic = context; __callArgument91; }), (cast Log._mergeSpanFields__log(({ final __callArgument92:Dynamic = resolved; __callArgument92; }), ({ final __callArgument93:Dynamic = channel; __callArgument93; })) : LogData)) : LogData) }; __callArgument94; }));
+    Log._emitToSinks__log(({ final __callArgument242:Dynamic = { level: LogLevel.Verbose, channel: channel, data: (cast Log._mergeContextFields__log(({ final __callArgument232:Dynamic = context; __callArgument232; }), (cast Log._mergeSpanFields__log(({ final __callArgument233:Dynamic = resolved; __callArgument233; }), ({ final __callArgument234:Dynamic = channel; __callArgument234; })) : LogData)) : LogData) }; __callArgument242; }));
   }
 
   public static function logWarn(data:flighthq._internal._Union2<LogData, LogDataProvider>, ?channel:Null<String>):Void {
     if (channel == null) channel = cast (null : Dynamic);
     var resolved:LogData = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument95:Dynamic = LogLevel.Warn; __callArgument95; }), ({ final __callArgument96:Dynamic = channel; __callArgument96; })) : Bool) : Bool) : Bool)) { return; }
+    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument254:Dynamic = LogLevel.Warn; __callArgument254; }), ({ final __callArgument255:Dynamic = channel; __callArgument255; })) : Bool) : Bool) : Bool)) { return; }
     resolved = ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'function') : Bool) ? (cast (cast (cast data : Void->LogData)() : LogData) : Dynamic) : (cast data : Dynamic));
-    Log._emitToSinks__log(({ final __callArgument99:Dynamic = { level: LogLevel.Warn, channel: channel, data: (cast Log._mergeSpanFields__log(({ final __callArgument97:Dynamic = resolved; __callArgument97; }), ({ final __callArgument98:Dynamic = channel; __callArgument98; })) : LogData) }; __callArgument99; }));
+    Log._emitToSinks__log(({ final __callArgument262:Dynamic = { level: LogLevel.Warn, channel: channel, data: (cast Log._mergeSpanFields__log(({ final __callArgument258:Dynamic = resolved; __callArgument258; }), ({ final __callArgument259:Dynamic = channel; __callArgument259; })) : LogData) }; __callArgument262; }));
   }
 
   public static function logWarnWith(context:LogContext, data:flighthq._internal._Union2<LogData, LogDataProvider>):Void {
@@ -675,9 +675,9 @@ class Log {
     var resolved:LogData = cast _Runtime.UNDEFINED;
     __destructure8 = context;
     channel = _Runtime.field(__destructure8, 'channel');
-    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument100:Dynamic = LogLevel.Warn; __callArgument100; }), ({ final __callArgument101:Dynamic = channel; __callArgument101; })) : Bool) : Bool) : Bool)) { return; }
+    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument268:Dynamic = LogLevel.Warn; __callArgument268; }), ({ final __callArgument269:Dynamic = channel; __callArgument269; })) : Bool) : Bool) : Bool)) { return; }
     resolved = ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'function') : Bool) ? (cast (cast (cast data : Void->LogData)() : LogData) : Dynamic) : (cast data : Dynamic));
-    Log._emitToSinks__log(({ final __callArgument105:Dynamic = { level: LogLevel.Warn, channel: channel, data: (cast Log._mergeContextFields__log(({ final __callArgument102:Dynamic = context; __callArgument102; }), (cast Log._mergeSpanFields__log(({ final __callArgument103:Dynamic = resolved; __callArgument103; }), ({ final __callArgument104:Dynamic = channel; __callArgument104; })) : LogData)) : LogData) }; __callArgument105; }));
+    Log._emitToSinks__log(({ final __callArgument282:Dynamic = { level: LogLevel.Warn, channel: channel, data: (cast Log._mergeContextFields__log(({ final __callArgument272:Dynamic = context; __callArgument272; }), (cast Log._mergeSpanFields__log(({ final __callArgument273:Dynamic = resolved; __callArgument273; }), ({ final __callArgument274:Dynamic = channel; __callArgument274; })) : LogData)) : LogData) }; __callArgument282; }));
   }
 
   public static function logWith(context:LogContext, level:LogLevel, data:flighthq._internal._Union2<LogData, LogDataProvider>):Void {
@@ -686,9 +686,9 @@ class Log {
     var resolved:LogData = cast _Runtime.UNDEFINED;
     __destructure9 = context;
     channel = _Runtime.field(__destructure9, 'channel');
-    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument106:Dynamic = level; __callArgument106; }), ({ final __callArgument107:Dynamic = channel; __callArgument107; })) : Bool) : Bool) : Bool)) { return; }
+    if ((cast !(cast (cast Log._passesLevelGate__log(({ final __callArgument294:Dynamic = level; __callArgument294; }), ({ final __callArgument295:Dynamic = channel; __callArgument295; })) : Bool) : Bool) : Bool)) { return; }
     resolved = ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'function') : Bool) ? (cast (cast (cast data : Void->LogData)() : LogData) : Dynamic) : (cast data : Dynamic));
-    Log._emitToSinks__log(({ final __callArgument111:Dynamic = { level: level, channel: channel, data: (cast Log._mergeContextFields__log(({ final __callArgument108:Dynamic = context; __callArgument108; }), (cast Log._mergeSpanFields__log(({ final __callArgument109:Dynamic = resolved; __callArgument109; }), ({ final __callArgument110:Dynamic = channel; __callArgument110; })) : LogData)) : LogData) }; __callArgument111; }));
+    Log._emitToSinks__log(({ final __callArgument308:Dynamic = { level: level, channel: channel, data: (cast Log._mergeContextFields__log(({ final __callArgument298:Dynamic = context; __callArgument298; }), (cast Log._mergeSpanFields__log(({ final __callArgument299:Dynamic = resolved; __callArgument299; }), ({ final __callArgument300:Dynamic = channel; __callArgument300; })) : LogData)) : LogData) }; __callArgument308; }));
   }
 
   public static function parseLogLevel(name:String):Null<LogLevel> {

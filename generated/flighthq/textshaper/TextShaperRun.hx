@@ -66,7 +66,7 @@ class TextShaperRun {
   public static function getFontUnitScale(format:TextFormat):Float {
     var metrics:Null<FontMetrics> = cast _Runtime.UNDEFINED;
     var size:Float = cast _Runtime.UNDEFINED;
-    metrics = (cast getFontMetrics(({ final __callArgument2:Dynamic = format; __callArgument2; })) : Null<FontMetrics>);
+    metrics = (cast getFontMetrics(({ final __callArgument3:Dynamic = format; __callArgument3; })) : Null<FontMetrics>);
     if ((cast _Runtime.strictEquals(metrics, null) : Bool)) { return cast -1.0; }
     size = _Runtime.coalesce(_Runtime.field(format, 'size'), function():Dynamic return cast 12.0);
     return cast (size / (cast metrics : { var unitsPerEm:Float; }).unitsPerEm);
@@ -106,7 +106,7 @@ class TextShaperRun {
 
   public static function getGlyphExtentsInto(glyphId:Float, _format:TextFormat, out:GlyphExtents):Bool {
     var extents:Null<GlyphExtents> = cast _Runtime.UNDEFINED;
-    extents = (cast getGlyphExtents((cast glyphId : Float), ({ final __callArgument3:Dynamic = _format; __callArgument3; })) : Null<GlyphExtents>);
+    extents = (cast getGlyphExtents((cast glyphId : Float), ({ final __callArgument5:Dynamic = _format; __callArgument5; })) : Null<GlyphExtents>);
     if ((cast _Runtime.strictEquals(extents, null) : Bool)) { return cast false; }
     ((cast out : GlyphExtents).height = (cast extents : GlyphExtents).height);
     ((cast out : GlyphExtents).width = (cast extents : GlyphExtents).width);
@@ -136,7 +136,7 @@ class TextShaperRun {
     var backend:Null<TextShaperBackend> = cast _Runtime.UNDEFINED;
     backend = (cast getTextShaperBackend() : Null<TextShaperBackend>);
     if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy((cast backend : { @:optional var shapeRun:Null<String->TextFormat->Null<ShapeRunOptions>->ShapedRun>; }).shapeRun) : Bool)) : Bool)) { return cast null; }
-    return cast ((cast backend : { @:optional var shapeRun:Null<String->TextFormat->Null<ShapeRunOptions>->ShapedRun>; }).shapeRun)((cast text : String), ({ final __callArgument4:Dynamic = format; __callArgument4; }), ({ final __callArgument5:Dynamic = options; __callArgument5; }));
+    return cast ((cast backend : { @:optional var shapeRun:Null<String->TextFormat->Null<ShapeRunOptions>->ShapedRun>; }).shapeRun)((cast text : String), ({ final __callArgument7:Dynamic = format; __callArgument7; }), ({ final __callArgument8:Dynamic = options; __callArgument8; }));
     return cast null;
   }
 
@@ -146,7 +146,7 @@ class TextShaperRun {
     var glyphs:Array<ShapedGlyph> = cast _Runtime.UNDEFINED;
     backend = (cast getTextShaperBackend() : Null<TextShaperBackend>);
     if ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast !_Runtime.truthy((cast backend : { @:optional var shapeRun:Null<String->TextFormat->Null<ShapeRunOptions>->ShapedRun>; }).shapeRun) : Bool)) : Bool)) { return cast false; }
-    result = ((cast backend : { @:optional var shapeRun:Null<String->TextFormat->Null<ShapeRunOptions>->ShapedRun>; }).shapeRun)((cast text : String), ({ final __callArgument6:Dynamic = format; __callArgument6; }), ({ final __callArgument7:Dynamic = options; __callArgument7; }));
+    result = ((cast backend : { @:optional var shapeRun:Null<String->TextFormat->Null<ShapeRunOptions>->ShapedRun>; }).shapeRun)((cast text : String), ({ final __callArgument9:Dynamic = format; __callArgument9; }), ({ final __callArgument10:Dynamic = options; __callArgument10; }));
     glyphs = out.glyphs;
     (out.advanceWidth = cast (result.advanceWidth : Float));
     (out.direction = cast (result.direction : TextDirection));

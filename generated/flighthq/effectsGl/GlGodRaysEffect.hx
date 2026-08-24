@@ -33,7 +33,7 @@ class GlGodRaysEffect {
     exposure = _Runtime.coalesce(effect.exposure, function():Dynamic return cast 0.6);
     samples = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(effect.samples, function():Dynamic return cast 64.0)));
     program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'atmospheric.godRays.' + Std.string(samples) + '' : String), (cast (cast GlGodRaysEffect.buildGodRaysFragment__glGodRaysEffect((cast samples : Float)) : String) : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; }), ({ final __callArgument3:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    drawGlFullscreenPass(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = program; __callArgument3; }), ({ final __callArgument4:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument4; }), ({ final __callArgument5:Dynamic = dest; __callArgument5; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform2f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_lightPosition'), centerX, centerY);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_density'), density);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_decay'), decay);
@@ -47,7 +47,7 @@ class GlGodRaysEffect {
   });
 
   public static function registerGlGodRaysEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'GodRaysEffect' : String), ({ final __callArgument6:Dynamic = defaultGlGodRaysEffectRunner; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument12:Dynamic = state; __callArgument12; }), (cast 'GodRaysEffect' : String), ({ final __callArgument13:Dynamic = defaultGlGodRaysEffectRunner; __callArgument13; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast 'GodRaysEffect' : String), ({ final __callArgument11:Dynamic = defaultGlGodRaysEffectRunner; __callArgument11; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static function buildGodRaysFragment__glGodRaysEffect(samples:Float):String {

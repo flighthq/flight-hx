@@ -75,7 +75,7 @@ class WgpuParticleEmitter2D {
     var format:String = cast _Runtime.UNDEFINED;
     var existing:Null<flighthq._internal.dom.GPURenderPipeline> = cast _Runtime.UNDEFINED;
     var pipeline:flighthq._internal.dom.GPURenderPipeline = cast _Runtime.UNDEFINED;
-    format = _Runtime.coalesce((cast (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime) : { @:optional var currentColorFormat:Null<String>; }).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
+    format = _Runtime.coalesce((cast (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime) : { @:optional var currentColorFormat:Null<String>; }).currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
     existing = ((cast (cast resources : WgpuParticleResources__wgpuParticleEmitter2D).pipelines : flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>).get(format));
     if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
     pipeline = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createRenderPipeline', cast ([{ layout: (cast resources : WgpuParticleResources__wgpuParticleEmitter2D).pipelineLayout, vertex: { module: (cast resources : WgpuParticleResources__wgpuParticleEmitter2D).module, entryPoint: 'vs_main' }, fragment: { module: (cast resources : WgpuParticleResources__wgpuParticleEmitter2D).module, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: { color: { srcFactor: 'one', dstFactor: 'one-minus-src-alpha', operation: 'add' }, alpha: { srcFactor: 'one', dstFactor: 'one-minus-src-alpha', operation: 'add' } } }] : Array<Dynamic>) }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'always', stencilFront: { compare: 'always', passOp: 'keep', failOp: 'keep', depthFailOp: 'keep' }, stencilBack: { compare: 'always', passOp: 'keep', failOp: 'keep', depthFailOp: 'keep' }, stencilReadMask: 255.0, stencilWriteMask: 0.0 }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
@@ -88,11 +88,11 @@ class WgpuParticleEmitter2D {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var needed:Float = cast _Runtime.UNDEFINED;
     var newCapacity:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuRenderStateRuntime);
     needed = (count * WgpuParticleEmitter2D.INSTANCE_STRIDE__wgpuParticleEmitter2D);
     if ((cast ((cast ((cast runtime.particleInstanceCapacity : Float) >= (cast needed : Float)) : Bool) && (cast !_Runtime.strictEquals(runtime.particleInstanceBuffer, null) : Bool)) : Bool)) { return; }
     if ((cast !_Runtime.strictEquals(runtime.particleInstanceBuffer, null) : Bool)) {
-      retireWgpuBuffer(({ final __callArgument3:Dynamic = state; __callArgument3; }), runtime.particleInstanceBuffer);
+      retireWgpuBuffer(({ final __callArgument6:Dynamic = state; __callArgument6; }), runtime.particleInstanceBuffer);
     }
     newCapacity = HxMath.max(needed, _Runtime.multiplyNumbers(_Runtime.orValue(runtime.particleInstanceCapacity, function():Dynamic return cast 0.0), 2.0));
     (runtime.particleInstanceBuffer = cast (flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBuffer', cast ([{ size: HxMath.max(newCapacity, WgpuParticleEmitter2D.INSTANCE_STRIDE__wgpuParticleEmitter2D), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'STORAGE')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUBufferUsage', 'COPY_DST'))) }] : Array<Dynamic>)) : Null<flighthq._internal.dom.GPUBuffer>));
@@ -136,7 +136,7 @@ class WgpuParticleEmitter2D {
     var ih2:Float = cast _Runtime.UNDEFINED;
     var instanceBindGroup:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
     var pass:flighthq._internal.dom.GPURenderPassEncoder = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : WgpuRenderStateRuntime);
     if ((cast _Runtime.strictEquals(runtime.renderPass, null) : Bool)) { return; }
     source = (cast (cast renderProxy : RenderProxy2D).source : ParticleEmitter2D);
     __destructure2 = source.data;
@@ -146,18 +146,18 @@ class WgpuParticleEmitter2D {
     ids = __destructure2.ids;
     particleCount = __destructure2.particleCount;
     transforms = __destructure2.transforms;
-    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast !(cast (cast hasTextureSource(({ final __callArgument5:Dynamic = atlas.texture; __callArgument5; })) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool)) { return; }
-    resources = (cast WgpuParticleEmitter2D.ensureParticleResources__wgpuParticleEmitter2D(({ final __callArgument6:Dynamic = state; __callArgument6; })) : WgpuParticleResources__wgpuParticleEmitter2D);
-    WgpuParticleEmitter2D.ensureParticleInstanceBuffer__wgpuParticleEmitter2D(({ final __callArgument7:Dynamic = state; __callArgument7; }), (cast particleCount : Float));
-    _Runtime.callOptionalValue((cast resolveWgpuApplyBlendMode(({ final __callArgument8:Dynamic = state; __callArgument8; })) : Null<WgpuRenderState->Null<String>->Void>), cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
-    textureEntry = (cast resolveWgpuTexture(({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = atlas.texture; __callArgument10; }), (cast true : Bool), ({ final __callArgument11:Dynamic = SCENE2D_WORKING_COLOR_SPACE; __callArgument11; })) : Null<WgpuTextureEntry>);
+    if ((cast ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast !(cast (cast hasTextureSource(({ final __callArgument10:Dynamic = atlas.texture; __callArgument10; })) : Bool) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals(particleCount, 0.0) : Bool)) : Bool)) { return; }
+    resources = (cast WgpuParticleEmitter2D.ensureParticleResources__wgpuParticleEmitter2D(({ final __callArgument12:Dynamic = state; __callArgument12; })) : WgpuParticleResources__wgpuParticleEmitter2D);
+    WgpuParticleEmitter2D.ensureParticleInstanceBuffer__wgpuParticleEmitter2D(({ final __callArgument14:Dynamic = state; __callArgument14; }), (cast particleCount : Float));
+    _Runtime.callOptionalValue((cast resolveWgpuApplyBlendMode(({ final __callArgument16:Dynamic = state; __callArgument16; })) : Null<WgpuRenderState->Null<String>->Void>), cast ([state, (cast renderProxy : RenderProxy2D).blendMode] : Array<Dynamic>));
+    textureEntry = (cast resolveWgpuTexture(({ final __callArgument18:Dynamic = state; __callArgument18; }), ({ final __callArgument19:Dynamic = atlas.texture; __callArgument19; }), (cast true : Bool), ({ final __callArgument20:Dynamic = SCENE2D_WORKING_COLOR_SPACE; __callArgument20; })) : Null<WgpuTextureEntry>);
     if ((cast _Runtime.strictEquals(textureEntry, null) : Bool)) { return; }
-    textureBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: runtime.textureBindGroupLayout, entries: cast ([{ binding: 0.0, resource: (cast textureEntry : WgpuTextureEntry).view }, { binding: 1.0, resource: (cast getWgpuSampler(({ final __callArgument12:Dynamic = state; __callArgument12; }), (cast ((cast StringTools.startsWith((cast (cast atlas.texture : Texture2D).sampler : { var minFilter:TextureFilter; }).minFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)) : String), (cast ((cast StringTools.startsWith((cast (cast atlas.texture : Texture2D).sampler : { var magFilter:TextureFilter; }).magFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)) : String), (cast (cast atlas.texture : Texture2D).sampler : { var wrapU:TextureWrap; }).wrapU, (cast (cast atlas.texture : Texture2D).sampler : { var wrapV:TextureWrap; }).wrapV, ((cast ((cast (cast (cast atlas.texture : Texture2D).sampler : { var mipmaps:Bool; }).mipmaps : Bool) && (cast _Runtime.includes((cast (cast atlas.texture : Texture2D).sampler : { var minFilter:TextureFilter; }).minFilter, 'mipmap') : Bool)) : Bool) ? (cast ((cast StringTools.endsWith(Std.string((cast (cast atlas.texture : Texture2D).sampler : { var minFilter:TextureFilter; }).minFilter), 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)), (cast (cast (cast atlas.texture : Texture2D).sampler : { var anisotropy:Float; }).anisotropy : Float)) : flighthq._internal.dom.GPUSampler) }] : Array<Dynamic>) }] : Array<Dynamic>));
+    textureBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: runtime.textureBindGroupLayout, entries: cast ([{ binding: 0.0, resource: (cast textureEntry : WgpuTextureEntry).view }, { binding: 1.0, resource: (cast getWgpuSampler(({ final __callArgument24:Dynamic = state; __callArgument24; }), (cast ((cast StringTools.startsWith((cast (cast atlas.texture : Texture2D).sampler : { var minFilter:TextureFilter; }).minFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)) : String), (cast ((cast StringTools.startsWith((cast (cast atlas.texture : Texture2D).sampler : { var magFilter:TextureFilter; }).magFilter, 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)) : String), (cast (cast atlas.texture : Texture2D).sampler : { var wrapU:TextureWrap; }).wrapU, (cast (cast atlas.texture : Texture2D).sampler : { var wrapV:TextureWrap; }).wrapV, ((cast ((cast (cast (cast atlas.texture : Texture2D).sampler : { var mipmaps:Bool; }).mipmaps : Bool) && (cast _Runtime.includes((cast (cast atlas.texture : Texture2D).sampler : { var minFilter:TextureFilter; }).minFilter, 'mipmap') : Bool)) : Bool) ? (cast ((cast StringTools.endsWith(Std.string((cast (cast atlas.texture : Texture2D).sampler : { var minFilter:TextureFilter; }).minFilter), 'nearest') : Bool) ? (cast 'nearest' : Dynamic) : (cast 'linear' : Dynamic)) : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)), (cast (cast (cast atlas.texture : Texture2D).sampler : { var anisotropy:Float; }).anisotropy : Float)) : flighthq._internal.dom.GPUSampler) }] : Array<Dynamic>) }] : Array<Dynamic>));
     regions = atlas.regions;
     numRegions = _Runtime.field(regions, 'length');
     nodeAlpha = (cast renderProxy : RenderProxy2D).alpha;
-    iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth(({ final __callArgument13:Dynamic = atlas.texture; __callArgument13; })) : Float)));
-    ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight(({ final __callArgument14:Dynamic = atlas.texture; __callArgument14; })) : Float)));
+    iw = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureWidth(({ final __callArgument26:Dynamic = atlas.texture; __callArgument26; })) : Float)));
+    ih = _Runtime.divideNumbers(1.0, HxMath.max(1.0, (cast getTextureHeight(({ final __callArgument28:Dynamic = atlas.texture; __callArgument28; })) : Float)));
     instanceData = runtime.particleInstanceData;
     drawCount = 0.0;
     base = 0.0;
@@ -258,7 +258,7 @@ class WgpuParticleEmitter2D {
     (runtime.uniformOffset += runtime.uniformStride);
     instanceBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: (cast resources : WgpuParticleResources__wgpuParticleEmitter2D).instanceBindGroupLayout, entries: cast ([{ binding: 0.0, resource: { buffer: runtime.particleInstanceBuffer } }] : Array<Dynamic>) }] : Array<Dynamic>));
     pass = runtime.renderPass;
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline((cast WgpuParticleEmitter2D.getParticlePipeline__wgpuParticleEmitter2D(({ final __callArgument15:Dynamic = state; __callArgument15; }), (cast resources : Dynamic)) : flighthq._internal.dom.GPURenderPipeline));
+    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline((cast WgpuParticleEmitter2D.getParticlePipeline__wgpuParticleEmitter2D(({ final __callArgument30:Dynamic = state; __callArgument30; }), (cast resources : Dynamic)) : flighthq._internal.dom.GPURenderPipeline));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, runtime.uniformBindGroup, cast ([uniformOffset] : Array<Dynamic>));
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, textureBindGroup);
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, instanceBindGroup);
@@ -266,7 +266,7 @@ class WgpuParticleEmitter2D {
   }
 
   public static final defaultWgpuParticleEmitter2DRenderer:SpriteRenderer = (cast { createData: noopRendererData, submit: function(state:WgpuRenderState, node:RenderProxy2D):Void {
-    flushWgpuQuadBatchWriter(({ final __callArgument16:Dynamic = state; __callArgument16; }));
-    drawWgpuParticleEmitter2D(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = node; __callArgument18; }));
+    flushWgpuQuadBatchWriter(({ final __callArgument32:Dynamic = state; __callArgument32; }));
+    drawWgpuParticleEmitter2D(({ final __callArgument34:Dynamic = state; __callArgument34; }), ({ final __callArgument35:Dynamic = node; __callArgument35; }));
   } });
 }

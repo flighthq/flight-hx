@@ -56,7 +56,7 @@ class CanvasQuadBatch {
     ids = __destructure0.ids;
     transforms = __destructure0.transforms;
     if ((cast ((cast ((cast _Runtime.strictEquals(atlas, null) : Bool) || (cast _Runtime.strictEquals(atlas.texture, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(instanceCount, 0.0) : Bool)) : Bool)) { return; }
-    image = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers(({ final __callArgument0:Dynamic = state; __callArgument0; })) : CanvasTextureResolvers), ({ final __callArgument1:Dynamic = atlas.texture; __callArgument1; })) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLVideoElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.HTMLCanvasElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
+    image = (cast resolveCanvasTexture((cast getCanvasRenderStateTextureResolvers(({ final __callArgument0:Dynamic = state; __callArgument0; })) : CanvasTextureResolvers), ({ final __callArgument2:Dynamic = atlas.texture; __callArgument2; })) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLVideoElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.HTMLCanvasElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
     if ((cast _Runtime.strictEquals(image, null) : Bool)) { return; }
     _Runtime.callOptionalValue((cast state : CanvasRenderState).applyBlendMode, cast ([state, (cast quadBatch : RenderProxy2D).blendMode] : Array<Dynamic>));
     context = (cast state : CanvasRenderState).context;
@@ -71,7 +71,7 @@ class CanvasQuadBatch {
     if ((cast !(cast smoothing : Bool) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', false);
     }
-    restoreMaterial = (cast applyCanvasMaterial(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast (cast quadBatch : RenderProxy2D).material : Dynamic)) : Bool);
+    restoreMaterial = (cast applyCanvasMaterial(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast (cast quadBatch : RenderProxy2D).material : Dynamic)) : Bool);
     flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([transform.a, transform.b, transform.c, transform.d, transform.tx, transform.ty] : Array<Dynamic>));
     {
       var i:Float = 0.0;
@@ -89,8 +89,8 @@ class CanvasQuadBatch {
           var dy:Float = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast transforms : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float));
           flighthq._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([image, region.x, region.y, region.width, region.height, ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dx) | 0) : Dynamic) : (cast dx : Dynamic)), ((cast roundPixels : Bool) ? (cast (_Runtime.toInt32(dy) | 0) : Dynamic) : (cast dy : Dynamic)), region.width, region.height] : Array<Dynamic>));
         } else {
-          setMatrixFromFloat32Array(({ final __callArgument3:Dynamic = quadTransform; __callArgument3; }), (cast offset : Float), ({ final __callArgument4:Dynamic = transforms; __callArgument4; }));
-          multiplyMatrix(({ final __callArgument5:Dynamic = quadTransform; __callArgument5; }), ({ final __callArgument6:Dynamic = transform; __callArgument6; }), ({ final __callArgument7:Dynamic = quadTransform; __callArgument7; }));
+          setMatrixFromFloat32Array(({ final __callArgument8:Dynamic = quadTransform; __callArgument8; }), (cast offset : Float), ({ final __callArgument9:Dynamic = transforms; __callArgument9; }));
+          multiplyMatrix(({ final __callArgument12:Dynamic = quadTransform; __callArgument12; }), ({ final __callArgument13:Dynamic = transform; __callArgument13; }), ({ final __callArgument14:Dynamic = quadTransform; __callArgument14; }));
           if ((cast roundPixels : Bool)) {
             (quadTransform.tx = cast (HxMath.round(quadTransform.tx) : Float));
             (quadTransform.ty = cast (HxMath.round(quadTransform.ty) : Float));
@@ -103,7 +103,7 @@ class CanvasQuadBatch {
     }
     if ((cast restoreMaterial : Bool)) { flighthq._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>)); }
     flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
-    releaseMatrix(({ final __callArgument8:Dynamic = quadTransform; __callArgument8; }));
+    releaseMatrix(({ final __callArgument18:Dynamic = quadTransform; __callArgument18; }));
     if ((cast !(cast smoothing : Bool) : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.setField(context, 'imageSmoothingEnabled', true);
     }

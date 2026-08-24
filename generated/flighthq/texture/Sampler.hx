@@ -31,22 +31,22 @@ class Sampler {
   }
 
   public static function createClampLinearSampler():flighthq.types.Sampler {
-    return cast (cast createSampler(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : flighthq.types.Sampler);
+    return cast (cast (#if js _Runtime.callValue(createSampler, cast ([] : Array<Dynamic>)) #else createSampler(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flighthq.types.Sampler);
     return cast null;
   }
 
   public static function createPixelArtSampler():flighthq.types.Sampler {
-    return cast (cast createSampler(({ final __callArgument1:Dynamic = { magFilter: 'nearest', minFilter: 'nearest', mipmaps: false }; __callArgument1; })) : flighthq.types.Sampler);
+    return cast (cast createSampler(({ final __callArgument2:Dynamic = { magFilter: 'nearest', minFilter: 'nearest', mipmaps: false }; __callArgument2; })) : flighthq.types.Sampler);
     return cast null;
   }
 
   public static function createSampler(?opts:{ @:optional var anisotropy:Null<Float>; @:optional var magFilter:Null<TextureFilter>; @:optional var minFilter:Null<TextureFilter>; @:optional var mipmaps:Null<Bool>; @:optional var wrapU:Null<TextureWrap>; @:optional var wrapV:Null<TextureWrap>; }):flighthq.types.Sampler {
-    return cast (cast createEntity((cast { anisotropy: _Runtime.coalesce(({ final __structural2 = opts; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var anisotropy:Null<Float>; }).anisotropy; }), function():Dynamic return cast 1.0), magFilter: _Runtime.coalesce(({ final __structural3 = opts; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var magFilter:Null<String>; }).magFilter; }), function():Dynamic return cast 'linear'), minFilter: _Runtime.coalesce(({ final __structural4 = opts; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var minFilter:Null<String>; }).minFilter; }), function():Dynamic return cast 'linear-mipmap-linear'), mipmaps: _Runtime.coalesce(({ final __structural5 = opts; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var mipmaps:Null<Bool>; }).mipmaps; }), function():Dynamic return cast true), wrapU: _Runtime.coalesce(({ final __structural6 = opts; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var wrapU:Null<String>; }).wrapU; }), function():Dynamic return cast 'clamp-to-edge'), wrapV: _Runtime.coalesce(({ final __structural7 = opts; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var wrapV:Null<String>; }).wrapV; }), function():Dynamic return cast 'clamp-to-edge') } : Dynamic)) : { >Entity, var anisotropy:Float; var magFilter:TextureFilter; var minFilter:TextureFilter; var mipmaps:Bool; var wrapU:TextureWrap; var wrapV:TextureWrap; });
+    return cast (cast createEntity((cast { anisotropy: _Runtime.coalesce(({ final __structural4 = opts; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var anisotropy:Null<Float>; }).anisotropy; }), function():Dynamic return cast 1.0), magFilter: _Runtime.coalesce(({ final __structural5 = opts; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var magFilter:Null<String>; }).magFilter; }), function():Dynamic return cast 'linear'), minFilter: _Runtime.coalesce(({ final __structural6 = opts; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var minFilter:Null<String>; }).minFilter; }), function():Dynamic return cast 'linear-mipmap-linear'), mipmaps: _Runtime.coalesce(({ final __structural7 = opts; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var mipmaps:Null<Bool>; }).mipmaps; }), function():Dynamic return cast true), wrapU: _Runtime.coalesce(({ final __structural8 = opts; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var wrapU:Null<String>; }).wrapU; }), function():Dynamic return cast 'clamp-to-edge'), wrapV: _Runtime.coalesce(({ final __structural9 = opts; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var wrapV:Null<String>; }).wrapV; }), function():Dynamic return cast 'clamp-to-edge') } : Dynamic)) : { >Entity, var anisotropy:Float; var magFilter:TextureFilter; var minFilter:TextureFilter; var mipmaps:Bool; var wrapU:TextureWrap; var wrapV:TextureWrap; });
     return cast null;
   }
 
   public static function createTilingSampler():flighthq.types.Sampler {
-    return cast (cast createSampler(({ final __callArgument8:Dynamic = { wrapU: 'repeat', wrapV: 'repeat' }; __callArgument8; })) : flighthq.types.Sampler);
+    return cast (cast createSampler(({ final __callArgument16:Dynamic = { wrapU: 'repeat', wrapV: 'repeat' }; __callArgument16; })) : flighthq.types.Sampler);
     return cast null;
   }
 

@@ -18,7 +18,7 @@ class Skeleton2dGuards {
   @:noCompletion
   public static function reportSkeleton2DDeformLengthMismatch(subject:String, offsets:Float, addressed:Float):Void {
     if ((cast _Runtime.strictEquals(Skeleton2dGuards._deformLengthGuard__skeleton2dGuards, null) : Bool)) { return; }
-    Skeleton2dGuards._deformLengthGuard__skeleton2dGuards(({ final __callArgument1:Dynamic = { addressed: addressed, offsets: offsets, subject: subject }; __callArgument1; }));
+    Skeleton2dGuards._deformLengthGuard__skeleton2dGuards(({ final __callArgument2:Dynamic = { addressed: addressed, offsets: offsets, subject: subject }; __callArgument2; }));
   }
 
   @:noCompletion

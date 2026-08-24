@@ -44,7 +44,7 @@ class GlWireframeUpload {
       flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : { var vao:flighthq._internal.dom.WebGLVertexArrayObject; }).vao);
       return cast upload;
     }
-    lineIndices = (cast GlWireframeUpload.buildLineIndices__glWireframeUpload(({ final __callArgument2:Dynamic = geometry; __callArgument2; })) : flighthq._internal._Union2<flighthq._internal._UInt32Array, flighthq._internal._UInt16Array>);
+    lineIndices = (cast GlWireframeUpload.buildLineIndices__glWireframeUpload(({ final __callArgument4:Dynamic = geometry; __callArgument4; })) : flighthq._internal._Union2<flighthq._internal._UInt32Array, flighthq._internal._UInt16Array>);
     indexType = ((cast _Runtime.isInstanceOfName(lineIndices, 'Uint32Array') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT) : Dynamic));
     if ((cast _Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (upload = cast ({ indexType: indexType, lineIndexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), vao: flighthq._internal.backend.WebGl2Backend.createVertexArray(gl), version: -1.0 } : Dynamic));
@@ -60,7 +60,7 @@ class GlWireframeUpload {
       while ((cast ((cast i : Float) < (cast _Runtime.field(attributes, 'length') : Float)) : Bool)) {
         var attribute:VertexAttribute = flighthq._internal._StaticIndex.readArray(attributes, i);
         if ((cast ((cast ((cast _Runtime.strictEquals(attribute.semantic, 'position') : Bool) || (cast _Runtime.strictEquals(attribute.semantic, 'joints0') : Bool)) : Bool) || (cast _Runtime.strictEquals(attribute.semantic, 'weights0') : Bool)) : Bool)) {
-          bindGlVertexAttribute(({ final __callArgument3:Dynamic = gl; __callArgument3; }), ({ final __callArgument4:Dynamic = attribute; __callArgument4; }), (cast stride : Float));
+          bindGlVertexAttribute(({ final __callArgument6:Dynamic = gl; __callArgument6; }), ({ final __callArgument7:Dynamic = attribute; __callArgument7; }), (cast stride : Float));
         }
         i++;
       }

@@ -28,15 +28,15 @@ class ImageResource {
 
   public static function createImageResource(image:flighthq._internal.dom.CanvasImageSource):Image {
     var resource:Image = cast _Runtime.UNDEFINED;
-    resource = (cast createEntity(({ final __callArgument1:Dynamic = { alphaType: ImageResource.DECODED_ALPHA_TYPE__imageResource, gamut: ImageResource.DECODED_GAMUT__imageResource, height: 0.0, kind: ImageTextureSourceKind, source: image, version: 0.0, width: 0.0 }; __callArgument1; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flighthq._internal._Any; var version:Float; var width:Float; });
-    ImageResource.updateImageResourceSize__imageResource(({ final __callArgument2:Dynamic = resource; __callArgument2; }));
+    resource = (cast createEntity(({ final __callArgument2:Dynamic = { alphaType: ImageResource.DECODED_ALPHA_TYPE__imageResource, gamut: ImageResource.DECODED_GAMUT__imageResource, height: 0.0, kind: ImageTextureSourceKind, source: image, version: 0.0, width: 0.0 }; __callArgument2; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flighthq._internal._Any; var version:Float; var width:Float; });
+    ImageResource.updateImageResourceSize__imageResource(({ final __callArgument4:Dynamic = resource; __callArgument4; }));
     return cast resource;
     return cast null;
   }
 
   @:noCompletion
   public static function invalidateImageResource(resource:Image):Void {
-    ImageResource.updateImageResourceSize__imageResource(({ final __callArgument3:Dynamic = resource; __callArgument3; }));
+    ImageResource.updateImageResourceSize__imageResource(({ final __callArgument6:Dynamic = resource; __callArgument6; }));
     ((cast resource : Image).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast resource : Image).version + 1.0)), 0));
   }
 

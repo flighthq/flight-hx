@@ -35,7 +35,7 @@ class GlVignetteEffect {
     b = ((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 255) / 255.0);
     a = ((_Runtime.toInt32(color) & 255) / 255.0);
     program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'lens.vignette' : String), (cast GlVignetteEffect.VIGNETTE_FRAGMENT_SRC__glVignetteEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; }), ({ final __callArgument3:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    drawGlFullscreenPass(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = program; __callArgument3; }), ({ final __callArgument4:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument4; }), ({ final __callArgument5:Dynamic = dest; __callArgument5; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_radius'), radius);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_softness'), softness);
@@ -48,7 +48,7 @@ class GlVignetteEffect {
   });
 
   public static function registerGlVignetteEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'VignetteEffect' : String), ({ final __callArgument6:Dynamic = defaultGlVignetteEffectRunner; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument12:Dynamic = state; __callArgument12; }), (cast 'VignetteEffect' : String), ({ final __callArgument13:Dynamic = defaultGlVignetteEffectRunner; __callArgument13; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast 'VignetteEffect' : String), ({ final __callArgument11:Dynamic = defaultGlVignetteEffectRunner; __callArgument11; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final VIGNETTE_FRAGMENT_SRC__glVignetteEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_radius;\nuniform float u_softness;\nuniform vec4 u_color;\nout vec4 o_color;\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  vec2 centered = v_texCoord - 0.5;\n  float dist = length(centered) * 1.41421356;\n  float vig = smoothstep(u_radius, u_radius - u_softness, dist);\n  float darken = (1.0 - vig) * u_intensity * u_color.a;\n  o_color = vec4(mix(c.rgb, u_color.rgb, darken), c.a);\n}';

@@ -25,13 +25,13 @@ class UpdateMeshMorph {
     geometry = mesh.geometry;
     bindPose = (cast getMeshGeometryMorphBindPose(({ final __callArgument0:Dynamic = geometry; __callArgument0; })) : Null<MeshMorphBindPose>);
     if ((cast _Runtime.strictEquals(bindPose, null) : Bool)) {
-      (bindPose = cast ((cast captureMeshMorphBindPose(({ final __callArgument1:Dynamic = geometry; __callArgument1; })) : MeshMorphBindPose) : Dynamic));
-      setMeshGeometryMorphBindPose(({ final __callArgument2:Dynamic = geometry; __callArgument2; }), (cast bindPose : Dynamic));
-    } else { if ((cast !(cast (cast UpdateMeshMorph.hasMorphWeightsChanged__updateMeshMorph(({ final __callArgument3:Dynamic = geometry; __callArgument3; }), ({ final __callArgument4:Dynamic = morph; __callArgument4; })) : Bool) : Bool) : Bool)) {
+      (bindPose = cast ((cast captureMeshMorphBindPose(({ final __callArgument2:Dynamic = geometry; __callArgument2; })) : MeshMorphBindPose) : Dynamic));
+      setMeshGeometryMorphBindPose(({ final __callArgument4:Dynamic = geometry; __callArgument4; }), (cast bindPose : Dynamic));
+    } else { if ((cast !(cast (cast UpdateMeshMorph.hasMorphWeightsChanged__updateMeshMorph(({ final __callArgument6:Dynamic = geometry; __callArgument6; }), ({ final __callArgument7:Dynamic = morph; __callArgument7; })) : Bool) : Bool) : Bool)) {
       return;
     } }
-    blendMeshGeometryMorph(({ final __callArgument5:Dynamic = geometry; __callArgument5; }), ({ final __callArgument6:Dynamic = morph; __callArgument6; }), ({ final __callArgument7:Dynamic = bindPose; __callArgument7; }));
-    UpdateMeshMorph.recordMorphBlendedWeights__updateMeshMorph(({ final __callArgument8:Dynamic = geometry; __callArgument8; }), ({ final __callArgument9:Dynamic = morph; __callArgument9; }));
+    blendMeshGeometryMorph(({ final __callArgument10:Dynamic = geometry; __callArgument10; }), ({ final __callArgument11:Dynamic = morph; __callArgument11; }), ({ final __callArgument12:Dynamic = bindPose; __callArgument12; }));
+    UpdateMeshMorph.recordMorphBlendedWeights__updateMeshMorph(({ final __callArgument16:Dynamic = geometry; __callArgument16; }), ({ final __callArgument17:Dynamic = morph; __callArgument17; }));
   }
 
   public static function hasMorphWeightsChanged__updateMeshMorph(geometry:MeshGeometry, morph:MeshMorph):Bool {
@@ -39,7 +39,7 @@ class UpdateMeshMorph {
     var blended:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
     var weights:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
-    blended = ({ final __typedStruct10 = runtime; __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : { var morphBlendedWeights:Null<flighthq._internal._Float32Array>; }).morphBlendedWeights; });
+    blended = ({ final __typedStruct20 = runtime; __typedStruct20 == null ? _Runtime.UNDEFINED : (cast __typedStruct20 : { var morphBlendedWeights:Null<flighthq._internal._Float32Array>; }).morphBlendedWeights; });
     if ((cast _Runtime.looseEquals(blended, null) : Bool)) { return cast true; }
     weights = morph.weights;
     if ((cast !_Runtime.strictEquals(_Runtime.field(blended, 'length'), _Runtime.field(weights, 'length')) : Bool)) { return cast true; }

@@ -216,13 +216,13 @@ class BitmapBlur {
       var pass:Float = 0.0;
       while ((cast ((cast pass : Float) < (cast passes : Float)) : Bool)) {
         if ((cast ((cast radiusX : Float) > (cast 0.0 : Float)) : Bool)) {
-          blurBitmapPixelsHorizontal(({ final __callArgument2:Dynamic = b; __callArgument2; }), ({ final __callArgument3:Dynamic = a; __callArgument3; }), (cast source.width : Float), (cast source.height : Float), (cast radiusX : Float));
+          blurBitmapPixelsHorizontal(({ final __callArgument4:Dynamic = b; __callArgument4; }), ({ final __callArgument5:Dynamic = a; __callArgument5; }), (cast source.width : Float), (cast source.height : Float), (cast radiusX : Float));
           var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
         }
         if ((cast ((cast radiusY : Float) > (cast 0.0 : Float)) : Bool)) {
-          blurBitmapPixelsVertical(({ final __callArgument4:Dynamic = b; __callArgument4; }), ({ final __callArgument5:Dynamic = a; __callArgument5; }), (cast source.width : Float), (cast source.height : Float), (cast radiusY : Float));
+          blurBitmapPixelsVertical(({ final __callArgument8:Dynamic = b; __callArgument8; }), ({ final __callArgument9:Dynamic = a; __callArgument9; }), (cast source.width : Float), (cast source.height : Float), (cast radiusY : Float));
           var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
@@ -259,7 +259,7 @@ class BitmapBlur {
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast len : Float)) : Bool)) {
-        ({ var __indexedObject6:flighthq._internal._Float32Array = out; var __indexedKey7:Float = i; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject6 : flighthq._internal._Float32Array), (cast __indexedKey7 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject6 : flighthq._internal._Float32Array), (cast __indexedKey7 : Float)) / sum) : Float)); });
+        ({ var __indexedObject12:flighthq._internal._Float32Array = out; var __indexedKey13:Float = i; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject12 : flighthq._internal._Float32Array), (cast __indexedKey13 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject12 : flighthq._internal._Float32Array), (cast __indexedKey13 : Float)) / sum) : Float)); });
         i++;
       }
     }
@@ -279,22 +279,22 @@ class BitmapBlur {
     radiusY = HxMath.max(0.0, HxMath.ceil((sigmaY * 3.0)));
     kernelX = ((cast ((cast radiusX : Float) > (cast 0.0 : Float)) : Bool) ? (cast new flighthq._internal._Float32Array(((2.0 * radiusX) + 1.0)) : Dynamic) : (cast null : Dynamic));
     kernelY = ((cast ((cast radiusY : Float) > (cast 0.0 : Float)) : Bool) ? (cast new flighthq._internal._Float32Array(((2.0 * radiusY) + 1.0)) : Dynamic) : (cast null : Dynamic));
-    if (_Runtime.truthy(kernelX)) { computeGaussianKernel(({ final __callArgument8:Dynamic = kernelX; __callArgument8; }), (cast radiusX : Float), (cast sigmaX : Float)); }
-    if (_Runtime.truthy(kernelY)) { computeGaussianKernel(({ final __callArgument9:Dynamic = kernelY; __callArgument9; }), (cast radiusY : Float), (cast sigmaY : Float)); }
-    extractBitmapPixels(({ final __callArgument10:Dynamic = out; __callArgument10; }), ({ final __callArgument11:Dynamic = source; __callArgument11; }));
+    if (_Runtime.truthy(kernelX)) { computeGaussianKernel(({ final __callArgument14:Dynamic = kernelX; __callArgument14; }), (cast radiusX : Float), (cast sigmaX : Float)); }
+    if (_Runtime.truthy(kernelY)) { computeGaussianKernel(({ final __callArgument16:Dynamic = kernelY; __callArgument16; }), (cast radiusY : Float), (cast sigmaY : Float)); }
+    extractBitmapPixels(({ final __callArgument18:Dynamic = out; __callArgument18; }), ({ final __callArgument19:Dynamic = source; __callArgument19; }));
     a = out;
     b = scratch;
     {
       var pass:Float = 0.0;
       while ((cast ((cast pass : Float) < (cast passCount : Float)) : Bool)) {
         if (_Runtime.truthy(kernelX)) {
-          blurBitmapPixelsHorizontalWeighted(({ final __callArgument12:Dynamic = b; __callArgument12; }), ({ final __callArgument13:Dynamic = a; __callArgument13; }), (cast source.width : Float), (cast source.height : Float), ({ final __callArgument14:Dynamic = kernelX; __callArgument14; }));
+          blurBitmapPixelsHorizontalWeighted(({ final __callArgument22:Dynamic = b; __callArgument22; }), ({ final __callArgument23:Dynamic = a; __callArgument23; }), (cast source.width : Float), (cast source.height : Float), ({ final __callArgument24:Dynamic = kernelX; __callArgument24; }));
           var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
         }
         if (_Runtime.truthy(kernelY)) {
-          blurBitmapPixelsVerticalWeighted(({ final __callArgument15:Dynamic = b; __callArgument15; }), ({ final __callArgument16:Dynamic = a; __callArgument16; }), (cast source.width : Float), (cast source.height : Float), ({ final __callArgument17:Dynamic = kernelY; __callArgument17; }));
+          blurBitmapPixelsVerticalWeighted(({ final __callArgument28:Dynamic = b; __callArgument28; }), ({ final __callArgument29:Dynamic = a; __callArgument29; }), (cast source.width : Float), (cast source.height : Float), ({ final __callArgument30:Dynamic = kernelY; __callArgument30; }));
           var t:flighthq._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));

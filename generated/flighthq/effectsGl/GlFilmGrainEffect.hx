@@ -25,7 +25,7 @@ class GlFilmGrainEffect {
     size = _Runtime.coalesce(effect.size, function():Dynamic return cast 1.0);
     seed = _Runtime.coalesce(effect.seed, function():Dynamic return cast 0.0);
     program = (cast getGlEffectProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'stylization.filmGrain' : String), (cast GlFilmGrainEffect.FILM_GRAIN_FRAGMENT_SRC__glFilmGrainEffect : String)) : GlFullscreenProgram);
-    drawGlFullscreenPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = program; __callArgument2; }), ({ final __callArgument3:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
+    drawGlFullscreenPass(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = program; __callArgument3; }), ({ final __callArgument4:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument4; }), ({ final __callArgument5:Dynamic = dest; __callArgument5; }), (cast function(gl:flighthq._internal.dom.WebGL2RenderingContext, p:GlFullscreenProgram):Void {
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_intensity'), intensity);
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_size'), HxMath.max(0.0001, size));
       flighthq._internal.backend.WebGl2Backend.uniform1f(gl, flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, _Runtime.field(p, 'program'), 'u_seed'), seed);
@@ -37,7 +37,7 @@ class GlFilmGrainEffect {
   });
 
   public static function registerGlFilmGrainEffect(state:GlRenderState):Void {
-    registerGlRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'FilmGrainEffect' : String), ({ final __callArgument6:Dynamic = defaultGlFilmGrainEffectRunner; __callArgument6; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(registerGlRenderEffect, cast ([({ final __callArgument12:Dynamic = state; __callArgument12; }), (cast 'FilmGrainEffect' : String), ({ final __callArgument13:Dynamic = defaultGlFilmGrainEffectRunner; __callArgument13; })] : Array<Dynamic>)) #else registerGlRenderEffect(({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast 'FilmGrainEffect' : String), ({ final __callArgument11:Dynamic = defaultGlFilmGrainEffectRunner; __callArgument11; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
   public static final FILM_GRAIN_FRAGMENT_SRC__glFilmGrainEffect:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform float u_intensity;\nuniform float u_size;\nuniform float u_seed;\nout vec4 o_color;\nfloat hash(vec2 p) {\n  p = floor(p / u_size);\n  return fract(sin(dot(p, vec2(127.1, 311.7)) + u_seed) * 43758.5453123);\n}\nvoid main() {\n  vec4 c = texture(u_texture0, v_texCoord);\n  float n = hash(v_texCoord * 1024.0) - 0.5;\n  o_color = vec4(c.rgb + n * u_intensity, c.a);\n}';

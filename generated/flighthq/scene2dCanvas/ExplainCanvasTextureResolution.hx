@@ -15,7 +15,7 @@ class ExplainCanvasTextureResolution {
     var kind:Null<String> = cast _Runtime.UNDEFINED;
     kind = (cast getTextureSourceKind(({ final __callArgument0:Dynamic = texture; __callArgument0; })) : Null<String>);
     if ((cast _Runtime.strictEquals(kind, null) : Bool)) { return cast { kind: kind, status: 'missing-kind' }; }
-    return cast { kind: kind, status: ((cast _Runtime.strictEquals(({ final __collection1:Dynamic = _Runtime.field(resolvers, 'registry'); __collection1 == null ? _Runtime.UNDEFINED : ((cast __collection1 : flighthq._internal._Map<String, CanvasTextureResolver>).has(kind)); }), true) : Bool) ? (cast 'registered' : Dynamic) : (cast 'missing-resolver' : Dynamic)) };
+    return cast { kind: kind, status: ((cast _Runtime.strictEquals(({ final __collection2:Dynamic = _Runtime.field(resolvers, 'registry'); __collection2 == null ? _Runtime.UNDEFINED : ((cast __collection2 : flighthq._internal._Map<String, CanvasTextureResolver>).has(kind)); }), true) : Bool) ? (cast 'registered' : Dynamic) : (cast 'missing-resolver' : Dynamic)) };
     return cast null;
   }
 }

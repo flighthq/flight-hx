@@ -37,24 +37,24 @@ class VertexColorGlMeshMaterialRenderer {
     gl = (cast state : GlRenderState).gl;
     vertexColor = (cast material : Null<VertexColorMaterial>);
     program = (cast ensureGlUnlitProgram(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast VertexColorGlMeshMaterialRenderer.defineKeyForMaterial__vertexColorGlMeshMaterialRenderer(({ final __callArgument1:Dynamic = vertexColor; __callArgument1; })) : GlUnlitDefineKey)) : GlUnlitProgram);
-    beginGlMeshDraw(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = program; __callArgument3; }), (cast ((cast !_Runtime.strictEquals(vertexColor, null) : Bool) && (cast (cast vertexColor : { var doubleSided:Bool; }).doubleSided : Bool)) : Bool));
-    setGlMeshViewProjection(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast program : GlUnlitProgram).locViewProjection, ({ final __callArgument5:Dynamic = camera; __callArgument5; }));
+    beginGlMeshDraw(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = program; __callArgument7; }), (cast ((cast !_Runtime.strictEquals(vertexColor, null) : Bool) && (cast (cast vertexColor : { var doubleSided:Bool; }).doubleSided : Bool)) : Bool));
+    setGlMeshViewProjection(({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast program : GlUnlitProgram).locViewProjection, ({ final __callArgument11:Dynamic = camera; __callArgument11; }));
     flighthq._internal.backend.WebGl2Backend.vertexAttrib4f(gl, 4.0, 1.0, 1.0, 1.0, 1.0);
     if ((cast _Runtime.strictEquals(vertexColor, null) : Bool)) {
-      bindGlUnlitSurface(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = program; __callArgument7; }), ({ final __callArgument8:Dynamic = VertexColorGlMeshMaterialRenderer.WHITE__vertexColorGlMeshMaterialRenderer; __callArgument8; }), (cast 1.0 : Float), (cast null : Dynamic), (cast 0.5 : Float));
+      bindGlUnlitSurface(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = program; __callArgument15; }), ({ final __callArgument16:Dynamic = VertexColorGlMeshMaterialRenderer.WHITE__vertexColorGlMeshMaterialRenderer; __callArgument16; }), (cast 1.0 : Float), (cast null : Dynamic), (cast 0.5 : Float));
       return;
     }
-    (cast unpackColorToLinear(({ final __callArgument9:Dynamic = VertexColorGlMeshMaterialRenderer.scratchRgba__vertexColorGlMeshMaterialRenderer; __callArgument9; }), (cast (cast vertexColor : { var tint:Float; }).tint : Float)) : LinearColor);
-    bindGlUnlitSurface(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = program; __callArgument11; }), ({ final __callArgument12:Dynamic = VertexColorGlMeshMaterialRenderer.scratchRgba__vertexColorGlMeshMaterialRenderer; __callArgument12; }), (cast 1.0 : Float), (cast null : Dynamic), (cast (cast vertexColor : { var alphaCutoff:Float; }).alphaCutoff : Float));
+    (cast unpackColorToLinear(({ final __callArgument20:Dynamic = VertexColorGlMeshMaterialRenderer.scratchRgba__vertexColorGlMeshMaterialRenderer; __callArgument20; }), (cast (cast vertexColor : { var tint:Float; }).tint : Float)) : LinearColor);
+    bindGlUnlitSurface(({ final __callArgument22:Dynamic = state; __callArgument22; }), ({ final __callArgument23:Dynamic = program; __callArgument23; }), ({ final __callArgument24:Dynamic = VertexColorGlMeshMaterialRenderer.scratchRgba__vertexColorGlMeshMaterialRenderer; __callArgument24; }), (cast 1.0 : Float), (cast null : Dynamic), (cast (cast vertexColor : { var alphaCutoff:Float; }).alphaCutoff : Float));
   }, draw: function(state:GlRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var program:Null<GlMeshProgram> = cast _Runtime.UNDEFINED;
-    program = (cast (cast getGlScene3DRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;
+    program = (cast (cast getGlScene3DRuntime(({ final __callArgument28:Dynamic = state; __callArgument28; })) : GlScene3DRuntime) : { var activeMeshProgram:Null<GlMeshProgram>; }).activeMeshProgram;
     if ((cast _Runtime.strictEquals(program, null) : Bool)) { return; }
-    drawGlMeshSubset(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = program; __callArgument15; }), ({ final __callArgument16:Dynamic = proxy; __callArgument16; }), ({ final __callArgument17:Dynamic = geometry; __callArgument17; }));
+    drawGlMeshSubset(({ final __callArgument30:Dynamic = state; __callArgument30; }), ({ final __callArgument31:Dynamic = program; __callArgument31; }), ({ final __callArgument32:Dynamic = proxy; __callArgument32; }), ({ final __callArgument33:Dynamic = geometry; __callArgument33; }));
   } });
 
   public static function registerGlVertexColorMaterial(state:GlRenderState):Void {
-    registerGlMeshMaterialRenderer(({ final __callArgument18:Dynamic = state; __callArgument18; }), (cast VertexColorMaterialKind : String), ({ final __callArgument19:Dynamic = vertexColorGlMeshMaterialRenderer; __callArgument19; }));
+    registerGlMeshMaterialRenderer(({ final __callArgument38:Dynamic = state; __callArgument38; }), (cast VertexColorMaterialKind : String), ({ final __callArgument39:Dynamic = vertexColorGlMeshMaterialRenderer; __callArgument39; }));
   }
 
   public static function defineKeyForMaterial__vertexColorGlMeshMaterialRenderer(material:Null<VertexColorMaterial>):GlUnlitDefineKey {

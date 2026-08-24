@@ -26,7 +26,7 @@ class TextureLevelLayout {
               while ((cast ((cast mip : Float) < (cast mipLevels : Float)) : Bool)) {
                 var width:Float = HxMath.max(1.0, (_Runtime.toInt32(baseWidth) >> _Runtime.toInt32(mip)));
                 var height:Float = HxMath.max(1.0, (_Runtime.toInt32(baseHeight) >> _Runtime.toInt32(mip)));
-                var byteLength:Float = (cast getTextureContainerLevelByteLength(({ final __callArgument1:Dynamic = format; __callArgument1; }), (cast width : Float), (cast height : Float)) : Float);
+                var byteLength:Float = (cast getTextureContainerLevelByteLength(({ final __callArgument2:Dynamic = format; __callArgument2; }), (cast width : Float), (cast height : Float)) : Float);
                 _Runtime.callProperty(levels, 'push', cast ([{ byteOffset: offset, byteLength: byteLength, height: height, width: width }] : Array<Dynamic>));
                 (offset = cast ((offset + byteLength) : Dynamic));
                 (mip = cast ((mip + 1.0) : Dynamic));
@@ -46,7 +46,7 @@ class TextureLevelLayout {
     var block:Null<TextureFormatBlockInfo__textureLevelLayout> = cast _Runtime.UNDEFINED;
     var blocksWide:Float = cast _Runtime.UNDEFINED;
     var blocksHigh:Float = cast _Runtime.UNDEFINED;
-    block = (cast TextureLevelLayout.getTextureContainerFormatBlockInfo__textureLevelLayout(({ final __callArgument2:Dynamic = format; __callArgument2; })) : Null<TextureFormatBlockInfo__textureLevelLayout>);
+    block = (cast TextureLevelLayout.getTextureContainerFormatBlockInfo__textureLevelLayout(({ final __callArgument4:Dynamic = format; __callArgument4; })) : Null<TextureFormatBlockInfo__textureLevelLayout>);
     if ((cast _Runtime.strictEquals(block, null) : Bool)) { return cast -1.0; }
     blocksWide = HxMath.ceil((width / (cast block : TextureFormatBlockInfo__textureLevelLayout).blockWidth));
     blocksHigh = HxMath.ceil((height / (cast block : TextureFormatBlockInfo__textureLevelLayout).blockHeight));

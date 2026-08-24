@@ -58,7 +58,7 @@ class AnimationTrack {
       return;
     }
     if ((cast ((cast t : Float) >= (cast _Runtime.getIndex(times, (count - 1.0)) : Float)) : Bool)) {
-      AnimationTrack.copyKeyframeValue__animationTrack(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = track; __callArgument3; }), (cast (count - 1.0) : Float));
+      AnimationTrack.copyKeyframeValue__animationTrack(({ final __callArgument4:Dynamic = out; __callArgument4; }), ({ final __callArgument5:Dynamic = track; __callArgument5; }), (cast (count - 1.0) : Float));
       return;
     }
     lo = 0.0;
@@ -74,17 +74,17 @@ class AnimationTrack {
     easing = _Runtime.coalesce(_Runtime.optionalIndex(track.segmentEasings, i), function():Dynamic return cast track.easing);
     if ((cast !_Runtime.strictEquals(easing, null) : Bool)) { (alpha = cast ((cast easing((cast alpha : Float)) : Float) : Dynamic)); }
     if ((cast _Runtime.strictEquals(track.interpolation, 'Step') : Bool)) {
-      AnimationTrack.copyKeyframeValue__animationTrack(({ final __callArgument4:Dynamic = out; __callArgument4; }), ({ final __callArgument5:Dynamic = track; __callArgument5; }), (cast i : Float));
+      AnimationTrack.copyKeyframeValue__animationTrack(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = track; __callArgument9; }), (cast i : Float));
       return;
     }
     if ((cast _Runtime.strictEquals(track.interpolation, 'Cubic') : Bool)) {
-      AnimationTrack.sampleCubicSegment__animationTrack(({ final __callArgument6:Dynamic = out; __callArgument6; }), ({ final __callArgument7:Dynamic = track; __callArgument7; }), (cast i : Float), (cast alpha : Float), (cast dt : Float));
+      AnimationTrack.sampleCubicSegment__animationTrack(({ final __callArgument12:Dynamic = out; __callArgument12; }), ({ final __callArgument13:Dynamic = track; __callArgument13; }), (cast i : Float), (cast alpha : Float), (cast dt : Float));
       return;
     }
-    oi = (cast AnimationTrack.keyframeValueOffset__animationTrack(({ final __callArgument8:Dynamic = track; __callArgument8; }), (cast i : Float)) : Float);
-    oj = (cast AnimationTrack.keyframeValueOffset__animationTrack(({ final __callArgument9:Dynamic = track; __callArgument9; }), (cast (i + 1.0) : Float)) : Float);
+    oi = (cast AnimationTrack.keyframeValueOffset__animationTrack(({ final __callArgument16:Dynamic = track; __callArgument16; }), (cast i : Float)) : Float);
+    oj = (cast AnimationTrack.keyframeValueOffset__animationTrack(({ final __callArgument18:Dynamic = track; __callArgument18; }), (cast (i + 1.0) : Float)) : Float);
     if ((cast ((cast track.quaternion : Bool) && (cast _Runtime.strictEquals(components, 4.0) : Bool)) : Bool)) {
-      AnimationTrack.slerpFlatQuaternion__animationTrack(({ final __callArgument10:Dynamic = out; __callArgument10; }), ({ final __callArgument11:Dynamic = values; __callArgument11; }), (cast oi : Float), (cast oj : Float), (cast alpha : Float));
+      AnimationTrack.slerpFlatQuaternion__animationTrack(({ final __callArgument20:Dynamic = out; __callArgument20; }), ({ final __callArgument21:Dynamic = values; __callArgument21; }), (cast oi : Float), (cast oj : Float), (cast alpha : Float));
       return;
     }
     {
@@ -110,7 +110,7 @@ class AnimationTrack {
     components = __destructure1.components;
     times = __destructure1.times;
     count = _Runtime.field(times, 'length');
-    stride = (cast AnimationTrack.keyframeStride__animationTrack(({ final __callArgument12:Dynamic = track; __callArgument12; })) : Float);
+    stride = (cast AnimationTrack.keyframeStride__animationTrack(({ final __callArgument24:Dynamic = track; __callArgument24; })) : Float);
     outTimes = (cast cast ([] : Array<Dynamic>));
     outValues = (cast cast ([] : Array<Dynamic>));
     sourceKeyframes = (cast cast ([] : Array<Dynamic>));
@@ -158,7 +158,7 @@ class AnimationTrack {
         k++;
       }
     }
-    expected = (count * (cast AnimationTrack.keyframeStride__animationTrack(({ final __callArgument13:Dynamic = track; __callArgument13; })) : Float));
+    expected = (count * (cast AnimationTrack.keyframeStride__animationTrack(({ final __callArgument26:Dynamic = track; __callArgument26; })) : Float));
     if ((cast !_Runtime.strictEquals(_Runtime.field(values, 'length'), expected) : Bool)) {
       _Runtime.callProperty(diagnostics, 'push', cast ([{ code: 'valuesLengthMismatch', index: null, message: 'values.length (' + Std.string(_Runtime.field(values, 'length')) + ') must equal keyCount * componentsPerKeyframe (' + Std.string(expected) + ').' }] : Array<Dynamic>));
     }
@@ -187,7 +187,7 @@ class AnimationTrack {
 
   public static function copyKeyframeValue__animationTrack(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, track:flighthq.types.AnimationTrack, k:Float):Void {
     var off:Float = cast _Runtime.UNDEFINED;
-    off = (cast AnimationTrack.keyframeValueOffset__animationTrack(({ final __callArgument14:Dynamic = track; __callArgument14; }), (cast k : Float)) : Float);
+    off = (cast AnimationTrack.keyframeValueOffset__animationTrack(({ final __callArgument28:Dynamic = track; __callArgument28; }), (cast k : Float)) : Float);
     {
       var c:Float = 0.0;
       while ((cast ((cast c : Float) < (cast track.components : Float)) : Bool)) {
@@ -204,7 +204,7 @@ class AnimationTrack {
 
   public static function keyframeValueOffset__animationTrack(track:flighthq.types.AnimationTrack, k:Float):Float {
     var stride:Float = cast _Runtime.UNDEFINED;
-    stride = (cast AnimationTrack.keyframeStride__animationTrack(({ final __callArgument15:Dynamic = track; __callArgument15; })) : Float);
+    stride = (cast AnimationTrack.keyframeStride__animationTrack(({ final __callArgument30:Dynamic = track; __callArgument30; })) : Float);
     return cast ((cast _Runtime.strictEquals(track.interpolation, 'Cubic') : Bool) ? (cast ((k * stride) + track.components) : Dynamic) : (cast (k * stride) : Dynamic));
     return cast null;
   }
@@ -265,7 +265,7 @@ class AnimationTrack {
         c++;
       }
     }
-    if ((cast ((cast track.quaternion : Bool) && (cast _Runtime.strictEquals(components, 4.0) : Bool)) : Bool)) { AnimationTrack.normalizeFlatQuaternion__animationTrack(({ final __callArgument16:Dynamic = out; __callArgument16; })); }
+    if ((cast ((cast track.quaternion : Bool) && (cast _Runtime.strictEquals(components, 4.0) : Bool)) : Bool)) { AnimationTrack.normalizeFlatQuaternion__animationTrack(({ final __callArgument32:Dynamic = out; __callArgument32; })); }
   }
 
   public static function slerpFlatQuaternion__animationTrack(out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>, values:flighthq._internal._ArrayLike<Float>, oa:Float, ob:Float, alpha:Float):Void {

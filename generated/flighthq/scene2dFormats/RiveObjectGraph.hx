@@ -52,15 +52,15 @@ class RiveObjectGraph {
     {
       var index:Float = 0.0;
       while ((cast ((cast index : Float) < (cast count : Float)) : Bool)) {
-        _Runtime.callProperty(parents, 'push', cast ([((cast _Runtime.strictEquals(index, 0.0) : Bool) ? (cast RiveObjectGraph.RIVE_NO_PARENT__riveObjectGraph : Dynamic) : (cast (cast RiveObjectGraph.readRiveParentIndex__riveObjectGraph(flighthq._internal._StaticIndex.readArray(artboard.objects, index), (cast count : Float), (cast index : Float), ({ final __callArgument4:Dynamic = diagnostics; __callArgument4; })) : Float) : Dynamic))] : Array<Dynamic>));
+        _Runtime.callProperty(parents, 'push', cast ([((cast _Runtime.strictEquals(index, 0.0) : Bool) ? (cast RiveObjectGraph.RIVE_NO_PARENT__riveObjectGraph : Dynamic) : (cast (cast RiveObjectGraph.readRiveParentIndex__riveObjectGraph(flighthq._internal._StaticIndex.readArray(artboard.objects, index), (cast count : Float), (cast index : Float), ({ final __callArgument6:Dynamic = diagnostics; __callArgument6; })) : Float) : Dynamic))] : Array<Dynamic>));
         index++;
       }
     }
     {
       var index:Float = 1.0;
       while ((cast ((cast index : Float) < (cast count : Float)) : Bool)) {
-        if ((cast !(cast (cast RiveObjectGraph.hasRiveParentCycle__riveObjectGraph(({ final __callArgument5:Dynamic = parents; __callArgument5; }), (cast index : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
-        RiveObjectGraph.reportRiveGraphDrop__riveObjectGraph(({ final __callArgument6:Dynamic = diagnostics; __callArgument6; }), (cast 'rive.parent-cycle' : String), (cast 'resolveRiveParentIndices' : String), ({ final __callArgument7:Dynamic = { index: index }; __callArgument7; }));
+        if ((cast !(cast (cast RiveObjectGraph.hasRiveParentCycle__riveObjectGraph(({ final __callArgument8:Dynamic = parents; __callArgument8; }), (cast index : Float)) : Bool) : Bool) : Bool)) { index++; continue; }
+        RiveObjectGraph.reportRiveGraphDrop__riveObjectGraph(({ final __callArgument10:Dynamic = diagnostics; __callArgument10; }), (cast 'rive.parent-cycle' : String), (cast 'resolveRiveParentIndices' : String), ({ final __callArgument11:Dynamic = { index: index }; __callArgument11; }));
         flighthq._internal._StaticIndex.writeFloatArrayTyped((cast parents : Array<Float>), (cast index : Float), (cast RiveObjectGraph.RIVE_NO_PARENT__riveObjectGraph : Float));
         index++;
       }
@@ -72,12 +72,12 @@ class RiveObjectGraph {
     var parent:Float = cast _Runtime.UNDEFINED;
     property = _Runtime.find(object.properties, function(candidate:RiveProperty, __unused0:Float, __unused1:Array<RiveProperty>):Bool return _Runtime.strictEquals(candidate.key, RiveObjectGraph.RIVE_PARENT_ID_PROPERTY_KEY__riveObjectGraph));
     if ((cast _Runtime.strictEquals(property, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      RiveObjectGraph.reportRiveGraphDrop__riveObjectGraph(({ final __callArgument8:Dynamic = diagnostics; __callArgument8; }), (cast 'rive.component-without-parent' : String), (cast 'readRiveParentIndex' : String), ({ final __callArgument9:Dynamic = { index: index }; __callArgument9; }));
+      RiveObjectGraph.reportRiveGraphDrop__riveObjectGraph(({ final __callArgument14:Dynamic = diagnostics; __callArgument14; }), (cast 'rive.component-without-parent' : String), (cast 'readRiveParentIndex' : String), ({ final __callArgument15:Dynamic = { index: index }; __callArgument15; }));
       return cast RiveObjectGraph.RIVE_NO_PARENT__riveObjectGraph;
     }
     parent = (cast (cast property : { var value:RiveValue; }).value : Float);
     if ((cast ((cast ((cast _Runtime.strictEquals(parent, index) : Bool) || (cast ((cast parent : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast parent : Float) >= (cast count : Float)) : Bool)) : Bool)) {
-      RiveObjectGraph.reportRiveGraphDrop__riveObjectGraph(({ final __callArgument10:Dynamic = diagnostics; __callArgument10; }), (cast 'rive.unresolved-parent' : String), (cast 'readRiveParentIndex' : String), ({ final __callArgument11:Dynamic = { index: index, parent: parent }; __callArgument11; }));
+      RiveObjectGraph.reportRiveGraphDrop__riveObjectGraph(({ final __callArgument18:Dynamic = diagnostics; __callArgument18; }), (cast 'rive.unresolved-parent' : String), (cast 'readRiveParentIndex' : String), ({ final __callArgument19:Dynamic = { index: index, parent: parent }; __callArgument19; }));
       return cast RiveObjectGraph.RIVE_NO_PARENT__riveObjectGraph;
     }
     return cast parent;
@@ -103,7 +103,7 @@ class RiveObjectGraph {
   }
 
   public static function reportRiveGraphDrop__riveObjectGraph(diagnostics:Null<Array<ImportDiagnostic>>, kind:String, origin:String, detail:flighthq._internal._Record<String, Float>):Void {
-    reportImportDiagnostic(({ final __callArgument12:Dynamic = diagnostics; __callArgument12; }), ({ final __callArgument13:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument13; }), (cast kind : String), (cast origin : String), ({ final __callArgument14:Dynamic = detail; __callArgument14; }));
+    reportImportDiagnostic(({ final __callArgument22:Dynamic = diagnostics; __callArgument22; }), ({ final __callArgument23:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument23; }), (cast kind : String), (cast origin : String), ({ final __callArgument24:Dynamic = detail; __callArgument24; }));
   }
 
   public static final RIVE_ARTBOARD_TYPE_KEY__riveObjectGraph:Float = 1.0;

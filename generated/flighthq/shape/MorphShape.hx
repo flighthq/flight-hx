@@ -39,13 +39,13 @@ class MorphShape {
       _Runtime.callProperty((cast shape.data : { var pathBindings:Array<MorphShapePathBinding>; }).pathBindings, 'push', cast ([binding] : Array<Dynamic>));
     }
     path = (cast binding : { var path:Path; }).path;
-    appendShapePath(({ final __callArgument2:Dynamic = shape; __callArgument2; }), (cast path : Path).commands, (cast path : Path).data, (cast path : Path).winding);
+    appendShapePath(({ final __callArgument4:Dynamic = shape; __callArgument4; }), (cast path : Path).commands, (cast path : Path).data, (cast path : Path).winding);
     return cast path;
     return cast null;
   }
 
   public static function createMorphShape(morph:PathMorph, ?obj:PartialNode<flighthq.types.MorphShape>):flighthq.types.MorphShape {
-    return cast (cast createNode2D((cast MorphShapeKind : String), (cast obj : Dynamic), (cast function(data:Null<{  }>):MorphShapeData return (cast createMorphShapeData(({ final __callArgument3:Dynamic = morph; __callArgument3; }), (cast data : Dynamic)) : MorphShapeData) : Dynamic), (cast function(__unused2:Dynamic):MorphShapeRuntime return createMorphShapeRuntime() : Dynamic)) : flighthq.types.MorphShape);
+    return cast (cast createNode2D((cast MorphShapeKind : String), (cast obj : Dynamic), (cast function(data:Null<{  }>):MorphShapeData return (cast createMorphShapeData(({ final __callArgument6:Dynamic = morph; __callArgument6; }), (cast data : Dynamic)) : MorphShapeData) : Dynamic), (cast function(__unused2:Dynamic):MorphShapeRuntime return createMorphShapeRuntime() : Dynamic)) : flighthq.types.MorphShape);
     return cast null;
   }
 
@@ -56,10 +56,10 @@ class MorphShape {
     var pathBindings:Array<{ var morph:PathMorph; var path:Path; }> = cast _Runtime.UNDEFINED;
     var inputPathBindings:Array<MorphShapePathBinding> = cast _Runtime.UNDEFINED;
     var out:MorphShapeData = cast _Runtime.UNDEFINED;
-    progress = _Runtime.coalesce(({ final __structural4 = data; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var progress:Null<Float>; }).progress; }), function():Dynamic return cast 0.0);
-    path = _Runtime.coalesce(({ final __structural5 = data; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var path:Null<Path>; }).path; }), function():Dynamic return cast (cast createPath(_Runtime.field(morph, 'winding')) : Path));
+    progress = _Runtime.coalesce(({ final __structural10 = data; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { @:optional var progress:Null<Float>; }).progress; }), function():Dynamic return cast 0.0);
+    path = _Runtime.coalesce(({ final __structural11 = data; __structural11 == null ? _Runtime.UNDEFINED : (cast __structural11 : { @:optional var path:Null<Path>; }).path; }), function():Dynamic return cast (cast createPath(_Runtime.field(morph, 'winding')) : Path));
     pathBindings = (cast cast ([{ morph: morph, path: path }] : Array<Dynamic>));
-    inputPathBindings = _Runtime.coalesce(({ final __structural6 = data; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var pathBindings:Null<Array<MorphShapePathBinding>>; }).pathBindings; }), function():Dynamic return cast cast ([] : Array<Dynamic>));
+    inputPathBindings = _Runtime.coalesce(({ final __structural12 = data; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { @:optional var pathBindings:Null<Array<MorphShapePathBinding>>; }).pathBindings; }), function():Dynamic return cast cast ([] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(inputPathBindings, 'length') : Float)) : Bool)) {
@@ -75,8 +75,8 @@ class MorphShape {
         i++;
       }
     }
-    out = (cast { commands: _Runtime.coalesce(({ final __structural7 = data; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), morph: morph, paintBindings: _Runtime.concatArrays([_Runtime.toArray(_Runtime.coalesce(({ final __structural8 = data; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var paintBindings:Null<Array<MorphShapePaintBinding>>; }).paintBindings; }), function():Dynamic return cast cast ([] : Array<Dynamic>)))]), path: path, pathBindings: pathBindings, progress: progress });
-    sampleMorphShapePaintBindings(({ final __callArgument9:Dynamic = out; __callArgument9; }), (cast progress : Float));
+    out = (cast { commands: _Runtime.coalesce(({ final __structural13 = data; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), morph: morph, paintBindings: _Runtime.concatArrays([_Runtime.toArray(_Runtime.coalesce(({ final __structural14 = data; __structural14 == null ? _Runtime.UNDEFINED : (cast __structural14 : { @:optional var paintBindings:Null<Array<MorphShapePaintBinding>>; }).paintBindings; }), function():Dynamic return cast cast ([] : Array<Dynamic>)))]), path: path, pathBindings: pathBindings, progress: progress });
+    sampleMorphShapePaintBindings(({ final __callArgument15:Dynamic = out; __callArgument15; }), (cast progress : Float));
     return cast out;
     return cast null;
   }
@@ -89,7 +89,7 @@ class MorphShape {
 
   @:noCompletion
   public static function getMorphShapeRuntime(source:flighthq.types.MorphShape):MorphShapeRuntime {
-    return cast (cast getNode2DRuntime(({ final __callArgument10:Dynamic = source; __callArgument10; })) : MorphShapeRuntime);
+    return cast (cast getNode2DRuntime(({ final __callArgument17:Dynamic = source; __callArgument17; })) : MorphShapeRuntime);
     return cast null;
   }
 

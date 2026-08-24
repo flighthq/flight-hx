@@ -40,7 +40,7 @@ class CapacitorStatusBar {
 
       });
     }, setStyle: function(style:StatusBarStyle):Void {
-      flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setStyle(({ final __callArgument10:Dynamic = { style: (cast CapacitorStatusBar.toCapacitorStyle__capacitorStatusBar(({ final __callArgument9:Dynamic = style; __callArgument9; })) : String) }; __callArgument10; })), function(__unused3:flighthq._internal._Any):Void {
+      flighthq._internal._Async.recover((cast statusBar : CapacitorStatusBarPlugin).setStyle(({ final __callArgument12:Dynamic = { style: (cast CapacitorStatusBar.toCapacitorStyle__capacitorStatusBar(({ final __callArgument10:Dynamic = style; __callArgument10; })) : String) }; __callArgument12; })), function(__unused3:flighthq._internal._Any):Void {
 
       });
     }, setVisible: function(visible:Bool):Void {

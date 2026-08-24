@@ -22,28 +22,28 @@ import flighthq.types.Vector3.Vector3Like;
 class Culling {
   public static function getCamera3DFrustum(out:FrustumLike, camera:Camera3D, aspect:Float):Void {
     getCamera3DViewProjectionMatrix4(({ final __callArgument0:Dynamic = Culling.__scratchViewProjection__culling; __callArgument0; }), ({ final __callArgument1:Dynamic = camera; __callArgument1; }), (cast aspect : Float));
-    setFrustumFromMatrix4(({ final __callArgument2:Dynamic = out; __callArgument2; }), ({ final __callArgument3:Dynamic = Culling.__scratchViewProjection__culling; __callArgument3; }));
+    setFrustumFromMatrix4(({ final __callArgument4:Dynamic = out; __callArgument4; }), ({ final __callArgument5:Dynamic = Culling.__scratchViewProjection__culling; __callArgument5; }));
   }
 
   public static function isBoxInCamera3DFrustum(camera:Camera3D, aabb:AabbLike, aspect:Float):Bool {
-    getCamera3DFrustum(({ final __callArgument4:Dynamic = Culling.__scratchFrustum__culling; __callArgument4; }), ({ final __callArgument5:Dynamic = camera; __callArgument5; }), (cast aspect : Float));
-    return cast (cast isFrustumIntersectingAabb(({ final __callArgument6:Dynamic = Culling.__scratchFrustum__culling; __callArgument6; }), ({ final __callArgument7:Dynamic = aabb; __callArgument7; })) : Bool);
+    getCamera3DFrustum(({ final __callArgument8:Dynamic = Culling.__scratchFrustum__culling; __callArgument8; }), ({ final __callArgument9:Dynamic = camera; __callArgument9; }), (cast aspect : Float));
+    return cast (cast isFrustumIntersectingAabb(({ final __callArgument12:Dynamic = Culling.__scratchFrustum__culling; __callArgument12; }), ({ final __callArgument13:Dynamic = aabb; __callArgument13; })) : Bool);
     return cast null;
   }
 
   public static function isPointInCamera3DFrustum(camera:Camera3D, point:Vector3Like, aspect:Float):Bool {
-    getCamera3DFrustum(({ final __callArgument8:Dynamic = Culling.__scratchFrustum__culling; __callArgument8; }), ({ final __callArgument9:Dynamic = camera; __callArgument9; }), (cast aspect : Float));
-    return cast (cast isFrustumContainingPoint(({ final __callArgument10:Dynamic = Culling.__scratchFrustum__culling; __callArgument10; }), ({ final __callArgument11:Dynamic = point; __callArgument11; })) : Bool);
+    getCamera3DFrustum(({ final __callArgument16:Dynamic = Culling.__scratchFrustum__culling; __callArgument16; }), ({ final __callArgument17:Dynamic = camera; __callArgument17; }), (cast aspect : Float));
+    return cast (cast isFrustumContainingPoint(({ final __callArgument20:Dynamic = Culling.__scratchFrustum__culling; __callArgument20; }), ({ final __callArgument21:Dynamic = point; __callArgument21; })) : Bool);
     return cast null;
   }
 
   public static function isSphereInCamera3DFrustum(camera:Camera3D, sphere:BoundingSphereLike, aspect:Float):Bool {
-    getCamera3DFrustum(({ final __callArgument12:Dynamic = Culling.__scratchFrustum__culling; __callArgument12; }), ({ final __callArgument13:Dynamic = camera; __callArgument13; }), (cast aspect : Float));
-    return cast (cast isFrustumIntersectingSphere(({ final __callArgument14:Dynamic = Culling.__scratchFrustum__culling; __callArgument14; }), ({ final __callArgument15:Dynamic = sphere; __callArgument15; })) : Bool);
+    getCamera3DFrustum(({ final __callArgument24:Dynamic = Culling.__scratchFrustum__culling; __callArgument24; }), ({ final __callArgument25:Dynamic = camera; __callArgument25; }), (cast aspect : Float));
+    return cast (cast isFrustumIntersectingSphere(({ final __callArgument28:Dynamic = Culling.__scratchFrustum__culling; __callArgument28; }), ({ final __callArgument29:Dynamic = sphere; __callArgument29; })) : Bool);
     return cast null;
   }
 
-  public static final __scratchViewProjection__culling:Matrix4 = (cast createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix4);
+  public static final __scratchViewProjection__culling:Matrix4 = (cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix4);
 
   public static final __scratchFrustum__culling:Frustum = (cast createFrustum() : Frustum);
 }

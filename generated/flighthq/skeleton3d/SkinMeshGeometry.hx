@@ -37,10 +37,10 @@ class SkinMeshGeometry {
     floatsPerVertex = (layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast (_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), floatsPerVertex)) | 0) : Dynamic) : (cast 0.0 : Dynamic));
     positionOffset = (cast SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument0:Dynamic = layout; __callArgument0; }), (cast 'position' : String)) : Float);
-    normalOffset = (cast SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument1:Dynamic = layout; __callArgument1; }), (cast 'normal' : String)) : Float);
+    normalOffset = (cast SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument2:Dynamic = layout; __callArgument2; }), (cast 'normal' : String)) : Float);
     positions = new flighthq._internal._Float32Array((vertexCount * 3.0));
     normals = new flighthq._internal._Float32Array((vertexCount * 3.0));
-    tangentOffset = (cast SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument2:Dynamic = layout; __callArgument2; }), (cast 'tangent' : String)) : Float);
+    tangentOffset = (cast SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument4:Dynamic = layout; __callArgument4; }), (cast 'tangent' : String)) : Float);
     tangents = new flighthq._internal._Float32Array(((cast ((cast tangentOffset : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (vertexCount * 4.0) : Dynamic) : (cast 0.0 : Dynamic)));
     joints = new flighthq._internal._Float32Array((vertexCount * 4.0));
     weights = new flighthq._internal._Float32Array((vertexCount * 4.0));
@@ -68,13 +68,13 @@ class SkinMeshGeometry {
           flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast tangents : flighthq._internal._Float32Array), (cast (w + 2.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast ((base + tangentOffset) + 2.0) : Float)) : Float));
           flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast tangents : flighthq._internal._Float32Array), (cast (w + 3.0) : Float), (cast flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast vertices : flighthq._internal._Float32Array), (cast ((base + tangentOffset) + 3.0) : Float)) : Float));
         }
-        if ((cast (cast getMeshGeometryVertexJoints0(({ final __callArgument3:Dynamic = joint; __callArgument3; }), ({ final __callArgument4:Dynamic = geometry; __callArgument4; }), (cast v : Float)) : Bool) : Bool)) {
+        if ((cast (cast getMeshGeometryVertexJoints0(({ final __callArgument6:Dynamic = joint; __callArgument6; }), ({ final __callArgument7:Dynamic = geometry; __callArgument7; }), (cast v : Float)) : Bool) : Bool)) {
           flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast joints : flighthq._internal._Float32Array), (cast w : Float), (cast (cast joint : { var w:Float; var x:Float; var y:Float; var z:Float; }).x : Float));
           flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast joints : flighthq._internal._Float32Array), (cast (w + 1.0) : Float), (cast (cast joint : { var w:Float; var x:Float; var y:Float; var z:Float; }).y : Float));
           flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast joints : flighthq._internal._Float32Array), (cast (w + 2.0) : Float), (cast (cast joint : { var w:Float; var x:Float; var y:Float; var z:Float; }).z : Float));
           flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast joints : flighthq._internal._Float32Array), (cast (w + 3.0) : Float), (cast (cast joint : { var w:Float; var x:Float; var y:Float; var z:Float; }).w : Float));
         }
-        if ((cast (cast getMeshGeometryVertexWeights0(({ final __callArgument5:Dynamic = weight; __callArgument5; }), ({ final __callArgument6:Dynamic = geometry; __callArgument6; }), (cast v : Float)) : Bool) : Bool)) {
+        if ((cast (cast getMeshGeometryVertexWeights0(({ final __callArgument10:Dynamic = weight; __callArgument10; }), ({ final __callArgument11:Dynamic = geometry; __callArgument11; }), (cast v : Float)) : Bool) : Bool)) {
           flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast weights : flighthq._internal._Float32Array), (cast w : Float), (cast (cast weight : { var w:Float; var x:Float; var y:Float; var z:Float; }).x : Float));
           flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast weights : flighthq._internal._Float32Array), (cast (w + 1.0) : Float), (cast (cast weight : { var w:Float; var x:Float; var y:Float; var z:Float; }).y : Float));
           flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast weights : flighthq._internal._Float32Array), (cast (w + 2.0) : Float), (cast (cast weight : { var w:Float; var x:Float; var y:Float; var z:Float; }).z : Float));
@@ -100,15 +100,15 @@ class SkinMeshGeometry {
     var skinnedPositions:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var skinnedTangents:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var vertexCount:Float = cast _Runtime.UNDEFINED;
-    skinVertices(bindPose.skinnedPositions, bindPose.skinnedNormals, bindPose.positions, bindPose.normals, ({ final __callArgument7:Dynamic = bindPose.joints; __callArgument7; }), bindPose.weights, skeleton.jointMatrices, skeleton.normalMatrices);
-    skinTangents(bindPose.skinnedTangents, bindPose.tangents, ({ final __callArgument8:Dynamic = bindPose.joints; __callArgument8; }), bindPose.weights, skeleton.jointMatrices);
+    skinVertices(bindPose.skinnedPositions, bindPose.skinnedNormals, bindPose.positions, bindPose.normals, ({ final __callArgument14:Dynamic = bindPose.joints; __callArgument14; }), bindPose.weights, skeleton.jointMatrices, skeleton.normalMatrices);
+    skinTangents(bindPose.skinnedTangents, bindPose.tangents, ({ final __callArgument16:Dynamic = bindPose.joints; __callArgument16; }), bindPose.weights, skeleton.jointMatrices);
     __destructure1 = geometry;
     layout = __destructure1.layout;
     vertices = __destructure1.vertices;
     floatsPerVertex = (layout.stride / 4.0);
-    positionOffset = (cast SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument9:Dynamic = layout; __callArgument9; }), (cast 'position' : String)) : Float);
-    normalOffset = (cast SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument10:Dynamic = layout; __callArgument10; }), (cast 'normal' : String)) : Float);
-    tangentOffset = ((cast ((cast _Runtime.field(bindPose.tangents, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument11:Dynamic = layout; __callArgument11; }), (cast 'tangent' : String)) : Float) : Dynamic) : (cast -1.0 : Dynamic));
+    positionOffset = (cast SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument18:Dynamic = layout; __callArgument18; }), (cast 'position' : String)) : Float);
+    normalOffset = (cast SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument20:Dynamic = layout; __callArgument20; }), (cast 'normal' : String)) : Float);
+    tangentOffset = ((cast ((cast _Runtime.field(bindPose.tangents, 'length') : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument22:Dynamic = layout; __callArgument22; }), (cast 'tangent' : String)) : Float) : Dynamic) : (cast -1.0 : Dynamic));
     __destructure2 = bindPose;
     skinnedNormals = __destructure2.skinnedNormals;
     skinnedPositions = __destructure2.skinnedPositions;
@@ -155,8 +155,8 @@ class SkinMeshGeometry {
     vertices = __destructure3.vertices;
     floatsPerVertex = (layout.stride / 4.0);
     vertexCount = ((cast ((cast floatsPerVertex : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.min((_Runtime.toInt32(_Runtime.divideNumbers(_Runtime.field(vertices, 'length'), floatsPerVertex)) | 0), _Runtime.divideNumbers(_Runtime.field(bindPose.positions, 'length'), 3.0)) : Dynamic) : (cast 0.0 : Dynamic));
-    positionOffset = (cast SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument12:Dynamic = layout; __callArgument12; }), (cast 'position' : String)) : Float);
-    normalOffset = (cast SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument13:Dynamic = layout; __callArgument13; }), (cast 'normal' : String)) : Float);
+    positionOffset = (cast SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument24:Dynamic = layout; __callArgument24; }), (cast 'position' : String)) : Float);
+    normalOffset = (cast SkinMeshGeometry.floatOffsetForSemantic__skinMeshGeometry(({ final __callArgument26:Dynamic = layout; __callArgument26; }), (cast 'normal' : String)) : Float);
     {
       var v:Float = 0.0;
       while ((cast ((cast v : Float) < (cast vertexCount : Float)) : Bool)) {

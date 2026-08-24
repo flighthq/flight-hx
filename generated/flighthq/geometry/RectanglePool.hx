@@ -27,7 +27,7 @@ class RectanglePool {
     if ((cast ((cast _Runtime.field(RectanglePool.pool__rectanglePool, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       (r = cast ((cast _Runtime.callProperty(RectanglePool.pool__rectanglePool, 'pop', cast ([] : Array<Dynamic>)) : Rectangle) : Dynamic));
     } else {
-      (r = cast ((cast createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Rectangle) : Dynamic));
+      (r = cast ((cast (#if js _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) #else createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Rectangle) : Dynamic));
     }
     return cast r;
     return cast null;

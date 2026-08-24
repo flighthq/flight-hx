@@ -23,7 +23,7 @@ class WgpuMipmap {
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
-    cached = (cast WgpuMipmap.ensureWgpuMipmapPipeline__wgpuMipmap(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast format : String)) : { var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; });
+    cached = (cast WgpuMipmap.ensureWgpuMipmapPipeline__wgpuMipmap(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast format : String)) : { var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; });
     pipeline = (cast cached : { var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; }).pipeline;
     layout = (cast cached : { var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; }).bindGroupLayout;
     encoder = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createCommandEncoder', cast ([] : Array<Dynamic>));
@@ -51,7 +51,7 @@ class WgpuMipmap {
   }
 
   public static function registerWgpuMipmapGeneration(state:WgpuRenderState):Void {
-    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime) : { var mipmapGenerator:Null<WgpuRenderState->flighthq._internal.dom.GPUTexture->Float->Float->String->Void>; }).mipmapGenerator = cast (generateWgpuMipmaps : Null<WgpuRenderState->flighthq._internal.dom.GPUTexture->Float->Float->String->Void>));
+    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuRenderStateRuntime) : { var mipmapGenerator:Null<WgpuRenderState->flighthq._internal.dom.GPUTexture->Float->Float->String->Void>; }).mipmapGenerator = cast (generateWgpuMipmaps : Null<WgpuRenderState->flighthq._internal.dom.GPUTexture->Float->Float->String->Void>));
   }
 
   public static function ensureWgpuMipmapPipeline__wgpuMipmap(state:WgpuRenderState, format:flighthq._internal.dom.GPUTextureFormat):{ var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; } {
@@ -63,7 +63,7 @@ class WgpuMipmap {
     var module:flighthq._internal.dom.GPUShaderModule = cast _Runtime.UNDEFINED;
     var pipeline:flighthq._internal.dom.GPURenderPipeline = cast _Runtime.UNDEFINED;
     var result:{ var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; } = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : WgpuRenderStateRuntime);
     cached = ((cast runtime.mipmapPipelineCache : flighthq._internal._Map<String, { var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; }>).get(format));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     __destructure1 = state;

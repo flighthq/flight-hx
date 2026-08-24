@@ -27,11 +27,11 @@ class UpdateMeshSkin {
     geometry = mesh.geometry;
     bindPose = (cast getMeshGeometrySkinBindPose(({ final __callArgument0:Dynamic = geometry; __callArgument0; })) : Null<MeshSkinBindPose>);
     if ((cast _Runtime.strictEquals(bindPose, null) : Bool)) {
-      (bindPose = cast ((cast captureMeshSkinBindPose(({ final __callArgument1:Dynamic = geometry; __callArgument1; })) : MeshSkinBindPose) : Dynamic));
-      setMeshGeometrySkinBindPose(({ final __callArgument2:Dynamic = geometry; __callArgument2; }), (cast bindPose : Dynamic));
+      (bindPose = cast ((cast captureMeshSkinBindPose(({ final __callArgument2:Dynamic = geometry; __callArgument2; })) : MeshSkinBindPose) : Dynamic));
+      setMeshGeometrySkinBindPose(({ final __callArgument4:Dynamic = geometry; __callArgument4; }), (cast bindPose : Dynamic));
     } else { if ((cast !_Runtime.looseEquals(mesh.morph, null) : Bool)) {
-      updateMeshSkinBindPoseDeformInput(({ final __callArgument3:Dynamic = bindPose; __callArgument3; }), ({ final __callArgument4:Dynamic = geometry; __callArgument4; }));
+      updateMeshSkinBindPoseDeformInput(({ final __callArgument6:Dynamic = bindPose; __callArgument6; }), ({ final __callArgument7:Dynamic = geometry; __callArgument7; }));
     } }
-    skinMeshGeometry(({ final __callArgument5:Dynamic = geometry; __callArgument5; }), (cast skin : { var skeleton:Skeleton3D; }).skeleton, ({ final __callArgument6:Dynamic = bindPose; __callArgument6; }));
+    skinMeshGeometry(({ final __callArgument10:Dynamic = geometry; __callArgument10; }), (cast skin : { var skeleton:Skeleton3D; }).skeleton, ({ final __callArgument11:Dynamic = bindPose; __callArgument11; }));
   }
 }

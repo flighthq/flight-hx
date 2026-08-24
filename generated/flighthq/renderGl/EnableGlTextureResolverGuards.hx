@@ -16,6 +16,6 @@ class EnableGlTextureResolverGuards {
   }
 
   public static function enableGlTextureResolverGuards(state:GlRenderState):Void {
-    enableRenderRegistryGuards(({ final __callArgument1:Dynamic = state; __callArgument1; }));
+    enableRenderRegistryGuards(({ final __callArgument2:Dynamic = state; __callArgument2; }));
   }
 }

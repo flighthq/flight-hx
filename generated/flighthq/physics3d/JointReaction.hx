@@ -60,8 +60,8 @@ class JointReaction {
     clearPhysics3DJointReaction(({ final __callArgument0:Dynamic = out; __callArgument0; }));
     if ((cast !(cast _Runtime.compare(dt, 0.0, '>') : Bool) : Bool)) { return cast false; }
     solver = ((cast world.jointSolvers : flighthq._internal._Map<String, Physics3DJointSolver>).get(_Runtime.field(joint, 'kind')));
-    if ((cast _Runtime.strictEquals(({ final __structural1 = solver; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var writeReaction:Null<Physics3DJoint->Float->Physics3DJointReaction->Bool>; }).writeReaction; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
-    return cast (cast solver : Physics3DJointSolver).writeReaction(({ final __callArgument2:Dynamic = joint; __callArgument2; }), (cast (1.0 / dt) : Float), ({ final __callArgument3:Dynamic = out; __callArgument3; }));
+    if ((cast _Runtime.strictEquals(({ final __structural2 = solver; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var writeReaction:Null<Physics3DJoint->Float->Physics3DJointReaction->Bool>; }).writeReaction; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
+    return cast (cast solver : Physics3DJointSolver).writeReaction(({ final __callArgument3:Dynamic = joint; __callArgument3; }), (cast (1.0 / dt) : Float), ({ final __callArgument4:Dynamic = out; __callArgument4; }));
     return cast null;
   }
 }

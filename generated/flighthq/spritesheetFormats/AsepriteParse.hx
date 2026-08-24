@@ -43,7 +43,7 @@ class AsepriteParse {
     durations = (cast _Runtime.mapArray((cast tagFrameNames : Array<String>), function(n:String, __unused0:Float, __unused1:Array<String>):Float return _Runtime.coalesce(((cast durationMap : flighthq._internal._Map<String, Float>).get(n)), function():Dynamic return cast 100.0), _Runtime.UNDEFINED));
     firstDuration = _Runtime.coalesce(flighthq._internal._StaticIndex.readFloatArrayTyped((cast durations : Array<Float>), (cast 0.0 : Float)), function():Dynamic return cast 100.0);
     uniform = _Runtime.callProperty(durations, 'every', cast ([function(d:Float, __unused2:Float, __unused3:Array<Float>):Bool return _Runtime.strictEquals(d, firstDuration)] : Array<Dynamic>));
-    return cast (cast createSpritesheetAnimationData(({ final __callArgument1:Dynamic = { direction: _Runtime.coalesce(tag.direction, function():Dynamic return cast 'forward'), frameDuration: firstDuration, frameDurations: ((cast uniform : Bool) ? (cast null : Dynamic) : (cast durations : Dynamic)), frameNames: tagFrameNames, name: tag.name, repeatCount: -1.0 }; __callArgument1; })) : SpritesheetAnimationData);
+    return cast (cast createSpritesheetAnimationData(({ final __callArgument2:Dynamic = { direction: _Runtime.coalesce(tag.direction, function():Dynamic return cast 'forward'), frameDuration: firstDuration, frameDurations: ((cast uniform : Bool) ? (cast null : Dynamic) : (cast durations : Dynamic)), frameNames: tagFrameNames, name: tag.name, repeatCount: -1.0 }; __callArgument2; })) : SpritesheetAnimationData);
     return cast null;
   }
 
@@ -55,7 +55,7 @@ class AsepriteParse {
     var __destructure7:Dynamic = cast _Runtime.UNDEFINED;
     var meta:AsepriteMeta = cast _Runtime.UNDEFINED;
     var animations:Array<SpritesheetAnimationData> = cast _Runtime.UNDEFINED;
-    regions = (cast (cast parseTextureAtlasAsepriteDocument(({ final __callArgument2:Dynamic = doc; __callArgument2; }), (cast createTextureAtlas(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : TextureAtlas)) : TextureAtlas) : { var regions:Array<TextureAtlasRegion>; }).regions;
+    regions = (cast (cast parseTextureAtlasAsepriteDocument(({ final __callArgument4:Dynamic = doc; __callArgument4; }), (cast (#if js _Runtime.callValue(createTextureAtlas, cast ([] : Array<Dynamic>)) #else createTextureAtlas(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : TextureAtlas)) : TextureAtlas) : { var regions:Array<TextureAtlasRegion>; }).regions;
     frames = (cast _Runtime.mapArray((cast regions : Array<TextureAtlasRegion>), AsepriteParse.frameFromRegion__asepriteParse, _Runtime.UNDEFINED));
     frameNames = (cast _Runtime.mapArray((cast regions : Array<TextureAtlasRegion>), function(region:TextureAtlasRegion, __unused4:Float, __unused5:Array<TextureAtlasRegion>):String return _Runtime.coalesce(region.name, function():Dynamic return cast ''), _Runtime.UNDEFINED));
     durationMap = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
@@ -72,8 +72,8 @@ class AsepriteParse {
     }
     __destructure7 = doc;
     meta = _Runtime.field(__destructure7, 'meta');
-    animations = ((cast _Runtime.andValue(meta.frameTags, function():Dynamic return cast ((cast _Runtime.field(meta.frameTags, 'length') : Float) > (cast 0.0 : Float))) : Bool) ? (cast (cast _Runtime.mapArray((cast meta.frameTags : Array<AsepriteFrameTag>), function(tag:AsepriteFrameTag, __unused8:Float, __unused9:Array<AsepriteFrameTag>):SpritesheetAnimationData return (cast AsepriteParse.animationFromTag__asepriteParse(({ final __callArgument7:Dynamic = tag; __callArgument7; }), ({ final __callArgument8:Dynamic = frameNames; __callArgument8; }), ({ final __callArgument9:Dynamic = durationMap; __callArgument9; })) : SpritesheetAnimationData), _Runtime.UNDEFINED)) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
-    return cast (cast createSpritesheetData(({ final __callArgument11:Dynamic = { animations: animations, frames: frames, imageFile: meta.image, imageHeight: (cast meta.size : { var h:Float; }).h, imageWidth: (cast meta.size : { var w:Float; }).w, scale: (cast AsepriteParse.metaScale__asepriteParse(({ final __callArgument10:Dynamic = meta; __callArgument10; })) : Float) }; __callArgument11; })) : SpritesheetData);
+    animations = ((cast _Runtime.andValue(meta.frameTags, function():Dynamic return cast ((cast _Runtime.field(meta.frameTags, 'length') : Float) > (cast 0.0 : Float))) : Bool) ? (cast (cast _Runtime.mapArray((cast meta.frameTags : Array<AsepriteFrameTag>), function(tag:AsepriteFrameTag, __unused8:Float, __unused9:Array<AsepriteFrameTag>):SpritesheetAnimationData return (cast AsepriteParse.animationFromTag__asepriteParse(({ final __callArgument10:Dynamic = tag; __callArgument10; }), ({ final __callArgument11:Dynamic = frameNames; __callArgument11; }), ({ final __callArgument12:Dynamic = durationMap; __callArgument12; })) : SpritesheetAnimationData), _Runtime.UNDEFINED)) : Dynamic) : (cast cast ([] : Array<Dynamic>) : Dynamic));
+    return cast (cast createSpritesheetData(({ final __callArgument18:Dynamic = { animations: animations, frames: frames, imageFile: meta.image, imageHeight: (cast meta.size : { var h:Float; }).h, imageWidth: (cast meta.size : { var w:Float; }).w, scale: (cast AsepriteParse.metaScale__asepriteParse(({ final __callArgument16:Dynamic = meta; __callArgument16; })) : Float) }; __callArgument18; })) : SpritesheetData);
     return cast null;
   }
 
@@ -82,9 +82,9 @@ class AsepriteParse {
     try {
       (document = cast ((cast _Runtime.jsonParse(json) : AsepriteDocument) : Dynamic));
     } catch (__error:Dynamic) {
-      return cast (cast createSpritesheetData(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : SpritesheetData);
+      return cast (cast (#if js _Runtime.callValue(createSpritesheetData, cast ([] : Array<Dynamic>)) #else createSpritesheetData(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : SpritesheetData);
     }
-    return cast (cast AsepriteParse.documentToData__asepriteParse(({ final __callArgument12:Dynamic = document; __callArgument12; })) : SpritesheetData);
+    return cast (cast AsepriteParse.documentToData__asepriteParse(({ final __callArgument22:Dynamic = document; __callArgument22; })) : SpritesheetData);
     return cast null;
   }
 
@@ -93,9 +93,9 @@ class AsepriteParse {
     try {
       (document = cast ((cast _Runtime.jsonParse(json) : AsepriteDocument) : Dynamic));
     } catch (__error:Dynamic) {
-      return cast { data: (cast createSpritesheetData(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : SpritesheetData), document: (cast AsepriteParse.createEmptyAsepriteDocument__asepriteParse() : AsepriteDocument) };
+      return cast { data: (cast (#if js _Runtime.callValue(createSpritesheetData, cast ([] : Array<Dynamic>)) #else createSpritesheetData(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : SpritesheetData), document: (cast AsepriteParse.createEmptyAsepriteDocument__asepriteParse() : AsepriteDocument) };
     }
-    return cast { data: (cast AsepriteParse.documentToData__asepriteParse(({ final __callArgument13:Dynamic = document; __callArgument13; })) : SpritesheetData), document: document };
+    return cast { data: (cast AsepriteParse.documentToData__asepriteParse(({ final __callArgument24:Dynamic = document; __callArgument24; })) : SpritesheetData), document: document };
     return cast null;
   }
 

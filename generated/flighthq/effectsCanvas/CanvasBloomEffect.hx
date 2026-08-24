@@ -29,8 +29,8 @@ class CanvasBloomEffect {
     threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.8);
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     radius = (cast computeBloomBlurRadius(({ final __callArgument0:Dynamic = effect; __callArgument0; })) : Float);
-    bright = (cast acquireCanvasRenderTarget(({ final __callArgument1:Dynamic = pool; __callArgument1; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
-    drawCanvasImageDataPass(({ final __callArgument2:Dynamic = bright; __callArgument2; }), ({ final __callArgument3:Dynamic = source; __callArgument3; }), ({ final __callArgument4:Dynamic = function(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float):Void {
+    bright = (cast acquireCanvasRenderTarget(({ final __callArgument2:Dynamic = pool; __callArgument2; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    drawCanvasImageDataPass(({ final __callArgument4:Dynamic = bright; __callArgument4; }), ({ final __callArgument5:Dynamic = source; __callArgument5; }), ({ final __callArgument6:Dynamic = function(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float):Void {
       {
         var pixel:Float = 0.0;
         while ((cast ((cast pixel : Float) < (cast pixelCount : Float)) : Bool)) {
@@ -43,16 +43,16 @@ class CanvasBloomEffect {
           pixel++;
         }
       }
-    }; __callArgument4; }));
-    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument5:Dynamic = pool; __callArgument5; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    }; __callArgument6; }));
+    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument10:Dynamic = pool; __callArgument10; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
     if ((cast ((cast radius : Float) > (cast 0.0 : Float)) : Bool)) {
-      drawCanvasEffectPass(({ final __callArgument6:Dynamic = blurred; __callArgument6; }), ({ final __callArgument7:Dynamic = bright; __callArgument7; }), (cast 'blur(' + Std.string(radius) + 'px)' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+      (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument14:Dynamic = blurred; __callArgument14; }), ({ final __callArgument15:Dynamic = bright; __callArgument15; }), (cast 'blur(' + Std.string(radius) + 'px)' : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument12:Dynamic = blurred; __callArgument12; }), ({ final __callArgument13:Dynamic = bright; __callArgument13; }), (cast 'blur(' + Std.string(radius) + 'px)' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     } else {
-      drawCanvasEffectPass(({ final __callArgument8:Dynamic = blurred; __callArgument8; }), ({ final __callArgument9:Dynamic = bright; __callArgument9; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+      (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument18:Dynamic = blurred; __callArgument18; }), ({ final __callArgument19:Dynamic = bright; __callArgument19; }), (cast 'none' : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument16:Dynamic = blurred; __callArgument16; }), ({ final __callArgument17:Dynamic = bright; __callArgument17; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     }
-    drawCanvasEffectPass(({ final __callArgument10:Dynamic = dest; __callArgument10; }), ({ final __callArgument11:Dynamic = source; __callArgument11; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
+    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument22:Dynamic = dest; __callArgument22; }), ({ final __callArgument23:Dynamic = source; __callArgument23; }), (cast 'none' : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument20:Dynamic = dest; __callArgument20; }), ({ final __callArgument21:Dynamic = source; __callArgument21; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     bloom = (cast flighthq._internal.backend.Canvas2dBackend.call(blurred.context, 'getImageData', cast ([0.0, 0.0, blurred.width, blurred.height] : Array<Dynamic>)) : flighthq._internal.dom.ImageData).data;
-    drawCanvasImageDataPass(({ final __callArgument12:Dynamic = dest; __callArgument12; }), ({ final __callArgument13:Dynamic = dest; __callArgument13; }), ({ final __callArgument14:Dynamic = function(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float):Void {
+    drawCanvasImageDataPass(({ final __callArgument24:Dynamic = dest; __callArgument24; }), ({ final __callArgument25:Dynamic = dest; __callArgument25; }), ({ final __callArgument26:Dynamic = function(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float):Void {
       {
         var pixel:Float = 0.0;
         while ((cast ((cast pixel : Float) < (cast pixelCount : Float)) : Bool)) {
@@ -63,9 +63,9 @@ class CanvasBloomEffect {
           pixel++;
         }
       }
-    }; __callArgument14; }));
-    releaseCanvasRenderTarget(({ final __callArgument15:Dynamic = pool; __callArgument15; }), ({ final __callArgument16:Dynamic = bright; __callArgument16; }));
-    releaseCanvasRenderTarget(({ final __callArgument17:Dynamic = pool; __callArgument17; }), ({ final __callArgument18:Dynamic = blurred; __callArgument18; }));
+    }; __callArgument26; }));
+    releaseCanvasRenderTarget(({ final __callArgument30:Dynamic = pool; __callArgument30; }), ({ final __callArgument31:Dynamic = bright; __callArgument31; }));
+    releaseCanvasRenderTarget(({ final __callArgument34:Dynamic = pool; __callArgument34; }), ({ final __callArgument35:Dynamic = blurred; __callArgument35; }));
   }
 
   public static final defaultCanvasBloomEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
@@ -73,6 +73,6 @@ class CanvasBloomEffect {
   });
 
   public static function registerCanvasBloomEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument19:Dynamic = state; __callArgument19; }), (cast 'BloomEffect' : String), ({ final __callArgument20:Dynamic = defaultCanvasBloomEffectRunner; __callArgument20; }));
+    registerCanvasRenderEffect(({ final __callArgument38:Dynamic = state; __callArgument38; }), (cast 'BloomEffect' : String), ({ final __callArgument39:Dynamic = defaultCanvasBloomEffectRunner; __callArgument39; }));
   }
 }

@@ -19,7 +19,7 @@ class BitmapFontJson {
     var record:Null<BitmapFontRecord> = cast _Runtime.UNDEFINED;
     record = (cast BitmapFontJson.parseBitmapFontJsonRecord__bitmapFontJson((cast text : String), ({ final __callArgument0:Dynamic = diagnostics; __callArgument0; })) : Null<BitmapFontRecord>);
     if ((cast _Runtime.strictEquals(record, null) : Bool)) { return cast null; }
-    return cast (cast buildBitmapFontFromRecord(({ final __callArgument1:Dynamic = record; __callArgument1; }), ({ final __callArgument2:Dynamic = options; __callArgument2; })) : Null<BitmapFont>);
+    return cast (cast buildBitmapFontFromRecord(({ final __callArgument2:Dynamic = record; __callArgument2; }), ({ final __callArgument3:Dynamic = options; __callArgument3; })) : Null<BitmapFont>);
     return cast null;
   }
 
@@ -75,7 +75,7 @@ class BitmapFontJson {
         if ((cast _Runtime.strictEquals(kerning, null) : Bool)) { droppedKernings++; } else { _Runtime.callProperty(kernings, 'push', cast ([kerning] : Array<Dynamic>)); }
       }
     }
-    reportDroppedBitmapFontRecords(({ final __callArgument7:Dynamic = diagnostics; __callArgument7; }), (cast 'parseBitmapFontJsonRecord' : String), (cast droppedPages : Float), (cast droppedChars : Float), (cast droppedKernings : Float));
+    reportDroppedBitmapFontRecords(({ final __callArgument10:Dynamic = diagnostics; __callArgument10; }), (cast 'parseBitmapFontJsonRecord' : String), (cast droppedPages : Float), (cast droppedChars : Float), (cast droppedKernings : Float));
     return cast { base: base, chars: chars, encoding: (cast BitmapFontJson.readJsonEncoding__bitmapFontJson((cast (cast root : { var distanceField:flighthq._internal._Any; }).distanceField : flighthq._internal._Any)) : BitmapFontEncoding), kernings: kernings, lineHeight: lineHeight, pages: pages };
     return cast null;
   }

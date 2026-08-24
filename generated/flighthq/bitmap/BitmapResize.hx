@@ -101,7 +101,7 @@ class BitmapResize {
                         var n:Float = -1.0;
                         while ((cast ((cast n : Float) <= (cast 2.0 : Float)) : Bool)) {
                           var wx:Float = (cast BitmapResize.catmullRomWeight__bitmapResize((cast (tx - n) : Float)) : Float);
-                          var rx:Null<Float> = (cast BitmapResize.resolveResizeEdge__bitmapResize((cast (x1 + n) : Float), (cast sw : Float), ({ final __callArgument1:Dynamic = edgeMode; __callArgument1; })) : Null<Float>);
+                          var rx:Null<Float> = (cast BitmapResize.resolveResizeEdge__bitmapResize((cast (x1 + n) : Float), (cast sw : Float), ({ final __callArgument2:Dynamic = edgeMode; __callArgument2; })) : Null<Float>);
                           if ((cast ((cast _Runtime.strictEquals(rx, null) : Bool) || (cast _Runtime.strictEquals(ry, null) : Bool)) : Bool)) { n++; continue; }
                           var sy:Float = (source.y + ry);
                           var sx:Float = (source.x + rx);
@@ -146,8 +146,8 @@ class BitmapResize {
         var fy:Float = (((dy + 0.5) * scaleY) - 0.5);
         var y0:Float = HxMath.floor(fy);
         var ty:Float = (fy - y0);
-        var ry0:Null<Float> = (cast BitmapResize.resolveResizeEdge__bitmapResize((cast y0 : Float), (cast sh : Float), ({ final __callArgument2:Dynamic = edgeMode; __callArgument2; })) : Null<Float>);
-        var ry1:Null<Float> = (cast BitmapResize.resolveResizeEdge__bitmapResize((cast (y0 + 1.0) : Float), (cast sh : Float), ({ final __callArgument3:Dynamic = edgeMode; __callArgument3; })) : Null<Float>);
+        var ry0:Null<Float> = (cast BitmapResize.resolveResizeEdge__bitmapResize((cast y0 : Float), (cast sh : Float), ({ final __callArgument4:Dynamic = edgeMode; __callArgument4; })) : Null<Float>);
+        var ry1:Null<Float> = (cast BitmapResize.resolveResizeEdge__bitmapResize((cast (y0 + 1.0) : Float), (cast sh : Float), ({ final __callArgument6:Dynamic = edgeMode; __callArgument6; })) : Null<Float>);
         {
           var dx:Float = 0.0;
           while ((cast ((cast dx : Float) < (cast dw : Float)) : Bool)) {
@@ -156,8 +156,8 @@ class BitmapResize {
             var fx:Float = (((dx + 0.5) * scaleX) - 0.5);
             var x0:Float = HxMath.floor(fx);
             var tx:Float = (fx - x0);
-            var rx0:Null<Float> = (cast BitmapResize.resolveResizeEdge__bitmapResize((cast x0 : Float), (cast sw : Float), ({ final __callArgument4:Dynamic = edgeMode; __callArgument4; })) : Null<Float>);
-            var rx1:Null<Float> = (cast BitmapResize.resolveResizeEdge__bitmapResize((cast (x0 + 1.0) : Float), (cast sw : Float), ({ final __callArgument5:Dynamic = edgeMode; __callArgument5; })) : Null<Float>);
+            var rx0:Null<Float> = (cast BitmapResize.resolveResizeEdge__bitmapResize((cast x0 : Float), (cast sw : Float), ({ final __callArgument8:Dynamic = edgeMode; __callArgument8; })) : Null<Float>);
+            var rx1:Null<Float> = (cast BitmapResize.resolveResizeEdge__bitmapResize((cast (x0 + 1.0) : Float), (cast sw : Float), ({ final __callArgument10:Dynamic = edgeMode; __callArgument10; })) : Null<Float>);
             var di:Float = (((oy * dStride) + ox) * 4.0);
             var i00:Float = ((cast ((cast !_Runtime.strictEquals(rx0, null) : Bool) && (cast !_Runtime.strictEquals(ry0, null) : Bool)) : Bool) ? (cast (((((source.y + ry0) * sStride) + source.x) + rx0) * 4.0) : Dynamic) : (cast -1.0 : Dynamic));
             var i10:Float = ((cast ((cast !_Runtime.strictEquals(rx1, null) : Bool) && (cast !_Runtime.strictEquals(ry0, null) : Bool)) : Bool) ? (cast (((((source.y + ry0) * sStride) + source.x) + rx1) * 4.0) : Dynamic) : (cast -1.0 : Dynamic));

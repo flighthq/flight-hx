@@ -63,29 +63,29 @@ class GlSprite {
     var transform:Matrix = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime);
     texture = (cast (cast (cast (cast renderProxy : RenderProxy2D).source : Sprite) : { var data:SpriteData; }).data : { var texture:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9767:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9767:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9767:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).texture;
-    if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) : Bool) || (cast !(cast (cast hasTextureSource(({ final __callArgument1:Dynamic = texture; __callArgument1; })) : Bool) : Bool) : Bool)) : Bool)) { return; }
-    width = _Runtime.multiplyNumbers(HxMath.max(0.0, (cast getTextureWidth(({ final __callArgument2:Dynamic = texture; __callArgument2; })) : Float)), HxMath.abs((cast (cast texture : Texture2D).uvScale : { var x:Float; }).x));
-    height = _Runtime.multiplyNumbers(HxMath.max(0.0, (cast getTextureHeight(({ final __callArgument3:Dynamic = texture; __callArgument3; })) : Float)), HxMath.abs((cast (cast texture : Texture2D).uvScale : { var y:Float; }).y));
+    if ((cast ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) : Bool) || (cast !(cast (cast hasTextureSource(({ final __callArgument2:Dynamic = texture; __callArgument2; })) : Bool) : Bool) : Bool)) : Bool)) { return; }
+    width = _Runtime.multiplyNumbers(HxMath.max(0.0, (cast getTextureWidth(({ final __callArgument4:Dynamic = texture; __callArgument4; })) : Float)), HxMath.abs((cast (cast texture : Texture2D).uvScale : { var x:Float; }).x));
+    height = _Runtime.multiplyNumbers(HxMath.max(0.0, (cast getTextureHeight(({ final __callArgument6:Dynamic = texture; __callArgument6; })) : Float)), HxMath.abs((cast (cast texture : Texture2D).uvScale : { var y:Float; }).y));
     if ((cast ((cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
     material = (cast renderProxy : RenderProxy2D).material;
-    materialRenderer = (cast resolveGlMaterialRenderer(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast material : Dynamic)) : Null<GlMaterialRenderer>);
+    materialRenderer = (cast resolveGlMaterialRenderer(({ final __callArgument8:Dynamic = state; __callArgument8; }), (cast material : Dynamic)) : Null<GlMaterialRenderer>);
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
-    glTexture = (cast resolveGlTexture(({ final __callArgument5:Dynamic = state; __callArgument5; }), ({ final __callArgument6:Dynamic = texture; __callArgument6; }), (cast true : Bool), ({ final __callArgument7:Dynamic = SCENE2D_WORKING_COLOR_SPACE; __callArgument7; })) : Null<flighthq._internal.dom.WebGLTexture>);
+    glTexture = (cast resolveGlTexture(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = texture; __callArgument11; }), (cast true : Bool), ({ final __callArgument12:Dynamic = SCENE2D_WORKING_COLOR_SPACE; __callArgument12; })) : Null<flighthq._internal.dom.WebGLTexture>);
     if ((cast _Runtime.strictEquals(glTexture, null) : Bool)) { return; }
     straightAlpha = runtime.currentTextureStraightAlpha;
-    (cast ensureGlQuadBatchShader(({ final __callArgument8:Dynamic = state; __callArgument8; })) : GlQuadBatchShader);
+    (cast ensureGlQuadBatchShader(({ final __callArgument16:Dynamic = state; __callArgument16; })) : GlQuadBatchShader);
     u0 = (cast (cast texture : Texture2D).uvOffset : { var x:Float; }).x;
     v0 = (cast (cast texture : Texture2D).uvOffset : { var y:Float; }).y;
     u1 = (u0 + (cast (cast texture : Texture2D).uvScale : { var x:Float; }).x);
     v1 = (v0 + (cast (cast texture : Texture2D).uvScale : { var y:Float; }).y);
-    if ((cast (cast texture : Texture2D).flipX : Bool)) { ({ var __destructure9:Dynamic = cast ([u1, u0] : Array<Dynamic>); u0 = cast flighthq._internal._StaticIndex.readArray(__destructure9, 0); u1 = cast flighthq._internal._StaticIndex.readArray(__destructure9, 1); __destructure9; }); }
-    if ((cast (cast texture : Texture2D).flipY : Bool)) { ({ var __destructure10:Dynamic = cast ([v1, v0] : Array<Dynamic>); v0 = cast flighthq._internal._StaticIndex.readArray(__destructure10, 0); v1 = cast flighthq._internal._StaticIndex.readArray(__destructure10, 1); __destructure10; }); }
-    if ((cast _Runtime.strictEquals((cast getTextureSourceKind(({ final __callArgument11:Dynamic = texture; __callArgument11; })) : Null<String>), RenderTargetTextureSourceKind) : Bool)) {
+    if ((cast (cast texture : Texture2D).flipX : Bool)) { ({ var __destructure18:Dynamic = cast ([u1, u0] : Array<Dynamic>); u0 = cast flighthq._internal._StaticIndex.readArray(__destructure18, 0); u1 = cast flighthq._internal._StaticIndex.readArray(__destructure18, 1); __destructure18; }); }
+    if ((cast (cast texture : Texture2D).flipY : Bool)) { ({ var __destructure19:Dynamic = cast ([v1, v0] : Array<Dynamic>); v0 = cast flighthq._internal._StaticIndex.readArray(__destructure19, 0); v1 = cast flighthq._internal._StaticIndex.readArray(__destructure19, 1); __destructure19; }); }
+    if ((cast _Runtime.strictEquals((cast getTextureSourceKind(({ final __callArgument20:Dynamic = texture; __callArgument20; })) : Null<String>), RenderTargetTextureSourceKind) : Bool)) {
       (v0 = cast ((1.0 - v0) : Dynamic));
       (v1 = cast ((1.0 - v1) : Dynamic));
     }
     instanceIndex = runtime.quadBatchWriterCount;
-    base = (cast prepareGlQuadBatchWrite(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = glTexture; __callArgument13; }), (cast straightAlpha : Bool), (cast (cast texture : Texture2D).sampler : Dynamic), (cast renderProxy : RenderProxy2D).blendMode, (cast material : Dynamic), ({ final __callArgument14:Dynamic = materialRenderer; __callArgument14; }), (cast 1.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Float);
+    base = (cast (#if js _Runtime.callValue(prepareGlQuadBatchWrite, cast ([({ final __callArgument25:Dynamic = state; __callArgument25; }), ({ final __callArgument26:Dynamic = glTexture; __callArgument26; }), (cast straightAlpha : Bool), (cast (cast texture : Texture2D).sampler : Dynamic), (cast renderProxy : RenderProxy2D).blendMode, (cast material : Dynamic), ({ final __callArgument27:Dynamic = materialRenderer; __callArgument27; }), (cast 1.0 : Float)] : Array<Dynamic>)) #else prepareGlQuadBatchWrite(({ final __callArgument22:Dynamic = state; __callArgument22; }), ({ final __callArgument23:Dynamic = glTexture; __callArgument23; }), (cast straightAlpha : Bool), (cast (cast texture : Texture2D).sampler : Dynamic), (cast renderProxy : RenderProxy2D).blendMode, (cast material : Dynamic), ({ final __callArgument24:Dynamic = materialRenderer; __callArgument24; }), (cast 1.0 : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Float);
     data = runtime.quadBatchWriterInstanceData;
     transform = (cast renderProxy : RenderProxy2D).transform2D;
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast base : Float), (cast transform.a : Float));
@@ -101,8 +101,8 @@ class GlSprite {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (base + 10.0) : Float), (cast u1 : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (base + 11.0) : Float), (cast v1 : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (base + 12.0) : Float), (cast (cast renderProxy : RenderProxy2D).alpha : Float));
-    packGlQuadBatchMaterialInstance(({ final __callArgument15:Dynamic = state; __callArgument15; }), (cast renderProxy : RenderProxy2D).materialData, (cast instanceIndex : Float));
-    recordGlQuadBatchColorScaleBias(({ final __callArgument16:Dynamic = state; __callArgument16; }), (cast _Runtime.coalesce((cast renderProxy : RenderProxy2D).colorMatrix, function():Dynamic return cast (cast renderProxy : RenderProxy2D).colorScaleBias) : Dynamic), (cast instanceIndex : Float));
+    packGlQuadBatchMaterialInstance(({ final __callArgument28:Dynamic = state; __callArgument28; }), (cast renderProxy : RenderProxy2D).materialData, (cast instanceIndex : Float));
+    recordGlQuadBatchColorScaleBias(({ final __callArgument30:Dynamic = state; __callArgument30; }), (cast _Runtime.coalesce((cast renderProxy : RenderProxy2D).colorMatrix, function():Dynamic return cast (cast renderProxy : RenderProxy2D).colorScaleBias) : Dynamic), (cast instanceIndex : Float));
     runtime.quadBatchWriterCount++;
   }
 

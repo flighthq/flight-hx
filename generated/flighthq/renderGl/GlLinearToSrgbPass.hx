@@ -12,7 +12,7 @@ import flighthq.types.GlRenderTarget;
 class GlLinearToSrgbPass {
   @:noCompletion
   public static function drawGlLinearToSrgbPass(state:GlRenderState, source:GlRenderTarget, dest:Null<GlRenderTarget>):Void {
-    drawGlFullscreenPass(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast GlLinearToSrgbPass.getGlLinearToSrgbProgram__glLinearToSrgbPass(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlFullscreenProgram), ({ final __callArgument2:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument2; }), ({ final __callArgument3:Dynamic = dest; __callArgument3; }), ({ final __callArgument4:Dynamic = function(__unused0:flighthq._internal.dom.WebGL2RenderingContext, __unused1:GlFullscreenProgram):Void { GlLinearToSrgbPass.NOOP__glLinearToSrgbPass(); }; __callArgument4; }));
+    drawGlFullscreenPass(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast GlLinearToSrgbPass.getGlLinearToSrgbProgram__glLinearToSrgbPass(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlFullscreenProgram), ({ final __callArgument3:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), ({ final __callArgument5:Dynamic = function(__unused0:flighthq._internal.dom.WebGL2RenderingContext, __unused1:GlFullscreenProgram):Void { GlLinearToSrgbPass.NOOP__glLinearToSrgbPass(); }; __callArgument5; }));
   }
 
   public static function getGlLinearToSrgbProgram__glLinearToSrgbPass(state:GlRenderState):GlFullscreenProgram {
