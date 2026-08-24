@@ -12,6 +12,7 @@ import flighthq.renderGl.GlCompressedTexture as Facade_RenderGl_flighthq_renderG
 import flighthq.renderGl.GlDraw as Facade_RenderGl_flighthq_renderGl_GlDraw;
 import flighthq.renderGl.GlElement as Facade_RenderGl_flighthq_renderGl_GlElement;
 import flighthq.renderGl.GlExternalTexture as Facade_RenderGl_flighthq_renderGl_GlExternalTexture;
+import flighthq.renderGl.GlPresentRenderTarget as Facade_RenderGl_flighthq_renderGl_GlPresentRenderTarget;
 import flighthq.renderGl.GlRenderPass as Facade_RenderGl_flighthq_renderGl_GlRenderPass;
 import flighthq.renderGl.GlRenderState as Facade_RenderGl_flighthq_renderGl_GlRenderState;
 import flighthq.renderGl.GlRenderTarget as Facade_RenderGl_flighthq_renderGl_GlRenderTarget;
@@ -116,6 +117,10 @@ class RenderGl {
     Facade_RenderGl_flighthq_renderGl_GlRenderState.destroyGlRenderState(state);
   }
 
+  public static function destroyGlRenderTarget(state:GlRenderState, target:GlRenderTarget):Void {
+    Facade_RenderGl_flighthq_renderGl_GlRenderTarget.destroyGlRenderTarget(state, target);
+  }
+
   public static function destroyGlRenderTexture(state:GlRenderState, renderTexture:RenderTexture):Void {
     Facade_RenderGl_flighthq_renderGl_GlRenderTexture.destroyGlRenderTexture(state, renderTexture);
   }
@@ -167,6 +172,10 @@ class RenderGl {
   public static function isGlRenderTargetFormatSupported(state:GlRenderState, format:RenderTargetFormat):Bool {
     return cast Facade_RenderGl_flighthq_renderGl_GlRenderTarget.isGlRenderTargetFormatSupported(state, format);
     return cast null;
+  }
+
+  public static function presentGlRenderTarget(state:GlRenderState, target:GlRenderTarget, ?dest:Null<GlRenderTarget>):Void {
+    Facade_RenderGl_flighthq_renderGl_GlPresentRenderTarget.presentGlRenderTarget(state, target, dest);
   }
 
   public static function registerGlBitmapTextureResolver(state:GlRenderState):Void {

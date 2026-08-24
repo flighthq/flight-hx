@@ -6,13 +6,27 @@ import flighthq._internal._Runtime;
 import flighthq.skeleton2dFormats.DragonBonesParse as Facade_Skeleton2dFormats_flighthq_skeleton2dFormats_DragonBonesParse;
 import flighthq.skeleton2dFormats.SkeletonDetect as Facade_Skeleton2dFormats_flighthq_skeleton2dFormats_SkeletonDetect;
 import flighthq.skeleton2dFormats.SpineBinaryParse as Facade_Skeleton2dFormats_flighthq_skeleton2dFormats_SpineBinaryParse;
+import flighthq.skeleton2dFormats.SpineBinaryVersion as Facade_Skeleton2dFormats_flighthq_skeleton2dFormats_SpineBinaryVersion;
+import flighthq.skeleton2dFormats.SpineBinaryVersioned as Facade_Skeleton2dFormats_flighthq_skeleton2dFormats_SpineBinaryVersioned;
 import flighthq.skeleton2dFormats.SpineParse as Facade_Skeleton2dFormats_flighthq_skeleton2dFormats_SpineParse;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.Skeleton2DImport;
+import flighthq.types.SpineBinaryVersion.SpineBinaryParser;
+import flighthq.types.SpineBinaryVersion.SpineBinaryVersionFailure;
 
 class Skeleton2dFormats {
+  public static function explainSpineBinaryVersionFailure(bytes:flighthq._internal._UInt8Array):SpineBinaryVersionFailure {
+    return cast Facade_Skeleton2dFormats_flighthq_skeleton2dFormats_SpineBinaryVersion.explainSpineBinaryVersionFailure(bytes);
+    return cast null;
+  }
+
   public static function getSkeleton2DFormatKinds():Array<String> {
     return cast Facade_Skeleton2dFormats_flighthq_skeleton2dFormats_SkeletonDetect.getSkeleton2DFormatKinds();
+    return cast null;
+  }
+
+  public static function getSpineBinaryVersion(bytes:flighthq._internal._UInt8Array):Null<String> {
+    return cast Facade_Skeleton2dFormats_flighthq_skeleton2dFormats_SpineBinaryVersion.getSpineBinaryVersion(bytes);
     return cast null;
   }
 
@@ -36,8 +50,22 @@ class Skeleton2dFormats {
     return cast null;
   }
 
+  public static function parseSpineSkeletonBinaryVersioned(bytes:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<Skeleton2DImport> {
+    return cast Facade_Skeleton2dFormats_flighthq_skeleton2dFormats_SpineBinaryVersioned.parseSpineSkeletonBinaryVersioned(bytes, diagnostics);
+    return cast null;
+  }
+
   public static function registerSkeleton2DFormat(kind:String, detect:String->Bool, parse:String->Array<ImportDiagnostic>->Null<Skeleton2DImport>):Void {
     Facade_Skeleton2dFormats_flighthq_skeleton2dFormats_SkeletonDetect.registerSkeleton2DFormat(kind, detect, parse);
+  }
+
+  public static function registerSpineSkeletonBinaryParser(version:String, parser:SpineBinaryParser):Void {
+    Facade_Skeleton2dFormats_flighthq_skeleton2dFormats_SpineBinaryVersioned.registerSpineSkeletonBinaryParser(version, parser);
+  }
+
+  public static function toSpineBinaryLayoutKey(version:String):String {
+    return cast Facade_Skeleton2dFormats_flighthq_skeleton2dFormats_SpineBinaryVersioned.toSpineBinaryLayoutKey(version);
+    return cast null;
   }
 
   public static function unregisterSkeleton2DFormat(kind:String):Void {

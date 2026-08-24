@@ -4,6 +4,7 @@ import compiled from '../../build/haxe-js/flight.cjs';
 export const applyAnimationClipToScene3D = compiled.flighthq.scene3d.Scene3d.applyAnimationClipToScene3D;
 export const buildScene3DFrustum = compiled.flighthq.scene3d.Scene3d.buildScene3DFrustum;
 export const cloneMesh = compiled.flighthq.scene3d.Scene3d.cloneMesh;
+export const cloneNode3DSubtree = compiled.flighthq.scene3d.Scene3d.cloneNode3DSubtree;
 export const createBillboard = compiled.flighthq.scene3d.Scene3d.createBillboard;
 export const createMesh = compiled.flighthq.scene3d.Scene3d.createMesh;
 export const createNode3D = compiled.flighthq.scene3d.Scene3d.createNode3D;

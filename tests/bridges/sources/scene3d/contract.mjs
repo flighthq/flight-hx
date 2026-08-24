@@ -5,6 +5,7 @@ __syncDependencies();
 
 export * from './billboard.mjs';
 export * from './billboardCamera.mjs';
+export * from './cloneNode3DSubtree.mjs';
 export * from './enableScene3DGuards.mjs';
 export * from './mesh.mjs';
 export * from './prepareScene3DMorph.mjs';

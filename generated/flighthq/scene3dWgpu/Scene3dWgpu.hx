@@ -3,6 +3,8 @@ package flighthq.scene3dWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.GPUBindGroup;
+import flighthq._internal.WebExterns.GPUBindGroupLayout;
 import flighthq.scene3dWgpu.BlinnPhongWgpuMeshMaterialRenderer as Facade_Scene3dWgpu_flighthq_scene3dWgpu_BlinnPhongWgpuMeshMaterialRenderer;
 import flighthq.scene3dWgpu.CustomShaderWgpuMeshMaterialRenderer as Facade_Scene3dWgpu_flighthq_scene3dWgpu_CustomShaderWgpuMeshMaterialRenderer;
 import flighthq.scene3dWgpu.DepthWgpuMeshMaterialRenderer as Facade_Scene3dWgpu_flighthq_scene3dWgpu_DepthWgpuMeshMaterialRenderer;
@@ -62,7 +64,7 @@ class Scene3dWgpu {
     Facade_Scene3dWgpu_flighthq_scene3dWgpu_WgpuShadowMap.drawWgpuScene3DShadowMap(state, scene, shadowCamera, directionalLight);
   }
 
-  public static function ensureWgpuShadowSampleLayout(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroupLayout {
+  public static function ensureWgpuShadowSampleLayout(state:WgpuRenderState):GPUBindGroupLayout {
     return cast Facade_Scene3dWgpu_flighthq_scene3dWgpu_WgpuMeshPipeline.ensureWgpuShadowSampleLayout(state);
     return cast null;
   }
@@ -152,7 +154,7 @@ class Scene3dWgpu {
 
   public static final unlitWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = Facade_Scene3dWgpu_flighthq_scene3dWgpu_UnlitWgpuMeshMaterialRenderer.unlitWgpuMeshMaterialRenderer;
 
-  public static function writeWgpuDrawUniform(state:WgpuRenderState, proxy:Scene3DRenderProxy):flighthq._internal.dom.GPUBindGroup {
+  public static function writeWgpuDrawUniform(state:WgpuRenderState, proxy:Scene3DRenderProxy):GPUBindGroup {
     return cast Facade_Scene3dWgpu_flighthq_scene3dWgpu_WgpuMeshPipeline.writeWgpuDrawUniform(state, proxy);
     return cast null;
   }

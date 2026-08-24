@@ -23,6 +23,7 @@ export * from './jointRegistry.mjs';
 export * from './joints.mjs';
 export * from './massProperties.mjs';
 export * from './material.mjs';
+export * from './nodeSync.mjs';
 export * from './registerBuiltInPhysics3DJointSolvers.mjs';
 export * from './solver.mjs';
 export * from './step.mjs';

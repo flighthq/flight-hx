@@ -3,9 +3,13 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.GPUBindGroup;
+import flighthq._internal.WebExterns.GPUTexture;
+import flighthq._internal.WebExterns.GPUTextureFormat;
+import flighthq._internal.WebExterns.GPUTextureView;
 import flighthq.types.RenderTarget.RenderTargetColorSpace;
 import flighthq.types.RenderTarget.RenderTargetDimensions;
 
-typedef WgpuRenderTarget = { var height:Float; var width:Float; var bindGroup:flighthq._internal.dom.GPUBindGroup; var colorSpace:RenderTargetColorSpace; var depthStencilTexture:flighthq._internal.dom.GPUTexture; var depthStencilView:flighthq._internal.dom.GPUTextureView; var format:flighthq._internal.dom.GPUTextureFormat; var sampleCount:Float; var clearColors:Array<Float>; var clearDepth:Float; var texture:flighthq._internal.dom.GPUTexture; var view:flighthq._internal.dom.GPUTextureView; };
+typedef WgpuRenderTarget = { var height:Float; var width:Float; var bindGroup:GPUBindGroup; var colorSpace:RenderTargetColorSpace; var depthStencilTexture:GPUTexture; var depthStencilView:GPUTextureView; var format:GPUTextureFormat; var sampleCount:Float; var clearColors:Array<Float>; var clearDepth:Float; var texture:GPUTexture; var view:GPUTextureView; };
 
 typedef WgpuRenderTargetPool = { var free:Array<flighthq.types.WgpuRenderTarget>; };

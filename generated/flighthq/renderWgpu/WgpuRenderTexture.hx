@@ -3,6 +3,7 @@ package flighthq.renderWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.GPUTextureFormat;
 import flighthq.render.RenderTarget.resolveRenderTargetDescriptor;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.renderWgpu.WgpuRenderTarget.beginWgpuRenderPass;
@@ -148,28 +149,28 @@ class WgpuRenderTexture {
   public static function ensureWgpuRenderTextureEntry__wgpuRenderTexture(state:WgpuRenderState, renderTexture:RenderTexture):WgpuRenderTextureEntry {
     var descriptor:RenderTarget = cast _Runtime.UNDEFINED;
     var requested:ResolvedRenderTargetDescriptor = cast _Runtime.UNDEFINED;
-    var format:String = cast _Runtime.UNDEFINED;
+    var format:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var colorSpace:String = cast _Runtime.UNDEFINED;
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var entries:flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry> = cast _Runtime.UNDEFINED;
     var entry:Null<WgpuRenderTextureEntry> = cast _Runtime.UNDEFINED;
     descriptor = renderTexture.source;
     requested = (cast resolveRenderTargetDescriptor(({ final __callArgument40:Dynamic = descriptor; __callArgument40; })) : ResolvedRenderTargetDescriptor);
-    format = (cast WgpuRenderTexture.getWgpuRenderTextureFormat__wgpuRenderTexture(({ final __callArgument41:Dynamic = state; __callArgument41; }), ({ final __callArgument42:Dynamic = requested.format; __callArgument42; })) : String);
+    format = WgpuRenderTexture.getWgpuRenderTextureFormat__wgpuRenderTexture(({ final __callArgument41:Dynamic = state; __callArgument41; }), ({ final __callArgument42:Dynamic = requested.format; __callArgument42; }));
     colorSpace = _Runtime.coalesce(descriptor.colorSpace, function():Dynamic return cast renderTexture.colorSpace);
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument43:Dynamic = state; __callArgument43; })) : WgpuRenderStateRuntime);
     entries = ({ final __nullishOwner44 = runtime; final __nullishValue45:Null<flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>> = cast __nullishOwner44.wgpuRenderTextureCache; __nullishValue45 == null ? (__nullishOwner44.wgpuRenderTextureCache = (cast _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Null<flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>>)) : (cast __nullishValue45 : Null<flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>>); });
     entry = ((cast entries : flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>).get(renderTexture));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var target:WgpuRenderTarget = (cast createWgpuRenderTarget(({ final __callArgument46:Dynamic = state; __callArgument46; }), (cast requested.width : Float), (cast requested.height : Float), (cast format : String), ({ final __callArgument47:Dynamic = colorSpace; __callArgument47; }), (cast requested.sampleCount : Float)) : WgpuRenderTarget);
+      var target:WgpuRenderTarget = (cast createWgpuRenderTarget(({ final __callArgument46:Dynamic = state; __callArgument46; }), (cast requested.width : Float), (cast requested.height : Float), (cast format : flighthq._internal._Any), ({ final __callArgument47:Dynamic = colorSpace; __callArgument47; }), (cast requested.sampleCount : Float)) : WgpuRenderTarget);
       (target.clearColors = cast (_Runtime.concatArrays([_Runtime.toArray(requested.clearColors)]) : Array<Float>));
       (target.clearDepth = cast (requested.clearDepth : Float));
       (entry = cast ({ status: 'unrendered', target: target } : Dynamic));
       ((cast entries : flighthq._internal._WeakMap<RenderTexture, WgpuRenderTextureEntry>).set(renderTexture, (cast entry)));
     } else {
-      if ((cast !_Runtime.strictEquals((cast (cast entry : { var target:WgpuRenderTarget; }).target : { var format:String; }).format, format) : Bool)) {
+      if ((cast !_Runtime.strictEquals((cast (cast entry : { var target:WgpuRenderTarget; }).target : { var format:flighthq._internal._Any; }).format, format) : Bool)) {
         destroyWgpuRenderTarget(({ final __callArgument48:Dynamic = state; __callArgument48; }), (cast entry : { var target:WgpuRenderTarget; }).target);
-        ((cast entry : { var target:WgpuRenderTarget; }).target = cast ((cast createWgpuRenderTarget(({ final __callArgument49:Dynamic = state; __callArgument49; }), (cast requested.width : Float), (cast requested.height : Float), (cast format : String), ({ final __callArgument50:Dynamic = colorSpace; __callArgument50; }), (cast requested.sampleCount : Float)) : WgpuRenderTarget) : WgpuRenderTarget));
+        ((cast entry : { var target:WgpuRenderTarget; }).target = cast ((cast createWgpuRenderTarget(({ final __callArgument49:Dynamic = state; __callArgument49; }), (cast requested.width : Float), (cast requested.height : Float), (cast format : flighthq._internal._Any), ({ final __callArgument50:Dynamic = colorSpace; __callArgument50; }), (cast requested.sampleCount : Float)) : WgpuRenderTarget) : WgpuRenderTarget));
         ((cast entry : { var status:WgpuRenderTextureStatus; }).status = cast ('unrendered' : WgpuRenderTextureStatus));
       } else {
         resizeWgpuRenderTarget(({ final __callArgument51:Dynamic = state; __callArgument51; }), (cast entry : { var target:WgpuRenderTarget; }).target, (cast requested.width : Float), (cast requested.height : Float), (cast requested.sampleCount : Float));
@@ -187,7 +188,7 @@ class WgpuRenderTexture {
     return cast null;
   }
 
-  public static function getWgpuRenderTextureFormat__wgpuRenderTexture(state:WgpuRenderState, format:Null<RenderTargetFormat>):flighthq._internal.dom.GPUTextureFormat {
+  public static function getWgpuRenderTextureFormat__wgpuRenderTexture(state:WgpuRenderState, format:Null<RenderTargetFormat>):GPUTextureFormat {
     if ((cast _Runtime.strictEquals(format, 'rgba16f') : Bool)) { return cast 'rgba16float'; }
     if ((cast _Runtime.strictEquals(format, 'rgba32f') : Bool)) { return cast 'rgba32float'; }
     return cast ((cast _Runtime.strictEquals(format, 'rgba8') : Bool) ? (cast 'rgba8unorm' : Dynamic) : (cast (cast state : WgpuRenderState).format : Dynamic));

@@ -3,7 +3,9 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.GPUBindGroupLayout;
+import flighthq._internal.WebExterns.GPURenderPipeline;
 
 typedef WgpuMatcapDefineKey = { var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasMatcap:Bool; };
 
-typedef WgpuMatcapPipeline = { var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; var skinned:Bool; };
+typedef WgpuMatcapPipeline = { var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:GPUBindGroupLayout; var pipeline:GPURenderPipeline; var skinned:Bool; };

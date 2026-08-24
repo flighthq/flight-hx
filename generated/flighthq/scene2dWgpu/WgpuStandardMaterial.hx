@@ -3,6 +3,7 @@ package flighthq.scene2dWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.GPUShaderModule;
 import flighthq.renderWgpu.WgpuMaterialRegistry.registerWgpuMaterialRenderer;
 import flighthq.scene2dWgpu.WgpuQuadBatchWriter.getWgpuQuadBatchPreludeWGSL;
 import flighthq.types.StandardMaterial.StandardMaterialKind;
@@ -16,18 +17,18 @@ class WgpuStandardMaterial {
   }
 
   @:noCompletion
-  public static final standardWgpuMaterialRenderer:WgpuMaterialRenderer = (cast { instanceFloatCount: 0.0, getShaderModule: function(state:WgpuRenderState):flighthq._internal.dom.GPUShaderModule {
-    var cached:Null<flighthq._internal.dom.GPUShaderModule> = cast _Runtime.UNDEFINED;
-    var module:flighthq._internal.dom.GPUShaderModule = cast _Runtime.UNDEFINED;
-    cached = ((cast WgpuStandardMaterial._modules__wgpuStandardMaterial : flighthq._internal._WeakMap<flighthq._internal.dom.GPUDevice, flighthq._internal.dom.GPUShaderModule>).get((cast state : WgpuRenderState).device));
+  public static final standardWgpuMaterialRenderer:WgpuMaterialRenderer = (cast { instanceFloatCount: 0.0, getShaderModule: function(state:WgpuRenderState):GPUShaderModule {
+    var cached:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var module:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    cached = ((cast WgpuStandardMaterial._modules__wgpuStandardMaterial : flighthq._internal._WeakMap<flighthq._internal._Any, flighthq._internal._Any>).get((cast state : WgpuRenderState).device));
     if ((cast !_Runtime.strictEquals(cached, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cached; }
     module = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createShaderModule', cast ([{ code: ((cast getWgpuQuadBatchPreludeWGSL() : String) + WgpuStandardMaterial.STANDARD_MATERIAL_WGSL__wgpuStandardMaterial) }] : Array<Dynamic>));
-    ((cast WgpuStandardMaterial._modules__wgpuStandardMaterial : flighthq._internal._WeakMap<flighthq._internal.dom.GPUDevice, flighthq._internal.dom.GPUShaderModule>).set((cast state : WgpuRenderState).device, (cast module)));
+    ((cast WgpuStandardMaterial._modules__wgpuStandardMaterial : flighthq._internal._WeakMap<flighthq._internal._Any, flighthq._internal._Any>).set((cast state : WgpuRenderState).device, (cast module)));
     return cast module;
     return cast _Runtime.UNDEFINED;
   } });
 
   public static final STANDARD_MATERIAL_WGSL__wgpuStandardMaterial:String = '\nstruct VertexOut {\n  @builtin(position) position : vec4f,\n  @location(0) uv : vec2f,\n  @location(1) alpha : f32,\n}\n\n@vertex\nfn vs_main(@builtin(vertex_index) vi : u32, @builtin(instance_index) ii : u32) -> VertexOut {\n  let bv = quadBaseVertex(vi, ii);\n  return VertexOut(bv.position, bv.uv, bv.alpha);\n}\n\n@fragment\nfn fs_main(in : VertexOut) -> @location(0) vec4f {\n  var color = textureSample(tex, smp, in.uv);\n  if (color.a <= 0.0) { discard; }\n  if (uni.straightTextureAlpha != 0u) {\n    color = vec4f(color.rgb * color.a, color.a);\n  }\n  return color * clamp(in.alpha, 0.0, 1.0);\n}\n';
 
-  public static final _modules__wgpuStandardMaterial:flighthq._internal._WeakMap<flighthq._internal.dom.GPUDevice, flighthq._internal.dom.GPUShaderModule> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _modules__wgpuStandardMaterial:flighthq._internal._WeakMap<flighthq._internal._Any, flighthq._internal._Any> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

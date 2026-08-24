@@ -3,7 +3,11 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.GPUBindGroupLayout;
+import flighthq._internal.WebExterns.GPUBuffer;
+import flighthq._internal.WebExterns.GPUIndexFormat;
+import flighthq._internal.WebExterns.GPURenderPipeline;
 
-typedef WgpuWireframePipeline = { var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; var skinned:Bool; };
+typedef WgpuWireframePipeline = { var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:GPUBindGroupLayout; var pipeline:GPURenderPipeline; var skinned:Bool; };
 
-typedef WgpuWireframeUpload = { var indexFormat:flighthq._internal.dom.GPUIndexFormat; var lineIndexBuffer:flighthq._internal.dom.GPUBuffer; var version:Float; var vertexBuffer:flighthq._internal.dom.GPUBuffer; };
+typedef WgpuWireframeUpload = { var indexFormat:GPUIndexFormat; var lineIndexBuffer:GPUBuffer; var version:Float; var vertexBuffer:GPUBuffer; };

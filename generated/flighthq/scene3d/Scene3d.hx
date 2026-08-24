@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene3d.Billboard as Facade_Scene3d_flighthq_scene3d_Billboard;
 import flighthq.scene3d.BillboardCamera as Facade_Scene3d_flighthq_scene3d_BillboardCamera;
+import flighthq.scene3d.CloneNode3DSubtree as Facade_Scene3d_flighthq_scene3d_CloneNode3DSubtree;
 import flighthq.scene3d.Mesh as Facade_Scene3d_flighthq_scene3d_Mesh;
 import flighthq.scene3d.PrepareScene3DMorph as Facade_Scene3d_flighthq_scene3d_PrepareScene3DMorph;
 import flighthq.scene3d.Scene as Facade_Scene3d_flighthq_scene3d_Scene;
@@ -56,6 +57,11 @@ class Scene3d {
 
   public static function cloneMesh(source:Mesh):Mesh {
     return cast Facade_Scene3d_flighthq_scene3d_Mesh.cloneMesh(source);
+    return cast null;
+  }
+
+  public static function cloneNode3DSubtree(source:Node3D, ?materialOverride:Null<Null<Material>->Null<Material>>):Node3D {
+    return cast Facade_Scene3d_flighthq_scene3d_CloneNode3DSubtree.cloneNode3DSubtree(source, materialOverride);
     return cast null;
   }
 

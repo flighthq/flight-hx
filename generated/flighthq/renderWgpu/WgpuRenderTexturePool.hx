@@ -130,7 +130,7 @@ class WgpuRenderTexturePool {
 
   public static function assertPoolDevice__wgpuRenderTexturePool(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool):Void {
     if ((cast _Runtime.strictEquals(pool.device, null) : Bool)) {
-      (pool.device = cast ((cast state : WgpuRenderState).device : Null<flighthq._internal.dom.GPUDevice>));
+      (pool.device = cast ((cast state : WgpuRenderState).device : flighthq._internal._Any));
     } else { if ((cast !_Runtime.strictEquals(pool.device, (cast state : WgpuRenderState).device) : Bool)) {
       _Runtime.throwValue(_Runtime.error('WgpuRenderTexturePool cannot cross GPU devices'));
     } }

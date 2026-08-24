@@ -3,6 +3,7 @@ package flighthq.cameraControls;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.cameraControls.CameraShake as Facade_CameraControls_flighthq_cameraControls_CameraShake;
 import flighthq.cameraControls.FlyCameraController as Facade_CameraControls_flighthq_cameraControls_FlyCameraController;
 import flighthq.cameraControls.Follow as Facade_CameraControls_flighthq_cameraControls_Follow;
 import flighthq.cameraControls.Framing as Facade_CameraControls_flighthq_cameraControls_Framing;
@@ -14,12 +15,19 @@ import flighthq.types.Camera3D;
 import flighthq.types.Camera3D.OrthographicProjection;
 import flighthq.types.Camera3D.PerspectiveProjection;
 import flighthq.types.Camera3D.Projection;
+import flighthq.types.CameraShake;
+import flighthq.types.CameraShake.CameraShakeOffset;
+import flighthq.types.CameraShake.CameraShakeOptions;
 import flighthq.types.FlyCameraController;
 import flighthq.types.FlyCameraController.FlyCameraControllerOptions;
 import flighthq.types.OrbitCameraController;
 import flighthq.types.OrbitCameraController.OrbitCameraControllerOptions;
 
 class CameraControls {
+  public static function addCameraShakeTrauma(shake:CameraShake, amount:Float):Void {
+    Facade_CameraControls_flighthq_cameraControls_CameraShake.addCameraShakeTrauma(shake, amount);
+  }
+
   public static function cloneFlyCameraController(source:FlyCameraController):FlyCameraController {
     return cast Facade_CameraControls_flighthq_cameraControls_FlyCameraController.cloneFlyCameraController(source);
     return cast null;
@@ -36,6 +44,16 @@ class CameraControls {
 
   public static function copyOrbitCameraController(out:OrbitCameraController, source:OrbitCameraController):Void {
     Facade_CameraControls_flighthq_cameraControls_OrbitCameraController.copyOrbitCameraController(out, source);
+  }
+
+  public static function createCameraShake(?options:CameraShakeOptions):CameraShake {
+    return cast Facade_CameraControls_flighthq_cameraControls_CameraShake.createCameraShake(options);
+    return cast null;
+  }
+
+  public static function createCameraShakeOffset():CameraShakeOffset {
+    return cast Facade_CameraControls_flighthq_cameraControls_CameraShake.createCameraShakeOffset();
+    return cast null;
   }
 
   public static function createFlyCameraController(?options:FlyCameraControllerOptions):FlyCameraController {
@@ -78,6 +96,10 @@ class CameraControls {
     Facade_CameraControls_flighthq_cameraControls_OrbitCameraController.panOrbitCameraControllerInViewPlane(controller, deltaRight, deltaUp);
   }
 
+  public static function resetCameraShake(shake:CameraShake):Void {
+    Facade_CameraControls_flighthq_cameraControls_CameraShake.resetCameraShake(shake);
+  }
+
   public static function resetFlyCameraController(controller:FlyCameraController, ?options:FlyCameraControllerOptions):Void {
     Facade_CameraControls_flighthq_cameraControls_FlyCameraController.resetFlyCameraController(controller, options);
   }
@@ -104,6 +126,10 @@ class CameraControls {
 
   public static function updateCamera2DFollow(camera:Camera2D, targetX:Float, targetY:Float, deltaTime:Float, ?options:Camera2DFollowOptions):Void {
     Facade_CameraControls_flighthq_cameraControls_Follow.updateCamera2DFollow(camera, targetX, targetY, deltaTime, options);
+  }
+
+  public static function updateCameraShake(shake:CameraShake, dt:Float, out:CameraShakeOffset):Void {
+    Facade_CameraControls_flighthq_cameraControls_CameraShake.updateCameraShake(shake, dt, out);
   }
 
   public static function updateFlyCameraController(controller:FlyCameraController, camera:Camera3D, deltaTime:Float):Void {

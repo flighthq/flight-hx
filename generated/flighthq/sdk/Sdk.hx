@@ -3,6 +3,10 @@ package flighthq.sdk;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.GPUBindGroup;
+import flighthq._internal.WebExterns.GPUBindGroupLayout;
+import flighthq._internal.WebExterns.GPUTexture;
+import flighthq._internal.WebExterns.GPUTextureFormat;
 import flighthq.abc.AbcFile as Facade_Sdk_flighthq_abc_AbcFile;
 import flighthq.abc.AbcInstruction as Facade_Sdk_flighthq_abc_AbcInstruction;
 import flighthq.accessibility.Accessibility as Facade_Sdk_flighthq_accessibility_Accessibility;
@@ -118,6 +122,7 @@ import flighthq.camera.ShadowCamera as Facade_Sdk_flighthq_camera_ShadowCamera;
 import flighthq.camera.ViewMatrix as Facade_Sdk_flighthq_camera_ViewMatrix;
 import flighthq.camera.VisibleBounds as Facade_Sdk_flighthq_camera_VisibleBounds;
 import flighthq.camera.Zoom as Facade_Sdk_flighthq_camera_Zoom;
+import flighthq.cameraControls.CameraShake as Facade_Sdk_flighthq_cameraControls_CameraShake;
 import flighthq.cameraControls.FlyCameraController as Facade_Sdk_flighthq_cameraControls_FlyCameraController;
 import flighthq.cameraControls.Follow as Facade_Sdk_flighthq_cameraControls_Follow;
 import flighthq.cameraControls.Framing as Facade_Sdk_flighthq_cameraControls_Framing;
@@ -450,7 +455,6 @@ import flighthq.imageCodec.RegisterWebImageEncoders as Facade_Sdk_flighthq_image
 import flighthq.importdiagnostics.ImportDiagnosticCollector as Facade_Sdk_flighthq_importdiagnostics_ImportDiagnosticCollector;
 import flighthq.importdiagnostics.ImportDiagnosticText as Facade_Sdk_flighthq_importdiagnostics_ImportDiagnosticText;
 import flighthq.input.InputManager as Facade_Sdk_flighthq_input_InputManager;
-import flighthq.interaction.CursorBackend as Facade_Sdk_flighthq_interaction_CursorBackend;
 import flighthq.interaction.DisplayObjectOverlap as Facade_Sdk_flighthq_interaction_DisplayObjectOverlap;
 import flighthq.interaction.EnableInteractionGuards as Facade_Sdk_flighthq_interaction_EnableInteractionGuards;
 import flighthq.interaction.FocusManager as Facade_Sdk_flighthq_interaction_FocusManager;
@@ -644,11 +648,17 @@ import flighthq.physics2d.JointRegistry as Facade_Sdk_flighthq_physics2d_JointRe
 import flighthq.physics2d.Joints as Facade_Sdk_flighthq_physics2d_Joints;
 import flighthq.physics2d.MassProperties as Facade_Sdk_flighthq_physics2d_MassProperties;
 import flighthq.physics2d.Material as Facade_Sdk_flighthq_physics2d_Material;
+import flighthq.physics2d.NodeSync as Facade_Sdk_flighthq_physics2d_NodeSync;
 import flighthq.physics2d.RegisterBuiltInPhysics2DJointSolvers as Facade_Sdk_flighthq_physics2d_RegisterBuiltInPhysics2DJointSolvers;
 import flighthq.physics2d.Solver as Facade_Sdk_flighthq_physics2d_Solver;
 import flighthq.physics2d.Step as Facade_Sdk_flighthq_physics2d_Step;
 import flighthq.physics2d.World as Facade_Sdk_flighthq_physics2d_World;
 import flighthq.physics2d.WorldQueries as Facade_Sdk_flighthq_physics2d_WorldQueries;
+import flighthq.physics2dAbi.Physics2DAbi as Facade_Sdk_flighthq_physics2dAbi_Physics2DAbi;
+import flighthq.physics2dAbi.Physics2DAbiBuffer as Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiBuffer;
+import flighthq.physics2dAbi.Physics2DAbiCommand as Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiCommand;
+import flighthq.physics2dAbi.Physics2DAbiLayout as Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout;
+import flighthq.physics2dAbi.Physics2DAbiQuery as Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiQuery;
 import flighthq.physics3d.Contacts as Facade_Sdk_flighthq_physics3d_Contacts;
 import flighthq.physics3d.Continuous as Facade_Sdk_flighthq_physics3d_Continuous;
 import flighthq.physics3d.DebugGeometry as Facade_Sdk_flighthq_physics3d_DebugGeometry;
@@ -665,6 +675,7 @@ import flighthq.physics3d.JointRegistry as Facade_Sdk_flighthq_physics3d_JointRe
 import flighthq.physics3d.Joints as Facade_Sdk_flighthq_physics3d_Joints;
 import flighthq.physics3d.MassProperties as Facade_Sdk_flighthq_physics3d_MassProperties;
 import flighthq.physics3d.Material as Facade_Sdk_flighthq_physics3d_Material;
+import flighthq.physics3d.NodeSync as Facade_Sdk_flighthq_physics3d_NodeSync;
 import flighthq.physics3d.RegisterBuiltInPhysics3DJointSolvers as Facade_Sdk_flighthq_physics3d_RegisterBuiltInPhysics3DJointSolvers;
 import flighthq.physics3d.Step as Facade_Sdk_flighthq_physics3d_Step;
 import flighthq.physics3d.World as Facade_Sdk_flighthq_physics3d_World;
@@ -703,6 +714,7 @@ import flighthq.renderGl.GlCompressedTexture as Facade_Sdk_flighthq_renderGl_GlC
 import flighthq.renderGl.GlDraw as Facade_Sdk_flighthq_renderGl_GlDraw;
 import flighthq.renderGl.GlElement as Facade_Sdk_flighthq_renderGl_GlElement;
 import flighthq.renderGl.GlExternalTexture as Facade_Sdk_flighthq_renderGl_GlExternalTexture;
+import flighthq.renderGl.GlPresentRenderTarget as Facade_Sdk_flighthq_renderGl_GlPresentRenderTarget;
 import flighthq.renderGl.GlRenderPass as Facade_Sdk_flighthq_renderGl_GlRenderPass;
 import flighthq.renderGl.GlRenderState as Facade_Sdk_flighthq_renderGl_GlRenderState;
 import flighthq.renderGl.GlRenderTarget as Facade_Sdk_flighthq_renderGl_GlRenderTarget;
@@ -836,6 +848,7 @@ import flighthq.scene2dWgpu.WgpuTilemap as Facade_Sdk_flighthq_scene2dWgpu_WgpuT
 import flighthq.scene2dWgpu.WgpuVelocity as Facade_Sdk_flighthq_scene2dWgpu_WgpuVelocity;
 import flighthq.scene3d.Billboard as Facade_Sdk_flighthq_scene3d_Billboard;
 import flighthq.scene3d.BillboardCamera as Facade_Sdk_flighthq_scene3d_BillboardCamera;
+import flighthq.scene3d.CloneNode3DSubtree as Facade_Sdk_flighthq_scene3d_CloneNode3DSubtree;
 import flighthq.scene3d.Mesh as Facade_Sdk_flighthq_scene3d_Mesh;
 import flighthq.scene3d.PrepareScene3DMorph as Facade_Sdk_flighthq_scene3d_PrepareScene3DMorph;
 import flighthq.scene3d.Scene as Facade_Sdk_flighthq_scene3d_Scene;
@@ -1009,6 +1022,8 @@ import flighthq.skeleton2d.TransformConstraint2D as Facade_Sdk_flighthq_skeleton
 import flighthq.skeleton2dFormats.DragonBonesParse as Facade_Sdk_flighthq_skeleton2dFormats_DragonBonesParse;
 import flighthq.skeleton2dFormats.SkeletonDetect as Facade_Sdk_flighthq_skeleton2dFormats_SkeletonDetect;
 import flighthq.skeleton2dFormats.SpineBinaryParse as Facade_Sdk_flighthq_skeleton2dFormats_SpineBinaryParse;
+import flighthq.skeleton2dFormats.SpineBinaryVersion as Facade_Sdk_flighthq_skeleton2dFormats_SpineBinaryVersion;
+import flighthq.skeleton2dFormats.SpineBinaryVersioned as Facade_Sdk_flighthq_skeleton2dFormats_SpineBinaryVersioned;
 import flighthq.skeleton2dFormats.SpineParse as Facade_Sdk_flighthq_skeleton2dFormats_SpineParse;
 import flighthq.skeleton3d.GetMeshSkinBounds as Facade_Sdk_flighthq_skeleton3d_GetMeshSkinBounds;
 import flighthq.skeleton3d.PrepareScene3DSkinning as Facade_Sdk_flighthq_skeleton3d_PrepareScene3DSkinning;
@@ -1227,6 +1242,7 @@ import flighthq.types.AudioResourceReference.AudioResourceReferenceResolutionExp
 import flighthq.types.AudioResourceReference.EmbeddedAudioResourceReference;
 import flighthq.types.AudioResourceReference.ExternalAudioResourceReference;
 import flighthq.types.AutoExposureEffect;
+import flighthq.types.BackendExplanation;
 import flighthq.types.BarrelDistortionEffect;
 import flighthq.types.BatchBarrier as Facade_Sdk_flighthq_types_BatchBarrier_BatchBarrier;
 import flighthq.types.BatchFormat as Facade_Sdk_flighthq_types_BatchFormat_BatchFormat;
@@ -1290,6 +1306,9 @@ import flighthq.types.Camera3D.PerspectiveProjection;
 import flighthq.types.Camera3D.Projection;
 import flighthq.types.Camera3DOptions;
 import flighthq.types.CameraMotionBlurEffect;
+import flighthq.types.CameraShake;
+import flighthq.types.CameraShake.CameraShakeOffset;
+import flighthq.types.CameraShake.CameraShakeOptions;
 import flighthq.types.CanvasRenderEffectPipeline;
 import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
@@ -1383,7 +1402,6 @@ import flighthq.types.CreateTextureOptions.CreateTexture2DOptions;
 import flighthq.types.CrtEffect;
 import flighthq.types.CubeTexture;
 import flighthq.types.Cursor;
-import flighthq.types.Cursor.CursorBackend;
 import flighthq.types.CustomShaderEffect;
 import flighthq.types.CustomShaderMaterial;
 import flighthq.types.Debug.DebugOptions;
@@ -1789,6 +1807,19 @@ import flighthq.types.Physics2D.Physics2DWheelJoint;
 import flighthq.types.Physics2D.Physics2DWheelJointOptions;
 import flighthq.types.Physics2D.Physics2DWorld;
 import flighthq.types.Physics2D.RigidBody2D;
+import flighthq.types.Physics2DAbi;
+import flighthq.types.Physics2DAbi.Physics2DAbiBodyBuffer;
+import flighthq.types.Physics2DAbi.Physics2DAbiCommandBuffer;
+import flighthq.types.Physics2DAbi.Physics2DAbiContactBuffer;
+import flighthq.types.Physics2DAbi.Physics2DAbiContactHooks;
+import flighthq.types.Physics2DAbi.Physics2DAbiContactSelection;
+import flighthq.types.Physics2DAbi.Physics2DAbiExecutionResult;
+import flighthq.types.Physics2DAbi.Physics2DAbiJointBuffer;
+import flighthq.types.Physics2DAbi.Physics2DAbiObjectId;
+import flighthq.types.Physics2DAbi.Physics2DAbiQueryBuffer;
+import flighthq.types.Physics2DAbi.Physics2DAbiStepStatus;
+import flighthq.types.Physics2DAbi.Physics2DAbiWorldHandle;
+import flighthq.types.Physics2DAbi.Physics2DAbiWorldStatus;
 import flighthq.types.Physics3D.Physics3DBallAndSocketJoint;
 import flighthq.types.Physics3D.Physics3DBallAndSocketJointOptions;
 import flighthq.types.Physics3D.Physics3DBodyType;
@@ -2067,6 +2098,8 @@ import flighthq.types.SpatialIndexing.SpatialIndexingGuard;
 import flighthq.types.SpatialIndexing.SpatialIndexingNotice;
 import flighthq.types.SpecularGlossinessPbrMaterial;
 import flighthq.types.SpecularPbrExtension;
+import flighthq.types.SpineBinaryVersion.SpineBinaryParser;
+import flighthq.types.SpineBinaryVersion.SpineBinaryVersionFailure;
 import flighthq.types.SpineParticleSchema.SpineAlphaKeyframe;
 import flighthq.types.SpineParticleSchema.SpineBlendMode;
 import flighthq.types.SpineParticleSchema.SpineParsed;
@@ -2596,6 +2629,10 @@ class Sdk {
 
   public static function addAudioBusToMixer(mixer:AudioMixer, bus:AudioBus):Void {
     Facade_Sdk_flighthq_media_AudioMixer.addAudioBusToMixer(mixer, bus);
+  }
+
+  public static function addCameraShakeTrauma(shake:CameraShake, amount:Float):Void {
+    Facade_Sdk_flighthq_cameraControls_CameraShake.addCameraShakeTrauma(shake, amount);
   }
 
   public static function addClockChild(parent:Clock, child:Clock):Void {
@@ -3944,6 +3981,10 @@ class Sdk {
     Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.clearParticleEmitter3D(target);
   }
 
+  public static function clearPhysics2DAbiCommandBuffer(out:Physics2DAbiCommandBuffer):Void {
+    Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiBuffer.clearPhysics2DAbiCommandBuffer(out);
+  }
+
   public static function clearPhysics3DAbiCommandBuffer(out:Physics3DAbiCommandBuffer):Void {
     Facade_Sdk_flighthq_physics3dAbi_Physics3DAbiBuffer.clearPhysics3DAbiCommandBuffer(out);
   }
@@ -4207,6 +4248,11 @@ class Sdk {
 
   public static function cloneMeshGeometryMetadata(source:MeshGeometry):MeshGeometry {
     return cast Facade_Sdk_flighthq_mesh_MeshGeometry.cloneMeshGeometryMetadata(source);
+    return cast null;
+  }
+
+  public static function cloneNode3DSubtree(source:Node3D, ?materialOverride:Null<Null<Material>->Null<Material>>):Node3D {
+    return cast Facade_Sdk_flighthq_scene3d_CloneNode3DSubtree.cloneNode3DSubtree(source, materialOverride);
     return cast null;
   }
 
@@ -5662,6 +5708,16 @@ class Sdk {
     return cast null;
   }
 
+  public static function createCameraShake(?options:CameraShakeOptions):CameraShake {
+    return cast Facade_Sdk_flighthq_cameraControls_CameraShake.createCameraShake(options);
+    return cast null;
+  }
+
+  public static function createCameraShakeOffset():CameraShakeOffset {
+    return cast Facade_Sdk_flighthq_cameraControls_CameraShake.createCameraShakeOffset();
+    return cast null;
+  }
+
   public static function createCanvasCacheState(screenState:CanvasRenderState):CanvasRenderState {
     return cast Facade_Sdk_flighthq_scene2dCanvas_CanvasCache.createCanvasCacheState(screenState);
     return cast null;
@@ -6092,7 +6148,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createExternalWgpuTexture(state:WgpuRenderState, handle:flighthq._internal.dom.GPUTexture, options:CreateExternalTextureOptions):Texture {
+  public static function createExternalWgpuTexture(state:WgpuRenderState, handle:GPUTexture, options:CreateExternalTextureOptions):Texture {
     return cast Facade_Sdk_flighthq_renderWgpu_WgpuExternalTexture.createExternalWgpuTexture(state, handle, options);
     return cast null;
   }
@@ -6719,6 +6775,46 @@ class Sdk {
 
   public static function createPhongMaterial(?opts:{ @:optional var diffuse:Null<Float>; @:optional var diffuseMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var shininess:Null<Float>; @:optional var specular:Null<Float>; @:optional var specularMap:Null<Texture>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var kind:Null<Kind>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):PhongMaterial {
     return cast Facade_Sdk_flighthq_materials_ClassicMaterials.createPhongMaterial(opts);
+    return cast null;
+  }
+
+  public static function createPhysics2DAbi():Physics2DAbi {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbi.createPhysics2DAbi();
+    return cast null;
+  }
+
+  public static function createPhysics2DAbiBodyBuffer(capacity:Float):Physics2DAbiBodyBuffer {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiBuffer.createPhysics2DAbiBodyBuffer(capacity);
+    return cast null;
+  }
+
+  public static function createPhysics2DAbiCommandBuffer(?byteCapacity:Float):Physics2DAbiCommandBuffer {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiBuffer.createPhysics2DAbiCommandBuffer(byteCapacity);
+    return cast null;
+  }
+
+  public static function createPhysics2DAbiContactBuffer(contactCapacity:Float, pointCapacity:Float):Physics2DAbiContactBuffer {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiBuffer.createPhysics2DAbiContactBuffer(contactCapacity, pointCapacity);
+    return cast null;
+  }
+
+  public static function createPhysics2DAbiExecutionResult():Physics2DAbiExecutionResult {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiBuffer.createPhysics2DAbiExecutionResult();
+    return cast null;
+  }
+
+  public static function createPhysics2DAbiJointBuffer(capacity:Float):Physics2DAbiJointBuffer {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiBuffer.createPhysics2DAbiJointBuffer(capacity);
+    return cast null;
+  }
+
+  public static function createPhysics2DAbiQueryBuffer(capacity:Float):Physics2DAbiQueryBuffer {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiBuffer.createPhysics2DAbiQueryBuffer(capacity);
+    return cast null;
+  }
+
+  public static function createPhysics2DAbiWorld(abi:Physics2DAbi):Physics2DAbiWorldHandle {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbi.createPhysics2DAbiWorld(abi);
     return cast null;
   }
 
@@ -7868,16 +7964,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWebCursorBackend(element:flighthq._internal.dom.HTMLElement):CursorBackend {
-    return cast Facade_Sdk_flighthq_interaction_CursorBackend.createWebCursorBackend(element);
-    return cast null;
-  }
-
-  public static function createWebGlyphRasterizerBackend():GlyphRasterizerBackend {
-    return cast Facade_Sdk_flighthq_glyphatlas_GlyphRasterizerBackend.createWebGlyphRasterizerBackend();
-    return cast null;
-  }
-
   public static function createWgpuCacheState(screenState:WgpuRenderState):WgpuRenderState {
     return cast Facade_Sdk_flighthq_scene2dWgpu_WgpuCache.createWgpuCacheState(screenState);
     return cast null;
@@ -7903,7 +7989,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWgpuRenderTarget(state:WgpuRenderState, width:Float, height:Float, ?format:flighthq._internal.dom.GPUTextureFormat, ?colorSpace:RenderTargetColorSpace, ?sampleCount:Float):WgpuRenderTarget {
+  public static function createWgpuRenderTarget(state:WgpuRenderState, width:Float, height:Float, ?format:GPUTextureFormat, ?colorSpace:RenderTargetColorSpace, ?sampleCount:Float):WgpuRenderTarget {
     return cast Facade_Sdk_flighthq_renderWgpu_WgpuRenderTarget.createWgpuRenderTarget(state, width, height, format, colorSpace, sampleCount);
     return cast null;
   }
@@ -8448,6 +8534,10 @@ class Sdk {
     Facade_Sdk_flighthq_renderGl_GlRenderState.destroyGlRenderState(state);
   }
 
+  public static function destroyGlRenderTarget(state:GlRenderState, target:GlRenderTarget):Void {
+    Facade_Sdk_flighthq_renderGl_GlRenderTarget.destroyGlRenderTarget(state, target);
+  }
+
   public static function destroyGlRenderTexture(state:GlRenderState, renderTexture:RenderTexture):Void {
     Facade_Sdk_flighthq_renderGl_GlRenderTexture.destroyGlRenderTexture(state, renderTexture);
   }
@@ -8462,6 +8552,11 @@ class Sdk {
 
   public static function destroyMeshGeometryWgpuData(geometry:MeshGeometry):Void {
     Facade_Sdk_flighthq_mesh_MeshGeometry.destroyMeshGeometryWgpuData(geometry);
+  }
+
+  public static function destroyPhysics2DAbiWorld(abi:Physics2DAbi, world:Physics2DAbiWorldHandle):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbi.destroyPhysics2DAbiWorld(abi, world);
+    return cast null;
   }
 
   public static function destroyPhysics3DAbiWorld(abi:Physics3DAbi, world:Physics3DAbiWorldHandle):Bool {
@@ -9784,7 +9879,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function ensureWgpuShadowSampleLayout(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroupLayout {
+  public static function ensureWgpuShadowSampleLayout(state:WgpuRenderState):GPUBindGroupLayout {
     return cast Facade_Sdk_flighthq_scene3dWgpu_WgpuMeshPipeline.ensureWgpuShadowSampleLayout(state);
     return cast null;
   }
@@ -9930,6 +10025,11 @@ class Sdk {
     Facade_Sdk_flighthq_physics3d_JointBreakage.evaluatePhysics3DJointBreakage(world, dt);
   }
 
+  public static function executePhysics2DAbiCommands(abi:Physics2DAbi, world:Physics2DAbiWorldHandle, commands:Physics2DAbiCommandBuffer, out:Physics2DAbiExecutionResult):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbi.executePhysics2DAbiCommands(abi, world, commands, out);
+    return cast null;
+  }
+
   public static function executePhysics3DAbiCommands(abi:Physics3DAbi, world:Physics3DAbiWorldHandle, commands:Physics3DAbiCommandBuffer, out:Physics3DAbiExecutionResult):Bool {
     return cast Facade_Sdk_flighthq_physics3dAbi_Physics3DAbi.executePhysics3DAbiCommands(abi, world, commands, out);
     return cast null;
@@ -10054,6 +10154,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function explainGlyphRasterizerBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_glyphatlas_GlyphRasterizerBackend.explainGlyphRasterizerBackend();
+    return cast null;
+  }
+
   public static function explainImageDecodeFailure(bytes:flighthq._internal._UInt8Array, ?mimeType:String):Null<ImageDecodeFailureExplanation> {
     return cast Facade_Sdk_flighthq_imageCodec_ExplainImageDecodeFailure.explainImageDecodeFailure(bytes, mimeType);
     return cast null;
@@ -10170,6 +10275,11 @@ class Sdk {
 
   public static function explainSpatialIndexing3D(index:SpatialIndex3D, id:SpatialObjectId):SpatialIndexingExplanation {
     return cast Facade_Sdk_flighthq_spatial_ExplainSpatialIndexing3D.explainSpatialIndexing3D(index, id);
+    return cast null;
+  }
+
+  public static function explainSpineBinaryVersionFailure(bytes:flighthq._internal._UInt8Array):SpineBinaryVersionFailure {
+    return cast Facade_Sdk_flighthq_skeleton2dFormats_SpineBinaryVersion.explainSpineBinaryVersionFailure(bytes);
     return cast null;
   }
 
@@ -11517,6 +11627,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function getGlyphRasterizerBackend():GlyphRasterizerBackend {
+    return cast Facade_Sdk_flighthq_glyphatlas_GlyphRasterizerBackend.getGlyphRasterizerBackend();
+    return cast null;
+  }
+
   public static function getGradientBevelEffectPadding(effect:GradientBevelEffect):RenderEffectPadding {
     return cast Facade_Sdk_flighthq_effects_GradientBevelEffect.getGradientBevelEffectPadding(effect);
     return cast null;
@@ -12270,6 +12385,21 @@ class Sdk {
     return cast null;
   }
 
+  public static function getPhysics2DAbiCommandBufferRemainingByteLength(buffer:Physics2DAbiCommandBuffer):Float {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiBuffer.getPhysics2DAbiCommandBufferRemainingByteLength(buffer);
+    return cast null;
+  }
+
+  public static function getPhysics2DAbiSetColliderCommandByteLength(collider:Physics2DCollider):Float {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiCommand.getPhysics2DAbiSetColliderCommandByteLength(collider);
+    return cast null;
+  }
+
+  public static function getPhysics2DAbiWorldStatus(abi:Physics2DAbi, world:Physics2DAbiWorldHandle):Physics2DAbiWorldStatus {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbi.getPhysics2DAbiWorldStatus(abi, world);
+    return cast null;
+  }
+
   public static function getPhysics2DJointSolver(world:Physics2DWorld, kind:Physics2DJointKind):Null<Physics2DJointSolver> {
     return cast Facade_Sdk_flighthq_physics2d_JointRegistry.getPhysics2DJointSolver(world, kind);
     return cast null;
@@ -12939,6 +13069,11 @@ class Sdk {
 
   public static function getSoftKeyboardResizeMode():SoftKeyboardResizeMode {
     return cast Facade_Sdk_flighthq_keyboard_Keyboard.getSoftKeyboardResizeMode();
+    return cast null;
+  }
+
+  public static function getSpineBinaryVersion(bytes:flighthq._internal._UInt8Array):Null<String> {
+    return cast Facade_Sdk_flighthq_skeleton2dFormats_SpineBinaryVersion.getSpineBinaryVersion(bytes);
     return cast null;
   }
 
@@ -16134,6 +16269,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function parseSpineSkeletonBinaryVersioned(bytes:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<Skeleton2DImport> {
+    return cast Facade_Sdk_flighthq_skeleton2dFormats_SpineBinaryVersioned.parseSpineSkeletonBinaryVersioned(bytes, diagnostics);
+    return cast null;
+  }
+
   public static function parseSpritesheet(text:String, ?formatKind:SpritesheetFormatKind, ?options:SpritesheetParseOptions):Null<SpritesheetData> {
     return cast Facade_Sdk_flighthq_spritesheetFormats_SpritesheetDetect.parseSpritesheet(text, formatKind, options);
     return cast null;
@@ -16387,6 +16527,82 @@ class Sdk {
 
   public static final PhongMaterialKind:String = Facade_Sdk_flighthq_types__internal__PhongMaterialValues.PhongMaterialKind;
 
+  public static final Physics2DAbiBodyFlag:{ var TypeMask:Float; var FixedRotation:Float; var Bullet:Float; var Sleeping:Float; var SleepEnabled:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiBodyFlag;
+
+  public static final Physics2DAbiBodyType:{ var Dynamic:Float; var Kinematic:Float; var Static:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiBodyType;
+
+  public static final Physics2DAbiBodyValue:{ var X:Float; var Y:Float; var Angle:Float; var VelocityX:Float; var VelocityY:Float; var AngularVelocity:Float; var ForceX:Float; var ForceY:Float; var Torque:Float; var Mass:Float; var Inertia:Float; var CenterX:Float; var CenterY:Float; var LinearDamping:Float; var AngularDamping:Float; var GravityScale:Float; var SleepTimer:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiBodyValue;
+
+  public static final Physics2DAbiBodyValueStride:Float = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiBodyValueStride;
+
+  public static final Physics2DAbiCapability:{ var ContactHooks:Float; var PersistentWorlds:Float; var Queries:Float; var SelectiveReadback:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiCapability;
+
+  public static final Physics2DAbiCommandByteLength:{ var SetGravity:Float; var SetSolverConfig:Float; var SetBody:Float; var DestroyBody:Float; var SetColliderMinimum:Float; var DestroyCollider:Float; var SetJoint:Float; var DestroyJoint:Float; var BodyAction:Float; var WakeBody:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiCommandByteLength;
+
+  public static final Physics2DAbiCommandHeaderByteLength:Float = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiCommandHeaderByteLength;
+
+  public static final Physics2DAbiCommandHeaderOffset:{ var Magic:Float; var Version:Float; var ByteLength:Float; var CommandCount:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiCommandHeaderOffset;
+
+  public static final Physics2DAbiCommandKind:{ var SetGravity:Float; var SetSolverConfig:Float; var SetBody:Float; var DestroyBody:Float; var SetCollider:Float; var DestroyCollider:Float; var SetJoint:Float; var DestroyJoint:Float; var ApplyForce:Float; var ApplyForceAtPoint:Float; var ApplyLinearImpulse:Float; var ApplyLinearImpulseAtPoint:Float; var ApplyTorque:Float; var WakeBody:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiCommandKind;
+
+  public static final Physics2DAbiCommandMagic:Float = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiCommandMagic;
+
+  public static final Physics2DAbiCommandRecordHeaderByteLength:Float = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiCommandRecordHeaderByteLength;
+
+  public static final Physics2DAbiCommandRecordOffset:{ var Kind:Float; var ByteLength:Float; var ObjectId:Float; var RelatedId:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiCommandRecordOffset;
+
+  public static final Physics2DAbiContactFlag:{ var Enabled:Float; var Sensor:Float; var Touching:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiContactFlag;
+
+  public static final Physics2DAbiContactId:{ var BodyA:Float; var BodyB:Float; var ColliderA:Float; var ColliderB:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiContactId;
+
+  public static final Physics2DAbiContactIdStride:Float = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiContactIdStride;
+
+  public static final Physics2DAbiContactPointValue:{ var X:Float; var Y:Float; var Depth:Float; var RelativeAX:Float; var RelativeAY:Float; var RelativeBX:Float; var RelativeBY:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiContactPointValue;
+
+  public static final Physics2DAbiContactPointValueStride:Float = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiContactPointValueStride;
+
+  public static final Physics2DAbiContactValue:{ var NormalX:Float; var NormalY:Float; var Friction:Float; var Restitution:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiContactValue;
+
+  public static final Physics2DAbiContactValueStride:Float = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiContactValueStride;
+
+  public static final Physics2DAbiJointCommonValue:{ var LocalAnchorAX:Float; var LocalAnchorAY:Float; var LocalAnchorBX:Float; var LocalAnchorBY:Float; var BreakForce:Float; var BreakTorque:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiJointCommonValue;
+
+  public static final Physics2DAbiJointFlag:{ var CollideConnected:Float; var Broken:Float; var EnableMotor:Float; var EnableLimit:Float; var EnableLimitSpring:Float; var LinearCoordinateA:Float; var LinearCoordinateB:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiJointFlag;
+
+  public static final Physics2DAbiJointKind:{ var Distance:Float; var Revolute:Float; var Prismatic:Float; var Weld:Float; var Wheel:Float; var Rope:Float; var Mouse:Float; var Pulley:Float; var Gear:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiJointKind;
+
+  public static final Physics2DAbiJointKindValueCount:Float = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiJointKindValueCount;
+
+  public static final Physics2DAbiJointValue:{ var ForceX:Float; var ForceY:Float; var Torque:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiJointValue;
+
+  public static final Physics2DAbiJointValueStride:Float = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiJointValueStride;
+
+  public static final Physics2DAbiMaxContactPoints:Float = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiMaxContactPoints;
+
+  public static final Physics2DAbiQueryValue:{ var Fraction:Float; var X:Float; var Y:Float; var NormalX:Float; var NormalY:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiQueryValue;
+
+  public static final Physics2DAbiQueryValueStride:Float = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiQueryValueStride;
+
+  public static final Physics2DAbiSetBodyPayloadOffset:{ var Flags:Float; var Reserved:Float; var Values:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiSetBodyPayloadOffset;
+
+  public static final Physics2DAbiSetColliderPayloadOffset:{ var Flags:Float; var CategoryBits:Float; var MaskBits:Float; var GroupIndex:Float; var Density:Float; var Friction:Float; var Restitution:Float; var Shape:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiSetColliderPayloadOffset;
+
+  public static final Physics2DAbiSetJointPayloadOffset:{ var Kind:Float; var BodyA:Float; var BodyB:Float; var Flags:Float; var CommonValues:Float; var KindValues:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiSetJointPayloadOffset;
+
+  public static final Physics2DAbiSetSolverConfigPayloadOffset:{ var Flags:Float; var Reserved0:Float; var MaxCcdSubsteps:Float; var MaxCcdRotationSubsteps:Float; var VelocityIterations:Float; var PositionIterations:Float; var Reserved1:Float; var Reserved2:Float; var Values:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiSetSolverConfigPayloadOffset;
+
+  public static final Physics2DAbiShapeHeaderByteLength:Float = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiShapeHeaderByteLength;
+
+  public static final Physics2DAbiShapeHeaderOffset:{ var Kind:Float; var ScalarCount:Float; var IntegerCount:Float; var Version:Float; var Scalars:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiShapeHeaderOffset;
+
+  public static final Physics2DAbiShapeKind:{ var Circle:Float; var Aabb:Float; var Obb:Float; var Capsule:Float; var Polygon:Float; var Segment:Float; var Point:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiShapeKind;
+
+  public static final Physics2DAbiSolverConfigFlag:{ var AllowSleeping:Float; var ContinuousCollision:Float; var WarmStarting:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiSolverConfigFlag;
+
+  public static final Physics2DAbiSolverConfigValue:{ var SleepLinearThreshold:Float; var SleepAngularThreshold:Float; var TimeToSleep:Float; var PenetrationSlop:Float; var PositionCorrection:Float; var RestitutionThreshold:Float; } = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiSolverConfigValue;
+
+  public static final Physics2DAbiVersion:Float = Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiLayout.Physics2DAbiVersion;
+
   public static final Physics2DDistanceJointKind:String = Facade_Sdk_flighthq_physics2d_Joints.Physics2DDistanceJointKind;
 
   public static final physics2DDistanceJointSolver:{ var warmStart:Physics2DWorld->Physics2DJoint->Void; var clearAccumulatedImpulses:Physics2DJoint->Void; var prepare:Physics2DWorld->Physics2DJoint->Float->Void; var solve:Physics2DWorld->Physics2DJoint->Void; var writeReaction:Physics2DWorld->Physics2DJoint->Float->Physics2DJointReaction->Bool; } = Facade_Sdk_flighthq_physics2d_Joints.physics2DDistanceJointSolver;
@@ -16470,6 +16686,8 @@ class Sdk {
   public static final Physics3DAbiJointValue:{ var ForceX:Float; var ForceY:Float; var ForceZ:Float; var TorqueX:Float; var TorqueY:Float; var TorqueZ:Float; } = Facade_Sdk_flighthq_physics3dAbi_Physics3DAbiLayout.Physics3DAbiJointValue;
 
   public static final Physics3DAbiJointValueStride:Float = Facade_Sdk_flighthq_physics3dAbi_Physics3DAbiLayout.Physics3DAbiJointValueStride;
+
+  public static final Physics3DAbiMaxContactPoints:Float = Facade_Sdk_flighthq_physics3dAbi_Physics3DAbiLayout.Physics3DAbiMaxContactPoints;
 
   public static final Physics3DAbiQueryValue:{ var Fraction:Float; var X:Float; var Y:Float; var Z:Float; var NormalX:Float; var NormalY:Float; var NormalZ:Float; } = Facade_Sdk_flighthq_physics3dAbi_Physics3DAbiLayout.Physics3DAbiQueryValue;
 
@@ -16673,6 +16891,10 @@ class Sdk {
     Facade_Sdk_flighthq_geometry_Matrix4.prependTranslationMatrix4(out, source, x, y, z);
   }
 
+  public static function presentGlRenderTarget(state:GlRenderState, target:GlRenderTarget, ?dest:Null<GlRenderTarget>):Void {
+    Facade_Sdk_flighthq_renderGl_GlPresentRenderTarget.presentGlRenderTarget(state, target, dest);
+  }
+
   public static function prevFrameMovieClip(clip:MovieClip):Void {
     Facade_Sdk_flighthq_movieclip_MovieClip.prevFrameMovieClip(clip);
   }
@@ -16743,6 +16965,31 @@ class Sdk {
 
   public static function queryCollisionConvexFace3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Float {
     return cast Facade_Sdk_flighthq_collision_CollisionFace3D.queryCollisionConvexFace3D(shape, dirX, dirY, dirZ, out);
+    return cast null;
+  }
+
+  public static function queryPhysics2DAbiPoint(abi:Physics2DAbi, world:Physics2DAbiWorldHandle, x:Float, y:Float, out:Physics2DAbiQueryBuffer, ?filter:Null<Physics2DQueryFilter>):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiQuery.queryPhysics2DAbiPoint(abi, world, x, y, out, filter);
+    return cast null;
+  }
+
+  public static function queryPhysics2DAbiRay(abi:Physics2DAbi, world:Physics2DAbiWorldHandle, originX:Float, originY:Float, directionX:Float, directionY:Float, out:Physics2DAbiQueryBuffer, ?maxFraction:Float, ?filter:Null<Physics2DQueryFilter>):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiQuery.queryPhysics2DAbiRay(abi, world, originX, originY, directionX, directionY, out, maxFraction, filter);
+    return cast null;
+  }
+
+  public static function queryPhysics2DAbiRayClosest(abi:Physics2DAbi, world:Physics2DAbiWorldHandle, originX:Float, originY:Float, directionX:Float, directionY:Float, out:Physics2DAbiQueryBuffer, ?maxFraction:Float, ?filter:Null<Physics2DQueryFilter>):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiQuery.queryPhysics2DAbiRayClosest(abi, world, originX, originY, directionX, directionY, out, maxFraction, filter);
+    return cast null;
+  }
+
+  public static function queryPhysics2DAbiRegion(abi:Physics2DAbi, world:Physics2DAbiWorldHandle, region:SpatialAabb2D, out:Physics2DAbiQueryBuffer, ?filter:Null<Physics2DQueryFilter>):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiQuery.queryPhysics2DAbiRegion(abi, world, region, out, filter);
+    return cast null;
+  }
+
+  public static function queryPhysics2DAbiShapeCast(abi:Physics2DAbi, world:Physics2DAbiWorldHandle, shape:CollisionBuiltInShape2D, dx:Float, dy:Float, out:Physics2DAbiQueryBuffer, ?maxFraction:Float, ?filter:Null<Physics2DQueryFilter>):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiQuery.queryPhysics2DAbiShapeCast(abi, world, shape, dx, dy, out, maxFraction, filter);
     return cast null;
   }
 
@@ -17038,6 +17285,21 @@ class Sdk {
 
   public static function readFileSymlink(path:String):flighthq._internal._Promise<Null<String>> {
     return cast Facade_Sdk_flighthq_filesystem_Filesystem.readFileSymlink(path);
+    return cast null;
+  }
+
+  public static function readPhysics2DAbiBodies(abi:Physics2DAbi, world:Physics2DAbiWorldHandle, bodyIds:Null<flighthq._internal._UInt32Array>, out:Physics2DAbiBodyBuffer):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbi.readPhysics2DAbiBodies(abi, world, bodyIds, out);
+    return cast null;
+  }
+
+  public static function readPhysics2DAbiContacts(abi:Physics2DAbi, world:Physics2DAbiWorldHandle, selection:Physics2DAbiContactSelection, out:Physics2DAbiContactBuffer):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbi.readPhysics2DAbiContacts(abi, world, selection, out);
+    return cast null;
+  }
+
+  public static function readPhysics2DAbiJoints(abi:Physics2DAbi, world:Physics2DAbiWorldHandle, out:Physics2DAbiJointBuffer):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbi.readPhysics2DAbiJoints(abi, world, out);
     return cast null;
   }
 
@@ -17898,6 +18160,10 @@ class Sdk {
     Facade_Sdk_flighthq_skeleton2d_TransformConstraint2D.registerSkeleton2DTransformConstraintSolver();
   }
 
+  public static function registerSpineSkeletonBinaryParser(version:String, parser:SpineBinaryParser):Void {
+    Facade_Sdk_flighthq_skeleton2dFormats_SpineBinaryVersioned.registerSpineSkeletonBinaryParser(version, parser);
+  }
+
   public static function registerSpriteHitTest(?alphaThreshold:Float):Void {
     Facade_Sdk_flighthq_interaction_RegisterSpriteHitTest.registerSpriteHitTest(alphaThreshold);
   }
@@ -18699,6 +18965,10 @@ class Sdk {
     Facade_Sdk_flighthq_animation_AnimationBlend.resetAnimationSampleAccumulator(accumulator);
   }
 
+  public static function resetCameraShake(shake:CameraShake):Void {
+    Facade_Sdk_flighthq_cameraControls_CameraShake.resetCameraShake(shake);
+  }
+
   public static function resetClock(clock:Clock):Void {
     Facade_Sdk_flighthq_clock_Clock.resetClock(clock);
   }
@@ -18833,7 +19103,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function resolveWgpuSmoothingBindGroup(state:WgpuRenderState, entry:WgpuTextureEntry, smoothing:Null<Bool>):flighthq._internal.dom.GPUBindGroup {
+  public static function resolveWgpuSmoothingBindGroup(state:WgpuRenderState, entry:WgpuTextureEntry, smoothing:Null<Bool>):GPUBindGroup {
     return cast Facade_Sdk_flighthq_renderWgpu_WgpuDraw.resolveWgpuSmoothingBindGroup(state, entry, smoothing);
     return cast null;
   }
@@ -20535,7 +20805,7 @@ class Sdk {
     Facade_Sdk_flighthq_texture_VideoTexture.setVideoTextureSource(texture, source);
   }
 
-  public static function setWgpuRenderEffectVelocityTexture(pipeline:WgpuRenderEffectPipeline, texture:Null<flighthq._internal.dom.GPUTexture>):Void {
+  public static function setWgpuRenderEffectVelocityTexture(pipeline:WgpuRenderEffectPipeline, texture:Null<GPUTexture>):Void {
     Facade_Sdk_flighthq_effectsWgpu_WgpuRenderEffectPipeline.setWgpuRenderEffectVelocityTexture(pipeline, texture);
   }
 
@@ -20972,6 +21242,11 @@ class Sdk {
     Facade_Sdk_flighthq_physics2d_Step.stepPhysics2D(world, dt);
   }
 
+  public static function stepPhysics2DAbiWorld(abi:Physics2DAbi, world:Physics2DAbiWorldHandle, dt:Float, ?hooks:Null<Physics2DAbiContactHooks>):Physics2DAbiStepStatus {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbi.stepPhysics2DAbiWorld(abi, world, dt, hooks);
+    return cast null;
+  }
+
   public static function stepPhysics3D(world:Physics3DWorld, dt:Float):Void {
     Facade_Sdk_flighthq_physics3d_Step.stepPhysics3D(world, dt);
   }
@@ -21145,6 +21420,14 @@ class Sdk {
 
   public static function synchronizeApplicationRenderView(view:ApplicationRenderView<Dynamic, Dynamic>):Void {
     Facade_Sdk_flighthq_application_ApplicationRenderView.synchronizeApplicationRenderView(view);
+  }
+
+  public static function syncPhysics2DBodyToNode2D(body:RigidBody2D, node:Node2D):Void {
+    Facade_Sdk_flighthq_physics2d_NodeSync.syncPhysics2DBodyToNode2D(body, node);
+  }
+
+  public static function syncPhysics3DBodyToNode3D(body:RigidBody3D, node:Node3D):Void {
+    Facade_Sdk_flighthq_physics3d_NodeSync.syncPhysics3DBodyToNode3D(body, node);
   }
 
   public static function takeWebcamPhoto(?options:WebcamCaptureOptions):flighthq._internal._Promise<Null<WebcamPhoto>> {
@@ -21455,6 +21738,11 @@ class Sdk {
 
   public static final ToonModifierKind:String = Facade_Sdk_flighthq_types__internal__ToonModifierValues.ToonModifierKind;
 
+  public static function toSpineBinaryLayoutKey(version:String):String {
+    return cast Facade_Sdk_flighthq_skeleton2dFormats_SpineBinaryVersioned.toSpineBinaryLayoutKey(version);
+    return cast null;
+  }
+
   public static function transformAabbByMatrix4(out:AabbLike, aabb:AabbLike, m:Matrix4Like):Void {
     Facade_Sdk_flighthq_geometry_Aabb.transformAabbByMatrix4(out, aabb, m);
   }
@@ -21724,6 +22012,10 @@ class Sdk {
   public static function updateCamera3DInverseViewProjection(camera:Camera3D, aspect:Float):Bool {
     return cast Facade_Sdk_flighthq_camera_Camera.updateCamera3DInverseViewProjection(camera, aspect);
     return cast null;
+  }
+
+  public static function updateCameraShake(shake:CameraShake, dt:Float, out:CameraShakeOffset):Void {
+    Facade_Sdk_flighthq_cameraControls_CameraShake.updateCameraShake(shake, dt, out);
   }
 
   public static function updateFlowStack(stack:FlowStack, deltaTime:Float):Void {
@@ -22154,6 +22446,76 @@ class Sdk {
     Facade_Sdk_flighthq_geometry_Matrix.writeMatrixToFloat32Array(out, offset, source);
   }
 
+  public static function writePhysics2DAbiApplyForceAtPointCommand(out:Physics2DAbiCommandBuffer, bodyId:Physics2DAbiObjectId, x:Float, y:Float, pointX:Float, pointY:Float):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiCommand.writePhysics2DAbiApplyForceAtPointCommand(out, bodyId, x, y, pointX, pointY);
+    return cast null;
+  }
+
+  public static function writePhysics2DAbiApplyForceCommand(out:Physics2DAbiCommandBuffer, bodyId:Physics2DAbiObjectId, x:Float, y:Float):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiCommand.writePhysics2DAbiApplyForceCommand(out, bodyId, x, y);
+    return cast null;
+  }
+
+  public static function writePhysics2DAbiApplyLinearImpulseAtPointCommand(out:Physics2DAbiCommandBuffer, bodyId:Physics2DAbiObjectId, x:Float, y:Float, pointX:Float, pointY:Float):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiCommand.writePhysics2DAbiApplyLinearImpulseAtPointCommand(out, bodyId, x, y, pointX, pointY);
+    return cast null;
+  }
+
+  public static function writePhysics2DAbiApplyLinearImpulseCommand(out:Physics2DAbiCommandBuffer, bodyId:Physics2DAbiObjectId, x:Float, y:Float):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiCommand.writePhysics2DAbiApplyLinearImpulseCommand(out, bodyId, x, y);
+    return cast null;
+  }
+
+  public static function writePhysics2DAbiApplyTorqueCommand(out:Physics2DAbiCommandBuffer, bodyId:Physics2DAbiObjectId, torque:Float):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiCommand.writePhysics2DAbiApplyTorqueCommand(out, bodyId, torque);
+    return cast null;
+  }
+
+  public static function writePhysics2DAbiDestroyBodyCommand(out:Physics2DAbiCommandBuffer, bodyId:Physics2DAbiObjectId):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiCommand.writePhysics2DAbiDestroyBodyCommand(out, bodyId);
+    return cast null;
+  }
+
+  public static function writePhysics2DAbiDestroyColliderCommand(out:Physics2DAbiCommandBuffer, colliderId:Physics2DAbiObjectId):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiCommand.writePhysics2DAbiDestroyColliderCommand(out, colliderId);
+    return cast null;
+  }
+
+  public static function writePhysics2DAbiDestroyJointCommand(out:Physics2DAbiCommandBuffer, jointId:Physics2DAbiObjectId):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiCommand.writePhysics2DAbiDestroyJointCommand(out, jointId);
+    return cast null;
+  }
+
+  public static function writePhysics2DAbiSetBodyCommand(out:Physics2DAbiCommandBuffer, bodyId:Physics2DAbiObjectId, body:RigidBody2D):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiCommand.writePhysics2DAbiSetBodyCommand(out, bodyId, body);
+    return cast null;
+  }
+
+  public static function writePhysics2DAbiSetColliderCommand(out:Physics2DAbiCommandBuffer, colliderId:Physics2DAbiObjectId, bodyId:Physics2DAbiObjectId, collider:Physics2DCollider):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiCommand.writePhysics2DAbiSetColliderCommand(out, colliderId, bodyId, collider);
+    return cast null;
+  }
+
+  public static function writePhysics2DAbiSetGravityCommand(out:Physics2DAbiCommandBuffer, x:Float, y:Float):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiCommand.writePhysics2DAbiSetGravityCommand(out, x, y);
+    return cast null;
+  }
+
+  public static function writePhysics2DAbiSetJointCommand(out:Physics2DAbiCommandBuffer, jointId:Physics2DAbiObjectId, bodyAId:Physics2DAbiObjectId, bodyBId:Physics2DAbiObjectId, joint:Physics2DJoint):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiCommand.writePhysics2DAbiSetJointCommand(out, jointId, bodyAId, bodyBId, joint);
+    return cast null;
+  }
+
+  public static function writePhysics2DAbiSetSolverConfigCommand(out:Physics2DAbiCommandBuffer, config:Physics2DSolverConfig):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiCommand.writePhysics2DAbiSetSolverConfigCommand(out, config);
+    return cast null;
+  }
+
+  public static function writePhysics2DAbiWakeBodyCommand(out:Physics2DAbiCommandBuffer, bodyId:Physics2DAbiObjectId):Bool {
+    return cast Facade_Sdk_flighthq_physics2dAbi_Physics2DAbiCommand.writePhysics2DAbiWakeBodyCommand(out, bodyId);
+    return cast null;
+  }
+
   public static function writePhysics2DColliderBounds(collider:Physics2DCollider, out:{ var minX:Float; var minY:Float; var maxX:Float; var maxY:Float; }):Void {
     Facade_Sdk_flighthq_physics2d_ColliderTransform.writePhysics2DColliderBounds(collider, out);
   }
@@ -22277,7 +22639,7 @@ class Sdk {
     Facade_Sdk_flighthq_geometry_Vector4.writeVector4ToFloat32Array(out, offset, source);
   }
 
-  public static function writeWgpuDrawUniform(state:WgpuRenderState, proxy:Scene3DRenderProxy):flighthq._internal.dom.GPUBindGroup {
+  public static function writeWgpuDrawUniform(state:WgpuRenderState, proxy:Scene3DRenderProxy):GPUBindGroup {
     return cast Facade_Sdk_flighthq_scene3dWgpu_WgpuMeshPipeline.writeWgpuDrawUniform(state, proxy);
     return cast null;
   }

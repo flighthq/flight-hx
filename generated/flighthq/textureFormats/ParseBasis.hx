@@ -134,9 +134,9 @@ class ParseBasis {
 
   public static final basisTexTypeOffset__parseBasis:Float = 23.0;
 
-  public static final basisSliceDescOffsetField__parseBasis:Float = 63.0;
+  public static final basisSliceDescOffsetField__parseBasis:Float = 65.0;
 
-  public static final basisHeaderMinSize__parseBasis:Float = 67.0;
+  public static final basisHeaderMinSize__parseBasis:Float = 69.0;
 
   public static final basisSliceDescSize__parseBasis:Float = 23.0;
 

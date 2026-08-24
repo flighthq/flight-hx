@@ -3,6 +3,7 @@ package flighthq.renderWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.GPUTextureFormat;
 import flighthq.renderWgpu.WgpuRenderTarget.createWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTarget.destroyWgpuRenderTarget;
 import flighthq.types.RenderTarget.RenderTargetColorSpace;
@@ -12,30 +13,30 @@ import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
 
 class WgpuRenderTargetPool {
   @:noCompletion
-  public static function acquireWgpuRenderTarget(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool, descriptor:{ var width:Float; var height:Float; @:optional var format:flighthq._internal.dom.GPUTextureFormat; @:optional var colorSpace:RenderTargetColorSpace; @:optional var sampleCount:Float; }):WgpuRenderTarget {
+  public static function acquireWgpuRenderTarget(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool, descriptor:{ var width:Float; var height:Float; @:optional var format:GPUTextureFormat; @:optional var colorSpace:RenderTargetColorSpace; @:optional var sampleCount:Float; }):WgpuRenderTarget {
     var sampleCount:Float = cast _Runtime.UNDEFINED;
     var scale:Float = cast _Runtime.UNDEFINED;
     var w:Float = cast _Runtime.UNDEFINED;
     var h:Float = cast _Runtime.UNDEFINED;
-    var format:String = cast _Runtime.UNDEFINED;
-    sampleCount = ((cast ((cast !_Runtime.strictEquals((cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).sampleCount, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).sampleCount : Float) > (cast 1.0 : Float)) : Bool)) : Bool) ? (cast 4.0 : Dynamic) : (cast 1.0 : Dynamic));
+    var format:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    sampleCount = ((cast ((cast !_Runtime.strictEquals((cast descriptor : { var width:Float; var height:Float; @:optional var format:flighthq._internal._Any; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).sampleCount, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast ((cast (cast descriptor : { var width:Float; var height:Float; @:optional var format:flighthq._internal._Any; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).sampleCount : Float) > (cast 1.0 : Float)) : Bool)) : Bool) ? (cast 4.0 : Dynamic) : (cast 1.0 : Dynamic));
     scale = ((cast _Runtime.strictEquals(sampleCount, 4.0) : Bool) ? (cast 2.0 : Dynamic) : (cast 1.0 : Dynamic));
-    w = _Runtime.multiplyNumbers(HxMath.max(1.0, HxMath.ceil((cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).width)), scale);
-    h = _Runtime.multiplyNumbers(HxMath.max(1.0, HxMath.ceil((cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).height)), scale);
-    format = _Runtime.coalesce((cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).format, function():Dynamic return cast (cast state : WgpuRenderState).format);
+    w = _Runtime.multiplyNumbers(HxMath.max(1.0, HxMath.ceil((cast descriptor : { var width:Float; var height:Float; @:optional var format:flighthq._internal._Any; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).width)), scale);
+    h = _Runtime.multiplyNumbers(HxMath.max(1.0, HxMath.ceil((cast descriptor : { var width:Float; var height:Float; @:optional var format:flighthq._internal._Any; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).height)), scale);
+    format = _Runtime.coalesce((cast descriptor : { var width:Float; var height:Float; @:optional var format:flighthq._internal._Any; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).format, function():Dynamic return cast (cast state : WgpuRenderState).format);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast pool : flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool).free, 'length') : Float)) : Bool)) {
         var candidate:WgpuRenderTarget = flighthq._internal._StaticIndex.readArray((cast pool : flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool).free, i);
         if ((cast ((cast ((cast ((cast _Runtime.strictEquals(candidate.width, w) : Bool) && (cast _Runtime.strictEquals(candidate.height, h) : Bool)) : Bool) && (cast _Runtime.strictEquals(candidate.format, format) : Bool)) : Bool) && (cast _Runtime.strictEquals(candidate.sampleCount, sampleCount) : Bool)) : Bool)) {
           _Runtime.splice((cast pool : flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool).free, Std.int(i), Std.int(1.0), []);
-          (candidate.colorSpace = cast (_Runtime.coalesce((cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).colorSpace, function():Dynamic return cast 'srgb') : RenderTargetColorSpace));
+          (candidate.colorSpace = cast (_Runtime.coalesce((cast descriptor : { var width:Float; var height:Float; @:optional var format:flighthq._internal._Any; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).colorSpace, function():Dynamic return cast 'srgb') : RenderTargetColorSpace));
           return cast candidate;
         }
         i++;
       }
     }
-    return cast (cast createWgpuRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).width : Float), (cast (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).height : Float), (cast format : String), ({ final __callArgument1:Dynamic = (cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).colorSpace; __callArgument1; }), (cast sampleCount : Float)) : WgpuRenderTarget);
+    return cast (cast createWgpuRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast (cast descriptor : { var width:Float; var height:Float; @:optional var format:flighthq._internal._Any; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).width : Float), (cast (cast descriptor : { var width:Float; var height:Float; @:optional var format:flighthq._internal._Any; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).height : Float), (cast format : flighthq._internal._Any), ({ final __callArgument1:Dynamic = (cast descriptor : { var width:Float; var height:Float; @:optional var format:flighthq._internal._Any; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).colorSpace; __callArgument1; }), (cast sampleCount : Float)) : WgpuRenderTarget);
     return cast null;
   }
 

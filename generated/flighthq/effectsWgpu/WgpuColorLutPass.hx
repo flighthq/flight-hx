@@ -3,6 +3,10 @@ package flighthq.effectsWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.GPUBindGroupLayout;
+import flighthq._internal.WebExterns.GPUBlendState;
+import flighthq._internal.WebExterns.GPUTexture;
+import flighthq._internal.WebExterns.GPUTextureFormat;
 import flighthq.effectsWgpu.WgpuEffectPass.EFFECT_VERTEX_WGSL;
 import flighthq.effectsWgpu.WgpuEffectPass.getWgpuEffectPassState;
 import flighthq.types.ColorLut;
@@ -15,71 +19,71 @@ class WgpuColorLutPass {
   @:noCompletion
   public static function applyColorLutPassToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, lut:ColorLut, cache:WgpuColorLutTextureCache):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
-    var fs:{ var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; } = cast _Runtime.UNDEFINED;
-    var texture:flighthq._internal.dom.GPUTexture = cast _Runtime.UNDEFINED;
-    var sourceBG:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
-    var lutBG:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
+    var device:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var fs:{ var uniformBG:flighthq._internal._Any; var textureBGLayout:flighthq._internal._Any; var uniformBGLayout:flighthq._internal._Any; var sampler:flighthq._internal._Any; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->flighthq._internal._Any->flighthq._internal._Any; } = cast _Runtime.UNDEFINED;
+    var texture:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var sourceBG:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var lutBG:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     var slotOffset:Float = cast _Runtime.UNDEFINED;
-    var pass:flighthq._internal.dom.GPURenderPassEncoder = cast _Runtime.UNDEFINED;
+    var pass:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
-    fs = (cast getWgpuEffectPassState(({ final __callArgument0:Dynamic = state; __callArgument0; })) : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; });
-    texture = (cast WgpuColorLutPass.uploadLutTexture__wgpuColorLutPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = lut; __callArgument2; }), ({ final __callArgument3:Dynamic = cache; __callArgument3; })) : flighthq._internal.dom.GPUTexture);
-    sourceBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).textureBGLayout, entries: cast ([{ binding: 0.0, resource: (cast (cast source : WgpuRenderTarget) : { var view:flighthq._internal.dom.GPUTextureView; }).view }, { binding: 1.0, resource: (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
-    lutBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: (cast WgpuColorLutPass.getLutBindGroupLayout__wgpuColorLutPass(({ final __callArgument4:Dynamic = state; __callArgument4; })) : flighthq._internal.dom.GPUBindGroupLayout), entries: cast ([{ binding: 0.0, resource: (cast texture : flighthq._internal.dom.GPUTexture).createView({ dimension: '3d' }) }, { binding: 1.0, resource: (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
-    pipeline = (cast WgpuColorLutPass.getLutPipeline__wgpuColorLutPass(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast (cast (cast dest : WgpuRenderTarget) : { var format:String; }).format : String)) : WgpuEffectPipeline);
-    slotOffset = (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).acquireSlot();
-    (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).writeSlot((cast slotOffset : Float), ({ final __callArgument6:Dynamic = function(__unused2:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused1:flighthq._internal._Int32Array):Void {
+    fs = (cast getWgpuEffectPassState(({ final __callArgument0:Dynamic = state; __callArgument0; })) : { var uniformBG:flighthq._internal._Any; var textureBGLayout:flighthq._internal._Any; var uniformBGLayout:flighthq._internal._Any; var sampler:flighthq._internal._Any; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->flighthq._internal._Any->flighthq._internal._Any; });
+    texture = WgpuColorLutPass.uploadLutTexture__wgpuColorLutPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = lut; __callArgument2; }), ({ final __callArgument3:Dynamic = cache; __callArgument3; }));
+    sourceBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: (cast fs : { var uniformBG:flighthq._internal._Any; var textureBGLayout:flighthq._internal._Any; var uniformBGLayout:flighthq._internal._Any; var sampler:flighthq._internal._Any; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->flighthq._internal._Any->flighthq._internal._Any; }).textureBGLayout, entries: cast ([{ binding: 0.0, resource: (cast (cast source : WgpuRenderTarget) : { var view:flighthq._internal._Any; }).view }, { binding: 1.0, resource: (cast fs : { var uniformBG:flighthq._internal._Any; var textureBGLayout:flighthq._internal._Any; var uniformBGLayout:flighthq._internal._Any; var sampler:flighthq._internal._Any; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->flighthq._internal._Any->flighthq._internal._Any; }).sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
+    lutBG = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroup', cast ([{ layout: WgpuColorLutPass.getLutBindGroupLayout__wgpuColorLutPass(({ final __callArgument4:Dynamic = state; __callArgument4; })), entries: cast ([{ binding: 0.0, resource: _Runtime.callProperty(texture, 'createView', cast ([{ dimension: '3d' }] : Array<Dynamic>)) }, { binding: 1.0, resource: (cast fs : { var uniformBG:flighthq._internal._Any; var textureBGLayout:flighthq._internal._Any; var uniformBGLayout:flighthq._internal._Any; var sampler:flighthq._internal._Any; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->flighthq._internal._Any->flighthq._internal._Any; }).sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
+    pipeline = (cast WgpuColorLutPass.getLutPipeline__wgpuColorLutPass(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast (cast (cast dest : WgpuRenderTarget) : { var format:flighthq._internal._Any; }).format : flighthq._internal._Any)) : WgpuEffectPipeline);
+    slotOffset = (cast fs : { var uniformBG:flighthq._internal._Any; var textureBGLayout:flighthq._internal._Any; var uniformBGLayout:flighthq._internal._Any; var sampler:flighthq._internal._Any; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->flighthq._internal._Any->flighthq._internal._Any; }).acquireSlot();
+    (cast fs : { var uniformBG:flighthq._internal._Any; var textureBGLayout:flighthq._internal._Any; var uniformBGLayout:flighthq._internal._Any; var sampler:flighthq._internal._Any; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->flighthq._internal._Any->flighthq._internal._Any; }).writeSlot((cast slotOffset : Float), ({ final __callArgument6:Dynamic = function(__unused2:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused1:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast _Runtime.field(lut, 'size') : Float));
     }, cast ([__unused2] : Array<Dynamic>)); }; __callArgument6; }));
-    pass = (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).beginPass(({ final __callArgument7:Dynamic = (cast dest : WgpuRenderTarget); __callArgument7; }), (cast 'load' : String));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(pipeline.pipeline);
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).uniformBG, cast ([slotOffset] : Array<Dynamic>));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(1.0, sourceBG);
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, lutBG);
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(6.0);
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end();
+    pass = (cast fs : { var uniformBG:flighthq._internal._Any; var textureBGLayout:flighthq._internal._Any; var uniformBGLayout:flighthq._internal._Any; var sampler:flighthq._internal._Any; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->flighthq._internal._Any->flighthq._internal._Any; }).beginPass(({ final __callArgument7:Dynamic = (cast dest : WgpuRenderTarget); __callArgument7; }), (cast 'load' : flighthq._internal._Any));
+    _Runtime.callProperty(pass, 'setPipeline', cast ([pipeline.pipeline] : Array<Dynamic>));
+    _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, (cast fs : { var uniformBG:flighthq._internal._Any; var textureBGLayout:flighthq._internal._Any; var uniformBGLayout:flighthq._internal._Any; var sampler:flighthq._internal._Any; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->flighthq._internal._Any->flighthq._internal._Any; }).uniformBG, cast ([slotOffset] : Array<Dynamic>)] : Array<Dynamic>));
+    _Runtime.callProperty(pass, 'setBindGroup', cast ([1.0, sourceBG] : Array<Dynamic>));
+    _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, lutBG] : Array<Dynamic>));
+    _Runtime.callProperty(pass, 'draw', cast ([6.0] : Array<Dynamic>));
+    _Runtime.callProperty(pass, 'end', cast ([] : Array<Dynamic>));
   }
 
-  public static function getLutBindGroupLayout__wgpuColorLutPass(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroupLayout {
-    var layout:Null<flighthq._internal.dom.GPUBindGroupLayout> = cast _Runtime.UNDEFINED;
-    layout = ((cast WgpuColorLutPass.lutBindGroupLayouts__wgpuColorLutPass : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal.dom.GPUBindGroupLayout>).get(state));
+  public static function getLutBindGroupLayout__wgpuColorLutPass(state:WgpuRenderState):GPUBindGroupLayout {
+    var layout:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    layout = ((cast WgpuColorLutPass.lutBindGroupLayouts__wgpuColorLutPass : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Any>).get(state));
     if ((cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (layout = cast (flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { viewDimension: '3d' } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), sampler: {  } }] : Array<Dynamic>) }] : Array<Dynamic>)) : Dynamic));
-      ((cast WgpuColorLutPass.lutBindGroupLayouts__wgpuColorLutPass : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal.dom.GPUBindGroupLayout>).set(state, (cast layout)));
+      ((cast WgpuColorLutPass.lutBindGroupLayouts__wgpuColorLutPass : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Any>).set(state, (cast layout)));
     }
     return cast layout;
     return cast null;
   }
 
-  public static function getLutPipeline__wgpuColorLutPass(state:WgpuRenderState, format:flighthq._internal.dom.GPUTextureFormat):WgpuEffectPipeline {
-    var byFormat:Null<flighthq._internal._Map<String, WgpuEffectPipeline>> = cast _Runtime.UNDEFINED;
+  public static function getLutPipeline__wgpuColorLutPass(state:WgpuRenderState, format:GPUTextureFormat):WgpuEffectPipeline {
+    var byFormat:Null<flighthq._internal._Map<flighthq._internal._Any, WgpuEffectPipeline>> = cast _Runtime.UNDEFINED;
     var pipeline:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
-    byFormat = ((cast WgpuColorLutPass.lutPipelines__wgpuColorLutPass : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuEffectPipeline>>).get(state));
+    byFormat = ((cast WgpuColorLutPass.lutPipelines__wgpuColorLutPass : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<flighthq._internal._Any, WgpuEffectPipeline>>).get(state));
     if ((cast _Runtime.strictEquals(byFormat, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (byFormat = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) : Dynamic));
-      ((cast WgpuColorLutPass.lutPipelines__wgpuColorLutPass : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuEffectPipeline>>).set(state, (cast byFormat)));
+      ((cast WgpuColorLutPass.lutPipelines__wgpuColorLutPass : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<flighthq._internal._Any, WgpuEffectPipeline>>).set(state, (cast byFormat)));
     }
-    pipeline = ((cast byFormat : flighthq._internal._Map<String, WgpuEffectPipeline>).get(format));
+    pipeline = ((cast byFormat : flighthq._internal._Map<flighthq._internal._Any, WgpuEffectPipeline>).get(format));
     if ((cast _Runtime.strictEquals(pipeline, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var fs:{ var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; } = (cast getWgpuEffectPassState(({ final __callArgument8:Dynamic = state; __callArgument8; })) : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; });
+      var fs:{ var uniformBG:flighthq._internal._Any; var textureBGLayout:flighthq._internal._Any; var uniformBGLayout:flighthq._internal._Any; var sampler:flighthq._internal._Any; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->flighthq._internal._Any->flighthq._internal._Any; } = (cast getWgpuEffectPassState(({ final __callArgument8:Dynamic = state; __callArgument8; })) : { var uniformBG:flighthq._internal._Any; var textureBGLayout:flighthq._internal._Any; var uniformBGLayout:flighthq._internal._Any; var sampler:flighthq._internal._Any; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->flighthq._internal._Any->flighthq._internal._Any; });
       var __destructure4 = state;
-      var device:flighthq._internal.dom.GPUDevice = _Runtime.field(__destructure4, 'device');
-      var shaderModule:flighthq._internal.dom.GPUShaderModule = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: (EFFECT_VERTEX_WGSL + WgpuColorLutPass.COLOR_LUT_FRAGMENT_WGSL__wgpuColorLutPass) }] : Array<Dynamic>));
-      var pipelineLayout:flighthq._internal.dom.GPUPipelineLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([(cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).uniformBGLayout, (cast fs : { var uniformBG:flighthq._internal.dom.GPUBindGroup; var textureBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBGLayout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->String->flighthq._internal.dom.GPURenderPassEncoder; }).textureBGLayout, (cast WgpuColorLutPass.getLutBindGroupLayout__wgpuColorLutPass(({ final __callArgument9:Dynamic = state; __callArgument9; })) : flighthq._internal.dom.GPUBindGroupLayout)] : Array<Dynamic>) }] : Array<Dynamic>));
-      var gpuPipeline:flighthq._internal.dom.GPURenderPipeline = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: pipelineLayout, vertex: { module: shaderModule, entryPoint: 'vs_main' }, fragment: { module: shaderModule, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: WgpuColorLutPass.REPLACE_BLEND__wgpuColorLutPass }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
+      var device:flighthq._internal._Any = _Runtime.field(__destructure4, 'device');
+      var shaderModule:flighthq._internal._Any = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createShaderModule', cast ([{ code: (EFFECT_VERTEX_WGSL + WgpuColorLutPass.COLOR_LUT_FRAGMENT_WGSL__wgpuColorLutPass) }] : Array<Dynamic>));
+      var pipelineLayout:flighthq._internal._Any = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([(cast fs : { var uniformBG:flighthq._internal._Any; var textureBGLayout:flighthq._internal._Any; var uniformBGLayout:flighthq._internal._Any; var sampler:flighthq._internal._Any; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->flighthq._internal._Any->flighthq._internal._Any; }).uniformBGLayout, (cast fs : { var uniformBG:flighthq._internal._Any; var textureBGLayout:flighthq._internal._Any; var uniformBGLayout:flighthq._internal._Any; var sampler:flighthq._internal._Any; var acquireSlot:Void->Float; var writeSlot:Float->(flighthq._internal._Float32Array->flighthq._internal._Int32Array->Void)->Void; var beginPass:Null<WgpuRenderTarget>->flighthq._internal._Any->flighthq._internal._Any; }).textureBGLayout, WgpuColorLutPass.getLutBindGroupLayout__wgpuColorLutPass(({ final __callArgument9:Dynamic = state; __callArgument9; }))] : Array<Dynamic>) }] : Array<Dynamic>));
+      var gpuPipeline:flighthq._internal._Any = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createRenderPipeline', cast ([{ layout: pipelineLayout, vertex: { module: shaderModule, entryPoint: 'vs_main' }, fragment: { module: shaderModule, entryPoint: 'fs_main', targets: cast ([{ format: format, blend: WgpuColorLutPass.REPLACE_BLEND__wgpuColorLutPass }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>));
       (pipeline = cast ({ pipeline: gpuPipeline, blendMode: 'replace' } : Dynamic));
-      ((cast byFormat : flighthq._internal._Map<String, WgpuEffectPipeline>).set(format, (cast pipeline)));
+      ((cast byFormat : flighthq._internal._Map<flighthq._internal._Any, WgpuEffectPipeline>).set(format, (cast pipeline)));
     }
     return cast pipeline;
     return cast null;
   }
 
-  public static function uploadLutTexture__wgpuColorLutPass(state:WgpuRenderState, lut:ColorLut, cache:WgpuColorLutTextureCache):flighthq._internal.dom.GPUTexture {
+  public static function uploadLutTexture__wgpuColorLutPass(state:WgpuRenderState, lut:ColorLut, cache:WgpuColorLutTextureCache):GPUTexture {
     var __destructure5:Dynamic = cast _Runtime.UNDEFINED;
-    var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
+    var device:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var n:Float = cast _Runtime.UNDEFINED;
     var samples:Array<Float> = cast _Runtime.UNDEFINED;
     var data:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
@@ -88,8 +92,8 @@ class WgpuColorLutPass {
     n = _Runtime.field(lut, 'size');
     if ((cast ((cast !_Runtime.strictEquals(cache.texture, null) : Bool) && (cast _Runtime.strictEquals(cache.lut, lut) : Bool)) : Bool)) { return cast cache.texture; }
     if ((cast ((cast _Runtime.strictEquals(cache.texture, null) : Bool) || (cast !_Runtime.strictEquals(cache.size, n) : Bool)) : Bool)) {
-      ({ final __hostTypeCall10 = cache.texture; __hostTypeCall10 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall10 : flighthq._internal.dom.GPUTexture).destroy(); });
-      (cache.texture = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([n, n, n] : Array<Dynamic>), dimension: '3d', format: 'rgba8unorm', usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)) : Null<flighthq._internal.dom.GPUTexture>));
+      _Runtime.callOptionalProperty(cache.texture, 'destroy', cast ([] : Array<Dynamic>));
+      (cache.texture = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createTexture', cast ([{ size: cast ([n, n, n] : Array<Dynamic>), dimension: '3d', format: 'rgba8unorm', usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'COPY_DST'))) }] : Array<Dynamic>)) : flighthq._internal._Any));
       (cache.size = cast (n : Float));
     }
     samples = _Runtime.field(lut, 'samples');
@@ -106,7 +110,7 @@ class WgpuColorLutPass {
         i++;
       }
     }
-    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeTexture', cast ([{ texture: cache.texture }, data, { bytesPerRow: (n * 4.0), rowsPerImage: n }, cast ([n, n, n] : Array<Dynamic>)] : Array<Dynamic>));
+    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'writeTexture', cast ([{ texture: cache.texture }, data, { bytesPerRow: (n * 4.0), rowsPerImage: n }, cast ([n, n, n] : Array<Dynamic>)] : Array<Dynamic>));
     (cache.lut = cast (lut : Null<ColorLut>));
     return cast cache.texture;
     return cast null;
@@ -117,11 +121,11 @@ class WgpuColorLutPass {
     return cast null;
   }
 
-  public static final REPLACE_BLEND__wgpuColorLutPass:flighthq._internal.dom.GPUBlendState = (cast { color: { srcFactor: 'one', dstFactor: 'zero', operation: 'add' }, alpha: { srcFactor: 'one', dstFactor: 'zero', operation: 'add' } });
+  public static final REPLACE_BLEND__wgpuColorLutPass:GPUBlendState = (cast { color: { srcFactor: 'one', dstFactor: 'zero', operation: 'add' }, alpha: { srcFactor: 'one', dstFactor: 'zero', operation: 'add' } });
 
   public static final COLOR_LUT_FRAGMENT_WGSL__wgpuColorLutPass:String = '\nstruct Uniforms { u_size : f32, _p0 : f32, _p1 : f32, _p2 : f32, }\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n@group(2) @binding(0) var lut : texture_3d<f32>;\n@group(2) @binding(1) var lutSmp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let c = textureSampleLevel(tex, smp, uv, 0.0);\n  let scale = (uni.u_size - 1.0) / uni.u_size;\n  let offset = 0.5 / uni.u_size;\n  let lc = clamp(c.rgb, vec3f(0.0), vec3f(1.0)) * scale + offset;\n  let graded = textureSampleLevel(lut, lutSmp, lc, 0.0).rgb;\n  return vec4f(graded, c.a);\n}';
 
-  public static final lutBindGroupLayouts__wgpuColorLutPass:flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal.dom.GPUBindGroupLayout> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final lutBindGroupLayouts__wgpuColorLutPass:flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Any> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final lutPipelines__wgpuColorLutPass:flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuEffectPipeline>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final lutPipelines__wgpuColorLutPass:flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<flighthq._internal._Any, WgpuEffectPipeline>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

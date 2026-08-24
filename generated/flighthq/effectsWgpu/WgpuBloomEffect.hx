@@ -31,7 +31,7 @@ class WgpuBloomEffect {
     var threshold:Float = cast _Runtime.UNDEFINED;
     var intensity:Float = cast _Runtime.UNDEFINED;
     var radius:Float = cast _Runtime.UNDEFINED;
-    var descriptor:{ var width:Float; var height:Float; var format:String; } = cast _Runtime.UNDEFINED;
+    var descriptor:{ var width:Float; var height:Float; var format:flighthq._internal._Any; } = cast _Runtime.UNDEFINED;
     var bright:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     var blurred:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     var temp:WgpuRenderTarget = cast _Runtime.UNDEFINED;

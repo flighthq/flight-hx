@@ -3,6 +3,9 @@ package flighthq.renderWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.GPUBindGroup;
+import flighthq._internal.WebExterns.GPUBindGroupLayout;
+import flighthq._internal.WebExterns.GPUTextureFormat;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.WgpuFullscreenPipeline;
 import flighthq.types.WgpuRenderState;
@@ -11,16 +14,16 @@ import flighthq.types.WgpuRenderTarget;
 
 class WgpuFullscreenPass {
   @:noCompletion
-  public static function createWgpuFullscreenPipeline(state:WgpuRenderState, fragmentWgsl:String, textureInputCount:Float = 1.0, ?format:flighthq._internal.dom.GPUTextureFormat):WgpuFullscreenPipeline {
+  public static function createWgpuFullscreenPipeline(state:WgpuRenderState, fragmentWgsl:String, textureInputCount:Float = 1.0, ?format:GPUTextureFormat):WgpuFullscreenPipeline {
     if (format == null) format = cast ((cast state : WgpuRenderState).format : Dynamic);
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
-    var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
-    var uniformBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout = cast _Runtime.UNDEFINED;
-    var textureBindGroupLayouts:Array<flighthq._internal.dom.GPUBindGroupLayout> = cast _Runtime.UNDEFINED;
-    var pipelineLayout:flighthq._internal.dom.GPUPipelineLayout = cast _Runtime.UNDEFINED;
-    var vsModule:flighthq._internal.dom.GPUShaderModule = cast _Runtime.UNDEFINED;
-    var fsModule:flighthq._internal.dom.GPUShaderModule = cast _Runtime.UNDEFINED;
-    var pipeline:flighthq._internal.dom.GPURenderPipeline = cast _Runtime.UNDEFINED;
+    var device:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var uniformBindGroupLayout:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var textureBindGroupLayouts:Array<GPUBindGroupLayout> = cast _Runtime.UNDEFINED;
+    var pipelineLayout:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var vsModule:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var fsModule:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var pipeline:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     __destructure0 = state;
     device = _Runtime.field(__destructure0, 'device');
     uniformBindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(device, 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), buffer: { type: 'uniform' } }] : Array<Dynamic>) }] : Array<Dynamic>));
@@ -45,32 +48,32 @@ class WgpuFullscreenPass {
   }
 
   @:noCompletion
-  public static function drawWgpuFullscreenPass(state:WgpuRenderState, wgpuPipeline:WgpuFullscreenPipeline, inputs:Array<WgpuRenderTarget>, dest:Null<WgpuRenderTarget>, setUniforms:Null<WgpuRenderState->flighthq._internal.dom.GPUBindGroupLayout->flighthq._internal.dom.GPUBindGroup>):Void {
+  public static function drawWgpuFullscreenPass(state:WgpuRenderState, wgpuPipeline:WgpuFullscreenPipeline, inputs:Array<WgpuRenderTarget>, dest:Null<WgpuRenderTarget>, setUniforms:Null<WgpuRenderState->GPUBindGroupLayout->GPUBindGroup>):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
+    var pass:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var runtime2:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
     pass = ((cast !_Runtime.strictEquals(dest, null) : Bool) ? (cast runtime.renderPass : Dynamic) : (cast runtime.renderPass : Dynamic));
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(_Runtime.field(wgpuPipeline, 'pipeline'));
+    _Runtime.callProperty(pass, 'setPipeline', cast ([_Runtime.field(wgpuPipeline, 'pipeline')] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(setUniforms, null) : Bool)) {
-      var uniformBindGroup:flighthq._internal.dom.GPUBindGroup = (cast (cast setUniforms : WgpuRenderState->flighthq._internal.dom.GPUBindGroupLayout->flighthq._internal.dom.GPUBindGroup)(({ final __callArgument1:Dynamic = state; __callArgument1; }), _Runtime.field(wgpuPipeline, 'uniformBindGroupLayout')) : flighthq._internal.dom.GPUBindGroup);
-      (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, uniformBindGroup);
+      var uniformBindGroup:flighthq._internal._Any = (cast setUniforms : WgpuRenderState->flighthq._internal._Any->flighthq._internal._Any)(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast _Runtime.field(wgpuPipeline, 'uniformBindGroupLayout') : flighthq._internal._Any));
+      _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, uniformBindGroup] : Array<Dynamic>));
     }
     runtime2 = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(inputs, 'length') : Float)) : Bool)) {
         var input:WgpuRenderTarget = flighthq._internal._StaticIndex.readArray(inputs, i);
-        var layout:flighthq._internal.dom.GPUBindGroupLayout = flighthq._internal._StaticIndex.readArray(_Runtime.field(wgpuPipeline, 'textureBindGroupLayouts'), i);
+        var layout:flighthq._internal._Any = flighthq._internal._StaticIndex.readArray(_Runtime.field(wgpuPipeline, 'textureBindGroupLayouts'), i);
         if ((cast _Runtime.strictEquals(layout, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { i++; continue; }
-        var sampler:flighthq._internal.dom.GPUSampler = ((cast (cast state : WgpuRenderState).allowSmoothing : Bool) ? (cast runtime2.linearSampler : Dynamic) : (cast runtime2.nearestSampler : Dynamic));
-        var bindGroup:flighthq._internal.dom.GPUBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: layout, entries: cast ([{ binding: 0.0, resource: input.view }, { binding: 1.0, resource: sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
-        (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup((1.0 + i), bindGroup);
+        var sampler:flighthq._internal._Any = ((cast (cast state : WgpuRenderState).allowSmoothing : Bool) ? (cast runtime2.linearSampler : Dynamic) : (cast runtime2.nearestSampler : Dynamic));
+        var bindGroup:flighthq._internal._Any = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: layout, entries: cast ([{ binding: 0.0, resource: input.view }, { binding: 1.0, resource: sampler }] : Array<Dynamic>) }] : Array<Dynamic>));
+        _Runtime.callProperty(pass, 'setBindGroup', cast ([(1.0 + i), bindGroup] : Array<Dynamic>));
         i++;
       }
     }
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(3.0);
+    _Runtime.callProperty(pass, 'draw', cast ([3.0] : Array<Dynamic>));
   }
 
   public static final FULLSCREEN_VERTEX_WGSL__wgpuFullscreenPass:String = '\n@vertex\nfn vs_main(@builtin(vertex_index) vi : u32) -> @builtin(position) vec4f {\n  // Full-screen triangle: three vertices covering the clip rect.\n  let x = f32((vi & 1u) << 2u) - 1.0;\n  let y = f32((vi & 2u) << 1u) - 1.0;\n  return vec4f(x, y, 0.0, 1.0);\n}\n';

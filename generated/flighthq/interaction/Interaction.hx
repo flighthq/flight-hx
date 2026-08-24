@@ -3,7 +3,6 @@ package flighthq.interaction;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.interaction.CursorBackend as Facade_Interaction_flighthq_interaction_CursorBackend;
 import flighthq.interaction.DisplayObjectOverlap as Facade_Interaction_flighthq_interaction_DisplayObjectOverlap;
 import flighthq.interaction.EnableInteractionGuards as Facade_Interaction_flighthq_interaction_EnableInteractionGuards;
 import flighthq.interaction.FocusManager as Facade_Interaction_flighthq_interaction_FocusManager;
@@ -18,7 +17,6 @@ import flighthq.interaction.RegisterSpriteHitTest as Facade_Interaction_flighthq
 import flighthq.interaction.RegisterTextHitTest as Facade_Interaction_flighthq_interaction_RegisterTextHitTest;
 import flighthq.interaction.SpatialQuery as Facade_Interaction_flighthq_interaction_SpatialQuery;
 import flighthq.types.Cursor;
-import flighthq.types.Cursor.CursorBackend;
 import flighthq.types.Entity.Kind;
 import flighthq.types.FocusManager;
 import flighthq.types.FocusManager.FocusDirection;
@@ -84,11 +82,6 @@ class Interaction {
 
   public static function createNodeInteractionState():NodeInteractionState {
     return cast Facade_Interaction_flighthq_interaction_NodeInteractionState.createNodeInteractionState();
-    return cast null;
-  }
-
-  public static function createWebCursorBackend(element:flighthq._internal.dom.HTMLElement):CursorBackend {
-    return cast Facade_Interaction_flighthq_interaction_CursorBackend.createWebCursorBackend(element);
     return cast null;
   }
 

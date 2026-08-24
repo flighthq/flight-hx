@@ -38,6 +38,7 @@ export const Physics3DAbiJointFlag = compiled.flighthq.physics3dAbi.Physics3dAbi
 export const Physics3DAbiJointKind = compiled.flighthq.physics3dAbi.Physics3dAbi.Physics3DAbiJointKind;
 export const Physics3DAbiJointValue = compiled.flighthq.physics3dAbi.Physics3dAbi.Physics3DAbiJointValue;
 export const Physics3DAbiJointValueStride = compiled.flighthq.physics3dAbi.Physics3dAbi.Physics3DAbiJointValueStride;
+export const Physics3DAbiMaxContactPoints = compiled.flighthq.physics3dAbi.Physics3dAbi.Physics3DAbiMaxContactPoints;
 export const Physics3DAbiQueryValue = compiled.flighthq.physics3dAbi.Physics3dAbi.Physics3DAbiQueryValue;
 export const Physics3DAbiQueryValueStride = compiled.flighthq.physics3dAbi.Physics3dAbi.Physics3DAbiQueryValueStride;
 export const Physics3DAbiSetBodyPayloadOffset = compiled.flighthq.physics3dAbi.Physics3dAbi.Physics3DAbiSetBodyPayloadOffset;

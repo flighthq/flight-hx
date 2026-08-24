@@ -17,6 +17,7 @@ import flighthq.types.ApplicationRenderView.ApplicationRenderViewResize;
 import flighthq.types.ApplicationWindow;
 import flighthq.types.ApplicationWindow.WindowBounds;
 import flighthq.types.ApplicationWindow.WindowOptions;
+import flighthq.types.BackendExplanation;
 import flighthq.types.LoopBackend;
 import flighthq.types.Matrix;
 import flighthq.types.RenderState;
@@ -39,7 +40,13 @@ class Application {
 
   public static final _lifecycleKeys__application:flighthq._internal._WeakMap<ApplicationWindow, flighthq._internal._Symbol> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static var _loopBackend__application:Null<LoopBackend> = _Runtime.explicitNull();
+  public static var _loopCustom__application:Null<LoopBackend> = _Runtime.explicitNull();
+
+  public static var _loopHost__application:Null<LoopBackend> = _Runtime.explicitNull();
+
+  public static var _loopHostConflict__application:Bool = false;
+
+  public static var _loopHostObservation__application:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
 
   public static final _mainWindows__application:flighthq._internal._WeakMap<flighthq.types.Application, ApplicationWindow> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
@@ -296,6 +303,18 @@ class Application {
     return cast null;
   }
 
+  @:noCompletion
+  public static function explainLoopBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(Application._loopCustom__application, null) : Bool)) {
+      return cast { conflict: Application._loopHostConflict__application, layer: 'custom', operation: null, viability: 'unobserved' };
+    }
+    if ((cast !_Runtime.strictEquals(Application._loopHost__application, null) : Bool)) {
+      return cast { conflict: Application._loopHostConflict__application, layer: 'host', operation: ((cast !_Runtime.strictEquals(Application._loopHostObservation__application, null) : Bool) ? (cast (cast Application._loopHostObservation__application : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(Application._loopHostObservation__application, null) : Bool) ? (cast (cast Application._loopHostObservation__application : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    }
+    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+    return cast null;
+  }
+
   public static function flashWindowFrame(win:ApplicationWindow):Void {
     Facade_Application_flighthq_application_Window.flashWindowFrame(win);
   }
@@ -361,9 +380,8 @@ class Application {
   }
 
   @:noCompletion
-  public static function getLoopBackend():LoopBackend {
-    if ((cast _Runtime.strictEquals(Application._loopBackend__application, null) : Bool)) { (Application._loopBackend__application = cast ((cast createWebLoopBackend() : LoopBackend) : Dynamic)); }
-    return cast Application._loopBackend__application;
+  public static function getLoopBackend():Null<LoopBackend> {
+    return cast _Runtime.coalesce(_Runtime.coalesce(Application._loopCustom__application, function():Dynamic return cast Application._loopHost__application), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -390,6 +408,15 @@ class Application {
 
   public static function hideWindow(win:ApplicationWindow):Void {
     Facade_Application_flighthq_application_Window.hideWindow(win);
+  }
+
+  @:noCompletion
+  public static function installLoopHostBackend(backend:LoopBackend):Void {
+    if ((cast !_Runtime.strictEquals(Application._loopHost__application, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(Application._loopHost__application, backend) : Bool)) { (Application._loopHostConflict__application = cast (true : Dynamic)); }
+      return;
+    }
+    (Application._loopHost__application = cast (backend : Dynamic));
   }
 
   public static function invokeWithApplicationErrorHandling__application(app:flighthq.types.Application, callback:Void->Void):Void {
@@ -428,6 +455,11 @@ class Application {
 
   public static function minimizeWindow(win:ApplicationWindow):Void {
     Facade_Application_flighthq_application_Window.minimizeWindow(win);
+  }
+
+  @:noCompletion
+  public static function observeLoopHostResult(operation:String, succeeded:Bool):Void {
+    (Application._loopHostObservation__application = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
   public static function openWindow(win:ApplicationWindow, ?options:WindowOptions):Bool {
@@ -477,6 +509,14 @@ class Application {
     return cast null;
   }
 
+  @:noCompletion
+  public static function resetLoopBackendForTest():Void {
+    (Application._loopCustom__application = cast (null : Dynamic));
+    (Application._loopHost__application = cast (null : Dynamic));
+    (Application._loopHostConflict__application = cast (false : Dynamic));
+    (Application._loopHostObservation__application = cast (null : Dynamic));
+  }
+
   public static function restoreWindow(win:ApplicationWindow):Void {
     Facade_Application_flighthq_application_Window.restoreWindow(win);
   }
@@ -505,7 +545,7 @@ class Application {
 
   @:noCompletion
   public static function setLoopBackend(backend:Null<LoopBackend>):Void {
-    (Application._loopBackend__application = cast (backend : Dynamic));
+    (Application._loopCustom__application = cast (backend : Dynamic));
   }
 
   public static function setWindowAlwaysOnTop(win:ApplicationWindow, alwaysOnTop:Bool):Void {
@@ -580,6 +620,7 @@ class Application {
     if (options == null) options = cast ({  } : Dynamic);
     var tick:Float->Void = cast _Runtime.UNDEFINED;
     var observers:flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
+    var resolved:Null<LoopBackend> = cast _Runtime.UNDEFINED;
     var backend:LoopBackend = cast _Runtime.UNDEFINED;
     var maxDeltaTime:Float = cast _Runtime.UNDEFINED;
     var targetFrameRate:Float = cast _Runtime.UNDEFINED;
@@ -621,7 +662,9 @@ class Application {
     observers = (cast Application.getApplicationObservers__application(({ final __callArgument29:Dynamic = app; __callArgument29; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).get(Application.kLoop__application)), cast ([] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).delete_(Application.kPaused__application));
-    backend = (cast getLoopBackend() : LoopBackend);
+    resolved = (cast getLoopBackend() : Null<LoopBackend>);
+    if ((cast _Runtime.strictEquals(resolved, null) : Bool)) { return; }
+    backend = resolved;
     maxDeltaTime = _Runtime.coalesce(options.maxDeltaTime, function():Dynamic return cast Application.DEFAULT_MAX_DELTA_TIME__application);
     targetFrameRate = _Runtime.coalesce(options.targetFrameRate, function():Dynamic return cast 0.0);
     backgroundFrameRate = _Runtime.coalesce(options.backgroundFrameRate, function():Dynamic return cast Application.DEFAULT_BACKGROUND_FRAME_RATE__application);

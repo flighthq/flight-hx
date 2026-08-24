@@ -90,22 +90,46 @@ class RiveClipping {
 
   public static function createRiveRelativeTransforms__riveClipping(artboard:RiveArtboardGraph):Array<Matrix> {
     var transforms:Array<Matrix> = cast _Runtime.UNDEFINED;
-    transforms = (cast cast ([(cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix)] : Array<Dynamic>));
+    var states:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var pending:Array<Float> = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(_Runtime.field(artboard.objects, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
+    transforms = _Runtime.createArray(_Runtime.field(artboard.objects, 'length'));
+    states = new flighthq._internal._UInt8Array(_Runtime.field(artboard.objects, 'length'));
+    pending = (cast cast ([] : Array<Dynamic>));
+    flighthq._internal._StaticIndex.writeArray(transforms, 0.0, (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix));
+    flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast states : flighthq._internal._UInt8Array), (cast 0.0 : Float), (cast RiveClipping.RIVE_TRANSFORM_RESOLVED__riveClipping : Float));
     {
       var index:Float = 1.0;
       while ((cast ((cast index : Float) < (cast _Runtime.field(artboard.objects, 'length') : Float)) : Bool)) {
-        var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(artboard.objects, index);
-        var parent:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast index : Float));
-        var inherited:Matrix = ((cast ((cast parent : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(transforms, parent) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(transforms, 0.0) : Dynamic));
-        if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveClipping.RIVE_NODE_TYPE_KEY__riveClipping : Float)) : Bool) : Bool) : Bool)) {
-          _Runtime.callProperty(transforms, 'push', cast ([inherited] : Array<Dynamic>));
-          index++;
-          continue;
+        var current:Float = index;
+        while ((cast !_Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast states : flighthq._internal._UInt8Array), (cast current : Float)), RiveClipping.RIVE_TRANSFORM_RESOLVED__riveClipping) : Bool)) {
+          if ((cast _Runtime.strictEquals(flighthq._internal._StaticIndex.readUint8ArrayTyped((cast states : flighthq._internal._UInt8Array), (cast current : Float)), RiveClipping.RIVE_TRANSFORM_RESOLVING__riveClipping) : Bool)) {
+            _Runtime.throwValue(_Runtime.error('Rive component parent cycle at index ' + Std.string(current) + '.'));
+          }
+          flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast states : flighthq._internal._UInt8Array), (cast current : Float), (cast RiveClipping.RIVE_TRANSFORM_RESOLVING__riveClipping : Float));
+          _Runtime.callProperty(pending, 'push', cast ([current] : Array<Dynamic>));
+          var parent:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast current : Float));
+          if ((cast _Runtime.strictEquals(parent, RiveClipping.RIVE_NO_PARENT__riveClipping) : Bool)) { break; }
+          if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isInteger', cast ([parent] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast parent : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast parent : Float) >= (cast _Runtime.field(artboard.objects, 'length') : Float)) : Bool)) : Bool)) {
+            _Runtime.throwValue(_Runtime.error('Rive component ' + Std.string(current) + ' has unresolved parent ' + Std.string(parent) + '.'));
+          }
+          (current = cast (parent : Dynamic));
         }
-        var local:Matrix = (cast RiveClipping.createRiveLocalMatrix__riveClipping(({ final __callArgument28:Dynamic = object; __callArgument28; })) : Matrix);
-        var world:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix);
-        multiplyMatrix(({ final __callArgument29:Dynamic = world; __callArgument29; }), ({ final __callArgument30:Dynamic = inherited; __callArgument30; }), ({ final __callArgument31:Dynamic = local; __callArgument31; }));
-        _Runtime.callProperty(transforms, 'push', cast ([world] : Array<Dynamic>));
+        while ((cast ((cast _Runtime.field(pending, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
+          (current = cast (_Runtime.callProperty(pending, 'pop', cast ([] : Array<Dynamic>)) : Dynamic));
+          var object:RiveCoreObject = flighthq._internal._StaticIndex.readArray(artboard.objects, current);
+          var parent:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast artboard.parentIndices : Array<Float>), (cast current : Float));
+          var inherited:Matrix = ((cast ((cast parent : Float) >= (cast 0.0 : Float)) : Bool) ? (cast flighthq._internal._StaticIndex.readArray(transforms, parent) : Dynamic) : (cast flighthq._internal._StaticIndex.readArray(transforms, 0.0) : Dynamic));
+          if ((cast !(cast (cast isRiveCoreTypeDerivedFrom((cast object.typeKey : Float), (cast RiveClipping.RIVE_NODE_TYPE_KEY__riveClipping : Float)) : Bool) : Bool) : Bool)) {
+            flighthq._internal._StaticIndex.writeArray(transforms, current, inherited);
+          } else {
+            var local:Matrix = (cast RiveClipping.createRiveLocalMatrix__riveClipping(({ final __callArgument28:Dynamic = object; __callArgument28; })) : Matrix);
+            var world:Matrix = (cast createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) : Matrix);
+            multiplyMatrix(({ final __callArgument29:Dynamic = world; __callArgument29; }), ({ final __callArgument30:Dynamic = inherited; __callArgument30; }), ({ final __callArgument31:Dynamic = local; __callArgument31; }));
+            flighthq._internal._StaticIndex.writeArray(transforms, current, world);
+          }
+          flighthq._internal._StaticIndex.writeUint8ArrayTyped((cast states : flighthq._internal._UInt8Array), (cast current : Float), (cast RiveClipping.RIVE_TRANSFORM_RESOLVED__riveClipping : Float));
+        }
         index++;
       }
     }
@@ -165,4 +189,10 @@ class RiveClipping {
   public static final RIVE_CLIP_FILL_RULE__riveClipping:Float = 93.0;
 
   public static final RIVE_CLIP_IS_VISIBLE__riveClipping:Float = 94.0;
+
+  public static final RIVE_NO_PARENT__riveClipping:Float = -1.0;
+
+  public static final RIVE_TRANSFORM_RESOLVING__riveClipping:Float = 1.0;
+
+  public static final RIVE_TRANSFORM_RESOLVED__riveClipping:Float = 2.0;
 }

@@ -12,7 +12,6 @@ import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderTarget.RenderTargetColorSpace;
 
 class GlPresentRenderTarget {
-  @:noCompletion
   public static function presentGlRenderTarget(state:GlRenderState, target:GlRenderTarget, ?dest:Null<GlRenderTarget>):Void {
     if (dest == null) dest = cast (null : Dynamic);
     if ((cast _Runtime.strictEquals(target.colorSpace, 'linear') : Bool)) {

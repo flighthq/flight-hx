@@ -3,5 +3,9 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.GPUBindGroupLayout;
+import flighthq._internal.WebExterns.GPUPipelineLayout;
+import flighthq._internal.WebExterns.GPURenderPipeline;
+import flighthq._internal.WebExterns.GPUShaderModule;
 
-typedef WgpuQuadBatchResources = { var instanceBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var materialBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var basePipelineLayout:flighthq._internal.dom.GPUPipelineLayout; var materialPipelineLayout:flighthq._internal.dom.GPUPipelineLayout; var pipelines:flighthq._internal._WeakMap<flighthq._internal.dom.GPUShaderModule, flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>>; };
+typedef WgpuQuadBatchResources = { var instanceBindGroupLayout:GPUBindGroupLayout; var materialBindGroupLayout:GPUBindGroupLayout; var basePipelineLayout:GPUPipelineLayout; var materialPipelineLayout:GPUPipelineLayout; var pipelines:flighthq._internal._WeakMap<GPUShaderModule, flighthq._internal._Map<String, GPURenderPipeline>>; };

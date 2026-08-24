@@ -76,6 +76,7 @@ import flighthq.physics3dAbi.Physics3DAbiLayout.Physics3DAbiContactValueStride;
 import flighthq.physics3dAbi.Physics3DAbiLayout.Physics3DAbiJointFlag;
 import flighthq.physics3dAbi.Physics3DAbiLayout.Physics3DAbiJointKind;
 import flighthq.physics3dAbi.Physics3DAbiLayout.Physics3DAbiJointValueStride;
+import flighthq.physics3dAbi.Physics3DAbiLayout.Physics3DAbiMaxContactPoints;
 import flighthq.physics3dAbi.Physics3DAbiLayout.Physics3DAbiQueryValueStride;
 import flighthq.physics3dAbi.Physics3DAbiLayout.Physics3DAbiSetColliderPayloadOffset;
 import flighthq.physics3dAbi.Physics3DAbiLayout.Physics3DAbiShapeHeaderByteLength;
@@ -757,7 +758,7 @@ class ReferencePhysics3DAbi {
   }
 
   public static function hasHookCapacity__referencePhysics3DAbi(buffer:Physics3DAbiContactBuffer):Bool {
-    return cast _Runtime.andValue(((cast ((cast (cast ReferencePhysics3DAbi.getContactCapacity__referencePhysics3DAbi(({ final __callArgument105:Dynamic = buffer; __callArgument105; })) : Float) : Float) >= (cast 1.0 : Float)) : Bool) && (cast ((cast _Runtime.field(buffer.pointFeatureIds, 'length') : Float) >= (cast 4.0 : Float)) : Bool)), function():Dynamic return cast ((cast _Runtime.field(buffer.pointValues, 'length') : Float) >= (cast (4.0 * Physics3DAbiContactPointValueStride) : Float)));
+    return cast _Runtime.andValue(((cast ((cast (cast ReferencePhysics3DAbi.getContactCapacity__referencePhysics3DAbi(({ final __callArgument105:Dynamic = buffer; __callArgument105; })) : Float) : Float) >= (cast 1.0 : Float)) : Bool) && (cast ((cast _Runtime.field(buffer.pointFeatureIds, 'length') : Float) >= (cast Physics3DAbiMaxContactPoints : Float)) : Bool)), function():Dynamic return cast ((cast _Runtime.field(buffer.pointValues, 'length') : Float) >= (cast (Physics3DAbiMaxContactPoints * Physics3DAbiContactPointValueStride) : Float)));
     return cast null;
   }
 

@@ -37,6 +37,8 @@ class Physics3DAbiLayout {
 
   public static final Physics3DAbiQueryValueStride:Float = 7.0;
 
+  public static final Physics3DAbiMaxContactPoints:Float = 4.0;
+
   public static final Physics3DAbiBodyValue:{ var X:Float; var Y:Float; var Z:Float; var OrientationX:Float; var OrientationY:Float; var OrientationZ:Float; var OrientationW:Float; var VelocityX:Float; var VelocityY:Float; var VelocityZ:Float; var AngularVelocityX:Float; var AngularVelocityY:Float; var AngularVelocityZ:Float; var ForceX:Float; var ForceY:Float; var ForceZ:Float; var TorqueX:Float; var TorqueY:Float; var TorqueZ:Float; var Mass:Float; var InertiaXX:Float; var InertiaYY:Float; var InertiaZZ:Float; var InertiaXY:Float; var InertiaXZ:Float; var InertiaYZ:Float; var CenterX:Float; var CenterY:Float; var CenterZ:Float; var LinearDamping:Float; var AngularDamping:Float; var GravityScale:Float; var SleepTimer:Float; } = (cast { X: 0.0, Y: 1.0, Z: 2.0, OrientationX: 3.0, OrientationY: 4.0, OrientationZ: 5.0, OrientationW: 6.0, VelocityX: 7.0, VelocityY: 8.0, VelocityZ: 9.0, AngularVelocityX: 10.0, AngularVelocityY: 11.0, AngularVelocityZ: 12.0, ForceX: 13.0, ForceY: 14.0, ForceZ: 15.0, TorqueX: 16.0, TorqueY: 17.0, TorqueZ: 18.0, Mass: 19.0, InertiaXX: 20.0, InertiaYY: 21.0, InertiaZZ: 22.0, InertiaXY: 23.0, InertiaXZ: 24.0, InertiaYZ: 25.0, CenterX: 26.0, CenterY: 27.0, CenterZ: 28.0, LinearDamping: 29.0, AngularDamping: 30.0, GravityScale: 31.0, SleepTimer: 32.0 });
 
   public static final Physics3DAbiContactId:{ var BodyA:Float; var BodyB:Float; var ColliderA:Float; var ColliderB:Float; } = (cast { BodyA: 0.0, BodyB: 1.0, ColliderA: 2.0, ColliderB: 3.0 });
@@ -49,7 +51,7 @@ class Physics3DAbiLayout {
 
   public static final Physics3DAbiQueryValue:{ var Fraction:Float; var X:Float; var Y:Float; var Z:Float; var NormalX:Float; var NormalY:Float; var NormalZ:Float; } = (cast { Fraction: 0.0, X: 1.0, Y: 2.0, Z: 3.0, NormalX: 4.0, NormalY: 5.0, NormalZ: 6.0 });
 
-  public static final Physics3DAbiCommandByteLength:{ var SetGravity:Float; var SetSolverConfig:Float; var SetBody:Float; var DestroyBody:Float; var SetColliderMinimum:Float; var DestroyCollider:Float; var SetJoint:Float; var DestroyJoint:Float; var BodyAction:Float; var WakeBody:Float; } = (cast { SetGravity: 40.0, SetSolverConfig: 96.0, SetBody: 288.0, DestroyBody: 16.0, SetColliderMinimum: 80.0, DestroyCollider: 16.0, SetJoint: 272.0, DestroyJoint: 16.0, BodyAction: 64.0, WakeBody: 16.0 });
+  public static final Physics3DAbiCommandByteLength:{ var SetGravity:Float; var SetSolverConfig:Float; var SetBody:Float; var DestroyBody:Float; var SetColliderMinimum:Float; var DestroyCollider:Float; var SetJoint:Float; var DestroyJoint:Float; var BodyAction:Float; var WakeBody:Float; } = (cast { SetGravity: 40.0, SetSolverConfig: 96.0, SetBody: 288.0, DestroyBody: 16.0, SetColliderMinimum: 72.0, DestroyCollider: 16.0, SetJoint: 272.0, DestroyJoint: 16.0, BodyAction: 64.0, WakeBody: 16.0 });
 
   public static final Physics3DAbiSetBodyPayloadOffset:{ var Flags:Float; var Reserved:Float; var Values:Float; } = (cast { Flags: 0.0, Reserved: 4.0, Values: 8.0 });
 

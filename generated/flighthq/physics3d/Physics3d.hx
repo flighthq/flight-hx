@@ -19,12 +19,14 @@ import flighthq.physics3d.JointRegistry as Facade_Physics3d_flighthq_physics3d_J
 import flighthq.physics3d.Joints as Facade_Physics3d_flighthq_physics3d_Joints;
 import flighthq.physics3d.MassProperties as Facade_Physics3d_flighthq_physics3d_MassProperties;
 import flighthq.physics3d.Material as Facade_Physics3d_flighthq_physics3d_Material;
+import flighthq.physics3d.NodeSync as Facade_Physics3d_flighthq_physics3d_NodeSync;
 import flighthq.physics3d.RegisterBuiltInPhysics3DJointSolvers as Facade_Physics3d_flighthq_physics3d_RegisterBuiltInPhysics3DJointSolvers;
 import flighthq.physics3d.Step as Facade_Physics3d_flighthq_physics3d_Step;
 import flighthq.physics3d.World as Facade_Physics3d_flighthq_physics3d_World;
 import flighthq.physics3d.WorldQueries as Facade_Physics3d_flighthq_physics3d_WorldQueries;
 import flighthq.types.Collision.CollisionBuiltInShape3D;
 import flighthq.types.Collision.CollisionColliderShape3D;
+import flighthq.types.Node3D;
 import flighthq.types.Physics3D.Physics3DBallAndSocketJoint;
 import flighthq.types.Physics3D.Physics3DBallAndSocketJointOptions;
 import flighthq.types.Physics3D.Physics3DBodyType;
@@ -476,6 +478,10 @@ class Physics3d {
 
   public static function stepPhysics3DInterval(world:Physics3DWorld, dt:Float):Void {
     Facade_Physics3d_flighthq_physics3d_Step.stepPhysics3DInterval(world, dt);
+  }
+
+  public static function syncPhysics3DBodyToNode3D(body:RigidBody3D, node:Node3D):Void {
+    Facade_Physics3d_flighthq_physics3d_NodeSync.syncPhysics3DBodyToNode3D(body, node);
   }
 
   public static function updateRigidBody3DMassData(body:RigidBody3D):Void {

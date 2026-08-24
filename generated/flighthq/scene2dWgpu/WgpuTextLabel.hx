@@ -74,7 +74,7 @@ class WgpuTextLabel {
     if ((cast _Runtime.strictEquals(textLabelData, null) : Bool)) { return; }
     entry = ((cast runtime.textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, WgpuTextureSourceTextureEntry>).get((cast textLabelData : WgpuTextLabelData__wgpuTextLabel).image));
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      (cast (cast entry : { var texture:flighthq._internal.dom.GPUTexture; }).texture : flighthq._internal.dom.GPUTexture).destroy();
+      _Runtime.callProperty((cast entry : { var texture:flighthq._internal._Any; }).texture, 'destroy', cast ([] : Array<Dynamic>));
       ((cast runtime.textureSourcePremultipliedTextureCache : flighthq._internal._WeakMap<TextureSource, WgpuTextureSourceTextureEntry>).delete_((cast textLabelData : WgpuTextLabelData__wgpuTextLabel).image));
     }
   }
@@ -91,7 +91,7 @@ class WgpuTextLabel {
     var material:Null<Material> = cast _Runtime.UNDEFINED;
     var materialRenderer:Null<WgpuMaterialRenderer> = cast _Runtime.UNDEFINED;
     var textData:Null<WgpuTextLabelData__wgpuTextLabel> = cast _Runtime.UNDEFINED;
-    var maxTexDim:Float = cast _Runtime.UNDEFINED;
+    var maxTexDim:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var pixelRatio:Float = cast _Runtime.UNDEFINED;
     var version:Float = cast _Runtime.UNDEFINED;
     var textureEntry:Null<WgpuTextureEntry> = cast _Runtime.UNDEFINED;
@@ -114,7 +114,7 @@ class WgpuTextLabel {
     if ((cast _Runtime.strictEquals(materialRenderer, null) : Bool)) { return; }
     textData = (cast getWgpuRendererData(({ final __callArgument4:Dynamic = (cast renderProxy : RenderProxy2D).rendererData; __callArgument4; })) : Null<WgpuTextLabelData__wgpuTextLabel>);
     if ((cast _Runtime.strictEquals(textData, null) : Bool)) { return; }
-    maxTexDim = flighthq._internal.backend.WebGpuLimitsBackend.field(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'limits'), 'maxTextureDimension2D');
+    maxTexDim = _Runtime.field(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'limits'), 'maxTextureDimension2D');
     pixelRatio = (cast state : WgpuRenderState).pixelRatio;
     version = (cast getNodeLocalContentRevision((cast source : Dynamic)) : Float);
     if ((cast ((cast !_Runtime.strictEquals(version, (cast textData : WgpuTextLabelData__wgpuTextLabel).lastContentId) : Bool) || (cast !_Runtime.strictEquals(pixelRatio, (cast textData : WgpuTextLabelData__wgpuTextLabel).lastPixelRatio) : Bool)) : Bool)) {

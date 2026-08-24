@@ -157,8 +157,8 @@
       "sites": [
         {
           "column": 18,
-          "line": 132,
-          "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+          "line": 94,
+          "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
         },
         {
           "column": 21,
@@ -246,8 +246,8 @@
         },
         {
           "column": 3,
-          "line": 139,
-          "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+          "line": 100,
+          "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
         },
         {
           "column": 5,
@@ -791,8 +791,8 @@
         },
         {
           "column": 3,
-          "line": 140,
-          "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+          "line": 101,
+          "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
         },
         {
           "column": 5,
@@ -905,8 +905,8 @@
       "sites": [
         {
           "column": 3,
-          "line": 141,
-          "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+          "line": 102,
+          "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
         },
         {
           "column": 7,
@@ -1073,8 +1073,8 @@
       "sites": [
         {
           "column": 3,
-          "line": 162,
-          "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+          "line": 69,
+          "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
         },
         {
           "column": 5,
@@ -1231,8 +1231,8 @@
         },
         {
           "column": 17,
-          "line": 143,
-          "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+          "line": 104,
+          "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
         }
       ]
     },
@@ -1876,13 +1876,13 @@
       "sites": [
         {
           "column": 23,
-          "line": 52,
-          "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+          "line": 18,
+          "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
         },
         {
           "column": 19,
-          "line": 120,
-          "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+          "line": 82,
+          "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
         },
         {
           "column": 12,
@@ -2956,13 +2956,13 @@
       "sites": [
         {
           "column": 3,
-          "line": 118,
-          "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+          "line": 80,
+          "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
         },
         {
           "column": 3,
-          "line": 138,
-          "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+          "line": 99,
+          "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
         },
         {
           "column": 3,
@@ -3010,13 +3010,13 @@
       "sites": [
         {
           "column": 3,
-          "line": 117,
-          "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+          "line": 79,
+          "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
         },
         {
           "column": 3,
-          "line": 137,
-          "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+          "line": 98,
+          "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
         },
         {
           "column": 3,
@@ -3193,13 +3193,13 @@
         },
         {
           "column": 23,
-          "line": 93,
-          "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+          "line": 50,
+          "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
         },
         {
           "column": 23,
-          "line": 97,
-          "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+          "line": 54,
+          "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
         },
         {
           "column": 19,
@@ -3618,8 +3618,8 @@
         },
         {
           "column": 3,
-          "line": 134,
-          "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+          "line": 96,
+          "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
         },
         {
           "column": 3,
@@ -3929,7 +3929,7 @@
       ]
     },
     {
-      "accesses": 42,
+      "accesses": 43,
       "binding": "CanvasElementBackend",
       "contract": "backend",
       "member": "width",
@@ -3968,13 +3968,18 @@
         },
         {
           "column": 61,
-          "line": 49,
+          "line": 52,
           "source": "upstream/packages/effects-wgpu/src/wgpuBlurEffect.ts"
         },
         {
           "column": 54,
           "line": 192,
           "source": "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts"
+        },
+        {
+          "column": 77,
+          "line": 13,
+          "source": "upstream/packages/effects-wgpu/src/wgpuEffectTexelScale.ts"
         },
         {
           "column": 13,
@@ -4198,8 +4203,8 @@
         },
         {
           "column": 3,
-          "line": 133,
-          "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+          "line": 95,
+          "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
         },
         {
           "column": 3,
@@ -4549,8 +4554,8 @@
         },
         {
           "column": 23,
-          "line": 97,
-          "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+          "line": 54,
+          "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
         },
         {
           "column": 18,
@@ -4823,8 +4828,8 @@
         },
         {
           "column": 51,
-          "line": 96,
-          "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts"
+          "line": 53,
+          "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
         },
         {
           "column": 55,
@@ -5078,7 +5083,7 @@
       "sites": [
         {
           "column": 46,
-          "line": 432,
+          "line": 486,
           "source": "upstream/packages/application/src/application.ts"
         },
         {
@@ -5947,7 +5952,7 @@
       "sites": [
         {
           "column": 3,
-          "line": 25,
+          "line": 26,
           "source": "upstream/packages/application/src/application.ts"
         },
         {
@@ -6583,7 +6588,7 @@
       "sites": [
         {
           "column": 30,
-          "line": 26,
+          "line": 27,
           "source": "upstream/packages/application/src/application.ts"
         },
         {
@@ -21758,25 +21763,6 @@
       "accesses": 1,
       "binding": "WebGpuCanvasContextBackend",
       "contract": "backend",
-      "member": "configure",
-      "operation": "call",
-      "receiverTypes": [
-        "GPUCanvasContext"
-      ],
-      "runtimeEndpoint": "configure",
-      "runtimePath": "src/flighthq/_internal/backend/WebGpuCanvasContextBackend.hx",
-      "sites": [
-        {
-          "column": 3,
-          "line": 135,
-          "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
-        }
-      ]
-    },
-    {
-      "accesses": 1,
-      "binding": "WebGpuCanvasContextBackend",
-      "contract": "backend",
       "member": "getCurrentTexture",
       "operation": "call",
       "receiverTypes": [
@@ -21793,7 +21779,7 @@
       ]
     },
     {
-      "accesses": 57,
+      "accesses": 56,
       "binding": "WebGpuDeviceBackend",
       "contract": "backend",
       "member": "createBindGroup",
@@ -21913,11 +21899,6 @@
           "column": 23,
           "line": 28,
           "source": "upstream/packages/render-wgpu/src/wgpuMipmap.ts"
-        },
-        {
-          "column": 28,
-          "line": 156,
-          "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
         },
         {
           "column": 30,
@@ -22301,7 +22282,7 @@
       ]
     },
     {
-      "accesses": 36,
+      "accesses": 35,
       "binding": "WebGpuDeviceBackend",
       "contract": "backend",
       "member": "createBuffer",
@@ -22316,11 +22297,6 @@
           "column": 25,
           "line": 82,
           "source": "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts"
-        },
-        {
-          "column": 25,
-          "line": 146,
-          "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
         },
         {
           "column": 25,
@@ -22787,7 +22763,7 @@
       ]
     },
     {
-      "accesses": 10,
+      "accesses": 8,
       "binding": "WebGpuDeviceBackend",
       "contract": "backend",
       "member": "createSampler",
@@ -22802,16 +22778,6 @@
           "column": 19,
           "line": 115,
           "source": "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts"
-        },
-        {
-          "column": 25,
-          "line": 161,
-          "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
-        },
-        {
-          "column": 26,
-          "line": 168,
-          "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
         },
         {
           "column": 15,
@@ -23228,7 +23194,7 @@
       ]
     },
     {
-      "accesses": 7,
+      "accesses": 6,
       "binding": "WebGpuDeviceBackend",
       "contract": "backend",
       "member": "limits",
@@ -23243,11 +23209,6 @@
           "column": 24,
           "line": 22,
           "source": "upstream/packages/render-wgpu/src/wgpuAntialias.ts"
-        },
-        {
-          "column": 39,
-          "line": 143,
-          "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
         },
         {
           "column": 24,
@@ -23542,93 +23503,6 @@
     },
     {
       "accesses": 1,
-      "binding": "WebGpuLimitsBackend",
-      "contract": "backend",
-      "member": "maxBindGroups",
-      "operation": "read",
-      "receiverTypes": [
-        "GPUSupportedLimits"
-      ],
-      "runtimeEndpoint": "maxBindGroups",
-      "runtimePath": "src/flighthq/_internal/backend/WebGpuLimitsBackend.hx",
-      "sites": [
-        {
-          "column": 7,
-          "line": 115,
-          "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
-        }
-      ]
-    },
-    {
-      "accesses": 7,
-      "binding": "WebGpuLimitsBackend",
-      "contract": "backend",
-      "member": "maxTextureDimension2D",
-      "operation": "read",
-      "receiverTypes": [
-        "GPUSupportedLimits"
-      ],
-      "runtimeEndpoint": "maxTextureDimension2D",
-      "runtimePath": "src/flighthq/_internal/backend/WebGpuLimitsBackend.hx",
-      "sites": [
-        {
-          "column": 33,
-          "line": 21,
-          "source": "upstream/packages/render-wgpu/src/wgpuAdapterCapabilities.ts"
-        },
-        {
-          "column": 24,
-          "line": 22,
-          "source": "upstream/packages/render-wgpu/src/wgpuAntialias.ts"
-        },
-        {
-          "column": 24,
-          "line": 115,
-          "source": "upstream/packages/render-wgpu/src/wgpuRenderTarget.ts"
-        },
-        {
-          "column": 24,
-          "line": 281,
-          "source": "upstream/packages/render-wgpu/src/wgpuRenderTarget.ts"
-        },
-        {
-          "column": 21,
-          "line": 89,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts"
-        },
-        {
-          "column": 21,
-          "line": 228,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts"
-        },
-        {
-          "column": 21,
-          "line": 93,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts"
-        }
-      ]
-    },
-    {
-      "accesses": 1,
-      "binding": "WebGpuLimitsBackend",
-      "contract": "backend",
-      "member": "minUniformBufferOffsetAlignment",
-      "operation": "read",
-      "receiverTypes": [
-        "GPUSupportedLimits"
-      ],
-      "runtimeEndpoint": "minUniformBufferOffsetAlignment",
-      "runtimePath": "src/flighthq/_internal/backend/WebGpuLimitsBackend.hx",
-      "sites": [
-        {
-          "column": 39,
-          "line": 143,
-          "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
-        }
-      ]
-    },
-    {
-      "accesses": 1,
       "binding": "WebGpuQueueBackend",
       "contract": "backend",
       "member": "copyExternalImageToTexture",
@@ -23650,40 +23524,6 @@
       "accesses": 4,
       "binding": "WebGpuQueueBackend",
       "contract": "backend",
-      "member": "submit",
-      "operation": "call",
-      "receiverTypes": [
-        "GPUQueue"
-      ],
-      "runtimeEndpoint": "submit",
-      "runtimePath": "src/flighthq/_internal/backend/WebGpuQueueBackend.hx",
-      "sites": [
-        {
-          "column": 5,
-          "line": 170,
-          "source": "upstream/packages/render-wgpu/src/wgpuBackground.ts"
-        },
-        {
-          "column": 3,
-          "line": 43,
-          "source": "upstream/packages/render-wgpu/src/wgpuMipmap.ts"
-        },
-        {
-          "column": 3,
-          "line": 156,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts"
-        },
-        {
-          "column": 5,
-          "line": 212,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts"
-        }
-      ]
-    },
-    {
-      "accesses": 35,
-      "binding": "WebGpuQueueBackend",
-      "contract": "backend",
       "member": "writeBuffer",
       "operation": "call",
       "receiverTypes": [
@@ -23692,51 +23532,6 @@
       "runtimeEndpoint": "writeBuffer",
       "runtimePath": "src/flighthq/_internal/backend/WebGpuQueueBackend.hx",
       "sites": [
-        {
-          "column": 3,
-          "line": 171,
-          "source": "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts"
-        },
-        {
-          "column": 7,
-          "line": 161,
-          "source": "upstream/packages/render-wgpu/src/wgpuBackground.ts"
-        },
-        {
-          "column": 3,
-          "line": 125,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuClipContours.ts"
-        },
-        {
-          "column": 28,
-          "line": 157,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuClipContours.ts"
-        },
-        {
-          "column": 3,
-          "line": 278,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts"
-        },
-        {
-          "column": 3,
-          "line": 163,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
-        },
-        {
-          "column": 5,
-          "line": 172,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
-        },
-        {
-          "column": 5,
-          "line": 75,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
-        },
-        {
-          "column": 5,
-          "line": 86,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
-        },
         {
           "column": 5,
           "line": 283,
@@ -23748,71 +23543,6 @@
           "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
         },
         {
-          "column": 3,
-          "line": 255,
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuVelocity.ts"
-        },
-        {
-          "column": 3,
-          "line": 262,
-          "source": "upstream/packages/scene3d-wgpu/src/customShaderWgpuMeshMaterialRenderer.ts"
-        },
-        {
-          "column": 3,
-          "line": 125,
-          "source": "upstream/packages/scene3d-wgpu/src/standardPbrWgpuMeshMaterialRenderer.ts"
-        },
-        {
-          "column": 3,
-          "line": 77,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuClassicPrelude.ts"
-        },
-        {
-          "column": 3,
-          "line": 56,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuDebugPrelude.ts"
-        },
-        {
-          "column": 5,
-          "line": 193,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts"
-        },
-        {
-          "column": 3,
-          "line": 41,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentSkybox.ts"
-        },
-        {
-          "column": 3,
-          "line": 79,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuMatcapPrelude.ts"
-        },
-        {
-          "column": 3,
-          "line": 313,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
-        },
-        {
-          "column": 3,
-          "line": 467,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
-        },
-        {
-          "column": 3,
-          "line": 683,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
-        },
-        {
-          "column": 3,
-          "line": 1132,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
-        },
-        {
-          "column": 3,
-          "line": 51,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshUpload.ts"
-        },
-        {
           "column": 5,
           "line": 95,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshUpload.ts"
@@ -23821,129 +23551,20 @@
           "column": 3,
           "line": 103,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshUpload.ts"
-        },
-        {
-          "column": 3,
-          "line": 156,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
-        },
-        {
-          "column": 3,
-          "line": 162,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
-        },
-        {
-          "column": 3,
-          "line": 355,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
-        },
-        {
-          "column": 3,
-          "line": 462,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
-        },
-        {
-          "column": 3,
-          "line": 163,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts"
-        },
-        {
-          "column": 3,
-          "line": 65,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts"
-        },
-        {
-          "column": 3,
-          "line": 118,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuUnlitPrelude.ts"
-        },
-        {
-          "column": 3,
-          "line": 54,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuWireframePrelude.ts"
-        },
-        {
-          "column": 3,
-          "line": 34,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuWireframeUpload.ts"
-        }
-      ]
-    },
-    {
-      "accesses": 10,
-      "binding": "WebGpuQueueBackend",
-      "contract": "backend",
-      "member": "writeTexture",
-      "operation": "call",
-      "receiverTypes": [
-        "GPUQueue"
-      ],
-      "runtimeEndpoint": "writeTexture",
-      "runtimePath": "src/flighthq/_internal/backend/WebGpuQueueBackend.hx",
-      "sites": [
-        {
-          "column": 3,
-          "line": 132,
-          "source": "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts"
-        },
-        {
-          "column": 3,
-          "line": 107,
-          "source": "upstream/packages/effects-wgpu/src/wgpuEffectGradientRamp.ts"
-        },
-        {
-          "column": 7,
-          "line": 114,
-          "source": "upstream/packages/render-wgpu/src/wgpuCompressedTexture.ts"
-        },
-        {
-          "column": 5,
-          "line": 143,
-          "source": "upstream/packages/render-wgpu/src/wgpuCompressedTexture.ts"
-        },
-        {
-          "column": 3,
-          "line": 562,
-          "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
-        },
-        {
-          "column": 3,
-          "line": 20,
-          "source": "upstream/packages/render-wgpu/src/wgpuTextureUpload.ts"
-        },
-        {
-          "column": 5,
-          "line": 558,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
-        },
-        {
-          "column": 3,
-          "line": 408,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
-        },
-        {
-          "column": 5,
-          "line": 255,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuSkinPalette.ts"
-        },
-        {
-          "column": 5,
-          "line": 263,
-          "source": "upstream/packages/scene3d-wgpu/src/wgpuSkinPalette.ts"
         }
       ]
     }
   ],
   "schemaVersion": 1,
   "summary": {
-    "accesses": 3681,
+    "accesses": 3622,
     "backendContractEndpoints": 394,
-    "bindings": 10,
-    "calls": 2337,
+    "bindings": 9,
+    "calls": 2287,
     "dynamicFallbackEndpoints": 12,
-    "endpoints": 394,
-    "reads": 1091,
+    "endpoints": 388,
+    "reads": 1082,
     "writes": 253
   },
-  "upstreamCommit": "9db114b3fe1db90a90a11541649cb3af8bb5ca62"
+  "upstreamCommit": "443275fa278b1f0415c49b6be710891ef8a64bf1"
 }

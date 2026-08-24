@@ -70,7 +70,6 @@ class GlRenderTarget {
     return cast null;
   }
 
-  @:noCompletion
   public static function destroyGlRenderTarget(state:GlRenderState, target:flighthq.types.GlRenderTarget):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;

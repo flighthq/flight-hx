@@ -3,5 +3,8 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.GPUBindGroupLayout;
+import flighthq._internal.WebExterns.GPUPipelineLayout;
+import flighthq._internal.WebExterns.GPURenderPipeline;
 
-typedef WgpuFullscreenPipeline = { var pipeline:flighthq._internal.dom.GPURenderPipeline; var pipelineLayout:flighthq._internal.dom.GPUPipelineLayout; var uniformBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var textureBindGroupLayouts:Array<flighthq._internal.dom.GPUBindGroupLayout>; };
+typedef WgpuFullscreenPipeline = { var pipeline:GPURenderPipeline; var pipelineLayout:GPUPipelineLayout; var uniformBindGroupLayout:GPUBindGroupLayout; var textureBindGroupLayouts:Array<GPUBindGroupLayout>; };

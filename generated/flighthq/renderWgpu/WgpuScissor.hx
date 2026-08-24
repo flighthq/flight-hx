@@ -3,6 +3,7 @@ package flighthq.renderWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.GPURenderPassEncoder;
 import flighthq.renderWgpu.WgpuAntialias.getWgpuSurfaceRenderScale;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderState;
@@ -11,7 +12,7 @@ import flighthq.types.WgpuRenderState.WgpuScissorRect;
 
 class WgpuScissor {
   @:noCompletion
-  public static function applyWgpuScissorRect(state:WgpuRenderState, pass:flighthq._internal.dom.GPURenderPassEncoder):Void {
+  public static function applyWgpuScissorRect(state:WgpuRenderState, pass:GPURenderPassEncoder):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var rect:Null<WgpuScissorRect> = cast _Runtime.UNDEFINED;
     var x:Float = cast _Runtime.UNDEFINED;
@@ -25,14 +26,14 @@ class WgpuScissor {
     y = HxMath.max(0.0, HxMath.floor((cast rect : { var y:Float; }).y));
     w = HxMath.max(1.0, HxMath.ceil((cast rect : { var width:Float; }).width));
     h = HxMath.max(1.0, HxMath.ceil((cast rect : { var height:Float; }).height));
-    setWgpuRenderPassScissorRect(({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = pass; __callArgument2; }), (cast x : Float), (cast y : Float), (cast w : Float), (cast h : Float));
+    setWgpuRenderPassScissorRect(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast pass : flighthq._internal._Any), (cast x : Float), (cast y : Float), (cast w : Float), (cast h : Float));
   }
 
   @:noCompletion
   public static function popWgpuScissorRect(state:WgpuRenderState):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var prev:Null<WgpuScissorRect> = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
     prev = _Runtime.callProperty(runtime.scissorStack, 'pop', cast ([] : Array<Dynamic>));
     (runtime.currentScissorRect = cast (_Runtime.coalesce(prev, function():Dynamic return cast null) : Null<WgpuScissorRect>));
   }
@@ -40,7 +41,7 @@ class WgpuScissor {
   @:noCompletion
   public static function pushWgpuScissorRect(state:WgpuRenderState, rect:WgpuScissorRect):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuRenderStateRuntime);
     if ((cast !_Runtime.strictEquals(runtime.currentScissorRect, null) : Bool)) {
       _Runtime.callProperty(runtime.scissorStack, 'push', cast ([runtime.currentScissorRect] : Array<Dynamic>));
     }
@@ -48,9 +49,9 @@ class WgpuScissor {
   }
 
   @:noCompletion
-  public static function setWgpuRenderPassScissorRect(state:WgpuRenderState, pass:flighthq._internal.dom.GPURenderPassEncoder, x:Float, y:Float, width:Float, height:Float):Void {
+  public static function setWgpuRenderPassScissorRect(state:WgpuRenderState, pass:GPURenderPassEncoder, x:Float, y:Float, width:Float, height:Float):Void {
     var scale:Float = cast _Runtime.UNDEFINED;
-    scale = (cast getWgpuSurfaceRenderScale(({ final __callArgument5:Dynamic = state; __callArgument5; })) : Float);
-    pass.setScissorRect((x * scale), (y * scale), (width * scale), (height * scale));
+    scale = (cast getWgpuSurfaceRenderScale(({ final __callArgument4:Dynamic = state; __callArgument4; })) : Float);
+    _Runtime.callProperty(pass, 'setScissorRect', cast ([(x * scale), (y * scale), (width * scale), (height * scale)] : Array<Dynamic>));
   }
 }

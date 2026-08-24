@@ -3,6 +3,7 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './cameraShake.mjs';
 export * from './flyCameraController.mjs';
 export * from './follow.mjs';
 export * from './framing.mjs';

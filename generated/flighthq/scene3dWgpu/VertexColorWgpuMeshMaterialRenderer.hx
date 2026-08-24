@@ -3,6 +3,7 @@ package flighthq.scene3dWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.GPUBindGroup;
 import flighthq.color.PackColor.unpackColorToLinear;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.scene3dWgpu.WgpuMeshMaterialRegistry.registerWgpuMeshMaterialRenderer;
@@ -32,26 +33,26 @@ class VertexColorWgpuMeshMaterialRenderer {
   @:noCompletion
   public static final vertexColorWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
+    var pass:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var vertexColor:Null<VertexColorMaterial> = cast _Runtime.UNDEFINED;
-    var format:String = cast _Runtime.UNDEFINED;
+    var format:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var pipeline:WgpuUnlitPipeline = cast _Runtime.UNDEFINED;
-    var group:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
+    var group:GPUBindGroup = cast _Runtime.UNDEFINED;
     stateRuntime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
     pass = stateRuntime.renderPass;
     if ((cast _Runtime.strictEquals(pass, null) : Bool)) { return; }
     vertexColor = (cast material : Null<VertexColorMaterial>);
     format = _Runtime.coalesce(stateRuntime.currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
-    pipeline = (cast ensureWgpuUnlitPipeline(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast VertexColorWgpuMeshMaterialRenderer.defineKeyForMaterial__vertexColorWgpuMeshMaterialRenderer(({ final __callArgument2:Dynamic = vertexColor; __callArgument2; })) : WgpuUnlitDefineKey), (cast format : String)) : WgpuUnlitPipeline);
+    pipeline = (cast ensureWgpuUnlitPipeline(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast VertexColorWgpuMeshMaterialRenderer.defineKeyForMaterial__vertexColorWgpuMeshMaterialRenderer(({ final __callArgument2:Dynamic = vertexColor; __callArgument2; })) : WgpuUnlitDefineKey), (cast format : flighthq._internal._Any)) : WgpuUnlitPipeline);
     writeWgpuFrameUniform(({ final __callArgument3:Dynamic = state; __callArgument3; }), ({ final __callArgument4:Dynamic = camera; __callArgument4; }), ({ final __callArgument5:Dynamic = _lights; __callArgument5; }));
     if ((cast _Runtime.strictEquals(vertexColor, null) : Bool)) {
-      (group = cast ((cast bindWgpuUnlitSurface(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pipeline; __callArgument7; }), ({ final __callArgument8:Dynamic = VertexColorWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__vertexColorWgpuMeshMaterialRenderer; __callArgument8; }), ({ final __callArgument9:Dynamic = VertexColorWgpuMeshMaterialRenderer.WHITE__vertexColorWgpuMeshMaterialRenderer; __callArgument9; }), (cast 1.0 : Float), (cast 0.5 : Float), (cast null : Dynamic)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (group = cast (bindWgpuUnlitSurface(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = pipeline; __callArgument7; }), ({ final __callArgument8:Dynamic = VertexColorWgpuMeshMaterialRenderer.FALLBACK_MATERIAL__vertexColorWgpuMeshMaterialRenderer; __callArgument8; }), ({ final __callArgument9:Dynamic = VertexColorWgpuMeshMaterialRenderer.WHITE__vertexColorWgpuMeshMaterialRenderer; __callArgument9; }), (cast 1.0 : Float), (cast 0.5 : Float), (cast null : Dynamic)) : Dynamic));
     } else {
       (cast unpackColorToLinear(({ final __callArgument10:Dynamic = VertexColorWgpuMeshMaterialRenderer._scratch__vertexColorWgpuMeshMaterialRenderer; __callArgument10; }), (cast (cast vertexColor : { var tint:Float; }).tint : Float)) : LinearColor);
-      (group = cast ((cast bindWgpuUnlitSurface(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = pipeline; __callArgument12; }), ({ final __callArgument13:Dynamic = vertexColor; __callArgument13; }), ({ final __callArgument14:Dynamic = VertexColorWgpuMeshMaterialRenderer._scratch__vertexColorWgpuMeshMaterialRenderer; __callArgument14; }), (cast 1.0 : Float), (cast (cast vertexColor : { var alphaCutoff:Float; }).alphaCutoff : Float), (cast null : Dynamic)) : flighthq._internal.dom.GPUBindGroup) : Dynamic));
+      (group = cast (bindWgpuUnlitSurface(({ final __callArgument11:Dynamic = state; __callArgument11; }), ({ final __callArgument12:Dynamic = pipeline; __callArgument12; }), ({ final __callArgument13:Dynamic = vertexColor; __callArgument13; }), ({ final __callArgument14:Dynamic = VertexColorWgpuMeshMaterialRenderer._scratch__vertexColorWgpuMeshMaterialRenderer; __callArgument14; }), (cast 1.0 : Float), (cast (cast vertexColor : { var alphaCutoff:Float; }).alphaCutoff : Float), (cast null : Dynamic)) : Dynamic));
     }
     beginWgpuMeshDraw(({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = pipeline; __callArgument16; }));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, group);
+    _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, group] : Array<Dynamic>));
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     drawWgpuMeshSubset(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = proxy; __callArgument18; }), ({ final __callArgument19:Dynamic = geometry; __callArgument19; }));
   } });

@@ -3,5 +3,7 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.GPURenderPipeline;
+import flighthq._internal.WebExterns.GPUTextureFormat;
 
-typedef WgpuEffectPipeline = { var pipeline:flighthq._internal.dom.GPURenderPipeline; var blendMode:WgpuEffectBlendMode; @:optional var compileForFormat:flighthq._internal.dom.GPUTextureFormat->flighthq._internal.dom.GPURenderPipeline; @:optional var variants:flighthq._internal._Map<flighthq._internal.dom.GPUTextureFormat, flighthq._internal.dom.GPURenderPipeline>; };
+typedef WgpuEffectPipeline = { var pipeline:GPURenderPipeline; var blendMode:WgpuEffectBlendMode; @:optional var compileForFormat:GPUTextureFormat->GPURenderPipeline; @:optional var variants:flighthq._internal._Map<GPUTextureFormat, GPURenderPipeline>; };

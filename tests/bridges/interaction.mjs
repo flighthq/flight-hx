@@ -10,7 +10,6 @@ export const containsNode2D = compiled.flighthq.interaction.Interaction.contains
 export const createFocusManager = compiled.flighthq.interaction.Interaction.createFocusManager;
 export const createInteractionManager = compiled.flighthq.interaction.Interaction.createInteractionManager;
 export const createNodeInteractionState = compiled.flighthq.interaction.Interaction.createNodeInteractionState;
-export const createWebCursorBackend = compiled.flighthq.interaction.Interaction.createWebCursorBackend;
 export const describeGraphHit = compiled.flighthq.interaction.Interaction.describeGraphHit;
 export const disableInteractionGuards = compiled.flighthq.interaction.Interaction.disableInteractionGuards;
 export const disconnectInteractionSignal = compiled.flighthq.interaction.Interaction.disconnectInteractionSignal;

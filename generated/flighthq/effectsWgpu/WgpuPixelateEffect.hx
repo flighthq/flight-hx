@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.effectsWgpu.WgpuEffectTexelScale.getWgpuEffectLogicalResolution;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.PixelateEffect;
 import flighthq.types.RenderEffect;
@@ -18,14 +19,16 @@ class WgpuPixelateEffect {
   @:noCompletion
   public static function applyPixelateEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:PixelateEffect):Void {
     var size:Float = cast _Runtime.UNDEFINED;
+    var resolution:{ var height:Float; var texelsPerLogicalPixel:Float; var width:Float; } = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     size = _Runtime.coalesce(_Runtime.field(effect, 'size'), function():Dynamic return cast 8.0);
-    pipeline = (cast getWgpuEffectPipeline(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'stylization.pixelate' : String), (cast WgpuPixelateEffect.PIXELATE_FRAGMENT_WGSL__wgpuPixelateEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast source : WgpuRenderTarget), ({ final __callArgument2:Dynamic = (cast dest : WgpuRenderTarget); __callArgument2; }), ({ final __callArgument3:Dynamic = pipeline; __callArgument3; }), ({ final __callArgument4:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; })) : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; });
+    pipeline = (cast getWgpuEffectPipeline(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast 'stylization.pixelate' : String), (cast WgpuPixelateEffect.PIXELATE_FRAGMENT_WGSL__wgpuPixelateEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast source : WgpuRenderTarget), ({ final __callArgument4:Dynamic = (cast dest : WgpuRenderTarget); __callArgument4; }), ({ final __callArgument5:Dynamic = pipeline; __callArgument5; }), ({ final __callArgument6:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast HxMath.max(1.0, size) : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast source.width : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast source.height : Float));
-    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument4; }));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).width : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).height : Float));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument6; }));
   }
 
   public static final defaultWgpuPixelateEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
@@ -33,7 +36,7 @@ class WgpuPixelateEffect {
   });
 
   public static function registerWgpuPixelateEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'PixelateEffect' : String), ({ final __callArgument6:Dynamic = defaultWgpuPixelateEffectRunner; __callArgument6; }));
+    registerWgpuRenderEffect(({ final __callArgument7:Dynamic = state; __callArgument7; }), (cast 'PixelateEffect' : String), ({ final __callArgument8:Dynamic = defaultWgpuPixelateEffectRunner; __callArgument8; }));
   }
 
   public static final PIXELATE_FRAGMENT_WGSL__wgpuPixelateEffect:String = '\nstruct Uniforms {\n  u_size : f32,\n  _pad0 : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uvIn : vec2f) -> @location(0) vec4f {\n  let blocks = uni.u_resolution / uni.u_size;\n  let uv = (floor(uvIn * blocks) + 0.5) / blocks;\n  return textureSampleLevel(tex, smp, uv, 0.0);\n}';

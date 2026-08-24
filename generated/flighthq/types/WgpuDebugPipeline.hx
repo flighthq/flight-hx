@@ -3,7 +3,9 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.GPUBindGroupLayout;
+import flighthq._internal.WebExterns.GPURenderPipeline;
 
 typedef WgpuDebugDefineKey = { var hasNormalMap:Bool; var mode:String; };
 
-typedef WgpuDebugPipeline = { var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; var skinned:Bool; };
+typedef WgpuDebugPipeline = { var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:GPUBindGroupLayout; var pipeline:GPURenderPipeline; var skinned:Bool; };

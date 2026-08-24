@@ -3,6 +3,14 @@ package flighthq.scene3dWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.GPUBindGroup;
+import flighthq._internal.WebExterns.GPUBindGroupEntry;
+import flighthq._internal.WebExterns.GPUBindGroupLayout;
+import flighthq._internal.WebExterns.GPUBindGroupLayoutEntry;
+import flighthq._internal.WebExterns.GPUBuffer;
+import flighthq._internal.WebExterns.GPUSampler;
+import flighthq._internal.WebExterns.GPUTextureFormat;
+import flighthq._internal.WebExterns.GPUTextureView;
 import flighthq.registry.RegistryTable.withRegistryTableEntry;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.renderWgpu.WgpuTextureResolver.registerWgpuBitmapTextureResolver;
@@ -42,24 +50,24 @@ import flighthq.types.WgpuScene3DRuntime;
 import flighthq.types._internal._CustomShaderMaterialValues.CustomShaderMaterialKind;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
-typedef CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer = { var textureBindGroup:Null<flighthq._internal.dom.GPUBindGroup>; var textureKeys:Array<String>; var textureSamplers:Array<flighthq._internal.dom.GPUSampler>; var textureViews:Array<flighthq._internal.dom.GPUTextureView>; var uniformBindGroup:flighthq._internal.dom.GPUBindGroup; var uniformBuffer:flighthq._internal.dom.GPUBuffer; };
+typedef CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer = { var textureBindGroup:Null<GPUBindGroup>; var textureKeys:Array<String>; var textureSamplers:Array<GPUSampler>; var textureViews:Array<GPUTextureView>; var uniformBindGroup:GPUBindGroup; var uniformBuffer:GPUBuffer; };
 
-typedef CustomMaterialLayouts__customShaderWgpuMeshMaterialRenderer = { var texture:flighthq._internal.dom.GPUBindGroupLayout; var user:flighthq._internal.dom.GPUBindGroupLayout; };
+typedef CustomMaterialLayouts__customShaderWgpuMeshMaterialRenderer = { var texture:GPUBindGroupLayout; var user:GPUBindGroupLayout; };
 
 class CustomShaderWgpuMeshMaterialRenderer {
   @:noCompletion
   public static final customShaderWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
+    var pass:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var custom:Null<CustomShaderMaterial> = cast _Runtime.UNDEFINED;
     var source:Null<String> = cast _Runtime.UNDEFINED;
     var layouts:CustomMaterialLayouts__customShaderWgpuMeshMaterialRenderer = cast _Runtime.UNDEFINED;
-    var format:String = cast _Runtime.UNDEFINED;
+    var format:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var sideKey:String = cast _Runtime.UNDEFINED;
     var pipeline:WgpuMeshPipeline = cast _Runtime.UNDEFINED;
     var binding:CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer = cast _Runtime.UNDEFINED;
-    var textureBindGroup:flighthq._internal.dom.GPUBindGroup = cast _Runtime.UNDEFINED;
+    var textureBindGroup:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuScene3DRuntime);
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument1:Dynamic = state; __callArgument1; })) : WgpuRenderStateRuntime);
     pass = runtime.renderPass;
@@ -81,15 +89,15 @@ class CustomShaderWgpuMeshMaterialRenderer {
     layouts = (cast CustomShaderWgpuMeshMaterialRenderer.ensureCustomMaterialLayouts__customShaderWgpuMeshMaterialRenderer(({ final __callArgument4:Dynamic = state; __callArgument4; })) : CustomMaterialLayouts__customShaderWgpuMeshMaterialRenderer);
     format = _Runtime.coalesce(runtime.currentColorFormat, function():Dynamic return cast (cast state : WgpuRenderState).format);
     sideKey = ((cast (cast custom : { var doubleSided:Bool; }).doubleSided : Bool) ? (cast 'double' : Dynamic) : (cast 'single' : Dynamic));
-    pipeline = (cast (cast ensureWgpuScene3DPipeline : WgpuRenderState->String->(Bool->Bool->WgpuMeshPipeline)->WgpuMeshPipeline)(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'custom:' + Std.string((cast custom : { var shaderKey:String; }).shaderKey) + ':' + Std.string(format) + ':' + Std.string(sideKey) + '' : String), ({ final __callArgument7:Dynamic = function(blended:Bool, skinned:Bool):WgpuMeshPipeline return (cast CustomShaderWgpuMeshMaterialRenderer.compileCustomMaterialPipeline__customShaderWgpuMeshMaterialRenderer(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast source : String), (cast format : String), (cast (cast custom : { var doubleSided:Bool; }).doubleSided : Bool), (cast blended : Bool), (cast skinned : Bool), (cast layouts : Dynamic)) : WgpuMeshPipeline); __callArgument7; })) : WgpuMeshPipeline);
-    binding = (cast CustomShaderWgpuMeshMaterialRenderer.ensureCustomMaterialBinding__customShaderWgpuMeshMaterialRenderer(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = custom; __callArgument9; }), (cast layouts : CustomMaterialLayouts__customShaderWgpuMeshMaterialRenderer).user) : CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer);
-    CustomShaderWgpuMeshMaterialRenderer.uploadCustomUniforms__customShaderWgpuMeshMaterialRenderer(({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast binding : CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer).uniformBuffer, ({ final __callArgument11:Dynamic = custom; __callArgument11; }));
-    textureBindGroup = (cast CustomShaderWgpuMeshMaterialRenderer.ensureCustomTextureBindGroup__customShaderWgpuMeshMaterialRenderer(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = custom; __callArgument13; }), (cast layouts : CustomMaterialLayouts__customShaderWgpuMeshMaterialRenderer).texture, (cast binding : Dynamic)) : flighthq._internal.dom.GPUBindGroup);
+    pipeline = (cast (cast ensureWgpuScene3DPipeline : WgpuRenderState->String->(Bool->Bool->WgpuMeshPipeline)->WgpuMeshPipeline)(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'custom:' + Std.string((cast custom : { var shaderKey:String; }).shaderKey) + ':' + Std.string(format) + ':' + Std.string(sideKey) + '' : String), ({ final __callArgument7:Dynamic = function(blended:Bool, skinned:Bool):WgpuMeshPipeline return (cast CustomShaderWgpuMeshMaterialRenderer.compileCustomMaterialPipeline__customShaderWgpuMeshMaterialRenderer(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast source : String), (cast format : flighthq._internal._Any), (cast (cast custom : { var doubleSided:Bool; }).doubleSided : Bool), (cast blended : Bool), (cast skinned : Bool), (cast layouts : Dynamic)) : WgpuMeshPipeline); __callArgument7; })) : WgpuMeshPipeline);
+    binding = (cast CustomShaderWgpuMeshMaterialRenderer.ensureCustomMaterialBinding__customShaderWgpuMeshMaterialRenderer(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = custom; __callArgument9; }), (cast (cast layouts : CustomMaterialLayouts__customShaderWgpuMeshMaterialRenderer).user : flighthq._internal._Any)) : CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer);
+    CustomShaderWgpuMeshMaterialRenderer.uploadCustomUniforms__customShaderWgpuMeshMaterialRenderer(({ final __callArgument10:Dynamic = state; __callArgument10; }), (cast (cast binding : CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer).uniformBuffer : flighthq._internal._Any), ({ final __callArgument11:Dynamic = custom; __callArgument11; }));
+    textureBindGroup = CustomShaderWgpuMeshMaterialRenderer.ensureCustomTextureBindGroup__customShaderWgpuMeshMaterialRenderer(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = custom; __callArgument13; }), (cast (cast layouts : CustomMaterialLayouts__customShaderWgpuMeshMaterialRenderer).texture : flighthq._internal._Any), (cast binding : Dynamic));
     writeWgpuFrameUniform(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = camera; __callArgument15; }), ({ final __callArgument16:Dynamic = lights; __callArgument16; }));
     stashWgpuUvTransform(({ final __callArgument17:Dynamic = state; __callArgument17; }), (cast null : Dynamic));
     beginWgpuMeshDraw(({ final __callArgument18:Dynamic = state; __callArgument18; }), ({ final __callArgument19:Dynamic = pipeline; __callArgument19; }));
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(2.0, (cast binding : CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer).uniformBindGroup);
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(3.0, textureBindGroup);
+    _Runtime.callProperty(pass, 'setBindGroup', cast ([2.0, (cast binding : CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer).uniformBindGroup] : Array<Dynamic>));
+    _Runtime.callProperty(pass, 'setBindGroup', cast ([3.0, textureBindGroup] : Array<Dynamic>));
   }, draw: function(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     drawWgpuMeshSubset(({ final __callArgument20:Dynamic = state; __callArgument20; }), ({ final __callArgument21:Dynamic = proxy; __callArgument21; }), ({ final __callArgument22:Dynamic = geometry; __callArgument22; }));
   } });
@@ -114,7 +122,7 @@ class CustomShaderWgpuMeshMaterialRenderer {
     registerWgpuMeshMaterialRenderer(({ final __callArgument29:Dynamic = state; __callArgument29; }), (cast CustomShaderMaterialKind : String), ({ final __callArgument30:Dynamic = customShaderWgpuMeshMaterialRenderer; __callArgument30; }));
   }
 
-  public static function compileCustomMaterialPipeline__customShaderWgpuMeshMaterialRenderer(state:WgpuRenderState, source:WgpuCustomMaterialShaderSource, format:flighthq._internal.dom.GPUTextureFormat, doubleSided:Bool, blended:Bool, skinned:Bool, layouts:CustomMaterialLayouts__customShaderWgpuMeshMaterialRenderer):WgpuMeshPipeline {
+  public static function compileCustomMaterialPipeline__customShaderWgpuMeshMaterialRenderer(state:WgpuRenderState, source:WgpuCustomMaterialShaderSource, format:GPUTextureFormat, doubleSided:Bool, blended:Bool, skinned:Bool, layouts:CustomMaterialLayouts__customShaderWgpuMeshMaterialRenderer):WgpuMeshPipeline {
     return cast (cast createWgpuMeshPipeline(({ final __callArgument31:Dynamic = state; __callArgument31; }), ({ final __callArgument32:Dynamic = { blended: blended, doubleSided: doubleSided, extraBindGroupLayout: _Runtime.field(layouts, 'texture'), format: format, materialBindGroupLayout: _Runtime.field(layouts, 'user'), module: flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createShaderModule', cast ([{ code: source }] : Array<Dynamic>)), skinned: skinned }; __callArgument32; })) : WgpuMeshPipeline);
     return cast null;
   }
@@ -122,7 +130,7 @@ class CustomShaderWgpuMeshMaterialRenderer {
   public static function ensureCustomMaterialLayouts__customShaderWgpuMeshMaterialRenderer(state:WgpuRenderState):CustomMaterialLayouts__customShaderWgpuMeshMaterialRenderer {
     var layouts:Null<CustomMaterialLayouts__customShaderWgpuMeshMaterialRenderer> = cast _Runtime.UNDEFINED;
     var visibility:Float = cast _Runtime.UNDEFINED;
-    var entries:Array<flighthq._internal.dom.GPUBindGroupLayoutEntry> = cast _Runtime.UNDEFINED;
+    var entries:Array<GPUBindGroupLayoutEntry> = cast _Runtime.UNDEFINED;
     layouts = ((cast CustomShaderWgpuMeshMaterialRenderer._customMaterialLayouts__customShaderWgpuMeshMaterialRenderer : flighthq._internal._WeakMap<WgpuRenderState, CustomMaterialLayouts__customShaderWgpuMeshMaterialRenderer>).get(state));
     if ((cast !_Runtime.strictEquals(layouts, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast layouts; }
     visibility = (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'VERTEX')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT')));
@@ -141,10 +149,10 @@ class CustomShaderWgpuMeshMaterialRenderer {
     return cast null;
   }
 
-  public static function ensureCustomMaterialBinding__customShaderWgpuMeshMaterialRenderer(state:WgpuRenderState, material:CustomShaderMaterial, layout:flighthq._internal.dom.GPUBindGroupLayout):CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer {
+  public static function ensureCustomMaterialBinding__customShaderWgpuMeshMaterialRenderer(state:WgpuRenderState, material:CustomShaderMaterial, layout:GPUBindGroupLayout):CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer {
     var stateBindings:Null<flighthq._internal._WeakMap<flighthq._internal._Object, CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer>> = cast _Runtime.UNDEFINED;
     var binding:Null<CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer> = cast _Runtime.UNDEFINED;
-    var uniformBuffer:flighthq._internal.dom.GPUBuffer = cast _Runtime.UNDEFINED;
+    var uniformBuffer:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     stateBindings = ((cast CustomShaderWgpuMeshMaterialRenderer._customMaterialBindings__customShaderWgpuMeshMaterialRenderer : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._WeakMap<flighthq._internal._Object, CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer>>).get(state));
     if ((cast _Runtime.strictEquals(stateBindings, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (stateBindings = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Dynamic));
@@ -159,7 +167,7 @@ class CustomShaderWgpuMeshMaterialRenderer {
     return cast null;
   }
 
-  public static function uploadCustomUniforms__customShaderWgpuMeshMaterialRenderer(state:WgpuRenderState, buffer:flighthq._internal.dom.GPUBuffer, material:CustomShaderMaterial):Void {
+  public static function uploadCustomUniforms__customShaderWgpuMeshMaterialRenderer(state:WgpuRenderState, buffer:GPUBuffer, material:CustomShaderMaterial):Void {
     var uniforms:flighthq._internal._Record<String, flighthq._internal._Union2<Float, Array<Float>>> = cast _Runtime.UNDEFINED;
     var names:Array<String> = cast _Runtime.UNDEFINED;
     var count:Float = cast _Runtime.UNDEFINED;
@@ -188,30 +196,30 @@ class CustomShaderWgpuMeshMaterialRenderer {
         slot++;
       }
     }
-    flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([buffer, 0.0, _Runtime.field(CustomShaderWgpuMeshMaterialRenderer._uniformScratch__customShaderWgpuMeshMaterialRenderer, 'buffer'), 0.0, _Runtime.field(CustomShaderWgpuMeshMaterialRenderer._uniformScratch__customShaderWgpuMeshMaterialRenderer, 'byteLength')] : Array<Dynamic>));
+    _Runtime.callProperty(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([buffer, 0.0, _Runtime.field(CustomShaderWgpuMeshMaterialRenderer._uniformScratch__customShaderWgpuMeshMaterialRenderer, 'buffer'), 0.0, _Runtime.field(CustomShaderWgpuMeshMaterialRenderer._uniformScratch__customShaderWgpuMeshMaterialRenderer, 'byteLength')] : Array<Dynamic>));
   }
 
-  public static function ensureCustomTextureBindGroup__customShaderWgpuMeshMaterialRenderer(state:WgpuRenderState, material:CustomShaderMaterial, layout:flighthq._internal.dom.GPUBindGroupLayout, binding:CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer):flighthq._internal.dom.GPUBindGroup {
+  public static function ensureCustomTextureBindGroup__customShaderWgpuMeshMaterialRenderer(state:WgpuRenderState, material:CustomShaderMaterial, layout:GPUBindGroupLayout, binding:CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer):GPUBindGroup {
     var textures:flighthq._internal._Record<String, Texture> = cast _Runtime.UNDEFINED;
-    var placeholder:flighthq._internal.dom.GPUTextureView = cast _Runtime.UNDEFINED;
+    var placeholder:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var textureCount:Float = cast _Runtime.UNDEFINED;
-    var entries:Array<flighthq._internal.dom.GPUBindGroupEntry> = cast _Runtime.UNDEFINED;
+    var entries:Array<GPUBindGroupEntry> = cast _Runtime.UNDEFINED;
     textures = _Runtime.coalesce(material.textures, function():Dynamic return cast {  });
-    placeholder = (cast ensureWgpuPlaceholderTextureView(({ final __callArgument33:Dynamic = state; __callArgument33; })) : flighthq._internal.dom.GPUTextureView);
+    placeholder = ensureWgpuPlaceholderTextureView(({ final __callArgument33:Dynamic = state; __callArgument33; }));
     textureCount = 0.0;
     for (name in flighthq._internal.DynamicObject.keys(textures)) {
       if ((cast !(cast _Runtime.callProperty(_Runtime.field(flighthq._internal.DynamicObject.field('prototype'), 'hasOwnProperty'), 'call', cast ([textures, name] : Array<Dynamic>)) : Bool) : Bool)) { continue; }
       var texture:Texture = _Runtime.getIndex(textures, name);
       flighthq._internal._StaticIndex.writeArray(CustomShaderWgpuMeshMaterialRenderer._textureKeyScratch__customShaderWgpuMeshMaterialRenderer, textureCount, name);
-      flighthq._internal._StaticIndex.writeArray(CustomShaderWgpuMeshMaterialRenderer._textureSamplerScratch__customShaderWgpuMeshMaterialRenderer, textureCount, (cast getWgpuMaterialSampler(({ final __callArgument34:Dynamic = state; __callArgument34; }), (cast texture : Dynamic)) : flighthq._internal.dom.GPUSampler));
-      flighthq._internal._StaticIndex.writeArray(CustomShaderWgpuMeshMaterialRenderer._textureViewScratch__customShaderWgpuMeshMaterialRenderer, textureCount, ((cast (cast isWgpuTextureReady((cast texture : Dynamic)) : Bool) : Bool) ? (cast (cast resolveWgpuMaterialTextureView(({ final __callArgument35:Dynamic = state; __callArgument35; }), (cast texture : Dynamic)) : flighthq._internal.dom.GPUTextureView) : Dynamic) : (cast placeholder : Dynamic)));
+      flighthq._internal._StaticIndex.writeArray(CustomShaderWgpuMeshMaterialRenderer._textureSamplerScratch__customShaderWgpuMeshMaterialRenderer, textureCount, getWgpuMaterialSampler(({ final __callArgument34:Dynamic = state; __callArgument34; }), (cast texture : Dynamic)));
+      flighthq._internal._StaticIndex.writeArray(CustomShaderWgpuMeshMaterialRenderer._textureViewScratch__customShaderWgpuMeshMaterialRenderer, textureCount, ((cast (cast isWgpuTextureReady((cast texture : Dynamic)) : Bool) : Bool) ? (cast resolveWgpuMaterialTextureView(({ final __callArgument35:Dynamic = state; __callArgument35; }), (cast texture : Dynamic)) : Dynamic) : (cast placeholder : Dynamic)));
       textureCount++;
     }
     _Runtime.setLength(CustomShaderWgpuMeshMaterialRenderer._textureKeyScratch__customShaderWgpuMeshMaterialRenderer, textureCount);
     {
       var slot:Float = textureCount;
       while ((cast ((cast slot : Float) < (cast WGPU_CUSTOM_SHADER_TEXTURE_CAPACITY : Float)) : Bool)) {
-        flighthq._internal._StaticIndex.writeArray(CustomShaderWgpuMeshMaterialRenderer._textureSamplerScratch__customShaderWgpuMeshMaterialRenderer, slot, (cast getWgpuMaterialSampler(({ final __callArgument36:Dynamic = state; __callArgument36; }), (cast null : Dynamic)) : flighthq._internal.dom.GPUSampler));
+        flighthq._internal._StaticIndex.writeArray(CustomShaderWgpuMeshMaterialRenderer._textureSamplerScratch__customShaderWgpuMeshMaterialRenderer, slot, getWgpuMaterialSampler(({ final __callArgument36:Dynamic = state; __callArgument36; }), (cast null : Dynamic)));
         flighthq._internal._StaticIndex.writeArray(CustomShaderWgpuMeshMaterialRenderer._textureViewScratch__customShaderWgpuMeshMaterialRenderer, slot, placeholder);
         slot++;
       }
@@ -228,8 +236,8 @@ class CustomShaderWgpuMeshMaterialRenderer {
     }
     ((cast binding : CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer).textureBindGroup = flighthq._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createBindGroup', cast ([{ layout: layout, entries: entries }] : Array<Dynamic>)));
     (cast CustomShaderWgpuMeshMaterialRenderer.overwriteCache__customShaderWgpuMeshMaterialRenderer : Array<String>->Array<String>->Void)((cast binding : CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer).textureKeys, ({ final __callArgument37:Dynamic = CustomShaderWgpuMeshMaterialRenderer._textureKeyScratch__customShaderWgpuMeshMaterialRenderer; __callArgument37; }));
-    (cast CustomShaderWgpuMeshMaterialRenderer.overwriteCache__customShaderWgpuMeshMaterialRenderer : Array<flighthq._internal.dom.GPUSampler>->Array<flighthq._internal.dom.GPUSampler>->Void)((cast binding : CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer).textureSamplers, ({ final __callArgument38:Dynamic = CustomShaderWgpuMeshMaterialRenderer._textureSamplerScratch__customShaderWgpuMeshMaterialRenderer; __callArgument38; }));
-    (cast CustomShaderWgpuMeshMaterialRenderer.overwriteCache__customShaderWgpuMeshMaterialRenderer : Array<flighthq._internal.dom.GPUTextureView>->Array<flighthq._internal.dom.GPUTextureView>->Void)((cast binding : CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer).textureViews, ({ final __callArgument39:Dynamic = CustomShaderWgpuMeshMaterialRenderer._textureViewScratch__customShaderWgpuMeshMaterialRenderer; __callArgument39; }));
+    (cast CustomShaderWgpuMeshMaterialRenderer.overwriteCache__customShaderWgpuMeshMaterialRenderer : Array<flighthq._internal._Any>->Array<flighthq._internal._Any>->Void)((cast binding : CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer).textureSamplers, ({ final __callArgument38:Dynamic = CustomShaderWgpuMeshMaterialRenderer._textureSamplerScratch__customShaderWgpuMeshMaterialRenderer; __callArgument38; }));
+    (cast CustomShaderWgpuMeshMaterialRenderer.overwriteCache__customShaderWgpuMeshMaterialRenderer : Array<flighthq._internal._Any>->Array<flighthq._internal._Any>->Void)((cast binding : CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer).textureViews, ({ final __callArgument39:Dynamic = CustomShaderWgpuMeshMaterialRenderer._textureViewScratch__customShaderWgpuMeshMaterialRenderer; __callArgument39; }));
     return cast (cast binding : CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer).textureBindGroup;
     return cast null;
   }
@@ -275,7 +283,7 @@ class CustomShaderWgpuMeshMaterialRenderer {
 
   public static final _textureKeyScratch__customShaderWgpuMeshMaterialRenderer:Array<String> = (cast cast ([] : Array<Dynamic>));
 
-  public static final _textureSamplerScratch__customShaderWgpuMeshMaterialRenderer:Array<flighthq._internal.dom.GPUSampler> = _Runtime.createArray(WGPU_CUSTOM_SHADER_TEXTURE_CAPACITY);
+  public static final _textureSamplerScratch__customShaderWgpuMeshMaterialRenderer:Array<GPUSampler> = _Runtime.createArray(WGPU_CUSTOM_SHADER_TEXTURE_CAPACITY);
 
-  public static final _textureViewScratch__customShaderWgpuMeshMaterialRenderer:Array<flighthq._internal.dom.GPUTextureView> = _Runtime.createArray(WGPU_CUSTOM_SHADER_TEXTURE_CAPACITY);
+  public static final _textureViewScratch__customShaderWgpuMeshMaterialRenderer:Array<GPUTextureView> = _Runtime.createArray(WGPU_CUSTOM_SHADER_TEXTURE_CAPACITY);
 }

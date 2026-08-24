@@ -84,6 +84,7 @@ export const setPhysics2DBodyType = compiled.flighthq.physics2d.Physics2d.setPhy
 export const solvePhysics2DContacts = compiled.flighthq.physics2d.Physics2d.solvePhysics2DContacts;
 export const solvePhysics2DContactsOnce = compiled.flighthq.physics2d.Physics2d.solvePhysics2DContactsOnce;
 export const stepPhysics2D = compiled.flighthq.physics2d.Physics2d.stepPhysics2D;
+export const syncPhysics2DBodyToNode2D = compiled.flighthq.physics2d.Physics2d.syncPhysics2DBodyToNode2D;
 export const updatePhysics2DColliderWorldShape = compiled.flighthq.physics2d.Physics2d.updatePhysics2DColliderWorldShape;
 export const updatePhysics2DSleep = compiled.flighthq.physics2d.Physics2d.updatePhysics2DSleep;
 export const updateRigidBody2DMassData = compiled.flighthq.physics2d.Physics2d.updateRigidBody2DMassData;

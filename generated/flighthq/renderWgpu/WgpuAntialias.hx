@@ -3,6 +3,8 @@ package flighthq.renderWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.GPUCommandEncoder;
+import flighthq._internal.WebExterns.GPUTextureView;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
@@ -12,69 +14,69 @@ class WgpuAntialias {
   public static final SUPERSAMPLE_SCALE__wgpuAntialias:Float = 2.0;
 
   @:noCompletion
-  public static function acquireWgpuSurfaceAntialiasView(state:WgpuRenderState, presentationView:flighthq._internal.dom.GPUTextureView):Null<flighthq._internal.dom.GPUTextureView> {
+  public static function acquireWgpuSurfaceAntialiasView(state:WgpuRenderState, presentationView:GPUTextureView):Null<GPUTextureView> {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var width:Float = cast _Runtime.UNDEFINED;
     var height:Float = cast _Runtime.UNDEFINED;
-    var maxDimension:Float = cast _Runtime.UNDEFINED;
-    var texture:flighthq._internal.dom.GPUTexture = cast _Runtime.UNDEFINED;
-    var view:flighthq._internal.dom.GPUTextureView = cast _Runtime.UNDEFINED;
+    var maxDimension:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var texture:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
     if ((cast !(cast runtime.surfaceAntialiasEnabled : Bool) : Bool)) {
-      (runtime.surfacePresentationView = cast (null : Null<flighthq._internal.dom.GPUTextureView>));
+      (runtime.surfacePresentationView = cast (null : flighthq._internal._Any));
       return cast null;
     }
     width = _Runtime.multiplyNumbers(HxMath.max(1.0, flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'width')), WgpuAntialias.SUPERSAMPLE_SCALE__wgpuAntialias);
     height = _Runtime.multiplyNumbers(HxMath.max(1.0, flighthq._internal.backend.CanvasElementBackend.field(_Runtime.field(state, 'canvas'), 'height')), WgpuAntialias.SUPERSAMPLE_SCALE__wgpuAntialias);
-    maxDimension = flighthq._internal.backend.WebGpuLimitsBackend.field(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'limits'), 'maxTextureDimension2D');
-    if ((cast ((cast ((cast width : Float) > (cast maxDimension : Float)) : Bool) || (cast ((cast height : Float) > (cast maxDimension : Float)) : Bool)) : Bool)) {
+    maxDimension = _Runtime.field(flighthq._internal.backend.WebGpuDeviceBackend.field(_Runtime.field(state, 'device'), 'limits'), 'maxTextureDimension2D');
+    if ((cast ((cast _Runtime.compare(width, maxDimension, '>') : Bool) || (cast _Runtime.compare(height, maxDimension, '>') : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('WgpuRenderOptions.antialias requires a ' + Std.string(width) + 'x' + Std.string(height) + ' supersample surface, exceeding maxTextureDimension2D ' + Std.string(maxDimension) + '.'));
     }
-    (runtime.surfacePresentationView = cast (presentationView : Null<flighthq._internal.dom.GPUTextureView>));
+    (runtime.surfacePresentationView = cast (presentationView : flighthq._internal._Any));
     if ((cast ((cast ((cast !_Runtime.strictEquals(runtime.surfaceAntialiasTexture, null) : Bool) && (cast _Runtime.strictEquals(runtime.surfaceAntialiasWidth, width) : Bool)) : Bool) && (cast _Runtime.strictEquals(runtime.surfaceAntialiasHeight, height) : Bool)) : Bool)) {
       return cast runtime.surfaceAntialiasView;
     }
-    ({ final __hostTypeCall1 = runtime.surfaceAntialiasTexture; __hostTypeCall1 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall1 : flighthq._internal.dom.GPUTexture).destroy(); });
+    _Runtime.callOptionalProperty(runtime.surfaceAntialiasTexture, 'destroy', cast ([] : Array<Dynamic>));
     texture = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createTexture', cast ([{ size: cast ([width, height, 1.0] : Array<Dynamic>), format: _Runtime.field(state, 'format'), usage: (_Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'RENDER_ATTACHMENT')) | _Runtime.toInt32(flighthq._internal.backend.WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING'))) }] : Array<Dynamic>));
-    view = (cast texture : flighthq._internal.dom.GPUTexture).createView();
-    (runtime.surfaceAntialiasTexture = cast (texture : Null<flighthq._internal.dom.GPUTexture>));
-    (runtime.surfaceAntialiasView = cast (view : Null<flighthq._internal.dom.GPUTextureView>));
+    view = _Runtime.callProperty(texture, 'createView', cast ([] : Array<Dynamic>));
+    (runtime.surfaceAntialiasTexture = cast (texture : flighthq._internal._Any));
+    (runtime.surfaceAntialiasView = cast (view : flighthq._internal._Any));
     (runtime.surfaceAntialiasWidth = cast (width : Float));
     (runtime.surfaceAntialiasHeight = cast (height : Float));
-    WgpuAntialias.ensureWgpuSurfaceAntialiasPipeline__wgpuAntialias(({ final __callArgument2:Dynamic = state; __callArgument2; }));
-    (runtime.surfaceAntialiasResolveBindGroup = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: runtime.surfaceAntialiasResolveBindGroupLayout, entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: runtime.linearSampler }] : Array<Dynamic>) }] : Array<Dynamic>)) : Null<flighthq._internal.dom.GPUBindGroup>));
+    WgpuAntialias.ensureWgpuSurfaceAntialiasPipeline__wgpuAntialias(({ final __callArgument1:Dynamic = state; __callArgument1; }));
+    (runtime.surfaceAntialiasResolveBindGroup = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroup', cast ([{ layout: runtime.surfaceAntialiasResolveBindGroupLayout, entries: cast ([{ binding: 0.0, resource: view }, { binding: 1.0, resource: runtime.linearSampler }] : Array<Dynamic>) }] : Array<Dynamic>)) : flighthq._internal._Any));
     return cast view;
     return cast null;
   }
 
   @:noCompletion
   public static function clearWgpuSurfacePresentation(state:WgpuRenderState):Void {
-    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuRenderStateRuntime) : { var surfacePresentationView:Null<flighthq._internal.dom.GPUTextureView>; }).surfacePresentationView = cast (null : Null<flighthq._internal.dom.GPUTextureView>));
+    ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime) : { var surfacePresentationView:flighthq._internal._Any; }).surfacePresentationView = cast (null : flighthq._internal._Any));
   }
 
   @:noCompletion
-  public static function encodeWgpuSurfaceAntialiasResolve(state:WgpuRenderState, encoder:flighthq._internal.dom.GPUCommandEncoder):Void {
+  public static function encodeWgpuSurfaceAntialiasResolve(state:WgpuRenderState, encoder:GPUCommandEncoder):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    var presentationView:Null<flighthq._internal.dom.GPUTextureView> = cast _Runtime.UNDEFINED;
-    var pipeline:Null<flighthq._internal.dom.GPURenderPipeline> = cast _Runtime.UNDEFINED;
-    var bindGroup:Null<flighthq._internal.dom.GPUBindGroup> = cast _Runtime.UNDEFINED;
-    var pass:flighthq._internal.dom.GPURenderPassEncoder = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuRenderStateRuntime);
+    var presentationView:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var pipeline:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var bindGroup:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var pass:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : WgpuRenderStateRuntime);
     presentationView = runtime.surfacePresentationView;
     pipeline = runtime.surfaceAntialiasResolvePipeline;
     bindGroup = runtime.surfaceAntialiasResolveBindGroup;
     if ((cast ((cast ((cast ((cast !(cast runtime.surfaceAntialiasEnabled : Bool) : Bool) || (cast _Runtime.strictEquals(presentationView, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(pipeline, null) : Bool)) : Bool) || (cast _Runtime.strictEquals(bindGroup, null) : Bool)) : Bool)) { return; }
-    pass = encoder.beginRenderPass({ colorAttachments: cast ([{ view: presentationView, loadOp: 'clear', storeOp: 'store', clearValue: { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } }] : Array<Dynamic>) });
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setPipeline(pipeline);
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).setBindGroup(0.0, bindGroup);
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(3.0);
-    (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end();
+    pass = _Runtime.callProperty(encoder, 'beginRenderPass', cast ([{ colorAttachments: cast ([{ view: presentationView, loadOp: 'clear', storeOp: 'store', clearValue: { r: 0.0, g: 0.0, b: 0.0, a: 0.0 } }] : Array<Dynamic>) }] : Array<Dynamic>));
+    _Runtime.callProperty(pass, 'setPipeline', cast ([pipeline] : Array<Dynamic>));
+    _Runtime.callProperty(pass, 'setBindGroup', cast ([0.0, bindGroup] : Array<Dynamic>));
+    _Runtime.callProperty(pass, 'draw', cast ([3.0] : Array<Dynamic>));
+    _Runtime.callProperty(pass, 'end', cast ([] : Array<Dynamic>));
   }
 
   @:noCompletion
   public static function getWgpuSurfaceRenderExtent(state:WgpuRenderState):{ var width:Float; var height:Float; } {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : WgpuRenderStateRuntime);
     if ((cast !_Runtime.strictEquals(runtime.surfacePresentationView, null) : Bool)) {
       return cast { width: runtime.surfaceAntialiasWidth, height: runtime.surfaceAntialiasHeight };
     }
@@ -85,23 +87,23 @@ class WgpuAntialias {
   @:noCompletion
   public static function getWgpuSurfaceRenderScale(state:WgpuRenderState):Float {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : WgpuRenderStateRuntime);
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuRenderStateRuntime);
     return cast ((cast ((cast _Runtime.strictEquals(runtime.currentRenderTarget, null) : Bool) && (cast !_Runtime.strictEquals(runtime.surfacePresentationView, null) : Bool)) : Bool) ? (cast WgpuAntialias.SUPERSAMPLE_SCALE__wgpuAntialias : Dynamic) : (cast 1.0 : Dynamic));
     return cast null;
   }
 
   public static function ensureWgpuSurfaceAntialiasPipeline__wgpuAntialias(state:WgpuRenderState):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    var bindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout = cast _Runtime.UNDEFINED;
-    var layout:flighthq._internal.dom.GPUPipelineLayout = cast _Runtime.UNDEFINED;
-    var module:flighthq._internal.dom.GPUShaderModule = cast _Runtime.UNDEFINED;
-    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument7:Dynamic = state; __callArgument7; })) : WgpuRenderStateRuntime);
+    var bindGroupLayout:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var layout:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    var module:flighthq._internal._Any = cast _Runtime.UNDEFINED;
+    runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument6:Dynamic = state; __callArgument6; })) : WgpuRenderStateRuntime);
     if ((cast !_Runtime.strictEquals(runtime.surfaceAntialiasResolvePipeline, null) : Bool)) { return; }
     bindGroupLayout = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createBindGroupLayout', cast ([{ entries: cast ([{ binding: 0.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), texture: { sampleType: 'float' } }, { binding: 1.0, visibility: flighthq._internal.backend.WebGpuConstantsBackend.value('GPUShaderStage', 'FRAGMENT'), sampler: { type: 'filtering' } }] : Array<Dynamic>) }] : Array<Dynamic>));
     layout = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createPipelineLayout', cast ([{ bindGroupLayouts: cast ([bindGroupLayout] : Array<Dynamic>) }] : Array<Dynamic>));
     module = flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createShaderModule', cast ([{ code: WgpuAntialias.SURFACE_ANTIALIAS_WGSL__wgpuAntialias }] : Array<Dynamic>));
-    (runtime.surfaceAntialiasResolveBindGroupLayout = cast (bindGroupLayout : Null<flighthq._internal.dom.GPUBindGroupLayout>));
-    (runtime.surfaceAntialiasResolvePipeline = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: module, entryPoint: 'vs_main' }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: _Runtime.field(state, 'format') }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>)) : Null<flighthq._internal.dom.GPURenderPipeline>));
+    (runtime.surfaceAntialiasResolveBindGroupLayout = cast (bindGroupLayout : flighthq._internal._Any));
+    (runtime.surfaceAntialiasResolvePipeline = cast (flighthq._internal.backend.WebGpuDeviceBackend.call(_Runtime.field(state, 'device'), 'createRenderPipeline', cast ([{ layout: layout, vertex: { module: module, entryPoint: 'vs_main' }, fragment: { module: module, entryPoint: 'fs_main', targets: cast ([{ format: _Runtime.field(state, 'format') }] : Array<Dynamic>) }, primitive: { topology: 'triangle-list' } }] : Array<Dynamic>)) : flighthq._internal._Any));
   }
 
   public static final SURFACE_ANTIALIAS_WGSL__wgpuAntialias:String = '\nstruct VertexOutput {\n  @builtin(position) position: vec4f,\n  @location(0) uv: vec2f,\n};\n\n@vertex\nfn vs_main(@builtin(vertex_index) index: u32) -> VertexOutput {\n  let positions = array<vec2f, 3>(\n    vec2f(-1.0, -1.0),\n    vec2f(3.0, -1.0),\n    vec2f(-1.0, 3.0),\n  );\n  let position = positions[index];\n  var output: VertexOutput;\n  output.position = vec4f(position, 0.0, 1.0);\n  output.uv = position * vec2f(0.5, -0.5) + vec2f(0.5);\n  return output;\n}\n\n@group(0) @binding(0) var source_texture: texture_2d<f32>;\n@group(0) @binding(1) var source_sampler: sampler;\n\n@fragment\nfn fs_main(input: VertexOutput) -> @location(0) vec4f {\n  return textureSample(source_texture, source_sampler, input.uv);\n}\n';

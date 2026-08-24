@@ -98,6 +98,7 @@ export const setPhysics3DBodyType = compiled.flighthq.physics3d.Physics3d.setPhy
 export const setRigidBody3DMassData = compiled.flighthq.physics3d.Physics3d.setRigidBody3DMassData;
 export const stepPhysics3D = compiled.flighthq.physics3d.Physics3d.stepPhysics3D;
 export const stepPhysics3DInterval = compiled.flighthq.physics3d.Physics3d.stepPhysics3DInterval;
+export const syncPhysics3DBodyToNode3D = compiled.flighthq.physics3d.Physics3d.syncPhysics3DBodyToNode3D;
 export const updateRigidBody3DMassData = compiled.flighthq.physics3d.Physics3d.updateRigidBody3DMassData;
 export const wakePhysics3DBody = compiled.flighthq.physics3d.Physics3d.wakePhysics3DBody;
 export const writePhysics3DDebugGeometry = compiled.flighthq.physics3d.Physics3d.writePhysics3DDebugGeometry;

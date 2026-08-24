@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.effectsWgpu.WgpuEffectTexelScale.getWgpuRenderTargetTexelScale;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
@@ -40,20 +41,13 @@ class WgpuBlurEffect {
   }
 
   public static final defaultWgpuBlurEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
-    var descriptor:{ var width:Float; var height:Float; var format:String; } = cast _Runtime.UNDEFINED;
+    var descriptor:{ var width:Float; var height:Float; var format:flighthq._internal._Any; } = cast _Runtime.UNDEFINED;
     var temp:WgpuRenderTarget = cast _Runtime.UNDEFINED;
-    descriptor = (cast { width: (cast ctx.source : { var width:Float; }).width, height: (cast ctx.source : { var height:Float; }).height, format: (cast ctx.source : { var format:String; }).format });
+    descriptor = (cast { width: (cast ctx.source : { var width:Float; }).width, height: (cast ctx.source : { var height:Float; }).height, format: (cast ctx.source : { var format:flighthq._internal._Any; }).format });
     temp = (cast acquireWgpuRenderTarget(ctx.state, ctx.pool, ({ final __callArgument11:Dynamic = descriptor; __callArgument11; })) : WgpuRenderTarget);
     applyBlurEffectToWgpu(ctx.state, ctx.source, ctx.dest, ({ final __callArgument12:Dynamic = temp; __callArgument12; }), (cast effect : BlurEffect));
     releaseWgpuRenderTarget(ctx.pool, ({ final __callArgument13:Dynamic = temp; __callArgument13; }));
   });
-
-  @:noCompletion
-  public static function getWgpuRenderTargetTexelScale(targetWidth:Float, canvasWidth:Float):Float {
-    if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([targetWidth] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([canvasWidth] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast canvasWidth : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast 1.0; }
-    return cast HxMath.max(1.0, HxMath.round((targetWidth / canvasWidth)));
-    return cast null;
-  }
 
   public static function registerWgpuBlurEffect(state:WgpuRenderState):Void {
     registerWgpuRenderEffect(({ final __callArgument14:Dynamic = state; __callArgument14; }), (cast 'BlurEffect' : String), ({ final __callArgument15:Dynamic = defaultWgpuBlurEffectRunner; __callArgument15; }));

@@ -6,4 +6,6 @@ __syncDependencies();
 export * from './dragonBonesParse.mjs';
 export * from './skeletonDetect.mjs';
 export * from './spineBinaryParse.mjs';
+export * from './spineBinaryVersion.mjs';
+export * from './spineBinaryVersioned.mjs';
 export * from './spineParse.mjs';

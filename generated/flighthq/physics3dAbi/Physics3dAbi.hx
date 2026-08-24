@@ -145,6 +145,8 @@ class Physics3dAbi {
 
   public static final Physics3DAbiJointValueStride:Float = Facade_Physics3dAbi_flighthq_physics3dAbi_Physics3DAbiLayout.Physics3DAbiJointValueStride;
 
+  public static final Physics3DAbiMaxContactPoints:Float = Facade_Physics3dAbi_flighthq_physics3dAbi_Physics3DAbiLayout.Physics3DAbiMaxContactPoints;
+
   public static final Physics3DAbiQueryValue:{ var Fraction:Float; var X:Float; var Y:Float; var Z:Float; var NormalX:Float; var NormalY:Float; var NormalZ:Float; } = Facade_Physics3dAbi_flighthq_physics3dAbi_Physics3DAbiLayout.Physics3DAbiQueryValue;
 
   public static final Physics3DAbiQueryValueStride:Float = Facade_Physics3dAbi_flighthq_physics3dAbi_Physics3DAbiLayout.Physics3DAbiQueryValueStride;

@@ -28,6 +28,7 @@ export const Physics3DAbiJointFlag = api.Physics3DAbiJointFlag;
 export const Physics3DAbiJointKind = api.Physics3DAbiJointKind;
 export const Physics3DAbiJointValue = api.Physics3DAbiJointValue;
 export const Physics3DAbiJointValueStride = api.Physics3DAbiJointValueStride;
+export const Physics3DAbiMaxContactPoints = api.Physics3DAbiMaxContactPoints;
 export const Physics3DAbiQueryValue = api.Physics3DAbiQueryValue;
 export const Physics3DAbiQueryValueStride = api.Physics3DAbiQueryValueStride;
 export const Physics3DAbiSetBodyPayloadOffset = api.Physics3DAbiSetBodyPayloadOffset;

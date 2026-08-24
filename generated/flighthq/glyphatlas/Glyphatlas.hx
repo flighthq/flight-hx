@@ -11,6 +11,7 @@ import flighthq.glyphatlas.GlyphAtlasEntry as Facade_Glyphatlas_flighthq_glyphat
 import flighthq.glyphatlas.GlyphAtlasMetrics as Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasMetrics;
 import flighthq.glyphatlas.GlyphRasterizerBackend as Facade_Glyphatlas_flighthq_glyphatlas_GlyphRasterizerBackend;
 import flighthq.glyphatlas.GlyphSource as Facade_Glyphatlas_flighthq_glyphatlas_GlyphSource;
+import flighthq.types.BackendExplanation;
 import flighthq.types.Bitmap;
 import flighthq.types.GlyphAtlasEntryExplanation;
 import flighthq.types.GlyphSource;
@@ -41,11 +42,6 @@ class Glyphatlas {
     return cast null;
   }
 
-  public static function createWebGlyphRasterizerBackend():GlyphRasterizerBackend {
-    return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphRasterizerBackend.createWebGlyphRasterizerBackend();
-    return cast null;
-  }
-
   public static function deriveGlyphMetricsFromFontSize(fontSize:Float):GlyphMetrics {
     return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlas.deriveGlyphMetricsFromFontSize(fontSize);
     return cast null;
@@ -65,6 +61,11 @@ class Glyphatlas {
 
   public static function explainGlyphAtlasEntry(atlas:GlyphAtlas, codepoint:Float):GlyphAtlasEntryExplanation {
     return cast Facade_Glyphatlas_flighthq_glyphatlas_ExplainGlyphAtlasEntry.explainGlyphAtlasEntry(atlas, codepoint);
+    return cast null;
+  }
+
+  public static function explainGlyphRasterizerBackend():BackendExplanation {
+    return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphRasterizerBackend.explainGlyphRasterizerBackend();
     return cast null;
   }
 
@@ -90,6 +91,11 @@ class Glyphatlas {
 
   public static function getGlyphAtlasMetrics(atlas:GlyphAtlas):GlyphMetrics {
     return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphAtlasMetrics.getGlyphAtlasMetrics(atlas);
+    return cast null;
+  }
+
+  public static function getGlyphRasterizerBackend():GlyphRasterizerBackend {
+    return cast Facade_Glyphatlas_flighthq_glyphatlas_GlyphRasterizerBackend.getGlyphRasterizerBackend();
     return cast null;
   }
 

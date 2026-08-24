@@ -3,6 +3,7 @@ package flighthq.effectsWgpu;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq._internal.WebExterns.GPUTexture;
 import flighthq.effectsWgpu.EnableWgpuRenderEffectGuards as Facade_EffectsWgpu_flighthq_effectsWgpu_EnableWgpuRenderEffectGuards;
 import flighthq.effectsWgpu.WgpuBevelEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBevelEffect;
 import flighthq.effectsWgpu.WgpuBlendEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuBlendEffect;
@@ -361,7 +362,7 @@ class EffectsWgpu {
     Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuWhiteBalanceEffect.registerWgpuWhiteBalanceEffect(state);
   }
 
-  public static function setWgpuRenderEffectVelocityTexture(pipeline:WgpuRenderEffectPipeline, texture:Null<flighthq._internal.dom.GPUTexture>):Void {
+  public static function setWgpuRenderEffectVelocityTexture(pipeline:WgpuRenderEffectPipeline, texture:Null<GPUTexture>):Void {
     Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuRenderEffectPipeline.setWgpuRenderEffectVelocityTexture(pipeline, texture);
   }
 }

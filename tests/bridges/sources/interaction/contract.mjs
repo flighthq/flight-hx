@@ -3,7 +3,6 @@
 function __syncDependencies() {}
 __syncDependencies();
 
-export * from './cursorBackend.mjs';
 export * from './displayHitTests.mjs';
 export * from './displayObjectOverlap.mjs';
 export * from './enableInteractionGuards.mjs';

@@ -16,12 +16,14 @@ import flighthq.physics2d.JointRegistry as Facade_Physics2d_flighthq_physics2d_J
 import flighthq.physics2d.Joints as Facade_Physics2d_flighthq_physics2d_Joints;
 import flighthq.physics2d.MassProperties as Facade_Physics2d_flighthq_physics2d_MassProperties;
 import flighthq.physics2d.Material as Facade_Physics2d_flighthq_physics2d_Material;
+import flighthq.physics2d.NodeSync as Facade_Physics2d_flighthq_physics2d_NodeSync;
 import flighthq.physics2d.RegisterBuiltInPhysics2DJointSolvers as Facade_Physics2d_flighthq_physics2d_RegisterBuiltInPhysics2DJointSolvers;
 import flighthq.physics2d.Solver as Facade_Physics2d_flighthq_physics2d_Solver;
 import flighthq.physics2d.Step as Facade_Physics2d_flighthq_physics2d_Step;
 import flighthq.physics2d.World as Facade_Physics2d_flighthq_physics2d_World;
 import flighthq.physics2d.WorldQueries as Facade_Physics2d_flighthq_physics2d_WorldQueries;
 import flighthq.types.Collision.CollisionBuiltInShape2D;
+import flighthq.types.Node2D;
 import flighthq.types.Physics2D.Physics2DCollider;
 import flighthq.types.Physics2D.Physics2DCollisionExplanation;
 import flighthq.types.Physics2D.Physics2DCollisionFilter;
@@ -406,6 +408,10 @@ class Physics2d {
 
   public static function stepPhysics2D(world:Physics2DWorld, dt:Float):Void {
     Facade_Physics2d_flighthq_physics2d_Step.stepPhysics2D(world, dt);
+  }
+
+  public static function syncPhysics2DBodyToNode2D(body:RigidBody2D, node:Node2D):Void {
+    Facade_Physics2d_flighthq_physics2d_NodeSync.syncPhysics2DBodyToNode2D(body, node);
   }
 
   public static function updatePhysics2DColliderWorldShape(collider:Physics2DCollider, body:RigidBody2D):Void {

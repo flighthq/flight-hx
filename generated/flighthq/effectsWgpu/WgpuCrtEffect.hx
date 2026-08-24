@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass;
 import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
+import flighthq.effectsWgpu.WgpuEffectTexelScale.getWgpuEffectLogicalResolution;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.CrtEffect;
 import flighthq.types.RenderEffect;
@@ -21,20 +22,22 @@ class WgpuCrtEffect {
     var scanlineIntensity:Float = cast _Runtime.UNDEFINED;
     var vignette:Float = cast _Runtime.UNDEFINED;
     var aberration:Float = cast _Runtime.UNDEFINED;
+    var resolution:{ var height:Float; var texelsPerLogicalPixel:Float; var width:Float; } = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     curvature = _Runtime.coalesce(effect.curvature, function():Dynamic return cast 0.1);
     scanlineIntensity = _Runtime.coalesce(effect.scanlineIntensity, function():Dynamic return cast 0.3);
     vignette = _Runtime.coalesce(effect.vignette, function():Dynamic return cast 0.3);
     aberration = _Runtime.coalesce(effect.aberration, function():Dynamic return cast 0.005);
-    pipeline = (cast getWgpuEffectPipeline(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast 'stylization.crt' : String), (cast WgpuCrtEffect.CRT_FRAGMENT_WGSL__wgpuCrtEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
-    drawWgpuEffectPass(({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast source : WgpuRenderTarget), ({ final __callArgument2:Dynamic = (cast dest : WgpuRenderTarget); __callArgument2; }), ({ final __callArgument3:Dynamic = pipeline; __callArgument3; }), ({ final __callArgument4:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
+    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; })) : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; });
+    pipeline = (cast getWgpuEffectPipeline(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast 'stylization.crt' : String), (cast WgpuCrtEffect.CRT_FRAGMENT_WGSL__wgpuCrtEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
+    drawWgpuEffectPass(({ final __callArgument3:Dynamic = state; __callArgument3; }), (cast source : WgpuRenderTarget), ({ final __callArgument4:Dynamic = (cast dest : WgpuRenderTarget); __callArgument4; }), ({ final __callArgument5:Dynamic = pipeline; __callArgument5; }), ({ final __callArgument6:Dynamic = function(__unused1:flighthq._internal._Float32Array, __unused2:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(f32:flighthq._internal._Float32Array, __unused0:flighthq._internal._Int32Array):Void {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast curvature : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 1.0 : Float), (cast scanlineIntensity : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 2.0 : Float), (cast vignette : Float));
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 3.0 : Float), (cast aberration : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast source.width : Float));
-      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast source.height : Float));
-    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument4; }));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 4.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).width : Float));
+      flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flighthq._internal._Float32Array), (cast 5.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).height : Float));
+    }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument6; }));
   }
 
   public static final defaultWgpuCrtEffectRunner:WgpuRenderEffectRunner = (cast function(ctx:WgpuRenderEffectContext, effect:RenderEffect):Void {
@@ -42,7 +45,7 @@ class WgpuCrtEffect {
   });
 
   public static function registerWgpuCrtEffect(state:WgpuRenderState):Void {
-    registerWgpuRenderEffect(({ final __callArgument5:Dynamic = state; __callArgument5; }), (cast 'CrtEffect' : String), ({ final __callArgument6:Dynamic = defaultWgpuCrtEffectRunner; __callArgument6; }));
+    registerWgpuRenderEffect(({ final __callArgument7:Dynamic = state; __callArgument7; }), (cast 'CrtEffect' : String), ({ final __callArgument8:Dynamic = defaultWgpuCrtEffectRunner; __callArgument8; }));
   }
 
   public static final CRT_FRAGMENT_WGSL__wgpuCrtEffect:String = '\nstruct Uniforms {\n  u_curvature : f32,\n  u_scanlineIntensity : f32,\n  u_vignette : f32,\n  u_aberration : f32,\n  u_resolution : vec2f,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\nfn barrel(uv : vec2f) -> vec2f {\n  var c = uv * 2.0 - 1.0;\n  c += c * uni.u_curvature * dot(c, c);\n  return c * 0.5 + 0.5;\n}\n\n@fragment\nfn fs_main(@location(0) uvIn : vec2f) -> @location(0) vec4f {\n  let uv = barrel(uvIn);\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {\n    return vec4f(0.0, 0.0, 0.0, 1.0);\n  }\n  let off = vec2f(uni.u_aberration, 0.0);\n  let r = textureSampleLevel(tex, smp, uv + off, 0.0).r;\n  let g = textureSampleLevel(tex, smp, uv, 0.0).g;\n  let b = textureSampleLevel(tex, smp, uv - off, 0.0).b;\n  let a = textureSampleLevel(tex, smp, uv, 0.0).a;\n  var col = vec3f(r, g, b);\n  let line = sin(uv.y * uni.u_resolution.y * 3.14159265) * 0.5 + 0.5;\n  col *= 1.0 - uni.u_scanlineIntensity * (1.0 - line);\n  let vc = uv * 2.0 - 1.0;\n  col *= 1.0 - uni.u_vignette * dot(vc, vc);\n  return vec4f(col, a);\n}';
