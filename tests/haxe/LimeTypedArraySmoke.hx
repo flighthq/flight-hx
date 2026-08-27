@@ -1,13 +1,13 @@
 package;
 
-import flighthq._internal._Float32Array;
-import flighthq._internal._Int16Array;
-import flighthq._internal._LimeTypedArray;
-import flighthq._internal._Runtime;
-import flighthq._internal._StaticIndex;
-import flighthq._internal._UInt16Array;
-import flighthq._internal._UInt8Array;
-import flighthq._internal.backend.WebGl2Backend;
+import flight._internal._Float32Array;
+import flight._internal._Int16Array;
+import flight._internal._LimeTypedArray;
+import flight._internal._Runtime;
+import flight._internal._StaticIndex;
+import flight._internal._UInt16Array;
+import flight._internal._UInt8Array;
+import flight._internal.backend.WebGl2Backend;
 
 class LimeTypedArraySmoke {
   static function main():Void {

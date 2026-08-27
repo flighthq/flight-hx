@@ -1,6 +1,6 @@
 # Host Seams: hostLime Coverage and Upstream Asks
 
-The host integration rule for this port: `flighthq.hostLime` implements the backend side of seams upstream Flight already defines — named `create*` factories (the `GlSurface` / `LimeCursor` / `LimeAudio` pattern) plugged into upstream's own registration points. Where upstream reaches a browser global directly with no seam, flight-hx does **not** invent a concept; the gap is recorded here as an upstream ask and bridged, if at all, by the narrowest possible adapter.
+The host integration rule for this port: `flight.hostLime` implements the backend side of seams upstream Flight already defines — named `create*` factories (the `GlSurface` / `LimeCursor` / `LimeAudio` pattern) plugged into upstream's own registration points. Where upstream reaches a browser global directly with no seam, flight-hx does **not** invent a concept; the gap is recorded here as an upstream ask and bridged, if at all, by the narrowest possible adapter.
 
 Surveyed at upstream `598ef6f6`. Re-verify the file/line claims after an upstream re-pin.
 
@@ -15,9 +15,9 @@ Surveyed at upstream `598ef6f6`. Re-verify the file/line claims after an upstrea
 Implemented:
 
 - `LimeApp.createLimeAppBackend` — `setAppBackend` seam.
-- `GlSurface.createGlSurface` / `Scene2dCairo.createCairoSurface` — the render-surface entry the `create*RenderState` family expects.
+- `GlSurface.createGlSurface` / `Scene2DCairo.createCairoSurface` — the render-surface entry the `create*RenderState` family expects.
 - `LimeCursor.createLimeCursorBackend` — per-manager `cursorBackend`.
-- `LimeAudio.createLimeAudioContext` — the injected `AudioContext`: genuine browser context on js, a node-graph emulation over `lime.media.AudioSource` natively (protocol subset per the `reports/host-types.json` census; `flighthq._internal.dom` audio types are nominal interfaces off-js so emitted calls keep compile-time arity).
+- `LimeAudio.createLimeAudioContext` — the injected `AudioContext`: genuine browser context on js, a node-graph emulation over `lime.media.AudioSource` natively (protocol subset per the `reports/host-types.json` census; `flight._internal.dom` audio types are nominal interfaces off-js so emitted calls keep compile-time arity).
 - `LimeLoop.createLimeLoopBackend` — `setLoopBackend` over the Lime frame loop, making `startApplicationLoop` drivable natively. Note `stepApplicationLoop` is documented upstream as an explicit-delta driver that bypasses fixed-step accumulation by design — judge the downstream fixed-timestep report against that contract before assuming a port bug.
 - `LimeNet.createLimeNetBackend` — `setNetBackend` over `lime.net.HTTPRequest` (libcurl natively; upstream's own web backend on js). Verified end-to-end: GET/headers/JSON decode plus the status-0 transport sentinel. Documented deviations: 'blob' decodes to the raw buffer, redirect 'error' reports the 3xx as a transport failure after receipt, and `url` echoes the request URL (Lime does not expose the post-redirect URL).
 - `LimeFileSystem.createLimeFileSystemBackend` — the full `FileSystemBackend` over sys IO, including atomic writes, recursive walks with `maxDepth`, stat, copy/append, and `getPath` over Lime's system directories. Unsupported-per-contract natively: file streams (null), symlinks/permissions (false/null), usage (null), watch (no-op unsubscribe, web parity).

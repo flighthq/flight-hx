@@ -1,16 +1,16 @@
 package;
 
-import flighthq._internal._Float32Array;
-import flighthq._internal._Float64Array;
-import flighthq._internal._Int16Array;
-import flighthq._internal._Int32Array;
-import flighthq._internal._Int8Array;
-import flighthq._internal._Runtime;
-import flighthq._internal._StaticIndex;
-import flighthq._internal._UInt16Array;
-import flighthq._internal._UInt32Array;
-import flighthq._internal._UInt8Array;
-import flighthq._internal._UInt8ClampedArray;
+import flight._internal._Float32Array;
+import flight._internal._Float64Array;
+import flight._internal._Int16Array;
+import flight._internal._Int32Array;
+import flight._internal._Int8Array;
+import flight._internal._Runtime;
+import flight._internal._StaticIndex;
+import flight._internal._UInt16Array;
+import flight._internal._UInt32Array;
+import flight._internal._UInt8Array;
+import flight._internal._UInt8ClampedArray;
 
 class StaticIndexSmoke {
   static var ordered:Array<Dynamic>;

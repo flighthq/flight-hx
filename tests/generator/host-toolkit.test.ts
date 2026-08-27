@@ -38,28 +38,28 @@ describe('host toolkit dependency boundary', () => {
     }
     expect(audit.values.some((entry) => entry.key === 'global:SHADOW_DEPTH_FORMAT')).toBe(false);
 
-    const runtime = readFileSync(path.join(workspace, 'src', 'flighthq', '_internal', '_Runtime.hx'), 'utf8');
+    const runtime = readFileSync(path.join(workspace, 'src', 'flight', '_internal', '_Runtime.hx'), 'utf8');
     expect(runtime).not.toMatch(/public static function (?:externalValue|globalValue|typeofGlobal)\b/u);
   });
 
   it('fails generation when emitted code references an undeclared key', () => {
     const workspace = mkdtempSync(path.join(tmpdir(), 'flight-hx-host-toolkit-'));
     try {
-      mkdirSync(path.join(workspace, 'generated', 'flighthq'), { recursive: true });
-      mkdirSync(path.join(workspace, 'src', 'flighthq', '_internal', 'dom'), { recursive: true });
+      mkdirSync(path.join(workspace, 'generated', 'flight'), { recursive: true });
+      mkdirSync(path.join(workspace, 'src', 'flight', '_internal', 'dom'), { recursive: true });
       writeFileSync(
-        path.join(workspace, 'generated', 'flighthq', 'Fixture.hx'),
-        "class Fixture { static final value = flighthq._internal._HostValueLut.get('MissingValue'); }\n",
+        path.join(workspace, 'generated', 'flight', 'Fixture.hx'),
+        "class Fixture { static final value = flight._internal._HostValueLut.get('MissingValue'); }\n",
       );
       writeFileSync(
-        path.join(workspace, 'src', 'flighthq', '_internal', '_HostValueLut.hx'),
+        path.join(workspace, 'src', 'flight', '_internal', '_HostValueLut.hx'),
         'class _HostValueLut { public static final keys:Array<String> = [\n  ]; public static final portableKeys:Array<String> = [\n  ]; }\n',
       );
       writeFileSync(
-        path.join(workspace, 'src', 'flighthq', '_internal', '_HostModuleLut.hx'),
+        path.join(workspace, 'src', 'flight', '_internal', '_HostModuleLut.hx'),
         'class _HostModuleLut {}\n',
       );
-      writeFileSync(path.join(workspace, 'src', 'flighthq', '_internal', 'WebExterns.hx'), 'class WebExterns {}\n');
+      writeFileSync(path.join(workspace, 'src', 'flight', '_internal', 'WebExterns.hx'), 'class WebExterns {}\n');
       const hostTypes: HostTypeAudit = {
         schemaVersion: 2,
         summary: { calls: 0, memberAccesses: 0, reads: 0, typeReferences: 0, types: 0, writes: 0 },

@@ -2,7 +2,7 @@
 
 Upstream commit: `cd6b6e71eb472b3a4249830a7743333f019fa7b7`
 
-Host identities are derived from the TypeScript checker and their ambient declaration origins. Every emitted identity maps mechanically to `flighthq._internal.dom.<SameTypeName>`; this census is descriptive, not an eligibility list.
+Host identities are derived from the TypeScript checker and their ambient declaration origins. Every emitted identity maps mechanically to `flight._internal.dom.<SameTypeName>`; this census is descriptive, not an eligibility list.
 
 | Metric | Count |
 | --- | ---: |

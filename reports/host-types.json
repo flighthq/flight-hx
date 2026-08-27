@@ -17,7 +17,7 @@
         "node_modules/@types/node/web-globals/abortcontroller.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.AbortController",
+      "haxeType": "flight._internal.dom.AbortController",
       "members": [
         {
           "calls": 15,
@@ -294,7 +294,7 @@
         "node_modules/@types/node/web-globals/abortcontroller.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.AbortSignal",
+      "haxeType": "flight._internal.dom.AbortSignal",
       "members": [
         {
           "calls": 0,
@@ -1284,7 +1284,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.AddEventListenerOptions",
+      "haxeType": "flight._internal.dom.AddEventListenerOptions",
       "members": [],
       "name": "AddEventListenerOptions",
       "typeReferences": {
@@ -1309,7 +1309,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.AudioBuffer",
+      "haxeType": "flight._internal.dom.AudioBuffer",
       "members": [
         {
           "calls": 1,
@@ -1533,7 +1533,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.AudioBufferSourceNode",
+      "haxeType": "flight._internal.dom.AudioBufferSourceNode",
       "members": [
         {
           "calls": 0,
@@ -1673,7 +1673,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.AudioContext",
+      "haxeType": "flight._internal.dom.AudioContext",
       "members": [
         {
           "calls": 1,
@@ -2003,7 +2003,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.AudioDestinationNode",
+      "haxeType": "flight._internal.dom.AudioDestinationNode",
       "members": [],
       "name": "AudioDestinationNode",
       "typeReferences": {
@@ -2034,7 +2034,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.AudioNode",
+      "haxeType": "flight._internal.dom.AudioNode",
       "members": [],
       "name": "AudioNode",
       "typeReferences": {
@@ -2102,7 +2102,7 @@
         "node_modules/typescript/lib/lib.dom.d.ts",
         "node_modules/typescript/lib/lib.dom.iterable.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.AudioParam",
+      "haxeType": "flight._internal.dom.AudioParam",
       "members": [
         {
           "calls": 2,
@@ -2280,7 +2280,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.BeforeUnloadEvent",
+      "haxeType": "flight._internal.dom.BeforeUnloadEvent",
       "members": [
         {
           "calls": 1,
@@ -2347,7 +2347,7 @@
         "node_modules/@types/node/buffer.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Blob",
+      "haxeType": "flight._internal.dom.Blob",
       "members": [
         {
           "calls": 4,
@@ -2697,7 +2697,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.BodyInit",
+      "haxeType": "flight._internal.dom.BodyInit",
       "members": [],
       "name": "BodyInit",
       "typeReferences": {
@@ -2722,7 +2722,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.BufferSource",
+      "haxeType": "flight._internal.dom.BufferSource",
       "members": [],
       "name": "BufferSource",
       "typeReferences": {
@@ -2748,7 +2748,7 @@
         "node_modules/typescript/lib/lib.dom.d.ts",
         "node_modules/typescript/lib/lib.dom.iterable.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.CSSStyleDeclaration",
+      "haxeType": "flight._internal.dom.CSSStyleDeclaration",
       "members": [
         {
           "calls": 0,
@@ -3996,7 +3996,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.CanvasFillRule",
+      "haxeType": "flight._internal.dom.CanvasFillRule",
       "members": [],
       "name": "CanvasFillRule",
       "typeReferences": {
@@ -4021,7 +4021,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.CanvasGradient",
+      "haxeType": "flight._internal.dom.CanvasGradient",
       "members": [
         {
           "calls": 7,
@@ -4277,7 +4277,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.CanvasImageSource",
+      "haxeType": "flight._internal.dom.CanvasImageSource",
       "members": [],
       "name": "CanvasImageSource",
       "typeReferences": {
@@ -4434,7 +4434,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.CanvasLineCap",
+      "haxeType": "flight._internal.dom.CanvasLineCap",
       "members": [],
       "name": "CanvasLineCap",
       "typeReferences": {
@@ -4459,7 +4459,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.CanvasLineJoin",
+      "haxeType": "flight._internal.dom.CanvasLineJoin",
       "members": [],
       "name": "CanvasLineJoin",
       "typeReferences": {
@@ -4484,7 +4484,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.CanvasPattern",
+      "haxeType": "flight._internal.dom.CanvasPattern",
       "members": [],
       "name": "CanvasPattern",
       "typeReferences": {
@@ -4707,7 +4707,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.CanvasRenderingContext2D",
+      "haxeType": "flight._internal.dom.CanvasRenderingContext2D",
       "members": [
         {
           "calls": 1,
@@ -8929,7 +8929,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.CanvasRenderingContext2DSettings",
+      "haxeType": "flight._internal.dom.CanvasRenderingContext2DSettings",
       "members": [],
       "name": "CanvasRenderingContext2DSettings",
       "typeReferences": {
@@ -8984,7 +8984,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.ChildNode",
+      "haxeType": "flight._internal.dom.ChildNode",
       "members": [
         {
           "calls": 0,
@@ -9076,7 +9076,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Clipboard",
+      "haxeType": "flight._internal.dom.Clipboard",
       "members": [
         {
           "calls": 4,
@@ -9254,7 +9254,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.ClipboardItem",
+      "haxeType": "flight._internal.dom.ClipboardItem",
       "members": [
         {
           "calls": 3,
@@ -9344,7 +9344,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.CloseEvent",
+      "haxeType": "flight._internal.dom.CloseEvent",
       "members": [
         {
           "calls": 0,
@@ -9424,7 +9424,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.CompositionEvent",
+      "haxeType": "flight._internal.dom.CompositionEvent",
       "members": [
         {
           "calls": 0,
@@ -9471,7 +9471,7 @@
         "node_modules/@types/node/console.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Console",
+      "haxeType": "flight._internal.dom.Console",
       "members": [
         {
           "calls": 1,
@@ -9511,7 +9511,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Crypto",
+      "haxeType": "flight._internal.dom.Crypto",
       "members": [
         {
           "calls": 1,
@@ -9558,7 +9558,7 @@
         "node_modules/@types/node/web-globals/events.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.CustomEvent",
+      "haxeType": "flight._internal.dom.CustomEvent",
       "members": [
         {
           "calls": 0,
@@ -9605,7 +9605,7 @@
         "node_modules/@types/node/web-globals/domexception.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.DOMException",
+      "haxeType": "flight._internal.dom.DOMException",
       "members": [
         {
           "calls": 0,
@@ -9675,7 +9675,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.DOMRect",
+      "haxeType": "flight._internal.dom.DOMRect",
       "members": [
         {
           "calls": 0,
@@ -9853,7 +9853,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.DOMRectReadOnly",
+      "haxeType": "flight._internal.dom.DOMRectReadOnly",
       "members": [
         {
           "calls": 0,
@@ -9907,7 +9907,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.DOMStringMap",
+      "haxeType": "flight._internal.dom.DOMStringMap",
       "members": [],
       "name": "DOMStringMap",
       "typeReferences": {
@@ -9932,7 +9932,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.DataTransfer",
+      "haxeType": "flight._internal.dom.DataTransfer",
       "members": [
         {
           "calls": 0,
@@ -9972,7 +9972,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Document",
+      "haxeType": "flight._internal.dom.Document",
       "members": [
         {
           "calls": 0,
@@ -11088,7 +11088,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.DragEvent",
+      "haxeType": "flight._internal.dom.DragEvent",
       "members": [
         {
           "calls": 0,
@@ -11172,7 +11172,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.EXT_color_buffer_float",
+      "haxeType": "flight._internal.dom.EXT_color_buffer_float",
       "members": [],
       "name": "EXT_color_buffer_float",
       "typeReferences": {
@@ -11203,7 +11203,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.EXT_texture_compression_bptc",
+      "haxeType": "flight._internal.dom.EXT_texture_compression_bptc",
       "members": [],
       "name": "EXT_texture_compression_bptc",
       "typeReferences": {
@@ -11228,7 +11228,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.EXT_texture_compression_rgtc",
+      "haxeType": "flight._internal.dom.EXT_texture_compression_rgtc",
       "members": [],
       "name": "EXT_texture_compression_rgtc",
       "typeReferences": {
@@ -11253,7 +11253,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.EXT_texture_filter_anisotropic",
+      "haxeType": "flight._internal.dom.EXT_texture_filter_anisotropic",
       "members": [
         {
           "calls": 0,
@@ -11349,7 +11349,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Element",
+      "haxeType": "flight._internal.dom.Element",
       "members": [
         {
           "calls": 1,
@@ -11440,7 +11440,7 @@
         "node_modules/@types/node/web-globals/events.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Event",
+      "haxeType": "flight._internal.dom.Event",
       "members": [
         {
           "calls": 6,
@@ -11744,7 +11744,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.EventListener",
+      "haxeType": "flight._internal.dom.EventListener",
       "members": [],
       "name": "EventListener",
       "typeReferences": {
@@ -11853,7 +11853,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.EventListenerObject",
+      "haxeType": "flight._internal.dom.EventListenerObject",
       "members": [],
       "name": "EventListenerObject",
       "typeReferences": {
@@ -11879,7 +11879,7 @@
         "node_modules/@types/node/web-globals/events.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.EventListenerOptions",
+      "haxeType": "flight._internal.dom.EventListenerOptions",
       "members": [],
       "name": "EventListenerOptions",
       "typeReferences": {
@@ -11905,7 +11905,7 @@
         "node_modules/@types/node/web-globals/events.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.EventTarget",
+      "haxeType": "flight._internal.dom.EventTarget",
       "members": [
         {
           "calls": 2,
@@ -12026,7 +12026,7 @@
         "node_modules/@types/node/buffer.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.File",
+      "haxeType": "flight._internal.dom.File",
       "members": [
         {
           "calls": 4,
@@ -12315,7 +12315,7 @@
         "node_modules/typescript/lib/lib.dom.d.ts",
         "node_modules/typescript/lib/lib.dom.iterable.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.FileList",
+      "haxeType": "flight._internal.dom.FileList",
       "members": [
         {
           "calls": 0,
@@ -12391,7 +12391,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.FileReader",
+      "haxeType": "flight._internal.dom.FileReader",
       "members": [
         {
           "calls": 0,
@@ -12566,7 +12566,7 @@
         "node_modules/typescript/lib/lib.dom.asynciterable.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.FileSystemDirectoryHandle",
+      "haxeType": "flight._internal.dom.FileSystemDirectoryHandle",
       "members": [
         {
           "calls": 1,
@@ -12742,7 +12742,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.FileSystemFileHandle",
+      "haxeType": "flight._internal.dom.FileSystemFileHandle",
       "members": [
         {
           "calls": 3,
@@ -12916,7 +12916,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.FileSystemWritableFileStream",
+      "haxeType": "flight._internal.dom.FileSystemWritableFileStream",
       "members": [
         {
           "calls": 1,
@@ -12990,7 +12990,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.FileSystemWriteChunkType",
+      "haxeType": "flight._internal.dom.FileSystemWriteChunkType",
       "members": [],
       "name": "FileSystemWriteChunkType",
       "typeReferences": {
@@ -13015,7 +13015,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.FontFace",
+      "haxeType": "flight._internal.dom.FontFace",
       "members": [
         {
           "calls": 1,
@@ -13182,7 +13182,7 @@
         "node_modules/typescript/lib/lib.dom.d.ts",
         "node_modules/typescript/lib/lib.dom.iterable.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.FontFaceSet",
+      "haxeType": "flight._internal.dom.FontFaceSet",
       "members": [
         {
           "calls": 1,
@@ -13278,7 +13278,7 @@
         "node_modules/typescript/lib/lib.dom.d.ts",
         "node_modules/typescript/lib/lib.dom.iterable.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.FormData",
+      "haxeType": "flight._internal.dom.FormData",
       "members": [],
       "name": "FormData",
       "typeReferences": {
@@ -13303,7 +13303,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPU",
+      "haxeType": "flight._internal.dom.GPU",
       "members": [
         {
           "calls": 1,
@@ -13381,7 +13381,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUAdapter",
+      "haxeType": "flight._internal.dom.GPUAdapter",
       "members": [
         {
           "calls": 0,
@@ -13527,7 +13527,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUAllowSharedBufferSource",
+      "haxeType": "flight._internal.dom.GPUAllowSharedBufferSource",
       "members": [
         {
           "calls": 0,
@@ -13579,7 +13579,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUBindGroup",
+      "haxeType": "flight._internal.dom.GPUBindGroup",
       "members": [],
       "name": "GPUBindGroup",
       "typeReferences": {
@@ -14918,7 +14918,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUBindGroupEntry",
+      "haxeType": "flight._internal.dom.GPUBindGroupEntry",
       "members": [
         {
           "calls": 0,
@@ -15036,7 +15036,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUBindGroupLayout",
+      "haxeType": "flight._internal.dom.GPUBindGroupLayout",
       "members": [],
       "name": "GPUBindGroupLayout",
       "typeReferences": {
@@ -16765,7 +16765,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUBindGroupLayoutEntry",
+      "haxeType": "flight._internal.dom.GPUBindGroupLayoutEntry",
       "members": [],
       "name": "GPUBindGroupLayoutEntry",
       "typeReferences": {
@@ -16844,7 +16844,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUBlendComponent",
+      "haxeType": "flight._internal.dom.GPUBlendComponent",
       "members": [],
       "name": "GPUBlendComponent",
       "typeReferences": {
@@ -16881,7 +16881,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUBlendFactor",
+      "haxeType": "flight._internal.dom.GPUBlendFactor",
       "members": [],
       "name": "GPUBlendFactor",
       "typeReferences": {
@@ -16912,7 +16912,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUBlendOperation",
+      "haxeType": "flight._internal.dom.GPUBlendOperation",
       "members": [],
       "name": "GPUBlendOperation",
       "typeReferences": {
@@ -16937,7 +16937,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUBlendState",
+      "haxeType": "flight._internal.dom.GPUBlendState",
       "members": [],
       "name": "GPUBlendState",
       "typeReferences": {
@@ -17322,7 +17322,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUBuffer",
+      "haxeType": "flight._internal.dom.GPUBuffer",
       "members": [
         {
           "calls": 20,
@@ -19234,7 +19234,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUBufferBinding",
+      "haxeType": "flight._internal.dom.GPUBufferBinding",
       "members": [],
       "name": "GPUBufferBinding",
       "typeReferences": {
@@ -19313,7 +19313,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUBufferDescriptor",
+      "haxeType": "flight._internal.dom.GPUBufferDescriptor",
       "members": [
         {
           "calls": 0,
@@ -19397,7 +19397,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUBufferUsage",
+      "haxeType": "flight._internal.dom.GPUBufferUsage",
       "members": [
         {
           "calls": 0,
@@ -19900,7 +19900,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUCanvasContext",
+      "haxeType": "flight._internal.dom.GPUCanvasContext",
       "members": [
         {
           "calls": 1,
@@ -20020,7 +20020,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUColor",
+      "haxeType": "flight._internal.dom.GPUColor",
       "members": [],
       "name": "GPUColor",
       "typeReferences": {
@@ -20063,7 +20063,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUColorDict",
+      "haxeType": "flight._internal.dom.GPUColorDict",
       "members": [],
       "name": "GPUColorDict",
       "typeReferences": {
@@ -20178,7 +20178,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUColorWrite",
+      "haxeType": "flight._internal.dom.GPUColorWrite",
       "members": [
         {
           "calls": 0,
@@ -20215,7 +20215,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUCommandBuffer",
+      "haxeType": "flight._internal.dom.GPUCommandBuffer",
       "members": [],
       "name": "GPUCommandBuffer",
       "typeReferences": {
@@ -20294,7 +20294,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUCommandEncoder",
+      "haxeType": "flight._internal.dom.GPUCommandEncoder",
       "members": [
         {
           "calls": 9,
@@ -20596,7 +20596,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUCopyExternalImageDestInfo",
+      "haxeType": "flight._internal.dom.GPUCopyExternalImageDestInfo",
       "members": [],
       "name": "GPUCopyExternalImageDestInfo",
       "typeReferences": {
@@ -20639,7 +20639,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUCopyExternalImageSource",
+      "haxeType": "flight._internal.dom.GPUCopyExternalImageSource",
       "members": [],
       "name": "GPUCopyExternalImageSource",
       "typeReferences": {
@@ -20706,7 +20706,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUCopyExternalImageSourceInfo",
+      "haxeType": "flight._internal.dom.GPUCopyExternalImageSourceInfo",
       "members": [],
       "name": "GPUCopyExternalImageSourceInfo",
       "typeReferences": {
@@ -20749,7 +20749,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUDevice",
+      "haxeType": "flight._internal.dom.GPUDevice",
       "members": [
         {
           "calls": 57,
@@ -23289,7 +23289,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUDeviceDescriptor",
+      "haxeType": "flight._internal.dom.GPUDeviceDescriptor",
       "members": [
         {
           "calls": 0,
@@ -23349,7 +23349,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUDeviceLostInfo",
+      "haxeType": "flight._internal.dom.GPUDeviceLostInfo",
       "members": [],
       "name": "GPUDeviceLostInfo",
       "typeReferences": {
@@ -23374,7 +23374,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUExtent3D",
+      "haxeType": "flight._internal.dom.GPUExtent3D",
       "members": [],
       "name": "GPUExtent3D",
       "typeReferences": {
@@ -23411,7 +23411,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUExtent3DDict",
+      "haxeType": "flight._internal.dom.GPUExtent3DDict",
       "members": [
         {
           "calls": 0,
@@ -23515,7 +23515,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUExtent3DDictStrict",
+      "haxeType": "flight._internal.dom.GPUExtent3DDictStrict",
       "members": [],
       "name": "GPUExtent3DDictStrict",
       "typeReferences": {
@@ -23540,7 +23540,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUExternalTexture",
+      "haxeType": "flight._internal.dom.GPUExternalTexture",
       "members": [],
       "name": "GPUExternalTexture",
       "typeReferences": {
@@ -23619,7 +23619,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUFeatureName",
+      "haxeType": "flight._internal.dom.GPUFeatureName",
       "members": [],
       "name": "GPUFeatureName",
       "typeReferences": {
@@ -23644,7 +23644,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUFilterMode",
+      "haxeType": "flight._internal.dom.GPUFilterMode",
       "members": [],
       "name": "GPUFilterMode",
       "typeReferences": {
@@ -23747,7 +23747,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUIndexFormat",
+      "haxeType": "flight._internal.dom.GPUIndexFormat",
       "members": [],
       "name": "GPUIndexFormat",
       "typeReferences": {
@@ -23778,7 +23778,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPULoadOp",
+      "haxeType": "flight._internal.dom.GPULoadOp",
       "members": [],
       "name": "GPULoadOp",
       "typeReferences": {
@@ -23833,7 +23833,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUMapMode",
+      "haxeType": "flight._internal.dom.GPUMapMode",
       "members": [
         {
           "calls": 0,
@@ -23864,7 +23864,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUMipmapFilterMode",
+      "haxeType": "flight._internal.dom.GPUMipmapFilterMode",
       "members": [],
       "name": "GPUMipmapFilterMode",
       "typeReferences": {
@@ -23907,7 +23907,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUOrigin3D",
+      "haxeType": "flight._internal.dom.GPUOrigin3D",
       "members": [],
       "name": "GPUOrigin3D",
       "typeReferences": {
@@ -23944,7 +23944,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUOrigin3DDict",
+      "haxeType": "flight._internal.dom.GPUOrigin3DDict",
       "members": [],
       "name": "GPUOrigin3DDict",
       "typeReferences": {
@@ -23999,7 +23999,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUPipelineLayout",
+      "haxeType": "flight._internal.dom.GPUPipelineLayout",
       "members": [],
       "name": "GPUPipelineLayout",
       "typeReferences": {
@@ -24378,7 +24378,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUPowerPreference",
+      "haxeType": "flight._internal.dom.GPUPowerPreference",
       "members": [],
       "name": "GPUPowerPreference",
       "typeReferences": {
@@ -24403,7 +24403,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUPrimitiveTopology",
+      "haxeType": "flight._internal.dom.GPUPrimitiveTopology",
       "members": [],
       "name": "GPUPrimitiveTopology",
       "typeReferences": {
@@ -24428,7 +24428,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUQueue",
+      "haxeType": "flight._internal.dom.GPUQueue",
       "members": [
         {
           "calls": 1,
@@ -25002,7 +25002,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPURenderPassEncoder",
+      "haxeType": "flight._internal.dom.GPURenderPassEncoder",
       "members": [
         {
           "calls": 20,
@@ -26650,7 +26650,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPURenderPipeline",
+      "haxeType": "flight._internal.dom.GPURenderPipeline",
       "members": [],
       "name": "GPURenderPipeline",
       "typeReferences": {
@@ -27359,7 +27359,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPURenderPipelineDescriptor",
+      "haxeType": "flight._internal.dom.GPURenderPipelineDescriptor",
       "members": [],
       "name": "GPURenderPipelineDescriptor",
       "typeReferences": {
@@ -27426,7 +27426,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUSampler",
+      "haxeType": "flight._internal.dom.GPUSampler",
       "members": [],
       "name": "GPUSampler",
       "typeReferences": {
@@ -28819,7 +28819,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUSamplerDescriptor",
+      "haxeType": "flight._internal.dom.GPUSamplerDescriptor",
       "members": [
         {
           "calls": 0,
@@ -28879,7 +28879,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUShaderModule",
+      "haxeType": "flight._internal.dom.GPUShaderModule",
       "members": [],
       "name": "GPUShaderModule",
       "typeReferences": {
@@ -29780,7 +29780,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUShaderStage",
+      "haxeType": "flight._internal.dom.GPUShaderStage",
       "members": [
         {
           "calls": 0,
@@ -30467,7 +30467,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUStencilFaceState",
+      "haxeType": "flight._internal.dom.GPUStencilFaceState",
       "members": [],
       "name": "GPUStencilFaceState",
       "typeReferences": {
@@ -30534,7 +30534,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUStencilOperation",
+      "haxeType": "flight._internal.dom.GPUStencilOperation",
       "members": [],
       "name": "GPUStencilOperation",
       "typeReferences": {
@@ -30559,7 +30559,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUSupportedFeatures",
+      "haxeType": "flight._internal.dom.GPUSupportedFeatures",
       "members": [
         {
           "calls": 6,
@@ -30641,7 +30641,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUSupportedLimits",
+      "haxeType": "flight._internal.dom.GPUSupportedLimits",
       "members": [
         {
           "calls": 0,
@@ -30775,7 +30775,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUTexelCopyBufferLayout",
+      "haxeType": "flight._internal.dom.GPUTexelCopyBufferLayout",
       "members": [
         {
           "calls": 0,
@@ -30879,7 +30879,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUTexelCopyTextureInfo",
+      "haxeType": "flight._internal.dom.GPUTexelCopyTextureInfo",
       "members": [
         {
           "calls": 0,
@@ -30955,7 +30955,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUTexture",
+      "haxeType": "flight._internal.dom.GPUTexture",
       "members": [
         {
           "calls": 37,
@@ -32401,7 +32401,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUTextureDescriptor",
+      "haxeType": "flight._internal.dom.GPUTextureDescriptor",
       "members": [
         {
           "calls": 0,
@@ -32547,7 +32547,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUTextureFormat",
+      "haxeType": "flight._internal.dom.GPUTextureFormat",
       "members": [],
       "name": "GPUTextureFormat",
       "typeReferences": {
@@ -32920,7 +32920,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUTextureUsage",
+      "haxeType": "flight._internal.dom.GPUTextureUsage",
       "members": [
         {
           "calls": 0,
@@ -33371,7 +33371,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUTextureView",
+      "haxeType": "flight._internal.dom.GPUTextureView",
       "members": [],
       "name": "GPUTextureView",
       "typeReferences": {
@@ -35298,7 +35298,7 @@
       "declarationSources": [
         "node_modules/@webgpu/types/dist/index.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GPUVertexBufferLayout",
+      "haxeType": "flight._internal.dom.GPUVertexBufferLayout",
       "members": [],
       "name": "GPUVertexBufferLayout",
       "typeReferences": {
@@ -35455,7 +35455,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GainNode",
+      "haxeType": "flight._internal.dom.GainNode",
       "members": [
         {
           "calls": 5,
@@ -35709,7 +35709,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Gamepad",
+      "haxeType": "flight._internal.dom.Gamepad",
       "members": [
         {
           "calls": 0,
@@ -35931,7 +35931,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GamepadButton",
+      "haxeType": "flight._internal.dom.GamepadButton",
       "members": [
         {
           "calls": 0,
@@ -36015,7 +36015,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GamepadEvent",
+      "haxeType": "flight._internal.dom.GamepadEvent",
       "members": [
         {
           "calls": 0,
@@ -36073,7 +36073,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Geolocation",
+      "haxeType": "flight._internal.dom.Geolocation",
       "members": [
         {
           "calls": 1,
@@ -36213,7 +36213,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GeolocationCoordinates",
+      "haxeType": "flight._internal.dom.GeolocationCoordinates",
       "members": [
         {
           "calls": 0,
@@ -36337,7 +36337,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GeolocationPosition",
+      "haxeType": "flight._internal.dom.GeolocationPosition",
       "members": [],
       "name": "GeolocationPosition",
       "typeReferences": {
@@ -36404,7 +36404,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GeolocationPositionError",
+      "haxeType": "flight._internal.dom.GeolocationPositionError",
       "members": [
         {
           "calls": 0,
@@ -36474,7 +36474,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.GlobalCompositeOperation",
+      "haxeType": "flight._internal.dom.GlobalCompositeOperation",
       "members": [],
       "name": "GlobalCompositeOperation",
       "typeReferences": {
@@ -36541,7 +36541,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.HTMLAudioElement",
+      "haxeType": "flight._internal.dom.HTMLAudioElement",
       "members": [
         {
           "calls": 1,
@@ -36582,7 +36582,7 @@
         "node_modules/@webgpu/types/dist/index.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.HTMLCanvasElement",
+      "haxeType": "flight._internal.dom.HTMLCanvasElement",
       "members": [
         {
           "calls": 2,
@@ -39088,7 +39088,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.HTMLDivElement",
+      "haxeType": "flight._internal.dom.HTMLDivElement",
       "members": [
         {
           "calls": 1,
@@ -39416,7 +39416,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.HTMLElement",
+      "haxeType": "flight._internal.dom.HTMLElement",
       "members": [
         {
           "calls": 12,
@@ -41406,7 +41406,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.HTMLHeadElement",
+      "haxeType": "flight._internal.dom.HTMLHeadElement",
       "members": [
         {
           "calls": 3,
@@ -41484,7 +41484,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.HTMLImageElement",
+      "haxeType": "flight._internal.dom.HTMLImageElement",
       "members": [
         {
           "calls": 0,
@@ -42018,7 +42018,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.HTMLInputElement",
+      "haxeType": "flight._internal.dom.HTMLInputElement",
       "members": [
         {
           "calls": 0,
@@ -42288,7 +42288,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.HTMLLIElement",
+      "haxeType": "flight._internal.dom.HTMLLIElement",
       "members": [
         {
           "calls": 5,
@@ -42497,7 +42497,7 @@
         "node_modules/typescript/lib/lib.dom.d.ts",
         "node_modules/vite/types/internal/cssPreprocessorOptions.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.HTMLLinkElement",
+      "haxeType": "flight._internal.dom.HTMLLinkElement",
       "members": [
         {
           "calls": 0,
@@ -42563,7 +42563,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.HTMLMediaElement",
+      "haxeType": "flight._internal.dom.HTMLMediaElement",
       "members": [],
       "name": "HTMLMediaElement",
       "typeReferences": {
@@ -42588,7 +42588,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.HTMLMetaElement",
+      "haxeType": "flight._internal.dom.HTMLMetaElement",
       "members": [],
       "name": "HTMLMetaElement",
       "typeReferences": {
@@ -42613,7 +42613,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.HTMLSpanElement",
+      "haxeType": "flight._internal.dom.HTMLSpanElement",
       "members": [
         {
           "calls": 1,
@@ -42755,7 +42755,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.HTMLStyleElement",
+      "haxeType": "flight._internal.dom.HTMLStyleElement",
       "members": [
         {
           "calls": 0,
@@ -42809,7 +42809,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.HTMLUListElement",
+      "haxeType": "flight._internal.dom.HTMLUListElement",
       "members": [
         {
           "calls": 2,
@@ -42940,7 +42940,7 @@
         "node_modules/@webgpu/types/dist/index.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.HTMLVideoElement",
+      "haxeType": "flight._internal.dom.HTMLVideoElement",
       "members": [
         {
           "calls": 3,
@@ -43958,7 +43958,7 @@
         "node_modules/typescript/lib/lib.dom.d.ts",
         "node_modules/typescript/lib/lib.dom.iterable.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Headers",
+      "haxeType": "flight._internal.dom.Headers",
       "members": [
         {
           "calls": 1,
@@ -44054,7 +44054,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.ImageBitmap",
+      "haxeType": "flight._internal.dom.ImageBitmap",
       "members": [
         {
           "calls": 1,
@@ -44458,7 +44458,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.ImageBitmapRenderingContext",
+      "haxeType": "flight._internal.dom.ImageBitmapRenderingContext",
       "members": [],
       "name": "ImageBitmapRenderingContext",
       "typeReferences": {
@@ -44483,7 +44483,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.ImageData",
+      "haxeType": "flight._internal.dom.ImageData",
       "members": [
         {
           "calls": 0,
@@ -44727,7 +44727,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.ImageDataArray",
+      "haxeType": "flight._internal.dom.ImageDataArray",
       "members": [
         {
           "calls": 2,
@@ -44764,7 +44764,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.ImageDataSettings",
+      "haxeType": "flight._internal.dom.ImageDataSettings",
       "members": [],
       "name": "ImageDataSettings",
       "typeReferences": {
@@ -44789,7 +44789,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.ImageSmoothingQuality",
+      "haxeType": "flight._internal.dom.ImageSmoothingQuality",
       "members": [],
       "name": "ImageSmoothingQuality",
       "typeReferences": {
@@ -44820,7 +44820,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.InputEvent",
+      "haxeType": "flight._internal.dom.InputEvent",
       "members": [
         {
           "calls": 0,
@@ -44880,7 +44880,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.KeyboardEvent",
+      "haxeType": "flight._internal.dom.KeyboardEvent",
       "members": [
         {
           "calls": 0,
@@ -45178,7 +45178,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Location",
+      "haxeType": "flight._internal.dom.Location",
       "members": [
         {
           "calls": 0,
@@ -45278,7 +45278,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.MediaDevices",
+      "haxeType": "flight._internal.dom.MediaDevices",
       "members": [
         {
           "calls": 1,
@@ -45336,7 +45336,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.MediaMetadata",
+      "haxeType": "flight._internal.dom.MediaMetadata",
       "members": [],
       "name": "MediaMetadata",
       "typeReferences": {
@@ -45367,7 +45367,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.MediaQueryList",
+      "haxeType": "flight._internal.dom.MediaQueryList",
       "members": [
         {
           "calls": 0,
@@ -45449,7 +45449,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.MediaSession",
+      "haxeType": "flight._internal.dom.MediaSession",
       "members": [
         {
           "calls": 0,
@@ -45555,7 +45555,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.MediaSource",
+      "haxeType": "flight._internal.dom.MediaSource",
       "members": [],
       "name": "MediaSource",
       "typeReferences": {
@@ -45580,7 +45580,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.MediaStream",
+      "haxeType": "flight._internal.dom.MediaStream",
       "members": [],
       "name": "MediaStream",
       "typeReferences": {
@@ -45647,7 +45647,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.MediaStreamTrack",
+      "haxeType": "flight._internal.dom.MediaStreamTrack",
       "members": [
         {
           "calls": 1,
@@ -45701,7 +45701,7 @@
         "node_modules/typescript/lib/lib.dom.d.ts",
         "node_modules/typescript/lib/lib.dom.iterable.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.MessageEvent",
+      "haxeType": "flight._internal.dom.MessageEvent",
       "members": [
         {
           "calls": 0,
@@ -45753,7 +45753,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.MouseEvent",
+      "haxeType": "flight._internal.dom.MouseEvent",
       "members": [
         {
           "calls": 0,
@@ -45848,7 +45848,7 @@
         "node_modules/typescript/lib/lib.dom.d.ts",
         "node_modules/typescript/lib/lib.dom.iterable.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Navigator",
+      "haxeType": "flight._internal.dom.Navigator",
       "members": [
         {
           "calls": 1,
@@ -46540,7 +46540,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Node",
+      "haxeType": "flight._internal.dom.Node",
       "members": [],
       "name": "Node",
       "typeReferences": {
@@ -46572,7 +46572,7 @@
         "node_modules/typescript/lib/lib.dom.d.ts",
         "node_modules/typescript/lib/lib.dom.iterable.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.NodeListOf",
+      "haxeType": "flight._internal.dom.NodeListOf",
       "members": [],
       "name": "NodeListOf",
       "typeReferences": {
@@ -46603,7 +46603,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Notification",
+      "haxeType": "flight._internal.dom.Notification",
       "members": [
         {
           "calls": 3,
@@ -46723,7 +46723,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.NotificationOptions",
+      "haxeType": "flight._internal.dom.NotificationOptions",
       "members": [],
       "name": "NotificationOptions",
       "typeReferences": {
@@ -46772,7 +46772,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.NotificationPermission",
+      "haxeType": "flight._internal.dom.NotificationPermission",
       "members": [],
       "name": "NotificationPermission",
       "typeReferences": {
@@ -46797,7 +46797,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.OES_texture_float_linear",
+      "haxeType": "flight._internal.dom.OES_texture_float_linear",
       "members": [],
       "name": "OES_texture_float_linear",
       "typeReferences": {
@@ -46823,7 +46823,7 @@
         "node_modules/@webgpu/types/dist/index.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.OffscreenCanvas",
+      "haxeType": "flight._internal.dom.OffscreenCanvas",
       "members": [
         {
           "calls": 1,
@@ -47211,7 +47211,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.OffscreenCanvasRenderingContext2D",
+      "haxeType": "flight._internal.dom.OffscreenCanvasRenderingContext2D",
       "members": [
         {
           "calls": 1,
@@ -47381,7 +47381,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.ParentNode",
+      "haxeType": "flight._internal.dom.ParentNode",
       "members": [
         {
           "calls": 2,
@@ -47445,7 +47445,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Performance",
+      "haxeType": "flight._internal.dom.Performance",
       "members": [
         {
           "calls": 1,
@@ -47553,7 +47553,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.PerformanceNavigationTiming",
+      "haxeType": "flight._internal.dom.PerformanceNavigationTiming",
       "members": [
         {
           "calls": 0,
@@ -47605,7 +47605,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.PermissionDescriptor",
+      "haxeType": "flight._internal.dom.PermissionDescriptor",
       "members": [],
       "name": "PermissionDescriptor",
       "typeReferences": {
@@ -47642,7 +47642,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.PermissionName",
+      "haxeType": "flight._internal.dom.PermissionName",
       "members": [],
       "name": "PermissionName",
       "typeReferences": {
@@ -47685,7 +47685,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.PermissionStatus",
+      "haxeType": "flight._internal.dom.PermissionStatus",
       "members": [
         {
           "calls": 2,
@@ -47909,7 +47909,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Permissions",
+      "haxeType": "flight._internal.dom.Permissions",
       "members": [
         {
           "calls": 9,
@@ -48075,7 +48075,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.PointerEvent",
+      "haxeType": "flight._internal.dom.PointerEvent",
       "members": [
         {
           "calls": 1,
@@ -48431,7 +48431,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.PositionOptions",
+      "haxeType": "flight._internal.dom.PositionOptions",
       "members": [],
       "name": "PositionOptions",
       "typeReferences": {
@@ -48462,7 +48462,7 @@
       "declarationSources": [
         "node_modules/@types/node/process.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Process",
+      "haxeType": "flight._internal.dom.Process",
       "members": [],
       "name": "Process",
       "typeReferences": {
@@ -48487,7 +48487,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.ProgressEvent",
+      "haxeType": "flight._internal.dom.ProgressEvent",
       "members": [],
       "name": "ProgressEvent",
       "typeReferences": {
@@ -48520,7 +48520,7 @@
         "node_modules/typescript/lib/lib.dom.asynciterable.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.ReadableStream",
+      "haxeType": "flight._internal.dom.ReadableStream",
       "members": [
         {
           "calls": 1,
@@ -48627,7 +48627,7 @@
         "node_modules/@types/node/stream/web.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.ReadableStreamDefaultReader",
+      "haxeType": "flight._internal.dom.ReadableStreamDefaultReader",
       "members": [
         {
           "calls": 1,
@@ -48668,7 +48668,7 @@
         "node_modules/@types/node/web-globals/fetch.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.RequestInit",
+      "haxeType": "flight._internal.dom.RequestInit",
       "members": [
         {
           "calls": 0,
@@ -48762,7 +48762,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.ResizeObserver",
+      "haxeType": "flight._internal.dom.ResizeObserver",
       "members": [
         {
           "calls": 2,
@@ -48840,7 +48840,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.ResizeObserverEntry",
+      "haxeType": "flight._internal.dom.ResizeObserverEntry",
       "members": [
         {
           "calls": 0,
@@ -48899,7 +48899,7 @@
         "node_modules/@types/node/web-globals/fetch.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Response",
+      "haxeType": "flight._internal.dom.Response",
       "members": [
         {
           "calls": 3,
@@ -49197,7 +49197,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.SVGImageElement",
+      "haxeType": "flight._internal.dom.SVGImageElement",
       "members": [],
       "name": "SVGImageElement",
       "typeReferences": {
@@ -49396,7 +49396,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Screen",
+      "haxeType": "flight._internal.dom.Screen",
       "members": [
         {
           "calls": 0,
@@ -49622,7 +49622,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.ScreenOrientation",
+      "haxeType": "flight._internal.dom.ScreenOrientation",
       "members": [
         {
           "calls": 1,
@@ -49676,7 +49676,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.ShareData",
+      "haxeType": "flight._internal.dom.ShareData",
       "members": [
         {
           "calls": 0,
@@ -49770,7 +49770,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.StereoPannerNode",
+      "haxeType": "flight._internal.dom.StereoPannerNode",
       "members": [
         {
           "calls": 1,
@@ -49881,7 +49881,7 @@
         "node_modules/@types/node/web-globals/storage.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Storage",
+      "haxeType": "flight._internal.dom.Storage",
       "members": [
         {
           "calls": 1,
@@ -50021,7 +50021,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.StorageEstimate",
+      "haxeType": "flight._internal.dom.StorageEstimate",
       "members": [
         {
           "calls": 0,
@@ -50123,7 +50123,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.StorageEvent",
+      "haxeType": "flight._internal.dom.StorageEvent",
       "members": [
         {
           "calls": 0,
@@ -50203,7 +50203,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.StorageManager",
+      "haxeType": "flight._internal.dom.StorageManager",
       "members": [
         {
           "calls": 1,
@@ -50313,7 +50313,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.TexImageSource",
+      "haxeType": "flight._internal.dom.TexImageSource",
       "members": [],
       "name": "TexImageSource",
       "typeReferences": {
@@ -50362,7 +50362,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Text",
+      "haxeType": "flight._internal.dom.Text",
       "members": [],
       "name": "Text",
       "typeReferences": {
@@ -50394,7 +50394,7 @@
         "node_modules/@types/node/util.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.TextDecoder",
+      "haxeType": "flight._internal.dom.TextDecoder",
       "members": [
         {
           "calls": 8,
@@ -50519,7 +50519,7 @@
         "node_modules/@types/node/util.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.TextEncoder",
+      "haxeType": "flight._internal.dom.TextEncoder",
       "members": [
         {
           "calls": 1,
@@ -50559,7 +50559,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.TextMetrics",
+      "haxeType": "flight._internal.dom.TextMetrics",
       "members": [
         {
           "calls": 0,
@@ -50857,7 +50857,7 @@
       "declarationSources": [
         "node_modules/@types/node/timers.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Timeout",
+      "haxeType": "flight._internal.dom.Timeout",
       "members": [],
       "name": "Timeout",
       "typeReferences": {
@@ -51154,7 +51154,7 @@
         "node_modules/esbuild/lib/main.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.URL",
+      "haxeType": "flight._internal.dom.URL",
       "members": [
         {
           "calls": 0,
@@ -51222,7 +51222,7 @@
         "node_modules/typescript/lib/lib.dom.d.ts",
         "node_modules/typescript/lib/lib.dom.iterable.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.URLSearchParams",
+      "haxeType": "flight._internal.dom.URLSearchParams",
       "members": [
         {
           "calls": 1,
@@ -51268,7 +51268,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.VideoFrame",
+      "haxeType": "flight._internal.dom.VideoFrame",
       "members": [
         {
           "calls": 0,
@@ -51562,7 +51562,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.VisualViewport",
+      "haxeType": "flight._internal.dom.VisualViewport",
       "members": [
         {
           "calls": 2,
@@ -51654,7 +51654,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WEBGL_compressed_texture_astc",
+      "haxeType": "flight._internal.dom.WEBGL_compressed_texture_astc",
       "members": [],
       "name": "WEBGL_compressed_texture_astc",
       "typeReferences": {
@@ -51679,7 +51679,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WEBGL_compressed_texture_etc",
+      "haxeType": "flight._internal.dom.WEBGL_compressed_texture_etc",
       "members": [],
       "name": "WEBGL_compressed_texture_etc",
       "typeReferences": {
@@ -51704,7 +51704,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WEBGL_compressed_texture_pvrtc",
+      "haxeType": "flight._internal.dom.WEBGL_compressed_texture_pvrtc",
       "members": [],
       "name": "WEBGL_compressed_texture_pvrtc",
       "typeReferences": {
@@ -51729,7 +51729,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WEBGL_compressed_texture_s3tc",
+      "haxeType": "flight._internal.dom.WEBGL_compressed_texture_s3tc",
       "members": [],
       "name": "WEBGL_compressed_texture_s3tc",
       "typeReferences": {
@@ -51754,7 +51754,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WEBGL_compressed_texture_s3tc_srgb",
+      "haxeType": "flight._internal.dom.WEBGL_compressed_texture_s3tc_srgb",
       "members": [],
       "name": "WEBGL_compressed_texture_s3tc_srgb",
       "typeReferences": {
@@ -51779,7 +51779,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WEBGL_debug_renderer_info",
+      "haxeType": "flight._internal.dom.WEBGL_debug_renderer_info",
       "members": [
         {
           "calls": 0,
@@ -51839,7 +51839,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WakeLock",
+      "haxeType": "flight._internal.dom.WakeLock",
       "members": [],
       "name": "WakeLock",
       "typeReferences": {
@@ -51870,7 +51870,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WakeLockSentinel",
+      "haxeType": "flight._internal.dom.WakeLockSentinel",
       "members": [
         {
           "calls": 1,
@@ -51922,7 +51922,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WebGL2RenderingContext",
+      "haxeType": "flight._internal.dom.WebGL2RenderingContext",
       "members": [
         {
           "calls": 0,
@@ -70600,7 +70600,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WebGLActiveInfo",
+      "haxeType": "flight._internal.dom.WebGLActiveInfo",
       "members": [
         {
           "calls": 0,
@@ -70684,7 +70684,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WebGLBuffer",
+      "haxeType": "flight._internal.dom.WebGLBuffer",
       "members": [],
       "name": "WebGLBuffer",
       "typeReferences": {
@@ -71033,7 +71033,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WebGLContextAttributes",
+      "haxeType": "flight._internal.dom.WebGLContextAttributes",
       "members": [],
       "name": "WebGLContextAttributes",
       "typeReferences": {
@@ -71082,7 +71082,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WebGLFramebuffer",
+      "haxeType": "flight._internal.dom.WebGLFramebuffer",
       "members": [],
       "name": "WebGLFramebuffer",
       "typeReferences": {
@@ -71341,7 +71341,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WebGLPowerPreference",
+      "haxeType": "flight._internal.dom.WebGLPowerPreference",
       "members": [],
       "name": "WebGLPowerPreference",
       "typeReferences": {
@@ -71366,7 +71366,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WebGLProgram",
+      "haxeType": "flight._internal.dom.WebGLProgram",
       "members": [],
       "name": "WebGLProgram",
       "typeReferences": {
@@ -72711,7 +72711,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WebGLRenderbuffer",
+      "haxeType": "flight._internal.dom.WebGLRenderbuffer",
       "members": [],
       "name": "WebGLRenderbuffer",
       "typeReferences": {
@@ -72766,7 +72766,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WebGLRenderingContext",
+      "haxeType": "flight._internal.dom.WebGLRenderingContext",
       "members": [
         {
           "calls": 1,
@@ -72862,7 +72862,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WebGLShader",
+      "haxeType": "flight._internal.dom.WebGLShader",
       "members": [],
       "name": "WebGLShader",
       "typeReferences": {
@@ -72899,7 +72899,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WebGLTexture",
+      "haxeType": "flight._internal.dom.WebGLTexture",
       "members": [],
       "name": "WebGLTexture",
       "typeReferences": {
@@ -75228,7 +75228,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WebGLUniformLocation",
+      "haxeType": "flight._internal.dom.WebGLUniformLocation",
       "members": [],
       "name": "WebGLUniformLocation",
       "typeReferences": {
@@ -77497,7 +77497,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WebGLVertexArrayObject",
+      "haxeType": "flight._internal.dom.WebGLVertexArrayObject",
       "members": [],
       "name": "WebGLVertexArrayObject",
       "typeReferences": {
@@ -77673,7 +77673,7 @@
         "node_modules/@types/node/web-globals/fetch.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WebSocket",
+      "haxeType": "flight._internal.dom.WebSocket",
       "members": [
         {
           "calls": 0,
@@ -77811,7 +77811,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WheelEvent",
+      "haxeType": "flight._internal.dom.WheelEvent",
       "members": [
         {
           "calls": 0,
@@ -77909,7 +77909,7 @@
       "declarationSources": [
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.Window",
+      "haxeType": "flight._internal.dom.Window",
       "members": [
         {
           "calls": 23,
@@ -78846,7 +78846,7 @@
         "node_modules/@types/node/stream/web.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WritableStream",
+      "haxeType": "flight._internal.dom.WritableStream",
       "members": [
         {
           "calls": 1,
@@ -78935,7 +78935,7 @@
         "node_modules/@types/node/stream/web.d.ts",
         "node_modules/typescript/lib/lib.dom.d.ts"
       ],
-      "haxeType": "flighthq._internal.dom.WritableStreamDefaultWriter",
+      "haxeType": "flight._internal.dom.WritableStreamDefaultWriter",
       "members": [
         {
           "calls": 1,

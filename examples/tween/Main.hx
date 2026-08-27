@@ -1,15 +1,15 @@
 // Line-by-line Haxe/Lime port of the upstream `tween` example (`app.ts`), written directly against
-// the generated Flight Haxe surface (`flighthq.*`). It is a standalone `lime.app.Application`: the
+// the generated Flight Haxe surface (`flight.*`). It is a standalone `lime.app.Application`: the
 // browser `./render` module and the `requestAnimationFrame`/`stepApplicationLoop` loop are replaced
 // by Lime's window/render lifecycle, and the Flight app backend is wired with
 // `App.setAppBackend(createLimeAppBackend(this))`. Every statement is otherwise translated faithfully.
-import flighthq.app.App;
-import flighthq.hostLime.LimeApp;
-import flighthq.sdk.Sdk.*;
-import flighthq.types.DisplayObject;
-import flighthq.types.EasingFunction;
-import flighthq.types.Shape;
-import flighthq.types.TweenManager;
+import flight.App;
+import flight.hostLime.LimeApp;
+import flight.Sdk.*;
+import flight.types.DisplayObject;
+import flight.types.EasingFunction;
+import flight.types.Shape;
+import flight.types.TweenManager;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.KeyCode;
@@ -39,7 +39,7 @@ class Main extends Application {
   var root:DisplayObject;
   // Upstream drives frames through a Flight `Application`; the browser `requestAnimationFrame` loop
   // becomes Lime's per-frame `update`.
-  var app:flighthq.types.Application;
+  var app:flight.types.Application;
   var frame = 0;
 
   public function new() {
@@ -59,7 +59,7 @@ class Main extends Application {
     }
     scale = window.scale;
     if (usingCairo) {
-      final canvas = flighthq.scene2dCairo.Scene2dCairo.createCairoSurface(window);
+      final canvas = flight.Scene2DCairo.createCairoSurface(window);
       renderState = createCanvasRenderState(canvas, {
         pixelRatio: window.scale,
         backgroundColor: 0x1a1a2eff,
@@ -72,7 +72,7 @@ class Main extends Application {
       registerCanvasBitmapTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
       enableCanvasBlendMode(renderState);
     } else {
-      final canvas = flighthq.hostLime.GlSurface.createGlSurface(window);
+      final canvas = flight.hostLime.GlSurface.createGlSurface(window);
       renderState = createGlRenderState(canvas, {
         pixelRatio: window.scale,
         backgroundColor: 0x1a1a2eff,

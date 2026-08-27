@@ -1,6 +1,6 @@
 package;
 
-import flighthq._internal.WebGl2RenderingContext;
+import flight._internal.WebGl2RenderingContext;
 
 class WebGl2BindingSmoke {
   static function main():Void {

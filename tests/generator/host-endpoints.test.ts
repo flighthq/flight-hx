@@ -100,7 +100,7 @@ describe('checker-derived host endpoint contract', () => {
           contract: 'dynamic-fallback',
           member: 'style',
           operation: 'read',
-          runtimePath: 'src/flighthq/_internal/_Runtime.hx',
+          runtimePath: 'src/flight/_internal/_Runtime.hx',
         }),
         expect.objectContaining({
           binding: 'DomDocumentBackend',
@@ -129,7 +129,7 @@ describe('checker-derived host endpoint contract', () => {
 
   it('fails loudly when the shared contract outruns a maintained runtime implementation', () => {
     const audit = auditHostEndpoints(workspace, 'fixture');
-    const runtimePath = path.join(workspace, 'src/flighthq/_internal/backend/WebGl2Backend.hx');
+    const runtimePath = path.join(workspace, 'src/flight/_internal/backend/WebGl2Backend.hx');
     const runtime = readFileSync(runtimePath, 'utf8').replace(
       'public static inline function blendFuncSeparate(',
       'public static inline function removedBlendFuncSeparate(',
@@ -141,7 +141,7 @@ describe('checker-derived host endpoint contract', () => {
       kind: 'contract-runtime-gap',
       member: 'blendFuncSeparate',
       operation: 'call',
-      runtimePath: 'src/flighthq/_internal/backend/WebGl2Backend.hx',
+      runtimePath: 'src/flight/_internal/backend/WebGl2Backend.hx',
     });
   });
 
@@ -157,7 +157,7 @@ describe('checker-derived host endpoint contract', () => {
         operation: 'call',
         receiverTypes: ['WebGL2RenderingContext'],
         runtimeEndpoint: 'futureMethod',
-        runtimePath: 'src/flighthq/_internal/backend/WebGl2Backend.hx',
+        runtimePath: 'src/flight/_internal/backend/WebGl2Backend.hx',
         sites: [],
       },
     ]);
@@ -167,7 +167,7 @@ describe('checker-derived host endpoint contract', () => {
       kind: 'usage-contract-gap',
       member: 'futureMethod',
       operation: 'call',
-      runtimePath: 'src/flighthq/_internal/backend/WebGl2Backend.hx',
+      runtimePath: 'src/flight/_internal/backend/WebGl2Backend.hx',
     });
   });
 
@@ -183,7 +183,7 @@ describe('checker-derived host endpoint contract', () => {
       path.join(workspace, 'upstream/packages/render-gl/src/glTextureUpload.ts'),
       'utf8',
     );
-    const runtime = readFileSync(path.join(workspace, 'src/flighthq/_internal/backend/WebGl2Backend.hx'), 'utf8');
+    const runtime = readFileSync(path.join(workspace, 'src/flight/_internal/backend/WebGl2Backend.hx'), 'utf8');
 
     expect(sourceUpload?.sites).toEqual(
       expect.arrayContaining([

@@ -1,23 +1,23 @@
 // Line-by-line Haxe/Lime port of the upstream `particleeditor` example (`app.ts`), written directly
-// against the generated Flight Haxe surface (`flighthq.*`). It is a standalone `lime.app.Application`:
+// against the generated Flight Haxe surface (`flight.*`). It is a standalone `lime.app.Application`:
 // the browser `./render` module and `requestAnimationFrame` loop are replaced by Lime's window/render
 // lifecycle, and the Flight app backend is wired with `App.setAppBackend(createLimeAppBackend(this))`.
 // Every statement of the upstream program is otherwise translated faithfully. The procedural glow
 // particle texture and the HTML `<div id="controls">` slider/color/blend panel are pure browser glue
 // with no SDK call sites, so they collapse to a size-reporting stub and the retained portable config
 // state; the emitter still follows the Lime pointer and rebuilds its config through the SDK.
-import flighthq.app.App;
-import flighthq.hostLime.LimeApp;
-import flighthq.sdk.Sdk.*;
-import flighthq.types.DisplayObject;
-import flighthq.types.TextLabel;
-import flighthq.types.Bitmap;
-import flighthq.types.ParticleEmitter2D;
-import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleForce;
-import flighthq.types.TextureAtlas;
-import flighthq.types._internal._BlendModeValues;
-import flighthq._internal._UInt8ClampedArray;
+import flight.App;
+import flight.hostLime.LimeApp;
+import flight.Sdk.*;
+import flight.types.DisplayObject;
+import flight.types.TextLabel;
+import flight.types.Bitmap;
+import flight.types.ParticleEmitter2D;
+import flight.types.ParticleEmitterConfig;
+import flight.types.ParticleForce;
+import flight.types.TextureAtlas;
+import flight.types._internal._BlendModeValues;
+import flight._internal._UInt8ClampedArray;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.KeyCode;
@@ -169,7 +169,7 @@ class Main extends Application {
     }
     scale = window.scale;
     if (usingCairo) {
-      final canvas = flighthq.scene2dCairo.Scene2dCairo.createCairoSurface(window);
+      final canvas = flight.Scene2DCairo.createCairoSurface(window);
       renderState = createCanvasRenderState(canvas, {
         pixelRatio: window.scale,
         backgroundColor: 0x0a0a14ff,
@@ -181,7 +181,7 @@ class Main extends Application {
       registerCanvasBitmapTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
       enableCanvasBlendMode(renderState);
     } else {
-      final canvas = flighthq.hostLime.GlSurface.createGlSurface(window);
+      final canvas = flight.hostLime.GlSurface.createGlSurface(window);
       renderState = createGlRenderState(canvas, {
         pixelRatio: window.scale,
         backgroundColor: 0x0a0a14ff,

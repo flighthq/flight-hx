@@ -23,14 +23,14 @@ describe('public Haxe facades', () => {
     };
     const firstIdentities = [...contractOnlyDeclarationIdentities(inventory.packages)];
     const secondIdentities = [...contractOnlyDeclarationIdentities(inventory.packages)];
-    const entity = readFileSync(path.join(workspace, 'generated', 'flighthq', 'entity', 'Entity.hx'), 'utf8');
+    const entity = readFileSync(path.join(workspace, 'generated', 'flight', '_Entity.hx'), 'utf8');
     const renderCacheAdapter = readFileSync(
-      path.join(workspace, 'generated', 'flighthq', 'types', 'RenderCacheAdapter.hx'),
+      path.join(workspace, 'generated', 'flight', 'types', 'RenderCacheAdapter.hx'),
       'utf8',
     );
-    const vector2 = readFileSync(path.join(workspace, 'generated', 'flighthq', 'geometry', 'Vector2.hx'), 'utf8');
-    const geometry = readFileSync(path.join(workspace, 'generated', 'flighthq', 'geometry', 'Geometry.hx'), 'utf8');
-    const abc = readFileSync(path.join(workspace, 'generated', 'flighthq', 'abc', 'Abc.hx'), 'utf8');
+    const internalGeometry = readFileSync(path.join(workspace, 'generated', 'flight', '_Geometry.hx'), 'utf8');
+    const geometry = readFileSync(path.join(workspace, 'generated', 'flight', 'Geometry.hx'), 'utf8');
+    const abc = readFileSync(path.join(workspace, 'generated', 'flight', 'Abc.hx'), 'utf8');
 
     expect(firstIdentities).toEqual(secondIdentities);
     expect(core.contractSurface.protectedDeclarationIdentities).toBe(firstIdentities.length);
@@ -43,42 +43,42 @@ describe('public Haxe facades', () => {
     expect(
       core.contractSurface.omittedModules.every((item) => item.reason === 'header-only-contract-export-lane'),
     ).toBe(true);
-    expect(existsSync(path.join(workspace, 'generated', 'flighthq', 'entity', 'Contract.hx'))).toBe(false);
+    expect(existsSync(path.join(workspace, 'generated', 'flight', '_Entity', 'Contract.hx'))).toBe(false);
     expect(existsSync(path.join(workspace, 'tests', 'bridges', 'sources', 'entity', 'contract.mjs'))).toBe(true);
-    expect(entity).toContain('@:allow(flighthq)\n  @:keep\n  private static function createEntity<Type:');
+    expect(entity).toContain('@:allow(flight)\n  @:keep\n  private static function createEntity<Type:');
     expect(renderCacheAdapter).toContain('@:noCompletion\ntypedef RenderCacheAdapter =');
-    expect(vector2).toContain('@:noCompletion\nclass Vector2 {');
+    expect(internalGeometry).toContain('@:noCompletion\nclass _Geometry {');
     expect(geometry).not.toContain('@:noCompletion\nclass Geometry {');
     expect(abc).not.toContain('@:noCompletion\nclass Abc {');
   });
 
   it('emits the broad SDK facade and renamed package re-exports', () => {
     const workspace = process.cwd();
-    const sdk = readFileSync(path.join(workspace, 'generated', 'flighthq', 'sdk', 'Sdk.hx'), 'utf8');
-    const scene2dGl = readFileSync(path.join(workspace, 'generated', 'flighthq', 'scene2dGl', 'Scene2dGl.hx'), 'utf8');
+    const sdk = readFileSync(path.join(workspace, 'generated', 'flight', 'Sdk.hx'), 'utf8');
+    const scene2dGl = readFileSync(path.join(workspace, 'generated', 'flight', 'Scene2DGl.hx'), 'utf8');
 
     expect(sdk).toContain('public static function createVector2(');
-    expect(sdk).toContain('Facade_Sdk_flighthq_geometry_Vector2.createVector2(x, y)');
+    expect(sdk).toContain('Facade_Sdk_flight__Geometry.createVector2(x, y)');
     expect(sdk).not.toContain('_Runtime.callValue(Facade_');
     expect(sdk).toContain('_Runtime.callHaxeRestValue(Facade_');
     expect(sdk).toContain('public static final defaultGlSpriteRenderer:');
     expect(sdk).toContain('#if lime\n  public static function createCairoSurface(window:lime.ui.Window)');
-    expect(sdk).toContain('flighthq.scene2dCairo.CairoSurface.createCairoSurface(window)');
+    expect(sdk).toContain('flight._internal.scene2DCairo.CairoSurface.createCairoSurface(window)');
     expect(sdk).toContain('#if lime\n  public static function createGlSurface(window:lime.ui.Window)');
-    expect(sdk).toContain('flighthq.hostLime.GlSurface.createGlSurface(window)');
+    expect(sdk).toContain('flight.hostLime.GlSurface.createGlSurface(window)');
     expect(scene2dGl).toContain('public static final defaultGlSpriteRenderer:');
   });
 
   it('places every exported canonical type in its own public module', () => {
     const workspace = process.cwd();
-    const layoutState = readFileSync(path.join(workspace, 'generated', 'flighthq', 'layout', 'LayoutState.hx'), 'utf8');
+    const layoutState = readFileSync(path.join(workspace, 'generated', 'flight', 'Layout.hx'), 'utf8');
 
-    expect(layoutState).toContain('public static function createLayoutState():flighthq.types.LayoutState');
-    expect(layoutState).toContain('public static function registerLayoutResolver(state:flighthq.types.LayoutState,');
-    expect(existsSync(path.join(workspace, 'generated', 'flighthq', 'types', 'Vector2Like.hx'))).toBe(true);
-    const vector2Like = readFileSync(path.join(workspace, 'generated', 'flighthq', 'types', 'Vector2Like.hx'), 'utf8');
+    expect(layoutState).toContain('public static function createLayoutState():LayoutState');
+    expect(layoutState).toContain('public static function registerLayoutResolver(state:LayoutState,');
+    expect(existsSync(path.join(workspace, 'generated', 'flight', 'types', 'Vector2Like.hx'))).toBe(true);
+    const vector2Like = readFileSync(path.join(workspace, 'generated', 'flight', 'types', 'Vector2Like.hx'), 'utf8');
     expect(vector2Like).toContain('typedef Vector2Like =');
-    expect(readFileSync(path.join(workspace, 'generated', 'flighthq', 'types', 'Vector2.hx'), 'utf8')).not.toContain(
+    expect(readFileSync(path.join(workspace, 'generated', 'flight', 'types', 'Vector2.hx'), 'utf8')).not.toContain(
       'typedef Vector2Like =',
     );
   });
@@ -134,23 +134,23 @@ describe('public Haxe facades', () => {
 
     expect(applicationGl).toContain("import * as __dependency0 from '@flighthq/node/contract';");
     expect(applicationGl).toContain("import * as __dependency1 from '@flighthq/render-gl/contract';");
-    expect(applicationGl).toContain('compiled.flighthq.node.Viewport.createViewport = __dependency0.createViewport;');
+    expect(applicationGl).toContain('compiled.flight._Node.createViewport = __dependency0.createViewport;');
     expect(applicationGl).toContain(
-      'compiled.flighthq.renderGl.GlRenderState.createGlRenderState = __dependency1.createGlRenderState;',
+      'compiled.flight._RenderGl.createGlRenderState = __dependency1.createGlRenderState;',
     );
     expect(applicationGl).toContain(
-      'compiled.flighthq.renderGl.GlRenderTarget.createGlRenderTarget = __dependency1.createGlRenderTarget;',
+      'compiled.flight._RenderGl.createGlRenderTarget = __dependency1.createGlRenderTarget;',
     );
     expect(gltfLoad).toContain("import * as __dependency0 from '@flighthq/scene3d-formats/contract';");
     expect(gltfLoad).toContain("import * as __dependency1 from '@flighthq/net/contract';");
-    expect(gltfLoad).toContain('compiled.flighthq.net.Net.sendNetRequest = __dependency1.sendNetRequest;');
+    expect(gltfLoad).toContain('compiled.flight._Net.sendNetRequest = __dependency1.sendNetRequest;');
     expect(ambientLight).not.toContain('__dependency');
     expect(glDropShadow).toContain(
-      'compiled.flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget = __dependency0.acquireGlRenderTarget;',
+      'compiled.flight._RenderGl.acquireGlRenderTarget = __dependency0.acquireGlRenderTarget;',
     );
     expect(glDropShadow).not.toContain('getGlRenderStateRuntime = __dependency0.getGlRenderStateRuntime;');
     expect(glChromaticAberration).toContain(
-      'compiled.flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram = __dependency1.getGlEffectProgram;',
+      'compiled.flight._EffectsGl.getGlEffectProgram = __dependency1.getGlEffectProgram;',
     );
   });
 
@@ -169,17 +169,25 @@ describe('public Haxe facades', () => {
       path.join(workspace, 'tests', 'bridges', 'sources', 'render-wgpu', 'wgpuTestHelper.mjs'),
       'utf8',
     );
+    const wgpuBlendEffect = readFileSync(
+      path.join(workspace, 'tests', 'bridges', 'sources', 'effects-wgpu', 'wgpuBlendEffect.mjs'),
+      'utf8',
+    );
 
     expect(entityContract).toContain("export * from './entity.mjs';");
     expect(dialog).toContain('export const setDialogBackend = api.setDialogBackend;');
     expect(renderWgpuContract).toContain("export { installWgpuMock } from './wgpuTestHelper.mjs';");
+    expect(renderWgpuTestHelper).toContain('const api = compiled.flight._RenderWgpu;');
     expect(renderWgpuTestHelper).toContain('export const installWgpuMock = api.installWgpuMock;');
+    expect(wgpuBlendEffect).toContain('const api = compiled.flight._EffectsWgpu;');
+    expect(wgpuBlendEffect).toContain('export const applyBlendEffectToWgpu = api.applyBlendEffectToWgpu;');
   });
 
   it('emits checker-proven runtime values and TypeScript-shaped enums', () => {
     const workspace = process.cwd();
     const typesBridge = readFileSync(path.join(workspace, 'tests', 'bridges', 'types.mjs'), 'utf8');
-    const typesFacade = readFileSync(path.join(workspace, 'generated', 'flighthq', 'types', 'Types.hx'), 'utf8');
+    const typesFacade = readFileSync(path.join(workspace, 'generated', 'flight', 'Types.hx'), 'utf8');
+    const typesImplementation = readFileSync(path.join(workspace, 'generated', 'flight', '_Types.hx'), 'utf8');
 
     for (const name of [
       'AdvancedBlendMode',
@@ -195,11 +203,14 @@ describe('public Haxe facades', () => {
       expect(typesBridge).toContain(`export const ${name} = `);
     }
     expect(typesFacade).toContain('public static final __enum_BatchFormat:Dynamic = _Runtime.objectFromPairs(');
-    expect(typesFacade).toContain("{ key: 'Quad', value: Facade_Types_flighthq_types_BatchFormat_BatchFormat.Quad }");
-    expect(typesFacade).toContain("{ key: Facade_Types_flighthq_types_BatchFormat_BatchFormat.Quad, value: 'Quad' }");
+    expect(typesFacade).toContain("{ key: 'Quad', value: Facade_Types_flight_types_BatchFormat_BatchFormat.Quad }");
+    expect(typesFacade).toContain("{ key: Facade_Types_flight_types_BatchFormat_BatchFormat.Quad, value: 'Quad' }");
     expect(typesFacade).toContain('public static final __enum_AppearanceFlags:Dynamic = _Runtime.objectFromPairs(');
     expect(typesFacade).toContain(
-      "{ key: 'any', value: Facade_Types_flighthq_types_AppearanceFlags_AppearanceFlags.any }",
+      "{ key: 'any', value: Facade_Types_flight_types_AppearanceFlags_AppearanceFlags.any }",
     );
+    expect(typesImplementation).not.toContain('import flight._internal._AudioResourceReferenceValues.');
+    expect(typesImplementation).not.toContain('import flight._internal._ImageResourceReferenceValues.');
+    expect(typesImplementation).not.toContain('import flight._internal._SceneCoverageEntryValues.');
   });
 });

@@ -4,13 +4,13 @@ Last audited: 2026-07-24
 
 ## Compile Status
 
-The complete generated `flighthq` namespace type-checks and runs its smoke test on Eval and Python without `js` or `html5`. Web-only globals are isolated behind maintained target boundaries or represented as `Dynamic` on other targets. They are unavailable at runtime there, but they are not library compile blockers.
+The complete generated `flight` namespace type-checks and runs its smoke test on Eval and Python without `js` or `html5`. Web-only globals are isolated behind maintained target boundaries or represented as `Dynamic` on other targets. They are unavailable at runtime there, but they are not library compile blockers.
 
 C++/hxcpp remains unverified in the current workspace because neither `g++` nor `clang++` is installed. The committed portability command still covers it on a properly provisioned host.
 
 ## WebGL2 Binding
 
-Generated WebGL2 method and constant names remain literal inputs to `flighthq._internal.backend.WebGl2Backend`. Its target branches dispatch each used binding to:
+Generated WebGL2 method and constant names remain literal inputs to `flight._internal.backend.WebGl2Backend`. Its target branches dispatch each used binding to:
 
 - the caller-provided `lime.graphics.WebGL2RenderContext` when `lime` is defined on a native target;
 - `js.html.webgl.WebGL2RenderingContext` methods and constants when both `js` and `html5` are defined;

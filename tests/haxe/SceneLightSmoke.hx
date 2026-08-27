@@ -1,15 +1,15 @@
 package;
 
-import flighthq.camera.Camera.createCamera3D;
-import flighthq.camera.Camera.createPerspectiveProjection;
-import flighthq.geometry.Vector3.createVector3;
-import flighthq.geometry.Vector3.normalizeVector3;
-import flighthq.lighting.AmbientLight.createAmbientLight;
-import flighthq.lighting.DirectionalLight.createDirectionalLight;
-import flighthq.render.SceneRender.prepareScene3DRender;
-import flighthq.scene3d.SceneNode.createNode3D;
-import flighthq.types.RenderState;
-import flighthq.types.Scene3DLights;
+import flight.Camera.createCamera3D;
+import flight.Camera.createPerspectiveProjection;
+import flight.Geometry.createVector3;
+import flight.Geometry.normalizeVector3;
+import flight.Lighting.createAmbientLight;
+import flight.Lighting.createDirectionalLight;
+import flight.Render.prepareScene3DRender;
+import flight.Scene3D.createNode3D;
+import flight.types.RenderState;
+import flight.types.Scene3DLights;
 
 class SceneLightSmoke {
   static function main():Void {

@@ -2,9 +2,9 @@
 import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from './wgpuSsaoEffect.mjs';
 
-const api = compiled.flighthq.effectsWgpu.WgpuContactShadowsEffect;
+const api = compiled.flight._EffectsWgpu;
 function __syncDependencies() {
-  compiled.flighthq.effectsWgpu.WgpuSsaoEffect.applySsaoEffectToWgpu = __dependency0.applySsaoEffectToWgpu;
+  compiled.flight._EffectsWgpu.applySsaoEffectToWgpu = __dependency0.applySsaoEffectToWgpu;
 }
 __syncDependencies();
 

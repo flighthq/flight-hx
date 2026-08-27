@@ -145,8 +145,8 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('typedef Scalar = flighthq._internal._Union2<String, Float>;');
-    expect(output).toContain('registry:flighthq._internal._Map<String, Float>');
+    expect(output).toContain('typedef Scalar = flight._internal._Union2<String, Float>;');
+    expect(output).toContain('registry:flight._internal._Map<String, Float>');
     expect(output).toContain('function render(sample:Sample):String');
     expect(output).toContain('next = (cast increment((cast (cast sample : Sample).value : Float)) : Float)');
     expect(output).toContain('(cast sample : Sample).value');
@@ -256,7 +256,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(output).toContain("_HostValueLut.typeofValue('matchMedia')");
-    expect(output).toContain("_Runtime.callValue(flighthq._internal._HostValueLut.get('matchMedia')");
+    expect(output).toContain("_Runtime.callValue(flight._internal._HostValueLut.get('matchMedia')");
     expect(output).not.toMatch(/\bmatchMedia\(/u);
   });
 
@@ -282,7 +282,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('rows:Array<{ var data:flighthq._internal._UInt8Array; var tag:Float; }>');
+    expect(output).toContain('rows:Array<{ var data:flight._internal._UInt8Array; var tag:Float; }>');
     expect(output).toContain('pair:{ var left:Float; var right:String; }');
     expect(output).not.toContain('interface Row');
     expect(output).not.toContain('typedef Pair');
@@ -396,10 +396,10 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain('constrainedDefaults:Array<Command<String>>');
     expect(output).toContain('function register(commands:Array<Command<CommandKey>>):Void');
-    expect(output).toContain('unconstrainedDefaults:Array<Payload<flighthq._internal._Any>>');
-    expect(output).toContain('ambiguousDefaults:Array<Mixed<flighthq._internal._Any>>');
-    expect(output).not.toContain('constrainedDefaults:Array<Command<flighthq._internal._Any>>');
-    expect(output).not.toContain('function register(commands:Array<Command<flighthq._internal._Any>>):Void');
+    expect(output).toContain('unconstrainedDefaults:Array<Payload<flight._internal._Any>>');
+    expect(output).toContain('ambiguousDefaults:Array<Mixed<flight._internal._Any>>');
+    expect(output).not.toContain('constrainedDefaults:Array<Command<flight._internal._Any>>');
+    expect(output).not.toContain('function register(commands:Array<Command<flight._internal._Any>>):Void');
   });
 
   it('lowers ECMAScript Math.fround to the portable binary32 runtime operation', () => {
@@ -537,7 +537,7 @@ describe('TypeScript lowering and Haxe emission', () => {
       name: 'Reader',
       packageName: '@flighthq/example',
     });
-    expect(output).toContain('public final source:flighthq._internal._UInt8Array;');
+    expect(output).toContain('public final source:flight._internal._UInt8Array;');
     expect(output).toContain('private var end:Float;');
     expect(output).toContain('(this.source = cast (source : Dynamic));');
     expect(output).toContain('(this.end = cast (end : Dynamic));');
@@ -621,7 +621,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     );
     const lowered = lowerTypeScriptSource(source, '@flighthq/math', '/workspace');
     const fixtureDirectory = path.resolve('build/haxe-fixture');
-    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    const packageDirectory = path.join(fixtureDirectory, 'flight');
     rmSync(fixtureDirectory, { force: true, recursive: true });
     mkdirSync(packageDirectory, { recursive: true });
     const output = emitHaxeModule({
@@ -634,7 +634,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     writeFileSync(
       path.join(fixtureDirectory, 'Main.hx'),
       `
-        import flighthq.MathFixture.*;
+        import flight.MathFixture.*;
         class Main {
           static function main() {
             if (clamp(12, 0, 10) != 10) throw 'clamp failed';
@@ -694,16 +694,16 @@ describe('TypeScript lowering and Haxe emission', () => {
       packageName: '@flighthq/types',
     });
     const fixtureDirectory = path.resolve('build/haxe-type-fixture');
-    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    const packageDirectory = path.join(fixtureDirectory, 'flight');
     rmSync(fixtureDirectory, { force: true, recursive: true });
     mkdirSync(packageDirectory, { recursive: true });
     writeFileSync(path.join(packageDirectory, 'TypesFixture.hx'), output);
     writeFileSync(
       path.join(fixtureDirectory, 'Main.hx'),
       `
-        import flighthq.TypesFixture.Callback;
-        import flighthq.TypesFixture.Vector2;
-        import flighthq.TypesFixture.Vector2Like;
+        import flight.TypesFixture.Callback;
+        import flight.TypesFixture.Vector2;
+        import flight.TypesFixture.Vector2Like;
         class Main {
           static function main() {
             final value:Vector2 = { id: 1, x: 2, y: 3 };
@@ -768,21 +768,21 @@ describe('TypeScript lowering and Haxe emission', () => {
       packageName: '@flighthq/example',
     });
     const fixtureDirectory = path.resolve('build/haxe-overload-fixture');
-    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    const packageDirectory = path.join(fixtureDirectory, 'flight');
     rmSync(fixtureDirectory, { force: true, recursive: true });
     mkdirSync(packageDirectory, { recursive: true });
     writeFileSync(path.join(packageDirectory, 'Overloads.hx'), output);
     writeFileSync(
       path.join(fixtureDirectory, 'Main.hx'),
       `
-        import flighthq.Overloads.Manager;
-        import flighthq.Overloads.Shape;
+        import flight.Overloads.Manager;
+        import flight.Overloads.Shape;
         class Main {
           static function main() {
             final manager:Manager = { brand: 'manager' };
             final shape:Shape = { x: 0.0, y: 0.0 };
-            flighthq.Overloads.createTween(manager, shape, 1.0, { x: 2.0, y: 3.0 });
-            flighthq.Overloads.createTween(shape, 1.0, { x: 2.0, y: 3.0 }, { delay: 0.5 });
+            flight.Overloads.createTween(manager, shape, 1.0, { x: 2.0, y: 3.0 });
+            flight.Overloads.createTween(shape, 1.0, { x: 2.0, y: 3.0 }, { delay: 0.5 });
           }
         }
       `,
@@ -791,7 +791,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(lowered.diagnostics).toEqual([]);
     expect(output.match(/@:overload\(/gu)).toHaveLength(2);
     expect(output).toContain(
-      '@:overload(function<T:flighthq._internal._Object>(manager:Manager, target:T, duration:Float, properties:NumericProps<T>, ?options:Options):T {})',
+      '@:overload(function<T:flight._internal._Object>(manager:Manager, target:T, duration:Float, properties:NumericProps<T>, ?options:Options):T {})',
     );
     expect(() =>
       execFileSync('node', ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '--main', 'Main', '--interp'], {
@@ -842,7 +842,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain('_Runtime.voidValue(_Runtime.callValue(task');
     expect(output).toContain('_Runtime.typeofValue(value)');
-    expect(output).toContain('function():flighthq._internal._Promise<String>');
+    expect(output).toContain('function():flight._internal._Promise<String>');
     expect(output).toContain('_Async.protect(function():Dynamic');
     expect(output).toContain('_Runtime.asyncIterator(values)');
   });
@@ -878,15 +878,15 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('_Async.resolve((left + right))');
 
     const fixtureDirectory = path.resolve('build/haxe-async-fixture');
-    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    const packageDirectory = path.join(fixtureDirectory, 'flight');
     rmSync(fixtureDirectory, { force: true, recursive: true });
     mkdirSync(packageDirectory, { recursive: true });
     writeFileSync(path.join(packageDirectory, 'ExampleFixture.hx'), output);
     writeFileSync(
       path.join(fixtureDirectory, 'Main.hx'),
       `
-        import flighthq.ExampleFixture.combine;
-        import flighthq._internal._Async;
+        import flight.ExampleFixture.combine;
+        import flight._internal._Async;
         class Main {
           static function main() {
             var result = 0;
@@ -933,7 +933,7 @@ describe('TypeScript lowering and Haxe emission', () => {
 
     expect(output).not.toContain('_Async.make');
     expect(output).toContain('_Async.protect(function():Dynamic');
-    expect(output).toContain('_Async.resolve(flighthq._internal._Async.protect');
+    expect(output).toContain('_Async.resolve(flight._internal._Async.protect');
     expect(output).toContain('_Async.resolve(7.0)');
   });
 
@@ -1015,14 +1015,14 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toMatch(/var (__thisValue\d+):Dynamic = null; \1 = \{ senderId:/u);
 
     const fixtureDirectory = path.resolve('build/haxe-ipc-receiver-fixture');
-    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    const packageDirectory = path.join(fixtureDirectory, 'flight');
     rmSync(fixtureDirectory, { force: true, recursive: true });
     mkdirSync(packageDirectory, { recursive: true });
     writeFileSync(path.join(packageDirectory, 'IpcReceiverFixture.hx'), output);
     writeFileSync(
       path.join(fixtureDirectory, 'Main.hx'),
       `
-        import flighthq.IpcReceiverFixture.createEvent;
+        import flight.IpcReceiverFixture.createEvent;
         class Main {
           static function main() {
             final event:Dynamic = createEvent();
@@ -1075,15 +1075,15 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('_Async.flowReturn');
 
     const fixtureDirectory = path.resolve('build/haxe-async-branch-fixture');
-    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    const packageDirectory = path.join(fixtureDirectory, 'flight');
     rmSync(fixtureDirectory, { force: true, recursive: true });
     mkdirSync(packageDirectory, { recursive: true });
     writeFileSync(path.join(packageDirectory, 'AsyncBranchFixture.hx'), output);
     writeFileSync(
       path.join(fixtureDirectory, 'Main.hx'),
       `
-        import flighthq.AsyncBranchFixture.choose;
-        import flighthq._internal._Async;
+        import flight.AsyncBranchFixture.choose;
+        import flight._internal._Async;
         class Main {
           static function main() {
             var selected = 0;
@@ -1152,16 +1152,16 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('_Async.finalizeFlow');
 
     const fixtureDirectory = path.resolve('build/haxe-async-try-fixture');
-    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    const packageDirectory = path.join(fixtureDirectory, 'flight');
     rmSync(fixtureDirectory, { force: true, recursive: true });
     mkdirSync(packageDirectory, { recursive: true });
     writeFileSync(path.join(packageDirectory, 'AsyncTryFixture.hx'), output);
     writeFileSync(
       path.join(fixtureDirectory, 'Main.hx'),
       `
-        import flighthq.AsyncTryFixture.overrideValue;
-        import flighthq.AsyncTryFixture.recoverValue;
-        import flighthq._internal._Async;
+        import flight.AsyncTryFixture.overrideValue;
+        import flight.AsyncTryFixture.recoverValue;
+        import flight._internal._Async;
         class Main {
           static function main() {
             var result = 0;
@@ -1237,15 +1237,15 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     const fixtureDirectory = path.resolve('build/haxe-async-loop-fixture');
-    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    const packageDirectory = path.join(fixtureDirectory, 'flight');
     rmSync(fixtureDirectory, { force: true, recursive: true });
     mkdirSync(packageDirectory, { recursive: true });
     writeFileSync(path.join(packageDirectory, 'AsyncLoopFixture.hx'), output);
     writeFileSync(
       path.join(fixtureDirectory, 'Main.hx'),
       `
-        import flighthq.AsyncLoopFixture.sumSelected;
-        import flighthq._internal._Async;
+        import flight.AsyncLoopFixture.sumSelected;
+        import flight._internal._Async;
         class Main {
           static function main() {
             var result = 0;
@@ -1298,15 +1298,15 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('_Async.continueIteration');
 
     const fixtureDirectory = path.resolve('build/haxe-async-numeric-loop-fixture');
-    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    const packageDirectory = path.join(fixtureDirectory, 'flight');
     rmSync(fixtureDirectory, { force: true, recursive: true });
     mkdirSync(packageDirectory, { recursive: true });
     writeFileSync(path.join(packageDirectory, 'AsyncNumericLoopFixture.hx'), output);
     writeFileSync(
       path.join(fixtureDirectory, 'Main.hx'),
       `
-        import flighthq.AsyncNumericLoopFixture.count;
-        import flighthq._internal._Async;
+        import flight.AsyncNumericLoopFixture.count;
+        import flight._internal._Async;
         class Main {
           static function main() {
             var result = 0;
@@ -1384,7 +1384,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain('if ((cast _Runtime.strictEquals(value, 0.0) : Bool)) { return cast null; }');
 
     const fixtureDirectory = path.resolve('build/haxe-async-sync-loop-return-fixture');
-    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    const packageDirectory = path.join(fixtureDirectory, 'flight');
     const javaScript = path.join(fixtureDirectory, 'main.cjs');
     rmSync(fixtureDirectory, { force: true, recursive: true });
     mkdirSync(packageDirectory, { recursive: true });
@@ -1392,11 +1392,11 @@ describe('TypeScript lowering and Haxe emission', () => {
     writeFileSync(
       path.join(fixtureDirectory, 'Main.hx'),
       `
-        import flighthq.AsyncSyncLoopReturnFixture.returnFromFor;
-        import flighthq.AsyncSyncLoopReturnFixture.returnFromForIn;
-        import flighthq.AsyncSyncLoopReturnFixture.returnFromForOf;
-        import flighthq.AsyncSyncLoopReturnFixture.returnFromWhile;
-        import flighthq._internal._Async;
+        import flight.AsyncSyncLoopReturnFixture.returnFromFor;
+        import flight.AsyncSyncLoopReturnFixture.returnFromForIn;
+        import flight.AsyncSyncLoopReturnFixture.returnFromForOf;
+        import flight.AsyncSyncLoopReturnFixture.returnFromWhile;
+        import flight._internal._Async;
         class Main {
           static function expectNull(promise:Dynamic, label:String):Void {
             promise.then(function(value) {
@@ -1477,7 +1477,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('flighthq._internal._Async.recover(task');
+    expect(output).toContain('flight._internal._Async.recover(task');
     expect(output).not.toContain("_Runtime.callProperty(task, 'catch'");
   });
 
@@ -1529,9 +1529,9 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('function(...args:flighthq._internal._Any)');
-    expect(output).toContain('_Runtime.haxeRest(function(...args:flighthq._internal._Any)');
-    expect(output).toContain('function(event:flighthq._internal._Any, ...args:flighthq._internal._Any)');
+    expect(output).toContain('function(...args:flight._internal._Any)');
+    expect(output).toContain('_Runtime.haxeRest(function(...args:flight._internal._Any)');
+    expect(output).toContain('function(event:flight._internal._Any, ...args:flight._internal._Any)');
     expect(output).not.toContain('function(args:Array<Dynamic>)');
     expect(output).toContain('_Runtime.apply(slot, _Runtime.concatArrays([_Runtime.toArray(args)]))');
     expect(output).toContain(
@@ -1609,23 +1609,23 @@ describe('TypeScript lowering and Haxe emission', () => {
 
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain(
-      "flighthq._internal.backend.WebGl2Backend.bindBuffer(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flighthq._internal.backend.WebGl2Backend.ARRAY_BUFFER), buffer)",
+      "flight._internal.backend.WebGl2Backend.bindBuffer(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flight._internal.backend.WebGl2Backend.ARRAY_BUFFER), buffer)",
     );
     expect(output).toContain(
-      "flighthq._internal.backend.WebGl2Backend.drawArrays(alias, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLES', flighthq._internal.backend.WebGl2Backend.TRIANGLES), 0.0, 3.0)",
+      "flight._internal.backend.WebGl2Backend.drawArrays(alias, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLES', flight._internal.backend.WebGl2Backend.TRIANGLES), 0.0, 3.0)",
     );
-    expect(output).toContain('flighthq._internal.backend.WebGl2Backend.bufferData(');
+    expect(output).toContain('flight._internal.backend.WebGl2Backend.bufferData(');
     expect(output).toContain(
-      "flighthq._internal.backend.WebGl2Backend.pixelStorei(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL', flighthq._internal.backend.WebGl2Backend.UNPACK_PREMULTIPLY_ALPHA_WEBGL), true)",
+      "flight._internal.backend.WebGl2Backend.pixelStorei(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL', flight._internal.backend.WebGl2Backend.UNPACK_PREMULTIPLY_ALPHA_WEBGL), true)",
     );
     expect(output).toContain(
-      "flighthq._internal.backend.WebGl2Backend.stencilOp(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'KEEP', flighthq._internal.backend.WebGl2Backend.KEEP), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'KEEP', flighthq._internal.backend.WebGl2Backend.KEEP), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'INVERT', flighthq._internal.backend.WebGl2Backend.INVERT))",
+      "flight._internal.backend.WebGl2Backend.stencilOp(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'KEEP', flight._internal.backend.WebGl2Backend.KEEP), flight._internal.backend.WebGl2Backend.contextConstant(gl, 'KEEP', flight._internal.backend.WebGl2Backend.KEEP), flight._internal.backend.WebGl2Backend.contextConstant(gl, 'INVERT', flight._internal.backend.WebGl2Backend.INVERT))",
     );
     expect(output).not.toContain('WebGl2Backend.bufferDataSize(');
-    expect(output).toContain('flighthq._internal.backend.WebGl2Backend.texImage2DSource(');
-    expect(output).toContain('flighthq._internal.backend.WebGl2Backend.texImage2D(');
+    expect(output).toContain('flight._internal.backend.WebGl2Backend.texImage2DSource(');
+    expect(output).toContain('flight._internal.backend.WebGl2Backend.texImage2D(');
     expect(output).toContain(
-      "flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR_BUFFER_BIT', flighthq._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT))",
+      "flight._internal.backend.WebGl2Backend.clear(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR_BUFFER_BIT', flight._internal.backend.WebGl2Backend.COLOR_BUFFER_BIT))",
     );
     expect(output).not.toContain('WebGl2Backend.call(');
     expect(output).not.toContain('WebGl2Backend.field(');
@@ -1691,7 +1691,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain(
       "(switch (_Runtime.coalesce((cast realization : { var src:GlBlendFactor; @:optional var equation:Null<String>; }).equation, function():Dynamic return cast 'FUNC_ADD')) { case 'FUNC_ADD':",
     );
-    expect(output).toContain("case 'MIN': flighthq._internal.backend.WebGl2Backend.MIN;");
+    expect(output).toContain("case 'MIN': flight._internal.backend.WebGl2Backend.MIN;");
     expect(output).toContain(
       "default: _Runtime.throwValue('WebGL2 computed constant is outside the closed GlBlendEquation domain: upstream/packages/render-gl/src/sample.ts');",
     );
@@ -1737,14 +1737,14 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle'");
-    expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.setField(ctx, 'lineCap'");
-    expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.call(ctx, 'quadraticCurveTo'");
-    expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.call(ctx, 'bezierCurveTo'");
-    expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.call(ctx, 'ellipse'");
-    expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.call(ctx, 'roundRect'");
-    expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.call(ctx, 'closePath'");
-    expect(output).toContain("flighthq._internal.backend.Canvas2dBackend.call(ctx, 'fillRect'");
+    expect(output).toContain("flight._internal.backend.Canvas2dBackend.setField(ctx, 'fillStyle'");
+    expect(output).toContain("flight._internal.backend.Canvas2dBackend.setField(ctx, 'lineCap'");
+    expect(output).toContain("flight._internal.backend.Canvas2dBackend.call(ctx, 'quadraticCurveTo'");
+    expect(output).toContain("flight._internal.backend.Canvas2dBackend.call(ctx, 'bezierCurveTo'");
+    expect(output).toContain("flight._internal.backend.Canvas2dBackend.call(ctx, 'ellipse'");
+    expect(output).toContain("flight._internal.backend.Canvas2dBackend.call(ctx, 'roundRect'");
+    expect(output).toContain("flight._internal.backend.Canvas2dBackend.call(ctx, 'closePath'");
+    expect(output).toContain("flight._internal.backend.Canvas2dBackend.call(ctx, 'fillRect'");
     expect(output).not.toContain("_Runtime.callProperty(ctx, 'quadraticCurveTo'");
     expect(output).toContain("Canvas2dBackend.field(ctx, 'roundRect')");
     expect(output).not.toContain("_Runtime.callProperty(ctx, 'fillRect'");
@@ -1821,11 +1821,11 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain('(cast map : AliasMap).set(');
     expect(output).toContain('(cast map : AliasMap).delete_(');
-    expect(output).toContain('(cast readonlyMap : flighthq._internal._Map<String, Float>).entries(');
-    expect(output).toContain('(cast wrappedMap : flighthq._internal._Map<String, Float>).get(');
-    expect(output).toContain('(cast set : flighthq._internal._Set<String>).add(');
-    expect(output).toContain('(cast weakMap : flighthq._internal._WeakMap<flighthq._internal._Object, Float>).set(');
-    expect(output).toContain('(cast weakSet : flighthq._internal._WeakSet<flighthq._internal._Object>).has(');
+    expect(output).toContain('(cast readonlyMap : flight._internal._Map<String, Float>).entries(');
+    expect(output).toContain('(cast wrappedMap : flight._internal._Map<String, Float>).get(');
+    expect(output).toContain('(cast set : flight._internal._Set<String>).add(');
+    expect(output).toContain('(cast weakMap : flight._internal._WeakMap<flight._internal._Object, Float>).set(');
+    expect(output).toContain('(cast weakSet : flight._internal._WeakSet<flight._internal._Object>).has(');
     expect(output).toContain('(cast map : AliasMap).size');
     expect(output).toContain('__collection');
     expect(output).not.toContain("_Runtime.callProperty(map, 'get'");
@@ -1869,7 +1869,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('_Runtime.filterArray((cast keys : Array<String>)');
     expect(output).toContain('function(key:String, __unused0:Float, __unused1:Array<String>)');
     expect(output).toContain("_Runtime.callProperty(values, 'map'");
-    expect(output).toContain('_Runtime.haxeArity(function(value:flighthq._internal._Any)');
+    expect(output).toContain('_Runtime.haxeArity(function(value:flight._internal._Any)');
     expect(output).toContain('(cast mapper : Mapper).map');
     expect(output).not.toContain('_Runtime.mapArray((cast mapper');
   });
@@ -2049,12 +2049,12 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('image:flighthq._internal.dom.HTMLImageElement');
-    expect(output).toContain('nullable:Null<flighthq._internal.dom.HTMLImageElement>');
+    expect(output).toContain('image:flight._internal.dom.HTMLImageElement');
+    expect(output).toContain('nullable:Null<flight._internal.dom.HTMLImageElement>');
     expect(output).toContain(
-      'media:flighthq._internal._Union2<flighthq._internal.dom.HTMLImageElement, flighthq._internal.dom.HTMLVideoElement>',
+      'media:flight._internal._Union2<flight._internal.dom.HTMLImageElement, flight._internal.dom.HTMLVideoElement>',
     );
-    expect(output).toContain('message:flighthq._internal.dom.MessageEvent<flighthq._internal._Any>');
+    expect(output).toContain('message:flight._internal.dom.MessageEvent<flight._internal._Any>');
     expect(output).toContain('local:HTMLFlightLocal');
     expect(output).toContain('width = image.width;');
     expect(output).toContain('(image.src = url)');
@@ -2066,17 +2066,17 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('.height; })');
     expect(output).toContain('(cast media : { var src:String; }).src');
     expect(output).toContain('(cast local : HTMLFlightLocal).width');
-    expect(output).toContain('(cast (cast box : ImageBox).image : flighthq._internal.dom.HTMLImageElement).width');
+    expect(output).toContain('(cast (cast box : ImageBox).image : flight._internal.dom.HTMLImageElement).width');
     expect(output).toContain(
-      '(cast (cast streams : StreamBox).stream : flighthq._internal.dom.ReadableStream<Dynamic>).cancel()',
+      '(cast (cast streams : StreamBox).stream : flight._internal.dom.ReadableStream<Dynamic>).cancel()',
     );
     expect(output).toContain(
-      "(cast flighthq._internal._HostValueLut.get('console') : flighthq._internal.dom.Console).debug(url)",
+      "(cast flight._internal._HostValueLut.get('console') : flight._internal.dom.Console).debug(url)",
     );
-    expect(output).toContain("_Runtime.construct(flighthq._internal._HostValueLut.get('DataView')");
-    expect(output).toContain("_Runtime.construct(flighthq._internal._HostValueLut.get('TextDecoder')");
+    expect(output).toContain("_Runtime.construct(flight._internal._HostValueLut.get('DataView')");
+    expect(output).toContain("_Runtime.construct(flight._internal._HostValueLut.get('TextDecoder')");
     expect(output).toContain('unresolvedGpuName = GPUFlightMissing;');
-    expect(output).not.toContain("flighthq._internal._HostValueLut.get('GPUFlightMissing')");
+    expect(output).not.toContain("flight._internal._HostValueLut.get('GPUFlightMissing')");
     expect(lowered.hostTypes.map((use) => use.name)).toContain('HTMLImageElement');
     expect(lowered.hostTypes.some((use) => use.kind === 'member' && use.member === 'decode')).toBe(true);
     expect(lowered.hostTypes.some((use) => use.name === 'HTMLFlightLocal')).toBe(false);
@@ -2105,7 +2105,7 @@ describe('TypeScript lowering and Haxe emission', () => {
       packageName: '@flighthq/audio',
     });
     const fixtureDirectory = path.resolve('build/haxe-host-stub-neko-fixture');
-    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    const packageDirectory = path.join(fixtureDirectory, 'flight');
     const nekoOutput = path.join(fixtureDirectory, 'main.n');
     rmSync(fixtureDirectory, { force: true, recursive: true });
     mkdirSync(packageDirectory, { recursive: true });
@@ -2113,17 +2113,17 @@ describe('TypeScript lowering and Haxe emission', () => {
     writeFileSync(
       path.join(fixtureDirectory, 'StubAudioBuffer.hx'),
       `
-        class StubAudioBuffer implements flighthq._internal.dom.AudioBuffer {
+        class StubAudioBuffer implements flight._internal.dom.AudioBuffer {
           public final duration:Float = 0;
           public final length:Int = 1;
           public final numberOfChannels:Int = 1;
           public final sampleRate:Float = 44100;
           public var calls:Int = 0;
           public function new() {}
-          public function getChannelData(_channel:Float):flighthq._internal._Float32Array {
-            return new flighthq._internal._Float32Array(1);
+          public function getChannelData(_channel:Float):flight._internal._Float32Array {
+            return new flight._internal._Float32Array(1);
           }
-          public function copyToChannel(_source:flighthq._internal._Float32Array, _channel:Float, ?_start:Float):Void {
+          public function copyToChannel(_source:flight._internal._Float32Array, _channel:Float, ?_start:Float):Void {
             calls++;
           }
         }
@@ -2132,7 +2132,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     writeFileSync(
       path.join(fixtureDirectory, 'StubCanvasGradient.hx'),
       `
-        class StubCanvasGradient implements flighthq._internal.dom.CanvasGradient {
+        class StubCanvasGradient implements flight._internal.dom.CanvasGradient {
           public var pattern:Int = 0;
           public function new() {}
           public function addColorStop(_offset:Float, _color:String):Void pattern++;
@@ -2145,10 +2145,10 @@ describe('TypeScript lowering and Haxe emission', () => {
         class Main {
           static function main() {
             final audio = new StubAudioBuffer();
-            flighthq.HostStub.copySamples(audio, new flighthq._internal._Float32Array(1));
+            flight.HostStub.copySamples(audio, new flight._internal._Float32Array(1));
             if (audio.calls != 1) throw 'optional-arity audio call did not execute exactly once';
             final gradient = new StubCanvasGradient();
-            flighthq.HostStub.addVignetteStop(gradient);
+            flight.HostStub.addVignetteStop(gradient);
             if (gradient.pattern != 1) throw 'vignette call lost its receiver';
           }
         }
@@ -2237,7 +2237,7 @@ describe('TypeScript lowering and Haxe emission', () => {
 
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain(
-      'decompress((cast source : flighthq._internal._UInt8Array).subarray(Std.int(streamStart)), (cast bodyLength : Float))',
+      'decompress((cast source : flight._internal._UInt8Array).subarray(Std.int(streamStart)), (cast bodyLength : Float))',
     );
     expect(output).not.toContain('decompress((cast (cast');
     expect(output).toMatch(/useNarrow\(\(\{ final (__callArgument\d+):Dynamic = value; \1; \}\)\)/u);
@@ -2251,9 +2251,9 @@ describe('TypeScript lowering and Haxe emission', () => {
     writeFileSync(
       path.join(fixtureDirectory, 'Main.hx'),
       `
-        import flighthq._internal._UInt8Array;
-        import flighthq.compression.Deflate.registerDeflateDecompressor;
-        import flighthq.swf.SwfDocument.createScene2DFromSwf;
+        import flight._internal._UInt8Array;
+        import flight._Compression.registerDeflateDecompressor;
+        import flight._Swf.createScene2DFromSwf;
 
         class Main {
           static function main():Void {
@@ -2310,9 +2310,9 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain("flighthq._internal._HostModuleLut.get('host-package', 'default')");
-    expect(output).toContain("flighthq._internal._HostModuleLut.get('host-package', 'named')");
-    expect(output).toContain("flighthq._internal._HostModuleLut.get('host-namespace', '*')");
+    expect(output).toContain("flight._internal._HostModuleLut.get('host-package', 'default')");
+    expect(output).toContain("flight._internal._HostModuleLut.get('host-package', 'named')");
+    expect(output).toContain("flight._internal._HostModuleLut.get('host-namespace', '*')");
     expect(output).not.toContain('_Runtime.externalValue');
   });
 
@@ -2347,7 +2347,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(output).toContain('return cast SHADOW_DEPTH_FORMAT;');
-    expect(output).not.toContain("flighthq._internal._HostValueLut.get('SHADOW_DEPTH_FORMAT')");
+    expect(output).not.toContain("flight._internal._HostValueLut.get('SHADOW_DEPTH_FORMAT')");
     expect(output).toContain("WebGpuConstantsBackend.value('GPUTextureUsage', 'TEXTURE_BINDING')");
   });
 
@@ -2364,14 +2364,14 @@ describe('TypeScript lowering and Haxe emission', () => {
       packageName: '@flighthq/example',
     });
     const fixtureDirectory = path.resolve('build/haxe-missing-host-type-fixture');
-    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    const packageDirectory = path.join(fixtureDirectory, 'flight');
     rmSync(fixtureDirectory, { force: true, recursive: true });
     mkdirSync(packageDirectory, { recursive: true });
     writeFileSync(path.join(packageDirectory, 'MissingHost.hx'), output);
     writeFileSync(
       path.join(fixtureDirectory, 'Main.hx'),
       `
-        import flighthq.MissingHost.identity;
+        import flight.MissingHost.identity;
         class Main {
           static function main() identity(null);
         }
@@ -2380,7 +2380,7 @@ describe('TypeScript lowering and Haxe emission', () => {
 
     expect(output).toContain('value:MissingHostType');
     expect(output).not.toContain('value:Dynamic');
-    expect(output).not.toContain('flighthq._internal.dom.MissingHostType');
+    expect(output).not.toContain('flight._internal.dom.MissingHostType');
     let errorText = '';
     try {
       execFileSync(
@@ -2456,42 +2456,40 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain("DomWindowBackend.hasField(win, 'screen')");
     expect(output).toContain("DomDocumentBackend.hasField(doc, 'body')");
     expect(output).toContain(
-      "DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'share')",
+      "DomNavigatorBackend.hasField(flight._internal.backend.DomNavigatorBackend.value(), 'share')",
     );
     expect(output).toContain(
-      "DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'addEventListener'",
+      "DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'addEventListener'",
     );
-    expect(output).toContain("DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'matchMedia'");
+    expect(output).toContain("DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'matchMedia'");
     expect(output).toContain("DomWindowBackend.call(win, 'getScreenDetails'");
     expect(output).toContain(
-      "DomDocumentBackend.setField(flighthq._internal.backend.DomDocumentBackend.value(), 'title', 'Flight')",
+      "DomDocumentBackend.setField(flight._internal.backend.DomDocumentBackend.value(), 'title', 'Flight')",
     );
     expect(output).toContain(
-      "DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement'",
+      "DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement'",
+    );
+    expect(output).toContain("DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'hasFocus'");
+    expect(output).toContain(
+      "DomNavigatorBackend.call(flight._internal.backend.DomNavigatorBackend.value(), 'getGamepads'",
     );
     expect(output).toContain(
-      "DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'hasFocus'",
-    );
-    expect(output).toContain(
-      "DomNavigatorBackend.call(flighthq._internal.backend.DomNavigatorBackend.value(), 'getGamepads'",
-    );
-    expect(output).toContain(
-      "DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'language')",
+      "DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'language')",
     );
     expect(output).toContain("DomNavigatorBackend.call(nav, 'getBattery'");
     expect(output).toContain("_Runtime.field(document, 'title')");
     expect(output).toContain("_Runtime.hasField(window, 'local')");
     expect(output).toContain("_Runtime.hasField(document, 'local')");
     expect(output).toContain("_Runtime.hasField(navigator, 'local')");
-    expect(output).toContain("flighthq._internal._HostValueLut.typeofValue('window')");
-    expect(output).toContain("flighthq._internal._HostValueLut.typeofValue('document')");
-    expect(output).toContain("flighthq._internal._HostValueLut.typeofValue('navigator')");
+    expect(output).toContain("flight._internal._HostValueLut.typeofValue('window')");
+    expect(output).toContain("flight._internal._HostValueLut.typeofValue('document')");
+    expect(output).toContain("flight._internal._HostValueLut.typeofValue('navigator')");
     expect(output).toContain("_Runtime.hasField(localNavigator, 'share')");
     expect(output).toContain("_Runtime.field(localNavigator, 'share')");
     expect(output).toContain("_Runtime.hasField(mutableNavigator, 'share')");
-    expect(output).not.toContain("flighthq._internal._HostValueLut.get('window')");
-    expect(output).not.toContain("flighthq._internal._HostValueLut.get('document')");
-    expect(output).not.toContain("flighthq._internal._HostValueLut.get('navigator')");
+    expect(output).not.toContain("flight._internal._HostValueLut.get('window')");
+    expect(output).not.toContain("flight._internal._HostValueLut.get('document')");
+    expect(output).not.toContain("flight._internal._HostValueLut.get('navigator')");
     expect(output).not.toContain("DomDocumentBackend.field(document, 'title')");
     expect(output).not.toContain('DomWindowBackend.hasField(window');
     expect(output).not.toContain('DomDocumentBackend.hasField(document');
@@ -2523,9 +2521,9 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('flighthq._internal.DynamicObject.assign(target, source)');
-    expect(output).toContain('flighthq._internal.DynamicObject.keys(target)');
-    expect(output).toContain('flighthq._internal.DynamicObject.entries(target)');
+    expect(output).toContain('flight._internal.DynamicObject.assign(target, source)');
+    expect(output).toContain('flight._internal.DynamicObject.keys(target)');
+    expect(output).toContain('flight._internal.DynamicObject.entries(target)');
     expect(output).not.toContain("_HostValueLut.get('Object')");
     expect(output).not.toContain('Reflect.fields');
   });
@@ -2556,7 +2554,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('flighthq._internal.DynamicObject.is(0.0, -0.0)');
+    expect(output).toContain('flight._internal.DynamicObject.is(0.0, -0.0)');
     expect(output).toContain(`diagonal: ${String(Math.SQRT2)}`);
     expect(output).toContain('wordBytes: 2.0');
     expect(output).toContain('_Runtime.isIterable(size)');
@@ -2586,7 +2584,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain('function formatKeys(format:TextFormat):Array<String>');
     expect(output).toContain('var keys:Array<String> = cast _Runtime.UNDEFINED;');
-    expect(output).toContain('(cast flighthq._internal.DynamicObject.keys(format) : Array<String>)');
+    expect(output).toContain('(cast flight._internal.DynamicObject.keys(format) : Array<String>)');
     expect(output).not.toContain('Array<TextFormat>');
   });
 
@@ -2647,9 +2645,9 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain(
       '_Runtime.filterArray((cast values : Array<String>), _Runtime.truthy, _Runtime.UNDEFINED)',
     );
-    expect(output).toContain("_Runtime.isInstanceOf(value, flighthq._internal._HostValueLut.get('VideoFrame'))");
+    expect(output).toContain("_Runtime.isInstanceOf(value, flight._internal._HostValueLut.get('VideoFrame'))");
     expect(output).toContain("_Runtime.isInstanceOfName(value, 'TypeError')");
-    expect(output).toContain('Boolean((cast 1.0 : flighthq._internal._Any))');
+    expect(output).toContain('Boolean((cast 1.0 : flight._internal._Any))');
     expect(output).not.toContain('_Runtime.callValue(Boolean,');
     expect(output).toContain('_Runtime.construct(VideoFrame, [])');
   });
@@ -2672,7 +2670,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('function(__unused0:flighthq._internal._Nothing):Bool return true');
+    expect(output).toContain('function(__unused0:flight._internal._Nothing):Bool return true');
     expect(output).not.toContain('function(__unused0:Void)');
   });
 
@@ -2802,7 +2800,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain("WebGpuDeviceBackend.call(device, 'createBuffer'");
     expect(output).toContain("WebGpuQueueBackend.call(queue, 'writeBuffer'");
     expect(output).toContain(
-      "WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'submit'",
+      "WebGpuQueueBackend.call(flight._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'submit'",
     );
     expect(output).toContain("WebGpuCanvasContextBackend.call(context, 'configure'");
     expect(output).toContain("WebGpuCanvasContextBackend.call(context, 'getCurrentTexture'");
@@ -2810,10 +2808,10 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain("_Runtime.field(device, 'features')");
     expect(output).not.toContain("WebGpuDeviceBackend.field(device, 'features')");
     expect(output).toContain(
-      "WebGpuLimitsBackend.field(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'limits'), 'minUniformBufferOffsetAlignment')",
+      "WebGpuLimitsBackend.field(flight._internal.backend.WebGpuDeviceBackend.field(device, 'limits'), 'minUniformBufferOffsetAlignment')",
     );
     expect(output).toContain(
-      "WebGpuLimitsBackend.field(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'limits'), 'maxTextureDimension2D')",
+      "WebGpuLimitsBackend.field(flight._internal.backend.WebGpuDeviceBackend.field(device, 'limits'), 'maxTextureDimension2D')",
     );
     expect(output).toContain("WebGpuLimitsBackend.field(_Runtime.field(adapter, 'limits'), 'maxBindGroups')");
     expect(output).not.toContain("_Runtime.callProperty(device, 'createBuffer'");
@@ -3241,12 +3239,12 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('((cast a : Float) < (cast b : Float))');
     expect(output).not.toContain("_Runtime.compare(a, b, '<')");
     expect(output).toContain("_Runtime.compare(text, 'z', '<')");
-    expect(output).toContain('_StaticIndex.readFloat32ArrayTyped((cast floats : flighthq._internal._Float32Array)');
+    expect(output).toContain('_StaticIndex.readFloat32ArrayTyped((cast floats : flight._internal._Float32Array)');
     expect(output).toContain('_StaticIndex.writeFloatArrayTyped((cast values : Array<Float>)');
     expect(output).toMatch(
-      /\(\{ var __indexedObject\d+:flighthq\._internal\._Float32Array = floats; var __indexedKey\d+:Float = 2\.0; flighthq\._internal\._StaticIndex\.writeFloat32ArrayTyped\(.+_StaticIndex\.readFloat32ArrayTyped\(.+ \+ b\).+\); \}\)/u,
+      /\(\{ var __indexedObject\d+:flight\._internal\._Float32Array = floats; var __indexedKey\d+:Float = 2\.0; flight\._internal\._StaticIndex\.writeFloat32ArrayTyped\(.+_StaticIndex\.readFloat32ArrayTyped\(.+ \+ b\).+\); \}\)/u,
     );
-    expect(output).not.toContain('_Runtime.addNumbers(flighthq._internal._StaticIndex.readFloat32ArrayTyped');
+    expect(output).not.toContain('_Runtime.addNumbers(flight._internal._StaticIndex.readFloat32ArrayTyped');
     expect(output).toContain('_Runtime.getIndex(mixed, 3.0)');
     expect(output).toContain('_Runtime.getIndex(shadowed, 4.0)');
     expect(output).not.toContain('_Runtime.getIndex(floats,');
@@ -3354,14 +3352,14 @@ describe('TypeScript lowering and Haxe emission', () => {
       expect(output).toContain(`_StaticIndex.write${receiver}Typed(`);
     }
     expect(output).toContain('_StaticIndex.readFloatArrayTyped((cast values : Array<Float>)');
-    expect(output).toContain('_StaticIndex.readFloat32ArrayTyped((cast typed : flighthq._internal._Float32Array)');
-    expect(output).toContain('_StaticIndex.readFloat32ArrayTyped((cast readonly : flighthq._internal._Float32Array)');
-    expect(output).toContain('_StaticIndex.readFloat32ArrayTyped((cast same : flighthq._internal._Float32Array)');
+    expect(output).toContain('_StaticIndex.readFloat32ArrayTyped((cast typed : flight._internal._Float32Array)');
+    expect(output).toContain('_StaticIndex.readFloat32ArrayTyped((cast readonly : flight._internal._Float32Array)');
+    expect(output).toContain('_StaticIndex.readFloat32ArrayTyped((cast same : flight._internal._Float32Array)');
     expect(output).toContain('_Runtime.getIndex(structural, key)');
     expect(output).toContain('_Runtime.getIndex(mixed, key)');
-    expect(output).toContain('_Runtime.getIndex((cast value : flighthq._internal._Any), key)');
+    expect(output).toContain('_Runtime.getIndex((cast value : flight._internal._Any), key)');
     expect(output).toMatch(
-      /\(\{ var (__indexedObject\d+):Array<Float> = .*receiver.*; var (__indexedKey\d+):Float = .*key.*; flighthq\._internal\._StaticIndex\.writeFloatArrayTyped\(.+_StaticIndex\.readFloatArrayTyped\(.+ \+ .*value.*\).+\); \}\)/u,
+      /\(\{ var (__indexedObject\d+):Array<Float> = .*receiver.*; var (__indexedKey\d+):Float = .*key.*; flight\._internal\._StaticIndex\.writeFloatArrayTyped\(.+_StaticIndex\.readFloatArrayTyped\(.+ \+ .*value.*\).+\); \}\)/u,
     );
   });
 
@@ -3511,17 +3509,17 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('new flighthq._internal._Float32Array(4.0)');
-    expect(output).toContain('new flighthq._internal._Float64Array(');
-    expect(output).toContain('new flighthq._internal._Int16Array(');
-    expect(output).toContain('new flighthq._internal._Int32Array(');
-    expect(output).toContain('new flighthq._internal._Int8Array(');
-    expect(output).toContain('new flighthq._internal._UInt16Array(');
-    expect(output).toContain('new flighthq._internal._UInt32Array(');
-    expect(output).toContain('new flighthq._internal._UInt8Array(');
-    expect(output).toContain('new flighthq._internal._UInt8ClampedArray(');
-    expect(output).toContain('new flighthq._internal._UInt8Array(buffer, Std.int(offset), Std.int(length))');
-    expect(output).not.toContain('new flighthq._internal._Float32Array(Std.int(4.0))');
+    expect(output).toContain('new flight._internal._Float32Array(4.0)');
+    expect(output).toContain('new flight._internal._Float64Array(');
+    expect(output).toContain('new flight._internal._Int16Array(');
+    expect(output).toContain('new flight._internal._Int32Array(');
+    expect(output).toContain('new flight._internal._Int8Array(');
+    expect(output).toContain('new flight._internal._UInt16Array(');
+    expect(output).toContain('new flight._internal._UInt32Array(');
+    expect(output).toContain('new flight._internal._UInt8Array(');
+    expect(output).toContain('new flight._internal._UInt8ClampedArray(');
+    expect(output).toContain('new flight._internal._UInt8Array(buffer, Std.int(offset), Std.int(length))');
+    expect(output).not.toContain('new flight._internal._Float32Array(Std.int(4.0))');
     for (const name of [
       'Float32Array',
       'Float64Array',
@@ -3533,7 +3531,7 @@ describe('TypeScript lowering and Haxe emission', () => {
       'Uint8Array',
       'Uint8ClampedArray',
     ]) {
-      expect(output).not.toContain(`_Runtime.construct(flighthq._internal._HostValueLut.get('${name}')`);
+      expect(output).not.toContain(`_Runtime.construct(flight._internal._HostValueLut.get('${name}')`);
     }
   });
 
@@ -3556,8 +3554,8 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('(cast data : flighthq._internal._Float32Array).subarray(Std.int(1.0), Std.int(3.0))');
-    expect(output).toContain('(cast bytes : flighthq._internal._UInt8Array).subarray(Std.int(2.0))');
+    expect(output).toContain('(cast data : flight._internal._Float32Array).subarray(Std.int(1.0), Std.int(3.0))');
+    expect(output).toContain('(cast bytes : flight._internal._UInt8Array).subarray(Std.int(2.0))');
     expect(output).not.toContain('data.subarray(');
     expect(output).not.toContain('bytes.subarray(');
   });
@@ -3616,8 +3614,8 @@ describe('TypeScript lowering and Haxe emission', () => {
       expect(lowered.staticFacts.typedArraySetReceivers[receiver]).toBe(1);
       expect(emission.typedArraySetReceivers[receiver]).toBe(1);
     }
-    expect(output).toContain('(cast float32 : flighthq._internal._Float32Array).set(source, Std.int(offset))');
-    expect(output).toContain('(cast clamped : flighthq._internal._UInt8ClampedArray).set(source)');
+    expect(output).toContain('(cast float32 : flight._internal._Float32Array).set(source, Std.int(offset))');
+    expect(output).toContain('(cast clamped : flight._internal._UInt8ClampedArray).set(source)');
     expect(output).not.toContain('Std.int(source)');
     expect(output).not.toContain("_Runtime.callProperty(float32, 'set'");
     expect(output).not.toContain('__flight_direct_typed_array_set');
@@ -3663,12 +3661,12 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(emission.typedArraySetCalls).toBe(0);
     expect(output).toContain('(cast shadowed : Float32Array).set(source)');
     expect(output).toContain(
-      '(cast structural : { var set:flighthq._internal._ArrayLike<Float>->Null<Float>->Void; }).set(source)',
+      '(cast structural : { var set:flight._internal._ArrayLike<Float>->Null<Float>->Void; }).set(source)',
     );
-    expect(output).toContain('(cast mixed : { var set:flighthq._internal._Any; }).set(source)');
-    expect(output).toContain('(cast unsigned : { var set:flighthq._internal._Any; }).set(source)');
+    expect(output).toContain('(cast mixed : { var set:flight._internal._Any; }).set(source)');
+    expect(output).toContain('(cast unsigned : { var set:flight._internal._Any; }).set(source)');
     expect(output).toContain("_Runtime.callOptionalProperty(nullable, 'set'");
-    expect(output).not.toContain('flighthq._internal._Float32Array).set(source');
+    expect(output).not.toContain('flight._internal._Float32Array).set(source');
   });
 
   it('uses both maintained widths only for a discriminator-correlated unsigned set', () => {
@@ -3713,9 +3711,9 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(emission.typedArraySetCalls).toBe(1);
     expect(emission.typedArraySetReceivers.Uint16ArrayOrUint32Array).toBe(1);
     expect(output).toMatch(
-      /_Runtime\.isInstanceOf\((__typedArraySetTarget\d+), flighthq\._internal\._HostValueLut\.get\('Uint32Array'\)\).*\(cast \1 : flighthq\._internal\._UInt32Array\)\.set\((__typedArraySetSource\d+)\).*\(cast \1 : flighthq\._internal\._UInt16Array\)\.set\(\2\)/u,
+      /_Runtime\.isInstanceOf\((__typedArraySetTarget\d+), flight\._internal\._HostValueLut\.get\('Uint32Array'\)\).*\(cast \1 : flight\._internal\._UInt32Array\)\.set\((__typedArraySetSource\d+)\).*\(cast \1 : flight\._internal\._UInt16Array\)\.set\(\2\)/u,
     );
-    expect(output.match(/\(cast target : \{ var set:flighthq\._internal\._Any; \}\)\.set/gu)).toHaveLength(2);
+    expect(output.match(/\(cast target : \{ var set:flight\._internal\._Any; \}\)\.set/gu)).toHaveLength(2);
     expect(output).not.toContain('__flight_direct_typed_array_set');
   });
 
@@ -3737,9 +3735,9 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('new flighthq._internal._Float32Array(values)');
-    expect(output).toContain('new flighthq._internal._UInt16Array(values)');
-    expect(output).not.toContain("callProperty(flighthq._internal._HostValueLut.get('Float32Array'), 'from'");
+    expect(output).toContain('new flight._internal._Float32Array(values)');
+    expect(output).toContain('new flight._internal._UInt16Array(values)');
+    expect(output).not.toContain("callProperty(flight._internal._HostValueLut.get('Float32Array'), 'from'");
     expect(output).not.toContain("callProperty(Uint16Array, 'from'");
   });
 
@@ -3764,7 +3762,7 @@ describe('TypeScript lowering and Haxe emission', () => {
 
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain(
-      '(cast _Runtime.toArray({ length: count }, function(__unused0:flighthq._internal._Any, __unused1:Float):Array<flighthq._internal._Any> return cast ([] : Array<Dynamic>)) : Array<Array<Float>>)',
+      '(cast _Runtime.toArray({ length: count }, function(__unused0:flight._internal._Any, __unused1:Float):Array<flight._internal._Any> return cast ([] : Array<Dynamic>)) : Array<Array<Float>>)',
     );
     expect(output).toContain("_Runtime.setIndex(binding, 'values', cast ([1.0, 2.0, 3.0] : Array<Dynamic>))");
     expect(output).not.toContain('cast _Runtime.getIndex(binding');
@@ -3804,7 +3802,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('-_Runtime.MAX_SAFE_INTEGER');
     expect(output).toContain('_Runtime.NUMBER_MIN_VALUE');
     expect(output).toContain('HxMath.NaN');
-    expect(output).not.toContain("flighthq._internal._HostValueLut.get('Number')");
+    expect(output).not.toContain("flight._internal._HostValueLut.get('Number')");
   });
 
   it('uses JavaScript ToInt32 coercion for bitwise and shift operands', () => {
@@ -3984,7 +3982,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('bind: function(state:Float, material:Null<String>)');
     expect(output).toContain('pack: function(state:Float, offset:Float)');
     expect(output).toContain(
-      'draw: function(_ctx:Dynamic, state:Dynamic, __unused2:Array<flighthq._internal._Any>, __unused3:Float)',
+      'draw: function(_ctx:Dynamic, state:Dynamic, __unused2:Array<flight._internal._Any>, __unused3:Float)',
     );
   });
 
@@ -4076,7 +4074,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('for (key in flighthq._internal.DynamicObject.keys(values))');
+    expect(output).toContain('for (key in flight._internal.DynamicObject.keys(values))');
     expect(output).toContain('for (key in _Runtime.forInKeys(values))');
     expect(output).toContain('var __flowKeys');
     expect(output).toContain(':Array<String> = _Runtime.forInKeys(values);');

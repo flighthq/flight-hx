@@ -6,15 +6,15 @@ import * as __dependency2 from './wgpuEffectBoxBlur.mjs';
 import * as __dependency3 from './wgpuEffectPass.mjs';
 import * as __dependency4 from './wgpuEffectTintShader.mjs';
 
-const api = compiled.flighthq.effectsWgpu.WgpuInnerGlowEffect;
+const api = compiled.flight._EffectsWgpu;
 function __syncDependencies() {
-  compiled.flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget = __dependency0.acquireWgpuRenderTarget;
-  compiled.flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget = __dependency0.releaseWgpuRenderTarget;
-  compiled.flighthq.effectsWgpu.WgpuEffectBlitShader.applyWgpuEffectBlitPass = __dependency1.applyWgpuEffectBlitPass;
-  compiled.flighthq.effectsWgpu.WgpuEffectBoxBlur.applyWgpuEffectBoxBlur = __dependency2.applyWgpuEffectBoxBlur;
-  compiled.flighthq.effectsWgpu.WgpuEffectPass.clearWgpuEffectTarget = __dependency3.clearWgpuEffectTarget;
-  compiled.flighthq.effectsWgpu.WgpuEffectTintShader.applyWgpuEffectInnerClipPass = __dependency4.applyWgpuEffectInnerClipPass;
-  compiled.flighthq.effectsWgpu.WgpuEffectTintShader.applyWgpuEffectInvertTintPass = __dependency4.applyWgpuEffectInvertTintPass;
+  compiled.flight._RenderWgpu.acquireWgpuRenderTarget = __dependency0.acquireWgpuRenderTarget;
+  compiled.flight._RenderWgpu.releaseWgpuRenderTarget = __dependency0.releaseWgpuRenderTarget;
+  compiled.flight._EffectsWgpu.applyWgpuEffectBlitPass = __dependency1.applyWgpuEffectBlitPass;
+  compiled.flight._EffectsWgpu.applyWgpuEffectBoxBlur = __dependency2.applyWgpuEffectBoxBlur;
+  compiled.flight._EffectsWgpu.clearWgpuEffectTarget = __dependency3.clearWgpuEffectTarget;
+  compiled.flight._EffectsWgpu.applyWgpuEffectInnerClipPass = __dependency4.applyWgpuEffectInnerClipPass;
+  compiled.flight._EffectsWgpu.applyWgpuEffectInvertTintPass = __dependency4.applyWgpuEffectInvertTintPass;
 }
 __syncDependencies();
 

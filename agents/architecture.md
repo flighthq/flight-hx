@@ -41,27 +41,32 @@ The analyzer resolves packages, source modules, exports, re-exports, type-only i
 
 ## Public Haxe Surface
 
-The Haxelib project is `flight`; its Haxe namespace is `flighthq`. The public address follows Flight intent rather than source-file ownership:
+The Haxelib project is `flight`; its Haxe namespace is `flight`. The upstream npm scope remains `@flighthq/*`; only the Haxe address uses the shorter root. The public address follows Flight intent rather than source-file ownership:
 
 ```text
 @flighthq/<npm-package> free function or value
-→ flighthq.<lowerCamelPackage>.<PascalCasePackage>.<exportName>
+→ flight.<PascalCasePackage>.<exportName>
+
+translated implementation for that package
+→ flight._<PascalCasePackage>
 
 @flighthq/types exported type
-→ flighthq.types.<TypeName>
+→ flight.types.<TypeName>
 ```
 
 Examples:
 
 ```text
-@flighthq/geometry createVector2   → flighthq.geometry.Geometry.createVector2
-@flighthq/render-gl createGlShader → flighthq.renderGl.RenderGl.createGlShader
-@flighthq/types Vector2Like        → flighthq.types.Vector2Like
+@flighthq/geometry createVector2   → flight.Geometry.createVector2
+@flighthq/render-gl createGlShader → flight.RenderGl.createGlShader
+@flighthq/types Vector2Like        → flight.types.Vector2Like
 ```
 
-Package `index.ts` files do not produce `Index`; each package has a PascalCase facade such as `flighthq.geometry.Geometry`, `flighthq.renderGl.RenderGl`, or `flighthq.sdk.Sdk`. Source-derived namespace classes retain implementation ownership and JavaScript bridge provenance, but carry `@:noCompletion` and are not the steered Haxe API. Files named `internal.ts` and test helpers compile under an underscore-hidden implementation package when the parity harness needs them.
+Package `index.ts` files do not produce `Index`; each package has a PascalCase facade such as `flight.Geometry`, `flight.RenderGl`, or `flight.Sdk`. All translated bodies and non-public secondary types for that package fold into one mirrored `@:noCompletion` implementation module such as `flight._Geometry`; the module retains declaration-level source provenance for diagnostics, reports, and JavaScript bridges without exposing the upstream file split as Haxe topology.
 
-Broad consumers use `import flighthq.sdk.Sdk.*`; package consumers use imports such as `import flighthq.geometry.Geometry.*`. Both avoid knowledge of Flight's defining-file split.
+Lowercase npm slugs do not contain enough information to reconstruct fused-word or dimensional casing. A reviewed package-name table therefore preserves Flight vocabulary such as `ParticleEmitter`, `FileSystem`, and `Scene2DGl`; unlisted names retain the deterministic lowercase-and-hyphen fallback rather than being split heuristically. The same reviewed name deterministically pairs `flight.Scene2DGl` with `flight._Scene2DGl`, so there is no second package spelling to memorize.
+
+Broad consumers use `import flight.Sdk.*`; package consumers use imports such as `import flight.Geometry.*`. Both avoid knowledge of Flight's defining-file split.
 
 Invalid module names, duplicate barrel values, duplicate exported type names, and Haxe package-level type collisions fail generation with every conflicting upstream source. Source provenance remains attached to each declaration and in the generated reports.
 
@@ -86,19 +91,19 @@ This structural declaration is also the portable ABI description for later Rust 
 
 ## Type Placement
 
-Every exported `@flighthq/types` declaration owns a module addressed directly by type name: `Vector2` is `flighthq.types.Vector2`, `Vector2Like` is `flighthq.types.Vector2Like`, and `RigidBody2D` is `flighthq.types.RigidBody2D`. Re-exporting packages reference that canonical declaration and do not duplicate it. Non-public helper types may remain secondary to their source implementation.
+Every exported `@flighthq/types` declaration owns a module addressed directly by type name: `Vector2` is `flight.types.Vector2`, `Vector2Like` is `flight.types.Vector2Like`, and `RigidBody2D` is `flight.types.RigidBody2D`. Re-exporting packages reference that canonical declaration and do not duplicate it. Non-public helper types may remain secondary to their source implementation.
 
-When a source file contains a same-named structural type and runtime values, the public type module remains canonical and values compile in an underscore-hidden companion used by the package facade. The split validates that each exported name has exactly one canonical declaration and that no maintained or generated module already owns its target path.
+When a source file contains a same-named structural type and runtime values, the public type module remains canonical and values compile in the package's underscore-prefixed companion module. The split validates that each exported name has exactly one canonical declaration and that no maintained or generated module already owns its target path.
 
 ## Package and SDK Facades
 
-Package facades are the granular public function/value surface. They and `flighthq.sdk.Sdk` mirror upstream barrels rather than blindly aggregating every package. Host and tooling packages excluded upstream remain excluded from the SDK facade. Completion-hidden defining-file namespaces remain implementation owners so generated bodies and per-source JavaScript bridges do not need to duplicate behavior.
+Package facades are the granular public function/value surface. They and `flight.Sdk` mirror upstream barrels rather than blindly aggregating every package. Host and tooling packages excluded upstream remain excluded from the SDK facade. Each facade forwards directly to its single completion-hidden sibling (`flight.Geometry` → `flight._Geometry`); per-source JavaScript bridges recover their original ownership from declaration provenance rather than from emitted Haxe modules.
 
 Each package's `./contract` export lane is Flight's protected inter-package channel. The generator still inventories every contract export and emits its JavaScript source bridge, but it does not emit a Haxe module for a contract source barrel that has no declarations of its own; `reports/core.json` records each omission and its manifest-derived reason. Both decisions use manifest lane and canonical source identity, never a `Contract` filename or export-name allowlist.
 
-The lane maps to Haxe _visibility_, not a namespace lane, in three tiers (see [`public-surface-and-contract-visibility.md`](public-surface-and-contract-visibility.md)): a symbol used only within its own module stays plain `private`; a contract **member** (field, static function, method) reachable by other packages is individually emitted as `private` with `@:allow(flighthq)`, which rejects ordinary out-of-package consumers without opening private siblings; a contract-exclusive **type** stays public with `@:noCompletion`, because a `private` type is unreachable cross-module even within `flighthq` and Haxe has no member-style grant for type visibility. Shared declarations such as `Vector2` remain visible. The root-package grant deliberately widens internal access to avoid generation breaks, but Haxe packages are open and this is API enforcement for ordinary consumers rather than a security boundary. Contract enforcement is guarded by `tests/generator/contract-visibility.test.ts`.
+The lane maps to Haxe _visibility_, not a namespace lane, in three tiers (see [`public-surface-and-contract-visibility.md`](public-surface-and-contract-visibility.md)): a symbol used only within its own module stays plain `private`; a contract **member** (field, static function, method) reachable by other packages is individually emitted as `private` with `@:allow(flight)`, which rejects ordinary out-of-package consumers without opening private siblings; a contract-exclusive **type** stays public with `@:noCompletion`, because a `private` type is unreachable cross-module even within `flight` and Haxe has no member-style grant for type visibility. Shared declarations such as `Vector2` remain visible. The root-package grant deliberately widens internal access to avoid generation breaks, but Haxe packages are open and this is API enforcement for ordinary consumers rather than a security boundary. Contract enforcement is guarded by `tests/generator/contract-visibility.test.ts`.
 
-The generator emits forwarding functions and value aliases for package-barrel and SDK value re-exports. It resolves renamed cross-package exports before building `flighthq.sdk.Sdk`, so names such as `defaultGlBeginBitmapFill` exist in both the package facade and the SDK when upstream exports them. Forwarders reuse canonical implementations; they do not create maintained duplicate bodies. Type re-exports retain their canonical type-name identity.
+The generator emits forwarding functions and value aliases for package-barrel and SDK value re-exports. It resolves renamed cross-package exports before building `flight.Sdk`, so names such as `defaultGlBeginBitmapFill` exist in both the package facade and the SDK when upstream exports them. Forwarders reuse canonical implementations; they do not create maintained duplicate bodies. Type re-exports retain their canonical type-name identity.
 
 Source-level `const alias = target` declarations also retain reference identity. The generator may inline a same-module constant into a Haxe parameter default, where Haxe requires a compile-time value, but it does not clone that initializer into another top-level declaration. This keeps renderer aliases, arrays, functions, and other reference values identical to their canonical target.
 
@@ -116,7 +121,7 @@ Generated ordinary implementation code should use portable Haxe constructs. A sm
 - structural unions and discriminants;
 - object reflection and property presence;
 
-Runtime source lives under `src/flighthq/_internal/` on the maintained classpath. Its underscore-prefixed package and type names, such as `flighthq._internal._Promise`, keep implementation details out of normal code completion. It never hides target-specific behavior behind an apparently portable implementation.
+Runtime source lives under `src/flight/_internal/` on the maintained classpath. Its underscore-prefixed package and type names, such as `flight._internal._Promise`, keep implementation details out of normal code completion. It never hides target-specific behavior behind an apparently portable implementation.
 
 The runtime distinguishes ECMAScript `Math.fround` from Haxe's integer-oriented `Math.fround`: the JavaScript operation is one IEEE-754 binary32 round whose result is returned as the target's ordinary `Float`. Async flow also distinguishes normal fallthrough, which fulfills with JavaScript `undefined`, from an explicit `return null`. Once a function enters the async-flow trampoline, a synchronous loop containing a function return remains in that trampoline even when the loop itself has no `await`; the return must cross the loop as a flow outcome rather than an ordinary callback result.
 
@@ -131,7 +136,7 @@ Platform adapters follow these rules:
 
 WebGL member calls remain typed maintained endpoints. Direct constant reads use the actual JavaScript context's enum surface so wrapped contexts and browser implementations observe the same identity as the TypeScript source; non-JavaScript targets use the fixed WebGL specification values. JavaScript endpoints preserve those context values through dispatch, while native endpoints own the integer coercion required by Lime/OpenGL signatures.
 
-TypeScript host ambient identities map mechanically to `flighthq._internal.dom.<SameTypeName>` from checker-resolved declaration origin, never from a type-name or prefix allowlist. The transpiler emits ordinary members as the same direct typed Haxe fields and methods on every target; a receiver recovered through Dynamic storage is cast back to its mapped host type first. It does not rewrite a known member to `_Runtime.field` or `_Runtime.callProperty` to compensate for an incomplete native toolkit declaration. Heterogeneous host unions remain Dynamic because they have no single mapped identity. Existing Canvas, DOM-root, WebGL, and WebGPU backend endpoints keep priority where they own target portability or observable host semantics.
+TypeScript host ambient identities map mechanically to `flight._internal.dom.<SameTypeName>` from checker-resolved declaration origin, never from a type-name or prefix allowlist. The transpiler emits ordinary members as the same direct typed Haxe fields and methods on every target; a receiver recovered through Dynamic storage is cast back to its mapped host type first. It does not rewrite a known member to `_Runtime.field` or `_Runtime.callProperty` to compensate for an incomplete native toolkit declaration. Heterogeneous host unions remain Dynamic because they have no single mapped identity. Existing Canvas, DOM-root, WebGL, and WebGPU backend endpoints keep priority where they own target portability or observable host semantics.
 
 External type identities with no generated declaration import a stable `WebExterns` key. Ambient values and non-Flight module values emit fully qualified `_HostValueLut` and `_HostModuleLut` calls. The deterministic host-toolkit manifest records every referenced key, its maintained provider, its use sites, and whether a type provider is concrete or a Dynamic compatibility stub. Generation fails before completion when a key has no provider. Dynamic declarations may remain in the toolkit while a target implementation is unfinished, but that debt cannot change the transpiler's emitted type or member expression. See [`host-toolkit-boundary.md`](host-toolkit-boundary.md).
 
@@ -140,7 +145,7 @@ External type identities with no generated declaration import a stable `WebExter
 Behavioral parity is tested by compiling Haxe to JavaScript and generating ESM modules that match upstream npm package identities:
 
 ```text
-@flighthq/geometry → generated bridge → compiled flighthq.geometry.Geometry
+@flighthq/geometry → generated bridge → compiled flight.Geometry
 @flighthq/sdk      → generated SDK bridge → granular package bridges
 ```
 

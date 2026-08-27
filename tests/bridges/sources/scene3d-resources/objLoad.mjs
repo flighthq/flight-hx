@@ -3,10 +3,10 @@ import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from '@flighthq/scene3d-formats/contract';
 import * as __dependency1 from '@flighthq/net/contract';
 
-const api = compiled.flighthq.scene3dResources.ObjLoad;
+const api = compiled.flight._Scene3DResources;
 function __syncDependencies() {
-  compiled.flighthq.scene3dFormats.ObjParse.parseObj = __dependency0.parseObj;
-  compiled.flighthq.net.Net.sendNetRequest = __dependency1.sendNetRequest;
+  compiled.flight._Scene3DFormats.parseObj = __dependency0.parseObj;
+  compiled.flight._Net.sendNetRequest = __dependency1.sendNetRequest;
 }
 __syncDependencies();
 

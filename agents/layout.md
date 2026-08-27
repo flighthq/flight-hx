@@ -17,12 +17,12 @@ flight-hx/
 │   └── status.md
 ├── upstream/                    # read-only Flight git submodule
 ├── src/                         # maintained publishable Haxe classpath
-│   └── flighthq/
+│   └── flight/
 │       ├── _internal/           # hidden portable runtime types
 │       └── hostLime/            # optional Lime backend adapters
 │           └── LimeApp.hx
 ├── generated/                   # disposable generated Haxe classpath
-│   └── flighthq/
+│   └── flight/
 │       ├── geometry/
 │       │   ├── Geometry.hx      # package facade
 │       │   └── Vector2.hx       # completion-hidden source implementation
@@ -61,7 +61,7 @@ flight-hx/
 
 Maintained sources are `src/`, `tools/`, `tests/`, root configuration, and agent documentation. `generated/` and `reports/` are generated. `build/` is transient and ignored.
 
-Never edit `generated/` to fix a port. Change the generator, configuration, a semantic patch, or the maintained runtime under `src/flighthq/_internal/`, regenerate, and verify idempotence. Generation fails if maintained and generated classpaths contain the same Haxe module.
+Never edit `generated/` to fix a port. Change the generator, configuration, a semantic patch, or the maintained runtime under `src/flight/_internal/`, regenerate, and verify idempotence. Generation fails if maintained and generated classpaths contain the same Haxe module.
 
 Every generated file begins with a banner naming its source of truth and the command that regenerates it. The generator owns ordering and formatting inside generated Haxe.
 

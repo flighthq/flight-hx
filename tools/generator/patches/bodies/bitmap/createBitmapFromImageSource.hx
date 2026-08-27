@@ -1,22 +1,22 @@
 if (width <= 0 || height <= 0) return null;
-final canvas:flighthq._internal.dom.HTMLCanvasElement = cast flighthq._internal.backend.DomDocumentBackend.call(
-  flighthq._internal.backend.DomDocumentBackend.value(),
+final canvas:flight._internal.dom.HTMLCanvasElement = cast flight._internal.backend.DomDocumentBackend.call(
+  flight._internal.backend.DomDocumentBackend.value(),
   'createElement',
   cast (['canvas'] : Array<Dynamic>)
 );
 if (canvas == null) return null;
-flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'width', width);
-flighthq._internal.backend.CanvasElementBackend.setField(canvas, 'height', height);
-final ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast flighthq._internal.backend.CanvasElementBackend.call(
+flight._internal.backend.CanvasElementBackend.setField(canvas, 'width', width);
+flight._internal.backend.CanvasElementBackend.setField(canvas, 'height', height);
+final ctx:flight._internal.dom.CanvasRenderingContext2D = cast flight._internal.backend.CanvasElementBackend.call(
   canvas,
   'getContext',
   cast (['2d'] : Array<Dynamic>)
 );
 if (ctx == null) return null;
-var raw:flighthq._internal.dom.ImageData;
+var raw:flight._internal.dom.ImageData;
 try {
-  flighthq._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([source, 0.0, 0.0] : Array<Dynamic>));
-  raw = cast flighthq._internal.backend.Canvas2dBackend.call(
+  flight._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([source, 0.0, 0.0] : Array<Dynamic>));
+  raw = cast flight._internal.backend.Canvas2dBackend.call(
     ctx,
     'getImageData',
     cast ([0.0, 0.0, width, height] : Array<Dynamic>)

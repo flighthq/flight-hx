@@ -3,7 +3,7 @@ import ts from 'typescript';
 
 import type { HostTypeUse } from '../model/ir.ts';
 
-export const HOST_TYPE_HAXE_PACKAGE = 'flighthq._internal.dom';
+export const HOST_TYPE_HAXE_PACKAGE = 'flight._internal.dom';
 
 export interface HostTypeIdentity {
   arity: number;

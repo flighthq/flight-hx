@@ -7,19 +7,19 @@ import * as __dependency3 from './wgpuEffectGradientRamp.mjs';
 import * as __dependency4 from './wgpuEffectPass.mjs';
 import * as __dependency5 from './wgpuEffectTintShader.mjs';
 
-const api = compiled.flighthq.effectsWgpu.WgpuGradientBevelEffect;
+const api = compiled.flight._EffectsWgpu;
 function __syncDependencies() {
-  compiled.flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget = __dependency0.acquireWgpuRenderTarget;
-  compiled.flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget = __dependency0.releaseWgpuRenderTarget;
-  compiled.flighthq.effectsWgpu.WgpuEffectBlitShader.applyWgpuEffectBlitPass = __dependency1.applyWgpuEffectBlitPass;
-  compiled.flighthq.effectsWgpu.WgpuEffectBlitShader.applyWgpuEffectErasePass = __dependency1.applyWgpuEffectErasePass;
-  compiled.flighthq.effectsWgpu.WgpuEffectBoxBlur.applyWgpuEffectBoxBlur = __dependency2.applyWgpuEffectBoxBlur;
-  compiled.flighthq.effectsWgpu.WgpuEffectGradientRamp.getWgpuEffectGradientRampTexture = __dependency3.getWgpuEffectGradientRampTexture;
-  compiled.flighthq.effectsWgpu.WgpuEffectPass.clearWgpuEffectTarget = __dependency4.clearWgpuEffectTarget;
-  compiled.flighthq.effectsWgpu.WgpuEffectPass.EFFECT_VERTEX_WGSL = __dependency4.EFFECT_VERTEX_WGSL;
-  compiled.flighthq.effectsWgpu.WgpuEffectPass.getWgpuEffectPassState = __dependency4.getWgpuEffectPassState;
-  compiled.flighthq.effectsWgpu.WgpuEffectTintShader.applyWgpuEffectTintPass = __dependency5.applyWgpuEffectTintPass;
-  compiled.flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime = __dependency0.getWgpuRenderStateRuntime;
+  compiled.flight._RenderWgpu.acquireWgpuRenderTarget = __dependency0.acquireWgpuRenderTarget;
+  compiled.flight._RenderWgpu.releaseWgpuRenderTarget = __dependency0.releaseWgpuRenderTarget;
+  compiled.flight._EffectsWgpu.applyWgpuEffectBlitPass = __dependency1.applyWgpuEffectBlitPass;
+  compiled.flight._EffectsWgpu.applyWgpuEffectErasePass = __dependency1.applyWgpuEffectErasePass;
+  compiled.flight._EffectsWgpu.applyWgpuEffectBoxBlur = __dependency2.applyWgpuEffectBoxBlur;
+  compiled.flight._EffectsWgpu.getWgpuEffectGradientRampTexture = __dependency3.getWgpuEffectGradientRampTexture;
+  compiled.flight._EffectsWgpu.clearWgpuEffectTarget = __dependency4.clearWgpuEffectTarget;
+  compiled.flight._EffectsWgpu.EFFECT_VERTEX_WGSL = __dependency4.EFFECT_VERTEX_WGSL;
+  compiled.flight._EffectsWgpu.getWgpuEffectPassState = __dependency4.getWgpuEffectPassState;
+  compiled.flight._EffectsWgpu.applyWgpuEffectTintPass = __dependency5.applyWgpuEffectTintPass;
+  compiled.flight._RenderWgpu.getWgpuRenderStateRuntime = __dependency0.getWgpuRenderStateRuntime;
 }
 __syncDependencies();
 

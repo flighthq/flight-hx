@@ -3,10 +3,10 @@ import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from '@flighthq/render-gl/contract';
 import * as __dependency1 from './glEffectProgramCache.mjs';
 
-const api = compiled.flighthq.effectsGl.GlDirectionalBlurEffect;
+const api = compiled.flight._EffectsGl;
 function __syncDependencies() {
-  compiled.flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass = __dependency0.drawGlFullscreenPass;
-  compiled.flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram = __dependency1.getGlEffectProgram;
+  compiled.flight._RenderGl.drawGlFullscreenPass = __dependency0.drawGlFullscreenPass;
+  compiled.flight._EffectsGl.getGlEffectProgram = __dependency1.getGlEffectProgram;
 }
 __syncDependencies();
 

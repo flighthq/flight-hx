@@ -21,318 +21,318 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 
 | Key | Kind | Emitted Haxe type | Provider | Coverage | Uses |
 | --- | --- | --- | --- | --- | ---: |
-| `external:GLenum` | `external` | `flighthq._internal.WebExterns.GLenum` | `src/flighthq/_internal/WebExterns.hx` | `typed` | 1 |
-| `external:WgpuRichTextData` | `external` | `flighthq._internal.WebExterns.WgpuRichTextData` | `src/flighthq/_internal/WebExterns.hx` | `dynamic-stub` | 1 |
-| `external:WgpuScale9ShapeData` | `external` | `flighthq._internal.WebExterns.WgpuScale9ShapeData` | `src/flighthq/_internal/WebExterns.hx` | `dynamic-stub` | 1 |
-| `external:WgpuTextLabelData` | `external` | `flighthq._internal.WebExterns.WgpuTextLabelData` | `src/flighthq/_internal/WebExterns.hx` | `dynamic-stub` | 1 |
-| `host:AbortController` | `host` | `flighthq._internal.dom.AbortController` | `src/flighthq/_internal/dom/AbortController.hx` | `typed` | 40 |
-| `host:AbortSignal` | `host` | `flighthq._internal.dom.AbortSignal` | `src/flighthq/_internal/dom/AbortSignal.hx` | `typed` | 155 |
-| `host:AddEventListenerOptions` | `host` | `flighthq._internal.dom.AddEventListenerOptions` | `src/flighthq/_internal/dom/AddEventListenerOptions.hx` | `typed` | 1 |
-| `host:AudioBuffer` | `host` | `flighthq._internal.dom.AudioBuffer` | `src/flighthq/_internal/dom/AudioBuffer.hx` | `typed` | 26 |
-| `host:AudioBufferSourceNode` | `host` | `flighthq._internal.dom.AudioBufferSourceNode` | `src/flighthq/_internal/dom/AudioBufferSourceNode.hx` | `dynamic-stub` | 12 |
-| `host:AudioContext` | `host` | `flighthq._internal.dom.AudioContext` | `src/flighthq/_internal/dom/AudioContext.hx` | `dynamic-stub` | 41 |
-| `host:AudioDestinationNode` | `host` | `flighthq._internal.dom.AudioDestinationNode` | `src/flighthq/_internal/dom/AudioDestinationNode.hx` | `dynamic-stub` | 2 |
-| `host:AudioNode` | `host` | `flighthq._internal.dom.AudioNode` | `src/flighthq/_internal/dom/AudioNode.hx` | `dynamic-stub` | 8 |
-| `host:AudioParam` | `host` | `flighthq._internal.dom.AudioParam` | `src/flighthq/_internal/dom/AudioParam.hx` | `dynamic-stub` | 21 |
-| `host:BeforeUnloadEvent` | `host` | `flighthq._internal.dom.BeforeUnloadEvent` | `src/flighthq/_internal/dom/BeforeUnloadEvent.hx` | `dynamic-stub` | 5 |
-| `host:Blob` | `host` | `flighthq._internal.dom.Blob` | `src/flighthq/_internal/dom/Blob.hx` | `dynamic-stub` | 51 |
-| `host:BodyInit` | `host` | `flighthq._internal.dom.BodyInit` | `src/flighthq/_internal/dom/BodyInit.hx` | `dynamic-stub` | 1 |
-| `host:BufferSource` | `host` | `flighthq._internal.dom.BufferSource` | `src/flighthq/_internal/dom/BufferSource.hx` | `dynamic-stub` | 1 |
-| `host:CanvasFillRule` | `host` | `flighthq._internal.dom.CanvasFillRule` | `src/flighthq/_internal/dom/CanvasFillRule.hx` | `dynamic-stub` | 1 |
-| `host:CanvasGradient` | `host` | `flighthq._internal.dom.CanvasGradient` | `src/flighthq/_internal/dom/CanvasGradient.hx` | `typed` | 38 |
-| `host:CanvasImageSource` | `host` | `flighthq._internal.dom.CanvasImageSource` | `src/flighthq/_internal/dom/CanvasImageSource.hx` | `dynamic-stub` | 23 |
-| `host:CanvasLineCap` | `host` | `flighthq._internal.dom.CanvasLineCap` | `src/flighthq/_internal/dom/CanvasLineCap.hx` | `dynamic-stub` | 1 |
-| `host:CanvasLineJoin` | `host` | `flighthq._internal.dom.CanvasLineJoin` | `src/flighthq/_internal/dom/CanvasLineJoin.hx` | `dynamic-stub` | 1 |
-| `host:CanvasPattern` | `host` | `flighthq._internal.dom.CanvasPattern` | `src/flighthq/_internal/dom/CanvasPattern.hx` | `dynamic-stub` | 34 |
-| `host:CanvasRenderingContext2D` | `host` | `flighthq._internal.dom.CanvasRenderingContext2D` | `src/flighthq/_internal/dom/CanvasRenderingContext2D.hx` | `dynamic-stub` | 639 |
-| `host:CanvasRenderingContext2DSettings` | `host` | `flighthq._internal.dom.CanvasRenderingContext2DSettings` | `src/flighthq/_internal/dom/CanvasRenderingContext2DSettings.hx` | `dynamic-stub` | 6 |
-| `host:ChildNode` | `host` | `flighthq._internal.dom.ChildNode` | `src/flighthq/_internal/dom/ChildNode.hx` | `dynamic-stub` | 8 |
-| `host:Clipboard` | `host` | `flighthq._internal.dom.Clipboard` | `src/flighthq/_internal/dom/Clipboard.hx` | `dynamic-stub` | 21 |
-| `host:ClipboardItem` | `host` | `flighthq._internal.dom.ClipboardItem` | `src/flighthq/_internal/dom/ClipboardItem.hx` | `dynamic-stub` | 9 |
-| `host:CloseEvent` | `host` | `flighthq._internal.dom.CloseEvent` | `src/flighthq/_internal/dom/CloseEvent.hx` | `dynamic-stub` | 6 |
-| `host:CompositionEvent` | `host` | `flighthq._internal.dom.CompositionEvent` | `src/flighthq/_internal/dom/CompositionEvent.hx` | `dynamic-stub` | 3 |
-| `host:Console` | `host` | `flighthq._internal.dom.Console` | `src/flighthq/_internal/dom/Console.hx` | `typed` | 2 |
-| `host:Crypto` | `host` | `flighthq._internal.dom.Crypto` | `src/flighthq/_internal/dom/Crypto.hx` | `dynamic-stub` | 3 |
-| `host:CSSStyleDeclaration` | `host` | `flighthq._internal.dom.CSSStyleDeclaration` | `src/flighthq/_internal/dom/CSSStyleDeclaration.hx` | `dynamic-stub` | 158 |
-| `host:CustomEvent` | `host` | `flighthq._internal.dom.CustomEvent` | `src/flighthq/_internal/dom/CustomEvent.hx` | `dynamic-stub` | 3 |
-| `host:DataTransfer` | `host` | `flighthq._internal.dom.DataTransfer` | `src/flighthq/_internal/dom/DataTransfer.hx` | `dynamic-stub` | 2 |
-| `host:Document` | `host` | `flighthq._internal.dom.Document` | `src/flighthq/_internal/dom/Document.hx` | `dynamic-stub` | 160 |
-| `host:DOMException` | `host` | `flighthq._internal.dom.DOMException` | `src/flighthq/_internal/dom/DOMException.hx` | `typed` | 7 |
-| `host:DOMRect` | `host` | `flighthq._internal.dom.DOMRect` | `src/flighthq/_internal/dom/DOMRect.hx` | `dynamic-stub` | 17 |
-| `host:DOMRectReadOnly` | `host` | `flighthq._internal.dom.DOMRectReadOnly` | `src/flighthq/_internal/dom/DOMRectReadOnly.hx` | `dynamic-stub` | 3 |
-| `host:DOMStringMap` | `host` | `flighthq._internal.dom.DOMStringMap` | `src/flighthq/_internal/dom/DOMStringMap.hx` | `dynamic-stub` | 1 |
-| `host:DragEvent` | `host` | `flighthq._internal.dom.DragEvent` | `src/flighthq/_internal/dom/DragEvent.hx` | `dynamic-stub` | 8 |
-| `host:Element` | `host` | `flighthq._internal.dom.Element` | `src/flighthq/_internal/dom/Element.hx` | `dynamic-stub` | 9 |
-| `host:Event` | `host` | `flighthq._internal.dom.Event` | `src/flighthq/_internal/dom/Event.hx` | `dynamic-stub` | 46 |
-| `host:EventListener` | `host` | `flighthq._internal.dom.EventListener` | `src/flighthq/_internal/dom/EventListener.hx` | `dynamic-stub` | 15 |
-| `host:EventListenerObject` | `host` | `flighthq._internal.dom.EventListenerObject` | `src/flighthq/_internal/dom/EventListenerObject.hx` | `typed` | 1 |
-| `host:EventListenerOptions` | `host` | `flighthq._internal.dom.EventListenerOptions` | `src/flighthq/_internal/dom/EventListenerOptions.hx` | `typed` | 1 |
-| `host:EventTarget` | `host` | `flighthq._internal.dom.EventTarget` | `src/flighthq/_internal/dom/EventTarget.hx` | `typed` | 14 |
-| `host:EXT_color_buffer_float` | `host` | `flighthq._internal.dom.EXT_color_buffer_float` | `src/flighthq/_internal/dom/EXT_color_buffer_float.hx` | `dynamic-stub` | 2 |
-| `host:EXT_texture_compression_bptc` | `host` | `flighthq._internal.dom.EXT_texture_compression_bptc` | `src/flighthq/_internal/dom/EXT_texture_compression_bptc.hx` | `dynamic-stub` | 1 |
-| `host:EXT_texture_compression_rgtc` | `host` | `flighthq._internal.dom.EXT_texture_compression_rgtc` | `src/flighthq/_internal/dom/EXT_texture_compression_rgtc.hx` | `dynamic-stub` | 1 |
-| `host:EXT_texture_filter_anisotropic` | `host` | `flighthq._internal.dom.EXT_texture_filter_anisotropic` | `src/flighthq/_internal/dom/EXT_texture_filter_anisotropic.hx` | `dynamic-stub` | 10 |
-| `host:File` | `host` | `flighthq._internal.dom.File` | `src/flighthq/_internal/dom/File.hx` | `dynamic-stub` | 34 |
-| `host:FileList` | `host` | `flighthq._internal.dom.FileList` | `src/flighthq/_internal/dom/FileList.hx` | `dynamic-stub` | 8 |
-| `host:FileReader` | `host` | `flighthq._internal.dom.FileReader` | `src/flighthq/_internal/dom/FileReader.hx` | `dynamic-stub` | 19 |
-| `host:FileSystemDirectoryHandle` | `host` | `flighthq._internal.dom.FileSystemDirectoryHandle` | `src/flighthq/_internal/dom/FileSystemDirectoryHandle.hx` | `dynamic-stub` | 22 |
-| `host:FileSystemFileHandle` | `host` | `flighthq._internal.dom.FileSystemFileHandle` | `src/flighthq/_internal/dom/FileSystemFileHandle.hx` | `dynamic-stub` | 23 |
-| `host:FileSystemWritableFileStream` | `host` | `flighthq._internal.dom.FileSystemWritableFileStream` | `src/flighthq/_internal/dom/FileSystemWritableFileStream.hx` | `dynamic-stub` | 5 |
-| `host:FileSystemWriteChunkType` | `host` | `flighthq._internal.dom.FileSystemWriteChunkType` | `src/flighthq/_internal/dom/FileSystemWriteChunkType.hx` | `dynamic-stub` | 1 |
-| `host:FontFace` | `host` | `flighthq._internal.dom.FontFace` | `src/flighthq/_internal/dom/FontFace.hx` | `dynamic-stub` | 23 |
-| `host:FontFaceSet` | `host` | `flighthq._internal.dom.FontFaceSet` | `src/flighthq/_internal/dom/FontFaceSet.hx` | `dynamic-stub` | 7 |
-| `host:FormData` | `host` | `flighthq._internal.dom.FormData` | `src/flighthq/_internal/dom/FormData.hx` | `dynamic-stub` | 1 |
-| `host:GainNode` | `host` | `flighthq._internal.dom.GainNode` | `src/flighthq/_internal/dom/GainNode.hx` | `dynamic-stub` | 35 |
-| `host:Gamepad` | `host` | `flighthq._internal.dom.Gamepad` | `src/flighthq/_internal/dom/Gamepad.hx` | `dynamic-stub` | 27 |
-| `host:GamepadButton` | `host` | `flighthq._internal.dom.GamepadButton` | `src/flighthq/_internal/dom/GamepadButton.hx` | `dynamic-stub` | 8 |
-| `host:GamepadEvent` | `host` | `flighthq._internal.dom.GamepadEvent` | `src/flighthq/_internal/dom/GamepadEvent.hx` | `dynamic-stub` | 5 |
-| `host:Geolocation` | `host` | `flighthq._internal.dom.Geolocation` | `src/flighthq/_internal/dom/Geolocation.hx` | `dynamic-stub` | 16 |
-| `host:GeolocationCoordinates` | `host` | `flighthq._internal.dom.GeolocationCoordinates` | `src/flighthq/_internal/dom/GeolocationCoordinates.hx` | `dynamic-stub` | 8 |
-| `host:GeolocationPosition` | `host` | `flighthq._internal.dom.GeolocationPosition` | `src/flighthq/_internal/dom/GeolocationPosition.hx` | `dynamic-stub` | 8 |
-| `host:GeolocationPositionError` | `host` | `flighthq._internal.dom.GeolocationPositionError` | `src/flighthq/_internal/dom/GeolocationPositionError.hx` | `dynamic-stub` | 7 |
-| `host:GlobalCompositeOperation` | `host` | `flighthq._internal.dom.GlobalCompositeOperation` | `src/flighthq/_internal/dom/GlobalCompositeOperation.hx` | `dynamic-stub` | 8 |
-| `host:GPU` | `host` | `flighthq._internal.dom.GPU` | `src/flighthq/_internal/dom/GPU.hx` | `dynamic-stub` | 7 |
-| `host:GPUAdapter` | `host` | `flighthq._internal.dom.GPUAdapter` | `src/flighthq/_internal/dom/GPUAdapter.hx` | `dynamic-stub` | 17 |
-| `host:GPUAllowSharedBufferSource` | `host` | `flighthq._internal.dom.GPUAllowSharedBufferSource` | `src/flighthq/_internal/dom/GPUAllowSharedBufferSource.hx` | `typed` | 4 |
-| `host:GPUBindGroup` | `host` | `flighthq._internal.dom.GPUBindGroup` | `src/flighthq/_internal/dom/GPUBindGroup.hx` | `dynamic-stub` | 220 |
-| `host:GPUBindGroupEntry` | `host` | `flighthq._internal.dom.GPUBindGroupEntry` | `src/flighthq/_internal/dom/GPUBindGroupEntry.hx` | `dynamic-stub` | 15 |
-| `host:GPUBindGroupLayout` | `host` | `flighthq._internal.dom.GPUBindGroupLayout` | `src/flighthq/_internal/dom/GPUBindGroupLayout.hx` | `dynamic-stub` | 285 |
-| `host:GPUBindGroupLayoutEntry` | `host` | `flighthq._internal.dom.GPUBindGroupLayoutEntry` | `src/flighthq/_internal/dom/GPUBindGroupLayoutEntry.hx` | `dynamic-stub` | 10 |
-| `host:GPUBlendComponent` | `host` | `flighthq._internal.dom.GPUBlendComponent` | `src/flighthq/_internal/dom/GPUBlendComponent.hx` | `dynamic-stub` | 3 |
-| `host:GPUBlendFactor` | `host` | `flighthq._internal.dom.GPUBlendFactor` | `src/flighthq/_internal/dom/GPUBlendFactor.hx` | `dynamic-stub` | 2 |
-| `host:GPUBlendOperation` | `host` | `flighthq._internal.dom.GPUBlendOperation` | `src/flighthq/_internal/dom/GPUBlendOperation.hx` | `dynamic-stub` | 1 |
-| `host:GPUBlendState` | `host` | `flighthq._internal.dom.GPUBlendState` | `src/flighthq/_internal/dom/GPUBlendState.hx` | `dynamic-stub` | 61 |
-| `host:GPUBuffer` | `host` | `flighthq._internal.dom.GPUBuffer` | `src/flighthq/_internal/dom/GPUBuffer.hx` | `dynamic-stub` | 306 |
-| `host:GPUBufferBinding` | `host` | `flighthq._internal.dom.GPUBufferBinding` | `src/flighthq/_internal/dom/GPUBufferBinding.hx` | `dynamic-stub` | 10 |
-| `host:GPUBufferDescriptor` | `host` | `flighthq._internal.dom.GPUBufferDescriptor` | `src/flighthq/_internal/dom/GPUBufferDescriptor.hx` | `typed` | 8 |
-| `host:GPUBufferUsage` | `host` | `flighthq._internal.dom.GPUBufferUsage` | `src/flighthq/_internal/dom/GPUBufferUsage.hx` | `dynamic-stub` | 73 |
-| `host:GPUCanvasContext` | `host` | `flighthq._internal.dom.GPUCanvasContext` | `src/flighthq/_internal/dom/GPUCanvasContext.hx` | `dynamic-stub` | 14 |
-| `host:GPUColor` | `host` | `flighthq._internal.dom.GPUColor` | `src/flighthq/_internal/dom/GPUColor.hx` | `dynamic-stub` | 4 |
-| `host:GPUColorDict` | `host` | `flighthq._internal.dom.GPUColorDict` | `src/flighthq/_internal/dom/GPUColorDict.hx` | `dynamic-stub` | 16 |
-| `host:GPUColorWrite` | `host` | `flighthq._internal.dom.GPUColorWrite` | `src/flighthq/_internal/dom/GPUColorWrite.hx` | `dynamic-stub` | 2 |
-| `host:GPUCommandBuffer` | `host` | `flighthq._internal.dom.GPUCommandBuffer` | `src/flighthq/_internal/dom/GPUCommandBuffer.hx` | `dynamic-stub` | 10 |
-| `host:GPUCommandEncoder` | `host` | `flighthq._internal.dom.GPUCommandEncoder` | `src/flighthq/_internal/dom/GPUCommandEncoder.hx` | `dynamic-stub` | 43 |
-| `host:GPUCopyExternalImageDestInfo` | `host` | `flighthq._internal.dom.GPUCopyExternalImageDestInfo` | `src/flighthq/_internal/dom/GPUCopyExternalImageDestInfo.hx` | `dynamic-stub` | 4 |
-| `host:GPUCopyExternalImageSource` | `host` | `flighthq._internal.dom.GPUCopyExternalImageSource` | `src/flighthq/_internal/dom/GPUCopyExternalImageSource.hx` | `dynamic-stub` | 8 |
-| `host:GPUCopyExternalImageSourceInfo` | `host` | `flighthq._internal.dom.GPUCopyExternalImageSourceInfo` | `src/flighthq/_internal/dom/GPUCopyExternalImageSourceInfo.hx` | `dynamic-stub` | 4 |
-| `host:GPUDevice` | `host` | `flighthq._internal.dom.GPUDevice` | `src/flighthq/_internal/dom/GPUDevice.hx` | `dynamic-stub` | 404 |
-| `host:GPUDeviceDescriptor` | `host` | `flighthq._internal.dom.GPUDeviceDescriptor` | `src/flighthq/_internal/dom/GPUDeviceDescriptor.hx` | `dynamic-stub` | 4 |
-| `host:GPUDeviceLostInfo` | `host` | `flighthq._internal.dom.GPUDeviceLostInfo` | `src/flighthq/_internal/dom/GPUDeviceLostInfo.hx` | `dynamic-stub` | 1 |
-| `host:GPUExtent3D` | `host` | `flighthq._internal.dom.GPUExtent3D` | `src/flighthq/_internal/dom/GPUExtent3D.hx` | `typed` | 3 |
-| `host:GPUExtent3DDict` | `host` | `flighthq._internal.dom.GPUExtent3DDict` | `src/flighthq/_internal/dom/GPUExtent3DDict.hx` | `typed` | 10 |
-| `host:GPUExtent3DDictStrict` | `host` | `flighthq._internal.dom.GPUExtent3DDictStrict` | `src/flighthq/_internal/dom/GPUExtent3DDictStrict.hx` | `typed` | 1 |
-| `host:GPUExternalTexture` | `host` | `flighthq._internal.dom.GPUExternalTexture` | `src/flighthq/_internal/dom/GPUExternalTexture.hx` | `dynamic-stub` | 10 |
-| `host:GPUFeatureName` | `host` | `flighthq._internal.dom.GPUFeatureName` | `src/flighthq/_internal/dom/GPUFeatureName.hx` | `dynamic-stub` | 1 |
-| `host:GPUFilterMode` | `host` | `flighthq._internal.dom.GPUFilterMode` | `src/flighthq/_internal/dom/GPUFilterMode.hx` | `dynamic-stub` | 14 |
-| `host:GPUIndexFormat` | `host` | `flighthq._internal.dom.GPUIndexFormat` | `src/flighthq/_internal/dom/GPUIndexFormat.hx` | `dynamic-stub` | 2 |
-| `host:GPULoadOp` | `host` | `flighthq._internal.dom.GPULoadOp` | `src/flighthq/_internal/dom/GPULoadOp.hx` | `dynamic-stub` | 6 |
-| `host:GPUMapMode` | `host` | `flighthq._internal.dom.GPUMapMode` | `src/flighthq/_internal/dom/GPUMapMode.hx` | `dynamic-stub` | 1 |
-| `host:GPUMipmapFilterMode` | `host` | `flighthq._internal.dom.GPUMipmapFilterMode` | `src/flighthq/_internal/dom/GPUMipmapFilterMode.hx` | `dynamic-stub` | 4 |
-| `host:GPUOrigin3D` | `host` | `flighthq._internal.dom.GPUOrigin3D` | `src/flighthq/_internal/dom/GPUOrigin3D.hx` | `dynamic-stub` | 3 |
-| `host:GPUOrigin3DDict` | `host` | `flighthq._internal.dom.GPUOrigin3DDict` | `src/flighthq/_internal/dom/GPUOrigin3DDict.hx` | `typed` | 6 |
-| `host:GPUPipelineLayout` | `host` | `flighthq._internal.dom.GPUPipelineLayout` | `src/flighthq/_internal/dom/GPUPipelineLayout.hx` | `dynamic-stub` | 60 |
-| `host:GPUPowerPreference` | `host` | `flighthq._internal.dom.GPUPowerPreference` | `src/flighthq/_internal/dom/GPUPowerPreference.hx` | `dynamic-stub` | 1 |
-| `host:GPUPrimitiveTopology` | `host` | `flighthq._internal.dom.GPUPrimitiveTopology` | `src/flighthq/_internal/dom/GPUPrimitiveTopology.hx` | `dynamic-stub` | 1 |
-| `host:GPUQueue` | `host` | `flighthq._internal.dom.GPUQueue` | `src/flighthq/_internal/dom/GPUQueue.hx` | `dynamic-stub` | 87 |
-| `host:GPURenderPassEncoder` | `host` | `flighthq._internal.dom.GPURenderPassEncoder` | `src/flighthq/_internal/dom/GPURenderPassEncoder.hx` | `dynamic-stub` | 258 |
-| `host:GPURenderPipeline` | `host` | `flighthq._internal.dom.GPURenderPipeline` | `src/flighthq/_internal/dom/GPURenderPipeline.hx` | `dynamic-stub` | 115 |
-| `host:GPURenderPipelineDescriptor` | `host` | `flighthq._internal.dom.GPURenderPipelineDescriptor` | `src/flighthq/_internal/dom/GPURenderPipelineDescriptor.hx` | `dynamic-stub` | 8 |
-| `host:GPUSampler` | `host` | `flighthq._internal.dom.GPUSampler` | `src/flighthq/_internal/dom/GPUSampler.hx` | `dynamic-stub` | 229 |
-| `host:GPUSamplerDescriptor` | `host` | `flighthq._internal.dom.GPUSamplerDescriptor` | `src/flighthq/_internal/dom/GPUSamplerDescriptor.hx` | `dynamic-stub` | 4 |
-| `host:GPUShaderModule` | `host` | `flighthq._internal.dom.GPUShaderModule` | `src/flighthq/_internal/dom/GPUShaderModule.hx` | `dynamic-stub` | 147 |
-| `host:GPUShaderStage` | `host` | `flighthq._internal.dom.GPUShaderStage` | `src/flighthq/_internal/dom/GPUShaderStage.hx` | `dynamic-stub` | 109 |
-| `host:GPUStencilFaceState` | `host` | `flighthq._internal.dom.GPUStencilFaceState` | `src/flighthq/_internal/dom/GPUStencilFaceState.hx` | `dynamic-stub` | 8 |
-| `host:GPUStencilOperation` | `host` | `flighthq._internal.dom.GPUStencilOperation` | `src/flighthq/_internal/dom/GPUStencilOperation.hx` | `dynamic-stub` | 1 |
-| `host:GPUSupportedFeatures` | `host` | `flighthq._internal.dom.GPUSupportedFeatures` | `src/flighthq/_internal/dom/GPUSupportedFeatures.hx` | `dynamic-stub` | 9 |
-| `host:GPUSupportedLimits` | `host` | `flighthq._internal.dom.GPUSupportedLimits` | `src/flighthq/_internal/dom/GPUSupportedLimits.hx` | `dynamic-stub` | 15 |
-| `host:GPUTexelCopyBufferLayout` | `host` | `flighthq._internal.dom.GPUTexelCopyBufferLayout` | `src/flighthq/_internal/dom/GPUTexelCopyBufferLayout.hx` | `typed` | 10 |
-| `host:GPUTexelCopyTextureInfo` | `host` | `flighthq._internal.dom.GPUTexelCopyTextureInfo` | `src/flighthq/_internal/dom/GPUTexelCopyTextureInfo.hx` | `typed` | 8 |
-| `host:GPUTexture` | `host` | `flighthq._internal.dom.GPUTexture` | `src/flighthq/_internal/dom/GPUTexture.hx` | `dynamic-stub` | 231 |
-| `host:GPUTextureDescriptor` | `host` | `flighthq._internal.dom.GPUTextureDescriptor` | `src/flighthq/_internal/dom/GPUTextureDescriptor.hx` | `typed` | 13 |
-| `host:GPUTextureFormat` | `host` | `flighthq._internal.dom.GPUTextureFormat` | `src/flighthq/_internal/dom/GPUTextureFormat.hx` | `dynamic-stub` | 59 |
-| `host:GPUTextureUsage` | `host` | `flighthq._internal.dom.GPUTextureUsage` | `src/flighthq/_internal/dom/GPUTextureUsage.hx` | `dynamic-stub` | 67 |
-| `host:GPUTextureView` | `host` | `flighthq._internal.dom.GPUTextureView` | `src/flighthq/_internal/dom/GPUTextureView.hx` | `dynamic-stub` | 318 |
-| `host:GPUVertexBufferLayout` | `host` | `flighthq._internal.dom.GPUVertexBufferLayout` | `src/flighthq/_internal/dom/GPUVertexBufferLayout.hx` | `dynamic-stub` | 23 |
-| `host:Headers` | `host` | `flighthq._internal.dom.Headers` | `src/flighthq/_internal/dom/Headers.hx` | `dynamic-stub` | 10 |
-| `host:HTMLAudioElement` | `host` | `flighthq._internal.dom.HTMLAudioElement` | `src/flighthq/_internal/dom/HTMLAudioElement.hx` | `dynamic-stub` | 2 |
-| `host:HTMLCanvasElement` | `host` | `flighthq._internal.dom.HTMLCanvasElement` | `src/flighthq/_internal/dom/HTMLCanvasElement.hx` | `dynamic-stub` | 405 |
-| `host:HTMLDivElement` | `host` | `flighthq._internal.dom.HTMLDivElement` | `src/flighthq/_internal/dom/HTMLDivElement.hx` | `dynamic-stub` | 38 |
-| `host:HTMLElement` | `host` | `flighthq._internal.dom.HTMLElement` | `src/flighthq/_internal/dom/HTMLElement.hx` | `dynamic-stub` | 299 |
-| `host:HTMLHeadElement` | `host` | `flighthq._internal.dom.HTMLHeadElement` | `src/flighthq/_internal/dom/HTMLHeadElement.hx` | `dynamic-stub` | 7 |
-| `host:HTMLImageElement` | `host` | `flighthq._internal.dom.HTMLImageElement` | `src/flighthq/_internal/dom/HTMLImageElement.hx` | `dynamic-stub` | 75 |
-| `host:HTMLInputElement` | `host` | `flighthq._internal.dom.HTMLInputElement` | `src/flighthq/_internal/dom/HTMLInputElement.hx` | `dynamic-stub` | 31 |
-| `host:HTMLLIElement` | `host` | `flighthq._internal.dom.HTMLLIElement` | `src/flighthq/_internal/dom/HTMLLIElement.hx` | `dynamic-stub` | 22 |
-| `host:HTMLLinkElement` | `host` | `flighthq._internal.dom.HTMLLinkElement` | `src/flighthq/_internal/dom/HTMLLinkElement.hx` | `dynamic-stub` | 5 |
-| `host:HTMLMediaElement` | `host` | `flighthq._internal.dom.HTMLMediaElement` | `src/flighthq/_internal/dom/HTMLMediaElement.hx` | `dynamic-stub` | 1 |
-| `host:HTMLMetaElement` | `host` | `flighthq._internal.dom.HTMLMetaElement` | `src/flighthq/_internal/dom/HTMLMetaElement.hx` | `dynamic-stub` | 1 |
-| `host:HTMLSpanElement` | `host` | `flighthq._internal.dom.HTMLSpanElement` | `src/flighthq/_internal/dom/HTMLSpanElement.hx` | `dynamic-stub` | 15 |
-| `host:HTMLStyleElement` | `host` | `flighthq._internal.dom.HTMLStyleElement` | `src/flighthq/_internal/dom/HTMLStyleElement.hx` | `dynamic-stub` | 3 |
-| `host:HTMLUListElement` | `host` | `flighthq._internal.dom.HTMLUListElement` | `src/flighthq/_internal/dom/HTMLUListElement.hx` | `dynamic-stub` | 13 |
-| `host:HTMLVideoElement` | `host` | `flighthq._internal.dom.HTMLVideoElement` | `src/flighthq/_internal/dom/HTMLVideoElement.hx` | `dynamic-stub` | 138 |
-| `host:ImageBitmap` | `host` | `flighthq._internal.dom.ImageBitmap` | `src/flighthq/_internal/dom/ImageBitmap.hx` | `dynamic-stub` | 60 |
-| `host:ImageBitmapRenderingContext` | `host` | `flighthq._internal.dom.ImageBitmapRenderingContext` | `src/flighthq/_internal/dom/ImageBitmapRenderingContext.hx` | `dynamic-stub` | 1 |
-| `host:ImageData` | `host` | `flighthq._internal.dom.ImageData` | `src/flighthq/_internal/dom/ImageData.hx` | `dynamic-stub` | 32 |
-| `host:ImageDataArray` | `host` | `flighthq._internal.dom.ImageDataArray` | `src/flighthq/_internal/dom/ImageDataArray.hx` | `dynamic-stub` | 2 |
-| `host:ImageDataSettings` | `host` | `flighthq._internal.dom.ImageDataSettings` | `src/flighthq/_internal/dom/ImageDataSettings.hx` | `typed` | 1 |
-| `host:ImageSmoothingQuality` | `host` | `flighthq._internal.dom.ImageSmoothingQuality` | `src/flighthq/_internal/dom/ImageSmoothingQuality.hx` | `dynamic-stub` | 2 |
-| `host:InputEvent` | `host` | `flighthq._internal.dom.InputEvent` | `src/flighthq/_internal/dom/InputEvent.hx` | `dynamic-stub` | 4 |
-| `host:KeyboardEvent` | `host` | `flighthq._internal.dom.KeyboardEvent` | `src/flighthq/_internal/dom/KeyboardEvent.hx` | `dynamic-stub` | 33 |
-| `host:Location` | `host` | `flighthq._internal.dom.Location` | `src/flighthq/_internal/dom/Location.hx` | `dynamic-stub` | 8 |
-| `host:MediaDevices` | `host` | `flighthq._internal.dom.MediaDevices` | `src/flighthq/_internal/dom/MediaDevices.hx` | `dynamic-stub` | 5 |
-| `host:MediaMetadata` | `host` | `flighthq._internal.dom.MediaMetadata` | `src/flighthq/_internal/dom/MediaMetadata.hx` | `dynamic-stub` | 2 |
-| `host:MediaQueryList` | `host` | `flighthq._internal.dom.MediaQueryList` | `src/flighthq/_internal/dom/MediaQueryList.hx` | `dynamic-stub` | 9 |
-| `host:MediaSession` | `host` | `flighthq._internal.dom.MediaSession` | `src/flighthq/_internal/dom/MediaSession.hx` | `dynamic-stub` | 9 |
-| `host:MediaSource` | `host` | `flighthq._internal.dom.MediaSource` | `src/flighthq/_internal/dom/MediaSource.hx` | `dynamic-stub` | 1 |
-| `host:MediaStream` | `host` | `flighthq._internal.dom.MediaStream` | `src/flighthq/_internal/dom/MediaStream.hx` | `dynamic-stub` | 8 |
-| `host:MediaStreamTrack` | `host` | `flighthq._internal.dom.MediaStreamTrack` | `src/flighthq/_internal/dom/MediaStreamTrack.hx` | `dynamic-stub` | 4 |
-| `host:MessageEvent` | `host` | `flighthq._internal.dom.MessageEvent` | `src/flighthq/_internal/dom/MessageEvent.hx` | `dynamic-stub` | 4 |
-| `host:MouseEvent` | `host` | `flighthq._internal.dom.MouseEvent` | `src/flighthq/_internal/dom/MouseEvent.hx` | `dynamic-stub` | 8 |
-| `host:Navigator` | `host` | `flighthq._internal.dom.Navigator` | `src/flighthq/_internal/dom/Navigator.hx` | `dynamic-stub` | 88 |
-| `host:Node` | `host` | `flighthq._internal.dom.Node` | `src/flighthq/_internal/dom/Node.hx` | `dynamic-stub` | 2 |
-| `host:NodeListOf` | `host` | `flighthq._internal.dom.NodeListOf` | `src/flighthq/_internal/dom/NodeListOf.hx` | `dynamic-stub` | 2 |
-| `host:Notification` | `host` | `flighthq._internal.dom.Notification` | `src/flighthq/_internal/dom/Notification.hx` | `dynamic-stub` | 10 |
-| `host:NotificationOptions` | `host` | `flighthq._internal.dom.NotificationOptions` | `src/flighthq/_internal/dom/NotificationOptions.hx` | `dynamic-stub` | 5 |
-| `host:NotificationPermission` | `host` | `flighthq._internal.dom.NotificationPermission` | `src/flighthq/_internal/dom/NotificationPermission.hx` | `dynamic-stub` | 1 |
-| `host:OES_texture_float_linear` | `host` | `flighthq._internal.dom.OES_texture_float_linear` | `src/flighthq/_internal/dom/OES_texture_float_linear.hx` | `dynamic-stub` | 1 |
-| `host:OffscreenCanvas` | `host` | `flighthq._internal.dom.OffscreenCanvas` | `src/flighthq/_internal/dom/OffscreenCanvas.hx` | `dynamic-stub` | 56 |
-| `host:OffscreenCanvasRenderingContext2D` | `host` | `flighthq._internal.dom.OffscreenCanvasRenderingContext2D` | `src/flighthq/_internal/dom/OffscreenCanvasRenderingContext2D.hx` | `dynamic-stub` | 21 |
-| `host:ParentNode` | `host` | `flighthq._internal.dom.ParentNode` | `src/flighthq/_internal/dom/ParentNode.hx` | `dynamic-stub` | 6 |
-| `host:Performance` | `host` | `flighthq._internal.dom.Performance` | `src/flighthq/_internal/dom/Performance.hx` | `typed` | 12 |
-| `host:PerformanceNavigationTiming` | `host` | `flighthq._internal.dom.PerformanceNavigationTiming` | `src/flighthq/_internal/dom/PerformanceNavigationTiming.hx` | `typed` | 4 |
-| `host:PermissionDescriptor` | `host` | `flighthq._internal.dom.PermissionDescriptor` | `src/flighthq/_internal/dom/PermissionDescriptor.hx` | `dynamic-stub` | 3 |
-| `host:PermissionName` | `host` | `flighthq._internal.dom.PermissionName` | `src/flighthq/_internal/dom/PermissionName.hx` | `dynamic-stub` | 4 |
-| `host:Permissions` | `host` | `flighthq._internal.dom.Permissions` | `src/flighthq/_internal/dom/Permissions.hx` | `dynamic-stub` | 23 |
-| `host:PermissionStatus` | `host` | `flighthq._internal.dom.PermissionStatus` | `src/flighthq/_internal/dom/PermissionStatus.hx` | `dynamic-stub` | 30 |
-| `host:PointerEvent` | `host` | `flighthq._internal.dom.PointerEvent` | `src/flighthq/_internal/dom/PointerEvent.hx` | `dynamic-stub` | 40 |
-| `host:PositionOptions` | `host` | `flighthq._internal.dom.PositionOptions` | `src/flighthq/_internal/dom/PositionOptions.hx` | `dynamic-stub` | 2 |
-| `host:Process` | `host` | `flighthq._internal.dom.Process` | `src/flighthq/_internal/dom/Process.hx` | `typed` | 1 |
-| `host:ProgressEvent` | `host` | `flighthq._internal.dom.ProgressEvent` | `src/flighthq/_internal/dom/ProgressEvent.hx` | `typed` | 2 |
-| `host:ReadableStream` | `host` | `flighthq._internal.dom.ReadableStream` | `src/flighthq/_internal/dom/ReadableStream.hx` | `dynamic-stub` | 13 |
-| `host:ReadableStreamDefaultReader` | `host` | `flighthq._internal.dom.ReadableStreamDefaultReader` | `src/flighthq/_internal/dom/ReadableStreamDefaultReader.hx` | `dynamic-stub` | 2 |
-| `host:RequestInit` | `host` | `flighthq._internal.dom.RequestInit` | `src/flighthq/_internal/dom/RequestInit.hx` | `dynamic-stub` | 7 |
-| `host:ResizeObserver` | `host` | `flighthq._internal.dom.ResizeObserver` | `src/flighthq/_internal/dom/ResizeObserver.hx` | `dynamic-stub` | 7 |
-| `host:ResizeObserverEntry` | `host` | `flighthq._internal.dom.ResizeObserverEntry` | `src/flighthq/_internal/dom/ResizeObserverEntry.hx` | `dynamic-stub` | 5 |
-| `host:Response` | `host` | `flighthq._internal.dom.Response` | `src/flighthq/_internal/dom/Response.hx` | `dynamic-stub` | 33 |
-| `host:Screen` | `host` | `flighthq._internal.dom.Screen` | `src/flighthq/_internal/dom/Screen.hx` | `dynamic-stub` | 25 |
-| `host:ScreenOrientation` | `host` | `flighthq._internal.dom.ScreenOrientation` | `src/flighthq/_internal/dom/ScreenOrientation.hx` | `dynamic-stub` | 3 |
-| `host:ShareData` | `host` | `flighthq._internal.dom.ShareData` | `src/flighthq/_internal/dom/ShareData.hx` | `dynamic-stub` | 7 |
-| `host:StereoPannerNode` | `host` | `flighthq._internal.dom.StereoPannerNode` | `src/flighthq/_internal/dom/StereoPannerNode.hx` | `dynamic-stub` | 11 |
-| `host:Storage` | `host` | `flighthq._internal.dom.Storage` | `src/flighthq/_internal/dom/Storage.hx` | `dynamic-stub` | 12 |
-| `host:StorageEstimate` | `host` | `flighthq._internal.dom.StorageEstimate` | `src/flighthq/_internal/dom/StorageEstimate.hx` | `dynamic-stub` | 11 |
-| `host:StorageEvent` | `host` | `flighthq._internal.dom.StorageEvent` | `src/flighthq/_internal/dom/StorageEvent.hx` | `dynamic-stub` | 6 |
-| `host:StorageManager` | `host` | `flighthq._internal.dom.StorageManager` | `src/flighthq/_internal/dom/StorageManager.hx` | `dynamic-stub` | 11 |
-| `host:SVGImageElement` | `host` | `flighthq._internal.dom.SVGImageElement` | `src/flighthq/_internal/dom/SVGImageElement.hx` | `dynamic-stub` | 30 |
-| `host:TexImageSource` | `host` | `flighthq._internal.dom.TexImageSource` | `src/flighthq/_internal/dom/TexImageSource.hx` | `dynamic-stub` | 5 |
-| `host:Text` | `host` | `flighthq._internal.dom.Text` | `src/flighthq/_internal/dom/Text.hx` | `dynamic-stub` | 2 |
-| `host:TextDecoder` | `host` | `flighthq._internal.dom.TextDecoder` | `src/flighthq/_internal/dom/TextDecoder.hx` | `dynamic-stub` | 16 |
-| `host:TextEncoder` | `host` | `flighthq._internal.dom.TextEncoder` | `src/flighthq/_internal/dom/TextEncoder.hx` | `typed` | 2 |
-| `host:TextMetrics` | `host` | `flighthq._internal.dom.TextMetrics` | `src/flighthq/_internal/dom/TextMetrics.hx` | `dynamic-stub` | 37 |
-| `host:Timeout` | `host` | `flighthq._internal.dom.Timeout` | `src/flighthq/_internal/dom/Timeout.hx` | `dynamic-stub` | 46 |
-| `host:URL` | `host` | `flighthq._internal.dom.URL` | `src/flighthq/_internal/dom/URL.hx` | `dynamic-stub` | 5 |
-| `host:URLSearchParams` | `host` | `flighthq._internal.dom.URLSearchParams` | `src/flighthq/_internal/dom/URLSearchParams.hx` | `dynamic-stub` | 3 |
-| `host:VideoFrame` | `host` | `flighthq._internal.dom.VideoFrame` | `src/flighthq/_internal/dom/VideoFrame.hx` | `dynamic-stub` | 43 |
-| `host:VisualViewport` | `host` | `flighthq._internal.dom.VisualViewport` | `src/flighthq/_internal/dom/VisualViewport.hx` | `dynamic-stub` | 8 |
-| `host:WakeLock` | `host` | `flighthq._internal.dom.WakeLock` | `src/flighthq/_internal/dom/WakeLock.hx` | `dynamic-stub` | 2 |
-| `host:WakeLockSentinel` | `host` | `flighthq._internal.dom.WakeLockSentinel` | `src/flighthq/_internal/dom/WakeLockSentinel.hx` | `dynamic-stub` | 4 |
-| `host:WEBGL_compressed_texture_astc` | `host` | `flighthq._internal.dom.WEBGL_compressed_texture_astc` | `src/flighthq/_internal/dom/WEBGL_compressed_texture_astc.hx` | `dynamic-stub` | 1 |
-| `host:WEBGL_compressed_texture_etc` | `host` | `flighthq._internal.dom.WEBGL_compressed_texture_etc` | `src/flighthq/_internal/dom/WEBGL_compressed_texture_etc.hx` | `dynamic-stub` | 1 |
-| `host:WEBGL_compressed_texture_pvrtc` | `host` | `flighthq._internal.dom.WEBGL_compressed_texture_pvrtc` | `src/flighthq/_internal/dom/WEBGL_compressed_texture_pvrtc.hx` | `dynamic-stub` | 1 |
-| `host:WEBGL_compressed_texture_s3tc` | `host` | `flighthq._internal.dom.WEBGL_compressed_texture_s3tc` | `src/flighthq/_internal/dom/WEBGL_compressed_texture_s3tc.hx` | `dynamic-stub` | 1 |
-| `host:WEBGL_compressed_texture_s3tc_srgb` | `host` | `flighthq._internal.dom.WEBGL_compressed_texture_s3tc_srgb` | `src/flighthq/_internal/dom/WEBGL_compressed_texture_s3tc_srgb.hx` | `dynamic-stub` | 1 |
-| `host:WEBGL_debug_renderer_info` | `host` | `flighthq._internal.dom.WEBGL_debug_renderer_info` | `src/flighthq/_internal/dom/WEBGL_debug_renderer_info.hx` | `dynamic-stub` | 4 |
-| `host:WebGL2RenderingContext` | `host` | `flighthq._internal.dom.WebGL2RenderingContext` | `src/flighthq/_internal/dom/WebGL2RenderingContext.hx` | `dynamic-stub` | 2811 |
-| `host:WebGLActiveInfo` | `host` | `flighthq._internal.dom.WebGLActiveInfo` | `src/flighthq/_internal/dom/WebGLActiveInfo.hx` | `dynamic-stub` | 8 |
-| `host:WebGLBuffer` | `host` | `flighthq._internal.dom.WebGLBuffer` | `src/flighthq/_internal/dom/WebGLBuffer.hx` | `dynamic-stub` | 55 |
-| `host:WebGLContextAttributes` | `host` | `flighthq._internal.dom.WebGLContextAttributes` | `src/flighthq/_internal/dom/WebGLContextAttributes.hx` | `dynamic-stub` | 5 |
-| `host:WebGLFramebuffer` | `host` | `flighthq._internal.dom.WebGLFramebuffer` | `src/flighthq/_internal/dom/WebGLFramebuffer.hx` | `dynamic-stub` | 40 |
-| `host:WebGLPowerPreference` | `host` | `flighthq._internal.dom.WebGLPowerPreference` | `src/flighthq/_internal/dom/WebGLPowerPreference.hx` | `dynamic-stub` | 1 |
-| `host:WebGLProgram` | `host` | `flighthq._internal.dom.WebGLProgram` | `src/flighthq/_internal/dom/WebGLProgram.hx` | `dynamic-stub` | 221 |
-| `host:WebGLRenderbuffer` | `host` | `flighthq._internal.dom.WebGLRenderbuffer` | `src/flighthq/_internal/dom/WebGLRenderbuffer.hx` | `dynamic-stub` | 6 |
-| `host:WebGLRenderingContext` | `host` | `flighthq._internal.dom.WebGLRenderingContext` | `src/flighthq/_internal/dom/WebGLRenderingContext.hx` | `dynamic-stub` | 10 |
-| `host:WebGLShader` | `host` | `flighthq._internal.dom.WebGLShader` | `src/flighthq/_internal/dom/WebGLShader.hx` | `dynamic-stub` | 3 |
-| `host:WebGLTexture` | `host` | `flighthq._internal.dom.WebGLTexture` | `src/flighthq/_internal/dom/WebGLTexture.hx` | `dynamic-stub` | 385 |
-| `host:WebGLUniformLocation` | `host` | `flighthq._internal.dom.WebGLUniformLocation` | `src/flighthq/_internal/dom/WebGLUniformLocation.hx` | `dynamic-stub` | 375 |
-| `host:WebGLVertexArrayObject` | `host` | `flighthq._internal.dom.WebGLVertexArrayObject` | `src/flighthq/_internal/dom/WebGLVertexArrayObject.hx` | `dynamic-stub` | 26 |
-| `host:WebSocket` | `host` | `flighthq._internal.dom.WebSocket` | `src/flighthq/_internal/dom/WebSocket.hx` | `dynamic-stub` | 9 |
-| `host:WheelEvent` | `host` | `flighthq._internal.dom.WheelEvent` | `src/flighthq/_internal/dom/WheelEvent.hx` | `dynamic-stub` | 9 |
-| `host:Window` | `host` | `flighthq._internal.dom.Window` | `src/flighthq/_internal/dom/Window.hx` | `dynamic-stub` | 126 |
-| `host:WritableStream` | `host` | `flighthq._internal.dom.WritableStream` | `src/flighthq/_internal/dom/WritableStream.hx` | `dynamic-stub` | 10 |
-| `host:WritableStreamDefaultWriter` | `host` | `flighthq._internal.dom.WritableStreamDefaultWriter` | `src/flighthq/_internal/dom/WritableStreamDefaultWriter.hx` | `dynamic-stub` | 4 |
+| `external:GLenum` | `external` | `flight._internal.WebExterns.GLenum` | `src/flight/_internal/WebExterns.hx` | `typed` | 1 |
+| `external:WgpuRichTextData` | `external` | `flight._internal.WebExterns.WgpuRichTextData` | `src/flight/_internal/WebExterns.hx` | `dynamic-stub` | 1 |
+| `external:WgpuScale9ShapeData` | `external` | `flight._internal.WebExterns.WgpuScale9ShapeData` | `src/flight/_internal/WebExterns.hx` | `dynamic-stub` | 1 |
+| `external:WgpuTextLabelData` | `external` | `flight._internal.WebExterns.WgpuTextLabelData` | `src/flight/_internal/WebExterns.hx` | `dynamic-stub` | 1 |
+| `host:AbortController` | `host` | `flight._internal.dom.AbortController` | `src/flight/_internal/dom/AbortController.hx` | `typed` | 40 |
+| `host:AbortSignal` | `host` | `flight._internal.dom.AbortSignal` | `src/flight/_internal/dom/AbortSignal.hx` | `typed` | 155 |
+| `host:AddEventListenerOptions` | `host` | `flight._internal.dom.AddEventListenerOptions` | `src/flight/_internal/dom/AddEventListenerOptions.hx` | `typed` | 1 |
+| `host:AudioBuffer` | `host` | `flight._internal.dom.AudioBuffer` | `src/flight/_internal/dom/AudioBuffer.hx` | `typed` | 26 |
+| `host:AudioBufferSourceNode` | `host` | `flight._internal.dom.AudioBufferSourceNode` | `src/flight/_internal/dom/AudioBufferSourceNode.hx` | `dynamic-stub` | 12 |
+| `host:AudioContext` | `host` | `flight._internal.dom.AudioContext` | `src/flight/_internal/dom/AudioContext.hx` | `dynamic-stub` | 41 |
+| `host:AudioDestinationNode` | `host` | `flight._internal.dom.AudioDestinationNode` | `src/flight/_internal/dom/AudioDestinationNode.hx` | `dynamic-stub` | 2 |
+| `host:AudioNode` | `host` | `flight._internal.dom.AudioNode` | `src/flight/_internal/dom/AudioNode.hx` | `dynamic-stub` | 8 |
+| `host:AudioParam` | `host` | `flight._internal.dom.AudioParam` | `src/flight/_internal/dom/AudioParam.hx` | `dynamic-stub` | 21 |
+| `host:BeforeUnloadEvent` | `host` | `flight._internal.dom.BeforeUnloadEvent` | `src/flight/_internal/dom/BeforeUnloadEvent.hx` | `dynamic-stub` | 5 |
+| `host:Blob` | `host` | `flight._internal.dom.Blob` | `src/flight/_internal/dom/Blob.hx` | `dynamic-stub` | 51 |
+| `host:BodyInit` | `host` | `flight._internal.dom.BodyInit` | `src/flight/_internal/dom/BodyInit.hx` | `dynamic-stub` | 1 |
+| `host:BufferSource` | `host` | `flight._internal.dom.BufferSource` | `src/flight/_internal/dom/BufferSource.hx` | `dynamic-stub` | 1 |
+| `host:CanvasFillRule` | `host` | `flight._internal.dom.CanvasFillRule` | `src/flight/_internal/dom/CanvasFillRule.hx` | `dynamic-stub` | 1 |
+| `host:CanvasGradient` | `host` | `flight._internal.dom.CanvasGradient` | `src/flight/_internal/dom/CanvasGradient.hx` | `typed` | 38 |
+| `host:CanvasImageSource` | `host` | `flight._internal.dom.CanvasImageSource` | `src/flight/_internal/dom/CanvasImageSource.hx` | `dynamic-stub` | 23 |
+| `host:CanvasLineCap` | `host` | `flight._internal.dom.CanvasLineCap` | `src/flight/_internal/dom/CanvasLineCap.hx` | `dynamic-stub` | 1 |
+| `host:CanvasLineJoin` | `host` | `flight._internal.dom.CanvasLineJoin` | `src/flight/_internal/dom/CanvasLineJoin.hx` | `dynamic-stub` | 1 |
+| `host:CanvasPattern` | `host` | `flight._internal.dom.CanvasPattern` | `src/flight/_internal/dom/CanvasPattern.hx` | `dynamic-stub` | 34 |
+| `host:CanvasRenderingContext2D` | `host` | `flight._internal.dom.CanvasRenderingContext2D` | `src/flight/_internal/dom/CanvasRenderingContext2D.hx` | `dynamic-stub` | 639 |
+| `host:CanvasRenderingContext2DSettings` | `host` | `flight._internal.dom.CanvasRenderingContext2DSettings` | `src/flight/_internal/dom/CanvasRenderingContext2DSettings.hx` | `dynamic-stub` | 6 |
+| `host:ChildNode` | `host` | `flight._internal.dom.ChildNode` | `src/flight/_internal/dom/ChildNode.hx` | `dynamic-stub` | 8 |
+| `host:Clipboard` | `host` | `flight._internal.dom.Clipboard` | `src/flight/_internal/dom/Clipboard.hx` | `dynamic-stub` | 21 |
+| `host:ClipboardItem` | `host` | `flight._internal.dom.ClipboardItem` | `src/flight/_internal/dom/ClipboardItem.hx` | `dynamic-stub` | 9 |
+| `host:CloseEvent` | `host` | `flight._internal.dom.CloseEvent` | `src/flight/_internal/dom/CloseEvent.hx` | `dynamic-stub` | 6 |
+| `host:CompositionEvent` | `host` | `flight._internal.dom.CompositionEvent` | `src/flight/_internal/dom/CompositionEvent.hx` | `dynamic-stub` | 3 |
+| `host:Console` | `host` | `flight._internal.dom.Console` | `src/flight/_internal/dom/Console.hx` | `typed` | 2 |
+| `host:Crypto` | `host` | `flight._internal.dom.Crypto` | `src/flight/_internal/dom/Crypto.hx` | `dynamic-stub` | 3 |
+| `host:CSSStyleDeclaration` | `host` | `flight._internal.dom.CSSStyleDeclaration` | `src/flight/_internal/dom/CSSStyleDeclaration.hx` | `dynamic-stub` | 158 |
+| `host:CustomEvent` | `host` | `flight._internal.dom.CustomEvent` | `src/flight/_internal/dom/CustomEvent.hx` | `dynamic-stub` | 3 |
+| `host:DataTransfer` | `host` | `flight._internal.dom.DataTransfer` | `src/flight/_internal/dom/DataTransfer.hx` | `dynamic-stub` | 2 |
+| `host:Document` | `host` | `flight._internal.dom.Document` | `src/flight/_internal/dom/Document.hx` | `dynamic-stub` | 160 |
+| `host:DOMException` | `host` | `flight._internal.dom.DOMException` | `src/flight/_internal/dom/DOMException.hx` | `typed` | 7 |
+| `host:DOMRect` | `host` | `flight._internal.dom.DOMRect` | `src/flight/_internal/dom/DOMRect.hx` | `dynamic-stub` | 17 |
+| `host:DOMRectReadOnly` | `host` | `flight._internal.dom.DOMRectReadOnly` | `src/flight/_internal/dom/DOMRectReadOnly.hx` | `dynamic-stub` | 3 |
+| `host:DOMStringMap` | `host` | `flight._internal.dom.DOMStringMap` | `src/flight/_internal/dom/DOMStringMap.hx` | `dynamic-stub` | 1 |
+| `host:DragEvent` | `host` | `flight._internal.dom.DragEvent` | `src/flight/_internal/dom/DragEvent.hx` | `dynamic-stub` | 8 |
+| `host:Element` | `host` | `flight._internal.dom.Element` | `src/flight/_internal/dom/Element.hx` | `dynamic-stub` | 9 |
+| `host:Event` | `host` | `flight._internal.dom.Event` | `src/flight/_internal/dom/Event.hx` | `dynamic-stub` | 46 |
+| `host:EventListener` | `host` | `flight._internal.dom.EventListener` | `src/flight/_internal/dom/EventListener.hx` | `dynamic-stub` | 15 |
+| `host:EventListenerObject` | `host` | `flight._internal.dom.EventListenerObject` | `src/flight/_internal/dom/EventListenerObject.hx` | `typed` | 1 |
+| `host:EventListenerOptions` | `host` | `flight._internal.dom.EventListenerOptions` | `src/flight/_internal/dom/EventListenerOptions.hx` | `typed` | 1 |
+| `host:EventTarget` | `host` | `flight._internal.dom.EventTarget` | `src/flight/_internal/dom/EventTarget.hx` | `typed` | 14 |
+| `host:EXT_color_buffer_float` | `host` | `flight._internal.dom.EXT_color_buffer_float` | `src/flight/_internal/dom/EXT_color_buffer_float.hx` | `dynamic-stub` | 2 |
+| `host:EXT_texture_compression_bptc` | `host` | `flight._internal.dom.EXT_texture_compression_bptc` | `src/flight/_internal/dom/EXT_texture_compression_bptc.hx` | `dynamic-stub` | 1 |
+| `host:EXT_texture_compression_rgtc` | `host` | `flight._internal.dom.EXT_texture_compression_rgtc` | `src/flight/_internal/dom/EXT_texture_compression_rgtc.hx` | `dynamic-stub` | 1 |
+| `host:EXT_texture_filter_anisotropic` | `host` | `flight._internal.dom.EXT_texture_filter_anisotropic` | `src/flight/_internal/dom/EXT_texture_filter_anisotropic.hx` | `dynamic-stub` | 10 |
+| `host:File` | `host` | `flight._internal.dom.File` | `src/flight/_internal/dom/File.hx` | `dynamic-stub` | 34 |
+| `host:FileList` | `host` | `flight._internal.dom.FileList` | `src/flight/_internal/dom/FileList.hx` | `dynamic-stub` | 8 |
+| `host:FileReader` | `host` | `flight._internal.dom.FileReader` | `src/flight/_internal/dom/FileReader.hx` | `dynamic-stub` | 19 |
+| `host:FileSystemDirectoryHandle` | `host` | `flight._internal.dom.FileSystemDirectoryHandle` | `src/flight/_internal/dom/FileSystemDirectoryHandle.hx` | `dynamic-stub` | 22 |
+| `host:FileSystemFileHandle` | `host` | `flight._internal.dom.FileSystemFileHandle` | `src/flight/_internal/dom/FileSystemFileHandle.hx` | `dynamic-stub` | 23 |
+| `host:FileSystemWritableFileStream` | `host` | `flight._internal.dom.FileSystemWritableFileStream` | `src/flight/_internal/dom/FileSystemWritableFileStream.hx` | `dynamic-stub` | 5 |
+| `host:FileSystemWriteChunkType` | `host` | `flight._internal.dom.FileSystemWriteChunkType` | `src/flight/_internal/dom/FileSystemWriteChunkType.hx` | `dynamic-stub` | 1 |
+| `host:FontFace` | `host` | `flight._internal.dom.FontFace` | `src/flight/_internal/dom/FontFace.hx` | `dynamic-stub` | 23 |
+| `host:FontFaceSet` | `host` | `flight._internal.dom.FontFaceSet` | `src/flight/_internal/dom/FontFaceSet.hx` | `dynamic-stub` | 7 |
+| `host:FormData` | `host` | `flight._internal.dom.FormData` | `src/flight/_internal/dom/FormData.hx` | `dynamic-stub` | 1 |
+| `host:GainNode` | `host` | `flight._internal.dom.GainNode` | `src/flight/_internal/dom/GainNode.hx` | `dynamic-stub` | 35 |
+| `host:Gamepad` | `host` | `flight._internal.dom.Gamepad` | `src/flight/_internal/dom/Gamepad.hx` | `dynamic-stub` | 27 |
+| `host:GamepadButton` | `host` | `flight._internal.dom.GamepadButton` | `src/flight/_internal/dom/GamepadButton.hx` | `dynamic-stub` | 8 |
+| `host:GamepadEvent` | `host` | `flight._internal.dom.GamepadEvent` | `src/flight/_internal/dom/GamepadEvent.hx` | `dynamic-stub` | 5 |
+| `host:Geolocation` | `host` | `flight._internal.dom.Geolocation` | `src/flight/_internal/dom/Geolocation.hx` | `dynamic-stub` | 16 |
+| `host:GeolocationCoordinates` | `host` | `flight._internal.dom.GeolocationCoordinates` | `src/flight/_internal/dom/GeolocationCoordinates.hx` | `dynamic-stub` | 8 |
+| `host:GeolocationPosition` | `host` | `flight._internal.dom.GeolocationPosition` | `src/flight/_internal/dom/GeolocationPosition.hx` | `dynamic-stub` | 8 |
+| `host:GeolocationPositionError` | `host` | `flight._internal.dom.GeolocationPositionError` | `src/flight/_internal/dom/GeolocationPositionError.hx` | `dynamic-stub` | 7 |
+| `host:GlobalCompositeOperation` | `host` | `flight._internal.dom.GlobalCompositeOperation` | `src/flight/_internal/dom/GlobalCompositeOperation.hx` | `dynamic-stub` | 8 |
+| `host:GPU` | `host` | `flight._internal.dom.GPU` | `src/flight/_internal/dom/GPU.hx` | `dynamic-stub` | 7 |
+| `host:GPUAdapter` | `host` | `flight._internal.dom.GPUAdapter` | `src/flight/_internal/dom/GPUAdapter.hx` | `dynamic-stub` | 17 |
+| `host:GPUAllowSharedBufferSource` | `host` | `flight._internal.dom.GPUAllowSharedBufferSource` | `src/flight/_internal/dom/GPUAllowSharedBufferSource.hx` | `typed` | 4 |
+| `host:GPUBindGroup` | `host` | `flight._internal.dom.GPUBindGroup` | `src/flight/_internal/dom/GPUBindGroup.hx` | `dynamic-stub` | 220 |
+| `host:GPUBindGroupEntry` | `host` | `flight._internal.dom.GPUBindGroupEntry` | `src/flight/_internal/dom/GPUBindGroupEntry.hx` | `dynamic-stub` | 15 |
+| `host:GPUBindGroupLayout` | `host` | `flight._internal.dom.GPUBindGroupLayout` | `src/flight/_internal/dom/GPUBindGroupLayout.hx` | `dynamic-stub` | 285 |
+| `host:GPUBindGroupLayoutEntry` | `host` | `flight._internal.dom.GPUBindGroupLayoutEntry` | `src/flight/_internal/dom/GPUBindGroupLayoutEntry.hx` | `dynamic-stub` | 10 |
+| `host:GPUBlendComponent` | `host` | `flight._internal.dom.GPUBlendComponent` | `src/flight/_internal/dom/GPUBlendComponent.hx` | `dynamic-stub` | 3 |
+| `host:GPUBlendFactor` | `host` | `flight._internal.dom.GPUBlendFactor` | `src/flight/_internal/dom/GPUBlendFactor.hx` | `dynamic-stub` | 2 |
+| `host:GPUBlendOperation` | `host` | `flight._internal.dom.GPUBlendOperation` | `src/flight/_internal/dom/GPUBlendOperation.hx` | `dynamic-stub` | 1 |
+| `host:GPUBlendState` | `host` | `flight._internal.dom.GPUBlendState` | `src/flight/_internal/dom/GPUBlendState.hx` | `dynamic-stub` | 61 |
+| `host:GPUBuffer` | `host` | `flight._internal.dom.GPUBuffer` | `src/flight/_internal/dom/GPUBuffer.hx` | `dynamic-stub` | 306 |
+| `host:GPUBufferBinding` | `host` | `flight._internal.dom.GPUBufferBinding` | `src/flight/_internal/dom/GPUBufferBinding.hx` | `dynamic-stub` | 10 |
+| `host:GPUBufferDescriptor` | `host` | `flight._internal.dom.GPUBufferDescriptor` | `src/flight/_internal/dom/GPUBufferDescriptor.hx` | `typed` | 8 |
+| `host:GPUBufferUsage` | `host` | `flight._internal.dom.GPUBufferUsage` | `src/flight/_internal/dom/GPUBufferUsage.hx` | `dynamic-stub` | 73 |
+| `host:GPUCanvasContext` | `host` | `flight._internal.dom.GPUCanvasContext` | `src/flight/_internal/dom/GPUCanvasContext.hx` | `dynamic-stub` | 14 |
+| `host:GPUColor` | `host` | `flight._internal.dom.GPUColor` | `src/flight/_internal/dom/GPUColor.hx` | `dynamic-stub` | 4 |
+| `host:GPUColorDict` | `host` | `flight._internal.dom.GPUColorDict` | `src/flight/_internal/dom/GPUColorDict.hx` | `dynamic-stub` | 16 |
+| `host:GPUColorWrite` | `host` | `flight._internal.dom.GPUColorWrite` | `src/flight/_internal/dom/GPUColorWrite.hx` | `dynamic-stub` | 2 |
+| `host:GPUCommandBuffer` | `host` | `flight._internal.dom.GPUCommandBuffer` | `src/flight/_internal/dom/GPUCommandBuffer.hx` | `dynamic-stub` | 10 |
+| `host:GPUCommandEncoder` | `host` | `flight._internal.dom.GPUCommandEncoder` | `src/flight/_internal/dom/GPUCommandEncoder.hx` | `dynamic-stub` | 43 |
+| `host:GPUCopyExternalImageDestInfo` | `host` | `flight._internal.dom.GPUCopyExternalImageDestInfo` | `src/flight/_internal/dom/GPUCopyExternalImageDestInfo.hx` | `dynamic-stub` | 4 |
+| `host:GPUCopyExternalImageSource` | `host` | `flight._internal.dom.GPUCopyExternalImageSource` | `src/flight/_internal/dom/GPUCopyExternalImageSource.hx` | `dynamic-stub` | 8 |
+| `host:GPUCopyExternalImageSourceInfo` | `host` | `flight._internal.dom.GPUCopyExternalImageSourceInfo` | `src/flight/_internal/dom/GPUCopyExternalImageSourceInfo.hx` | `dynamic-stub` | 4 |
+| `host:GPUDevice` | `host` | `flight._internal.dom.GPUDevice` | `src/flight/_internal/dom/GPUDevice.hx` | `dynamic-stub` | 404 |
+| `host:GPUDeviceDescriptor` | `host` | `flight._internal.dom.GPUDeviceDescriptor` | `src/flight/_internal/dom/GPUDeviceDescriptor.hx` | `dynamic-stub` | 4 |
+| `host:GPUDeviceLostInfo` | `host` | `flight._internal.dom.GPUDeviceLostInfo` | `src/flight/_internal/dom/GPUDeviceLostInfo.hx` | `dynamic-stub` | 1 |
+| `host:GPUExtent3D` | `host` | `flight._internal.dom.GPUExtent3D` | `src/flight/_internal/dom/GPUExtent3D.hx` | `typed` | 3 |
+| `host:GPUExtent3DDict` | `host` | `flight._internal.dom.GPUExtent3DDict` | `src/flight/_internal/dom/GPUExtent3DDict.hx` | `typed` | 10 |
+| `host:GPUExtent3DDictStrict` | `host` | `flight._internal.dom.GPUExtent3DDictStrict` | `src/flight/_internal/dom/GPUExtent3DDictStrict.hx` | `typed` | 1 |
+| `host:GPUExternalTexture` | `host` | `flight._internal.dom.GPUExternalTexture` | `src/flight/_internal/dom/GPUExternalTexture.hx` | `dynamic-stub` | 10 |
+| `host:GPUFeatureName` | `host` | `flight._internal.dom.GPUFeatureName` | `src/flight/_internal/dom/GPUFeatureName.hx` | `dynamic-stub` | 1 |
+| `host:GPUFilterMode` | `host` | `flight._internal.dom.GPUFilterMode` | `src/flight/_internal/dom/GPUFilterMode.hx` | `dynamic-stub` | 14 |
+| `host:GPUIndexFormat` | `host` | `flight._internal.dom.GPUIndexFormat` | `src/flight/_internal/dom/GPUIndexFormat.hx` | `dynamic-stub` | 2 |
+| `host:GPULoadOp` | `host` | `flight._internal.dom.GPULoadOp` | `src/flight/_internal/dom/GPULoadOp.hx` | `dynamic-stub` | 6 |
+| `host:GPUMapMode` | `host` | `flight._internal.dom.GPUMapMode` | `src/flight/_internal/dom/GPUMapMode.hx` | `dynamic-stub` | 1 |
+| `host:GPUMipmapFilterMode` | `host` | `flight._internal.dom.GPUMipmapFilterMode` | `src/flight/_internal/dom/GPUMipmapFilterMode.hx` | `dynamic-stub` | 4 |
+| `host:GPUOrigin3D` | `host` | `flight._internal.dom.GPUOrigin3D` | `src/flight/_internal/dom/GPUOrigin3D.hx` | `dynamic-stub` | 3 |
+| `host:GPUOrigin3DDict` | `host` | `flight._internal.dom.GPUOrigin3DDict` | `src/flight/_internal/dom/GPUOrigin3DDict.hx` | `typed` | 6 |
+| `host:GPUPipelineLayout` | `host` | `flight._internal.dom.GPUPipelineLayout` | `src/flight/_internal/dom/GPUPipelineLayout.hx` | `dynamic-stub` | 60 |
+| `host:GPUPowerPreference` | `host` | `flight._internal.dom.GPUPowerPreference` | `src/flight/_internal/dom/GPUPowerPreference.hx` | `dynamic-stub` | 1 |
+| `host:GPUPrimitiveTopology` | `host` | `flight._internal.dom.GPUPrimitiveTopology` | `src/flight/_internal/dom/GPUPrimitiveTopology.hx` | `dynamic-stub` | 1 |
+| `host:GPUQueue` | `host` | `flight._internal.dom.GPUQueue` | `src/flight/_internal/dom/GPUQueue.hx` | `dynamic-stub` | 87 |
+| `host:GPURenderPassEncoder` | `host` | `flight._internal.dom.GPURenderPassEncoder` | `src/flight/_internal/dom/GPURenderPassEncoder.hx` | `dynamic-stub` | 258 |
+| `host:GPURenderPipeline` | `host` | `flight._internal.dom.GPURenderPipeline` | `src/flight/_internal/dom/GPURenderPipeline.hx` | `dynamic-stub` | 115 |
+| `host:GPURenderPipelineDescriptor` | `host` | `flight._internal.dom.GPURenderPipelineDescriptor` | `src/flight/_internal/dom/GPURenderPipelineDescriptor.hx` | `dynamic-stub` | 8 |
+| `host:GPUSampler` | `host` | `flight._internal.dom.GPUSampler` | `src/flight/_internal/dom/GPUSampler.hx` | `dynamic-stub` | 229 |
+| `host:GPUSamplerDescriptor` | `host` | `flight._internal.dom.GPUSamplerDescriptor` | `src/flight/_internal/dom/GPUSamplerDescriptor.hx` | `dynamic-stub` | 4 |
+| `host:GPUShaderModule` | `host` | `flight._internal.dom.GPUShaderModule` | `src/flight/_internal/dom/GPUShaderModule.hx` | `dynamic-stub` | 147 |
+| `host:GPUShaderStage` | `host` | `flight._internal.dom.GPUShaderStage` | `src/flight/_internal/dom/GPUShaderStage.hx` | `dynamic-stub` | 109 |
+| `host:GPUStencilFaceState` | `host` | `flight._internal.dom.GPUStencilFaceState` | `src/flight/_internal/dom/GPUStencilFaceState.hx` | `dynamic-stub` | 8 |
+| `host:GPUStencilOperation` | `host` | `flight._internal.dom.GPUStencilOperation` | `src/flight/_internal/dom/GPUStencilOperation.hx` | `dynamic-stub` | 1 |
+| `host:GPUSupportedFeatures` | `host` | `flight._internal.dom.GPUSupportedFeatures` | `src/flight/_internal/dom/GPUSupportedFeatures.hx` | `dynamic-stub` | 9 |
+| `host:GPUSupportedLimits` | `host` | `flight._internal.dom.GPUSupportedLimits` | `src/flight/_internal/dom/GPUSupportedLimits.hx` | `dynamic-stub` | 15 |
+| `host:GPUTexelCopyBufferLayout` | `host` | `flight._internal.dom.GPUTexelCopyBufferLayout` | `src/flight/_internal/dom/GPUTexelCopyBufferLayout.hx` | `typed` | 10 |
+| `host:GPUTexelCopyTextureInfo` | `host` | `flight._internal.dom.GPUTexelCopyTextureInfo` | `src/flight/_internal/dom/GPUTexelCopyTextureInfo.hx` | `typed` | 8 |
+| `host:GPUTexture` | `host` | `flight._internal.dom.GPUTexture` | `src/flight/_internal/dom/GPUTexture.hx` | `dynamic-stub` | 231 |
+| `host:GPUTextureDescriptor` | `host` | `flight._internal.dom.GPUTextureDescriptor` | `src/flight/_internal/dom/GPUTextureDescriptor.hx` | `typed` | 13 |
+| `host:GPUTextureFormat` | `host` | `flight._internal.dom.GPUTextureFormat` | `src/flight/_internal/dom/GPUTextureFormat.hx` | `dynamic-stub` | 59 |
+| `host:GPUTextureUsage` | `host` | `flight._internal.dom.GPUTextureUsage` | `src/flight/_internal/dom/GPUTextureUsage.hx` | `dynamic-stub` | 67 |
+| `host:GPUTextureView` | `host` | `flight._internal.dom.GPUTextureView` | `src/flight/_internal/dom/GPUTextureView.hx` | `dynamic-stub` | 318 |
+| `host:GPUVertexBufferLayout` | `host` | `flight._internal.dom.GPUVertexBufferLayout` | `src/flight/_internal/dom/GPUVertexBufferLayout.hx` | `dynamic-stub` | 23 |
+| `host:Headers` | `host` | `flight._internal.dom.Headers` | `src/flight/_internal/dom/Headers.hx` | `dynamic-stub` | 10 |
+| `host:HTMLAudioElement` | `host` | `flight._internal.dom.HTMLAudioElement` | `src/flight/_internal/dom/HTMLAudioElement.hx` | `dynamic-stub` | 2 |
+| `host:HTMLCanvasElement` | `host` | `flight._internal.dom.HTMLCanvasElement` | `src/flight/_internal/dom/HTMLCanvasElement.hx` | `dynamic-stub` | 405 |
+| `host:HTMLDivElement` | `host` | `flight._internal.dom.HTMLDivElement` | `src/flight/_internal/dom/HTMLDivElement.hx` | `dynamic-stub` | 38 |
+| `host:HTMLElement` | `host` | `flight._internal.dom.HTMLElement` | `src/flight/_internal/dom/HTMLElement.hx` | `dynamic-stub` | 299 |
+| `host:HTMLHeadElement` | `host` | `flight._internal.dom.HTMLHeadElement` | `src/flight/_internal/dom/HTMLHeadElement.hx` | `dynamic-stub` | 7 |
+| `host:HTMLImageElement` | `host` | `flight._internal.dom.HTMLImageElement` | `src/flight/_internal/dom/HTMLImageElement.hx` | `dynamic-stub` | 75 |
+| `host:HTMLInputElement` | `host` | `flight._internal.dom.HTMLInputElement` | `src/flight/_internal/dom/HTMLInputElement.hx` | `dynamic-stub` | 31 |
+| `host:HTMLLIElement` | `host` | `flight._internal.dom.HTMLLIElement` | `src/flight/_internal/dom/HTMLLIElement.hx` | `dynamic-stub` | 22 |
+| `host:HTMLLinkElement` | `host` | `flight._internal.dom.HTMLLinkElement` | `src/flight/_internal/dom/HTMLLinkElement.hx` | `dynamic-stub` | 5 |
+| `host:HTMLMediaElement` | `host` | `flight._internal.dom.HTMLMediaElement` | `src/flight/_internal/dom/HTMLMediaElement.hx` | `dynamic-stub` | 1 |
+| `host:HTMLMetaElement` | `host` | `flight._internal.dom.HTMLMetaElement` | `src/flight/_internal/dom/HTMLMetaElement.hx` | `dynamic-stub` | 1 |
+| `host:HTMLSpanElement` | `host` | `flight._internal.dom.HTMLSpanElement` | `src/flight/_internal/dom/HTMLSpanElement.hx` | `dynamic-stub` | 15 |
+| `host:HTMLStyleElement` | `host` | `flight._internal.dom.HTMLStyleElement` | `src/flight/_internal/dom/HTMLStyleElement.hx` | `dynamic-stub` | 3 |
+| `host:HTMLUListElement` | `host` | `flight._internal.dom.HTMLUListElement` | `src/flight/_internal/dom/HTMLUListElement.hx` | `dynamic-stub` | 13 |
+| `host:HTMLVideoElement` | `host` | `flight._internal.dom.HTMLVideoElement` | `src/flight/_internal/dom/HTMLVideoElement.hx` | `dynamic-stub` | 138 |
+| `host:ImageBitmap` | `host` | `flight._internal.dom.ImageBitmap` | `src/flight/_internal/dom/ImageBitmap.hx` | `dynamic-stub` | 60 |
+| `host:ImageBitmapRenderingContext` | `host` | `flight._internal.dom.ImageBitmapRenderingContext` | `src/flight/_internal/dom/ImageBitmapRenderingContext.hx` | `dynamic-stub` | 1 |
+| `host:ImageData` | `host` | `flight._internal.dom.ImageData` | `src/flight/_internal/dom/ImageData.hx` | `dynamic-stub` | 32 |
+| `host:ImageDataArray` | `host` | `flight._internal.dom.ImageDataArray` | `src/flight/_internal/dom/ImageDataArray.hx` | `dynamic-stub` | 2 |
+| `host:ImageDataSettings` | `host` | `flight._internal.dom.ImageDataSettings` | `src/flight/_internal/dom/ImageDataSettings.hx` | `typed` | 1 |
+| `host:ImageSmoothingQuality` | `host` | `flight._internal.dom.ImageSmoothingQuality` | `src/flight/_internal/dom/ImageSmoothingQuality.hx` | `dynamic-stub` | 2 |
+| `host:InputEvent` | `host` | `flight._internal.dom.InputEvent` | `src/flight/_internal/dom/InputEvent.hx` | `dynamic-stub` | 4 |
+| `host:KeyboardEvent` | `host` | `flight._internal.dom.KeyboardEvent` | `src/flight/_internal/dom/KeyboardEvent.hx` | `dynamic-stub` | 33 |
+| `host:Location` | `host` | `flight._internal.dom.Location` | `src/flight/_internal/dom/Location.hx` | `dynamic-stub` | 8 |
+| `host:MediaDevices` | `host` | `flight._internal.dom.MediaDevices` | `src/flight/_internal/dom/MediaDevices.hx` | `dynamic-stub` | 5 |
+| `host:MediaMetadata` | `host` | `flight._internal.dom.MediaMetadata` | `src/flight/_internal/dom/MediaMetadata.hx` | `dynamic-stub` | 2 |
+| `host:MediaQueryList` | `host` | `flight._internal.dom.MediaQueryList` | `src/flight/_internal/dom/MediaQueryList.hx` | `dynamic-stub` | 9 |
+| `host:MediaSession` | `host` | `flight._internal.dom.MediaSession` | `src/flight/_internal/dom/MediaSession.hx` | `dynamic-stub` | 9 |
+| `host:MediaSource` | `host` | `flight._internal.dom.MediaSource` | `src/flight/_internal/dom/MediaSource.hx` | `dynamic-stub` | 1 |
+| `host:MediaStream` | `host` | `flight._internal.dom.MediaStream` | `src/flight/_internal/dom/MediaStream.hx` | `dynamic-stub` | 8 |
+| `host:MediaStreamTrack` | `host` | `flight._internal.dom.MediaStreamTrack` | `src/flight/_internal/dom/MediaStreamTrack.hx` | `dynamic-stub` | 4 |
+| `host:MessageEvent` | `host` | `flight._internal.dom.MessageEvent` | `src/flight/_internal/dom/MessageEvent.hx` | `dynamic-stub` | 4 |
+| `host:MouseEvent` | `host` | `flight._internal.dom.MouseEvent` | `src/flight/_internal/dom/MouseEvent.hx` | `dynamic-stub` | 8 |
+| `host:Navigator` | `host` | `flight._internal.dom.Navigator` | `src/flight/_internal/dom/Navigator.hx` | `dynamic-stub` | 88 |
+| `host:Node` | `host` | `flight._internal.dom.Node` | `src/flight/_internal/dom/Node.hx` | `dynamic-stub` | 2 |
+| `host:NodeListOf` | `host` | `flight._internal.dom.NodeListOf` | `src/flight/_internal/dom/NodeListOf.hx` | `dynamic-stub` | 2 |
+| `host:Notification` | `host` | `flight._internal.dom.Notification` | `src/flight/_internal/dom/Notification.hx` | `dynamic-stub` | 10 |
+| `host:NotificationOptions` | `host` | `flight._internal.dom.NotificationOptions` | `src/flight/_internal/dom/NotificationOptions.hx` | `dynamic-stub` | 5 |
+| `host:NotificationPermission` | `host` | `flight._internal.dom.NotificationPermission` | `src/flight/_internal/dom/NotificationPermission.hx` | `dynamic-stub` | 1 |
+| `host:OES_texture_float_linear` | `host` | `flight._internal.dom.OES_texture_float_linear` | `src/flight/_internal/dom/OES_texture_float_linear.hx` | `dynamic-stub` | 1 |
+| `host:OffscreenCanvas` | `host` | `flight._internal.dom.OffscreenCanvas` | `src/flight/_internal/dom/OffscreenCanvas.hx` | `dynamic-stub` | 56 |
+| `host:OffscreenCanvasRenderingContext2D` | `host` | `flight._internal.dom.OffscreenCanvasRenderingContext2D` | `src/flight/_internal/dom/OffscreenCanvasRenderingContext2D.hx` | `dynamic-stub` | 21 |
+| `host:ParentNode` | `host` | `flight._internal.dom.ParentNode` | `src/flight/_internal/dom/ParentNode.hx` | `dynamic-stub` | 6 |
+| `host:Performance` | `host` | `flight._internal.dom.Performance` | `src/flight/_internal/dom/Performance.hx` | `typed` | 12 |
+| `host:PerformanceNavigationTiming` | `host` | `flight._internal.dom.PerformanceNavigationTiming` | `src/flight/_internal/dom/PerformanceNavigationTiming.hx` | `typed` | 4 |
+| `host:PermissionDescriptor` | `host` | `flight._internal.dom.PermissionDescriptor` | `src/flight/_internal/dom/PermissionDescriptor.hx` | `dynamic-stub` | 3 |
+| `host:PermissionName` | `host` | `flight._internal.dom.PermissionName` | `src/flight/_internal/dom/PermissionName.hx` | `dynamic-stub` | 4 |
+| `host:Permissions` | `host` | `flight._internal.dom.Permissions` | `src/flight/_internal/dom/Permissions.hx` | `dynamic-stub` | 23 |
+| `host:PermissionStatus` | `host` | `flight._internal.dom.PermissionStatus` | `src/flight/_internal/dom/PermissionStatus.hx` | `dynamic-stub` | 30 |
+| `host:PointerEvent` | `host` | `flight._internal.dom.PointerEvent` | `src/flight/_internal/dom/PointerEvent.hx` | `dynamic-stub` | 40 |
+| `host:PositionOptions` | `host` | `flight._internal.dom.PositionOptions` | `src/flight/_internal/dom/PositionOptions.hx` | `dynamic-stub` | 2 |
+| `host:Process` | `host` | `flight._internal.dom.Process` | `src/flight/_internal/dom/Process.hx` | `typed` | 1 |
+| `host:ProgressEvent` | `host` | `flight._internal.dom.ProgressEvent` | `src/flight/_internal/dom/ProgressEvent.hx` | `typed` | 2 |
+| `host:ReadableStream` | `host` | `flight._internal.dom.ReadableStream` | `src/flight/_internal/dom/ReadableStream.hx` | `dynamic-stub` | 13 |
+| `host:ReadableStreamDefaultReader` | `host` | `flight._internal.dom.ReadableStreamDefaultReader` | `src/flight/_internal/dom/ReadableStreamDefaultReader.hx` | `dynamic-stub` | 2 |
+| `host:RequestInit` | `host` | `flight._internal.dom.RequestInit` | `src/flight/_internal/dom/RequestInit.hx` | `dynamic-stub` | 7 |
+| `host:ResizeObserver` | `host` | `flight._internal.dom.ResizeObserver` | `src/flight/_internal/dom/ResizeObserver.hx` | `dynamic-stub` | 7 |
+| `host:ResizeObserverEntry` | `host` | `flight._internal.dom.ResizeObserverEntry` | `src/flight/_internal/dom/ResizeObserverEntry.hx` | `dynamic-stub` | 5 |
+| `host:Response` | `host` | `flight._internal.dom.Response` | `src/flight/_internal/dom/Response.hx` | `dynamic-stub` | 33 |
+| `host:Screen` | `host` | `flight._internal.dom.Screen` | `src/flight/_internal/dom/Screen.hx` | `dynamic-stub` | 25 |
+| `host:ScreenOrientation` | `host` | `flight._internal.dom.ScreenOrientation` | `src/flight/_internal/dom/ScreenOrientation.hx` | `dynamic-stub` | 3 |
+| `host:ShareData` | `host` | `flight._internal.dom.ShareData` | `src/flight/_internal/dom/ShareData.hx` | `dynamic-stub` | 7 |
+| `host:StereoPannerNode` | `host` | `flight._internal.dom.StereoPannerNode` | `src/flight/_internal/dom/StereoPannerNode.hx` | `dynamic-stub` | 11 |
+| `host:Storage` | `host` | `flight._internal.dom.Storage` | `src/flight/_internal/dom/Storage.hx` | `dynamic-stub` | 12 |
+| `host:StorageEstimate` | `host` | `flight._internal.dom.StorageEstimate` | `src/flight/_internal/dom/StorageEstimate.hx` | `dynamic-stub` | 11 |
+| `host:StorageEvent` | `host` | `flight._internal.dom.StorageEvent` | `src/flight/_internal/dom/StorageEvent.hx` | `dynamic-stub` | 6 |
+| `host:StorageManager` | `host` | `flight._internal.dom.StorageManager` | `src/flight/_internal/dom/StorageManager.hx` | `dynamic-stub` | 11 |
+| `host:SVGImageElement` | `host` | `flight._internal.dom.SVGImageElement` | `src/flight/_internal/dom/SVGImageElement.hx` | `dynamic-stub` | 30 |
+| `host:TexImageSource` | `host` | `flight._internal.dom.TexImageSource` | `src/flight/_internal/dom/TexImageSource.hx` | `dynamic-stub` | 5 |
+| `host:Text` | `host` | `flight._internal.dom.Text` | `src/flight/_internal/dom/Text.hx` | `dynamic-stub` | 2 |
+| `host:TextDecoder` | `host` | `flight._internal.dom.TextDecoder` | `src/flight/_internal/dom/TextDecoder.hx` | `dynamic-stub` | 16 |
+| `host:TextEncoder` | `host` | `flight._internal.dom.TextEncoder` | `src/flight/_internal/dom/TextEncoder.hx` | `typed` | 2 |
+| `host:TextMetrics` | `host` | `flight._internal.dom.TextMetrics` | `src/flight/_internal/dom/TextMetrics.hx` | `dynamic-stub` | 37 |
+| `host:Timeout` | `host` | `flight._internal.dom.Timeout` | `src/flight/_internal/dom/Timeout.hx` | `dynamic-stub` | 46 |
+| `host:URL` | `host` | `flight._internal.dom.URL` | `src/flight/_internal/dom/URL.hx` | `dynamic-stub` | 5 |
+| `host:URLSearchParams` | `host` | `flight._internal.dom.URLSearchParams` | `src/flight/_internal/dom/URLSearchParams.hx` | `dynamic-stub` | 3 |
+| `host:VideoFrame` | `host` | `flight._internal.dom.VideoFrame` | `src/flight/_internal/dom/VideoFrame.hx` | `dynamic-stub` | 43 |
+| `host:VisualViewport` | `host` | `flight._internal.dom.VisualViewport` | `src/flight/_internal/dom/VisualViewport.hx` | `dynamic-stub` | 8 |
+| `host:WakeLock` | `host` | `flight._internal.dom.WakeLock` | `src/flight/_internal/dom/WakeLock.hx` | `dynamic-stub` | 2 |
+| `host:WakeLockSentinel` | `host` | `flight._internal.dom.WakeLockSentinel` | `src/flight/_internal/dom/WakeLockSentinel.hx` | `dynamic-stub` | 4 |
+| `host:WEBGL_compressed_texture_astc` | `host` | `flight._internal.dom.WEBGL_compressed_texture_astc` | `src/flight/_internal/dom/WEBGL_compressed_texture_astc.hx` | `dynamic-stub` | 1 |
+| `host:WEBGL_compressed_texture_etc` | `host` | `flight._internal.dom.WEBGL_compressed_texture_etc` | `src/flight/_internal/dom/WEBGL_compressed_texture_etc.hx` | `dynamic-stub` | 1 |
+| `host:WEBGL_compressed_texture_pvrtc` | `host` | `flight._internal.dom.WEBGL_compressed_texture_pvrtc` | `src/flight/_internal/dom/WEBGL_compressed_texture_pvrtc.hx` | `dynamic-stub` | 1 |
+| `host:WEBGL_compressed_texture_s3tc` | `host` | `flight._internal.dom.WEBGL_compressed_texture_s3tc` | `src/flight/_internal/dom/WEBGL_compressed_texture_s3tc.hx` | `dynamic-stub` | 1 |
+| `host:WEBGL_compressed_texture_s3tc_srgb` | `host` | `flight._internal.dom.WEBGL_compressed_texture_s3tc_srgb` | `src/flight/_internal/dom/WEBGL_compressed_texture_s3tc_srgb.hx` | `dynamic-stub` | 1 |
+| `host:WEBGL_debug_renderer_info` | `host` | `flight._internal.dom.WEBGL_debug_renderer_info` | `src/flight/_internal/dom/WEBGL_debug_renderer_info.hx` | `dynamic-stub` | 4 |
+| `host:WebGL2RenderingContext` | `host` | `flight._internal.dom.WebGL2RenderingContext` | `src/flight/_internal/dom/WebGL2RenderingContext.hx` | `dynamic-stub` | 2811 |
+| `host:WebGLActiveInfo` | `host` | `flight._internal.dom.WebGLActiveInfo` | `src/flight/_internal/dom/WebGLActiveInfo.hx` | `dynamic-stub` | 8 |
+| `host:WebGLBuffer` | `host` | `flight._internal.dom.WebGLBuffer` | `src/flight/_internal/dom/WebGLBuffer.hx` | `dynamic-stub` | 55 |
+| `host:WebGLContextAttributes` | `host` | `flight._internal.dom.WebGLContextAttributes` | `src/flight/_internal/dom/WebGLContextAttributes.hx` | `dynamic-stub` | 5 |
+| `host:WebGLFramebuffer` | `host` | `flight._internal.dom.WebGLFramebuffer` | `src/flight/_internal/dom/WebGLFramebuffer.hx` | `dynamic-stub` | 40 |
+| `host:WebGLPowerPreference` | `host` | `flight._internal.dom.WebGLPowerPreference` | `src/flight/_internal/dom/WebGLPowerPreference.hx` | `dynamic-stub` | 1 |
+| `host:WebGLProgram` | `host` | `flight._internal.dom.WebGLProgram` | `src/flight/_internal/dom/WebGLProgram.hx` | `dynamic-stub` | 221 |
+| `host:WebGLRenderbuffer` | `host` | `flight._internal.dom.WebGLRenderbuffer` | `src/flight/_internal/dom/WebGLRenderbuffer.hx` | `dynamic-stub` | 6 |
+| `host:WebGLRenderingContext` | `host` | `flight._internal.dom.WebGLRenderingContext` | `src/flight/_internal/dom/WebGLRenderingContext.hx` | `dynamic-stub` | 10 |
+| `host:WebGLShader` | `host` | `flight._internal.dom.WebGLShader` | `src/flight/_internal/dom/WebGLShader.hx` | `dynamic-stub` | 3 |
+| `host:WebGLTexture` | `host` | `flight._internal.dom.WebGLTexture` | `src/flight/_internal/dom/WebGLTexture.hx` | `dynamic-stub` | 385 |
+| `host:WebGLUniformLocation` | `host` | `flight._internal.dom.WebGLUniformLocation` | `src/flight/_internal/dom/WebGLUniformLocation.hx` | `dynamic-stub` | 375 |
+| `host:WebGLVertexArrayObject` | `host` | `flight._internal.dom.WebGLVertexArrayObject` | `src/flight/_internal/dom/WebGLVertexArrayObject.hx` | `dynamic-stub` | 26 |
+| `host:WebSocket` | `host` | `flight._internal.dom.WebSocket` | `src/flight/_internal/dom/WebSocket.hx` | `dynamic-stub` | 9 |
+| `host:WheelEvent` | `host` | `flight._internal.dom.WheelEvent` | `src/flight/_internal/dom/WheelEvent.hx` | `dynamic-stub` | 9 |
+| `host:Window` | `host` | `flight._internal.dom.Window` | `src/flight/_internal/dom/Window.hx` | `dynamic-stub` | 126 |
+| `host:WritableStream` | `host` | `flight._internal.dom.WritableStream` | `src/flight/_internal/dom/WritableStream.hx` | `dynamic-stub` | 10 |
+| `host:WritableStreamDefaultWriter` | `host` | `flight._internal.dom.WritableStreamDefaultWriter` | `src/flight/_internal/dom/WritableStreamDefaultWriter.hx` | `dynamic-stub` | 4 |
 
 ## Ambient values
 
 | Key | Provider | Coverage | Uses |
 | --- | --- | --- | ---: |
-| `global:AbortController` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 9 |
-| `global:AbortSignal` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 3 |
-| `global:ArrayBuffer` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 13 |
-| `global:atob` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 4 |
-| `global:Audio` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 1 |
-| `global:AudioBuffer` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 1 |
-| `global:Blob` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 4 |
-| `global:btoa` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 1 |
-| `global:cancelAnimationFrame` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 2 |
-| `global:ClipboardItem` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 4 |
-| `global:console` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 6 |
-| `global:createImageBitmap` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 1 |
-| `global:crypto` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 3 |
-| `global:DataView` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 49 |
-| `global:Date` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 20 |
-| `global:decodeURIComponent` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 2 |
-| `global:DeviceMotionEvent` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 7 |
-| `global:document` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 24 |
-| `global:DOMException` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 13 |
-| `global:encodeURIComponent` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 2 |
-| `global:fetch` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 6 |
-| `global:File` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 1 |
-| `global:FileReader` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 4 |
-| `global:Float32Array` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 2 |
-| `global:FontFace` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 1 |
-| `global:getComputedStyle` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 1 |
-| `global:globalThis` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 8 |
-| `global:HTMLCanvasElement` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 6 |
-| `global:HTMLImageElement` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 4 |
-| `global:HTMLVideoElement` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 5 |
-| `global:Image` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 1 |
-| `global:ImageBitmap` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 3 |
-| `global:ImageData` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 1 |
-| `global:Intl` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 13 |
-| `global:isNaN` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 12 |
-| `global:KeyboardEvent` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 5 |
-| `global:localStorage` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 4 |
-| `global:location` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 8 |
-| `global:Map` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 335 |
-| `global:matchMedia` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 6 |
-| `global:MediaMetadata` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 2 |
-| `global:navigator` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 42 |
-| `global:Notification` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 19 |
-| `global:Number` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 756 |
-| `global:OffscreenCanvas` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 10 |
-| `global:parseFloat` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 84 |
-| `global:parseInt` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 39 |
-| `global:performance` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 9 |
-| `global:process` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 2 |
-| `global:Proxy` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 3 |
-| `global:RegExp` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 5 |
-| `global:requestAnimationFrame` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 3 |
-| `global:ResizeObserver` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 3 |
-| `global:screen` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 8 |
-| `global:Set` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 125 |
-| `global:setInterval` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 1 |
-| `global:SharedArrayBuffer` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 4 |
-| `global:structuredClone` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 3 |
-| `global:TextDecoder` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 8 |
-| `global:TextEncoder` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 1 |
-| `global:Uint32Array` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 1 |
-| `global:Uint8Array` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 5 |
-| `global:URL` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 7 |
-| `global:URLSearchParams` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 1 |
-| `global:VideoFrame` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 2 |
-| `global:WeakMap` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 200 |
-| `global:WeakSet` | `src/flighthq/_internal/_HostValueLut.hx` | `portable` | 13 |
-| `global:WebSocket` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 4 |
-| `global:WheelEvent` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 3 |
-| `global:window` | `src/flighthq/_internal/_HostValueLut.hx` | `js-only` | 53 |
+| `global:AbortController` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 9 |
+| `global:AbortSignal` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 3 |
+| `global:ArrayBuffer` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 13 |
+| `global:atob` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 4 |
+| `global:Audio` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 1 |
+| `global:AudioBuffer` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 1 |
+| `global:Blob` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 4 |
+| `global:btoa` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 1 |
+| `global:cancelAnimationFrame` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 2 |
+| `global:ClipboardItem` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 4 |
+| `global:console` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 6 |
+| `global:createImageBitmap` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 1 |
+| `global:crypto` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 3 |
+| `global:DataView` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 49 |
+| `global:Date` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 20 |
+| `global:decodeURIComponent` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 2 |
+| `global:DeviceMotionEvent` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 7 |
+| `global:document` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 24 |
+| `global:DOMException` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 13 |
+| `global:encodeURIComponent` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 2 |
+| `global:fetch` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 6 |
+| `global:File` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 1 |
+| `global:FileReader` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 4 |
+| `global:Float32Array` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 2 |
+| `global:FontFace` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 1 |
+| `global:getComputedStyle` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 1 |
+| `global:globalThis` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 8 |
+| `global:HTMLCanvasElement` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 6 |
+| `global:HTMLImageElement` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 4 |
+| `global:HTMLVideoElement` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 5 |
+| `global:Image` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 1 |
+| `global:ImageBitmap` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 3 |
+| `global:ImageData` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 1 |
+| `global:Intl` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 13 |
+| `global:isNaN` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 12 |
+| `global:KeyboardEvent` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 5 |
+| `global:localStorage` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 4 |
+| `global:location` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 8 |
+| `global:Map` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 335 |
+| `global:matchMedia` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 6 |
+| `global:MediaMetadata` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 2 |
+| `global:navigator` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 42 |
+| `global:Notification` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 19 |
+| `global:Number` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 756 |
+| `global:OffscreenCanvas` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 10 |
+| `global:parseFloat` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 84 |
+| `global:parseInt` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 39 |
+| `global:performance` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 9 |
+| `global:process` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 2 |
+| `global:Proxy` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 3 |
+| `global:RegExp` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 5 |
+| `global:requestAnimationFrame` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 3 |
+| `global:ResizeObserver` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 3 |
+| `global:screen` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 8 |
+| `global:Set` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 125 |
+| `global:setInterval` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 1 |
+| `global:SharedArrayBuffer` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 4 |
+| `global:structuredClone` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 3 |
+| `global:TextDecoder` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 8 |
+| `global:TextEncoder` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 1 |
+| `global:Uint32Array` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 1 |
+| `global:Uint8Array` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 5 |
+| `global:URL` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 7 |
+| `global:URLSearchParams` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 1 |
+| `global:VideoFrame` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 2 |
+| `global:WeakMap` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 200 |
+| `global:WeakSet` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 13 |
+| `global:WebSocket` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 4 |
+| `global:WheelEvent` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 3 |
+| `global:window` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 53 |
 
 ## External module values
 

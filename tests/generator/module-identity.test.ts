@@ -43,9 +43,9 @@ describe('generated Haxe module identities', () => {
     );
 
     expect(modules).toHaveLength(2);
-    expect(modules[0]?.imports).toEqual(['flighthq.example._internal._ReaderValues.LIMIT__reader']);
+    expect(modules[0]?.imports).toEqual(['flight._internal._ReaderValues.LIMIT__reader']);
     expect(modules[1]).toMatchObject({
-      haxePackage: 'flighthq.example._internal',
+      haxePackage: 'flight._internal',
       name: '_ReaderValues',
     });
   });
@@ -54,7 +54,7 @@ describe('generated Haxe module identities', () => {
     const modules: IrModule[] = [
       {
         declarations: [],
-        haxePackage: 'flighthq.geometry',
+        haxePackage: 'flight.geometry',
         imports: [],
         name: 'Vector2',
         packageName: '@flighthq/geometry',
@@ -78,7 +78,7 @@ describe('generated Haxe module identities', () => {
             typeParameters: [],
           },
         ],
-        haxePackage: 'flighthq.hostElectron',
+        haxePackage: 'flight.hostElectron',
         imports: [],
         name: 'ElectronModule',
         packageName: '@flighthq/host-electron',
@@ -97,7 +97,7 @@ describe('generated Haxe module identities', () => {
             typeParameters: [],
           },
         ],
-        haxePackage: 'flighthq.hostElectron',
+        haxePackage: 'flight.hostElectron',
         imports: [],
         name: 'ElectronApp',
         packageName: '@flighthq/host-electron',
@@ -121,7 +121,7 @@ describe('generated Haxe module identities', () => {
             typeParameters: [],
           },
         ],
-        haxePackage: 'flighthq.hostElectron',
+        haxePackage: 'flight.hostElectron',
         imports: [],
         name: 'ElectronModule',
         packageName: '@flighthq/host-electron',
@@ -138,7 +138,7 @@ describe('generated Haxe module identities', () => {
             typeParameters: [],
           },
         ],
-        haxePackage: 'flighthq.hostElectron',
+        haxePackage: 'flight.hostElectron',
         imports: [],
         name: 'Other',
         packageName: '@flighthq/host-electron',
@@ -147,7 +147,7 @@ describe('generated Haxe module identities', () => {
     ];
 
     expect(() => validateHaxeModuleIdentities(modules)).toThrowError(
-      /flighthq\.hostElectron\.ElectronApp:.*electronModule\.ts.*other\.ts/isu,
+      /flight\.hostElectron\.ElectronApp:.*electronModule\.ts.*other\.ts/isu,
     );
   });
 });

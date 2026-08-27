@@ -2,10 +2,10 @@
 import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from './wgpuEffectPass.mjs';
 
-const api = compiled.flighthq.effectsWgpu.WgpuColorLutPass;
+const api = compiled.flight._EffectsWgpu;
 function __syncDependencies() {
-  compiled.flighthq.effectsWgpu.WgpuEffectPass.EFFECT_VERTEX_WGSL = __dependency0.EFFECT_VERTEX_WGSL;
-  compiled.flighthq.effectsWgpu.WgpuEffectPass.getWgpuEffectPassState = __dependency0.getWgpuEffectPassState;
+  compiled.flight._EffectsWgpu.EFFECT_VERTEX_WGSL = __dependency0.EFFECT_VERTEX_WGSL;
+  compiled.flight._EffectsWgpu.getWgpuEffectPassState = __dependency0.getWgpuEffectPassState;
 }
 __syncDependencies();
 

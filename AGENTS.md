@@ -41,7 +41,7 @@ Flight is intentionally optimized for globally searchable, free-function APIs. T
 - Preserve explicit `out` parameters, aliasing guarantees, sentinel returns, allocation vocabulary, and side-effect boundaries.
 - Prefer a boring, grepable one-to-one mapping over a clever transformation.
 
-The public namespace is addressed by Flight intent rather than upstream file layout: an npm package such as `@flighthq/render-gl` maps its free functions and values to the `flighthq.renderGl.RenderGl` package facade, while every exported `@flighthq/types` declaration owns `flighthq.types.<TypeName>`. Source-derived function modules remain completion-hidden implementation/provenance owners for generated bridges, not the steered consumer API. See [`agents/architecture.md`](agents/architecture.md) for placement, visibility, and collision validation.
+The public namespace is addressed by Flight intent rather than upstream file layout: an npm package such as `@flighthq/render-gl` maps its free functions and values to the `flight.RenderGl` facade, backed by one completion-hidden `flight._RenderGl` implementation module, while every exported `@flighthq/types` declaration owns `flight.types.<TypeName>`. Declarations retain source provenance for generated bridges and diagnostics without exposing the upstream file topology. See [`agents/architecture.md`](agents/architecture.md) for placement, visibility, and collision validation.
 
 ## Translation Discipline
 
@@ -60,7 +60,7 @@ The intended source-of-truth split is:
 
 - `upstream/`: read-only Flight TypeScript input.
 - `tools/generator/`: TypeScript analyzer, intermediate model, transforms, emitter, semantic patches, and generator templates.
-- `src/`: maintained publishable Haxe, including `flighthq._internal` runtime types and conditional host adapters.
+- `src/`: maintained publishable Haxe, including `flight._internal` runtime types and conditional host adapters.
 - `generated/`: disposable publishable Haxe produced by generation.
 - `tests/`: generator, Haxe, portability, and bridge tests.
 - `build/`: ignored transient compiler and test output.

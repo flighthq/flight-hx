@@ -1,15 +1,15 @@
 package;
 
-@:access(flighthq.particleemitter.ParticleEmitter)
-@:access(flighthq.particles.ParticleEmitterState)
+@:access(flight._ParticleEmitter)
+@:access(flight._Particles)
 class TypedStructParticleClassSmoke {
   static function main():Void {
     run();
   }
 
   public static function run():Void {
-    final transforms = new flighthq._internal._Float32Array([1, 2, 3, 4]);
-    final data = flighthq.particleemitter.ParticleEmitter.createParticleEmitterData({
+    final transforms = new flight._internal._Float32Array([1, 2, 3, 4]);
+    final data = flight._ParticleEmitter.createParticleEmitterData({
       particleCount: 1,
       transforms: transforms,
       worldSpace: true,
@@ -24,14 +24,14 @@ class TypedStructParticleClassSmoke {
     data.particleCount = 2;
     if (dataAlias.particleCount != 2) throw 'ParticleEmitterData lost mutation identity';
 
-    final random = flighthq.math.Random.createRandomSource(123);
-    final state = flighthq.particles.ParticleEmitterState.createParticleEmitterState(random);
+    final random = flight.Math.createRandomSource(123);
+    final state = flight._Particles.createParticleEmitterState(random);
     final stateAlias = state;
     if (state.random != random || state.lifetimes.length != 0 || state.velocities.length != 0) {
       throw 'ParticleEmitterState construction lost supplied values or empty defaults';
     }
     state.emitterAge = 4;
-    flighthq.particles.ParticleEmitterState.ensureParticleEmitterStateCapacity(state, 2, true);
+    flight._Particles.ensureParticleEmitterStateCapacity(state, 2, true);
     if (stateAlias.emitterAge != 4 || stateAlias.lifetimes.length < 4 || stateAlias.velocities.length < 6) {
       throw 'ParticleEmitterState lost mutation identity or capacity';
     }
@@ -43,7 +43,7 @@ class TypedStructParticleClassSmoke {
     }
 
     #if cpp
-    if (!Std.isOfType(state, flighthq.types.ParticleEmitterState)) {
+    if (!Std.isOfType(state, flight.types.ParticleEmitterState)) {
       throw 'ParticleEmitterState retained Gate 4 class did not construct an instance';
     }
     #end

@@ -4,13 +4,13 @@ import * as __dependency0 from '@flighthq/render-gl/contract';
 import * as __dependency1 from './glBlurEffect.mjs';
 import * as __dependency2 from './glEffectProgramCache.mjs';
 
-const api = compiled.flighthq.effectsGl.GlLensDirtEffect;
+const api = compiled.flight._EffectsGl;
 function __syncDependencies() {
-  compiled.flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget = __dependency0.acquireGlRenderTarget;
-  compiled.flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass = __dependency0.drawGlFullscreenPass;
-  compiled.flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget = __dependency0.releaseGlRenderTarget;
-  compiled.flighthq.effectsGl.GlBlurEffect.applyGaussianBlurToGl = __dependency1.applyGaussianBlurToGl;
-  compiled.flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram = __dependency2.getGlEffectProgram;
+  compiled.flight._RenderGl.acquireGlRenderTarget = __dependency0.acquireGlRenderTarget;
+  compiled.flight._RenderGl.drawGlFullscreenPass = __dependency0.drawGlFullscreenPass;
+  compiled.flight._RenderGl.releaseGlRenderTarget = __dependency0.releaseGlRenderTarget;
+  compiled.flight._EffectsGl.applyGaussianBlurToGl = __dependency1.applyGaussianBlurToGl;
+  compiled.flight._EffectsGl.getGlEffectProgram = __dependency2.getGlEffectProgram;
 }
 __syncDependencies();
 

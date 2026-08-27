@@ -1,5 +1,5 @@
 // Line-by-line Haxe/Lime port of the upstream `sound` example (`app.ts`), written directly against
-// the generated Flight Haxe surface (`flighthq.*`). It is a standalone `lime.app.Application`: the
+// the generated Flight Haxe surface (`flight.*`). It is a standalone `lime.app.Application`: the
 // browser `./render` module and `requestAnimationFrame` loop are replaced by Lime's window/render
 // lifecycle, and the Flight app backend is wired with `App.setAppBackend(createLimeAppBackend(this))`.
 //
@@ -9,15 +9,15 @@
 // (2) the DOM pointer source (`createInputManager`/`attachPointerInput`/`connectInputToInteraction`)
 // is replaced by Lime's `onMouseDown`/`onMouseMove`/`onMouseUp`, which dispatch straight into the
 // Flight interaction manager. Every other statement is translated faithfully.
-import flighthq.app.App;
-import flighthq.hostLime.LimeApp;
-import flighthq.sdk.Sdk.*;
-import flighthq._internal._Float32Array;
-import flighthq.types.AudioBus;
-import flighthq.types.AudioResource;
-import flighthq.types.DisplayObject;
-import flighthq.types.Shape;
-import flighthq.types.TextLabel;
+import flight.App;
+import flight.hostLime.LimeApp;
+import flight.Sdk.*;
+import flight._internal._Float32Array;
+import flight.types.AudioBus;
+import flight.types.AudioResource;
+import flight.types.DisplayObject;
+import flight.types.Shape;
+import flight.types.TextLabel;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.KeyCode;
@@ -139,7 +139,7 @@ class Main extends Application {
       // `new AudioContext()` is browser-only; the hostLime backend supplies the same protocol over
       // Lime audio output, so the SDK audio call sites (createAudioMixer/playAudioResource) stay
       // identical.
-      audioContext = flighthq.hostLime.LimeAudio.createLimeAudioContext();
+      audioContext = flight.hostLime.LimeAudio.createLimeAudioContext();
     }
     return audioContext;
   }
@@ -177,7 +177,7 @@ class Main extends Application {
     scale = window.scale;
     var canvasAdapter:Dynamic = null;
     if (usingCairo) {
-      final canvas = flighthq.scene2dCairo.Scene2dCairo.createCairoSurface(window);
+      final canvas = flight.Scene2DCairo.createCairoSurface(window);
       canvasAdapter = canvas;
       renderState = createCanvasRenderState(canvas, {
         pixelRatio: window.scale,
@@ -191,7 +191,7 @@ class Main extends Application {
       registerCanvasBitmapTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
       enableCanvasBlendMode(renderState);
     } else {
-      final canvas = flighthq.hostLime.GlSurface.createGlSurface(window);
+      final canvas = flight.hostLime.GlSurface.createGlSurface(window);
       canvasAdapter = canvas;
       renderState = createGlRenderState(canvas, {
         pixelRatio: window.scale,
@@ -230,7 +230,7 @@ class Main extends Application {
     registerDefaultHitTests();
     final canvasElement = canvasAdapter;
     interactionManager = createInteractionManager(root, {
-      cursorBackend: flighthq.hostLime.LimeCursor.createLimeCursorBackend(window),
+      cursorBackend: flight.hostLime.LimeCursor.createLimeCursorBackend(window),
     });
     // Upstream feeds the manager from a DOM pointer source (createInputManager/attachPointerInput/
     // connectInputToInteraction). Lime's onMouseDown/onMouseMove/onMouseUp dispatch into the manager

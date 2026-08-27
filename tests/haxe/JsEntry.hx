@@ -1,11 +1,11 @@
 package;
 
-@:access(flighthq.entity.Guards)
+@:access(flight._Entity)
 class JsEntry {
   static function main():Void {
-    final math = flighthq.math.Math.EPSILON;
-    final entity = flighthq.entity.Guards.areEntityRuntimeGuardsEnabled;
-    final geometry = flighthq.geometry.Geometry.createVector2;
-    final signals = flighthq.signals.Signals.createSignal;
+    final math = flight.Math.EPSILON;
+    final entity = flight._Entity.areEntityRuntimeGuardsEnabled;
+    final geometry = flight.Geometry.createVector2;
+    final signals = flight.Signals.createSignal;
   }
 }

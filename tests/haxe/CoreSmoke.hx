@@ -1,45 +1,45 @@
 package;
 
-import flighthq.math.Math.*;
-import flighthq.types.Vector2Like;
-import flighthq._internal._Async;
-import flighthq._internal._HostValueLut;
-import flighthq._internal._Runtime;
-import flighthq._internal.DynamicObject;
+import flight.Math.*;
+import flight.types.Vector2Like;
+import flight._internal._Async;
+import flight._internal._HostValueLut;
+import flight._internal._Runtime;
+import flight._internal.DynamicObject;
 
-@:access(flighthq.entity.Entity)
+@:access(flight._Entity)
 class CoreSmoke {
   static function main():Void {
     // Number.isSafeInteger through the exact emitted form (callProperty on the
     // LUT Number namespace): physics2d timestep validation depends on it.
-    final numberNamespace:Dynamic = flighthq._internal._HostValueLut.get('Number');
-    if (flighthq._internal._Runtime.callProperty(numberNamespace, 'isSafeInteger', cast ([8.0] : Array<Dynamic>)) != true) {
+    final numberNamespace:Dynamic = flight._internal._HostValueLut.get('Number');
+    if (flight._internal._Runtime.callProperty(numberNamespace, 'isSafeInteger', cast ([8.0] : Array<Dynamic>)) != true) {
       throw 'Number.isSafeInteger(8) should be true';
     }
-    if (flighthq._internal._Runtime.callProperty(numberNamespace, 'isSafeInteger', cast ([1.5] : Array<Dynamic>)) != false) {
+    if (flight._internal._Runtime.callProperty(numberNamespace, 'isSafeInteger', cast ([1.5] : Array<Dynamic>)) != false) {
       throw 'Number.isSafeInteger(1.5) should be false';
     }
-    if (flighthq._internal._Runtime.callProperty(numberNamespace, 'isSafeInteger', cast ([9007199254740992.0] : Array<Dynamic>)) != false) {
+    if (flight._internal._Runtime.callProperty(numberNamespace, 'isSafeInteger', cast ([9007199254740992.0] : Array<Dynamic>)) != false) {
       throw 'Number.isSafeInteger(2^53) should be false';
     }
 
     // Cairo alias surface: the derived Cairo-named entry points and typedefs
     // must forward to the canvas originals with reference identity.
-    final cairoResolvers:flighthq.types.CairoTextureResolvers = flighthq.scene2dCairo.Scene2dCairo.createCairoTextureResolvers();
+    final cairoResolvers:flight.types.CairoTextureResolvers = flight.Scene2DCairo.createCairoTextureResolvers();
     final canvasResolvers:Dynamic = cairoResolvers;
     if (canvasResolvers == null) throw 'cairo alias returned null resolvers';
-    if (flighthq.scene2dCairo.Scene2dCairo.defaultCairoShapeCommands != flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasShapeCommands) {
+    if (flight.Scene2DCairo.defaultCairoShapeCommands != flight.Scene2DCanvas.defaultCanvasShapeCommands) {
       throw 'cairo alias lost reference identity';
     }
-    final shapeCommandRegistrarTypecheck:flighthq.types.RenderState->Void = typecheckShapeCommandRegistrars;
+    final shapeCommandRegistrarTypecheck:flight.types.RenderState->Void = typecheckShapeCommandRegistrars;
     if (shapeCommandRegistrarTypecheck == null) throw 'shape command registrar typecheck failed';
-    final typedProtocolObjectTypecheck:flighthq.types.TweenManager->flighthq.types.Shape->flighthq._internal.dom.AudioContext->flighthq.types.AudioResource->Void = typecheckTypedProtocolObjects;
+    final typedProtocolObjectTypecheck:flight.types.TweenManager->flight.types.Shape->flight._internal.dom.AudioContext->flight.types.AudioResource->Void = typecheckTypedProtocolObjects;
     if (typedProtocolObjectTypecheck == null) throw 'typed protocol object typecheck failed';
-    final physicsSolverTypecheck:flighthq.types.Physics2DWorld->Void = typecheckPhysicsSolverArity;
+    final physicsSolverTypecheck:flight.types.Physics2DWorld->Void = typecheckPhysicsSolverArity;
     if (physicsSolverTypecheck == null) throw 'physics solver arity typecheck failed';
     #if lime
-    final glSurfaceTypecheck:lime.ui.Window->flighthq._internal.dom.HTMLCanvasElement = flighthq.sdk.Sdk.createGlSurface;
-    final cairoSurfaceTypecheck:lime.ui.Window->flighthq._internal.dom.HTMLCanvasElement = flighthq.sdk.Sdk.createCairoSurface;
+    final glSurfaceTypecheck:lime.ui.Window->flight._internal.dom.HTMLCanvasElement = flight.Sdk.createGlSurface;
+    final cairoSurfaceTypecheck:lime.ui.Window->flight._internal.dom.HTMLCanvasElement = flight.Sdk.createCairoSurface;
     if (glSurfaceTypecheck == null || cairoSurfaceTypecheck == null) throw 'SDK host surface typecheck failed';
     #end
     if (clamp(12, 0, 10) != 10) throw 'clamp failed';
@@ -106,13 +106,13 @@ class CoreSmoke {
     if (point.x * point.x + point.y * point.y > 1) throw 'random point escaped unit disc';
     FmodSmoke.run();
 
-    final vector = flighthq.geometry.Geometry.createVector2(3, 4);
-    if (flighthq.geometry.Geometry.getVector2Length(vector) != 5) throw 'geometry failed';
-    final sdkVector = flighthq.sdk.Sdk.createVector2(6, 8);
-    if (flighthq.sdk.Sdk.getVector2Length(sdkVector) != 10) throw 'sdk facade failed';
-    final mutableVector = flighthq.geometry.Geometry.createVector3(1, 2, 3);
+    final vector = flight.Geometry.createVector2(3, 4);
+    if (flight.Geometry.getVector2Length(vector) != 5) throw 'geometry failed';
+    final sdkVector = flight.Sdk.createVector2(6, 8);
+    if (flight.Sdk.getVector2Length(sdkVector) != 10) throw 'sdk facade failed';
+    final mutableVector = flight.Geometry.createVector3(1, 2, 3);
     final vectorAlias = mutableVector;
-    flighthq.geometry.Geometry.setVector3(mutableVector, 4, 5, 6);
+    flight.Geometry.setVector3(mutableVector, 4, 5, 6);
     if (vectorAlias.x != 4 || vectorAlias.y != 5 || vectorAlias.z != 6) {
       throw 'typed struct out parameter lost alias identity';
     }
@@ -122,32 +122,32 @@ class CoreSmoke {
     TypedStructParticleClassSmoke.run();
     RuntimeToolkitSmoke.run();
 
-    final box = flighthq.mesh.Mesh.createBoxMeshGeometry(2, 4, 6);
+    final box = flight.Mesh.createBoxMeshGeometry(2, 4, 6);
     if (box.bounds == null || box.bounds.min.x != -1 || box.bounds.max.y != 2 || box.bounds.max.z != 3) {
       throw 'mesh bounds failed';
     }
-    final entity = flighthq.entity.Entity.createEntity({value: 1});
+    final entity = flight._Entity.createEntity({value: 1});
     if (entity.value != 1) throw 'entity failed';
-    final signal:flighthq.types.Signal<Void->Void> = flighthq.signals.Signals.createSignal();
+    final signal:flight.types.Signal<Void->Void> = flight.Signals.createSignal();
     var emitted = false;
-    flighthq.signals.Signals.connectSignal(signal, function() emitted = true);
-    flighthq.signals.Signals.emitSignal(signal);
+    flight.Signals.connectSignal(signal, function() emitted = true);
+    flight.Signals.emitSignal(signal);
     if (!emitted) throw 'signals failed';
-    final valueSignal:flighthq.types.Signal<Float->Void> = flighthq.signals.Signals.createSignal();
+    final valueSignal:flight.types.Signal<Float->Void> = flight.Signals.createSignal();
     var emittedValue = 0.0;
-    flighthq.signals.Signals.connectSignal(valueSignal, function(value:Float) emittedValue = value);
-    flighthq.signals.Signals.emitSignal(valueSignal, 4.5);
+    flight.Signals.connectSignal(valueSignal, function(value:Float) emittedValue = value);
+    flight.Signals.emitSignal(valueSignal, 4.5);
     if (emittedValue != 4.5) throw 'signal arguments failed';
-    final tupleSignal:flighthq.types.Signal<Float->Float->Float->Void> = flighthq.signals.Signals.createSignal();
+    final tupleSignal:flight.types.Signal<Float->Float->Float->Void> = flight.Signals.createSignal();
     var emittedTuple = '';
-    flighthq.signals.Signals.connectSignal(tupleSignal, function(a:Float, b:Float, c:Float) {
+    flight.Signals.connectSignal(tupleSignal, function(a:Float, b:Float, c:Float) {
       emittedTuple = '$a,$b,$c';
     });
-    flighthq.signals.Signals.emitSignal(tupleSignal, 1, 2, 4);
+    flight.Signals.emitSignal(tupleSignal, 1, 2, 4);
     if (emittedTuple != '1,2,4') throw 'signal rest arguments failed';
 
     final tweenTarget:{var x:Float;} = {x: 0.0};
-    final tween = flighthq.tween.Tween.makeTween__tween(
+    final tween = flight._Tween.makeTween__tween(
       tweenTarget,
       1.0,
       cast {x: 2.0},
@@ -164,17 +164,17 @@ class CoreSmoke {
     );
     if (dynamicMapped.join(',') != 'ONE,TWO') throw 'dynamic Array map callback ABI failed';
 
-    final cursorTokens:Array<flighthq.types.ShapeCommandToken> = cast (
+    final cursorTokens:Array<flight.types.ShapeCommandToken> = cast (
       ['moveTo', 2.0, 10.0, 20.0] : Array<Dynamic>
     );
-    final cursorRuntime = new flighthq._internal.ShapeCommandArgumentCursorRuntime(cursorTokens);
-    flighthq.shape.ShapeBounds.setShapeCommandArgumentCursor__shapeBounds(cast cursorRuntime, 2.0, 2.0);
-    final publicCursor:flighthq.types.ShapeCommandArgumentCursor = cast cursorRuntime;
+    final cursorRuntime = new flight._internal.ShapeCommandArgumentCursorRuntime(cursorTokens);
+    flight._Shape.setShapeCommandArgumentCursor__shapeBounds(cast cursorRuntime, 2.0, 2.0);
+    final publicCursor:flight.types.ShapeCommandArgumentCursor = cast cursorRuntime;
     if (publicCursor.length != 2.0 || publicCursor.getArgument(0.0) != 10.0 || publicCursor.getArgument(2.0) != null) {
       throw 'shape command cursor lost its portable derived length or indexed arguments';
     }
 
-    final circleCommands:Array<flighthq.types.ShapeCommandToken> = cast (
+    final circleCommands:Array<flight.types.ShapeCommandToken> = cast (
       [
         'beginFill',
         2.0,
@@ -189,11 +189,11 @@ class CoreSmoke {
         0.0,
       ] : Array<Dynamic>
     );
-    final circleRegions = flighthq.shape.ShapeFill.getShapeFillRegions(circleCommands);
+    final circleRegions = flight.Shape.getShapeFillRegions(circleCommands);
     if (circleRegions == null || circleRegions.length != 1) {
       throw 'circle shape fill command walker failed';
     }
-    final defaultToleranceMesh = flighthq.path.TessellatePath.tessellatePath(
+    final defaultToleranceMesh = flight.Path.tessellatePath(
       circleRegions[0].path,
       #if js
       cast _Runtime.field(_Runtime, 'UNDEFINED')
@@ -206,27 +206,27 @@ class CoreSmoke {
     }
 
     final missingAlpha:Array<Dynamic> = [{}];
-    if (flighthq.particlesFormats.SpineParse.firstAlpha__spineParse(missingAlpha) != 1) {
+    if (flight._ParticlesFormats.firstAlpha__spineParse(missingAlpha) != 1) {
       throw 'nullish Float assertion bypassed the upstream alpha fallback';
     }
 
-    final booleanCircle = flighthq.path.Path.createPath();
-    flighthq.path.Path.appendPathCircle(booleanCircle, 160, 150, 80);
-    final booleanRoundRectangle = flighthq.path.Path.createPath();
-    flighthq.path.Path.appendPathRoundRectangle(booleanRoundRectangle, 170, 90, 140, 120, cast 16);
-    final booleanUnion = flighthq.pathBoolean.BooleanPaths.unionPaths(booleanCircle, booleanRoundRectangle);
+    final booleanCircle = flight.Path.createPath();
+    flight.Path.appendPathCircle(booleanCircle, 160, 150, 80);
+    final booleanRoundRectangle = flight.Path.createPath();
+    flight.Path.appendPathRoundRectangle(booleanRoundRectangle, 170, 90, 140, 120, cast 16);
+    final booleanUnion = flight.PathBoolean.unionPaths(booleanCircle, booleanRoundRectangle);
     if (booleanUnion.commands.length == 0 || booleanUnion.data.length == 0) {
       throw 'Martinez path boolean returned an empty union';
     }
 
-    final endFillState:flighthq.types.CanvasShapeDrawState = cast {
+    final endFillState:flight.types.CanvasShapeDrawState = cast {
       bitmapSrc: null,
       fillMatrix: null,
       fillMatrixInverse: null,
       hasFill: true,
       hasPendingPath: false,
     };
-    flighthq.scene2dCanvas.CanvasShapeCommands.defaultCanvasEndFill.draw(
+    flight.Scene2DCanvas.defaultCanvasEndFill.draw(
       cast null,
       endFillState,
       cast [],
@@ -236,17 +236,17 @@ class CoreSmoke {
 
     #if !js
     final decoder = _Runtime.construct(_HostValueLut.get('TextDecoder'), []);
-    final decoded = _Runtime.callProperty(decoder, 'decode', [new flighthq._internal._UInt8Array([104, 105])]);
+    final decoded = _Runtime.callProperty(decoder, 'decode', [new flight._internal._UInt8Array([104, 105])]);
     if (decoded != 'hi') throw 'portable TextDecoder failed';
 
     final buffer = _Runtime.construct(_HostValueLut.get('ArrayBuffer'), [4]);
     final view = _Runtime.construct(_HostValueLut.get('DataView'), [buffer]);
-    final bytes = new flighthq._internal._UInt8Array(_Runtime.field(view, 'buffer'));
+    final bytes = new flight._internal._UInt8Array(_Runtime.field(view, 'buffer'));
     _Runtime.callProperty(view, 'setUint32', [0, 0x01020304, true]);
-    if (flighthq._internal._StaticIndex.readUint8Array(bytes, 0) != 4) {
+    if (flight._internal._StaticIndex.readUint8Array(bytes, 0) != 4) {
       throw 'portable ArrayBuffer DataView-to-typed-array sharing failed';
     }
-    flighthq._internal._StaticIndex.writeUint8Array(bytes, 3, 8);
+    flight._internal._StaticIndex.writeUint8Array(bytes, 3, 8);
     if (_Runtime.callProperty(view, 'getUint32', [0, true]) != 0x08020304) {
       throw 'portable ArrayBuffer typed-array-to-DataView sharing failed';
     }
@@ -273,41 +273,41 @@ class CoreSmoke {
     return result;
   }
 
-  static function typecheckShapeCommandRegistrars(state:flighthq.types.RenderState):Void {
-    flighthq.scene2dCanvas.Scene2dCanvas.registerCanvasShapeCommands(state, flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasShapeCommands);
-    flighthq.scene2dCanvas.Scene2dCanvas.registerCanvasShapeCommands(state, flighthq.scene2dCanvas.Scene2dCanvas.defaultCanvasTextureShapeCommands);
-    flighthq.scene2dGl.Scene2dGl.registerGlShapeCommands(state, flighthq.scene2dGl.Scene2dGl.defaultGlShapeCommands);
-    flighthq.scene2dGl.Scene2dGl.registerGlShapeCommands(state, flighthq.scene2dGl.Scene2dGl.defaultGlTextureShapeCommands);
-    flighthq.scene2dWgpu.Scene2dWgpu.registerWgpuShapeCommands(state, flighthq.scene2dWgpu.Scene2dWgpu.defaultWgpuShapeCommands);
-    flighthq.scene2dWgpu.Scene2dWgpu.registerWgpuShapeCommands(state, flighthq.scene2dWgpu.Scene2dWgpu.defaultWgpuTextureShapeCommands);
-    flighthq.scene2dCairo.Scene2dCairo.registerCairoShapeCommands(state, flighthq.scene2dCairo.Scene2dCairo.defaultCairoShapeCommands);
-    flighthq.scene2dCairo.Scene2dCairo.registerCairoShapeCommands(state, flighthq.scene2dCairo.Scene2dCairo.defaultCairoTextureShapeCommands);
-    flighthq.sdk.Sdk.registerCanvasShapeCommands(state, flighthq.sdk.Sdk.defaultCanvasShapeCommands);
-    flighthq.sdk.Sdk.registerGlShapeCommands(state, flighthq.sdk.Sdk.defaultGlShapeCommands);
-    flighthq.sdk.Sdk.registerWgpuShapeCommands(state, flighthq.sdk.Sdk.defaultWgpuShapeCommands);
+  static function typecheckShapeCommandRegistrars(state:flight.types.RenderState):Void {
+    flight.Scene2DCanvas.registerCanvasShapeCommands(state, flight.Scene2DCanvas.defaultCanvasShapeCommands);
+    flight.Scene2DCanvas.registerCanvasShapeCommands(state, flight.Scene2DCanvas.defaultCanvasTextureShapeCommands);
+    flight.Scene2DGl.registerGlShapeCommands(state, flight.Scene2DGl.defaultGlShapeCommands);
+    flight.Scene2DGl.registerGlShapeCommands(state, flight.Scene2DGl.defaultGlTextureShapeCommands);
+    flight.Scene2DWgpu.registerWgpuShapeCommands(state, flight.Scene2DWgpu.defaultWgpuShapeCommands);
+    flight.Scene2DWgpu.registerWgpuShapeCommands(state, flight.Scene2DWgpu.defaultWgpuTextureShapeCommands);
+    flight.Scene2DCairo.registerCairoShapeCommands(state, flight.Scene2DCairo.defaultCairoShapeCommands);
+    flight.Scene2DCairo.registerCairoShapeCommands(state, flight.Scene2DCairo.defaultCairoTextureShapeCommands);
+    flight.Sdk.registerCanvasShapeCommands(state, flight.Sdk.defaultCanvasShapeCommands);
+    flight.Sdk.registerGlShapeCommands(state, flight.Sdk.defaultGlShapeCommands);
+    flight.Sdk.registerWgpuShapeCommands(state, flight.Sdk.defaultWgpuShapeCommands);
   }
 
   static function typecheckTypedProtocolObjects(
-    manager:flighthq.types.TweenManager,
-    shape:flighthq.types.Shape,
-    context:flighthq._internal.dom.AudioContext,
-    audio:flighthq.types.AudioResource,
+    manager:flight.types.TweenManager,
+    shape:flight.types.Shape,
+    context:flight._internal.dom.AudioContext,
+    audio:flight.types.AudioResource,
   ):Void {
-    flighthq.tween.Tween.createTween(manager, shape, 1.0, {x: 2.0, y: 3.0});
-    flighthq.sdk.Sdk.createTween(manager, shape, 1.0, {x: 2.0, y: 3.0});
-    flighthq.sdk.Sdk.playAudioResource(context, audio, {gain: 1});
+    flight.Tween.createTween(manager, shape, 1.0, {x: 2.0, y: 3.0});
+    flight.Sdk.createTween(manager, shape, 1.0, {x: 2.0, y: 3.0});
+    flight.Sdk.playAudioResource(context, audio, {gain: 1});
   }
 
-  static function typecheckPhysicsSolverArity(world:flighthq.types.Physics2DWorld):Void {
-    flighthq.physics2d.JointRegistry.registerPhysics2DJointSolver(
+  static function typecheckPhysicsSolverArity(world:flight.types.Physics2DWorld):Void {
+    flight.Physics2D.registerPhysics2DJointSolver(
       world,
-      flighthq.physics2d.Joints.Physics2DMouseJointKind,
-      flighthq.physics2d.Joints.physics2DMouseJointSolver,
+      flight.Physics2D.Physics2DMouseJointKind,
+      flight.Physics2D.physics2DMouseJointSolver,
     );
-    flighthq.sdk.Sdk.registerPhysics2DJointSolver(
+    flight.Sdk.registerPhysics2DJointSolver(
       world,
-      flighthq.sdk.Sdk.Physics2DWheelJointKind,
-      flighthq.sdk.Sdk.physics2DWheelJointSolver,
+      flight.Sdk.Physics2DWheelJointKind,
+      flight.Sdk.physics2DWheelJointSolver,
     );
   }
 }

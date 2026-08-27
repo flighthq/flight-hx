@@ -94,10 +94,10 @@ const typedArraySetReceiverNames = [
 
 const collectionBindingTypes = {
   ArrayCollection: 'Array<Dynamic>',
-  MapCollection: 'flighthq._internal._Map<Dynamic, Dynamic>',
-  SetCollection: 'flighthq._internal._Set<Dynamic>',
-  WeakMapCollection: 'flighthq._internal._WeakMap<Dynamic, Dynamic>',
-  WeakSetCollection: 'flighthq._internal._WeakSet<Dynamic>',
+  MapCollection: 'flight._internal._Map<Dynamic, Dynamic>',
+  SetCollection: 'flight._internal._Set<Dynamic>',
+  WeakMapCollection: 'flight._internal._WeakMap<Dynamic, Dynamic>',
+  WeakSetCollection: 'flight._internal._WeakSet<Dynamic>',
 } as const;
 
 function collectionReceiverType(expression: Extract<IrExpression, { kind: 'property' }>): string {
@@ -112,19 +112,19 @@ function collectionReceiverType(expression: Extract<IrExpression, { kind: 'prope
 }
 
 const typedArrayBindingTypes = {
-  Float32Array: 'flighthq._internal._Float32Array',
-  Float64Array: 'flighthq._internal._Float64Array',
-  Int16Array: 'flighthq._internal._Int16Array',
-  Int32Array: 'flighthq._internal._Int32Array',
-  Int8Array: 'flighthq._internal._Int8Array',
-  Uint16Array: 'flighthq._internal._UInt16Array',
-  Uint32Array: 'flighthq._internal._UInt32Array',
-  Uint8Array: 'flighthq._internal._UInt8Array',
-  Uint8ClampedArray: 'flighthq._internal._UInt8ClampedArray',
+  Float32Array: 'flight._internal._Float32Array',
+  Float64Array: 'flight._internal._Float64Array',
+  Int16Array: 'flight._internal._Int16Array',
+  Int32Array: 'flight._internal._Int32Array',
+  Int8Array: 'flight._internal._Int8Array',
+  Uint16Array: 'flight._internal._UInt16Array',
+  Uint32Array: 'flight._internal._UInt32Array',
+  Uint8Array: 'flight._internal._UInt8Array',
+  Uint8ClampedArray: 'flight._internal._UInt8ClampedArray',
 } as const;
 
 let temporaryIndex = 0;
-let currentHaxePackage = 'flighthq';
+let currentHaxePackage = 'flight';
 let currentModuleName = '';
 let currentSourceIdentity = '';
 let currentModuleValues = new Set<string>();
@@ -174,7 +174,7 @@ export function staticLoweringEmissionCounts(): StaticLoweringEmissionCounts {
 
 export function emitHaxeModule(module: IrModule): string {
   temporaryIndex = 0;
-  currentHaxePackage = module.haxePackage ?? 'flighthq';
+  currentHaxePackage = module.haxePackage ?? 'flight';
   currentModuleName = module.name;
   currentSourceIdentity =
     module.source ?? module.declarations[0]?.origin.source ?? `${module.packageName}/${module.name}`;
@@ -206,7 +206,7 @@ export function emitHaxeModule(module: IrModule): string {
     `package ${currentHaxePackage};`,
     '',
     'import Math as HxMath;',
-    'import flighthq._internal._Runtime;',
+    'import flight._internal._Runtime;',
   ];
   for (const imported of module.imports) lines.push(`import ${imported};`);
   lines.push('');
@@ -690,7 +690,7 @@ function emitThisCapture(name?: string): string[] {
 function emitPromiseProtectedBody(bodyLines: string[], thisCapture?: string): string[] {
   return [
     ...emitThisCapture(thisCapture),
-    'return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {',
+    'return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {',
     ...indent(bodyLines),
     '}));',
   ];
@@ -746,8 +746,8 @@ function emitFlowFunctionBody(statements: IrStatement[], parameters: IrParameter
     const body = [...emitParameterInitializers(parameters), ...emitFlowScopedStatements(statements)];
     return [
       ...emitThisCapture(thisCapture),
-      'return cast flighthq._internal._Async.finishFlow(',
-      '  flighthq._internal._Async.protect(function():Dynamic {',
+      'return cast flight._internal._Async.finishFlow(',
+      '  flight._internal._Async.protect(function():Dynamic {',
       ...indent(indent(body)),
       '  })',
       ');',
@@ -775,14 +775,14 @@ function emitFlowScopedStatements(statements: IrStatement[]): string[] {
 }
 
 function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
-  if (index >= statements.length) return ['return flighthq._internal._Async.flowNormal();'];
+  if (index >= statements.length) return ['return flight._internal._Async.flowNormal();'];
   const statement = statements[index]!;
   const continuation = () => emitFlowStatements(statements, index + 1);
   switch (statement.kind) {
     case 'break':
-      return ['return flighthq._internal._Async.flowBreak();'];
+      return ['return flight._internal._Async.flowBreak();'];
     case 'continue':
-      return ['return flighthq._internal._Async.flowContinue();'];
+      return ['return flight._internal._Async.flowContinue();'];
     case 'variable':
       return emitFlatMapVariableInitializers(statement.declarations, 0, continuation);
     case 'expression':
@@ -790,12 +790,12 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
     case 'return':
       return statement.expression
         ? emitAwaitedExpression(statement.expression, (value) => [
-            `return flighthq._internal._Async.flowReturn(${value});`,
+            `return flight._internal._Async.flowReturn(${value});`,
           ])
-        : ['return flighthq._internal._Async.flowReturn(_Runtime.UNDEFINED);'];
+        : ['return flight._internal._Async.flowReturn(_Runtime.UNDEFINED);'];
     case 'throw':
       return emitAwaitedExpression(statement.expression, (value) => [
-        `return flighthq._internal._Async.reject(${value});`,
+        `return flight._internal._Async.reject(${value});`,
       ]);
     case 'block':
       return emitFlowThenContinue(emitFlowProtectedStatements(statement.statements), continuation);
@@ -812,7 +812,7 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
             ...indent([`${branch} = ${emitFlowProtectedStatements(statementToStatements(statement.otherwise))};`]),
           );
         } else {
-          lines.push('} else {', `  ${branch} = flighthq._internal._Async.flowNormal();`);
+          lines.push('} else {', `  ${branch} = flight._internal._Async.flowNormal();`);
         }
         lines.push('}');
         lines.push(...emitFlowThenContinue(branch, continuation));
@@ -826,13 +826,13 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
         'function():Dynamic {',
         ...indent(
           emitAwaitedExpression(statement.condition, (condition) => [
-            `if (!${emitTruthinessValue(condition, statement.condition)}) return flighthq._internal._Async.flowBreak();`,
+            `if (!${emitTruthinessValue(condition, statement.condition)}) return flight._internal._Async.flowBreak();`,
             `return ${emitFlowProtectedStatements(statementToStatements(statement.body))};`,
           ]),
         ),
         '}',
       ].join('\n');
-      return emitFlowThenContinue(`flighthq._internal._Async.repeatFlow(${iteration})`, continuation);
+      return emitFlowThenContinue(`flight._internal._Async.repeatFlow(${iteration})`, continuation);
     }
     case 'for': {
       if (!statementContainsAwait(statement) && !statementContainsReturn(statement)) {
@@ -841,23 +841,23 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
       const advance = statement.increment
         ? emitAwaitedExpression(statement.increment, (value) => [
             `${value};`,
-            'return flighthq._internal._Async.flowNormal();',
+            'return flight._internal._Async.flowNormal();',
           ])
-        : ['return flighthq._internal._Async.flowNormal();'];
+        : ['return flight._internal._Async.flowNormal();'];
       const condition = statement.condition ?? { kind: 'literal', value: true };
       const iteration = [
         'function():Dynamic {',
         ...indent(
           emitAwaitedExpression(condition, (value) => [
-            `if (!${emitTruthinessValue(value, condition)}) return flighthq._internal._Async.flowBreak();`,
-            `return flighthq._internal._Async.continueIteration(${emitFlowProtectedStatements(statementToStatements(statement.body))}, function():Dynamic {`,
+            `if (!${emitTruthinessValue(value, condition)}) return flight._internal._Async.flowBreak();`,
+            `return flight._internal._Async.continueIteration(${emitFlowProtectedStatements(statementToStatements(statement.body))}, function():Dynamic {`,
             ...indent(advance),
             '});',
           ]),
         ),
         '}',
       ].join('\n');
-      const loop = () => [`return flighthq._internal._Async.repeatFlow(${iteration});`];
+      const loop = () => [`return flight._internal._Async.repeatFlow(${iteration});`];
       let body: string[];
       if (Array.isArray(statement.initializer)) {
         body = statement.initializer.map(
@@ -870,7 +870,7 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
       } else {
         body = loop();
       }
-      const flow = ['flighthq._internal._Async.protect(function():Dynamic {', ...indent(body), '})'].join('\n');
+      const flow = ['flight._internal._Async.protect(function():Dynamic {', ...indent(body), '})'].join('\n');
       return emitFlowThenContinue(flow, continuation);
     }
     case 'forOf':
@@ -890,8 +890,8 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
         const iteration = statement.async
           ? [
               'function():Dynamic {',
-              `  return flighthq._internal._Async.flatMap(_Runtime.callProperty(${iterator}, 'next', cast ([] : Array<Dynamic>)), function(__step:Dynamic):Dynamic {`,
-              `    if (_Runtime.truthy(_Runtime.field(__step, 'done'))) return flighthq._internal._Async.flowBreak();`,
+              `  return flight._internal._Async.flatMap(_Runtime.callProperty(${iterator}, 'next', cast ([] : Array<Dynamic>)), function(__step:Dynamic):Dynamic {`,
+              `    if (_Runtime.truthy(_Runtime.field(__step, 'done'))) return flight._internal._Async.flowBreak();`,
               `    var ${safeName(statement.variable)}:Dynamic = _Runtime.field(__step, 'value');`,
               ...indent(indent(body)),
               '  });',
@@ -899,7 +899,7 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
             ].join('\n')
           : [
               'function():Dynamic {',
-              `  if (${indexName} >= ${iterator}.length) return flighthq._internal._Async.flowBreak();`,
+              `  if (${indexName} >= ${iterator}.length) return flight._internal._Async.flowBreak();`,
               `  var ${safeName(statement.variable)}:Dynamic = ${markGuardedArrayRead('asyncFlowForOfValues', `${iterator}[${indexName}++]`)};`,
               ...indent(body),
               '}',
@@ -907,7 +907,7 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
         const lines = statement.async
           ? [`var ${iterator}:Dynamic = _Runtime.asyncIterator(${iterable});`]
           : [`var ${iterator}:Array<Dynamic> = _Runtime.iterable(${iterable});`, `var ${indexName}:Int = 0;`];
-        lines.push(...emitFlowThenContinue(`flighthq._internal._Async.repeatFlow(${iteration})`, continuation));
+        lines.push(...emitFlowThenContinue(`flight._internal._Async.repeatFlow(${iteration})`, continuation));
         return lines;
       });
     case 'forIn':
@@ -920,7 +920,7 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
         const body = emitFlowScopedStatements(statementToStatements(statement.body));
         const iteration = [
           'function():Dynamic {',
-          `  if (${indexName} >= ${keys}.length) return flighthq._internal._Async.flowBreak();`,
+          `  if (${indexName} >= ${keys}.length) return flight._internal._Async.flowBreak();`,
           `  var ${safeName(statement.variable)}:String = ${markGuardedArrayRead('asyncFlowForInKeys', `${keys}[${indexName}++]`)};`,
           ...indent(body),
           '}',
@@ -928,7 +928,7 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
         return [
           `var ${keys}:Array<String> = ${emitForInKeys(statement.enumeration, object)};`,
           `var ${indexName}:Int = 0;`,
-          ...emitFlowThenContinue(`flighthq._internal._Async.repeatFlow(${iteration})`, continuation),
+          ...emitFlowThenContinue(`flight._internal._Async.repeatFlow(${iteration})`, continuation),
         ];
       });
     case 'do':
@@ -939,7 +939,7 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
       if (statement.catchBody) {
         const error = safeName(statement.catchName ?? '__error');
         flow = [
-          `flighthq._internal._Async.recover(${flow}, function(__caughtError:Dynamic):Dynamic {`,
+          `flight._internal._Async.recover(${flow}, function(__caughtError:Dynamic):Dynamic {`,
           `  var ${error}:Dynamic = __caughtError;`,
           ...indent([`return ${emitFlowProtectedStatements(statementToStatements(statement.catchBody))};`]),
           '})',
@@ -947,7 +947,7 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
       }
       if (statement.finallyBody) {
         flow = [
-          `flighthq._internal._Async.finalizeFlow(${flow}, function():Dynamic {`,
+          `flight._internal._Async.finalizeFlow(${flow}, function():Dynamic {`,
           ...indent(emitFlowScopedStatements(statementToStatements(statement.finallyBody))),
           '})',
         ].join('\n');
@@ -961,7 +961,7 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
 
 function emitFlowProtectedStatements(statements: IrStatement[]): string {
   return [
-    'flighthq._internal._Async.protect(function():Dynamic {',
+    'flight._internal._Async.protect(function():Dynamic {',
     ...indent(emitFlowScopedStatements(statements)),
     '})',
   ].join('\n');
@@ -969,7 +969,7 @@ function emitFlowProtectedStatements(statements: IrStatement[]): string {
 
 function emitFlowThenContinue(value: string, continuation: () => string[]): string[] {
   return [
-    `return flighthq._internal._Async.continueFlow(${value}, function():Dynamic {`,
+    `return flight._internal._Async.continueFlow(${value}, function():Dynamic {`,
     ...indent(continuation()),
     '});',
   ];
@@ -981,7 +981,7 @@ function statementToStatements(statement: IrStatement): IrStatement[] {
 
 function emitFlatMapStatements(statements: IrStatement[], index = 0): string[] {
   if (index >= statements.length) {
-    return ['return flighthq._internal._Async.resolve(_Runtime.UNDEFINED);'];
+    return ['return flight._internal._Async.resolve(_Runtime.UNDEFINED);'];
   }
   const statement = statements[index]!;
   const continuation = () => emitFlatMapStatements(statements, index + 1);
@@ -992,13 +992,11 @@ function emitFlatMapStatements(statements: IrStatement[], index = 0): string[] {
       return emitAwaitedExpression(statement.expression, (value) => [`${value};`, ...continuation()]);
     case 'return':
       return statement.expression
-        ? emitAwaitedExpression(statement.expression, (value) => [
-            `return flighthq._internal._Async.resolve(${value});`,
-          ])
-        : ['return flighthq._internal._Async.resolve(_Runtime.UNDEFINED);'];
+        ? emitAwaitedExpression(statement.expression, (value) => [`return flight._internal._Async.resolve(${value});`])
+        : ['return flight._internal._Async.resolve(_Runtime.UNDEFINED);'];
     case 'throw':
       return emitAwaitedExpression(statement.expression, (value) => [
-        `return flighthq._internal._Async.reject(${value});`,
+        `return flight._internal._Async.reject(${value});`,
       ]);
     default:
       throw new Error(`Flat-map lowering does not support statement ${statement.kind}`);
@@ -1104,7 +1102,7 @@ function emitAwaitedExpression(expression: IrExpression, continuation: (value: s
     const awaited = awaits[index]!;
     lines = awaited.awaited
       ? [
-          `return flighthq._internal._Async.flatMap(${emitAwaitInput(awaited.expression)}, function(${awaited.name}:Dynamic):Dynamic {`,
+          `return flight._internal._Async.flatMap(${emitAwaitInput(awaited.expression)}, function(${awaited.name}:Dynamic):Dynamic {`,
           ...indent(lines),
           '});',
         ]
@@ -1583,7 +1581,7 @@ function isHaxeConstant(expression: IrExpression): boolean {
 
 function emitForInKeys(enumeration: 'direct-record' | 'runtime', object: string): string {
   return enumeration === 'direct-record'
-    ? `flighthq._internal.DynamicObject.keys(${object})`
+    ? `flight._internal.DynamicObject.keys(${object})`
     : `_Runtime.forInKeys(${object})`;
 }
 
@@ -1639,7 +1637,7 @@ function emitStatement(statement: IrStatement): string[] {
             ...indent(['while (true) {']),
             ...indent(
               indent([
-                `var ${step}:Dynamic = flighthq._internal._Async.awaitValue(_Runtime.callProperty(${iterator}, 'next', cast ([] : Array<Dynamic>)));`,
+                `var ${step}:Dynamic = flight._internal._Async.awaitValue(_Runtime.callProperty(${iterator}, 'next', cast ([] : Array<Dynamic>)));`,
                 `if (_Runtime.truthy(_Runtime.field(${step}, 'done'))) break;`,
                 `var ${safeName(statement.variable)}:Dynamic = _Runtime.field(${step}, 'value');`,
               ]),
@@ -1777,9 +1775,9 @@ function isVoidType(type: IrType): boolean {
 function isPromiseNothingType(type: IrType): boolean {
   return (
     type.kind === 'named' &&
-    type.name === 'flighthq._internal._Promise' &&
+    type.name === 'flight._internal._Promise' &&
     type.arguments[0]?.kind === 'named' &&
-    type.arguments[0].name === 'flighthq._internal._Nothing'
+    type.arguments[0].name === 'flight._internal._Nothing'
   );
 }
 
@@ -2109,7 +2107,7 @@ function emitDestructuringRead(expression: IrExpression, object: string, index: 
   const source = expression.staticFacts?.destructuringSource;
   const value =
     source?.receiver === 'Array'
-      ? markStaticIndexedLowering('Array', 'reads', `flighthq._internal._StaticIndex.readArray(${object}, ${index})`)
+      ? markStaticIndexedLowering('Array', 'reads', `flight._internal._StaticIndex.readArray(${object}, ${index})`)
       : `_Runtime.getIndex(${object}, ${index})`;
   return markDestructuringRead(expression, value);
 }
@@ -2150,7 +2148,7 @@ function emitTypedArraySet(expression: Extract<IrExpression, { kind: 'call' }>, 
   const offsetTemporary = offset ? `__typedArraySetOffset${String(temporaryIndex++)}` : undefined;
   const offsetDeclaration = offsetTemporary ? ` final ${offsetTemporary}:Dynamic = ${emitExpression(offset!)};` : '';
   const offsetArgument = offsetTemporary ? `, Std.int(${offsetTemporary})` : '';
-  return `${marker}({ final ${targetTemporary}:Dynamic = ${owner}; final ${sourceTemporary}:Dynamic = ${emitExpression(source)};${offsetDeclaration} if (_Runtime.isInstanceOf(${targetTemporary}, flighthq._internal._HostValueLut.get('Uint32Array'))) { (cast ${targetTemporary} : flighthq._internal._UInt32Array).set(${sourceTemporary}${offsetArgument}); } else { (cast ${targetTemporary} : flighthq._internal._UInt16Array).set(${sourceTemporary}${offsetArgument}); } })`;
+  return `${marker}({ final ${targetTemporary}:Dynamic = ${owner}; final ${sourceTemporary}:Dynamic = ${emitExpression(source)};${offsetDeclaration} if (_Runtime.isInstanceOf(${targetTemporary}, flight._internal._HostValueLut.get('Uint32Array'))) { (cast ${targetTemporary} : flight._internal._UInt32Array).set(${sourceTemporary}${offsetArgument}); } else { (cast ${targetTemporary} : flight._internal._UInt16Array).set(${sourceTemporary}${offsetArgument}); } })`;
 }
 
 function emitSyntheticArrayRead(
@@ -2161,7 +2159,7 @@ function emitSyntheticArrayRead(
   return `${syntheticArrayReadMarkers[kind]}${markStaticIndexedLowering(
     'Array',
     'reads',
-    `flighthq._internal._StaticIndex.readArray(${object}, ${index})`,
+    `flight._internal._StaticIndex.readArray(${object}, ${index})`,
   )}`;
 }
 
@@ -2206,8 +2204,8 @@ function emitStaticIndexedRead(
     indexedAccess.receiver,
     'reads',
     fastPath
-      ? `flighthq._internal._StaticIndex.read${fastPath.endpoint}((cast ${object} : ${fastPath.receiverType}), (cast ${index} : Float))`
-      : `flighthq._internal._StaticIndex.read${indexedAccess.receiver}(${object}, ${index})`,
+      ? `flight._internal._StaticIndex.read${fastPath.endpoint}((cast ${object} : ${fastPath.receiverType}), (cast ${index} : Float))`
+      : `flight._internal._StaticIndex.read${indexedAccess.receiver}(${object}, ${index})`,
   );
 }
 
@@ -2224,8 +2222,8 @@ function emitStaticIndexedWrite(
     indexedAccess.receiver,
     'writes',
     fastPath
-      ? `flighthq._internal._StaticIndex.write${fastPath.endpoint}((cast ${object} : ${fastPath.receiverType}), (cast ${index} : Float), (cast ${value} : ${fastPath.valueType}))`
-      : `flighthq._internal._StaticIndex.write${indexedAccess.receiver}(${object}, ${index}, ${value})`,
+      ? `flight._internal._StaticIndex.write${fastPath.endpoint}((cast ${object} : ${fastPath.receiverType}), (cast ${index} : Float), (cast ${value} : ${fastPath.valueType}))`
+      : `flight._internal._StaticIndex.write${indexedAccess.receiver}(${object}, ${index}, ${value})`,
   );
 }
 
@@ -2243,7 +2241,7 @@ function emitExpression(expression: IrExpression): string {
       }
       return `cast ([${expression.elements.map(emitExpression).join(', ')}] : Array<Dynamic>)`;
     case 'await':
-      return `flighthq._internal._Async.awaitValue(${emitAwaitInput(expression.expression)})`;
+      return `flight._internal._Async.awaitValue(${emitAwaitInput(expression.expression)})`;
     case 'assignment':
     case 'binary': {
       if (expression.kind === 'assignment' && expression.left.kind === 'cast') {
@@ -2329,7 +2327,7 @@ function emitExpression(expression: IrExpression): string {
               );
             }
           }
-          const binding = `flighthq._internal.backend.${expression.left.binding}`;
+          const binding = `flight._internal.backend.${expression.left.binding}`;
           const current = `${binding}.field(${object}, ${quote(expression.left.name)})`;
           const value =
             expression.operator === '='
@@ -2504,7 +2502,7 @@ function emitExpression(expression: IrExpression): string {
       }
       if (expression.kind === 'binary' && expression.operator === 'in') {
         if (expression.domRootBinding) {
-          return `flighthq._internal.backend.${expression.domRootBinding}.hasField(${emitExpression(expression.right)}, ${emitExpression(expression.left)})`;
+          return `flight._internal.backend.${expression.domRootBinding}.hasField(${emitExpression(expression.right)}, ${emitExpression(expression.left)})`;
         }
         return `_Runtime.hasField(${emitExpression(expression.right)}, ${emitExpression(expression.left)})`;
       }
@@ -2527,8 +2525,8 @@ function emitExpression(expression: IrExpression): string {
         ) {
           return `_Runtime.isInstanceOfName(${emitExpression(expression.left)}, ${quote(expression.right.name)})`;
         }
-        if (emitExpression(expression.right) === "flighthq._internal._HostValueLut.get('Promise')") {
-          return `flighthq._internal._Async.isPromise(${emitExpression(expression.left)})`;
+        if (emitExpression(expression.right) === "flight._internal._HostValueLut.get('Promise')") {
+          return `flight._internal._Async.isPromise(${emitExpression(expression.left)})`;
         }
         if (
           expression.right.kind === 'identifier' &&
@@ -2651,7 +2649,7 @@ function emitExpression(expression: IrExpression): string {
     }
     case 'identifier':
       if (expression.domRootBinding) {
-        return `flighthq._internal.backend.${expression.domRootBinding}.value()`;
+        return `flight._internal.backend.${expression.domRootBinding}.value()`;
       }
       if (expression.name === 'super' || expression.name === 'this') return expression.name;
       // Barrel values are statics of the module's namespace class; nominal classes in
@@ -2676,9 +2674,9 @@ function emitExpression(expression: IrExpression): string {
       }
       if (
         (expression.callee.kind === 'identifier' && expression.callee.name === 'Promise') ||
-        emitExpression(expression.callee) === "flighthq._internal._HostValueLut.get('Promise')"
+        emitExpression(expression.callee) === "flight._internal._HostValueLut.get('Promise')"
       ) {
-        return `flighthq._internal._Async.create(${expression.arguments.map(emitExpression).join(', ')})`;
+        return `flight._internal._Async.create(${expression.arguments.map(emitExpression).join(', ')})`;
       }
       if (emitExpression(expression.callee) === 'TypeError') {
         return `_Runtime.typeError(${expression.arguments.map(emitExpression).join(', ')})`;
@@ -2779,17 +2777,17 @@ function emitExpression(expression: IrExpression): string {
       );
     case 'property':
       if (expression.binding === 'DynamicObject') {
-        return `flighthq._internal.DynamicObject.field(${quote(expression.name)})`;
+        return `flight._internal.DynamicObject.field(${quote(expression.name)})`;
       }
       if (expression.binding === 'WebGpuConstantsBackend') {
-        return `flighthq._internal.backend.WebGpuConstantsBackend.value(${emitExpression(expression.object)}, ${quote(expression.name)})`;
+        return `flight._internal.backend.WebGpuConstantsBackend.value(${emitExpression(expression.object)}, ${quote(expression.name)})`;
       }
       if (expression.binding === 'WebGl2Backend') {
         if (expression.optional) {
           throw new Error(`Optional WebGL2 constant access has no typed backend endpoint: ${expression.name}`);
         }
         const endpoint = webGl2ConstantEndpoint(expression.name);
-        return `flighthq._internal.backend.WebGl2Backend.contextConstant(${emitExpression(expression.object)}, ${quote(expression.name)}, flighthq._internal.backend.WebGl2Backend.${endpoint})`;
+        return `flight._internal.backend.WebGl2Backend.contextConstant(${emitExpression(expression.object)}, ${quote(expression.name)}, flight._internal.backend.WebGl2Backend.${endpoint})`;
       }
       if (expression.binding && expression.binding in collectionBindingTypes) {
         if (expression.name !== 'size') {
@@ -2813,7 +2811,7 @@ function emitExpression(expression: IrExpression): string {
         expression.binding === 'WebGpuQueueBackend'
       ) {
         requireHostEndpoint(expression.binding as IrHostEndpointBinding, 'read', expression.name);
-        return `flighthq._internal.backend.${expression.binding}.field(${emitExpression(expression.object)}, ${quote(expression.name)})`;
+        return `flight._internal.backend.${expression.binding}.field(${emitExpression(expression.object)}, ${quote(expression.name)})`;
       }
       if (expression.hostTypeBinding) return emitHostTypeRead(expression);
       if (expression.typedStructBinding) return emitTypedStructRead(expression);
@@ -2873,7 +2871,7 @@ function emitExpression(expression: IrExpression): string {
           if (expression.operand.binding === 'Canvas2dBackend') {
             throw new Error(`Canvas2D property deletion has no typed backend endpoint: ${expression.operand.name}`);
           }
-          return `flighthq._internal.backend.${expression.operand.binding}.deleteField(${emitExpression(expression.operand.object)}, ${quote(expression.operand.name)})`;
+          return `flight._internal.backend.${expression.operand.binding}.deleteField(${emitExpression(expression.operand.object)}, ${quote(expression.operand.name)})`;
         }
         if (expression.operand.kind === 'property' && expression.operand.hostTypeBinding) {
           const owner = emitExpression(expression.operand.object);
@@ -3115,7 +3113,7 @@ function directTypedStructField(
   const indexedReceiver =
     !binding.receiverCast &&
     expression.object.type?.kind === 'named' &&
-    expression.object.type.name === 'flighthq._internal._IndexedAccess' &&
+    expression.object.type.name === 'flight._internal._IndexedAccess' &&
     binding.field.type
       ? ({
           extends: [],
@@ -3256,7 +3254,7 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
   if (
     expression.callee.kind === 'property' &&
     expression.callee.object.kind === 'identifier' &&
-    ['flighthq._internal._HostModuleLut', 'flighthq._internal._HostValueLut'].includes(expression.callee.object.name)
+    ['flight._internal._HostModuleLut', 'flight._internal._HostValueLut'].includes(expression.callee.object.name)
   ) {
     if (
       expression.optional ||
@@ -3270,10 +3268,10 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
   }
   if (
     expression.callee.kind === 'property' &&
-    emitExpression(expression.callee.object) === "flighthq._internal._HostValueLut.get('Promise')" &&
+    emitExpression(expression.callee.object) === "flight._internal._HostValueLut.get('Promise')" &&
     ['all', 'allSettled', 'race', 'reject', 'resolve'].includes(expression.callee.name)
   ) {
-    return `flighthq._internal._Async.${expression.callee.name}(${expression.arguments.map(emitExpression).join(', ')})`;
+    return `flight._internal._Async.${expression.callee.name}(${expression.arguments.map(emitExpression).join(', ')})`;
   }
   if (expression.haxeRestIndex !== undefined) {
     const chunks = expression.arguments.map((argument) =>
@@ -3319,7 +3317,7 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
         expression.callee.binding === 'WebGpuQueueBackend'
       ) {
         requireHostEndpoint(expression.callee.binding as IrHostEndpointBinding, 'call', expression.callee.name);
-        return `flighthq._internal.backend.${expression.callee.binding}.call(${emitExpression(expression.callee.object)}, ${quote(expression.callee.name)}, _Runtime.concatArrays([${chunks.join(', ')}]))`;
+        return `flight._internal.backend.${expression.callee.binding}.call(${emitExpression(expression.callee.object)}, ${quote(expression.callee.name)}, _Runtime.concatArrays([${chunks.join(', ')}]))`;
       }
       if (expression.callee.hostTypeBinding) {
         return emitHostTypeCall(expression, expression.callee, `_Runtime.concatArrays([${chunks.join(', ')}])`, true);
@@ -3347,7 +3345,7 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       }
     }
     if (expression.callee.binding === 'DynamicObject') {
-      return `flighthq._internal.DynamicObject.${safeName(name)}(${expression.arguments.map(emitExpression).join(', ')})`;
+      return `flight._internal.DynamicObject.${safeName(name)}(${expression.arguments.map(emitExpression).join(', ')})`;
     }
     if (expression.callee.binding === 'String') {
       const argument = expression.arguments[0] ? emitExpression(expression.arguments[0]) : "''";
@@ -3362,7 +3360,7 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       }
       const endpoint = webGl2MethodEndpoint(name, expression.arguments.length);
       const arguments_ = [owner, ...expression.arguments.map(emitExpression)].join(', ');
-      return `flighthq._internal.backend.WebGl2Backend.${endpoint}(${arguments_})`;
+      return `flight._internal.backend.WebGl2Backend.${endpoint}(${arguments_})`;
     }
     if (expression.callee.binding && expression.callee.binding in collectionBindingTypes) {
       const collectionType = collectionReceiverType(expression.callee);
@@ -3407,7 +3405,7 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
     ) {
       requireHostEndpoint(expression.callee.binding as IrHostEndpointBinding, 'call', name);
       const method = expression.optional || expression.callee.optional ? 'callOptional' : 'call';
-      return `flighthq._internal.backend.${expression.callee.binding}.${method}(${owner}, ${quote(name)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
+      return `flight._internal.backend.${expression.callee.binding}.${method}(${owner}, ${quote(name)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
     }
     if (expression.callee.hostTypeBinding) {
       return emitHostTypeCall(expression, expression.callee, expression.arguments.map(emitExpression).join(', '));
@@ -3542,7 +3540,7 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       return `_Runtime.slice(${owner}, ${start}, ${end})`;
     }
     if (name === 'catch' && expression.arguments.length === 1) {
-      return `flighthq._internal._Async.recover(${owner}, ${emitExpression(expression.arguments[0]!)})`;
+      return `flight._internal._Async.recover(${owner}, ${emitExpression(expression.arguments[0]!)})`;
     }
     if (name === 'codePointAt') {
       return `_Runtime.codePointAt(${owner}, ${expression.arguments.map(emitExpression).join(', ')})`;
@@ -3687,7 +3685,7 @@ function emitCheckedCallArgument(
   const expectedPreviouslyNeededInference =
     expected.kind !== 'primitive' &&
     expected.kind !== 'dynamic' &&
-    !(expected.kind === 'named' && expected.name === 'flighthq._internal._Any');
+    !(expected.kind === 'named' && expected.name === 'flight._internal._Any');
   if (
     expectedPreviouslyNeededInference &&
     argument.type &&
@@ -3821,7 +3819,7 @@ function typedArrayConstructor(expression: IrExpression): string | undefined {
       : expression.kind === 'call' &&
           expression.callee.kind === 'property' &&
           expression.callee.object.kind === 'identifier' &&
-          expression.callee.object.name === 'flighthq._internal._HostValueLut' &&
+          expression.callee.object.name === 'flight._internal._HostValueLut' &&
           expression.callee.name === 'get' &&
           expression.arguments[0]?.kind === 'literal' &&
           typeof expression.arguments[0].value === 'string'
@@ -3829,15 +3827,15 @@ function typedArrayConstructor(expression: IrExpression): string | undefined {
         : undefined;
   if (!name) return undefined;
   return {
-    Float32Array: 'flighthq._internal._Float32Array',
-    Float64Array: 'flighthq._internal._Float64Array',
-    Int16Array: 'flighthq._internal._Int16Array',
-    Int32Array: 'flighthq._internal._Int32Array',
-    Int8Array: 'flighthq._internal._Int8Array',
-    Uint16Array: 'flighthq._internal._UInt16Array',
-    Uint32Array: 'flighthq._internal._UInt32Array',
-    Uint8Array: 'flighthq._internal._UInt8Array',
-    Uint8ClampedArray: 'flighthq._internal._UInt8ClampedArray',
+    Float32Array: 'flight._internal._Float32Array',
+    Float64Array: 'flight._internal._Float64Array',
+    Int16Array: 'flight._internal._Int16Array',
+    Int32Array: 'flight._internal._Int32Array',
+    Int8Array: 'flight._internal._Int8Array',
+    Uint16Array: 'flight._internal._UInt16Array',
+    Uint32Array: 'flight._internal._UInt32Array',
+    Uint8Array: 'flight._internal._UInt8Array',
+    Uint8ClampedArray: 'flight._internal._UInt8ClampedArray',
   }[name];
 }
 
@@ -3855,7 +3853,7 @@ export function emitType(type: IrType): string {
     case 'array':
       return `Array<${emitType(type.element)}>`;
     case 'dynamic':
-      return type.reason && type.reason !== 'checker-known-unrepresentable' ? 'flighthq._internal._Any' : 'Dynamic';
+      return type.reason && type.reason !== 'checker-known-unrepresentable' ? 'flight._internal._Any' : 'Dynamic';
     case 'function':
       return `${
         type.parameters.length === 0
@@ -3882,14 +3880,14 @@ export function emitType(type: IrType): string {
       return type.alternatives
         .slice(1)
         .reduce(
-          (left, right) => `flighthq._internal._Union2<${left}, ${emitType(right)}>`,
+          (left, right) => `flight._internal._Union2<${left}, ${emitType(right)}>`,
           emitType(type.alternatives[0] ?? { kind: 'dynamic' }),
         );
   }
 }
 
 function emitValueType(type: IrType): string {
-  return isVoidType(type) ? 'flighthq._internal._Nothing' : emitType(type);
+  return isVoidType(type) ? 'flight._internal._Nothing' : emitType(type);
 }
 
 function quote(value: string): string {
@@ -3915,7 +3913,7 @@ function webGl2ConstantEndpoint(name: string): string {
 
 function emitWebGl2ComputedConstant(index: IrExpression, domain: IrWebGlComputedConstantDomain): string {
   const cases = domain.values
-    .map((name) => `case ${quote(name)}: flighthq._internal.backend.WebGl2Backend.${webGl2ConstantEndpoint(name)};`)
+    .map((name) => `case ${quote(name)}: flight._internal.backend.WebGl2Backend.${webGl2ConstantEndpoint(name)};`)
     .join(' ');
   return `(switch (${emitExpression(index)}) { ${cases} default: _Runtime.throwValue(${quote(`WebGL2 computed constant is outside the closed ${domain.name} domain: ${currentSourceIdentity}`)}); })`;
 }

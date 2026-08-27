@@ -38,7 +38,7 @@ Aliases chain leaf scripts; they do not duplicate command implementations.
 | `test:generator` | Run analyzer, lowering, patch, and emitter unit tests.            |
 | `test:haxe:core` | Run the focused Haxe API/runtime smoke test under Eval.           |
 | `test:haxe:all`  | Compile the complete generated namespace and run the Eval smoke.  |
-| `test:upstream`  | Run upstream Vitest through generated Haxe JS bridges.            |
+| `test:upstream`  | Run upstream Vitest and report changes from committed reviews.    |
 | `test:portable`  | Run the supported cross-target compile/smoke matrix.              |
 | `test:coverage`  | Run maintained-code coverage reporting.                           |
 | `check`          | Run static, formatting, API, patch, and generated-drift gates.    |
@@ -47,6 +47,8 @@ Aliases chain leaf scripts; they do not duplicate command implementations.
 | `package`        | Assemble and validate the `flight` Haxelib artifact.              |
 
 The portability leaves are `test:portable:eval`, `test:portable:js`, `test:portable:python`, and `test:portable:cpp`. The required matrix and host prerequisites are tracked in [`status.md`](status.md).
+
+Upstream parity assertion differences are report-only by default. The runner compares exact failing-test identities with the newest applicable committed parity report and records reviewed failures, unreviewed failures, and fixes since review. Process crashes still fail the command; pass `--strict` when any assertion difference must also produce a nonzero exit.
 
 ## Formatting and Linting
 
@@ -84,7 +86,7 @@ Use small fixture inputs and inspect the normalized model or emitted Haxe. Each 
 
 ### Haxe API and runtime tests
 
-Compile consumer-style fixtures against `flighthq.sdk.Sdk`, package facades, and direct type-name imports from `flighthq.types`. Verify public names, completion-hidden source implementations, contract access rejection, sentinels, numeric behavior, typed arrays, collections, async behavior, and platform seams.
+Compile consumer-style fixtures against `flight.Sdk`, package facades, and direct type-name imports from `flight.types`. Verify public names, completion-hidden source implementations, contract access rejection, sentinels, numeric behavior, typed arrays, collections, async behavior, and platform seams.
 
 ### Upstream behavioral tests
 

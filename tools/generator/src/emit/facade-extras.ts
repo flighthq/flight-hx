@@ -12,7 +12,7 @@ const limeWindow: IrType = { arguments: [], kind: 'named', name: 'lime.ui.Window
 const canvasElement: IrType = {
   arguments: [],
   kind: 'named',
-  name: 'flighthq._internal.dom.HTMLCanvasElement',
+  name: 'flight._internal.dom.HTMLCanvasElement',
 };
 
 export const sdkFacadeFunctionExtras: readonly FacadeFunctionExtra[] = [
@@ -21,13 +21,13 @@ export const sdkFacadeFunctionExtras: readonly FacadeFunctionExtra[] = [
     name: 'createCairoSurface',
     parameters: [{ name: 'window', optional: false, rest: false, type: limeWindow }],
     returns: canvasElement,
-    target: 'flighthq.scene2dCairo.CairoSurface.createCairoSurface',
+    target: 'flight._internal.scene2DCairo.CairoSurface.createCairoSurface',
   },
   {
     condition: 'lime',
     name: 'createGlSurface',
     parameters: [{ name: 'window', optional: false, rest: false, type: limeWindow }],
     returns: canvasElement,
-    target: 'flighthq.hostLime.GlSurface.createGlSurface',
+    target: 'flight.hostLime.GlSurface.createGlSurface',
   },
 ];

@@ -76,7 +76,7 @@
           "specifier": "@flighthq/abc/contract"
         }
       ],
-      "haxeModule": "flighthq.abc.Abc",
+      "haxeModule": "flight.Abc",
       "name": "@flighthq/abc",
       "sdkExposures": [
         {
@@ -267,7 +267,7 @@
           "specifier": "@flighthq/accessibility/contract"
         }
       ],
-      "haxeModule": "flighthq.accessibility.Accessibility",
+      "haxeModule": "flight.Accessibility",
       "name": "@flighthq/accessibility",
       "sdkExposures": [
         {
@@ -966,7 +966,7 @@
           "specifier": "@flighthq/adjustments/contract"
         }
       ],
-      "haxeModule": "flighthq.adjustments.Adjustments",
+      "haxeModule": "flight.Adjustments",
       "name": "@flighthq/adjustments",
       "sdkExposures": [
         {
@@ -1765,7 +1765,7 @@
           "specifier": "@flighthq/animation/contract"
         }
       ],
-      "haxeModule": "flighthq.animation.Animation",
+      "haxeModule": "flight.Animation",
       "name": "@flighthq/animation",
       "sdkExposures": [
         {
@@ -2430,7 +2430,7 @@
           "specifier": "@flighthq/app/contract"
         }
       ],
-      "haxeModule": "flighthq.app.App",
+      "haxeModule": "flight.App",
       "name": "@flighthq/app",
       "sdkExposures": [
         {
@@ -3733,7 +3733,7 @@
           "specifier": "@flighthq/application/contract"
         }
       ],
-      "haxeModule": "flighthq.application.Application",
+      "haxeModule": "flight.Application",
       "name": "@flighthq/application",
       "sdkExposures": [
         {
@@ -3833,7 +3833,7 @@
           "specifier": "@flighthq/application-gl/contract"
         }
       ],
-      "haxeModule": "flighthq.applicationGl.ApplicationGl",
+      "haxeModule": "flight.ApplicationGl",
       "name": "@flighthq/application-gl",
       "sdkExposures": [
         {
@@ -4150,7 +4150,7 @@
           "specifier": "@flighthq/assets/contract"
         }
       ],
-      "haxeModule": "flighthq.assets.Assets",
+      "haxeModule": "flight.Assets",
       "name": "@flighthq/assets",
       "sdkExposures": [
         {
@@ -4695,7 +4695,7 @@
           "specifier": "@flighthq/audio/contract"
         }
       ],
-      "haxeModule": "flighthq.audio.Audio",
+      "haxeModule": "flight.Audio",
       "name": "@flighthq/audio",
       "sdkExposures": [
         {
@@ -4814,7 +4814,7 @@
           "specifier": "@flighthq/binpack/contract"
         }
       ],
-      "haxeModule": "flighthq.binpack.Binpack",
+      "haxeModule": "flight.Binpack",
       "name": "@flighthq/binpack",
       "sdkExposures": [
         {
@@ -6435,7 +6435,7 @@
           "specifier": "@flighthq/bitmap/contract"
         }
       ],
-      "haxeModule": "flighthq.bitmap.Bitmap",
+      "haxeModule": "flight.Bitmap",
       "name": "@flighthq/bitmap",
       "sdkExposures": [
         {
@@ -6710,7 +6710,7 @@
           "specifier": "@flighthq/bitmapfont/contract"
         }
       ],
-      "haxeModule": "flighthq.bitmapfont.Bitmapfont",
+      "haxeModule": "flight.BitmapFont",
       "name": "@flighthq/bitmapfont",
       "sdkExposures": [
         {
@@ -6838,7 +6838,7 @@
           "specifier": "@flighthq/bitmapfont-formats/contract"
         }
       ],
-      "haxeModule": "flighthq.bitmapfontFormats.BitmapfontFormats",
+      "haxeModule": "flight.BitmapFontFormats",
       "name": "@flighthq/bitmapfont-formats",
       "sdkExposures": [
         {
@@ -7094,7 +7094,7 @@
           "specifier": "@flighthq/bitmaptext/contract"
         }
       ],
-      "haxeModule": "flighthq.bitmaptext.Bitmaptext",
+      "haxeModule": "flight.BitmapText",
       "name": "@flighthq/bitmaptext",
       "sdkExposures": [
         {
@@ -7761,7 +7761,7 @@
           "specifier": "@flighthq/camera/contract"
         }
       ],
-      "haxeModule": "flighthq.camera.Camera",
+      "haxeModule": "flight.Camera",
       "name": "@flighthq/camera",
       "sdkExposures": [
         {
@@ -8212,7 +8212,7 @@
           "specifier": "@flighthq/camera-controls/contract"
         }
       ],
-      "haxeModule": "flighthq.cameraControls.CameraControls",
+      "haxeModule": "flight.CameraControls",
       "name": "@flighthq/camera-controls",
       "sdkExposures": [
         {
@@ -8436,7 +8436,7 @@
           "specifier": "@flighthq/capture/contract"
         }
       ],
-      "haxeModule": "flighthq.capture.Capture",
+      "haxeModule": "flight.Capture",
       "name": "@flighthq/capture",
       "sdkExposures": [
         {
@@ -8845,7 +8845,7 @@
           "specifier": "@flighthq/clip/contract"
         }
       ],
-      "haxeModule": "flighthq.clip.Clip",
+      "haxeModule": "flight.Clip",
       "name": "@flighthq/clip",
       "sdkExposures": [
         {
@@ -9377,7 +9377,7 @@
           "specifier": "@flighthq/clipboard/contract"
         }
       ],
-      "haxeModule": "flighthq.clipboard.Clipboard",
+      "haxeModule": "flight.Clipboard",
       "name": "@flighthq/clipboard",
       "sdkExposures": [
         {
@@ -9643,7 +9643,7 @@
           "specifier": "@flighthq/clock/contract"
         }
       ],
-      "haxeModule": "flighthq.clock.Clock",
+      "haxeModule": "flight.Clock",
       "name": "@flighthq/clock",
       "sdkExposures": [
         {
@@ -11289,7 +11289,7 @@
           "specifier": "@flighthq/collision/contract"
         }
       ],
-      "haxeModule": "flighthq.collision.Collision",
+      "haxeModule": "flight.Collision",
       "name": "@flighthq/collision",
       "sdkExposures": [
         {
@@ -11792,7 +11792,7 @@
           "specifier": "@flighthq/color/contract"
         }
       ],
-      "haxeModule": "flighthq.color.Color",
+      "haxeModule": "flight.Color",
       "name": "@flighthq/color",
       "sdkExposures": [
         {
@@ -11945,7 +11945,7 @@
           "specifier": "@flighthq/compression/contract"
         }
       ],
-      "haxeModule": "flighthq.compression.Compression",
+      "haxeModule": "flight.Compression",
       "name": "@flighthq/compression",
       "sdkExposures": [
         {
@@ -12214,7 +12214,7 @@
           "specifier": "@flighthq/connectivity/contract"
         }
       ],
-      "haxeModule": "flighthq.connectivity.Connectivity",
+      "haxeModule": "flight.Connectivity",
       "name": "@flighthq/connectivity",
       "sdkExposures": [
         {
@@ -12425,7 +12425,7 @@
           "specifier": "@flighthq/debug/contract"
         }
       ],
-      "haxeModule": "flighthq.debug.Debug",
+      "haxeModule": "flight.Debug",
       "name": "@flighthq/debug",
       "sdkExposures": [
         {
@@ -12677,7 +12677,7 @@
           "specifier": "@flighthq/device/contract"
         }
       ],
-      "haxeModule": "flighthq.device.Device",
+      "haxeModule": "flight.Device",
       "name": "@flighthq/device",
       "sdkExposures": [
         {
@@ -12970,7 +12970,7 @@
           "specifier": "@flighthq/dialog/contract"
         }
       ],
-      "haxeModule": "flighthq.dialog.Dialog",
+      "haxeModule": "flight.Dialog",
       "name": "@flighthq/dialog",
       "sdkExposures": [
         {
@@ -13775,7 +13775,7 @@
           "specifier": "@flighthq/easing/contract"
         }
       ],
-      "haxeModule": "flighthq.easing.Easing",
+      "haxeModule": "flight.Easing",
       "name": "@flighthq/easing",
       "sdkExposures": [
         {
@@ -15982,7 +15982,7 @@
           "specifier": "@flighthq/effects/contract"
         }
       ],
-      "haxeModule": "flighthq.effects.Effects",
+      "haxeModule": "flight.Effects",
       "name": "@flighthq/effects",
       "sdkExposures": [
         {
@@ -16974,7 +16974,7 @@
           "specifier": "@flighthq/effects-canvas/contract"
         }
       ],
-      "haxeModule": "flighthq.effectsCanvas.EffectsCanvas",
+      "haxeModule": "flight.EffectsCanvas",
       "name": "@flighthq/effects-canvas",
       "sdkExposures": [
         {
@@ -19052,7 +19052,7 @@
           "specifier": "@flighthq/effects-gl/contract"
         }
       ],
-      "haxeModule": "flighthq.effectsGl.EffectsGl",
+      "haxeModule": "flight.EffectsGl",
       "name": "@flighthq/effects-gl",
       "sdkExposures": [
         {
@@ -21047,7 +21047,7 @@
           "specifier": "@flighthq/effects-wgpu/contract"
         }
       ],
-      "haxeModule": "flighthq.effectsWgpu.EffectsWgpu",
+      "haxeModule": "flight.EffectsWgpu",
       "name": "@flighthq/effects-wgpu",
       "sdkExposures": [
         {
@@ -21221,7 +21221,7 @@
           "specifier": "@flighthq/entity/contract"
         }
       ],
-      "haxeModule": "flighthq.entity.Entity",
+      "haxeModule": "flight.Entity",
       "name": "@flighthq/entity",
       "sdkExposures": [
         {
@@ -21907,7 +21907,7 @@
           "specifier": "@flighthq/filesystem/contract"
         }
       ],
-      "haxeModule": "flighthq.filesystem.Filesystem",
+      "haxeModule": "flight.FileSystem",
       "name": "@flighthq/filesystem",
       "sdkExposures": [
         {
@@ -22102,7 +22102,7 @@
           "specifier": "@flighthq/flow/contract"
         }
       ],
-      "haxeModule": "flighthq.flow.Flow",
+      "haxeModule": "flight.Flow",
       "name": "@flighthq/flow",
       "sdkExposures": [
         {
@@ -22397,7 +22397,7 @@
           "specifier": "@flighthq/font/contract"
         }
       ],
-      "haxeModule": "flighthq.font.Font",
+      "haxeModule": "flight.Font",
       "name": "@flighthq/font",
       "sdkExposures": [
         {
@@ -22805,7 +22805,7 @@
           "specifier": "@flighthq/font-formats/contract"
         }
       ],
-      "haxeModule": "flighthq.fontFormats.FontFormats",
+      "haxeModule": "flight.FontFormats",
       "name": "@flighthq/font-formats",
       "sdkExposures": [
         {
@@ -23056,7 +23056,7 @@
           "specifier": "@flighthq/geolocation/contract"
         }
       ],
-      "haxeModule": "flighthq.geolocation.Geolocation",
+      "haxeModule": "flight.Geolocation",
       "name": "@flighthq/geolocation",
       "sdkExposures": [
         {
@@ -28574,7 +28574,7 @@
           "specifier": "@flighthq/geometry/contract"
         }
       ],
-      "haxeModule": "flighthq.geometry.Geometry",
+      "haxeModule": "flight.Geometry",
       "name": "@flighthq/geometry",
       "sdkExposures": [
         {
@@ -28912,7 +28912,7 @@
           "specifier": "@flighthq/glyphatlas/contract"
         }
       ],
-      "haxeModule": "flighthq.glyphatlas.Glyphatlas",
+      "haxeModule": "flight.GlyphAtlas",
       "name": "@flighthq/glyphatlas",
       "sdkExposures": [
         {
@@ -29177,7 +29177,7 @@
           "specifier": "@flighthq/haptics/contract"
         }
       ],
-      "haxeModule": "flighthq.haptics.Haptics",
+      "haxeModule": "flight.Haptics",
       "name": "@flighthq/haptics",
       "sdkExposures": [
         {
@@ -29440,7 +29440,7 @@
           "specifier": "@flighthq/host-capacitor/contract"
         }
       ],
-      "haxeModule": "flighthq.hostCapacitor.HostCapacitor",
+      "haxeModule": "flight.HostCapacitor",
       "name": "@flighthq/host-capacitor",
       "sdkExposures": [],
       "sdkIncluded": false,
@@ -29793,7 +29793,7 @@
           "specifier": "@flighthq/host-electron/contract"
         }
       ],
-      "haxeModule": "flighthq.hostElectron.HostElectron",
+      "haxeModule": "flight.HostElectron",
       "name": "@flighthq/host-electron",
       "sdkExposures": [],
       "sdkIncluded": false,
@@ -30014,7 +30014,7 @@
           "specifier": "@flighthq/host-tauri/contract"
         }
       ],
-      "haxeModule": "flighthq.hostTauri.HostTauri",
+      "haxeModule": "flight.HostTauri",
       "name": "@flighthq/host-tauri",
       "sdkExposures": [],
       "sdkIncluded": false,
@@ -30742,7 +30742,7 @@
           "specifier": "@flighthq/host-web/contract"
         }
       ],
-      "haxeModule": "flighthq.hostWeb.HostWeb",
+      "haxeModule": "flight.HostWeb",
       "name": "@flighthq/host-web",
       "sdkExposures": [],
       "sdkIncluded": false,
@@ -31157,7 +31157,7 @@
           "specifier": "@flighthq/image/contract"
         }
       ],
-      "haxeModule": "flighthq.image.Image",
+      "haxeModule": "flight.Image",
       "name": "@flighthq/image",
       "sdkExposures": [
         {
@@ -31548,7 +31548,7 @@
           "specifier": "@flighthq/image-codec/contract"
         }
       ],
-      "haxeModule": "flighthq.imageCodec.ImageCodec",
+      "haxeModule": "flight.ImageCodec",
       "name": "@flighthq/image-codec",
       "sdkExposures": [
         {
@@ -31659,7 +31659,7 @@
           "specifier": "@flighthq/importdiagnostics/contract"
         }
       ],
-      "haxeModule": "flighthq.importdiagnostics.Importdiagnostics",
+      "haxeModule": "flight.ImportDiagnostics",
       "name": "@flighthq/importdiagnostics",
       "sdkExposures": [
         {
@@ -32282,7 +32282,7 @@
           "specifier": "@flighthq/input/contract"
         }
       ],
-      "haxeModule": "flighthq.input.Input",
+      "haxeModule": "flight.Input",
       "name": "@flighthq/input",
       "sdkExposures": [
         {
@@ -33363,7 +33363,7 @@
           "specifier": "@flighthq/interaction/contract"
         }
       ],
-      "haxeModule": "flighthq.interaction.Interaction",
+      "haxeModule": "flight.Interaction",
       "name": "@flighthq/interaction",
       "sdkExposures": [
         {
@@ -33628,7 +33628,7 @@
           "specifier": "@flighthq/intl/contract"
         }
       ],
-      "haxeModule": "flighthq.intl.Intl",
+      "haxeModule": "flight.Intl",
       "name": "@flighthq/intl",
       "sdkExposures": [
         {
@@ -33936,7 +33936,7 @@
           "specifier": "@flighthq/ipc/contract"
         }
       ],
-      "haxeModule": "flighthq.ipc.Ipc",
+      "haxeModule": "flight.Ipc",
       "name": "@flighthq/ipc",
       "sdkExposures": [
         {
@@ -34293,7 +34293,7 @@
           "specifier": "@flighthq/keyboard/contract"
         }
       ],
-      "haxeModule": "flighthq.keyboard.Keyboard",
+      "haxeModule": "flight.Keyboard",
       "name": "@flighthq/keyboard",
       "sdkExposures": [
         {
@@ -34474,7 +34474,7 @@
           "specifier": "@flighthq/layout/contract"
         }
       ],
-      "haxeModule": "flighthq.layout.Layout",
+      "haxeModule": "flight.Layout",
       "name": "@flighthq/layout",
       "sdkExposures": [
         {
@@ -34736,7 +34736,7 @@
           "specifier": "@flighthq/lifecycle/contract"
         }
       ],
-      "haxeModule": "flighthq.lifecycle.Lifecycle",
+      "haxeModule": "flight.Lifecycle",
       "name": "@flighthq/lifecycle",
       "sdkExposures": [
         {
@@ -35242,7 +35242,7 @@
           "specifier": "@flighthq/lighting/contract"
         }
       ],
-      "haxeModule": "flighthq.lighting.Lighting",
+      "haxeModule": "flight.Lighting",
       "name": "@flighthq/lighting",
       "sdkExposures": [
         {
@@ -35522,7 +35522,7 @@
           "specifier": "@flighthq/loader/contract"
         }
       ],
-      "haxeModule": "flighthq.loader.Loader",
+      "haxeModule": "flight.Loader",
       "name": "@flighthq/loader",
       "sdkExposures": [
         {
@@ -36460,7 +36460,7 @@
           "specifier": "@flighthq/log/contract"
         }
       ],
-      "haxeModule": "flighthq.log.Log",
+      "haxeModule": "flight.Log",
       "name": "@flighthq/log",
       "sdkExposures": [
         {
@@ -37637,7 +37637,7 @@
           "specifier": "@flighthq/materials/contract"
         }
       ],
-      "haxeModule": "flighthq.materials.Materials",
+      "haxeModule": "flight.Materials",
       "name": "@flighthq/materials",
       "sdkExposures": [
         {
@@ -38742,7 +38742,7 @@
           "specifier": "@flighthq/math/contract"
         }
       ],
-      "haxeModule": "flighthq.math.Math",
+      "haxeModule": "flight.Math",
       "name": "@flighthq/math",
       "sdkExposures": [
         {
@@ -39424,7 +39424,7 @@
           "specifier": "@flighthq/media/contract"
         }
       ],
-      "haxeModule": "flighthq.media.Media",
+      "haxeModule": "flight.Media",
       "name": "@flighthq/media",
       "sdkExposures": [
         {
@@ -39647,7 +39647,7 @@
           "specifier": "@flighthq/mediasession/contract"
         }
       ],
-      "haxeModule": "flighthq.mediasession.Mediasession",
+      "haxeModule": "flight.MediaSession",
       "name": "@flighthq/mediasession",
       "sdkExposures": [
         {
@@ -39969,7 +39969,7 @@
           "specifier": "@flighthq/menu/contract"
         }
       ],
-      "haxeModule": "flighthq.menu.Menu",
+      "haxeModule": "flight.Menu",
       "name": "@flighthq/menu",
       "sdkExposures": [
         {
@@ -41209,7 +41209,7 @@
           "specifier": "@flighthq/mesh/contract"
         }
       ],
-      "haxeModule": "flighthq.mesh.Mesh",
+      "haxeModule": "flight.Mesh",
       "name": "@flighthq/mesh",
       "sdkExposures": [
         {
@@ -41378,7 +41378,7 @@
           "specifier": "@flighthq/motionpath/contract"
         }
       ],
-      "haxeModule": "flighthq.motionpath.Motionpath",
+      "haxeModule": "flight.MotionPath",
       "name": "@flighthq/motionpath",
       "sdkExposures": [
         {
@@ -41816,7 +41816,7 @@
           "specifier": "@flighthq/movieclip/contract"
         }
       ],
-      "haxeModule": "flighthq.movieclip.Movieclip",
+      "haxeModule": "flight.MovieClip",
       "name": "@flighthq/movieclip",
       "sdkExposures": [
         {
@@ -41921,7 +41921,7 @@
           "specifier": "@flighthq/net/contract"
         }
       ],
-      "haxeModule": "flighthq.net.Net",
+      "haxeModule": "flight.Net",
       "name": "@flighthq/net",
       "sdkExposures": [
         {
@@ -43579,7 +43579,7 @@
           "specifier": "@flighthq/node/contract"
         }
       ],
-      "haxeModule": "flighthq.node.Node",
+      "haxeModule": "flight.Node",
       "name": "@flighthq/node",
       "sdkExposures": [
         {
@@ -44012,7 +44012,7 @@
           "specifier": "@flighthq/notification/contract"
         }
       ],
-      "haxeModule": "flighthq.notification.Notification",
+      "haxeModule": "flight.Notification",
       "name": "@flighthq/notification",
       "sdkExposures": [
         {
@@ -44772,7 +44772,7 @@
           "specifier": "@flighthq/particleemitter/contract"
         }
       ],
-      "haxeModule": "flighthq.particleemitter.Particleemitter",
+      "haxeModule": "flight.ParticleEmitter",
       "name": "@flighthq/particleemitter",
       "sdkExposures": [
         {
@@ -45207,7 +45207,7 @@
           "specifier": "@flighthq/particles/contract"
         }
       ],
-      "haxeModule": "flighthq.particles.Particles",
+      "haxeModule": "flight.Particles",
       "name": "@flighthq/particles",
       "sdkExposures": [
         {
@@ -45713,7 +45713,7 @@
           "specifier": "@flighthq/particles-formats/contract"
         }
       ],
-      "haxeModule": "flighthq.particlesFormats.ParticlesFormats",
+      "haxeModule": "flight.ParticlesFormats",
       "name": "@flighthq/particles-formats",
       "sdkExposures": [
         {
@@ -46623,7 +46623,7 @@
           "specifier": "@flighthq/path/contract"
         }
       ],
-      "haxeModule": "flighthq.path.Path",
+      "haxeModule": "flight.Path",
       "name": "@flighthq/path",
       "sdkExposures": [
         {
@@ -46833,7 +46833,7 @@
           "specifier": "@flighthq/path-boolean/contract"
         }
       ],
-      "haxeModule": "flighthq.pathBoolean.PathBoolean",
+      "haxeModule": "flight.PathBoolean",
       "name": "@flighthq/path-boolean",
       "sdkExposures": [
         {
@@ -46945,7 +46945,7 @@
           "specifier": "@flighthq/path-formats/contract"
         }
       ],
-      "haxeModule": "flighthq.pathFormats.PathFormats",
+      "haxeModule": "flight.PathFormats",
       "name": "@flighthq/path-formats",
       "sdkExposures": [
         {
@@ -47169,7 +47169,7 @@
           "specifier": "@flighthq/permissions/contract"
         }
       ],
-      "haxeModule": "flighthq.permissions.Permissions",
+      "haxeModule": "flight.Permissions",
       "name": "@flighthq/permissions",
       "sdkExposures": [
         {
@@ -48594,7 +48594,7 @@
           "specifier": "@flighthq/physics2d/contract"
         }
       ],
-      "haxeModule": "flighthq.physics2d.Physics2d",
+      "haxeModule": "flight.Physics2D",
       "name": "@flighthq/physics2d",
       "sdkExposures": [
         {
@@ -49711,7 +49711,7 @@
           "specifier": "@flighthq/physics2d-abi/contract"
         }
       ],
-      "haxeModule": "flighthq.physics2dAbi.Physics2dAbi",
+      "haxeModule": "flight.Physics2DAbi",
       "name": "@flighthq/physics2d-abi",
       "sdkExposures": [
         {
@@ -51461,7 +51461,7 @@
           "specifier": "@flighthq/physics3d/contract"
         }
       ],
-      "haxeModule": "flighthq.physics3d.Physics3d",
+      "haxeModule": "flight.Physics3D",
       "name": "@flighthq/physics3d",
       "sdkExposures": [
         {
@@ -52522,7 +52522,7 @@
           "specifier": "@flighthq/physics3d-abi/contract"
         }
       ],
-      "haxeModule": "flighthq.physics3dAbi.Physics3dAbi",
+      "haxeModule": "flight.Physics3DAbi",
       "name": "@flighthq/physics3d-abi",
       "sdkExposures": [
         {
@@ -52747,7 +52747,7 @@
           "specifier": "@flighthq/picking/contract"
         }
       ],
-      "haxeModule": "flighthq.picking.Picking",
+      "haxeModule": "flight.Picking",
       "name": "@flighthq/picking",
       "sdkExposures": [
         {
@@ -53041,7 +53041,7 @@
           "specifier": "@flighthq/platform/contract"
         }
       ],
-      "haxeModule": "flighthq.platform.Platform",
+      "haxeModule": "flight.Platform",
       "name": "@flighthq/platform",
       "sdkExposures": [
         {
@@ -53370,7 +53370,7 @@
           "specifier": "@flighthq/power/contract"
         }
       ],
-      "haxeModule": "flighthq.power.Power",
+      "haxeModule": "flight.Power",
       "name": "@flighthq/power",
       "sdkExposures": [
         {
@@ -53727,7 +53727,7 @@
           "specifier": "@flighthq/protocol/contract"
         }
       ],
-      "haxeModule": "flighthq.protocol.Protocol",
+      "haxeModule": "flight.Protocol",
       "name": "@flighthq/protocol",
       "sdkExposures": [
         {
@@ -54199,7 +54199,7 @@
           "specifier": "@flighthq/quadbatch/contract"
         }
       ],
-      "haxeModule": "flighthq.quadbatch.Quadbatch",
+      "haxeModule": "flight.QuadBatch",
       "name": "@flighthq/quadbatch",
       "sdkExposures": [
         {
@@ -54422,7 +54422,7 @@
           "specifier": "@flighthq/registry/contract"
         }
       ],
-      "haxeModule": "flighthq.registry.Registry",
+      "haxeModule": "flight.Registry",
       "name": "@flighthq/registry",
       "sdkExposures": [
         {
@@ -54575,7 +54575,7 @@
           "specifier": "@flighthq/registry-catalog/contract"
         }
       ],
-      "haxeModule": "flighthq.registryCatalog.RegistryCatalog",
+      "haxeModule": "flight.RegistryCatalog",
       "name": "@flighthq/registry-catalog",
       "sdkExposures": [
         {
@@ -54659,7 +54659,7 @@
           "specifier": "@flighthq/registry-codegen/contract"
         }
       ],
-      "haxeModule": "flighthq.registryCodegen.RegistryCodegen",
+      "haxeModule": "flight.RegistryCodegen",
       "name": "@flighthq/registry-codegen",
       "sdkExposures": [
         {
@@ -55373,7 +55373,7 @@
           "specifier": "@flighthq/render/contract"
         }
       ],
-      "haxeModule": "flighthq.render.Render",
+      "haxeModule": "flight.Render",
       "name": "@flighthq/render",
       "sdkExposures": [
         {
@@ -56585,7 +56585,7 @@
           "specifier": "@flighthq/render-gl/contract"
         }
       ],
-      "haxeModule": "flighthq.renderGl.RenderGl",
+      "haxeModule": "flight.RenderGl",
       "name": "@flighthq/render-gl",
       "sdkExposures": [
         {
@@ -57798,7 +57798,7 @@
           "specifier": "@flighthq/render-wgpu/contract"
         }
       ],
-      "haxeModule": "flighthq.renderWgpu.RenderWgpu",
+      "haxeModule": "flight.RenderWgpu",
       "name": "@flighthq/render-wgpu",
       "sdkExposures": [
         {
@@ -57937,7 +57937,7 @@
           "specifier": "@flighthq/requirements/contract"
         }
       ],
-      "haxeModule": "flighthq.requirements.Requirements",
+      "haxeModule": "flight.Requirements",
       "name": "@flighthq/requirements",
       "sdkExposures": [
         {
@@ -58356,7 +58356,7 @@
           "specifier": "@flighthq/scene2d/contract"
         }
       ],
-      "haxeModule": "flighthq.scene2d.Scene2d",
+      "haxeModule": "flight.Scene2D",
       "name": "@flighthq/scene2d",
       "sdkExposures": [
         {
@@ -59693,7 +59693,7 @@
           "specifier": "@flighthq/scene2d-canvas/contract"
         }
       ],
-      "haxeModule": "flighthq.scene2dCanvas.Scene2dCanvas",
+      "haxeModule": "flight.Scene2DCanvas",
       "name": "@flighthq/scene2d-canvas",
       "sdkExposures": [
         {
@@ -60372,7 +60372,7 @@
           "specifier": "@flighthq/scene2d-dom/contract"
         }
       ],
-      "haxeModule": "flighthq.scene2dDom.Scene2dDom",
+      "haxeModule": "flight.Scene2DDom",
       "name": "@flighthq/scene2d-dom",
       "sdkExposures": [
         {
@@ -60579,7 +60579,7 @@
           "specifier": "@flighthq/scene2d-formats/contract"
         }
       ],
-      "haxeModule": "flighthq.scene2dFormats.Scene2dFormats",
+      "haxeModule": "flight.Scene2DFormats",
       "name": "@flighthq/scene2d-formats",
       "sdkExposures": [
         {
@@ -61568,7 +61568,7 @@
           "specifier": "@flighthq/scene2d-gl/contract"
         }
       ],
-      "haxeModule": "flighthq.scene2dGl.Scene2dGl",
+      "haxeModule": "flight.Scene2DGl",
       "name": "@flighthq/scene2d-gl",
       "sdkExposures": [
         {
@@ -61841,7 +61841,7 @@
           "specifier": "@flighthq/scene2d-resources/contract"
         }
       ],
-      "haxeModule": "flighthq.scene2dResources.Scene2dResources",
+      "haxeModule": "flight.Scene2DResources",
       "name": "@flighthq/scene2d-resources",
       "sdkExposures": [
         {
@@ -62852,7 +62852,7 @@
           "specifier": "@flighthq/scene2d-wgpu/contract"
         }
       ],
-      "haxeModule": "flighthq.scene2dWgpu.Scene2dWgpu",
+      "haxeModule": "flight.Scene2DWgpu",
       "name": "@flighthq/scene2d-wgpu",
       "sdkExposures": [
         {
@@ -63497,7 +63497,7 @@
           "specifier": "@flighthq/scene3d/contract"
         }
       ],
-      "haxeModule": "flighthq.scene3d.Scene3d",
+      "haxeModule": "flight.Scene3D",
       "name": "@flighthq/scene3d",
       "sdkExposures": [
         {
@@ -64121,7 +64121,7 @@
           "specifier": "@flighthq/scene3d-formats/contract"
         }
       ],
-      "haxeModule": "flighthq.scene3dFormats.Scene3dFormats",
+      "haxeModule": "flight.Scene3DFormats",
       "name": "@flighthq/scene3d-formats",
       "sdkExposures": [
         {
@@ -65815,7 +65815,7 @@
           "specifier": "@flighthq/scene3d-gl/contract"
         }
       ],
-      "haxeModule": "flighthq.scene3dGl.Scene3dGl",
+      "haxeModule": "flight.Scene3DGl",
       "name": "@flighthq/scene3d-gl",
       "sdkExposures": [
         {
@@ -66448,7 +66448,7 @@
           "specifier": "@flighthq/scene3d-resources/contract"
         }
       ],
-      "haxeModule": "flighthq.scene3dResources.Scene3dResources",
+      "haxeModule": "flight.Scene3DResources",
       "name": "@flighthq/scene3d-resources",
       "sdkExposures": [
         {
@@ -67855,7 +67855,7 @@
           "specifier": "@flighthq/scene3d-wgpu/contract"
         }
       ],
-      "haxeModule": "flighthq.scene3dWgpu.Scene3dWgpu",
+      "haxeModule": "flight.Scene3DWgpu",
       "name": "@flighthq/scene3d-wgpu",
       "sdkExposures": [
         {
@@ -68359,7 +68359,7 @@
           "specifier": "@flighthq/screen/contract"
         }
       ],
-      "haxeModule": "flighthq.screen.Screen",
+      "haxeModule": "flight.Screen",
       "name": "@flighthq/screen",
       "sdkExposures": [
         {
@@ -213444,7 +213444,7 @@
           "specifier": "@flighthq/sdk/text"
         }
       ],
-      "haxeModule": "flighthq.sdk.Sdk",
+      "haxeModule": "flight.Sdk",
       "name": "@flighthq/sdk",
       "sdkExposures": [],
       "sdkIncluded": false,
@@ -213915,7 +213915,7 @@
           "specifier": "@flighthq/sensors/contract"
         }
       ],
-      "haxeModule": "flighthq.sensors.Sensors",
+      "haxeModule": "flight.Sensors",
       "name": "@flighthq/sensors",
       "sdkExposures": [
         {
@@ -214349,7 +214349,7 @@
           "specifier": "@flighthq/shading/contract"
         }
       ],
-      "haxeModule": "flighthq.shading.Shading",
+      "haxeModule": "flight.Shading",
       "name": "@flighthq/shading",
       "sdkExposures": [
         {
@@ -215457,7 +215457,7 @@
           "specifier": "@flighthq/shape/contract"
         }
       ],
-      "haxeModule": "flighthq.shape.Shape",
+      "haxeModule": "flight.Shape",
       "name": "@flighthq/shape",
       "sdkExposures": [
         {
@@ -215556,7 +215556,7 @@
           "specifier": "@flighthq/shape-formats/contract"
         }
       ],
-      "haxeModule": "flighthq.shapeFormats.ShapeFormats",
+      "haxeModule": "flight.ShapeFormats",
       "name": "@flighthq/shape-formats",
       "sdkExposures": [
         {
@@ -215850,7 +215850,7 @@
           "specifier": "@flighthq/share/contract"
         }
       ],
-      "haxeModule": "flighthq.share.Share",
+      "haxeModule": "flight.Share",
       "name": "@flighthq/share",
       "sdkExposures": [
         {
@@ -216122,7 +216122,7 @@
           "specifier": "@flighthq/shell/contract"
         }
       ],
-      "haxeModule": "flighthq.shell.Shell",
+      "haxeModule": "flight.Shell",
       "name": "@flighthq/shell",
       "sdkExposures": [
         {
@@ -216655,7 +216655,7 @@
           "specifier": "@flighthq/shortcut/contract"
         }
       ],
-      "haxeModule": "flighthq.shortcut.Shortcut",
+      "haxeModule": "flight.Shortcut",
       "name": "@flighthq/shortcut",
       "sdkExposures": [
         {
@@ -216878,7 +216878,7 @@
           "specifier": "@flighthq/signals/contract"
         }
       ],
-      "haxeModule": "flighthq.signals.Signals",
+      "haxeModule": "flight.Signals",
       "name": "@flighthq/signals",
       "sdkExposures": [
         {
@@ -217592,7 +217592,7 @@
           "specifier": "@flighthq/skeleton2d/contract"
         }
       ],
-      "haxeModule": "flighthq.skeleton2d.Skeleton2d",
+      "haxeModule": "flight.Skeleton2D",
       "name": "@flighthq/skeleton2d",
       "sdkExposures": [
         {
@@ -217841,7 +217841,7 @@
           "specifier": "@flighthq/skeleton2d-formats/contract"
         }
       ],
-      "haxeModule": "flighthq.skeleton2dFormats.Skeleton2dFormats",
+      "haxeModule": "flight.Skeleton2DFormats",
       "name": "@flighthq/skeleton2d-formats",
       "sdkExposures": [
         {
@@ -218247,7 +218247,7 @@
           "specifier": "@flighthq/skeleton3d/contract"
         }
       ],
-      "haxeModule": "flighthq.skeleton3d.Skeleton3d",
+      "haxeModule": "flight.Skeleton3D",
       "name": "@flighthq/skeleton3d",
       "sdkExposures": [
         {
@@ -218409,7 +218409,7 @@
           "specifier": "@flighthq/snapshot/contract"
         }
       ],
-      "haxeModule": "flighthq.snapshot.Snapshot",
+      "haxeModule": "flight.Snapshot",
       "name": "@flighthq/snapshot",
       "sdkExposures": [
         {
@@ -218676,7 +218676,7 @@
           "specifier": "@flighthq/socket/contract"
         }
       ],
-      "haxeModule": "flighthq.socket.Socket",
+      "haxeModule": "flight.Socket",
       "name": "@flighthq/socket",
       "sdkExposures": [
         {
@@ -219145,7 +219145,7 @@
           "specifier": "@flighthq/spatial/contract"
         }
       ],
-      "haxeModule": "flighthq.spatial.Spatial",
+      "haxeModule": "flight.Spatial",
       "name": "@flighthq/spatial",
       "sdkExposures": [
         {
@@ -219383,7 +219383,7 @@
           "specifier": "@flighthq/spring/contract"
         }
       ],
-      "haxeModule": "flighthq.spring.Spring",
+      "haxeModule": "flight.Spring",
       "name": "@flighthq/spring",
       "sdkExposures": [
         {
@@ -219889,7 +219889,7 @@
           "specifier": "@flighthq/spritesheet/contract"
         }
       ],
-      "haxeModule": "flighthq.spritesheet.Spritesheet",
+      "haxeModule": "flight.Spritesheet",
       "name": "@flighthq/spritesheet",
       "sdkExposures": [
         {
@@ -220229,7 +220229,7 @@
           "specifier": "@flighthq/spritesheet-formats/contract"
         }
       ],
-      "haxeModule": "flighthq.spritesheetFormats.SpritesheetFormats",
+      "haxeModule": "flight.SpritesheetFormats",
       "name": "@flighthq/spritesheet-formats",
       "sdkExposures": [
         {
@@ -220510,7 +220510,7 @@
           "specifier": "@flighthq/statechart/contract"
         }
       ],
-      "haxeModule": "flighthq.statechart.Statechart",
+      "haxeModule": "flight.Statechart",
       "name": "@flighthq/statechart",
       "sdkExposures": [
         {
@@ -220839,7 +220839,7 @@
           "specifier": "@flighthq/statusbar/contract"
         }
       ],
-      "haxeModule": "flighthq.statusbar.Statusbar",
+      "haxeModule": "flight.StatusBar",
       "name": "@flighthq/statusbar",
       "sdkExposures": [
         {
@@ -221469,7 +221469,7 @@
           "specifier": "@flighthq/storage/contract"
         }
       ],
-      "haxeModule": "flighthq.storage.Storage",
+      "haxeModule": "flight.Storage",
       "name": "@flighthq/storage",
       "sdkExposures": [
         {
@@ -221722,7 +221722,7 @@
           "specifier": "@flighthq/swf/contract"
         }
       ],
-      "haxeModule": "flighthq.swf.Swf",
+      "haxeModule": "flight.Swf",
       "name": "@flighthq/swf",
       "sdkExposures": [
         {
@@ -222920,7 +222920,7 @@
           "specifier": "@flighthq/text/contract"
         }
       ],
-      "haxeModule": "flighthq.text.Text",
+      "haxeModule": "flight.Text",
       "name": "@flighthq/text",
       "sdkExposures": [
         {
@@ -223103,7 +223103,7 @@
           "specifier": "@flighthq/text-markup/contract"
         }
       ],
-      "haxeModule": "flighthq.textMarkup.TextMarkup",
+      "haxeModule": "flight.TextMarkup",
       "name": "@flighthq/text-markup",
       "sdkExposures": [
         {
@@ -223235,7 +223235,7 @@
           "specifier": "@flighthq/textbidi/contract"
         }
       ],
-      "haxeModule": "flighthq.textbidi.Textbidi",
+      "haxeModule": "flight.TextBidi",
       "name": "@flighthq/textbidi",
       "sdkExposures": [
         {
@@ -224078,7 +224078,7 @@
           "specifier": "@flighthq/textinput/contract"
         }
       ],
-      "haxeModule": "flighthq.textinput.Textinput",
+      "haxeModule": "flight.TextInput",
       "name": "@flighthq/textinput",
       "sdkExposures": [
         {
@@ -224785,7 +224785,7 @@
           "specifier": "@flighthq/textlayout/contract"
         }
       ],
-      "haxeModule": "flighthq.textlayout.Textlayout",
+      "haxeModule": "flight.TextLayout",
       "name": "@flighthq/textlayout",
       "sdkExposures": [
         {
@@ -224987,7 +224987,7 @@
           "specifier": "@flighthq/textsegment/contract"
         }
       ],
-      "haxeModule": "flighthq.textsegment.Textsegment",
+      "haxeModule": "flight.TextSegment",
       "name": "@flighthq/textsegment",
       "sdkExposures": [
         {
@@ -225499,7 +225499,7 @@
           "specifier": "@flighthq/textshaper/contract"
         }
       ],
-      "haxeModule": "flighthq.textshaper.Textshaper",
+      "haxeModule": "flight.TextShaper",
       "name": "@flighthq/textshaper",
       "sdkExposures": [
         {
@@ -225583,7 +225583,7 @@
           "specifier": "@flighthq/textshaper-canvas/contract"
         }
       ],
-      "haxeModule": "flighthq.textshaperCanvas.TextshaperCanvas",
+      "haxeModule": "flight.TextShaperCanvas",
       "name": "@flighthq/textshaper-canvas",
       "sdkExposures": [
         {
@@ -226396,7 +226396,7 @@
           "specifier": "@flighthq/texture/contract"
         }
       ],
-      "haxeModule": "flighthq.texture.Texture",
+      "haxeModule": "flight.Texture",
       "name": "@flighthq/texture",
       "sdkExposures": [
         {
@@ -226591,7 +226591,7 @@
           "specifier": "@flighthq/texture-formats/contract"
         }
       ],
-      "haxeModule": "flighthq.textureFormats.TextureFormats",
+      "haxeModule": "flight.TextureFormats",
       "name": "@flighthq/texture-formats",
       "sdkExposures": [
         {
@@ -227176,7 +227176,7 @@
           "specifier": "@flighthq/textureatlas/contract"
         }
       ],
-      "haxeModule": "flighthq.textureatlas.Textureatlas",
+      "haxeModule": "flight.TextureAtlas",
       "name": "@flighthq/textureatlas",
       "sdkExposures": [
         {
@@ -227416,7 +227416,7 @@
           "specifier": "@flighthq/textureatlas-formats/contract"
         }
       ],
-      "haxeModule": "flighthq.textureatlasFormats.TextureatlasFormats",
+      "haxeModule": "flight.TextureAtlasFormats",
       "name": "@flighthq/textureatlas-formats",
       "sdkExposures": [
         {
@@ -227770,7 +227770,7 @@
           "specifier": "@flighthq/tilemap/contract"
         }
       ],
-      "haxeModule": "flighthq.tilemap.Tilemap",
+      "haxeModule": "flight.Tilemap",
       "name": "@flighthq/tilemap",
       "sdkExposures": [
         {
@@ -228010,7 +228010,7 @@
           "specifier": "@flighthq/tilemap-formats/contract"
         }
       ],
-      "haxeModule": "flighthq.tilemapFormats.TilemapFormats",
+      "haxeModule": "flight.TilemapFormats",
       "name": "@flighthq/tilemap-formats",
       "sdkExposures": [
         {
@@ -228346,7 +228346,7 @@
           "specifier": "@flighthq/timeline/contract"
         }
       ],
-      "haxeModule": "flighthq.timeline.Timeline",
+      "haxeModule": "flight.Timeline",
       "name": "@flighthq/timeline",
       "sdkExposures": [
         {
@@ -230440,7 +230440,7 @@
           "specifier": "@flighthq/tool-capture/contract"
         }
       ],
-      "haxeModule": "flighthq.toolCapture.ToolCapture",
+      "haxeModule": "flight.ToolCapture",
       "name": "@flighthq/tool-capture",
       "sdkExposures": [],
       "sdkIncluded": false,
@@ -230541,7 +230541,7 @@
           "specifier": "@flighthq/tool-registry/contract"
         }
       ],
-      "haxeModule": "flighthq.toolRegistry.ToolRegistry",
+      "haxeModule": "flight.ToolRegistry",
       "name": "@flighthq/tool-registry",
       "sdkExposures": [],
       "sdkIncluded": false,
@@ -230990,7 +230990,7 @@
           "specifier": "@flighthq/tray/contract"
         }
       ],
-      "haxeModule": "flighthq.tray.Tray",
+      "haxeModule": "flight.Tray",
       "name": "@flighthq/tray",
       "sdkExposures": [
         {
@@ -231439,7 +231439,7 @@
           "specifier": "@flighthq/tween/contract"
         }
       ],
-      "haxeModule": "flighthq.tween.Tween",
+      "haxeModule": "flight.Tween",
       "name": "@flighthq/tween",
       "sdkExposures": [
         {
@@ -266521,7 +266521,7 @@
           "specifier": "@flighthq/types/contract"
         }
       ],
-      "haxeModule": "flighthq.types.Types",
+      "haxeModule": "flight.Types",
       "name": "@flighthq/types",
       "sdkExposures": [
         {
@@ -266920,7 +266920,7 @@
           "specifier": "@flighthq/updater/contract"
         }
       ],
-      "haxeModule": "flighthq.updater.Updater",
+      "haxeModule": "flight.Updater",
       "name": "@flighthq/updater",
       "sdkExposures": [
         {
@@ -267150,7 +267150,7 @@
           "specifier": "@flighthq/useragent/contract"
         }
       ],
-      "haxeModule": "flighthq.useragent.Useragent",
+      "haxeModule": "flight.UserAgent",
       "name": "@flighthq/useragent",
       "sdkExposures": [
         {
@@ -267508,7 +267508,7 @@
           "specifier": "@flighthq/velocity/contract"
         }
       ],
-      "haxeModule": "flighthq.velocity.Velocity",
+      "haxeModule": "flight.Velocity",
       "name": "@flighthq/velocity",
       "sdkExposures": [
         {
@@ -267801,7 +267801,7 @@
           "specifier": "@flighthq/video/contract"
         }
       ],
-      "haxeModule": "flighthq.video.Video",
+      "haxeModule": "flight.Video",
       "name": "@flighthq/video",
       "sdkExposures": [
         {
@@ -268004,7 +268004,7 @@
           "specifier": "@flighthq/webcam/contract"
         }
       ],
-      "haxeModule": "flighthq.webcam.Webcam",
+      "haxeModule": "flight.Webcam",
       "name": "@flighthq/webcam",
       "sdkExposures": [
         {
@@ -268157,7 +268157,7 @@
           "specifier": "@flighthq/xml/contract"
         }
       ],
-      "haxeModule": "flighthq.xml.Xml",
+      "haxeModule": "flight.Xml",
       "name": "@flighthq/xml",
       "sdkExposures": [
         {

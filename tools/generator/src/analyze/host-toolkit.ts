@@ -100,13 +100,13 @@ export function auditHostToolkit(workspaceDirectory: string, hostTypes: HostType
     for (const match of source.matchAll(/_HostModuleLut\.get\('([^']+)', '([^']+)'\)/gu)) {
       addUse(moduleUses, `${match[1]!}#${match[2]!}`, location);
     }
-    for (const match of source.matchAll(/import flighthq\._internal\.WebExterns\.([A-Za-z0-9_]+);/gu)) {
+    for (const match of source.matchAll(/import flight\._internal\.WebExterns\.([A-Za-z0-9_]+);/gu)) {
       addUse(externalTypeUses, match[1]!, location);
     }
   }
 
-  const hostTypeDirectory = path.join(workspaceDirectory, 'src', 'flighthq', '_internal', 'dom');
-  const webExternsPath = path.join(workspaceDirectory, 'src', 'flighthq', '_internal', 'WebExterns.hx');
+  const hostTypeDirectory = path.join(workspaceDirectory, 'src', 'flight', '_internal', 'dom');
+  const webExternsPath = path.join(workspaceDirectory, 'src', 'flight', '_internal', 'WebExterns.hx');
   const webExterns = existsSync(webExternsPath) ? readFileSync(webExternsPath, 'utf8') : '';
   const types: HostToolkitAudit['types'] = hostTypes.types.map((entry) => {
     const provider = path.join(hostTypeDirectory, `${entry.name}.hx`);
@@ -131,17 +131,17 @@ export function auditHostToolkit(workspaceDirectory: string, hostTypes: HostType
   for (const [name, use] of [...externalTypeUses].sort(([left], [right]) => left.localeCompare(right))) {
     types.push({
       coverage: typeCoverage(webExterns, name),
-      haxeType: `flighthq._internal.WebExterns.${name}`,
+      haxeType: `flight._internal.WebExterns.${name}`,
       key: `external:${name}`,
       kind: 'external',
       locations: [...use.locations].sort(),
-      provider: 'src/flighthq/_internal/WebExterns.hx',
+      provider: 'src/flight/_internal/WebExterns.hx',
       uses: use.uses,
     });
   }
   types.sort((left, right) => left.key.localeCompare(right.key));
 
-  const valueProvider = path.join(workspaceDirectory, 'src', 'flighthq', '_internal', '_HostValueLut.hx');
+  const valueProvider = path.join(workspaceDirectory, 'src', 'flight', '_internal', '_HostValueLut.hx');
   const valueSource = existsSync(valueProvider) ? readFileSync(valueProvider, 'utf8') : '';
   const providedValues = declaredStringArray(valueSource, 'keys');
   const portableValues = declaredStringArray(valueSource, 'portableKeys');
@@ -156,11 +156,11 @@ export function auditHostToolkit(workspaceDirectory: string, hostTypes: HostType
           : ('js-only' as const),
       key: `global:${name}`,
       locations: [...use.locations].sort(),
-      provider: 'src/flighthq/_internal/_HostValueLut.hx',
+      provider: 'src/flight/_internal/_HostValueLut.hx',
       uses: use.uses,
     }));
 
-  const moduleProvider = path.join(workspaceDirectory, 'src', 'flighthq', '_internal', '_HostModuleLut.hx');
+  const moduleProvider = path.join(workspaceDirectory, 'src', 'flight', '_internal', '_HostModuleLut.hx');
   const moduleProviderExists = existsSync(moduleProvider);
   const moduleValues = [...moduleUses]
     .sort(([left], [right]) => left.localeCompare(right))

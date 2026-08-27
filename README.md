@@ -1,16 +1,18 @@
 # flight-hx
 
-`flight-hx` is a mechanically generated Haxe source port of the Flight SDK. It preserves Flight's deliberately searchable free-function API under source-derived `flighthq.*` packages and uses `flight` as the Haxelib name.
+`flight-hx` is a mechanically generated Haxe source port of the Flight SDK. It preserves Flight's deliberately searchable free-function API as root modules such as `flight.Geometry` and uses `flight` as the Haxelib name. Each public package facade has one completion-hidden implementation sibling (`flight.Geometry` → `flight._Geometry`); upstream source files do not become public Haxe modules.
 
-The current generation accounts for all 143 upstream packages, 32,998 public exports, and 1,419 upstream test files. Lowering has zero diagnostics, and every translated package suite passes through compiled Haxe JavaScript bridges (the Node-only `tool-capture` CLI is the one recorded exclusion).
+The upstream npm scope remains `@flighthq/*`; `flight.*` is the Haxe namespace used by this port.
+
+The current generation inventories 153 upstream packages, 36,488 export records, and 1,599 upstream test files. Lowering has zero diagnostics; the two tooling-only package exclusions and current parity results are recorded in the generated reports.
 
 ## API shape
 
 Use the package facade when you know the Flight domain:
 
 ```haxe
-import flighthq.geometry.Geometry.*;
-import flighthq.types.Vector2Like;
+import flight.Geometry.*;
+import flight.types.Vector2Like;
 
 final point:Vector2Like = createVector2(3, 4);
 trace(getVector2Length(point));
@@ -19,16 +21,16 @@ trace(getVector2Length(point));
 Use the generated SDK facade for broad discoverability:
 
 ```haxe
-import flighthq.sdk.Sdk.*;
+import flight.Sdk.*;
 
 final point = createVector2(3, 4);
 ```
 
-The qualified form is `flighthq.geometry.Geometry.createVector2()`. Function names remain unchanged; `createVector2` does not become a constructor, and `getVector2Length` does not become an instance method. Every exported canonical type is directly addressable by name under `flighthq.types`, independent of its defining TypeScript file.
+The qualified form is `flight.Geometry.createVector2()`. Function names remain unchanged; `createVector2` does not become a constructor, and `getVector2Length` does not become an instance method. Every exported canonical type is directly addressable by name under `flight.types`, independent of its defining TypeScript file.
 
 ## Lime host
 
-`flighthq.hostLime.LimeApp` provides the optional Lime application backend. A Lime application explicitly installs it with `flighthq.app.App.setAppBackend(LimeApp.createLimeAppBackend(this))`, matching the factory-based Capacitor, Tauri, and Electron hosts. The adapter does not own the Lime application lifecycle or renderer. It is compiled only when Lime's `lime` define is active, so the base Flight library does not require Lime. The adapter still needs verification against an installed Lime toolchain.
+`flight.hostLime.LimeApp` provides the optional Lime application backend. A Lime application explicitly installs it with `flight.App.setAppBackend(LimeApp.createLimeAppBackend(this))`, matching the factory-based Capacitor, Tauri, and Electron hosts. The adapter does not own the Lime application lifecycle or renderer. It is compiled only when Lime's `lime` define is active, so the base Flight library does not require Lime. The adapter still needs verification against an installed Lime toolchain.
 
 ## Repository setup
 
@@ -59,9 +61,9 @@ Generated Haxe under `generated/` is disposable. Maintained runtime and host int
 
 Native rendering uses the same generated code as the web, with two rules that are easy to miss:
 
-- **Mark adapter classes `@:keep`.** Objects you hand to Flight (renderers, canvas/surface adapters, texture resolvers, media sources) are currently reached reflectively, so dead-code elimination will silently strip members the compiler cannot see being used, and Haxe properties (`get`/`set`) reflect as absent — use plain physical fields for values Flight reads (for example a surface's `width`/`height`). `flighthq.scene2dCairo.CairoSurface` is the reference adapter. Typed protocol access is planned, which will turn these rules into ordinary compile-time contracts.
+- **Mark adapter classes `@:keep`.** Objects you hand to Flight (renderers, canvas/surface adapters, texture resolvers, media sources) are currently reached reflectively, so dead-code elimination will silently strip members the compiler cannot see being used, and Haxe properties (`get`/`set`) reflect as absent — use plain physical fields for values Flight reads (for example a surface's `width`/`height`). `flight.Scene2DCairo.createCairoSurface` exposes the reference adapter. Typed protocol access is planned, which will turn these rules into ordinary compile-time contracts.
 - **On Neko, callbacks must match arity exactly.** Neko dispatch requires the declared parameter count, including trailing optionals; JavaScript's drop-or-pad tolerance does not apply. Prefer callbacks without optional parameters, and call optional-arity Flight endpoints with every argument supplied. C++ (`hxcpp`) is the primary native target and does not have this restriction; Neko remains supported as the fast-iteration target.
 - **On Neko, `-dce full` is required.** Without dead-code elimination the whole generated SDK links into the module (~9 MB), and Neko fails at load with `module.c(560) : Stack check failed for function scope` — an error that looks nothing like its cause. Every project under `examples/` sets `<haxeflag name="-dce" value="full" />`; copy it into any new Lime project consuming this library.
-- **Public escapes for toolkit types.** Consumer code should not reach into `flighthq._internal`: typed arrays are exported at the package root (`flighthq.Float32Array`, `flighthq.UInt8Array`, … — natively their constructors accept `haxe.io.Bytes` directly, so SWF or asset bytes wrap without an element copy), the union carrier as `flighthq.Union2`, and Lime font registration as `flighthq.hostLime.LimeFonts.registerLimeFont`.
+- **Public escapes for toolkit types.** Consumer code should not reach into `flight._internal`: typed arrays are exported at the package root (`flight.Float32Array`, `flight.UInt8Array`, … — natively their constructors accept `haxe.io.Bytes` directly, so SWF or asset bytes wrap without an element copy), the union carrier as `flight.Union2`, and Lime font registration as `flight.hostLime.LimeFonts.registerLimeFont`.
 
 The examples under `examples/` are working Lime applications demonstrating the full wiring, including the per-frame present-skip (`window.onRender.cancel()`) that avoids double-buffer flicker when a scene is unchanged.

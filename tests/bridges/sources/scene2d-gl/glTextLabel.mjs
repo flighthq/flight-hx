@@ -2,11 +2,11 @@
 import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from '@flighthq/textlayout/contract';
 
-const api = compiled.flighthq.scene2dGl.GlTextLabel;
+const api = compiled.flight._Scene2DGl;
 function __syncDependencies() {
-  compiled.flighthq.textlayout.TextLayout.computeTextLayout = __dependency0.computeTextLayout;
-  compiled.flighthq.textlayout.TextFormatRange.createTextFormatRange = __dependency0.createTextFormatRange;
-  compiled.flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult = __dependency0.getTextLayoutResult;
+  compiled.flight._TextLayout.computeTextLayout = __dependency0.computeTextLayout;
+  compiled.flight._TextLayout.createTextFormatRange = __dependency0.createTextFormatRange;
+  compiled.flight._TextLayout.getTextLayoutResult = __dependency0.getTextLayoutResult;
 }
 __syncDependencies();
 

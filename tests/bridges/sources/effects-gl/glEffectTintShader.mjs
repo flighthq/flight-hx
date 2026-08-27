@@ -2,10 +2,10 @@
 import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from '@flighthq/render-gl/contract';
 
-const api = compiled.flighthq.effectsGl.GlEffectTintShader;
+const api = compiled.flight._EffectsGl;
 function __syncDependencies() {
-  compiled.flighthq.renderGl.GlFullscreenPass.compileGlFullscreenProgram = __dependency0.compileGlFullscreenProgram;
-  compiled.flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass = __dependency0.drawGlFullscreenPass;
+  compiled.flight._RenderGl.compileGlFullscreenProgram = __dependency0.compileGlFullscreenProgram;
+  compiled.flight._RenderGl.drawGlFullscreenPass = __dependency0.drawGlFullscreenPass;
 }
 __syncDependencies();
 

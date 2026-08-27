@@ -29,7 +29,7 @@ Per-target (one module/crate per language):
 
 - Language ownership and type lowering. Haxe: GC and structural typing. Rust: ownership/borrow — this is where the Rust emitter earns its keep and where the TS→Rust semantic gap is absorbed. It lives here, never in core.
 - Emitter: module/file layout, formatting, banners, ordering.
-- Maintained runtime: Haxe `flighthq._internal`; a Rust equivalent.
+- Maintained runtime: Haxe `flight._internal`; a Rust equivalent.
 - Host adapters and the behavioral bridge to the oracle.
 - Target-scoped patches: idiom exceptions that only make sense for one language.
 
@@ -69,7 +69,7 @@ Flight monorepo (upstream, pure TS)     source of truth + tests
         │  git submodule (read-only)
         ▼
 flight-port-core                        analyzer · IR · patches · manifest · fingerprints · oracle spec
-    ├── flight-hx    Haxe emitter + flighthq._internal runtime + Vitest bridge
+    ├── flight-hx    Haxe emitter + flight._internal runtime + Vitest bridge
     └── flight-rs    Rust emitter + Rust runtime + vector/wasm parity harness   (rebuilt)
 surface-rs (standalone)                 earned wasm/native accelerator behind the surface seam
 ```

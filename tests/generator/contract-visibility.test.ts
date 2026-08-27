@@ -6,27 +6,27 @@ import { describe, expect, it } from 'vitest';
 // Guards the contract-lane visibility mapping documented in
 // agents/public-surface-and-contract-visibility.md against the pinned Haxe toolchain.
 // The mechanism, not generated output, is under test, so the fixtures are self-contained:
-// a minimal flighthq.* tree plus an out-of-package consumer standing in for end-user code.
+// a minimal flight.* tree plus an out-of-package consumer standing in for end-user code.
 
 const fixtureRoot = path.resolve('build/contract-visibility-fixture');
 
-function writeFlighthqTree(): void {
+function writeFlightTree(): void {
   rmSync(fixtureRoot, { force: true, recursive: true });
-  mkdirSync(path.join(fixtureRoot, 'flighthq', 'node'), { recursive: true });
-  mkdirSync(path.join(fixtureRoot, 'flighthq', 'geometry'), { recursive: true });
+  mkdirSync(path.join(fixtureRoot, 'flight'), { recursive: true });
+  mkdirSync(path.join(fixtureRoot, 'flight', '_fixtureGeometry'), { recursive: true });
   mkdirSync(path.join(fixtureRoot, 'game'), { recursive: true });
 
   // Contract members carry their own grant, so an unrelated module-private
   // sibling remains private. Contract-exclusive types can only be completion-hidden.
   writeFileSync(
-    path.join(fixtureRoot, 'flighthq', 'node', 'Node.hx'),
-    `package flighthq.node;
-class Node {
+    path.join(fixtureRoot, 'flight', '_Node.hx'),
+    `package flight;
+class _Node {
   public var publicX:Int = 1;
-  @:allow(flighthq)
+  @:allow(flight)
   private var contractY:Int = 2;
   private var moduleOnly:Int = 4;
-  @:allow(flighthq)
+  @:allow(flight)
   private static function contractFn():Int return 40;
   public function new() {}
 }
@@ -36,16 +36,16 @@ private typedef ContractOnly = { secret:Int }
 `,
   );
 
-  // A sibling flighthq package reaching the contract member and static across packages (tier 2, must compile).
+  // A sibling flight package reaching the contract member and static across packages (tier 2, must compile).
   writeFileSync(
-    path.join(fixtureRoot, 'flighthq', 'geometry', 'Consumer.hx'),
-    `package flighthq.geometry;
-import flighthq.node.Node;
+    path.join(fixtureRoot, 'flight', '_fixtureGeometry', 'Consumer.hx'),
+    `package flight._fixtureGeometry;
+import flight._Node;
 class Consumer {
   public static function use():Int {
-    final n = new Node();
-    final shared:flighthq.node.Node.SharedContract = { value: 0 };
-    return n.publicX + n.contractY + Node.contractFn() + shared.value;
+    final n = new _Node();
+    final shared:flight._Node.SharedContract = { value: 0 };
+    return n.publicX + n.contractY + _Node.contractFn() + shared.value;
   }
   static function main():Void {
     if (use() != 43) throw 'cross-package contract access miscompiled';
@@ -81,20 +81,20 @@ function existingCompileError(main: string): string {
 }
 
 describe('contract-lane visibility mapping', () => {
-  it('A: @:allow(flighthq) grants cross-package access to a private member and static (recursively)', () => {
-    writeFlighthqTree();
-    expect(() => compile('flighthq.geometry.Consumer')).not.toThrow();
+  it('A: @:allow(flight) grants cross-package access to a private member and static (recursively)', () => {
+    writeFlightTree();
+    expect(() => compile('flight._fixtureGeometry.Consumer')).not.toThrow();
   });
 
-  it('B: end-user code outside flighthq is rejected at compile time on a contract member', () => {
-    writeFlighthqTree();
+  it('B: end-user code outside flight is rejected at compile time on a contract member', () => {
+    writeFlightTree();
     const output = compileError(
       'App',
       `package game;
-import flighthq.node.Node;
+import flight._Node;
 class App {
   public static function main():Void {
-    final n = new Node();
+    final n = new _Node();
     trace(n.publicX);
     trace(n.contractY);
   }
@@ -105,49 +105,51 @@ class App {
   });
 
   it('C: a module-private type is unreachable cross-module, so contract-exclusive types cannot be private', () => {
-    writeFlighthqTree();
-    // Even a flighthq-internal package cannot see a module-private type in another module.
+    writeFlightTree();
+    // Even a flight-internal package cannot see a module-private type in another module.
     writeFileSync(
-      path.join(fixtureRoot, 'flighthq', 'geometry', 'WantsType.hx'),
-      `package flighthq.geometry;
+      path.join(fixtureRoot, 'flight', '_fixtureGeometry', 'WantsType.hx'),
+      `package flight._fixtureGeometry;
 class WantsType {
   public static function f():Int {
-    final c:flighthq.node.Node.ContractOnly = { secret: 3 };
+    final c:flight._Node.ContractOnly = { secret: 3 };
     return c.secret;
   }
   static function main():Void { f(); }
 }
 `,
     );
-    const output = existingCompileError('flighthq.geometry.WantsType');
+    const output = existingCompileError('flight._fixtureGeometry.WantsType');
     expect(output).toContain('Cannot access private type ContractOnly');
   });
 
   it('D: a member-level grant does not expose an unrelated module-private sibling', () => {
-    writeFlighthqTree();
+    writeFlightTree();
     writeFileSync(
-      path.join(fixtureRoot, 'flighthq', 'geometry', 'WantsLocal.hx'),
-      `package flighthq.geometry;
-import flighthq.node.Node;
+      path.join(fixtureRoot, 'flight', '_fixtureGeometry', 'WantsLocal.hx'),
+      `package flight._fixtureGeometry;
+import flight._Node;
 class WantsLocal {
   static function main():Void {
-    final n = new Node();
+    final n = new _Node();
     trace(n.moduleOnly);
   }
 }
 `,
     );
-    expect(existingCompileError('flighthq.geometry.WantsLocal')).toContain('Cannot access private field moduleOnly');
+    expect(existingCompileError('flight._fixtureGeometry.WantsLocal')).toContain(
+      'Cannot access private field moduleOnly',
+    );
   });
 
   it('E: @:noCompletion contract types remain compile-visible to consumers', () => {
-    writeFlighthqTree();
+    writeFlightTree();
     writeFileSync(
       path.join(fixtureRoot, 'game', 'TypeConsumer.hx'),
       `package game;
 class TypeConsumer {
   static function main():Void {
-    final value:flighthq.node.Node.SharedContract = { value: 3 };
+    final value:flight._Node.SharedContract = { value: 3 };
     if (value.value != 3) throw 'contract type miscompiled';
   }
 }

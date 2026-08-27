@@ -2,12 +2,12 @@
 //
 // Native Lime rendering runs the canvas backends over cairo, so the natural
 // native spelling of the 2D API is Cairo-named. This tool mechanically mirrors
-// the generated package facades (`Scene2dCanvas`, `EffectsCanvas`) into
-// maintained alias modules (`flighthq.scene2dCairo.Scene2dCairo`,
-// `flighthq.effectsCairo.EffectsCairo`) whose every entry point forwards
+// the generated package facades (`Scene2DCanvas`, `EffectsCanvas`) into
+// maintained root alias modules (`flight.Scene2DCairo`,
+// `flight.EffectsCairo`) whose every entry point forwards
 // inline to the canvas original under a Canvas->Cairo rename, plus typedef
-// aliases for the Canvas-named canonical types (`flighthq.types.CairoX`).
-// `textshaperCanvas` is deliberately not mirrored: its entire static surface
+// aliases for the Canvas-named canonical types (`flight.types.CairoX`).
+// `textShaperCanvas` is deliberately not mirrored: its entire static surface
 // is contract-only (`@:noCompletion`), and the protected channel must not be
 // re-exposed under new names.
 //
@@ -23,16 +23,12 @@ const checkOnly = process.argv.includes('--check');
 
 const FACADES = [
   {
-    cairoModule: 'Scene2dCairo',
-    cairoPackage: 'scene2dCairo',
-    canvasModule: 'Scene2dCanvas',
-    canvasPackage: 'scene2dCanvas',
+    cairoModule: 'Scene2DCairo',
+    canvasModule: 'Scene2DCanvas',
   },
   {
     cairoModule: 'EffectsCairo',
-    cairoPackage: 'effectsCairo',
     canvasModule: 'EffectsCanvas',
-    canvasPackage: 'effectsCanvas',
   },
 ];
 
@@ -86,16 +82,13 @@ function matchParen(text, start) {
   throw new Error('derive-cairo-aliases: unbalanced parentheses in a facade signature');
 }
 
-function deriveFacade({ cairoModule, cairoPackage, canvasModule, canvasPackage }) {
-  const source = readFileSync(
-    path.join(workspace, 'generated', 'flighthq', canvasPackage, `${canvasModule}.hx`),
-    'utf8',
-  );
+function deriveFacade({ cairoModule, canvasModule }) {
+  const source = readFileSync(path.join(workspace, 'generated', 'flight', `${canvasModule}.hx`), 'utf8');
   const imports = source
     .split('\n')
     .filter((line) => line.startsWith('import '))
     .join('\n');
-  const qualified = `flighthq.${canvasPackage}.${canvasModule}`;
+  const qualified = `flight.${canvasModule}`;
   const lines = [];
 
   const functionPattern = /^ {2}public static function ([A-Za-z_]\w*)(<[^>]+>)?\(/gmu;
@@ -127,21 +120,21 @@ function deriveFacade({ cairoModule, cairoPackage, canvasModule, canvasPackage }
     lines.push(`  static inline function get_${alias}():${type.trim()} return ${qualified}.${name};`);
   }
 
-  if (cairoModule === 'Scene2dCairo') {
+  if (cairoModule === 'Scene2DCairo') {
     lines.push('  #if lime');
     lines.push('  /** Native window-backed presentable surface; handwritten in CairoSurface.hx. */');
     lines.push(
-      '  public static inline function createCairoSurface(window:lime.ui.Window):flighthq._internal.dom.HTMLCanvasElement { return flighthq.scene2dCairo.CairoSurface.createCairoSurface(window); }',
+      '  public static inline function createCairoSurface(window:lime.ui.Window):flight._internal.dom.HTMLCanvasElement { return flight._internal.scene2DCairo.CairoSurface.createCairoSurface(window); }',
     );
     lines.push('  #end');
   }
   if (lines.length === 0) throw new Error(`derive-cairo-aliases: ${canvasModule} yielded no aliases`);
-  const module = `${header}package flighthq.${cairoPackage};\n\n${imports}\n\nclass ${cairoModule} {\n${lines.join('\n')}\n}\n`;
-  return { content: module, relative: path.join('src', 'flighthq', cairoPackage, `${cairoModule}.hx`) };
+  const module = `${header}package flight;\n\n${imports}\n\nclass ${cairoModule} {\n${lines.join('\n')}\n}\n`;
+  return { content: module, relative: path.join('src', 'flight', `${cairoModule}.hx`) };
 }
 
 function deriveTypes() {
-  const typesDirectory = path.join(workspace, 'generated', 'flighthq', 'types');
+  const typesDirectory = path.join(workspace, 'generated', 'flight', 'types');
   const outputs = [];
   const names = readdirSync(typesDirectory)
     .filter((name) => name.endsWith('.hx') && name.includes('Canvas'))
@@ -165,8 +158,8 @@ function deriveTypes() {
       if (moduleName !== typeName) {
         throw new Error(`derive-cairo-aliases: canonical type ${typeName} does not own module ${moduleName}`);
       }
-      const content = `${header}package flighthq.types;\n\ntypedef ${alias}${generics ?? ''} = flighthq.types.${typeName}${genericNames};\n`;
-      outputs.push({ content, relative: path.join('src', 'flighthq', 'types', `${alias}.hx`) });
+      const content = `${header}package flight.types;\n\ntypedef ${alias}${generics ?? ''} = flight.types.${typeName}${genericNames};\n`;
+      outputs.push({ content, relative: path.join('src', 'flight', 'types', `${alias}.hx`) });
     }
   }
   if (outputs.length === 0) throw new Error('derive-cairo-aliases: no Canvas-named canonical types found');
@@ -176,10 +169,10 @@ function deriveTypes() {
 const derived = [...FACADES.map(deriveFacade), ...deriveTypes()];
 const derivedByPath = new Map(derived.map((entry) => [entry.relative, entry.content]));
 
-const OWNED_DIRECTORIES = ['src/flighthq/scene2dCairo', 'src/flighthq/effectsCairo'];
+const OWNED_DIRECTORIES = ['src/flight/scene2dCairo', 'src/flight/effectsCairo'];
 // Handwritten cairo-native modules living beside the derived aliases: never
 // swept as stale, and a derived name colliding with one is a hard error.
-const HANDWRITTEN = new Set([path.join('src', 'flighthq', 'scene2dCairo', 'CairoSurface.hx')]);
+const HANDWRITTEN = new Set([path.join('src', 'flight', '_internal', 'scene2DCairo', 'CairoSurface.hx')]);
 for (const handwritten of HANDWRITTEN) {
   if (derivedByPath.has(handwritten)) {
     throw new Error(`derive-cairo-aliases: derived output collides with handwritten module ${handwritten}`);
@@ -201,12 +194,12 @@ for (const directory of OWNED_DIRECTORIES) {
 }
 let typeEntries = [];
 try {
-  typeEntries = readdirSync(path.join(workspace, 'src', 'flighthq', 'types'));
+  typeEntries = readdirSync(path.join(workspace, 'src', 'flight', 'types'));
 } catch {
   // No maintained type aliases yet.
 }
 for (const entry of typeEntries) {
-  const relative = path.join('src', 'flighthq', 'types', entry);
+  const relative = path.join('src', 'flight', 'types', entry);
   if (entry.startsWith('Cairo') && !ownedFiles.has(relative)) stale.push(relative);
 }
 

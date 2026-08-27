@@ -1,24 +1,24 @@
 // Line-by-line Haxe/Lime port of the upstream `particles` example (`app.ts`), written directly against
-// the generated Flight Haxe surface (`flighthq.*`). It is a standalone `lime.app.Application`: the
+// the generated Flight Haxe surface (`flight.*`). It is a standalone `lime.app.Application`: the
 // browser `./render` module and `requestAnimationFrame` loop are replaced by Lime's window/render
 // lifecycle, and the Flight app backend is wired with `App.setAppBackend(createLimeAppBackend(this))`.
 // Every statement of the upstream program is otherwise translated faithfully. The procedural
 // Canvas-2D texture painting is replaced by a minimal stub that keeps the SDK call sites intact.
-import flighthq.app.App;
-import flighthq.hostLime.LimeApp;
-import flighthq.sdk.Sdk.*;
-import flighthq.types.ColorKeyframe;
-import flighthq.types.DisplayObject;
-import flighthq.types.TextLabel;
-import flighthq.types.Bitmap;
-import flighthq.types.ParticleEmitter2D;
-import flighthq.types.ParticleForce;
+import flight.App;
+import flight.hostLime.LimeApp;
+import flight.Sdk.*;
+import flight.types.ColorKeyframe;
+import flight.types.DisplayObject;
+import flight.types.TextLabel;
+import flight.types.Bitmap;
+import flight.types.ParticleEmitter2D;
+import flight.types.ParticleForce;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.KeyCode;
 import lime.ui.KeyModifier;
 import lime.ui.Window;
-import flighthq._internal._UInt8ClampedArray;
+import flight._internal._UInt8ClampedArray;
 
 class Main extends Application {
   // `scale` in the upstream render module is `window.devicePixelRatio || 1`; Lime exposes `window.scale`.
@@ -71,7 +71,7 @@ class Main extends Application {
     }
     scale = window.scale;
     if (usingCairo) {
-      final canvas = flighthq.scene2dCairo.Scene2dCairo.createCairoSurface(window);
+      final canvas = flight.Scene2DCairo.createCairoSurface(window);
       renderState = createCanvasRenderState(canvas, {
         pixelRatio: window.scale,
         backgroundColor: 0x0a0a14ff,
@@ -83,7 +83,7 @@ class Main extends Application {
       registerCanvasBitmapTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
       enableCanvasBlendMode(renderState);
     } else {
-      final canvas = flighthq.hostLime.GlSurface.createGlSurface(window);
+      final canvas = flight.hostLime.GlSurface.createGlSurface(window);
       renderState = createGlRenderState(canvas, {
         pixelRatio: window.scale,
         backgroundColor: 0x0a0a14ff,

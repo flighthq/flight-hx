@@ -3,7 +3,8 @@
 # hosted runner), so it runs nightly and on demand. Each shard takes a
 # deterministic sixth of the sorted package list (tools/test-upstream.mjs
 # --shard i/6 partitions exactly: every package lands in one shard), so a
-# shard's pass/fail names the failing packages directly.
+# shard report distinguishes reviewed failures, unreviewed failures, and fixes;
+# only runner crashes fail the report-only workflow.
 name: parity
 on:
   schedule:

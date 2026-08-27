@@ -1,6 +1,6 @@
 package;
 
-import flighthq.math.Math.*;
+import flight.Math.*;
 
 class StaticLoweringSmoke {
   public static function run():Void {

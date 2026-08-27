@@ -4,18 +4,18 @@ import * as __dependency0 from '@flighthq/render-gl/contract';
 import * as __dependency1 from './glNode2D.mjs';
 import * as __dependency2 from './glQuadBatchWriter.mjs';
 
-const api = compiled.flighthq.scene2dGl.GlCache;
+const api = compiled.flight._Scene2DGl;
 function __syncDependencies() {
-  compiled.flighthq.renderGl.GlRenderPass.beginGlRenderPass = __dependency0.beginGlRenderPass;
-  compiled.flighthq.renderGl.GlRenderState.createGlOffscreenRenderState = __dependency0.createGlOffscreenRenderState;
-  compiled.flighthq.renderGl.GlRenderTarget.createGlRenderTarget = __dependency0.createGlRenderTarget;
-  compiled.flighthq.renderGl.GlRenderTarget.destroyGlRenderTarget = __dependency0.destroyGlRenderTarget;
-  compiled.flighthq.renderGl.GlRenderTarget.drawGlRenderTargetResult = __dependency0.drawGlRenderTargetResult;
-  compiled.flighthq.renderGl.GlRenderPass.endGlRenderPass = __dependency0.endGlRenderPass;
-  compiled.flighthq.renderGl.GlRenderTarget.resizeGlRenderTarget = __dependency0.resizeGlRenderTarget;
-  compiled.flighthq.renderGl.GlRenderPass.setGlRenderTransform2D = __dependency0.setGlRenderTransform2D;
-  compiled.flighthq.scene2dGl.GlNode2D.renderGlScene2D = __dependency1.renderGlScene2D;
-  compiled.flighthq.scene2dGl.GlQuadBatchWriter.flushGlQuadBatchWriter = __dependency2.flushGlQuadBatchWriter;
+  compiled.flight._RenderGl.beginGlRenderPass = __dependency0.beginGlRenderPass;
+  compiled.flight._RenderGl.createGlOffscreenRenderState = __dependency0.createGlOffscreenRenderState;
+  compiled.flight._RenderGl.createGlRenderTarget = __dependency0.createGlRenderTarget;
+  compiled.flight._RenderGl.destroyGlRenderTarget = __dependency0.destroyGlRenderTarget;
+  compiled.flight._RenderGl.drawGlRenderTargetResult = __dependency0.drawGlRenderTargetResult;
+  compiled.flight._RenderGl.endGlRenderPass = __dependency0.endGlRenderPass;
+  compiled.flight._RenderGl.resizeGlRenderTarget = __dependency0.resizeGlRenderTarget;
+  compiled.flight._RenderGl.setGlRenderTransform2D = __dependency0.setGlRenderTransform2D;
+  compiled.flight._Scene2DGl.renderGlScene2D = __dependency1.renderGlScene2D;
+  compiled.flight._Scene2DGl.flushGlQuadBatchWriter = __dependency2.flushGlQuadBatchWriter;
 }
 __syncDependencies();
 

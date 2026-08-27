@@ -6,8 +6,8 @@ Goal: strictly typed GL translation so Lime's typed `WebGL2RenderContext` abstra
 
 For expressions bound to `WebGl2Backend`:
 
-- Method call: `WebGl2Backend.call(gl, 'name', cast [a, b] : Array<Dynamic>)` becomes `flighthq._internal.backend.WebGl2Backend.name(gl, a, b)`.
-- Constant read: `WebGl2Backend.field(gl, 'NAME')` becomes `flighthq._internal.backend.WebGl2Backend.NAME`. The receiver expression is dropped; WebGL constant values are fixed by spec, identical on every target.
+- Method call: `WebGl2Backend.call(gl, 'name', cast [a, b] : Array<Dynamic>)` becomes `flight._internal.backend.WebGl2Backend.name(gl, a, b)`.
+- Constant read: `WebGl2Backend.field(gl, 'NAME')` becomes `flight._internal.backend.WebGl2Backend.NAME`. The receiver expression is dropped; WebGL constant values are fixed by spec, identical on every target.
 - The emitter stays type-blind: it never coerces arguments. Endpoints accept JS-semantics types (`Float` for TS numbers, `Bool`, typed handles, list abstracts) and own every `Std.int`/unwrap conversion internally.
 
 Name mapping rules (the only exceptions to identity):
@@ -22,7 +22,7 @@ Confirmed unused in current generated output (do not need endpoint forms): optio
 
 ## Backend surface (src/ side)
 
-`src/flighthq/_internal/backend/WebGl2Backend.hx` module provides:
+`src/flight/_internal/backend/WebGl2Backend.hx` module provides:
 
 - `GlContext` typedef: `lime.graphics.WebGL2RenderContext` under `#if lime`, `js.html.webgl.WebGL2RenderingContext` under `#elseif js`, `Dynamic` otherwise (eval/python portability compile only; GL never executes there).
 - Handle typedefs on the same conditional plan: `GlBuffer`, `GlFramebuffer`, `GlProgram`, `GlRenderbuffer`, `GlShader`, `GlTexture`, `GlVertexArray`, `GlUniformLocation`, `GlActiveInfo`.

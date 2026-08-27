@@ -2,9 +2,9 @@
 import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from '@flighthq/node/contract';
 
-const api = compiled.flighthq.scene2dWgpu.WgpuMeshShapeRenderer;
+const api = compiled.flight._Scene2DWgpu;
 function __syncDependencies() {
-  compiled.flighthq.node.Revision.getNodeLocalContentRevision = __dependency0.getNodeLocalContentRevision;
+  compiled.flight._Node.getNodeLocalContentRevision = __dependency0.getNodeLocalContentRevision;
 }
 __syncDependencies();
 

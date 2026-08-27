@@ -3,10 +3,10 @@ import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from './wgpuEffectPass.mjs';
 import * as __dependency1 from './wgpuEffectProgramCache.mjs';
 
-const api = compiled.flighthq.effectsWgpu.WgpuColorMatrixPass;
+const api = compiled.flight._EffectsWgpu;
 function __syncDependencies() {
-  compiled.flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass = __dependency0.drawWgpuEffectPass;
-  compiled.flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline = __dependency1.getWgpuEffectPipeline;
+  compiled.flight._EffectsWgpu.drawWgpuEffectPass = __dependency0.drawWgpuEffectPass;
+  compiled.flight._EffectsWgpu.getWgpuEffectPipeline = __dependency1.getWgpuEffectPipeline;
 }
 __syncDependencies();
 

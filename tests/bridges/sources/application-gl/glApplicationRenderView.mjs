@@ -3,15 +3,15 @@ import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from '@flighthq/node/contract';
 import * as __dependency1 from '@flighthq/render-gl/contract';
 
-const api = compiled.flighthq.applicationGl.GlApplicationRenderView;
+const api = compiled.flight._ApplicationGl;
 function __syncDependencies() {
-  compiled.flighthq.node.Viewport.createViewport = __dependency0.createViewport;
-  compiled.flighthq.renderGl.GlRenderState.createGlRenderState = __dependency1.createGlRenderState;
-  compiled.flighthq.renderGl.GlRenderTarget.createGlRenderTarget = __dependency1.createGlRenderTarget;
-  compiled.flighthq.renderGl.GlRenderState.destroyGlRenderState = __dependency1.destroyGlRenderState;
-  compiled.flighthq.renderGl.GlRenderTarget.destroyGlRenderTarget = __dependency1.destroyGlRenderTarget;
-  compiled.flighthq.renderGl.GlRenderState.invalidateGlRenderStateCache = __dependency1.invalidateGlRenderStateCache;
-  compiled.flighthq.renderGl.GlRenderTarget.resizeGlRenderTarget = __dependency1.resizeGlRenderTarget;
+  compiled.flight._Node.createViewport = __dependency0.createViewport;
+  compiled.flight._RenderGl.createGlRenderState = __dependency1.createGlRenderState;
+  compiled.flight._RenderGl.createGlRenderTarget = __dependency1.createGlRenderTarget;
+  compiled.flight._RenderGl.destroyGlRenderState = __dependency1.destroyGlRenderState;
+  compiled.flight._RenderGl.destroyGlRenderTarget = __dependency1.destroyGlRenderTarget;
+  compiled.flight._RenderGl.invalidateGlRenderStateCache = __dependency1.invalidateGlRenderStateCache;
+  compiled.flight._RenderGl.resizeGlRenderTarget = __dependency1.resizeGlRenderTarget;
 }
 __syncDependencies();
 

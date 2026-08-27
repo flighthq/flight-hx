@@ -1,5 +1,5 @@
 // Line-by-line Haxe/Lime port of the upstream `video` example (`app.ts`), written directly against
-// the generated Flight Haxe surface (`flighthq.*`). It is a standalone `lime.app.Application`: the
+// the generated Flight Haxe surface (`flight.*`). It is a standalone `lime.app.Application`: the
 // browser `./render` module and `requestAnimationFrame` loop are replaced by Lime's window/render
 // lifecycle, and the Flight app backend is wired with `App.setAppBackend(createLimeAppBackend(this))`.
 //
@@ -11,11 +11,11 @@
 // static capture render, the frames keep animating: each source advances at the playback rate its
 // upstream audio channel would have used (0.75/1.0/1.25), so the visible result matches the live
 // browser demo — three copies of the clip drifting apart in time.
-import flighthq.app.App;
-import flighthq.hostLime.LimeApp;
-import flighthq.sdk.Sdk.*;
-import flighthq.types.DisplayObject;
-import flighthq.types.Sprite;
+import flight.App;
+import flight.hostLime.LimeApp;
+import flight.Sdk.*;
+import flight.types.DisplayObject;
+import flight.types.Sprite;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.Window;
@@ -23,7 +23,7 @@ import lime.ui.Window;
 #if js
 private typedef CaptureContext = Dynamic;
 #else
-private typedef CaptureContext = flighthq._internal.backend.NativeCanvas2dContext;
+private typedef CaptureContext = flight._internal.backend.NativeCanvas2dContext;
 #end
 
 class Main extends Application {
@@ -58,7 +58,7 @@ class Main extends Application {
     }
     scale = window.scale;
     if (usingCairo) {
-      final canvas = flighthq.scene2dCairo.Scene2dCairo.createCairoSurface(window);
+      final canvas = flight.Scene2DCairo.createCairoSurface(window);
       renderState = createCanvasRenderState(canvas, {
         pixelRatio: window.scale,
         backgroundColor: 0x1a1a2eff,
@@ -67,7 +67,7 @@ class Main extends Application {
       registerCanvasImageTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
       registerRenderer(renderState, SpriteKind, defaultCanvasSpriteRenderer);
     } else {
-      final canvas = flighthq.hostLime.GlSurface.createGlSurface(window);
+      final canvas = flight.hostLime.GlSurface.createGlSurface(window);
       renderState = createGlRenderState(canvas, {
         pixelRatio: window.scale,
         backgroundColor: 0x1a1a2eff,
@@ -222,7 +222,7 @@ class Main extends Application {
 // (`videoWidth`/`videoHeight`/`readyState`) the video texture runtime reads reflectively. They must
 // be real fields — hxcpp Reflect.field cannot find expando properties on class instances.
 @:keep
-private class _CaptureVideoFrame extends flighthq._internal.backend.NativeScratchCanvas {
+private class _CaptureVideoFrame extends flight._internal.backend.NativeScratchCanvas {
   public var videoWidth:Int = 0;
   public var videoHeight:Int = 0;
   public var readyState:Int = 2;

@@ -1,15 +1,15 @@
 // Line-by-line Haxe/Lime port of the upstream `flowstates` example (`app.ts`), written directly
-// against the generated Flight Haxe surface (`flighthq.*`). It is a standalone `lime.app.Application`:
+// against the generated Flight Haxe surface (`flight.*`). It is a standalone `lime.app.Application`:
 // the browser `./render` module and `requestAnimationFrame` loop are replaced by Lime's window/render
 // lifecycle, and the Flight app backend is wired with `App.setAppBackend(createLimeAppBackend(this))`.
 // The `keydown` listener becomes Lime's `onKeyDown`; the flow stack still drives what is on screen.
-import flighthq.app.App;
-import flighthq.hostLime.LimeApp;
-import flighthq.sdk.Sdk.*;
-import flighthq.types.DisplayObject;
-import flighthq.types.TextLabel;
-import flighthq.types.FlowState;
-import flighthq.types.FlowStack;
+import flight.App;
+import flight.hostLime.LimeApp;
+import flight.Sdk.*;
+import flight.types.DisplayObject;
+import flight.types.TextLabel;
+import flight.types.FlowState;
+import flight.types.FlowStack;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.KeyCode;
@@ -75,7 +75,7 @@ class Main extends Application {
     }
     scale = window.scale;
     if (usingCairo) {
-      final canvas = flighthq.scene2dCairo.Scene2dCairo.createCairoSurface(window);
+      final canvas = flight.Scene2DCairo.createCairoSurface(window);
       renderState = createCanvasRenderState(canvas, {
         pixelRatio: window.scale,
         backgroundColor: 0x000000ff,
@@ -88,7 +88,7 @@ class Main extends Application {
       registerCanvasBitmapTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
       enableCanvasBlendMode(renderState);
     } else {
-      final canvas = flighthq.hostLime.GlSurface.createGlSurface(window);
+      final canvas = flight.hostLime.GlSurface.createGlSurface(window);
       renderState = createGlRenderState(canvas, {
         pixelRatio: window.scale,
         backgroundColor: 0x000000ff,

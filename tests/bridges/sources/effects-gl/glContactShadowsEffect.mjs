@@ -2,9 +2,9 @@
 import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from './glSsaoEffect.mjs';
 
-const api = compiled.flighthq.effectsGl.GlContactShadowsEffect;
+const api = compiled.flight._EffectsGl;
 function __syncDependencies() {
-  compiled.flighthq.effectsGl.GlSsaoEffect.applySsaoEffectToGl = __dependency0.applySsaoEffectToGl;
+  compiled.flight._EffectsGl.applySsaoEffectToGl = __dependency0.applySsaoEffectToGl;
 }
 __syncDependencies();
 

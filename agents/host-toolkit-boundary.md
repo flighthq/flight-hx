@@ -12,10 +12,10 @@ Compiling green is not permission to move work between those layers. In particul
 
 | Key | Generated reference | Maintained provider |
 | --- | --- | --- |
-| `host:<TypeName>` | `flighthq._internal.dom.<TypeName>` | `src/flighthq/_internal/dom/<TypeName>.hx` |
-| `external:<TypeName>` | `import flighthq._internal.WebExterns.<TypeName>` | `src/flighthq/_internal/WebExterns.hx` |
-| `global:<ValueName>` | `flighthq._internal._HostValueLut.get/typeofValue('<ValueName>')` | `src/flighthq/_internal/_HostValueLut.hx` |
-| `module:<specifier>#<binding>` | `flighthq._internal._HostModuleLut.get('<specifier>', '<binding>')` | `src/flighthq/_internal/_HostModuleLut.hx` and target module integration |
+| `host:<TypeName>` | `flight._internal.dom.<TypeName>` | `src/flight/_internal/dom/<TypeName>.hx` |
+| `external:<TypeName>` | `import flight._internal.WebExterns.<TypeName>` | `src/flight/_internal/WebExterns.hx` |
+| `global:<ValueName>` | `flight._internal._HostValueLut.get/typeofValue('<ValueName>')` | `src/flight/_internal/_HostValueLut.hx` |
+| `module:<specifier>#<binding>` | `flight._internal._HostModuleLut.get('<specifier>', '<binding>')` | `src/flight/_internal/_HostModuleLut.hx` and target module integration |
 
 The generated references are fully qualified, so modules without a host dependency do not gain unused toolkit imports. Global keys are explicitly declared, and the toolkit separately lists which ones have a portable implementation; the remaining keys are explicit JavaScript-only capabilities. An unknown global key throws, non-JavaScript module lookup throws with its complete key, and a missing type declaration or manifest provider fails generation.
 

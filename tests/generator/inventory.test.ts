@@ -87,8 +87,8 @@ describe('analyzeUpstream', () => {
     expect(() => resolvePackageExportLane(inventoryByName, '@flighthq/geometry/private')).toThrow(
       'Package import uses an unaccounted export lane: @flighthq/geometry/private',
     );
-    expect(geometry.haxeModule).toBe('flighthq.geometry.Geometry');
-    expect(physics3DAbi.haxeModule).toBe('flighthq.physics3dAbi.Physics3dAbi');
+    expect(geometry.haxeModule).toBe('flight.Geometry');
+    expect(physics3DAbi.haxeModule).toBe('flight.Physics3DAbi');
     expect(physics3DAbi.sdkIncluded).toBe(true);
     expect(packageRootExportLane(geometry)).toBe(geometryRoot);
     expect(sdk.exportLanes).toHaveLength(15);
@@ -259,21 +259,29 @@ describe('auditLowering', () => {
 describe('packageNameToModule', () => {
   it('maps scoped kebab-case package names deterministically', () => {
     expect(packageNameToModule('@flighthq/geometry')).toBe('Geometry');
-    expect(packageNameToModule('@flighthq/camera2d')).toBe('Camera2d');
-    expect(packageNameToModule('@flighthq/displayobject-gl')).toBe('DisplayobjectGl');
+    expect(packageNameToModule('@flighthq/camera2d')).toBe('Camera2D');
+    expect(packageNameToModule('@flighthq/displayobject-gl')).toBe('DisplayObjectGl');
     expect(packageNameToModule('@flighthq/entity')).toBe('Entity');
     expect(packageNameToModule('@flighthq/render-gl')).toBe('RenderGl');
     expect(packageNameToModule('@flighthq/sdk')).toBe('Sdk');
   });
 
-  it('maps npm packages and defining source files to nested Haxe modules', () => {
-    expect(packageNameToHaxePackage('@flighthq/render-gl')).toBe('flighthq.renderGl');
+  it('uses reviewed casing for fused words and 2D/3D package stems', () => {
+    expect(packageNameToHaxePackage('@flighthq/particleemitter')).toBe('flight');
+    expect(packageNameToModule('@flighthq/particleemitter')).toBe('ParticleEmitter');
+    expect(packageNameToHaxePackage('@flighthq/scene2d-wgpu')).toBe('flight');
+    expect(packageNameToModule('@flighthq/scene2d-wgpu')).toBe('Scene2DWgpu');
+    expect(packageNameToHaxePackage('@flighthq/physics3d-abi')).toBe('flight');
+    expect(packageNameToModule('@flighthq/physics3d-abi')).toBe('Physics3DAbi');
+    expect(packageNameToHaxePackage('@flighthq/unknowncompound-gl')).toBe('flight');
+  });
+
+  it('stages defining sources at root for folding into the package implementation module', () => {
+    expect(packageNameToHaxePackage('@flighthq/render-gl')).toBe('flight');
     expect(sourcePathToModule('upstream/packages/geometry/src/vector2.ts')).toBe('Vector2');
     expect(sourcePathToModule('upstream/packages/textshaper/src/_textShaperHooks.ts')).toBe('_TextShaperHooks');
     expect(sourcePathToModule('upstream/packages/menu/src/menu-templates.ts')).toBe('MenuTemplates');
-    expect(sourcePathToHaxePackage('@flighthq/geometry', 'upstream/packages/geometry/src/vector2.ts')).toBe(
-      'flighthq.geometry',
-    );
+    expect(sourcePathToHaxePackage('@flighthq/geometry', 'upstream/packages/geometry/src/vector2.ts')).toBe('flight');
   });
 
   it('hides internal and test-helper implementation modules', () => {
@@ -281,7 +289,7 @@ describe('packageNameToModule', () => {
     expect(sourcePathToModule('upstream/packages/render-wgpu/src/wgpuTestHelper.ts')).toBeUndefined();
     expect(sourcePathToImplementationModule('upstream/packages/signals/src/internal.ts')).toBe('_Internal');
     expect(sourcePathToHaxePackage('@flighthq/signals', 'upstream/packages/signals/src/internal.ts')).toBe(
-      'flighthq.signals._internal',
+      'flight._internal',
     );
   });
 });
@@ -313,7 +321,7 @@ function exclusionFixture(
     directory,
     exclusion: null,
     exportLanes: [],
-    haxeModule: `flighthq.${name}.${name}`,
+    haxeModule: `flight.${name}.${name}`,
     name: `@flighthq/${name}`,
     sdkExposures: [],
     sdkIncluded: false,

@@ -6,16 +6,16 @@ import * as __dependency2 from './wgpuEffectBoxBlur.mjs';
 import * as __dependency3 from './wgpuEffectPass.mjs';
 import * as __dependency4 from './wgpuEffectTintShader.mjs';
 
-const api = compiled.flighthq.effectsWgpu.WgpuDropShadowEffect;
+const api = compiled.flight._EffectsWgpu;
 function __syncDependencies() {
-  compiled.flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget = __dependency0.acquireWgpuRenderTarget;
-  compiled.flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget = __dependency0.releaseWgpuRenderTarget;
-  compiled.flighthq.effectsWgpu.WgpuEffectBlitShader.applyWgpuEffectBlitOffsetPass = __dependency1.applyWgpuEffectBlitOffsetPass;
-  compiled.flighthq.effectsWgpu.WgpuEffectBlitShader.applyWgpuEffectBlitPass = __dependency1.applyWgpuEffectBlitPass;
-  compiled.flighthq.effectsWgpu.WgpuEffectBlitShader.applyWgpuEffectErasePass = __dependency1.applyWgpuEffectErasePass;
-  compiled.flighthq.effectsWgpu.WgpuEffectBoxBlur.applyWgpuEffectBoxBlur = __dependency2.applyWgpuEffectBoxBlur;
-  compiled.flighthq.effectsWgpu.WgpuEffectPass.clearWgpuEffectTarget = __dependency3.clearWgpuEffectTarget;
-  compiled.flighthq.effectsWgpu.WgpuEffectTintShader.applyWgpuEffectTintPass = __dependency4.applyWgpuEffectTintPass;
+  compiled.flight._RenderWgpu.acquireWgpuRenderTarget = __dependency0.acquireWgpuRenderTarget;
+  compiled.flight._RenderWgpu.releaseWgpuRenderTarget = __dependency0.releaseWgpuRenderTarget;
+  compiled.flight._EffectsWgpu.applyWgpuEffectBlitOffsetPass = __dependency1.applyWgpuEffectBlitOffsetPass;
+  compiled.flight._EffectsWgpu.applyWgpuEffectBlitPass = __dependency1.applyWgpuEffectBlitPass;
+  compiled.flight._EffectsWgpu.applyWgpuEffectErasePass = __dependency1.applyWgpuEffectErasePass;
+  compiled.flight._EffectsWgpu.applyWgpuEffectBoxBlur = __dependency2.applyWgpuEffectBoxBlur;
+  compiled.flight._EffectsWgpu.clearWgpuEffectTarget = __dependency3.clearWgpuEffectTarget;
+  compiled.flight._EffectsWgpu.applyWgpuEffectTintPass = __dependency4.applyWgpuEffectTintPass;
 }
 __syncDependencies();
 

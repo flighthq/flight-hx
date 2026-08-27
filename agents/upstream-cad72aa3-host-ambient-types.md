@@ -7,7 +7,7 @@ Status: implemented, regenerated, and verified with review's maintained Haxe dec
 Host types are now classified by TypeScript checker identity and declaration origin. A resolved type declared by a non-ECMAScript TypeScript host library, a global ambient declaration file, or a global augmentation maps mechanically to:
 
 ```text
-flighthq._internal.dom.<SameTypeName>
+flight._internal.dom.<SameTypeName>
 ```
 
 There is no type-name allowlist and no HTML, GPU, WebGL, event, or canvas prefix heuristic. External modules do not become host types merely because they contain declarations, and a symbol merged with an ECMAScript library declaration stays on the portable ECMAScript path. This keeps names such as a source-defined `HTMLFlightLocal` and the standard `Date` type out of the host mapping while admitting new ambient host types without a generator edit.
@@ -16,13 +16,13 @@ The same identity rule applies to explicit type references, inferred member rece
 
 ## Member emission and failure behavior
 
-Reads, writes, and calls on an unbound checker-proven host receiver use one target-independent typed expression. An explicitly mapped parameter emits `image.width`, while a host value recovered through a structural `Dynamic` path emits `(cast value : flighthq._internal.dom.HTMLImageElement).width`. The cast makes the maintained declaration resolve both the identity and its member instead of silently accepting another dynamic lookup. Optional access evaluates the receiver once and preserves the existing nullish result. Spread calls use `Reflect.callMethod` only for argument-spread semantics; the method value itself is still read as a direct typed field.
+Reads, writes, and calls on an unbound checker-proven host receiver use one target-independent typed expression. An explicitly mapped parameter emits `image.width`, while a host value recovered through a structural `Dynamic` path emits `(cast value : flight._internal.dom.HTMLImageElement).width`. The cast makes the maintained declaration resolve both the identity and its member instead of silently accepting another dynamic lookup. Optional access evaluates the receiver once and preserves the existing nullish result. Spread calls use `Reflect.callMethod` only for argument-spread semantics; the method value itself is still read as a direct typed field.
 
 On non-JavaScript targets, many maintained host declarations are still `Dynamic` compatibility stubs rather than concrete toolkit implementations. That is deliberately not repaired in generated expressions: tolerant absent-field behavior, call arity adjustment, or a native replacement value belongs in the declaration, value LUT, or named adapter. The transpiler does not route checker-known members through `_Runtime` merely to make an incomplete toolkit compile or execute.
 
 Existing target-semantic host endpoints retain priority over ordinary direct emission. Canvas2D, canvas-element, DOM-root, WebGL, and selected WebGPU operations still cross their maintained typed backend because that seam owns native portability or observable host semantics.
 
-No maintained declaration is synthesized by the generator. If the mapped `flighthq._internal.dom.<SameTypeName>` declaration is absent, generation fails with the missing `host:<SameTypeName>` key. Review owns the maintained declarations and adapters: real browser externs, remaining portable `Dynamic` compatibility branches, concrete native types, value LUT entries, and target backends.
+No maintained declaration is synthesized by the generator. If the mapped `flight._internal.dom.<SameTypeName>` declaration is absent, generation fails with the missing `host:<SameTypeName>` key. Review owns the maintained declarations and adapters: real browser externs, remaining portable `Dynamic` compatibility branches, concrete native types, value LUT entries, and target backends.
 
 Unresolved source type names no longer collapse silently to `Dynamic`. A compile fixture proves that an unresolved `MissingHostType` remains visible in generated Haxe and produces `Type not found : MissingHostType`.
 

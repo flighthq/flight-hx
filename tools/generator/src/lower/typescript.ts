@@ -143,15 +143,15 @@ const domRootBindings = {
 } as const satisfies Readonly<Record<string, IrDomRootBinding>>;
 
 const typedArrayTypeReferenceMap = {
-  Float32Array: 'flighthq._internal._Float32Array',
-  Float64Array: 'flighthq._internal._Float64Array',
-  Int16Array: 'flighthq._internal._Int16Array',
-  Int32Array: 'flighthq._internal._Int32Array',
-  Int8Array: 'flighthq._internal._Int8Array',
-  Uint16Array: 'flighthq._internal._UInt16Array',
-  Uint32Array: 'flighthq._internal._UInt32Array',
-  Uint8Array: 'flighthq._internal._UInt8Array',
-  Uint8ClampedArray: 'flighthq._internal._UInt8ClampedArray',
+  Float32Array: 'flight._internal._Float32Array',
+  Float64Array: 'flight._internal._Float64Array',
+  Int16Array: 'flight._internal._Int16Array',
+  Int32Array: 'flight._internal._Int32Array',
+  Int8Array: 'flight._internal._Int8Array',
+  Uint16Array: 'flight._internal._UInt16Array',
+  Uint32Array: 'flight._internal._UInt32Array',
+  Uint8Array: 'flight._internal._UInt8Array',
+  Uint8ClampedArray: 'flight._internal._UInt8ClampedArray',
 } as const;
 
 type TypedArrayBinding = keyof typeof typedArrayTypeReferenceMap;
@@ -182,23 +182,23 @@ const standardMathConstants = {
 
 const portableTypeReferenceMap: Readonly<Record<string, string>> = {
   ArrayBuffer: 'haxe.io.Bytes',
-  ArrayBufferLike: 'flighthq._internal._ArrayBufferLike',
+  ArrayBufferLike: 'flight._internal._ArrayBufferLike',
   ArrayBufferView: 'haxe.io.ArrayBufferView',
   ...typedArrayTypeReferenceMap,
 };
 
 const standardGenericTypeReferenceMap: Readonly<Record<string, { arity: number; haxeType: string }>> = {
-  ArrayLike: { arity: 1, haxeType: 'flighthq._internal._ArrayLike' },
-  Record: { arity: 2, haxeType: 'flighthq._internal._Record' },
+  ArrayLike: { arity: 1, haxeType: 'flight._internal._ArrayLike' },
+  Record: { arity: 2, haxeType: 'flight._internal._Record' },
 };
 
 const collectionTypeReferenceMap: Readonly<Record<string, { arity: number; haxeType: string }>> = {
-  Map: { arity: 2, haxeType: 'flighthq._internal._Map' },
-  ReadonlyMap: { arity: 2, haxeType: 'flighthq._internal._Map' },
-  ReadonlySet: { arity: 1, haxeType: 'flighthq._internal._Set' },
-  Set: { arity: 1, haxeType: 'flighthq._internal._Set' },
-  WeakMap: { arity: 2, haxeType: 'flighthq._internal._WeakMap' },
-  WeakSet: { arity: 1, haxeType: 'flighthq._internal._WeakSet' },
+  Map: { arity: 2, haxeType: 'flight._internal._Map' },
+  ReadonlyMap: { arity: 2, haxeType: 'flight._internal._Map' },
+  ReadonlySet: { arity: 1, haxeType: 'flight._internal._Set' },
+  Set: { arity: 1, haxeType: 'flight._internal._Set' },
+  WeakMap: { arity: 2, haxeType: 'flight._internal._WeakMap' },
+  WeakSet: { arity: 1, haxeType: 'flight._internal._WeakSet' },
 };
 
 const standardDynamicTypes = new Set([
@@ -950,7 +950,7 @@ function structuralReceiverType(node: ts.PropertyAccessExpression, context: Lowe
   if (receiver.isUnionOrIntersection() || (receiver.flags & ts.TypeFlags.IndexedAccess) !== 0) return fieldShape();
   const lowered = lowerCheckerType(receiver, node.expression, context, new Set());
   if (!lowered || lowered.kind === 'dynamic' || lowered.kind === 'union') return undefined;
-  if (lowered.kind === 'named' && lowered.name === 'flighthq._internal._IndexedAccess') return fieldShape();
+  if (lowered.kind === 'named' && lowered.name === 'flight._internal._IndexedAccess') return fieldShape();
   if (lowered.kind === 'anonymous') {
     return lowered.fields.some((field) => field.name === node.name.text) ? lowered : fieldShape();
   }
@@ -1504,13 +1504,13 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
     case ts.SyntaxKind.UndefinedKeyword:
       return { kind: 'dynamic', reason: 'source-undefined' };
     case ts.SyntaxKind.ObjectKeyword:
-      return { arguments: [], kind: 'named', name: 'flighthq._internal._Object' };
+      return { arguments: [], kind: 'named', name: 'flight._internal._Object' };
     case ts.SyntaxKind.BooleanKeyword:
       return { kind: 'primitive', name: 'Bool' };
     case ts.SyntaxKind.NumberKeyword:
       return { kind: 'primitive', name: 'Float' };
     case ts.SyntaxKind.SymbolKeyword:
-      return { arguments: [], kind: 'named', name: 'flighthq._internal._Symbol' };
+      return { arguments: [], kind: 'named', name: 'flight._internal._Symbol' };
     case ts.SyntaxKind.StringKeyword:
       return { kind: 'primitive', name: 'String' };
     case ts.SyntaxKind.VoidKeyword:
@@ -1558,7 +1558,7 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
         ts.isTypeParameterDeclaration(declaration) &&
         (ts.isInferTypeNode(declaration.parent) || ts.isMappedTypeNode(declaration.parent)),
     );
-    if (operatorBound) return { arguments: [], kind: 'named', name: 'flighthq._internal._Infer' };
+    if (operatorBound) return { arguments: [], kind: 'named', name: 'flight._internal._Infer' };
     const declaredArity = Math.max(
       0,
       ...(symbol?.declarations ?? []).map((declaration) =>
@@ -1588,7 +1588,7 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
       }
     }
     if (name === 'DeepReadonly') {
-      return { arguments: arguments_, kind: 'named', name: 'flighthq._internal._DeepReadonly' };
+      return { arguments: arguments_, kind: 'named', name: 'flight._internal._DeepReadonly' };
     }
     if (context.erasedLocalTypes.has(name)) {
       const localDeclaration = symbol?.declarations?.find(
@@ -1638,12 +1638,12 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
       return { kind: 'dynamic' };
     }
     const utilityType = {
-      Exclude: 'flighthq._internal._Exclude',
-      Extract: 'flighthq._internal._Extract',
-      Omit: 'flighthq._internal._Omit',
-      Partial: 'flighthq._internal._Partial',
-      Pick: 'flighthq._internal._Pick',
-      Required: 'flighthq._internal._Required',
+      Exclude: 'flight._internal._Exclude',
+      Extract: 'flight._internal._Extract',
+      Omit: 'flight._internal._Omit',
+      Partial: 'flight._internal._Partial',
+      Pick: 'flight._internal._Pick',
+      Required: 'flight._internal._Required',
     }[name];
     if (utilityType && standardType) return { arguments: arguments_, kind: 'named', name: utilityType };
     if (['Awaited', 'NonNullable', 'Readonly'].includes(name) && arguments_[0]) {
@@ -1656,9 +1656,9 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
     if (name === 'Promise') {
       const promiseType =
         arguments_[0]?.kind === 'primitive' && arguments_[0].name === 'Void'
-          ? { arguments: [], kind: 'named' as const, name: 'flighthq._internal._Nothing' }
+          ? { arguments: [], kind: 'named' as const, name: 'flight._internal._Nothing' }
           : (arguments_[0] ?? { kind: 'dynamic' as const });
-      return { arguments: [promiseType], kind: 'named', name: 'flighthq._internal._Promise' };
+      return { arguments: [promiseType], kind: 'named', name: 'flight._internal._Promise' };
     }
     if (name === 'Array' || name === 'ReadonlyArray') {
       return { element: arguments_[0] ?? { kind: 'dynamic' }, kind: 'array' };
@@ -1707,11 +1707,11 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
     return {
       arguments: [lowerType(node.objectType, context), lowerType(node.indexType, context)],
       kind: 'named',
-      name: 'flighthq._internal._IndexedAccess',
+      name: 'flight._internal._IndexedAccess',
     };
   }
   if (ts.isInferTypeNode(node)) {
-    return { arguments: [], kind: 'named', name: 'flighthq._internal._Infer' };
+    return { arguments: [], kind: 'named', name: 'flight._internal._Infer' };
   }
   if (ts.isConditionalTypeNode(node)) {
     return {
@@ -1722,7 +1722,7 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
         lowerType(node.falseType, context),
       ],
       kind: 'named',
-      name: 'flighthq._internal._Conditional',
+      name: 'flight._internal._Conditional',
     };
   }
   if (ts.isMappedTypeNode(node)) {
@@ -1732,7 +1732,7 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
         node.type ? lowerType(node.type, context) : { kind: 'dynamic' },
       ],
       kind: 'named',
-      name: 'flighthq._internal._Mapped',
+      name: 'flight._internal._Mapped',
     };
   }
   if (ts.isLiteralTypeNode(node)) {
@@ -1875,10 +1875,10 @@ function lowerCheckerTypeUncached(
   if ((type.flags & ts.TypeFlags.NumberLike) !== 0) return { kind: 'primitive', name: 'Float' };
   if ((type.flags & ts.TypeFlags.StringLike) !== 0) return { kind: 'primitive', name: 'String' };
   if ((type.flags & ts.TypeFlags.ESSymbolLike) !== 0) {
-    return { arguments: [], kind: 'named', name: 'flighthq._internal._Symbol' };
+    return { arguments: [], kind: 'named', name: 'flight._internal._Symbol' };
   }
   if ((type.flags & ts.TypeFlags.NonPrimitive) !== 0) {
-    return { arguments: [], kind: 'named', name: 'flighthq._internal._Object' };
+    return { arguments: [], kind: 'named', name: 'flight._internal._Object' };
   }
   if ((type.flags & ts.TypeFlags.IndexedAccess) !== 0) {
     const indexed = type as ts.IndexedAccessType;
@@ -1888,7 +1888,7 @@ function lowerCheckerTypeUncached(
       ? {
           arguments: [objectType, indexType],
           kind: 'named',
-          name: 'flighthq._internal._IndexedAccess',
+          name: 'flight._internal._IndexedAccess',
         }
       : undefined;
   }
@@ -1970,11 +1970,11 @@ function lowerCheckerTypeUncached(
     return {
       arguments: [
         promised.kind === 'primitive' && promised.name === 'Void'
-          ? { arguments: [], kind: 'named', name: 'flighthq._internal._Nothing' }
+          ? { arguments: [], kind: 'named', name: 'flight._internal._Nothing' }
           : promised,
       ],
       kind: 'named',
-      name: 'flighthq._internal._Promise',
+      name: 'flight._internal._Promise',
     };
   }
   const portableType = name && standardLibraryType(type, name) ? portableTypeReferenceMap[name] : undefined;
@@ -2397,14 +2397,14 @@ function commonType(types: IrType[]): IrType {
 
 function lowerIntersection(types: IrType[], forceNominal = false): IrType {
   const concrete = types.filter(
-    (type) => !(type.kind === 'named' && type.name === 'flighthq._internal._Object' && types.length > 1),
+    (type) => !(type.kind === 'named' && type.name === 'flight._internal._Object' && types.length > 1),
   );
   if (concrete.length === 0) return types[0] ?? { kind: 'dynamic', reason: 'source-unknown' };
   if (concrete.length === 1) return concrete[0]!;
   if (
     !forceNominal &&
     concrete.every(
-      (type) => type.kind === 'anonymous' || (type.kind === 'named' && !type.name.startsWith('flighthq._internal.')),
+      (type) => type.kind === 'anonymous' || (type.kind === 'named' && !type.name.startsWith('flight._internal.')),
     )
   ) {
     return {
@@ -2417,7 +2417,7 @@ function lowerIntersection(types: IrType[], forceNominal = false): IrType {
     (left, right) => ({
       arguments: [left, right],
       kind: 'named',
-      name: 'flighthq._internal._Intersection2',
+      name: 'flight._internal._Intersection2',
     }),
     concrete[0] ?? { kind: 'dynamic', reason: 'source-unknown' },
   );
@@ -3364,7 +3364,7 @@ function typedStructReceiverCast(
   if (declaredTypeNode) {
     const storageType = lowerType(declaredTypeNode, context);
     const concreteStorageType = storageType.kind === 'nullable' ? storageType.inner : storageType;
-    if (concreteStorageType.kind === 'named' && concreteStorageType.name === 'flighthq._internal._IndexedAccess') {
+    if (concreteStorageType.kind === 'named' && concreteStorageType.name === 'flight._internal._IndexedAccess') {
       return schemaHaxeType;
     }
   }
@@ -3782,7 +3782,7 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
         callee: {
           kind: 'property',
           name: 'typeofValue',
-          object: { kind: 'identifier', name: 'flighthq._internal._HostValueLut' },
+          object: { kind: 'identifier', name: 'flight._internal._HostValueLut' },
         },
         kind: 'call',
         typeArguments: [],
@@ -4260,7 +4260,7 @@ function isThisParameter(node: ts.ParameterDeclaration): boolean {
 function promiseOfDynamic(): IrType {
   return {
     kind: 'named',
-    name: 'flighthq._internal._Promise',
+    name: 'flight._internal._Promise',
     arguments: [{ kind: 'dynamic' }],
   };
 }
@@ -4288,7 +4288,7 @@ function lowerIdentifier(node: ts.Identifier, context: LoweringContext, locallyB
       callee: {
         kind: 'property',
         name: 'get',
-        object: { kind: 'identifier', name: 'flighthq._internal._HostModuleLut' },
+        object: { kind: 'identifier', name: 'flight._internal._HostModuleLut' },
       },
       kind: 'call',
       typeArguments: [],
@@ -4303,7 +4303,7 @@ function lowerIdentifier(node: ts.Identifier, context: LoweringContext, locallyB
       callee: {
         kind: 'property',
         name: 'get',
-        object: { kind: 'identifier', name: 'flighthq._internal._HostValueLut' },
+        object: { kind: 'identifier', name: 'flight._internal._HostValueLut' },
       },
       kind: 'call',
       typeArguments: [],

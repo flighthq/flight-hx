@@ -73,15 +73,15 @@ describe('Haxe emitter indentation', () => {
 
     expect(output).toContain(
       [
-        '      var task:Void->flighthq._internal._Promise<Float> = cast _Runtime.UNDEFINED;',
-        '      task = function():flighthq._internal._Promise<Float> {',
-        '        return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {',
+        '      var task:Void->flight._internal._Promise<Float> = cast _Runtime.UNDEFINED;',
+        '      task = function():flight._internal._Promise<Float> {',
+        '        return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {',
         '          var nested:Void->Float = cast _Runtime.UNDEFINED;',
         '          nested = function():Float {',
         '            return cast 7.0;',
         '            return cast _Runtime.UNDEFINED;',
         '          };',
-        '          return flighthq._internal._Async.resolve(_Runtime.callValue(nested, cast ([] : Array<Dynamic>)));',
+        '          return flight._internal._Async.resolve(_Runtime.callValue(nested, cast ([] : Array<Dynamic>)));',
         '        }));',
         '      };',
       ].join('\n'),

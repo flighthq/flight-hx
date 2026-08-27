@@ -5,15 +5,15 @@ import * as __dependency1 from './wgpuBlurEffect.mjs';
 import * as __dependency2 from './wgpuEffectPass.mjs';
 import * as __dependency3 from './wgpuEffectProgramCache.mjs';
 
-const api = compiled.flighthq.effectsWgpu.WgpuLensDirtEffect;
+const api = compiled.flight._EffectsWgpu;
 function __syncDependencies() {
-  compiled.flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget = __dependency0.acquireWgpuRenderTarget;
-  compiled.flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget = __dependency0.releaseWgpuRenderTarget;
-  compiled.flighthq.effectsWgpu.WgpuBlurEffect.applyGaussianBlurToWgpu = __dependency1.applyGaussianBlurToWgpu;
-  compiled.flighthq.effectsWgpu.WgpuEffectPass.createWgpuDualSourceEffectPipeline = __dependency2.createWgpuDualSourceEffectPipeline;
-  compiled.flighthq.effectsWgpu.WgpuEffectPass.drawWgpuDualSourceEffectPass = __dependency2.drawWgpuDualSourceEffectPass;
-  compiled.flighthq.effectsWgpu.WgpuEffectPass.drawWgpuEffectPass = __dependency2.drawWgpuEffectPass;
-  compiled.flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline = __dependency3.getWgpuEffectPipeline;
+  compiled.flight._RenderWgpu.acquireWgpuRenderTarget = __dependency0.acquireWgpuRenderTarget;
+  compiled.flight._RenderWgpu.releaseWgpuRenderTarget = __dependency0.releaseWgpuRenderTarget;
+  compiled.flight._EffectsWgpu.applyGaussianBlurToWgpu = __dependency1.applyGaussianBlurToWgpu;
+  compiled.flight._EffectsWgpu.createWgpuDualSourceEffectPipeline = __dependency2.createWgpuDualSourceEffectPipeline;
+  compiled.flight._EffectsWgpu.drawWgpuDualSourceEffectPass = __dependency2.drawWgpuDualSourceEffectPass;
+  compiled.flight._EffectsWgpu.drawWgpuEffectPass = __dependency2.drawWgpuEffectPass;
+  compiled.flight._EffectsWgpu.getWgpuEffectPipeline = __dependency3.getWgpuEffectPipeline;
 }
 __syncDependencies();
 

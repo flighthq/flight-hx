@@ -1,5 +1,5 @@
 // Line-by-line Haxe/Lime port of the upstream `scene3d` example (`app.ts` + `render.webgl.ts`),
-// written directly against the generated Flight Haxe surface (`flighthq.*`). It is a standalone
+// written directly against the generated Flight Haxe surface (`flight.*`). It is a standalone
 // `lime.app.Application`: the browser `./render` module is replaced by Lime's window/render
 // lifecycle, the canvas pointer/wheel listeners by Lime's mouse callbacks, and the Flight app
 // backend is wired with `App.setAppBackend(createLimeAppBackend(this))`. Every statement is
@@ -9,12 +9,12 @@
 // module (registerGlStandardPbrMaterial + a HDR/depth GlRenderEffectPipeline + the shadow-map pass +
 // prepareScene3DRender + drawGlScene3D) is inlined into `onWindowCreate` (setup) and
 // `render(context)` (the per-frame draw).
-import flighthq.app.App;
-import flighthq.hostLime.LimeApp;
-import flighthq.sdk.Sdk.*;
-import flighthq.types.Camera3D;
-import flighthq.types.Scene3DLights;
-import flighthq.types.Node3D;
+import flight.App;
+import flight.hostLime.LimeApp;
+import flight.Sdk.*;
+import flight.types.Camera3D;
+import flight.types.Scene3DLights;
+import flight.types.Node3D;
 import lime.app.Application;
 import lime.graphics.RenderContext;
 import lime.ui.KeyCode;
@@ -60,7 +60,7 @@ class Main extends Application {
         throw 'Flight examples require an OpenGL/WebGL render context.';
     }
     scale = window.scale;
-    final canvas = flighthq.hostLime.GlSurface.createGlSurface(window);
+    final canvas = flight.hostLime.GlSurface.createGlSurface(window);
     renderState = createGlRenderState(canvas, {
       pixelRatio: window.scale,
       backgroundColor: 0x0a0c10ff,
@@ -223,9 +223,9 @@ class Main extends Application {
     // Browser WebGL clears the default framebuffer's depth/stencil before every frame regardless of
     // preserveDrawingBuffer; Lime does not, so without this host-parity clear the present quad fails
     // the scene pass's leftover LESS depth test from frame 2 on and the window stays black.
-    flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
-    flighthq._internal.backend.WebGl2Backend.clearDepth(gl, 1);
-    flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_BUFFER_BIT);
+    flight._internal.backend.WebGl2Backend.depthMask(gl, true);
+    flight._internal.backend.WebGl2Backend.clearDepth(gl, 1);
+    flight._internal.backend.WebGl2Backend.clear(gl, flight._internal.backend.WebGl2Backend.DEPTH_BUFFER_BIT);
     // The directional depth pass must finish before the HDR effect target opens its framebuffer.
     prepareScene3DRender(renderState, scene, camera, lights);
     // Upstream f1a7a9a0: the shadow pass now takes the owning directional light, whose
@@ -233,9 +233,9 @@ class Main extends Application {
     drawGlScene3DShadowMap(renderState, scene, shadowCamera, lights.directional);
     beginGlRenderEffectPipeline(renderState, pipeline, 'linear');
     renderGlBackground(renderState);
-    flighthq._internal.backend.WebGl2Backend.depthMask(gl, true);
-    flighthq._internal.backend.WebGl2Backend.clearDepth(gl, 1);
-    flighthq._internal.backend.WebGl2Backend.clear(gl, flighthq._internal.backend.WebGl2Backend.DEPTH_BUFFER_BIT);
+    flight._internal.backend.WebGl2Backend.depthMask(gl, true);
+    flight._internal.backend.WebGl2Backend.clearDepth(gl, 1);
+    flight._internal.backend.WebGl2Backend.clear(gl, flight._internal.backend.WebGl2Backend.DEPTH_BUFFER_BIT);
     drawGlScene3D(renderState, scene, camera, lights);
     endGlRenderEffectPipeline(renderState, pipeline, cast []);
   }

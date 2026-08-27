@@ -1,6 +1,6 @@
 # Lime examples
 
-Faithful, **line-by-line** Haxe/Lime ports of every example under [`upstream/examples/packages`](../upstream/examples/packages), written directly against the generated Flight Haxe surface (`flighthq.*`). Each example is an ordinary, **self-contained** Lime project — a `project.xml` and a single `Main.hx` — with no shared base class or helper module.
+Faithful, **line-by-line** Haxe/Lime ports of every example under [`upstream/examples/packages`](../upstream/examples/packages), written directly against the generated Flight Haxe surface (`flight.*`). Each example is an ordinary, **self-contained** Lime project — a `project.xml` and a single `Main.hx` — with no shared base class or helper module.
 
 ## Structure
 

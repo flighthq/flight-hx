@@ -20,7 +20,7 @@ Each eligible interface or object-shaped type alias becomes a structural schema 
 - any string/number index signature;
 - an eligibility classification and the reason for any dynamic escape.
 
-Public typedef placement is name-addressed: every exported declaration from `@flighthq/types` owns `flighthq.types.<TypeName>`, independent of the defining TypeScript file. Source provenance remains in the declaration and generated manifests, while non-public helper types may remain with their implementation source. Package and SDK facades reference the canonical type module; they do not receive duplicate typedefs.
+Public typedef placement is name-addressed: every exported declaration from `@flighthq/types` owns `flight.types.<TypeName>`, independent of the defining TypeScript file. Source provenance remains in the declaration and generated manifests, while non-public helper types may remain with their implementation source. Package and SDK facades reference the canonical type module; they do not receive duplicate typedefs.
 
 Anonymous inline object types may remain inline Haxe structures. If the same resolved shape is reused enough to require a name, the generator should create a private, deterministic helper typedef in the owning implementation module, keyed by source identity rather than a hash that can churn when unrelated files change.
 

@@ -2,9 +2,9 @@
 import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from '@flighthq/render-wgpu/contract';
 
-const api = compiled.flighthq.effectsWgpu.WgpuEffectPass;
+const api = compiled.flight._EffectsWgpu;
 function __syncDependencies() {
-  compiled.flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime = __dependency0.getWgpuRenderStateRuntime;
+  compiled.flight._RenderWgpu.getWgpuRenderStateRuntime = __dependency0.getWgpuRenderStateRuntime;
 }
 __syncDependencies();
 

@@ -4038,7 +4038,7 @@ describe('typed struct analysis', () => {
     declaration.cppStructInitSchemaId = candidateId(candidate);
     const output = emitHaxeModule({
       declarations: result.lowered.declarations,
-      haxePackage: 'flighthq.types',
+      haxePackage: 'flight.types',
       imports: [],
       name: 'CameraPilot',
       packageName: '@flighthq/types',
@@ -4053,7 +4053,7 @@ describe('typed struct analysis', () => {
     expect(output).not.toContain('return cast { rotation: 0.0');
 
     const fixtureDirectory = path.resolve('build/haxe-cpp-struct-init-fixture');
-    const packageDirectory = path.join(fixtureDirectory, 'flighthq', 'types');
+    const packageDirectory = path.join(fixtureDirectory, 'flight', 'types');
     rmSync(fixtureDirectory, { force: true, recursive: true });
     mkdirSync(packageDirectory, { recursive: true });
     writeFileSync(path.join(packageDirectory, 'CameraPilot.hx'), output.replace('#if cpp', '#if (cpp || eval)'));
@@ -4062,8 +4062,8 @@ describe('typed struct analysis', () => {
       `
         class Main {
           static function main() {
-            final camera = flighthq.types.CameraPilot.createCamera2D();
-            if (!Std.isOfType(camera, flighthq.types.CameraPilot.Camera2D)) throw 'not a class';
+            final camera = flight.types.CameraPilot.createCamera2D();
+            if (!Std.isOfType(camera, flight.types.CameraPilot.Camera2D)) throw 'not a class';
             if (camera.x != 12 || camera.viewportHeight != 480 || camera.zoom != 2) throw 'bad fields';
           }
         }
@@ -4081,7 +4081,7 @@ describe('typed struct analysis', () => {
       `
         class JsMain {
           static function main() {
-            final camera = flighthq.types.CameraPilot.createCamera2D();
+            final camera = flight.types.CameraPilot.createCamera2D();
             if (camera.x != 12 || camera.viewportHeight != 480 || camera.zoom != 2) throw 'bad fields';
           }
         }
@@ -4293,7 +4293,7 @@ describe('typed struct analysis', () => {
     const classAuditById = new Map(classAudit.schemas.map((schema) => [schema.id, schema]));
     const provenanceById = new Map(provenance.schemas.map((schema) => [schema.id, schema]));
     const typeErasureReport = JSON.parse(readFileSync('reports/type-erasures.json', 'utf8')) as {
-      modules: Array<{ byReason: Record<string, number>; module: string; total: number }>;
+      modules: Array<{ byReason: Record<string, number>; module: string; source: string; total: number }>;
       summary: { byReason: Record<string, number>; total: number };
     };
     const rectangle = report.candidates.find((candidate) => candidate.name === 'Rectangle');
@@ -5190,14 +5190,14 @@ describe('typed struct analysis', () => {
     expect(() => validateCppStructInitProvenance([rectangleId, rectangleLikeId], provenance)).toThrow(
       `cpp @:structInit schemas are not provenance-closed: ${rectangleId}, ${rectangleLikeId}`,
     );
-    expect(readFileSync('generated/flighthq/types/ParticleEmitter2D.hx', 'utf8')).toContain(
+    expect(readFileSync('generated/flight/types/ParticleEmitter2D.hx', 'utf8')).toContain(
       'typedef ParticleEmitter2D = { var data:ParticleEmitterData;',
     );
-    expect(readFileSync('generated/flighthq/types/ParticleEmitter3D.hx', 'utf8')).toContain(
+    expect(readFileSync('generated/flight/types/ParticleEmitter3D.hx', 'utf8')).toContain(
       'typedef ParticleEmitter3D = { var data:ParticleEmitterData;',
     );
-    expect(readFileSync('generated/flighthq/types/NodeData.hx', 'utf8')).toContain(
-      'typedef NodeData = flighthq._internal._Object;',
+    expect(readFileSync('generated/flight/types/NodeData.hx', 'utf8')).toContain(
+      'typedef NodeData = flight._internal._Object;',
     );
 
     expect(report.summary).toEqual({
@@ -5252,42 +5252,55 @@ describe('typed struct analysis', () => {
     });
     expect(
       typeErasureReport.modules
-        .filter(({ module }) =>
-          [
-            'flighthq.scene2dCanvas.CanvasCache',
-            'flighthq.scene2dCanvas.CanvasRenderState',
-            'flighthq.scene2dCanvas.CanvasRenderTarget',
-          ].includes(module),
+        .filter(
+          ({ module, source }) =>
+            module === 'flight._Scene2DCanvas' &&
+            [
+              'upstream/packages/scene2d-canvas/src/canvasCache.ts',
+              'upstream/packages/scene2d-canvas/src/canvasRenderState.ts',
+              'upstream/packages/scene2d-canvas/src/canvasRenderTarget.ts',
+            ].includes(source ?? ''),
         )
-        .map(({ byReason, module, total }) => ({ byReason, module, total })),
+        .map(({ byReason, module, source, total }) => ({ byReason, module, source, total })),
     ).toEqual([
       {
         byReason: { 'standard-toolkit-boundary': 19 },
-        module: 'flighthq.scene2dCanvas.CanvasCache',
+        module: 'flight._Scene2DCanvas',
+        source: 'upstream/packages/scene2d-canvas/src/canvasCache.ts',
         total: 19,
       },
       {
         byReason: { 'external-toolkit-boundary': 1, 'standard-toolkit-boundary': 7 },
-        module: 'flighthq.scene2dCanvas.CanvasRenderState',
+        module: 'flight._Scene2DCanvas',
+        source: 'upstream/packages/scene2d-canvas/src/canvasRenderState.ts',
         total: 8,
       },
       {
         byReason: { 'external-toolkit-boundary': 1, 'standard-toolkit-boundary': 26 },
-        module: 'flighthq.scene2dCanvas.CanvasRenderTarget',
+        module: 'flight._Scene2DCanvas',
+        source: 'upstream/packages/scene2d-canvas/src/canvasRenderTarget.ts',
         total: 27,
       },
     ]);
     expect(
-      typeErasureReport.modules.find(({ module }) => module === 'flighthq.interaction.NodeInteractionState'),
+      typeErasureReport.modules.find(
+        ({ module, source }) =>
+          module === 'flight._Interaction' && source === 'upstream/packages/interaction/src/nodeInteractionState.ts',
+      ),
     ).toEqual({
       byReason: { 'source-never': 12 },
-      module: 'flighthq.interaction.NodeInteractionState',
+      module: 'flight._Interaction',
       source: 'upstream/packages/interaction/src/nodeInteractionState.ts',
       total: 12,
     });
-    expect(typeErasureReport.modules.find(({ module }) => module === 'flighthq.animation.AnimationClip')).toEqual({
+    expect(
+      typeErasureReport.modules.find(
+        ({ module, source }) =>
+          module === 'flight._Animation' && source === 'upstream/packages/animation/src/animationClip.ts',
+      ),
+    ).toEqual({
       byReason: { 'source-unknown': 12, 'standard-toolkit-boundary': 10 },
-      module: 'flighthq.animation.AnimationClip',
+      module: 'flight._Animation',
       source: 'upstream/packages/animation/src/animationClip.ts',
       total: 22,
     });
@@ -8219,1430 +8232,81 @@ describe('typed struct analysis', () => {
         reasons: [],
       });
     }
-    const bitmapTransform = readFileSync('generated/flighthq/bitmap/BitmapTransform.hx', 'utf8');
+    const reviewedDirectCandidates = report.candidates.filter((candidate) =>
+      candidate.purpose.startsWith('reviewed escape-free'),
+    );
+    expect(reviewedDirectCandidates).toHaveLength(388);
+    expect(
+      reviewedDirectCandidates.every(
+        (candidate) =>
+          candidate.eligible &&
+          candidate.emission.mode === 'direct' &&
+          candidate.emission.pendingAccesses === 0 &&
+          candidate.emission.reflectiveSurvivors.length === 0,
+      ),
+    ).toBe(true);
+    expect(reviewedDirectCandidates.reduce((total, candidate) => total + candidate.emission.directAccesses, 0)).toBe(
+      14_799,
+    );
+
+    // Merged implementation modules invalidate whole-file receiver-name scans:
+    // an unrelated source in the same package may legitimately use a dynamic
+    // `source`, `target`, or `state`. Keep representative emitted-code
+    // checks scoped to the declaration range that owns the reviewed schema.
+    const bitmapModule = readFileSync('generated/flight/_Bitmap.hx', 'utf8');
+    const bitmapTransform = generatedSourceRange(
+      bitmapModule,
+      '  public static function transformBitmap(',
+      '  public static function copyBitmapAlpha(',
+    );
     expect(bitmapTransform).not.toMatch(/_Runtime\.field\((?:dest|source),/u);
-    const glRenderState = readFileSync('generated/flighthq/renderGl/GlRenderState.hx', 'utf8');
+
+    const renderGlModule = readFileSync('generated/flight/_RenderGl.hx', 'utf8');
+    const glRenderState = generatedSourceRange(
+      renderGlModule,
+      '  public static function copyGlRenderStateRegistrations(',
+      '  public static function readGlBooleanQuad__glRenderStateBracket(',
+    );
     expect(glRenderState).toContain(
-      '(runtime.currentProgram = cast (null : Null<flighthq._internal.dom.WebGLProgram>));',
+      '(runtime.currentProgram = cast (null : Null<flight._internal.dom.WebGLProgram>));',
     );
-    expect(glRenderState).not.toMatch(/\(cast (?:runtime|sourceRuntime|targetRuntime) : GlRenderStateRuntime\)\./u);
     expect(glRenderState).not.toMatch(/_Runtime\.field\((?:runtime|sourceRuntime|targetRuntime),/u);
-    const wgpuRenderState = readFileSync('generated/flighthq/renderWgpu/WgpuRenderState.hx', 'utf8');
+
+    const renderWgpuModule = readFileSync('generated/flight/_RenderWgpu.hx', 'utf8');
+    const wgpuRenderState = generatedSourceRange(
+      renderWgpuModule,
+      '  public static function copyWgpuRenderStateRegistrations(',
+      '  public static function beginWgpuRenderPassEncoder__wgpuRenderTarget(',
+    );
     expect(wgpuRenderState).toContain(
-      '(runtime.uniformBuffer = cast (uniformBuffer : flighthq._internal.dom.GPUBuffer));',
+      '(runtime.uniformBuffer = cast (uniformBuffer : flight._internal.dom.GPUBuffer));',
     );
-    expect(wgpuRenderState).not.toMatch(/\(cast (?:runtime|sourceRuntime|targetRuntime) : WgpuRenderStateRuntime\)\./u);
     expect(wgpuRenderState).not.toMatch(/_Runtime\.field\((?:runtime|sourceRuntime|targetRuntime),/u);
-    const renderTarget = readFileSync('generated/flighthq/render/RenderTarget.hx', 'utf8');
-    expect(renderTarget).toContain('width = HxMath.max(1.0, HxMath.ceil(descriptor.width));');
-    expect(renderTarget).not.toMatch(/_Runtime\.field\(descriptor,/u);
-    for (const [path, typeName] of [
-      ['generated/flighthq/scene2dCanvas/CanvasRenderTarget.hx', 'CanvasRenderTarget'],
-      ['generated/flighthq/renderGl/GlRenderTarget.hx', 'GlRenderTarget'],
-      ['generated/flighthq/renderWgpu/WgpuRenderTarget.hx', 'WgpuRenderTarget'],
-    ] as const) {
-      const generatedRenderTarget = readFileSync(path, 'utf8');
-      expect(generatedRenderTarget).not.toMatch(/_Runtime\.field\(target,/u);
-      expect(generatedRenderTarget).not.toContain(`(cast target : flighthq.types.${typeName}).`);
-    }
-    const richText = readFileSync('generated/flighthq/text/RichText.hx', 'utf8');
-    expect(richText).not.toMatch(/_Runtime\.field\((?:content|richText),/u);
-    expect(richText).not.toMatch(/\(cast richText : flighthq\.types\.RichText\)\./u);
-    const richTextContent = readFileSync('generated/flighthq/textlayout/RichTextContent.hx', 'utf8');
-    expect(richTextContent).not.toMatch(/_Runtime\.field\(data,/u);
-    const richTextMetrics = readFileSync('generated/flighthq/textlayout/RichTextMetrics.hx', 'utf8');
-    expect(richTextMetrics).not.toMatch(/_Runtime\.field\(layout,/u);
-    const richTextQuery = readFileSync('generated/flighthq/textlayout/RichTextQuery.hx', 'utf8');
-    expect(richTextQuery).not.toMatch(/_Runtime\.field\((?:group|layout),/u);
-    const physicsStepValidation = readFileSync('generated/flighthq/physics2d/StepValidation.hx', 'utf8');
-    expect(physicsStepValidation).not.toMatch(/_Runtime\.field\((?:collider|config|contact|world),/u);
-    expect(physicsStepValidation).not.toMatch(
-      /\(cast (?:collider|config|contact|world) : Physics2D(?:Collider|Contact|SolverConfig|World)\)\./u,
-    );
-    const physicsWorld = readFileSync('generated/flighthq/physics2d/World.hx', 'utf8');
-    expect(physicsWorld).not.toMatch(/_Runtime\.field\(world,/u);
-    const generatedClipRegion = readFileSync('generated/flighthq/clip/ClipRegion.hx', 'utf8');
-    expect(generatedClipRegion).not.toMatch(/_Runtime\.field\(clip,/u);
-    expect(generatedClipRegion).not.toMatch(/\(cast clip : ClipRegion\)\./u);
-    for (const [path, typeName] of [
-      ['generated/flighthq/effectsCanvas/CanvasBevelEffect.hx', 'CanvasRenderEffectContext'],
-      ['generated/flighthq/effectsGl/GlBloomEffect.hx', 'GlRenderEffectContext'],
-      ['generated/flighthq/effectsWgpu/WgpuBloomEffect.hx', 'WgpuRenderEffectContext'],
-    ] as const) {
-      const generatedEffect = readFileSync(path, 'utf8');
-      expect(generatedEffect).not.toContain(`(cast ctx : ${typeName}).`);
-      expect(generatedEffect).not.toMatch(/_Runtime\.field\(ctx,/u);
-    }
-    const glSceneRuntime = readFileSync('generated/flighthq/scene3dGl/GlEnvironmentIblBake.hx', 'utf8');
-    expect(glSceneRuntime).not.toContain('(cast runtime : GlScene3DRuntime).');
-    const wgpuSceneRuntime = readFileSync('generated/flighthq/scene3dWgpu/WgpuShadowMap.hx', 'utf8');
-    expect(wgpuSceneRuntime).not.toContain('(cast scene : WgpuScene3DRuntime).');
-    const quadBatch = readFileSync('generated/flighthq/quadbatch/QuadBatch.hx', 'utf8');
-    expect(quadBatch).not.toMatch(/\(cast (?:data|src) : QuadBatchData\)\./u);
-    expect(quadBatch).not.toMatch(/_Runtime\.field\(__destructure/u);
-    for (const path of [
-      'generated/flighthq/scene2dCanvas/CanvasShape.hx',
-      'generated/flighthq/scene2dCanvas/CanvasShapeCommands.hx',
+
+    const scene2DFormats = readFileSync('generated/flight/_Scene2DFormats.hx', 'utf8');
+    for (const riveCore of [
+      generatedSourceRange(
+        scene2DFormats,
+        '  public static function applyAnimationClipToRiveDocument(',
+        '  public static function createRiveFileAssets(',
+      ),
+      generatedSourceRange(
+        scene2DFormats,
+        '  public static function createRiveObjectGraph(',
+        '  public static function createRiveArtboardImport__riveScene2D(',
+      ),
+      generatedSourceRange(
+        scene2DFormats,
+        '  public static function appendRiveShapePaint(',
+        '  public static function createRivePath(',
+      ),
     ]) {
-      const canvasShape = readFileSync(path, 'utf8');
-      expect(canvasShape).not.toMatch(/\(cast (?:drawState|state) : CanvasShapeDrawState\)\./u);
-      expect(canvasShape).not.toMatch(/_Runtime\.field\((?:drawState|state),/u);
-    }
-    for (const path of [
-      'generated/flighthq/scene3d/SceneDocument.hx',
-      'generated/flighthq/scene3d/SceneDocumentLights.hx',
-    ]) {
-      const sceneDocument = readFileSync(path, 'utf8');
-      expect(sceneDocument).not.toContain('(cast document : Scene3DDocument).');
-      expect(sceneDocument).not.toMatch(/_Runtime\.field\(document,/u);
-    }
-    const orbitController = readFileSync('generated/flighthq/cameraControls/OrbitCameraController.hx', 'utf8');
-    expect(orbitController).not.toMatch(
-      /\(cast (?:controller|out|source) : (?:flighthq\.types\.)?OrbitCameraController\)\./u,
-    );
-    expect(orbitController).not.toMatch(/_Runtime\.field\((?:controller|out|source),/u);
-    for (const path of [
-      'generated/flighthq/scene2dFormats/RiveAnimation.hx',
-      'generated/flighthq/scene2dFormats/RiveObjectGraph.hx',
-      'generated/flighthq/scene2dFormats/RiveShapePaint.hx',
-    ]) {
-      const riveCore = readFileSync(path, 'utf8');
-      expect(riveCore).not.toMatch(/\(cast (?:keyframe|object|source) : RiveCoreObject\)\./u);
       expect(riveCore).not.toMatch(/_Runtime\.field\((?:keyframe|object|source),/u);
     }
-    const animationTrack = readFileSync('generated/flighthq/animation/AnimationTrack.hx', 'utf8');
-    expect(animationTrack).not.toMatch(/\(cast (?:source|track) : AnimationTrack\)\./u);
+
+    const animationModule = readFileSync('generated/flight/_Animation.hx', 'utf8');
+    const animationTrack = generatedSourceRange(animationModule, '  public static function cloneAnimationTrack(');
     expect(animationTrack).not.toMatch(/_Runtime\.field\((?:source|track),/u);
-    for (const path of [
-      'generated/flighthq/animation/AnimationBlendTree.hx',
-      'generated/flighthq/animation/AnimationClip.hx',
-    ]) {
-      const animationChannel = readFileSync(path, 'utf8');
-      expect(animationChannel).not.toMatch(/\(cast (?:channel|existing) : AnimationChannel\)\./u);
-      expect(animationChannel).not.toMatch(/_Runtime\.field\((?:channel|existing),/u);
-    }
-    const animationPlayer = readFileSync('generated/flighthq/animation/AnimationPlayer.hx', 'utf8');
-    expect(animationPlayer).not.toMatch(/\(cast player : (?:flighthq\.types\.)?AnimationPlayer\)\./u);
-    expect(animationPlayer).not.toMatch(/_Runtime\.field\(player,/u);
-    for (const path of ['generated/flighthq/tween/Tween.hx', 'generated/flighthq/tween/UpdateTweens.hx']) {
-      const tween = readFileSync(path, 'utf8');
-      expect(tween).not.toMatch(/\(cast (?:source|target|tween) : (?:flighthq\.types\.)?Tween[^)]*\)\./u);
-      expect(tween).not.toMatch(/_Runtime\.field\((?:source|target|tween),/u);
-    }
-    const timeline = readFileSync('generated/flighthq/timeline/Timeline.hx', 'utf8');
-    expect(timeline).not.toMatch(/\(cast timeline : (?:flighthq\.types\.)?Timeline\)\./u);
-    expect(timeline).not.toMatch(/_Runtime\.field\(timeline,/u);
-    const riveObjectGraph = readFileSync('generated/flighthq/scene2dFormats/RiveObjectGraph.hx', 'utf8');
-    expect(riveObjectGraph).not.toMatch(/\(cast artboard : RiveArtboardGraph\)\./u);
-    expect(riveObjectGraph).not.toMatch(/_Runtime\.field\(artboard,/u);
-    expect(riveObjectGraph).not.toMatch(/\(cast candidate : RiveProperty\)\./u);
-    const riveAssets = readFileSync('generated/flighthq/scene2dFormats/RiveAssets.hx', 'utf8');
-    expect(riveAssets).not.toMatch(/\(cast candidate : RiveProperty\)\./u);
-    expect(riveAssets).not.toMatch(/: RiveFileAsset\)\.(?:bytes|cdnBaseUrl|height|kind|name|width)/u);
-    const riveShapePaint = readFileSync('generated/flighthq/scene2dFormats/RiveShapePaint.hx', 'utf8');
-    expect(riveShapePaint).not.toMatch(/\(cast record : RivePathRecord\)\./u);
-    expect(riveShapePaint).not.toMatch(/_Runtime\.field\(record,/u);
-    const riveScene2DDocument = readFileSync('generated/flighthq/scene2dFormats/RiveScene2DDocument.hx', 'utf8');
-    expect(riveScene2DDocument).not.toMatch(/\(cast imported : RiveDocumentImportResult\)\./u);
-    expect(riveScene2DDocument).not.toMatch(/_Runtime\.field\(imported,/u);
-    expect(riveScene2DDocument).not.toMatch(/\(cast asset : RiveFileAsset\)\./u);
-    const generatedInputManager = readFileSync('generated/flighthq/input/InputManager.hx', 'utf8');
-    expect(generatedInputManager).not.toMatch(/\(cast manager : flighthq\.types\.InputManager\)\./u);
-    expect(generatedInputManager).not.toMatch(/_Runtime\.field\(manager,/u);
-    expect(generatedInputManager).not.toMatch(/\(cast (?:data|out) : Input(?:Keyboard|Pointer)Data\)\./u);
-    expect(generatedInputManager).not.toMatch(/_Runtime\.field\(data,/u);
-    const generatedTextInputManager = readFileSync('generated/flighthq/textinput/TextInputManager.hx', 'utf8');
-    expect(generatedTextInputManager).not.toMatch(/\(cast data : KeyboardEventData\)\./u);
-    expect(generatedTextInputManager).not.toMatch(/_Runtime\.field\(data,/u);
-    for (const path of [
-      'generated/flighthq/textinput/SelectableRichTextManager.hx',
-      'generated/flighthq/textinput/TextInput.hx',
-      'generated/flighthq/textinput/TextInputEditing.hx',
-      'generated/flighthq/textinput/TextInputManager.hx',
-    ]) {
-      const generatedTextInput = readFileSync(path, 'utf8');
-      expect(generatedTextInput).not.toMatch(/\(cast state : TextInputState\)\./u);
-      expect(generatedTextInput).not.toMatch(/_Runtime\.field\(state,/u);
-    }
-    const generatedPbrMaterials = readFileSync('generated/flighthq/materials/PbrMaterials.hx', 'utf8');
-    expect(generatedPbrMaterials).not.toMatch(
-      /\(cast (?:material|out|source|target) : (?:SpecularGlossinessPbrMaterial|StandardPbrMaterialProperties)\)\./u,
-    );
-    expect(generatedPbrMaterials).not.toMatch(/_Runtime\.field\((?:material|out|source|target),/u);
-    const generatedClassicMaterials = readFileSync('generated/flighthq/materials/ClassicMaterials.hx', 'utf8');
-    expect(generatedClassicMaterials).not.toMatch(/\(cast material : (?:BlinnPhongMaterial|PhongMaterial)\)\./u);
-    expect(generatedClassicMaterials).not.toMatch(/_Runtime\.field\(material,/u);
-    const generatedShadedMaterialRenderer = readFileSync(
-      'generated/flighthq/scene3dGl/ShadedGlMeshMaterialRenderer.hx',
-      'utf8',
-    );
-    expect(generatedShadedMaterialRenderer).not.toMatch(/\(cast material : ShadedMaterial\)\./u);
-    expect(generatedShadedMaterialRenderer).not.toMatch(/_Runtime\.field\(material,/u);
-    const generatedRenderState = readFileSync('generated/flighthq/render/RenderState.hx', 'utf8');
-    expect(generatedRenderState).not.toMatch(/\(cast runtime : RenderStateRuntime\)\./u);
-    expect(generatedRenderState).not.toMatch(/_Runtime\.field\(runtime,/u);
-    const generatedRenderProxy = readFileSync('generated/flighthq/render/RenderProxy.hx', 'utf8');
-    expect(generatedRenderProxy).not.toMatch(
-      /\(cast (?:data|parentData|proxy|source) : (?:flighthq\.types\.)?RenderProxy\)\./u,
-    );
-    expect(generatedRenderProxy).not.toMatch(/_Runtime\.field\((?:data|parentData|proxy),/u);
-    const generatedDomRenderState = readFileSync('generated/flighthq/scene2dDom/DomRenderState.hx', 'utf8');
-    expect(generatedDomRenderState).not.toMatch(/\(cast runtime : DomRenderStateRuntime\)\./u);
-    expect(generatedDomRenderState).not.toMatch(/_Runtime\.field\(runtime,/u);
-    const generatedGlRenderTarget = readFileSync('generated/flighthq/renderGl/GlRenderTarget.hx', 'utf8');
-    expect(generatedGlRenderTarget).not.toMatch(
-      /\(cast (?:descriptor|requested) : ResolvedRenderTargetDescriptor\)\./u,
-    );
-    expect(generatedGlRenderTarget).not.toMatch(/_Runtime\.field\((?:descriptor|requested),/u);
-    const generatedWgpuMeshPipeline = readFileSync('generated/flighthq/scene3dWgpu/WgpuMeshPipeline.hx', 'utf8');
-    expect(generatedWgpuMeshPipeline).not.toMatch(/\(cast proxy : Scene3DRenderProxy\)\./u);
-    expect(generatedWgpuMeshPipeline).not.toMatch(/_Runtime\.field\(proxy,/u);
-    const generatedVelocity = readFileSync('generated/flighthq/velocity/TransformVelocity.hx', 'utf8');
-    expect(generatedVelocity).not.toMatch(/\(cast (?:a|b|current|out|previous|source|velocity) : Velocity2D\)\./u);
-    expect(generatedVelocity).not.toMatch(/_Runtime\.field\((?:a|b|current|out|previous|source|velocity),/u);
-    const generatedMassProperties = readFileSync('generated/flighthq/physics2d/MassProperties.hx', 'utf8');
-    expect(generatedMassProperties).not.toMatch(/\(cast out : Physics2DMassData\)\./u);
-    expect(generatedMassProperties).not.toMatch(/_Runtime\.field\(out,/u);
-    const generatedCollisionManifold2D = readFileSync('generated/flighthq/collision/Manifold2D.hx', 'utf8');
-    expect(generatedCollisionManifold2D).not.toMatch(/\(cast out : CollisionManifold2D\)\./u);
-    expect(generatedCollisionManifold2D).not.toMatch(/_Runtime\.field\(out,/u);
-    const generatedContactManifold = readFileSync('generated/flighthq/collision/ContactManifold2D.hx', 'utf8');
-    expect(generatedContactManifold).not.toMatch(/\(cast out : CollisionContactManifold2D\)\./u);
-    expect(generatedContactManifold).not.toMatch(/_Runtime\.field\(out,/u);
-    const generatedSweepCollision = readFileSync('generated/flighthq/collision/SweepCollisionShape2D.hx', 'utf8');
-    expect(generatedSweepCollision).not.toMatch(/\(cast out : CollisionTimeOfImpact2D\)\./u);
-    expect(generatedSweepCollision).not.toMatch(/_Runtime\.field\(out,/u);
-    const generatedPhysicsJoints = readFileSync('generated/flighthq/physics2d/Joints.hx', 'utf8');
-    expect(generatedPhysicsJoints).not.toMatch(
-      /\(cast (?:gear|prismatic|pulley|revolute|wheel) : Physics2D(?:Gear|Prismatic|Pulley|Revolute|Wheel)Joint\)\./u,
-    );
-    expect(generatedPhysicsJoints).not.toMatch(/_Runtime\.field\((?:gear|prismatic|pulley|revolute|wheel),/u);
-    const generatedPhysicsDebugGeometry = readFileSync('generated/flighthq/physics2d/DebugGeometry.hx', 'utf8');
-    expect(generatedPhysicsDebugGeometry).not.toMatch(/\(cast pulley : Physics2DPulleyJoint\)\./u);
-    expect(generatedPhysicsDebugGeometry).not.toMatch(/_Runtime\.field\(pulley,/u);
-    const generatedSkeleton2D = readFileSync('generated/flighthq/skeleton2d/Skeleton2d.hx', 'utf8');
-    expect(generatedSkeleton2D).not.toMatch(/\(cast (?:skeleton|entry) : (?:Skeleton2D|SkinAttachment2D)\)\./u);
-    expect(generatedSkeleton2D).not.toMatch(/_Runtime\.field\((?:skeleton|entry),/u);
-    const generatedPathConstraint2D = readFileSync('generated/flighthq/skeleton2d/PathConstraint2D.hx', 'utf8');
-    expect(generatedPathConstraint2D).not.toMatch(
-      /\(cast (?:constraint|pathConstraint|skeleton) : (?:Skeleton2DPathConstraint|Skeleton2D)\)\./u,
-    );
-    expect(generatedPathConstraint2D).not.toMatch(/_Runtime\.field\((?:constraint|pathConstraint|skeleton),/u);
-    const generatedSkeleton3D = readFileSync('generated/flighthq/skeleton3d/Skeleton3d.hx', 'utf8');
-    expect(generatedSkeleton3D).not.toMatch(/\(cast skeleton : Skeleton3D\)\./u);
-    expect(generatedSkeleton3D).not.toMatch(/_Runtime\.field\(skeleton,/u);
-    const generatedSkinMesh = readFileSync('generated/flighthq/skeleton3d/SkinMeshGeometry.hx', 'utf8');
-    expect(generatedSkinMesh).not.toMatch(/\(cast bindPose : MeshSkinBindPose\)\./u);
-    expect(generatedSkinMesh).not.toMatch(/_Runtime\.field\(bindPose,/u);
-    const generatedAnimationCrossfade = readFileSync('generated/flighthq/animation/AnimationCrossfade.hx', 'utf8');
-    expect(generatedAnimationCrossfade).not.toMatch(/\(cast state : flighthq\.types\.AnimationCrossfade\)\./u);
-    expect(generatedAnimationCrossfade).not.toMatch(/_Runtime\.field\(state,/u);
-    const generatedAnimationStateMachine = readFileSync(
-      'generated/flighthq/animation/AnimationStateMachine.hx',
-      'utf8',
-    );
-    expect(generatedAnimationStateMachine).not.toMatch(/\(cast machine : flighthq\.types\.AnimationStateMachine\)\./u);
-    expect(generatedAnimationStateMachine).not.toMatch(/_Runtime\.field\(machine,/u);
-    const generatedStatechart = readFileSync('generated/flighthq/statechart/Statechart.hx', 'utf8');
-    expect(generatedStatechart).not.toMatch(
-      /\(cast (?:chart|instance|transition) : (?:Statechart|StatechartInstance|StatechartTransition)\)\./u,
-    );
-    expect(generatedStatechart).not.toMatch(/_Runtime\.field\((?:chart|instance|transition),/u);
-    for (const path of [
-      'generated/flighthq/renderGl/GlCompressedTexture.hx',
-      'generated/flighthq/renderWgpu/WgpuCompressedTexture.hx',
-    ]) {
-      const generatedCompressedTexture = readFileSync(path, 'utf8');
-      expect(generatedCompressedTexture).not.toMatch(
-        /\(cast (?:container|entry) : (?:TextureContainer|TextureContainerLevel)\)\./u,
-      );
-      expect(generatedCompressedTexture).not.toMatch(/_Runtime\.field\((?:container|entry),/u);
-    }
-    const generatedGlRenderTexture = readFileSync('generated/flighthq/renderGl/GlRenderTexture.hx', 'utf8');
-    expect(generatedGlRenderTexture).not.toMatch(
-      /\(cast (?:entry|renderTexture) : (?:GlRenderTextureEntry|RenderTexture)\)\./u,
-    );
-    expect(generatedGlRenderTexture).not.toMatch(/_Runtime\.field\(renderTexture,/u);
-    const generatedWgpuRenderTexture = readFileSync('generated/flighthq/renderWgpu/WgpuRenderTexture.hx', 'utf8');
-    expect(generatedWgpuRenderTexture).not.toMatch(
-      /\(cast (?:entry|renderTexture) : (?:WgpuRenderTextureEntry|RenderTexture)\)\./u,
-    );
-    expect(generatedWgpuRenderTexture).not.toMatch(/_Runtime\.field\(renderTexture,/u);
-    const generatedRaycastCollision = readFileSync('generated/flighthq/collision/RaycastCollisionShape2D.hx', 'utf8');
-    expect(generatedRaycastCollision).not.toMatch(
-      /\(cast (?:out|RaycastCollisionShape\.localHitScratch__raycastCollisionShape2D) : CollisionRaycastHit2D\)\./u,
-    );
-    expect(generatedRaycastCollision).not.toMatch(
-      /_Runtime\.field\((?:out|RaycastCollisionShape\.localHitScratch__raycastCollisionShape2D),/u,
-    );
-    const generatedShapeContact = readFileSync('generated/flighthq/collision/ShapeContact2D.hx', 'utf8');
-    expect(generatedShapeContact).not.toMatch(/\(cast point : CollisionContactPoint2D\)\./u);
-    expect(generatedShapeContact).not.toMatch(/_Runtime\.field\(point,/u);
-    const generatedWorldQueries = readFileSync('generated/flighthq/physics2d/WorldQueries.hx', 'utf8');
-    expect(generatedWorldQueries).not.toMatch(/\(cast (?:current|hit) : Physics2DRayHit\)\./u);
-    expect(generatedWorldQueries).not.toMatch(/_Runtime\.field\((?:a|b|current|hit|source),/u);
-    const generatedPickScene3D = readFileSync('generated/flighthq/picking/PickScene3D.hx', 'utf8');
-    expect(generatedPickScene3D).not.toMatch(/\(cast (?:hit|out|src|PickScene3D\._hit__pickScene3D) : Scene3DHit\)\./u);
-    expect(generatedPickScene3D).not.toMatch(/_Runtime\.field\((?:hit|out|src|PickScene3D\._hit__pickScene3D),/u);
-    const generatedVelocitySample = readFileSync('generated/flighthq/velocity/VelocitySample.hx', 'utf8');
-    expect(generatedVelocitySample).not.toMatch(/\(cast sample : flighthq\.types\.VelocitySample\)\./u);
-    expect(generatedVelocitySample).not.toMatch(/_Runtime\.field\(sample,/u);
-    const generatedBitmapText = readFileSync('generated/flighthq/bitmaptext/BitmapText.hx', 'utf8');
-    expect(generatedBitmapText).not.toMatch(/\(cast page : BitmapTextPage\)\./u);
-    expect(generatedBitmapText).not.toMatch(/_Runtime\.field\(page,/u);
-    const generatedRichTextRuntime = readFileSync('generated/flighthq/text/RichText.hx', 'utf8');
-    expect(generatedRichTextRuntime).not.toMatch(/\(cast out : RichTextRuntime\)\./u);
-    expect(generatedRichTextRuntime).not.toMatch(/_Runtime\.field\(out,/u);
-    const generatedTextLabel = readFileSync('generated/flighthq/text/TextLabel.hx', 'utf8');
-    expect(generatedTextLabel).not.toMatch(
-      /\(cast (?:data|label|source) : (?:TextLabelData|flighthq\.types\.TextLabel)\)\./u,
-    );
-    expect(generatedTextLabel).not.toMatch(/_Runtime\.field\((?:data|label|source),/u);
-    const generatedCanvasTextLabel = readFileSync('generated/flighthq/scene2dCanvas/CanvasTextLabel.hx', 'utf8');
-    expect(generatedCanvasTextLabel).not.toMatch(/_Runtime\.field\(__destructure0,/u);
-    const generatedTextShaperRun = readFileSync('generated/flighthq/textshaper/TextShaperRun.hx', 'utf8');
-    expect(generatedTextShaperRun).not.toMatch(/\(cast (?:out|result|run) : ShapedRun\)\./u);
-    expect(generatedTextShaperRun).not.toMatch(/_Runtime\.field\((?:out|run),/u);
-    const generatedShape = readFileSync('generated/flighthq/shape/Shape.hx', 'utf8');
-    expect(generatedShape).not.toMatch(/\(cast (?:out|shape|source) : flighthq\.types\.Shape\)\./u);
-    expect(generatedShape).not.toMatch(/_Runtime\.field\((?:out|shape|source), '(?:data|kind)'\)/u);
-    const generatedMorphShape = readFileSync('generated/flighthq/shape/MorphShape.hx', 'utf8');
-    expect(generatedMorphShape).not.toMatch(/\(cast shape : flighthq\.types\.MorphShape\)\./u);
-    expect(generatedMorphShape).not.toMatch(/_Runtime\.field\(shape,/u);
-    const generatedMorphShapePaint = readFileSync('generated/flighthq/shape/MorphShapePaint.hx', 'utf8');
-    expect(generatedMorphShapePaint).not.toMatch(/\(cast (?:data|shape) : (?:MorphShapeData|MorphShape)\)\./u);
-    expect(generatedMorphShapePaint).not.toMatch(/_Runtime\.field\(data, 'commands'\)/u);
-    const generatedCanvasScale9 = readFileSync('generated/flighthq/scene2dCanvas/CanvasScale9Shape.hx', 'utf8');
-    expect(generatedCanvasScale9).not.toMatch(/_Runtime\.field\(__destructure1, '(?:scaleX|scaleY)'\)/u);
-    const generatedShapeJson = readFileSync('generated/flighthq/shapeFormats/ShapeJson.hx', 'utf8');
-    expect(generatedShapeJson).not.toMatch(/_Runtime\.field\(shape, 'data'\)/u);
-    const generatedGlMeshProgram = readFileSync('generated/flighthq/scene3dGl/GlMeshProgram.hx', 'utf8');
-    expect(generatedGlMeshProgram).not.toMatch(/_Runtime\.field\(program,/u);
-    expect(generatedGlMeshProgram).not.toMatch(/\(cast upload : GlMeshUpload\)\./u);
-    const generatedGlMeshUpload = readFileSync('generated/flighthq/scene3dGl/GlMeshUpload.hx', 'utf8');
-    expect(generatedGlMeshUpload).not.toMatch(/_Runtime\.field\(upload,/u);
-    expect(generatedGlMeshUpload).not.toMatch(/\(cast upload : flighthq\.types\.GlScene3DRuntime\.GlMeshUpload\)\./u);
-    const generatedGlParticles = readFileSync('generated/flighthq/scene2dGl/GlParticleEmitter2D.hx', 'utf8');
-    expect(generatedGlParticles).not.toMatch(/\(cast shader : GlParticleShader\)\./u);
-    expect(generatedGlParticles).not.toMatch(/_Runtime\.field\(shader,/u);
-    for (const path of [
-      'generated/flighthq/scene3dGl/BlinnPhongGlMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dGl/PhongGlMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dGl/StandardPbrGlMeshMaterialRenderer.hx',
-    ]) {
-      const generatedGlMaterial = readFileSync(path, 'utf8');
-      expect(generatedGlMaterial).not.toMatch(/\(cast program : (?:GlClassicProgram|GlPbrProgram)\)\./u);
-      expect(generatedGlMaterial).not.toMatch(/_Runtime\.field\(program,/u);
-    }
-    for (const path of [
-      'generated/flighthq/effects/BevelEffect.hx',
-      'generated/flighthq/effects/DropShadowEffect.hx',
-      'generated/flighthq/effects/GradientBevelEffect.hx',
-      'generated/flighthq/effects/InnerShadowEffect.hx',
-      'generated/flighthq/effects/OuterGlowEffect.hx',
-      'generated/flighthq/effectsCanvas/CanvasBevelEffect.hx',
-      'generated/flighthq/effectsCanvas/CanvasDropShadowEffect.hx',
-      'generated/flighthq/effectsCanvas/CanvasEffectDropShadowCss.hx',
-      'generated/flighthq/effectsCanvas/CanvasGradientBevelEffect.hx',
-      'generated/flighthq/effectsCanvas/CanvasInnerShadowEffect.hx',
-      'generated/flighthq/effectsCanvas/CanvasOuterGlowEffect.hx',
-      'generated/flighthq/effectsGl/GlBevelEffect.hx',
-      'generated/flighthq/effectsGl/GlDropShadowEffect.hx',
-      'generated/flighthq/effectsGl/GlGradientBevelEffect.hx',
-      'generated/flighthq/effectsGl/GlInnerShadowEffect.hx',
-      'generated/flighthq/effectsGl/GlOuterGlowEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuBevelEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuDropShadowEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuGradientBevelEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuInnerShadowEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuOuterGlowEffect.hx',
-    ]) {
-      const generatedEffect = readFileSync(path, 'utf8');
-      expect(generatedEffect).not.toMatch(/_Runtime\.field\(effect,/u);
-      expect(generatedEffect).not.toMatch(
-        /\(cast effect : (?:BevelEffect|DropShadowEffect|GradientBevelEffect|InnerShadowEffect|OuterGlowEffect)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/shading/CreateAnimatedNormalModifier.hx',
-      'generated/flighthq/shading/CreateDissolveModifier.hx',
-      'generated/flighthq/shading/CreateEmissiveModifier.hx',
-      'generated/flighthq/shading/CreateFogModifier.hx',
-      'generated/flighthq/shading/CreateVertexDisplaceModifier.hx',
-    ]) {
-      const generatedModifierOptions = readFileSync(path, 'utf8');
-      expect(generatedModifierOptions).not.toMatch(/_Runtime\.field\(options,/u);
-      expect(generatedModifierOptions).not.toMatch(
-        /\(cast options : (?:AnimatedNormalModifierOptions|DissolveModifierOptions|EmissiveModifierOptions|FogModifierOptions|VertexDisplaceModifierOptions)\)\./u,
-      );
-    }
-    const generatedTypedInputManager = readFileSync('generated/flighthq/input/InputManager.hx', 'utf8');
-    expect(generatedTypedInputManager).not.toMatch(/_Runtime\.field\(state,/u);
-    expect(generatedTypedInputManager).not.toMatch(/\(cast state : InputState\)\./u);
-    const generatedInteractionManager = readFileSync('generated/flighthq/interaction/InteractionManager.hx', 'utf8');
-    expect(generatedInteractionManager).not.toMatch(/_Runtime\.field\((?:data|manager|state),/u);
-    expect(generatedInteractionManager).not.toMatch(
-      /\(cast (?:data|manager|state) : (?:flighthq\.types\.)?(?:InteractionManager|InteractionPointerState|PointerEventData)(?:<[^>]+>)?\)\./u,
-    );
-    const generatedInteractionSpatialIndex = readFileSync(
-      'generated/flighthq/interaction/InteractionSpatialIndex.hx',
-      'utf8',
-    );
-    expect(generatedInteractionSpatialIndex).not.toMatch(/\(cast manager : InteractionManager<[^>]+>\)\./u);
-    for (const path of [
-      'generated/flighthq/interaction/HitTests.hx',
-      'generated/flighthq/interaction/InteractionSpatialIndex.hx',
-      'generated/flighthq/interaction/NodeInteractionState.hx',
-    ]) {
-      const generatedOptionalInteractionState = readFileSync(path, 'utf8');
-      expect(generatedOptionalInteractionState).toContain('__typedStruct');
-      expect(generatedOptionalInteractionState).not.toContain('__structural');
-    }
-    for (const path of [
-      'generated/flighthq/scene2dCanvas/CanvasTilemap.hx',
-      'generated/flighthq/scene2dGl/GlTilemap.hx',
-      'generated/flighthq/scene2dWgpu/WgpuTilemap.hx',
-      'generated/flighthq/tilemap/Tilemap.hx',
-      'generated/flighthq/tilemapFormats/TiledGid.hx',
-      'generated/flighthq/tilemapFormats/TiledProject.hx',
-      'generated/flighthq/tilemapFormats/TiledTmxFormat.hx',
-    ]) {
-      const generatedTilemap = readFileSync(path, 'utf8');
-      expect(generatedTilemap).not.toMatch(
-        /_Runtime\.field\((?:data|frame|map|object|property|ref|source|tile|tilemap|tileset),/u,
-      );
-      expect(generatedTilemap).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:TiledGid|TiledMap|TiledObject|TiledProperty|TiledTileset|TiledTilesetRef|TiledTilesetTile|TiledTilesetTileFrame|Tilemap|TilemapData)\)\./u,
-      );
-    }
-    expect(readFileSync('generated/flighthq/tilemap/Tilemap.hx', 'utf8')).toMatch(
-      /var __destructure[0-9]+:TilemapData/u,
-    );
-    expect(readFileSync('generated/flighthq/tilemapFormats/TiledProject.hx', 'utf8')).toMatch(
-      /var __destructure[0-9]+:TiledGid/u,
-    );
-    for (const path of [
-      'generated/flighthq/materials/ClearcoatPbrExtension.hx',
-      'generated/flighthq/materials/IridescencePbrExtension.hx',
-      'generated/flighthq/materials/SpecularPbrExtension.hx',
-      'generated/flighthq/materials/TransmissionVolumePbrExtension.hx',
-      'generated/flighthq/materials/WrappedDiffusePbrExtension.hx',
-      'generated/flighthq/scene3dFormats/GltfTransmissionVolume.hx',
-      'generated/flighthq/scene3dGl/ClearcoatPbrGlExtension.hx',
-      'generated/flighthq/scene3dGl/IridescencePbrGlExtension.hx',
-      'generated/flighthq/scene3dGl/SpecularPbrGlExtension.hx',
-      'generated/flighthq/scene3dGl/TransmissionVolumePbrGlExtension.hx',
-      'generated/flighthq/scene3dGl/WrappedDiffusePbrGlExtension.hx',
-      'generated/flighthq/scene3dResources/ClearcoatPbrScene3DMaterialTextures.hx',
-      'generated/flighthq/scene3dResources/IridescencePbrScene3DMaterialTextures.hx',
-      'generated/flighthq/scene3dResources/SpecularPbrScene3DMaterialTextures.hx',
-      'generated/flighthq/scene3dResources/TransmissionVolumePbrScene3DMaterialTextures.hx',
-      'generated/flighthq/scene3dResources/WrappedDiffusePbrScene3DMaterialTextures.hx',
-    ]) {
-      const generatedPbrExtension = readFileSync(path, 'utf8');
-      expect(generatedPbrExtension).not.toMatch(
-        /_Runtime\.field\((?:clearcoat|extension|iridescence|specular|target|transmission|value|wrappedDiffuse),/u,
-      );
-      expect(generatedPbrExtension).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:ClearcoatPbrExtension|IridescencePbrExtension|SpecularPbrExtension|TransmissionVolumePbrExtension|WrappedDiffusePbrExtension)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/binpack/ExplainUnpackedRectangles.hx',
-      'generated/flighthq/binpack/PackRectangles.hx',
-      'generated/flighthq/cameraControls/FlyCameraController.hx',
-      'generated/flighthq/node/NodeOrderList.hx',
-      'generated/flighthq/particleemitter/EmitParticleBurst3D.hx',
-      'generated/flighthq/particleemitter/ParticleEmitter3D.hx',
-      'generated/flighthq/particleemitter/UpdateParticleEmitter3D.hx',
-      'generated/flighthq/scene3dGl/GlParticleEmitter3D.hx',
-      'generated/flighthq/scene3dWgpu/WgpuParticleEmitter3D.hx',
-      'generated/flighthq/socket/ExplainSocketSendFailure.hx',
-      'generated/flighthq/socket/Socket.hx',
-    ]) {
-      const generatedFrontier = readFileSync(path, 'utf8');
-      expect(generatedFrontier).not.toMatch(
-        /_Runtime\.field\((?:a|b|emitter|list|out|rect|rectangle|runtime|source),/u,
-      );
-      expect(generatedFrontier).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:FlyCameraController|NodeOrderList(?:<[^>]+>)?|PackableRectangle|ParticleEmitter3D|SocketRuntime)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/clock/Clock.hx',
-      'generated/flighthq/clock/ClockSignals.hx',
-      'generated/flighthq/lighting/AreaLight.hx',
-      'generated/flighthq/movieclip/MovieClip.hx',
-      'generated/flighthq/path/PathMeshPool.hx',
-      'generated/flighthq/path/TessellatePathTyped.hx',
-      'generated/flighthq/path/TessellateStrokePath.hx',
-      'generated/flighthq/scene2dFormats/LottieDocument.hx',
-      'generated/flighthq/scene2dGl/GlMeshShapeRenderer.hx',
-      'generated/flighthq/scene2dWgpu/WgpuMeshShapeRenderer.hx',
-    ]) {
-      const generatedSecondFrontier = readFileSync(path, 'utf8');
-      expect(generatedSecondFrontier).not.toMatch(/_Runtime\.field\((?:clock|fresh|layer|mesh),/u);
-      expect(generatedSecondFrontier).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AreaLight|Clock|LottieLayer|MovieClipData|PathMesh)\)\./u,
-      );
-    }
-    expect(readFileSync('generated/flighthq/clock/Clock.hx', 'utf8')).not.toMatch(/_Runtime\.field\(current,/u);
-    expect(readFileSync('generated/flighthq/lighting/AreaLight.hx', 'utf8')).not.toMatch(/_Runtime\.field\(source,/u);
-    for (const path of [
-      'generated/flighthq/bitmapfontFormats/BitmapFontFnt.hx',
-      'generated/flighthq/interaction/RegisterSpriteHitTest.hx',
-      'generated/flighthq/layout/AnchorLayout.hx',
-      'generated/flighthq/layout/FlexLayout.hx',
-      'generated/flighthq/layout/GridLayout.hx',
-      'generated/flighthq/layout/ResolveLayoutTree.hx',
-      'generated/flighthq/renderGl/GlDraw.hx',
-      'generated/flighthq/renderGl/GlExternalTexture.hx',
-      'generated/flighthq/renderWgpu/WgpuDraw.hx',
-      'generated/flighthq/renderWgpu/WgpuExternalTexture.hx',
-      'generated/flighthq/scene2dCanvas/CanvasRichText.hx',
-      'generated/flighthq/scene2dCanvas/CanvasTextInput.hx',
-      'generated/flighthq/scene2dCanvas/CanvasTextureWindowSource.hx',
-      'generated/flighthq/scene2dDom/DomTextInput.hx',
-      'generated/flighthq/scene2dGl/GlTextInput.hx',
-      'generated/flighthq/scene2dWgpu/WgpuTextInput.hx',
-      'generated/flighthq/scene3d/SceneKindUsage.hx',
-      'generated/flighthq/scene3dFormats/GltfEmissiveStrength.hx',
-      'generated/flighthq/scene3dFormats/GltfMaterialExtension.hx',
-      'generated/flighthq/scene3dFormats/GltfParse.hx',
-      'generated/flighthq/scene3dFormats/GltfSpecularGlossiness.hx',
-      'generated/flighthq/scene3dFormats/GltfUnlit.hx',
-      'generated/flighthq/scene3dFormats/ObjParse.hx',
-      'generated/flighthq/scene3dGl/ExplainGlScene3DCoverage.hx',
-      'generated/flighthq/scene3dGl/GlEnvironmentCube.hx',
-      'generated/flighthq/scene3dGl/StandardPbrGlMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dResources/ExplainScene3DResourceCoverage.hx',
-      'generated/flighthq/scene3dResources/ResolveScene3DResources.hx',
-      'generated/flighthq/scene3dWgpu/ExplainWgpuScene3DCoverage.hx',
-      'generated/flighthq/scene3dWgpu/StandardPbrWgpuMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dWgpu/WgpuEnvironmentCube.hx',
-      'generated/flighthq/textinput/TextInputEditing.hx',
-      'generated/flighthq/texture/CubeTexture.hx',
-      'generated/flighthq/texture/Texture.hx',
-      'generated/flighthq/textureatlas/TextureAtlas.hx',
-    ]) {
-      const generatedThirdFrontier = readFileSync(path, 'utf8');
-      expect(generatedThirdFrontier).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:LayoutNode(?:<[^>]+>)?|Scene3DKindUsage|StandardPbrMaterial|TextSelectionRectangle|TextureSource)\)\./u,
-      );
-    }
-    expect(readFileSync('generated/flighthq/scene3d/SceneKindUsage.hx', 'utf8')).not.toMatch(
-      /_Runtime\.field\(usage,/u,
-    );
-    for (const path of [
-      'generated/flighthq/hostElectron/ElectronApp.hx',
-      'generated/flighthq/hostElectron/ElectronClipboard.hx',
-      'generated/flighthq/hostElectron/ElectronDialog.hx',
-      'generated/flighthq/hostElectron/ElectronIpc.hx',
-      'generated/flighthq/hostElectron/ElectronMenu.hx',
-      'generated/flighthq/hostElectron/ElectronNotification.hx',
-      'generated/flighthq/hostElectron/ElectronPlatform.hx',
-      'generated/flighthq/hostElectron/ElectronPower.hx',
-      'generated/flighthq/hostElectron/ElectronProtocol.hx',
-      'generated/flighthq/hostElectron/ElectronScreen.hx',
-      'generated/flighthq/hostElectron/ElectronShell.hx',
-      'generated/flighthq/hostElectron/ElectronShortcut.hx',
-      'generated/flighthq/hostElectron/ElectronStorage.hx',
-      'generated/flighthq/hostElectron/ElectronTray.hx',
-      'generated/flighthq/hostElectron/ElectronUpdater.hx',
-      'generated/flighthq/hostElectron/ElectronWindow.hx',
-      'generated/flighthq/layout/EnableLayoutGuards.hx',
-      'generated/flighthq/layout/LayoutState.hx',
-      'generated/flighthq/layout/ResolveLayoutTree.hx',
-      'generated/flighthq/mesh/MeshGeometry.hx',
-      'generated/flighthq/mesh/MeshGeometryCompute.hx',
-      'generated/flighthq/mesh/MeshGeometryLayout.hx',
-      'generated/flighthq/mesh/UpdateMeshMorph.hx',
-      'generated/flighthq/quadbatch/QuadBatch.hx',
-      'generated/flighthq/scene2dCanvas/CanvasQuadBatch.hx',
-      'generated/flighthq/scene2dGl/GlQuadBatch.hx',
-      'generated/flighthq/scene2dGl/GlVelocity.hx',
-      'generated/flighthq/scene2dWgpu/WgpuQuadBatch.hx',
-      'generated/flighthq/scene2dWgpu/WgpuVelocity.hx',
-      'generated/flighthq/scene3dGl/GlLitProgram.hx',
-      'generated/flighthq/scene3dWgpu/WgpuMeshUpload.hx',
-      'generated/flighthq/scene3dWgpu/WgpuSkinPalette.hx',
-    ]) {
-      const generatedFourthFrontier = readFileSync(path, 'utf8');
-      expect(generatedFourthFrontier).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:ElectronApi|GlLitProgram|LayoutState|MeshGeometryRuntime|QuadBatch)\)\./u,
-      );
-    }
-    expect(readFileSync('generated/flighthq/hostElectron/ElectronApp.hx', 'utf8')).not.toMatch(
-      /_Runtime\.field\(electron,/u,
-    );
-    expect(readFileSync('generated/flighthq/layout/ResolveLayoutTree.hx', 'utf8')).not.toMatch(
-      /_Runtime\.field\(state,/u,
-    );
-    expect(readFileSync('generated/flighthq/scene3dGl/GlLitProgram.hx', 'utf8')).not.toMatch(
-      /_Runtime\.field\(program,/u,
-    );
-    expect(readFileSync('generated/flighthq/quadbatch/QuadBatch.hx', 'utf8')).not.toMatch(/_Runtime\.field\(batch,/u);
-    for (const path of [
-      'generated/flighthq/effects/GodRaysMath.hx',
-      'generated/flighthq/effectsGl/GlGodRaysEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuGodRaysEffect.hx',
-      'generated/flighthq/render/SceneRender.hx',
-      'generated/flighthq/scene2dDom/DomNativeText.hx',
-      'generated/flighthq/scene2dFormats/LottieDocument.hx',
-      'generated/flighthq/scene3dGl/GlLitProgram.hx',
-      'generated/flighthq/scene3dWgpu/WgpuMeshPipeline.hx',
-      'generated/flighthq/text/NativeText.hx',
-      'generated/flighthq/textinput/TextInput.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:GodRaysEffect|LottieDocument|NativeTextData|Scene3DLightBlock|TextInputOptions)\)\./u,
-      );
-    }
-    expect(readFileSync('generated/flighthq/effects/GodRaysMath.hx', 'utf8')).not.toMatch(/_Runtime\.field\(effect,/u);
-    expect(readFileSync('generated/flighthq/textinput/TextInput.hx', 'utf8')).not.toMatch(/_Runtime\.field\(options,/u);
-    for (const path of [
-      'generated/flighthq/bitmaptext/BitmapText.hx',
-      'generated/flighthq/bitmaptext/UpdateBitmapText.hx',
-      'generated/flighthq/effects/GradientGlowEffect.hx',
-      'generated/flighthq/effectsCanvas/CanvasGradientGlowEffect.hx',
-      'generated/flighthq/effectsGl/GlGradientGlowEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuGradientGlowEffect.hx',
-      'generated/flighthq/scene2dWgpu/WgpuColorAdjustmentMaterialFeature.hx',
-      'generated/flighthq/scene2dWgpu/WgpuShapeData.hx',
-      'generated/flighthq/scene2dWgpu/WgpuShapeMesh.hx',
-      'generated/flighthq/scene3d/SceneDocument.hx',
-      'generated/flighthq/scene3dFormats/Awd2Parse.hx',
-      'generated/flighthq/scene3dFormats/GltfParse.hx',
-      'generated/flighthq/scene3dFormats/Md5Parse.hx',
-      'generated/flighthq/scene3dFormats/ObjParse.hx',
-      'generated/flighthq/scene3dFormats/ThreeDsParse.hx',
-      'generated/flighthq/scene3dResources/LoadScene3DResources.hx',
-      'generated/flighthq/scene3dResources/ResolveScene3DResources.hx',
-      'generated/flighthq/scene3dResources/SceneResourceResolver.hx',
-      'generated/flighthq/scene3dResources/SceneResourceSignals.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:BitmapTextData|GradientGlowEffect|Scene3DDocumentNode|Scene3DResourceResolverRuntime|WgpuShapeMeshBuffers)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/effects/GradientGlowEffect.hx',
-      'generated/flighthq/effectsCanvas/CanvasGradientGlowEffect.hx',
-      'generated/flighthq/effectsGl/GlGradientGlowEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuGradientGlowEffect.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(/_Runtime\.field\(effect,/u);
-    }
-    for (const path of [
-      'generated/flighthq/lighting/DirectionalLight.hx',
-      'generated/flighthq/materials/SurfaceMaterial.hx',
-      'generated/flighthq/render/SceneRender.hx',
-      'generated/flighthq/scene3d/SceneDocumentLights.hx',
-      'generated/flighthq/scene3dFormats/Awd2Parse.hx',
-      'generated/flighthq/scene3dGl/DrawGlScene3D.hx',
-      'generated/flighthq/scene3dGl/GlMeshProgram.hx',
-      'generated/flighthq/scene3dGl/GlParticleEmitter3D.hx',
-      'generated/flighthq/scene3dGl/GlPbrStandardBlock.hx',
-      'generated/flighthq/scene3dGl/GlShadowMap.hx',
-      'generated/flighthq/scene3dGl/PrepareGlScene3DForwardLights.hx',
-      'generated/flighthq/scene3dWgpu/DrawWgpuScene3D.hx',
-      'generated/flighthq/scene3dWgpu/PrepareWgpuScene3DForwardLights.hx',
-      'generated/flighthq/scene3dWgpu/StandardPbrWgpuMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dWgpu/WgpuMeshPipeline.hx',
-      'generated/flighthq/scene3dWgpu/WgpuParticleEmitter3D.hx',
-      'generated/flighthq/scene3dWgpu/WgpuShadowMap.hx',
-      'generated/flighthq/shape/ExplainMorphShapeGradientEndpoints.hx',
-      'generated/flighthq/shape/MorphShapePaint.hx',
-      'generated/flighthq/spatial/FormatSpatialIndexingNotice.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:DirectionalLight|MorphShapeGradientEndpoint|Scene3DRenderList|SpatialIndexingNotice|SurfaceMaterial)\)\./u,
-      );
-    }
-    expect(readFileSync('generated/flighthq/lighting/DirectionalLight.hx', 'utf8')).not.toMatch(
-      /_Runtime\.field\(light,/u,
-    );
-    expect(readFileSync('generated/flighthq/materials/SurfaceMaterial.hx', 'utf8')).not.toMatch(
-      /_Runtime\.field\(material,/u,
-    );
-    for (const path of [
-      'generated/flighthq/effects/InnerGlowEffect.hx',
-      'generated/flighthq/effectsCanvas/CanvasInnerGlowEffect.hx',
-      'generated/flighthq/effectsGl/GlInnerGlowEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuInnerGlowEffect.hx',
-      'generated/flighthq/materials/CustomShaderMaterial.hx',
-      'generated/flighthq/motionpath/MotionPath.hx',
-      'generated/flighthq/render/ExplainScene2DCoverage.hx',
-      'generated/flighthq/scene2d/SceneKindUsage.hx',
-      'generated/flighthq/scene2dCanvas/ExplainCanvasScene2DCoverage.hx',
-      'generated/flighthq/scene2dGl/ExplainGlScene2DCoverage.hx',
-      'generated/flighthq/scene3dGl/CustomShaderGlMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dWgpu/CustomShaderWgpuMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dWgpu/EnableWgpuScene3DCustomShaderGuards.hx',
-      'generated/flighthq/texture/RenderTexture.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:CreateRenderTextureOptions|CustomShaderMaterial|InnerGlowEffect|MotionPath|Scene2DKindUsage)\)\./u,
-      );
-    }
-    expect(readFileSync('generated/flighthq/effects/InnerGlowEffect.hx', 'utf8')).not.toMatch(
-      /_Runtime\.field\(effect,/u,
-    );
-    expect(readFileSync('generated/flighthq/motionpath/MotionPath.hx', 'utf8')).not.toMatch(
-      /_Runtime\.field\(motionPath,/u,
-    );
-    for (const path of [
-      'generated/flighthq/abc/AbcFile.hx',
-      'generated/flighthq/animation/AnimationRootMotion.hx',
-      'generated/flighthq/effectsCanvas/CanvasRenderTextureEffect.hx',
-      'generated/flighthq/log/Log.hx',
-      'generated/flighthq/scene2dCanvas/CanvasRenderTexturePool.hx',
-      'generated/flighthq/swf/SwfFrameAction.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AbcInstruction|AbcMultiname|AnimationRootMotionExtractor|CanvasRenderTexturePool|LogEntry)\)\./u,
-      );
-    }
-    expect(readFileSync('generated/flighthq/abc/AbcFile.hx', 'utf8')).not.toMatch(
-      /_Runtime\.field\((?:instruction|multiname),/u,
-    );
-    expect(readFileSync('generated/flighthq/log/Log.hx', 'utf8')).not.toMatch(/_Runtime\.field\(entry,/u);
-    for (const path of [
-      'generated/flighthq/effects/ConvolutionEffect.hx',
-      'generated/flighthq/effectsGl/GlConvolutionEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuConvolutionEffect.hx',
-      'generated/flighthq/materials/UnlitMaterials.hx',
-      'generated/flighthq/scene3dFormats/GltfUnlit.hx',
-      'generated/flighthq/scene3dGl/EmissiveGlMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dGl/ToonGlMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dGl/UnlitGlMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dResources/SceneMaterialTextureRegistry.hx',
-      'generated/flighthq/scene3dWgpu/EmissiveWgpuMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dWgpu/ToonWgpuMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dWgpu/UnlitWgpuMeshMaterialRenderer.hx',
-      'generated/flighthq/skeleton2d/Skeleton2d.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:ConvolutionEffect|EmissiveMaterial|ToonMaterial|TransformInherit2D|UnlitMaterial)\)\./u,
-      );
-    }
-    expect(readFileSync('generated/flighthq/effects/ConvolutionEffect.hx', 'utf8')).not.toMatch(
-      /_Runtime\.field\(effect,/u,
-    );
-    for (const path of [
-      'generated/flighthq/animation/AnimationClip.hx',
-      'generated/flighthq/animation/AnimationPlayer.hx',
-      'generated/flighthq/bitmaptext/BitmapText.hx',
-      'generated/flighthq/bitmaptext/UpdateBitmapText.hx',
-      'generated/flighthq/materials/ExtendedPbrMaterial.hx',
-      'generated/flighthq/scene2dCanvas/CanvasBitmapText.hx',
-      'generated/flighthq/scene2dGl/GlBitmapText.hx',
-      'generated/flighthq/scene2dWgpu/WgpuBitmapText.hx',
-      'generated/flighthq/scene3dFormats/GltfEmissiveStrength.hx',
-      'generated/flighthq/scene3dFormats/GltfMaterialExtension.hx',
-      'generated/flighthq/scene3dGl/ExtendedPbrGlMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dResources/SceneMaterialTextureRegistry.hx',
-      'generated/flighthq/scene3dWgpu/WgpuMeshPipeline.hx',
-      'generated/flighthq/scene3dWgpu/WgpuShadowMap.hx',
-      'generated/flighthq/tween/Tween.hx',
-      'generated/flighthq/tween/TweenProgress.hx',
-      'generated/flighthq/tween/UpdateTweens.hx',
-      'generated/flighthq/tween/_internal/_Internal.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AnimationClipEvent|BitmapTextRuntime|ExtendedPbrMaterial|TweenPropertyDetail|WgpuScene3DShadow)\)\./u,
-      );
-    }
-    expect(readFileSync('generated/flighthq/animation/AnimationClip.hx', 'utf8')).not.toMatch(
-      /_Runtime\.field\(event,/u,
-    );
-    for (const path of [
-      'generated/flighthq/animation/AnimationBlendTree.hx',
-      'generated/flighthq/animation/AnimationLayerStack.hx',
-      'generated/flighthq/animation/AnimationStateMachine.hx',
-      'generated/flighthq/animation/AnimationStateMachineAdvance.hx',
-      'generated/flighthq/cameraControls/OrbitCameraController.hx',
-      'generated/flighthq/materials/ClassicMaterials.hx',
-      'generated/flighthq/renderGl/GlRenderState.hx',
-      'generated/flighthq/scene2dGl/GlColorAdjustmentMaterialFeature.hx',
-      'generated/flighthq/scene2dWgpu/WgpuMeshShapeRenderer.hx',
-      'generated/flighthq/scene2dWgpu/WgpuRasterShapeRenderer.hx',
-      'generated/flighthq/scene2dWgpu/WgpuShapeData.hx',
-      'generated/flighthq/scene3dGl/LambertGlMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dWgpu/LambertWgpuMeshMaterialRenderer.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AnimationBlendTree|GlColorScaleBiasInstancedShader|LambertMaterial|OrbitCameraControllerOptions|WgpuShapeRendererData)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/effectsGl/GlRenderTextureEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuRenderTextureEffect.hx',
-      'generated/flighthq/renderGl/GlRenderTexturePool.hx',
-      'generated/flighthq/renderWgpu/WgpuRenderState.hx',
-      'generated/flighthq/renderWgpu/WgpuRenderTexturePool.hx',
-      'generated/flighthq/scene2dGl/GlMeshShapeRenderer.hx',
-      'generated/flighthq/scene2dGl/GlRasterShapeRenderer.hx',
-      'generated/flighthq/scene2dGl/GlShapeData.hx',
-      'generated/flighthq/scene2dWgpu/WgpuQuadBatchWriter.hx',
-      'generated/flighthq/scene3dGl/ShadedGlMeshMaterialRenderer.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:GlRenderTexturePool|GlShadedProgram|GlShapeRendererData|WgpuQuadBatchWriterBufferSlot|WgpuRenderTexturePool)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/hostCapacitor/CapacitorKeyboard.hx',
-      'generated/flighthq/interaction/RegisterSpriteHitTest.hx',
-      'generated/flighthq/keyboard/Keyboard.hx',
-      'generated/flighthq/layout/AnchorLayout.hx',
-      'generated/flighthq/layout/FlexLayout.hx',
-      'generated/flighthq/layout/GridLayout.hx',
-      'generated/flighthq/layout/ResolveLayoutTree.hx',
-      'generated/flighthq/movieclip/SpritesheetTimelineSource.hx',
-      'generated/flighthq/scene2d/Sprite.hx',
-      'generated/flighthq/scene2dCanvas/CanvasSprite.hx',
-      'generated/flighthq/scene2dDom/DomSprite.hx',
-      'generated/flighthq/scene2dGl/GlSprite.hx',
-      'generated/flighthq/scene2dWgpu/WgpuSprite.hx',
-      'generated/flighthq/swf/SwfDocument.hx',
-      'generated/flighthq/textlayout/TextLayout.hx',
-      'generated/flighthq/textshaper/TextShaper.hx',
-      'generated/flighthq/textshaper/TextShaperRun.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:LayoutTree|SoftKeyboardInfo|Sprite|TextLayoutParams|TextShaperBackend)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/animation/AnimationBlend.hx',
-      'generated/flighthq/animation/AnimationBlendTree.hx',
-      'generated/flighthq/animation/AnimationLayerStack.hx',
-      'generated/flighthq/scene2dFormats/LottieDocument.hx',
-      'generated/flighthq/skeleton2d/TransformConstraint2D.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AnimationBlendTreeInput|AnimationLayer|AnimationSampleAccumulator|LottieKeyframe|Skeleton2DTransformConstraint)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/abc/AbcFile.hx',
-      'generated/flighthq/materials/SheenPbrExtension.hx',
-      'generated/flighthq/net/Net.hx',
-      'generated/flighthq/scene2dCanvas/CanvasRenderTexture.hx',
-      'generated/flighthq/scene3dFormats/ThreeDsParse.hx',
-      'generated/flighthq/scene3dGl/SheenPbrGlExtension.hx',
-      'generated/flighthq/scene3dResources/SheenPbrScene3DMaterialTextures.hx',
-      'generated/flighthq/swf/SwfFrameAction.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AbcTrait|CanvasRenderTextureEntry|NetRequest|SheenPbrExtension|ThreeDsLight)\)\./u,
-      );
-    }
-    for (const [path, receiver] of [
-      ['generated/flighthq/abc/AbcFile.hx', 'trait'],
-      ['generated/flighthq/net/Net.hx', 'request'],
-      ['generated/flighthq/scene3dFormats/ThreeDsParse.hx', 'light'],
-      ['generated/flighthq/scene3dGl/SheenPbrGlExtension.hx', 'extension'],
-      ['generated/flighthq/scene3dResources/SheenPbrScene3DMaterialTextures.hx', 'sheen'],
-    ] as const) {
-      expect(readFileSync(path, 'utf8')).not.toContain(`_Runtime.field(${receiver},`);
-    }
-    for (const path of [
-      'generated/flighthq/application/ApplicationRenderView.hx',
-      'generated/flighthq/effectsWgpu/WgpuColorLutPass.hx',
-      'generated/flighthq/effectsWgpu/WgpuRenderEffectPipeline.hx',
-      'generated/flighthq/hostTauri/TauriApp.hx',
-      'generated/flighthq/hostTauri/TauriClipboard.hx',
-      'generated/flighthq/hostTauri/TauriDialog.hx',
-      'generated/flighthq/hostTauri/TauriMenu.hx',
-      'generated/flighthq/hostTauri/TauriNotification.hx',
-      'generated/flighthq/hostTauri/TauriPlatform.hx',
-      'generated/flighthq/hostTauri/TauriShell.hx',
-      'generated/flighthq/hostTauri/TauriShortcut.hx',
-      'generated/flighthq/hostTauri/TauriTray.hx',
-      'generated/flighthq/hostTauri/TauriWindow.hx',
-      'generated/flighthq/node/Viewport.hx',
-      'generated/flighthq/renderGl/GlRenderPass.hx',
-      'generated/flighthq/scene3dWgpu/WgpuEnvironmentIblBake.hx',
-      'generated/flighthq/scene3dWgpu/WgpuMeshPipeline.hx',
-      'generated/flighthq/scene3dWgpu/WgpuMeshUpload.hx',
-      'generated/flighthq/scene3dWgpu/WgpuShadowMap.hx',
-      'generated/flighthq/scene3dWgpu/WgpuWireframeUpload.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:TauriApi|Viewport|WgpuColorLutTextureCache|WgpuMeshUpload|WgpuScene3DIbl)\)\./u,
-      );
-    }
-    for (const [path, receiver] of [
-      ['generated/flighthq/effectsWgpu/WgpuColorLutPass.hx', 'cache'],
-      ['generated/flighthq/hostTauri/TauriApp.hx', 'tauri'],
-      ['generated/flighthq/node/Viewport.hx', 'viewport'],
-      ['generated/flighthq/scene3dWgpu/WgpuMeshPipeline.hx', 'ibl'],
-      ['generated/flighthq/scene3dWgpu/WgpuMeshUpload.hx', 'upload'],
-    ] as const) {
-      expect(readFileSync(path, 'utf8')).not.toContain(`_Runtime.field(${receiver},`);
-    }
-    for (const path of [
-      'generated/flighthq/path/StrokePathGeometry.hx',
-      'generated/flighthq/physics2d/DebugGeometry.hx',
-      'generated/flighthq/scene3d/SceneKindUsage.hx',
-      'generated/flighthq/scene3dGl/GlShadedPrelude.hx',
-      'generated/flighthq/scene3dGl/ShadedGlMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dWgpu/WgpuShadedPrelude.hx',
-      'generated/flighthq/shading/GetModifierDefineKey.hx',
-      'generated/flighthq/shading/GetUnregisteredModifierKinds.hx',
-      'generated/flighthq/shading/OrderModifierStack.hx',
-      'generated/flighthq/shape/CompactStrokePath.hx',
-      'generated/flighthq/socket/EnableSocketGuards.hx',
-      'generated/flighthq/socket/ExplainSocketSendFailure.hx',
-      'generated/flighthq/socket/Socket.hx',
-      'generated/flighthq/statechart/EnableStatechartGuards.hx',
-      'generated/flighthq/statechart/Statechart.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:Modifier|Physics2DDebugGeometry|Socket|StatechartState|StrokeStyle)\)\./u,
-      );
-    }
-    for (const [path, receiver] of [
-      ['generated/flighthq/path/StrokePathGeometry.hx', 'style'],
-      ['generated/flighthq/physics2d/DebugGeometry.hx', 'out'],
-      ['generated/flighthq/shading/GetModifierDefineKey.hx', 'modifier'],
-      ['generated/flighthq/socket/Socket.hx', 'socket'],
-      ['generated/flighthq/statechart/Statechart.hx', 'state'],
-    ] as const) {
-      expect(readFileSync(path, 'utf8')).not.toContain(`_Runtime.field(${receiver},`);
-    }
-    for (const path of [
-      'generated/flighthq/interaction/RegisterSpriteHitTest.hx',
-      'generated/flighthq/movieclip/SpritesheetTimelineSource.hx',
-      'generated/flighthq/physics2d/WorldQueries.hx',
-      'generated/flighthq/scene2d/Sprite.hx',
-      'generated/flighthq/scene2dCanvas/CanvasSprite.hx',
-      'generated/flighthq/scene2dDom/DomNativeText.hx',
-      'generated/flighthq/scene2dDom/DomSprite.hx',
-      'generated/flighthq/scene2dGl/GlSprite.hx',
-      'generated/flighthq/scene2dWgpu/WgpuSprite.hx',
-      'generated/flighthq/scene3dFormats/GltfMaterialExtension.hx',
-      'generated/flighthq/scene3dGl/GlPbrExtensionRegistry.hx',
-      'generated/flighthq/scene3dResources/SceneMaterialTextureRegistry.hx',
-      'generated/flighthq/skeleton2d/IkConstraint2D.hx',
-      'generated/flighthq/swf/SwfDocument.hx',
-      'generated/flighthq/text/NativeText.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:NativeTextRuntime|PbrExtension|Physics2DRayResult|Skeleton2DIkConstraint|SpriteData)\)\./u,
-      );
-    }
-    for (const [path, receiver] of [
-      ['generated/flighthq/physics2d/WorldQueries.hx', 'out'],
-      ['generated/flighthq/skeleton2d/IkConstraint2D.hx', 'ik'],
-      ['generated/flighthq/text/NativeText.hx', 'runtime'],
-    ] as const) {
-      expect(readFileSync(path, 'utf8')).not.toContain(`_Runtime.field(${receiver},`);
-    }
-    for (const path of [
-      'generated/flighthq/bitmap/BitmapFingerprint.hx',
-      'generated/flighthq/capture/CaptureComparison.hx',
-      'generated/flighthq/effectsGl/EnableGlRenderEffectGuards.hx',
-      'generated/flighthq/effectsGl/GlRenderTextureEffect.hx',
-      'generated/flighthq/layout/FlexLayout.hx',
-      'generated/flighthq/materials/UnlitMaterials.hx',
-      'generated/flighthq/scene2dFormats/LottieDocument.hx',
-      'generated/flighthq/scene2dFormats/RiveLayout.hx',
-      'generated/flighthq/scene3dGl/MatcapGlMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dWgpu/MatcapWgpuMeshMaterialRenderer.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:BitmapFingerprint|FlexLayoutItemStyle|GlRenderEffectApplicationExplanation|LottieShapePath|MatcapMaterial)\)\./u,
-      );
-    }
-    for (const [path, receiver] of [
-      ['generated/flighthq/bitmap/BitmapFingerprint.hx', 'a'],
-      ['generated/flighthq/effectsGl/EnableGlRenderEffectGuards.hx', 'explanation'],
-      ['generated/flighthq/layout/FlexLayout.hx', 'item'],
-      ['generated/flighthq/scene3dGl/MatcapGlMeshMaterialRenderer.hx', 'matcap'],
-    ] as const) {
-      expect(readFileSync(path, 'utf8')).not.toContain(`_Runtime.field(${receiver},`);
-    }
-    expect(readFileSync('generated/flighthq/scene2dFormats/LottieDocument.hx', 'utf8')).not.toContain(
-      "_Runtime.field(value, 'v')",
-    );
-    for (const path of [
-      'generated/flighthq/accessibility/Accessibility.hx',
-      'generated/flighthq/effectsCanvas/CanvasVignetteEffect.hx',
-      'generated/flighthq/effectsGl/GlVignetteEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuVignetteEffect.hx',
-      'generated/flighthq/renderWgpu/WgpuDraw.hx',
-      'generated/flighthq/scene2dWgpu/WgpuShapeMesh.hx',
-      'generated/flighthq/scene3dWgpu/DrawWgpuScene3D.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AccessibilityState|VignetteEffect|WgpuScene3DDrawEntry|WgpuShapeMesh|WgpuVideoTextureEntry)\)\./u,
-      );
-    }
-    expect(readFileSync('generated/flighthq/accessibility/Accessibility.hx', 'utf8')).not.toContain(
-      "_Runtime.field(state, 'disabled')",
-    );
-    for (const path of [
-      'generated/flighthq/effectsCanvas/CanvasVignetteEffect.hx',
-      'generated/flighthq/effectsGl/GlVignetteEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuVignetteEffect.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toContain('_Runtime.field(effect,');
-    }
-    for (const path of [
-      'generated/flighthq/effects/RenderEffectPadding.hx',
-      'generated/flighthq/effectsCanvas/CanvasRenderEffectPipeline.hx',
-      'generated/flighthq/node/NodeColorAdjustment.hx',
-      'generated/flighthq/render/RenderTarget.hx',
-      'generated/flighthq/scene3dGl/DrawGlScene3D.hx',
-      'generated/flighthq/shading/CreateShadedMaterial.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:CanvasRenderEffectPipeline|ColorAdjustmentRuntime|GlScene3DDrawEntry|RenderEffectPadding|ShadedMaterialOptions)\)\./u,
-      );
-    }
-    expect(readFileSync('generated/flighthq/effects/RenderEffectPadding.hx', 'utf8')).not.toContain(
-      '_Runtime.field(padding,',
-    );
-    expect(readFileSync('generated/flighthq/render/RenderTarget.hx', 'utf8')).not.toContain('_Runtime.field(padding,');
-    expect(readFileSync('generated/flighthq/shading/CreateShadedMaterial.hx', 'utf8')).not.toContain(
-      'final __structural',
-    );
-    for (const path of [
-      'generated/flighthq/accessibility/Accessibility.hx',
-      'generated/flighthq/layout/GridLayout.hx',
-      'generated/flighthq/scene2dDom/DomNativeText.hx',
-      'generated/flighthq/scene2dFormats/RiveClipping.hx',
-      'generated/flighthq/scene2dFormats/RiveLayout.hx',
-      'generated/flighthq/scene2dFormats/RiveScene2D.hx',
-      'generated/flighthq/swf/SwfDocument.hx',
-      'generated/flighthq/text/NativeText.hx',
-      'generated/flighthq/text/TextLabel.hx',
-      'generated/flighthq/text/TextLabelLayout.hx',
-      'generated/flighthq/textlayout/TextLayoutRuntime.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AccessibilityNode|DisplayObject|GridLayoutItemStyle|NativeText|TextLabelRuntime)\)\./u,
-      );
-    }
-    expect(readFileSync('generated/flighthq/accessibility/Accessibility.hx', 'utf8')).not.toContain(
-      '_Runtime.field(node,',
-    );
-    expect(readFileSync('generated/flighthq/layout/GridLayout.hx', 'utf8')).not.toContain('final __structural');
-    for (const path of [
-      'generated/flighthq/hostCapacitor/CapacitorApp.hx',
-      'generated/flighthq/hostCapacitor/CapacitorClipboard.hx',
-      'generated/flighthq/hostCapacitor/CapacitorConnectivity.hx',
-      'generated/flighthq/hostCapacitor/CapacitorDevice.hx',
-      'generated/flighthq/hostCapacitor/CapacitorDialog.hx',
-      'generated/flighthq/hostCapacitor/CapacitorFileSystem.hx',
-      'generated/flighthq/hostCapacitor/CapacitorGeolocation.hx',
-      'generated/flighthq/hostCapacitor/CapacitorHaptics.hx',
-      'generated/flighthq/hostCapacitor/CapacitorKeyboard.hx',
-      'generated/flighthq/hostCapacitor/CapacitorNotification.hx',
-      'generated/flighthq/hostCapacitor/CapacitorShare.hx',
-      'generated/flighthq/hostCapacitor/CapacitorStatusBar.hx',
-      'generated/flighthq/hostElectron/ElectronScreen.hx',
-      'generated/flighthq/hostElectron/ElectronTray.hx',
-      'generated/flighthq/hostElectron/ElectronWindow.hx',
-      'generated/flighthq/keyboard/Keyboard.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:CapacitorApi|CapacitorDeviceInfo|ElectronDisplay|ElectronRectangle|SoftKeyboard)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/animation/AnimationLayerStack.hx',
-      'generated/flighthq/statechart/EnableStatechartGuards.hx',
-      'generated/flighthq/statechart/Statechart.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AnimationLayerStack|StatechartCondition|StatechartInput|StatechartRegion|StatechartTransitionExplanation)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/cameraControls/FlyCameraController.hx',
-      'generated/flighthq/lighting/SceneForwardLights.hx',
-      'generated/flighthq/mesh/MeshGeometryDeformationClone.hx',
-      'generated/flighthq/mesh/MorphMeshGeometry.hx',
-      'generated/flighthq/mesh/UpdateMeshMorph.hx',
-      'generated/flighthq/scene3d/Mesh.hx',
-      'generated/flighthq/scene3d/SceneAnimation.hx',
-      'generated/flighthq/scene3d/SceneDocument.hx',
-      'generated/flighthq/scene3dFormats/Awd2Parse.hx',
-      'generated/flighthq/scene3dFormats/GltfParse.hx',
-      'generated/flighthq/scene3dFormats/Md2Parse.hx',
-      'generated/flighthq/scene3dFormats/Md5Parse.hx',
-      'generated/flighthq/scene3dGl/PrepareGlScene3DForwardLights.hx',
-      'generated/flighthq/scene3dWgpu/PrepareWgpuScene3DForwardLights.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:FlyCameraControllerOptions|MeshMorph|MeshMorphBindPose|Scene3DDocumentMesh|Scene3DForwardLightSelection)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/adjustments/ColorLutCache.hx',
-      'generated/flighthq/effectsCanvas/CanvasRenderEffectPipeline.hx',
-      'generated/flighthq/effectsGl/GlRenderEffectPipeline.hx',
-      'generated/flighthq/effectsWgpu/WgpuRenderEffectPipeline.hx',
-      'generated/flighthq/scene2dCanvas/CanvasRenderTexturePool.hx',
-      'generated/flighthq/scene2dGl/GlColorAdjustmentMaterialFeature.hx',
-      'generated/flighthq/scene2dGl/GlShapeMesh.hx',
-      'generated/flighthq/scene2dGl/GlVelocity.hx',
-      'generated/flighthq/scene2dWgpu/WgpuVelocity.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:CanvasRenderTargetPool|ColorLutCache|GlShapeMeshBinding|GlVelocityContext|WgpuVelocityContext)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/scene2dFormats/LottieDocument.hx',
-      'generated/flighthq/swf/SwfFrameAction.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AbcConstantPool|AbcFile|LottieDashEntry|LottieTextDocument|LottieTransform)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/lighting/AreaLight.hx',
-      'generated/flighthq/lighting/DirectionalLight.hx',
-      'generated/flighthq/lighting/LightAnalysis.hx',
-      'generated/flighthq/lighting/PointLight.hx',
-      'generated/flighthq/lighting/SpotLight.hx',
-      'generated/flighthq/scene3d/SceneDocumentLights.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AreaLightOptions|DirectionalLightOptions|Light|PointLightOptions|SpotLightOptions)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/effectsWgpu/WgpuColorLutPass.hx',
-      'generated/flighthq/effectsWgpu/WgpuEffectPass.hx',
-      'generated/flighthq/effectsWgpu/WgpuGradientBevelEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuGradientGlowEffect.hx',
-      'generated/flighthq/renderWgpu/WgpuDraw.hx',
-      'generated/flighthq/renderWgpu/WgpuRenderState.hx',
-      'generated/flighthq/renderWgpu/WgpuRenderTarget.hx',
-      'generated/flighthq/scene2dWgpu/WgpuShapeData.hx',
-      'generated/flighthq/scene2dWgpu/WgpuTextLabel.hx',
-      'generated/flighthq/scene3dWgpu/WgpuMeshPipeline.hx',
-      'generated/flighthq/scene3dWgpu/WgpuShadedPrelude.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:WgpuEffectPipeline|WgpuMeshPipeline|WgpuRenderOptions|WgpuSavedPassState|WgpuTextureSourceTextureEntry)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/scene3d/SceneDocument.hx',
-      'generated/flighthq/scene3dFormats/Awd2Parse.hx',
-      'generated/flighthq/scene3dFormats/GltfParse.hx',
-      'generated/flighthq/scene3dFormats/GltfPunctualLights.hx',
-      'generated/flighthq/scene3dFormats/Md2Parse.hx',
-      'generated/flighthq/scene3dFormats/Md5Parse.hx',
-      'generated/flighthq/scene3dFormats/ObjParse.hx',
-      'generated/flighthq/scene3dFormats/SceneSkeleton.hx',
-      'generated/flighthq/scene3dFormats/ThreeDsParse.hx',
-      'generated/flighthq/scene3dGl/DrawGlScene3D.hx',
-      'generated/flighthq/scene3dGl/GlShadowMap.hx',
-      'generated/flighthq/scene3dWgpu/DrawWgpuScene3D.hx',
-      'generated/flighthq/scene3dWgpu/WgpuShadowMap.hx',
-      'generated/flighthq/skeleton3d/PrepareScene3DSkinning.hx',
-      'generated/flighthq/skeleton3d/UpdateMeshSkin.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:GltfCamera|GltfPunctualLight|Scene3DDocumentScene|Skin|ThreeDsCamera)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/interaction/FocusManager.hx',
-      'generated/flighthq/textinput/SelectableRichTextManager.hx',
-      'generated/flighthq/textinput/TextInputEditing.hx',
-      'generated/flighthq/textinput/TextInputManager.hx',
-      'generated/flighthq/textsegment/TextSegmentBoundary.hx',
-      'generated/flighthq/textsegment/TextSegmenterBackend.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:FocusManager|SelectableRichTextManager|TextInputHistoryEntry|TextInputManager|TextSegment)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/animation/AnimationBlendTree.hx',
-      'generated/flighthq/animation/AnimationCrossfade.hx',
-      'generated/flighthq/animation/AnimationLayerStack.hx',
-      'generated/flighthq/animation/AnimationStateMachine.hx',
-      'generated/flighthq/animation/AnimationStateMachineAdvance.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AnimationBlendTreeChannel|AnimationCrossfadeChannel|AnimationLayerStackChannel|AnimationStateMachineChannel|AnimationStateMachineState)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/effects/BlurEffect.hx',
-      'generated/flighthq/effects/EdgeDetectMath.hx',
-      'generated/flighthq/effects/GlitchEffect.hx',
-      'generated/flighthq/effects/OutlineEffect.hx',
-      'generated/flighthq/effectsCanvas/CanvasBlendEffect.hx',
-      'generated/flighthq/effectsCanvas/CanvasBlurEffect.hx',
-      'generated/flighthq/effectsCanvas/CanvasFilmGrainEffect.hx',
-      'generated/flighthq/effectsGl/GlBlendEffect.hx',
-      'generated/flighthq/effectsGl/GlBlurEffect.hx',
-      'generated/flighthq/effectsGl/GlFilmGrainEffect.hx',
-      'generated/flighthq/effectsGl/GlGlitchEffect.hx',
-      'generated/flighthq/effectsGl/GlOutlineEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuBlendEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuBlurEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuFilmGrainEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuGlitchEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuOutlineEffect.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:BlendEffect|BlurEffect|FilmGrainEffect|GlitchEffect|OutlineEffect)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/physics2d/DebugGeometry.hx',
-      'generated/flighthq/physics2d/JointFactories.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?Physics2D(?:DebugGeometry|GearJoint|MouseJoint|PrismaticJoint|WheelJoint)Options\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/effectsGl/GlColorLutPass.hx',
-      'generated/flighthq/effectsGl/GlRenderEffectPipeline.hx',
-      'generated/flighthq/renderGl/GlRenderState.hx',
-      'generated/flighthq/scene2dGl/GlColorAdjustmentMaterialFeature.hx',
-      'generated/flighthq/scene3dGl/GlEnvironmentIblBake.hx',
-      'generated/flighthq/scene3dGl/GlLitProgram.hx',
-      'generated/flighthq/scene3dGl/GlScene3DRuntime.hx',
-      'generated/flighthq/scene3dGl/GlWireframeUpload.hx',
-      'generated/flighthq/scene3dGl/ToonGlMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dGl/WireframeGlMeshMaterialRenderer.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:GlColorLutTextureCache|GlScene3DIbl|GlShapeMeshColorScaleBiasShader|GlToonProgram|GlWireframeUpload)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/effects/DirectionalBlurEffect.hx',
-      'generated/flighthq/effects/TiltShiftEffect.hx',
-      'generated/flighthq/effectsGl/GlCrtEffect.hx',
-      'generated/flighthq/effectsGl/GlDirectionalBlurEffect.hx',
-      'generated/flighthq/effectsGl/GlLensFlareEffect.hx',
-      'generated/flighthq/effectsGl/GlRadialBlurEffect.hx',
-      'generated/flighthq/effectsGl/GlTiltShiftEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuCrtEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuDirectionalBlurEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuLensFlareEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuRadialBlurEffect.hx',
-      'generated/flighthq/effectsWgpu/WgpuTiltShiftEffect.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:CrtEffect|DirectionalBlurEffect|LensFlareEffect|RadialBlurEffect|TiltShiftEffect)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/materials/AnisotropyPbrExtension.hx',
-      'generated/flighthq/materials/UnlitMaterials.hx',
-      'generated/flighthq/scene3dGl/AnisotropyPbrGlExtension.hx',
-      'generated/flighthq/scene3dGl/DepthGlMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dGl/NormalGlMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dGl/VertexColorGlMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dGl/WireframeGlMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dResources/AnisotropyPbrScene3DMaterialTextures.hx',
-      'generated/flighthq/scene3dWgpu/DepthWgpuMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dWgpu/NormalWgpuMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dWgpu/VertexColorWgpuMeshMaterialRenderer.hx',
-      'generated/flighthq/scene3dWgpu/WireframeWgpuMeshMaterialRenderer.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AnisotropyPbrExtension|DepthMaterial|NormalMaterial|VertexColorMaterial|WireframeMaterial)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/flow/Flow.hx',
-      'generated/flighthq/swf/SwfDocument.hx',
-      'generated/flighthq/timeline/Timeline.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:FlowStack|FlowState|TimelineAudioCue|TimelineLabel|TimelineSignals)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/quadbatch/QuadBatch.hx',
-      'generated/flighthq/render/RenderQueue.hx',
-      'generated/flighthq/renderGl/GlExternalTexture.hx',
-      'generated/flighthq/renderWgpu/WgpuExternalTexture.hx',
-      'generated/flighthq/scene2dGl/GlVelocity.hx',
-      'generated/flighthq/scene2dWgpu/WgpuRasterShapeRenderer.hx',
-      'generated/flighthq/scene2dWgpu/WgpuShapeData.hx',
-      'generated/flighthq/scene2dWgpu/WgpuVelocity.hx',
-      'generated/flighthq/velocity/TransformVelocity.hx',
-      'generated/flighthq/velocity/VelocityField.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:VelocityField|CreateExternalTextureOptions|RenderQueue|QuadBatchRuntime|WgpuShapeRasterSurface)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/bitmap/BitmapBevel.hx',
-      'generated/flighthq/bitmap/BitmapConvolution.hx',
-      'generated/flighthq/bitmap/BitmapDisplacement.hx',
-      'generated/flighthq/bitmap/BitmapGradient.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:BitmapBevelOptions|BitmapDisplacementMapOptions|BitmapConvolutionOptions|BitmapGradientBevelOptions|BitmapGradientGlowOptions)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/skeleton2d/ClippingAttachment2D.hx',
-      'generated/flighthq/skeleton2d/DeformPathAttachment2D.hx',
-      'generated/flighthq/skeleton2d/PointAttachment2D.hx',
-      'generated/flighthq/skeleton2d/RegionAttachment2D.hx',
-      'generated/flighthq/skeleton2d/Skeleton2d.hx',
-      'generated/flighthq/skeleton2dFormats/SpineBinaryParse.hx',
-      'generated/flighthq/skeleton2dFormats/SpineParse.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:AttachmentSkin2D|RegionAttachment2D|PathAttachment2D|PointAttachment2D|ClippingAttachment2D)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/shape/MorphShape.hx',
-      'generated/flighthq/shape/MorphShapeAnimation.hx',
-      'generated/flighthq/shape/MorphShapePaint.hx',
-      'generated/flighthq/swf/SwfMorphShape.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:MorphShapeLineEndpoint|MorphShapeColorEndpoint|MorphShapePathBinding|MorphShapeAnimationTarget|SwfMorphShapePaths)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/physics3d/ExplainPhysics3DJoints.hx',
-      'generated/flighthq/physics3d/ExplainPhysics3DStep.hx',
-      'generated/flighthq/physics3d/Islands.hx',
-      'generated/flighthq/physics3d/JointCollisionSuppression.hx',
-      'generated/flighthq/physics3d/JointRegistry.hx',
-      'generated/flighthq/physics3d/Joints.hx',
-      'generated/flighthq/physics3d/MassProperties.hx',
-      'generated/flighthq/physics3d/Solver.hx',
-      'generated/flighthq/physics3d/Step.hx',
-      'generated/flighthq/physics3d/StepValidation.hx',
-      'generated/flighthq/physics3d/World.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:Physics3DWorld|Physics3DMassData|Physics3DHingeJoint|Physics3DSliderJoint)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/physics3d/Islands.hx',
-      'generated/flighthq/physics3d/Joints.hx',
-      'generated/flighthq/physics3d/Solver.hx',
-      'generated/flighthq/physics3d/Step.hx',
-      'generated/flighthq/physics3d/StepValidation.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:Physics3DContactConstraint|Physics3DContactConstraintPoint|Physics3DConeTwistJoint|Physics3DGeneric6DofJoint)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/scene2dCanvas/CanvasRenderState.hx',
-      'generated/flighthq/scene2dDom/DomRenderState.hx',
-      'generated/flighthq/renderGl/GlRenderState.hx',
-      'generated/flighthq/render/RenderState.hx',
-      'generated/flighthq/renderWgpu/WgpuRenderState.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:CanvasRenderRegistries|DomRenderRegistries|GlRenderRegistries|RenderRegistries|WgpuRenderRegistries)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/fontFormats/CffTable.hx',
-      'generated/flighthq/fontFormats/OpenTypeCmap.hx',
-      'generated/flighthq/fontFormats/OpenTypeGlyf.hx',
-      'generated/flighthq/fontFormats/OpenTypeGlyphOutlineSource.hx',
-      'generated/flighthq/fontFormats/OpenTypeMetrics.hx',
-      'generated/flighthq/fontFormats/Woff2Font.hx',
-      'generated/flighthq/fontFormats/Woff2GlyfTransform.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:CffIndex|SfntTableDirectory|SfntTableRange|Woff2GlyfStreams|Woff2TableEntry)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/registryCatalog/RegistryCatalog.hx',
-      'generated/flighthq/registryCodegen/RegistryCodegen.hx',
-      'generated/flighthq/render/ExplainScene2DCoverage.hx',
-      'generated/flighthq/requirements/RequirementSet.hx',
-      'generated/flighthq/scene2dCanvas/ExplainCanvasScene2DCoverage.hx',
-      'generated/flighthq/scene2dGl/ExplainGlScene2DCoverage.hx',
-      'generated/flighthq/scene3dGl/ExplainGlScene3DCoverage.hx',
-      'generated/flighthq/scene3dResources/ExplainScene3DResourceCoverage.hx',
-      'generated/flighthq/scene3dWgpu/ExplainWgpuScene3DCoverage.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:CatalogEntry|CatalogRegistration|RegistryCatalog|RegistryCatalogEntry|Requirement)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/physics3d/JointFactories.hx',
-      'generated/flighthq/physics3d/Solver.hx',
-      'generated/flighthq/physics3d/Step.hx',
-      'generated/flighthq/physics3d/StepValidation.hx',
-      'generated/flighthq/physics3d/World.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:Physics3DGeneric6DofJointOptions|Physics3DJointFrameOptions|Physics3DJointOptions|Physics3DSequentialImpulseConfig)\)\./u,
-      );
-    }
-    for (const path of [
-      'generated/flighthq/physics3d/Continuous.hx',
-      'generated/flighthq/physics3dAbi/Physics3DAbi.hx',
-      'generated/flighthq/physics3dAbi/Physics3DAbiBuffer.hx',
-      'generated/flighthq/physics3dAbi/Physics3DAbiCommand.hx',
-      'generated/flighthq/physics3dAbi/Physics3DAbiQuery.hx',
-      'generated/flighthq/physics3dAbi/ReferencePhysics3DAbi.hx',
-    ]) {
-      expect(readFileSync(path, 'utf8')).not.toMatch(
-        /\(cast [A-Za-z_][A-Za-z0-9_]* : (?:flighthq\.types\.)?(?:Physics3DAbiBodyBuffer|Physics3DAbiCommandBuffer|Physics3DAbiContactBuffer|Physics3DAbiContactHooks|Physics3DAbiExecutionResult|Physics3DAbiJointBuffer|Physics3DAbiQueryBuffer|Physics3DRotationalCcdEnvelope)\)\./u,
-      );
-    }
-    const generatedCanvasRenderState = readFileSync('generated/flighthq/scene2dCanvas/CanvasRenderState.hx', 'utf8');
-    expect(generatedCanvasRenderState).not.toMatch(
-      /\(cast (?:runtime|sourceRuntime|targetRuntime) : CanvasRenderStateRuntime\)\./u,
-    );
-    for (const [path, typeName] of [
-      ['generated/flighthq/effectsGl/GlRenderEffectPipeline.hx', 'GlRenderEffectPipeline'],
-      ['generated/flighthq/effectsWgpu/WgpuRenderEffectPipeline.hx', 'WgpuRenderEffectPipeline'],
-    ] as const) {
-      expect(readFileSync(path, 'utf8')).not.toContain(`(cast pipeline : flighthq.types.${typeName}).`);
-    }
-    for (const [path, typeName] of [
-      ['generated/flighthq/renderGl/GlRenderPass.hx', 'GlScissorRect'],
-      ['generated/flighthq/renderGl/GlRenderTarget.hx', 'GlScissorRect'],
-      ['generated/flighthq/scene2dGl/GlClipRectangle.hx', 'GlScissorRect'],
-      ['generated/flighthq/renderWgpu/WgpuScissor.hx', 'WgpuScissorRect'],
-      ['generated/flighthq/scene2dWgpu/WgpuClipRectangle.hx', 'WgpuScissorRect'],
-    ] as const) {
-      expect(readFileSync(path, 'utf8')).not.toContain(`: ${typeName}).`);
-    }
-    for (const path of [
-      'generated/flighthq/scene3dGl/GlShadedBuiltInModifiers.hx',
-      'generated/flighthq/scene3dWgpu/WgpuShadedPrelude.hx',
-      'generated/flighthq/shading/CreateAnimatedNormalModifier.hx',
-      'generated/flighthq/shading/CreateDissolveModifier.hx',
-      'generated/flighthq/shading/CreateEmissiveModifier.hx',
-      'generated/flighthq/shading/CreateVertexDisplaceModifier.hx',
-      'generated/flighthq/shading/RegisterBuiltInModifiers.hx',
-    ]) {
-      const generatedModifier = readFileSync(path, 'utf8');
-      expect(generatedModifier).not.toMatch(/_Runtime\.field\(modifier,/u);
-      expect(generatedModifier).not.toMatch(
-        /\(cast modifier : (?:AnimatedNormalModifier|DissolveModifier|EmissiveModifier|FogModifier|VertexDisplaceModifier)\)\./u,
-      );
-    }
     expect(codec?.memberEscapes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -10058,7 +8722,7 @@ describe('typed struct analysis', () => {
     );
     const output = emitHaxeModule({
       declarations: result.lowered.declarations,
-      haxePackage: 'flighthq.types',
+      haxePackage: 'flight.types',
       imports: [],
       name: 'Rectangle',
       packageName: '@flighthq/types',
@@ -10103,7 +8767,7 @@ describe('typed struct analysis', () => {
     );
     const output = emitHaxeModule({
       declarations: result.lowered.declarations,
-      haxePackage: 'flighthq.types',
+      haxePackage: 'flight.types',
       imports: [],
       name: 'Options',
       packageName: '@flighthq/types',
@@ -10115,11 +8779,11 @@ describe('typed struct analysis', () => {
     );
     expect(output).toContain('typedef SelectedOptions = { var alpha:Float; var gamma:Bool; };');
     expect(output).toContain('typedef RemainingOptions = { var alpha:Float; var gamma:Bool; var mode:Mode; };');
-    expect(output).toContain('typedef GenericOptions<Type> = flighthq._internal._Partial<Type>;');
+    expect(output).toContain('typedef GenericOptions<Type> = flight._internal._Partial<Type>;');
     expect(output).toContain(
-      'typedef OpenOptions = flighthq._internal._Partial<flighthq._internal._Record<String, Float>>;',
+      'typedef OpenOptions = flight._internal._Partial<flight._internal._Record<String, Float>>;',
     );
-    expect(output).toContain('typedef StandardOptions = flighthq._internal._Partial<Date>;');
+    expect(output).toContain('typedef StandardOptions = flight._internal._Partial<Date>;');
   });
 
   it('does not materialize a source-defined utility that shadows Partial', () => {
@@ -10136,7 +8800,7 @@ describe('typed struct analysis', () => {
     );
     const output = emitHaxeModule({
       declarations: result.lowered.declarations,
-      haxePackage: 'flighthq.types',
+      haxePackage: 'flight.types',
       imports: [],
       name: 'Options',
       packageName: '@flighthq/types',
@@ -10148,25 +8812,25 @@ describe('typed struct analysis', () => {
   });
 
   it('materializes the reviewed production mapped aliases without erasing named field types', () => {
-    expect(readFileSync('generated/flighthq/types/ViewportLike.hx', 'utf8')).toContain(
+    expect(readFileSync('generated/flight/types/ViewportLike.hx', 'utf8')).toContain(
       'typedef ViewportLike = { @:optional var devicePixelRatio:Null<Float>; @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; };',
     );
-    expect(readFileSync('generated/flighthq/types/ApplicationRenderViewTargetOptions.hx', 'utf8')).toContain(
+    expect(readFileSync('generated/flight/types/ApplicationRenderViewTargetOptions.hx', 'utf8')).toContain(
       'typedef ApplicationRenderViewTargetOptions = { @:optional var format:Null<RenderTargetFormat>; @:optional var colorAttachments:Null<Float>; @:optional var colorFormats:Null<Array<RenderTargetFormat>>;',
     );
-    expect(readFileSync('generated/flighthq/types/FocusNavigationInput.hx', 'utf8')).toContain(
+    expect(readFileSync('generated/flight/types/FocusNavigationInput.hx', 'utf8')).toContain(
       'typedef FocusNavigationInput = { var onKeyDown:Signal<InputKeyboardData->Void>; };',
     );
-    expect(readFileSync('generated/flighthq/types/InteractionInputSource.hx', 'utf8')).toContain(
+    expect(readFileSync('generated/flight/types/InteractionInputSource.hx', 'utf8')).toContain(
       'typedef InteractionInputSource = { var onKeyDown:Signal<InputKeyboardData->Void>; var onKeyUp:Signal<InputKeyboardData->Void>;',
     );
-    expect(readFileSync('generated/flighthq/physics2d/JointFactories.hx', 'utf8')).toContain(
+    expect(readFileSync('generated/flight/_Physics2D.hx', 'utf8')).toContain(
       'typedef Physics2DJointBase__jointFactories = { var bodyA:Float; var bodyB:Float;',
     );
-    expect(readFileSync('generated/flighthq/types/EntityWithoutRuntime.hx', 'utf8')).toContain(
-      'typedef EntityWithoutRuntime<Type> = flighthq._internal._Omit<Type, Dynamic>;',
+    expect(readFileSync('generated/flight/types/EntityWithoutRuntime.hx', 'utf8')).toContain(
+      'typedef EntityWithoutRuntime<Type> = flight._internal._Omit<Type, Dynamic>;',
     );
-    expect(readFileSync('generated/flighthq/types/TextureLike.hx', 'utf8')).toContain(
+    expect(readFileSync('generated/flight/types/TextureLike.hx', 'utf8')).toContain(
       'typedef TextureLike = TextureLikeFrom__Texture<Texture>;',
     );
   });
@@ -10363,6 +9027,14 @@ function provenanceAuditFixture(productionText: string) {
 
 function candidateId(candidate: TypedStructCandidate): string {
   return typedStructStableId(candidate.packageName, 'interface', candidate.name);
+}
+
+function generatedSourceRange(module: string, startMarker: string, endMarker?: string): string {
+  const start = module.indexOf(startMarker);
+  if (start < 0) throw new Error(`Missing generated source-range start marker: ${startMarker}`);
+  const end = endMarker === undefined ? module.length : module.indexOf(endMarker, start + startMarker.length);
+  if (end < 0) throw new Error(`Missing generated source-range end marker: ${endMarker}`);
+  return module.slice(start, end);
 }
 
 function collectTypedStructBindings(value: unknown): IrTypedStructBinding[] {

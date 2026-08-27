@@ -61,7 +61,7 @@ jobs:
         with:
           neko: 'true'
       - run: >
-          node tools/haxe.mjs -cp src -cp generated -cp tests/haxe --main CoreSmoke --macro "include('flighthq')" --neko build/neko-smoke/core.n
+          node tools/haxe.mjs -cp src -cp generated -cp tests/haxe --main CoreSmoke --macro "include('flight')" --neko build/neko-smoke/core.n
 
 
       - run: neko build/neko-smoke/core.n

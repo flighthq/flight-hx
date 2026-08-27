@@ -2,10 +2,10 @@
 import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from '@flighthq/image/contract';
 
-const api = compiled.flighthq.scene3dResources.ResolveScene3DResources;
+const api = compiled.flight._Scene3DResources;
 function __syncDependencies() {
-  compiled.flighthq.image.ImageResourceReference.createImageResourceFailure = __dependency0.createImageResourceFailure;
-  compiled.flighthq.image.ImageResourceReference.resolveImageResourceReference = __dependency0.resolveImageResourceReference;
+  compiled.flight._Image.createImageResourceFailure = __dependency0.createImageResourceFailure;
+  compiled.flight._Image.resolveImageResourceReference = __dependency0.resolveImageResourceReference;
 }
 __syncDependencies();
 

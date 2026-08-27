@@ -64,7 +64,7 @@ export interface HostEndpointAudit {
 
 type HostRuntimeSources = Partial<Record<IrHostEndpointBinding, string>>;
 
-const dynamicRuntimePath = 'src/flighthq/_internal/_Runtime.hx';
+const dynamicRuntimePath = 'src/flight/_internal/_Runtime.hx';
 
 interface MutableHostEndpointAuditEntry extends HostEndpointAuditEntry {
   siteKeys: Set<string>;

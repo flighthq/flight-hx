@@ -1,2 +1,2 @@
 -D flight
---macro flighthq._internal._LibraryPaths.run()
+--macro flight._internal._LibraryPaths.run()

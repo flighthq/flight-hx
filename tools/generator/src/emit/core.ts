@@ -221,18 +221,14 @@ export function generateCoreModules(
     item.lowered.sources.flatMap((source) => buildSourceModules(item.packageName, source, workspaceDirectory)),
   );
   splitPublicTypesIntoModules(modules, typesInventory);
-  for (const module of modules) {
-    if (
-      module.source &&
-      module.haxePackage === packageNameToHaxePackage(module.packageName) &&
-      module.name !== packageNameToModule(module.packageName) &&
-      module.declarations.some((declaration) => declaration.kind === 'function' || declaration.kind === 'variable')
-    ) {
-      module.namespaceNoCompletion = true;
-    }
-  }
+  const omittedContractModules = omitHeaderOnlyContractModules(modules, inventory.packages);
+  const contractVisibility = markContractOnlyDeclarationsVisibility(modules, inventory.packages);
+  mergePackageImplementationModules(
+    modules,
+    loweredPackages.map((item) => item.packageName),
+  );
   for (const item of loweredPackages) {
-    const haxePackage = packageNameToHaxePackage(item.packageName);
+    const haxePackage = 'flight';
     const existing = modules.find((module) => module.haxePackage === haxePackage && module.name === item.moduleName);
     if (!existing) {
       modules.push({
@@ -244,8 +240,6 @@ export function generateCoreModules(
       });
     }
   }
-  const omittedContractModules = omitHeaderOnlyContractModules(modules, inventory.packages);
-  const contractVisibility = markContractOnlyDeclarationsVisibility(modules, inventory.packages);
   markCppStructInitTypes(modules, structRegistry, typedStructProvenance);
   verifyTypedStructEmissionCoverage(modules, structRegistry);
   const shadowedTypeNames = markShadowedSecondaryTypes(modules);
@@ -288,9 +282,7 @@ export function generateCoreModules(
     if (!packageInventory) throw new Error(`Expected package inventory for ${item.packageName}`);
     const rootExports = packageRootExportLane(packageInventory).exports;
     const facade = modules.find(
-      (module) =>
-        module.haxePackage === packageNameToHaxePackage(item.packageName) &&
-        module.name === packageNameToModule(item.packageName),
+      (module) => module.haxePackage === 'flight' && module.name === packageNameToModule(item.packageName),
     );
     if (!facade) throw new Error(`Expected generated facade for ${item.packageName}`);
     const externalExports = rootExports.flatMap((record) => {
@@ -407,32 +399,41 @@ export function generateCoreModules(
 
 function auditTypeErasures(modules: IrModule[]): TypeErasureAudit {
   const results = modules.flatMap((module) => {
-    const byReason = new Map<string, number>();
-    const visit = (value: unknown): void => {
-      if (Array.isArray(value)) {
-        value.forEach(visit);
-        return;
-      }
-      if (!value || typeof value !== 'object') return;
-      const record = value as Record<string, unknown>;
-      if (record.kind === 'dynamic') {
-        const reason = typeof record.reason === 'string' ? record.reason : 'unclassified';
-        byReason.set(reason, (byReason.get(reason) ?? 0) + 1);
-      }
-      Object.values(record).forEach(visit);
-    };
-    visit(module.declarations);
-    const total = [...byReason.values()].reduce((sum, count) => sum + count, 0);
-    return total === 0
-      ? []
-      : [
-          {
-            byReason: Object.fromEntries([...byReason].sort(([left], [right]) => left.localeCompare(right))),
-            module: modulePath(module),
-            source: module.source ?? null,
-            total,
-          },
-        ];
+    const declarationsBySource = new Map<string | null, IrDeclaration[]>();
+    for (const declaration of module.declarations) {
+      const source = module.source ?? declaration.origin.source ?? null;
+      const declarations = declarationsBySource.get(source) ?? [];
+      declarations.push(declaration);
+      declarationsBySource.set(source, declarations);
+    }
+    return [...declarationsBySource].flatMap(([source, declarations]) => {
+      const byReason = new Map<string, number>();
+      const visit = (value: unknown): void => {
+        if (Array.isArray(value)) {
+          value.forEach(visit);
+          return;
+        }
+        if (!value || typeof value !== 'object') return;
+        const record = value as Record<string, unknown>;
+        if (record.kind === 'dynamic') {
+          const reason = typeof record.reason === 'string' ? record.reason : 'unclassified';
+          byReason.set(reason, (byReason.get(reason) ?? 0) + 1);
+        }
+        Object.values(record).forEach(visit);
+      };
+      visit(declarations);
+      const total = [...byReason.values()].reduce((sum, count) => sum + count, 0);
+      return total === 0
+        ? []
+        : [
+            {
+              byReason: Object.fromEntries([...byReason].sort(([left], [right]) => left.localeCompare(right))),
+              module: modulePath(module),
+              source,
+              total,
+            },
+          ];
+    });
   });
   const summaryByReason = new Map<string, number>();
   for (const module of results) {
@@ -442,7 +443,9 @@ function auditTypeErasures(modules: IrModule[]): TypeErasureAudit {
   }
   const byReason = Object.fromEntries([...summaryByReason].sort(([left], [right]) => left.localeCompare(right)));
   return {
-    modules: results.sort((left, right) => left.module.localeCompare(right.module)),
+    modules: results.sort(
+      (left, right) => left.module.localeCompare(right.module) || (left.source ?? '').localeCompare(right.source ?? ''),
+    ),
     schemaVersion: 1,
     summary: {
       byReason,
@@ -606,6 +609,45 @@ export function buildSourceModules(packageName: string, source: LoweredSource, w
   ];
 }
 
+/**
+ * Collapse every translated source owner for an npm package into one root-level
+ * implementation module. Haxe addresses its static body owner as `flight._Foo`
+ * and any secondary implementation type as `flight._Foo.Type`; consumers use
+ * the sibling public facade `flight.Foo` instead.
+ */
+function mergePackageImplementationModules(modules: IrModule[], packageNames: readonly string[]): void {
+  for (const packageName of packageNames) {
+    const owned = modules.filter(
+      (module) => module.packageName === packageName && module.haxePackage !== 'flight.types',
+    );
+    if (owned.length === 0) continue;
+    const declarations = owned.flatMap((module) => module.declarations);
+    const foldedModulePaths = new Set(owned.map((module) => modulePath(module)));
+    const imports = [...new Set(owned.flatMap((module) => module.imports))]
+      .filter(
+        (imported) =>
+          ![...foldedModulePaths].some(
+            (folded) =>
+              imported === folded || imported.startsWith(`${folded}.`) || imported.startsWith(`${folded} as `),
+          ),
+      )
+      .sort();
+    for (const module of owned) {
+      const index = modules.indexOf(module);
+      if (index >= 0) modules.splice(index, 1);
+    }
+    if (declarations.length === 0) continue;
+    modules.push({
+      declarations,
+      haxePackage: 'flight',
+      imports,
+      name: `_${packageNameToModule(packageName)}`,
+      namespaceNoCompletion: true,
+      packageName,
+    });
+  }
+}
+
 function exportDeclarationIdentities(record: ExportRecord): string[] {
   const identities = new Set([`${record.source}\0${record.fingerprint}`]);
   if (record.runtime) {
@@ -619,7 +661,7 @@ function exportDeclarationIdentities(record: ExportRecord): string[] {
  * Flight's canonical data package is addressed by exported type name, not by
  * the TypeScript file that happened to define it. Keep non-public helper types
  * with their source implementation, but give every root/contract-exported type
- * its own `flighthq.types.<TypeName>` module.
+ * its own `flight.types.<TypeName>` module.
  */
 export function splitPublicTypesIntoModules(modules: IrModule[], inventory: PackageInventory): void {
   if (inventory.name !== '@flighthq/types') {
@@ -628,7 +670,7 @@ export function splitPublicTypesIntoModules(modules: IrModule[], inventory: Pack
   const publicIdentities = new Set(
     inventory.exportLanes.flatMap((lane) => lane.exports.flatMap((record) => exportDeclarationIdentities(record))),
   );
-  const typePackage = packageNameToHaxePackage(inventory.name);
+  const typePackage = 'flight.types';
   const moved: Array<{ declaration: IrDeclaration; owner: IrModule }> = [];
   for (const module of modules) {
     if (module.packageName !== inventory.name) continue;
@@ -744,7 +786,7 @@ export function markContractOnlyDeclarationsVisibility(
     }
     const declaration = declarations[0]!;
     if (declaration.kind === 'function' || declaration.kind === 'variable') {
-      declaration.allowPackage = 'flighthq';
+      declaration.allowPackage = 'flight';
       declaration.noCompletion = undefined;
       restrictedMemberDeclarations++;
     } else {
@@ -783,7 +825,7 @@ export function omitHeaderOnlyContractModules(
     const index = modules.indexOf(module);
     modules.splice(index, 1);
     omitted.push({
-      module: modulePath(module),
+      module: `flight._${packageNameToModule(inventory.name)}`,
       packageName: inventory.name,
       reason: 'header-only-contract-export-lane',
       source: lane.source,
@@ -802,10 +844,15 @@ function populateSourceImports(
 ): void {
   const modulesBySource = new Map<string, IrModule[]>();
   for (const module of modules) {
-    if (!module.source) continue;
-    const owners = modulesBySource.get(module.source) ?? [];
-    owners.push(module);
-    modulesBySource.set(module.source, owners);
+    const sources = new Set([
+      ...(module.source ? [module.source] : []),
+      ...module.declarations.map((declaration) => declaration.origin.source),
+    ]);
+    for (const source of sources) {
+      const owners = modulesBySource.get(source) ?? [];
+      if (!owners.includes(module)) owners.push(module);
+      modulesBySource.set(source, owners);
+    }
   }
   const resolveRecord = (record: { fingerprint: string; source: string }) => {
     for (const module of modulesBySource.get(record.source) ?? []) {
@@ -852,7 +899,7 @@ function populateSourceImports(
   // the same-package type is auto-imported and shadows it. Such imports are dropped.
   const moduleNamesByPackage = new Map<string, Set<string>>();
   for (const module of modules) {
-    const pkg = module.haxePackage ?? 'flighthq';
+    const pkg = module.haxePackage ?? 'flight';
     const names = moduleNamesByPackage.get(pkg) ?? new Set<string>();
     names.add(module.name);
     moduleNamesByPackage.set(pkg, names);
@@ -909,13 +956,13 @@ function populateSourceImports(
           const alias = element.name.text === resolved.declaration.name ? '' : ` as ${element.name.text}`;
           const importPath = `${declarationImportPath(resolved.module, resolved.declaration)}${alias}`;
           const bindingName = element.name.text;
-          const importedPackage = resolved.module.haxePackage ?? 'flighthq';
+          const importedPackage = resolved.module.haxePackage ?? 'flight';
           for (const owner of owners) {
             if (owner === resolved.module) continue;
             // Drop a same-package import whose bound name collides with a top-level
             // module in that package (the owner itself or a sibling): Haxe rejects it
             // as a redefinition, and the colliding same-package type is already visible.
-            const ownerPackage = owner.haxePackage ?? 'flighthq';
+            const ownerPackage = owner.haxePackage ?? 'flight';
             if (ownerPackage === importedPackage && moduleNamesByPackage.get(ownerPackage)?.has(bindingName)) continue;
             owner.imports.push(importPath);
           }
@@ -927,7 +974,7 @@ function populateSourceImports(
 }
 
 function modulePath(module: IrModule): string {
-  return `${module.haxePackage ?? 'flighthq'}.${module.name}`;
+  return `${module.haxePackage ?? 'flight'}.${module.name}`;
 }
 
 function declarationImportPath(module: IrModule, declaration: IrDeclaration): string {
@@ -938,7 +985,7 @@ function declarationImportPath(module: IrModule, declaration: IrDeclaration): st
 }
 
 function moduleRelativePath(module: IrModule): string {
-  return `${(module.haxePackage ?? 'flighthq').split('.').join(path.sep)}${path.sep}${module.name}.hx`;
+  return `${(module.haxePackage ?? 'flight').split('.').join(path.sep)}${path.sep}${module.name}.hx`;
 }
 
 /**
@@ -954,7 +1001,7 @@ function markShadowedSecondaryTypes(modules: IrModule[]): Set<string> {
   const shadowedTypeNames = new Set<string>();
   // (a) A secondary type colliding with a same-package module: make it private and shadow-route.
   for (const module of modules) {
-    const pkg = module.haxePackage ?? 'flighthq';
+    const pkg = module.haxePackage ?? 'flight';
     for (const declaration of module.declarations) {
       if (declaration.kind !== 'type' && declaration.kind !== 'class' && declaration.kind !== 'enum') continue;
       if (declaration.name === module.name) continue;
@@ -990,10 +1037,10 @@ function computeSelfShadowTypeModules(modules: IrModule[]): Map<string, string> 
     }
   }
   const selfShadowTypeModules = new Map<string, string>();
-  // Prefer the canonical `flighthq.types.*` declaration; fall back to any other
+  // Prefer the canonical `flight.types.*` declaration; fall back to any other
   // module that owns the type. A canonical types module may also own runtime
   // constants, so its value declarations do not disqualify its secondary types.
-  const isTypesPackage = (module: IrModule): boolean => (module.haxePackage ?? '').startsWith('flighthq.types');
+  const isTypesPackage = (module: IrModule): boolean => (module.haxePackage ?? '').startsWith('flight.types');
   for (const pass of [true, false]) {
     for (const module of modules) {
       if (isTypesPackage(module) !== pass) continue;
@@ -1023,7 +1070,7 @@ function isPackagePrivateDeclaration(declaration: IrDeclaration): boolean {
 }
 
 /** Maintained lookup module (in `src/`) that declares host/DOM extern types per target. */
-const WEB_EXTERNS_MODULE = 'flighthq._internal.WebExterns';
+const WEB_EXTERNS_MODULE = 'flight._internal.WebExterns';
 
 /** Collect value identifiers (not type references) referenced anywhere in `value` that are in `names`. */
 function collectReferencedValueIdentifiers(value: unknown, names: ReadonlySet<string>, output: Set<string>): void {
@@ -1116,7 +1163,7 @@ function computeExternalTypeNames(modules: IrModule[]): Set<string> {
   for (const module of modules) collect(module.declarations);
   const external = new Set<string>();
   for (const name of referenced) {
-    // Fully-qualified references (`flighthq._internal.*`, `haxe.*`) already resolve.
+    // Fully-qualified references (`flight._internal.*`, `haxe.*`) already resolve.
     if (name.includes('.') || declared.has(name) || typeParameters.has(name) || builtins.has(name)) continue;
     external.add(name);
   }
@@ -1126,7 +1173,7 @@ function computeExternalTypeNames(modules: IrModule[]): Set<string> {
 /**
  * Some generated declarations reference type names with no Haxe declaration in the emitted output:
  * host/DOM globals (Clipboard, Geolocation, MediaSession, Screen, Storage) and a few renderer-internal
- * data shapes. These are provided by the maintained lookup module `flighthq._internal.WebExterns`
+ * data shapes. These are provided by the maintained lookup module `flight._internal.WebExterns`
  * (a per-target typedef: `js.html.X` on JS, `Dynamic` elsewhere). Import each referenced external name
  * into the module so the reference resolves; a module that IS the like-named namespace resolves the
  * name to itself and needs no import.
@@ -1168,7 +1215,7 @@ export function validateHaxeModuleIdentities(modules: IrModule[]): void {
         // Package-private shadowed secondaries do not occupy the package namespace.
         if (declaration.packagePrivate) continue;
         addOwner(
-          `${module.haxePackage ?? 'flighthq'}.${declaration.name}`,
+          `${module.haxePackage ?? 'flight'}.${declaration.name}`,
           `${module.source ?? `${module.packageName} barrel`} declaration ${declaration.name}`,
         );
       }
@@ -1212,7 +1259,7 @@ function buildPublicFacades(
   shadowedTypeNames: ReadonlySet<string>,
 ): void {
   const facadeForPackage = (packageName: string): IrModule | undefined => {
-    const haxePackage = packageNameToHaxePackage(packageName);
+    const haxePackage = 'flight';
     const name = packageNameToModule(packageName);
     return modules.find((module) => module.haxePackage === haxePackage && module.name === name);
   };
@@ -1434,7 +1481,7 @@ function buildPublicFacades(
   // elided and the reference shadow-resolves to the same-package module.
   const moduleNamesByPackage = new Map<string, Set<string>>();
   for (const module of modules) {
-    const pkg = module.haxePackage ?? 'flighthq';
+    const pkg = module.haxePackage ?? 'flight';
     const names = moduleNamesByPackage.get(pkg) ?? new Set<string>();
     names.add(module.name);
     moduleNamesByPackage.set(pkg, names);
@@ -1442,7 +1489,7 @@ function buildPublicFacades(
   for (const target of modules) {
     const referencedTypes = new Set<string>();
     collectReferencedNamedTypes(target.declarations, new Set(typeOwnerByName.keys()), referencedTypes);
-    const targetPackage = target.haxePackage ?? 'flighthq';
+    const targetPackage = target.haxePackage ?? 'flight';
     for (const typeName of referencedTypes) {
       const owner = typeOwnerByName.get(typeName);
       const declaration = owner?.declarations.find(
@@ -1454,7 +1501,7 @@ function buildPublicFacades(
       // Shadowed types (package-private secondaries, or generic types shadowed by a namespace
       // class) are emitted as `Dynamic` and must not be imported by name.
       if (isPackagePrivateDeclaration(declaration) || shadowedTypeNames.has(typeName)) continue;
-      const ownerPackage = owner.haxePackage ?? 'flighthq';
+      const ownerPackage = owner.haxePackage ?? 'flight';
       if (ownerPackage === targetPackage && moduleNamesByPackage.get(targetPackage)?.has(typeName)) continue;
       target.imports.push(declarationImportPath(owner, declaration));
     }
@@ -1506,6 +1553,14 @@ function removeStaleGeneratedModules(directory: string, expected: ReadonlySet<st
     .filter((file) => readFileSync(path.join(directory, file), 'utf8').startsWith('// Generated by flight-hx.'));
   if (stale.length > 0 && check) throw new Error(`Stale generated modules: ${stale.join(', ')}`);
   for (const file of stale) rmSync(path.join(directory, file));
+  if (!check) removeEmptyGeneratedDirectories(directory, directory);
+}
+
+function removeEmptyGeneratedDirectories(current: string, root: string): void {
+  for (const entry of readdirSync(current, { withFileTypes: true })) {
+    if (entry.isDirectory()) removeEmptyGeneratedDirectories(path.join(current, entry.name), root);
+  }
+  if (current !== root && readdirSync(current).length === 0) rmSync(current, { recursive: true });
 }
 
 function flattenStructuralTypes(declarations: IrDeclaration[]): void {
@@ -1839,7 +1894,7 @@ function emitJavaScriptBridge(
         runtimeName: sourcePathToModule(declaration.origin.source) ? publicName : declaration.name,
         runtimePath:
           declaration.kind === 'class' && owner
-            ? `${owner.haxePackage ?? 'flighthq'}.${declaration.name}`
+            ? declarationImportPath(owner, declaration)
             : declaration.kind === 'enum' || sourcePathToModule(declaration.origin.source)
               ? apiPath
               : owner
@@ -1898,7 +1953,11 @@ function emitJavaScriptSourceBridge(
 ): string {
   const source = ts.createSourceFile(file, readFileSync(file, 'utf8'), ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
   const relativeSource = path.relative(workspaceDirectory, file).split(path.sep).join('/');
-  const sourceModules = modules.filter((module) => module.source === relativeSource);
+  const sourceModules = modules.filter(
+    (module) =>
+      module.source === relativeSource ||
+      module.declarations.some((declaration) => declaration.origin.source === relativeSource),
+  );
   const mockedSpecifiers = collectAdjacentTestMocks(file);
   const dependencies: Array<{
     generatedName: string;
@@ -1966,17 +2025,17 @@ function emitJavaScriptSourceBridge(
         }
         const dependencyBinding = dependencyExport ? runtimeExportBinding(dependencyExport) : undefined;
         const generatedName = canonicalValueAliases.get(importedName) ?? importedName;
-        const dependencyModule = modules.find(
-          (module) =>
-            (dependencySource ? module.source === dependencySource : module.source === dependencyBinding!.source) &&
-            module.declarations.some(
-              (declaration) =>
-                (dependencyBinding
-                  ? declaration.origin.source === dependencyBinding.source &&
-                    declaration.origin.fingerprint === dependencyBinding.fingerprint
-                  : true) &&
-                (declaration.name === generatedName || declaration.name === importedName),
-            ),
+        const dependencyOrigin = dependencySource ?? dependencyBinding!.source;
+        const dependencyModule = modules.find((module) =>
+          module.declarations.some(
+            (declaration) =>
+              declaration.origin.source === dependencyOrigin &&
+              (dependencyBinding
+                ? declaration.origin.source === dependencyBinding.source &&
+                  declaration.origin.fingerprint === dependencyBinding.fingerprint
+                : true) &&
+              (declaration.name === generatedName || declaration.name === importedName),
+          ),
         );
         const dependencyDeclaration = dependencyModule?.declarations.find(
           (declaration) =>
@@ -2010,14 +2069,13 @@ function emitJavaScriptSourceBridge(
     }
     const dependencyBinding = runtimeExportBinding(dependencyExport);
     const generatedName = canonicalValueAliases.get(importedName) ?? importedName;
-    const dependencyModule = modules.find(
-      (module) =>
-        module.source === dependencyBinding.source &&
-        module.declarations.some(
-          (declaration) =>
-            declaration.origin.fingerprint === dependencyBinding.fingerprint &&
-            (declaration.name === generatedName || declaration.name === importedName),
-        ),
+    const dependencyModule = modules.find((module) =>
+      module.declarations.some(
+        (declaration) =>
+          declaration.origin.source === dependencyBinding.source &&
+          declaration.origin.fingerprint === dependencyBinding.fingerprint &&
+          (declaration.name === generatedName || declaration.name === importedName),
+      ),
     );
     const dependencyDeclaration = dependencyModule?.declarations.find(
       (declaration) =>
@@ -2086,11 +2144,7 @@ function emitJavaScriptSourceBridge(
   );
   const apiModule =
     valueModule ??
-    modules.find(
-      (module) =>
-        module.haxePackage === packageNameToHaxePackage(packageName) &&
-        module.name === packageNameToModule(packageName),
-    );
+    modules.find((module) => module.haxePackage === 'flight' && module.name === packageNameToModule(packageName));
   const needsCompiled =
     needsApi || dependencies.length > 0 || sourceDeclarations.some((declaration) => declaration.kind === 'class');
   return [
@@ -2124,7 +2178,7 @@ function emitJavaScriptSourceBridge(
       const exportedName = publicName(declaration);
       if (declaration.kind === 'class') {
         const owner = sourceModules.find((module) => module.declarations.includes(declaration));
-        return `export const ${exportedName} = compiled.${owner?.haxePackage ?? 'flighthq'}.${declaration.name};`;
+        return `export const ${exportedName} = compiled.${owner ? declarationImportPath(owner, declaration) : `flight.${declaration.name}`};`;
       }
       if (declaration.kind === 'enum') return `export const ${exportedName} = api.__enum_${declaration.name};`;
       if (declaration.kind === 'function') {

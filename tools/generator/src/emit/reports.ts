@@ -120,7 +120,7 @@ export function hostTypeSummary(audit: HostTypeAudit): string {
     '',
     `Upstream commit: \`${audit.upstreamCommit}\``,
     '',
-    'Host identities are derived from the TypeScript checker and their ambient declaration origins. Every emitted identity maps mechanically to `flighthq._internal.dom.<SameTypeName>`; this census is descriptive, not an eligibility list.',
+    'Host identities are derived from the TypeScript checker and their ambient declaration origins. Every emitted identity maps mechanically to `flight._internal.dom.<SameTypeName>`; this census is descriptive, not an eligibility list.',
     '',
     '| Metric | Count |',
     '| --- | ---: |',

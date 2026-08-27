@@ -1,7 +1,7 @@
 package;
 
-import flighthq._internal._HostValueLut;
-import flighthq._internal._Runtime;
+import flight._internal._HostValueLut;
+import flight._internal._Runtime;
 
 class RuntimeToolkitSmoke {
   public static function run():Void {
@@ -43,7 +43,7 @@ class RuntimeToolkitSmoke {
     final match:Dynamic = _Runtime.callProperty(expression, 'exec', ['flight-haxe']);
     if (_Runtime.getIndex(match, 1) != 'haxe') throw 'portable RegExp.exec failed';
 
-    final encoder:flighthq._internal.dom.TextEncoder = _Runtime.construct(_HostValueLut.get('TextEncoder'), []);
+    final encoder:flight._internal.dom.TextEncoder = _Runtime.construct(_HostValueLut.get('TextEncoder'), []);
     final encoded = encoder.encode('hé');
     if (encoded.length != 3 || encoded[0] != 104 || encoded[1] != 195 || encoded[2] != 169) {
       throw 'portable TextEncoder UTF-8 failed';
@@ -58,7 +58,7 @@ class RuntimeToolkitSmoke {
       throw 'portable decodeURIComponent failed';
     }
 
-    final performance:flighthq._internal.dom.Performance = cast _HostValueLut.get('performance');
+    final performance:flight._internal.dom.Performance = cast _HostValueLut.get('performance');
     if (performance.now() < 0 || performance.getEntriesByType('navigation').length != 0) {
       throw 'portable performance failed';
     }
@@ -68,16 +68,16 @@ class RuntimeToolkitSmoke {
     if (_Runtime.callProperty(_HostValueLut.get('ArrayBuffer'), 'isView', [buffer])) {
       throw 'portable ArrayBuffer was classified as a view';
     }
-    final byteView = new flighthq._internal._UInt8Array([1, 2, 3]);
+    final byteView = new flight._internal._UInt8Array([1, 2, 3]);
     if (!_Runtime.callProperty(_HostValueLut.get('ArrayBuffer'), 'isView', [byteView])) {
       throw 'portable typed array was not classified as a view';
     }
     if (!_Runtime.isInstanceOf(byteView, _HostValueLut.get('Uint8Array'))) throw 'portable Uint8Array identity failed';
-    final floatView = new flighthq._internal._Float32Array([1.5, 2.5]);
+    final floatView = new flight._internal._Float32Array([1.5, 2.5]);
     if (!_Runtime.isInstanceOf(floatView, _HostValueLut.get('Float32Array'))) throw 'portable Float32Array identity failed';
     if (_Runtime.isInstanceOf(floatView, _HostValueLut.get('Uint8Array'))) throw 'typed-array identities collapsed';
 
-    final controller:flighthq._internal.dom.AbortController = _Runtime.construct(_HostValueLut.get('AbortController'), []);
+    final controller:flight._internal.dom.AbortController = _Runtime.construct(_HostValueLut.get('AbortController'), []);
     var abortCalls = 0;
     var paddedAbortCalls = 0;
     controller.signal.addEventListener('abort', function():Void abortCalls++, {once: true});
@@ -95,9 +95,9 @@ class RuntimeToolkitSmoke {
     }
     if (!threwReason) throw 'portable AbortSignal.throwIfAborted failed';
 
-    final left:flighthq._internal.dom.AbortController = _Runtime.construct(_HostValueLut.get('AbortController'), []);
-    final right:flighthq._internal.dom.AbortController = _Runtime.construct(_HostValueLut.get('AbortController'), []);
-    final combined = flighthq.connectivity.Connectivity.anyAbortSignal__connectivity(left.signal, right.signal);
+    final left:flight._internal.dom.AbortController = _Runtime.construct(_HostValueLut.get('AbortController'), []);
+    final right:flight._internal.dom.AbortController = _Runtime.construct(_HostValueLut.get('AbortController'), []);
+    final combined = flight._Connectivity.anyAbortSignal__connectivity(left.signal, right.signal);
     right.abort('combined');
     if (!combined.aborted || combined.reason != 'combined') {
       throw 'portable AbortSignal.any failed: aborted=' + combined.aborted + ', reason=' + Std.string(combined.reason);
@@ -105,7 +105,7 @@ class RuntimeToolkitSmoke {
 
     final exception = _Runtime.construct(_HostValueLut.get('DOMException'), ['message', 'AbortError']);
     if (!_Runtime.isInstanceOf(exception, _HostValueLut.get('DOMException'))
-      || (cast exception : flighthq._internal.dom.DOMException).name != 'AbortError') {
+      || (cast exception : flight._internal.dom.DOMException).name != 'AbortError') {
       throw 'portable DOMException identity failed';
     }
 
@@ -130,14 +130,14 @@ class RuntimeToolkitSmoke {
     _Runtime.callProperty(weakSet, 'add', [identityKey]);
     if (!_Runtime.callProperty(weakSet, 'has', [identityKey])) throw 'portable WeakSet array identity failed';
 
-    final snapshot:Dynamic = flighthq.snapshot.CaptureSnapshot.captureSnapshot(cyclic);
-    if (!flighthq._internal.DynamicObject.isFrozen(snapshot) || snapshot.self != snapshot) {
+    final snapshot:Dynamic = flight.Snapshot.captureSnapshot(cyclic);
+    if (!flight._internal.DynamicObject.isFrozen(snapshot) || snapshot.self != snapshot) {
       throw 'portable snapshot freeze visitation failed';
     }
     final cyclicArray:Array<Dynamic> = [];
     cyclicArray.push(cyclicArray);
-    final arraySnapshot:Dynamic = flighthq.snapshot.CaptureSnapshot.captureSnapshot(cyclicArray);
-    if (!flighthq._internal.DynamicObject.isFrozen(arraySnapshot) || arraySnapshot[0] != arraySnapshot) {
+    final arraySnapshot:Dynamic = flight.Snapshot.captureSnapshot(cyclicArray);
+    if (!flight._internal.DynamicObject.isFrozen(arraySnapshot) || arraySnapshot[0] != arraySnapshot) {
       throw 'portable array snapshot identity failed';
     }
 

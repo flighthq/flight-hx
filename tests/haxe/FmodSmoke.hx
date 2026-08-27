@@ -1,6 +1,6 @@
 package;
 
-import flighthq._internal._Runtime;
+import flight._internal._Runtime;
 
 class FmodSmoke {
   public static function main():Void {
