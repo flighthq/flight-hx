@@ -143,7 +143,7 @@ Behavioral parity is tested by compiling Haxe to JavaScript and generating ESM m
 
 Package bridges expose their compiled Haxe module and mechanically re-export values owned by another package bridge. The SDK bridge follows the upstream SDK barrel by re-exporting the granular bridges. Per-source bridges preserve relative-module identity for upstream tests and synchronize only dependencies explicitly mocked by an adjacent `vi.mock` or `vi.doMock`, preserving genuine Vitest mock seams.
 
-The harness mechanically redirects upstream imports to these bridges while leaving upstream test bodies and assertions unchanged. All 1,166 inventoried test files currently execute, and the harness never edits the upstream submodule.
+The harness mechanically redirects upstream imports to these bridges while leaving upstream test bodies and assertions unchanged. All 1,599 inventoried test files currently execute, and the harness never edits the upstream submodule.
 
 JavaScript exposure metadata is an output concern, not part of the canonical Haxe API or generated source. The parity harness adds it at its dedicated JavaScript build boundary; ordinary Haxe consumers retain dead-code elimination.
 

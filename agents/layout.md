@@ -77,7 +77,7 @@ classPath: src
 extraParams.hxml: -D flight
 ```
 
-The package archive includes generated API, inventory, lowering, patch, parity, and provenance records under `generation/`, including the exact upstream revision. The current version remains the pre-release `0.0.0` until a release policy is chosen.
+The package archive includes generated API, inventory, lowering, patch, parity, and provenance records under `generation/`, including the exact upstream revision. The current Haxelib release version is `0.4.0`; the private npm tooling package remains `0.0.0`.
 
 ## Generated Source Version Control
 

@@ -1,9 +1,10 @@
 # Project Status
 
-Last updated: 2026-08-24
+Last updated: 2026-08-26
 
 ## Current State
 
+- The upstream `0.4.0` tag pins `cd6b6e71eb472b3a4249830a7743333f019fa7b7`, 49 commits after the preceding pin. The release inventory remains 153 packages and 319 public lanes, with 151 translated packages, two derived tooling exclusions, 36,488 canonical export records, and 1,599 routed tests. All 15,531 candidate declarations lower with zero diagnostics. `VelocityExplanation` is the sole new typed-struct identity and remains unreviewed audit-only; the browser `matchMedia` global is recorded as an explicit JavaScript-only host-toolkit capability. Object-literal methods now capture their owning object on every target instead of relying on JavaScript-only dynamic `this`; the 0.4.0 IPC reply method exposed that latent native null-receiver path, and the warning-free Eval, JavaScript, Python, and C++ portability matrix now passes.
 - The `443275fa` pin advances 68 Flight `develop` commits and inventories 153 packages, 319 public lanes, 36,109 exports, and 1,570 tests. Generator census tests now validate complete package coverage, report consistency, and reviewed emission safety instead of duplicating exact totals that fail on legitimate upstream additions. The typed-struct report labels 1,426 new schemas as unreviewed audit-only since the maintained baseline; they remain reflective unless separately fingerprint-approved. Repository checks and all 162 generator unit tests pass.
 - JavaScript direct calls now omit TypeScript-defaulted trailing arguments instead of materializing an observable extra `undefined`; static Haxe targets retain padded function arity, and `super` remains a direct constructor call. The historical `effects-canvas` default draw failures are closed, with focused parity passing 204/204. The upstream runner defaults to three package workers because each compiled bridge can consume multiple gigabytes; callers can still override `--jobs` explicitly.
 
@@ -155,7 +156,7 @@ The latest complete local `npm run ci` finished successfully on 2026-07-22. Its 
 - Namespace: generated APIs mechanically map to `flighthq.<lowerCamelPackage>.<PascalCaseFile>`; package barrels map to facades such as `flighthq.geometry.Geometry` and `flighthq.renderGl.RenderGl`.
 - SDK: `flighthq.sdk.Sdk` is a generated facade over the actual upstream SDK export graph, including renamed cross-package re-exports.
 - Types: canonical declarations live in their defining modules under `flighthq.types`; additional declarations use Haxe secondary-type imports such as `flighthq.types.Vector2.Vector2Like`.
-- Distribution: Haxelib name `flight`, currently at pre-release version `0.0.0`.
+- Distribution: Haxelib name `flight`, release version `0.4.0`.
 - Sources: maintained Haxe lives under `src/` and generated Haxe under `generated/`; the Haxelib artifact merges both into its single `src` classpath while repository commands pass both source trees explicitly.
 - Internals: maintained runtime types live under `flighthq._internal` and use underscore-prefixed names such as `_Runtime` and `_Promise`.
 - Hosts: optional maintained adapters live in the main source tree; `flighthq.hostLime.LimeApp.createLimeAppBackend(application)` returns a Lime-specific App backend without owning or registering the application and is conditional on Lime's `lime` define.
@@ -165,8 +166,8 @@ The latest complete local `npm run ci` finished successfully on 2026-07-22. Its 
 
 ## Verified Accounting
 
-- Inventory: 143 packages, 2,544 production source files, 1,419 routed test files, 299 public lanes, and 32,998 export records; 142 packages translate and `tool-capture` is the sole source-derived tooling exclusion.
-- Lowering: 13,067 of 13,067 candidate declarations lowered across 142 packages, with zero diagnostics and no placeholder bodies.
+- Inventory: 153 packages, 2,754 production source files, 1,599 routed test files, 319 public lanes, and 36,488 export records; 151 packages translate and `tool-capture` plus `tool-registry` are the two source-derived tooling exclusions.
+- Lowering: 15,531 of 15,531 candidate declarations lowered across 151 packages, with zero diagnostics and no placeholder bodies.
 - Patches: one applied semantic patch; zero stale, unmatched, or conflicting patches.
 - Upstream parity: all 1,419 routed upstream test files have generated compiled-Haxe JavaScript bridges. Focused `scene2d-gl` parity passes 220/220 across 28 files with the bridge hook budget described above. The latest complete 143-package parity sweep has not been rerun for this Haxe synchronization; the historical `f1a7a9a0` sweep and its contention outcomes remain summarized above.
 - Focused generator tests: 132 passing across 12 files, including deterministic output, patch drift, executable Haxe, typed receivers, host ambient identity and target-independent direct member lowering, ambient/module LUT emission, fail-closed host-toolkit keys and manifest equality, indexed-lowering coverage, secondary-type self-shadowing, contract-lane visibility and omission accounting, top-level alias identity, binary32 `Math.fround`, async-loop return identity, direct WebGL context constants, and direct-versus-parked destructuring receiver audits.
@@ -176,7 +177,7 @@ The latest complete local `npm run ci` finished successfully on 2026-07-22. Its 
 - Native typed arrays: maintained Float32/Int16/UInt16/UInt8 wrappers use `#if js` browser storage, `#elseif lime` Lime-native storage, and the existing generic array fallback. The generator routes their constructors to those wrappers, runtime helpers preserve their semantics, and native GL dispatch unwraps uploads to the Lime view with the concrete argument types and boolean conversions required by Lime's native `WebGL2RenderContext`. The bitmap example compiles to Neko against pinned Lime 8.4.0; execution reaches Lime's native loader but cannot open a window because the Git-pinned Lime source has no prebuilt `lime.ndll`. Live Lime window validation was not part of the indexed-read campaign. The focused fake-Lime smoke, full portable matrix, generator drift check, and repository `npm run check` pass.
 - Desktop shaders: Lime's desktop compatibility context is OpenGL rather than OpenGL ES, so the native backend converts final WebGL2 `#version 300 es` shader sources to GLSL `#version 330 core` and removes ES precision syntax. This addresses the platformer Neko failure at the initial bitmap shader; browser and OpenGL ES source is unchanged. A packaged Lime 8.3.2 `lime.ndll` was validated through startup, but live rendering remains unavailable on this host because SDL has no video device.
 - Focused GL parity audit: `render-gl` currently has 242 passing and 23 failing tests on the checked-out upstream revision. Every failure is an undefined runtime `BlendMode` or `AdvancedBlendMode` object in the JavaScript bridge; the Haxe port currently emits only their string typedefs and internal value tables. This is separate from the typed-array change and is the next GL parity issue to fix before treating the focused renderer suite as green.
-- Packaging: `build/package/flight-0.0.0.zip` installs into an isolated Haxelib repository and a clean JavaScript consumer passes using `import flight.Sdk.*`. Validation pins `HAXELIB_PATH` to that repository and removes any installed same-name artifact before installation, so a stale same-version archive cannot shadow the candidate.
+- Packaging: `build/package/flight-0.4.0.zip` installs into an isolated Haxelib repository and a clean JavaScript consumer passes using `import flight.Sdk.*`. Validation pins `HAXELIB_PATH` to that repository and removes any installed same-name artifact before installation, so a stale same-version archive cannot shadow the candidate.
 
 ## Host Prerequisites
 
@@ -197,7 +198,7 @@ The latest complete local `npm run ci` finished successfully on 2026-07-22. Its 
 
 ## Remaining Release Decisions
 
-The implementation has no known correctness blocker. Before a public non-zero release, choose the release/versioning policy, Haxelib publication credentials, and generated API-documentation presentation. Those are release-management decisions rather than gaps in the port.
+The release policy is established: commit the Haxelib version and release note, verify the package from the final tree, then push a matching `0.4.0` or `v0.4.0` tag so the release workflow can publish with repository credentials. Generated API-documentation presentation remains a later release-management decision rather than a port gap.
 
 ## API Realignment In Progress
 
